@@ -155,8 +155,51 @@ private lemma map_inv_app_comp_map_hom_app {C D E : Type*} [Category C] [Categor
     F.map (e.inv.app X) ≫ F.map (e.hom.app X) = 𝟙 _ := by
   rw [← F.map_comp, Iso.inv_hom_id_app, F.map_id]
 
-set_option maxHeartbeats 1600000 in
--- the statement involves several large derived functor objects
+/-- Transport split invariant summands through the composition isomorphisms of a square.
+The diagram chase is carried out with abstract functors, before specializing to derived
+pullbacks and nearby cycles. -/
+private lemma isIso_of_invariant_summands_square {D E₁ E : Type*} [Category D]
+    [Category E₁] [Category E] {ι : Type*} {A : ι → Type*} [∀ q, Category (A q)]
+    (F : E₁ ⥤ E) (Ψ : D ⥤ E) (H : ∀ q, E ⥤ A q)
+    (hcons : ∀ {X Y : E} (g : X ⟶ Y), (∀ q, IsIso ((H q).map g)) → IsIso g)
+    {P Q R S : E} {A₁ B₁ : E₁} {T U V : D}
+    (α : P ⟶ Q) (α₁ : A₁ ⟶ B₁) (r₁ : B₁ ⟶ A₁) (hr₁ : α₁ ≫ r₁ = 𝟙 _)
+    (α₂ : R ⟶ Ψ.obj U) (r₂ : Ψ.obj U ⟶ R) (hr₂ : α₂ ≫ r₂ = 𝟙 _)
+    (cA : T ≅ U) (cB : T ≅ V) (cB' : P ≅ F.obj A₁) (I' : R ≅ Q)
+    (i : P ⟶ S) (Lα : S ⟶ R) (cA' : P ⟶ S)
+    (hnat : α ≫ I'.inv = i ≫ Lα) (hIA : cA' = i)
+    (β : F.obj B₁ ⟶ Ψ.obj V) [IsIso β]
+    (hsq : cA' ≫ Lα ≫ α₂ ≫ Ψ.map cA.inv =
+      cB'.hom ≫ F.map α₁ ≫ β ≫ Ψ.map cB.inv)
+    {κ : Type*} (ρ₁ : κ → (B₁ ⟶ B₁)) (ρ₂ : κ → (Ψ.obj V ⟶ Ψ.obj V))
+    (ρ₂' : κ → (Ψ.obj U ⟶ Ψ.obj U))
+    (hβ : ∀ k, F.map (ρ₁ k) ≫ β = β ≫ ρ₂ k)
+    (hn : ∀ k, ρ₂ k ≫ Ψ.map (cB.inv ≫ cA.hom) =
+      Ψ.map (cB.inv ≫ cA.hom) ≫ ρ₂' k)
+    (he₂ : ∀ k, ρ₂' k ≫ (r₂ ≫ α₂) = r₂ ≫ α₂)
+    (he₁ : ∀ q {W : A q} (φ : (H q).obj (F.obj B₁) ⟶ W),
+      (∀ k, (H q).map (F.map (ρ₁ k)) ≫ φ = φ) →
+      (H q).map (F.map (r₁ ≫ α₁)) ≫ φ = φ) : IsIso α := by
+  refine isIso_of_comp_eq_comp_of_coinvariant H hcons α
+    (cB'.hom ≫ F.map α₁) (F.map r₁ ≫ cB'.inv) ?_
+    (I'.inv ≫ α₂ ≫ Ψ.map (cA.inv ≫ cB.hom))
+    (Ψ.map (cB.inv ≫ cA.hom) ≫ r₂ ≫ I'.hom) ?_ β ?_
+    (fun k ↦ F.map (ρ₁ k)) ρ₂ (fun k ↦ ⟨k, hβ k⟩) (fun k ↦ ?_) (fun q W φ hφ ↦ ?_)
+  · simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc, hr₁]
+    simp
+  · simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc, show (cA.inv ≫ cB.hom) ≫ cB.inv ≫ cA.hom = 𝟙 _ by simp]
+    simp [reassoc_of% hr₂]
+  · rw [Functor.map_comp]
+    exact sq_aux hnat hIA hsq (by rw [← Ψ.map_comp, cB.inv_hom_id, Ψ.map_id])
+  · simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [reassoc_of% (hn k), reassoc_of% (he₂ k)]
+  · have h : (F.map r₁ ≫ cB'.inv) ≫ cB'.hom ≫ F.map α₁ = F.map (r₁ ≫ α₁) := by
+      rw [Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp]
+    rw [h]
+    exact he₁ q φ hφ
+
 /-- **Change of trait on the invariant summands** (SGA 4½, [Th. finitude], proof of 3.7, 3.8). Let
 `τ : N₂ ⟶ N₁` be a morphism of models over `Spec l`, `ω : Ω₁ ⟶ Ω₂` a homomorphism of extensions
 over `l`, `τ'` the change of Galois layers, and `σᵢ : Nᵢ_{Ωᵢ} ⟶ Nᵢ` the projections. Assume
@@ -208,36 +251,26 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   have hsq := pullbackExchange_galoisLayerMap_square Λ Ω₁ Ω₂ ω hω τ hτ C
   have hA' := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId_self Λ
     (Category.id_comp f') ((N₁.nearbyCycles Λ).obj C)
-  have hIA : (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f')).hom.app
-      ((N₁.nearbyCycles Λ).obj C) = (leftDerivedUpperStarId Λ X₂').inv.app _ := by
-    rw [← cancel_mono ((leftDerivedUpperStarId Λ X₂').hom.app _), hA', Iso.inv_hom_id_app]
-    rfl
+  -- Use the inverse characterization directly, without a cancellation rewrite.
+  have hIA := (Iso.comp_hom_eq_id ((leftDerivedUpperStarId Λ X₂').app _)).1 hA'
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
-  refine isIso_of_comp_eq_comp_of_coinvariant (fun q ↦ DerivedCategory.homologyFunctor _ q)
-    (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg) ((τ.pullbackExchange Λ).app C)
-    (cB'.hom ≫ L((f')^*⟦Λ⟧).map α₁) (L((f')^*⟦Λ⟧).map r₁ ≫ cB'.inv) ?_
-    (I'.inv ≫ α₂ ≫ Ψ₂Ω.map (cA.inv ≫ cB.hom)) (Ψ₂Ω.map (cB.inv ≫ cA.hom) ≫ r₂ ≫ I'.hom) ?_ β
-    ?_ (fun k ↦ L((f')^*⟦Λ⟧).map
-      (N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-    (fun k ↦ ⟨k, (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
-      (σ k).1 (σ k).2 (hσ k) _).symm⟩) (fun k ↦ ?_) (fun q W φ hφ ↦ ?_)
-  · simp only [Category.assoc]
-    rw [← Functor.map_comp_assoc, show α₁ ≫ r₁ = 𝟙 _ from hr₁]
-    simp
-  · simp only [Category.assoc]
-    rw [← Functor.map_comp_assoc, show (cA.inv ≫ cB.hom) ≫ cB.inv ≫ cA.hom = 𝟙 _ by simp]
-    simp [reassoc_of% (show α₂ ≫ r₂ = 𝟙 _ from hr₂)]
-  · rw [Functor.map_comp]
-    dsimp only [Functor.id_obj, Functor.id_map] at hnat
-    exact sq_aux hnat hIA hsq (map_inv_app_comp_map_hom_app _ _ _)
-  · have hn := N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom)
-    simp only [Category.assoc, Iso.hom_inv_id_assoc]
-    rw [reassoc_of% hn, reassoc_of% (he₂ (σ k).2)]
-  · have : (L((f')^*⟦Λ⟧).map r₁ ≫ cB'.inv) ≫ cB'.hom ≫ L((f')^*⟦Λ⟧).map α₁ =
-        L((f')^*⟦Λ⟧).map (r₁ ≫ α₁) := by
-      rw [Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp]
-    rw [this]
-    exact he₁ q φ hφ
+  dsimp only [Functor.id_obj, Functor.id_map] at hnat
+  let α := (τ.pullbackExchange Λ).app C
+  let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
+  let H := DerivedCategory.homologyFunctor A
+  have hcons {X Y : DerivedCategory A} (g : X ⟶ Y) :
+      (∀ q, IsIso ((H q).map g)) → IsIso g := (DerivedCategory.isIso_iff A g).2
+  -- Infer the pullback functor and the action objects from the square and retractions.
+  have key := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
+    _ Ψ₂Ω H (fun g hg ↦ hcons g hg) α α₁ r₁ hr₁ α₂ r₂ hr₂
+    cA cB cB' I' _ _ _ hnat hIA β hsq
+    (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 _)
+    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 _)
+    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 _)
+    (fun k ↦ (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
+      (σ k).1 (σ k).2 (hσ k) _).symm)
+    (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
+    (fun k ↦ he₂ (σ k).2) he₁
+  exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

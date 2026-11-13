@@ -25,9 +25,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] constantAdicQuotientRealization constantAdicFiniteRealization
   constantAdicQuotientRightIso pbcDerivedRestrict constantAdicFiniteProjection
 
-set_option maxHeartbeats 800000 in
--- Matching the explicit derived scalar-comparison types in the assembly needs more
--- elaboration heartbeats; this file compiles in about 25 seconds.
 /-- Separate local markings of a fixed normalized finite algebraic tower can be
 chosen compatibly on a common pro-etale cover. The tower K, its bounds and its
 normalization arrows are inputs; this theorem constructs only compatible markings.
@@ -135,21 +132,7 @@ theorem lisse_tower_compatible_stalk_markings
               (X := fun k : ℕ ↦ (R k).mapDerivedCategory.obj (K k)) s).map
                 (homOfLE h).op) ≫ z n := by
   classical
-  dsimp only
-  let C := AdicCompletion d.ideal A
-  let J := d.ideal.map (algebraMap A C)
-  let R (n : ℕ) := ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
-    (Ideal.Quotient.mk (J ^ (n + 1)))
-  let s (n : ℕ) := (R (n + 1)).mapDerivedCategory.map (t n) ≫
-    (Functor.mapDerivedCategoryCompIso
-      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
-        (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-      (R (n + 1))).symm.inv.app (K n) ≫
-    (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
-      (Ideal.Quotient.mk (J ^ (n + 2)))
-      (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))
-      (Ideal.Quotient.mk (J ^ (n + 1)))
-      (Ideal.Quotient.factor_comp_mk _).symm)).inv.app (K n)
+  intro C J R s
   obtain ⟨I, r, ev, hI, hne, hred⟩ :=
     lisse_tower_isomorphism_sections X Y g d M U K t huniversal hbounded hfinite hmodels
   obtain ⟨ι, V, hcov, ha, hw, v, hv⟩ :=
@@ -165,19 +148,17 @@ theorem lisse_tower_compatible_stalk_markings
     obtain ⟨i, a, _⟩ := (Sieve.mem_ofArrows_iff Z f w).mp hw'
     let b (n : ℕ) := ev (V i) (ha i) (hw i) W a n (v i n)
     refine ⟨b, ?_⟩
+    intro a₀ H z
     let F := Functor.ofOpSequence
-      (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s ⋙
-        constantAdicFiniteRealization (W.hom ≫ g) d
+      (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s ⋙ a₀
     let N := constantAdicRestrictedTower (W.hom ≫ g) d M
-    let z (n : ℕ) := (constantAdicQuotientRightIso (W.hom ≫ g) d n).hom.app (K n) ≫
-      (pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d n)).map (b n).hom
-    let α : F ⟶ N := NatTrans.ofOpSequence z (by
+    let α : F ⟶ N := NatTrans.ofOpSequence (F := F) (G := N) z (by
       intro n
       have h := hred (V i) (ha i) (hw i) W a n (v i (n + 1))
       dsimp only at h
       rw [hv i n] at h
       simpa only [F, N, Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ,
-        constantAdicRestrictedTower, constantAdicRestrictedStep, b, z,
+        constantAdicRestrictedTower, constantAdicRestrictedStep, b, z, H, a₀,
         Category.assoc] using h.symm)
     intro m n h
     have hn := α.naturality (homOfLE h).op

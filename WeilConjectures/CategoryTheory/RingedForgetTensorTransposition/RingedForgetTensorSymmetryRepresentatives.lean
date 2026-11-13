@@ -32,6 +32,29 @@ attribute [local irreducible] homComplexFunctor homComplexπ derivedInternalHomO
 
 namespace CategoryTheory.RingedForgetTensorTransposition
 
+-- Prove the diagram chase with abstract morphisms, before instantiating the models.
+private theorem symmetry_localization_square {E : Type*} [Category E]
+    {X X' Y Y' Z Z' W W' V V' : E}
+    (i : X ⟶ Y) [Epi i] (a' : Z' ⟶ V') [Mono a']
+    {i' : X' ⟶ Y'} {b : Y ⟶ Y'} {e : Z ⟶ Z'}
+    {c : Y ⟶ Z} {c' : Y' ⟶ Z'} {a : Z ⟶ V}
+    {j : W ⟶ V} {j' : W' ⟶ V'} {d : V ⟶ V'}
+    {k : X ⟶ W} {k' : X' ⟶ W'} {t : W ⟶ W'} {s : X ⟶ X'}
+    (hs : i ≫ b = s ≫ i')
+    (hr : i ≫ c ≫ a = k ≫ j) (hr' : i' ≫ c' ≫ a' = k' ≫ j')
+    (hk : s ≫ k' = k ≫ t) (hj : j ≫ d = t ≫ j')
+    (hn : a ≫ d = e ≫ a') : b ≫ c' = c ≫ e := by
+  apply (cancel_epi i).mp
+  apply (cancel_mono a').mp
+  calc
+    _ = s ≫ (i' ≫ c' ≫ a') := by simp only [← Category.assoc, hs]
+    _ = s ≫ k' ≫ j' := by rw [hr']
+    _ = k ≫ t ≫ j' := by rw [← Category.assoc, hk, Category.assoc]
+    _ = k ≫ j ≫ d := by rw [← hj]
+    _ = _ := by
+      rw [← Category.assoc, ← hr]
+      simp only [Category.assoc, hn]
+
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max c v r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
@@ -125,7 +148,6 @@ omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
   [U.PreservesKInjectiveComplexes]
 include cB cA
 
-set_option maxHeartbeats 400000 in
 -- The localization square compares two independently presented derived tensor models.
 /-- Symmetry on a pair of flat-term K-flat representatives.
 There are no unit or associativity assertions, and the arguments are fixed
@@ -196,12 +218,6 @@ theorem ringed_forget_tensor_symmetry_representatives
   let aQ := U.mapDerivedCategoryFactors.hom.app Q
   have : IsIso (Prod.mkHom aQ aP) := (isIso_prod_iff _ _).2
     ⟨inferInstance, inferInstance⟩
-  apply (cancel_epi (U.mapDerivedCategory.map (TB.iso J R SB P Q hP hQ).hom)).mp
-  apply (cancel_mono (SA.tensor.map (X := (U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q),
-      U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)))
-    (Y := (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q),
-      DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P)))
-    (aQ, aP))).mp
   let := SA.monoidal
   let : SymmetricCategory (DerivedCategory (RingedTensorModules.{d, vd, s} J' R')) := βA
   have hn := BraidedCategory.braiding_naturality aP aQ
@@ -210,52 +226,38 @@ theorem ringed_forget_tensor_symmetry_representatives
     U.mapDerivedCategoryFactors.hom.app _ =
       U.mapDerivedCategoryFactors.hom.app _ ≫
         DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map sB.hom) at hf
-  calc
-    _ = U.mapDerivedCategory.map (DerivedCategory.Q.map sB.hom) ≫
-        U.mapDerivedCategory.map (TB.iso J R SB Q P hQ hP).hom ≫
-        μ.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≫
-        SA.tensor.map
-          (X := (U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q),
-            U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)))
-          (Y := (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q),
-            DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P)))
-          (aQ, aP) := by
-      erw [← U.mapDerivedCategory.map_comp_assoc, heB, Functor.map_comp]
-      simp only [Category.assoc]
-    _ = U.mapDerivedCategoryFactors.hom.app _ ≫
-        DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map sB.hom) ≫
-        DerivedCategory.Q.map (chain.hom.app (Q, P)) ≫
-        (TA.iso J' R' SA _ _ hUQ hUP).hom := by
-      dsimp only [aP, aQ]
-      erw [hm', reassoc_of% hf]
-    _ = U.mapDerivedCategoryFactors.hom.app _ ≫
-        DerivedCategory.Q.map (chain.hom.app (P, Q)) ≫
-        DerivedCategory.Q.map sA.hom ≫ (TA.iso J' R' SA _ _ hUQ hUP).hom := by
-      erw [← DerivedCategory.Q.map_comp_assoc, hc, Functor.map_comp]
-      simp only [Category.assoc]
-    _ = U.mapDerivedCategoryFactors.hom.app _ ≫
-        DerivedCategory.Q.map (chain.hom.app (P, Q)) ≫
-        (TA.iso J' R' SA _ _ hUP hUQ).hom ≫
-        (β_ (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P))
-          (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q))).hom := by
-      erw [← heA]
-    _ = U.mapDerivedCategory.map (TB.iso J R SB P Q hP hQ).hom ≫
-        μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-        SA.tensor.map
-          (X := (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P),
-            U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q)))
-          (Y := (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P),
-            DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q)))
-          (aP, aQ) ≫
-        (β_ (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P))
-          (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q))).hom := by
-      simpa only [Category.assoc] using congrArg (fun f ↦ f ≫
-        (β_ (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P))
-          (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q))).hom) hm.symm
-    _ = _ := by
-      simpa only [CoefficientClosedStructure.tensor, tensor_map, Functor.comp_obj,
-        Category.assoc] using
-        congrArg (fun f ↦ U.mapDerivedCategory.map (TB.iso J R SB P Q hP hQ).hom ≫
-          μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫ f) hn
+  apply symmetry_localization_square
+    (U.mapDerivedCategory.map (TB.iso J R SB P Q hP hQ).hom)
+    (SA.tensor.map
+      (X := (U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q),
+        U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)))
+      (Y := (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q),
+        DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P)))
+      (aQ, aP))
+    (s := U.mapDerivedCategory.map (DerivedCategory.Q.map sB.hom))
+    (t := DerivedCategory.Q.map sA.hom)
+    (k := U.mapDerivedCategoryFactors.hom.app _ ≫
+      DerivedCategory.Q.map (chain.hom.app (P, Q)))
+    (k' := U.mapDerivedCategoryFactors.hom.app _ ≫
+      DerivedCategory.Q.map (chain.hom.app (Q, P)))
+    (j := (TA.iso J' R' SA _ _ hUP hUQ).hom)
+    (j' := (TA.iso J' R' SA _ _ hUQ hUP).hom)
+    (d := (β_ (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P))
+      (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q))).hom)
+    (a := SA.tensor.map
+      (X := (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P),
+        U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q)))
+      (Y := (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P),
+        DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q)))
+      (aP, aQ))
+    (i' := U.mapDerivedCategory.map (TB.iso J R SB Q P hQ hP).hom)
+  · exact (U.mapDerivedCategory.map_comp _ _).symm.trans
+      ((congrArg U.mapDerivedCategory.map heB).trans (U.mapDerivedCategory.map_comp _ _))
+  · exact hm.trans (Category.assoc _ _ _).symm
+  · exact hm'.trans (Category.assoc _ _ _).symm
+  · rw [← Category.assoc, hf, Category.assoc, ← DerivedCategory.Q.map_comp, hc,
+      DerivedCategory.Q.map_comp, Category.assoc]
+  · exact heA
+  · simpa only [CoefficientClosedStructure.tensor, tensor_map, Functor.comp_obj] using hn
 
 end CategoryTheory.RingedForgetTensorTransposition

@@ -91,6 +91,16 @@ private theorem normalizedTensorComposite
   rw [reassoc_of% hr, ← H.map_comp, hq]
   exact hf
 
+private theorem normalizedTensorComparisonSquare
+    {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] (F G : 𝒞 ⥤ 𝒟)
+    (δ : F ⟶ G) {A B C D : 𝒞} {Z : 𝒟}
+    (j : A ⟶ B) (e : B ⟶ C) (a : A ⟶ D) (b : D ⟶ C)
+    (s : G.obj C ⟶ Z) (s' : F.obj C ⟶ Z) (r : F.obj D ⟶ Z)
+    (hp : j ≫ e = a ≫ b) (hs : δ.app C ≫ s = s') (hr : F.map b ≫ s' = r) :
+    F.map j ≫ δ.app B ≫ G.map e ≫ s = F.map a ≫ r := by
+  rw [← δ.naturality_assoc e, hs, ← F.map_comp_assoc, hp, F.map_comp,
+    Category.assoc, hr]
+
 /-- Transport the uniquely strict-Roos-normalized tensor to the specified calculus.
 The comparison of reductions is fixed by their adjunctions to the same limit;
 the comparison of tensors preserves their common tensor-Hom transpose.
@@ -123,7 +133,6 @@ private theorem tensorModelRealization_hom (W : Scheme.{u})
 
 attribute [local irreducible] tensorModelRealization pullbackTensorReferenceTensorModel
 
-set_option maxHeartbeats 600000 in
 -- The normalization composes several derived-category naturality equations.
 /-- The constructed tensor realization has the prescribed strict quotient formula
 and Roos equation on every pair of whole-system coherent presentations.
@@ -168,12 +177,6 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
   let t := (tensor l E W).mapIso (a.prod b)
   let q := U.mapIso t.symm ≪≫ pullbackTensorTensorTower l E W P.obj Q.obj
   refine ⟨q, strictQuotientTensorGenerator l E W P.obj Q.obj C D a b κC κD hκa hκb, ?_⟩
-  have hn := δ.hom.naturality (Prod.mkHom eC.hom eD.hom)
-  change T.systemClosed.tensor.map (Prod.mkHom eC.hom eD.hom) ≫
-      δ.hom.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj D) =
-    δ.hom.app (S.reduction.obj (DerivedCategory.Q.obj P.obj),
-      S.reduction.obj (DerivedCategory.Q.obj Q.obj)) ≫
-        S.systemClosed.tensor.map (Prod.mkHom eC.hom eD.hom) at hn
   have ht : T.systemClosed.tensor.map
       (Prod.mkHom (DerivedCategory.Q.map a.hom) (DerivedCategory.Q.map b.hom)) ≫
         (T.systemTensorModel.iso _ _ _ C D hC hD).inv =
@@ -199,16 +202,14 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
       (pullbackTensorSystemModel l E W (R.obj P.obj) (R.obj Q.obj)
         (pullbackTensorReductionGood l E W P) (pullbackTensorReductionGood l E W Q)).inv ≫
         DerivedCategory.Q.map t.hom := by
-    rw [← reassoc_of% hn]
-    rw [coefficientTensorModelComparison l E W S T C D hC hD]
-    rw [← T.systemClosed.tensor.map_comp_assoc]
     have hpair : Prod.mkHom (j.hom.app (DerivedCategory.Q.obj P.obj))
         (j.hom.app (DerivedCategory.Q.obj Q.obj)) ≫ Prod.mkHom eC.hom eD.hom =
       Prod.mkHom ((pullbackTensorReductionModel l E W).hom.app P)
         ((pullbackTensorReductionModel l E W).hom.app Q) ≫
       Prod.mkHom (DerivedCategory.Q.map a.hom) (DerivedCategory.Q.map b.hom) := by
       exact Prod.ext ha.symm hb.symm
-    rw [hpair, T.systemClosed.tensor.map_comp, Category.assoc, ht]
+    exact normalizedTensorComparisonSquare T.systemClosed.tensor S.systemClosed.tensor
+      δ.hom _ _ _ _ _ _ _ hpair (coefficientTensorModelComparison l E W S T C D hC hD) ht
   let η := Functor.isoWhiskerRight
       (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors
         (coefficientConstantTowerLimit l E W) ≪≫
@@ -221,8 +222,7 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
       H.map (U.map t.hom) at hr
   have hq : U.map t.hom ≫ q.hom =
       (pullbackTensorTensorTower l E W P.obj Q.obj).hom := by
-    change U.map t.hom ≫ (U.map t.inv ≫ _) = _
-    rw [← Category.assoc, ← U.map_comp, t.hom_inv_id, U.map_id, Category.id_comp]
+    exact (U.mapIso t).hom_inv_id_assoc _
   have he := (pullbackTensorIntegralTensorModel_existsUnique l E W).exists.choose_spec P Q
   change (pullbackTensorIntegralTensorModel l E W).app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) =
@@ -244,9 +244,7 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     exact hr.trans (congrArg (fun f ↦ f ≫ H.map (U.map t.hom))
       (congrArg Iso.hom (roosBridge_eq l E W ρ
         ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))).symm)
-  apply heq_of_eq
-  rw [tensorModelRealization_hom]
-  refine normalizedTensorComposite L H
+  have hfinal := normalizedTensorComposite L H
     ((pullbackTensorIntegralTensorModel l E W).hom.app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
     (T.systemClosed.tensor.map
@@ -267,10 +265,9 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     (integralComparisonRoosBridge l E W ρ ((tensor l E W).obj (C, D))).hom
     (U.map t.hom) q.hom (pullbackTensorTensorTower l E W P.obj Q.obj).hom
     ((integralCompletedTensorComparison l E W).hom.app (P, Q))
-    ?_ ?_ ?_ ?_
-  · exact (Category.assoc _ _ _).trans hm
-  · exact hr'
-  · exact hq
-  · exact hreference
+    ((Category.assoc _ _ _).trans hm) hr' hq hreference
+  apply heq_of_eq
+  simpa only [tensorModelRealization_hom, L, H, T, j, δ, Functor.comp_map,
+    Functor.comp_obj] using hfinal
 
 end WeilConjectures.ScalarExtensionTower

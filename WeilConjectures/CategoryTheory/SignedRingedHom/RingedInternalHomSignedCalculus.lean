@@ -261,8 +261,6 @@ private theorem nativeMonoidal_eq :
   unfold RingedDerivedNative.monoidal derivedMonoidal
   with_reducible_and_instances rfl
 
-set_option maxHeartbeats 1000000 in
--- Checking the native closed structure against the displayed normalization is expensive.
 private theorem normalizedAdjunction_exists :
     ∃ S : WeilConjectures.CoefficientClosedStructure (homFunctor J R),
       ∃ (h : S.monoidal = derivedMonoidal J R)
@@ -291,7 +289,8 @@ private theorem normalizedAdjunction_exists :
   have := RingedDerivedNative.isIso_mu.{u, u, u, u} J R P.obj L.obj (Or.inl P.property)
   change inv (Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj) ≫ 𝟙 _ ≫
     Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫ DerivedCategory.Q.map (𝟙 _) = 𝟙 _
-  rw [Category.id_comp, Functor.map_id, Category.comp_id, IsIso.inv_hom_id]
+  simpa only [Category.id_comp, Functor.map_id, Category.comp_id] using
+    IsIso.inv_hom_id (Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj)
 
 private theorem kFlat_representative (X : D J R) :
     ∃ L : CochainComplex (Modules J R) ℤ,
@@ -423,8 +422,6 @@ private theorem comparison_hom_eq {X Y : D J R} {x₁ x₂ : X ⟶ Y} [IsIso x�
   calc x₁ = (x₁ ≫ y₁) ≫ x₂ := by rw [h, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
     _ = x₂ := by rw [h₁, Category.id_comp]
 
-set_option maxHeartbeats 1000000 in
--- Substituting the derived monoidal structure into both closed structures is expensive.
 private theorem normalizedAdjunction_unique
     (S₁ S₂ : WeilConjectures.CoefficientClosedStructure (homFunctor J R))
     (hS₁ : ∃ (h : S₁.monoidal = derivedMonoidal J R)
@@ -463,12 +460,10 @@ private theorem normalizedAdjunction_unique
     comparison_hom_eq J R (c₁ ⟨P, hP⟩ ⟨L, hL⟩) (c₂ ⟨P, hP⟩ ⟨L, hL⟩) rfl
   apply (cancel_epi (M₁.comparison.hom.app (⟨P, hP⟩, ⟨L, hL⟩))).1
   refine e₁.trans ?_
-  rw [hψ]
+  refine (congrArg (fun ψ ↦ DerivedCategory.Q.map ψ ≫
+    WeilConjectures.coefficientHomResolutionInverse.{u, u, u, u} J R M) hψ).trans ?_
   refine e₂.symm.trans ?_
-  change (M₂.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom ≫ _ =
-    (M₁.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom ≫ _
-  rw [hc]
-  rfl
+  exact congrArg (fun f ↦ f ≫ _) hc.symm
 
 /-- The tensor--Hom adjunction is uniquely fixed by ordinary evaluation on
 K-flat representatives, for the actual derived monoidal structure.

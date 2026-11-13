@@ -41,14 +41,59 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
+/-- Transport through compatible squares of functors commutes with conjugation. -/
+private theorem map_conjugate_of_commutative_square
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    {S₀ : C₀ ⥤ D₀} {S₁ : C₁ ⥤ D₁} {S₂ : C₂ ⥤ D₂}
+    {p : C₀ ⥤ C₁} {q : C₁ ⥤ C₂} {r : C₀ ⥤ C₂}
+    {P : D₀ ⥤ D₁} {Q : D₁ ⥤ D₂} {R : D₀ ⥤ D₂}
+    (a : S₀ ⋙ P ≅ p ⋙ S₁) (b : S₁ ⋙ Q ≅ q ⋙ S₂) (d : S₀ ⋙ R ≅ r ⋙ S₂)
+    (e : r ≅ p ⋙ q) (E : R ≅ P ⋙ Q)
+    (hcomp : ∀ X, E.hom.app (S₀.obj X) ≫ Q.map (a.hom.app X) ≫
+      b.hom.app (p.obj X) = d.hom.app X ≫ S₂.map (e.hom.app X))
+    {K M : D₀} {F G : C₀} (eK : K ≅ S₀.obj F) (eM : M ≅ S₀.obj G)
+    (δ : P.obj K ⟶ P.obj M) (φ : p.obj F ⟶ p.obj G)
+    (hφ : S₁.map φ = a.inv.app F ≫ P.map eK.inv ≫ δ ≫
+      P.map eM.hom ≫ a.hom.app G) :
+    S₂.map (e.hom.app F ≫ q.map φ ≫ e.inv.app G) =
+      d.inv.app F ≫ R.map eK.inv ≫
+        (E.hom.app K ≫ Q.map δ ≫ E.inv.app M) ≫ R.map eM.hom ≫ d.hom.app G := by
+  have hb : S₂.map (q.map φ) =
+      b.inv.app _ ≫ Q.map (S₁.map φ) ≫ b.hom.app _ := by
+    rw [← cancel_epi (b.hom.app _), Iso.hom_inv_id_app_assoc]
+    exact (b.hom.naturality φ).symm
+  have h₁ : ∀ X, S₂.map (e.hom.app X) =
+      d.inv.app X ≫ E.hom.app _ ≫ Q.map (a.hom.app X) ≫ b.hom.app _ := by
+    intro X
+    rw [hcomp X]
+    exact (Iso.inv_hom_id_app_assoc d X _).symm
+  have h₂ : S₂.map (e.inv.app G) =
+      b.inv.app _ ≫ Q.map (a.inv.app G) ≫ E.inv.app _ ≫ d.hom.app G := by
+    rw [← cancel_epi (S₂.map (e.hom.app G)), ← Functor.map_comp,
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, h₁ G]
+    simp [← Functor.map_comp_assoc]
+  have nK := E.hom.naturality eK.inv
+  have nM := E.inv.naturality eM.hom
+  simp only [Functor.comp_map] at nK nM
+  have hφ' : a.hom.app F ≫ S₁.map φ ≫ a.inv.app G =
+      P.map eK.inv ≫ δ ≫ P.map eM.hom := by
+    rw [hφ]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  have hQ := congrArg Q.map hφ'
+  simp only [Functor.map_comp] at hQ
+  rw [Functor.map_comp, Functor.map_comp, h₁ F, hb, h₂]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% hQ, ← reassoc_of% nK, reassoc_of% nM]
+
 namespace AlgebraicGeometry
 
 open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-set_option maxHeartbeats 1000000 in
--- the gluing manipulates long composites of derived and sheaf-level isomorphisms
 /-- **Descent of morphisms of sheaves placed in degree zero along a surjective étale
 morphism.** Let `u : U ⟶ T` be surjective and étale, `Z` with `r₁, r₂ : Z ⟶ U` a fibre product
 `U ×_T U`, and `K, M ∈ D(T_ét, Λ)` isomorphic to sheaves placed in degree zero. A morphism
@@ -100,42 +145,10 @@ theorem Etale.exists_leftDerivedUpperStar_map_eq_of_isPullback {T U Z : Scheme.{
             (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c u w hc).inv.app M) ≫
           (L((w)^*[ModuleCat.{u + 1} Λ])).map eM.hom ≫ (s w).hom.app G := by
       intro c hc
-      have nK := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c u w hc).hom.naturality eK.inv
-      have nM := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c u w hc).inv.naturality eM.hom
-      have hc' : (_root_.DerivedCategory.singleFunctor _ 0).map
-          ((c)^*[ModuleCat.{u + 1} Λ].map φ₀) =
-          (s c).inv.app _ ≫ (L((c)^*[ModuleCat.{u + 1} Λ])).map
-            ((_root_.DerivedCategory.singleFunctor _ 0).map φ₀) ≫ (s c).hom.app _ := by
-        rw [hs]
-        simp only [Category.assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_app_assoc]
-        erw [Category.comp_id]
-      have h₁ : ∀ Y, (_root_.DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c u w hc).hom.app Y) =
-          (s w).inv.app Y ≫
-            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c u w hc).hom.app _ ≫
-            (L((c)^*[ModuleCat.{u + 1} Λ])).map ((s u).hom.app Y) ≫ (s c).hom.app _ :=
-        fun Y ↦ by
-          rw [Etale.leftDerivedUpperStarComp_hom_app_singleFunctor_obj c u w hc Y]
-          exact (Iso.inv_hom_id_app_assoc (s w) Y _).symm
-      have h₂ : (_root_.DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c u w hc).inv.app G) =
-          (s c).inv.app _ ≫ (L((c)^*[ModuleCat.{u + 1} Λ])).map ((s u).inv.app G) ≫
-            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c u w hc).inv.app _ ≫
-              (s w).hom.app G := by
-        rw [← cancel_epi ((_root_.DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c u w hc).hom.app G)),
-          ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, h₁ G]
-        simp [← Functor.map_comp_assoc]
-      rw [Functor.map_comp, Functor.map_comp, h₁ F, hc', h₂]
-      simp only [Functor.comp_map] at nK nM
-      have M₁ : (s u).hom.app F ≫ (_root_.DerivedCategory.singleFunctor _ 0).map φ₀ ≫
-          (s u).inv.app G = (L((u)^*[ModuleCat.{u + 1} Λ])).map eK.inv ≫ δ ≫
-            (L((u)^*[ModuleCat.{u + 1} Λ])).map eM.hom := by
-        rw [hφ₀]; simp
-      have M₂ := congrArg (L((c)^*[ModuleCat.{u + 1} Λ])).map M₁
-      simp only [Functor.map_comp] at M₂
-      simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-      rw [reassoc_of% M₂, ← reassoc_of% nK, reassoc_of% nM]
+      exact map_conjugate_of_commutative_square (s u) (s c) (s w)
+        (Etale.upperStarComp _ c u w hc) (leftDerivedUpperStarComp _ c u w hc)
+        (Etale.leftDerivedUpperStarComp_hom_app_singleFunctor_obj c u w hc)
+        eK eM δ φ₀ hφ₀
     rw [key a ha, key b hb]
     have hab : a ≫ u = b ≫ u := ha.symm.trans hb
     let ℓ := hZ.lift a b hab

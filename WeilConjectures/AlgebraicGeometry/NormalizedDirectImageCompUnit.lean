@@ -48,8 +48,23 @@ local instance (Z : Scheme.{u}) : IsGrothendieckAbelian.{u} Z.Modules :=
   SheafOfModules.isGrothendieckAbelian _
 local instance (Z : Scheme.{u}) : Abelian.HasKInjectiveResolutions Z.Modules :=
   Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
-set_option maxHeartbeats 700000 in
--- The chosen composition comparison unfolds the two module-category presentations.
+
+private theorem schemeCompUnit_app {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
+    (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
+      (Scheme.Modules.pushforward t)).app K =
+    (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+        (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj K) ≫
+      (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctor.map
+        ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
+  exact compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K
+
+private theorem schemeNormalizedDirectImageCompIso_eq
+    {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
+    schemeNormalizedDirectImageCompIso s t =
+      Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
+        s.toLRSHom.toShHom t.toLRSHom.toShHom) := rfl
+
 /-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
 Source: Stacks Project, Cohomology, Tag 0D5T.
 (blueprint: lem-pc-normalized-direct-image-square-unit-comp-normalization).
@@ -60,9 +75,20 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
-  exact ((Classical.choose_spec (RingedSpace.exists_derivedModuleDirectImageComposition
-    s.toLRSHom.toShHom t.toLRSHom.toShHom)) K).trans
-    (compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K).symm
-
+  -- Focus each rewrite to avoid reducing the derived functors on the other side.
+  have hcomp := congrArg (fun e ↦ e.inv.app (DerivedCategory.Qh.obj K))
+    (schemeNormalizedDirectImageCompIso_eq (A := A) (B := B) (C := C) s t)
+  conv_rhs => rw [schemeCompUnit_app (A := A) (B := B) (C := C) s t K]
+  conv_lhs => rw [hcomp]
+  exact Classical.choose_spec
+    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
+      A.toRingedSpace B.toRingedSpace C.toRingedSpace
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› A)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
+      s.toLRSHom.toShHom t.toLRSHom.toShHom) K
 
 end AlgebraicGeometry

@@ -25,6 +25,18 @@ open CategoryTheory MonoidalCategory Limits
 
 namespace CategoryTheory
 
+-- Prove the tensorator calculation abstractly so its rewrites do not unfold sheafification.
+private theorem tensorRight_comparison_naturality
+    {A B : Type*} [Category A] [Category B] [MonoidalCategory A] [MonoidalCategory B]
+    (F : A ⥤ B) [F.LaxMonoidal] {M M' N : B} {X X' Y : A}
+    (f : M ⟶ M') (g : X ⟶ X')
+    (a : M ⟶ F.obj X) (a' : M' ⟶ F.obj X') (b : N ⟶ F.obj Y)
+    (h : f ≫ a' = a ≫ F.map g) :
+    f ▷ N ≫ ((a' ⊗ₘ b) ≫ Functor.LaxMonoidal.μ F X' Y) =
+      (a ⊗ₘ b) ≫ Functor.LaxMonoidal.μ F X Y ≫ F.map (g ▷ Y) := by
+  rw [← Functor.LaxMonoidal.μ_natural_left, ← Category.assoc, ← Category.assoc,
+    whiskerRight_comp_tensorHom, tensorHom_comp_whiskerRight, h]
+
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
 variable {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
@@ -41,7 +53,6 @@ attribute [local instance]
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Tensor comparison naturality unfolds the sheafification localization interface.
 private theorem tensorRight_additive_reconstruction (N : 𝒜) :
     (MonoidalCategory.tensorRight N).Additive := by
@@ -65,17 +76,8 @@ private theorem tensorRight_additive_reconstruction (N : 𝒜) :
       (𝟙 (𝓞).obj)).counit
     have h : f ≫ c.inv.app M' = c.inv.app M ≫ S.map f.val := by
       exact c.inv.naturality f
-    change f ▷ N ≫ ((c.inv.app M' ⊗ₘ c.inv.app N) ≫
-        Functor.LaxMonoidal.μ S M'.val N.val) =
-      (c.inv.app M ⊗ₘ c.inv.app N) ≫ Functor.LaxMonoidal.μ S M.val N.val ≫
-        S.map (f.val ▷ N.val)
-    rw [← Functor.LaxMonoidal.μ_natural_left, ← Category.assoc, ← Category.assoc]
-    congr 1
-    rw [← tensorHom_id, ← tensorHom_id, tensorHom_comp_tensorHom,
-      tensorHom_comp_tensorHom]
-    simp only [Category.id_comp]
-    rw [h]
-    erw [Category.comp_id]
+    exact tensorRight_comparison_naturality S f f.val
+      (c.inv.app M) (c.inv.app M') (c.inv.app N) h
   refine ⟨?_⟩
   intro M M' f g
   apply (cancel_mono (SheafOfModules.tensorObjIsoSheafification (R := R) M' N).hom).1

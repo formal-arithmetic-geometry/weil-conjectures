@@ -96,8 +96,6 @@ private lemma terminalEvaluation_map_eq_res {C : Type*} [Category C]
   rw [he]
   exact Sheaf.ΓRes_map F f.op
 
-set_option maxHeartbeats 800000 in
--- Nested pullback and localization comparisons require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -167,8 +165,13 @@ theorem objectSections_naturality {X : Scheme.{v}} {U V : X.Etale}
   have hδ := restriction_unit V.hom F V wV delta
   have hδmap : ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ V.hom inferInstance
       _root_.trivial).homEquiv wV V).symm delta = eV.hom := by
-    ext
-    simp [delta, eV, Adjunction.homEquiv_counit]
+    apply MorphismProperty.Over.Hom.ext
+    simp only [Functor.const_obj_obj, Functor.id_obj, MorphismProperty.Over.map_obj_left,
+      Adjunction.homEquiv_counit, MorphismProperty.Over.mapPullbackAdj_counit_app,
+      MorphismProperty.Comma.comp_hom, MorphismProperty.Over.homMk_hom, Comma.comp_left,
+      MorphismProperty.Over.pullback_obj_left, MorphismProperty.Over.map_map_left,
+      Over.homMk_left, limit.lift_π, PullbackCone.mk_pt, PullbackCone.mk_π_app,
+      MorphismProperty.Over.isoMk_hom_left, Iso.refl_hom, delta, eV]
   rw [hδmap] at hδ
   have hδ' : ((upperStarLowerStarAdjunction A V.hom).unit.app F).hom.app (op V) ≫
       FV.obj.map delta.op = F.obj.map eV.hom.op ≫ rV.inv.hom.app (op wV) := by
@@ -288,6 +291,6 @@ theorem objectSections_naturality {X : Scheme.{v}} {U V : X.Etale}
   rw [ht']
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   erw [← hn]
-  exact congrArg (· ≫ tU.inv.app K) hc
+  simpa only [Category.assoc] using congrArg (· ≫ tU.inv.app K) hc
 
 end AlgebraicGeometry.Etale

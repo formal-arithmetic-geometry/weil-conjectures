@@ -153,8 +153,50 @@ private theorem tensorSection_smul (W : Scheme.{u})
   rw [← TensorProduct.smul_tmul]
   rfl
 
-set_option maxHeartbeats 1600000 in
--- Instantiating the glued chain at the identity coefficient field elaborates large types.
+/-- The ordinary association in the prescribed scalar model, normalized on tensor sections. -/
+private theorem scalarChainSection (W : Scheme.{u})
+    (M : CompletionUnit.OrdinaryModel l E W)
+    (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
+      CochainComplex (coefficientSequenceModules l L W) ℤ)
+    (directEvaluation : ∀ n : ℕ,
+      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅
+        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)
+    (htransition : IsCoefficientExtensionStrictTransition l E L ι W direct directEvaluation)
+    (K : (integralOperationsGoodComplex l E W).FullSubcategory) :
+    ∃ β : (scalar l E L ι W).obj ((M.quotient l E W).obj K.obj) ≅ direct.obj K,
+      ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ)
+        (c : (coefficientSequenceCommRingSheaf l L W).obj.obj (op (n, U.unop)))
+        (x : (K.obj.X i).val.obj U),
+        (β.hom.f i).val.app (op (n, U.unop))
+          (integralComparisonSequenceTensorSection l E L ι W (M.tensor.obj (K.obj.X i))
+            (op (n, U.unop)) c
+            (CoefficientExtensionAssociation.quotientUnitSection l E W M
+              (K.obj.X i) n U x)) =
+        integralComparisonSequenceSection l L W ((direct.obj K).X i) n U
+          ((((directEvaluation n).inv.app K).f i).val.app U
+            (integralScalarTensorSection l E L ι W n (K.obj.X i) U c x)) := by
+  classical
+  obtain ⟨A, hA, hT⟩ := OrdinaryScalarTowerProof.fixedSystems_exists l E L ι W
+  obtain ⟨ρ, hρ, -⟩ := coefficientScalarCochainEvaluation l E L ι W A
+  obtain ⟨f⟩ := coefficientExtensionFiniteAssociation_exists l E L ι W A
+  obtain ⟨β, hβ⟩ := chainSection l E L ι W A M ρ hρ f.association
+    f.association_section direct directEvaluation htransition
+  let := coefficientScalarModelZero A.scalar
+  let Q := (M.quotient l E W).obj K.obj
+  have hQ := (mapHomologicalComplex_obj_eq hA Q).symm
+  refine ⟨eqToIso hQ ≪≫ β.app K, ?_⟩
+  intro n i U c x
+  let V : (ℕ × W.ProEt)ᵒᵖ := op (n, U.unop)
+  let q := CoefficientExtensionAssociation.quotientUnitSection l E W M (K.obj.X i) n U x
+  have he : ((eqToHom hQ).f i).val.app V
+      (integralComparisonSequenceTensorSection l E L ι W (Q.X i) V c q) =
+      c • (show (A.scalar.model.E.obj (M.tensor.obj (K.obj.X i))).val.obj V from
+        (A.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q) := by
+    rw [HomologicalComplex.eqToHom_f]
+    exact eq_of_heq ((OrdinaryScalarTowerProof.eqToHom_section _ V _).trans
+      (hT (Q.X i) V c q))
+  exact (congrArg (fun y ↦ ((β.hom.app K).f i).val.app V y) he).trans (hβ K n i U c x)
+
 /-- Degreewise normalized association datum for fixed strict quotient representatives.
 
 Source: Stacks Tags 03EL and 07A4; the finite balanced tensor association and its
@@ -198,26 +240,14 @@ theorem quotientAssociation_degreeData_exists
                 (op (n, U.unop))) a * b) x)) := by
   classical
   obtain ⟨M⟩ := CompletionUnit.ordinaryModel_exists l E W
-  obtain ⟨A₁, hA₁, hT₁⟩ := OrdinaryScalarTowerProof.fixedSystems_exists l E L ι W
-  obtain ⟨ρ₁, hρ₁, -⟩ := coefficientScalarCochainEvaluation l E L ι W A₁
-  obtain ⟨f₁⟩ := coefficientExtensionFiniteAssociation_exists l E L ι W A₁
-  obtain ⟨β₁, hβ₁⟩ := chainSection l E L ι W A₁ M ρ₁ hρ₁ f₁.association
-    f₁.association_section d.direct d.directEvaluation d.direct_transition
-  obtain ⟨A₀, hA₀, hT₀⟩ :=
-    OrdinaryScalarTowerProof.fixedSystems_exists l E E (AlgHom.id ℚ_[l] E) W
-  obtain ⟨ρ₀, hρ₀, -⟩ := coefficientScalarCochainEvaluation l E E (AlgHom.id ℚ_[l] E) W A₀
-  obtain ⟨f₀⟩ := coefficientExtensionFiniteAssociation_exists l E E (AlgHom.id ℚ_[l] E) W A₀
-  obtain ⟨β₀, hβ₀⟩ := chainSection l E E (AlgHom.id ℚ_[l] E) W A₀ M ρ₀ hρ₀ f₀.association
-    f₀.association_section d0.direct d0.directEvaluation d0.direct_transition
-  let := coefficientScalarModelZero A₁.scalar
-  let := coefficientScalarModelZero A₀.scalar
+  obtain ⟨β₁, hβ₁⟩ := scalarChainSection l E L ι W M d.direct d.directEvaluation
+    d.direct_transition K
+  obtain ⟨β₀, hβ₀⟩ := scalarChainSection l E E (AlgHom.id ℚ_[l] E) W M d0.direct
+    d0.directEvaluation d0.direct_transition K
   let Q := (M.quotient l E W).obj K.obj
-  have hQ₀ := mapHomologicalComplex_obj_eq hA₀ Q
-  have hQ₁ := (mapHomologicalComplex_obj_eq hA₁ Q).symm
-  let γ : d0.direct.obj K ≅ Q :=
-    (β₀.app K).symm ≪≫ eqToIso hQ₀ ≪≫ (scalarUnit l E W).app Q
+  let γ : d0.direct.obj K ≅ Q := β₀.symm ≪≫ (scalarUnit l E W).app Q
   let Δ : (scalar l E L ι W).obj (d0.direct.obj K) ≅ d.direct.obj K :=
-    (scalar l E L ι W).mapIso γ ≪≫ eqToIso hQ₁ ≪≫ β₁.app K
+    (scalar l E L ι W).mapIso γ ≪≫ β₁
   refine ⟨fun i ↦ HomologicalComplex.Hom.isoApp Δ i, fun i j ↦ Δ.hom.comm i j, ?_⟩
   intro n i U b a x
   let V : (ℕ × W.ProEt)ᵒᵖ := op (n, U.unop)
@@ -227,46 +257,22 @@ theorem quotientAssociation_degreeData_exists
     ((((d0.directEvaluation n).inv.app K).f i).val.app U
       (integralScalarTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W n
         (K.obj.X i) U a x))
-  -- the identity-coefficient side
-  have h₀ := hβ₀ K n i U a x
-  have hinv : ((β₀.inv.app K).f i).val.app V s₀ =
-      a • (show (A₀.scalar.model.E.obj (M.tensor.obj (K.obj.X i))).val.obj V from
-        (A₀.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q) := by
-    have hc : (β₀.hom.app K).f i ≫ (β₀.inv.app K).f i = 𝟙 _ := by
-      rw [← HomologicalComplex.comp_f, Iso.hom_inv_id_app, HomologicalComplex.id_f]
-    refine (congrArg (fun y ↦ ((β₀.inv.app K).f i).val.app V y) h₀.symm).trans ?_
-    exact congrArg (fun g ↦ g.val.app V (a • (show (A₀.scalar.model.E.obj
-      (M.tensor.obj (K.obj.X i))).val.obj V from
-        (A₀.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q))) hc
-  have he₀ : ((eqToHom hQ₀).f i).val.app V
-      (a • (show (A₀.scalar.model.E.obj (M.tensor.obj (K.obj.X i))).val.obj V from
-        (A₀.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q)) =
+  have hinv : (β₀.inv.f i).val.app V s₀ =
       integralComparisonSequenceTensorSection l E E (AlgHom.id ℚ_[l] E) W (Q.X i) V a q := by
-    rw [HomologicalComplex.eqToHom_f]
-    exact eq_of_heq ((OrdinaryScalarTowerProof.eqToHom_section _ V _).trans
-      (hT₀ (Q.X i) V a q).symm)
-  have hγ : ((γ.hom).f i).val.app V s₀ = a • q := by
-    simp only [γ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, eqToIso.hom,
-      HomologicalComplex.comp_f, SheafOfModules.comp_val, PresheafOfModules.comp_app,
-      ModuleCat.comp_apply]
-    erw [hinv, he₀]
+    have hc : β₀.hom.f i ≫ β₀.inv.f i = 𝟙 _ := by
+      rw [← HomologicalComplex.comp_f, β₀.hom_inv_id, HomologicalComplex.id_f]
+    refine (congrArg (fun y ↦ (β₀.inv.f i).val.app V y) (hβ₀ n i U a x).symm).trans ?_
+    exact congrArg (fun g ↦ g.val.app V
+      (integralComparisonSequenceTensorSection l E E (AlgHom.id ℚ_[l] E) W (Q.X i) V a q)) hc
+  have hγ : (γ.hom.f i).val.app V s₀ = a • q := by
+    change ((integralComparisonSequenceScalarUnit l E W).hom.app (Q.X i)).val.app V
+      ((β₀.inv.f i).val.app V s₀) = _
+    rw [hinv]
     exact scalar_unit_section l E W (Q.X i) V a q
-  -- the scalar side
-  have he₁ : ((eqToHom hQ₁).f i).val.app V
-      (integralComparisonSequenceTensorSection l E L ι W (Q.X i) V
-        ((integralComparisonSequenceScalarMap.{u, u} l E L ι W).hom.app V a * b) q) =
-      ((integralComparisonSequenceScalarMap.{u, u} l E L ι W).hom.app V a * b) •
-        (show (A₁.scalar.model.E.obj (M.tensor.obj (K.obj.X i))).val.obj V from
-          (A₁.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q) := by
-    rw [HomologicalComplex.eqToHom_f]
-    exact eq_of_heq ((OrdinaryScalarTowerProof.eqToHom_section _ V _).trans
-      (hT₁ (Q.X i) V _ q))
-  change ((Δ.hom).f i).val.app V
-      (integralComparisonSequenceTensorSection l E L ι W ((d0.direct.obj K).X i) V b s₀) = _
-  simp only [Δ, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, eqToIso.hom,
-    HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  erw [scalar_section_naturality l E L ι W, hγ, tensorSection_smul l E L ι W, he₁]
-  exact hβ₁ K n i U _ x
+  change (β₁.hom.f i).val.app V
+      (((integralComparisonSequenceScalarModel l E L ι W).E.map (γ.hom.f i)).val.app V
+        (integralComparisonSequenceTensorSection l E L ι W ((d0.direct.obj K).X i) V b s₀)) = _
+  rw [scalar_section_naturality l E L ι W, hγ, tensorSection_smul l E L ι W]
+  exact hβ₁ n i U _ x
 
 end WeilConjectures.ScalarExtensionTower

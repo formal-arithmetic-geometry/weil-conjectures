@@ -26,8 +26,27 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
--- Explicit functor identity rewrites elaborate through the sheaf and localization instances.
+private theorem localized_uncurry_factor_of_naturality
+    {C D : Type*} [Category* C] [Category* D] [MonoidalCategory D]
+    (H : Cᵒᵖ × C ⥤ C) (I : C ⥤ C) (Q : C ⥤ D) {P L M : C} {HD : D}
+    (φ : P ⟶ H.obj (op L, I.obj M))
+    (U : (P ⟶ H.obj (op L, I.obj M)) → (Q.obj P ⊗ Q.obj L ⟶ Q.obj M))
+    (E : Q.obj (H.obj (op L, I.obj M)) ⊗ Q.obj L ⟶ Q.obj M)
+    (j : HD ≅ Q.obj (H.obj (op L, I.obj M)))
+    (h : U (φ ≫ 𝟙 _ ≫ H.map ((𝟙 L).op, I.map (𝟙 M))) =
+      (Q.map φ ⊗ₘ Q.map (𝟙 L)) ≫ E ≫ Q.map (𝟙 M)) :
+    U φ = ((Q.map φ ≫ j.inv) ⊗ₘ 𝟙 (Q.obj L)) ≫
+      (j.hom ⊗ₘ 𝟙 (Q.obj L)) ≫ E := by
+  have hid : ((𝟙 L).op, I.map (𝟙 M)) = 𝟙 (op L, I.obj M) := by
+    rw [I.map_id, op_id]
+    rfl
+  rw [hid, H.map_id] at h
+  simp only [Category.comp_id, Q.map_id] at h
+  rw [h]
+  simp only [tensorHom_comp_tensorHom_assoc, Category.assoc, Iso.inv_hom_id,
+    Category.comp_id]
+
+-- Apply the categorical identity calculation without rewriting the concrete sheaf instances.
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem localized_uncurry_input (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -47,25 +66,15 @@ private theorem localized_uncurry_input (X : Scheme.{u})
           DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
             schemeHomResolutionInverse X M := by
   let := schemeDerivedTensorMonoidal X
-  have h := schemeTensorHomUncurry_localized_evaluation X _ P L L M M φ (𝟙 L) (𝟙 M)
-    (𝟙 _)
-  have hid : ((𝟙 L).op, (schemeHomKInjectiveResolution X).map (𝟙 M)) =
-      𝟙 (op L, (schemeHomKInjectiveResolution X).obj M) := by
-    rw [(schemeHomKInjectiveResolution X).map_id M, op_id]
-    rfl
-  have hφid : φ ≫ 𝟙 _ ≫
-      (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map
-        (X := (op L, (schemeHomKInjectiveResolution X).obj M))
-        (Y := (op L, (schemeHomKInjectiveResolution X).obj M))
-        ((𝟙 L).op, (schemeHomKInjectiveResolution X).map (𝟙 M)) = φ := by
-    rw [hid, (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map_id]
-    exact (congrArg (fun k ↦ φ ≫ k) (Category.comp_id (𝟙 _))).trans
-      (Category.comp_id φ)
-  rw [hφid, DerivedCategory.Q.map_id L, DerivedCategory.Q.map_id M] at h
-  simp only [Category.comp_id] at h
-  rw [h]
-  simp only [tensorHom_comp_tensorHom_assoc, Category.assoc, Iso.inv_hom_id,
-    Category.comp_id]
+  exact localized_uncurry_factor_of_naturality
+    (C := CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (Functor.uncurry.obj (homComplexFunctor.{u, u, u, u} (R := X.sheaf)))
+    (schemeHomKInjectiveResolution X) DerivedCategory.Q φ
+    (fun ψ ↦ pullbackTensorModelMap X P L ≫
+      DerivedCategory.Q.map (schemeTensorHomUncurry X P L M ψ) ≫
+        schemeHomResolutionInverse X M)
+    _ (schemeDerivedInternalHomResolutionIso X L M)
+    (schemeTensorHomUncurry_localized_evaluation X _ P L L M M φ (𝟙 L) (𝟙 M) (𝟙 _))
 
 private theorem evaluation_heq {C : Type*} [Category C] [MonoidalCategory C]
     (H : Cᵒᵖ × C ⥤ C) {K L M K' L' M' : C}

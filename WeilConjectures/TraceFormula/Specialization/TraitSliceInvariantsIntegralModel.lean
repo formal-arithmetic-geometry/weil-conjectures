@@ -114,8 +114,6 @@ lemma baseChangeGaloisModel_j_comp_total :
   simp only [baseChangeGaloisModel, Hom.traitChangeModel_j, Hom.cartesianModel_j, Category.assoc]
   rw [pullback.condition]
 
-set_option maxHeartbeats 1000000 in
--- the derived pullbacks along the large composites of the base change model are large terms
 /-- The identification `L(j'')^* Lφ^* B ≅ L(ε'')^* A` on the generic fibre of `N''`. -/
 noncomputable def baseChangeGaloisModelPullbackIso
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -219,8 +217,6 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
             (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
 set_option linter.style.whitespace false in
-set_option maxHeartbeats 2000000 in
--- comparing the Galois actions of `Gal(L^sep / L)` on the concrete layer is slow
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
 `ρ : M'' ⟶ N''_{L^sep}` carries the action of `τ` on the Galois layer to that of the generic
 automorphism `galoisEquiv⁻¹ τ`. -/
@@ -240,7 +236,7 @@ lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
               (traitGenericField K)) τ).autAction Λ C) ≫
         ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C := by
   obtain ⟨σ, rfl⟩ := GenericAut.galoisEquiv.surjective τ
-  rw [MulEquiv.symm_apply_apply]
-  exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ σ C
+  simpa only [MulEquiv.symm_apply_apply] using
+    pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ σ C
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

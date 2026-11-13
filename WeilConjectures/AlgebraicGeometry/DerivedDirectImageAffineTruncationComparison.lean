@@ -48,9 +48,6 @@ private theorem isQuasicoherent_overEquiv (X : Scheme.{u}) (U : X.Opens)
     _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     (U.sheafOfModulesEquivOverUnit X.ringCatSheaf) _ _ (fun V ↦ this V) _ _ M _
 
-set_option maxHeartbeats 400000 in
--- Exact restriction through the site equivalences needs additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
 /-- On an affine open, a sufficiently low canonical truncation induces an
 isomorphism on any fixed higher direct image. The assertion concerns the actual
 canonical map, and does not assert quasi-coherence of either higher direct image.
@@ -99,8 +96,12 @@ theorem exists_isIso_schemeHigherDirectImage_truncGE_over_affine
     (Scheme.Modules.overEquiv U.1)
   let RX := rX ⋙ eX
   let RY := rY ⋙ eY
-  have : RX.Additive := Functor.additive_of_preserves_binary_products _
-  have : RY.Additive := Functor.additive_of_preserves_binary_products _
+  have : rX.Additive := Functor.additive_of_preserves_binary_products _
+  have : eX.Additive := Functor.additive_of_preserves_binary_products _
+  have : rY.Additive := Functor.additive_of_preserves_binary_products _
+  have : eY.Additive := Functor.additive_of_preserves_binary_products _
+  have : RX.Additive := inferInstance
+  have : RY.Additive := inferInstance
   have : CategoryTheory.Limits.PreservesFiniteLimits RX :=
     CategoryTheory.Limits.comp_preservesFiniteLimits _ _
   have : CategoryTheory.Limits.PreservesFiniteColimits RX :=

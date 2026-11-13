@@ -65,8 +65,6 @@ lemma smoothOfRelativeDimension_of_isPullback {Y S P : Scheme.{u}} [IrreducibleS
     rwa [zero_add] at this
   exact smoothOfRelativeDimension_of_pullback_snd g j hj d
 
-set_option maxHeartbeats 1000000 in
--- Elaborating the many restrictions over `V` exceeds the default heartbeat limit.
 /-- **Assembling the generic curve model over an open of the base.** Let `S₀` be integral and
 locally noetherian, `F₀ : X₀ ⟶ S₀` proper, `pₐ : Yₐ ⟶ X₀` finitely many finite morphisms whose
 base changes `gₐ` along a morphism `j : Spec L ⟶ S₀` to the generic point are smooth of relative
@@ -110,7 +108,8 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   have Hσ : IsPullback (Limits.Sigma.map fun a ↦ (p a ⁻¹ᵁ X').ι) ν' ν₀ X'.ι :=
     isPullback_sigmaDesc p p' (fun a ↦ (p a ⁻¹ᵁ X').ι) X'.ι
       fun a ↦ (isPullback_morphismRestrict (p a) X').flip
-  have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V := (morphismRestrict_comp _ _ _).symm
+  have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V :=
+    (morphismRestrict_comp (p a) F₀ V).symm
   -- smoothness and relative dimension of the pieces over `V`
   have hrel (a : ι) : SmoothOfRelativeDimension (d a) (p' a ≫ F') := by
     rw [hcomp]

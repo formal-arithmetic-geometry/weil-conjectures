@@ -86,6 +86,33 @@ private theorem tensor_unit_stalk_cast {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
   subst a
   simpa using tensor_unit_stalk k x M m
 
+/-- The degreewise tensor-stalk comparison sends a unit tensor to the pullback unit. -/
+private theorem tensorStalkIso_unit
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X X' S S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (sq : IsPullback g' f' f g) (z : X')
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (n : ℤ) (m : (stalkComplex g' z P).X n) :
+    letI := leftAlgebra f g' z
+    letI := rightAlgebra f f' g g' sq z
+    (tensorStalkIso f f' g g' sq z P).hom.f n
+        ((1 : C z) ⊗ₜ[A g' z, (tensorMap f f' g g' sq z).comp
+          (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z))] m) =
+      (((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (g' z)).map
+        (Scheme.Modules.Hom.mapPresheaf
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g')).unit.app
+            (P.X n)))) ≫
+        ((Scheme.Modules.tensorPullback g').obj (P.X n)).presheaf.stalkPushforward
+          AddCommGrpCat.{u} g'.base z) m := by
+  let := leftAlgebra f g' z
+  let := rightAlgebra f f' g g' sq z
+  exact (ConcreteCategory.congr_hom
+    (Classical.choose_spec (exists_tensorStalkIso f f' g g' sq z P) n) _).trans
+      (tensor_unit_stalk_cast g' z (P.X n) _
+        (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1 m)
+
 private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toScheme)
     (M : X.Modules) (r : U.toScheme.presheaf.stalk x)
     (m : (RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace x).obj
@@ -110,8 +137,6 @@ private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toSch
   rw [he]
   rfl
 
-set_option maxHeartbeats 700000 in
--- Stalk scalar transport elaborates two specified tensor-stalk components.
 /-- The unit-scalar section-germ generator equation for the pinned comparison.
 
 Expand the tensor-stalk and pinned restriction maps on a section germ. Their
@@ -188,24 +213,16 @@ theorem openOrdinaryTensor_pure_germ_coordinates_canonical
   let := rightAlgebra f f' g g' sq z.val
   let := (tensorMap f f' g g' sq z.val).toAlgebra
   simp only [map_one]
-  erw [Classical.choose_spec (exists_tensorStalkIso f f' g g' sq z.val P) n,
-    Classical.choose_spec
-      (exists_tensorStalkIso (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀) n]
-  change (eqToHom _ ≫
-      (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z.val)).inv.app
-        (P.X n)) _ =
-    (γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n)))
-      ((L₀.map ((openPinnedTensorRestrictionIso g'
-        (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv.app (P.X n)))
-        ((eqToHom _ ≫
-          (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso j z)).inv.app
-            (Q₀.X n)) _))
-  rw [tensor_unit_stalk_cast, tensor_unit_stalk_cast]
-  · exact ConcreteCategory.congr_hom
-      (openPinnedTensorRestriction_stalk_unit g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj (P.X n) z) q
-  · exact (Classical.choose_spec
-      (exists_tensorMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z)).1
-  · exact (Classical.choose_spec (exists_tensorMap f f' g g' sq z.val)).1
+  let m : K.X n := (γᵢ.hom.app (P.X n) ≫
+    ((show X.Modules from P.X n).presheaf.stalkCongr (.of_eq hx)).hom) q
+  let d := L₀.map ((openPinnedTensorRestrictionIso g'
+    (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv.app (P.X n))
+  let δ := γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n))
+  have h₁ := tensorStalkIso_unit f f' g g' sq z.val P n m
+  have h₀ := tensorStalkIso_unit (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀ n q
+  have hunit := ConcreteCategory.congr_hom
+    (openPinnedTensorRestriction_stalk_unit g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj (P.X n) z) q
+  exact h₁.trans (hunit.trans (congrArg (fun t ↦ δ (d t)) h₀.symm))
 
 
 -- Explicit stalk and tensor module coercions require additional definitional checks.

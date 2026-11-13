@@ -64,6 +64,55 @@ lemma mapHomotopyCategoryCommIsoHom_app {J : Type*} (c : ComplexShape J)
 
 end CategoryTheory.Functor
 
+namespace CategoryTheory
+
+/-- Transport a counit factorization across a naturality square of isomorphisms. -/
+private lemma inv_comp_counit_of_iso_naturality {C : Type*} [Category* C]
+    {A B B' D D' E Z : C} (e : A ≅ B) (d : B ≅ B') (d' : D ≅ D')
+    {ε : A ⟶ Z} {m : B ⟶ D} {m' : B' ⟶ D'} {c : D ⟶ E} {c' : D' ⟶ E} {q : E ⟶ Z}
+    (h₁ : e.hom ≫ m ≫ c ≫ q = ε) (h₂ : m ≫ d'.hom = d.hom ≫ m')
+    (h₃ : d'.hom ≫ c' = c) :
+    (d.inv ≫ e.inv) ≫ ε = m' ≫ c' ≫ q := by
+  rw [← h₁]
+  simp only [Category.assoc, e.inv_hom_id_assoc]
+  rw [← h₃]
+  simp only [Category.assoc]
+  rw [reassoc_of% h₂, d.inv_hom_id_assoc]
+
+namespace Adjunction
+
+/-- Reverse a tensor comparison square after identifying its chosen comparison maps. -/
+private lemma comparisonCompatible_symm_of_composite_eq
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
+    {F : D ⥤ C} {F' : D' ⥤ C'} {N_D : D ⥤ D'} {N_C : C ⥤ C'}
+    (α : F ⋙ N_C ≅ N_D ⋙ F')
+    (φ ψ : (Functor.postcompose₂.obj F).obj (curriedTensor D) ⟶
+      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
+    (φ' ψ' : (Functor.postcompose₂.obj F').obj (curriedTensor D') ⟶
+      (((Functor.whiskeringLeft₂ C').obj F').obj F').obj (curriedTensor C'))
+    (m_C : (Functor.postcompose₂.obj N_C).obj (curriedTensor C) ≅
+      (((Functor.whiskeringLeft₂ C').obj N_C).obj N_C).obj (curriedTensor C'))
+    (m_D : (Functor.postcompose₂.obj N_D).obj (curriedTensor D) ≅
+      (((Functor.whiskeringLeft₂ D').obj N_D).obj N_D).obj (curriedTensor D'))
+    (hφ : φ = ψ) (hφ' : φ' = ψ')
+    (h : ∀ K M, F'.map ((m_D.hom.app K).app M) ≫
+        (ψ'.app (N_D.obj K)).app (N_D.obj M) =
+      α.inv.app (K ⊗ M) ≫ N_C.map ((ψ.app K).app M) ≫
+        (m_C.hom.app (F.obj K)).app (F.obj M) ≫ (α.hom.app K ⊗ₘ α.hom.app M)) :
+    ComparisonCompatible α.symm φ φ' m_C m_D := by
+  subst ψ ψ'
+  intro K M
+  simp only [Iso.symm_inv, Iso.symm_hom, curriedTensor_obj_obj,
+    curriedTensor_map_app, curriedTensor_obj_map]
+  rw [reassoc_of% (h K M), Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
+    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
+  erw [MonoidalCategory.id_tensorHom_id, Category.comp_id]
+
+end Adjunction
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -80,8 +129,6 @@ noncomputable def leftDerivedExtendScalarsUpperStarCompIso :
       (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ ≪≫
     Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm
 
-set_option maxHeartbeats 1000000 in
--- the instances of the general lemmas are found for each of the categories of module objects
 /-- `L(Ext_{a_Y} ⋙ f^*_Λ') ≅ L(Ext_{a_Y}) ⋙ Lf^*_Λ'` is compatible with the counits. -/
 lemma leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit
     (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
@@ -99,17 +146,12 @@ lemma leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
   have h₃ := leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ'
     (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (.up ℤ)).obj K)
-  rw [← h₁]
-  simp only [leftDerivedExtendScalarsUpperStarCompIso, Iso.trans_inv, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Iso.symm_inv, Category.assoc,
-    Iso.inv_hom_id_app_assoc]
-  rw [← h₃]
-  simp only [Category.assoc]
-  erw [reassoc_of% h₂]
-  rw [Iso.hom_inv_id_app_assoc]
+  exact inv_comp_counit_of_iso_naturality
+    ((Functor.leftDerivedFunctorCompMapDerivedCategoryRightIso
+      (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧).app (DerivedCategory.Qh.obj K))
+    ((leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm.app _)
+    ((leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm.app _) h₁ h₂ h₃
 
-set_option maxHeartbeats 4000000 in
--- the derived categories of module objects are unfolded when matching the comparisons
 /-- **(Pull) is monoidal**: for an arbitrary coefficient change `a`, the derived (Pull)
 isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor comparisons of the derived
 pullbacks and of the derived extensions of scalars. -/
@@ -120,20 +162,18 @@ theorem comparisonCompatible_derivedUpperStarExtendScalarsIso :
   let := Mod.extendScalarsMonoidal (coefficientMap a X)
   let := Mod.extendScalarsMonoidal (coefficientMap a Y)
   have := isMonoidal_pullIso_hom a f
+  refine Adjunction.comparisonCompatible_symm_of_composite_eq
+    (derivedUpperStarExtendScalarsIso a f) _ _ _ _ _ _
+    (leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison Λ f)
+    (leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison Λ' f) ?_
   intro K M
-  have h := Functor.map_leftDerivedTensorComparison_comp_eq_of_counit_of_iso
+  exact Functor.map_leftDerivedTensorComparison_comp_eq_of_counit_of_iso
     (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ (f)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X)) (pullIso a f)
     (derivedUpperStarExtendScalarsIso a f) (leftDerivedExtendScalarsUpperStarCompIso a f).inv
-    (fun X ↦ (derivedUpperStarExtendScalarsIsoFac a f X).trans (by
-      rw [Functor.mapHomotopyCategoryCommIsoHom_app]))
+    (fun K ↦ (derivedUpperStarExtendScalarsIsoFac a f K).trans
+      (congrArg (fun t ↦ _ ≫ _ ≫ DerivedCategory.Qh.map t)
+        (Functor.mapHomotopyCategoryCommIsoHom_app (.up ℤ) (pullIso a f) K)))
     (leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit a f) K M
-  rw [leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison,
-    leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison]
-  simp only [derivedExtendScalarsTensorIso, asIso_hom, Iso.symm_inv, Iso.symm_hom,
-    curriedTensor_obj_obj, curriedTensor_map_app, curriedTensor_obj_map, Functor.comp_obj]
-  rw [reassoc_of% h, Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
-    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
-  erw [MonoidalCategory.id_tensorHom_id, Category.comp_id]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

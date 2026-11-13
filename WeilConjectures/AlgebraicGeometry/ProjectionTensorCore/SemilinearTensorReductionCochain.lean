@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalculusSupplement
+import all WeilConjectures.AlgebraicGeometry.System.SystemCochainTensorReduction
 import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 import all WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -493,7 +494,6 @@ private theorem tensorSummand_map (R : Sheaf J CommRingCat.{max c v r})
   rfl
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 400000 in
 -- The summand calculation compares three dependent ringed module categories.
 /-- Cochain reduction commutes with the normalized total tensor comparisons.
 Source: Zheng Construction 4.1; Stacks 06YN, 07A4
@@ -543,18 +543,9 @@ theorem cochain_tensor_reduction
       (((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Pm)
       (((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Qm)
       p q k hpq ≫ _ = _
-  erw [← Category.assoc, hs, Category.assoc, ← (A.scalar h).model.E.map_comp_assoc, hm]
-  erw [(A.scalar h).model.E.map_comp, Category.assoc,
-    cochainReduction_f.{c, v, r} J B τ A h
-      ((totalTensor.{c, v, r} (coefficientSequenceTopology J)
-        (systemRing.{c, v, max c v r} J B τ)).obj (P, Q)) k]
-  erw [hnat]
-  erw [reassoc_of% hmap, hn]
-  erw [cochainReduction_f.{c, v, r} J B τ A h P p,
-    cochainReduction_f.{c, v, r} J B τ A h Q q]
-  erw [A.tensorEvaluationModel_ordinary m (P.X p) (Q.X q),
-    A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)]
-  have hinv := ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q)
-  erw [reassoc_of% hinv]
+  rw [A.tensorEvaluationModel_ordinary m (P.X p) (Q.X q)] at hm
+  rw [A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)] at hn
+  exact cochainReduction_summand_paste (A.scalar h).model.E hs hm hn hmap hnat
+    (ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q))
 
 end WeilConjectures.SemilinearSections.ProjectionTensorCore

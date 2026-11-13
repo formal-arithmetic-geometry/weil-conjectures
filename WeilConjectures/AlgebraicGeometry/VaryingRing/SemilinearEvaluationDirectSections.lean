@@ -25,8 +25,6 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-set_option maxHeartbeats 600000 in
--- Normalizing the two continuous module functors needs the upstream normalization budget.
 /-- Direct-image evaluation retains sections in the native evaluation carrier.
 Source: Zheng, Construction 4.1 (blueprint: lem-sf-scalar-evaluation-direct-sections).
 Proof: the existing unique comparison is normalized on the common fibre-product
@@ -36,8 +34,7 @@ theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Modules R φ X) (n : ℕ) (H : Y.ProEtᵒᵖ)
     (x : ((eval R φ Y n).obj ((push R φ f).obj M)).val.obj H) :
     HEq (((moduleEvalP R φ f n).hom.app M).val.app H x) x := by
-  unfold moduleEvalP
-  have h := (moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x
-  exact heq_of_eq h
+  apply heq_of_eq
+  exact (moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x
 
 end AlgebraicGeometry.ProEtale.VaryingRing

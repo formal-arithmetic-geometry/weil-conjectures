@@ -16,8 +16,30 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
-set_option maxHeartbeats 500000 in
--- Transport through the three derived comparison functors needs extra reduction heartbeats.
+
+private theorem image_resolution_normalization
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {I E : C} {A B : D} (e : I ≅ E) (a : F.obj I ≅ A) (b : B ≅ F.obj E)
+    (f : A ⟶ B) (hf : a.hom ≫ f ≫ b.hom = F.map e.hom) :
+    F.map e.inv ≫ a.hom ≫ f = b.inv := by
+  apply (cancel_mono b.hom).mp
+  rw [Category.assoc, Category.assoc, hf, ← F.map_comp, e.inv_hom_id, F.map_id,
+    b.inv_hom_id]
+
+private theorem image_resolution_comparison_of_localization
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (H : E ⥤ D)
+    {M N O : C} {A B : D} {I J K : E}
+    {m : M ⟶ N} {n : N ⟶ O} {k : M ⟶ O} {s : A ⟶ B} {d : B ⟶ Q.obj M}
+    {r : I ⟶ J} {t : J ⟶ K} {v : I ⟶ K} {c : Q.obj O ≅ H.obj K}
+    {l : Q.obj N ⟶ H.obj J} {x : A ⟶ H.obj I}
+    (hfactor : k = m ≫ n) (hnat : Q.map n ≫ c.hom = l ≫ H.map t)
+    (hl : s ≫ d ≫ Q.map m ≫ l = x ≫ H.map r) (hn : r ≫ t = v) :
+    s ≫ d ≫ Q.map k = x ≫ H.map v ≫ c.inv := by
+  apply (cancel_mono c.hom).mp
+  simp only [hfactor, Q.map_comp, Category.assoc, c.inv_hom_id, Category.comp_id]
+  rw [hnat, reassoc_of% hl, ← H.map_comp, hn]
+
 /-- The restriction-induced intersection component realizes the canonical derived comparison.
 Source: Stacks Project, Tags 08FE, 08BV and 0D5T.
 (blueprint: lem-pc-mayer-vietoris-image-resolution-comparison-intersection).
@@ -74,14 +96,8 @@ theorem schemeMV_image_resolution_comparison_intersection
     (schemeMVAdjunction Y (U ⊓ V))
   have hn : (schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).inv ≫
       a.hom ≫ DerivedCategory.Q.map f = b.inv := by
-    apply (cancel_mono b.hom).mp
-    simp only [Category.assoc, b.inv_hom_id]
-    change (schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).inv ≫
-      ((RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom
-        (schemeMVResolution X E)).hom ≫ DerivedCategory.Q.map f ≫
-        (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).hom) = _
-    rw [hf, ← (schemeDerivedDirectImage h).map_comp, Iso.inv_hom_id]
-    exact (schemeDerivedDirectImage h).map_id E
+    exact image_resolution_normalization (schemeDerivedDirectImage h)
+      (schemeMVResolutionIso X E) a b (DerivedCategory.Q.map f) hf
   have hp : h ⁻¹ᵁ (U ⊓ V) = (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) := rfl
   have : (schemeOpenModuleImageComplex X (h ⁻¹ᵁ (U ⊓ V)) I).IsKInjective := by
     rw [hp]
@@ -91,24 +107,8 @@ theorem schemeMV_image_resolution_comparison_intersection
   have hnat := schemeMVOpenImageLocalization_naturality Y (U ⊓ V) f
   rw [schemeMVOpenImageLocalization_eq Y (U ⊓ V) J] at hnat
   dsimp only at hl hnat
-  dsimp only
-  change _ ≫ _ ≫ DerivedCategory.Q.map (schemeMVImageComponent h (U ⊓ V) I J f) = _
-  rw [schemeMVImageComponent_factor, DerivedCategory.Q.map_comp]
-  apply (cancel_mono c.hom).mp
-  simp only [Category.assoc]
-  change _ ≫ _ ≫ (DerivedCategory.Q.map _ ≫
-    DerivedCategory.Q.map _ ≫ c.hom) =
-    (schemeMVOpenComparison h (U ⊓ V) E).hom ≫ H.map b.inv ≫ c.inv ≫ c.hom
-  erw [c.inv_hom_id, Category.comp_id]
-  dsimp only [c]
-  erw [hnat]
-  simp only [Scheme.Hom.preimage_inf] at hl
-  have hh := congrArg (fun t ↦ t ≫ H.map (DerivedCategory.Q.map f)) hl
-  simp only [Category.assoc] at hh
-  refine hh.trans ?_
-  change (schemeMVOpenComparison h (U ⊓ V) E).hom ≫
-    H.map ((schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).inv ≫ a.hom) ≫
-      H.map (DerivedCategory.Q.map f) = _
-  rw [← H.map_comp, Category.assoc, hn]
+  exact image_resolution_comparison_of_localization DerivedCategory.Q H (c := c)
+    (schemeMVImageComponent_factor h (U ⊓ V) I J f) hnat hl
+    ((Category.assoc _ _ _).trans hn)
 
 end AlgebraicGeometry

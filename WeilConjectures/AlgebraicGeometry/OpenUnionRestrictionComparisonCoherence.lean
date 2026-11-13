@@ -31,8 +31,6 @@ private theorem cancel_mapped_iso_pasting
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
--- The four descents compare large transported derived functor expressions.
 /-- Supplied direct restriction comparisons descend to commuting overlap comparisons.
 Source: Stacks Project Tag 08BW, cohomology.tex, lemma-mayer-vietoris-hom;
 Tag 08BT, lemma-adjoint-lower-shriek-restrict.
@@ -172,13 +170,12 @@ theorem open_union_restriction_comparison_coherence
   obtain ⟨cV, hcV⟩ := hcV
   refine ⟨cW, cV, qI, ?_, ?_⟩
   · intro G
-    have hc := congrArg (fun e ↦ e.hom.app G) haW
-    rw [← hcW] at hc
+    have hc := (congrArg (fun e ↦ e.hom.app (L.obj G)) hcW).trans
+      (congrArg (fun e ↦ e.hom.app G) haW)
     simp only [Functor.isoWhiskerLeft_hom, Iso.trans_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.whiskerLeft_app] at hc
-    have h : cW.hom.app (RU.obj (L.obj G)) ≫ bWR.hom.app G = bWL.hom.app G := by
-      rw [hc]
-      simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    have h := congrArg (fun f ↦ f ≫ bWR.hom.app G) hc
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at h
     simp only [bWR, bWL, rW, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,
@@ -186,13 +183,12 @@ theorem open_union_restriction_comparison_coherence
     exact cancel_mapped_iso_pasting eI.functor (tU.app (L.obj G))
       (qI.hom.app G) _ h
   · intro G
-    have hc := congrArg (fun e ↦ e.hom.app G) haV
-    rw [← hcV] at hc
+    have hc := (congrArg (fun e ↦ e.hom.app (L.obj G)) hcV).trans
+      (congrArg (fun e ↦ e.hom.app G) haV)
     simp only [Functor.isoWhiskerLeft_hom, Iso.trans_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.whiskerLeft_app] at hc
-    have h : cV.hom.app (RT.obj (L.obj G)) ≫ bVR.hom.app G = bVL.hom.app G := by
-      rw [hc]
-      simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    have h := congrArg (fun f ↦ f ≫ bVR.hom.app G) hc
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at h
     simp only [bVR, bVL, rV, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,

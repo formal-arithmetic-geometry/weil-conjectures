@@ -21,8 +21,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
-set_option maxHeartbeats 800000 in
--- Instantiating adjunction naturality in four derived module categories needs extra heartbeats.
 /-- Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, the Hom paragraph
 of the module docstring; the coefficient complex construction in step 3 of
 `prop-weil-pbc-qbar-condensed-two-colimit`.
@@ -86,11 +84,19 @@ theorem exists_condensed_coefficient_complex_presentation
                         (g ≫ (ei i).hom)) ≫
                   (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app L) =
               g ≫ DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
-  obtain ⟨a, ha⟩ := hL
+  -- Keep the existential eliminators explicit: nested `obtain` unfolds the large target.
+  refine hL.elim fun a ha ↦ ?_
   have : L.IsGE a := ha
-  obtain ⟨C, hC, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE L a
-  obtain ⟨N, c, hc, hN, eΩ, ei, hcomp⟩ :=
-    exists_condensed_coefficient_complex_model X ℓ E F C H he hf
+  refine (DerivedCategory.exists_iso_Q_obj_of_isGE L a).elim fun C hC ↦ ?_
+  refine hC.elim fun hC heC ↦ ?_
+  refine heC.elim fun e ↦ ?_
+  refine (exists_condensed_coefficient_complex_model X ℓ E F C H he hf).elim fun N hN ↦ ?_
+  refine hN.elim fun c hc ↦ ?_
+  have hN := hc.2.1
+  have hrest := hc.2.2
+  have hc := hc.1
+  refine hrest.elim fun eΩ hrest ↦ ?_
+  refine hrest.elim fun ei hcomp ↦ ?_
   have hbound : ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r) := by
     intro i r hr
     rw [hN i]

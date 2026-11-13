@@ -42,8 +42,6 @@ private theorem adicResidue_complete_of_iso
       ((Iso.refl _).op.prod
         ((ringedDerivedRestriction.{w, w + 1, w + 1} B U).mapIso e)))
 
-set_option maxHeartbeats 500000 in
--- Comparing the two termwise constant presentations unfolds their sheafification maps.
 private theorem adicResidue_constant_complete
     (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
@@ -83,8 +81,10 @@ private theorem adicResidue_constant_complete
     exact (adicResidueRestriction B U).mapIso
       ((CategoryTheory.ConstantCompletion.Q B).mapIso γ) ≪≫
         F.mapDerivedCategoryFactors.app K
-  exact adicResidue_complete_of_iso _ e
-    (AdicPerfectModel.complete_slice_model X J P hP U)
+  -- Normalize the model aliases before comparing completeness predicates on the slice.
+  dsimp only [K, B, T] at e
+  exact adicResidue_complete_of_iso.{max v (u + 1)} _ e
+    (AdicPerfectModel.complete_slice_model.{u, v} X J P hP U)
 
 private theorem adicResidue_restriction_factor
     {D : Type w} [SmallCategory D] {T : GrothendieckTopology D}

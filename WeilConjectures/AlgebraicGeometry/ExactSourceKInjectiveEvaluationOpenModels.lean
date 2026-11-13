@@ -33,6 +33,25 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+/-- Transport a comparison square along model isomorphisms and a functor factorization. -/
+private theorem comparison_of_transported_evaluation
+    {C₁ C₂ D : Type*} [Category* C₁] [Category* C₂] [Category* D]
+    (T : C₁ ⥤ C₂) (Q : C₂ ⥤ D) (E : C₁ ⥤ D) (v : E ≅ T ⋙ Q)
+    {A B : C₁} {A' B' : C₂} {S H : D} (f : A ⟶ B) (g : S ⟶ H)
+    (t : T.obj A ≅ A') (b : T.obj B ≅ B')
+    (h : ∃ a' : S ≅ Q.obj A', ∃ b' : H ≅ Q.obj B',
+      g ≫ b'.hom = a'.hom ≫ Q.map (t.inv ≫ T.map f ≫ b.hom)) :
+    ∃ a : S ≅ E.obj A, ∃ b : H ≅ E.obj B, g ≫ b.hom = a.hom ≫ E.map f := by
+  obtain ⟨a', b', h⟩ := h
+  refine ⟨a' ≪≫ (Q.mapIso t).symm ≪≫ (v.app A).symm,
+    b' ≪≫ (Q.mapIso b).symm ≪≫ (v.app B).symm, ?_⟩
+  dsimp only [Iso.trans_hom, Iso.symm_hom]
+  rw [← Category.assoc, ← Category.assoc, h]
+  simp only [Functor.mapIso_inv, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id, Category.comp_id]
+  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, Iso.app_inv] using
+    congrArg (fun z ↦ a'.hom ≫ Q.map t.inv ≫ z) (v.inv.naturality f)
+
 /-- The standard localization is available on the open scheme independently of the
 specified localization universe of the over-site.
 Source: Stacks Project, Tag 05RU.
@@ -42,7 +61,6 @@ local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating the transported models unfolds the exact-functor factorization.
 /-- Ordinary representative evaluation when the coefficient complex is K-injective.
 Source: Stacks Project, cohomology.tex, Tags 08DJ (lemma-internal-hom),
@@ -99,29 +117,31 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
-  let L := Equivalence.functor
+  -- Keep the evaluation arrow named while unpacking the transported models.
+  intro E₀ H D g
+  obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
+    exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
+  let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
+  let L : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
     (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
     (Scheme.Modules.overEquiv U)
-  let T := L.mapHomologicalComplex (.up ℤ)
+  have : L.Additive := Functor.additive_of_preserves_binary_products L
+  have : PreservesFiniteLimits L := inferInstance
+  have : PreservesFiniteColimits L := inferInstance
+  let T : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ ⥤
+      CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
+    L.mapHomologicalComplex (.up ℤ)
   let E := L.mapDerivedCategory
-  let v := L.mapDerivedCategoryFactors
-  obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
-    exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
+  have v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
   have : CochainComplex.IsKInjective (T.obj F) := hF
-  let eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
-  let eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
-  obtain ⟨a', b', h⟩ := exists_kInjective_scheme_evaluation_models U.toScheme K N
+  have eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
+  have eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
+  apply comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
+    v f g t b
+  exact exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
-  refine ⟨a' ≪≫ (DerivedCategory.Q.mapIso t).symm ≪≫
-    (v.app (localEvaluationTensor X U P F)).symm,
-    b' ≪≫ (DerivedCategory.Q.mapIso b).symm ≪≫
-      (v.app (homComplex (R := X.sheaf.over U) P F)).symm, ?_⟩
-  dsimp only [Iso.trans_hom, Iso.symm_hom]
-  rw [← Category.assoc, ← Category.assoc, h]
-  simp only [Functor.mapIso_inv, Category.assoc, ← Functor.map_comp,
-    Iso.hom_inv_id, Category.comp_id]
-  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, Iso.app_inv, L, T] using
-    congrArg (fun z ↦ a'.hom ≫ DerivedCategory.Q.map t.inv ≫ z) (v.inv.naturality f)
 
 end AlgebraicGeometry

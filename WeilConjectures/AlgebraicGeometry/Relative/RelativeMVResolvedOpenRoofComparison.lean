@@ -153,8 +153,15 @@ private theorem open_resolution_numerator
     Functor.mapIso_inv, H, Functor.map_comp, Category.assoc, Iso.hom_inv_id, Category.comp_id]
     using hh
 
-set_option maxHeartbeats 500000 in
--- Normalization of the composed derived and open functors needs extra heartbeats.
+private lemma map_iso_cancel_left
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B : C} {T U : D} (a : A ≅ B) (e : F.obj A ≅ T)
+    (r : T ⟶ U) (t : F.obj B ⟶ U)
+    (h : F.map a.inv ≫ e.hom ≫ r = t) :
+    r = e.inv ≫ F.map a.hom ≫ t := by
+  rw [← h, ← F.map_comp_assoc, a.hom_inv_id, F.map_id, Category.id_comp,
+    e.inv_hom_id_assoc]
+
 private theorem open_resolution_denominator_intersection
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -194,18 +201,17 @@ private theorem open_resolution_denominator_intersection
         g'.toLRSHom.toShHom (schemeOpenModuleImageComplex X' W' J)).hom ≫
       DerivedCategory.Q.map (schemeMVImageComponent g' W J L s) =
       (schemeMVOpenComparison g' W K').hom ≫ b.inv := by
-    dsimp only [a, b, Iso.trans_inv, Functor.mapIso_inv]
-    exact schemeMV_image_resolution_comparison_intersection X' X g' U V K' s hf
-  have hh := congrArg (fun t ↦
-    (schemeMVDirectImageLocalization g').app (schemeOpenModuleImageComplex X' W' J) ≫
-      (schemeDerivedDirectImage g').map a.hom ≫ t) hn
-  rw [schemeMVDirectImageLocalization_app g'
-    (schemeOpenModuleImageComplex X' W' J)] at hh
-  rw [← (schemeDerivedDirectImage g').map_comp_assoc, a.hom_inv_id,
-    (schemeDerivedDirectImage g').map_id, Category.id_comp, Iso.inv_hom_id_assoc] at hh
+    have hcomp := schemeMV_image_resolution_comparison_intersection X' X g' U V K' s hf
+    -- Normalize the comparisons and third chain-map component before matching the theorem.
+    simpa only [a, b, H, H', J, L, W, W', Iso.trans_inv, Functor.mapIso_inv,
+      schemeMVImageChainMap, ShortComplex.homMk] using hcomp
   rw [schemeMVDirectImageLocalization_app g'
     (schemeOpenModuleImageComplex X' W' J)]
-  exact hh
+  exact map_iso_cancel_left (schemeDerivedDirectImage g') a
+    (RingedSpace.derivedModuleDirectImageKInjectiveIso
+      g'.toLRSHom.toShHom (schemeOpenModuleImageComplex X' W' J))
+    (DerivedCategory.Q.map (schemeMVImageComponent g' W J L s))
+    ((schemeMVOpenComparison g' W K').hom ≫ b.inv) hn
 
 private theorem open_resolution_denominator
     [∀ Z : Scheme.{u},

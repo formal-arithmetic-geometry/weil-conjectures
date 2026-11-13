@@ -45,8 +45,6 @@ private lemma equiv_zero_one (Y : Scheme.{u}) :
 
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 400000 in
--- The comparison elaborates several sheaf adjunctions and Ext functors.
 /-- The inverse-image/counit comparison carries the boundary of one in the pullback
 of a direct-image extension to the boundary of one in the original extension.
 
@@ -105,10 +103,18 @@ theorem units_extension_pullback_boundary_comparison
         ((toSheafify (Opens.grothendieckTopology Z)
           ((Functor.const (Opens Z)ᵒᵖ).obj
             (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) := by
+  -- Reuse the ambient sheaf and Ext instances throughout the comparison.
+  have : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify (Opens.grothendieckTopology Z) AddCommGrpCat.{u} := inferInstance
+  let : Abelian (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) := inferInstance
+  let : Abelian (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) := inferInstance
+  have : HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) := inferInstance
+  have : HasExt.{u} (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) := inferInstance
   let g := Opens.map i.base
-  let L := g.sheafPullback AddCommGrpCat.{u}
-    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
   let R := g.sheafPushforwardContinuous AddCommGrpCat.{u}
+    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
+  have : R.IsRightAdjoint := inferInstance
+  let L := g.sheafPullback AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
   let adj : L ⊣ R := g.sheafAdjunctionContinuous AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
@@ -116,6 +122,8 @@ theorem units_extension_pullback_boundary_comparison
   let : PreservesFiniteLimits L :=
     Functor.sheafPullbackConstruction.preservesFiniteLimits _ _ _ _
   let : PreservesColimitsOfSize.{u, u} L := adj.leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits L := inferInstance
+  have : L.PreservesZeroMorphisms := inferInstance
   let := preservesBinaryBiproducts_of_preservesBinaryProducts L
   let := Functor.additive_of_preservesBinaryBiproducts L
   let S := ShortComplex.mk a p w

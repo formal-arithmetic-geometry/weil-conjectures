@@ -136,7 +136,6 @@ private theorem regular_restriction_iso (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
   apply Iso.ext
   exact regular_restriction_hom a T
 
-set_option maxHeartbeats 400000 in
 -- The single-object comparison traverses several exact derived functor isomorphisms.
 private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -145,10 +144,10 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
         (DerivedCategory.singleFunctor _ 0).mapIso
           (CondensedRing.residueOrdinaryRestrictedRegularPullIso Λ Λ' a f) := by
   apply Iso.ext
-  rw [← regularPullback₀_eq a f]
+  simp only [← regularPullback₀_eq a f]
   unfold scalarTensorRegularPullIso
   dsimp only [id]
-  rw [regular_restriction_iso a Y, regular_restriction_iso a X]
+  simp only [regular_restriction_iso a Y, regular_restriction_iso a X]
   unfold scalarTensorRestrictPullIso RestrictedCoefficientMate.regularPullback₀
     Functor.singleFunctorCompLeftDerivedFunctorIso
   dsimp only [id]
@@ -157,8 +156,10 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
-  erw [← CategoryTheory.Functor.map_comp_assoc]
-  erw [exact_unit Λ' f]
+  -- Normalize the mapped unit without rechecking the preceding comparison maps.
+  conv_lhs =>
+    arg 2; arg 2; arg 2
+    rw [← (V a X).map_comp_assoc, exact_unit Λ' f]
   simp only [Functor.map_comp, Category.assoc]
   have hc : (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.app
       ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ' Y))) ≫

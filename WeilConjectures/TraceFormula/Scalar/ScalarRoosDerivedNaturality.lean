@@ -60,8 +60,23 @@ attribute [local implicit_reducible] coefficientSequenceLimit
 attribute [local irreducible] completedDerivedScalarExtension
   completedOrdinaryScalarExtension completedScalarCounit
 
-set_option maxHeartbeats 800000 in
--- Fraction naturality contains large but fixed coefficient-functor signatures.
+private theorem scalarRoos_naturality_of_bridge
+    {A B : Type*} [Category A] [Category B] (G : A ⥤ B)
+    {C D C' D' : A} (eC : C ≅ C') (eD : D ≅ D')
+    {KC KD TC TD VC VD : B}
+    (cC : G.obj C' ⟶ KC) (cD : G.obj D' ⟶ KD)
+    (rC : KC ⟶ TC) (rD : KD ⟶ TD) (bC : VC ≅ TC) (bD : VD ≅ TD)
+    {UC UD : B} (a : VC ⟶ UC) (h : UC ⟶ UD) (d : UD ⟶ VD) (f : C ⟶ D)
+    (w : (G.map eC.hom ≫ cC ≫ rC ≫ bC.inv) ≫ a ≫ h ≫ d =
+      G.map f ≫ (G.map eD.hom ≫ cD ≫ rD ≫ bD.inv)) :
+    cC ≫ rC ≫ bC.inv ≫ a ≫ h ≫ d ≫ bD.hom =
+      G.map (eC.inv ≫ f ≫ eD.hom) ≫ cD ≫ rD := by
+  have w' := congrArg (fun k ↦ G.map eC.inv ≫ k ≫ bD.hom) w
+  simp only [Category.assoc, ← Functor.map_comp_assoc] at w'
+  simp only [eC.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    bD.inv_hom_id, Category.comp_id] at w'
+  simpa only [Functor.map_comp, Category.assoc] using w'
+
 /-- A natural ordinary scalar map of whole towers is natural on derived morphisms
 once the source cochain counit becomes invertible after total limit.
 
@@ -165,15 +180,9 @@ theorem scalarRoosDerivedNaturality
   have hε (Z : CochainComplex (coefficientSequenceModules l L X) ℤ) :
       ε.app Z = HF.map (m.ε.app Z) := rfl
   simp only [hb, hε, Functor.comp_map] at hn
-  have hn' := congrArg (fun f ↦
-    (completedDerivedScalarExtension l L F j X).map
-        (integralComparisonRoosBridge l L X ρL C).inv ≫ f ≫
-      (integralComparisonRoosBridge l F X ρF _).hom) hn
-  simp only [Category.assoc, ← Functor.map_comp_assoc] at hn'
-  erw [Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp] at hn'
-  erw [Iso.inv_hom_id, Category.comp_id] at hn'
-  simp only [Functor.map_comp, Category.assoc] at hn'
-  simpa only [integralComparisonDerivedSequenceScalar, Functor.map_comp, Category.assoc]
-    using hn'
+  exact scalarRoos_naturality_of_bridge (completedDerivedScalarExtension l L F j X)
+    (integralComparisonRoosBridge l L X ρL C) (integralComparisonRoosBridge l L X ρL D)
+    _ _ _ _ (integralComparisonRoosBridge l F X ρF _)
+    (integralComparisonRoosBridge l F X ρF _) _ _ _ _ hn
 
 end WeilConjectures

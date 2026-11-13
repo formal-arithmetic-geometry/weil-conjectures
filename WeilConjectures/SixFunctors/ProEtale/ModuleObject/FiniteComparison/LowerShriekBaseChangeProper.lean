@@ -72,9 +72,6 @@ lemma boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardDa
 variable {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left]
   [IsProper p'.left]
 
-set_option maxHeartbeats 800000 in
--- the final `exact` identifies the `𝒪_E` adjunctions and pullback comparison of `p` with those of
--- the proper map of the trivial compactification of `p`, which is only definitional
 /-- **`Ex_!` on `𝒪_E`-complexes for proper vertical maps is `Ex_*`**: under the identifications
 `κ_p : Rp_! ≅ Rp_*` and `κ_{p'} : Rp'_! ≅ Rp'_*`, the compact-support base change of a cartesian
 square with `p` and `p'` proper is the proper base change morphism `Ex_* : Lg^* Rp_* ⟶ Rp'_* Lg'^*`:
@@ -88,11 +85,22 @@ theorem boundedConstructibleLowerShriekBaseChange_padicIntegers_of_isProper
       Functor.whiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E p).hom
           (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ g) ≫
         PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq := by
-  rw [boundedConstructibleLowerShriekBaseChange_padicIntegers_eq_pushforwardData,
+  -- Normalize the structure maps before identifying the adjunctions and square comparison.
+  obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
+  obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
+  obtain ⟨pl, ⟨⟨⟨⟩⟩⟩, pw⟩ := p
+  obtain ⟨pl', ⟨⟨⟨⟩⟩⟩, pw'⟩ := p'
+  change Xl ⟶ Y.left at pl
+  change Xl' ⟶ Y'.left at pl'
+  obtain rfl : Xh = pl ≫ Y.hom := by simpa using pw.symm
+  obtain rfl : Xh' = pl' ≫ Y'.hom := by simpa using pw'.symm
+  rewrite [boundedConstructibleLowerShriekBaseChange_padicIntegers_eq_pushforwardData,
     boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardData,
     boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardData,
     PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
-  exact BoundedConstructiblePushforwardData.lowerShriekBaseChange_of_isProper _ sq
+  have key := BoundedConstructiblePushforwardData.lowerShriekBaseChange_of_isProper
+    (isIsoRefinementPushforward_padicIntegersPushforwardData ℓ k E) sq
+  exact key
 
 /-- **`Ex_!` on `𝒪_E`-complexes for proper vertical maps is the mate of the pullback square
 comparison**: under the identifications `κ_p : Rp_! ≅ Rp_*` and `κ_{p'} : Rp'_! ≅ Rp'_*`

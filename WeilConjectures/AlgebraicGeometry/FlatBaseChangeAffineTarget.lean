@@ -84,8 +84,6 @@ private theorem flatCohomologyBaseChange_bijective_of_compact_open
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1000000 in
--- The affine comparisons carry several definitionally equal section and scalar instances.
 /-- Target affine dictionary for a source comparison with a normalized linear lift.
 Source: Stacks Project, Tags 02KH (both parts), 01XJ, 01E4 and 03FD.
 (blueprint: new-flat-base-change-affine-target)
@@ -163,10 +161,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
                 (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                   ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
   classical
-  dsimp only
   let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
-  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
+  intro h N P Q
   have : Module.Flat Γ(S, V) Γ(S', W) := g.flat_appLE hV hW eVW
   have : CompactSpace (f ⁻¹ᵁ V).toScheme :=
     isCompact_iff_compactSpace.mp (f.isCompact_preimage hV.isCompact)
@@ -178,7 +174,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
     (Scheme.Hom.opensRange_of_isIso _) N inferInstance p
   rw [Category.id_comp] at hb
   let c := LinearEquiv.ofBijective (Scheme.Modules.H.baseChange (S := Γ(S', W)) h N p) hb
-  obtain ⟨e0, a0, b0, ha0, hb0⟩ :=
+  choose e0 a0 b0 ha0 hb0 using
     Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
       f g F I J p V W hV hW eVW D
   intro eH a ha ha_tmul
@@ -194,7 +190,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
     exact one_smul _ _
   have ht : a (1 ⊗ₜ[Γ(S, V)] xi) =
       a0 (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi)) := by
-    rw [ha_tmul, ha0, e0.symm_apply_apply]
+    refine (ha_tmul 1 xi).trans ?_
+    simpa only [e0.symm_apply_apply] using (ha0 1 (e0 (eH.symm xi))).symm
   have ht' : a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)) =
       1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi) :=
     (congrArg a0.symm ht).trans (a0.symm_apply_apply _)
@@ -202,10 +199,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
   calc
     b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) =
         b (c (1 ⊗ₜ[Γ(S, V)] xi)) := congrArg b (hc xi).symm
-    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) := by
-      dsimp only [b, LinearEquiv.trans_apply]
-      rw [c.symm_apply_apply]
-      rfl
+    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) :=
+      congrArg (fun z ↦ b0 (c (a0.symm (a z)))) (c.symm_apply_apply _)
     _ = b0 (c (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi))) := congrArg (fun z ↦ b0 (c z)) ht'
     _ = b0 (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p
         (e0 (eH.symm xi))) := congrArg b0 (hc _)

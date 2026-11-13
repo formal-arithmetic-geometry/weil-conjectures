@@ -22,8 +22,6 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
-set_option maxHeartbeats 500000 in
--- Comparing the explicit resolution class maps unfolds several homology transports.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
@@ -78,12 +76,9 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
               ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
               V (D.sourceClass p (eH.symm xi)))) := by
   classical
-  dsimp only
   let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
-  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
-  let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F
-  obtain ⟨E, hE⟩ :=
+  intro h N P
+  choose E hE using
     Scheme.Modules.exists_moduleCohomology_source_comparison (f ⁻¹ᵁ V).toScheme p
   let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
       ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+
@@ -91,13 +86,13 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
     (E ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
       (Scheme.Modules.H.mapLinearEquiv
         ((Scheme.Modules.restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F) p).toAddEquiv
-  obtain ⟨e, he⟩ :=
+  choose e he using
     Scheme.Modules.exists_affine_cohomology_section_equiv f F I p V hV D.source E hE
   have hP : P.IsQuasicoherent := ordinaryHigherImage_isQuasicoherent f F inferInstance p
   let : ∀ G : S.Modules, Module Γ(S, V)
       Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
     fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
-  obtain ⟨c, hc, hs, ht, _⟩ :=
+  choose c hc hs ht _ using
     Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
   let k : (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) →ₗ[Γ(S', W)]
       Γ((Scheme.Modules.tensorPullback g).obj P, W) :=
@@ -115,7 +110,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
       ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm.bijective.comp t.bijective)
   · intro s xi
     change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
-    have he' : e xi = D.sourceClass p (eH.symm xi) := he xi
+    have he' : e xi = D.sourceClass p (eH.symm xi) := by
+      simpa only [Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass, eH] using he xi
     exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
       ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op
         (Scheme.Modules.Hom.app

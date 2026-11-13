@@ -148,8 +148,6 @@ private theorem changeOfRingsIso_formula {T : TopCat.{u}} {A B : T.Sheaf CommRin
 
 end
 
-set_option maxHeartbeats 800000 in
--- Comparing dependent inverse-image scalar actions requires extra elaboration steps.
 /-- Canonical algebra pushout comparison for the chosen tensor pullback adjunction.
 
 Source: Stacks Project, Tags 0095 and 0096; Tag 09MS, coefficient quotient.
@@ -168,6 +166,12 @@ private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{
   classical
   let JX := Opens.grothendieckTopology X
   let JZ := Opens.grothendieckTopology Z
+  -- Construct the Kan extensions pointwise instead of searching for colimits of extensions.
+  have : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+      (Opens.map j.base).op.HasLeftKanExtension F := fun F ↦ by
+    have : (Opens.map j.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+    exact Functor.HasLeftKanExtension.mk _
+      (Functor.pointwiseLeftKanExtensionUnit (Opens.map j.base).op F)
   let adjR := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (Opens.map j.base) CommRingCat.{u} JX JZ
   let P := (Opens.map j.base).sheafPushforwardContinuous CommRingCat.{u} JX JZ
@@ -225,29 +229,13 @@ private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{
       ((changeOfRingsIso r q.symm).hom.val.app W
         ((a₀.unit.app (commAlgebraSheafModule X.sheaf B)).val.app (op V) x)))
   symm
-  rw [Classical.choose_spec (exists_tensorPullbackAdjunction j)]
-  erw [changeOfRingsIso_formula r q.symm W]
-  change v.hom.val.app W ((k IM).inv.val.app W
-    (((PresheafOfModules.sheafificationAdjunction (𝟙 Z.ringCatSheaf.obj)).unit.app
-      (SheafOfModules.changeOfRingsPresheaf.{u, u, u} r
-        ((SheafOfModules.restrictScalars
-          ((sheafCompose JZ (forget₂ CommRingCat.{u} RingCat.{u})).map s)).obj IM))).app W
-        ((ModuleCat.extendScalars (r.hom.app W).hom).map (q.inv.val.app W)
-          ((1 : Z.sheaf.obj.obj W) ⊗ₜ[
-            (TopCat.Sheaf.inverseImageRing j.base X.sheaf).obj.obj W,
-            (r.hom.app W).hom] m)))) = _
-  have ht : (ModuleCat.extendScalars (r.hom.app W).hom).map (q.inv.val.app W)
-      ((1 : Z.sheaf.obj.obj W) ⊗ₜ[
-        (TopCat.Sheaf.inverseImageRing j.base X.sheaf).obj.obj W,
-        (r.hom.app W).hom] m) =
-      (1 : Z.sheaf.obj.obj W) ⊗ₜ[
-        (TopCat.Sheaf.inverseImageRing j.base X.sheaf).obj.obj W,
-        (r.hom.app W).hom]
-        (show ((SheafOfModules.restrictScalars
-          ((sheafCompose JZ (forget₂ CommRingCat.{u} RingCat.{u})).map s)).obj IM).val.obj W
-          from m) := by
-    exact ModuleCat.ExtendScalars.map_tmul _ _ _ _
-  rw [ht]
+  -- Apply the section formulas without rewriting the composite's dependent module types.
+  refine (congrArg (fun y ↦ v.hom.val.app W ((k IM).inv.val.app W
+      ((changeOfRingsIso r q.symm).hom.val.app W y)))
+    (Classical.choose_spec (exists_tensorPullbackAdjunction j)
+      (commAlgebraSheafModule X.sheaf B) (op V) x)).trans ?_
+  refine (congrArg (fun y ↦ v.hom.val.app W ((k IM).inv.val.app W y))
+    (changeOfRingsIso_formula r q.symm W _)).trans ?_
   exact (congrArg (v.hom.val.app W) (hk IM W m)).trans (hv (op V) x)
 
 /-- Pulling back an algebra sheaf and pushing it forward realizes the unit on its

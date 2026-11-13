@@ -48,8 +48,19 @@ private theorem descend_comparison_squares
     _ = (c.hom ≫ a.hom) ≫ E.map f := by
       simpa only [Category.assoc] using congrArg (fun t ↦ c.hom ≫ t) h₂
 
-set_option maxHeartbeats 600000 in
--- Derived equivalence instance comparisons need a larger declaration-local budget.
+private theorem descend_comparison_squares_of_exists
+    {C D : Type*} [Category* C] [Category* D]
+    (E : C ⥤ D) [E.Full] [E.Faithful]
+    {S T S' T' : C} {A B : D} (g : S ⟶ T) (f : S' ⟶ T') (h : A ⟶ B)
+    (h₁ : ∃ c : E.obj S ≅ A, ∃ d : E.obj T ≅ B,
+      E.map g ≫ d.hom = c.hom ≫ h)
+    (h₂ : ∃ a : A ≅ E.obj S', ∃ b : B ≅ E.obj T',
+      h ≫ b.hom = a.hom ≫ E.map f) :
+    ∃ a' : S ≅ S', ∃ b' : T ≅ T', g ≫ b'.hom = a'.hom ≫ f := by
+  obtain ⟨c, d, hc⟩ := h₁
+  obtain ⟨a, b, ha⟩ := h₂
+  exact descend_comparison_squares E g f c d a b h hc ha
+
 /-- The representative equation needs preservation of quasi-isomorphisms by Hom(P,-)
 and K-flatness of its ordinary dual, rather than finite freeness or invertibility
 of ordinary evaluation. The second complex is arbitrary.
@@ -120,10 +131,10 @@ theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
   let E := ec.mapDerivedCategory
   let R := (SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory
-  obtain ⟨c, d, hrestrict⟩ := exists_canonicalEvaluation_open_restriction X U K N
-  obtain ⟨aU, bU, hmodel⟩ := exists_exactSource_evaluation_open_models X U
-    (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
-    (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf
-  exact descend_comparison_squares E _ _ c d aU bU _ hrestrict hmodel
+  exact descend_comparison_squares_of_exists E _ _ _
+    (exists_canonicalEvaluation_open_restriction X U K N)
+    (exists_exactSource_evaluation_open_models X U
+      (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
+      (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf)
 
 end AlgebraicGeometry

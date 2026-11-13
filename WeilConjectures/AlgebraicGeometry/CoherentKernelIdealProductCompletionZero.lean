@@ -100,12 +100,24 @@ private theorem completionSections_dictionary {X : Scheme.{u}}
     rw [Category.assoc, preservesLimitIso_hom_π, he]
   exact ⟨q, e', hq, he'⟩
 
+/-- Compatibility with quotient projections determines the map on ideal quotients. -/
+private theorem reduceModIdeal_naturality_of_mkQ
+    {R M N P Q : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+    [AddCommGroup N] [Module R N] [AddCommGroup P] [Module R P]
+    [AddCommGroup Q] [Module R Q] (J : Ideal R) (f : M →ₗ[R] N)
+    (pM : M →ₗ[R] P) (pN : N →ₗ[R] Q)
+    (qM : (M ⧸ (J • ⊤ : Submodule R M)) →ₗ[R] P)
+    (qN : (N ⧸ (J • ⊤ : Submodule R N)) →ₗ[R] Q) (g : P →ₗ[R] Q)
+    (hqM : qM.comp (Submodule.mkQ (J • ⊤)) = pM)
+    (hqN : qN.comp (Submodule.mkQ (J • ⊤)) = pN)
+    (hg : g.comp pM = pN.comp f) (x : M ⧸ (J • ⊤ : Submodule R M)) :
+    g (qM x) = qN (f.reduceModIdeal J x) := by
+  obtain ⟨y, rfl⟩ := (J • (⊤ : Submodule R M)).mkQ_surjective x
+  exact (congrArg g (LinearMap.congr_fun hqM y)).trans
+    ((LinearMap.congr_fun hg y).trans (LinearMap.congr_fun hqN (f y)).symm)
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- v4.35 tree: this override is still needed here (green in bumpF builds up to 81, timeout without it in build83);
--- master removed it on the pre-bump tree.
-set_option maxHeartbeats 600000 in
--- Comparing the evaluated quotient maps unfolds several layers of sheaf functors.
 private theorem completionSections_map_injective {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) {M N : X.Modules}
     [M.IsQuasicoherent] [N.IsQuasicoherent] (f : M ⟶ N) [Mono f]
@@ -138,32 +150,20 @@ private theorem completionSections_map_injective {X : Scheme.{u}} [IsNoetherian 
     apply LinearMap.ext
     intro x
     change (E.map (formalModuleQuotientMap I f (Nat.le_refl _)))
-      ((qM n.unop).hom (AdicCompletion.eval J Γ(M, U.1) (n.unop + 1) x)) =
-      (qN n.unop).hom (AdicCompletion.eval J Γ(N, U.1) (n.unop + 1)
-        (AdicCompletion.map J L x))
-    obtain ⟨y, hy⟩ := (J ^ (n.unop + 1) • (⊤ : Submodule A Γ(M, U.1))).mkQ_surjective
-      (AdicCompletion.eval J Γ(M, U.1) (n.unop + 1) x)
-    have hqm := ConcreteCategory.congr_hom (hqM n.unop) y
-    have hqn := ConcreteCategory.congr_hom (hqN n.unop) (L y)
-    change (qM n.unop).hom ((J ^ (n.unop + 1) • (⊤ : Submodule A Γ(M, U.1))).mkQ y) =
-      (E.map (formalModuleQuotientπ I (n.unop + 1) M)) y at hqm
-    change (qN n.unop).hom ((J ^ (n.unop + 1) • (⊤ : Submodule A Γ(N, U.1))).mkQ (L y)) =
-      (E.map (formalModuleQuotientπ I (n.unop + 1) N)) (L y) at hqn
-    change (J ^ (n.unop + 1) • (⊤ : Submodule A Γ(M, U.1))).mkQ y = x.val (n.unop + 1) at hy
-    simp only [AdicCompletion.eval_apply]
-    rw [AdicCompletion.map_val_apply, ← hy, hqm]
-    change (E.map (formalModuleQuotientMap I f (Nat.le_refl _)))
-      ((E.map (formalModuleQuotientπ I (n.unop + 1) M)) y) =
-        (qN n.unop).hom ((J ^ (n.unop + 1) •
-          (⊤ : Submodule A Γ(N, U.1))).mkQ (L y))
-    rw [hqn]
-    have hnatu := ConcreteCategory.congr_hom
-      (congrArg (fun g ↦ E.map g)
-        (show formalModuleQuotientπ I (n.unop + 1) M ≫
-          formalModuleQuotientMap I f (Nat.le_refl _) =
-          f ≫ formalModuleQuotientπ I (n.unop + 1) N by
-            simp [formalModuleQuotientMap, formalModuleQuotientπ])) y
-    exact hnatu
+      ((qM n.unop).hom (x.val (n.unop + 1))) =
+      (qN n.unop).hom (L.reduceModIdeal (J ^ (n.unop + 1)) (x.val (n.unop + 1)))
+    apply reduceModIdeal_naturality_of_mkQ (J ^ (n.unop + 1)) L
+      (E.map (formalModuleQuotientπ I (n.unop + 1) M)).hom
+      (E.map (formalModuleQuotientπ I (n.unop + 1) N)).hom
+      (qM n.unop).hom.hom (qN n.unop).hom.hom
+      (E.map (formalModuleQuotientMap I f (Nat.le_refl _))).hom
+      (congrArg ModuleCat.Hom.hom (hqM n.unop))
+      (congrArg ModuleCat.Hom.hom (hqN n.unop))
+    have hnatu : formalModuleQuotientπ I (n.unop + 1) M ≫
+        formalModuleQuotientMap I f (Nat.le_refl _) =
+        f ≫ formalModuleQuotientπ I (n.unop + 1) N := by
+      simp only [formalModuleQuotientMap, formalModuleQuotientπ, cokernel.π_desc]
+    exact congrArg (fun g ↦ (E.map g).hom) hnatu
   intro x y hxy
   obtain ⟨x', rfl⟩ := eM.toLinearEquiv.surjective x
   obtain ⟨y', rfl⟩ := eM.toLinearEquiv.surjective y
@@ -173,10 +173,21 @@ private theorem completionSections_map_injective {X : Scheme.{u}} [IsNoetherian 
   have hn' := fun z ↦ ConcreteCategory.congr_hom hn z
   exact (hn' x').symm.trans (hxy.trans (hn' y'))
 
+/-- A map into a kernel annihilated by an ideal kills the corresponding ideal product. -/
+private theorem linearMap_eq_zero_of_mem_smul_top_of_annihilator
+    {R M N P : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+    [AddCommGroup N] [Module R N] [AddCommGroup P] [Module R P]
+    (J : Ideal R) (f : M →ₗ[R] N) (g : N →ₗ[R] P)
+    (hf : ∀ x, f x ∈ LinearMap.ker g)
+    (hJ : J ≤ Module.annihilator R (LinearMap.ker g))
+    {x : M} (hx : x ∈ J • (⊤ : Submodule R M)) : f x = 0 := by
+  refine Submodule.smul_induction_on hx (fun r hr x _ ↦ ?_) (fun x y hx hy ↦ ?_)
+  · rw [map_smul]
+    exact congrArg Subtype.val (Module.mem_annihilator.mp (hJ hr) ⟨_, hf x⟩)
+  · rw [map_add, hx, hy, add_zero]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 600000 in
--- The affine-limit comparison and sheaf separatedness require extra elaboration steps.
 /-- An affine limit-kernel annihilator makes every reduction of the coherent
 ideal product with the original kernel zero.
 Source: Stacks Project, Tag 088A, second application of Remark 0888;
@@ -295,18 +306,9 @@ theorem coherentKernel_idealProduct_completion_zero
       rw [hr] at hm
       exact hm
     change completionSectionsUnit I F.obj U ((kernel.ι a.hom).app U.1 (i.app U.1 s)) = 0
-    refine Submodule.smul_induction_on hs (fun r hr x _ ↦ ?_) (fun x y hx hy ↦ ?_)
-    · change (completionSectionsUnit I F.obj U).hom
-        ((E.map (kernel.ι a.hom)).hom (r • x)) = 0
-      rw [map_smul, map_smul]
-      exact congrArg Subtype.val (Module.mem_annihilator.mp (h U hr) ⟨_, hk x⟩)
-    · change (completionSectionsUnit I F.obj U).hom
-        ((E.map (kernel.ι a.hom)).hom (x + y)) = 0
-      change (completionSectionsUnit I F.obj U).hom
-        ((E.map (kernel.ι a.hom)).hom x) = 0 at hx
-      change (completionSectionsUnit I F.obj U).hom
-        ((E.map (kernel.ι a.hom)).hom y) = 0 at hy
-      rw [map_add, map_add, hx, hy, add_zero]
+    exact linearMap_eq_zero_of_mem_smul_top_of_annihilator (K.ideal U ^ t)
+      ((completionSectionsUnit I F.obj U).hom.comp (E.map (kernel.ι a.hom)).hom)
+      (lim.map (Functor.whiskerRight ((completion X I).map a).hom E)).hom hk (h U) hs
   intro n
   have hquot (U : X.affineOpens) (s : Γ(H, U.1)) :
       (formalModuleQuotientπ I (n + 1) H).app U.1 s = 0 := by
@@ -330,22 +332,6 @@ theorem coherentKernel_idealProduct_completion_zero
       obtain ⟨s, rfl⟩ := hsurj x
       obtain ⟨r, rfl⟩ := hsurj y
       exact (hquot U s).trans (hquot U r).symm⟩
-  apply (IsZero.iff_id_eq_zero _).mpr
-  apply Scheme.Modules.hom_ext
-  intro W
-  ext s
-  change s = 0
-  refine TopCat.Sheaf.eq_of_locally_eq'
-    ⟨(formalModuleQuotient I (n + 1) H).presheaf,
-      (formalModuleQuotient I (n + 1) H).isSheaf⟩
-    (fun V : {U : X.affineOpens // U.1 ≤ W} ↦ V.1.1) W
-    (fun V ↦ homOfLE V.2) ?_ _ _ ?_
-  · intro x hx
-    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVW⟩ :=
-      X.isBasis_affineOpens.exists_subset_of_mem_open hx W.2
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVW⟩, hxV⟩
-  · intro V
-    have := hsections V.1
-    exact Subsingleton.elim _ _
+  exact Scheme.Modules.isZero_of_forall_affineOpens _ hsections
 
 end AlgebraicGeometry

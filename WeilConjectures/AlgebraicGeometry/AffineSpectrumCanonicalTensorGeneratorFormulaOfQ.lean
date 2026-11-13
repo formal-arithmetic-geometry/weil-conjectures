@@ -25,8 +25,6 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
--- Comparing the fixed stalk complex types needs substantial definitional reduction.
 /-- The canonical affine-spectrum comparison respects tensor generators for the explicitly
 constructed input coordinates, not for arbitrary chain isomorphisms.
 Proof: the coefficient-one identity is the composition-unit germ calculation. The
@@ -120,29 +118,15 @@ theorem canonicalSpectrum_tensor_generator_formula_of_q
         eD d ⊗ₜ[A0, (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
           (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
           (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by
-  dsimp only
-  intro k d x
+  intro z P0 _ _ _ _ _ _ _ _ _ _ R0 A0 B0 Q Q0 H hA eA eD q k d x
   have hs := canonicalSpectrum_tensor_comparison_smul f f' g g' sq sq0 z0 P k d
     ((1 : C (X'.isoSpec.inv z0)) ⊗ₜ[_, _] x)
   have hu := canonicalSpectrum_tensor_comparison_one f f' g g' sq sq0 z0 P k x
-  let z := X'.isoSpec.inv z0
-  let := leftAlgebra f g' z
-  let := rightAlgebra f f' g g' sq z
-  let := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0
-  let := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop)
-    (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0
   have hl := ModuleCat.ExtendScalars.smul_tmul
     ((tensorMap f f' g g' sq z).comp
       (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))
     (M := (stalkComplex g' z P).X k) d 1 x
   simp only [mul_one] at hl
-  rw [hl, hu] at hs
-  let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
-    (.up ℤ)).obj P
-  let hA : g' z = X.isoSpec.inv ((Spec.map g'.appTop) z0) :=
-    (congrArg (fun k : Spec Γ(X', ⊤) ⟶ X ↦ k z0)
-      (Scheme.isoSpec_inv_naturality g')).symm
-  let q := canonicalSpectrumStalkComplexIso X (g' z) ((Spec.map g'.appTop) z0) hA P
   have hr := ModuleCat.ExtendScalars.smul_tmul
     ((tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
       (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
@@ -152,7 +136,9 @@ theorem canonicalSpectrum_tensor_generator_formula_of_q
     (M := (stalkComplex (Spec.map g'.appTop) z0 P0).X k)
     (canonicalSpectrumStalkEquiv X' z z0 rfl d) 1 (q.hom.f k x)
   simp only [mul_one] at hr
-  rw [hr] at hs
-  exact hs
+  exact (congrArg (fun t ↦ H.hom.f k t) hl.symm).trans
+    (hs.trans ((congrArg (fun t : (tensorComplex (Spec.map f.appTop)
+      (Spec.map f'.appTop) (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0).X k ↦
+        eD d • t) hu).trans hr))
 
 end AlgebraicGeometry.SingleComplexBaseChange

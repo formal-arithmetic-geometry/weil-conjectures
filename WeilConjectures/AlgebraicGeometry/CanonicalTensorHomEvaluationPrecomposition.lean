@@ -68,6 +68,21 @@ private theorem dinatural_inv {C : Type*} [Category* C] [MonoidalCategory C]
     ← id_tensor_comp_tensor_id, Category.assoc, hf, ← id_tensor_comp_assoc]
   simp
 
+private theorem dinatural_right_fraction {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory D] (Q : C ⥤ D) (H : Dᵒᵖ × D ⥤ D) (M : D)
+    (e : ∀ L : C, H.obj (op (Q.obj L), M) ⊗ Q.obj L ⟶ M)
+    (h : ∀ (L L' : C) (b : L ⟶ L'),
+      (H.map ((Q.map b).op, 𝟙 M) ⊗ₘ 𝟙 (Q.obj L)) ≫ e L =
+        (𝟙 _ ⊗ₘ Q.map b) ≫ e L')
+    {L L' : C} (b : Q.obj L ⟶ Q.obj L')
+    (hb : ∃ (R : C) (s : R ⟶ L) (_ : IsIso (Q.map s)) (g : R ⟶ L'),
+      b = inv (Q.map s) ≫ Q.map g) :
+    (H.map (b.op, 𝟙 M) ⊗ₘ 𝟙 (Q.obj L)) ≫ e L = (𝟙 _ ⊗ₘ b) ≫ e L' := by
+  obtain ⟨R, s, hs, g, rfl⟩ := hb
+  have := hs
+  exact dinatural_comp H (inv (Q.map s)) (Q.map g) _ _ _
+    (dinatural_inv H (Q.map s) _ _ (h R L s)) (h R L' g)
+
 private theorem normalized_chain {C : Type*} [Category* C] [MonoidalCategory C]
     {A A' H H' L L' M : C}
     (d : A' ⟶ A) (j : A ⟶ H) (j' : A' ⟶ H') (f : H' ⟶ H) (b : L ⟶ L')
@@ -93,7 +108,30 @@ private def evaluation (X : Scheme.{u})
       DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
         schemeHomResolutionInverse X M
 
-set_option maxHeartbeats 500000 in
+private theorem hom_resolution_naturality (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (L L' M M' : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (b : L' ⟶ L) (c : M ⟶ M') :
+    (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
+        ((DerivedCategory.Q.map b).op, DerivedCategory.Q.map c) ≫
+          (schemeDerivedInternalHomResolutionIso X L' M').hom =
+      (schemeDerivedInternalHomResolutionIso X L M).hom ≫
+        DerivedCategory.Q.map
+          ((Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map
+            (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+            (Y := (op L', (schemeHomKInjectiveResolution X).obj M'))
+            (b.op, (schemeHomKInjectiveResolution X).map c)) := by
+  have := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  exact (Localization.fac _
+    (derivedInternalHom_inverts (Opens.grothendieckTopology X) X.sheaf
+      (CochainComplex.kInjectiveResolutionFunctor.{u}
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+      (CochainComplex.toKInjectiveResolution.{u} _)
+      (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
+        CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
+    (DerivedCategory.Q.op.prod DerivedCategory.Q)).hom.naturality
+      (X := (op L, M)) (Y := (op L', M')) (b.op, c)
+
 -- The localization factorization elaborates through the sheaf and derived tensor instances.
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem evaluation_chain (X : Scheme.{u})
@@ -129,25 +167,10 @@ private theorem evaluation_chain (X : Scheme.{u})
         ((DerivedCategory.Q.map b).op, 𝟙 (DerivedCategory.Q.obj M)) ≫
           (schemeDerivedInternalHomResolutionIso X L M).hom =
       (schemeDerivedInternalHomResolutionIso X L' M).hom ≫ DerivedCategory.Q.map f := by
-    have := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-    have hn := (Localization.fac _
-      (derivedInternalHom_inverts (Opens.grothendieckTopology X) X.sheaf
-        (CochainComplex.kInjectiveResolutionFunctor.{u}
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-        (CochainComplex.toKInjectiveResolution.{u} _)
-        (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
-          CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
-      (DerivedCategory.Q.op.prod DerivedCategory.Q)).hom.naturality
-        (X := (op L', M)) (Y := (op L, M)) (b.op, 𝟙 M)
-    change (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
-        ((DerivedCategory.Q.map b).op, DerivedCategory.Q.map (𝟙 M)) ≫
-          (schemeDerivedInternalHomResolutionIso X L M).hom =
-      (schemeDerivedInternalHomResolutionIso X L' M).hom ≫ DerivedCategory.Q.map f at hn
-    rw [DerivedCategory.Q.map_id] at hn
-    exact hn
+    simpa only [DerivedCategory.Q.map_id] using
+      hom_resolution_naturality X L' L M M b (𝟙 M)
   exact normalized_chain _ _ _ _ _ _ _ hj hraw
 
-set_option maxHeartbeats 600000 in
 -- Matching the fixed evaluation expression uses the shared sheaf localization instances.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- One-variable compatibility of the explicit localized identity evaluation.
@@ -185,17 +208,10 @@ theorem tensorHomEvaluation_precomposition (X : Scheme.{u})
         (b.hom.op, 𝟙 (DerivedCategory.Q.obj M)) ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫ E L M =
       (𝟙 _ ⊗ₘ b.hom) ≫ E L' M := by
   let := schemeDerivedTensorMonoidal X
-  change ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
-      (b.hom.op, 𝟙 (DerivedCategory.Q.obj M)) ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫
-        evaluation X L M = (𝟙 _ ⊗ₘ b.hom) ≫ evaluation X L' M
   -- Dinaturality on chain maps extends to a right fraction by inversion and composition.
-  obtain ⟨R, s, hs, g, hb⟩ := DerivedCategory.right_fac b.hom
-  let := hs
-  rw [hb]
-  exact dinatural_comp (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)
-    (inv (DerivedCategory.Q.map s)) (DerivedCategory.Q.map g) _ _ _
-    (dinatural_inv (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)
-      (DerivedCategory.Q.map s) _ _ (evaluation_chain X R L M s))
-    (evaluation_chain X R L' M g)
+  exact dinatural_right_fraction DerivedCategory.Q
+    (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf) (DerivedCategory.Q.obj M)
+    (fun L ↦ evaluation X L M) (fun L L' b ↦ evaluation_chain X L L' M b)
+    b.hom (DerivedCategory.right_fac b.hom)
 
 end AlgebraicGeometry

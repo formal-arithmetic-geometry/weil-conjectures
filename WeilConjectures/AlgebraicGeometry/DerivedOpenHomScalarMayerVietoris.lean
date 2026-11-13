@@ -125,8 +125,6 @@ private theorem boundary_of_adjunction_triangle
     change eW (eO.symm (aO s γ) ≫ d) = aW s (eW (eO.symm γ ≫ d))
     rw [hn, Category.assoc, hw]
 
-set_option maxHeartbeats 1600000 in
--- Instantiating the four derived adjunctions compares large localization functors.
 /-- The boundary for Hom on an open union commutes with global scalar endomorphisms.
 Its preceding term is Hom into the negative shift on the overlap. No compactness,
 perfectness, quasi-coherence or support hypothesis is required.
@@ -175,7 +173,9 @@ theorem derived_open_hom_scalar_mayer_vietoris
   let bV := (adj V).homEquiv A ((R V).obj (E'⟦k⟧))
     (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β₀)
   let b := biprod.lift bU bV
-  obtain ⟨d, c, hT⟩ := derived_open_union_adjunction_triangle X U V G adj E' k
+  -- Bind the witnesses first to avoid generalizing these expressions through the goal.
+  have htriangle := derived_open_union_adjunction_triangle X U V G adj E' k
+  obtain ⟨d, c, hT⟩ := htriangle
   have hbU (f : E ⟶ A) :
       ((adj U).homEquiv E ((R U).obj (E'⟦k⟧))).symm (f ≫ b ≫ biprod.fst) =
         derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left)
@@ -196,7 +196,7 @@ theorem derived_open_hom_scalar_mayer_vietoris
   let eO := ((adj (U ⊓ V)).homAddEquiv E ((R (U ⊓ V)).obj (E'⟦k - 1⟧))).symm
   let eU := ((adj U).homAddEquiv E ((R U).obj (E'⟦k⟧))).symm
   let eV := ((adj V).homAddEquiv E ((R V).obj (E'⟦k⟧))).symm
-  obtain ⟨δ, hex, hn⟩ := boundary_of_adjunction_triangle d b c hT eW eO eU eV
+  have hboundary := boundary_of_adjunction_triangle d b c hT eW eO eU eV
     (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left))
     (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right))
     hbU hbV
@@ -204,6 +204,7 @@ theorem derived_open_hom_scalar_mayer_vietoris
     (fun s γ ↦ (R (U ⊓ V)).map s ≫ γ)
     (fun s f ↦ (adj (U ⊔ V)).homEquiv_naturality_left_symm s f)
     (fun s f ↦ (adj (U ⊓ V)).homEquiv_naturality_left_symm s f)
+  obtain ⟨δ, hex, hn⟩ := hboundary
   exact ⟨δ, hex, fun r γ ↦ hn (schemeDerivedScalar X r (𝟙 E)) γ⟩
 
 end AlgebraicGeometry

@@ -443,8 +443,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-set_option maxHeartbeats 1000000 in
--- the instances of the categories of sheaves make the rewriting slow
 /-- **The Frobenius comparison at a fibre** (blueprint `lemma-comparison-via-relative-frobenius--4`,
 proof of (2)): for the fibre `Z` of `f = r ≫ f'` over a point `y` fixed by `Φ_Y`, the base change
 `β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the pullback `Φ_Z^♯`. -/
@@ -481,17 +479,17 @@ lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {
     Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
     Category.id_comp, Functor.comp_obj, Functor.id_obj]
   simp only [Functor.map_comp, Category.assoc]
-  rw [cH, hH]
-  rw [eqToHom_refl ((boundedConstructibleLowerShriek ℓ
+  simp only [cH, hH]
+  simp only [eqToHom_refl ((boundedConstructibleLowerShriek ℓ
       (r ≫ f')).obj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (r ≫ p)).obj K))]
-  rw [CategoryTheory.Functor.map_id, Category.id_comp
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp
       (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
         ((boundedConstructibleLowerShriek ℓ (r ≫ f')).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K)))
       ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app _)]
   simp only [Category.assoc]
-  rw [hk]
+  simp only [hk]
 
 end Fibre
 

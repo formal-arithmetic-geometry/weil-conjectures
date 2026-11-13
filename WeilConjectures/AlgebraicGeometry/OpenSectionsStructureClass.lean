@@ -98,8 +98,42 @@ private theorem exact_single_iso
   erw [Category.comp_id]
   rfl
 
-set_option maxHeartbeats 700000 in
--- The explicit restriction and homology comparison types exceed the default elaboration budget.
+private theorem exact_single_complexUnit_apply
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    {R : Type u} [Ring R] [HasDerivedCategory (ModuleCat.{u} R)]
+    (T : C ⥤ D) [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    (S : D ⥤ ModuleCat.{u} R) [S.Additive]
+    {K : CochainComplex C ℤ} {X : C} {Y : D}
+    (a : K ≅ (CochainComplex.singleFunctor C 0).obj X) (b : T.obj X ≅ Y)
+    (x : ((S.mapHomologicalComplex (.up ℤ)).obj
+      ((CochainComplex.singleFunctor D 0).obj Y)).homology 0) :
+    let J := (T.mapHomologicalComplex (.up ℤ)).obj K
+    let L := (CochainComplex.singleFunctor D 0).obj Y
+    let e := (T.mapHomologicalComplex (.up ℤ)).mapIso a ≪≫
+      (HomologicalComplex.singleMapHomologicalComplex T (.up ℤ) 0).app X ≪≫
+      (CochainComplex.singleFunctor D 0).mapIso b
+    let i := T.mapDerivedCategory.mapIso (DerivedCategory.Q.mapIso a) ≪≫
+      (T.mapDerivedCategorySingleFunctor 0).app X ≪≫
+      (DerivedCategory.singleFunctor D 0).mapIso b
+    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} R) 0
+    let F := S.rightDerivedFunctor ⋙ H
+    let Φ := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} R) 0
+    F.map i.inv
+        (H.map ((openComparisonComplexUnit S).app L)
+          ((Φ.app ((S.mapHomologicalComplex (.up ℤ)).obj L)).inv x)) =
+      F.map (T.mapDerivedCategoryFactors.inv.app K)
+        (H.map ((openComparisonComplexUnit S).app J)
+          ((Φ.app ((S.mapHomologicalComplex (.up ℤ)).obj J)).inv
+            (HomologicalComplex.homologyMap
+              ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 x))) := by
+  intro J L e i H F Φ
+  have hn := congrArg (fun f ↦ f x) (complexUnit_homology_naturality S e.inv)
+  simp only [ModuleCat.comp_apply] at hn
+  rw [exact_single_iso T a b, F.map_comp, ModuleCat.comp_apply]
+  exact congrArg (fun z ↦ F.map (T.mapDerivedCategoryFactors.inv.app K) z) hn.symm
+
 /-- Before comparing the two derived functors, the restricted structure class is the
 image of the ordinary tilde class of one under the restricted ordinary-to-derived unit.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and Tag 079V, the definition
@@ -161,7 +195,9 @@ theorem openComparison_structure_class (A : Type u) [CommRing A]
   let := HasDerivedCategory.standard (ModuleCat.{u} B)
   let S := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace
   let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) 0
+  let Φ := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) 0
   let J := (T.mapHomologicalComplex (.up ℤ)).obj C
+  let V := (S.mapHomologicalComplex (.up ℤ)).obj J
   let D := (CochainComplex.singleFunctor
     (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj
       (SheafOfModules.unit (moduleRings U.toScheme.toRingedSpace))
@@ -171,40 +207,26 @@ theorem openComparison_structure_class (A : Type u) [CommRing A]
       (CochainComplex.singleFunctor
         (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).mapIso
           (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U _)
-  let ε : ((S.mapHomologicalComplex (.up ℤ)).obj D).homology 0 ≅ ModuleCat.of B B :=
+  let VD := (S.mapHomologicalComplex (.up ℤ)).obj D
+  let ε : VD.homology 0 ≅ ModuleCat.of B B :=
     (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso
       ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) 0).app _) ≪≫
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)
-  have hi : i.inv = DerivedCategory.Q.map e.inv ≫ T.mapDerivedCategoryFactors.inv.app C := by
-    exact exact_single_iso T (openComparisonStructureComplexIso A)
-      (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U _)
   have ho : HomologicalComplex.homologyMap
       ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 (ε.inv (1 : B)) =
       (openComparisonOrdinaryIso A U C).inv
         ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A))) := by
     exact openComparison_ordinary_structure_class A U
-  have hn := complexUnit_homology_naturality S e.inv
-  have hn' := congrArg (fun f ↦ f (ε.inv (1 : B))) hn
-  simp only [ModuleCat.comp_apply] at hn'
-  dsimp only [derivedStructureGlobalOne]
-  rw [hi, F.map_comp]
-  change F.map (T.mapDerivedCategoryFactors.inv.app C)
-      (H.map (S.rightDerivedFunctor.map (DerivedCategory.Q.map e.inv))
-        (H.map ((openComparisonComplexUnit S).app D)
-          (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) 0).app
-            ((S.mapHomologicalComplex (.up ℤ)).obj D)).inv (ε.inv (1 : B))))) = _
   calc
     _ = F.map (T.mapDerivedCategoryFactors.inv.app C)
         (H.map ((openComparisonComplexUnit S).app J)
-          (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) 0).app
-            ((S.mapHomologicalComplex (.up ℤ)).obj J)).inv
-              (HomologicalComplex.homologyMap
-                ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 (ε.inv (1 : B))))) :=
-      congrArg (fun z ↦ F.map (T.mapDerivedCategoryFactors.inv.app C) z) hn'.symm
+          ((Φ.app V).inv
+            (HomologicalComplex.homologyMap
+              ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 (ε.inv (1 : B))))) :=
+      exact_single_complexUnit_apply T S (openComparisonStructureComplexIso A)
+        (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U _) (ε.inv (1 : B))
     _ = _ := congrArg (fun z ↦ F.map (T.mapDerivedCategoryFactors.inv.app C)
-      (H.map ((openComparisonComplexUnit S).app J)
-        (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) 0).app
-          ((S.mapHomologicalComplex (.up ℤ)).obj J)).inv z))) ho
+      (H.map ((openComparisonComplexUnit S).app J) ((Φ.app V).inv z))) ho
 
 end
 end AlgebraicGeometry

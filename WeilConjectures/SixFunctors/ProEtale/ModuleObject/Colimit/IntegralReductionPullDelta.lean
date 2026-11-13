@@ -51,12 +51,28 @@ attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod 
   hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
   preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
 
+-- Prove the cancellation in abstract categories, before specializing to derived functors.
+private lemma inv_comp_of_comparison {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {A B A' B' : D} {W X Y Z : C} (e : A ≅ B)
+    (p : W ≅ X) (q : X ⟶ Y) (q' : Y ⟶ X) (hq : q ≫ q' = 𝟙 X) (r : Z ≅ Y)
+    (u : A ⟶ A') (v : A' ⟶ F.obj W) (s : B ⟶ B') (t : B' ⟶ F.obj Z)
+    (h : e.hom ≫ s ≫ t ≫ F.map r.hom = u ≫ v ≫ F.map p.hom ≫ F.map q) :
+    e.inv ≫ u ≫ v = (s ≫ t) ≫ F.map (r.hom ≫ q' ≫ p.inv) := by
+  rw [Iso.inv_comp_eq]
+  calc
+    u ≫ v = (u ≫ v ≫ F.map p.hom ≫ F.map q) ≫
+        F.map (q' ≫ p.inv) := by
+          simp only [Category.assoc, ← F.map_comp, reassoc_of% hq,
+            p.hom_inv_id, F.map_id, Category.comp_id]
+    _ = (e.hom ≫ s ≫ t ≫ F.map r.hom) ≫ F.map (q' ≫ p.inv) := by rw [h]
+    _ = e.hom ≫ (s ≫ t) ≫ F.map (r.hom ≫ q' ≫ p.inv) := by
+      simp only [Functor.map_comp, Category.assoc]
+
 section Comap
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 /-- The inverse of (Pull) on the image of an object of the homotopy category, modulo the
 counits. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
@@ -79,17 +95,20 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
               (ComplexShape.up ℤ)).inv.app K) :
         (L(Mod.extendScalars (coefficientMap a Y)) ⋙ L((f)^*⟦Λ'⟧)).obj
           (DerivedCategory.Qh.obj K) ⟶ _) := by
-  have hB := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K
   have hp : (NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K ≫
       (NatTrans.mapHomotopyCategory (pullIso a f).inv (ComplexShape.up ℤ)).app K = 𝟙 _ := by
     rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
       NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
-  rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom, Functor.map_comp, reassoc_of% hB]
-  simp only [← Functor.map_comp]
-  rw [reassoc_of% hp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv, Functor.comp_obj] using
+    inv_comp_of_comparison DerivedCategory.Qh
+      ((derivedUpperStarExtendScalarsIso a f).app (DerivedCategory.Qh.obj K))
+      ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X))) (.up ℤ)).app K)
+      _ _ hp
+      ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧)) (.up ℤ)).app K)
+      _ _ _ _ (derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K)
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 /-- The composite `Lf^* (Res (Ext M)) ⟶ Res (Lf^* (Ext M)) ⟶ Res (Ext (Lf^* M))` of `ι` and of `Res`
 of the inverse of (Pull), on the image of an object of the homotopy category, modulo the
 counits: it is the underived composite of `comapUpperStarIso` and of the inverse of `pullIso`. -/
@@ -164,7 +183,7 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExten
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at hB l1 l2 i1' ⊢
   simp only [Functor.map_comp, Category.assoc] at l2 ⊢
-  rw [reassoc_of% hB, ← reassoc_of% l1, l2, reassoc_of% i1']
+  simp only [reassoc_of% hB, ← reassoc_of% l1, l2, reassoc_of% i1']
   simp only [Functor.map_comp, Category.assoc]
 
 /-- The levelwise comparison `f^* (Res (Ext P)) ⟶ Res (Ext (f^* P))` of complexes: the commutation
@@ -253,7 +272,6 @@ lemma upperStarExtendComapComplexIso_quotient_map
 
 variable (hY : (ShortComplex.mk _ _ wY).ShortExact) (hX : (ShortComplex.mk _ _ wX).ShortExact)
 
-set_option maxHeartbeats 8000000 in -- large composites of derived functors on sheaf categories
 /-- **(Pull) is compatible with the connecting morphisms of the reduction triangles**, on the
 image of a complex of flat modules. -/
 lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
@@ -279,19 +297,24 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   have nδ := (Mod.derivedExtendScalarsTriangleδ k wX hX).naturality
     (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P))
   dsimp only [Functor.comp_obj, Functor.comp_map] at nδ
-  rw [← cancel_mono ((shiftFunctor _ (1 : ℤ)).map (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app
-    ((HomotopyCategory.quotient _ _).obj P)))]
+  apply (cancel_mono ((shiftFunctor _ (1 : ℤ)).map (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app
+    ((HomotopyCategory.quotient _ _).obj P)))).1
   simp only [Category.assoc]
-  rw [← nδ,
+  simp only [← nδ,
     Mod.derivedExtendScalarsTriangleδ_app_Qh_obj_of_shortExact k wY hY P hS]
   have d2 := Mod.derivedExtendScalarsTriangleδ_app_Qh_obj_of_shortExact k wX hX _ hS'
-  erw [d2]
+  conv_rhs =>
+    enter [2, 2, 2]
+    erw [d2]
   have Φ :=
     derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExtendScalarsIso_inv
       a f ((HomotopyCategory.quotient _ _).obj P)
-  rw [Mod.derivedExtendComapComparisonh, Functor.map_comp, Mod.derivedExtendComapComparisonh]
+  simp only [Mod.derivedExtendComapComparisonh]
+  conv_lhs =>
+    arg 1
+    rw [Functor.map_comp]
   simp only [Category.assoc]
-  erw [reassoc_of% Φ]
+  conv_rhs => erw [reassoc_of% Φ]
   have : NatTrans.CommShift ((f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory).inv ℤ :=
     Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
   have hG := Functor.leftDerivedFunctor_map_triangleOfSESδ (f)^*⟦Λ⟧ hS
@@ -303,7 +326,9 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫
       (shiftFunctor _ (1 : ℤ)).map
         (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P)) = _ := hG
-  rw [hG']
+  conv_lhs =>
+    arg 2
+    rw [hG']
   have hV := congrArg DerivedCategory.Qh.map (upperStarExtendComapComplexIso_quotient_map a f P)
   simp only [Functor.map_comp] at hV
   have hq := DerivedCategory.quotientCompQhIso_hom_naturality
@@ -313,10 +338,9 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   simp only [reductionShortComplexUpperStarIso, ShortComplex.isoMk_hom_τ₁,
     ShortComplex.isoMk_hom_τ₃, Iso.refl_hom, CategoryTheory.Functor.map_id] at hσ
   simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hV, reassoc_of% hq, ← reassoc_of% hσ]
+  simp only [reassoc_of% hV, reassoc_of% hq, ← reassoc_of% hσ]
   rfl
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 /-- **(Pull) is compatible with the connecting morphisms of the reduction triangles**: for
 `M ∈ D(Y_proét, Λ)`, `Lf^*` of the connecting morphism `δ_M`, followed by the commutation of `Lf^*`
 with the shift, is the commutation `ι` of `Res` with `Lf^*`, followed by `Res` of the inverse of
@@ -343,8 +367,9 @@ theorem upperStar_map_derivedExtendScalarsTriangleδ_app
   have n4 := (derivedUpperStarExtendScalarsIso a f).inv.naturality e.hom
   have n5 := (Mod.derivedExtendScalarsTriangleδ k wX hX).naturality (L((f)^*⟦Λ⟧).map e.hom)
   dsimp only [Functor.comp_obj, Functor.comp_map] at n1 n2 n3 n4 n5
-  rw [← cancel_epi (L((f)^*⟦Λ⟧).map (D(Mod.comap (coefficientMap a Y)).map
-    (L(Mod.extendScalars (coefficientMap a Y)).map e.hom))), ← Functor.map_comp_assoc, n1,
+  apply (cancel_epi (L((f)^*⟦Λ⟧).map (D(Mod.comap (coefficientMap a Y)).map
+    (L(Mod.extendScalars (coefficientMap a Y)).map e.hom)))).1
+  simp only [← Functor.map_comp_assoc, n1,
     Functor.map_comp, Category.assoc, n2, reassoc_of% n3, ← Functor.map_comp_assoc, n4,
     Functor.map_comp, Category.assoc, n5, reassoc_of% h]
 

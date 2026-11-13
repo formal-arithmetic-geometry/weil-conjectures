@@ -63,13 +63,58 @@ private theorem composition_unit {X Y Z : Scheme.{u}}
   simpa only [Functor.comp_obj, Adjunction.comp_unit_app, Category.assoc,
     Scheme.Modules.tensorPullbackCompositionIso, conjugateIsoEquiv_symm_apply_hom] using t
 
+-- Carry out the unit calculation with abstract functors. This keeps rewriting and
+-- kernel conversion independent of the concrete tensor-pullback constructions.
+private theorem unit_square_of_composition
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {K : C ⥤ D} {P R : D ⥤ F} {J S : C ⥤ E} {Q : E ⥤ F} {A : C ⥤ F}
+    {Hk : D ⥤ C} {Hp : F ⥤ D} {Hj : E ⥤ C} {Hq : F ⥤ E} {Ha : F ⥤ C}
+    (ak : K ⊣ Hk) (ap : P ⊣ Hp) (aj : J ⊣ Hj) (aq : Q ⊣ Hq) (aa : A ⊣ Ha)
+    (ar : R ⊣ Hp) (as : S ⊣ Hj)
+    (θp : P ≅ R) (θj : J ≅ S) (βp : A ≅ K ⋙ P) (βq : A ≅ J ⋙ Q)
+    (cP : Hp ⋙ Hk ≅ Ha) (cQ : Hq ⋙ Hj ≅ Ha) (θ : K ⋙ R ≅ S ⋙ Q) (M : C)
+    (hup : ap.unit.app (K.obj M) ≫ Hp.map (θp.hom.app (K.obj M)) =
+      ar.unit.app (K.obj M))
+    (huj : aj.unit.app M ≫ Hj.map (θj.hom.app M) = as.unit.app M)
+    (hcP : ak.unit.app M ≫ Hk.map (ap.unit.app (K.obj M)) ≫
+        cP.hom.app (P.obj (K.obj M)) = aa.unit.app M ≫ Ha.map (βp.hom.app M))
+    (hcQ : aj.unit.app M ≫ Hj.map (aq.unit.app (J.obj M)) ≫
+        cQ.hom.app (Q.obj (J.obj M)) = aa.unit.app M ≫ Ha.map (βq.hom.app M))
+    (hθ : θp.hom.app (K.obj M) ≫ θ.hom.app M =
+      βp.inv.app M ≫ βq.hom.app M ≫ Q.map (θj.hom.app M)) :
+    ak.unit.app M ≫ Hk.map (ar.unit.app (K.obj M)) ≫
+        (Hp ⋙ Hk).map (θ.hom.app M) =
+      as.unit.app M ≫ Hj.map (aq.unit.app (S.obj M)) ≫
+        cQ.hom.app (Q.obj (S.obj M)) ≫ cP.inv.app (Q.obj (S.obj M)) := by
+  rw [← hup, ← huj]
+  apply (cancel_mono (cP.hom.app (Q.obj (S.obj M)))).1
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  change ak.unit.app M ≫ Hk.map (ap.unit.app (K.obj M)) ≫
+      (Hp ⋙ Hk).map (θp.hom.app (K.obj M)) ≫
+      (Hp ⋙ Hk).map (θ.hom.app M) ≫ cP.hom.app _ =
+    aj.unit.app M ≫ Hj.map (θj.hom.app M) ≫ Hj.map (aq.unit.app (S.obj M)) ≫
+      cQ.hom.app _
+  rw [← Functor.map_comp_assoc, hθ, cP.hom.naturality]
+  rw [reassoc_of% hcP]
+  simp only [← Functor.map_comp, βp.hom_inv_id_app_assoc]
+  have hn : Hj.map (θj.hom.app M) ≫ Hj.map (aq.unit.app (S.obj M)) =
+      Hj.map (aq.unit.app (J.obj M)) ≫ (Hq ⋙ Hj).map (Q.map (θj.hom.app M)) := by
+    rw [← Functor.map_comp, ← aq.unit_naturality, Functor.map_comp]
+    rfl
+  rw [reassoc_of% hn]
+  conv_rhs =>
+    rhs
+    rhs
+    erw [cQ.hom.naturality (Q.map (θj.hom.app M))]
+  have hQ := congrArg (fun v ↦ v ≫ Ha.map (Q.map (θj.hom.app M))) hcQ
+  simpa only [Category.assoc, Functor.map_comp] using hQ.symm
+
 section
 attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.tensorPullbackCompositionIso Scheme.Modules.pushforward
   Scheme.Modules.pushforwardComp Scheme.Modules.pushforwardCongr
   openTensorRestrictionIso openTensorRestrictionSquareIso
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the two composition mates with their specified adjunction units.
 private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) :
@@ -95,64 +140,26 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
   dsimp only
   let p := pullback.fst k U.ι
   let q := pullback.snd k U.ι
-  let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
-  let H {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.pushforward a
-  let ak := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)
-  let ap := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p)
-  let aj := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U.ι)
-  let aq := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q)
-  let cP := Scheme.Modules.pushforwardComp p k ≪≫ Scheme.Modules.pushforwardCongr rfl
-  let cQ := Scheme.Modules.pushforwardComp q U.ι ≪≫
-    Scheme.Modules.pushforwardCongr pullback.condition.symm
-  let θp := openTensorRestrictionIso p
-  let θj := openTensorRestrictionIso U.ι
-  let βp := Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl
-  let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm
-  rw [← open_unit p, ← open_unit U.ι]
-  change ak.unit.app M ≫ (H k).map
-      (ap.unit.app ((T k).obj M) ≫ (H p).map (θp.hom.app ((T k).obj M))) ≫
-      (H p ⋙ H k).map ((openTensorRestrictionSquareIso k U).hom.app M) =
-    aj.unit.app M ≫ (H U.ι).map (θj.hom.app M) ≫
-      (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
-      cQ.hom.app _ ≫ cP.inv.app _
-  apply (cancel_mono (cP.hom.app _)).1
-  simp only [Functor.comp_obj, Category.assoc, Functor.map_comp]
-  erw [Iso.inv_hom_id_app, Category.comp_id]
-  simp only [← Functor.comp_map]
-  change ak.unit.app M ≫ (H k).map (ap.unit.app ((T k).obj M)) ≫
-      (H p ⋙ H k).map (θp.hom.app ((T k).obj M)) ≫
-      (H p ⋙ H k).map ((openTensorRestrictionSquareIso k U).hom.app M) ≫ cP.hom.app _ =
-    aj.unit.app M ≫ (H U.ι).map (θj.hom.app M) ≫
-      (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
-      cQ.hom.app _
-  have hcP := composition_unit p k (p ≫ k) rfl M
-  have hcQ := composition_unit q U.ι (p ≫ k) pullback.condition.symm M
-  have hn := aq.unit_naturality (θj.hom.app M)
-  have hθ : θp.hom.app ((T k).obj M) ≫
-      (openTensorRestrictionSquareIso k U).hom.app M =
-    βp.inv.app M ≫ βq.hom.app M ≫ (T q).map (θj.hom.app M) := by
-    simp [openTensorRestrictionSquareIso, θp, θj, βp, βq, p, q, T]
-  rw [← Functor.map_comp_assoc, hθ]
-  rw [cP.hom.naturality]
-  erw [reassoc_of% hcP]
-  simp only [← Functor.map_comp]
-  have hb := βp.hom_inv_id_app_assoc M (βq.hom.app M ≫ (T q).map (θj.hom.app M))
-  simp only [βp] at *
-  rw [hb]
-  have hn' : (H U.ι).map (θj.hom.app M) ≫
-      (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) =
-    (H U.ι).map (aq.unit.app ((T U.ι).obj M)) ≫
-      (H q ⋙ H U.ι).map ((T q).map (θj.hom.app M)) := by
-    rw [← Functor.map_comp, ← hn, Functor.map_comp]
-    rfl
-  rw [reassoc_of% hn']
-  conv_rhs =>
-    rhs
-    rhs
-    erw [cQ.hom.naturality ((T q).map (θj.hom.app M))]
-  have hQ := congrArg
-    (fun v ↦ v ≫ (H (p ≫ k)).map ((T q).map (θj.hom.app M))) hcQ
-  simpa only [Category.assoc, Functor.map_comp, βq, aj, aq, H, T, cQ] using hQ.symm
+  refine unit_square_of_composition
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k))
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p))
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U.ι))
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q))
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (p ≫ k)))
+    (Scheme.Modules.restrictAdjunction p) (Scheme.Modules.restrictAdjunction U.ι)
+    (openTensorRestrictionIso p) (openTensorRestrictionIso U.ι)
+    (Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl)
+    (Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm)
+    (Scheme.Modules.pushforwardComp p k ≪≫ Scheme.Modules.pushforwardCongr rfl)
+    (Scheme.Modules.pushforwardComp q U.ι ≪≫
+      Scheme.Modules.pushforwardCongr pullback.condition.symm)
+    (openTensorRestrictionSquareIso k U) M
+    (open_unit p _) (open_unit U.ι M)
+    (composition_unit p k (p ≫ k) rfl M)
+    (composition_unit q U.ι (p ≫ k) pullback.condition.symm M) ?_
+  simp only [openTensorRestrictionSquareIso, p, q, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.hom_inv_id_app_assoc]
 
 end
 

@@ -488,8 +488,6 @@ variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
   [∀ P, MulAction GU ((FiniteEtale.fiber sU).obj P)]
   [PreGaloisCategory.IsFundamentalGroup (FiniteEtale.fiber sU) GU]
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [Finite K] in
 lemma map_inertiaInvariants_transport :
     (inertiaInvariants j c.point F).map (IsFiniteLocallyConstantSheaf.transportLinearEquiv
@@ -512,8 +510,6 @@ lemma map_inertiaInvariants_transport :
     rw [hT, T.apply_symm_apply]
     exact hy ⟨_, σ, hσ, rfl⟩
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lemma-boundary-stalk--1` (finite coefficient level, representation form):
 the boundary stalk `(j_* F)_x̄` is isomorphic to the invariants, in the stalk `F_{s_U}` with its
 action of `π₁(U₀, s_U)` (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.galoisRep`), of

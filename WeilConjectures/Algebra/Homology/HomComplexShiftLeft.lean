@@ -52,7 +52,6 @@ private lemma homObjMap_units_smul_left
   · simp only [one_smul]
   · simp only [Units.neg_smul, one_smul, homObjMap_neg_left]
 
-set_option maxHeartbeats 1600000 in
 -- The dependent product projection formulas require repeated complex-index transport.
 set_option backward.isDefEq.respectTransparency false in
 /-- The signed reindexing for a source shift is natural in the target complex.
@@ -124,7 +123,16 @@ theorem homComplex_shift_left
     intro p
     change (a M n ≫ b M n) ≫ π L M (n - m) p (p + (n - m)) rfl = _
     dsimp only [K, CochainComplex.shiftFunctor_obj_X'] at a b ha hb ⊢
-    rw [Category.assoc, hb, Linear.comp_units_smul, ← Category.assoc, ha]
+    conv_lhs =>
+      rw [Category.assoc]
+      rhs
+      rw [hb M n p (p + (n - m)) rfl]
+    conv_lhs =>
+      rw [Linear.comp_units_smul]
+      rhs
+      rw [← Category.assoc]
+      lhs
+      rw [ha M n (p - m) (p + (n - m)) (by omega)]
     simp only [Linear.units_smul_comp, smul_smul, Int.units_mul_self, one_smul]
     change _ = π L M (n - m) p (p + (n - m)) rfl
     exact hπeq L M (n - m) p (p - m + m) (p + (n - m)) (by omega) rfl
@@ -133,7 +141,14 @@ theorem homComplex_shift_left
     intro p
     change (b M n ≫ a M n) ≫ π S M n p (p + n) rfl = _
     dsimp only [K, CochainComplex.shiftFunctor_obj_X'] at a b ha hb ⊢
-    rw [Category.assoc, ha, Linear.comp_units_smul, hb]
+    conv_lhs =>
+      rw [Category.assoc]
+      rhs
+      rw [ha M n p (p + n) rfl]
+    conv_lhs =>
+      rw [Linear.comp_units_smul]
+      rhs
+      rw [hb M n (p + m) (p + n) (by omega)]
     simp only [smul_smul, Int.units_mul_self, one_smul]
     change _ = π S M n p (p + n) rfl
     exact hπeq S M n p (p + m - m) (p + n) (by omega) rfl
@@ -154,15 +169,33 @@ theorem homComplex_shift_left
     change (a M n ≫ (T M).d n (n + 1)) ≫ π S M (n + 1) p (p + (n + 1)) rfl =
       (((-m).negOnePow • ((F.obj (op L)).obj M).d (n - m) (n + 1 - m)) ≫
         a M (n + 1)) ≫ π S M (n + 1) p (p + (n + 1)) rfl
-    rw [Category.assoc,
-      hπ₂ S M n (n + 1) p (p + (n + 1)) (p + n) (p + 1)
-        rfl rfl rfl (by omega),
-      Preadditive.comp_sub, Linear.comp_units_smul, ← Category.assoc,
-      ha M n p (p + n) rfl, ← Category.assoc,
-      ha M n (p + 1) (p + (n + 1)) (by omega), Category.assoc]
-    conv_rhs => rw [ha M (n + 1) p (p + (n + 1)) rfl]
+    -- Focus on each projection composite so matching does not unfold the product lifts.
+    conv_lhs =>
+      rw [Category.assoc]
+      rhs
+      rw [hπ₂ S M n (n + 1) p (p + (n + 1)) (p + n) (p + 1)
+        rfl rfl rfl (by omega)]
+    conv_lhs => rw [Preadditive.comp_sub]
+    conv_lhs =>
+      lhs
+      rw [← Category.assoc]
+      lhs
+      rw [ha M n p (p + n) rfl]
+    conv_lhs =>
+      rhs
+      rw [Linear.comp_units_smul]
+      rhs
+      rw [← Category.assoc]
+      lhs
+      rw [ha M n (p + 1) (p + (n + 1)) (by omega)]
+    conv_rhs =>
+      rw [Category.assoc]
+      rhs
+      rw [ha M (n + 1) p (p + (n + 1)) rfl]
     simp only [Linear.comp_units_smul, Linear.units_smul_comp, smul_smul]
-    rw [hπ₂ L M (n - m) (n + 1 - m) (p + m) (p + (n + 1)) (p + n) (p + 1 + m)
+    conv_rhs =>
+      rhs
+      rw [hπ₂ L M (n - m) (n + 1 - m) (p + m) (p + (n + 1)) (p + n) (p + 1 + m)
         (by omega) (by omega) (by omega) (by omega)]
     simp only [S, CochainComplex.shiftFunctor_obj_d', homObjMap_units_smul_left,
       Linear.comp_units_smul, smul_sub, smul_smul,
@@ -170,7 +203,10 @@ theorem homComplex_shift_left
     have hs : (m * (n + 1)).negOnePow = (m * n).negOnePow * m.negOnePow := by
       rw [mul_add, mul_one, Int.negOnePow_add]
     simp only [hs, mul_assoc, Int.units_mul_self, mul_one]
-    rw [mul_left_comm n.negOnePow (m * n).negOnePow m.negOnePow]
+    conv_lhs =>
+      rhs
+      lhs
+      rw [mul_left_comm n.negOnePow (m * n).negOnePow m.negOnePow]
     rfl
   refine ⟨NatIso.ofComponents (fun M ↦
     HomologicalComplex.Hom.isoOfComponents (e M) (hc M)) ?_⟩
@@ -184,8 +220,24 @@ theorem homComplex_shift_left
   change (((F.obj (op L)).map f).f (n - m) ≫ a N n) ≫
       π S N n p (p + n) rfl =
     (a M n ≫ ((F.obj (op S)).map f).f n) ≫ π S N n p (p + n) rfl
-  rw [Category.assoc, ha, Linear.comp_units_smul, hm, Category.assoc, hm,
-    ← Category.assoc, ha, Linear.units_smul_comp]
+  -- Use naturality only at the selected factor of the product.
+  conv_lhs =>
+    rw [Category.assoc]
+    rhs
+    rw [ha N n p (p + n) rfl]
+  conv_lhs =>
+    rw [Linear.comp_units_smul]
+    rhs
+    rw [hm L M N f (n - m) (p + m) (p + n) (by omega)]
+  conv_rhs =>
+    rw [Category.assoc]
+    rhs
+    rw [hm S M N f n p (p + n) rfl]
+  conv_rhs =>
+    rw [← Category.assoc]
+    lhs
+    rw [ha M n p (p + n) rfl]
+  rw [Linear.units_smul_comp]
   rfl
 
 end CategoryTheory

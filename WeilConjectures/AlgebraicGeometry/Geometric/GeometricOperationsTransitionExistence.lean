@@ -22,6 +22,34 @@ attribute [local irreducible] WeilConjectures.SemilinearSections.hasDerived
 universe c v r
 open CategoryTheory CategoryTheory.Limits
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+private theorem localization_composite_transition_fac
+    {C X Y : Type*} [Category C] [Category X] [Category Y]
+    [Abelian C] [Abelian X] [Abelian Y]
+    [HasDerivedCategory C] [HasDerivedCategory X] [HasDerivedCategory Y]
+    (E₀ : C ⥤ X) (E₁ : C ⥤ Y) (p : Y ⥤ X)
+    [E₀.Additive] [E₁.Additive] [p.Additive]
+    [PreservesFiniteLimits E₀] [PreservesFiniteColimits E₀]
+    [PreservesFiniteLimits E₁] [PreservesFiniteColimits E₁]
+    [PreservesFiniteLimits p] [PreservesFiniteColimits p]
+    (τ : E₀ ⟶ E₁ ⋙ p) (K : CochainComplex C ℤ) :
+    ((Localization.liftNatTrans DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (.up ℤ)) _ _
+      E₀.mapDerivedCategory (E₁ ⋙ p).mapDerivedCategory
+      (Functor.whiskerRight (NatTrans.mapHomologicalComplex τ (.up ℤ))
+        DerivedCategory.Q)) ≫ (Functor.mapDerivedCategoryCompIso E₁ p).inv).app
+          (DerivedCategory.Q.obj K) ≫
+        p.mapDerivedCategory.map (E₁.mapDerivedCategoryFactors.hom.app K) ≫
+        p.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      E₀.mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ (.up ℤ)).app K) := by
+  dsimp only [NatTrans.comp_app]
+  rw [Category.assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors,
+    Localization.liftNatTrans_app]
+  simp only [Category.assoc]
+  change _ ≫ _ ≫ (E₁ ⋙ p).mapDerivedCategoryFactors.inv.app K ≫ _ = _
+  simp only [Iso.inv_hom_id_app, Category.comp_id]
+  rfl
+
 private theorem localize_transition
     {C D X₀ X₁ Y₀ Y₁ : Type*}
     [Category C] [Category D] [Category X₀] [Category X₁] [Category Y₀] [Category Y₁]
@@ -199,7 +227,6 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-set_option maxHeartbeats 500000 in
 -- Elaborating the exact localization square compares several dependent derived categories.
 private theorem pull_transition
     (A : Data.{c, v, r} J B τ)
@@ -224,7 +251,13 @@ private theorem pull_transition
           (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
         ((e.{c, v, max c v r} J B τ n).obj M) := by
   rw [G.pullEvaluation_model n, G.pullEvaluation_model m]
-  exact localize_transition G.pull
+  refine localize_transition
+    (C := Systems.{c, v, max c v r} J B τ)
+    (D := Systems.{c, v, max c v r} J' G.coefficients G.coefficientTransition)
+    (X₀ := Mod.{c, v, max c v r} J (B m))
+    (X₁ := Mod.{c, v, max c v r} J (B n))
+    (Y₀ := Mod.{c, v, max c v r} J' (G.coefficients m))
+    (Y₁ := Mod.{c, v, max c v r} J' (G.coefficients n)) G.pull
     (evaluation.{c, v, max c v r} J B τ m)
     (evaluation.{c, v, max c v r} J B τ n)
     (evaluation.{c, v, max c v r} J'
@@ -243,10 +276,14 @@ private theorem pull_transition
     (derivedTransition.{c, v, max c v r} J B τ h)
     (derivedTransition.{c, v, max c v r} J'
       G.coefficients G.coefficientTransition h)
-    (derived_transition_fac.{c, v, max c v r} J B τ h)
-    (derived_transition_fac.{c, v, max c v r} J'
-      G.coefficients G.coefficientTransition h)
-    (G.ordinaryPullTransition h) M
+    ?_ ?_ ?_ M
+  · intro K
+    exact localization_composite_transition_fac _ _ _
+      (transition.{c, v, max c v r} J B τ h) K
+  · intro K
+    exact localization_composite_transition_fac _ _ _
+      (transition.{c, v, max c v r} J' G.coefficients G.coefficientTransition h) K
+  · exact G.ordinaryPullTransition h
 
 /-- The canonical termwise construction satisfies the pull-transition equation.  On each
 coefficient level this is the mate identity for inverse image and direct image; the ordinary

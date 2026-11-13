@@ -97,8 +97,43 @@ private def evG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) f n
 
-set_option maxHeartbeats 600000 in
--- Comparing the native and normalized coefficient carriers needs additional heartbeats.
+private theorem systemEval_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (N : coefficientSequenceModules.{u, u} l E Y) :
+    (coefficientSequenceEvaluation l E Y n).map ((systemAdj l E f).unit.app N) ≫
+      (evP l E f n).hom.app ((systemPull l E f).obj N) ≫
+      (ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E n) f).map
+        ((evG l E f n).hom.app N) =
+    (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f).unit.app
+      ((coefficientSequenceEvaluation l E Y n).obj N) := by
+  exact compactSupportOrdinaryPullbackUnit l E f n N
+
+private theorem systemEval_transition {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E X) :
+    (compactSupportOrdinaryCoefficientTransition l E Y h).app ((systemPush l E f).obj M) ≫
+      (proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E m n h)).map
+        ((evP l E f n).hom.app M) ≫
+      (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom.app
+        ((coefficientSequenceEvaluation l E X n).obj M) =
+    (evP l E f m).hom.app M ≫
+      (ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f).map
+        ((compactSupportOrdinaryCoefficientTransition l E X h).app M) := by
+  exact compactSupportOrdinaryDirectImageTransition l E f h M
+
+private theorem scalarPullback_unit {A B : Type u} [CommRing A] [CommRing B]
+    [Finite A] [Finite B] {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B)
+    (M : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
+    (proEtaleConstantRingAdjunction A f).unit.app
+        ((proEtaleCoefficientRestrictScalars Y φ).obj M) ≫
+      (proEtaleConstantRingPushforward A f).map
+        ((compactSupportScalarPullback f φ).app M) =
+    (proEtaleCoefficientRestrictScalars Y φ).map
+        ((proEtaleConstantRingAdjunction B f).unit.app M) ≫
+      (compactSupportScalarDirectImage f φ).hom.app
+        ((proEtaleConstantRingPullback B f).obj M) := by
+  exact (unit_mateEquiv_symm (proEtaleConstantRingAdjunction B f)
+    (proEtaleConstantRingAdjunction A f)
+    (compactSupportScalarDirectImage f φ).hom M).symm
+
 /-- Horizontal maps of ordinary coefficient systems commute with native inverse image.
 Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
 (blueprint: lem-weil-compact-support-ordinary-pullback-transition).
@@ -125,6 +160,10 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
   let R := compactSupportSystemLevel l E
   let q := compactSupportSystemQuotient l E
   refine horizontalLeftMate (systemAdj l E f)
+    (Lm := ProEtale.StrictTower.modulePullback (R m) f)
+    (Rm := ProEtale.StrictTower.moduleDirectImage (R m) f)
+    (Ln := ProEtale.StrictTower.modulePullback (R n) f)
+    (Rn := ProEtale.StrictTower.moduleDirectImage (R n) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
     (coefficientSequenceEvaluation l E Y m) (coefficientSequenceEvaluation l E Y n)
@@ -137,16 +176,13 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
-    ?_ ?_ (compactSupportOrdinaryDirectImageTransition l E f h) ?_ N
+    ?_ ?_ ?_ ?_ N
   · intro Q
-    exact compactSupportOrdinaryPullbackUnit l E f m Q
+    exact systemEval_unit l E f m Q
   · intro Q
-    exact compactSupportOrdinaryPullbackUnit l E f n Q
+    exact systemEval_unit l E f n Q
+  · exact systemEval_transition l E f h
   · intro M
-    exact (unit_mateEquiv_symm
-      (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
-      (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
-      (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
-      M).symm
+    exact scalarPullback_unit f (compactSupportLevelQuotient l E m n h) M
 
 end WeilConjectures

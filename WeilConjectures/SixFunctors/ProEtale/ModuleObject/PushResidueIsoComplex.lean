@@ -35,6 +35,16 @@ open CategoryTheory Limits MonoidalCategory MonObj
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+private lemma CategoryTheory.inv_comp_map_eq_of_comp_map_eq
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B U V : D} {X Y : C} (e : A ≅ B)
+    (x₁ : B ⟶ U) (x₂ : U ⟶ F.obj Y) (y₁ : A ⟶ V) (y₂ : V ⟶ F.obj X)
+    (p : X ⟶ Y) (q : Y ⟶ X)
+    (h : e.hom ≫ x₁ ≫ x₂ = y₁ ≫ y₂ ≫ F.map p) (hpq : p ≫ q = 𝟙 X) :
+    e.inv ≫ y₁ ≫ y₂ = x₁ ≫ x₂ ≫ F.map q := by
+  rw [← cancel_epi e.hom, Iso.hom_inv_id_assoc, reassoc_of% h, ← F.map_comp, hpq,
+    F.map_id, Category.comp_id]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -71,8 +81,6 @@ lemma pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app
   erw [Category.comp_id, Category.comp_id]
   exact Iso.hom_inv_id_app _ _
 
-set_option maxHeartbeats 1000000 in
--- unifying objects of the derived categories of module objects is slow
 /-- The derived (Pull) isomorphism through the counits, inverse form: on the image of a
 complex `N`, `(derivedUpperStarExtendScalarsIso a f).inv` followed by the counits is the inverse
 of the underived (Pull) isomorphism. -/
@@ -88,15 +96,11 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_Qh_comp_counit
         ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
           (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (.up ℤ)).obj N) ≫
         DerivedCategory.Qh.map ((pullIsoInvHomotopy a f).app N) := by
-  have h : DerivedUpperStarExtendScalarsIsoFac a f N := derivedUpperStarExtendScalarsIsoFac a f N
-  unfold DerivedUpperStarExtendScalarsIsoFac at h
-  rw [← cancel_epi ((derivedUpperStarExtendScalarsIso a f).hom.app (DerivedCategory.Qh.obj N)),
-    Iso.hom_inv_id_app_assoc, reassoc_of% h, ← DerivedCategory.Qh.map_comp,
-    pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  exact inv_comp_map_eq_of_comp_map_eq DerivedCategory.Qh
+    ((derivedUpperStarExtendScalarsIso a f).app (DerivedCategory.Qh.obj N)) _ _ _ _ _ _
+    (derivedUpperStarExtendScalarsIsoFac a f N)
+    (pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app a f N)
 
-set_option maxHeartbeats 1000000 in
--- unifying objects of the derived categories of module objects is slow
 /-- **The derived (Push) comparison on complexes**, for an arbitrary coefficient change: through
 the units of the right derived pushforwards and the counits of the derived extensions of scalars,
 `derivedUpperStarExtendScalarsPushHom a f` at the image of a complex `K` is the mate on the
@@ -115,7 +119,10 @@ theorem derivedUpperStarExtendScalarsPushHom_app_Qh_fac_mate
             (pullIsoInvHomotopy a f)).app K) ≫
         ((f)_*⟦Λ'⟧).rightDerivedFunctorUnit.app
           (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory (.up ℤ)).obj K) :=
-  mateEquiv_app_comp_eq_of_fac _ _ (derivedUpperStarLowerStarAdjunction Λ f)
+  mateEquiv_app_comp_eq_of_fac
+    ((upperStarLowerStarAdjunction Λ f).mapHomotopyCategory (.up ℤ))
+    ((upperStarLowerStarAdjunction Λ' f).mapHomotopyCategory (.up ℤ))
+    (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ' f)
     ((f)^*⟦Λ⟧).leftDerivedFunctorCounit ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit
     (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit

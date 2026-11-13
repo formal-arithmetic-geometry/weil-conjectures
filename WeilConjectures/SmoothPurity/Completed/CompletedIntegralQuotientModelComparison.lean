@@ -1003,7 +1003,6 @@ private theorem integralScalarComparison_unique
 attribute [local irreducible] integralScalarExtensionOfUniverses
   integralScalarExtensionComparisonOfUniverses
 
-set_option maxHeartbeats 250000 in
 -- The comparison combines two derived counits across independent coefficient universes.
 private theorem completedIntegralComparison_descent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -1067,7 +1066,6 @@ private theorem completedIntegralComparison_descent
 
 attribute [local semireducible] PrincipalQuotientCompletion.quotientRoos
 
-set_option maxHeartbeats 500000 in
 -- The normalized tower and cone comparisons involve independent site/coefficient sizes.
 /-- Completing ordinary extension is the actual coefficient-reduction Roos functor,
 with the specified scalar augmentation, on every input.
@@ -1241,29 +1239,13 @@ theorem completedIntegralQuotientModelComparison
               (SheafOfModules.changeOfRingsPresheaf φ (P.X i)).presheaf).app U
             (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
               (φ.hom.app U).hom] x)))
-    rw [show ((a P (n + 1)).f i).val.app U
-        ((eqToHom (F.obj_eq (P.X i)).symm).val.app U
-          ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
-              (SheafOfModules.changeOfRingsPresheaf φ (P.X i)).presheaf).app U
-            (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
-              (φ.hom.app U).hom] x))) =
-        integralScalarTensorSection l E L ι Y (n + 1) (P.X i) U
-          ((completedIntegralCommRingProjectionUnrestricted l L Y (n + 1)).hom.app U s) x
-        from hβa P i (n + 1) U s x]
-    rw [show ((a P n).f i).val.app U
-        ((eqToHom (F.obj_eq (P.X i)).symm).val.app U
-          ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
-              (SheafOfModules.changeOfRingsPresheaf φ (P.X i)).presheaf).app U
-            (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
-              (φ.hom.app U).hom] x))) =
-        integralScalarTensorSection l E L ι Y n (P.X i) U
-          ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app U s) x
-        from hβa P i n U s x]
     have ht := (integralScalarTransition_existsUnique l E L ι Y n).exists.choose_spec
       P i U ((completedIntegralCommRingProjectionUnrestricted l L Y (n + 1)).hom.app U s) x
-    erw [ht]
-    congr 1
-    exact CompletedIntegralComparisonProof.completedProjection_step l L Y n U s
+    exact (congrArg ((((integralScalarTransition l E L ι Y n).app P).f i).val.app U)
+      (hβa P i (n + 1) U s x)).trans (ht.trans
+        ((congrArg (fun z ↦ integralScalarTensorSection l E L ι Y n (P.X i) U z x)
+          (CompletedIntegralComparisonProof.completedProjection_step l L Y n U s)).trans
+            (hβa P i n U s x).symm))
   have hn : ∀ {P P'} (f : P ⟶ P') n, K.map f ≫ a P' n = a P n ≫
       (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (V.map f)).app (op n) := by
     intro P P' f n

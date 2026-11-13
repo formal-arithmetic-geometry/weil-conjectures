@@ -28,8 +28,22 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-set_option maxHeartbeats 800000 in
--- Elaborating the ind-object under-category transport needs more than the default heartbeats.
+/-- Separability of ring elements implies separability of every residue-field fraction. -/
+private theorem isSeparable_residueField_of_images
+    {B k : Type*} [CommRing B] [Field k] (q : Ideal B) [q.IsPrime]
+    [Algebra k q.ResidueField]
+    (h : ∀ b : B, IsSeparable k (algebraMap B q.ResidueField b)) :
+    Algebra.IsSeparable k q.ResidueField := by
+  refine ⟨fun y ↦ ?_⟩
+  rw [← mem_separableClosure_iff (F := k) (E := q.ResidueField)]
+  obtain ⟨x', m', _, hxm⟩ := IsFractionRing.div_surjective (A := B ⧸ q) y
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x'
+  obtain ⟨m, rfl⟩ := Ideal.Quotient.mk_surjective m'
+  rw [← hxm, Ideal.algebraMap_quotient_residueField_mk,
+    Ideal.algebraMap_quotient_residueField_mk]
+  exact div_mem (mem_separableClosure_iff.mpr (h x))
+    (mem_separableClosure_iff.mpr (h m))
+
 /-- The canonical residue extension of a Noetherian pair henselization is separable algebraic.
 
 Source: Stacks Project, More on Algebra, Tag 0AH1; Tag 0A02 for filteredness.
@@ -91,15 +105,6 @@ theorem pair_henselization_fiber_separable
     Algebra.IndEtale.isSeparable_of_algHom_to_isLocalRing
       (q.comap c.pt.hom.hom).ResidueField q.ResidueField
       (IsScalarTower.toAlgHom A c.pt.right q.ResidueField) b
-  refine ⟨fun y ↦ ?_⟩
-  rw [← mem_separableClosure_iff
-    (F := (q.comap c.pt.hom.hom).ResidueField) (E := q.ResidueField)]
-  obtain ⟨x', m', _, hxm⟩ := IsFractionRing.div_surjective (A := c.pt.right ⧸ q) y
-  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x'
-  obtain ⟨m, rfl⟩ := Ideal.Quotient.mk_surjective m'
-  rw [← hxm, Ideal.algebraMap_quotient_residueField_mk,
-    Ideal.algebraMap_quotient_residueField_mk]
-  exact div_mem (mem_separableClosure_iff.mpr (key x))
-    (mem_separableClosure_iff.mpr (key m))
+  exact isSeparable_residueField_of_images q key
 
 end RingTheory

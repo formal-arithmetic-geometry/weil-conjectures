@@ -26,11 +26,20 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 
+private theorem localizedModule_comp_apply
+    {D : Type u} [CommRing D] (S : Submonoid D) {U V W : ModuleCat.{u} D}
+    (a : U ⟶ V) (b : V ⟶ W) (x : LocalizedModule S U) :
+    LocalizedModule.map S (a ≫ b).hom x =
+      LocalizedModule.map S b.hom (LocalizedModule.map S a.hom x) :=
+  congrArg (fun z ↦ z x)
+    (IsLocalizedModule.map_comp' S
+      (LocalizedModule.mkLinearMap S U)
+      (LocalizedModule.mkLinearMap S V)
+      (LocalizedModule.mkLinearMap S W) a.hom b.hom)
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
--- Comparing the explicit stalk and module composites unfolds several derived functors.
 /-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, last displayed localization identity;
 Tags 06Y6, 01HV and 08IB.
@@ -122,12 +131,9 @@ theorem affineBaseChangeTildeModuleMap_localized
       (affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b).hom x =
         LocalizedModule.map p.asIdeal.primeCompl b.hom.hom
           (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x) := by
-    rw [ha]
-    exact congrArg (fun z ↦ z x)
-      (IsLocalizedModule.map_comp' p.asIdeal.primeCompl
-        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _)
-        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _)
-        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _) a₀.hom b.hom.hom)
+    exact (congrArg (fun a ↦ LocalizedModule.map p.asIdeal.primeCompl
+      (ModuleCat.Hom.hom a) x) ha).trans
+        (localizedModule_comp_apply p.asIdeal.primeCompl a₀ b.hom x)
   rw [hloc]
   rw [affineTensorPullbackHomologyStalkIso_coordinates A A' φg' K hL M e hc i p]
   rw [hlU]

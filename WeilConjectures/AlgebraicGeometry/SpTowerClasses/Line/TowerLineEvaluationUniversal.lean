@@ -79,8 +79,6 @@ attribute [local irreducible] constantResidueHomEquiv
 
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
-set_option maxHeartbeats 400000 in
--- The coefficient-system encodings require normalization when applying the Hom equivalence.
 /-- Evaluation of scalar extension represents additive maps from the roots sheaf.
 Source: blueprint classes (2), evaluation of coefficient extension
 (blueprint: lem-sp-tower-line-evaluation-universal).
@@ -148,12 +146,13 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
       (f : (SemilinearSections.evaluation.{u + 1, u, u + 1}
         J D σ n).obj
           (c.scalar.model.E.obj c.rootModule) ⟶ N) :
-      Φ N f = e.hom ≫ (SheafOfModules.toSheaf _).map (Ψ N f) := by
+      Φ N f = e.hom ≫
+        (SheafOfModules.toSheaf
+          (SemilinearSections.ring (Scheme.ProEt.topology T) (Rlevel l T n))).map (Ψ N f) := by
     dsimp only [Φ]
     erw [Equiv.trans_apply, Equiv.trans_apply, constantResidueHomEquiv_apply,
       Iso.homCongr_apply]
     simp only [Iso.symm_inv, Iso.refl_hom, Category.comp_id]
-    rfl
   refine ⟨Φ, ?_, ?_⟩
   · intro N N' f g
     erw [hΦ, hΦ, hΨ]
@@ -161,9 +160,10 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
     rfl
   · intro N f U a x x' v hx hv
     erw [hΦ]
-    refine (hsection N f U a x v hv).trans ?_
-    exact congrArg (fun t : M.val.obj U ↦
-      a • (show N.val.obj U from (Ψ N f).val.app U t)) (he U x x' hx).symm
+    change f.val.app U v = a • (show N.val.obj U from (Ψ N f).val.app U
+      (e.hom.hom.app U (((c.rootForget.hom.app (op n)).hom.app U) x')))
+    rw [he U x x' hx]
+    exact hsection N f U a x v hv
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 

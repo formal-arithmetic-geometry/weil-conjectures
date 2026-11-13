@@ -63,8 +63,43 @@ private theorem schemeOpenModuleImageRestriction_epi
     infer_instance
   exact epi_of_epi ((schemeOpenModuleAdjunction X U).unit.app M) _
 
-set_option maxHeartbeats 500000 in
--- The explicit biproduct comparison requires additional elaboration steps.
+private theorem shortExact_of_degreewise_pullback
+    {C : Type*} [Category C] [Abelian C]
+    {A B D E : CochainComplex C ℤ}
+    (a : A ⟶ B) (b : A ⟶ D) (c : B ⟶ E) (d : D ⟶ E)
+    (h : ∀ n, IsPullback (a.f n) (b.f n) (c.f n) (d.f n))
+    (hc : ∀ n, Epi (c.f n)) :
+    ∃ hz : biprod.lift a b ≫ biprod.desc c (-d) = 0,
+      (ShortComplex.mk (biprod.lift a b) (biprod.desc c (-d)) hz).ShortExact := by
+  have hz : biprod.lift a b ≫ biprod.desc c (-d) = 0 := by
+    rw [biprod.lift_desc, Preadditive.comp_neg]
+    apply add_neg_eq_zero.mpr
+    ext n
+    exact (h n).w
+  refine ⟨hz, ?_⟩
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    (ShortComplex.mk (biprod.lift a b) (biprod.desc c (-d)) hz)
+  intro n
+  have : Epi (c.f n) := hc n
+  have : Epi (h n).shortComplex'.g := by
+    have : Epi (biprod.inl ≫ (h n).shortComplex'.g) := by
+      simpa only [CommSq.shortComplex'_g, biprod.inl_desc] using hc n
+    exact epi_of_epi biprod.inl _
+  have he : (h n).shortComplex'.ShortExact :=
+    ShortComplex.ShortExact.mk' (IsPullback.exact_shortComplex' (h n))
+      (h n).mono_shortComplex'_f inferInstance
+  let F := HomologicalComplex.eval C (ComplexShape.up ℤ) n
+  let e : (ShortComplex.mk (biprod.lift a b) (biprod.desc c (-d)) hz).map F ≅
+      (h n).shortComplex' :=
+    ShortComplex.isoMk (Iso.refl _) (F.mapBiprod B D) (Iso.refl _) (by
+      change 𝟙 _ ≫ biprod.lift (a.f n) (b.f n) = _
+      rw [Category.id_comp]
+      exact (biprod.map_lift_mapBiprod F B D a b).symm) (by
+      change _ ≫ biprod.desc (c.f n) (-d.f n) = _ ≫ 𝟙 _
+      rw [Category.comp_id]
+      exact biprod.mapBiprod_hom_desc F B D c (-d))
+  exact ShortComplex.shortExact_of_iso e.symm he
+
 /-- The pair of restrictions from the union and the difference to the overlap
 form a short exact sequence for a complex with injective terms.
 
@@ -102,84 +137,14 @@ theorem schemeOpenUnionImageComplex_shortExact
       (schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U)) I)
       (-(schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V)) I))
     ∃ h : f ≫ g = 0, (ShortComplex.mk f g h).ShortExact := by
-  let f := biprod.lift
+  apply shortExact_of_degreewise_pullback
     (schemeOpenModuleImageComplexRestriction X (homOfLE (le_sup_left : U ≤ U ⊔ V)) I)
     (schemeOpenModuleImageComplexRestriction X (homOfLE (le_sup_right : V ≤ U ⊔ V)) I)
-  let g := biprod.desc
     (schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U)) I)
-    (-(schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V)) I))
-  have hz : f ≫ g = 0 := by
-    apply HomologicalComplex.Hom.ext
-    funext n
-    have h := (schemeOpenUnionModuleImage_isPullback X U V (I.X n)).w
-    change (f ≫ g).f n = 0
-    dsimp only [f, g]
-    rw [biprod.lift_desc]
-    simp only [Preadditive.comp_neg]
-    change _ + -_ = 0
-    exact add_neg_eq_zero.mpr h
-  refine ⟨hz, ?_⟩
-  apply HomologicalComplex.shortExact_of_degreewise_shortExact (ShortComplex.mk f g hz)
-  intro n
-  let h := schemeOpenUnionModuleImage_isPullback X U V (I.X n)
-  have : Injective (I.X n) := hI n
-  have : Epi ((schemeOpenModuleImageRestriction X
-      (homOfLE (inf_le_left : U ⊓ V ≤ U))).app (I.X n)) :=
-    schemeOpenModuleImageRestriction_epi X _ (I.X n)
-  have : Epi h.shortComplex'.g := by
-    have : Epi (biprod.inl ≫ h.shortComplex'.g) := by
-      simpa only [CommSq.shortComplex'_g, biprod.inl_desc] using
-        (inferInstance : Epi ((schemeOpenModuleImageRestriction X
-          (homOfLE (inf_le_left : U ⊓ V ≤ U))).app (I.X n)))
-    exact epi_of_epi biprod.inl _
-  have he : h.shortComplex'.ShortExact :=
-    ShortComplex.ShortExact.mk' (IsPullback.exact_shortComplex' h)
-      h.mono_shortComplex'_f inferInstance
-  let S := (ShortComplex.mk f g hz).map
-    (HomologicalComplex.eval (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-      (ComplexShape.up ℤ) n)
-  -- Evaluation preserves the biproduct. Check both units and both signed restrictions.
-  let e : S ≅ h.shortComplex' := ShortComplex.isoMk (Iso.refl _)
-    (HomologicalComplex.biprodXIso
-      (schemeOpenModuleImageComplex X U I) (schemeOpenModuleImageComplex X V I) n)
-    (Iso.refl _) (by
-      change biprod.lift ((schemeOpenModuleImageRestriction X (homOfLE le_sup_left)).app (I.X n))
-        ((schemeOpenModuleImageRestriction X (homOfLE le_sup_right)).app (I.X n)) =
-          f.f n ≫ _
-      apply biprod.hom_ext
-      · rw [biprod.lift_fst, Category.assoc]
-        erw [HomologicalComplex.biprodXIso_hom_fst]
-        exact (HomologicalComplex.biprod_lift_fst_f
-          (schemeOpenModuleImageComplexRestriction X (homOfLE le_sup_left) I)
-          (schemeOpenModuleImageComplexRestriction X (homOfLE le_sup_right) I) n).symm
-      · rw [biprod.lift_snd, Category.assoc]
-        erw [HomologicalComplex.biprodXIso_hom_snd]
-        exact (HomologicalComplex.biprod_lift_snd_f
-          (schemeOpenModuleImageComplexRestriction X (homOfLE le_sup_left) I)
-          (schemeOpenModuleImageComplexRestriction X (homOfLE le_sup_right) I) n).symm)
-    (by
-      change _ ≫ biprod.desc
-        ((schemeOpenModuleImageRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U))).app
-          (I.X n))
-        (-((schemeOpenModuleImageRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V))).app
-          (I.X n))) = g.f n ≫ 𝟙 _
-      rw [Category.comp_id]
-      apply (cancel_epi (HomologicalComplex.biprodXIso
-        (schemeOpenModuleImageComplex X U I) (schemeOpenModuleImageComplex X V I) n).inv).mp
-      rw [Iso.inv_hom_id_assoc]
-      apply biprod.hom_ext'
-      · rw [biprod.inl_desc, ← Category.assoc]
-        erw [HomologicalComplex.inl_biprodXIso_inv
-          (schemeOpenModuleImageComplex X U I) (schemeOpenModuleImageComplex X V I) n]
-        exact (HomologicalComplex.biprod_inl_desc_f
-          (schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_left) I)
-          (-(schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_right) I)) n).symm
-      · rw [biprod.inr_desc, ← Category.assoc]
-        erw [HomologicalComplex.inr_biprodXIso_inv
-          (schemeOpenModuleImageComplex X U I) (schemeOpenModuleImageComplex X V I) n]
-        exact (HomologicalComplex.biprod_inr_desc_f
-          (schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_left) I)
-          (-(schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_right) I)) n).symm)
-  exact ShortComplex.shortExact_of_iso e.symm he
+    (schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V)) I)
+  · exact fun n ↦ schemeOpenUnionModuleImage_isPullback X U V (I.X n)
+  · intro n
+    have : Injective (I.X n) := hI n
+    exact schemeOpenModuleImageRestriction_epi X _ (I.X n)
 
 end AlgebraicGeometry

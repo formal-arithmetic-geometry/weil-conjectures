@@ -85,6 +85,7 @@ import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.CategoryTheory.LeftDerivedKanSourceTriangles
 import Mathlib.CategoryTheory.Localization.Triangulated
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 
 /-! # The counit-compatible shift of derived scalar extension
 
@@ -111,8 +112,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace SheafOfModules
 
-set_option synthInstance.maxHeartbeats 200000 in
--- `PreservesLimit` for the right-extension equivalence `Ψ` is found through `IsEquivalence`.
 /-- The derived scalar-extension counit determines a unique natural shift comparison,
 and this comparison makes derived scalar extension triangulated.
 Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (LF part), and
@@ -309,30 +308,9 @@ theorem derivedScalarExtension_counitShift
     let H := shiftFunctor (DerivedCategory A') (1 : ℤ)
     let γ := (Functor.associator DerivedCategory.Qh F H).inv ≫
       Functor.whiskerRight ε H
-    -- Shifting the target carries the terminal right-extension object to a terminal one.
-    have hpost : (F ⋙ H).IsRightKanExtension γ := by
-      let Ψ := Functor.RightExtension.postcompose₂ DerivedCategory.Qh B H
-      let : IsIso (𝟙 (B ⋙ H)) := inferInstance
-      let : Ψ.IsEquivalence := by
-        dsimp [Ψ, Functor.RightExtension.postcompose₂]
-        let t : ((Functor.whiskeringRight (DerivedCategory A) (DerivedCategory A')
-              (DerivedCategory A')).obj H) ⋙
-              (Functor.whiskeringLeft (HomotopyCategory A (.up ℤ))
-                (DerivedCategory A) (DerivedCategory A')).obj DerivedCategory.Qh ⟶
-            (Functor.whiskeringLeft (HomotopyCategory A (.up ℤ))
-                (DerivedCategory A) (DerivedCategory A')).obj DerivedCategory.Qh ⋙
-              ((Functor.whiskeringRight (HomotopyCategory A (.up ℤ))
-                (DerivedCategory A') (DerivedCategory A')).obj H) :=
-          { app G := (Functor.associator DerivedCategory.Qh G H).inv
-            naturality G G' α := by
-              ext X
-              exact (Category.comp_id _).trans (Category.id_comp _).symm }
-        let : IsIso t := by apply NatIso.isIso_of_isIso_app
-        exact CostructuredArrow.isEquivalenceMap₂ t (𝟙 _)
-      constructor
-      refine ⟨IsTerminal.ofIso
-        (IsTerminal.isTerminalObj Ψ _ (F.isUniversalOfIsRightKanExtension ε)) ?_⟩
-      exact Functor.RightExtension.postcompose₂ObjMkIso H ε
+    -- Apply preservation by an equivalence before specializing to these derived categories.
+    have hpost : (F ⋙ H).IsRightKanExtension γ :=
+      Functor.isRightKanExtension_comp_of_isEquivalence F ε H
     let : (F ⋙ H).IsRightKanExtension γ := hpost
     apply Iso.ext
     apply (F ⋙ H).hom_ext_of_isRightKanExtension γ

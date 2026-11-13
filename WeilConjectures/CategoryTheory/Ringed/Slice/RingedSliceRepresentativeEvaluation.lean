@@ -241,6 +241,22 @@ private theorem inverse_of_model {X Y Z : D} (κ : X ≅ Y) (e : X ≅ Z)
   apply (cancel_epi κ.hom).1
   rw [← Category.assoc, h, Iso.hom_inv_id, Iso.hom_inv_id]
 
+private theorem map_hom_square_inverse
+    {E : Type b} [Category.{y} E] (r : D ⥤ E) {X P Q : D}
+    {XU YU PU QU R : E} (q : X ⟶ Q) (κ : P ≅ Q) (κU : PU ≅ QU)
+    (a : r.obj P ⟶ R) (b : R ⟶ PU) (αX : r.obj X ⟶ XU) (αQ : r.obj Q ⟶ YU)
+    (qU : XU ⟶ YU) (γ : YU ⟶ QU)
+    (h : r.map κ.hom ≫ αQ ≫ γ = a ≫ b ≫ κU.hom)
+    (hq : r.map q ≫ αQ = αX ≫ qU) :
+    r.map (q ≫ κ.inv) ≫ a ≫ b = αX ≫ (qU ≫ γ) ≫ κU.inv := by
+  have hκ : r.map κ.inv ≫ a ≫ b ≫ κU.hom = αQ ≫ γ := by
+    rw [← h, ← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id,
+      Category.id_comp]
+  have hκ' := congrArg (fun z ↦ z ≫ κU.inv) hκ
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hκ'
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hκ', ← Category.assoc _ _ (γ ≫ κU.inv), hq, Category.assoc]
+
 end Generic
 
 set_option hygiene false in
@@ -313,7 +329,6 @@ local notation "tot" => coefficientTotalTensor.{u, c, v} J A
 set_option hygiene false in
 local notation "totU" => coefficientTotalTensor.{u, max c v, v} (J.over U) (A.over U)
 
-set_option maxHeartbeats 800000 in
 -- The local-family formula has dependent slice-section and complex-degree endpoints.
 private theorem slice_uncurry
     (Q P I : CochainComplex Mod ℤ) (q : Q ⟶ homComplex (R := A) P I)
@@ -350,26 +365,27 @@ private theorem slice_uncurry
       (coefficientTensorGenerator.{u, max c v, v} (J.over U) (A.over U)
         ((rC).obj Q) ((rC).obj P) p a k h (op V) x y) =
       coefficientTensorGenerator.{u, c, v} J A Q P p a k h (op V.left) x y := by
-    rw [← hγ]
     have he := congrArg (fun f ↦ (f.f k).val.app (op V)
       (coefficientTensorGenerator.{u, c, v} J A Q P p a k h (op V.left) x y))
         γt.hom_inv_id
-    exact he
-  dsimp only [k] at hinv
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  erw [hinv]
+    exact (congrArg ((γt.inv.f k).val.app (op V)) hγ).symm.trans he
   change (((RingedDerivedNative.chainEquiv.{c, v, u} J A Q P I).symm q).f k).val.app
-      (op V.left) (coefficientTensorGenerator.{u, c, v} J A Q P p a k h
-        (op V.left) x y) = _
-  erw [RingedDerivedNative.chainEquiv_symm_pure.{c, v, u, w},
-    RingedDerivedNative.chainEquiv_symm_pure.{max c v, v, u, w'}]
-  exact (hh p a k (by omega) V (Over.mk (𝟙 V)) y
-    ((q.f p).val.app (op V.left) x)).symm
+      (op V.left) ((γt.inv.f k).val.app (op V)
+        (coefficientTensorGenerator.{u, max c v, v} (J.over U) (A.over U)
+          ((rC).obj Q) ((rC).obj P) p a k h (op V) x y)) = _
+  refine (congrArg (fun z ↦
+    (((RingedDerivedNative.chainEquiv.{c, v, u} J A Q P I).symm q).f k).val.app
+      (op V.left) z) hinv).trans ?_
+  refine (RingedDerivedNative.chainEquiv_symm_pure.{c, v, u, w}
+    J A Q P I q p a k h (add_comm a p) (op V.left) x y).trans ?_
+  exact (hh p a k (add_comm a p) V (Over.mk (𝟙 V)) y
+    ((q.f p).val.app (op V.left) x)).symm.trans
+      (RingedDerivedNative.chainEquiv_symm_pure.{max c v, v, u, w'}
+        (J.over U) (A.over U) ((rC).obj Q) ((rC).obj P) ((rC).obj I)
+        ((rC).map q ≫ γh.hom) p a k h (add_comm a p) (op V) x y).symm
 
 end SliceChains
 
-set_option maxHeartbeats 1000000 in
 -- Assemble the dependent tensor and Hom normalization squares without unfolding their data.
 /-- Normalized slice evaluation on a flat-term K-flat source and K-injective target.
 Source: Stacks Project, Tags 08J9 and 08JB
@@ -458,30 +474,16 @@ theorem ringedSlice_representativeEvaluation
   · simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc,
       α, rC] using htensor
   · change r.map (DerivedCategory.Q.map q ≫ κ.inv) ≫ _ = _
-    have hh' : r.map κ.inv ≫ (d.eta (DerivedCategory.Q.obj P)
-        (DerivedCategory.Q.obj I)).hom ≫
-        (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)).map
-          (X := (op (r.obj (DerivedCategory.Q.obj P)), r.obj (DerivedCategory.Q.obj I)))
-          (Y := (op (DerivedCategory.Q.obj (rC.obj P)), DerivedCategory.Q.obj (rC.obj I)))
-          ((α.inv.app P).op, α.hom.app I) ≫ κU.hom =
-        α.hom.app (homComplex (R := A) P I) ≫ DerivedCategory.Q.map γh.hom := by
-      rw [← hhom, ← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id,
-        Category.id_comp]
-    have hh'' := congrArg (fun z ↦ z ≫ κU.inv) hh'
-    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hh''
-    simp only [Functor.map_comp, Iso.app_hom, Iso.app_inv, Category.assoc]
-    rw [hh'']
-    have hqnat := α.hom.naturality q
-    dsimp only [Functor.comp_map] at hqnat
-    rw [← Category.assoc _ _ (DerivedCategory.Q.map γh.hom ≫ κU.inv), hqnat]
-    simp only [qU, Functor.map_comp, Category.assoc, rC]
+    simpa only [qU, Functor.map_comp, Iso.app_hom, Iso.app_inv, Category.assoc] using
+      map_hom_square_inverse r (DerivedCategory.Q.map q) κ κU _ _
+        (α.hom.app Q) (α.hom.app (homComplex (R := A) P I))
+        (DerivedCategory.Q.map (rC.map q)) (DerivedCategory.Q.map γh.hom)
+        hhom (α.hom.naturality q)
   · have hc := slice_uncurry.{c, v, u, w, w'} J A U Q P I q γt γh hγt hγh
     have hn := α.hom.naturality f
     dsimp only [Functor.comp_map] at hn
     change r.map (DerivedCategory.Q.map f) ≫ α.hom.app I = _
-    rw [hn]
-    change α.hom.app _ ≫ DerivedCategory.Q.map (rC.map f) = _
-    rw [hc]
+    refine hn.trans ((congrArg (fun z ↦ α.hom.app _ ≫ DerivedCategory.Q.map z) hc).trans ?_)
     simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom,
       Iso.app_hom, Category.assoc, fU, qU, rC]
 

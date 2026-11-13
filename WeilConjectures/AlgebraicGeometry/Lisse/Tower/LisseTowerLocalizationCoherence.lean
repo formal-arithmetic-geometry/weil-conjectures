@@ -96,6 +96,24 @@ lemma realizationScalar_hom_app_comp
       (NatTrans.ext (funext fun X ↦ by simpa using key X))
   simpa using congrArg (fun τ ↦ τ.app M) hLR
 
+/-- Paste scalar squares using the naturality of the two comparison maps. -/
+private lemma scalarSquare_comp_map
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (R : E ⥤ D)
+    {U V W : E} {C₀ C₁ C₂ C₃ : C} {D₀ D₁ D₂ : D}
+    {p : U ⟶ V} {q : V ⟶ W}
+    {x : D₀ ⟶ D₁} {y : D₁ ⟶ D₂} {z : D₂ ⟶ R.obj U}
+    {r : D₀ ⟶ F.obj C₀} {k : D₁ ⟶ F.obj C₁}
+    {m : C₀ ⟶ C₁} {l : C₁ ⟶ C₂} {n : C₂ ⟶ C₃} {s : C₀ ⟶ C₃}
+    {i : F.obj C₂ ⟶ R.obj V} {j : F.obj C₃ ⟶ R.obj W}
+    (hSa : y ≫ z ≫ R.map p = k ≫ F.map l ≫ i)
+    (hSb : m ≫ l ≫ n = s)
+    (hφ : x ≫ k = r ≫ F.map m)
+    (hI : F.map n ≫ j = i ≫ R.map q) :
+    x ≫ y ≫ z ≫ R.map (p ≫ q) = r ≫ F.map s ≫ j := by
+  rw [Functor.map_comp, reassoc_of% hSa, reassoc_of% hφ, ← hI,
+    ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, hSb]
+
 end LisseTowerLocalizationTransport
 
 open LisseTowerLocalizationTransport
@@ -431,8 +449,6 @@ theorem lisseTowerChainScalar_represents :
   · refine NatTrans.ext (funext fun X ↦ ?_)
     simp [lisseTowerChainScalarOrdinary]
 
-set_option maxHeartbeats 2000000 in
--- Rewriting with the scalar squares compares large module sheaf types.
 /-- The two fixed pullback comparisons are compatible with the scalar squares. -/
 theorem lisseTowerChainScalarOrdinary_key
     (P : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))) :
@@ -508,10 +524,9 @@ theorem lisseTowerChainScalarOrdinary_key
           ((lisseTowerStepPullback a (b ≫ t) d n).map
             ((lisseTowerFixedPullbackIso b t d n).hom.app P)) :=
     (lisseTowerStepRestriction a (b ≫ t) d n).naturality _
-  rw [CategoryTheory.Functor.map_comp]
-  rw [reassoc_of% hSa]
-  rw [reassoc_of% hφ, ← hI, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
-    Category.assoc, hSb]
+  exact scalarSquare_comp_map (lisseTowerStepPullback a (b ≫ t) d (n + 1))
+    (pbcRestrict ((adicTowerInverseImage (a ≫ b ≫ t)).map
+      (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))) hSa hSb hφ hI
 
 /-- The ordinary scalar faces are compatible with the chained comparison. -/
 theorem lisseTowerChainScalarOrdinary_comp

@@ -32,9 +32,45 @@ private lemma transport_comparison
     _ = e.hom ≫ (e₂.hom ≫ f) := congrArg (e.hom ≫ ·) hβ
     _ = (e ≪≫ e₂).hom ≫ f := (Category.assoc _ _ _).symm
 
+-- Rectify abstract chain representatives without unfolding the geometric vertices.
+private theorem unionHomotopyChainData_rectify
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
+    {a aU aV aUV : Arrow (DerivedCategory E)}
+    (h : ∃ (C D C' D' : CochainComplex E ℤ)
+      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),
+      ∃ (H : Homotopy (t ≫ β) (α ≫ t'))
+        (e₁ : DerivedCategory.Q.obj C ≅ a.left)
+        (e₂ : DerivedCategory.Q.obj D ≅ aU.left ⊞ aV.left)
+        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ aUV.left)
+        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)
+        (e₂' : DerivedCategory.Q.obj D' ≅ aU.right ⊞ aV.right)
+        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ aUV.right),
+        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
+        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧
+        DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =
+          e₃.hom ≫ aUV.hom) :
+    ∃ (C D C' D' : CochainComplex E ℤ)
+      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),
+      ∃ (hc : t ≫ β = α ≫ t')
+        (e₁ : DerivedCategory.Q.obj C ≅ a.left)
+        (e₂ : DerivedCategory.Q.obj D ≅ aU.left ⊞ aV.left)
+        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ aUV.left)
+        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)
+        (e₂' : DerivedCategory.Q.obj D' ≅ aU.right ⊞ aV.right)
+        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ aUV.right),
+        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
+        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧
+        DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =
+          e₃.hom ≫ aUV.hom := by
+  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hcone⟩ := h
+  obtain ⟨T, i, b, hc, d₂, d₃, hb, hq⟩ :=
+    CochainComplex.homotopy_square_cone_rectification t t' α β H
+  refine ⟨C, T, C', D', i, t', α, b, hc, e₁, d₂ ≪≫ e₂, d₃ ≪≫ e₃,
+    e₁', e₂', e₃', hα, ?_, ?_⟩
+  · exact transport_comparison d₂ e₂ e₂' hb hβ
+  · exact transport_comparison d₃ e₃ e₃' hq hcone
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
--- Transporting the standard derived-category instances needs extra elaboration heartbeats.
 /-- A strict first-map square whose cones represent the overlap comparisons.
 Unlike a short exact presentation, this asserts no monomorphism, epimorphism,
 short complex or exactness of complexes on A.
@@ -104,13 +140,6 @@ theorem standardSingle_union_ses_chain_data
           e₃.hom ≫ aUV.hom := by
   let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hcone⟩ :=
-    standardSingle_union_homotopy_chain_data p g U V N
-  obtain ⟨T, i, b, hc, d₂, d₃, hb, hq⟩ :=
-    CochainComplex.homotopy_square_cone_rectification t t' α β H
-  refine ⟨C, T, C', D', i, t', α, b, hc, e₁, d₂ ≪≫ e₂, d₃ ≪≫ e₃,
-    e₁', e₂', e₃', hα, ?_, ?_⟩
-  · exact transport_comparison d₂ e₂ e₂' hb hβ
-  · exact transport_comparison d₃ e₃ e₃' hq hcone
+  exact unionHomotopyChainData_rectify (standardSingle_union_homotopy_chain_data p g U V N)
 
 end AlgebraicGeometry

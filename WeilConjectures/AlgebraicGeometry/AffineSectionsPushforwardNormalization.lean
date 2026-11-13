@@ -94,12 +94,59 @@ private theorem composite_isRightDerived_of_acyclic
   dsimp [Functor.rightDerivedFunctorCompUnit]
   infer_instance
 
+/-- Transport a composite derived unit through chosen identifications of its two targets. -/
+private theorem derivedComparison_of_acyclic
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) [F.Additive] [G.Additive] [H.Additive]
+    (s : F ⋙ G ≅ H)
+    (h : ∀ (I : CochainComplex C ℤ) [I.IsKInjective],
+      IsIso (G.rightDerivedFunctorUnit.app
+        ((F.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj I))))
+    {DG : DerivedCategory D ⥤ DerivedCategory E}
+    {DH : DerivedCategory C ⥤ DerivedCategory E}
+    (uG : G.rightDerivedFunctor ≅ DG) (uH : H.rightDerivedFunctor ≅ DH) :
+    ∃ c : F.rightDerivedFunctor ⋙ DG ≅ DH,
+      ∀ J : HomotopyCategory C (.up ℤ),
+        (Functor.rightDerivedFunctorCompUnit F G).app J ≫
+            uG.hom.app (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj J)) ≫
+            c.hom.app (DerivedCategory.Qh.obj J) =
+          DerivedCategory.Qh.map ((s.hom.mapHomotopyCategory (.up ℤ)).app J) ≫
+            H.rightDerivedFunctorUnit.app J ≫ uH.hom.app (DerivedCategory.Qh.obj J) := by
+  have := composite_isRightDerived_of_acyclic F G h
+  let eD := Functor.rightDerivedUnique (F ⋙ G).rightDerivedFunctor
+    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
+    (F ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit F G)
+    (HomotopyCategory.quasiIso _ (.up ℤ))
+  let c := Functor.isoWhiskerLeft F.rightDerivedFunctor uG.symm ≪≫
+    eD.symm ≪≫ Functor.rightDerivedFunctorNatIso s ≪≫ uH
+  refine ⟨c, fun J ↦ ?_⟩
+  have heD : (F ⋙ G).rightDerivedFunctorUnit.app J ≫
+      eD.hom.app (DerivedCategory.Qh.obj J) =
+      (Functor.rightDerivedFunctorCompUnit F G).app J := by
+    simpa only [eD, Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
+      Iso.refl_hom, NatTrans.id_app, Category.id_comp] using
+      Functor.rightDerivedNatTrans_app (F ⋙ G).rightDerivedFunctor
+        (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
+        (F ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit F G)
+        (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _) J
+  have hfac : (Functor.rightDerivedFunctorCompUnit F G).app J ≫
+      eD.inv.app (DerivedCategory.Qh.obj J) = (F ⋙ G).rightDerivedFunctorUnit.app J := by
+    erw [← heD, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  simp only [c, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    NatTrans.comp_app, Iso.symm_hom, Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% hfac]
+  dsimp only [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
+  rw [Functor.rightDerivedNatTrans_app_assoc]
+  rfl
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option maxHeartbeats 500000 in
--- Scalar-action comparisons unfold global-section and derived-functor identifications.
 /-- Sections of pushforward retain their affine scalar action before and after deriving.
 There are no internal-Hom, perfectness or quasi-coherence inputs in this statement.
 Source: Stacks, Tags 0D5T, 08D5 (proof of (2)), and 0AA7
@@ -201,39 +248,7 @@ theorem exists_affineSectionsPushforwardNormalization
     intro I hI
     exact exactComp_unit_isIso G₀ r _
       (isIso_directImage_globalSections_unit_on_kInjective (pullback.fst f g) I)
-  have := composite_isRightDerived_of_acyclic F G hG
-  let eD := Functor.rightDerivedUnique (F ⋙ G).rightDerivedFunctor
-    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
-    (F ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit F G)
-    (HomotopyCategory.quasiIso _ (.up ℤ))
-  let c := Functor.isoWhiskerLeft F.rightDerivedFunctor uG.symm ≪≫
-    eD.symm ≪≫ Functor.rightDerivedFunctorNatIso s ≪≫ uH
-  refine ⟨s, c, ?_, ?_⟩
-  · intro M x
-    rfl
-  · intro J
-    have heD : (F ⋙ G).rightDerivedFunctorUnit.app J ≫
-        eD.hom.app (DerivedCategory.Qh.obj J) =
-        (Functor.rightDerivedFunctorCompUnit F G).app J := by
-      simpa only [eD, Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
-        Iso.refl_hom, NatTrans.id_app, Category.id_comp] using
-        Functor.rightDerivedNatTrans_app (F ⋙ G).rightDerivedFunctor
-          (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
-          (F ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit F G)
-          (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _) J
-    have hfac : (Functor.rightDerivedFunctorCompUnit F G).app J ≫
-        eD.inv.app (DerivedCategory.Qh.obj J) = (F ⋙ G).rightDerivedFunctorUnit.app J := by
-      erw [← heD, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
-    change (Functor.rightDerivedFunctorCompUnit F G).app J ≫
-      uG.hom.app (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj J)) ≫
-        c.hom.app (DerivedCategory.Qh.obj J) =
-      DerivedCategory.Qh.map ((s.hom.mapHomotopyCategory (.up ℤ)).app J) ≫
-        (H ⋙ S).rightDerivedFunctorUnit.app J ≫ uH.hom.app (DerivedCategory.Qh.obj J)
-    simp only [c, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-      NatTrans.comp_app, Iso.symm_hom, Iso.hom_inv_id_app_assoc]
-    rw [reassoc_of% hfac]
-    dsimp only [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
-    rw [Functor.rightDerivedNatTrans_app_assoc]
-    rfl
+  obtain ⟨c, hc⟩ := derivedComparison_of_acyclic F G (H ⋙ S) s hG uG uH
+  exact ⟨s, c, fun _ _ ↦ rfl, hc⟩
 
 end AlgebraicGeometry

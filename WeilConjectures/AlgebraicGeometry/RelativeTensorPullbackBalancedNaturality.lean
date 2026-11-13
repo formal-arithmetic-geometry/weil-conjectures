@@ -174,6 +174,16 @@ private theorem balancedPure_natural
   erw [Category.assoc, hv, ← Category.assoc, ← hn]
   rfl
 
+private theorem balancedPure_tensorHom_app
+    (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Z) CommRingCat.{u})
+    {M M' N N' : SheafOfModules.{u} (𝓡 R)} (f : M ⟶ M') (g : N ⟶ N')
+    (W : (Opens Z)ᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
+    ((monoidalCategory R).tensorHom f g).val.app W
+        ((balancedPure R M N).app W (m ⊗ₜ[R.obj.obj W] n)) =
+      (balancedPure R M' N').app W
+        (f.val.app W m ⊗ₜ[R.obj.obj W] g.val.app W n) :=
+  congrArg (fun t ↦ (t.app W).hom (m ⊗ₜ[R.obj.obj W] n)) (balancedPure_natural R f g)
+
 private theorem balancedPure_ext
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Z) CommRingCat.{u})
     (M N P : SheafOfModules.{u} (𝓡 R))
@@ -208,8 +218,7 @@ private theorem balancedUnit_map (α : R ⟶ B)
   rw [ModuleCat.ExtendScalars.map_tmul] at hx
   exact hx.symm
 
-set_option maxHeartbeats 400000 in
--- The tensor calculation compares both sheafification units and both ring actions.
+-- Compose the sectionwise naturality equalities without rewriting the nested sheaf terms.
 private theorem balancedMap_natural (α : R ⟶ B)
     {M M' : SheafOfModules.{u} (𝓡 B)} {N N' : SheafOfModules.{u} (𝓡 R)}
     (f : M ⟶ M') (g : N ⟶ N') :
@@ -219,37 +228,18 @@ private theorem balancedMap_natural (α : R ⟶ B)
         ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)) := by
   apply balancedPure_ext R ((restrictScalars (𝓻 α)).obj M) N
   intro W m n
-  have hl := congrArg (fun t ↦ (t.app W).hom (m ⊗ₜ[R.obj.obj W] n))
-    (balancedPure_natural R ((restrictScalars (𝓻 α)).map f) g)
-  change ((monoidalCategory R).tensorHom ((restrictScalars (𝓻 α)).map f) g).val.app W
-    ((balancedPure R ((restrictScalars (𝓻 α)).obj M) N).app W
-      (m ⊗ₜ[R.obj.obj W] n)) =
-    (balancedPure R ((restrictScalars (𝓻 α)).obj M') N').app W
-      (f.val.app W m ⊗ₜ[R.obj.obj W] g.val.app W n) at hl
-  change (balancedMap α M' N').val.app W
-    (((monoidalCategory R).tensorHom ((restrictScalars (𝓻 α)).map f) g).val.app W
-      ((balancedPure R ((restrictScalars (𝓻 α)).obj M) N).app W
-        (m ⊗ₜ[R.obj.obj W] n))) =
-    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
-      ((balancedMap α M N).val.app W _)
-  rw [hl, balancedMap_pure, balancedMap_pure]
-  have hr := congrArg (fun t ↦ (t.app W).hom
-    (m ⊗ₜ[B.obj.obj W] (balancedUnit α N).app W
-      ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))
-    (balancedPure_natural B f (changeOfRingsHom.{u, u, u} α N g))
-  change ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
-    ((balancedPure B M (changeOfRings.{u, u, u} α N)).app W _) =
-    (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
-      (f.val.app W m ⊗ₜ[B.obj.obj W]
-        (changeOfRingsHom.{u, u, u} α N g).val.app W ((balancedUnit α N).app W _)) at hr
-  change (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
-    (f.val.app W m ⊗ₜ[B.obj.obj W] (balancedUnit α N').app W _) = _
-  change _ =
-    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
-      ((balancedPure B M (changeOfRings.{u, u, u} α N)).app W
-        (m ⊗ₜ[B.obj.obj W] (balancedUnit α N).app W
-          ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))
-  rw [hr, balancedUnit_map]
+  refine (congrArg (fun x ↦ (balancedMap α M' N').val.app W x)
+    (balancedPure_tensorHom_app R ((restrictScalars (𝓻 α)).map f) g W m n)).trans ?_
+  refine (balancedMap_pure α M' N' W (f.val.app W m) (g.val.app W n)).trans ?_
+  symm
+  refine (congrArg (fun x ↦
+    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W x)
+      (balancedMap_pure α M N W m n)).trans ?_
+  refine (balancedPure_tensorHom_app B f (changeOfRingsHom.{u, u, u} α N g) W m
+    ((balancedUnit α N).app W
+      ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W, (α.hom.app W).hom] n))).trans ?_
+  exact congrArg (fun x ↦ (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
+    (f.val.app W m ⊗ₜ[B.obj.obj W] x)) (balancedUnit_map α g W n)
 
 private theorem balancedChangeHom_id (α : R ⟶ B) (N : SheafOfModules.{u} (𝓡 R)) :
     changeOfRingsHom.{u, u, u} α N (𝟙 N) = 𝟙 (changeOfRings.{u, u, u} α N) := by

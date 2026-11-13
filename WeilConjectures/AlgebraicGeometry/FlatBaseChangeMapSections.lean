@@ -28,8 +28,6 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 600000 in
--- Comparing section maps elaborates the nested resolution and homology transports.
 /-- The base-change map constructed from resolutions is independent of the resolutions
 and augmented lifts. Its adjoint sends the canonical image of a class on f⁻¹V to the
 canonical image of its pullback along g' restricted to g'⁻¹(f⁻¹V).
@@ -92,15 +90,14 @@ theorem flatBaseChangeMap_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S'
             ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi)) := by
   let I := injectiveResolution F
   let J := injectiveResolution ((tensorPullback (pullback.snd g f)).obj F)
-  obtain ⟨t, ht⟩ := flatBaseChangeResolutionLift f g I J
+  refine (flatBaseChangeResolutionLift f g (F := F) I J).elim fun t ht ↦ ?_
   refine ⟨flatBaseChangeResolutionBeta f g I J t p, ?_, ?_, ?_⟩
   · intro I₁ J₁ t₁ ht₁
     exact flatBaseChangeResolutionBeta_independent f g I₁ J₁ t₁ ht₁ I J t ht p
   · exact flatBaseChangeMap_sections_choices f g F
   · intro I₁ J₁ V D xi
-    obtain ⟨t₁, ht₁⟩ := flatBaseChangeResolutionLift f g I₁ J₁
-    have h := flatBaseChangeResolutionBeta_sections f g I₁ J₁ t₁ ht₁ p V D xi
-    simpa only [flatBaseChangeResolutionBeta_independent f g I₁ J₁ t₁ ht₁ I J t ht p]
-      using h
+    refine (flatBaseChangeResolutionLift f g (F := F) I₁ J₁).elim fun t₁ ht₁ ↦ ?_
+    rw [← flatBaseChangeResolutionBeta_independent f g I₁ J₁ t₁ ht₁ I J t ht p]
+    exact flatBaseChangeResolutionBeta_sections f g I₁ J₁ t₁ ht₁ p V D xi
 
 end AlgebraicGeometry.Scheme.Modules

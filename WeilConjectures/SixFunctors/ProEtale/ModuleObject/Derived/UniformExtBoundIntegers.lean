@@ -204,9 +204,6 @@ lemma hasInvertibleExponent_residueFieldCoeff {X : Scheme.{u}} (aX : X ⟶ Spec 
       by simpa using (Ne.isUnit hℓ).map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
   exact .of_hom aX
 
-set_option maxHeartbeats 400000 in
--- elaborating the vanishing statement of `exists_forall_eq_zero_of_constructibleFiniteTor` for the
--- derived reduction unfolds the derived categories of module objects
 omit [Fact (ringChar k ≠ ℓ)] in
 /-- **Torsion targets**: for a separated finite-type scheme `X` over a field `k` with
 `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, and a bounded constructible `𝒪_E`-complex `P`, there is `d` with
@@ -231,8 +228,13 @@ theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X :
   have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
     inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
   have hC := constructibleFiniteTor_derivedReduction_obj P hP
-  obtain ⟨N, hN⟩ := DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor_of_generation
-    (Λ := ResidueFieldCoeff.{u} ℓ E) hk aX hC
+  have hbound : ∃ N : ℤ, ∀ L : DerivedCategory
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E))),
+      DerivedCategory.etaleOriginHomology (ResidueFieldCoeff.{u} ℓ E) X L → L.IsLE N →
+      ∀ f : (derivedReduction X ℓ E).obj P ⟶ L, f = 0 :=
+    DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor_of_generation
+      (Λ := ResidueFieldCoeff.{u} ℓ E) hk aX (C := (derivedReduction X ℓ E).obj P) hC
+  obtain ⟨N, hN⟩ := hbound
   refine ⟨-N, fun K hK hK₀ q hq f ↦ ?_⟩
   let adj := Mod.derivedExtendMapDerivedCategoryAdjunction (padicIntegersToResidueField X ℓ E)
   have := isEquivalence_residueFieldModuleSheaf_of_section X ℓ E (residueFieldSectionFac X ℓ E)

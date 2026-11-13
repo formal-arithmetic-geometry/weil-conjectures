@@ -66,7 +66,6 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
-set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the product are large terms
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `proposition-external-kunneth-formula-nearby-cycles`; Illusie, *Autour du théorème de monodromie
@@ -113,27 +112,12 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
     DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
   have : B₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right _ _)
-  have hAB : boundedConstructible (condensedRingObj 𝒪 Z)
-      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
-    boundedConstructible_tensorObj
-      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
-  obtain ⟨c, hc⟩ := hAB.1.1
-  -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
-  have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
-      (w : W), h w = z ∧ IsIso ((L((h)^*⟦𝔽⟧)).map (kunnethMap 𝔽 φ₁ φ₂
-        ((Mod.extendScalars (coefficientMap
-          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
-        ((Mod.extendScalars (coefficientMap
-          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj
-            B₀))) := fun z hz ↦ by
-    have key := exists_isIso_map_kunnethMap_of_not_isClosed 𝒪 (M := M) (N := N) (P := P)
-      (φ₁ := φ₁) (φ₂ := φ₂) (A := A₀) (B := B₀) hM hN hpb hP hgen hm hm' hslice heM heN hA₀ hB₀ z hz
-    refine key.imp fun W ↦ Exists.imp fun h ↦ Exists.imp fun w hw ↦ ⟨hw.1, ?_⟩
-    have := hw.2
-    exact (isIso_map_map_kunnethMap_iff_residueField ℓ E φ₁ φ₂ h A₀ B₀
-      (min hA₀.1.1.choose hB₀.1.1.choose) c).1 (Functor.map_isIso _ _)
+  -- Infer the external product from the preservation lemmas to reuse its derived tensor structure.
+  have hAB := boundedConstructible_tensorObj
+    (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
+  refine hAB.1.1.elim fun c hc ↦ ?_
   -- its global sections are invertible
   have hΓ := isIso_lowerStar_kunnethMap_residueField ℓ E hM hN hpb hP hgen
     (boundedConstructible_derivedExtendScalars_residueField X ℓ E.1 A₀ hA₀)
@@ -141,6 +125,14 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
   have hs := plusEtaleOrigin_kunnethMap_source _ (M := M) (N := N) (f₁' := f₁') (f₂' := f₂')
     hT hAe hBe
   have ht := plusEtaleOrigin_kunnethMap_target _ (P := P) (f₁ := f₁) (f₂ := f₂) hT hAe hBe
-  exact isIso_of_isIso_leftDerivedUpperStar_map_of_not_isClosed _ Z'.hom _ hs ht hpt hΓ
+  refine isIso_of_isIso_leftDerivedUpperStar_map_of_not_isClosed _ Z'.hom _ hs ht ?_ hΓ
+  -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
+  intro z hz
+  have key := exists_isIso_map_kunnethMap_of_not_isClosed 𝒪 (M := M) (N := N) (P := P)
+    (φ₁ := φ₁) (φ₂ := φ₂) (A := A₀) (B := B₀) hM hN hpb hP hgen hm hm' hslice heM heN hA₀ hB₀ z hz
+  refine key.imp fun W ↦ Exists.imp fun h ↦ Exists.imp fun w hw ↦ ⟨hw.1, ?_⟩
+  have := hw.2
+  exact (isIso_map_map_kunnethMap_iff_residueField ℓ E φ₁ φ₂ h A₀ B₀
+    (min hA₀.1.1.choose hB₀.1.1.choose) c).1 (Functor.map_isIso _ _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

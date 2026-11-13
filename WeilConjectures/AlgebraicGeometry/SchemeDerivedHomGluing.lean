@@ -69,7 +69,6 @@ private theorem lifted_morphism_eq
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
 set_option maxHeartbeats 500000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.

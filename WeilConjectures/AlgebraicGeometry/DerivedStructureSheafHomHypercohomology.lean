@@ -25,9 +25,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
--- The sheaf instances and nested derived functors require extra elaboration heartbeats.
--- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 /-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections.
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
 first paragraph (blueprint: lem-pc-derived-structure-sheaf-hom-hypercohomology).
@@ -62,8 +59,6 @@ theorem derivedStructureSheaf_hom_hypercohomology (X : Scheme.{u})
     ((moduleRings X.toRingedSpace).obj.obj (op ⊤))
   refine ⟨fun E ↦ (a E).trans (b _), ?_⟩
   intro E E' f g
-  change b _ (a E' (g ≫ f)) = _
-  rw [ha E E' f g]
-  exact hb _ _ _ _
+  exact (congrArg (b _) (ha E E' f g)).trans (hb _ _ _ _)
 
 end AlgebraicGeometry

@@ -29,8 +29,6 @@ private theorem openSections_map {Y : Scheme.{uBC}} {M N : Y.Modules}
     (φ : M ⟶ N) (U : Y.Opens) :
     (RingedSpace.openModuleSections Y.toRingedSpace U).map φ = Hom.app φ U := rfl
 
-set_option maxHeartbeats 500000 in
--- Elaborating the nested restriction-adjunction lift needs additional fuel.
 /-- The section identity for the explicit restriction-adjunction lift.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
 (blueprint: lem-weil-pbc-restricted-lift-section-formula).
@@ -104,12 +102,9 @@ theorem flatBaseChangeRestrictedLift_section_formula {X S S' : Scheme.{uBC}}
       eqToHom_op, eqToHom_map]
     simp only [eqToIso.hom, HomologicalComplex.eqToHom_f]
     rfl
-  rw [squareSections]
-  change E.map t ≫ e.hom =
-    D.source.sections.inv ≫ ΓS.map (flatBaseChangeRestrictedLift f g I J t V D) ≫
-      a.inv ≫ (D.target.sections ≪≫ e).hom
   have hl := congrArg (fun z ↦ D.source.sections.inv ≫ z ≫ e.hom) liftSections
-  simpa only [Iso.trans_hom, Category.assoc, Iso.inv_hom_id_assoc] using hl.symm
+  exact squareSections.trans (by
+    simpa only [Iso.trans_hom, Category.assoc, Iso.inv_hom_id_assoc] using hl.symm)
 
 
 end AlgebraicGeometry.Scheme.Modules

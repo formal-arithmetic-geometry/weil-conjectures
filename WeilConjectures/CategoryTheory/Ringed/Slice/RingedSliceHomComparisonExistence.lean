@@ -623,8 +623,6 @@ private theorem modelSquare
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.inv_hom_id, Category.comp_id] using hh.symm
 
-set_option maxHeartbeats 600000 in
--- Elaborating the four fixed representative comparisons requires extra steps.
 /-- The local-family comparison descends to derived Hom with its fixed augmentations.
 Source: Stacks Project, Tags 08JB, 08FI, 0A8X and 0A95
 (blueprint: lem-weil-pbc-ringed-slice-hom-comparison-existence).
@@ -692,6 +690,7 @@ theorem ringedSlice_homComparison_exists
               DerivedCategory.Q.obj ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I)))
             (((ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).inv.app L).op,
               (ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).hom.app I) ≫ κU.hom := by
+  classical
   let M := ModuleSheaf.{c, v, u} J A
   let MU := ModuleSheaf.{max c v, v, u} (J.over U) (A.over U)
   let Q : CochainComplex M ℤ ⥤ DerivedCategory M := DerivedCategory.Q
@@ -699,23 +698,34 @@ theorem ringedSlice_homComparison_exists
   let r := ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U
   let RC := ringedSliceComplexRestriction.{c, v, u} J A U
   let loc := ringedSliceLocalizationIso.{c, v, u, w, w'} J A U
-  obtain ⟨Γ, hΓ⟩ := sheafHomRestrictionComparison.{c, v, u} J A U
-  obtain ⟨η, hη⟩ := homDerivedComparison.{c, v, u, w, w'} J A U Γ
+  -- Share the witnesses without rebuilding the large dependent goal for each elimination.
+  have hΓ := sheafHomRestrictionComparison.{c, v, u} J A U
+  let Γ := hΓ.choose
+  have hΓ := hΓ.choose_spec
+  have hη := homDerivedComparison.{c, v, u, w, w'} J A U Γ
+  let η := hη.choose
+  have hη := hη.choose_spec
   refine ⟨η, ?_⟩
   intro L I hI
   have : (RC.obj I).IsKInjective :=
     isKInjective_restrict_localizedOfUniverses.{c, v, u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)
       U inferInstance I
-  obtain ⟨κ, hκ, hκinv⟩ := kInjectiveModel.{c, v, u, w} J A L I
-  obtain ⟨κU, hκU, hκUinv⟩ := kInjectiveModel.{max c v, v, u, w'}
+  have hκ := kInjectiveModel.{c, v, u, w} J A L I
+  let κ := hκ.choose
+  have hκinv := hκ.choose_spec.2
+  have hκ := hκ.choose_spec.1
+  have hκU := kInjectiveModel.{max c v, v, u, w'}
     (J.over U) (A.over U) (RC.obj L) (RC.obj I)
+  let κU := hκU.choose
+  have hκUinv := hκU.choose_spec.2
+  have hκU := hκU.choose_spec.1
   let gammaIso : RC.obj (homComplex (R := A) L I) ≅
       homComplex (R := A.over U) (RC.obj L) (RC.obj I) := Γ.app (op L, I)
   refine ⟨κ, κU, gammaIso, hκ, hκU, ?_, ?_⟩
   · exact homComparison_local.{c, v, u} J A U L I gammaIso (hΓ L I)
-  · have hh := hη L I
-    simp only [← hκinv] at hh
+  · have hh := congrArg (fun f ↦ r.map f ≫
+      η.hom.app (op (Q.obj L), Q.obj I)) hκinv
     let HU := derivedInternalHomOfUniverses.{max c v, v, u, w'}
       (J.over U) (A.over U)
     let delta := (Functor.isoWhiskerRight
@@ -726,7 +736,7 @@ theorem ringedSlice_homComparison_exists
     have hhs : (r.mapIso κ).inv ≫ (η.app (op (Q.obj L), Q.obj I)).hom =
         loc.hom.app (homComplex (R := A) L I) ≫ QU.map gammaIso.hom ≫
           κU.inv ≫ delta.inv := by
-      exact hh.trans ht.symm
+      exact hh.trans ((hη L I).trans ht.symm)
     have hs := modelSquare (r.mapIso κ) (η.app (op (Q.obj L), Q.obj I))
       delta κU (loc.hom.app (homComplex (R := A) L I)) (QU.map gammaIso.hom) hhs
     change (r.mapIso κ).hom ≫ loc.hom.app (homComplex (R := A) L I) ≫

@@ -84,8 +84,6 @@ private theorem evaluationIso_changeAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- Comparing the canonical derived tensor instances requires extra elaboration work.
 /-- Tensor evaluation is invertible for a perfect first argument.
 Source: Stacks Project, Cohomology, Tags 08DQ and 08DM.
 Proof: refine the perfect neighbourhoods to affine opens and represent K by a
@@ -137,16 +135,16 @@ theorem perfect_rhom_evaluation_isomorphisms
       (q : B ⟶ H.obj (op K.obj, N)) :
       adj A K.obj N (f ≫ q) = (f ▷ K.obj) ≫ adj B K.obj N q := by
     have hh := hadj B A K.obj K.obj N N f (𝟙 _) (𝟙 _) q
-    rw [op_id, ← prod_id', H.map_id (op K.obj, N)] at hh
-    dsimp only [H] at hh
-    simpa only [Category.comp_id, tensorHom_id] using hh
+    change adj A K.obj N (f ≫ q ≫ H.map (𝟙 (op K.obj, N))) =
+      (f ⊗ₘ 𝟙 K.obj) ≫ adj B K.obj N q ≫ 𝟙 N at hh
+    simpa only [H.map_id (op K.obj, N), Category.comp_id, tensorHom_id] using hh
   have hn₀ (A B N : schemeDerivedCategory X) (f : A ⟶ B)
       (q : B ⟶ H.obj (op K.obj, N)) :
       e₀ A K.obj N (f ≫ q) = (f ▷ K.obj) ≫ e₀ B K.obj N q := by
     have hh := he₀.1 B A K.obj K.obj N N f (𝟙 _) (𝟙 _) q
-    rw [op_id, ← prod_id', H.map_id (op K.obj, N)] at hh
-    dsimp only [H] at hh
-    simpa only [Category.comp_id, tensorHom_id] using hh
+    change e₀ A K.obj N (f ≫ q ≫ H.map (𝟙 (op K.obj, N))) =
+      (f ⊗ₘ 𝟙 K.obj) ≫ e₀ B K.obj N q ≫ 𝟙 N at hh
+    simpa only [H.map_id (op K.obj, N), Category.comp_id, tensorHom_id] using hh
   apply evaluationIso_changeAdjunction (schemeDerivedCategory X) K.obj
     (fun N ↦ H.obj (op K.obj, N)) (fun A N ↦ adj A K.obj N)
     (fun A N ↦ e₀ A K.obj N) hn hn₀

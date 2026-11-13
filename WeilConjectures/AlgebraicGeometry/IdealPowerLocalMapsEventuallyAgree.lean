@@ -267,9 +267,24 @@ private theorem local_affine_eventually_zero
   have := Modules.powers_qc ι (n + k)
   exact ⟨n + k, hnm, local_affine_zero χ A hAT hzero⟩
 
+private theorem exists_overlap_difference {X : Scheme.{u}} {M N : X.Modules}
+    {V V' : X.Opens} (α : M.over V ⟶ N.over V) (β : M.over V' ⟶ N.over V') :
+    ∃ φ : M.over (V ⊓ V') ⟶ N.over (V ⊓ V'),
+      ∀ (W : X.Opens) (hWT : W ≤ V ⊓ V'),
+        φ.val.app (op (Over.mk (homOfLE hWT))) =
+          (show M.val.obj (op W) ⟶ N.val.obj (op W) from
+            α.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_left))))) -
+          (show M.val.obj (op W) ⟶ N.val.obj (op W) from
+            β.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_right))))) := by
+  let a : M.over (V ⊓ V') ⟶ N.over (V ⊓ V') :=
+    (SheafOfModules.overMap X.ringCatSheaf
+      (homOfLE inf_le_left : V ⊓ V' ⟶ V)).map α
+  let b : M.over (V ⊓ V') ⟶ N.over (V ⊓ V') :=
+    (SheafOfModules.overMap X.ringCatSheaf
+      (homOfLE inf_le_right : V ⊓ V' ⟶ V')).map β
+  exact ⟨a - b, fun _ _ ↦ rfl⟩
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
--- Allow elaboration of repeated restrictions to the over-site.
 /-- Two local maps with equal evaluation agree on a sufficiently high ideal power
 on their quasi-compact overlap. No lifting or quotient construction is asserted.
 
@@ -321,20 +336,11 @@ theorem ideal_power_local_maps_eventually_agree
           (r n m h).val.app (op W) ≫ β.val.app (op (Over.mk (homOfLE hWV'))) := by
   classical
   let T := V ⊓ V'
-  let a : ((idealSheafPower ι n).1).over T ⟶ F.over T :=
-    (SheafOfModules.overMap X.ringCatSheaf
-      (homOfLE inf_le_left : T ⟶ V)).map α
-  let b : ((idealSheafPower ι n).1).over T ⟶ F.over T :=
-    (SheafOfModules.overMap X.ringCatSheaf
-      (homOfLE inf_le_right : T ⟶ V')).map β
-  let φ := a - b
+  obtain ⟨φ, hφapp⟩ := exists_overlap_difference α β
   have hφ (W : X.Opens) (hWU : W ≤ U) (hWT : W ≤ T) :
       φ.val.app (op (Over.mk (homOfLE hWT)))
         (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) = 0 := by
-    change (show Γ(F, W) from
-      α.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_left)))) _) -
-      (show Γ(F, W) from
-      β.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_right)))) _) = 0
+    rw [hφapp]
     exact sub_eq_zero.mpr (heval W hWU _ _)
   obtain ⟨S, hfin, hcover⟩ :=
     isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens.mp
@@ -386,12 +392,7 @@ theorem ideal_power_local_maps_eventually_agree
   refine ⟨m, hnm, ?_⟩
   intro W hWV hWV'
   have hh := hz W (le_inf hWV hWV')
-  let αW : ModuleCat.of Γ(X, W) Γ((idealSheafPower ι n).1, W) ⟶
-      ModuleCat.of Γ(X, W) Γ(F, W) := α.val.app (op (Over.mk (homOfLE hWV)))
-  let βW : ModuleCat.of Γ(X, W) Γ((idealSheafPower ι n).1, W) ⟶
-      ModuleCat.of Γ(X, W) Γ(F, W) := β.val.app (op (Over.mk (homOfLE hWV')))
-  change (r n m hnm).val.app (op W) ≫ (αW - βW) = 0 at hh
-  rw [Preadditive.comp_sub] at hh
+  rw [hφapp, Preadditive.comp_sub] at hh
   exact sub_eq_zero.mp hh
 
 

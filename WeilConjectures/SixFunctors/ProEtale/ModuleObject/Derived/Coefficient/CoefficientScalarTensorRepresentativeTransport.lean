@@ -22,6 +22,7 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.CategoryTheory.Monoidal.UncurriedComparison
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import all Mathlib.Algebra.Homology.Localization
@@ -108,7 +109,6 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 -- Retain the original exactness hypothesis, although transport only uses the supplied data.
 set_option linter.unusedSectionVars false in
-set_option maxHeartbeats 800000 in
 -- Elaborate the whiskered naturality diagram without unfolding the derived tensor data.
 /-- Transport an equation known on all internal complexes to arbitrary section
 complexes satisfying the same flat-term and K-flat hypotheses. The proof uses the
@@ -205,30 +205,10 @@ theorem coefficientScalarTensorRepresentative_transport
     have h₂ (K : CochainComplex (ModuleRingedComparison.modules S Z) ℤ) :
         (DerivedCategory.quotientCompQhIso _).hom.app K = 𝟙 _ := rfl
     erw [h₁, h₂, F.map_id, Category.id_comp, Category.comp_id]
+  -- Reuse the total-complex comparison's naturality before specializing to sheaves.
   let δ : TR ⋙ E ⟶ E.prod E ⋙ TS :=
-    { app := fun K ↦ HomologicalComplex.mapBifunctorComparison
-        (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) K.1 K.2
-      naturality := by
-        intro M N f
-        change E.map
-            (HomologicalComplex.mapBifunctorMap f.1 (𝟙 M.2) (curriedTensor _) (.up ℤ) ≫
-              HomologicalComplex.mapBifunctorMap (𝟙 N.1) f.2 (curriedTensor _) (.up ℤ)) ≫
-            HomologicalComplex.mapBifunctorComparison
-              (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) N.1 N.2 =
-          HomologicalComplex.mapBifunctorComparison
-              (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) M.1 M.2 ≫
-            (HomologicalComplex.mapBifunctorMap (E.map f.1) (𝟙 (E.obj M.2))
-                (curriedTensor _) (.up ℤ) ≫
-              HomologicalComplex.mapBifunctorMap (𝟙 (E.obj N.1)) (E.map f.2)
-                (curriedTensor _) (.up ℤ))
-        have h₁ := HomologicalComplex.mapBifunctorComparison_naturality
-          (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) f.1 (𝟙 M.2)
-        have h₂ := HomologicalComplex.mapBifunctorComparison_naturality
-          (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) (𝟙 N.1) f.2
-        rw [E.map_comp, Category.assoc, h₂, ← Category.assoc, h₁, Category.assoc]
-        dsimp only [E]
-        rw [(d.b.extension.mapHomologicalComplex (.up ℤ)).map_id,
-          (d.b.extension.mapHomologicalComplex (.up ℤ)).map_id] }
+    HomologicalComplex.mapBifunctorComparisonUncurried
+      (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ)
   have hδ (K L : CochainComplex (ModuleRingedComparison.modules R Z) ℤ) :
       coefficientSectionScalarTotal a Z d.b d.m K L = δ.app (K, L) := by
     unfold coefficientSectionScalarTotal

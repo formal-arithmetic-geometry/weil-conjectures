@@ -32,8 +32,6 @@ attribute [local irreducible] Scheme.Modules.moduleCohomologyFMap
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
--- Nested cohomology restrictions and resolution comparisons need extra elaboration heartbeats.
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.
 (blueprint: lem-weil-pbc-formal-functions-finite-quotient-maps)
@@ -71,27 +69,20 @@ theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
   intro I J V hy D xi
   let K := injectiveResolution
     ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)
-  obtain ⟨E₀⟩ := Scheme.Modules.flatBaseChangeMap_sections_choices
-    f (Y.fromSpecStalk y) F I K V
+  let E₀ := Classical.choice (Scheme.Modules.flatBaseChangeMap_sections_choices
+    f (Y.fromSpecStalk y) F I K V)
   let E : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V :=
     { E₀ with source := D.source }
-  obtain ⟨t, ht, htx⟩ := formalFunctions_finite_open_factorization f y F p n I K J V E D
+  have hfac := formalFunctions_finite_open_factorization f y F p n I K J V E D
+  let t := hfac.choose
+  have ht := hfac.choose_spec.1
+  have htx := hfac.choose_spec.2
   have hl := ha I K V hy E xi
   let rho := Scheme.Modules.moduleCohomologyRestriction
     ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V))
     ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F) p
-  have hrc (z : formalFunctionsLocalCohomology f y F p) :
-      rho (r z) = rho (formalFunctionsFinitePullback f y F p n z) :=
-    congrArg rho (hr z)
-  let rho' := Scheme.Modules.moduleCohomologyRestriction
-    ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V))
-    ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p
-  have hcomb (z : formalFunctionsLocalCohomology f y F p) :
-      rho (r z) = t (rho' z) := (hrc z).trans (ht z).symm
-  have hright := (congrArg t hl).trans (htx xi)
-  have hresult := (hcomb _).trans hright
-  simpa only [rho, LinearMap.comp_apply, E, Scheme.Modules.moduleCohomologyRestriction]
-    using hresult
+  refine (congrArg rho (hr _)).trans ?_
+  exact (ht _).symm.trans ((congrArg t hl).trans (htx xi))
 
 
 end

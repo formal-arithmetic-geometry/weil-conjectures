@@ -88,10 +88,6 @@ structure OrdinaryRingedTensorChainComparison
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ G.obj N) ≫
         (α_ (G.obj P) (G.obj Q) (G.obj N)).hom
 
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option maxHeartbeats 1200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
 /-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
 The normalization equations fix every tensorator uniquely. The first clause retains
 symmetry relative to the actual ordinary balanced tensor. This is a property of

@@ -190,9 +190,6 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
   obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   rfl
 
-set_option maxHeartbeats 400000 in
--- the final `exact` identifies the pullback along `g'` with the pullback along the map between the
--- middle objects of the trivial compactifications, which is only definitional
 /-- The compact-support exchange map of `P` of the trivial compactifications of the proper `f`
 and `f'` is the base change `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of `P` of the square of their
 proper maps, through `Rf_!^c ≅ Rf_*`. -/
@@ -223,8 +220,11 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   simp only [lowerShriekOfCompactificationOfIsProperIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom,
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
-  rw [P.baseChange_eq_pfBaseChange, P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
-  exact key
+  rewrite [P.baseChange_eq_pfBaseChange,
+    P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
+  -- Compare components so the pullback identification is checked on objects and morphisms.
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  exact congr_app key K
 
 variable {P}
 

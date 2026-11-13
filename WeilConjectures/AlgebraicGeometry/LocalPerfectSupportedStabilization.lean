@@ -35,7 +35,6 @@ private instance moduleToSheaf_additive (Y : Scheme.{u}) :
     (SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace)).Additive where
   map_add := by intros; rfl
 
-set_option maxHeartbeats 600000 in
 -- Exact restriction comparisons involve several nested localized module categories.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -88,13 +87,23 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
         (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj
           (F ⊞ F⟦(1 : ℤ)⟧)).val.presheaf x))) := by
   classical
+  -- Reuse the abelian structures and exactness instances in the derived comparisons.
+  let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
   let G := schemeOpenRestriction X W
+  have : G.Additive := schemeOpenRestriction_additive X W
+  have : PreservesFiniteLimits G := schemeOpenRestriction_preservesFiniteLimits X W
+  have : PreservesFiniteColimits G := schemeOpenRestriction_preservesFiniteColimits X W
   let F := G.mapDerivedCategory.obj R
   have hF : IsPerfect W.toScheme F := by
     intro x
     obtain ⟨O, hxO, K, hK, ⟨eK⟩⟩ := hR x.val x.property
     let V := W.ι ⁻¹ᵁ O
     let O₀ := W.ι ''ᵁ V
+    let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O₀)) :=
+      inferInstance
+    let : Abelian (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over V)) :=
+      inferInstance
     have hO₀ : O₀ ≤ O := by
       rintro y ⟨z, hz, rfl⟩
       exact hz
@@ -112,6 +121,13 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
       ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
         Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId)
     let A := (EV.trans ES).trans EO.symm
+    -- Inferring these repeatedly unfolds all three constituent equivalences.
+    have : A.functor.Additive := inferInstance
+    have : A.inverse.Additive := inferInstance
+    have : PreservesFiniteLimits A.functor := inferInstance
+    have : PreservesFiniteColimits A.functor := inferInstance
+    have : PreservesFiniteLimits A.inverse := inferInstance
+    have : PreservesFiniteColimits A.inverse := inferInstance
     let K' := (A.inverse.mapHomologicalComplex (.up ℤ)).obj K₀
     have unitIso : A.functor.obj
         (SheafOfModules.unit ((moduleRings W.toScheme.toRingedSpace).over V)) ≅
@@ -134,9 +150,7 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
             (R := (moduleRings X.toRingedSpace).over O₀) (ULift.{u} (Fin m))) ≅
             SheafOfModules.free
               (R := (moduleRings W.toScheme.toRingedSpace).over V) (ULift.{u} (Fin m)) :=
-          (asIso (sigmaComparison A.inverse (fun _ : ULift.{u} (Fin m) ↦
-            SheafOfModules.unit ((moduleRings X.toRingedSpace).over O₀)))).symm ≪≫
-              Sigma.mapIso (fun _ ↦ unitIso')
+          (SheafOfModules.mapFreeIso A.inverse (ULift.{u} (Fin m)) unitIso'.symm).symm
         refine ⟨m, A.inverse.map j ≫ c.hom, c.inv ≫ A.inverse.map p, ?_⟩
         change (A.inverse.map j ≫ c.hom) ≫ c.inv ≫ A.inverse.map p =
           𝟙 (A.inverse.obj (K₀.X n))
@@ -145,6 +159,12 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
     refine ⟨V, hxO, K', hK', ?_⟩
     let H := SheafOfModules.overFunctor.{u} (moduleRings W.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) O₀
+    have : H.Additive := inferInstance
+    have : PreservesFiniteLimits H := inferInstance
+    have : PreservesFiniteColimits H := inferInstance
+    have : L.Additive := inferInstance
+    have : PreservesFiniteLimits L := inferInstance
+    have : PreservesFiniteColimits L := inferInstance
     have fac : s.inv ≫ V.ι ≫ W.ι = O₀.ι := by
       rw [← Category.assoc, W.isoImage_ι_inv_ι V]
       exact X.homOfLE_ι _

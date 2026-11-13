@@ -36,6 +36,16 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
+private theorem map_conjugate_comp_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (L : D ⥤ E) (G : C ⥤ E) (j : F ⋙ L ⟶ G)
+    {P Q : C} {U V : D} (s : F.obj P ≅ U) (t : F.obj Q ≅ V) (a : P ⟶ Q) :
+    L.map (s.inv ≫ F.map a ≫ t.hom) ≫ (L.map t.inv ≫ j.app Q) =
+      (L.map s.inv ≫ j.app P) ≫ G.map a := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← L.map_comp_assoc t.hom, t.hom_inv_id, L.map_id, Category.id_comp]
+  exact congrArg (fun k ↦ L.map s.inv ≫ k) (j.naturality a)
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
   {X X' S S' : Scheme.{u}}
@@ -69,8 +79,6 @@ def comparisonIntoPullback (z : X')
             (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
           (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
-set_option maxHeartbeats 1600000 in
--- The default 200000 timed out at whnf in 13s; BZ856 checked this historical limit in 17s.
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
 underlying cohomology transport.
@@ -154,12 +162,9 @@ theorem comparisonIntoPullback_naturality (z : X')
     j.hom.app (DerivedCategory.Q.obj Q)
   have hk : L.map b.hom ≫ kQ =
       kP ≫ (comparisonDerivedStalk X' z).map ((derivedPullback g').map a.hom) := by
-    simp only [b, kP, kQ, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-      Iso.app_hom, Functor.map_comp, Category.assoc]
-    rw [← L.map_comp_assoc (T.mapDerivedCategoryFactors.hom.app Q),
-      Iso.hom_inv_id_app, L.map_id, Category.id_comp]
-    exact congrArg (fun t => L.map (T.mapDerivedCategoryFactors.inv.app P) ≫ t)
-      (j.hom.naturality a.hom)
+    exact map_conjugate_comp_naturality (comparisonDerivedStalk X (g' z)) L
+      (derivedPullback g' ⋙ comparisonDerivedStalk X' z) j.hom
+      (T.mapDerivedCategoryFactors.app P) (T.mapDerivedCategoryFactors.app Q) a.hom
   have hkH : H.map (L.map b.hom) ≫ H.map kQ =
       H.map kP ≫ (comparisonStalkCohomology X' z i).map
         ((derivedPullback g').map a.hom) := by

@@ -56,8 +56,6 @@ private theorem restriction_mate_equation
   have h := hx (H.obj (op L, E)) K L E ξ (𝟙 _)
   simpa only [Category.comp_id] using congrArg R.map h.symm
 
-set_option maxHeartbeats 800000 in
--- Naturality of the canonical family unfolds the sheaf tensor-Hom instance data.
 /-- Exact open restriction has simultaneous tensor and internal-Hom comparisons
 compatible with the canonical tensor-Hom bijections.
 Source: Stacks Project, Tags 079U, 08DL and 08DJ.
@@ -107,21 +105,14 @@ theorem exists_derivedRestriction_tensorHom_coherence
           (R.obj K) (R.obj L) (R.obj E) (R.map ξ ≫ (h L E).hom) =
         R.map (schemeDerivedTensorHomEquiv X K L E ξ)) := by
   classical
-  dsimp only
-  let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)).mapDerivedCategory
-  let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-    X.toRingedSpace.sheaf
+  obtain ⟨t, ht⟩ := exists_derivedRestriction_tensor_natural X U
+  intro R H HU
   let e := schemeDerivedTensorHomEquiv X
   let eU := schemeDerivedTensorHomEquiv U.toScheme
   have he : IsCanonicalDerivedTensorHom X e :=
     Classical.choose_spec (exists_canonicalDerivedTensorHom X)
   have heU : IsCanonicalDerivedTensorHom U.toScheme eU :=
     Classical.choose_spec (exists_canonicalDerivedTensorHom U.toScheme)
-  obtain ⟨t, ht⟩ := exists_derivedRestriction_tensor_natural X U
   let m := fun L E ↦ (eU (R.obj (H.obj (op L, E))) (R.obj L) (R.obj E)).symm
     ((t (H.obj (op L, E)) L).inv ≫ R.map (e (H.obj (op L, E)) L E (𝟙 _)))
   have hm (L E : schemeDerivedCategory X) : IsIso (m L E) :=

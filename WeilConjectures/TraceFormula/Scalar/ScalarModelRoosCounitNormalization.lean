@@ -38,8 +38,16 @@ attribute [local implicit_reducible] coefficientSequenceLimit
   integralComparisonConstantAdjunction integralScalarComplexFunctor
   completedScalarRoosEndomorphism
 
-set_option maxHeartbeats 800000 in
--- The normalization equation carries large coefficient-functor signatures.
+private theorem scalarCounit_normalization_of_fac
+    {𝒞 : Type*} [Category 𝒞] {A B C D E F G H : 𝒞}
+    (a : A ⟶ B) (b : B ⟶ C) (c : C ≅ D) (d : D ⟶ E) [IsIso d]
+    (e : E ≅ F) (f : F ≅ G) (t : B ⟶ G) (k : A ⟶ H) (n : H ⟶ G)
+    (hb : b ≫ c.hom ≫ d ≫ e.hom ≫ f.hom = t) (ha : a ≫ t = k ≫ n) :
+    a ≫ b = k ≫ n ≫ f.inv ≫ e.inv ≫ inv d ≫ c.inv := by
+  apply (cancel_mono (c.hom ≫ d ≫ e.hom ≫ f.hom)).1
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id_assoc,
+    Iso.inv_hom_id, Category.comp_id, hb] using ha
+
 /-- The normalized scalar realization commutes with the whole-system counit in
 Roos coordinates. This is an equation on the target system alone, before inserting
 any map from a good complex or identifying any strict zero-shift lift.
@@ -185,16 +193,10 @@ theorem scalarModelRoos_counit_normalization
         DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.inv) ≫
         (integralComparisonRoosBridge l F X ρF _).inv ≫
         inv (HF.map (m.ε.app C)) ≫ HF.map (T.map e.inv) := by
-    apply (cancel_mono (HF.map (T.map e.hom) ≫ HF.map (m.ε.app C) ≫
-      (integralComparisonRoosBridge l F X ρF _).hom ≫
-      DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom))).1
-    simp only [Category.assoc]
-    rw [hn, hχ]
-    simp only [m, ← HF.map_comp_assoc, ← T.map_comp_assoc, e.inv_hom_id, T.map_id,
-      Category.id_comp, IsIso.inv_hom_id_assoc, Iso.inv_hom_id_assoc,
-      ← DerivedCategory.Q.map_comp, ← integralOperationsRoosFunctor.map_comp,
-      q.inv_hom_id, CategoryTheory.Functor.map_id]
-    erw [Category.comp_id]
+    exact scalarCounit_normalization_of_fac (χ.app _) (b.realization.hom.app _)
+      (HF.mapIso (T.mapIso e)) (HF.map (m.ε.app C))
+      (integralComparisonRoosBridge l F X ρF _)
+      ((integralOperationsRoosFunctor ⋙ DerivedCategory.Q).mapIso q) _ _ _ hn hχ
   have htrans := scalarQuotientRoosTensorTranspose l L F j X ρL ρF P C κ c hct q hq D h a ha
   have hcalc : B.map z.hom ≫ χ.app (H.obj (DerivedCategory.Q.obj D)) ≫
       b.realization.hom.app (H.obj (DerivedCategory.Q.obj D)) ≫

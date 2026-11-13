@@ -352,10 +352,29 @@ private theorem single_product
     (Discrete.compNatIsoDiscrete F (DerivedCategory.singleFunctor.{w} A 0)) _).symm hc
   exact ⟨IsLimit.ofIsoLimit hc' (Cone.ext (Iso.refl _) (by intro ⟨n⟩; simp))⟩
 
+/-- An additive functor transports the tower endomorphism along a product comparison. -/
+private theorem map_towerTransitionEndomorphism_comp_comparison
+    {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
+    (S : A ⥤ B) [S.Additive] (F : ℕ → A) [HasProduct F]
+    [HasProduct (fun n ↦ S.obj (F n))] (t : ∀ n, F (n + 1) ⟶ F n)
+    (e : S.obj (∏ᶜ F) ⟶ ∏ᶜ (fun n ↦ S.obj (F n)))
+    (he : ∀ n, e ≫ Pi.π (fun n ↦ S.obj (F n)) n = S.map (Pi.π F n)) :
+    S.map (towerTransitionEndomorphism t) ≫ e =
+      e ≫ towerTransitionEndomorphism (fun n ↦ S.map (t n)) := by
+  apply Pi.hom_ext
+  intro n
+  have h₁ := (towerTransitionEndomorphism_eq_iff t _).mp rfl n
+  have h₂ := (towerTransitionEndomorphism_eq_iff
+    (K := fun n ↦ S.obj (F n)) (fun n ↦ S.map (t n)) _).mp rfl n
+  simp only [Category.assoc, he]
+  rw [← S.map_comp, h₁, S.map_sub, S.map_comp, h₂]
+  simp only [Preadditive.comp_sub, he]
+  exact congrArg (fun q ↦ S.map (Pi.π F n) - q)
+    ((congrArg (fun q ↦ q ≫ S.map (t n)) (he (n + 1))).symm.trans
+      (Category.assoc _ _ _))
+
 -- Preserve the original name of the product-instance binder, used only by typeclass search.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
--- The dependent conjunction transports several canonical limits through the degree-zero functor.
 set_option backward.isDefEq.respectTransparency false in
 /-- A surjective tower of module sheaves has its ordinary limit as a derived limit,
 with its canonical projections and the triangle of its short exact Roos sequence.
@@ -473,17 +492,7 @@ theorem proEtale_surjectiveTower_derivedLimit
     refine ⟨e, he, ?_⟩
     have htrans : S.map (towerTransitionEndomorphism t) ≫ e.hom =
         e.hom ≫ towerTransitionEndomorphism (fun n ↦ S.map (t n)) := by
-      apply Pi.hom_ext
-      intro n
-      have h₁ := (towerTransitionEndomorphism_eq_iff t _).mp rfl n
-      have h₂ := (towerTransitionEndomorphism_eq_iff
-        (K := fun n ↦ S.obj (F n)) (fun n ↦ S.map (t n)) _).mp rfl n
-      simp only [Category.assoc, he]
-      rw [← S.map_comp, h₁, S.map_sub, S.map_comp, h₂]
-      simp only [Preadditive.comp_sub, he]
-      exact congrArg (fun q ↦ S.map (Pi.π F n) - q)
-        ((congrArg (fun q ↦ q ≫ S.map (t n)) (he (n + 1))).symm.trans
-          (Category.assoc _ _ _))
+      exact map_towerTransitionEndomorphism_comp_comparison S F t e.hom he
     let T := Pretriangulated.Triangle.mk (S.map i ≫ e.hom)
       (towerTransitionEndomorphism (K := fun n ↦ S.obj (F n)) (fun n ↦ S.map (t n)))
       (e.inv ≫ hSES.singleδ)

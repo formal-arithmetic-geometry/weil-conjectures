@@ -45,6 +45,37 @@ private theorem tensor_degree_transport
     Iso.refl_hom, Category.id_comp, MonoidalCategory.id_tensorHom]
   rfl
 
+private theorem signed_tensor_degree_transport
+    {E : Type*} [Category* E] [Preadditive E] [HasCountableCoproducts E]
+    [MonoidalCategory E] [MonoidalPreadditive E]
+    {R A : Type*} [CommRing R] [CommRing A] [Linear R E]
+    (ρ : A →+* R) (b : A) (K Q : CochainComplex E ℤ)
+    (p p' n n' t : ℤ) (hp : p = p') (hn : n = n')
+    (h : p + n = t) (h' : p' + n' = t)
+    (s : MonoidalCategory.tensorUnit E ⟶ MonoidalCategory.tensorUnit E)
+    (hs : (MonoidalCategory.rightUnitor (K.X p)).inv ≫
+      (MonoidalCategory.tensorLeft (K.X p)).map s =
+        (ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv)
+    (β : MonoidalCategory.tensorUnit E ⟶ Q.X n') :
+    ((-1 : ℤˣ) ^ p) • (MonoidalCategory.rightUnitor (K.X p)).inv ≫
+        (MonoidalCategory.tensorLeft (K.X p)).map
+          (s ≫ β ≫ eqToHom (congrArg Q.X hn.symm)) ≫
+        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p n t h =
+      ((ρ ((if Even p then 1 else -1) * b)) • (K.XIsoOfEq hp).hom) ≫
+        (MonoidalCategory.rightUnitor (K.X p')).inv ≫
+        MonoidalCategory.tensorHom (𝟙 _) β ≫
+        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p' n' t h' := by
+  have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← Category.assoc, hs]
+  simp only [Linear.smul_comp]
+  rw [ht, neg_one_zpow_eq_ite]
+  by_cases he : Even p
+  · simp only [ite_eq_left he, one_smul, one_mul]
+  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
+      neg_one_mul, map_neg, neg_smul, one_smul]
+
 section Scalars
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -209,7 +240,6 @@ private theorem signed_power_scalar {A : Type z} [CommRing A] (ρ : A →+* S) (
   rw [zsmul_eq_mul]
   simp only [map_mul, map_pow, map_neg, map_one, Int.cast_pow, Int.cast_neg, Int.cast_one]
 
-set_option maxHeartbeats 600000 in
 -- The transport compares the canonical sheaf tensor and Hom scalar instances.
 private theorem signed_scalar_degree_transport
     {A : Type z} [CommRing A]
@@ -242,21 +272,9 @@ private theorem signed_scalar_degree_transport
   let := Classical.choice (SheafOfModules.tensorClosed O).2.1
   let := coefficientLinear O
   intro β
-  have hs := unitor_tensor_scalar O (K.X p) (ρ b)
-  have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rw [← Category.assoc, hs]
-  change ((-1 : ℤˣ) ^ p) •
-      (((ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv) ≫ _ ≫ _) = _
-  simp only [Linear.smul_comp]
-  rw [ht]
-  simp only [ringedKoszulCoefficientSMul, Linear.smul_comp]
-  rw [neg_one_zpow_eq_ite]
-  by_cases he : Even p
-  · simp only [ite_eq_left he, one_smul, one_mul]
-  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
-      neg_one_mul, map_neg, neg_smul, one_smul]
+  exact signed_tensor_degree_transport ρ b K Q p p' n n' t hp hn h h'
+    (ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩).asHom
+    (unitor_tensor_scalar O (K.X p) (ρ b)) β
 
 end Scalars
 

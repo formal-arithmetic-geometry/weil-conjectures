@@ -115,8 +115,6 @@ private theorem tensorModelMap_isIso (X : Scheme.{uCD})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
--- The representative predicate elaborates the sheaf tensor and derived-category instances.
 /-- Every normalized natural uncurrying map is bijective.
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom), using
 sites-cohomology.tex, Tag 0A90 (Hom complexes).
@@ -151,6 +149,8 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     ∀ K L M, Function.Bijective (t K L M) := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  -- Cache the abelian structure used by the localization and resolution constructions.
+  let : Abelian C := inferInstance
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf
@@ -193,9 +193,16 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     obtain ⟨e, he⟩ := exists_normalizedHomotopyTensorHom X P L I
     have hcomm : (t (Q.obj P) (Q.obj L) (Q.obj M)) ∘ src = dst ∘ e := by
       funext v
-      obtain ⟨φ, rfl⟩ := q.map_surjective v
-      obtain ⟨ψ, hψ, htψ⟩ := ht.2 P L M hP φ
-      obtain ⟨ψ', hψ', heψ⟩ := he φ
+      -- Compare chosen representatives, then transport along the quotient equation.
+      let φ : P ⟶ homComplex (R := X.sheaf) L I := v.out
+      have hv : q.map φ = v := HomotopyCategory.quotient_map_out v
+      have hψ_exists := ht.2 P L M hP φ
+      let ψ := hψ_exists.choose
+      have hψ := hψ_exists.choose_spec.1
+      have htψ := hψ_exists.choose_spec.2
+      let ψ' := (he φ).choose
+      have hψ' := (he φ).choose_spec.1
+      have heψ := (he φ).choose_spec.2
       have hψeq : ψ = ψ' := by
         apply HomologicalComplex.hom_ext
         intro n
@@ -203,26 +210,30 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
           (K₁ := P) (K₂ := L) (F := curriedTensor C) (c := .up ℤ)
         intro p r hpr
         change p + r = n at hpr
-        exact (hψ p r n hpr (by omega)).trans
-          ((uncurryComponent_eq X P L M φ p r n (by omega)).trans
-            (hψ' p r n hpr (by omega)).symm)
+        have hrp : r + p = n := (add_comm r p).trans hpr
+        exact (hψ p r n hpr hrp).trans
+          ((uncurryComponent_eq X P L M φ p r n hrp).trans
+            (hψ' p r n hpr hrp).symm)
       have hs : src (q.map φ) = Q.map φ ≫ j.inv := by
         dsimp only [src, Equiv.trans_apply, Iso.homCongr_apply]
-        rw [localizedHomEquiv_map]
-        change (𝟙 (Q.obj P)) ≫ Q.map φ ≫ j.inv = _
-        exact Category.id_comp _
+        exact (Category.id_comp _).trans
+          (congrArg (fun f ↦ f ≫ j.inv) (localizedHomEquiv_map X P _ φ))
       have hd : dst (q.map ψ) =
           pullbackTensorModelMap X P L ≫ Q.map ψ ≫ schemeHomResolutionInverse X M := by
         dsimp only [dst, Equiv.trans_apply, Iso.homCongr_apply]
-        rw [localizedHomEquiv_map]
-        rfl
-      change t (Q.obj P) (Q.obj L) (Q.obj M) (src (q.map φ)) = dst (e (q.map φ))
+        exact congrArg
+          (fun f ↦ pullbackTensorModelMap X P L ≫ f ≫ schemeHomResolutionInverse X M)
+          (localizedHomEquiv_map X (pullbackTensorTotal X P L) I ψ)
+      change t (Q.obj P) (Q.obj L) (Q.obj M) (src v) = dst (e v)
       calc
+        _ = t (Q.obj P) (Q.obj L) (Q.obj M) (src (q.map φ)) :=
+          congrArg (fun v ↦ t (Q.obj P) (Q.obj L) (Q.obj M) (src v)) hv.symm
         _ = t (Q.obj P) (Q.obj L) (Q.obj M) (Q.map φ ≫ j.inv) := congrArg _ hs
         _ = pullbackTensorModelMap X P L ≫ Q.map ψ ≫ schemeHomResolutionInverse X M := htψ
         _ = dst (q.map ψ) := hd.symm
         _ = dst (q.map ψ') := congrArg (fun f ↦ dst (q.map f)) hψeq
         _ = dst (e (q.map φ)) := congrArg dst heψ.symm
+        _ = dst (e v) := congrArg (fun v ↦ dst (e v)) hv
     have hb := dst.bijective.comp e.bijective
     rw [← hcomm] at hb
     exact (Function.Bijective.of_comp_iff _ src.bijective).mp hb

@@ -26,17 +26,64 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctor
 
-universe t u
+universe t u v w
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures
 
+-- Prove the section formulas over abstract sheaves before specializing the ring maps.
+-- This avoids reducing the nested sequence-site scalar restrictions in the concrete proof.
+private theorem compactSupportPushforwardComp_sections
+    {C : Type v} [Category C] {D : Type w} [Category D] {B : Type*} [Category B]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {I : GrothendieckTopology B} {F : C ⥤ D} {G : D ⥤ B}
+    [F.IsContinuous J K] [G.IsContinuous K I]
+    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}} {T : Sheaf I RingCat.{u}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R)
+    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat.{u} K I).obj T) :
+    ∀ M U x, HEq (((SheafOfModules.pushforwardComp.{u} φ ψ).hom.app M).val.app U x) x := by
+  intro M U x
+  exact heq_of_eq (SheafOfModules.pushforwardComp_hom_app_val_app φ ψ M U x)
+
+private theorem compactSupportPushforwardComp_inv_sections
+    {C : Type v} [Category C] {D : Type w} [Category D] {B : Type*} [Category B]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {I : GrothendieckTopology B} {F : C ⥤ D} {G : D ⥤ B}
+    [F.IsContinuous J K] [G.IsContinuous K I]
+    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}} {T : Sheaf I RingCat.{u}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R)
+    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat.{u} K I).obj T) :
+    ∀ M U x, HEq (((SheafOfModules.pushforwardComp.{u} φ ψ).inv.app M).val.app U x) x := by
+  intro M U x
+  exact heq_of_eq (SheafOfModules.pushforwardComp_inv_app_val_app φ ψ M U x)
+
+private theorem compactSupportPushforwardCongr_sections
+    {C : Type v} [Category C] {D : Type w} [Category D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {F : C ⥤ D} [F.IsContinuous J K] {R : Sheaf K RingCat.{u}}
+    {S : Sheaf J RingCat.{u}}
+    {φ ψ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R} (h : φ = ψ) :
+    ∀ M U (x : ((SheafOfModules.pushforward.{u} φ).obj M).val.obj U),
+      HEq (((SheafOfModules.pushforwardCongr h).hom.app M).val.app U x) x := by
+  intro M U x
+  exact heq_of_eq (SheafOfModules.pushforwardCongr_hom_app_val_app h M U x)
+
+private theorem compactSupportIsoTrans_sections
+    {C : Type v} [Category C] {D : Type w} [Category D]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {F G H : D ⥤ SheafOfModules.{u} R} (e : F ≅ G) (d : G ≅ H)
+    (he : ∀ M U (x : (F.obj M).val.obj U), HEq ((e.hom.app M).val.app U x) x)
+    (hd : ∀ M U (x : (G.obj M).val.obj U), HEq ((d.hom.app M).val.app U x) x) :
+    ∀ M U (x : (F.obj M).val.obj U), HEq (((e ≪≫ d).hom.app M).val.app U x) x := by
+  intro M U x
+  dsimp only [Iso.trans_hom, NatTrans.comp_app, SheafOfModules.comp_val]
+  rw [PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  exact (hd M U _).trans (he M U x)
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 800000 in
--- Elaborating the section identity traverses the nested sequence-site scalar restrictions.
 /-- The ordinary direct-image comparison is sectionwise the identity.
 
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941.
@@ -112,11 +159,17 @@ theorem compactSupportDirectImageOrdinaryEvaluation
       rfl
     refine ⟨SheafOfModules.pushforwardComp a r' ≪≫
       SheafOfModules.pushforwardCongr h ≪≫ (SheafOfModules.pushforwardComp s b).symm, ?_⟩
-    intro N V x
-    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-      SheafOfModules.pushforwardCongr_hom_app_val_app]
-    rfl
+    apply compactSupportIsoTrans_sections
+    · exact compactSupportPushforwardComp_sections
+        (F := Prod.sectR n Y.ProEt) (G := integralComparisonSequenceBaseChange p) a r'
+    · apply compactSupportIsoTrans_sections
+      · exact compactSupportPushforwardCongr_sections
+          (F := Prod.sectR n Y.ProEt ⋙ integralComparisonSequenceBaseChange p)
+          (S := integralCoefficientSheaf l E Y n)
+          (R := (sheafCompose _ (forget₂ CommRingCat.{max u (t+1)} RingCat)).obj
+            (coefficientSequenceCommRingSheaf l E Z)) h
+      · exact compactSupportPushforwardComp_inv_sections
+          (F := Scheme.proEtaleBaseChange p) (G := Prod.sectR n Z.ProEt) s b
   exact ⟨fun n ↦ (level n).choose, fun n ↦ (level n).choose_spec⟩
 
 end WeilConjectures

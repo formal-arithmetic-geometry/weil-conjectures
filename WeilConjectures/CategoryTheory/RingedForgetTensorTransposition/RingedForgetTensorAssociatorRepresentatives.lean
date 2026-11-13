@@ -91,6 +91,46 @@ private theorem right_square {B : Type b} [Category.{vb} B] [MonoidalCategory B]
       simp only [← id_tensorHom, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
     _ = _ := by rw [hj]; simp only [Category.assoc]
 
+private theorem left_model_square {B : Type b} [Category.{vb} B] [MonoidalCategory B]
+    {A : Type a} [Category.{va} A] [MonoidalCategory A]
+    (F : B ⥤ A)
+    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
+    {X Y Z V W : B} {X' Y' Z' V' W' I K O : A}
+    (i : V ⟶ X ⊗ Y) (j : W ⟶ V ⊗ Z)
+    (eX : F.obj X ⟶ X') (eY : F.obj Y ⟶ Y') (eZ : F.obj Z ⟶ Z')
+    (eV : F.obj V ⟶ V') (eW : F.obj W ⟶ W')
+    (t : V' ⟶ I) (s : W' ⟶ K) (q : K ⟶ O)
+    (i' : I ⟶ X' ⊗ Y') (j₀ : K ⟶ V' ⊗ Z') (j' : O ⟶ I ⊗ Z')
+    (hi : F.map i ≫ μ.hom.app (X, Y) ≫ (eX ⊗ₘ eY) = eV ≫ t ≫ i')
+    (hj : F.map j ≫ μ.hom.app (V, Z) ≫ (eV ⊗ₘ eZ) = eW ≫ s ≫ j₀)
+    (hn : q ≫ j' = j₀ ≫ (t ▷ Z')) :
+    F.map (j ≫ (i ▷ Z)) ≫ μ.hom.app (X ⊗ Y, Z) ≫
+        (μ.hom.app (X, Y) ▷ F.obj Z) ≫ ((eX ⊗ₘ eY) ⊗ₘ eZ) =
+      (eW ≫ s ≫ q) ≫ (j' ≫ (i' ▷ Z')) := by
+  rw [left_square F μ i j eX eY eZ eV eW (t ≫ i') (s ≫ j₀) hi hj]
+  simp only [comp_whiskerRight, Category.assoc]
+  rw [← reassoc_of% hn]
+
+private theorem right_model_square {B : Type b} [Category.{vb} B] [MonoidalCategory B]
+    {A : Type a} [Category.{va} A] [MonoidalCategory A]
+    (F : B ⥤ A)
+    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
+    {X Y Z V W : B} {X' Y' Z' V' W' I K O : A}
+    (i : V ⟶ Y ⊗ Z) (j : W ⟶ X ⊗ V)
+    (eX : F.obj X ⟶ X') (eY : F.obj Y ⟶ Y') (eZ : F.obj Z ⟶ Z')
+    (eV : F.obj V ⟶ V') (eW : F.obj W ⟶ W')
+    (t : V' ⟶ I) (s : W' ⟶ K) (q : K ⟶ O)
+    (i' : I ⟶ Y' ⊗ Z') (j₀ : K ⟶ X' ⊗ V') (j' : O ⟶ X' ⊗ I)
+    (hi : F.map i ≫ μ.hom.app (Y, Z) ≫ (eY ⊗ₘ eZ) = eV ≫ t ≫ i')
+    (hj : F.map j ≫ μ.hom.app (X, V) ≫ (eX ⊗ₘ eV) = eW ≫ s ≫ j₀)
+    (hn : q ≫ j' = j₀ ≫ (X' ◁ t)) :
+    F.map (j ≫ (X ◁ i)) ≫ μ.hom.app (X, Y ⊗ Z) ≫
+        (F.obj X ◁ μ.hom.app (Y, Z)) ≫ (eX ⊗ₘ (eY ⊗ₘ eZ)) =
+      (eW ≫ s ≫ q) ≫ (j' ≫ (X' ◁ i')) := by
+  rw [right_square F μ i j eX eY eZ eV eW (t ≫ i') (s ≫ j₀) hi hj]
+  simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+  rw [← reassoc_of% hn]
+
 private theorem associativity_transport
     {B : Type b} [Category.{vb} B] [MonoidalCategory B]
     {A : Type a} [Category.{va} A] [MonoidalCategory A]
@@ -130,6 +170,23 @@ private theorem associativity_transport
       simp only [Category.assoc]
       rfl
 
+private theorem tensor_associativity_of_whiskers
+    {B : Type b} [Category.{vb} B] [MonoidalCategory B]
+    {A : Type a} [Category.{va} A] [MonoidalCategory A]
+    (F : B ⥤ A)
+    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
+    (X Y Z : B)
+    (h : F.map (α_ X Y Z).hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
+        (F.obj X ◁ μ.hom.app (Y, Z)) =
+      μ.hom.app (X ⊗ Y, Z) ≫ (μ.hom.app (X, Y) ▷ F.obj Z) ≫
+        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom) :
+    F.map (α_ X Y Z).hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
+        (𝟙 (F.obj X) ⊗ₘ μ.hom.app (Y, Z)) =
+      μ.hom.app (X ⊗ Y, Z) ≫ (μ.hom.app (X, Y) ⊗ₘ 𝟙 (F.obj Z)) ≫
+        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom := by
+  dsimp only [Functor.comp_obj, Functor.prod_obj] at *
+  simpa only [id_tensorHom, tensorHom_id] using h
+
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max c v r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
@@ -138,6 +195,24 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 private theorem coefficient_total_eq :
     coefficientTotalTensor.{r, c, v} J R = SheafOfModules.KFlatTotalTensorModel.total R := by
   rfl
+
+private theorem ringed_tensor_both_naturality
+    [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
+    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, wb} J R))
+    (T : CoefficientTensorModels.{r, c, v, wb} J R S)
+    (β : @SymmetricCategory _ _ S.monoidal)
+    (coh : RingedDerivedTensorCoherence.{c, v, r, wb} J R S T β)
+    (P Q P' Q' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)
+    (hP' : P'.IsKFlatIndependentCoefficients) (hQ' : Q'.IsKFlatIndependentCoefficients)
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map (f, g)) ≫
+        (T.iso J R S P' Q' hP' hQ').hom =
+      (T.iso J R S P Q hP hQ).hom ≫
+        S.tensor.map (DerivedCategory.Q.map f, DerivedCategory.Q.map g) := by
+  have h := coh.tensorIso_naturality P Q P' Q' (Or.inl hP) (Or.inl hP') f g
+  rw [coh.tensorIso_both P Q hP hQ, coh.tensorIso_both P' Q' hP' hQ'] at h
+  exact h
 
 variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)
   [HasSheafify J' AddCommGrpCat.{max d vd s}]
@@ -167,8 +242,6 @@ attribute [local irreducible] coefficientTotalTensor tensorSummand
 include cB cA
 -- Preserve the original instance assumptions in the public declaration.
 set_option linter.unusedSectionVars false
-set_option maxHeartbeats 800000 in
--- Combining four representative squares across independent tensor presentations needs this budget.
 /-- Associativity on the image of flat-term K-flat representatives.
 This only concerns three specified complexes, not arbitrary derived objects, and
 constructs neither a unit comparison nor any other structural constraint.
@@ -250,18 +323,8 @@ theorem ringed_forget_tensor_associator_representatives
           (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))).hom := by
   let := SB.monoidal
   let := SA.monoidal
-  change U.mapDerivedCategory.map (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
-      (DerivedCategory.Q.obj N)).hom ≫
-      μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q ⊗ DerivedCategory.Q.obj N) ≫
-      (𝟙 (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)) ⊗ₘ
-        μ.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N)) =
-    μ.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N) ≫
-      (μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⊗ₘ
-        𝟙 (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))) ≫
-      (α_ (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
-        (U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q))
-        (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))).hom
-  erw [id_tensorHom, tensorHom_id]
+  apply tensor_associativity_of_whiskers U.mapDerivedCategory μ
+    (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj N)
   let V := U.mapHomologicalComplex (.up ℤ)
   let B := coefficientTotalTensor.{r, c, v} J R
   let A := coefficientTotalTensor.{s, d, vd} J' R'
@@ -347,54 +410,32 @@ theorem ringed_forget_tensor_associator_representatives
   have hmQN := hμ Q N hQ hN hUQ hUN fQ fN
   have hmL := hμ PQ N hPQ hN hUPQ hUN fPQ fN
   have hmR := hμ P QN hP hQN hUP hUQN fP fQN
-  have hnL := cA.tensorIso_naturality (V.obj PQ) (V.obj N)
-    (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inl hUPQ) (Or.inl hAPQ)
+  have hnL := ringed_tensor_both_naturality J' R' SA TA βA cA
+    (V.obj PQ) (V.obj N) (A.obj (V.obj P, V.obj Q)) (V.obj N) hUPQ hUN hAPQ hUN
     (chain.hom.app (P, Q)) (𝟙 (V.obj N))
-  rw [cA.tensorIso_both _ _ hUPQ hUN, cA.tensorIso_both _ _ hAPQ hUN] at hnL
-  have hnR := cA.tensorIso_naturality (V.obj P) (V.obj QN)
-    (V.obj P) (A.obj (V.obj Q, V.obj N)) (Or.inl hUP) (Or.inl hUP)
+  have hnR := ringed_tensor_both_naturality J' R' SA TA βA cA
+    (V.obj P) (V.obj QN) (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hUQN hUP hAQN
     (𝟙 (V.obj P)) (chain.hom.app (Q, N))
-  rw [cA.tensorIso_both _ _ hUP hUQN, cA.tensorIso_both _ _ hUP hAQN] at hnR
   simp only [CoefficientClosedStructure.tensor, tensor_map,
     DerivedCategory.Q.map_id] at hnL
   erw [tensorHom_id] at hnL
   simp only [CoefficientClosedStructure.tensor, tensor_map,
     DerivedCategory.Q.map_id] at hnR
   erw [id_tensorHom] at hnR
-  have hL₀ := left_square U.mapDerivedCategory μ bPQ.hom bL.hom
+  have hL := left_model_square U.mapDerivedCategory μ bPQ.hom bL.hom
     (e.hom.app P) (e.hom.app Q) (e.hom.app N) (e.hom.app PQ)
-    (e.hom.app (B.obj (PQ, N))) (tPQ ≫ aPQ.hom) (tL ≫ aL₀.hom) hmPQ hmL
-  have hR₀ := right_square U.mapDerivedCategory μ bQN.hom bR.hom
+    (e.hom.app (B.obj (PQ, N))) tPQ tL
+    (DerivedCategory.Q.map (A.map (X := (V.obj PQ, V.obj N))
+      (Y := (A.obj (V.obj P, V.obj Q), V.obj N))
+      (chain.hom.app (P, Q), 𝟙 (V.obj N))))
+    aPQ.hom aL₀.hom aL.hom hmPQ hmL hnL
+  have hR := right_model_square U.mapDerivedCategory μ bQN.hom bR.hom
     (e.hom.app P) (e.hom.app Q) (e.hom.app N) (e.hom.app QN)
-    (e.hom.app (B.obj (P, QN))) (tQN ≫ aQN.hom) (tR ≫ aR₀.hom) hmQN hmR
-  have hL : U.mapDerivedCategory.map lB.hom ≫
-      μ.hom.app (SB.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q),
-        DerivedCategory.Q.obj N) ≫
-      (μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ▷
-        U.mapDerivedCategory.obj (DerivedCategory.Q.obj N)) ≫
-      (((e.hom.app P) ⊗ₘ (e.hom.app Q)) ⊗ₘ (e.hom.app N)) = eL ≫ lA.hom := by
-    calc
-      _ = e.hom.app (B.obj (PQ, N)) ≫ (tL ≫ aL₀.hom) ≫
-          ((tPQ ≫ aPQ.hom) ▷ DerivedCategory.Q.obj (V.obj N)) := hL₀
-      _ = _ := by
-        simp only [comp_whiskerRight, Category.assoc]
-        erw [← reassoc_of% hnL]
-        simp only [eL, lA, Iso.trans_hom, whiskerRightIso_hom, Category.assoc]
-        rfl
-  have hR : U.mapDerivedCategory.map rB.hom ≫
-      μ.hom.app (DerivedCategory.Q.obj P,
-        SB.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N)) ≫
-      (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P) ◁
-        μ.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N)) ≫
-      ((e.hom.app P) ⊗ₘ ((e.hom.app Q) ⊗ₘ (e.hom.app N))) = eR ≫ rA.hom := by
-    calc
-      _ = e.hom.app (B.obj (P, QN)) ≫ (tR ≫ aR₀.hom) ≫
-          (DerivedCategory.Q.obj (V.obj P) ◁ (tQN ≫ aQN.hom)) := hR₀
-      _ = _ := by
-        simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
-        erw [← reassoc_of% hnR]
-        simp only [eR, rA, Iso.trans_hom, whiskerLeftIso_hom, Category.assoc]
-        rfl
+    (e.hom.app (B.obj (P, QN))) tQN tR
+    (DerivedCategory.Q.map (A.map (X := (V.obj P, V.obj QN))
+      (Y := (V.obj P, A.obj (V.obj Q, V.obj N)))
+      (𝟙 (V.obj P), chain.hom.app (Q, N))))
+    aQN.hom aR₀.hom aR.hom hmQN hmR hnR
   have hC : U.mapDerivedCategory.map (DerivedCategory.Q.map aB.hom) ≫ eR =
       eL ≫ DerivedCategory.Q.map aA.hom := by
     have hf := e.hom.naturality aB.hom

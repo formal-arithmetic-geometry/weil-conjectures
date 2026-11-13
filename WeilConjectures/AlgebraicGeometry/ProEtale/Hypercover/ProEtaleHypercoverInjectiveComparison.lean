@@ -31,7 +31,6 @@ namespace AlgebraicGeometry.Scheme.ProEt
 variable (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
   (W : X.ProEt) (U : SimplicialObject (Over W))
 
-set_option maxHeartbeats 600000 in
 -- The comparison expands the evaluation, single-complex and section functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact descent for individual injective sheaves implies descent for a
@@ -98,15 +97,15 @@ theorem hypercoverAugmentation_quasiIso_of_injective_rows
     · subst p
       dsimp only [HomologicalComplex.comp_f, Arrow.mk_hom,
         Iso.refl_hom, HomologicalComplex.id_f, Category.comp_id]
-      erw [HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
+      simp only [Iso.app_hom, HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
       dsimp only [hypercoverRowAugmentationComplex]
-      rw [HomologicalComplex.mkHomFromSingle_f]
+      simp only [HomologicalComplex.mkHomFromSingle_f]
       change ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 A).hom.f n ≫
         (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (A.X n)).inv) ≫
           (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (A.X n)).hom ≫ _ = _
       simp only [Category.assoc, Iso.inv_hom_id_assoc, Category.comp_id]
       change _ = ((HomologicalComplex.mkHomFromSingle a ha).f 0).f n
-      rw [HomologicalComplex.mkHomFromSingle_f]
+      simp only [HomologicalComplex.mkHomFromSingle_f]
       rfl
     · exact ((HomologicalComplex.eval _ (.up ℤ) n).map_isZero
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 A p hp)).eq_of_src _ _

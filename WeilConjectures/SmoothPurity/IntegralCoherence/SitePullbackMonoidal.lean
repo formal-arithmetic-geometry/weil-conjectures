@@ -342,8 +342,6 @@ theorem ordinary_braiding (M N : SheafOfModules.{r}
   rw [unit_naturality_apply, moduleTmul_braiding, ordinary_pure, ordinary_pure,
     moduleTmul_braiding]
 
-set_option maxHeartbeats 800000 in
--- The pure-triple extensionality and rewriting chain is long.
 /-- The ordinary comparison is compatible with the associators. -/
 theorem ordinary_associativity (M N P : SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :
@@ -355,10 +353,8 @@ theorem ordinary_associativity (M N P : SheafOfModules.{r}
   rw [← id_tensorHom, ← tensorHom_id]
   apply hom_ext_pure₃ J K U R S φ F adj
   intro V x y z
-  simp only [comp_val_app_apply]
-  rw [unit_naturality_apply, moduleTmul_associator, ordinary_pure, moduleTmul_map,
-    ordinary_pure, ordinary_pure, moduleTmul_map, ordinary_pure, id_val_app_apply,
-    id_val_app_apply, moduleTmul_associator]
+  simp only [comp_val_app_apply, unit_naturality_apply, moduleTmul_associator,
+    ordinary_pure, moduleTmul_map, id_val_app_apply]
 
 /-- The ordinary comparison is compatible with the left unitors. -/
 theorem ordinary_leftUnitor (M : SheafOfModules.{r}
@@ -456,8 +452,6 @@ variable [UnivLE.{max c v, r}]
   (adj₂ : F₂ ⊣ SheafOfModules.pushforward.{r} (ringMap K L U₂ S T φ₂))
   (adj₁₂ : F₁₂ ⊣ SheafOfModules.pushforward.{r} (ringMap J L U₁₂ R T φ₁₂))
 
-set_option maxHeartbeats 800000 in
--- The pure-tensor extensionality and rewriting chain is long.
 /-- A compositor sending unit images to restricted iterated unit images is compatible with
 the normalized ordinary comparisons. -/
 theorem ordinary_composition (a : F₁₂ ≅ F₁ ⋙ F₂)
@@ -476,8 +470,7 @@ theorem ordinary_composition (a : F₁₂ ≅ F₁ ⋙ F₂)
         (ordinary K L U₂ S T φ₂ F₂ adj₂ (F₁.obj M) (F₁.obj N)).hom := by
   apply hom_ext_pure J L U₁₂ R T φ₁₂ F₁₂ adj₁₂
   intro V x y
-  simp only [comp_val_app_apply]
-  rw [ordinary_pure, moduleTmul_map, ha, ha, ha]
+  simp only [comp_val_app_apply, ordinary_pure, moduleTmul_map, ha]
   erw [← moduleTmul_restrict]
   erw [PresheafOfModules.naturality_apply,
     unit_naturality_apply.{c, v, r} K L U₂ S T φ₂ F₂ adj₂]

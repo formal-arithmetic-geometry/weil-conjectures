@@ -80,6 +80,16 @@ private theorem sectionsEvaluation_preservesHomology (p : ℕ)
               (Over.mkIdTerminal.from (U _⦋p⦌)).left.op).hom).PreservesHomology
   infer_instance
 
+private theorem hypercover_extendMap_naturality
+    {C : Type*} [Category C] [HasZeroObject C] [HasZeroMorphisms C]
+    {A B : CochainComplex C ℕ} (f : A ⟶ B) (p : ℕ) :
+    (HomologicalComplex.extendMap f ComplexShape.embeddingUpNat).f (p : ℤ) ≫
+        (B.extendXIso ComplexShape.embeddingUpNat (i := p) rfl).hom =
+      (A.extendXIso ComplexShape.embeddingUpNat (i := p) rfl).hom ≫ f.f p := by
+  change ((ComplexShape.embeddingUpNat.extendFunctor _).map f).f (p : ℤ) ≫ _ = _
+  erw [HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat (i := p) rfl]
+  simp
+
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def sectionColumnIso
     (E : CochainComplex (ringedSiteModules.{u + 1}
@@ -117,8 +127,6 @@ private theorem sectionBicomplex_zero
   · exact (HomologicalComplex.eval _ _ p).map_isZero
       ((hypercoverSectionRows X R W U).map_isZero (E.isZero_of_isStrictlyGE N q hq))
 
-set_option maxHeartbeats 600000 in
--- Comparing section-column maps unfolds the section and extension functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;
 no covering or matching-map hypotheses are needed for this comparison.
@@ -163,12 +171,9 @@ theorem hypercoverTotal_map_quasiIso_of_weaklyContractible
     intro q
     dsimp only [HomologicalComplex.comp_f, HomologicalComplex.Hom.isoOfComponents_hom_f]
     symm
-    change ((ComplexShape.embeddingUpNat.extendFunctor _).map
+    exact hypercover_extendMap_naturality
       ((AlgebraicTopology.alternatingCofaceMapComplex _).map
-        ((hypercoverSections X R W U).map (f.hom.f q)))).f (p : ℤ) ≫ _ = _
-    erw [HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat (i := p) rfl]
-    simp [sectionColumnIso]
-    rfl
+        ((hypercoverSections X R W U).map (f.hom.f q))) p
   · have hzero (A : CochainComplex.Plus (ringedSiteModules.{u + 1}
         ((sheafCompose (topology X)
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))) :

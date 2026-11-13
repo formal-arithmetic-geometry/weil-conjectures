@@ -154,8 +154,72 @@ noncomputable abbrev sliceComparison (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
     (Scheme.Modules.pullbackCongr (slicePt_sliceX X Y Z x y)).app L ≪≫
     ((Scheme.Modules.pullbackComp _ _).app L).symm
 
-set_option maxHeartbeats 1000000 in
--- transporting sections between equal opens `g⁻¹ f⁻¹ O` and `(g ≫ f)⁻¹ O` is slow
+private lemma coeff_eq_of_pullback_compatibility {A B C T : Scheme.{u}}
+    (f : A ⟶ C) (g : B ⟶ C) (i : T ⟶ A) (j : T ⟶ B) (h : i ≫ f = j ≫ g)
+    (L : C.Modules) {O : C.Opens} {ℓ : Γ(L, O)} (hℓ : Scheme.Modules.IsFreeGenerator ℓ)
+    (ex : Γ((Scheme.Modules.pullback f).obj L, ⊤))
+    (ey : Γ((Scheme.Modules.pullback g).obj L, ⊤))
+    (hC : ((Scheme.Modules.pullbackComp i f).app L ≪≫
+        (Scheme.Modules.pullbackCongr h).app L ≪≫
+        ((Scheme.Modules.pullbackComp j g).app L).symm).hom.app ⊤
+          (Scheme.Modules.pullbackSection i ex) = Scheme.Modules.pullbackSection j ey)
+    {g₁ : Γ(A, f ⁻¹ᵁ O)} {g₂ : Γ(B, g ⁻¹ᵁ O)}
+    (hg₁ : g₁ • Scheme.Modules.pullbackSection f ℓ =
+      ((Scheme.Modules.pullback f).obj L).presheaf.map (homOfLE le_top).op ex)
+    (hg₂ : g₂ • Scheme.Modules.pullbackSection g ℓ =
+      ((Scheme.Modules.pullback g).obj L).presheaf.map (homOfLE le_top).op ey) :
+    i.app _ g₁ = T.presheaf.map (homOfLE (congrArg (· ⁻¹ᵁ O) h).le).op (j.app _ g₂) := by
+  let e : (Scheme.Modules.pullback i).obj ((Scheme.Modules.pullback f).obj L) ≅
+      (Scheme.Modules.pullback j).obj ((Scheme.Modules.pullback g).obj L) :=
+    (Scheme.Modules.pullbackComp i f).app L ≪≫
+    (Scheme.Modules.pullbackCongr h).app L ≪≫
+    ((Scheme.Modules.pullbackComp j g).app L).symm
+  have hW : (i ≫ f) ⁻¹ᵁ O = (j ≫ g) ⁻¹ᵁ O :=
+    congrArg (· ⁻¹ᵁ O) h
+  have hT := (hℓ.pullback_unit_app g).pullback_unit_app j
+  have hT' := hT.map hW.le
+  have h1 := congrArg (fun s ↦ e.hom.app _
+    (Scheme.Modules.pullbackSection i s)) hg₁
+  rw [Scheme.Modules.pullbackSection_smul, Scheme.Modules.Hom.app_smul] at h1
+  erw [Scheme.Modules.pullbackComp_congr_hom_app_pullbackSection' h L ℓ]
+    at h1
+  rw [Scheme.Modules.pullbackSection_map, Scheme.Modules.Hom.app_presheaf_map] at h1
+  erw [hC] at h1
+  have h4 : j.app _ g₂ • Scheme.Modules.pullbackSection j
+      (Scheme.Modules.pullbackSection g ℓ) =
+      ((Scheme.Modules.pullback j).obj
+        ((Scheme.Modules.pullback g).obj L)).presheaf.map
+        (homOfLE (j.preimage_mono le_top)).op
+        (Scheme.Modules.pullbackSection j ey) := by
+    rw [← Scheme.Modules.pullbackSection_smul, hg₂, Scheme.Modules.pullbackSection_map]
+  have h5 : T.presheaf.map (homOfLE hW.le).op (j.app _ g₂) •
+      ((Scheme.Modules.pullback j).obj
+        ((Scheme.Modules.pullback g).obj L)).presheaf.map (homOfLE hW.le).op
+        (Scheme.Modules.pullbackSection j
+          (Scheme.Modules.pullbackSection g ℓ)) =
+      ((Scheme.Modules.pullback j).obj
+        ((Scheme.Modules.pullback g).obj L)).presheaf.map
+        (homOfLE (hW.le.trans (j.preimage_mono
+          (le_top : g ⁻¹ᵁ O ≤ ⊤)))).op
+        (Scheme.Modules.pullbackSection j ey) := by
+    rw [← Scheme.Modules.map_smul, h4]
+    exact Scheme.Modules.presheaf_map_presheaf_map_apply _ _ _ _ _
+  have h1' : (show Γ(T, (i ≫ f) ⁻¹ᵁ O) from
+      i.app _ g₁) •
+      ((Scheme.Modules.pullback j).obj
+        ((Scheme.Modules.pullback g).obj L)).presheaf.map (homOfLE hW.le).op
+        (Scheme.Modules.pullbackSection j
+          (Scheme.Modules.pullbackSection g ℓ)) =
+      ((Scheme.Modules.pullback j).obj
+        ((Scheme.Modules.pullback g).obj L)).presheaf.map
+        (homOfLE (hW.le.trans (j.preimage_mono
+          (le_top : g ⁻¹ᵁ O ≤ ⊤)))).op
+        (Scheme.Modules.pullbackSection j ey) := by
+    convert h1 using 2
+    all_goals rfl
+  exact hT'.smul_left_injective (h1'.trans h5.symm)
+
+
 /-- **Compatibility of the coefficients of rigidified slice trivialisations.** Let `ex`, `ey`
 be global sections of `L` on the two slices which agree on `{x} × {y} × Z`, and `ℓ` a free
 generator of `L` on `O`. Then the coefficients of `ex` and `ey` with respect to `ℓ` agree on
@@ -173,51 +237,8 @@ lemma app_coeff_eq (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z
       ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L).presheaf.map (homOfLE le_top).op ey) :
     (slicePt Z y).app _ g₁ = Z.left.presheaf.map (homOfLE
       (congrArg (· ⁻¹ᵁ O) (slicePt_sliceX X Y Z x y)).le).op ((slicePt Z x).app _ g₂) := by
-  have hW : (slicePt Z y ≫ sliceX X Y Z x) ⁻¹ᵁ O = (slicePt Z x ≫ sliceY X Y Z y) ⁻¹ᵁ O :=
-    congrArg (· ⁻¹ᵁ O) (slicePt_sliceX X Y Z x y)
-  have hT := (hℓ.pullback_unit_app (sliceY X Y Z y)).pullback_unit_app (slicePt Z x)
-  have hT' := hT.map hW.le
-  have h1 := congrArg (fun s ↦ (sliceComparison X Y Z x y L).hom.app _
-    (Scheme.Modules.pullbackSection (slicePt Z y) s)) hg₁
-  simp only [sliceComparison] at h1
-  rw [Scheme.Modules.pullbackSection_smul, Scheme.Modules.Hom.app_smul] at h1
-  erw [Scheme.Modules.pullbackComp_congr_hom_app_pullbackSection' (slicePt_sliceX X Y Z x y) L ℓ]
-    at h1
-  rw [Scheme.Modules.pullbackSection_map, Scheme.Modules.Hom.app_presheaf_map] at h1
-  erw [hC] at h1
-  have h4 : (slicePt Z x).app _ g₂ • Scheme.Modules.pullbackSection (slicePt Z x)
-      (Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ) =
-      ((Scheme.Modules.pullback (slicePt Z x)).obj
-        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map
-        (homOfLE ((slicePt Z x).preimage_mono le_top)).op
-        (Scheme.Modules.pullbackSection (slicePt Z x) ey) := by
-    rw [← Scheme.Modules.pullbackSection_smul, hg₂, Scheme.Modules.pullbackSection_map]
-  have h5 : Z.left.presheaf.map (homOfLE hW.le).op ((slicePt Z x).app _ g₂) •
-      ((Scheme.Modules.pullback (slicePt Z x)).obj
-        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map (homOfLE hW.le).op
-        (Scheme.Modules.pullbackSection (slicePt Z x)
-          (Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ)) =
-      ((Scheme.Modules.pullback (slicePt Z x)).obj
-        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map
-        (homOfLE (hW.le.trans ((slicePt Z x).preimage_mono
-          (le_top : sliceY X Y Z y ⁻¹ᵁ O ≤ ⊤)))).op
-        (Scheme.Modules.pullbackSection (slicePt Z x) ey) := by
-    rw [← Scheme.Modules.map_smul, h4]
-    exact Scheme.Modules.presheaf_map_presheaf_map_apply _ _ _ _ _
-  have h1' : (show Γ(Z.left, (slicePt Z y ≫ sliceX X Y Z x) ⁻¹ᵁ O) from
-      (slicePt Z y).app _ g₁) •
-      ((Scheme.Modules.pullback (slicePt Z x)).obj
-        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map (homOfLE hW.le).op
-        (Scheme.Modules.pullbackSection (slicePt Z x)
-          (Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ)) =
-      ((Scheme.Modules.pullback (slicePt Z x)).obj
-        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map
-        (homOfLE (hW.le.trans ((slicePt Z x).preimage_mono
-          (le_top : sliceY X Y Z y ⁻¹ᵁ O ≤ ⊤)))).op
-        (Scheme.Modules.pullbackSection (slicePt Z x) ey) := by
-    convert h1 using 2
-    all_goals rfl
-  exact hT'.smul_left_injective (h1'.trans h5.symm)
+  exact coeff_eq_of_pullback_compatibility (sliceX X Y Z x) (sliceY X Y Z y)
+    (slicePt Z y) (slicePt Z x) (slicePt_sliceX X Y Z x y) L hℓ ex ey hC hg₁ hg₂
 
 
 

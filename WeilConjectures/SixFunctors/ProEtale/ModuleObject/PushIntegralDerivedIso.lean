@@ -41,6 +41,50 @@ open CategoryTheory Limits MonoidalCategory MonObj
 
 open scoped CategoryTheory.Obj
 
+/-- A compatibility of units determines a factorization of the mate. -/
+private lemma pushHom_fac_of_unit_compatibility
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    {F : A ⥤ C} {U : C ⥤ A} {G : B ⥤ D} {V : D ⥤ B}
+    (adjX : F ⊣ U) (adjY : G ⊣ V) (P : A ⥤ B) (P' : C ⥤ D)
+    (β : U ⋙ P ⟶ P' ⋙ V) {Z : A} {ZY : B} {W : C} {DY DE : D}
+    (u : ZY ⟶ P.obj Z) (cX : F.obj Z ⟶ W) (cY : G.obj ZY ⟶ DY)
+    (b : DY ⟶ DE) (r : DE ⟶ P'.obj W)
+    (h : u ≫ P.map (adjX.unit.app Z ≫ U.map cX) ≫ β.app W =
+      adjY.unit.app ZY ≫ V.map cY ≫ V.map b ≫ V.map r) :
+    G.map u ≫ ((mateEquiv adjX adjY).symm β).app Z ≫ P'.map cX = cY ≫ b ≫ r := by
+  apply (adjY.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  dsimp only [Functor.comp_obj]
+  rw [adjY.unit_naturality_assoc]
+  have hm := (unit_mateEquiv_symm adjX adjY (TwoSquare.mk _ _ _ _ β) Z).symm
+  rw [reassoc_of% hm]
+  have hn := β.naturality cX
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Functor.map_comp_assoc]
+  exact h
+
+/-- Transport the underived unit square through the comparison maps before taking its mate. -/
+private lemma pushHom_fac_of_comparison_units
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    {F : A ⥤ C} {U : C ⥤ A} {G : B ⥤ D} {V : D ⥤ B}
+    (adjX : F ⊣ U) (adjY : G ⊣ V) (P : A ⥤ B) (P' : C ⥤ D)
+    (β : U ⋙ P ⟶ P' ⋙ V) {Z Z' : A} {ZY H B₁ B₂ : B} {W : C} {DY DE : D}
+    (u : ZY ⟶ P.obj Z) (cX : F.obj Z ⟶ W) (cY : G.obj ZY ⟶ DY)
+    (b : DY ⟶ DE) (r : DE ⟶ P'.obj W)
+    (x : Z ⟶ Z') (z : Z' ⟶ U.obj W) (y : ZY ⟶ H) (v₀ : H ⟶ V.obj DY)
+    (p : ZY ⟶ B₁) (t : B₁ ⟶ P.obj Z') (q : B₁ ⟶ B₂)
+    (v₁ : B₂ ⟶ V.obj DE) (k : H ⟶ B₂)
+    (hX : adjX.unit.app Z ≫ U.map cX = x ≫ z)
+    (hY : adjY.unit.app ZY ≫ V.map cY = y ≫ v₀)
+    (hP : p ≫ t = u ≫ P.map x)
+    (hβ : t ≫ P.map z ≫ β.app W = q ≫ v₁ ≫ V.map r)
+    (hV : k ≫ v₁ = v₀ ≫ V.map b) (hxy : y ≫ k = p ≫ q) :
+    G.map u ≫ ((mateEquiv adjX adjY).symm β).app Z ≫ P'.map cX = cY ≫ b ≫ r := by
+  apply pushHom_fac_of_unit_compatibility adjX adjY P P' β
+  rw [hX, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← reassoc_of% hP, hβ, reassoc_of% hY, ← reassoc_of% hV, reassoc_of% hxy]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme DerivedCategory
@@ -120,8 +164,6 @@ lemma derivedComapLowerStarIso_inv_app_Qh
   erw [reassoc_of% hQ]
   erw [Iso.hom_inv_id_app_assoc]
 
-set_option maxHeartbeats 1000000 in
--- Rewriting inside derived-category composites requires unfolding homotopy category objects.
 /-- The derived (Push) on the image of a complex `I`, through the units of the right derived
 pushforwards and the counits of the derived extensions of scalars, is the underived (Push). -/
 lemma derivedPushHom_app_Qh_fac
@@ -139,60 +181,31 @@ lemma derivedPushHom_app_Qh_fac
       ((f)_*⟦Λ'⟧).rightDerivedFunctorUnit.app
         (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
           ((HomotopyCategory.quotient _ _).obj I)) := by
-  apply ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).homEquiv _ _
-    ).injective
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
-  dsimp only [Functor.comp_obj]
-  erw [(Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit_naturality_assoc
-    (((f)_*⟦Λ⟧).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I))]
-  have hm : (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
-        (((f)_*⟦Λ⟧).rightDerivedFunctor.obj (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) ≫
-      (Mod.comap (coefficientMap a Y)).mapDerivedCategory.map
-        ((derivedPushHom a f).app (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) =
-      ((f)_*⟦Λ⟧).rightDerivedFunctor.map
-        ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
-          (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) ≫
-        (derivedComapLowerStarIso a f).inv.app _ :=
-    (unit_mateEquiv_symm (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
-      (TwoSquare.mk _ _ _ _ (derivedComapLowerStarIso a f).inv) _).symm
-  dsimp only [Functor.comp_obj]
-  have hm2 := reassoc_of% hm
-  rw [hm2]
-  have hn := (derivedComapLowerStarIso a f).inv.naturality
-    ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit.app
-      ((HomotopyCategory.quotient _ _).obj I))
-  dsimp only [Functor.comp_map] at hn
-  erw [← hn]
-  rw [← Functor.map_comp_assoc]
-  erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a X)
-    ((HomotopyCategory.quotient _ _).obj I)]
-  rw [Functor.map_comp, Category.assoc]
-  clear hm hm2 hn
-  erw [← ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.naturality_assoc
+  have hX := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a X)
+    ((HomotopyCategory.quotient _ _).obj I)
+  have hY := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a Y)
+    ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I))
+  have hP := ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.naturality
     (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
-      (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I))]
-  erw [derivedComapLowerStarIso_inv_app_Qh a f
+      (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I))
+  have hβ := derivedComapLowerStarIso_inv_app_Qh a f
     (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
-      ((HomotopyCategory.quotient _ _).obj I))]
-  erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh_assoc (coefficientMap a Y)
-    ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I))]
-  erw [← (Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.inv.naturality_assoc
-    ((NatTrans.mapHomotopyCategory (pushHom a f) _).app ((HomotopyCategory.quotient _ _).obj I))]
-  have hu := congrArg Qh.map (unit_app_comp_map_mapHomotopyCategory_pushHom_app a f I)
-  simp only [Functor.map_comp] at hu
-  dsimp only [Functor.comp_map]
-  erw [reassoc_of% hu]
-  rfl
-
+      ((HomotopyCategory.quotient _ _).obj I))
+  have hV := (Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.inv.naturality
+    ((NatTrans.mapHomotopyCategory (pushHom a f) _).app ((HomotopyCategory.quotient _ _).obj I))
+  have hxy := congrArg Qh.map (unit_app_comp_map_mapHomotopyCategory_pushHom_app a f I)
+  simp only [Functor.map_comp] at hxy
+  exact pushHom_fac_of_comparison_units
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
+    ((f)_*⟦Λ⟧).rightDerivedFunctor ((f)_*⟦Λ'⟧).rightDerivedFunctor
+    (derivedComapLowerStarIso a f).inv _ _ _ _ _ _ _ _ _ _ _ _ _ _ hX hY hP hβ hV hxy
 
 section Integral
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}}
   (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
-set_option maxHeartbeats 1000000 in
--- Producing the bounded below injective resolution of `K` is slow to elaborate.
 /-- **(Push) for `𝒪_E ⟶ E` on bounded below objects**: for a quasi-compact quasi-separated `f`
 and a bounded below `K ∈ D(𝒪_{E,X})`, the comparison `E_Y ⊗ᴸ Rf_* K ⟶ Rf_*(E_X ⊗ᴸ K)` is an
 isomorphism. -/
@@ -200,12 +213,15 @@ theorem isIso_derivedPushHom_app_padicIntegers_of_isGE
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [K.IsGE n] :
     IsIso ((derivedPushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f).app K) := by
-  obtain ⟨T, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isGE n
-  obtain ⟨I, i, _, hI, _⟩ :=
-    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  -- Bind the existence proofs before eliminating them, to avoid abstracting over the large goal.
+  have hK := K.exists_iso_Q_obj_of_isGE n
+  obtain ⟨T, _, ⟨e⟩⟩ := hK
+  have hT := CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  obtain ⟨I, i, _, hI, _⟩ := hT
   have : I.IsKInjective := CochainComplex.isKInjective_of_injective I n
   rw [NatTrans.isIso_app_iff_of_iso _
     (e ≪≫ asIso (Q.map i) ≪≫ ((quotientCompQhIso _).app I).symm)]
+  dsimp only [Functor.comp_obj]
   have h := derivedPushHom_app_Qh_fac (padicIntegersRingObjToContinuousMapRingObj ℓ E) f I
   have : ∀ k, IsIso (((NatTrans.mapHomologicalComplex
       (pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f) (ComplexShape.up ℤ)).app I).f
@@ -235,7 +251,9 @@ theorem isIso_derivedPushHom_app_padicIntegers_of_isGE
       rightAcyclic_lowerStar_of_rightAcyclic_forget _ f
         (rightAcyclic_lowerStar_extendScalars_of_injective ℓ E f (I.X k))
   have := IsIso.of_isIso_fac_left h
-  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+  have := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+  -- Compare the instance arguments without unfolding the derived functors.
+  with_reducible exact this
 
 end Integral
 

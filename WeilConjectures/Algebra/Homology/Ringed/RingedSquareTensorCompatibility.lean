@@ -206,7 +206,34 @@ private theorem tensor_map_comp {A B : Type*} [Category A] [Category B]
       T.map (CategoryTheory.Prod.mkHom a b) ≫ T.map (CategoryTheory.Prod.mkHom c d) :=
   T.map_comp (CategoryTheory.Prod.mkHom a b) (CategoryTheory.Prod.mkHom c d)
 
-set_option maxHeartbeats 800000 in
+private theorem tensor_map_square {A B : Type*} [Category A] [Category B]
+    (T : A × A ⥤ B) {P₁ P₂ P₃ P₄ Q₁ Q₂ Q₃ Q₄ : A}
+    {a : P₁ ⟶ P₂} {b : Q₁ ⟶ Q₂} {c : P₂ ⟶ P₄} {d : Q₂ ⟶ Q₄}
+    {e : P₁ ⟶ P₃} {f : Q₁ ⟶ Q₃} {g : P₃ ⟶ P₄} {h : Q₃ ⟶ Q₄}
+    (hp : a ≫ c = e ≫ g) (hq : b ≫ d = f ≫ h) :
+    T.map (CategoryTheory.Prod.mkHom a b) ≫ T.map (CategoryTheory.Prod.mkHom c d) =
+      T.map (CategoryTheory.Prod.mkHom e f) ≫ T.map (CategoryTheory.Prod.mkHom g h) := by
+  rw [← tensor_map_comp, hp, hq, tensor_map_comp]
+
+-- Perform the diagram chase before specializing to derived categories and total complexes.
+private theorem tensor_square_of_comparison {C : Type*} [Category C]
+    {R₁ R₂ A₁ A₂ B₁ B₂ D₁ D₂ E₁ E₂ F₁ F₂ : C}
+    (r₁ : R₁ ⟶ A₁) (r₂ : R₂ ⟶ A₂) (θr : R₁ ⟶ R₂) (θ : A₁ ⟶ A₂)
+    (t₁ : A₁ ⟶ B₁) (t₂ : A₂ ⟶ B₂) (θt : B₁ ⟶ B₂)
+    (z₁ : B₁ ⟶ F₁) (z₂ : B₂ ⟶ F₂) (θz : F₁ ⟶ F₂)
+    (c₁ : R₁ ⟶ D₁) (c₂ : R₂ ⟶ D₂) (θc : D₁ ⟶ D₂)
+    (d₁ : D₁ ⟶ E₁) (d₂ : D₂ ⟶ E₂) (θd : E₁ ⟶ E₂)
+    (r₁' : E₁ ⟶ F₁) (r₂' : E₂ ⟶ F₂)
+    (hn : r₁ ≫ θ = θr ≫ r₂)
+    (he₁ : r₁ ≫ t₁ ≫ z₁ = c₁ ≫ d₁ ≫ r₁')
+    (he₂ : r₂ ≫ t₂ ≫ z₂ = c₂ ≫ d₂ ≫ r₂')
+    (hc : θr ≫ c₂ = c₁ ≫ θc) (hd : θc ≫ d₂ = d₁ ≫ θd)
+    (hr : θd ≫ r₂' = r₁' ≫ θz) (hz : θt ≫ z₂ = z₁ ≫ θz) :
+    r₁ ≫ (θ ≫ t₂) ≫ z₂ = r₁ ≫ (t₁ ≫ θt) ≫ z₂ := by
+  simp only [Category.assoc]
+  rw [reassoc_of% hn, he₂, reassoc_of% hc, reassoc_of% hd, hr,
+    ← reassoc_of% he₁, hz]
+
 -- Keep the four representative identifications explicit during composition.
 private theorem two_edges_equation {A B C : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B) (d : RingedTensorEdge B C)
@@ -252,7 +279,6 @@ private theorem two_edges_equation {A B C : RingedTensorCorner.{u, w}}
     arg 2
     rw [reassoc_of% (comparison_naturality d (delta e P Q))]
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the four derived functors and their representative comparisons together.
 /-- The representative characterization of the derived square is compatible with
 canonical tensor comparisons on flat K-flat complexes.
@@ -384,61 +410,49 @@ theorem ringedSquareTensorCompatibility
         (ObjectProperty.homMk
           (X := ⟨(pull k).obj ((pull g).obj Q), pull_good k (pull_good g hq)⟩)
           (Y := ⟨(pull h).obj ((pull f).obj Q), pull_good h (pull_good f hq)⟩) (γ.app Q)))
-  have hl :
-      k.left.map (g.left.map r) ≫
-        theta.hom.app (Y.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
-        h.left.map ((f.tensorComparison aY aX).hom.app
-          (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
-        (h.tensorComparison aX aX').hom.app
-          (f.left.obj (DerivedCategory.Q.obj P), f.left.obj (DerivedCategory.Q.obj Q)) ≫
-        X'.tensor.map (CategoryTheory.Prod.mkHom zP zQ) =
-      k.left.map (comparison g ((totalTensor Y).obj (P, Q))) ≫
-        comparison k ((pull g).obj ((totalTensor Y).obj (P, Q))) ≫
-        DerivedCategory.Q.map ((pull k).map (delta g P Q) ≫
-          delta k ((pull g).obj P) ((pull g).obj Q)) ≫
-        aX'.representative.hom.app
-          (⟨(pull k).obj ((pull g).obj P), pull_good k (pull_good g hp)⟩,
-            ⟨(pull k).obj ((pull g).obj Q), pull_good k (pull_good g hq)⟩) ≫
-        X'.tensor.map (CategoryTheory.Prod.mkHom
-          (DerivedCategory.Q.map (γ.app P)) (DerivedCategory.Q.map (γ.app Q))) := by
-    rewrite [reassoc_of% hn]
-    rewrite [heF]
-    simp only [Category.assoc, Functor.map_comp]
-    rewrite [reassoc_of% hsT]
-    rewrite [reassoc_of% ho]
-    conv_lhs =>
-      arg 2
-      arg 2
-      arg 2
-      arg 2
-      rw [hrep]
-  have hr' :
-      k.left.map (g.left.map r) ≫
-        k.left.map ((g.tensorComparison aY aY').hom.app
-          (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
-        (k.tensorComparison aY' aX').hom.app
-          (g.left.obj (DerivedCategory.Q.obj P), g.left.obj (DerivedCategory.Q.obj Q)) ≫
-        X'.tensor.map (CategoryTheory.Prod.mkHom
-          (theta.hom.app (DerivedCategory.Q.obj P))
-          (theta.hom.app (DerivedCategory.Q.obj Q))) ≫
-        X'.tensor.map (CategoryTheory.Prod.mkHom zP zQ) =
-      k.left.map (comparison g ((totalTensor Y).obj (P, Q))) ≫
-        comparison k ((pull g).obj ((totalTensor Y).obj (P, Q))) ≫
-        DerivedCategory.Q.map ((pull k).map (delta g P Q) ≫
-          delta k ((pull g).obj P) ((pull g).obj Q)) ≫
-        aX'.representative.hom.app
-          (⟨(pull k).obj ((pull g).obj P), pull_good k (pull_good g hp)⟩,
-            ⟨(pull k).obj ((pull g).obj Q), pull_good k (pull_good g hq)⟩) ≫
-        X'.tensor.map (CategoryTheory.Prod.mkHom
-          (DerivedCategory.Q.map (γ.app P)) (DerivedCategory.Q.map (γ.app Q))) := by
-    conv_lhs =>
-      arg 2
-      arg 2
-      arg 2
-      rw [← tensor_map_comp]
-      rw [hsP, hsQ]
-      rw [tensor_map_comp]
-    rw [reassoc_of% heG]
-  simpa only [Functor.comp_map, Category.assoc] using hl.trans hr'.symm
+  have chase := tensor_square_of_comparison
+    (r₁ := k.left.map (g.left.map r))
+    (r₂ := h.left.map (f.left.map r))
+    (θr := theta.hom.app (DerivedCategory.Q.obj ((totalTensor Y).obj (P, Q))))
+    (θ := theta.hom.app (Y.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)))
+    (t₁ := k.left.map ((g.tensorComparison aY aY').hom.app
+      (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+      (k.tensorComparison aY' aX').hom.app
+        (g.left.obj (DerivedCategory.Q.obj P), g.left.obj (DerivedCategory.Q.obj Q)))
+    (t₂ := h.left.map ((f.tensorComparison aY aX).hom.app
+      (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+      (h.tensorComparison aX aX').hom.app
+        (f.left.obj (DerivedCategory.Q.obj P), f.left.obj (DerivedCategory.Q.obj Q)))
+    (θt := X'.tensor.map (CategoryTheory.Prod.mkHom
+      (theta.hom.app (DerivedCategory.Q.obj P)) (theta.hom.app (DerivedCategory.Q.obj Q))))
+    (z₁ := X'.tensor.map (CategoryTheory.Prod.mkHom
+      (k.left.map (comparison g P) ≫ comparison k ((pull g).obj P))
+      (k.left.map (comparison g Q) ≫ comparison k ((pull g).obj Q))))
+    (z₂ := X'.tensor.map (CategoryTheory.Prod.mkHom zP zQ))
+    (θz := X'.tensor.map (CategoryTheory.Prod.mkHom
+      (DerivedCategory.Q.map (γ.app P)) (DerivedCategory.Q.map (γ.app Q))))
+    (c₁ := k.left.map (comparison g ((totalTensor Y).obj (P, Q))) ≫
+      comparison k ((pull g).obj ((totalTensor Y).obj (P, Q))))
+    (c₂ := h.left.map (comparison f ((totalTensor Y).obj (P, Q))) ≫
+      comparison h ((pull f).obj ((totalTensor Y).obj (P, Q))))
+    (θc := DerivedCategory.Q.map (γ.app ((totalTensor Y).obj (P, Q))))
+    (d₁ := DerivedCategory.Q.map ((pull k).map (delta g P Q) ≫
+      delta k ((pull g).obj P) ((pull g).obj Q)))
+    (d₂ := DerivedCategory.Q.map ((pull h).map (delta f P Q) ≫
+      delta h ((pull f).obj P) ((pull f).obj Q)))
+    (θd := DerivedCategory.Q.map ((totalTensor X').map
+      (CategoryTheory.Prod.mkHom (γ.app P) (γ.app Q))))
+    (r₁' := aX'.representative.hom.app
+      (⟨(pull k).obj ((pull g).obj P), pull_good k (pull_good g hp)⟩,
+        ⟨(pull k).obj ((pull g).obj Q), pull_good k (pull_good g hq)⟩))
+    (r₂' := aX'.representative.hom.app
+      (⟨(pull h).obj ((pull f).obj P), pull_good h (pull_good f hp)⟩,
+        ⟨(pull h).obj ((pull f).obj Q), pull_good h (pull_good f hq)⟩))
+    hn (by simpa only [Category.assoc] using heG)
+    (by simpa only [Category.assoc] using heF)
+    (by simpa only [Category.assoc] using hsT)
+    (by simpa only [Functor.map_comp, Category.assoc] using ho)
+    hrep (tensor_map_square X'.tensor hsP hsQ)
+  simpa only [Functor.comp_map, Category.assoc] using chase
 
 end SheafOfModules

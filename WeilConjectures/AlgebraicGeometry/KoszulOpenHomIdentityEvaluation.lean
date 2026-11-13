@@ -26,8 +26,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 900000 in
--- Nested derived restriction functors require extra elaboration heartbeats.
 /-- Natural evaluation, normalized only on the identity of each Koszul tail.
 Source: Stacks Project, Tags 09M1, 08DC, 08DD and 08D1.
 (blueprint: lem-sc-koszul-open-hom-identity-evaluation).
@@ -84,56 +82,31 @@ theorem koszulOpenHom_identity_evaluation
               (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))
       := by
   classical
-  dsimp only
-  let F₀ := SheafOfModules.overFunctor.{u}
-    (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)
-  let G₀ := Equivalence.functor
-    (C := SheafOfModules.{u}
-      ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-    (D := SheafOfModules.{u}
-      (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-    (Scheme.Modules.overEquiv (koszulOpen A r f))
-  let R := (F₀ ⋙ G₀).mapDerivedCategory
-  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
-  let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
+  intro R H G
   let c := fun e : ℕ ↦ H.map (koszulCechDerivedComparison A r f (koszulOpenSheafComplex A r f e))
       (H.map (DerivedCategory.Q.map (colimit.ι
         (koszulCechHomDiagram A r f
         (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj
           (koszulOpenSheafComplex A r f e))) e))
         (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))
-  obtain ⟨b, hb, h₀⟩ := koszulOpen_structure_evaluation.{u, w, v} A r f
+  have h := koszulOpen_structure_evaluation.{u, w, v} A r f
+  let b := h.choose
+  have hb := h.choose_spec.1
+  have h₀ := h.choose_spec.2
   refine ⟨b, hb, ?_⟩
   intro e v hv
   change R.map (koszulOpenUnit A r f e) ≫ v = 𝟙 _ at hv
-  have hi : IsIso (F₀.mapDerivedCategory.map (koszulOpenUnit A r f e)) := by
-    have h := (affine_perfect_koszul_principal_unit A r f (e + 1)
-      (Nat.le_add_left 1 e)).2
-    have hU : (⨆ i : Fin r, (Spec (.of A)).basicOpen
-        ((Scheme.ΓSpecIso (.of A)).inv (f i))) = koszulOpen A r f := by
-      unfold koszulOpen
-      congr 1
-      funext i
-      exact basicOpen_eq_of_affine (R := .of A) (f i)
-    rw [hU] at h
-    exact h
-  have hiso : IsIso (R.map (koszulOpenUnit A r f e)) := by
-    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F₀ G₀) _).1
-    change IsIso (G₀.mapDerivedCategory.map
-      (F₀.mapDerivedCategory.map (koszulOpenUnit A r f e)))
-    infer_instance
   let z := (b (koszulOpenObject A r f e)).symm (c e)
   have hz : b (koszulOpenObject A r f e) z = c e := Equiv.apply_symm_apply _ _
   have hclass := koszulOpen_augmented_identity_class.{u, w, v} A r f e
   have hright : z ≫ R.map (koszulOpenUnit A r f e) = 𝟙 _ := by
     apply (b (koszulOpenStructure A)).injective
     rw [hb, hz, hclass, h₀]
-  have hvright : v ≫ R.map (koszulOpenUnit A r f e) = 𝟙 _ := by
-    apply (cancel_epi (R.map (koszulOpenUnit A r f e))).mp
-    rw [← Category.assoc, hv, Category.id_comp, Category.comp_id]
   have hvz : v = z := by
-    apply (cancel_mono (R.map (koszulOpenUnit A r f e))).mp
-    rw [hvright, hright]
+    calc
+      v = (z ≫ R.map (koszulOpenUnit A r f e)) ≫ v := by
+        rw [hright, Category.id_comp]
+      _ = z := by rw [Category.assoc, hv, Category.comp_id]
   change b (koszulOpenObject A r f e) v = c e
   rw [hvz, hz]
 

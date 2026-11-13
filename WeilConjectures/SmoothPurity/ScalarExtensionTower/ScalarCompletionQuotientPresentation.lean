@@ -60,7 +60,6 @@ private theorem restrictedSection_map (Y : Scheme.{u})
     (fun y ↦ ((coefficientSequenceEvaluation l E Y n).map f).val.app U y)
     (restricted_section_cancel l E Y D n U x))
 
-set_option maxHeartbeats 800000 in
 -- Naturality across the large coefficient-site instance expressions needs extra elaboration fuel.
 private theorem presentation_transport (Y : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E Y)
@@ -138,7 +137,19 @@ private theorem presentation_transport (Y : Scheme.{u})
       simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
       rfl
 
-set_option maxHeartbeats 800000 in
+private theorem scalarPresentation_homEquiv
+    {A B : Type*} [Category A] [Category B] {F : A ⥤ B} {G : B ⥤ A}
+    (adj : F ⊣ G) {X Y : A} {Z Z' Z'' : B}
+    (f : X ⟶ Y) (g : Y ⟶ G.obj Z) (h : Z ⟶ Z') (k : Z' ⟶ Z'') :
+    adj.homEquiv X Z'' (F.map f ≫ (F.map g ≫ adj.counit.app Z) ≫ h ≫ k) =
+      f ≫ g ≫ G.map h ≫ G.map k := by
+  simp only [Category.assoc]
+  rw [← F.map_comp_assoc]
+  simp only [← Category.assoc]
+  change adj.homEquiv X Z'' (((adj.homEquiv X Z).symm (f ≫ g) ≫ h) ≫ k) = _
+  rw [adj.homEquiv_naturality_right,
+    adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
+
 -- Compose the large derived functor interfaces without unfolding their constructions.
 /-- Scalar completion induces the coherent quotient presentation of ordinary scalar change.
 Source: Stacks 06YY, 0941; scalar normalization and the tensor-unit augmentation
@@ -246,13 +257,9 @@ theorem scalarCompletionQuotientPresentation (Y : Scheme.{u})
       (scalarCompletion l E L ι Y).app (DerivedCategory.Q.obj P.obj) ≫
         SY.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫
         T.map (A.map eC.hom) ≫ T.map t := by
-    unfold scalarReduction
-    simp only [Category.assoc]
-    rw [← SL.reduction.map_comp_assoc]
-    simp only [← Category.assoc]
-    rw [← SL.adjunction.homEquiv_counit,
-      SL.adjunction.homEquiv_naturality_right,
-      SL.adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+    exact scalarPresentation_homEquiv SL.adjunction
+      ((scalarCompletion l E L ι Y).app (DerivedCategory.Q.obj P.obj))
+      (SY.realization.hom.app (DerivedCategory.Q.obj P.obj)) (A.map eC.hom) t
   erw [hm, SL.adjunction.homEquiv_naturality_left]
   change (d ≫ (SL.adjunction.unit.app _ ≫ T.map eS.hom)) ≫ (r ≫ z) = _
   simp only [Category.assoc]

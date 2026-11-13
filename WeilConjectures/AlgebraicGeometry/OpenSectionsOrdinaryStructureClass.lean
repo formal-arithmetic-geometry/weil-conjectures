@@ -254,6 +254,70 @@ private theorem normalized_forget_comparison
   simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
   rfl
 
+private theorem normalized_forget_comparison_apply
+    {R S : Type u} [Ring R] [Ring S]
+    {X : CochainComplex (ModuleCat.{u} R) ℤ}
+    {Y Z : CochainComplex (ModuleCat.{u} S) ℤ}
+    {M : ModuleCat.{u} R} {N E : ModuleCat.{u} S}
+    (a : X ≅ (HomologicalComplex.single _ (.up ℤ) 0).obj M)
+    (b : Y ≅ (HomologicalComplex.single _ (.up ℤ) 0).obj N)
+    (c : Z ≅ (HomologicalComplex.single _ (.up ℤ) 0).obj E)
+    (z : ((forget₂ (ModuleCat.{u} R) AddCommGrpCat).mapHomologicalComplex (.up ℤ)).obj X ≅
+      ((forget₂ (ModuleCat.{u} S) AddCommGrpCat).mapHomologicalComplex (.up ℤ)).obj Y)
+    (f : Z ⟶ Y) (x : M) (y : E) :
+    let P := forget₂ (ModuleCat.{u} R) AddCommGrpCat
+    let Q := forget₂ (ModuleCat.{u} S) AddCommGrpCat
+    let aH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso a ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 M
+    let cH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso c ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 E
+    let a₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso a ≪≫
+      HomologicalComplex.singleObjXSelf (.up ℤ) 0 M
+    let c₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso c ≪≫
+      HomologicalComplex.singleObjXSelf (.up ℤ) 0 E
+    let i := ((X.sc 0).mapHomologyIso P).symm ≪≫
+      (HomologicalComplex.homologyFunctor AddCommGrpCat (.up ℤ) 0).mapIso z ≪≫
+      (Y.sc 0).mapHomologyIso Q
+    z.hom.f 0 (a₀.inv x) = f.f 0 (c₀.inv y) →
+      aH.inv x = i.inv (HomologicalComplex.homologyMap f 0 (cH.inv y)) := by
+  intro P Q aH cH a₀ c₀ i h
+  let bH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso b ≪≫
+    HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 N
+  let b₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso b ≪≫
+    HomologicalComplex.singleObjXSelf (.up ℤ) 0 N
+  have hcmp : i.hom ≫ Q.map bH.hom =
+      P.map aH.hom ≫ P.map a₀.inv ≫ z.hom.f 0 ≫ Q.map b₀.hom :=
+    normalized_forget_comparison a b z
+  have hf : HomologicalComplex.homologyMap f 0 ≫ bH.hom =
+      cH.hom ≫ c₀.inv ≫ f.f 0 ≫ b₀.hom :=
+    normalized_homology_map c b f
+  apply (ConcreteCategory.bijective_of_isIso (i.hom ≫ Q.map bH.hom)).1
+  conv_lhs => rw [hcmp]
+  simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+  change b₀.hom (z.hom.f 0 (a₀.inv (aH.hom (aH.inv x)))) =
+    (HomologicalComplex.homologyMap f 0 ≫ bH.hom) (cH.inv y)
+  rw [Iso.inv_hom_id_apply, hf]
+  simp only [ConcreteCategory.comp_apply]
+  have hc : cH.hom (cH.inv y) = y :=
+    congrArg (fun k : E ⟶ E ↦ k.hom y) cH.inv_hom_id
+  erw [hc]
+  exact congrArg b₀.hom h
+
+private theorem mapped_single_homology_inv
+    {V W : Type*} [Category V] [Category W] [Abelian V] [Abelian W]
+    (F : V ⥤ W) [F.Additive] {X : CochainComplex V ℤ} {M : V}
+    (e : X ≅ (HomologicalComplex.single V (.up ℤ) 0).obj M) :
+    let H := HomologicalComplex.homologyFunctor W (.up ℤ) 0
+    let s := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app M
+    (H.mapIso ((F.mapHomologicalComplex (.up ℤ)).mapIso e ≪≫ s) ≪≫
+        HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv =
+      (H.mapIso s ≪≫
+        HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv ≫
+          HomologicalComplex.homologyMap ((F.mapHomologicalComplex (.up ℤ)).map e.inv) 0 := by
+  intro H s
+  simp only [Functor.mapIso_trans, Iso.trans_inv, Functor.mapIso_inv, Category.assoc]
+  rfl
+
 set_option backward.defeqAttrib.useBackward true in
 private theorem ordinary_section_one (A : Type u) [CommRing A]
     (U : (Spec (.of A)).Opens) :
@@ -308,8 +372,6 @@ private theorem section_iso_one (A : Type u) [CommRing A]
 
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 900000 in
--- The nested single-complex and scalar-forgetting comparisons need extra heartbeats.
 /-- The restricted ordinary class of one agrees with the tilde/sections unit class.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and its restriction to U.
 (blueprint: lem-sc-open-sections-ordinary-structure-class).
@@ -376,8 +438,6 @@ theorem openComparison_ordinary_structure_class (A : Type u) [CommRing A]
         ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A))) := by
   intro T K L C η₀ η j e₀ e₁ B S D J e ε
   let O := SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)
-  let P := forget₂ (ModuleCat.{u} B) AddCommGrpCat
-  let Q := forget₂ (ModuleCat.{u} A) AddCommGrpCat
   let X := (S.mapHomologicalComplex (.up ℤ)).obj J
   let Y := ((affineOpenSections A U).mapHomologicalComplex (.up ℤ)).obj C
   let a : X ≅ (CochainComplex.singleFunctor (ModuleCat.{u} B) 0).obj
@@ -388,84 +448,39 @@ theorem openComparison_ordinary_structure_class (A : Type u) [CommRing A]
       ((affineOpenSections A U).obj O) :=
     ((affineOpenSections A U).mapHomologicalComplex (.up ℤ)).mapIso e₁ ≪≫
     (HomologicalComplex.singleMapHomologicalComplex (affineOpenSections A U) (.up ℤ) 0).app O
-  let aH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso a ≪≫
-    HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)
-  let bH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso b ≪≫
-    HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0
-      ((affineOpenSections A U).obj O)
   let a₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso a ≪≫
     HomologicalComplex.singleObjXSelf (.up ℤ) 0 (ModuleCat.of B B)
-  let b₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso b ≪≫
-    HomologicalComplex.singleObjXSelf (.up ℤ) 0 ((affineOpenSections A U).obj O)
   let l₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso e₀ ≪≫
     HomologicalComplex.singleObjXSelf (.up ℤ) 0 (ModuleCat.of A A)
   let z := (NatIso.mapHomologicalComplex (openComparisonSectionsIso A U) (.up ℤ)).app C
+  have hdegree : z.hom.f 0 (a₀.inv (1 : B)) = η.f 0 (l₀.inv (1 : A)) := by
+    have he : a₀.inv = S.map (T.map (e₁.inv.f 0)) := by rfl
+    have hl : l₀.inv = e₀.inv.f 0 := by rfl
+    have he₁ : e₁.inv.f 0 = (koszulOpenTilde A).map (e₀.inv.f 0) := by rfl
+    have hs : z.hom.f 0 (a₀.inv (1 : B)) =
+        ((affineOpenSections A U).map (e₁.inv.f 0))
+          (tilde.toOpen (ModuleCat.of A A) U (1 : A)) := by
+      have hh := section_iso_one A U (e₁.inv.f 0)
+      rw [he]
+      exact hh
+    have hn := ConcreteCategory.congr_hom
+      (tilde.toOpen_map_app (e₀.inv.f 0) U) (1 : A)
+    rw [hs, he₁, hl]
+    exact hn
+  have h := normalized_forget_comparison_apply (R := B) (S := A)
+    (X := X) (Y := Y) (Z := L) (M := ModuleCat.of B B)
+    (N := (affineOpenSections A U).obj O) (E := ModuleCat.of A A)
+    a b e₀ z η (1 : B) (1 : A) hdegree
   have hj : j = (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso e₀ ≪≫
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of A A) :=
     extension_single_homology A
-  have hcmp : (openComparisonOrdinaryIso A U C).hom ≫ Q.map bH.hom =
-      P.map aH.hom ≫ P.map a₀.inv ≫ z.hom.f 0 ≫ Q.map b₀.hom :=
-    normalized_forget_comparison (R := B) (S := A) (X := X) (Y := Y)
-      (M := ModuleCat.of B B) (N := (affineOpenSections A U).obj O) a b z
-  have hη : HomologicalComplex.homologyMap η 0 ≫ bH.hom =
-      j.hom ≫ l₀.inv ≫ η.f 0 ≫ b₀.hom := by
-    rw [hj]
-    exact normalized_homology_map (V := ModuleCat.{u} A) (X := L) (Y := Y)
-      (M := ModuleCat.of A A) (N := (affineOpenSections A U).obj O) e₀ b η
-  have haH : aH =
-      (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso
-        ((S.mapHomologicalComplex (.up ℤ)).mapIso e) ≪≫ ε := by
-    dsimp only [aH, a, ε]
-    rw [Functor.mapIso_trans, Iso.trans_assoc]
-  have hm : HomologicalComplex.homologyMap
-      ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 ≫ aH.hom = ε.hom := by
-    rw [haH]
-    change HomologicalComplex.homologyMap
-        ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 ≫
-      (HomologicalComplex.homologyMap ((S.mapHomologicalComplex (.up ℤ)).map e.hom) 0 ≫
-        ε.hom) = ε.hom
-    rw [← HomologicalComplex.homologyMap_comp_assoc, ← Functor.map_comp,
-      Iso.inv_hom_id, CategoryTheory.Functor.map_id, HomologicalComplex.homologyMap_id,
-      Category.id_comp]
-  have hleft : aH.hom
-      (HomologicalComplex.homologyMap ((S.mapHomologicalComplex (.up ℤ)).map e.inv)
-        0 (ε.inv (1 : B))) = (1 : B) := by
-    change (HomologicalComplex.homologyMap
-      ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 ≫ aH.hom) (ε.inv (1 : B)) = _
-    rw [hm]
-    exact congrArg (fun f : ModuleCat.of B B ⟶ ModuleCat.of B B ↦ f.hom (1 : B))
-      ε.inv_hom_id
-  apply (ConcreteCategory.bijective_of_isIso
-    ((openComparisonOrdinaryIso A U C).hom ≫ Q.map bH.hom)).1
-  conv_lhs => rw [hcmp]
-  simp only [ConcreteCategory.comp_apply]
-  rw [Iso.inv_hom_id_apply]
-  change b₀.hom (z.hom.f 0 (a₀.inv (aH.hom
-      (HomologicalComplex.homologyMap ((S.mapHomologicalComplex (.up ℤ)).map e.inv)
-        0 (ε.inv (1 : B)))))) =
-    bH.hom ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A)))
-  erw [hleft]
-  change b₀.hom (z.hom.f 0 (a₀.inv (1 : B))) =
-    (HomologicalComplex.homologyMap η 0 ≫ bH.hom) (j.inv (1 : A))
-  erw [hη]
-  simp only [ConcreteCategory.comp_apply]
-  have hj' : j.hom (j.inv (1 : A)) = (1 : A) :=
-    congrArg (fun f : ModuleCat.of A A ⟶ ModuleCat.of A A ↦ f.hom (1 : A)) j.inv_hom_id
-  erw [hj']
-  apply congrArg b₀.hom
-  have he : a₀.inv = S.map (T.map (e₁.inv.f 0)) := by rfl
-  have hl : l₀.inv = e₀.inv.f 0 := by rfl
-  have he₁ : e₁.inv.f 0 = (koszulOpenTilde A).map (e₀.inv.f 0) := by rfl
-  have hs : z.hom.f 0 (a₀.inv (1 : B)) =
-      ((affineOpenSections A U).map (e₁.inv.f 0))
-        (tilde.toOpen (ModuleCat.of A A) U (1 : A)) := by
-    have hh := section_iso_one A U (e₁.inv.f 0)
-    rw [he]
-    exact hh
-  have hn := ConcreteCategory.congr_hom
-    (tilde.toOpen_map_app (e₀.inv.f 0) U) (1 : A)
-  rw [hs, he₁, hl]
-  exact hn
+  have ha : ((HomologicalComplex.homologyFunctor (ModuleCat.{u} B) (.up ℤ) 0).mapIso a ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)).inv =
+        ε.inv ≫ HomologicalComplex.homologyMap
+          ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 :=
+    mapped_single_homology_inv S e
+  erw [ha, ← hj] at h
+  exact h
 
 end
 end AlgebraicGeometry

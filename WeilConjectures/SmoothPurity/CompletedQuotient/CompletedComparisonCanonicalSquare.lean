@@ -110,7 +110,43 @@ private theorem strictPullModel_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
       (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P ≫
         DerivedCategory.Q.map ((pullBridge l E f).hom.app P) := rfl
 
-set_option maxHeartbeats 800000 in
+-- Paste the two normalization squares before specializing to the derived models.
+private theorem tensor_square_paste {C D : Type*} [Category C] [Category D]
+    (V : C ⥤ D) (T : D × D ⥤ D) (U : C × C ⥤ C)
+    {P₁ P₂ Q₁ Q₂ R S : C} {A B X₁ X₂ : D}
+    (m : A ⟶ B) (n : B ⟶ T.obj (X₁, X₂))
+    (a₁ : X₁ ⟶ V.obj P₁) (a₂ : X₂ ⟶ V.obj P₂)
+    (u : A ⟶ V.obj R) (k : R ⟶ U.obj (P₁, P₂))
+    (s : V.obj (U.obj (P₁, P₂)) ⟶ T.obj (V.obj P₁, V.obj P₂))
+    (s' : V.obj (U.obj (Q₁, Q₂)) ⟶ T.obj (V.obj Q₁, V.obj Q₂))
+    (e : R ≅ S) (b₁ : P₁ ≅ Q₁) (b₂ : P₂ ≅ Q₂)
+    (hn : m ≫ n ≫ T.map (Prod.mkHom a₁ a₂) = u ≫ V.map k ≫ s)
+    (ht : s ≫ T.map (Prod.mkHom (V.map b₁.hom) (V.map b₂.hom)) =
+      V.map (U.map (Prod.mkHom b₁.hom b₂.hom)) ≫ s') :
+    m ≫ n ≫ T.map (Prod.mkHom (a₁ ≫ V.map b₁.hom) (a₂ ≫ V.map b₂.hom)) =
+      (u ≫ V.map e.hom) ≫ V.map (e.inv ≫ k ≫ U.map (Prod.mkHom b₁.hom b₂.hom)) ≫
+        s' := by
+  rw [show T.map (Prod.mkHom (a₁ ≫ V.map b₁.hom) (a₂ ≫ V.map b₂.hom)) =
+    T.map (Prod.mkHom a₁ a₂) ≫ T.map (Prod.mkHom (V.map b₁.hom) (V.map b₂.hom)) from
+      T.map_comp (Prod.mkHom a₁ a₂) (Prod.mkHom (V.map b₁.hom) (V.map b₂.hom))]
+  simp only [← Category.assoc] at hn ⊢
+  rw [hn]
+  simp only [Category.assoc]
+  rw [ht]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← V.map_comp_assoc e.hom e.inv, e.hom_inv_id, V.map_id, Category.id_comp]
+
+private theorem inverse_square_paste {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A B : C} {U V W Z : D} (sy : A ≅ B) (sx : U ≅ V)
+    (c : F.obj B ⟶ W) (t : W ⟶ V) (p : F.obj A ⟶ Z) (k : Z ⟶ U)
+    (h : F.map sy.hom ≫ c ≫ t = p ≫ k ≫ sx.hom) :
+    F.map sy.inv ≫ p ≫ k = c ≫ t ≫ sx.inv := by
+  apply (cancel_epi (F.mapIso sy).hom).1
+  apply (cancel_mono sx.hom).1
+  simp only [Functor.mapIso_hom, Category.assoc]
+  rw [← F.map_comp_assoc, Iso.hom_inv_id, F.map_id, Category.id_comp]
+  simpa only [Iso.inv_hom_id, Category.comp_id] using h.symm
+
 -- The normalization square compares several large functor models.
 private theorem strict_system_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y)
@@ -155,27 +191,10 @@ private theorem strict_system_square {X Y : Scheme.{u}} (f : X ⟶ Y)
           (Y := ⟨(IntegralCoherence.pull l E f).obj P, hfP.1⟩) (b.hom.app P))
         (ObjectProperty.homMk (X := ⟨F.obj Q, hq⟩)
           (Y := ⟨(IntegralCoherence.pull l E f).obj Q, hfQ.1⟩) (b.hom.app Q)))).symm
-  simp only [strictPullModel_hom]
-  erw [show Prod.mkHom
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P ≫
-        DerivedCategory.Q.map ((pullBridge l E f).hom.app P))
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app Q ≫
-        DerivedCategory.Q.map ((pullBridge l E f).hom.app Q)) =
-    Prod.mkHom ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P)
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app Q) ≫
-    Prod.mkHom (DerivedCategory.Q.map ((pullBridge l E f).hom.app P))
-      (DerivedCategory.Q.map ((pullBridge l E f).hom.app Q)) from rfl]
-  rw [Functor.map_comp]
-  simp only [← Category.assoc] at hn ⊢
-  erw [hn]
-  simp only [Category.assoc]
-  rw [ht]
-  simp only [comparison, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Iso.prod_hom, Functor.map_comp, Category.assoc]
-  simp only [Iso.app_hom, Iso.app_inv, ← DerivedCategory.Q.map_comp_assoc,
-    Iso.hom_inv_id_app_assoc]
-  simp only [Functor.map_comp, Category.assoc]
-  rfl
+  simp only [strictPullModel_hom, comparison, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom, Iso.app_inv]
+  exact tensor_square_paste DerivedCategory.Q TX U _ _ _ _ _ _ _ _
+    (b.app (StrictQuotient.total l E P Q)) (b.app P) (b.app Q) hn ht
 
 private theorem tensor_reduction {W : Scheme.{u}}
     {K H : DerivedCategory (scalarReductionSource l E W)}
@@ -233,7 +252,6 @@ private theorem pull_reduction {V W : Scheme.{u}} (g : V ⟶ W)
   simpa only [v, strictPullModel_hom, Functor.comp_map, Functor.id_map,
     ← L.map_comp, R, L, pullbackTensorReferencePullback, Functor.comp_obj] using hn
 
-set_option maxHeartbeats 1600000 in
 -- Keep counit cancellation explicit across the derived operation models.
 /-- Source: Stacks 07A4, 0941; the integral comparison counit construction.
 (blueprint: lem-pur-completed-comparison-canonical-square).
@@ -274,12 +292,8 @@ theorem completedComparisonCanonicalSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
         DerivedCategory.Q.map (comparison l E f A B).hom =
       C.hom.app (DerivedCategory.Q.obj A, DerivedCategory.Q.obj B) ≫
         T.map (Prod.mkHom p q) ≫ sx.inv := by
-    apply (cancel_epi (F.mapIso sy).hom).1
-    apply (cancel_mono sx.hom).1
-    simp only [Functor.mapIso_hom, Category.assoc]
-    rw [← F.map_comp_assoc, Iso.hom_inv_id, F.map_id, Category.id_comp]
-    simp only [Iso.inv_hom_id, Category.comp_id]
-    exact (strict_system_square l E f A B hA hB hfA hfB).symm
+    exact inverse_square_paste F sy sx _ _ _ _
+      (strict_system_square l E f A B hA hB hfA hfB)
   have hn := C.hom.naturality (Prod.mkHom a b)
   dsimp only [Functor.comp_map, Functor.prod_map] at hn
   rw [pullSubstitution, tensor_reduction]

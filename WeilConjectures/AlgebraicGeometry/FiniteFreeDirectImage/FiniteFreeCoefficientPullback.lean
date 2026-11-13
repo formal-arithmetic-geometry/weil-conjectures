@@ -247,8 +247,22 @@ private def transportedCoefficientBasis {Z W : Scheme.{u}} {q : Z ⟶ W}
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≪≫
     (proEtaleRingRestrictScalars a.source).mapIso (pullbackRegularIso S)
 
-set_option maxHeartbeats 700000 in
--- The expanded finite-product and coefficient transports require extra elaboration heartbeats.
+-- Compute the coordinate before specializing to the geometric pullback functors.
+private theorem transportedBasisCoordinate {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {ι : Type*} (O : C) (O' : D)
+    [HasProduct (fun _ : ι ↦ O)] [HasProductsOfShape ι D]
+    [PreservesLimit (Discrete.functor (fun _ : ι ↦ O)) F]
+    {A : C} {B B' : D} (e : F.obj O ≅ O')
+    (θ : (∏ᶜ fun _ : ι ↦ O) ≅ A) (ρ : F.obj A ≅ B) (σ : B ≅ B') (i : ι) :
+    F.map (θ.inv ≫ Pi.π _ i) ≫ e.hom =
+      ρ.hom ≫ σ.hom ≫
+        (Pi.mapIso (fun _ : ι ↦ e.symm) ≪≫
+          (PreservesProduct.iso F (fun _ : ι ↦ O)).symm ≪≫ F.mapIso θ ≪≫ ρ ≪≫ σ).inv ≫
+        Pi.π _ i := by
+  simp only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv, Category.assoc,
+    Iso.hom_inv_id_assoc, Pi.mapIso_inv_π, PreservesProduct.iso_hom,
+    piComparison_comp_π_assoc, Functor.map_comp]
+
 private theorem transportedCoefficientBasis_coordinate {Z W : Scheme.{u}} {q : Z ⟶ W}
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
     (θ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology W)
@@ -264,25 +278,12 @@ private theorem transportedCoefficientBasis_coordinate {Z W : Scheme.{u}} {q : Z
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≫
       (proEtaleRingRestrictScalars a.source).map (pullbackRegularIso S).hom ≫
       (transportedCoefficientBasis R S a d θ).inv ≫ Pi.π _ i := by
-  let F := proEtaleRingModulePullback q R.target R.source R.identification
-  let U := proEtaleRingRestrictScalars a.source
-  let ρ := asIso (proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
-    a.target a.source R.identification S.identification a.comm)
-  simp only [transportedCoefficientBasis, Iso.trans_inv, Iso.symm_inv,
-    Functor.mapIso_inv, Iso.app_inv, Category.assoc]
-  rw [← U.map_comp_assoc, Iso.hom_inv_id, U.map_id, Category.id_comp]
-  let O := SheafOfModules.unit ((sheafCompose (ProEt.topology W)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)
-  let OS := SheafOfModules.unit ((sheafCompose (ProEt.topology W)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)
-  change F.map (θ.inv ≫ Pi.π _ i) ≫ (pullbackRegularIso R).hom =
-    ρ.hom.app OS ≫ ρ.inv.app OS ≫ F.map θ.inv ≫
-      (PreservesProduct.iso F (fun _ : Fin d ↦ O)).hom ≫
-      (Pi.mapIso (fun _ : Fin d ↦ (pullbackRegularIso R).symm)).inv ≫ Pi.π _ i
-  rw [ρ.hom_inv_id_app_assoc, Pi.mapIso_inv_π]
-  simp only [Functor.map_comp, Category.assoc, Iso.symm_inv]
-  rw [PreservesProduct.iso_hom]
-  rw [piComparison_comp_π_assoc]
+  exact transportedBasisCoordinate
+    (proEtaleRingModulePullback q R.target R.source R.identification) _ _
+    (pullbackRegularIso R) θ
+    ((asIso (proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
+      a.target a.source R.identification S.identification a.comm)).app _)
+    ((proEtaleRingRestrictScalars a.source).mapIso (pullbackRegularIso S)) i
 
 private theorem restrictionPullback_unit {Z W : Scheme.{u}} {q : Z ⟶ W}
     (R S : Coefficients q) (a : CoefficientMap R S)
