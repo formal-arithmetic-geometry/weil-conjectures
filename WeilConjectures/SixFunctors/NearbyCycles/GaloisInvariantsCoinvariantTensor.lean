@@ -331,6 +331,45 @@ private lemma tensor_coinvariant_isColimit (T₀ : Type)
     (fun p ↦ (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N
       T K hcab a f' p).some) V b hV q
 
+/-- A projector with the coinvariant property for continuous functors has that property
+on the homology of its pullback tensored with a bounded below complex. -/
+private lemma tensor_coinvariant_property (T₀ : Type)
+    [TopologicalSpace T₀] [Field T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀] [Finite T₀]
+    [QuasiCompact N.j] [QuasiSeparated N.j]
+    {Yinf : Scheme.{u}} {ginf : Yinf ⟶ N.generic} [WeaklyEtale ginf] (T : GaloisTower ginf)
+    {Z : Scheme.{u}} (f' : Z ⟶ X')
+    {Y : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X'))}
+    (p : Y ⟶ Y) {κ : Type*} (act : κ → (Y ⟶ Y))
+    (hcoinv : ∀ (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) ⥤
+            Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+              (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)) [G.Additive],
+        (∀ (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+            (condensedRingObj (Profinite.continuousMapRingObj T₀) N.generic)) ℤ) (a : ℤ)
+            [K.IsStrictlyGE a], (∀ n, IsColimit (T.abCocone (K.X n).X)) →
+          Nonempty (IsColimit ((DerivedCategory.Q ⋙
+            R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+              L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ G).mapCocone
+                (T.complexCocone (Profinite.continuousMapRingObj T₀) K)))) →
+        ∀ {W : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)} (φ : G.obj Y ⟶ W),
+        (∀ k, G.map (act k) ≫ φ = φ) → G.map p ≫ φ = φ) :
+    ∀ (q : ℤ) (V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousMapRingObj T₀) Z))) (b : ℤ), V.IsGE b →
+        ∀ {W : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)}
+        (φ : (DerivedCategory.homologyFunctor _ q).obj
+          (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).obj Y ⊗ V) ⟶ W),
+        (∀ k, (DerivedCategory.homologyFunctor _ q).map
+          (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map (act k) ▷ V) ≫ φ = φ) →
+        (DerivedCategory.homologyFunctor _ q).map
+          (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map p ▷ V) ≫ φ = φ := by
+  intro q V b hV W φ hφ
+  exact hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
+    DerivedCategory.homologyFunctor _ q)
+    (fun K a _ hcab ↦ tensor_coinvariant_isColimit N T₀ T K a hcab f' V b hV q) φ hφ
+
 set_option profiler true in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
@@ -372,10 +411,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ :=
   (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
     T₀ N h Ω hp C hC act hact).imp fun _ hr ↦
-      ⟨hr.1, fun q V b hV W φ hφ ↦ hr.2 (Z := Z) (W := W)
-        (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
-          DerivedCategory.homologyFunctor _ q)
-        (fun K a _ hcab ↦
-          tensor_coinvariant_isColimit N T₀ (galoisTower Ω h) K a hcab f' V b hV q) φ hφ⟩
+      ⟨hr.1, tensor_coinvariant_property N T₀ (galoisTower Ω h) f' _ _ (hr.2 (Z := Z))⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
