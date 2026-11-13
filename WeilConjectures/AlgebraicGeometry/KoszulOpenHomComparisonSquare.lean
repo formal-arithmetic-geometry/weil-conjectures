@@ -20,6 +20,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option maxHeartbeats 800000 in
+set_option profiler true in
 /-- The stage Hom and restricted structure-Hom identifications intertwine the canonical
 Koszul comparison with restriction and augmentation.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5, and Tag 08D1.
@@ -88,6 +90,9 @@ theorem koszulOpenHom_comparison_square
       (D := SheafOfModules.{uMain}
         (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
       (Scheme.Modules.overEquiv (koszulOpen A r f))
+  letI : F₀.Additive := Functor.additive_of_preserves_binary_products F₀
+  letI : G₀.Additive := Functor.additive_of_preserves_binary_products G₀
+  letI : (F₀ ⋙ G₀).Additive := Functor.additive_of_preserves_binary_products (F₀ ⋙ G₀)
   let R := (F₀ ⋙ G₀).mapDerivedCategory
   let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0
   let D := koszulCechHomDiagram A r f
