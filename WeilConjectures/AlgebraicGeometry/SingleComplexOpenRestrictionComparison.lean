@@ -27,8 +27,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- Elaborating the sheaf tensor comparisons and their naturality needs this budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restricting a single-complex base-change problem to compatible base opens gives
@@ -108,9 +106,9 @@ theorem singleComplexBaseChange_openRestrictionComparison
     have hφ : singleComplexRestrictedCoefficient g' K K' φ
         (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj = δ ≫ R'.map φ := by
       dsimp only [δ, singleComplexRestrictedCoefficient, R']
-      rw [CategoryTheory.Functor.map_id]
-      simp only [Category.comp_id, Category.assoc]
-    rw [Functor.map_comp, hb, hφ, Functor.map_comp]
+      simp only [(schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.map_id
+        ((derivedPullback g').obj K), Category.comp_id, Category.assoc]
+    simp only [Functor.map_comp, hb, hφ]
     have hn := b.inv.naturality φ
     dsimp only [Functor.comp_map] at hn
     simp only [Category.assoc, Iso.app_inv]
