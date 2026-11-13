@@ -213,6 +213,7 @@ theorem singleComplexOpen_pullback_cube
     (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j
     (morphismRestrict_ι f V) (morphismRestrict_ι f' V')
     (Scheme.Hom.resLE_comp_ι g hV') hj h₀ M
+  dsimp only [d, d', e, e']
   simp only [openSquare_app f V (f ⁻¹ᵁ V) (f ∣_ V) (morphismRestrict_ι f V) M,
     openSquare_app g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj ((derivedPullback f).obj M),
     openSquare_app g V V' (g.resLE V V' hV') (Scheme.Hom.resLE_comp_ι g hV') M,

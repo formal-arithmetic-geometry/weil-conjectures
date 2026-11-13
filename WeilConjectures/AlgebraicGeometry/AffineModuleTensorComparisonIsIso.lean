@@ -85,14 +85,14 @@ set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
 private theorem adjunction_counit_factorization_triangle
-    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
-    (adj : L ⊣ R) {X Y : D} (g : L.obj (R.obj X) ⟶ Y) (a : Y ⟶ X)
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {G : D ⥤ C}
+    (adj : L ⊣ G) {X Y : D} (g : L.obj (G.obj X) ⟶ Y) (a : Y ⟶ X)
     (h : g ≫ a = adj.counit.app X) :
-    adj.homEquiv (R.obj X) Y g ≫ R.map a = 𝟙 (R.obj X) := by
+    adj.homEquiv (G.obj X) Y g ≫ G.map a = 𝟙 (G.obj X) := by
   rw [← adj.homEquiv_naturality_right, h, ← adj.homEquiv_symm_id]
   exact Equiv.apply_symm_apply _ _
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
 performs the affine inverse calculation and the passage from affine opens to sheaves.
