@@ -95,6 +95,31 @@ private theorem roosMap_level
   simpa only [HomologicalComplex.comp_f, Category.assoc] using
     congrArg ((CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫ ·) h
 
+private theorem roosMap_snd_zero
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {P : CochainComplex A ℤ} {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (f : P ⟶ integralOperationsRoosFunctor.obj V) (α : V ⟶ W) (i : ℤ)
+    (h : f.f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary V)).v i (i - 1) (by omega) = 0) :
+    (f ≫ integralOperationsRoosFunctor.map α).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary W)).v i (i - 1) (by omega) = 0 := by
+  rw [HomologicalComplex.comp_f, Category.assoc, roosMap_snd, ← Category.assoc, h,
+    zero_comp]
+
+private theorem roosMap_level_iso_hom
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {P Q : CochainComplex A ℤ} {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (f : P ⟶ Q) (g : Q ⟶ integralOperationsRoosFunctor.obj V)
+    (e : W ≅ V) (n : ℕ) (i : ℤ) :
+    ((f ≫ g ≫ integralOperationsRoosFunctor.map e.inv).f i ≫
+        (CochainComplex.mappingCocone.fst (scalarRoosBoundary W)).f i ≫
+        (Pi.π (fun m : ℕ ↦ W.obj (op m)) n).f i) ≫ (e.hom.app (op n)).f i =
+      (f ≫ g).f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
+        (Pi.π (fun m : ℕ ↦ V.obj (op m)) n).f i := by
+  simp only [HomologicalComplex.comp_f, Category.assoc, roosMap_level]
+  rw [← HomologicalComplex.comp_f, Iso.inv_hom_id_app, HomologicalComplex.id_f,
+    Category.comp_id]
+
 attribute [local irreducible] HasDerivedCategory.standard
   integralComparisonSequenceScalarModel coefficientSequenceRestriction coefficientSequenceLimit
   integralScalarExtensionOfUniverses completedDerivedScalarExtension
@@ -276,15 +301,12 @@ theorem scalarTensorRoosCoordinates
   dsimp only
   refine ⟨?_, ?_, ?_⟩
   · intro i
-    simp only [HomologicalComplex.comp_f, Category.assoc]
-    erw [roosMap_snd]
-    erw [reassoc_of% (completedScalarChainComparison_spec l E L ι X).2 P i]
-    simp only [zero_comp]
+    exact roosMap_snd_zero _ qEL.inv i
+      ((completedScalarChainComparison_spec l E L ι X).2 P i)
   · intro i
-    simp only [HomologicalComplex.comp_f, Category.assoc]
-    erw [roosMap_snd]
-    erw [reassoc_of% (completedScalarChainComparison_spec l E F (j.comp ι) X).2 P i]
-    simp only [zero_comp, comp_zero]
+    rw [HomologicalComplex.comp_f, Category.assoc,
+      roosMap_snd_zero _ _ i ((completedScalarChainComparison_spec l E F (j.comp ι) X).2 P i),
+      comp_zero]
   · intro n i U s t x y h
     let D := ((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex
       (.up ℤ)).obj C
@@ -308,21 +330,13 @@ theorem scalarTensorRoosCoordinates
       ((HomologicalComplex.eval _ (.up ℤ) i).mapIso ((wa ≪≫ qEF).app (op n)))
     apply (ConcreteCategory.bijective_of_isIso eU.hom).1
     dsimp only [eU, Functor.mapIso_hom]
-    simp only [HomologicalComplex.comp_f, Category.assoc]
-    erw [roosMap_level]
-    change (((((qEF.inv ≫ wa.inv) ≫ (wa ≪≫ qEF).hom).app (op n)).f i).val.app U)
-        (((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
-          (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫
-          (completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
-          (CochainComplex.mappingCocone.fst
-            (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
-          (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E F (j.comp ι) X).obj P).obj
-            (op m)) n).f i).val.app U)
-          (completedScalarTensorSection l L F j X _ U s
-            (completedScalarTensorSection l E L ι X (P.X i) U t x))) = _
-    simp only [Iso.trans_hom, Category.assoc, Iso.inv_hom_id_assoc,
-      Iso.inv_hom_id, NatTrans.id_app, HomologicalComplex.id_f,
-      SheafOfModules.id_val]
+    change (((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
+        (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫
+        (completedScalarChainComparison l E F (j.comp ι) X).app P ≫
+        integralOperationsRoosFunctor.map (wa ≪≫ qEF).inv).f i ≫
+        (CochainComplex.mappingCocone.fst (scalarRoosBoundary _)).f i ≫
+        (Pi.π _ n).f i) ≫ ((wa ≪≫ qEF).hom.app (op n)).f i).val.app U) _ = _
+    rw [roosMap_level_iso_hom]
     change ((((completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
       (CochainComplex.mappingCocone.fst
         (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
