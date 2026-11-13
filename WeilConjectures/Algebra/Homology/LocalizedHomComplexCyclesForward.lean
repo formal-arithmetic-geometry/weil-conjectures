@@ -19,7 +19,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 /-- The projection components of a localized degree-zero cycle form a chain map.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
@@ -92,6 +91,7 @@ theorem localizedHomComplex_cycles_forward
     have hzπ := (congrArg ((π L I 1 p q hpq).val.app (op U)) hz).trans
       ((π L I 1 p q hpq).val.app (op U)).hom.map_zero
     have hc := sub_eq_zero.mp (he.symm.trans hzπ)
+    -- Compare components before unfolding the two restriction constructions.
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro W

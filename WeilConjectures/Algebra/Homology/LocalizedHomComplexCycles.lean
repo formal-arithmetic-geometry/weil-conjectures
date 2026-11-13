@@ -73,8 +73,9 @@ theorem localizedHomComplex_cycles_aux
       (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),
         ((e z).f p).val.app W =
           (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) := by
+  intro R₀ H π S _ res
   classical
-  obtain ⟨f, hf⟩ := localizedHomComplex_cycles_forward (C := C) J R U L I hzero
+  refine (localizedHomComplex_cycles_forward (C := C) J R U L I hzero).elim fun f hf ↦ ?_
   exact ⟨Equiv.ofBijective f
     (localizedHomComplex_cycles_bijective (C := C) J R U L I hzero f hf), hf⟩
 

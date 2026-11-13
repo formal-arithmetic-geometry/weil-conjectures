@@ -28,7 +28,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 /-- A localized chain map lifts to a sectionwise degree-zero cycle.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
@@ -157,6 +156,7 @@ theorem localizedHomComplex_cycle_lift
   change S.iCycles 0 ((S.sc 0).abCyclesIso.inv ⟨x, hk⟩) = x at hz
   change (((π L I 0 p p (add_zero p)).val.app (op U))
     (S.iCycles 0 ((S.sc 0).abCyclesIso.inv ⟨x, hk⟩))).app W = (g.f p).val.app W
+  -- Transport the section equalities without rewriting the dependent projection types.
   exact congrArg (fun y ↦ y.app W)
     ((congrArg ((π L I 0 p p (add_zero p)).val.app (op U)) hz).trans (hx p))
 
