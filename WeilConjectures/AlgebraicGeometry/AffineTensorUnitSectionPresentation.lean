@@ -191,6 +191,7 @@ private theorem scalar_tensor_presentation
       rw [map_sub, hrel, sub_self]
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The affine comparisons unfold dependent section-module scalar restrictions.
 /-- Affine sections of the two tensor operations are the quotient of the first tensor
 product by the diagonal-action relations. The map on unit tensors is canonical.

@@ -73,6 +73,7 @@ set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The two transported tensor adjunctions require extra definitional-equality checks.
 /-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
