@@ -302,6 +302,7 @@ private theorem projectionMap_laxSquare
   erw [whisker_exchange_assoc, whisker_exchange_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc]
+  rw [Category.assoc]
   erw [hunit]
 
 /-- The derived adjunction `D(u_!) ⊣ Lu^*` for an étale morphism `u`, with the right adjoint
@@ -320,7 +321,6 @@ noncomputable def derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction {U : Sch
     (.up ℤ)).localization DerivedCategory.Qh (HomotopyCategory.quasiIso _ _)
       DerivedCategory.Qh (HomotopyCategory.quasiIso _ _) _ _
 
-set_option profiler true in
 omit [HasSmallSiteSheafify A] in
 open HomotopyCategory _root_.DerivedCategory in
 /-- On objects coming from cochain complexes, the derived projection map of `D(u_!) ⊣ Lu^*` is
