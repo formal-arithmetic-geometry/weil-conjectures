@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 
 /-! # Finite affine realizations of coherent algebras with proper support
@@ -38,13 +38,6 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
--- v4.35 tree: this override is still needed here (green in bumpF builds up to 81, timeout without
--- it in build83);
--- master removed it on the pre-bump tree.
-set_option maxHeartbeats 600000 in
--- needed on the v4.35 toolchain: the elaboration exceeds the default heartbeat budget
-set_option synthInstance.maxHeartbeats 200000 in
--- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- An affine realization of a coherent algebra is finite, and proper over the base
@@ -71,47 +64,11 @@ theorem coherent_algebra_affine_finite_proper
     (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X B.toModule).mp hB
   have : B.toModule.IsQuasicoherent := hq
   have : B.toModule.IsFiniteType := ht
-  have hfinite_over (X : Scheme.{u}) (F : X.Modules) [F.IsFiniteType]
-      (U : X.Opens) : (F.over U).IsFiniteType := by
-    classical
-    obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
-    let G := Over.forget U
-    let J := Opens.grothendieckTopology X
-    let K := J.over U
-    let S := X.ringCatSheaf.over U
-    let φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} K J).obj X.ringCatSheaf := 𝟙 _
-    let d : (F.over U).LocalGeneratorsData :=
-      { I := Σ (V : Over U) (i : q.I), G.obj V ⟶ q.X i
-        X := fun i ↦ i.1
-        coversTop := fun V ↦ by
-          refine K.superset_covering ?_ (G.cover_lift K _ (q.coversTop (G.obj V)))
-          intro W g ⟨i, ⟨v⟩⟩
-          exact ⟨⟨W, i, v⟩, ⟨𝟙 _⟩⟩
-        generators := fun i ↦ by
-          let G' := Over.post (X := i.1) G ⋙ Over.map i.2.2
-          have : G'.IsContinuous (K.over i.1) (J.over (q.X i.2.1)) :=
-            Functor.isContinuous_comp _ _ _ (J.over _) _
-          have : G'.IsCocontinuous (K.over i.1) (J.over (q.X i.2.1)) :=
-            isCocontinuous_comp _ _ _ (J.over _)
-          let ψ : S.over i.1 ⟶
-              (G'.sheafPushforwardContinuous RingCat.{u} (K.over i.1)
-                (J.over (q.X i.2.1))).obj (X.ringCatSheaf.over (q.X i.2.1)) :=
-            ((Over.forget i.1).sheafPushforwardContinuous RingCat.{u} (K.over i.1) K).map φ
-          have : (SheafOfModules.pushforward.{u} ψ).IsLeftAdjoint :=
-            SheafOfModules.isLeftAdjoint_pushforward_of_isIso.{u} ψ
-          exact (q.generators i.2.1).map (SheafOfModules.pushforward.{u} ψ) (Iso.refl _) }
-    apply SheafOfModules.IsFiniteType.mk (R := X.ringCatSheaf.over U)
-    refine ⟨d, ?_⟩
-    refine SheafOfModules.LocalGeneratorsData.IsFiniteType.mk (p := d) (fun i ↦ ?_)
-    have := hq.isFiniteType i.2.1
-    dsimp only [d]
-    infer_instance
   have hg : IsFinite g := by
     refine (isFinite_iff g).mpr ⟨inferInstance, ?_⟩
     intro U hU
     have hf : Module.Finite Γ(X, U) Γ(B.toModule, U) :=
-      (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} X).2 B.toModule hq).1 U hU).1.mp
-        (hfinite_over X B.toModule U)
+      Scheme.Modules.coherent_affine_sections_finite X B.toModule hB U hU
     let e : B.right.obj.obj (op U) ⟶ Γ(Y, g ⁻¹ᵁ U) := α.hom.right.hom.app (op U)
     let ei := α.inv.right.hom.app (op U)
     let φ : Γ(B.toModule, U) →ₗ[Γ(X, U)]
