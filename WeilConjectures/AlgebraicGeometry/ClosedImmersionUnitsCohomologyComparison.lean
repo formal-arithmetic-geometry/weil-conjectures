@@ -68,7 +68,6 @@ private theorem epi_pushforward_closedEmbedding
     rw [map_zero]
     exact hzero.symm
 
-set_option profiler true in
 /-- The Ext-adjunction bijection remains bijective after identifying its source object
 by an isomorphism. Precomposition commutes with composition by the counit. -/
 private theorem bijective_extMap_counit_precomp
@@ -93,7 +92,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
 /-- The canonical comparison from cohomology of the direct image of units to cohomology
 of units is bijective in every degree.
 Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY, the sentence
