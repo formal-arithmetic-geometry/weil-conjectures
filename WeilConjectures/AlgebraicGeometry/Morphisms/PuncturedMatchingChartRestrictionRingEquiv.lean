@@ -58,8 +58,6 @@ private theorem principalOpen_image
     inf_eq_right.mpr hf]
   exact SpecMap_preimage_basicOpen D.baseMap f
 
-set_option maxHeartbeats 600000 in
--- The dependent chart equivalences and their scalar actions require extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem matching_chart_kernel
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
@@ -116,10 +114,9 @@ private theorem matching_chart_kernel
   intro z hz
   have hcoord : (b.symm z).val.2 0 = 0 := by
     apply c.injective
-    rw [map_zero]
-    have hc' : ψ (ρ (b (b.symm z))) = c ((b.symm z).val.2 0) := hc (b.symm z)
-    rw [b.apply_symm_apply] at hc'
-    exact hc'.symm.trans hz
+    exact (hc (b.symm z)).symm.trans
+      ((congrArg (fun x ↦ ψ (ρ x)) (b.apply_symm_apply z)).trans
+        (hz.trans c.map_zero.symm))
   have hzero : LocalizedModule.mk (S := Submonoid.powers (g' 0)) (b.symm z) 1 =
       LocalizedModule.mk (0 : FormalGlueing.h0 (algebraMap A C) g' X) 1 := by
     apply hbij.injective
@@ -130,11 +127,12 @@ private theorem matching_chart_kernel
     (f := LocalizedModule.mkLinearMap _ (FormalGlueing.h0 (algebraMap A C) g' X)) hzero
   obtain ⟨n, hn⟩ := a.property
   refine ⟨n, ?_⟩
+  change (a : A) • b.symm z = (a : A) •
+    (0 : FormalGlueing.h0 (algebraMap A C) g' X) at ha
   have hb := congrArg b ha
-  simp only [map_smul, smul_zero, LinearEquiv.map_zero, b.apply_symm_apply,
-    Submonoid.smul_def, ← hn, g', Fin.cons_zero, Algebra.smul_def, map_pow] at hb
-  have hbase : algebraMap A D.matchingRing = D.baseMap.hom := rfl
-  rw [hbase] at hb
+  simp only [b.map_smul, smul_zero, b.map_zero, b.apply_symm_apply] at hb
+  change D.baseMap.hom (a : A) * z = 0 at hb
+  rw [← hn, map_pow] at hb
   exact hb
 
 /-- The localized formal-gluing comparison is a ring equivalence on the
