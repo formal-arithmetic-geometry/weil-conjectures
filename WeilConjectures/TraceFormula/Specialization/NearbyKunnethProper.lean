@@ -63,22 +63,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
--- Reuse tensor preservation of colimits throughout the graded tensor constructions.
--- Public declarations make these available in theorem statements; instance search stays local.
-local instance (priority := 10000) properTensorLeftColimit (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
-    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimit V ((MonoidalCategory.curriedTensor _).obj M) := by
-  infer_instance
-
-local instance (priority := 10000) properTensorRightColimit (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
-    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimit V ((MonoidalCategory.curriedTensor _).flip.obj M) := by
-  infer_instance
-
 variable {ℓ : ℕ} [Fact ℓ.Prime]
 
 namespace NearbyCyclesModel
@@ -209,6 +193,8 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
+set_option maxHeartbeats 1600000 in
+-- the triangle of the Künneth map has large terms
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product `P` over the
 strictly henselian trait of models `M`, `N` of finite type along proper structure morphisms, with

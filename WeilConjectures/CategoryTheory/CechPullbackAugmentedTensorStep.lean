@@ -23,13 +23,8 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
-
--- Cache sheaf preservation before elaborating the statement, with priority over the general
--- multicospan-limit instance search.
-local instance (priority := 20000) cechPullbackHasSheafCompose {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) :
-    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
-
+set_option maxHeartbeats 2000000 in
+-- The successor clause contains several chosen total-complex instances.
 /-- One successor step of the finite Cech comparison, including its augmentation.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
 Proof: expand the successor clause of ringedExtendedCech. The adjunction makes F additive

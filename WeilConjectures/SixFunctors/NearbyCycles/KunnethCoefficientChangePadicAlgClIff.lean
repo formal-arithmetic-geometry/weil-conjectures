@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangePadicAlgCl
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -35,56 +34,12 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
--- Reuse the tensor and colimit instances at each occurrence of a derived functor.
--- Public restatements of the shortcut instances of `ShortcutInstances`, which is imported
--- privately (a public import would be re-exported to every dependent and change its instance
--- resolution); the local instance attribute needs them in the exported view (theorem headers).
-theorem hasTensor₄ObjExt_kunnethCoefficientChangePadicAlgClIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
-  hasTensor₄ObjExt_mod T R X₁ X₂ X₃ X₄
-
-theorem hasGoodTensor₁₂Tensor_kunnethCoefficientChangePadicAlgClIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
-  hasGoodTensor₁₂Tensor_mod T R X₁ X₂ X₃
-
-theorem hasGoodTensorTensor₂₃_kunnethCoefficientChangePadicAlgClIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
-  hasGoodTensorTensor₂₃_mod T R X₁ X₂ X₃
-
-theorem hasColimitsOfShape_int_kunnethCoefficientChangePadicAlgClIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
-    HasColimitsOfShape ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :=
-  hasColimitsOfShape_int_mod T R
-
-theorem preservesColimitsOfShape_int_curriedTensor_obj_kunnethCoefficientChangePadicAlgClIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_obj_mod T R M
-
-theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethCoefficientChangePadicAlgClIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod T R M
-
-attribute [local instance] hasTensor₄ObjExt_kunnethCoefficientChangePadicAlgClIff
-  hasGoodTensor₁₂Tensor_kunnethCoefficientChangePadicAlgClIff
-  hasGoodTensorTensor₂₃_kunnethCoefficientChangePadicAlgClIff
-  hasColimitsOfShape_int_kunnethCoefficientChangePadicAlgClIff
-  preservesColimitsOfShape_int_curriedTensor_obj_kunnethCoefficientChangePadicAlgClIff
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethCoefficientChangePadicAlgClIff
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
+set_option maxHeartbeats 2000000 in
+-- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` is invertible if and only if `Π_{A,B}` is. -/
@@ -113,6 +68,8 @@ theorem isIso_map_map_kunnethMap_iff_padicAlgCl [QuasiCompact M.j] [QuasiSeparat
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_map_kunnethMap_padicAlgCl ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
+set_option maxHeartbeats 2000000 in
+-- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`, for every `h : W ⟶ Z'`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{A,B}` is. -/

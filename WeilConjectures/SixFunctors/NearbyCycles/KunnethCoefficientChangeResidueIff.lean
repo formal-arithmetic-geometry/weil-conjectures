@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidue
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -33,56 +32,13 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
--- Reuse the graded tensor and colimit instances needed by each derived functor.
--- Public restatements of the shortcut instances of `ShortcutInstances`, which is imported
--- privately (a public import would be re-exported to every dependent and change its instance
--- resolution); the local instance attribute needs them in the exported view (theorem headers).
-theorem hasTensor₄ObjExt_kunnethCoefficientChangeResidueIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
-  hasTensor₄ObjExt_mod T R X₁ X₂ X₃ X₄
-
-theorem hasGoodTensor₁₂Tensor_kunnethCoefficientChangeResidueIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
-  hasGoodTensor₁₂Tensor_mod T R X₁ X₂ X₃
-
-theorem hasGoodTensorTensor₂₃_kunnethCoefficientChangeResidueIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
-  hasGoodTensorTensor₂₃_mod T R X₁ X₂ X₃
-
-theorem hasColimitsOfShape_int_kunnethCoefficientChangeResidueIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
-    HasColimitsOfShape ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :=
-  hasColimitsOfShape_int_mod T R
-
-theorem preservesColimitsOfShape_int_curriedTensor_obj_kunnethCoefficientChangeResidueIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_obj_mod T R M
-
-theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethCoefficientChangeResidueIff
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod T R M
-
-attribute [local instance] hasTensor₄ObjExt_kunnethCoefficientChangeResidueIff
-  hasGoodTensor₁₂Tensor_kunnethCoefficientChangeResidueIff
-  hasGoodTensorTensor₂₃_kunnethCoefficientChangeResidueIff
-  hasColimitsOfShape_int_kunnethCoefficientChangeResidueIff
-  preservesColimitsOfShape_int_curriedTensor_obj_kunnethCoefficientChangeResidueIff
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethCoefficientChangeResidueIff
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
+
+set_option maxHeartbeats 1000000 in
+-- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` is invertible if and
 only if `Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
@@ -106,6 +62,8 @@ theorem isIso_map_kunnethMap_iff_residueField (φ₁ : P.Hom M f₁ f₁') (φ�
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_kunnethMap_residueField ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
+set_option maxHeartbeats 1000000 in
+-- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: under the hypotheses of
 `NearbyCyclesModel.isIso_map_kunnethMap_iff_residueField`, for every `h : W ⟶ Z'`,
 `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/

@@ -265,21 +265,6 @@ noncomputable def genericPath : fiber (pointOfAlgebra Ω (genericPointLift j)) �
 noncomputable def genericGaloisMap : Gal(Ω/C.functionField) →* GU :=
   galoisToFundamentalGroup (genericPointLift j) (genericPath j sU) GU
 
--- Make the action on the integral closure explicit so synthesis does not search through
--- `SeparableClosure` and its integral closures while elaborating stabilizers.
-noncomputable local instance boundarySmulCommClass {z : C} (c : BoundaryChart p j z) :
-    SMulCommClass Gal(Ω/C.functionField) Γ(C, c.W) Ω :=
-  AlgEquiv.smulCommClass_of_isScalarTower (Γ(C, c.W)) C.functionField Ω
-noncomputable local instance boundaryIntegralClosureAction {z : C} (c : BoundaryChart p j z) :
-    MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
-noncomputable local instance boundaryIdealAction {z : C} (c : BoundaryChart p j z) :
-    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) where
-  smul g I := I.map (MulSemiringAction.toRingHom _ _ g)
-  one_smul I :=
-    congr_arg (I.map ·) (RingHom.ext <| one_smul Gal(Ω/C.functionField)) |>.trans I.map_id
-  mul_smul g h I :=
-    congr_arg (I.map ·) (RingHom.ext <| mul_smul g h) |>.trans (I.map_map _ _).symm
-
 section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
@@ -434,6 +419,8 @@ lemma BoundaryChart.restrictionMap_genericGaloisMap (σ : Gal(Ω/C.functionField
   refine IsFundamentalGroup.non_trivial (F := fiber sC) _ fun P y ↦ ?_
   rw [mul_smul, key, smul_inv_smul]
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Frobenius lifts in the decomposition group.** Some element of the decomposition group of `Q`
 restricts to a Frobenius element at `z` in `π₁(C₀)`: one inducing the inverse of the arithmetic
@@ -470,6 +457,7 @@ noncomputable def boundaryInertia (z : ↥((Set.range j.base)ᶜ)) :
   (inertiaGroup sU GU (boundaryChart (p := p) j z) (boundaryChart (p := p) j z).point).comap
     ((MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype) ⊓ (weilGroupDeg pU sU GU).ker
 
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma exists_boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) :
@@ -485,6 +473,7 @@ its residue field. -/
 noncomputable def boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) : Gal(Ω/C.functionField) :=
   (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose
 
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma boundaryFrobeniusLift_mem_stabilizer (z : ↥((Set.range j.base)ᶜ)) :
@@ -528,6 +517,7 @@ lemma isConj_restrictionHom_boundaryResidueFrobenius (z : ↥((Set.range j.base)
     Multiplicative.ofAdd (p.degreeOver z.1 : ℤ)
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
 
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] [IsCurve pU] in
 /-- An element of `W(U₀)` mapping into the decomposition group conjugates the inertia group at `z`

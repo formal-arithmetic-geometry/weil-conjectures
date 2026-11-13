@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import
   WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
 
@@ -194,51 +193,7 @@ universe u
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {T X : Scheme.{u}}
 
--- The generic instance search behind every `L(-)` in the statements below is slow.
--- Public restatements of the shortcut instances of `ShortcutInstances`, which is imported
--- privately (a public import would be re-exported to every dependent and change its instance
--- resolution); the local instance attribute needs them in the exported view (theorem headers).
-theorem hasTensor₄ObjExt_frobeniusNaturality
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
-  hasTensor₄ObjExt_mod T R X₁ X₂ X₃ X₄
-
-theorem hasGoodTensor₁₂Tensor_frobeniusNaturality
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
-  hasGoodTensor₁₂Tensor_mod T R X₁ X₂ X₃
-
-theorem hasGoodTensorTensor₂₃_frobeniusNaturality
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
-  hasGoodTensorTensor₂₃_mod T R X₁ X₂ X₃
-
-theorem hasColimitsOfShape_int_frobeniusNaturality
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
-    HasColimitsOfShape ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :=
-  hasColimitsOfShape_int_mod T R
-
-theorem preservesColimitsOfShape_int_curriedTensor_obj_frobeniusNaturality
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_obj_mod T R M
-
-theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_frobeniusNaturality
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod T R M
-
-attribute [local instance] hasTensor₄ObjExt_frobeniusNaturality
-  hasGoodTensor₁₂Tensor_frobeniusNaturality hasGoodTensorTensor₂₃_frobeniusNaturality
-  hasColimitsOfShape_int_frobeniusNaturality
-  preservesColimitsOfShape_int_curriedTensor_obj_frobeniusNaturality
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_frobeniusNaturality
-
+set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of derived trivializations of pullbacks**: let `g : T ⟶ X`, `F_X : X ⟶ X`,
 `F_T : T ⟶ T` with `g ≫ F_X = F_T ≫ g`, and trivializations `κ_X : F_X^* ≅ 𝟭`,
@@ -257,12 +212,12 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
       eqToHom (congrArg (fun s ↦ L((s)^*⟦Λ⟧).obj M) h) ≫
         (leftDerivedUpperStarComp Λ FT g).hom.app M ≫
           (Functor.leftDerivedFunctorIdIso κT).hom.app (L((g)^*⟦Λ⟧).obj M) := by
-  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
-  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
-  simpa only [upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app] using
-    (Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
+  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso,
+    leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso,
+    Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
       (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
-      (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M)
+      (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M,
+    upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
