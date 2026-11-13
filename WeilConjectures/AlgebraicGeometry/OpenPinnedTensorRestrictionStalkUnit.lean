@@ -93,7 +93,6 @@ private theorem restriction_pushforward_transport
   apply congrArg Q.presheaf.map
   exact Subsingleton.elim _ _
 
-set_option maxHeartbeats 400000 in
 -- Section transport uses the restriction API rather than unfolding its sheaf data.
 -- Work with abstract left adjoints when taking section components of the mate identity.
 private theorem unit_sections_of_conjugate
@@ -142,14 +141,14 @@ private theorem unit_sections_of_conjugate
       Scheme.Modules.Hom.app (E.app M) (j ⁻¹ᵁ W) =
     Scheme.Modules.Hom.app (E.app M) (j ⁻¹ᵁ U.ι ⁻¹ᵁ A) ≫
       S.presheaf.map jt.op at hnE
-  rw [← hnE] at hv
+  conv_rhs at hv => arg 2; arg 2; rw [← hnE]
   have hnJ := (Scheme.Modules.Hom.mapPresheaf (aj.unit.app R)).naturality t.op
   change R.presheaf.map t.op ≫ Scheme.Modules.Hom.app (aj.unit.app R) W =
     Scheme.Modules.Hom.app (aj.unit.app R) (U.ι ⁻¹ᵁ A) ≫
       (Lj.obj R).presheaf.map jt.op at hnJ
-  rw [← reassoc_of% hnJ] at hv
+  conv_rhs at hv => arg 2; rw [← reassoc_of% hnJ]
   have hR := restrict_image_unit U.ι M W
-  erw [reassoc_of% hR] at hv
+  conv_rhs at hv => erw [reassoc_of% hR]
   let hW : U'.ι ''ᵁ (j ⁻¹ᵁ W) ≤ k ⁻¹ᵁ A := by
     rintro x ⟨y, hy, rfl⟩
     exact ⟨j y, hy, congrArg (fun q : U'.toScheme ⟶ X ↦ q y) hj⟩
@@ -165,7 +164,6 @@ private theorem unit_sections_of_conjugate
   conv_lhs => arg 2; erw [← hv']
 
 
--- Normalizing four adjunction comparisons requires extra elaboration heartbeats.
 set_option maxRecDepth 2048 in
 private theorem section_unit
     {X X' : Scheme.{u}} (k : X' ⟶ X)
@@ -309,7 +307,6 @@ private theorem stalk_unit_of_sections
   exact hs.symm
 
 
--- Germ conversion across the slice equivalence needs extra elaboration heartbeats.
 set_option maxRecDepth 2048 in
 /-- The pinned tensor restriction comparison preserves the pullback unit on stalks.
 
