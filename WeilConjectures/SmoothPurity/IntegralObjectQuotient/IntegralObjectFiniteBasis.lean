@@ -462,8 +462,9 @@ theorem finiteNormalizedBasis (n : ℕ) :
       (complexBasis_zero l E X W L e n)
   intro U z
   let f := ((degreePullbackBasis l E X W L e n).inv.val.app (op U)).hom
-  have hs : f z = z • f 1 :=
-    (congrArg f (mul_one z).symm).trans (f.map_smul z 1)
+  have hs : f z = z • f (1 : (integralCoefficientSheaf l E W.left n).obj.obj (op U)) :=
+    (congrArg f (mul_one z).symm).trans
+      (f.map_smul z (1 : (integralCoefficientSheaf l E W.left n).obj.obj (op U)))
   exact (congrArg (fun g ↦ g.val.app (op U) z) hc).trans
     (hs.trans (congrArg (fun t ↦ z • t) (degreePullbackBasis_inv_one l E X W L e n U)))
 
