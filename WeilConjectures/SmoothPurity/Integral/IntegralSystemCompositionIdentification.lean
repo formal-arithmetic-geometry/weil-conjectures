@@ -51,7 +51,7 @@ theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶
     finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSequenceComposition l E h k := by
   unfold finiteSystemComposition integralComparisonSequenceComposition
-  congr 1
+  congr! (closePost := false) 1
 
 set_option profiler true in
 /-- The derived finite-system compositor is the derived strict sequence compositor.
@@ -61,7 +61,6 @@ theorem finiteSystemDerivedComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k 
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  congr 2
-  exact finiteSystemComposition_eq l E h k
+  congr! (closePost := false) 2
 
 end WeilConjectures
