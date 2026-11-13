@@ -70,27 +70,27 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
 -- repeatedly reconstruct the graded tensor instances.
 private lemma pullUnit_hasTensor
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-        (T : Scheme.{u}) (A B : GradedObject ℤ
-          (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-        A.HasTensor B := inferInstance
+    (T : Scheme.{u}) (A B : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
+    A.HasTensor B := inferInstance
 
 private lemma pullUnit_hasTensor₄ObjExt
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-        (T : Scheme.{u}) (A B C D : GradedObject ℤ
-          (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-        GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+    (T : Scheme.{u}) (A B C D : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
+    GradedObject.HasTensor₄ObjExt A B C D := inferInstance
 
 private lemma pullUnit_hasGoodTensor₁₂Tensor
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-        (T : Scheme.{u}) (A B C : GradedObject ℤ
-          (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-        GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+    (T : Scheme.{u}) (A B C : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
 
 private lemma pullUnit_hasGoodTensorTensor₂₃
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-        (T : Scheme.{u}) (A B C : GradedObject ℤ
-          (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-        GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
+    (T : Scheme.{u}) (A B C : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
 
 set_option trace.profiler true in
 
@@ -114,10 +114,14 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (comapUpperStarIso a f).inv (ComplexShape.up ℤ)).app Z) :
         (D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧)).obj (DerivedCategory.Qh.obj Z) ⟶ _) := by
-  have := @pullUnit_hasTensor.{u}
-  have := @pullUnit_hasTensor₄ObjExt.{u}
-  have := @pullUnit_hasGoodTensor₁₂Tensor.{u}
-  have := @pullUnit_hasGoodTensorTensor₂₃.{u}
+  have := pullUnit_hasTensor Λ Y
+  have := pullUnit_hasTensor₄ObjExt Λ Y
+  have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
+  have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
+  have := pullUnit_hasTensor Λ' Y
+  have := pullUnit_hasTensor₄ObjExt Λ' Y
+  have := pullUnit_hasGoodTensor₁₂Tensor Λ' Y
+  have := pullUnit_hasGoodTensorTensor₂₃ Λ' Y
   rw [derivedComapLeftDerivedUpperStarIso_hom_eq]
   simp only [derivedComapUpperStarIso, Iso.trans_hom,
     Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
@@ -203,10 +207,18 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
         (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) := by
-  have := @pullUnit_hasTensor.{u}
-  have := @pullUnit_hasTensor₄ObjExt.{u}
-  have := @pullUnit_hasGoodTensor₁₂Tensor.{u}
-  have := @pullUnit_hasGoodTensorTensor₂₃.{u}
+  have := pullUnit_hasTensor Λ Y
+  have := pullUnit_hasTensor₄ObjExt Λ Y
+  have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
+  have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
+  have := pullUnit_hasTensor Λ' Y
+  have := pullUnit_hasTensor₄ObjExt Λ' Y
+  have := pullUnit_hasGoodTensor₁₂Tensor Λ' Y
+  have := pullUnit_hasGoodTensorTensor₂₃ Λ' Y
+  have := pullUnit_hasTensor Λ X
+  have := pullUnit_hasTensor₄ObjExt Λ X
+  have := pullUnit_hasGoodTensor₁₂Tensor Λ X
+  have := pullUnit_hasGoodTensorTensor₂₃ Λ X
   set K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
@@ -288,10 +300,10 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
         (L((f)^*⟦Λ⟧).obj M) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app M) := by
-  have := @pullUnit_hasTensor.{u}
-  have := @pullUnit_hasTensor₄ObjExt.{u}
-  have := @pullUnit_hasGoodTensor₁₂Tensor.{u}
-  have := @pullUnit_hasGoodTensorTensor₂₃.{u}
+  have := pullUnit_hasTensor Λ Y
+  have := pullUnit_hasTensor₄ObjExt Λ Y
+  have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
+  have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
   let P := (CochainComplex.flatResolutionFunctor _).obj (DerivedCategory.Q.objPreimage M)
   let e : DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P) ≅ M :=
     (DerivedCategory.quotientCompQhIso _).app P ≪≫
