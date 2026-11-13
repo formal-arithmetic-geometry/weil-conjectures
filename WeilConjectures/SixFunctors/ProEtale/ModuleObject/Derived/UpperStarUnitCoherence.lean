@@ -161,7 +161,7 @@ end Homotopy
 
 section Derived
 
-open DerivedCategory
+open _root_.DerivedCategory
 
 variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
   [Abelian C₁] [Abelian C₂] [Abelian C₃]
