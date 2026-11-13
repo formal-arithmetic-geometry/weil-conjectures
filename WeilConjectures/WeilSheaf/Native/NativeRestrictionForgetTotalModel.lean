@@ -580,7 +580,46 @@ private theorem ordinary_sheaf_restriction_tensor
 
 end OrdinarySheafRestriction
 
-set_option maxHeartbeats 2000000 in
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
+/-- On a balanced tensor summand, the inverse ordinary total comparison is the
+pullback tensorator followed by the image of the ordinary insertion. -/
+private theorem ordinary_restriction_total_summand
+    (P T : CochainComplex (ProEtale.AdicSheaf l
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
+    (p q n : ℤ) (hpq : p + q = n) :
+    let R := ProEtale.adicUpperStar l
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))));
+    let G := ProEtale.upperStar (WeilCoefficients.{u} l)
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))));
+    Mod.tensorObjπ (R.obj (P.X p)) (R.obj (T.X q)) ≫
+        (HomologicalComplex.ιTensorObj ((R.mapHomologicalComplex (.up ℤ)).obj P)
+          ((R.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq).hom ≫
+        ((nativeOrdinaryRestrictionTotal k₀ l j P T).inv.f n).hom =
+      Functor.LaxMonoidal.μ G (P.X p).X (T.X q).X ≫
+        G.map (Mod.tensorObjπ (P.X p) (T.X q)) ≫
+        G.map (HomologicalComplex.ιTensorObj P T p q n hpq).hom := by
+  intro R G
+  let : G.Braided :=
+    { toMonoidal := inferInstance
+      braided X Y := Functor.LaxBraided.braided (F := G) X Y }
+  let : R.Monoidal := by
+    dsimp only [R, ProEtale.adicUpperStar, Adjunction.modLeft]
+    infer_instance
+  let : R.IsLeftAdjoint :=
+    (ProEtale.adicUpperStarLowerStarAdjunction l
+      (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
+  change _ ≫ _ ≫ ((R.mapCochainComplexμIso P T).hom.f n).hom = _
+  have hι := congrArg Mod.Hom.hom
+    (R.ιTensorObj_mapCochainComplexμIso_hom_f P T p q n hpq)
+  simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
+  rw [hι, reassoc_of% (ordinary_sheaf_restriction_tensor k₀ l j (P.X p) (T.X q))]
+
 -- Keep the concrete presentation types folded while transporting the restriction fields.
 private theorem native_restriction_data
     (R0 : ProEtaleWeilSheaf k₀ l Z ⥤ ProEtaleWeilSheaf k₀ l U) [R0.Additive]
@@ -624,6 +663,32 @@ private theorem native_restriction_data
         heq_of_eq (congrArg (fun S ↦ fun M N ↦ S.obj (M, N))
           (eq_of_heq hc.2.2.1)), hc.2.2.2⟩
 
+/-- Paste the two balanced quotient equations with the pullback tensorator. -/
+private theorem balanced_restriction_summand
+    {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)
+    {A B O W T : C} {A' B' O' W' T' : D}
+    {π : A ⟶ B} {π₀ : A ⟶ O} {i : B ⟶ W} {c : W ⟶ T} {i₀ : O ⟶ T}
+    {π' : A' ⟶ B'} {π₀' : A' ⟶ O'} {i' : B' ⟶ W'} {c' : W' ⟶ T'}
+    {i₀' : O' ⟶ T'} {μ : T' ⟶ G.obj T}
+    {μA : A' ⟶ G.obj A} {r : B' ⟶ G.obj B}
+    (hu : π' ≫ i' ≫ c' = π₀' ≫ i₀')
+    (ht : π₀' ≫ i₀' ≫ μ = μA ≫ G.map π₀ ≫ G.map i₀)
+    (hr : π' ≫ r = μA ≫ G.map π)
+    (hz : π ≫ i ≫ c = π₀ ≫ i₀) :
+    π' ≫ i' ≫ c' ≫ μ = π' ≫ r ≫ G.map i ≫ G.map c := by
+  rw [reassoc_of% hu, ht, reassoc_of% hr]
+  simp only [← G.map_comp, hz]
+
+/-- Identity input comparisons do not change a binary functor square. -/
+private theorem binary_map_identity_square
+    {C D : Type*} [Category* C] [Category* D] (S : C × C ⥤ D)
+    {P T : C} {A B E : D} {a : P ⟶ P} {b : T ⟶ T} {c : A ⟶ A}
+    {f : A ⟶ B} {g : B ⟶ S.obj (P, T)} {r : A ⟶ E} {s : E ⟶ S.obj (P, T)}
+    (ha : a = 𝟙 P) (hb : b = 𝟙 T) (hc : c = 𝟙 A) (h : f ≫ g = r ≫ s) :
+    f ≫ g ≫ S.map (Prod.mkHom a b) = c ≫ r ≫ s := by
+  rw [ha, hb, hc, ← prod_id, S.map_id, Category.comp_id, Category.id_comp]
+  exact h
+
 section AbstractTransport
 variable (α : (ProEtale.adicUpperStar l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))) ⋙
@@ -632,8 +697,123 @@ variable (α : (ProEtale.adicUpperStar l
     (ProEtale.adicUpperStar l
       (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))))
 local notation "Lα" => Endofunctor.IsoAlgebra.mapOfNatIso α
-set_option maxHeartbeats 4000000 in
--- Concrete sheaf and derived-category instances require a larger elaboration budget.
+
+omit [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
+/-- The exact restriction-forget square is the identity on each complex. -/
+private theorem native_restriction_complex_square_hom
+    (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) :
+    (complex_square (Lα)
+      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U))
+      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
+      (ProEtale.adicUpperStar l
+        (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))))
+      (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α)).hom.app K = 𝟙 _ := by
+  ext n : 1
+  simp only [complex_square, Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
+    Iso.refl_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
+    Functor.mapHomologicalComplexCompIso_inv_app_f, Iso.refl_inv,
+    NatTrans.id_app, HomologicalComplex.id_f]
+  erw [Category.comp_id]
+  rfl
+
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
+/-- The chain comparison follows from the balanced summand equations, independently of
+any derived models. -/
+private theorem native_restriction_chain
+    (hL : (Lα).IsLeftAdjoint)
+    (sr : ∀ M N : ProEtaleWeilSheaf k₀ l Z,
+      (Lα).obj (tensor k₀ l Z N M) ≅ tensor k₀ l U ((Lα).obj N) ((Lα).obj M))
+    (hsr : ∀ M N, HEq ((sr M N).hom.hom.f)
+      ((ProEtale.adicUpperStarTensorLeftIso l
+        (Scheme.Hom.geometricFiberMap j (comp_over j _)) N.carrier).hom.app M.carrier))
+    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) :
+    let F := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z);
+    let FU := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U);
+    let R := ProEtale.adicUpperStar l
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))));
+    let RP := ((Lα).mapHomologicalComplex (.up ℤ)).obj P;
+    let RT := ((Lα).mapHomologicalComplex (.up ℤ)).obj T;
+    let P₀ := (F.mapHomologicalComplex (.up ℤ)).obj P;
+    let T₀ := (F.mapHomologicalComplex (.up ℤ)).obj T;
+    ∀ (tr : ((Lα).mapHomologicalComplex (.up ℤ)).obj
+        (((nativeTensorTotal k₀ l Z).obj P).obj T) ≅
+          ((nativeTensorTotal k₀ l U).obj RP).obj RT)
+      (cZ : (F.mapHomologicalComplex (.up ℤ)).obj
+          (((nativeTensorTotal k₀ l Z).obj P).obj T) ≅ P₀ ⊗ T₀)
+      (cU : (FU.mapHomologicalComplex (.up ℤ)).obj
+          (((nativeTensorTotal k₀ l U).obj RP).obj RT) ≅
+        (FU.mapHomologicalComplex (.up ℤ)).obj RP ⊗
+          (FU.mapHomologicalComplex (.up ℤ)).obj RT)
+      (_ : ∀ (p q n : ℤ) (hpq : p + q = n),
+        FU.map ((Lα).map (nativeOpenTensorInsertion k₀ l Z P T p q n hpq)) ≫
+            FU.map (tr.hom.f n) =
+          FU.map (sr (P.X p) (T.X q)).hom ≫
+            FU.map (nativeOpenTensorInsertion k₀ l U RP RT p q n hpq))
+      (_ : ∀ (p q n : ℤ) (hpq : p + q = n),
+        Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
+            (F.map (nativeOpenTensorInsertion k₀ l Z P T p q n hpq)).hom ≫
+            (cZ.hom.f n).hom =
+          Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
+            (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom)
+      (_ : ∀ (p q n : ℤ) (hpq : p + q = n),
+        Mod.tensorπ (RP.X p).carrier (RT.X q).carrier ≫
+            (FU.map (nativeOpenTensorInsertion k₀ l U RP RT p q n hpq)).hom ≫
+            (cU.hom.f n).hom =
+          Mod.tensorObjπ (RP.X p).carrier (RT.X q).carrier ≫
+            (HomologicalComplex.ιTensorObj
+              ((FU.mapHomologicalComplex (.up ℤ)).obj RP)
+              ((FU.mapHomologicalComplex (.up ℤ)).obj RT) p q n hpq).hom),
+      (FU.mapHomologicalComplex (.up ℤ)).map tr.hom ≫ cU.hom =
+        (R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫
+          (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom := by
+  let := hL
+  intro F FU R RP RT P₀ T₀ tr cZ cU restriction_summands hcZ hcU
+  let G := ProEtale.upperStar (WeilCoefficients.{u} l)
+    (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
+  dsimp only [nativeOpenTensorInsertion] at restriction_summands hcZ hcU
+  dsimp only [RP, RT, Functor.mapHomologicalComplex_obj_X] at hcU
+  apply (cancel_mono (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).inv).1
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  ext n : 1
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+  apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
+    (F := (nativeTensorBifunctor k₀ l Z).flip)
+  intro p q hpq
+  dsimp only [Functor.comp_map]
+  rw [reassoc_of% (restriction_summands p q n hpq)]
+  let r := (ProEtale.adicUpperStarTensorLeftIso l
+    (Scheme.Hom.geometricFiberMap j (comp_over j _)) (T.X q).carrier).app
+      (P.X p).carrier
+  have hs : FU.map (sr (P.X p) (T.X q)).hom = r.hom := by
+    exact eq_of_heq (hsr (P.X p) (T.X q))
+  conv_lhs =>
+    arg 1
+    rw [hs]
+  apply (cancel_epi r.inv).1
+  conv_lhs => rw [Iso.inv_hom_id_assoc]
+  apply Mod.tensorLeft_obj_hom_ext
+  simp only [Mod.comp_hom']
+  simp only [R, ProEtale.adicUpperStar_map_hom]
+  exact balanced_restriction_summand G (hcU p q n hpq)
+    (ordinary_restriction_total_summand k₀ l j P₀ T₀ p q n hpq)
+    (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
+      (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
+        (P.X p).carrier (T.X q).carrier)
+    (hcZ p q n hpq)
+
+-- Project the model witnesses without eliminating into the concrete derived-category goal.
 private theorem native_restriction_goal_proof
     (hL : (Endofunctor.IsoAlgebra.mapOfNatIso α).IsLeftAdjoint) :
   ∀ (_hR : ∀ T, NativeIsKFlat k₀ l Z T →
@@ -709,168 +889,38 @@ private theorem native_restriction_goal_proof
   intro hR sr hsr rho c _hc dU dZ P T hP hT
   have hdata := native_restriction_data k₀ l (Lα)
     hR sr rho c _hc
-  rcases hdata with ⟨totalRestriction, restriction_summands, restriction_model'⟩
-  clear _hc c
+  let totalRestriction := hdata.choose
+  have restriction_summands := hdata.choose_spec.1
+  have restriction_model' := hdata.choose_spec.2
   dsimp only
   let F := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)
   let FU := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U)
   let R := ProEtale.adicUpperStar l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
-  let G := ProEtale.upperStar (WeilCoefficients.{u} l)
-    (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
-  let : G.Braided :=
-    { toMonoidal := inferInstance
-      braided X Y := Functor.LaxBraided.braided (F := G) X Y }
-  let : R.Monoidal := by
-    dsimp only [R, ProEtale.adicUpperStar, Adjunction.modLeft]
-    infer_instance
-  let : R.IsLeftAdjoint :=
-    (ProEtale.adicUpperStarLowerStarAdjunction l
-      (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
   let P₀ := (F.mapHomologicalComplex (.up ℤ)).obj P
   let T₀ := (F.mapHomologicalComplex (.up ℤ)).obj T
-  obtain ⟨cZ, hcZ, hmZ⟩ := native_forget_normalized_binary_models k₀ l Z P T hP hT dZ
+  have hmodelsZ := native_forget_normalized_binary_models k₀ l Z P T hP hT dZ
+  let cZ := hmodelsZ.choose
+  have hcZ := hmodelsZ.choose_spec.1
+  have hmZ := hmodelsZ.choose_spec.2
   let mZ := (nativeForget k₀ l Z).mapIso (nativeOpenTensorModel k₀ l Z P T hP hT) ≪≫
     F.mapDerivedCategoryFactors.app _ ≪≫ DerivedCategory.Q.mapIso cZ
   have hmZ' : mZ.hom = _ := hmZ
   let RP := ((Lα).mapHomologicalComplex (.up ℤ)).obj P
   let RT := ((Lα).mapHomologicalComplex (.up ℤ)).obj T
-  obtain ⟨cU, hcU, hmU⟩ := native_forget_normalized_binary_models k₀ l U RP RT
+  have hmodelsU := native_forget_normalized_binary_models k₀ l U RP RT
     (hR P hP) (hR T hT) dU
+  let cU := hmodelsU.choose
+  have hcU := hmodelsU.choose_spec.1
+  have hmU := hmodelsU.choose_spec.2
   let e : (Lα) ⋙ FU ≅ F ⋙ R :=
     Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α
-  let a : (Lα).mapHomologicalComplex (.up ℤ) ⋙
-      FU.mapHomologicalComplex (.up ℤ) ≅
-      F.mapHomologicalComplex (.up ℤ) ⋙ R.mapHomologicalComplex (.up ℤ) :=
-    Functor.mapHomologicalComplexCompIso e (.up ℤ) ≪≫
-      (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm
-  have ha (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) (n : ℤ) :
-      (a.hom.app K).f n = 𝟙 _ := by
-    simp only [a, e, Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
-      Iso.refl_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
-      Functor.mapHomologicalComplexCompIso_inv_app_f, Iso.refl_inv,
-      NatTrans.id_app]
-    erw [Category.comp_id]
-    rfl
-  let b := (MonoidalCategory.tensor _).mapIso ((a.app P).prod (a.app T))
-  have hb (p q n : ℤ) (hpq : p + q = n) :
-      HomologicalComplex.ιTensorObj
-          ((FU.mapHomologicalComplex (.up ℤ)).obj RP)
-          ((FU.mapHomologicalComplex (.up ℤ)).obj RT) p q n hpq ≫ b.hom.f n =
-        HomologicalComplex.ιTensorObj
-          ((R.mapHomologicalComplex (.up ℤ)).obj P₀)
-          ((R.mapHomologicalComplex (.up ℤ)).obj T₀) p q n hpq := by
-    change HomologicalComplex.ιMapBifunctor _ _ _ _ p q n hpq ≫
-      (HomologicalComplex.mapBifunctorMap (a.hom.app P) (a.hom.app T) _ _).f n = _
-    rw [HomologicalComplex.ι_mapBifunctorMap, ha, ha]
-    simp only [CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
-    rfl
   let ztotal := (((nativeTensorTotal k₀ l Z).obj P).obj T)
   let utotal := (((nativeTensorTotal k₀ l U).obj RP).obj RT)
-  let source := (FU.mapHomologicalComplex (.up ℤ)).obj
-    (((Lα).mapHomologicalComplex (.up ℤ)).obj ztotal)
-  let target := (R.mapHomologicalComplex (.up ℤ)).obj P₀ ⊗
-    (R.mapHomologicalComplex (.up ℤ)).obj T₀
-  let t₀ : source ⟶ (FU.mapHomologicalComplex (.up ℤ)).obj utotal :=
-    (FU.mapHomologicalComplex (.up ℤ)).map (totalRestriction P T).hom
-  let t₁ : source ⟶ (FU.mapHomologicalComplex (.up ℤ)).obj RP ⊗
-      (FU.mapHomologicalComplex (.up ℤ)).obj RT := t₀ ≫ cU.hom
-  let t₂ : source ⟶ target := t₁ ≫ b.hom
-  let r₀ : (R.mapHomologicalComplex (.up ℤ)).obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj ztotal) ⟶
-        (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) :=
-    (R.mapHomologicalComplex (.up ℤ)).map cZ.hom
-  let r₁ : source ⟶ (R.mapHomologicalComplex (.up ℤ)).obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj ztotal) := a.hom.app ztotal
-  let r₂ : source ⟶ (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) := r₁ ≫ r₀
-  let r₃ : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶ target :=
-    (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom
-  let r₄ : source ⟶ target := r₂ ≫ r₃
-  unfold ForgottenRestrictionSummands at restriction_summands
-  dsimp only [nativeOpenTensorInsertion] at restriction_summands hcZ hcU
-  dsimp only [RP, RT, Functor.mapHomologicalComplex_obj_X] at hcU
-  have hchain : t₂ = r₄ := by
-    dsimp only [t₂, t₁, t₀, r₄, r₂, r₁, r₀, r₃, ztotal]
-    simp only [Category.assoc]
-    ext n : 1
-    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-      ha]
-    apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
-      (F := (nativeTensorBifunctor k₀ l Z).flip)
-    intro p q hpq
-    dsimp only [Functor.comp_map]
-    conv_rhs =>
-      arg 2
-      erw [Category.id_comp]
-    rw [reassoc_of% (restriction_summands P T p q n hpq)]
-    let r := (ProEtale.adicUpperStarTensorLeftIso l
-      (Scheme.Hom.geometricFiberMap j (comp_over j _)) (T.X q).carrier).app
-        (P.X p).carrier
-    have hs : FU.map (sr (P.X p) (T.X q)).hom = r.hom := by
-      exact eq_of_heq (hsr (P.X p) (T.X q))
-    conv_lhs =>
-      arg 1
-      rw [hs]
-    apply (cancel_mono ((R.mapCochainComplexμIso P₀ T₀).hom.f n)).1
-    simp only [Category.assoc]
-    conv_rhs =>
-      arg 1
-      change R.map (F.map (HomologicalComplex.ιMapBifunctor P T
-        (nativeTensorBifunctor k₀ l Z).flip (.up ℤ) p q n hpq))
-    conv_rhs =>
-      arg 2
-      arg 2
-      arg 1
-      change (R.mapCochainComplexμIso P₀ T₀).inv.f n
-    have hcancel := congrArg
-      (fun f : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶
-        (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ↦ f.f n)
-      (Iso.inv_hom_id (R.mapCochainComplexμIso P₀ T₀))
-    simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hcancel
-    conv_rhs =>
-      arg 2
-      arg 2
-      rw [hcancel]
-    conv_rhs =>
-      arg 2
-      erw [Category.comp_id]
-    apply (cancel_epi r.inv).1
-    conv_lhs => rw [Iso.inv_hom_id_assoc]
-    apply Mod.tensorLeft_obj_hom_ext
-    simp only [Mod.comp_hom']
-    erw [reassoc_of% (hcU p q n hpq)]
-    rw [← (reassoc_of% (Mod.comp_hom' (HomologicalComplex.ιTensorObj
-      ((FU.mapHomologicalComplex (.up ℤ)).obj RP)
-      ((FU.mapHomologicalComplex (.up ℤ)).obj RT) p q n hpq) (b.hom.f n))),
-      hb p q n hpq]
-    erw [reassoc_of% (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
-      (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
-        (P.X p).carrier (T.X q).carrier)]
-    simp only [R, ProEtale.adicUpperStar_map_hom]
-    have hcz := congrArg (fun f ↦ G.map f) (hcZ p q n hpq)
-    simp only [Functor.map_comp] at hcz
-    rw [hcz]
-    have hι := congrArg
-      (fun f :
-        (((R.mapHomologicalComplex (.up ℤ)).obj P₀).X p ⊗
-          ((R.mapHomologicalComplex (.up ℤ)).obj T₀).X q) ⟶
-          ((R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀)).X n ↦ f.hom)
-      (R.ιTensorObj_mapCochainComplexμIso_hom_f P₀ T₀ p q n hpq)
-    simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
-    conv_lhs =>
-      arg 2
-      rw [hι]
-    have hsheaf := ordinary_sheaf_restriction_tensor k₀ l j
-      (P.X p).carrier (T.X q).carrier
-    have hfinal := congrArg
-      (fun f ↦ f ≫ G.map (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom) hsheaf
-    simp only [Category.assoc] at hfinal
-    convert hfinal using 1
-    rfl
-  dsimp only [t₂, t₁, t₀, r₄, r₂, r₁, r₀, r₃, ztotal] at hchain
-  simp only [Category.assoc] at hchain
-  obtain ⟨mU, hmU', hsquare⟩ :=
+  have hchain := native_restriction_chain k₀ l j α hL sr hsr P T
+    (totalRestriction P T) cZ cU (restriction_summands P T) hcZ hcU
+  have ha := native_restriction_complex_square_hom k₀ l j α
+  have hdiagram :=
     final_total_diagram (Lα) FU F R e
       (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l U)
       (nativeDerivedClosedComparison k₀ l U).ordinaryClosed.tensor
@@ -879,11 +929,10 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l Z P T hP hT)
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
-      cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) hchain mZ rfl
-  refine ⟨mZ, mU, hmZ', hmU', ?_⟩
-  exact hsquare
+      cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀)
+      (binary_map_identity_square _ (ha P) (ha T) (ha ztotal) hchain) mZ rfl
+  exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
-set_option maxHeartbeats 2000000 in
 -- Preserve the named restriction functor when specializing the Frobenius comparison.
 /-- Match the named pullback in the inputs before transporting its Frobenius comparison. -/
 private theorem native_restriction_goal_transport
