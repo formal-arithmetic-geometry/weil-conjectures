@@ -15,8 +15,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Cancellation of tensor extension over a pushout of ring sheaves
 
-Source: Stacks Project, Tag 01SB, tensor construction, and Tag 008A.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-cancellation).
+## References
+
+* [Stacks Project, Tag 01SB](https://stacks.math.columbia.edu/tag/01SB)
+* [Stacks Project, Tag 008A](https://stacks.math.columbia.edu/tag/008A)
 -/
 
 @[expose] public section
@@ -236,28 +238,7 @@ private theorem comparison_naturality
   rw [changeOfRingsHom_unit]
   rfl
 
-/-- Tensor cancellation across a pushout, naturally in the module, including its tensor unit.
-Source: Stacks Project, Tag 01SB (tensor construction and elucidation), Tag 008A.
-Proof: sheafify the presheaf of rings W ↦ C(W) tensor over D(W) with A(W).
-A pair of maps out of C and A agreeing on D defines on each open the ring map
-c tensor a ↦ u(c)v(a); these maps commute with restriction and uniquely extend through
-sheafification. Thus this sheaf is a pushout, and its canonical map to B is an isomorphism.
-Put L = sheafification of W ↦ C(W) tensor over D(W) with M(W). The formula
-(c tensor a)(c' tensor m) = cc' tensor (a • m) defines the pushout-ring action on L:
-balancing proves well-definedness before sheafification, local representatives extend it,
-and uniqueness of sheaf gluing proves independence and all action laws.
-The A-linear map m ↦ sheafification(1 tensor m) then extends B-linearly to
-B tensor over A with M, by β tensor m ↦ β • sheafification(1 tensor m).
-After restricting to C this is the forward comparison. Its inverse is the sheafification
-of c tensor m ↦ b(c) tensor m; D-balancing follows from r followed by b = s followed by t.
-The forward-inverse composite fixes c tensor m. For the other composite, locally write
-β as a sum of c tensor a in the sheafified pushout. A-balancing gives
-b(c)t(a) tensor m = b(c) tensor (a • m), so it fixes β tensor m locally, hence globally.
-These formulas commute with every restriction and with each linear map M → N, proving
-naturality. The inverse takes 1 tensor m to b(1) tensor m = 1 tensor m on every open.
-All constructions use balanced tensor relations and sheaf gluing, with no flatness or
-nonzero-ring assumption; the zero module and empty open are included.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-cancellation). -/
+/-- Tensor cancellation across a pushout, naturally in the module, including its tensor unit. -/
 theorem sheafTensorPushoutCancellation
     (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t : A ⟶ B)
     (hp : IsPushout r s b t) :

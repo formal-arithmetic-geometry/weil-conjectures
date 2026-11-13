@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SectionScalarComputationAll
 
 /-! # Computation of a realized scalar pullback comparison
 
-Source: Stacks Project, Tags 03EK, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section
@@ -684,34 +687,7 @@ attribute [local irreducible] complex_iso complex_comp_iso section_localization_
 set_option cleanup.letToHave false in
 -- Track the specified localization and termwise-equivalence instances through the diagram.
 /-- The K-flat computation equation for supplied ordinary and derived comparisons.
-All isomorphisms are supplied as inputs; this theorem selects no data.
-Source: Stacks Project, Cohomology on Sites, Tags 03EK, 0D6D and 07A6;
-section pullback normalization transport, representative computation step.
-(auxiliary; not a blueprint node)
-
-Proof: conjugate the identity restriction/pushforward square through the two
-ordinary scalar adjunctions and the two geometric adjunctions. The restriction
-comparisons of the endpoint realizations are identities on sections. Their
-ordinary scalar comparisons send the internal balanced generators to the section
-balanced generators, and both scalar units insert 1. Thus the resulting ordinary
-square is precisely c, by injectivity of conjugateEquiv. Coefficient compatibility
-of the geometric ring maps identifies its internal form with the inverse of
-CondensedRing.pullIso.
-
-Extend each endpoint scalar computation equation to all internal complexes:
-resolve its section image by a flat-term K-flat complex, lift the resolution
-through the termwise section equivalence, apply the given normalization there,
-and use naturality and invertibility of the localized augmentation to cancel.
-Paste these scalar computation equations with the geometric representative
-pullback equations. PullNormalized identifies the central internal paths.
-The ordinary identification replaces the resulting ordinary square by c.
-The specified realization equation substitutes d for the realized internal b.
-Naturality of the localization comparisons and cancellation now give the
-computation equation after precomposition by the termwise section equivalence.
-Precomposition by this equivalence is faithful, so the equation holds on every
-section complex, in particular on the supplied flat-term K-flat complexes.
-No preservation of K-flatness by geometric pullback is required. Zero rings and
-empty schemes satisfy the same adjunction and localization identities. -/
+All isomorphisms are supplied as inputs; this theorem selects no data. -/
 theorem section_pull_computation_of_realization (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (sX : SectionScalarComparison a X) (sY : SectionScalarComparison a Y)

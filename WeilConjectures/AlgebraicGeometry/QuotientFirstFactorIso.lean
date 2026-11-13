@@ -13,8 +13,11 @@ import Mathlib.RingTheory.Idempotents
 
 /-! # Identification of a quotient factor over an isomorphism locus
 
-Source: Stacks Project, More on Algebra, proof of Tag 09XH.
-(blueprint: lem-weil-pbc-quotient-first-factor-iso)
+## References
+
+* [Stacks Project, Tag 09XH](https://stacks.math.columbia.edu/tag/09XH)
+* [Stacks Project, Tag 2529](https://stacks.math.columbia.edu/tag/2529)
+* [Stacks Project, Tag 2541](https://stacks.math.columbia.edu/tag/2541)
 -/
 
 @[expose] public section
@@ -95,10 +98,6 @@ private theorem ker_comp_quotient_mk
   exact sup_comm _ _
 
 /-- An idempotent factor supported in the isomorphism locus is preserved isomorphically.
-
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Tag 09XH,
-including the localization and final quotient argument.
-(blueprint: lem-weil-pbc-quotient-first-factor-iso).
 
 Split S'/J' by the idempotent c as C'₁ = (S'/J')/(1-c) and C'₂ = (S'/J')/(c),
 using the Chinese remainder theorem. The equality f(c)=e.symm(1,0) makes f diagonal

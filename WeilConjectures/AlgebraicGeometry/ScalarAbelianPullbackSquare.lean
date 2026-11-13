@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ScalarStructureCoefficientAdjunct
 
 /-! # The underlying abelian square for scalar inverse image
 
-Source: Stacks Project, Tag 01F7; Modules, Tag 0096.
-(blueprint: new-sc-scalar-abelian-pullback-square).
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ attribute [local instance] Sheaf.monoidalCategory
 attribute [local irreducible] scalarAbelianUnitClass scalarInverseImage
 attribute [local instance] instHasExtKSheaf
 
-/-- Abelian inverse image along a scheme morphism, as in structure-sheaf pullback.
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+/-- Abelian inverse image along a scheme morphism, as in structure-sheaf pullback. -/
 noncomputable abbrev scalarAbelianInverseImage {X Y : Scheme.{u}} (a : Y ⟶ X) :=
   (Opens.map a.base).sheafPullback AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
@@ -53,26 +53,20 @@ instance {X Y : Scheme.{u}} (a : Y ⟶ X) :
   have := preservesBinaryBiproducts_of_preservesBinaryProducts (scalarAbelianInverseImage a)
   exact Functor.additive_of_preservesBinaryBiproducts _
 
-/-- The abelian coefficient map adjoint to the structure-sheaf morphism.
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+/-- The abelian coefficient map adjoint to the structure-sheaf morphism. -/
 noncomputable abbrev scalarAbelianStructureCoefficient {X Y : Scheme.{u}} (a : Y ⟶ X) :=
   (((Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u} _ _).homEquiv
     (structureSheafAb X) (structureSheafAb Y)).symm
       (⟨Functor.whiskerRight a.c
         (forget₂ CommRingCat RingCat.{u} ⋙ forget₂ RingCat AddCommGrpCat.{u})⟩)
 
-/-- The comparison from the target integer sheaf to inverse image of the source integer sheaf.
-Source: Stacks Project, Tag 01F7; constant-sheaf adjunction.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+/-- The comparison from the target integer sheaf to inverse image of the source integer sheaf. -/
 noncomputable abbrev scalarAbelianIntegerIso {X Y : Scheme.{u}} (a : Y ⟶ X) :=
   ((Opens.map a.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
     isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))
 
-/-- The defining Ext formula for structure-sheaf pullback.
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+/-- The defining Ext formula for structure-sheaf pullback. -/
 theorem scalarAbelianStructurePullback_apply {X Y : Scheme.{u}} (a : Y ⟶ X)
     (n : ℕ) (x : Sheaf.H (structureSheafAb X) n) :
     structureSheafCohomologyPullback a n x =
@@ -82,29 +76,7 @@ theorem scalarAbelianStructurePullback_apply {X Y : Scheme.{u}} (a : Y ⟶ X)
   rfl
 
 /-- The canonical square of inverse image and forgetting scalars carries both the
-integer-unit generator and the tensor-unit coefficient to their abelian counterparts.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
-Modules, Tag 0096, inverse-image/direct-image adjunction.
-(blueprint: new-sc-scalar-abelian-pullback-square).
-
-Proof: Form the canonical comparison from abelian inverse image of the underlying
-scalar sheaf to the underlying sheaf of scalar inverse image. Its adjunct is the
-forgotten scalar adjunction unit; it is an isomorphism because both inverse images
-have the same stalks and forgetting scalars commutes with filtered colimits.
-Invert this comparison to obtain c, naturally in the coefficient sheaf. The
-constant-sheaf adjunction identifies its unit component: the integer generator
-maps to the scalar section 1, scalarInverseUnitIso transports the scalar section
-1 to the same section on Y, and scalarAbelianIntegerIso transports the integer
-generator to that section. Equality under the sections adjunction gives the first
-(degree-zero) equation. For the second equation apply the abelian inverse-image
-adjunction. The characterization in exists_scalarPullbackCoefficient identifies
-its sectionwise adjunct with the tensor adjunction unit. Postcomposition with
-tensorPullbackObjUnitToUnit gives the original structure-sheaf morphism, by
-tensorPullbackObjUnitToUnit_isIso. This is the adjunct defining
-scalarAbelianStructureCoefficient. Injectivity of the adjunction equivalence gives
-the equation. These are sheaf-map and degree-zero identities, with no higher
-cohomology class, module Ext comparison, or resolution choices. On the empty
-scheme all involved sections and identities are zero; no nonemptiness is needed. -/
+integer-unit generator and the tensor-unit coefficient to their abelian counterparts. -/
 theorem scalar_abelian_pullback_square (k : Type u) [Field k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g) :

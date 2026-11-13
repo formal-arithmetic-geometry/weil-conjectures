@@ -12,7 +12,13 @@ import WeilConjectures.AlgebraicGeometry.RectangleQCohOrdinaryCompatibility
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
+* [Stacks Project, Tag 0ATM](https://stacks.math.columbia.edu/tag/0ATM)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 0D5T](https://stacks.math.columbia.edu/tag/0D5T)
 -/
 
 @[expose] public section
@@ -25,32 +31,7 @@ open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
 -- The fixed signature names hL and hs, although the conclusion does not depend on their proofs.
-/-- Direct-image and base comparisons compatible with a fixed canonical upper comparison.
-Source: Stacks Project, Tags 0ATM (ordinary base-change pasting), 08HY (the counit
-formula), 0D5S (pullback composition), and 0D5T (direct-image composition).
-(blueprint: lem-sc-rectangle-ordinary-geometric-direct)
-
-Proof: The two projection equations identify k with the iterated pullback
-isomorphism. Let c be the pinned derived pullback composition family and let a
-be the pinned pullback/direct-image adjunctions used by schemeDerivedBaseChangeMap.
-Conjugate c(k,q), where q is the rectangle's second projection, under a(kq) and
-a(q).comp(a(k)). Since pullback along k is an equivalence, the unit for a(k)
-is invertible. Combine the inverse conjugate, this unit, and hk₂ to identify
-pullback along k followed by direct image along the iterated second projection
-with direct image along q; restrict this comparison to obtain p. Restrict
-c(h,g).symm to obtain b. The ambient component hypothesis on s uniquely specifies
-it because the quasi-coherent inclusion is faithful. Transpose the two-step
-ordinary base-change map under the composite pinned adjunction. Substitute the
-counit definition (08HY). Naturality moves the inner counit across the pullback
-comparison; the two associativity identities for c identify the transpose with
-the transpose of the outer rectangle, transported along k. The triangle identity
-cancels the unit for k. Injectivity of the Hom equivalence proves ordinary pasting
-(0ATM), with these choices of p and b. Each ordinary base-change component is
-invertible by the three hβ hypotheses. Invert the resulting identity and cancel
-the comparison isomorphisms to obtain Q(s)δ = pαb, componentwise. Restriction is
-faithful, so the ambient identity gives precisely the displayed quasi-coherent
-identity. All steps are functorial or adjunction identities and apply to empty
-schemes and zero objects; identity g or h gives the corresponding unit law. -/
+/-- Direct-image and base comparisons compatible with a fixed canonical upper comparison. -/
 theorem rectangle_ordinary_geometric_direct
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

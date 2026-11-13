@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
 /-! Identity law for pullback on structure-sheaf cohomology.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-identity)
+
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
 -/
 
 @[expose] public section
@@ -55,26 +59,7 @@ private theorem ext_map_to_identity {C : Type*} [Category C] [Abelian C]
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical pullback along an identity scheme morphism is the identity.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial
-and Remark 01FB.
-
-Proof: Write L for inverse image along the identity and let alpha : L ≅ Id
-be the unique left-adjoint comparison with identity direct image, compatible with the
-adjunction unit. The adjoint of the identity structure map is alpha at the additive
-structure sheaf O. Write c : Z ≅ L(Z) for the constant-integer-sheaf comparison used
-in the definition. Its construction by uniqueness of left adjoints gives
-c.hom ≫ alpha.hom.app Z = id. Naturality of alpha on Ext identifies L(x) followed
-by alpha at O with alpha at Z followed by x. Prove this by induction on the degree:
-in degree zero use naturality on ordinary morphisms; in successor degree embed O
-into an injective, express x as a connecting class, and use naturality of extension
-classes for the map of short exact sequences induced by alpha. Unfolding H.mapFunctor
-and H.map, pullback sends x to the Yoneda
-composite c.hom ; L(x) ; alpha at O. Substitution and cancellation give x.
-Thus the additive homomorphism is the identity in every degree. In degree zero this
-is the usual identity map on global sections; the argument also applies to the empty
-scheme, where all the cohomology groups are zero.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-identity) -/
+/-- The canonical pullback along an identity scheme morphism is the identity. -/
 theorem structureSheafCohomologyPullback_identity (X : Scheme.{u}) (n : ℕ) :
     structureSheafCohomologyPullback (𝟙 X) n =
       AddMonoidHom.id (Sheaf.H (structureSheafAb X) n) := by

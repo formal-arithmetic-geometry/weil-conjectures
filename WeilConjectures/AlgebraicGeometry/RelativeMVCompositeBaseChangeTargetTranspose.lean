@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 
 /-! # The counit for base change of a composite morphism
 
-Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -106,12 +110,7 @@ private theorem restriction_transpose
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
   rfl
 
-/-- The inverse-image inclusion preserves the first pullback projection.
-Source: Stacks Project, Cohomology, Tag 08HY; the universal property of pullbacks.
-Proof: The inclusion is the pullback lift with first component the projection
-from the smaller inverse-image open. The first projection equation for this
-lift gives the assertion. No hypothesis beyond the inclusion is needed, so
-this holds for equal opens and for an empty open as well. -/
+/-- The inverse-image inclusion preserves the first pullback projection. -/
 private theorem relativeMVOpenLift_fst {X X' : Scheme.{u}} (g' : X' ⟶ X)
     {W U : X.Opens} (i : W ≤ U) :
     relativeMVOpenLift g' i ≫ pullback.fst g' U.ι = pullback.fst g' W.ι :=
@@ -132,23 +131,7 @@ private theorem comparison_witness_eq
         (relativeMVOpenLift_fst g' i))) := by
   congr 1
 
-/-- Transposing the target restriction removes the direct-image composition mates.
-Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
-(blueprint: new-relative-mv-composite-base-change-target-transpose).
-Proof: Expand relativeMVRestriction. Its three factors are the inverse U',f'
-right-adjoint comparison, Rf' applied to the adjoint of the restricted open counit,
-and the W',f' right-adjoint comparison. Naturality in the source of the adjunction
-Hom equivalence moves the incoming local arrow and inverse U',f' comparison
-through the transpose. The mate identity for the final W',f' comparison replaces
-its composite counit by the inverse pullback composition comparison followed by
-L(W'→X') of the f' counit and then the W' counit. Naturality moves the middle
-Rf' map through the f' counit. The triangle identity cancels the transpose of
-the restricted open counit. Naturality of the inverse pullback comparison then
-moves the incoming arrow to the f' transpose. The remaining three factors are
-exactly the inverse c', pulled-back U' counit, and c' at Lg'K shown below.
-The base-change map in the local arrow is neither expanded nor computed.
-This argument uses only adjunction naturality and the mate counit identity, so
-equal opens, empty opens and zero objects satisfy it without extra hypotheses. -/
+/-- Transposing the target restriction removes the direct-image composition mates. -/
 theorem relativeMV_composite_baseChange_target_transpose
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

@@ -15,28 +15,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
-/-- Core affine construction of the dominant map, omitting separable generation.
-Source: Stacks Project, Tags 0559 and 030R; the affine tensor and reduction argument.
-Proof: give E its residue-field algebra structure by composing e with k' -> E.
-Write A, B, B' for the affine coordinate rings of Z, S, S', and k = kappa(eta).
-The ring C of the original fibre is A tensor_B k. Dominance of j makes C -> L
-injective, and its base identity says that this map is k-linear. Tensor with the
-flat k-module k' to obtain an injection C tensor_k k' -> L tensor_k k'. The two
-maps to E induce a unital map L tensor_k k' -> E by hsquare. The latter tensor
-ring is finite-dimensional over L and has a single prime: purely inseparable
-field extension induces a homeomorphism on spectra. Thus the kernel of its map
-to the field E is its nilradical. The induced map on its reduction is injective.
-The first injection induces an injection on reductions, since an element whose
-image is nilpotent is itself nilpotent. Hence (C tensor_k k')_red embeds in E.
-The coordinate ring of the reduced pullback is (A tensor_B B')_red. Since B'
-is a domain and eta' is generic, kappa(eta') is its fraction field. Localizing
-at the nonzero elements of B' commutes with reduction. Via hq and he this
-identifies the reduced pullback's generic fibre ring with (C tensor_k k')_red.
-Take the spectrum of the constructed injection. It is scheme-theoretically
-dominant; the scalar-map identity and the compatibility with e follow from the
-chosen algebra map and the tensor-product construction. This also proves the
-identity-extension case, and requires no separability hypothesis on E.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding-core) -/
+/-- Core affine construction of the dominant map, omitting separable generation. -/
 theorem exists_reduced_generic_fibre_field_embedding_core
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)

@@ -17,8 +17,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Ring coordinates for tensor stalk comparisons
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1).
-(blueprint: lem-pc-tensor-stalk-comparison-squares).
+## References
+
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
+* [Stacks Project, Tag 0BYJ](https://stacks.math.columbia.edu/tag/0BYJ)
 -/
 
 @[expose] public section
@@ -131,22 +133,7 @@ private theorem stalkTensor_flat
 
 
 /-- Simultaneous ring coordinates for the original and tensor comparison maps.
-No invertibility of a comparison is asserted.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ.
-Proof: take existing coordinates e for the identity map on the pullback of E.
-Set U to the stalk of e.P, Q to the stalk of c.P, N to the stalk of c.N,
-and t to tensorStalkIso(c.P) followed by the stalk of c.t. The stalk K-flat
-criterion proves both acyclicity assertions. Construct the local-spectrum map
-from Spec(A tensor_R B) to X' using the given cartesian square. It is a
-preimmersion, and its composite with Spec C is the canonical local-spectrum
-map of X'. Flatness of that composite, cancellation along a monomorphism,
-and the affine flatness criterion prove C flat over A tensor_R B.
-Use cohomologyModel(c.P) for m and the canonical model for U tensor Q for mU.
-The first square uses identity vertical isomorphisms and homologyMap_comp.
-The tensor square is the remaining fixed-map obligation
- tensorStalkComparison_fixedMap_square, applied to e.P, e.e and e.isKFlat.
-No invertibility of a horizontal comparison is asserted.
-(blueprint: lem-pc-tensor-stalk-comparison-squares). -/
+No invertibility of a comparison is asserted. -/
 theorem exists_tensorStalkComparison_squares
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

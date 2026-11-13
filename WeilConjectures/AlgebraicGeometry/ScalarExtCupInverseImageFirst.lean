@@ -11,7 +11,12 @@ import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
 
 /-! # ScalarExtCupInverseImageFirst
 
-Source: Stacks Project, Cohomology, Tags 01F7, 01FD, 07MB and 0FKV.
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 01FD](https://stacks.math.columbia.edu/tag/01FD)
+* [Stacks Project, Tag 07MB](https://stacks.math.columbia.edu/tag/07MB)
+* [Stacks Project, Tag 0FKV](https://stacks.math.columbia.edu/tag/0FKV)
 -/
 
 @[expose] public section
@@ -103,26 +108,6 @@ private theorem unitComparison (t : Y ⟶ X) :
 
 -- Normalize the inverse-image functor before applying monoidal coherence.
 /-- Compatibility of the first tensor transport with exact inverse image.
-Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV.
-(blueprint: lem-sc-scalar-ext-cup-inverse-image-first).
-
-Proof: Put T = scalarInverseImage t, u = scalarInverseUnitIso t, and write δ for the canonical
-oplax tensor comparison. Consider the natural transformation from tensorRight 1_X followed by T
-to T followed by tensorRight 1_Y with component δ_{M,1_X} followed by id_{TM} tensor u.hom. Its
-naturality follows from δ_natural_left and bifunctoriality of tensor. Apply this transformation
-termwise to complexes, pass to localization, and use its commutation with shifts: the naturality
-square for the shifted morphism representing a is exactly the equality of the two Ext
-transports, with degree-zero components given by mk₀. The identity (u.inv followed by
-T(λ_{1_X}.inv) followed by δ_{1_X,1_X} followed by id tensor u.hom) = (λ_{1_Y}.inv followed by
-u.inv tensor id) identifies their source maps. To obtain it, the oplax right-unitor identity,
-together with λ_{1_X} = ρ_{1_X}, λ_{1_Y} = ρ_{1_Y} and naturality of ρ along u.inv, gives the
-same formula with its unit comparison η in place of u.hom; these maps agree because their
-adjoints under the inverse-image/direct-image adjunction are both the constant section 1 (expand
-the constant-sheaf adjunction defining u). Naturality of the unitors and tensor with φ,
-preservation of degree-zero morphisms by Ext transport, and associativity now insert φ on both
-sides. This proves the stated first-factor formula independently of any b or q. For p=0 all the
-Ext maps reduce to the same morphism coherence square; zero sheaves and empty schemes use the
-identical square.
 -/
 theorem scalarExtCup_inverseImage_first (t : Y ⟶ X)
     (A : KSheaf X k) (A' : KSheaf Y k)

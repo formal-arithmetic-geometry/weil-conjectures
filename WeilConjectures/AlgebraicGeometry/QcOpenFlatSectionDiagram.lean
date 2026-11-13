@@ -13,8 +13,10 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 /-!
 # Compatible flat base change on finite intersections of compact opens
 
-Source: Stacks Project, Tag 0APJ, proof of `lemma-affine-base-change`, and Tag 02KH.
-(blueprint: lem-a1-qc-open-flat-section-diagram)
+## References
+
+* [Stacks Project, Tag 0APJ](https://stacks.math.columbia.edu/tag/0APJ)
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
 -/
 
 @[expose] public section
@@ -27,16 +29,14 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The ordinary section algebra on an open, with scalars supplied by the structure map.
-Source: Stacks, Tag 0APJ (blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- The ordinary section algebra on an open, with scalars supplied by the structure map. -/
 def qcOpenSectionAlgebra {R : CommRingCat.{u}} {Y : Scheme.{u}}
     (f : Y ⟶ Spec R) (V : Y.Opens) : CommAlgCat.{u} R :=
   letI := ((ΓSpecIso R).inv ≫ f.appTop ≫ Y.presheaf.map
     (homOfLE (le_top : V ≤ ⊤)).op).hom.toAlgebra
   CommAlgCat.of R Γ(Y, V)
 
-/-- Ordinary restriction as a map of the structural section algebras.
-Source: Stacks, Tag 0APJ (blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- Ordinary restriction as a map of the structural section algebras. -/
 def qcOpenSectionRestriction {R : CommRingCat.{u}} {Y : Scheme.{u}}
     (f : Y ⟶ Spec R) {V W : Y.Opens} (i : W ⟶ V) :
     qcOpenSectionAlgebra f V ⟶ qcOpenSectionAlgebra f W :=
@@ -51,8 +51,7 @@ def qcOpenSectionRestriction {R : CommRingCat.{u}} {Y : Scheme.{u}}
         simp only [← ConcreteCategory.comp_apply, Category.assoc, ← Functor.map_comp]
         rfl }
 
-/-- The actual tensor of open sections with T, with its right-factor T-algebra structure.
-Source: Stacks, Tag 0APJ (blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- The actual tensor of open sections with T, with its right-factor T-algebra structure. -/
 def qcOpenSectionTensor {R T : CommRingCat.{u}} (r : R ⟶ T) {Y : Scheme.{u}}
     (f : Y ⟶ Spec R) (V : Y.Opens) : CommAlgCat.{u} T :=
   letI := r.hom.toAlgebra
@@ -60,16 +59,14 @@ def qcOpenSectionTensor {R T : CommRingCat.{u}} (r : R ⟶ T) {Y : Scheme.{u}}
     (R := R) (A := qcOpenSectionAlgebra f V) (B := T)
   CommAlgCat.of T ((qcOpenSectionAlgebra f V) ⊗[R] T)
 
-/-- Pure tensors in the structural open-section tensor algebra.
-Source: Stacks, Tag 0APJ (blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- Pure tensors in the structural open-section tensor algebra. -/
 def qcOpenSectionPure {R T : CommRingCat.{u}} (r : R ⟶ T) {Y : Scheme.{u}}
     (f : Y ⟶ Spec R) (V : Y.Opens) (a : Γ(Y, V)) (t : T) :
     qcOpenSectionTensor r f V :=
   letI := r.hom.toAlgebra
   (a : qcOpenSectionAlgebra f V) ⊗ₜ[R] t
 
-/-- Restriction on the first tensor factor and identity on T.
-Source: Stacks, Tag 0APJ (blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- Restriction on the first tensor factor and identity on T. -/
 def qcOpenSectionTensorRestriction {R T : CommRingCat.{u}} (r : R ⟶ T)
     {Y : Scheme.{u}} (f : Y ⟶ Spec R) {V W : Y.Opens} (i : W ⟶ V) :
     qcOpenSectionTensor r f V ⟶ qcOpenSectionTensor r f W := by
@@ -85,16 +82,12 @@ def qcOpenSectionTensorRestriction {R T : CommRingCat.{u}} (r : R ⟶ T)
         change m (1 ⊗ₜ[R] t) = 1 ⊗ₜ[R] t
         simp [m] }
 
-/-- The finite-intersection refinement, indexed by nonempty finite subsets.
-Source: Stacks, Tag 0APJ, first sentence of the proof
-(blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- The finite-intersection refinement, indexed by nonempty finite subsets. -/
 def qcFiniteIntersection {Y : Scheme.{u}} {I : Type v} (U : I → Y.Opens)
     (F : {F : Finset I // F.Nonempty}) : Y.Opens :=
   ⨅ i : F.val, U i.val
 
-/-- An inclusion F ⊆ G gives the inclusion V_G into V_F.
-Source: Stacks, Tag 0APJ, finite-intersection refinement
-(blueprint: lem-a1-qc-open-flat-section-diagram). -/
+/-- An inclusion F ⊆ G gives the inclusion V_G into V_F. -/
 def qcFiniteIntersectionInclusion {Y : Scheme.{u}} {I : Type v} (U : I → Y.Opens)
     {F G : {F : Finset I // F.Nonempty}} (h : F ≤ G) :
     qcFiniteIntersection U G ⟶ qcFiniteIntersection U F :=
@@ -163,36 +156,7 @@ private theorem qcOpen_component {R T : CommRingCat.{u}} (r : R ⟶ T)
 /-- The finite-intersection diagrams have canonical, compatible flat tensor isomorphisms.
 The isomorphisms are specified on every pure tensor, uniquely determining their forward
 maps. The last equality is the square on all tensor elements, expressed as equality of
-T-algebra morphisms. Thus the component inverses also give a diagram isomorphism.
-
-Source: Stacks Project, Tag 0APJ, proof of `lemma-affine-base-change`; Tag 02KH, degree zero.
-(blueprint: lem-a1-qc-open-flat-section-diagram).
-
-Proof:
-1. A singleton gives a nonempty finite subset; union gives a common upper bound.
-   Restrictions run from F to G when F is contained in G, by presheaf functoriality.
-2. The quasi-separated affine-cover criterion
-   (lem-weil-pbc-quasi-separated-affine-cover-criterion, Tag 01KO) makes intersections
-   of affine opens compact. Finite affine covers then make intersections of compact
-   opens compact. Induction proves this for every nonempty finite intersection.
-   The same affine-cover criterion proves all open subschemes quasi-separated.
-3. A map between spectra is affine (lem-weil-pbc-morphism-affine-schemes-affine).
-   Base change preserves affineness (lem-weil-pbc-affine-morphism-permanence), so the
-   projection is quasi-compact and quasi-separated. The qcqs permanence theorem
-   (lem-weil-pbc-qcqs-morphism-permanence) gives quasi-separatedness of the pullback
-   and compactness of every inverse-image open. Open immersions are stable under
-   base change (lem-weil-pbc-open-immersion-base-change). The fibre-product universal
-   property identifies that inverse-image open with V_F times Spec T over Spec R,
-   respecting both projections; it is quasi-separated as an open of the pullback.
-4. Apply flat qcqs base change for global sections
-   (lem-weil-pbc-flat-base-change-global-sections-qcqs, Tag 02KH) on each V_F.
-   Identify sections of the two spectra with R and T. Tensor-pushout universality
-   (lem-weil-pbc-algebra-tensor-pushout-universal-property) identifies the comparison
-   with a tensor t mapped to g-sharp(a) times t. It respects T, as does its inverse.
-5. Naturality of the scheme comorphism and of scalar restriction makes the displayed
-   square commute on pure tensors. Tensor-pushout uniqueness gives equality of the
-   algebra maps. Restriction identity and composition give the diagrams; composing
-   the squares with the component inverses gives the inverse natural transformation. -/
+T-algebra morphisms. Thus the component inverses also give a diagram isomorphism. -/
 theorem qc_open_flat_section_diagram {R T : CommRingCat.{u}} (r : R ⟶ T)
     [Flat (Spec.map r)] {Y : Scheme.{u}} (f : Y ⟶ Spec R) [QuasiSeparatedSpace Y]
     {I : Type v} [Nonempty I] (U : I → Y.Opens)

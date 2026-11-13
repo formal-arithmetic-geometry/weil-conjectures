@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIso
 
 /-! # Derived scalar extension and the stalk of derived pullback
 
-Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison).
+## References
+
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 06Y6](https://stacks.math.columbia.edu/tag/06Y6)
 -/
 
 @[expose] public section
@@ -66,24 +69,7 @@ variable [∀ Y : Scheme.{u},
 set_option linter.unusedVariables false in
 /-- Derived extension of the original stalk identifies naturally with the stalk of
 sheaf derived pullback. The computation on K-flat complexes uses precisely the
-specified tensor-stalk isomorphism and the two universal counits.
-
-Proof: derive extension along the actual stalk map A -> C using K-flat resolutions
-of A-modules. The K-flat stalk criterion says that stalks of K-flat sheaf complexes
-are K-flat A-complexes. Their ordinary scalar extensions therefore compute this
-left-derived functor, with invertible universal counits. The natural pullback-stalk
-isomorphism identifies their ordinary scalar extensions with stalks of ordinary
-sheaf pullback. Its degreewise components are those specifying tensorStalkIso.
-Both sides preserve quasi-isomorphisms on these resolving objects. Localize this
-natural identification and its inverse on K-flat representatives to obtain the
-natural isomorphism j. The two inverse identities descend from the identities on
-complexes. Compatibility with the localization factors and universal counits gives
-the displayed equation after taking homology; scalarExtensionHomologyIso contains
-exactly the scalar-extension counit and its localization factors. Exactness of
-stalks gives comparisonStalkHomologyIso on the sheaf side. No base-flatness or
-invertibility of the base-derived cohomology comparison is involved.
-Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison). -/
+specified tensor-stalk isomorphism and the two universal counits. -/
 theorem exists_stalkDerivedExtensionComparison (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

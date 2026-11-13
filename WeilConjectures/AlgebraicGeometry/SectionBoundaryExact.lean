@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Exactness of the canonical boundary on global sections
 
-Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-module-section-boundary-exact).
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
 -/
 
 @[expose] public section
@@ -23,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.RingedSpace
 universe u wC wD
 
-/-- The canonical connecting map, preceded by the degree-zero comparison from sections.
-Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-module-section-boundary-exact). -/
+/-- The canonical connecting map, preceded by the degree-zero comparison from sections. -/
 noncomputable def moduleSectionBoundary (X : RingedSpace.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{wD}
@@ -69,14 +68,7 @@ private theorem section_boundary_exact
   exact ShortComplex.isoMk ((e 0).app S.X₂) ((e 0).app S.X₃) ((e 1).app S.X₁)
     ((e 0).hom.naturality S.g).symm (Iso.hom_inv_id_app_assoc (e 0) S.X₃ _)
 
-/-- A section has zero canonical boundary precisely when it lifts through the quotient.
-Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-module-section-boundary-exact).
-Proof: The image of the short exact sequence's canonical triangle under derived global
-sections is distinguished. Its homology sequence is exact at degree zero of the quotient.
-Transport that exactness through the single-complex comparison and the isomorphism from
-sections to zeroth derived global sections. Exactness in modules is exactness of the
-underlying functions, giving precisely the asserted existence of a lifting section. -/
+/-- A section has zero canonical boundary precisely when it lifts through the quotient. -/
 theorem moduleSectionBoundary_eq_zero_iff (X : RingedSpace.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{wD}

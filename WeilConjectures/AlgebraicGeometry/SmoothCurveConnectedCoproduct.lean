@@ -13,8 +13,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # Finite connected-component decomposition of a smooth curve
-
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step.
 -/
 
 @[expose] public section
@@ -24,17 +22,7 @@ open CategoryTheory Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A qc separated smooth curve of relative dimension one is a finite coproduct
-of connected smooth curves, compatibly with its structure map.
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step.
-(blueprint: lem-sc-smooth-curve-connected-coproduct)
-
-Proof: Finite type over the field makes C Noetherian. Its connected components
-are finitely many clopen subsets. Give each its open subscheme structure and
-restrict f. The restricted morphisms remain separated, of finite type, and
-smooth of relative dimension one. Each component is connected and nonempty,
-so the dimension theorem for nonempty smooth schemes gives dimension exactly
-one. Disjointness and coverage give the coproduct universal property. If C is
-empty the component index set is empty and the same universal property applies. -/
+of connected smooth curves, compatibly with its structure map. -/
 theorem exists_smoothCurveConnectedCoproduct
     {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] :

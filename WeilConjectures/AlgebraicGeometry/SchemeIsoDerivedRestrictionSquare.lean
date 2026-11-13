@@ -13,9 +13,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The derived restriction square of a scheme isomorphism
 
-Source: Stacks Project, Tag 09IR, isomorphism transport in the affine setup;
-Mathlib scheme-module restriction composition and localization uniqueness.
-(blueprint: lem-pc-scheme-iso-derived-restriction-square).
+## References
+
+* [Stacks Project, Tag 09IR](https://stacks.math.columbia.edu/tag/09IR)
 -/
 
 @[expose] public section
@@ -37,27 +37,7 @@ private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) 
       Modules.pushforwardCongr s.inv_hom_id ≪≫ Modules.pushforwardId T)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The derived equivalence on corresponding open sites commutes with restriction.
-Source: Stacks Project, Tag 09IR; restriction-comparison part of step 1 of
-lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-restriction-square).
-
-Proof: Restrict s to the isomorphism s.hom.preimageIso U between the open subschemes.
-Pushforward along this isomorphism and its inverse gives an exact equivalence on
-module sheaves. Compose with Modules.overEquiv on each side to obtain an exact
-module-sheaf equivalence on the two localized open sites. Apply its termwise
-complex functor and localize to obtain the displayed equivalence eU.
-The global module-sheaf pushforward along s is isomorphic to restriction along
-s.inv, since both are left adjoint to pushforward along s.inv. Similarly identify
-the open isomorphism pushforward with restriction along its inverse. Compose
-Modules.overFunctorEquiv, restrictFunctorComp and restrictFunctorCongr with the
-identity s.hom.preimageIso_hom_ι (or its inverse version). These identify the two
-composites of underived functors, by restriction to the same opens with the same
-structure-ring maps. Their termwise natural comparison descends by localization.
-The given he identifies e.functor with the derived isomorphism pushforward by
-uniqueness of localization. Composing this comparison with the localized module
-restriction comparison yields the displayed square. The argument needs no
-quasi-coherence, perfection or nonempty points and includes empty and full U. -/
+/-- The derived equivalence on corresponding open sites commutes with restriction. -/
 theorem exists_scheme_iso_derived_restriction_square {X Y : Scheme.{u}} (s : X ≅ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

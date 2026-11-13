@@ -21,13 +21,14 @@ set_option linter.privateModule false
 /-!
 # Base change of an inverse-limit tower and its finite tensor reduction
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md, final sentence;
-Stacks Project, Tags 03DB, 03CO and 03EL
-(auxiliary; not a blueprint node).
-
 The index `op r` denotes the positive level `r + 1`. Scalar extension is the
 recorded sheaf tensor construction, with its pure tensors written in the order `a ⊗ x`.
+
+## References
+
+* [Stacks Project, Tag 03DB](https://stacks.math.columbia.edu/tag/03DB)
+* [Stacks Project, Tag 03CO](https://stacks.math.columbia.edu/tag/03CO)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
 -/
 
 @[expose] public noncomputable section

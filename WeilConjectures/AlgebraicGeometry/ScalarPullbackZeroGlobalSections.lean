@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.ScalarGlobalSectionsComparison
 
 /-! # Pullback in degree zero on global sections
 
-Source: Stacks Project, Cohomology, Tags 01DZ, 0FKV; Modules, Tag 0096.
-(blueprint: lem-sc-scalar-pullback-zero-global-sections).
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* [Stacks Project, Tag 0FKV](https://stacks.math.columbia.edu/tag/0FKV)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section
@@ -157,27 +160,7 @@ private theorem homEquiv_unique {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Degree-zero cohomology pullback evaluates to the tensor-pullback unit on sections.
-Source: Stacks Project, Cohomology, Tags 01DZ, 0FKV; Modules, Tag 0096.
-(blueprint: lem-sc-scalar-pullback-zero-global-sections).
-
-Proof: The cocycle formula specifying moduleExtEquiv in degree zero identifies
-the rightDerivedZeroIsoSelf global section with evaluation at 1 of the unique
-morphism from the structure sheaf representing the degree-zero Ext class.
-After restriction of scalars and precomposition with scalarUnitMorphism, the
-constant-sheaf adjunction identifies the resulting scalar-unit morphism with
-that same global section. Represent scalarCohomologyExtEquiv f F 0 x by mk₀
-of this morphism. Exact inverse image sends mk₀ to the degree-zero class of
-its inverse-image morphism, and composing with mk₀ classes is ordinary morphism
-composition. Precomposition with scalarInverseUnitIso.inv identifies the
-inverse-image constant unit with the target constant unit. Postcomposition with
-scalarPullbackCoefficient is adjoint to the sectionwise tensor-pullback unit,
-by Classical.choose_spec of exists_scalarPullbackCoefficient. Apply that
-adjunction identity to the top open. Its inverse image is the top open on Y;
-the restriction along the canonical inclusion of the top open into its inverse
-image is the one in tensorPullbackTopSection. Finally cancel the target
-scalarCohomologyExtEquiv with its inverse in scalarCohomologyPullback. No
-quasi-coherence or nonemptiness is used, and the formula sends zero to zero. -/
+/-- Degree-zero cohomology pullback evaluates to the tensor-pullback unit on sections. -/
 theorem scalarCohomologyPullback_zero_globalSections
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

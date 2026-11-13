@@ -13,7 +13,14 @@ import WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationLocalDes
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
-/-! # Gluing torsion-controlled triples -/
+/-! # Gluing torsion-controlled triples
+
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
+-/
 
 @[expose] public section
 universe u
@@ -145,24 +152,7 @@ private theorem system_iso_glue {X : Scheme.{u}}
     exact (e i).inv_hom_id_app n
 
 /-- Local torsion-controlled triples glue to a global factorization whose actual
-kernel and cokernel retain local annihilation bounds.
-
-Source: Stacks Project, Tag 0889(1), uniqueness argument; Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-algebraization-descent-gluing).
-
-Proof: Choose supplied triples on each open. On each overlap use the normalized
-quotient comparisons to identify completions. Lift the comparison and its inverse
-by torsion-controlled hom lifting. Completion extensionality, together with
-compatibility with the map to H, shows that both composites are identities and
-that the lifted comparison is unique. Uniqueness proves the cocycle equation.
-Apply sheaf-of-modules descent to glue the sources and maps. Coherence is local.
-Glue formal comparison maps and inverses levelwise; their transition equations
-and factorization equations hold locally, hence globally. Exact restriction
-identifies the restrictions of the global kernel and cokernel with the kernels
-and cokernels of the local maps, and ideal products commute with restriction.
-Transport the supplied bounds across these identifications. For the empty scheme
-all these modules are zero; for the unit ideal uniqueness uses the torsion
-hypothesis and makes no assertion about arbitrary algebraizations. -/
+kernel and cokernel retain local annihilation bounds. -/
 theorem torsionControlled_algebraization_descent_gluing
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

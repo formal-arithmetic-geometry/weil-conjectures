@@ -16,8 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 
 /-! # The shifted determinant of the dual evaluates against the determinant
 
-Source: Stacks Project, Tag 0BRT, determinant inversion in the conclusion of the proof.
-(blueprint: lem-sc-shifted-determinant-dual-evaluation).
+## References
+
+* [Stacks Project, Tag 0BRT](https://stacks.math.columbia.edu/tag/0BRT)
 -/
 
 @[expose] public section
@@ -119,23 +120,7 @@ private noncomputable def tensorShiftIso
     (shiftFunctorAdd' (DerivedCategory C) b a (a + b) (add_comm b a)).symm.app _
 
 /-- The shifted top exterior powers of a finite locally free sheaf and its dual are
-mutually inverse derived tensor objects.
-Source: Stacks Project, Tag 0BRT, final determinant inversion.
-(blueprint: lem-sc-shifted-determinant-dual-evaluation).
-
-Proof: on an open cover trivializing M as O_X^d, use a basis e₁,...,e_d and its dual.
-The determinant evaluation pairs their top wedges to 1 and is therefore an isomorphism
-from wedge^d M^dual tensor wedge^d M to O_X on that cover. A basis change multiplies
-the two determinant generators by inverse determinants, so this evaluation is
-independent of the chosen bases and glues. Sectionwise exterior powers sheafify to
-these local determinant lines, and internal Hom restricts to the dual free module.
-Both determinant lines are locally free of rank one, hence flat, so their ordinary
-product computes their derived tensor product. The single functor in degree zero
-therefore carries the evaluation to an isomorphism with the derived unit. Compatibility
-of derived tensor with shifts identifies the displayed product with that unshifted
-product shifted by -d+d=0. Compose with the zero-shift isomorphism. When d=0 the empty
-wedge is the structure sheaf and the evaluation is multiplication; the same argument
-works on an empty scheme as well. -/
+mutually inverse derived tensor objects. -/
 theorem shiftedDeterminant_dual_evaluation
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

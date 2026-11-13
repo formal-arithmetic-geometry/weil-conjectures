@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SfSupportedTraceContractions
 
 /-! # Coordinate integrals for a trace-diagonal kernel
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the two coordinate integrals and triangle calculations.
 The definitions use the existing compact-support exchange and composition maps.
 -/
 
@@ -94,30 +92,7 @@ attribute [local irreducible] unit counit DerivedCategory instCategoryDerivedCat
 attribute [local implicit_reducible] rightDerivedLowerShriek derivedTensorRight
 
 /-- A normalized diagonal kernel for a pulled-back even shifted line satisfies both
-triangles on the entire unbounded derived categories.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, both triangle computations
-(auxiliary; not a blueprint node).
-
-Proof: Transport the trace and diagonal class through the supplied coefficient
-isomorphism e and the canonical proper forget-supports comparisons. The resulting
-direct-image data have the two trace-exchange equations by the definitions of
-traceFirst and traceSecond. Apply CoordinateTrace.contractions to the lisse line J
-and its even shift 2d. For the first triangle, precompose its first contraction
-equation with direct image of the supported diagonal class tensored with p1* M.
-Projection naturality and the section identity for p1 Delta = id identify the
-result with direct image of M tensored with the first integral. Its value is
-identity by h.1. For the second triangle use the second contraction equation at
-K. Both pulled-back coefficients come from the base, so coordinate identifies
-them; projection naturality and the section identity for p2 Delta = id identify
-the result with the right-adjoint object tensored with the second integral.
-It is identity by h.2. The line self-symmetry is identity on a local basis, and
-the shift is even, so the tensor rearrangement introduces no sign. The symmetry
-factors in the explicitly defined unit and counit cancel with those in the ordered
-projection comparisons. Finally the proper forget-supports comparison preserves
-the exchange, projection and composition maps, giving precisely the two stated
-natural-transformation equations. No boundedness or Noetherian condition occurs. -/
+triangles on the entire unbounded derived categories. -/
 theorem triangles (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
     (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)
     (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))

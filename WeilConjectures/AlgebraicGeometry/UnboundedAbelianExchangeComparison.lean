@@ -16,13 +16,17 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 /-!
 # Unbounded exchange and forgetting module coefficients
 
-Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7
-(auxiliary; not a blueprint node).
-
 The inverse-image comparison is descended termwise. Its derived adjunction mate gives
 an actual canonical direct-image comparison; the theorem asserts its invertibility and
 its normalization by the right-derived units. This normalization identifies it with
 0D6J's K-injective replacement construction, without preservation of K-injectives.
+
+## References
+
+* [Stacks Project, Tag 0D6J](https://stacks.math.columbia.edu/tag/0D6J)
+* [Stacks Project, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+* [Stacks Project, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
 -/
 
 @[expose] public section
@@ -655,9 +659,7 @@ private lemma derived_mate_exact_inv_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R'
 
 end DerivedMates
 
-/-- The termwise inverse-image coefficient comparison, transported to exact inverse image.
-Source: Stacks Project, Tags 03D3 and 07A7
-(auxiliary; not a blueprint node). -/
+/-- The termwise inverse-image coefficient comparison, transported to exact inverse image. -/
 noncomputable def moduleAbelianUnboundedUpperStarIso
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     D((v)^*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ A) ≅
@@ -668,9 +670,7 @@ noncomputable def moduleAbelianUnboundedUpperStarIso
 
 /-- The adjunction mate of the termwise inverse-image comparison. Its right-derived-unit
 normalization below identifies it with the map computed by a module K-injective complex
-and an abelian K-injective replacement of its underlying complex.
-Source: Stacks Project, Tags 0D6J(3) and 07A7
-(auxiliary; not a blueprint node). -/
+and an abelian K-injective replacement of its underlying complex. -/
 noncomputable def moduleAbelianUnboundedLowerStarComparison
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     R((v)_*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ B) ⟶
@@ -733,30 +733,6 @@ The unit equation is stated on every homotopy complex: on a K-injective module c
 `I`, apply it and naturality of the abelian derived unit to a quasi-isomorphism `UI → J`
 with `J` abelian K-injective. Both derived units at K-injectives are invertible, so the
 equation says exactly that the comparison is the class of `v_* UI → v_* J`.
-
-Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Forgetting preserves kernels and sheafified cokernels. The inverse of a bijective
-module map is linear. Exact-functor localization and its homology comparison imply
-exactness and reflection of isomorphisms on unbounded derived categories.
-2. Descend the ordinary inverse-image coefficient comparison termwise. Its square
-coherence follows degree by degree and survives localization.
-3. Descend the sectionwise direct-image comparison using the absolute right-derived
-functor property supplied by K-injective resolutions. Its defining unit equation holds
-on every homotopy complex. The acyclicity statement of Tag 0D6J(3), isolated in
-`moduleAbelianForget_kInjective_directImage_quasiIso`, makes the abelian derived unit
-invertible on forgotten module K-injectives. The derivability criterion therefore
-makes the descended comparison invertible.
-4. Compute the derived adjunction mate on homotopy complexes using the explicit
-normalizations of the derived unit and counit. It has the same unit equation as the
-descended comparison; uniqueness of right-derived descent identifies the two maps.
-5. The ordinary module/abelian exchange identity is already proved. Pass its cube of
-natural transformations to homotopy categories, insert the exact-functor factorization
-isomorphisms, and use the defining unit equations of the four descended comparisons.
-Right-derived uniqueness gives the cube equality on the derived category. Step 4
-identifies its four faces with the fixed mate definitions in the statement.
 -/
 theorem unbounded_abelian_exchange_comparison
     (Λ : Type (u + 1)) [CommRing Λ]

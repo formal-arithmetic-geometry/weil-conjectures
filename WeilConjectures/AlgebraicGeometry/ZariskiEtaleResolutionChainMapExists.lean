@@ -14,7 +14,12 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
-/-! # Resolution comparison bridge -/
+/-! # Resolution comparison bridge
+
+## References
+
+* [Stacks Project, Tag 013P](https://stacks.math.columbia.edu/tag/013P)
+-/
 
 @[expose] public section
 
@@ -23,21 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
-/-- An augmented comparison from a resolution to the pushed complex exists.
-
-Source: Stacks Project, Derived Categories, Tag 013P (comparison of resolutions).
-(blueprint: lem-zariski-etale-resolution-chain-map-exists)
-
-Proof: The exact inverse image preserves monomorphisms. Its right adjoint therefore
-preserves injectives, so every term of the pushed complex is injective. Extend the
-pushed augmentation along the monic augmentation of R to obtain the degree-zero
-component. Its composite with the next differential vanishes on the augmentation.
-Exactness of R lets it factor through the first differential and injectivity extends
-it to degree one. Inductively, commutativity at the preceding degree and the
-square-zero identity show that the required composite vanishes on the preceding
-differential. Factor and extend again. The inductive chain-map constructor assembles
-these components. Its degree-zero component gives the asserted augmentation equality.
-No exactness of the pushed complex is required. -/
+/-- An augmented comparison from a resolution to the pushed complex exists. -/
 theorem zariski_etale_resolution_comparison_chain_map_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

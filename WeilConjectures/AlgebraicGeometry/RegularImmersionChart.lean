@@ -14,10 +14,10 @@ public import WeilConjectures.RingTheory.Etale.Coordinates
 /-!
 # Étale charts adapted to a regular immersion
 
-Let `i : Z ⟶ X` be a regular immersion of pure codimension `c` between schemes smooth over a
+Let `i: Z ⟶ X` be a regular immersion of pure codimension `c` between schemes smooth over a
 perfect field `k` (with `Z` regular). Near every point of `Z` there is an affine open `U` of `X`
 with functions `f₁, …, f_c` generating the ideal of `Z ∩ U`, and an étale morphism
-`v : U ⟶ 𝔸^c_{𝔸^m_k}` whose `c` fibre coordinates pull back to the `fᵢ`.
+`v: U ⟶ 𝔸^c_{𝔸^m_k}` whose `c` fibre coordinates pull back to the `fᵢ`.
 
 ## Main results
 
@@ -37,7 +37,7 @@ namespace AlgebraicGeometry
 variable {k : Type u} [Field k]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- If `U` is an affine open of `X` on which `aX : X ⟶ Spec k` is smooth of relative dimension
+/-- If `U` is an affine open of `X` on which `aX: X ⟶ Spec k` is smooth of relative dimension
 `n`, then `k → Γ(X, U)` is locally standard smooth of relative dimension `n`. -/
 theorem locally_isStandardSmoothOfRelativeDimension_appLE {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) {U : X.Opens} (hU : IsAffineOpen U) (n : ℕ)
@@ -60,10 +60,10 @@ theorem locally_isStandardSmoothOfRelativeDimension_appLE {X : Scheme.{u}}
 
 open IsRegularImmersion in
 set_option backward.isDefEq.respectTransparency false in
-/-- **Étale charts adapted to a regular immersion.** Let `i : Z ⟶ X` be a regular immersion of
+/-- **Étale charts adapted to a regular immersion.** Let `i: Z ⟶ X` be a regular immersion of
 pure codimension `c`, with `X` smooth over a perfect field `k` and `Z` regular. Then every point
 `z` of `Z` has an affine open neighbourhood `U` in `X` with functions `f₁, …, f_c` on `U`
-generating the ideal of `Z ∩ U`, together with an étale morphism `v : U ⟶ 𝔸^c_{𝔸^m_k}` whose
+generating the ideal of `Z ∩ U`, together with an étale morphism `v: U ⟶ 𝔸^c_{𝔸^m_k}` whose
 `c` fibre coordinates pull back to the `fᵢ`. -/
 theorem IsRegularImmersion.exists_etale_affineSpace [PerfectField k] {X Z : Scheme.{u}}
     (c : ℕ) (i : Z ⟶ X) [IsRegularImmersion c i] (aX : X ⟶ Spec (.of k)) [Smooth aX]

@@ -9,7 +9,11 @@ import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
 /-! # Section realization of the restricted scalar computation counit
 
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -272,22 +276,8 @@ attribute [local irreducible] sectionScalarRestriction
 
 -- Generator comparisons elaborate both internal and section module tensor structures.
 /-- Scalar normalization and ordinary generators identify the restricted scalar
-computation after the section equivalence. Source: Stacks 03EK, 06YY, 07A6;
-scalar and ordinary part of the conjugate-computation node's first step.
-(auxiliary; not a blueprint node).
-
-Proof: substitute the K-flat computation clause of hs. Naturality of exact
-restriction moves the scalar computation counit through its section comparison.
-The composition and natural-isomorphism factor equations for mapDerivedCategory
-identify the remaining localization factors with the termwise restriction
-comparison. It remains to compare the ordinary maps in each degree. Precompose
-with scalar-extension generators. The ordinary clauses of hs identify the scalar
-comparison and restriction with their actual section maps. The prescribed formula
-for o and the balanced-tensor formula for t.ordinary then send z tensor x to
-x tensor z. Tensor induction and sheafification extend this equality to all
-sections; equality degreewise gives equality of chain maps. Apply Q and compose
-with the scalar counit. Only P being flat-term K-flat is used, to apply hs;
-there is no derived tensor comparison or derived e in this assertion. -/
+computation after the section equivalence.
+. -/
 theorem section_scalar_computation_transport (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
     (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)

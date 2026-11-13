@@ -16,15 +16,19 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPrope
 
 /-! # The residue identification of the coordinate-ring strict henselization
 
-Source: Stacks Project, Tag 04HX and Definition 03PS
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
-
 This is clause (1) of `lem-weil-pbc-strict-henselization-functoriality` for the
 coordinate-ring model `Scheme.strictHenselizationRing` of the strict henselization,
 whose canonical maps are the legs of `Scheme.strictHenselizationCone` and the structural
 map `Scheme.strictHenselizationStructuralMap`. The pointed residue map is transported from
 the point evaluation on `Scheme.strictHenselization` along the canonical colimit comparison
 `Scheme.smallStrictHenselizationColimitIso`.
+
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
+* [Stacks Project, Tag 03PS](https://stacks.math.columbia.edu/tag/03PS)
+* [Stacks Project, Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+* [Stacks Project, Tag 04GP](https://stacks.math.columbia.edu/tag/04GP)
 -/
 
 @[expose] public section
@@ -37,9 +41,7 @@ namespace AlgebraicGeometry
 closure: the point evaluation on `Scheme.strictHenselization`, precomposed with the canonical
 colimit comparison. Its kernel is the maximal ideal, and followed by the inclusion into Ω it
 recovers every chosen pointed neighbourhood through the legs of
-`Scheme.strictHenselizationCone`.
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map). -/
+`Scheme.strictHenselizationCone`. -/
 private theorem strictHenselizationRingPointedMap
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)
@@ -96,24 +98,7 @@ private theorem strictHenselizationRingPointedMap
 identification of clause (1), for the coordinate-ring model
 `Scheme.strictHenselizationRing`. The factorization condition forces the residue
 identification to respect the base residue field; using ring equivalences therefore
-also states uniqueness as an equivalence of base-residue-field algebras.
-Source: Stacks Project, Tag 04HX and Definition 03PS
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
-
-Proof: by `strictHenselizationLocalStructure` the colimit ring $C$ is a strictly
-henselian local ring. The pointed map of the colimit, the point evaluation $\psi$ to the
-relative separable closure $\kappa(\bar x)$, is surjective with kernel the maximal ideal,
-so it induces an isomorphism $\sigma : C/\mathfrak m_C \to \kappa(\bar x)$. Let
-$\lambda : \operatorname{Spec}\Omega \to \operatorname{Spec} C$ be given by
-$C \to C/\mathfrak m_C \to \kappa(\bar x) \subset \Omega$. By construction of $\psi$ every
-leg $c_V$ of the limit cone satisfies $c_V \circ \lambda = \bar v$; composing with the
-structure morphism of any neighbourhood gives $j_Y \circ \lambda = \bar x$, hence $j_Y$ maps
-the closed point (the image of $\lambda$) to $y$. Since $\Omega$ is algebraically closed,
-$\kappa(\bar x)$ is a separable closure of $\kappa(y)$, hence separably closed. Uniqueness:
-another $\sigma'$ with the same factorizations gives $\lambda_{\sigma'}$ with the same
-composites with all legs of the limit cone, so $\lambda_{\sigma'} = \lambda$; then the two
-ring maps $C \to \Omega$ agree, and since the residue map is surjective and the inclusion
-into $\Omega$ is injective, $\sigma' = \sigma$. -/
+also states uniqueness as an equivalence of base-residue-field algebras. -/
 theorem strictHenselizationRingResidue
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)

@@ -15,13 +15,14 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Base change of the explicit graph compositor
 
-Source: Stacks Project, Tags 0F7F and 0F7J; the product-graph argument of
-`lem-route-exists-right-derived-lower-shriek-comp-iso`
-(auxiliary; not a blueprint node).
-
 The compositor is the constructed product-graph isomorphism. The assertion concerns
 its compatibility with the specified compactification exchange, rather than the
 existence of some compatible isomorphism.
+
+## References
+
+* [Stacks Project, Tag 0F7F](https://stacks.math.columbia.edu/tag/0F7F)
+* [Stacks Project, Tag 0F7J](https://stacks.math.columbia.edu/tag/0F7J)
 -/
 
 @[expose] public section
@@ -1141,30 +1142,7 @@ private theorem change_pullback_compositor
 
 /-- The graph compositor commutes with compact-support exchange for pasted squares.
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7F and 0F7J; blueprint
-`sec-six-functors-basics/sk-thm-sf-comp-composition`, composition and base change;
-steps 4--7 of `lem-route-exists-right-derived-lower-shriek-comp-iso`.
-(auxiliary; not a blueprint node).
-
-Proof: form the product of the proper parts of the compactifications of the composite
-and of g. Its open over X contains the proper graph of X; its open over Y is proper
-over Y; intersect the opens to obtain the graph presentation of f. The graph
-compositor consists of the comparison from the compactification of the composite,
-the inverse proper/open interchange, and the inverse graph comparison for f.
-Pull back this whole diagram along c. For each proper compositor the mate-pasting
-identity supplies the exchange square. The unit-normalized open mate supplies the
-square for each open compositor. The proper/open exchange cube supplies the square
-for each interchange, including the extra graph-neighborhood shrinking. The graph
-comparison base-change theorem supplies the squares for the endpoint graph maps
-and their inverses. Paste these equalities to obtain the equation with the literal
-pulled-back graph diagram. Compare that diagram with the graph constructed from the
-chosen primed compactifications. Graph comparison/interchange compatibility and the
-graph comparison cocycle identify their compositors. Finally the quasi-compact
-refinement clause identifies the comparison from each pulled-back compactification
-with rightDerivedLowerShriekIso. Naturality moves the middle comparison across the
-exchange for f. Substitution gives the displayed equality. All operations are on
-ordinary unbounded derived categories; no quasi-compactness of the original maps
-or their open compactification factors is used. -/
+. -/
 theorem sfGraphCompactSupportCompIso_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z X' Y' Z' : Scheme.{u}}

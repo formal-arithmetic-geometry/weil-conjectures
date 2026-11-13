@@ -15,8 +15,15 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! Derived universal properties of normalized supported scalar maps.
-Source: Stacks Project, Tags 03QP, 03Q1 and 06YY
-(auxiliary; not a blueprint node). -/
+
+## References
+
+* [Stacks Project, Tag 03QP](https://stacks.math.columbia.edu/tag/03QP)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks Project, Tag 06YQ](https://stacks.math.columbia.edu/tag/06YQ)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -111,25 +118,8 @@ private theorem finite_constant_flat
     ((ModuleCat.flat_iff_flat _).2 inferInstance)
 
 /-- The normalized coefficient maps give the three derived scalar-extension units.
-Source: Stacks Project, etale-cohomology Tag 03QP (finite stalk formula),
-sites-cohomology Tags 06YQ, 06YY and 07A6 (flat-source derived scalar adjunction).
-(auxiliary; not a blueprint node).
 
-Proof: Constant R-module sheaves are the monoidal units, hence flat. A closed immersion
-is finite. By the finite-stalk formula, every geometric stalk of i_*R_D is a finite
-product of copies of R. Identify it with the finite free module R^E using the constant
-stalk isomorphisms. The geometric-stalk criterion then proves flatness of i_*R_D.
-This argument includes empty geometric fibres and needs no restriction on the rings.
-
-The constant-sheaf/global-sections adjunction and evaluation of a linear map at 1
-identify maps from R_X and from A_X to an A-module sheaf with the same section set.
-The generator equations hD and hT identify composition with the prescribed coefficient
-maps with the identity of that section set. Thus both constant maps are ordinary
-scalar-extension units. Finite direct image preserves the ordinary universal property
-by finite_ordinary_scalar_unit, with exactly the inverse restriction comparison in
-the statement. Finally scalarUniversal_of_flat passes each of these three ordinary
-units to the unbounded derived unit, using the flat source just proved. Unfold the
-named supported scalar-unit property and assemble the three conclusions. -/
+. -/
 theorem supported_kummer_scalar_derived_units
     (T : Scheme.{u}) (R A : Type (u + 1)) [CommRing R] [CommRing A] (φ : R →+* A)
     {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]

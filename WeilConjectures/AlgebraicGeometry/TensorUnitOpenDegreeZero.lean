@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 
 /-! # Restricted tensor units in degree zero
 
-Source: Stacks Project, Cohomology, Remark Tag 01FB, equation-choice.
-(blueprint: lem-weil-pbc-tensor-unit-open-degree-zero).
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
 -/
 
 @[expose] public section
@@ -89,25 +90,7 @@ private theorem restricted_unit_sections {X P : Scheme.{u}} (h : P ⟶ X)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The restricted tensor-unit square commutes on augmented sections when the
-inverse-image open is the whole fibre product.
-Source: Stacks Project, Cohomology, Remark Tag 01FB (remark-explain-arrow),
-equation-choice, specialized to degree zero.
-(blueprint: lem-weil-pbc-tensor-unit-open-degree-zero).
-
-Proof: Apply the canonical degree-zero augmentation square for moduleCohomologyFMap
-first to the restricted h-map D.psi and then to the restriction-adjunction unit on
-the fibre product. Their inputs are the section t identified with a section of the
-restricted module by restrictAppIso, and the restriction of its tensor-unit image
-along hV. The two resulting sections of the restricted tensor pullback agree:
-evaluate D.unit_square at U = f inverse V and at t. PushforwardComp and
-pushforwardCongr identify these with the same section on W = h inverse U;
-the restriction-adjunction unit acts by restriction, and restrictAppIso identifies
-sections over top with sections over U (respectively W). Since hV says W is top,
-restriction from top to W followed by restriction back to top is the identity.
-Naturality of restriction with the tensor unit therefore gives precisely the two
-sections in question. Apply their common augmentation to obtain the equality.
-No flatness is used. The calculation also applies to empty fibre products, empty
-opens and zero sections. -/
+inverse-image open is the whole fibre product. -/
 theorem tensorUnit_open_degree_zero {X S : Scheme.{u}} (f : X ⟶ S) (y : S) (n : ℕ)
     (F : X.Modules) (I : InjectiveResolution F)
     (J : InjectiveResolution ((tensorPullback (formalFibreι f y n)).obj F))

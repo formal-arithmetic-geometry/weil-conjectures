@@ -21,8 +21,16 @@ import WeilConjectures.AlgebraicGeometry.Regular
 /-!
 # A finite smooth modification of a reduced curve
 
-Source: Stacks Project, Varieties, Tags 0BXR and 0B8Y, as used in the proof of
-Etale Cohomology, Tag 0A3Q (blueprint: lem-weil-pbc-reduced-curve-normalization).
+## References
+
+* [Stacks Project, Tag 0BXR](https://stacks.math.columbia.edu/tag/0BXR)
+* [Stacks Project, Tag 0B8Y](https://stacks.math.columbia.edu/tag/0B8Y)
+* [Stacks Project, Tag 0A3Q](https://stacks.math.columbia.edu/tag/0A3Q)
+* [Stacks Project, Tag 035P](https://stacks.math.columbia.edu/tag/035P)
+* [Stacks Project, Tag 0BA8](https://stacks.math.columbia.edu/tag/0BA8)
+* [Stacks Project, Tag 0BAJ](https://stacks.math.columbia.edu/tag/0BAJ)
+* [Stacks Project, Tag 01WK](https://stacks.math.columbia.edu/tag/01WK)
+* [Stacks Project, Tag 0CYI](https://stacks.math.columbia.edu/tag/0CYI)
 -/
 
 @[expose] public section
@@ -34,15 +42,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A reduced finite-type curve admits a finite list of its distinct integral components.
-Source: Stacks Project, Varieties 0BXR; Morphisms 035P; Properties 0BA8.
-
-Proof: A finite-type scheme over a field is Noetherian, so its irreducible components form
-a finite set. Enumerate this set without repetitions by Fin n, including n = 0 in the
-empty case. Give each component its reduced induced closed subscheme structure. It is
-integral, since its underlying space is nonempty and irreducible and its structure is
-reduced. Its inclusion is a closed immersion and its image is the chosen component.
-A chain of irreducible closed subsets of this closed subspace is also such a chain in X,
-so its dimension is at most that of X. The enumeration gives injectivity and exhaustivity.
 -/
 private theorem exists_integral_component_cover_of_reduced_curve
     {k : Type u} [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
@@ -83,20 +82,6 @@ private theorem exists_integral_component_cover_of_reduced_curve
     simp [I, Z, hi]
 
 /-- Assemble finite smooth modifications of the distinct integral components.
-Source: Stacks Project, Varieties 0BXR and Morphisms 0BAJ, 01WK, 0CYI, as used in
-Etale Cohomology 0A3Q.
-
-Proof: Take the finite disjoint union of the Y i and use the maps ν i followed by ι i
-on its summands. Closed immersions and ν i are finite, so their composites and their
-finite coproduct are finite. Smoothness is local on the source, and each summand is
-smooth over k. Each irreducible chain of the coproduct lies in one open-and-closed
-summand, so its dimension is at most one. For each component remove every other
-component, then intersect with its dense open U i. These intersections are disjoint
-opens in X, each containing the generic point of its component, and their union is
-dense. The closed immersion of that component is surjective over its intersection;
-as X is reduced its ideal is zero, so it is an isomorphism there. All other summands
-have empty preimage, and ν i is an isomorphism there by restriction from U i. These
-local inverses glue over the union. For n = 0 use the empty coproduct and empty open.
 -/
 private theorem exists_modification_of_component_modifications
     {k : Type u} [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsReduced X]
@@ -140,7 +125,7 @@ private theorem exists_modification_of_component_modifications
 /-- Normalize an integral curve of dimension at most one. Finiteness, dimension preservation,
 and the dense-open isomorphism come from the source normalization module. Its normal stalks
 are regular in dimension at most one, and regular finite-type schemes over a perfect field
-are smooth. Source: Stacks Project, Varieties 0BXR and 0B8Y. -/
+are smooth. -/
 private theorem integral_curve_modification
     {k : Type u} [Field k] [IsAlgClosed k] (C : Scheme.{u}) [IsIntegral C]
     (q : C ⟶ Spec (.of k)) [LocallyOfFiniteType q]
@@ -171,24 +156,7 @@ private theorem integral_curve_modification
 
 /-- A reduced separated finite-type scheme of dimension at most one over an algebraically
 closed field admits a finite modification from a smooth separated finite-type scheme of
-dimension at most one, which is an isomorphism over a dense open.
-Source: Stacks Project, Tags 0BXR, 0B8Y and the proof of 0A3Q.
-(blueprint: lem-weil-pbc-reduced-curve-normalization)
-
-Proof:
-1. Enumerate the irreducible components and put their reduced closed subscheme structures
-on them. The proved helper `exists_integral_component_cover_of_reduced_curve` supplies
-this cover from Noetherianity, vanishing ideals, and the dimension bound for subspaces.
-2. Normalize each integral component. The proved helper `integral_curve_modification`
-uses the source library's finite normalization, dimension preservation and dense-open
-isomorphism results. Normality and dimension at most one give regularity; regularity
-then gives smoothness over the perfect field k. This works in dimension zero as well.
-3. Choose these modifications simultaneously. The proved helper
-`exists_modification_of_component_modifications` takes their coproduct, whose map is
-finite and whose structure map is smooth. The open summands bound its dimension by one.
-The remaining dense-open gluing is `lem-weil-pbc-dense-open-component-modifications`.
-4. Finiteness over X gives separatedness and finite type over k by composition, and
-these properties together with the coproduct's dense open give the stated witness. -/
+dimension at most one, which is an isomorphism over a dense open. -/
 theorem exists_finite_smooth_modification_of_reduced_curve
     {k : Type u} [Field k] [IsAlgClosed k] (X : Scheme.{u})
     [X.Over (Spec (.of k))] [IsReduced X]

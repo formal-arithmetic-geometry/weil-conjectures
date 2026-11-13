@@ -19,8 +19,11 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 /-!
 # Strictly henselian singleton neighbourhoods in dimension zero
 
-Source: Stacks Project, Algebra, Tags 00KH, 00FV and 06RS.
-(blueprint: lem-weil-pbc-zero-dimensional-singleton-neighbourhoods)
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
+* [Stacks Project, Tag 06RS](https://stacks.math.columbia.edu/tag/06RS)
 -/
 
 @[expose] public section
@@ -34,26 +37,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A geometric point on a zero-dimensional finite-type scheme has a singleton open
-neighbourhood which is the spectrum of a strictly henselian local ring.
-Source: Stacks Project, Tags 00KH, 00FV and 06RS.
-(blueprint: lem-weil-pbc-zero-dimensional-singleton-neighbourhoods)
-
-Proof: The geometry theorem `zeroDimensional_baseChange_geometry` makes C discrete.
-Set U_c = {c} with its open subscheme structure. The unique-point source of s_c
-and hs show that its range is contained in U_c, so the open immersion lift
-constructs t_c and its factorization. A singleton scheme is affine (Mathlib's
-instance in AlgebraicGeometry.Limits); set R_c = Gamma(U_c, top) and use isoSpec.
-Its spectrum is a nonempty singleton, hence R_c is nonzero and has only one maximal
-ideal. `IsLocalRing.of_singleton_maximalSpectrum` gives its local-ring structure,
-and `ringKrullDimZero_iff_ringKrullDim_eq_zero` gives dimension zero from this spectrum. The
-composite Spec R_c -> U_c -> C -> Spec k is locally of finite type. Apply
-`residueFieldIsoBase` at the closed point (closed in this singleton spectrum), then
-`stalkClosedPointIso` and `IsLocalRing.ResidueField.mapEquiv`: they identify the
-local-ring residue field with k. Transfer algebraic closedness along the resulting
-ring equivalence; in particular the residue field is separably closed. Apply
-`isStrictlyHenselianLocalRing_of_ringKrullDim_eq_zero` (Tag 06RS). Finally the
-lifted geometric point lands at the unique point of Spec R_c, its closed point.
-If C is empty all indexed data are empty functions and the conditions are vacuous. -/
+neighbourhood which is the spectrum of a strictly henselian local ring. -/
 theorem zeroDimensional_singleton_neighbourhoods
     (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) [C.Over (Spec (.of k))]

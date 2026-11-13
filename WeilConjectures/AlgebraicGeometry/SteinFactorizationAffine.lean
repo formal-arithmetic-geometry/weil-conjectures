@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Global
 /-!
 # Stein factorization over an affine base
 
-Source: Stacks Project, More on Morphisms, Theorem 37.53.5, Tag 03H2
-(blueprint: lem-weil-pbc-stein-factorization-affine).
+## References
+
+* [Stacks Project, Tag 03H2](https://stacks.math.columbia.edu/tag/03H2)
 -/
 
 @[expose] public section
@@ -29,10 +30,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Theorem 37.53.5 (Tag 03H2), over `Spec A`.
-(blueprint: lem-weil-pbc-stein-factorization-affine)
-
-For a proper `f`, put `B = Γ(X, ⊤)`. The canonical Stein factorization has first map
+/-- For a proper `f`, put `B = Γ(X, ⊤)`. The canonical Stein factorization has first map
 `X.toSpecΓ` and second map `f.steinFactorizationBase`. Its ring map is integral, its first
 map is proper with geometrically connected fibres, and each ordinary fibre and topological
 inverse image of a point is connected (thus nonempty). The underlying fibre maps
@@ -45,8 +43,8 @@ Proof route of the node:
    intermediate affine scheme with `Spec B`, gives integrality of the second map, and gives
    universal closedness, quasi-compactness, quasi-separatedness and surjectivity of the first
    map, together with its structure-sheaf pushforward being the structure sheaf.
-2. Separated cancellation (`lem-weil-pbc-separated-cancellation`) and permanence of finite
-   type (`lem-weil-pbc-proper-fp-permanence`) make the first map separated and finite type.
+2. Separated cancellation and permanence of finite
+   type make the first map separated and finite type.
    Together with universal closedness this gives properness.
 3. Over the affine base, integrality of the second map is integrality of `A → B`; equivalently
    use `lem-weil-pbc-stein-integral-global-sections` and the affine global-sections isomorphism.

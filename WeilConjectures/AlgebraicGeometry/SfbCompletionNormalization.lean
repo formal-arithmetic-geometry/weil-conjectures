@@ -9,7 +9,12 @@ import WeilConjectures.AlgebraicGeometry.RestrictionLocalCompleteness
 
 /-! # Normalizing completed coefficients on the small pro-etale site
 
-Source: Stacks Tags 00YY, 093M and 099C; Bhatt--Scholze, Lemma 6.5.8.
+## References
+
+* [Stacks Project, Tag 00YY](https://stacks.math.columbia.edu/tag/00YY)
+* [Stacks Project, Tag 093M](https://stacks.math.columbia.edu/tag/093M)
+* [Stacks Project, Tag 099C](https://stacks.math.columbia.edu/tag/099C)
+* Bhatt--Scholze, Lemma 6.5.8
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +34,7 @@ private local instance standardDerived {C : Type (u + 1)} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u + 1}) :
     HasDerivedCategory (ConstantCompletion.Mod O) := HasDerivedCategory.standard _
 
-/-- Constant rings commute with transport to the small site.
-Source: Stacks Tag 00YY (auxiliary; not a blueprint node). -/
+/-- Constant rings commute with transport to the small site. -/
 def constants (X : Scheme.{u}) :
     constantSheaf (ProEt.topology X) CommRingCat.{u + 1} ⋙ sfbModelRings X ≅
       constantSheaf (proEtaleModelTopology X) CommRingCat.{u + 1} := by
@@ -46,8 +50,7 @@ def constants (X : Scheme.{u}) :
     (fun A ↦ (e.app ((Functor.const X.ProEtᵒᵖ).obj A)).symm)
     (fun f ↦ e.inv.naturality ((Functor.const X.ProEtᵒᵖ).map f))
 
-/-- The finite quotient diagrams agree, including all transition maps.
-Source: Stacks Tags 00YY and 093M (auxiliary; not a blueprint node). -/
+/-- The finite quotient diagrams agree, including all transition maps. -/
 def finiteComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) :
     adicLisseRingSystem X I ⋙ sfbModelRings X ≅
@@ -67,9 +70,7 @@ def finiteComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   have : IsIso t := NatIso.isIso_of_isIso_app t
   exact asIso t
 
-/-- The canonical completed-ring comparison, constructed from finite projections.
-Source: Stacks Tags 00YY and 093M
-(auxiliary; not a blueprint node). -/
+/-- The canonical completed-ring comparison, constructed from finite projections. -/
 def coefficients (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbModelRings X).obj (adicLisseCompletedRing X I) ≅
       ConstantCompletion.completed (proEtaleModelTopology X) A I :=
@@ -77,9 +78,7 @@ def coefficients (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) 
     HasLimit.isoOfNatIso (finiteComparison X I)
 
 /-- Normalize the actual transported localization representative by scalar restriction
-along the inverse of the canonical coefficient isomorphism.
-Source: Stacks Tags 00YY and 099C
-(auxiliary; not a blueprint node). -/
+along the inverse of the canonical coefficient isomorphism. -/
 def object (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
     ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology X) A I) :=
@@ -157,14 +156,7 @@ private theorem complete_iso
   · rintro ⟨W, hW, h⟩
     exact IB.local_mem U b W hW (fun V g hg ↦ (hmem V _).mpr (h V g hg))
 
-/-- The two completed coefficient presentations give the same local completeness test.
-Source: Stacks Tags 00YY, 093M and 099C
-(auxiliary; not a blueprint node).
-
-Proof: the canonical limit isomorphism commutes with the first projections by its
-construction. Its inverse identifies their kernel ideals. Apply preservation and
-reflection of local completeness under scalar restriction; the target-ring isomorphism
-makes the image-generated ideal exactly the kernel, section by section. -/
+/-- The two completed coefficient presentations give the same local completeness test. -/
 theorem complete_iff (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
     IsSfbAdicComplete X I K ↔

@@ -12,8 +12,11 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShiftRightUnitor
 /-! # Exactness and unitality of canonical tensor shifts
-Source: Stacks Project, Tag 06YH and the Koszul unitor identity.
-(blueprint: lem-sc-scheme-canonical-tensor-shift-properties).
+
+## References
+
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 08EU](https://stacks.math.columbia.edu/tag/08EU)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -60,20 +63,7 @@ private lemma independent_tensorRight_exact (K : DerivedCategory C) :
 end DerivedCategory
 
 namespace AlgebraicGeometry
-/-- Canonical tensor shifts are exact and their degree-one right-unitor squares hold.
-Source: Stacks Tag 06YH; total-complex shift/unitor calculation used in Tag 08EU.
-(blueprint: lem-sc-scheme-canonical-tensor-shift-properties).
-
-Proof. For a fixed K-flat complex the canonical shift comparison agrees with the
-comparison descended from tensoring mapping-cone triangles on the homotopy category.
-The tensor functor is therefore exact. A K-flat replacement of the fixed factor and
-naturality of the two-variable shift comparison transport this to every fixed object.
-For the unitor square, use the bifunctor localization comparison with the unit fixed
-in the second factor and a K-flat complex P in the first. Expand the comparison's
-shift square. The complex right unitor satisfies the Koszul translation identity in
-every degree. Naturality of the unitor absorbs the inclusion's shift map. Cancel the
-invertible localization shift comparison to obtain the square at Q(P). The identity
-functor has its standard shift. Zero factors and the empty scheme give zero maps. -/
+/-- Canonical tensor shifts are exact and their degree-one right-unitor squares hold. -/
 theorem schemeCanonicalTensorShift_properties (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
     letI := schemeCanonicalTensorShift Y

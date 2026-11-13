@@ -19,33 +19,15 @@ import WeilConjectures.AlgebraicGeometry.FiniteConductorMul
 
 /-! # Conductor powers in a semilocal normalization
 
-Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
-(blueprint: semilocal-dim-one-conductor-power)
+## References
+
+* [Stacks Project, Tag 09N2](https://stacks.math.columbia.edu/tag/09N2)
 -/
 
 @[expose] public section
 universe u v
 
 /-- Conductor-power conclusion for the normalization in Varieties Lemma 09N2.
-
-Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
-(blueprint: semilocal-dim-one-conductor-power)
-
-Proof: identify `B` with its image in `K` using the injective fraction-ring map,
-put `B' = integralClosure B K`, and let `A = B[x,y]` inside `K`. Both generators
-are integral, so `A` is finite over `B`. Since `B ⊆ A ⊆ K` and `K` is the fraction
-field of `B`, it is also the fraction field of `A`. The finite conductor theorem
-therefore supplies `r > 0` with `J(B)^r A ⊆ B`: every product of a member of
-`J(B)^r` with a member of `A` lies in `B`, and so do finite sums of such products.
-The inclusions `B ⊆ A ⊆ B'` are injective and integral. Integral lying-over gives
-surjectivity of `Spec(B') → Spec(A)`. Apply `integral_overring_jacobson_power`
-using the assumed finiteness of the maximal spectra of `B` and `B'`. Since
-`x ∈ A` maps into `J(B')`, it yields `m > 0` with `x^m ∈ J(B) A`. Raising to
-power `r` puts `x^(m*r)` in `(J(B) A)^r = J(B)^r A`. Multiplying by `y ∈ A`
-keeps it in that ideal, hence in `B`. Take `n = m*r > 0` and the corresponding
-preimage `b : B` to obtain the equality in `K`. This also works for `y = 0`;
-the nonzero hypothesis on `x` is inherited from the source and is not needed
-for this part of its argument.
 -/
 theorem semilocal_dim_one_conductor_power
     (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B]

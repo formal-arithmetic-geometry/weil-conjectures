@@ -24,8 +24,15 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Chosen affine comparison for nonpositive flat resolutions
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1).
-(blueprint: new-h3-self-tor-nonpositive-chosen-comparisons). -/
+
+## References
+
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 06YG](https://stacks.math.columbia.edu/tag/06YG)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks Project, Tag 00LS](https://stacks.math.columbia.edu/tag/00LS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -40,32 +47,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Nonpositive flat resolutions have affine coordinates compatible with one
 augmented quotient-resolution lift on each basic inclusion. Compatibility with
-arbitrary supplied lifts is a separate algebraic homotopy argument.
-
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1).
-(blueprint: new-h3-self-tor-nonpositive-chosen-comparisons).
-
-Proof: Bounded-above termwise flatness makes K K-flat. Apply the natural
-K-flat derived tensor comparison to the constant families K and B[0]. The
-quasi-isomorphism q becomes an isomorphism d under derived localization. Tensor
-d inverse with the identity of Q(B[0]), then compose with the K-flat comparison.
-Apply homology in degree -n and the homology factorization isomorphism. This gives
-a global sheaf isomorphism from intrinsic derived self-Tor to the stated homology.
-
-Take normalized affine coordinates for intrinsic derived self-Tor from
-exists_derived_selfTor_affine_coordinates. Compose each coordinate equivalence
-with the linear equivalence on sections induced by the global sheaf isomorphism.
-For a basic inclusion V in U, restriction carries the kernel ideal on U into
-that on V. The augmented quotient-resolution tensor comparison therefore provides
-psi, a and k with the quotient, augmentation and pure-tensor equations.
-
-Apply the intrinsic coordinate restriction equation to these supplied comparisons.
-Naturality of the global sheaf isomorphism identifies restriction of its U section
-map with its V section map after restriction. Substitute the intrinsic equation
-and apply the V section map to both sides. This proves the desired equation for
-the composed coordinates, using the same restriction-of-scalars homology comparison.
-The algebraic lifting theorem does not require projective restricted target terms.
-Degree zero, zero quotients, and empty basic opens use these same constructions. -/
+arbitrary supplied lifts is a separate algebraic homotopy argument. -/
 theorem exists_selfTor_nonpositive_chosen_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]

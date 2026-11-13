@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.RectangleInverseBaseChangeMateTransport
 
 /-! # Right-adjoint mate for two successive base changes
 
-Source: Stacks Project, Duality for Schemes, Tag 0ATR.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
 -/
 
 @[expose] public section
@@ -24,24 +26,7 @@ namespace AlgebraicGeometry
 -- Lifted functors and the two iterated pullbacks require extra definitional-equality checks.
 /-- The right-adjoint mate for the rectangle factors through the two square mates
 on the genuine iterated pullback. This assertion concerns only successive base
-changes, before identifying either pullback with an open restriction.
-Source: Stacks Project, Duality for Schemes, Tag 0ATR, Lemma 48.5.2.
-(blueprint: lem-sc-right-adjoint-mate-successive-base-change)
-
-Proof: Derived pullback composition and the displayed projection equations give
-source comparisons. Derived direct-image composition, and uniqueness of right
-adjoints with the unit/counit comparisons, give the middle and target comparisons.
-Transpose ordinary base change under the composite pullback/direct-image
-adjunction. The counit formula and associativity of pullback composition identify
-its transpose with the composite of the square transposes; injectivity of the Hom
-equivalence proves ordinary base-change pasting. Expand the second mates as
-pullback of the right adjoint of the base unit, inverse conjugate of ordinary base
-change, then the upper pullback counit. ConjugateEquiv preserves composition and
-inverses. Naturality moves the conjugates past units and counits; the middle unit
-and counit cancel by the triangle identities. The remaining factors are the three
-comparison isomorphisms and the two square mates in the displayed order. Neither
-square mate is inverted. This works for arbitrary qcqs base morphisms and empty
-schemes, and does not require flatness or properness. -/
+changes, before identifying either pullback with an open restriction. -/
 theorem rightAdjoint_mate_successive_baseChange
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

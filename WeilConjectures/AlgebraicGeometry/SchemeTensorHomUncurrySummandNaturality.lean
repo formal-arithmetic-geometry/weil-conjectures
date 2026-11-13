@@ -10,7 +10,12 @@ public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 
 /-! # Naturality of uncurrying on tensor summands
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -73,21 +78,7 @@ private theorem component_formula (X : Scheme.{u})
 attribute [local irreducible] homComplexFunctor
 
 -- The abstract API avoids unfolding Hom-complex data during the calculation.
-/-- Restricting uncurrying and postcomposition to an arbitrary tensor summand.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-ordinary evaluation chain calculation, step 3, naturality portion.
-(blueprint: lem-pc-scheme-uncurry-summand-naturality).
-
-Proof: Apply schemeTensorHomUncurry_component to the outer inclusion in degrees
-n,r,k. Its inverse tensor-Hom expression uses the projection of Hom(P,I(F)).
-The naturality equation of homComplex_projections_exists with identity on P and
-eta_F on F moves this projection across Hom(P,eta_F). Naturality of uncurrying in
-its target moves eta_F to the last factor. Naturality of the symmetric braiding
-and of uncurrying in its source then moves the inner tensor inclusion into the
-argument of tensorHomEquiv.symm. Reassociate composition to obtain the displayed
-formula. Only n+r=k is used for the Hom projection; p+q=n indexes the inclusion.
-This argument imposes no boundedness or nonvanishing hypotheses and works for
-zero complexes and the empty scheme. -/
+/-- Restricting uncurrying and postcomposition to an arbitrary tensor summand. -/
 theorem schemeTensorHomUncurry_summand_naturality (Y : Scheme.{u})
     (P F V : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F V ⟶ homComplex (R := Y.sheaf) P F)

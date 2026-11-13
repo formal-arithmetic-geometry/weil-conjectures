@@ -16,8 +16,13 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite local constancy under refinement
 
-Source: Stacks Project, Tags 095A, 03Q1 (3), and 03SI.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse).
+## References
+
+* [Stacks Project, Tag 095A](https://stacks.math.columbia.edu/tag/095A)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)
+* [Stacks Project, Tag 093R](https://stacks.math.columbia.edu/tag/093R)
+* [Stacks Project, Tag 04DZ](https://stacks.math.columbia.edu/tag/04DZ)
 -/
 
 @[expose] public section
@@ -66,22 +71,7 @@ private theorem constant_over_iff {X : Scheme.{u}} (U : X.Etale)
     exact Sheaf.isConstant_congr _ e.symm
 
 open CategoryTheory.Limits Opposite in
-/-- Inverse image along any scheme morphism preserves local constancy of sheaves of sets.
-Source: Stacks Project, Tag 095A (Lemma 59.64.2), using Modules on Sites, Tag 093R.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse).
-
-Proof: choose an etale cover of X trivializing F and base change it along g. Its members
-are etale over Y and jointly surjective, so they form an etale cover of Y. Restriction
-of inverse image to a member is inverse image of the original restriction along the
-projection to the corresponding member of the original cover. This follows by the
-composition comparison and the equality of the two maps from the fibre product to X;
-restriction is inverse image along the etale structure map, after transporting through
-the equivalence with the localized site. The original restriction is a constant sheaf
-with some coefficient set in Type (u + 1). Inverse image preserves this constant sheaf,
-by the constant-sheaf adjunction (Tag 093R), for coefficient sets in this full universe.
-Thus every restriction to the base-changed cover is constant. This witnesses local
-constancy of the inverse image. The empty cover on an empty scheme is permitted, and
-neither the set of coefficients nor its cardinality is restricted. -/
+/-- Inverse image along any scheme morphism preserves local constancy of sheaves of sets. -/
 private theorem etaleSetLocallyConstant_pullback {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (hF : IsLocallyConstantEtaleSheafOfSets F) :
@@ -133,25 +123,7 @@ private theorem constant_descend {X Y : Scheme.{u}} (p : Y ⟶ X)
     ((etaleSetPullback p).preimageIso (i.symm ≪≫ (ci.app a).symm))
 
 open CategoryTheory.Limits Opposite in
-/-- Local constancy descends along a universal homeomorphism.
-Source: Stacks Project, Tags 03SI and 04DZ; compare the cover construction in
-`WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism`.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse).
-
-Proof: take a trivializing etale cover of the inverse image of F on Y. Base change along
-p is an equivalence of etale categories (04DZ); choose for each member an etale X-scheme
-whose base change is isomorphic to that member. These X-schemes cover X: lift a point
-of X through the surjective map p, cover the lift by an original member, and project its
-image under the chosen isomorphism to the corresponding X-scheme. Base change of p to
-each chosen X-scheme is again a universal homeomorphism. Its inverse image is fully
-faithful on sheaves, since it is part of the topos equivalence (03SI). Restrictions of F
-to these X-schemes pull back to the original constant restrictions, using the composition
-comparison and restriction/localized-site comparison. Constancy descends under this
-fully faithful inverse image: the inverse image of the constant sheaf on the same
-coefficient set is constant (093R), and full faithfulness lifts the trivialization and
-its inverse, including their inverse identities. Hence the descended cover trivializes
-F. No finiteness of stalks or of the coefficient set is required, and the argument also
-allows the empty scheme and the empty trivializing cover. -/
+/-- Local constancy descends along a universal homeomorphism. -/
 private theorem etaleSetLocallyConstant_descend {X Y : Scheme.{u}} (p : Y ⟶ X)
     [IsUniversalHomeomorphism p] (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (hF : IsLocallyConstantEtaleSheafOfSets ((etaleSetPullback p).obj F)) :
@@ -230,26 +202,6 @@ private theorem locallyConstant_of_iso {Z : Scheme.{u}}
       (𝒰.etalePrecoverageToEtale i)).mapIso e)
 
 /-- Finite local constancy on a stratification passes to every refinement.
-Source: Stacks Project, Tags 095A, 03Q1 (3), and 03SI; compare the abelian-coefficient
-argument in `WeilConjectures.ConstructibleSheaf.Refinement`.
-
-Proof: fix i and choose k with T.stratum i contained in S.stratum k. Write
-Z = T.domain i, W = S.domain k, a = T.immersion i, and b = S.immersion k.
-Form P = Z times_X W with projections p to Z and q to W. The image containment makes
-p surjective. It is an immersion by base change of b, hence a surjective closed
-immersion and a universal homeomorphism. This avoids assuming that a factors through b,
-which need not follow from containment of their underlying images.
-Pull back the finite locally constant sheaf b^*F along q. A pulled-back trivializing
-etale cover is still a cover and inverse image preserves constant sheaves (095A);
-the stalk at each geometric point is the original stalk at its image (03Q1 (3)),
-so it remains finite. Composition of inverse images and p followed by a = q followed
-by b identify this sheaf with p^*(a^*F). The small etale sites of P and Z are equivalent
-under p (03SI). Descend a trivializing cover and its constant-sheaf isomorphisms through
-this equivalence; coverings and constant objects correspond, so a^*F is locally constant.
-Every geometric point of Z lifts uniquely to P because p is a surjective closed immersion
-and fields kill its defining ideal. The stalk comparison therefore also shows that all
-geometric stalks of a^*F are finite. This proves the assertion for each i.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse)
 -/
 theorem refinement_preserves_finite_lisse
     (X : Scheme.{u})

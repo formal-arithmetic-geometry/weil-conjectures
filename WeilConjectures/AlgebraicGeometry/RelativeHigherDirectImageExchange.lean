@@ -15,7 +15,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Degreewise relative exchange with coefficient maps
 
-Source: Stacks Project, Tags 0EYM and 07A7. -/
+## References
+
+* [Stacks Project, Tag 0EYM](https://stacks.math.columbia.edu/tag/0EYM)
+* [Stacks Project, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
+-/
 
 @[expose] public section
 
@@ -29,8 +33,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Degree-q commutative-square exchange followed by the coefficient map.
 
-Source: Stacks Project, Tag 0EYM, first proof paragraph; Tag 07A7, remark-base-change
-(blueprint: def-kun-relative-higher-image-exchange).
 The first factor identifies inverse image of cohomology with cohomology of inverse
 image. The second takes cohomology of the derived mate `derivedBaseChangeMapPlus` and
 of the specified coefficient map, using the exact pullback comparison with degree zero.

@@ -14,7 +14,16 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionCocycleHomology
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionPullbackCocycle
 
-/-! # Resolution comparison bridge -/
+/-! # Resolution comparison bridge
+
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 013P](https://stacks.math.columbia.edu/tag/013P)
+* [Stacks Project, Tag 015B](https://stacks.math.columbia.edu/tag/015B)
+* [Stacks Project, Tag 0730](https://stacks.math.columbia.edu/tag/0730)
+* [Stacks Project, Tag 0733](https://stacks.math.columbia.edu/tag/0733)
+-/
 
 @[expose] public section
 
@@ -49,41 +58,7 @@ private lemma resolutionSectionEquiv_zero
     resolutionSectionEquiv J V A 0 = 0 := by
   rfl
 
-/-- The canonical pullback-counit map is represented by any augmented comparison.
-
-Source: Stacks Project, Cohomology, Tag 01FB; Derived Categories, Tags 013P and
-015B (4); Cohomology on Sites, Tags 0730 and 0733 (1).
-(blueprint: lem-zariski-etale-resolution-homology-data-exists)
-
-Proof: Let P(V) be the sheafification of the free abelian presheaf on yoneda(V).
-The sheafification adjunction, the free abelian group adjunction and additive Yoneda
-identify Hom(P(V), A) with A(V), naturally in A. Applied termwise to R, this
-identifies the Hom complex computing Ext(P(V), i_*F, q) with the section complex
-R(V). The injective resolution computation of Ext gives e₁. The same construction
-for I at i(V) gives e₂, since evaluating i_*I at V is evaluating I at i(V).
-These additive identifications are valid also for q = 0, the zero sheaf and empty V;
-if the Ext universe differs, use the canonical change-of-universe equivalence.
-
-For an arbitrary coefficient A, resolve A and i⁻¹A. Exactness of inverse image
-implies that direct image preserves injective objects. Extend the unit of the
-adjunction to a comparison from the first resolution to the direct image of the
-second, using the degree-by-degree extension through injective objects. Two such
-comparisons are homotopic, by factoring their difference through the differentials.
-Naturality of these lifts and the horseshoe construction therefore give a family
-on section homology natural in A and commuting with connecting homomorphisms.
-In degree zero it is evaluation of the unit. Ext(P(V), -, q) is effaceable for
-q > 0, so dimension shifting identifies this family with the supplied fstar:
-embed A into an injective, use the surjective connecting map, and induct on q.
-
-Now take A = i_*F and follow the unit comparison with the comparison for the counit
-into I. Naturality of the Ext-to-section identifications computes the composite
-as fstar followed by cohomology of the counit. The adjunction triangle identity
-says its augmentation is the pushed augmentation of F into I. The difference from
-the prescribed b is null-homotopic (the theorem
-zariski_etale_resolution_homology_independent). Evaluation preserves the homotopy,
-so their homology maps agree. This proves the formula using the e₁ and e₂ already
-constructed, for every x. We claim no compatibility for arbitrary equivalences.
-This theorem does not assert the existence of an augmented chain map. -/
+/-- The canonical pullback-counit map is represented by any augmented comparison. -/
 theorem zariski_etale_resolution_homology_data_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

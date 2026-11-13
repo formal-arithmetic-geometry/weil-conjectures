@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Pushforward of coherent thickening systems is an equivalence with adic systems.
 
-Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-systems-pushforward-equivalence).
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
+* [Stacks Project, Tag 0880](https://stacks.math.columbia.edu/tag/0880)
 -/
 
 @[expose] public section
@@ -34,48 +37,6 @@ noncomputable section
 set_option autoImplicit false
 
 /-- Pushforward of coherent thickening systems is an equivalence with adic systems.
-Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880.
-(blueprint: lem-weil-pbc-thickening-systems-pushforward-equivalence).
-
-Proof:
-1. The projection j_n is a closed immersion with kernel J^(n+1) by hgeom, where
-   J = I O_X. Since X is Noetherian, X_n is Noetherian. The two identities hi and hi₂
-   identify i_n with the canonical nested-quotient immersion by uniqueness of maps to
-   a pullback (quotientBaseChange_nestedIdeals). Its ideal is J^(n+1).comap j_(n+1).
-2. For a system M, put G_n = j_(n,*) M.term n. Closed-immersion coherent equivalence
-   says G_n is coherent and annihilated by J^(n+1). The adjoint of comparison n is
-   t'_n : M.term (n+1) → i_(n,*) M.term n. Push it along j_(n+1),* and compose with
-   pushforwardComp and pushforwardCongr hi to define t_n : G_(n+1) → G_n.
-   The closed-immersion unit-quotient theorem identifies t'_n with the quotient by
-   (J.comap j_(n+1))^(n+1), followed by an isomorphism. The pushforward ideal-power
-   theorem identifies the induced quotient G_(n+1)/J^(n+1)G_(n+1) with G_n.
-   Hence these terms and transitions define a coherent formal module. Adjoints of
-   composites satisfy the required compatibility by naturality of the adjunction;
-   applying j_(n,*) to each component defines the functor on compatible families.
-   The inverse-system functor laws follow from functoriality of pushforward.
-   Its evaluation comparisons β are the defining termwise identifications.
-3. For a map of pushed inverse systems, fully faithful j_(n,*) gives a unique map
-   u_n between terms. The inverse-system transition equation, faithfulness of
-   j_(n+1),*, and the adjunction homEquiv identify this equation with precisely
-   the comparison compatibility for u_n. Thus the constructed functor is full and
-   faithful. Conversely compatible u_n give compatible pushed maps by the same
-   equation, so this argument proves both directions, naturally in the objects.
-4. Given a coherent formal module H, each H_n is annihilated by J^(n+1).
-   Closed-immersion coherent equivalence for j_n supplies a coherent term M_n and
-   an isomorphism j_(n,*) M_n ≅ H_n. Conjugate the transitions by these isomorphisms
-   and uniquely lift them through fully faithful j_(n+1),*, using pushforwardComp
-   and hi. Take their adjoints along i_n to obtain maps i_n^* M_(n+1) → M_n.
-   The unit-quotient theorem and pushforward ideal-power comparison identify their
-   pushforwards with the quotient transition isomorphisms of H. Full faithfulness
-   reflects isomorphisms, so these adjoints are isomorphisms. Thus M is a coherent
-   thickening system and the chosen termwise isomorphisms assemble into Φ M ≅ H.
-   Full faithfulness and essential surjectivity prove Φ.IsEquivalence.
-5. The calculation of the transitions in step 2 is the displayed β equation.
-   The unit-quotient theorem is stated for a chosen adjunction. For the supplied ai,
-   transport it along the unique comparison between left adjoints to the same
-   pushforward; its unit identity identifies the transported quotient with ai.unit.
-   This only changes the quotient identification by an isomorphism, preserving all
-   the quotient and reflection arguments. No completeness or separatedness is used.
 -/
 theorem thickeningSystems_pushforward_equivalence {A : Type v} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))

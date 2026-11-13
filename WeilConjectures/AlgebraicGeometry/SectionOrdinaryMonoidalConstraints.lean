@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # The normalized ordinary section functor is strong monoidal
 
-Source: Stacks Project, Modules on Sites, Tag 03EK.
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
 -/
 
 @[expose] public noncomputable section
@@ -53,17 +55,7 @@ private theorem changeComparisons
   subst d'
   exact ⟨ha, hl, hr⟩
 
-/-- The normalized ordinary section comparisons preserve associators and unitors.
-Source: Stacks Project, Modules on Sites, Tag 03EK; the ordinary tensor and regular
-module comparisons in internal_section_tensor_comparison.
-
-Proof: the public internal section tensor comparison theorem supplies coherent
-tensor and unit comparisons. They agree with ordinaryTensorComparison and
-ordinaryUnitComparison by uniqueness of their pure-tensor and scalar formulas.
-Substitute these equalities in its associator and left and right unitor identities.
-All three diagrams have the unchanged section equivalence as their forward functor.
-No nonzero-ring or flatness hypothesis is used.
-(auxiliary; not a blueprint node). -/
+/-- The normalized ordinary section comparisons preserve associators and unitors. -/
 theorem section_ordinary_monoidal_constraints (T : Scheme.{u}) :
     (∀ M N P : internalModules Λ T,
       (ordinaryTensorComparison Λ T (M ⊗ N) P).hom ≫

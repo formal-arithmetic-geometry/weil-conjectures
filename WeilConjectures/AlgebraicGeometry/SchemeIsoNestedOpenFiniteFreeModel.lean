@@ -11,8 +11,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Transport of a finite-free model from a nested open
 
-Source: Stacks Project, Tags 08EE and 08E7, identification with an affine spectrum and
-restriction of local models (blueprint: lem-pc-scheme-iso-nested-open-finite-free-model).
+## References
+
+* [Stacks Project, Tag 08EE](https://stacks.math.columbia.edu/tag/08EE)
+* [Stacks Project, Tag 08E7](https://stacks.math.columbia.edu/tag/08E7)
 -/
 
 @[expose] public section
@@ -30,30 +32,7 @@ set_option maxHeartbeats 500000 in
 -- The nested functor comparisons require additional definitional equality checks.
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport one specified bounded-above finite-free model on a nested open across a
-scheme isomorphism. Neither scheme is assumed affine, and no module localization is used.
-
-Source: Stacks Project, Tags 08EE and 08E7, the passage to an affine spectrum and the
-restriction of a local finite-free model
-(blueprint: lem-pc-scheme-iso-nested-open-finite-free-model).
-
-Proof: Let Z be the image of V under the open immersion V.toScheme into X, and let W be
-its image under s.hom. The composite is an open immersion and induces an isomorphism
-V.toScheme with W.toScheme. The membership equivalence is exactly the description of
-these two images. Pass P from the localized site over V to modules on V.toScheme using
-Modules.overEquiv, restrict along the inverse of this isomorphism, and pass back to the
-site over W using its inverse overEquiv. Apply these functors termwise to define P'.
-These are exact equivalences, so they preserve zero objects and the given upper bound.
-They identify the rank-one free module with the rank-one free module: on sections this
-is the structure-sheaf comparison of the scheme isomorphism. Equivalences preserve
-coproducts, so the same comparison identifies every free sheaf on ULift (Fin r).
-Applying it to each term gives the asserted finite ranks. Localize the exact functors.
-The restriction composition comparison identifies restriction first to U and then to V
-with restriction to Z. The isomorphism hC identifies C with the restriction of D along s.
-Naturality of restriction and the localization factorization comparisons therefore turn
-the supplied model isomorphism into the asserted isomorphism over W. Independent choices
-of derived categories cause no change: the localized equivalences and their factorization
-isomorphisms compare them. This construction also works for empty V, zero ranks and an
-arbitrary integer upper bound; it uses no compactness or finite cover. -/
+scheme isomorphism. Neither scheme is assumed affine, and no module localization is used. -/
 theorem exists_scheme_iso_nested_open_finite_free_model
     {X Y : Scheme.{u}} (s : X ≅ Y) (U : X.Opens)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

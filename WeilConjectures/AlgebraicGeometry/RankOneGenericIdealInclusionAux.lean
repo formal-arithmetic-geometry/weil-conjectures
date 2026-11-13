@@ -22,20 +22,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The stalk of a closed pushforward of the structure module at the generic point
-is isomorphic to any compatible residue-field line.
-Source: Stacks Project, Tag 01YH, rank calculation following Tag 01YE.
-(blueprint: new-rank-one-generic-ideal-inclusion-aux)
-
-Proof: closed-pushforward stalk comparison identifies the source with the regular
-module over the generic local ring of W. Integrality makes that ring a field.
-The closed-immersion stalk homomorphism is a surjective local homomorphism onto
-this field, so its kernel is the ambient maximal ideal. Factoring through that
-ideal identifies the field with the ambient residue field. These identifications
-respect the ambient stalk-ring action. A vector space of finrank one is finite
-and has a one-element basis, hence is linearly isomorphic to its scalar field.
-Use the scalar compatibility in hGrank to regard this equivalence as linear over
-the ambient stalk ring, and compose with the source identifications. No ideal
-lattice or global sheaf morphism is constructed by this statement. -/
+is isomorphic to any compatible residue-field line. -/
 theorem rank_one_generic_structure_stalk_iso {X W : Scheme.{u}}
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (G : X.Modules)

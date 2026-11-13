@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.RestrictedTensorPullbackStalk
 
 /-! # Tensor pullback preserves a local isomorphism
 
-Source: Stacks Project, Tags 0095 and 0098.
-(blueprint: lem-pc-tensor-pullback-local-isomorphism). -/
+## References
+
+* [Stacks Project, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,18 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- A map invertible on U pulls back to a map invertible on its inverse image.
-Source: Stacks Project, Tags 0095 and 0098.
-(blueprint: lem-pc-tensor-pullback-local-isomorphism).
-
-Proof: At each point x of f inverse-image U, restriction to U identifies the
-stalk of h at f(x) with an invertible stalk map. The pullback stalk formula
-identifies the stalk of f*(h) with extension of this map along the structure
-ring map. Scalar extension sends isomorphisms to isomorphisms. Thus every stalk
-map of the restriction of f*(h) is invertible. A map of sheaves of modules is
-invertible if it is invertible on all stalks. Empty U has no points and its
-restricted category has only zero objects, so the same stalk criterion applies.
-No flatness of f or quasi-coherence of the modules is required. -/
+/-- A map invertible on U pulls back to a map invertible on its inverse image. -/
 theorem tensorPullback_map_over_isIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) {M N : Y.Modules}
     (h : M ⟶ N) (hh : IsIso (h.over U)) :

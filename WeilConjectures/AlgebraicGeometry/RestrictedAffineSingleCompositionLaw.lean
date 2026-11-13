@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleMaps
 
 /-! # Explicit maps for restricted degree-zero complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 03CB](https://stacks.math.columbia.edu/tag/03CB)
 -/
 
 @[expose] public section
@@ -229,24 +233,7 @@ private lemma single_transition_comp {A B C : Type*}
   rw [hγ]
   simp only [Functor.map_comp]
 
-/-- Composition law for restricted single transitions.
-Source: Stacks Project, Tags 09Z1 and 03CB, inverse-image coherence in restriction.
-(blueprint: lem-sbc-restricted-affine-single-composition-law).
-
-Proof: Expand all three transitions. Their pullback second-projection equations give
-two adjacent commuting squares and their outer rectangle. Substitute D.map_comp
-and hφcomp into the outer restricted coefficient. Horizontal pasting for
-squareUpperStarIso expresses the outer inverse comparison as upperStarComp for
-the restricted arrows followed by the pulled-back first inverse square comparison
-and the second inverse square comparison. Use naturality of the second comparison
-to move the first coefficient map past it. Cancel each comparison with its inverse;
-the result is the coefficient composition law on the restricted sheaves, with the
-transport along restrictedAffineDiagram.map_comp. Apply HomologicalComplex.hom_ext.
-In degree zero, the evaluation isomorphisms singleObjXSelf and their naturality
-identify the single-complex comparison maps with this sheaf calculation; cancel
-the intervening evaluation isomorphisms. In every other degree the source single
-complex is zero. No directedness, cone, nonemptiness, affineness or nonzero sheaf
-assumption is used, so the empty and zero cases satisfy the same equation. -/
+/-- Composition law for restricted single transitions. -/
 theorem restrictedAffineSingleTransition_composition_law {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

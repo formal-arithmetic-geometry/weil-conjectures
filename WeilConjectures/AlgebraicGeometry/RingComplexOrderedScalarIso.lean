@@ -10,7 +10,10 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Scalar extension of explicit ordered localization coordinates
 
-Source: Stacks Project, Tag 0ALZ and Tag 00DK.
+## References
+
+* [Stacks Project, Tag 0ALZ](https://stacks.math.columbia.edu/tag/0ALZ)
+* [Stacks Project, Tag 00DK](https://stacks.math.columbia.edu/tag/00DK)
 -/
 
 @[expose] public noncomputable section
@@ -95,24 +98,8 @@ private theorem scalarPointIso_one_tmul {A B : CommRingCat.{u}} (φ : A →+* B)
 /-- Scalar extension identifies two explicit ordered localization complexes for a list
 and its image. This is an augmented cochain isomorphism, with no derived-category,
 K-flatness, ideal, replacement complex, or change-of-generators assumption.
-Source: Stacks Project, dualizing.tex, Tag 0ALZ; algebra.tex, Tag 00DK.
-(auxiliary; not a blueprint node).
 
-Proof: in degree zero use multiplication B tensor_A A to B. In degree q+1, tensor
-commutes with the finite product indexed by increasing (q+1)-tuples. On its t-factor
-use B tensor_A A[1/product(f(t i))] = B[1/product(phi(f(t i)))]. This is the localization
-base-change isomorphism; it sends b tensor a/g^n to b*phi(a)/phi(g)^n, and its inverse
-sends b/phi(g)^n to b tensor 1/g^n. Use the supplied linear coordinate isomorphisms to
-transport these maps to the terms of the complexes. The bottom-topology sheafification
-unit identifies tensor sections with the actual scalar-extension sheaf. Negative terms
-are zero. For the first differential the fraction map carries phi(a) to its localization.
-For the positive differentials the face maps commute with these fraction maps: both
-composites are the unique algebra map out of the corresponding localization. Tensor
-linearity then preserves the finite alternating sum and its integer signs. Thus the
-term isomorphisms form a cochain isomorphism. In degree zero their multiplication map
-is precisely the scalar augmentation; other target degrees are zero. This proves the
-augmentation equation. Finite empty products here are zero modules, so an empty list
-works; the localization identities also apply at zero generators and over zero rings. -/
+. -/
 theorem ringComplex_ordered_scalar_iso
     (A B : CommRingCat.{u}) (φ : A →+* B) (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (RingSiteModules A) ℤ) (a : C ⟶ ringComplexSingle A)

@@ -29,8 +29,11 @@ Mathlib's notions once the finite-type conditions are added.
 - `AlgebraicGeometry.Scheme.Hom.isQuasiFinite_iff`:
   `IsQuasiFinite f ↔ LocallyQuasiFinite f ∧ LocallyOfFiniteType f ∧ QuasiCompact f`.
 
-Source: Stacks Project, Morphisms of Schemes, Tags 01TD, 01TF and 01TJ
-(blueprint: pqf-def-quasifinite).
+## References
+
+* [Stacks Project, Tag 01TD](https://stacks.math.columbia.edu/tag/01TD)
+* [Stacks Project, Tag 01TF](https://stacks.math.columbia.edu/tag/01TF)
+* [Stacks Project, Tag 01TJ](https://stacks.math.columbia.edu/tag/01TJ)
 -/
 
 @[expose] public section

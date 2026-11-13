@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedGlobalGermExchange
 
 /-! # Strict-local exchange compared with derived global sections
 
-Source: Stacks Project, Tags 03QO and 095T.
+## References
+
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 095T](https://stacks.math.columbia.edu/tag/095T)
 -/
 
 @[expose] public section
@@ -31,29 +34,7 @@ open Scheme Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- Strict-local stalk exchange is the derived-unit map on total-space hypercohomology.
 This statement is on all bounded below complexes and all integer degrees; it contains
-no comparison with Ext-valued sheaf cohomology.
-
-Source: Stacks Project, etale-cohomology.tex, Tag 03QO and the final map-on-stalks
-paragraph of Tag 095T, before closed-fibre comparison.
-(blueprint: lem-weil-pbc-strict-local-derived-global-exchange)
-
-Proof: Choose a bounded below injective representative I of K, and a bounded below
-injective replacement g'^*I → J of its exact inverse image. Direct image preserves
-K-injectives because it is right adjoint to exact inverse image. Thus Rf_*K is
-represented by f_*I and Rf'_*g'^*K by f'_*J. The closed-point stalk is exact, and
-Tag 03QO identifies it naturally with global sections over each strict-local base.
-Locality of φ puts the image of the closed B-point at the closed A-point. Inverse-image
-stalk comparison identifies the stalk after g^* with the original stalk at that image;
-changing the separably closed residue field does not change this stalk. Apply these
-natural identifications degree by degree to the two complexes, and use exactness to
-commute stalks with homology. Leray identifies Γ(Spec A,f_*I) with Γ(X,I), and similarly
-for B and J. Their homologies give c₁ and c₂. The termwise derived exchange formula
-represents the exchange by g^*f_*I → f'_*g'^*I → f'_*J. Under the germ identifications
-its map on sections is Γ(X,I) → Γ(X',g'^*I) → Γ(X',J), the underived unit followed by
-the replacement. The derived adjunction unit and Leray compatibility identify its
-class with the morphism defining p. Taking homology proves the equation. Comparisons
-of K-injective representatives are unique up to homotopy and induce isomorphisms,
-so the calculation applies to the chosen derived functors in the statement. -/
+no comparison with Ext-valued sheaf cohomology. -/
 theorem Etale.exists_addEquiv_strictLocal_derivedGlobal_exchange
     {A B : Type u} [CommRing A] [HenselianLocalRing A]
     [IsSepClosed (IsLocalRing.ResidueField A)]

@@ -15,8 +15,11 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemHomTransport
 
 /-! # Morphisms of completions as compatible restriction families
 
-Source: Stacks Project, Remark 088F, equation 0880 and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-completion-hom-dictionary).
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 0880](https://stacks.math.columbia.edu/tag/0880)
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
 -/
 
 @[expose] public section
@@ -31,32 +34,7 @@ namespace AlgebraicGeometry
 
 /-- The Hom part of the thickening dictionary for two completed coherent modules.
 This identifies formal morphisms with compatible restriction families; it makes no
-assertion that either kind of morphism lifts to an uncompleted morphism.
-Source: Stacks, Remark 088F, equation 0880 and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-completion-hom-dictionary).
-
-Proof:
-1. Apply `thickeningSystems_dictionary` with the tensor-pullback adjunctions. It gives
-   a restriction functor R, an equivalence Φ, evaluation comparisons r_n and a natural
-   comparison ρ between completion and R followed by Φ.
-2. Full faithfulness of Φ and conjugation by ρ identify formal Hom with Hom(R G,R F).
-   CoherentFormalModule is a full subcategory, so its arrows are precisely the natural
-   transformations between the two formalCompletionSystem functors.
-3. Conjugating each component by r_n identifies these system arrows with families
-   between the actual tensor pullbacks. The transition equation for r_n carries the
-   compatibility equation to the one using the dictionary's comparison c'_n.
-4. This remains the same family condition for the comparison c_n in the statement.
-   For each closed immersion j_n its right adjoint is fully faithful (087T). The
-   counit and the pulled-back unit are invertible by the adjunction triangle identities.
-   Naturality against the unit shows that any natural automorphism of j_n^* acts
-   centrally on maps between its values: conjugate its component on j_{n,*}M by the
-   counit to get a natural automorphism of M, and use the unit to identify this with
-   its component on j_n^*F. Hence c_n(c'_n)^{-1} commutes with
-   every v_n. Cancel it to identify the two compatibility equations.
-5. These componentwise operations are inverse bijections, since each r_n is invertible
-   and Φ is fully faithful. Naturality of ρ and r_n sends the completion of w to the
-   componentwise pullback of w, giving the displayed equation. Empty schemes, zero
-   modules and I=0 impose no exception; no completeness or properness is used. -/
+assertion that either kind of morphism lifts to an uncompleted morphism. -/
 theorem thickeningSystems_completion_hom_equiv
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A)

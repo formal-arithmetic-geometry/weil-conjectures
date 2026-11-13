@@ -11,8 +11,10 @@ import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 
 /-! # Universality of the transported tensor pairing
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-pairing-isIso).
+
+## References
+
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
 -/
 
 @[expose] public section
@@ -229,31 +231,7 @@ attribute [local irreducible] monoidalCategory
 
 set_option maxHeartbeats 600000 in
 -- The proof checks transported module structures in four bilinear identities and two inverses.
-/-- The map representing the transported pure pairing is invertible.
-Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-pairing-isIso).
-
-Proof: transport the product-preserving right adjoint on set sheaves to modules over R,
-using the adjoint of I.ringUnderlying as the structural ring map. The graph identities for
-I.moduleAdd and I.moduleSMul, and the corresponding right-adjoint operations, show that
-the sheaf adjunction restricts to linear maps for the specified I. This also proves that
-maps out of I(M tensor N) are determined by the transported pure pairing: transpose two
-such maps, test their mates on pure source tensors, then use the tensor universal property.
-
-For H = I(M) tensor I(N), transpose its pure pairing along the inverse product comparison.
-For each of the four bilinearity identities, use the adjunction's naturality, its formulas
-for addition and scalar multiplication, and the corresponding graph identity of I. Evaluate
-on the universal triple of operands to obtain sectionwise bilinearity. The source tensor
-universal property gives a linear map M tensor N into the module direct image of H.
-The restricted adjunction transposes this map to gamma : I(M tensor N) → H.
-
-Naturality of the adjunction and the source tensor's pairing formula show that gamma
-composed with the transported pure pairing is the pure pairing of H. The normalization
-of b and tensor extensionality give b followed by gamma equal to the identity on H.
-The extensionality for maps out of I(M tensor N), proved above, then gives gamma followed
-by b equal to the identity. These are the two inverse identities. All constructions use
-the specified I. No points or nonzero-ring assumption is needed; zero modules, zero rings
-and empty sites satisfy the same argument. -/
+/-- The map representing the transported pure pairing is invertible. -/
 theorem inverseImageTensorPairing_isIso
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u))

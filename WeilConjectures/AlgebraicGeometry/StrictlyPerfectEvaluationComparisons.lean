@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComp
 
 /-! # Compatible comparison isomorphisms for an ordinary evaluation map
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-comparisons).
+## References
+
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
 -/
 
 @[expose] public section
@@ -125,29 +128,6 @@ set_option maxHeartbeats 700000 in
 /-- Given representatives and an ordinary evaluation chain map, there are compatible
 source and target comparison isomorphisms. The comparisons are existentially
 quantified; the square is not asserted for arbitrary isomorphisms.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of
-lemma-dual-perfect-complex; Tag 08DM, lemma-Rhom-strictly-perfect;
-Tag 08DL, lemma-restriction-RHom-to-U.
-(blueprint: lem-pc-strictly-perfect-evaluation-comparisons).
-
-Proof:
-1. A finite-projective term is a retract of a finite free sheaf. Internal Hom
-   makes its short-complex sequence a retract of the finite-free sequence.
-   Monomorphisms and epimorphisms are stable under retracts; the retraction on
-   homology makes its homology zero. Thus termwise internal Hom is exact.
-2. Apply bounded exact-term Hom to the functorial K-injective resolution
-   eta:F to I. Consequently Q Hom(P,eta) is invertible.
-3. Construct the ordinary evaluation map for I using the specified degree maps
-   and their differential equation. Apply the K-injective comparison theorem
-   with eN followed by Q eta to obtain aI and bI and the resolved square.
-4. Both ordinary evaluation maps are invertible by the strictly-perfect
-   degreewise theorem. Set b=bI followed by the inverse of Q Hom(P,eta).
-   Set a=aI followed by Q fI, the inverse of Q Hom(P,eta), and the inverse of Q f.
-   Associativity and cancellation give R(g);b=a;Q(f).
-   The source comparison is existentially chosen, so it need not be the map
-   induced by tensoring eta. No separate evaluation-naturality lemma is needed.
-   Zero complexes and empty opens use the same retractions and inverses.
 -/
 theorem exists_strictlyPerfect_evaluation_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -12,9 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # Second coordinate extraction before a trace
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, second triangle, common coefficient extraction.
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -180,9 +178,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
   [UpperStarPreservesFlat C]
 
-/-- Reassociate and swap the two base coefficients, then undo tensor pullback.
-Source: thm-amb-p1-adjunction.proof.md, second triangle before the scalar trace
-(auxiliary; not a blueprint node). -/
+/-- Reassociate and swap the two base coefficients, then undo tensor pullback. -/
 def extractionShuffle {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
     (N K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology C)) :
@@ -502,22 +498,7 @@ private theorem comparison_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc, CoordinateTrace.swap, Iso.app_inv]
 
-/-- The second-coordinate isomorphism calculation before a scalar trace is applied.
-Source: thm-amb-p1-adjunction.proof.md, second triangle, extraction of the common
-coefficient and the even self-symmetry (auxiliary; not a blueprint node).
-
-Proof: use exchange/projection compatibility for the canonical self-product square
-and invert the resulting square. Tensor with B and apply projection associativity.
-Transport e through the tensor pullback comparisons. The two copies of the line
-on the product can be exchanged without changing the map, by the hypothesis on
-its canonical self-symmetry and the braided pullback comparisons. The comparison
-on the entire coefficient B tensor f*K is then exactly coordinateTwisted. The
-remaining operations are inverse second-coordinate exchange, inverse coordinate
-comparison on B and the reassociation extractionShuffle. This proves the identity
-of maps to B tensor f*(Rf!B tensor K), before a trace Rf!B -> A is chosen.
-The native compact-support projection/exchange square supplies this compatibility
-directly; all compositors and exchanges remain canonical.
-No trace, diagonal class, integral normalization or triangle identity occurs. -/
+/-- The second-coordinate isomorphism calculation before a scalar trace is applied. -/
 theorem secondExtraction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (L : DerivedCategoryModule A Y)
     (hL : (CoordinateTrace.swap A Y L L).hom = 𝟙 _)

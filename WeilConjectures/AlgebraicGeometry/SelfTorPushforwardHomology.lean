@@ -14,8 +14,13 @@ import WeilConjectures.AlgebraicGeometry.SelfTorProjectionHomology
 
 /-! # Closed-immersion self-Tor on fixed resolution representatives
 
-Source: Stacks Project, Tags 08EU, 068G, 06YS and 08KS.
-(blueprint: lem-pc-self-tor-pushforward-homology). -/
+## References
+
+* [Stacks Project, Tag 08EU](https://stacks.math.columbia.edu/tag/08EU)
+* [Stacks Project, Tag 068G](https://stacks.math.columbia.edu/tag/068G)
+* [Stacks Project, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+* [Stacks Project, Tag 08KS](https://stacks.math.columbia.edu/tag/08KS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,30 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- The homology of the derived tensor square of the pushed-forward structure sheaf
-is the pushforward of the homology of its termwise pulled-back K-flat resolution.
-
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EU;
-More on Algebra, Tag 068G;
-modules.tex, Tag 08KS; Tag 06YS for K-flat representatives.
-(blueprint: lem-pc-self-tor-pushforward-homology).
-
-Proof: In standard derived localizations put E=O_Z[0] and K=B[0]. A closed immersion
-is affine and hence quasi-compact and quasi-separated. Both E and K have
-quasi-coherent cohomology: O_Z is quasi-coherent and affine pushforward preserves
-quasi-coherence. Exactness of closed-immersion pushforward identifies Ri*E with K.
-The qcqs derived projection formula gives K tensor^L K isomorphic to
-Ri*(E tensor^L Li*K). The structure-sheaf single complex is the derived tensor unit,
-so the right side is Ri*(Li*K). The augmentation a and K-flat representative
-comparison identify Li*K with Q(T), for the actual termwise pullback T of P.
-Closed-immersion pushforward is exact (after forgetting scalars, use the closed-image
-homeomorphism and closed-subset exactness, and reflect exactness back to modules).
-Thus its derived homology is ordinary pushforward of homology. Apply degree-k
-homology to the preceding isomorphisms. Transport from standard localizations to the
-supplied category on Y using the localization equivalences and the comparisons for
-tensor and homology. This keeps the displayed fixed tensor structure. The argument
-needs neither flatness of the immersion nor any boundedness of P. For the identity
-immersion it reduces to the derived unit law. Empty schemes, the zero quotient and
-all integer degrees are included by the same unit and representative comparisons. -/
+is the pushforward of the homology of its termwise pulled-back K-flat resolution. -/
 theorem nonempty_selfTor_pushforward_homology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

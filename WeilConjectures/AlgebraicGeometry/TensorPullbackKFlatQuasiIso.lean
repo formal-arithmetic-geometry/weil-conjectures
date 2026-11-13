@@ -15,8 +15,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Tensor pullback of quasi-isomorphisms between K-flat complexes
 
-Source: Stacks Project, Cohomology, Tags 06YJ and 06YC.
-(blueprint: lem-pc-tensor-pullback-kflat-quasi-iso).
+## References
+
+* [Stacks Project, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks Project, Tag 06YC](https://stacks.math.columbia.edu/tag/06YC)
+* [Stacks Project, Tag 06YT](https://stacks.math.columbia.edu/tag/06YT)
 -/
 
 @[expose] public section
@@ -27,24 +30,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Tensor pullback preserves quasi-isomorphisms between K-flat complexes.
-Source: Stacks Project, Cohomology, Tags 06YJ and 06YC; Cohomology on Sites, Tag 06YT.
-
-Proof: exact inverse image preserves the quasi-isomorphism and takes the two K-flat
-complexes to K-flat complexes over g⁻¹ O_S. For the second complex, apply resolution
-preservation to its identity morphism. Apply the quasi-isomorphism preservation clause
-of derived change of rings to g⁻¹ O_S → O_T. One may choose standard derived categories
-locally for this application; the conclusion is about complexes and does not retain
-these choices. The object and map formulas for change of rings identify the composite
-with the recorded tensor pullback, so its termwise map is a quasi-isomorphism.
-For completeness the change-of-rings clause follows by resolving O_T by a K-flat
-complex: tensoring that resolution with each source K-flat complex preserves the
-augmentation quasi-isomorphism, while tensoring the inverse-image quasi-isomorphism
-with the resolution preserves it by K-flatness. The commutative square and two-out-of-
-three give the claim. The argument works for arbitrary g, including the empty scheme
-and the identity, without any flatness of its structure-sheaf map. Additivity only
-provides the termwise complex functor.
-(blueprint: lem-pc-tensor-pullback-kflat-quasi-iso). -/
+/-- Tensor pullback preserves quasi-isomorphisms between K-flat complexes. -/
 theorem tensorPullback_quasiIso_of_isKFlat {T S : Scheme.{u}} (g : T ⟶ S)
     [(Scheme.Modules.tensorPullback g).Additive]
     {P Q : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ}

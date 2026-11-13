@@ -11,8 +11,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 /-!
 # Vector bundles and their zero sections
 
-A *vector bundle of constant rank `c`* over a scheme `Z` is a morphism `p : E ⟶ Z` with a section
-`z : Z ⟶ E` which is Zariski-locally on `Z` isomorphic to `(𝔸^c_V ⟶ V, 0)`, the coordinates of two
+A *vector bundle of constant rank `c`* over a scheme `Z` is a morphism `p: E ⟶ Z` with a section
+`z: Z ⟶ E` which is Zariski-locally on `Z` isomorphic to `(𝔸^c_V ⟶ V, 0)`, the coordinates of two
 charts being related by linear substitutions with coefficients in `𝒪_Z`
 (`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas`). This is the geometric vector bundle of
 Hartshorne (Exercise II.5.18): the sheaf `ℰ` of fibrewise linear functions on `E` (locally spanned
@@ -21,7 +21,7 @@ the zero section being the closed immersion defined by the augmentation `Sym^•
 kills the coordinates. The pinned Mathlib has no relative `Spec` of a quasi-coherent algebra and
 no symmetric algebra of a sheaf of modules, so the bundle is described through its linear charts.
 
-The charts are taken over open immersions `v : V ⟶ Z` jointly covering `Z`, a chart being an
+The charts are taken over open immersions `v: V ⟶ Z` jointly covering `Z`, a chart being an
 isomorphism `E ×_Z V ≅ 𝔸^c_V` over `V`.
 
 A *trivialization* of `E` (`AlgebraicGeometry.Scheme.Hom.VectorBundleTrivialization`) is an étale
@@ -41,10 +41,10 @@ variable {E Z : Scheme.{u}}
 
 namespace Scheme.Hom
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
-A *linear atlas of rank `c`* of `p : E ⟶ Z` with section `z`: open immersions `vᵢ : Vᵢ ⟶ Z`
-covering `Z`, with isomorphisms `φᵢ : E ×_Z Vᵢ ≅ 𝔸^c_{Vᵢ}` over `Vᵢ` carrying `z` to the zero
+A *linear atlas of rank `c`* of `p: E ⟶ Z` with section `z`: open immersions `vᵢ: Vᵢ ⟶ Z`
+covering `Z`, with isomorphisms `φᵢ: E ×_Z Vᵢ ≅ 𝔸^c_{Vᵢ}` over `Vᵢ` carrying `z` to the zero
 section, such that over `Vᵢ ×_Z Vⱼ` every coordinate of the chart `φⱼ` is a linear combination,
 with coefficients in `Γ(Vᵢ ×_Z Vⱼ, 𝒪)`, of the coordinates of `φᵢ`. -/
 structure VectorBundleAtlas (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) where
@@ -77,9 +77,9 @@ structure VectorBundleAtlas (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) where
             (pullback.fst (v i) (v j)) (𝟙 Z) (by simp) (by simp)).appTop
             ((chart i).hom.appTop (AffineSpace.coord (V i) (ULift.up l))))
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
-`p : E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a section
+`p: E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a section
 of `p` and a closed immersion, and `(p, z)` admits a linear atlas of rank `c`
 (`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas`): Zariski-locally on `Z`, `(E, z)` is
 `(𝔸^c, 0)` with linear transition functions, i.e. `E ≅ Spec_Z (Sym^• ℰ)` for the locally free
@@ -89,9 +89,9 @@ structure IsVectorBundle (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) : Prop where
   isClosedImmersion_zeroSection : IsClosedImmersion z
   nonempty_atlas : Nonempty (VectorBundleAtlas c p z)
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
-A *trivialization* of `p : E ⟶ Z`: an étale open `v : Z' ⟶ Z` together with an isomorphism
+A *trivialization* of `p: E ⟶ Z`: an étale open `v: Z' ⟶ Z` together with an isomorphism
 `E ×_Z Z' ≅ 𝔸^c_{Z'}` over `Z'`. -/
 structure VectorBundleTrivialization (c : ℕ) (p : E ⟶ Z) where
   /-- The étale open `Z'`. -/

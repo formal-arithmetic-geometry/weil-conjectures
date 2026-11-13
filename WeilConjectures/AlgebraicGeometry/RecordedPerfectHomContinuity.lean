@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomContinuity
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 /-! # Continuity of Hom sets for perfect complexes in a ring-colimit system.
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation and open induction.
-(blueprint: lem-pc-recorded-perfect-hom-continuity).
+
+## References
+
+* [Stacks Project, Tag 09RE](https://stacks.math.columbia.edu/tag/09RE)
 -/
 
 @[expose] public section
@@ -25,20 +27,7 @@ namespace AlgebraicGeometry
 /-- The canonical Hom map is surjective on every cofinal tail, and two representatives
 with the same image agree on some entire later tail. These are the set-colimit
 consequences of continuity of Hom; no isomorphism descent or finite collection of
-relations is asserted here.
-Source: Stacks Project, perfect.tex, Tag 09RE, proof of lemma-descend-homomorphisms
-(blueprint: lem-pc-recorded-perfect-hom-continuity).
-
-Proof: choose the universal change-of-counit automorphisms in
-`exists_recordedPerfectHom_normalization`. Conjugate the desired limit morphism
-by the inverse automorphism at P and the forward automorphism at Q. The existing
-Hom continuity theorem lifts it to a finite stage on the desired tail. Conjugate
-this lift by the forward stage automorphism at P and its inverse at Q. The
-normalization equation and inverse cancellation give its required limit image.
-For equality, the normalization equation cancels the outer limit automorphisms,
-so the two stage morphisms conjugated by the inverse stage automorphisms have
-equal old limit images. Apply old tail equality to them. The normalization equation
-at every later stage transports this equality back to the recorded Hom maps. -/
+relations is asserted here. -/
 theorem recorded_perfect_hom_continuity
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

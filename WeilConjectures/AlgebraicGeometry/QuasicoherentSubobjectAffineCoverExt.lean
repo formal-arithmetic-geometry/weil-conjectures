@@ -12,9 +12,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Detecting equality of quasi-coherent subobjects on an affine cover
 
-Source: Stacks Project, Cohomology of Schemes, Tag 01Y8, proof;
-Schemes, Tag 01I6 (affine quasi-coherent modules)
-(blueprint: lem-weil-pbc-quasicoherent-subobject-affine-cover-ext).
+## References
+
+* [Stacks Project, Tag 01Y8](https://stacks.math.columbia.edu/tag/01Y8)
+* [Stacks Project, Tag 01I6](https://stacks.math.columbia.edu/tag/01I6)
+* [Stacks Project, Tag 01IA](https://stacks.math.columbia.edu/tag/01IA)
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- An inclusion into a quasi-coherent subobject is equality if its section images agree
 on an affine open cover. The smaller subobject need not be quasi-coherent, and no
-finiteness or Noetherian hypothesis is needed.
-Source: Stacks Project, Tag 01Y8, proof; the basic-open localization of Tag 01IA
-and sheaf gluing supply the local-to-global step
-(blueprint: lem-weil-pbc-quasicoherent-subobject-affine-cover-ext).
-
-Proof: The inequality gives the inclusion from G to H. It is injective on every open
-because it is a monomorphism. On each covering affine, equality of the images of G and H
-in F makes the inclusion surjective on sections, using the injectivity of H into F.
-The basic opens in all the covering affines form a basis. Given a section of H on a
-basic open D(f), quasi-coherence of H expresses a power of f times the section as the
-restriction of a section on the covering affine. Lift the latter section to G there
-and restrict it to D(f). The restriction of f is a unit on D(f), so multiplying this
-lift by its inverse power gives a lift of the original section. Thus the inclusion
-is bijective on each member of the basis. Mathlib's basis test for sheaf isomorphisms
-makes it a global isomorphism. The isomorphism commutes with the subobject arrows,
-so the subobjects are equal. This also covers an empty scheme and an empty cover. -/
+finiteness or Noetherian hypothesis is needed. -/
 theorem quasicoherent_subobject_eq_of_affine_cover (X : Scheme.{u}) (F : X.Modules)
     (G H : Subobject F) (hH : (H : X.Modules).IsQuasicoherent) (hGH : G ≤ H)
     (I : Type v) (U : I → X.affineOpens) (hU : ⨆ i, (U i).1 = ⊤)

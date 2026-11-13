@@ -12,7 +12,10 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Smooth.Kaehler
 
 /-! # Conormal residue kernel comparison
-Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1).
+
+## References
+
+* [Stacks Project, Tag 02HT](https://stacks.math.columbia.edu/tag/02HT)
 -/
 
 @[expose] public section
@@ -132,11 +135,6 @@ private theorem truncated_kernel_to_residue_conormal
 set_option backward.isDefEq.respectTransparency false in
 /-- A section at a truncation satisfying the Artin--Rees bound detects the residue kernel.
 
-Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1), paragraphs
-beginning "Consider the presentation" through "Since a split injection", specialized
-to reduction modulo the maximal ideal (https://stacks.math.columbia.edu/tag/02HT).
-(blueprint: lem-weil-pbc-truncated-section-conormal-residue-kernel).
-
 Proof in words:
 Put C = P.Ring, J = P.ker, m = maximalIdeal C, n = maximalIdeal S, and k = S/n.
 The surjection C -> S identifies S with C/J, pulls n back to m, and maps m onto n.
@@ -172,13 +170,11 @@ then the class of x modulo n is zero, exactly the asserted membership.
 For J = 0 the source is zero and the claim is immediate; N = 2 is allowed
 and uses exponent 1 in both differential comparisons. The Artin--Rees bound
 is essential: without it, e.g. J = (t^2) in k[t]_(t) at N = 2, reduction of
-the kernel of E -> F need not identify with J/(J^2 + mJ). 
-(blueprint: lem-weil-pbc-truncated-section-conormal-residue-kernel-comap)
+the kernel of E -> F need not identify with J/(J^2 + mJ).
 -/
 /- Structural form of the truncated-section residue-kernel comparison.
 The proof is the Artin--Rees and square-zero conormal argument of Stacks Tag 02HT;
-see the parent theorem for the complete mathematical reduction.
-(blueprint: lem-weil-pbc-truncated-section-conormal-residue-kernel-comap) -/
+see the parent theorem for the complete mathematical reduction.-/
 theorem truncated_section_conormal_residue_kernel_comap
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]

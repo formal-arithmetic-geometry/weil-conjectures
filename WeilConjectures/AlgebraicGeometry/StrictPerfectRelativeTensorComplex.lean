@@ -15,8 +15,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # The explicit relative tensor complex on an open chart
 
-Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
-(blueprint: def-pc-strict-perfect-relative-tensor-complex).
+## References
+
+* [Stacks Project, Tag 0DJQ](https://stacks.math.columbia.edu/tag/0DJQ)
+* [Stacks Project, Tag 08CI](https://stacks.math.columbia.edu/tag/08CI)
 -/
 
 @[expose] public section
@@ -37,9 +39,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Restrict G to the open site, form the ordinary signed direct-sum total tensor
 with L, and restrict scalars along the inverse-image structure-ring map on that site.
-This construction makes no choice of a representative or of a quasi-isomorphism.
-Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
-(blueprint: def-pc-strict-perfect-relative-tensor-complex). -/
+This construction makes no choice of a representative or of a quasi-isomorphism. -/
 noncomputable def strictPerfectRelativeTensorComplex
     {X S : Scheme.{u}} (f : X ⟶ S) (U : X.Opens)
     (L : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)

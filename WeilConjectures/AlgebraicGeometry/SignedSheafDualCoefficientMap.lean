@@ -10,7 +10,10 @@ public import WeilConjectures.Algebra.Homology.HomComplexToSingle
 
 /-! # Postcomposition on a signed internal dual complex
 
-Source: Stacks Project, Tag 0A8X, differential of Hom complexes. -/
+## References
+
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+-/
 
 @[expose] public section
 
@@ -25,8 +28,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{u}}
 
 /-- Postcomposition commutes with signed precomposition.
-Source: Stacks Project, Tag 0A8X. 
-(blueprint: new-g3-signed-sheaf-dual-coefficient-map)
 -/
 theorem signedSheafDualCoefficientMap_comm
     (L : CochainComplex (SheafOfModules.{u}
@@ -41,9 +42,7 @@ theorem signedSheafDualCoefficientMap_comm
     Linear.comp_units_smul, Linear.units_smul_comp,
     SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp, Category.comp_id]
 
-/-- The coefficient map is actual postcomposition in every degree.
-Source: Stacks Project, Tag 0A8X.
-(blueprint: new-g3-signed-sheaf-dual-coefficient-map). -/
+/-- The coefficient map is actual postcomposition in every degree. -/
 noncomputable def signedSheafDualCoefficientMap
     (L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)

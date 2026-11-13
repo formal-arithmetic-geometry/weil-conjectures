@@ -11,8 +11,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Ordered coordinates of the tensor localization complex over a ring
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0996](https://stacks.math.columbia.edu/tag/0996)
+* [Stacks Project, Tag 099D](https://stacks.math.columbia.edu/tag/099D)
 -/
 
 @[expose] public noncomputable section
@@ -24,16 +28,16 @@ open scoped BigOperators
 namespace CategoryTheory
 
 /-- An element of a ring as a section of its one-point ring sheaf.
-Source: Stacks Project, Tag 0996.
-(auxiliary; not a blueprint node). -/
+
+. -/
 def ringTensorCechSection (A : CommRingCat.{u}) (x : A) :
     ((CochainComplex.onePointRingSheaf A).obj ⋙ forget CommRingCat).sections :=
   ⟨fun _ ↦ x, fun _ ↦ rfl⟩
 
 /-- The actual ordered tensor of the two-term localization complexes on the ring site.
 This uses the existing tensor construction, with its existing augmentation.
-Source: Stacks Project, Tag 0996.
-(auxiliary; not a blueprint node). -/
+
+. -/
 def ringTensorCech (A : CommRingCat.{u}) (r : ℕ) (f : Fin r → A) :
     Σ K : CochainComplex (RingSiteModules A) ℤ, K ⟶ ringComplexSingle A :=
   ringedExtendedCech (CochainComplex.onePointRingSheaf A) r
@@ -165,27 +169,8 @@ private theorem ringTensorCech_augmentation_zero_isIso (A : CommRingCat.{u})
     infer_instance
 
 /-- The tensor complex over a ring has the ordered localization coordinates.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
-(auxiliary; not a blueprint node).
 
-Proof: evaluation on the one-object bottom-topology site identifies module sheaves
-with A-modules, their tensor with module tensor, and sheafification with the identity.
-Induct on r in the actual recursive tensor construction. A summand in degree n
-chooses n factors in degree one and the remaining factors in degree zero. Sort the
-chosen indices to identify it with an order embedding Fin n into Fin r. The
-localization universal property identifies the tensor of their localizations with
-localization at their product: the forward map multiplies fractions, and the inverse
-sends a/product(f_i)^k to the tensor with numerator a in one factor and denominators
-f_i^k in all factors. These formulas also cover zero generators and the zero ring.
-The tensor differential inserts one missing index; its Koszul sign is the number of
-chosen preceding indices, precisely the index of the deleted element in the target
-ordered subset. This proves the two displayed differential formulas. Finite direct
-sums are finite products. No negative-degree summand occurs. In degree zero all
-factors are A and multiplication identifies their tensor with A. The tensor of the
-factor projections followed by the unit constraint is this identification, proving
-the augmentation equation. For r=0 the tensor is A[0], with zero empty positive
-products and the identity augmentation. Repeated generators cause no change to the
-indexing or the fraction identities. -/
+. -/
 theorem ringTensorCech_coordinates (A : CommRingCat.{u}) (r : ℕ) (f : Fin r → A) :
     let K := (ringTensorCech A r f).1
     let a := (ringTensorCech A r f).2

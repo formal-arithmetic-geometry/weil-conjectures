@@ -16,8 +16,11 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnderivedTensorMate
 
 /-! # The open pullback square evaluated on a direct-image representative
 
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-e2-open-pullback-counit-representative).
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -51,8 +54,6 @@ set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The representative identity after cancelling the open-restriction factorization.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-e2-open-pullback-counit-representative-postcomp).
 
 This is the mate calculation before composing with the inverse factorization
 isomorphism. It is strictly weaker than the displayed representative identity,
@@ -112,26 +113,7 @@ theorem singleComplexOpen_pullback_counit_representative_postcomp
 set_option cleanup.letToHave false in
 /-- The pullback-composition route, after the direct-image unit, is the localization
 of the sectionwise counit. This calculation does not use the derived open direct-image
-comparison: it compares the explicit pullback factors with the underived adjunction.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-e2-open-pullback-counit-representative).
-
-Proof: Write F for module direct image along f, F0 for direct image along f restricted
-to V, and rX,rY for exact open restriction. On the homotopy category the sectionwise
-comparison e identifies rY(F(I)) with F0(rX(I)). The tensor adjunctions transpose e
-to the pullback square. Indeed the composition comparisons for tensor pullback are
-conjugates of pushforward composition, and the open pullback comparison is the unique
-left-adjoint comparison with exact restriction. Evaluate on sections: both routes
-send a local tensor a tensor x to a times the restriction of x. Thus their composite
-with the underived counit is the same morphism. Apply Qh and use the left-derived
-counit factorization for each composition comparison. Cancel the open-restriction
-factorization isomorphisms, and use naturality of the recorded right-derived unit.
-The pinning of the derived Hom equivalence identifies the derived counit after that
-unit with the left-derived counit followed by Qh of the underived counit. These
-factorizations yield exactly the displayed equality. The calculation works for every
-homotopy-category I: it uses the unit, not its inverse, and needs no resolution or
-boundedness assumption. Empty opens and zero complexes satisfy the same sectionwise
-identity, so no exceptional cases are excluded. -/
+comparison: it compares the explicit pullback factors with the underived adjunction. -/
 theorem singleComplexOpen_pullback_counit_representative
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -14,8 +14,10 @@ import Mathlib.Algebra.Homology.Linear
 
 /-! # Scalar action on derived global sections
 
-Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-scalar-action)
+## References
+
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 01E5](https://stacks.math.columbia.edu/tag/01E5)
 -/
 
 @[expose] public section
@@ -29,14 +31,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
-/-- Derived global sections send multiplication to scalar multiplication.
-Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-scalar-action)
-
-Proof: Multiplication by the global section termwise on an injective resolution lifts
-multiplication on the resolved module, by naturality of multiplication. After global
-sections this is scalar multiplication on the complex. Homology preserves this scalar
-endomorphism, and naturality of the linear resolution comparison gives the result. -/
+/-- Derived global sections send multiplication to scalar multiplication. -/
 theorem moduleCohomology_map_smulHom {X : Scheme.{u}} (M : X.Modules)
     (I : InjectiveResolution M) (p : ℕ) (a : Γ(X, ⊤))
     (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj M) :

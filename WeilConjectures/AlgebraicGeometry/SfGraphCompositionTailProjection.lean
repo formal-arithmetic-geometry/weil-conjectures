@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.SfGraphWordProjectionSquare
 
 /-! # Projection along the remaining graph-composition word
 
-Source: `LowerShriekComposition.lean`, graph construction, and Stacks Tags
-0B56, 0GL1 and 0F7B. (auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* [Stacks Project, Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
+* [Stacks Project, Tag 0F7B](https://stacks.math.columbia.edu/tag/0F7B)
 -/
 
 @[expose] public section
@@ -216,23 +219,6 @@ private theorem diagram_projection
   exact hp
 
 /-- Projection compatibility for the tail of the graph composition word.
-
-Source: node lem-sf-etale-compact-projection-coherence, steps 6--7;
-`LowerShriekComposition.lean`, e3 followed by inverse e2; Stacks Tags 0B56,
-0GL1 and 0F7B. (auxiliary; not a blueprint node).
-
-Proof: apply the Cartesian graph-interchange projection square to the explicit
-product graph diagram. Normalize the actual compact-support compositor as the
-composite graph comparison, inverse raw interchange and inverse source graph
-comparison. Paste the projection squares for the source and composite graph
-comparisons with the interchange square. Naturality of these comparisons and
-cancellation of their isomorphisms give the full compositor projection square.
-Factor that compositor as the first graph comparison followed by the specified
-tail. Paste the first graph comparison's projection square and cancel tensoring
-that comparison. The remaining equality is precisely the stated tail square.
-Only graph comparison isomorphisms are cancelled; no projection map is inverted.
-The calculation applies to arbitrary schemes and unbounded complexes, including
-empty and identity opens and zero coefficients.
 -/
 theorem sfGraphCompositionTailIso_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]

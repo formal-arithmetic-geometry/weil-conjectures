@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Transport of a right-adjoint mate across a scheme isomorphism
 
-Source: Stacks Project, Duality for Schemes, Tag 0ATR.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
+* [Stacks Project, Tag 0E9S](https://stacks.math.columbia.edu/tag/0E9S)
 -/
 
 @[expose] public section
@@ -31,27 +34,7 @@ private theorem map_id_coefficient
   simp only [Category.id_comp, Category.comp_id]
 
 /-- Transport both ordinary base change and its right-adjoint mate when the source
-scheme of the vertical morphism is replaced by an isomorphic scheme.
-Source: Stacks Project, Duality for Schemes, Tag 0ATR, Lemma 48.5.2,
-and Tag 0E9S, invariance under the cartesian restriction identification.
-(blueprint: lem-sc-right-adjoint-mate-scheme-iso-transport-base)
-
-Proof: The projection equations identify r with the pullback of e.hom, hence r is
-an isomorphism. Derived pullback along e.hom and along r are equivalences; their
-inverse functors are pullback along the inverse scheme maps, with the composition
-and identity comparisons. Derived direct-image composition identifies the two
-vertical direct images under these equivalences. Uniqueness of right adjoints,
-with its unit and counit identities, identifies a with b and d with b'.
-Ordinary base change is natural under this identification: transpose under the
-pullback/direct-image adjunction, use the two projection equations and the
-associativity of pullback composition, then use injectivity of the Hom equivalence.
-Thus the ordinary base-change component for f is a conjugate of the component
-for f' at the equivalent object, and is invertible. In the formula for the second
-mate, move the units and counits across these adjunction comparisons. ConjugateEquiv
-preserves the conjugated ordinary comparison and its inverse. The resulting square
-commutes and has invertible vertical sides, giving the asserted arrow isomorphism.
-No invertibility of either right-adjoint mate is required. Empty schemes and zero
-objects satisfy the same naturality and triangle identities. -/
+scheme of the vertical morphism is replaced by an isomorphic scheme. -/
 theorem rightAdjoint_mate_scheme_iso_transport_base
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {P U S T : Scheme.{u}}

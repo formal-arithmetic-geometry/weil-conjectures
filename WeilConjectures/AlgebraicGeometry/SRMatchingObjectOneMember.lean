@@ -15,8 +15,12 @@ import Mathlib.CategoryTheory.FinCategory.Basic
 /-!
 # Matching schemes and one-member semi-representable families
 
-Source: Stacks Project, Hypercoverings, Tags 01G2, 01G3, 01G5; Simplicial Methods,
-Tag 0186 (auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 01G2](https://stacks.math.columbia.edu/tag/01G2)
+* [Stacks Project, Tag 01G3](https://stacks.math.columbia.edu/tag/01G3)
+* [Stacks Project, Tag 01G5](https://stacks.math.columbia.edu/tag/01G5)
+* [Stacks Project, Tag 0186](https://stacks.math.columbia.edu/tag/0186)
 -/
 
 @[expose] public section
@@ -247,30 +251,21 @@ universality is tested on all schemes over `X`, rather than only the étale ones
 proper-face diagram in degree zero has the specified vertex `id_X` and its unique matching
 map is the augmentation.
 
-Source: Stacks, Tags 01G2, 01G3, 01G5, 0186
-(auxiliary; not a blueprint node).
-
 Proof, following the six steps of the node:
-1. The small étale category has terminal object `id_X` and scheme-theoretic pullbacks
-   [lem-weil-pbc-etale-base-change-finite-limits]. Its inclusion into `Over X` preserves
-   these, hence finite limits [lem-weil-pbc-finite-limits-from-terminal-pullbacks].
-2. Take the matching objects in `X.Etale`. Their boundary cones are also proper-face limits
-   [lem-weil-pbc-matching-object-proper-faces, lem-weil-pbc-simplicial-matching-object].
+1. The small étale category has terminal object `id_X` and scheme-theoretic pullbacks. Its inclusion into `Over X` preserves
+   these, hence finite limits.
+2. Take the matching objects in `X.Etale`. Their boundary cones are also proper-face limits.
    Preservation gives limiting cones in `Over X`, with étale vertices and matching maps
    whose proper-face components are precisely the simplicial operators.
 3. The singleton inclusion preserves terminal objects and pullbacks by the memberwise
-   formulas [lem-weil-pbc-semi-representable-finite-limits], hence finite limits by
-   [lem-weil-pbc-finite-limits-from-terminal-pullbacks].
+   formulas, hence finite limits by.
 4. Apply this to the matching boundary diagram. Limit uniqueness identifies the recorded
    SR matching object with the singleton matching scheme, and identifies their matching
    maps by their face components. In degree zero both vertices are `{id_X}`.
-5. Isomorphisms in SR are coverings. Covering permanence
-   [lem-weil-pbc-semi-representable-covering-permanence] transports the covering condition
+5. Isomorphisms in SR are coverings. Covering permanence transports the covering condition
    across the comparison. A singleton is covering exactly when its component is étale and
-   surjective. The component is étale since it is a morphism between étale `X`-schemes
-   [lem-weil-pbc-etale-composition-cancellation].
-6. Apply the equivalence in every degree to the definition of an SR hypercover
-   [def-weil-pbc-semi-representable-object], obtaining the final equivalence. -/
+   surjective. The component is étale since it is a morphism between étale `X`-schemes.
+6. Apply the equivalence in every degree to the definition of an SR hypercover, obtaining the final equivalence. -/
 theorem sr_matching_object_one_member (X : Scheme.{u}) (U : SimplicialObject X.Etale) :
     ∃ (M : ℕ → X.Etale)
       (π : ∀ n : ℕ, (Functor.const _).obj (M n) ⟶ U.properFaceDiagram n)

@@ -14,8 +14,10 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 
 /-! # Change of the counit normalization in perfect Hom transport
 
-Source: Stacks Project, Cohomology, Tags 06YJ and 0D5S.
-(blueprint: lem-pc-recorded-perfect-hom-normalization).
+## References
+
+* [Stacks Project, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -222,25 +224,7 @@ private theorem normalization_comparison {X S : Scheme.{u}} (s : X ⟶ S)
 
 /-- Two composition systems for the same derived pullbacks differ by conjugation
 with the universal change-of-counit automorphisms of the direct pullbacks.
-No perfectness, finite presentation or filtered diagram is involved.
-Source: Stacks Project, Cohomology, Tags 06YJ and 0D5S; uniqueness of the
-left-derived universal functor and its composition comparison.
-(blueprint: lem-pc-recorded-perfect-hom-normalization).
-
-Proof: write ε₀ for the counits selected with the old composition family and ε₁
-for the retained original counits. For every arrow p use leftDerivedUnique to
-construct e_p with Qh(e_p.hom) followed by ε₀(p) equal to ε₁(p). Its inverse
-satisfies the inverse equation by cancellation. Substitute these equations into
-the defining composite-counit expressions for both composition lifts. Naturality
-of e_f at ε₀(g) and the functor associators identifies the two expressions.
-The left-derived uniqueness property implies
-c₁(f,g) = (e_g whiskered by Lf) followed by (Lg whiskered by e_f), then
-c₀(f,g), then e_(fg) inverse. Transport through baseChangeMap_fst gives the
-corresponding formula for the inverse composition comparison. In its conjugation
-on Hom, the two components of e_(baseChangeMap) cancel by naturality at a.
-The remaining expression is exactly the equation below. Equality transport is
-compatible with e by equality induction. Zero objects and identity arrows use the
-same cancellation; no representatives or arbitrary geometric witnesses are chosen. -/
+No perfectness, finite presentation or filtered diagram is involved. -/
 theorem exists_recordedPerfectHom_normalization :
     ∃ e : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), derivedPullback f ≅ derivedPullback f,
       ∀ {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Over S} (g : T' ⟶ T)

@@ -19,8 +19,11 @@ import all WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 
 /-! # The open pullback square evaluated on a direct-image representative
 
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-counit-homotopy-factorization).
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -73,21 +76,7 @@ private theorem targetHomotopyComparison
 
 end
 
-/-- Derived compatibility before the sectionwise mate identity.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-counit-homotopy-factorization).
-
-Proof: The pinned Hom equivalence identifies pullback of the right-derived unit
-followed by the derived counit with the left-derived counit followed by localization
-of the homotopy counit. Move that unit across the five-factor pullback square by
-naturality. Apply open_pinned_counit_homotopy_restriction to the direct-image
-homotopy complex, and cancel the target restriction and tensor restriction
-isomorphisms. Naturality of the source restriction factorization moves localization
-of the homotopy counit through restriction. Functoriality of Qh then joins the
-inverse tensor comparison and restricted homotopy counit into the displayed arrow.
-This calculation does not identify that arrow with the restricted-morphism counit;
-that is the separate sectionwise mate identity. It uses no inverse of the derived
-unit, so applies also to unbounded complexes, empty opens and the zero complex. -/
+/-- Derived compatibility before the sectionwise mate identity. -/
 theorem singleComplexOpen_pullback_counit_homotopy_factorization
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

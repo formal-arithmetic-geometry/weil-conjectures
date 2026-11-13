@@ -10,8 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Associativity of the canonical tensor pullback comparisons
-Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096.
-(blueprint: lem-pc-tensor-pullback-composition-associativity). -/
+
+## References
+
+* [Stacks Project, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+-/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -21,21 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local irreducible] tensorPullback
 
-/-- The two routes from a triple composite to its three tensor pullbacks agree.
-Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks.
-(blueprint: lem-pc-tensor-pullback-composition-associativity).
-Proof: Substitute the four factorization equalities. Apply the conjugate
-natural-transformation equivalence for the adjunction of the total pullback
-and the composite of the three chosen tensor pullback adjunctions. Conjugation
-preserves composition, whiskering and associators (Mathlib's conjugateEquiv_comp,
-conjugateEquiv_whiskerLeft, conjugateEquiv_whiskerRight and
-conjugateEquiv_associator_hom). The two sides become the two composites of
-pushforward composition comparisons. These agree: on every open set their
-components are identity maps of sections, with the equality transports
-identified by proof irrelevance. Injectivity of conjugation proves equality of
-natural transformations. Evaluate at M; functor associators evaluate to the
-identity, giving exactly the three factors on each side below. No assumption
-on M or the morphisms is required; identities and the zero module are included. -/
+/-- The two routes from a triple composite to its three tensor pullbacks agree. -/
 theorem tensorPullbackCompositionIso_associativity
     {X₀ X₁ X₂ Z : Scheme.{u}}
     (h : X₁ ⟶ X₀) (q : X₂ ⟶ X₁) (p : Z ⟶ X₂)

@@ -15,8 +15,9 @@ import Mathlib.AlgebraicGeometry.FunctionField
 For a scheme `X` with finitely many irreducible components, taking germs at their generic
 points identifies the ring of rational functions on `X` with the product of the generic stalks.
 
-Source: Stacks Project, Morphisms, Lemma 01RV, first and third assertions
-(blueprint: def-sc-function-field).
+## References
+
+* [Stacks Project, Tag 01RV](https://stacks.math.columbia.edu/tag/01RV)
 -/
 
 @[expose] public section
@@ -93,8 +94,7 @@ end GenericPoints
 /-- For a scheme with finitely many irreducible components, every dense open contains their
  generic points, and taking germs identifies rational functions with the product of the generic
  stalks. For an integral scheme there is one component, the whole space, and both the rational
- function ring and the generic stalk are fields. Source: Stacks Project, Lemma 01RV, first and
- third assertions (blueprint: def-sc-function-field). -/
+ function ring and the generic stalk are fields. -/
 theorem exists_ringEquiv_rationalFunctionRing_pi_stalk (X : Scheme.{u}) (n : ℕ)
     (components : Fin n ≃ {Z : Set X // Z ∈ irreducibleComponents X})
     (η : Fin n → X) (hη : ∀ i : Fin n, IsGenericPoint (η i) (components i).val) :

@@ -12,8 +12,12 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.ResolutionOpenRestrictionNatural
 
 /-! # The fixed comparison commutes with restriction to the scalar nonvanishing open.
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-core). -/
+
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+-/
 
 @[expose] public section
 universe u
@@ -37,17 +41,7 @@ private theorem unit_nonvanishing_basicOpen (Y : Scheme.{u}) (b : Γ(Y, ⊤)) :
     exact unitSectionsEquiv_eq_smul_one b
   · trivial
 
-/-- The fixed comparison commutes with restriction to the scalar nonvanishing open.
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-core).
-
-Proof: Restrict the resolution again to the inverse image of D(a). For the tensor unit the stalk
-generator identifies nonvanishing with the basic open of the pulled back scalar. Pullback of
-basic opens identifies it with the inverse image of D(a). The degreewise restrictAppIso
-comparisons commute with the restriction maps of the original resolution. Apply homology, and
-use the naturality of isoRightDerivedObj for the derived restriction natural transformation.
-Cancel the comparison inverses to give the displayed equality. This works also for the empty
-open, a=0, invertible a, and q=0. -/
+/-- The fixed comparison commutes with restriction to the scalar nonvanishing open. -/
 theorem resolution_open_restriction_core {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)
     (W : T.Opens) (a : Γ(T, W))

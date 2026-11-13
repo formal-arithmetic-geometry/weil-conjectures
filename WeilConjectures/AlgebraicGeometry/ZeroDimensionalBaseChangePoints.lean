@@ -19,8 +19,12 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreHom
 /-!
 # Points of a zero-dimensional scheme after field extension
 
-Source: Stacks Project, algebra.tex, Lemmas 00KH and 00P4, Theorem 00FV;
-Schemes Lemma 01JT (blueprint: lem-weil-pbc-zero-dimensional-base-change-points).
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00P4](https://stacks.math.columbia.edu/tag/00P4)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
+* [Stacks Project, Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)
 -/
 
 @[expose] public section
@@ -33,13 +37,11 @@ namespace AlgebraicGeometry
 
 /-- A zero-dimensional finite-type scheme over an algebraically closed field has the
 same finite discrete set of points after extension of the ground field.
-Source: Stacks Project, algebra.tex, Lemmas 00KH and 00P4, Theorem 00FV;
-Schemes Lemma 01JT (blueprint: lem-weil-pbc-zero-dimensional-base-change-points).
 
 The proof first obtains finiteness and discreteness from the Artinian zero-dimensional
 case, then identifies each residue field with the algebraically closed base field by
-Nullstellensatz.  The point description of a fibre product identifies each fibre of the
-projection with `Spec k'`; its unique point gives bijectivity.  Dimension zero and
+Nullstellensatz. The point description of a fibre product identifies each fibre of the
+projection with `Spec k'`; its unique point gives bijectivity. Dimension zero and
 local Artinianness after field extension make the source of the projection discrete, so
 this bijection is a homeomorphism. -/
 theorem zeroDimensional_baseChange_points

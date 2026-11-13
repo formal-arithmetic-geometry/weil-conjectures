@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomMapSurjective
 
 /-! # Invertibility of the fixed raw scalar comparison
 
-Source: Stacks Project, Tag 03FD.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-is-iso).
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -23,22 +24,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- Forgetting the raw class induces an additive bijection.
-Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-is-iso).
-
-Proof: Put V = U times_S A.left. Pullback of the represented free sheaf
-corepresents sections on V, for both coefficient categories. Resolve A.hom^*G
-by injective module sheaves. Restriction to the etale object V preserves
-injectives, since its extension-by-zero left adjoint is exact. After forgetting
-scalars this resolution is acyclic for abelian sections by Tag 03FD. Thus both
-raw derived Hom groups are cohomology of the same complex of sections. On that
-complex the displayed map is the identity: freeMap sends the identity generator
-to the identity generator, derived forgetting is termwise forgetting, and the
-single, shift and coefficient comparisons identify precisely the same section.
-It is consequently bijective and additive, so is an isomorphism in AddCommGrpCat.
-This includes degree zero, where it is the sections adjunction, the zero ring,
-and empty V, where the section complex is zero. -/
+/-- Forgetting the raw class induces an additive bijection. -/
 theorem isIso_rawModuleAbelianHomMap
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)

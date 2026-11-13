@@ -14,7 +14,10 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-! # The pullback adjunction unit on an isomorphism locus
 
-Source: Stacks Project, Tags 0095 and 088B.
+## References
+
+* [Stacks Project, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks Project, Tag 088B](https://stacks.math.columbia.edu/tag/088B)
 -/
 
 @[expose] public section
@@ -29,21 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The unit of any tensor-pullback adjunction restricts to an isomorphism on
-an open over which the scheme morphism is an isomorphism.
-
-Source: Stacks Project, Tag 0095 (pullback adjunction), and Tag 088B, proof,
-the adjunction morphism over the complement of the exceptional locus.
-(blueprint: lem-weil-pbc-tensor-pullback-unit-restriction-iso)
-
-Proof: Let j be the open inclusion and let p' be the base change of p to that
-open. Restriction commutes with pushforward and with pullback, and transports
-the restricted unit to the unit of p'. Since p' is an isomorphism, its pullback
-and pushforward are inverse equivalences, so its unit is invertible. These
-identifications hold for the standard adjunction. For any other adjunction of
-the same functors, uniqueness of left adjoints changes its unit by pushforward
-of a natural automorphism of the pullback functor. Restricting that automorphism
-preserves its invertibility. Thus the supplied unit is invertible as well.
-The assertion includes the empty open and requires no properness or coherence. -/
+an open over which the scheme morphism is an isomorphism. -/
 theorem tensorPullback_unit_restriction_isIso
     {X Y : Scheme.{u}} (p : X ⟶ Y) (U : Y.Opens)
     (hp : IsIso (pullback.snd p U.ι))

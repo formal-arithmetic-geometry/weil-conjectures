@@ -27,11 +27,25 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 /-!
 # Strict constant-coefficient tower operations
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint (auxiliary; not a blueprint node).
-
-The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
+The index `n: ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
+
+## References
+
+* [Stacks Project, Tag 0F7B](https://stacks.math.columbia.edu/tag/0F7B)
+* [Stacks Project, Tag 0F7C](https://stacks.math.columbia.edu/tag/0F7C)
+* [Stacks Project, Tag 0F7D](https://stacks.math.columbia.edu/tag/0F7D)
+* [Stacks Project, Tag 0F7F](https://stacks.math.columbia.edu/tag/0F7F)
+* [Stacks Project, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
+* [Stacks Project, Tag 09AE](https://stacks.math.columbia.edu/tag/09AE)
+* [Stacks Project, Tag 0H7J](https://stacks.math.columbia.edu/tag/0H7J)
+* [Stacks Project, Tag 098K](https://stacks.math.columbia.edu/tag/098K)
+* [Stacks Project, Tag 079P](https://stacks.math.columbia.edu/tag/079P)
+* [Stacks Project, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
+* [Stacks Project, Tag 079B](https://stacks.math.columbia.edu/tag/079B)
+* [Stacks Project, Tag 0DVC](https://stacks.math.columbia.edu/tag/0DVC)
 -/
 
 @[expose] public section
@@ -50,44 +64,32 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 -- ProEtaleRingSheafChangeAdjunction, without importing its unrelated comparisons.
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The existing constant-sheaf construction in the site's coefficient universe.
-Source: Stacks, Tag 0H7J (auxiliary; not a blueprint node). -/
+/-- The existing constant-sheaf construction in the site's coefficient universe. -/
 noncomputable abbrev coefficients (X : Scheme.{u}) :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of B)
 
-/-- Modules over the actual constant ring sheaf. Source: Stacks, Tags 098K and 09AE
-(auxiliary; not a blueprint node). -/
+/-- Modules over the actual constant ring sheaf. -/
 abbrev Modules (X : Scheme.{u}) :=
   Scheme.proEtaleRingModules X ((coefficients B X))
 
-/-- The module category is Grothendieck abelian at the site's original universes.
-Source: Stacks, Tag 079P (auxiliary; not a blueprint node). -/
+/-- The module category is Grothendieck abelian at the site's original universes. -/
 noncomputable instance modules_grothendieck (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (Modules B X) :=
   (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u,
       u + 1}
     (Scheme.ProEt.topology X) (coefficients B X)).1
 
-/-- Strict inverse systems, with index `n` representing level `n+1`.
-Source: blueprint strict-tower refinement of Tag 0F7B
-(auxiliary; not a blueprint node). -/
+/-- Strict inverse systems, with index `n` representing level `n+1`. -/
 abbrev Towers (X : Scheme.{u}) := ℕᵒᵖ ⥤ Modules B X
 
-/-- Standard unbounded localization of the strict tower category.
-Source: Stacks, Tag 05RU (auxiliary; not a blueprint node). -/
+/-- Standard unbounded localization of the strict tower category. -/
 noncomputable instance towers_hasDerivedCategory (X : Scheme.{u}) :
     HasDerivedCategory (Towers B X) := HasDerivedCategory.standard _
 
-/-- The ordinary unbounded derived category of strict towers.
-Source: Stacks, Tag 05RU (auxiliary; not a blueprint node). -/
+/-- The ordinary unbounded derived category of strict towers. -/
 abbrev Derived (X : Scheme.{u}) := DerivedCategory (Towers B X)
 
-/-- Constant coefficients pull back canonically for arbitrary rings, including infinite ones.
-Source: Stacks, Tag 0H7J and the blueprint's first proof step
-(auxiliary; not a blueprint node).
-Proof: maps out of a constant sheaf are maps out of its constant presheaf. Compose
-this universal property with the inverse-image adjunction. The resulting comparison
-preserves constant sections and is inverse to the canonical constant-section map. -/
+/-- Constant coefficients pull back canonically for arbitrary rings, including infinite ones. -/
 theorem constantRing_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of B)) := by
   let A := CommRingCat.of B
@@ -127,74 +129,58 @@ theorem constantRing_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rw [he]
   infer_instance
 
-/-- The canonical constant-ring identification, retaining its constant-section map.
-Source: Stacks, Tag 0H7J (auxiliary; not a blueprint node). -/
+/-- The canonical constant-ring identification, retaining its constant-section map. -/
 noncomputable def constantRingIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
       ((coefficients B Y)) ≅ (coefficients B X) :=
   @asIso _ _ _ _ (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of B))
     (constantRing_isIso B f)
 
-/-- Exact module inverse image through the canonical constant-ring identification.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Exact module inverse image through the canonical constant-ring identification. -/
 noncomputable def modulePullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Modules B Y ⥤ Modules B X :=
   Scheme.proEtaleRingModulePullback f ((coefficients B Y))
     ((coefficients B X)) (constantRingIso B f)
 
-/-- Module direct image with the adjoint constant-ring map.
-Source: Stacks, Tag 03DA (auxiliary; not a blueprint node). -/
+/-- Module direct image with the adjoint constant-ring map. -/
 noncomputable def moduleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Modules B X ⥤ Modules B Y :=
   Scheme.proEtaleRingModuleDirectImage f ((coefficients B Y))
     ((coefficients B X)) (constantRingIso B f)
 
-/-- The recorded module-operation instance, specialized to canonical constant coefficients.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- The recorded module-operation instance, specialized to canonical constant coefficients. -/
 noncomputable instance modulePullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (modulePullback B f).Additive :=
   (Scheme.proEtaleRingModuleOperations_properties f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).1
 
-/-- The recorded module-operation instance, specialized to canonical constant coefficients.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- The recorded module-operation instance, specialized to canonical constant coefficients. -/
 noncomputable instance moduleDirectImage_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (moduleDirectImage B f).Additive :=
   (Scheme.proEtaleRingModuleOperations_properties f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).2.1
 
-/-- The recorded module-operation instance, specialized to canonical constant coefficients.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- The recorded module-operation instance, specialized to canonical constant coefficients. -/
 noncomputable instance modulePullback_finiteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (modulePullback B f) :=
   (Scheme.proEtaleRingModuleOperations_properties f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).2.2.1
 
-/-- The recorded module-operation instance, specialized to canonical constant coefficients.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- The recorded module-operation instance, specialized to canonical constant coefficients. -/
 noncomputable instance modulePullback_finiteColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (modulePullback B f) :=
   (Scheme.proEtaleRingModuleOperations_properties f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).2.2.2.1
 
-/-- Termwise inverse image on strict towers.
-Source: blueprint, first proof step (auxiliary; not a blueprint node). -/
+/-- Termwise inverse image on strict towers. -/
 noncomputable abbrev towerPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B Y) (Modules B X)).obj (modulePullback B f)
 
-/-- Termwise direct image on strict towers.
-Source: blueprint, first proof step (auxiliary; not a blueprint node). -/
+/-- Termwise direct image on strict towers. -/
 noncomputable abbrev towerDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B X) (Modules B Y)).obj (moduleDirectImage B f)
 
-/-- Tower complexes admit K-injective resolutions, without a uniform levelwise bound.
-Source: blueprint, first proof step, Stacks, Tags 079B and 079P
-(auxiliary; not a blueprint node).
-Proof: the module category is Grothendieck abelian. Filtered colimits of towers are
-exact pointwise. If H is a separator of modules, the coproduct over n of the free
-diagrams on H is a separator of towers: transpose a detecting map at an index
-under the evaluation adjunction. Thus towers are Grothendieck abelian and the
-existing general K-injective resolution theorem applies. -/
+/-- Tower complexes admit K-injective resolutions, without a uniform levelwise bound. -/
 theorem towers_hasKInjectiveResolutions (X : Scheme.{u}) :
     CategoryTheory.Abelian.HasKInjectiveResolutions (Towers B X) := by
   let M := Modules B X
@@ -219,17 +205,12 @@ theorem towers_hasKInjectiveResolutions (X : Scheme.{u}) :
   let : IsGrothendieckAbelian.{u + 1} (Towers B X) := {}
   infer_instance
 
-/-- K-injective existence as an instance. Source: Stacks, Tag 079P
-(auxiliary; not a blueprint node). -/
+/-- K-injective existence as an instance. -/
 noncomputable instance towers_kInjective (X : Scheme.{u}) :
     CategoryTheory.Abelian.HasKInjectiveResolutions (Towers B X) :=
   towers_hasKInjectiveResolutions B X
 
-/-- Termwise exactness uses the levelwise kernels and cokernels of strict diagrams.
-Source: blueprint, first proof step (auxiliary; not a blueprint node).
-Proof: evaluate each finite limit and colimit at an index. The module inverse image
-is exact, so the pointwise comparison is invertible. Evaluation jointly reflects
-isomorphisms of strict diagrams, proving both claims. -/
+/-- Termwise exactness uses the levelwise kernels and cokernels of strict diagrams. -/
 theorem towerPullback_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (towerPullback B f) ∧
       PreservesFiniteColimits (towerPullback B f) := by
@@ -237,28 +218,23 @@ theorem towerPullback_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Left exactness on strict diagrams. Source: blueprint, first proof step
-(auxiliary; not a blueprint node). -/
+/-- Left exactness on strict diagrams. -/
 noncomputable instance towerPullback_finiteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (towerPullback B f) := (towerPullback_exact B f).1
 
-/-- Right exactness on strict diagrams. Source: blueprint, first proof step
-(auxiliary; not a blueprint node). -/
+/-- Right exactness on strict diagrams. -/
 noncomputable instance towerPullback_finiteColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (towerPullback B f) := (towerPullback_exact B f).2
 
-/-- Exact inverse image on the unbounded derived strict-tower category.
-Source: blueprint, first proof step (auxiliary; not a blueprint node). -/
+/-- Exact inverse image on the unbounded derived strict-tower category. -/
 noncomputable def G {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived B Y ⥤ Derived B X :=
   (towerPullback B f).mapDerivedCategory
 
-/-- Total right derived termwise direct image.
-Source: blueprint, first proof step (auxiliary; not a blueprint node). -/
+/-- Total right derived termwise direct image. -/
 noncomputable def R {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived B X ⥤ Derived B Y :=
   (towerDirectImage B f).rightDerivedFunctor
 
-/-- The derived adjunction induced from the normalized sheaf adjunction, termwise.
-Source: Stacks, Tag 0DVC (auxiliary; not a blueprint node). -/
+/-- The derived adjunction induced from the normalized sheaf adjunction, termwise. -/
 noncomputable def adj {X Y : Scheme.{u}} (f : X ⟶ Y) : G B f ⊣ R B f :=
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
     ((Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)

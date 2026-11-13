@@ -11,8 +11,12 @@ import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 
 /-! # Transport of normalized scalar pullback comparisons
 
-Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47.
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 0E47](https://stacks.math.columbia.edu/tag/0E47)
 -/
 
 @[expose] public noncomputable section
@@ -268,28 +272,7 @@ private theorem sectionDerivedPull_realization (φ : Λ ⟶ Λ') [IsMonHom φ]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc]
 
 /-- A supplied universally normalized internal scalar/pullback comparison is
-section-normalized with respect to any two normalized endpoint realizations.
-Source: Stacks 03EK, 0D6D and 07A6; internal scalar/pullback normalization, step 8.
-(auxiliary; not a blueprint node)
-
-Proof: the identity restriction/direct-image map is conjugated by the endpoint
-restriction comparisons to give the ordinary section square r. Both endpoint
-restriction comparisons are identity on sections, so r is identity on sections.
-Conjugate r under the specified composite ordinary scalar/geometric adjunctions
-to obtain c. The normalized scalar units insert 1, so c is the ordinary balanced
-pullback/scalar comparison. Use the K-flat scalar comparison theorem for these
-endpoint scalar pairs and the specified ringed pullbacks to descend c to d.
-The normalization equation for d is its K-flat computation equation. The two
-endpoint scalar normalization equations and the geometric representative square
-identify the realized b, after its computation maps, with d on each flat-term
-K-flat representative: PullNormalized gives precisely the same ordinary balanced
-map c. Cancel the invertible computation counits on such a representative.
-For any unbounded object choose an incoming flat-term K-flat resolution. The
-localized resolution is invertible, and naturality transports the comparison
-equality from this representative to the object. These r, c and d together with
-the displayed equality are exactly the witnesses of SectionPullNormalized.
-There is no flatness condition on the coefficient map; zero coefficients,
-identity geometric maps and empty schemes satisfy the same argument. -/
+section-normalized with respect to any two normalized endpoint realizations. -/
 theorem section_pull_normalized_of_normalized (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)

@@ -85,20 +85,7 @@ private theorem localArrow_factor
   erw [(schemeDerivedDirectImage (pullback.fst g' W.ι ≫ f')).map_id]
   simp only [Category.id_comp]
 
-/-- Base change commutes with relative restriction along one inclusion of opens.
-Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
-(blueprint: new-relative-mv-second).
-Proof: Expand relativeMVRestriction as the mate of the restricted counit and
-cancel the right-adjoint composition comparisons on both paths. Transpose under
-the adjunction for W and its inverse-image open. The resulting maps are
-composites of pullbacks of the same counit. Naturality of that counit and of φ
-identifies their middle factors; associativity of the pinned pullback
-composition comparisons identifies the outside factors. The lift identities
-for relativeMVOpenLift give equality of the two projections, hence the equality
-transport appearing in the local comparison is precisely the one in the
-restriction. Injectivity of the adjunction Hom equivalence gives the claimed
-square. No strictness of the inclusion is used, so equality and empty opens
-are included. -/
+/-- Base change commutes with relative restriction along one inclusion of opens. -/
 theorem relativeMV_restriction_naturality
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X S X' S' : Scheme.{u}}

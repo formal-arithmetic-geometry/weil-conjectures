@@ -12,8 +12,10 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Spectra of universal square-zero algebra extensions
 
-Source: Stacks Project, More on Morphisms, proof of Lemma 04F3, affine-case paragraph,
-using Algebra, Lemma 04EB (blueprint: lem-weil-pbc-universal-thickening-affine-case).
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
+* [Stacks Project, Tag 04EB](https://stacks.math.columbia.edu/tag/04EB)
 -/
 
 @[expose] public section
@@ -268,35 +270,7 @@ private theorem affine_lift
     exact congrArg AlgHom.toRingHom (huniq γ hγ)
 
 /-- The spectrum of a universal square-zero extension of `R`-algebras is a universal
-first order thickening over `Spec R`, including tests by non-affine schemes.
-Source: Stacks Project, More on Morphisms, proof of Lemma 04F3, third paragraph
-(blueprint: lem-weil-pbc-universal-thickening-affine-case).
-
-Proof:
-1. Use the bijection between maps `Y → Spec B` and ring maps `B → Γ(Y)`
-   (lem-weil-pbc-morphism-into-affine-scheme). Its compatibility with composition and
-   Spec maps follows from functoriality and lem-weil-pbc-spec-map-global-sections.
-2. The algebra structure maps commute with `π`, so the triangle of spectra commutes.
-   Surjectivity of `π` gives a closed immersion by
-   lem-weil-pbc-closed-immersion-affine-cover-criterion. Its ideal sheaf on the whole
-   affine target corresponds to the kernel of `π`; powers are computed on affine opens
-   (def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers). Thus its square
-   is zero, and it is a first order thickening (def-sbc-first-order-thickening).
-3. For affine `T'`, the closed immersion `T → T'` gives a surjection on global sections
-   with square-zero kernel. Identify its quotient with `Γ(T)`. Under the bijection in
-   step 1, the two required conditions on a lift are precisely that it is an `R`-algebra
-   map and that its composite with the quotient map is `a.comp π`. The ring universal
-   property therefore gives exactly one scheme lift.
-4. Pull back an arbitrary test thickening along the affine cover and its overlaps.
-   Closed immersions are stable under Limits.pullback. The kernel ideal on each affine open
-   is transported along the open immersion's sections isomorphism, so its square
-   remains zero (lem-weil-pbc-thickening-open-restriction). The pullback squares give
-   the triangle identities for restricted solutions.
-5. Cover `T'` by affine opens (lem-weil-pbc-affine-opens-basis). Step 3 gives local lifts.
-   On overlaps these agree on every affine open by uniqueness. Scheme morphism gluing
-   (lem-weil-pbc-scheme-morphism-gluing) gives a global lift. Both triangle identities
-   hold locally, hence globally; any other lift agrees locally and hence globally.
-6. Steps 2 and 5 are exactly def-weil-pbc-universal-first-order-thickening. -/
+first order thickening over `Spec R`, including tests by non-affine schemes. -/
 theorem isUniversalFirstOrderThickening_spec
     (R S S' : Type u) [CommRing R] [CommRing S] [CommRing S']
     (φ : R →+* S)

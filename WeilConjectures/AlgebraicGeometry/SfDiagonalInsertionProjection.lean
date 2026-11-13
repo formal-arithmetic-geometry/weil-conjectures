@@ -10,9 +10,7 @@ import WeilConjectures.AlgebraicGeometry.SfProperSectionProjection
 
 /-! # Projection naturality for insertion of a supported diagonal class
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, projection naturality and the two diagonal section identities.
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -492,25 +490,7 @@ private theorem insertion_projection_aux {B : DerivedCategoryModule A X}
 end Naturality
 
 /-- Insertion commutes with projection, leaving tensor with the pushed-forward class.
-No trace, line condition, or normalized integral is assumed.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the sentences beginning
-"Naturality of the tensor projection map" and "Since p1*q*K=p2*q*K"
-(auxiliary; not a blueprint node).
-
-Proof: Write U=RDelta!1. Naturality of the projection formula in U->p2*B moves delta
-past inverse projection, leaving tensor with Rp_i!(delta). For i=1, use the normalized
-composition comparisons for fp1=fp2 to identify F Rp2! RDelta! with F Rp1! RDelta!.
-Projection composition and Delta p1=id identify the remaining insertion of U with the
-right unitor inverse followed by tensor with diagonalFirst at 1. This gives the first
-formula. For i=2 use that M= B tensor f*K is itself pulled back from L tensor K, via e
-and coefficientPull. Naturality of these pullback comparisons identifies its coordinate
-comparison with coordinateTwisted. On restriction along Delta this comparison is identity,
-since both projection composites are identity. Projection composition and Delta p2=id
-therefore identify the insertion of U with the right unitor inverse followed by tensor
-with idIsoDiagonalSnd at 1, giving the second formula. All symmetries occur in inverse
-pairs by the definition of orderedProjection. The argument is natural in an arbitrary
-diagonal class; it imposes no trace-exchange equation or diagonal normalization. -/
+No trace, line condition, or normalized integral is assumed. -/
 theorem insertion_projection {B : DerivedCategoryModule A X}
     (L : DerivedCategoryModule A Y) (e : B ≅ (CoordinateTrace.pull A f).obj L)
     (δ : (push A (TraceDiagonalDatum.diagonal f)).obj

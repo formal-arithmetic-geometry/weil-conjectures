@@ -20,7 +20,10 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-! # Derived direct-image exchange along a limit of smooth schemes
 
-Source: Stacks Project, Tag 0F09, specialized to a field base and a degree-zero sheaf.
+## References
+
+* [Stacks Project, Tag 0F09](https://stacks.math.columbia.edu/tag/0F09)
+* [Stacks Project, Tag 0EZT](https://stacks.math.columbia.edu/tag/0EZT)
 -/
 
 @[expose] public section
@@ -71,26 +74,7 @@ private theorem isIso_abelian_derivedExchange_single_of_smooth
     (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) e).1 hi'
 
 /-- Relative derived exchange passes to a cofiltered limit of smooth qcqs schemes
-with affine transitions, for coefficients killed by an integer invertible in the field.
-Source: Stacks Project, Lemma 59.89.3, Tag 0F09; limit comparison Tag 0EZT.
-(blueprint: lem-sc-smooth-limit-derived-direct-image-exchange)
-
-Proof: For each stage, form X_i = X times_{Spec k} D_i. Smooth base change identifies
-the inverse image of Rf_* F with Rf_{i,*} of the inverse image of F. The n-torsion
-hypothesis on F gives the torsion hypothesis at every geometric stalk, and hn makes
-n invertible on every stage. The X_i have affine transition maps and limit
-X times_{Spec k} c.pt, since base change preserves limits. In any fixed degree q,
-the higher-direct-image limit comparison (Tag 0EZT) identifies the two sides of the
-limit exchange map with filtered colimits of the pulled-back stage higher direct
-images. Every stage exchange map is an isomorphism by smooth base change, hence the
-filtered colimit map is an isomorphism. Exact inverse image commutes with homology.
-The sheaf F in degree zero is bounded below; applying the single-complex derived
-functor comparison identifies these degreewise maps with the homology maps of the
-derived exchange. A morphism in the derived category which induces isomorphisms in
-every degree is invertible. Finally exact inverse image commutes with degree-zero
-single complexes. This gives the displayed isomorphism. The cofiltered index is
-nonempty. Zero coefficients or the empty source give zero objects; n = 1 forces
-zero coefficients, and n = 0 is excluded by hn. -/
+with affine transitions, for coefficients killed by an integer invertible in the field. -/
 theorem nonempty_smoothLimit_derivedDirectImage_single_iso
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

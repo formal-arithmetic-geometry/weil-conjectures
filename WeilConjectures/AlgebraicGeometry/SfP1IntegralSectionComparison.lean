@@ -100,27 +100,7 @@ private theorem compact_prefix
 /-- Proper exchange and forget-supports carry the compact-support diagonal section
 unit to the ordinary section unit, under an isomorphism over the base.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the canonical identification
-M = Rp2_* Delta_* M and the paragraph on substituting the exchange counits;
-lem-amb-p1-diagonal-integrals.proof.md, the diagonal is a section for either projection.
-(auxiliary; not a blueprint node).
-
-Proof: For either projection p, the square induced by i and i times i is
-Cartesian, as is the diagonal square. Paste these squares. Their vertical
-composite is the square for p Delta = id, so the composite-adjunction unit
-formula makes exchange applied to the diagonal unit equal to the unit of the
-identity adjunction. The ordinary projectiveLineDiagonalAlpha is exactly the
-composite of the constant-object units for p and Delta. The compact-support
-section map is the inverse identity/composition comparison. Forget-supports
-identifies these composition comparisons: use the identity compactification for
-the proper maps and independence from compactification, then the ordinary
-composition mate formula. Thus both composites are the same section unit.
-Finally the constant inverse-image comparison and the constant-sheaf/derived
-monoidal-unit comparison identify the source; their inverses occur in
-diagonalLift and constantComparison in precisely the displayed directions.
-This calculation uses no coefficient line, Ext class, trace, nonempty-base
-hypothesis, or nonzero-ring hypothesis. -/
+. -/
 theorem sectionComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

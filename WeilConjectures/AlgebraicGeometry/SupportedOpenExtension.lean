@@ -21,8 +21,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extension of a supported perfect object from an affine open
 
-Source: Stacks Project, Tags 08DP, 08DF and 0A9A.
-(blueprint: lem-pc-supported-open-extension).
+## References
+
+* [Stacks Project, Tag 08DP](https://stacks.math.columbia.edu/tag/08DP)
+* [Stacks Project, Tag 08DF](https://stacks.math.columbia.edu/tag/08DF)
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
 -/
 
 @[expose] public section
@@ -35,22 +38,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- A perfect quasi-coherent object supported on a globally closed subset of an affine
-open has a perfect quasi-coherent extension with the extension-by-zero Hom formula.
-Source: Stacks Project, Tags 08DP, 08DF and 0A9A, supported Koszul construction.
-(blueprint: lem-pc-supported-open-extension).
-
-Proof: Take exact extension by zero along V, after the inverse of Modules.overEquiv V,
-and derive this exact composite termwise. Call its value on B A. The derived adjunction
-with open restriction gives Hom(A[n], C) = Hom(B[n], C|V), since the exact functor
-commutes with shifts. Because B is supported on the globally closed S contained in V,
-the canonical map from extension by zero to derived direct image is an isomorphism
-(Tags 08DP and 08DF). Supported open pushforward makes A perfect. The affine inclusion
-in a quasi-separated scheme is quasi-compact and separated, so derived direct image
-has quasi-coherent cohomology (Tag 08D5). At a point of V, the cohomology stalk of A
-is that of B; at a point outside V it is zero by exact extension by zero. Thus every
-cohomology stalk outside S is zero. The argument works for empty V or S, and for V=X.
-There is no zero-detection assertion here: B is arbitrary, and C need not be supported
-or quasi-coherent. -/
+open has a perfect quasi-coherent extension with the extension-by-zero Hom formula. -/
 theorem supported_open_extension
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

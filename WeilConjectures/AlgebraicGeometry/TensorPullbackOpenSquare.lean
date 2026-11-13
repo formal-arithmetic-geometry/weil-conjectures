@@ -11,7 +11,11 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Normalized restriction of a projection pullback
 
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
 -/
 
 @[expose] public section
@@ -27,22 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 -- Section transports across two composite adjunctions require extra elaboration.
 /-- The second factor of open base change preserves local unit sections.
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-tensor-pullback-open-square).
-
-Proof: compose the pushforward composition isomorphisms and transport along h to
-identify pushforward a followed by pushforward V.ι with pushforward j followed by
-pushforward b. Conjugate this isomorphism under the composite adjunctions
-(restriction along V.ι, tensor pullback along a) and (tensor pullback along b,
-restriction along j). Its inverse conjugate is the required coefficient comparison.
-The conjugate unit equation evaluated at V identifies the two successive units.
-The image condition hj identifies j inverse-image of b inverse-image V with the
-whole source; naturality transports the comparison to the top open. Combine the
-restriction maps into transport along hj. On the other side, the pushforward
-comparison gives only an open-equality transport. Naturality of the a unit moves
-that transport before the unit, and the restriction unit for V.ι becomes transport
-from G(V) to the global sections of G restricted to V. All comparisons remain
-isomorphisms for empty schemes and opens; no generation by global sections is used.
 -/
 theorem exists_tensorPullback_openSquare {A B C : Scheme.{w}}
     (j : A ⟶ B) [IsOpenImmersion j] (b : B ⟶ C) (V : C.Opens)

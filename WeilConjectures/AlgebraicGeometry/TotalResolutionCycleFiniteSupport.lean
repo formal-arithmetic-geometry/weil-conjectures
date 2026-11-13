@@ -14,8 +14,9 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-! # Finite support in a left half-plane total complex
 
-Source: Stacks Project, Homology, Tag 09IZ, proof, finite-support representation.
-(blueprint: aux-total-resolution-cycle-finite-support)
+## References
+
+* [Stacks Project, Tag 09IZ](https://stacks.math.columbia.edu/tag/09IZ)
 -/
 
 @[expose] public section
@@ -29,19 +30,7 @@ namespace WeilConjectures.DerivedTotalResolution
 
 variable {R : Type u} [Ring R]
 
-/-- Every total element in a left half-plane bicomplex has a finite column expansion.
-Source: Stacks Project, Homology, Tag 09IZ, proof, finite-support representation.
-(blueprint: aux-total-resolution-cycle-finite-support)
-
-Proof. Map the dependent finite-support vectors of the modules in bidegrees
-(-i,n+i), for natural i, into the total module by summing their inclusions.
-This map is epi: equality after it can be tested on singleton vectors, which
-covers every nonpositive-column summand; positive-column summands are zero.
-The total coproduct's universal property then gives equality on the total module.
-An epimorphism of modules is surjective, so choose a finite-support preimage of z.
-Bound its support by its finite supremum r (zero for empty support), and extend
-its reconstruction sum to the range r+1 by adding zero terms. This uses neither
-a cycle condition nor horizontal exactness. -/
+/-- Every total element in a left half-plane bicomplex has a finite column expansion. -/
 theorem total_resolution_element_finite_support
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)
       (ComplexShape.up ℤ))

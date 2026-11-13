@@ -23,22 +23,14 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C]
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R]
   (φ : R ⟶ S) [IsMonHom φ]
 
-/-- The coefficient map as a map of regular modules.
-Source: the extension--restriction adjunction.
-(auxiliary; not a blueprint node) -/
+/-- The coefficient map as a map of regular modules. -/
 noncomputable def regularCoefficientMap : regular R ⟶ (comap φ).obj (regular S) :=
   homMk φ (by
     change μ[R] ≫ φ = R ◁ φ ≫ φ ▷ S ≫ μ[S]
     rw [IsMonHom.mul_hom, tensorHom_def']
     exact Category.assoc _ _ _)
 
-/-- Extension of scalars sends the regular module to the regular module.
-Source: the extension--restriction adjunction and the universal property of the regular module.
-(auxiliary; not a blueprint node)
-
-Proof: extend the coefficient map. In the other direction use the unique S-linear map
-sending 1 to the image of 1 under the adjunction unit. The two composite identities follow
-from the regular-module universal property and the adjunction identities. -/
+/-- Extension of scalars sends the regular module to the regular module. -/
 noncomputable def regularExtensionIso :
     (extendScalars φ).obj (regular R) ≅ regular S := by
   let h := regularCoefficientMap φ
@@ -63,9 +55,7 @@ noncomputable def regularExtensionIso :
       ← Category.assoc, IsMonHom.one_hom (f := φ), hg, Category.comp_id]
   exact ⟨f, g, hfg, hgf⟩
 
-/-- A commuting square of regular endomorphisms extends to its scalar-extension square.
-Source: naturality of the extension--restriction adjunction.
-(auxiliary; not a blueprint node) -/
+/-- A commuting square of regular endomorphisms extends to its scalar-extension square. -/
 theorem regularExtensionIso_naturality
     (p : regular R ⟶ regular R) (q : regular S ⟶ regular S)
     (h : p.hom ≫ φ = φ ≫ q.hom) :

@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ScalarForgetPullbackIntegerUnit
 
 /-! # Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence
 
-Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-forget-pullback-adjunction).
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -26,21 +28,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence.
-Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-forget-pullback-adjunction).
-
-Proof: Adjunct the forgotten scalar inverse-image unit to obtain a natural map
-from abelian inverse image to forgotten scalar inverse image. On every stalk this
-is the map identifying the same filtered colimit of underlying abelian groups,
-since forgetting a field action preserves filtered colimits. It is therefore an
-isomorphism; invert it to obtain c. Naturality and the adjunction triangle identity
-give the first equation for every q. For the integer-unit equation, pass through
-the constant-integer sections adjunction: both maps carry the integer generator
-to the scalar section 1. The constant-sheaf pullback comparison carries this same
-section to 1, and the definition of scalarInverseUnitIso is its scalar analogue.
-Equality on the generator proves equality of the sheaf maps. This proof works
-for zero sheaves, the empty scheme, and fields of every characteristic. -/
+/-- Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence. -/
 theorem scalar_forget_pullback_adjunction (k : Type u) [Field k]
     {X Y : Scheme.{u}} (a : Y ⟶ X) :
     let L := (Opens.map a.base).sheafPullback AddCommGrpCat.{u}

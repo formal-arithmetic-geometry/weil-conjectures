@@ -17,8 +17,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 /-!
 # Small finite-subsum presentations of existing module-sheaf coproducts
 
-Source: Stacks Project, Modules, Tag 01AH; Cohomology, Tag 09J7.
-(blueprint: lem-weil-pbc-module-coproduct-small-subsum-diagram).
+## References
+
+* [Stacks Project, Tag 01AH](https://stacks.math.columbia.edu/tag/01AH)
+* [Stacks Project, Tag 09J7](https://stacks.math.columbia.edu/tag/09J7)
 -/
 
 @[expose] public section
@@ -54,31 +56,8 @@ open Classical in
 /-- A given, possibly large coproduct of module sheaves has a small directed presentation
 by finite biproducts of its summands, with the original inclusions as component maps.
 
-Source: Stacks Project, Modules, Tag 01AH; Cohomology, Tag 09J7, the finite-subsum
-presentation used in the proof. The universe reduction is the smallness argument in
-`lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives`.
-(blueprint: lem-weil-pbc-module-coproduct-small-subsum-diagram).
-
-Proof: Let N be the subtype of indices of nonzero summands. For each summand,
-the coproduct universal property supplies a projection which is the identity on
-that summand and zero on all others. The resulting endomorphisms of S are distinct
-on N: composing an equality with the inclusion and projection of one summand
-would make its identity zero. Thus N injects into End(S), which is u-small.
-This is the same argument as the proved private small-support helper in
-`WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts`.
-
-Discard the zero summands: extend any family of maps on N by zero, and use the
-original coproduct universal property. Maps from a zero summand are unique,
-which proves uniqueness. Shrink N to B : Type u and whisker the restricted cofan
-by the discrete equivalence. Mathlib's finite-subcoproduct diagram on
-Finset (Discrete B) is directed, nonempty, and has colimit the coproduct of this
-small family. Transport that cocone along the unique coproduct isomorphism to S.
-For each finite stage a, map its indices injectively to I, obtaining J. The
-finite-set image equivalence and the biproduct-coproduct isomorphism identify
-the stage with the biproduct over J. The equations for these isomorphisms and
-the transported colimit legs give precisely the original inclusion ι j.
-No cohomology, compactness or quasi-separatedness is used. For empty support,
-the diagram contains only the empty finite subset and its zero coproduct. -/
+ The universe reduction is the smallness argument in
+`lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives`.. -/
 theorem exists_small_finiteSubsum_diagram (X : Scheme.{u}) (I : Type v)
     (F : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (S : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ι : ∀ i : I, F i ⟶ S)

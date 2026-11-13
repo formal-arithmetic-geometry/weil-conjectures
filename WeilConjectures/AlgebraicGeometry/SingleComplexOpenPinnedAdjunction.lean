@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Named pinned data for the open base-change calculation
 
-Source: Stacks Project, Tags 0D5S and 08HY.
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -21,9 +24,7 @@ namespace AlgebraicGeometry
 
 /-- The exact adjunction family already used by `schemeDerivedBaseChangeMap`.
 Its Hom equivalence is pinned to the same left-derived counit and right-derived unit.
-This name shares the existing expression and makes no new adjunction choice.
-Source: Stacks Project, Tag 08HY, and `exists_schemeDerivedAdjunction`.
-(blueprint: def-pc-t2-open-pinned-adjunction). -/
+This name shares the existing expression and makes no new adjunction choice. -/
 noncomputable abbrev singleComplexOpenPinnedAdjunction
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

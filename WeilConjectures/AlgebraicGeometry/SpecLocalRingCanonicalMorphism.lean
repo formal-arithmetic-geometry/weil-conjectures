@@ -17,14 +17,19 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 /-!
 # The canonical morphism from the spectrum of a local ring
 
-Source: Stacks Project, Schemes, Tags 01J6, 02NA, 01J7; Cohomology of Schemes, Tag 02OD;
-Sheaves, Tag 0098 (blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
-
 ## Main statements
 * `Scheme.fromSpecStalk_affine_description`: localization and affine factorization.
 * `Scheme.fromSpecStalk_local_properties`: the image, stalk maps, and flatness.
 * `Scheme.fromSpecStalk_module_stalk`: the unit induces an isomorphism at the closed point.
 * `Scheme.fromSpecStalk_quotient_factorization`: factorization for proper quotients.
+
+## References
+
+* [Stacks Project, Tag 01J6](https://stacks.math.columbia.edu/tag/01J6)
+* [Stacks Project, Tag 02NA](https://stacks.math.columbia.edu/tag/02NA)
+* [Stacks Project, Tag 01J7](https://stacks.math.columbia.edu/tag/01J7)
+* [Stacks Project, Tag 02OD](https://stacks.math.columbia.edu/tag/02OD)
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -42,8 +47,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The natural localization map is an isomorphism, and every affine neighborhood gives
- the same canonical morphism. Source: Stacks, Tags 01J6, 02NA
-(blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
+ the same canonical morphism.
 Proof (node steps 1 and 2): choose an affine neighborhood using affine-opens-basis.
 The affine-open-stalk-localization lemma identifies the germ map with localization at
 its prime. Compose its spectrum map with the affine open immersion. Compare two choices
@@ -72,8 +76,7 @@ theorem fromSpecStalk_affine_description (Y : Scheme.{u}) (y : Y)
 /-- The closed point maps to `y`; the image is its generalizations, every neighborhood
 pulls back to the whole spectrum, all stalk maps are isomorphisms, the closed stalk map
 is the identity after the canonical identifications, and the morphism is flat.
-Source: Stacks, Tags 01J6, 02NA, 01J7, 02OD
-(blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
+
 Proof (node steps 3--6): localization prime correspondence gives the image and closed
 point. Generalizations belong to every neighborhood. Factor each stalk map through
 an affine open immersion and the spectrum of a localization; both maps are isomorphisms
@@ -149,8 +152,7 @@ theorem fromSpecStalk_local_properties (Y : Scheme.{u}) (y : Y) :
 at the closed point. The source point is written as `c(y')`, equal to `y` by the
 preceding statement, to avoid noncanonical casts. Restricting scalars along the closed
 stalk map expresses the target as an `O_{Y,y}`-module.
-Source: Stacks, Tags 0098, 02NA
-(blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
+
 Proof (node step 7): module-stalk-pullback identifies the target with extension of
 scalars along the closed stalk map and the unit on germs with `s_y ⊗ 1`. The ring map
 is the identity under the closed-stalk identification (step 5). Hence the tensor map
@@ -196,8 +198,7 @@ theorem fromSpecStalk_module_stalk (Y : Scheme.{u}) (y : Y) (G : Y.Modules) :
 
 /-- For every proper ideal, the local-ring correspondence sends the quotient map to
 its spectrum map followed by the canonical morphism; the spectrum map is a closed
-immersion. Source: Stacks, Tag 01J6 and the paragraph following 02NA
-(blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
+immersion.
 Proof (node step 8): a proper ideal lies in the maximal ideal, so the quotient is local
 and its quotient map is local. The spectrum of a surjection is a closed immersion.
 It sends the quotient closed point to the original closed point. Stalk-map-composition

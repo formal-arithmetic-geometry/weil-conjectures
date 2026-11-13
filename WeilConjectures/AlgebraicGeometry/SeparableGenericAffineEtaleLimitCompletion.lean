@@ -16,8 +16,14 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationImage
 /-! # Canonical strict-henselization completion steps
 
 The two statements below are deliberately about the canonical reindexed
-neighbourhood system.  They do not quantify over arbitrary diagrams or arbitrary
+neighbourhood system. They do not quantify over arbitrary diagrams or arbitrary
 maps out of the specified separable closure.
+
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
+* [Stacks Project, Tag 03QL](https://stacks.math.columbia.edu/tag/03QL)
+* [Stacks Project, Tag 0032](https://stacks.math.columbia.edu/tag/0032)
 -/
 
 @[expose] public section
@@ -143,10 +149,6 @@ theorem Scheme.separableClosure_residueField_generic_eq
 /-- Transport the canonical strict-henselization limit to the specified relative
 separable closure.
 
-Source: Stacks Project, Tags 04HX, 03QL and 0032; the landed declarations
-`strictHenselizationAffineProperties` and `exists_directed_reindexing`.
-(blueprint: new-lem-pd-separable-generic-affine-etale-limit)
-
 The proof obtains the canonical colimit-to-residue comparison from the affine
 étale neighbourhood/triple comparison, proves that the generic strict
 henselization has zero maximal ideal, and transports the canonical inverse-limit
@@ -232,10 +234,6 @@ theorem separableGeneric_affineEtale_limit
   exact congrArg (Spec.map (CommRingCat.ofHom e.toRingHom) ≫ ·) (hπcan j).symm
 
 /-- Pointedness of the canonical reindexed strict-henselization cone.
-
-Source: Stacks Project, Tags 04HX and 03QL; the landed declaration
-`strictHenselizationPointEvaluation_pointed`.
-(blueprint: new-lem-pd-separable-generic-affine-etale-pointed)
 
 The proof substitutes the canonical cone-leg equation from
 `strictHenselizationPointEvaluation_pointed`, the displayed ring comparison,

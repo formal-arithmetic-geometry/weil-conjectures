@@ -10,8 +10,10 @@ import WeilConjectures.AlgebraicGeometry.SectionResolvingOplaxEdgeIdentification
 
 /-! # Resolving model edge squares
 
-Source: Stacks Project, Tags 07A4 and 0G7E; the corresponding explicit
-representative calculation of the resolving constraint diagram.
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -29,25 +31,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 
-/-- The nested resolving models, and the six edge squares.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; Steps 1–7 of
-lem-pd-section-resolving-oplax-constraint-diagrams.
-
-Proof: apply K-flat tensor closure to P,Q and Q,H, then to their outer pairs.
-Ringed-topos pullback preserves K-flatness and flat terms, so every listed pullback
-is resolving. The specified tensor comparison and the resolution counit are
-invertible on these models; tensoring and composing them proves invertibility of
-each vertex. For the source associator use the normalized associator equation for
-qTensor and naturality of the resolution counit. For the two outer splitting edges,
-use naturality of μ along modelTensor in the unresolved tensor input, then apply
-the assumed representative equation to P,Q⊗H and P⊗Q,H. For the inner splitting
-edges apply that equation to Q,H and P,Q, respectively, then use naturality of the
-target modelTensor. Bifunctoriality of tensor identifies the resulting composites
-with the prescribed vertices. The target associator square follows from its
-naturality in the three resolution counits and the normalized target qTensor
-associator equation. These calculations use the same vertex map on both adjacent
-edges and apply to arbitrary integer-indexed direct-sum totals.
-(auxiliary; not a blueprint node). -/
+/-- The nested resolving models, and the six edge squares. -/
 theorem section_resolving_oplax_model_edges {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

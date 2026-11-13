@@ -9,8 +9,11 @@ import WeilConjectures.CategoryTheory.EquivalenceAdjunctionComparison
 
 /-! # Ordinary scalar pullback compatibility
 
-Source: Stacks Project, Tags 03EK, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section
@@ -200,21 +203,7 @@ private theorem scalar_mate (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     s.pair.ordinaryAdjunction s.ordinary s.restriction.hom hunit
 
 -- Compare the specified composite adjunctions and all four section functors explicitly.
-/-- The ordinary scalar and geometric comparisons preserve the balanced pullback square.
-Source: Stacks Project, Tags 03EK, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
-
-Proof: the scalar generator equations identify the specified scalar adjunctions:
-the units send m to 1 tensor m. This identifies each inverse mate with the
-specified restriction comparison.
-Paste these two adjunction squares with the geometric adjunction squares.
-The resulting right-adjoint rectangle is the identity on sections, by the scalar
-restriction normalizations, the geometric pushforward comparisons, coefficient
-compatibility and the hypothesis on r. It is thus r. Both left-adjoint rectangles
-have that same conjugate; injectivity of conjugateEquiv identifies them. Evaluate
-this equality at M. The internal left rectangle is CondensedRing.pullIso inverse
-by its definition as the conjugate of comapLowerStarIso. This gives the equation.
-The argument uses no flatness or nonzero-coefficient assumption. -/
+/-- The ordinary scalar and geometric comparisons preserve the balanced pullback square. -/
 theorem section_ordinary_pull_compatibility (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (sX : SectionScalarComparison a X) (sY : SectionScalarComparison a Y)

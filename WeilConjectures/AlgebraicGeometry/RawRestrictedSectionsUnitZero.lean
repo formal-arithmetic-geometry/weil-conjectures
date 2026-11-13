@@ -13,8 +13,10 @@ import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
 /-! # Degree-zero normalization of the restricted sections unit
 
-Source: Stacks Project, Cohomology on Sites, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-sections-unit-zero).
+## References
+
+* [Stacks Project, Tag 072W](https://stacks.math.columbia.edu/tag/072W)
+* [Stacks Project, Tag 0BKV](https://stacks.math.columbia.edu/tag/0BKV)
 -/
 
 @[expose] public section
@@ -125,9 +127,7 @@ private theorem unit_zero_comparison {C D : Type*}
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
-/-- The derived-sections unit transported through the localization comparisons.
-Source: Stacks Project, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-sections-unit-zero). -/
+/-- The derived-sections unit transported through the localization comparisons. -/
 noncomputable def sectionsUnit {Y : Scheme.{v}} (W : Y.Etale)
     (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :
     DerivedCategory.Q.obj (((underivedSections W).mapHomologicalComplex (.up ℤ)).obj K) ⟶
@@ -253,24 +253,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On a single sheaf the homology of the transported unit is the inverse of
-`zeroIso`, after identifying single-complex homology with underived sections.
-Source: Stacks Project, Tags 072W and 0BKV (degree-zero derived sections).
-(blueprint: lem-sbc-raw-restricted-sections-unit-zero).
-
-Proof: expand `zeroIso` into the exact-restriction single comparison, the
-unbounded-to-bounded-below derived comparison, the injective-resolution homology
-comparison, and the classical degree-zero comparison. The compatibility of the
-two derived functors with their units, given by `Functor.rightDerivedNatTrans_app`,
-cancels the unbounded-to-bounded-below comparison. Apply the proved
-`Functor.rightDerivedPlusSingleUnitHomology_comp_comparison` to the restricted
-sheaf: it identifies the bounded-below single unit with `toRightDerivedZero`.
-Since sections preserve finite limits, `rightDerivedZeroIsoSelf` is its inverse.
-Thus the classical comparison cancels the same augmentation. The single-complex
-homology isomorphism identifies its source with the sheaf of sections. Naturality
-of exact restriction's single-complex comparison and homology's localization
-comparison gives the
-displayed equality. This argument requires no K-injectivity of the single
-sheaf, and includes the zero sheaf and the empty etale object. -/
+`zeroIso`, after identifying single-complex homology with underived sections. -/
 theorem sectionsUnit_zero {Y : Scheme.{v}} (W : Y.Etale)
     (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (underivedSingleIso W A).inv ≫

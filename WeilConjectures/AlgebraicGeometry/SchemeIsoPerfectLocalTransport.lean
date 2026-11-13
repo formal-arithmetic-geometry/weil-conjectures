@@ -21,27 +21,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The derived equivalence on corresponding open sites commutes with restriction.
-Source: Stacks Project, Tag 09IR; restriction-comparison part of step 1 of
-lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-restriction-square).
-
-Proof: Restrict s to the isomorphism s.hom.preimageIso U between the open subschemes.
-Pushforward along this isomorphism and its inverse gives an exact equivalence on
-module sheaves. Compose with Modules.overEquiv on each side to obtain an exact
-module-sheaf equivalence on the two localized open sites. Apply its termwise
-complex functor and localize to obtain the displayed equivalence eU.
-The global module-sheaf pushforward along s is isomorphic to restriction along
-s.inv, since both are left adjoint to pushforward along s.inv. Similarly identify
-the open isomorphism pushforward with restriction along its inverse. Compose
-Modules.overFunctorEquiv, restrictFunctorComp and restrictFunctorCongr with the
-identity s.hom.preimageIso_hom_ι (or its inverse version). These identify the two
-composites of underived functors, by restriction to the same opens with the same
-structure-ring maps. Their termwise natural comparison descends by localization.
-The given he identifies e.functor with the derived isomorphism pushforward by
-uniqueness of localization. Composing this comparison with the localized module
-restriction comparison yields the displayed square. The argument needs no
-quasi-coherence, perfection or nonempty points and includes empty and full U. -/
+/-- The derived equivalence on corresponding open sites commutes with restriction. -/
 private theorem localRestrictionSquare {X Y : Scheme.{u}} (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -132,8 +112,7 @@ private theorem localRestrictionSquare {X Y : Scheme.{u}} (s : X ≅ Y)
 set_option backward.isDefEq.respectTransparency true in
 /-- Local transport of a perfect model along a scheme isomorphism. The proof follows the
 localization comparison, restriction compatibility, and transport of strictly perfect
-complexes described in Stacks Project, perfect.tex, Tag 08EB.
-(blueprint: lem-pc-scheme-iso-perfect-local-transport) -/
+complexes described in Stacks Project, perfect.tex, Tag 08EB. -/
 theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}
     (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

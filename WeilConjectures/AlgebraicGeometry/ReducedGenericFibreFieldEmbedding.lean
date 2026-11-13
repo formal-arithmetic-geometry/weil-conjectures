@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingTransp
 
 /-! # Affine steps in the radicial generic field construction
 
-Source: Stacks Project, Tags 0559 and 030R. -/
+## References
+
+* [Stacks Project, Tag 0559](https://stacks.math.columbia.edu/tag/0559)
+* [Stacks Project, Tag 030R](https://stacks.math.columbia.edu/tag/030R)
+-/
 
 @[expose] public section
 
@@ -29,24 +33,7 @@ open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 
 /-- A dominant generic field map and a compatible finite purely inseparable base
-extension induce a dominant field map on the reduced generic pullback.
-Source: Stacks Project, Tag 0559, second proof, reduction and field embedding step.
-Proof: both original fibre and reduced pullback fibre are affine. Write C for the original
-fibre ring and k for its base field. Scheme-theoretic dominance of j gives an injection
-C -> L. Flatness of k'/k preserves this injection after tensoring. Since k'/k is finite
-purely inseparable, L tensor_k k' is an Artinian local ring whose reduction is a field.
-The compatible maps into E give a unital homomorphism of this tensor ring into E. Its
-kernel is its unique prime, hence its nilradical, so its reduced map is injective.
-An injective ring map induces an injection on reductions by detection of nilpotence.
-Since S' is integral and eta' is generic, its residue field is the localization of
-its coordinate ring at zero. Localization commutes with reduction, identifying the reduced
-pullback fibre ring with (C tensor_k k')_red. Compose these injections to get its injection
-into E. Its spectrum
-map is scheme-theoretically dominant and respects the base algebra maps by construction.
-Transport the E/k' transcendence basis and separability across e to obtain separable
-generation over kappa(eta'). This construction works also for identity base extension;
-it imposes no reducedness or finite presentation assumption on the original family.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding) -/
+extension induce a dominant field map on the reduced generic pullback. -/
 theorem exists_reduced_generic_fibre_field_embedding
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)

@@ -14,9 +14,11 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 
 /-! # A local section of canonical derived evaluation
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ,
-proof of lemma-dual-perfect-complex; Tags 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-local-section).
+## References
+
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
 -/
 
 @[expose] public section
@@ -35,25 +37,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A local section of canonical derived evaluation.
 Only one inverse identity is asserted. No representative of N and no
 comparison square with a prescribed ordinary chain map is part of the statement.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ,
-proof of lemma-dual-perfect-complex; Tags 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-local-section).
-
-Proof:
-1. Represent RN by the localization preimage F and its canonical isomorphism.
-   strictlyPerfect_localHom_computations gives preservation of quasi-isomorphisms
-   by Hom(P,-) and K-flatness of Hom(P,O[0]).
-2. Construct the ordinary evaluation chain map from localEvaluationDegreeMap
-   and its differential identity. The component formula gives its evaluation
-   predicate. exists_exactSource_evaluation_local_comparisons gives the two
-   model isomorphisms a,b and the square R(g);b = a;Q(f).
-3. Strictly perfect ordinary evaluation makes every component of f invertible,
-   hence f and Q(f) are isomorphisms.
-4. Set s = b.hom;inv(Q(f));a.inv. Postcompose the desired identity with b.hom,
-   use the square, and cancel the two inverse pairs.
-Rank zero, zero complexes and empty opens give the same identities on zero
-objects; F may be unbounded because the finite support is that of P.
 -/
 theorem exists_strictlyPerfect_evaluation_local_section (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

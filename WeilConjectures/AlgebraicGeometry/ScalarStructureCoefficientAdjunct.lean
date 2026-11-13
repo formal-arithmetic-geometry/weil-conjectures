@@ -11,8 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Scalar structure coefficient has the original structure-sheaf adjunct
 
-Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-structure-coefficient-adjunct).
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -26,18 +28,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- Scalar structure coefficient has the original structure-sheaf adjunct.
-Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-structure-coefficient-adjunct).
-
-Proof: Apply naturality on the target of the scalar inverse-image adjunction.
-The characterization of scalarPullbackCoefficient says sectionwise that its
-adjunct is the unit of the tensor pullback adjunction. After postcomposition by
-tensorPullbackObjUnitToUnit, the second equation of
-tensorPullbackObjUnitToUnit_isIso identifies this composite with the structure
-sheaf map. Forgetting the scalar action changes neither sections nor maps.
-Sheaf-map extensionality proves the result. No stalk, nonempty-open, or
-characteristic assumption enters this calculation. -/
+/-- Scalar structure coefficient has the original structure-sheaf adjunct. -/
 theorem scalar_structure_coefficient_adjunct (k : Type u) [Field k] {X Y : Scheme.{u}} (f : X ⟶
     Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g) :
     (scalarAbelianForget k X).map ((((Opens.map a.base).sheafAdjunctionContinuous (ModuleCat.{u}

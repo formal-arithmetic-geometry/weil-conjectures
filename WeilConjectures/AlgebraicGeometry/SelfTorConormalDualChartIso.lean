@@ -19,8 +19,15 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # Chart factorizations of the canonical exterior-to-self-Tor comparison
 
-Source: Stacks Project, Tags 09PQ, 062I, 0BQY and 06YH.
-(blueprint: new-r4-self-tor-conormal-dual-chart-iso). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 062I](https://stacks.math.columbia.edu/tag/062I)
+* [Stacks Project, Tag 0BQY](https://stacks.math.columbia.edu/tag/0BQY)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 01I6](https://stacks.math.columbia.edu/tag/01I6)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,9 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Sheafify an affine module, extend it to Y, and apply ordinary tensor pullback to Z.
-Only its restriction over the chosen affine chart is used below.
-Source: Stacks Project, Tags 01I6, 0096 and 06YH.
-(blueprint: new-r4-self-tor-conormal-dual-chart-iso). -/
+Only its restriction over the chosen affine chart is used below. -/
 noncomputable def selfTorAffineComparisonFunctor {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) : ModuleCat.{u} (Γ(Y, U.1) : Type u) ⥤ Z.Modules :=
   tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
@@ -39,29 +44,7 @@ noncomputable def selfTorAffineComparisonFunctor {Z Y : Scheme.{u}} (i : Z ⟶ Y
 
 /-- The dual of the canonical comparison has, on every affine chart, the factorization
 obtained by sheafifying the normalized algebraic comparison. No regularity is required
-for this construction or for the two coordinate identifications.
-
-Source: Stacks Project, Tag 09PQ (canonical Tor products), Tag 062I (the conormal
-identification), and Tag 06YH (K-flat computation of derived tensor).
-(blueprint: new-r4-self-tor-conormal-dual-chart-iso).
-
-Proof: On U=Spec A, write I for the immersion ideal. Use a projective resolution of A/I
-and sheafify it on U. Tensoring it with A/I computes the restriction of the given
-K-flat derived tensor, since a bounded-above complex of flat sheaves is K-flat and
-resolution comparison is a quasi-isomorphism. The quotient action identifies its
-ordinary pullback with the same Tor module on the inverse-image closed chart. The
-pulled-back ideal has sections I/I², and exterior powers commute with the tilde
-functor and localization. These give the source and target coordinate isomorphisms.
-The algebraic comparison is normalized on every tuple of ideal elements and every
-projective resolution. Localization preserves that normalization, so uniqueness of
-the normalized algebraic map shows that the chart maps agree on basic open overlaps.
-Sheaf descent glues them to the global morphism τ. This is the canonical exterior-to-Tor
-map, including on singular charts. Dualize the coordinate square, restrict to V, and
-apply the over-site restriction. Both coordinate maps stay isomorphisms; their
-composite gives exactly the displayed factorization through the functorial image of
-the algebraic comparison. Extension along U is used only to write that functor on Z;
-over the inverse-image chart it is the original tilde module. For n=0 the map is the
-unit; empty charts, zero quotients, and n above the regular rank require no exceptions. -/
+for this construction or for the two coordinate identifications. -/
 theorem selfTor_conormal_dual_chart_iso
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

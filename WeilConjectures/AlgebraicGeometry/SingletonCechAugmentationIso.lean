@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # The singleton Čech augmentation
 
-Source: Stacks Project, Tag 08C2, singleton-cover specialization of the alternating total.
-(blueprint: lem-sc-singleton-cech-augmentation-iso).
+## References
+
+* [Stacks Project, Tag 08C2](https://stacks.math.columbia.edu/tag/08C2)
 -/
 
 @[expose] public section
@@ -21,19 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- For the cover consisting of the whole scheme, the section-to-total augmentation
-is already an isomorphism of complexes, without any acyclicity or boundedness assumption.
-Source: Stacks Project, Tag 08C2, equation-global-sections-to-alternating-cech.
-(blueprint: lem-sc-singleton-cech-augmentation-iso).
-
-Proof: In Čech degree zero there is exactly one increasing tuple into Fin 1. Its
-intersection is the whole scheme and the restriction is the identity. In every
-positive Čech degree there are no increasing tuples into Fin 1, so that cochain
-module is zero. The extended double complex therefore has only Čech column zero.
-In each total degree its coproduct has exactly this one nonzero summand; evaluation
-on the unique tuple identifies it with the ordinary section module. The vertical
-sign is (-1)^0 = 1 and the horizontal differential is zero. These evaluation maps
-commute with the differential and are inverse to the specified augmentation.
-This works for the empty scheme and for unbounded or zero complexes as well. -/
+is already an isomorphism of complexes, without any acyclicity or boundedness assumption. -/
 theorem singletonCechAugmentation_isIso (X : Scheme.{u})
     (F : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     IsIso ((alternatingCechAugmentation (fun _ : Fin 1 ↦ (⊤ : X.Opens))).app F) := by

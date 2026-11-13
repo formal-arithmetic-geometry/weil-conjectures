@@ -15,7 +15,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Concrete restricted affine coefficient constructions
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -29,27 +32,7 @@ namespace AlgebraicGeometry.Etale
 -- Preserve the existing names of the existential proof witnesses in the statement.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Coherent transitions and cone comparisons for the concrete restricted single complexes.
-Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object), and
-Tag 0EZM (canonical coefficient maps).
-(blueprint: lem-sbc-restricted-affine-single-coherence).
-
-Proof: First substitute hD' and the four heterogeneous data equalities to reduce to
-the concrete diagram, cone, K, G and L. Restrict each transition by
-rawAffineRestrictedCoefficient and compose its image
-under the degree-zero single functor with mapCochainComplexSingleFunctor. The pullback
-projection triangles and upperStarComp identify successive restrictions. The unit and
-associativity coherence of upperStarComp, and the identity and composition laws for phi,
-give the two transition laws. At each cone leg use the composition comparisons for the
-triangle between the two second projections and the cone leg, followed by the restriction
-of eH, to identify G with the pulled-back K. Naturality of these comparisons and the
-transition equation hH give the diagram equation hG. Inverting this comparison and
-composing with the restricted colimit injection cancels the eH comparison. The remaining
-two composition comparisons are precisely rawAffineRestrictedCoefficient for that leg.
-Naturality of mapCochainComplexSingleFunctor gives the asserted complex-level equality.
-The data equalities only allow local names for these fixed constructions; they introduce
-no mathematical hypothesis beyond identifying the constructions. This theorem constructs
-neither a limit of schemes nor a cohomology comparison. -/
+/-- Coherent transitions and cone comparisons for the concrete restricted single complexes. -/
 theorem exists_restricted_affine_single_coherence {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

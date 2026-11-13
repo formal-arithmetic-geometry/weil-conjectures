@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPullbackCube
 
 /-! # Residual calculation for explicit open base-change comparisons
 
-Source: Stacks Project, Tags 08FE, 08HY and 0DJ9.
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -132,39 +136,7 @@ attribute [local irreducible] CategoryTheory.Adjunction.homEquiv
 
 /-- Compatibility of the pinned base-change arrow with the explicitly constructed
 open comparisons. All comparison data are already constructed; this statement
-is only the remaining mate calculation, with no existence claim.
-Source: Stacks Project, cohomology.tex, Tags 08HY and 08FE; perfect.tex,
-Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-n3-open-base-change-calculation).
-
-Proof: Work on K-flat representatives for pullback and K-injective representatives
-for direct image. Open restriction preserves K-injectives (Tag 08BS). The
-underived direct-image comparison in singleComplexOpenDirectImageIso is the
-sectionwise identity on inverse-image opens. It therefore identifies restriction
-of the tensor-pullback adjunction counit with the restricted counit. The derived
-comparison has the same equation by the factorization identities of
-rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorNatIso,
-rightDerivedFunctorCompIso and rightDerivedFunctorIsoMapDerivedCategory.
-The adjunctions in schemeDerivedBaseChangeMap are pinned to the underived
-adjunctions and the same derived counits, so this equation descends to their
-counits. Explicitly, write L₀=L(f|V)*, R_X=restriction to U and
-R_S=restriction to V. If c_f:L₀ R_S ≅ R_X Lf* is the comparison formed
-from open pullback and the composition comparisons, and b_f is the constructed
-direct-image comparison, the equation is
-L₀(b_f.hom.app E) ≫ ε_f₀.app(R_X E) = c_f.hom.app(Rf*E) ≫ R_X(ε_f.app E).
-Both sides are evaluation of the same restricted tensor-pullback counit on the
-representatives. Apply the same equation for f'. Transpose both sides of the
-claimed identity under the pinned adjunction for f' restricted to V'.
-Tag 08HY identifies each transpose as pullback of the counit. Substitute the
-restriction-counit equation and the explicit source comparison. Associativity
-of the pinned pullback composition comparisons, the restricted square equation,
-and hj identify the two pullback paths. Cancel inverse comparison factors.
-The remaining factors are exactly singleComplexRestrictedCoefficient with
-identity coefficient: inverse open pullback on X, composition along j and U.ι,
-hj, inverse composition along U'.ι and g', and open pullback on X'. Transposing
-back gives the equality. Every operation is a natural transformation identity,
-so the proof also applies to zero coefficients, empty opens and unbounded
-complexes. -/
+is only the remaining mate calculation, with no existence claim. -/
 theorem singleComplexOpen_baseChange_calculation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

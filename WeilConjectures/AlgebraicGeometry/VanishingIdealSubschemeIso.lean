@@ -11,12 +11,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 # Isomorphisms of reduced closed subschemes
 
-An isomorphism of schemes `φ : X ≅ Y` mapping a closed subset `Z` of `X` onto a closed subset
+An isomorphism of schemes `φ: X ≅ Y` mapping a closed subset `Z` of `X` onto a closed subset
 `W` of `Y` restricts to an isomorphism of the reduced induced closed subschemes
 (`AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdealSubschemeIso`), compatible with the
 closed immersions into `X` and `Y`. In particular an automorphism of `X` stabilizing `Z` induces
 an automorphism of the reduced closed subscheme on `Z`.
-
 -/
 
 @[expose] public section
@@ -36,7 +35,7 @@ lemma vanishingIdeal_le_map_vanishingIdeal (f : X ⟶ Y) {Z : Closeds X} {W : Cl
   rw [map_vanishingIdeal]
   exact vanishingIdeal_antimono (Closeds.closure_le.2 h)
 
-/-- An isomorphism `φ : X ≅ Y` with `φ(Z) = W` restricts to an isomorphism of the reduced
+/-- An isomorphism `φ: X ≅ Y` with `φ(Z) = W` restricts to an isomorphism of the reduced
 induced closed subschemes on `Z` and `W`. -/
 noncomputable def vanishingIdealSubschemeIso (φ : X ≅ Y) {Z : Closeds X} {W : Closeds Y}
     (h : φ.hom.base '' Z = W) :

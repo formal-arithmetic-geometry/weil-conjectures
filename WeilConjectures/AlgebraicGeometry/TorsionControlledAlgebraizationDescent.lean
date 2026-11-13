@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationDescentB
 
 /-! # Descent of already constructed torsion-controlled triples
 
-Source: Stacks Project, Tag 0889(1), first sentence and uniqueness argument;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -26,29 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Local triples on an open cover descend. The hypothesis supplies actual local
-algebraizations, not a torsion condition on the original formal map.
-
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: lem-weil-pbc-torsion-controlled-algebraization-descent).
-
-Proof: Choose the triples supplied on the covering opens. Restrict two triples to
-an overlap, using the quotient/restriction comparison to compare completions.
-The formal isomorphism between their completions respects the maps to H. The
-torsion-controlled completion homomorphism lifting theorem lifts it and its
-inverse to coherent maps. The completion extensionality theorem identifies their
-composites with the identity, giving an isomorphism of triples. The same theorem
-makes that isomorphism unique. On triple overlaps uniqueness proves the cocycle
-identity. Glue the coherent sheaves by sheaf descent, the maps by morphism descent,
-and the component isomorphisms by morphism descent at each level. Coherence is
-local, and the transition equations can be checked on the cover, so the glued
-component comparisons form an isomorphism of formal systems. Their factorization
-equations glue to the equation for δ. Choose a finite subcover using Noetherian
-quasi-compactness. Take the maximum of its bounds and 1. Higher ideal powers factor
-through lower powers, and restriction is exact, so this bound kills both global
-kernel and cokernel. On the empty scheme the empty subcover uses bound 1. The
-argument uses uniqueness only between torsion-controlled triples, including for
-the unit ideal; it asserts nothing about unrestricted triples. -/
+algebraizations, not a torsion condition on the original formal map. -/
 theorem torsionControlled_algebraization_descent
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

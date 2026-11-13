@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 /-!
 # Coordinates for a finite tensor-pullback frame
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-tensor-free-frame-coordinates).
+## References
+
+* [Stacks Project, Tag 0GKU](https://stacks.math.columbia.edu/tag/0GKU)
 -/
 
 @[expose] public section
@@ -175,23 +176,6 @@ private theorem exists_restriction_frame_coordinates
 
 set_option maxRecDepth 2048 in
 /-- Coordinates from a finite free frame commute with tensor-section restriction.
-
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
-first paragraph (trivialize the vector bundle and use its frame coordinates).
-(blueprint: lem-fd-tensor-free-frame-coordinates).
-
-Proof: for h:W -> V, use the inverse of precisely the normalized composition map
-that occurs in the definition of tensor-section restriction. Follow it by the
-unit-normalized comparison with ordinary pullback, the pullback of the supplied
-frame, and the free-pullback isomorphism. Global sections and reindexing give e_(W,h).
-On a restricted section, the composition map cancels its inverse. The adjunction
-unit equation identifies the remaining tensor unit with ordinary section pullback.
-Pullback of each coordinate projection commutes with section pullback, and the
-structure-sheaf comparison acts by h.appTop. Thus these coordinates of a restricted
-section equal the pullback of the original frame coordinates. Apply this formula to
-h=id and use the presheaf identity law to identify e_(V,id) with those original
-coordinates. Substitution proves the asserted formula. Rank zero has no coordinate
-to check, and all comparisons and identity laws apply to empty test schemes.
 -/
 theorem exists_natural_tensor_free_frame_coordinates
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent]

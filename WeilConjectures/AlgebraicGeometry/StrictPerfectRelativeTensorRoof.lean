@@ -15,8 +15,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # A relative tensor representative roof
 
-Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
-(blueprint: lem-pc-strict-perfect-relative-tensor-roof).
+## References
+
+* [Stacks Project, Tag 0DJQ](https://stacks.math.columbia.edu/tag/0DJQ)
+* [Stacks Project, Tag 08CI](https://stacks.math.columbia.edu/tag/08CI)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 05RT](https://stacks.math.columbia.edu/tag/05RT)
 -/
 
 @[expose] public section
@@ -51,24 +55,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The explicit local tensor and scalar-restricted K have a common quasi-isomorphic
 complex. This is only the representative-comparison step; no relative flatness or
-prescribed interval is assumed or asserted. Source: Stacks Project, Tags 0DJQ,
-06YH and 05RT, local tensor computation and the calculus of fractions.
-
-Proof: each term of L is a finite-free retract, hence flat over O_X on the open
-site. Its boundedness implies K-flatness. Exact monoidal open restriction carries
-eK to an isomorphism with the restricted derived tensor; eL identifies its first
-factor with QL. The K-flat tensor comparison identifies that derived tensor with
-Q of the ordinary total tensor of L and G restricted to U. Restriction of scalars
-is exact and therefore descends to localization at quasi-isomorphisms. It carries
-this comparison to the two base-ring complexes on U, commuting with open
-restriction sectionwise. In the homotopy category, right fractions represent the
-resulting derived isomorphism by a roof with a quasi-isomorphic left leg. The right
-leg becomes an isomorphism after localization, hence is a quasi-isomorphism as
-well (homology reflects this). Choose actual chain maps representing both
-homotopy classes. Their homology maps are unchanged, so both are quasi-isomorphisms.
-Only an existential proposition uses this roof, not a definition of data.
-On the empty open all complexes have zero terms and the same comparison applies.
-(blueprint: lem-pc-strict-perfect-relative-tensor-roof). -/
+prescribed interval is assumed or asserted. -/
 theorem strictPerfect_relativeTensor_roof
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 
 /-! # Algebraic conormal wedges after extension of scalars
 
-Source: Stacks Project, Tag 01R3(2), lemma-affine-conormal.
-(blueprint: new-v2-self-tor-conormal-exterior-tensor). -/
+## References
+
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -169,26 +171,7 @@ private theorem exterior_quotient_tensor
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-/-- The conormal exterior section calculation before passing to associated sheaves.
-Source: Stacks Project, Tag 01R3(2), lemma-affine-conormal.
-(blueprint: new-v2-self-tor-conormal-exterior-tensor).
-Proof: Write A = Gamma(Y,U), I = ker(i)(U), B = Gamma(Z,i inverse-image U).
-The map A to B is surjective with kernel I; hence its quotient map q : A/I to B
-is an isomorphism. Apply affine_conormal_sections with R=A and r=id, obtaining
-an A-linear equivalence I/I squared to N(V), taking each ideal class to its
-pullback-unit image. Scalar lifting along A to B shows that this equivalence
-is semilinear along q. Apply the universal property of exterior powers to it
-and its inverse. Multilinearity and alternation are preserved by q, and the
-composites are identities because they are identities on pure wedges. This
-identifies the exterior over B with the exterior over A/I transported along q.
-For M the latter exterior regarded over A, the map B tensor_A M to that
-transported module sends b tensor m to q inverse(b) times m. It is well-defined
-by balancing and has inverse m to 1 tensor m: lift b to a in A and use
-b tensor m = 1 tensor a*m. Compose with the inverse exterior equivalence.
-The formula follows from the degree-one formula and the value of the tensor
-inverse. For n=0 both exterior modules are their scalar rings and the formula
-sends the empty wedge to 1 tensor 1. For I=A, B is the zero ring and all the
-modules are zero. No flatness or finite-generation assumption is used. -/
+/-- The conormal exterior section calculation before passing to associated sheaves. -/
 theorem exists_selfTor_conormal_exterior_tensor
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

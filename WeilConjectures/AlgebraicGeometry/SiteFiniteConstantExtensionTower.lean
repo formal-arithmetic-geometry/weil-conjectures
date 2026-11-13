@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local finite constant extension towers
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G, the cohomological
-induction before the boundary maps are realized by chain maps.
+## References
+
+* [Stacks Project, Tag 094G](https://stacks.math.columbia.edu/tag/094G)
 -/
 
 @[expose] public section
@@ -241,36 +242,7 @@ attribute [local instance] map_colimits map_additive pullback_colimits pullback_
 
 /-- Locally, finite locally constant cohomology admits a finite tower of
 triangles with constant finite attachments. This is only the cohomological
-induction: it produces no complex and no chain representatives for boundaries.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
-`lemma-locally-constant`, through the induction applied to the cone L.
-(auxiliary; not a blueprint node)
-
-Proof: Induct on the nonnegative width b-a, simultaneously on slices. In width
-zero, the canonical t-structure identifies K with H^a(K) in degree a; locally
-trivialize that finite locally constant sheaf. This is the single constructor.
-For positive width, trivialize H^b(K) as the constant finite module M. Choose
-finitely many generators, hence an epimorphism from the constant finite free
-module F to H^b(K). Represent K by its good upper truncation at b. The quotient
-from its cycles to H^b is epi. The finite-free local lifting theorem lifts the
-chosen epimorphism through this quotient on a covering. Compose with the cycles
-inclusion to obtain a chain map F[-b] to the representative and localize it.
-Complete to the triangle F[-b] to K to L to F[-b+1]. Its long exact homology
-sequence gives vanishing of L outside [a,b-1], unchanged homology below b-1,
-and an extension of H^(b-1)(K) by the kernel of F to H^b(K) in degree b-1.
-Noetherianity and the finite locally constant Serre property show that this
-homology is finite locally constant. For the recorded ringed-module versions,
-transport through site_moduleSheaf_restriction_equivalence; its constant and
-slice comparisons identify the same local trivializations. Exact restriction and its comparison
-with constants transport these assertions to every further slice. Apply the
-induction hypothesis to L. Rotate the displayed triangle and identify
-F[-b+1] with the single object in degree b-1; the step constructor appends this
-triangle to the shorter tower. Flatten iterated slices via their canonical
-slice equivalence, and compose all covering refinements. The zero ring, zero
-top homology, and empty covers require no nonzero generator: choose rank zero
-and the zero single object. This argument stops at triangles, before the
-separate chain-representative and mapping-cocone realization argument. -/
+induction: it produces no complex and no chain representatives for boundaries. -/
 theorem exists_site_finite_constant_extension_tower
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

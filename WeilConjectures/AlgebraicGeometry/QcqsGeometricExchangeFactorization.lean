@@ -21,7 +21,12 @@ import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # The degree-zero exchange factorization through strict-local sections
 
-Source: Stacks Project, Tags 03Q9, 03Q1 and 0A3U.
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 0A3U](https://stacks.math.columbia.edu/tag/0A3U)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
 -/
 
 @[expose] public section
@@ -34,8 +39,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- Global sections to the identity geometric stalk on the spectrum of a closed field.
 This is the global-section identification followed by the identity-neighbourhood germ.
-Source: Stacks Project, Tag 03QO.
-(auxiliary; not a blueprint node). -/
+
+. -/
 noncomputable def geometricPointGlobalGerm
     (Λ : Type (u + 1)) [CommRing Λ] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -55,27 +60,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- For a qcqs morphism, exchange on the identity geometric stalk factors through
 sections over the strict henselization and restriction to the given geometric fibre.
-There is no properness hypothesis and no invertibility claim for the fibre restriction.
-Source: Stacks Project, Tags 03Q9, 03Q1 and 0A3U
-(auxiliary; not a blueprint node).
-
-Proof: the pointed affine-neighbourhood colimit constructs the strict-local ring and
-its distinguished map from Spec Ω. Its maximal ideal is the kernel of the residue map,
-so this is its geometric closed point. The neighbourhood maps show that its composite
-with the structural morphism is s. Form the pullback with X; the universal property
-provides q and its cartesian square. The qcqs section-continuity comparison (03Q9)
-identifies the direct-image stalk with global sections on this pullback. Forgetting
-modules commutes with the filtered colimit and the inverse-image constructions, so
-this bijective comparison is a module isomorphism. On an affine representative it is
-adjunction unit followed by restriction along the corresponding limit leg.
-The inverse-image stalk formula (03Q1) identifies the source stalk of exchange with
-this direct-image stalk. Expand exchange as unit, square comparison and counit.
-On every representative the result restricts its section to the same pointed fibre.
-The upperStarComp inverse identifies the iterated inverse image with g' inverse image;
-the lowerStar global-section comparison and the terminal germ give the target stalk.
-The colimit's jointly epimorphic germs give the displayed equality. This proves only
-the factorization: the restriction to the geometric closed fibre need not be invertible
-without properness, and is handled separately. -/
+There is no properness hypothesis and no invertibility claim for the fibre restriction. -/
 theorem qcqs_geometricExchange_factorization
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

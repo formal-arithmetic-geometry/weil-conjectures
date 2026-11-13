@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection
 
 /-! # Evaluation comparisons with a K-injective second representative
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-kinjective-evaluation-comparisons).
+## References
+
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
 -/
 
 @[expose] public section
@@ -33,25 +36,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The local evaluation square when its second representative is already K-injective.
 This only handles the resolved case; it does not assert the comparison for an arbitrary
 second complex.
-
-Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-kinjective-evaluation-comparisons).
-
-Proof:
-1. Apply the local retraction and section statements to the restricted canonical
-   evaluation. If r and s are their respective inverse maps, then
-   r = (s followed by R(g)) followed by r = s followed by (R(g) followed by r) = s.
-   Thus r is a two-sided inverse and defines an isomorphism e with hom R(g).
-2. Restrict derived internal Hom to U by 08DL and transport its arguments through
-   eK and eN. Since F is K-injective, derivedInternalHom_obj_iso computes the target
-   as Q Hom(P,F), giving b without resolving F again.
-3. Ordinary evaluation is degreewise invertible for strictly perfect P. Hence the
-   prescribed f is an isomorphism of complexes and Q(f) is an isomorphism.
-4. Set a = e followed by b followed by the inverse of Q(f). Associativity and the
-   inverse identity give R(g) followed by b = a followed by Q(f). No independently
-   prescribed source comparison is required by the statement.
-The two local inverse identities remain separate named obligations, following the
-ordinary-model calculation of Stacks 08DQ.
 -/
 theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

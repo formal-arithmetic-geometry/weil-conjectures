@@ -13,8 +13,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Coefficient and symmetry transport for strict-local sections
-Source: Stacks Project, Tags 03D3, 03D7, and 03Q9.
-(blueprint: lem-weil-pbc-strict-local-module-sections-set-transport)
+
+## References
+
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -28,8 +32,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical equivalence of strict-local terminal sections after forgetting module
 coefficients and interchanging the two pullback factors.
-Source: Stacks Project, Tags 03D3, 03D7, and 03Q9.
-(blueprint: def-weil-pbc-strict-local-module-sections-set-equiv).
+
 The coefficient comparison, composition of inverse images, restriction along the
 pullback symmetry, and terminal/global section comparisons are all actual isomorphisms.
 The composition comparison is determined by its unit identity and fixed-sheaf uniqueness.
@@ -251,31 +254,7 @@ private lemma symmetry_unit_transport
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Forgetting coefficients and interchanging the two pullback factors identifies terminal
-sections, compatibly with restriction of a section from any affine pointed neighbourhood.
-Source: Stacks Project, Tags 03D3 and 03D7 (inverse images), and Tag 03Q9 (degree zero).
-(blueprint: lem-weil-pbc-strict-local-module-sections-set-transport).
-
-Proof: Put S = Spec of the strict henselization, A = X ×_Y S, B = S ×_Y X,
-g = A → X, h = B → X, and σ : A → B the pullback symmetry, so σ ≫ h = g.
-Write H for the underlying set sheaf and K = h⁻¹H. Expand the equivalence in
-strictLocalModuleSectionsSetEquiv. Its global-section comparison cancels the inverse
-comparison at the end of the displayed module restriction map. Let q : g⁻¹H → U(g*F)
-be the coefficient comparison. By Adjunction.homEquiv_unit, the forgotten module unit
-is the set unit followed by q. Naturality of q⁻¹ therefore sends the restricted module
-section to the g-unit section restricted to the terminal object of A.
-The chosen composition isomorphism c : σ⁻¹(h⁻¹H) ≅ (σ ≫ h)⁻¹H satisfies its unit
-formula by Classical.choose_spec etaleSetInverseImageCompositionUnits. After transport
-along σ ≫ h = g, naturality of c⁻¹ sends that restricted g-unit section to the iterated
-h-unit and σ-unit section, restricted along the terminal-to-iterated-pullback map.
-The chosen restriction comparison r : σ⁻¹K ≅ K restricted along σ satisfies the unit
-formula of Classical.choose_spec (etaleSetInverseImageRestriction σ). Use its naturality
-to move the preceding restriction past r; its unit formula replaces the σ-unit by
-restriction along the fibre-product projection. Finally the inverse sheaf map at the
-terminal-object isomorphism induced by σ transports evaluation from A → B to B → B.
-The composite restriction map is strictHenselizationSectionMap f s j: compare both
-projections using pullback.lift_fst, pullback.lift_snd, the pullbackComp projection
-identities, and pullbackSymmetry_hom_comp_snd. Functoriality gives the displayed equation.
-No step uses qcqs, nonempty schemes, or nonzero coefficients. -/
+sections, compatibly with restriction of a section from any affine pointed neighbourhood. -/
 theorem strictLocalModuleSections_set_transport
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)

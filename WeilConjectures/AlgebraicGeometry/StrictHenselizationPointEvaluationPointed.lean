@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluati
 
 /-! # Pointedness of colimit evaluation
 
-Source: Stacks Project, Tag 04HX.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-pointed).
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
 -/
 
 @[expose] public section
@@ -22,9 +23,8 @@ namespace AlgebraicGeometry.Scheme
 
 -- The colimit comparison unfolds the full affine neighborhood diagram.
 /-- Evaluation recovers the given geometric point at every chosen neighbourhood.
-Source: Stacks Project, Tag 04HX. This is the colimit coprojection equation,
-followed by the naturality and triangle identities of Γ and Spec.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-pointed). -/
+ This is the colimit coprojection equation,
+followed by the naturality and triangle identities of Γ and Spec.. -/
 theorem strictHenselizationPointEvaluation_pointed
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)

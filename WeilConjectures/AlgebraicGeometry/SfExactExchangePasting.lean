@@ -11,11 +11,12 @@ import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 
 /-! # Elementary pasting for the exact derived exchange maps
 
-Source: Stacks Project, Tag 0F7F; canonical adjunction mate pasting
-(auxiliary; not a blueprint node).
-
 The pullback pseudofunctor and its proper and open mates give the elementary
 pasting equations. These statements impose no quasi-compactness assumptions.
+
+## References
+
+* [Stacks Project, Tag 0F7F](https://stacks.math.columbia.edu/tag/0F7F)
 -/
 
 @[expose] public section
@@ -799,12 +800,8 @@ private theorem exact_identity_mate
   exact (Category.comp_id _).symm
 
 /-- Exact exchange for identity direct images respects the canonical identity normalization.
-Source: Stacks Project Tag 0F7F and the identity mate law.
-(auxiliary; not a blueprint node).
-Proof: transport the identity adjunction along exact inverse-image identity. Its
-right conjugate is the canonical derived direct-image identity isomorphism. The
-identity mate law, followed by cancellation of the conjugating isomorphisms,
-is the displayed identity. -/
+
+. -/
 private theorem sfExactIdentityExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' : Scheme.{u}} (t : X' ⟶ X)
@@ -842,12 +839,8 @@ private theorem sfExactIdentityExchange
   simp only [Category.comp_id]
 
 /-- Proper direct-image compositors intertwine the exact exchange of two vertically
-pasted squares. Source: the mate-pasting law, Stacks Project Tag 0F7F.
-(auxiliary; not a blueprint node).
-Proof: realize exact inverse image as a pullback pseudofunctor. Its right mate is
-exactDerivedBaseChangeMap and the conjugate of its compositor is
-rightDerivedLowerStarComp. Apply the vertical mate-pasting law and cancel the
-compositor inverse. This works for arbitrary commutative squares. -/
+pasted squares.
+. -/
 private theorem sfExactProperExchange_paste
     (A : Type (u + 1)) [CommRing A]
     {U U' V V' Z Z' : Scheme.{u}}
@@ -884,11 +877,8 @@ private theorem sfExactProperExchange_paste
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- Open compositors intertwine inverse exact base change for pasted Cartesian squares.
-Source: Stacks Project Tag 0F7F; the extension-by-zero unit mate.
-(auxiliary; not a blueprint node).
-Proof: derive the open adjunctions and their composite unit. The open compositor
-is the unique conjugate of inverse-image composition. Apply vertical mate pasting,
-then multiply by the inverse open exchange factors. -/
+
+. -/
 private theorem sfExactOpenExchange_paste
     (A : Type (u + 1)) [CommRing A]
     {U U' V V' Z Z' : Scheme.{u}}
@@ -935,13 +925,8 @@ private theorem sfExactOpenExchange_paste
   exact Category.comp_id _
 
 /-- Exact proper, open, and identity exchanges respect their specified compositors.
-Source: Stacks Project Tag 0F7F and the vertical and identity mate laws.
-(auxiliary; not a blueprint node).
-Proof: the proper compositor is conjugate to the exact inverse-image compositor;
-vertical mate pasting gives the proper clause. The descended open adjunction and
-its unit identify the open compositor with the inverse-image conjugate; mate
-pasting followed by inverse cancellation gives the open clause. The identity
-adjunction and its conjugate give the identity clause by the identity mate law. -/
+
+. -/
 theorem sfExactExchangePasting :
     (∀
     (A : Type (u + 1)) [CommRing A] [Finite A]

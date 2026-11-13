@@ -12,9 +12,13 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Detecting higher-direct-image vanishing on strict-local pullbacks
 
-Source: Stacks Project, Tag 03Q9; ILO, Exposé XIII, Proposition 2.3.4, printed p. 198.
+ 198.
 This is the stalk-comparison part of the independent principal-open estimate needed by
 `lem-per-qe-open-residue-spectral-strip`, not the affine Lefschetz estimate itself.
+
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -30,18 +34,8 @@ namespace AlgebraicGeometry.Etale
 /-- A higher direct image vanishes exactly when the corresponding absolute cohomology
 groups of all strict-local pullbacks vanish.
 
-Source: Stacks Project, Tag 03Q9; ILO, Exposé XIII, Proposition 2.3.4, printed p. 198,
+ 198,
 the equality of a higher-direct-image stalk with cohomology over the strict localization.
-
-Proof: compare the ordinary right derived functor with `higherDirectImage`. At every
-geometric point, the strict-henselization stalk formula identifies the underlying additive
-group of that stalk with the displayed Ext group. A zero sheaf has zero stalks, proving
-one direction. Conversely, subsingleton Ext groups make all geometric stalks zero. The
-conservative family of algebraic-closure points then makes the identity of the higher
-direct image equal to zero. Transport back through the derived-functor comparison.
-This includes degree zero, an empty source or target, and arbitrary coefficient rings.
-
-(blueprint: lem-per-qe-open-residue-strict-local-vanishing-criterion)
 -/
 theorem isZero_rightDerived_lowerStar_iff_strict_local_ext
     (B : Type (u + 1)) [CommRing B] {Y S : Scheme.{u}} (f : Y ⟶ S)

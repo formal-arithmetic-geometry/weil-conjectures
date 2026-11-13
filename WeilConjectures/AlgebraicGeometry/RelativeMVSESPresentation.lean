@@ -16,7 +16,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
 
 /-! # Chain-level relative Mayer--Vietoris presentation
 
-Source: Stacks Project, Cohomology, Tags 08BV, 08HY and 08HZ.
+## References
+
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
 -/
 
 @[expose] public section
@@ -28,35 +32,7 @@ set_option backward.isDefEq.respectTransparency false
 namespace AlgebraicGeometry
 
 /-- Present the relative Mayer--Vietoris comparison by a morphism of short exact
-complexes. No connecting morphisms or distinguished triangles are asserted.
-
-Source: Stacks Project, Tags 08BV, 08HY and 08HZ, the K-injective construction
-before passage to the derived triangle.
-(blueprint: lem-pc-relative-mv-ses-presentation).
-
-Proof: The two affine bases and qcqs morphisms give qcqs sources, and the affine
-base change g' takes the compact two-open cover to a compact cover. Resolve K and
-K' by K-injective complexes with injective terms. For each cover take the pair
-of restriction units followed by the difference of restrictions. Gluing proves
-exactness at the first two terms, and injectivity (hence flasqueness) proves
-surjectivity at the last term, degree by degree. Transpose the object map under
-the derived adjunction and lift it to the chosen K-injective representative.
-Its restrictions give a morphism of the two short exact diagrams. Apply derived
-direct image and derived pullback using functorial resolutions. Represent these
-image diagrams by short exact complexes, replacing the source by the standard
-mapping-cylinder presentation if necessary; this preserves the entire diagram,
-not just its individual objects. The exact restrictions compute open derived
-pullback. Compare their adjunctions with the pinned adjunctions by uniqueness
-of right adjoints, then take mates of the pinned pullback composition comparisons.
-These identify the six vertices with the relative global, biproduct and overlap
-terms. Naturality of the adjunction units gives the first-arrow identities;
-transposing the restricted counits gives the second-arrow identities with their
-usual difference sign. Expanding the base-change mate and using the pullback
-projection equality identifies the first and third components with the specified
-global and overlap arrows. Empty opens give zero complexes, repeated opens give
-the split restriction sequence; neither case needs additional hypotheses.
-This is a chain-level comparison construction, prior to the short-exact-sequence
-triangle theorem and its boundary naturality. -/
+complexes. No connecting morphisms or distinguished triangles are asserted. -/
 theorem relativeMV_ses_presentation
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

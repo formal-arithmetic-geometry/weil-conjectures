@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Mathlib.Topology.Sheaves.Stalks
 
 /-! # Vanishing of derived restriction away from cohomological support
-Source: Stacks Project, Tags 0A9A and 05RU.
-(blueprint: lem-pc-supported-derived-restriction-zero).
+
+## References
+
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
+* [Stacks Project, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
 -/
 
 @[expose] public section
@@ -35,16 +38,7 @@ private theorem module_restriction_zero
   change TopCat.Presheaf.germ M.val.presheaf _ x hx _ = TopCat.Presheaf.germ M.val.presheaf _ x hx _
   exact (hM x (hU (leOfHom V.unop.hom hx))).elim _ _
 
-/-- A derived object with cohomology supported on T restricts to zero outside T.
-Source: Stacks Project, Tag 0A9A, affine proof, and Tag 05RU.
-(blueprint: lem-pc-supported-derived-restriction-zero).
-
-Proof:
-1. Restriction of module sheaves to an open is exact and commutes with cohomology.
-2. At a point of U, each cohomology stalk is the corresponding stalk on X and is zero
-   by the support assumption. A module sheaf with all stalks zero is zero.
-3. Thus all homology objects of the derived restriction vanish; homology detects zero
-   in the derived category of module sheaves. This also covers the empty open. -/
+/-- A derived object with cohomology supported on T restricts to zero outside T. -/
 theorem supported_derived_restriction_zero
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

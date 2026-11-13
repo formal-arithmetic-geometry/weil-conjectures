@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.SchemeTensorUnitAction
 import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent
 import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent
 /-! # Ordinary evaluation: a step of the chain calculation
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -55,25 +60,7 @@ private theorem triple_ext {C : Type*} [Category* C] [Preadditive C]
   exact (Category.assoc _ _ _).trans
     ((h p q r (p + q) k rfl hpqr).trans (Category.assoc _ _ _).symm)
 
-/-- The ordinary component formula gives the tensor-unit action for a factor map.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-ordinary evaluation chain calculation, step 3.
-(blueprint: lem-pc-scheme-ordinary-evaluation-chain-action).
-
-Proof: The K-injective augmentation eta_O is monic degreewise. Consequently
-the supplied factorization equation determines each component of e: on a
-V^q tensor P^r summand it is symmetry followed by uncurrying the Hom(P,O)
-projection. This follows by projection naturality and cancellation of eta_O.
-Test the desired equality on F^p tensor V^q tensor P^r. Uncurry the formula
-hf using the inverse laws of the tensor-Hom bijection and the symmetry.
-When q+r is nonzero, O^(q+r) is zero and both components vanish. When q+r=0,
-use singleObjXSelf to identify its coefficient with the unit. The resulting
-map is the right unit action on F^p after tensoring with the component of e.
-The standard total complex associator reindexes these same three summands
-without a sign. Naturality in eta_F places its augmentation last. Apply
-coproduct extensionality twice and then chain-map extensionality. The
-argument works for all integer degrees and requires no flatness or boundedness;
-it also holds for zero complexes and the empty scheme. -/
+/-- The ordinary component formula gives the tensor-unit action for a factor map. -/
 theorem schemeOrdinaryEvaluation_chain_action (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

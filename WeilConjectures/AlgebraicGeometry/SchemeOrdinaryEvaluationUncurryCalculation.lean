@@ -12,8 +12,12 @@ import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationChainCalculatio
 import WeilConjectures.AlgebraicGeometry.SchemeTensorEvaluationLocalizationCoherence
 
 /-! # Uncurried ordinary evaluation calculation
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-scheme-ordinary-evaluation-uncurry-calculation).
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -32,28 +36,7 @@ set_option maxHeartbeats 1000000 in
 -- Elaborating the fixed Hom and tensor maps uses the sheaf coproduct instances.
 /-- The ordinary component equation determines the composite of explicit evaluation maps.
 This statement involves only constructed chain maps and the lax tensor comparison;
-it does not mention the derived tensor-Hom equivalence or transport to other objects.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-representative calculation in localization proof step 2.
-(blueprint: lem-pc-scheme-ordinary-evaluation-uncurry-calculation).
-
-Proof: Write eta for the fixed K-injective augmentation, O for the single unit,
-and V for Hom(P,O). On the summand F^p tensor V^q tensor P^r, project the
-ordinary evaluation map to Hom(P^r,F^(r+p+q)). Its uncurrying after eta_F is
-eta_F applied to the right unit action on F^p and the evaluation of V^q at P^r.
-This is precisely hf, by the inverse laws and naturality of the sheaf tensor-Hom
-bijection and the symmetry. When r+q is nonzero, the component of O vanishes;
-both sides are zero. When r+q=0, the single-complex identification converts the
-component of O to the module tensor unit. Coproduct extensionality in the two
-tensor degrees gives equality of the chain composites before resolution.
-Naturality of eta moves the coefficient augmentation to the last map.
-Apply Q and the associativity and right-unit laws of its lax monoidal structure.
-Cancel Q eta_F and Q eta_O with the specified resolution inverses. The localized
-single-complex right unit is the inverse quotient comparison at O, since the
-homotopy quotient is monoidal and Q is its composite with Qh. This gives the
-stated equation without inverting any tensor comparison. The component argument
-uses no boundedness or flatness, and also applies to zero complexes and the
-empty scheme, where all component equations are zero. -/
+it does not mention the derived tensor-Hom equivalence or transport to other objects. -/
 theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)

@@ -13,7 +13,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Underived affine Hom evaluation
 
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3.
+## References
+
+* [Stacks Project, Tag 0BUZ](https://stacks.math.columbia.edu/tag/0BUZ)
+* [Stacks Project, Tag 0BV0](https://stacks.math.columbia.edu/tag/0BV0)
+* [Stacks Project, Tag 0AX3](https://stacks.math.columbia.edu/tag/0AX3)
 -/
 
 @[expose] public section
@@ -23,19 +27,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Identify restricted algebra-Hom with Hom from the pushed-forward structure sheaf,
-compatibly with its evaluation counit.
-
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3.
-(blueprint: lem-sc-underived-affine-hom-counit)
-
-Proof: The restriction of the unit of f_*O_X is definitionally equal to f_* of
-the unit of O_X: sections and restriction maps are identical, as are their
-O_Y-module structures. Thus iH itself supplies j. On each open U and section φ,
-precomposition with O_Y → f_*O_X followed by canonical unit-Hom evaluation
-returns iH(φ) applied to the image of 1 under the ring map. This image is 1.
-The hypothesis h_eval identifies the result with the counit. Extensionality on
-opens and sections proves the equality. This also applies to the empty scheme
-and zero section rings. -/
+compatibly with its evaluation counit. -/
 theorem underived_affine_hom_counit
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤

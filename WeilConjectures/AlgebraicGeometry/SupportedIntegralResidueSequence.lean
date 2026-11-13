@@ -12,6 +12,12 @@ import WeilConjectures.SixFunctors.Finite.Exact
 # Reduction of the supported integral constant
 
 The integral generator is the actual quotient projection, including its value on one.
+
+## References
+
+* [Stacks Project, Tag 0152](https://stacks.math.columbia.edu/tag/0152)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks Project, Tag 0GLZ](https://stacks.math.columbia.edu/tag/0GLZ)
 -/
 
 @[expose] public noncomputable section
@@ -155,14 +161,7 @@ private theorem ordinaryIntegralResidueSequence (T : Scheme.{u}) (n : ℕ) (hn :
 
 /-- For a closed immersion i:D→T of schemes and n>0, the maps n:i_*Z_D→i_*Z_D and the normalized
 integral generator i_*Z_D→forget(i_*(ULift(Z/n))_D) form a short exact sequence of abelian etale
-sheaves [def-weil-pbc-direct-image, def-asd-ordinary-finite-p1-kummer-class].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
-Proof: The constant integer-to-residue sequence is exact: sheafification is exact and the elementary
-integer sequence has kernel nZ. A closed immersion is finite, so its etale direct image is exact.
-Apply this direct image to the constant sequence. The constant-sections adjunction identifies its
-quotient map with the published integral generator. Positivity ensures multiplication by n is monic,
-including n=1. -/
+sheaves. -/
 theorem supported_integral_residue_sequence {D T : Scheme.{u}} (i : D ⟶ T)
     [IsClosedImmersion i] (n : ℕ) (hn : 0 < n) :
     ∃ w : (n • 𝟙 ((lowerStar AddCommGrpCat.{u + 1} i).obj

@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 /-!
 # Quasi-coherent submodules of the structure sheaf are ideal sheaves
 
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph;
-Mathlib's `Scheme.IdealSheafData` and `range_toModulesι_app`
-(blueprint: lem-pqf-quasi-coherent-submodule-ideal).
+## References
+
+* [Stacks Project, Tag 01XF](https://stacks.math.columbia.edu/tag/01XF)
 -/
 
 @[expose] public section
@@ -29,26 +29,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent submodule of the structure sheaf is isomorphic to the module
 of ideal sheaf data.
-
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph
-(blueprint: lem-pqf-quasi-coherent-submodule-ideal).
-
-Proof: On each affine open U take J(U) to be the range of the injective linear map
-on sections induced by i. It is a submodule of the section ring acting on itself,
-hence an ideal. Quasi-coherence identifies restriction to each principal open D(f)
-with localization. Thus J(D(f)) is the image ideal of J(U) under ring restriction.
-These ideals and their localization equalities construct Scheme.IdealSheafData J,
-using its default support (the intersection of their zero loci). The inclusion
-J.toModulesι has section range J(U) on every affine open by range_toModulesι_app.
-Every section in the image of i on an affine open is killed by the closed-subscheme
-restriction map, by idealOfOpens_eq_ideal and mem_idealOfOpens_iff. The sheaf condition
-extends this vanishing to all opens. Hence i lifts to a morphism M → J.toModules by
-the kernel universal property. On every affine open this lift is injective because
-i is injective, and surjective because the two inclusions have equal ranges.
-The affine-basis isomorphism criterion makes the lift an isomorphism. Transport the
-quasi-coherence of M along it. For a zero submodule the ideals are zero; for the
-identity inclusion they are unit ideals. The argument does not require the scheme
-to be affine or quasi-compact, nor the module to be finitely generated.
 -/
 theorem quasiCoherent_submodule_ideal (X : Scheme.{u}) {M : X.Modules}
     [M.IsQuasicoherent] (i : M ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono i] :

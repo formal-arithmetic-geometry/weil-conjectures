@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.SfGraphSecondProjectionSquare
 
 /-! # The graph-model projection square
 
-Source: `LowerShriekComposition.lean`, graph construction, and Stacks Tags
-0B56, 0GL1 and 0F7B. (auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* [Stacks Project, Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
+* [Stacks Project, Tag 0F7B](https://stacks.math.columbia.edu/tag/0F7B)
 -/
 
 @[expose] public section
@@ -54,26 +57,7 @@ private theorem paste_graph_squares
 /-- The graph comparison intertwines projection on a compactification and successive
 projection on the proper/open/proper word.
 
-Source: node lem-sf-etale-compact-projection-coherence, steps 4--5;
-`LowerShriekComposition.lean`, eA/eC/eB; Stacks Tags 0B56, 0GL1 and 0F7B.
-(auxiliary; not a blueprint node).
-
-Proof: expand the comparison as B1, the proper direct image of B12, and inverse B2.
-For B1 insert the direct-image identity comparison, and split the identity direct
-image along the proper graph and its retraction. The normalized composite-adjunction
-counit identifies its projection with the successive projections. The Cartesian
-proper/open tensor square moves these past the first supporting open. Compose the
-outer proper projections by the same counit calculation. This proves the B1 square.
-For B2 split the given proper map through its proper graph and retraction and apply
-the same Cartesian tensor square and proper-composition identity. For B12 use the
-proper/open tensor square on each identity-top graph triangle and the open projection
-composition identity on the two intersection inclusions. Their composite opens are
-equal by pullback.condition. Cancel inverse comparison components to reverse the
-second square. Whisker B12 by the outer proper image and paste it between B1 and
-inverse B2. Naturality moves each inner projection past the next comparison. The
-monoidal pullback-composition identities identify the final tensor-factor comparison
-with the one in sfGraphWordProjection. This proves the displayed equality of actual
-derived arrows. No projection is inverted and no boundedness or qc assumption is used.
+.
 -/
 theorem sfGraphCompactificationComparison_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]

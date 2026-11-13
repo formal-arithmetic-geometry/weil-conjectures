@@ -194,19 +194,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The maps obtained by factoring the cone boundary and projection are natural.
 
 proof.md, first paragraph;
-the expanded proof's naturality step (auxiliary; not a blueprint node).
-
-Proof: A strict tower map induces the diagonal product map on both summands of
-Cone(1-T)[-1]. The equation for the transition endomorphisms makes it a chain map.
-The diagonal map commutes with the cone inclusion and negative projection, hence
-with the connecting homomorphism and projection in cohomology. The canonical
-product/cohomology comparison commutes with it, as is checked after each product
-projection. On cokernels, cancel the cokernel projection and use the boundary
-square; on kernels, compose with the kernel inclusion and use the projection
-square. The kernel-to-limit identification respects every coordinate projection,
-so it also commutes with the induced limit map. Transporting the two squares
-along these endpoint isomorphisms gives the two equations below. No exactness
-claim is part of this statement; the maps are the explicitly constructed maps. -/
+the expanded proof's naturality step. -/
 theorem roos_cohomology_naturality {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableLimits A] [HasExactLimitsOfShape (Discrete ℕ) A]
     (q : ℤ) {K L : ℕᵒᵖ ⥤ CochainComplex A ℤ} (f : K ⟶ L) :

@@ -16,8 +16,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The relative tensor comparison on K-flat representatives
 
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE).
-(blueprint: lem-pc-relative-tensor-pullback-kflat-model)
+## References
+
+* [Stacks Project, Tag 08DE](https://stacks.math.columbia.edu/tag/08DE)
 -/
 
 @[expose] public section
@@ -193,22 +194,7 @@ private theorem relativeTensorPullback_ordinary_homology
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
 This is only the representative calculation: no replacement of the restricted first
-complex by an arbitrary K-flat resolution is asserted here.
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-
-Proof: the K-flat counit for derived pullback identifies Lf*(Q(L)) with Q(f*L).
-The K-flat first-factor comparison then identifies Q(A) tensor Q(f*L) with
-Q(Tot(A tensor f*L)). In each bidegree the balanced tensor isomorphism
-A^p tensor over O_X (O_X tensor over f-inverse O_S f-inverse L^q)
-is A^p restricted to f-inverse O_S tensor f-inverse L^q. Its naturality
-commutes with both differentials; the same sign (-1)^p occurs on both sides.
-Restriction of scalars preserves coproducts, so these summand identifications
-induce an isomorphism of total complexes. Exact restriction of scalars commutes
-with homology, and forgetting to abelian sheaves removes the scalar action.
-Compose these identifications with the localization homology comparison.
-The construction is valid for unbounded complexes and empty schemes; it does not
-require the restriction of A to be K-flat.
-(blueprint: lem-pc-relative-tensor-pullback-kflat-model) -/
+complex by an arbitrary K-flat resolution is asserted here. -/
 theorem relativeTensorPullback_kFlat_model
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

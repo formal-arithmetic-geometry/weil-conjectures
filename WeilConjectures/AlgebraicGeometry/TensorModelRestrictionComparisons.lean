@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence
 
 /-! # Coherent tensor-model comparisons under open restriction
 
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-sc-tensor-model-restriction-comparisons).
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
 -/
 
 @[expose] public section
@@ -91,24 +94,7 @@ private theorem transport_model_comparisons
     rw [Category.assoc, hh, ← R.map_comp]
 
 -- Canonical representative coherence requires substantial elaboration.
-/-- Coherent tensor-model and RHom object comparisons under open restriction.
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL, and Tag 06YH.
-(blueprint: lem-sc-tensor-model-restriction-comparisons).
-
-Proof: compute tensor with the K-flat P using the natural localization tensor
-comparison. Apply tensor symmetry and eA to obtain c. Restrict P, which remains
-K-flat, and use the total-tensor restriction comparison and the localization
-factorization of restriction to obtain d. Naturality of those comparisons and
-symmetry gives the first equation. For h, resolve E by the fixed K-injective
-resolution, restrict it, and identify the Hom complexes termwise; transport the
-result through the over-site equivalence to U.toScheme. On each tensor summand,
-restriction of the evaluation map is evaluation of the restricted local map.
-This proves the second equation for chain maps into Hom(P,I). That Hom complex
-is K-injective, since P is K-flat and I is K-injective. Its restriction is also
-K-injective. Every morphism from Q(J) is represented by a chain map modulo
-homotopy, without requiring J to be K-flat. Uncurrying respects homotopy, so the
-equation holds for every derived morphism. All comparisons are defined for zero
-complexes and the empty open as well. -/
+/-- Coherent tensor-model and RHom object comparisons under open restriction. -/
 theorem exists_tensorModel_restriction_comparisons
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

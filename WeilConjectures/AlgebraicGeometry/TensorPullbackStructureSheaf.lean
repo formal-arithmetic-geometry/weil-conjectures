@@ -13,8 +13,10 @@ import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 /-!
 # Tensor pullback of the structure sheaf
 
-Source: Stacks Project, Modules, pullback and tensor product, Tags 0096 and 01CA
-(blueprint: lem-weil-pbc-module-pullback-structure-sheaf).
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01CA](https://stacks.math.columbia.edu/tag/01CA)
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 noncomputable section
 
-/-- The structure-sheaf map adjoint to `g♯` under the tensor pullback adjunction.
-Source: Stacks Project, Modules, Tag 0096
-(blueprint: lem-weil-pbc-module-pullback-structure-sheaf). -/
+/-- The structure-sheaf map adjoint to `g♯` under the tensor pullback adjunction. -/
 def tensorPullbackObjUnitToUnit {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (tensorPullback g).obj (SheafOfModules.unit Y.ringCatSheaf) ⟶
       SheafOfModules.unit X.ringCatSheaf :=
@@ -39,14 +39,7 @@ def tensorPullbackObjUnitToUnit {X Y : Scheme.{u}} (g : X ⟶ Y) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The adjoint structure-sheaf map is an isomorphism, and its composite with the unit
-is the original structure-sheaf map. Source: Stacks Project, Modules, Tags 0096 and 01CA
-(blueprint: lem-weil-pbc-module-pullback-structure-sheaf).
-Proof: under the chosen adjunction, the defined morphism corresponds to the
-structure-sheaf map. For every module `M`, precomposition with this morphism
-corresponds, via the adjunction and evaluation at the unit section, to pushforward
-of global sections. This map is bijective because inverse image on opens is final.
-The coyoneda criterion therefore makes the morphism an isomorphism. The adjunction
-unit formula gives the asserted characterization. -/
+is the original structure-sheaf map. -/
 theorem tensorPullbackObjUnitToUnit_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     IsIso (tensorPullbackObjUnitToUnit g) ∧
       (Classical.choose (exists_tensorPullbackAdjunction g)).unit.app

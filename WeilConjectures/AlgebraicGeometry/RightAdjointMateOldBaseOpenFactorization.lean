@@ -14,7 +14,10 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-! # Factorization of a right-adjoint mate through an old-base open
 
-Source: Stacks Project, duality.tex, Remark 48.6.1 (Tag 0E9S).
+## References
+
+* [Stacks Project, Tag 0E9S](https://stacks.math.columbia.edu/tag/0E9S)
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
 -/
 
 @[expose] public section
@@ -54,30 +57,6 @@ private theorem transport_arrow_factorization
 The open mate is retained as a morphism and is not assumed invertible.
 Only quasi-compactness and quasi-separatedness are needed for f; properness,
 flatness, and finite presentation play no role in this categorical factorization.
-Source: Stacks Project, duality.tex, Lemma 48.5.2 (Tag 0ATR) and
-Remark 48.6.1 (Tag 0E9S).
-(blueprint: lem-sc-right-adjoint-mate-old-base-open-factorization)
-
-Proof: The restriction square is cartesian. Its pullback along gV identifies
-U times_V T with the iterated pullback of X along V and then T. The supplied
-projection equations uniquely specify s and t under this identification.
-Pullback composition supplies e₀. The isomorphism between U and X times_Y V,
-direct-image composition, and uniqueness of right adjoints identify aV with b;
-pulling this identification along the projection to U supplies e₁.
-Likewise the scheme isomorphism U times_V T to X times_Y T, direct-image
-composition, and right-adjoint uniqueness supply e₂ comparing c and b'.
-Expand each mate as pullback of the right adjoint applied to the pullback unit,
-followed by the inverse conjugate of ordinary base change, followed by the
-pullback counit. Composite adjunction units and counits are the pasted units
-and counits. Pasting ordinary base change follows by applying the adjunction
-Hom equivalence and the associative derived-pullback composition comparisons.
-ConjugateEquiv respects composition; conjugation takes the inverses to inverses.
-Substituting these three identities in the global mate and cancelling the
-adjunction unit/counit pairs with the triangle identities gives the displayed
-factorization, with the open mate O.hom remaining in the middle. No inversion
-of O.hom is used here. The argument remains valid on empty schemes and for
-noninvertible local mates; it is an equality of morphisms, not a claim that
-base change for the right adjoints is universally invertible.
 -/
 theorem rightAdjoint_mate_oldBase_open_factorization
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

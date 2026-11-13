@@ -15,7 +15,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageJointRepresentatives
 /-!
 # Equivariant morphisms for scheme torsor inverse image
 
-Source: Stacks Project Tags 03Q1 (4), 03AG and 0A5G.
+## References
+
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 03AG](https://stacks.math.columbia.edu/tag/03AG)
+* [Stacks Project, Tag 0A5G](https://stacks.math.columbia.edu/tag/0A5G)
 -/
 
 @[expose] public section
@@ -24,21 +28,7 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Unit-equivariant maps from an inverse-image torsor sheaf are invertible.
-Source: Stacks Project Section 03AG (morphisms of torsors), and Tag 03Q1 (4).
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-equivariant-hom-is-iso)
-
-Proof: Inverse image preserves the torsor action and local nonemptiness, since it
-preserves finite limits and covering epimorphisms. The displayed equation on units
-implies equivariance on arbitrary local sections: sections of both inverse images
-are locally represented by source-site sections, by the sheafification construction
-of inverse image; refine the two representing covers to a common one and use
-naturality, followed by separatedness. An equivariant map between torsors is locally
-bijective. Locally choose a section of the source torsor. Translation identifies
-both torsors with the coefficient group, and the map becomes the identity on that
-group. Hence it is locally injective and locally surjective, and is an isomorphism
-of sheaves. This argument also covers empty site objects and the trivial group:
-local nonemptiness is the torsor axiom, not a global section assumption. -/
+/-- Unit-equivariant maps from an inverse-image torsor sheaf are invertible. -/
 theorem scheme_torsor_pullback_equivariant_hom_isIso
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M] [Finite M]

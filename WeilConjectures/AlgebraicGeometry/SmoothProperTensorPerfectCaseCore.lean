@@ -41,8 +41,7 @@ private theorem projection_isIso
   rw [← hp]
   infer_instance
 
-/-- Intermediate perfect comparison clause. Source: Stacks Tag 0A9T.
-(blueprint: lem-sc-smooth-proper-tensor-perfect-case-core). -/
+/-- Intermediate perfect comparison clause. -/
 theorem smoothProper_tensor_perfect_case_core
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

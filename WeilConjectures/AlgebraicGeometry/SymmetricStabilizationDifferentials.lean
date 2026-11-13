@@ -15,7 +15,9 @@ import WeilConjectures.RingTheory.SymmetricAlgebraDifferentials
 
 /-! # Reduced differentials of symmetric-algebra stabilization
 
-Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph.
+## References
+
+* [Stacks Project, Tag 07M7](https://stacks.math.columbia.edu/tag/07M7)
 -/
 
 @[expose] public section
@@ -26,22 +28,6 @@ namespace AlgebraicGeometry
 
 /-- Reduced differentials of a symmetric stabilization split into the original
 reduced differentials and the scalar extension of the stabilizing module.
-
-Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph; differentials
-of tensor products and the universal property of the symmetric algebra.
-(blueprint: lem-weil-pbc-symmetric-stabilization-differentials)
-
-Proof: write S = Sym_A₁(K) and D = S tensor_A B. The universal property of
-A₁-derivations on D identifies them with a pair consisting of an A₁-derivation
-on S and an A-derivation on B. A derivation on S is uniquely determined by an
-A₁-linear map from K, because S is the symmetric algebra. The universal
-property of Kahler differentials therefore gives the direct sum of
-D tensor_B Omega[B/A] and D tensor_A₁ K. Tensor this identity with Q over D.
-Associativity and cancellation of tensor products give Q tensor_B Omega[B/A]
-and Q tensor_A₁ K. The two compatibility equations ensure that the B and A₁
-scalar actions are exactly those specified by sigma and eta. Finite products
-are direct sums of modules. This argument requires neither smoothness nor
-nonzero rings and works also for K = 0.
 -/
 theorem symmetric_stabilization_differentials
     (A B Q : Type u) [CommRing A] [CommRing B] [CommRing Q]

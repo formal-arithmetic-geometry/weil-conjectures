@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 /-!
 # Comparing two sections of a smooth family over a trait
 
-Source: Stacks Project, Tag 055Q, last two paragraphs, using Tag 055J.
+## References
+
+* [Stacks Project, Tag 055Q](https://stacks.math.columbia.edu/tag/055Q)
+* [Stacks Project, Tag 055J](https://stacks.math.columbia.edu/tag/055J)
 -/
 
 @[expose] public section
@@ -25,26 +28,7 @@ open CategoryTheory Limits Topology IsLocalRing
 namespace AlgebraicGeometry
 
 /-- Two sections of a smooth family over a DVR which meet the same special-fibre
-component also meet the same generic-fibre component.
-
-Source: Stacks Project, Tag 055Q, last two paragraphs, using Tag 055J.
-Proof: The total space is locally noetherian because the morphism is smooth over a
-noetherian affine base. The special-fibre component C of the section point is open
-in the fibre, so choose an ambient open O cutting it out. The special fibre F is
-closed in the total space. The open U = O ∪ (P ∖ F) therefore meets F exactly in C.
-Take the connected component W of U containing the special point of σ. It is open
-because U is locally noetherian and hence locally connected. The preimage of C is
-preconnected and contains that point, so it lies in W. Thus both special section
-points lie in W. Both sections factor through W because every trait point specializes
-to its closed point and W is open. This component is
-flat over the trait and its special fibre is reduced, by smoothness. Tag 055J makes
-its generic fibre connected: a separating idempotent on that fibre extends over
-each affine open, since a minimal denominator which is a positive power of a
-uniformizer would give a nonzero nilpotent in the reduced special fibre. The affine
-extensions are unique by flatness and glue to an idempotent on the connected total
-space, a contradiction. The images of both generic section points therefore lie in
-one connected subset of the original generic fibre, proving the assertion.
-(blueprint: lem-sbc-smooth-trait-section-components) -/
+component also meet the same generic-fibre component. -/
 theorem Smooth.trait_sections_mem_same_generic_component {R : Type u} [CommRing R]
     [IsDomain R] [IsDiscreteValuationRing R] {P : Scheme.{u}}
     (g : P ⟶ Spec (.of R)) [Smooth g] [QuasiCompact g] [QuasiSeparated g]

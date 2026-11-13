@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineBasicOpen
 
 /-! # Scheme-theoretic support
 
-Source: Stacks Project, Morphisms, Lemma 05JU and Definition 05JV
-(blueprint: lem-weil-pbc-scheme-theoretic-support).
+## References
+
+* [Stacks Project, Tag 05JU](https://stacks.math.columbia.edu/tag/05JU)
+* [Stacks Project, Tag 05JV](https://stacks.math.columbia.edu/tag/05JV)
+* [Stacks Project, Tag 01QQ](https://stacks.math.columbia.edu/tag/01QQ)
 -/
 
 @[expose] public section
@@ -97,34 +100,23 @@ private theorem annihilator_kernel_iff
 quasi-coherent module. Its sections on an arbitrary open are the kernel of the closed
 immersion's map on sections; the displayed equivalence identifies these with the rule
 of annihilating every section on every smaller open.
-Source: Stacks Project, Morphisms, Lemma 05JU and Definition 05JV, with Lemma 01QQ
-(blueprint: lem-weil-pbc-scheme-theoretic-support).
 
 Proof (the node's seven steps):
 1. The rule on arbitrary opens is an ideal, stable under restriction, and membership is
-   local by the sheaf property (def-weil-sheaf-of-modules-category); hence it is an ideal sheaf.
-2. On an affine open it equals the annihilator of sections: use the principal-open basis
-   (lem-weil-pbc-affine-open-spec-points, def-weil-affine-spectrum,
-   lem-weil-pbc-affine-ideals-closed-subscheme) and the quasi-coherent section base-change
-   formula (lem-weil-pbc-quasi-coherent-affine-section-base-change), then sheaf locality.
-3. Finite type makes the affine section module finite
-   (lem-weil-pbc-quasi-coherent-finite-type-affine). The annihilator localizes
-   (def-weil-pbc-module-localization-away),
+   local by the sheaf property; hence it is an ideal sheaf.
+2. On an affine open it equals the annihilator of sections: use the principal-open basis and the quasi-coherent section base-change
+   formula, then sheaf locality.
+3. Finite type makes the affine section module finite. The annihilator localizes,
    so the affine ideals satisfy basic-open compatibility.
-4. The compatible ideals cut out a closed subscheme with the stated quotient charts
-   (lem-weil-pbc-affine-ideals-closed-subscheme, def-weil-closed-immersion,
-   def-sbc-closed-immersion-ideal-sheaf).
+4. The compatible ideals cut out a closed subscheme with the stated quotient charts.
 5. Its kernel ideal sheaf equals the annihilator sheaf on affine opens, hence on every
-   open by sheaf locality. It is therefore quasi-coherent (def-pc-scheme,
-   def-sbc-closed-immersion-ideal-sheaf).
+   open by sheaf locality. It is therefore quasi-coherent.
 6. The image equals the nonzero-stalk locus on affine opens by the finite-module support
-   formula (lem-weil-pbc-finite-type-module-support-closed,
-   lem-weil-pbc-affine-open-spec-points, def-weil-pbc-closed-subset-proper-over-base),
-   hence globally because affine opens cover (def-pc-scheme).
+   formula,
+   hence globally because affine opens cover.
 7. Taking the smaller open equal to the given open proves annihilation. Any closed
    immersion's ideal sheaf annihilating F is contained in this sheaf, since its sections
-   restrict to sections of that ideal on every smaller open
-   (def-sbc-closed-immersion-ideal-sheaf). -/
+   restrict to sections of that ideal on every smaller open. -/
 theorem schemeTheoreticSupport
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] :
     ∃ (I : X.IdealSheafData),

@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.AffinePreparationRestriction
 
 /-! # Reduction and the first generic-flat shrinking
 
-Source: Stacks Project, Tag 0559, second proof, first two paragraphs.
+## References
+
+* [Stacks Project, Tag 0559](https://stacks.math.columbia.edu/tag/0559)
+* [Stacks Project, Tag 051T](https://stacks.math.columbia.edu/tag/051T)
+* [Stacks Project, Tag 052A](https://stacks.math.columbia.edu/tag/052A)
 -/
 
 @[expose] public section
@@ -25,30 +29,7 @@ open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 
 /-- Prepare a reduced affine flat family over an integral affine base, before any
-purely inseparable extension.
-
-Source: Stacks Project, Tag 0559, second proof, reduction and first flat shrinking;
-Tags 051T and 052A.
-Proof: factor f through the given affine open V. Reduce X and V; the morphism
-from the reduced source factors through the reduction of V. The latter is
-integral since its underlying space has the generic point induced by eta.
-Both reduction maps are surjective closed immersions. The canonical map from
-the reduced source into the pullback along the base reduction is also a
-surjective closed immersion: on rings, if A maps to B, then
-B tensor_A (A / nilradical A) = B / ((nilradical A) B), and its reduction is
-B / nilradical B. Apply generic flat finite presentation to this reduced
-family, which is quasi-compact since both schemes are affine. Choose a
-principal open about the generic point inside the resulting nonempty open.
-Lift its defining element from the reduced coordinate ring to the coordinate
-ring of V. It defines an affine open U in T, whose inverse image in the
-reduced base is the chosen principal open S. Restrict the reduced source to S,
-obtaining affine reduced Z, flat and locally finitely presented over S.
-Restriction preserves the universal homeomorphism to the original pullback.
-The homeomorphism from S to U lifts eta to its generic point. No geometric
-irreducibility assumption or extension of the generic residue field is used.
-The generic-point hypothesis excludes an empty base; an empty source is allowed.
-
-(blueprint: lem-sbc-reduced-flat-affine-preparation) -/
+purely inseparable extension. -/
 theorem exists_reduced_flat_affine_preparation
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

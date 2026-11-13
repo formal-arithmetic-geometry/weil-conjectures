@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNatura
 
 /-! # The specified raw class of restricted cohomology
 
-Source: Stacks Project, Tag 03Q8, and the comparison square in Tag 0EYM.
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 0EYM](https://stacks.math.columbia.edu/tag/0EYM)
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse of the specified raw evaluation comparison, cached as a construction.
-The inverse is unique, and no raw representative is chosen from mere existence.
-Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-raw-restricted-cohomology-class). -/
+The inverse is unique, and no raw representative is chosen from mere existence. -/
 @[irreducible]
 noncomputable def rawRestrictedCohomologyClass {S Y : Scheme.{u}} (h : Y ⟶ S)
     (q : ℕ) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale)
@@ -33,12 +34,7 @@ noncomputable def rawRestrictedCohomologyClass {S Y : Scheme.{u}} (h : Y ⟶ S)
   letI := isIso_rawRestrictedCohomologyComparison h q G V
   exact (asIso (rawRestrictedCohomologyComparison h q G V)).inv x
 
-/-- Evaluation recovers the given restricted cohomology class.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sc-raw-restricted-cohomology-class).
-
-Proof: The construction is the inverse of the evaluation isomorphism. Its
-inverse-hom identity, evaluated at x, is the asserted equation. -/
+/-- Evaluation recovers the given restricted cohomology class. -/
 theorem rawRestrictedCohomologyClass_spec {S Y : Scheme.{u}} (h : Y ⟶ S)
     (q : ℕ) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale)
     (x : rawAffineRestrictedCohomology h q G V) :
@@ -48,12 +44,7 @@ theorem rawRestrictedCohomologyClass_spec {S Y : Scheme.{u}} (h : Y ⟶ S)
   unfold rawRestrictedCohomologyClass
   exact Iso.inv_hom_id_apply (asIso (rawRestrictedCohomologyComparison h q G V)) x
 
-/-- Pulling back the specified raw class evaluates to the restricted cohomology map.
-Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-raw-restricted-cohomology-class).
-
-Proof: Apply naturality of raw evaluation to the inverse evaluation class.
-Evaluation of that class is the original input by the inverse-hom identity. -/
+/-- Pulling back the specified raw class evaluates to the restricted cohomology map. -/
 theorem rawRestrictedCohomologyClass_map {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -69,12 +60,7 @@ theorem rawRestrictedCohomologyClass_map {S Y Y' : Scheme.{u}}
   rw [rawRestrictedCohomologyClass_spec] at hn
   exact hn
 
-/-- The canonical raw class commutes with the specified restricted pullback.
-Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-raw-restricted-cohomology-class).
-
-Proof: Evaluation is injective. Evaluating the left side recovers the restricted
-cohomology map, and evaluating the right side gives the same map by naturality. -/
+/-- The canonical raw class commutes with the specified restricted pullback. -/
 theorem rawRestrictedCohomologyClass_naturality {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})

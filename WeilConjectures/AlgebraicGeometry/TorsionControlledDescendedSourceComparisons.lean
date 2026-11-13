@@ -16,8 +16,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -28,26 +31,6 @@ namespace AlgebraicGeometry
 /-- A descended source with compatible quotient maps yields the formal comparisons and arrow.
 This lemma assumes that the source and its transition identifications are already glued.
 It has no torsion or local-existence hypothesis and constructs no overlap comparisons.
-
-Source: Stacks Project, Tag 0889(1), sheaf descent after the uniqueness argument;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-descended-source-comparisons).
-
-Proof: Compose each φi with li through overFunctorEquiv to identify M restricted to Ui
-with Fi. Coherence is invariant under these isomorphisms and is local on the cover,
-so M is coherent. The maps φi followed by bi agree on overlaps by hφ and hbcompat;
-morphism descent gives a map a to H, and its restriction equation follows from hbi.
-The maps φi followed by qi likewise agree by hφ and hqcompat. Their equations hqi
-identify them with the canonical quotient maps of Fi followed by βi.inv. Exact
-restriction and its compatibility with ideal powers and ideal-module products give
-canonical normalized completion-restriction isomorphisms for M. Consequently the
-local quotients induced by these maps are isomorphic to N at each level. Invert
-these isomorphisms to obtain ε. They commute with transitions because βi and the
-quotient projections do; their hom components agree on overlaps because the qi do
-and quotient projections are epimorphisms. Finally hδ proves the local factorization
-by precomposing with the quotient projection and cancelling that epimorphism.
-For J=0 these are the original maps. For J=1 the quotient systems are zero.
-For an empty cover X is empty, coherence and all equations are vacuous.
 -/
 theorem torsionControlled_descended_source_comparisons
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

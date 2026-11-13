@@ -16,8 +16,10 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Cohomology of the one-column finite free Hom complex
 
-Source: Stacks Project, Tag 08I5, the one-column Hom calculation.
-(blueprint: lem-sc-single-supported-finite-free-homology-iso)
+## References
+
+* [Stacks Project, Tag 08I5](https://stacks.math.columbia.edu/tag/08I5)
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
 -/
 
 @[expose] public section
@@ -63,25 +65,7 @@ private lemma homMap_zero_left
   rw [map_zero, map_zero]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A one-column finite free source gives a finite sum of shifted target cohomology.
-
-Source: Stacks Project, Tag 08I5, the finite-free column calculation in its proof;
-Tag 0A8X, the product Hom differential.
-Proof: in each Hom degree project to source degree k. Every other factor is zero
-because its source is zero; the inverse is the product lift with that component
-and zero elsewhere. The source differential is zero: for the only potentially
-nonzero source degree its next term is zero. Thus projection intertwines the Hom
-differential with postcomposition by the target differential. Evaluate on the r
-basis sections under hfree. This naturally identifies internal Hom from E^k with
-r copies of the target module, compatibly with restrictions and differentials.
-We obtain the reindexed complex with terms r copies of I^(k+n) and differential
-r copies of d_I. The reindexing has no sign change because it translates the
-complex shape directly. Finite biproducts are exact in any abelian category and
-therefore commute with kernels and cokernels, hence with homology. This gives the
-asserted isomorphism. The coproduct and biproduct coincide because the index is
-finite. For r=0 both sides are zero; the same reasoning applies to empty opens
-and unbounded targets.
-(blueprint: lem-sc-single-supported-finite-free-homology-iso). -/
+/-- A one-column finite free source gives a finite sum of shifted target cohomology. -/
 theorem single_supported_finiteFree_homology_iso
     (X : Scheme.{u}) (U : X.Opens)
     (E I : CochainComplex

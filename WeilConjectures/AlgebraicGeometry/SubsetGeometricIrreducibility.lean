@@ -15,8 +15,11 @@ import WeilConjectures.FieldTheory.CommonExtensionFields
 /-!
 # Testing geometric irreducibility of a subset
 
-Source: Stacks Project, Tags 054P, 020J and 038I.
-(blueprint: lem-sbc-subset-geometric-irreducibility)
+## References
+
+* [Stacks Project, Tag 054P](https://stacks.math.columbia.edu/tag/054P)
+* [Stacks Project, Tag 020J](https://stacks.math.columbia.edu/tag/020J)
+* [Stacks Project, Tag 038I](https://stacks.math.columbia.edu/tag/038I)
 -/
 
 @[expose] public section
@@ -36,23 +39,7 @@ private theorem geometricallyIrreducible_field_specMap {k K : Type u}
     (IsSepClosed.field_tensor_unique_minimalPrime k K E).2.1
 
 /-- Irreducibility of the inverse image of a subset over a separably closed extension
-implies irreducibility of its inverse image over every field extension.
-
-Source: Stacks Project, Tags 054P, 020J and 038I.
-Proof: for any field K over a separably closed field Ω, the spectrum map Spec K to
-Spec Ω is geometrically irreducible. Indeed its field base changes are spectra of tensor
-products of fields, which are irreducible by field_tensor_unique_minimalPrime. Given a
-test field E over k, choose a common extension M of Ω and E over k. Form X_M as the
-iterated pullback of X_E. Pullback pasting identifies its map r to X_Ω as the base change
-of Spec M to Spec Ω. Thus r is geometrically irreducible and open. The inverse image under
-r of the given irreducible subset of X_Ω is irreducible by isIrreducible_preimage. The
-commuting projections identify it with the inverse image under X_M to X_E of the desired
-subset. The latter projection is surjective, being a base change of a spectrum map between
-fields. Its continuous image is therefore exactly the desired subset and is irreducible.
-This proves nonemptiness as well. No closed subscheme structure is needed, and when A is
-empty the hypothesis cannot hold.
-
-(blueprint: lem-sbc-subset-geometric-irreducibility) -/
+implies irreducibility of its inverse image over every field extension. -/
 theorem isIrreducible_preimage_of_isSepClosed_extension {k Ω : Type u}
     [Field k] [Field Ω] [Algebra k Ω] [IsSepClosed Ω]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))

@@ -26,8 +26,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   HasDerivedCategory.ofHasKInjectiveResolutions Functor.rightDerivedFunctor
   Functor.leftDerivedFunctor Functor.mapDerivedCategory AlgebraicGeometry.ProjectiveSpace
 
-/-- The first projection square, with its morphisms reduced to pullback projections.
-Source: the product-map construction (auxiliary; not a blueprint node). -/
+/-- The first projection square, with its morphisms reduced to pullback projections. -/
 theorem firstProjectionSquare
     {S X : Scheme.{u}} (f : X ⟶ S)
     (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f) :
@@ -415,26 +414,7 @@ private theorem square_line
     NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc] using h₁.trans h₂.symm
 
 /-- The coefficient square for the two pulled-back coordinates, without any
-direct image, exchange map, or trace.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the equality p1* q*=p2* q* in the second triangle.
-(auxiliary; not a blueprint node)
-
-Proof: expand coefficientComparison and SfDiagonalKernel.coordinate. The roots
-inclusion and pure coefficient generators uniquely characterize normalized line
-transport. Thus for composable morphisms its comparison is the composite of
-the two comparisons and upperStarComp. For N>0 this is also the composition law
-of finiteEtaleTwistPullbackData; for N=0 the invertibility hypothesis makes S
-empty, and maps to the line sheaf are unique. Apply the degree-zero functor,
-its canonical exact/left-derived comparison, and shift by two. Naturality of
-these comparisons gives the same composition law for shifted lines. Apply it
-to productMap followed by the first projective projection and to the first
-projection followed by i, which are equal by projectionSquare. Apply it again
-to the two projections followed by f. The latter equality is pullback.condition;
-its derived comparison is CoordinateTrace.coordinate. Cancel the normalized
-line isomorphisms, leaving the displayed square. This proof applies to arbitrary
-schemes and zero coefficient rings and introduces no integration identity. -/
+direct image, exchange map, or trace. -/
 theorem coordinateLineComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

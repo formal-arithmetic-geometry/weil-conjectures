@@ -11,8 +11,12 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Restriction naturality of raw section cohomology
 
-Source: Stacks Project, Tags 01E1, 01E2 and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-natural). -/
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
+* [Stacks Project, Tag 01E2](https://stacks.math.columbia.edu/tag/01E2)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+-/
 
 @[expose] public section
 universe u
@@ -41,27 +45,7 @@ private theorem homology_restriction_transport
   simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using hm'
 
 
-/-- The fixed comparison is natural for inverse images of smaller base opens.
-Source: Stacks Project, Tags 01E1, 01E2 (Equation 20.7.1.1) and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-natural).
-
-Proof: Compute both top-open and U-open cohomology using the given injective
-resolution R.resolution on Y. Map R.comparison through U-open sections, then
-identify sections by restrictAppIso and hU. Applying homology and the exact
-evaluation comparison gives an isomorphism from U-open cohomology to P(V);
-its inverse defines d. For the top-open isomorphism use R.sections, so its
-inverse is precisely resolutionOpenComparison. Naturality of R.comparison
-with respect to top-to-U restriction, together with R.components, makes the
-section-complex square commute degreewise. Apply homology to this square and
-use InjectiveResolution.rightDerived_app_eq for the section restriction
-natural transformation. Naturality of mapHomologyIso identifies the lower
-map with P's restriction. Cancel both comparison inverses to obtain the
-claimed equation. No further restriction of injectives is needed, since
-openModuleCohomology is already the derived functor of U-open sections on Y.
-The calculation follows rawOpenIso_restriction in SectionCohomologyUntwistedComparisons,
-with R.components in place of its specially constructed resolution.
-Empty V or U, V=W, and degree zero use the same functors and cancellation;
-there are no scalar, affineness, compactness or quasi-coherence assumptions. -/
+/-- The fixed comparison is natural for inverse images of smaller base opens. -/
 theorem resolution_open_restriction_natural {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)
     (W : T.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ W))

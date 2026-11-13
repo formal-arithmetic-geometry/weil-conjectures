@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVCanonicalTriangles
 
 /-! # Relative Mayer--Vietoris gluing for one complex
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.26.2 (Tag 0DJ9)
-(blueprint: lem-pc-rf-single-complex-relative-mayer-vietoris).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -39,24 +40,7 @@ private theorem isIso_of_eq
     {C : Type*} [Category C] {A B : C} {a b : A ⟶ B}
     (h : a = b) (hb : IsIso b) : IsIso a := h.symm ▸ hb
 
-/-- Relative Mayer--Vietoris gluing for the single-complex base-change map.
-Source: Stacks Project, Tag 0DJ9, induction step
-(blueprint: lem-pc-rf-single-complex-relative-mayer-vietoris).
-
-Proof:
-1. Since the bases are affine and `f` is quasi-compact and quasi-separated, `X`
-   is qcqs. The affine morphism `g` has affine base change `g'`, so the inverse
-   images of the three quasi-compact opens are quasi-compact. Apply
-   `lem-pc-derived-mayer-vietoris-triangle` to `K` and `K'`, then apply the
-   exact functors `Lg^*Rf_*` and `Rf'_*`. The composition identifications of
-   `lem-pc-derived-direct-image-composition` identify their open terms.
-2. `lem-pc-rf-mv-triangle-naturality` identifies the three comparison maps
-   as a morphism of these distinguished triangles on `S'`.
-3. The two individual isomorphisms on `U` and `V` give an isomorphism on
-   their direct sum. The overlap map is also invertible by hypothesis.
-   Apply `lem-sf-triangle-morphism-iso` to infer that the global map is invertible.
-4. The global component is precisely the canonical base-change map followed
-   by `Rf'_*` of `φ`, the composite asserted here. -/
+/-- Relative Mayer--Vietoris gluing for the single-complex base-change map. -/
 theorem relativeMayerVietoris
     [∀ Z : Scheme.{um},
       HasDerivedCategory.{wm} (SheafOfModules.{um} (moduleRings Z.toRingedSpace))]

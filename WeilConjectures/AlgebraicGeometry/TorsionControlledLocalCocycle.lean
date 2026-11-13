@@ -13,8 +13,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -23,24 +26,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Local algebraizations give an algebraic cocycle preserving the arrows and quotient maps.
-
-Source: Stacks Project, Tag 0889(1), first sentence and uniqueness verification;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-local-cocycle).
-
-Proof: Transfer each supplied Fi to Li on the over-site by the inverse of overEquiv;
-li is its counit. Transfer ai through hHlocal to obtain bi. Define qi by transferring
-quotientπ followed by βi.inv. Normalization hγ and hfactor give qi followed by δ equal
-to bi followed by the quotient projection of H. On pairwise intersections restriction
-preserves coherence, kernels, cokernels and their ideal-power annihilation bounds.
-Normalized completion comparisons identify the two completions with N. Lift this
-comparison and its inverse using torsion-controlled hom lifting. Completion
-extensionality with the map to H makes the lifts inverse. The same extensionality
-identifies composites on triple intersections, proving the cocycle. Transfer these
-isomorphisms back to the over-site as θ. Their compatibility with bi is the lifting
-factorization equation, and compatibility with qi is the equality of their completions
-precomposed with quotient projections. Zero ideals give the original comparisons;
-unit ideals force the bounded arrows to be isomorphisms; empty covers require no data.
 -/
 theorem torsionControlled_local_cocycle
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

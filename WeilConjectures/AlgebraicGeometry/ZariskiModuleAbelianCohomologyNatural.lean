@@ -21,8 +21,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Natural comparison of module and abelian cohomology
 
-Source: Stacks Project, sites-cohomology.tex, Tag 03FD.
-(blueprint: lem-sc-module-abelian-zariski-cohomology).
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -60,19 +61,7 @@ private theorem resolutionForget_naturality
 
 -- Comparing the two section complexes requires unfolding module and abelian evaluations.
 set_option backward.isDefEq.respectTransparency false in
-/-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
-(blueprint: new-zariski-module-abelian-cohomology-components)
-
-Proof: Choose an injective resolution of each module sheaf. Forgetting to abelian sheaves
-is exact, and every forgotten injective module is acyclic for global sections. Thus the
-same global-sections complex computes both cohomologies. The acyclic-resolution comparison
-provides the component isomorphisms. A module morphism lifts to a chain map of resolutions;
-the induced map on the common complex computes both cohomology maps. Independence of the
-lift up to homotopy proves the naturality squares. Assemble these component isomorphisms
-into a natural isomorphism. The componentwise comparison comes from the common resolution
-complex. No degree-zero normalization is asserted here. -/
+/-- Module cohomology and abelian sheaf cohomology are naturally isomorphic. -/
 theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : ℕ) :
     let F := RingedSpace.moduleCohomology X.toRingedSpace q ⋙
       forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
@@ -169,9 +158,6 @@ theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : �
     (d.inv.naturality (T.map f))
 
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
-(blueprint: lem-sc-module-abelian-zariski-cohomology)
 
 The componentwise comparison and its naturality are provided by
 `zariskiModuleAbelianCohomologyNatural_components`; `NatIso.ofComponents`

@@ -28,29 +28,7 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 /-- The base-change equation for the splitting trace identifies the two chart
 traces with the coordinate traces of the explicitly transported trace.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the paragraphs identifying t_p1 and t_p2 with
-base change of t_q and the equality qp1 = qp2.
-(auxiliary; not a blueprint node).
-
-Proof: Apply the trace clause of hbc to the projective-line structure morphism
-P -> S. The canonical projective-space base-change isomorphism is the chart
-used by ordinaryFiniteP1DiagonalChartMap for the second projection, and the
-flipped square gives the first projection. Substitute the definition of that
-chart map and the exchange mate. Its pullback counit, composed with the chart
-unit, cancels by the adjunction triangle. This identifies each chart trace
-with inverse ordinary exchange followed by pullback of (d S hS).trace.
-Paste with i and its self-product. Substitution of the composite-adjunction
-counit gives pushPull and the composition comparison in the explicit trace.
-Naturality of proper forget-supports identifies ordinary exchange with the
-compact-support exchange used by coordinateTrace. Normalize all twist maps on
-roots and pure scalar generators: uniqueness of those maps gives their
-composition and square equations. For the second projection use p1 f = p2 f;
-this is exactly the coordinate correction in coordinateTrace. The constant
-unit comparison commutes with these inverse images and cancels the source and
-target constant comparisons. These substitutions give the displayed equation
-for both Boolean choices. No diagonal class or integral identity is used, and
-the computation also applies to the empty base and to zero coefficients. -/
+. -/
 theorem traceComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)

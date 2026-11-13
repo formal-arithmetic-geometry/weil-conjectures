@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Finite local freeness of smooth relative differentials
 
-Source: Stacks Project, Tag 02G1.
-(blueprint: lem-ag-smooth-relative-differentials-finite-locally-free)
+## References
+
+* [Stacks Project, Tag 02G1](https://stacks.math.columbia.edu/tag/02G1)
 -/
 
 @[expose] public section
@@ -24,13 +25,7 @@ open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- Relative differentials of a smooth morphism are finite locally free, without a
-constant relative dimension assumption. Source: Stacks Project, Tag 02G1.
-
-Proof: choose standard smooth affine charts at each point. Their differential modules
-are finite free. The affine comparison for relative differentials identifies these with
-restrictions of the differential sheaf, and finite local freeness descends along the cover.
-
-(blueprint: lem-ag-smooth-relative-differentials-finite-locally-free) -/
+constant relative dimension assumption. -/
 theorem isFiniteLocallyFree_relativeDifferentials {X S : Scheme.{u}} (f : X ⟶ S)
     [Smooth f] : f.relativeDifferentials.IsFiniteLocallyFree := by
   choose U hU V hV hx e hsm using fun x ↦

@@ -17,8 +17,10 @@ import WeilConjectures.CategoryTheory.BoundedBelowCoproductFiltration
 
 /-! # Local surjectivity of the lower-truncated coproduct comparison
 
-Source: Stacks Project, Tags 08DZ and 015J
-(blueprint: lem-pc-truncated-direct-image-sheaf-coproduct-epi).
+## References
+
+* [Stacks Project, Tag 08DZ](https://stacks.math.columbia.edu/tag/08DZ)
+* [Stacks Project, Tag 015J](https://stacks.math.columbia.edu/tag/015J)
 -/
 
 @[expose] public section
@@ -30,32 +32,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The truncated direct-image coproduct comparison is an epimorphism.
-Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence argument
-(blueprint: lem-pc-truncated-direct-image-sheaf-coproduct-epi).
-
-Proof.
-1. Choose complex representatives and form their termwise coproduct. Exact sums compute
-   its cohomology as the coproduct of the individual cohomology sheaves. Transport to
-   the given ambient coproduct using uniqueness of colimits. The cohomology sums are
-   quasi-coherent. Lower truncation commutes with these exact sums, and all lower
-   truncations have the same cohomological lower bound a.
-2. Apply the natural bounded-below truncation hypercohomology spectral sequence to
-   every summand and to the coproduct. The second pages are R^p f_* H^r. On affine
-   opens V of Y, the preimage is qcqs. Cohomology on that preimage commutes with sums.
-   The higher-direct-image presheaf description and preservation of coproducts by
-   sheafification turn these compatible comparisons into second-page isomorphisms.
-3. Naturality gives maps of exact couples. Exact sums preserve kernels, images and
-   cokernels, so induction on the page makes every page comparison an isomorphism.
-   On the diagonal p+r=q only 0 ≤ p ≤ q-a occurs, and these terms stabilize.
-4. Take coproducts of the finite convergent filtrations of the summands. Their common
-   bounds give a finite filtration on the coproduct of the abutments. Its graded
-   pieces are the coproducts of the individual stable terms. The natural map to the
-   target filtration induces the stable-page comparison on every graded piece.
-   Finite filtration induction makes the abutment comparison an isomorphism, hence
-   an epimorphism. The canonical abutment identifications and naturality identify
-   this map with the displayed Sigma.desc. For q<a both sides are zero. For an empty
-   family exact sums and the zero coproduct give the same conclusion. No assertion
-   that global sections preserve epimorphisms is used here.
 -/
 theorem truncated_directImage_sheaf_coproduct_epi
     {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

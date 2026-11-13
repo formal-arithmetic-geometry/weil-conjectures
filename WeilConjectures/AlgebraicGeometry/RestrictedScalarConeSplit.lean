@@ -10,8 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 
 /-! # A scalar cone splits after restriction
 
-Source: Stacks Project, Tags 08EK, 05QR, 05QS, and 05QT
-(blueprint: lem-sc-restricted-scalar-cone-split).
+## References
+
+* [Stacks Project, Tag 08EK](https://stacks.math.columbia.edu/tag/08EK)
+* [Stacks Project, Tag 05QR](https://stacks.math.columbia.edu/tag/05QR)
+* [Stacks Project, Tag 05QS](https://stacks.math.columbia.edu/tag/05QS)
+* [Stacks Project, Tag 05QT](https://stacks.math.columbia.edu/tag/05QT)
 -/
 
 @[expose] public section
@@ -130,22 +134,7 @@ private theorem scalar_zero_of_iso_biproduct_shifts (Y : Scheme.{u})
     _ = 0 ≫ e.hom := by rw [hsum, comp_zero, zero_comp]
 
 /-- If a scalar kills F, a cone of that scalar on an object whose restriction is a
-finite sum of shifts of F restricts to the sum of its input and its shifted input.
-Source: Stacks Project, Tag 08EK, cone construction, and Tags 05QR, 05QS, 05QT
-(blueprint: lem-sc-restricted-scalar-cone-split).
-
-Proof: The restriction functor is exact and its derived functor is triangulated.
-Sectionwise multiplication commutes with restriction and the over-site equivalence.
-The equality of top sections identifies the restricted scalar with g'; compatibility
-of each family then gives equality on every smaller open. Derived scalar
-multiplication is natural, commutes with shifts, and acts componentwise on finite
-biproducts. Transporting along the given decomposition therefore makes the scalar
-on the restricted input zero. The restricted triangle is a cone triangle of zero.
-Rotate the restricted triangle once. Its objects are input, cone, input[1],
-and its last map is minus the shift of the zero scalar map, hence zero. Apply
-Tag 05QT (Mathlib's `exists_iso_binaryBiproduct_of_distTriang`) and invert the
-resulting isomorphism to identify the cone with input plus input[1]. This includes
-an empty family, where the input and its cone are zero. -/
+finite sum of shifts of F restricts to the sum of its input and its shifted input. -/
 theorem restricted_scalar_cone_split (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

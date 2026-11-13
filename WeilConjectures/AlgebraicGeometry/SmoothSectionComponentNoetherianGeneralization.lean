@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SmoothTraitSectionComponents
 /-!
 # Generalization of a smooth section component over a noetherian base
 
-Source: Stacks Project, Tag 055Q.
+## References
+
+* [Stacks Project, Tag 055Q](https://stacks.math.columbia.edu/tag/055Q)
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- The noetherian geometric argument produces an open stable locus agreeing with the
-section component locus.
-(blueprint: lem-sbc-smooth-section-component-noetherian-generalization-core) -/
+section component locus. -/
 theorem Smooth.exists_noetherian_section_component_stable_locus {P T : Scheme.{u}}
     (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g]
     [IsNoetherian T]

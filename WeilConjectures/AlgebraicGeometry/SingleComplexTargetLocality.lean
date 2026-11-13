@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Target locality of the single-complex criterion
 
-Source: Stacks Project, Tag 0DJ9, reduction to affine bases.
-(blueprint: lem-pc-single-complex-target-locality).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -43,23 +44,6 @@ set_option linter.unusedVariables false in
 /-- The single-complex criterion for affine bases suffices for arbitrary bases.
 The extra premise supplies only the affine-base case, to be proved separately by
 source-open induction; it does not assume the original conclusion.
-Source: Stacks Project, Tag 0DJ9, first paragraph of the proof.
-(blueprint: lem-pc-single-complex-target-locality).
-
-Proof: For a point of S' choose an affine neighbourhood V of its image in S, and an
-affine neighbourhood V' of the point contained in g inverse-image V. Restrict f to
-f inverse-image V and f' to f' inverse-image V'. Together with g restricted V' → V
-and the restriction of g' these form a cartesian square with affine bases. Quasi-
-compactness and quasi-separatedness survive this restriction. Restrict K, K' and
-phi, using the canonical derived pullback composition comparison; quasi-coherent
-cohomology and the stalk condition survive since local rings on opens agree with
-the original local rings. Apply the supplied affine-base criterion. Derived direct
-image commutes with restriction to inverse-image opens, as does derived pullback.
-Their canonical comparisons identify the restricted composite with the local
-base-change composite: this follows from naturality of the derived counits in the
-adjoint description of the map. Thus the original arrow is invertible on V'.
-Apply schemeDerived_isIso_of_openRestriction, since such V' cover S'. Empty bases
-are covered by the vacuous locality criterion. No global compactness of S is used.
 -/
 theorem singleComplexBaseChange_targetLocal
     [∀ Y : Scheme.{u},

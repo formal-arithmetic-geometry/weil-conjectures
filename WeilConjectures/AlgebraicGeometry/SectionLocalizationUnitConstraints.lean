@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SectionRepresentativeTensorArrow
 
 /-! # The regular-unit constraints of the section localization tensor map
 
-Source: Stacks Project, Tags 06YU and 07A4; localization of the ordinary
-regular-module constraints under the fixed section equivalence.
+## References
+
+* [Stacks Project, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -229,27 +231,7 @@ private theorem internalLocalizationUnit (T : Scheme.{u}) :
     CategoryTheory.Quotient.lift.isLift_hom]
   rfl
 
-/-- The fixed localization tensorator has the specified regular-unit constraints.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 07A4; the source and
-target normalized modelTensor unitor equations in Steps 2–3 of
-lem-pd-section-resolving-oplax-unit-models.
-
-Proof: on termwise images of internal complexes, substitute the defining
-representative normalization for qTensor. Its binary comparison is the inverse
-of tensorComparison followed by the internal lax localization tensorator, the
-section localization factor, and the localized ordinary total comparison. Apply
-naturality to the ordinary unit comparison. The ordinary total comparison
-preserves both unitors: check the total comparison equation degreewise on
-direct-sum summands. Only the degree-zero term of the unit survives, and its
-equation is the ordinary left or right unit law of the section equivalence.
-The internal lax localization satisfies its left and right unit laws, with
-identity unit comparison. The fixed section localization and ordinary unit comparisons
-compose to regular, so cancelling their inverse factors gives the two displayed
-equalities. Every section complex is isomorphic to a termwise image under the
-section equivalence. Naturality of qTensor and of both unitors transports these
-equalities along that isomorphism to the given complex. This uses no pullback
-functor, no resolving hypothesis, and no derived pullback constraint.
-(auxiliary; not a blueprint node). -/
+/-- The fixed localization tensorator has the specified regular-unit constraints. -/
 theorem section_localization_unit_constraints (T : Scheme.{u})
     (P : CochainComplex (modules Λ T) ℤ) :
     letI := derivedMonoidal Λ T

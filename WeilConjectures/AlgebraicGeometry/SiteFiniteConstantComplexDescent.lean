@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Descending the differentials of a bounded constant graded sheaf
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G, the last step of the
-inductive construction of a constant complex.
+## References
+
+* [Stacks Project, Tag 094G](https://stacks.math.columbia.edu/tag/094G)
 -/
 
 @[expose] public section
@@ -179,20 +180,7 @@ private theorem exists_complex_of_lifted_differentials
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A bounded sheaf complex with constant finite graded terms is locally the
-constant sheaf complex of an actual bounded complex of finite modules.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
-`lemma-locally-constant`, descent of the finitely many differentials.
-(auxiliary; not a blueprint node)
-
-Proof: Conjugate each differential by the given term isomorphisms. Finite generation
-makes each of these maps locally induced by a module map. Intersect the covering
-sieves for the finitely many source degrees in [a,b]. On a nonempty slice, the unit
-of constant-presheaf sheafification is injective, so the constant sheaf functor is
-faithful. The lifted consecutive maps therefore compose to zero, and define the
-required complex. Outside [a,b] its terms are the prescribed zero modules. The
-term isomorphisms give a chain isomorphism. On an empty slice every sheaf is zero;
-the same graded modules with zero differentials give a model there. -/
+constant sheaf complex of an actual bounded complex of finite modules. -/
 theorem exists_local_constant_complex_of_constant_terms
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B]

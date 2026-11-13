@@ -13,7 +13,15 @@ import WeilConjectures.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-! Invertibility of the derived stalk comparison from its K-flat equation.
-(blueprint: lem-pc-stalk-derived-extension-comparison-is-iso) -/
+
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ7](https://stacks.math.columbia.edu/tag/0DJ7)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 06Y6](https://stacks.math.columbia.edu/tag/06Y6)
+-/
 
 @[expose] public section
 
@@ -33,20 +41,7 @@ variable [∀ Y : Scheme.{u},
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
-/-- Any natural comparison satisfying the K-flat equation is invertible.
-
-Proof: on a K-flat representative, the scalar-extension counit is invertible by
-K-flatness of its stalk. All the remaining factors in the equation are images
-of isomorphisms, including the inverse pullback counit assumed there. Thus the
-comparison component is invertible after cancelling the source factor.
-For an arbitrary derived object, choose K-flat coordinates for the identity of
-its pullback. These give a K-flat representative, an invertible pullback counit,
-and an isomorphism from its localization to the object. Naturality transports
-invertibility from that representative to the object. Componentwise invertibility
-then gives invertibility of the natural transformation.
-Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 (Tag 0DJ7);
-Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison-is-iso). -/
+/-- Any natural comparison satisfying the K-flat equation is invertible. -/
 theorem stalkDerivedExtensionComparison_isIso (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

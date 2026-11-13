@@ -16,8 +16,13 @@ import WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopies
 
 /-! # The standard-source abelian Ext section calculation
 
-Source: Stacks Project, Tags 01FB, 01F7 and 013P.
-(blueprint: new-standard-abelian-ext-section-diagram)
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 013P](https://stacks.math.columbia.edu/tag/013P)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 06XR](https://stacks.math.columbia.edu/tag/06XR)
 -/
 
 @[expose] public section
@@ -33,7 +38,7 @@ namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 
 /-- A concrete augmentation lift into a complex of injectives. First extend the
 augmentation by injectivity, then descend and extend successively using exactness.
-Source: Stacks Project, Tag 013P. No existence theorem supplies the data. -/
+ No existence theorem supplies the data. -/
 def sectionAugmentationLift {C : Type u} [Category.{v} C] [Abelian C] {G : C}
     (J : InjectiveResolution G) (K : CochainComplex C ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n)) (γ : G ⟶ K.X 0)
@@ -51,8 +56,7 @@ def sectionAugmentationLift {C : Type u} [Category.{v} C] [Abelian C] {G : C}
           rw [← Category.assoc, ← w, Category.assoc, K.d_comp_d, comp_zero]),
         ((J.exact_succ n).comp_descToInjective _ _).symm⟩)
 
-/-- The concrete lift extends its specified augmentation.
-Source: Stacks Project, Tag 013P. -/
+/-- The concrete lift extends its specified augmentation. -/
 theorem sectionAugmentationLift_comm {C : Type u} [Category.{v} C] [Abelian C] {G : C}
     (J : InjectiveResolution G) (K : CochainComplex C ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n)) (γ : G ⟶ K.X 0)
@@ -62,16 +66,14 @@ theorem sectionAugmentationLift_comm {C : Type u} [Category.{v} C] [Abelian C] {
 
 attribute [local instance] enoughInjectives
 
-/-- The augmentation into an injective replacement of the pushed-forward resolution.
-Source: Stacks Project, Equation 01FB. -/
+/-- The augmentation into an injective replacement of the pushed-forward resolution. -/
 def sectionEdgeAugmentation {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Modules}
     (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K) :
     (pushforward f).obj F ⟶ K.X 0 :=
   (pushforward f).map (I.ι.f 0) ≫ l.f 0
 
-/-- The augmentation is a cycle by the chain-map equation and the resolution equation.
-Source: Stacks Project, Equation 01FB. -/
+/-- The augmentation is a cycle by the chain-map equation and the resolution equation. -/
 theorem sectionEdgeAugmentation_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Modules}
     (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K) :
@@ -83,8 +85,7 @@ theorem sectionEdgeAugmentation_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Mo
   rw [← Functor.map_comp_assoc, I.ι_f_zero_comp_complex_d, Functor.map_zero, zero_comp]
 
 /-- The explicit lift with standard source resolution; neither an arbitrary source
-resolution nor an arbitrary augmentation lift is an argument.
-Source: Stacks Project, Remark 01FB, construction of beta using Tag 013P. -/
+resolution nor an arbitrary augmentation lift is an argument. -/
 def standardSectionEdgeLift {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Modules}
     (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n))
@@ -93,36 +94,14 @@ def standardSectionEdgeLift {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Modules}
   sectionAugmentationLift _ K hK (sectionEdgeAugmentation f I K l)
     (sectionEdgeAugmentation_cycle f I K l)
 
-/-- The map on abelian Ext cohomology induced by inverse image and the counit.
-Source: Stacks Project, Tag 01F7. -/
+/-- The map on abelian Ext cohomology induced by inverse image and the counit. -/
 def standardSectionExtHom {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (p : ℕ) :
     AddCommGrpCat.of (H ((pushforward f).obj F) p) ⟶ AddCommGrpCat.of (H F p) :=
   AddCommGrpCat.ofHom ((Sheaf.H.map (coeff f (𝟙 ((pushforward f).obj F))) p).comp
     (Sheaf.H.mapFunctor (invImage f) (constIso f).symm
       ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p))
 
-/-- The standard-source calculation of the inverse-image/counit Ext map.
-Source: Stacks Project, Tags 01FB (section diagram), 01F7 (derived functoriality),
-03FD (forgotten injective acyclicity), and 06XR (sections as Ext).
-(blueprint: new-standard-abelian-ext-section-diagram)
-
-Proof: Write T for forgetting modules. Forgotten injectives on X and Y are acyclic
-for abelian sections by 03FD. Thus T(I) computes the derived abelian direct image,
-and T(K), with the given quasi-isomorphism, is its acyclic replacement. The explicit
-standardSectionEdgeLift extends the map f_*F to f_*I to K. After localizing complexes,
-its map from the standard resolution is therefore the canonical map f_*F to Rf_*F
-of 01F7. Apply derived abelian sections to this morphism, computed on the standard
-source resolution and on K by acyclic comparison. Derived adjunction identifies this
-map with inverse image on Ext from the constant integer sheaf followed by the counit.
-The free integer generator corresponds to 1 in sections, so the source comparison
-is constIso(f).symm. The sections comparison from f_*I to I is a: its inverse agrees
-degreewise with restriction by ha. Consequently its homology map, followed by the
-section map of l, is exactly the right-hand vertical arrow below. The two ways of
-computing the localized morphism give the displayed equality. This calculation
-only uses the standard source resolution and the explicitly constructed lift;
-independence of an arbitrary source resolution and arbitrary lift is a separate
-homotopy argument. It includes degree zero and zero or empty coefficients, and
-does not assert that f_*F is acyclic or that module pullback is exact. -/
+/-- The standard-source calculation of the inverse-image/counit Ext map. -/
 theorem standard_abelian_ext_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n))

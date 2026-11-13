@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SectionRingChartCrossMultiplication
 
 /-! # Verification of section-ring quotients on a second chart
 
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-section-ring-quotient-chart-transfer).
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
 -/
 
 @[expose] public section
@@ -61,26 +63,7 @@ private theorem sectionRing_power_generator {X : Scheme.{v}} (L : X.Modules)
     exact (ih.tmulSection ht).app_hom (L.tensorPowAddIso (k • e) e).symm
 
 -- Elaborating the ambient-open section identifications and tensor cancellation needs this limit.
-/-- The coefficient equation on the chosen chart determines all other chart equations.
-Source: Stacks Project, Constructions, Tag 01N8, proof, comparison on intersecting charts;
-Tag 01NK, proof, passing between different positive degrees.
-(blueprint: lem-sc-section-ring-quotient-chart-transfer).
-
-Proof: Work locally on U where L has a basis z, and write s = b z^d and t = c z^e.
-Since s generates L^{tensor d}, b is a unit. The coefficient equation says the map on
-S_(s) sends a/s^n to the coefficient of a divided by b^n. The Proj chart intersection
-D_+(s) intersect D_+(t) is the basic open of t^d/s^e in Spec S_(s). Its pullback is the
-unit locus of c^d/b^e, which equals the unit locus of c. The map on this intersection
-is the localization of the map on S_(s), since q has that map on global sections.
-For xi in degree ne the identity of fractions
-xi/t^n = (xi t^{n(d-1)}/s^{ne}) / (t^d/s^e)^n
-shows that its pullback is the coefficient of xi divided by c^n: the factors b^{ne}
-and c^{n(d-1)} cancel. Multiplying by t^n gives xi. A positive power is a unit exactly
-when its base is a unit, so this works in arbitrary local rings, including rings with
-nilpotents. Changes of z preserve the equation; the sheaf separation axiom glues these
-local equations on the ambient image in X. For n=0 the same fraction identity has unit
-denominator and is the degree-zero coefficient equation. Empty chart intersections
-have unique sections, so their equations are automatic. -/
+/-- The coefficient equation on the chosen chart determines all other chart equations. -/
 theorem sectionRing_quotient_chart_transfer
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

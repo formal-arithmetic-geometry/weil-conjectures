@@ -21,8 +21,14 @@ import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine sections of ordinary tensor with a K-flat quotient resolution
 
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS.
-(blueprint: new-b3-self-tor-ordinary-resolution-sections). -/
+## References
+
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 06YG](https://stacks.math.columbia.edu/tag/06YG)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks Project, Tag 00LS](https://stacks.math.columbia.edu/tag/00LS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,38 +39,7 @@ namespace AlgebraicGeometry
 
 /-- Affine tensor-resolution homology computes the sections of the ordinary total tensor
 with a global K-flat resolution. This is a statement entirely about complexes and homology;
-no derived tensor or existence of algebraic resolution lifts occurs in its conclusion.
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS.
-(blueprint: new-b3-self-tor-ordinary-resolution-sections).
-
-Proof: Restrict K and q to each affine chart. Identify the restricted closed structure
-sheaf B with the associated sheaf of A/I, using the canonical quotient identification.
-Sheafify the chosen projective resolution P of A/I and extend it to nonpositive
-cochain degrees. Its augmentation is a quasi-isomorphism by exactness of tilde,
-and it is K-flat since its terms are flat and it is bounded above. Restriction
-of K remains K-flat. Use the two augmentations in the zigzag
-K tensor B <- K tensor P -> B tensor P -> P tensor B (with the last arrow the
-braiding). The two first arrows are quasi-isomorphisms: tensor with a K-flat
-complex preserves quasi-isomorphisms. Thus the zigzag induces a homology
-isomorphism. The termwise tilde tensor comparison identifies P tensor B with
-tilde of the quotient tensor resolution, with chain degree n in cochain degree -n.
-Exact tilde commutes with homology, and its affine sections unit gives c_U.
-
-For a basic inclusion, associate a sheaf map on V to the semilinear map a by
-scalar extension, the tilde adjunction, and the affine restriction comparison.
-The quotient equation identifies the associated map of quotient sheaves with
-the restriction of B. The augmentation equation, tested on affine sections
-and transported by full faithfulness of tilde, says that the augmented sheaf
-resolutions commute. The pure tensor identity, by extensionality on pure
-tensors, identifies the associated tensor map of k with a tensor this quotient
-map. Restrict the preceding zigzag for U to V and compare it with the zigzag
-for V. Each square commutes by tensor functoriality, the augmentation square,
-and naturality of the braiding. Take homology and invert the two isomorphism
-legs to obtain the equality of the two composite comparisons. Naturality of
-the tilde sections unit turns this equality into the displayed section formula.
-Exact restriction of scalars supplies mapHomologyIso. This is true for every lift;
-no inverse is chosen at chain level. The construction applies to degree zero,
-the zero quotient, and the empty basic open, using zero rings and zero modules. -/
+no derived tensor or existence of algebraic resolution lifts occurs in its conclusion. -/
 theorem exists_selfTor_ordinary_resolution_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]

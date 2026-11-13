@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.TangentVectorsVectorSpaceOperations
 /-!
 # The vector space of dual-number tangent vectors
 
-Source: Stacks Project, Tag 0B2B, Lemma 33.16.2 and its proof, with base `Spec k`
-(blueprint: lem-sc-tangent-space-vector-space).
+## References
+
+* [Stacks Project, Tag 0B2B](https://stacks.math.columbia.edu/tag/0B2B)
 -/
 
 @[expose] public section
@@ -30,26 +31,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The dual-number tangent vectors at a point of a scheme over a field form a vector space.
-Source: Stacks Project, Tag 0B2B (blueprint: lem-sc-tangent-space-vector-space).
-
-Proof:
-1. Apply lem-sc-dual-number-scheme-pushout with `K = X.residueField x` and two copies.
-   The coordinate projections identify the square-zero algebra with the fiber product of
-   two dual-number rings over `K`. The local-ring description of maps into arbitrary schemes
-   gives the scheme pushout. The two tangent vectors have the same restriction, so glue
-   uniquely to `Θ`. Uniqueness with target `Spec k` shows that `Θ` is over `k`.
-2. The sum map and each scaling map preserve the common closed point and the structure map
-   to `Spec k`. Thus precomposition gives elements of the displayed subtype `T`. The map
-   factoring through `Spec K` is the zero vector.
-3. Apply the same pushout lemma to three copies for associativity: both parenthesizations
-   send all three infinitesimals to epsilon. Swapping two coordinates gives commutativity.
-   Gluing a vector with the constant map gives the original vector after precomposition.
-   Gluing the two scalar multiples uses epsilon mapping to `λ ε₁ + μ ε₂`, proving scalar
-   additivity. Scaling both coordinates proves distributivity over vector addition.
-   Composition of scaling maps proves multiplicativity and the identity scalar law.
-   Scaling by minus one supplies additive inverses, since epsilon then maps to zero.
-   These identities give an additive commutative group and a `K`-module, with exactly the
-   addition, scalar multiplication and zero described in the conclusion.
 -/
 theorem exists_tangentVectors_vectorSpace
     (k : Type u) [Field k] (X : Scheme.{u})

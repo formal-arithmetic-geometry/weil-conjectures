@@ -15,8 +15,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 
 /-! # Relative flatness on stalks
 
-Source: Stacks Project, Morphisms, Tag 01U2, and Algebra, Tags 00H9 and 00HT.
-(blueprint: lem-pc-relative-flat-module-stalk).
+## References
+
+* [Stacks Project, Tag 01U2](https://stacks.math.columbia.edu/tag/01U2)
+* [Stacks Project, Tag 00H9](https://stacks.math.columbia.edu/tag/00H9)
+* [Stacks Project, Tag 00HT](https://stacks.math.columbia.edu/tag/00HT)
 -/
 
 @[expose] public section
@@ -25,18 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Affine-local relative flatness implies flatness of the module stalk over the base stalk.
-Source: Stacks Project, Morphisms Tag 01U2; Algebra Tags 00H9 and 00HT.
-(blueprint: lem-pc-relative-flat-module-stalk).
-
-Proof: Choose an affine neighbourhood V of f(x). Affine neighbourhoods U of x inside
-f⁻¹(V) form a filtered neighbourhood basis. The hypothesis makes every G(U) flat
-over O(V); their filtered colimit G_x is therefore flat over O(V). Its scalar action
-factors through O_{S,f(x)}, the localization of O(V) at f(x), because the scalar
-multiplication of germs agrees with the stalk map of f. Flatness over a ring and
-over its localization are equivalent for a module over the latter. The equation
-hRA identifies the chosen algebra structure with that stalk map. Empty schemes
-have no point x; the zero sheaf gives the flat zero stalk. -/
+/-- Affine-local relative flatness implies flatness of the module stalk over the base stalk. -/
 theorem relative_flat_module_stalk {S X : Scheme.{u}} (f : X ⟶ S)
     (G : X.Modules) (hflat : G.IsFlatOver f) (x : X)
     [Algebra (S.presheaf.stalk (f x)) (X.presheaf.stalk x)]

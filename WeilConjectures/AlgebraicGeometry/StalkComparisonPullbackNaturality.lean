@@ -21,8 +21,11 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 /-! # Naturality of the localized comparison into derived pullback
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-pc-stalk-comparison-pullback-naturality).
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 06Y6](https://stacks.math.columbia.edu/tag/06Y6)
 -/
 
 @[expose] public section
@@ -46,7 +49,6 @@ variable [∀ Y : Scheme.{u},
 Its construction uses the invertible pullback counit on the representative, the
 specified tensor-stalk isomorphism, and the localization comparison; no target
 complex or morphism to a target is involved.
-(blueprint: lem-pc-stalk-comparison-pullback-naturality)
 -/
 def comparisonIntoPullback (z : X')
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
@@ -73,28 +75,7 @@ set_option maxHeartbeats 1600000 in
 -- The default 200000 timed out at whnf in 13s; BZ856 checked this historical limit in 17s.
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
-underlying cohomology transport.
-
-Proof: stalk K-flatness follows from the K-flat stalk criterion. Ordinary extension
-from A to C therefore computes derived extension on each stalk representative.
-The derived stalk of sheaf pullback identifies with this derived extension: on
-complexes this is tensorStalkIso, and the two universal derived counits determine
-the identification on the localized category. The transformation from base-derived
-tensor to A-derived extension is induced by scalar extension and tensor
-associativity. Its naturality holds on complexes and descends through localization;
-thus it holds for the derived isomorphism a, without choosing a chain map for a.
-Apply cohomology and use the counit-compatible comparison between the two base
-derived tensor functors. The equations comparison_eq identify their cohomology
-comparisons with these counits, and localized_eq transposes these comparisons
-through extension/restriction adjunction. Naturality of tensorStalkIso and the
-homology localization factors then gives the displayed equation. Faithfulness of
-restriction to B identifies the given e with the tensor-algebra transport. Extend
-e to C; functoriality of extension and the preceding adjunction equation yield
-exactly the square below. No isomorphism assertion about localizedComparison is
-used, and no flatness over R or Tor-independence of the square is required.
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8; Cohomology,
-Tag 06YB (K-flat stalks), and Tag 06Y6 (derived tensor functoriality).
-(blueprint: lem-pc-stalk-comparison-pullback-naturality). -/
+underlying cohomology transport. -/
 theorem comparisonIntoPullback_naturality (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor)

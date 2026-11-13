@@ -33,10 +33,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   HasDerivedCategory.ofHasKInjectiveResolutions Functor.rightDerivedFunctor
   Functor.leftDerivedFunctor Functor.mapDerivedCategory AlgebraicGeometry.ProjectiveSpace
 
-/-- The fixed second projection gives the same compact-support functor.
-Source: the definition of projection.
-Proof: reduce the true branch; the compactification existence proofs agree by
-proof irrelevance. (auxiliary; not a blueprint node). -/
+/-- The fixed second projection gives the same compact-support functor. -/
 theorem secondProjectionShriek_eq
     (A : Type (u + 1)) [CommRing A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] :
@@ -48,11 +45,7 @@ theorem secondProjectionShriek_eq
 attribute [local semireducible] projection
 attribute [local implicit_reducible] projection
 
-/-- The fixed-projection functor transport is the identity on every complex.
-Source: secondProjectionShriek_eq and projection.
-Proof: the functors become identical in the true branch, so eqToHom is the
-identity natural transformation, whose components are identity morphisms.
-(auxiliary; not a blueprint node). -/
+/-- The fixed-projection functor transport is the identity on every complex. -/
 theorem secondProjectionShriek_hom_app
     (A : Type (u + 1)) [CommRing A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
@@ -63,8 +56,7 @@ theorem secondProjectionShriek_hom_app
   unfold projection
   rfl
 
-/-- The second projection comparison with a fixed, reduced source functor.
-Source: projectionComparison (auxiliary; not a blueprint node). -/
+/-- The second projection comparison with a fixed, reduced source functor. -/
 @[irreducible]
 def secondProjectionComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -638,29 +630,7 @@ set_option linter.defProp false in
   raw_geometry A f i hi B (ordinary_presentation_exchange A f i hi B)
 
 /-- Exchange along the presentation isomorphism, before inserting any coefficient
-comparison or trace.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the paragraph identifying the second coordinate
-integral using composition of direct images and the same pullback counits.
-(auxiliary; not a blueprint node)
-
-Proof: replace the compact-support projection by ordinary direct image using
-proper forget-supports. This comparison intertwines exchange: evaluate the
-compactification base-change/forget-supports equation at B and cancel its
-invertible factors. Concretely use rightDerivedLowerShriekBaseChangeMap_eq, the
-compactification base-change/forget-supports equation, and the hom-component
-formula for rightDerivedLowerShriekIsoRightDerivedLowerStar.
-For ordinary direct images, compute the square i;q=f over the identity base by
-transposing along the adjunction for f. The composite counit formula and naturality
-reduce this computation to inverse-image composition coherence. Then use
-derivedBaseChangeMap_cube to paste the projection squares induced by i with the
-self-product square of q. The horizontal equivalence i identifies pushPull with the inverse of the
-unit of the pullback/direct-image adjunction for i. This follows by the triangle
-identities and the inverse-morphism comparison.
-Cancel the product exchange isomorphisms and apply the direct-image composition
-comparison for i;q=f. This gives exactly the displayed equation. B is arbitrary;
-no Tate comparison, trace, splitting, or nonempty-scheme assumption is used. -/
+comparison or trace. -/
 theorem presentationExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

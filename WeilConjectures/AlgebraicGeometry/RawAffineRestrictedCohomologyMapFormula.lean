@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 
 /-! # Formula for the canonical restricted cohomology map
 
-Source: Stacks Project, Tag 0EZM, canonical cohomology pullback.
-(blueprint: lem-sbc-raw-affine-restricted-cohomology-map-formula).
+## References
+
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -25,19 +26,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] cohomology upperStar rawAffineComplexPullback
   rightDerivedGlobalSections DerivedCategory.Q
 
-/-- An explicit formula for the canonical cohomology map of any triangle over S.
-Source: Stacks Project, Tag 0EZM, canonical pullback and coefficient maps.
-(blueprint: lem-sbc-raw-affine-restricted-cohomology-map-formula).
-
-Proof: Restrict F along the second projection to U ×_S Y and place it in the
-single complex in degree zero. Pull cohomology back along the induced morphism
-U ×_S Y' → U ×_S Y. The comparison between pulling back a single complex and
-forming the single complex of the pulled-back sheaf, followed by the single
-complex map of the restricted coefficient morphism, gives the coefficient map.
-Apply Q and cohomology to it and compose with the pullback map. These are exactly
-the two factors in rawAffineRestrictedCohomologyMap, so reflexivity proves the
-formula. HEq exposes this formula while allowing the raw cohomology objects to
-remain folded when the lemma is applied. -/
+/-- An explicit formula for the canonical cohomology map of any triangle over S. -/
 theorem rawAffineRestrictedCohomologyMap_formula {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleData
 
 /-! # Unit law for restricted fixed-coefficient single complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: lem-sbc-restricted-over-single-unit).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -141,19 +143,7 @@ private theorem restricted_identity_heq {W S : Scheme.{u}} (k : W ⟶ S)
     ((upperStar AddCommGrpCat.{u + 1} r).obj R) _ hγ
   exact hs
 
-/-- Unit law for a fixed-coefficient restricted single complex at one diagram object.
-Source: Stacks Project, Tags 09Z1 and 0EZM, canonical fixed-coefficient comparisons.
-(blueprint: lem-sbc-restricted-over-single-unit).
-
-Proof: Substitute D₀.map_id. The induced pullback map is identity by its two projection
-identities. Expand restrictedOverSingleIso.hom and rawAffineRestrictedCoefficient.
-The two inverse-image composition unit laws reduce the three sheaf comparisons to
-upperStarId. The natural comparison of singleFunctor with inverse image respects
-this unit: in degree zero it is the identity comparison; every other degree is zero.
-Consequently its hom is the displayed mapHomologicalComplex unit, transported along
-the restricted diagram map_id equality. Proof irrelevance makes the choice of equality proof
-immaterial. This argument also applies to the zero sheaf, the empty scheme and identity
-structure maps. -/
+/-- Unit law for a fixed-coefficient restricted single complex at one diagram object. -/
 theorem restrictedOverSingle_unit {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
     {I : Type u} [Category.{u} I] (D₀ : I ⥤ Over W) (U : S.Etale) (i : I) :

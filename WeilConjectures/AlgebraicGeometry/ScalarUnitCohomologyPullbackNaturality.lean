@@ -17,8 +17,10 @@ import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 /-! # Pullback compatibility of the explicit unit comparison
 
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-unit-pullback-naturality).
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -29,20 +31,7 @@ namespace AlgebraicGeometry.Scheme
 open Modules
 
 /-- The explicit comparison map, rather than an arbitrary family of equivalences,
-intertwines the two structure-sheaf pullback operations.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial and
-cohomology-equation-choice; Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: new-sc-scalar-unit-pullback-naturality).
-
-Proof: Factor each explicit module-to-abelian comparison through scalar Ext.
-Use coefficient naturality to move the tensor-unit coefficient map into Ext, and
-cancel the cohomology-to-Ext equivalence with its inverse in the pullback formula.
-The underlying abelian pullback square identifies the two coefficient maps and
-the integer-unit classes. Apply naturality of Ext for this square of exact functors,
-whose scalar Ext universes are u+1 and abelian Ext universes are u. Associativity
-of Yoneda composition combines the unit and coefficient identities. The result
-is the defining Ext formula for structureSheafCohomologyPullback. No injective
-acyclicity assertion is needed for this algebraic reduction. -/
+intertwines the two structure-sheaf pullback operations. -/
 theorem scalar_unit_cohomology_pullback_naturality (k : Type u) [Field k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g)

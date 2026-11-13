@@ -22,8 +22,10 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationExchangeCubeTargetSt
 
 /-! # Invertibility of the canonical strict-local stalk comparisons
 
-Source: Stacks Project, Tags 03Q9 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
 -/
 
 @[expose] public section
@@ -34,30 +36,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The two fixed cube restriction maps are invertible on the indicated closed-point
-stalks. This says nothing about either exchange map or compatibility with exchange.
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images, and Tag 03QO,
-lemma-cohomology-strictly-henselian.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos).
-
-Proof:
-1. Extend the point fields along ν and ν followed by ι. Precomposition is bijective
-on pointed étale lifts because the fibres over separably closed fields are disjoint
-unions of copies of the base field. These induce natural stalk isomorphisms.
-2. Commute homology with the exact pullbacks g and g₀ and use the inverse-image
-stalk isomorphisms. The source comparison then becomes the strict-local restriction
-for f at νισ, followed by the pullback-single-complex identification. Apply unrestricted
-03Q9, transporting its chosen pullback across sq₀ and eA.
-3. Apply the same unrestricted theorem to f' at ντ and the coefficient g'^*G.
-Cartesianness implies f' is qcqs. Transport the chosen pullback across sqB and eB;
-hb and inverse-image composition identify its coefficients with p₁^*p₀^*G.
-4. On either strict local base, global sections coincide naturally with the closed
-point stalk, and are exact by 03QO. Hence the Leray homology comparisons in 03Q9
-identify total-space cohomology with the local higher-direct-image stalks. Locality of
-φ, hρ, hρA, and hρB identify the closed points and their reparametrizations. The two
-morphisms in the conclusion are precisely these composites: this follows by the germ
-formula for inverse-image stalks and the section-restriction formula in 03Q9. Thus
-each is a composite of isomorphisms. This handles q = 0, empty total spaces, zero
-sheaves, inseparable point-field extensions and nonstandard pullback models. -/
+stalks. This says nothing about either exchange map or compatibility with exchange. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_stalkComparisons
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}

@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleData
 
 /-! # Triangle composition of restricted fixed-coefficient single complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: lem-sbc-restricted-over-single-composition).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -170,23 +172,7 @@ private lemma restricted_single_iso_hom {W S : Scheme.{u}} (k : W ⟶ S)
   simp only [restrictedOverSingleIso.eq_1, asIso_hom]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Composition law for a triangle of fixed-coefficient restricted single complexes.
-Source: Stacks Project, Tags 09Z1 and 0EZM, canonical fixed-coefficient comparisons.
-(blueprint: lem-sbc-restricted-over-single-composition).
-
-Proof: Substitute ha to replace the third arrow by g followed by f. Expand the
-three explicit transition homs. The second pullback projections satisfy the
-commuting triangles with f.left, g.left, and their composite. Apply the associativity
-law of upperStarComp to these triangles and to the structure arrows to W. Naturality
-moves each sheaf comparison across inverse image, and the inverse comparisons
-cancel. Thus the composite of the two coefficient maps is the coefficient map
-for the composite, preceded by upperStarComp for the restricted maps. Applying
-the single functor and naturality of mapCochainComplexSingleFunctor gives the stated
-complex identity. Its composition compatibility is checked in degree zero, where
-it is the original functor composition identity; in other degrees the source is
-zero. Transport along hq identifies the composite restricted map with that for a.
-No cone, limiting property, or category structure on an indexing type is required;
-zero sheaves, empty schemes and identity arrows satisfy the same calculation. -/
+/-- Composition law for a triangle of fixed-coefficient restricted single complexes. -/
 theorem restrictedOverSingle_composition {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
     {A B C : Over W} (f : B ⟶ A) (g : C ⟶ B) (a : C ⟶ A)

@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-!
 # Quasi-coherence of pushforward along a qcqs morphism
 
-Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC
-(blueprint: pqf-lem-pushforward-qcoh).
+## References
+
+* [Stacks Project, Tag 01LC](https://stacks.math.columbia.edu/tag/01LC)
 -/
 
 @[expose] public section
@@ -46,28 +47,7 @@ private lemma section_torsion_of_basicOpen_eq
   subst O
   exact exists_pow_smul_eq_zero_of_isCompact F hW a t ht
 
-/-- Pushforward along a quasi-compact, quasi-separated morphism preserves quasi-coherence.
-Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC
-(blueprint: pqf-lem-pushforward-qcoh).
-
-Proof:
-1. Work over an affine open `S₀ = Spec A` and set `X₀ = f⁻¹(S₀)`. Quasi-compactness
-   (`def-weil-pbc-scheme-conventions`) supplies a finite affine cover `Uᵢ = Spec Bᵢ` of `X₀`.
-   Quasi-coherence (`pqf-def-coherent`) identifies the restrictions with associated modules
-   `Mᵢ`. Quasi-separatedness makes each overlap quasi-compact, by the relative diagonal,
-   so choose finite covers of the overlaps by principal opens `Wᵢⱼₖ = D(gᵢⱼₖ)` in `Uᵢ`.
-   Their section modules are the localizations `Nᵢⱼₖ = (Mᵢ)_{gᵢⱼₖ}`, using
-   `pqf-lem-associated-sections-localize` and restriction of associated sheaves.
-2. Sheaf gluing identifies sections on `X₀` with the kernel of the difference of
-   restrictions from the finite product of the `Mᵢ` to the finite product of the `Nᵢⱼₖ`.
-3. Pull these covers back to each principal open `D(a)` in `S₀`. The section-localization
-   lemma (`pqf-lem-associated-sections-localize`) identifies the new two terms and map with
-   localization over `A` of the old ones. Localization is exact and commutes with finite
-   products, giving sections over `f⁻¹(D(a))` as sections over `X₀` localized at `a`.
-4. These identifications commute with further localization because the maps are
-   restrictions. Thus on the principal-open basis of `S₀` the pushforward is the sheaf
-   associated to its module of sections on `X₀`, hence is quasi-coherent
-   (`pqf-def-coherent`). Varying `S₀` proves the result. -/
+/-- Pushforward along a quasi-compact, quasi-separated morphism preserves quasi-coherence. -/
 theorem isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (F : X.Modules) [F.IsQuasicoherent] :

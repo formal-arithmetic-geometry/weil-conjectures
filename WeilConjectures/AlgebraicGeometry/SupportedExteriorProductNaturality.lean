@@ -11,10 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHense
 /-!
 # Naturality of the resolution pairing of supported sections
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
-
 The pullback and tensor of supported sections, its totalization, the comparison with the
 derived exterior product and the support units are natural in the cochain complexes. We
 package the right-hand side of the resolution normalization

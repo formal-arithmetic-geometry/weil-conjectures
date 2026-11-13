@@ -16,9 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Dimension
 /-!
 # Zero-dimensional closed subschemes are finite over the base field
 
-Source: Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0), algebraic case;
-Morphisms, Tag 03J3, opening paragraph
-(blueprint: lem-pc-zero-dimensional-closed-subscheme-finite).
+## References
+
+* [Stacks Project, Tag 06LH](https://stacks.math.columbia.edu/tag/06LH)
+* [Stacks Project, Tag 03J3](https://stacks.math.columbia.edu/tag/03J3)
 -/
 
 @[expose] public section
@@ -31,19 +32,6 @@ namespace AlgebraicGeometry
 
 /-- A closed subscheme of a finite-type scheme over a field, with topological dimension
 at most zero, is finite over the field and affine, with finite-dimensional global sections.
-
-Source: Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0), algebraic case;
-Morphisms, Tag 03J3, opening paragraph
-(blueprint: lem-pc-zero-dimensional-closed-subscheme-finite).
-
-Proof: (1) Mathlib's closed-immersion instances give that `i` is finite, hence locally
-of finite type and quasi-compact. Composition with `f` makes `Z` finite type over `k`.
-(2) Rewrite the dimension bound using `Scheme.dim_eq_topologicalKrullDim` and apply
-`isAffine_and_isFinite_of_dim_le_zero` to the structure morphism `i ≫ f`. This includes
-empty `Z`, whose dimension is `⊥`, without a separate case.
-(3) The ring map on global sections is finite by `Scheme.Hom.finite_appTop`. Composing
-with the inverse of `Scheme.ΓSpecIso` gives a finite ring map from `k`; this is exactly
-finite-dimensionality for the algebra structure `(i ≫ f).ΓAlgebra`.
 -/
 theorem closed_subscheme_finite_of_topologicalKrullDim_le_zero
     {k : Type u} [Field k] {X Z : Scheme.{u}}

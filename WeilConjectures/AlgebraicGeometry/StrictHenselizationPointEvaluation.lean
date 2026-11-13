@@ -14,8 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 /-! # Evaluation at the compatible geometric points
 
-Source: Stacks Project, Tag 04HX.
-(blueprint: def-weil-pbc-strict-henselization-point-evaluation).
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
 -/
 
 @[expose] public section
@@ -25,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The geometric points define a cocone of coordinate rings with vertex Ω.
-Source: Stacks Project, Tag 04HX. Its naturality is the pointed transition equation.
-(blueprint: def-weil-pbc-strict-henselization-point-evaluation). -/
+ Its naturality is the pointed transition equation.. -/
 noncomputable def strictHenselizationPointCocone
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y) : Cocone (strictHenselizationAffineDiagram barY) where
@@ -50,9 +50,7 @@ noncomputable def strictHenselizationPointCocone
       simp
       rfl }
 
-/-- Evaluation on the coordinate-ring colimit, constructed by its universal property.
-Source: Stacks Project, Tag 04HX.
-(blueprint: def-weil-pbc-strict-henselization-point-evaluation). -/
+/-- Evaluation on the coordinate-ring colimit, constructed by its universal property. -/
 noncomputable def strictHenselizationPointEvaluation
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y) : strictHenselization barY →+* Ω :=

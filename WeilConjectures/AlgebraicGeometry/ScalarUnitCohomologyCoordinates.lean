@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 
 /-! # Scalar coordinates on degree-zero unit cohomology
 
-Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED.
-(blueprint: lem-sc-scalar-unit-cohomology-coordinates).
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* [Stacks Project, Tag 0BED](https://stacks.math.columbia.edu/tag/0BED)
 -/
 
 @[expose] public section
@@ -21,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The degree-zero cohomology class of the section 1, constructed using the canonical
-map from sections to their zeroth right derived functor.
-Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-scalar-unit-cohomology-coordinates). -/
+map from sections to their zeroth right derived functor. -/
 noncomputable def scalarUnitCohomologyClass {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of k)) :
     scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 0 :=
@@ -32,16 +32,7 @@ noncomputable def scalarUnitCohomologyClass {k : Type u} [Field k] {X : Scheme.{
   ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
     (SheafOfModules.unit X.ringCatSheaf)).hom (1 : Γ(X, ⊤))
 
-/-- Bijective structure maps give normalized scalar coordinates on degree-zero cohomology.
-Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED.
-(blueprint: lem-sc-scalar-unit-cohomology-coordinates).
-
-Proof: Evaluation of module sheaves at the terminal open preserves finite limits.
-Its zeroth right derived functor is therefore canonically isomorphic to evaluation.
-Restrict this isomorphism along the structure ring map. The bijective structure map
-is a linear equivalence from k to the sections of the unit module. Compose its inverse
-with the degree-zero comparison. The inverse sends r to the class of the scalar section
-r, which is r times the class of 1 by linearity. -/
+/-- Bijective structure maps give normalized scalar coordinates on degree-zero cohomology. -/
 theorem scalar_unit_cohomology_coordinates {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of k)) (h : Function.Bijective (scalarMap f ⊤)) :
     ∃ d : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 0 ≃ₗ[k] k,

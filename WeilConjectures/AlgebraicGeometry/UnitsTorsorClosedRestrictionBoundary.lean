@@ -12,8 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.ZariskiUnitsRestriction
 /-!
 # Boundary comparison for a pulled-back direct-image extension
 
-Source: Stacks Project, Tags 02UV and 02FQ.
-(blueprint: lem-sc-units-extension-pullback-boundary-comparison).
+## References
+
+* [Stacks Project, Tag 02UV](https://stacks.math.columbia.edu/tag/02UV)
+* [Stacks Project, Tag 02FQ](https://stacks.math.columbia.edu/tag/02FQ)
 -/
 
 @[expose] public section
@@ -48,24 +50,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 400000 in
 -- The comparison elaborates several sheaf adjunctions and Ext functors.
 /-- The inverse-image/counit comparison carries the boundary of one in the pullback
-of a direct-image extension to the boundary of one in the original extension.
-
-Source: Stacks Project, Cohomology of Sheaves, Lemma 02UV and the naturality of
-connecting homomorphisms used in Lemma 02FQ.
-(blueprint: lem-sc-units-extension-pullback-boundary-comparison).
-
-Proof: Apply exact inverse image to the short exact pullback extension. Compose its
-map to the inverse image of the direct-image extension with the counit. Naturality
-of the counit makes this a map of short exact sequences to the original extension.
-On the kernel its map is the counit of the units sheaf, because the first projection
-of k is the direct image of a. On the quotient, the comparison of constant integer
-sheaves and the restriction identity for r carry the section one to one. The Ext
-boundary is composition with the extension class. Exact inverse image preserves
-extension classes, and naturality of the extension class for this map of sequences
-therefore gives the displayed equality, after precomposition with the constant
-sheaf comparison. This is precisely the definition of
-unitsPushforwardCohomologyComparison. The argument also applies to an empty Z,
-where the original boundary is zero. -/
+of a direct-image extension to the boundary of one in the original extension. -/
 theorem units_extension_pullback_boundary_comparison
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (E : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})

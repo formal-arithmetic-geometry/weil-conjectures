@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # Scalar transport through restricted section complexes
 
-Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-sections-homology-scalar)
+## References
+
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 01E5](https://stacks.math.columbia.edu/tag/01E5)
 -/
 
 @[expose] public section
@@ -49,27 +51,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 400000 in
 -- The nested section, evaluation and homology functors require extra elaboration work.
-/-- The homology comparison of restricted section complexes is semilinear.
-Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-sections-homology-scalar)
-
-Proof: Put U = f inverse V. The ring map displayed here is pullback of sections
-along f: the canonical chart V.toSpecΓ cancels ΓSpecIso, and restriction to the
-whole of U is the identity. In every degree, R.components expresses R.sections
-as a module morphism on U followed by the restriction comparison and restriction
-along the equality U.ι_image_top. Each of these maps preserves multiplication
-by the pulled-back section. Hence the section complex comparison is semilinear
-for Γ(S,V) to Γ(U,O_U). Fix a and its pullback b. Multiplication by b is a
-natural endomorphism of the forgetful functor from global-section modules;
-multiplication by a is a natural endomorphism of evaluation at V. The degreewise
-identity gives a commuting square on the three-term complexes. Apply homology
-and use homologyMap_mapNatTrans to identify its scalar endomorphisms through
-the two mapHomologyIso comparisons. Cancelling the comparison inverses gives
-b acting before T equal to a acting after T. Evaluate this equality at y.
-This uses neither the augmentation nor resolution naturality: it is a statement
-about the pinned degreewise section comparison. It also holds for p=0, empty
-opens, and zero modules, since the same module maps and homology comparisons
-are used in those cases. -/
+/-- The homology comparison of restricted section complexes is semilinear. -/
 theorem resolutionSectionsHomology_scalar
     {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)
     (p : ℕ) (V : S.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) :

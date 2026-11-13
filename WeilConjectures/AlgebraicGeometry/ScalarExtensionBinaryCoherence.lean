@@ -10,8 +10,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-!
 # Binary scalar-extension comparisons
 
-Source: Stacks Project, Tag 03EK.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 05V4](https://stacks.math.columbia.edu/tag/05V4)
 -/
 
 @[expose] public section
@@ -39,8 +43,7 @@ local notation:max "𝒪" R:arg => unit ((sheafCompose J (forget₂ CommRingCat 
 set_option hygiene false in
 local notation:max "𝒯" N:arg P:arg => (siteSheafTensorRight P).obj N
 
-/-- Sectionwise multiplication identifies scalar extension of the unit with the target unit.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Sectionwise multiplication identifies scalar extension of the unit with the target unit. -/
 noncomputable def scalarExtensionUnitRawIso {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S) :
     changeOfRingsPresheafOfUniverses α (𝒪 R) ≅ (𝒪 S).val :=
   PresheafOfModules.isoMk (fun U ↦ by
@@ -62,8 +65,7 @@ noncomputable def scalarExtensionUnitRawIso {R S : Sheaf J CommRingCat.{u}} (α 
     simp only [map_one, mul_one]
     exact ConcreteCategory.congr_hom (α.hom.naturality i) a)
 
-/-- Sheafify the explicit multiplication isomorphism and compose with the counit.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Sheafify the explicit multiplication isomorphism and compose with the counit. -/
 noncomputable def scalarExtensionUnitIso {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S) :
     changeOfRingsOfUniverses α (𝒪 R) ≅ 𝒪 S :=
   (PresheafOfModules.sheafification
@@ -72,8 +74,7 @@ noncomputable def scalarExtensionUnitIso {R S : Sheaf J CommRingCat.{u}} (α : R
     (asIso (PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj S) (𝟙 _)).counit).app (𝒪 S)
 
-/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication. -/
 noncomputable def scalarTensorLeftUnitRawIso (R : Sheaf J CommRingCat.{u}) (N : Mod R) :
     siteTensorPresheaf (𝒪 R).val N.val ≅ N.val :=
   PresheafOfModules.isoMk (fun U ↦ (TensorProduct.lid (R.obj.obj U) (N.val.obj U)).toModuleIso)
@@ -84,8 +85,7 @@ noncomputable def scalarTensorLeftUnitRawIso (R : Sheaf J CommRingCat.{u}) (N : 
       intro a x
       exact (N.val.map_smul i a x).symm)
 
-/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication. -/
 noncomputable def scalarTensorLeftUnitor (R : Sheaf J CommRingCat.{u}) (N : Mod R) :
     𝒯 (𝒪 R) N ≅ N :=
   (PresheafOfModules.sheafification
@@ -94,9 +94,7 @@ noncomputable def scalarTensorLeftUnitor (R : Sheaf J CommRingCat.{u}) (N : Mod 
     (asIso (PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).counit).app N
 
-/-- The tensor unit comparison sends a pure tensor to scalar multiplication.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: the sheafification adjunction identifies the comparison with sectionwise multiplication. -/
+/-- The tensor unit comparison sends a pure tensor to scalar multiplication. -/
 theorem scalarTensorLeftUnitor_tmul (R : Sheaf J CommRingCat.{u}) (N : Mod R)
     (U : Cᵒᵖ) (a : R.obj.obj U) (x : N.val.obj U) :
     ((scalarTensorLeftUnitor R N).hom.val.app U) (siteSheafTensorTmul (𝒪 R) N U a x) =
@@ -111,8 +109,7 @@ theorem scalarTensorLeftUnitor_tmul (R : Sheaf J CommRingCat.{u}) (N : Mod R)
     exact Equiv.apply_symm_apply _ _
   exact congrArg (fun f ↦ f.app U (a ⊗ₜ[R.obj.obj U] x)) h
 
-/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication. -/
 noncomputable def scalarTensorRightUnitRawIso (R : Sheaf J CommRingCat.{u}) (N : Mod R) :
     siteTensorPresheaf N.val (𝒪 R).val ≅ N.val :=
   PresheafOfModules.isoMk (fun U ↦ (TensorProduct.rid (R.obj.obj U) (N.val.obj U)).toModuleIso)
@@ -123,8 +120,7 @@ noncomputable def scalarTensorRightUnitRawIso (R : Sheaf J CommRingCat.{u}) (N :
       intro x a
       exact (N.val.map_smul i a x).symm)
 
-/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication. -/
 noncomputable def scalarTensorRightUnitor (R : Sheaf J CommRingCat.{u}) (N : Mod R) :
     𝒯 N (𝒪 R) ≅ N :=
   (PresheafOfModules.sheafification
@@ -133,9 +129,7 @@ noncomputable def scalarTensorRightUnitor (R : Sheaf J CommRingCat.{u}) (N : Mod
     (asIso (PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).counit).app N
 
-/-- The tensor unit comparison sends a pure tensor to scalar multiplication.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: the sheafification adjunction identifies the comparison with sectionwise multiplication. -/
+/-- The tensor unit comparison sends a pure tensor to scalar multiplication. -/
 theorem scalarTensorRightUnitor_tmul (R : Sheaf J CommRingCat.{u}) (N : Mod R)
     (U : Cᵒᵖ) (x : N.val.obj U) (a : R.obj.obj U) :
     ((scalarTensorRightUnitor R N).hom.val.app U) (siteSheafTensorTmul N (𝒪 R) U x a) =
@@ -150,9 +144,7 @@ theorem scalarTensorRightUnitor_tmul (R : Sheaf J CommRingCat.{u}) (N : Mod R)
     exact Equiv.apply_symm_apply _ _
   exact congrArg (fun f ↦ f.app U (x ⊗ₜ[R.obj.obj U] a)) h
 
-/-- scalarTensorSwapRawIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node). -/
+/-- scalarTensorSwapRawIso for the explicit sheaf tensor construction. -/
 noncomputable def scalarTensorSwapRawIso {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     siteTensorPresheaf P Q ≅ siteTensorPresheaf Q P :=
@@ -165,9 +157,7 @@ noncomputable def scalarTensorSwapRawIso {R : Sheaf J CommRingCat.{u}}
       intro x y
       rfl)
 
-/-- scalarTensorAssocRawIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node). -/
+/-- scalarTensorAssocRawIso for the explicit sheaf tensor construction. -/
 noncomputable def scalarTensorAssocRawIso {R : Sheaf J CommRingCat.{u}}
     (P Q Z : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     siteTensorPresheaf (siteTensorPresheaf P Q) Z ≅
@@ -183,9 +173,7 @@ noncomputable def scalarTensorAssocRawIso {R : Sheaf J CommRingCat.{u}}
       | add xy xy' h h' => simp only [map_add, TensorProduct.add_tmul, h, h']
       | tmul x y => rfl)
 
-/-- scalarSheafificationUnit for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node). -/
+/-- scalarSheafificationUnit for the explicit sheaf tensor construction. -/
 noncomputable def scalarSheafificationUnit
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -195,11 +183,7 @@ noncomputable def scalarSheafificationUnit
   (PresheafOfModules.sheafificationAdjunction
     (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).unit.app P
 
-/-- scalarSheafificationUnit locallyInjective for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarSheafificationUnit locallyInjective for the explicit sheaf tensor construction. -/
 instance scalarSheafificationUnit_locallyInjective
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -210,11 +194,7 @@ instance scalarSheafificationUnit_locallyInjective
     (CategoryTheory.toSheafify J P.presheaf))
   infer_instance
 
-/-- scalarSheafificationUnit locallySurjective for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarSheafificationUnit locallySurjective for the explicit sheaf tensor construction. -/
 instance scalarSheafificationUnit_locallySurjective
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -227,11 +207,7 @@ instance scalarSheafificationUnit_locallySurjective
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarSheafification map unit for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarSheafification map unit for the explicit sheaf tensor construction. -/
 theorem scalarSheafification_map_unit
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -244,11 +220,7 @@ theorem scalarSheafification_map_unit
     ((PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).unit.naturality f)).symm
 
-/-- scalarTensorSheafifyFirst isIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarTensorSheafifyFirst isIso for the explicit sheaf tensor construction. -/
 theorem scalarTensorSheafifyFirst_isIso {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     IsIso ((PresheafOfModules.sheafification
@@ -258,9 +230,7 @@ theorem scalarTensorSheafifyFirst_isIso {R : Sheaf J CommRingCat.{u}}
     (f := scalarSheafificationUnit P) (N := Q)
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).property
 
-/-- scalarTensorSheafifyFirstIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node). -/
+/-- scalarTensorSheafifyFirstIso for the explicit sheaf tensor construction. -/
 noncomputable def scalarTensorSheafifyFirstIso {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     ((PresheafOfModules.sheafification
@@ -277,9 +247,7 @@ noncomputable def scalarTensorSheafifyFirstIso {R : Sheaf J CommRingCat.{u}}
   have : IsIso (L.map f) := scalarTensorSheafifyFirst_isIso P Q
   exact asIso (L.map f)
 
-/-- scalarTensorSheafifySecondIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node). -/
+/-- scalarTensorSheafifySecondIso for the explicit sheaf tensor construction. -/
 noncomputable def scalarTensorSheafifySecondIso {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     ((PresheafOfModules.sheafification
@@ -296,9 +264,7 @@ noncomputable def scalarTensorSheafifySecondIso {R : Sheaf J CommRingCat.{u}}
     scalarTensorSheafifyFirstIso P Q ≪≫
       L.mapIso (scalarTensorSwapRawIso (L.obj P).val Q)
 
-/-- scalarTensorAssociatorIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node). -/
+/-- scalarTensorAssociatorIso for the explicit sheaf tensor construction. -/
 noncomputable def scalarTensorAssociatorIso (R : Sheaf J CommRingCat.{u}) (N P Q : Mod R) :
     (siteSheafTensorRight Q).obj ((siteSheafTensorRight P).obj N) ≅ 𝒯 N (𝒯 P Q) :=
   let L := PresheafOfModules.sheafification
@@ -307,11 +273,7 @@ noncomputable def scalarTensorAssociatorIso (R : Sheaf J CommRingCat.{u}) (N P Q
     L.mapIso (scalarTensorAssocRawIso N.val P.val Q.val) ≪≫
       scalarTensorSheafifySecondIso (siteTensorPresheaf P.val Q.val) N.val
 
-/-- scalarTensorSheafifyFirstIso hom tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarTensorSheafifyFirstIso hom tmul for the explicit sheaf tensor construction. -/
 theorem scalarTensorSheafifyFirstIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
     (U : Cᵒᵖ) (x : P.obj U) (y : Q.obj U) :
@@ -324,11 +286,7 @@ theorem scalarTensorSheafifyFirstIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
   exact scalarSheafification_map_unit (siteTensorHom (scalarSheafificationUnit P) Q)
     U (x ⊗ₜ[R.obj.obj U] y)
 
-/-- scalarTensorSheafifyFirstIso inv tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarTensorSheafifyFirstIso inv tmul for the explicit sheaf tensor construction. -/
 theorem scalarTensorSheafifyFirstIso_inv_tmul {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
     (U : Cᵒᵖ) (x : P.obj U) (y : Q.obj U) :
@@ -344,11 +302,7 @@ theorem scalarTensorSheafifyFirstIso_inv_tmul {R : Sheaf J CommRingCat.{u}}
   rw [Iso.hom_inv_id]
   rfl
 
-/-- scalarTensorSheafifySecondIso hom tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarTensorSheafifySecondIso hom tmul for the explicit sheaf tensor construction. -/
 theorem scalarTensorSheafifySecondIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
     (U : Cᵒᵖ) (x : P.obj U) (y : Q.obj U) :
@@ -373,11 +327,7 @@ theorem scalarTensorSheafifySecondIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
   rw [scalarTensorSheafifyFirstIso_hom_tmul, scalarSheafification_map_unit]
   rfl
 
-/-- scalarTensorAssociatorIso tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4
-(auxiliary; not a blueprint node).
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- scalarTensorAssociatorIso tmul for the explicit sheaf tensor construction. -/
 theorem scalarTensorAssociatorIso_tmul (R : Sheaf J CommRingCat.{u}) (N P Q : Mod R)
     (U : Cᵒᵖ) (x : N.val.obj U) (y : P.val.obj U) (z : Q.val.obj U) :
     ((scalarTensorAssociatorIso R N P Q).hom.val.app U)
@@ -401,8 +351,7 @@ theorem scalarTensorAssociatorIso_tmul (R : Sheaf J CommRingCat.{u}) (N P Q : Mo
   rw [scalarTensorSheafifySecondIso_hom_tmul]
   rfl
 
-/-- The actual sheaf tensor coherence, constructed without choosing existence witnesses.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- The actual sheaf tensor coherence, constructed without choosing existence witnesses. -/
 noncomputable def scalarTensorCoherence (R : Sheaf J CommRingCat.{u}) :
     ScalarTensorCoherence R where
   associator := scalarTensorAssociatorIso R
@@ -412,9 +361,7 @@ noncomputable def scalarTensorCoherence (R : Sheaf J CommRingCat.{u}) :
   rightUnitor := scalarTensorRightUnitor R
   rightUnitor_tmul := scalarTensorRightUnitor_tmul R
 
-/-- The binary part of scalar extension, before forming any tensor powers.
-Source: Stacks Project, Tag 03EK
-(auxiliary; not a blueprint node). -/
+/-- The binary part of scalar extension, before forming any tensor powers. -/
 structure ScalarExtensionTensorCore
     (R S : Sheaf J CommRingCat.{u}) (α : R ⟶ S) where
   tensorComparison : ∀ (N P : Mod R),
@@ -459,9 +406,6 @@ structure ScalarExtensionTensorCore
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtension_hom_ext for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
 theorem scalarExtension_hom_ext
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -482,9 +426,6 @@ theorem scalarExtension_hom_ext
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionSection_naturality for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
 theorem scalarExtensionSection_naturality
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -503,9 +444,6 @@ theorem scalarExtensionSection_naturality
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtension_map_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
 theorem scalarExtension_map_tmul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -524,9 +462,6 @@ theorem scalarExtension_map_tmul
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionSection_smul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
 theorem scalarExtensionSection_smul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -542,9 +477,6 @@ theorem scalarExtensionSection_smul
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionSection_base_smul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
 theorem scalarExtensionSection_base_smul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -573,7 +505,6 @@ include hk
 end Coherence
 
 /-- scalarExtensionRawLift for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
 -/
 noncomputable def scalarExtensionRawLift
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -600,7 +531,6 @@ noncomputable def scalarExtensionRawLift
     exact PresheafOfModules.naturality_apply f.val i x
 
 /-- scalarExtensionLift for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
 -/
 noncomputable def scalarExtensionLift
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -617,9 +547,6 @@ noncomputable def scalarExtensionLift
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionLift_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node).
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
 theorem scalarExtensionLift_tmul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]

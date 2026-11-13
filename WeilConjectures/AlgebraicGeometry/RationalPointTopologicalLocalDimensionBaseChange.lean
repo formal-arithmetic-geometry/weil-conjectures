@@ -10,7 +10,12 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 
-/-! Auxiliary reductions for rational point local dimension base change. -/
+/-! Auxiliary reductions for rational point local dimension base change.
+
+## References
+
+* [Stacks Project, Tag 00P4](https://stacks.math.columbia.edu/tag/00P4)
+-/
 
 @[expose] public section
 
@@ -48,21 +53,6 @@ private theorem localDim_openEmbedding {X : Type*} {Y : Type*}
 
 /-- The topological local dimensions at compatible rational points are preserved by scalar
 extension.
-
-Source: Stacks Project, Lemma 10.116.6, Tag 00P4.
-Proof: Write x for the image of the unique point under p, and y for its image under q.
-The compatibility hqp implies that the first pullback projection takes y to x. Choose
-an affine open U = Spec A containing x. The restriction of f gives a finite type
-k-algebra structure on A, since f is locally of finite type and Spec k is affine.
-Its inverse image V in the pullback is open, contains y, and is canonically isomorphic
-to Spec (A tensor_k K). Under these identifications the first projection is the prime
-contraction along a -> a tensor 1, so the prime corresponding to y contracts to the
-prime corresponding to x. Apply topologicalKrullDimAt_spec_tensorProduct_field_extension
-to this upper prime. Finally, open immersions preserve local topological dimension:
-open neighbourhoods contained in an open chart are cofinal among all neighbourhoods,
-and the chart isomorphisms give homeomorphisms. Transport the affine equality through
-these two charts. Neither maximality nor reducedness nor separatedness is used.
-(blueprint: lem-ag-rational-point-topological-local-dimension-base-change)
 -/
 theorem topologicalKrullDimAt_rationalPoint_field_baseChange
     {k : Type u} [Field k] {X : Scheme.{u}}

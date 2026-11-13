@@ -21,8 +21,12 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Local cohomology calculation for a strictly perfect tensor
 
-Source: Stacks Project, Tags 0DJQ, 08C4, 06YH and 01Y0.
-(blueprint: lem-pc-strict-perfect-tensor-local-cohomology).
+## References
+
+* [Stacks Project, Tag 0DJQ](https://stacks.math.columbia.edu/tag/0DJQ)
+* [Stacks Project, Tag 08C4](https://stacks.math.columbia.edu/tag/08C4)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 01Y0](https://stacks.math.columbia.edu/tag/01Y0)
 -/
 
 @[expose] public section
@@ -77,30 +81,7 @@ private theorem coherent_homology_of_coherent_terms (Y : Scheme.{u})
   exact hclosure.2.2.2.2 _ _ S.homologyIsoCokernelLift.symm hh
 
 /-- A strictly perfect representative on one open computes the restricted tensor
-cohomology, with the sum of the two termwise degree intervals as a vanishing interval.
-Source: Stacks Project, perfect.tex, Tag 0DJQ, local tensor calculation in Lemma 36.27.2;
-cohomology.tex, Tags 08C4 and 06YH; coherent.tex, Tag 01Y0.
-(blueprint: lem-pc-strict-perfect-tensor-local-cohomology).
-
-Proof: Restrict G termwise to U and transport through Modules.overEquiv U to the
-open subscheme. Exact restriction preserves its bounds [c,d] and coherence of its
-terms. Transport K and its finite-free retractions through the same equivalence.
-Each transported term of K is a retract of a finite free module, hence flat.
-The bounded complex K is therefore K-flat. The derived tensor restricted to U is
-computed by the ordinary signed total tensor of this K with the restriction of G:
-open restriction commutes with derived tensor, the given e identifies the first
-factor, and the K-flat tensor comparison identifies its total complex with the
-localized tensor. Exact restriction and the derived homology comparison identify
-its i-th homology with the restriction of the global tensor's i-th homology.
-In total degree n only pairs p+q=n with a<=p<=b and c<=q<=d contribute.
-Consequently the total term is zero outside [a+c,b+d]. Its terms are coherent:
-each tensor summand is a retract of a finite direct sum of coherent terms of G,
-and only finitely many summands are nonzero. Coherent modules form an abelian
-subcategory (01Y0), so kernels, images and the quotient of cycles by boundaries
-are coherent. A zero total term has zero homology in that degree. Transport these
-facts across the homology isomorphism. This argument works for empty U, zero
-terms and reversed intervals; an interval with a>b forces every term of K to
-vanish, and similarly for c>d. It uses only local Noetherianity, not compactness. -/
+cohomology, with the sum of the two termwise degree intervals as a vanishing interval. -/
 theorem strictPerfect_tensor_local_cohomology
     {X : Scheme.{u}} [IsLocallyNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

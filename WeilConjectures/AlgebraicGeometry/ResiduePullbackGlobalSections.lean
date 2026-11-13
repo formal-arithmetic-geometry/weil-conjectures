@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Global sections of residue-point tensor pullback
 
-Source: Stacks Project, Sheaves, Tag 0098.
-(blueprint: lem-sc-residue-pullback-global-sections).
+## References
+
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -106,33 +107,7 @@ private noncomputable def extendScalarsRingIso {A B C : Type u}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Residue-point pullback, evaluated globally with its residue-field scalars,
-is naturally extension of scalars of the original stalk.
-Source: Stacks Project, Sheaves, Tag 0098.
-(blueprint: lem-sc-residue-pullback-global-sections).
-
-Proof: Take the closed point y of Spec kappa(x). Every neighborhood of y is
-the whole space. The germ map is surjective by representing each stalk element
-by a section on a neighborhood; it is injective because equality of germs holds
-after restriction to a neighborhood, which must again be the whole space.
-Its linearity over kappa(x) follows from germ_smul and the compatibility of
-GammaSpecIso with stalkClosedPointIso. The stalk-map germ formula gives naturality,
-so these bijective linear maps form a natural isomorphism from global sections
-to stalks, with scalars restricted along stalkClosedPointIso inverse.
-
-Apply the natural tensor-pullback stalk isomorphism of Tag 0098 at y and
-restrict its scalars to kappa(x). For a ring isomorphism B -> C, extension of
-scalars and restriction along the inverse are left adjoints of the same functor.
-Uniqueness of left adjoints identifies them. Combining this with composition of
-extension of scalars changes the resulting functor to extension along the composite
-O_X,f(y) -> O_Spec(kappa(x)),y -> kappa(x).
-
-Finally, SpecToEquivOfLocalRing classifies a morphism from a local-ring spectrum by
-its closed-point image and local stalk map. Its inverse sends (x, residue) to
-Spec(residue) followed by fromSpecStalk x, exactly fromSpecResidueField x.
-The inverse identity therefore identifies both the point and the composite ring
-map at once. Applying the stalk-then-extension functor to this equality finishes
-the composition of natural isomorphisms. All steps apply to arbitrary module
-sheaves, including the zero sheaf, without quasi-coherence or flatness. -/
+is naturally extension of scalars of the original stalk. -/
 theorem nonempty_residuePullback_globalSections_iso (X : Scheme.{u}) (x : X) :
     Nonempty
       (Modules.tensorPullback (X.fromSpecResidueField x) ⋙

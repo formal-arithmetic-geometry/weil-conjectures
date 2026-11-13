@@ -17,8 +17,9 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComp
 
 /-! # Acyclicity for the pulled-back free abelian source
 
-Source: Stacks Project, Tag 03FD, second paragraph of its proof.
-(blueprint: lem-sbc-raw-module-free-source-acyclic).
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -71,21 +72,7 @@ private noncomputable def rawSourceSectionsIso
       Adjunction.homEquiv_naturality_right]
     rfl)
 
-/-- Forgotten injective modules are acyclic for sections corepresented by this source.
-Source: Stacks Project, Tag 03FD, second proof paragraph and the sections adjunction.
-(blueprint: lem-sbc-raw-module-free-source-acyclic).
-
-Proof: Pullback of the represented sheaf U is represented by X times_S U.
-Pullback commutes with free abelian sheafification. Thus the source in the
-statement is the free abelian sheaf of that etale object of X. Sheafification,
-free abelian and Yoneda adjunctions give a natural additive isomorphism from
-Hom(source,-) to evaluation at X times_S U. Right derived functors respect this
-isomorphism. Tag 03FD gives zero positive right derived evaluation on the
-underlying abelian sheaf of every injective module sheaf. One may transport
-ModuleCat-valued sheaves to modules over the constant ring sheaf without
-changing underlying sections or injectivity. Therefore the rightAcyclic
-condition holds in every positive degree. The empty object and zero ring give
-the same conclusion; the underlying abelian sheaf need not be injective. -/
+/-- Forgotten injective modules are acyclic for sections corepresented by this source. -/
 theorem rawModuleFreeSource_acyclic
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)
     (U : S.Etale) (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

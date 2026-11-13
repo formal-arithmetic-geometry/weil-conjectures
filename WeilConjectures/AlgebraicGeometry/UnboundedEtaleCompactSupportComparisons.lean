@@ -27,14 +27,18 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 /-!
 # Unbounded ordinary etale compact-support comparisons
 
-Source: Stacks Project, Tags 0F7H--0F7L and 0F7B, case (b)
-(auxiliary; not a blueprint node).
-
 The candidates, common-refinement comparisons, and proper/open tower isomorphism are the
 existing ordinary etale constructions. The definitions below assemble the specified tower
 composition and transport the existing exchange to exact, termwise inverse image. The
 statements supply coherence and equality with the bounded-below maps, on actual natural
 transformations rather than just existence of unrelated isomorphisms.
+
+## References
+
+* [Stacks Project, Tag 0F7H](https://stacks.math.columbia.edu/tag/0F7H)
+* [Stacks Project, Tag 0F7L](https://stacks.math.columbia.edu/tag/0F7L)
+* [Stacks Project, Tag 0F7B](https://stacks.math.columbia.edu/tag/0F7B)
+* [Stacks Project, Tag 0F7J](https://stacks.math.columbia.edu/tag/0F7J)
 -/
 
 @[expose] public section
@@ -135,9 +139,7 @@ private lemma exact_exchange_transport
 
 /-- Assemble the canonical proper/open tower comparison, using the closure compactification
 `ofComp`, and compare the input and output with the chosen compactifications. This is the
-explicit isomorphism in the proof of the existing unbounded composition theorem.
-Source: Stacks Project, Tag 0F7J
-(auxiliary; not a blueprint node). -/
+explicit isomorphism in the proof of the existing unbounded composition theorem. -/
 noncomputable def unboundedEtaleLowerShriekCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -160,9 +162,7 @@ noncomputable def unboundedEtaleLowerShriekCompIso
           (HasCompactification.compactification g)))
 
 /-- Transport the already defined unbounded exchange from left derived inverse image to
-its exact termwise realization. No new choice of exchange map is made.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node). -/
+its exact termwise realization. No new choice of exchange map is made. -/
 noncomputable def unboundedEtaleCompactSupportBaseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
@@ -1121,12 +1121,7 @@ end UnboundedFormalism
 attribute [local instance] unbounded_has_base_change unbounded_has_proper_exchange
 
 /-- The composition isomorphism is computed by every proper/open tower. Thus it is
-independent of compactification choices and commutes with their refinement comparisons.
-Source: Stacks Project, Tag 0F7J
-(auxiliary; not a blueprint node).
-Proof: identify the formalism's triangle compositor with the actual proper/open tower
-map, using the exact-derived open compositor and the canonical right-derived proper
-compositor. Its every-triangle equation then gives the result for the supplied tower. -/
+independent of compactification choices and commutes with their refinement comparisons. -/
 private lemma unbounded_sh_id
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (unboundedFormalism A).shId X =

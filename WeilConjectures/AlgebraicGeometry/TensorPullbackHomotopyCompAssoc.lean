@@ -9,7 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Homology.HomotopyCategory
 
-/-! Associativity of the pinned tensor pullback comparisons on homotopy categories. -/
+/-! Associativity of the pinned tensor pullback comparisons on homotopy categories.
+
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+-/
 
 @[expose] public section
 
@@ -22,23 +27,7 @@ namespace AlgebraicGeometry
 
 set_option maxHeartbeats 600000 in
 -- Elaborating the six pinned adjunctions and termwise comparison needs a larger heartbeat budget.
-/-- The tensor pullback composition mates are associative after passage to homotopy.
-Source: Mathlib `Adjunction.leftAdjointCompIso_assoc` and
-the component formulas for `Scheme.Modules.pushforwardComp`; Stacks Project, Cohomology, Tag 0D5S.
-(blueprint: lem-pc-tensor-pullback-homotopy-comp-assoc).
-Proof: For each scheme morphism choose the adjunction pinned by
-`exists_tensorPullbackAdjunction`. Its composition comparison is exactly the inverse
-mate of `pushforwardComp`. Apply `Adjunction.leftAdjointCompIso_assoc` to the six
-adjunctions belonging to h, f, g, h≫f, f≫g, and the total composite. The hypothesis
-is the pushforward associativity identity, inverted to match these mates. Identify
-the two total composites by Category.assoc, transporting the chosen adjunction too;
-proof irrelevance identifies the equality transports. This gives equality of the
-underived triple comparisons. Apply the additive functors termwise to complexes
-and then pass to the homotopy quotient. The comparison between termwise composition
-and composition of termwise functors is natural and its components are identity
-maps, so both sides become precisely the two composites displayed here. Evaluate
-at H. This argument uses no derived category, counit, or K-flatness. It applies to
-zero complexes, empty schemes and identity morphisms without extra hypotheses. -/
+/-- The tensor pullback composition mates are associative after passage to homotopy. -/
 theorem tensorPullback_homotopy_comp_assoc
     (a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive)
     {W X Y Z : Scheme.{u₁}} (h : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)

@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Existence of the canonical strict-local neighbourhood geometry
 
-Source: Stacks Project, Tag 03Q9, first proof paragraph.
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -30,22 +32,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The pullback of the strict henselization is the limit of the small affine
 neighbourhood pullbacks, with qcqs stages and affine transition morphisms.
-This supplies only geometry, with no derived sheaves, cocones or mates.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: lem-weil-pbc-strict-local-neighbourhood-geometry).
-
-Proof: `strictHenselizationAffineBaseChangeCone_exists` supplies the limiting cone over
-exactly the same small affine neighbourhood diagram, with vertex S_(s) ×_S X and
-both specified projection equations. Precompose its legs with pullback symmetry
-from X ×_S S_(s), and transport the limit by the induced cone isomorphism.
-Precomposing each supplied projection equation with that symmetry proves `first`
-and `over`. Each neighbourhood is a spectrum, hence affine, compact and
-quasi-separated. Its stage projection is a base change of f, so Mathlib's
-`QuasiCompact.compactSpace_of_compactSpace` and
-`quasiSeparatedSpace_of_quasiSeparated` prove the two stage properties. Each
-transition is the base change of a map between affine neighbourhoods, so
-`MorphismProperty.pullbackLift_fst_snd` proves that it is affine. No global qcqs
-assumption on X or S is used. -/
+This supplies only geometry, with no derived sheaves, cocones or mates. -/
 theorem nonempty_strictLocalNeighbourhoodGeometry {X S : Scheme.{v}}
     (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :

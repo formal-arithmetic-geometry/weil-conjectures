@@ -13,7 +13,13 @@ import WeilConjectures.AlgebraicGeometry.SerreSectionModuleAction
 
 /-! # SerreSectionModuleConstruction
 
-Intermediate step for finite generation of graded sections. -/
+Intermediate step for finite generation of graded sections.
+
+## References
+
+* [Stacks Project, Tag 01YS](https://stacks.math.columbia.edu/tag/01YS)
+* [Stacks Project, Tag 0AG6](https://stacks.math.columbia.edu/tag/0AG6)
+-/
 
 @[expose] public section
 
@@ -26,20 +32,7 @@ namespace AlgebraicGeometry
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The nonnegative twisted sections carry their canonical internally graded polynomial action.
-No coherence or finiteness is asserted.
-
-Source: Stacks Project, Section 30.14, the graded module in Lemma 01YS(5), and Lemma
-0AG6(4); https://stacks.math.columbia.edu/tag/01YS.
-(blueprint: lem-sc-p1-section-module-construction).
-Proof: take the additive direct sum of the groups Γ(G ⊗ O(n), P), indexed by n ≥ 0.
-A homogeneous polynomial a of degree e sends the n-th summand to the (n+e)-th by
-G ◁ Proj.twistMul n a. Define the action of an arbitrary polynomial by adding the actions
-of its finitely many homogeneous components. Locally, twistMul is multiplication of
-fractions, so it is additive in a, sends 1 to the identity, and its composites are
-multiplication by the product, after the degree equalities are transported. These facts
-prove the module laws. The summand images give the internal integer grading; put zero
-in negative degrees. The inverse of each summand inclusion gives φ. Its definition and
-the homogeneous action give the asserted compatibility, including degree zero. -/
+No coherence or finiteness is asserted. -/
 theorem serreSectionModuleConstruction
     (k : Type u) [Field k]
     (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules)

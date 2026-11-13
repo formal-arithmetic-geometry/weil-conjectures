@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexCechData
 import WeilConjectures.AlgebraicGeometry.PowerTorsionLocalizedShiftHom
 import WeilConjectures.AlgebraicGeometry.RingComplexCechCohomologyPowerTorsion
 
-/-! # Orthogonality of an ordered localization model to localized modules -/
+/-! # Orthogonality of an ordered localization model to localized modules
+
+## References
+
+* [Stacks Project, Tag 0A6R](https://stacks.math.columbia.edu/tag/0A6R)
+-/
 
 @[expose] public section
 
@@ -23,23 +28,6 @@ namespace AlgebraicGeometry
 
 /-- Every shift of an augmented ordered localization model is left orthogonal to a module
 on which an element of the defining ideal acts invertibly.
-Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
-and the localization/restriction adjunction used in the node's finite localization proof.
-(auxiliary; not a blueprint node)
-
-Proof: take a finite generating list for I and append s; it still generates I. Apply
-hT to this list. After inverting s, insert or delete the appended index in each ordered
-subset, with its alternating sign. The resulting homotopy contracts the localized
-ordered complex, including its degree-zero term. Localization is flat and exact, so
-this is also vanishing of derived localization of T. If multiplication by s on M is
-bijective, M has its unique A[1/s]-module structure, with s inverse acting by the inverse
-linear map. The extension/restriction adjunction descends to derived categories because
-both functors are exact for a localization. It identifies maps from each shift of T
-into M[0] with maps from its zero localized object, and hence every such map is zero.
-Evaluation at the unique site object identifies these constructions with ordinary
-modules. Transport across the model isomorphism and across shifts and isomorphisms gives
-exactly the right-orthogonal predicate displayed here. If s=0, M is zero. If I=0,
-only this case is possible; the argument includes the zero ring and repeated generators.
 -/
 theorem ringComplex_cech_localized_orthogonality
     (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]

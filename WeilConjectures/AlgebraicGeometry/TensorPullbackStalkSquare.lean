@@ -15,8 +15,13 @@ import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareCompatibility
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-pullback-stalk-square-assembly).
+## References
+
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
+* [Stacks Project, Tag 0BYJ](https://stacks.math.columbia.edu/tag/0BYJ)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 079R](https://stacks.math.columbia.edu/tag/079R)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
 -/
 
 @[expose] public section
@@ -43,25 +48,7 @@ attribute [local instance] pinnedTensorSquareLeftSummandInstance3
   pinnedTensorSquareLeftSummandInstance4
 
 -- Elaborating the scalar-extension and stalk tensor constructions needs more heartbeats.
-/-- Stalk compatibility of a specified tensor pullback chain map.
-
-Proof: Take sigma as the inverse stalk-total-tensor isomorphism on P and Q.
-For rho, tensor the inverse pullback-stalk comparison on P with the identity
-on the stalk of N, then apply the inverse target stalk-total-tensor isomorphism.
-Check the chain equation degreewise after every total tensor summand injection.
-The hypothesis hχ identifies the summand map with the specified module tensor
-pullback comparison. The tensorStalkIso generator equation and the
-module_pullback_tensor generator equation turn both composites on a pure tensor
-into extension of its first factor to C followed by the stalk of a on its second
-factor. The scalar-extension tensorator has the same pure-tensor formula.
-Pure tensors generate each summand; the coproduct universal property then gives
-equality in each total degree. Naturality of the stalk tensor and pullback
-comparisons makes sigma and rho chain isomorphisms, including the differential
-signs. Arbitrary direct sums, zero rings, zero factors and unbounded complexes
-are included; no derived-category morphisms or K-flatness are used.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), Tag 0BYJ and
-equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB.
-(blueprint: lem-pc-tensor-pullback-stalk-square-assembly). -/
+/-- Stalk compatibility of a specified tensor pullback chain map. -/
 theorem exists_tensor_pullback_stalk_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

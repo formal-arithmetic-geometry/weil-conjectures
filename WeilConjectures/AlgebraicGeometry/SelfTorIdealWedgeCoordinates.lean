@@ -23,8 +23,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-! # Normalized self-Tor coordinates on wedges of affine ideal sections
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e3-self-tor-ideal-wedge-coordinates). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -239,32 +243,7 @@ private theorem ideal_wedge_agreement_of_basic
 
 /-- The normalized chart comparisons agree on wedges of ideal sections from the smaller
 ambient affine chart. The entries here must come from the pullback unit; arbitrary
-conormal sections are not included.
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e3-self-tor-ideal-wedge-coordinates).
-
-Proof: On U = Spec A identify the closed chart with Spec(A/I). Choose a projective
-resolution of A/I with its augmentation and sheafify it using
-exists_affine_quotient_sheafified_resolution. The bounded-above flat cochain complex is
-K-flat, so comparison with the fixed derived tensor identifies its quotient-tensored
-homology with Q on the closed chart. The quotient ideal annihilates this homology,
-which gives the target coordinates. For the source coordinates apply
-affineOpen_kernel_conormal_sections with identity ring coordinates: each ideal section
-maps to its conormal class under the pullback unit. Exterior powers and open restriction
-then give the source coordinates. Make these choices on every chart.
-For V contained in U, cover V by principal opens of U contained in V and refine by
-principal opens of V. Localize both augmented resolutions on each refinement; flat
-localization preserves homology. The tuple b is a tuple of actual ideal sections on V,
-so its restrictions give the same ideal elements in both localized coordinates.
-Lift its Koszul augmentation to the projective resolutions. The normalization of
-selfTorConormalComparison identifies the image of the wedge cycle with the algebraic
-comparison on its conormal classes. Resolution comparison and homotopy independence
-identify these homology classes in Q. The source coordinates preserve the unit, hence
-the two chart maps have equal values on the displayed wedge on every refinement.
-Separatedness of Q gives equality on the full inverse image of V. There is no need to
-lift arbitrary conormal sections here. In degree zero the cycle is the quotient unit;
-the empty chart and the zero quotient give the unique section. No regularity or Koszul
-acyclicity is assumed. -/
+conormal sections are not included. -/
 theorem exists_ideal_wedge_selfTor_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

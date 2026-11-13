@@ -19,8 +19,10 @@ import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 /-!
 # Invertible Jacobian presentations near regular closed points
 
-Source: Stacks Project, Algebra, Lemmas 00TV and 00TS; standard smooth presentations.
-(blueprint: lem-weil-pbc-regular-maximal-jacobian-presentation).
+## References
+
+* [Stacks Project, Tag 00TV](https://stacks.math.columbia.edu/tag/00TV)
+* [Stacks Project, Tag 00TS](https://stacks.math.columbia.edu/tag/00TS)
 -/
 
 @[expose] public section
@@ -32,23 +34,7 @@ namespace Algebra
 set_option linter.unusedVariables false in
 /-- A regular closed point has a principal neighbourhood with an explicit polynomial
 presentation and an invertible Jacobian minor. This statement concerns equations and
-an algebra isomorphism; it does not assert smoothness.
-Source: Stacks Project, Algebra, Lemma 00TV (regular points with separable residue field)
-and Lemma 00TS, implication (1) => (4) (standard smooth neighbourhood).
-(blueprint: lem-weil-pbc-regular-maximal-jacobian-presentation).
-
-Proof: The source library proves smoothness at a regular closed point over an
-algebraically closed field, using independent kernel generators of a regular local
-quotient and the cotangent-complex criterion. Mathlib then supplies a principal
-standard smooth neighbourhood, hence a finite submersive presentation. Reindex its
-variables by `Fin n`. Order its relation indices by their injective selection of
-variables and enumerate this finite order increasingly by `Fin c`; reindexing the
-relations now gives a strictly increasing variable selection. The presentation's
-quotient equivalence identifies the quotient image of its Jacobian with its unit
-Jacobian in the localized algebra. Its Jacobian matrix is the transpose of the matrix
-in the statement, so their determinants coincide. All finite enumerations and the
-transpose identity also apply to empty index types. The scoped linter option retains
-the original, intentionally unused existential isomorphism binder `e`. -/
+an algebra isomorphism; it does not assert smoothness. -/
 theorem exists_jacobian_unit_presentation_of_regularAtMaximal
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [IsAlgClosed k] [Algebra.FiniteType k S]

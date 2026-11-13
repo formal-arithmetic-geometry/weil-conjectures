@@ -12,8 +12,10 @@ public import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Extension by zero for abelian Zariski sheaves
 
-Source: literature/stacks-project/sites-modules.tex, Lemma 03DI and Definition 04IX;
-blueprint: lem-weil-pbc-zariski-extension-by-zero-adjunction.
+## References
+
+* [Stacks Project, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks Project, Tag 04IX](https://stacks.math.columbia.edu/tag/04IX)
 -/
 
 @[expose] public section
@@ -27,10 +29,8 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- The presheaf extension by zero and its sheafification give an additive left adjoint
 from abelian sheaves on an open Zariski subspace to abelian sheaves on the ambient scheme.
-Source: Stacks Project, Modules on Sites, Lemma 03DI
-(blueprint: lem-weil-pbc-zariski-extension-by-zero-adjunction).
 
-The presheaf `P F` is sectionwise `F W` on opens `W ≤ U` and zero otherwise.  The
+The presheaf `P F` is sectionwise `F W` on opens `W ≤ U` and zero otherwise. The
 maps `θ F` satisfy the universal property of sheafification, and the displayed
 adjunction is the map induced by composition with `θ F`, natural in both sheaves.
 -/

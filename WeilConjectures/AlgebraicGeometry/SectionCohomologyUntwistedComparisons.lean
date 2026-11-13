@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Untwisted comparison with raw section cohomology
 
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-section-cohomology-untwisted-comparisons).
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -360,30 +362,8 @@ private theorem rawOpenIso_restriction {X T : Scheme.{u}}
 /-- Derived sections of the restricted coefficient sheaf agree with raw section
 cohomology, preserving restriction and the action of every function on the base open.
 
-Source: Stacks Project, Tag 01E4, Lemma 20.7.3 (section-complex computation), and
-Tag 01E1 (restriction of injectives). This is the untwisted part of the proof of
-`sectionCohomology_unit_comparisons`.
-(blueprint: lem-pc-section-cohomology-untwisted-comparisons).
-
-Proof: Restrict I termwise to Y = f inverse W. Exact restriction preserves
-injectives, so the restricted augmented complex resolves G. The sectionwise
-restrictAppIso identifies sections of this resolution on the top open with I
-on f inverse W, hence with (f_* I)(W). The image of U in X is assumed to
-be f inverse V. The same restrictAppIso therefore identifies sections on U
-with (f_* I)(V). Apply isoRightDerivedObj for this one restricted resolution
-and commute exact evaluation and scalar forgetting with homology. These
-isomorphisms yield t and e. Naturality of isoRightDerivedObj for the section
-restriction transformation, followed by naturality of mapHomologyIso, gives
-the restriction equation. For any r in Gamma(T,W), the displayed coefficient
-endomorphism is multiplication by the pullback of r: evaluate the inverse
-right unitor, the tensor morphism and the right unitor on elementary tensors.
-Lift this endomorphism to the restricted resolution using multiplication by
-the same pullback in every degree; its augmentation square commutes by
-linearity. Naturality of isoRightDerivedObj and the degreewise semilinear
-section comparisons, proved by naturality of the pullback and linearity, identify its action
-with multiplication by r restricted to V. This proves the scalar equation.
-All maps exist for empty opens and zero sheaves; no invertibility of r
-is used, and degree zero uses the same augmented resolution comparison. -/
+ This is the untwisted part of the proof of
+`sectionCohomology_unit_comparisons`.. -/
 theorem sectionCohomology_untwisted_comparisons {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F)
     (q : ℕ) (W V : T.Opens) (hV : V ≤ W) :

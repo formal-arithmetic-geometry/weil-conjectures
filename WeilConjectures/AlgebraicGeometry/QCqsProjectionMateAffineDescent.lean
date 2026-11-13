@@ -17,8 +17,9 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Affine descent for supplied derived projection mates
 
-Source: Stacks Project, Tag 08EU, local reduction of the projection formula.
-(blueprint: lem-pc-qcqs-projection-mate-affine-descent).
+## References
+
+* [Stacks Project, Tag 08EU](https://stacks.math.columbia.edu/tag/08EU)
 -/
 
 @[expose] public section
@@ -27,29 +28,7 @@ universe u w
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- The projection-mate theorem for affine targets implies its global case.
-Source: Stacks Project, Tag 08EU, first sentence of the proof.
-(blueprint: lem-pc-qcqs-projection-mate-affine-descent).
-
-Proof: cover Y by affine opens V, each identified with Spec Gamma(V,O).
-The inverse image U is quasi-compact since f is quasi-compact and V is affine,
-and it is quasi-separated since X is quasi-separated. Restriction is exact
-and is a localization whose derived direct-image right adjoint is fully
-faithful. Pullback and tensor commute with open restriction and direct image
-commutes with restriction on the target. Thus both bifunctors compared by t
-factor through these localizations. Evaluate t on the fully faithful right
-adjoints and use the invertible localization counits to descend the supplied
-tensor comparison. Transport the supplied adjunction by the same procedure.
-The restricted displayed Hom-equivalence mate is precisely this transported
-mate, by the counit formula for the Hom equivalence. Change chosen derived
-localizations to standard ones by their canonical localization equivalences;
-these equivalences transport the K-flat tensor, pullback, direct image, t and
-p. Transport also across V isomorphic to Spec Gamma(V,O). Apply haffine and
-reflect invertibility through these equivalences. Restriction preserves
-quasi-coherent cohomology. Finally exact restriction commutes with cohomology,
-and isomorphisms of cohomology sheaves are detected on the affine open cover,
-so the original mate is invertible. For empty Y the cover is empty and all
-cohomology sheaves are zero, giving the same conclusion. -/
+/-- The projection-mate theorem for affine targets implies its global case. -/
 theorem qcqsProjectionMate_of_affine
     (haffine : ∀ (A : Type u) [CommRing A] (Z : Scheme.{u})
       [CompactSpace Z] [QuasiSeparatedSpace Z]

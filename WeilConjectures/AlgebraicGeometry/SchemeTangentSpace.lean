@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.TangentMapLinear
 /-!
 # Tangent spaces at arbitrary points of schemes over a field
 
-Source: Stacks Project, Tags 0B2B, 0B2C and 0B2F, with base `Spec k`
-(blueprint: def-sc-scheme-tangent-space).
-
 ## Main definitions
 
 * `schemeTangentSpace`: dual-number morphisms over the base with the prescribed closed point.
@@ -21,6 +18,12 @@ Source: Stacks Project, Tags 0B2B, 0B2C and 0B2F, with base `Spec k`
   structure supplied by `exists_tangentVectors_vectorSpace`, with its specified operations.
 * `schemeTangentMap`: the linear map supplied by `exists_tangentMap_linear`, given by
   postcomposition after the residue fields are identified.
+
+## References
+
+* [Stacks Project, Tag 0B2B](https://stacks.math.columbia.edu/tag/0B2B)
+* [Stacks Project, Tag 0B2C](https://stacks.math.columbia.edu/tag/0B2C)
+* [Stacks Project, Tag 0B2F](https://stacks.math.columbia.edu/tag/0B2F)
 -/
 
 @[expose] public section
@@ -32,8 +35,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Tangent vectors at `x` are morphisms from the residue-field dual-number spectrum to `X`
-restricting to the canonical point and commuting with the structure morphism to `Spec k`.
-Source: Stacks Project, Tag 0B2C (blueprint: def-sc-scheme-tangent-space). -/
+restricting to the canonical point and commuting with the structure morphism to `Spec k`. -/
 def schemeTangentSpace (k : Type u) [Field k] (X : Scheme.{u})
     (p : X ⟶ Spec (.of k)) (x : X) : Type u :=
   let K := X.residueField x
@@ -44,16 +46,14 @@ def schemeTangentSpace (k : Type u) [Field k] (X : Scheme.{u})
 
 /-- The additive group of tangent vectors is selected from the vector-space existence lemma.
 Its zero is the constant point morphism; its addition is gluing along the common closed point,
-followed by the map sending both square-zero coordinates to epsilon.
-Source: Stacks Project, Tag 0B2B (blueprint: def-sc-scheme-tangent-space). -/
+followed by the map sending both square-zero coordinates to epsilon. -/
 noncomputable instance schemeTangentSpaceAddCommGroup
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     AddCommGroup (schemeTangentSpace k X p x) :=
   Classical.choose (exists_tangentVectors_vectorSpace k X p x).2.2.2
 
 /-- The canonical residue-field module structure, selected together with its additive group.
-Multiplication by `t` is precomposition with the spectrum of the map epsilon to `t * epsilon`.
-Source: Stacks Project, Tag 0B2B (blueprint: def-sc-scheme-tangent-space). -/
+Multiplication by `t` is precomposition with the spectrum of the map epsilon to `t * epsilon`. -/
 noncomputable instance schemeTangentSpaceModule
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     Module (X.residueField x) (schemeTangentSpace k X p x) :=
@@ -63,8 +63,7 @@ noncomputable instance schemeTangentSpaceModule
 /-- The differential of a morphism over `k` with bijective induced residue-field map.
 The target scalar action is transported by the inverse residue-field isomorphism. The chosen
 linear map has value `d ≫ θ.val ≫ f`, where `d` is the induced identification of dual-number
-spectra. This is postcomposition with `f` under the identification of the two residue fields.
-Source: Stacks Project, Tag 0B2F (blueprint: def-sc-scheme-tangent-space). -/
+spectra. This is postcomposition with `f` under the identification of the two residue fields. -/
 noncomputable def schemeTangentMap
     (k : Type u) [Field k] (X Y : Scheme.{u})
     (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k))

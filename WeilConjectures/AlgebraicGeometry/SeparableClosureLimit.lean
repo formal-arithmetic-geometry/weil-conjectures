@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPu
 
 Let `k` be a field with separable closure `kˢᵉᵖ`. The field `kˢᵉᵖ` is the filtered colimit of
 its finite subextensions `L` (`AlgebraicGeometry.Scheme.isColimitSepFiniteSubfieldCocone`), so
-for a `k`-scheme `t : Z ⟶ Spec k` the base change `Z ×_k kˢᵉᵖ` is the cofiltered limit of the
+for a `k`-scheme `t: Z ⟶ Spec k` the base change `Z ×_k kˢᵉᵖ` is the cofiltered limit of the
 base changes `Z ×_k L`, as schemes over `Z`
 (`AlgebraicGeometry.Scheme.isLimitSepFiniteSubfieldOverCone`). The transition morphisms are
 affine.

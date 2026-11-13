@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.SmoothAtPrimeArtinianLifting
 /-!
 # Artinian lifting criterion for smoothness at a point
 
-Source: Stacks Project, More on Morphisms, Lemma 02HX, (1) iff (3), and Algebra,
-Definition 02HS (blueprint: lem-weil-pbc-smooth-artinian-lifting-at-point).
+## References
+
+* [Stacks Project, Tag 02HX](https://stacks.math.columbia.edu/tag/02HX)
+* [Stacks Project, Tag 02HS](https://stacks.math.columbia.edu/tag/02HS)
 -/
 
 @[expose] public section
@@ -166,24 +168,18 @@ private lemma artinian_tests_spec_iff {R A : Type u} [CommRing R] [CommRing A]
     · rw [← Spec.map_comp]
       exact congrArg (fun ψ ↦ Spec.map (CommRingCat.ofHom ψ)) hρ
 
-/-- Source: Stacks Project, More on Morphisms, Lemma 02HX, (1) iff (3), with small
-extensions as in Algebra, Definition 02HS
-(blueprint: lem-weil-pbc-smooth-artinian-lifting-at-point).
-
-A locally finite type morphism over a locally Noetherian scheme is smooth on a
+/-- A locally finite type morphism over a locally Noetherian scheme is smooth on a
 neighbourhood of `x` iff every compatible diagram at `x` lifts along each surjection
 of Artinian local rings whose kernel has module length one. The consequences
 that the kernel is a residue-field module and is square zero are not extra hypotheses.
 
 Proof, following the five steps of the blueprint node:
 1. Choose affine neighbourhoods `V = Spec R` of `f(x)` and `U = Spec A` of `x`
-   with `f(U)` contained in `V`. Local Noetherianity (pqf-def-locnoeth) makes `R`
-   Noetherian, and local finite type (def-weil-finite-type-morphism) makes `A`
-   finite type over `R`. Factor the restriction through `V`
-   (lem-weil-pbc-morphism-factors-through-open-subscheme).
-2. Both test spectra have a unique point
-   (lem-weil-pbc-artinian-local-unique-prime), so the test maps factor through `U`
-   and `V`. The affine spectrum correspondence (def-weil-affine-spectrum)
+   with `f(U)` contained in `V`. Local Noetherianity makes `R`
+   Noetherian, and local finite type makes `A`
+   finite type over `R`. Factor the restriction through `V`.
+2. Both test spectra have a unique point, so the test maps factor through `U`
+   and `V`. The affine spectrum correspondence
    identifies their commutative square with a commutative square of ring maps,
    with the maximal ideal pulling back to the prime corresponding to `x`.
    Cancel the open inclusion using lem-weil-pbc-open-immersion-monomorphism.
@@ -191,7 +187,7 @@ Proof, following the five steps of the blueprint node:
    and cancellation identify scheme lifts with ring lifts, giving exactly the
    test condition of lem-weil-pbc-smooth-at-prime-artinian-lifting.
 4. Restriction to open subschemes, composition with their inclusions, and
-   invariance under isomorphism (lem-weil-pbc-smooth-restrict-open-subschemes)
+   invariance under isomorphism
    identify smoothness on a neighbourhood of `x` with smoothness on a
    neighbourhood of the corresponding prime of `A`.
 5. Apply lem-weil-pbc-smooth-at-prime-artinian-lifting to the Noetherian ring `R`

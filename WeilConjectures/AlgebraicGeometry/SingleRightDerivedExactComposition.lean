@@ -12,8 +12,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical single comparison under exact postcomposition
 
-Source: Stacks Project, Tag 0AVW, canonical affine factorization.
-(blueprint: lem-sc-single-right-derived-exact-composition).
+## References
+
+* [Stacks Project, Tag 0AVW](https://stacks.math.columbia.edu/tag/0AVW)
 -/
 
 @[expose] public section
@@ -30,17 +31,7 @@ variable {C : Type uC} {A : Type uA} {B : Type uB}
   [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wA} A]
   [HasDerivedCategory.{wB} B] [HasKInjectiveResolutions C]
 
-/-- The canonical single-to-right-derived comparison commutes with exact postcomposition.
-Source: Stacks Project, Tag 0AVW, canonical factorization of affine pushforward
-(blueprint: lem-sc-single-right-derived-exact-composition).
-
-Proof: Expand the comparison for the composite right-derived functor. Uniqueness of
-right derived functors identifies its composite with the composite of the two units.
-Postcomposing the second unit with its exact-functor comparison gives the inverse
-localization comparison. Naturality of that comparison moves the inverse single map
-through it. The termwise single comparisons compose, leaving the canonical single
-comparison for F followed by T. This is an equality of canonical maps, valid also for
-zero objects and zero functors. -/
+/-- The canonical single-to-right-derived comparison commutes with exact postcomposition. -/
 theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
     [F.Additive] [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]
     (M : C) :

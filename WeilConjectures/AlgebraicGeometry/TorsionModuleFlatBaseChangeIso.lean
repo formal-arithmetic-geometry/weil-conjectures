@@ -18,8 +18,9 @@ set_option autoImplicit false
 
 /-! # I-power torsion modules and flat base change
 
-Source: Stacks Project, More on Algebra, Lemma 05E9 (implication (2) => (1))
-(blueprint: lem-weil-pbc-torsion-module-flat-base-change-iso).
+## References
+
+* [Stacks Project, Tag 05E9](https://stacks.math.columbia.edu/tag/05E9)
 -/
 
 open scoped TensorProduct
@@ -100,7 +101,7 @@ private theorem killedModule_baseChange_bijective
 preserves every module whose elements are killed by powers of that ideal.
 The proof follows Lemma 05E9: the case killed by `I`, induction through
 `I ^ n M`, and passage to the directed union of the bounded torsion parts.
-- (blueprint: lem-weil-pbc-torsion-module-flat-base-change-iso)
+-
 - Proof source: Stacks Project, More on Algebra, Lemma 05E9, lines 24277--24298;
   it uses only flatness, tensor right exactness and colimit compatibility.
 -/

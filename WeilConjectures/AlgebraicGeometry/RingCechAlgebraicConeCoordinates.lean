@@ -9,8 +9,11 @@ import WeilConjectures.AlgebraicGeometry.RingCechConeDifferential
 
 /-! # Ordered localization coordinates for an algebraic two-row cone
 
-Source: Stacks Project, more-algebra.tex, section-alternating-cech.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0996](https://stacks.math.columbia.edu/tag/0996)
 -/
 
 @[expose] public noncomputable section
@@ -22,29 +25,8 @@ namespace CategoryTheory
 /-- The algebraic cone of localization has the full ordered-subset coordinates.
 This statement involves only modules, linear maps and localizations; it does not
 involve a site, a sheaf tensor product or a totalization.
-Source: Stacks Project, more-algebra.tex, section-alternating-cech, its differential
-formula and localization base change; algebraization.tex, Tag 0996.
-(auxiliary; not a blueprint node).
 
-Proof: partition increasing nonempty subsets by whether their first element is zero.
-Subsets avoiding zero give the first factor M(q+1). Subsets containing zero give
-the second factor S tensor M(q). For q=0 use S tensor A = S; for q>0 distribute
-tensor over the finite coordinate product and use
-A[1/f(0)] tensor A[1/g] = A[1/(f(0)*g)]. Multiplication gives this isomorphism;
-its inverse on a fraction a/(f(0)*g)^k is (1/f(0)^k) tensor (a/g^k).
-Localization uniqueness proves the inverse identities. Product reassociation then
-gives E. For each face choose the unique A-algebra localization map; the omitted
-product divides the full product, so its image is invertible there.
-The first block formula is diagonal localization. For the later formula, a target
-subset avoiding zero has exactly the tail differential. For a subset containing
-zero, its zero-deletion face is the image of u under 1 tensor -, with positive
-sign. Every other deletion is a tail face with deletion index one smaller, so
-its sign is minus the tail sign, exactly the second block - (1 tensor d)v.
-Check the equality first on pure tensors, then use tensor induction and linearity.
-The localization maps supplied in the hypotheses equal the canonical maps by
-localization uniqueness. Empty coordinate products are zero modules. The argument
-uses invertibility only in localization rings and holds for zero and repeated
-generators, the zero ring and r=0. -/
+. -/
 theorem ringCechAlgebraicCone_coordinates (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A)
     (d : ∀ n : ℕ, ringCechTailTerm A r (fun i ↦ f i.succ) n →ₗ[A]

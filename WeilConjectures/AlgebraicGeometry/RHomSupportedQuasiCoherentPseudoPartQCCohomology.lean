@@ -18,7 +18,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 
 The degreewise calculation behind the quasi-coherence clause of the pseudo-coherent
 internal-Hom lemma: locally, each cohomology sheaf of the Hom complex is computed by a
-truncation of a bounded-above finite free model (Stacks Project, Tag 0A6H, clause (1)). -/
+truncation of a bounded-above finite free model (Stacks Project, Tag 0A6H, clause (1)).
+
+## References
+
+* [Stacks Project, Tag 0A6H](https://stacks.math.columbia.edu/tag/0A6H)
+-/
 
 @[expose] public section
 
@@ -128,19 +133,7 @@ private theorem homComplex_trunc_homology_isIso
     hmid (show Mono (f.f ((ComplexShape.up ℤ).next n)) from inferInstance)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The degreewise quasi-coherence calculation for RHom from a pseudo-coherent complex.
-
-Source: Stacks Project, Tag 0A6H, clause (1), affine-local finite-free calculation.
-Proof: choose the local bounded-above finite-free model P supplied by pseudo-coherence.
-Restriction preserves the lower bound and quasi-coherent cohomology of L. Represent its
-restriction by a bounded-below K-injective complex I with quasi-coherent cohomology.
-If I vanishes below m, cutting P below m - n - 1 changes no Hom factors in degrees
-n - 1, n, n + 1: discarded factors have zero target. The product universal properties
-make the comparison an isomorphism in these three degrees, hence on H^n. The truncated
-source is a bounded finite-free complex, so finiteFree_homComplex_qc_cohomology applies.
-The K-injective RHom computation and restriction comparison identify this with the
-restriction of the desired cohomology sheaf. Quasi-coherence glues along the chosen cover.
-(blueprint: new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc-cohomology). -/
+/-- The degreewise quasi-coherence calculation for RHom from a pseudo-coherent complex. -/
 theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

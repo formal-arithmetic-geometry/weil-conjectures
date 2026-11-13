@@ -18,8 +18,11 @@ import WeilConjectures.AlgebraicGeometry.TensorStalkChainCoordinates
 
 /-! # Tensor compatibility of a fixed stalk chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-stalk-fixed-map-square).
+## References
+
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
+* [Stacks Project, Tag 0BYJ](https://stacks.math.columbia.edu/tag/0BYJ)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
 -/
 
 @[expose] public section
@@ -149,30 +152,7 @@ private theorem coordinates_comparison_transport
       rfl
 
 
-/-- Tensor comparison for the fixed chain map induced by the coordinates c.
-
-Proof: take the total tensor of the K-flat sheaf complexes P and c.P.
-The localization tensor map identifies its derived object with E tensor K via
-eP and c.e. The stalk tensor isomorphism identifies its stalk with U tensor Q.
-The canonical pullback tensor equation in hτ identifies the pullback of this
-representative with the tensor of the two termwise pullbacks, using the shared
-counit. Compose with tensoring c.t. The represents equation of c and naturality
-of τ show that this chain map represents τ followed by tensoring φ.
-The pullback-stalk isomorphisms and tensor associativity identify its stalk map
-with the inverse scalar-extension tensorator followed by tensoring t. This
-identification is fixed on each tensor summand by the canonical module maps.
-Exact stalks and derived cohomology supply the target isomorphism to d.N through
-this representation and d.represents. The source isomorphism is induced by the
-derived isomorphism from P tensor c.P to d.P; its A-tensor-R-B linearity follows
-from the model's cohomologyIso_smul equation. The universal derived scalar-extension
-counits make the source isomorphism compatible with comparison_eq; localized_eq
-transposes the equality to C-linear maps. Naturality of comparison into pullback
-for derived isomorphisms yields the displayed square for arbitrary d.
-No horizontal comparison is assumed invertible. The construction uses unbounded
-K-flat representatives; zero complexes and zero rings cause no exception.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), the tensor-transitivity computation
-of Tag 0BYJ, with equation-bc before Tag 0DJ8 and the canonical tensor equation.
-(blueprint: lem-pc-tensor-stalk-fixed-map-square). -/
+/-- Tensor comparison for the fixed chain map induced by the coordinates c. -/
 theorem tensorStalkComparison_fixedMap_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

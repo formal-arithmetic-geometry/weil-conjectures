@@ -15,8 +15,12 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomolog
 
 /-! # Bounded projective models of closed-pushforward stalks
 
-Source: Stacks Project, Tags 00AE, 01AG, 08C4 and 08CM.
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-model).
+## References
+
+* [Stacks Project, Tag 00AE](https://stacks.math.columbia.edu/tag/00AE)
+* [Stacks Project, Tag 01AG](https://stacks.math.columbia.edu/tag/01AG)
+* [Stacks Project, Tag 08C4](https://stacks.math.columbia.edu/tag/08C4)
+* [Stacks Project, Tag 08CM](https://stacks.math.columbia.edu/tag/08CM)
 -/
 
 @[expose] public section
@@ -29,28 +33,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Taking stalks of a local strictly perfect model gives a bounded complex of projectives
-with the homology of the restricted source stalk in degree zero.
-
-Source: Stacks Project, Sheaves Tag 00AE, Modules Tag 01AG, and Cohomology of Sheaves
-Tags 08C4 and 08CM; steps 1 and 2 of the stalk-resolution argument.
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-model).
-
-Proof. Regard the site over U as the open-subspace site and take the stalk at i(x).
-The cofinality of neighbourhoods contained in U identifies the stalk rings and the
-stalks of restricted sheaves with those on Y. Apply this stalk functor termwise to K.
-It preserves zero objects, so the bounds a and b for K are also bounds for its stalk
-complex L. It preserves finite coproducts: the germs of the standard generators
-identify the stalk of the rank-m free sheaf with the free stalk module of rank m.
-Applying the stalk functor to each finite-free retraction for K gives a retraction
-of this free module onto L in that degree. A retract of a projective is projective.
-By exactness of module stalks (Tag 01AG), this functor preserves homology and
-quasi-isomorphisms and descends to the derived localization. Apply it to e. The
-localized degree-zero sheaf has stalk in degree zero and no other homology.
-Tag 00AE identifies the pushforward stalk at i(x) with the source stalk; its germ
-map is linear through i.stalkMap x. For the unit sheaf the source stalk is its
-stalk ring with the regular module structure. These identifications give the
-stated degree-zero isomorphism; all other homology objects are zero. No
-truncation, tail splitting or augmented resolution is asserted here. -/
+with the homology of the restricted source stalk in degree zero. -/
 theorem strictPerfectClosedPushforward_stalkModel
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

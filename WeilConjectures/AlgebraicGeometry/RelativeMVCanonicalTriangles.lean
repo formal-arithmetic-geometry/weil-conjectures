@@ -16,7 +16,12 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSquares
 
 /-! # Canonically identified relative Mayer--Vietoris triangles
 
-Source: Stacks Project, Tag 0DJ9, induction step, and Tags 08BV, 08HZ and 08HY.
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -33,36 +38,7 @@ namespace AlgebraicGeometry
 /-- Construct the two relative Mayer--Vietoris triangles with their open terms
 identified by the canonical composition comparisons, and construct the morphism
 whose components are exactly the given global and local base-change composites.
-No local isomorphism hypothesis or global isomorphism conclusion is assumed.
-
-Source: Stacks Project, Tag 0DJ9, induction diagram; Cohomology, Tags 08BV, 08HZ and 08HY
-(blueprint: lem-pc-relative-mv-canonical-triangles).
-Proof:
-1. The sources X and X' are qcqs: f and its base change are qcqs over affine
-bases. The morphism g is affine, so g' is affine; inverse images of the three
-quasi-compact opens are quasi-compact and cover X'. Construct the Mayer--Vietoris
-triangles for K and K' using Tag 08BV.
-2. Apply the triangulated functors Lg* Rf* and Rf'* respectively. Identify every
-open term with the direct image along W → S or W' → S', using the composition
-isomorphisms which are mates of the canonical derived pullback comparisons.
-The pullback of W.ι is canonically the inverse-image open. Exact restriction
-along an open immersion computes its derived pullback; use its canonical derived
-comparison, rather than an arbitrary witness of existence of an isomorphism.
-Transport both triangles, including their connecting arrows, along these
-identifications. Additive functors identify the two middle terms with biproducts.
-3. Transpose φ to K → Rg'*K'. Functoriality of the Mayer--Vietoris triangle and
-its compatibility with direct image give a morphism of the two relative
-triangles; transposing back preserves all three commuting squares, including the
-connecting square because the derived adjunction commutes with shift. On an open
-W, the mates calculation of Tag 08HY identifies the component with the base-change
-map for the outer square followed by the restriction of φ. Expand the counit of
-the composite adjunction into its two counits; their triangle identities give
-vertical pasting. The two composition comparisons for g' and W.ι, with the
-pullback equality between their composites, give precisely the displayed local
-map. Naturality identifies the middle component with biprod.map of the U and V
-components. The first component is the displayed global map.
-The empty-open and zero-complex cases are the same construction with zero terms;
-no nonempty or nonzero hypothesis is needed. -/
+No local isomorphism hypothesis or global isomorphism conclusion is assumed. -/
 theorem relativeMV_canonicalTriangles
     [∀ Z : Scheme.{um},
       HasDerivedCategory.{wm} (SheafOfModules.{um} (moduleRings Z.toRingedSpace))]

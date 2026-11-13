@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw
 
 /-! # Explicit maps for restricted degree-zero complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 03CB](https://stacks.math.columbia.edu/tag/03CB)
 -/
 
 @[expose] public section
@@ -23,22 +27,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- The explicit restricted transitions satisfy the unit and composition laws.
-Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object),
-and the inverse-image composition comparisons of Tag 03CB.
-(blueprint: lem-sbc-restricted-affine-single-transition-laws).
-
-Proof: The pullback projection identity identifies the composite of the restricted
-map with the stage second projection with the limit second projection followed by
-the original map. Expand rawAffineRestrictedCoefficient. For the identity, substitute
-D.map_id and the given coefficient identity law; the two unit laws of upperStarComp
-cancel the composition comparisons. For two arrows, substitute D.map_comp and the
-coefficient composition law. Apply upperStarComp_assoc to each of the two triangles
-of second projections, and naturality to move the coefficient maps through the
-comparisons. Cancel adjacent inverse comparisons. Apply the degree-zero single
-functor. Its inverse-image comparison is natural, and is compatible with identity
-and composition termwise: in degree zero it is the identity comparison, and in all
-other degrees both complexes are zero. This gives exactly the displayed laws. -/
+/-- The explicit restricted transitions satisfy the unit and composition laws. -/
 theorem restrictedAffineSingleTransition_laws {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

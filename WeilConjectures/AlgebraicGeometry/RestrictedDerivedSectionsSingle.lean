@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionZeroComp
 
 /-! # Unshifted single comparison before restricted section homology
 
-Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-sections-single).
+## References
+
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 0D6F](https://stacks.math.columbia.edu/tag/0D6F)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -299,21 +302,7 @@ end SingleCompatibility
 
 -- Restriction comparisons contain several large sheaf functors.
 /-- On unshifted singles, the restriction and single comparisons give the explicit
-complex pullback and coefficient map, before applying any homology functor.
-Source: Stacks Project, Tags 07A6, 0D6F and 03Q8.
-(blueprint: lem-sbc-restricted-derived-sections-single).
-
-Proof: Factor the exact inverse-image single comparisons through localization Q.
-Check compatibility with composition and natural isomorphisms on the actual single
-complex: degree zero gives identities and the underived comparison, and every other
-degree has zero target. Apply Q and its factorization laws to obtain the derived
-square identity. Naturality of the single comparison incorporates the arbitrary
-coefficient map. Apply derived global sections and move the source single comparison
-past derivedSectionPullback by naturality; its unit and Leray construction need not
-be expanded. The Plus inclusion identifies the bounded-below single comparison with
-the same comparison in the full derived category. No coefficient is assumed
-invertible; zero sheaves and empty schemes satisfy the same identities. No shift or
-homology comparison is used. -/
+complex pullback and coefficient map, before applying any homology functor. -/
 theorem restrictedDerivedSections_single {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

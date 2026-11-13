@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.RingPointTensorComparison
 
 /-! # Evaluated blocks of tensoring with one localization complex
 
-Source: Stacks Project, algebraization.tex, Tag 0996; the two-term tensor calculation.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0996](https://stacks.math.columbia.edu/tag/0996)
 -/
 
 @[expose] public noncomputable section
@@ -387,26 +390,8 @@ private theorem rowZeroInclusion_aug (K : CochainComplex (RingSiteModules A) ℤ
 end LocalizationRows
 
 /-- Evaluation of the two nonzero rows of a localization tensor total.
-Source: Stacks Project, algebraization.tex, Tag 0996, tensor presentation of the
-extended complex, and the tensor differential convention of More on Algebra,
-section-alternating-cech.
-(auxiliary; not a blueprint node).
 
-Proof: on the one-object bottom-topology site every presheaf is a sheaf.
-The unit of sheafification and the sectionwise tensor comparison are therefore
-isomorphisms. Identify the evaluated degree-zero term of the first factor with A,
-and its degree-one term with S=A[1/s]. The coproduct defining the tensor total has
-only these two possibly nonzero summands. The coproduct universal property,
-the unit isomorphism A tensor M = M, and the evaluated tensor comparison give c.
-In degree zero the second summand is S tensor K^{-1}=0, by hneg, giving z.
-The tensor augmentation restricts to the tail augmentation on the first row
-and is zero on the second row; this proves the augmentation equation.
-For the differential use the inclusion formula for the total tensor differential:
-on row zero it is d_K together with localization, which evaluates to x maps to
-1 tensor x; on row one it is minus 1 tensor d_K, since (-1)^1=-1.
-There is no row-two term. These formulas give the two displayed block equations.
-All comparisons use universal properties, so no element or denominator is cancelled;
-the same construction works for s=0 and the zero ring. -/
+. -/
 theorem ringLocalizationTensor_blocks (A : CommRingCat.{u}) (s₀ : A)
     (K : CochainComplex (RingSiteModules A) ℤ) (a : K ⟶ ringComplexSingle A)
     (hneg : ∀ n : ℤ, n < 0 → Limits.IsZero (K.X n)) :

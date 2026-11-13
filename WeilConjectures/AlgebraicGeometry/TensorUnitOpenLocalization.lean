@@ -14,8 +14,10 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Localization of the tensor-pullback unit on an open set
 
-Source: Stacks Project, Tags 0096 and 01E8, local degree-zero projection formula.
-(blueprint: lem-sc-tensor-unit-open-localization)
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01E8](https://stacks.math.columbia.edu/tag/01E8)
 -/
 
 @[expose] public section
@@ -183,24 +185,7 @@ private theorem localized_unit_of_invertible_comparison
   simp [a.left_triangle_components M]
 
 /-- The pullback-pushforward functor and its adjunction unit restrict to an
-additive endofunctor and a natural transformation on the open slice site.
-Source: Stacks Project, Tag 0096 (adjunction) and Tag 01E8 (local calculation).
-(blueprint: lem-sc-tensor-unit-open-localization)
-
-Proof: Let R be restriction to U and S its right adjoint, with unit ι and
-counit ε. The counit is invertible: on the slice every W is already contained
-in U, so the map W → U ∩ W is an isomorphism. Put P = tensorPullback p and
-Q = pushforward p. On V = p⁻¹U construct the restricted ring map and its
-pullback/pushforward adjunction PU ⊣ QU. Inverse image preserves intersections;
-naturality of p.c identifies the scalar maps, giving SX ⋙ Q ≅ QU ⋙ S.
-Uniqueness of left adjoints then gives R ⋙ PU ≅ P ⋙ RX. Direct-image restriction
-also gives Q ⋙ R ≅ RX ⋙ QU, definitionally. The triangle identity makes R(ι_M)
-invertible; transporting through these comparisons shows R(Q(P(ι_M))) is
-invertible. Define H = S ⋙ P ⋙ Q ⋙ R, α_N = ε_N⁻¹ ; R(η_(S N)), and θ_M as
-the inverse of R(Q(P(ι_M))). Naturality of η gives the required equation after
-cancelling θ_M⁻¹, since R(ι_M) = ε_(R M)⁻¹ by the triangle identity. Sectionwise
-pushforward and restriction are additive, and adjunction transfers additivity
-to P. Thus H is additive. All constructions apply when U is empty -/
+additive endofunctor and a natural transformation on the open slice site. -/
 theorem tensorPullback_unit_open_localization {X Y : Scheme.{u}} (p : X ⟶ Y)
     (U : Opens Y) :
     ∃ (H : SheafOfModules.{u} (Y.ringCatSheaf.over U) ⥤

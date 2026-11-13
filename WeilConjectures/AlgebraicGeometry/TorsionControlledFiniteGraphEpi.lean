@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 
 /-! # The finite graph of a prescribed formal comparison map
 
-Source: Stacks Project, Tag 0889(1), formal gluing of comparison morphisms.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 05EK](https://stacks.math.columbia.edu/tag/05EK)
 -/
 
 @[expose] public section
@@ -140,22 +143,7 @@ private theorem epi_of_first_quotient_and_power_cokernel {X : Scheme.{u}}
   exact (Preadditive.epi_iff_isZero_cokernel f).mpr
     (isZero_of_first_quotient_and_power J (cokernel f) s hs hcq hp)
 
-/-- The finite graph surjects onto F at every positive depth.
-Source: Stacks Project, Tag 0889(1), affine comparison argument using Tag 05EK.
-Proof: work on an affine open Spec(A), where all coherent sheaves give finite modules.
-The graph is the kernel of the displayed discrepancy on F ×_H F'. Complete over A.
-Completion is flat and exact for finite modules over the Noetherian ring A, so the
-completed graph is this same kernel in the completed pullback. The map
-x ↦ (x, θ(x)) lies in that kernel, by hθ and its level n+1 component; thus the
-completed first projection is surjective. At a prime containing J, Nakayama applied
-to its finite cokernel makes the original projection surjective. At a prime not
-containing J, the power-torsion kernel and cokernel of a' vanish, so a' is an
-isomorphism, the quotient at level n+1 is zero, and the graph projection is an
-isomorphism. These two cases cover Spec(A). Local surjectivity is epimorphy of
-sheaves, giving the global assertion. The zero ideal makes the graph the usual
-graph of θ; the unit ideal makes a' an isomorphism. Zero modules and the empty
-scheme cause no exception.
-(blueprint: lem-weil-pbc-torsion-controlled-finite-graph-epi). -/
+/-- The finite graph surjects onto F at every positive depth. -/
 theorem torsionControlledGraphFst_epi
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceDerivedRestri
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-restriction).
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -25,31 +27,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical cycle comparison identifies the strict-local derived mate with
-restriction along the fixed geometric cone leg.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph; Tag 03Q8.
-(blueprint: lem-weil-pbc-strict-local-injective-source-restriction).
-
-Proof: compute the source direct image on the fixed bounded-below injective complex
-J using the right-derived unit. Represent each source morphism by a Hom-complex
-cocycle; localization into f_*J is bijective because f_*J is K-injective. The
-canonical comparison evaluates that cocycle at the free generator. Applying the
-degree-zero homology germ map before this evaluation gives its homology class,
-with the shift isomorphism putting it in degree n. The defining germ-leg equation
-for the unique strict-henselization stalk restriction takes this class to its
-inverse-image restriction on the strict-local pullback. Q.first and Q.over fix
-both projections of that restriction and identify it with Q.legs.app i.
-On the injective representative, the derived adjunction unit and counit are the
-classes of their termwise units and counits. Expand mateEquiv and the pullback
-comparison. The adjunction triangle identities cancel the intermediate unit and
-counit; its sections map is therefore sectionsPullbackNat along the cone leg,
-followed by upperStarComp.inv. Taking homology gives termwiseSectionsRestriction.
-At the limit the derived-sections unit is retained, rather than inverted, which
-is exactly representativeSectionsComparison after transport by q. Exact inverse
-image commutes with homology. Exact strict-local sections and the Leray comparison
-identify the target by strictLocalBaseChangeTargetIso. These identifications give
-the displayed equation after its inverse. Naturality transports every step from
-J to K. This argument uses neither continuity nor injectivity of the limit
-pullback of J; negative degrees and zero complexes are covered without alteration. -/
+restriction along the fixed geometric cone leg. -/
 theorem strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

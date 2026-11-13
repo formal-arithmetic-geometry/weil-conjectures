@@ -16,9 +16,10 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart
 
 /-! # Quasi-coherence and support of derived internal Hom
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 0A6H (1), (2),
-and the support observation in the proof of Tag 0A9C
-(blueprint: lem-sc-rhom-supported-qcoherent).
+## References
+
+* [Stacks Project, Tag 0A6H](https://stacks.math.columbia.edu/tag/0A6H)
+* [Stacks Project, Tag 0A9C](https://stacks.math.columbia.edu/tag/0A9C)
 -/
 
 @[expose] public section
@@ -34,28 +35,7 @@ object is quasi-coherent and locally bounded below; from a perfect source into a
 quasi-coherent object it is quasi-coherent. In both cases it preserves support on a closed
 subset in the second variable. Local boundedness means that each point has a neighbourhood
 on which all cohomology sheaves below some integer vanish. Support means that every
-cohomology sheaf restricts to zero on the open complement.
-
-Source: Stacks Project, Tag 0A6H (1), (2), and Tag 0A9C, proof
-(blueprint: lem-sc-rhom-supported-qcoherent).
-
-Proof:
-1. By def-pur-pseudo-coherent-complex, locally choose a bounded-above finite-free model
-   of K and shrink to an affine open. By lem-pc-affine-qcoh-derived-equivalence represent
-   L there by a module complex. Exactness and faithfulness of associated sheaves transfer
-   its cohomological lower bound. By lem-sc-derived-internal-hom-restrict-open and
-   lem-sc-affine-pseudo-coherent-rhom-qcoherent the restricted internal Hom has
-   quasi-coherent cohomology vanishing below a bound.
-2. A perfect K has quasi-coherent cohomology, since its local strictly perfect models have
-   quasi-coherent terms. By lem-pc-perfect-rhom-tensor-comparison its dual is perfect and
-   quasi-coherent, and RHom(K,L) is the derived tensor of L with that dual. By
-   lem-pc-derived-pullback-tensor-qcoh this tensor has quasi-coherent cohomology.
-3. If L is supported on T, its restriction to the complement is zero in the derived
-   category. By lem-sc-derived-internal-hom-restrict-open the restriction of RHom(K,L)
-   is RHom of the restricted objects, hence zero. Its cohomology restricts to zero.
-4. Quasi-coherence is local, so the affine conclusions give quasi-coherence globally.
-   The neighbourhood bounds from step 1 give exactly local boundedness, without claiming
-   a uniform lower bound on a non-quasi-compact scheme. Step 3 gives support in both cases. -/
+cohomology sheaf restricts to zero on the open complement. -/
 theorem rhom_supported_quasiCoherent
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

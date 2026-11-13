@@ -10,10 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 
 /-! # Constructible compact-support exceptional adjoint
 
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and Proposition 6.8.14
-(blueprint: lem-per-condensed-structural-exceptional-adjoint).
-
-For a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the blueprint lemma asserts
+For a morphism `f: X ⟶ Y` of separated `k`-schemes of finite type, the blueprint lemma asserts
 that the bounded constructible compact-support functor `Rf_!` is computed by `i_! ⋙ Rp_*` for
 every compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, and that it has a right adjoint `Rf^!` on
 bounded constructible complexes. The adjunction is
@@ -21,6 +18,10 @@ bounded constructible complexes. The adjunction is
 (`Rf_! = boundedConstructibleLowerShriek ⊣ Rf^! = boundedConstructibleUpperShriek`); this file
 supplies the compactification-independence clause, comparing `Rf_!` on `Dᵇc` with the derived
 lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧` on the ambient derived categories for an arbitrary `c`.
+
+## References
+
+* Bhatt--Scholze, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and Proposition 6.8.14
 -/
 
 @[expose] public noncomputable section
@@ -41,12 +42,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- The bounded constructible compact-support functor `Rf_!`, the left adjoint in
-`boundedConstructibleUpperShriekAdjunction ℓ f : Rf_! ⊣ Rf^!`, is independent of the
+`boundedConstructibleUpperShriekAdjunction ℓ f: Rf_! ⊣ Rf^!`, is independent of the
 compactification: for every compactification `c` of `f`, it is the restriction to `Dᵇc` of the
 derived lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧ = i_! ⋙ Rp_*` attached to `c`.
-
-Source: Bhatt--Scholze, Definition 6.7.6, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and
-Proposition 6.8.14; (blueprint: lem-per-condensed-structural-exceptional-adjoint).
 
 Construction: the independence isomorphism
 `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` from the chosen

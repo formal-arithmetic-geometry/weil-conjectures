@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 proof.md`, paragraph 1;
 Stacks Project, Tags 0F0G, 0GL1 and 0F5Y
-(auxiliary; not a blueprint node).
+.
 
 The factorization is supplied explicitly as `Compactification f`, which does not
 require its open immersion to be quasi-compact. The categories are ordinary and
@@ -44,27 +44,23 @@ namespace AlgebraicGeometry.Etale
 factorization has a right adjoint, and its canonical projection map is invertible.
 proof.md`, paragraph 1;
 Stacks Project, Tags 0F0G, 0GL1 and 0F5Y
-(auxiliary; not a blueprint node).
+.
 
 Proof in words:
 1. Exact open extension by zero and exact inverse image induce the unbounded
    derived adjunction D(j_!) ⊣ D(j^*), so the open-extension functor is a left
-   adjoint (lem-weil-pbc-extension-by-zero-adjunction,
-   lem-weil-pbc-extension-by-zero-exact,
-   prop-weil-pbc-inverse-image-modules-exact).
+   adjoint.
 2. Proper derived direct image for finite coefficients is a left adjoint by
    lem-etale-proper-derived-direct-image-adjoint. Compose these two left adjoints
    to obtain a right adjoint for the supplied-compactification functor.
 3. The proper finite-coefficient projection map is invertible by
    lem-etale-proper-projection-formula-finite. The canonical compactification map
    is this component followed by mapped open tensor and inverse-image composition
-   isomorphisms (def-kun-projection-formula-map,
-   lem-pur-etale-open-derived-tensor, lem-weil-pbc-inverse-image-composition).
+   isomorphisms.
    Therefore each of its components is invertible.
 4. For any selected right adjoint G, specialize the projection isomorphism to
    G(A_Y), invert it, compose with the counit tensored with K and the left unitor,
-   and transpose under the adjunction. This is sfEtaleAmbientTensorMap below
-   (lem-kun-tensor-unit).
+   and transpose under the adjunction. This is sfEtaleAmbientTensorMap below.
 No Noetherian, boundedness, constructibility or quasi-compact-open hypothesis is used. -/
 theorem sfEtaleAmbientAdjointProjection
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -91,7 +87,7 @@ K and the left unit constraint. The adjunction is data selecting the right
 adjoint whose existence is sfEtaleAmbientAdjointProjection, not an additional
 geometric hypothesis. No invertibility assertion is made about theta.
 proof.md`, paragraph 1
-(auxiliary; not a blueprint node). -/
+. -/
 noncomputable def sfEtaleAmbientTensorMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

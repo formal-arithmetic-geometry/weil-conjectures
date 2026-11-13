@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Tor-independent perfect pullback comparison at a stalk
 
-Source: Stacks Project, Tag 08IB, local affine Tor-independent tensor comparison
-(blueprint: lem-pc-tor-independent-perfect-pullback-comparison).
+## References
+
+* [Stacks Project, Tag 08IB](https://stacks.math.columbia.edu/tag/08IB)
 -/
 
 @[expose] public section
@@ -118,9 +119,6 @@ The comparison is expressed in K-flat coordinates by `IsComparisonIso`, using
 exactly the canonical map of `BaseDerivedTensorCohomologyModel`; invertibility
 is invariant under the identification with the actual derived pullback stalk.
 
-Source: Stacks Project, perfect.tex, Tag 08IB, local affine reduction
-(blueprint: lem-pc-tor-independent-perfect-pullback-comparison).
-
 Proof (the node's three steps):
 1. Fix z and put R = O_{S,s}, A = O_{X,x}, B = O_{T,t}, C = O_{X',z}.
    On an affine neighbourhood of x, perfectness gives a bounded finite-projective
@@ -134,7 +132,7 @@ Proof (the node's three steps):
    pullback termwise. Apply lem-weil-pbc-module-stalk-pullback degreewise to
    identify the target with Q tensor-over-A C. The ring map to C is a
    localization by the affine description of the fibre product; exactness of
-   localization (lem-weil-pbc-localization-module-exact) commutes it with
+   localization commutes it with
    cohomology. These natural identifications identify the canonical map with
    Step 2. For any other K-flat representative, a common resolution and
    functoriality of derived tensor and pullback transport the same comparison.

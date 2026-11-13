@@ -17,9 +17,10 @@ import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningExistence
 /-!
 # Existence and uniqueness of universal first order thickenings
 
-Source: Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3), and the opening
-paragraph of Section 37.7 (Tag 04F2)
-(blueprint: lem-weil-pbc-universal-first-order-thickening-exists).
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
+* [Stacks Project, Tag 04F2](https://stacks.math.columbia.edu/tag/04F2)
 -/
 
 @[expose] public section
@@ -32,31 +33,28 @@ namespace AlgebraicGeometry
 
 /-- A formally unramified morphism admits a universal first order thickening, and any two
 such thickenings admit exactly one compatible morphism, which is an isomorphism.
-Source: Stacks Project, Tags 04F3 and 04F2
-(blueprint: lem-weil-pbc-universal-first-order-thickening-exists).
 
 Proof plan, following the seven steps of the node:
 1. Uniqueness follows from `IsUniversalFirstOrderThickening.unique`: apply the two universal
    properties to the identity of `Z`, and use uniqueness to identify the inverse composites.
-2. Cover `Z` by affine opens mapping into affine opens of `X` (def-pc-scheme). Restriction
-   preserves formal unramifiedness (lem-weil-pbc-formally-unramified-open-restriction).
-   Identify the pieces with spectra (def-weil-affine-spectrum) and apply
+2. Cover `Z` by affine opens mapping into affine opens of `X`. Restriction
+   preserves formal unramifiedness.
+   Identify the pieces with spectra and apply
    lem-weil-pbc-affine-formally-unramified-iff-ring and
    lem-weil-pbc-ring-universal-first-order-thickening. The affine-case lemma
    lem-weil-pbc-universal-thickening-affine-case gives universal scheme thickenings, and
    lem-weil-pbc-universal-thickening-open-pieces lets their base maps land in `X`.
-3. A first order thickening is a homeomorphism on points (def-sbc-first-order-thickening).
+3. A first order thickening is a homeomorphism on points.
    Thus each overlap determines an open in each thickened piece. By the open-pieces lemma
    these are universal for the overlap, so uniqueness gives their transition isomorphisms.
 4. On triple overlaps both transition composites extend the same map over `X`; uniqueness
    makes them equal. Factoring through the corresponding opens uses def-weil-open-immersion.
 5. Glue the pieces using lem-weil-pbc-glue-schemes. Glue the maps to `X` and the maps from
    `Z` using lem-weil-pbc-scheme-morphism-gluing. Their composites agree with `h` on the
-   cover, giving a morphism over `X` (def-weil-scheme-over-base).
+   cover, giving a morphism over `X`.
 6. The inverse image of each glued piece is its original open of `Z`. The affine-cover
    criterion lem-weil-pbc-closed-immersion-affine-cover-criterion proves the global map
-   is a closed immersion (def-weil-closed-immersion). Its kernel ideal sheaf
-   (def-sbc-closed-immersion-ideal-sheaf) has square zero locally, hence globally. This
+   is a closed immersion. Its kernel ideal sheaf has square zero locally, hence globally. This
    gives a first order thickening; the pieces and their intersections remain universal.
 7. For a test thickening `T ⊆ T'`, pull the covering of `Z` back to `T` and transfer it to
    `T'`. The open-pieces lemma provides test thickenings on this cover. Local universal

@@ -21,8 +21,12 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Ambient self-Tor coordinates on affine sections
 
-Source: Stacks Project, Tags 08DX(2), 06YG and 00LS.
-(blueprint: new-h2-self-tor-ambient-localized-comparisons). -/
+## References
+
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 06YG](https://stacks.math.columbia.edu/tag/06YG)
+* [Stacks Project, Tag 00LS](https://stacks.math.columbia.edu/tag/00LS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -36,31 +40,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 
 /-- Ambient affine coordinates compatible with one localized resolution comparison for each
-basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts.
-Source: Stacks Project, Tag 08DX(2), with Tags 06YG and 00LS(1).
-(blueprint: new-h2-self-tor-ambient-localized-comparisons).
-
-Proof: For each affine U, identify the closed structure sheaf with tilde(A/I).
-Sheafify its chosen projective resolution and augmentation using
-lem-sc-affine-quotient-resolution-sheafification. Extend it to nonpositive
-cochain degrees. Projective modules are flat, and their associated sheaves are
-flat. Apply lem-pc-bounded-above-flat-kflat and the natural affine computation
-lem-pc-affine-derived-pullback-tensor-tilde. Exactness of tilde and affine
-sections identifies the negative-n homology of the ambient self-tensor with
-homology of the quotient tensor resolution. This gives c_U directly on the tensor
-complex homology, before the separate isoLeftDerivedObj transport to Tor.
-These coordinates come from the same natural derived comparison.
-For each basic V inside U, the ideal restriction induces the quotient map psi.
-Localize the chosen U-resolution, obtaining a projective resolution over C.
-Lift its augmentation to the chosen V-resolution by the projective lifting
-argument of 00LS(1). Precompose with localization to obtain a and tensor with
-psi to obtain k, so the three displayed equations hold. Naturality of the
-K-flat comparison (lem-pc-kflat-derived-tensor-comparison), exact restriction
-of scalars, and the affine section unit gives the displayed equality for this
-one lift. No uniqueness or homotopy independence is asserted here.
-For n=0 the same homology comparison applies. For I=top or an empty basic
-open, quotient and section modules are zero; the constructions and equations
-remain valid. -/
+basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts. -/
 theorem exists_selfTor_ambient_localized_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

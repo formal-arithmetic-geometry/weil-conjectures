@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Structure and restriction comparisons for a spectrum presentation
 
-Source: Stacks Project, Tag 08DC; Mathlib exact functors and scheme-module restriction.
-(blueprint: lem-sc-spectrum-structure-restriction-comparison).
+## References
+
+* [Stacks Project, Tag 08DC](https://stacks.math.columbia.edu/tag/08DC)
 -/
 
 @[expose] public section
@@ -33,32 +34,7 @@ set_option synthInstance.maxSize 512 in
 set_option maxHeartbeats 1000000 in
 -- The derived localization and full restriction comparisons require extra heartbeats.
 /-- Isomorphism transport identifies the spectrum structure complex and the full
-restriction functor, including transport from localized sites to open subschemes.
-Source: Stacks Project, Tag 08DC (equation-comparison, structure object);
-Mathlib Algebra.Homology.DerivedCategory.ExactFunctor and
-AlgebraicGeometry.Modules.Sheaf (formal isomorphism transport).
-(blueprint: lem-sc-spectrum-structure-restriction-comparison).
-
-Proof:
-1. The exact equivalence Modules.overEquiv on the spectrum open transfers its chosen
-   localized-site derived category to a derived category on the open subscheme in
-   the same morphism universe. This is localization transported through an exact
-   equivalence; the construction uses no points and applies to the empty open.
-2. HomologicalComplex.extendSingleIso identifies the extended A[0] in
-   koszulOpenStructure with the integer single complex. The singleMapHomologicalComplex
-   comparison and tildeSelf identify its termwise tilde with O_Spec(A)[0].
-   Pushforward along s identifies O_Spec(A) with O_X: identify that pushforward with
-   restriction along s.inv by uniqueness of left adjoints and use
-   Modules.restrictUnitIso. Apply the single-complex functor and localization, then
-   use he on the structure complex. This gives the first displayed isomorphism.
-3. Apply exists_scheme_iso_derived_restriction_square to s, e and he at U.
-   The derived equivalences of Modules.overEquiv on both opens conjugate the
-   localized-site equivalence to an equivalence G of open-subscheme derived
-   categories. Functor.mapDerivedCategoryCompIso identifies the localization of
-   each composite with the composite of its localizations. Whisker the restriction
-   square with these equivalences and cancel their units and counits. The result
-   is the displayed natural isomorphism of full restriction functors. This step
-   uses no quasi-coherence, perfection, compactness or boundedness hypothesis. -/
+restriction functor, including transport from localized sites to open subschemes. -/
 theorem exists_spectrum_structure_restriction_comparison
     (A : Type u) [CommRing A] (X : Scheme.{u}) (s : Spec (.of A) ≅ X)
     (U : X.Opens) (V : (Spec (.of A)).Opens) (hV : s.hom ⁻¹ᵁ U = V)

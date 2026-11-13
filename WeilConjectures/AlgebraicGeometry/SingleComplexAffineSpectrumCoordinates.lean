@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Spectrum coordinates for a single-complex affine square
 
-Source: Stacks Project, Tags 0DJ8 and 0DJ9, affine coordinate reduction.
-(blueprint: lem-pc-single-complex-affine-spectrum-coordinates).
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -29,28 +31,7 @@ namespace AlgebraicGeometry
 This statement concerns coordinate transport, not invertibility of the comparison.
 The two displayed isomorphisms identify its endpoints and the final equation
 identifies the actual morphism, including its given coefficient map.
-Source: Stacks Project, Tag 0DJ8, affine reduction in the proof; Tag 0DJ9,
-affine-open paragraph. Canonical transport details expanded by C1.
-(blueprint: lem-pc-single-complex-affine-spectrum-coordinates).
-
-Proof: For each of the four affine schemes use its canonical isomorphism to the
-spectrum of its global section ring. Naturality of toSpecGamma identifies each
-arrow with Spec.map of its map on global sections. Transport the pullback cone
-along these four isomorphisms, identifying the supplied sq0. Take K0 and K0'
-to be pullbacks of K
-and K' along the inverse canonical isomorphisms. Derived pullback composition
-and the identity comparison give the coefficient map phi0 and identify both
-coefficient objects with the originals. Pullback preserves quasi-coherent
-cohomology. The induced isomorphisms on local rings commute with the four stalk
-maps and with tensor pullback; exact stalks commute with cohomology. Thus the
-localized tensor comparisons for phi and phi0 are conjugate. Every K-flat
-coordinate presentation represents that same canonical comparison, so this gives
-both directions of the displayed stalk-condition equivalence. The equivalence
-of derived categories along S'.toSpecGamma and the pullback/direct-image
-composition comparisons give eL and eR. The counit definition of base change,
-naturality of the adjunction counits, and coherence of pullback composition give
-the displayed equality. These are equivalences and identities even for the zero
-ring/empty scheme and unbounded objects; no flatness or boundedness is used. -/
+ Canonical transport details expanded by C1.. -/
 theorem exists_singleComplexAffineSpectrumCoordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

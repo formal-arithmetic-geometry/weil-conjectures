@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.RationalTangentCoefficientOperations
 /-!
 # Linear descent of tangent coefficients
 
-Source: Stacks Project, Tags 0B2D and 0B2E
-(blueprint: lem-sc-rational-tangent-coefficient-linear-map).
+## References
+
+* [Stacks Project, Tag 0B2D](https://stacks.math.columbia.edu/tag/0B2D)
+* [Stacks Project, Tag 0B2E](https://stacks.math.columbia.edu/tag/0B2E)
 -/
 
 @[expose] public section
@@ -29,27 +31,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Extracting the epsilon coefficient gives a linear map to the cotangent dual.
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
-(blueprint: lem-sc-rational-tangent-coefficient-linear-map).
-
-Proof:
-1. The closed-point restriction of a tangent vector gives the residue map upon reducing its
-   stalk homomorphism modulo epsilon: reconstruct the spectrum morphism from its stalk map
-   and cancel the monomorphism from the local spectrum to `X`. Apply the inverse of the
-   bijective structural residue map `r` to the second dual-number coordinate. The resulting
-   function `D` is additive, by addition of coordinates.
-2. The condition that the vector is over `Spec k` says that the structural field map `s`
-   is sent to the constant dual numbers. Thus `D (s c) = 0` for every `c` in `k`.
-   Multiplication of coordinates gives the residue-valued Leibniz rule for `D`.
-3. On the maximal ideal, this rule kills products of two ideal elements, and additivity kills
-   their finite sums. Hence `D` descends to the quotient by the square ideal. Multiplication
-   by the structural copy of `k` shows that the descended functional is `k`-linear.
-4. Under the prescribed tangent-vector addition, the pushout of two dual-number spectra
-   gives the sum of the two second coordinates. Precomposition with epsilon scaling gives
-   scalar multiplication of the second coordinate. The chosen vector-space structures of
-   `schemeTangentSpace` have precisely these operations, so the functional assignment is a
-   linear map `L`. This proves its value on every maximal-ideal representative. -/
+/-- Extracting the epsilon coefficient gives a linear map to the cotangent dual. -/
 theorem exists_rationalTangent_coefficient_linearMap
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     let R := X.presheaf.stalk x

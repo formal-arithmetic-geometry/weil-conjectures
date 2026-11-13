@@ -127,15 +127,8 @@ private theorem middleComposite_factor
 attribute [local semireducible] middleComparison projectionExchange
 
 /-- The middle false comparison is the coefficient transport followed by exchange pasting.
-Source: blueprint thm-amb-p1-adjunction.proof.md, first-coordinate exchange calculation.
-(auxiliary; not a blueprint node).
 
-Proof: naturality of projectionComparison carries the opposite-projection line
-inverse through middleComposite. The normalized shifted-line square, with the two
-line isomorphisms cancelled, identifies this transported line comparison with
-pullback of the isomorphism i followed by the derived second-projection square.
-Apply coefficient-independent exchangeIsoTransport to the shifted line and
-associate the resulting factors. This proves precisely the displayed equation. -/
+. -/
 theorem middle_exchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

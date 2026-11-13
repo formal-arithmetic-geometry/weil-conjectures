@@ -9,9 +9,11 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Direct-image comparison restricted to the diagonal
 
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle and the
-interchange of the two coordinates under the direct image to the base.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0DV0](https://stacks.math.columbia.edu/tag/0DV0)
 -/
 
 @[expose] public noncomputable section
@@ -123,21 +125,7 @@ private theorem collapse_assoc (A : Type (u + 1)) [CommRing A] [Finite A]
     Functor.map_comp, Functor.map_id, Category.assoc, ← congr_inv,
     Iso.inv_hom_id_app_assoc] using e
 
-/-- Both ways to push a diagonal-supported object to the base agree.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle:
-"The equality qp1=qp2 and the composition isomorphism for derived direct images
-interchange these two operations"; Stacks Project, Tag 0DV0
-(auxiliary; not a blueprint node).
-
-Proof: expand directComparison as the inverse compositor for p2,f, the equality
-p2 f = p1 f, and the compositor for p1,f. Expand the two section identifications
-using Delta p_i = id. Apply associativity of the direct-image compositors to
-Delta,p_i,f using the proved unbounded compact-support formalism. Cancel the
-common comparisons for id,f and Delta,p_i f, then precompose with the inverse
-identity comparison. No separate identity-composition law is needed. Congruence
-along a reversed equality is the inverse congruence, by equality induction.
-This argument concerns only composition of direct images; it uses neither tensor
-products nor the projection formula, and holds for every diagonal-supported object. -/
+/-- Both ways to push a diagonal-supported object to the base agree. -/
 theorem diagonalPushComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (M : DerivedCategoryModule A X) :
     (push A f).map ((TraceDiagonalDatum.idIsoDiagonalSnd (Λ := A) f).hom.app M) ≫

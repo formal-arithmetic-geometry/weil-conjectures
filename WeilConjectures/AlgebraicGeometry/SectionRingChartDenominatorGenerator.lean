@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-! # Free denominators on inverse images of section-ring charts
 
-Source: Stacks Project, Tags 01N8 and 01NK, uniqueness arguments, and Tag 01CY.
-(blueprint: lem-sc-section-ring-chart-denominator-generator).
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
+* [Stacks Project, Tag 01CY](https://stacks.math.columbia.edu/tag/01CY)
 -/
 
 @[expose] public section
@@ -25,25 +28,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- On an inverse homogeneous chart, each power of the denominator is a free generator.
-Source: Stacks Project, Tags 01N8 and 01NK, uniqueness proofs; Tag 01CY.
-(blueprint: lem-sc-section-ring-chart-denominator-generator).
-
-Proof: At a point of Q, s is nonvanishing because Q lies in U. Apply the fraction
-identity with denominator a, exponent d and numerator s^r, and take its value in the
-fibre. Tensor products of nonzero vectors in one-dimensional vector spaces are
-nonzero, so s^r is nonzero. The identity forces a^d to be nonzero, hence a to be
-nonvanishing. Tag 01CY trivializes L^{tensor r} by a on its nonvanishing locus.
-Positive section-ring powers have the same nonvanishing locus: on simultaneous
-trivializations, tensor multiplication multiplies the coefficients, and D(f*g)
-is D(f) intersect D(g); tensorPowAddIso transports this tensor section to the
-section-ring product. Induction proves power invariance. Thus a^n is nonvanishing
-on Q for n>0. Apply Tag 01CY to a^n and restrict to Q. Its unique-quotient clause
-proves both injectivity and surjectivity on every smaller open. For n=0 use the
-restriction of the tensor-unit generator, independently of a. The argument is valid
-on nonreduced schemes because it uses fibre values to
-locate the trivialization, and then the module isomorphism itself. On the empty
-open the unique module and scalar sections give the same bijection. -/
+/-- On an inverse homogeneous chart, each power of the denominator is a free generator. -/
 theorem sectionRing_chart_denominator_generator
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVSESPresentation
 
 /-! # Compatible relative Mayer--Vietoris boundaries
 
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -30,29 +35,7 @@ namespace AlgebraicGeometry
 
 /-- Complete the fixed relative restriction sequences by compatible boundaries.
 This asserts distinguishedness and only the connecting square; it does not assert
-commutativity of either restriction square.
-Source: Stacks Project, Cohomology, Tags 08BV and 08HZ; Tag 0DJ9, induction diagram
-(blueprint: lem-pc-relative-mv-boundary-completion).
-Proof: The qcqs morphisms f and its base change over the affine bases have qcqs
-sources. The base change g' of the affine morphism g is affine. Its inverse images
-of U, V and their overlap are quasi-compact. Use the functorial K-injective
-Mayer--Vietoris construction for these two covers. Identify exact open restriction
-with derived pullback by its derived universal property and the canonical
-underived open-pullback comparison. Identify composite direct images by the
-right-adjoint mates of the same pinned pullback composition comparisons. Thus the
-first two maps become exactly relativeMVSourceFirst/Second and
-relativeMVTargetFirst/Second. Apply the triangulated functors Lg* Rf* and Rf'* and
-transport the boundaries as well as the first two arrows along these comparisons
-and the additive biproduct comparisons. This proves the two distinguishedness
-claims. Transpose the object map under Lg'* adjoint to Rg'*. Functoriality of the
-K-injective short-exact-sequence boundary, and compatibility of this construction
-with direct image, give its boundary square. Transpose back using the
-shift-compatible derived adjunction. The mates calculation of Tag 08HY and
-associativity of pullback composition identify the overlap component with the
-specified local arrow, including the equality transport of the pullback
-projections; the global component is the specified base-change composite.
-The zero terms for empty opens and zero complexes satisfy the same construction.
-No invertibility of the object map or of any base-change map is used. -/
+commutativity of either restriction square. -/
 theorem relativeMV_boundary_completion
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

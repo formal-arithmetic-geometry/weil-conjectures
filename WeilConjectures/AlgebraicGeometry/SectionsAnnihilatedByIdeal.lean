@@ -19,8 +19,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # The subsheaf of sections annihilated by an ideal
 
-Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP
-(blueprint: lem-weil-pbc-sections-annihilated-by-ideal).
+## References
+
+* [Stacks Project, Tag 01PO](https://stacks.math.columbia.edu/tag/01PO)
+* [Stacks Project, Tag 01PP](https://stacks.math.columbia.edu/tag/01PP)
 -/
 
 @[expose] public section
@@ -47,10 +49,8 @@ private theorem annihilator_stalkMap_injective (X : Scheme.{u}) {G F : X.Modules
   exact (ModuleCat.mono_iff_injective _).mp hm
 
 /-- The subsheaf of sections annihilated by a quasi-coherent ideal of finite type.
-Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP
-(blueprint: lem-weil-pbc-sections-annihilated-by-ideal).
 
-The quasi-coherent ideal is `J : X.IdealSheafData` (quasi-coherence is built in), with
+The quasi-coherent ideal is `J: X.IdealSheafData` (quasi-coherence is built in), with
 ideal sheaf `J.toModules ⊆ 𝒪_X` via `J.toModulesι`; finite type is Mathlib's
 `SheafOfModules.IsFiniteType` of `J.toModules`. Its sections over an open `V` are
 `J.idealOfOpens V` (`range_toModulesι_app_eq_idealOfOpens`), over an affine open `J.ideal U`.
@@ -60,22 +60,6 @@ The stalk clause uses `RingedSpace.moduleStalkFunctor`. It expresses annihilatio
 the ideal stalk through all germs of ideal sections: every element of `J_x` is such a
 germ, and its image in `𝒪_{X,x}` is the germ of the section. The stalk maps of both
 inclusions are injective.
-
-Proof:
-1. `exists_annihilator_subsheaf` constructs the submodule presheaf explicitly and
-proves gluing by separatedness of F. Its inclusion is sectionwise injective.
-2. `annihilator_affine_criterion` identifies the affine image by ideal extension
-along restriction and separatedness on an affine cover. This step needs neither
-finite type of the ideal nor quasi-coherence of F.
-3. `annihilator_subsheaf_quasicoherent` supplies quasi-coherence from the affine
-image formula, using the finite-generator principal-open localization argument.
-4. `RingedSpace.module_stalk_exact` makes both inclusion stalk maps injective.
-A germ from G is annihilated by every ideal germ: intersect the two representative
-opens, restrict the ideal section there, and apply the sectionwise image formula.
-5. `annihilator_stalk_local_lift` gives a locally annihilated representative of an
-annihilated stalk element. Lift that representative through the sectionwise image
-formula and take its germ. The quasi-coherence and local-lifting inputs remain
-separate named theorems whose proofs are open.
 -/
 theorem sections_annihilated_by_ideal
     (X : Scheme.{u}) (J : X.IdealSheafData) [J.toModules.IsFiniteType]

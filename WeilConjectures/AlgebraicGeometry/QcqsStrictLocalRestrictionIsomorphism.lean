@@ -15,7 +15,11 @@ import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective
 
 /-! # Strict-local module restriction: one step of the comparison
 
-Source: Stacks Project, Tag 03Q9, degree zero and canonical restriction maps.
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public section
@@ -27,20 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- A linear map with the strict-local representative formula is invertible.
-This asserts only invertibility of an already constructed map, not its existence.
-Source: Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
-(blueprint: lem-weil-pbc-strict-local-module-restriction-isomorphism).
-
-Proof: Forget modules. The forgetful functor preserves filtered colimits, hence identifies
-this map's source with the set stalk, with the same germ maps. The canonical module/set
-inverse-image comparison is invertible and its adjoint-transpose identity identifies its
-unit with the forgotten module unit. Transport the target across that comparison,
-pullback symmetry and the terminal-section/global-section identification. The assumed
-representative equations now say that the transported map is the unique map in
-sets_pushforward_stalk_strictHenselization. That theorem makes it bijective. All target
-transports are bijections, so the original linear map is bijective, hence invertible.
-The argument uses qcqs continuity but no properness or torsion, and includes the empty
-source and zero coefficient ring. -/
+This asserts only invertibility of an already constructed map, not its existence. -/
 theorem isIso_qcqsStrictLocalRestriction_of_formula
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

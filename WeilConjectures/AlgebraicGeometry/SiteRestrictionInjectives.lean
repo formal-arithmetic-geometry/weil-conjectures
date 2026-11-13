@@ -17,8 +17,11 @@ public import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 /-!
 # Extension by zero and restriction on a localized site
 
-Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Section 03DH
-and Lemmas 03DI--03DJ (blueprint: lem-weil-pbc-site-restriction-injectives).
+## References
+
+* [Stacks Project, Tag 03DH](https://stacks.math.columbia.edu/tag/03DH)
+* [Stacks Project, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks Project, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
 -/
 
 @[expose] public section
@@ -31,23 +34,6 @@ namespace CategoryTheory
 
 /-- Restriction to a localized site has an exact extension-by-zero left adjoint,
 and is itself exact.
-
-Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Section 03DH
-and Lemmas 03DI--03DJ (blueprint: lem-weil-pbc-site-restriction-injectives).
-
-Proof:
-1. Use the localized topology on `Over W`: a covering is one whose underlying
-   family covers in `C`. Restriction evaluates a sheaf at the underlying object
-   of each arrow to `W`, with its original restriction maps
-   (`def-weil-pbc-sites-and-cohomology`, Stacks Sites, Section 00XZ).
-2. Apply `Functor.sheafPullbackConstruction.sheafAdjunctionContinuous` to
-   `Over.forget W`. This is `lem-weil-pbc-site-restriction-adjunction` and gives
-   the natural adjunction between the displayed extension by zero and restriction.
-3. Apply `site_extensionByZero_exact`
-   (`lem-weil-pbc-site-extension-by-zero-exact`) to obtain one zero-morphism
-   preservation witness and preservation of every short exact sequence on the slice.
-4. Apply `siteRestriction_exact` (`lem-weil-pbc-site-restriction-exact`) to each
-   short exact sequence on the original site. Combine the three conclusions.
 -/
 theorem siteRestriction_injectives
     {C : Type w} [SmallCategory C]

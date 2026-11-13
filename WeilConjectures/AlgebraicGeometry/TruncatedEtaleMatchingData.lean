@@ -12,8 +12,6 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 /-!
 # Finite matching limits of truncated étale diagrams
-
-Source: blueprint lemma-weil-pbc-finite-hypercover-descent, finite matching-limit paragraph.
 -/
 
 @[expose] public section
@@ -21,8 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 /-- Matching objects for a finite truncated étale diagram, with universality in schemes over
-its base. Source: blueprint finite-hypercover-descent, finite matching-limit paragraph.
-(auxiliary; not a blueprint node) -/
+its base. -/
 structure TruncatedEtaleMatchingData (X : Scheme.{u}) (r : ℕ)
     (S : SimplicialObject.Truncated X.Etale r) where
   matching : Fin (r + 1) → X.Etale
@@ -159,18 +156,7 @@ private theorem boundaryHomFinite {r : ℕ} (n : Fin (r + 1))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A truncated diagram of qcqs étale schemes has qcqs matching schemes.
-Source: the finite matching-limit paragraph of the blueprint finite-hypercover-descent proof.
-(auxiliary; not a blueprint node)
-
-Proof: work in the full subcategory of qcqs étale schemes. It has a terminal object and
-scheme fibre products, and its inclusion in schemes over X preserves finite limits.
-For degree n take the finite category of all arrows from lower-dimensional simplices to n.
-The limit of the restricted contravariant simplicial diagram gives the matching scheme.
-The limiting projections give the projection maps, and the simplicial maps out of degree n
-give the matching map by the limit universal property. The same universal property after
-forgetting to schemes over X gives existence and uniqueness for every compatible boundary
-family, including the empty family when n is zero. -/
+/-- A truncated diagram of qcqs étale schemes has qcqs matching schemes. -/
 theorem exists_truncated_etale_matching_data (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] {r : ℕ} [Finite (SimplexCategory.Truncated r)]
     (S : SimplicialObject.Truncated X.Etale r)

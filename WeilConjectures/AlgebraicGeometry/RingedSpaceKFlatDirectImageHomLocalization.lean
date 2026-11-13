@@ -14,8 +14,11 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # Localization of Hom into successive module direct images
 
-Source: Stacks Project, Cohomology, Tags 079W, 0D5S, and 0D5T.
-(blueprint: lem-pc-ringed-space-kflat-direct-image-hom-localization).
+## References
+
+* [Stacks Project, Tag 079W](https://stacks.math.columbia.edu/tag/079W)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 0D5T](https://stacks.math.columbia.edu/tag/0D5T)
 -/
 
 @[expose] public section
@@ -27,27 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Localization computes maps from a K-flat complex into the successive direct
-image of a K-injective complex, without requiring that direct image be K-injective.
-Source: Stacks Project, Cohomology, lemma-adjoint (079W),
-lemma-derived-pullback-composition (0D5S), and
-lemma-derived-pushforward-composition (0D5T).
-(blueprint: lem-pc-ringed-space-kflat-direct-image-hom-localization).
-
-Proof: denote successive tensor pullback by P and its right adjoint by F.
-A derived map QK to QFI is a roof K ←s K' →a FI in the homotopy category.
-Resolve K' by a K-flat K'' and precompose both roof arrows. Now s has K-flat
-endpoints. Pullback preserves K-flatness and computes its derived functor there,
-so Q(Ps) is invertible. Adjunction sends a to b : P K'' → I. The derived map
-inv(Q(Ps)) ≫ Qb comes from a unique homotopy class c : PK → I, since I is
-K-injective. Faithfulness into I gives Ps ≫ c = b. Naturality of the underived
-adjunction gives s ≫ adjunct(c) = a, so the original roof is Q(adjunct(c)).
-This proves surjectivity. For injectivity, if Qu = Qv, the right calculus of
-fractions gives a quasi-isomorphism s : K' → K with s ≫ u = s ≫ v. Resolve K'
-by a K-flat K'' again. Naturality of adjunction gives Ps ≫ adjunct⁻¹(u) =
-Ps ≫ adjunct⁻¹(v). Q(Ps) is invertible, so these adjuncts have equal localized
-maps; K-injective faithfulness gives equality already in the homotopy category.
-The underived adjunction is a bijection, hence u = v. Identity and zero complexes
-satisfy the same argument; no flatness or boundedness of f or g is used. -/
+image of a K-injective complex, without requiring that direct image be K-injective. -/
 theorem moduleDirectImage_kFlat_hom_localization_bijective
     {X Y Z : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

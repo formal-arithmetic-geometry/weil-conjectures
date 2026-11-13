@@ -21,8 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Single-complex criterion for derived direct-image base change
 
-Source: Stacks Project, perfect.tex, Tags 0DJ8, 0DJ9 and 0DJA(1)
-(blueprint: lem-pc-rf-base-change-single-complex-criterion).
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
 -/
 
 @[expose] public section
@@ -66,9 +69,7 @@ Proof (the three steps of the node):
    recorded derived base-change map, then the canonical derived tensor
    comparison τ (pinned by its uniquely characterising predicate
    `IsCanonicalPullbackTensorComparison`), followed by tensoring the
-   left-derived counit at G with Lg'^*E.
-Source: Stacks Project, perfect.tex, Tags 0DJ8, 0DJ9 and 0DJA(1)
-(blueprint: lem-pc-rf-base-change-single-complex-criterion). -/
+   left-derived counit at G with Lg'^*E. -/
 theorem singleComplexBaseChangeCriterion
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

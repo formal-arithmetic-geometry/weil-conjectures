@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoLiftedComparisonCounit
 
 /-! # Commutation of normalized source-isomorphism transport with the second mate
 
-Source: Stacks Project, Tags 0ATR and 0D5S.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -24,8 +27,6 @@ namespace AlgebraicGeometry
 noncomputable section
 /-- The source comparison uses only pullback composition and the supplied comparison of
 right adjoints. All its data are explicit; no witness of existence is chosen.
-Source: Stacks Project, Tags 0ATR and 0D5S. 
-(blueprint: lem-sc-scheme-iso-second-mate-normalized-square)
 -/
 def schemeIsoMateSourceIso
     [∀ Z : Scheme.{u},
@@ -97,24 +98,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized endpoint comparisons commute with the fixed second-mate formula.
 Unlike the transport theorem, this asserts an equality of specified morphisms;
-it neither supplies endpoint isomorphisms nor constructs an arrow isomorphism.
-Source: Stacks Project, Tag 0ATR, composite adjunction and conjugate calculation.
-(blueprint: lem-sc-scheme-iso-second-mate-normalized-square)
-
-Proof: Expand the fixed second mate into pullback of the base unit, pullback of the
-inverse conjugate of ordinary base change, and the upper counit. The normalization
-of φ and ψ is the counit identity for the transported vertical adjunctions; by
-adjunction transposition it gives their unit identities too. Transpose the ordinary
-base-change maps under the canonical pullback/direct-image adjunctions. Use he,
-hr₁ and hr₂ and associativity of the fixed pullback composition comparisons to
-identify these transposes. Injectivity of the Hom equivalences identifies ordinary
-base change after transport. ConjugateEquiv respects this equality and the endpoint
-comparisons; as ordinary base change is invertible, its conjugate inverse respects
-it as well. Substitute in the expanded second-mate formulas. Move the normalized
-comparisons past the units and counits by the preceding identities, and cancel
-the inverse comparison pairs. The remaining equation is the stated square, with
-its source comparison the explicit pullback-composition expression above. No
-second mate is inverted. Zero objects and empty schemes require no extra cases. -/
+it neither supplies endpoint isomorphisms nor constructs an arrow isomorphism. -/
 theorem schemeIso_secondMate_normalized_square
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {P U S T : Scheme.{u}}

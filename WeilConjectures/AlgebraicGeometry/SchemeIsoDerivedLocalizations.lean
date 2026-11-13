@@ -12,8 +12,10 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Transport of chosen derived localizations along a scheme isomorphism
 
-Source: Stacks Project, Tags 05RU and 09IR.
-(blueprint: lem-pc-scheme-iso-derived-localizations).
+## References
+
+* [Stacks Project, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
+* [Stacks Project, Tag 09IR](https://stacks.math.columbia.edu/tag/09IR)
 -/
 
 @[expose] public section
@@ -62,24 +64,7 @@ private theorem hasDerivedCategory_of_equivalence {C D : Type v}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A scheme isomorphism transfers the existence of chosen derived localizations,
-including the localized open sites, without increasing the morphism universe.
-Source: Stacks Project, Tags 05RU and 09IR; the localization-existence part of
-step 1 of lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-localizations).
-
-Proof: Pushforward along s.hom and s.inv gives inverse exact equivalences of
-module-sheaf categories. Apply these functors degreewise to cochain complexes;
-exactness identifies homology and hence identifies quasi-isomorphisms in both
-directions. Compose the forward complex equivalence with the supplied localization
-on Y. The universal property of localization, transported through the inverse
-complex equivalence, proves that this composite is a localization on X. Its target
-is the chosen derived category of Y, so its morphisms remain in universe w.
-For an open V of X, let W be its image under the homeomorphism s.hom. The
-isomorphism identifies the localized sites at V and W, including their structure
-ring sheaves. The same argument with this module-sheaf equivalence and the chosen
-localization at W supplies the localization at V. Carry this out for all V.
-The equivalences use the structure maps of s, and the construction applies also to
-empty schemes and empty opens; no choice of a nonempty point is involved. -/
+including the localized open sites, without increasing the morphism universe. -/
 theorem exists_scheme_iso_derived_localizations {X Y : Scheme.{u}} (s : X ≅ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens, HasDerivedCategory.{w}

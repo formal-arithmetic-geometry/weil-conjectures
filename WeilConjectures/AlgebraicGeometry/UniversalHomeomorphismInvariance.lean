@@ -19,9 +19,10 @@ set_option linter.style.haveILetI false
 /-!
 # Universal-homeomorphism invariance, with functorial compatibility
 
-Source: Stacks Project, Tags 04DZ and 03SI; blueprint
-`sec-curve-estimates/lem-sc-arbitrary-curve-cd` (blueprint:
-thm-weil-pbc-universal-homeomorphism-invariance).
+## References
+
+* [Stacks Project, Tag 04DZ](https://stacks.math.columbia.edu/tag/04DZ)
+* [Stacks Project, Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)
 -/
 
 @[expose] public section
@@ -33,28 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Universal-homeomorphism invariance of the small etale sites, topoi and cohomology,
-including identity, composition and base-change compatibility. Source: Stacks Project,
-Tags 04DZ and 03SI; blueprint `sec-curve-estimates/lem-sc-arbitrary-curve-cd`
-(blueprint: thm-weil-pbc-universal-homeomorphism-invariance).
-
-Proof: (1) `lemma-weil-pbc-universal-homeomorphism-site-equivalence` (04DZ) makes
-base change an equivalence of etale categories; `lemma-weil-pbc-universal-homeomorphism-
-coverings` identifies covering families, giving an equivalence of sites.
-(2) `prop-weil-pbc-universal-homeomorphism-topos` (03SI) gives the sheaf equivalence.
-The inverse image is left adjoint to direct image; uniqueness of adjoints identifies
-these with the two sides of the equivalence, and makes their unit and counit isomorphisms.
-(3) The same proposition makes the cohomology pullback bijective: the exact equivalence
-carries injective resolutions to injective resolutions, and its unit identifies their
-global-section complexes.
-(4) `lem-weil-pbc-inverse-image-composition` gives the identity and composition
-isomorphisms, compatibly with the adjunction units. Clause 4 of
-`lem-weil-pbc-cohomology-pullback-functorial` gives the displayed cohomology equations.
-(5) `lem-weil-pbc-universal-homeomorphism-base-change` makes the base-changed morphism
-a universal homeomorphism. Applying the composition isomorphisms to the two
-factorizations of the cartesian square gives the inverse-image square. Inserting the
-unit of the original equivalence and the counit of the base-changed equivalence gives
-the square for the quasi-inverses. Applying cohomology composition to both
-factorizations gives the final equality. -/
+including identity, composition and base-change compatibility. -/
 theorem universalHomeomorphism_invariance {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     u.Etale.IsEquivalence ∧

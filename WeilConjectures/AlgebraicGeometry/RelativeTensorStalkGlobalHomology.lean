@@ -24,9 +24,16 @@ import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
-/-! # RelativeTensorStalkGlobalHomology
+/-! # RelativeTensorStalkGlobalHomology.
 
-(blueprint: lem-pc-relative-tensor-stalk-global-homology).
+## References
+
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 08CG](https://stacks.math.columbia.edu/tag/08CG)
+* [Stacks Project, Tag 09U9](https://stacks.math.columbia.edu/tag/09U9)
+* [Stacks Project, Tag 008H](https://stacks.math.columbia.edu/tag/008H)
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
+* [Stacks Project, Tag 01AG](https://stacks.math.columbia.edu/tag/01AG)
 -/
 
 @[expose] public section
@@ -65,22 +72,7 @@ private theorem stalk_preservesFiniteColimits (Z : RingedSpace.{u}) (x : Z) :
         TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x)
   exact preservesFiniteColimits_of_reflects_of_preserves _ A
 
-/-- Global stalk computation for a prescribed K-flat relative representative.
-Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG, 09U9;
-Sheaves Tags 008H and 0098; Modules Tag 01AG.
-Proof: form the inverse-image ringed space with underlying space X. The canonical
-inverse-image ring stalk isomorphism identifies its stalk ring with A=O_Y,f(y).
-Take M to be the actual module stalk of F restricted along that isomorphism.
-The stalk criterion makes P_y K-flat. Exactness of stalks sends q to a
-quasi-isomorphism; the germ formula for the inverse-image ring map identifies
-its target with the restriction along f.stalkMap of the module stalk of K.
-A K-flat complex computes its derived tensor with every complex, so Q of the
-total tensor of P_y and M[0] is isomorphic to Q of that restricted stalk of K
-tensored in the derived category with M[0]. Stalks commute with total tensor,
-single complexes and homology. Taking homology and forgetting scalars gives
-the displayed isomorphisms for all i with this same M. This works for zero
-modules, unbounded complexes and every integer i.
-(blueprint: lem-pc-relative-tensor-stalk-global-homology). -/
+/-- Global stalk computation for a prescribed K-flat relative representative. -/
 theorem relativeTensor_stalk_global_homology_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

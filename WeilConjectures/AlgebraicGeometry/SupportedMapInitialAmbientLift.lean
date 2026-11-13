@@ -14,8 +14,13 @@ import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Initial ambient representative of a supported perfect map
 
-Source: Stacks Project, Tags 08BT and 09IM.
-(blueprint: lem-sc-supported-map-initial-ambient-lift).
+## References
+
+* [Stacks Project, Tag 08BT](https://stacks.math.columbia.edu/tag/08BT)
+* [Stacks Project, Tag 09IM](https://stacks.math.columbia.edu/tag/09IM)
+* [Stacks Project, Tag 00A7](https://stacks.math.columbia.edu/tag/00A7)
+* [Stacks Project, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
+* [Stacks Project, Tag 06Z0](https://stacks.math.columbia.edu/tag/06Z0)
 -/
 
 @[expose] public section
@@ -27,8 +32,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Localize the degreewise exact adjunction and transpose a map across its invertible unit.
-Source: Stacks Project, Tag 08BT and Tag 00A7 (4). -/
+/-- Localize the degreewise exact adjunction and transpose a map across its invertible unit. -/
 private theorem exact_adjunction_lifts_map
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
@@ -73,8 +77,7 @@ private theorem exact_adjunction_lifts_map
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Exact restriction preserves the homology stalks at points of the open.
-Source: Stacks Project, Tags 08DW and 06Z0. -/
+/-- Exact restriction preserves the homology stalks at points of the open. -/
 private theorem openRestriction_support (X : Scheme.{u}) (U : X.Opens) (T : Set X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
@@ -111,22 +114,7 @@ private theorem openRestriction_support (X : Scheme.{u}) (U : X.Opens) (T : Set 
 set_option backward.isDefEq.respectTransparency false in
 /-- A supported perfect source and map on an open have an ambient representative
 which is perfect and supported at the points of that open. No perfectness is asserted
-outside the open.
-Source: Stacks Project, Tags 08BT, 00A7 (4), and 09IM (initial object of the induction).
-(blueprint: lem-sc-supported-map-initial-ambient-lift).
-
-Proof: Apply the inverse of Modules.overEquiv U to F and then exact extension by
-zero to X. These are actual functors: no arbitrary existence witness defines the
-source. The exact extension-by-zero/restriction adjunction induces a derived
-adjunction. The adjoint of α, after the equivalence comparisons, is β. The unit
-is invertible since extension by zero restricts to the identity on U. Let e be
-its inverse, transported to the open subscheme. The adjunction unit equation gives
-β restricted to U = e.hom followed by α. At x in U extension by zero has the same
-cohomology stalk as F, proving support. Transport a strictly perfect local model
-of F at x along the equivalence of the localized site with the open subscheme.
-The bounded complex and its finite-free retracts transport termwise, providing
-O and K in the displayed local perfectness condition. The construction works for
-empty U and zero F, and does not assert that extension by zero is globally perfect. -/
+outside the open. -/
 theorem exists_supported_map_initial_ambient_lift
     (X : Scheme.{u}) (U : X.Opens) (T : Set X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

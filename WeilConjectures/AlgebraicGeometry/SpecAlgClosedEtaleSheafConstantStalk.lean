@@ -17,17 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The identity geometric stalk is computed by the global sections map in the
-algebraically closed case.
-Source: Stacks Project, Lemma 59.39.3 (Tag 0A3H).
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk).
-
-Proof: The marked lift of any pointed neighbourhood is a morphism from the
-identity neighbourhood. For injectivity, equality of germs is witnessed on a
-pointed refinement; pull its equality back along this lift. Its composite with
-the refinement map is an endomorphism over the identity and hence the identity.
-For surjectivity, represent a germ on a pointed neighbourhood and restrict its
-representative along the marked lift. Naturality of the colimit coprojections
-identifies the resulting global germ with the original one. -/
+algebraically closed case. -/
 theorem spec_algClosed_etale_sheaf_constant_stalk
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf ((Spec (CommRingCat.of Ω)).smallEtaleTopology) (Type (u + 1))) :

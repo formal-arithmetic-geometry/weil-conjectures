@@ -14,7 +14,15 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
 /-! Natural comparison transformation for the derived stalk extension.
-(blueprint: lem-pc-stalk-derived-extension-comparison-core) -/
+
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ7](https://stacks.math.columbia.edu/tag/0DJ7)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 06Y6](https://stacks.math.columbia.edu/tag/06Y6)
+-/
 
 @[expose] public section
 
@@ -81,23 +89,7 @@ set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 800000 in
 -- The default 200000 times out at whnf; this historical limit passed in 40 seconds remotely.
 /-- A natural comparison with the specified K-flat representative equation, without an
-invertibility assertion.
-
-Proof: identify the composite stalk ring map with the actual stalk map of g'.
-On K-flat sheaf complexes use the scalar-extension counit, the Q/Qh factors,
-the specified tensorStalkIso, the inverse exact-stalk factor and the inverse
-pullback counit in the displayed order. Exact stalks preserve quasi-isomorphisms,
-and their K-flatness follows from the stalk criterion. Naturality of the counits
-and the degreewise pullback-stalk identification gives naturality for chain maps
-between K-flat representatives. Every derived arrow is represented by a roof;
-replace its middle complex by a K-flat resolution. Common refinements show the
-induced maps are independent of the roof and resolution. They therefore descend
-to a natural transformation on derived categories. For a K-flat P with invertible
-pullback counit use P itself as its resolution; the construction is precisely the
-stated equation. Invertibility of this transformation is a separate argument.
-Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 (Tag 0DJ7);
-Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison-core). -/
+invertibility assertion. -/
 theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

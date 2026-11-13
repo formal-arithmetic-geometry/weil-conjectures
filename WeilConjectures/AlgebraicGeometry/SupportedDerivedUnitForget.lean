@@ -11,8 +11,10 @@ import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
 /-!
 # Integral evaluation of the exact derived closed unit
 
-Source: blueprint lem-amb-cartier-kummer-map; Stacks 03PL and 0A45
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 03PL](https://stacks.math.columbia.edu/tag/03PL)
+* [Stacks Project, Tag 0A45](https://stacks.math.columbia.edu/tag/0A45)
 -/
 
 @[expose] public noncomputable section
@@ -236,21 +238,7 @@ private theorem coefficient_unit (A : Type (u + 1)) [CommRing A]
   rw [integral_unit_apply, generator_apply]
 
 /-- Evaluation on the integral generator commutes with the derived closed unit
-and its exact degree-zero direct-image comparison.
-Source: Stacks 0A45, derived support-Hom unit normalization; blueprint
-lem-amb-cartier-kummer-map, paragraph 4 (auxiliary; not a blueprint node).
-
-Proof: exactness of closed direct image identifies its right-derived functor on
-single objects with the single of direct image. The factorization formula for the
-derived adjunction unit, and the single-complex comparison, identify the composite
-of the derived unit and that comparison with the single of the underived unit.
-Apply Ext.homEquiv and the functoriality of Ext under exact coefficient forgetting.
-The integral coefficient generator is natural for the constant-sheaf unit: both
-adjuncts send an integer r to its image r in A, on every etale object of the closed
-support. Thus the resulting precomposition is the integral supported unit followed
-by the supported coefficient generator. Yoneda associativity gives the equality.
-This holds for the empty support and scheme, and no finiteness or flatness condition
-on the coefficient ring is used. -/
+and its exact degree-zero direct-image comparison. -/
 theorem supported_derived_unit_forget (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))

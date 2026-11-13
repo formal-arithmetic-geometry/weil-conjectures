@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleUnitLift
 
 /-! # Explicit maps for restricted degree-zero complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 03CB](https://stacks.math.columbia.edu/tag/03CB)
 -/
 
 @[expose] public section
@@ -76,22 +80,7 @@ private lemma raw_identity {S Y : Scheme.{v}} (a : Y ⟶ Y)
     apply pullback.hom_ext <;> simp [rawAffineRestrictedMap]
   exact unit_square_heq _ hq (pullback.snd U.hom h) _ F
 
-/-- Identity law for restricted single transitions.
-Source: Stacks Project, Tags 09Z1 and 03CB, inverse-image coherence in restriction.
-(blueprint: lem-sbc-restricted-affine-single-identity-law).
-
-Proof: Expand the transition as the single comparison followed by the image of the
-restricted coefficient. The pullback second-projection equation gives its commuting
-square. Use D.map_id to replace both horizontal arrows by identities, and hφid to
-replace the original coefficient with upperStarId. The identity square comparison
-is the composite of the two unit comparisons, whiskered along the second projection.
-Its inverse cancels the pulled-back coefficient unit, leaving the unit on the
-restricted sheaf, transported along restrictedAffineDiagram.map_id. Apply
-HomologicalComplex.hom_ext. At degree zero use singleObjXSelf and naturality of the
-unit comparison to identify the single-complex map with this sheaf equality. At all
-other degrees the target single complex is zero, so its morphisms agree. The
-calculation also applies to zero sheaves and empty schemes; for an empty index type
-there is no identity equation to check. -/
+/-- Identity law for restricted single transitions. -/
 theorem restrictedAffineSingleTransition_identity_law {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

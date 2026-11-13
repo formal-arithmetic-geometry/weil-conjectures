@@ -21,15 +21,17 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 /-!
 # Canonical restriction to a strict henselization
 
-The germ restriction `r_G : G_s ⟶ Γ(S_(s), g⁻¹G)` is characterised by its components at the
+The germ restriction `r_G: G_s ⟶ Γ(S_(s), g⁻¹G)` is characterised by its components at the
 representative affine pointed neighbourhoods (the unit of `g⁻¹ ⊣ g_*` followed by restriction
 along the section `S_(s) ⟶ V ×_S S_(s)` given by the limit leg); it exists and is unique
 (`existsUnique_strictHenselizationStalkRestriction`). The canonical restriction
-`ρ^q : (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is `r ≫ strictHenselizationCohomologyComparison`
+`ρ^q: (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is `r ≫ strictHenselizationCohomologyComparison`
 for that unique `r`.
 
-Source: Stacks, Tag 03Q9, theorem-higher-direct-images, its restriction construction
-(blueprint: def-weil-pbc-strict-henselization-restriction).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
 -/
 
 @[expose] public section
@@ -45,9 +47,7 @@ variable {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
   (s : Spec (.of Ω) ⟶ S)
 
 /-- The section `S_(s) ⟶ V ×_S S_(s)` of the base change of a representative affine pointed
-neighbourhood `V`, with first component the limit leg `S_(s) ⟶ Spec Γ(V, ⊤) ≅ V`.
-Source: Stacks, Tag 03Q9, proof of theorem-higher-direct-images
-(blueprint: def-weil-pbc-strict-henselization-restriction). -/
+neighbourhood `V`, with first component the limit leg `S_(s) ⟶ Spec Γ(V, ⊤) ≅ V`. -/
 noncomputable def strictHenselizationNeighbourhoodSection
     (j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
     Scheme.Etale.mk (𝟙 (Scheme.strictLocalization s)) ⟶
@@ -71,9 +71,7 @@ noncomputable def strictHenselizationNeighbourhoodSection
 
 /-- Restrict a section over a representative affine pointed neighbourhood to the strict
 henselization: the unit of `g⁻¹ ⊣ g_*` on sections over `V`, then restriction along
-`strictHenselizationNeighbourhoodSection`.
-Source: Stacks, Tag 03Q9, proof of theorem-higher-direct-images
-(blueprint: def-weil-pbc-strict-henselization-restriction). -/
+`strictHenselizationNeighbourhoodSection`. -/
 noncomputable def strictHenselizationSectionRestriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
     (j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -96,10 +94,8 @@ noncomputable def strictHenselizationSectionRestriction
           (Scheme.strictLocalization s))
         (Scheme.Etale.mk (𝟙 (Scheme.strictLocalization s))) Over.mkIdTerminal)).inv.app _
 
-/-- The germ restriction `r : F_s ⟶ Γ(S_(s), g⁻¹F)`: its composite with the germ map of every
-representative affine pointed neighbourhood is `strictHenselizationSectionRestriction`.
-Source: Stacks, Tag 03Q9, proof of theorem-higher-direct-images
-(blueprint: def-weil-pbc-strict-henselization-restriction). -/
+/-- The germ restriction `r: F_s ⟶ Γ(S_(s), g⁻¹F)`: its composite with the germ map of every
+representative affine pointed neighbourhood is `strictHenselizationSectionRestriction`. -/
 def IsStrictHenselizationStalkRestriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
     (r : (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶
@@ -115,13 +111,7 @@ def IsStrictHenselizationStalkRestriction
         F.obj ≫ r =
       strictHenselizationSectionRestriction s F j
 
-/-- The germ restriction exists and is unique.
-Source: Stacks, Tag 03Q9, proof of theorem-higher-direct-images
-(blueprint: def-weil-pbc-strict-henselization-restriction).
-Proof: the representative affine pointed neighbourhoods are initial among all pointed
-neighbourhoods (`strictHenselizationAffineProperties`), so the stalk is the colimit of `F` over
-them and maps out of it are determined by these components. The components are compatible
-with pointed maps by naturality of the unit and of the limit legs, so they descend. -/
+/-- The germ restriction exists and is unique. -/
 theorem existsUnique_strictHenselizationStalkRestriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     ∃! r : (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶
@@ -213,14 +203,7 @@ theorem existsUnique_strictHenselizationStalkRestriction
     intro j
     exact (hr j.unop).trans (hc.fac d j).symm
 
-/-- Global sections on the strict henselization are exact.
-Source: Stacks, Tag 03QO (strictly henselian local schemes have exact global sections)
-(blueprint: def-weil-pbc-strict-henselization-restriction).
-Proof: the pointed étale neighbourhood colimit is the strict henselian local ring
-(Stacks, lemma-describe-etale-local-ring, used in 03Q9). Every étale covering of its
-closed point has a section over this strictly henselian local scheme. Thus a locally
-surjective map of sheaves is surjective on global sections.
-The global sections functor is already left exact, so it preserves finite colimits. -/
+/-- Global sections on the strict henselization are exact. -/
 theorem strictHenselization_globalSections_preservesFiniteColimits :
     PreservesFiniteColimits
       (Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology
@@ -243,9 +226,7 @@ theorem strictHenselization_globalSections_preservesFiniteColimits :
   have : E.PreservesHomology := Functor.preservesHomology_of_preservesEpis_and_kernels E
   exact E.preservesFiniteColimits_of_preservesHomology
 
-/-- The canonical Leray and exact-global-sections comparison over the strict local base.
-Source: Stacks, Tags 03Q9 and 03QO; the derived-functor composition isomorphism
-(blueprint: def-weil-pbc-strict-henselization-restriction). -/
+/-- The canonical Leray and exact-global-sections comparison over the strict local base. -/
 noncomputable def strictHenselizationLerayHomologyIso
     {X : Scheme.{v}} (f : X ⟶ S) (q : ℤ)
     (K : DerivedCategory.Plus
@@ -286,10 +267,8 @@ noncomputable def strictHenselizationLerayHomologyIso
 inverse image with cohomology, apply the derived base-change mate `g⁻¹ Rf_* ⟶ Rf'_* p⁻¹`
 (the mate of the pullback-square comparison under the derived adjunctions), then the exact
 global sections and Leray isomorphism. The canonical restriction
-`ρ^q : (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` of the node is `r ≫` this map, for the unique
-`r` with `IsStrictHenselizationStalkRestriction s (R^q f_* F) r`.
-Source: Stacks, Tag 03Q9, proof of theorem-higher-direct-images
-(blueprint: def-weil-pbc-strict-henselization-restriction). -/
+`ρ^q: (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` of the node is `r ≫` this map, for the unique
+`r` with `IsStrictHenselizationStalkRestriction s (R^q f_* F) r`. -/
 noncomputable def strictHenselizationCohomologyComparison
     {X : Scheme.{v}} (f : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) (q : ℕ) :

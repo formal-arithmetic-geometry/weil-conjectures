@@ -20,8 +20,11 @@ import WeilConjectures.AlgebraicGeometry.ConstantRankExteriorDerivedComparison
 
 /-! # The dualizing object of a smooth diagonal in constant rank
 
-Source: Stacks Project, Tags 0BR0 and 08S2, fourth equality of Tag 0BRT
-(blueprint: lem-sc-smooth-diagonal-dualizing-determinant).
+## References
+
+* [Stacks Project, Tag 0BR0](https://stacks.math.columbia.edu/tag/0BR0)
+* [Stacks Project, Tag 08S2](https://stacks.math.columbia.edu/tag/08S2)
+* [Stacks Project, Tag 0BRT](https://stacks.math.columbia.edu/tag/0BRT)
 -/
 
 @[expose] public section
@@ -60,30 +63,7 @@ private theorem singleton_one_isKoszulRegular (R : Type u) [CommRing R] :
     ((HomologicalComplex.homologyFunctor _ _ n).mapIso e.symm)
 
 /-- The diagonal right adjoint takes the structure object to the shifted determinant
-of the dual of relative differentials. This does not involve the right adjoint of f.
-Source: Stacks Project, Tags 0BR0 and 08S2, fourth equality in Tag 0BRT.
-(blueprint: lem-sc-smooth-diagonal-dualizing-determinant).
-
-Proof: Properness makes the diagonal a closed immersion. Smoothness of pure relative
-dimension d makes it Koszul regular. The local generators near each diagonal point
-have length d; restrict their affine neighbourhoods to obtain the regularity witness
-required by koszulRegularImmersion_dualizing. The diagonal conormal is relative
-Kahler differentials by diagonalConormal_iso_relativeDifferentials. Smoothness says
-that this sheaf is finite locally free of rank d; hence its stalk finrank is d,
-and the constant locally constant function with value d satisfies the rank witness
-in Koszul duality. Apply koszulRegularImmersion_dualizing with this rank function
-and the specified adjunction c. First apply c to the full-subcategory lift of hOP,
-so its input is literally the single structure sheaf as required there. Koszul
-duality gives the rank-stratified exterior complex isomorphic to c(OP).
-Dualize the conormal isomorphism by precomposition, then apply the exterior power.
-For constant rank d, all rank strata other than d are empty; their extensions by
-zero vanish. The rank-d stratum is all of X, so its extension is the original
-exterior sheaf. Thus the locally ranked complex is the complex with this sheaf in
-degree d and zero elsewhere. Its image in the derived category is its degree-zero
-single shifted by -d. Compose these identifications with the inverse of Koszul
-duality. Its theorem already permits different derived universes for X and P.
-If X is empty, the rank witness is vacuous and the same complex identification
-holds. For d = 0 it gives the structure sheaf in degree zero, as it should. -/
+of the dual of relative differentials. This does not involve the right adjoint of f. -/
 theorem smoothDiagonal_dualizing_determinant
     (X S : Scheme.{u}) [IsNoetherian S]
     (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f]

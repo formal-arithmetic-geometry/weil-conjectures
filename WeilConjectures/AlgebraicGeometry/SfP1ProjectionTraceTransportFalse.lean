@@ -28,13 +28,12 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 The ordinary inverse-exchange trace transport for the first projection.
 
 This is the `a = false` component of
-`lem-sf-p1-projection-trace-transport`.  Its source is the same projective-line
+`lem-sf-p1-projection-trace-transport`. Its source is the same projective-line
 adjunction comparison calculation, with the projection fixed to the first
 coordinate; the arbitrary arrow `τ` is carried by naturality through every
-factor.  The calculation uses proper exchange and the composite adjunction
+factor. The calculation uses proper exchange and the composite adjunction
 counit, and the inverse-image/direct-image cancellation for the chosen
-isomorphism.  It is valid for empty bases and zero coefficient rings.
-(auxiliary; not a blueprint node)
+isomorphism. It is valid for empty bases and zero coefficient rings.
 -/
 theorem projectionTraceTransport_false
     (A : Type (u + 1)) [CommRing A] [Finite A]

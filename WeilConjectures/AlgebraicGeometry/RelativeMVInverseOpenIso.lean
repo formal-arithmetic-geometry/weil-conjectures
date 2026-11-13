@@ -14,8 +14,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # Explicit inverse-image open comparison
 
-Source: Stacks Project, Cohomology, Tags 08HZ and 08HY, and Schemes, Tag 01JR.
-(blueprint: lem-pc-relative-mv-inverse-open-iso).
+## References
+
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 01JR](https://stacks.math.columbia.edu/tag/01JR)
+* [Stacks Project, Tag 079W](https://stacks.math.columbia.edu/tag/079W)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
 -/
 
 @[expose] public section
@@ -36,8 +41,7 @@ variable [d : ∀ Z : Scheme.{u},
 /-- Transport the open localization object along a specified isomorphism over X.
 The unit of pullback along the isomorphism is invertible. The last comparison is
 right-adjoint uniqueness for the composite adjunction, using the specified equality
-of scheme morphisms. Source: Stacks, Tags 01JR, 079W and 08HZ.
-(blueprint: lem-pc-relative-mv-inverse-open-iso). -/
+of scheme morphisms. -/
 @[irreducible] def relativeMVIsoOpenTransport {A B X : Scheme.{u}} (s : B ≅ A)
     (j : A ⟶ X) (p : B ⟶ X) (h : s.hom ≫ j = p)
     (K : schemeDerivedCategory X) :
@@ -67,9 +71,7 @@ private theorem iso_open_transport_unit {A B X : Scheme.{u}} (s : B ≅ A)
     Functor.whiskerRight_app, Adjunction.comp_unit_app, Functor.comp_map,
     Category.assoc] using hu
 
-/-- The localization comparison on X', before applying any further direct image.
-Source: Stacks, Tags 01JR, 079W and 08HZ.
-(blueprint: lem-pc-relative-mv-inverse-open-iso). -/
+/-- The localization comparison on X', before applying any further direct image. -/
 @[irreducible] def relativeMVInverseOpenLocalizationIso {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (W : X.Opens) (K' : schemeDerivedCategory X') :
     (schemeDerivedDirectImage (g' ⁻¹ᵁ W).ι).obj
@@ -92,8 +94,7 @@ private theorem inverse_open_localization_unit {X X' : Scheme.{u}} (g' : X' ⟶ 
   rw [Adjunction.unit_leftAdjointUniq_hom_app, iso_open_transport_unit]
 
 /-- The inverse-image open comparison is constructed, independent of f, K and the
-object map in a base-change square. Source: Stacks, Tags 01JR, 08HZ and 08HY.
-(blueprint: lem-pc-relative-mv-inverse-open-iso). -/
+object map in a base-change square. -/
 @[irreducible] def relativeMVInverseOpenIso {X X' S' : Scheme.{u}} (g' : X' ⟶ X)
     (f' : X' ⟶ S') (W : X.Opens) (K' : schemeDerivedCategory X') :
     (schemeDerivedDirectImage f').obj
@@ -105,15 +106,7 @@ object map in a base-change square. Source: Stacks, Tags 01JR, 08HZ and 08HY.
   (relativeMVImageComp (pullback.fst g' W.ι) f').app
     ((derivedPullback (pullback.fst g' W.ι)).obj K')
 
-/-- The explicit inverse-open comparison preserves the unit.
-Source: Stacks Project, Tag 08HZ, and adjunction uniqueness.
-(blueprint: lem-pc-relative-mv-inverse-open-iso).
-
-Proof: Left-adjoint uniqueness sends the exact-open unit to the pullback unit.
-The composite adjunction unit is the j unit followed by Rj of the iso-pullback
-unit. Transport this adjunction along the pullback composition comparison and
-the projection equality. Right-adjoint uniqueness sends its unit to the p unit.
-Apply Rf' and its pinned direct-image composition comparison. -/
+/-- The explicit inverse-open comparison preserves the unit. -/
 theorem relativeMVInverseOpenIso_unit {X X' S' : Scheme.{u}} (g' : X' ⟶ X)
     (f' : X' ⟶ S') (W : X.Opens) (K' : schemeDerivedCategory X') :
     (schemeDerivedDirectImage f').map
@@ -256,17 +249,7 @@ private theorem inverse_open_restriction_of_units
   exact map_comparison_restriction (schemeDerivedDirectImage f) r b qU qW
     ((relativeMVImageComp pU f).app _) ((relativeMVImageComp pW f).app _) hbase
 
-/-- The explicit inverse-open comparison intertwines nested restriction.
-Source: Stacks Project, Tags 08BV and 08HZ, restricted-counit construction.
-(blueprint: lem-pc-relative-mv-inverse-open-iso).
-
-Proof: Each restriction, exact or pinned, composed with its U unit is its W unit,
-by naturality and the triangle identity. Both localization comparisons preserve
-units. Compose the desired equality with the exact U unit; the two sides then
-agree. Exact restriction to W sends that unit to an isomorphism, since restriction
-to W factors through U and open direct image is fully faithful. Transpose after
-composing with the inverse W comparison, and cancel the mapped U unit. Finally
-apply Rf' and cancel the inverse direct-image comparison on U. -/
+/-- The explicit inverse-open comparison intertwines nested restriction. -/
 theorem relativeMVInverseOpenIso_restriction {X X' S' : Scheme.{u}} (g' : X' ⟶ X)
     (f' : X' ⟶ S') {W U : X.Opens} (i : W ≤ U) (K' : schemeDerivedCategory X') :
     (schemeDerivedDirectImage f').map

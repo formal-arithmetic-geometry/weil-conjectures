@@ -10,9 +10,13 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.Algebra.Category.Grp.Colimits
 /-! # Certificates for comparison maps on specified stages
 
-Source: Stacks Project, Tag 09YQ, comparison maps for coherent sheaf systems.
 The closure under products and transport is the finite-cover bookkeeping used
 with Tag 0A50. These certificates contain geometric data, not continuity proofs.
+
+## References
+
+* [Stacks Project, Tag 09YQ](https://stacks.math.columbia.edu/tag/09YQ)
+* [Stacks Project, Tag 0A50](https://stacks.math.columbia.edu/tag/0A50)
 -/
 
 @[expose] public section
@@ -24,10 +28,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- A comparison assembled from canonical cohomology comparisons with specified stages.
-
-Source: Stacks Project, Tag 09YQ (theorem-colimit), comparison-map construction,
-and Tag 0A50, finite direct sums in Mayer--Vietoris.
-(blueprint: def-weil-pbc-stage-cohomology-comparison).
 
 The system constructor records an actual scheme limit, coherent coefficient system,
 sheaf colimit, and canonical cohomology cocone, with a stage in `allowed`.

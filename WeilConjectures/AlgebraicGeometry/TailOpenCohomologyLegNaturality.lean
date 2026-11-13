@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Restricted cohomology leg naturality
 
-Source: Stacks Project, Tags 09YQ and 01F7.
+## References
+
+* [Stacks Project, Tag 09YQ](https://stacks.math.columbia.edu/tag/09YQ)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -100,9 +103,7 @@ private theorem cohomologyMap_transported_comp {X Y Z : Scheme.{u}}
     _ = _ := (Sheaf.H.map_comp_apply (e.hom.app G) (m ≫ k) y).symm
 
 
-/-- Canonical cohomology leg from a stage open to the limit open.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-tail-open-cohomology-leg-naturality). -/
+/-- Canonical cohomology leg from a stage open to the limit open. -/
 noncomputable def tailOpenCohomologyCoconeLeg {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -124,20 +125,7 @@ noncomputable def tailOpenCohomologyCoconeLeg {I : Type u} [Preorder I]
         ((eG j.val).inv ≫ L.ι.app j.val)) n)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The restricted cohomology legs commute with the restricted transitions.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-tail-open-cohomology-leg-naturality).
-
-Proof: Precompose the cocone equation G.map f; L_k = L_j by eG_j.inv and substitute hG.
-Cancel the inverse isomorphisms to obtain the original coefficient leg equation.
-Restrict it along the limit-open inclusion. The projection square and transition square
-paste to the projection square at j. Vertical pasting of inverse-image square comparisons
-and naturality in the coefficient transition identify the restricted coefficient equation
-with the composite of the restricted transition and restricted leg at k. The scheme
-projections compose because both agree after the stage-open inclusion, by c.w.
-Apply cohomology pullback composition, coefficient naturality and Sheaf.H.map composition
-to this coefficient equation. The displayed naturality equality follows. The argument
-uses arbitrary cocones, and includes empty opens and zero coefficients. -/
+/-- The restricted cohomology legs commute with the restricted transitions. -/
 theorem tailOpenCohomologyCoconeLeg_naturality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

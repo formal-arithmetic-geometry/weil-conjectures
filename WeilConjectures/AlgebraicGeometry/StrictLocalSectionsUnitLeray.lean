@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction
 
 /-! # Derived sections unit followed by Leray on a representative
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-sections-unit-leray).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -145,22 +146,7 @@ private lemma sections_unit_on_complex {S : Scheme.{v}}
 -- The long naturality calculation elaborates several composed derived functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The direct-image unit followed by Leray is the derived sections unit.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-unit factorization defining `Functor.rightDerivedFunctorCompIso`.
-(blueprint: lem-weil-pbc-strict-local-sections-unit-leray).
-
-Proof: expand the exact sections comparison and the bounded-below/unbounded
-right-derived compatibility. Their defining unit compatibilities identify their
-composite with the inverse exact-to-right-derived sections comparison.
-Naturality moves the map from Q(D) to T through the Leray isomorphism. Expand
-Leray as the inverse derived composition isomorphism followed by the derived
-underived sections isomorphism. The composition unit factorization now gives
-the sections unit at D preceded by the localized underived sections isomorphism.
-Naturality of the sections unit and quotient/localization isomorphisms accounts
-for the displayed transport r. This calculation never inverts the direct-image
-unit or the sections unit at D; it holds for zero and nonacyclic complexes. -/
+/-- The direct-image unit followed by Leray is the derived sections unit. -/
 theorem strictLocalSections_unit_leray {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     {Y : Scheme.{v}} (t : Y ⟶ Scheme.strictLocalization s)

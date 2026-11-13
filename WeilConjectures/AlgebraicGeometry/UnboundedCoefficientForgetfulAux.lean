@@ -133,9 +133,6 @@ private noncomputable def restrictScalarsForgetIso
 
 /-- Restriction of scalars preserves the invertibility test for the canonical unbounded
 exchange, after identifying its source and target with the restricted-coefficient versions.
-Source: Stacks Project, Tag 0D6J(3), and the canonical mate coherence of
-`lem-kun-unbounded-abelian-exchange-comparison`.
-(auxiliary; not a blueprint node)
 
 Proof in words: write U_R and U_S for forgetting R- and S-module structure to abelian
 sheaves. Termwise restriction gives U_R Res = U_S, including on complexes and their

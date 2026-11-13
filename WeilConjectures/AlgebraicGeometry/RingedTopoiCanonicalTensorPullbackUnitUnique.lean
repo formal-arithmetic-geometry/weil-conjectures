@@ -8,8 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonData
 
 /-! # Uniqueness of the normalized tensor-pullback unit
 
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
 -/
 
 @[expose] public section
@@ -32,8 +35,8 @@ open scoped ChangeOfRings
 set_option linter.unusedVariables false in
 /--
 The proof cancels the tensor comparison and uses the tensor universal property to identify maps.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
+
+.
 Proof in words: cancel the tensor comparison and apply the tensor universal property. -/
 theorem canonicalRingedTensorComparison_unit_unique
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}

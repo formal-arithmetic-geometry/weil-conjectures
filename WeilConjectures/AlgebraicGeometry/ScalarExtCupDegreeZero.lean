@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
 
 /-! # ScalarExtCupDegreeZero
 
-Source: Stacks Project, Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-ext-cup-degree-zero).
+## References
+
+* [Stacks Project, Tag 0FKU](https://stacks.math.columbia.edu/tag/0FKU)
 -/
 
 @[expose] public section
@@ -78,25 +79,7 @@ private theorem ext_iso_transport {C : Type*} [Category C] [Abelian C]
     Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀,
     Iso.hom_inv_id_app, Abelian.Ext.comp_mk₀_id] using h
 
-/-- Tensoring a degree-one scalar Ext class with a degree-zero morphism is coefficient composition.
-Source: Stacks Project, Cohomology, Tag 0FKU, Lemma 20.31.1 and Remark 20.31.2.
-(blueprint: lem-sc-scalar-ext-cup-degree-zero).
-
-Proof: Expand scalarExtCup. Exact-functor transport sends mk₀ of a morphism
-u to mk₀ of its tensor whiskering. For the right formula the product is
-precomposition by the inverse unit unitor, tensorRight-unit transport of a,
-and postcomposition by B whiskered with u. Naturality on Ext of the right
-unitor identifies the first two factors with a postcomposed by the inverse
-right unitor of B; the left and right unitors agree at the tensor unit.
-Associativity gives the first formula. For the left formula the first
-transport is mk₀ of u whiskered with the unit. Move this whiskering past the
-transport of a using naturality on Ext of the transformation tensorLeft-unit
-to tensorLeft-A induced by u. The remaining tensorLeft-unit transport is
-identified with a by naturality of the left unitor. Associativity and
-naturality of the unitors give the displayed coefficient morphism. These
-are exact-functor identities in Ext, so they require no geometric assumptions.
-The degree-zero factor introduces no sign. The formula holds with zero u or with the zero sheaf.
-The naturality argument used below applies in every degree. -/
+/-- Tensoring a degree-one scalar Ext class with a degree-zero morphism is coefficient composition. -/
 theorem scalarExtCup_mk₀ {A B : KSheaf X k}
     (a : Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) B 1)
     (v : 𝟙_ (KSheaf X k) ⟶ A) :

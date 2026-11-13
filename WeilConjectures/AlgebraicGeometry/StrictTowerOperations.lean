@@ -13,15 +13,20 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTrian
 
 /-! # Canonical operations on strict module towers
 
-Source: blueprint completed-exchange-coherence, first two proof sentences;
-Stacks 07A7 and 0D6D (auxiliary; not a blueprint node).
-
 ## Main definitions
 
 * `exchangeTowerPull`, `exchangeTowerPush`: strict diagram derived functors.
 * `exchangeTowerAdjunction`: the derived termwise normalized module adjunction.
 * `StrictTowerRingedSquare.exchangeTowerSquare`: canonical pullback composition.
 * `StrictTowerRingedSquare.exchangeTowerMate`: its specified adjunction mate.
+
+## References
+
+* [Stacks Project, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
+* [Stacks Project, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+* [Stacks Project, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks Project, Tag 00VC](https://stacks.math.columbia.edu/tag/00VC)
+* [Stacks Project, Tag 03D8](https://stacks.math.columbia.edu/tag/03D8)
 -/
 
 @[expose] public noncomputable section
@@ -38,19 +43,11 @@ attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
 
-/-- Constant coefficients on the small pro-etale site, in the sheaf-value universe.
-Source: strict normalization, paragraph 2; Stacks 00YV
-(auxiliary; not a blueprint node). -/
+/-- Constant coefficients on the small pro-etale site, in the sheaf-value universe. -/
 abbrev exchangeConstantRing (T : Scheme.{t}) (A : Type (t + 1)) [CommRing A] :=
   adicLisseConstantRing T A
 
-/-- Inverse image preserves the specific constant-section comparison for every ring.
-Source: Stacks 00VC, 07A7; strict normalization, paragraph 2
-(auxiliary; not a blueprint node).
-Proof: the constant sheaf is inverse image from sets. Composition of inverse images
-identifies inverse image of a constant sheaf with the same constant sheaf. On constant
-sections this comparison is the sheafification adjunct defining the recorded map.
-Thus that particular map is invertible; no finiteness of A is required. -/
+/-- Inverse image preserves the specific constant-section comparison for every ring. -/
 theorem exchangeConstantComparison_isIso {U V : Scheme.{t}} (f : U ⟶ V)
     (A : Type (t + 1)) [CommRing A] :
     IsIso ((proEtaleConstantComparison f).app (CommRingCat.of A)) := by
@@ -91,9 +88,7 @@ theorem exchangeConstantComparison_isIso {U V : Scheme.{t}} (f : U ⟶ V)
   rw [he]
   infer_instance
 
-/-- The constant coefficient identification, fixed by the constant-section map.
-Source: strict normalization, paragraph 2; Stacks 00VC
-(auxiliary; not a blueprint node). -/
+/-- The constant coefficient identification, fixed by the constant-section map. -/
 def exchangeConstantIso {U V : Scheme.{t}} (f : U ⟶ V)
     (A : Type (t + 1)) [CommRing A] :
     (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj (exchangeConstantRing V A) ≅
@@ -107,9 +102,7 @@ variable {U V : Scheme.{t}} (f : U ⟶ V)
   (c : (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj R ≅ S)
 
 /-- Sectionwise normalization of the ordinary composition comparison. Its right-adjoint
-conjugate is exactly the canonical fibre-product pasting map on every section.
-Source: Stacks 03D8 and 0D6D
-(auxiliary; not a blueprint node). -/
+conjugate is exactly the canonical fibre-product pasting map on every section. -/
 def ExchangeModuleCompositionNormalized {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
     (RV : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
     (RW : Sheaf (ProEt.topology W) CommRingCat.{t + 1})
@@ -131,17 +124,7 @@ def ExchangeModuleCompositionNormalized {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : 
             (op U) m =
       N.val.map ((MorphismProperty.Over.pullbackComp h k).hom.app U).op m
 
-/-- There is a unique composition comparison with the sectionwise canonical conjugate.
-Source: Stacks 03D8 and 0D6D
-(auxiliary; not a blueprint node).
-Proof: proEtaleRingDerivedPullbackComposition supplies ordinary adjunctions whose
-units are the canonical tensor-unit sections, a sectionwise pasting isomorphism of
-right adjoints, and its conjugate ordinary pullback comparison. These adjunctions
-agree with proEtaleRingModuleAdjunction: the units agree on every section, hence
-agree as natural transformations, and determine the adjunction. Thus its comparison
-satisfies this normalization. Sectionwise equality determines the direct-image
-natural transformation uniquely. The conjugate-isomorphism equivalence is bijective,
-so the pullback comparison is unique as well. -/
+/-- There is a unique composition comparison with the sectionwise canonical conjugate. -/
 theorem exchangeModuleComposition_existsUnique {V W Z : Scheme.{t}}
     (h : Z ⟶ W) (k : W ⟶ V)
     (RV : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
@@ -178,9 +161,7 @@ theorem exchangeModuleComposition_existsUnique {V W Z : Scheme.{t}}
     exact (ha N U.unop m).trans (hd N U.unop m).symm
 
 /-- The ordinary canonical pullback composition, fixed by its sectionwise conjugate
-and the existing tensor-unit-normalized module adjunctions.
-Source: Stacks 03D8 and 0D6D
-(auxiliary; not a blueprint node). -/
+and the existing tensor-unit-normalized module adjunctions. -/
 def exchangeModuleComposition {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
     (RV : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
     (RW : Sheaf (ProEt.topology W) CommRingCat.{t + 1})

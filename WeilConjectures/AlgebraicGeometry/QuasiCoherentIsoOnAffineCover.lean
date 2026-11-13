@@ -14,9 +14,12 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Isomorphisms of quasi-coherent modules detected on an affine open cover
 
-Source: Stacks Project, Schemes, Tags 01IA and 01IB, and Sheaves, Tag 04TN;
-used in Morphisms, Tag 01SB
-(blueprint: lem-weil-pbc-quasi-coherent-iso-on-affine-cover).
+## References
+
+* [Stacks Project, Tag 01IA](https://stacks.math.columbia.edu/tag/01IA)
+* [Stacks Project, Tag 01IB](https://stacks.math.columbia.edu/tag/01IB)
+* [Stacks Project, Tag 04TN](https://stacks.math.columbia.edu/tag/04TN)
+* [Stacks Project, Tag 01SB](https://stacks.math.columbia.edu/tag/01SB)
 -/
 
 @[expose] public section
@@ -30,16 +33,12 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A morphism of quasi-coherent modules is an isomorphism if its maps on sections over an
 arbitrary affine open cover are bijective.
 
-Source: Stacks Project, Schemes, Tags 01IA and 01IB, Sheaves, Tag 04TN;
-used in Morphisms, Tag 01SB
-(blueprint: lem-weil-pbc-quasi-coherent-iso-on-affine-cover).
-
 Proof (the node's four steps):
 1. For each affine open `W a`, put `R = Γ(Y, W a)`. Choose an isomorphism
-   `h : Spec R ≅ W a` inducing the identity on global sections. This follows from
+   `h: Spec R ≅ W a` inducing the identity on global sections. This follows from
    `def-pc-scheme` and `def-weil-affine-spectrum`. Compose with the inclusion into `Y`.
    By `lem-weil-pbc-module-restriction-open-immersion-colimits`, restriction along this
-   open immersion is functorial and preserves quasi-coherence (`pqf-def-coherent`).
+   open immersion is functorial and preserves quasi-coherence.
    The restricted morphism's global sections map is precisely `φ.app (W a)` as an
    `R`-linear map, since the chosen chart induces the identity on `R`.
 2. By `lem-weil-pbc-affine-tilde-gamma-adjunction`, the counits for the two restricted

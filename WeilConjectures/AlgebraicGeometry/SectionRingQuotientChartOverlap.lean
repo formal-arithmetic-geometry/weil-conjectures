@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf
 
 /-! # Uniqueness of section-ring quotient charts on overlaps
 
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
 -/
 
 @[expose] public section
@@ -26,31 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Two morphisms satisfying the homogeneous fraction equations agree on the overlap
 of their nonvanishing source opens. This is a comparison theorem for given morphisms;
-it asserts no existence of quotient charts.
-Source: Stacks Project, Constructions, Tags 01N8 (lemma-converse-construction),
-01NK (lemma-invertible-map-into-proj), overlap and uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap).
-
-Proof: First show that g sends U into D_+(s). At x in U choose a positive-degree
-chart D_+(a) through g(x), say a has degree r. Apply hg with denominator a,
-exponent d and numerator s^r. In the one-dimensional residue-field fibre, s^r is
-nonzero. Thus both the value of a^d and the pulled-back coefficient of s^r/a^d
-are nonzero. The coefficient is therefore a unit in the source local ring. Since
-the stalk homomorphism is local, s^r/a^d is a unit in the target local ring;
-the homogeneous localization unit criterion gives s outside the homogeneous prime.
-More generally the same argument shows that a nonvanishing section t has image in
-D_+(t). In particular g and h both send U intersect V into D_+(st).
-
-Factor the restrictions through this affine chart. The section st is a generator
-of L^{tensor(d+e)} on U intersect V, and every positive tensor power is again a
-free generator. Restrict hg and hh with denominator st to U intersect V. For every
-homogeneous numerator xi of degree n(d+e), their two scalar pullbacks multiplied
-by the same generator (st)^n equal the same restriction of xi. Cancel the generator
-to get equality of the scalar pullbacks. Every element of S_(st) is such a fraction,
-so the ring maps agree. The affine morphism correspondence gives equality of the
-factored morphisms, and composing the chart inclusion gives the displayed equality.
-When n = 0 the generator is the tensor unit; an empty overlap has unique sections
-and morphisms. No reducedness, affineness of U or V, or covering hypothesis is used. -/
+it asserts no existence of quotient charts. -/
 theorem sectionRing_quotient_charts_overlap
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d e : ℕ) (s : sectionRingGrade L d) (t : sectionRingGrade L e)

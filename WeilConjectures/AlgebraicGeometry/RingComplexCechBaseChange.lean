@@ -8,7 +8,15 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension
 import WeilConjectures.AlgebraicGeometry.RingComplexCechAugmentationHom
 import WeilConjectures.AlgebraicGeometry.RingComplexCechScalarModel
 
-/-! # Base change detected by augmented ordered localization models -/
+/-! # Base change detected by augmented ordered localization models
+
+## References
+
+* [Stacks Project, Tag 099D](https://stacks.math.columbia.edu/tag/099D)
+* [Stacks Project, Tag 0A6R](https://stacks.math.columbia.edu/tag/0A6R)
+* [Stacks Project, Tag 0ALZ](https://stacks.math.columbia.edu/tag/0ALZ)
+* [Stacks Project, Tag 06YQ](https://stacks.math.columbia.edu/tag/06YQ)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -19,36 +27,7 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 
 /-- The normalized scalar-extension map between augmented localization models is a
-quasi-isomorphism on every K-flat replacement.
-Source: Stacks Project, Tags 099D(c), 0A6R, 0ALZ;
-Tag 06YQ for bounded flat complexes.
-(auxiliary; not a blueprint node)
-
-Proof: choose a finite generating list for I. Its ordered localization complex is
-bounded and termwise flat: finite products are finite direct sums, localizations
-are flat, and degrees outside the finite range are zero. It is therefore K-flat.
-For an augmented derived model isomorphism, choose a common cochain roof and
-replace its source by a K-flat resolution. Both legs are quasi-isomorphisms between
-K-flat complexes. The existing changeOfRings_kFlat_quasiIso theorem preserves both
-legs under the actual scalar-extension functor, so the resulting derived scalar
-extension comparison is invertible. The fraction maps (a/g^n) tensor b to
-phi(a)b/phi(g)^n identify its scalar extension with the localization complex for
-the image list, including the differential and
-augmentation. To identify the map, use the universal property of local cohomology:
-for an extended localization complex C and any complex T whose localization at
-each generator vanishes, composition Hom(T,C) to Hom(T,B[0]) with the augmentation
-is bijective. Indeed the cone of C to B[0] is a finite iterated extension of
-localization modules, and derived Hom from T into any of these is zero by the
-localization/restriction adjunction. This includes their shifts. The scalar
-extension of P is supported on the image ideal, because its derived object is
-the scalar extension of C, and C becomes contractible after any generator is
-inverted (insert or delete that index with its ordered sign). The given
-augmentation equation identifies the induced map with the fraction comparison
-under the two augmented derived model isomorphisms, by this bijectivity. Hence
-it is invertible. K-flatness makes ordinary extension of P compute its derived
-extension, so the actual normalized map is a quasi-isomorphism. For the empty
-list this is the identity comparison to the ring; localization at zero gives
-the zero module and the argument remains valid. -/
+quasi-isomorphism on every K-flat replacement. -/
 theorem ringComplex_cech_baseChange_quasiIso
     (A B : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]
     [HasDerivedCategory.{w} (RingSiteModules B)] (φ : A →+* B)

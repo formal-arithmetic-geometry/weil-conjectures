@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # The one-step cohomological reduction on a covering slice
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G.
+## References
+
+* [Stacks Project, Tag 094G](https://stacks.math.columbia.edu/tag/094G)
 -/
 
 @[expose] public section
@@ -348,30 +350,7 @@ attribute [local instance] map_colimits map_additive
 set_option linter.unusedVariables false in
 /-- Killing top cohomology locally leaves an object with one fewer possible
 cohomological degree and finite locally constant cohomology. The triangle is
-recorded after rotation; no extension tower is part of this assertion.
-
-Source: Stacks Project, Tag 094G, proof of `lemma-locally-constant`, from the
-choice of top-cohomology generators through the short exact sequence for the
-cohomology of the cone.
-(auxiliary; not a blueprint node)
-
-Proof: Work on C/U. Trivialize the finite top cohomology on a covering, choose
-finitely many module generators, and take the corresponding finite free module
-F surjecting onto it. Choose any cochain representative of K. The map from
-its cycles in degree b to its cohomology is epic. Intersect the image sieves of
-the finitely many generators and extract a J-cover. The constant-sheaf
-adjunction on each flat slice gives the required lift through this epimorphism.
-Inclusion of the cycles gives a chain map from the constant
-F in degree b. Complete its localization to a distinguished triangle and rotate.
-The long exact homology sequence makes the cone vanish outside [a,b-1],
-identifies its homology below b-1 with that of K, and gives in degree b-1 an
-extension of H^(b-1)(K) by the kernel of F onto H^b(K). The finite locally
-constant Serre theorem, using Noetherianity, shows this extension is finite
-locally constant. Exact restriction, the constant-sheaf comparison and the
-canonical equivalence of an iterated slice with C/V identify all these
-properties with the displayed restrictions along maps in C. Compose the two
-covering refinements. The construction also allows rank zero, a zero ring and
-empty covers. -/
+recorded after rotation; no extension tower is part of this assertion. -/
 theorem exists_site_finite_constant_cone_step
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

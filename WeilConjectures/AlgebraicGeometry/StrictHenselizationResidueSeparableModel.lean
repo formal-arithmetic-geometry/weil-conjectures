@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
 
 /-! # The residue field of a strict-henselization model
 
-Source: Stacks Project, Tags 04HX and 04GP.
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
+* [Stacks Project, Tag 04GP](https://stacks.math.columbia.edu/tag/04GP)
 -/
 
 @[expose] public section
@@ -26,25 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The closed point of any affine local model of the strict henselization factors
-through a base residue field, over which its own residue field is separable.
-Source: Stacks Project, Tag 04HX and Tag 04GP, property (5).
-(blueprint: lem-weil-pbc-strict-henselization-residue-separable-model)
-
-Proof: apply the existing `strictHenselizationResidue` theorem with the algebra
-structure induced by z. It identifies the coordinate colimit's residue field with
-the relative separable closure K of the base residue field F in Ω, and gives the
-pointed structural factorization. The scheme isomorphism e gives a ring
-isomorphism A to that coordinate colimit. Compose it with the surjection to K.
-This surjection has maximal-ideal kernel and therefore gives a residue-field
-isomorphism σA: κA ≃ K. Write d for σA followed by K's inclusion into Ω.
-The pointed structural factorization transports to Spec(d) followed by the
-closed-point structural morphism q of A, giving z. Thus q has image s, the image
-of z. The field-point equivalence supplies f: κ(s) → κA with Spec(f) followed
-by the canonical residue-field point equal to q. Cancellation of that canonical
-monomorphism gives d composed with f equal to the geometric embedding of F.
-Every d(x) belongs to K, hence is separable over F. Regard d as an F-algebra
-homomorphism using this equality; `IsSeparable.of_algHom` descends separability
-to x. All witnesses are eliminated within this theorem proof. -/
+through a base residue field, over which its own residue field is separable. -/
 theorem strictHenselization_residue_separable_model
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]
     [HenselianLocalRing A]

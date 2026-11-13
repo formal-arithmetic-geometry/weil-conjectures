@@ -17,9 +17,11 @@ import WeilConjectures.AlgebraicGeometry.SeparableGenericAffineEtaleLimitComplet
 /-!
 # The separable generic point as an affine étale inverse limit
 
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), Tag 03QL
-(theorem-henselization), and Tag 0032 (lemma-directed-category-system).
-(blueprint: lem-pd-separable-generic-affine-etale-limit)
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
+* [Stacks Project, Tag 03QL](https://stacks.math.columbia.edu/tag/03QL)
+* [Stacks Project, Tag 0032](https://stacks.math.columbia.edu/tag/0032)
 -/
 
 @[expose] public section
@@ -35,32 +37,28 @@ namespace AlgebraicGeometry
 
 /-- A specified separable generic point is presented by affine étale stages.
 
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), Tag 03QL
-(theorem-henselization, clauses (3),(4)), Tag 0032 (lemma-directed-category-system).
 The vertex is fixed to be the specified `Spec (separableClosure F Ω)`, and the final
 equality records that its map to `S` is the canonical generic-point map.
 
 Proof (node steps):
 1. Choose an affine open `U = Spec R ⊆ S` containing the generic point. The affine
    pointed étale neighbourhoods of the geometric generic point `Spec Ω → S` form a
-   cofiltered category, and those factoring through `U` are initial
-   (lem-weil-pbc-etale-local-ring-triples); def-weil-pbc-strict-henselization-limit
+   cofiltered category, and those factoring through `U` are initial; def-weil-pbc-strict-henselization-limit
    identifies the spectrum of the coordinate-ring colimit with the inverse limit.
 2. On the small cofiltered category `J` of these neighbourhoods, the spectrum of the
-   colimit is a limit of the forgetful diagram (lem-weil-pbc-spec-small-colimit-limit).
+   colimit is a limit of the forgetful diagram.
    The directed reindexing lem-weil-pbc-cofiltered-limit-directed-reindex gives a
    nonempty directed `I`, stages `S_i` and pointed transitions `v_ji` whose restricted
    cone is still a limit. Each `S_i` is affine and étale over `S`, each `v_ji` is an
    `S`-morphism between affine schemes, hence affine.
 3. By lem-weil-pbc-strict-henselization-triples at `R = Γ(U, 𝒪_U)`, the generic prime
-   `(0)` and `K = F^s`, the colimit ring `C` has a surjection `ψ : C → F^s` with
+   `(0)` and `K = F^s`, the colimit ring `C` has a surjection `ψ: C → F^s` with
    `𝔪_C = ker ψ = 0`, so `ψ` is the canonical identification `C ≅ F^s` and the vertex
-   is `Spec F^s` (def-weil-pbc-strict-henselization-point-evaluation).
+   is `Spec F^s`.
 4. By lem-weil-pbc-strict-henselization-point-evaluation-pointed the evaluation map
    composed with each cone leg is the chosen geometric point of the stage, so composing
    with `u_i` gives the original map `Spec F^s → Spec F → S`; the transition and
-   compatibility identities are those of the inverse-system cone.
-(blueprint: lem-pd-separable-generic-affine-etale-limit) -/
+   compatibility identities are those of the inverse-system cone. -/
 theorem exists_separableGeneric_affineEtale_limit
     (S : Scheme.{u}) [IsIntegral S]
     (Ω : Type u) [Field Ω] [Algebra S.functionField Ω]

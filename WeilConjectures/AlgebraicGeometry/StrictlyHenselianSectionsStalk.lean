@@ -14,8 +14,9 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 /-!
 # Sections over a strictly henselian local scheme and the geometric stalk
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03QO
-(blueprint: lem-weil-pbc-strictly-henselian-sections-stalk).
+## References
+
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
 -/
 
 @[expose] public section
@@ -118,27 +119,7 @@ private theorem strictlyHenselianSections_pointedSection
 
 set_option backward.isDefEq.respectTransparency false in
 /-- For an abelian sheaf on a strictly henselian local scheme the global germ is an
-isomorphism, natural in the sheaf. Source: Stacks Project, Lemma Tag 03QO.
-(blueprint: lem-weil-pbc-strictly-henselian-sections-stalk)
-
-Proof:
-1. For each pointed etale neighbourhood, shrink around its marked point to an affine
-   chart Spec B. Its etale ring map R → B has a marked prime q over the maximal ideal.
-2. The local map R → B_q is weakly etale, so the proved Olivier theorem
-   `Algebra.WeaklyEtale.bijective_of_isStrictlyHenselianLocalRing` identifies it with R.
-   Invert it and compose with B → B_q to obtain a retraction B → R.
-3. The marked map B → Ω extends to B_q because every element outside q maps to a
-   unit. This extension shows that the retraction yields a section through the
-   prescribed geometric point, not just through its underlying topological point.
-4. Equality of global germs is witnessed on a common pointed neighbourhood by
-   `Point.toPresheafFiber_eq_iff'`. Pull back along its pointed section to obtain
-   equality of the original global sections. Every germ has a representative on
-   some neighbourhood by `Point.toPresheafFiber_jointly_surjective`; pulling that
-   representative back along the pointed section gives a global section with that
-   germ. Thus the germ map is bijective and hence an isomorphism of abelian groups.
-5. Naturality is `Point.toPresheafFiber_naturality`. The forgetful functor on abelian
-   groups preserves filtered colimits, with its universes shrunk to those of the
-   neighbourhood category to apply the elementwise Point API. -/
+isomorphism, natural in the sheaf. -/
 theorem strictlyHenselianSections_geometricStalk_isIso
     {R : Type u} [CommRing R] [IsLocalRing R]
     (hR : IsStrictlyHenselianLocalRing R)

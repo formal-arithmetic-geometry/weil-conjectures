@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Transport of compatible morphism families
 
-Source: Stacks Project, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-hom-transport).
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
 -/
 
 @[expose] public section
@@ -31,30 +33,7 @@ namespace AlgebraicGeometry
 
 /-- Evaluation comparisons transport system arrows to restriction families, independently
 of the natural pullback comparison chosen. This concerns a restriction functor only;
-it makes no assertion about formal completions or an equivalence of categories.
-Source: Stacks Project, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-hom-transport).
-
-Proof: First use d as the comparison. Send a system arrow a to the family
-(r_n,G).inv followed by a.app n followed by (r_n,F).hom. In the reverse direction,
-conjugate each v_n by (r_n,G).hom and (r_n,F).inv. Substitute the displayed equation
-hr for G and F into the system compatibility equation, use functoriality of pullback,
-and cancel the r isomorphisms. This proves compatibility in both directions.
-The two conjugations are inverse componentwise, and the compatibility proofs are
-irrelevant, so this gives an equivalence of sets.
-
-To replace d by c, their difference d_n.symm followed by c_n is a natural
-automorphism alpha of j_n^*. For L=j_n^* and its right adjoint U=j_n,*, the counit
-is invertible by 087T. Its triangle identity makes L(unit_M) invertible. Define
-beta_N on N by conjugating alpha_(U N) by the counit at N. Counit naturality and
-alpha naturality make beta natural in every map N to N'. Naturality of alpha at
-the unit of M and the triangle identity give beta_(L M)=alpha_M. Thus alpha_G
-commutes with every v_n:L G to L F, even when v_n does not lift to X. Substitute
-c_n=d_n followed by alpha into its compatibility equation and cancel alpha_F;
-the c and d equations are equivalent. This identifies the two family subtypes
-without changing their components. Finally naturality of r shows that the family
-attached to R.map w has components j_n^*w. Naturality of c supplies its subtype
-proof. The argument also applies to empty schemes and zero modules. -/
+it makes no assertion about formal completions or an equivalence of categories. -/
 theorem thickeningSystem_hom_transport
     {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}
     (j : ∀ n, T n ⟶ X) (hj : ∀ n, IsClosedImmersion (j n))

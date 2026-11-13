@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedInternalHomRestrictOpen
 
 /-! # SupportPart of derived internal Hom
 
-Source: Stacks Project, Tag 0A9C proof
-(blueprint: lem-sc-rhom-supported-qcoherent-support-part).
+## References
+
+* [Stacks Project, Tag 0A9C](https://stacks.math.columbia.edu/tag/0A9C)
 -/
 
 @[expose] public section
@@ -79,20 +80,7 @@ private theorem derivedInternalHom_zero_target
   exact (DerivedCategory.Q.map_isZero (homComplex_zero_target J R P)).of_iso e
 
 
-/-- Internal Hom preserves support in its second argument.
-
-Source: Stacks Project, Tag 0A9C proof
-(blueprint: lem-sc-rhom-supported-qcoherent-support-part).
-
-Proof: Let U be the open complement of T. Exact restriction commutes with cohomology,
-so the hypothesis makes every cohomology object of L restricted to U zero. Cohomology
-detects zero in the derived category, hence L restricted to U is a zero object.
-Derived internal Hom commutes with restriction to U. Internal Hom into a zero object
-is zero: represent the first argument by any complex and the second by the zero
-K-injective complex; every term of its Hom complex is a product of zero module sheaves.
-Consequently every cohomology sheaf of RHom(K,L) restricts to zero on U. This argument
-also covers U empty, T empty, and T equal to X; it requires no pseudo-coherence
-or perfectness assumption. -/
+/-- Internal Hom preserves support in its second argument. -/
 theorem rhom_supported_quasiCoherent_support_part
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine Koszul construction with its open restriction unit
-Source: Stacks Project, Tags 0A9A and 09IR.
-(blueprint: lem-pc-supported-perfect-detector-affine-construction).
+
+## References
+
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
+* [Stacks Project, Tag 09IR](https://stacks.math.columbia.edu/tag/09IR)
 -/
 
 @[expose] public section
@@ -44,19 +47,7 @@ private theorem qcoh_of_qcoh_terms (Y : Scheme.{u})
       ((DerivedCategory.homologyFunctorFactors
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).app L).symm) hq
 
-/-- Construct the supported Koszul object and its orthogonality comparison with the open unit.
-Source: Stacks Project, Tags 0A9A and 09IR.
-(blueprint: lem-pc-supported-perfect-detector-affine-construction).
-
-Proof:
-1. Present X as Spec A. The quasi-compact complement U is covered by finitely many D(f_i).
-   Sheafify and localize the finite Koszul complex on these functions to obtain E.
-2. Finite free Koszul terms make E perfect and its homology quasi-coherent. Multiplication
-   by each f_i is null-homotopic, so the homology stalks vanish on U (Tag 0663).
-3. Exact restriction to U has a derived right adjoint R. Transport Tag 09IR along the
-   affine presentation: for any quasi-coherent K orthogonal
-   to all shifts of E, the canonical unit K to R(K restricted to U) is invertible.
-   The empty tuple and the empty scheme satisfy the same assertion. -/
+/-- Construct the supported Koszul object and its orthogonality comparison with the open unit. -/
 theorem supported_perfect_detector_affine_construction
     (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

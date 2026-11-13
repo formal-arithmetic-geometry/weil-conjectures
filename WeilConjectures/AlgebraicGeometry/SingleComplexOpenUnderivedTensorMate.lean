@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquare
 
 /-! # The underived mate for restriction to an inverse-image open
 
-Source: Stacks Project, Tags 08FE and 08HY; Mathlib's mates correspondence.
-(blueprint: lem-pc-m3-open-underived-tensor-mate).
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -149,39 +152,7 @@ private theorem tensor_open_conjugate
 
 -- The iterated mates law specializes four transported scheme module adjunctions.
 /-- The sectionwise direct-image comparison is the mate of the inverse underived
-restriction comparison. No complexes, derived categories, or additivity assumptions occur.
-
-Source: Stacks Project, Tag 08FE, the sectionwise identity in its proof; Tag 08HY,
-the adjoint construction of the base-change map; Tag 0D5S, composition of pullbacks.
-(blueprint: lem-pc-m3-open-underived-tensor-mate).
-
-Proof: First apply schemeMVOrdinaryOpenCounit_square to the two exact open
-restriction adjunctions. Its restriction comparison is definitionally the same
-as singleComplexOpenUnderivedDirectImageIso. The counit equation for mates and
-injectivity of the inverse Hom equivalence for the Y open adjunction identify
-the open mate of this comparison with schemeMVUnderivedOpenComposition.hom.
-
-Next compute the conjugate of openPinnedTensorOpenIso. Transport of the open
-adjunction through overFunctorEquiv describes its counit. Cancel that equivalence
-with its inverse, then combine the two left-adjoint uniqueness comparisons by
-leftAdjointUniq_trans_app. Their counit equation identifies the conjugate with
-the identity on the direct image along the open inclusion.
-
-For the inverse four-factor tensor restriction comparison, apply conjugation's
-composition law three times and its two whiskering laws. Both open comparison
-conjugates are identities, including the inverse one by the inverse law for
-conjugateIsoEquiv. Each tensor composition comparison is defined by inverse
-conjugation of pushforwardComp followed by pushforwardCongr, so the remaining
-conjugate is the first pushforward comparison followed by the inverse second one.
-Pushforward congruence at reflexivity is identity, and inverse congruence along
-the open-square equality equals hom congruence along its symmetric equality.
-Thus the conjugate is precisely schemeMVUnderivedOpenComposition.hom.
-
-Finally iterated_mateEquiv_conjugateEquiv identifies this conjugate with the open
-mate of the horizontal tensor mate. It equals the open mate of the sectionwise
-direct-image comparison by the first step. Injectivity of the open mates
-equivalence gives the result. These categorical identities apply also to empty
-and top opens and zero modules, with no geometric hypothesis on f. -/
+restriction comparison. No complexes, derived categories, or additivity assumptions occur. -/
 theorem singleComplexOpen_underived_tensor_mate
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     (mateEquiv

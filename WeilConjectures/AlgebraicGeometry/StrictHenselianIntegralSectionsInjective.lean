@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleSectionsFieldExtension
 
 /-! # Injectivity of integral sections over a strictly henselian base
 
-Source: Stacks Project, Tags 09XK, 09ZH and 0A3I, as used in Tag 0EYP.
+## References
+
+* [Stacks Project, Tag 09XK](https://stacks.math.columbia.edu/tag/09XK)
+* [Stacks Project, Tag 09ZH](https://stacks.math.columbia.edu/tag/09ZH)
+* [Stacks Project, Tag 0A3I](https://stacks.math.columbia.edu/tag/0A3I)
+* [Stacks Project, Tag 0EYP](https://stacks.math.columbia.edu/tag/0EYP)
 -/
 
 @[expose] public section
@@ -25,23 +30,7 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- Restriction to any closed geometric fibre of an integral scheme over a strictly
-henselian local ring is injective on sections.
-
-Source: Stacks Project, Tags 09XK, 09ZH and 0A3I, proof of Tag 0EYP.
-(blueprint: lem-sbc-strict-henselian-integral-sections-injective).
-
-Proof: An integral scheme over Spec A is affine, say Spec B, with B integral over A.
-Set J to the extension of the maximal ideal of A. Tag 09XK makes (B,J) henselian.
-Apply henselian degree-zero comparison to the proper identity of Spec B to see
-that restriction to Spec(B/J) is injective. The map t factors through the residue
-field k of A, since its image is the closed point. The ring k is separably closed.
-Tag 0A3I makes further restriction from the closed fibre to its extension along
-k -> Omega bijective. Forgetting modules to sets commutes with inverse images
-and the units; hence these are the same restriction maps for module coefficients.
-The pullback property identifies their composite, up to the canonical composition
-and terminal-section isomorphisms, with the displayed map. Injectivity follows.
-The zero algebra B and the empty fibre cause no exception: their section module
-is zero, and the henselian comparison also holds for the zero ring. -/
+henselian local ring is injective on sections. -/
 theorem strictHenselianIntegralSections_injective
     (Λ : Type (u + 1)) [CommRing Λ]
     (A : Type u) [CommRing A] [IsStrictlyHenselianLocalRing A]

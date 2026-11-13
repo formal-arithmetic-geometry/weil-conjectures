@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentNoetherianModelCo
 /-!
 # Local noetherian models for a smooth section component
 
-Source: Stacks Project, Tag 055Q.
+## References
+
+* [Stacks Project, Tag 055Q](https://stacks.math.columbia.edu/tag/055Q)
+* [Stacks Project, Tag 055M](https://stacks.math.columbia.edu/tag/055M)
 -/
 
 @[expose] public section
@@ -25,22 +28,7 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- Locally on the source, a smooth section component is the inverse image of the
-component locus of a smooth section over a noetherian base.
-
-Source: Stacks Project, Tag 055Q, first two paragraphs, and Tag 055M.
-Proof: choose an affine neighbourhood V of g x and put W = g⁻¹(V). Restrict the section
-and the smooth finitely presented morphism to V. Write the coordinate ring of V as a
-filtered colimit of finite type Z-algebras. Descend the finitely presented morphism and
-section to a stage, increasing the stage so that the section identity and smoothness
-hold. This produces g₀ and σ₀ over a noetherian affine scheme T₀; quasi-compactness and
-quasi-separatedness hold because the descended morphism is finitely presented. The
-projection a from the base change W to P₀ is a scheme morphism. Restricting the base
-has not changed any fibre or its section point. Tag 055M identifies the component locus
-on the base change with the inverse image of the locus on P₀. Therefore the displayed
-equivalence holds for every w, independently of any specialization or membership
-assumption on x.
-
-(blueprint: lem-sbc-smooth-section-component-noetherian-model) -/
+component locus of a smooth section over a noetherian base. -/
 theorem Smooth.exists_section_component_noetherian_model {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T)
     (x : P) :

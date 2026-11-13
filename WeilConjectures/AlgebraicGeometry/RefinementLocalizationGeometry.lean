@@ -17,10 +17,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Geometry of the explicit common localization
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-refinement-localization-geometry)
 -/
 
 @[expose] public section

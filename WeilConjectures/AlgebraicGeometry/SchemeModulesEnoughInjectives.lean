@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Enough injectives for sheaves of modules on a scheme
 
-Source: Stacks Project, Injectives, Lemma 01DI
-(blueprint: lem-weil-pbc-scheme-modules-enough-injectives).
+## References
+
+* [Stacks Project, Tag 01DI](https://stacks.math.columbia.edu/tag/01DI)
 -/
 
 @[expose] public section

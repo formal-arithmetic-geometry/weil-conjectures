@@ -25,7 +25,11 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Extending bounded-below support preservation using sums
 
-Source: Stacks Project, Duality for Schemes, Tag 0E4G.
+## References
+
+* [Stacks Project, Tag 0E4G](https://stacks.math.columbia.edu/tag/0E4G)
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
+* [Stacks Project, Tag 09SN](https://stacks.math.columbia.edu/tag/09SN)
 -/
 
 @[expose] public section
@@ -186,30 +190,7 @@ private theorem cofan_killed (Y : Scheme.{u})
   exact (hK i).eq_of_src _ _
 
 /-- Preservation of support on bounded-below objects extends to every supported
-object when the right adjoint preserves all set-indexed sums.
-Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3(3), using Tags 0A9A and 09SN.
-(blueprint: lem-sc-right-adjoint-open-support-of-bounded).
-
-Proof. Use nonempty_derivedOpenLocalization to supply the open-site derived
-localizations in the ambient Hom universe. Put T = Y \ V. The supported quasi-coherent
-derived category is generated
-by a perfect supported complex E. Perfect complexes on a quasi-compact scheme
-are bounded below: choose strictly perfect local models, take a finite subcover,
-and take the minimum of their lower bounds. Exact restriction commutes with
-homology and sheaves are detected locally, giving a uniform lower bound on Y.
-Thus the hypothesis kills the restriction of a(E) to U.
-The kernel of the exact functor a followed by ambient inclusion and restriction
-to U is closed under shifts, cones, and retracts. It is also closed under all
-set-indexed sums: a preserves them by hypothesis, and ambient inclusion and
-exact open restriction preserve the quasi-coherent coproducts. Hence it contains
-all sums of shifts of E. Every supported Q has the sequential construction of
-supported_derived_generated_perfect, starting at zero, whose transition cones
-are sums of shifts of E. Induction kills each stage. Applying the same functor
-to the telescope triangle kills both copies of the sum of the stages, and thus
-kills Q. Vanishing under restriction is equivalent to vanishing of all
-cohomology stalks on V, so this construction applies to exactly the input support
-condition. This proof includes empty and full opens, and uses preservation of
-arbitrary sums only in the transition cones and telescope. -/
+object when the right adjoint preserves all set-indexed sums. -/
 theorem rightAdjoint_open_support_of_bounded
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

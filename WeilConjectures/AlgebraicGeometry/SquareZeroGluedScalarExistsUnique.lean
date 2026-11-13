@@ -16,7 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The quotient action on a square-zero ideal
 
-Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of the proof.
+## References
+
+* [Stacks Project, Tag 0B8S](https://stacks.math.columbia.edu/tag/0B8S)
 -/
 
 @[expose] public section
@@ -28,24 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Multiplication by local lifts gives a uniquely determined section of the kernel.
-Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of its proof.
-(blueprint: lem-sc-square-zero-glued-scalar-exists-unique)
-
-Proof: Choose a cover of U and lifts b_a of f using local surjectivity of p.
-The products b_a*i(x|V_a) agree on intersections: the difference of two lifts
-is killed by p, as is i(x), so their product is zero by square-zero. Glue the
-products in B to a section z. Naturality and separatedness in C show p(z)=0.
-Evaluation preserves exactness at B for this short exact sequence, since i
-is mono and evaluation preserves kernels. Thus z has a preimage y in I(U).
-For any other lift b on V, restrict to the cover V intersect V_a and repeat
-the difference-of-lifts calculation; separatedness in B proves the required
-formula on V. Two candidate sections have the same image in B on the lifting
-cover, hence globally by separatedness; sectionwise injectivity of i gives
-uniqueness. The gluing and separatedness APIs include empty covers, so the
-empty open and the zero sheaf require no exceptions. This constructs only
-one scalar-action section; linearity, ring laws and restriction compatibility
-of an operator family are not asserted here. -/
+/-- Multiplication by local lifts gives a uniquely determined section of the kernel. -/
 theorem square_zero_glued_scalar_exists_unique (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))

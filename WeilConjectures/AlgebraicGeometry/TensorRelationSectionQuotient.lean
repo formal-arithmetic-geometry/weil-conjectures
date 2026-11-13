@@ -13,8 +13,12 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 /-! # Sections of a tensor relation cokernel
 
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-tensor-relation-section-quotient).
+## References
+
+* [Stacks Project, Tag 01SB](https://stacks.math.columbia.edu/tag/01SB)
+* [Stacks Project, Tag 0089](https://stacks.math.columbia.edu/tag/0089)
+* [Stacks Project, Tag 01I8](https://stacks.math.columbia.edu/tag/01I8)
+* [Stacks Project, Tag 01CA](https://stacks.math.columbia.edu/tag/01CA)
 -/
 
 @[expose] public section
@@ -111,23 +115,6 @@ private theorem sectionQuotientAux
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A section cokernel of the balancing relation is the tensor product over B.
-Source: Stacks Project, Schemes, Lemma 01I8 (1); Modules, Section 01CA.
-(blueprint: lem-weil-pbc-tensor-relation-section-quotient).
-
-Proof: the additive bilinear map (c,p) ↦ q(tmulSection c p) is B-balanced:
-apply q to the displayed relation and use range δ = ker q. The tensor universal
-property therefore gives g : C(W) tensor_B P(W) → coker(δ)(W), with the stated formula.
-Conversely, send a pure tensor of C(W) tensor_O P(W) to its B-tensor class. This is
-O-balanced because φ commutes with the structure maps. Transport that additive map
-along the bijective section tensor map to f : S(W) → C(W) tensor_B P(W).
-The surjective section tensor map for F, followed by tensor induction on both
-factors, reduces f δ = 0 to the B-balancing identity. Thus ker q is contained in
-ker f. The additive group universal property of the surjective q gives an additive
-map v on its target with v q = f. Tensor induction proves v g = id; surjectivity
-of q and of the section tensor map, then tensor induction, proves g v = id.
-These inverse maps give the desired additive equivalence. The private helper proves
-this ordinary module argument; the public theorem supplies the section maps and
-checks scalar compatibility from φ.w. No affineness or quasi-coherence is needed.
 -/
 theorem tensor_relation_section_quotient (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)

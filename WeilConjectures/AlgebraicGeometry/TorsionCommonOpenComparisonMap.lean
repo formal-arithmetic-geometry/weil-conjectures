@@ -15,8 +15,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -28,24 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A prescribed completed comparison lifts to a map on any common open.
 Only a map is asserted: invertibility and all cocycle identities are consequences
 of section separation, proved in the parent module.
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness.
-(blueprint: lem-weil-pbc-torsion-common-open-comparison-map).
-
-Proof: Transfer Li and Lj through overEquiv and restrict Fi, Fj and H to W.
-Coherence, kernels, cokernels and their ideal-power annihilation bounds restrict
-along these open immersions. Use the normalized quotient restriction comparison
-and beta_i, beta_j to identify their completions with N restricted to W.
-The prescribed completed map is beta_i inverse followed by beta_j, with those
-restriction comparisons. The equations hdelta show it commutes with the maps to
-the completion of H: precompose each component with the quotient epimorphism
-and use hqi and hbi. Apply torsionControlled_completion_hom_lift_exists on W.
-Transfer the resulting map back through overEquiv. Its equation over H yields
-the b equation on each V contained in W. Its completed equation, precomposed
-with the source quotient projection and rewritten using hqi, yields the q
-equations. This uses arbitrary open restrictions, not affine intersections.
-For J=0 the completed comparison is the original map. For J=1 both arrows to
-H are isomorphisms and the comparison is their composite. On an empty common
-open the unique map suffices; the index type may also be empty.
 -/
 theorem torsion_common_open_comparison_map
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

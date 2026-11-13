@@ -11,8 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientSquare
 public import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomMap
 
 /-! # Concrete formulas for raw scalar comparison
-Source: Stacks Project, Tags 03FD, 03Q8 and 03D7.
-(blueprint: lem-sbc-raw-scalar-hom-evaluation).
+
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public section
@@ -25,17 +29,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance] moduleSheafCategory moduleSheafPreadditive moduleSheafAbelian
   moduleSheafHasDerivedCategory
 
-/-- Evaluation of the explicit additive scalar Hom map.
-Source: Stacks Project, Tags 03FD and 03Q8, formula-expansion step of
-lem-sbc-raw-module-abelian-hom-map-naturality.
-(blueprint: lem-sbc-raw-scalar-hom-evaluation).
-
-Proof: Expand the definition of rawModuleAbelianHomMap. Its additive map is the composite of
-derived forgetting, right composition by the coefficient factor, and left composition by the
-source factor. Evaluation of AddCommGrpCat.ofHom and of the two additive compositions therefore
-gives c composed with V(z) composed with b. The two named factor definitions have exactly these
-source and coefficient bodies. No naturality or coherence equation is used. This applies to zero
-classes, zero sheaves, identity geometric maps and degree zero. -/
+/-- Evaluation of the explicit additive scalar Hom map. -/
 theorem rawModuleScalarHom_evaluate
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)

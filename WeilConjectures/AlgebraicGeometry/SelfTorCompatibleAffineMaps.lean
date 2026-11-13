@@ -19,8 +19,14 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 
 /-! # Compatible affine self-Tor comparison maps
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-n1-self-tor-compatible-affine-maps). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 01I6](https://stacks.math.columbia.edu/tag/01I6)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,9 +36,7 @@ namespace AlgebraicGeometry
 
 /-- An affine coordinate square for a local comparison, before duality.
 The coordinate maps themselves need not be invertible comparisons; only the changes
-of coordinates are isomorphisms. No regularity hypothesis is imposed.
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-n1-self-tor-compatible-affine-maps). -/
+of coordinates are isomorphisms. No regularity hypothesis is imposed. -/
 def IsAffineSelfTorChartMap {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) (n : ℕ) (E Q : Z.Modules)
     (φ : E.over (i ⁻¹ᵁ U.1) ⟶ Q.over (i ⁻¹ᵁ U.1)) : Prop :=
@@ -45,19 +49,7 @@ def IsAffineSelfTorChartMap {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     φ = s.hom ≫ (T.map c).over (i ⁻¹ᵁ U.1) ≫ t.hom
 
 /-- A local affine model is quasi-coherent on the inverse-image chart, so maps from
-any isomorphic source are determined by the component on the whole chart.
-Source: Stacks Project, Tags 01I6 and 0096.
-(blueprint: new-n1-self-tor-compatible-affine-maps).
-
-Proof: Restrict tensor pullback of the extended affine module to the inverse-image
-chart. Uniqueness of left adjoints identifies tensor pullback with ordinary pullback.
-Pullback composition, the chart square, and the open-restriction counit identify the
-result with pullback of the associated module on the affine chart. It is therefore
-quasi-coherent. Transport this property across the supplied source coordinate and
-the over-site equivalence. The inverse-image chart is affine, so the proved affine
-Hom extensionality theorem applies. The top open corresponds to an over-object
-isomorphic to the terminal object; naturality along that isomorphism transports the
-hypothesis. No quasi-coherence of the target or regularity of the immersion is needed. -/
+any isomorphic source are determined by the component on the whole chart. -/
 private theorem affine_model_hom_ext
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens) (M : ModuleCat.{u} (Γ(Y, U.1) : Type u))
@@ -200,29 +192,7 @@ private theorem affine_chart_maps_compatible_of_nested
     exact h₁.trans h₂.symm
   exact hU.symm.trans ((congrArg (fun f ↦ f (E.val.map g.op x)) heq).trans hU')
 
-/-- Affine normalized comparisons exist locally and agree on overlaps.
-
-Source: Stacks Project, Tag 09PQ (resolution-independent Tor products),
-Tag 01R3 (conormal classes), and Tag 06YH (K-flat derived tensor).
-(blueprint: new-n1-self-tor-compatible-affine-maps).
-
-Proof: For each affine U=Spec A, sheafify a projective resolution of A/I.
-The affine quotient resolution comparison identifies its augmentation with
-(i_*O_Z)|_U. Its tensor with A/I computes the restriction of the fixed derived
-self tensor, by K-flat resolution comparison; the quotient scalar action identifies
-its pullback with the same Tor sheaf on i^{-1}U. Identify the pulled-back kernel
-with I/I² using affineOpen_kernel_conormal_sections. Exterior powers commute with
-associated sheaves and localization, giving the source coordinate isomorphism.
-Conjugate the sheafified selfTorConormalComparison by these two coordinate
-isomorphisms to obtain φ_U. On a basic open overlap, quotient resolutions localize,
-the conormal identification sends the same ideal classes to the same unit sections,
-and normalized Tor products localize. The uniqueness in
-existsUnique_selfTor_conormal_comparison therefore identifies the maps on each
-basic open. Such opens cover every overlap, so separatedness identifies the maps
-on every open W mapping into two charts. This proves the displayed component
-compatibility. Empty charts have unique component maps; the same construction
-covers n=0, the zero ideal, the zero quotient, and nonregular ideals. Only local
-maps are asserted here: no global morphism and no dual coordinate square is used. -/
+/-- Affine normalized comparisons exist locally and agree on overlaps. -/
 theorem exists_compatible_affine_selfTor_maps
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

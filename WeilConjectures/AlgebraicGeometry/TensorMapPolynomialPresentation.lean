@@ -11,8 +11,9 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-! # Presentations of tensor maps
 
-Source: Stacks Project, Algebra, proof of Tag 07RI.
-(blueprint: lem-weil-pbc-tensor-map-polynomial-presentation).
+## References
+
+* [Stacks Project, Tag 07RI](https://stacks.math.columbia.edu/tag/07RI)
 -/
 
 @[expose] public section
@@ -23,21 +24,7 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Base change preserves the variables and coefficientwise relations of a presentation.
-
-Source: Stacks Project, Algebra, proof of Tag 07RI, lines 47640-47642.
-(blueprint: lem-weil-pbc-tensor-map-polynomial-presentation).
-
-Proof: base change the presentation along B → T tensor B. Its target is
-(T tensor B) tensor_B C. Commute the two tensor factors, commute T tensor B,
-apply tensor cancellation, and commute once more to identify this target with
-T tensor C. On pure tensors this is (t tensor b) tensor c ↦ t tensor φ(b)c.
-In particular its restriction to T tensor B is id_T tensor φ. Transport the
-base-changed presentation through this algebra equivalence. Its relations are
-exactly the coefficientwise images of the original relations, by the definition
-of Presentation.baseChange. No flatness is required: the quotient/base-change
-identification uses right exactness only. Empty generators and relations, and
-zero rings, are included by the same constructions. -/
+/-- Base change preserves the variables and coefficientwise relations of a presentation. -/
 theorem tensorMap_polynomialPresentation
     {A : Type u} [CommRing A]
     {B C : Type v} [CommRing B] [CommRing C]

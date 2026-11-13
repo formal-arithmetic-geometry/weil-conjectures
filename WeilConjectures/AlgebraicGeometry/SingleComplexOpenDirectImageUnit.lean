@@ -11,8 +11,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! # The open direct-image comparison on right-derived units
 
-Source: Stacks Project, Tags 08FE and 08BS.
-(blueprint: lem-pc-e2-open-direct-image-unit).
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08BS](https://stacks.math.columbia.edu/tag/08BS)
 -/
 
 @[expose] public section
@@ -22,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The sectionwise comparison before deriving; this is the explicit comparison
-used in `singleComplexOpenDirectImageIso`.
-Source: Stacks Project, Tag 08FE.
-(blueprint: def-pc-e2-open-underived-direct-image-iso). -/
+used in `singleComplexOpenDirectImageIso`. -/
 noncomputable def singleComplexOpenUnderivedDirectImageIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙ schemeOpenRestriction Y V ≅
@@ -46,9 +46,7 @@ noncomputable def singleComplexOpenUnderivedDirectImageIso
     exact congr($(morphismRestrict_app f V W.unop) x).symm
 
 /-- The same sectionwise comparison on homotopy categories, including the canonical
-composition comparisons for termwise application.
-Source: Stacks Project, Tag 08FE.
-(blueprint: def-pc-e2-open-homotopy-direct-image-iso). -/
+composition comparisons for termwise application. -/
 noncomputable def singleComplexOpenHomotopyDirectImageIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ) ⋙
@@ -164,19 +162,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 1600000 in
 -- The comparison unfolds several derived universal-property constructions.
 /-- Evaluating the constructed derived direct-image comparison on its right-derived
-units gives the underived sectionwise comparison on the homotopy category.
-Source: Stacks Project, Tags 08FE and 08BS.
-(blueprint: lem-pc-e2-open-direct-image-unit).
-
-Proof: Expand the four factors defining the derived comparison. The first factor
-is the inverse of right-derived uniqueness for postcomposition by exact restriction;
-its unit factorization replaces it with the composite right-derived unit. The second
-factor is the right-derived natural isomorphism of the sectionwise comparison, so
-its unit factorization gives the image of that comparison under Qh. The third factor
-is right-derived composition, whose unit is the composite unit. The last factor
-identifies the right-derived exact restriction with its termwise derived functor;
-its unit factorization is the inverse of mapDerivedCategoryFactorsh. Reassociate and
-use naturality to obtain the displayed equation. No K-injectivity of I is required. -/
+units gives the underived sectionwise comparison on the homotopy category. -/
 theorem singleComplexOpen_directImage_unit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

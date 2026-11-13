@@ -11,9 +11,12 @@ import WeilConjectures.AlgebraicGeometry.FormalMapTorsionFiniteDetection
 
 /-! # A completion lift constructed from the prescribed formal map
 
-Source: Stacks Project, Tag 0889(1), comparison morphisms.
 The finite graph retains a component of θ, and a separating quotient makes its
 first projection invertible. Both compatibility equations belong to this construction.
+
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
 -/
 
 @[expose] public section
@@ -25,12 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- At a separating depth the finite graph has monomorphic first projection.
-Proof: a map with zero first projection has second projection in ker(a'). The
-kernel equation for the graph kills its image in the separating quotient, so
-this second projection is zero as well. Pullback extensionality finishes.
-Source: Stacks Project, Tag 0889(1), comparison argument.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+/-- At a separating depth the finite graph has monomorphic first projection. -/
 theorem torsionControlledGraphFst_mono
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -68,9 +66,7 @@ theorem torsionControlledGraphFst_mono
   · simpa only [torsionControlledGraphSnd, Category.assoc, zero_comp] using hzsecond
 
 /-- The first projection is invertible: surjectivity is the affine finite-graph
-lemma, and injectivity is the separating-quotient argument above.
-Source: Stacks Project, Tag 0889(1).
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+lemma, and injectivity is the separating-quotient argument above. -/
 theorem torsionControlledGraphFst_isIso
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -89,9 +85,7 @@ theorem torsionControlledGraphFst_isIso
 
 /-- The lift is inverse(first graph projection) followed by second projection.
 The only choice is the unique inverse of the stated isomorphism; the graph itself
-is an actual kernel of an actual pullback discrepancy containing θ.
-Source: Stacks Project, Tag 0889(1).
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+is an actual kernel of an actual pullback discrepancy containing θ. -/
 noncomputable def torsionControlledCompletionHomLift
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -109,13 +103,7 @@ noncomputable def torsionControlledCompletionHomLift
     (inv (torsionControlledGraphFst J a a' θ n) ≫ torsionControlledGraphSnd J a a' θ n)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Both equations hold for the lift constructed with the prescribed θ.
-Source: Stacks Project, Tag 0889(1), comparison morphisms.
-Proof: the pullback condition gives the equation with a'. The graph kernel
-condition gives the prescribed component of θ after cancelling the quotient
-projection. Functoriality gives the completed equation with a'; finite torsion
-detection then identifies all components with θ.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+/-- Both equations hold for the lift constructed with the prescribed θ. -/
 theorem torsionControlled_completion_hom_lift_constructed
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

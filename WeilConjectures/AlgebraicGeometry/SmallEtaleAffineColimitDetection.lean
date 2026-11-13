@@ -12,8 +12,11 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Detection of filtered colimits on the affine etale basis
 
-Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
-(blueprint: sbc-lem-small-etale-affine-colimit-detection).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 03A0](https://stacks.math.columbia.edu/tag/03A0)
 -/
 
 @[expose] public section
@@ -24,19 +27,7 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Affine etale evaluation detects a colimit cocone of module sheaves.
-Source: Stacks Project, Tag 09Z1, final affine-basis sheafification step, and
-Sites, comparison lemma for a dense subsite (Tag 03A0).
-(blueprint: sbc-lem-small-etale-affine-colimit-detection).
-
-Proof: Restrict the cocone to the dense affine etale site. For each affine etale
-object, the hypothesis says that its evaluation is a colimit. Evaluation jointly
-reflects colimits of presheaves, so the restricted presheaf cocone is a colimit.
-The fully faithful inclusion of sheaves into presheaves reflects colimits, and the
-restriction to the dense affine etale site is an equivalence of sheaf categories.
-Reflecting successively through these two functors gives the desired universal
-property. This works for every indexing category; no filteredness is needed.
-The empty affine scheme causes no issue: its sections form the zero module. -/
+/-- Affine etale evaluation detects a colimit cocone of module sheaves. -/
 theorem nonempty_isColimit_of_affine_etale
     (Λ : Type (u + 1)) [CommRing Λ] (S : Scheme.{u})
     {J : Type u} [Category.{u} J]

@@ -15,8 +15,11 @@ set_option linter.privateModule false
 
 /-! # The canonical inverse-image coefficient comparison
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E and 07A6
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section

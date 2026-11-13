@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FibreCohenMacaulayLocus
 
 /-! # Openness of the fibre Cohen-Macaulay locus over a base open
 
-Source: Stacks Project, Tag 045U.
-(blueprint: lem-sbc-restricted-fibre-cohen-macaulay-locus-open)
+## References
+
+* [Stacks Project, Tag 045U](https://stacks.math.columbia.edu/tag/045U)
 -/
 
 @[expose] public section
@@ -94,19 +95,7 @@ private theorem fibre_depth_eq_ringKrullDim_restrict_iff
     asIso (q'.stalkMap ((f ∣_ U).asFiber x))).commRingCatIsoToRingEquiv
   rw [← ringKrullDim_eq_of_ringEquiv e, ← depth_eq_of_ringEquiv e]
 
-/-- The Cohen-Macaulay fibre-stalk locus is open over a flat finitely presented restriction.
-
-Source: Stacks Project, Tag 045U (1), (2), with Cohen-Macaulayness expressed by depth.
-Proof: Form the base restriction `f ∣_ U`. For each point of its source, the
-restriction pullback square and the residue-field isomorphism of the open immersion
-identify its fibre with the original fibre. Their stalks are isomorphic as local
-rings, preserving depth and Krull dimension. The restricted fibres are locally of
-finite type over fields, hence locally Noetherian. For these rings equality of depth
-and Krull dimension is exactly Cohen-Macaulayness. Tag 045U (1), (2) says that this
-locus in the restricted source is open. The source restriction inclusion is an open
-immersion, and its image is precisely the set displayed below. Its image is open in X.
-For an empty U or X this set is empty, which is open.
-(blueprint: lem-sbc-restricted-fibre-cohen-macaulay-locus-open) -/
+/-- The Cohen-Macaulay fibre-stalk locus is open over a flat finitely presented restriction. -/
 theorem isOpen_fibre_depth_eq_ringKrullDim_over_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :

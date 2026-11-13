@@ -16,8 +16,13 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStalkSquare
 
 /-! # Tensor coordinates and the chain-level stalk square
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-stalk-chain-coordinates).
+## References
+
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
+* [Stacks Project, Tag 0BYJ](https://stacks.math.columbia.edu/tag/0BYJ)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 079R](https://stacks.math.columbia.edu/tag/079R)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
 -/
 
 @[expose] public section
@@ -32,36 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
-/-- Tensor coordinates for the given representative, with a chain-level stalk square.
-
-Proof: form the total tensor of P and c.P. It is K-flat by tensor associativity
-and the K-flatness of both factors. Its derived isomorphism to E tensor K is the
-inverse localization tensor map followed by eP tensor c.e. The target complex is
-the total tensor of the termwise pullback of P and c.N. Pullback preserves
-K-flatness of P, so its localization tensor map is invertible even though c.N
-need not be K-flat. The pullback counit on P and eP identify its derived value
-with the pullback of E; tensor this identification with c.e' to obtain the
-target isomorphism. Use the chain tensor comparison supplied by hτ, followed by
-tensoring c.t, for e.t. The canonical counit equation for hτ, naturality of τ,
-and c.represents give the represents field of e. Its counit is invertible
-because its source is K-flat.
-
-The source stalk tensor isomorphism gives σ. The target stalk tensor
-isomorphism followed by the inverse pullback-stalk isomorphism on P gives ρ.
-To verify the chain equation, restrict to each summand of total degree n,
-indexed by p + q = n. The specified degreewise tensor-pullback comparison and
-the specified tensorStalkIso components identify both routes with the same
-C-linear map: extend the two stalk module factors to C and apply the stalk
-of c.t to the second factor. Equality follows on pure tensors from the module
-pullback tensor equation and the scalar-extension tensorator formula, and on
-the whole direct sum from the coproduct universal property. Naturality gives
-compatibility with differentials. This uses direct sums in all integer degrees;
-it requires neither boundedness nor invertibility of any cohomology comparison.
-For a zero ring or a zero factor these are the unique maps between zero modules.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), the tensor-transitivity
-calculation of Tag 0BYJ and equation-bc before Tag 0DJ8; Cohomology, Tags 079R
-and 06YB for K-flat tensor products and stalk tensor identification.
-(blueprint: lem-pc-tensor-stalk-chain-coordinates). -/
+/-- Tensor coordinates for the given representative, with a chain-level stalk square. -/
 theorem exists_tensorStalk_chain_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

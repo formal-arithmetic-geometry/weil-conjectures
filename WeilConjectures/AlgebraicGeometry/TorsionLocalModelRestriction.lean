@@ -18,8 +18,10 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Restricting one torsion-controlled local model
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness; equation 0880.
-(blueprint: lem-weil-pbc-torsion-local-model-restriction).
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 0880](https://stacks.math.columbia.edu/tag/0880)
 -/
 
 @[expose] public section
@@ -55,35 +57,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A single local coherent model restricts, with its actual torsion bounds and
 normalized quotient maps, to every smaller open. This asserts no comparison map
 between different local models.
-
-Source: Stacks Project, Tag 0889(1), first sentence of proof; equation 0880.
-(blueprint: lem-weil-pbc-torsion-local-model-restriction).
-
-Proof: Let f : W → U be the open immersion, R its restriction functor, and T
-its tensor pullback. Their adjunctions to the same pushforward give t : T ≅ R.
-Construct Fw = R(F). The proved coherent_pullback helper of FormalSystemsPullback
-and invariance under isomorphism prove coherence. Set lw = overMapCompOverEquiv(L)
-followed by R(l). The over-site comparisons and hHlocal identify R(Hlocal) with Hw;
-call that isomorphism eH, and define aw = R(a) followed by eH. Naturality of
-overMapCompOverEquiv and R(hb), followed by cancellation of the comparison
-isomorphisms, prove the required b equation.
-
-The proved powerQuotientIso helpers of FormalSystemsPullback construct a normalized
-completion comparison for T(F). Conjugate by t to obtain gamma for R(F). Naturality
-of t, powerQuotientIso_π, and the cokernel descent equation show that R(π) followed
-by gamma is π for R(F). Assemble beta_w using overFunctorMap inverse,
-overMapCompOverEquiv, overFunctorEquiv U, R(beta), and gamma. To check q, postcompose
-with beta_w, cancel overFunctorMap, use naturality of overMapCompOverEquiv and R(hq),
-cancel R(beta inverse) against R(beta), and apply the normalized gamma equation.
-
-The actual kernel and cokernel of a are quasi-coherent. The proved
-powerProduct_pullback_zero helper transfers their zero ideal-power products to T;
-the powerProduct_zero_of_iso helper of TorsionControlledFormalRestriction transfers
-them through t. Restriction preserves kernels and cokernels, and postcomposition
-with eH preserves their isomorphism classes. Transfer the zero products through
-these comparisons to get the same positive exponent for aw. The ideal on W is
-identified using comap_comp and homOfLE_ι. Nothing assumes a cover or affineness;
-empty opens, zero modules, and zero or unit ideals use these same constructions.
 -/
 theorem torsionLocalModel_restriction
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

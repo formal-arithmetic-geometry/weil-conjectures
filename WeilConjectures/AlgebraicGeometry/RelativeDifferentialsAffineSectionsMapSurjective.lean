@@ -19,9 +19,7 @@ variable {X S : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine comparison map is surjective by the affine calculation for relative
 differentials. Identify the affine open with a spectrum, use the canonical affine
-comparison for relative differentials, and transport its surjectivity to sections.
-Source: Stacks Project, Tag 01UT.
-(blueprint: lem-sc-relative-differentials-affine-sections-map-surjective). -/
+comparison for relative differentials, and transport its surjectivity to sections. -/
 theorem relativeDifferentials_affine_sections_map_surjective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]

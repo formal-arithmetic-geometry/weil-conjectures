@@ -9,9 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBas
 
 /-! # Explicit operators for split simplicial attachment
 
-Source: Stacks Project, Tag 0DAV (lemma-hypercovering-object), construction of the
-extension and the final simplicial composition check; Tag 0DAU (lemma-split).
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0DAV](https://stacks.math.columbia.edu/tag/0DAV)
+* [Stacks Project, Tag 0DAU](https://stacks.math.columbia.edu/tag/0DAU)
 -/
 
 @[expose] public section
@@ -24,8 +27,7 @@ namespace CategoryTheory.FormalSplitAttachment
 
 variable {D : Type u} [Category.{v} D] {n : ℕ}
 
-/-- The inverse normalization component for a given old index. Source: Stacks 0DAU.
-(auxiliary; not a blueprint node) -/
+/-- The inverse normalization component for a given old index. -/
 noncomputable def denormalize
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (q : Fin (n + 1)) (i : (term K q).I) :
@@ -37,8 +39,7 @@ noncomputable def denormalize
   have : IsIso ((operator K a.2.1.val).φ a.2.2.val) := hs.2 q a
   exact eqToHom (congrArg (term K q).obj he.symm) ≫ inv ((operator K a.2.1.val).φ a.2.2.val)
 
-/-- The normalization isomorphism from the labeled old family to its actual term.
-Source: Stacks 0DAU. (auxiliary; not a blueprint node) -/
+/-- The normalization isomorphism from the labeled old family to its actual term. -/
 noncomputable def normalizationIso
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (q : Fin (n + 1)) :
@@ -47,8 +48,7 @@ noncomputable def normalizationIso
   FormalCoproduct.isoOfComponents (Equiv.ofBijective (labelIndex K q) (hs.1 q))
     (fun a ↦ by have := hs.2 q a; exact asIso ((operator K a.2.1.val).φ a.2.2.val))
 
-/-- Concatenating an epi on normalized labels, with identity components.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- Concatenating an epi on normalized labels, with identity components. -/
 def normalizedEpi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)
     (V : FormalCoproduct.{w} D) (q : Fin (n + 1))
@@ -58,8 +58,7 @@ def normalizedEpi
   f a := Sum.inr (precomposeLabel K a σ hσ)
   φ _ := 𝟙 _
 
-/-- Concatenation of an old epi on normalized families. Source: Stacks 0DAU.
-(auxiliary; not a blueprint node) -/
+/-- Concatenation of an old epi on normalized families. -/
 def normalizedOldEpi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (q r : Fin (n + 1))
     (θ : SimplexCategory.mk r.val ⟶ SimplexCategory.mk q.val) (hθ : Epi θ) :
@@ -68,8 +67,7 @@ def normalizedOldEpi
   f a := precomposeLabel K a θ hθ
   φ _ := 𝟙 _
 
-/-- Old normalization is natural for epimorphisms. Source: Stacks 0DAU.
-(auxiliary; not a blueprint node) -/
+/-- Old normalization is natural for epimorphisms. -/
 theorem normalizationIso_epi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (q r : Fin (n + 1))
@@ -87,8 +85,7 @@ theorem normalizationIso_epi
     FormalCoproduct.isoOfComponents, labelIndex] using
     (FormalCoproduct.hom_ext_iff' _ _).mp hc a.2.2.val
 
-/-- A degeneracy into the newly attached degree. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- A degeneracy into the newly attached degree. -/
 noncomputable def attachEpi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q : Fin (n + 1))
@@ -97,8 +94,7 @@ noncomputable def attachEpi
   f i := Sum.inr (precomposeLabel K (normalization K hs q i) σ hσ)
   φ i := denormalize K hs q i
 
-/-- The explicit degeneracy is inverse normalization followed by label concatenation.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- The explicit degeneracy is inverse normalization followed by label concatenation. -/
 theorem attachEpi_eq
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q : Fin (n + 1))
@@ -108,8 +104,7 @@ theorem attachEpi_eq
   intro i
   simp [attachEpi, normalizationIso, normalizedEpi, denormalize, normalization]
 
-/-- Top degeneracies commute with every old epimorphism. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- Top degeneracies commute with every old epimorphism. -/
 theorem attachEpi_oldEpi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q r : Fin (n + 1))
@@ -127,8 +122,7 @@ theorem attachEpi_oldEpi
   simp only [Category.assoc, attachEpi_eq, Iso.hom_inv_id_assoc]
   exact hn
 
-/-- The lower faces of the attached family, on its two kinds of summands.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- The lower faces of the attached family, on its two kinds of summands. -/
 def attachFace
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q : Fin (n + 1))
@@ -140,8 +134,7 @@ def attachFace
     | Sum.inl j => (p.projection q α).φ j
     | Sum.inr a => (operator K (α ≫ a.2.1.val)).φ a.2.2.val
 
-/-- Faces of the attached family form a compatible boundary cone. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- Faces of the attached family form a compatible boundary cone. -/
 theorem attachFace_naturality
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q r : Fin (n + 1))
@@ -166,9 +159,7 @@ theorem attachFace_naturality
     have hh := (FormalCoproduct.hom_ext_iff' _ _).mp (hc a) a.2.2.val
     simpa [attachFace] using hh
 
-/-- A new degeneracy followed by an old face is the old composite operator.
-Source: Stacks 0DAV, simplicial composition check.
-(auxiliary; not a blueprint node) -/
+/-- A new degeneracy followed by an old face is the old composite operator. -/
 theorem attachEpi_face
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q r : Fin (n + 1))
@@ -191,8 +182,7 @@ theorem attachEpi_face
   rw [attachEpi_eq, Category.assoc, hn]
   simp
 
-/-- An arbitrary map from the top ordinal to an old ordinal, using its image.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- An arbitrary map from the top ordinal to an old ordinal, using its image. -/
 noncomputable def attachLift
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q : Fin (n + 1))
@@ -203,8 +193,7 @@ noncomputable def attachLift
   operator K (q := r) (image.ι α) ≫
     attachEpi K hs V r (factorThruImage α) inferInstance
 
-/-- The lifting operator can use any epi-mono factorization. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- The lifting operator can use any epi-mono factorization. -/
 theorem attachLift_factor_mono
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q r : Fin (n + 1))
@@ -230,8 +219,7 @@ theorem attachLift_factor_mono
   simp only [h2]
   rfl
 
-/-- A lift can use an epi followed by any old map. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- A lift can use an epi followed by any old map. -/
 theorem attachLift_factor
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q r : Fin (n + 1))
@@ -251,8 +239,7 @@ theorem attachLift_factor
     (factorThruImage ι ≫ image.ι ι) _ _).op = _
   rw [image.fac]
 
-/-- Lifts commute with all old operators. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- Lifts commute with all old operators. -/
 theorem attachLift_naturality
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q r : Fin (n + 1))
@@ -272,8 +259,7 @@ theorem attachLift_naturality
   rw [hc, Category.assoc]
   rfl
 
-/-- In the epi case no image factorization remains. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- In the epi case no image factorization remains. -/
 theorem attachLift_epi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (q : Fin (n + 1))
@@ -283,9 +269,7 @@ theorem attachLift_epi
   have hi : operator K (q := q) (r := q) (𝟙 _) = 𝟙 _ := K.map_id _
   rw [hi, Category.id_comp]
 
-/-- The same face relation for every map from the top ordinal to an old ordinal.
-Source: Stacks 0DAV, image-factorization composition check.
-(auxiliary; not a blueprint node) -/
+/-- The same face relation for every map from the top ordinal to an old ordinal. -/
 theorem attachLift_face
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q r : Fin (n + 1))
@@ -301,8 +285,7 @@ theorem attachLift_face
     ((α ≫ factorThruImage β) ≫ image.ι β) _ _).op = _
   rw [Category.assoc, image.fac]
 
-/-- An endomorphism of the top family: the identity, or a proper image factorization.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- An endomorphism of the top family: the identity, or a proper image factorization. -/
 noncomputable def attachEnd
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V)
@@ -324,8 +307,7 @@ noncomputable def attachEnd
     attachFace K V p r (image.ι α) ≫
       attachEpi K hs V r (factorThruImage α) inferInstance
 
-/-- A nonidentity top endomorphism can use any epi-mono factorization.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- A nonidentity top endomorphism can use any epi-mono factorization. -/
 theorem attachEnd_factor_mono
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (r : Fin (n + 1))
@@ -360,8 +342,7 @@ theorem attachEnd_factor_mono
   simp only [h2, attachEnd, dite_eq_right hα]
   rfl
 
-/-- The top endomorphism can use an epi followed by any proper old-degree map.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- The top endomorphism can use an epi followed by any proper old-degree map. -/
 theorem attachEnd_factor
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (r : Fin (n + 1))
@@ -375,9 +356,7 @@ theorem attachEnd_factor
   rw [← attachEpi_oldEpi K hs V t r (factorThruImage ι) inferInstance ρ hρ,
     ← Category.assoc, attachFace_naturality, image.fac]
 
-/-- Endomorphisms of the top family commute with every lower face.
-Source: Stacks 0DAV, simplicial composition check.
-(auxiliary; not a blueprint node) -/
+/-- Endomorphisms of the top family commute with every lower face. -/
 theorem attachEnd_face
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q : Fin (n + 1))
@@ -395,8 +374,7 @@ theorem attachEnd_face
     congr 1
     rw [Category.assoc, image.fac]
 
-/-- A lift followed by a top endomorphism is the lift of the composite.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- A lift followed by a top endomorphism is the lift of the composite. -/
 theorem attachLift_end
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q : Fin (n + 1))
@@ -413,8 +391,7 @@ theorem attachLift_end
     rw [← Category.assoc, attachLift_face, ← attachLift_factor]
     rw [← Category.assoc, image.fac]
 
-/-- A lift through an old degree followed by a face gives a top endomorphism.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- A lift through an old degree followed by a face gives a top endomorphism. -/
 theorem attachEnd_lift
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (r : Fin (n + 1))
@@ -426,8 +403,7 @@ theorem attachEnd_lift
   rw [← Category.assoc, attachFace_naturality, ← attachEnd_factor]
   rw [← Category.assoc, image.fac]
 
-/-- The top endomorphisms compose contravariantly. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- The top endomorphisms compose contravariantly. -/
 theorem attachEnd_comp
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V)
@@ -443,15 +419,13 @@ theorem attachEnd_comp
     rw [← Category.assoc, attachEnd_face, ← attachEnd_factor]
     rw [← Category.assoc, image.fac]
 
-/-- The actual degree families of the extension; old degrees stay literally unchanged.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- The actual degree families of the extension; old degrees stay literally unchanged. -/
 def attachmentTerm
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)
     (V : FormalCoproduct.{w} D) (q : Fin (n + 2)) : FormalCoproduct.{w} D :=
   if hq : q.val < n + 1 then term K ⟨q.val, hq⟩ else attachedFamily K V
 
-/-- Every ordinal operator of the extension, before verifying composition.
-Source: Stacks 0DAV. (auxiliary; not a blueprint node) -/
+/-- Every ordinal operator of the extension, before verifying composition. -/
 noncomputable def attachmentMap
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V)
@@ -480,8 +454,7 @@ noncomputable def attachmentMap
       exact eqToHom (by simp [attachmentTerm]) ≫ attachEnd K hs V p α ≫
         eqToHom (by simp [attachmentTerm])
 
-/-- The top-to-old epi case is the normalization formula. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- The top-to-old epi case is the normalization formula. -/
 theorem attachmentMap_epi
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q : Fin (n + 1))
@@ -499,8 +472,7 @@ private theorem eqToHom_component_iso {A B : FormalCoproduct.{w} D} (h : A = B)
   change IsIso (𝟙 _)
   infer_instance
 
-/-- Every component of a top degeneracy is invertible. Source: Stacks 0DAU and 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- Every component of a top degeneracy is invertible. -/
 theorem attachmentMap_epi_component_iso
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q : Fin (n + 1))
@@ -518,8 +490,7 @@ theorem attachmentMap_epi_component_iso
   change IsIso ((_ ≫ _ ≫ _ : _ ⟶ _))
   infer_instance
 
-/-- The explicit operators preserve identities. Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+/-- The explicit operators preserve identities. -/
 theorem attachmentMap_id
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q : Fin (n + 2)) :

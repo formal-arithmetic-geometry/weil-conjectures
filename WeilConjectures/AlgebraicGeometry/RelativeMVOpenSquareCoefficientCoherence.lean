@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalRelativeMVOpenSquareCoefficien
 
 /-! # Coefficient coherence for one nested open square
 
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks;
-formal comparison part of the single open-square counit calculation.
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -23,25 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The coefficient comparisons commute with the inclusion W ⊆ U, before any
-counit or base-change mate is applied.
-Source: Stacks Project, Tag 0D5S, canonical derived pullback composition.
-(blueprint: lem-pc-relative-mv-open-square-coefficient-coherence).
-
-Proof: Substitute the five defining equations hc, hc', hs, ht and hd to
-replace the explicit comparison arguments by their canonical formulas.
-Apply coefficient_square_coordinate_change with v = W.ι, z = U.ι,
-t = pullback.snd g' W.ι, s = pullback.fst g' W.ι, qz = pullback.snd g' U.ι,
-pz = pullback.fst g' U.ι, e = X.homOfLE i and b = relativeMVOpenLift g' i.
-The equality e ≫ z = v is Scheme.homOfLE_ι. The two projection equalities
-b ≫ qz = t ≫ e and b ≫ pz = s follow from pullback.lift_snd and
-pullback.lift_fst. Both square equalities are pullback.condition.symm.
-Use the coefficient object (derivedPullback g').obj N and its identity map.
-Functoriality removes its pullbacks from the last factor of each square map.
-Expand the components of c, c' and d using Iso.trans_hom, NatTrans.comp_app
-and eqToHom_app, and reassociate composition. The resulting identity is exactly
-the coordinate-change identity. Proof irrelevance identifies the equality
-transports. This uses only composition coherence, so it also holds when W or
-U is empty, when W = U, and when N is the zero object. -/
+counit or base-change mate is applied. -/
 theorem relativeMV_open_square_coefficient_coherence
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

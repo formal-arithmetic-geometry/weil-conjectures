@@ -10,9 +10,12 @@ import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentComposition
 
 /-! # Operators for one split simplicial attachment
 
-Source: Stacks Project, Tag 0DAV (lemma-hypercovering-object), construction of the
-extension and the final simplicial composition check; Tag 0DAU (lemma-split).
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0DAV](https://stacks.math.columbia.edu/tag/0DAV)
+* [Stacks Project, Tag 0DAU](https://stacks.math.columbia.edu/tag/0DAU)
 -/
 
 @[expose] public section
@@ -26,25 +29,8 @@ namespace CategoryTheory.FormalSplitAttachment
 variable {D : Type u} [Category.{v} D] {n : ℕ}
 
 /-- Realize the prescribed lower faces and normalized top degeneracies as a functor.
-Source: Stacks Project, Tag 0DAV, construction of the extension, with the composition
-verification expanded in the parent node's steps 3 and 4.
-(auxiliary; not a blueprint node).
 
-Proof: Normalize every old index by the split bijection, with component isomorphism
-`e_(σ,i)`. Use the prescribed cone on new summands and the old operators on old
-summands for proper injective operators. For an arbitrary ordinal operator, factor
-its composite with the source label as an epimorphism followed by a monomorphism.
-Apply the proper-face operator, normalize its output, and concatenate the remaining
-epimorphism with that label. Its component is the face component followed by the
-inverse of the output normalization isomorphism. The only full-image case in degree
-`n+1` is the identity, where use the identity on the new summand.
-For composition, factor the next operator through the image of the first one.
-Both routes then have the same concatenated epimorphism, and functoriality in the
-old truncation cancels the intermediate normalization isomorphism. Naturality of
-`p` gives the same identity on a new summand. Transport to the original old families.
-The new-face and old-face equations are the definitions of these operators. An epi
-only concatenates a label; its component is an inverse old normalization isomorphism,
-so is invertible. Empty families and dimension zero use the identical formulas. -/
+. -/
 theorem exists_attachment_operators
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) :

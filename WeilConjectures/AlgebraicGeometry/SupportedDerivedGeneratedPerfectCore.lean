@@ -15,9 +15,10 @@ import WeilConjectures.CategoryTheory.GeneratorTowerNormalize
 
 /-! # Telescope construction for a given supported compact detector
 
-Source: Stacks Project, duality.tex, proof of Lemma 48.4.3(3), Section Tag 0E4G;
-derived.tex, lemma-write-as-colimit (Tag 09SN).
-(blueprint: lem-sc-supported-derived-generated-perfect-core).
+## References
+
+* [Stacks Project, Tag 0E4G](https://stacks.math.columbia.edu/tag/0E4G)
+* [Stacks Project, Tag 09SN](https://stacks.math.columbia.edu/tag/09SN)
 -/
 
 @[expose] public section
@@ -28,42 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry
 
-/-- A given compact supported detector builds each supported quasi-coherent object.
-Source: Stacks Project, duality.tex, proof of Lemma 48.4.3(3), Section Tag 0E4G;
-derived.tex, lemma-write-as-colimit (Tag 09SN).
-(blueprint: lem-sc-supported-derived-generated-perfect-core).
-
-Proof:
-1. Let P be the ambient object property of quasi-coherent cohomology with zero stalks
-   on V. The supplied triangulated-closure hypothesis equips its full subcategory
-   with the inherited triangulated structure. The support hypothesis puts E in it.
-2. Ambient coproducts have coproduct cohomology by
-   `lem-pc-derived-ambient-direct-sums`. By `lem-pc-stalk-direct-sums`, their stalks
-   on V are sums of zero modules and hence zero. Quasi-coherence is preserved by
-   `lem-pc-derived-qcoh-direct-sums`. Thus P has coproducts created by its inclusion.
-3. The supplied compactness of E in D_QCoh(Y), fullness, and the agreement of
-   coproducts make E compact in P. The supplied shifted-Hom detection
-   equivalence gives the singleton generating family in `def-pc-generators`.
-4. The small-site K-injective resolutions of `prop-pur-kinjective-resolutions-exist`
-   show that derived Hom sets are u-small: after resolving the target, morphisms
-   are homotopy classes of chain maps between sheaves of modules in universe u.
-   Surjectivity of the localization map into a K-injective target gives smallness
-   as a quotient of this u-small chain-map set. Replace P by its equivalent model
-   with these small Hom sets. Apply `lem-pc-compact-generators-build-objects` with
-   coproduct universe u to the singleton family and Q, then transport back to P.
-   Write its sequence as A_n and its triangles as Z_n -> A_n -> A_(n+1) -> Z_n[1].
-   Rotate each triangle once. Since the shift functor is an equivalence, it preserves
-   coproducts, so Z_n[1] is a coproduct of E[m+1]. Fullness transports these triangles
-   and the telescope triangle to the ambient derived category.
-5. Set X_0=0 and X_(n+1)=A_n. The first triangle is the distinguished triangle
-   0 -> A_0 -> A_0 -> 0[1]; all other triangles are those from step 4. A coproduct
-   of the X_n is isomorphic to the coproduct of the A_n: the new summand is zero,
-   and all other summands are relabelled by n+1. Under this isomorphism the endomorphism
-   s induced by the transitions becomes the old shift endomorphism (on the zero
-   summand both maps are zero). Transporting the telescope triangle along this
-   isomorphism gives the asserted triangle with 1-s. Replace ULift-indexed sums
-   by naturally indexed cofans using the index equivalence. The full subcategory
-   objects supply the required quasi-coherent X_n. -/
+/-- A given compact supported detector builds each supported quasi-coherent object. -/
 theorem supported_derived_generated_perfect_core (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (V : Y.Opens) (E Q : schemeDerivedQCohCategory Y)

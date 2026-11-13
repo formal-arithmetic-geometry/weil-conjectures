@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # The weak Serre property in the module-valued slice encoding
 
-Source: Stacks Project, Modules on Sites, Tag 093U (3), transported through the
-constant-ring equivalence and the equivalence of iterated slices.
+## References
+
+* [Stacks Project, Tag 093U](https://stacks.math.columbia.edu/tag/093U)
 -/
 
 @[expose] public section
@@ -170,25 +171,7 @@ private noncomputable def flatModel_restrict {C : Type u} [SmallCategory C]
       (restrictionConstants (T.over W) (T.over V) B (Over.map f)).app M
 
 /-- Finite locally constant sheaves on a slice are closed under kernels,
-cokernels and extensions, in the module-valued sheaf encoding.
-
-Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node)
-
-Proof: On the site C/U, take the constant ring sheaf and the equivalence between
-module-valued sheaves and modules over that ring. Its slice comparison and the
-constant-sheaf restriction isomorphism identify the displayed property with
-IsFiniteTypeLocallyConstant. Covering sieves on an object V/U correspond to
-covering sieves on V. Each contains a J-cover, since J is stable under base
-change and composition and contains isomorphisms. Conversely a J-cover generates
-a covering sieve; the property of admitting a constant finite trivialization is
-stable under further restriction, so the displayed covers yield the sieve
-condition. The canonical equivalence (C/U)/(V/U) ≌ C/V identifies the restriction
-functors and their constants. Thus these are exactly the same local
-trivializations. Apply finiteTypeLocallyConstant_closedUnder_kernels_cokernels_extensions
-on C/U. Equivalences are exact, and their kernel, cokernel and short exact
-sequence comparisons transport the three closure properties back. No
-nonempty-cover or nonzero-ring condition is used. -/
+cokernels and extensions, in the module-valued sheaf encoding. -/
 theorem site_finiteLocallyConstant_weakSerre
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

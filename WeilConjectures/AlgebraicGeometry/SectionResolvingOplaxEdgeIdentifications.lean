@@ -12,8 +12,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Six resolving oplax model edge squares
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E;
-the six edge-identification part of `lem-pd-section-resolving-oplax-model-edges`.
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -241,12 +243,12 @@ private theorem representative_all {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /--
 Under the representative equations, the six prescribed edge squares commute
-for every triple of resolving section complexes.  The proof expands the fixed
+for every triple of resolving section complexes. The proof expands the fixed
 vertices, uses naturality of the resolution comparison and of `modelTensor`,
 and applies the representative equation to the relevant binary pair; the
 source and target associator equations identify the remaining edge.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
-(auxiliary; not a blueprint node).
+
+.
 -/
 theorem section_resolving_oplax_edge_identifications {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)

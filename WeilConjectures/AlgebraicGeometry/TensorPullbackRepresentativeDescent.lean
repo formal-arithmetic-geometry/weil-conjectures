@@ -6,7 +6,13 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Localization.Prod
 
-/-! # Descent of a tensor comparison from representatives -/
+/-! # Descent of a tensor comparison from representatives
+
+## References
+
+* [Stacks Project, Tag 04VK](https://stacks.math.columbia.edu/tag/04VK)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,13 +24,8 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 /-- A tensor comparison descends uniquely when restriction to representatives is fully
 faithful and the comparison maps are invertible on representatives and their tensors.
-Source: Stacks Project, Categories, Tag 04VK; Cohomology on Sites, Tag 07A4.
-(auxiliary; not a blueprint node).
-Proof: on the product of representative categories compose the inverse source tensor
-identification, the comparison on the tensor, the chain tensor comparison, the target
-tensor identification, and the inverse comparisons on each factor. Fully faithful
-restriction lifts this natural isomorphism. Cancel the source tensor identification
-and the two factor comparisons to prove the square and uniqueness. -/
+
+. -/
 theorem tensorComparisonDescent
     {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]
     {D : Type u₃} [Category.{v₃} D] {E : Type u₄} [Category.{v₄} E]

@@ -16,8 +16,11 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! Intermediate geometric facts for zero-dimensional base change.
-Source: Stacks Project, algebra.tex, Lemmas 00KH and 00FV.
-(blueprint: new-zdbp-geometry)
+
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
 -/
 
 set_option linter.style.haveILetI false
@@ -33,13 +36,12 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A zero-dimensional finite-type scheme over an algebraically closed field is finite and
- discrete, and its structure morphism induces residue-field isomorphisms. Source: Stacks
- Project, algebra.tex, Lemma 00KH and Theorem 00FV. Finite type over a field makes C locally
+ discrete, and its structure morphism induces residue-field isomorphisms. Finite type over a field makes C locally
  Noetherian. The dimension bound makes its affine rings Artinian, hence C is discrete.
  Quasi-compactness then makes its point set finite. Every singleton is closed. Nullstellensatz
  makes each closed-point residue field a finite extension of k; algebraic closedness makes the
  induced field map an isomorphism. The empty scheme has a finite discrete space and the pointwise
- claims are vacuous. (blueprint: new-zdbp-geometry) -/
+ claims are vacuous. -/
 theorem zeroDimensional_baseChange_geometry
     (k : Type v) [Field k] [IsAlgClosed k]
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

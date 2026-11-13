@@ -11,7 +11,14 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Whiskering
 set_option linter.privateModule false
 
-/-! # Full faithfulness of restriction to resolving representatives -/
+/-! # Full faithfulness of restriction to resolving representatives
+
+## References
+
+* [Stacks Project, Tag 04VI](https://stacks.math.columbia.edu/tag/04VI)
+* [Stacks Project, Tag 04VK](https://stacks.math.columbia.edu/tag/04VK)
+* [Stacks Project, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -175,16 +182,7 @@ open CategoryTheory CategoryTheory.Functor
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction along a quotient followed by localization is fully faithful on two-variable
-functor categories when every homotopy object has a resolving representative.
-Source: Stacks Project, Categories, Tags 04VI--04VK; Cohomology on Sites, Tag 06YS.
-(blueprint: lem-weil-pbc-resolving-representative-whiskering).
-Proof: resolve the extra vertices of Ore squares and equality refinements to restrict
-the right calculus of fractions to the resolving subcategory. The induced localization
-functor is full by refining roofs, faithful by refining common roofs, and essentially
-surjective by resolving objects. Restriction along it is fully faithful, also on its
-product with itself. The full, surjective-on-objects quotient restricts to a full,
-essentially surjective functor of representative categories; precomposition along this
-functor is fully faithful. Compose these two restriction functors. -/
+functor categories when every homotopy object has a resolving representative. -/
 theorem resolvingRepresentativesFullyFaithfulWhiskering
     {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]
     {D : Type u₃} [Category.{v₃} D] (E : Type u₄) [Category.{v₄} E]

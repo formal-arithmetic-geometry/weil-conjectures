@@ -8,7 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexCechData
 import WeilConjectures.AlgebraicGeometry.RingComplexCechConeFiltration
 import WeilConjectures.AlgebraicGeometry.RingComplexCechLocalizedOrthogonality
 
-/-! # Maps between augmented ordered localization models -/
+/-! # Maps between augmented ordered localization models
+
+## References
+
+* [Stacks Project, Tag 0A6R](https://stacks.math.columbia.edu/tag/0A6R)
+-/
 
 @[expose] public section
 
@@ -21,25 +26,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry
 
 /-- Composition with the augmentation of an ordered localization model induces a
-bijection on derived maps from another model for the same finitely generated ideal.
-Source: Stacks Project, dualizing.tex, Tag 0A6R, the local-cohomology adjunction.
-(auxiliary; not a blueprint node)
-
-Proof: choose a finite generating list f of I and use the two augmented derived
-isomorphisms with its ordered localization complex C(f). Inverting any f_i contracts
-C(f), by inserting or deleting index i with its ordered sign. Thus the source T has
-zero derived localization at each f_i. The cone of C(f) to A[0] has a finite filtration
-whose graded pieces are shifts of the positive-degree terms of C(f), each a finite
-product of localization modules A[1/g], with g a nonempty product of generators.
-For every integer shift, derived Hom from T to A[1/g] vanishes: flat localization and
-restriction of scalars are adjoint on derived categories, and T localizes to zero
-after inverting g, since a factor f_i is then invertible. Finite products and the
-long exact Hom sequences of the filtration imply vanishing of Hom from T to the
-cone and to its shift by -1. The triangle Hom sequence therefore says exactly that
-composition with C(f) to A[0] is bijective. Transport across the augmented derived
-isomorphism for K gives the displayed map. When the list is empty the augmentation
-is an isomorphism; a zero generator has zero localization, so the argument includes
-zero ideals, unit ideals, and the zero ring without extra hypotheses. -/
+bijection on derived maps from another model for the same finitely generated ideal. -/
 theorem ringComplex_cech_augmentation_hom_bijective
     (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]
     (I : {I : Ideal A // I.FG})

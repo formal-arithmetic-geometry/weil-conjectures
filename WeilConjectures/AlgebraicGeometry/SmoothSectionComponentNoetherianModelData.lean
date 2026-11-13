@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.NoetherianApproximationSmoothStage
 /-!
 # Local noetherian approximation of a smooth morphism and its section
 
-Source: Stacks Project, Tags 055Q, 01ZM and 0C0C.
+## References
+
+* [Stacks Project, Tag 055Q](https://stacks.math.columbia.edu/tag/055Q)
+* [Stacks Project, Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
+* [Stacks Project, Tag 0C0C](https://stacks.math.columbia.edu/tag/0C0C)
 -/
 
 @[expose] public section
@@ -101,27 +105,7 @@ private theorem exists_smooth_noetherian_model_with_section {X S : Scheme.{u}}
 
 /-- A smooth quasi-compact quasi-separated morphism with a section admits, near any
 source point, a noetherian model together with cartesian comparison squares and a
-compatible restricted section. No assertion about connected components is made here.
-
-Source: Stacks Project, Tag 055Q, first two paragraphs; Tag 01ZM, clauses (1)-(3);
-and Tag 0C0C (descent of smoothness).
-Proof: choose an affine open V containing g(x), and set W = g⁻¹(V). The restriction
-q : W → V is smooth and finitely presented: smoothness gives local finite presentation,
-and quasi-compactness and quasi-separatedness give finite presentation. Its section τ
-is the restriction of σ, so τ≫W.ι = V.ι≫σ. Express the coordinate ring of V as the
-filtered union of its finite-type ℤ-subalgebras. Tag 01ZM(1) descends q to a finitely
-presented stage model. The eventual-smoothness theorem (Tag 0C0C) permits an increase
-so that this model is smooth. Tag 01ZM(2) then descends the section composed with
-the source comparison to a later base stage, over the smooth model's base. Lift
-this map and the identity into the pullback of the model to that stage. The second
-projection gives the section identity directly; the first projection and uniqueness
-of pullback lifts give compatibility with τ. The affine base T₀ is noetherian
-because its ring is finite type over ℤ. Finite presentation of g₀ supplies quasi-compactness and
-quasi-separatedness. The base-change isomorphism supplies a and b and the second
-cartesian square, with τ≫a = b≫σ₀. The first square is cartesian by the construction
-W = g⁻¹(V). Every later increase of the index preserves these identities.
-
-(blueprint: lem-sbc-smooth-section-component-noetherian-model-data) -/
+compatible restricted section. No assertion about connected components is made here. -/
 theorem Smooth.exists_section_component_noetherian_model_data {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (x : P) :
     ∃ (W : P.Opens) (_ : x ∈ W) (V : T.Opens) (P₀ T₀ : Scheme.{u})

@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
 
 /-! # Untwisted comparison of resolution sections
 
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-scalar-comparison).
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -26,34 +28,7 @@ open CategoryTheory MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Raw resolution sections agree with untwisted open cohomology, naturally for
-restriction to a pulled-back principal open and for multiplication by a function.
-
-Source: Stacks Project, Tag 01E4, Lemma 20.7.3, and Tag 01E1, Lemma 20.7.1.
-(blueprint: lem-pc-resolution-open-scalar-comparison).
-
-Proof: Restrict I to Y using exact open restriction, which preserves injectives
-because extension by zero is an exact left adjoint. Apply the equivalence from
-modules on the over-site to modules on Y. The restricted augmentation and complex
-are an injective resolution of G. Its sections on any open of Y are identified
-with the original resolution's sections on the corresponding open of X by
-restrictAppIso. In particular sections on Y and the inverse image of D(a) are
-exactly the evaluation of f_*I on W and D(a). Use isoRightDerivedObj to compute
-open cohomology by this restricted resolution. Evaluation and forgetting scalars
-are exact and commute with homology, giving c and d. At each degree all comparison
-maps commute with restriction of the same sections. The naturality of
-isoRightDerivedObj and mapHomologyIso therefore gives the restriction equation.
-The tensor-unit section s is b times its standard generator. Its nonvanishing
-locus is the basic open of b: the stalk generator identifies the maximal-ideal
-multiple of the module with the maximal ideal of the local ring, so its fibre
-value is nonzero exactly when the germ of b is a unit. Pullback of basic opens
-identifies this open with the inverse image of D(a), inside Y. Finally each
-section comparison is semilinear for the pullback Γ(T,W) to Γ(Y,top). On the
-restricted section complex, the endomorphism induced by G.smulHom(b^n) is
-multiplication by b^n in each degree. The semilinear comparison takes this to
-multiplication by a^n on the evaluated complex. Applying homology and the
-naturality of the resolution comparison yields the scalar equation. This is
-valid for n=0 and q=0, empty W, zero F, a=0 and invertible a, since the same
-section maps, local-ring test, and exact functors cover all these cases. -/
+restriction to a pulled-back principal open and for multiplication by a function. -/
 theorem resolution_open_scalar_comparison {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)
     (W : T.Opens) (a : Γ(T, W)) :

@@ -14,8 +14,12 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine criteria for finite type and finite presentation of modules
 
-Source: Stacks Project, Modules, Tags 01BN and 01BO; Properties, Tags 01PB and 01PC
-(blueprint: lem-weil-pbc-quasi-coherent-finite-type-affine).
+## References
+
+* [Stacks Project, Tag 01BN](https://stacks.math.columbia.edu/tag/01BN)
+* [Stacks Project, Tag 01BO](https://stacks.math.columbia.edu/tag/01BO)
+* [Stacks Project, Tag 01PB](https://stacks.math.columbia.edu/tag/01PB)
+* [Stacks Project, Tag 01PC](https://stacks.math.columbia.edu/tag/01PC)
 -/
 
 @[expose] public section
@@ -386,34 +390,7 @@ private theorem finitePresentation_affine_iff (F : X.Modules) [F.IsQuasicoherent
 and finite presentation on an affine open are equivalent to the corresponding finiteness
 of its sections. Finite generation on an affine open cover gives finite type globally
 and finite generation on every affine open; global finite presentation gives finitely
-presented sections on every affine open.
-Source: Stacks Project, Modules, Tags 01BN, 01BO; Properties, Tags 01PB, 01PC
-(blueprint: lem-weil-pbc-quasi-coherent-finite-type-affine).
-
-Proof:
-1. Mathlib's finite-presentation instance gives quasi-coherence directly (Stacks 01BO).
-2. Map finite generating families along colimit-preserving restriction functors and
-   equivalences that preserve the unit. Bind local generating families over a cover;
-   shrinking the index type gives locality for covers in any universe.
-3. On `Spec R`, the existing `finite_sections_top_of_isIso_fromTildeΓ` shows that a
-   finite global generating family has finite sections: the tilde functor reflects
-   epimorphisms between quasi-coherent modules.
-4. For a quasi-coherent module of finite type, refine its local generating cover by
-   basic opens in an affine open. Map the generating families to these restrictions
-   and use step 3. Their defining sections span the unit ideal, and
-   `Module.Finite.of_localizationSpan'` descends finite generation (Stacks 01PB).
-5. Conversely a finite spanning set of affine sections defines a surjection from a
-   finite free module. Tilde preserves this epimorphism; compose with the counit
-   isomorphism and transport to `F.over U`. These global generators imply finite type.
-6. For finite presentation, use the proved source-library results in `FiniteDescent`:
-   `finitePresentation_sections_top` and
-   `exists_presentation_isFinite_of_finitePresentation`. The former descends finite
-   presentations over basic opens; the latter applies tilde to a finite presentation
-   of the module of sections. Restriction and `sectionsRestrictFromSpecLinearEquiv`
-   give both directions on every affine open (Stacks 01PC).
-7. Finite sections on a covering give finite type on each member by step 5. Bind the
-   local finite generators as in step 2, and apply step 4 on any affine open. The
-   final assertion is `finitePresentation_sections_of_isFinitePresentation`. -/
+presented sections on every affine open. -/
 theorem quasicoherent_finite_type_affine (X : Scheme.{u}) :
     (∀ G : X.Modules, G.IsFinitePresentation → G.IsQuasicoherent) ∧
     (∀ F : X.Modules, F.IsQuasicoherent →

@@ -15,20 +15,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 /-- The negative-degree raw module and restricted abelian groups are zero,
-so their unique isomorphisms are natural.
-Source: Stacks Project, Tags 03FD and 03Q8; negative-degree vanishing of
-right derived sections and orthogonality of the standard derived t-structure.
-(blueprint: lem-sbc-raw-module-restricted-abelian-negative).
-
-Proof: The source of raw derived Hom is concentrated in degree zero. Its target
-is a degree-zero sheaf shifted by q < 0, hence is concentrated in degrees at
-least -q > 0. Orthogonality of the standard t-structure makes every such morphism
-zero. Restricted abelian cohomology is homology of right derived global sections
-of a sheaf in degree zero. An injective resolution starts in degree zero, so the
-result is concentrated in nonnegative degrees and its degree-q homology is zero.
-Any two zero objects have a unique isomorphism. Both sides of the naturality
-square have zero source and are therefore equal. This also applies to an empty
-scheme or test object and to q = -1. -/
+so their unique isomorphisms are natural. -/
 theorem exists_rawModule_restrictedAbelian_negative
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale)

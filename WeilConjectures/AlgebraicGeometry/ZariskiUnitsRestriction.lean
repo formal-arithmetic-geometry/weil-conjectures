@@ -15,8 +15,11 @@ public import Mathlib.Topology.Sheaves.Functors
 /-!
 # Restriction of Zariski units and their cohomology
 
-Source: Stacks Project, Tags 09NY, 02UV and 01F7
-(blueprint: def-sc-zariski-units-restriction).
+## References
+
+* [Stacks Project, Tag 09NY](https://stacks.math.columbia.edu/tag/09NY)
+* [Stacks Project, Tag 02UV](https://stacks.math.columbia.edu/tag/02UV)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -27,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The map `O_Xˣ → i_* O_Zˣ` induced by the structure-sheaf map of `i`.
-Source: Stacks Project, Tag 09NY (blueprint: def-sc-zariski-units-restriction). -/
+/-- The map `O_Xˣ → i_* O_Zˣ` induced by the structure-sheaf map of `i`. -/
 noncomputable def unitsSheafToPushforward {Z X : Scheme.{u}} (i : Z ⟶ X) :
     X.unitsSheaf ⟶ ((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u}
       (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj Z.unitsSheaf :=
@@ -38,9 +40,7 @@ noncomputable def unitsSheafToPushforward {Z X : Scheme.{u}} (i : Z ⟶ X) :
 image to the Ext class, identify inverse image of the constant integer sheaf with the
 constant integer sheaf, then apply the counit `i⁻¹ i_* O_Zˣ → O_Zˣ`. For a closed immersion
 this is the inverse of the canonical cohomology identification of Tag 02UV, obtained by
-applying the exact pushforward to an injective resolution.
-Source: Stacks Project, Tags 01F7 and 02UV
-(blueprint: def-sc-zariski-units-restriction). -/
+applying the exact pushforward to an injective resolution. -/
 noncomputable def unitsPushforwardCohomologyComparison {Z X : Scheme.{u}} (i : Z ⟶ X)
     (p : ℕ) :
     Sheaf.H (((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u}

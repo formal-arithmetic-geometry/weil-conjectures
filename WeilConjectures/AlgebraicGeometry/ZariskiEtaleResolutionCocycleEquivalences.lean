@@ -14,9 +14,10 @@ import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 
 /-! # Additive equivalences for Zariski–étale resolution cocycles
 
-Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
-Tag 06XR (1), lemma-compute-ext-resolutions.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-equivalences)
+## References
+
+* [Stacks Project, Tag 01FT](https://stacks.math.columbia.edu/tag/01FT)
+* [Stacks Project, Tag 06XR](https://stacks.math.columbia.edu/tag/06XR)
 -/
 
 @[expose] public section
@@ -51,16 +52,7 @@ set_option linter.unusedVariables false in
 /-- Intermediate cocycle-comparison component for the Zariski–étale resolution comparison.
 
 The existence of the displayed additive equivalences is the termwise sheafification,
-free-abelian, and Yoneda calculation from Stacks Project, Section 01FT.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-equivalences)
-
-Proof: evaluate objectCohomologyPresheaf_resolution at V and remove both universe
-lifts using AddEquiv.ulift. Exact evaluation identifies the resulting presheaf
-homology with homology of the evaluated resolution. This gives e₁ for R on the
-Zariski site and e₂ for I at i(V) on the étale site. Evaluation of continuous
-pushforward at V is definitionally evaluation at i(V), in every degree and for
-every differential, so e₂ has precisely the required target. The map b is
-irrelevant to the existence of these equivalences. -/
+free-abelian, and Yoneda calculation from Stacks Project, Section 01FT. -/
 theorem zariski_etale_resolution_cocycle_equivalences
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

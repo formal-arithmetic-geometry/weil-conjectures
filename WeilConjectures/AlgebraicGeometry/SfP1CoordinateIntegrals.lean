@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
 import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransport
 
 /-! # Standard-chart projective-line coordinate integrals
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, trace base change and the two diagonal integrals.
 -/
 
 @[expose] public section
@@ -112,34 +109,7 @@ private theorem conjugate_identity
 /-- The arbitrary-base projective-line trace and supported diagonal, expressed in
 standard-chart coordinates and the compact-support comparison conventions.
 The conclusion consists only of coefficient pullback and two degree-zero integral
-identities, with no unit, counit, adjunction, or claim about arbitrary complexes.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, trace base-change normalization and diagonal integrals
-(auxiliary; not a blueprint node).
-
-Proof: The stalkwise invertibility hypothesis implies invertibility of N in the
-global sections of S, since invertibility is local on the Zariski site. Apply
-exists_arbitraryBaseFiniteP1Integrals. Rename the two homogeneous coordinates by
-the equivalence from Option (ULift (Fin 1)) to ULift (Fin 2); graded polynomial
-renaming induces an isomorphism of projective schemes over S. Transport the
-splitting's trace and its supported Kummer diagonal along that isomorphism and
-its self-product. Exact constant inverse image and the normalized finite Tate
-line comparison identify B with q* (A_S(1)[2]), giving e. The finite twist line
-theorem, transported from slice restriction to inverse image, gives its lisse
-rank-one property. For each projection use the canonical projective-line chart
-over P. The arbitrary-base trace base-change equation identifies the chart's
-trace with inverse proper exchange followed by q* of the original trace, which
-is precisely traceFirst or traceSecond. Exact closed direct image identifies the
-supported Ext representative with the diagonalClass source. The composite
-inverse-image/direct-image unit for p_i Delta = id identifies the source alpha
-with diagonalFirst or idIsoDiagonalSnd. The proper forget-supports isomorphisms
-intertwine these source comparisons and exchange maps with the compact-support
-ones. Thus the two normalized integral equations from finiteP1DiagonalProperty
-are exactly Integrals. All transport maps are the canonical ones, so both
-equations use the same trace and supported class. Coordinate renaming and these
-comparisons apply over the empty base as well; for N = 1 the coefficient ring
-is zero and the identical equations hold in the zero module category. -/
+identities, with no unit, counit, adjunction, or claim about arbitrary complexes. -/
 theorem sfP1CoordinateIntegrals
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

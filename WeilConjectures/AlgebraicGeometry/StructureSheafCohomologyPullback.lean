@@ -14,13 +14,15 @@ public import Mathlib.Topology.Sheaves.Functors
 /-!
 # Pullback on structure sheaf cohomology
 
-Source: Stacks Project, Varieties, Tag 0BED, the functoriality maps in the proof
-(blueprint: def-sc-structure-sheaf-cohomology-pullback).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.structureSheafAb`: the structure sheaf with its additive groups.
 - `AlgebraicGeometry.Scheme.structureSheafCohomologyPullback`: canonical pullback on cohomology.
+
+## References
+
+* [Stacks Project, Tag 0BED](https://stacks.math.columbia.edu/tag/0BED)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The underlying abelian sheaf of the structure sheaf. Source: Stacks Project,
-Varieties, Tag 0BED (blueprint: def-sc-structure-sheaf-cohomology-pullback). -/
+/-- The underlying abelian sheaf of the structure sheaf. -/
 noncomputable def structureSheafAb (X : Scheme.{v}) :
     Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{v} :=
   (sheafCompose _
@@ -40,9 +41,7 @@ noncomputable def structureSheafAb (X : Scheme.{v}) :
 
 /-- Pullback on structure sheaf cohomology: apply the exact inverse-image functor to
 an Ext class, compare the constant integer sheaves, and then apply the adjoint of the
-structure morphism on sheaves. Source: Stacks Project, Varieties, Tag 0BED, proof;
-Cohomology of Sheaves, Section 01F7
-(blueprint: def-sc-structure-sheaf-cohomology-pullback). -/
+structure morphism on sheaves. -/
 noncomputable def structureSheafCohomologyPullback {X Y : Scheme.{v}} (f : X ⟶ Y) (n : ℕ) :
     Sheaf.H (structureSheafAb Y) n →+ Sheaf.H (structureSheafAb X) n :=
   letI := lan_preservesFiniteLimits_of_flat (E := AddCommGrpCat.{v}) (Opens.map f.base)

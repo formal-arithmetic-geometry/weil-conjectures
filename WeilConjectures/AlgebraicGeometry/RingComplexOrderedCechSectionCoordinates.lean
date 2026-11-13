@@ -8,8 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexOrderedCechConstructi
 
 /-! # Principal-localization coordinates before taking the Čech mapping fibre
 
-Source: Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 099D](https://stacks.math.columbia.edu/tag/099D)
+* [Stacks Project, Tag 01EQ](https://stacks.math.columbia.edu/tag/01EQ)
+* [Stacks Project, Tag 01FJ](https://stacks.math.columbia.edu/tag/01FJ)
 -/
 
 @[expose] public section
@@ -182,25 +185,7 @@ by
   rfl
 
 /-- Sections on ordered intersections, before adjoining the augmentation term, have
-localization coordinates compatible with restriction and with the map from A.
-Source: Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
-(auxiliary; not a blueprint node)
-
-Proof: each f_i belongs to I, so D(f_i) is contained in Spec A minus V(I).
-Each ordered intersection in the complement maps isomorphically onto D(product f_i).
-The open-immersion section isomorphism followed by the
-principal-open localization isomorphism identifies its structure-ring sections with
-A localized at this product. These are A-algebra isomorphisms for the scalar map
-used in ringComplexSectionScalars. Take their product in each degree, and compose
-with the extension-by-zero term isomorphism from natural to integer Čech degrees.
-Transport each face restriction through the two algebra isomorphisms to obtain l;
-it preserves the structural map from A. The definition of the ordered differential
-is the signed sum of these face restrictions. Linearity of the product coordinates
-therefore proves the differential equation. The augmentation is restriction of the
-structural map A to each singleton open, which proves the first equation. These
-arguments also apply to empty intersections, zero or repeated generators, and the
-zero ring, since the structure ring on an empty open and its localization at zero
-are both the zero ring. No cone calculation or degree shift is part of this claim. -/
+localization coordinates compatible with restriction and with the map from A. -/
 theorem ringComplexOrderedCech_sections_coordinates (A : CommRingCat.{u}) (I : Ideal A)
     (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) :
     let L := ringComplexOrderedCechSections A I f

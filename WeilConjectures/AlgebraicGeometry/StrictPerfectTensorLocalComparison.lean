@@ -21,8 +21,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Comparison with prescribed local strictly perfect tensor models
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 09J5 and 06YH; Schemes,
-Tag 08DX (blueprint: lem-sc-strict-perfect-tensor-local-comparison).
+## References
+
+* [Stacks Project, Tag 09J5](https://stacks.math.columbia.edu/tag/09J5)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 06YD](https://stacks.math.columbia.edu/tag/06YD)
 -/
 
 @[expose] public section
@@ -81,8 +85,6 @@ local instance sptc_localTotal (X : Scheme.{u}) (U : X.Opens)
   fun _ ↦ inferInstance
 
 /-- Strictly perfect complexes are K-flat on the localized ringed space.
-Source: Stacks Project, Tag 06YD, bounded-above flat complexes are K-flat.
-(blueprint: lem-sc-strict-perfect-tensor-local-comparison).
 -/
 private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
     (A : CochainComplex
@@ -188,23 +190,7 @@ set_option linter.unusedVariables false in
 -- Localized-site tensor comparisons require additional elaboration steps.
 /-- On a fixed open, prescribed strictly perfect models compute the restriction of the
 ordinary tensor of global K-flat representatives. No perfectness hypothesis or choice of
-neighbourhood is involved.
-Source: Stacks Project, Cohomology of Sheaves, Lemma 09J5, local reduction and K-flat
-computation; Tag 06YH, independence of K-flat representatives; Tag 08DX, open restriction.
-(blueprint: lem-sc-strict-perfect-tensor-local-comparison).
-
-Proof: Let R be exact restriction to the localized site over U. The comparison between
-termwise and derived restriction identifies R(Q(P)) with Q(R(P)), and similarly for N.
-Restriction preserves K-flatness, since it is restriction to an open. Restriction also
-commutes with sheaf tensor and arbitrary direct sums, so Q(R(Tot(P tensor N))) identifies
-with Q(Tot(R(P) tensor R(N))). Each term of A and B is a retract of a finite free sheaf,
-hence flat; their upper degree bounds make them K-flat. The K-flat derived tensor
-comparison identifies the latter object with Q(R(P)) tensor-derived Q(R(N)). Tensor the
-two prescribed derived-category isomorphisms, obtaining Q(A) tensor-derived Q(B).
-The same K-flat comparison for A and B identifies this with Q(Tot(A tensor B)). Compose
-these isomorphisms. All constructions are on the localized site; no quasi-coherence or
-affineness assumption is needed. On the empty open every category object is zero, and
-rank-zero free summands and zero complexes obey the same comparison. -/
+neighbourhood is involved. -/
 theorem strictPerfect_tensor_localComparison (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]

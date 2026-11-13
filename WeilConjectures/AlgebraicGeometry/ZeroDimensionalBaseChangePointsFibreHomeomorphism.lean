@@ -18,8 +18,11 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoi
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreTopology
 
 /-! Intermediate fibre facts for zero-dimensional base change.
-Source: Stacks Project, schemes.tex Lemma 01JT and algebra.tex Lemma 00P4.
-(blueprint: new-zdbp-fibres-homeomorphism)
+
+## References
+
+* [Stacks Project, Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)
+* [Stacks Project, Tag 00P4](https://stacks.math.columbia.edu/tag/00P4)
 -/
 
 set_option linter.style.haveILetI false
@@ -32,9 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The projection after base change is a homeomorphism. Source: topology of discrete
-spaces and the preceding point and dimension results. A continuous bijection between
-discrete spaces has continuous inverse. (blueprint: new-zdbp-fibres-homeomorphism) -/
+/-- The projection after base change is a homeomorphism. A continuous bijection between
+discrete spaces has continuous inverse. -/
 theorem zeroDimensional_baseChange_fibre_homeomorphism
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

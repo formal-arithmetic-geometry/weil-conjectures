@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 
 /-! # Tensor-unit comparisons for raw section cohomology
 
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-section-cohomology-unit-comparisons).
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -94,30 +96,7 @@ private theorem unitTwistIso_section {Y : Scheme.{u}} (G : Y.Modules)
       rightUnitor_hom_app_tmulSection, map_pow]
 
 /-- Evaluation of a pushforward resolution agrees with derived sections on the inverse
-image open, compatibly with restriction and multiplication by a tensor power of a function.
-
-Source: Stacks Project, Tag 01E4, Lemma 20.7.3, and Tag 01E1, restriction of injectives.
-(blueprint: lem-pc-section-cohomology-unit-comparisons).
-
-Proof: Put Y = f inverse W and G = F restricted to Y. Restrict I termwise to Y.
-Restriction is exact and preserves injectives, so this is a resolution of G. Evaluation
-of pushforward identifies its sections on Y with the section complex K(W). Restricting
-again to D(b) identifies sections with K(D(a)), because pullback commutes with the
-nonvanishing locus. Compute the derived section functors using these resolutions;
-exact evaluation of presheaves and forgetting scalars commute with homology. This gives
-the additive comparison
-e. The tensor powers of the tensor unit have canonical isomorphisms to the unit,
-constructed recursively with the unitors. Tensoring these with G gives isomorphisms
-G tensor unit^n to G. Apply derived sections on Y and on U and then the preceding
-comparisons to obtain c and d. Naturality of the derived section comparison for
-restriction gives the second equation. Degreewise, the map induced by tensoring with
-s^n is multiplication by b^n, under the unitors. The section comparisons are semilinear
-for pullback of functions, and hence on homology multiplication by b^n corresponds
-to the a^n action restricted along the structure-sheaf restriction. This is the first
-equation. No compactness, separation, affineness, or quasi-coherence is needed: this
-is only an identification of resolutions and their scalar and restriction maps.
-For a=0 the open U and the target complex are empty; the same comparisons still apply.
-For n=0 the scalar is 1 and the tensor-power comparison is the right unitor. -/
+image open, compatibly with restriction and multiplication by a tensor power of a function. -/
 theorem sectionCohomology_unit_comparisons {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F)
     (q : ℕ) (W : T.Opens) (a : Γ(T, W)) :

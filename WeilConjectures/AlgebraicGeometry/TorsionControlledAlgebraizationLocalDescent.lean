@@ -15,9 +15,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraic descent with local formal comparisons
 
-Source: Stacks Project, Tag 0889(1), Zariski locality via uniqueness;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-algebraization-local-descent).
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -28,35 +30,6 @@ namespace AlgebraicGeometry
 /-- Glue the algebraic sources and their arrows, retaining local formal comparisons.
 This conclusion does not glue the comparisons into a global formal isomorphism
 and does not assert annihilation for the actual global kernel or cokernel.
-
-Source: Stacks Project, Tag 0889(1), first sentence of the proof and uniqueness;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-algebraization-local-descent).
-
-Proof: Choose one supplied triple on each open. Restrict them to pairwise
-intersections. Restriction preserves coherence, kernels and cokernels, and
-commutes with ideal products and powers, so the restricted arrows retain their
-bounds. The normalized completion-restriction comparisons identify the two
-completions with the restriction of N. The resulting completed comparison
-commutes with the maps to the restricted H. Lift it and its inverse using
-torsion-controlled completion hom lifting. Completion extensionality with the
-map to H identifies their composites with identities. The same extensionality
-proves the cocycle equation on triple intersections. Glue these module sheaves
-and arrows by module descent; coherence is local. The resulting local source
-isomorphisms e identify the restricted global arrow with the supplied arrow ai,
-with the target identification eqToHom(hHlocal.symm). Retain ai's supplied bound.
-Compose each supplied beta with the inverse of the completion of e and the
-canonical completion-restriction comparison. Transfer these local system
-isomorphisms through the equivalence between open-subscheme modules and modules
-on the over-site, obtaining epsilon. Their components agree on every open
-inside an intersection by the defining completed comparisons. Naturality is
-inherited from beta and completion. The supplied factorization and naturality
-of the normalized comparison give delta restricted = epsilon followed by the
-restricted completion of a at every level. No global epsilon is glued here.
-For J = 0 the local completed comparisons are the original module comparisons.
-For the unit ideal the bounded arrows are isomorphisms, so comparison is through
-H even though completion is zero. For an empty cover hcover forces X empty and
-module descent supplies the zero source; all comparison conditions are vacuous.
 -/
 theorem torsionControlled_algebraization_local_descent
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

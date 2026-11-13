@@ -20,15 +20,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- If every object is flat, the tensor localization comparison is invertible on all
-cochain complexes, including unbounded complexes.
-Source: the first paragraph of the finite-ring Kunneth proof, K-flat comparison step.
-
-Proof. Each bounded-above good truncation of L is K-flat since all its terms are flat.
-The filtered colimit of these truncations is L, and K-flat complexes are closed under
-these colimits. Thus L is K-flat. The homotopy-to-derived tensor counit is invertible
-when its right input is K-flat. The complex-to-homotopy tensor comparison is an identity,
-so the composite lax structure on Q has invertible tensor comparison as well.
-(blueprint: lem-pur-tensor-comparison-all-flat). -/
+cochain complexes, including unbounded complexes. -/
 theorem tensorComparisonIsoOfAllFlat
     {C : Type (u + 2)} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C]

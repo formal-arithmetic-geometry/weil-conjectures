@@ -17,8 +17,10 @@ import all WeilConjectures.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
 
 /-! # Coefficient factors of the derived scalar pullback square
 
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-square).
+## References
+
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -31,9 +33,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] moduleAbelianDerivedUpperStarIso
 
-/-- The shifted coefficient part of scalar comparison.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-square). -/
+/-- The shifted coefficient part of scalar comparison. -/
 noncomputable def scalarCoefficientFactor
     (Λ : Type (u + 1)) [CommRing Λ] {W Y : Scheme.{u}} (h : Y ⟶ W)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :

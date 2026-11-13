@@ -12,8 +12,11 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedSectionsUnitZero
 
 /-! # Compatibility of derived evaluation with a resolution
 
-Source: Stacks Project, Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-resolution-evaluation).
+## References
+
+* [Stacks Project, Tag 072W](https://stacks.math.columbia.edu/tag/072W)
+* [Stacks Project, Tag 0BKV](https://stacks.math.columbia.edu/tag/0BKV)
+* [Stacks Project, Tag 0D6F](https://stacks.math.columbia.edu/tag/0D6F)
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
-/-- The canonical computation of restricted derived sections on a K-injective restriction.
-Source: Stacks Project, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-resolution-evaluation). -/
+/-- The canonical computation of restricted derived sections on a K-injective restriction. -/
 noncomputable def resolutionSectionsIso {Y : Scheme.{v}} (W : Y.Etale)
     (I : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [CochainComplex.IsKInjective
@@ -114,21 +115,7 @@ private theorem sectionsUnit_resolution {Y : Scheme.{v}} (W : Y.Etale)
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- On a chain map, derived evaluation agrees with termwise evaluation in the resolution.
-Source: Stacks Project, Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-resolution-evaluation).
-
-Proof: let L be etale restriction and R be sections. The comparison defining
-`resolutionSectionsIso` first uses the exact-functor localization comparison for L,
-then the inverse right-derived unit for R on the K-injective complex L(I), and finally
-homology's localization comparison. Naturality of all three comparisons identifies
-its composite with the image under H^0(R L) of the given chain map. For the degree-zero
-single source, the degree-zero derived-to-underived isomorphism `zeroIso` is the same
-comparison followed by the single-complex homology identification. Thus the element
-`zeroIso.inv (generator h U)` maps to the generator's single-complex class. Applying
-the chain map gives exactly `chainEvaluation`. This equality is independent of any
-chosen homotopy class isomorphism and does not assert its bijectivity. It also holds
-for a zero chain map and for a zero or empty restricted complex. -/
+/-- On a chain map, derived evaluation agrees with termwise evaluation in the resolution. -/
 theorem rawRestricted_resolution_evaluation {S Y : Scheme.{v}}
     (h : Y ⟶ S) (U : S.Etale)
     (I : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))

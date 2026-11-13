@@ -10,7 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
-/-! # Restriction of canonical rectangle comparisons -/
+/-! # Restriction of canonical rectangle comparisons
+
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 0ATM](https://stacks.math.columbia.edu/tag/0ATM)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -21,25 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- The fixed rectangle interface names U and V although this comparison does not use them.
-/-- Canonical ordinary rectangle comparisons on the quasi-coherent subcategories.
-Source: Stacks Project, Tags 0D5S (pullback composition), 0ATM (pasting), and
-08HY (adjunctions defining the mate).
-(blueprint: lem-sc-rectangle-qcoh-comparison-lifts)
-
-Proof: The two projection equations identify k with pullbackLeftPullbackSndIso.hom,
-by the uniqueness clause for the outer pullback. Pullback along k is an equivalence:
-its inverse is pullback along the inverse scheme isomorphism, with unit and counit
-obtained from the pinned composition and identity comparisons. Consequently the
-unit of the pinned adjunction for k is invertible. Conjugate c(k,q) followed by the
-transport along hk₂ under the pinned adjunctions for q, k, and the iterated second
-projection; this is d. Whisker d with pullback along k and cancel the invertible
-unit to obtain an ambient isomorphism from that pullback followed by the iterated
-direct image to the outer direct image. Its inverse component is exactly the
-first displayed formula. Both end functors preserve quasi-coherent objects, so
-full faithfulness of the QCoh inclusion lifts this isomorphism uniquely to p.
-Likewise lift c(h,g).symm to b. Faithfulness gives the second component formula.
-No base-change map is assumed invertible here. Empty schemes and identity maps
-satisfy the same universal-property and adjunction calculations. -/
+/-- Canonical ordinary rectangle comparisons on the quasi-coherent subcategories. -/
 theorem rectangle_qcoh_comparison_lifts
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine evaluation of coproducts of lower-truncated higher images
 
-Source: Stacks Project, Tags 08D5 and 015J, with Schemes, Tag 01I7
-(blueprint: lem-pc-truncated-higher-images-affine-coproduct).
+## References
+
+* [Stacks Project, Tag 08D5](https://stacks.math.columbia.edu/tag/08D5)
+* [Stacks Project, Tag 015J](https://stacks.math.columbia.edu/tag/015J)
+* [Stacks Project, Tag 01I7](https://stacks.math.columbia.edu/tag/01I7)
 -/
 
 @[expose] public section
@@ -32,29 +35,6 @@ namespace AlgebraicGeometry
 /-- The sheaf coproduct of lower-truncated higher images is a coproduct on affine sections.
 This assertion concerns only the family of higher-image sheaves; no ambient derived
 coproduct or its higher direct image occurs in its statement.
-Source: Stacks Project, Tag 08D5, bounded-below paragraph, and Tag 015J; Tag 01I7
-(blueprint: lem-pc-truncated-higher-images-affine-coproduct).
-
-Proof.
-1. Canonical lower truncation preserves quasi-coherent cohomology: the cohomology is
-   unchanged in degrees at least a and zero below a. It has common lower bound a.
-2. For each i, apply bounded-below truncation hypercohomology for direct image. Its
-   second page is R^p f_* H^r. On an affine target open the preimage is qcqs. Ordinary
-   higher images of quasi-coherent modules are quasi-coherent: affine acyclicity and
-   localization of sections give localization of cohomology in the affine case;
-   Mayer--Vietoris on a finite affine cover, with quasi-compact overlaps supplied by
-   quasi-separatedness, gives it for the preimage. These comparisons commute with
-   principal restriction. The higher-image presheaf description therefore gives
-   the affine localization criterion for quasi-coherence of the second-page sheaves.
-3. Closure under kernels and cokernels/images gives quasi-coherence of all later
-   pages. In total degree q the convergent filtration is finite, and its graded
-   pieces are stable terms of these pages. Descending extension induction from its
-   zero last step makes the abutment quasi-coherent. Below the bound a it is zero.
-4. Arbitrary sheaf coproducts of quasi-coherent modules are quasi-coherent. Apply
-   affine evaluation of quasi-coherent colimits to their canonical coproduct cocone.
-   This gives the displayed module colimit, including an empty index type and the
-   empty affine open. No claim that arbitrary module-sheaf coproducts are sectionwise
-   is needed.
 -/
 theorem truncated_higherImages_affine_coproduct
     {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

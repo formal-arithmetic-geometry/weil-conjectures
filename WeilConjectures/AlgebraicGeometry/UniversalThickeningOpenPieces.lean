@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 /-!
 # Open pieces of universal first order thickenings
 
-Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
-the general remarks preceding the affine case
-(blueprint: lem-weil-pbc-universal-thickening-open-pieces).
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
 -/
 
 @[expose] public section
@@ -49,41 +49,9 @@ private theorem firstOrder_restrict {T T' : Scheme.{u}} (i : T ⟶ T')
 
 /-- Restriction of a first order thickening, restriction of a universal thickening to
 opens of source and base, and enlargement of an open base containing the image.
-In the first clause, for any structure morphism `b : T' ⟶ X`, the restricted structure
+In the first clause, for any structure morphism `b: T' ⟶ X`, the restricted structure
 morphism is `W'.ι ≫ b`; the source is over `X` by composition. The equality on affine
-opens expresses restriction of the defining ideal sheaf, in Mathlib's ideal-sheaf data.
-
-Source: Stacks Project, proof of Lemma 37.7.1 (Tag 04F3), general remarks
-(blueprint: lem-weil-pbc-universal-thickening-open-pieces).
-
-Proof:
-1. Apply lem-weil-pbc-thickening-open-restriction to `iT` and `W'`, with the whole
-   base as its open. The restricted immersion is closed, its ideal is the restricted
-   ideal, and this ideal still has square zero. This proves the first clause over any
-   base, using def-sbc-first-order-thickening.
-2. A first order thickening is a homeomorphism on underlying spaces. The image of
-   each open `W` is open and is its unique inverse under preimage. This also supplies
-   the unique open `V'` corresponding to `V` in the second clause.
-3. Every point of `V'` is `i(v)` with `v` in `V`. Since `i ≫ h' = h`, its image
-   under `h'` lies in `U`. Factor the restricted maps through the opens by
-   lem-weil-pbc-morphism-factors-through-open-subscheme; restriction of the thickening
-   gives a first order thickening of `V` over `U`, compatible with the restricted `h`.
-4. Given a test thickening over `U` and a map to `V`, compose with the inclusions to
-   obtain a test over `X`. Apply def-weil-pbc-universal-first-order-thickening to get
-   the unique extension into `Z'`. Surjectivity on points of the test thickening
-   places its image in `V'`, so it factors uniquely through `V'`. Cancel the open
-   inclusions to verify its two required compatibilities over `U`.
-5. Two such extensions into `V'` become extensions into `Z'`; universal uniqueness
-   makes them equal after inclusion, and cancellation of that inclusion proves
-   uniqueness into `V'`. This proves universality of the restricted thickening.
-6. For enlargement of the base, the immersion and its square-zero ideal are unchanged;
-   composing the structure morphism with `U.ι` makes a thickening over `X` for `h`.
-7. In any test over `X` mapping to `Z`, surjectivity on points of its immersion and
-   the containment of `h(Z)` in `U` force the structure map of the test to factor
-   through `U`. Cancel `U.ι` to verify the compatibility, then apply universality
-   over `U` to obtain the required extension over `X`.
-8. Any other extension over `X` is over `U` after cancelling `U.ι`, and uniqueness
-   over `U` identifies the two. This proves the third clause. -/
+opens expresses restriction of the defining ideal sheaf, in Mathlib's ideal-sheaf data. -/
 theorem universalFirstOrderThickening_open_pieces {Z X : Scheme.{u}} (h : Z ⟶ X) :
     (∀ {T T' : Scheme.{u}} (iT : T ⟶ T') (_b : T' ⟶ X),
       IsFirstOrderThickening iT →

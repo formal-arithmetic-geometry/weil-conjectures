@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Forward implication for the section-ring chart formula
 
-Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ
-(blueprint: lem-sc-ample-proj-canonical-map-preimage-forward).
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01PZ](https://stacks.math.columbia.edu/tag/01PZ)
 -/
 
 @[expose] public section
@@ -113,27 +115,7 @@ private theorem nonvanishing_of_local_smul {X : Scheme.{v}} (M : X.Modules)
 /-- If a point lies in the inverse image of a homogeneous basic open, the section is
 nonvanishing there. The proof uses the fraction identity with a section already known
 to be nonvanishing at the point; in the residue-field fibre, a nonzero numerator cannot
-be a multiple of a vanishing denominator.
-Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ
-(blueprint: lem-sc-ample-proj-canonical-map-preimage-forward).
-
-Proof: the nonvanishing/local-generation equivalence shows that an isomorphism
-preserves nonvanishing. Trivialize two invertible modules simultaneously and write
-their sections as a times a basis and b times a basis. Their tensor has coefficient
-a*b, and the basic-open multiplication formula identifies its nonvanishing locus
-with the intersection of the two original loci. Homogeneous section-ring
-multiplication is this tensor section transported through tensorPowAddIso, as
-DirectSum.of_mul_of shows after extracting the single-component representatives.
-Induction now shows that every positive section-ring power has the same
-nonvanishing locus as its base section.
-Choose e > 0 and t nonvanishing at x from hx. Form the homogeneous numerator t^d
-in degree e*d using d*e = e*d; its degree-e*d component is nonvanishing at x.
-Specialize hformula to n = e and this numerator. Take germs at x on the inverse
-image of D_+(s). Germs commute with restriction and scalar multiplication. If the
-germ of s^e belonged to the maximal ideal times its stalk, its scalar multiple
-would also belong there, contradicting nonvanishing of t^d. Thus s^e is
-nonvanishing, and positive-power invariance gives nonvanishing of s.
-No reducedness, ampleness or quasi-compactness assumption is needed. -/
+be a multiple of a vanishing denominator. -/
 theorem sectionRing_proj_mem_basicOpen_forward (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (f : X ⟶ Proj (sectionRingGrade L))
     (hformula : ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d),

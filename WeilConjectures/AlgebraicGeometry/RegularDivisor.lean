@@ -11,13 +11,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCart
 /-!
 # Regular divisors meeting transversely at one point
 
-The transverse boundary calculation of the trace formula (blueprint
-`sk-lem-tf-transverse-boundary`) works with two regular divisors `X, Y` of a surface `Z`
+The transverse boundary calculation of the trace formula works with two regular divisors `X, Y` of a surface `Z`
 "meeting transversely at exactly one point `z`".
 
 ## Main definitions
 
-- `AlgebraicGeometry.IsRegularDivisor i`: the morphism `i : D ⟶ Z` is an effective Cartier
+- `AlgebraicGeometry.IsRegularDivisor i`: the morphism `i: D ⟶ Z` is an effective Cartier
   divisor (`AlgebraicGeometry.IsEffectiveCartierCenter`) with regular source.
 - `AlgebraicGeometry.MeetTransverselyAt iX iY z`: the scheme-theoretic intersection
   `X ×_Z Y` is the spectrum of a field, lying over the point `z`. For two divisors on a regular
@@ -33,7 +32,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- A *regular divisor* of `Z`: an effective Cartier divisor `i : D ⟶ Z` whose source `D` is
+/-- A *regular divisor* of `Z`: an effective Cartier divisor `i: D ⟶ Z` whose source `D` is
 a regular scheme. -/
 def IsRegularDivisor {D Z : Scheme.{u}} (i : D ⟶ Z) : Prop :=
   IsEffectiveCartierCenter i ∧ IsRegular D
@@ -43,7 +42,7 @@ lemma IsRegularDivisor.isClosedImmersion {D Z : Scheme.{u}} {i : D ⟶ Z}
     (h : IsRegularDivisor i) : IsClosedImmersion i :=
   h.1.isClosedImmersion
 
-/-- Two closed subschemes `iX : X ⟶ Z` and `iY : Y ⟶ Z` *meet transversely at exactly the
+/-- Two closed subschemes `iX: X ⟶ Z` and `iY: Y ⟶ Z` *meet transversely at exactly the
 point `z`*: their scheme-theoretic intersection `X ×_Z Y` is the spectrum of a field, mapping to
 `z`. -/
 def MeetTransverselyAt {X Y Z : Scheme.{u}} (iX : X ⟶ Z) (iY : Y ⟶ Z) (z : Z) : Prop :=

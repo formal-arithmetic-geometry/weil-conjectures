@@ -20,9 +20,11 @@ import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 
 /-! # Localization of an abelian stalk exchange to strict henselian bases
 
-Source: Stacks Project, Tag 03Q9 (restriction complexes), Tag 03QO (closed-point germs),
-and the total-space restriction portion of Tag 095T.
-(blueprint: lem-weil-pbc-abelian-stalk-exchange-localization).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 095T](https://stacks.math.columbia.edu/tag/095T)
 -/
 
 @[expose] public section
@@ -37,41 +39,7 @@ open Scheme Etale
 /-- Restriction to compatible strict henselizations conjugates the original exchange
 on abelian stalks to the exchange on the strict local bases. Both sides are stalks;
 this statement makes no identification with Ext cohomology and claims no invertibility
-of either exchange. The morphism f need only be quasi-compact and quasi-separated.
-
-Source: Stacks Project, Tag 03Q9, proof of theorem-higher-direct-images, restriction
-complexes; Tag 03QO, exactness of closed-point germs; Tag 095T, final stalk calculation.
-(blueprint: lem-weil-pbc-abelian-stalk-exchange-localization).
-
-Proof:
-1. Enlarge the separably closed point fields along ν and ν ≫ ι. Lifts to an etale
-neighbourhood are unchanged: its fibre is a disjoint union of spectra of finite
-separable field extensions, and these extensions of k or k' are already trivial.
-Precomposition therefore gives isomorphisms of the point fibre functors, natural in
-sheaves. Commute exact inverse image with homology and apply the inverse-image stalk
-comparison to identify the source with the direct-image stalk at σ.
-2. Apply the unrestricted 03Q9 restriction to f at ν ≫ ι ≫ σ and to f' at ν ≫ τ.
-The second morphism is qcqs by base change. Transport the first total space to X₀
-using sq₀ and eA. The square sq₁ and the equation hφ identify X₁ with the base change
-of X' to Spec B: paste sq₁ and sq₀, then cancel the original pullback sq.
-The inverse-image composition isomorphisms identify the resulting coefficients with
-p₀^*G and p₁^*p₀^*G, including the degree-zero derived single-complex comparisons.
-3. The closed-point germ on either strict local base is an exact isomorphism by
-03QO. Locality of φ and hρ identify the image of the closed B-point with the closed
-A-point; hρA and hρB identify its reparametrizations with σ and τ. The Leray comparison
-and exactness of closed-point sections now identify the two total-space homologies
-in step 2 with the two local higher-direct-image stalks in the conclusion. Compose
-these isomorphisms with step 1 and take the underlying additive equivalences.
-4. Resolve G by a bounded below injective abelian complex I and replace g'^*I by a
-K-injective complex J. The termwise exchange is pullback of sections followed by
-I -> J. At each pointed affine neighbourhood, restriction before or after this map
-agrees: the structural square hφ and the residue square hρ give the same pointed
-etale lift, and strict henselian pointed-lift uniqueness identifies the two lifts.
-Thus the section-complex square commutes. Filtered colimits are exact, so passing
-to homology gives the displayed equation. Conjugation by the unique pullback
-isomorphisms used in step 2 preserves this equation by naturality of the mate.
-The argument works in degree zero, for the zero sheaf, for inseparable field
-extensions, and for nonstandard pullback models; no torsion is used. -/
+of either exchange. The morphism f need only be quasi-compact and quasi-separated. -/
 theorem Etale.exists_addEquiv_strictHenselization_abelian_stalkExchange
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}

@@ -16,8 +16,11 @@ import WeilConjectures.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHomIsIso
 /-!
 # Compatibility of an equivariant representative with inverse image
 
-Source: Stacks Project Tags 03Q1 (4) and 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-compatible)
+## References
+
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 0A5G](https://stacks.math.columbia.edu/tag/0A5G)
+* [Stacks Project, Tag 03RV](https://stacks.math.columbia.edu/tag/03RV)
 -/
 
 @[expose] public section
@@ -28,25 +31,7 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- An equivariant base-change isomorphism gives the unit-compatible sheaf isomorphism.
-Source: Stacks Project Tags 03Q1 (4), 03RV and 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-compatible)
-
-Proof: Inverse image of the representable sheaf of t is the representable sheaf of
-its base change, by Tag 03Q1 (4). Compose this canonical isomorphism with Yoneda of e
-and with the representing torsor isomorphism hrepr. Transport the constant coefficient
-sheaf through upperStarConstantSheafIso. On a constant section m, compatibility of e
-with the scheme actions makes this composite commute with translation by m. The
-canonical representable comparison sends a section over W to its base change over
-W ×_Y Y₀; this follows from its construction by the adjunction and Yoneda evaluation.
-The constant-sheaf comparison sends the adjunction unit of m to the constant m.
-For a general section g of the constant coefficient sheaf, partition W into the
-open-and-closed fibres of its locally constant map to M. On every fibre the equation
-is the constant-section equation; naturality and the separated sheaf axiom glue it.
-Coefficient transport uses the inverse of the same constant-sheaf comparison, so
-these equations have exactly the coefficient unit appearing below. This construction
-uses only a given equivariant representative, not an equivalence of finite étale
-categories or a choice of a transport function. -/
+/-- An equivariant base-change isomorphism gives the unit-compatible sheaf isomorphism. -/
 theorem scheme_torsor_pullback_compatible
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M] [Finite M]

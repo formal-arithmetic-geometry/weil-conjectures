@@ -11,8 +11,12 @@ import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison
 
 /-! # The derived evaluation square before choosing a generator
 
-Source: Stacks Project, Tags 0D6F, 07A6 and 03Q8.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback).
+## References
+
+* [Stacks Project, Tag 0D6F](https://stacks.math.columbia.edu/tag/0D6F)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 0BKV](https://stacks.math.columbia.edu/tag/0BKV)
 -/
 
 @[expose] public section
@@ -23,18 +27,14 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
-/-- Restricted derived sections followed by zeroth homology.
-Source: Stacks Project, Tag 0BKV.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback). -/
+/-- Restricted derived sections followed by zeroth homology. -/
 noncomputable abbrev Hzero {S Y : Scheme.{v}} (h : Y ⟶ S) (U : S.Etale) :=
   sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U) ⋙
     DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0
 
 /-- Transport zeroth derived sections of a single sheaf by ordinary section pullback.
 All maps are constructed: the zero comparison, the adjunction unit on sections,
-the restricted coefficient map, and the inverse zero comparison.
-Source: Stacks Project, Tags 0D6F and 07A6.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback). -/
+the restricted coefficient map, and the inverse zero comparison. -/
 noncomputable def transportZero {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -49,9 +49,7 @@ noncomputable def transportZero {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
       (rawAffineRestrictedCoefficient a h h' w G G' ψ U) ≫
     (zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) G').inv
 
-/-- Pullback of a derived morphism with an arbitrary source sheaf identification.
-Source: Stacks Project, Tag 07A6.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback). -/
+/-- Pullback of a derived morphism with an arbitrary source sheaf identification. -/
 noncomputable def pullbackHom {Y Y' : Scheme.{v}} (a : Y' ⟶ Y) (p : ℕ)
     {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}}
     {G' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1}}
@@ -73,28 +71,7 @@ noncomputable def pullbackHom {Y Y' : Scheme.{v}} (a : Y' ⟶ Y) (p : ℕ)
         (DerivedCategory.Plus.singleFunctor _ 0).map φ)
 
 /-- The derived section square for an arbitrary morphism between single complexes.
-No represented sheaf, identity generator, or evaluation at a chosen element occurs.
-Source: Stacks Project, Cohomology on Sites, Tags 0D6F and 07A6; the natural
-restriction calculation in Tag 03Q8.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback).
-
-Proof: Put r = pr_Y, r' = pr_Y' and q = U times_S a. The pullback identities
-imply r' followed by a equals q followed by r. Use inverse-image composition
-along this equality to identify r'^* a^* with q^* r^*. The unit for q gives a
-natural map RΓ(V, r^* K) to RΓ(V', r'^* a^* K): apply RΓ to its derived unit,
-then use the derived composition comparison for q_* and global sections.
-Its naturality square at t commutes by functoriality and naturality of the unit.
-On a single G in degree zero this map is the ordinary section pullback, since
-the degree-zero right-derived comparison identifies the derived unit with the
-underived adjunction unit. Postcompose by e to obtain transportZero.
-On the shifted single F the shift comparison and single-complex comparison
-identify the same map with rawAffineComplexPullback, followed by the restricted
-single coefficient morphism for φ. Naturality of these comparisons gives
-rawAffineRestrictedCohomologyMap. Precompose the naturality square with the
-single comparison for G and the inverse of e, and postcompose with the shift
-comparison for F'. Cancel each comparison with its inverse. The resulting
-square is the stated equality of homomorphisms. All constructions apply for
-p = 0 and on an empty restricted scheme; no inverse of a section map is used. -/
+No represented sheaf, identity generator, or evaluation at a chosen element occurs. -/
 theorem restrictedDerivedEvaluation_pullback {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

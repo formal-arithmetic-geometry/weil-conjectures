@@ -23,9 +23,11 @@ set_option linter.privateModule false
 /-!
 # Localization complexes and derived internal Hom on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9 and 08JB;
-Algebraization of Formal Spaces, Tag 0996
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
+* [Stacks Project, Tag 08JB](https://stacks.math.columbia.edu/tag/08JB)
+* [Stacks Project, Tag 0996](https://stacks.math.columbia.edu/tag/0996)
 -/
 
 @[expose] public noncomputable section

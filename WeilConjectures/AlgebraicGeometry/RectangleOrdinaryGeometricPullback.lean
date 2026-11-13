@@ -12,7 +12,10 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -27,23 +30,7 @@ namespace AlgebraicGeometry
 -- Keep the derived construction folded while restricting its comparisons.
 
 /-- The canonical upper pullback comparison and equivalence for an iterated fiber product.
-No quasi-compactness or ordinary base-change invertibility is needed here.
-Source: Stacks Project, Tag 0D5S; the pullback universal property.
-(blueprint: lem-sc-rectangle-ordinary-geometric-pullback)
-
-Proof: Restrict the pinned derived pullback composition and identity comparisons
-through the fully faithful quasi-coherent inclusion. The two projection equations
-identify k with pullbackLeftPullbackSndIso.hom by pullback.hom_ext. Pullback along
-its inverse is an inverse functor to qcPullback k: composition comparisons,
-equality transports for the two inverse identities, and the identity comparison
-give its unit and counit isomorphisms. Equivalence.mk supplies the equivalence.
-Compose the ambient comparison for k and the outer first projection, the equality
-transport for hk₁, and the inverse comparison for the two inner first projections.
-Lift this natural isomorphism uniquely through the fully faithful inclusion to s.
-The map-preimage identity computes its ambient component, and equality transport
-commutes with evaluation. This is the stated three-factor formula. Empty schemes
-and zero complexes need no special assumptions; identity maps use the same unit
-comparisons. The chosen composition family is pinned by its universal property. -/
+No quasi-compactness or ordinary base-change invertibility is needed here. -/
 theorem rectangle_ordinary_geometric_pullback
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

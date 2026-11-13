@@ -14,7 +14,10 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 /-!
 # Universal-homeomorphism pullback coherence
 
-Source: Stacks Project, Tags 04DZ and 03SI.
+## References
+
+* [Stacks Project, Tag 04DZ](https://stacks.math.columbia.edu/tag/04DZ)
+* [Stacks Project, Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)
 -/
 
 set_option linter.style.haveILetI false

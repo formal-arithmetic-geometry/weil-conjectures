@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalSectionPullback
 
 /-! # Exchange and the representative restriction comparison
 
-Source: Stacks Project, Tags 03Q1 and 0A3U, expanded compatibility in degree zero.
+## References
+
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 0A3U](https://stacks.math.columbia.edu/tag/0A3U)
 -/
 
 @[expose] public section
@@ -60,28 +63,7 @@ private theorem module_inverseImage_stalk_germ
 set_option maxRecDepth 2048 in
 /-- Any linear map with the strict-local representative formula intertwines exchange
 with restriction to a pointed fibre. This is a compatibility result, with no qcqs,
-properness, local-ring, closed-point or invertibility hypothesis.
-Source: Stacks Project, Tag 03Q1 (3), and Tag 0A3U, compatibility omitted there;
-expanded as step 3 of `lem-weil-pbc-qcqs-geometric-exchange-factorization`.
-(blueprint: lem-weil-pbc-strict-local-exchange-compatibility).
-
-Proof: the affine pointed neighbourhoods are initial among all pointed neighbourhoods,
-so their germs are jointly epimorphic. Precompose the equality with these germs after
-transport through the inverse-image stalk isomorphism. The inverse-image germ formula
-identifies this composite with the germ of the unit section at the induced pointed
-neighbourhood over Spec Ω. Expand `baseChangeMap` as unit, the square inverse-image
-comparison, and counit. Naturality of the germ maps, the adjunction identities, and the
-composition-unit identity show that this composite is restriction of the original
-section to the pointed fibre. On the right, `ha` replaces the strict-local comparison
-by its unit and limit-leg restriction. The equation `hpoint` says that the limit leg
-restricted along t is exactly the original pointed neighbourhood map. The pullback
-universal property, `hqt`, and `hq` therefore identify the two fibre restriction maps.
-The composition inverse `upperStarComp` identifies the iterated inverse image with
-inverse image along g'. Finally expand `lowerStarCompGlobalSectionsIso` and the
-terminal germ: both sides evaluate the same pulled-back section and take its identity
-neighbourhood germ. Cancel the inverse-image stalk isomorphism, and use the jointly
-epimorphic affine germs to conclude. This proof uses only the representative formula,
-not bijectivity of a; it works for zero modules and empty schemes as well. -/
+properness, local-ring, closed-point or invertibility hypothesis. -/
 theorem strictLocal_exchange_compatibility
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

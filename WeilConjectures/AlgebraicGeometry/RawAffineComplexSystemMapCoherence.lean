@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
 
 /-! # Coherence of canonical complex cohomology maps
 
-Source: Stacks Project, Tag 0EZM, canonical maps; Tags 015J and 015K.
-(blueprint: lem-sbc-raw-affine-complex-system-map-coherence).
+## References
+
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 015J](https://stacks.math.columbia.edu/tag/015J)
+* [Stacks Project, Tag 015K](https://stacks.math.columbia.edu/tag/015K)
 -/
 
 @[expose] public section
@@ -85,21 +88,7 @@ private lemma pairMap_comp {X Y Z : Scheme.{v}} (f : Y ⟶ X) (g : Z ⟶ Y)
     f g ⟨K, hK⟩ ⟨M, hM⟩ ⟨N, hN⟩ a b p
 
 /-- Canonical cohomology maps of a coherent inverse-image complex system obey
-identity, composition and cone-leg equations.
-Source: Stacks Project, Tag 0EZM, canonical maps; Tags 015J and 015K.
-(blueprint: lem-sbc-raw-affine-complex-system-map-coherence).
-
-Proof: Define the pair map as rawAffineComplexPullback followed by the
-coefficient map and identify it with the formula in
-derivedEtaleCohomology_pullback_laws. Apply that existing theorem to the
-bounded-below stage complexes and the bounded-below cocone vertex. Rewrite
-psi using hidentity and hcomposition and transport across D.map_id and
-D.map_comp. For the cone-leg equation, precompose cocone naturality with
-eG_i.inv, rewrite hG and cancel eG_i.inv followed by eG_i.hom. Apply the
-existing composition law to D.map f and c.pi_j; the cone equation identifies
-the composite with c.pi_i, and the coefficient equality gives the desired
-leg equation. No limiting or colimiting universal property, affineness,
-quasi-compactness or cohomology continuity assertion is used. -/
+identity, composition and cone-leg equations. -/
 theorem rawAffineComplex_system_map_coherence {J : Type v} [SmallCategory J]
     (D : J ⥤ Scheme.{v}) (c : Cone D)
     (K : ∀ i : J, CochainComplex (Sheaf (D.obj i).smallEtaleTopology

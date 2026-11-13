@@ -15,7 +15,12 @@ The canonical map from the section-fraction presentation, sending a class
 the explicit numerator map through the section-fraction relations.
 The theorem records bijectivity of this specific canonical map together with its
 generator formula.
-Source: Stacks Project, Properties, Tags 0B5L, 01PW, and 01Q1.
+
+## References
+
+* [Stacks Project, Tag 0B5L](https://stacks.math.columbia.edu/tag/0B5L)
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
+* [Stacks Project, Tag 01Q1](https://stacks.math.columbia.edu/tag/01Q1)
 -/
 
 @[expose] public section
@@ -28,8 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 -- The kernel equality is used directly to certify the quotient lift.
 
 /-- The canonical map from section-fraction classes to homogeneous fractions.
-Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
-(blueprint: lem-sc-section-ring-veronese-fractions-core)
+
 Descend the explicit direct-sum numerator map to the quotient by section-fraction
 relations. The proved kernel equality makes this well-defined; constructing the
 map itself does not require choosing an inverse or proving surjectivity.
@@ -45,8 +49,7 @@ noncomputable def sectionRingVeroneseFractionCanonicalMap
     (sectionRingVeroneseFractionMap_kernel X L d s).le
 
 /-- The canonical Veronese fraction map is bijective.
-Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
-(blueprint: lem-sc-section-ring-veronese-fractions-core)
+
 The map descends the explicit numerator-to-fraction map through the section-fraction
 relations. Its kernel is precisely the relation subgroup, which gives injectivity
 of the descended map. Surjectivity follows from the surjectivity of the numerator

@@ -11,8 +11,13 @@ public import Mathlib.CategoryTheory.Sites.CoverLifting
 
 /-! # Canonical comparison of the two completed coefficient rings
 
-Source: Stacks Tags 00YY and 03CY; Bhatt--Scholze, Proposition 6.6.11.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 00YY](https://stacks.math.columbia.edu/tag/00YY)
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -21,14 +26,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The small-site precomposition is an equivalence.
-Source: Stacks Tag 00YY (auxiliary; not a blueprint node). -/
+/-- The small-site precomposition is an equivalence. -/
 instance sfbDown_isEquivalence (T : Scheme.{u}) :
     (AsSmall.down : coefficientProEtaleSiteModel.{u, 0} T ⥤ T.ProEt).IsEquivalence :=
   inferInstanceAs ((AsSmall.equiv (C := T.ProEt)).inverse.IsEquivalence)
 
-/-- The induced topology makes the equivalent small site a dense subsite.
-Source: Stacks Tag 00YY (auxiliary; not a blueprint node). -/
+/-- The induced topology makes the equivalent small site a dense subsite. -/
 instance sfbDown_isDenseSubsite (T : Scheme.{u}) :
     (AsSmall.down : coefficientProEtaleSiteModel.{u, 0} T ⥤ T.ProEt).IsDenseSubsite
       (coefficientProEtaleModelTopology.{u, 0} T) (ProEt.topology T) := by
@@ -37,8 +40,7 @@ instance sfbDown_isDenseSubsite (T : Scheme.{u}) :
       T.ProEt).inducedTopology (ProEt.topology T)) (ProEt.topology T)
   infer_instance
 
-/-- The equivalent-site precomposition preserves coverings in the reverse direction.
-Source: Stacks Tag 00YY (auxiliary; not a blueprint node). -/
+/-- The equivalent-site precomposition preserves coverings in the reverse direction. -/
 instance sfbDown_isCocontinuous (T : Scheme.{u}) :
     (AsSmall.down : coefficientProEtaleSiteModel.{u, 0} T ⥤ T.ProEt).IsCocontinuous
       (coefficientProEtaleModelTopology.{u, 0} T) (ProEt.topology T) := by
@@ -46,8 +48,7 @@ instance sfbDown_isCocontinuous (T : Scheme.{u}) :
   infer_instance
 
 attribute [-instance] SheafOfModules.instAbelian in
-/-- Precomposition to the equivalent small site is additive.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+/-- Precomposition to the equivalent small site is additive. -/
 instance sfbModuleToModel_additive (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
     (proEtaleModuleToModel.{u} (X := X) R).Additive := by
@@ -61,9 +62,7 @@ instance sfbModuleToModel_additive (X : Scheme.{u})
   intro x
   rfl
 
-/-- The canonical constant sheafification comparison under the equivalent small site.
-Source: Stacks Tags 00YY and 03CY
-(auxiliary; not a blueprint node). -/
+/-- The canonical constant sheafification comparison under the equivalent small site. -/
 def sfbModelConstantsIso (T : Scheme.{u}) :
     constantSheaf (ProEt.topology T) CommRingCat.{u + 1} ⋙
       (AsSmall.down : coefficientProEtaleSiteModel.{u, 0} T ⥤ T.ProEt).sheafPushforwardContinuous
@@ -83,9 +82,7 @@ def sfbModelConstantsIso (T : Scheme.{u}) :
 
 attribute [local irreducible] sfbModelConstantsIso
 
-/-- The constant comparison, naturally in the positive quotient exponent.
-Source: Stacks Tags 00YY and 03CY
-(auxiliary; not a blueprint node). -/
+/-- The constant comparison, naturally in the positive quotient exponent. -/
 def sfbModelSystemIso (T : Scheme.{u}) {A : Type (u + 1)}
     [CommRing A] (I : Ideal A) :
     adicLisseRingSystem T I ⋙ sfbModelRings T ≅
@@ -106,9 +103,7 @@ def sfbModelSystemIso (T : Scheme.{u}) {A : Type (u + 1)}
   exact hn.naturality f
 attribute [local irreducible] sfbModelSystemIso
 
-/-- The limit comparison for the actual positive quotient diagrams.
-Source: Stacks Tags 00YY and 03CY
-(auxiliary; not a blueprint node). -/
+/-- The limit comparison for the actual positive quotient diagrams. -/
 def sfbModelCompletionIso (T : Scheme.{u}) {A : Type (u + 1)}
     [CommRing A] (I : Ideal A) :
     (sfbModelRings T).obj (adicLisseCompletedRing T I) ≅
@@ -118,9 +113,7 @@ def sfbModelCompletionIso (T : Scheme.{u}) {A : Type (u + 1)}
 
 attribute [local irreducible] sfbModelCompletionIso
 
-/-- The limit comparison commutes with every actual quotient projection.
-Source: Stacks Tags 00YY and 03CY
-(auxiliary; not a blueprint node). -/
+/-- The limit comparison commutes with every actual quotient projection. -/
 theorem sfbModelCompletionIso_projection (T : Scheme.{u}) {A : Type (u + 1)}
     [CommRing A] (I : Ideal A) (n : ℕ) :
     (sfbModelCompletionIso T I).hom ≫

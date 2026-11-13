@@ -110,30 +110,7 @@ private theorem affine_model_chart_quasicoherent {Z Y : Scheme.{u}} (i : Z ⟶ Y
   exact (SheafOfModules.isQuasicoherent V.toScheme.ringCatSheaf).prop_of_iso
     r.symm (by infer_instance)
 
-/-- Sheafification of the affine conormal section calculation.
-Source: Stacks Project, Tags 01R3 (conormal) and 01I6 (affine
-quasi-coherent sheaves, full faithfulness, and exterior powers).
-(blueprint: new-t2-self-tor-conormal-wedge-chart-from-sections).
-Proof: Let V be the inverse-image chart. It is affine since i is a closed
-immersion and U is affine. The ideal module is the kernel of the map from the
-structure module to the direct image of the structure module of its closed
-subscheme. Closed direct image and kernels preserve quasi-coherence, so this
-ideal module is quasi-coherent. Identify tensorPullback with ordinary pullback
-by uniqueness of left adjoints; pullback preserves quasi-coherence. Restrict
-the conormal module to V and apply isQuasicoherent_exteriorSheaf_of_isAffine.
-Use exteriorSheaf_restrict_iso to identify this exterior sheaf with E|V.
-The restriction of T(M) to V is quasi-coherent:
-on U the restricted pushforward is the associated A-module M, and its pullback
-to the closed chart is the associated B-module B tensor_A M, where B = A/I.
-Identify the over-site sheaves with module sheaves on the open subscheme V.
-For quasi-coherent module sheaves on an affine scheme, a B-linear map on global
-sections extends uniquely: on a principal open D(f) use its localization,
-x/f^k mapping to e(x)/f^k, and glue over this basis. Apply this to both e and
-e.symm. Their composites are identities on all principal opens, hence as sheaf
-maps. Transport this isomorphism back to the over-site. Its component at the
-terminal open is e by construction, proving the displayed equation for every
-section. This step uses no pure-wedge equation and no choice of a section map.
-For the empty chart both sheaves are zero and the same construction applies. -/
+/-- Sheafification of the affine conormal section calculation. -/
 theorem exists_selfTor_conormal_wedge_chart_from_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens)

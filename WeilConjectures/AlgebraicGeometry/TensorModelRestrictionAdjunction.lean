@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 
 /-! # Tensor-model adjunction and restriction
 
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-sc-tensor-model-restriction-adjunction).
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
 -/
 
 @[expose] public section
@@ -83,35 +85,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 512 in
 /-- The adjunction on a fixed K-flat first model gives global and restricted
 transposition families. They commute with restriction and are natural in the
-second complex, without any K-flatness requirement on that complex.
-
-Source: Stacks Project, cohomology.tex, Tag 08DJ, equation-internal-hom and
-lemma-internal-hom; Tag 08DL, lemma-restriction-RHom-to-U.
-(blueprint: lem-sc-tensor-model-restriction-adjunction).
-
-Proof:
-1. Compute tensor with the fixed K-flat P by the total tensor complex, and
-transport its first argument through eA. The canonical tensor-Hom adjunction,
-with the tensor symmetry to order P first, gives t for every J and E.
-2. Restriction is exact, preserves P's K-flatness, and commutes with direct-sum
-signed total tensors. Restrict P and transport eA by restriction. The canonical
-RHom restriction comparison and the same adjunction on U give r.
-3. Resolve E by a K-injective complex. Its restriction is K-injective. The Hom
-restriction comparison restricts each local component, and tensor evaluation
-on each summand restricts the same local map. Thus r applied to the restriction
-of a morphism is the restriction of t applied to that morphism. Localizing the
-component equations gives the first displayed identity. Since P is K-flat and
-I is K-injective, Hom(P,I) is K-injective, both globally and after restriction.
-Every derived map from Q(J) into these Hom objects is therefore represented by
-a chain map modulo homotopy, even for non-K-flat J. Uncurrying respects homotopy;
-the component calculation consequently proves compatibility for every derived
-morphism, not just for an assumed chain representative.
-4. Precomposition by a chain map u in J commutes with evaluation on every
-summand. The canonical adjunction is natural, as are the localization tensor
-comparison and restriction comparison. Hence r sends precomposition by R(Q(u))
-to precomposition by R(Q(id_P tensor u)), the second displayed identity.
-The zero model and the empty open satisfy the same equations, since all the
-comparisons and summand maps are defined there too. -/
+second complex, without any K-flatness requirement on that complex. -/
 theorem exists_tensorModel_restriction_adjunction
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

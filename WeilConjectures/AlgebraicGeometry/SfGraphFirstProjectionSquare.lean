@@ -12,8 +12,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 
 /-! # Projection compatibility of the first graph side
 
-Source: `LowerShriekComposition.lean`, eA, and Stacks Tags 0B56, 0GL1 and 0F7B.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* [Stacks Project, Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
+* [Stacks Project, Tag 0F7B](https://stacks.math.columbia.edu/tag/0F7B)
 -/
 
 @[expose] public section
@@ -560,9 +565,6 @@ private theorem first_side_hom
     Functor.map_comp, Category.assoc, sfGraphFirstPresentation]
 
 /-- Projection compatibility of the first graph side.
-
-Source: `LowerShriekComposition.lean`, eA; the tensor calculation uses Stacks
-Tags 0B56, 0GL1 and 0F7B (auxiliary; not a blueprint node).
 
 Proof in words. Expand B1 into the inverse direct-image identity comparison, inverse composition
 for s1 followed by its retraction q1, the Cartesian proper/open exchange for

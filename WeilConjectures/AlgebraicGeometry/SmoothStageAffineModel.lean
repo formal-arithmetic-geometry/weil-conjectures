@@ -19,10 +19,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- The affine-chart part of eventual smoothness: after passing to a later stage `j`,
-the base change `pullback.snd p (N.D.map j.hom)` of `p` is smooth.  This is the affine
-descent argument of Tags 0CAQ and 01ZM(2)-(3) on a finite affine cover of `Y`.
-Source: Stacks Project, Tag 0C0C, limits.tex, affine reduction of lemma-descend-smooth.
-(blueprint: lem-sbc-noetherian-approximation-smooth-stage-affine-model) -/
+the base change `pullback.snd p (N.D.map j.hom)` of `p` is smooth. This is the affine
+descent argument of Tags 0CAQ and 01ZM(2)-(3) on a finite affine cover of `Y`. -/
 theorem Scheme.NoetherianApproximation.exists_smooth_affine_model
     {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}
     {Y X : Scheme.{u}} (p : Y ⟶ N.D.obj i)

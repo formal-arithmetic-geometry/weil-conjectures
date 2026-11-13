@@ -15,9 +15,11 @@ import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Spectral presentation of intersections of quasi-compact opens
 
-Source: Stacks Project, More on Groupoids in Spaces, `equation-sections-of-intersection`;
-Topology, Tag 0A31; Properties, Tag 094L; Schemes, Tag 01KO
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation).
+## References
+
+* [Stacks Project, Tag 0A31](https://stacks.math.columbia.edu/tag/0A31)
+* [Stacks Project, Tag 094L](https://stacks.math.columbia.edu/tag/094L)
+* [Stacks Project, Tag 01KO](https://stacks.math.columbia.edu/tag/01KO)
 -/
 
 @[expose] public section
@@ -30,23 +32,18 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The distinct original opens contained in the chosen member, ordered by reverse inclusion.
-Source: Stacks, `equation-sections-of-intersection`, reduction to one member
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation). -/
+/-- The distinct original opens contained in the chosen member, ordered by reverse inclusion. -/
 abbrev qcOpenIntersectionIndex {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i₀ : I) :=
   OrderDual {V : X.Opens // V ∈ Set.range U ∧ V ≤ U i₀}
 
-/-- The inclusion diagram on the opposite of the reverse-inclusion index.
-Source: Stacks, Topology, Tag 0A31, assertion (b)
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation). -/
+/-- The inclusion diagram on the opposite of the reverse-inclusion index. -/
 def qcOpenIntersectionDiagram {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i₀ : I) :
     (qcOpenIntersectionIndex U i₀)ᵒᵖ ⥤ TopCat.{u} where
   obj V := TopCat.of V.unop.val
   map f := (Opens.toTopCat X.toTopCat).map (homOfLE (leOfHom f.unop))
 
 /-- The cone of literal inclusions from the subspace intersection, without a scheme structure
-on the intersection. Source: Stacks, Topology, Tag 0A31, assertion (b)
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation). -/
+on the intersection. -/
 def qcOpenIntersectionCone {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i₀ : I) :
     Cone (qcOpenIntersectionDiagram U i₀) where
   pt := TopCat.of {x : X // ∀ i : I, x ∈ U i}
@@ -60,8 +57,6 @@ def qcOpenIntersectionCone {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i�
       naturality := fun _ _ _ ↦ rfl }
 
 /-- Cofinal spectral presentation of a directed intersection of quasi-compact opens.
-Source: Stacks, `equation-sections-of-intersection`; Topology, Tag 0A31; Properties, Tag 094L;
-Schemes, Tag 01KO (blueprint: lem-a1-qc-open-intersection-spectral-presentation).
 
 Proof, following steps 1--5 of the node:
 1. The index is a subset of the opens of X. Y belongs to it and is least in reverse inclusion.
@@ -72,7 +67,7 @@ Proof, following steps 1--5 of the node:
    (`Topology.IsOpenEmbedding.quasiSeparatedSpace`), and compact by hU. A quasi-compact,
    quasi-separated scheme is spectral (lem-weil-pbc-qcqs-scheme-spectral, realized by the
    Mathlib scheme instances), also for empty V.
-4. For V ≤ W (so W ⊆ V) the inclusion g : W ↪ V is an open embedding with compact open range.
+4. For V ≤ W (so W ⊆ V) the inclusion g: W ↪ V is an open embedding with compact open range.
    For a compact open K of V, quasi-separatedness of V makes K ∩ range g compact, and this
    is the image of g⁻¹(K). This gives the spectral-map property of W ↪ V.
 5. Compatibility with the maps to Y makes every tuple a common point lying in all opens.

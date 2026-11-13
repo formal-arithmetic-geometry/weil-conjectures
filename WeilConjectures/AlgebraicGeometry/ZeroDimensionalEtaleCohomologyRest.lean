@@ -17,9 +17,15 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Zero-dimensional étale cohomology: cohomological remainder
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs.
-(blueprint: zero-dimensional-etale-cohomology-rest).
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
+* [Stacks Project, Tag 054M](https://stacks.math.columbia.edu/tag/054M)
+* [Stacks Project, Tag 03QT](https://stacks.math.columbia.edu/tag/03QT)
+* [Stacks Project, Tag 03QU](https://stacks.math.columbia.edu/tag/03QU)
+* [Stacks Project, Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
 -/
 
 @[expose] public section
@@ -33,21 +39,6 @@ namespace AlgebraicGeometry
 
 /-- Positive étale cohomology is zero, and the canonical degree-zero comparison
 followed by the product of the chosen geometric stalk germs is invertible.
-
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
-Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1.
-(blueprint: zero-dimensional-etale-cohomology-rest).
-
-Proof: Apply `zero_dimensional_global_sections_preservesFiniteColimits`; global
-sections already preserve finite limits. The exact-functor comparison
-`Functor.singleFunctorCompRightDerivedFunctorIso` identifies derived global
-sections of F in degree zero with ordinary global sections placed in degree zero.
-Transport the vanishing of the homology of a single complex in positive degree
-through this comparison, then use `AddCommGrpCat.subsingleton_of_isZero`.
-The degree-zero conjunct is `zero_dimensional_etale_cohomology_iso`, which keeps
-the reduction, finite coproduct, and canonical germ compatibility route described
-in the source. Neither unresolved obligation restates this conjunction.
 -/
 theorem zero_dimensional_etale_cohomology_rest
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})

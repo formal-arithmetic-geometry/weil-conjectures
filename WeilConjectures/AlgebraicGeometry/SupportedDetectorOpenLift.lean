@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLiftCore
 
 /-! # Lifting the detector from the smaller open
 
-Source: Stacks Project, Tag 0A9A.
-(blueprint: lem-pc-supported-detector-open-lift).
+## References
+
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
 -/
 
 @[expose] public section
@@ -26,27 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The lift of the smaller-cover detector detects supported objects whose open unit
-is invertible; it need not detect arbitrary supported objects on X.
-Source: Stacks Project, Tag 0A9A, induction and final adjunction paragraphs.
-(blueprint: lem-pc-supported-detector-open-lift).
-
-Proof:
-1. Remove one affine chart V from s and take U to be the union of the others. Restrict
-   those charts to U to obtain a strictly smaller affine cover. Finite unions of affine
-   opens are compact; quasi-separatedness makes U and U minus T quasi-compact.
-2. Transport the derived localizations across the canonical module equivalence for U
-   and its opens. Apply ih to the smaller cover and the inverse image of T to obtain P.
-3. Lift the zero map P to zero using exists_perfect_supported_map_lift. Its global
-   source Q is perfect, supported on T, and P is a retract of Q restricted to U.
-   Perfect complexes have quasi-coherent cohomology, so Q lies in D_QCoh(X).
-4. Take a right adjoint R of exact derived restriction L (unbounded open direct image).
-   For supported K with invertible unit, adjunction identifies Hom(Q[n], K) with
-   Hom(L(Q[n]), L(K)). Exact restriction commutes with shifts. The retract P of L(Q)
-   therefore gives vanishing of Hom(P[n], L(K)). Restriction preserves quasi-coherence
-   and support. The detector P gives L(K) zero, and the invertible unit K to R(L(K))
-   makes K zero: the inverse hom equivalence makes the unit zero, and cancellation
-   against this invertible unit gives the identity of K equal to zero.
-   Redundant charts and empty U are allowed; the smaller-cover bound still holds. -/
+is invertible; it need not detect arbitrary supported objects on X. -/
 theorem exists_supported_detector_open_lift
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

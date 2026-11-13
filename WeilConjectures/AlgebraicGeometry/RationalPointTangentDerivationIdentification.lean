@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.RationalCotangentFunctionalRealization
 /-!
 # Rational tangent vectors and cotangent functionals
 
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
-(blueprint: lem-sc-rational-point-tangent-derivation-identification).
+## References
+
+* [Stacks Project, Tag 0B2D](https://stacks.math.columbia.edu/tag/0B2D)
+* [Stacks Project, Tag 0B2E](https://stacks.math.columbia.edu/tag/0B2E)
 -/
 
 @[expose] public section
@@ -33,24 +35,7 @@ namespace AlgebraicGeometry
 identifies tangent vectors with the dual of the cotangent space. The map `r` is the structural
 map from `k` to the residue field; its bijectivity expresses rationality. Scalar structures
 are restricted along `r`. The displayed dual-number formula uses residue-field coordinates,
-so that the coefficient `D a : k` appears as `r (D a)`.
-Source: Stacks Project, Tags 0B2D and 0B2E
-(blueprint: lem-sc-rational-point-tangent-derivation-identification).
-
-Proof:
-1. The closed-point condition implies that the stalk homomorphism reduces to the residue
-   map, using the Spec-local-ring correspondence to reconstruct the spectrum morphism and
-   cancel the monomorphism from the local spectrum to `X`
-   (lem-weil-pbc-morphism-from-spec-local-ring).
-   Unique dual-number coordinates give `D`; additivity and multiplication give additivity
-   and the residue-valued Leibniz identity. The base-morphism condition makes `D` vanish on k.
-2. The Leibniz identity makes `D` vanish on products of maximal-ideal elements, hence on
-   their square ideal. It descends to the quotient, additively and k-linearly.
-3. A functional on the cotangent space recovers `D a` by applying it to the class of
-   `a` minus its structural-field residue. Expanding products proves the Leibniz identity,
-   giving a local k-algebra map into dual numbers. The Spec-local-ring correspondence
-   recovers a unique tangent vector. Scaling epsilon scales coefficients, and the pushout
-   addition of def-sc-scheme-tangent-space adds them. Thus this bijection is k-linear. -/
+so that the coefficient `D a: k` appears as `r (D a)`. -/
 theorem exists_rationalPoint_tangent_cotangent_linearEquiv
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     let R := X.presheaf.stalk x

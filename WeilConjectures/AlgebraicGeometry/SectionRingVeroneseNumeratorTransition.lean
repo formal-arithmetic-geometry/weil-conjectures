@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 
 /-! # Compatibility of Veronese numerators with tensor-power transitions
 
-Source: Stacks Project, Properties, equation module-invert-s (Tag 0B5L),
-Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1.
+## References
+
+* [Stacks Project, Tag 0B5L](https://stacks.math.columbia.edu/tag/0B5L)
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
+* [Stacks Project, Tag 01Q1](https://stacks.math.columbia.edu/tag/01Q1)
 -/
 
 @[expose] public section
@@ -27,19 +30,6 @@ open CategoryTheory MonoidalCategory DirectSum
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Regrouping tensor powers preserves their concatenation.
-Source: Stacks Project, Properties, Tag 0B5L, equation module-invert-s and
-Lemma 01PW(2).
-
-Proof: induct on n. At zero, tensorPowMulIso is the exponent-zero identification
-and tensorPowAddIso is the left unitor, so naturality of the left unitor gives the
-identity. At n+1, expand tensorPowMulIso and tensorPowAddIso. Naturality of the
-associator moves the two regrouping maps through it. Apply the inductive identity
-to the remaining n blocks, and then associativity of tensorPowAddIso for the three
-exponents d, d*n, d*b. This associativity is itself proved by induction on its first
-exponent, using the left unitor at zero and the monoidal pentagon at the successor.
-All exponent transports agree by proof irrelevance and multiplication distributing
-over addition. Neither symmetry nor an invertibility assumption is needed. Thus
-this includes d=0, n=0 and b=0.
 -/
 private theorem tensorPowMulIso_add_inv
     {X : Scheme.{u}} (L : X.Modules) (d n b : ℕ) :
@@ -118,24 +108,6 @@ private theorem transition_unitor {X : Scheme.{u}} {M : X.Modules}
 -- Comparing the degree-one tensor regroupings needs additional definitional reductions.
 /-- Transporting a tensor-power transition to the section ring multiplies the numerator
 by the corresponding power of the homogeneous section.
-Source: Stacks Project, Properties, equation module-invert-s (Tag 0B5L),
-Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1.
-(blueprint: lem-sc-section-ring-veronese-numerator-transition)
-
-Proof: cover X by opens on which L has a free generator e. Its tensor powers have generators
-obtained by repeatedly tensoring e, with the zeroth generator the unit section. Induction on
-the exponent in tensorPowAddIso and tensorPowMulIso shows that these isomorphisms send the
-respective tensor products of these generators to the generator of the total tensor exponent;
-the left unitor deletes the unit generator. Thus the inverse numerator isomorphism sends a
-numerator with coefficient f to the same coefficient f in degree n*d. Write s locally as
-c times the degree-d generator. The morphism homOfGlobalSection sends 1 to this section;
-its b-th tensor power sends 1 to c^b times the degree-b*d generator. The definition of
-mulTensorPowSection therefore sends the numerator with coefficient f to the numerator with
-coefficient f*c^b. By the definition of graded multiplication, multiplying its ring numerator
-by s^b has that same coefficient in degree (n+b)*d. Naturality of all the isomorphisms and
-of tensor sections identifies these calculations with restrictions of the two global ring
-numerators. The sheaf separatedness axiom glues their equality. The calculation includes
-n=0, b=0, d=0, and zero coefficients, without dividing by c or assuming s nonzero.
 -/
 theorem sectionRingVeroneseNumerator_transition
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]

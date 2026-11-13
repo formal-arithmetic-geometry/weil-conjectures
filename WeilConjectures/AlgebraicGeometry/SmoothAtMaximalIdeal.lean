@@ -21,8 +21,9 @@ public import Mathlib.Algebra.Module.SpanRankOperations
 /-!
 # Smoothness at a maximal ideal from a differential dimension bound
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00TS
-(blueprint: lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound).
+## References
+
+* [Stacks Project, Tag 00TS](https://stacks.math.columbia.edu/tag/00TS)
 -/
 
 @[expose] public section
@@ -32,19 +33,7 @@ universe u v
 namespace Algebra
 
 /-- Over an algebraically closed field, the differential dimension bound at a maximal ideal
-implies smoothness there. Source: Stacks Project, Algebra, Lemma Tag 00TS, implication
-(2) => (4) (blueprint: lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound).
-
-Proof:
-1. The closed-point cotangent comparison identifies the differential fibre dimension
-   with the cotangent dimension of S_m. Finite type makes S and S_m Noetherian.
-   The assumed inequality and Mathlib's cotangent criterion make S_m regular.
-2. The regular-point presentation lemma supplies g outside m and a polynomial quotient
-   isomorphic to S_g, with an explicit Jacobian minor that is a unit in that quotient.
-3. Form the naive pre-submersive presentation with the selected variables. Its Jacobian
-   matrix is the transpose of the matrix in step 2, so its determinant is the same unit.
-   It is therefore a submersive presentation. Mathlib makes its quotient standard smooth
-   and smooth. Transporting smoothness along the algebra isomorphism proves the result. -/
+implies smoothness there. -/
 theorem smoothAtMaximalIdeal_of_finrank_differentials_le_krullDim
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [IsAlgClosed k] [Algebra.FiniteType k S]

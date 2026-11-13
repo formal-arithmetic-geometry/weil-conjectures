@@ -19,9 +19,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Relative tensor-pullback homology comparison
 
-Source: Stacks Project, Tag 08EV, second displayed equality;
-Cohomology, Lemma 20.27.4 (Tag 08DE).
-(blueprint: lem-pc-relative-tensor-pullback-homology-comparison)
+## References
+
+* [Stacks Project, Tag 08EV](https://stacks.math.columbia.edu/tag/08EV)
+* [Stacks Project, Tag 08DE](https://stacks.math.columbia.edu/tag/08DE)
 -/
 
 @[expose] public section
@@ -98,26 +99,7 @@ private theorem kFlat_tensor_left_of_quasiIso
 
 /-- Restricting scalars identifies the homology of tensor with derived pullback
 with the homology computed by any K-flat resolution of the restricted complex.
-This comparison does not require finite Tor amplitude or any boundedness of K or P.
-Source: Stacks Project, Tag 08EV, second displayed equality, and Cohomology,
-Lemma 20.27.4 (Tag 08DE).
-
-Proof: Resolve F[0] by a K-flat complex L. Exact inverse image carries L
-to a K-flat resolution of the inverse-image module. Resolve K over O_X by
-a K-flat complex A. The K-flat derived-pullback counit identifies Lf*(Q(L))
-with Q(f*L), so A tensor f*L computes the displayed derived tensor.
-After restricting scalars, tensor associativity identifies this complex with
-A restricted to f-inverse O_S tensor f-inverse L. Exact restriction of scalars
-preserves the quasi-isomorphism A -> K. Since f-inverse L is K-flat, tensoring
-it with the zigzag A| -> K| <- P gives quasi-isomorphisms. Since P is K-flat,
-tensoring P with the augmentation f-inverse L -> f-inverse F[0] is also a
-quasi-isomorphism. The resulting zigzag identifies homology with that of
-P tensor f-inverse F[0]. Exact restriction of scalars and the exact forgetful
-functor to abelian sheaves commute with homology. Finally, the isomorphism
-Q(K) -> E transports the derived tensor and its homology. The construction
-uses no chosen arbitrary derived object and works also for zero modules and
-empty schemes.
-(blueprint: lem-pc-relative-tensor-pullback-homology-comparison) -/
+This comparison does not require finite Tor amplitude or any boundedness of K or P. -/
 theorem relativeTensorPullback_homology_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

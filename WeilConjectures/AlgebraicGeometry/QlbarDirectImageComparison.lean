@@ -23,12 +23,14 @@ import WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
 /-!
 # Algebraic-closure coefficient change and bounded-below direct image
 
-Source: Hemo--Richarz--Scholbach, Lemmas 5.3(1) and 5.6; Bhatt--Scholze,
-Remark 6.8.15 (auxiliary; not a blueprint node).
-
 The comparison is the existing coefficient-change mate `derivedPushHom` in the
 ordinary ambient derived category of internal module objects. Its algebraic-closure
 coefficient ring uses continuous functions with values in one finite subextension.
+
+## References
+
+* Hemo--Richarz--Scholbach, Lemmas 5.3(1) and 5.6
+* Hemo--Richarz--Scholbach, Lemmas 5.3(1), 5.6
 -/
 
 @[expose] public section
@@ -133,42 +135,31 @@ private theorem coefficientDerivedCoproducts (Λ : Sheaf
 -- The scalar mate criterion compares derived adjunctions in four module categories.
 /-- Algebraic-closure extension commutes with qcqs direct image on every bounded-below
 ambient module complex, without constructibility or finite Tor amplitude.
-Source: Hemo--Richarz--Scholbach, Lemmas 5.3(1), 5.6; Bhatt--Scholze, Remark 6.8.15
-(auxiliary; not a blueprint node).
 
 Proof plan:
 1. Transport internal modules to section-ring module sheaves using
    lem-pe-internal-section-tensor-comparison and lem-sfb-internal-module-operations-transport.
    Exact equivalences preserve injective resolutions and the null-homotopy test for
-   K-injectivity (lem-weil-pbc-equivalence-injective-resolutions), so this also preserves
-   the derived adjunction and its counit (sk-def-sfb-derived-categories).
+   K-injectivity, so this also preserves
+   the derived adjunction and its counit.
 2. The finite intermediate fields containing E form a nonempty directed tail. Their
-   actual inclusion legs exhibit the algebraic-closure coefficient module as a colimit
-   (lem-sfb-qlbar-tail-module-colimit). Cartesian coefficients identify their pullbacks
-   and inclusion maps (sk-prop-sfb-cartesian-coefficients, sk-def-sfb-coefficient-change).
-   Finite coefficients are finite free; closure coefficients are flat
-   (lem-sfb-subfield-flat, lem-sfb-qlbar-flat).
+   actual inclusion legs exhibit the algebraic-closure coefficient module as a colimit. Cartesian coefficients identify their pullbacks
+   and inclusion maps.
+   Finite coefficients are finite free; closure coefficients are flat.
 3. Represent C by a complex vanishing below one integer a, using
    def-sbc-standard-tstructure-derived-category. Exact scalar extension preserves this
-   common bound. Tensor preserves the coefficient colimit termwise
-   (lem-weil-pbc-independent-sheaf-tensor-colimits). Filtered module colimits are exact
-   (lem-weil-pbc-module-sheaves-colimits-forgetful,
-   lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact), hence commute with cohomology
-   (lem-weil-pbc-exact-functor-complex-cohomology).
+   common bound. Tensor preserves the coefficient colimit termwise. Filtered module colimits are exact, hence commute with cohomology.
 4. The symmetric projection mate at a finite coefficient field is the finite-biproduct
-   comparison: naturality and the tensor-unit normalization identify it on every summand
-   (lem-weil-pbc-ringed-projection-mate-exact). It is therefore invertible.
+   comparison: naturality and the tensor-unit normalization identify it on every summand. It is therefore invertible.
 5. Apply det-pe-bounded-continuity-direct-image to the actual finite-field diagram with
    its common bound a. Naturality gives the cocone equation for the projection mates.
    Thus the closure projection mate induces, on every cohomology sheaf, the colimit of
    the finite-field isomorphisms followed by the continuity isomorphism. Cohomology
-   detects invertibility (lem-weil-pbc-unbounded-derived-iso-cohomology).
+   detects invertibility.
 6. Restrict the specified coefficient-change map to E. The conservative restriction
-   and its adjunction-compatible pushforward comparison
-   (lem-weil-pbc-ring-sheaf-change-adjunction) identify it with the closure projection
+   and its adjunction-compatible pushforward comparison identify it with the closure projection
    mate: both adjuncts are the canonical pullback/tensor identification followed by
-   scalar extension of the E-coefficient counit
-   (lem-weil-pbc-ringed-topoi-derived-tensor-pullback). The pulled-back inclusion is the
+   scalar extension of the E-coefficient counit. The pulled-back inclusion is the
    same by sk-def-sfb-coefficient-change. Restriction reflects isomorphisms, so the
    specified map is invertible. Transport back to internal modules as in step 1.
 

@@ -13,7 +13,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Noetherian descent of a finitely presented morphism with a section
 
-Source: Stacks Project, Tags 055P (first reduction), 01ZA and 01ZM.
+## References
+
+* [Stacks Project, Tag 055P](https://stacks.math.columbia.edu/tag/055P)
+* [Stacks Project, Tag 01ZA](https://stacks.math.columbia.edu/tag/01ZA)
+* [Stacks Project, Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
 -/
 
 @[expose] public section
@@ -25,21 +29,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- A finitely presented morphism over an affine base, together with a section, descends
-in a cartesian square to noetherian schemes.
-
-Source: Stacks Project, Tag 055P, first reduction; Tags 01ZA and 01ZM.
-Proof: express the affine base as the inverse limit of spectra of its finitely generated
-Z-subalgebras. All stages are noetherian. Descend the finitely presented source to a
-stage by 01ZM(1). Regard the composite of the section with the source projection as a
-morphism over that stage. Apply morphism descent on the system of later stages to obtain
-a map from a later base stage to the source model, over the original base stage. Lift
-this map and the identity of the later base to the pullback of the source model. This
-lift is a section by the second projection identity, and its base change is the given
-section by the first projection identity and uniqueness in the pullback. The later source
-is of finite presentation over the noetherian stage, hence is noetherian too. Pasting
-and cancelling the model's pullback square gives the claimed cartesian square.
-
-(blueprint: lem-sbc-affine-section-noetherian-descent) -/
+in a cartesian square to noetherian schemes. -/
 theorem exists_noetherian_model_with_section {X S : Scheme.{u}} [IsAffine S]
     (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
     (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :

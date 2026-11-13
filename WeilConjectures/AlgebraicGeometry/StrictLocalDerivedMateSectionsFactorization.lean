@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalDerivedExchangeGlobalSection
 
 /-! # The derived mate on the complex of neighbourhood sections
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -25,30 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The derived mate on an injective representative is computed by the underived
 exchange map followed by the derived-sections unit. This statement does not identify
-that exchange map with restriction along any strict-local neighbourhood cone.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the generic
-factorization of derived adjunction mates on complexes.
-(blueprint: lem-weil-pbc-strict-local-derived-mate-sections-factorization).
-
-Proof: put M = ιJ, L = f_*M. Pass first to the homotopy category. Apply
-Adjunction.derivedPlus_mateEquiv_app_fac to the two inverse/direct-image
-adjunctions and squareUpperStarIso. The compatibility hypothesis on the square
-follows by expanding pullbackSquareComparison and the localization factorization
-of upperStarComp. The right-derived unit at M is invertible because M is a bounded
-below complex of injectives. Its inverse is precisely the factor used in
-sourceInjectiveDirectImageIso. Move restriction of L across this identity by
-naturality of the right-derived units. Apply global sections on the strict-local
-base. Their exactness identifies homology of sections with sections of homology;
-the derived Leray factorization converts the direct-image unit at p^*M into the
-right-derived sections unit at p^*M. The remaining underived maps are restriction
-on the base, baseChangeMap, and lowerStarCompGlobalSectionsIso, in that order:
-this is strictLocalUnderivedMateSections. Apply localization and degree-n homology,
-using naturality of homologyFunctorFactors and the exact-sections homology
-comparison. Transport by q using naturality. This yields the stated equality.
-Only the direct-image unit at M is inverted; the sections unit at p^*M is retained.
-Thus no acyclicity of p^*M is asserted or needed, and negative degrees and zero
-complexes are included. -/
+that exchange map with restriction along any strict-local neighbourhood cone. -/
 theorem strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

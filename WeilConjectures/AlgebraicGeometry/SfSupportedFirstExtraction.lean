@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 
 /-! # First coordinate extraction before a trace
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first triangle, coordinate interchange.
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -636,25 +634,7 @@ attribute [local irreducible] properRouteCompIso rightDerivedLowerShriekCompIso
   nativeInner nativeExchange nativeRoute comparison comparisonIso
   orderedProjection directComparison
 
-/-- Interchange the two supported coordinate extractions before applying any trace.
-Source: thm-amb-p1-adjunction.proof.md, first triangle, interchange of the two
-coordinates (auxiliary; not a blueprint node).
-
-Proof: construct the proper-supported Kunneth route from the specified compositor,
-projection, exchange and tensor symmetry. Normalize its inverse to the ordinary
-Kunneth map using the proper forget-supports comparisons. The ordinary Kunneth
-map is symmetric: both orders have the same mixed-counit transpose, after the
-braided pullback tensor comparison. Naturality of the tensor of the proper
-comparisons therefore gives symmetry of the supported route, by cancellation.
-For the self-product, its second-coordinate inner map is comparison: the reversed
-inverse symmetry is the forward symmetry. Move the kernel swap through the
-first compositor by naturality. The first-coordinate inner map following the
-swap is orderedProjection inverse followed by inverse exchange, by naturality
-and involutivity of symmetry. The second compositor followed by directComparison
-is the first compositor, directly by their definitions. Cancel that compositor
-and the two final swaps. This gives the displayed morphism equality for arbitrary
-B and M. No trace, line condition, diagonal class or integral is used; empty
-schemes and the zero coefficient ring satisfy the same canonical-mate identities. -/
+/-- Interchange the two supported coordinate extractions before applying any trace. -/
 theorem firstExtraction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (B M : DerivedCategoryModule A X) :
     (push A f).map (comparison A f B M).hom ≫

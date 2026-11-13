@@ -8,7 +8,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 
-/-! # Transferring an isomorphism through a component coproduct -/
+/-! # Transferring an isomorphism through a component coproduct
+
+## References
+
+* [Stacks Project, Tag 0BAJ](https://stacks.math.columbia.edu/tag/0BAJ)
+-/
 
 @[expose] public section
 
@@ -45,21 +50,7 @@ private theorem isIso_sigmaRestrictInclusion
 
 /-- If a coproduct map is an isomorphism over U and each summand modification is
 an isomorphism over the corresponding inverse image, their composite coproduct
-map is an isomorphism over U.
-Source: the coproduct and restriction gluing in
-`lem-weil-pbc-dense-open-component-modifications`, step 3 (Stacks Project,
-Morphisms, Tag 0BAJ, componentwise reduction).
-
-Proof: Write p = Sigma.desc ι and q = Sigma.map ν. The composite q ≫ p is
-Sigma.desc (fun i ↦ ν i ≫ ι i) by the coproduct universal property.
-Base change along the open U identifies p's restricted source with the coproduct
-of C i restricted to ι i's inverse image of U. Under this identification the
-restriction of q is the coproduct of the restrictions of ν i. Each is an
-isomorphism by hypothesis, so their coproduct is an isomorphism. Compose with
-the given isomorphism p restricted to U, using morphismRestrict_comp.
-This works for an empty family as well, since the coproduct of an empty family
-of isomorphisms is the identity of an initial object.
-(blueprint: lem-weil-pbc-sigma-desc-restrict-iso) -/
+map is an isomorphism over U. -/
 theorem isIso_sigmaDesc_comp_restrict
     (X : Scheme.{u}) (n : ℕ) (C Y : Fin n → Scheme.{u})
     (ι : ∀ i, C i ⟶ X) (ν : ∀ i, Y i ⟶ C i) (U : X.Opens)

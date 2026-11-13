@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SectionModuleAlgebraicInverseImage
 
 /-! # Resolving closure for nested section tensors
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E;
-the resolving-closure part of `lem-pd-section-resolving-oplax-model-edges`.
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -103,12 +105,12 @@ private theorem resolving_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /--
 The four nested tensor totals of resolving section complexes, together with all
-their pullbacks, are resolving.  This is the closure step in the explicit
+their pullbacks, are resolving. This is the closure step in the explicit
 representative calculation: apply the K-flat total-tensor model theorem to the
 two binary pairs and then to the two outer pairs, and apply preservation of
 K-flatness and flat terms by ringed-topos pullback.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
-(auxiliary; not a blueprint node).
+
+.
 -/
 theorem section_resolving_oplax_closure {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q H : CochainComplex (modules Λ Y) ℤ)

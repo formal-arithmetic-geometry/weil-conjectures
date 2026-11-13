@@ -17,12 +17,16 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCoordinateStalkTranspo
 
 /-! # Stalkwise conjugacy for transported open coordinates.
 
-Source: Stacks Project, perfect.tex, Tag 0DJ9, localization calculation.
-(blueprint: lem-pc-single-complex-open-coordinate-stalk-equivalence)
-
 The proof is the termwise stalk calculation: open-immersion stalk isomorphisms
 identify the four local rings and complexes, and naturality of tensor extension,
 homology, and the representing map conjugates the two comparison arrows.
+
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
 -/
 
 @[expose] public section
@@ -91,48 +95,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Elaborating the mapped normalization equations unfolds nested derived tensor sources.
 /-- The restricted and original stalk comparison arrows are isomorphic after
 forgetting scalars, for any coordinates of the canonical restricted coefficient.
-No invertibility of either comparison is assumed.
-
-Proof: Write U=f⁻¹V and U'=f'⁻¹V'. At z the four open-immersion stalk maps
-for U, U', V, V' are invertible. The point equalities follow from hj and the
-restriction squares. Transport the four local rings along these stalk maps.
-The stalkMap_comp identity and sq.w identify the maps R→A, R→B, A→C and B→C.
-The two restrictions of tensorMap then agree, so its tensor-product universal
-property identifies both the tensor algebra A⊗_R B and its action on C.
-
-Exact stalks applied to c.e and d.e, together with the restriction-stalk
-extension comparison, identify the derived stalks of c.P and d.P after this
-ring transport: both represent the stalk of K at g'(z.val). Restriction and
-extension along the stalk ring isomorphisms are inverse exact equivalences.
-They transport the left-derived scalar-extension universal property. Its unique
-counit-compatible isomorphism, followed by the model cohomologyIso, identifies
-the base-derived tensor cohomology objects. The cohomologyIso_smul equations
-identify multiplication by A; tensor-product induction lifts this identification
-from B-linearity to A⊗_R B-linearity. Extend it to C and forget scalars to obtain
-the source additive isomorphism. Exact stalks applied to c.e' and d.e' similarly
-identify both target homologies with H^i(K') at z.val, giving the target isomorphism.
-
-For commutativity, normalize both comparisons by these target identifications.
-The represents equations replace each homology map of the chain map by the map
-of the corresponding derived coefficient, after cancellation of its invertible
-pullback counit. K-flatness of the stalk representatives follows from the stalk
-criterion, so ordinary A→C extension computes their derived pullback. The
-comparison_eq and localized_eq equations express the preceding tensor comparisons
-by the universal derived counits and their extension/restriction transposes.
-Naturality under the ring isomorphisms and derived representative isomorphisms
-therefore identifies these normalized comparisons. The coefficient is exactly
-singleComplexRestrictedCoefficient: its composition factors identify derived
-pullback of the original coefficient with restricted pullback, and the
-leftDerivedUnique factorization identity for singleComplexOpenPullbackIso makes
-this identification compatible with the pinned counits. Consequently the source
-and target isomorphisms give a commuting square for the two complete comparison
-maps. Apply Arrow.isoMk. This argument constructs no extra coordinate system and
-uses no flatness over R. Empty opens have no z; top opens, zero complexes, zero
-rings and unbounded complexes obey the same identities.
-
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8 and
-Tag 0DJ9, first paragraph; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-coordinate-stalk-equivalence). -/
+No invertibility of either comparison is assumed. -/
 theorem nonempty_singleComplexOpen_stalk_arrow_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

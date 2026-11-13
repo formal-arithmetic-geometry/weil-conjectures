@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceFactors
 
 /-! # A concrete common source prefix
 
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: def-sbc-raw-module-scalar-source-prefix).
+## References
+
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -20,9 +22,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The source comparison followed by the forgotten class, with coefficients unprocessed.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: def-sbc-raw-module-scalar-source-prefix). -/
+/-- The source comparison followed by the forgotten class, with coefficients unprocessed. -/
 noncomputable def rawModuleScalarSourcePrefix
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)

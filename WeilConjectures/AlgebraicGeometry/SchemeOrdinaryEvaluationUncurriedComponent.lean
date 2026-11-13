@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Uncurried ordinary evaluation component
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -24,22 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- Cancellation of the ordinary component equation under tensor-Hom uncurrying.
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ;
-ordinary evaluation chain calculation, step 3, cancellation portion.
-(blueprint: lem-pc-scheme-ordinary-uncurried-component).
-
-Proof: The equality n+r=k identifies k with r+n, so apply hf at p,q,n,r.
-Apply tensorHomEquiv.symm to the component equation and precompose with the
-braiding of F^p tensor V^q and P^r. If r+q=0, the inverse laws for tensorHomEquiv
-cancel its forward application. Symmetry cancels the two successive braidings,
-leaving precisely the associator, dual projection, single-unit identification,
-right unitor and the degree transport displayed on the right. The degree sums
-and r+q=0 imply p=k; proof irrelevance identifies the degree transports. If
-r+q is nonzero, hf gives zero. Under the monoidal closed structure supplied by
-tensorClosed, uncurrying is a tensor whiskering followed by evaluation, hence
-sends zero to zero by monoidal preadditivity. Precomposition also preserves zero.
-The argument is valid in every integer degree and for zero complexes. -/
+/-- Cancellation of the ordinary component equation under tensor-Hom uncurrying. -/
 theorem schemeOrdinaryEvaluation_uncurried_component (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

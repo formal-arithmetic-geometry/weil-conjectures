@@ -21,9 +21,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 
 /-! # A compact dual model for smooth ordinary direct images
-
-Source: blueprint lem-asd-smooth-generic-direct-image, construction of the compact
-coefficient dual and compatibility with ordinary exchange.
 -/
 
 @[expose] public section
@@ -41,7 +38,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
 
 /-- The total derived inverse image, with coefficient parameters kept generic.
 This is definitionally `L(upperStar A v)`.
-(auxiliary; not a blueprint node). -/
+. -/
 noncomputable abbrev smoothCompactPullback
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -59,9 +56,7 @@ noncomputable abbrev smoothCompactSingle
     _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (_root_.DerivedCategory.singleFunctor _ 0).obj L
 
-/-- Data of a compact coefficient-dual presentation, including its exchange identity.
-Source: blueprint lem-asd-smooth-generic-direct-image, compact-dual construction and
-comparison of pairings (auxiliary; not a blueprint node). -/
+/-- Data of a compact coefficient-dual presentation, including its exchange identity. -/
 structure SmoothCompactDualModel (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {S X : Scheme.{u}} (f : X ⟶ S)
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) where
@@ -992,21 +987,7 @@ attribute [local instance] isIso_rightDerivedLowerShriekBaseChangeMap in
 image. Ordinary direct image is its coefficient dual, compatibly with the actual exchange.
 This assertion makes no generic shrinking and asserts no local constancy of a direct image.
 
-Source: blueprint sec-six-functors-basics/sk-lem-geo-smooth-generic/
-lem-asd-smooth-generic-direct-image.proof.md, relative dual construction and exchange.
-(auxiliary; not a blueprint node).
-
-Proof: Cover the smooth source by charts of constant relative dimension. Smooth duality
-makes the relative dualizing complex invertible and bounded constructible of finite Tor
-amplitude on every chart. Invertibility is local, and a finite subcover supplies common
-cohomological and Tor bounds globally. Put K=L[0], N=RHom(K,omega), and C=Rf_!N.
-Relative finite-lisse biduality identifies K with RHom(N,omega); compact-support finiteness
-makes C bounded constructible. Pull this presentation to each open restriction and each
-Noetherian test scheme, using smooth exceptional exchange and dualizability of N.
-Internal compact adjunction and the dual of compact exchange provide the required
-isomorphisms. Cartesian compatibility of internal compact adjunction, naturality in the
-coefficient unit, and naturality in compact exchange prove their exchange identity.
-All complexes and comparison maps are the explicit constructions of the six-functor API. -/
+. -/
 theorem exists_smooth_compact_dual_model
     (k : Type u) [Field k] (S : Scheme.{u})
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]

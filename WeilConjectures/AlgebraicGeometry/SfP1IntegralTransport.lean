@@ -114,37 +114,7 @@ private theorem transport_composite
 /-- Rename a projective line over its base and compare the two compact-support
 composites with the ordinary chart composites, for an arbitrary supported Ext class.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, base-change identification of the two projection traces;
-sec-six-functors-basics/sk-prop-geo-p1-adjunction/lem-amb-p1-diagonal-integrals.proof.md,
-exact closed image and the section comparisons.
-(auxiliary; not a blueprint node).
-
-Proof: Pull the given Ext representative along the product isomorphism induced by i.
-Exact closed direct image and its derived comparison identify its source with the
-pushforward of the constant complex along the diagonal. The normalized twist
-comparison identifies its target with the inverse image of the shifted line along
-p2. Use the proper forget-supports isomorphism to obtain the diagonalClass arrow.
-Transport (d S hS).trace along i, the derived composition comparison and proper
-forget-supports to obtain the trace arrow. These two arrows define D. The constant
-inverse-image comparison for i, followed by the identification of the degree-zero
-constant complex with the derived tensor unit, defines c.
-
-For each projection, paste its Cartesian square with the isomorphism i and its
-self-product. The defining exchange mate is preserved by this pasting: substitute
-the pullback counit and use the composite-adjunction counit formula. The trace
-base-change equation hbc identifies this mate followed by pullback of the trace
-with the trace over ProjectiveLine S, transported along its canonical P1 chart.
-For p2 the equality of the two maps to S gives exactly the extra coordinate
-comparison in traceSecond. Normalization on roots and their scalar generators
-makes the three twist comparisons in this pasting agree. The composite adjunction
-unit for p_a Delta = id identifies the ordinary alpha with diagonalFirst or
-idIsoDiagonalSnd, respectively. The proper forget-supports comparison commutes
-with these exchange, composition and section maps. Naturality with respect to the
-arbitrary Ext representative now gives the two displayed equalities, conjugated
-by c. This is a comparison of composites only; no integral is evaluated here.
-Everything is linear in the Ext representative. Neither a nonempty base nor
-nonzero coefficients are required. -/
+. -/
 theorem sfP1IntegralTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)

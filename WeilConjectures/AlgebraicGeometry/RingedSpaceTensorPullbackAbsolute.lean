@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux
 
 /-! # Absolute left derived tensor pullback via K-flat resolutions
 
-Source: Stacks Project, Cohomology, Tags 06YJ and 079W; Derived Categories, Tag 06XN.
+## References
+
+* [Stacks Project, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks Project, Tag 079W](https://stacks.math.columbia.edu/tag/079W)
+* [Stacks Project, Tag 06XN](https://stacks.math.columbia.edu/tag/06XN)
 -/
 
 @[expose] public section
@@ -29,24 +33,7 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.RingedSpace
 
 /-- The concrete tensor pullback has a left derived comparison computed on K-flat
-complexes, and this comparison remains left derived after postcomposition.
-
-Source: Stacks Project, Cohomology, Tags 06YJ and 079W; Derived Categories, Tag 06XN.
-(blueprint: lem-pc-ringed-space-tensor-pullback-absolute)
-
-Proof: every source complex admits a K-flat resolution. Exact inverse image sends
-its quasi-isomorphism to a quasi-isomorphism and preserves K-flatness over the
-inverse-image ring, by applying K-flat pullback preservation to the identity ring
-map. Derived change of rings then shows that tensor pullback sends quasi-isomorphisms
-between these K-flat complexes to quasi-isomorphisms. The prescribed object and map
-formulas identify the termwise functor P with this construction, including its
-differentials. The K-flat resolving-class construction gives its total left derived
-functor and a comparison which is invertible on K-flat complexes. To see absoluteness,
-compute the right Kan extension along localization on the cofinal category of
-K-flat resolutions of each complex. All the comparison arrows there are isomorphisms;
-the resulting diagram is essentially constant, so its limiting cone is preserved
-by every functor H. Consequently the postcomposed comparison is again a left
-derived comparison. This also handles zero complexes and identity resolutions. -/
+complexes, and this comparison remains left derived after postcomposition. -/
 theorem exists_absolute_leftDerived_tensorModulePullback
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

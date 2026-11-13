@@ -16,8 +16,13 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 
 /-! # Derived identifications for a specified tensor chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-coordinate-identifications).
+## References
+
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
+* [Stacks Project, Tag 0BYJ](https://stacks.math.columbia.edu/tag/0BYJ)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 079R](https://stacks.math.columbia.edu/tag/079R)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
 -/
 
 @[expose] public section
@@ -178,22 +183,7 @@ private theorem tensor_representation_algebra
     reassoc_of% hnat]
   rw [tensorHom_comp_whiskerLeft]
 
-/-- Derived identifications for a specified tensor chain map.
-
-Proof: Use the inverse localization tensor map followed by eP tensor c.e for e.
-For e', invert the localization tensor map on the pulled-back P and c.N,
-then tensor the inverse pullback counit followed by derivedPullback(eP) with c.e'.
-The localization maps are invertible since P and its pullback are K-flat.
-The total source is K-flat by associativity and K-flatness of both factors.
-Its counit is invertible by the K-flat counit theorem. To check the displayed
-representation identity, precompose with derivedPullback of the source localization
-map, use hχ, and apply naturality of the target localization tensor map.
-The second-factor counit followed by Q(c.t) and c.e' is replaced using c.represents.
-Naturality hnat with eP and c.e finishes the identity, after canceling the
-invertible localization maps. No target K-flatness or stalk assertion is used.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), Tag 0BYJ and
-equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB.
-(blueprint: lem-pc-tensor-coordinate-identifications). -/
+/-- Derived identifications for a specified tensor chain map. -/
 theorem exists_tensor_coordinate_identifications
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

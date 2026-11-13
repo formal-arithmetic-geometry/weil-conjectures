@@ -16,14 +16,17 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 
 /-! # Normalization of derived section push-pull
 
-Source: Stacks Project, `derived.tex`, Tags 09T5 and 08BJ, and
-`sites-cohomology.tex`, Tags 07A6 and 0FPI
-(auxiliary; not a blueprint node).
-
 The statement records the comparison of the fixed internal module operations with
-the section-module operations after passage to derived categories.  All functors,
+the section-module operations after passage to derived categories. All functors,
 equivalences, and comparison maps are the constructions imported from the preceding
 section-module modules.
+
+## References
+
+* [Stacks Project, Tag 09T5](https://stacks.math.columbia.edu/tag/09T5)
+* [Stacks Project, Tag 08BJ](https://stacks.math.columbia.edu/tag/08BJ)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 0FPI](https://stacks.math.columbia.edu/tag/0FPI)
 -/
 
 @[expose] public noncomputable section
@@ -485,9 +488,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
-/-- The existing internal derived adjunction with its two functor types fixed explicitly.
-Source: Stacks 09T5 and 07A6
-(auxiliary; not a blueprint node). -/
+/-- The existing internal derived adjunction with its two functor types fixed explicitly. -/
 def normalizationInternalAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalDerivedPullback Λ f ⊣ internalDerivedPushforward Λ f :=
   CondensedRing.derivedUpperStarLowerStarAdjunction Λ f
@@ -754,10 +755,6 @@ private theorem derivedMate {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (InternalModuleOperations.upperComparison_existsUnique Λ f).exists.choose_spec)
 
 /--
-Source: Stacks Project, `derived.tex`, Tags 09T5 and 08BJ, and
-`sites-cohomology.tex`, Tags 07A6 and 0FPI
-(auxiliary; not a blueprint node).
-
 Proof, following the eight steps of the node.
 1. Use the derived equivalence instance for the fixed additive section equivalence.
 2. The equivalence and its exact inverse preserve K-injectivity. The degreewise
@@ -784,7 +781,6 @@ Proof, following the eight steps of the node.
    left-derived compositor.
 8. Mate pasting for the inverse pullback squares and the mixed conjugate/mate
    pasting identities give precisely the specified right compositor equation.
-
 -/
 theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedFunctor Λ X).IsEquivalence ∧

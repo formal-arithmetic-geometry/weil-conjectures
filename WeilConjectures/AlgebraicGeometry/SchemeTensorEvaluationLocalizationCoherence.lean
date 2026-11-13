@@ -9,8 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeTensorUnitAction
 
 /-! # Localizing tensor evaluation against the unit
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-scheme-tensor-evaluation-localization-coherence).
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -63,20 +67,7 @@ private theorem lax_tensor_evaluation {C D : Type*} [Category* C] [Category* D]
   simp only [whiskerLeft_comp, Category.assoc, reassoc_of% hzz]
 
 -- Elaborating total tensor associators uses the sheaf tensor and coproduct instances.
-/-- Localization transports tensor evaluation against the single unit.
-Source: Stacks Project, cohomology.tex, Tags 08DM and 08DQ;
-ordinary evaluation localization proof step 2.
-(blueprint: lem-pc-scheme-tensor-evaluation-localization-coherence).
-
-Proof: Expand the tensor comparison as the lax monoidal structure of Q. Apply
-its associativity law to F,V,P, then its naturality in the second variable to
-e : Tot(V,P) to O. Its right-unit law identifies the remaining comparison
-followed by Q of the complex right unitor with the derived right unitor after
-tensoring the inverse unit comparison. Q is the composite of the monoidal
-homotopy quotient with Qh, so this inverse unit comparison is precisely the
-inverse quotientCompQhIso at the single unit O. Reassociate to obtain the
-formula. This uses no invertibility of the tensor comparisons and applies to
-any e, including zero, and to arbitrary unbounded F,V,P. -/
+/-- Localization transports tensor evaluation against the single unit. -/
 theorem schemeTensorEvaluation_localization_coherence (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (F V P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :

@@ -13,8 +13,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -25,19 +28,6 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 500000 in
 -- The over-site equivalence and evaluated biproduct require extra definitional reductions.
 /-- The map to H and the normalized formal quotient maps jointly separate local sections.
-Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, made explicit
-by the Artin--Rees argument of `coherentMap_torsion_completion_ext_zero`.
-(blueprint: lem-weil-pbc-torsion-local-section-separation).
-
-Proof: Fix i and a positive annihilation bound for the kernel of ai. Artin--Rees
-provides n such that ker(ai) maps monomorphically to Fi/J^(n+1)Fi. Evaluate this
-monomorphism on any open of Ui; evaluation preserves kernels and monomorphisms.
-Transfer through li and overFunctorEquiv. If x and y have the same b-image, x-y
-lies in this kernel. By hqi, equality of their q-images at op n says its image
-in the quotient is zero, since beta is invertible. Monomorphy gives x-y=0.
-The open on Ui corresponding to W is arbitrary; no affineness assumption is used.
-When J=0 the first quotient detects sections. When J=1 the torsion kernel is
-zero and b detects sections. Empty opens have only the zero section.
 -/
 theorem torsion_local_section_separation
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

@@ -9,7 +9,12 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiInverseImageTensorComparison
 import WeilConjectures.AlgebraicGeometry.RingedTopoiScalarTensorComparison
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
-/-! # Existence of the normalized ringed-topos tensor comparison -/
+/-! # Existence of the normalized ringed-topos tensor comparison
+
+## References
+
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+-/
 
 @[expose] public section
 universe u
@@ -29,27 +34,7 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 open scoped ChangeOfRings
 
 -- Elaborating the composite comparison checks several transported module structures.
-/-- The normalized ordinary tensor comparison exists.
-Source: Stacks Project, Modules on Sites, Tag 03EL, together with the inverse-image
-adjunction for a morphism of topoi and extension of scalars
-(auxiliary; not a blueprint node).
-
-Proof: First apply the inverse-image adjunction to the universal property of module
-bilinear maps. Finite-product preservation transports addition and scalar multiplication;
-the compatibility axioms of I identify these transported operations with those on
-I.modules. Thus inverse image takes the universal R-balanced pairing to the universal
-RI-balanced pairing. Its representing isomorphism sends the inverse image of m tensor n
-to the tensor of the inverse images of m and n, naturally in both modules.
-Next extend scalars. The balanced maps
-s tensor (m tensor n) mapped to (s tensor m) tensor (1 tensor n), and
-(s tensor m) tensor (t tensor n) mapped to st tensor (m tensor n), are inverse.
-They commute with restrictions and so descend through module sheafification; checking
-on pure tensors proves inverse identities and naturality. Compose these two comparisons
-and transport along hobj. The map q is the sheafification insertion m mapped to 1 tensor m,
-followed by eqToHom (hobj M).symm. The displayed scalar-extension formulas give q_one.
-The same formulas, applied to a generalized pair of sections over any sheaf Z, give pure.
-Naturality of both representing isomorphisms and hmap gives naturality. This supplies
-all five fields of CanonicalRingedTensorComparison. -/
+/-- The normalized ordinary tensor comparison exists. -/
 theorem canonicalRingedTensorComparison_nonempty
     (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]

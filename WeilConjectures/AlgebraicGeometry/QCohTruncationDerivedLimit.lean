@@ -18,12 +18,15 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 
 /-! # Reconstruction of quasi-coherent complexes by lower truncations
 
-Source: Stacks Project, Tags 08D3, 08D4 and 08U1
-(blueprint: lem-pc-qcoh-truncation-derived-limit).
-
 Both conclusions use specified Roos triangles: the map to the product is fixed to be
 induced by the canonical truncation projections. Products are in the ambient derived
 categories, rather than in the full subcategory of quasi-coherent complexes.
+
+## References
+
+* [Stacks Project, Tag 08D3](https://stacks.math.columbia.edu/tag/08D3)
+* [Stacks Project, Tag 08D4](https://stacks.math.columbia.edu/tag/08D4)
+* [Stacks Project, Tag 08U1](https://stacks.math.columbia.edu/tag/08U1)
 -/
 
 @[expose] public section
@@ -35,16 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical projections exhibit a quasi-coherent complex as the derived limit
-of its lower truncations. Source: Stacks Project, Tag 08D3
-(blueprint: lem-pc-qcoh-truncation-derived-limit).
-
-Proof: On the basis of affine opens, all positive cohomology of every cohomology
-sheaf vanishes by pqf-lem-affine-vanishing, since schemeDerivedQCohProperty says these
-sheaves are quasi-coherent (def-pc-derived-category). Apply
-lem-pc-ringed-space-truncation-derived-limit with bound zero. Its Roos triangle uses
-exactly the standard truncation projections (def-sbc-standard-tstructure-derived-category)
-and the product in D(O_X) (def-weil-derived-limit). This gives the displayed triangle,
-which expresses that the canonical reconstruction map is an isomorphism. -/
+of its lower truncations. -/
 theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [Abelian.HasKInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -69,18 +63,7 @@ theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
 -- Identifying Scheme.Modules with the shared SheafOfModules category requires
 -- unfolding their category and derived-functor instances during equality transport.
 /-- Applying a countable-product-preserving additive functor's right derived functor
-preserves the canonical reconstruction. Source: Stacks Project, Tag 08U1, and
-Tag 08D4, proof of (2) (blueprint: lem-pc-qcoh-truncation-derived-limit).
-
-Proof: First use qcoh_truncation_isDerivedLimitTriangle, proved by affine vanishing
-and lem-pc-ringed-space-truncation-derived-limit. Apply
-lem-pc-derived-functor-commutes-derived-limit to this Roos triangle: K-injective
-products compute the source product, and exact countable products in Ab compute the
-target product. Product preservation identifies their images, and triangulatedness
-of RF carries the distinguished triangle to the target Roos triangle. The product
-comparison respects projections, so its first map is precisely the product lift of
-RF applied to each truncation projection. Naturality of truncation and of this
-comparison identifies this triangle with the canonical reconstruction after RF. -/
+preserves the canonical reconstruction. -/
 theorem rightDerivedFunctor_qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [Abelian.HasKInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

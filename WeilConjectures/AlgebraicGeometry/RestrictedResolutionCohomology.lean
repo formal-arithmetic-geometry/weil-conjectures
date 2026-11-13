@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Restriction on resolution cohomology before the section-class map
 
-Source: Stacks Project, Tags 01E2 and 01FB.
-(blueprint: lem-weil-pbc-restricted-resolution-cohomology)
+## References
+
+* [Stacks Project, Tag 01E2](https://stacks.math.columbia.edu/tag/01E2)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
 -/
 
 @[expose] public section
@@ -67,25 +69,7 @@ set_option maxHeartbeats 700000 in
 -- Resolution comparison unfolds the scheme module and ringed-space section interfaces.
 /-- Restriction on module cohomology is computed by the restriction of sections of a
 fixed resolution, followed by the pinned identification of the restricted resolution.
-This is a statement about homology of section complexes, before the map to a homology sheaf.
-Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
-(blueprint: lem-weil-pbc-restricted-resolution-cohomology)
-
-Proof: Let j be the inclusion of U. The restriction unit gives a map from I to
-j_* of its restriction. Compose it with j_* of R.comparison.inv. Naturality of
-the unit and R.augmentation show that this map lifts the restriction unit on F.
-Restriction preserves finite limits, so its right adjoint j_* preserves injectives. Thus
-j_*R is already termwise injective: use it as the comparison complex, with
-lambda the identity, source resolution I and target resolution R, in the
-construction of the cohomology map. The global sections comparison is restriction
-along j inverse image of the top open, so it is an isomorphism. Independence of
-the choices identifies this calculation with moduleCohomologyRestriction.
-Cancel the target resolution comparison and the global sections comparison.
-The degreewise formula R.components says that the surviving map is exactly
-restriction from the top open to U, followed by R.sections.inv. Apply homology
-and compose with R.sections.hom to obtain the displayed equality. The argument
-uses only naturality and inverse identities and applies in degree zero, for zero
-modules, and for the empty and top opens. -/
+This is a statement about homology of section complexes, before the map to a homology sheaf. -/
 theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
     (I : InjectiveResolution F) (U : Z.Opens) (R : RestrictedResolutionSections I U)
     (p : ℕ) :

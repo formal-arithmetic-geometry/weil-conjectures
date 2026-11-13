@@ -25,9 +25,13 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Relative tensor bounds from a strictly perfect local model
 
-Source: Stacks Project, Tag 0B6G, verification of condition (3), and
-Cohomology of Sheaves, Tags 08CG, 09U9, and 06YB.
-(blueprint: lem-pc-strictly-perfect-relative-tensor-stalk-bound).
+## References
+
+* [Stacks Project, Tag 0B6G](https://stacks.math.columbia.edu/tag/0B6G)
+* [Stacks Project, Tag 08CG](https://stacks.math.columbia.edu/tag/08CG)
+* [Stacks Project, Tag 09U9](https://stacks.math.columbia.edu/tag/09U9)
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 064L](https://stacks.math.columbia.edu/tag/064L)
 -/
 
 @[expose] public section
@@ -39,30 +43,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 /-- A strictly perfect local model in degrees [r,s], and a Tor bound d for the
-structure stalk, give relative tensor homology vanishing outside [r-d,s].
-Source: Stacks Project, Tag 0B6G, `lemma-perfect-proper-perfect-direct-image`,
-condition (3); Cohomology of Sheaves, Tags 08CG,
-09U9, and 06YB; More on Algebra, Tag 064L.
-
-Proof: since y belongs to V, exact restriction and the local representative
-isomorphism identify the stalk of K with the stalk of L in the derived category.
-Every L term is a retract of a finite free structure module. Taking stalks and
-restricting scalars preserve this retraction. Tor is additive and preserves
-retractions, so the assumed bound for the structure stalk gives amplitude [-d,0]
-for each term. Filter L by its finitely many nonzero degrees. The quotients are
-its terms placed in those degrees; after derived tensor their amplitudes are
-[t-d,t]. Induction using the long exact cohomology sequence therefore gives
-[r-d,s] for the scalar-restricted stalk of L. If r > s the degree hypothesis
-makes every term zero and all tensor homology vanishes.
-Apply the K-flat stalk criterion to the ringed space with ring sheaf f inverse
-image O_Y. The given q and exactness of stalks identify its K-flat stalk complex
-with the scalar-restricted stalk of K. Comparing to a common K-flat replacement
-of the local model makes their derived tensors equal, by invariance under
-quasi-isomorphisms between K-flat complexes. Stalks commute with total tensor
-and with homology, so the underlying abelian-group stalk of the displayed tensor
-homology vanishes outside [r-d,s], for every test sheaf F. This argument is
-pointwise and needs no finite-type, Noetherian, or perfect-morphism hypothesis.
-(blueprint: lem-pc-strictly-perfect-relative-tensor-stalk-bound). -/
+structure stalk, give relative tensor homology vanishing outside [r-d,s]. -/
 theorem strictlyPerfect_relativeTensor_stalk_bound
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

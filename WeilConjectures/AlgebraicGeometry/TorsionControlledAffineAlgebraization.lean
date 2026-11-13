@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKern
 
 /-! # The affine part of torsion-controlled algebraization
 
-Source: Stacks Project, Tag 0889(1), affine paragraph, using Tags 087W, 0ALK and 05EU.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 087W](https://stacks.math.columbia.edu/tag/087W)
+* [Stacks Project, Tag 0ALK](https://stacks.math.columbia.edu/tag/0ALK)
+* [Stacks Project, Tag 05EU](https://stacks.math.columbia.edu/tag/05EU)
 -/
 
 @[expose] public section
@@ -25,29 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Algebraization on a single affine scheme. Descent to a nonaffine scheme is not
-part of this assertion.
-
-Source: Stacks Project, Tag 0889(1), affine paragraph, using Tags 087W, 0ALK and 05EU.
-(blueprint: lem-weil-pbc-torsion-controlled-affine-algebraization).
-
-Proof: Identify X with Spec A via its canonical affine isomorphism. Coherent sheaves
-correspond to finite A-modules. The affine formal-module equivalence identifies N
-with a finite completed module M' and completion H with completion of the finite
-module P of sections of H. Remark 0888 transfers the componentwise bound to the
-kernel and cokernel of the map M' to completion P. Completion of P is its tensor
-product with the completed ring. The completion ring map is flat and induces an
-isomorphism modulo J, so apply the map-to part of formal-gluing Lemma 0ALK.
-It yields a module T, a map T to P, and a compatible completed isomorphism, with
-ideal-power-torsion kernel and cokernel. At each generator f of J, localization
-kills that kernel and cokernel, so T_f is isomorphic to the finite module P_f.
-Its completed scalar extension is M', also finite. The finiteness criterion of
-Remark 05EU therefore makes T finite. Over the Noetherian ring A the
-kernel and cokernel are finite. Choose finitely many generators of each and take
-the maximum of their annihilating exponents and 1. This gives one positive bound.
-Sheafify T and the map, and transport the completed isomorphism back through the
-affine equivalence; compatibility gives the displayed factorization. If J is the
-unit ideal, take T=P and the identity map; if J is zero, completion is the identity
-and the original map provides the triple. The zero ring causes no exception. -/
+part of this assertion. -/
 theorem torsionControlled_affine_algebraization
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

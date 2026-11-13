@@ -11,8 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenSquareCompariso
 
 /-! # Coherence of open pullback squares
 
-Source: Stacks Project, Tag 0D5S, and Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-t2-open-pullback-cube).
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -160,27 +162,7 @@ private theorem openSquare_app
 
 set_option maxHeartbeats 800000 in
 -- Matching the derived-open component formulas needs extra elaboration heartbeats.
-/-- The two paths around a commuting cube of pullback comparisons agree.
-Source: Stacks Project, cohomology.tex, Tag 0D5S; perfect.tex, Tag 0DJ9.
-(blueprint: lem-pc-t2-open-pullback-cube).
-
-Proof: First extend the pinned two-arrow composition isomorphisms by equality
-transport to named composites. Their three-arrow identity follows by substituting
-the named composites in the associativity clause of exists_derivedPullbackComposition.
-Normalize the six paths j,U.ι,f; j,f restricted,V.ι;
-f' restricted,g restricted,V.ι; U'.ι,g',f; U'.ι,f',g;
-and f' restricted,V'.ι,g to the common total morphism j ≫ (U.ι ≫ f).
-Postcompose both ordinary cube paths with an invertible comparison to that total
-pullback, apply the three-arrow identities, and cancel neighboring comparisons.
-The commuting-face equations give the required equality transports; their proofs
-coincide by proof irrelevance. Expand each open square into inverse open comparison,
-ordinary pullback square, and terminal open comparison. Cancel the intermediate
-open comparisons. Naturality moves the remaining inverse open comparison on V
-to the front and the open comparison on U' to the end. The ordinary cube identity
-then proves the displayed equation with these two common factors. The calculation
-uses only functoriality and invertible comparisons, hence applies to empty opens,
-zero objects, and arbitrary unbounded complexes. No direct image or adjunction
-counit occurs in this assertion. -/
+/-- The two paths around a commuting cube of pullback comparisons agree. -/
 theorem singleComplexOpen_pullback_cube
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

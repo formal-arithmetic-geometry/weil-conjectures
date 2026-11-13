@@ -20,22 +20,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Transport the kernel adjunction through any compactification, retaining its trace formula.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, G7 and canonical proper comparison
-(auxiliary; not a blueprint node).
-
-Proof: Let E be rightDerivedLowerShriekIso A c. Transport adj₀ along E.symm.
-Its counit at K is E at B tensor f*K followed by the original kernel counit.
-Put t = E_B followed by d.trace. Compactification projection compatibility moves
-E across the projection map, giving tensor(E_B,id) followed by ordinary projection.
-The latter cancels the inverse projection in the kernel counit, leaving
- tensor(E_B,id) followed by tensor(d.trace,id) and the left unitor.
-Functoriality of the tensor bifunctor identifies this with tensor(t,id) followed
-by the same left unitor. These are equalities of actual maps. This transport
-uses no geometric integral or triangle calculation beyond the supplied adjunction.
-It applies equally to empty schemes and the zero coefficient ring. -/
+/-- Transport the kernel adjunction through any compactification, retaining its trace formula. -/
 theorem sfCompactificationKernelTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]

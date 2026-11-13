@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport).
+## References
+
+* [Stacks Project, Tag 08DG](https://stacks.math.columbia.edu/tag/08DG)
+* [Stacks Project, Tag 08BW](https://stacks.math.columbia.edu/tag/08BW)
 -/
 
 @[expose] public section
@@ -33,9 +35,7 @@ section
 namespace RestrictionTransport
 
 open CategoryTheory.Functor in
-/-- The composition comparison on a complex, with its identity complex comparison removed.
-Source: `Functor.mapDerivedCategoryCompIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+/-- The composition comparison on a complex, with its identity complex comparison removed. -/
 private lemma comp_fac
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -55,9 +55,7 @@ private lemma comp_fac
   simpa [h] using mapDerivedCategoryCompIso_fac F G K
 
 open CategoryTheory.Functor in
-/-- Solve the composition factorization for its forward comparison on a complex.
-Source: `Functor.mapDerivedCategoryCompIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+/-- Solve the composition factorization for its forward comparison on a complex. -/
 private lemma comp_hom_Q
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -78,9 +76,7 @@ private lemma comp_hom_Q
   exact comp_fac F G K
 
 open CategoryTheory.Functor in
-/-- Solve the composition factorization for its inverse comparison on a complex.
-Source: `Functor.mapDerivedCategoryCompIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+/-- Solve the composition factorization for its inverse comparison on a complex. -/
 private lemma comp_inv_Q
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -99,9 +95,7 @@ private lemma comp_inv_Q
   simp
 
 open CategoryTheory.Functor in
-/-- Solve the natural-isomorphism factorization for its component on a complex.
-Source: `Functor.mapDerivedCategoryNatIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+/-- Solve the natural-isomorphism factorization for its component on a complex. -/
 private lemma nat_hom_Q
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -119,13 +113,7 @@ private lemma nat_hom_Q
   exact mapDerivedCategoryNatIso_fac e K
 
 open CategoryTheory.Functor in
-/-- Deriving a pasted square agrees with pasting its derived comparison maps.
-Source: the factorization laws for exact derived functors and
-`Localization.natTrans_ext`. Proof: check after precomposition with the localization.
-Expand comparison maps using their factorization laws, move the inner comparison
-across the factorization of A by naturality, and cancel inverse pairs. Naturality
-of the factorization of v leaves a levelwise equality of complex morphisms.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+/-- Deriving a pasted square agrees with pasting its derived comparison maps. -/
 private lemma pasting
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -191,12 +179,7 @@ private lemma pasting
   rfl
 
 open CategoryTheory.Functor in
-/-- Transport morphisms across a pasted square of exact derived functors.
-Source: the preceding pasting identity, `Functor.map_preimage`, and naturality.
-Proof: map the full preimage back, paste the comparison square, and cancel the
-outer comparison isomorphisms. Naturality of the inner square gives the result.
-Only fullness of the derived functor is needed.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+/-- Transport morphisms across a pasted square of exact derived functors. -/
 private lemma transport
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -268,21 +251,7 @@ set_option synthInstance.maxHeartbeats 400000 in
 set_option maxHeartbeats 1600000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Restricting a local derived morphism commutes with transporting from the localized
-site to the open subscheme. The formula includes all derived composition comparisons.
-Source: Stacks Project, Cohomology, Tag 08BW, canonical local Hom restriction maps;
-Mathlib's equivalence Scheme.Modules.overEquiv
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport).
-Proof: mapDerivedCategoryCompIso identifies restriction on the open subscheme with
-restriction to the localized site followed by the derived equivalence. Transport a
-back using the full and faithful derived equivalence and these identifications.
-The underived comparison from iterated restriction to direct restriction cancels
-the functor and inverse of overEquiv U using its unit. After deriving, the unit
-naturality equation cancels the transported equivalence on the morphism a.
-Associativity of the derived composition comparisons identifies what remains
-with overFunctorMap followed by the equivalence for W. This is precisely the
-conjugation defining derivedOpenHomRestriction. Conjugating by the outer
-composition comparisons gives the displayed equality. This argument is natural
-in F and E and works for W=U and W empty as well. -/
+site to the open subscheme. The formula includes all derived composition comparisons. -/
 theorem scheme_derived_hom_restriction_transport
     (X : Scheme.{u}) (U W : X.Opens) (i : W ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

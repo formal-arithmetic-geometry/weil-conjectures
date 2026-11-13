@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenPieces
 
 /-! # Triple-overlap cocycle for universal thickenings
 
-Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1.
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
 -/
 
 @[expose] public section
@@ -24,38 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Canonical transitions of universal overlap restrictions extend to triple overlaps
-and satisfy the cocycle, without asserting the existence of a scheme glue datum.
-
-Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1,
-paragraph beginning "By the general remarks".
-(blueprint: lem-weil-pbc-universal-thickening-overlap-cocycle)
-
-Proof: The existing open-pieces theorem gives unique inverse-image opens for
-each s(k,l). Its closed image has open complement with empty preimage, so
-uniqueness identifies that complement with the empty open. Thus every point
-lifts along s(k,l).
-The transition fixes the source intersection, identified by pullback symmetry.
-The pointwise range equivalence therefore shows that t(k,l) carries the open
-triple intersection in V(k,l) into the triple intersection in V(l,k). Factor
-this restriction through the open immersion V(l,m) into Z' l and use the
-pullback universal property to construct t'(k,l,m). Its second projection is
-by construction the first projection followed by t(k,l). To check the cocycle, pull back s(k,l)
-along the first projection of the triple
-overlap P=V(k,l) ×[Z' k] V(k,m). This gives a first order test thickening j:Q→P
-by the base-change theorem. Its map to the source pair supplies the k and l
-coordinates. The range equivalence for f(k,m) shows that its k coordinate maps
-into the image of C.f m, so the open-immersion lifting property supplies the m
-coordinate. Form the source pairs (l,m) and (m,k) using these coordinates.
-After composing with f(l,m), the first projection of j followed by t'(k,l,m)
-is the l coordinate followed by i l; cancel this open immersion to identify the
-projection with the source pair followed by s(l,m). Repeat this argument twice.
-The full cyclic composite therefore extends the same source map as P's first
-projection. Each t' is over X by its second-projection identity and base
-compatibility of t. The lifting uniqueness for s(k,l), applied to j, identifies
-the cyclic composite followed by P's first projection with that projection.
-The projection is a monomorphism, so the cyclic composite is the identity.
-Repeated indices use the same argument; no inequality assumptions are needed.
-Empty index types give vacuous conditions. -/
+and satisfy the cocycle, without asserting the existence of a scheme glue datum. -/
 theorem universalFirstOrderThickening_overlapCocycle
     {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})
     (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)

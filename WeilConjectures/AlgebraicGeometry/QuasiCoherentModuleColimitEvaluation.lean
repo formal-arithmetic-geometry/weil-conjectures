@@ -14,7 +14,10 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine evaluation of quasi-coherent module colimits
 
-Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24, item (4).
+## References
+
+* [Stacks Project, Tag 01ID](https://stacks.math.columbia.edu/tag/01ID)
+* [Stacks Project, Tag 01I7](https://stacks.math.columbia.edu/tag/01I7)
 -/
 
 @[expose] public section
@@ -75,24 +78,7 @@ private noncomputable def affineEvaluationIso
       (f.mapPresheaf.naturality (eqToHom he.symm).op) x).symm
 
 /-- Evaluation on an affine open sends a quasi-coherent module colimit cocone to
-an actual colimit cocone of modules. No filteredness is needed.
-Source: Stacks Project, Schemes, Lemma 01ID and Lemma 01I7
-(blueprint: lem-weil-pbc-quasi-coherent-module-colimit-evaluation).
-
-Proof: Put R = Γ(X, U) and restrict the diagram and cocone along the open immersion
-Spec R → X furnished by the affine open U. Restriction preserves colimits since it
-is left adjoint to pushforward, and preserves quasi-coherence. The tilde-Gamma counit
-identifies every restricted stage with the tilde of its global sections, naturally in
-stage maps. The assumption that c.pt is quasi-coherent also lets one compute the
-affine colimit in the full subcategory of quasi-coherent modules using tildeEquiv.
-Form the colimit M of the section modules. The tilde functor is a left
-adjoint, so tilde M is the colimit of the tilde stage modules. Uniqueness of colimits
-gives an isomorphism tilde M ≅ c.pt restricted to Spec R, intertwining the legs.
-Taking global sections and composing with the tilde-Gamma unit (an isomorphism)
-gives M ≅ Γ(c.pt, U). Naturality of the unit and the triangle identity show that the
-transported legs are precisely the original evaluated c.ι. Transport the module
-colimit along this isomorphism. This works also for an empty indexing category,
-where M is zero, and for the empty affine open, where every module is zero. -/
+an actual colimit cocone of modules. No filteredness is needed. -/
 theorem quasiCoherentModuleColimitEvaluation
     (X : Scheme.{u}) (I : Type u) [Category.{u} I]
     (F : I ⥤ X.Modules) (c : Cocone F) (hc : IsColimit c)

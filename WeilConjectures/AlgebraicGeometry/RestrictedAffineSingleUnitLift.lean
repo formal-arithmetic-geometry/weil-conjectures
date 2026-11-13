@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleMaps
 
 /-! # Lifting restricted coefficient units to single complexes
 
-Source: Stacks Project, Tags 09Z1, 0EZM and 03CB;
-Mathlib.Algebra.Homology.Additive and Mathlib.Algebra.Homology.Single.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 03CB](https://stacks.math.columbia.edu/tag/03CB)
 -/
 
 @[expose] public section
@@ -65,29 +68,7 @@ private theorem complex_transport_heq {C : Type*} [Category C] [HasZeroMorphisms
   exact Category.id_comp f
 
 /-- The restricted transition is the transported complex unit,
-provided its restricted sheaf coefficient is already the sheaf unit.
-Source: Stacks Project, Tags 09Z1, 0EZM and 03CB;
-Mathlib.Algebra.Homology.Additive, `singleMapHomologicalComplex_hom_app_self`, and
-Mathlib.Algebra.Homology.Single, `single_map_f_self`.
-(blueprint: lem-sbc-restricted-affine-single-unit-lift).
-
-Proof: Write X for the fibre product, r for its second projection, R = r^* F_i,
-q for the restricted diagram's identity transition, and gamma for the raw restricted
-coefficient. The diagram's map_id proves q = id_X. Substitute this equality in the
-heterogeneous coefficient hypothesis to obtain the ordinary unit equation; transporting
-back gives gamma = (eqToIso (congrArg upperStar map_id)).hom.app R followed by
-upperStarId.hom.app R. This step uses only equality elimination and identity composition.
-Evaluate the single comparison at zero with singleMapHomologicalComplex_hom_app_self,
-and the image of gamma with single_map_f_self. The evaluation isomorphisms around the
-intermediate object q^* R cancel. The remaining expression is q^* of the evaluation
-isomorphism for R, followed by gamma and its inverse evaluation isomorphism. Naturality
-of the transported unit with respect to that evaluation isomorphism identifies this
-with its component on the zero object of the single complex. The component formula for
-NatIso.mapHomologicalComplex identifies this last expression with the displayed right
-side. Apply HomologicalComplex.hom_ext. The calculation above proves its zero component;
-in every other degree the target is zero by isZero_single_obj_X, so its morphisms agree.
-This assumes the restricted coefficient unit and does not prove its restriction identity.
-Zero sheaves and empty schemes require no exceptions; an empty I supplies no index i. -/
+provided its restricted sheaf coefficient is already the sheaf unit. -/
 theorem restrictedAffineSingleUnit_lift {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

@@ -9,13 +9,15 @@ import all WeilConjectures.AlgebraicGeometry.SectionOrdinaryOplaxNormalization
 
 /-! # The actual internal total oplax arrow in section modules
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, displayed total comparison;
-Modules on Sites, Tag 03EL (auxiliary; not a blueprint node).
-
 All tensors are relative to the pulled-back coefficient ring. The totalization is the
 existing signed direct-sum total, including its infinite degreewise sums. The helpers
 name existing functors and canonical comparisons; the final proposition records their
 specified-map equalities before and after homotopy quotient and localization.
+
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +32,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
-/-- Equality of specified chain maps and of their homotopy and derived images.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+/-- Equality of specified chain maps and of their homotopy and derived images. -/
 def TotalMapAgreement (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (modules Λ X)]
     {P Q : CochainComplex (modules Λ X) ℤ} (a b : P ⟶ Q) : Prop :=
@@ -47,8 +48,7 @@ set_option backward.isDefEq.respectTransparency true
 equalities, both inverse laws, every summand, local scalar formulas, signed differential,
 unit multiplication, naturality and the three constraint diagrams. All complex arguments
 are arbitrary integer-indexed complexes; flat-term K-flat subcategories introduced in
-the node are context for later derived-tensor computation and impose no restriction here.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+the node are context for later derived-tensor computation and impose no restriction here. -/
 def SectionTotalNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{u + 1} (modules Λ X)] : Prop :=
   (∀ P Q : CochainComplex (internalModules Λ Y) ℤ,

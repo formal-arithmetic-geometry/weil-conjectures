@@ -16,7 +16,12 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSquares
 
 /-! # Compatible relative Mayer--Vietoris boundaries
 
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -50,46 +55,7 @@ private theorem triangle_transport_distinguished
 /-- The pinned relative restriction maps are the first two arrows of a functorial
 pair of distinguished triangles. Their morphism has the prescribed global, open,
 and overlap components. This is a derived-category statement, with no assertion
-about strict representatives of any of its components.
-
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; perfect.tex, Tag 0DJ9,
-the induction diagram.
-(blueprint: lem-pc-relative-mv-pinned-triangle-comparison).
-
-Proof: Use the two functorial restriction triangles of Tag 08BV, on X and on the
-inverse-image cover of X'. Apply Lg* Rf* and Rf'* as triangulated functors, as in
-derivedBaseChange_mayerVietoris_naturality. The affine map g and its base change
-are qcqs, and the inverse-image opens and their intersection are compact.
-For each open W, exact restriction identifies the derived restriction object
-with L(W.ι)K. Compare the restriction/direct-image adjunction with relativeMVAdj
-by uniqueness of right adjoints: the comparison is the unique natural
-isomorphism carrying one unit to the other. Compose each right-adjoint vertex
-comparison with relativeMVImageComp, the mate of the pinned pullback composition
-comparison. For the pullback cover also use the canonical isomorphism from the
-inverse-image open to the chosen fibre product. Use the additive biproduct
-comparison at the middle vertices. Naturality of the adjunction units proves
-that the transported first maps are relativeMVSourceFirst and
-relativeMVTargetFirst. Transpose each of the two restricted counits under the
-same adjunction comparisons. The counit identity for the comparison of adjoints
-identifies these transposes with relativeMVRestriction. Subtraction in the V
-summand gives precisely relativeMVSourceSecond and relativeMVTargetSecond.
-Transport the connecting maps by these same vertex comparisons (including the
-shift of the global comparison), thereby preserving distinguishedness.
-Transpose φ under Lg'* adjoint to Rg'*. Naturality of the restriction triangles
-and compatibility with direct image give the triangle map before transport.
-Expand the base-change mate using its pulled-back counit description in Tag
-08HY. The counit of a composite adjunction is the composite of its two counits;
-substitute this formula at W and cancel the adjunction triangle identities.
-The remaining expression is the base-change map for W.ι ≫ f followed by the
-restriction of φ. The equality of the two pullback projections supplies the
-equality transport, and the two pinned pullback composition comparisons supply
-relativeMVComp in that expression. Thus the transported overlap component is
-relativeMVLocalArrow at U ⊓ V and the global component is relativeMVGlobalArrow.
-The same computation at U and V gives the middle component by biproduct
-projection extensionality. Transporting the whole triangle map gives its third
-commutativity equation as well; do not infer it from the first two squares.
-Empty opens give zero objects and repeated opens give split rows, so the same
-comparison works in these cases. -/
+about strict representatives of any of its components. -/
 theorem relativeMV_pinned_triangle_comparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

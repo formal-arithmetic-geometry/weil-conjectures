@@ -16,8 +16,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The conormal comparison for the open restriction data.
-Source: Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2
-(blueprint: lem-weil-pbc-universal-thickening-open-restriction-conormal).
+
 The restriction of the kernel ideal along an open immersion identifies with the
 kernel ideal of the restricted thickening; tensor pullback composition and the
 open-immersion pullback/restriction comparison then give the displayed module

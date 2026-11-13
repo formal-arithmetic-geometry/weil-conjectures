@@ -12,7 +12,12 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.ClosedPointDimensionLocalRing
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-/-! Auxiliary reductions for rational point local dimension base change. -/
+/-! Auxiliary reductions for rational point local dimension base change.
+
+## References
+
+* [Stacks Project, Tag 00OU](https://stacks.math.columbia.edu/tag/00OU)
+-/
 
 @[expose] public section
 
@@ -49,19 +54,6 @@ private theorem localDim_openEmbedding {X : Type*} {Y : Type*}
 
 /-- At a rational closed point of a locally finite type scheme over a field, the Krull
 dimension of the scheme stalk equals its topological local dimension.
-
-Source: Stacks Project, Lemma 10.114.6, Tag 00OU, applied on an affine open chart.
-Proof: A section over the one-point scheme Spec k is a closed immersion, so its image
-x is closed. Choose an affine open immersion a : Spec R -> X whose image contains x,
-and write x = a(z). Since a is injective and continuous, z is closed and its prime
-ideal is maximal. The composite a followed by f is locally of finite type; its ring
-map k -> R therefore makes R a finite type k-algebra. Apply
-topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal at z. The open immersion
-stalk isomorphism and Spec.stalkIso identify the stalk at x with R localized at z.
-Ring equivalences preserve ring Krull dimension. The open immersion a also preserves
-local topological dimension by cofinality of open neighbourhoods. Combining these
-identifications proves the equality.
-(blueprint: lem-ag-rational-point-stalk-topological-local-dimension)
 -/
 theorem ringKrullDim_stalk_rationalPoint_eq_topologicalKrullDimAt
     {k : Type u} [Field k] {X : Scheme.{u}}

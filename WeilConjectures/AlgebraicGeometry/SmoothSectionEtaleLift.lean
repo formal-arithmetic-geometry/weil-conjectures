@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionQuotientCutout
 
 /-! # Sections of smooth algebras modulo an ideal lift over an étale neighbourhood
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07M7
-(blueprint: lem-weil-pbc-smooth-section-etale-lift).
+## References
+
+* [Stacks Project, Tag 07M7](https://stacks.math.columbia.edu/tag/07M7)
 -/
 
 @[expose] public section
@@ -28,24 +29,9 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-weil-pbc-smooth-section-etale-lift)
-Let `A` be a commutative ring, `J` an ideal, and `B` a smooth `A`-algebra.
+/-- Let `A` be a commutative ring, `J` an ideal, and `B` a smooth `A`-algebra.
 Every `A`-algebra section of `B` to `A/J` lifts after an étale neighbourhood
 of `A` inducing an isomorphism on the quotient.
-Proof: Stacks Project, More on Algebra, Tag 07M7.
-1. `exists_etale_neighbourhoods_of_smooth_section` performs the conormal, projective
-   complement, symmetric algebra and basis quotient construction. It gives a
-   factorization through an algebra étale near all primes of the section kernel.
-2. `exists_isUnit_mk_and_etale_away` chooses a global étale localization
-   with denominator invertible modulo that kernel. Map the unit through `kerLift`
-   and use the localization universal property to extend the section.
-3. `exists_localization_quotient_equiv_of_etale_section` cuts out the section by
-   an idempotent after reduction modulo `J`. It gives a second localization `D`
-   and an equivalence `t : D/JD ≃ₐ[A] A/J` extending the section.
-4. The second localization is étale by composition. Take `α = t.symm` and compose
-   `B → C → D`. Apply the injectivity of `t` to check the displayed lift equation.
-The first construction is left as a named intermediate theorem; the localization,
-quotient equivalence and compatibility argument here are fully proved.
 -/
 theorem exists_etale_lift_of_smooth
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]

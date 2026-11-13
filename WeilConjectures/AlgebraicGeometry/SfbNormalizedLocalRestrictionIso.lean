@@ -16,7 +16,13 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Comparing the two presentations of local derived restriction
 
-Source: Stacks Tags 00YY, 03D2 and 06YY; Bhatt--Scholze, Lemma 6.5.8.
+## References
+
+* [Stacks Project, Tag 00YY](https://stacks.math.columbia.edu/tag/00YY)
+* [Stacks Project, Tag 03D2](https://stacks.math.columbia.edu/tag/03D2)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* Bhatt--Scholze, Lemma 6.5.8
+* Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10
 -/
 
 @[expose] public noncomputable section
@@ -150,32 +156,7 @@ private theorem pullExact
 
 /-- Isomorphisms after the original stratum-and-slice restriction give isomorphisms
 between the corresponding normalized restrictions. This concerns arbitrary objects,
-without a completeness, covering, stratification or perfectness hypothesis.
-
-Source: Stacks Tags 00YY, 03D2 and 06YY; Bhatt--Scholze, Lemma 6.5.8 and
-Remark 6.5.10 (auxiliary; not a blueprint node).
-
-Proof: first compare ordinary module functors. The transported original ring
-adjunction unit identifies the coefficient ring produced by F with the transported
-original inverse-image ring. Compose the inverse of this identification with the
-invertible completed scalar map. Uniqueness of module left adjoints now compares
-normalized immersion pullback with the specified original module pullback, followed
-by transport and scalar restriction. This target coefficient identification need
-not be the canonical completion comparison: only its existence is needed here.
-For the slice, Over.postEquiv for AsSmall gives a continuous and cocontinuous
-transport. Its module pushforward, with the inverse coefficient map, is additive
-and exact. Scalar extension along an isomorphism is scalar restriction along its
-inverse, giving the ordinary slice comparison.
-
-Both scalar maps are invertible since immersion inverse image and slice restriction
-preserve limits. The existing computation lemma identifies their left-derived
-pullbacks with the derived functors of their exact ordinary pullbacks, by cancelling
-precomposition with localization. Derive the composite ordinary comparison. The
-localization-preimage isomorphisms remove the chosen complex representatives in
-normalization and in original slice restriction. Apply the resulting exact derived
-slice transport to the given local isomorphism and compose the comparison on K
-with the inverse comparison on L. Empty slices and zero coefficient rings require
-no additional assumption. -/
+without a completeness, covering, stratification or perfectness hypothesis. -/
 theorem sfbNormalizedLocalRestriction_iso
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A)

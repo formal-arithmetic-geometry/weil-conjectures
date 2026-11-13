@@ -14,7 +14,10 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 /-!
 # Functoriality of the strict henselization scheme
 
-Source: Stacks Project, Tags 04GU and 03Q9.
+## References
+
+* [Stacks Project, Tag 04GU](https://stacks.math.columbia.edu/tag/04GU)
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -111,19 +114,7 @@ private noncomputable def pointedPullback
   exact α.mapElements ⋙ Functor.Elements.precomp F (pointSmallEtale t).fiber
 
 /-- Compatible geometric points admit a morphism of their strict henselization schemes
-commuting with the structural maps. No assertion of locality is made here.
-Source: Stacks Project, Tag 04GU; Tag 03Q9, inverse-limit description.
-(blueprint: lem-weil-pbc-strict-henselization-scheme-functoriality)
-
-Proof: pull back every pointed etale neighbourhood of s along g, pointing the pullback
-by t and its compatible lift to the neighbourhood. The canonical cone of the strict
-henselization at t extends to all pointed etale neighbourhoods because affine pointed
-neighbourhoods are initial. Project its leg at each of these pullbacks to the original
-neighbourhood of s. Pullback functoriality and cone naturality make these projections
-a cone on the affine pointed-neighbourhood diagram at s. The limit property of the
-canonical cone at s gives f. Each cone leg is a morphism over g: the pullback condition
-and the structural-map characterization give the displayed equality after composition
-with any leg at s. There is at least one such leg, since the index is cofiltered. -/
+commuting with the structural maps. No assertion of locality is made here. -/
 theorem exists_strictHenselizationSchemeMap
     {S T : Scheme.{u}} {g : T ⟶ S}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

@@ -25,19 +25,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 /-- The natural short exact sequence from the long exact sequence of Cone(1-T)[-1].
 
 proof.md, first paragraph
-(auxiliary; not a blueprint node).
-
-Proof: Apply the cone long exact cohomology sequence to the transition endomorphism
-on the termwise product. Exact products identify its cohomology with the product
-of the cohomology objects; the projection formulas conjugate the induced map to
-1-T. Factor the incoming map through its cokernel and the outgoing map through
-its kernel. Exactness at the three middle terms makes the first factor a mono,
-the second an epi, and their image and kernel equal. The kernel of 1-T is the
-limit of the tower: its projections are compatible and any compatible family
-factors uniquely through the kernel. A tower morphism induces the diagonal map
-on both cone summands. It commutes with the inclusion and negative projection,
-so the kernel and cokernel universal properties give the two naturality squares.
-This calculation applies in every integer degree and to unbounded complexes. -/
+. -/
 theorem roos_cohomology_sequence {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableLimits A] [HasExactLimitsOfShape (Discrete ℕ) A] :
     ∀ q : ℤ,

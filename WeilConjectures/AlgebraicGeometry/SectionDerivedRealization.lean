@@ -9,10 +9,6 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 /-! # Canonical derived section-module realization
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
-03D7, 03DI and 03DJ; Cohomology on Sites, Tags 07A4, 07A6 and 0B56
-(auxiliary; not a blueprint node).
-
 ## Main definitions
 
 - `derivedEquivalence`: localization of the fixed section equivalence.
@@ -22,6 +18,18 @@ Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
 - `derivedExtension`, `derivedOpenAdjunction`: localized open extension and restriction.
 - `derivedPullbackComposition`: localization of geometric pullback pasting.
 
+## References
+
+* [Stacks Project, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks Project, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* [Stacks Project, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
 -/
 
 @[expose] public noncomputable section
@@ -52,11 +60,7 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 attribute [local instance] sectionFunctorAdditive
 
 set_option linter.unusedSectionVars false in
-/-- Exact sequential colimits transfer through the fixed section equivalence.
-Source: Stacks 00YV (auxiliary; not a blueprint node).
-Proof: transfer each diagram and its colimit along the exact equivalence. Its
-inverse preserves finite limits, so the exactness of internal sequential colimits
-implies exactness of the section-module colimits. -/
+/-- Exact sequential colimits transfer through the fixed section equivalence. -/
 @[instance] theorem section_hasExactSequentialColimits (X : Scheme.{u}) :
     HasExactColimitsOfShape ℤ (modules Λ X) := by
   exact HasExactColimitsOfShape.of_codomain_equivalence ℤ (equivalence Λ X)
@@ -227,8 +231,7 @@ private theorem sectionTotalNatIso_hom (X : Scheme.{u})
   exact uncurryTotalComparisonIso_hom (equivalence Λ X).functor
     (sectionOrdinaryTensorMap Λ X) P Q
 
-/-- Normalization on all termwise section-equivalence images.
-Source: Stacks 06YU and 07A4 (auxiliary; not a blueprint node). -/
+/-- Normalization on all termwise section-equivalence images. -/
 def TensorRepresentativeNormalization (X : Scheme.{u})
     (q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -246,8 +249,7 @@ def TensorRepresentativeNormalization (X : Scheme.{u})
             ((internalLocalizationTensorMap Λ X).app (P, Q)) ≫
           localizedTotalComparison Λ X P Q
 
-/-- Invertibility whenever either complex passes the independent acyclic tensor test.
-Source: Stacks 06YU and 07A4 (auxiliary; not a blueprint node). -/
+/-- Invertibility whenever either complex passes the independent acyclic tensor test. -/
 def TensorRepresentativeIsIso (X : Scheme.{u})
     (q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -256,14 +258,12 @@ def TensorRepresentativeIsIso (X : Scheme.{u})
         CochainComplex.IsKFlatIndependentCoefficients P ∨
           CochainComplex.IsKFlatIndependentCoefficients Q → IsIso (q.app (P, Q))
 
-/-- The transported tensor unit is the regular section module in degree zero.
-Source: Stacks 06YU and 07A4 (auxiliary; not a blueprint node). -/
+/-- The transported tensor unit is the regular section module in degree zero. -/
 def TensorRepresentativeUnit (X : Scheme.{u}) : Prop :=
   Nonempty (tensorUnit Λ X ≅
         (DerivedCategory.singleFunctor (modules Λ X) 0).obj (𝟙_ (modules Λ X)))
 
-/-- The complete representative normalization, K-flat invertibility and regular-unit condition.
-Source: Stacks 06YU and 07A4 (auxiliary; not a blueprint node). -/
+/-- The complete representative normalization, K-flat invertibility and regular-unit condition. -/
 def TensorRepresentativeCondition (X : Scheme.{u})
     (q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -444,24 +444,7 @@ private theorem transport_tensor_representative_complete
 
 attribute [local irreducible] derivedEquivalence
 
-/-- Split existence of the normalized representative.
-Source: Stacks Project, Tags 06YU and 07A4.
-
-Proof: the normalized ordinary tensor maps are natural by the internal section
-comparison. The induced map on signed totals has the prescribed summand formula,
-so uniqueness identifies it with totalComparison and proves its naturality.
-Compose the inverse localization and derived tensor comparisons, the image of the
-internal lax tensor map, and the localized total comparison. This is a natural
-transformation on pairs of internal complexes. Fully faithful precomposition by
-the termwise section equivalence extends it to all section complexes, with the
-required normalization. The acyclic-test criterion and the braiding identify
-section K-flatness with internal categorical K-flatness. Hence either K-flat
-argument makes the internal lax tensor map invertible. Every pair of section
-complexes is isomorphic, via the equivalence counit, to an internal image; naturality
-transfers this invertibility to that pair. Finally localize the ordinary unit
-comparison and the compatibility of termwise equivalence with degree-zero single
-complexes to identify the transported unit with the regular section module.
-(auxiliary; not a blueprint node) -/
+/-- Split existence of the normalized representative. -/
 theorem section_tensor_representative_exists (X : Scheme.{u}) :
     ∃ q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -515,18 +498,7 @@ private theorem natTrans_eq_on_equivalence
   apply NatTrans.ext
   exact funext h
 
-/-- The transported tensor is the ringed-site K-flat derived tensor, including its unit.
-Source: Stacks 06YU and 07A4
-(auxiliary; not a blueprint node).
-Proof: apply the existing normalized internal_section_tensor_comparison degreewise;
-its summand equations identify the signed total tensors. Exactness preserves and
-reflects acyclicity. Thus the two acyclic K-flat tests agree, using the signed
-symmetry to interchange their test sides. On K-flat representatives the internal
-localization tensor comparison is invertible. Transport it across the equivalence.
-The local pure-tensor and regular-unit normalizations descend, so the unit is the
-regular ring sheaf placed in degree zero. Every section-module complex is
-isomorphic to a termwise image under E; naturality therefore uniquely determines
-q on every pair of complexes. -/
+/-- The transported tensor is the ringed-site K-flat derived tensor, including its unit. -/
 theorem tensor_representatives (X : Scheme.{u}) :
     ∃! q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -541,8 +513,7 @@ theorem tensor_representatives (X : Scheme.{u}) :
   rintro ⟨P, Q⟩
   exact (hq'.1 P Q).trans (hq.1 P Q).symm
 
-/-- The actual internal derived tensor comparison, obtained by localizing its mate map.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The actual internal derived tensor comparison, obtained by localizing its mate map. -/
 def internalDelta {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Functor.postcompose₂.obj (internalDerivedPullback Λ f)).obj (CondensedRing.derivedTensor Λ Y) ⟶
       (((Functor.whiskeringLeft₂ _).obj (internalDerivedPullback Λ f)).obj
@@ -550,8 +521,7 @@ def internalDelta {X Y : Scheme.{u}} (f : X ⟶ Y) :
   (CondensedRing.upperStar Λ f).leftDerivedTensorComparison
 
 /-- The derived pullback comparison, obtained by localizing the specified ordinary
-comparison and the canonical exact-functor left-derived factorization.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+comparison and the canonical exact-functor left-derived factorization. -/
 def derivedPullComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (internalDerivedPullback Λ f) ⋙ (derivedEquivalence Λ X).functor ≅
       (derivedEquivalence Λ Y).functor ⋙ derivedPullback Λ f :=
@@ -562,8 +532,7 @@ def derivedPullComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (G₁ := (equivalence Λ Y).functor) (G₂ := pullback Λ f) (pullComparison Λ f)
 
 /-- The derived pushforward comparison, via uniqueness of the K-injective right
- derived functors. Every factor is the specified resolution comparison.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+ derived functors. Every factor is the specified resolution comparison. -/
 def derivedPushComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (internalDerivedPushforward Λ f) ⋙ (derivedEquivalence Λ Y).functor ≅
       (derivedEquivalence Λ X).functor ⋙ derivedPushforward Λ f :=
@@ -576,8 +545,7 @@ def derivedPushComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option linter.unusedSectionVars false in
 /-- The canonical derived adjunction of the ordinary ringed module adjunction.
-Its left adjoint is expressed by exact localization using the canonical comparison.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Its left adjoint is expressed by exact localization using the canonical comparison. -/
 def derivedAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     derivedPullback Λ f ⊣ derivedPushforward Λ f :=
   ((adjunction Λ f).derivedAdjunction).ofNatIsoLeft
@@ -585,8 +553,7 @@ def derivedAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- The localization tensor comparison selected by its complete normalization on
 termwise equivalence images. Every complex is isomorphic to such an image, so
-naturality and the displayed normalization determine this transformation uniquely.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+naturality and the displayed normalization determine this transformation uniquely. -/
 @[local irreducible] def qTensor (X : Scheme.{u}) :
     (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -598,8 +565,7 @@ private theorem qTensor_spec (X : Scheme.{u}) :
   unfold qTensor
   exact (tensor_representatives Λ X).exists.choose_spec
 
-/-- The signed total of the fixed ordinary oplax pullback tensor comparison.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The signed total of the fixed ordinary oplax pullback tensor comparison. -/
 @[local irreducible] def totalPullComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     ((pullback Λ f).mapHomologicalComplex (ComplexShape.up ℤ)).obj
@@ -763,8 +729,7 @@ private theorem tensorComparisonDescentAll
 
 attribute [local irreducible] totalTensor
 
-/-- The specified tensor-pullback representative square, with the actual ordinary oplax mate.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The specified tensor-pullback representative square, with the actual ordinary oplax mate. -/
 def TensorPullRepresentativeCondition {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : tensor Λ Y ⋙ derivedPullback Λ f ≅
         ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X) : Prop :=
@@ -803,16 +768,7 @@ private theorem complex_resolving_whiskering
     (NatIso.prod (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))
       (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))))⟩
 
-/-- The canonical ringed tensor-pullback map is uniquely specified on representatives.
-Source: Stacks 07A4; ringedTopoiCanonicalDerivedTensorPullback
-(auxiliary; not a blueprint node).
-Proof: the normalized ordinary mate sends s tensor (m tensor n) to
-(s tensor m) tensor (1 tensor n). The direct-sum total has those components
-and the same signed differential. Compute on flat-term K-flat resolutions;
-the qTensor maps are isomorphisms there. Two-variable localization gives the
-natural isomorphism, and every pair has such resolutions, giving uniqueness.
-Exactness of pullback and the localization factor maps extend the square to
-all complex pairs, with no boundedness or flatness assumption on their terms. -/
+/-- The canonical ringed tensor-pullback map is uniquely specified on representatives. -/
 theorem tensorPullComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! d : tensor Λ Y ⋙ derivedPullback Λ f ≅
         ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X,
@@ -845,16 +801,13 @@ theorem tensorPullComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
       have : QuasiIso a := ha
       exact ⟨T, a, hT, inferInstance⟩)
 
-/-- The canonical ringed tensor isomorphism selected by its unique representative square.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The canonical ringed tensor isomorphism selected by its unique representative square. -/
 def tensorPullComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     tensor Λ Y ⋙ derivedPullback Λ f ≅
       ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X :=
   (tensorPullComparison_existsUnique Λ f).exists.choose
 
-/-- Localization of the ringed pullback compositor specified by geometric pasting.
-Source: Stacks 03D7 and 07A6
-(auxiliary; not a blueprint node). -/
+/-- Localization of the ringed pullback compositor specified by geometric pasting. -/
 def derivedPullbackComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback Λ (f ≫ g) ≅ derivedPullback Λ g ⋙ derivedPullback Λ f :=
   Functor.mapDerivedCategoryNatIso (pullbackComposition Λ f g) ≪≫

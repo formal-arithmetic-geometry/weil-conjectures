@@ -8,8 +8,13 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 
 /-! Normalized constant coefficient maps for supported scalar extension.
-Source: Stacks Project, Tags 03QP and 06YY
-(auxiliary; not a blueprint node). -/
+
+## References
+
+* [Stacks Project, Tag 03QP](https://stacks.math.columbia.edu/tag/03QP)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -17,8 +22,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The constant coefficient map adjoint to the linear map sending one to the target unit.
-Source: the constant-sheaf adjunction (auxiliary; not a blueprint node). -/
+/-- The constant coefficient map adjoint to the linear map sending one to the target unit. -/
 noncomputable def normalizedConstantMap {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (D : Scheme.{u}) :
     ordinaryFiniteConstant R D ⟶
@@ -106,10 +110,7 @@ private theorem normalizedConstantMap_apply {R S : Type (u + 1)} [CommRing R]
   exact hn
 
 /-- Construct the normalized coefficient maps by the constant-sheaf adjunction and record their
-component formulas. Proof: use the adjunction hom-equivalence to define each map from the
-terminal generator, then use naturality of the sheafification unit to transport the terminal
-formula along every étale object. Source: Stacks Project, Tags 03QP and 06YY
-(auxiliary; not a blueprint node). -/
+component formulas. -/
 theorem exists_supported_kummer_scalar_maps
     (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (φ : ULift.{u + 1} (ZMod N) →+* A)
@@ -191,12 +192,7 @@ private theorem supportedConstantUnit_apply (R : Type (u + 1)) [CommRing R]
         (ModuleCat.of R R))).app (i.Etale.op.obj U) r := by
   exact congrArg (fun f ↦ f r) (NatTrans.congr_app (supportedConstantUnit_generators R i) U)
 
-/-- Normalized coefficient maps commute with the adjunction unit on constants.
-Proof: precompose with the constant-presheaf sheafification unit. The constant-pullback
-comparison is characterized by the constants/global-sections adjunction; its unit sends
-constant generators to the same generators on the pullback object. Both composites
-therefore send r to φ(r). Source: Stacks Project, Tag 03Q1
-(auxiliary; not a blueprint node). -/
+/-- Normalized coefficient maps commute with the adjunction unit on constants. -/
 theorem supported_kummer_scalar_units_commute {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) {D T : Scheme.{u}} (i : D ⟶ T)
     (ηD : ordinaryFiniteConstant R D ⟶

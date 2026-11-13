@@ -22,8 +22,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # A supported Koszul relative detector
 
-Source: Stacks Project, Tag 0A9A, induction step.
-(blueprint: lem-pc-supported-koszul-relative-detector).
+## References
+
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
 -/
 
 @[expose] public section
@@ -101,25 +102,7 @@ private theorem stalk_subsingleton_of_restriction_zero
     (Scheme.Modules.restrictStalkNatIso U.ι ⟨x, hx⟩).app M
   exact AddCommGrpCat.subsingleton_of_isZero (hzG.of_iso i.symm)
 
-/-- The Koszul object on the affine complement detects supported objects zero on U.
-Source: Stacks Project, Tag 0A9A, affine and supported Koszul construction paragraphs.
-(blueprint: lem-pc-supported-koszul-relative-detector).
-
-Proof: Put S = T intersect (X minus U), closed in X and contained in V. Its complement
-in V is W = (U intersect V) union (V minus T), quasi-compact by quasi-separatedness,
-compactness of U, and compactness of X minus T. Apply the already stated affine
-supported perfect detector on V with support S to obtain B, perfect and quasi-coherent.
-Its extension by zero A
-is isomorphic to derived open pushforward, hence perfect and supported on S by supported
-open pushforward. Quasi-compactness of the affine inclusion and quasi-separatedness
-of X make its direct image preserve quasi-coherent cohomology. Restriction of A to U
-is zero because S is disjoint from U. For C supported on T with C restricted to U zero,
-its cohomology on V is supported on S. Exact extension-by-zero adjunction transfers
-orthogonality to all shifts of A to orthogonality of C restricted to V to all shifts
-of B. The affine Koszul detector therefore makes C restricted to V zero. Since C is
-zero on U already, stalkwise homology detection on the cover U,V makes C zero globally.
-If U is top take the zero Koszul object; if U is empty this is affine detection.
-If T is empty, every supported object is already zero. No right adjoint is used here. -/
+/-- The Koszul object on the affine complement detects supported objects zero on U. -/
 theorem exists_supported_koszul_relative_detector
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

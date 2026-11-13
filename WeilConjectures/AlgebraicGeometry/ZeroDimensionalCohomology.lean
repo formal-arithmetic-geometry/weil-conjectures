@@ -42,8 +42,7 @@ has a section through that point, by topological invariance of the étale site a
 
 ## Main statements
 
-- `AlgebraicGeometry.zero_dimensional_etale_cohomology`
-  (blueprint `lem-weil-pbc-zero-dimensional-cohomology`): the statement above.
+- `AlgebraicGeometry.zero_dimensional_etale_cohomology`: the statement above.
 - `AlgebraicGeometry.Etale.isIso_piLift_toPresheafFiber`: on a finite discrete scheme with
   separably closed residue fields, the sections of a sheaf are the product of its stalks.
 -/
@@ -76,7 +75,7 @@ lemma Scheme.discreteTopology_of_topologicalKrullDim_le_zero {k : Type u} [Field
   have := IsLocallyArtinian.of_topologicalKrullDim_le_zero hdim
   exact (IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology.1 this).2
 
-/-- Two field-valued points `a b : Spec Ω ⟶ V` of a scheme `V` étale over `S`, with the same
+/-- Two field-valued points `a b: Spec Ω ⟶ V` of a scheme `V` étale over `S`, with the same
 image point and the same composite to `S`, are equal if the residue field of `S` at their image
 is separably closed: the residue field extension at that point is then trivial. -/
 theorem Scheme.eq_of_comp_eq_of_isSepClosed {V S : Scheme.{u}} (p : V ⟶ S) [Etale p]
@@ -102,7 +101,7 @@ theorem Scheme.eq_of_comp_eq_of_isSepClosed {V S : Scheme.{u}} (p : V ⟶ S) [Et
   rw [this]
 
 /-- Let `U` be a scheme with a single point, whose residue field is separably closed, and
-`p : V ⟶ U` étale. Every field-valued point `v` of `V` lies on a section of `p`. The section
+`p: V ⟶ U` étale. Every field-valued point `v` of `V` lies on a section of `p`. The section
 is obtained over `Spec κ`, `κ` the residue field of `U`, and lifted to `U` by topological
 invariance of the étale site along the universal homeomorphism `Spec κ ⟶ U`. -/
 theorem Scheme.exists_section_of_etale_of_subsingleton {U V : Scheme.{u}} [Subsingleton U]
@@ -365,7 +364,7 @@ lemma Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero {k : Type u} [F
     inferInstance) Ω s hs F
   infer_instance
 
-/-- Blueprint `lem-weil-pbc-zero-dimensional-cohomology`: **Cohomology of zero-dimensional
+/-- **Cohomology of zero-dimensional
 schemes.** Let `C` be a separated scheme of finite type over an algebraically closed field `k`
 with `dim C ≤ 0`. Then `C` has finitely many points, and for every abelian étale sheaf `F` on
 `C`, `Hᵠ(C, F) = 0` for `q > 0` while the canonical map `H⁰(C, F) ⟶ ∏_x F_{s x}` to the

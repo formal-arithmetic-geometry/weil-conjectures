@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.SfEtaleGraphTransferTensor
 
 /-! # Proper exchange and the compactification tensor comparison
 
-Source: step 6 of `lem-sf-etale-graph-unit-tensor`; Stacks Tag 0E48.
+## References
+
+* [Stacks Project, Tag 0E48](https://stacks.math.columbia.edu/tag/0E48)
 -/
 
 @[expose] public section
@@ -387,8 +389,6 @@ private theorem exchange_tensor_geometric
 
 /-- Exchange/projection compatibility for the self-base-change square, including the
 open projection comparison, but without a graph transfer or graph unit.
-Source: `lem-sf-etale-graph-unit-tensor`, step 6; Stacks Tag 0E48
-(auxiliary; not a blueprint node).
 
 Proof in words. Expand projectionMapOfCompactification into the direct-image
 projection for c.g, the inverse open projection for c.i, and the compactification

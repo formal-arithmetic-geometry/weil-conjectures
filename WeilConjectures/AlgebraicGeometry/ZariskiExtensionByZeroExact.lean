@@ -19,15 +19,16 @@ import WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
 /-!
 # Exactness of extension by zero on the small Zariski site
 
-Source: Stacks Project, Modules on Sites, Lemma 03DJ
-(blueprint: lem-weil-pbc-zariski-extension-by-zero-exact).
-
 `U_Zar` is the localized site `(Opens.grothendieckTopology X).over U` (the opens `W ⊆ U`,
-with the coverings of `X_Zar`), and extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)` is
+with the coverings of `X_Zar`), and extension by zero `j_!: Ab(U_Zar) ⥤ Ab(X_Zar)` is
 `sheafToPresheaf ⋙ (Over.forget U).op.lan ⋙ presheafToSheaf`
 (`Functor.sheafPullbackConstruction.sheafPullback`): the left Kan extension of `F` along
 the inclusion is the presheaf `j_{p!} F` (`F(V)` for `V ⊆ U`, the empty colimit `0`
 otherwise), followed by sheafification on `X_Zar`.
+
+## References
+
+* [Stacks Project, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
 -/
 
 @[expose] public section
@@ -38,15 +39,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)`, the sheafification of `j_{p!}`, is
-additive.
-
-Source: Stacks Project, Modules on Sites, Lemma 03DJ, additivity clause
-(blueprint: lem-weil-pbc-zariski-extension-by-zero-exact).
-
-Proof: `j_!` is a left adjoint of restriction (Mathlib's
-`sheafPullbackConstruction.sheafAdjunctionContinuous`); a left adjoint between
-preadditive categories preserves finite biproducts, hence is additive. -/
+/-- Extension by zero `j_!: Ab(U_Zar) ⥤ Ab(X_Zar)`, the sheafification of `j_{p!}`, is
+additive. -/
 @[instance]
 theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
     (Functor.sheafPullbackConstruction.sheafPullback (Over.forget U) AddCommGrpCat.{u}
@@ -58,18 +52,9 @@ theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
     (Over.forget U) AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U)
     (Opens.grothendieckTopology X)).left_adjoint_additive
 
-/-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)` (additive by
+/-- Extension by zero `j_!: Ab(U_Zar) ⥤ Ab(X_Zar)` (additive by
 `zariski_extensionByZero_additive`) carries every short exact sequence to a short exact
-sequence, and in particular carries monomorphisms to monomorphisms.
-
-Source: Stacks Project, Modules on Sites, Lemma 03DJ
-(blueprint: lem-weil-pbc-zariski-extension-by-zero-exact).
-
-Proof: `j_!` is a left adjoint of restriction, hence right exact, so it preserves
-cokernels. A monomorphism of `Ab(U_Zar)` is sectionwise injective, so `j_{p!}` of it is
-sectionwise injective, and sheafification preserves finite limits, so `j_!` of it is a
-monomorphism. A short exact sequence is a mono followed by its cokernel; both are
-preserved, which gives short exactness of the image. -/
+sequence, and in particular carries monomorphisms to monomorphisms. -/
 theorem zariski_extensionByZero_exact (X : Scheme.{u}) (U : X.Opens) :
     (∀ S : ShortComplex (Sheaf ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u}),
       S.ShortExact →

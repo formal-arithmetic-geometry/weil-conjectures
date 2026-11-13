@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleMaps
 
 /-! # Explicit maps for restricted degree-zero complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -32,15 +35,7 @@ private theorem mapped_iso_inv_leg {A B C : Type*}
     Functor.map_comp, Category.assoc]
 
 /-- The explicit cone comparison carries the restricted colimit leg to the
-canonical restricted coefficient map.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-affine-single-cone-leg).
-
-Proof: Expand the inverse of the explicit cone isomorphism and the mapped cocone leg.
-The inverse factors are the single comparison, the inverse composition comparison for
-q and r_i, the composition comparison for r and c_i, and the restricted eH inverse.
-Combine the latter with the restricted colimit injection by functoriality.
-These are exactly the defining factors of rawAffineRestrictedCoefficient. -/
+canonical restricted coefficient map. -/
 theorem restrictedAffineSingleConeIso_inv_leg {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

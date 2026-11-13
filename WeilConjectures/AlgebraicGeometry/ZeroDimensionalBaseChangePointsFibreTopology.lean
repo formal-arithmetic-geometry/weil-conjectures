@@ -15,8 +15,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 
 /-! Intermediate fibre facts for zero-dimensional base change.
-Source: Stacks Project, schemes.tex Lemma 01JT and algebra.tex Lemma 00P4.
-(blueprint: new-zdbp-fibres-topology)
+
+## References
+
+* [Stacks Project, Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)
+* [Stacks Project, Tag 00P4](https://stacks.math.columbia.edu/tag/00P4)
 -/
 
 set_option linter.style.haveILetI false
@@ -29,10 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The base-changed scheme is zero-dimensional and discrete. Source: Stacks Project,
-algebra.tex Lemma 00P4. Base change preserves local quasi-finiteness and local
-Artinianness; the Artinian criterion gives discreteness and dimension at most zero.
-(blueprint: new-zdbp-fibres-topology) -/
+/-- The base-changed scheme is zero-dimensional and discrete. Base change preserves local quasi-finiteness and local
+Artinianness; the Artinian criterion gives discreteness and dimension at most zero. -/
 theorem zeroDimensional_baseChange_fibre_topology
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

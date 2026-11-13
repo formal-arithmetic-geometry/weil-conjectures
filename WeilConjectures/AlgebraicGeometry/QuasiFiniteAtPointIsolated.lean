@@ -15,8 +15,9 @@ public import Mathlib.RingTheory.ZariskisMainTheorem
 /-!
 # Quasi-finite at a point implies isolated in the fibre
 
-Source: Stacks Project, Morphisms, Lemma 01TH
-(blueprint: lem-weil-pbc-quasi-finite-at-point-isolated).
+## References
+
+* [Stacks Project, Tag 01TH](https://stacks.math.columbia.edu/tag/01TH)
 -/
 
 @[expose] public section
@@ -30,7 +31,6 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 /-- A morphism locally of finite type and quasi-finite at a point has an isolated
 point in its scheme-theoretic fibre (Stacks Project, Lemma 01TH).
-(blueprint: lem-weil-pbc-quasi-finite-at-point-isolated)
 
 Proof (Stacks 01TH, (1) implies (2), with the node's affine identifications):
 1. Unpack `IsQuasiFiniteAtPoint` (`pqf-def-quasifinite`, Stacks 01TD) to obtain affine
@@ -39,14 +39,13 @@ Proof (Stacks 01TH, (1) implies (2), with the node's affine identifications):
    to `x`; by `def-weil-pbc-ring-map-quasi-finite-at-prime`, the corresponding prime
    of the fibre ring is an open singleton.
 2. The residue field of `V` at `s = f x` is that of `S`, compatibly with its canonical
-   point map (`lem-weil-pbc-residue-field-point-naturality`). Consequently the fibre
+   point map. Consequently the fibre
    of `U → V` embeds as the open subset `p⁻¹(U)` of `X_s`, compatibly with the first
-   projection (`lem-weil-pbc-open-fibre-product`).
+   projection.
 3. Identify this fibre with the spectrum of `A ⊗[R] κ(p)` using
    `lem-weil-pbc-spec-residue-field-identification` and
-   `lem-weil-pbc-fibre-product-affine-spectra`. Uniqueness of fibre products
-   (`def-pc-fibre-product`) gives a homeomorphism onto `p⁻¹(U)` respecting projections.
-4. The homeomorphism `fiberHomeo` (`def-pc-scheme-fibre`) supplies the unique point
+   `lem-weil-pbc-fibre-product-affine-spectra`. Uniqueness of fibre products gives a homeomorphism onto `p⁻¹(U)` respecting projections.
+4. The homeomorphism `fiberHomeo` supplies the unique point
    `ξ = f.asFiber x` over `x`. It lies in `p⁻¹(U)` and corresponds to the fibre prime from step 1
    by `lem-weil-pbc-fibre-ring-primes-bijection`. Its singleton is therefore open
    in `p⁻¹(U)`, hence in `X_s` since `p⁻¹(U)` is open.
@@ -55,7 +54,7 @@ Proof (Stacks 01TH, (1) implies (2), with the node's affine identifications):
 
 The point `ξ` is Mathlib's `f.asFiber x = (f.fiberHomeo (f x)).symm ⟨x, rfl⟩`, the unique
 point of the fibre over `x` (`fiberι_asFiber`); isolation is spelled as in the landed
-consumers (`IsOpen ({f.asFiber x} : Set (f.fiber (f x)))`, STATE line QUASI-FINITE).
+consumers (`IsOpen ({f.asFiber x}: Set (f.fiber (f x)))`, STATE line QUASI-FINITE).
 -/
 theorem quasiFiniteAtPoint_isolated_in_fiber
     {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S)

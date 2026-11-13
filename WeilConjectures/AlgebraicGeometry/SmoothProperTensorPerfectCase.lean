@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore
 
 /-! # Projection comparison for perfect complexes
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9T
-(blueprint: lem-sc-smooth-proper-tensor-perfect-case).
+## References
+
+* [Stacks Project, Tag 0A9T](https://stacks.math.columbia.edu/tag/0A9T)
 -/
 
 @[expose] public section
@@ -50,11 +51,8 @@ for their canonical K-flat constructions. These choices do not change invertibil
 Finite Tor dimension is stated directly using Tor of the actual stalk-map restriction
 of scalars; the bound may depend on the point, but not on the test module.
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9T
-(blueprint: lem-sc-smooth-proper-tensor-perfect-case).
 Proof (the node's two steps):
-1. Properness implies quasi-compactness and quasi-separatedness. The projection formula
-   (lem-pc-projection-formula) gives `pf`; the displayed adjunction equation specifies
+1. Properness implies quasi-compactness and quasi-separatedness. The projection formula gives `pf`; the displayed adjunction equation specifies
    its canonical direction. Composing with the counit at the unit gives the comparison.
    Restriction to quasi-coherent derived categories and the K-flat tensor construction
    give the bookkeeping witnesses.

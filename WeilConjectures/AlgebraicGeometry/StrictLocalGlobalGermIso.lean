@@ -13,7 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-! # Invertibility of strict-local global germs
 
-Source: Stacks Project, Tags 03QO and 03Q1.
+## References
+
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
 -/
 
 @[expose] public section
@@ -83,26 +86,7 @@ private theorem globalGerm_isIso_at_closedPoint
     refine ⟨F.obj.map g.op a, ?_⟩
     rw [Φ.toPresheafFiber_w_apply, hg]
 set_option backward.isDefEq.respectTransparency false in
-/-- Global germs and pulled global germs are invertible over strict-local bases.
-
-Source: Stacks Project, etale-cohomology.tex, Tags 03QO and 03Q1 (3).
-(blueprint: lem-weil-pbc-strict-local-global-germ-iso)
-
-Proof: For a pointed etale neighbourhood of the closed point of a strictly henselian
-local scheme, shrink to an affine chart and localize at the marked prime. The local
-weakly etale algebra is the base ring (Olivier's theorem), so the neighbourhood has a
-section through the marked geometric point. Every germ is represented on a neighbourhood;
-pull its representative back along this section for surjectivity. An equality of germs
-holds on a common neighbourhood, and its section gives equality of global sections for
-injectivity. This proves invertibility of the global germ, with its naturality supplied
-by the germ naturality formula. The same argument works for a separably closed point
-field: it uses only the marked field map, not algebraic closedness. For the pulled germ,
-the inverse-image stalk identification identifies the germ with the original stalk at
-the composite point. A local ring map sends the closed B-point to the closed A-point.
-Apply the preceding pointed-section argument there with point field kappa(B); the
-inverse-image germ compatibility identifies this isomorphism with `pulledGlobalGerm`.
-Thus both natural transformations are componentwise isomorphisms and hence are isomorphisms.
-No restriction on sheaves, properness or torsion is needed. -/
+/-- Global germs and pulled global germs are invertible over strict-local bases. -/
 theorem strictLocal_globalGerm_isIso
     {A B : Type u} [CommRing A] [HenselianLocalRing A]
     [IsSepClosed (IsLocalRing.ResidueField A)]

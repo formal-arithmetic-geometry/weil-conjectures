@@ -12,7 +12,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # Exact restriction versus pinned relative restriction on one open
 
-Source: Stacks Project, Cohomology, Tags 08BV and 08HZ.
+## References
+
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
 -/
 
 @[expose] public section
@@ -31,8 +34,7 @@ variable [d : ∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The comparison on one open, constructed by uniqueness of left adjoints and
-composition of direct images. Source: Stacks, Tags 08BV and 08HZ
-(blueprint: lem-pc-relative-mv-exact-open-comparison). -/
+composition of direct images. -/
 def relativeMVExactOpenIso {X S : Scheme.{u}} (f : X ⟶ S) (W : X.Opens)
     (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).obj ((schemeDerivedDirectImage W.ι).obj
@@ -43,8 +45,7 @@ def relativeMVExactOpenIso {X S : Scheme.{u}} (f : X ⟶ S) (W : X.Opens)
       (relativeMVImageComp W.ι f).app ((derivedPullback W.ι).obj K)
 
 /-- The exact-open comparison carries the restriction unit to the pinned relative
-unit. Source: Stacks, Tag 08HZ; uniqueness of left adjoints
-(blueprint: lem-pc-relative-mv-exact-open-comparison). -/
+unit. -/
 theorem relativeMVExactOpenIso_unit {X S : Scheme.{u}} (f : X ⟶ S) (W : X.Opens)
     (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).map ((mvOpenRestrictionAdjunction X W).unit.app K) ≫
@@ -111,26 +112,7 @@ private theorem exact_nested_map_unit_isIso (X : Scheme.{u}) {W U : X.Opens}
     ((schemeOpenRestriction X U).mapDerivedCategory.map (a.unit.app K)))
   infer_instance
 
-/-- The exact-open comparison intertwines restriction along a single inclusion.
-
-Source: Stacks Project, Cohomology, Tags 08BV and 08HZ, the restricted-counit
-construction of the second Mayer--Vietoris arrow.
-(blueprint: lem-pc-relative-mv-exact-open-comparison).
-
-Proof: For any two adjunctions and a comparison L_U followed by H to L_W,
-the map defined as the transpose of the restricted U counit has composite with
-the U unit equal to the W unit. This follows by naturality of the comparison
-and the U triangle identity. Apply this observation both to exact restrictions
-and to pinned pullbacks. The uniqueness comparisons preserve their units, so
-the exact restriction followed by the W uniqueness comparison and the U
-uniqueness comparison followed by pinned restriction have equal composites
-with the exact U unit. Restriction to W sends this U unit to an isomorphism:
-open direct image is fully faithful, the U triangle identity makes restriction
-to U of its unit invertible, and exact nested restriction factors restriction
-to W through U. The W adjunction therefore makes precomposition by the U unit
-injective for maps into its direct-image objects. Cancel that unit to identify
-the maps. Apply Rf*, insert the composition comparisons on U and W, and cancel
-the comparison on U against its inverse. Empty opens and W=U are included. -/
+/-- The exact-open comparison intertwines restriction along a single inclusion. -/
 theorem relativeMVExactOpenIso_restriction {X S : Scheme.{u}} (f : X ⟶ S)
     {W U : X.Opens} (i : W ≤ U) (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).map

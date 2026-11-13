@@ -46,14 +46,8 @@ private theorem constant_unit_hom_generic
     Functor.Monoidal.εIso_inv, hη, CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- The constant coefficient comparison is the native single-degree unit comparison.
-Source: the definition of constantUnit and the monoidal unit of constant sheafification
-in blueprint thm-amb-p1-adjunction.proof.md, first-coordinate unit normalization.
-(auxiliary; not a blueprint node).
 
-Proof: the oplax unit of constantSheaf is presheafToSheaf.map(identity) followed
-by identity. Both are identities. The inverse of its monoidal unit iso is this
-oplax unit, and the single-degree functor maps it to identity. The first factor
-in constantUnit therefore cancels, leaving the stated single-degree comparison. -/
+. -/
 theorem constantUnit_hom
     (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) :
     (constantUnit A T).hom = (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom := by

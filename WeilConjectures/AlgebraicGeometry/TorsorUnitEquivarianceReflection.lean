@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Reflection of equivariance through the inverse-image unit
 
-Source: Stacks Project Tag 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-torsor-unit-equivariance-reflection)
+## References
+
+* [Stacks Project, Tag 0A5G](https://stacks.math.columbia.edu/tag/0A5G)
 -/
 
 @[expose] public section
@@ -23,26 +24,7 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- A lifted map is equivariant if its transported map is equivariant.
-Source: Stacks Project Tag 0A5G, final paragraph, action compatibility in the
-finite étale interpretation of torsors.
-(blueprint: lem-weil-pbc-torsor-unit-equivariance-reflection)
-
-Proof: For each m in M, the constant section defines natural translation
-endomorphisms a₁(m) and a₂(m) of the two original torsor sheaves. Naturality
-of the inverse-image unit and its displayed compatibility with e₁ and e₂
-show, on every section over every W, that the adjoints of
-L(a₁(m) ≫ f) ≫ e₂.hom and L(f ≫ a₂(m)) ≫ e₂.hom are equal:
-use compatibility for e₁, equivariance of φ, then compatibility for e₂.
-The adjunction bijection and cancellation of e₂.hom give equality of the
-inverse images. Injectivity of L.map on this Hom set gives
- a₁(m) ≫ f = f ≫ a₂(m). Finally the sheafification map from the constant presheaf M is locally
-surjective. Its image sieve on any coefficient section is covering.
-On each arrow in that sieve the section is the image of some m in M.
-Naturality of f and both actions reduces the desired equation there to
-the constant-section equation just proved; separatedness of T₂ glues them.
-No injectivity of individual unit components, no points of the base,
-and no surjectivity of i are used. -/
+/-- A lifted map is equivariant if its transported map is equivariant. -/
 theorem torsor_map_equivariant_of_unit
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M]

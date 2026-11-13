@@ -13,8 +13,13 @@ import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-! # Structure-sheaf pullback preserves the degree-zero class of one
 
-Source: Stacks Project, Cohomology, Tags 0FKU and 01F7.
-(blueprint: lem-sc-scalar-unit-class-pullback).
+## References
+
+* [Stacks Project, Tag 0FKU](https://stacks.math.columbia.edu/tag/0FKU)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01CA](https://stacks.math.columbia.edu/tag/01CA)
 -/
 
 @[expose] public section
@@ -60,18 +65,7 @@ private theorem augmentation_extMk {C : Type*} [Category C] [Abelian C] [HasExt 
   erw [augmentation_cocycle I, ShiftedHom.map_mk₀, ShiftedHom.mk₀_comp_mk₀]
   simp
 
-/-- The augmented section one corresponds to the scalar-unit morphism in degree-zero Ext.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7.
-(blueprint: lem-sc-scalar-unit-class-pullback).
-
-Proof: Choose an injective resolution I of the structure sheaf. Its augmentation sends
-one to a degree-zero cocycle. The definition of the map to the zeroth right derived
-functor identifies the class of this cocycle with scalarUnitCohomologyClass. The
-cocycle formula specifying moduleExtEquiv identifies its image with the Ext class of
-the augmentation, which is mk₀ of the identity of the structure sheaf. Exact restriction
-of scalars preserves mk₀ and identity morphisms. Precomposition by scalarUnitMorphism
-therefore gives mk₀ of scalarUnitMorphism. This also applies to the zero sheaf on an
-empty scheme: the augmentation and both classes are zero. -/
+/-- The augmented section one corresponds to the scalar-unit morphism in degree-zero Ext. -/
 private theorem scalar_unit_class_ext {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of k)) :
     scalarCohomologyExtEquiv f (SheafOfModules.unit X.ringCatSheaf) 0
@@ -120,22 +114,7 @@ private theorem homEquiv_unique {C D : Type*} [Category C] [Category D]
 
 -- Adjunction comparisons require unfolding several sheaf evaluation functors.
 /-- The scalar-unit coefficient morphism commutes with inverse image and the
-structure-sheaf coefficient map.
-Source: Stacks Project, Modules, Tags 0096 and 01CA; Cohomology, Tag 01F7.
-(blueprint: lem-sc-scalar-unit-class-pullback).
-
-Proof: Precompose by the constant-sheaf unit isomorphism and apply the constant-sheaf
-adjunction at the terminal open. The inverse-image comparison for constant sheaves
-is the uniqueness isomorphism of the composite constant-sheaf and inverse-image
-adjunctions. Its defining identity turns the left side into the scalar-unit map on X,
-followed by the adjoint of scalarPullbackCoefficient and the pushforward of the
-structure-sheaf coefficient map. The sectionwise characterization of the former is
-the tensor-pullback adjunction unit. The characterization in
-tensorPullbackObjUnitToUnit_isIso identifies the composite of this unit with the
-pushforward coefficient with the structure-sheaf ring map. That map sends one to one.
-Both maps from k are k-linear, so agreement on one gives agreement on every scalar.
-Invert the constant-sheaf adjunction to obtain the equality. No nonemptiness is used;
-on the empty scheme the maps have zero codomain. -/
+structure-sheaf coefficient map. -/
 private theorem scalar_unit_morphism_pullback {k : Type u} [Field k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (t : Y ⟶ X) (h : t ≫ f = g) :
@@ -220,23 +199,7 @@ private theorem scalar_unit_morphism_pullback {k : Type u} [Field k]
 
 end
 
-/-- Pullback followed by the structure-sheaf coefficient map preserves the class of one.
-Source: Stacks Project, Cohomology, Tag 01F7, and Modules, Tags 0096 and 01CA.
-(blueprint: lem-sc-scalar-unit-class-pullback).
-
-Proof: In degree zero the injective-resolution comparison is the usual identification
-of derived global sections with sections. Evaluation at one identifies the image of
-the augmented section one under scalarCohomologyExtEquiv with mk₀ of
-scalarUnitMorphism. Inverse image preserves degree-zero Ext classes. Under the
-inverse-image/direct-image adjunction, scalarPullbackCoefficient is characterized
-by the tensor-pullback adjunction unit on sections. Compose with the adjoint map
-tensorPullbackObjUnitToUnit: the tensor-pullback adjunction identity makes this the
-structure-sheaf ring map. That ring map takes one to one. The constant-sheaf
-adjunction, evaluated at the terminal open, now identifies the composite with the
-scalar-unit morphism on the destination; scalarInverseUnitIso is precisely the
-constant-unit identification in this adjunction. Naturality of the cohomology-to-Ext
-comparison in the coefficient map converts this morphism equality to the displayed
-cohomology equality. This also holds on the empty scheme, where all sections vanish. -/
+/-- Pullback followed by the structure-sheaf coefficient map preserves the class of one. -/
 theorem scalar_unit_class_pullback (k : Type u) [Field k]
     (X Y : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (t : Y ⟶ X) (h : t ≫ f = g) :

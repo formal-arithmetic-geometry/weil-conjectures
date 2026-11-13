@@ -34,7 +34,7 @@ variable (n : Type u) (S : Scheme.{u})
 noncomputable abbrev topAlgebra : Algebra Γ(S, ⊤) Γ(𝔸(n; S), ⊤) :=
   (𝔸(n; S) ↘ S).appTop.hom.toAlgebra
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
 The coordinates of `𝔸^n_S` are linearly independent over `Γ(S, ⊤)`. -/
 theorem linearIndependent_coord :
@@ -67,7 +67,7 @@ noncomputable def linearFunctions :
   letI := topAlgebra n S
   Submodule.span Γ(S, ⊤) (Set.range (coord S))
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
 The fibrewise linear functions on `𝔸^n_S` form a free `Γ(S, ⊤)`-module with basis the
 coordinates. -/
@@ -83,7 +83,7 @@ namespace AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas
 
 variable {E Z : Scheme.{u}} {c : ℕ} {p : E ⟶ Z} {z : Z ⟶ E}
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
 The coordinates of a chart `E ×_Z Vᵢ ≅ 𝔸^c_{Vᵢ}` of a linear atlas are linearly independent over
 `Γ(Vᵢ, ⊤)` (acting through the projection): the fibrewise linear functions on `E ×_Z Vᵢ` form a
@@ -108,7 +108,7 @@ theorem linearIndependent_chart_coord (A : VectorBundleAtlas c p z) (i : A.ι) :
     (ConcreteCategory.bijective_of_isIso ((A.chart i).hom.appTop)).1
   exact (AffineSpace.linearIndependent_coord _ _).map' φ (LinearMap.ker_eq_bot.2 hinj)
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
 The fibrewise linear functions on the chart `E ×_Z Vᵢ`: the `Γ(Vᵢ, ⊤)`-span of the chart
 coordinates, a free module of rank `c` with basis the coordinates. -/

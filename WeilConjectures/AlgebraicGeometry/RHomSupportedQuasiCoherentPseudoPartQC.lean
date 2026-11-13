@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCC
 
 The quasi-coherence clause of the pseudo-coherent internal-Hom lemma, obtained from the
 affine-local finite free calculation and local gluing (Stacks Project, Tag 0A6H,
-clause (1)). -/
+clause (1)).
+
+## References
+
+* [Stacks Project, Tag 0A6H](https://stacks.math.columbia.edu/tag/0A6H)
+-/
 
 @[expose] public section
 
@@ -27,11 +32,9 @@ namespace AlgebraicGeometry
 
 /-- The quasi-coherence component of the pseudo-coherent internal-Hom lemma.
 
-Source: Stacks Project, Tag 0A6H, clause (1).
 The proof is the affine-local finite-free calculation, followed by local gluing of
 quasi-coherent cohomology; it is split from the local lower-bound component so that
-the two independent conclusions can be proved separately.
-(blueprint: new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc). -/
+the two independent conclusions can be proved separately.. -/
 theorem rhom_supported_quasiCoherent_pseudo_part_qc
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

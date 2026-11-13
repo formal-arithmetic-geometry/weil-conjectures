@@ -9,7 +9,12 @@ import all WeilConjectures.AlgebraicGeometry.ShriekTensorComposition
 
 /-! # Composition coherence of proper projection maps
 
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* [Stacks Project, Tag 0DV0](https://stacks.math.columbia.edu/tag/0DV0)
 -/
 
 @[expose] public noncomputable section
@@ -311,20 +316,7 @@ private theorem projection_composition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y
 
 end SourceConvention
 
-/-- The canonical projection formula commutes with composition of proper maps.
-Source: Stacks Project, Tags 0B56 and 0DV0; the concrete compactification calculation in
-WeilConjectures.AlgebraicGeometry.ShriekTensorComposition, projectionMap_chosen_comp
-(auxiliary; not a blueprint node).
-
-Proof: first take r = f ≫ g. The concrete chosen-compactification projection square says
-π_g; G(π_f); E = T(E); π_(fg); H(T(l)), where E is
-unboundedEtaleLowerShriekCompIso and l is leftDerivedUpperStarComp. Expanding the three
-comparison factors identifies E with the inverse of rightDerivedLowerShriekCompIso.
-Precompose with T(C.hom), postcompose with C.hom, and cancel inverse pairs to get the
-forward square below. Replace projectionMap.app by projectionIso.hom; the latter is the
-asIso of exactly that map. For arbitrary r and hr, eliminate hr. The equality comparison
-then becomes the identity isomorphism, so its extra factors disappear. This argument
-neither specializes to a section nor uses a tensor unit or an identity projection law. -/
+/-- The canonical projection formula commutes with composition of proper maps. -/
 theorem properProjectionCompositionOfEq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (r : X ⟶ Z) [IsProper f] [IsProper g] [IsProper r] (hr : r = f ≫ g)
     (V : DerivedCategoryModule A X) (M : DerivedCategoryModule A Z) :

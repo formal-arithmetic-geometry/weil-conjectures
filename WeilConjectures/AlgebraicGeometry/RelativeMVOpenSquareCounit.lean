@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVOpenSquareCoefficientCoherenc
 
 /-! # Restricting the counit in a single open base-change square
 
-Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 0D5S.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -88,21 +92,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The pinned derived adjunctions require a larger elaboration and kernel budget.
 /-- The single open-square counit calculation. There is no structure morphism `f`
-or second base-change morphism `g`, and no relative direct image to a base.
-Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 0D5S.
-(blueprint: new-relative-mv-open-square-counit).
-Proof: Transpose the base-change map for U → X using its defining 08HY formula.
-The target restriction counit is the transpose after the comparison for W' → U' → X'.
-Naturality moves the base-change morphism through the inverse comparison. The
-triangle identity cancels the U'-adjunction unit, leaving the pullback of the
-U-adjunction counit and the U coefficient comparison. Associativity of the
-canonical pullback comparisons on W → U → X and W' → U' → X', together with
-both projection identities of relativeMVOpenLift, identifies these factors with
-the W coefficient comparison, the pulled-back inverse W → U → X comparison,
-the pulled-back U-counit, and the W coefficient comparison at K. Scheme.homOfLE_ι
-identifies the open composite, and proof irrelevance identifies all equality
-transports. The inverse W coefficient comparison is then canceled. This argument
-uses neither strictness nor nonemptiness of the opens and works also for K = 0. -/
+or second base-change morphism `g`, and no relative direct image to a base. -/
 theorem relativeMV_open_square_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

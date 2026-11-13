@@ -10,7 +10,12 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import all WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 import WeilConjectures.AlgebraicGeometry.SplitProEtaleAbelianProductMap
 
-/-! # The canonical product map over a split finite cover -/
+/-! # The canonical product map over a split finite cover
+
+## References
+
+* [Stacks Project, Tag 095B](https://stacks.math.columbia.edu/tag/095B)
+-/
 
 @[expose] public section
 
@@ -152,10 +157,6 @@ private theorem moduleProduct_from_abelian
   exact isIso_of_reflects_iso qM V
 
 /-- The counit maps to the sheets of a split finite cover form an isomorphism.
-
-Source: Stacks Project, Tag 095B, proof by sections over a split finite cover; the
-weakly etale base-change argument for the pro-etale site.
-(auxiliary; not a blueprint node)
 
 Proof in words. Compute inverse image along the weakly etale map g by restriction
 along the localization functor of pro-etale sites. For a test W over Y, the assumed

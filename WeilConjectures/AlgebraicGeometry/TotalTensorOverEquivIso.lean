@@ -12,9 +12,11 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Total tensor comparison for the open-site equivalence
 
-Source: Stacks Project, Tags 06YN and 08DJ, ordinary tensor totalization;
-Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-total-tensor-over-equiv-iso). -/
+## References
+
+* [Stacks Project, Tag 06YN](https://stacks.math.columbia.edu/tag/06YN)
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+-/
 
 @[expose] public section
 
@@ -42,22 +44,7 @@ noncomputable local instance totalTensorSchemePreadditive (X : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} X.ringCatSheaf) :=
   Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
 
-/-- The degreewise open-site equivalence commutes with the actual total tensor.
-Source: Stacks Project, Tags 06YN and 08DJ; Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-total-tensor-over-equiv-iso).
-
-Proof: use `exists_localizedOpen_tensor_equivalence` for the natural comparison
-L(A tensor B) -> L(A) tensor L(B) on sheaves. Apply it in each bidegree of the
-bicomplex. Its naturality with the identity on the first factor identifies the
-vertical differential, and naturality with the identity on the second identifies
-the horizontal differential. Form the bicomplex isomorphism by two applications
-of `HomologicalComplex.Hom.isoOfComponents`. The equivalence is additive and
-preserves coproducts, so `HomologicalComplex₂.mapTotalIso` identifies the image
-of the total complex with the total of the image bicomplex. Compose its inverse
-with `HomologicalComplex₂.total.mapIso` of the bicomplex comparison. Totalization
-handles the signed vertical differential. There is no boundedness assumption:
-all coproducts in each total degree are preserved by the equivalence. Zero
-complexes, zero rings and the empty open use the same construction. -/
+/-- The degreewise open-site equivalence commutes with the actual total tensor. -/
 theorem exists_totalTensor_overEquiv_iso (X : Scheme.{u}) (U : X.Opens)
     (A K : CochainComplex (localEvaluationModules X U) ℤ) :
     let L := Equivalence.functor

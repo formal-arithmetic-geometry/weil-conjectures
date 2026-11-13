@@ -9,10 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 
 /-! # Compatibility of stalk comparison with a second open restriction
-
-Source: lem-pc-finite-free-stalk-degreewise-shrink, step 3, expanding
-lem-pc-perfect-locus's finite matrix calculation.
-(blueprint: lem-pc-stalk-restriction-subopen-compatibility)
 -/
 
 @[expose] public section
@@ -137,25 +133,7 @@ private theorem restrict_stalk_triangle {A B C D : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The stalk of the restriction of a component map is its original stalk conjugated
-by the canonical comparisons. No chain equations or finiteness are required.
-
-Source: lem-pc-finite-free-stalk-degreewise-shrink, step 3, and the comparison
-calculation in lem-pc-finite-free-stalk-chain-map-lift-restrict.
-
-Proof: Write j for V -> U and C for the comparison of restriction to V with
-restriction first to U and then along j. Replace restrictions by pullbacks using
-restrictFunctorIsoPullback. The equality V.fromSpecStalkOfMem >> j =
-U.fromSpecStalkOfMem follows by cancelling the open inclusion U -> Y and using
-fromSpecStalkOfMem_ι twice. Pullback composition gives a comparison D between
-restriction along j followed by stalk pullback and stalk pullback through U.
-The associativity law for pullback composition identifies the composite of the
-stalk pullback of C with D with E_V followed by E_U inverse. The compatibility
-of restriction-to-pullback comparisons with composition follows from their
-adjunction units (equivalently uniqueness of left adjoints to the common
-pushforward). Apply naturality of D to f and cancel inverse/hom pairs. Taking
-the n-th component gives the displayed equation. This also covers U = V,
-zero objects, and arbitrary maps between the indicated terms.
-(blueprint: lem-pc-stalk-restriction-subopen-compatibility) -/
+by the canonical comparisons. No chain equations or finiteness are required. -/
 theorem stalkRestrictionComplexIso_map_subopen
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (y : Y) (U V : Y.Opens) (hyU : y ∈ U) (hyV : y ∈ V) (hVU : V ≤ U)

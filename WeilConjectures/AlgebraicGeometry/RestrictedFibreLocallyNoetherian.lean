@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Locally noetherian fibres over a finitely presented restriction
 
-Source: Stacks Project, Tag 054U, fibre topology in the proof.
-(blueprint: lem-sbc-restricted-fibre-locally-noetherian)
+## References
+
+* [Stacks Project, Tag 054U](https://stacks.math.columbia.edu/tag/054U)
 -/
 
 @[expose] public section
@@ -22,14 +23,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Fibres over the open where a morphism is locally finitely presented are locally noetherian.
-Source: Stacks Project, Tag 054U and the finite-type-over-a-field fibre argument.
-Proof: the restriction is locally of finite type. Its fibre over the point of U
-corresponding to t is locally of finite type over the residue field, so is locally
-noetherian. The residue field of U at t is canonically the residue field of T at t.
-Pullback associativity therefore identifies the restricted fibre with f.fiber t.
-The isomorphism preserves local noetherianity. No assertion is made outside U.
-(blueprint: lem-sbc-restricted-fibre-locally-noetherian) -/
+/-- Fibres over the open where a morphism is locally finitely presented are locally noetherian. -/
 theorem isLocallyNoetherian_fibre_of_finite_presentation_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [LocallyOfFinitePresentation (f ∣_ U)] (t : T) (ht : t ∈ U) :

@@ -11,8 +11,10 @@ public import Mathlib.CategoryTheory.Sites.Precoverage
 /-!
 # A family isomorphic to a covering is a covering
 
-Source: literature/stacks-project/sites.tex, Definition 00VH and Definition 00VU
-(blueprint: lem-weil-pbc-site-covering-isomorphic-family)
+## References
+
+* [Stacks Project, Tag 00VH](https://stacks.math.columbia.edu/tag/00VH)
+* [Stacks Project, Tag 00VU](https://stacks.math.columbia.edu/tag/00VU)
 -/
 
 @[expose] public section
@@ -25,22 +27,6 @@ namespace CategoryTheory
 
 /-- A family of arrows isomorphic over its target to a covering family is covering
 up to a bijective reindexing, and hence is covering after reindexing.
-
-Proof (blueprint: lem-weil-pbc-site-covering-isomorphic-family):
-1. Base change the covering `g` along `φ` using
-   `Precoverage.IsStableUnderBaseChange` and the chosen pullbacks supplied by
-   `Precoverage.HasPullbacks`.
-2. For each index, the commuting square formed by `σ a` and `φ` is a pullback:
-   its universal factorization is obtained by composing with the inverses of
-   these isomorphisms.
-3. The chosen pullback and `(Vₐ a, σ a, f a)` are therefore uniquely
-   isomorphic, with the projection to `V` identified with `f a`.
-4. Each comparison isomorphism is a singleton covering by `HasIsos`; composing
-   these singleton coverings with the base-changed covering uses
-   `IsStableUnderComposition`.
-5. The resulting indexing type is a sigma type of singleton indices, hence is
-   bijective with `A`; this gives the reindexed covering. Presieves identify
-   bijective reindexings, giving the final covering clause.
 -/
 theorem site_covering_isomorphic_family
     {C : Type u} [Category.{v} C] (J : Precoverage C)

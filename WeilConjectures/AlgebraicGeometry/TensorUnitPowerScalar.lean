@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 /-! # Tensor-unit powers and scalar multiplication
 
-Source: Stacks Project, Tag 09MR, tensor-unit specialization of numerator maps.
-(blueprint: lem-pc-tensor-unit-power-scalar).
+## References
+
+* [Stacks Project, Tag 09MR](https://stacks.math.columbia.edu/tag/09MR)
 -/
 
 @[expose] public section
@@ -50,20 +51,7 @@ private theorem unitPowerIso_section (Y : Scheme.{u}) (b : Γ(Y, ⊤))
     rw [homOfGlobalSection_app_one, presheaf_map_unitSectionsEquiv,
       leftUnitor_hom_app_tmulSection, ← LinearEquiv.map_smul, smul_eq_mul, pow_succ']
 
-/-- Tensor powers of the unit can be removed compatibly with the numerator transition.
-
-Source: Stacks Project, Tag 09MR, numerator maps specialized to the tensor unit.
-(blueprint: lem-pc-tensor-unit-power-scalar).
-
-Proof: Identify unit^0 with the unit by the identity, and identify unit^(n+1)
-with the unit by tensoring the preceding identification with the identity and
-applying the left unitor. Induction shows that the section s^n goes to b^n.
-Tensor these isomorphisms with G and apply the right unitor. Precompose the
-claimed equation with the inverse of the degree-zero right unitor. A section x
-then goes to x tensor 1; the numerator map takes it to x tensor s^n. The
-identification takes this to b^n x, as does smulHom. Equality on all sections
-proves equality of the sheaf morphisms. This includes n=0, b=0, b a unit,
-empty Y, and zero G. -/
+/-- Tensor powers of the unit can be removed compatibly with the numerator transition. -/
 theorem tensorUnitPower_scalar (Y : Scheme.{u}) (G : Y.Modules) (b : Γ(Y, ⊤)) :
     let L := 𝟙_ Y.Modules
     let s : Γ(L, ⊤) := unitSectionsEquiv ⊤ b

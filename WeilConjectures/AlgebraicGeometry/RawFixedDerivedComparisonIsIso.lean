@@ -8,7 +8,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RawFixedDerivedComparison
 
-/-! # Invertibility of fixed-coefficient raw evaluation -/
+/-! # Invertibility of fixed-coefficient raw evaluation
+
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 0GIT](https://stacks.math.columbia.edu/tag/0GIT)
+-/
 
 @[expose] public section
 
@@ -17,13 +23,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- Fixed-coefficient raw evaluation is invertible, including empty charts.
-Source: Stacks Project, Tags 03Q8 and 0GIT.
-(blueprint: lem-sc-raw-fixed-derived-comparison-is-iso).
-
-Proof: The raw derived evaluation is an isomorphism. Its second factor is the
-image, under cohomology, of the inverse of the canonical derived composition
-isomorphism. A functor preserves isomorphisms, as does composition. -/
+/-- Fixed-coefficient raw evaluation is invertible, including empty charts. -/
 theorem isIso_rawFixedDerivedComparison {B T Y : Scheme.{u}}
     (h : Y ⟶ B) (g : Y ⟶ T)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))

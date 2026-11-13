@@ -20,8 +20,13 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-! # Canonical comparison maps for square-zero tensor boundaries
 
-Source: Stacks Project, Tags 09MS, 08KS, and 01XC.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit).
+## References
+
+* [Stacks Project, Tag 09MS](https://stacks.math.columbia.edu/tag/09MS)
+* [Stacks Project, Tag 08KS](https://stacks.math.columbia.edu/tag/08KS)
+* [Stacks Project, Tag 01XC](https://stacks.math.columbia.edu/tag/01XC)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
 -/
 
 @[expose] public section
@@ -34,15 +39,13 @@ universe u
 attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
-/-- The adjunction comparison with Mathlib pullback. Source: Stacks Tag 0096.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The adjunction comparison with Mathlib pullback. -/
 def boundaryPullbackComparison {X Z : Scheme.{u}} (j : Z ⟶ X) :
     tensorPullback j ≅ pullback j :=
   (Classical.choose (exists_tensorPullbackAdjunction j)).leftAdjointUniq
     (pullbackPushforwardAdjunction j)
 
-/-- The tensor comparison induced by the monoidal Mathlib pullback.
-Source: Stacks Tag 01CD. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The tensor comparison induced by the monoidal Mathlib pullback. -/
 def boundaryPullbackTensorIso {X Z : Scheme.{u}} (j : Z ⟶ X) (A B : X.Modules) :
     (tensorPullback j).obj (A ⊗ B) ≅
       (tensorPullback j).obj A ⊗ (tensorPullback j).obj B :=
@@ -51,15 +54,13 @@ def boundaryPullbackTensorIso {X Z : Scheme.{u}} (j : Z ⟶ X) (A B : X.Modules)
     (((boundaryPullbackComparison j).app A).symm ⊗ᵢ
       ((boundaryPullbackComparison j).app B).symm)
 
-/-- Tensor powers of an isomorphism, including exponent zero.
-Source: Stacks Tag 01CD. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- Tensor powers of an isomorphism, including exponent zero. -/
 def boundaryTensorPowIso {Z : Scheme.{u}} {A B : Z.Modules} (t : A ≅ B) :
     ∀ d : ℕ, A.tensorPow d ≅ B.tensorPow d
   | 0 => Iso.refl _
   | d + 1 => t ⊗ᵢ boundaryTensorPowIso t d
 
-/-- The degreewise pullback comparison, with the canonical unit comparison in degree zero.
-Source: Stacks Tag 01CD. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The degreewise pullback comparison, with the canonical unit comparison in degree zero. -/
 def boundaryPullbackPowIso {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules) :
     ∀ d : ℕ, (tensorPullback j).obj (L.tensorPow d) ≅
       ((tensorPullback j).obj L).tensorPow d
@@ -67,8 +68,7 @@ def boundaryPullbackPowIso {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules) :
   | d + 1 => boundaryPullbackTensorIso j L (L.tensorPow d) ≪≫
       (Iso.refl _ ⊗ᵢ boundaryPullbackPowIso j L d)
 
-/-- The section-degree comparison. Source: Stacks Tag 09MS, graded ideal sequences.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The section-degree comparison. -/
 def boundarySectionDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (n e : ℕ) :
     (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅
@@ -77,8 +77,7 @@ def boundarySectionDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     ((tensorPullback j).obj L).tensorPowMulIso n (e + 1)
 
 /-- The coefficient-degree comparison uses the generic tensor comparison, since the ideal
-need not be invertible. Source: Stacks Tags 01CD and 09MS.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+need not be invertible. -/
 def boundaryCoefficientDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (n e : ℕ) :
     (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow (n * (e + 1))) ≅
@@ -91,12 +90,7 @@ def boundaryCoefficientDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     (Iso.refl _ ⊗ᵢ (boundaryPullbackPowIso j (L.tensorPow n) e ≪≫
       boundaryTensorPowIso (boundaryPullbackPowIso j L n) e))
 
-/-- The multiplication inclusion is the kernel, with its canonical inclusion equation.
-Source: Stacks Tags 08KS and 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit).
-Proof: the unit quotient theorem identifies its kernel with the image of multiplication.
-Twisting the ideal inclusion by an invertible module is mono, so multiplication equals
-its image up to the unique image isomorphism. Transport the limiting kernel fork along
-that isomorphism, and compare adjunction units by uniqueness of left adjoints. -/
+/-- The multiplication inclusion is the kernel, with its canonical inclusion equation. -/
 theorem boundaryIdealKernelIso_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) [M.IsInvertible] :
     ∃ t : j.ker.toModules ⊗ M ≅
@@ -123,7 +117,7 @@ theorem boundaryIdealKernelIso_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     (kernelIsKernel (adj'.unit.app M)) WalkingParallelPair.zero
 
 /-- The kernel comparison is determined by its inclusion equation; no unspecified object
-is selected. Source: Stacks Tag 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+is selected. -/
 def boundaryIdealKernelIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) [M.IsInvertible] :
     j.ker.toModules ⊗ M ≅
@@ -131,15 +125,7 @@ def boundaryIdealKernelIso {X Z : Scheme.{u}} (j : Z ⟶ X)
   Classical.choose (boundaryIdealKernelIso_exists j M)
 
 /-- Square-zero annihilation makes the adjunction unit on every ideal tensor power invertible.
-This statement concerns modules only, with no cohomology, section, or derivation assertion.
-
-Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit).
-Proof: on an affine open where L is free of rank one, identify I tensor L^d with I.
-Multiplication by I is then zero because I squared is zero. This local calculation glues,
-so I annihilates I tensor L^d on every open. The ideal is quasi-coherent, and twisting
-by an invertible module preserves quasi-coherence. Apply the annihilated-module unit
-isomorphism for the closed immersion. Degree zero is the right unitor case. -/
+This statement concerns modules only, with no cohomology, section, or derivation assertion. -/
 theorem square_zero_ideal_tensor_unit_isIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (d : ℕ) :
@@ -204,8 +190,7 @@ theorem square_zero_ideal_tensor_unit_isIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     exact hn ▸ hm
 
 /-- The cohomology comparison is constructed from the coefficient isomorphism, the inverse
-closed-immersion edge, the inverse annihilated-module unit, and the kernel inclusion.
-Source: Stacks Tags 09MS and 01XC. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+closed-immersion edge, the inverse annihilated-module unit, and the kernel inclusion. -/
 def boundaryCoefficientCohomologyIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ) :
@@ -243,8 +228,7 @@ def boundaryCoefficientCohomologyIso {X Z : Scheme.{u}} (j : Z ⟶ X)
       HX.mapIso (boundaryIdealKernelIso j (L.tensorPow (n * (e + 1)))))
   exact k
 
-/-- A package of the section and coefficient comparison maps, including degree zero.
-Source: Stacks Tag 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- A package of the section and coefficient comparison maps, including degree zero. -/
 structure TensorBoundaryComparisonData {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (n : ℕ) where
   a : ∀ e : ℕ, (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅
@@ -257,8 +241,7 @@ structure TensorBoundaryComparisonData {X Z : Scheme.{u}} (j : Z ⟶ X)
       (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
         (L.tensorPow (n * (e + 1))))))
 
-/-- The package is built from the explicit comparison constructions.
-Source: Stacks Tag 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The package is built from the explicit comparison constructions. -/
 def canonicalTensorBoundaryComparisons {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) : TensorBoundaryComparisonData j L n where

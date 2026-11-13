@@ -14,7 +14,13 @@ import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.RingComplexGodementCech
 import WeilConjectures.AlgebraicGeometry.RingComplexOrderedScalarIso
 
-/-! # Scalar extension of an augmented ordered localization model -/
+/-! # Scalar extension of an augmented ordered localization model
+
+## References
+
+* [Stacks Project, Tag 0ALZ](https://stacks.math.columbia.edu/tag/0ALZ)
+* [Stacks Project, Tag 099D](https://stacks.math.columbia.edu/tag/099D)
+-/
 
 @[expose] public section
 
@@ -187,32 +193,7 @@ private theorem augmented_iso_of_good_quasiIso
   simpa only [u, z, Category.assoc] using hhom.symm.compLeft q
 
 /-- Scalar extension of a K-flat augmented Čech model has the image-ideal Čech model,
-with its augmentation normalized on the actual sheafification unit.
-Source: Stacks Project, dualizing.tex, Tag 0ALZ, and algebraization.tex, Tag 099D(c).
-(auxiliary; not a blueprint node)
-
-Proof: define the augmentation by extending the semilinear map obtained from εP and φ;
-the extension/restriction adjunction gives its stated value on 1 tensor x. Choose finite
-generators f of I. The ordered localization complex C(f) is bounded and termwise flat:
-its terms are finite products of flat localizations, and increasing tuples do not exist
-above the length of f. Thus C(f) is K-flat. Represent the augmented derived isomorphism
-between C(f) and P by a common cochain roof, and take a K-flat resolution of the roof's
-source. Its two legs are quasi-isomorphisms between K-flat complexes. Termwise scalar
-extension preserves both legs by changeOfRings_kFlat_quasiIso. The augmented equations
-also survive this operation: a derived equality can be checked after a further common
-roof refinement, followed by a K-flat resolution; cochain homotopies are preserved by
-the additive extension functor. For each product g of generators, use the localization
-isomorphism B tensor_A A[1/g] = B[1/φ(g)], sending b tensor a/g^n to bφ(a)/φ(g)^n.
-Its inverse sends b/φ(g)^n to b tensor 1/g^n. These maps commute with the face maps,
-alternating differentials, and augmentations, so the resulting augmented derived object
-is C(φ(f)). For any other generating list of J, use the common refinement of the two
-principal-open covers of Spec(B) minus V(J): the augmented Čech comparison is a
-quasi-isomorphism: its iterated localization rows are augmented-exact, because the
-other generating list generates the unit ideal after localization. Exactness follows
-by clearing finitely many denominators and expressing one as a sum of generator powers.
-This gives the model property for every list, as required by RingComplexHasCechModel.
-Empty lists give the ring in degree zero;
-localization at zero is zero. The same constructions therefore include both cases. -/
+with its augmentation normalized on the actual sheafification unit. -/
 theorem ringComplex_cech_scalar_model
     (A B : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]
     [HasDerivedCategory.{w} (RingSiteModules B)] (φ : A →+* B)

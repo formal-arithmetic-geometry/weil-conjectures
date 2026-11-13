@@ -14,8 +14,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # The explicit module-to-abelian comparison for unit coefficients
 
-Source: Stacks Project, Tag 03FD.
-(blueprint: new-sc-scalar-unit-comparison-family).
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -27,9 +28,7 @@ open Modules
 
 /-- Forget a module Ext class and precompose with the constant-integer class of the
 unit section. The source is the underlying additive group of restricted-scalar cohomology;
-thus this construction is independent of the structure morphism to the field.
-Source: Stacks Project, Tag 03FD, and the constant-sheaf adjunction.
-(blueprint: new-sc-scalar-unit-comparison-family). -/
+thus this construction is independent of the structure morphism to the field. -/
 noncomputable def scalarUnitAbelianComparison (X : Scheme.{u}) :
     ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj
       (SheafOfModules.unit X.ringCatSheaf)) →+ Sheaf.H (structureSheafAb X) 1 := by
@@ -213,19 +212,7 @@ private theorem unitExtComparison_one_bijective (X : Scheme.{u})
   refine ⟨z.comp hS.extClass (zero_add 1), ?_⟩
   rw [hδ, hz, hy]
 
-/-- The explicit comparison is bijective; no assertion about pullbacks is made here.
-Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: new-sc-scalar-unit-comparison-family).
-
-Proof: Resolve the unit module by injective module sheaves. Forgetting to abelian sheaves
-is exact and the forgotten injectives are acyclic for sections by Tag 03FD. Consequently
-both derived sections groups are computed by the same underlying additive sections complex.
-The module Ext comparison evaluates a morphism from the unit at its section 1, as specified
-by exists_moduleExtEquiv. After forgetting modules, precomposition with the integer-unit
-class does exactly the same evaluation: the constant-sheaf adjunction sends that class to 1.
-Thus scalarUnitAbelianComparison is the common-resolution comparison on degree-one homology,
-which is an isomorphism. This also handles the empty scheme, whose sections complex is zero;
-no nonemptiness or finiteness assumption is used. -/
+/-- The explicit comparison is bijective; no assertion about pullbacks is made here. -/
 theorem scalar_unit_abelian_comparison_bijective (X : Scheme.{u}) :
     Function.Bijective (scalarUnitAbelianComparison X) := by
   let : EnoughInjectives (SheafOfModules.{u} X.ringCatSheaf) :=

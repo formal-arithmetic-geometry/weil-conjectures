@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.ResolutionSectionsHomologyScalar
 
 /-! # Scalar compatibility of the normalized resolution class
 
-Source: Stacks Project, Tags 01E4, 01E5 and 03FD.
-(blueprint: lem-pc-resolution-section-scalar-map)
+## References
+
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 01E5](https://stacks.math.columbia.edu/tag/01E5)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -31,19 +34,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
 -- Explicit section comparisons require unfolding several categorical functor composites.
 /-- The canonical section class map intertwines multiplication endomorphisms.
-No Ext comparison, affine open, finiteness or quasi-coherence is assumed.
-Source: Stacks Project, Tags 01E4 and 01E5; naturality of derived functors.
-(blueprint: lem-pc-resolution-section-scalar-map)
-
-Proof: Module-valued derived global sections take multiplication by b on the module
-M to scalar multiplication on cohomology, by moduleCohomology_map_smulHom. The
-module-valued resolution comparison e is linear, so it preserves b. The middle
-three arrows T preserve the pulled-back scalar by resolutionSectionsHomology_scalar.
-The evaluated sectionCohomologyTheta is a module morphism and hence preserves a;
-the same holds for the final inverse resolution comparison. Compose these four
-pointwise equalities. No comparison of lifts or vanishing argument is needed.
-Degree zero is multiplication on sections, and empty opens and zero modules are
-covered by the same module and homology maps. -/
+No Ext comparison, affine open, finiteness or quasi-coherence is assumed. -/
 theorem resolutionSectionClass_map_smulHom
     {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)
     (p : ℕ) (V : S.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) :

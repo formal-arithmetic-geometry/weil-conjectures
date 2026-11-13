@@ -19,8 +19,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Affine normalized self-Tor coordinates
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e1-self-tor-nested-affine-coordinates). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -118,38 +122,7 @@ private theorem exterior_over_component_ext_le
 set_option backward.isDefEq.respectTransparency false in
 /-- Choose affine source and target coordinates using quotient resolutions and conormal
 classes. The conjugated comparisons agree on the whole smaller affine chart's sections.
-No assertion on an arbitrary subopen, an incomparable overlap or a global map is made.
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e1-self-tor-nested-affine-coordinates).
-
-Proof: On U = Spec A use the quotient presentation defined by i.ker.ideal U and a
-projective resolution P of A/I. Apply exists_affine_quotient_sheafified_resolution to its
-augmentation. Its tensor with A/I computes the restriction of the fixed derived tensor:
-termwise projectives sheafify to flat modules, the bounded-above cochain resolution is
-K-flat, and comparison with a K-flat model gives the same homology. The quotient action
-on this homology identifies its tensor pullback with the associated Tor module on the
-closed affine chart. This gives t_U. The conormal sections theorem identifies i*ker(i)
-with the associated I/I², preserving the class of each ideal section. Applying the
-exterior universal property and sheafification gives s_U. Use these specific coordinates,
-rather than arbitrary isomorphisms. For V affine inside U, cover V by principal opens
-of U lying in V, then refine each by principal opens of V. Quotient resolutions and
-the conormal unit localize. Flat localization commutes with resolution homology, and
-sends the normalized algebraic comparison to the normalized comparison: apply its
-Koszul normalization on tuples of ideal elements and extend by multilinearity to
-localized tuples. Uniqueness of the normalized comparison identifies the two products.
-The chosen resolution identifications commute with these comparison maps in the
-derived category, independently of the resolutions. Thus the conjugated comparisons
-have identical images of pure wedges on each refinement. Those wedges generate the
-localized exterior modules; the target sheaf's separatedness then identifies their
-values on all sections over i^-1 V. This is exactly the displayed nested top-component
-equation. Degree zero uses the empty wedge and the quotient unit; the empty chart,
-zero quotient, zero ideal and nonregular ideals require no exceptions.
-
-Lean reduction: exists_local_wedge_selfTor_coordinates supplies the coordinates and
-local agreement only on pure wedges. The proved exterior_over_component_ext helper
-extends that agreement by span induction on sections of the exterior presheaf,
-local surjectivity of the sheafification unit, and separatedness of the target.
-Thus the general-section and top-component part of the argument is proved here. -/
+No assertion on an arbitrary subopen, an incomparable overlap or a global map is made. -/
 theorem exists_nested_affine_selfTor_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

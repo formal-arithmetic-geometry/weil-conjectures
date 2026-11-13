@@ -11,8 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 
 /-! # Pullback of tensor-power concatenation with one factor
 
-Source: Stacks Project, Tag 01CD, functorial pullback of tensor products.
-(blueprint: lem-sc-tensor-pullback-power-append).
+## References
+
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks Project, Tag 09MS](https://stacks.math.columbia.edu/tag/09MS)
 -/
 
 @[expose] public section
@@ -25,23 +27,7 @@ universe u
 attribute [local irreducible] tensorPullback boundaryPullbackComparison
 
 /-- The recursive pullback comparison preserves appending a single tensor factor.
-This has no block size, coefficient object, section, ideal, or square-zero hypothesis.
-Source: Stacks Project, Tag 01CD, the functorial tensor comparison, with its
-associator and unit coherence; Tag 09MS, the tensor powers in coherent-equation-ses.
-(blueprint: lem-sc-tensor-pullback-power-append).
-Proof: Use the proved private pullback_power_add of BoundaryCoefficientDegreeSplit
-at exponents e and 1. Transport the monoidal structure across
-boundaryPullbackComparison and use pullback_monoidal_unit_comparison to identify
-the degree-zero inverse comparison with the transported unit map. Monoidal right
-unitality then identifies the inverse right unitor followed by the degree-one
-inverse comparison with the pullback of the inverse right unitor of B. Precompose
-the required equation with the invertible degree-e comparison tensored with the
-identity of the final factor. Tensorator naturality moves the appended inverse
-right unitor through pullback; whisker exchange and the degree-one identity turn
-this into the left side of pullback_power_add at e and 1. Apply that identity and
-cancel the degree-(e+1) inverse comparison with its hom. The existing addition
-identity includes e=0, and right unitality applies to every B, including the unit;
-no invertibility or positivity hypothesis is needed. -/
+This has no block size, coefficient object, section, ideal, or square-zero hypothesis. -/
 theorem boundaryPullbackPowIso_append {X Z : Scheme.{u}} (j : Z ⟶ X)
     (B : X.Modules) (e : ℕ) :
     (boundaryPullbackTensorIso j (B.tensorPow e) B).inv ≫

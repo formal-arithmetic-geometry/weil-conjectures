@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ProjChartPullbackFractionRelation
 
 /-! # Clearing denominators between section-ring charts
 
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-section-ring-chart-cross-multiplication).
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
 -/
 
 @[expose] public section
@@ -23,28 +25,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The numerator identity after clearing the second-chart denominator.
-Source: Stacks Project, Constructions, Tag 01N8, comparison on overlapping charts;
-Tag 01NK, passage between different positive degrees.
-(blueprint: lem-sc-section-ring-chart-cross-multiplication).
-
-Proof: Put k=n*(d-1), i=n*e and j=k*e. Then i+j=n*e*d.
-On the chart intersection let r=t^d/s^e and η=ξ*t^k, so η has degree n*e*d.
-The homogeneous-localization identity (ξ/t^n)*r^n=η/s^(n*e) follows by
-multiplying numerators and denominators: n+k=n*d. Restrict this identity to
-the intersection and pull it back along q. The chart restriction on the
-s-side is localization at r; its map on sections agrees with ρ by hq.
-Use hρ with exponent n*e and numerator η, and with exponent e and numerator t^d.
-Locally write s=b*z^d and t=c*z^e in a basis z of L, where b is a unit.
-The pulled-back identity becomes a*(c^d/b^e)^n=η_coeff/b^(n*e), where a is
-exactly the displayed pullback of ξ/t^n. Multiply by the unit b^(n*e):
-a*c^(n*d)=η_coeff. Tensor multiplication identifies c^(n*d)*z^(n*e*d)
-with the displayed tensor of t^n and t^k through tensorPowAddIso.
-Thus the cleared identity holds locally. Naturality of tensor sections and
-of tensorPowAddIso lets these equalities glue on the ambient image W.
-This argument does not cancel c or assume t generates on W. For n=0 the
-identity has no denominators or extra factors, and for d=1 one has k=0.
-Empty intersections have unique sections, so the same conclusion holds there. -/
+/-- The numerator identity after clearing the second-chart denominator. -/
 theorem sectionRing_chart_cross_multiplication
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

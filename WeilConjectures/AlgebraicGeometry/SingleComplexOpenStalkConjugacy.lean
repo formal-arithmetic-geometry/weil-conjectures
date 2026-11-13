@@ -14,9 +14,10 @@ import WeilConjectures.AlgebraicGeometry.OpenComparisonIntoPullbackTransport
 
 /-! # Source-open conjugacy of the canonical stalk comparison
 
-Source: Stacks Project, Tag 0DJ8, locality of equation-bc on X'; Tag 0DJ9,
-source-open induction.
-(blueprint: lem-pc-single-complex-open-stalk-conjugacy).
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -72,43 +73,7 @@ private theorem open_stalkComparison_normalized
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The original and source-open comparisons are isomorphic as additive arrows.
-No invertibility of either comparison is assumed.
-
-Proof: write j = U.ι, p = pullback.fst g' j, q = pullback.snd g' j.
-The base change p of j is an open immersion. Restrict c.P and c.N termwise along
-j and p. Exact restriction preserves K-flatness, and its derived functor is
-canonically derived pullback on an open immersion. The underived pullback
-composition isomorphisms give a chain map from q* of the restricted source to
-the restricted target. The defining universal-counit equation for the derived
-composition comparisons gives its represents equation for the displayed phiU.
-This produces coordinates r for phiU with the restricted representatives.
-
-At z, the isomorphisms j.stalkMap (q z) and p.stalkMap z identify the original
-rings A and C with the restricted rings. The commutative square identifies the
-base rings R and B; the stalkMap_comp equations identify their algebra actions.
-The restriction-stalk extension isomorphisms identify the complexes degreewise.
-Thus derived tensor over R with B gives an isomorphism of the model cohomology
-objects, compatible with the A-tensor-R-B action (multiplication is natural).
-After extension to C this gives the source vertical isomorphism. Exact stalks
-and cohomology give the target vertical isomorphism. The comparison_eq and
-localized_eq equations of the cohomology models identify their horizontal maps
-with the universal derived tensor counits and their scalar-extension transposes.
-Naturality of these counits, of tensorStalkIso, and of the restricted chain map
-therefore gives a commuting square for c and r.
-
-For arbitrary d, its e and e' compared with those of r give derived isomorphisms
-of the representatives. Apply the same source transport and pullback naturality
-used in coordinate invariance: after normalizing the targets by e', both maps
-are induced by phiU because of represents. These give another commuting square
-with invertible vertical maps for r and d. Compose the squares and forget the
-module scalars. Arrow.isoMk packages the two additive isomorphisms and the
-commutativity equation. This uses no flatness over R and does not assert that
-the localized comparison itself is invertible. For an empty open there is no z;
-for the top open the same ring isomorphisms apply. Zero complexes and zero rings
-are also allowed, since every transport is through a ring or derived isomorphism.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, proof of locality of condition (1);
-Tag 0DJ9, the comparison for U and its inverse image.
-(blueprint: lem-pc-single-complex-open-stalk-conjugacy). -/
+No invertibility of either comparison is assumed. -/
 theorem nonempty_stalkComparison_open_arrow_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

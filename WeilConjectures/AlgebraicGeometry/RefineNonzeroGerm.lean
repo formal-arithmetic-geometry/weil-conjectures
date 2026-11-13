@@ -8,10 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-/-! # RefineNonzeroGerm
-
-Source: blueprint `lem-weil-pbc-lisse-generic-kernel`, first proof step.
-(blueprint: lem-weil-pbc-refine-nonzero-germ) -/
+/-! # RefineNonzeroGerm -/
 
 @[expose] public section
 universe u
@@ -19,26 +16,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Refinement of a pointed nonzero germ over a locally constant set sheaf.
-Source: blueprint `lem-weil-pbc-locally-constant-nonzero-germs`, proof steps 2--4.
-A trivialising etale cover and filtered-colimit equality refine the section so
-that its germ is nonzero at every geometric point of the refinement.
-(blueprint: lem-weil-pbc-refine-nonzero-germ)
 
-Proof:
-1. Choose a member of the trivialising etale cover through the marked geometric
-   point; surjectivity of the geometric fibre gives a lift to that member.
-   Pull back U along this member and restrict a and the zero section.
-2. The set-sheaf trivialisation identifies their distinct marked germs with two
-   distinct elements m and z of its constant value. Constant-sheaf stalks are
-   this value, since sheafification preserves stalks and the pointed
-   neighbourhood category is nonempty and connected.
-3. Filtered-colimit equality yields pointed refinements on which a is the
-   constant section m and zero is the constant section z. Take a common
-   refinement V of these two refinements, and let r be its composite to U.
-4. The retained marked point proves V is nonempty. At each geometric lift to V,
-   the constant-sheaf stalk formula identifies the two restricted germs with
-   m and z. They are distinct, so the germ of the restriction of a is nonzero.
-   Only a set-sheaf trivialisation is used; addition need not be preserved. -/
+A trivialising etale cover and filtered-colimit equality refine the section so
+that its germ is nonzero at every geometric point of the refinement. -/
 theorem refine_section_nonzero_germs (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : IsLocallyConstantEtaleSheafOfSets

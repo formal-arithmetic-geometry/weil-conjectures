@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleCoherence
 /-! # Base change and the restricted coefficient complex system
 
-Source: Stacks Project, Tag 09Z1 proof and Tag 0EZM.
-(blueprint: lem-sbc-restricted-affine-coefficient-system).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -26,36 +28,7 @@ namespace AlgebraicGeometry.Etale
 -- morphism equality does not refer to them. Keep the original binder names.
 set_option linter.unusedVariables false in
 /-- Construct the base-changed schemes and their degree-zero coefficient complexes,
-including the coefficient colimit and its restriction comparisons.
-Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object;
-Tag 0EZM, canonical pullback maps.
-(blueprint: lem-sbc-restricted-affine-coefficient-system).
-
-Proof: Use the schemes U ×_S D(i) with transition maps induced by the pullback
-universal property, and the cone U ×_S c.pt. The universal property gives a
-limiting cone. Base change preserves affine, quasi-compact and quasi-separated
-morphisms. Since U is affine, the stage schemes are compact and quasi-separated.
-Restrict F_i along the second projection and put the resulting sheaf into the
-single complex in degree zero. Define its transitions by the two composition
-comparisons of inverse image around each pullback square followed by the
-restriction of phi. Naturality and associativity of upperStarComp transport
-hphiid and hphicomp to the complex identity and composition equations.
-The single complexes have zero terms below zero. Restrict H to U ×_S c.pt,
-reindex by double opposite, and apply the single functor to obtain G. The
-composition comparisons and eH give eG; their naturality and hH give hG.
-Map the colimit cocone of H by restriction and the single functor. Restriction
-is a left adjoint, hence preserves colimits, and single complexes preserve
-colimits degreewise. This gives L and hL. Its vertex is a degree-zero single complex,
-so its terms in negative degrees are zero, giving hbelowL. The stage complexes are exactly
-those defining rawAffineRestrictedCohomology, giving r. Preservation of the
-coefficient colimit identifies L.pt with the restriction of colimit H as a
-single complex, giving rL after applying Q and cohomology. On a cone leg,
-the two inverse-image comparisons used in eG are precisely the ones defining
-rawAffineRestrictedCoefficient. Naturality of the single-functor comparison
-and of Q therefore identifies the coefficient complex map with the one in
-rawAffineRestrictedCohomologyMap. Apply cohomology and compose with the fixed
-rawAffineComplexPullback to obtain the displayed morphism equality.
-No cohomology diagram, cocone or cohomology continuity is constructed here. -/
+including the coefficient colimit and its restriction comparisons. -/
 theorem exists_restricted_affine_coefficient_system {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

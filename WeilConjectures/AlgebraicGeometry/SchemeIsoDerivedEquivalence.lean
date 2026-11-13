@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Derived transport along an isomorphism of schemes
 
-Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport
-(blueprint: lem-pc-scheme-iso-derived-equivalence).
+## References
+
+* [Stacks Project, Tag 08EB](https://stacks.math.columbia.edu/tag/08EB)
 -/
 
 @[expose] public section
@@ -37,16 +38,7 @@ private noncomputable def moduleIsoEquivalence {X Y : Scheme.{u}} (s : X ≅ Y) 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pushforward along a scheme isomorphism induces an equivalence on any chosen derived
-categories, compatible with localization of its explicit termwise pushforward.
-Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport
-(blueprint: lem-pc-scheme-iso-derived-equivalence).
-
-Proof: Pushforwards along the isomorphism and its inverse form an equivalence: compose the
-pushforward composition comparison, the equality of the composite with the identity, and
-pushforward of the identity. Equivalences of abelian categories are additive and exact.
-The termwise functors therefore preserve quasi-isomorphisms. Localize both functors and
-localize their unit and counit to obtain inverse derived functors. The localization
-factorization is the asserted comparison. This works for independent morphism universes. -/
+categories, compatible with localization of its explicit termwise pushforward. -/
 theorem exists_scheme_iso_derived_equivalence {X Y : Scheme.{u}} (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

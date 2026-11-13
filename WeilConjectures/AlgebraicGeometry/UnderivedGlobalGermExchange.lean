@@ -11,7 +11,11 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Underived global germ and exchange
 
-Source: Stacks Project, Tags 095T, 01F8 and 08J6.
+## References
+
+* [Stacks Project, Tag 095T](https://stacks.math.columbia.edu/tag/095T)
+* [Stacks Project, Tag 01F8](https://stacks.math.columbia.edu/tag/01F8)
+* [Stacks Project, Tag 08J6](https://stacks.math.columbia.edu/tag/08J6)
 -/
 
 @[expose] public section
@@ -161,22 +165,7 @@ private theorem squareLowerStarIso_globalSections
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Category.comp_id]
   exact lowerStarCompGlobalSectionsIso_comp g' f (g' ≫ f) rfl P
 
-/-- Global germs identify underived exchange with pullback of global sections.
-Source: Stacks Project, etale-cohomology.tex, Tag 095T, final map-on-stalks paragraph;
-cohomology.tex, Tag 01F8.
-(blueprint: lem-weil-pbc-underived-global-germ-exchange)
-
-Proof: Evaluate both transformations on a sheaf and a global section. The inverse of
-`lowerStarCompGlobalSectionsIso` views the section on the terminal object over Y.
-The pulled germ is its germ at the image of t, transported to the inverse-image stalk.
-Expand the exchange as the mate of the pullback-square isomorphism. The adjunction
-triangle identities cancel the counit and the unit on the Y side. What remains is the
-unit into g'_*g'^* applied to the original section, followed by the terminal-object
-identification over X' and its germ over Y'. Expand the stalk identification into
-`sheafPullbackIso`, `sheafFiberComapIso` and `pointSmallEtaleComapIso`; their unit-germ
-formulas give this equality already on each representative in the stalk colimit.
-The terminal-section identifications give exactly the three remaining components of b.
-This uses only commutativity of the square and works for separably closed Ω. -/
+/-- Global germs identify underived exchange with pullback of global sections. -/
 theorem underivedGlobalGerm_exchange
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)

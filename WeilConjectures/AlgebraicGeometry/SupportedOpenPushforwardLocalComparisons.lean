@@ -33,7 +33,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Exact derived restriction has the original homology stalk at each point of the open.
 Combine exact restriction/homology comparison with the over-site equivalence and
-`Scheme.Modules.restrictStalkNatIso`. Source: Stacks Project, Tags 08DW and 06Z0. -/
+`Scheme.Modules.restrictStalkNatIso`. -/
 private noncomputable def restrictionHomologyStalkIso.{z}
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -57,7 +57,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Vanishing after open restriction implies vanishing of homology stalks on that open.
 Apply homology and the additive stalk functor to the zero object, then use the stalk
-comparison. Source: Stacks Project, Tag 05RU. -/
+comparison. -/
 private theorem stalk_zero_of_restriction_zero.{z}
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -83,8 +83,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Open base change propagates cohomological support through derived direct image.
 Restriction to the inverse image of the open complement of T is zero by supported
 restriction. Open base change identifies restriction of the direct image with the
-direct image of that zero object. Its homology stalks on the complement vanish.
-Source: Stacks Project, Tags 08FE and 05RU. -/
+direct image of that zero object. Its homology stalks on the complement vanish. -/
 private theorem direct_image_support
     {Y X : Scheme.{u}} (f : Y ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -163,21 +162,7 @@ private theorem over_restriction_map_isIso
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The supported adjunction unit is invertible after restriction to U and X minus T.
-Source: Stacks Project, Tag 08DF (1), using Tag 08FE.
-(blueprint: lem-pc-supported-open-pushforward-local-comparisons-first).
-
-Proof: Write L for restriction to U and R for its derived direct image. The
-open direct image is fully faithful, so the counit of any L ⊣ R is invertible.
-The triangle identity then makes L applied to the unit at E invertible; the
-scheme/over-site equivalence reflects invertibility. On V = X minus T,
-restriction of E is zero: restriction commutes with cohomology, its cohomology
-stalks vanish there, stalks detect zero sheaves, and cohomology detects zero
-objects in the derived category. The restriction of L(E) to U intersect V is
-likewise zero. Tag 08FE identifies restriction of R(L(E)) to V with the derived
-direct image of that zero object, hence zero. Thus the restricted unit on V
-is a map between zero objects and is invertible. This proves both allowed
-values of W. The argument also covers empty opens and empty T. -/
+/-- The supported adjunction unit is invertible after restriction to U and X minus T. -/
 theorem supported_open_pushforward_local_comparisons_first (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)
@@ -229,8 +214,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Any left adjoint of derived open restriction preserves cohomological support.
-Identify it with exact extension by zero and compute the interior and exterior stalks.
-Source: Stacks Project, Tags 08BS and 00A7. -/
+Identify it with exact extension by zero and compute the interior and exterior stalks. -/
 private theorem left_adjoint_support
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -290,24 +274,7 @@ private theorem left_adjoint_support
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).mapIso (α.app F))
   exact i.addCommGroupIsoToAddEquiv.toEquiv.subsingleton_congr.mp hs
 
-/-- The supported left/right direct-image comparison is locally invertible.
-Source: Stacks Project, Tag 08DF (2), using Tags 08FE and 08BS.
-(blueprint: lem-pc-supported-open-pushforward-local-comparisons-second).
-
-Proof: Exact extension by zero gives a left adjoint to derived restriction L.
-Its unit is invertible, since restriction of extension by zero is the identity.
-Uniqueness of left adjoints transports these facts to the given S and adjS.
-The open direct image R is fully faithful, so the counit of the given L ⊣ R
-is invertible. The equation in the statement makes the right adjunct of phi
-the inverse of adjS.unit at F. This adjunct is L(phi) followed by the counit
-at F, so L(phi) is invertible. The scheme/over-site equivalence reflects this,
-proving the assertion on U. Support of F makes its restriction to U intersect V
-zero, by stalkwise vanishing of cohomology. Tag 08FE makes restriction of R(F)
-to V zero. Restriction of extension by zero to V is extension by zero from
-U intersect V, hence also zero; transport along the left-adjoint isomorphism
-makes restriction of S(F) zero. Thus phi on V is invertible between zero
-objects. No perfectness is needed for this local calculation. Empty opens and
-empty T obey the same zero argument. -/
+/-- The supported left/right direct-image comparison is locally invertible. -/
 theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)
@@ -362,27 +329,7 @@ theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U 
     exact IsZero.isIso hz hz' _
 
 /-- The two supported comparison maps are invertible after restriction to U
-and to V = X minus T; this states local comparisons, not global invertibility.
-Source: Stacks Project, Tag 08DF, its restriction computations using Tags 08FE
-and 08BS (exact extension by zero).
-(blueprint: lem-pc-supported-open-pushforward-local-comparisons).
-
-Proof: For any G supported on T in U, G restricted to U intersect V is zero:
-its cohomology sheaves have zero stalks there, so vanish, and cohomology detects
-zero derived objects. Tag 08FE identifies Rj_*G on V with the direct image of
-this zero restriction, hence with zero; on U it identifies Rj_*G with G.
-For E supported on T, E on V is also zero. The adjunction unit restricts on U
-to an isomorphism by the fully faithful open direct image adjunction, and on V
-to a morphism between zero objects. These statements hold for any adjunction
-since two adjunction structures differ by natural automorphisms.
-For S left adjoint to restriction, uniqueness of left adjoints identifies S
-with the derived exact extension-by-zero functor (Tag 08BS). Its unit is an
-isomorphism, its restriction on U is F, and on V it is extension by zero of
-F on U intersect V, hence zero. The given adjunct equation says that the
-restriction of phi to U, composed with the unit, is the identity, after the
-counit identification for Rj_*. Thus this restriction is invertible. On V
-both endpoints are zero, so the restriction is invertible there too.
-Empty opens and T empty use the zero-object statements with no stalks to test. -/
+and to V = X minus T; this states local comparisons, not global invertibility. -/
 theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)

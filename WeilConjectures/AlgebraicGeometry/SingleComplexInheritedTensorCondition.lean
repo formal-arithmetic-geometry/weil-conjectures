@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonInheritance
 
 /-! # Tensor inheritance of the single-complex base-change condition
 
-Source: Stacks Project, perfect.tex, Tag 0DJA, part (1)
-(blueprint: lem-pc-rf-single-complex-inherited-tensor-condition).
+## References
+
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
 -/
 
 @[expose] public section
@@ -32,16 +33,7 @@ set_option autoImplicit false
 /-- Tensoring a map satisfying the single-complex stalkwise base-change condition by an
 arbitrary quasi-coherent derived object preserves the condition for the canonical
 pullback tensor comparison. The comparison is characterized by its K-flat coordinate
-and shared derived-counit equations, as in the paper.
-Source: Stacks Project, perfect.tex, Tag 0DJA, part (1).
-Proof: realize the canonical comparison as a monoidal model using the existing
-existence and realization theorems. For the inherited
-condition, identify both stalk comparisons with their ring-level cohomology models.
-The original commuting square transfers h_stalk to the localized ring comparison.
-Apply tensor inheritance for K-flat stalk complexes and the flat localization
-A tensor-over-R B -> C. The tensor square then transfers invertibility back to every
-coordinate presentation of the inherited map, by cancellation of its vertical isomorphisms.
-(blueprint: lem-pc-rf-single-complex-inherited-tensor-condition). -/
+and shared derived-counit equations, as in the paper. -/
 theorem singleComplexInheritedTensorCondition
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

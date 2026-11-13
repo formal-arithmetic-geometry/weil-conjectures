@@ -19,9 +19,12 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseCounitCompatib
 
 /-! # The normalized comparison on a termwise restricted complex
 
-Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
-preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-termwise-comparison).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
 -/
 
 @[expose] public section
@@ -78,37 +81,7 @@ set_option linter.unusedVariables false in
 -- Keep the original unused local H in the statement unchanged.
 /-- Open restriction transports the normalized tensor comparison on the literal
 termwise restriction of the source complex. There is no independently chosen
-restricted representative or representing isomorphism.
-
-Proof: put U = f⁻¹V and U' = f'⁻¹V'. The open stalk maps identify the four
-local rings with their unrestricted counterparts. The identities stalkMap_comp,
-hj, and the restricted cartesian square identify every structure map and the
-map from the tensor algebra to the last stalk ring. Restrict P degreewise.
-Restriction is tensor pullback along the open immersion and preserves K-flatness.
-The universal derived counit is invertible on this K-flat complex; uniqueness of
-the left-derived functor transfers that property to the pinned counit hcP0.
-The restriction-stalk isomorphism identifies its stalk complex with the
-original stalk complex after extension along the open stalk-ring isomorphism.
-Transport the universal left-derived scalar extension through these exact ring
-equivalences. Its counit-compatible uniqueness identifies the derived tensor
-cohomology objects; naturality of multiplication and cohomologyIso_smul make
-this identification linear over the identified tensor algebra. Extension to
-the last stalk ring gives the source isomorphism l. The natural isomorphism ν is
-openDerivedAdditiveStalkIso, constructed from exact restriction and
-restrictStalkNatIso by localization and cohomology.
-The comparison_eq and localized_eq equations express both comparison maps
-by the same transported scalar-extension counit. The factorization identity
-for leftDerivedUnique in singleComplexOpenPullbackIso and the pinned composition
-comparisons identify the map to restricted derived pullback with the displayed
-restricted identity coefficient. Apply cohomology to obtain the stated square.
-The representing isomorphism a is the localization factor of actual termwise
-restriction; no comparison of arbitrary representatives is part of this lemma.
-For empty opens there is no z; top opens, zero complexes and zero rings use
-exactly the same isomorphisms. No base flatness or bounds are needed.
-
-Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
-preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-termwise-comparison). -/
+restricted representative or representing isomorphism. -/
 theorem exists_singleComplexOpen_termwise_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

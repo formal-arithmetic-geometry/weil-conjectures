@@ -16,9 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Coherated sheaf derived Hom adjunction
 
-Source: Stacks Project, Duality for Schemes, Lemma 48.3.6 (Tag 0A9Q), with
-equation-sheafy-trace (48.3.5.1) defining the sheafy trace
-(blueprint: lem-pc-qcqs-sheaf-rhom-adjunction).
+## References
+
+* [Stacks Project, Tag 0A9Q](https://stacks.math.columbia.edu/tag/0A9Q)
 -/
 
 @[expose] public section
@@ -34,8 +34,7 @@ set_option autoImplicit false
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Detection of an isomorphism by Hom and a right adjoint.
-Source: the Yoneda step of Stacks, Tag 0A9Q. -/
+/-- Detection of an isomorphism by Hom and a right adjoint. -/
 private theorem rightAdjoint_map_isIso_of_bijective
     {C D : Type*} [Category* C] [Category* D]
     {i : D ⥤ C} {r : C ⥤ D} (coh : i ⊣ r)
@@ -125,27 +124,12 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 900000 in
 -- Elaborating the derived tensor instances needs this budget.
-/-- For qcqs schemes and a qcqs morphism `f`, let `adj : Rf_* ⊣ a` be the restricted
+/-- For qcqs schemes and a qcqs morphism `f`, let `adj: Rf_* ⊣ a` be the restricted
 adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `Rf_* RHom_X(L, M) ⟶ RHom_Y(Rf_* L, Rf_* M)`, tied by the mate equation `hc` of
-`exists_derivedDirectImage_internalHom_comparison` (lem-pc-sheaf-rhom-projection-formula).
+`exists_derivedDirectImage_internalHom_comparison`.
 The sheafy trace `c(L, aK) ≫ RHom_Y(Rf_* L, ε_K)` is natural in `L` and `K`, and it becomes
-invertible after applying the coherator `DQ`.
-Source: Stacks Project, Tag 0A9Q and equation 48.3.5.1
-(blueprint: lem-pc-qcqs-sheaf-rhom-adjunction).
-
-Proof:
-1. Naturality of c and the restricted adjunction counit give the naturality square.
-2. The coherator adjunction and Yoneda reduce invertibility to bijectivity of
-   postcomposition on Hom from each quasi-coherent M.
-3. Derived pullback preserves quasi-coherence, and
-   canonical_derivedTensor_preserve_QCoh puts Lf*M tensor L in the full subcategory.
-4. Compose pullback/direct-image, tensor-Hom and restricted adjunction equivalences.
-   Precomposition with qcqsDerivedProjectionMate_isIso supplies the fourth Hom
-   bijection; the target tensor-Hom adjunction supplies the fifth.
-5. The supplied mate equation hc, naturality of the tensor-Hom and pullback
-   adjunctions, and the counit formula for the restricted adjunction identify
-   this composite equivalence with postcomposition by the trace. -/
+invertible after applying the coherator `DQ`. -/
 theorem qcqsSheafRHomAdjunction (X Y : Scheme.{u₁})
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

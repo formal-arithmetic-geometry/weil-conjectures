@@ -388,33 +388,7 @@ private theorem comparison_naturality
 
 /-- Exchange pasting for an arbitrary complex on the projective line.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the composition isomorphism and canonical pullback
-counits in the first-coordinate calculation.
-(auxiliary; not a blueprint node).
-
-Proof: Write q:P -> S, W = P times_S P, V = X times_S X and w = i times_S i.
-The two projection squares for w commute. Expand projectionComparison as proper
-forget-supports followed by inverse ordinary exchange. Proper forget-supports
-intertwines ordinary and supported exchange: expand the chosen-compactification
-exchange, use the compactification-refinement comparison followed by its
-forget-supports map, and then the open-immersion comparison with ordinary direct
-image. Thus it suffices to compare ordinary exchange on the two self-products.
-Transpose the comparison by the adjunction for V -> X. The defining mate equation
-replaces exchange followed by this counit by the pullback square comparison
-followed by pullback of the counit for f. Expand the direct-image compositor
-using its conjugate pullback compositor. Its counit is the composite counit for
-i followed by q. Naturality moves these counits through the pullback square
-comparisons. Pullback-composition associativity and w followed by either
-projection equal to the corresponding projection followed by i identify the two
-remaining square maps. The unit and counit for i cancel. The resulting
-cancellation is pushPull: identify Ri_* with L(i inverse)^* by the exact
-inverse-image/direct-image comparison, then use i inverse followed by i = id.
-This is precisely the definition of pushPull, including its identity compositor.
-Undoing the transpose gives the displayed equality. No twist, coefficient
-normalization, trace map or constant-object comparison enters this argument;
-the object M is arbitrary. Empty schemes and zero coefficients require no
-additional assumptions. -/
+. -/
 theorem exchangeIsoTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

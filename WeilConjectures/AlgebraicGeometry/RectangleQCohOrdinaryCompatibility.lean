@@ -10,7 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangePasting
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
 
-/-! # Ordinary compatibility of the rectangle comparison lifts -/
+/-! # Ordinary compatibility of the rectangle comparison lifts
+
+## References
+
+* [Stacks Project, Tag 0ATM](https://stacks.math.columbia.edu/tag/0ATM)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -89,24 +95,7 @@ private theorem upper_pasting_transport
       (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))) past
 
 
-/-- Ordinary base-change compatibility for the canonical comparison lifts.
-Source: Stacks Project, Tag 0ATM, and Tag 08HY.
-(blueprint: lem-sc-rectangle-qcoh-ordinary-compatibility)
-
-Proof: Apply the faithful QCoh inclusion to the desired equality. Substitute the
-component formulas for p.inv and b.hom, and the given formula for s.hom. The
-upper-precomposition pasting law schemeDerivedBaseChange_pasting, transported
-along hk₁ and hk₂, identifies the outer base-change map followed by the unit for
-k and d.inv with the ordinary map for the pulled-back rectangle. To check this
-transport, eliminate the two equalities, commute d.inv past the inverse upper
-pullback comparison by naturality, and cancel d.hom/d.inv and the pullback
-comparison/inverse. The horizontal law schemeDerivedBaseChange_horizontal_pasting
-then identifies the successive inner and outer base-change maps with this
-rectangle map conjugated by c(h,g) and c(t,p). The latter comparison cancels the
-inverse present in s, giving the displayed equality. Reflect this equality through
-the faithful inclusion. No ordinary base-change invertibility is used: the result
-is the ordinary pasting step prior to inversion. The argument applies to zero
-objects, empty schemes, and identity arrows without extra assumptions. -/
+/-- Ordinary base-change compatibility for the canonical comparison lifts. -/
 theorem rectangle_qcoh_ordinary_compatibility
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

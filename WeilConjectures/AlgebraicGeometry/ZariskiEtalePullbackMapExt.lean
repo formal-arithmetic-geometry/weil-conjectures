@@ -18,8 +18,11 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # Identification of normalized pullback with exact-functor transport
 
-Source: Stacks Project, Derived Categories, Tag 015B (4).
-(blueprint: lem-weil-pbc-zariski-etale-pullback-map-ext)
+## References
+
+* [Stacks Project, Tag 015B](https://stacks.math.columbia.edu/tag/015B)
+* [Stacks Project, Tag 0730](https://stacks.math.columbia.edu/tag/0730)
+* [Stacks Project, Tag 010T](https://stacks.math.columbia.edu/tag/010T)
 -/
 
 @[expose] public section
@@ -40,22 +43,7 @@ private noncomputable def resolutionSectionEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The characterized object-cohomology pullback is exact-functor transport of Ext,
-precomposed with a free-representable map whose generator is the adjunction unit.
-
-Source: Stacks Project, Derived Categories, Tag 015B (4), lemma-higher-derived-functors;
-Cohomology on Sites, Tag 0730; Homology, Tag 010T.
-(blueprint: lem-weil-pbc-zariski-etale-pullback-map-ext)
-
-Proof: For the fixed open V and map t, precomposition by Ext.mk₀ t after exact-functor
-transport defines an additive family on Ext. Exact-functor transport preserves Yoneda
-products and the extension class of a short exact sequence, hence this family commutes
-with the displayed connecting maps. In degree zero naturality of the adjunction unit
-and of evaluation of the identity generator identify it with the specified fstar.
-For positive degree embed A into an injective B and form 0 → A → B → C → 0.
-Ext(P(V), B, p+1) vanishes, so every class of degree p+1 is a connecting image
-of a degree p class for C. Both families commute with that connecting map.
-Induction on degree proves equality on every class. This also treats zero sheaves
-and empty opens; degree zero uses no incoming differential. -/
+precomposed with a free-representable map whose generator is the adjunction unit. -/
 theorem zariski_etale_pullback_eq_mapExt
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

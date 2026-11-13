@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVCompositeBaseChangeTargetTran
 
 /-! # The counit for base change of a composite morphism
 
-Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -34,28 +38,7 @@ private theorem prefix_glue {D : Type*} [Category D]
   simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ c₁ ≫ c₂ ≫ c₃) h
 
 /-- The first part of the target transpose: compute the composite base change and
-its f-counit, leaving the single open-square base change and target open counit intact.
-Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
-(blueprint: new-relative-mv-composite-base-change-counit).
-Proof: Expand relativeMVLocalArrow and relativeMVRestriction. Naturality of the
-composite-adjunction Hom equivalence and the defining mate equation of
-relativeMVImageComp remove the target direct-image comparisons. The transpose
-is the transpose of the U local arrow under the f'-adjunction, pulled back along
-W' → X', followed by the explicit open restriction counit defined using c'.
-Expand base change for U → X → S using 08HY, and replace the inverse U,f
-right-adjoint comparison by its defining mate equation. The counit of the
-composite adjunction is the pullback of the f-counit followed by the U-counit.
-Naturality moves the U coefficient comparison through the transpose; the triangle
-identity cancels the intermediate f'-unit. The remaining U-counit and square
-comparison are precisely base change for U → X followed by the U coefficient
-comparison. Associativity of relativeMVComp for W → X → S and for the two
-base-change squares identifies the preceding factors with the W square comparison,
-the pulled-back inverse W,f comparison and f-counit, and the W coefficient
-comparison at C. Projection identities and hpull.w identify the scheme composites;
-proof irrelevance identifies the equality transports. Leave the trailing c' and
-open restriction counit unchanged: their calculation is a separate identity.
-Equal and empty opens and zero complexes require no special assumptions, since
-only functoriality, naturality, coherence and adjunction identities were used. -/
+its f-counit, leaving the single open-square base change and target open counit intact. -/
 theorem relativeMV_composite_baseChange_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

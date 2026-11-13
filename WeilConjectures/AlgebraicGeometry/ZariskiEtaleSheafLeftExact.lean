@@ -23,9 +23,6 @@ namespace AlgebraicGeometry
 
 /-- Left exactness of the canonical sheaf pullback, with arbitrary coefficient universe.
 
-Source: Stacks Project, Sites, Lemma Tag 00X5, using Tags 00X3 and 00WJ.
-(blueprint: lem-weil-pbc-zariski-etale-sheaf-left-exact)
-
 Proof in words: representable flatness says that the category of arrows T -> i(U)
 is cofiltered for each etale object T. Its opposite is therefore filtered. The
 left Kan extension along i.op, evaluated at T, is the colimit of the original

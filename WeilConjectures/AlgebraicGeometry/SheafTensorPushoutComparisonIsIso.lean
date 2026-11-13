@@ -17,8 +17,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Invertibility of the pushout tensor comparison
 
-Source: Stacks Project, Tags 01SB and 008A.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso).
+## References
+
+* [Stacks Project, Tag 01SB](https://stacks.math.columbia.edu/tag/01SB)
+* [Stacks Project, Tag 008A](https://stacks.math.columbia.edu/tag/008A)
 -/
 
 @[expose] public section
@@ -115,29 +117,7 @@ set_option maxHeartbeats 800000 in
 -- Comparing the stalk scalar actions unfolds the filtered-colimit module constructions.
 /-- A fixed comparison morphism with the tensor-unit formula is invertible over a
 pushout of ring sheaves. This concerns one module and does not construct the comparison
-or assert naturality in the module.
-
-Source: Stacks Project, Tag 01SB, tensor construction and elucidation in
-`lemma-affine-equivalence-modules`; Tag 008A, `lemma-adjointness-tensor-restrict`.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso).
-
-Proof: C-linearity and the unit formula give the formula on every pure tensor:
-f(theta_r(c tensor m)) = theta_t(b(c) tensor m). The stalk functor from sheaves
-of commutative rings is left adjoint to the skyscraper functor, so it preserves
-pushouts. Give the stalks their algebra structures via the induced ring maps;
-the square equation gives the two scalar towers. Restriction of module scalars
-commutes with the stalk action: represent the scalar and vector on a common
-intersection of neighborhoods and use the germ scalar formula. The library's
-stalk change-of-rings isomorphisms identify the source and target stalk modules
-with C_x tensor over D_x with M_x and B_x tensor over A_x with M_x. Mathlib's
-Algebra.IsPushout.cancelBaseChange gives an equivalence between these tensors.
-On pure tensor germs it is c_x tensor m_x to b_x(c_x) tensor m_x. The formula for
-f and the germ formulas of the stalk comparisons identify the induced stalk map
-with this equivalence. Tensor induction extends the equality to all stalk tensors;
-the two stalk comparisons are bijective, so the stalk map of f is bijective.
-The underlying abelian sheaf morphism is therefore an isomorphism by stalk
-conservativity, and forgetting the module structure reflects isomorphisms.
-All arguments allow zero rings, zero modules, and empty opens. -/
+or assert naturality in the module. -/
 theorem sheafTensorPushoutComparison_isIso
     (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t : A ⟶ B)
     (hp : IsPushout r s b t) (M : SheafOfModules.{u} (𝓡 A))

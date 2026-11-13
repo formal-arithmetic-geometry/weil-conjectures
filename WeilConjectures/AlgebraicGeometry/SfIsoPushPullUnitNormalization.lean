@@ -8,10 +8,14 @@ public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 
 /-! # Geometric isomorphism cancellation normalizes the derived unit
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first triangle and canonical comparison maps;
-Stacks Project, Tags 03D7, 03D8, 015F and 09T5.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03D8](https://stacks.math.columbia.edu/tag/03D8)
+* [Stacks Project, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
+* [Stacks Project, Tag 09T5](https://stacks.math.columbia.edu/tag/09T5)
 -/
 
 @[expose] public section
@@ -208,44 +212,8 @@ private theorem exact_unit_comp
       ordinary_unit_comp A i N
 
 /-- The concrete geometric cancellation `pushPull` is inverse to the canonical derived unit.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle;
-Stacks Project, Tags 03D7, 03D8, 015F and 09T5.
-(auxiliary; not a blueprint node).
 
-Proof:
-1. Work on ordinary module sheaves. Put L = i*, R = i_*, V = (i.inv)* and U = (i.inv)_*.
-The adjunctions a : L adjoint R and b : V adjoint U have the ordinary module units of
-prop-weil-pbc-inverse-image-modules-exact. The direct-image equivalence gives e : R adjoint U
-with geometric counit d : RU isomorphic to Id. Its triangles hold on sections: the two maps
-from the iterated fibre product retain the original coordinate. If c : VL isomorphic to Id
-is inverse upperStarComp followed by upperStarId, the normalized composition and identity
-assertions of lem-weil-pbc-inverse-image-composition-module-linear and
-lem-weil-pbc-inverse-image-composition give eta_a;R(eta_b at L);RU(c) = d.inv.
-The module identity follows after forgetting the action, by the underlying abelian units.
-2. Write gamma : V isomorphic to R for upperStarInvIsoLowerStarHom, the canonical left-adjoint
-uniqueness comparison from b to e. Its transpose equation is eta_b;U(gamma) = eta_e, also
-obtained by expanding def-weil-pbc-adjunction-conjugate on the identity of U. Set
-w = gamma.inv at L followed by c. Its e-transpose is eta_b at L followed by U(c), so the
-inverse transpose gives w = R(eta_b at L;U(c));d.
-3. Substitute in the equation of step 1: eta_a;w = d.inv;d = Id. These equations are natural
-in the sheaf, hence give equality of natural transformations for the specified maps.
-4. All four ordinary functors are exact: L and V by the module inverse-image theorem,
-R and U because they form an equivalence. Use lem-weil-pbc-exact-functor-derived-functor
-for the universal comparisons ell : Li* isomorphic to D(L), r : Ri_* isomorphic to D(R).
-By lem-sp-exact-derived-transformation-pasting, expanding the actual factors of pushPull
-identifies rho with j;D(w), where j at K is r at (Li* K) followed by D(R)(ell at K).
-Indeed the internal comparison in pushPull becomes D(gamma.inv), the inverse pullback
-compositor becomes D of inverse upperStarComp, and the remaining identity comparisons become
-D of upperStarId; adjacent exact/left-derived comparisons cancel.
-5. The canonical derived unit on a cochain object is Q of the ordinary cochain unit followed
-by the universal right-derived comparison, by lem-sfb-derived-adjunction-cochain-unit.
-Use lem-sfb-resolving-derived-adjunction-normalization with all homotopy complexes as the
-resolving class to transport this equation to the actual universal left-derived functor.
-Exactness of R identifies its universal comparison followed by r with the inverse exact
-factorization. Consequently eta_i;j = D(eta_a). Localize step 3 using
-lem-sp-exact-derived-transformation-pasting and substitute step 4 to obtain
-eta_i;rho = D(eta_a);D(w) = D(eta_a;w) = Id on every unbounded derived object.
-Invertibility of rho then says precisely that rho is the inverse of eta_i. -/
+. -/
 theorem unit_comp_pushPull
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (i : X ≅ ProjectiveLine S)

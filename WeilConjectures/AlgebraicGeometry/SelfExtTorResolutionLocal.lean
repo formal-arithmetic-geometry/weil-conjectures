@@ -19,8 +19,12 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 
 /-! # Local models of augmented self-Ext/self-Tor resolutions
 
-Source: Stacks Project, Tags 0BQY, 068C and 08BS.
-(blueprint: new-j3-self-ext-tor-local). -/
+## References
+
+* [Stacks Project, Tag 0BQY](https://stacks.math.columbia.edu/tag/0BQY)
+* [Stacks Project, Tag 068C](https://stacks.math.columbia.edu/tag/068C)
+* [Stacks Project, Tag 08BS](https://stacks.math.columbia.edu/tag/08BS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,31 +33,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Local zero-differential models for the pullback of an augmented K-flat resolution,
-and K-injectivity for the restriction of an augmented K-injective resolution.
-
-Source: Stacks Project, Tag 0BQY (quotient Koszul computation), Tag 068C (affine
-sheafification), and Tag 08BS (restriction of K-injective complexes).
-(blueprint: new-j3-self-ext-tor-local).
-
-Proof: Put A = Gamma(Y,U), I = ker(i)(U), and choose the finite Koszul-regular sequence
-f supplied by hU. Its Koszul complex is a bounded finite-free projective resolution
-of A/I. Sheafify its augmentation on U and identify tilde(A/I) with the restricted
-pushforward of O_Z. The augmentation a identifies the restriction of P with the same
-single quotient complex. Since P is K-flat with flat terms, its tensor pullback
-computes the derived pullback, as does the sheafified Koszul resolution. Comparison
-of these two resolutions in the localization gives a quasi-isomorphism roof between
-the restriction of T and the sheafified Koszul complex tensored with A/I. Each f_j
-vanishes in A/I, so the latter differential is zero. Its exterior-power terms are
-finite free and it is supported in degrees -m through zero. Further restriction to
-V and to its over site W is exact, preserves the quasi-isomorphisms in the roof,
-and takes finite free modules to finite free modules. This proves the stated model
-condition, with that restricted roof. Restriction of J to V, then to W, preserves
-K-injectivity since each restriction is right adjoint to exact extension by zero.
-The augmentation b identifies J as a resolution of O_Z; K-injectivity is a separate
-explicit hypothesis, not a consequence of its homology. The proof applies to each
-chart using the fixed global P and J. For an empty sequence the Koszul complex has
-one term. Empty charts and zero quotients give zero models, so no nonempty or
-proper-ideal assumption is required. -/
+and K-injectivity for the restriction of an augmented K-injective resolution. -/
 theorem selfExt_tor_resolution_local
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [(Scheme.Modules.tensorPullback i).Additive]

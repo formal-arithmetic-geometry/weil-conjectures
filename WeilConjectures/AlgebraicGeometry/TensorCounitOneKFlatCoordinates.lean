@@ -21,8 +21,10 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 /-! # Tensor pullback counit in one K-flat coordinate
 
-Source: Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1).
-(blueprint: lem-pc-tensor-counit-one-kflat-coordinates).
+## References
+
+* [Stacks Project, Tag 079U](https://stacks.math.columbia.edu/tag/079U)
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
 -/
 
 @[expose] public section
@@ -125,25 +127,7 @@ private theorem modelMap_isIso
 -- The `HasMapBifunctor` instances of the K-flat tensor statement exceed the default
 -- instance-search budget against the current slopmaster2.
 /-- With one K-flat tensor factor, the total-complex counit and the derived
- tensor comparison agree up to the canonical representative isomorphisms.
-
-Source: Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1).
-Proof: the localization tensor map Q(P) tensor Q(G) -> Q(Tot(P tensor G))
-is invertible because P is K-flat; let a be its associated isomorphism.
-Termwise module tensor pullback commutes with sums and has its canonical
-tensor isomorphism, so it gives a chain isomorphism from the pullback of the total
-complex to Tot(g^*P tensor g^*G). Pullback preserves K-flatness of P; hence the
-localization tensor map at g^*P and g^*G is invertible. The universal counit at P
-is invertible as well. Compose these isomorphisms to obtain b.
-For K-flat G the required equation is the characterizing coordinate equation of
-hτ, after canceling the counit at P and the target localization tensor map.
-For general G take a K-flat resolution
-N -> G. Tensoring it with P preserves quasi-isomorphisms. Naturality
-of the universal counits, the localization tensor maps, and the termwise tensor
-pullback comparison gives the same equation after precomposing with the induced
-isomorphism on derived tensor products. Cancel that isomorphism. This proves the
-equation for arbitrary G, without imposing flatness over X or any base scheme.
-(blueprint: lem-pc-tensor-counit-one-kflat-coordinates). -/
+ tensor comparison agree up to the canonical representative isomorphisms. -/
 theorem tensorCounit_oneKFlat_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

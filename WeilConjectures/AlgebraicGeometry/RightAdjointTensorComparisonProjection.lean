@@ -24,9 +24,12 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # The pinned quasi-coherent projection formula
 
-Source: Stacks Project, Tag 08EU, with perfect generation (Tag 09IS) and
-perfect tensor-Hom duality (Tags 0B54 and 0A9T).
-(blueprint: lem-sc-right-adjoint-tensor-comparison-projection).
+## References
+
+* [Stacks Project, Tag 08EU](https://stacks.math.columbia.edu/tag/08EU)
+* [Stacks Project, Tag 09IS](https://stacks.math.columbia.edu/tag/09IS)
+* [Stacks Project, Tag 0B54](https://stacks.math.columbia.edu/tag/0B54)
+* [Stacks Project, Tag 0A9T](https://stacks.math.columbia.edu/tag/0A9T)
 -/
 
 @[expose] public section
@@ -35,21 +38,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 open CategoryTheory.ShiftSaturated
-/-- Projection formula isomorphisms with the pinned inverse equation.
-Source: Stacks Project, Tag 08EU; perfect generation is Tag 09IS.
-Proof: fix E = c(O_Y) and use hRf to regard Rf_*E as quasi-coherent. For perfect K,
-tensor-Hom duality identifies the displayed mate with the conjugate of the
-monoidal tensorator at its dual, so it is invertible. The mates are natural in K.
-Use the predicate that the mate is invertible at every integer translate of K.
-This predicate is stable under retracts and coproducts by naturality and
-coproduct preservation. It is stable under cones by a five-term exact-sequence
-argument using the mate at A, B, A[1] and B[1]. The fourth and fifth vertical
-maps use those components transported by the functors' exact shift structures;
-no shift compatibility of the mate is required. Perfect objects are closed
-under every translate, so perfect generation proves the predicate for all K.
-Its value at shift zero gives the required invertibility. Invert the canonical
-component to obtain pf; its inverse is the specified mate by construction.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-projection) -/
+/-- Projection formula isomorphisms with the pinned inverse equation. -/
 theorem exists_rightAdjointTensorComparison_projection
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity
 
 /-! # Restriction of the single-complex base-change arrow
 
-Source: Stacks Project, Tag 0DJ9, first paragraph; Tag 08HY, counit description.
-(blueprint: lem-pc-single-complex-open-restriction-comparison).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
 -/
 
 @[expose] public section
@@ -34,29 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Restricting a single-complex base-change problem to compatible base opens gives
 an arrow isomorphic to the restriction of the original arrow, and preserves its
 stalk condition. No affineness, quasi-compactness, or invertibility is assumed.
-The two restricted complexes are explicitly given by exact restriction.
-Source: Stacks Project, perfect.tex, Tag 0DJ9, first paragraph; cohomology.tex,
-Tag 08HY (derived base-change counit), and Tag 08FE (direct-image restriction).
-(blueprint: lem-pc-single-complex-open-restriction-comparison).
-
-Proof: Put U = f inverse-image V and U' = f' inverse-image V'. Choose a
-coordinate presentation of phi using nonempty_coordinates. The open-coordinate
-transport theorem restricts its K-flat complex and representing chain map,
-producing coordinates of the explicitly constructed phi0 and an equivalence of
-invertibility of the original and restricted stalk comparisons. The original
-stalk condition gives invertibility in these coordinates. Apply coordinate
-invariance to obtain it in every restricted coordinate presentation. No
-K-injectivity assumption is needed on the supplied coordinate complex N.
-
-The source comparison a is the composite of the pullback-open comparison for g
-and the direct-image-open comparison for f; the target comparison b is the
-direct-image-open comparison for f'. These identify the restricted derived
-counit with the counit for f restricted to V. Transpose under the compatible
-derived adjunction for f' restricted to V'. Naturality of the counit and the
-composition comparisons in the definition of schemeDerivedBaseChangeMap give
-the displayed arrow equality. Naturality of the direct-image comparison with
-respect to phi supplies its final factor. These computations do not require
-quasi-coherence, boundedness, nonempty opens, or affine bases. -/
+The two restricted complexes are explicitly given by exact restriction. -/
 theorem singleComplexBaseChange_openRestrictionComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

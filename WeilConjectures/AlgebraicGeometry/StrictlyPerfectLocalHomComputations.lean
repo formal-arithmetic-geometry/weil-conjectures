@@ -17,9 +17,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Exact Hom and K-flat dual computations for a strictly perfect local complex
 
-Source: Stacks Project, Tag 08DQ, proof of lemma-dual-perfect-complex;
-Tag 08DM, the bounded Hom calculation.
-(blueprint: lem-pc-strictly-perfect-local-hom-computations).
+## References
+
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
 -/
 
 @[expose] public section
@@ -104,23 +105,6 @@ private theorem exact_homObj_of_finiteFree_retract {C : Type u} [SmallCategory C
 
 /-- Internal Hom from P preserves quasi-isomorphisms, and its actual ordinary dual
 is K-flat. Neither assertion involves a derived evaluation map.
-Source: Stacks Project, Tag 08DM, bounded Hom calculation, and Tag 08DQ,
-proof of lemma-dual-perfect-complex, termwise evaluation.
-(blueprint: lem-pc-strictly-perfect-local-hom-computations).
-
-Proof: internal Hom from each term of P is a retract of internal Hom from a
-finite free module. Precomposition with its projection and inclusion gives a
-retraction of the associated short complexes. Finite free internal Hom is exact;
-short exactness descends along this retraction. Apply the bounded exact-term Hom
-quasi-isomorphism theorem to obtain the first assertion.
-For an acyclic F, apply that assertion to the quasi-isomorphism 0 -> F.
-Hom(P,0) is zero in each degree by its product universal property, so Hom(P,F)
-is acyclic. Construct ordinary evaluation from the recorded degree maps and their
-differential identity. It is invertible in each degree for strictly perfect P,
-hence is an isomorphism of complexes. Transport the acyclicity of Hom(P,F) through
-its inverse to obtain acyclicity of Tot(F tensor Hom(P,O[0])). This is exactly
-K-flatness of the dual. This argument avoids a second proof of flatness of its
-terms, and allows unbounded F, zero P, rank zero, reversed bounds and empty U.
 -/
 theorem strictlyPerfect_localHom_computations (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ)

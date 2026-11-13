@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceCompar
 
 /-! # Evaluation of a localized cocycle on the cohomology sheaf
 
-Source: Stacks Project, Tag 03Q8, computation with an injective complex.
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -22,9 +24,7 @@ open AlgebraicGeometry CochainComplex CochainComplex.HomComplex
 namespace AlgebraicGeometry.Etale
 
 /-- The homology section of a cocycle, evaluated at the free generator.
-This construction uses the actual cycle map and transports homology along `r`.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: lem-weil-pbc-source-localized-cocycle-homology). -/
+This construction uses the actual cycle map and transports homology along `r`. -/
 noncomputable def sourceCocycleHomologySection {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -40,20 +40,7 @@ noncomputable def sourceCocycleHomologySection {S : Scheme.{v}}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation of a localized single-source cocycle is its actual homology section.
-This is a comparison on the base site, before taking stalks or restricting to any scheme.
-
-Source: Stacks Project, Tag 03Q8, injective-complex computation.
-(blueprint: lem-weil-pbc-source-localized-cocycle-homology).
-
-Proof: the localization isomorphism sends the class of the single-source cocycle to
-its chain map into the shifted complex, then applies the quotient and shift comparison.
-Degree-zero homology of that map is the map on cycles followed by the homology quotient.
-The single-complex homology identification removes the source single complex. The homology
-shift comparison identifies the target with degree n homology of L. Naturality of the
-localization factorization and the homology shift comparison transports this equality
-along r inverse. Evaluation of the resulting sheaf morphism at the free generator is
-sourceFreeSectionsEquiv, giving the displayed section. This works for every integer n;
-zero cocycles give zero sections and boundaries give zero homology sections. -/
+This is a comparison on the base site, before taking stalks or restricting to any scheme. -/
 theorem sourceLocalizedCocycleHomology {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)

@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ThickeningIntegral
 
 /-!
 # Components of an affine scheme with split reduction
-
-Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-finite-algebra calculation.
-(blueprint: lem-weil-pbc-split-reduction-spectrum-components).
 -/
 
 @[expose] public section
@@ -54,15 +50,7 @@ private theorem universalHomeomorphism_of_thickening
     exact congrArg i' hx
   exact {}
 
-/-- Lift the factors of a product decomposition through a nilradical reduction.
-
-Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-finite-algebra calculation. (blueprint: lem-weil-pbc-split-reduction-spectrum-components).
-Proof: Identify the spectrum of the finite product with the coproduct of factor spectra,
-transport it across the supplied algebra equivalence, and lift the resulting clopen pieces
-through the surjective nilradical closed immersion. Restrict the immersion to each lifted
-piece and use invariance of integrality under thickenings, surjectivity of the composite,
-and cancellation of universal injectivity after arbitrary base change. -/
+/-- Lift the factors of a product decomposition through a nilradical reduction. -/
 theorem spectrum_components_of_split_reduction
     (A R : Type u) [CommRing A] [CommRing R] [Algebra A R]
     (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, Algebra A (D j)]

@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleComposition
 
 /-! # Coherence of restricted fixed-coefficient single complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: lem-sbc-restricted-over-single-coherence).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -87,28 +89,7 @@ private theorem restrictedOverSingle_canonical_coherence
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
-/-- Identity, composition, and constant-diagram coherence of the explicit single complexes.
-Source: Stacks Project, Tag 09Z1, affine-object restriction in lemma-relative-colimit;
-Tag 0EZM, fixed-coefficient complexes in lemma-colimit-variant-complexes.
-(blueprint: lem-sbc-restricted-over-single-coherence).
-
-Proof: Substitute the equality identifying D and the heterogeneous equalities
-identifying c, K, phi, G, and eG with the displayed concrete constructions.
-Write r_A for the second projection U times_S A to A. For each arrow f,
-expand the coefficient comparison as the inverse comparison for a_f and r_B,
-the comparison for r_A and f.left, and r_A inverse image of the inverse comparison
-for f.left and B.hom. These compare the two iterated inverse images of the same
-fixed sheaf F. The identity comparison is the inverse-image unit law. For two
-arrows, inverse-image associativity identifies their composite with the comparison
-for the composite arrow; naturality moves the comparisons through the coefficient
-maps and cancels each hom with its inverse. Apply the single-complex functor and
-its natural comparison with inverse image to obtain the displayed identity and
-composition equations. For the cone equation, substitute the cone relation
-c_j followed by D(f) equals c_i into this composition equation. The comparison
-for c_i cancels its inverse, leaving the identity map on the fixed apex complex.
-This proof needs neither a limit hypothesis nor affineness, boundedness,
-cohomology, or a cohomology continuity theorem. Empty schemes and zero sheaves
-obey the same functorial identities. -/
+/-- Identity, composition, and constant-diagram coherence of the explicit single complexes. -/
 theorem restrictedOverSingle_coherence {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
     {I : Type u} [Category.{u} I] (D₀ : I ⥤ Over W) (c₀ : Cone D₀) (U : S.Etale)

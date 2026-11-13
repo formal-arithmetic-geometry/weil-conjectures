@@ -107,17 +107,8 @@ private theorem trace_tail_natural
   exact trace_tail_paste F G H hc hm he (η.hom.naturality j.inv) ht hu
 
 /-- The false projection chart tail equals the transported coordinate trace.
-Source: blueprint thm-amb-p1-adjunction.proof.md, first-coordinate calculation.
-(auxiliary; not a blueprint node).
 
-Proof: chart exchange and cancellation of the chart factor give projectionExchange.
-The middle exchange formula separates the inverse shifted-line comparison and the
-geometric exchange square. Naturality of exchange and proper forget-supports moves
-that inverse comparison into the transported trace. Naturality of the pullback
-compositor carries the arbitrary trace arrow through the composition comparison.
-The unit composition formula and constant-unit pullback identity finish the tail.
-The categorical pasting is performed for abstract functors, then specialized with
-the native source shift used by the definition of trace. -/
+. -/
 theorem falseProjectionChartTail
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

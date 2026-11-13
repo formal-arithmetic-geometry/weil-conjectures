@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Tensor pullback preserves finite presentation
 
-Source: Stacks Project, Tag 01BQ, and tensor pullback, Tags 0095--0097.
+## References
+
+* [Stacks Project, Tag 01BQ](https://stacks.math.columbia.edu/tag/01BQ)
+* [Stacks Project, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks Project, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
 -/
 
 @[expose] public section
@@ -21,21 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Pulling back a finitely presented scheme module preserves finite presentation.
-Source: Stacks Project, modules.tex, Tag 01BQ; sheaves.tex, Tags 0095--0097.
-(blueprint: lem-pc-tensor-pullback-finite-presentation).
-
-Proof: choose the local finite free presentations expressing finite presentation of M.
-The inverse images of their open domains cover X. Restriction of tensor pullback to
-one such inverse-image open is pullback of the corresponding restricted module.
-Inverse image and sheafified extension of scalars are left adjoints, so their composite
-preserves the cokernel presentation. Pullback of the structure module is the structure
-module by the multiplication isomorphism b tensor a maps to b g-sharp(a), inverse
-b maps to b tensor 1. It therefore preserves the finite free modules in both degrees
-of each presentation, with their original finite index sets. These presentations on
-the inverse-image cover give QuasicoherentData with finite presentations, exactly
-SheafOfModules.IsFinitePresentation. Empty inverse-image opens may be discarded;
-an empty source has the empty cover. No flatness hypothesis on g is required. -/
+/-- Pulling back a finitely presented scheme module preserves finite presentation. -/
 theorem isFinitePresentation_tensorPullback
     {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modules) [M.IsFinitePresentation] :
     ((tensorPullback g).obj M).IsFinitePresentation := by

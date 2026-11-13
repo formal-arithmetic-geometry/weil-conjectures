@@ -14,7 +14,12 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Pinned relative Mayer--Vietoris vertex comparisons
 
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -58,31 +63,7 @@ private theorem map_desc_comparison
 
 /-- Vertex comparisons for the canonical exact-restriction presentation of the
 relative Mayer--Vietoris rows. The overlap component satisfies the vertical-pasting
-identity. No boundary, distinguishedness, or morphism of triangles is asserted.
-
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories
-of Schemes, Tag 0DJ9, the induction diagram.
-(blueprint: lem-pc-relative-mv-pinned-vertex-comparisons).
-
-Proof: For each open W, compare derived exact restriction with derived pullback
-using leftAdjointUniq for mvOpenRestrictionAdjunction and relativeMVAdj. Apply
-the direct-image functor and compose with relativeMVImageComp W.ι f. Apply Lg*
-to obtain the source comparisons. On the inverse-image cover, identify its open
-scheme with the chosen pullback using the projection-preserving canonical scheme
-isomorphism. Derive this isomorphism and use the same adjunction and composition
-comparisons to obtain the target comparisons. At the middle vertices compose the
-additive functors' biproduct comparison with biprod.mapIso of the two open
-comparisons. The unit identity for leftAdjointUniq proves the two first-arrow
-identities. Transpose the restricted counits under these adjunction comparisons;
-the counit identity and composition coherence prove the two second-arrow
-identities, with subtraction on the V summand. For the overlap expand the
-base-change map as the mate of the pulled-back counit. Substitute the composite
-adjunction counit formula and cancel both triangle identities. The two pullback
-projection composites are equal; transport along this equality and compose the
-two pinned pullback comparisons. The remaining map is precisely
-relativeMVLocalArrow. This gives the last equality. No compactness,
-quasi-coherence, or cover condition is used by these comparisons; empty opens,
-zero objects, repeated opens and the zero object map obey the same identities. -/
+identity. No boundary, distinguishedness, or morphism of triangles is asserted. -/
 theorem relativeMV_pinned_vertex_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

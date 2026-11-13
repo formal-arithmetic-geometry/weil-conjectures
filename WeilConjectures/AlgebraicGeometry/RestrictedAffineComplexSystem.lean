@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
 
 /-! # Geometric complex system for restricted cohomology
 
-Source: Stacks Project, Tag 09Z1 proof, and Tag 0EZM for the canonical maps.
-(blueprint: lem-sbc-restricted-affine-complex-system).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -27,38 +29,7 @@ namespace AlgebraicGeometry.Etale
 -- The existential conclusion records properties that later binders need not reference.
 set_option linter.unusedVariables false in
 /-- The restricted-cohomology diagram comes from a qcqs scheme limit and
-single complexes with a common lower bound, before any comparison with raw Hom.
-Source: Stacks Project, Tag 09Z1 proof, before applying cohomology continuity;
-Tag 0EZM for the cohomology cocone of complexes.
-(blueprint: lem-sbc-restricted-affine-complex-system).
-
-Proof: Base change the underlying scheme diagram and cone along U.hom. Define
-the induced maps by the pullback universal property; uniqueness proves their
-identity and composition laws and that the new cone is limiting. Affine maps
-remain affine after base change. The qcqs structure maps remain qcqs, and their
-target U is affine, so all stage schemes are compact and quasi-separated.
-Restrict the sheaves along the second projections of these pullbacks. Compare
-the two composites around each pullback square using upperStarComp; restrict
-phi through this comparison. The identity and associativity coherence of
-upperStarComp transports hphiid and hphicomp to the restricted transition laws.
-Put these sheaves into degree-zero single complexes. The lower bound is zero,
-and mapCochainComplexSingleFunctor gives the required complex transitions.
-Restrict H at the limit and use the comparison on each cone triangle and eH
-to construct eG; hH gives hG. Map the colimit cocone of H by restriction, which
-is a left adjoint, and then by the single functor, which preserves colimits
-termwise. This is L and proves hL. Use the fixed map rawAffineComplexPullback for every
-cohomology pullback. Take T to the cohomology groups of the stage complexes;
-its transition maps are P followed by the coefficient map. Naturality and
-composition of the derived adjunction unit prove hT and the functor laws.
-Take B to the limit cohomology with the same pullback/coefficient legs. The
-cone equations and coefficient cocone equations prove that these legs form a
-cocone and give hB. The stage restrictionIso is the identity under the single
-complex identifications. The colimit comparison from restriction identifies
-L.pt with the single complex of the restriction of colimit H, giving
-restrictionLimitIso. The inverse-image composition comparison on each cone
-triangle is exactly rawAffineRestrictedCoefficient. Thus the leg equality
-is exactly rawAffineRestrictedCohomologyMap, proving the last equation.
-This construction asserts no IsColimit B and uses no cohomology continuity. -/
+single complexes with a common lower bound, before any comparison with raw Hom. -/
 theorem exists_restricted_affine_complex_system {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

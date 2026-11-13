@@ -14,8 +14,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # The tensor-formula pullback of modules is left adjoint to pushforward
 
-Source: Stacks Project, Tags 008X, 0095, 0096
-(blueprint: lem-pc-module-pullback-adjunction).
+## References
+
+* [Stacks Project, Tag 008X](https://stacks.math.columbia.edu/tag/008X)
+* [Stacks Project, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section
@@ -38,14 +41,7 @@ variable {X Y : Scheme.{w}} (g : X ⟶ Y)
 adjunction `tensorPullback g ⊣ pushforward g`. The adjunction is pinned to the canonical
 composite by its unit: on a section `m` of `G` over `V` it is `θ(1 ⊗ η_G(m))`, where `η` is the
 unit of the inverse-image/direct-image adjunction of abelian sheaves and `θ` is the
-sheafification of the sectionwise tensor product.
-Source: Stacks, Tag 0096 (blueprint: lem-pc-module-pullback-adjunction).
-Proof: by the change-of-rings adjunction (Tag 008A), `Hom_{O_X}(P_g G, F)` is
-`Hom_{g⁻¹O_Y}(g⁻¹G, F)` via `u ↦ (m ↦ u(1 ⊗ m))`. By the inverse-image/direct-image module
-adjunction (Tag 008Y) this is `Hom_{O_Y}(G, g_* F)`, where `O_Y` acts on `g_* F` through
-`ρ ∘ η_{O_Y}`. Since `ρ` is adjoint to `g^♯`, `ρ_{g⁻¹V} ∘ η_{O_Y,V} = g^♯_V`, so this is the
-pushforward module. The composite bijection is natural in both modules, and its unit is
-the stated sectionwise formula. -/
+sheafification of the sectionwise tensor product. -/
 theorem exists_tensorPullbackAdjunction :
     ∃ adj : tensorPullback g ⊣ pushforward g,
       ∀ (G : Y.Modules) (V : (Opens Y)ᵒᵖ) (m : G.val.obj V),

@@ -12,8 +12,11 @@ import WeilConjectures.AlgebraicGeometry.TensorModelRestrictionAdjunction
 
 /-! # Transposing a supplied augmented complex after open restriction
 
-Source: Stacks Project, Tags 08DJ, 08DL and 08EH.
-(blueprint: lem-sc-tensor-roof-transposition).
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+* [Stacks Project, Tag 08EH](https://stacks.math.columbia.edu/tag/08EH)
 -/
 
 @[expose] public section
@@ -75,31 +78,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 512 in
 /-- Tensor-Hom transposition converts a supplied section representative into a map
 from the total tensor model. The augmentation and its representative are inputs;
-no affine hypothesis, quasi-coherence, or existence of a perfect roof is asserted.
-
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL; perfect.tex, Tag 08EH,
-construction of the two maps and the restriction identity.
-(blueprint: lem-sc-tensor-roof-transposition).
-
-Proof:
-1. The unit-tensor-Hom adjunction on U and the canonical restriction comparison
-   for RHom identify Hom(R(Q(O_X[0])),R(RHom(A,E))) with Hom(R(A),R(E)).
-   Use the tensor-unit comparison for restriction and the right unitor. This is
-   the equivalence e, fixed by the canonical adjunction, rather than an arbitrary
-   isomorphism between the objects supplied by restriction of RHom.
-2. For a supplied K-flat J, transpose ξ:J→RHom(A,E) under the canonical derived
-   tensor-Hom adjunction. The K-flat comparison identifies A tensor^L Q(J) with
-   Q(Tot(P tensor J)), using eA on the first factor. Transport the transpose
-   through this comparison to obtain γ.
-3. Restriction is exact and preserves K-flat complexes and total tensors. The
-   augmentation on the restricted total tensor identifies with id_R(A) tensor
-   R(Q(u)), followed by the right unitor. Hence its image is invertible when
-   R(Q(u)) is invertible; the chain right unitor and eA are also invertible.
-4. The representative tensor-Hom adjunction commutes with restriction, since its
-   evaluation maps on tensor summands are the same sheaf maps after restriction.
-   Apply its naturality in J to R(Q(u))≫s=R(ξ). The unit adjunction and right-unitor
-   identity give R(β)≫e(s)=R(γ), with β exactly the chain formula below.
-   The zero complex and empty open satisfy the same identities. -/
+no affine hypothesis, quasi-coherence, or existence of a perfect roof is asserted. -/
 theorem tensor_roof_transposition
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

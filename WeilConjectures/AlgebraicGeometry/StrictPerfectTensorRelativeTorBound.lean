@@ -23,8 +23,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The relative Tor bound on a strictly perfect chart
 
-Source: Stacks Project, Tags 0DJQ and 08CI, the local relative Tor calculation.
-(blueprint: lem-pc-strict-perfect-tensor-relative-tor-bound).
+## References
+
+* [Stacks Project, Tag 0DJQ](https://stacks.math.columbia.edu/tag/0DJQ)
+* [Stacks Project, Tag 08CI](https://stacks.math.columbia.edu/tag/08CI)
 -/
 
 @[expose] public section
@@ -66,29 +68,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A strictly perfect chart of amplitude `[a,b]` gives the relative tensor bound
-`[a+c,b+d]` on that chart, for any global relative K-flat model of the tensor.
-Source: Stacks Project, Tag 0DJQ, proof, and Tag 08CI, implication (2) to (1).
-
-Proof: On U, represent E by L. Its terms are retracts of finite free modules,
-so they are flat over O_U. Since L is bounded, it is K-flat over O_U, and
-L tensor G|_U represents the restriction of E tensor^L G. Its degree n term
-is the finite direct sum of L^p tensor G^q for p+q=n. If n is outside
-[a+c,b+d], every summand vanishes by one of the two degree bounds.
-For relative flatness, choose an affine neighbourhood V of f(x). On affine
-neighbourhoods W of x inside f^{-1}V the sections of G^q are flat over O_S(V).
-Their filtered colimit is flat over O_S(V), and localization gives flatness
-over O_{S,f(x)}. Thus G^q restricted to U is flat over (f^{-1}O_S)|_U.
-Tensoring with L^p makes a retract of a finite sum of these flat modules;
-finite sums and retracts preserve flatness. The bounded total complex is
-therefore K-flat over (f^{-1}O_S)|_U. The quasi-isomorphism q and the model
-isomorphisms identify its relative derived tensors with those computed by
-P|_U. Open restriction is exact, preserves total tensors and K-flatness,
-and hence identifies the restriction of each homology sheaf with the local
-homology. Tensoring the bounded flat model with F[0] leaves its degree
-bounds unchanged, so the homology sheaf restricts to zero on U. Its sections
-on every V <= U are zero. This also covers empty U, zero complexes, and
-reversed degree bounds, when the bounded complex in question is zero.
-(blueprint: lem-pc-strict-perfect-tensor-relative-tor-bound). -/
+`[a+c,b+d]` on that chart, for any global relative K-flat model of the tensor. -/
 theorem strictPerfect_tensor_relativeTor_bound
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

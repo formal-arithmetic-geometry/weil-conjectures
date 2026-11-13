@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceClassFormula
 
 /-! # The source and class factors of the raw scalar comparison
 
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-module-abelian-hom-source-formula).
+## References
+
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -27,23 +29,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Expand the module pullback and commute only its source and class factors.
-The coefficient comparison is deliberately retained as the module coefficient tail.
-Source: Stacks Project, Tags 03D7 and 03Q8, source-generator part of the scalar
-naturality calculation.
-(blueprint: lem-sbc-raw-module-abelian-hom-source-formula).
-
-Proof: Evaluate the additive composite defining rawModuleAbelianHomMap. Use the module
-raw pullback formula to expose its source, class and coefficient factors. Functoriality of
-scalar forgetting separates these factors. Apply the underived scalar sheaf-composition
-square to the free represented module sheaf and its free abelian generator map. Naturality
-of upperStarComp moves this generator map across the comparison. Apply singleFunctor to
-this sheaf square and use plus_single_source_square_core to identify the inverse derived
-scalar comparison. This moves the source factor past scalar forgetting. Naturality of the
-inverse derived comparison on z moves z past that comparison. Reassociate, leaving the
-inverse comparison at the shifted coefficient, the forgotten module coefficient factor,
-and the scalar coefficient factor untouched. No coefficient square or abelian raw pullback
-is used. The argument covers zero classes, zero or empty sheaves, degree zero and identity
-arrows; neither invertibility of the scalar Hom map nor acyclicity is assumed. -/
+The coefficient comparison is deliberately retained as the module coefficient tail. -/
 theorem rawModuleAbelianHomMap_source_formula
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)

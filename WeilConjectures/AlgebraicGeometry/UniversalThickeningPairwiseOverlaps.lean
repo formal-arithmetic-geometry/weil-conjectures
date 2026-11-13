@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenPieces
 
 /-! # Pairwise overlaps of universal thickenings
 
-Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1.
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
 -/
 
 @[expose] public section
@@ -38,25 +40,7 @@ private theorem universalThickening_iso_source
     · intro d hd
       exact huniq d (by simpa only [Category.assoc] using hd)
 
-/-- Construct the pairwise overlap restrictions, before choosing any transitions.
-
-Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1,
-the general remarks on restriction to opens and the paragraph beginning
-"Choose an affine open covering".
-(blueprint: lem-weil-pbc-universal-thickening-pairwise-overlaps)
-
-Proof: For k,l let W be the inverse image under C.f k of the open image of C.f l.
-The square-zero closed immersion i k is a homeomorphism, so W has a unique
-corresponding open W' in Z' k. Set V(k,l)=W'.toScheme and f(k,l)=W'.ι.
-The source pullback is canonically isomorphic to W.toScheme because C.f l is
-an open immersion. Restrict the universal thickening to W and the whole base,
-using the open-pieces theorem, and transport its source along this canonical
-isomorphism. This gives s(k,l) and universality for the structure map f(k,l) ≫ h' k.
-The restriction equation gives the asserted factorization of s. Membership in
-the range of f is membership in W', whose preimage is W; this is exactly the
-pointwise equivalence. For k=l the image-preimage open W is the whole chart,
-so W' is the whole thickened chart and its inclusion f(k,k) is an isomorphism.
-All constructions are indexed by pairs, so the empty cover is vacuous. -/
+/-- Construct the pairwise overlap restrictions, before choosing any transitions. -/
 theorem universalFirstOrderThickening_pairwiseOverlaps
     {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})
     (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)

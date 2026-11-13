@@ -17,9 +17,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Exactness of restriction to a localized site
 
-Source: Stacks Project, Sites, Section 00XZ (localized site and restriction);
-Modules on Sites, localization section, surrounding Lemma 03DJ
-(blueprint: lem-weil-pbc-site-restriction-exact).
+## References
+
+* [Stacks Project, Tag 00XZ](https://stacks.math.columbia.edu/tag/00XZ)
+* [Stacks Project, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
 -/
 
 @[expose] public section
@@ -30,10 +31,7 @@ namespace CategoryTheory
 
 /-- Restriction of abelian sheaves to the localized site is exact.
 
-Source: Stacks Project, Sites, Section 00XZ; Modules on Sites, localization
-(near Lemma 03DJ). (blueprint: lem-weil-pbc-site-restriction-exact)
-
-Proof, step 1 (`def-weil-pbc-sites-and-cohomology`): for every slice object
+Proof, step 1: for every slice object
 `V ⟶ W`, restriction has section group `G(V)` and the original section maps.
 A covering in the slice is precisely a covering of its underlying object.
 Step 2: the sectionwise kernel of a map of abelian sheaves is a sheaf: a

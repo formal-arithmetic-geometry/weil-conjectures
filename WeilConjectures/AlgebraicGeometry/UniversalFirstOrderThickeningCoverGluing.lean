@@ -13,9 +13,11 @@ import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningGluedAtlas
 /-!
 # Gluing universal first order thickenings on an open cover
 
-Source: Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3),
-last two paragraphs. This gluing assertion does not assume formal unramifiedness.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-cover-gluing)
+ This gluing assertion does not assume formal unramifiedness.
+
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
 -/
 
 @[expose] public section
@@ -248,37 +250,7 @@ private theorem lifts_on_charts
 
 /-- Universal first order thickenings given on an open cover glue to a universal
 first order thickening of the whole source. The local thickenings are explicit
-input data; no existence or formal unramifiedness assumption on `h` is used.
-
-Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
-paragraphs beginning "Choose an affine open covering" and "It turns out".
-(blueprint: lem-weil-pbc-universal-first-order-thickening-cover-gluing)
-
-Proof:
-1. For each pair of charts of `C`, their fibre product is their open intersection.
-   The first clause of `universalFirstOrderThickening_open_pieces` transfers this
-   open to each local thickening. Its second clause says the restricted thickenings
-   are universal over `X` (take the whole base as the base open).
-2. Apply `IsUniversalFirstOrderThickening.unique` to identify the two thickenings
-   of each intersection by their unique isomorphism over `X` fixing the intersection.
-   On triple intersections both composites have these properties, so uniqueness
-   proves the cocycle identity, including the identity on repeated indices.
-3. Glue these schemes along the resulting open isomorphisms using scheme gluing.
-   The local maps from `C.X k` and to `X` commute on intersections, hence glue to
-   `i : Z ⟶ W` and `p : W ⟶ X` with `i ≫ p = h`. The local immersions are the
-   restrictions of `i` along the glued open cover. Closed immersion is local on
-   the target, and its kernel ideals restrict to those of the given immersions.
-   Consequently `i` is a closed immersion and its ideal has square zero.
-4. For a test thickening `j : T ⟶ T'` with a map `a : T ⟶ Z`, pull `C` back along
-   `a` to cover `T`. The underlying homeomorphism of `j` gives the corresponding
-   open cover of `T'`. Restricting `j` to these opens preserves square zero by
-   the first clause of the open-pieces theorem. On each chart local universality
-   produces a lift into the corresponding open of `W`.
-5. On overlaps both lifts land in the thickening of the intersection: this follows
-   on points from surjectivity of `j`. Universality on the intersection identifies
-   them. Glue these morphisms into `W`, and verify both triangle identities locally.
-   Any other lift has the same restrictions by local uniqueness, hence equals it.
-   Together with step 3 these are precisely the three defining clauses. -/
+input data; no existence or formal unramifiedness assumption on `h` is used. -/
 theorem universalFirstOrderThickening_glue
     {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})
     (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)

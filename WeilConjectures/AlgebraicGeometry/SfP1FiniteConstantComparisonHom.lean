@@ -30,14 +30,8 @@ attribute [local irreducible] DerivedCategory.singleFunctors upperStar lowerStar
 attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
 
 /-- The single-degree constant comparison is the native finite constant comparison.
-Source: blueprint thm-amb-p1-adjunction.proof.md, constant-object comparison.
-(auxiliary; not a blueprint node).
 
-Proof: the single-degree left-derived comparison is the exact-derived comparison
-followed by the exact single-degree comparison. Adjoining the single image of
-the sheaf-level constant comparison gives the native constant comparison, by
-associativity. First prove this for an abstract coefficient category and then
-specialize to modules over A. -/
+. -/
 theorem finiteConstantComparison_hom
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).hom.app

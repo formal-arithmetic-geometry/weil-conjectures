@@ -13,9 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 /-! # Compact-support coordinate contractions before inserting a diagonal
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the exchange and projection computations in both triangles.
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -237,28 +235,7 @@ private theorem supported_projection_trace {X Y : Scheme.{u}}
   rw [projection_iso_hom]
   exact proper_trace (ModuleCat.{u + 1} A) f M N t (ordinary_trace A f M N t)
 
-/-- Coordinate contractions for compact support, without using the diagonal class or its integrals.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two exchange/projection
-computations before inserting delta (auxiliary; not a blueprint node).
-
-Proof: Apply firstExtraction, the coordinate Kunneth identity before a trace is chosen.
-Postcompose with the trace and the left unitor. Naturality of symmetry moves the trace
-past the final swap, and its compatibility with the unitors gives the right unitor.
-ProjectionTraceNormalization transports through the proper forget-supports isomorphism:
-projection compatibility, naturality of that isomorphism, tensor naturality and unitor
-naturality prove supported_projection_trace. Cancel the invertible projection, combine
-the two direct-image maps, and expand traceFirst. This gives the first equality without
-using the line condition or e.
-For the second equality apply secondExtraction with evenLineSelfSymmetry and e, then
-postcompose with B tensor f* of trace tensor identity followed by the left unitor.
-Naturality and left unitality of the tensor pullback comparison, symmetry naturality
-and the right-unitor tensor identity prove shuffle_trace. This identifies the resulting
-map with tensoring the identity by the pulled-back scalar trace, followed by the right
-unitor. Combining that scalar trace with inverse coordinate comparison and inverse
-exchange gives exactly traceSecond. On the other side the same factors form the given
-counit inside the coefficient-first twisted pullback. Every map is the specified
-canonical one; the diagonal class and its integral normalization never occur. -/
+/-- Coordinate contractions for compact support, without using the diagonal class or its integrals. -/
 theorem contractions {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
     (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ) {B : DerivedCategoryModule A X}

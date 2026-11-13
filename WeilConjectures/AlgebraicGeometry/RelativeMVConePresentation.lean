@@ -14,7 +14,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.RelativeMVPinnedTriangleComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.EndpointConePresentation
 
-/-! # A mapping-cone model of the relative Mayer--Vietoris diagram -/
+/-! # A mapping-cone model of the relative Mayer--Vietoris diagram
+
+## References
+
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+-/
 
 @[expose] public section
 universe u w
@@ -26,36 +34,7 @@ namespace AlgebraicGeometry
 
 /-- Construct a strict square of first restriction maps whose functorial cones
 compute the two relative overlap terms. This is the enhanced Mayer--Vietoris
-construction; no short exact replacement on the base is required here.
-
-Source: Stacks Project, Cohomology, Tags 08BV, 08HY and 08HZ, and Derived Categories
-of Schemes, Tag 0DJ9, the induction diagram.
-(blueprint: lem-pc-relative-mv-cone-presentation).
-
-Proof: Choose K-injective resolutions with injective terms for K and K'. On each
-cover the restriction units and their difference form the short exact sequence
-of Tag 08HZ. The inverse-image cover is still compact: g is a morphism between
-affine schemes, hence affine, as is its base change g'. Restricting a K-injective
-complex to an open remains K-injective. Transpose the given object morphism along
-the derived adjunction for g', and represent the transposed morphism by a chain
-map into a K-injective resolution. Its restrictions give a strict morphism of
-Mayer--Vietoris diagrams. Compute Rf* and Rf'* by these resolutions and Lg* by
-K-flat resolutions of the entire diagram. Resolve the finite arrow diagram,
-rather than its vertices independently, so its first square is a strict chain
-square t ≫ b = a ≫ t'. Call the resulting first arrows t and t'. Their cones
-compute the overlap terms because the original restriction rows are short exact
-and both derived functors are triangulated. Functoriality of this cone comparison
-identifies the induced cone map with the relative overlap comparison. Exact open
-restriction computes derived open pullback. Compare its adjunction with the pinned
-adjunction by uniqueness of right adjoints, and compare composite direct images
-by the right-adjoint mates of the pinned pullback composition isomorphisms.
-Naturality of units identifies the localized first maps; transposing restricted
-counits identifies the cone inclusions with the difference maps. Expanding the
-base-change mate, and using the equality of the two pullback projections, gives
-the displayed global and overlap component equations, including the given φ.
-This comparison is made before choosing short exact mapping-cylinder models.
-For an empty open the corresponding restriction complex is zero, and for a
-repeated open the row is split; the same cone construction applies. -/
+construction; no short exact replacement on the base is required here. -/
 theorem relativeMV_cone_presentation
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

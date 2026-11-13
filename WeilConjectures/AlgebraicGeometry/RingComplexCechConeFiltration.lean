@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.RingComplexGodementConstruction
 import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension
 import WeilConjectures.CategoryTheory.DerivedCategory.BoundedComplexTriangulatedDevissage
 
-/-! # Finite localization filtration of the augmentation cone -/
+/-! # Finite localization filtration of the augmentation cone
+
+## References
+
+* [Stacks Project, Tag 0A6R](https://stacks.math.columbia.edu/tag/0A6R)
+-/
 
 @[expose] public section
 
@@ -93,25 +98,6 @@ private theorem localization_term_mem
 /-- The cone of a model augmentation belongs to every triangulated subcategory containing
 modules on which some element of I acts invertibly. This assertion concerns the target
 model alone and imposes no condition on any source of morphisms.
-Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
-the finite localization filtration of its displayed extended Cech complex.
-(auxiliary; not a blueprint node)
-
-Proof: choose a finite generating list f of I and use the augmented model isomorphism
-in hK. For its ordered model C, the degree-zero augmentation is an isomorphism and
-all negative terms vanish. Cancelling the resulting identity pair in its cone gives
-the ordinary finite unaugmented localization complex, shifted as prescribed by the
-cone convention. Its terms are finite products of A[1/g], with g a product of a
-nonempty increasing subset of f. Each g lies in I, and multiplication by g is bijective
-on that localization, so each factor in degree zero belongs to P by hP. Finite products
-are finite biproducts and belong to P; the zero terms do as well. Filter the bounded
-complex by its degrees. The successive triangles have shifts of these terms as their
-third vertices, so induction using closure under shifts and distinguished triangles
-puts its derived object in P. The augmentation-compatible derived isomorphism gives
-an isomorphism of the augmentation triangles (hence their cones), transporting this
-membership to the actual cone of εK. For an empty generating list the augmentation is
-already an isomorphism and its cone is zero. Zero and nilpotent products simply give
-zero localization factors; repeated generators require no change.
 -/
 theorem ringComplex_cech_cone_filtration
     (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]

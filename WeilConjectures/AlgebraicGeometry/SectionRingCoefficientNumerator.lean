@@ -71,7 +71,6 @@ private theorem veroneseIso_power {X : Scheme.{v}} (L : X.Modules) [L.IsInvertib
 
 /-- Existence of a coefficient function satisfying the numerator equation.
 The function is obtained by the local quotient construction of Stacks Tags 01N8 and 01NK.
-(blueprint: lem-sc-section-ring-coefficient-data-numerator)
 
 Write e_n for the restriction of the degree-n*d component of s^n. The section-ring
 product is the tensor product transported by tensorPowAddIso. Restriction preserves

@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Sheafification of cohomology over open subsets
 
-Source: Stacks Project, Cohomology, Lemma 20.32.3, Tag 0BKJ
-(blueprint: lem-pc-ringed-space-sheafification-cohomology).
+## References
+
+* [Stacks Project, Tag 0BKJ](https://stacks.math.columbia.edu/tag/0BKJ)
 -/
 
 @[expose] public section
@@ -94,26 +95,7 @@ private def complexSheafificationHomologyIso (X : RingedSpace.{u}) (q : ℤ) :
 unbounded derived category. Its sheafification is naturally the cohomology sheaf.
 The comparison with that sheaf is the sheafification unit followed by this isomorphism;
 it represents every stalk element locally, detects zero locally, and commutes with
-morphisms on germs.
-
-Source: Stacks Project, Tag 0BKJ
-(blueprint: lem-pc-ringed-space-sheafification-cohomology).
-
-Proof:
-1. Resolve by `CochainComplex.kInjectiveResolutionFunctor`, as in
-   `def-pc-ringed-spaces-derived-direct-image`. A quasi-isomorphism between the resulting
-   K-injective complexes is a homotopy equivalence. Taking sections and then cohomology
-   therefore inverts quasi-isomorphisms and descends to the derived category.
-2. Compute cycles, boundaries and their quotient sectionwise. Exact sheafification
-   (`lem-weil-pbc-ringed-site-module-sheafification-exact`) identifies their sheafifications
-   with the cycles, boundaries and cohomology sheaf of the resolution. The resolution
-   quasi-isomorphism identifies the latter with the derived cohomology sheaf. This is
-   natural in chain maps and hence, by localization, in all derived morphisms.
-3. The sheafification unit is an isomorphism on stalks
-   (`lem-weil-pbc-stalk-sheafification-space`). The stalk is the filtered colimit over
-   neighborhoods (`def-weil-pbc-module-stalk`), so every element is represented locally
-   and a zero germ vanishes on a smaller neighborhood. Naturality of the comparison
-   gives the asserted compatibility for the germ of the image of a section. -/
+morphisms on germs. -/
 theorem sheafification_cohomology (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] (q : ℤ) :
     ∃ P : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤

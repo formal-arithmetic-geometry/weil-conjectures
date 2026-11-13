@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # SchemeDerivedMateEvaluation
 
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation).
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -40,9 +42,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The adjunction choice already used by `schemeDerivedBaseChangeMap`, pinned to the
-selected left-derived counit and the recorded right-derived unit.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+selected left-derived counit and the recorded right-derived unit. -/
 noncomputable def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶ Q) :
     derivedPullback k ⊣ schemeDerivedDirectImage k :=
   Classical.choose (exists_schemeDerivedAdjunction k
@@ -52,18 +52,14 @@ noncomputable def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶
       (Classical.choose_spec exists_derivedPullbackComposition))) k))
 
 /-- The composition choice already used by `schemeDerivedBaseChangeMap`, determined
-by the left-derived universal property in `exists_derivedPullbackComposition`.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+by the left-derived universal property in `exists_derivedPullbackComposition`. -/
 noncomputable def canonicalDerivedPullbackComposition {P Q Z : Scheme.{u}}
     (k : P ⟶ Q) (l : Q ⟶ Z) :
     derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=
   (Classical.choose (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition)))) k l
 
-/-- The square comparison already used in the defining transpose of base change.
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+/-- The square comparison already used in the defining transpose of base change. -/
 noncomputable def canonicalDerivedSquareComparison {P Q P' Q' : Scheme.{u}}
     (l : P ⟶ Q) (l' : P' ⟶ Q') (r : Q' ⟶ Q) (r' : P' ⟶ P)
     (hh : r' ≫ l = l' ≫ r) (M : schemeDerivedCategory Q) :
@@ -73,11 +69,7 @@ noncomputable def canonicalDerivedSquareComparison {P Q P' Q' : Scheme.{u}}
     eqToHom (congrArg (fun k ↦ (derivedPullback k).obj M) hh.symm) ≫
       (canonicalDerivedPullbackComposition r' l).inv.app M
 
-/-- Evaluating the counit-defined mate recovers its defining transpose.
-Proof: unfold the mate, apply the inverse-forward identity for the pinned
-adjunction Hom equivalence, and reassociate the defining square comparison.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+/-- Evaluating the counit-defined mate recovers its defining transpose. -/
 theorem schemeDerivedMate_evaluation
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

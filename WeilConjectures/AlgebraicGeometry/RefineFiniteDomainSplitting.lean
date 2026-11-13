@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ReducedProductLocalization
 
 /-!
 # Combining finitely many localizations of a finite domain decomposition
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-refine-finite-domain-splitting)
 -/
 
 @[expose] public section
@@ -35,34 +31,7 @@ open AlgebraicGeometry
 
 /-- Combine specified principal opens on which the factors of an existing reduced algebra
 product are universal homeomorphisms. This is localization and tensor-product bookkeeping;
-the existence of those opens, and the product decomposition, are hypotheses.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9, taking a common
-localization for the finitely many purely inseparable factors.
-(blueprint: lem-weil-pbc-refine-finite-domain-splitting)
-
-Proof:
-1. Put `t = prod j, s j` in `S = A[1/c]` (the empty product is one). It is nonzero since
-`S` is a domain. Write it as `a / c^n` with `a` nonzero in `A`. Set `d = c * a`.
-The universal properties identify `S[1/t]` with `A[1/d]`: inverting `t` inverts `a`,
-and conversely; inverting the product `c*a` inverts both factors.
-2. Set `A'' = A' tensor_S S[1/t]` and `E j = D j tensor_S S[1/t]` with the induced
-maps. This is localization at the image of `t` in each ring. The maps from `S` into `A'`
-and then into each `D j` are injective: the first is a finite etale surjective
-map between domains, so its kernel vanishes by lying over and reducedness; injectivity
-of the second is a hypothesis. Thus
-the localized factors remain domains. Finiteness, etaleness, and surjectivity of the base
-cover persist under base change. Finiteness of each factor does also.
-3. Each `s j` is a unit in `S[1/t]` because it divides `t`. Therefore each new factor map
-is a base change of the specified universal homeomorphism on `S[1/s j]`. Stability under
-base change gives its universal-homeomorphism property, and in particular surjectivity.
-4. Localize the given reduced product equivalence. Localization commutes with finite
-products and with reduction: a fraction is nilpotent exactly when some denominator
-multiple of its numerator is nilpotent. Tensor associativity identifies the localized
-left side with the reduction of `B tensor_A A''`. Transport along the base localization
-isomorphism of step 1 to obtain the asserted `A''`-algebra equivalence. For zero factors
-this says that localization of the zero ring is zero. -/
+the existence of those opens, and the product decomposition, are hypotheses. -/
 theorem exists_refinement_of_finite_domain_splitting
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]
     (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]

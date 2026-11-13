@@ -21,8 +21,12 @@ import WeilConjectures.AlgebraicGeometry.SelfTorTargetBasicLocalization
 
 /-! # Self-Tor coordinates on principal affine localizations
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-u4-self-tor-basic-ideal-wedge-coordinates). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -89,40 +93,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Source and target coordinates agree under principal affine localization on
 restrictions of ideal tuples from the larger chart. The input tuple is defined on U,
 not on its principal open V. General ideal tuples on V and general affine inclusions
-are not asserted here.
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-u4-self-tor-basic-ideal-wedge-coordinates).
-
-Proof: For each U = Spec A identify the closed chart with Spec(A/I). Choose an
-augmented projective resolution of A/I and sheafify it using
-exists_affine_quotient_sheafified_resolution. Exactness of associated-sheaf formation
-and the bounded-above flat resolution comparison with the fixed derived tensor give
-the target coordinates t_U. The quotient ideal acts by zero on its homology, so
-pulling back gives the associated Tor module on the closed chart. For s_U use
-affineOpen_kernel_conormal_sections with identity ring coordinates and form its
-exterior power, using exteriorSheaf_restrict_iso. Specify these coordinates by the
-augmentation and by the pullback-unit equation, respectively, on every affine chart.
-
-Suppose V = D(f) in U and let b be an ideal tuple defined on U. Its inclusion into
-O_U gives g:Fin(n) -> I. The Koszul complex on g has its quotient augmentation over A.
-Lift it to the projective resolution chosen on U. Tensoring with A/I makes its top
-wedge a cycle. The defining normalization selfTorConormalComparison_spec identifies
-its homology image with c_U on the conormal wedge of g. Localizing at f is exact,
-preserves projective resolutions, and takes this cycle and augmentation to the cycle
-and augmentation for g/1 over A_f. Compare the localized projective resolution with
-the resolution chosen on V, over the quotient augmentation. The two Koszul lifts are
-homotopic, hence have equal homology images. Applying the same normalization over
-A_f identifies the latter image with c_V on the restricted conormal tuple.
-The sheafified resolution comparison identifies these images in the fixed Q,
-compatibly with restriction: it is induced by the localized augmentation and the
-K-flat comparison, not an arbitrary homology isomorphism. The source coordinate unit
-equations identify the input wedges with these same conormal wedges. This proves
-exactly the displayed equality for the restricted global tuple; neither clearing
-denominators for an arbitrary ideal tuple on V nor section descent is needed here.
-Degree zero uses the empty Koszul wedge, namely the quotient unit. For f=0 both sides
-are sections on the empty chart; f=1 uses the identity localization. A zero quotient
-gives zero modules. Regularity, finiteness of I, and acyclicity of the Koszul complex
-are not assumed. -/
+are not asserted here. -/
 theorem exists_basic_ideal_wedge_selfTor_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

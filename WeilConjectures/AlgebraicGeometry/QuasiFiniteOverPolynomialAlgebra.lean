@@ -16,8 +16,10 @@ import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-! # Quasi-finite over a polynomial algebra
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00QE
-(blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
+## References
+
+* [Stacks Project, Tag 00QE](https://stacks.math.columbia.edu/tag/00QE)
+* [Stacks Project, Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)
 -/
 
 @[expose] public section
@@ -133,27 +135,7 @@ private theorem isOpen_singleton_fiber_of_embedding
   simpa only [Set.image_singleton, hx] using H.isOpenMap _ ho
 
 /-- If the entire fibre at the contraction of `q` has dimension `n`, polynomial
-coordinates in `n` variables can be chosen so that the map is quasi-finite at `q`.
-Source: Stacks Project, Algebra, Lemma Tag 00QE, second paragraph of the proof,
-using Noether normalization Tag 00OY.
-(blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
-
-Proof: Put `p = q ∩ R`, `k = κ(p)` and `F = k ⊗[R] S`. The fibre contains the point
-corresponding to `q`, so it is nonzero. It is finite type over `k` by base change.
-The dimension of its spectrum equals its ring Krull dimension. Noether normalization
-therefore supplies an injective finite map `k[t₁, …, t_n] → F`. For each variable
-image `y_i`, the localization-quotient presentation of `F` gives `u_i ∉ p` and
-`s_i ∈ S` with `u_i y_i = 1 ⊗ s_i`. Multiplication of each variable by the nonzero
-scalar `u_i` is a polynomial automorphism over `k`, so the rescaled coordinate map
-is still finite. Set `f = aeval s`. Its base change is this finite coordinate map.
-Polynomial scalar extension identifies `k ⊗[R] R[t]` with `k[t]` and hence
-makes `F` finite over `k ⊗[R] R[t]`. The commuting square on spectra has fibre
-embeddings as its vertical maps. Every point in the fibre through `q` contracts
-to `p`, so this fibre is homeomorphic to the fibre through the point of `Spec F`.
-The finite map upstairs is quasi-finite, and its distinguished singleton is open.
-Transport that open singleton to obtain the required quasi-finiteness at `q`.
-Finally the original finite set of generators over `R` also generates `S` over
-`R[t]`, because the structure map extends the original `R`-algebra structure. -/
+coordinates in `n` variables can be chosen so that the map is quasi-finite at `q`. -/
 private theorem exists_polynomial_isQuasiFiniteAtPrime_of_fibre_dimension
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.FiniteType R S] (q : PrimeSpectrum S) (n : ℕ)
@@ -287,41 +269,7 @@ private theorem exists_polynomial_isQuasiFiniteAtPrime_of_fibre_dimension
 
 set_option linter.unusedVariables false in
 /-- A finite type algebra is locally quasi-finite over a polynomial algebra in its fibre
- dimension.
-
-Source: Stacks Project, Algebra, Lemma Tag 00QE
-(blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
-Proof:
-
-1. Put `p = q ∩ R` and `F = κ(p) ⊗[R] S`. The fibre homeomorphism embeds
-`Spec F` in `Spec S`. The infimum of dimensions of open neighbourhoods of the
-point corresponding to `q` is attained. Pull an ambient basic open `D(g₀)` back
-into a minimizing neighbourhood. Monotonicity and the defining infimum force
-its dimension to be `n`. Localization and base change identify this open with
-`Spec (κ(p) ⊗[R] S[g₀⁻¹])`. Lift `q` to the localized prime `q₀`.
-
-2. Noether normalization gives a finite map from `κ(p)[t₁, …, t_n]` to this
-localized fibre. Write each variable image as `yᵢ`, and clear its residue-field
-denominator: `uᵢ • yᵢ = 1 ⊗ sᵢ`, with `uᵢ ∉ p` and `sᵢ ∈ S[g₀⁻¹]`.
-Scaling each variable by the unit `uᵢ` is a polynomial automorphism, so the
-rescaled map remains finite. The elements `sᵢ` define the required coordinate
-map `f₀ : R[t₁, …, t_n] → S[g₀⁻¹]`, initially at `q₀`.
-
-3. Polynomial scalar extension and the rescaled normalization give a finite
-map on the `κ(p)`-fibres. The fibre embeddings form a commuting square on
-spectra. Every point in the fibre of `f₀` through `q₀` lies over `p` and lifts
-upstairs, so restricting the embedding gives a homeomorphism of the whole
-fibres. The finite map upstairs has an open singleton at the distinguished
-point. Transporting it proves quasi-finiteness at `q₀`. Restricting scalars
-from the original finite-type algebra gives finite type over the polynomial ring.
-
-4. Mathlib's finite-subalgebra form of Zariski's Main Theorem supplies a finite
-polynomial subalgebra and an element `h ∉ q₀` whose localizations map bijectively
-onto `S[g₀⁻¹][h⁻¹]`. Finiteness, localization, and this surjection give
-quasi-finiteness at every prime of the latter ring. Let `b` be a numerator of `h`;
-its image is associated to `h`, so `b ∉ q`. The iterated localization is a
-localization of `S` away from `g₀*b`. Transport `f₀` and quasi-finiteness across
-its canonical algebra equivalence with `S[(g₀*b)⁻¹]`. -/
+ dimension. -/
 theorem exists_quasiFinite_over_polynomial_algebra
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.FiniteType R S] (q : PrimeSpectrum S)

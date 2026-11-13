@@ -11,16 +11,7 @@ import Mathlib.RingTheory.AlgebraicIndependent.Basic
 set_option autoImplicit false
 universe u
 namespace AlgebraicGeometry
-/-- Separably generated extensions transport across a residue-field ring equivalence.
-Source: Stacks Project, Tag 030O (definition of separable generation).
-Proof: keep the same subset of E as transcendence basis. Transport algebraic
-independence in both directions along e, using the compatibility of algebra maps;
-maximality is therefore unchanged. Surjectivity of e and compatibility show that
-the coefficient fields have the same image in E. Their intermediate fields
-adjoining the basis thus have equal underlying subfields. The identity of these
-subfields is a ring equivalence commuting with their embeddings in E. Transport
-separability along this equivalence and the identity equivalence of E.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding-transport) -/
+/-- Separably generated extensions transport across a residue-field ring equivalence. -/
 theorem separablyGenerated_of_residueField_equiv
     (K K' E : Type u) [Field K] [Field K'] [Field E]
     (e : K ≃+* K') [Algebra K E] [Algebra K' E]

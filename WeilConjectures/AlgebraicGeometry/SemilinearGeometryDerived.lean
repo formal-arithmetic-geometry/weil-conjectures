@@ -8,8 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearGeometryCore
 
 /-! # Normalized derived geometric operations on semilinear systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A4
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* Zheng Construction 4.1 and Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +44,7 @@ variable (A : Data.{c, v, r} J B τ)
   (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
   (adjSet : uInv ⊣ uPush)
 
-/-- Derived geometric operations with canonical K-injective and tensor normalizations.
-Source: Zheng Construction 4.1 and Lemma 4.10 (auxiliary; not a blueprint node). -/
+/-- Derived geometric operations with canonical K-injective and tensor normalizations. -/
 structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet where
   /-- The same derived adjunction at each level. -/
   derivedLevelAdjunction : ∀ n : ℕ,

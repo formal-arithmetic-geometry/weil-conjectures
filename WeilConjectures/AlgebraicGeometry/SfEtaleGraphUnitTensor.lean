@@ -11,10 +11,11 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleGraphExchangeTensor
 /-! # Tensor identity for the specified compactification graph unit
 
 This is the geometric unit calculation preceding the adjunction calculation of the
-etale projection square. Source: the proof of
-`lem-sf-etale-graph-projection-arbitrary-base`, steps 2--6; blueprint
-`sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md`, paragraph 3;
-Stacks Tag 0GKF.
+etale projection square.
+
+## References
+
+* [Stacks Project, Tag 0GKF](https://stacks.math.columbia.edu/tag/0GKF)
 -/
 
 @[expose] public section
@@ -80,10 +81,6 @@ private theorem graph_unit_fac
 /-- The graph unit respects the specified proper/open projection, in the exact
 inverse-image model. This statement concerns the graph unit before transposition;
 it neither asserts invertibility nor mentions etale sum extension.
-
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3, and the accepted
-proof of `lem-sf-etale-graph-projection-arbitrary-base`, steps 2--6; Stacks Tag 0GKF
-(auxiliary; not a blueprint node).
 
 Proof in words. Write F = Rr_*Dj_!, E = D(e^*), and J = EK. The graph sigma in
 Z times_W V is clopen: it is a section of a separated proper morphism, and is an

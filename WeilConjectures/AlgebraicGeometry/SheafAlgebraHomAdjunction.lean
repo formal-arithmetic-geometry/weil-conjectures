@@ -11,8 +11,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The underived algebra-valued sheaf Hom adjunction
 
-Source: Stacks Project, Modules, Tag 0A6F; Duality for Schemes, Tags 0BV0 and 0BV1
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction).
+## References
+
+* [Stacks Project, Tag 0A6F](https://stacks.math.columbia.edu/tag/0A6F)
+* [Stacks Project, Tag 0BV0](https://stacks.math.columbia.edu/tag/0BV0)
+* [Stacks Project, Tag 0BV1](https://stacks.math.columbia.edu/tag/0BV1)
 -/
 
 @[expose] public section
@@ -49,9 +52,7 @@ private noncomputable abbrev res (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :
       (forget₂ CommRingCat RingCat)).map B.hom)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Send m to the O-linear map b ↦ φ(b • m), on every open over U.
-Source: Stacks Project, Modules, Tag 0A6F
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+/-- Send m to the O-linear map b ↦ φ(b • m), on every open over U. -/
 private noncomputable def currySection
     {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} {M : BMod Y B} {F : OMod Y} (φ : (res Y B).obj M ⟶ F)
     (U : (Opens Y)ᵒᵖ) (m : M.val.obj U) : sheafAlgebraHomSections Y B F U where
@@ -92,9 +93,7 @@ private noncomputable def currySection
     rw [← M.val.map_comp_apply, ← op_comp, Over.w]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Assemble the sectionwise maps into a B-linear sheaf morphism.
-Source: Stacks Project, Modules, Tag 0A6F
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+/-- Assemble the sectionwise maps into a B-linear sheaf morphism. -/
 private noncomputable def curry
     {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} {M : BMod Y B} {F : OMod Y}
     (φ : (res Y B).obj M ⟶ F) :
@@ -149,9 +148,7 @@ private noncomputable def curry
         exact M.val.congr_map_apply (Subsingleton.elim _ _) m }
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluate at 1 to recover an O-linear sheaf morphism.
-Source: Stacks Project, Modules, Tag 0A6F
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+/-- Evaluate at 1 to recover an O-linear sheaf morphism. -/
 private noncomputable def uncurry
     {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} {M : BMod Y B} {F : OMod Y}
     (ψ : M ⟶ sheafAlgebraHomObj Y B F) :
@@ -217,30 +214,7 @@ private theorem uncurry_apply
       (1 : B.right.obj.obj U) := rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction of scalars is left adjoint to the explicitly constructed algebra-valued Hom.
-
-Proof: For a B-module sheaf M and an O-module sheaf F, send a morphism φ from the
-scalar restriction of M to F to ψ with ψ_U(m)_V(b) = φ_V(b • res_{U,V}(m)).
-Here V ranges over opens contained in U, as in `sheafAlgebraHomSections`.
-Conversely send ψ to φ_U(m) = (ψ_U(m)).app (op (Over.mk (𝟙 U))) 1.
-Additivity in m and b follows from distributivity and additivity of φ. O-linearity
-in b follows from O-linearity of φ and the scalar-tower identity. B-linearity in m
-follows from associativity and commutativity of multiplication and
-`sheafAlgebraHom_smul`: multiplying ψ by c precomposes its argument by c.
-For V contained in U, restrictions preserve products and scalar multiplication;
-φ's naturality therefore makes the family in V a presheaf morphism and the family
-in U a sheaf morphism into `sheafAlgebraHomObj`. Evaluation at 1 is O-linear by
-`sheafAlgebraHom_underlying_linear`, and commutes with restrictions since ring
-restriction preserves 1. The composites are φ(1 • m) = φ(m) and
-ψ(b • m)(1) = (b • ψ(m))(1) = ψ(m)(b). Thus the two maps are inverse.
-Precomposition in M and postcomposition in F commute with these formulas;
-`sheafAlgebraHomMap` is precisely postcomposition, so the equivalences are natural
-in both variables. Apply `Adjunction.mkOfHomEquiv` to these natural equivalences.
-The same formulas work when B is the zero ring or the scheme is empty: units and
-module identities still hold, and no choice of a nonzero section was used.
-
-Source: Stacks Project, Modules, Tag 0A6F; Duality for Schemes, Tags 0BV0 and 0BV1
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+/-- Restriction of scalars is left adjoint to the explicitly constructed algebra-valued Hom. -/
 theorem sheafAlgebraHom_adjunction (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :
     Nonempty ((SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)

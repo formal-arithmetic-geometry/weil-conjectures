@@ -16,8 +16,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Naturality of the ordinary balanced tensor comparison
 
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-(blueprint: lem-pc-relative-tensor-pullback-balanced-naturality)
+## References
+
+* [Stacks Project, Tag 08DE](https://stacks.math.columbia.edu/tag/08DE)
 -/
 
 @[expose] public section
@@ -286,28 +287,7 @@ private theorem inverse_naturality {C : Type*} [Category C]
 namespace AlgebraicGeometry.Scheme
 
 -- Comparing tensors over two rings requires explicit coefficient-forgetting reductions.
-/-- The balanced tensor identity for ordinary module sheaves is natural in both variables.
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-
-Proof: write R = f-inverse O_S and B = O_X. On sections, the balanced map
-M tensor_B (B tensor_R N) -> M restricted to R tensor_R N sends
-m tensor (b tensor n) to (b*m) tensor n. Its inverse sends m tensor n to
-m tensor (1 tensor n). Additivity and the B- and R-balancing relations make
-both maps well defined. Their composites are the identity on pure tensors,
-and pure tensors generate the section tensor products. Both maps commute
-with restrictions. Tensoring with module sheafification agrees with
-sheafifying the tensor presheaf, so replacing the scalar-extension presheaf
-by its sheafification preserves this comparison. Underlying module
-sheafification is abelian sheafification, independent of the coefficient ring.
-The sheafification universal property therefore gives inverse maps of
-abelian sheaves. The construction is natural in each variable:
-a B-linear map commutes with multiplication by b, and an R-linear map
-commutes with forming b tensor n. Transport the second factor along hG;
-hGmap identifies its morphisms with the tensor pullback morphisms. Thus the
-two displayed naturality equalities hold. This works for arbitrary modules,
-including zero modules, zero coefficient rings, and the empty scheme. No
-complex, differential, coproduct, flatness or derived category is involved.
-(blueprint: lem-pc-relative-tensor-pullback-balanced-naturality) -/
+/-- The balanced tensor identity for ordinary module sheaves is natural in both variables. -/
 theorem exists_relativeTensorPullback_balanced_natural
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤

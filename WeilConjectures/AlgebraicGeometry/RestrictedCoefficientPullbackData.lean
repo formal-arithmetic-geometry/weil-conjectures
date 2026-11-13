@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.ModuleRingedToposDerivedComparis
 /-! # Constructed regular-coefficient pullback comparisons
 
 The ordinary and exact derived comparisons are independent of the projection-mate theorem.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section
@@ -31,18 +36,14 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
 
 /-- The ordinary restricted-regular pullback identification: restrict the regular
-S-module after pullback and apply the specified monoidal unit comparison.
-Source: blueprint rational proper-base-change proof (1), cartesian coefficients;
-Stacks 07A4 (auxiliary; not a blueprint node). -/
+S-module after pullback and apply the specified monoidal unit comparison. -/
 def regularPullback₀ (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.upperStar R f).obj (B₀ a Y) ≅ B₀ a X :=
   (CondensedRing.comapUpperStarIso a f).symm.app _ ≪≫
     (V₀ a X).mapIso (Functor.Monoidal.εIso (CondensedRing.upperStar S f)).symm
 
 /-- The canonical rho, using exact inverse image, its localization comparison and
-its degree-zero comparison, followed by the ordinary cartesian identification.
-Source: blueprint rational proper-base-change proof (1); Stacks 07A4 and 07A6
-(auxiliary; not a blueprint node). -/
+its degree-zero comparison, followed by the ordinary cartesian identification. -/
 def regularPullback (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (L R f).obj (B a Y) ≅ B a X := by
   unfold L CondensedRing.moduleObjectDerivedPullback

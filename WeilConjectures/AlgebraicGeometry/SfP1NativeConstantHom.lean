@@ -20,13 +20,8 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   Functor.mapDerivedCategory DerivedCategory.singleFunctors upperStar
 
 /-- The single-degree constant comparison reassociates to the native constant comparison.
-Source: blueprint thm-amb-p1-adjunction.proof.md, constant-object comparisons.
-(auxiliary; not a blueprint node).
 
-Proof: the single-degree left-derived comparison consists of the exact-derived
-comparison followed by the exact single-degree comparison. Composing with the
-single image of the sheaf-level constant comparison supplies the three factors
-in the native constant comparison. Associativity changes their parentheses. -/
+. -/
 theorem nativeConstant_hom
     (B : Type uB) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

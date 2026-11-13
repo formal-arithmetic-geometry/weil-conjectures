@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleMaps
 
 /-! # Explicit maps for restricted degree-zero complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 03CB](https://stacks.math.columbia.edu/tag/03CB)
 -/
 
 @[expose] public section
@@ -212,22 +216,7 @@ private lemma single_naturality {A B C : Type*} [Category A] [Category B] [Categ
   rw [hh]
   simp only [Functor.map_comp]
 
-/-- The explicit cone comparison intertwines the restricted diagram transitions.
-Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object),
-and Tag 03CB inverse-image composition comparisons.
-(blueprint: lem-sbc-restricted-affine-single-cone-naturality).
-
-Proof: Expand the explicit cone isomorphisms and restricted transitions, and substitute
-hH for the coefficient diagram arrow. Write q_i for a restricted cone leg, r_i for
-the stage second projection, and r for the cone point second projection. The pullback
-projection identity is q_i followed by r_i equals r followed by c_i. The cone triangle
-identifies q_j followed by the restricted transition with q_i. Apply upperStarComp_assoc
-first to the triangle of the two original cone legs and the original transition, then
-to the corresponding restricted triangle, and then to the second-projection squares.
-Naturality moves the images of eH and of the coefficient transition through these
-comparisons. Cancel inverse comparisons and the adjacent eH isomorphisms. Applying
-singleFunctor and its natural inverse-image comparison gives the displayed equation.
-This argument needs only hH, not the coefficient transition laws or any colimit. -/
+/-- The explicit cone comparison intertwines the restricted diagram transitions. -/
 theorem restrictedAffineSingleConeIso_naturality {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

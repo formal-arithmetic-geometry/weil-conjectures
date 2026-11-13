@@ -11,7 +11,11 @@ import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
 /-! # Transport of normalized scalar tensor comparisons to section modules
 
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -404,14 +408,8 @@ private theorem ordinary_generator (a : Λ ⟶ Λ') [IsMonHom a]
       (E.functor.obj (B₀ a T)) U x z) hxy))
 
 /-- The internal scalar and tensor normalizations transport to section modules.
-Source: Stacks Tags 03EK, 06YY, 07A6; blueprint paragraph (1), steps 1--5.
-(auxiliary; not a blueprint node).
-Proof: conjugate the ordinary and derived internal comparisons by the fixed exact
-section equivalences and their tensor comparison. The pure generator equation is
-preserved by the balanced tensor formula and symmetry. On flat-term K-flat
-representatives the universal computation equations cancel the scalar and tensor
-counits; localization and essential surjectivity then give the displayed equation
-for every derived object. -/
+
+. -/
 theorem section_tensor_normalized_of_normalized (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
     (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)

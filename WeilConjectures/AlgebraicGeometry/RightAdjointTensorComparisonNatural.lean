@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.RightAdjointTensorComparisonComponents
 
 /-! # The pinned projection isomorphisms yield a natural right-adjoint tensor comparison.
 
-Source: Stacks Project, Tag 0A9U.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-natural).
+## References
+
+* [Stacks Project, Tag 0A9U](https://stacks.math.columbia.edu/tag/0A9U)
 -/
 
 @[expose] public section
@@ -26,22 +27,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- The pinned projection isomorphisms yield a natural right-adjoint tensor comparison.
-Source: Stacks Project, Duality for Schemes, Section 48.8, equation (48.8.0.1),
-and Tag 0A9U, first two sentences of proof.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-natural).
-
-Proof. A proper map is quasi-compact and quasi-separated, so the unbounded
-quasi-coherent projection formula applies to K and c(O_Y). Its canonical map is
-exactly the pullback-adjunction mate of the inverse monoidal comparison followed
-by the counit. Invert this map to obtain pf; the required equation pins its inverse
-and hence makes pf unique. The formula is natural in K by naturality of the
-monoidal comparison and pullback counit. Compose pf with tensoring the right
-adjunction counit and the right unitor. Naturality of this composite and naturality
-of adj.homEquiv yield a natural transformation with the displayed components.
-The source functor is the actual lift of pullback followed by tensorRight, justified
-by hTensor. No invertibility of this right-adjoint comparison is asserted. This
-construction also applies to zero objects and does not require hsums. -/
+/-- The pinned projection isomorphisms yield a natural right-adjoint tensor comparison. -/
 theorem rightAdjointTensorComparison_natural
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

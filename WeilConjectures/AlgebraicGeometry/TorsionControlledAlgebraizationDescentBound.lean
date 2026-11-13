@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
-/-! # Uniform annihilation on a finite cover -/
+/-! # Uniform annihilation on a finite cover
+
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+-/
 
 @[expose] public section
 universe u
@@ -23,19 +28,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Locally annihilated modules in the kernel and cokernel of a coherent map
-have a common positive annihilating exponent on a Noetherian scheme.
-
-Source: Stacks Project, Tag 0889(1), global torsion conclusion.
-(blueprint: new-stage3-torsion-controlled-algebraization-descent-bound).
-
-Proof: Quasi-compactness gives a finite subcover. Choose the supplied exponent on
-each of its opens and take their maximum together with 1. If s is at least a
-local exponent t, inclusion J^s into J^t makes the product at exponent s factor
-through the zero product at exponent t. Restriction commutes with ideal products,
-so the global products at exponent s restrict to zero on the finite subcover.
-A sheaf that is zero on an open cover is zero, proving both conclusions. On the
-empty scheme take s = 1; all modules are zero. If J = 0 the products already
-vanish; if J is the unit ideal the hypotheses force both modules to vanish. -/
+have a common positive annihilating exponent on a Noetherian scheme. -/
 theorem torsionControlled_algebraization_descent_bound
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H F : CoherentModules X) (a : F ⟶ H)

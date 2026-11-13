@@ -20,8 +20,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 
 /-! # Support and quasi-coherence of the open right-adjoint image
 
-Source: Stacks Project, Tags 08D5, 08FE and 08BS.
-(blueprint: lem-pc-supported-open-unit-image-properties).
+## References
+
+* [Stacks Project, Tag 08D5](https://stacks.math.columbia.edu/tag/08D5)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08BS](https://stacks.math.columbia.edu/tag/08BS)
+* [Stacks Project, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
+* [Stacks Project, Tag 06Z0](https://stacks.math.columbia.edu/tag/06Z0)
+* [Stacks Project, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
 -/
 
 @[expose] public section
@@ -36,7 +42,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Exact derived restriction has the original homology stalk at each point of the open.
 Combine exact restriction/homology comparison with the over-site equivalence and
-`Scheme.Modules.restrictStalkNatIso`. Source: Stacks Project, Tags 08DW and 06Z0. -/
+`Scheme.Modules.restrictStalkNatIso`. -/
 private noncomputable def restrictionHomologyStalkIso
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -60,7 +66,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Vanishing after open restriction implies vanishing of homology stalks on that open.
 Apply homology and the additive stalk functor to the zero object, then use the stalk
-comparison. Source: Stacks Project, Tag 05RU. -/
+comparison. -/
 private theorem stalk_zero_of_restriction_zero
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -86,8 +92,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Open base change propagates cohomological support through derived direct image.
 Restriction to the inverse image of the open complement of T is zero by supported
 restriction. Open base change identifies restriction of the direct image with the
-direct image of that zero object. Its homology stalks on the complement vanish.
-Source: Stacks Project, Tags 08FE and 05RU. -/
+direct image of that zero object. Its homology stalks on the complement vanish. -/
 private theorem direct_image_support
     {Y X : Scheme.{u}} (f : Y ⟶ X)
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -135,29 +140,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The open right-adjoint image of a supported quasi-coherent complex remains supported
-and quasi-coherent. This concerns the second vertex, with no cone or triangle supplied.
-Source: Stacks Project, Tags 08D5 and 08FE; Tag 08BS for derived open adjunction.
-(blueprint: lem-pc-supported-open-unit-image-properties).
-
-Proof: Identify modules on the over-site with modules on the open subscheme using
-Scheme.Modules.overEquiv U, and derive this exact equivalence. Exact restriction is
-left adjoint to derived direct image: direct image preserves K-injectives because its
-left adjoint is exact. Compose this adjunction with the derived equivalence, then use
-uniqueness of right adjoints to identify the supplied R with that composite.
-Restriction preserves quasi-coherent cohomology by exactness and local presentations.
-The open immersion U to X is quasi-compact: in a quasi-separated scheme the intersection
-of the compact open U with every compact affine open is compact. It is separated.
-Thus derived direct image preserves quasi-coherent cohomology by Tag 08D5; transport
-along the right-adjoint comparison gives quasi-coherence of R(L(K)).
-For support, let O be the open complement of the closed set T. The support hypothesis
-and supported_derived_restriction_zero give K restricted to O zero. Its further
-restriction to U intersect O is zero. Open base change (Tag 08FE) identifies the
-restriction of R(L(K)) to O with the derived direct image of this zero restriction.
-An additive derived direct image sends zero to zero. Hence R(L(K)) restricts to zero
-on O. Exact restriction commutes with homology; at each x in O its stalk is the
-original homology stalk at x, which is therefore zero. Both conclusions transport
-along the comparison isomorphism. No boundedness is needed. For empty U the image is
-zero; for empty T the input and image are zero; for T = X the support clause is vacuous. -/
+and quasi-coherent. This concerns the second vertex, with no cone or triangle supplied. -/
 theorem supported_open_unit_image_properties
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

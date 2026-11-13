@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-! # Degreewise ordinary evaluation and coefficient compatibility
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -117,28 +122,7 @@ private theorem evaluation_graded_naturality {C : Type u} [Category.{u} C]
   exact hπ p q n (by omega)
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Degreewise ordinary evaluation commutes with a map to the fixed coefficient resolution.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-ordinary evaluation localization proof step 2.
-(blueprint: lem-pc-scheme-ordinary-evaluation-graded-augmentation).
-
-Proof: Fix total degree n. Use coproduct extensionality for the total tensor,
-so it suffices to compare the composites from each summand with indices p,q
-satisfying p+q=n. The component formula for schemeTensorHomUncurry identifies
-the left composite with symmetry followed by inverse tensor-Hom adjunction
-of Hom(P,g)^p followed by the projection to Hom(P^q,I^n), where I is the
-fixed resolution of N. The coefficient naturality formula for the Hom
-projections, applied with the identity of P and g, replaces this composite
-by the projection to Hom(P^q,N^n) followed by homObjMap(id,g^n).
-Naturality of the tensor-Hom equivalence in its coefficient identifies its
-inverse with inverse adjunction of the latter projection followed by g^n.
-Associativity and the coproduct descent equation give precisely the right
-composite, proving the degreewise equality. This uses no differential
-compatibility or monicity; it is an equality of graded maps for arbitrary
-P,N and any coefficient map g to the fixed resolution. If either complex
-is zero, or the scheme is empty, the same coproduct equations still apply.
-The evaluation maps are explicit coproduct descents of the fixed product
-projections; no evaluation map is chosen from an existence assertion. -/
+/-- Degreewise ordinary evaluation commutes with a map to the fixed coefficient resolution. -/
 theorem schemeOrdinaryEvaluationGraded_augmentation (Y : Scheme.{u})
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (g : N ⟶ (schemeHomKInjectiveResolution Y).obj N) (n : ℤ) :

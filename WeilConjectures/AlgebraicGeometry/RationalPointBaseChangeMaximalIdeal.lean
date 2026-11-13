@@ -15,9 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 /-!
 # Extension of the maximal ideal at a rational point
 
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
-Stacks Algebra, Tag 00E6.
-(blueprint: lem-sc-rational-point-base-change-maximal-ideal).
+## References
+
+* [Stacks Project, Tag 00E6](https://stacks.math.columbia.edu/tag/00E6)
 -/
 
 @[expose] public section
@@ -43,26 +43,7 @@ private theorem ker_stalkMap_field (F : Type u) [Field F] {Z : Scheme.{u}}
   exact hmax
 
 set_option backward.isDefEq.respectTransparency false in
-/-- At a rational point, scalar extension extends the maximal ideal of the stalk exactly.
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
-Stacks Algebra, Tag 00E6
-(blueprint: lem-sc-rational-point-base-change-maximal-ideal).
-
-Proof: let x' be the base-changed rational point. The fibre over x is Spec K,
-so y = x'. Pullback pasting shows that the square formed by x, x', the projection,
-and Spec K to Spec k is cartesian. Since both rational points are closed immersions,
-the ideal sheaf of x' is the pullback of the ideal sheaf of x.
-Choose an affine neighbourhood U of the image of x and an affine neighbourhood V
-of x' inside the inverse image of U. The formula ideal_comap_appLE says that the
-ideal on V is the extension of the ideal on U. For either closed immersion,
-ker_stalkMap identifies the kernel on stalks with the extension along the germ
-map of its affine defining ideal. The stalk of Spec of a field is the field itself;
-a local map to a field has kernel equal to the source maximal ideal. Thus both
-stalk kernels are precisely the respective maximal ideals. Extending the source
-maximal ideal along the projection's stalk map and using Ideal.map_map gives the
-same ideal as extending the target affine ideal along its germ map: the equality
-of the composite ring maps is germ_stalkMap followed by germ_res.
-No smoothness, dimension, properness, or algebraic closure is needed. -/
+/-- At a rational point, scalar extension extends the maximal ideal of the stalk exactly. -/
 theorem Scheme.rational_point_base_change_maximalIdeal
     (k K : Type u) [Field k] [Field K] [Algebra k K]
     (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) (x : s.fieldPoints k)

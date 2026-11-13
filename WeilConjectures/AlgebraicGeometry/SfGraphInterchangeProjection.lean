@@ -11,9 +11,14 @@ import all WeilConjectures.AlgebraicGeometry.SfGraphCompactSupportCompositionBas
 
 /-! # Projection compatibility of one proper/open interchange
 
-Source: Stacks Tags 0F7B, 0GL1, 0B56 and 0E48; the Cartesian interchange part
-of `LowerShriekComposition.lean`, e3.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0F7B](https://stacks.math.columbia.edu/tag/0F7B)
+* [Stacks Project, Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
+* [Stacks Project, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* [Stacks Project, Tag 0E48](https://stacks.math.columbia.edu/tag/0E48)
 -/
 
 @[expose] public section
@@ -154,26 +159,7 @@ private theorem interchange_prefix_transport_split
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A Cartesian proper/open interchange preserves successive projection maps.
 
-Source: Stacks more-etale.tex, Tag 0F7B; sites-cohomology.tex, Tags 0GL1 and
-0B56; the open and proper composition normalizations of Tag 0E48.
-(auxiliary; not a blueprint node).
-
-Proof: put f0=e r and use the compactifications c=(e,r) and ce=(e k,p).
-The Cartesian square supplies a compatible tower over the compactification
-(i,q) of g. Apply the existing general tower projection calculation to Ra M
-and K. That calculation pastes the proper/open tensor square with the open
-projection composition identity and the proper counit composition identity.
-Factor the graph-word projection for (a,e,r), and for (a,e k,p q), as the
-corresponding compactification projection on Ra M followed by the proper
-projection for a and the inverse pullback compositor. Proper-projection naturality
-and inverse threefold pullback associativity give these factorizations.
-Cancel the identity-direct-image normalization in I; Cartesian normalization
-identifies its exchange with the actual proper/open exchange used by the
-tower. Naturality of I moves the projection for a past the interchange.
-Finally the mixed hom/inverse pullback associativity identity identifies
-La(c_f0,g) followed by inverse c_a,f0 with inverse c_a,f0g followed by c_f,g.
-Functoriality pastes these equations to give the displayed square. No
-projection is inverted and no boundedness or quasi-compactness is used.
+.
 -/
 theorem sfGraphInterchange_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]

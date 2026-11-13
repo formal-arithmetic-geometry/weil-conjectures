@@ -22,8 +22,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Canonical Leray comparison for the Zariski-to-étale morphism
 
-Source: Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).
-(blueprint: lem-weil-pbc-zariski-etale-canonical-leray)
+## References
+
+* [Stacks Project, Tag 072W](https://stacks.math.columbia.edu/tag/072W)
+* [Stacks Project, Tag 0733](https://stacks.math.columbia.edu/tag/0733)
+* [Stacks Project, Tag 09AX](https://stacks.math.columbia.edu/tag/09AX)
 -/
 
 @[expose] public section
@@ -34,39 +37,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 /-- If zero on every positive object-cohomology presheaf is locally injective,
 the canonical pullback followed by the counit is an isomorphism on every open.
-There is no strict-henselian hypothesis here.
-
-Source: literature/stacks-project/sites-cohomology.tex, Tags 072W and 0733(1);
-etale-cohomology.tex, Tag 09AX, proof, first, second and last sentences.
-(blueprint: lem-weil-pbc-zariski-etale-canonical-leray)
-
-Proof: For the usual inclusion the inverse image on abelian sheaves is exact.
-For the functor `i` specified here, first restrict to the etale object `i(⊤)`.
-Its underlying scheme is `X`, and `hi_inclusion` identifies every `i(U)` with its
-open restriction. Direct image along `i` is restriction to that etale object
-followed by the usual Zariski direct image; its left adjoint is the usual exact
-inverse image followed by exact etale extension by zero. Hence that abelian
-left adjoint is exact as well. Local injectivity of zero says any two sections
-locally coincide. In
-particular every section is locally zero. Transfer this condition along the natural
-resolution description of Ext cohomology, using a coefficient universe supporting
-sheafification; this transfer is necessary because the Ext universe is arbitrary.
-For the morphism of this cohomology presheaf to zero, local surjectivity is automatic
-and local injectivity is the hypothesis. Sheafification therefore makes it an
-isomorphism to the zero sheaf. By 072W this sheafification is its `q`-th right
-derived direct image, so every positive derived direct image of `F` is zero.
-Choose an injective resolution of `F`.
-The direct image of each injective is injective because its left adjoint is exact.
-The pushed-forward resolution has no positive homology by the preceding vanishing,
-and degree-zero homology is the direct image of `F` by left exactness.
-It is therefore an injective resolution of that direct image. Evaluating it on
-an open `V` gives the same complex as evaluating the original resolution on `i(V)`.
-The resulting cohomology comparison is an isomorphism. To identify this comparison,
-its degree-zero map is the unit followed by the counit, and the triangle identity
-makes this the identity. Resolution comparison maps give naturality and compatibility
-with connecting homomorphisms. The uniqueness characterization of cohomology pullback
-(the three clauses `hfstar`) then identifies it with `fstar` followed by the counit.
-This proves invertibility of the specified composite, including degree zero. -/
+There is no strict-henselian hypothesis here. -/
 theorem zariski_etale_canonical_leray
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

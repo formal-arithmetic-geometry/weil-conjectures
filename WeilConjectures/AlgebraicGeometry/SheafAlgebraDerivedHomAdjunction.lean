@@ -15,9 +15,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The constructed algebra-valued derived Hom adjunction
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0 and 0BV1, with Modules Tag 0A6F
-and Derived Categories Tag 09T5
-(blueprint: lem-sc-sheaf-algebra-derived-hom-adjunction).
+## References
+
+* [Stacks Project, Tag 0BV0](https://stacks.math.columbia.edu/tag/0BV0)
+* [Stacks Project, Tag 0BV1](https://stacks.math.columbia.edu/tag/0BV1)
+* [Stacks Project, Tag 0A6F](https://stacks.math.columbia.edu/tag/0A6F)
+* [Stacks Project, Tag 09T5](https://stacks.math.columbia.edu/tag/09T5)
 -/
 
 @[expose] public section
@@ -32,32 +35,7 @@ namespace AlgebraicGeometry
 
 /-- The explicit algebra-valued derived Hom is right adjoint to derived restriction
 of scalars. No finiteness, Noetherianity, cohomological bound, or assertion about
-quasi-coherence of the output is involved.
-Source: Stacks Project, Duality for Schemes, Tags 0BV0 and 0BV1, with Modules Tag 0A6F
-and Derived Categories Tag 09T5
-(blueprint: lem-sc-sheaf-algebra-derived-hom-adjunction).
-
-Proof:
-1. Restriction along B.hom has right adjoint sheafAlgebraHom Y B. On an open U,
-   an O-linear map from the restricted M to F determines the B-linear map to
-   Hom(B,F) by m ↦ (b ↦ φ(bm)); evaluation at 1 is its inverse. These formulas
-   commute with restriction and postcomposition and give the sheaf adjunction.
-2. Restriction of scalars is exact: its finite-limit and finite-colimit properties
-   are sheafAlgebraRestrictScalars_preservesFiniteLimits and
-   sheafAlgebraRestrictScalars_preservesFiniteColimits. Consequently its derived
-   functor is its termwise localization mapDerivedCategory.
-3. Compute the right derived Hom on the fixed functorial K-injective resolution
-   sheafAlgebraHomResolution. The underived right adjoint sends K-injectives to
-   K-injectives because its exact left adjoint preserves acyclic complexes.
-   Thus the derived adjunction exists and its right functor is the localization
-   of Hom(B,I(-)). The comparison derivedRHomAlgebraModule_comparison identifies
-   this with the explicitly constructed derivedRHomAlgebraModule, including the
-   B-action, since both use sheafAlgebraHom and the same resolution.
-4. Localization uniqueness and the exact-functor comparison with
-   rightDerivedFunctor transport the adjunction to the stated left functor.
-   Evaluation at one and multiplication still give inverse maps when B is zero,
-   when Y is empty, and for unbounded complexes; the K-injective argument applies
-   in all these cases. -/
+quasi-coherence of the output is involved. -/
 theorem sheafAlgebraDerivedHom_adjunction
     (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

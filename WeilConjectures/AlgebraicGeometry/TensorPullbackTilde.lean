@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 /-!
 # Pullback of associated modules on affine schemes
 
-Source: Stacks Project, Schemes, Tag 01I9 (1), using Tags 01I7 and 01BJ
-(blueprint: lem-weil-pbc-tilde-pullback-base-change).
+## References
+
+* [Stacks Project, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks Project, Tag 01I7](https://stacks.math.columbia.edu/tag/01I7)
+* [Stacks Project, Tag 01BJ](https://stacks.math.columbia.edu/tag/01BJ)
 -/
 
 @[expose] public section
@@ -32,16 +35,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Pullback of `M` tilde along `Spec φ` is naturally the tilde of `S ⊗[R] M`.
 The comparison takes the pullback-unit image of the canonical section of `m` to
-that of `1 ⊗ m`. The unit is the canonical tensor-formula adjunction unit.
-Source: Stacks Project, Schemes, Tag 01I9 (1), Tags 01I7 and 01BJ
-(blueprint: lem-weil-pbc-tilde-pullback-base-change).
-Proof: compose the tilde-global-sections adjunction with the chosen tensor-pullback
-adjunction. Global sections of pushforward along `Spec φ` are restriction of scalars
-along `φ`, via `pushforwardSpecMapCompΓIso`. Thus this composite and extension of
-scalars followed by tilde are left adjoints to the same functor. Uniqueness of left
-adjoints gives the natural isomorphism. Its unit compatibility, evaluated at `m`, is
-exactly the displayed equality, since the tilde unit is `tilde.toOpen` at the whole
-space and the scalar-extension unit sends `m` to `1 ⊗ m`. -/
+that of `1 ⊗ m`. The unit is the canonical tensor-formula adjunction unit. -/
 theorem exists_tensorPullback_tilde_iso {R S : CommRingCat.{u}} (φ : R ⟶ S) :
     ∃ θ : tilde.functor R ⋙ tensorPullback (Spec.map φ) ≅
         ModuleCat.extendScalars φ.hom ⋙ tilde.functor S,

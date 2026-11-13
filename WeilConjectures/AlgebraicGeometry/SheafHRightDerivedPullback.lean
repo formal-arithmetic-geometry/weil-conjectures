@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.ClassicalPullbackResolutionSections
 
 /-! # Ext compatibility with classical derived pullback
 
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-sheafH-right-derived-pullback)
+## References
+
+* [Stacks Project, Tag 01F8](https://stacks.math.columbia.edu/tag/01F8)
+* [Stacks Project, Tag 01F9](https://stacks.math.columbia.edu/tag/01F9)
+* [Stacks Project, Tag 01FA](https://stacks.math.columbia.edu/tag/01FA)
 -/
 
 @[expose] public section
@@ -30,19 +33,7 @@ open Scheme Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- There exist Ext/classical comparisons on the two schemes that identify the
-classical right-derived section map with the Ext pullback map.
-
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-sheafH-right-derived-pullback)
-
-Proof: take the chosen injective resolutions of G and its inverse image. Apply exact
-inverse image to the first augmentation and lift it into the second resolution.
-Compute the classical derived base-change map by this lift. Compute Ext pullback
-by applying inverse image to an Ext cocycle and precomposing the constant-sheaf
-comparison. Evaluation at 1 in the constant integers identifies the two cochain
-maps termwise. The sections identifications commute with differentials, so their
-homology maps agree. The comparison theorem makes the result independent of the
-chosen lift. The same formula holds in degree zero and for the zero sheaf. -/
+classical right-derived section map with the Ext pullback map. -/
 theorem sheafHRightDerivedIso_pullback {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}

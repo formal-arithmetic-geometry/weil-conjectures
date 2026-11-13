@@ -61,12 +61,8 @@ private theorem native_unit_compat
     (leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp B f)
 
 /-- Inverse image preserves the specified constant-unit comparison.
-Source: blueprint thm-amb-p1-adjunction.proof.md, constant-unit normalization.
-(auxiliary; not a blueprint node).
 
-Proof: identify constantUnit with singleFunctorObjUnitIso and the ordinary
-constant inverse-image map with the native single-constant comparison. The native
-unit formula after cancelling the two single-unit isomorphisms gives the equation. -/
+. -/
 theorem constantUnit_pullback
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

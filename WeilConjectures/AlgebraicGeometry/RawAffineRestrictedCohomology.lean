@@ -11,8 +11,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Restricted single-complex cohomology and its canonical maps
 
-Source: Stacks Project, Tags 03Q8 and 0EZM.
-(blueprint: def-sbc-raw-affine-restricted-cohomology).
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical cohomology pullback on an actual complex, using the derived adjunction unit.
-Source: Stacks Project, Tag 0EZM.
-(blueprint: def-sbc-raw-affine-restricted-cohomology). -/
+/-- Canonical cohomology pullback on an actual complex, using the derived adjunction unit. -/
 noncomputable def rawAffineComplexPullback (p : ℤ) {X Y : Scheme.{v}} (f : X ⟶ Y)
     (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :
     (cohomology AddCommGrpCat.{v + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶
@@ -52,8 +52,7 @@ noncomputable def rawAffineComplexPullback (p : ℤ) {X Y : Scheme.{v}} (f : X �
           ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryFactors.hom.app K))
 
 /-- Cohomology of a sheaf restricted to the etale scheme `U ×_S Y`, in degree zero
-as a complex. No raw derived-Hom group occurs in this definition.
-(blueprint: def-sbc-raw-affine-restricted-cohomology). -/
+as a complex. No raw derived-Hom group occurs in this definition.. -/
 noncomputable def rawAffineRestrictedCohomology {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     AddCommGrpCat.{v + 1} :=
@@ -61,16 +60,14 @@ noncomputable def rawAffineRestrictedCohomology {S Y : Scheme.{v}} (h : Y ⟶ S)
     (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj
       ((upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)).obj F)))
 
-/-- The map between the restricted schemes induced by a triangle over `S`.
-(blueprint: def-sbc-raw-affine-restricted-cohomology). -/
+/-- The map between the restricted schemes induced by a triangle over `S`.. -/
 noncomputable def rawAffineRestrictedMap {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :
     Limits.pullback U.hom h' ⟶ Limits.pullback U.hom h :=
   Limits.pullback.map U.hom h' U.hom h (𝟙 _) a (𝟙 _) (by simp) (by simpa using w.symm)
 
 /-- Restriction of a coefficient map to the pullback triangle, with both inverse-image
-composition comparisons written explicitly.
-(blueprint: def-sbc-raw-affine-restricted-cohomology). -/
+composition comparisons written explicitly.. -/
 noncomputable def rawAffineRestrictedCoefficient {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -88,8 +85,7 @@ noncomputable def rawAffineRestrictedCoefficient {S Y Y' : Scheme.{v}} (a : Y' �
       (upperStar AddCommGrpCat.{v + 1} r').map φ
 
 /-- Canonical restricted-cohomology map: derived pullback followed by the restricted
-coefficient map. This definition uses neither continuity nor raw derived Hom.
-(blueprint: def-sbc-raw-affine-restricted-cohomology). -/
+coefficient map. This definition uses neither continuity nor raw derived Hom.. -/
 noncomputable def rawAffineRestrictedCohomologyMap {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

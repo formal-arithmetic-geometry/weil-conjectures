@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.RingComplexGodementCech
 import WeilConjectures.AlgebraicGeometry.RingComplexOrderedScalarIso
 public import Mathlib.RingTheory.Flat.Localization
 
-/-! # Element-power torsion in ordered localization-model cohomology -/
+/-! # Element-power torsion in ordered localization-model cohomology
+
+## References
+
+* [Stacks Project, Tag 0A6R](https://stacks.math.columbia.edu/tag/0A6R)
+-/
 
 @[expose] public section
 
@@ -176,23 +181,6 @@ private theorem power_torsion_of_localization_zero (A : CommRingCat.{u}) (s : A)
 
 /-- Every cohomology class of an ordered localization model is killed by some power
 of each element of the defining ideal. No coefficient module or derived Hom occurs.
-Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
-and the finite localization calculation in its proof.
-(auxiliary; not a blueprint node)
-
-Proof: choose a finite generating list of I and append s, retaining the same span.
-Apply hT to that list. Invert s in every term of its ordered localization complex.
-A coordinate whose index contains the appended index is identified with the same
-localization as the coordinate obtained by deleting that index. Insert or delete
-this final index, with the alternating sign of its position, to define a degree
-minus one homotopy. The two homotopy composites cancel in pairs on all other
-coordinates and give the identity on the remaining coordinate, also in degree
-zero. Thus the localized complex is contractible. Localization is exact, so it
-commutes with cohomology. The model isomorphism transports this vanishing to T.
-The module-localization zero criterion says precisely that each original class
-is annihilated by some power of s. Evaluation at the unique object is exact and
-identifies the calculation with ordinary modules. Zero and nilpotent s, the zero
-ring, repeated generators, and the empty initial generating list are included.
 -/
 theorem ringComplex_cech_cohomology_power_torsion
     (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]

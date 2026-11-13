@@ -15,8 +15,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The zero comparison for restricted derived section pullback
 
-Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison).
+## References
+
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 0D6F](https://stacks.math.columbia.edu/tag/0D6F)
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
-/-- Derived section pullback is the derived adjunction unit followed by Leray.
-Source: Stacks Project, Tag 07A6.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison). -/
+/-- Derived section pullback is the derived adjunction unit followed by Leray. -/
 noncomputable def derivedSectionPullback {X Y : Scheme.{v}} (f : X ⟶ Y) :
     rightDerivedGlobalSections AddCommGrpCat.{v + 1} Y ⟶
       D(upperStar AddCommGrpCat.{v + 1} f) ⋙
@@ -48,9 +48,7 @@ noncomputable def derivedSectionPullback {X Y : Scheme.{v}} (f : X ⟶ Y) :
           (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{v + 1}
             terminalIsTerminal).symm)).hom
 
-/-- The comparison of the two restrictions in a pullback triangle, on derived objects.
-Source: Stacks Project, Tag 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison). -/
+/-- The comparison of the two restrictions in a pullback triangle, on derived objects. -/
 noncomputable def derivedRestrictionIso {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :
     D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)) ⋙
@@ -66,9 +64,7 @@ noncomputable def derivedRestrictionIso {S Y Y' : Scheme.{v}}
       upperStarComp AddCommGrpCat.{v + 1} r' a (q ≫ r) hw.symm) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Natural pullback on zeroth homology of restricted derived sections.
-Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison). -/
+/-- Natural pullback on zeroth homology of restricted derived sections. -/
 noncomputable def restrictedSectionPullback {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :
     sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U) ⋙
@@ -88,21 +84,7 @@ noncomputable def restrictedSectionPullback {S Y Y' : Scheme.{v}}
     (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0)
 
 /-- On a single sheaf in degree zero, the constructed derived section pullback is
-ordinary section pullback, followed by the restricted coefficient map.
-Source: Stacks Project, Tags 07A6 (derived adjunction) and 0D6F (restriction).
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison).
-
-Proof: Write q = U times_S a and r,r' for the two projections. The comparison
-of restrictions is the derived image of q^* r^* = r'^* a^*, and on singles its
-single comparison is the underived upperStarComp comparison. Under the zeroth
-right-derived comparison, the derived adjunction unit for q is the underived
-unit: compute both on an injective resolution and use naturality of the
-augmentation and the right-derived unit. The Leray comparison similarly
-identifies with the ordinary pushforward/global-section comparison in degree
-zero, by its defining composite unit. Hence their composite is the ordinary
-section pullback. Naturality of the zero comparison for ψ gives the final
-coefficient map. Cancel the single and zero comparisons with their inverses.
-This argument uses no invertibility of ψ and applies to the empty scheme. -/
+ordinary section pullback, followed by the restricted coefficient map. -/
 theorem restrictedSectionPullback_zero {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

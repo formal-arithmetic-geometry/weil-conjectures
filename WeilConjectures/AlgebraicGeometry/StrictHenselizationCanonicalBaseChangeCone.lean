@@ -17,8 +17,9 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # The strict-henselization fibre-product limit cone
 
-Source: Stacks Project, Tag 03Q9, proof: fibre products commute with limits.
-(blueprint: lem-weil-pbc-strict-henselization-base-change-cone).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -31,19 +32,7 @@ set_option backward.isDefEq.respectTransparency false
 
 
 /-- Base change of the affine pointed-neighbourhood diagram has a limiting cone with
-vertex the strict-henselization fibre product and the two specified projections.
-Source: Stacks Project, Tag 03Q9, proof: fibre products commute with limits.
-(blueprint: lem-weil-pbc-strict-henselization-base-change-cone).
-
-Proof: reindex the canonical spectrum cone across the double-opposite equivalence.
-The Gamma-Spec unit identifies its diagram with the original affine neighbourhoods.
-Transport the limit along that natural isomorphism. Its inverse components are
-`Spec.map (ΓSpecIso _).inv`, and the structural-map theorem identifies their composites
-with the maps to Y. Lift the two fibre-product projections to every stage; cone
-naturality follows by the two projections. Pullback pasting identifies each square
-between these legs and the original cone legs as cartesian. Cofilteredness gives
-connectedness, and `isLimitOfIsPullbackOfIsConnected` proves the new cone limiting.
-The projection formulas are `pullback.lift_fst` and `pullback.lift_snd`. -/
+vertex the strict-henselization fibre product and the two specified projections. -/
 theorem strictHenselizationAffineBaseChangeCone_exists
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :

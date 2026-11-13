@@ -14,8 +14,12 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 
 /-! Intermediate fibre facts for zero-dimensional base change.
-Source: Stacks Project, schemes.tex Lemma 01JT and algebra.tex Lemma 00P4.
-(blueprint: new-zdbp-fibres-point)
+
+## References
+
+* [Stacks Project, Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)
+* [Stacks Project, Tag 00P4](https://stacks.math.columbia.edu/tag/00P4)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
 -/
 
 @[expose] public section
@@ -26,10 +30,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Point uniqueness in the base-change fibre. Source: Stacks Project, schemes.tex Lemma 01JT
-and algebra.tex Theorem 00FV. The fibre-product point correspondence identifies the fibre
+/-- Point uniqueness in the base-change fibre. The fibre-product point correspondence identifies the fibre
 over each c with Spec (κ(c) ⊗ₖ k′); the residue-field isomorphism from Nullstellensatz
-identifies this ring with k′, which has one prime. (blueprint: new-zdbp-fibres-point) -/
+identifies this ring with k′, which has one prime. -/
 theorem zeroDimensional_baseChange_fibre_points
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

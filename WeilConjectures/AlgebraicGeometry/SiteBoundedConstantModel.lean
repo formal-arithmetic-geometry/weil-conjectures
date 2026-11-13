@@ -17,12 +17,13 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Local bounded constant models on a small site
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
-`lemma-locally-constant` (auxiliary; not a blueprint node).
-
 Constant-coefficient module sheaves are encoded as `Sheaf J (ModuleCat B)`:
 restriction is precomposition on the slice, and the constant complex is obtained
 by applying the constant-sheaf functor to both terms and differentials.
+
+## References
+
+* [Stacks Project, Tag 094G](https://stacks.math.columbia.edu/tag/094G)
 -/
 
 @[expose] public section
@@ -76,38 +77,7 @@ private theorem exists_constant_model_of_concentrated
           (constantSheaf J (ModuleCat.{u} B)) (ComplexShape.up ℤ) a).app M).symm⟩
 
 /-- A bounded object with locally constant finite cohomology has local constant
-finite-module complex models, with the same degree bounds.
-
-Source: Stacks Project, Tag 094G, strengthened assertion in the induction in the
-proof of `lemma-locally-constant`.
-(auxiliary; not a blueprint node)
-
-Proof: Induct on `b - a`. Exact slice restriction preserves cohomology and cones
-(lem-pur-site-restriction-module-adjunction-exact); constant sheaves restrict to
-constant sheaves (lem-weil-pbc-site-constant-restriction), and successive coverings
-compose. On empty slices use the zero complex. If `a = b`, canonical truncation
-(lem-weil-pbc-truncation-descends) identifies the object with its single nonzero
-cohomology sheaf; trivialize that sheaf. Otherwise trivialize the top cohomology
-as a finite module M and choose finitely many generators. Exact sheafification
-(lem-weil-pbc-site-module-presheaf-sheafification-exact) and local representatives
-(lem-weil-pbc-site-sheafification-sections-local) lift the generators locally to
-cycles, giving a map from a constant finite free module in degree b. Its cone
-has cohomology in [a,b-1]; the long exact sequence
-(lem-sf-derived-homology-long-exact) and the Serre property
-(lem-weil-pbc-locally-constant-derived-serre) give locally constant finite
-cohomology. Apply induction. Represent the boundary to the free module shifted
-by b-1 using a right fraction (lem-pc-right-fraction-representation and
-lem-pc-quasi-isomorphisms-multiplicative-system). Upper truncate the roof;
-its top component factors through top cohomology and hence yields an actual
-chain map out of the constant model. Its top component locally comes from a
-module map (lem-weil-pbc-site-constant-morphism-local). On a nonempty slice,
-local equality in the constant presheaf makes the constant functor faithful,
-so this module map annihilates the preceding differential. Append the free
-module in degree b. The resulting constant complex is the shifted cone of the
-boundary; rotation and the morphism-of-triangles axiom
-(def-weil-triangulated-category), followed by the long exact cohomology
-sequence, identify it with the original object. Compose the finitely many
-covering refinements. No points or Tor-amplitude assumption is used. -/
+finite-module complex models, with the same degree bounds. -/
 theorem exists_site_bounded_constant_model
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

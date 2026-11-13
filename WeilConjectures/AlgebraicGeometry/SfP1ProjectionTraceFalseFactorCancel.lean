@@ -44,9 +44,8 @@ def falseProjectionChartFactorInv
 
 /--
 The chart factor and its displayed inverse cancel by the two inverse/direct-image
-cancellations.  This is the cancellation step after the false-projection
+cancellations. This is the cancellation step after the false-projection
 mate-pasting calculation.
-(auxiliary; not a blueprint node)
 -/
 theorem falseProjectionChartFactor_cancel
     (A : Type (u + 1)) [CommRing A] [Finite A]

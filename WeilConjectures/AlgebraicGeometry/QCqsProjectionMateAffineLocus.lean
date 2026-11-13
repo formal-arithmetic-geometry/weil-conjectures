@@ -26,8 +26,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 
 /-! # Closure of the affine projection-mate locus
 
-Source: Stacks Project, Tag 08EU.
-(blueprint: lem-pc-qcqs-projection-mate-affine-locus).
+## References
+
+* [Stacks Project, Tag 08EU](https://stacks.math.columbia.edu/tag/08EU)
 -/
 
 @[expose] public section
@@ -224,27 +225,7 @@ variable (A : Type u) [CommRing A]
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The all-shifts isomorphism locus of the supplied projection mate is closed
-under coproducts, distinguished triangles, and retracts.
-
-Proof: the mate is natural in M by naturality of t and the counit and of the
-adjunction Hom equivalence. The two functors in M are exact. On quasi-coherent
-objects they preserve coproducts: e is an equivalence, pullback is a left
-adjoint, tensor preserves coproducts, and qcqs direct image preserves
-quasi-coherent coproducts. The quasi-coherent inclusion preserves these sums.
-Shifts preserve coproducts, so a component on a sum is a sum of invertible
-components. For a distinguished triangle use every shift of the triangle.
-Apply Hom(T,-) to the two image sequences, for each ambient T. Naturality at
-the three maps, including the connecting map, gives a diagram of exact
-sequences. The five lemma makes the third component invertible when the
-first two are invertible; use Yoneda and then every shift. No compatibility
-of t with a chosen shift comparison is required: the sequences have vertices
-F(K[n]) and the arrows obtained by applying F to the shifted triangle maps.
-Naturality transports an isomorphism component along an object isomorphism
-and along a retract. The predicate quantifies over all object isomorphisms,
-so it is invariant under isomorphism by composition. The zero object and
-empty coproduct are included.
-Source: Stacks Project, Tag 08EU.
-(blueprint: lem-pc-qcqs-projection-mate-affine-locus). -/
+under coproducts, distinguished triangles, and retracts. -/
 theorem qcqsProjectionMate_affineLocus_closed
     (htri : ∃ (_h : (e.functor ⋙
       (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ),

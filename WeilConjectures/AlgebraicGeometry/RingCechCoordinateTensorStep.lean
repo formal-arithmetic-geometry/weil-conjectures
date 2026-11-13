@@ -11,8 +11,12 @@ import WeilConjectures.AlgebraicGeometry.RingLocalizationTensorBlocks
 
 /-! # Adjoining one localization factor to an ordered localization complex
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 0996](https://stacks.math.columbia.edu/tag/0996)
+* [Stacks Project, Tag 099D](https://stacks.math.columbia.edu/tag/099D)
 -/
 
 @[expose] public noncomputable section
@@ -26,37 +30,8 @@ set_option maxHeartbeats 2500000 in
 -- The coordinate eliminations compare the chosen sheaf-tensor instance parameters.
 /-- A single two-term localization factor preserves the positive ordered coordinates
 of an arbitrary nonnegative augmented complex with the tail's coordinates.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d), the induction
-adjoining the first factor in the tensor expansion.
-(auxiliary; not a blueprint node).
 
-Proof: write S=A[1/f(0)]. The first factor is A in degree zero, S in degree one,
-and zero elsewhere. The total tensor in degree n is therefore the direct sum of
-K^n and S tensor K^(n-1). Its degree-zero augmentation on the A tensor K^0
-summand is the tail augmentation followed by multiplication, by ha. In positive degree,
-apply the supplied tail coordinates to the two summands. Localization commutes
-with finite sums, and multiplication of fractions identifies S tensor A[1/g]
-with A[1/(f(0)*g)]. The inverse sends a/(f(0)*g)^k to
-(1/f(0)^k) tensor (a/g^k); the localization universal property proves both
-inverse identities, including when a denominator is zero. Partition the ordered
-subsets of Fin(r+1) according to whether they contain zero: the first summand
-indexes those avoiding zero, and the second indexes those containing zero.
-These give mutually inverse linear maps onto the required finite product.
-For the differential on the first summand, the tail differential gives all
-faces except the face adjoining zero, which is the localization map coming
-from the first factor's differential. On the second summand, the first factor
-has degree one, so the tensor differential is minus the localized tail
-differential. Deleting the initial zero shifts each remaining face index by
-one, giving precisely that minus sign. Use localization uniqueness to identify
-all transported algebra maps with the maps at the corresponding face products.
-For the first differential, hd₀ and the degree-zero localization map give the
-diagonal map from the actual tensor augmentation; for later differentials hd
-gives the stated alternating sum. This claim constructs no degree-zero
-equivalence and proves no negative-degree vanishing.
-Finite direct sums are finite products. When r=0 the tail's positive coordinate
-products are empty and therefore zero, leaving exactly the single two-term
-factor. Zero rings, zero generators and repeated generators require no separate
-choices and satisfy the same universal-property and subset formulas. -/
+. -/
 theorem ringCechCoordinates_tensor_step (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A)
     (K : CochainComplex (RingSiteModules A) ℤ) (a : K ⟶ ringComplexSingle A)

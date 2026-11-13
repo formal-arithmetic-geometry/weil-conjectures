@@ -23,8 +23,12 @@ import WeilConjectures.AlgebraicGeometry.SelfTorAmbientSectionCoordinates
 
 /-! # Ambient affine self-Tor comparison
 
-Source: Stacks Project, Tags 08DX, 06YG and 00LS.
-(blueprint: lem-pc-self-tor-ambient-resolution-charts). -/
+## References
+
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 06YG](https://stacks.math.columbia.edu/tag/06YG)
+* [Stacks Project, Tag 00LS](https://stacks.math.columbia.edu/tag/00LS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -159,31 +163,7 @@ private theorem affine_iso_of_chart_coordinates {Y : Scheme.{u}} (U : Y.affineOp
   exact congrArg c (d.symm_apply_apply x)
 
 /-- The affine quotient tensor resolutions compute the ambient homology sheaf,
-before any pullback to the closed subscheme.
-Source: Stacks Project, Tag 08DX(2), Tag 06YG, and Tag 00LS.
-(blueprint: lem-pc-self-tor-ambient-resolution-charts).
-
-Proof: Use the natural affine section coordinates provided by
-exists_selfTor_ambient_section_coordinates. The pushed-forward closed structure
-sheaf is quasi-coherent, since a closed immersion is affine. Its degree-zero
-single object has quasi-coherent cohomology: degree zero is the module itself
-and every other degree is zero. The canonical derived tensor preserves
-quasi-coherent cohomology, so Q and every open restriction of Q are quasi-coherent.
-
-The normalized chart section equivalence identifies the affine model's sections
-with algebraic self-Tor and proves quasi-coherence of its restriction to the chart.
-Compose its inverse with the ambient section coordinates. On the affine chart,
-extend this linear equivalence and its inverse to sheaf morphisms. Affine Hom
-extensionality proves that their composites are identities. Transport the
-resulting isomorphism through overEquiv; its effect on sections is the prescribed
-linear equivalence. This constructs each t U with its normalization, without
-assuming the original chart isomorphisms.
-
-For V contained in U, naturality of (t U).hom moves restriction through the
-chart isomorphism. Its normalization replaces the top section by c U x. The
-ambient section coordinate equation gives c V (q x), and the normalization of
-t V gives the required right-hand side. This handles zero modules, empty charts
-and degree zero with the same equivalences and naturality equation. -/
+before any pullback to the closed subscheme. -/
 theorem exists_selfTor_ambient_resolution_charts
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

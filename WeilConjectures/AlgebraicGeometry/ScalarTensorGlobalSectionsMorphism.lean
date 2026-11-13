@@ -11,8 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
 /-! # Tensor product of scalar section morphisms
 
-Source: Stacks Project, Cohomology, Tags 01F7 and 0FKV.
-(blueprint: lem-sc-scalar-tensor-global-sections-morphism).
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 0FKV](https://stacks.math.columbia.edu/tag/0FKV)
 -/
 
 @[expose] public section
@@ -108,22 +110,7 @@ private theorem inclusion_unit_inv
   rw [leftUnitor_inv_naturality_assoc]
   simp only [tensorHom_def', Category.assoc]
 
-/-- Scalar section morphisms respect the tensor coefficient.
-Source: Stacks Project, Cohomology, Tags 01F7 and 0FKV.
-(blueprint: lem-sc-scalar-tensor-global-sections-morphism).
-
-Proof: Precompose both morphisms with the constant-scalar-unit isomorphism.
-The constant-sheaf/global-sections adjunction reduces equality to the linear maps
-out of k determined by the value at one. Each section morphism sends one to its
-section: scalarUnitLinear sends one to one, and homOfGlobalSection evaluates to
-its section at the top open. The inverse unit constraint sends one to the pure
-tensor one tensor one under the inclusion tensorator. Naturality of this
-tensorator therefore identifies the tensor of the two section morphisms at one
-with the tensorator applied to s tensor t. The already proved
-exists_scalarTensorCoefficient sends this to tmulSection s t, the same value as
-the section morphism on the right. Linear maps out of k are determined by one,
-and the adjunction and unit isomorphism are injective, proving the equality.
-The proof remains valid for zero sections and for the empty scheme. -/
+/-- Scalar section morphisms respect the tensor coefficient. -/
 theorem scalarTensorCoefficient_globalSections_morphism
     {k : Type w} [Field k] {X : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (F G : X.Modules)

@@ -12,8 +12,13 @@ import all WeilConjectures.SecSmoothPurity.CochainModuleAdjunction
 import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 
 /-! # Module adjunction with its underlying topos transpose
-Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
-(auxiliary; not a blueprint node).
+
+.
+
+## References
+
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public section
@@ -31,14 +36,8 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 /-- The module adjunction for a specified algebraic inverse image, with the
-underlying transpose retained. Source: Stacks 03D3 and 03D7.
-(auxiliary; not a blueprint node).
-
-Proof: use the existing product-preserving right-module construction. Its addition
-and scalar diagrams identify linear maps among the set-sheaf adjuncts. Restrict the
-set adjunction to those maps. Faithfulness proves the two inverse laws and naturality;
-the resulting Hom equivalence defines the adjunction. Its map formula is exactly the
-underlying set adjunction, followed by the inverse underlying-sheaf identification. -/
+underlying transpose retained.
+. -/
 theorem normalizedModuleAdjunction_exists
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u))

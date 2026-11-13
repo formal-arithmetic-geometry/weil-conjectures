@@ -20,8 +20,12 @@ import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Ambient self-Tor coordinates on affine sections
 
-Source: Stacks Project, Tags 08DX(2), 06YG and 00LS.
-(blueprint: new-a3-self-tor-ambient-section-coordinates). -/
+## References
+
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 06YG](https://stacks.math.columbia.edu/tag/06YG)
+* [Stacks Project, Tag 00LS](https://stacks.math.columbia.edu/tag/00LS)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,38 +35,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- Algebraic self-Tor gives linear coordinates on the affine sections of the
-ambient tensor homology, compatible with augmented resolution comparisons.
-Source: Stacks Project, Tag 08DX(2), Tag 06YG and Tag 00LS.
-(blueprint: new-a3-self-tor-ambient-section-coordinates).
-
-Proof: On U = Spec A, identify the closed structure sheaf with tilde(A/I).
-Sheafify the chosen projective resolution of A/I and its augmentation using
-lem-sc-affine-quotient-resolution-sheafification. Projective terms are flat;
-extend into nonpositive degrees and apply lem-pc-bounded-above-flat-kflat.
-The natural affine derived tensor comparison of
-lem-pc-affine-derived-pullback-tensor-tilde computes the restricted ambient
-self-tensor as tilde of that resolution tensored with A/I. Exactness of tilde
-identifies its negative-n homology with tilde of the chain homology in degree n.
-Apply affine sections and the tilde adjunction unit, then compose with
-ProjectiveResolution.isoLeftDerivedObj to obtain the linear equivalence c U.
-This constructs section coordinates only, not a sheaf isomorphism on the
-category of opens below U.
-
-For a basic inclusion V in U, localize the resolution. Localization is exact
-and preserves projectives. The quotient ring equation identifies the induced
-map of the closed structure sheaves. The augmentation equation makes a a lift
-of that map, and the pure tensor equation identifies k with the tensor lift.
-Compare the localized resolution with the chosen resolution over C: the lifts
-of the same augmentation are homotopic by the projective comparison argument
-of 00LS, which holds for projectives by the lifting property. Tensoring carries
-this homotopy to the corresponding tensor complexes. Thus their homology maps
-agree. The natural K-flat comparison of
-lem-pc-kflat-derived-tensor-comparison makes this the restriction map of the
-ambient tensor, before any pullback to Z. Exact restriction of scalars gives
-mapHomologyIso, and conjugating by isoLeftDerivedObj yields precisely q.
-Naturality of the affine section unit gives the displayed equation.
-The same constructions apply for n = 0, I = top, and empty basic opens;
-zero rings and zero section modules require no additional hypotheses. -/
+ambient tensor homology, compatible with augmented resolution comparisons. -/
 theorem exists_selfTor_ambient_section_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

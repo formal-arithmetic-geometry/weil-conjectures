@@ -9,12 +9,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 
 /-! # Ordinary evaluation on the open scheme's actual site
-Source: Stacks Project, Tags 08DJ and 08DQ, representative evaluation calculation.
-(blueprint: def-pc-scheme-ordinary-evaluation-formula).
+
 The existing local predicate has an over-site carrier. This predicate writes the
 same component equation directly on a scheme's opens, so that transport can be
 separated from the derived calculation. All complexes and components are actual
 constructions; no comparison object is selected from an existence theorem.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -33,8 +37,7 @@ namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
 /-- A single scheme-site ordinary evaluation component, with its actual tensor-Hom map.
-Source: Stacks Project, Tags 08DJ and 08DQ.
-(blueprint: def-pc-scheme-ordinary-evaluation-component).
+
 This is the same component formula as `IsSchemeOrdinaryEvaluation`, isolated
 so that proofs can use the predicate without expanding its large tensor-Hom term. -/
 def schemeOrdinaryEvaluationComponent (Y : Scheme.{u})
@@ -64,11 +67,7 @@ def schemeOrdinaryEvaluationComponent (Y : Scheme.{u})
 attribute [local irreducible] homComplexFunctor
 
 
-/-- Component criterion for scheme ordinary evaluation.
-Source: Stacks Project, Tags 08DJ and 08DQ.
-(blueprint: lem-pc-scheme-ordinary-evaluation-of-components).
-Proof: unfold the predicate and the isolated component formula; they give
-exactly the same equation for every summand and projection. -/
+/-- Component criterion for scheme ordinary evaluation. -/
 theorem schemeOrdinaryEvaluation_of_components (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

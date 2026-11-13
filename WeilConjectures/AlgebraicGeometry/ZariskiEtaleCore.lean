@@ -67,10 +67,6 @@ private noncomputable def etaleImageAdjunction (X : Scheme.{u}) :
 
 /-- Core site data for the Zariski-to-etale inclusion.
 
-Source: Stacks Project, Sites, Proposition Tag 00X6 and Lemma Tag 00X5;
-Morphisms, Tag 02GP; Schemes, Tag 01JR.
-(blueprint: lem-weil-pbc-zariski-etale-core)
-
 Proof in words: send an open U to its open subscheme with inclusion into X,
 which is etale because open immersions are etale. Send an inclusion V <= U
 to the scheme inclusion over X. These are the objects and maps of

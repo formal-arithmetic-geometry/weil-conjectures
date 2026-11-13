@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 
 proof.md, diagonal-kernel unit,
 both triangle identities and (G7)
-(auxiliary; not a blueprint node).
+.
 
 The counit equality is written after precomposition with the canonical projection
 isomorphism. Cancelling that isomorphism gives precisely the inverse-projection
@@ -40,17 +40,13 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The identity/proper compactification of the projective line in standard-chart
-coordinates. Source: the standard compactification in
-`cor-amb-affine-space-adjunction.proof.md`, paragraph 1
-(auxiliary; not a blueprint node). -/
+coordinates. -/
 noncomputable abbrev sfProjectiveLineCompactification (S : Scheme.{u}) :
     Compactification (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S ↘ S) :=
   Compactification.ofIsProper (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S ↘ S)
 
 /-- The canonical identification of a complex with its tensor product with the
-pullback of the coefficient unit. Source: the unit normalization in
-`thm-amb-p1-adjunction.proof.md`, (G7)
-(auxiliary; not a blueprint node). -/
+pullback of the coefficient unit. -/
 noncomputable def sfTensorPullbackUnitIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B : DerivedCategoryModule A X) :
@@ -162,7 +158,7 @@ The equality for every K includes the coefficient unit: the projection map at th
 unit is the canonical unit comparison, so the counit there is t.
 
 proof.md, (G6), (G7), both triangles
-(auxiliary; not a blueprint node).
+.
 
 Proof plan:
 1. Apply lem-sp-tower-p1-arbitrary-base-integrals to the arbitrary affine S.
@@ -180,7 +176,7 @@ Proof plan:
    natural unit M -> q^*Rq_*M tensor B. Use the normalized monoidal comparisons
    of lem-sfb-ringed-derived-monoidal-comparisons throughout. Define the proposed
    counit by inverse ordered projection, tensoring t with the identity, and the
-   unit constraint (def-kun-projection-formula-map).
+   unit constraint.
 3. Apply lem-sfb-etale-coordinate-trace-contractions with f = q and d = 1;
    lem-asd-finite-etale-twist-line supplies its line hypothesis. Its first
    coordinate equation, naturality and the section identity of
@@ -194,12 +190,11 @@ Proof plan:
    Apply lem-weil-pbc-adjunction-of-natural-bijection. The resulting adjunction
    has the proposed e as its actual counit.
 6. Transport the right adjoint through the symmetry from q^*K tensor B to
-   B tensor q^*K (lem-kun-tensor-sym). The transported counit is exactly inverse
+   B tensor q^*K. The transported counit is exactly inverse
    proper projection followed by t tensor identity and the left unitor. The
    identity/proper compactification of lem-sf-etale-ambient-adjoint-projection
    gives the same projection map. At the coefficient unit the canonical
-   projection and unit constraints identify the counit with t
-   (lem-kun-tensor-unit). N = 1 forces A to be the zero ring, where the same
+   projection and unit constraints identify the counit with t. N = 1 forces A to be the zero ring, where the same
    formulas hold, and the empty affine base causes no exception. -/
 theorem sfAffineBaseP1TraceAdjunction
     (A : Type (u + 1)) [CommRing A] [Finite A]

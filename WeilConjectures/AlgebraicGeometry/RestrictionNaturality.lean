@@ -12,9 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Target isomorphisms and module cohomology maps
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01F8 and Remark 01FB;
-Derived Categories, Tags 013P, 013S and 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-target-iso-naturality).
+## References
+
+* [Stacks Project, Tag 01F8](https://stacks.math.columbia.edu/tag/01F8)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 013P](https://stacks.math.columbia.edu/tag/013P)
+* [Stacks Project, Tag 013S](https://stacks.math.columbia.edu/tag/013S)
+* [Stacks Project, Tag 05TG](https://stacks.math.columbia.edu/tag/05TG)
 -/
 
 @[expose] public section
@@ -239,19 +243,16 @@ private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     Iso.symm_inv, Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using hh
 
 /-- Target naturality for an isomorphism of the target module.
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01F8 and Remark 01FB;
-Derived Categories, Tags 013P, 013S and 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-target-iso-naturality).
 
 Proof (resolution comparison, independent of functoriality of h-maps):
 1. Let D and E be the data chosen in the two occurrences of moduleCohomologyFMap.
-   Write P = h_*. Lift e.hom to c : D.I -> E.I and the identity of G to
-   d : D.J -> E.J. Their augmentation equations are I_D.ι c = e.hom I_E.ι
+   Write P = h_*. Lift e.hom to c: D.I -> E.I and the identity of G to
+   d: D.J -> E.J. Their augmentation equations are I_D.ι c = e.hom I_E.ι
    and J_D.ι d = J_E.ι. Injective-resolution comparison gives these lifts.
 2. Extend the natural-indexed complexes by zero to integer indices. E.K is bounded
    below and termwise injective, hence K-injective. Since D.lambda is a
    quasi-isomorphism, precomposition with it is bijective on homotopy classes
-   into E.K (Tag 05TG). Lift P(c) followed by E.lambda to t : D.K -> E.K,
+   into E.K (Tag 05TG). Lift P(c) followed by E.lambda to t: D.K -> E.K,
    with D.lambda followed by t homotopic to P(c) followed by E.lambda.
 3. D.beta followed by t and d followed by E.beta have homotopic composites
    with D.J's augmentation: use D.compatible, the preceding lambda homotopy,

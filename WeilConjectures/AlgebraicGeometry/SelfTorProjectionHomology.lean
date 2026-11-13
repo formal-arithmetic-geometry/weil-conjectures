@@ -23,10 +23,9 @@ namespace AlgebraicGeometry
 /-- Projection-formula and representative-comparison step for self-Tor.
 
 This is the intermediate statement used to separate the qcqs projection formula
-from the final choice of the literal termwise pullback representative.  Its
+from the final choice of the literal termwise pullback representative. Its
 proof is the derived projection formula, exactness of closed-immersion
-pushforward, and transport along the displayed complex isomorphism.
-(blueprint: lem-pc-self-tor-projection-homology). -/
+pushforward, and transport along the displayed complex isomorphism.. -/
 theorem nonempty_selfTor_projection_homology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

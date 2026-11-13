@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 # Globalization of affine lifting for universal first order thickenings
 
 The affine-test lifting property globalizes by affine covers and morphism gluing.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-globalization)
+
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
 -/
 
 @[expose] public section
@@ -160,10 +163,7 @@ private theorem lifts_of_affine_tests
   exact ⟨c', hc', fun d hd => unique_lifts_of_affine_tests h i h' H j b a hj hab hd hc'⟩
 
 /-- Affine-test universality of a first-order thickening implies universality for all
-test schemes. Source: Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3), gluing step.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-globalization)
-Proof: cover the test target by affine opens, apply affine-test uniqueness and existence,
-then glue the local lifts; equality on overlaps follows from affine-test uniqueness. -/
+test schemes. -/
 theorem isUniversalFirstOrderThickening_of_affine_local
     {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (hi : IsFirstOrderThickening i) (hcomp : i ≫ h' = h)

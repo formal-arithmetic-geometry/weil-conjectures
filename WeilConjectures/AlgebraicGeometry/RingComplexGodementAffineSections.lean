@@ -14,8 +14,11 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Godement augmentation on principal affine intersections
 
-Source: Stacks Project, Tags 0FKS, 01ET, and 01XB.
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks Project, Tag 0FKS](https://stacks.math.columbia.edu/tag/0FKS)
+* [Stacks Project, Tag 01ET](https://stacks.math.columbia.edu/tag/01ET)
+* [Stacks Project, Tag 01XB](https://stacks.math.columbia.edu/tag/01XB)
 -/
 
 @[expose] public section
@@ -123,24 +126,7 @@ private theorem godement_eval_quasiIso (X : Scheme.{u}) (U : X.Opens)
   exact h
 
 /-- The chosen Godement augmentation remains a quasi-isomorphism on every
-principal affine intersection of a generating cover.
-Source: Stacks Project, Tags 0FKS, 01ET and 01XB.
-(auxiliary; not a blueprint node)
-
-Proof: the span equality shows D(f_i) lies in Spec A minus V(I).
-The intersection indexed by t is therefore the principal open D(product f(t i)),
-viewed inside that complement; it is affine, including when the product is zero.
-The structure module restricts to its structure module and is quasi-coherent,
-so its positive cohomology vanishes by affine vanishing. The prescribed Godement
-augmentation is a quasi-isomorphism, extended by zero in negative degrees. Each
-nonnegative term is a product of stalk skyscrapers, hence flasque. Restriction
-to an open remains flasque and is exact. These restricted terms are acyclic for
-sections. Apply the bounded-below acyclic-resolution comparison to the coefficient
-single complex and this Godement complex: both have section-acyclic terms, so
-sections preserve this quasi-isomorphism. This is the displayed evaluation map,
-without changing the augmentation. If the cover is empty, there are no tuples;
-if the intersection is empty, every section module is zero. Zero rings and
-repeated generators require no additional case. -/
+principal affine intersection of a generating cover. -/
 theorem ringComplexGodement_affineSections (A : CommRingCat.{u}) (I : Ideal A)
     (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) :
     ∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r),

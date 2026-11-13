@@ -8,7 +8,13 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-/-! # Scalar action calculation for an affine chart -/
+/-! # Scalar action calculation for an affine chart
+
+## References
+
+* [Stacks Project, Tag 01IB](https://stacks.math.columbia.edu/tag/01IB)
+* [Stacks Project, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
+-/
 
 @[expose] public section
 universe u
@@ -16,17 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Scalar multiplication on a module induces scalar multiplication on every
-section of its associated sheaf.
-Source: Stacks Project, Tag 01IB (associated sheaves), and Tag 01HV,
-Lemma 26.5.4 (7) (localization of module morphisms).
-(blueprint: lem-sc-tilde-scalar-section-action).
-
-Proof: A section is a dependent function with values in the localized modules
-at the points of Spec R. The tilde map acts pointwise by the localized linear
-map. Since f is multiplication by a, that localized map sends each fraction
-m/s to (a m)/s, which equals a times m/s by the localization relations.
-Extensionality of the section functions gives the equality on every open.
-The argument also applies to the empty open and to the zero ring. -/
+section of its associated sheaf. -/
 theorem tilde_scalar_section_action (R : CommRingCat.{u}) (M : ModuleCat.{u} R)
     (a : R) (f : M ⟶ M) (hf : ∀ m : M, f m = a • m)
     (V : (Spec R).Opens) (s : Γ((tilde.functor R).obj M, V)) :

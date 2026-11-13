@@ -14,8 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselization
 The strict henselization `S_(s)` of a scheme `S` at a geometric point `s` maps to `S` through
 every affine pointed étale neighbourhood; this module names that canonical morphism.
 
-Source: Stacks Project, Tag 03Q9, proof
-(blueprint: def-weil-pbc-strict-henselization-structural-map).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -28,14 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- There is a morphism `S_(s) ⟶ S` equal, for every representative affine pointed
 neighbourhood `(V, v)`, to the limit leg `S_(s) ⟶ Spec Γ(V, ⊤)`, followed by the
-identification `Spec Γ(V, ⊤) ≅ V` and the structure morphism `V ⟶ S`.
-Source: Stacks Project, Tag 03Q9, proof
-(blueprint: def-weil-pbc-strict-henselization-structural-map).
-
-Proof: the representative category is cofiltered (`strictHenselization_properties`), hence
-nonempty and connected. The legs of `strictHenselizationCone s` commute with the transition
-maps, which are pointed morphisms over `S`, so the composites with the structure morphisms
-agree along every arrow, hence for every pair of objects; take their common value. -/
+identification `Spec Γ(V, ⊤) ≅ V` and the structure morphism `V ⟶ S`. -/
 theorem exists_strictHenselizationStructuralMap
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -85,9 +79,7 @@ theorem exists_strictHenselizationStructuralMap
 
 /-- The structural morphism `S_(s) ⟶ S` of the strict henselization at a geometric point:
 the common composite of the limit legs with the neighbourhood structure morphisms,
-characterized by `exists_strictHenselizationStructuralMap`.
-Source: Stacks Project, Tag 03Q9, proof
-(blueprint: def-weil-pbc-strict-henselization-structural-map). -/
+characterized by `exists_strictHenselizationStructuralMap`. -/
 noncomputable def strictHenselizationStructuralMap
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S :=

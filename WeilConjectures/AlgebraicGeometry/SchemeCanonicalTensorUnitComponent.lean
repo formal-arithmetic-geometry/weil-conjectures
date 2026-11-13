@@ -12,7 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDiffere
 import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationGradedAugmentation
 
 /-! # The canonical coefficient formula for a tensor-unit action
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -169,29 +174,7 @@ private theorem evaluation_summand_postcomp (Y : Scheme.{u})
 set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 600000 in
 -- Specializing the total tensor formula elaborates sheaf coproduct and closed instances.
-/-- A tensor-unit action has the canonical dual-projection component formula.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-ordinary evaluation chain calculation, coefficient cancellation and tensor action.
-(blueprint: lem-pc-scheme-canonical-tensor-unit-component).
-
-Proof: Restrict the assumed factorization to V^q tensor P^r. The component
-formula for schemeTensorHomUncurry and coefficient naturality of the Hom
-projections give the uncurried old projection followed by eta_O. The
-augmentation is degreewise monic: monoQuasiIso_toKInjectiveResolution_app
-makes it monic as a chain map, and evaluation preserves finite limits.
-Cancel it to determine the component of e. For r+q=0, postcompose this
-component with singleObjXSelf and use tensor-Hom coefficient naturality to
-move this identification inside uncurrying. Restrict the total tensor action
-to (F^p tensor V^q) tensor P^r: the total associator acts by the component
-associator without a sign, and tensor-map naturality gives the component of e.
-The single-unit right unitor is the coefficient identification followed by
-rho and XIsoOfEq; the degree equations give p=k. Thus the displayed formula
-holds when r+q=0. Otherwise O^(r+q) is zero, so the tensor action component
-vanishes. Finally postcompose with eta_F; the component of a composition is
-the composition of components. No ordinary evaluation map f, no ordinary
-component predicate, no boundedness or flatness, and no existence of e are
-used. Zero maps, zero complexes, negative degrees and the empty scheme are
-included by the same argument. -/
+/-- A tensor-unit action has the canonical dual-projection component formula. -/
 theorem schemeCanonicalTensorUnit_component (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (e : pullbackTensorTotal Y

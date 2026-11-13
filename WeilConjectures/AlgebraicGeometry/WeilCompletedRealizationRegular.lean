@@ -13,9 +13,13 @@ set_option linter.privateModule false
 
 /-! # The regular module under completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
-lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 03D8](https://stacks.math.columbia.edu/tag/03D8)
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 0GMW](https://stacks.math.columbia.edu/tag/0GMW)
 -/
 
 @[expose] public noncomputable section

@@ -14,8 +14,9 @@ import Mathlib.RingTheory.Flat.Localization
 
 /-! # Recovering relative flatness from stalks
 
-Source: Stacks Project, Morphisms, Tag 01U4, implication (1) to (2).
-(blueprint: lem-pc-relative-flat-of-stalks).
+## References
+
+* [Stacks Project, Tag 01U4](https://stacks.math.columbia.edu/tag/01U4)
 -/
 
 @[expose] public section
@@ -26,20 +27,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent module with relatively flat stalks satisfies the affine-section
-relative-flatness criterion.
-Source: Stacks Project, Morphisms, Tag 01U4, implication (1) to (2).
-(blueprint: lem-pc-relative-flat-of-stalks).
-
-Proof: Fix affine opens V of S and U of X with U contained in f inverse V.
-Put R = O_S(V), A = O_X(U), and N = G(U), using the ring map f.appLE.
-For each prime q of A, let x be its point of U and p its inverse image in R.
-Quasi-coherence identifies N localized at q with G_x as an A_q-module.
-The stalk of S at f(x) is R_p, compatibly with f.appLE and f.stalkMap.
-By the hypothesis G_x is R_p-flat. Since R_p is a flat R-algebra, G_x is
-R-flat by transitivity. Thus all the localizations N_q are R-flat.
-The local criterion for flatness of an A-module over R now makes N R-flat
-(Algebra Tag 00HT). This proves each test in IsFlatOver. Empty affine opens
-have zero sections, which are flat; an empty source has no stalk tests. -/
+relative-flatness criterion. -/
 theorem relative_flat_of_stalks {X S : Scheme.{u}} (f : X ⟶ S)
     (G : X.Modules) [G.IsQuasicoherent]
     (h : ∀ x : X, Module.Flat (S.presheaf.stalk (f x))

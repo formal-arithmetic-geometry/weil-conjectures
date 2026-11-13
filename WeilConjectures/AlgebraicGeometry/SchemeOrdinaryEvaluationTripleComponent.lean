@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality
 import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurriedComponent
 
 /-! # Uncurrying ordinary evaluation on a triple summand
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+
+## References
+
+* [Stacks Project, Tag 08DJ](https://stacks.math.columbia.edu/tag/08DJ)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -27,25 +32,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- Uncurrying the ordinary evaluation equation on one triple tensor summand.
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ;
-ordinary evaluation chain calculation, step 3.
-(blueprint: lem-pc-scheme-ordinary-evaluation-triple-component).
-
-Proof: First restrict schemeTensorHomUncurry to the outer tensor summand using
-schemeTensorHomUncurry_component. Naturality of the Hom projections under
-eta_F and naturality of tensorHomEquiv move eta_F to the end of this map.
-Naturality in the source tensor inclusion then expresses the remaining map
-as the inverse tensorHomEquiv applied to the ordinary component equation hf.
-For r+q=0, apply hf, cancel the tensorHomEquiv inverse with tensorHomEquiv,
-and cancel the two symmetries. The remaining map is exactly the associator,
-the dual Hom projection (identified with the tensor unit by singleObjXSelf),
-and the right unitor displayed below. For r+q nonzero hf gives zero; the
-additive tensor-Hom equivalence and composition send zero to zero. The
-reindexing equality p=k follows from the two degree sums and r+q=0.
-This calculation uses no putative evaluation map e and no factorization
-hypothesis. It holds in negative degrees, for unbounded or zero complexes,
-and for the empty scheme. -/
+/-- Uncurrying the ordinary evaluation equation on one triple tensor summand. -/
 theorem schemeOrdinaryEvaluation_triple_component (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

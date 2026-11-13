@@ -12,8 +12,11 @@ import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsSingle
 
 /-! # The shifted single comparison for restricted derived section pullback
 
-Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-shift-comparison).
+## References
+
+* [Stacks Project, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks Project, Tag 0D6F](https://stacks.math.columbia.edu/tag/0D6F)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -25,25 +28,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 /-- On a shifted single sheaf, the constructed natural pullback is the explicitly
-constructed restricted cohomology map.
-Source: Stacks Project, Tags 07A6 and 0D6F; Tag 03Q8 for restriction of cohomology.
-(blueprint: lem-sbc-restricted-derived-section-shift-comparison).
-
-Proof: Commute restriction and derived global sections with the shift by p.
-The derived adjunction unit and the Leray isomorphism commute with this shift,
-since the adjunction is induced from the adjunction of complexes and the
-Leray isomorphism is characterized by the composite right-derived unit.
-After the homology shift comparison, the map is H^p of the derived unit for q,
-followed by the Leray comparison and the mapDerivedCategoryFactors comparison
-on the actual single complex. This is exactly rawAffineComplexPullback.
-The derivedRestrictionIso comparison, on a single, is the image under Q of
-the mapCochainComplexSingleFunctor comparison followed by the single image
-of upperStarComp(q,r) inverse and upperStarComp(r',a). Naturality for φ
-then makes its coefficient part the Q image of the single coefficient map
-rawAffineRestrictedCoefficient. Substitute these identities into shiftIso
-and cancel the single and shift comparisons and their inverses. The result
-is rawAffineRestrictedCohomologyMap by definition. The same calculation holds
-for p = 0, for an empty restricted scheme, and for a noninvertible φ. -/
+constructed restricted cohomology map. -/
 theorem restrictedSectionPullback_shift {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

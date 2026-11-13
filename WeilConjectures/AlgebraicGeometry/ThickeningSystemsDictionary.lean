@@ -18,9 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemsCompletionComparison
 
 /-! # The dictionary for coherent systems on infinitesimal thickenings
 
-Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T
-(blueprint: lem-weil-pbc-thickening-systems-dictionary).
-
 The natural evaluation isomorphisms specify the dictionary on both objects and morphisms.
 The unit equations specify its transitions and the canonical restriction comparisons.
 The indexing starts with X_0 = X × Spec(A/I).
@@ -28,6 +25,13 @@ X_n is spelled `pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ 
 j_n its `pullback.fst`, and I O_X `(Scheme.IdealSheafData.ofIdealTop (I.map
 (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f`, as in the landed
 `quotientBaseChange_closedImmersion_ideal` and `grothendieck_existence`.
+
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
+* [Stacks Project, Tag 0880](https://stacks.math.columbia.edu/tag/0880)
+* [Stacks Project, Tag 0CYL](https://stacks.math.columbia.edu/tag/0CYL)
 -/
 
 @[expose] public section
@@ -103,8 +107,6 @@ private lemma support_proper_closed_square {Y X S₀ S : Scheme.{v}}
     exact ⟨Z, hZ, IsProper.of_comp (t ≫ g) q⟩
 
 /-- The dictionary, including its naturality and proper-support restriction.
-Source: Stacks, Remark 088F, Lemma 087T, equation 0880 and Lemma 0CYL
-(blueprint: lem-weil-pbc-thickening-systems-dictionary).
 
 Proof, in the node's twelve steps:
 1. A finite-type scheme over a Noetherian affine scheme is Noetherian (01T6).

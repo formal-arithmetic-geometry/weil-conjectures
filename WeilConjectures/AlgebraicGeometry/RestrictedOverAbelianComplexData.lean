@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleCoherence
 
 /-! # Geometric complex data for restricted abelian cohomology
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-abelian-complex-data).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -23,15 +25,13 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The abelian coefficient sheaf pulled back from the fixed scheme W. 
-(blueprint: lem-sbc-restricted-over-abelian-complex-data)
+/-- The abelian coefficient sheaf pulled back from the fixed scheme W.
 -/
 noncomputable def restrictedOverCoefficient {W : Scheme.{u}}
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (A : Over W) :=
   (upperStar AddCommGrpCat.{u + 1} A.hom).obj F
 
-/-- Integer-degree cohomology on the actual etale fibre product. 
-(blueprint: lem-sbc-restricted-over-abelian-complex-data)
+/-- Integer-degree cohomology on the actual etale fibre product.
 -/
 noncomputable def restrictedOverCohomology {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
@@ -42,8 +42,7 @@ noncomputable def restrictedOverCohomology {W S : Scheme.{u}} (k : W ⟶ S)
         (restrictedOverCoefficient F A))))
 
 /-- The canonical map is derived pullback followed by the coefficient identification.
-It is written explicitly and is not selected from an existence theorem. 
-(blueprint: lem-sbc-restricted-over-abelian-complex-data)
+It is written explicitly and is not selected from an existence theorem.
 -/
 noncomputable def restrictedOverCohomologyMap {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
@@ -64,33 +63,7 @@ noncomputable def restrictedOverCohomologyMap {W S : Scheme.{u}} (k : W ⟶ S)
               (restrictedOverCoefficient F B) (restrictedOverCoefficient F A) φ U)))
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Geometric complex data for restricted abelian cohomology of fixed coefficients.
-Source: Stacks Project, Tag 09Z1, affine-object reduction in lemma-relative-colimit;
-Tag 0EZM, lemma-colimit-variant-complexes, before invoking continuity.
-(blueprint: lem-sbc-restricted-over-abelian-complex-data).
-
-Proof: Base change D and c to U using the pullbacks U times_S D(i). The universal
-property of each pullback defines the transition arrows and cone arrows, proves
-functoriality, and identifies the resulting cone as limiting. Affineness survives
-base change. The maps to affine U are qcqs by base change, so their sources are
-compact and quasi-separated. Restrict the sheaves A.hom^*F to these fibre products
-and form their degree-zero single complexes. The coefficient identifications are
-upperStarComp inverses, restricted using the two comparisons displayed in
-rawAffineRestrictedCoefficient. Unit and associativity coherence give the complex
-identity and composition equations. The lower bound is zero. On the limiting
-scheme these complexes identify with the pullback of F from W, in degree zero.
-Take the constant diagram of that complex and its identity cocone. I opposite
-is nonempty and connected, so that cocone is colimiting; the composition comparisons
-give eG and its map equation. Set p=q and P=rawAffineComplexPullback q. The stage
-cohomology is precisely restrictedOverCohomology; compose the single-complex
-identifications with e to give eH. Identify the constant cocone point similarly
-and compose with e₀ to obtain the apex isomorphism. The definitions of
-restrictedOverCohomologyMap and rawAffineRestrictedCoefficient identify the stage
-maps with P followed by cohomology of phi, and the cone maps with P followed by
-cohomology of the coefficient leg. The assumed squares give hH and hB.
-No derived Hom, scalar comparison, or cohomology continuity is used. For q<0
-single-complex cohomology vanishes; the identical construction still applies.
-For an empty test object the same pullback and zero sheaf constructions apply. -/
+/-- Geometric complex data for restricted abelian cohomology of fixed coefficients. -/
 theorem restrictedOverAbelianCocone_complex_data
     {W S : Scheme.{u}} (k : W ⟶ S)
     (F₀ : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)

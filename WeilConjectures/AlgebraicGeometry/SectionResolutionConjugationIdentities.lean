@@ -15,12 +15,13 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 
 /-! # Resolution conjugation identities for the section equivalence
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; the explicit
-internal/section conjugation calculation in the blueprint proof
-(auxiliary; not a blueprint node).
-
 The maps below are composites of the specified comparisons, never independently
 chosen tensor-pullback transformations. Composition in Lean is left to right.
+
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +46,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 
-/-- The internal resolution transformation eta at a cochain representative.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The internal resolution transformation eta at a cochain representative. -/
 @[irreducible] def eta {X Y : Scheme.{u}} (f : X ⟶ Y) (A : CochainComplex (internalModules Λ Y) ℤ) :
     (internalDerivedPullFunctor Λ f).obj ((internalLocalizationFunctor Λ Y).obj A) ⟶
       (internalLocalizationFunctor Λ X).obj ((totalInternalPull Λ f).obj A) :=
@@ -55,16 +55,14 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       exact cast (by rfl) ((CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj A))
 
-/-- The specified section resolution transformation epsilon, using exact localization.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The specified section resolution transformation epsilon, using exact localization. -/
 @[irreducible] def epsilon {X Y : Scheme.{u}} (f : X ⟶ Y) (P : CochainComplex (modules Λ Y) ℤ) :
     (derivedPullback Λ f).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj ((totalSectionPull Λ f).obj P) :=
   by
     with_unfolding_all exact (pullback Λ f).mapDerivedCategoryFactors.hom.app P
 
-/-- The output identification d_A = q(h_A) kappa at the internal pullback.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The output identification d_A = q(h_A) kappa at the internal pullback. -/
 @[irreducible] def d {X Y : Scheme.{u}} (f : X ⟶ Y) (A : CochainComplex (internalModules Λ Y) ℤ) :
     (derivedSectionFunctor Λ X).obj
         ((internalLocalizationFunctor Λ X).obj ((totalInternalPull Λ f).obj A)) ⟶
@@ -73,8 +71,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (cochainLocalizationIso Λ X ((totalInternalPull Λ f).obj A)).hom ≫
     DerivedCategory.Q.map (termwisePullComparison Λ f A).hom
 
-/-- The input identification j_A = LF(kappa_A) gamma.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The input identification j_A = LF(kappa_A) gamma. -/
 @[irreducible] def j {X Y : Scheme.{u}} (f : X ⟶ Y) (A : CochainComplex (internalModules Λ Y) ℤ) :
     (derivedSectionFunctor Λ X).obj
         ((internalDerivedPullFunctor Λ f).obj ((internalLocalizationFunctor Λ Y).obj A)) ⟶
@@ -83,8 +80,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (derivedPullSquare Λ f).hom.app ((internalLocalizationFunctor Λ Y).obj A) ≫
     (derivedPullback Λ f).map (cochainLocalizationIso Λ Y A).hom
 
-/-- The total input-output identification d_Z, including F applied to the total comparison.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The total input-output identification d_Z, including F applied to the total comparison. -/
 @[irreducible] def dZ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) :
     (derivedSectionFunctor Λ X).obj
@@ -94,8 +90,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   d Λ f (A ⊗ B) ≫
     DerivedCategory.Q.map ((totalSectionPull Λ f).map (cochainTensorComparison Λ Y A B).hom)
 
-/-- The total output identification d_out, with the tensor of the ordinary pull comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The total output identification d_out, with the tensor of the ordinary pull comparisons. -/
 @[irreducible] def dOut {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) :
     (derivedSectionFunctor Λ X).obj ((internalLocalizationFunctor Λ X).obj
@@ -110,8 +105,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
     DerivedCategory.Q.map
       ((termwisePullComparison Λ f A).hom ⊗ₘ (termwisePullComparison Λ f B).hom)
 
-/-- The binary input identification j_AB, with the fixed theta followed by kappa tensor kappa.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The binary input identification j_AB, with the fixed theta followed by kappa tensor kappa. -/
 @[irreducible] def jTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) :
     (derivedSectionFunctor Λ X).obj ((internalDerivedPullFunctor Λ f).obj
@@ -127,8 +121,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
         (tensor Λ Y).map (Prod.mkHom (cochainLocalizationIso Λ Y A).hom
           (cochainLocalizationIso Λ Y B).hom))
 
-/-- The binary output identification k_AB, in the order theta, gamma tensor gamma, LF(kappa).
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The binary output identification k_AB, in the order theta, gamma tensor gamma, LF(kappa). -/
 @[irreducible] def kTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) :
     (derivedSectionFunctor Λ X).obj
@@ -149,8 +142,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       ((derivedPullback Λ f).map (cochainLocalizationIso Λ Y A).hom)
       ((derivedPullback Λ f).map (cochainLocalizationIso Λ Y B).hom))
 
-/-- The internal input arrow a^i. The lax localization map is (r_Y^i) inverse.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The internal input arrow a^i. The lax localization map is (r_Y^i) inverse. -/
 @[irreducible] def aInternal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) :
     (internalDerivedPullFunctor Λ f).obj ((internalLocalizationFunctor Λ Y).obj A ⊗
@@ -160,8 +152,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       (internalQTensorArrow Λ Y A B) ≫
     eta Λ f (A ⊗ B)
 
-/-- The internal output arrow c^i; its final lax localization map is (r_X^i) inverse.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The internal output arrow c^i; its final lax localization map is (r_X^i) inverse. -/
 @[irreducible] def cInternal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) :
     (internalDerivedPullFunctor Λ f).obj ((internalLocalizationFunctor Λ Y).obj A) ⊗
@@ -172,8 +163,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
     internalQTensorArrow Λ X
       ((totalInternalPull Λ f).obj A) ((totalInternalPull Λ f).obj B)
 
-/-- The section input arrow a^s, with the prescribed inverse representative map qTensor.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The section input arrow a^s, with the prescribed inverse representative map qTensor. -/
 @[irreducible] def aSection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (derivedPullback Λ f).obj
@@ -182,8 +172,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (derivedPullback Λ f).map (qTensorArrow Λ Y P Q) ≫
     epsilon Λ f (P ⊗ Q)
 
-/-- The section output arrow c^s, using the fixed tensor on epsilon and then qTensor.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The section output arrow c^s, using the fixed tensor on epsilon and then qTensor. -/
 @[irreducible] def cSection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (tensor Λ X).obj
@@ -193,8 +182,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (tensor Λ X).map (Prod.mkHom (epsilon Λ f P) (epsilon Λ f Q)) ≫
     qTensorArrow Λ X ((totalSectionPull Λ f).obj P) ((totalSectionPull Λ f).obj Q)
 
-/-- The regular unit identification e_T = q(ell_T) kappa_{R_T[0]}.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The regular unit identification e_T = q(ell_T) kappa_{R_T[0]}. -/
 @[irreducible] def e (T : Scheme.{u}) :
     (derivedSectionFunctor Λ T).obj
         ((internalLocalizationFunctor Λ T).obj (internalCochainUnit Λ T)) ⟶
@@ -202,8 +190,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (cochainLocalizationIso Λ T (internalCochainUnit Λ T)).hom ≫
     DerivedCategory.Q.map (cochainUnitComparison Λ T).hom
 
-/-- The three resolution equations and the localized actual total-arrow equation.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The three resolution equations and the localized actual total-arrow equation. -/
 @[irreducible] def Equations {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ) : Prop :=
   ((derivedSectionFunctor Λ X).map (eta Λ f A) ≫ d Λ f A =
@@ -220,8 +207,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       (sectionTotalIso Λ f ((totalSectionEquivalence Λ Y).obj A)
         ((totalSectionEquivalence Λ Y).obj B)).hom)
 
-/-- The unary formula with the localized ordinary regular-unit comparison.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The unary formula with the localized ordinary regular-unit comparison. -/
 @[irreducible] def UnitEquation {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   (derivedSectionFunctor Λ X).map
       (eta Λ f (internalCochainUnit Λ Y) ≫
@@ -233,8 +219,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       DerivedCategory.Q.map (sectionPullUnitArrow Λ f)
 
 /-- Naturality of the four displayed composites on resolving representatives. The matching
-right-hand composites are equal by Equations, so these are also their naturality squares.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+right-hand composites are equal by Equations, so these are also their naturality squares. -/
 @[irreducible] def Naturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   ∀ (A B A' B' : CochainComplex (internalModules Λ Y) ℤ)
       (_hA : KFlatSectionComparison.internalResolving Λ Y A)
@@ -275,8 +260,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
 
 /-- Substitution by the displayed section equivalence isomorphisms. Every transport
 is written explicitly, so the equations at arbitrary section representatives retain
-exactly the original comparison factors.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+exactly the original comparison factors. -/
 @[irreducible] def SubstitutionEquations {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (internalModules Λ Y) ℤ)
     (P Q : CochainComplex (modules Λ Y) ℤ)
@@ -307,8 +291,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
         DerivedCategory.Q.map (sectionTotalIso Λ f P Q).hom)
 
 /-- The unary equation after substituting a section-unit isomorphism. In the theorem
-this is exactly the inverse of the termwise equivalence counit at the section unit.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+this is exactly the inverse of the termwise equivalence counit at the section unit. -/
 @[irreducible] def UnitSubstitution {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (modules Λ Y) ℤ)
     (σ : sectionCochainUnit Λ Y ≅ P) : Prop :=
@@ -499,36 +482,6 @@ private theorem qh_map_quotient
 
 -- The concrete localization and total-comparison interfaces require extra elaboration steps.
 /-- Explicit resolution conjugation identities, their naturality, and counit substitution.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; the agent calculation
-refining the representative square (auxiliary; not a blueprint node).
-
-Proof:
-1. Reverse the resolution-compatibility clause of sectionDerivedPushpullNormalization.
-   This gives the unary equation at every internal complex.
-2. The first clause of TensorRepresentativeCondition holds for every pair of internal
-   complexes. Cancel the inverse localization and tensor-comparison factors to obtain
-   the representative identity. Paste this with the unary equation at the total tensor,
-   gamma-naturality at the internal representative map, and epsilon-naturality at the
-   ordinary total comparison. The result is the binary input equation.
-3. Apply the representative identity at the two internal pullbacks. Naturality of
-   qTensor at the termwise pullback comparisons, naturality of tensorComparison at the
-   two eta maps, and the two unary equations give the output equation. Bifunctoriality
-   combines the paired transports. No resolving-preservation hypothesis is needed here.
-4. Cancel the invertible source transports in the ordinary total-comparison clause of
-   section_oplax_total_comparison. Localize and paste with kappa-naturality. For units,
-   cancel the corresponding ordinary unit transports, then apply kappa-naturality,
-   the unary equation at the internal unit, and epsilon-naturality at its comparison.
-5. The pure-tensor characterization identifies ordinaryTensorComparison with the
-   natural comparison of internal_section_tensor_comparison. Its summand formula and
-   coproduct extensionality prove naturality of totalComparison. Naturality of eta,
-   kappa, the termwise pullback comparison and the actual total oplax map then gives
-   all four Naturality squares.
-6. Use epsilon-, qTensor- and section-total naturality to transport the equations along
-   arbitrary section-complex isomorphisms. K-flatness is invariant under tensoring such
-   an isomorphism, and termwise flatness is invariant under the induced isomorphism of
-   tensor-right functors. Apply the resolving equivalence to the termwise inverse
-   image and its counit. Epsilon-naturality and inverse cancellation give the final
-   unit substitution. All the displayed maps remain the specified comparisons.
 -/
 theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ (A B : CochainComplex (internalModules Λ Y) ℤ),

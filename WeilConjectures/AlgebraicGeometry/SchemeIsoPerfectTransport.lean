@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectLocalTransport
 
 /-! # Perfect objects under scheme isomorphisms
 
-Source: Stacks Project, perfect.tex, Tag 08EB, transport along an affine isomorphism
-(blueprint: lem-pc-scheme-iso-perfect-transport).
+## References
+
+* [Stacks Project, Tag 08EB](https://stacks.math.columbia.edu/tag/08EB)
 -/
 
 @[expose] public section
@@ -25,22 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The inverse of a derived equivalence induced by an isomorphism of schemes preserves
-perfect objects.
-Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport
-(blueprint: lem-pc-scheme-iso-perfect-transport).
-
-Proof: The localization comparison identifies the forward functor with exact pushforward
-along s.hom. Its inverse is consequently isomorphic to exact pushforward along s.inv,
-by the pushforward composition and identity comparisons and uniqueness of localization.
-For a point of X, transport a perfect neighbourhood of its image in Y
-to its inverse-image open in X. The induced
-localized-site equivalence commutes with restriction, including the localization
-comparisons for the independently chosen derived categories. This equivalence identifies
-the structure module and finite free modules, preserves retractions by functoriality,
-and preserves zero objects. It therefore transports a strictly perfect local complex
-with the same degree bounds and ranks. Applying the exact derived functor to the local
-model isomorphism gives the required model of e.inverse.obj E. No affineness,
-boundedness of E in advance, nonemptiness, or relation between w₁ and w₂ is needed. -/
+perfect objects. -/
 theorem scheme_iso_derived_inverse_preserves_perfect {X Y : Scheme.{u}}
     (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

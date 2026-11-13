@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnderivedTensorMate
 
 /-! # Sectionwise counit identity for the open tensor comparison
 
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-homotopy-tensor-counit).
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -65,30 +68,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Comparing the chosen adjunctions with the named homotopy comparisons needs this budget.
 /-- The inverse tensor restriction comparison is the mate of the sectionwise
 open direct-image comparison, evaluated on a homotopy complex. All arrows here
-are in homotopy categories; there are no derived-category arrows or units.
-
-Source: Stacks Project, Tags 08FE (sectionwise direct-image restriction), 08HY
-(counit description of the mate), and 0D5S (tensor composition).
-(blueprint: lem-pc-k3-open-homotopy-tensor-counit).
-
-Proof: Expand openPinnedTensorRestrictionIso into its four factors: inverse open
-pullback comparison on X, inverse tensor composition along the source inclusion,
-tensor composition along the restricted morphism and the target inclusion, and
-open pullback comparison on Y. The tensor composition factors are conjugates of
-pushforwardComp under the chosen tensor adjunctions. The open comparison is the
-unique left-adjoint comparison with exact restriction. Consequently the mate of
-the inverse composite is pushforwardComp followed by transport across
-morphismRestrict_ι followed by inverse pushforwardComp, with the open restriction
-identifications inserted. This is singleComplexOpenUnderivedDirectImageIso:
-on every open W of V both components identify sections over f inverse image W.
-The counit equation for mates therefore says that the inverse tensor comparison
-followed by restriction of the f counit equals pullback of the direct-image
-comparison followed by the restricted-morphism counit. Apply the termwise complex
-functors; their counits act degreewise by the module counits, and the comparison
-commutes with differentials by naturality. Descend through the homotopy quotient
-and insert the canonical mapHomotopyCategoryCompIso factors. Their composition
-identities yield the displayed equality for every I. Empty or top opens and the
-zero complex use the same identities; no flatness or boundedness is assumed. -/
+are in homotopy categories; there are no derived-category arrows or units. -/
 theorem singleComplexOpen_homotopy_tensor_counit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Scalar compatibility of inverse open restriction on stalks
 
-Source: Stacks Project, Tag 0098; Mathlib restriction-stalk germ formulas.
+## References
+
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -64,24 +66,7 @@ private theorem restriction_stalk_smul
   erw [hg, hg]
   exact PresheafOfModules.germ_smul (R := Y.presheaf) M.val _ _ _ _ _
 
-/-- Inverse open restriction on module stalks is semilinear for the actual stalk map.
-
-Proof: first prove semilinearity of the forward restriction comparison over the
-inverse stalk ring map. Represent the scalar and restricted module element by germs
-on a common source open. The inverse stalk ring map takes the scalar germ to the
-ambient germ of the inverse appIso section. The hom restriction-stalk germ formula
-and germ_smul on both schemes give the scalar identity for the forward comparison.
-Now apply injectivity of that additive comparison to the desired inverse identity.
-Use forward semilinearity with scalar j.stalkMap z d and element r(x), where r is
-inverse restriction. The inverse equations for the ring map and additive comparison
-reduce the resulting identity to the required equality. There is no point on an
-empty source; zero rings and zero modules need no assumptions.
-The two private germ lemmas reuse the proved arguments in
-WeilConjectures.AlgebraicGeometry.OpenSemilinearInputComplexIso (also in
-WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso).
-Source: Stacks Project, Tag 0098, restriction of stalks; Mathlib
-Scheme.Modules.germ_restrictStalkNatIso_hom_app and PresheafOfModules.germ_smul.
-(blueprint: lem-pc-restrict-stalk-inv-smul). -/
+/-- Inverse open restriction on module stalks is semilinear for the actual stalk map. -/
 theorem restrictStalkNatIso_inv_smul
     {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] (z : Y)
     (M : Z.Modules) (d : Z.presheaf.stalk (j z))

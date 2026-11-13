@@ -11,8 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonNor
 
 /-! # ScalarUnitExtClass
 
-Source: Stacks Project, Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-unit-ext-class).
+## References
+
+* [Stacks Project, Tag 0FKU](https://stacks.math.columbia.edu/tag/0FKU)
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
 -/
 
 @[expose] public section
@@ -27,22 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 attribute [local instance] Sheaf.monoidalCategory HasExt.standard
 
-/-- The cohomology class of one corresponds to the degree-zero scalar-unit morphism.
-Source: Stacks Project, Cohomology, Tags 01DZ and 0FKU (Lemma 20.31.1).
-(blueprint: lem-sc-scalar-unit-ext-class).
-
-Proof: Choose an injective resolution I of the structure sheaf. The canonical
-map to the zeroth right derived functor sends one to the homology class of its
-image under the augmentation. Evaluation at one identifies that cocycle with
-the augmentation morphism from the structure sheaf to I in degree zero.
-The cocycle formula specifying moduleExtEquiv therefore identifies this class
-with mk₀ of the identity of the structure sheaf. Exact restriction of scalars
-sends this identity to the identity of scalarSheaf. Precomposition with
-scalarUnitMorphism, as in scalarExtMap, now gives mk₀ scalarUnitMorphism by
-preservation of degree-zero classes and the identity law for Ext composition.
-The AddEquiv.ofBijective wrapper has the same forward map. No bijectivity of
-the structure map on sections is required, and on the empty scheme both
-morphisms to the zero sheaf are zero. -/
+/-- The cohomology class of one corresponds to the degree-zero scalar-unit morphism. -/
 theorem scalarUnitCohomologyClass_ext
     (f : X ⟶ Spec (CommRingCat.of k)) :
     scalarCohomologyExtEquiv f (SheafOfModules.unit X.ringCatSheaf) 0

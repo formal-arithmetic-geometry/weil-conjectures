@@ -14,8 +14,10 @@ import Mathlib.AlgebraicGeometry.Gluing
 
 /-! # Sheaf components of section-ring quotient charts
 
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-sheaf-map).
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
 -/
 
 @[expose] public section
@@ -57,31 +59,7 @@ private theorem fraction_equation_restrict
 
 -- The unchanged interface contains symmetric nonvanishing assumptions; the proof only needs U.
 /-- After identifying the underlying maps, their pullbacks agree on every target open.
-The equality includes the restriction transport induced by that identification.
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-sheaf-map).
-
-Proof: Write F and H for the two restrictions to U intersect V. Fix a point of
-this overlap and a positive-degree homogeneous a of degree r whose chart contains
-its common image under F and H. The fraction equations imply that a is
-nonvanishing near the point: apply the equation with denominator a, exponent d
-and numerator s^r (or exponent e and numerator t^r), and pass to the residue
-field. A nonzero numerator forces the denominator power, and hence a, to be
-nonvanishing. The locus is open, and a trivializes L^{tensor(r)} on it.
-Restrict hg and hh to the intersection of the two inverse-image a-charts with
-the overlap. Tensor powers of this free generator are free generators, so the
-equations with denominator a imply equality of the scalar pullbacks of every
-homogeneous fraction xi/a^n: both multiplied by a^n equal the restriction of xi.
-For n = 0 the generator is the tensor unit and the same cancellation applies.
-Every element of the degree-zero homogeneous localization S_(a) has such a
-representative. Thus the induced ring maps from S_(a) to sections on this source
-open agree. The affine morphism correspondence for D_+(a) identifies the two
-restricted maps, including their sheaf components. These source opens cover the
-overlap, so equality of pullbacks of any section on any target open follows by
-sheaf locality on its inverse image. The equality of underlying maps identifies
-these inverse images; in Lean the displayed eqToHom restriction is that transport.
-Empty inverse images have unique sections. Nilpotents are retained: cancellation
-uses a free generator, not reducedness or cancellation in the section ring. -/
+The equality includes the restriction transport induced by that identification. -/
 theorem sectionRing_overlap_sheaf_map
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U V : X.Opens)

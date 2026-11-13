@@ -20,8 +20,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+* [Stacks Project, Tag 00AM](https://stacks.math.columbia.edu/tag/00AM)
 -/
 
 @[expose] public section
@@ -31,24 +34,6 @@ namespace AlgebraicGeometry
 
 /-- The fixed local sources and normalized quotient maps admit compatible overlap isomorphisms.
 All local objects and maps are supplied; only pairwise comparisons and their cocycle are built.
-
-Source: Stacks Project, Tag 0889(1), uniqueness verification omitted at the end of the proof;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-overlap-cocycle).
-
-Proof: On every common open obtain a map respecting the supplied b and q maps.
-No isomorphism or cocycle is assumed at this step. The Artin--Rees separation
-argument shows that b and all q maps jointly separate local sections. Evaluate a
-forward map followed by the reverse map on any contained open: its b and q images
-agree with the identity by the two compatibility equations. Section separation
-and sheaf morphism extensionality identify the composite with the identity.
-Package the two maps on Ui intersect Uj into theta_ij. On every common open of
-three charts, the direct map and the two-map composite have identical b and q
-images, again by compatibility. Section separation on chart k proves equality,
-and ModuleCat extensionality gives the cocycle. The b and q clauses are exactly
-the original common-open map equations. Intersections need not be affine. The
-unit ideal is handled by the map to H, the zero ideal by the quotient maps,
-and the empty index type or empty scheme causes no additional condition.
 -/
 theorem torsionControlled_overlap_cocycle
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

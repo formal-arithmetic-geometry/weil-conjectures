@@ -12,11 +12,10 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 # Morphisms from spectra of fields through a rational point
 
-Let `f : X ⟶ Spec k` and `y : Spec k ⟶ X` a `k`-point (`y ≫ f = 𝟙`). A morphism
-`g : Spec K ⟶ X` from the spectrum of a field whose image is the point `y` factors through `y`:
+Let `f: X ⟶ Spec k` and `y: Spec k ⟶ X` a `k`-point (`y ≫ f = 𝟙`). A morphism
+`g: Spec K ⟶ X` from the spectrum of a field whose image is the point `y` factors through `y`:
 `g = (g ≫ f) ≫ y` when `y` is a closed immersion (`AlgebraicGeometry.Scheme.eq_comp_of_apply_eq`):
 the base change of `y` along `g` is a surjective closed immersion onto the reduced `Spec K`.
-
 -/
 
 @[expose] public section

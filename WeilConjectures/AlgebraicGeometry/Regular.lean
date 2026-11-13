@@ -114,9 +114,7 @@ theorem isRegularLocalRing_stalk_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etal
 
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
 regular local rings, hence domains (`IsRegularLocalRing.isDomain`). Near any point `X` is étale
-over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps preserve regularity.
-
-(blueprint: `lem-sc-smooth-regular`) -/
+over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps preserve regularity. -/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [Smooth f] : IsRegular X :=
   ⟨Smooth.isRegularLocalRing_stalk f⟩
@@ -125,8 +123,7 @@ theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ S
 point `x` the residue field is finitely generated over the perfect field `k`, hence separably
 generated, and a regular local `k`-algebra essentially of finite type with such a residue field
 is smooth over `k` (Stacks `00TV`). This is the main input of
-`AlgebraicGeometry.Scheme.smooth_fromNormalization_comp` (blueprint:
-`lem-sc-normalized-curve-smooth`). -/
+`AlgebraicGeometry.Scheme.smooth_fromNormalization_comp`. -/
 theorem smooth_of_isRegular {k : Type u} [Field k] [PerfectField k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsRegular X] : Smooth f := by
   refine HasRingHomProperty.of_iSup_eq_top (P := @Smooth) (fun V : X.affineOpens ↦ V)
@@ -165,8 +162,7 @@ theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k
   exact (IsRegular.of_smooth (pullback.fst f g ≫ f)).isRegularLocalRing_stalk z
 
 /-- A locally noetherian scheme of dimension at most one whose local rings are integrally closed
-domains is regular: each local ring is a field or a discrete valuation ring.
-(blueprint: `lem-sc-normal-dim1-dvr`) -/
+domains is regular: each local ring is a field or a discrete valuation ring. -/
 theorem IsRegular.of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsLocallyNoetherian X]
     (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x))
     (hdim : topologicalKrullDim X ≤ 1) : IsRegular X := by
@@ -177,8 +173,7 @@ theorem IsRegular.of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsLocallyNoether
 /-- **The normalized curve over a perfect field is smooth.** Let `X` be an integral scheme of
 finite type and of dimension one over a perfect field `k`. Its normalization `X^ν` in the function
 field is normal of dimension one, so its local rings are fields or discrete valuation rings; hence
-`X^ν` is regular, and therefore smooth over `k` (`AlgebraicGeometry.smooth_of_isRegular`).
-(blueprint: `lem-sc-normalized-curve-smooth`) -/
+`X^ν` is regular, and therefore smooth over `k` (`AlgebraicGeometry.smooth_of_isRegular`). -/
 theorem Scheme.smooth_fromNormalization_comp {k : Type u} [Field k] [PerfectField k]
     {X : Scheme.{u}} [IsIntegral X] (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q]
     (hdim : topologicalKrullDim X = 1) : Smooth (X.fromNormalization ≫ q) := by
@@ -201,13 +196,12 @@ theorem Scheme.smooth_fromNormalization_comp {k : Type u} [Field k] [PerfectFiel
   exact smooth_of_isRegular _
 
 /-- **Properties of the normalization.** Let `X` be an integral scheme of finite type over a
-field `k`, and `ν : X^ν ⟶ X` its normalization in the function field.
+field `k`, and `ν: X^ν ⟶ X` its normalization in the function field.
 
 * **(a)** `ν` is finite and surjective, and `dim X^ν = dim X`; if `X` is proper over `k`, so is
   `X^ν`.
 * **(b)** `ν` is an isomorphism over every open of `X` whose local rings are integrally closed.
-* **(c)** If `dim X = 1` and `k` is perfect, then `X^ν` is smooth over `k`.
-(blueprint: `lem-sc-normalization-properties`) -/
+* **(c)** If `dim X = 1` and `k` is perfect, then `X^ν` is smooth over `k`. -/
 theorem Scheme.normalization_properties {k : Type u} [Field k] {X : Scheme.{u}} [IsIntegral X]
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] :
     (IsFinite X.fromNormalization ∧ Surjective X.fromNormalization ∧
@@ -231,7 +225,7 @@ theorem isIntegrallyClosed_stalk_of_isRegular {X : Scheme.{u}} [IsRegular X]
 /-- **Smooth curves are normal.** The local rings of a scheme of dimension at most one which is
 smooth over a field `k` are integrally closed: they are regular local rings
 (`AlgebraicGeometry.IsRegular.of_smooth`) of dimension at most one, hence fields or discrete
-valuation rings. (blueprint: `lem-sc-smooth-normal`) -/
+valuation rings. -/
 theorem isIntegrallyClosed_stalk_of_smooth {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [Smooth f] (hdim : topologicalKrullDim X ≤ 1) (x : X) :
     IsIntegrallyClosed (X.presheaf.stalk x) :=
@@ -308,7 +302,7 @@ theorem IsRegular.isIntegrallyClosed_stalk {X : Scheme.{u}} [IsRegular X] (x : X
   have := uniqueFactorizationMonoid_stalk x
   inferInstance
 
-/-- Blueprint `rem-pc-regular-normal`: Regular schemes are normal; the normal decomposition.
+/-- Regular schemes are normal; the normal decomposition.
 
 Regular schemes are normal (Stacks 0569, `AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`)
 and a Noetherian normal scheme is a finite disjoint union of normal integral schemes (Stacks

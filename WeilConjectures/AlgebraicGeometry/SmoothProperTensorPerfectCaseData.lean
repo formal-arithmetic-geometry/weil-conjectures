@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- Intermediate existence of the quasi-coherent and monoidal data used by the
-projection comparison. Source: Stacks Project, Tag 0A9T.
-(blueprint: lem-sc-smooth-proper-tensor-perfect-case-data). -/
+projection comparison. -/
 theorem smoothProper_tensor_perfect_case_data
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

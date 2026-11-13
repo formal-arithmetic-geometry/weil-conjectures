@@ -24,9 +24,14 @@ import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 
 /-! # Tor-independent base change for a perfect tensor factor
 
-Source: Stacks Project, perfect.tex, single-complex base change (Tags 0DJ9, 0DJA)
-and the Tor-independent comparison (Tag 08IB)
-(blueprint: lem-pc-tor-independent-perfect-tensor-base-change).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 0DJA](https://stacks.math.columbia.edu/tag/0DJA)
+* [Stacks Project, Tag 08IB](https://stacks.math.columbia.edu/tag/08IB)
+* [Stacks Project, Tag 01AG](https://stacks.math.columbia.edu/tag/01AG)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -41,8 +46,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Convert the pullback comparison predicate into the identity stalk condition.
 The coordinate equation makes t a quasi-isomorphism. Exact stalks preserve it;
 the two tensor-to-stalk maps agree by uniqueness, so the localized comparisons
-agree. Cancel the coordinate isomorphism and compose the remaining isomorphisms.
-Source: Stacks, Tags 08IB, 01AG, and equation-bc before Tag 0DJ8. -/
+agree. Cancel the coordinate isomorphism and compose the remaining isomorphisms. -/
 private theorem stalkCondition_of_comparison
     [∀ Y : Scheme.{uPT},
       HasDerivedCategory.{wPT} (SheafOfModules.{uPT} (moduleRings Y.toRingedSpace))]
@@ -113,8 +117,7 @@ private theorem stalkCondition_of_comparison
   infer_instance
 
 /-- Naturality of the canonical mate in its derived input, from the naturality
-of the pullback composition comparisons and the adjunction Hom equivalence.
-Source: Stacks Project, Tag 08HY, the canonical derived base-change construction. -/
+of the pullback composition comparisons and the adjunction Hom equivalence. -/
 private theorem baseChange_naturality
     [∀ Z : Scheme.{uPT}, HasDerivedCategory.{wPT}
       (SheafOfModules.{uPT} (moduleRings Z.toRingedSpace))]
@@ -184,8 +187,7 @@ The target is written as Rf'_* Lg_X^*(P ⊗ K). Under the canonical tensor-pullb
 isomorphism of lem-pc-derived-pullback-tensor-product (Stacks, 079U), this is exactly
 Rf'_*(Lg_X^*P ⊗ Lg_X^*K). Postcomposing the fixed base-change map with that
 isomorphism does not change IsIso.
-Source: Stacks, perfect.tex, Tags 08IB, 0DJA and 0DJ9
-(blueprint: lem-pc-tor-independent-perfect-tensor-base-change).
+
 Proof (the node's four steps):
 1. Apply lem-pc-tor-independent-perfect-pullback-comparison to P: Tor independence
    gives the stalkwise condition for the identity of Lg_X^*P.

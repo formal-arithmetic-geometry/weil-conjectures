@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.CoefficientSquareCoordinateChange
 
 /-! # Coherence of twice-restricted coefficients
 
-Source: Stacks Project, Tags 0D5S and 0DJ9.
-(blueprint: lem-pc-single-complex-nested-coefficient-coherence).
+## References
+
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -28,24 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 /-- The coefficient map obtained by restricting twice agrees with the once-restricted
 map in the canonical smaller-open and pullback-pasting coordinates. No direct image,
-base scheme or base-change comparison occurs in this statement.
-Source: Stacks Project, cohomology.tex, Tag 0D5S (associativity of derived pullback),
-and perfect.tex, Tag 0DJ9 (source-open restriction in the induction).
-(blueprint: lem-pc-single-complex-nested-coefficient-coherence).
-
-Proof: Expand phiW, phiZ and phiA using the coherent pullback comparisons c.
-Naturality of c at phi moves its pullback through the target comparisons. Apply
-associativity of c first along A to W to X and the map t to A, then along the two
-pullback projections to X'. The pullback conditions identify the composites from
-the twice-pulled-back source to X. The equations hp and hq identify its projections
-in the once-pulled-back coordinates e'. The equality e.hom followed by Z.ι equals
-A.ι followed by W.ι identifies the two source-coordinate compositions. Naturality
-of the comparisons under these equalities moves the eqToHom factors together;
-proof irrelevance identifies the transports. Inverse and forward comparisons
-cancel, leaving the displayed equality. This computation uses only composition
-and naturality: zero objects, empty opens and equal opens satisfy the same laws.
-The isomorphisms alpha and beta are the displayed real composites, not arbitrary
-witnesses chosen from an existence assertion. -/
+base scheme or base-change comparison occurs in this statement. -/
 theorem singleComplex_nested_coefficient_coherence
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

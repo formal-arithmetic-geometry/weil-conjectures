@@ -22,8 +22,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-sections).
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -38,29 +40,7 @@ namespace AlgebraicGeometry.Etale
 /-- Source derived Hom, neighbourhood restriction, and the sections map of the mate
 computed on a specified bounded-below complex of injectives. The intermediate groups
 are homology of actual termwise sections, not stage hypercohomology. At the limit
-only the canonical map to derived sections is used; it need not be invertible.
-Source: Stacks, Tags 03Q8 and 03Q9, final injective-complex paragraph
-(blueprint: lem-weil-pbc-strict-local-injective-source-sections).
-
-Proof: identify Rf_*K with f_*J using the right-derived unit on the injective
-representative and the supplied q. Derived adjunction identifies a morphism from
-Z[V][0] with a morphism from f^*Z[V][0] to J[n]. The free-sheaf sections adjunction
-identifies the Hom complex with the complex of sections of J on V times_S X.
-The restricted complex is injective, since its projection to X is etale. Thus
-passing to homology gives the component isomorphisms e. Precomposition by an etale
-neighbourhood map is restriction of those same sections, and composition of inverse
-images gives the displayed transition. For a cone leg, evaluate the derived mate
-on J using its construction by the two adjunction units and the pullback-square
-comparison. It sends a section on V times_S X to its inverse image on the limit.
-The canonical derived Hom-to-homology germ map takes that section to its homology
-class; the first leg equation of Q identifies its geometric germ with this inverse
-image. Exact inverse image commutes with homology, while exact strict-local
-sections and Leray give strictLocalBaseChangeTargetIso. The comparison from the
-complex of sections at the limit to its derived sections is precisely the
-right-derived sections unit, even if the pulled-back J is not injective there.
-This proves the restriction formula. Naturality with q identifies all maps with
-those for K. Neither continuity nor invertibility of the mate is used. The
-argument works in all integer degrees and for the zero complex. -/
+only the canonical map to derived sections is used; it need not be invertible. -/
 theorem exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

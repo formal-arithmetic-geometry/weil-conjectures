@@ -12,9 +12,11 @@ import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT
 
 /-! # Tensor-power sections under open restriction
 
-Source: Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction to the
-opens in its proof; Cohomology of Schemes, Tag 09MR, affine-open paragraph.
-(blueprint: lem-sc-tensor-power-section-open-restriction).
+## References
+
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
+* [Stacks Project, Tag 09MR](https://stacks.math.columbia.edu/tag/09MR)
 -/
 
 @[expose] public section
@@ -48,32 +50,7 @@ private theorem openRestrictionNumeratorIso_inv_tmul (X : Scheme.{u}) (L F : X.M
 
 /-- Open restriction identifies tensor-power numerator groups, their transition maps,
 and the equations expressing multiplication by a tensor power of a section.
-No affineness, invertibility, quasi-coherence, or nonvanishing hypothesis is needed.
-
-Source: Stacks Project, Modules, Tag 01CD (functorial tensor-pullback comparison),
-Properties, Tag 01PW, proof (restriction to the affine opens), and Cohomology of
-Schemes, Tag 09MR, affine-open paragraph.
-(blueprint: lem-sc-tensor-power-section-open-restriction).
-
-Proof: Identify restriction along U.ι with pullback using restrictFunctorIsoPullback.
-Pullback is strong monoidal; transport its unit and tensor comparisons to restriction.
-Induction on n, starting with the unit comparison, identifies the restriction of
-L.tensorPow n with (L.restrict U.ι).tensorPow n. Tensor this comparison with F and
-apply restrictAppIso on sections. At the top open, U.ι_image_top identifies its image
-with U, giving N n in the indicated direction. The restricted global section sU is
-obtained by ordinary restriction of s and the inverse restrictAppIso. The unit
-comparison sends the morphism homOfGlobalSection L s to homOfGlobalSection _ sU.
-Induction on n in tensorPowSection and coherence with unitors and associators show
-that these comparisons identify mulTensorPowSection in every degree. This proves
-the first displayed equality. For V, compose restrictAppIso for F with the presheaf
-isomorphism induced by hW to get T. Naturality of restrictAppIso identifies the two
-restriction maps from U and the top open. The tensor comparison carries
-z tensor sU^n to T(z) tensor s^n. By rightUnitor_inv_comp_whiskerLeft_app the latter
-is precisely the ambient coefficient map. Apply the injective numerator comparison
-on V to the two sides of the restricted equation; naturality gives exactly the
-ambient equation. Applying its inverse proves the reverse implication. Every
-comparison is an isomorphism, so this argument includes n = 0, zero modules,
-zero sections and the empty open without a choice of a generator. -/
+No affineness, invertibility, quasi-coherence, or nonvanishing hypothesis is needed. -/
 theorem exists_tensorPowSection_open_restriction (X : Scheme.{u}) (L F : X.Modules)
     (s : Γ(L, ⊤)) (U : X.Opens) :
     let LU := L.restrict U.ι

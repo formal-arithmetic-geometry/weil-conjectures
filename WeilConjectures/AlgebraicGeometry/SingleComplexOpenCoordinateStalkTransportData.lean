@@ -13,9 +13,12 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseComparison
 
 /-! # Open transport of the normalized tensor comparison
 
-Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
-preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-normalized-transport).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
 -/
 
 @[expose] public section
@@ -146,29 +149,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 /-- Transport the tensor comparison into derived pullback under open restriction.
 This statement concerns the source complex and the pullback counit only; it has no
-coefficient morphism and no target representative.
-
-Proof: construct the natural additive derived-stalk comparison from exact
-restriction and restrictStalkNatIso. Put P0 equal to the actual termwise restriction
-of P. The termwise comparison lemma supplies K-flatness, the invertible pinned
-counit on P0, and the normalized square
-for P, P0, K=Q(P), and restriction's canonical localization factor.
-
-Compose naturality of the six restriction/pullback comparison factors to prove
-naturality of the restricted identity coefficient. Its naturality in e and that of the
-additive derived-stalk comparison transport this square from Q(P) to K. Let E be
-restriction's localization factor followed by restriction(e), and let b=a then
-E inverse. This identifies Q(Q) with Q(P0). Apply exists_comparisonSourceIso to b
-in the restricted square, extend its tensor-algebra source isomorphism to the
-final stalk ring, and forget scalars, obtaining d. The proved pullback comparison
-naturality gives its square. Since b then E equals a, compose this square with
-the canonical termwise square, using naturality and functoriality. The composite
-source isomorphism is d then l. Empty opens have no z; the argument uses neither
-base flatness nor boundedness and applies to zero complexes and zero rings.
-
-Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
-preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-normalized-transport). -/
+coefficient morphism and no target representative. -/
 theorem exists_singleComplexOpen_normalized_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

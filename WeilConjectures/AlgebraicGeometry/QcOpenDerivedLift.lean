@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 /-! # Lifting quasi-coherent derived objects from a quasi-compact open
 
-Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent
-(blueprint: lem-sc-qc-open-derived-lift).
+## References
+
+* [Stacks Project, Tag 08EE](https://stacks.math.columbia.edu/tag/08EE)
+* [Stacks Project, Tag 08ED](https://stacks.math.columbia.edu/tag/08ED)
 -/
 
 @[expose] public section
@@ -33,19 +35,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- Every quasi-coherent derived object on a quasi-compact open of an affine scheme
 lifts to a quasi-coherent derived object on the scheme. Restriction is first to the
-localized site and then transported by the canonical equivalence with the open's site.
-Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent
-(blueprint: lem-sc-qc-open-derived-lift).
-
-Proof:
-1. Write j : U → X for the open inclusion. A finite affine cover of U shows that j
-   is quasi-compact: its intersections with affine opens of X are affine, since X
-   is separated. Every open immersion is separated, hence j is quasi-separated.
-2. Set E' = Rj_* E. By lem-pc-derived-direct-image-preserves-qcoh, its cohomology
-   sheaves are quasi-coherent, so E' belongs to D_QCoh(O_X).
-3. Apply lem-pc-restrict-derived-direct-image-open with f = j and V = U. The
-   inverse image of U is U, and the induced map is the identity of U. This identifies
-   the restriction of E' with R(id_U)_* E, which is E. -/
+localized site and then transported by the canonical equivalence with the open's site. -/
 theorem exists_qc_derived_lift_of_isCompact_open
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

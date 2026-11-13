@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 
 /-! # ScalarTensorUnitCoefficient
 
-Source: Stacks Project, Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-tensor-unit-coefficient).
+## References
+
+* [Stacks Project, Tag 0FKU](https://stacks.math.columbia.edu/tag/0FKU)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 01CA](https://stacks.math.columbia.edu/tag/01CA)
 -/
 
 @[expose] public section
@@ -61,23 +64,7 @@ private theorem scalarUnit_presheaf (f : X ⟶ Spec (CommRingCat.of k))
     (X.presheaf.map (homOfLE (le_top (a := U))).op).hom (scalarMap f ⊤ r) at hv
   simpa [I, scalarMap] using hv
 
-/-- Scalar tensor coefficients and the scalar unit respect both module unitors.
-Source: Stacks Project, Modules, Tags 0096 and 01CA; Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-tensor-unit-coefficient).
-
-Proof: First identify the scalar unit on each open. Monoidal coherence for the
-sheafification adjunction identifies its composite with the presheaf unit with
-the constant-presheaf adjoint of scalarUnitLinear. The constant-presheaf counit
-restricts the global scalar section, giving scalarMap f U r.
-For the right identity, precompose with the inverse right unitor and apply
-faithfulness of the sheaf inclusion. Its lax monoidal unit coherence and
-naturality reduce the composite on a section s to the tensor coefficient on
-s tensor the scalar-unit image of 1, followed by the module right unitor.
-The scalar-unit formula and exists_scalarTensorCoefficient give tmulSection s 1.
-The sectionwise right-unitor formula and one_smul return s. For the left identity,
-precompose with the inverse left unitor and repeat with 1 tensor s and the
-sectionwise left-unitor formula. Neither argument requires nonzero sections;
-both apply to zero modules and the empty scheme. -/
+/-- Scalar tensor coefficients and the scalar unit respect both module unitors. -/
 theorem scalarTensorCoefficient_unit
     (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules) :
     ((scalarSheaf f F) ◁ scalarUnitMorphism f) ≫

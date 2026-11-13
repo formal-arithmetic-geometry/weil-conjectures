@@ -28,9 +28,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Tensor formula for the right adjoint of a perfect proper immersion
 
-Source: literature/stacks-project/duality.tex, Tag 0A9U
-(projection formula for a perfect proper morphism and its right adjoint)
-(blueprint: lem-sc-smooth-proper-diagonal-tensor-formula).
+## References
+
+* [Stacks Project, Tag 0A9U](https://stacks.math.columbia.edu/tag/0A9U)
 -/
 
 @[expose] public section
@@ -45,10 +45,8 @@ namespace AlgebraicGeometry
 open CategoryTheory.ShiftSaturated
 
 /-- For a proper perfect closed immersion, the right adjoint of derived direct image
-satisfies the projection formula.  The displayed morphism is the mate, under the
+satisfies the projection formula. The displayed morphism is the mate, under the
 specified adjunction, of the projection-formula morphism.
-Source: Stacks Project, Tag 0A9U.
-(blueprint: lem-sc-smooth-proper-diagonal-tensor-formula).
 
 Proof (Tag 0A9U, following the five node steps):
 1. The closed immersion is proper, finite type and perfect: the stalks of i_*O_Z have

@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceFactors
 public import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientSquare
 
 /-! # Abelian raw pullback factorization
-Source: Stacks Project, Tags 03FD and 03Q8.
+
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -22,22 +26,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The abelian raw map factors independently of any module cohomology class.
-Source: Stacks Project, Tags 03FD and 03Q8, explicit-map expansion in the proof of
-lem-sbc-raw-module-abelian-hom-map-naturality.
-(blueprint: lem-sbc-raw-scalar-pullback-abelian-formula).
-
-Proof: Fix x and unfold abelianHigherDirectImageRawPullback. Its source free abelian
-sheaf is RawModuleScalarComparison.freeAbelian S U, since evaluation of whiskering
-by AddCommGrpCat.free is composition with that functor. Its first two maps are the
-single of the composite inverse-image comparison and the inverse derived-single
-comparison, which are abelianSourceFactor. Its middle map is derived inverse image
-of x. Its last two maps are the shift comparison and the shift of the single
-comparison followed by the single of the inverse coefficient upperStarComp. Expand
-restrictedOverCoefficient to identify these last maps with abelianCoefficientFactor.
-Apply Category.assoc to the first two maps. The Over triangle proofs coincide by
-proof irrelevance. No module class z, scalar comparison, or inverse-image coherence
-square is used. The same calculation covers degree zero, zero x, and identity f. -/
+/-- The abelian raw map factors independently of any module cohomology class. -/
 theorem rawModuleScalar_pullback_abelian_formula
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)

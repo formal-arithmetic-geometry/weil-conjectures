@@ -9,8 +9,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # The coefficient action on an internal Hom
 
-Source: Stacks Project, Algebraization, Tag 099I
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
 -/
 
 @[expose] public noncomputable section
@@ -345,17 +346,7 @@ private def coefficientHomComparisonIso :
     rfl
 
 /-- The internal Hom from a B-module to an R-module has a functorial B-module
-structure whose restriction to R is naturally the usual internal Hom.
-Source: Stacks Project, Algebraization, Tag 099I, the coefficient action on E prime
-(auxiliary; not a blueprint node).
-Proof: over U let b act on a local R-linear map by precomposing multiplication by
-b on the B-module source. The commuting source endomorphisms give the module
-laws. Restriction commutes with these actions, and the underlying additive
-presheaf is the usual internal Hom, which is a sheaf. The R-action agrees with
-postcomposition by R-linearity. Precomposition with B-linear maps and
-postcomposition with R-linear maps are B-linear, giving the bifunctor. The
-identity on local maps supplies the natural isomorphism after restriction.
-Additivity separately in both variables follows from additivity of composition. -/
+structure whose restriction to R is naturally the usual internal Hom. -/
 theorem exists_restrictedCoefficientHomFunctor :
     ∃ F :
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))ᵒᵖ ×

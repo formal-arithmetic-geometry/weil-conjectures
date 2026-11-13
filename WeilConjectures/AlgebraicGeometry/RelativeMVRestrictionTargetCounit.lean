@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVOpenSquareCounit
 
 /-! # A counit normal form for the relative restriction square
 
-Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
 -/
 
 @[expose] public section
@@ -37,24 +41,7 @@ private theorem restriction_glue {C D : Type*} [Category C] [Category D]
   rw [hopen]
   simp only [F.map_comp, Category.assoc]
 
-/-- The target path has the explicit restricted-counit normal form.
-Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
-(blueprint: new-relative-mv-restriction-target-counit).
-Proof: Transpose only the target path under L(W'→S') adjoint to R(W'→S').
-Expand its relative restriction and remove the right-adjoint composition
-comparisons by their defining mate equations. Transpose the U base-change
-map using 08HY. Move the counit for U'→X' through the coefficient comparison
-by naturality and use both triangle identities to cancel the intermediate
-adjunction unit. The remaining factors are pullbacks of the counits for f
-and U→X. Apply the associativity coherence of relativeMVComp to the triples
-W→U→X→S and W'→U'→X'→S'. The identities for relativeMVOpenLift with each
-projection, together with Scheme.homOfLE_ι, identify the resulting composites
-of scheme morphisms. Thus the equality transports in the comparisons agree
-by proof irrelevance. After canceling inverse comparison pairs, the outside
-factors are the W square comparison and the W coefficient comparison, and
-the inside factors are exactly the displayed restricted f and U counits.
-This is the displayed normal form, independent of computing the source path.
-The same equations apply for W=U, empty opens and zero complexes. -/
+/-- The target path has the explicit restricted-counit normal form. -/
 theorem relativeMV_restriction_target_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

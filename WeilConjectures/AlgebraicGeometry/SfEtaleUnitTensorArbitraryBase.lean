@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleGraphProjectionArbitraryBase
 /-! # Normalized etale exceptional duality over arbitrary bases
 
 proof.md`, paragraphs 2-3
-(auxiliary; not a blueprint node).
+.
 
 The normalization is the mate of the constructed graph comparison, with the exact
 sum/evaluation adjunction. Tensor domains are transported explicitly from left-derived
@@ -37,10 +37,7 @@ attribute [local irreducible] upperStar lowerStar etaleLowerShriek
   leftDerivedUpperStarIsoMapDerivedCategory
 
 /-- The canonical right-adjoint comparison, defined as the mate of the graph comparison
-under the selected compact-support adjunction and the exact sum/evaluation adjunction.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraphs 2-3; the graph construction
-is `compactificationEtaleComparison` in upstream `EtaleLowerShriekCompactification`
-(auxiliary; not a blueprint node). -/
+under the selected compact-support adjunction and the exact sum/evaluation adjunction. -/
 noncomputable def sfEtaleRightAdjointComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] (c : Compactification e)
@@ -51,9 +48,7 @@ noncomputable def sfEtaleRightAdjointComparison
     (compactificationEtaleComparison A e c)
 
 /-- The coefficient-unit component eta of the canonical comparison rho, followed by the
-specified pullback-unit identification. Its invertibility is asserted below.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraphs 2-3
-(auxiliary; not a blueprint node). -/
+specified pullback-unit identification. Its invertibility is asserted below. -/
 noncomputable def sfEtaleRightAdjointUnit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] (c : Compactification e)
@@ -64,9 +59,7 @@ noncomputable def sfEtaleRightAdjointUnit
     (etaleSumPullbackUnitIso A e).hom
 
 /-- The specified ambient tensor map, with its domain transported along the canonical
-left-derived/exact inverse-image comparison. This is theta on the ordinary exact model.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+left-derived/exact inverse-image comparison. This is theta on the ordinary exact model. -/
 noncomputable def sfEtaleExactAmbientTensorMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] (c : Compactification e)
@@ -168,34 +161,26 @@ private theorem exactTensorUnit
 and the equality of the actual tensor mate with the unit action. The adjunction argument
 selects any right adjoint furnished by `sfEtaleAmbientAdjointProjection`.
 proof.md`, paragraphs 2-3
-(auxiliary; not a blueprint node).
+.
 
 Proof plan:
 1. Exact etale sum extension is left adjoint to exact inverse image. Apply the
    sum/evaluation adjunction termwise, then descend its unit, counit and triangles
-   through homotopy localization to the entire unbounded derived categories
-   (lem-weil-pbc-etale-restriction-injectives,
-   prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-termwise-adjunction-homotopy,
-   lem-weil-pbc-exact-functor-derived-factorization,
-   lem-weil-pbc-localization-universal-property). Transport the canonical strong
+   through homotopy localization to the entire unbounded derived categories. Transport the canonical strong
    monoidal structure of derived pullback to exact inverse image, retaining its unit
-   comparison (lem-weil-pbc-ringed-topoi-derived-tensor-pullback,
-   def-pur-etale-exact-pullback-unit-composition-comparisons,
-   lem-sfb-ringed-derived-monoidal-comparisons).
+   comparison.
 2. The specified graph comparison a from sum extension S to compact support F is
-   invertible (lem-sf-etale-graph-projection-arbitrary-base). Its adjunction conjugate
+   invertible. Its adjunction conjugate
    rho is therefore invertible. The mate formula says ev S(rho) = a_G followed by
-   the compact-support counit. This fixes the normalization uniquely
-   (def-weil-pbc-adjunction-conjugate). Its coefficient-unit component followed by
+   the compact-support counit. This fixes the normalization uniquely. Its coefficient-unit component followed by
    the pullback-unit identification is eta, hence eta is invertible.
 3. Transpose rho_K theta_K under S adjoint to E. Naturality of a and the defining
    transpose of theta give inverse projection followed by the compact-support
-   counit at A_W and the unitor (lem-sf-etale-ambient-adjoint-projection).
+   counit at A_W and the unitor.
    The graph/projection square replaces this by kappa followed by the evaluation
-   counit at A_W and the unitor (lem-sf-etale-graph-projection-arbitrary-base).
+   counit at A_W and the unitor.
 4. Naturality and the counit equation for the unit-adjunct tensor action rewrite
-   this as the evaluation adjunct of E(lambda) mu^{-1} (rho_A tensor 1)
-   (lem-pur-unit-adjunct-tensor-action). The monoidal left-unit law identifies it
+   this as the evaluation adjunct of E(lambda) mu^{-1} (rho_A tensor 1). The monoidal left-unit law identifies it
    with the adjunct of lambda (eta tensor 1). Injectivity of the adjunction
    bijection gives the stated equality.
 5. The equality expresses theta as a composite of invertible maps; thus theta is

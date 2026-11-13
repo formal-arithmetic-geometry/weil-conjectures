@@ -13,9 +13,13 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # Persistence of zero sections under further base change
 
-Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
-Algebra, Tags 05N7 (3) and 05LI (1).
-(blueprint: lem-pc-section-base-change-zero-persists).
+## References
+
+* [Stacks Project, Tag 01ZR](https://stacks.math.columbia.edu/tag/01ZR)
+* [Stacks Project, Tag 05N7](https://stacks.math.columbia.edu/tag/05N7)
+* [Stacks Project, Tag 05LI](https://stacks.math.columbia.edu/tag/05LI)
+* [Stacks Project, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section
@@ -64,22 +68,7 @@ private theorem unit_zero_comp {X Y Z : Scheme.{u}}
   rw [hbz, map_zero] at he
   exact he.symm
 
-/-- Zero pullback of a section remains zero under a further base change.
-Source: Stacks Project, Sheaves, Tags 0095 and 0096; Limits, Tag 01ZR (3).
-(blueprint: lem-pc-section-base-change-zero-persists).
-
-Proof: for l ≤ k the k-to-j base-change map is the composite of the k-to-l
-and l-to-j base-change maps, by pullback uniqueness and functoriality of R.
-Tensor pullback along this composite is canonically isomorphic to the composite
-of tensor pullbacks. The unit of the composite adjunction is the first unit
-followed by pushforward of the second unit. On the inverse image of U its
-value on y is therefore the further pullback of the given zero section, which
-is zero by linearity. The composite-pullback isomorphism transports this unit
-to a unit for the k-to-j tensor pullback. Uniqueness of left adjoints compares
-that adjunction to the supplied one: their units differ by an isomorphism of
-the pullback object. Its section maps preserve zero. No quasi-coherence,
-finiteness or affineness is used; empty opens and identity transitions obey
-the same unit equation. -/
+/-- Zero pullback of a section remains zero under a further base change. -/
 theorem section_baseChange_zero_persists
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

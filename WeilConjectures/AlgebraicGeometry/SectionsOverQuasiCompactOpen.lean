@@ -19,8 +19,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Sections over the complement of a finite type ideal
 
-Source: Stacks Project, Properties, Lemma 01PQ
-(blueprint: lem-weil-pbc-sections-over-quasi-compact-open).
+## References
+
+* [Stacks Project, Tag 01PQ](https://stacks.math.columbia.edu/tag/01PQ)
 -/
 
 @[expose] public section
@@ -112,37 +113,7 @@ Hom groups by `e` and `e'`; their maps are exactly precomposition by the inclusi
 powers, and, in the quotient case, postcomposition by the induced quotient maps.
 The cocones take a homomorphism to its value on the section `one n` above `1` on `U`.
 In the quotient case this value is transported back through the quotient map on `U`.
-The annihilator subsheaves are specified on every open, including all smaller opens.
-Source: Stacks Project, Properties, Lemma 01PQ
-(blueprint: lem-weil-pbc-sections-over-quasi-compact-open).
-
-Proof:
-1. By lem-weil-pbc-ideal-times-quasi-coherent-affine-sections, the powers are
-quasi-coherent finite type ideals, with affine sections I^n. By
-lem-weil-pbc-quasi-coherent-ideal-zero-set-affine, the complement of their zero set is U.
-On opens inside U the ideal contains 1, so equals the whole structure sheaf.
-2. The affine tilde/Gamma adjunction and lem-weil-pbc-spec-module-tilde-sections identify
-Hom of quasi-coherent modules with Hom of their affine sections, compatibly with
-composition and restriction (lem-weil-pbc-affine-tilde-gamma-adjunction).
-3. Evaluation at 1 commutes with restriction along powers. On D(f) it is phi(f^n)/f^n,
-so agrees with the map of lem-weil-pbc-sections-over-quasi-compact-open-in-affine.
-4. Cover X by finitely many affine opens. If evaluation is zero, the affine injectivity
-and lem-weil-pbc-filtered-colimit-modules-elementwise give a power on which the map
-vanishes on each open. Take the maximum exponent and use uniqueness of gluing
-(lem-weil-pbc-glue-sheaves-of-modules) to get global vanishing and injectivity.
-5. Form the annihilator subsheaves by lem-weil-pbc-sections-annihilated-by-ideal. They
-increase and vanish on U. Their cokernels are quasi-coherent by
-lem-weil-pbc-quasi-coherent-module-cokernel-image. Restriction preserves cokernels
-(lem-weil-pbc-module-restriction-open-immersion-colimits), so the quotient maps are
-isomorphisms on U; the quotient transition maps commute with evaluation there.
-6. On each affine open the second comparison is the affine bijection, by the Hom
-identification and the formula phi(f^n)/f^n in the quotient, transported back on D(f).
-7. The same finite-cover argument proves injectivity for this second comparison.
-8. Under quasi-separatedness choose a finite affine cover with quasi-compact overlaps
-(lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings). Lift a section on each affine open
-using the affine bijection. Cover the overlaps by finitely many affines; equality in
-their colimits gives a common exponent where all lifts agree. Take the maximum and
-glue by lem-weil-pbc-glue-sheaves-of-modules. This proves surjectivity. -/
+The annihilator subsheaves are specified on every open, including all smaller opens. -/
 theorem sections_over_quasiCompact_open {X : Scheme.{u}} [CompactSpace X]
     {I : X.Modules} (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
     [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] :

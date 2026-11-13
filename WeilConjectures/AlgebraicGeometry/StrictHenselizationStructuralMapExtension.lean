@@ -18,8 +18,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 The strict henselization `S_(s)` of a scheme `S` at a geometric point `s` maps to `S` through
 every affine pointed étale neighbourhood; this module names that canonical morphism.
 
-Source: Stacks Project, Tag 03Q9, proof
-(blueprint: def-weil-pbc-strict-henselization-structural-map).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -32,14 +33,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- There is a morphism `S_(s) ⟶ S` equal, for every representative affine pointed
 neighbourhood `(V, v)`, to the limit leg `S_(s) ⟶ Spec Γ(V, ⊤)`, followed by the
-identification `Spec Γ(V, ⊤) ≅ V` and the structure morphism `V ⟶ S`.
-Source: Stacks Project, Tag 03Q9, proof
-(blueprint: def-weil-pbc-strict-henselization-structural-map).
-
-Proof: the representative category is cofiltered (`strictHenselizationAffineProperties`), hence
-nonempty and connected. The legs of `strictHenselizationAffineCone s` commute with the transition
-maps, which are pointed morphisms over `S`, so the composites with the structure morphisms
-agree along every arrow, hence for every pair of objects; take their common value. -/
+identification `Spec Γ(V, ⊤) ≅ V` and the structure morphism `V ⟶ S`. -/
 theorem exists_strictHenselizationAffineStructuralMap
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalDerivedGlobalExchange
 
 /-! # Strict-local exchange with abelian coefficients
 
-Source: Stacks Project, Tags 03QO and 095T.
+## References
+
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 095T](https://stacks.math.columbia.edu/tag/095T)
 -/
 
 @[expose] public section
@@ -30,25 +33,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The geometric calculation of exchange for abelian sheaves, before any comparison
-with cohomology computed in a category of modules.
-
-Source: Stacks Project, Tag 03QO and the map-on-stalks paragraph of Tag 095T.
-(blueprint: lem-weil-pbc-strict-local-abelian-total-exchange)
-
-Proof: by Tag 03QO, the closed-point germ on each strict local base identifies
-sections with the stalk and is exact. Locality of φ makes the image of the
-closed B-point the closed A-point. Inverse-image stalk comparison, including
-invariance under separably closed residue field extensions, therefore identifies
-the source stalk with sections of the derived direct image on Spec A. Choose a
-bounded below injective abelian resolution G → I and a K-injective replacement
-of g'^* I. Exactness of the stalk functors identifies the two stalk homologies
-with the homologies of the section complexes on X and X'. These compute Ext
-from the constant integer sheaf, hence Sheaf.H. The termwise exchange formula
-identifies the stalk map with pullback of sections followed by the replacement.
-The degree-zero unit is pullback of sections; its derived map is the Ext map
-cohomologyMap, by the derived adjunction and the constant-sheaf comparison.
-Uniqueness of comparisons into K-injectives ensures the identification in every
-degree. This uses no properness or torsion assumption. -/
+with cohomology computed in a category of modules. -/
 theorem Etale.exists_addEquiv_strictLocal_abelian_total_exchange
     {A B : Type u} [CommRing A] [HenselianLocalRing A]
     [IsSepClosed (IsLocalRing.ResidueField A)]

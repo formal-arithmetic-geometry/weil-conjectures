@@ -35,7 +35,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Unbounded proper/open Pasting
 
-Source: Stacks Project, Tags 0F7C and 0F7D.
+## References
+
+* [Stacks Project, Tag 0F7C](https://stacks.math.columbia.edu/tag/0F7C)
+* [Stacks Project, Tag 0F7D](https://stacks.math.columbia.edu/tag/0F7D)
+* [Stacks Project, Tag 0F4X](https://stacks.math.columbia.edu/tag/0F4X)
+* [Stacks Project, Tag 0F50](https://stacks.math.columbia.edu/tag/0F50)
 -/
 
 @[expose] public section
@@ -64,10 +69,7 @@ private theorem exact_identity_fac
   simp only [Iso.trans_hom, NatTrans.comp_app]
   rw [Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj, Functor.mapDerivedCategoryNatIso_fach]
 
-/-- For an open immersion, extension by zero embeds into direct image.
-Source: Stacks Project, More on Etale Cohomology, Tags 0F4X and 0F50:
-the proper-support inclusion is sectionwise injective and identifies with this comparison
-(auxiliary; not a blueprint node). -/
+/-- For an open immersion, extension by zero embeds into direct image. -/
 theorem mono_openImmersionLowerShriekToLowerStar_app
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (k : X ⟶ Y) [IsOpenImmersion k]

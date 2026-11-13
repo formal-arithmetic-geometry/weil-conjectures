@@ -15,9 +15,10 @@ import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantStalk
 /-!
 # Etale sheaves on an algebraically closed spectrum are constant
 
-Source: literature/stacks-project/etale-cohomology.tex, Remark 59.23.2 (Tag 03P5),
-together with Lemma 59.39.3 (Tag 0A3H)
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant).
+## References
+
+* [Stacks Project, Tag 03P5](https://stacks.math.columbia.edu/tag/03P5)
+* [Stacks Project, Tag 0A3H](https://stacks.math.columbia.edu/tag/0A3H)
 -/
 
 @[expose] public section
@@ -30,22 +31,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every set-valued sheaf on the small etale site of an algebraically closed field
 is canonically constant, and its global sections identify with its identity geometric stalk.
-Source: Stacks Project, Remark 59.23.2 (Tag 03P5), together with Lemma 59.39.3 (Tag 0A3H).
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant).
-
-Proof:
-1. Every etale object over `Spec Ω` is a coproduct of copies of `Spec Ω`, by
-   `lem-weil-pbc-etale-fibre-discrete-separable-points` and algebraic closedness.
-2. The sheaf equalizer condition computes sections on such a coproduct as the product
-   of its sections on the one-point pieces, including the empty coproduct.
-3. The constant sheaf has the same product description by
-   `lem-weil-pbc-constant-sheaf-set-sections-connected-natural`; hence the canonical
-   counit of `constantSheafAdj` is an isomorphism, naturally in the sheaf.
-4. A pointed etale neighbourhood has a unique morphism from the identity neighbourhood,
-   namely its specified lift. Thus the identity neighbourhood is initial in the pointed
-   category and terminal in its opposite, which indexes the stalk colimit. The displayed
-   map is its colimit coprojection: the germ of a global section, hence a bijection.
-   Naturality follows from the counit and `toPresheafFiberNatTrans`.
 -/
 theorem spec_algClosed_etale_sheaf_constant
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω]

@@ -17,8 +17,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Vanishing of open pushforward on the complement of closed support
 
-Source: Stacks Project, Tag 08DP, the computation on the complementary open using 08FE.
-(blueprint: lem-pc-supported-open-pushforward-complement-zero).
+## References
+
+* [Stacks Project, Tag 08DP](https://stacks.math.columbia.edu/tag/08DP)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
 -/
 
 @[expose] public section
@@ -42,21 +44,7 @@ private theorem isZero_of_zero_stalks (Y : Scheme.{u})
   exact (IsZero.iff_id_eq_zero (G.obj M)).mp hG
 
 
-/-- Derived open pushforward vanishes on an open disjoint from the cohomological support.
-Source: Stacks Project, Tags 08DP and 08FE.
-(blueprint: lem-pc-supported-open-pushforward-complement-zero).
-
-Proof: Restrict F to the inverse image of V in U. Exact restriction commutes with
-cohomology, and its cohomology stalks are the original stalks of F. Every point maps
-outside T by hV, so the support hypothesis makes those stalks zero. Sheaves of modules
-are zero if all their stalks vanish, and cohomology detects zero derived objects;
-thus this restriction is zero. Tag 08FE identifies Rj_*F restricted to V with the
-derived direct image of that zero object, which is zero by additivity. Transport back
-through Modules.overEquiv V to obtain the assertion on the localized site.
-The needed chosen derived categories on open subschemes can be transported from the
-given over-site localizations along Modules.overEquiv; the comparison is independent
-of that choice. This argument needs neither perfection nor closedness nor T contained
-in U. It also works when V or U is empty, T is empty, or U is total. -/
+/-- Derived open pushforward vanishes on an open disjoint from the cohomological support. -/
 theorem supported_open_pushforward_complement_zero (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (V : X.Opens) (hV : ∀ x : X, x ∈ V → x ∉ T)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

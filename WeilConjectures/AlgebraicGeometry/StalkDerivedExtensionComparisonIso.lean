@@ -13,7 +13,15 @@ import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsoCore
 import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsIso
 
 /-! Intermediate comparison isomorphism for the derived stalk extension.
-(blueprint: lem-pc-stalk-derived-extension-comparison-intermediate) -/
+
+## References
+
+* [Stacks Project, Tag 06YB](https://stacks.math.columbia.edu/tag/06YB)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
+* [Stacks Project, Tag 06Y6](https://stacks.math.columbia.edu/tag/06Y6)
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ7](https://stacks.math.columbia.edu/tag/0DJ7)
+-/
 
 @[expose] public section
 
@@ -37,35 +45,7 @@ variable [∀ Y : Scheme.{u},
 set_option linter.unusedVariables false in
 /-- Derived pullback commutes with exact stalks, with its comparison specified before
 applying homology. This statement assumes a universal scalar-extension pair; it does
-not construct that pair or assert invertibility of its counit on stalk complexes.
-
-Proof: write ρ for the actual composite A → A ⊗[R] B → C. Its restriction
-equation identifies ρ with the stalk map of g'. On complexes, the natural
-pullback-stalk isomorphism gives extension along ρ followed by localization ≅
-ordinary pullback followed by the exact derived stalk. The component of this
-isomorphism is the specified tensorStalkIso: equality follows degreewise from
-its defining components, so it is compatible with differentials and homotopies.
-Resolve sheaf complexes by K-flat complexes. Their stalks are K-flat by the
-stalk criterion. The universal scalar-extension counit and the recorded sheaf
-pullback counit are invertible on these representatives. On such a representative,
-define the comparison by the scalar-extension counit, the localized tensorStalkIso,
-the inverse exact-stalk factor, and the inverse image of the pullback counit, in
-that order. Include the quotientCompQhIso factors to pass between Q and Qh.
-For a quasi-isomorphism between resolving complexes, naturality of both counits,
-of the stalk factors and of the tensor-stalk identification makes this comparison
-commute with its localized image. Every derived morphism can be represented by a
-roof of complexes; replace its middle complex by a K-flat resolution. A common
-K-flat refinement of two roofs makes their induced comparisons equal, so the
-construction descends to a natural transformation. Apply the same construction
-with the inverse tensor-stalk identification and reversed invertible counits.
-The two composites are identities on K-flat representatives and therefore on
-every derived object. This gives j. At a K-flat P, use the identity resolution;
-the definition just given is precisely the displayed equation. No homology
-calculation or base-flatness is used. Zero complexes, zero stalk rings and the
-identity morphism satisfy the same construction without exceptions.
-Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6;
-perfect.tex, equation-bc preceding Tag 0DJ8 (Tag 0DJ7).
-(blueprint: lem-pc-stalk-derived-extension-comparison-intermediate). -/
+not construct that pair or assert invertibility of its counit on stalk complexes. -/
 theorem exists_stalkDerivedExtensionComparisonIso (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

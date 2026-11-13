@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {c : ℕ}
 
-/-- Local linearity pulls back along `F : T ⟶ N` lying over `g : P ⟶ Y`. -/
+/-- Local linearity pulls back along `F: T ⟶ N` lying over `g: P ⟶ Y`. -/
 lemma IsLocallyLinear.pullback {T N P Y : Scheme.{u}} (F : T ⟶ N) (q : T ⟶ P) (g : P ⟶ Y)
     (t : N ⟶ Y) (hF : F ≫ t = q ≫ g) {σ : Fin c → Γ(N, ⊤)} {s : Γ(N, ⊤)}
     (hs : IsLocallyLinear t σ s) :
@@ -104,7 +104,7 @@ lemma isLocallyLinear_overlapCoordFst (A : VectorBundleAtlas c p z) (i j : A.ι)
   simp only [overlapSwap_appTop_overlapCoordSnd, overlapSwap_appTop_overlapCoordFst] at h
   exact h
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
 **The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the span of the
 coordinates of the chart `i` consists of functions locally linear in the coordinates of the
@@ -120,7 +120,7 @@ theorem span_chart_coord_le_locallyLinear_and_symm (A : VectorBundleAtlas c p z)
   ⟨A.span_chart_coord_le_locallyLinear i j,
     span_le_locallyLinearSubmodule _ (A.isLocallyLinear_overlapCoordFst i j)⟩
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Vector bundle with zero section
 
 **The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the functions
 locally linear in the coordinates of the chart `i` are exactly those locally linear in the

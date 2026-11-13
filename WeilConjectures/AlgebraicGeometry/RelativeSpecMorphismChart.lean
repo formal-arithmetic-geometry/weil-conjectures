@@ -15,12 +15,7 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 800000 in
 -- The dependent object transports require extra elaboration heartbeats.
 /-- The local chart compatibility for the relative-spectrum anti-equivalence, provided
-its forward functor acts on morphisms by the canonical section maps (`hmap`).
-Source: Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX
-(blueprint: lem-weil-pbc-relative-spec-morphism-chart).
-
-Proof: Apply naturality of the counit of the equivalence to an algebra morphism,
-then use the affine `toSpecΓ` naturality lemma and functoriality of `Spec.map`. -/
+its forward functor acts on morphisms by the canonical section maps (`hmap`). -/
 theorem relative_spec_morphism_chart (S : Scheme.{u})
     (E : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌
       ObjectProperty.FullSubcategory (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent))

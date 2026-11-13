@@ -13,7 +13,11 @@ public import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Restriction of the bare base-change arrow
 
-Source: Stacks Project, Tags 0DJ9, 08HY, and 08FE.
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
 -/
 
 @[expose] public section
@@ -25,30 +29,7 @@ namespace AlgebraicGeometry
 
 /-- The restriction calculation for the bare base-change arrow (identity
 coefficient). The direct-image comparison is natural on all target coefficients;
-no stalk condition, target coefficient K', or arbitrary coefficient map is assumed.
-Source: Stacks Project, cohomology.tex, Tags 08HY and 08FE; perfect.tex, Tag 0DJ9,
-first paragraph.
-(blueprint: lem-pc-single-complex-open-base-change-identity).
-
-Proof: The source comparison a is pullback-open compatibility for g followed by
-open restriction of the derived direct image of f. Let b be the natural
-open-restriction comparison for derived direct image of f'. Compute these on
-K-flat representatives for left derived pullback and K-injective representatives
-for right derived direct image. Underived open restriction identifies sections
-on inverse-image opens, so it identifies the restriction counit with the counit
-for the restricted map. The pinned left-derived composition comparisons have
-this same compatibility by their factorization equations. Transpose the two
-base-change arrows under the pinned derived adjunction for f' restricted to V'.
-By Tag 08HY both transposes are pullback of the respective counit. Substitute the
-restriction-counit equation, use hj and the commutative-square equations to
-identify the two pullback paths, and cancel the inverse composition comparisons.
-The remaining comparison from L(j)*K|U to (L(g')*K)|U' is precisely
-singleComplexRestrictedCoefficient with identity coefficient: its factors are
-open pullback inverse, composition for j then U.ι, hj, inverse composition for
-U'.ι then g', and open pullback. This gives the equality after transposing back.
-The construction of b is functorial in every coefficient, giving the stated
-natural isomorphism rather than only one object isomorphism. The calculation
-works for empty opens and unbounded complexes. -/
+no stalk condition, target coefficient K', or arbitrary coefficient map is assumed. -/
 theorem singleComplexOpen_baseChange_identity
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

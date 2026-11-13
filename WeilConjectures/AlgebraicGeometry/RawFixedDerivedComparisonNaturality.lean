@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionPullbackCommShi
 
 /-! # Naturality of fixed-coefficient raw evaluation
 
-Source: Stacks Project, Tags 03Q8, 0D6F and 0GIT.
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 0D6F](https://stacks.math.columbia.edu/tag/0D6F)
+* [Stacks Project, Tag 0GIT](https://stacks.math.columbia.edu/tag/0GIT)
 -/
 
 @[expose] public section
@@ -298,21 +302,7 @@ private theorem fixed_cohomology_square {B T Y Y' : Scheme.{u}}
   rw [plus_comp_inv]
   simpa only [Category.assoc] using fixed_section_square a h h' w g g' wg K.obj U
 
-/-- Raw evaluation intertwines triangle pullback with canonical cohomology pullback.
-Source: Stacks Project, Tag 03Q8, restriction in Tag 0D6F, and the canonical maps of 0GIT.
-(blueprint: lem-sc-raw-fixed-derived-comparison-naturality).
-
-Proof: Apply rawRestrictedDerivedComparison_pullback to the coefficient morphism
-which is the inverse derived inverse-image composition comparison. The restricted
-section pullback commutes with shifts. Thus its conjugate by the two derivedShiftIso
-maps is homology in degree q of its unshifted map. Expand that map: it is the
-adjunction unit for U times_B a followed by Leray and the restriction composition
-comparison. Naturality moves the coefficient composition comparison past the unit
-and Leray. Inverse-image associativity, applied to the two projections and a,g,
-cancels the restriction comparison with the two coefficient comparisons. What
-remains is exactly presentationDerivedMap. All steps are identities of natural
-transformations, and cover empty U, zero K, identity a and every integer q. No
-limit, affine or qcqs hypothesis is involved. -/
+/-- Raw evaluation intertwines triangle pullback with canonical cohomology pullback. -/
 theorem rawFixedDerivedComparison_naturality {B T Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ B) (h' : Y' ⟶ B) (w : a ≫ h = h')
     (g : Y ⟶ T) (g' : Y' ⟶ T) (wg : g' = a ≫ g)

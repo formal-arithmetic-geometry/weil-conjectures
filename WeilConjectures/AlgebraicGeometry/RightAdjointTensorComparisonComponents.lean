@@ -15,12 +15,7 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
-/-- The pinned projection family has a natural right-adjoint mate.
-Source: Stacks Project, Tag 0A9U; naturality of the monoidal comparison,
-counits, and adjunction hom equivalences.
-Proof: expand the displayed component and use naturality of the monoidal
-comparison, both counits, the right unitor, and adjunction hom equivalence.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-components) -/
+/-- The pinned projection family has a natural right-adjoint mate. -/
 theorem rightAdjointTensorComparison_components
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

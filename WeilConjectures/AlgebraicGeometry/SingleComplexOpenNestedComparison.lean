@@ -13,9 +13,10 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-! # Comparison invariance under nested source-open restriction
 
-Source: Stacks Project, Tag 0DJ9, restriction to a source open in the induction step,
-and Tag 08HY, canonical base-change map.
-(blueprint: lem-pc-single-complex-open-nested-comparison).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -26,34 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Computing the comparison on a smaller open after restricting to a larger open
 preserves and reflects invertibility. This is a coordinate transport statement:
-it has no cover, compactness, quasi-coherence or local-isomorphism hypotheses.
-Source: Stacks Project, Tag 0DJ9, induction step on a source open, and Tag 08HY.
-(blueprint: lem-pc-single-complex-open-nested-comparison).
-
-Proof: Write A = W.ι⁻¹(Z). The composite A → W → X has image Z since Z ≤ W.
-The canonical isomorphism A ≅ Z over X identifies the smaller source. Pasting
-pullback squares identifies (X' ×_X W) ×_W A with X' ×_X Z over both X' and Z.
-The derived pullback composition comparisons identify the twice-restricted K
-with its restriction to Z, and the twice-restricted K' with its restriction to
-X' ×_X Z. Their associativity law and naturality with respect to φ identify the
-twice-restricted coefficient morphism with the coefficient morphism restricted
-once. More explicitly, let e : A ≅ Z be the image isomorphism and let
-e′ : ((X′ ×_X W) ×_W A) ≅ (X′ ×_X Z) be the pullback-pasting
-isomorphism. The structural maps to S and S′ agree after composition
-with e and e′. The pullback comparisons and their right-adjoint mates
-therefore identify the two comparison domains and codomains; the units
-and counits for e and e′ are invertible since these maps are isomorphisms.
-The open immersion W → X itself needs no invertible adjunction unit.
-The direct-image comparisons are the mates of these same pullback
-comparisons under the canonical derived adjunctions. Transpose the two
-base-change arrows under their direct-image adjunctions: by Tag 08HY both
-transposes consist of the pullback composition comparison followed by the
-counit of the source adjunction. Naturality of that counit and the associativity
-law identify the transposes. Thus the two comparison arrows are conjugate by
-isomorphisms on their domain and codomain, which preserves and reflects IsIso.
-For Z empty the same constructions take place in the zero module category;
-for Z = W this is the identity restriction comparison. No affine hypothesis is
-used, and no arbitrary coefficient witness is chosen. -/
+it has no cover, compactness, quasi-coherence or local-isomorphism hypotheses. -/
 theorem singleComplexOpenComparison_nested_isIso_iff
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

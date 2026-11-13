@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 
 /-! # Clearing denominators of sections on a nonvanishing locus
 
-Source: Stacks Project, Properties, Lemma 01PW, proof of part (2)
-(blueprint: lem-sc-p1-section-clearing-denominators-qcqs).
+## References
+
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
 -/
 
 @[expose] public section
@@ -34,30 +35,6 @@ variable {X : Scheme.{u}}
 section of an invertible module become restrictions of global sections after a tensor power.
 Here `U` is an open with underlying set `X_s = nonvanishingLocus L s` and the right side is
 `t ⊗ (s|_U)^{⊗ m}`.
-Source: Stacks Project, Properties, Lemma 01PW, proof of part (2)
-(blueprint: lem-sc-p1-section-clearing-denominators-qcqs).
-
-Proof:
-1. Using `def-sc-invertible-module` and `pqf-def-coherent`, choose affine neighbourhoods
-   with a basis for `L` and a module presentation for `F`. Refine their intersections by
-   principal opens; `lem-weil-pbc-spec-module-tilde-sections` preserves the presentations.
-   By `def-weil-pbc-quasi-compact-scheme`, take a finite cover `Vᵢ = Spec Aᵢ`. Write
-   `s = fᵢ eᵢ` on each chart. Its residue-field value is nonzero precisely on `D(fᵢ)`.
-   The same affine-sections lemma identifies sections there with localized modules.
-   Write the given section locally as `vᵢ / fᵢ ^ aᵢ`, take a common exponent `a`, and
-   form `wᵢ = fᵢ ^ (a - aᵢ) vᵢ ⊗ eᵢ ^ a`. Its restriction is the given section times
-   `s ^ a`.
-2. Quasi-separatedness makes each overlap `Wᵢⱼ = Vᵢ ∩ Vⱼ` quasi-compact.
-   The difference of the two local lifts vanishes on `Wᵢⱼ ∩ X_s`. The basis of
-   `L ^ a` on `Vᵢ` identifies this difference with a section of `F` on `Wᵢⱼ`.
-   Its restriction to `D(fᵢ|_{Wᵢⱼ})` is zero, by injectivity of tensoring with
-   the restricted basis. Apply `exists_pow_smul_eq_zero_of_isCompact` to this
-   section of `F`: a power of `fᵢ` kills it, hence also the original difference.
-3. Take a common exponent `b` for the finitely many pairs. After multiplying each lift
-   by `s ^ b` and identifying the tensor powers, the resulting sections agree on every
-   overlap. Glue them by the sheaf axiom to a global section of `F ⊗ L ^ (a + b)`.
-   On the principal opens covering `X_s` it equals the given section times `s ^ (a + b)`.
-   Thus `m = a + b` has the required property.
 -/
 theorem exists_tensorPowSection_eq_restrict_qcqs [CompactSpace X]
     [QuasiSeparatedSpace X] (L : X.Modules) [L.IsInvertible]

@@ -17,8 +17,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Uniform cohomological dimension of inverse images of affine opens
 
-Source: Stacks Project, Tags 01XJ and 01XK; Tag 08D5, proof of (2).
-(blueprint: lem-pc-uniform-inverse-affine-sections-bound).
+## References
+
+* [Stacks Project, Tag 01XJ](https://stacks.math.columbia.edu/tag/01XJ)
+* [Stacks Project, Tag 01XK](https://stacks.math.columbia.edu/tag/01XK)
+* [Stacks Project, Tag 08D5](https://stacks.math.columbia.edu/tag/08D5)
 -/
 
 @[expose] public section
@@ -30,22 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A single positive bound works for ordinary module cohomology on the inverse image
-of every affine open of the target.
-Source: Stacks Project, Tags 01XJ and 01XK; Tag 08D5, proof of (2).
-(blueprint: lem-pc-uniform-inverse-affine-sections-bound).
-
-Proof:
-1. Each point s of S has an open neighbourhood V(s) and a bound n(s) for higher
-   direct images, uniform in the quasi-coherent module, by the affine-base part of
-   Tag 01XJ. Compactness gives finitely many such neighbourhoods covering S.
-2. Let N be the maximum of 1 and their finitely many bounds. For p >= N, the p-th
-   higher direct image of any quasi-coherent M is zero on each covering open, hence
-   zero globally: vanishing of module sheaves is local.
-3. For each affine U, the affine-open Leray comparison of Tag 01XK identifies the
-   right derived functor of sections on f^{-1}U with sections on U of this higher
-   direct image. An additive section functor sends a zero object to a zero object.
-   Transport along the comparison gives the conclusion. Empty schemes and opens
-   are included: the finite supremum is zero for an empty cover, and N is still 1. -/
+of every affine open of the target. -/
 theorem exists_uniform_inverse_affine_sections_bound
     {X S : Scheme.{u}} (f : X ⟶ S)
     [QuasiCompact f] [QuasiSeparated f] [CompactSpace S] :

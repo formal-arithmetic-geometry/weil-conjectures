@@ -12,9 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 
 /-! # The two conventions for a section's nonvanishing locus
 
-Source: Stacks Project, Properties, Section 01PR and Lemma 01PW;
-Modules, Lemma 01CY.
-(blueprint: lem-weil-pbc-section-nonvanishing-zero-locus).
+## References
+
+* [Stacks Project, Tag 01PR](https://stacks.math.columbia.edu/tag/01PR)
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
+* [Stacks Project, Tag 01CY](https://stacks.math.columbia.edu/tag/01CY)
 -/
 
 @[expose] public section
@@ -75,20 +77,7 @@ private theorem bijective_smul_germ {X : Scheme.{u}} (M : X.Modules)
     rw [ha, hz]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The stalk-theoretic nonvanishing set equals the complement of the zero ideal's support.
-
-Source: Stacks Project, Properties, Section 01PR and Lemma 01PW, local calculation
-in its proof; Modules, Lemma 01CY.
-(blueprint: lem-weil-pbc-section-nonvanishing-zero-locus).
-
-Proof: Cover X by affine opens V on which M has a free generator e. Write the restriction
-of s as f • e. The germ of e is a basis of M_x for every x in V, so the germ of s lies
-in the maximal ideal times M_x precisely when the germ of f lies in the maximal ideal
-of O_{X,x}. This is equivalent to f not being a unit in O_{X,x}, or x not lying in D(f).
-On the other hand, homOfGlobalSection sends 1 to s, so its coefficient in the bases 1
-and e is f. Hom.ideal_zeroLocus identifies its ideal on V with (f), whose support is
-V minus D(f). Thus the two sets agree on each V, hence globally. The empty scheme and
-the zero section satisfy the same local calculation, with no nonemptiness hypothesis. -/
+/-- The stalk-theoretic nonvanishing set equals the complement of the zero ideal's support. -/
 theorem nonvanishingLocus_eq_compl_support_zeroLocus (X : Scheme.{u}) (M : X.Modules)
     [M.IsInvertible] (s : Γ(M, ⊤)) :
     nonvanishingLocus M s =

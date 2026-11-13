@@ -10,8 +10,11 @@ public import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Openness of the image of a quotient factor over an isomorphism locus
 
-Source: Stacks Project, More on Algebra, proof of Tag 09XH.
-(blueprint: lem-weil-pbc-quotient-first-factor-image-open)
+## References
+
+* [Stacks Project, Tag 09XH](https://stacks.math.columbia.edu/tag/09XH)
+* [Stacks Project, Tag 2529](https://stacks.math.columbia.edu/tag/2529)
+* [Stacks Project, Tag 2541](https://stacks.math.columbia.edu/tag/2541)
 -/
 
 @[expose] public section
@@ -24,8 +27,7 @@ namespace AlgebraicGeometry
 
 /-- The first product factor has spectrum image the basic open of its idempotent.
 
-Source: Stacks Project, proof of Tag 09XH, first-factor spectrum identification.
-Auxiliary calculation for (blueprint: lem-weil-pbc-quotient-first-factor-image-open).
+Auxiliary calculation for.
 The kernel of the first projection consists of the complementary factor. A prime
 contains it exactly when it omits the first-factor idempotent: use their sum 1
 in one direction and their product 0 in the other. -/
@@ -54,9 +56,6 @@ theorem firstFactor_range
     exact (p.isPrime.mem_or_mem (hm ▸ p.asIdeal.zero_mem)).resolve_right he
 
 /-- A component of a closed fibre has relatively open image over an isomorphism locus.
-
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Tag 09XH.
-(blueprint: lem-weil-pbc-quotient-first-factor-image-open).
 
 Choose a lift t of e.symm (1,0). The first factor spectrum is V(J) intersect D(t):
 a prime containing J contains exactly one of t and 1-t, since their product lies in J.

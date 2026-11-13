@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Pullback of strict-local representative sections
 
-Source: Stacks Project, Tags 03Q9 and 0A3U.
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 0A3U](https://stacks.math.columbia.edu/tag/0A3U)
 -/
 
 @[expose] public section
@@ -128,24 +131,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Pulling a strict-local representative section back to the pointed fibre is the
-unit restriction along that representative's marked point.
-Source: Stacks Project, Tag 03Q9, canonical restriction on representatives, and
-Tag 0A3U, degree-zero compatibility in the parent factorization.
-(blueprint: lem-weil-pbc-strict-local-section-pullback).
-
-Proof: expand `qcqsStrictLocalSectionRestriction` and the global-sections pullback.
-Naturality of terminal evaluation changes the latter into the unit for q followed
-by restriction along its terminal lift. Naturality of the unit moves the strict-local
-limit-leg restriction past this unit. The composition-unit identity and the inverse
-of `upperStarComp` identify the two successive inverse-image units with the unit for
-g'. The remaining morphism from the terminal object to g'^*f^*V has outer second
-projection identity. Its inner projections are g', by hq, and f' followed by the
-marked point: use hqt to replace the map to the strict-local base by f't, then use
-hpoint to replace t followed by the limit leg by the marked point. Pullback hom-ext
-therefore identifies this morphism with `geometricFibreSectionLift`. The terminal
-section/global-section isomorphisms cancel, leaving exactly the stated identity.
-No isomorphism of stalks, comparison map a, qcqs hypothesis, or exchange map occurs.
-The argument is valid for empty schemes and zero coefficient modules as well. -/
+unit restriction along that representative's marked point. -/
 theorem strictLocal_section_pullback
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

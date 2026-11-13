@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
 
 /-! # Affine conormal exterior coordinates preserving ideal wedges
 
-Source: Stacks Project, Tags 01R3 and 0096.
-(blueprint: new-t2-self-tor-conormal-wedge-chart). -/
+## References
+
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,28 +28,7 @@ namespace AlgebraicGeometry
 
 /-- On one affine chart the exterior conormal coordinate sends the wedge of the
 pullback-unit images of ideal sections to the associated algebraic conormal wedge.
-This statement involves no derived category or Tor module.
-Source: Stacks Project, Tag 01R3 (conormal classes), Tag 0096 (pullback unit).
-(blueprint: new-t2-self-tor-conormal-wedge-chart).
-
-Proof: The closed inverse-image chart of U is affine with coordinate ring A/I,
-where A = Gamma(Y,U) and I = i.ker.ideal U. Apply affine_conormal_sections in identity
-ring coordinates; it makes the pulled-back ideal quasi-coherent and sends the class of
-an ideal section to its pullback-unit image. The pulled-back kernel and the associated cotangent
-module are quasi-coherent on this affine chart, so their section equivalence gives
-a sheaf isomorphism. The map A to the closed chart section ring is onto with kernel I.
-Thus A-linearity of the conormal equivalence is also A/I-linearity after the quotient
-ring identification. Take the nth exterior power over A/I. Associated-sheaf formation
-commutes with exterior powers: check the universal alternating map on basic opens,
-where both constructions are localization of the same exterior module. Restriction
-commutes with exterior sheaves by exteriorSheaf_restrict_iso. Composing these
-identifications gives s, oriented from the exterior sheaf to the affine model.
-The conormal unit equation and the characterizing alternating maps give exactly the
-asserted equality on each tuple. The affine model section in the conclusion is
-constructed by the tilde unit and tensor-pullback unit, so it is the same constant
-wedge, not a chosen section. For n=0 both sides are the quotient unit. The empty
-chart and zero quotient have zero section modules; the zero ideal is allowed.
-No finite generation or regularity is used. -/
+This statement involves no derived category or Tor module. -/
 theorem exists_selfTor_conormal_wedge_chart
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

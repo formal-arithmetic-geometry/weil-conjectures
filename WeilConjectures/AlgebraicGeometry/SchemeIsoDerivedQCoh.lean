@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-! # Quasi-coherent cohomology under a scheme isomorphism
 
-Source: Stacks Project, Tag 08EB, and exact isomorphism pushforward
-(blueprint: lem-pc-scheme-iso-derived-qcoh).
+## References
+
+* [Stacks Project, Tag 08EB](https://stacks.math.columbia.edu/tag/08EB)
 -/
 
 @[expose] public section
@@ -37,15 +38,7 @@ private noncomputable def moduleIsoEquivalence {X Y : Scheme.{u}} (s : X ≅ Y) 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse of an isomorphism-induced derived equivalence preserves quasi-coherent
-cohomology. Source: Stacks Project, Tag 08EB, affine isomorphism transport.
-(blueprint: lem-pc-scheme-iso-derived-qcoh).
-
-Proof: Represent the inverse image by a complex P. The localization comparison and
-counit identify E with the localization of s_* P. Exactness of isomorphism pushforward
-identifies its homology with s_* H(P). These sheaves are quasi-coherent since E is.
-Apply pushforward along the inverse isomorphism, which preserves quasi-coherence by the
-affine pushforward theorem. Its composite with s_* is the identity, so H(P) is
-quasi-coherent. The homology comparison for Q(P) gives the assertion in every degree. -/
+cohomology. -/
 theorem scheme_iso_derived_inverse_preserves_qcoh {X Y : Scheme.{u}} (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

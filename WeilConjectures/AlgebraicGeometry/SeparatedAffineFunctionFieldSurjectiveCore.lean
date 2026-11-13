@@ -20,8 +20,7 @@ universe u
 namespace AlgebraicGeometry
 
 /-- The separated affine function-field construction yields a closed immersion of spectra.
-Source: Varieties Lemma 09NB, separatedness paragraph
-(blueprint: lem-sc-separated-affine-function-field-surjective-core).
+
 The proof constructs the pullback of the diagonal along the affine charts, identifies it
 with `Spec K`, and transports the resulting closed immersion through the affine-spectrum
 identifications. -/

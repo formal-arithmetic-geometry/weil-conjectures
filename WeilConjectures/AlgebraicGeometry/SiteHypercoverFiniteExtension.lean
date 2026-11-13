@@ -14,8 +14,10 @@ import Mathlib.Basic.Finite.Sum
 
 /-! # Finite attachment to a split truncated simplicial family
 
-Source: Stacks Project, Tags 0DAV and 0DAU
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 0DAV](https://stacks.math.columbia.edu/tag/0DAV)
+* [Stacks Project, Tag 0DAU](https://stacks.math.columbia.edu/tag/0DAU)
 -/
 
 @[expose] public section
@@ -34,22 +36,6 @@ private theorem index_surjective {A B : FormalCoproduct.{w} D} (h : A = B) :
   exact Function.surjective_id
 
 /-- Attach a finite family along its prescribed boundary.
-Source: Stacks 0DAV, construction of the extension, and 0DAU, split convention
-(auxiliary; not a blueprint node).
-
-Proof: Compose v with the matching projections to obtain a compatible boundary
-cone on V. Normalize each old index using the split bijection and its component
-isomorphism. Attach the new family in degree n+1; for an arbitrary ordinal map,
-use its epi--mono image factorization, an old operator or the prescribed face
-cone, and inverse normalization. The factorization identities prove composition
-in all eight old/top cases. This constructs the extended functor with its
-prescribed faces and normalized degeneracies. These degeneracies show that the
-old labels give exactly the degenerate indices in the new degree, and have
-invertible components; old degrees inherit splitness by restriction. The matching
-universal property gives b, and its uniqueness gives the prescribed restriction
-v. Finite old indices and the finiteness of ordinal maps give finite label sets,
-hence finiteness in the new degree. The old summand face formula is the explicit
-face construction.
 -/
 theorem exists_split_truncated_extension
     [HasFiniteLimits D]

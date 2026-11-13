@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 
 /-! # Source and class coherence before coefficients
 
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-module-scalar-source-class-formula).
+## References
+
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -94,21 +96,6 @@ private theorem single_source_class_attach
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Commute the source and class factors before attaching any coefficient tail.
-Source: Stacks Project, Tags 03D7 and 03Q8, scalar inverse-image composition.
-(blueprint: lem-sbc-raw-module-scalar-source-class-formula).
-
-Proof: Apply rawModuleScalar_sheaf_composition to the free represented module
-sheaf. Naturality of upperStarComp on the free abelian generator attaches that
-generator to its source square. Apply plus_single_source_square_core in degree
-zero to derive the square. Its factors are scalarSourceFactor, moduleSourceFactor
-and abelianSourceFactor, and its comparison is derivedPullbackIso. Postcompose
-this square with derived scalar forgetting of the derived inverse image of z.
-Naturality of the inverse derivedPullbackIso on z moves z across the inverse
-comparison. Functor.map_comp combines the abelian inverse images of the source
-map and forgotten class into rawModuleScalarSourcePrefix. Reassociate. No
-moduleCoefficientFactor, scalarCoefficientFactor or coefficient coherence is
-used in this equation. Zero classes, q = 0, identity arrows, zero and empty
-objects satisfy the same functoriality and naturality equations.
 -/
 theorem rawModuleScalar_source_class_formula
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)

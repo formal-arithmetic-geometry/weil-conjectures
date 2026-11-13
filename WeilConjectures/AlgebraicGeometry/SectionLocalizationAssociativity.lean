@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.SectionRepresentativeTensorArrow
 
 /-! # Associativity of the fixed section localization tensor map
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU, 0FPT, and 07A4.
+## References
+
+* [Stacks Project, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
+* [Stacks Project, Tag 0FPT](https://stacks.math.columbia.edu/tag/0FPT)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -237,28 +241,7 @@ private theorem localization_lax (T : Scheme.{u}) :
     convert hn'.trans hs.symm using 1
     all_goals exact Category.assoc _ _ _
 
-/-- The specified section localization tensorator preserves the associator.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT; the source
-and target normalized associator equations in the proof of
-lem-pd-section-resolving-oplax-model-edges, based on Tag 07A4.
-
-Proof: use the already proved ordinary section monoidal data and its standard
-extension to cochains. Identify its tensorator with cochainTensorComparison by
-equality of the curried comparison maps and sectionTotalComparison_eq. The
-ConstraintCondition in section_kflat_tensor_comparison gives the derived section
-equivalence its strong monoidal structure with tensorator tensorComparison.
-Transport the lax structure on internal localization followed by this equivalence
-across the cochain section equivalence to section localization. The localization
-factor isomorphism is monoidal by naturality and the equivalence triangle laws.
-Its monoidal square and qTensorArrow_normalization have the same right side;
-cancel the invertible tensorComparison and localization factors to identify
-the transferred lax tensorator with qTensor on termwise internal images.
-Naturality along the cochain equivalence counit and cancellation of its
-invertible tensor components extend this equality to all pairs. Apply lax monoidal
-associativity. No modelTensor component
-is inverted, and no resolving or pullback hypothesis is used.
-(auxiliary; not a blueprint node). -/
+/-- The specified section localization tensorator preserves the associator. -/
 theorem section_localization_associativity (T : Scheme.{u})
     (P Q H : CochainComplex (modules Λ T) ℤ) :
     letI := derivedMonoidal Λ T

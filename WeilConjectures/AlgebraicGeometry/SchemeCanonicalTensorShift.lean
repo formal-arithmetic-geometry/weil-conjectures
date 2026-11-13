@@ -9,16 +9,17 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorShiftIndependentUniverse
 
 /-! # Canonical tensor shifts on schemes
-Source: Stacks Project, Tag 06YH, total tensor localization.
-(blueprint: def-sc-scheme-canonical-tensor-shift).
+
+## References
+
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
 -/
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
-/-- Canonical Koszul tensor shifts, with independent localization universe.
-Source: Stacks Tag 06YH (blueprint: def-sc-scheme-canonical-tensor-shift). -/
+/-- Canonical Koszul tensor shifts, with independent localization universe. -/
 @[instance_reducible]
 noncomputable def schemeCanonicalTensorShift (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

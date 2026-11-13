@@ -14,7 +14,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Limits
 
-/-! # The canonical product map over a split finite cover -/
+/-! # The canonical product map over a split finite cover
+
+## References
+
+* [Stacks Project, Tag 095B](https://stacks.math.columbia.edu/tag/095B)
+-/
 
 @[expose] public section
 
@@ -90,7 +95,7 @@ private lemma Scheme.ProEt.comp_map_eq_of_disjoint [∀ i, Mono (π i)]
     exact (Scheme.ProEt.isTerminalSectionsOfIsEmpty G Z).hom_ext _ _
 
 /-- **A sheaf sends a disjoint cover to a product**: if the pairwise disjoint subobjects
-`π i : W i ⟶ V` cover `V` in the small pro-étale topology, then the restriction maps exhibit
+`π i: W i ⟶ V` cover `V` in the small pro-étale topology, then the restriction maps exhibit
 `G V` as the product of the `G (W i)`. -/
 private theorem Scheme.ProEt.isIso_piLift_of_disjoint [∀ i, Mono (π i)]
     (hcov : Sieve.ofArrows W π ∈ (Scheme.ProEt.topology X) V)
@@ -358,10 +363,6 @@ private theorem sectionProduct_isIso
   exact (Fan.nonempty_isLimit_iff_isIso_piLift c).mp ⟨hl⟩
 
 /-- The counit maps to the sheets of a split finite cover form an isomorphism.
-
-Source: Stacks Project, Tag 095B, proof by sections over a split finite cover; the
-weakly etale base-change argument for the pro-etale site.
-(auxiliary; not a blueprint node)
 
 Proof in words. Compute inverse image along the weakly etale map g by restriction
 along the localization functor of pro-etale sites. For a test W over Y, the assumed

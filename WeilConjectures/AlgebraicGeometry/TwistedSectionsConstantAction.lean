@@ -13,9 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # Constant multiplication on twisted sections
 
-Source: Stacks Project, Lemma 01YS, proof of (5); homogeneous fraction construction
-of the twisting sheaf, Tag 01M6.
-(blueprint: lem-sc-p1-twisted-sections-constant-action).
+## References
+
+* [Stacks Project, Tag 01YS](https://stacks.math.columbia.edu/tag/01YS)
+* [Stacks Project, Tag 01M6](https://stacks.math.columbia.edu/tag/01M6)
 -/
 
 @[expose] public section
@@ -93,21 +94,7 @@ private theorem tensor_smul {X : Scheme.{u}} (M N : X.Modules) (r : Γ(X, ⊤)) 
 
 end Scheme.Modules
 
-/-- Constant homogeneous multiplication agrees with the canonical base-field action.
-Source: Stacks Project, Lemma 01YS, proof of (5), and Tag 01M6.
-(blueprint: lem-sc-p1-twisted-sections-constant-action).
-
-Proof: on D₊(Xᵢ) and each of its subopens the structure-map image of c is the degree-zero
-fraction C(c)/1. The definition of twistMul multiplies a degree-n fraction a/b by
-C(c)/1. This is therefore multiplication by the restriction of the global function
-ρ(c), on every section of O(n). Equality on the two basic opens, which cover Proj,
-gives equality of these sheaf morphisms after transporting n+0 to n. Tensoring this
-morphism with the identity of G acts by the same scalar: on pure tensors,
-x tensor (ρ(c) y) = ρ(c) (x tensor y). Additivity gives the equality on the presheaf
-tensor product, and sheafification preserves it. Evaluating on global sections gives
-the displayed formula. Proof irrelevance makes it independent of the equality p and
-of ha. No coherence or positivity assumption is required; c=0 and c=1 give zero and
-the identity, and the argument also applies to the zero sheaf and negative twists. -/
+/-- Constant homogeneous multiplication agrees with the canonical base-field action. -/
 theorem serreTwistedSectionsConstantAction
     (k : Type u) [Field k]
     (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules)

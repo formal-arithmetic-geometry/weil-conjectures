@@ -10,8 +10,14 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Normalized sections of an associated affine chart
 
-Source: Stacks Project, Tags 01I7, 01HV, 01I9, 0096 and 0097.
-(blueprint: new-p4-self-tor-affine-chart-sections). -/
+## References
+
+* [Stacks Project, Tag 01I7](https://stacks.math.columbia.edu/tag/01I7)
+* [Stacks Project, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
+* [Stacks Project, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,20 +29,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 -- The chart restriction scalar structures require extra elaboration fuel.
-/-- The chart-associated module has its original module as sections on the chart.
-Source: Stacks Project, Tag 01I7, lemma-compare-constructions; Tag 01HV,
-lemma-spec-sheaves; Tag 0096, lemma-adjoint-pullback-pushforward-modules.
-(blueprint: new-p4-self-tor-affine-chart-sections).
-Proof: The tilde adjunction unit is an isomorphism from M to the global sections
-on Spec A. The chart isomorphism sends the whole chart onto Spec A. The inverse
-restriction section isomorphism identifies its sections with those of the chart
-restriction; the open pushforward evaluates on U at the whole chart. These
-isomorphisms compose to e. Their scalar maps compose to the identity of A, since
-the chart isomorphism is induced by the identity on A. Thus e is A-linear.
-Evaluating the composite is precisely the displayed restriction of the tilde
-unit. The chart restriction is quasi-coherent by restriction of tilde; the open
-pushforward followed by restriction is that same sheaf by the open counit.
-For M=0 or U empty the same isomorphisms and formulas apply. -/
+/-- The chart-associated module has its original module as sections on the chart. -/
 theorem exists_selfTor_affine_chart_sections
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) :

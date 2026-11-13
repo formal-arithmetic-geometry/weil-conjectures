@@ -19,8 +19,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # The supported Koszul summand forces the open unit
 
-Source: Stacks Project, Tag 0A9A.
-(blueprint: lem-pc-supported-koszul-unit-summand).
+## References
+
+* [Stacks Project, Tag 0A9A](https://stacks.math.columbia.edu/tag/0A9A)
 -/
 
 @[expose] public section
@@ -32,27 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Adding the supported Koszul summand forces the open-restriction unit to be an
-isomorphism under shifted orthogonality. This does not assert detection or use induction.
-Source: Stacks Project, Tag 0A9A, supported Koszul construction and unit paragraphs.
-(blueprint: lem-pc-supported-koszul-unit-summand).
-
-Proof:
-1. Construct a supported Koszul relative detector A on the affine complement. It is
-   perfect, has quasi-coherent cohomology supported on T, and restricts to zero on U.
-   It detects supported objects which already restrict to zero on U.
-2. Set E = Q biproduct A. Homology preserves the biproduct, so E is quasi-coherent.
-   The split distinguished triangle gives perfectness by two out of three. Applying
-   the additive stalk-homology functor to the biproduct total identity proves support.
-   The inclusion and projection exhibit both Q and A as retracts of E.
-3. Complete the specified unit of K to a distinguished triangle with cone C. The
-   supported open-unit cone lemma gives quasi-coherence, support on T, and zero
-   restriction of C to U. Orthogonality to E passes to A through its retract. Since
-   A restricts to zero, derived adjunction gives vanishing of maps from its shifts
-   into R(K restricted to U). Integer shift equivalence gives vanishing of maps into
-   K[1]. Triangle exactness now gives vanishing of all shifted maps from A into C.
-4. The relative detector makes C zero. The distinguished-triangle zero-cone criterion
-   makes the original, specified unit invertible. No comparison with a different
-   right adjoint is required in this combining proof. Empty U, T, or X are allowed. -/
+isomorphism under shifted orthogonality. This does not assert detection or use induction. -/
 theorem exists_supported_koszul_unit_summand
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

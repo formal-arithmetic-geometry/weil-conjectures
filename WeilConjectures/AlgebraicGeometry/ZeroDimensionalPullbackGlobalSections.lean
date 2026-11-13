@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 /-!
 # Global sections under field extension in dimension zero
 
-Source: the degree-zero argument of blueprint lem-weil-pbc-zero-dimensional-field-extension.
-(blueprint: lem-weil-pbc-zero-dimensional-pullback-global-sections).
+## References
+
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+* [Stacks Project, Tag 0GJA](https://stacks.math.columbia.edu/tag/0GJA)
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Pullback on global sections of an abelian etale sheaf is bijective for a
- zero-dimensional finite-type scheme over an algebraically closed field.
- Source: blueprint lem-weil-pbc-zero-dimensional-field-extension, proof steps 1 and 4;
- Stacks Project, Tags 03Q1 and 0GJA.
- (blueprint: lem-weil-pbc-zero-dimensional-pullback-global-sections).
-
- Proof: The source has finitely many closed points with residue field k, and after
- extending k to k' the projection gives a bijection of these point sets, by
- lem-weil-pbc-zero-dimensional-base-change-points. Choose an algebraically closed
- geometric point above each point of the base change and compose it with the projection.
- The germ maps identify global sections on both schemes with products of these stalks,
- by lem-weil-pbc-zero-dimensional-sections-stalks. Inverse image identifies each target
- stalk with the corresponding source stalk, compatibly with germs of sections, by
- lem-weil-pbc-inverse-image-stalk-germ. Consequently the global sections pullback is,
- under these product identifications, the product of the stalk isomorphisms reindexed
- along the point bijection. It is therefore bijective. The empty scheme gives empty
- products and is covered by the same argument. Neither torsion nor reducedness is used. -/
+ zero-dimensional finite-type scheme over an algebraically closed field. -/
 theorem bijective_globalSectionsUpperStarMap_of_dim_zero {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)

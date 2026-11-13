@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationCohomologyComparison
 /-!
 # Unrestricted strict-henselization stalk formula
 
-Source: Stacks Project, Theorem 59.53.1, Tag 03Q9, first assertion
-(blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -30,20 +31,7 @@ namespace AlgebraicGeometry.Etale
 The germ map `r` is specified by its neighbourhood components; its existence and uniqueness
 are supplied by `existsUnique_strictHenselizationStalkRestriction`. The canonical map is
 `r ≫ strictHenselizationCohomologyComparison`, with target the cohomology of the inverse
-image along the first projection of the strict-local base change.
-Source: Stacks Project, Tag 03Q9, first assertion and proof
-(blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk).
-
-Proof:
-1. Choose the unique germ restriction supplied by
-`existsUnique_strictHenselizationStalkRestriction`.
-2. The strict-local germ restriction is an isomorphism by
-`isIso_strictHenselizationStalkRestriction`.
-3. Apply `isIso_strictHenselization_baseChange_globalHomology` to `F` in degree zero.
-The cohomology comparison is the composite of the exact inverse-image/homology
-isomorphism, this base-change map on global homology, the strict-local Leray isomorphism,
-and the inverse-image/single-complex isomorphism. Each factor is invertible, so its
-composite with the germ restriction is invertible. -/
+image along the first projection of the strict-local base change. -/
 theorem unrestricted_strictHenselization_stalk
     {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type w} [Field Ω] [IsAlgClosed Ω]

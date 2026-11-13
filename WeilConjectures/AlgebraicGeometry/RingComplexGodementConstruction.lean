@@ -10,9 +10,13 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # The ring complex as a concrete Godement mapping fibre
 
-Source: Stacks Project, Tags 099D and 0FKS.
 The complex is constructed from global sections on the open complement of the ideal.
-(auxiliary; not a blueprint node).
+.
+
+## References
+
+* [Stacks Project, Tag 099D](https://stacks.math.columbia.edu/tag/099D)
+* [Stacks Project, Tag 0FKS](https://stacks.math.columbia.edu/tag/0FKS)
 -/
 
 @[expose] public section
@@ -148,8 +152,8 @@ def ringComplexGodementRestriction (A : CommRingCat.{u}) (I : Ideal A) :
     (ringComplexGodementFirst_closed A I)
 
 /-- The actual ring complex: the mapping fibre of restriction to Godement sections.
-Source: Stacks Project, Tags 099D, 0FKS.
-(auxiliary; not a blueprint node). -/
+
+. -/
 def ringComplexGodement (A : CommRingCat.{u}) (I : Ideal A) :
     CochainComplex (RingSiteModules A) ℤ :=
   (CochainComplex.mappingCone.triangle (ringComplexGodementRestriction A I)).invRotate.obj₁

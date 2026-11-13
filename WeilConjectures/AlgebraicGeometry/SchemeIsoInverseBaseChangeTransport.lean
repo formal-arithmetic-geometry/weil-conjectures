@@ -11,7 +11,10 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # The ordinary inverse square under source-isomorphism transport
 
-Source: Stacks Project, Tags 0ATR and 0D5S.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -342,28 +345,7 @@ set_option maxHeartbeats 200000 in
 -- The explicit mate calculation needs a larger elaboration budget.
 /-- Transport of the inverse ordinary base-change square along a source isomorphism.
 The component formulas determine all three comparisons uniquely.
-This theorem has no exceptional right adjoints and no second mates.
-Source: Stacks Project, Tag 0ATR, composite adjunction calculation; Tag 0D5S.
-(blueprint: lem-sc-scheme-iso-inverse-base-change-transport)
-
-Proof: The pinned pullback adjunction of each source isomorphism is an equivalence:
-pullback along its inverse is an inverse functor by the canonical composition and
-identity comparisons. Thus its unit, and hence the explicitly constructed unit
-comparison q, is invertible. Transpose ordinary base change under the pinned
-pullback/direct-image adjunctions. Apply derived base-change pasting to r and use
-hr₂ for the upper direct-image comparison. Apply pullback composition to the other
-projection and use hr₁ and he. The associativity law for the fixed composition
-comparisons identifies these transposes. Injectivity of the Hom equivalences gives
-the ordinary-square equation with the specified k, q and σ. Invert the two ordinary
-base-change transformations, which are isomorphisms by hβ and hβf; cancel them on
-the two sides. Naturality moves k and q through the composites and gives exactly
-the displayed inverse-square equation. The component identity for q is recorded
-after two arbitrary postcompositions, using associativity; identity arrows recover
-the unpostcomposed component. It holds for every quasi-coherent object,
-including the zero object, and on empty schemes: only naturality, composition and
-triangle identities are used. Restriction to quasi-coherent objects is legitimate
-by pullback and qcqs direct-image preservation; full faithfulness gives the same
-equality in the full subcategories. -/
+This theorem has no exceptional right adjoints and no second mates. -/
 theorem schemeIso_inverseBaseChange_transport
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

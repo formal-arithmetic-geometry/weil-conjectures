@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarHomEvaluation
 
 /-! # The bundled scalar Hom composite
 
-Source: Stacks Project, Tags 03FD and 03Q8, the explicit scalar map.
-(blueprint: lem-sbc-raw-module-scalar-hom-composite-formula).
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
 -/
 
 @[expose] public section
@@ -36,19 +38,6 @@ private theorem map_three_factors
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Expand the scalar map on a raw module pullback, retaining all module factors.
-Source: Stacks Project, Tags 03FD and 03Q8, raw-map expansion.
-(blueprint: lem-sbc-raw-module-scalar-hom-composite-formula).
-
-Proof: Evaluate rawModuleAbelianHomMap as its defining additive composite:
-derived scalar forgetting on Hom groups, right composition by its coefficient
-morphism b, and left composition by its source morphism c. The definitions of
-scalarCoefficientFactor and scalarSourceFactor identify b and c with the displayed
-factors. Apply rawModuleScalar_pullback_module_formula to the raw pullback input,
-inside the derived scalar-forgetting map. This replaces that input with the
-module source factor, the derived module inverse image of z, and the module
-coefficient factor. Distribute scalar forgetting by Functor.map_comp,
-but do not use either scalar source coherence or inverse-comparison naturality.
-The equality holds for zero classes, q = 0, identity f, and zero coefficients.
 -/
 theorem rawModuleScalar_hom_composite_formula
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)

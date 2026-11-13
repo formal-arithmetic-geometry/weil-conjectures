@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 
 /-! # Cancelling the restricted homotopy counit comparisons
 
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-restricted-counit-cancellation).
+## References
+
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -54,25 +57,7 @@ private theorem cancel_restriction_counit
 
 set_option linter.unusedVariables false in
 -- Preserve the existing unused F₀ and a bindings in the public statement.
-/-- A separate step of the open counit factorization.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-restricted-counit-cancellation).
-
-Proof: Put P = F_h(I), let v be the homotopy tensor adjunction counit at I,
- and write t for the homotopy tensor restriction isomorphism. Apply
- open_pinned_counit_homotopy_restriction to P and the restricted square. Its identity
- input contributes only an identity map, so its left side is S(Qh(P)) followed by
- rX(epsilon_f(P)), the target restriction factorization at the homotopy pullback of
- P, and Qh(t.hom(P)). Its right side is Lf0 of the source restriction factorization
- followed by epsilon_f0(rY_h(P)). Precompose both sides with Lf0 of the inverse
- source restriction factorization, and postcompose both sides with Qh(t.inv(P)).
- Functoriality and the inverse identities cancel the source factorization and the
- pair t.hom, t.inv. Next postcompose with Qh(rX_h(v)). Naturality of the target
- restriction factorization at v identifies its composite with this arrow with
- rX(Qh(v)) followed by the restriction factorization at I. Finally combine the two
- Qh images on the right by functoriality. This gives precisely the asserted
- equality. No derived unit or derived-adjunction counit occurs. All cancellations
- are of isomorphisms, so empty opens and zero complexes require no exceptions. -/
+/-- A separate step of the open counit factorization. -/
 theorem singleComplexOpen_restricted_counit_cancellation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

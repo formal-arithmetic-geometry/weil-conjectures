@@ -8,7 +8,10 @@ public import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 import all WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Transport of strict tensor cone towers
-Source: Stacks 06YP (auxiliary; not a blueprint node).
+
+## References
+
+* [Stacks Project, Tag 06YP](https://stacks.math.columbia.edu/tag/06YP)
 -/
 
 @[expose] public noncomputable section
@@ -56,12 +59,7 @@ private def coneTowerIso
     simp only [Iso.inv_hom_id_app, CochainComplex.mappingCone.map_id]
     rfl
 
-/-- A tensor square of strict towers induces an isomorphism of their cone towers.
-Source: Stacks 06YP (auxiliary; not a blueprint node).
-Proof: transpose to towers of complexes. The additive evaluation functors identify
-transposition of a cone with its levelwise cone. The signed tensor-cone comparison
-is natural in every transition. Apply the cone map to the given square and to
-its inverse square, and compose the three tower isomorphisms. -/
+/-- A tensor square of strict towers induces an isomorphism of their cone towers. -/
 theorem tensorConeTowerIso
     {B : Type*} [Category B] [Abelian B]
     (F : B ⥤ B ⥤ B) [F.Additive] [∀ X : B, (F.obj X).Additive]

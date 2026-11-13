@@ -18,8 +18,11 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationCanonicalBaseChangeC
 
 /-! # Stalk of a direct image over the strict henselization
 
-Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 09YQ](https://stacks.math.columbia.edu/tag/09YQ)
+* [Stacks Project, Tag 09YU](https://stacks.math.columbia.edu/tag/09YU)
 -/
 
 @[expose] public section
@@ -32,11 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The compatibility needed to map the base-changed strict henselization to V ×_Y X, for a
 representative affine pointed neighbourhood `j` with leg `c_V` (the limit leg followed by
-`Spec Γ(V, ⊤) ≅ V`).
-Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
-Proof: by `exists_strictHenselizationAffineStructuralMap`, `c_V` followed by `V ⟶ Y` is
-`strictLocalizationToBase y`; then use `pullback.condition`. -/
+`Spec Γ(V, ⊤) ≅ V`). -/
 theorem strictHenselizationBaseChange_condition
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -54,9 +53,7 @@ theorem strictHenselizationBaseChange_condition
   exact pullback.condition
 
 /-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine
-pointed neighbourhood `j`.
-Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). -/
+pointed neighbourhood `j`. -/
 noncomputable def strictHenselizationBaseChangeMap
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -73,9 +70,7 @@ noncomputable def strictHenselizationBaseChangeMap
     (pullback.snd (strictLocalizationToBase y) f)
     (strictHenselizationBaseChange_condition f y j)
 
-/-- The site morphism σ_V from the final object to the iterated fibre product.
-Source: Stacks Project, Tag 03Q9, canonical section restriction
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). -/
+/-- The site morphism σ_V from the final object to the iterated fibre product. -/
 noncomputable def strictHenselizationSectionMap
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -99,32 +94,7 @@ open Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Every direct-image germ has an affine representative, and the canonical comparison
 with sections on the strict henselization pullback is the unique map with the unit and
-restriction formula, and is bijective.
-Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
-
-Proof:
-1. Use `def-weil-pbc-strict-henselization-limit` and `def-pc-fibre-product` for the
-   neighbourhood and base-changed limit diagrams. By
-   `lem-weil-pbc-qcqs-morphism-permanence`, the base changes are qcqs; their transitions
-   are affine. Apply `lem-weil-pbc-filtered-category-directed-cofinal` to the opposite
-   of the small neighbourhood category. The same directed cofinal family computes
-   both section colimits and the inverse limits, using
-   `lem-weil-pbc-limit-affine-transition` and `lem-weil-pbc-spec-small-colimit-limit`.
-2. Apply `lem-weil-pbc-sets-etale-section-continuity` to this system and the pullback
-   of H to a fixed stage. The composition isomorphisms of
-   `lem-weil-pbc-sets-etale-inverse-image-composition-units` identify the resulting
-   limit sheaf with p⁻¹H. By `lem-weil-pbc-sets-etale-inverse-image-restriction`,
-   sections at each stage identify with H(V ×_Y X), and the units and composition
-   equations identify the transition maps with restrictions of f_*H.
-3. The component of the section colimit comparison at a representative V is
-   restriction along σ_V of the unit image p*s. The unit equations in
-   `lem-weil-pbc-sets-etale-inverse-image-composition-units` give compatibility under
-   pointed refinement.
-4. By `def-weil-pbc-geometric-stalks` and
-   `lemma-weil-pbc-affine-neighbourhood-cofinal`, the affine section colimit is the
-   geometric stalk. Every element therefore has an affine representative. The
-   colimit component formula uniquely determines Θ; continuity makes it bijective. -/
+restriction formula, and is bijective. -/
 theorem sets_pushforward_stalk_strictHenselization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (H : Sheaf X.smallEtaleTopology (Type (v + 1)))

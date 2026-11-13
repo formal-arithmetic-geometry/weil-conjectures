@@ -20,12 +20,15 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # The single-complex stalkwise base-change condition
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8, and Tag 0DJ9
-(blueprint: def-pc-single-complex-base-change-stalk-condition).
-
 K-flat coordinates express the canonical tensor-cohomology comparison, followed by
 the given derived map. Every choice is tied to the actual stalk maps or to a
 localization equation. Invertibility is independent of representative coordinates.
+
+## References
+
+* [Stacks Project, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -42,16 +45,12 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{uSC},
   HasDerivedCategory.{wSC} (SheafOfModules.{uSC} (moduleRings Y.toRingedSpace))]
 
-/-- Additivity of termwise tensor pullback, from the existing composition construction.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- Additivity of termwise tensor pullback, from the existing composition construction. -/
 instance tensorPullbackAdditive {Y Z : Scheme.{uSC}} (k : Y ⟶ Z) :
     (Scheme.Modules.tensorPullback k).Additive :=
   (Classical.choose exists_derivedPullbackComposition) k
 
-/-- The universal counit of the recorded derived tensor pullback, on homotopy categories.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The universal counit of the recorded derived tensor pullback, on homotopy categories. -/
 def counit {Y Z : Scheme.{uSC}} (k : Y ⟶ Z) :
     DerivedCategory.Qh (C := SheafOfModules.{uSC} (moduleRings Z.toRingedSpace)) ⋙
       derivedPullback k ⟶
@@ -63,39 +62,25 @@ variable {X X' S S' : Scheme.{uSC}}
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
-/-- The base stalk ring O_{S,f(g' z)}.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The base stalk ring O_{S,f(g' z)}. -/
 abbrev R (z : X') := S.presheaf.stalk (f (g' z))
-/-- The original scheme stalk ring O_{X,g' z}.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The original scheme stalk ring O_{X,g' z}. -/
 abbrev A (z : X') := X.presheaf.stalk (g' z)
-/-- The new base stalk ring O_{S',f' z}.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The new base stalk ring O_{S',f' z}. -/
 abbrev B (z : X') := S'.presheaf.stalk (f' z)
-/-- The base-changed scheme stalk ring O_{X',z}.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The base-changed scheme stalk ring O_{X',z}. -/
 abbrev C (z : X') := X'.presheaf.stalk z
 
-/-- The R-algebra structure on A is the stalk map of f.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The R-algebra structure on A is the stalk map of f. -/
 abbrev leftAlgebra (z : X') : Algebra (R f g' z) (A g' z) :=
   (f.stalkMap (g' z)).hom.toAlgebra
 
-/-- The R-algebra structure on B transports the stalk map of g along the square.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The R-algebra structure on B transports the stalk map of g along the square. -/
 abbrev rightAlgebra (z : X') : Algebra (R f g' z) (B f' z) :=
   ((S.presheaf.stalkCongr (.of_eq (congrArg (fun k : X' ⟶ S => k z) sq.w))).hom ≫
     g.stalkMap (f' z)).hom.toAlgebra
 
-/-- The two stalk projection maps form compatible algebra maps over the base stalk.
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-single-complex-stalk-algebra-maps). -/
+/-- The two stalk projection maps form compatible algebra maps over the base stalk. -/
 theorem exists_stalk_algebra_maps (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z
@@ -123,9 +108,7 @@ theorem exists_stalk_algebra_maps (z : X') :
       commutes' := fun a => (congrArg (fun k => k.hom a) hsq).symm }
   exact ⟨l, r, fun _ => rfl, fun _ => rfl, fun _ _ => Commute.all _ _⟩
 
-/-- Existence of the tensor-to-stalk map with its two specified restrictions.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- Existence of the tensor-to-stalk map with its two specified restrictions. -/
 theorem exists_tensorMap (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z
@@ -145,9 +128,7 @@ theorem exists_tensorMap (z : X') :
   · ext y
     simp [a, hr]
 
-/-- The canonical tensor-to-stalk map, chosen from its universal property.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The canonical tensor-to-stalk map, chosen from its universal property. -/
 def tensorMap (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z
@@ -156,9 +137,7 @@ def tensorMap (z : X') :
   letI := rightAlgebra f f' g g' sq z
   Classical.choose (exists_tensorMap f f' g g' sq z)
 
-/-- The original representative's stalk complex, using the shared module stalk functor.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The original representative's stalk complex, using the shared module stalk functor. -/
 abbrev stalkComplex (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
   ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).mapHomologicalComplex
@@ -166,9 +145,7 @@ abbrev stalkComplex (z : X')
 
 /-- The existing base-derived tensor cohomology model at a point of this square.
 The R-, A-, B- and tensor-algebra structures are the actual scheme stalk maps;
-the model fixes the localized comparison by its derived counit equations.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+the model fixes the localized comparison by its derived counit equations. -/
 def cohomologyModel (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
   letI := leftAlgebra f g' z
@@ -179,9 +156,7 @@ def cohomologyModel (z : X')
   ModuleCat.baseDerivedTensorCohomologyModel (R f g' z) (A g' z) (B f' z)
     (stalkComplex g' z P) (C z)
 
-/-- Ordinary scalar extension of the stalk complex along A -> A tensor-over-R B -> C.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- Ordinary scalar extension of the stalk complex along A -> A tensor-over-R B -> C. -/
 def tensorComplex (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
   letI := leftAlgebra f g' z
@@ -190,13 +165,7 @@ def tensorComplex (z : X')
     (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomologicalComplex
       (.up ℤ)).obj (stalkComplex g' z P)
 
-/-- Existence of the canonical degreewise pullback-stalk identification.
-Proof: the tensorMap restriction equation identifies its A-to-C map with the
-stalk map of g'. Apply the existing natural pullback-stalk isomorphism in every
-degree. Its naturality for each differential shows that these components give a
-chain isomorphism, whose components are precisely the displayed maps.
-Source: Stacks Project, Tag 0098 and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- Existence of the canonical degreewise pullback-stalk identification. -/
 theorem exists_tensorStalkIso (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :
     letI := leftAlgebra f g' z
@@ -248,9 +217,7 @@ theorem exists_tensorStalkIso (z : X')
     exact ⟨(NatIso.mapHomologicalComplex e.symm (.up ℤ)).app P, fun _ => by simp [e]⟩
   exact h _ (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1
 
-/-- The canonical pullback-stalk chain isomorphism specified degreewise above.
-Source: Stacks Project, Tag 0098 and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- The canonical pullback-stalk chain isomorphism specified degreewise above. -/
 def tensorStalkIso (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :
     tensorComplex f f' g g' sq z P ≅
@@ -260,9 +227,7 @@ def tensorStalkIso (z : X')
 
 /-- K-flat coordinates for the given derived morphism. P represents K, N represents
 K', and t represents phi through the specified left-derived counit and the two
-representative isomorphisms. No arbitrary stalk comparison is included.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+representative isomorphisms. No arbitrary stalk comparison is included. -/
 structure Coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') where
   P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ
@@ -320,16 +285,7 @@ private theorem derived_map_surjective
   simp [e]
 
 -- Elaborating the two sheaf resolutions and their localization maps needs this budget.
-/-- Every derived morphism has these K-flat coordinates.
-Proof: choose a complex representing K and a K-flat resolution P (lem-pc-kflat-resolution).
-Choose a K-injective representative N of K' (prop-pur-kinjective-resolutions-exist).
-The universal left-derived counit computes pullback on P, so is invertible there.
-Compose its inverse with the pullback of e and phi, and then e' inverse. Since N
-is K-injective, the localization Hom bijection lifts this derived morphism to a
-homotopy class of chain maps from termwise pullback of P to N. Choose a chain-map
-representative t. The localization equation is exactly the represents field.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+/-- Every derived morphism has these K-flat coordinates. -/
 theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') : Nonempty (Coordinates g' K K' φ) := by
   obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution
@@ -364,9 +320,7 @@ It is the existing localized tensor comparison followed by the canonical
 pullback-stalk identification and the stalk of c.t. The target H^i(N_z) identifies
 canonically with H^i(K')_z through c.e' and exactness of stalks. Postcomposing by
 that identification preserves and reflects invertibility. The represents equation
-of c ensures this is the map induced by the given phi, rather than a free comparison.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+of c ensures this is the map induced by the given phi, rather than a free comparison. -/
 def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
     {φ : (derivedPullback g').obj K ⟶ K'} (c : Coordinates g' K K' φ) (z : X') (i : ℤ) :=
   letI := leftAlgebra f g' z
@@ -383,9 +337,7 @@ def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'
 /-- The single-complex stalk condition (equation-bc of Tag 0DJ8 an isomorphism for
 every z and i). Invertibility of the comparison does not depend on the K-flat
 coordinates, so it is required for all of them; they exist by `nonempty_coordinates`,
-so the condition is not vacuous. No coordinate system is chosen.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
+so the condition is not vacuous. No coordinate system is chosen. -/
 def StalkCondition (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') : Prop :=
   ∀ (c : Coordinates g' K K' φ) (z : X') (i : ℤ),

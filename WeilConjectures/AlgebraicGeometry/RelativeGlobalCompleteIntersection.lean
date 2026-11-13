@@ -14,8 +14,9 @@ public import Mathlib.Topology.KrullDimension
 /-!
 # Relative global complete intersections
 
-Source: Stacks Project, Algebra, Definition Tag 00SP
-(blueprint: def-weil-pbc-relative-global-complete-intersection).
+## References
+
+* [Stacks Project, Tag 00SP](https://stacks.math.columbia.edu/tag/00SP)
 -/
 
 @[expose] public section
@@ -25,8 +26,6 @@ namespace Algebra
 /-- A ring map is a relative global complete intersection when it has a finite
 polynomial presentation whose nonempty fibres all have the expected dimension.
 If `c > n`, this forces every fibre to be empty.
-Source: Stacks Project, Algebra, Definition Tag 00SP
-(blueprint: def-weil-pbc-relative-global-complete-intersection).
 -/
 def IsRelativeGlobalCompleteIntersection {R S : Type*} [CommRing R] [CommRing S]
     (f : R →+* S) : Prop :=

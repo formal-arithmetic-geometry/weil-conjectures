@@ -12,7 +12,7 @@ public import WeilConjectures.RingTheory.TrdegAlgebraicAdjoin
 /-!
 # Transcendence degrees of residue field extensions
 
-For a morphism of schemes `f : X ⟶ Y` and a point `x : X`, `f.trdegAt x` is the transcendence
+For a morphism of schemes `f: X ⟶ Y` and a point `x: X`, `f.trdegAt x` is the transcendence
 degree of the residue field extension `κ(x) / κ(f x)`.
 
 * `AlgebraicGeometry.Scheme.Hom.trdegAt_comp`: it is additive along compositions.

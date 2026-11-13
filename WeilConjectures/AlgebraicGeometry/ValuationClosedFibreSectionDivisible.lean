@@ -20,9 +20,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Dividing a section which vanishes on the closed fibre
 
-Source: Stacks Project, More on Morphisms, Tag 0EX8, general-case proof.
-(blueprint: new-valuation-closed-fibre-section-divisible)
-
 Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
 is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient
 fibre with the scheme-theoretic closed fibre. Uniqueness of adjoints compares the
@@ -32,6 +29,10 @@ kernel theorem identifies multiplication by pi with the restriction kernel.
 Represent s by O_X -> L, lift this morphism through the kernel, and evaluate the
 lift at 1 to obtain t. Evaluating the kernel factorization gives pi t = s. The
 integrality hypothesis is retained in the signature but is not used in this proof.
+
+## References
+
+* [Stacks Project, Tag 0EX8](https://stacks.math.columbia.edu/tag/0EX8)
 -/
 
 @[expose] public section
@@ -166,18 +167,6 @@ private theorem closed_fibre_unit_zero_iff (A : Type u) [CommRing A] [IsDomain A
 set_option linter.unusedVariables false in
 /-- A section vanishing on the closed fibre is divisible by a maximal-ideal element,
 assuming the closed fibre is integral.
-Source: Stacks Project, More on Morphisms, Tag 0EX8.
-(blueprint: new-valuation-closed-fibre-section-divisible)
-
-Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
-is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient
-fibre with the scheme-theoretic closed fibre. Uniqueness of adjoints compares the
-units by isomorphisms, so they have the same kernel. Apply the closed-fibre
-vanishing lemma to get a nonzero pi in the maximal ideal. The principal quotient
-kernel theorem identifies multiplication by pi with the restriction kernel.
-Represent s by O_X -> L, lift this morphism through the kernel, and evaluate the
-lift at 1 to obtain t. Evaluating the kernel factorization gives pi t = s. The
-integrality hypothesis is retained in the signature but is not used in this proof.
 -/
 theorem closed_fibre_section_is_divisible
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]

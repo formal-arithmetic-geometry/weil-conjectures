@@ -16,6 +16,11 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Algebraic presentation of pro-étale internal inverse image
+
+## References
+
+* [Stacks Project, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks Project, Tag 03D2](https://stacks.math.columbia.edu/tag/03D2)
 -/
 
 @[expose] public section
@@ -26,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option backward.isDefEq.respectTransparency false
 
-/- The concrete inverse image and its comparison after forgetting abelian groups. -/
+/- The concrete inverse image and its comparison after forgetting abelian groups.-/
 private noncomputable def setPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Sheaf (Scheme.ProEt.topology Y) (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology X) (Type (u + 1)) :=
@@ -61,7 +66,7 @@ private noncomputable def pullbackForgetIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (presheafToSheaf (Scheme.ProEt.topology X) (Type (u + 1))))
 
 
-/- Concrete coefficient and module comparisons, including the universe lifts. -/
+/- Concrete coefficient and module comparisons, including the universe lifts.-/
 private noncomputable def sheafUliftIso
     {C : Type*} [Category C] (J : GrothendieckTopology C)
     {A : Type*} [Category A] (G : A ⥤ Type (u + 1))
@@ -201,7 +206,7 @@ private theorem sectionModulePullbackIso_inv_apply {X Y : Scheme.{u}} (f : X ⟶
   simp only [Functor.map_comp, Category.assoc]
   rfl
 
-/- Compatibility with the two adjunction units. -/
+/- Compatibility with the two adjunction units.-/
 private theorem setPullback_unit_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : Sheaf (Scheme.ProEt.topology Y) (Type (u + 1))) :
     let U := MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
@@ -285,7 +290,7 @@ private theorem pullbackForgetIso_unit_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
   ext W x
   rfl
 
-/- The additive operation graphs follow by transposition through the set adjunction. -/
+/- The additive operation graphs follow by transposition through the set adjunction.-/
 private noncomputable def sumSections {X : Scheme.{u}}
     {T : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))}
     (A : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -378,7 +383,7 @@ private theorem pullback_zero_graph {X Y : Scheme.{u}} (f : X ⟶ Y)
       (a.hom.app W x) = (0 : ((f)^*[Ab.{u + 1}].obj A).obj.obj (U.op.obj W))
   rw [h W x, map_zero]
 
-/- Pointwise ring and action formulas for pushforward and its adjunction unit. -/
+/- Pointwise ring and action formulas for pushforward and its adjunction unit.-/
 private theorem section_mul {X : Scheme.{u}}
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
     (W : X.ProEtᵒᵖ) (a b : S.obj.obj W) :
@@ -652,7 +657,7 @@ private theorem sectionRingPullbackIso_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U.op.obj W) x) hn
   exact congrArg (fun x ↦ ((asIso ρ).inv.hom.app (U.op.obj W)) x) (hn'.symm.trans hu)
 
-/- Ring operation graphs, proved by transposition through the set adjunction. -/
+/- Ring operation graphs, proved by transposition through the set adjunction.-/
 private noncomputable def ringMulSections {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (T : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))
@@ -922,36 +927,7 @@ private theorem sectionRingPullback_nat_graph {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 
 /-- The internal inverse image has the algebraic operations transported by the
-inverse image of set sheaves. Source: Stacks Project, Tags 00YV and 03D2.
-Proof: express both set and abelian inverse image as sheafification of the
-left Kan extension along base change. The comma categories are filtered, and
-the abelian forgetful functor preserves their colimits and sheafification.
-Compose the resulting comparison with the inverse of rho and the equal-universe
-ULift isomorphisms to obtain the ring comparison. Use the section-equivalence
-counit to obtain the natural module comparison. These constructions and their
-compatibility with the adjunction unit are proved by the private helpers above.
-The helpers pullback_add_graph and pullback_zero_graph also prove preservation
-of addition and zero before coefficient and module-equivalence transport.
-The helpers pushforward_section_mul, pushforward_section_one and
-pushforward_section_smul identify the pointwise algebraic operations under
-pushforward. The concrete ring homomorphism inverseImageSectionRingUnit
-combines the monoidal adjunction unit with the inverse coefficient map.
-The lemma sectionRingPullbackIso_unit identifies it with the transpose of the
-underlying ring comparison. The helpers sectionRingPullback_add_graph,
-sectionRingPullback_mul_graph and sectionRingPullback_nat_graph prove the ring
-operation graph equations, with zero and one as the natural-constant cases.
-For each operation graph, form its two maps from the inverse image of the test
-sheaf to the underlying target sheaf. Transpose through the set-sheaf adjunction.
-Unit compatibility identifies the transposed maps with the source maps followed
-by the abelian unit and the inverse coefficient isomorphism. The additive unit
-preserves addition and zero. Its monoid-homomorphism property preserves
-multiplication and one, using the pointwise tensor and unit formulas for
-pushforward. The lifted module-adjunction unit preserves scalar multiplication;
-compose with the linear section-equivalence counit. Thus the source graph
-identity implies equality of the transposes and hence of the target maps.
-Evaluating those maps gives all seven graph fields. Choose the constructed
-module functor itself, with the identity comparison isomorphism.
-(auxiliary; not a blueprint node) -/
+inverse image of set sheaves. -/
 theorem exists_sectionModuleAlgebraicInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]

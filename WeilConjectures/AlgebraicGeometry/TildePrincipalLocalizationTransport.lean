@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-!
 # Principal localization of tilde sections transported by an affine isomorphism
 
-Source: Stacks Project, Schemes, Lemma 01HV (2), (4), (5).
-(blueprint: lem-weil-pbc-tilde-principal-localization-transport)
+## References
+
+* [Stacks Project, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
 -/
 
 @[expose] public section
@@ -112,23 +113,7 @@ private theorem tildeLocalization_smul
 
 /-- Transport the global and principal-open section identifications of tilde along
 an affine isomorphism, preserving the section-ring action and restriction of
-whole-chart sections.
-
-Source: Stacks Project, Schemes, Lemma 01HV (2), (4), (5).
-(blueprint: lem-weil-pbc-tilde-principal-localization-transport)
-
-Proof:
-For the whole scheme compose restrictAppIso with the inverse of tilde.isoTop.
-For D(r), compose restrictAppIso with the inverse of the localization equivalence
-induced by tilde.toOpen. The image of the inverse image of D(r) under the
-isomorphism is D(r). The section-ring equivalence t is the inverse of the
-canonical localization equivalence on Spec R, composed with the inverse of
-appIso. It sends every pulled-back constant x to x/1. Scalar compatibility
-follows from smul_restrictAppIso_hom and the localized scalar action on tilde;
-linearity over R extends to R_r because powers of r act invertibly.
-The normalization on whole-scheme restrictions follows from toOpen_res and
-the inverse laws of isoTop. If r=0 all principal-open objects are zero, and
-if r is a unit the equivalences are the global-section equivalences. -/
+whole-chart sections. -/
 theorem tilde_principalLocalization_transport
     (R : CommRingCat.{u}) (N : ModuleCat.{u} R)
     (X : Scheme.{u}) (e : X ≅ Spec R) :

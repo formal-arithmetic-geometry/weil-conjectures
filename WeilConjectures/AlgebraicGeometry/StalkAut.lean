@@ -18,7 +18,7 @@ local ring `𝒪_{X, x}` (`AlgebraicGeometry.Scheme.stalkAut`), compatible with 
 maps between fixed points and with `Spec 𝒪_{X, x} ⟶ X`. For an integral scheme the generic point
 is fixed, so `E` induces an automorphism `e` of the function field `k(X)`, and this automorphism
 extends to every separable closure `Ω` of `k(X)`: there is an automorphism `φ` of `Ω` with
-`Spec φ ≫ η̄ = η̄ ≫ E` for the generic geometric point `η̄ : Spec Ω ⟶ X`
+`Spec φ ≫ η̄ = η̄ ≫ E` for the generic geometric point `η̄: Spec Ω ⟶ X`
 (`AlgebraicGeometry.Scheme.exists_ringEquiv_separableClosure`).
 -/
 
@@ -127,7 +127,7 @@ variable [IsIntegral X]
 /-- **Lifting an automorphism to the separable closure of the function field.** An automorphism
 `E` of an integral scheme `X` lifts to an automorphism `φ` of a separable closure `Ω` of the
 function field: `φ` restricts to the automorphism of `k(X)` induced by `E`, and
-`Spec φ ≫ η̄ = η̄ ≫ E` for the generic geometric point `η̄ : Spec Ω ⟶ X`. -/
+`Spec φ ≫ η̄ = η̄ ≫ E` for the generic geometric point `η̄: Spec Ω ⟶ X`. -/
 theorem exists_ringEquiv_separableClosure (Ω : Type u) [Field Ω] [Algebra X.functionField Ω]
     [IsSepClosure X.functionField Ω] :
     ∃ φ : Ω ≃+* Ω, (∀ f, φ (algebraMap X.functionField Ω f) =

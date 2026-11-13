@@ -17,10 +17,8 @@ noncomputable section
 set_option autoImplicit false
 
 /-- Adjacent compatibility of termwise pushforward identifications assembles to an
-isomorphism of inverse systems.  The construction uses `NatTrans.ofOpSequence` and
-its componentwise inverse identities.
-Source: Stacks, Remark 088F and equation 0880.
-(blueprint: lem-weil-pbc-thickening-system-pushforward-lifting-assembly). -/
+isomorphism of inverse systems. The construction uses `NatTrans.ofOpSequence` and
+its componentwise inverse identities. -/
 theorem thickeningSystemPushforward_assemble
     {X : Scheme.{v}} [IsNoetherian X] {T : ℕ → Scheme.{v}}
     {i : ∀ n, T n ⟶ T (n + 1)}

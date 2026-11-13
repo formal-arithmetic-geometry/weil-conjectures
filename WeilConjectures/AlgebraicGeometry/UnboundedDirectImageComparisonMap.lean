@@ -47,7 +47,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 /-! # The canonical unbounded direct-image mate
 
 The constructions are reexported by `UnboundedDirectImageComparison`.
-Source: blueprint `sk-prop-pe-unbounded-classical-direct-image.md`.
 -/
 
 @[expose] public section
@@ -56,10 +55,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
-/-- Apply the exact inverse images termwise and localize the specified comparison square.
-Source: blueprint, sk-prop-pe-unbounded-classical-direct-image.md; the inverse-image
-comparison is sk-thm-pe-direct-image-comparison
-(auxiliary; not a blueprint node). -/
+/-- Apply the exact inverse images termwise and localize the specified comparison square. -/
 noncomputable def unboundedDirectImagePullbackIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ⋙
@@ -77,9 +73,7 @@ noncomputable def unboundedDirectImagePullbackIso
 
 /-- The specified unbounded comparison: transpose the pullback-square identification
 followed by the etale derived counit under the pro-etale derived adjunction.
-All direct images are total right derived functors on K-injective resolutions.
-Source: blueprint, sk-prop-pe-unbounded-classical-direct-image.md, displayed mate
-(auxiliary; not a blueprint node). -/
+All direct images are total right derived functors on K-injective resolutions. -/
 noncomputable def unboundedDirectImageComparisonMap
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (g : X ⟶ Y)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :

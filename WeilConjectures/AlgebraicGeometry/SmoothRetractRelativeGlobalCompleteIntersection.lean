@@ -19,9 +19,11 @@ import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 /-!
 # Smooth retract by a relative global complete intersection
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG (lemma-syntomic-complete-intersection),
-line 567 and proof lines 580--588 (blueprint:
-lem-weil-pbc-smooth-retract-relative-global-complete-intersection).
+## References
+
+* [Stacks Project, Tag 07CG](https://stacks.math.columbia.edu/tag/07CG)
+* [Stacks Project, Tag 07CF](https://stacks.math.columbia.edu/tag/07CF)
+* [Stacks Project, Tag 07CH](https://stacks.math.columbia.edu/tag/07CH)
 -/
 
 @[expose] public section
@@ -205,29 +207,6 @@ private theorem smooth_conormal_basis_fibre_dimension
   simp only [(hpoint _).2, ciSup_const]
 
 /-- A smooth algebra is a retract of a relative global complete intersection that is smooth over it.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG
-(blueprint: lem-weil-pbc-smooth-retract-relative-global-complete-intersection).
-
-Proof:
-1. Apply lem-weil-pbc-improve-presentation-smooth-conormal-free to obtain a smooth
-   `A`-algebra `C₀` with an `A`-algebra retraction and a polynomial presentation with free
-   conormal module. Composition of smooth maps makes `C₀` smooth, hence finitely presented,
-   over `R` (lem-weil-pbc-smooth-ring-map-base-change-composition).
-2. Apply lem-weil-pbc-conormal-free-presentation-basis (07CF) to get `n,c,f` and an
-   `R`-algebra isomorphism `ψ : R[x]/(f) ≃ C₀` with equation classes a conormal basis.
-   Transport smoothness over `R` across `ψ`.
-3. Set `σ = ψ⁻¹ ∘ (A → C₀)` and `π = ρ ∘ ψ`. Cancellation gives `π ∘ σ = id`.
-   Give the quotient its `A`-algebra structure through `σ`; then `ψ` is an `A`-algebra
-   isomorphism, so it transports smoothness over `A` as well.
-4. Apply lem-weil-pbc-smooth-quotient-fibre-differential-rank to the quotient and its
-   conormal basis: for each prime of a fibre, `c ≤ n` and the differential fibre has
-   rank `n - c`. This remaining rank calculation is stated in its own module.
-5. For a prime of `R`, the fibre is smooth over its residue field by base change.
-   Lemma lem-weil-pbc-smooth-over-field-dimension-differentials identifies the dimension
-   at every point of this fibre with that rank.
-6. For a nonempty fibre, lem-weil-pbc-dimension-supremum-local-dimensions identifies
-   its dimension with the supremum of these constant point dimensions, hence `n - c`.
-   This is the specified relative global complete-intersection condition.
 -/
 theorem smooth_retract_relative_global_complete_intersection
     (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [Smooth R A] :

@@ -13,10 +13,6 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyKFlatResolution
 /-!
 # The derived supported exterior product
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
-
 The supported exterior product κ is the unique morphism normalized on K-flat representatives
 and injective support resolutions by `IsResolutionSupportedExteriorProduct`.
 -/
@@ -34,18 +30,7 @@ namespace AlgebraicGeometry.Etale
 section Derived
 
 /-- The direct supported-section pairing has a unique derived extension with its
-K-flat/injective-resolution normalization. Source: the nested blueprint unit cited
-above (blueprint: def-pur-supported-exterior-product).
-Proof: choose K-flat representatives of the two inputs, resolve supported sections by
-injectives, and totalize the ordinary pairing. The kernel vanishing on the two pulled-back
-complements makes its target the product-support complex. The usual resolution comparison
-maps identify the resulting morphisms for different resolutions. To check independence
-and uniqueness one can use flat support-acyclic resolutions: these are obtained by the
-flasque resolution of flat sheaves, with finite truncation using finite cohomological
-dimension on the separated finite-type schemes. Comparison with injective support
-resolutions makes the two input units invertible there. The normalization therefore
-determines the map. Its comparison on arbitrary K-flat representatives is the same
-chain-level pairing followed by the injective-resolution units. -/
+K-flat/injective-resolution normalization. -/
 theorem existsUnique_resolutionSupportedExteriorProduct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsAlgClosed k]
@@ -86,10 +71,7 @@ theorem existsUnique_resolutionSupportedExteriorProduct
 
 /-- The supported exterior product κ, defined anew by the unique derived extension
 of pullback and tensor of supported sections, normalized on K-flat representatives
-and injective support resolutions. Source: literature/blueprint/latest/blueprint/
-part-duality-trace-formula/sec-smooth-purity/sec-the-trace-map-of-affine-space/
-sk-prop-an/def-pur-supported-exterior-product.md
-(blueprint: def-pur-supported-exterior-product). -/
+and injective support resolutions. -/
 noncomputable def resolutionSupportedExteriorProduct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsAlgClosed k]
@@ -108,9 +90,7 @@ noncomputable def resolutionSupportedExteriorProduct
           (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj) :=
   (existsUnique_resolutionSupportedExteriorProduct A k f g i j K L hF).exists.choose
 
-/-- The representative characterization of κ. Source: the nested blueprint unit cited
-above (blueprint: def-pur-supported-exterior-product).
-Proof: take the normalized element of the unique-existence theorem used in the definition. -/
+/-- The representative characterization of κ. -/
 theorem resolutionSupportedExteriorProduct_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsAlgClosed k]
@@ -127,14 +107,7 @@ theorem resolutionSupportedExteriorProduct_normalization
   exact (existsUnique_resolutionSupportedExteriorProduct A k f g i j K L hF).exists.choose_spec
 
 /-- Forgetting the output support after κ is the ordinary exterior product after
-forgetting both input supports. Source: the nested blueprint unit cited above
-(blueprint: def-pur-supported-exterior-product).
-Proof: the ordinary kernel lift followed by its inclusion is the pullback and tensor
-of sections. The same equality holds on every bidegree of the signed total complexes.
-Apply the K-flat tensor localization and the injective-resolution units to this identity.
-The support inclusions commute with these units by naturality of right derivation.
-The resulting ordinary pairing is the recorded canonical Künneth map. Comparison on
-support-acyclic resolutions gives the claimed identity for the derived objects. -/
+forgetting both input supports. -/
 theorem resolutionSupportedExteriorProduct_forgetSupport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsAlgClosed k]

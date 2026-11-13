@@ -11,26 +11,21 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Natural intermediate stalk tensor comparisons
-Source: Stacks Project, Tags 008H, 0098, 008B and 01BH. -/
+
+## References
+
+* [Stacks Project, Tag 008H](https://stacks.math.columbia.edu/tag/008H)
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
+* [Stacks Project, Tag 008B](https://stacks.math.columbia.edu/tag/008B)
+* [Stacks Project, Tag 01BH](https://stacks.math.columbia.edu/tag/01BH)
+-/
 
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory TensorProduct
 namespace AlgebraicGeometry
-/-- Natural stalk comparison after restricting the target to an open.
-Source: Stacks Project, Tags 008H, 0098 and 008B.
-(blueprint: new-e1-restricted-tensor-pullback-stalk)
-
-Proof: The restriction and tensor-pullback adjunctions identify restriction to V
-with tensor pullback along V.ι. The natural composition isomorphism identifies
-tensorPullback i followed by this restriction with tensorPullback (V.ι ≫ i).
-Whisker this comparison by the module stalk functor at z, and compose with
-exists_tensorPullback_stalk_iso for V.ι ≫ i. Rewrite the composite stalk map
-with Scheme.Hom.stalkMap_comp. Its component linear equivalences give β, and
-evaluating its naturality equation on x gives the asserted baseChange equality.
-No affine or flatness hypothesis is used. Zero modules and empty V cause no
-exception (there is no point z when V is empty). -/
+/-- Natural stalk comparison after restricting the target to an open. -/
 theorem exists_restricted_tensorPullback_stalk
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme) :
     let S := (Y.presheaf.stalk (i z.1) : Type u)

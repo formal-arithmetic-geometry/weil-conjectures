@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartTransfer
 
 /-! # A single quotient chart for an invertible section ring
 
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
 -/
 
 @[expose] public section
@@ -27,35 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A single positive-degree section gives a quotient morphism on its nonvanishing open.
-No compatibility with a second morphism is asserted.
-Source: Stacks Project, Constructions, Tags 01N8 (lemma-converse-construction),
-01NK (lemma-invertible-map-into-proj).
-(blueprint: lem-sc-section-ring-single-quotient-chart).
-
-Proof: On U, s is a free generator of L^{tensor d}. Its n-th tensor power
-trivializes L^{tensor nd}. Define the image of a/s^n in S_(s) to be the unique
-coefficient of the restriction of a in this basis. The localization equivalence
-relation says that two fractions become equal after multiplication by a power of s;
-cancelling the corresponding free generator shows that their coefficients agree.
-Additivity, multiplication and the unit follow from tensor multiplication and unique
-coefficients. The resulting ring map S_(s) -> Gamma(U,O_X), followed by the affine
-morphism correspondence and the basic-chart inclusion, defines g.
-
-To verify the formula for an arbitrary t of degree e > 0, cover U by opens on which
-L is free, with basis z. Write s = b z^d and t = c z^e. Here b is a unit.
-The local ring map sends a/s^n to its coefficient divided by b^n. The chart function
-t^d/s^e pulls back to c^d/b^e, so the inverse image of D_+(t) is exactly where c
-is a unit. Localizing there, a fraction xi/t^n maps to the coefficient of xi divided
-by c^n. Multiplication by the restricted t^n gives xi, which is the desired equation.
-These equations agree on changes of z and hence glue as equations of sections.
-For n = 0 this is the unit-degree coefficient map. On an empty U the section rings
-are zero rings and the morphism and equations are unique.
-
-The Lean reduction obtains the free-generator property from
-`nonvanishing_section_trivializes`, applies `exists_sectionRing_coefficient_hom`,
-and constructs the affine morphism using `ΓSpec.adjunction`. The adjunction identity
-verifies its induced ring map. Composing with `Proj.awayι` and applying
-`sectionRing_quotient_chart_transfer` gives all of the displayed equations. -/
+No compatibility with a second morphism is asserted. -/
 theorem exists_sectionRing_single_quotient_chart
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

@@ -16,8 +16,10 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The one-column finite free Hom calculation
 
-Source: Stacks Project, Tags 0A6H (2) and 08I5.
-(blueprint: lem-sc-single-supported-finite-free-hom-qc)
+## References
+
+* [Stacks Project, Tag 0A6H](https://stacks.math.columbia.edu/tag/0A6H)
+* [Stacks Project, Tag 08I5](https://stacks.math.columbia.edu/tag/08I5)
 -/
 
 @[expose] public section
@@ -55,19 +57,7 @@ private theorem qc_overEquiv_inverse (X : Scheme.{u}) (U : X.Opens)
     (U.sheafOfModulesEquivOverInverseUnit X.ringCatSheaf)
 
 set_option backward.isDefEq.respectTransparency true in
-/-- A one-column source gives shifts of finite sums of target cohomology.
-
-Source: Stacks Project, Tag 08I5, Hom double-complex calculation, and Tag 0A6H (2).
-Proof: the product defining Hom has zero factors except for the source degree k.
-The surviving factor is Hom(E^k,I^(k+n)); the source differential vanishes.
-Choose the finite-free identification of E^k and evaluate on its basis to identify
-this factor, naturally in the target, with r copies of I^(k+n). The differential
-is r copies of the target differential, so H^n is r copies of H^(k+n)(I).
-Finite sums commute with homology in the abelian category of module sheaves.
-Transport to the open subscheme by its exact localized-site equivalence, use finite
-sum closure of quasi-coherence there, and transport back. If r=0 all terms are zero;
-no boundedness of I is used.
-(blueprint: lem-sc-single-supported-finite-free-hom-qc). -/
+/-- A one-column source gives shifts of finite sums of target cohomology. -/
 theorem single_supported_finiteFree_hom_qc
     (X : Scheme.{u}) (U : X.Opens)
     (E I : CochainComplex

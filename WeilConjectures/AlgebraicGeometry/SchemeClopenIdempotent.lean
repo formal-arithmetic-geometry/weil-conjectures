@@ -12,14 +12,14 @@ import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 
 /-! # Clopen subsets and idempotent global functions of schemes
 
-Source: Stacks Project, Algebra, Lemma 10.21.3 (Tag 00EE,
-`lemma-disjoint-decomposition`), the affine case; the scheme case follows by the sheaf
-property, as in Schemes, Tag 01I5, proof of `lemma-disjoint-union-affines`.
-(blueprint: lem-weil-pbc-scheme-clopen-idempotent)
-
 ## Main statements
 
 * `scheme_clopen_idempotent`: the clopen correspondence and its pullback compatibility.
+
+## References
+
+* [Stacks Project, Tag 00EE](https://stacks.math.columbia.edu/tag/00EE)
+* [Stacks Project, Tag 01I5](https://stacks.math.columbia.edu/tag/01I5)
 -/
 
 @[expose] public section
@@ -32,27 +32,22 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- The locus where a global function has nonzero germ, used for the idempotent
-correspondence of Stacks Project, Algebra, Tag 00EE (`lemma-disjoint-decomposition`).
-(blueprint: lem-weil-pbc-scheme-clopen-idempotent) -/
+correspondence of Stacks Project, Algebra, Tag 00EE. -/
 def idempotentOpen {X : Scheme.{u}} (e : Γ(X, ⊤)) : Set X :=
   {x | X.presheaf.Γgerm x e ≠ 0}
 
-/-- (blueprint: lem-weil-pbc-scheme-clopen-idempotent) Let `X` be a scheme. For every
+/-- Let `X` be a scheme. For every
 idempotent global section `e`, the set of points where its germ is nonzero equals the
 locus where its germ is one and is clopen, with complementary locus for `1 - e`.
 Idempotents and clopen opens are bijective, with inverse given by the section restricting
 to one and zero on the two complementary opens. Pullback of an idempotent locus is
 its inverse image under a scheme morphism.
 
-Source: Stacks Project, Algebra, Tag 00EE (`lemma-disjoint-decomposition`), extended
-from affine schemes by the sheaf property (Schemes, Tag 01I5, proof).
-
 Proof, following the node's five steps:
 1. Germ maps are ring homomorphisms, so every germ of an idempotent is idempotent.
-   Stalks are local rings (`def-pc-scheme`); by
+   Stalks are local rings; by
    `lem-weil-pbc-local-ring-idempotent-zero-one`, these germs are zero or one.
-   Thus the nonzero-germ locus is the one-germ locus and the basic open of the section
-   (`lem-weil-pbc-basic-open-function`).
+   Thus the nonzero-germ locus is the one-germ locus and the basic open of the section.
 2. The basic open is open. The section `1 - e` is idempotent, and its germs are the
    complements of the germs of `e`. Its locus is exactly the complementary set,
    also open, proving closedness of the original locus.

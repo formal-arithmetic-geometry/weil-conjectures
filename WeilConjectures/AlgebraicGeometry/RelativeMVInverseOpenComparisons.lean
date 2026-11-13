@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVInverseOpenMate
 
 /-! # Inverse-image open comparisons with units, restrictions, and base change
 
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY.
+## References
+
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -26,34 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
 /-- Comparisons on individual inverse-image opens, compatible with their units,
-restrictions along one inclusion, and the pasted base-change map.
-
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories
-of Schemes, Tag 0DJ9, the open vertices of the induction diagram.
-(blueprint: lem-pc-relative-mv-inverse-open-comparisons).
-
-Proof: For each W use pullbackRestrictIsoRestrict g' W to identify the chosen
-pullback with the inverse-image open, preserving both projections. Derive this
-scheme isomorphism, and use left-adjoint uniqueness to identify exact restriction
-with pullback on the inverse-image open. Compose the resulting direct-image
-comparison with relativeMVImageComp for the projection to X' followed by f'.
-This constructs the entire family e, independently of the source object map.
-The left-adjoint uniqueness unit identity and the right-adjoint composition unit
-identity prove the first formula. For an inclusion W≤U, the projection-preserving
-scheme comparisons carry the inverse-image inclusion to relativeMVOpenLift:
-check its two projections and use pullback hom-ext. Transpose both restriction
-maps under the W adjunction. The counit identity for adjoint uniqueness and the
-canonical derived composition coherence identify the two transposes, proving
-the second formula. For the third formula expand mvBaseChangeOpenMap and each
-base-change map as the mate of the pulled-back counit. Substitute the counit of
-a composite adjunction. Naturality moves the object map to the last factor;
-the two triangle identities cancel the intermediate unit-counit pairs. Pinned
-pullback associativity identifies the remaining two comparisons, and the equality
-of the two pullback projection composites gives exactly the equality transport
-in relativeMVLocalArrow. Thus the remaining composite is its hom preceded by
-the mapped relativeMVExactOpenIso. These identities hold for arbitrary opens,
-including the empty open, and arbitrary object maps, including zero maps. No
-cover or distinguishedness assertion is involved. -/
+restrictions along one inclusion, and the pasted base-change map. -/
 theorem relativeMV_inverse_open_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

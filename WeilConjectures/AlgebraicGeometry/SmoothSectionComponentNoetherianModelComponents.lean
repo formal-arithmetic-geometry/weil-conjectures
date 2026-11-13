@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 /-!
 # Base change of the fibre component containing a smooth section
 
-Source: Stacks Project, Tag 055M.
+## References
+
+* [Stacks Project, Tag 055M](https://stacks.math.columbia.edu/tag/055M)
 -/
 
 @[expose] public section
@@ -40,23 +42,7 @@ private theorem exists_component_open {X : Type*} [TopologicalSpace X]
   · exact ⟨⊥, by simp [connectedComponentIn_eq_empty hx]⟩
 
 /-- The component of the section in a fibre of a smooth morphism is preserved by any
-cartesian base change equipped with the compatible section.
-
-Source: Stacks Project, Tag 055M (Lemma 37.29.2).
-Proof: for p' in P', put t' = g'(p') and t = b(t'). The cartesian square identifies
-P'_{t'} with P_t ×_{κ(t)} κ(t'), and the section compatibility identifies the distinguished
-point with the base change of σ(t). The component C of σ(t) is a connected smooth
-κ(t)-scheme with a κ(t)-rational point; it is geometrically connected by Varieties,
-Lemma 33.7.14. Here fibres are locally noetherian, and their components are open and
-closed, since g is smooth and quasi-compact. Thus C × κ(t') is a connected open and
-closed subscheme containing σ'(t'), so it lies in that point's component. Conversely
-the continuous projection maps the component of σ'(t') to a connected subset containing
-σ(t), hence into C. These inclusions give equality of the component and the inverse
-image of C. Finally the underlying space of a scheme fibre maps homeomorphically onto
-the topological fibre; under this identification the equality is the displayed iff.
-This argument applies at each p', without a noetherian assumption on the bases.
-
-(blueprint: lem-sbc-smooth-section-component-noetherian-model-components) -/
+cartesian base change equipped with the compatible section. -/
 theorem Smooth.section_component_iff_of_isPullback {P T P' T' : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T)
     (g' : P' ⟶ T') (σ' : T' ⟶ P') (a : P' ⟶ P) (b : T' ⟶ T)

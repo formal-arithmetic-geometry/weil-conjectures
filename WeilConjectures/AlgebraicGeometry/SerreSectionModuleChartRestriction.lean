@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 /-!
 # Restriction calculation on homogeneous chart representatives
 
-Source: Stacks Project, Proposition 0BXD, final paragraph.
+## References
+
+* [Stacks Project, Tag 0BXD](https://stacks.math.columbia.edu/tag/0BXD)
 -/
 
 @[expose] public section
@@ -53,16 +55,7 @@ private lemma unitToTwist_mul_comp
   simp
 
 /-- Multiplying the section attached to f by a is the section attached to their product,
-including the transport of the twisting degree and tensoring with an arbitrary module.
-Source: Stacks Project, Proposition 0BXD, final paragraph.
-
-Proof: evaluate unitToTwist and twistMul at each open and then each point. The first
-map sends a local function r to r*f, and the second sends that value to (r*f)*a.
-Associativity and f*a=g identify it with r*g. Equality of degrees gives the indicated
-transport; eliminate that equality to check that transport is the identity on values.
-Apply the functor G tensor -, which preserves composition and identity transports,
-and precompose by the inverse right unitor. This argument covers zero polynomials and
-zero degrees as well, since it uses only multiplication, not division. -/
+including the transport of the twisting degree and tensoring with an arbitrary module. -/
 private lemma serreTwistMultiplicationProduct
     (k : Type u) [Field k]
     (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)
@@ -98,21 +91,7 @@ private lemma phi_transport
   subst j
   rfl
 
-/-- Canonical charts commute with restriction on homogeneous representatives.
-Source: Stacks Project, Proposition 0BXD, final paragraph; the homogeneous calculation
-in step 3 of lem-sc-p1-serre-section-module-charts.
-(blueprint: lem-sc-p1-serre-section-module-chart-restriction)
-
-Proof: for y of degree m*d the characterization of alpha_f identifies the restriction
-of phi(y) with multiplication of s by f^m. Restrict this equality to D+(g). Multiply
-by a^m and use hphi to identify the numerator with phi(a^m*y). When f,g,a are nonzero,
-uniqueness of homogeneous degree in g^e=a*f gives e*b=c+d. Thus a^m*y has degree
-e*m*b, and (a*f)^m=g^(e*m) identifies the multiplication on the right with the
-one in the characterization of alpha_g. That characterization gives the displayed
-fraction formula. If a=0 or f=0, the relation forces g=0 (the polynomial ring is a
-domain and e>0); the target chart and target localization are zero. If g=0 directly,
-the same zero argument applies. The case m=0 uses the zeroth power, unitToTwistZero
-and the right unitor, so the argument also covers denominator one. -/
+/-- Canonical charts commute with restriction on homogeneous representatives. -/
 theorem serreSectionModuleChartRestriction
     (k : Type u) [Field k]
     (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)

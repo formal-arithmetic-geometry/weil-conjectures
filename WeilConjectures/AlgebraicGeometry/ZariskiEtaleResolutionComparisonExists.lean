@@ -14,7 +14,14 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionChainMapExists
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionHomologyDataExists
 
-/-! # Resolution comparison bridge -/
+/-! # Resolution comparison bridge
+
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 013P](https://stacks.math.columbia.edu/tag/013P)
+* [Stacks Project, Tag 015B](https://stacks.math.columbia.edu/tag/015B)
+-/
 
 @[expose] public section
 
@@ -23,33 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
-/-- Construct a comparison representing the canonical map.
-
-Proof: sheafification, the free-abelian adjunction and additive Yoneda identify
-Hom from the free abelian sheaf on V with evaluation at V. Apply this naturally to
-all terms of R, and similarly to I at i(V). Ext computed from injective resolutions
-then supplies e₁ and e₂, including when the chosen Ext universe differs from the
-coefficient universe. Evaluation of the pushed complex at V is evaluation of I at i(V).
-The inverse image is exact, so its right adjoint preserves injectives. Extend the
-pushed augmentation F → I to a map b from R using injectivity and exactness of R:
-first extend in degree zero, then factor each next differential through the image
-of the previous differential and extend into the next injective term.
-To identify its map on cohomology, lift the adjunction unit from an injective
-resolution of an arbitrary coefficient sheaf A to the pushed resolution of its
-inverse image. Comparison maps are natural up to homotopy; the horseshoe construction
-shows that they respect connecting maps. In degree zero they evaluate to the unit.
-Ext with the free abelian sheaf as fixed first argument is effaceable in positive
-degree in the second (coefficient) argument, so dimension shifting identifies this
-family uniquely with fstar satisfying hfstar. Postcomposing with the cohomology map
-of the counit yields
-the comparison lifting the identity of the direct image, by the adjunction triangle
-identity. Choose b as that composite comparison. It has the augmentation asserted
-here, and the termwise evaluation identifications give the displayed formula.
-No arbitrary equivalences are asserted to satisfy this formula: e₁ and e₂ are the
-ones constructed from evaluation and Ext. Only existence of one comparison is used.
-
-Source: Stacks Project, Tags 01FB, 013P and 015B.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-comparison-exists) -/
+/-- Construct a comparison representing the canonical map. -/
 theorem zariski_etale_resolution_comparison_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

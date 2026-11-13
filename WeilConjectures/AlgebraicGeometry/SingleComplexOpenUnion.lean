@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenNestedComparison
 
 /-! # Source-open union gluing for the single-complex comparison
 
-Source: Stacks Project, Tag 0DJ9, induction step.
-(blueprint: lem-pc-single-complex-open-union).
+## References
+
+* [Stacks Project, Tag 0DJ9](https://stacks.math.columbia.edu/tag/0DJ9)
 -/
 
 @[expose] public section
@@ -25,22 +26,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Mayer--Vietoris on a union, expressed in the ambient scheme's open coordinates.
-Source: Stacks Project, Tag 0DJ9, induction step.
-(blueprint: lem-pc-single-complex-open-union).
-
-Proof: Put W = U union V. Inside W take the inverse images of U and V; they cover W,
-are quasi-compact, and their intersection identifies with U intersection V. Since
-X is quasi-separated over the affine S, the quasi-compact open immersion W → X
-is quasi-compact, and W → S is qcqs. Base change identifies W' with X' times_X W.
-Restrict K and K' and transport phi by the pullback composition comparisons.
-Open restriction preserves quasi-coherent cohomology. Apply relativeMayerVietoris
-to the resulting square with source W. Its three comparison hypotheses are the
-ambient comparisons on U, V and their intersection: the identifications follow
-from singleComplexOpenComparison_nested_isIso_iff, the canonical nested-open
-transport. The conclusion is definitionally the ambient comparison on W.
-Empty opens cause no exception; a redundant member of the cover
-also gives the same comparison. -/
+/-- Mayer--Vietoris on a union, expressed in the ambient scheme's open coordinates. -/
 theorem singleComplexOpenComparison_union
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

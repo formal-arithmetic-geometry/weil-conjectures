@@ -107,27 +107,8 @@ private theorem comp_congr (A : Type (u + 1)) [CommRing A]
   rfl
 
 /-- The chart map uses the canonical composite-adjunction direct-image map.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the composite-adjunction counit in the
-identification of each projection with base change of q.
-(auxiliary; not a blueprint node).
 
-Proof: write e for the chart, p for its selected projection, and r for the
-projective projection, so r=e followed by p. Expand the chart-map definition.
-Its four factors are direct image of the chart adjunction unit, the direct-image
-composition comparison for e,p, congruence along e followed by p equals r, and
-direct image of the shifted line comparison. In the source library,
-rightDerivedLowerStarComp_hom_comp_congr_hom identifies the middle two natural
-transformations with rightDerivedLowerStarCompHom for r=e followed by p. One can
-also prove this identity by substituting that equation: congruence becomes the
-identity, and conjugateEquiv_leftDerivedUpperStarComp_hom identifies the remaining
-composition comparison with the conjugate of inverse-image composition.
-Evaluate this identity at the inverse image of the shifted line. Reassociate the
-four factors and compose the identity on the left with the unit and on the right
-with the line comparison. Finally replace the particular proof of invertibility
-in the definition by hW, using proof irrelevance. This argument uses no exchange,
-trace, twist-composition law or positivity of N. It works for both projections,
-empty schemes, N=0 and the zero coefficient ring. -/
+. -/
 theorem chartMap_compHom
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u})

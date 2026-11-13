@@ -12,8 +12,10 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-scheme-derived-hom-gluing).
+## References
+
+* [Stacks Project, Tag 08DG](https://stacks.math.columbia.edu/tag/08DG)
+* [Stacks Project, Tag 08BW](https://stacks.math.columbia.edu/tag/08BW)
 -/
 
 @[expose] public section
@@ -73,20 +75,7 @@ set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
 set_option maxHeartbeats 500000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
-/-- Compatible local morphisms between two fixed global derived objects lift globally.
-Source: Stacks Project, Cohomology, Tag 08BW, exactness at the local Hom pair
-(blueprint: lem-sc-scheme-derived-hom-gluing).
-Proof: transport a and b backwards through the derived equivalences induced by
-Scheme.Modules.overEquiv U and V. Their transported restrictions to the localized
-overlap site coincide: the two displayed comparisons are obtained by cancelling
-these equivalences with their inverses and composing overFunctorMap. Naturality
-of their units and the derived composition comparisons identifies this equality
-with equality of derivedOpenHomRestriction on the transported maps. Apply
-exactness at the local Hom pair in derived_hom_mayer_vietoris to their pair;
-the difference is zero. The resulting global f has the two transported maps as
-restrictions. Apply the equivalences forwards and cancel their units to obtain
-the prescribed a and b. No uniqueness is asserted. Empty opens and disjoint
-opens are allowed, since the Mayer--Vietoris exactness has no nonemptiness premise. -/
+/-- Compatible local morphisms between two fixed global derived objects lift globally. -/
 theorem scheme_derived_hom_gluing
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -12,8 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturalityExtension
 
 /-! # Evaluation of the fixed terminal-source comparison
-Source: Stacks Project, Tags 06XR and 01F7.
-(blueprint: new-terminal-source-sections-evaluation)
+
+## References
+
+* [Stacks Project, Tag 06XR](https://stacks.math.columbia.edu/tag/06XR)
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -25,13 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 
-/-- Evaluation through the terminal-source comparison agrees with the integer generator.
-Source: Stacks Project, Tag 06XR; the constant-sheaf and free-abelian adjunctions.
-(blueprint: new-terminal-source-sections-evaluation)
-
-Proof: The free singleton generator maps to the integer 1. Expand the two
-adjunctions, commute the singleton isomorphism through sheafification using
-naturality of its unit, and evaluate on that generator. -/
+/-- Evaluation through the terminal-source comparison agrees with the integer generator. -/
 theorem terminal_source_sections_evaluation (X : Scheme.{u})
     (N : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

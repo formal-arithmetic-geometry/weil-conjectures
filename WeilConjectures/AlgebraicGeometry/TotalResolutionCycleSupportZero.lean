@@ -21,15 +21,7 @@ namespace WeilConjectures.DerivedTotalResolution
 
 variable {R : Type u} [Ring R]
 
-/-- A total cycle lying in column zero comes from a vertical cycle in that column.
-Source: Stacks Project, Homology, Tag 09IZ, proof, final column-zero representative.
-(blueprint: aux-total-resolution-cycle-support-zero)
-
-Proof. Each component j.f is the injection of the column-zero summand into a
-coproduct, and is therefore a split monomorphism. Write iCycles(z)=j.f(n)(x).
-The chain-map equation for j and the fact that z is a cycle imply
-j.f(n+1)(d(x))=0. Injectivity gives d(x)=0, so x defines a vertical cycle y.
-The inclusion of y is x, which proves the equality. -/
+/-- A total cycle lying in column zero comes from a vertical cycle in that column. -/
 theorem total_resolution_cycle_support_zero
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)
       (ComplexShape.up ℤ))

@@ -12,7 +12,12 @@ import WeilConjectures.CategoryTheory.EquivalenceRightAdjointCounitTransport
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 0ATM](https://stacks.math.columbia.edu/tag/0ATM)
+* [Stacks Project, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -24,28 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
-/-- Ordinary horizontal pasting and the adjunction comparisons for the iterated pullback.
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2; Tags 08HY, 0ATM and 0D5S.
-(blueprint: lem-sc-rectangle-ordinary-pasting-comparisons)
-
-Proof: The two projection equations identify k with the canonical iterated-pullback
-isomorphism, by the pullback universal property. Restrict the canonical pullback
-composition comparisons to the full quasi-coherent subcategories. Their composite
-with the first projection equation gives s with the displayed component; the base
-composition comparison gives b. Pullback along k is an equivalence. Derived
-pullback/direct-image adjunctions identify its inverse with direct image along k;
-derived direct-image composition and the second projection equation therefore give
-p. Transport the adjunction for P along p and this equivalence. Uniqueness of right
-adjoints gives t, characterized by the displayed counit equation. Transpose the
-ordinary rectangle and the horizontally pasted ordinary square under the pinned
-pullback/direct-image adjunctions. The counit formula for base change and the
-associativity law for canonical derived pullback composition identify their
-transposes. Injectivity of the Hom equivalence gives ordinary pasting. Inverting
-the ordinary base-change comparisons gives the displayed identity for alpha and
-delta: all three inverses exist by the hypotheses, and naturality moves p and b
-through the composites. This argument is entirely at the ordinary-square level:
-it uses no right adjoint to the direct image of f and no second mate. The same
-identities apply to empty schemes and zero complexes. -/
+/-- Ordinary horizontal pasting and the adjunction comparisons for the iterated pullback. -/
 theorem rectangle_ordinary_pasting_comparisons
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

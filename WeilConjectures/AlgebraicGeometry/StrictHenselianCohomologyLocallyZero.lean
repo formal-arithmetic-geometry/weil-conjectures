@@ -19,8 +19,11 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Positive étale cohomology classes are Zariski locally zero
 
-Source: Stacks Project, Étale Cohomology, Tag 09AX, proof, Tags 03Q6 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselian-cohomology-locally-zero)
+## References
+
+* [Stacks Project, Tag 09AX](https://stacks.math.columbia.edu/tag/09AX)
+* [Stacks Project, Tag 03Q6](https://stacks.math.columbia.edu/tag/03Q6)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
 -/
 
 @[expose] public section
@@ -36,30 +39,7 @@ private theorem forget_preserves_small_filtered_colimits
   infer_instance
 
 /-- Every positive-degree class on an open becomes zero near each point when all
-local rings are strictly henselian.
-
-Source: literature/stacks-project/etale-cohomology.tex, Tag 09AX, proof,
-third and fourth sentences; Tags 03Q6 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselian-cohomology-locally-zero)
-
-Proof: Compare the filtered colimit of object cohomology over neighbourhoods
-of x with homology of stalkwise sections of an injective resolution, using
-etaleObjectCohomology_stalk_complex. This comparison holds for arbitrary i,
-without any henselian hypothesis. Apply strictHenselian_stalkSections_preservesEpimorphisms
-at x to see that the section functor preserves epimorphisms. It preserves
-finite limits already, since sheaf inclusion, restriction of presheaves and
-filtered colimits of abelian groups do so. It therefore preserves homology.
-The resolution is exact in degree n+1, so
-its image has zero homology there. The comparison makes the colimit a
-subsingleton. The class xi and zero consequently have the same coprojection.
-The forgetful functor preserves filtered colimits at the neighbourhood
-universe; the elementwise equality criterion supplies a later neighbourhood
-V with a transition map from U killing xi. That map is the opposite of the
-inclusion V into U, so V is contained in U and contains x. Remove the universe
-lift from the equality to obtain exactly the required restriction equality.
-The empty open has no x, and q=0 is excluded. No data-valued definition chooses
-an injective resolution or an equivalence: the existential comparison theorem
-is eliminated only within this proof. -/
+local rings are strictly henselian. -/
 theorem strictHenselian_cohomology_locally_zero
     {X : Scheme.{u + 1}}
     (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x))

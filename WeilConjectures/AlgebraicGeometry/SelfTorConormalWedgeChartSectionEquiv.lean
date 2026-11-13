@@ -16,29 +16,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
-/-- The affine section calculation underlying the conormal wedge chart.
-Source: Stacks Project, Tags 01R3 (conormal), 01I6 (exterior powers and
-affine pullback), and 0096 (canonical pullback unit).
-(blueprint: new-t2-self-tor-conormal-wedge-chart-section-equiv).
-Proof: Write A = Gamma(Y,U), I = i.ker.ideal U, and V = i inverse-image U.
-The closed immersion makes V affine, with section ring B = A/I. The theorem
-`affine_conormal_sections` identifies N(V) with I/I^2 and sends each ideal
-class to its pullback-unit section. Its A-linearity descends to B-linearity,
-since A surjects onto B and I annihilates both modules. On a principal open
-of V, these identifications localize. Exterior powers commute with localization
-by their universal alternating-map property, so the exterior presheaf sheafifies
-to the associated module of the nth exterior power over B. Its sections on V
-are that exterior module, and the sheafification unit sends each tuple to its
-pure wedge. The affine model T(M), restricted to V, is also the associated
-B-module of M: on the chart the pushforward-restriction comparison cancels,
-and tensor pullback is extension of scalars from A to B. Since I annihilates M,
-B tensor_A M identifies with M by b tensor m mapping to b*m. The tilde unit
-followed by the tensor-pullback unit therefore gives the constant section m.
-Compose these two B-linear identifications in the stated orientation. Their
-formulas on pure wedges give the equation with selfTorIdealWedge and
-selfTorAffineSection. In degree zero this is the B-linear identity on B,
-sending the empty wedge to 1. Empty charts and zero quotient rings give zero
-modules. No finite generation, regularity, or freeness hypothesis is used. -/
+/-- The affine section calculation underlying the conormal wedge chart. -/
 theorem exists_selfTor_conormal_wedge_chart_section_equiv
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

@@ -197,21 +197,7 @@ private theorem pullback_power_add {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Compatibility of the canonical section-degree comparison with multiplication.
-Source: Stacks Project, Tag 01CD, tensor pullback, and Tag 09MS, tensor powers.
-(blueprint: lem-sc-square-zero-tensor-section-product-comparison).
-Proof: Replace D by canonicalTensorBoundaryComparisons using hD. Its section
-comparison is boundaryPullbackPowIso followed by tensorPowMulIso. Expand these
-recursive isomorphisms, and use naturality of boundaryPullbackComparison and the
-monoidal pullback tensorator. The tensor-power addition map groups the first n
-factors and the remaining n(e+1) factors; the tensor-power multiplication map groups
-the same factors into blocks of n. Associator coherence identifies these groupings.
-The degree-one power tensorPowSection f 1 is f followed by the inverse right unitor;
-its unitor cancels the degree-one tensorPowMulIso. Evaluate the resulting morphism
-equality at 1, using tensorHom_app_tmulSection and the inverse left unitor formula.
-The arithmetic equality hdeg only transports the target degree. For n=0 all factors
-are units and the same triangle and unitor identities apply; for e=0 the argument
-is the two-block case. No graded presentation or cohomology property is used. -/
+/-- Compatibility of the canonical section-degree comparison with multiplication. -/
 theorem tensorSectionProduct_comparison {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (D : TensorBoundaryComparisonData j L n)

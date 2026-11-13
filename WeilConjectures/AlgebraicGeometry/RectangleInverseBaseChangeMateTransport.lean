@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.RectangleOrdinaryPastingComparisons
 
 /-! # Transport the rectangle to the pasted ordinary base-change square
 
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
+## References
+
+* [Stacks Project, Tag 0ATR](https://stacks.math.columbia.edu/tag/0ATR)
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The source comparison built from the canonical pullback composition family.
 The chosen family is fixed by its left-derived universal property, not an arbitrary
-witness of existence. 
-(blueprint: lem-sc-rectangle-inverse-base-change-mate-transport)
+witness of existence.
 -/
 noncomputable def successiveBaseChangeSourceIso
     [∀ Z : Scheme.{u},
@@ -91,28 +92,7 @@ private theorem mate_comparison
   rw [hb, ← reassoc_of% hα]
 
 /-- Transport the rectangle mate to the mate of the pasted inverse ordinary square.
-This comparison has no middle right adjoint and asserts no factorization of second mates.
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
-(blueprint: lem-sc-rectangle-inverse-base-change-mate-transport)
-
-Proof: The projection equations identify k with the iterated pullback comparison,
-which is an isomorphism by the pullback universal property. The canonical pullback
-composition isomorphisms identify its upper projection functor with the two
-successive upper pullbacks and identify the base pullback with the two successive
-base pullbacks. Conjugate the comparison of direct images obtained from the
-upper isomorphism and the second projection equation; uniqueness of right adjoints
-identifies pullback along k followed by c with d. Use the counit formula defining
-ordinary base change to transpose both the rectangle and the horizontally pasted
-ordinary transformations. Pullback composition associativity identifies the
-transposes, so injectivity gives ordinary pasting. Invert the ordinary comparisons;
-conjugation and the Hom equivalences respect the resulting transport. The fixed
-rectangle second mate therefore identifies with the mate of the pasted inverse
-ordinary square under adja and adjd. Apply the inclusion of the full quasi-coherent
-subcategory and take components at K to get the displayed two comparison
-isomorphisms and commuting square. The source comparison is explicitly
-constructed as successiveBaseChangeSourceIso. No middle right adjoint is involved. All
-comparisons are natural isomorphisms from universal properties, so this proof
-also handles empty schemes and zero complexes. -/
+This comparison has no middle right adjoint and asserts no factorization of second mates. -/
 theorem rectangle_inverseBaseChange_mate_transport
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

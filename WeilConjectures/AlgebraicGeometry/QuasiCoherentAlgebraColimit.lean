@@ -15,9 +15,13 @@ import WeilConjectures.CategoryTheory.SheafAlgebrasDirectedColimit
 
 /-! # Directed colimits of quasi-coherent algebra sheaves
 
-Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24; Sheaves,
-Section 009E and Lemma 0087; Modules, Lemmas 01AH and 01AJ
-(blueprint: lem-weil-pbc-quasi-coherent-algebra-colimit).
+## References
+
+* [Stacks Project, Tag 01ID](https://stacks.math.columbia.edu/tag/01ID)
+* [Stacks Project, Tag 009E](https://stacks.math.columbia.edu/tag/009E)
+* [Stacks Project, Tag 0087](https://stacks.math.columbia.edu/tag/0087)
+* [Stacks Project, Tag 01AH](https://stacks.math.columbia.edu/tag/01AH)
+* [Stacks Project, Tag 01AJ](https://stacks.math.columbia.edu/tag/01AJ)
 -/
 
 @[expose] public section
@@ -35,9 +39,6 @@ have colimit rings of sections on affine opens, and commute with restriction to 
 Being a colimit in all algebra sheaves with quasi-coherent vertex also gives the colimit
 in their full subcategory of quasi-coherent algebras. Restriction uses the open site
 `Over V`, whose objects are precisely the opens contained in `V`.
-Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24; Sheaves,
-Section 009E and Lemma 0087; Modules, Lemmas 01AH and 01AJ
-(blueprint: lem-weil-pbc-quasi-coherent-algebra-colimit).
 
 1. Take the presheaf-ring colimit and apply
    `CategoryTheory.sheafAlgebras_directed_colimit`. Evaluation preserves presheaf

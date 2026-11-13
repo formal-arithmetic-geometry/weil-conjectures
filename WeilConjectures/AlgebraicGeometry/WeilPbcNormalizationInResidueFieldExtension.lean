@@ -98,8 +98,7 @@ private theorem finite_residue_extension_integral_quotients
 the composite `Spec K ⟶ X` is quasi-compact and quasi-separated and factors through an integral
 morphism from an integral normal scheme whose generic point has residue field `K`.
 
-Source: Stacks Project, Morphisms Lemmas 035H, 035I, 035L and Etale Cohomology Lemma 09Z6
-(blueprint: lem-weil-pbc-normalization-in-residue-field-extension). The proof first shows that
+ The proof first shows that
 the composite from the affine field scheme is quasi-compact and quasi-separated. It applies
 relative normalization to obtain an integral factorization with dominant map and uses
 integrality of the source to make the normalization integral. On affine opens through the

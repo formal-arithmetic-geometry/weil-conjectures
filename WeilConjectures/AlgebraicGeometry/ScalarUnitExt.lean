@@ -13,14 +13,8 @@ universe uC uB vC vB wC wB hC hB
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace CategoryTheory.Abelian
 
-/-- For exact additive U:A→B, η:F→UP with the unbounded derived unit property
-[def-sp-exact-functor-derived-unit], Q in A and n≥0, the map Ext^n(P,Q)→Ext^n(F,UQ) sending c to
-mk0(η) composed with U(c) is bijective [def-weil-abstract-derived-category].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
-Proof: Test the unit universal property at (single Q)[n]. Identify Hom sets with Ext using
-Ext.homEquiv. Naturality of the exact-functor single comparison and its commutation with shift
-identifies the resulting function with the stated Yoneda composition. -/
+/-- For exact additive U:A→B, η:F→UP with the unbounded derived unit property, Q in A and n≥0, the map Ext^n(P,Q)→Ext^n(F,UQ) sending c to
+mk0(η) composed with U(c) is bijective. -/
 theorem scalar_unit_ext_bijective
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasExt.{wC} C]
     [HasDerivedCategory.{hC} C]

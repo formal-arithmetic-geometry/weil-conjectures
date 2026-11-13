@@ -12,8 +12,10 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Internal conjugation of constraint diagrams
 
-Source: Stacks Project, Tags 07A4 and 0G7E; the corresponding explicit
-representative calculation of the resolving constraint diagram.
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -421,31 +423,7 @@ private theorem section_unit_laws {X Y : Scheme.{u}} (f : X ⟶ Y)
       _ = (ρ_ (L.obj M)).inv ≫ (ρ_ (L.obj M)).hom := by erw [← hg]
       _ = _ := by simp only [Iso.inv_hom_id, ← L.map_comp, L.map_id]
 
-/-- Conjugation identifies the internal edges and units with the fixed section models.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4; Steps 11–12 of
-lem-pd-section-resolving-oplax-constraint-diagrams, with the fixed tensor and derived
-pullback normalization theorems.
-
-Proof: expand Conjugation as its pair and unit equations. At each associativity
-vertex use the nested inverse tensor comparisons and the inverse derived pullback
-comparison prescribed by vertex0 through vertex5. Naturality of μ moves each
-source tensor comparison past a splitting edge. Substitute the pair equation;
-then naturality of the derived pullback comparison moves it past the internal
-splitting arrow. Adjacent comparison/inverse factors cancel. For inner edges use
-bifunctoriality and naturality of the target tensor comparison. For the source
-and target associator edges use the normalized associator equations for the fixed
-tensor comparisons. These are precisely the six InternalEdges clauses. At unit
-vertices replace the corresponding tensor factor by the transported unit identity;
-the unit conjugation equation and the two normalized unitor equations give the
-three edge squares and the opposite branch for each unit. All vertex maps are
-composites of isomorphisms. Compose the edge squares and cancel the common final
-vertex map to obtain the whole paths and their equalities; the section unit laws
-hold on all objects by resolving localization and the given representative
-hypotheses. The resolution compatibility of the derived pullback comparison and
-the tensor representative normalization identify these vertex maps on resolving
-objects with the same nested modelTensor and ε maps, so no replacement endpoint
-comparison is introduced.
-(auxiliary; not a blueprint node). -/
+/-- Conjugation identifies the internal edges and units with the fixed section models. -/
 theorem section_resolving_oplax_internal_conjugation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

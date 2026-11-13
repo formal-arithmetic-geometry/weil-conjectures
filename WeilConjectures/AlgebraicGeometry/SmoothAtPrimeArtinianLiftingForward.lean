@@ -20,17 +20,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Algebra, Lemma 02HT, (1) implies (3); Definition 02HS.
-(blueprint: lem-weil-pbc-smooth-at-prime-artinian-lifting-forward).
-
-Proof in words, with step numbers inherited from the parent plan:
-1. Principal opens form a basis of Spec A (def-weil-affine-spectrum). The localization
-   map identifies Spec A_g with D(g) (lem-weil-pbc-principal-localization-open-immersion,
-   def-weil-open-immersion). Smoothness is unchanged by that isomorphism and by restriction
-   (lem-weil-pbc-smooth-restrict-open-subschemes,
-   lem-weil-pbc-morphism-factors-through-open-subscheme). Thus an open smooth neighbourhood
-   exists iff some g outside q makes R -> A_g smooth
-   (lem-weil-pbc-smooth-ring-map-iff-smooth-affine, def-weil-pbc-smooth-ring-map).
+/-- Proof in words, with step numbers inherited from the parent plan:
+1. Principal opens form a basis of Spec A. The localization
+   map identifies Spec A_g with D(g). Smoothness is unchanged by that isomorphism and by restriction. Thus an open smooth neighbourhood
+   exists iff some g outside q makes R -> A_g smooth.
 2. The kernel I of the surjection B' -> B is proper because B is nonzero. It lies
    in the maximal ideal of B'. The Jacobson radical of an Artinian ring is nilpotent;
    in a local ring it is the maximal ideal, so I is nilpotent. This argument works for

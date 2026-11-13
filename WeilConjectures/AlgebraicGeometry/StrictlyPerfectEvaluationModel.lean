@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons
 
 /-! # The local ordinary model of canonical derived evaluation
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 08DL, 08DM and 08DQ.
-(blueprint: lem-pc-strictly-perfect-evaluation-model).
+## References
+
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+* [Stacks Project, Tag 08DM](https://stacks.math.columbia.edu/tag/08DM)
+* [Stacks Project, Tag 08DQ](https://stacks.math.columbia.edu/tag/08DQ)
 -/
 
 @[expose] public section
@@ -31,35 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The restricted canonical adjunct is the localization of ordinary evaluation,
 with the source and target comparison isomorphisms included in the commuting square.
 This assertion does not say that the evaluation chain map is invertible.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of Lemma 20.50.5;
-Tag 08DM, Lemma 20.46.9; Tag 08DL, Lemma 20.42.3.
-(blueprint: lem-pc-strictly-perfect-evaluation-model).
-
-Proof:
-1. Represent N restricted to U by a complex F. Exact restriction commutes with
-   the tensor and Hom-complex constructions. The restriction comparison for
-   RHom and the given isomorphism K|U ≅ QP identify the first Hom input with P.
-2. The Hom complex from P computes RHom(P,F) and RHom(P,O[0]). This holds on
-   arbitrary U: each term of P is a retract of a finite free module, so its
-   internal Hom preserves exact sequences. The finite stupid filtration of P
-   shows that Hom(P,-) preserves quasi-isomorphisms. Equivalently, check on
-   affine subopens and then on cohomology sheaves, as in Tag 08DM.
-3. The dual Hom(P,O[0]) is bounded, and its terms are retracts of finite free
-   modules, obtained by dualizing the retractions for P. Thus its terms are flat
-   and it is K-flat. Its total tensor with F computes the derived tensor without
-   requiring F to be bounded or K-flat. These computations give a and b.
-4. Define f by its tensor-summand components: for r+q=0, curry the map that
-   evaluates the degree-q dual on P^r, then acts on F^p by the unit; for
-   r+q≠0 set the component to zero. The Hom-product and tensor-coproduct universal
-   properties give the degree maps. The Hom differential and total tensor
-   differential have matching signs, so these maps form a chain map.
-5. Apply the representative equation of the canonical tensor-Hom family to
-   the evaluation map into a K-injective resolution. On each summand its
-   uncurrying is the same evaluation in step 4. Naturality transports this
-   equation along K|U ≅ QP and the chosen representative of N|U. The comparison
-   maps to the resolutions commute with evaluation, hence the displayed square
-   commutes after localization. Empty U and zero P use the same zero maps.
 -/
 theorem strictlyPerfect_evaluation_local_model (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

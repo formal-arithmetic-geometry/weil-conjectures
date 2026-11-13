@@ -13,8 +13,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # Zero sets of quasi-coherent ideal sheaves on affine opens
 
-Source: Stacks Project, Schemes, Example 01HM and Lemma 01IN
-(blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine).
+## References
+
+* [Stacks Project, Tag 01HM](https://stacks.math.columbia.edu/tag/01HM)
+* [Stacks Project, Tag 01IN](https://stacks.math.columbia.edu/tag/01IN)
+* [Stacks Project, Tag 01HP](https://stacks.math.columbia.edu/tag/01HP)
 -/
 
 @[expose] public section
@@ -28,10 +31,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The underlying abelian-group stalk map is surjective precisely off the support.
 Lift the germ of `1` and shrink the equality to an affine neighborhood for the forward
 implication. For the reverse implication, restrict each representative to an affine
-neighborhood disjoint from the support, where the ideal of sections is the unit ideal.
-Source: Stacks Project, Schemes, Example 01HM and Lemma 01IN; the germ argument is
-written directly using Mathlib's representation and equality lemmas for stalks.
-(blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine). -/
+neighborhood disjoint from the support, where the ideal of sections is the unit ideal. -/
 private theorem stalk_surjective_iff_not_mem_support (X : Scheme.{u})
     (K : X.IdealSheafData) (x : X) :
     Function.Surjective
@@ -87,31 +87,10 @@ private theorem stalk_surjective_iff_not_mem_support (X : Scheme.{u})
 surjective exactly when the ideal of sections is not contained in the prime of the point.
 Thus the set of points where the stalk ideal is proper is locally the ordinary zero locus,
 is closed, and equals the image of every closed immersion with this kernel ideal sheaf.
-Here `K : X.IdealSheafData` is the compatible affine-local encoding of a quasi-coherent
+Here `K: X.IdealSheafData` is the compatible affine-local encoding of a quasi-coherent
 ideal sheaf, whose actual submodule sheaf and inclusion are `K.toModules` and `K.toModulesι`.
 Surjectivity means that the image ideal is the whole stalk ring, without choosing an
-identification of the module stalk of the structure sheaf with its ring stalk.
-
-Source: Stacks Project, Schemes, Example 01HM, Lemmas 01HP and 01IN
-(blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine).
-
-Proof:
-1. The underlying map is Mathlib's abelian-group stalk map. Sectionwise injectivity of
-   `K.toModulesι` implies its stalkwise injectivity by the concrete stalk lemma.
-2. If the stalk inclusion is surjective, lift the germ of the global section `1`.
-   Represent the lift on an open neighborhood, then shrink the equality of germs
-   to an affine neighborhood W. Naturality shows that the restricted section maps
-   to `1`, so `1` belongs to `K.ideal W`. Hence the point is outside `K.support`.
-3. Conversely, outside the closed support, restrict any representative to an affine
-   neighborhood W contained in its domain and disjoint from the support. The ideal
-   `K.ideal W` is the unit ideal by `ideal_eq_top_of_disjoint_support`, so the restricted
-   section lifts through `K.toModulesι.app W`. Taking its germ gives the required lift.
-4. Thus the set of nonsurjective stalk maps is `K.support`. The affine prime criterion
-   and affine zero-locus equality follow from `mem_support_iff_of_mem`,
-   `fromSpec_preimage_zeroLocus`, `fromSpec_primeIdealOf`, and `fromSpec_image_zeroLocus`.
-5. Closedness is `K.support.isClosed`. For a closed immersion with kernel K, use
-   `Scheme.Hom.support_ker` and closedness of its range to identify that range with K's
-   support. -/
+identification of the module stalk of the structure sheaf with its ring stalk. -/
 theorem quasi_coherent_ideal_zero_set_affine (X : Scheme.{u}) (K : X.IdealSheafData) :
     (∀ x : X, Function.Injective
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom) ∧

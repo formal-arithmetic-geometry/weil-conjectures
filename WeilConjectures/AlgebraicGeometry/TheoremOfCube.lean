@@ -89,7 +89,7 @@ lemma nonempty_iso_pullback_comp {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C
 Let `X`, `Y` be proper and geometrically integral over a field `K` with `K`-points `x`, `y`, and
 let `M`, `N` be invertible modules on `X ×_K Y ×_K Z` which become isomorphic on the slices
 `{x} × Y × Z` and `X × {y} × Z`. If `M` and `N` become isomorphic on the fibre
-`X ×_K Y ×_K Spec F` over a point `φ : Spec F ⟶ Z` with values in a field `F`, then they are
+`X ×_K Y ×_K Spec F` over a point `φ: Spec F ⟶ Z` with values in a field `F`, then they are
 isomorphic on `X ×_K Y ×_K U` for an open neighbourhood `U` of the image of `φ`.
 
 This is Tag 0BF3 applied over the base `Z` to `X ×_K Z` and `Y ×_K Z` with the sections given
@@ -257,7 +257,7 @@ Let `X`, `Y` be proper and geometrically integral over a field `K` and let `x` b
 the members `U` of an open cover of `Z`, and are isomorphic on the slice `{x} × Y × Z`, then
 `M ≅ N`.
 
-We show that `L = M ⊗ Nᵛ` is trivial. Let `π : X ×_K (Y ×_K Z) ⟶ Y ×_K Z` be the projection and
+We show that `L = M ⊗ Nᵛ` is trivial. Let `π: X ×_K (Y ×_K Z) ⟶ Y ×_K Z` be the projection and
 `σ` the slice `{x} × Y × Z`, a section of `π`. As `X` is proper and geometrically integral, `π`
 induces bijections `Γ(V, 𝒪) ≅ Γ(π⁻¹ V, 𝒪)` on all opens `V`. Local generators of `L` over the
 opens `π⁻¹ V`, `V` lying over an open of the cover of `Z`, can be rescaled so that their
@@ -281,7 +281,7 @@ theorem nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd (X Y Z : Over (Sp
     have : GeometricallyIntegral (X.left ↘ Spec (.of K)) :=
       inferInstanceAs (GeometricallyIntegral X.hom)
     .of_geometricallyIntegral (k := K) (X := X.left)
-  -- The slice `σ : Y × Z ⟶ X × Y × Z` at `x` is a section of the projection `π`.
+  -- The slice `σ: Y × Z ⟶ X × Y × Z` at `x` is a section of the projection `π`.
   set σ := lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)
   let π : ((X ⊗ Y) ⊗ Z).left ⟶ (Y ⊗ Z).left := ((α_ X Y Z).hom ≫ snd X (Y ⊗ Z)).left
   have hσ : σ.left ≫ π = 𝟙 _ := by

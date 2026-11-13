@@ -11,8 +11,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 
 /-! # Canonical pairing on the supplied algebraic inverse image
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
+
+.
+
+## References
+
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
 -/
 
 @[expose] public section
@@ -24,9 +28,7 @@ set_option backward.isDefEq.respectTransparency false
 variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
-/-- The pure tensor pairing, viewed in the cartesian category of set sheaves.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+/-- The pure tensor pairing, viewed in the cartesian category of set sheaves. -/
 noncomputable def pureSheaf (R : Sheaf J CommRingCat.{u})
     (M N : SheafOfModules.{u} (ringSheaf R)) :
     (underlying R).obj M ⊗ (underlying R).obj N ⟶
@@ -365,9 +367,7 @@ private theorem transportedPairing_smul_right
     (fun (v : RI.obj.obj W)
       (w : (I.modules.obj ((monoidalCategory R).tensorObj M N)).val.obj W) ↦ v • w) hx h₂'))
 
-/-- Transport of the actual pure pairing through the specified inverse-image lift.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+/-- Transport of the actual pure pairing through the specified inverse-image lift. -/
 noncomputable def inverseImagePurePairing
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]
@@ -380,9 +380,7 @@ noncomputable def inverseImagePurePairing
     Functor.LaxMonoidal.μ F _ _ ≫ F.map (pureSheaf R M N) ≫
       I.moduleUnderlying.inv.app ((monoidalCategory R).tensorObj M N)
 
-/-- Naturality of the ordinary pure pairing.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+/-- Naturality of the ordinary pure pairing. -/
 theorem pureSheaf_natural (R : Sheaf J CommRingCat.{u})
     {M M' N N' : SheafOfModules.{u} (ringSheaf R)} (f : M ⟶ M') (g : N ⟶ N') :
     ((underlying R).map f ⊗ₘ (underlying R).map g) ≫ pureSheaf R M' N' =
@@ -390,9 +388,7 @@ theorem pureSheaf_natural (R : Sheaf J CommRingCat.{u})
   ext W p
   exact (pure_map R f g W p.1 p.2).symm
 
-/-- Naturality of the transported pure pairing.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+/-- Naturality of the transported pure pairing. -/
 theorem inverseImagePurePairing_natural
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]
@@ -424,17 +420,8 @@ theorem inverseImagePurePairing_natural
 
 /-- A canonical morphism from the tensor of inverse images to the inverse image of the
  tensor, with its normalization on every generalized pair.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
 
-Proof: transport the ordinary pure pairing using the finite-product comparison and the
-specified module-underlying isomorphisms. To check each additivity or scalar equation,
-take the test sheaf of its three operands. Product preservation supplies a section above
-any given target triple. Apply the graph axioms of the algebraic inverse image to the
-source bilinear equation, and use the inverse-underlying isomorphisms on the projections.
-The transported pairing commutes with restrictions since it is a sheaf morphism. The
-sheaf tensor universal property supplies the required linear morphism. The product
-comparison equation gives the displayed normalization for every test sheaf. -/
+. -/
 theorem exists_inverseImageTensorPairing
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]

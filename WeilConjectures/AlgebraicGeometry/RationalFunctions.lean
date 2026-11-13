@@ -14,8 +14,12 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 We define the diagram of section rings over the dense opens of a scheme `X` and its colimit
 `Scheme.rationalFunctionRing X`, the ring of rational functions on `X`.
 
-Source: Stacks Project, Morphisms, Definitions 01RS, 01RT, 01RU and Lemma 01RV
-(blueprint: def-sc-function-field).
+## References
+
+* [Stacks Project, Tag 01RS](https://stacks.math.columbia.edu/tag/01RS)
+* [Stacks Project, Tag 01RT](https://stacks.math.columbia.edu/tag/01RT)
+* [Stacks Project, Tag 01RU](https://stacks.math.columbia.edu/tag/01RU)
+* [Stacks Project, Tag 01RV](https://stacks.math.columbia.edu/tag/01RV)
 -/
 
 @[expose] public section
@@ -28,15 +32,13 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- The dense open subsets of a scheme, ordered by inclusion (Stacks, Tag 01RS;
-(blueprint: def-sc-function-field)). -/
+/-- The dense open subsets of a scheme, ordered by inclusion (Stacks, Tag 01RS;). -/
 def DenseOpens (X : Scheme) := {U : X.Opens // Dense (U : Set X)}
 
 instance (X : Scheme) : PartialOrder (DenseOpens X) := inferInstanceAs
   (PartialOrder {U : X.Opens // Dense (U : Set X)})
 
-/-- The intersection of two dense opens is dense (Stacks, Tag 01RS;
-(blueprint: def-sc-function-field)). -/
+/-- The intersection of two dense opens is dense (Stacks, Tag 01RS;). -/
 def DenseOpens.inter {X : Scheme} (U V : DenseOpens X) : DenseOpens X :=
   ⟨U.val ⊓ V.val, by
     change Dense ((U.val : Set X) ∩ (V.val : Set X))
@@ -50,24 +52,21 @@ instance (X : Scheme) : IsCofiltered (DenseOpens X) := by
       (inf_le_right : U.val ⊓ V.val ≤ V.val)⟩⟩
   infer_instance
 
-/-- The inclusion of dense opens into all opens (Stacks, Tag 01RS;
-(blueprint: def-sc-function-field)). -/
+/-- The inclusion of dense opens into all opens (Stacks, Tag 01RS;). -/
 def denseOpensInclusion (X : Scheme) : DenseOpens X ⥤ X.Opens where
   obj U := U.val
   map f := homOfLE (leOfHom f)
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The section rings over dense opens with restriction maps (Stacks, Tag 01RV;
-(blueprint: def-sc-function-field)). -/
+/-- The section rings over dense opens with restriction maps (Stacks, Tag 01RV;). -/
 def denseOpenSections (X : Scheme) : (DenseOpens X)ᵒᵖ ⥤ CommRingCat :=
   (denseOpensInclusion X).op ⋙ X.presheaf
 
 /-- The ring of rational functions on a scheme is the colimit of its section rings on
  dense opens, with transition maps given by restriction. Thus elements are section classes,
  identified when they agree on a smaller dense open; addition and multiplication are induced
- by restriction to intersections and the ring operations on sections. Source: Stacks Project,
- Tags 01RT, 01RU and Lemma 01RV (blueprint: def-sc-function-field). -/
+ by restriction to intersections and the ring operations on sections. -/
 noncomputable def rationalFunctionRing (X : Scheme.{u}) : CommRingCat.{u} :=
   colimit (denseOpenSections X)
 

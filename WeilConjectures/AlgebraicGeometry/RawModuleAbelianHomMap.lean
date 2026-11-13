@@ -15,8 +15,11 @@ public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalC
 
 /-! # The fixed scalar-forgetting map on raw derived Hom
 
-Source: Stacks Project, Tag 03FD, and the free represented sections adjunction.
-(blueprint: def-sbc-raw-module-abelian-hom-map).
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public section
@@ -27,9 +30,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Forget the derived class and precompose with the map of free represented sheaves.
-The coefficient identification is the unique inverse of the inverse-image mate.
-Source: Stacks Project, Tag 03FD, and Tags 03D3 and 03D7.
-(blueprint: def-sbc-raw-module-abelian-hom-map). -/
+The coefficient identification is the unique inverse of the inverse-image mate. -/
 noncomputable def rawModuleAbelianHomMap
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)

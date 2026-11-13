@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 
 /-! # Canonical degree-zero and external global-section maps
 
-Source: Stacks Project, Tags 01DZ, 0BED.
-(blueprint: def-sc-scalar-global-sections-comparison).
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* [Stacks Project, Tag 0BED](https://stacks.math.columbia.edu/tag/0BED)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- Degree-zero derived sections are ordinary sections, with scalars restricted along f.
-Source: Stacks Project, Tag 01DZ. -/
+/-- Degree-zero derived sections are ordinary sections, with scalars restricted along f. -/
 def scalarGlobalSectionsEquiv (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules) :
     scalarCohomology f F 0 ≃ₗ[k] scalarObj f F (op ⊤) := by
   letI : EnoughInjectives (SheafOfModules.{w} X.ringCatSheaf) :=
@@ -37,8 +39,7 @@ def scalarGlobalSectionsEquiv (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules
   let e := (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedZeroIsoSelf.app F
   exact ((ModuleCat.restrictScalars (scalarMap f ⊤)).mapIso e).toLinearEquiv
 
-/-- The tensor-pullback adjunction unit on global sections, restricted to the top open.
-Source: Stacks Project, Tags 0096, 0BED. -/
+/-- The tensor-pullback adjunction unit on global sections, restricted to the top open. -/
 def tensorPullbackTopSection (a : Y ⟶ X) (F : X.Modules) (s : F.val.obj (op ⊤)) :
     ((tensorPullback a).obj F).val.obj (op ⊤) :=
   ((tensorPullback a).obj F).val.map (homOfLE (by simp : ⊤ ≤ a ⁻¹ᵁ ⊤)).op
@@ -73,8 +74,7 @@ private theorem tensorPullbackTopSection_smul
   simp only [scalarMap, RingHom.comp_apply]
   simp [Scheme.Hom.appTop]
 
-/-- The bilinear external product of global sections, using tensor-pullback units.
-Source: Stacks Project, Varieties, Tag 0BED, maps preceding equation-kunneth-on-cech. -/
+/-- The bilinear external product of global sections, using tensor-pullback units. -/
 def externalGlobalSectionsBilinear
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :
@@ -97,9 +97,7 @@ def externalGlobalSectionsBilinear
         (pullback.snd f g) pullback.condition.symm, tmulSection_smul]
       rfl)
 
-/-- The canonical linear map induced by the external product of sections.
-Source: Stacks Project, Varieties, Tag 0BED.
-(blueprint: def-sc-scalar-global-sections-comparison). -/
+/-- The canonical linear map induced by the external product of sections. -/
 def externalGlobalSectionsTensor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :

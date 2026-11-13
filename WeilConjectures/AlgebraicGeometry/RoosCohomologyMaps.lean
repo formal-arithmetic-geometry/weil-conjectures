@@ -165,17 +165,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The explicit Roos boundary and projection form a short exact sequence.
 
 proof.md, first paragraph
-(auxiliary; not a blueprint node).
-
-Proof: The mapping-cocone triangle gives three adjacent exact pairs. Factoring
-its boundary through the preceding cokernel gives a monomorphism; factoring its
-projection through the following kernel gives an epimorphism. The middle pair
-remains exact by cancellation of the cokernel epimorphism and kernel monomorphism.
-Exact products identify product homology with the product of homologies, and the
-projection formulas identify the induced transition with one minus shift. Finally,
-the kernel of one minus shift represents compatible families and hence the tower
-limit. Transporting the factored sequence along these endpoint isomorphisms gives
-the stated explicit short exact sequence. -/
+. -/
 theorem milnor_shortExact [HasExactLimitsOfShape (Discrete ℕ) A]
     (K : ℕᵒᵖ ⥤ CochainComplex A ℤ) (q : ℤ) :
     ∃ h : milnorInclusion K q ≫ milnorProjection K q = 0,

@@ -14,13 +14,16 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 
 /-! # Ordinary pullback on balanced generators
 
-Source: Stacks Project, Modules on Sites, Tags 03D7, 03EK and 03EL
-(auxiliary; not a blueprint node).
-
 The generators below are applications of the existing relative-tensor projections.
 In particular, inverse-image sections range over every object of the source site;
 they are not restricted to global sections or sections pulled from the target.
 The scalar formulas characterize the normalized canonical ringed comparison.
+
+## References
+
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
 -/
 
 @[expose] public noncomputable section
@@ -142,13 +145,11 @@ namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The actual inverse-image module before extension of scalars.
-Source: Stacks 03D7 (auxiliary; not a blueprint node). -/
+/-- The actual inverse-image module before extension of scalars. -/
 abbrev normalizationInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y)
 
-/-- The inverse-image tensor identification applied to a local balanced pure tensor.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The inverse-image tensor identification applied to a local balanced pure tensor. -/
 def normalizationInverseImageTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : internalModules Λ Y) (W : X.ProEtᵒᵖ)
     (m : ((normalizationInverseImage Λ f).obj M).X.obj.obj W)
@@ -159,8 +160,7 @@ def normalizationInverseImageTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
       (Scheme.ProEt.topology X) ((ProEtale.upperStar Ab.{u + 1} f).obj (condensedRingObj Λ Y))
       ((normalizationInverseImage Λ f).obj M) ((normalizationInverseImage Λ f).obj N) W m n)
 
-/-- The local scalar-extension generator s tensor m, using the actual coequalizer projection.
-Source: Stacks 03D7 and 03EK (auxiliary; not a blueprint node). -/
+/-- The local scalar-extension generator s tensor m, using the actual coequalizer projection. -/
 def normalizationScalarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : internalModules Λ Y) (W : X.ProEtᵒᵖ) (s : (ring Λ X).obj.obj W)
     (m : ((normalizationInverseImage Λ f).obj M).X.obj.obj W) :
@@ -170,38 +170,33 @@ def normalizationScalarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
       (condensedRingObj Λ X) ((normalizationInverseImage Λ f).obj M).X).app W)
       (s ⊗ₜ[ℤ] m))
 
-/-- The actual composite oplax tensor map: abelian inverse image followed by scalar extension.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The actual composite oplax tensor map: abelian inverse image followed by scalar extension. -/
 @[reducible] def normalizationInternalTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : internalModules Λ Y) :
     (CondensedRing.upperStar Λ f).obj (M ⊗ N) ⟶
       (CondensedRing.upperStar Λ f).obj M ⊗ (CondensedRing.upperStar Λ f).obj N :=
   (CondensedRing.monoidal_upperStar Λ f).toOplaxMonoidal.δ M N
 
-/-- The inverse of the actual composite oplax tensor map, supplied by its strong structure.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The inverse of the actual composite oplax tensor map, supplied by its strong structure. -/
 @[reducible] def normalizationInternalTensorInv {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : internalModules Λ Y) :
     (CondensedRing.upperStar Λ f).obj M ⊗ (CondensedRing.upperStar Λ f).obj N ⟶
       (CondensedRing.upperStar Λ f).obj (M ⊗ N) :=
   (CondensedRing.monoidal_upperStar Λ f).toLaxMonoidal.μ M N
 
-/-- The actual composite oplax unit, retaining the scalar-extension multiplication map.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The actual composite oplax unit, retaining the scalar-extension multiplication map. -/
 @[reducible] def normalizationInternalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.upperStar Λ f).obj (𝟙_ (internalModules Λ Y)) ⟶
       𝟙_ (internalModules Λ X) :=
   (CondensedRing.monoidal_upperStar Λ f).toOplaxMonoidal.η
 
-/-- The specified ringed-section adjunction mate tensor map.
-Source: Stacks 03D7 and 03EL (auxiliary; not a blueprint node). -/
+/-- The specified ringed-section adjunction mate tensor map. -/
 @[reducible] def normalizationSectionTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : modules Λ Y) :
     (pullback Λ f).obj (M ⊗ N) ⟶ (pullback Λ f).obj M ⊗ (pullback Λ f).obj N :=
   (pullOplax Λ f).δ M N
 
-/-- The specified ringed-section adjunction mate unit map.
-Source: Stacks 03D7 and 03EL (auxiliary; not a blueprint node). -/
+/-- The specified ringed-section adjunction mate unit map. -/
 @[reducible] def normalizationSectionUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullback Λ f).obj (𝟙_ (modules Λ Y)) ⟶ 𝟙_ (modules Λ X) :=
   (pullOplax Λ f).η

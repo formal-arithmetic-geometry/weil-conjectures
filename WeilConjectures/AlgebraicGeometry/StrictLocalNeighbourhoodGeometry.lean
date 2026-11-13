@@ -17,8 +17,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Canonical derived sections and strict-local cohomology germs
 
-Source: Stacks Project, Tags 03Q8 and 03Q9. The derived Hom comparison is the
+ The derived Hom comparison is the
 explicit free-abelian-sheaf construction used in AbelianHigherDirectImagePresheaf.
+
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -30,26 +35,20 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- The fixed small affine pointed-neighbourhood functor to the small etale site.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: def-weil-pbc-strict-local-neighbourhood-geometry). -/
+/-- The fixed small affine pointed-neighbourhood functor to the small etale site. -/
 noncomputable def strictLocalNeighbourhoods {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s) ⥤ S.Etale :=
   (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
     Functor.Elements.π _ ⋙ Scheme.AffineEtale.Spec S
 
-/-- The base-changed neighbourhood diagram, with the order V ×_S X.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: def-weil-pbc-strict-local-neighbourhood-geometry). -/
+/-- The base-changed neighbourhood diagram, with the order V ×_S X. -/
 noncomputable def strictLocalNeighbourhoodDiagram {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s) ⥤ Scheme.{v} :=
   strictLocalNeighbourhoods s ⋙ Scheme.Etale.forget S ⋙ Over.pullback f ⋙ Over.forget X
 
-/-- The stage projections to X.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: def-weil-pbc-strict-local-neighbourhood-geometry). -/
+/-- The stage projections to X. -/
 noncomputable def strictLocalNeighbourhoodProjection {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     strictLocalNeighbourhoodDiagram f s ⟶
@@ -62,9 +61,7 @@ noncomputable def strictLocalNeighbourhoodProjection {X S : Scheme.{v}} (f : X �
 /-- Geometric data for the canonical pullback limit, without any cohomology or mate.
 The first-component equation fixes each leg by the strict-henselization limit leg;
 the second fixes its projection to X. Thus the data admit no arbitrary reindexing
-or automorphism of the limit cone.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: def-weil-pbc-strict-local-neighbourhood-geometry). -/
+or automorphism of the limit cone. -/
 structure StrictLocalNeighbourhoodGeometry {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) where
   legs : (Functor.const (SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s))).obj

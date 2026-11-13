@@ -14,7 +14,11 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # ScalarCupCoefficientNaturality
 
-Source: Stacks Project, Cohomology, Tags 01F7, 07MB and 0FKV.
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
+* [Stacks Project, Tag 07MB](https://stacks.math.columbia.edu/tag/07MB)
+* [Stacks Project, Tag 0FKV](https://stacks.math.columbia.edu/tag/0FKV)
 -/
 
 @[expose] public section
@@ -157,28 +161,6 @@ private theorem tensorCoefficient_naturality
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Cup products are natural in two coefficient morphisms on a fixed scheme.
-Source: Stacks Project, Cohomology, Tags 07MB and 0FKV; Tag 01F7 for coefficient maps.
-(blueprint: lem-sc-scalar-cup-coefficient-naturality).
-
-Proof: Choose injective resolutions of the four coefficient modules and comparison
-chain maps lifting phi and psi. Evaluation at 1 intertwines a comparison chain map
-with the global-sections map, since an O-linear map sends the image of 1 to the
-image of that section. Thus the moduleExtEquiv comparison intertwines the recorded
-right-derived-functor coefficient map with postcomposition in Ext. Restriction to
-k and precomposition by scalarUnitMorphism preserve this equality by associativity
-of Yoneda composition, giving the same assertion for scalarCohomologyExtEquiv.
-For the tensor coefficient, both orders send s tensor t to phi(s) tensor psi(t).
-The tensor universal property and sheafification adjunction make this an equality
-of sheaf morphisms. Apply this square to the tensor pairing of resolution complexes:
-comparison chain maps have degree zero, so the signs of Tag 07MB agree in both
-orders. Tag 0FKV identifies its augmentation with the ordinary coefficient tensor
-map and the derived cup product. Equivalently, associativity and naturality of
-Yoneda composition identify postcomposition of scalarExtCup with the cup of the
-two postcompositions. Compose with scalarTensorCoefficient, use its square, and
-transport through the injective scalarCohomologyExtEquiv. The comparison with the
-recorded coefficient maps proved above gives the displayed equality. No acyclic
-cover or quasi-coherence assumption is used. In degree zero this is precisely the
-pure-tensor identity; if a morphism or a coefficient is zero both sides are zero.
 -/
 theorem scalarCup_coefficient_naturality
     (k : Type w) [Field k] (X : Scheme.{w})

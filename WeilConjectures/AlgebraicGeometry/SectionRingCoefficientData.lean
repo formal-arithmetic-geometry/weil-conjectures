@@ -19,8 +19,7 @@ The coefficient of a homogeneous fraction is defined using the unique scalar rel
 powers of the chosen free generator. Equality of fractions is checked after clearing a
 power of the denominator; restricting to the open and using uniqueness proves independence.
 The same calculation proves preservation of zero, one, addition, and multiplication, and
-proves the displayed numerator equation.
-(blueprint: lem-sc-section-ring-coefficient-data). -/
+proves the displayed numerator equation.. -/
 theorem exists_sectionRing_coefficient_data
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

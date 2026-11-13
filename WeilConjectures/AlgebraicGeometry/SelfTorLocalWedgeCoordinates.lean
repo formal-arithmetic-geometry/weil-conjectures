@@ -19,8 +19,12 @@ import WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan
 
 /-! # Local Koszul agreement on wedges in affine self-Tor coordinates
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-h3-self-tor-local-wedge-coordinates). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -160,39 +164,7 @@ private theorem local_wedge_agreement_of_ideal_generators
 
 set_option linter.unusedVariables false in
 /-- Normalized affine coordinates agree locally on a single pure wedge. This assertion
-provides neither equality on general exterior sections nor equality of module maps.
-Source: Stacks Project, Tag 09PQ (Koszul normalization and resolution independence),
-Tag 01R3 (conormal classes), and Tag 06YH (K-flat computation).
-(blueprint: new-h3-self-tor-local-wedge-coordinates).
-
-Proof: On each affine chart U, identify the closed chart with Spec(A/I). Sheafify a
-projective resolution of A/I by exists_affine_quotient_sheafified_resolution. Its
-bounded-above projective complex sheafifies to a K-flat resolution; tensoring with
-A/I and comparing with the fixed derived tensor gives the target coordinate t_U.
-The quotient ideal kills the resulting homology, so its tensor pullback is the
-associated quotient-module sheaf. Apply affineOpen_kernel_conormal_sections to
-the identity ring coordinates; its unit formula identifies each ideal class with
-the pulled-back kernel section. The exterior universal property and restriction
-isomorphism give s_U. Choose these resolution and conormal coordinates for all U.
-For V contained in U and a point x in W contained in i^-1 V, shrink around x to a
-principal-open refinement of U and V. The finitely many entries of the wedge are
-locally linear combinations of conormal classes of ideal sections: lift the
-conormal quotient classes locally, and clear their finitely many denominators on
-a common principal refinement. Flat localization preserves the quotient complex,
-its augmentation, and homology. Lift each resulting finite tuple's Koszul
-augmentation to the localized projective resolution. The normalization of
-selfTorConormalComparison identifies the image of its wedge cycle with the value
-of the algebraic comparison. Homotopic lifts give the same homology class, and
-comparison of projective resolutions preserves the augmentation and this class.
-Hence the two charts give the same value for each lifted ideal tuple.
-Multilinearity extends this equality to the cleared tuple of local conormal
-sections, with identical restricted scalar coefficients on both sides. Invert the
-cleared denominators to get equality for the original wedge on a neighbourhood
-W' of x. This is the displayed equality of restrictions of the two values.
-No passage from wedges to general sheafified sections is used here. For n=0 the
-empty tuple gives the quotient unit. For an empty W the pointwise clause is
-vacuous. Zero quotients, the zero ideal and nonregular ideals use the same
-resolution and normalization argument; no Koszul acyclicity is assumed. -/
+provides neither equality on general exterior sections nor equality of module maps. -/
 theorem exists_local_wedge_selfTor_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

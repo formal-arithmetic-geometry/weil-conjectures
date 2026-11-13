@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.SquareZeroGluedScalarExistsUnique
 
 /-! # The quotient action on a square-zero ideal
 
-Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of the proof.
+## References
+
+* [Stacks Project, Tag 0B8S](https://stacks.math.columbia.edu/tag/0B8S)
 -/
 
 @[expose] public section
@@ -28,20 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Linear operators obtained by multiplying with local lifts in a square-zero extension.
-Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of its proof.
-(blueprint: lem-sc-square-zero-glued-linear-operators)
-
-Proof: Short exactness identifies I with the kernel of p, sectionwise. Cover U by
-opens on which f lifts to b. The product b*i(x) is in the kernel and has a unique
-preimage in I. On overlaps two lifts differ by a kernel section, which annihilates
-i(x) by square-zero. The preimages glue uniquely. The construction is additive and
-O_X(U)-linear in x: check these identities after restricting to the lifting cover,
-apply the injective inclusion i, and use distributivity and commutativity in B.
-This gives a linear endomorphism for each f, without asserting any ring laws in f.
-Uniqueness of gluing proves restriction compatibility. For f=p(b), use b itself
-as a lift. Empty opens and the zero kernel are covered by the same uniqueness
-argument. No chosen object is installed as a definition. -/
+/-- Linear operators obtained by multiplying with local lifts in a square-zero extension. -/
 theorem square_zero_glued_linear_operators (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))

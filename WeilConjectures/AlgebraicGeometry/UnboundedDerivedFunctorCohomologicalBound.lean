@@ -19,8 +19,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 /-!
 # An upper cohomological bound for an unbounded derived functor
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08D4, part (3), upper-bound
-clause (blueprint: lem-pc-unbounded-derived-functor-cohomological-bound).
+## References
+
+* [Stacks Project, Tag 08D4](https://stacks.math.columbia.edu/tag/08D4)
 -/
 
 @[expose] public section
@@ -34,25 +35,6 @@ namespace AlgebraicGeometry
 /-- An additive functor commuting with countable products and with `R^p F = 0` on
 quasi-coherent modules for `p ≥ N` sends quasi-coherent derived objects supported in
 degrees at most `b` to objects supported in degrees at most `b + N - 1`.
-
-Source: Stacks Project, Tag 08D4, part (3), upper-bound clause
-(blueprint: lem-pc-unbounded-derived-functor-cohomological-bound).
-
-Proof:
-1. Put `E_n = τ_{≥ -n} E`. Use `lem-pc-qcoh-truncation-derived-limit` to
-reconstruct after `RF`, and apply `lem-pc-derived-limit-milnor-sequence` in degree `i`.
-2. For `i ≥ b + N`, start with `E_{-b-1} = τ_{≥ b+1} E = 0`, by the standard
-t-structure and the support assumption. The right derived functor preserves zero
-objects. Integer induction using `lem-pc-derived-functor-truncation-stabilization`
-then gives `H^i(RF(E_n)) = 0` for every integer `n ≥ -b-1`: the successor index
-`n+1` is at least `N-i`.
-3. In degree `i-1`, successor transitions of the natural-number tower are
-isomorphisms for `n ≥ max(0,N-i)`. Apply
-`lem-pc-derived-limit-eventually-iso` to make the left Milnor endpoint zero.
-4. The degree-`i` tower is eventually zero by step 2. For each projection to term
-`j`, choose a natural `n ≥ j` and `n ≥ -b-1`; compatibility factors that projection
-through the zero term `n`. Limit extensionality makes the right Milnor endpoint
-zero. Exactness between zero endpoints gives the required vanishing.
 -/
 theorem isZero_homology_rightDerivedFunctor_of_cohomological_bound
     (X : Scheme.{u})

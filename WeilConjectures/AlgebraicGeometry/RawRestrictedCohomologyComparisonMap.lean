@@ -13,8 +13,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Evaluation comparison from raw derived Hom to restricted cohomology
 
-Source: Stacks Project, Tags 03Q8, 072W and 0BKV.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map).
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 072W](https://stacks.math.columbia.edu/tag/072W)
+* [Stacks Project, Tag 0BKV](https://stacks.math.columbia.edu/tag/0BKV)
 -/
 
 @[expose] public section
@@ -27,21 +30,17 @@ namespace AlgebraicGeometry.Etale
 
 namespace RawRestrictedComparison
 
-/-- The existing stability instance, named to avoid unfolding etaleness during synthesis.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- The existing stability instance, named to avoid unfolding etaleness during synthesis.. -/
 abbrev etaleComposition : MorphismProperty.IsStableUnderComposition @Etale := inferInstance
 
-/-- The existing identity instance, named to avoid unfolding etaleness during synthesis.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- The existing identity instance, named to avoid unfolding etaleness during synthesis.. -/
 abbrev etaleIdentities : MorphismProperty.ContainsIdentities @Etale := inferInstance
 
-/-- Etaleness is stable under the pullbacks used here.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Etaleness is stable under the pullbacks used here.. -/
 theorem etalePullbacks {X Y : Scheme.{v}} (f : X ⟶ Y) :
     MorphismProperty.HasPullbacksAlong (@Etale) f := inferInstance
 
-/-- The existing base-change stability instance in an explicit form.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- The existing base-change stability instance in an explicit form.. -/
 theorem etaleBaseChange {X Y : Scheme.{v}} (f : X ⟶ Y) :
     MorphismProperty.IsStableUnderBaseChangeAlong (@Etale) f := inferInstance
 
@@ -49,22 +48,19 @@ attribute [local instance] etaleComposition etaleIdentities etalePullbacks
   etaleBaseChange
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Cache the existing sheafification instance during elaboration of the formulas.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Cache the existing sheafification instance during elaboration of the formulas.. -/
 theorem sheafifyInstance (X : Scheme.{v}) :
     HasSheafify X.smallEtaleTopology AddCommGrpCat.{v + 1} := inferInstance
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Cache the weak instance underlying the same sheafification.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Cache the weak instance underlying the same sheafification.. -/
 theorem weakSheafifyInstance (X : Scheme.{v}) :
     HasWeakSheafify X.smallEtaleTopology AddCommGrpCat.{v + 1} := inferInstance
 
 attribute [local instance] sheafifyInstance weakSheafifyInstance
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The free abelian represented sheaf whose inverse image is the raw Hom source.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- The free abelian represented sheaf whose inverse image is the raw Hom source.. -/
 noncomputable abbrev freeSheaf (S : Scheme.{v}) (U : S.Etale) :
     Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1} :=
   (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
@@ -72,8 +68,7 @@ noncomputable abbrev freeSheaf (S : Scheme.{v}) (U : S.Etale) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections of an etale restriction are sections over the etale object.
-The terminal object of the localized site maps to that object.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+The terminal object of the localized site maps to that object.. -/
 noncomputable def sectionsIso {Y : Scheme.{v}} (W : Y.Etale)
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (Sheaf.Γ W.left.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
@@ -87,8 +82,7 @@ noncomputable def sectionsIso {Y : Scheme.{v}} (W : Y.Etale)
       (MorphismProperty.Over.mkIdTerminal @Etale W.left)).app _ ≪≫ G.obj.mapIso i.op.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The represented identity section, pulled back to `U ×_S Y`.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- The represented identity section, pulled back to `U ×_S Y`.. -/
 noncomputable def generator {S Y : Scheme.{v}} (h : Y ⟶ S) (U : S.Etale) :
     (Sheaf.Γ (Limits.pullback U.hom h).smallEtaleTopology AddCommGrpCat.{v + 1}).obj
       ((upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)).obj
@@ -111,13 +105,11 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
   (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   (R : D ⥤ AddCommGrpCat.{v + 1}) [R.Additive] [PreservesFiniteLimits R]
 
-/-- Restriction followed by derived sections, in abstract abelian categories.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Restriction followed by derived sections, in abstract abelian categories.. -/
 noncomputable abbrev functor : DerivedCategory.Plus C ⥤ DerivedCategory AddCommGrpCat.{v + 1} :=
   DerivedCategory.Plus.ι ⋙ L.mapDerivedCategory ⋙ R.rightDerivedFunctor
 
-/-- The degree-zero single comparison for evaluation.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- The degree-zero single comparison for evaluation.. -/
 noncomputable def singleIso (F : C) :
     (functor L R).obj ((DerivedCategory.Plus.singleFunctor C 0).obj F) ≅
       R.rightDerivedFunctor.obj (DerivedCategory.Q.obj
@@ -127,8 +119,7 @@ noncomputable def singleIso (F : C) :
       (L.mapDerivedCategorySingleFunctor 0).app F ≪≫
       (DerivedCategory.singleFunctorIsoCompQ D 0).app (L.obj F))
 
-/-- Zeroth derived evaluation is underived evaluation.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Zeroth derived evaluation is underived evaluation.. -/
 noncomputable def zeroIso (F : C) :
     (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).obj
       ((functor L R).obj ((DerivedCategory.Plus.singleFunctor C 0).obj F)) ≅
@@ -140,8 +131,7 @@ noncomputable def zeroIso (F : C) :
     R.homologyRightDerivedFunctorObjSingleFunctorIso (L.obj F) 0 ≪≫
     R.rightDerivedZeroIsoSelf.app (L.obj F)
 
-/-- Undo the shift after taking zeroth homology.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Undo the shift after taking zeroth homology.. -/
 noncomputable def shiftIso (p : ℕ) (F : C) :
     (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).obj
       ((functor L R).obj (((DerivedCategory.Plus.singleFunctor C 0).obj F)⟦(p : ℤ)⟧)) ≅
@@ -154,8 +144,7 @@ noncomputable def shiftIso (p : ℕ) (F : C) :
       (p : ℤ) 0 (p : ℤ) (by simp)).app _ ≪≫
     (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} (p : ℤ)).mapIso (singleIso L R F)
 
-/-- Apply an additive functor to a morphism and evaluate at a fixed element.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Apply an additive functor to a morphism and evaluate at a fixed element.. -/
 noncomputable def evaluate {E : Type*} [Category.{v + 1} E] [Preadditive E]
     (T : E ⥤ AddCommGrpCat.{v + 1}) [T.Additive] {A B : E} (x : T.obj A) :
     AddCommGrpCat.of (A ⟶ B) ⟶ T.obj B :=
@@ -166,16 +155,14 @@ noncomputable def evaluate {E : Type*} [Category.{v + 1} E] [Preadditive E]
 
 end Evaluation
 
-/-- Restrict a bounded-below derived object, then take derived sections.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Restrict a bounded-below derived object, then take derived sections.. -/
 noncomputable abbrev sectionsFunctor {Y : Scheme.{v}} (W : Y.Etale) :
     DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ⥤
       DerivedCategory AddCommGrpCat.{v + 1} :=
   Evaluation.functor (upperStar AddCommGrpCat.{v + 1} W.hom)
     (Sheaf.Γ W.left.smallEtaleTopology AddCommGrpCat.{v + 1})
 
-/-- Zeroth derived sections of a single sheaf are its sections.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Zeroth derived sections of a single sheaf are its sections.. -/
 noncomputable def zeroIso {Y : Scheme.{v}} (W : Y.Etale)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).obj
@@ -185,8 +172,7 @@ noncomputable def zeroIso {Y : Scheme.{v}} (W : Y.Etale)
   Evaluation.zeroIso (upperStar AddCommGrpCat.{v + 1} W.hom)
     (Sheaf.Γ W.left.smallEtaleTopology AddCommGrpCat.{v + 1}) F
 
-/-- Shifted zeroth derived sections compute degree p restricted cohomology.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+/-- Shifted zeroth derived sections compute degree p restricted cohomology.. -/
 noncomputable def shiftIso {S Y : Scheme.{v}} (h : Y ⟶ S) (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).obj
@@ -201,9 +187,7 @@ end RawRestrictedComparison
 set_option backward.isDefEq.respectTransparency false in
 /-- Apply restricted derived sections and zeroth homology to a raw class, evaluate
 at the pulled-back represented identity section, and undo the shift comparison.
-All data are explicit functorial constructions.
-Source: Stacks Project, Tag 03Q8; Tags 072W and 0BKV.
-(blueprint: def-sbc-raw-restricted-cohomology-comparison-map). -/
+All data are explicit functorial constructions. -/
 noncomputable def rawRestrictedCohomologyComparison {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     (abelianHigherDirectImageRawPresheaf h p F).obj (op U) ⟶

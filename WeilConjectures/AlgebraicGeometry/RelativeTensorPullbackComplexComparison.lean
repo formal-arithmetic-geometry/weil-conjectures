@@ -17,8 +17,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Balanced tensor pullback for ordinary complexes
 
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-(blueprint: lem-pc-relative-tensor-pullback-complex-comparison)
+## References
+
+* [Stacks Project, Tag 08DE](https://stacks.math.columbia.edu/tag/08DE)
 -/
 
 @[expose] public section
@@ -39,23 +40,7 @@ noncomputable local instance complexComparisonModuleTensor (X : Scheme.{u}) :
 
 
 /-- The balanced module tensor identity extends to total complexes after forgetting
-scalars. No K-flatness, quasi-isomorphism or derived category occurs in this statement.
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-
-Proof: in bidegree (p,q), identify
-A^p tensor over O_X (O_X tensor over f-inverse O_S f-inverse L^q)
-with A^p restricted to f-inverse O_S tensor f-inverse L^q by
- a tensor (b tensor l) maps to (b*a) tensor l; the inverse sends
- a tensor l to a tensor (1 tensor l). The balancing relations prove
-well-definedness and the two inverse identities. These identities on sections
-commute with restrictions, so they sheafify to module tensor isomorphisms.
-Naturality in both factors makes them commute with the two differentials.
-In total degree n both sides use the coproduct over p+q=n, and the second
-differential has the same sign (-1)^p. Forgetting scalars preserves these
-coproducts. Taking the coproduct of the summand isomorphisms in each degree
-therefore gives mutually inverse chain maps of abelian sheaves. No bound on
-A or L is needed; zero modules and empty schemes satisfy the same identities.
-(blueprint: lem-pc-relative-tensor-pullback-complex-comparison) -/
+scalars. No K-flatness, quasi-isomorphism or derived category occurs in this statement. -/
 theorem relativeTensorPullback_complex_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤

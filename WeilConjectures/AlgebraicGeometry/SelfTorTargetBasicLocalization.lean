@@ -22,8 +22,11 @@ import WeilConjectures.RingTheory.SelfTorRestrictionConormalWedge
 
 /-! # Target self-Tor coordinates and principal localization of algebraic wedge images
 
-Source: Stacks Project, Tags 09PQ and 06YH.
-(blueprint: new-t2-self-tor-target-basic-localization). -/
+## References
+
+* [Stacks Project, Tag 09PQ](https://stacks.math.columbia.edu/tag/09PQ)
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,32 +36,7 @@ namespace AlgebraicGeometry
 
 /-- Choose only the Tor-to-derived-homology coordinates, and compare their values on
 explicit associated algebraic Tor elements under a principal localization. No exterior
-sheaf source coordinate or pullback-unit wedge equation is assumed or asserted.
-Source: Stacks Project, Tag 09PQ (normalized Tor products), Tag 06YH (K-flat tensor).
-(blueprint: new-t2-self-tor-target-basic-localization).
-
-Proof: On each U choose a projective quotient resolution with its augmentation.
-Sheafify it using exists_affine_quotient_sheafified_resolution. Its bounded-above
-flat cochain complex is K-flat, so the augmentation comparison with the fixed derived
-tensor identifies quotient-tensored homology with the restriction of its homology.
-The ideal acts by zero on Tor; its tensor pullback is thus the associated Tor module
-on the closed chart. This gives t on each chart, determined by the augmented
-resolution comparison. For V=D(f) and b defined on U, include b into I_U. Lift the
-Koszul quotient augmentation for that tuple to the projective resolution on U.
-After quotient tensoring its top wedge is a cycle. By selfTorConormalComparison_spec,
-its homology image is c_U(selfTorIdealWedge b). Localization is flat, preserves the
-augmentation and the projective resolution, and takes this cycle to the cycle of
-the restricted tuple on V. Compare this localized resolution with the one chosen
-on V over the quotient augmentation. The two Koszul lifts are chain homotopic,
-so they have equal homology images. Normalization on V identifies that image with
-c_V of the restricted ideal wedge. The K-flat augmentation comparison identifies
-these classes in the fixed derived tensor and commutes with restriction. The
-explicit selfTorAffineSection sends each algebraic class to exactly its associated
-sheaf section and then its tensor-pullback-unit image, so the equality is precisely
-the displayed equation. In degree zero the cycle is the quotient unit; for f=0
-both sides are sections on the empty chart, and for f=1 the localization is the
-identity. Zero quotients give zero modules. No regularity, finite generation of I,
-or acyclicity of the Koszul complex is used. -/
+sheaf source coordinate or pullback-unit wedge equation is assumed or asserted. -/
 theorem exists_selfTor_target_basic_localization
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

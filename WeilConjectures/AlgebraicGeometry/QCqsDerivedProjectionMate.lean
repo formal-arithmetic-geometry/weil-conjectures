@@ -27,8 +27,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectionFormulaLocality
 
 /-! # The quasi-coherent derived projection mate
 
-Source: Stacks Project, perfect.tex, Tag 08EU, lemma-cohomology-base-change.
-(blueprint: lem-pc-qcqs-derived-projection-mate).
+## References
+
+* [Stacks Project, Tag 08EU](https://stacks.math.columbia.edu/tag/08EU)
+* [Stacks Project, Tag 0A9Q](https://stacks.math.columbia.edu/tag/0A9Q)
 -/
 
 @[expose] public section
@@ -37,45 +39,7 @@ universe u w
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- The projection mate for quasi-coherent derived objects is invertible.
-Source: Stacks Project, Tag 08EU (lemma-cohomology-base-change),
-and the fourth Hom equality in Tag 0A9Q (lemma-iso-on-RSheafHom).
-(blueprint: lem-pc-qcqs-derived-projection-mate).
-
-Proof: write pi(M,L) for the displayed mate. It is natural in both arguments
-by naturality of t, the counit, and the adjunction Hom equivalence. Restrict to
-an affine open U of Y and f inverse U in X. Restriction is a localization:
-its right adjoint on the derived category is fully faithful. Pullback and
-tensor commute with restriction, and direct image commutes with restriction
-to an open in the target. Consequently the bifunctors underlying t descend
-to these localized categories, as does t itself (evaluate on the fully
-faithful right adjoints and use the localization counit). The same operation
-transports p, its counit, and its Hom equivalence. Thus restriction of pi is
-the mate for the transported p and t; no equality with the canonical tensor
-comparison is asserted. Isomorphisms are detected on an open cover.
-
-Now Y is affine, say Spec A. For M = O_Y[n], the shift and unit comparisons
-identify t(M,-) with a natural automorphism of shifted pullback. Its mate
-under p and the shifted adjunction is a natural automorphism of shifted
-direct image: the mate of the inverse is its inverse, by the triangle
-identities. The displayed pi(M,L), after these shift and unit identifications,
-is exactly that mate evaluated at L. It is therefore invertible for every
-integer n and every quasi-coherent L. This argument allows arbitrary p and t.
-
-Fix L. Under D(A) equivalent to D_QCoh(Y), use the property that pi(M[n],L)
-is invertible for every integer n, rather than only at M. Both functors in M
-are exact and preserve coproducts: pullback is a left adjoint, tensor preserves
-coproducts, and qcqs direct image preserves quasi-coherent coproducts. Hence
-this property is closed under coproducts and retracts. For a distinguished
-triangle, apply Hom(T,-), for every ambient test object T, to its images and
-all its shifts. These are exact sequences. Naturality of pi at the triangle
-maps and at the connecting maps gives a diagram of these sequences using
-pi at each shifted vertex. The five lemma proves the property for the third
-vertex when it holds for the other two. This uses no compatibility of t with
-a separately chosen shift comparison. The free-generation theorem for D(A)
-now proves the property for every M, since it holds for all shifts of A.
-Open-cover detection gives the result on Y. For zero objects and the empty
-scheme every arrow concerned is the unique isomorphism between zero objects. -/
+/-- The projection mate for quasi-coherent derived objects is invertible. -/
 theorem qcqsDerivedProjectionMate_isIso (X Y : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

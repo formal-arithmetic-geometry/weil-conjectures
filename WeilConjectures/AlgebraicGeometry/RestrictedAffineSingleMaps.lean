@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedAffineCoefficientConst
 
 /-! # Explicit maps for restricted degree-zero complexes
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -21,9 +24,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Restrict the given coefficient transition and apply the degree-zero single functor.
-Source: Stacks Project, Tag 09Z1, restriction to an affine etale object.
-(blueprint: def-sbc-restricted-affine-single-maps). -/
+/-- Restrict the given coefficient transition and apply the degree-zero single functor. -/
 @[implicit_reducible]
 noncomputable def restrictedAffineSingleTransition {S : Scheme.{v}} {I : Type v}
     [Preorder I] (D : Iᵒᵖ ⥤ Over S)
@@ -44,9 +45,7 @@ noncomputable def restrictedAffineSingleTransition {S : Scheme.{v}} {I : Type v}
         (Over.w (D.map f)) (F i.unop) (F j.unop) (φ f.unop) U)
 
 /-- The cone comparison, built from the given `eH`, two inverse-image composition
-isomorphisms, and the single-complex comparison. No witness is chosen.
-Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of a cone coefficient system.
-(blueprint: def-sbc-restricted-affine-single-maps). -/
+isomorphisms, and the single-complex comparison. No witness is chosen. -/
 noncomputable def restrictedAffineSingleConeIso {S : Scheme.{v}} {I : Type v}
     [Preorder I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D)
     (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})

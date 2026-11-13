@@ -15,8 +15,12 @@ import WeilConjectures.AlgebraicGeometry.FirstOrderThickeningBaseChange
 /-!
 # Universal first order thickenings under flat base change
 
-Source: Stacks Project, More on Morphisms, Lemmas 04F8 and 04F9; Morphisms,
-Lemmas 01R4 and 0473 (blueprint: lem-weil-pbc-universal-thickening-flat-base-change).
+## References
+
+* [Stacks Project, Tag 04F8](https://stacks.math.columbia.edu/tag/04F8)
+* [Stacks Project, Tag 04F9](https://stacks.math.columbia.edu/tag/04F9)
+* [Stacks Project, Tag 01R4](https://stacks.math.columbia.edu/tag/01R4)
+* [Stacks Project, Tag 0473](https://stacks.math.columbia.edu/tag/0473)
 -/
 
 @[expose] public section
@@ -31,29 +35,7 @@ namespace AlgebraicGeometry
 conormal sheaves. The two projection equations specify `iZ = id_X × iW` uniquely.
 The map in the final clause is exactly the canonical map of
 `Scheme.Modules.closedImmersion_conormal_functorial`, not an arbitrary module isomorphism.
-The proof witnesses `hu` and `HZ` allow the conormal definition to use this thickening.
-
-Source: Stacks Project, More on Morphisms, Lemmas 04F8 and 04F9, with Morphisms,
-Lemmas 01R4 and 0473 (blueprint: lem-weil-pbc-universal-thickening-flat-base-change).
-Proof:
-1. The first projection is formally unramified by base change of `hW`
-   (lem-weil-pbc-formally-unramified-base-change).
-2. The square of `iZ`, `iW` and the second projections is cartesian by
-   lem-weil-pbc-cartesian-square-pasting. Thus iZ is a first order thickening by
-   lem-weil-pbc-first-order-thickening-base-change.
-3. Given a test thickening over X mapping into Z, compose its maps with g and the
-   second projection. The universal property of HW gives a unique map into W'.
-   Pair it with the test scheme's map to X to obtain its unique map into Z'.
-   This is def-weil-pbc-universal-first-order-thickening and the fibre product property.
-4. The second projection from Z' is flat by base change of g
-   (lem-weil-pbc-flat-morphism-base-change).
-5. By def-weil-pbc-conormal-sheaf-formally-unramified, compute the conormal sheaves
-   using HW and HZ; uniqueness of universal thickenings justifies these choices
-   (lem-weil-pbc-universal-first-order-thickening-exists). Their canonical map is the
-   map of lem-weil-pbc-closed-immersion-conormal-functorial, induced by the ambient
-   second projection on ideals and def-pc-module-pullback. The cartesian square and
-   its flat ambient map make it an isomorphism by
-   lem-weil-pbc-closed-immersion-conormal-flat-base-change. -/
+The proof witnesses `hu` and `HZ` allow the conormal definition to use this thickening. -/
 theorem universalFirstOrderThickening_flat_base_change
     {W W' X Y : Scheme.{u}} (hW : W ⟶ Y) [FormallyUnramified hW]
     (g : X ⟶ Y) [Flat g] (iW : W ⟶ W') (s : W' ⟶ Y)

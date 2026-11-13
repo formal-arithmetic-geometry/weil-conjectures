@@ -12,13 +12,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificatio
 
 /-! # The graph comparison and the etale projection formula over arbitrary bases
 
-Source: blueprint `sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md`,
-paragraph 3; Stacks Tag 0GKF, lemma-f-shriek-projection
-(auxiliary; not a blueprint node).
-
 The graph comparison is the upstream `compactificationEtaleComparison`, constructed
 from clopen graph transfer and inverse proper exchange. The helpers merely insert the
 canonical exact/left-derived comparison into the existing projection maps.
+
+## References
+
+* [Stacks Project, Tag 0GKF](https://stacks.math.columbia.edu/tag/0GKF)
 -/
 
 @[expose] public section
@@ -33,8 +33,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse tensor comparison for exact inverse image, transported from derived pullback.
-Source: Stacks Tag 0GKF and blueprint paragraph 3
-(auxiliary; not a blueprint node).
+
 This is mu, using precisely the canonical exact/left-derived comparison in both inputs
 and in their tensor product. Its coefficient-unit normalization is etaleSumPullbackUnitIso.
 It is the existing `supportExactPullbackTensorIso` (owner
@@ -50,8 +49,7 @@ noncomputable abbrev sfEtaleExactPullbackTensorIso
   supportExactPullbackTensorIso (ModuleCat.{u + 1} A) e B K
 
 /-- The specified unit-adjunct tensor action kappa for exact etale sum extension.
-Source: Stacks Tag 0GKF and blueprint paragraph 3
-(auxiliary; not a blueprint node).
+
 This is the inverse Hom transpose of the sum/evaluation unit tensored with the identity,
 followed by the inverse of mu. No choice of a projection isomorphism is made. -/
 noncomputable def sfEtaleSumExactTensorMap
@@ -69,8 +67,7 @@ noncomputable def sfEtaleSumExactTensorMap
         (D(etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj M) K).inv)
 
 /-- The proper-counit/open-tensor projection P, in the exact inverse-image model.
-Source: Stacks Tag 0GKF and blueprint paragraph 3
-(auxiliary; not a blueprint node).
+
 The existing ambient theorem supplies invertibility of the specified projection.
 Only its target is transported along the canonical Le* to D(e*) comparison. -/
 noncomputable def sfEtaleExactProjectionIso
@@ -132,9 +129,6 @@ private theorem exactTensor_inv_naturality
 
 /-- The specified graph comparison is a natural isomorphism, and intertwines the
 proper-counit/open-tensor projection with the sum/evaluation unit-adjunct tensor action.
-Source: blueprint thm-asd-smooth-tensor.proof.md, paragraph 3; Stacks Tag 0GKF,
-lemma-f-shriek-projection
-(auxiliary; not a blueprint node).
 
 The comparison a is exactly compactificationEtaleComparison: its graph transfer uses
 compactificationEtaleGraphIso, the clopen unit and counit, followed by the ordinary

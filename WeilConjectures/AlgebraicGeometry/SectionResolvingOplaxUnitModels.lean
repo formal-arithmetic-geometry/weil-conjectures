@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SectionRepresentativeTensorArrow
 
 /-! # Resolving regular-unit diagrams
 
-Source: Stacks Project, Tags 07A4 and 0G7E; the corresponding explicit
-representative calculation of the resolving constraint diagram.
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -182,22 +184,7 @@ private theorem section_tensor_map (T : Scheme.{u})
         M M' N N' a b := by
   rfl
 
-/-- The prescribed regular-unit models identify both unit diagrams.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4; Steps 9–10 of
-lem-pd-section-resolving-oplax-constraint-diagrams.
-
-Proof: the degree-zero regular module is resolving and so is its pullback. Its
-binary model maps, all resolution counits, and their tensor products are therefore
-invertible, giving the eight invertibility clauses. For the first left edge use
-the representative equation at the regular unit and P. For the second substitute
-v = ε at the unit followed by the localized scalar-unit arrow, and use naturality
-of the target modelTensor. For the third use naturality of the left unitor in ε_P
-and the normalized target modelTensor unitor equation. Composing these three
-squares is postponed to the consumer. Naturality of ε and the source
-modelTensor unitor equation give the opposite branch. Repeat with tensor factors
-reversed and the right unitor to obtain every right-unit edge clause. In both cases
-retain the specified scalar unit, regular comparison and binary model map throughout.
-(auxiliary; not a blueprint node). -/
+/-- The prescribed regular-unit models identify both unit diagrams. -/
 theorem section_resolving_oplax_unit_models {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

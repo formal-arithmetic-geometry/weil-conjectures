@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionForward
 
 /-! # Projection compatibility of the fixed graph compositor
 
-Source: blueprint sk-prop-sf-pf-coherence, composition pentagon.
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public section
@@ -127,21 +126,7 @@ private meta partial def graphProjectionCongrHEq (a b : Expr) : MetaM Expr := do
 
 /-- The explicitly constructed graph compositor preserves the projection maps.
 
-Source: blueprint sk-prop-sf-pf-coherence, composition pentagon; steps 1--3 of
-lem-route-exists-right-derived-lower-shriek-comp-iso.
-(auxiliary; not a blueprint node).
-
-Proof: apply sfEtaleCompactProjectionInverse_composition to the three chosen
-compactifications. All three projection components are invertible by
-sfEtaleAmbientAdjointProjection. Precompose its equation with the projection
-for the composite, then postcompose with the projection for g and the image
-under g of the projection for f. Cancel the three inverse pairs. The resulting
-forward equation is exactly ProjectionCompCompatible. Identify derivedTensor's
-object and morphism APIs with tensor objects and whiskering, and unfold only
-projectionMap and rightDerivedLowerShriek to identify the chosen compactifications.
-The two coefficient braiding instances are definitionally equal; the conversion
-must retain the derived-category constructions folded. This assertion involves
-only projection maps, and imposes no base-change compatibility. -/
+. -/
 theorem sfGraphCompactSupportCompIso_projection
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

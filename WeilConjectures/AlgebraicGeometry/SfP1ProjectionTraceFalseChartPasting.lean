@@ -43,7 +43,6 @@ def falseProjectionChartFactor
 The false projection mate-pasting calculation, before the trace is applied.
 It is the chart-exchange factorization precomposed by the intermediate
 comparison, and is independent of any choice of trace morphism.
-(auxiliary; not a blueprint node)
 -/
 theorem falseProjectionChartPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]

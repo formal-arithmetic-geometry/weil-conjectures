@@ -14,8 +14,10 @@ import Mathlib.RingTheory.Flat.EquationalCriterion
 
 /-! # Sheaf properties preserved by a retraction
 
-Source: Stacks Project, Tags 01PC and 00NX; affine direct summands.
-(blueprint: lem-pc-split-top-differential-cancellation-properties)
+## References
+
+* [Stacks Project, Tag 01PC](https://stacks.math.columbia.edu/tag/01PC)
+* [Stacks Project, Tag 00NX](https://stacks.math.columbia.edu/tag/00NX)
 -/
 
 @[expose] public section
@@ -26,22 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Retracts preserve the three termwise properties used in split cancellation.
-
-Source: Stacks Project, Tags 01PC and 00NX; affine direct summands.
-(blueprint: lem-pc-split-top-differential-cancellation-properties).
-
-Proof: Let i:M→N and r:N→M be the supplied retraction, so i ≫ r = id.
-Quasi-coherence of M follows by identifying it with the kernel of id_N - r ≫ i,
-whose source and target are quasi-coherent. On every affine open U the section
-maps make Γ(M,U) a retract of Γ(N,U). The affine finite-presentation criterion
-makes Γ(N,U) finitely presented. Flatness over the identity, evaluated at U=V,
-makes it flat over Γ(S,U), hence finite projective. Its retract is finite
-projective and therefore finitely presented; the affine criterion gives finite
-presentation of M. For arbitrary affine U⊆V, restrict scalars along Γ(S,V)→Γ(S,U).
-The section retraction is still linear and still splits, so flatness of Γ(N,U)
-over Γ(S,V) implies that of Γ(M,U) by Module.Flat.of_retract. This is exactly
-IsFlatOver (id S). The zero sheaf and the empty scheme cause no exception. -/
+/-- Retracts preserve the three termwise properties used in split cancellation. -/
 theorem split_top_differential_cancellation_properties
     (S : Scheme.{u}) (M N : S.Modules) (h : Retract M N)
     (hflat : N.IsFlatOver (𝟙 S)) (hqc : N.IsQuasicoherent)

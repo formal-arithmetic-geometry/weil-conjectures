@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Supported gluing relative to an ambient scheme
 
-Source: Stacks Project, Tag 08DG; Tag 08CM for local perfectness.
-(blueprint: lem-sc-supported-relative-open-gluing).
+## References
+
+* [Stacks Project, Tag 08DG](https://stacks.math.columbia.edu/tag/08DG)
+* [Stacks Project, Tag 08CM](https://stacks.math.columbia.edu/tag/08CM)
+* [Stacks Project, Tag 09IM](https://stacks.math.columbia.edu/tag/09IM)
 -/
 
 @[expose] public section
@@ -168,26 +171,7 @@ private theorem stalk_subsingleton_of_open_immersion
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Glue arbitrary supported perfect local objects and compatible maps on W union V.
-Neither affineness nor a stabilization of either source is assumed.
-Source: Stacks Project, Tags 08DG and 08CM, used in Tag 09IM.
-(blueprint: lem-sc-supported-relative-open-gluing).
-
-Proof: Set Y=W union V and pull W and V back to opens of Y. They cover Y and are
-canonically isomorphic as open subschemes to W and V. Transport A and B through these
-isomorphisms and the exact module over-equivalences. The corresponding equivalence on the
-intersection transports c. The natural composition comparisons for restriction identify
-the given compatibility equation with the hypothesis of derived_open_gluing on Y for
-the target E restricted to Y. That theorem supplies F, its two restriction isomorphisms,
-and a map alpha with the required equations. Transport those equations back to the
-relative functors PW and PV; the composition comparison kW (respectively kV) identifies
-iterated restriction of E with its direct restriction to W (respectively V).
-For a point of Y choose W or V containing it. A strictly perfect neighbourhood model
-of A or B, restricted and transported to the corresponding open of Y, is a model of F.
-This gives IsPerfect Y F. Exact restriction identifies each homology stalk of F with
-the corresponding stalk of A or B. Off T that stalk is zero by hAT or hBT, so F is
-supported on T intersect Y. No compactness, closedness of T, or boundedness of E is used.
-If a member of the cover is empty, choose the other at each point; if Y is empty,
-the perfectness and support conclusions are vacuous. -/
+Neither affineness nor a stabilization of either source is assumed. -/
 theorem exists_supported_relative_open_gluing
     (X : Scheme.{u}) (W V : X.Opens) (T : Set X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

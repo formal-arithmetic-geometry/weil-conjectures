@@ -63,13 +63,7 @@ private theorem postcomp_bijective {P Q Q' : C} (a : Q ≅ Q') (n : ℕ) :
 /-- In an exact-functor square U⋙G≅F⋙V between abelian categories, assume F and G induce bijections
 on Ext, and the degree-n Ext map induced by a specified scalar unit η is bijective. After
 transporting its source and target by specified isomorphisms, the corresponding V-scalar-unit map on
-Ext is also bijective [def-weil-abstract-derived-category].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
-Proof: Naturality of exact-functor Ext maps for the square isomorphism makes the two maps a
-commuting square after the endpoint isomorphisms. Those isomorphisms induce bijections by Yoneda
-composition, as do F and G by assumption. Express the lower map as a composite of these bijections
-and the inverse of the upper comparison; its bijectivity follows. -/
+Ext is also bijective. -/
 theorem scalar_unit_ext_comparison_bijective
     (τ : U ⋙ G ≅ F ⋙ V) {P Q : C} {X : B} {X' : E} {P' : D}
     (η : X ⟶ U.obj P) (s : G.obj X ≅ X') (a : F.obj P ≅ P') (n : ℕ)

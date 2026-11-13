@@ -16,8 +16,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Lower vanishing for the supported complex of a smooth pair
 
-Source: Stacks Project, Tags 0FUE and 09XP; the normal-coordinate argument in
-lem-pur-relative-support-bottom-descent, Steps 1--3.
+## References
+
+* [Stacks Project, Tag 0FUE](https://stacks.math.columbia.edu/tag/0FUE)
+* [Stacks Project, Tag 09XP](https://stacks.math.columbia.edu/tag/09XP)
 -/
 
 @[expose] public noncomputable section
@@ -34,31 +36,6 @@ vanishes below twice the codimension of a smooth pair with finite-dimensional am
 stalks. The finite-dimensional stalk hypothesis explicitly rules out using the
 codimension equation at infinity, where addition cannot determine the codimension.
 No frame or orientation is needed for this vanishing assertion.
-Source: Stacks Project, Tags 0FUE and 09XP; blueprint main-20261015,
-sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md, local coordinate argument
-(blueprint: lem-pur-relative-support-vanishing).
-
-Proof: At a geometric point on the support choose simultaneous etale coordinates for
-(V,Z) over B, and pull the chart back along e. Etale restriction is exact and preserves
-injectives; its ordinary kernel identification therefore identifies the supported
-derived stalks. The relative support coordinate model identifies the stalk with the
-global supported complex of the origin in affine b-space over the fixed algebraically
-closed field k. The codimension clause of that model gives b=c on every chart meeting
-the support, using the dimension equation at all points of Z, without cancelling an
-infinite Krull dimension. The finite-type coordinate support orientation over Spec k
-concentrates this field complex in degree 2b. Changing the annihilating exponent from
-the coefficient-ring characteristic to the universal ell-power preserves the signed
-finite Tate sheaf by the exponent comparison; all exponents in question are positive
-and invertible over k. Thus every supported stalk vanishes below 2c. The finite-dimensional
-ambient-stalk hypothesis is used when passing from the displayed Krull-dimension equality
-to the finite relative codimension in the local coordinate model. Outside the support the
-complementary open adjunction unit is invertible locally, so its kernel and derived stalk
-vanish. Forgetting scalars is exact and commutes with the restriction kernels. The underlying
-injective module sheaves are acyclic for
-restriction and for the supported kernel (check on etale objects using the support
-exact sequence), so the module calculation computes the same derived abelian support
-sheaf. Exact geometric stalks commute with cohomology, and their conservativity gives
-the asserted zero sheaf. This also covers c=0 (only negative degrees) and empty support.
 -/
 theorem relative_support_vanishing
     (P : WeilConjectures.PurityFiniteSetting.{u}) (c d : ℕ)
