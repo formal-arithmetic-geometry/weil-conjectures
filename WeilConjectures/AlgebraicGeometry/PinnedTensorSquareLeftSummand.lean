@@ -129,7 +129,6 @@ private theorem pinnedTensorStalkSquare_transport {X X' : Scheme.{u}}
   simpa only [Category.assoc, Functor.Monoidal.μIso_hom,
     Functor.Monoidal.μ_δ_assoc] using h
 
-set_option profiler true in
 /-- Pullback route on one tensor summand, in explicit stalk coordinates.
 
 Proof: invert the pinned source injection equation by cancelling its degree-n hom.

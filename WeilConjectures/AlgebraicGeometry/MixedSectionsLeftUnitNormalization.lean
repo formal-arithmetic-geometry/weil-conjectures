@@ -225,8 +225,10 @@ theorem mixedSections_left_unit_normalization
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
     dsimp only [p]
     simp only [Category.assoc]
-    rw [← Functor.map_comp_assoc, he, Functor.map_comp]
-    rw [Category.assoc, hn]
+    rw [← Functor.map_comp_assoc]
+    erw [he]
+    rw [Functor.map_comp]
+    erw [Category.assoc, hn]
     simpa only [Category.assoc] using congrArg
       (fun z ↦ z ≫ (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))) hg₀
