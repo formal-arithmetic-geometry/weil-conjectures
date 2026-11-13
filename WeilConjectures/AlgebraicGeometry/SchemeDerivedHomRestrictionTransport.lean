@@ -265,6 +265,7 @@ private lemma transportEquivalence
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
     [HasDerivedCategory H] [HasDerivedCategory I]
     (A : C ⥤ D) (e : D ≌ E) (T : D ⥤ H) (v : H ≌ I) (B : C ⥤ H)
+    [hA : A.Additive] [hT : T.Additive] [hB : B.Additive]
     [PreservesFiniteLimits A] [PreservesFiniteColimits A]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]
     [PreservesFiniteLimits B] [PreservesFiniteColimits B]
@@ -380,6 +381,9 @@ theorem scheme_derived_hom_restriction_transport
             (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app E))) ≫
           qW.inv.app E := by
   exact RestrictionTransport.transportEquivalence
+    (hA := moduleOverFunctor_additive X.toRingedSpace U)
+    (hT := moduleOverMap_additive X.toRingedSpace i)
+    (hB := moduleOverFunctor_additive X.toRingedSpace W)
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)
     (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) from Scheme.Modules.overEquiv U)
