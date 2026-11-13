@@ -461,6 +461,8 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
       L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
 
+set_option profiler true in
+set_option trace.profiler true in
 /-- Construct the projector using a bounded complex of étale origin. The exchange and action
 are shared in the conclusion, so their derived functors are elaborated only once. -/
 private theorem exists_retraction_galoisLayer_projector_of_complex
@@ -490,12 +492,6 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
             ∃ k, ∀ x : L', S k x = a x) →
           (∀ k, H.map (ρ (S k)) ≫ φ = φ) → H.map (r ≫ α) ≫ φ = φ := by
   dsimp only
-  have := projector_hasTensor₄ObjExt N.total
-    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
-  have := projector_hasGoodTensor₁₂Tensor N.total
-    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
-  have := projector_hasGoodTensorTensor₂₃ N.total
-    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
   choose F₀ hF₀ using hterms
   have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
       (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
