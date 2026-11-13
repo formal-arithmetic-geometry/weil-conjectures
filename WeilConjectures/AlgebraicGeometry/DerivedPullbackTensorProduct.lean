@@ -180,20 +180,24 @@ theorem derivedPullback_tensorProduct
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
                 (φ P N).hom)) := by
   classical
-  -- Reuse coproduct synthesis for both presentations of the module categories.
-  have : ∀ P N : CochainComplex S.Modules ℤ,
-      HomologicalComplex.HasMapBifunctor P N (curriedTensor S.Modules) (.up ℤ) :=
-    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
-      S.Modules).has_colimits_of_shape _).has_colimit _
+  let : (curriedTensor (SheafOfModules.{uPull}
+      (moduleRings S.toRingedSpace))).PreservesZeroMorphisms :=
+    SheafOfModules.preservesZeroMorphisms_curriedTensor S.sheaf
+  let : (curriedTensor (SheafOfModules.{uPull}
+      (moduleRings T.toRingedSpace))).PreservesZeroMorphisms :=
+    SheafOfModules.preservesZeroMorphisms_curriedTensor T.sheaf
+  let : ∀ M : SheafOfModules.{uPull} (moduleRings S.toRingedSpace),
+      ((curriedTensor _).obj M).PreservesZeroMorphisms :=
+    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj S.sheaf M
+  let : ∀ M : SheafOfModules.{uPull} (moduleRings T.toRingedSpace),
+      ((curriedTensor _).obj M).PreservesZeroMorphisms :=
+    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf M
+  -- Reuse the coproduct instances for all total tensor complexes in the proof.
   have : ∀ P N : CochainComplex
       (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
     fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
       (SheafOfModules.{uPull} (moduleRings S.toRingedSpace))).has_colimits_of_shape _).has_colimit _
-  have : ∀ P N : CochainComplex T.Modules ℤ,
-      HomologicalComplex.HasMapBifunctor P N (curriedTensor T.Modules) (.up ℤ) :=
-    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
-      T.Modules).has_colimits_of_shape _).has_colimit _
   have : ∀ P N : CochainComplex
       (SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
@@ -213,19 +217,9 @@ theorem derivedPullback_tensorProduct
   have : CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0} G := inferInstance
   let e := Classical.choose (Scheme.Modules.module_pullback_tensor g)
   have hn := (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1
-  let : (curriedTensor (SheafOfModules.{uPull}
-      (moduleRings S.toRingedSpace))).PreservesZeroMorphisms :=
-    SheafOfModules.preservesZeroMorphisms_curriedTensor S.sheaf
-  let : (curriedTensor (SheafOfModules.{uPull}
-      (moduleRings T.toRingedSpace))).PreservesZeroMorphisms :=
-    SheafOfModules.preservesZeroMorphisms_curriedTensor T.sheaf
-  let : ∀ M : SheafOfModules.{uPull} (moduleRings S.toRingedSpace),
-      ((curriedTensor _).obj M).PreservesZeroMorphisms :=
-    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj S.sheaf M
-  let : ∀ M : SheafOfModules.{uPull} (moduleRings T.toRingedSpace),
-      ((curriedTensor _).obj M).PreservesZeroMorphisms :=
-    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf M
-  obtain ⟨φ, hφ, hnatural⟩ := exists_totalTensorComparison G e hn
+  obtain ⟨φ, hφ, hnatural⟩ := exists_totalTensorComparison
+    (C := SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
+    (D := SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) G e hn
   refine ⟨G, hF, hmap, hadd, ε, hder, φ, ?_, hnatural, ?_⟩
   · intro P N p q n h
     simpa only [eqToHom_refl, tensorHom_id, MonoidalCategory.id_whiskerRight,
