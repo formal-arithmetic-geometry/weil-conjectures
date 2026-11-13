@@ -67,6 +67,15 @@ end ProEtaleWeilSheaf
 
 namespace ProEtale
 
+private noncomputable abbrev adicGlobalSectionsHB (l : ℕ) [Fact l.Prime] (Z : Scheme.{u}) :
+    AdicSheaf l Z ⥤ WeilCoefficients.{u} l :=
+  AdicSheaf.forget Z ⋙ Sheaf.Γ _ _
+
+private noncomputable abbrev adicLowerStarCompGlobalSectionsIsoHB (l : ℕ) [Fact l.Prime]
+    {Z W : Scheme.{u}} (g : Z ⟶ W) :
+    (g)_*ᵃ[l] ⋙ adicGlobalSectionsHB l W ≅ adicGlobalSectionsHB l Z :=
+  Functor.isoWhiskerLeft (AdicSheaf.forget Z) (globalSectionsLowerStarIso _ g)
+
 /-- The underlying morphism of sheaves of the Frobenius exchange isomorphism. -/
 lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app {k : Type u}
     [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)}
@@ -77,6 +86,27 @@ lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
           (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h)).hom.app M.X ≫
           (lowerStarComp (WeilCoefficients.{u} l) _ _).inv.app M.X :=
   rfl
+
+private lemma adicGlobalSectionsFrobeniusNatTransAppHB {Z W : Scheme.{u}} (g : Z ⟶ W)
+    (hW : W ⟶ W) (hZ : Z ⟶ Z) (comm : g ≫ hW = hZ ≫ g)
+    (X : IsoAlgebra (adicLowerStar l hZ)) :
+    (IsoAlgebra.frobeniusNatTrans
+      (adicLowerStarComp l g hW ≪≫ adicLowerStarCongr l comm ≪≫
+        (adicLowerStarComp l hZ g).symm)
+      (adicGlobalSectionsHB l W) (adicGlobalSectionsHB l Z)
+      (adicLowerStarCompGlobalSectionsIsoHB l g)
+      (adicLowerStarCompGlobalSectionsIsoHB l hW).inv).app X =
+      (adicLowerStarCompGlobalSectionsIsoHB l hZ).inv.app X.carrier ≫
+        (adicGlobalSectionsHB l Z).map X.str.hom := by
+  have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l) g g hW hZ
+    comm.symm X.carrier.X ((AdicSheaf.forget _).map X.str.hom)
+  rw [IsoAlgebra.frobeniusNatTrans_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
+    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
+  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
+  simp only [Category.assoc] at h ⊢
+  exact h
 
 end ProEtale
 
@@ -108,23 +138,12 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
           Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
   refine NatTrans.ext (funext fun X ↦ ?_)
-  have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
-    (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
-      (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
+  exact adicGlobalSectionsFrobeniusNatTransAppHB
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
-    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
-    ((AdicSheaf.forget _).map X.str.hom)
-  rw [IsoAlgebra.frobeniusNatTrans_app,
-    ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
-    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
-  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
-  simp only [Category.assoc]
-  exact h
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) X
 
 
 set_option profiler true in
