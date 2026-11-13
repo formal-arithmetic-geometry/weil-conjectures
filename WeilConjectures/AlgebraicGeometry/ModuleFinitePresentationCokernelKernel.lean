@@ -217,7 +217,6 @@ private theorem finiteType_kernel_of_equivOver {X : RingedSpace.{u}}
   exact finiteType_of_iso (R := (moduleRings X).over U)
     (M := E.inverse.obj (E.functor.obj (kernel f))) (E.unitIso.app (kernel f)).symm
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The relations of the quotient presentation are of finite type.
 Source: Stacks Project, Modules, Lemma 0H96, proof, lines 1440-1454
