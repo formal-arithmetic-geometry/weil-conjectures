@@ -178,8 +178,9 @@ theorem rhom_global_sections
     CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u₁} A M
   have hη (M : CochainComplex A ℤ) : QuasiIso (η.app M) :=
     (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u₁} A M).2
-  obtain ⟨a⟩ := homComplex_hypercohomology J R I hI
-  obtain ⟨c⟩ := derivedInternalHom_comparison J R I η (fun M ↦ ⟨hη M, hI M⟩)
+  let a := Classical.choice (homComplex_hypercohomology J R I hI)
+  let c := Classical.choice
+    (derivedInternalHom_comparison J R I η (fun M ↦ ⟨hη M, hI M⟩))
   exact rhomGlobalSectionsOfComparison I η hI hη
     (derivedInternalHom J R ⋙ ringedSiteZerothHypercohomology J R)
     (Functor.isoWhiskerRight c (ringedSiteZerothHypercohomology J R) ≪≫ a)
