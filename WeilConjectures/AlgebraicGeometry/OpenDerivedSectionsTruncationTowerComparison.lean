@@ -38,6 +38,7 @@ private lemma transport_comparison_naturality
   rw [← H.map_comp_assoc, h, H.map_comp_assoc]
   exact congrArg (fun z ↦ H.map c₁.hom ≫ z) (e.hom.naturality f)
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The comparison elaborates functors on both module sheaf categories and their derived categories.
 /-- Derived evaluation on an open agrees with sections after exact restriction,
