@@ -61,13 +61,13 @@ private noncomputable def sfbOrdinarySliceNormalizationIso
       (H.sheafPushforwardContinuous RingCat.{u + 1}
         ((proEtaleModelTopology S).over W) ((ProEt.topology S).over U)).obj
         (((adicLisseForget S).obj R).over U)) :
-    ((proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
+    (((proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
         ConstantCompletion.res e.inv) ⋙
         ConstantCompletion.pull
           (SfbAdicRestriction.sliceAlgebra (proEtaleModelTopology S)
             (AsSmall.up.obj U)) c ≅
       SheafOfModules.overFunctor ((adicLisseForget S).obj R) U ⋙
-        SheafOfModules.pushforward.{u + 1} (F := H) φ := by
+        SheafOfModules.pushforward.{u + 1} (F := H) φ) := by
   let h : ConstantCompletion.change c ≅ ConstantCompletion.res (asIso c).inv :=
     changeIsoRestriction c
   exact Functor.isoWhiskerLeft
