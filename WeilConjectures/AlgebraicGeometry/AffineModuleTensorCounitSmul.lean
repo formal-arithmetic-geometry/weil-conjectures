@@ -194,23 +194,21 @@ theorem affine_module_tensor_counit_smul
   -- generation argument using the pushout is necessary.
   have _ := hpush
   intro F W c p
-  let G := (R).obj F
-  let adj := adj₀
   let N := (SheafOfModules.restrictScalars (𝓻 ε)).obj F
   let evaluation := exists_affine_tensor_evaluation f B t ε ht F
   let d := evaluation.choose
   have hd := evaluation.choose_spec
   -- Restriction along b is O_U-linear because b followed by ε is the identity.
-  let dP : P.obj G ⟶ N := eqToHom (pobj _) ≫ d
+  let dP : P.obj ((R).obj F) ⟶ N := eqToHom (pobj _) ≫ d
   have hb' : (𝓻 b) ≫ (𝓻 ε) = 𝟙 U.ringCatSheaf :=
     congrArg ((sheafCompose (𝓙 U) (forget₂ CommRingCat.{u} RingCat.{u})).map) hb
-  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj G) ⟶ F :=
+  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F :=
     (SheafOfModules.restrictScalars (𝓻 b)).map dP ≫
       (SheafOfModules.restrictScalarsCancelIso (𝓻 b) (𝓻 ε) hb').hom.app F
-  let a : (tensorPullback f).obj ((S).obj G) ⟶ F :=
-    κ.inv.app G ≫ dU
+  let a : (tensorPullback f).obj ((S).obj ((R).obj F)) ⟶ F :=
+    κ.inv.app ((R).obj F) ≫ dU
   -- The κ-unit formula identifies the adjunct of this evaluation with the identity.
-  have ha : (adj.homEquiv ((S).obj G) F) a =
+  have ha : ((adj₀).homEquiv ((S).obj ((R).obj F)) F) a =
       𝟙 ((pushforward f).obj F) := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -218,19 +216,19 @@ theorem affine_module_tensor_counit_smul
     ext m
     change d.val.app ((Opens.map f.base).op.obj V)
       ((eqToHom (pobj _)).val.app ((Opens.map f.base).op.obj V)
-        ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V)
-          ((adj.unit.app ((S).obj G)).val.app V m))) = m
+        ((κ.inv.app ((R).obj F)).val.app ((Opens.map f.base).op.obj V)
+          (((adj₀).unit.app ((S).obj ((R).obj F))).val.app V m))) = m
     exact (congrArg (d.val.app ((Opens.map f.base).op.obj V))
-      (hP.2 G V m)).trans (hd V m)
-  have hac : a = adj.counit.app F :=
-    ((adj.homEquiv ((S).obj G) F).eq_symm_apply.mpr ha).trans
-      (adj.homEquiv_symm_id F)
-  have heq : κ.hom.app G ≫ adj.counit.app F = dU :=
-    (congrArg (fun q ↦ κ.hom.app G ≫ q) hac.symm).trans
-      ((κ.app G).hom_inv_id_assoc dU)
-  have hq (V : (Opens U)ᵒᵖ) (m : (P.obj G).val.obj V) :
-      (adj.counit.app F).val.app V
-        ((κ.hom.app G).val.app V m) = dP.val.app V m :=
+      (hP.2 ((R).obj F) V m)).trans (hd V m)
+  have hac : a = (adj₀).counit.app F :=
+    (((adj₀).homEquiv ((S).obj ((R).obj F)) F).eq_symm_apply.mpr ha).trans
+      ((adj₀).homEquiv_symm_id F)
+  have heq : κ.hom.app ((R).obj F) ≫ (adj₀).counit.app F = dU :=
+    (congrArg (fun q ↦ κ.hom.app ((R).obj F) ≫ q) hac.symm).trans
+      ((κ.app ((R).obj F)).hom_inv_id_assoc dU)
+  have hq (V : (Opens U)ᵒᵖ) (m : (P.obj ((R).obj F)).val.obj V) :
+      ((adj₀).counit.app F).val.app V
+        ((κ.hom.app ((R).obj F)).val.app V m) = dP.val.app V m :=
     congrArg (fun q ↦ q.val.app V m) heq
   exact (hq W (c • p)).trans (((dP.val.app W).hom.map_smul c p).trans
     (congrArg (fun m : F.val.obj W ↦ (ε.hom.app W c) • m) (hq W p).symm))
