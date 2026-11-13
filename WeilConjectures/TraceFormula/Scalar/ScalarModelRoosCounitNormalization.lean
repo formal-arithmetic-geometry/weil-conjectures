@@ -45,9 +45,9 @@ private theorem scalarCounit_normalization_of_fac
     (hb : b ≫ c.hom ≫ d ≫ e.hom ≫ f.hom = t) (ha : a ≫ t = k ≫ n) :
     a ≫ b = k ≫ n ≫ f.inv ≫ e.inv ≫ inv d ≫ c.inv := by
   apply (cancel_mono (c.hom ≫ d ≫ e.hom ≫ f.hom)).1
-  simpa only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id_assoc, hb] using ha
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id_assoc,
+    Iso.inv_hom_id, Category.comp_id, hb] using ha
 
-set_option profiler true in
 /-- The normalized scalar realization commutes with the whole-system counit in
 Roos coordinates. This is an equation on the target system alone, before inserting
 any map from a good complex or identifying any strict zero-shift lift.
