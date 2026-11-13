@@ -97,7 +97,6 @@ private theorem exists_totalTensorComparison
   · intro P P' N N' a b
     exact HomologicalComplex.mapBifunctorComparison_naturality τ (.up ℤ) a b
 
-set_option profiler true in
 set_option synthInstance.maxSize 256 in
 /-- (blueprint: lem-pc-derived-pullback-tensor-product) For a morphism of schemes
 `g : T ⟶ S`, derived pullback commutes with derived tensor product:
@@ -209,7 +208,8 @@ theorem derivedPullback_tensorProduct
     (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
       (Classical.choose_spec (derivedPullback_spec g))))).2.2.2
   refine ⟨F, hF, hmap, hadd, ε, hder, ?_⟩
-  -- The recorded object and map formulas determine the termwise functor strictly.
+  -- Keep F abstract during totalization; use its equality with tensor pullback only
+  -- to transport adjointness and the module-level tensor comparison.
   have hEq : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
   let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction g)
