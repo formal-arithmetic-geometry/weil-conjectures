@@ -79,10 +79,12 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   funext K L M
   apply Equiv.ext
   intro f
-  obtain ⟨P, p, hP, _, hp, _⟩ :=
+  have hPResolution :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage K)
-  obtain ⟨Lc, l, hL, _, hl, _⟩ :=
+  rcases hPResolution with ⟨P, p, hP, _, hp, _⟩
+  have hLResolution :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage L)
+  rcases hLResolution with ⟨Lc, l, hL, _, hl, _⟩
   have : IsIso (Q.map p) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ p).2 hp
   have : IsIso (Q.map l) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ l).2 hl
   let a : Q.obj P ≅ K := asIso (Q.map p) ≪≫ Q.objObjPreimageIso K
@@ -100,10 +102,12 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     a.hom ≫ f ≫ H.map (b.hom.op, c.inv)
   let q := HomotopyCategory.quotient C (.up ℤ)
   let d := DerivedCategory.quotientCompQhIso.{wCD} C
-  obtain ⟨v, hv⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+  have hvSurj := (CochainComplex.IsKInjective.Qh_map_bijective
     (q.obj P) (homComplex (R := X.sheaf) Lc I)).surjective
       ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app _).inv)
-  obtain ⟨φ, hφ⟩ := q.map_surjective v
+  rcases hvSurj with ⟨v, hv⟩
+  have hφSurj := q.map_surjective v
+  rcases hφSurj with ⟨φ, hφ⟩
   have hφQ : Q.map φ = g ≫ j.hom := by
     have hn := DerivedCategory.quotientCompQhIso_hom_naturality φ
     rw [hφ, hv] at hn
@@ -114,8 +118,10 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   have hg : Q.map φ ≫ j.inv = g := by
     rw [hφQ]
     simp
-  obtain ⟨ψ, hψ, he⟩ := h.2 P Lc Mc hP φ
-  obtain ⟨ψ', hψ', he'⟩ := h'.2 P Lc Mc hP φ
+  have hrep := h.2 P Lc Mc hP φ
+  rcases hrep with ⟨ψ, hψ, he⟩
+  have hrep' := h'.2 P Lc Mc hP φ
+  rcases hrep' with ⟨ψ', hψ', he'⟩
   have eqψ : ψ = ψ' := by
     have := SheafOfModules.isMonoidal_W X.sheaf
     have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
