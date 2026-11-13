@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemOperations
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponent
+public import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponent
 
 /-! # The cochain pullback evaluation transition square
 
