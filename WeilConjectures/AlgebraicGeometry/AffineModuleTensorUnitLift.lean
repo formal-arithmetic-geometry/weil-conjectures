@@ -136,16 +136,18 @@ theorem affine_module_tensor_unitLift
       ∃ a : G ⟶ (R).obj (H.obj G),
         (S).map a = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G) := by
   classical
-  let : HasWeakSheafify (𝓙 U) AddCommGrpCat.{u} := inferInstance
-  let : HasWeakSheafify (𝓙 X) AddCommGrpCat.{u} := inferInstance
-  let : HasWeakSheafify (𝓙 U) CommRingCat.{u} := inferInstance
-  let : HasWeakSheafify (𝓙 X) CommRingCat.{u} := inferInstance
+  let : (Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U.toTopCat) :=
+    inferInstanceAs ((Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U))
   have _ := hpush
   have _ := hb
   intro G
   -- The second extension unit is B-linear and agrees with γ after κ.
-  obtain ⟨Eε, heε, adjε, hε⟩ :=
+  have hexε :=
     SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat B U.sheaf ε
+  let Eε := hexε.choose
+  let heε := hexε.choose_spec.choose
+  let adjε := hexε.choose_spec.choose_spec.choose
+  have hε := hexε.choose_spec.choose_spec.choose_spec
   let z : P.obj G ⟶ (SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G) :=
     adjε.homEquiv (P.obj G) (H.obj G)
       (eqToHom (heε (P.obj G)) ≫ eqToHom (hobj G).symm)
@@ -160,8 +162,12 @@ theorem affine_module_tensor_unitLift
     simp only [eqToHom_trans, eqToHom_refl]
     rfl
   -- Composing the two tensor units gives an IA-linear map.
-  obtain ⟨Et, het, adjt, hunit⟩ :=
+  have hext :=
     SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
+  let Et := hext.choose
+  let het := hext.choose_spec.choose
+  let adjt := hext.choose_spec.choose_spec.choose
+  have hunit := hext.choose_spec.choose_spec.choose_spec
   let q : I G ⟶ (SheafOfModules.restrictScalars (𝓻 t)).obj
       ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G)) :=
     adjt.homEquiv (I G) ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))

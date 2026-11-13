@@ -273,10 +273,8 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
           (γ.app G).val.app (fV (op V))
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by
   classical
-  let : HasWeakSheafify (𝓙 U) AddCommGrpCat.{u} := inferInstance
-  let : HasWeakSheafify (𝓙 X) AddCommGrpCat.{u} := inferInstance
-  let : HasWeakSheafify (𝓙 U) CommRingCat.{u} := inferInstance
-  let : HasWeakSheafify (𝓙 X) CommRingCat.{u} := inferInstance
+  let : (Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U.toTopCat) :=
+    inferInstanceAs ((Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U))
   dsimp only
   let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
   let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
@@ -287,8 +285,15 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
     ⟨fun r c n ↦ by
       change ((f.app V).hom r * c) • n = (f.app V).hom r • (c • n)
       exact mul_smul _ _ _⟩
-  obtain ⟨δ, hδ, hgen, p, hpα, hpδ, hpu⟩ :=
+  have hfirst :=
     affine_pushout_first_tensor_sections f B b t ε hring P pobj κ hP G hG V hV
+  let δ := hfirst.choose
+  have hδ := hfirst.choose_spec.1
+  have hgen := hfirst.choose_spec.2.1
+  let p := hfirst.choose_spec.2.2.choose
+  have hpα := hfirst.choose_spec.2.2.choose_spec.1
+  have hpδ := hfirst.choose_spec.2.2.choose_spec.2.1
+  have hpu := hfirst.choose_spec.2.2.choose_spec.2.2
   let Aalg : X.CommAlgebraSheaf := Under.mk ρ
   let Balg : U.CommAlgebraSheaf := Under.mk b
   let Calg : U.CommAlgebraSheaf := Under.mk (𝟙 U.sheaf)
@@ -344,13 +349,13 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
       (ε.hom.app (op (f ⁻¹ᵁ V))).hom
         ((b.hom.app (op (f ⁻¹ᵁ V))).hom c) = c := by
     exact congrArg (fun a ↦ a.hom.app (op (f ⁻¹ᵁ V)) c) hring.2.1
-  obtain ⟨hq, hk⟩ := scalar_tensor_presentation
+  have hpresentation := scalar_tensor_presentation
     (D := Γ(X, V)) (C := Γ(U, f ⁻¹ᵁ V))
     (E := B.obj.obj (op (f ⁻¹ᵁ V))) (N := G.val.obj (op V))
     (M := (P.obj G).val.obj (op (f ⁻¹ᵁ V))) (T := Γ(H.obj G, f ⁻¹ᵁ V))
     (b.hom.app (op (f ⁻¹ᵁ V))).hom δ (ε.hom.app (op (f ⁻¹ᵁ V))).hom
     hb hδ hgen p hpα hpδ e q he
-  refine ⟨q, hq, hk, ?_⟩
+  refine ⟨q, hpresentation.1, hpresentation.2, ?_⟩
   intro n
   change l (p ((1 : Γ(U, f ⁻¹ᵁ V)) ⊗ₜ[Γ(X, V)] n)) = _
   refine (congrArg l (hpu n)).trans ?_
