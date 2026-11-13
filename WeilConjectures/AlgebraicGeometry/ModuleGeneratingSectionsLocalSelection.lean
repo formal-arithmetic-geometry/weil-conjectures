@@ -23,7 +23,6 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option profiler true in
 private theorem epi_overMap_of_factorization
     {X : TopCat.{u}} (R : X.Sheaf RingCat.{u})
     {V U W : TopologicalSpace.Opens X} (hUV : U ≤ V) (hWU : W ≤ U)
@@ -44,8 +43,6 @@ private theorem epi_overMap_of_factorization
     rfl
   exact @epi_of_epi_fac _ _ _ _ _ a _ _ hE hfac
 
-set_option profiler true in
--- Comparing iterated slice restrictions requires additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- Near any point of an open on which a module sheaf is finite type, finitely many
 members of a specified global generating family generate. Compactness is not assumed.
