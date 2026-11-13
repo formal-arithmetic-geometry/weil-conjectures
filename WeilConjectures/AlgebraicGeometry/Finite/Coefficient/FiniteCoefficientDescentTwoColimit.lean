@@ -404,6 +404,7 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- The four-clause assembly elaborates several derived functor and zero-shift interfaces.
 /-- All four finite coefficient descent assertions, including the rational identification
