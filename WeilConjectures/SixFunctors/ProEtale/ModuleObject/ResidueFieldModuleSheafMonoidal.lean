@@ -255,8 +255,6 @@ lemma upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app {S T
     (upperStarForgetIso_hom_comp_whiskerRight_residueFieldModuleSheafUpperStarIso_hom ℓ E a) M
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- matching the units of the pullbacks of module objects unfolds the underlying sheaves of pullbacks
 /-- **The commutation of `G` with the pullbacks is compatible with the tensor products**: the
 isomorphism `f^* ⋙ G_X ≅ G_Y ⋙ f^*` of `residueFieldModuleSheafUpperStarIso` is compatible with
 the tensor isomorphisms of `G_X`, `G_Y` and the comonoidal structures of the pullbacks. On
@@ -289,12 +287,17 @@ lemma tensorCompatible_residueFieldModuleSheafUpperStarIso {S T : Scheme.{u}} (a
         (a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧ M N).hom :=
     rfl
   dsimp at hι
-  rw [upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app_assoc,
+  rw [upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app_assoc
+      ℓ E a (M ⊗ N),
     ← reassoc_of% hι, ← Functor.map_comp_assoc]
   rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app T ℓ E M N]
-  rw [upperStar_map_μ_comp_sheafComposeForget₂CompUpperStarIso]
-  rw [hG, map_tensorObjπ_upperStarUnitHom_δ_hom_assoc]
-  rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app_assoc S ℓ E]
+  rw [upperStar_map_μ_comp_sheafComposeForget₂CompUpperStarIso (ResidueFieldCoeff.{u} ℓ E) a
+    ((residueFieldModuleSheaf T ℓ E).obj M) ((residueFieldModuleSheaf T ℓ E).obj N)]
+  rw [hG, map_tensorObjπ_upperStarUnitHom_δ_hom_assoc
+    (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) a M N]
+  rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app_assoc S ℓ E
+    ((a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj M)
+    ((a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)]
   have hμ := Functor.LaxMonoidal.μ_natural (sheafCompose (ProEt.topology S)
       (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1}))
       ((residueFieldModuleSheafUpperStarIso ℓ E a).hom.app M)
