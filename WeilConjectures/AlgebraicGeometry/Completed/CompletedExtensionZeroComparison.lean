@@ -1098,9 +1098,14 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
               (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
   let S := reductionModuleRing T (completedReductionCoefficient T d)
   let W := cbcOpenObject j hj
-  let adj :=
+  let a :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
+  let core : Adjunction.CoreHomEquiv (cbcOpenShriek d j hj) (cbcOpenRestriction d j hj) :=
+    { homEquiv := fun M N ↦ a.homEquiv M N
+      homEquiv_naturality_left_symm := fun f g ↦ a.homEquiv_naturality_left_symm f g
+      homEquiv_naturality_right := fun f g ↦ a.homEquiv_naturality_right f g }
+  let adj := Adjunction.mkOfHomEquiv core
   trace "PH604: adj constructed"
   have hu (M : pbcModules U (pbcAdicCompletion U d))
       (N : pbcModules T (pbcAdicCompletion T d))
@@ -1110,9 +1115,13 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
         (PresheafOfModules.sheafificationHomEquiv.{t + 1} (𝟙 S.obj) α).app
           (op ((cbcOpenSiteFunctor j hj).obj V))
             (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
-    rw [compAdjunction_homEquiv_apply, openSliceAdjunction_homEquiv_apply]
-    trace "PH604: hom formula rewritten"
-    exact extensionSheafAdjunction_homEquiv_apply S W _ N α (cbcOpenSliceObject j hj V) x
+    rw [Adjunction.mkOfHomEquiv_homEquiv]
+    change ((a.homEquiv M N) α).val.app (op V) x = _
+    rw [compAdjunction_homEquiv_apply]
+    exact (openSliceAdjunction_homEquiv_apply d j hj M
+      ((SheafOfModules.overFunctor S W).obj N)
+      ((SheafOfModules.extensionSheafAdjunction S W).homEquiv _ N α) V x).trans
+        (extensionSheafAdjunction_homEquiv_apply S W _ N α (cbcOpenSliceObject j hj V) x)
   trace "PH604: formula proved"
   refine ⟨adj, hu, ?_⟩
   trace "PH604: witness supplied"
