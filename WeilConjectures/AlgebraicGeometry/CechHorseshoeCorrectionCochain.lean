@@ -117,6 +117,41 @@ private theorem cechZeroπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
   erw [hh]
   rfl
 
+private theorem cech_localSections_d {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) (M : X.Modules) (x : ∀ i : ι, M.val.obj (op (U i)))
+    (y : Fin 2 → ι) :
+    TopCat.Presheaf.cechComplexFunctorπ U M.presheafModuleCat 1 y
+      (((cechComplexFunctor U).obj M.presheafModuleCat).d 0 1
+        ((ModuleCat.piIsoPi (fun w : Fin 1 → ι ↦ M.presheafModuleCat.obj
+          (op (∏ᶜ fun k : Fin 1 ↦ U (w k))))).inv
+          (fun w ↦ M.val.presheaf.map (Pi.π (fun k : Fin 1 ↦ U (w k)) 0).op
+            (x (w 0))))) =
+      M.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1)) -
+        M.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0)) := by
+  rw [TopCat.Presheaf.cechComplexFunctorπ_d_apply, Fin.sum_univ_two]
+  simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_zsmul, neg_zsmul]
+  rw [TopCat.Presheaf.cechComplexFunctorπ_piIsoPi_inv,
+    TopCat.Presheaf.cechComplexFunctorπ_piIsoPi_inv]
+  have h₁ := TopCat.Presheaf.map_map_apply
+    (M.presheafModuleCat)
+    (Pi.π (fun k : Fin 1 ↦ U ((y ∘ (0 : Fin 2).succAbove) k)) 0).op
+    (Pi.lift fun l ↦ Pi.π (fun l : Fin 2 ↦ U (y l))
+      ((0 : Fin 2).succAbove l)).op (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1))
+  have h₀ := TopCat.Presheaf.map_map_apply
+    (M.presheafModuleCat)
+    (Pi.π (fun k : Fin 1 ↦ U ((y ∘ (1 : Fin 2).succAbove) k)) 0).op
+    (Pi.lift fun l ↦ Pi.π (fun l : Fin 2 ↦ U (y l))
+      ((1 : Fin 2).succAbove l)).op (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0))
+  have h := congrArg₂ (fun a b ↦ a + -b) h₁ h₀
+  dsimp [presheafModuleCat, PresheafOfModules.forgetToPresheafModuleCat,
+    PresheafOfModules.forgetToPresheafModuleCatObj,
+    PresheafOfModules.forgetToPresheafModuleCatObjMap,
+    PresheafOfModules.presheaf] at h ⊢
+  simp only [AddMonoidHom.mk'_apply,
+    sub_eq_add_neg] at h ⊢
+  convert h using 1
+  rfl
+
 private theorem cochain_comm_apply {R : Type u} [Ring R]
     {K L : CochainComplex (ModuleCat.{u} R) ℕ} (f : K ⟶ L) (i j : ℕ) (x : K.X i) :
     L.d i j (f.f i x) = f.f j (K.d i j x) :=
@@ -236,30 +271,7 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
       TopCat.Presheaf.cechComplexFunctorπ U (S.X₂.presheafModuleCat) 1 y (B.d 0 1 x₀) =
         S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1)) -
           S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0)) := by
-    rw [TopCat.Presheaf.cechComplexFunctorπ_d_apply, Fin.sum_univ_two]
-    simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_zsmul, neg_zsmul]
-    dsimp only [x₀]
-    rw [TopCat.Presheaf.cechComplexFunctorπ_piIsoPi_inv,
-      TopCat.Presheaf.cechComplexFunctorπ_piIsoPi_inv]
-    have h₁ := TopCat.Presheaf.map_map_apply
-      (S.X₂.presheafModuleCat)
-      (Pi.π (fun k : Fin 1 ↦ U ((y ∘ (0 : Fin 2).succAbove) k)) 0).op
-      (Pi.lift fun l ↦ Pi.π (fun l : Fin 2 ↦ U (y l))
-        ((0 : Fin 2).succAbove l)).op (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1))
-    have h₀ := TopCat.Presheaf.map_map_apply
-      (S.X₂.presheafModuleCat)
-      (Pi.π (fun k : Fin 1 ↦ U ((y ∘ (1 : Fin 2).succAbove) k)) 0).op
-      (Pi.lift fun l ↦ Pi.π (fun l : Fin 2 ↦ U (y l))
-        ((1 : Fin 2).succAbove l)).op (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0))
-    have h := congrArg₂ (fun a b ↦ a + -b) h₁ h₀
-    dsimp [presheafModuleCat, PresheafOfModules.forgetToPresheafModuleCat,
-      PresheafOfModules.forgetToPresheafModuleCatObj,
-      PresheafOfModules.forgetToPresheafModuleCatObjMap,
-      PresheafOfModules.presheaf] at h ⊢
-    simp only [AddMonoidHom.mk'_apply,
-      sub_eq_add_neg] at h ⊢
-    convert h using 1
-    rfl
+    exact cech_localSections_d U S.X₂ x y
   have hdx : B.d 0 1 x₀ = (F.map S.f).f 1
       (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z) := by
     apply TopCat.Presheaf.cechComplexFunctor_ext U S.X₂.presheafModuleCat
