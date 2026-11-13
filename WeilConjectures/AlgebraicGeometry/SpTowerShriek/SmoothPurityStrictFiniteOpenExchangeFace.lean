@@ -641,29 +641,29 @@ private theorem open_exchange_inverse (b : Base l E)
       intro M
       have HU := strict_finite_open_unit l E b j n M
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU) (by
+      convert (preTransparency := .reducible) HU <;> rfl) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU)
+      convert (preTransparency := .reducible) HU <;> rfl)
     (by
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      convert HU <;> rfl)
+      convert (preTransparency := .reducible) HU <;> rfl)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      convert he <;> rfl)
+      convert (preTransparency := .reducible) he <;> rfl)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HC) N
+      convert (preTransparency := .reducible) HC <;> rfl) N
   dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  convert H <;> rfl
+  convert (preTransparency := .reducible) H <;> rfl
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
