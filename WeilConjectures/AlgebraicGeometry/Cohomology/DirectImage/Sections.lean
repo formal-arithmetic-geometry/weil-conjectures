@@ -135,6 +135,7 @@ lemma sectionsHigherDirectImageSuccAddEquiv_apply (I : InjectiveResolution ℱ) 
   rfl
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- identifying sections of `f_* Iⁿ` and of `Iⁿ` over `⊤` unfolds `f ⁻¹ᵁ ⊤`
 /-- The comparison `Γ(T, R^{n+1} f_* ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
 lemma sectionsHigherDirectImageSuccAddEquiv_naturality (𝒢 : X.Modules)
@@ -292,6 +293,7 @@ lemma rightDerivedGlobalSectionsSuccAddEquiv_apply (I : InjectiveResolution ℱ)
   rfl
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- the identifications of the global sections complexes unfold the sections functor
 /-- `R^{n+1} Γ(X, ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
 lemma rightDerivedGlobalSectionsSuccAddEquiv_naturality (𝒢 : X.Modules) (φ : ℱ ⟶ 𝒢)
