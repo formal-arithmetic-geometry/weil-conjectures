@@ -67,7 +67,6 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
     leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategorySquareIso]
   rfl
 
-set_option trace.profiler true in
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
 an object of the homotopy category, is the underived commutation `comapUpperStarIso` modulo
@@ -236,9 +235,8 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at e1
   simp only [← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
-  simp only [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
+  rw [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
-set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**, on the image of a K-flat complex. -/
 lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (P : CochainComplex (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
@@ -282,7 +280,6 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   simpa only [c, Functor.mapIso_hom, Iso.trans_hom, Iso.app_hom, asIso_hom, Category.assoc] using
     upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh_counit a f K
 
-set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**: for `M ∈ D(Y_proét, Λ)`, the
 pullback of the unit `M ⟶ Res (Ext M)`, followed by the commutation `ι` of `Res` with `Lf^*`, is
 the unit at `Lf^* M` followed by `Res` of (Pull). -/
