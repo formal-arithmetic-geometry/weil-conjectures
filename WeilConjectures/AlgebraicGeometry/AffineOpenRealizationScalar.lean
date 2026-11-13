@@ -176,8 +176,9 @@ theorem affine_open_realization_scalar
   obtain ⟨c⟩ := hF
   have hFscalar : F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj K)) =
       b • 𝟙 (F.obj (DerivedCategory.Q.obj K)) := by
-    exact scalar_map_of_factorization DerivedCategory.Q DerivedCategory.Q
-      (S.mapHomologicalComplex (.up ℤ)) F c (show A from a.val (op U)) b K hS
+    refine scalar_map_of_factorization DerivedCategory.Q DerivedCategory.Q
+      (S.mapHomologicalComplex (.up ℤ)) F c (show A from a.val (op U)) b K ?_
+    exact hS
   rw [hFscalar, hR]
   exact he
 
