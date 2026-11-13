@@ -643,7 +643,10 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
     (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg)
   have e₁ : a₀.inv = x.hom ≫ a''.inv ≫ u₀.inv :=
     CategoryTheory.Iso.inv_eq_hom_comp_inv_comp_inv a₀ a'' x u₀ n₁
-  have e₂ := CategoryTheory.Iso.inv_eq_inv_comp_inv_comp_hom a a'' y u n₂
+  have n₂' : a''.hom ≫ y.inv = u.inv ≫ a.hom := by
+    rw [← cancel_epi u.hom, Iso.hom_inv_id_assoc, ← reassoc_of% n₂]
+    simp
+  have e₂ := CategoryTheory.Iso.inv_eq_hom_comp_inv_comp_inv a'' a y.symm u.symm n₂'
   rw [e₁, reassoc_of% hz, e₂]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, ← hv]
   simp
