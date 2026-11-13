@@ -87,7 +87,6 @@ private theorem sectionCohomologyTheta_universal {Y : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- Stacks 01E4 with every datum tied. For an injective resolution I of F, the presheaf
 P_p is `sectionCohomologyPresheaf (f_*I) p`, V ↦ H^p(I(f⁻¹V)); theta is
 `sectionCohomologyTheta (f_*I) p` followed by the resolution comparison
