@@ -589,6 +589,7 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
+set_option trace.profiler true in
 /-- **Flatness descends to a finitely generated subalgebra** (Stacks, Tag 02JO; EGA IV₃, 11.2.6).
 Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an
 `R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `A`. Then there is a finitely
