@@ -35,19 +35,7 @@ theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Modules R φ X) (n : ℕ) (H : Y.ProEtᵒᵖ)
     (x : ((eval R φ Y n).obj ((push R φ f).obj M)).val.obj H) :
     HEq (((moduleEvalP R φ f n).hom.app M).val.app H x) x := by
-  dsimp only [eval, WeilConjectures.SemilinearSections.evaluation,
-    SheafOfModules.pushforward, PresheafOfModules.pushforward,
-    PresheafOfModules.pushforward₀, PresheafOfModules.pushforward₀Obj,
-    PresheafOfModules.restrictScalars, ModuleCat.restrictScalars,
-    ModuleCat.RestrictScalars.obj'] at x
-  have h := (moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x
-  dsimp only [eval, WeilConjectures.SemilinearSections.evaluation, push,
-    StrictTower.moduleDirectImage, Scheme.proEtaleRingModuleDirectImage,
-    Functor.comp_obj, moduleEvalP, SheafOfModules.pushforward,
-    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
-    PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
-    ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj'] at h ⊢
-  trace_state
-  exact heq_of_eq h
+  apply heq_of_eq
+  exact (moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x
 
 end AlgebraicGeometry.ProEtale.VaryingRing
