@@ -154,7 +154,6 @@ noncomputable abbrev sliceComparison (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
     (Scheme.Modules.pullbackCongr (slicePt_sliceX X Y Z x y)).app L ≪≫
     ((Scheme.Modules.pullbackComp _ _).app L).symm
 
-set_option profiler true in
 private lemma coeff_eq_of_pullback_compatibility {A B C T : Scheme.{u}}
     (f : A ⟶ C) (g : B ⟶ C) (i : T ⟶ A) (j : T ⟶ B) (h : i ≫ f = j ≫ g)
     (L : C.Modules) {O : C.Opens} {ℓ : Γ(L, O)} (hℓ : Scheme.Modules.IsFreeGenerator ℓ)

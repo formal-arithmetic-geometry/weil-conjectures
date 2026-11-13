@@ -82,7 +82,6 @@ theorem reindex_first_page_comparison
   rw [heq]
   infer_instance
 
-set_option profiler true in
 /-- Quotient presentations of a finite filtration, transported along abutment isomorphisms.
 This is an argument in abelian groups, independent of how the cohomology objects are constructed. -/
 private theorem exists_quotient_presentations_of_filtrations
@@ -104,7 +103,7 @@ private theorem exists_quotient_presentations_of_filtrations
       (e' : (E'.page r hr).X ⟨p - q, q⟩ ≅ W.gradedPiece q),
       ∀ i : I, ∃ (k : ∀ z : ℤ, ((V i).step z : AddCommGrpCat.{u + 1}) ⟶
           (W.step z : AddCommGrpCat.{u + 1}))
-        (hk : ∀ z : ℤ, k z ≫ (W.step z).arrow = ((V i).step z).arrow ≫ β i)
+        (_hk : ∀ z : ℤ, k z ≫ (W.step z).arrow = ((V i).step z).arrow ≫ β i)
         (hc : ∀ z : ℤ,
           Subobject.ofLE ((V i).step (z + 1)) ((V i).step z)
               ((V i).antitone_step (Int.le_add_one (le_refl z))) ≫ k z =
@@ -189,7 +188,7 @@ private theorem exists_quotient_presentations_of_filtrations
         dsimp [f, j]
         rw [← Category.assoc, Subobject.ofLE_arrow]) y
   refine ⟨S, hS0, hSN, hanti, ?_⟩
-  intro n hn
+  intro n _hn
   rw [show p - a - (n : ℤ) = p - (a + n) by omega]
   obtain ⟨r, hr, e, e', ht⟩ := hstable (a + n)
   clear hstable
@@ -278,8 +277,6 @@ private theorem exists_quotient_presentations_of_filtrations
 
 set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
-set_option profiler true in
--- The dependent page and quotient witnesses require elaboration together.
 /-- Construct the functorial pages and abutment quotient projections, without continuity.
 Source: Stacks Project, Tags 015J and 015K; Tag 0EZM, proof of
 lemma-colimit-variant-complexes.

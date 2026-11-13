@@ -42,7 +42,6 @@ namespace TheoremOfCube
 
 variable {K : Type u} [Field K] (X Y Z : Over (Spec (.of K)))
 
-set_option profiler true in
 /-- Glue affine local sections modulo a quasi-coherent module with vanishing first cohomology.
 Keeping the cover and its restriction maps over arbitrary schemes avoids unfolding the products
 used to construct the local sections. -/
@@ -120,8 +119,6 @@ private theorem exists_section_of_affine_local_lifts {A B : Scheme.{u}} (f : A �
     Scheme.Modules.presheaf_map_id_apply]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
--- the proof elaborates many restrictions between intersections of an open cover
 /-- **Gluing the local lifts.** If `H¹` of the twist `𝒢` vanishes over `f⁻¹ V` for an affine
 open `V` of `Z`, there is a section of `L` over `f⁻¹ V` generating `L` along the slice
 `{x} × Y × Z`. -/
