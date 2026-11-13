@@ -114,7 +114,6 @@ private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
     (hk ((HomotopyCategory.quotient C (.up ℤ)).obj F)
       ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 hF)).2
 
-set_option trace.profiler true in
 private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (P N A B : CochainComplex

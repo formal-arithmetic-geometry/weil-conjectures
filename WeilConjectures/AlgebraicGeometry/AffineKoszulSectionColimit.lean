@@ -209,7 +209,7 @@ theorem affine_koszul_section_colimit
             ι.app n (cast (hD n).symm ξ) = v n ≫ R.map ξ) ∧
           Nonempty (IsColimit (Cocone.mk _ ι)) := by
   classical
-  intro _ _ T R
+  intro T R
   -- Keep the chosen restriction functor and abelian structures shared.
   let : Abelian (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) := inferInstance
   let : Abelian (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace)) :=
