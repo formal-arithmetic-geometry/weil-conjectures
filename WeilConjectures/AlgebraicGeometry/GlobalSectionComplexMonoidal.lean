@@ -46,8 +46,6 @@ noncomputable abbrev smallClosedCochainMonoidal
       GradedObject.HasTensor₄ObjExt X Y Z W := by infer_instance
   exact HomologicalComplex.monoidalCategory D (.up ℤ)
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Comparing the canonical module and total-complex structures needs extra elaboration steps.
 /-- The scalar-extension functor on complexes is strong monoidal with its prescribed
 multiplication as the inverse unit constraint.
