@@ -115,6 +115,7 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
+  intro E₀ H D g
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
     exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
   trace "PH413: transport ready"
