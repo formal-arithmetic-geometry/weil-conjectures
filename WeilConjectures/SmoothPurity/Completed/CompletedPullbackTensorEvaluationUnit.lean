@@ -59,6 +59,7 @@ private theorem evaluation_section_heq (W : Scheme.{u})
   exact h
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The section transports involve two presentations of the module underlying groups.
 private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : coefficientSequenceModules l E Y) (U : Y.ProEt)
