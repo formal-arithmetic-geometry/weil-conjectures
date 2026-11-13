@@ -233,6 +233,59 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
     Lean.Elab.Tactic.closeMainGoal `exact result
 
+-- Reuse common application parameters instead of generating congruence premises for them.
+private meta partial def conversionSharedCongruence
+    (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
+    (congrCache : IO.Ref (Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem))
+    (a b : Lean.Expr) : Lean.MetaM Lean.Expr := do
+  let a := a.consumeMData
+  let b := b.consumeMData
+  if a == b then return ← Lean.Meta.mkHEqRefl a
+  if let some h := (← cache.get).get? (a, b) then return h
+  if a.getAppFn == b.getAppFn && a.isApp && a.getAppNumArgs == b.getAppNumArgs then
+    try
+      let aa := a.getAppArgs
+      let bb := b.getAppArgs
+      let mut common := 0
+      while common < aa.size && aa[common]! == bb[common]! do
+        common := common + 1
+      let head := Lean.mkAppN a.getAppFn (aa.extract 0 common)
+      let arity := aa.size - common
+      let key := (head, arity)
+      let ct ← match (← congrCache.get).get? key with
+        | some ct => pure ct
+        | none => do
+          let ct ← Lean.Meta.mkHCongrWithArity head arity
+          let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
+            (zetaDelta := true) (kind? := `_sharedCongruence)
+          let ct := { ct with proof := proof }
+          congrCache.modify fun m => m.insert key ct
+          pure ct
+      let mut args := #[]
+      for i in [common:aa.size] do
+        let h ← conversionSharedCongruence cache congrCache aa[i]! bb[i]!
+        let h ← if ct.argKinds[i - common]! == .eq then conversionToEq h else pure h
+        args := args ++ #[aa[i]!, bb[i]!, h]
+      let h := Lean.mkAppN ct.proof args
+      let h ← Lean.Meta.mkAuxTheorem (← Lean.Meta.mkHEq a b) h
+        (zetaDelta := true) (kind? := `_sharedCongruence)
+      cache.modify fun m => m.insert (a, b) h
+      return h
+    catch _ => pure ()
+  conversionCongruence cache congrCache a b
+
+private meta def exactBySharedConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit :=
+  Lean.Elab.Tactic.withMainContext do
+    let x ← Lean.instantiateMVars (← Lean.Meta.inferType h)
+    let y ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let strip (e : Lean.Expr) : Lean.Expr := e.replace fun v =>
+      if v.isMData then some v.consumeMData else none
+    let cache ← IO.mkRef ({} : Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr)
+    let congrCache ← IO.mkRef
+      ({} : Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem)
+    let e ← conversionToEq (← conversionSharedCongruence cache congrCache (strip x) (strip y))
+    Lean.Elab.Tactic.closeMainGoal `exact (← Lean.Meta.mkAppM ``Eq.mp #[e, h])
+
 -- Explicit comparison congruences are checked within this declaration.
 private theorem conjugate_open_unit
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -518,31 +571,6 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
--- Reconcile the generic-ring instance expressions once at the finite coefficient level.
-private theorem finite_native_open_unit_mate
-    {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
-    {j : U ⟶ Z} {g : Z' ⟶ Z} [IsOpenImmersion j] [IsOpenImmersion j']
-    (sq : IsPullback h j' j g) (n : ℕ)
-    (N : DerivedCategory (Sheaf (ProEt.topology U)
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))))) :
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').unit.app
-        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.obj N) ≫
-      (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').leftDerivedFunctor.map
-        ((leftDerivedOpenImmersionLowerShriekBaseChangeIso
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).hom.app N) =
-    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.map
-        ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).unit.app N) ≫
-      (leftDerivedUpperStarSquareIso
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).inv.app
-        ((openImmersionLowerShriek
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
-  have HU := native_open_unit_mate (R l E n) sq N
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-    exactByConversion h
-
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
@@ -586,10 +614,14 @@ private theorem inverse_pull_square (b : Base l E)
     (by
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
       simp only [Iso.app, Functor.mapIso_hom, Iso.symm_hom, Iso.symm_inv]
-      exact HC)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+        exactBySharedConversion h)
   simp only [Iso.app, Functor.mapIso_inv,
     Iso.symm_hom, Iso.symm_inv] at he
-  exact he
+  run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+        exactBySharedConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_scalar_from_comparisons
@@ -666,16 +698,22 @@ private theorem open_exchange_inverse (b : Base l E)
       intro M
       have HU := strict_finite_open_unit l E b j n M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU) (by
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
+        exactBySharedConversion h) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
+        exactBySharedConversion h)
     (by
       intro M
-      have HU := finite_native_open_unit_mate l E sq n M
+      have HU := native_open_unit_mate (R l E n) sq M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
+        exactBySharedConversion h)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
@@ -683,16 +721,18 @@ private theorem open_exchange_inverse (b : Base l E)
         eqToIso.inv] at he ⊢
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h)
+        exactBySharedConversion h)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HC) N
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+        exactBySharedConversion h) N
   simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+    exactBySharedConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
