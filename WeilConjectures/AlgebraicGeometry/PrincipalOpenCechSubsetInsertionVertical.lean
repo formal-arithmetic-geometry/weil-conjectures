@@ -93,7 +93,6 @@ private theorem verticalTotal_conjugate {R : Type u} [Ring R]
   simp only [ComplexShape.ε₂, Linear.comp_units_smul, Category.assoc, Iso.inv_hom_id_assoc]
   rfl
 
-set_option profiler true in
 private theorem principalSubsetInsertOne_vertical
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :
