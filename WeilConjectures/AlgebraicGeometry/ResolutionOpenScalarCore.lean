@@ -113,14 +113,15 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
         exact smulHom_app_top_apply _ (b ^ n) z
     have hphiH : (S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi =
         eA.hom ≫ ((A.homology q).smul (b ^ n)).asHom ≫ eA.inv := by
-      change ShortComplex.homologyMap _ = _
-      rw [hphiSC]
-      exact ShortComplex.homologyMap_mapNatTrans (A.sc q)
-        (ModuleCat.smulNatTrans _ (b ^ n)).asHom
+      exact (congrArg (fun g ↦ ShortComplex.homologyMap g) hphiSC).trans
+        (ShortComplex.homologyMap_mapNatTrans (A.sc q)
+          (ModuleCat.smulNatTrans _ (b ^ n)).asHom)
+    have hy := ConcreteCategory.congr_hom hphiH y
+    simp only [ConcreteCategory.comp_apply] at hy
     calc
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
-          (eA.inv ≫ raw) ((b ^ n) • (show A.homology q from eA.hom y)) :=
-        congrArg (fun g ↦ raw (g y)) hphiH
+          (eA.inv ≫ raw) ((b ^ n) • (show A.homology q from eA.hom y)) := by
+        simpa only [ConcreteCategory.comp_apply] using congrArg raw hy
       _ = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from
           (eA.inv ≫ raw) (eA.hom y)) := ht _
       _ = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from raw y) := by
