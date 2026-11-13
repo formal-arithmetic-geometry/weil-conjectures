@@ -55,7 +55,6 @@ def normalizedTensorHomCochains (X : Scheme.{u})
   exact (normalizedHomGlobalCochains X.sheaf P H k).symm.trans
     (b.trans (normalizedHomGlobalCochains X.sheaf T I k))
 
-set_option trace.profiler true in
 /-- The uncurrying equivalence commutes with the ordinary cochain differential.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
 (blueprint: lem-pc-normalized-tensor-hom-cochains).
