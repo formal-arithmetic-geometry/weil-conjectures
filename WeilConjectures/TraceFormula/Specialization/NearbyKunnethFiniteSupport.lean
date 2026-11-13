@@ -248,7 +248,6 @@ noncomputable abbrev finiteSupportUpperStar
         (condensedRingObj Λ X)) :=
   L((f)^*⟦Λ⟧)
 
-set_option profiler true in
 /-- A morphism of bounded constructible complexes is invertible away from finitely many closed
 points if it is invertible over the generic points of local coordinates detecting closed points. -/
 lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Prime]
@@ -285,7 +284,8 @@ lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Pri
   obtain ⟨K, hK, ξ, t, ht, hf⟩ := hgen i
   refine ⟨K, hK, ξ, t, ht, ?_⟩
   exact Triangle.isZero₃_of_isIso₁ _
-    ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) (pullback.fst (b i) ξ)).map_distinguished _
+    ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ)
+      (pullback.fst (b i) ξ)).map_distinguished _
       ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) U.ι).map_distinguished _ hT)) hf
 
 /-- Invertibility after derived pullback is preserved by a further factorization. -/
@@ -327,7 +327,6 @@ lemma isTraitModelOver_restrictOpen_productOpen
   convert hP.restrictOpen (productOpen φ₁ φ₂ V W) using 1 <;>
     simp [Scheme.Hom.resLE_comp_ι_assoc]
 
-set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Coordinates of product charts detect closed points and make the Künneth map invertible
 on their generic fibres, assuming the slicing formula in smaller chart dimension. -/
@@ -478,7 +477,6 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
     exact isIso_upperStar_map_of_factorization _
       (exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)) _ hslice'
 
-set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
