@@ -400,7 +400,6 @@ lemma Etale.leftDerivedUpperStarComp_conj_comp {W P Y Z : Scheme.{u}} (f : W ⟶
   erw [← reassoc_of% n]
   rw [a₂']
 
-set_option profiler true in
 /-- Coherent comparison isomorphisms preserve the transport of a morphism by conjugation. -/
 private lemma map_conj_of_comparison
     {C₀ : Type*} {C₁ : Type*} {C₂ : Type*} {D₀ : Type*} {D₁ : Type*} {D₂ : Type*}
@@ -438,10 +437,9 @@ private lemma map_conj_of_comparison
   have nφ := (NatIso.naturality_1 s₂ φ).symm
   dsimp only [Functor.comp_map] at nφ
   rw [Functor.map_comp, Functor.map_comp, h₁ X, h₂, nφ]
-  simp only [Functor.comp_map, Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% h', ← reassoc_of% nK, reassoc_of% nM]
 
-set_option profiler true in
 /-- The comparison with degree-zero sheaves transports conjugation along a composite pullback. -/
 private lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
     (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂)
@@ -473,8 +471,6 @@ private lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
     ((g₁₂)^*[_]).singleFunctorCompLeftDerivedFunctorIso
     (Etale.upperStarComp _ g₁ g₂ g₁₂ hg) (Etale.leftDerivedUpperStarComp _ g₁ g₂ g₁₂ hg)
     (Etale.leftDerivedUpperStarComp_hom_app_singleFunctor_obj g₁ g₂ g₁₂ hg) k m δ φ hφ
-
-set_option profiler true in
 
 theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
     {K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
