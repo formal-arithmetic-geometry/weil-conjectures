@@ -300,8 +300,22 @@ theorem coefficientScalarSectionsChainMap_unit (D : CoefficientDerivedSystemScal
       coefficientFiniteUnitSection l E W D n :=
   rfl
 
+private theorem cyclesMap_comp_apply_eq_of_components
+    {X Y Z X' : CochainComplex AddCommGrpCat.{u} ℤ}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : X' ⟶ Z)
+    (x : X.cycles 0) (y : X'.cycles 0)
+    (hf : g.f 0 (f.f 0 (X.iCycles 0 x)) = h.f 0 (X'.iCycles 0 y)) :
+    HomologicalComplex.cyclesMap g 0 (HomologicalComplex.cyclesMap f 0 x) =
+      HomologicalComplex.cyclesMap h 0 y := by
+  apply (AddCommGrpCat.mono_iff_injective (Z.iCycles 0)).1 inferInstance
+  have h1 := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i g 0)
+    (HomologicalComplex.cyclesMap f 0 x)
+  have h2 := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i f 0) x
+  have h3 := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i h 0) y
+  simp only [ConcreteCategory.comp_apply] at h1 h2 h3
+  exact h1.trans ((congrArg (g.f 0) h2).trans (hf.trans h3.symm))
+
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- The section-level cycle computation unfolds the scalar-sections comparison.
 /-- The global cycles of the transported scalar unit and of the finite unit agree.
 Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
@@ -323,40 +337,12 @@ theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScal
             (ComplexShape.up ℤ)).map (coefficientFiniteUnitComparison l E W D n)) 0
         (coefficientUnitCycle.{u} (Scheme.ProEt.topology W)
           (integralCoefficientCommRingSheaf l E W n)) := by
-  apply (AddCommGrpCat.mono_iff_injective (HomologicalComplex.iCycles _ 0)).1 inferInstance
-  have h1 := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i
-    (coefficientScalarSectionsChainMap l E W D n
-      (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj
-        (coefficientIntegralUnitComplex l E W))) 0)
-    (HomologicalComplex.cyclesMap
-      (((coefficientOrdinarySections.{u, t + 1, t} (Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l E W)).mapHomologicalComplex
-          (ComplexShape.up ℤ)).map (coefficientIntegralUnitComplexUnit l E W n)) 0
-      (coefficientUnitCycle.{u} (Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l E W)))
-  have h2 := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i
-    (((coefficientOrdinarySections.{u, t + 1, t} (Scheme.ProEt.topology W)
-      (completedIntegralCommRingSheafUnrestricted l E W)).mapHomologicalComplex
-        (ComplexShape.up ℤ)).map (coefficientIntegralUnitComplexUnit l E W n)) 0)
-    (coefficientUnitCycle.{u} (Scheme.ProEt.topology W)
-      (completedIntegralCommRingSheafUnrestricted l E W))
-  have h3 := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i
-    (((coefficientOrdinarySections.{u, t + 1, t} (Scheme.ProEt.topology W)
-      (integralCoefficientCommRingSheaf l E W n)).mapHomologicalComplex
-        (ComplexShape.up ℤ)).map (coefficientFiniteUnitComparison l E W D n)) 0)
-    (coefficientUnitCycle.{u} (Scheme.ProEt.topology W)
-      (integralCoefficientCommRingSheaf l E W n))
-  simp only [ConcreteCategory.comp_apply] at h1 h2 h3
-  rw [h1, h3]
-  refine (congrArg (ConcreteCategory.hom ((coefficientScalarSectionsChainMap l E W D n
-    (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj
-      (coefficientIntegralUnitComplex l E W))).f 0)) h2).trans ?_
-  erw [coefficientUnitCycle_iCycles]
-  rw [coefficientUnitCycle_iCycles]
-  rw [coefficientScalarSectionsChainMap_unit, coefficientFiniteUnitComparison_unit]
+  apply cyclesMap_comp_apply_eq_of_components
+  rw [coefficientUnitCycle_iCycles, coefficientUnitCycle_iCycles]
+  exact (coefficientScalarSectionsChainMap_unit l E W D n).trans
+    (coefficientFiniteUnitComparison_unit l E W D n).symm
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- The unit-class computation chains several localized section comparisons.
 /-- The finite scalar adjunction unit followed by the scalar-sections comparison sends
 the completed unit class to the finite unit class, along the transported scalar unit.
@@ -440,7 +426,11 @@ theorem coefficientFiniteAdjunction_unit_unitClass
         (HasDerivedCategory.standard _) 0).map hm)
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at hm' hnat ⊢
     refine (hm' _).trans ?_
-    exact congrArg _ hnat
+    exact congrArg
+      ((@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
+        (HasDerivedCategory.standard _) 0).map
+          (coefficientSiteSectionsComparison.{u, t + 1, t} (Scheme.ProEt.topology W)
+            (integralCoefficientCommRingSheaf l E W n) I)) hnat
   have e1 := ((coefficientFiniteSections l E W n ⋙
     (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
       (HasDerivedCategory.standard _) 0)).mapIso pU).hom_inv_id_apply
