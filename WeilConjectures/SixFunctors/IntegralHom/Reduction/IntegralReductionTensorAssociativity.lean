@@ -31,6 +31,7 @@ private theorem reduction_iso_inv_section_of_hom_section
   rw [← h]
   exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
 
+-- Establish the diagram identities before specializing to the derived coefficient models.
 private theorem reduction_map_inverse_cancel
     {C : Type*} [Category C] {X Y : C} {e : X ≅ Y} {f : Y ≅ X}
     (h : e.symm = f) {D : Type*} [Category D] (F : C ⥤ D) :
@@ -47,7 +48,7 @@ private theorem reduction_normalized_comparison
   calc
     (a ≫ b ≫ c) ≫ t = (a ≫ b ≫ c) ≫ ri ≫ s := by
       rw [hs]
-      simp only [reassoc_of% hr, Category.id_comp]
+      simp only [reassoc_of% hr]
     _ = ε ≫ w ≫ s := by
       have hh := congrArg (fun z ↦ z ≫ w ≫ s) h
       simpa only [Category.assoc, reassoc_of% hv, Category.id_comp] using hh
@@ -291,7 +292,6 @@ private theorem finiteCochainModel_reductionCounit (n : ℕ)
   simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   with_unfolding_all rfl
 
-set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem nativeReductionMonoidal
@@ -323,12 +323,10 @@ private theorem nativeReductionMonoidal
     RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S
   let : MonoidalCategory (Derived.{t, u} Y R) :=
     RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J R
-  trace "PH805: source coherence"
   obtain ⟨⟨monR, adjR, evR⟩, hmonR, TR, βR, hR, _, hTR⟩ :=
     ringedDerived_closed_symmetric_monoidal_native.{t + 1, t, u, max u (t + 1) + 1} J R
   dsimp only [CoefficientClosedStructure.monoidal] at hmonR
   subst monR
-  trace "PH805: target coherence"
   obtain ⟨⟨monS, adjS, evS⟩, hmonS, TS, βS, hS, _, hTS⟩ :=
     ringedDerived_closed_symmetric_monoidal_native.{t + 1, t, u, max u (t + 1) + 1} J S
   dsimp only [CoefficientClosedStructure.monoidal] at hmonS
@@ -345,7 +343,6 @@ private theorem nativeReductionMonoidal
   let mu : AR.tensor ⋙ F ≅ F.prod F ⋙ AS.tensor :=
     Functor.isoWhiskerRight e.symm F ≪≫ m.mu ≪≫ Functor.isoWhiskerLeft (F.prod F) f
   let φ := completedIntegralCommRingProjectionUnrestricted l E Y n
-  trace "PH805: scalar comparison"
   obtain ⟨κ, hκ, _⟩ := ringedFiniteFreeHomBaseChange_complex.{t + 1, t, u,
     max u (t + 1) + 1} J φ D'
   have hc (P Q : CochainComplex (scalarReductionSource l E Y) ℤ) :
@@ -360,26 +357,20 @@ private theorem nativeReductionMonoidal
       exact h
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
-  trace "PH805: monoidal descent"
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
-      trace "PH805: presentation normalization"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
-      trace "PH805: normalization unpacked"
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
-      trace "PH805: beta normalized"
       have hcPQ := hc P Q
+      -- Use the same tensor and scalar-extension expressions in both uniqueness equalities.
       dsimp only [reductionExtension_eq_scalarExtension, coefficientTotalTensor,
         totalTensor, ordinaryTensor] at hb
       dsimp only [D', finiteCochainModel, coefficientTotalTensor,
         totalTensor, ordinaryTensor] at hcPQ
-      trace "PH805: comparison types normalized"
       have hbκ := hb.trans hcPQ.symm
-      trace "PH805: flat representatives"
       refine ⟨hEP, hEQ, ?_⟩
-      trace "PH805: representative comparisons"
       have hrepR := nativeIso_representative Y R a P Q hP hQ
       have hrepS := nativeIso_representative Y S m.target _ _ hEP hEQ
       have hTR' := eq_of_heq (hTR P Q hP hQ)
@@ -392,34 +383,27 @@ private theorem nativeReductionMonoidal
           (hA : A.IsKFlatIndependentCoefficients) :
           D'.ε.app A = reductionCounit l E Y D hl n A :=
         finiteCochainModel_reductionCounit l E Y D hl n A hA
-      trace "PH805: counit rewrites"
       have hepsPQ := heps _ (coefficientTotalTensor_isKFlat J R P Q hP hQ)
       simp only [heps P hP, heps Q hQ]
       dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
         CategoryTheory.Functor.uncurry_obj_obj, Modules, J, R] at hepsPQ ⊢
+      -- Rewrite just the counit, without testing the other natural-transformation components.
       conv_rhs =>
         arg 1
         rw [hepsPQ]
-      trace "PH805: counits rewritten"
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
-      trace "PH805: target comparison"
       have hcs := (congrArg Iso.hom hTS').trans hrepS.symm
-      trace "PH805: target comparison proved"
       have hcan := reduction_map_inverse_cancel hbκ DerivedCategory.Q
-      trace "PH805: cancellation proved"
       have hr := m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩)
-      trace "PH805: transport square"
       dsimp only [D', finiteCochainModel, reductionExtension_eq_scalarExtension,
         J, R, S, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
         ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj] at hnorm hcan hcs hr
       have hn := by
         with_unfolding_all
           exact reduction_normalized_comparison hcs hnorm hcan hr
-      trace "PH805: normalization transported"
       have ht := reduction_tensorComparison_transport F e f m.mu
         (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) hcr εP εQ
-      trace "PH805: tensor comparison transported"
       dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
         F, integralDerivedReduction, reductionExtension_eq_scalarExtension, e, f, mu,
         AS, CoefficientClosedStructure.tensor, εP, εQ,
@@ -428,10 +412,8 @@ private theorem nativeReductionMonoidal
         ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj,
         CategoryTheory.Functor.prod_obj, Functor.comp_obj, ObjectProperty.ι_obj] at ht hn ⊢
       have hsquare := ht.trans hn
-      trace "PH805: square composed"
       with_unfolding_all
         exact hsquare)
-  trace "PH805: resulting tensorator"
   refine ⟨core, ?_⟩
   intro X Z
   have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
