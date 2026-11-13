@@ -296,8 +296,104 @@ private theorem tensorUnit_complex_right
   rfl
 
 
-set_option maxHeartbeats 600000 in
--- The concrete sheaf tensor instances require extra elaboration heartbeats.
+-- Carry out the coherence calculation with abstract tensor structures, so the sheaf
+-- instances are synthesized only when this lemma is applied.
+private theorem tensorUnit_complex_coherence
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+  [MonoidalCategory C] [MonoidalCategory D] [Limits.HasZeroObject C] [Limits.HasZeroObject D]
+  [MonoidalPreadditive C] [MonoidalPreadditive D]
+  [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ : GradedObject ℤ D), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ X₁, Limits.PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+  [∀ X₂, Limits.PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+  [∀ X₁, Limits.PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
+  [∀ X₂, Limits.PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    {D₁ D₂ : Type*} [Category* D₁] [Category* D₂]
+    [MonoidalCategory D₁] [MonoidalCategory D₂]
+    (F : C ⥤ D) [F.Additive] (mF : F.CoreMonoidal)
+    (QX : CochainComplex C ℤ ⥤ D₁) (QT : CochainComplex D ℤ ⥤ D₂)
+    [QX.LaxMonoidal] [QT.LaxMonoidal] [IsIso (Functor.LaxMonoidal.ε QT)]
+    (G : D₁ ⥤ D₂)
+    (e : ∀ K, G.obj (QX.obj K) ⟶
+      QT.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))
+    (he : ∀ {K N : CochainComplex C ℤ} (f : K ⟶ N),
+      G.map (QX.map f) ≫ e N =
+        e K ≫ QT.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f))
+    (φ : ∀ K N : CochainComplex C ℤ,
+      (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (K ⊗ N) ≅
+        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⊗
+          (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N)
+    (hφ : ∀ K N p q n (h : p + q = n),
+      F.map (HomologicalComplex.ιTensorObj K N p q n h) ≫ (φ K N).hom.f n =
+        (mF.μIso (K.X p) (N.X q)).inv ≫ HomologicalComplex.ιTensorObj
+          ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
+          ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) p q n h)
+    (μ : curriedTensorPre G ≅ curriedTensorPost G) (η : 𝟙_ D₂ ≅ G.obj (𝟙_ D₁))
+    (hη' : let u := (HomologicalComplex.single D (ComplexShape.up ℤ) 0).mapIso mF.εIso ≪≫
+        ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).app _).symm
+      η.inv ≫ Functor.LaxMonoidal.ε QT =
+        G.map (Functor.LaxMonoidal.ε QX) ≫ e (𝟙_ (CochainComplex C ℤ)) ≫ QT.map u.inv)
+    (hμ : ∀ K N,
+      (∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ K).Acyclic) →
+      (∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ N).Acyclic) →
+      ((μ.app (QX.obj K)).app (QX.obj N)).hom ≫
+          G.map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫ QT.map (φ K N).hom =
+        (e K ⊗ₘ e N) ≫ Functor.LaxMonoidal.μ QT
+          ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
+          ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N))
+    (P : CochainComplex C ℤ)
+    (hP : ∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ P).Acyclic) [IsIso (e P)] :
+    (λ_ (G.obj (QX.obj P))).hom = η.hom ▷ G.obj (QX.obj P) ≫
+        ((μ.app (𝟙_ D₁)).app (QX.obj P)).hom ≫ G.map (λ_ (QX.obj P)).hom ∧
+      (ρ_ (G.obj (QX.obj P))).hom = G.obj (QX.obj P) ◁ η.hom ≫
+        ((μ.app (QX.obj P)).app (𝟙_ D₁)).hom ≫ G.map (ρ_ (QX.obj P)).hom := by
+  let FC := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let U : CochainComplex C ℤ := 𝟙_ _
+  let u : 𝟙_ (CochainComplex D ℤ) ≅ FC.obj U :=
+    (HomologicalComplex.single _ (ComplexShape.up ℤ) 0).mapIso mF.εIso ≪≫
+      ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).app _).symm
+  have huL := tensorUnit_complex_left F mF P (φ U P)
+    (fun n ↦ hφ U P 0 n n (zero_add n))
+  have huR := tensorUnit_complex_right F mF P (φ P U)
+    (fun n ↦ hφ P U n 0 n (add_zero n))
+  have hη : η.inv = G.map (Functor.LaxMonoidal.ε QX) ≫
+      e U ≫ QT.map u.inv ≫ inv (Functor.LaxMonoidal.ε QT) := by
+    apply (cancel_mono (Functor.LaxMonoidal.ε QT)).mp
+    simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
+  let W := fun K : CochainComplex C ℤ ↦
+    ∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ K).Acyclic
+  have hU : W U := by
+    intro N hN i
+    exact (hN i).of_iso (ρ_ N).symm
+  have hδ (K N : CochainComplex C ℤ) (hK : W K) (hN : W N) :
+      (μ.inv.app (QX.obj K)).app (QX.obj N) ≫ (e K ⊗ₘ e N) ≫
+          Functor.LaxMonoidal.μ QT (FC.obj K) (FC.obj N) =
+        G.map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫ QT.map (φ K N).hom :=
+    (((μ.app (QX.obj K)).app (QX.obj N)).inv_comp_eq).2 (hμ K N hK hN).symm
+  have hl := tensorUnit_left_square QX QT FC G μ.inv e P u (φ U P)
+    η hη (he (λ_ P).inv) (hδ U P hU hP) huL
+  have hr := tensorUnit_right_square QX QT FC G μ.inv e P u (φ P U)
+    η hη (he (ρ_ P).inv) (hδ P U hP hU) huR
+  constructor
+  · let a := λ_ (G.obj (QX.obj P))
+    let b := whiskerRightIso η (G.obj (QX.obj P)) ≪≫
+      (μ.app (𝟙_ D₁)).app (QX.obj P) ≪≫ G.mapIso (λ_ (QX.obj P))
+    apply (Iso.inv_eq_inv a b).mp
+    simpa only [a, b, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
+      whiskerRightIso, Category.assoc] using hl
+  · let a := ρ_ (G.obj (QX.obj P))
+    let b := whiskerLeftIso (G.obj (QX.obj P)) η ≪≫
+      (μ.app (QX.obj P)).app (𝟙_ D₁) ≪≫ G.mapIso (ρ_ (QX.obj P))
+    apply (Iso.inv_eq_inv a b).mp
+    simpa only [a, b, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
+      whiskerLeftIso, Category.assoc] using hr
+
 /-- The explicitly constructed unit comparison satisfies both unit laws on Q(P)
 when P is K-flat. No statement about arbitrary derived objects is made here.
 Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product;
@@ -382,71 +478,13 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
              (derivedPullback g).map (ρ_ A).hom) := by
   let AX := SheafOfModules.{uModel} (moduleRings X.toRingedSpace)
   let AT := SheafOfModules.{uModel} (moduleRings T.toRingedSpace)
-  let FC := F.mapHomologicalComplex (ComplexShape.up ℤ)
-  let U : CochainComplex AX ℤ := 𝟙_ _
-  let u : 𝟙_ (CochainComplex AT ℤ) ≅ FC.obj U :=
-    (HomologicalComplex.single _ (ComplexShape.up ℤ) 0).mapIso mF.εIso ≪≫
-      ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).app _).symm
-  have huL := tensorUnit_complex_left F mF P (φ U P)
-    (fun n ↦ hφ U P 0 n n (zero_add n))
-  have huR := tensorUnit_complex_right F mF P (φ P U)
-    (fun n ↦ hφ P U n 0 n (add_zero n))
-  have hU : CochainComplex.IsKFlatTensor (R := X.sheaf) U := by
-    intro N hN i
-    exact (hN i).of_iso (ρ_ N).symm
   have hEP : IsIso (ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj P)) :=
     tensorUnit_counit_kFlat_isIso g F hF hmap ε hε P hP
-  let QX := DerivedCategory.Q (C := AX)
-  let QT := DerivedCategory.Q (C := AT)
-  let η := derivedPullback_tensorUnitIso g F mF ε
-  let e := fun K : CochainComplex AX ℤ ↦
-    ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj K)
-  obtain ⟨hQT, hη'⟩ := derivedPullback_tensorUnitIso_normalization g F mF ε
-  have hη : η.inv = (derivedPullback g).map (Functor.LaxMonoidal.ε QX) ≫
-      e U ≫ QT.map u.inv ≫ inv (Functor.LaxMonoidal.ε QT) := by
-    apply (cancel_mono (Functor.LaxMonoidal.ε QT)).mp
-    simpa only [cast_eq, Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
-  have he : ∀ {K N : CochainComplex AX ℤ} (f : K ⟶ N),
-      (derivedPullback g).map (QX.map f) ≫ e N = e K ≫ QT.map (FC.map f) := by
-    intro K N f
-    exact ε.naturality ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).map f)
-  have hδ : ∀ K N : CochainComplex AX ℤ,
-      CochainComplex.IsKFlatTensor (R := X.sheaf) K →
-      CochainComplex.IsKFlatTensor (R := X.sheaf) N →
-      ((μ.inv.app (QX.obj K)).app (QX.obj N)) ≫ (e K ⊗ₘ e N) ≫
-        Functor.LaxMonoidal.μ QT (FC.obj K) (FC.obj N) =
-      (derivedPullback g).map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫
-        QT.map (φ K N).hom := by
-    intro K N hK hN
-    have hμ' := hμ K N hK hN
-    simp only [cast_eq] at hμ'
-    erw [← hμ']
-    dsimp only [QX, QT, e]
-    simp only [Iso.app_hom]
-    rw [Iso.inv_hom_id_app_app_assoc]
-    rfl
-  have hl := tensorUnit_left_square QX QT FC (derivedPullback g) μ.inv e P u (φ U P)
-    η hη (he (λ_ P).inv) (hδ U P hU hP) huL
-  have hr := tensorUnit_right_square QX QT FC (derivedPullback g) μ.inv e P u (φ P U)
-    η hη (he (ρ_ P).inv) (hδ P U hP hU) huR
-  constructor
-  · let a := λ_ ((derivedPullback g).obj (QX.obj P))
-    let b := whiskerRightIso η ((derivedPullback g).obj (QX.obj P)) ≪≫
-      (μ.app (𝟙_ (schemeDerivedCategory X))).app (QX.obj P) ≪≫
-        (derivedPullback g).mapIso (λ_ (QX.obj P))
-    have hab : a.symm = b.symm := by
-      apply Iso.ext
-      simpa only [a, b, Iso.symm_hom, Iso.trans_inv, Functor.mapIso_inv,
-        Iso.app_inv, whiskerRightIso, Category.assoc] using hl
-    exact congrArg Iso.hom (Iso.symm_eq_iff.mp hab)
-  · let a := ρ_ ((derivedPullback g).obj (QX.obj P))
-    let b := whiskerLeftIso ((derivedPullback g).obj (QX.obj P)) η ≪≫
-      (μ.app (QX.obj P)).app (𝟙_ (schemeDerivedCategory X)) ≪≫
-        (derivedPullback g).mapIso (ρ_ (QX.obj P))
-    have hab : a.symm = b.symm := by
-      apply Iso.ext
-      simpa only [a, b, Iso.symm_hom, Iso.trans_inv, Functor.mapIso_inv,
-        Iso.app_inv, whiskerLeftIso, Category.assoc] using hr
-    exact congrArg Iso.hom (Iso.symm_eq_iff.mp hab)
+  obtain ⟨hQT, hη⟩ := derivedPullback_tensorUnitIso_normalization g F mF ε
+  exact tensorUnit_complex_coherence F mF
+    (DerivedCategory.Q (C := AX)) (DerivedCategory.Q (C := AT)) (derivedPullback g)
+    (fun K ↦ ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj K))
+    (fun f ↦ ε.naturality ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).map f))
+    φ hφ μ (derivedPullback_tensorUnitIso g F mF ε) hη hμ P hP
 
 end AlgebraicGeometry
