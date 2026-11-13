@@ -28,11 +28,20 @@ Source: literature/stacks-project/cohomology.tex, Lemma 01E4
 (blueprint: lem-weil-pbc-higher-direct-image-presheaf).
 -/
 
+private theorem higherDirectImagePresheaf_universal_aux
+    {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C}
+    (A : L ⊣ R) {P : C} {H T Q : D} (c : L.obj P ⟶ H) [IsIso c]
+    (e : T ≅ H) (a : P ⟶ R.obj Q) :
+    ∃! b : T ⟶ Q, A.homEquiv P H c ≫ R.map (e.inv ≫ b) = a := by
+  simpa only [Equiv.trans_apply, Iso.homFromEquiv_apply, Iso.symm_inv,
+    Iso.trans_hom, asIso_hom, Iso.symm_hom, Category.assoc,
+    A.homEquiv_naturality_right] using
+    ((((asIso c) ≪≫ e.symm).symm.homFromEquiv).trans
+      (A.homEquiv P Q)).bijective.existsUnique a
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 750000 in
-set_option trace.profiler true in
--- The explicit resolution and evaluation comparisons require substantial elaboration.
+set_option profiler true in
 /-- Stacks 01E4 with every datum tied. For an injective resolution I of F, the presheaf
 P_p is `sectionCohomologyPresheaf (f_*I) p`, V ↦ H^p(I(f⁻¹V)); theta is
 `sectionCohomologyTheta (f_*I) p` followed by the resolution comparison
@@ -122,13 +131,7 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
         dsimp [A]
         infer_instance
       exact HomologicalComplex.Hom.isIso_of_components _
-    apply IsIso.comp_isIso'
-    · infer_instance
-    · change IsIso ((HomologicalComplex.homologyFunctor Y.Modules
-        (ComplexShape.up ℕ) p).map
-          ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K))
-      exact (HomologicalComplex.homologyFunctor Y.Modules (ComplexShape.up ℕ) p).map_isIso
-        ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K)
+    infer_instance
   refine ⟨?_, ?_, ?_, ?_, by infer_instance⟩
   · change IsIso (Scheme.Modules.sectionCohomologyComparison K p ≫ e.inv)
     infer_instance
@@ -139,30 +142,8 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
         Scheme.Modules.sectionCohomologyTheta K p ≫
           (SheafOfModules.forget Y.ringCatSheaf).map (e.inv ≫ b) = a
     intro Q a
-    let c := Scheme.Modules.sectionCohomologyComparison K p ≫ e.inv
-    have : IsIso c := by dsimp [c]; infer_instance
-    refine ⟨inv c ≫ (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).symm a, ?_, ?_⟩
-    · change A.homEquiv _ _ (Scheme.Modules.sectionCohomologyComparison K p) ≫
-        (SheafOfModules.forget Y.ringCatSheaf ⋙
-          PresheafOfModules.restrictScalars (𝟙 Y.ringCatSheaf.obj)).map
-            (e.inv ≫ (inv c ≫
-              (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).symm a)) = a
-      rw [← A.homEquiv_naturality_right]
-      change A.homEquiv _ _ (c ≫ inv c ≫
-        (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).symm a) = a
-      simpa only [IsIso.hom_inv_id_assoc] using
-        (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).apply_symm_apply a
-    · intro b hb
-      apply (cancel_epi c).mp
-      apply (A.homEquiv _ _).injective
-      have hb' : A.homEquiv _ _ (c ≫ b) = a := by
-        rw [show c ≫ b = Scheme.Modules.sectionCohomologyComparison K p ≫
-            (e.inv ≫ b) by simp [c]]
-        rw [A.homEquiv_naturality_right]
-        exact hb
-      rw [hb']
-      simpa only [IsIso.hom_inv_id_assoc] using
-        ((A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).apply_symm_apply a).symm
+    exact higherDirectImagePresheaf_universal_aux A
+      (Scheme.Modules.sectionCohomologyComparison K p) e a
   · change ∀ y : Y, IsIso
       ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y).map
         (Scheme.Modules.sectionCohomologyTheta K p ≫
