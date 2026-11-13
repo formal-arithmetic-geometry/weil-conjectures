@@ -190,6 +190,7 @@ private theorem transport_homology
   simpa only [Category.assoc] using congrArg
     (fun g => g ≫ E.map (U.map L.homologyπ)) hc
 
+-- Keep the augmentation chase abstract until it is applied to sheaf and section functors.
 private theorem transport_augmentation
     {C D P Q : Type*} [Category* C] [Category* D] [Category* P] [Category* Q]
     [Abelian C] [Abelian D] [Abelian P] [Abelian Q]
@@ -267,7 +268,6 @@ private theorem augmentation_comp_resolution
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option profiler true in
 /-- The class of an augmented restricted section is the direct-image augmentation
 of the same section on the original open.
 Source: Stacks Project, Cohomology, Tag 01E4 (lemma-describe-higher-direct-images).
