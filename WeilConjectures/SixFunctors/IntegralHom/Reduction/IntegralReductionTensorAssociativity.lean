@@ -331,8 +331,10 @@ private theorem nativeReductionMonoidal
       intro P Q hP hQ
       trace "PH805: presentation normalization"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
+      trace "PH805: normalization unpacked"
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
+      trace "PH805: beta normalized"
       have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
       trace "PH805: flat representatives"
       refine ⟨hEP, hEQ, ?_⟩
