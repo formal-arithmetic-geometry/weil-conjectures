@@ -25,6 +25,23 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+private theorem cochain_square_of_comparison_eq
+    {S V W : Type*} [Category* S] [Category* V] [Category* W]
+    [HasZeroMorphisms V] [HasZeroMorphisms W]
+    {F₀ F₁ : S ⥤ CochainComplex W ℤ} {G₀ G₁ : S ⥤ CochainComplex V ℤ}
+    {R : CochainComplex W ℤ ⥤ CochainComplex V ℤ} {P : S}
+    {D : CochainComplex V ℤ}
+    {α α' : F₀ ≅ F₁} {β β' : G₀ ≅ G₁}
+    {a : G₀.obj P ⟶ R.obj (F₀.obj P)}
+    {d : G₁.obj P ⟶ D} {e : D ⟶ R.obj (F₁.obj P)}
+    (hα : α = α') (hβ : β = β')
+    (h : ∀ i, a.f i ≫ (R.map (α'.hom.app P)).f i =
+      (β'.hom.app P).f i ≫ d.f i ≫ e.f i) :
+    a ≫ R.map (α.hom.app P) = β.hom.app P ≫ d ≫ e := by
+  subst α'
+  subst β'
+  exact HomologicalComplex.hom_ext _ _ h
+
 /-- The actual comparison of exact cochain functors, before localization.
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
@@ -78,11 +95,9 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  apply HomologicalComplex.hom_ext
-  intro i
-  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
-  dsimp only [integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
-    HomologicalComplex.comp_f] at h ⊢
-  exact h
+  refine cochain_square_of_comparison_eq
+    (α' := ordinaryPullEvaluationComplex l E f n)
+    (β' := ordinaryPullEvaluationComplex l E f (n + 1)) rfl rfl ?_
+  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
 
 end WeilConjectures.IntegralSystemRealization
