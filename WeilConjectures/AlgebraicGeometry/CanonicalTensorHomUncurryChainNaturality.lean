@@ -155,6 +155,16 @@ private theorem naturality_transport
   apply (cancel_mono eM'.inv).mp
   simpa only [Category.assoc, hc'] using h
 
+private theorem map_comp_naturality_of_lift
+    {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
+    {P P' I I' : C} {H H' : D}
+    (a : P' ⟶ P) (φ : P ⟶ I) (g : I ⟶ I')
+    (s : Q.obj I ⟶ H) (s' : Q.obj I' ⟶ H') (h : H ⟶ H') (f : Q.obj P ⟶ H)
+    (hg : Q.map g ≫ s' = s ≫ h) (hφ : Q.map φ ≫ s = f) :
+    Q.map (a ≫ φ ≫ g) ≫ s' = Q.map a ≫ f ≫ h := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hg, ← Category.assoc (Q.map φ), hφ]
+
 
 set_option trace.profiler true in
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
@@ -264,10 +274,8 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
           (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
             X.toRingedSpace.sheaf).map ((Q.map b₀).op,
               Q.map c) := by
-      dsimp only [ψ]
-      simp only [Functor.map_comp, Category.assoc]
-      rw [hom_model_natural X N N' M M' b₀ c,
-        ← Category.assoc (Q.map φ), hf]
+      exact map_comp_naturality_of_lift Q a₀ φ _ _ _ _ f₀
+        (hom_model_natural X N N' M M' b₀ c) hf
     rw [← hψ, ht F' N' M' hF' ψ, ← hf, ht F N M hF φ]
     exact schemeTensorHomUncurry_localized_evaluation X F F' N N' M M' a₀ b₀ c φ
   exact naturality_transport
