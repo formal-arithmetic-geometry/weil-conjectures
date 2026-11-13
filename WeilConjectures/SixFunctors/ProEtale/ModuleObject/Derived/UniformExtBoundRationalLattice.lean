@@ -210,26 +210,26 @@ theorem hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRin
     fun K ↦ ∃ N : ℤ, ∀ B, IsConstructibleModuleObject
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) X) B → ∀ n ≤ N,
       ∀ f : K ⟶ (DerivedCategory.singleFunctor _ n).obj B, f = 0
-  have hiso : ∀ {K K'}, (K ≅ K') → P K → P K' := by
-    intro K K' e ⟨N, hN⟩
-    exact ⟨N, fun B hB n hn f ↦ hom_eq_zero_of_source_iso e (hN B hB n hn) f⟩
   refine CondensedRing.prop_singleFunctor_of_isConstructibleModuleObject_of_perfectField
     (preservesFiniteLimits_tensorLeft_continuousMapRingObj_of_finiteDimensional ℓ E.1) aX P
-    (fun K hK ↦ ⟨0, fun B _ n _ f ↦ hK.eq_of_src _ _⟩) hiso
+    (fun K hK ↦ ⟨0, fun B _ n _ f ↦ hK.eq_of_src _ _⟩) (fun {K K'} e hK ↦ ?_)
     (fun Tr hTr h₁ h₃ ↦ ?_) (fun D c _ V S c' _ _ _ _ L hL ↦ ?_) M hM
+  · obtain ⟨N, hN⟩ := hK
+    refine ⟨N, fun B hB n hn f ↦ ?_⟩
+    exact hom_eq_zero_of_source_iso e (hN B hB n hn) f
   · obtain ⟨N₁, h₁⟩ := h₁
     obtain ⟨N₃, h₃⟩ := h₃
     refine ⟨min N₁ N₃, fun B hB n hn f ↦ ?_⟩
     exact hom_eq_zero_to_of_distinguished Tr hTr
       (h₁ B hB n (hn.trans (min_le_left _ _)))
       (h₃ B hB n (hn.trans (min_le_right _ _))) f
-  · refine prop_of_exists_iso_image _ _ P hiso ?_
-      (exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek
-        ℓ E c V c' L hL)
-    intro G₀ hG₀
+  · obtain ⟨G₀, hG₀, ⟨eY⟩⟩ :=
+      exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek ℓ E c V c'
+        L hL
     obtain ⟨N, hN⟩ := hb G₀ hG₀
-    exact ⟨N, fun B hB n hn f ↦
-      eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField ℓ E aX
-        (hc G₀ hG₀) N hN B hB n hn f⟩
+    refine ⟨N, fun B hB n hn f ↦ ?_⟩
+    exact hom_eq_zero_of_source_iso eY.symm
+      (eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField ℓ E aX
+        (hc G₀ hG₀) N hN B hB n hn) f
 
 end AlgebraicGeometry.ProEtale
