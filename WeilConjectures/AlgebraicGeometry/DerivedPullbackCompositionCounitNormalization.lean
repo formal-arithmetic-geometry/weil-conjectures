@@ -24,8 +24,6 @@ set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
--- Use the sheaf-module abelian structure directly during instance synthesis.
-attribute [local instance 30000] SheafOfModules.instAbelian
 -- Compare the recorded functors through their interfaces, without unfolding the
 -- chosen resolutions or adjunction witnesses during statement elaboration.
 -- Open the pinned adjunction explicitly only at its defining Hom equation.
@@ -128,9 +126,6 @@ theorem derivedPullbackComposition_counit_normalization
   run_tac Lean.logInfo m!"after localized counit: {(← Lean.getRemainingHeartbeats) / 1000}"
   exact normalizeCounitPrecomposition
     (C := DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    ((canonicalDerivedPullbackComposition f g).hom.app
-      (((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).mapHomotopyCategory
-        (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K))
-    he hl
+    _ he hl
 
 end AlgebraicGeometry
