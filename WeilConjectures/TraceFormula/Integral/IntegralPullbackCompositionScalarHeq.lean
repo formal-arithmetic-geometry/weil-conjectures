@@ -239,8 +239,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       apply HEq.rfl)
     (finiteSystemComposition_heq_integralComparison l E h k)
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  apply eq_of_heq
-  exact hh
+  cases hh
+  rfl
 
 end Composition
 
