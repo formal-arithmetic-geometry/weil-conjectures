@@ -52,6 +52,7 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 attribute [instance] topological_pushforwardAb_additive
 
 set_option profiler true in
+set_option maxHeartbeats 800000 in
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -91,7 +92,7 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
           (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤),
         ∃ E : E₂CohomologicalSpectralSequenceNat
             (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}),
-          ∃ e₂ : ∀ a b : ℕ, (E.page 2 le_rfl).X (a, b) ≅
+          ∃ e₂ : ∀ a b : ℕ, (E.page 2).X (a, b) ≅
               (TopCat.Sheaf.pushforwardAb f).rightDerived b ⋙ HX a,
             (∀ a b : ℕ, ∃ (R : ℤ) (_hR : 2 ≤ R), ∀ (r : ℤ) (hr : R ≤ r),
               Nonempty ((E.page r (by omega)).X (a, b) ≅ E.pageInfinity (a, b))) ∧
@@ -100,18 +101,17 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
               (∀ n, (T n).step (n + 1) = ⊥) ∧
               ∃ g : ∀ p q : ℕ, (T (p + q)).gradedPiece p ≅ E.pageInfinity (p, q),
                 ∃ e₀ : ∀ p : ℕ,
-                    TopCat.Sheaf.pushforwardAb f ⋙ HX p ≅ (E.page 2 le_rfl).X (p, 0),
+                    TopCat.Sheaf.pushforwardAb f ⋙ HX p ≅ (E.page 2).X (p, 0),
                   (∀ p, (e₀ p).hom =
                     Functor.whiskerRight (TopCat.Sheaf.pushforwardAb f).toRightDerivedZero
                       (HX p) ≫ (e₂ p 0).inv) ∧
                   ∃ t : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
-                      (E.page r hr).X (p, 0) ⟶ (E.page (r + 1) (by omega)).X (p, 0),
+                      (E.page r).X (p, 0) ⟶ (E.page (r + 1)).X (p, 0),
                     (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
-                      (E.page r hr).iCycles (p, 0) ≫ t p r hr =
-                        (E.page r hr).homologyπ (p, 0) ≫
-                          (E.iso r (r + 1) (p, 0) rfl hr).hom) ∧
+                      (E.page r).iCycles (p, 0) ≫ t p r hr =
+                        (E.page r).homologyπ (p, 0) ≫ (E.iso r (r + 1) (p, 0)).hom) ∧
                     ∃ b : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
-                        (E.page 2 le_rfl).X (p, 0) ⟶ (E.page r hr).X (p, 0),
+                        (E.page 2).X (p, 0) ⟶ (E.page r).X (p, 0),
                       (∀ p, b p 2 (by omega) = 𝟙 _) ∧
                       (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
                         b p (r + 1) (by omega) = b p r hr ≫ t p r hr) ∧
