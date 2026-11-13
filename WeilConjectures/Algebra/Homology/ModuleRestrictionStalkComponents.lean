@@ -62,23 +62,17 @@ theorem exists_moduleRestrictionStalk_components (X : RingedSpace.{u}) (W : Open
       Limits.Cocone ((OpenNhds.inclusion y).op ⋙ (N F).val.presheaf) :=
     { pt := TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x
       ι :=
-        { app := fun (V : (OpenNhds y)ᵒᵖ) ↦ AddCommGrpCat.ofHom <|
-            AddMonoidHom.mk'
-              (fun s ↦ TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)
-                F.val.presheaf (W.isOpenEmbedding.isOpenMap.functor.obj V.unop.1)
-                x ⟨y, V.unop.2, rfl⟩ s)
-              (fun s t ↦ map_add _ s t)
+        { app := fun (V : (OpenNhds y)ᵒᵖ) ↦
+            TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)
+              F.val.presheaf (W.isOpenEmbedding.isOpenMap.functor.obj V.unop.1)
+              x ⟨y, V.unop.2, rfl⟩
           naturality := by
             intro U V f
-            ext s
-            change TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)
-              F.val.presheaf _ x _
-                (F.val.presheaf.map (W.isOpenEmbedding.isOpenMap.functor.map
-                  (homOfLE f.unop.le : V.unop.1 ⟶ U.unop.1)).op s) = _
-            exact TopCat.Presheaf.germ_res_apply (C := Ab.{u}) (X := X.carrier)
+            exact (TopCat.Presheaf.germ_res (C := Ab.{u}) (X := X.carrier)
               F.val.presheaf
               (W.isOpenEmbedding.isOpenMap.functor.map
-                (homOfLE f.unop.le : V.unop.1 ⟶ U.unop.1)) x ⟨y, V.unop.2, rfl⟩ s } }
+                (homOfLE f.unop.le : V.unop.1 ⟶ U.unop.1)) x ⟨y, V.unop.2, rfl⟩).trans
+                (Category.comp_id _).symm } }
   let a (F : SheafOfModules.{u} (moduleRings X)) :
       TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y ⟶
         TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x :=
