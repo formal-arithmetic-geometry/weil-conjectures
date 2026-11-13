@@ -147,7 +147,7 @@ theorem coefficientTensorAssociativityOnRepresentatives
       (α_ (F.obj (DerivedCategory.Q.obj P))
         (F.obj (DerivedCategory.Q.obj Q))
         (F.obj (DerivedCategory.Q.obj N))).hom
-  simp only [id_tensorHom, tensorHom_id]
+  simp only [@id_tensorHom _ _ SA.monoidal, @tensorHom_id _ _ SA.monoidal]
   let V := K
   let := hε P hP fP
   let := hε Q hQ fQ
@@ -246,10 +246,10 @@ theorem coefficientTensorAssociativityOnRepresentatives
   simp only [cA.tensorIso_both _ _ hUP hUQN, cA.tensorIso_both _ _ hUP hAQN] at hnR
   simp only [CoefficientClosedStructure.tensor, tensor_obj, tensor_map,
     DerivedCategory.Q.map_id] at hnL
-  simp only [tensorHom_id] at hnL
+  simp only [@tensorHom_id _ _ SA.monoidal] at hnL
   simp only [CoefficientClosedStructure.tensor, tensor_obj, tensor_map,
     DerivedCategory.Q.map_id] at hnR
-  simp only [id_tensorHom] at hnR
+  simp only [@id_tensorHom _ _ SA.monoidal] at hnR
   have hL₀ := left_square F μ bPQ.hom bL.hom
     (e.app P) (e.app Q) (e.app N) (e.app PQ)
     (e.app (B.obj (PQ, N))) (tPQ ≫ aPQ.hom) (tL ≫ aL₀.hom) hmPQ hmL
