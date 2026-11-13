@@ -97,17 +97,18 @@ theorem exists_subfieldEndRingEquiv :
   have key (W : Scheme.{u}) (f : C(W, E)) :
       (e W).symm (Mod.regularEndRingHom (subfieldSectionRingHom ℓ W E f)) = f :=
     (e W).symm_apply_apply f
+  have inverse (W : Scheme.{u}) (t : End (Mod.regular (padicSubfieldRingObj W ℓ E))) :
+      Mod.regularEndRingHom (subfieldSectionRingHom ℓ W E ((e W).symm t)) = t :=
+    (e W).apply_symm_apply t
   refine ⟨fun W ↦ (e W).symm, ?_, ?_⟩
   · intro W' W g t x
-    obtain ⟨f, rfl⟩ := (e W).surjective t
-    change (e W').symm (restrictEnd _ g
-      (Mod.regularEndRingHom (subfieldSectionRingHom ℓ W E f))) x = (e W).symm (e W f) (g x)
-    rw [restrictEnd_regularEndRingHom, Γ_map_condensedPullbackHom_subfieldSectionRingHom,
-      key, RingEquiv.symm_apply_apply]
+    have h := restrictEnd_regularEndRingHom (Profinite.continuousMapRingObj E) g
+      (subfieldSectionRingHom ℓ W E ((e W).symm t))
+    rw [inverse, Γ_map_condensedPullbackHom_subfieldSectionRingHom] at h
+    rw [h, key]
     rfl
   · intro W t ht
-    obtain ⟨f, rfl⟩ := (e W).surjective t
-    simp only [RingEquiv.symm_apply_apply] at ht
+    let f := (e W).symm t
     let := normedFieldOfAlgebra ℓ E.1
     have hmem (x : W) : f x ∈ integers ℓ E.1 :=
       (mem_integers_iff_norm_le_one_intermediateField _).2 (ht x)
@@ -115,7 +116,7 @@ theorem exists_subfieldEndRingEquiv :
       (continuous_induced_rng.2 (continuous_subtype_val.comp f.continuous)).subtype_mk _⟩
     refine ⟨continuousMapCoefficientSectionRingHom W (integers ℓ E.1) h, ?_⟩
     rw [Γ_map_padicIntegersToPadicSubfield]
-    rfl
+    exact inverse W t
 
 /-! ### The units `𝒪_{E,V}ⁿ ⟶ E_V ⊗ 𝒪_{E,V}ⁿ` are monomorphisms -/
 
