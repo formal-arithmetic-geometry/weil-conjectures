@@ -102,8 +102,6 @@ theorem exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_l
     leftDerivedExtendScalarsSingleFunctorIso ℓ E _
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- the dévissage unfolds the derived categories of modules over `E_X`
 /-- Let `G₀` be a constructible `𝒪_{E,X}`-module on a scheme `X` locally of finite type over a
 perfect field, such that `Hom(G₀[0], -[q])` factors through filtered colimits and the morphisms
 `G₀[0] ⟶ B[n]` vanish for every constructible `𝒪_{E,X}`-module `B` and `n ≤ N`. Then the morphisms
@@ -140,25 +138,23 @@ theorem eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField {k
       (fun Y hY m _ g ↦ ((shiftFunctor _ (-m)).map_isZero hY).eq_of_tgt _ _)
       (fun {Y Y'} e hY m hm g ↦ ?_) (fun Tr hTr h₁ h₃ m hm g ↦ ?_)
       (fun D c _ V S c' _ _ _ _ L hL m hm g ↦ ?_) B hB
-    · rw [← cancel_mono ((shiftFunctor _ (-m)).map e.inv), zero_comp]
-      exact hY m hm _
-    · obtain ⟨g', rfl⟩ := Triangle.coyoneda_exact₂ _ (Triangle.shift_distinguished Tr hTr (-m)) g
-        (h₃ m hm _)
-      rw [h₁ m hm g', zero_comp]
+    · exact (cancel_mono ((shiftFunctor _ (-m)).map e.inv)).1
+        ((hY m hm _).trans zero_comp.symm)
+    · obtain ⟨g', hg'⟩ := Triangle.coyoneda_exact₂ _
+        (Triangle.shift_distinguished Tr hTr (-m)) g (h₃ m hm _)
+      exact hg'.trans ((congrArg (fun k ↦ k ≫ _) (h₁ m hm g')).trans zero_comp)
     · obtain ⟨H₀, hH₀, ⟨eY⟩⟩ :=
         exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek ℓ E c V
           c' L hL
       let e := (shiftFunctor _ (-m)).mapIso eY ≪≫
         ((DerivedCategory.singleFunctors _).shiftIso (-m) m 0 (by omega)).app _
-      rw [← cancel_mono e.hom, zero_comp]
-      exact eq_zero_of_extendScalars_padicIntegersToPadicSubfield ℓ E hc N hN H₀ hH₀ m hm _
+      exact (cancel_mono e.hom).1
+        ((eq_zero_of_extendScalars_padicIntegersToPadicSubfield
+          ℓ E hc N hN H₀ hH₀ m hm (g ≫ e.hom)).trans zero_comp.symm)
   let e := ((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).app B
-  rw [← cancel_mono e.inv, zero_comp]
-  exact hP n hn _
+  exact (cancel_mono e.inv).1 ((hP n hn (f ≫ e.inv)).trans zero_comp.symm)
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- the dévissage unfolds the derived categories of modules over `E_X`
 /-- Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`: on a noetherian scheme
 locally of finite type over a perfect field, the uniform `Ext` bound for constructible
 `E_X`-modules follows from the uniform bound and the continuity of `Ext` for constructible
@@ -186,21 +182,21 @@ theorem hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRin
     (fun Tr hTr h₁ h₃ ↦ ?_) (fun D c _ V S c' _ _ _ _ L hL ↦ ?_) M hM
   · obtain ⟨N, hN⟩ := hK
     refine ⟨N, fun B hB n hn f ↦ ?_⟩
-    rw [← cancel_epi e.hom, comp_zero]
-    exact hN B hB n hn _
+    exact (cancel_epi e.hom).1 ((hN B hB n hn _).trans comp_zero.symm)
   · obtain ⟨N₁, h₁⟩ := h₁
     obtain ⟨N₃, h₃⟩ := h₃
     refine ⟨min N₁ N₃, fun B hB n hn f ↦ ?_⟩
-    obtain ⟨g, rfl⟩ := Triangle.yoneda_exact₂ _ hTr f
+    obtain ⟨g, hg⟩ := Triangle.yoneda_exact₂ _ hTr f
       (h₁ B hB n (hn.trans (min_le_left _ _)) _)
-    rw [h₃ B hB n (hn.trans (min_le_right _ _)) g, comp_zero]
+    exact hg.trans ((congrArg (fun k ↦ Tr.mor₂ ≫ k)
+      (h₃ B hB n (hn.trans (min_le_right _ _)) g)).trans comp_zero)
   · obtain ⟨G₀, hG₀, ⟨eY⟩⟩ :=
       exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek ℓ E c V c'
         L hL
     obtain ⟨N, hN⟩ := hb G₀ hG₀
     refine ⟨N, fun B hB n hn f ↦ ?_⟩
-    rw [← cancel_epi eY.inv, comp_zero]
-    exact eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField ℓ E aX
-      (hc G₀ hG₀) N hN B hB n hn _
+    exact (cancel_epi eY.inv).1
+      ((eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField ℓ E aX
+        (hc G₀ hG₀) N hN B hB n hn (eY.inv ≫ f)).trans comp_zero.symm)
 
 end AlgebraicGeometry.ProEtale
