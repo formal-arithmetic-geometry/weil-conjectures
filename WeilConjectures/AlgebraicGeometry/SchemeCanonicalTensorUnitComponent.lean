@@ -248,9 +248,11 @@ theorem schemeCanonicalTensorUnit_component (Y : Scheme.{u})
     (HomologicalComplex.singleObjXSelf (.up ℤ) 0
       (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom
   have ha := tensor_unit_action_component F V P e p q r n k hpq hnr
-  rw [HomologicalComplex.comp_f, ← Category.assoc, ← Category.assoc]
-  apply congrArg (fun t ↦ t ≫ (eta.app F).f k)
-  rw [Category.assoc, schemeTensorUnitAction, ha]
+  have ha' := congrArg (fun t ↦ t ≫ (eta.app F).f k) ha
+  simp only [schemeTensorUnitAction, HomologicalComplex.comp_f, Category.assoc] at ⊢
+  simp only [HomologicalComplex.comp_f, Category.assoc] at ha'
+  apply ha'.trans
+  congr 1
   split_ifs with h
   · rw [he 0, hcoeff h]
   · rfl
