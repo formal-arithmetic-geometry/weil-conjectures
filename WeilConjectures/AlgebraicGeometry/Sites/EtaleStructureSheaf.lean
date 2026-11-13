@@ -101,10 +101,7 @@ theorem isSheaf_etaleStructurePresheaf_aux :
   refine Presieve.isSheaf_iso _ (NatIso.ofComponents (fun V ↦ (eqv V).toIso) ?_).symm h
   intro V W f
   ext a
-  change smulMor _ (f.unop.left.appTop a) =
-    pullHom (F := modulesPseudofunctor) (smulMor _ a) f.unop.left (G.obj W.unop).hom
-      (G.obj W.unop).hom (MorphismProperty.Over.w f.unop) (MorphismProperty.Over.w f.unop)
-  unfold smulMor
-  exact (pullHom_smulHom _ _ _ _ _ _).symm
+  exact (pullHom_smulHom (unitObj X) V.unop.hom f.unop.left W.unop.hom
+    (MorphismProperty.Over.w f.unop) a).symm
 
 end AlgebraicGeometry.Scheme
