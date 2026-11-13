@@ -229,12 +229,6 @@ private noncomputable def fromModelForgetSetIso (X : Scheme.{u})
   exact Functor.isoWhiskerLeft (modelSetEquivalence X).inverse
     (Functor.isoWhiskerRight q (modelSetEquivalence Y).functor)
 
-private theorem scalarGraph_comparison_inv
-    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
-    {X Z : D} {Y : C} (f : X ⟶ F.obj Y) (g : F.obj Y ⟶ Z) :
-    ((f ≫ F.map (𝟙 Y)) ≫ g) ≫ 𝟙 Z = f ≫ g := by
-  rw [F.map_id, Category.comp_id, Category.comp_id]
-
 private theorem scalarGraph_naturality
     {C D : Type*} [Category* C] [Category* D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -400,7 +394,14 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
       q.inv.app ((SheafOfModules.toSheaf A ⋙
         sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M) ≫
       v.map (em.inv.app ((proEtaleModuleToModel A).obj M)) := by
-    rfl
+    have hp : p.inv.app M = 𝟙 _ := by
+      dsimp [p]
+      rfl
+    have ht : t₀.inv.app M = 𝟙 _ := by
+      exact (Ls ⋙ v).map_id _
+    simp only [eM, Iso.trans_inv, NatTrans.comp_app, hp, ht, Category.id_comp,
+      Category.comp_id, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app]
   rw [hE]
   exact h₁.trans (hg.trans (congrArg₂ (fun (r : Bm.obj.obj (AsSmall.up.op.obj V))
       (m : Nm.val.obj (AsSmall.up.op.obj V)) ↦ r • m) h₂.symm h₃.symm))
