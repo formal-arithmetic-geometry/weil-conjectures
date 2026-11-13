@@ -106,7 +106,48 @@ private theorem augmentationComparisonToSingle
   simp only [HomologicalComplex.comp_f] at hn
   exact augmentationComparisonOfZero E f ε eK eQ vK vL π c
     (q.hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv)
-    _ _ hf heQ hu hp' hn (fun _ _ h ↦ HomologicalComplex.to_single_hom_ext h)
+    _ _ hf heQ hu hp' (by simpa only [Category.assoc] using hn)
+    (fun _ _ h ↦ HomologicalComplex.to_single_hom_ext h)
+
+/-- Compare extended augmentations using only their normalized degree-zero maps. -/
+private theorem normalizedExtendedAugmentationComparison
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (E : C ⥤ D) [E.Additive] {K : ChainComplex C ℕ} {V Z : C}
+    (v : V ≅ K.X 0) (f : K ⟶ (ChainComplex.single₀ C).obj Z) (π : V ⟶ Z)
+    {T : CochainComplex D ℤ} {N W : D}
+    (ε : T ⟶ (HomologicalComplex.single D (.up ℤ) 0).obj N)
+    (eK : (E.mapHomologicalComplex (.up ℤ)).obj
+      (K.extend ComplexShape.embeddingDownNat) ≅ T)
+    (c : W ≅ E.obj V) (q : E.obj Z ≅ N)
+    (u : (HomologicalComplex.single D (.up ℤ) 0).obj W ⟶ T)
+    (p : (HomologicalComplex.single D (.up ℤ) 0).obj W ⟶
+      (HomologicalComplex.single D (.up ℤ) 0).obj N)
+    (hf : v.hom ≫ f.f 0 = π)
+    (hu : c.hom ≫ E.map
+        (v.hom ≫ (K.extendXIso ComplexShape.embeddingDownNat (i := 0) rfl).inv) ≫
+      eK.hom.f 0 = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ u.f 0)
+    (hp : c.hom ≫ E.map π ≫ q.hom =
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ p.f 0 ≫
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).hom)
+    (hε : u ≫ ε = p) :
+    (E.mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.extendMap f ComplexShape.embeddingDownNat) ≫
+      (((E.mapHomologicalComplex (.up ℤ)).mapIso
+          (HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat Z 0 0 rfl) ≪≫
+        (HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).app Z ≪≫
+        (HomologicalComplex.single D (.up ℤ) 0).mapIso q).hom) = eK.hom ≫ ε := by
+  apply augmentationComparisonToSingle E _ ε eK _
+    (v ≪≫ (K.extendXIso ComplexShape.embeddingDownNat (i := 0) rfl).symm)
+    (((ChainComplex.single₀ C).obj Z).extendXIso
+      ComplexShape.embeddingDownNat (i := 0) rfl) π c q u p
+  · simp only [Iso.trans_hom, Iso.symm_hom,
+      HomologicalComplex.extendMap_f _ _ (i := 0) (i' := 0) rfl,
+      Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+    exact hf
+  · exact mapExtendSingleIso_hom_f_zero E Z q
+  · exact hu
+  · exact hp
+  · exact hε
 
 /-- Extension preserves an augmentation which is epimorphic in degree zero. -/
 private theorem epi_extendMap_single_of_epi_zero
@@ -251,41 +292,16 @@ theorem adicResidue_koszul_coefficient_cone_comparison
       (B n) 0 0 rfl) ≪≫
     (HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).app (B n) ≪≫
     (HomologicalComplex.single (Mod O) (.up ℤ) 0).mapIso (q n)
-  let vK (n : ℕ) : ModuleCat.of A A ⟶ (K n).X 0 :=
-    ModuleCat.ofHom (exteriorPower.zeroEquiv A (Fin r →₀ A)).symm.toLinearMap ≫
-      ((ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))).extendXIso
-        ComplexShape.embeddingDownNat (i := 0) rfl).inv
-  have hvK (n : ℕ) : IsIso (vK n) := by
-    change IsIso ((exteriorPower.zeroEquiv A (Fin r →₀ A)).toModuleIso.inv ≫ _)
-    infer_instance
-  have heQ (n : ℕ) : (eQ n).hom.f 0 =
-      E.map ((((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extendXIso
-        ComplexShape.embeddingDownNat (i := 0) rfl).hom) ≫
-      (q n).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv :=
-    mapExtendSingleIso_hom_f_zero E (B n) (q n)
   have haug (n : ℕ) : H.map (f n) ≫ (eQ n).hom = (eK n).hom ≫ ε.app (op n) := by
-    have hf0 : vK n ≫ (f n).f 0 ≫
-        (((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extendXIso
-          ComplexShape.embeddingDownNat (i := 0) rfl).hom =
-        ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ := by
-      dsimp only [vK, f]
-      rw [HomologicalComplex.extendMap_f _ _ (i := 0) (i' := 0) rfl, hεA n]
-      dsimp only [B]
-      simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
-      change ModuleCat.ofHom
-        (((((Ideal.span (Set.range a)) ^ (n + 1)).mkQ).comp
-          (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap).comp
-            (exteriorPower.zeroEquiv A (Fin r →₀ A)).symm.toLinearMap) = _
-      apply ModuleCat.hom_ext
-      apply LinearMap.ext
-      intro x
-      simp
-    exact augmentationComparisonToSingle E (f n) (ε.app (op n)) (eK n) (eQ n)
-      (asIso (vK n))
-      (((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extendXIso
-        ComplexShape.embeddingDownNat (i := 0) rfl)
+    apply normalizedExtendedAugmentationComparison E
+      (exteriorPower.zeroEquiv A (Fin r →₀ A)).toModuleIso.symm (εA n)
       (ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
-      c (q n) _ _ hf0 (heQ n) (hu n) (hq n) (hε n)
+      (ε.app (op n)) (eK n) c (q n) _ _ ?_ (hu n) (hq n) (hε n)
+    rw [hεA n]
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    simp
   have hfepi (n : ℕ) : Epi (H.map (f n)) := by
     have : Epi ((εA n).f 0) := by
       rw [hεA n]
