@@ -65,6 +65,37 @@ private theorem chart_fmap_inverse {Y Z : Scheme.{u}} (σ : Y ≅ Z)
   rw [hc]
   exact chart_fmap_identity Z A p
 
+private theorem chart_fmap_naturality_apply {Y Z : Scheme.{u}} (h : Y ⟶ Z)
+    {A : Z.Modules} {B : Y.Modules} (φ : A ⟶ (pushforward h).obj B)
+    (α : A ⟶ A) (β : B ⟶ B) (hs : α ≫ φ = φ ≫ (pushforward h).map β)
+    (p : ℕ) (x : (RingedSpace.moduleCohomology Z.toRingedSpace p).obj A) :
+    moduleCohomologyFMap h φ p
+        (((RingedSpace.moduleCohomology Z.toRingedSpace p).map α).hom x) =
+      ((RingedSpace.moduleCohomology Y.toRingedSpace p).map β).hom
+        (moduleCohomologyFMap h φ p x) := by
+  have hsource := moduleCohomologyFMap_source_naturality h α φ p
+  have htarget := moduleCohomologyFMap_target_naturality h β φ p
+  rw [hs] at hsource
+  exact ConcreteCategory.congr_hom (hsource.trans htarget.symm) x
+
+private theorem chart_fmap_unit_square {Z T U L : Scheme.{u}}
+    (b : T ⟶ Z) (s : L ⟶ T) (q : U ⟶ Z) (j : L ⟶ U) (e : s ≫ b = j ≫ q)
+    {K N : Z.Modules} {A : T.Modules} {B : U.Modules} {M : L.Modules}
+    (α : K ⟶ N) (η : N ⟶ (pushforward b).obj A)
+    (φ : A ⟶ (pushforward s).obj M) (ψ : K ⟶ (pushforward q).obj B)
+    (r : B ⟶ (pushforward j).obj M)
+    (hc : α ≫ η ≫ (pushforward b).map φ ≫ (pushforwardComp s b).hom.app M ≫
+        (pushforwardCongr e).hom.app M =
+      ψ ≫ (pushforward q).map r ≫ (pushforwardComp j q).hom.app M) (p : ℕ) :
+    (forget₂ _ AddCommGrpCat.{u}).map
+        ((RingedSpace.moduleCohomology Z.toRingedSpace p).map α) ≫
+        moduleCohomologyFMap b η p ≫ moduleCohomologyFMap s φ p =
+      moduleCohomologyFMap q ψ p ≫ moduleCohomologyFMap j r p := by
+  rw [← moduleCohomologyFMap_comp, moduleCohomologyFMap_source_naturality,
+    chart_fmap_congr e]
+  simp only [Category.assoc] at hc ⊢
+  rw [hc, moduleCohomologyFMap_comp]
+
 set_option profiler true in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- Transport along the affine chart identifies its unit map with open restriction
@@ -148,13 +179,10 @@ theorem exists_flatBaseChange_chart_cohomology_transport
       map_add' := a.hom.map_add }
   refine ⟨t, ?_, ?_⟩
   · intro s y
-    have hs := moduleCohomologyFMap_source_naturality σ.hom
+    exact chart_fmap_naturality_apply σ.hom φ
       (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫
-        (baseChangeSnd (S := Γ(S', W)) h).appTop).hom s)) φ p
-    have ht := moduleCohomologyFMap_target_naturality σ.hom
-      (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom s)) φ p
-    rw [hscalar s] at hs
-    exact ConcreteCategory.congr_hom (hs.trans ht.symm) y
+        (baseChangeSnd (S := Γ(S', W)) h).appTop).hom s))
+      (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom s)) (hscalar s) p y
   · let j := (Limits.pullback g f).homOfLE e
     let c := (restrictFunctorComp j U.ι).symm.app G ≪≫
       (restrictFunctorCongr ((Limits.pullback g f).homOfLE_ι e)).app G
@@ -166,13 +194,9 @@ theorem exists_flatBaseChange_chart_cohomology_transport
         ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map α) ≫
         moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)
           (baseChangeUnit (S := Γ(S', W)) h N) p ≫ a =
-        moduleCohomologyFMap q D.psi p ≫ moduleCohomologyFMap j r p := by
-      dsimp only [a]
-      rw [← moduleCohomologyFMap_comp,
-        moduleCohomologyFMap_source_naturality,
-        chart_fmap_congr ef]
-      simp only [Category.assoc] at hunit ⊢
-      rw [hunit, moduleCohomologyFMap_comp]
+        moduleCohomologyFMap q D.psi p ≫ moduleCohomologyFMap j r p :=
+      chart_fmap_unit_square (baseChangeFst (S := Γ(S', W)) h) σ.hom q j ef
+        α (baseChangeUnit (S := Γ(S', W)) h N) φ D.psi r hunit p
     intro x
     unfold cohomologyOpenRestriction
     dsimp only [t]

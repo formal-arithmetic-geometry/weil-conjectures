@@ -29,7 +29,6 @@ private theorem openSections_map {Y : Scheme.{uBC}} {M N : Y.Modules}
     (φ : M ⟶ N) (U : Y.Opens) :
     (RingedSpace.openModuleSections Y.toRingedSpace U).map φ = Hom.app φ U := rfl
 
-set_option profiler true in
 /-- The section identity for the explicit restriction-adjunction lift.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
 (blueprint: lem-weil-pbc-restricted-lift-section-formula).
