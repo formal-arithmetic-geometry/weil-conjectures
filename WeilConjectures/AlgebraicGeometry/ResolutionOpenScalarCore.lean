@@ -26,6 +26,9 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
+private lemma moduleCat_smul_asHom_apply {R : Type u} [Ring R]
+    (M : ModuleCat.{u} R) (r : R) (x : M) : (M.smul r).asHom x = r • x := rfl
+
 set_option profiler true in
 /-- The fixed comparison intertwines the scalar endomorphisms.
 Source: Stacks Project, Tags 01E1 and 01E4.
@@ -117,8 +120,7 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
         (ShortComplex.homologyMap_mapNatTrans (A.sc q)
           (ModuleCat.smulNatTrans _ (b ^ n)).asHom)
     have hy := ConcreteCategory.congr_hom hphiH y
-    change (S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y =
-      eA.inv ((b ^ n) • (show A.homology q from eA.hom y)) at hy
+    simp only [ConcreteCategory.comp_apply, moduleCat_smul_asHom_apply] at hy
     calc
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
           (eA.inv ≫ raw) ((b ^ n) • (show A.homology q from eA.hom y)) := by
