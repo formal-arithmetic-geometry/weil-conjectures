@@ -113,7 +113,6 @@ private theorem naiveMapComponent_summand
             (HomologicalComplex.ιTensorObj K L i j n h) := by
   exact HomologicalComplex.ι_mapBifunctorDesc _ i j h
 
-set_option profiler true in
 -- Rewriting tensor summands unfolds the two induced monoidal structures.
 /-- The summandwise section tensor maps commute with the total differentials.
 Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
