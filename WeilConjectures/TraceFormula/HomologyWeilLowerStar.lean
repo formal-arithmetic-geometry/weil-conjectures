@@ -93,7 +93,7 @@ lemma boundedConstructibleUpperStarComp_inv_app_hom (f : X ⟶ Y) (g : Y ⟶ Y')
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- On the ambient derived category, the pullback comparison of a commutative square on bounded
 constructible complexes is the isomorphism of total left derived functors induced by the
