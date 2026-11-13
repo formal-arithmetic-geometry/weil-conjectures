@@ -89,7 +89,6 @@ private theorem localization_maximal_residue_comparison
     simpa only [neg_sub] using m.neg_mem (hJm ha)
   exact ⟨hmax, hres⟩
 
-set_option profiler true in
 /-- The Noetherian and maximal-local regularity part of the G-ring theorem for a
 henselization of a pair.  It packages the completion comparison, finite separable
 fibres, and geometric-regularity argument of Stacks Project Tag 0AH3; the final

@@ -79,11 +79,9 @@ private theorem splitting_polynomial_cover_of_finite_away
   refine ⟨M, hM, alg, hi, hfinite, d, roots, hd, ?_⟩
   intro q hqmax
   refine ⟨(hq q).1, ?_⟩
-  change (∏ i : Fin d, (t - algebraMap R T (roots i))) ∈ _
   rw [heval]
   exact (hq q).2 hmem
 
-set_option profiler true in
 /-- A finite localized splitting cover carries a single positive-degree split polynomial
 whose evaluation belongs to every maximal contraction.
 Source: Stacks Project, Algebra, Tag 0334, Step 5, before extracting a linear factor.

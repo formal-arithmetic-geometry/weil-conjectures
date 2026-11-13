@@ -32,7 +32,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-set_option profiler true in
 /-- The henselization of a Noetherian pair is Noetherian and flat over the base, has the
 same adic completion, and maps faithfully flatly to the completion of the base.
 Source: Stacks Project, Tag 0AGV
@@ -90,6 +89,7 @@ theorem pair_henselization_noetherian_completion
           (θ.symm.toRingHom.comp
             (algebraMap c.pt.right (AdicCompletion (I.map c.pt.hom.hom) c.pt.right))) := by
   classical
+  -- Only the witness and projections are needed; keep the completion data intact.
   have hflatquot := pair_henselization_flat_quotients A I c hc
   have hcompletion :=
     pair_henselization_completion_data A c.pt.right I c.pt.hom.hom hflatquot.2
