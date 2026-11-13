@@ -23,6 +23,26 @@ namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 
 open QuotientChange IntegralQuotient ModuleRingedComparison
 
+-- Transpose compatibility gives the unit square before specializing the categories.
+private theorem adjunction_unit_square
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {U : B ⥤ A} {L' : C ⥤ D} {U' : D ⥤ C}
+    {P : A ⥤ C} {Q : B ⥤ D}
+    (adj : L ⊣ U) (adj' : L' ⊣ U')
+    (restriction : U ⋙ P ≅ Q ⋙ U') (comparison : L ⋙ Q ≅ P ⋙ L')
+    (h : ∀ (M : A) (N : B) (f : L.obj M ⟶ N),
+      P.map (adj.homEquiv M N f) ≫ restriction.hom.app N =
+        adj'.homEquiv _ _ (comparison.inv.app M ≫ Q.map f)) (M : A) :
+    P.map (adj.unit.app M) ≫ restriction.hom.app (L.obj M) ≫
+        U'.map (comparison.hom.app M) = adj'.unit.app (P.obj M) := by
+  have ht := h M (L.obj M) (𝟙 _)
+  rw [Adjunction.homEquiv_id, Q.map_id] at ht
+  erw [Category.comp_id, Adjunction.homEquiv_unit] at ht
+  have hu := congrArg (fun f ↦ f ≫ U'.map (comparison.hom.app M)) ht
+  simp only [Category.assoc, ← U'.map_comp, Iso.inv_hom_id_app] at hu
+  erw [U'.map_id, Category.comp_id] at hu
+  exact hu
+
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a]
@@ -69,7 +89,6 @@ private theorem section_pair_unit (T : Scheme.{u})
             ⊗ₜ[(ring Λ T).obj.obj W,((sectionQuotient a T).hom.app W).hom] m) := by
   simpa only [ModuleCat.extendRestrictScalarsAdj_unit_app_apply] using s.ordinaryUnit N W m
 
-set_option maxHeartbeats 800000 in
 -- The unit square compares the ordinary components of two scalar adjunctions.
 private theorem canonical_section_extension (T : Scheme.{u}) (M : Modules Λ T) :
     ∃ c : (equivalence Λ' T).functor.obj ((extension a T).obj M) ⟶
@@ -97,30 +116,23 @@ private theorem canonical_section_extension (T : Scheme.{u}) (M : Modules Λ T) 
     eqToIso (s.extension_obj ((equivalence Λ T).functor.obj M))
   refine ⟨c.hom, inferInstance, ?_⟩
   intro W m
-  have ht := htranspose M ((extension a T).obj M) (𝟙 _)
-  rw [Adjunction.homEquiv_id, CategoryTheory.Functor.map_id] at ht
-  erw [Category.comp_id, Adjunction.homEquiv_unit] at ht
-  have hu := congrArg (fun f ↦ f ≫
-    (SheafOfModules.scalarRestriction.{u + 1, u, u + 1}
-      (InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}
-        (Scheme.ProEt.topology T) (coefficientMap a T))).map
-          (comparison.hom.app M)) ht
-  simp only [Category.assoc, ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app] at hu
+  have hu := adjunction_unit_square
+    (Mod.extendRestrictAdjunction (coefficientMap a T)) s.ordinaryAdjunction
+    restriction comparison htranspose M
   have hv := congrArg (fun f ↦ f.val.app W m) hu
   change (comparison.hom.app M).val.app W
     ((restriction.hom.app ((extension a T).obj M)).val.app W
       (((Mod.extendRestrictAdjunction (coefficientMap a T)).unit.app M).hom.hom.app W m)) =
     (s.ordinaryAdjunction.unit.app ((equivalence Λ T).functor.obj M)).val.app W m at hv
-  rw [hrestriction] at hv
-  change (eqToHom (s.extension_obj ((equivalence Λ T).functor.obj M))).val.app W
-    ((comparison.hom.app M).val.app W
-      (((Mod.extendUnit (coefficientMap a T) M).hom.hom.app W) m)) = _
   have hunit : ((Mod.extendRestrictAdjunction (coefficientMap a T)).unit.app M).hom =
       (Mod.extendUnit (coefficientMap a T) M).hom :=
     Mod.extendRestrictAdjunction_unit_app_hom _ _
-  rw [← hunit]
-  erw [hv]
-  exact section_pair_unit a T s ((equivalence Λ T).functor.obj M) W m
+  have hg := (hrestriction ((extension a T).obj M) W _).trans
+    (congrArg (fun f ↦ f.hom.app W m) hunit)
+  have hx := (congrArg (fun x ↦ (comparison.hom.app M).val.app W x) hg).symm.trans hv
+  exact (congrArg
+    (fun x ↦ (eqToHom (s.extension_obj ((equivalence Λ T).functor.obj M))).val.app W x)
+    hx).trans (section_pair_unit a T s ((equivalence Λ T).functor.obj M) W m)
 
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
