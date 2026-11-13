@@ -118,7 +118,8 @@ theorem koszulChain_restriction_formula
         (D := SheafOfModules.{u}
           (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
-      let D := koszulCechHomDiagram A r f M
+    let M := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F
+    let D := koszulCechHomDiagram A r f M
     let C := koszulCechHomColimit A r f M
     let β := ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app C).inv ≫
       (DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0).map

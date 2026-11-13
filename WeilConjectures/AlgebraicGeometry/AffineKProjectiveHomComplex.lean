@@ -144,6 +144,37 @@ private theorem moduleHomComplex_of_homEquiv
   dsimp at hπ
   rw [hπ, hcycles]
 
+private theorem moduleHomComplex_of_full_functor
+    (A : Type u) [CommRing A] [HasDerivedCategory.{v} (ModuleCat.{u} A)]
+    {D : Type*} [Category D] [Preadditive D]
+    (P : CochainComplex (ModuleCat.{u} A) ℤ ⥤ D)
+    (M : CochainComplex (ModuleCat.{u} A) ℤ)
+    (h : ∃ F : DerivedCategory (ModuleCat.{u} A) ⥤ D,
+      F.Full ∧ F.Faithful ∧ F.Additive ∧ Nonempty (DerivedCategory.Q ⋙ F ≅ P)) :
+    ∃ a : ∀ (L : CochainComplex (ModuleCat.{u} A) ℤ) (_hL : L.IsKProjective),
+        (P.obj L ⟶ P.obj M) ≃+
+          (CochainComplex.moduleHomComplex L M).homology 0,
+      (∀ (L L' : CochainComplex (ModuleCat.{u} A) ℤ)
+        (hL : L.IsKProjective) (hL' : L'.IsKProjective) (g : L' ⟶ L)
+        (t : CochainComplex.moduleHomComplex L M ⟶ CochainComplex.moduleHomComplex L' M),
+        (∀ (n : ℤ) (z : CochainComplex.HomComplex.Cochain L M n),
+          (t.f n) z = (CochainComplex.HomComplex.Cochain.ofHom g).comp z (zero_add n)) →
+        ∀ φ : P.obj L ⟶ P.obj M,
+          a L' hL' (P.map g ≫ φ) =
+            HomologicalComplex.homologyMap t 0 (a L hL φ)) ∧
+      ∀ (L : CochainComplex (ModuleCat.{u} A) ℤ) (hL : L.IsKProjective)
+        (φ : P.obj L ⟶ P.obj M),
+        ∃ (g : L ⟶ M) (z : (CochainComplex.moduleHomComplex L M).cycles 0),
+          P.map g = φ ∧
+          (CochainComplex.moduleHomComplex L M).iCycles 0 z =
+            CochainComplex.HomComplex.Cochain.ofHom g ∧
+          a L hL φ = (CochainComplex.moduleHomComplex L M).homologyπ 0 z := by
+  obtain ⟨F, hfull, hfaith, hadd, ⟨η⟩⟩ := h
+  let := hfull
+  let := hfaith
+  let := hadd
+  obtain ⟨c, hc⟩ := kProjective_homEquiv_of_full_functor A F P η M
+  exact moduleHomComplex_of_homEquiv A P M c hc
 
 set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
@@ -188,11 +219,7 @@ theorem affineKProjective_homComplex (A : Type u) [CommRing A]
           a L hL φ = (CochainComplex.moduleHomComplex L M).homologyπ 0 z := by
   classical
   intro T
-  obtain ⟨F, hfull, hfaith, hadd, ⟨η⟩⟩ := affineTilde_map_bijective.{u, w, v} A
-  let := hfull
-  let := hfaith
-  let := hadd
-  obtain ⟨c, hc⟩ := kProjective_homEquiv_of_full_functor A F (T ⋙ DerivedCategory.Q) η M
-  exact moduleHomComplex_of_homEquiv A (T ⋙ DerivedCategory.Q) M c hc
+  exact moduleHomComplex_of_full_functor A (T ⋙ DerivedCategory.Q) M
+    (affineTilde_map_bijective.{u, w, v} A)
 
 end AlgebraicGeometry
