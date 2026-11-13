@@ -120,6 +120,7 @@ private theorem compatible_single_adjunction
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborating the pasted comparison and unit uses several large sheaf-category instances.
 /-- Successive tensor pullbacks and their derived functors have compatible
 adjunctions; the left comparison is invertible on K-flat complexes.

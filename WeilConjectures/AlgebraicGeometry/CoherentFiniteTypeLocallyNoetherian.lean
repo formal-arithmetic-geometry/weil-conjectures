@@ -154,6 +154,7 @@ private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
   exact ⟨inferInstance, h.1⟩
 
 set_option maxHeartbeats 300000 in
+set_option profiler true in
 -- Check the slice-kernel transport separately from the forward local-presentation construction.
 private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
