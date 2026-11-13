@@ -189,6 +189,7 @@ private theorem derivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' 
 
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- The cross-presentation comparison of the two derived composites (final `exact`, ~11 s)
 -- exceeds the default budget; the HEq bridge replaces the former 40M `rw; rfl` proof.
 /-- The finite-system composition comparison of integral pullback is the whole-system
