@@ -84,6 +84,22 @@ private theorem scalar_composition_paste
   rw [reassoc_of% N1, IIIk', reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
     reassoc_of% CE', mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
 
+private theorem integralComparisonSystemScalarPullback_finite_naturality
+    {X Y : Scheme.{u}}
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
+    {M N : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Y}
+    (a : M ⟶ N) :
+    (integralComparisonDerivedSequenceScalar l E L ι X).map
+        ((finiteSystemDerivedPullback (integralSystemRings l E)
+          (integralSystemTransition l E) f).map a) ≫
+        (integralComparisonSystemScalarPullback l E L ι f).hom.app N =
+      (integralComparisonSystemScalarPullback l E L ι f).hom.app M ≫
+        (finiteSystemDerivedPullback (integralSystemRings l L)
+          (integralSystemTransition l L) f).map
+            ((integralComparisonDerivedSequenceScalar l E L ι Y).map a) := by
+  exact (integralComparisonSystemScalarPullback l E L ι f).hom.naturality a
+
 private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
@@ -136,7 +152,7 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have IIIk := integralPullbackSystemIso_scalar l E L ι k K
   have IIIh := integralPullbackSystemIso_scalar l E L ι h
     ((constructibleIntegralPullback l E k).obj K)
-  have Ng := (integralComparisonSystemScalarPullback l E L ι h).hom.naturality
+  have Ng := integralComparisonSystemScalarPullback_finite_naturality l E L ι h
     ((integralPullbackSystemIso l E k).hom.app K)
   have Np := (integralSystemScalarIso l E L ι Z).hom.naturality
     (((integralPullbackComposition l E).choose h k).hom.app K)
@@ -157,17 +173,11 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     ((integralComparisonDerivedSequenceScalar l E L ι V).obj
       ((integralSystemReduction l E V).obj K))
   dsimp only [Functor.comp_map, Functor.comp_obj, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Ng Np mix Na
+    Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Np mix Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  refine scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
-    (g2 := ?_)
-    N1 IIIk IIIh ?_ Np CE ?_ eE eL IIIhk Na CL
-  rotate_left
-  · trace "pasting naturality"
-    exact Ng
-  · trace "pasting mixed coherence"
-    exact mix
+  exact scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
+    N1 IIIk IIIh Ng Np CE mix eE eL IIIhk Na CL
 
 end SystemScalar
 
