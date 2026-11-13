@@ -162,10 +162,15 @@ theorem affine_module_tensor_counit_smul
       (t.hom.app ((Opens.map f.base).op.obj V) (ηA.hom.app V r)) = r at hh
     rw [hh]
   -- Compose inverse-image and change-of-rings Hom equivalences.
-  obtain ⟨φ, hφ, _, _⟩ := SheafOfModules.moduleInverseImageAdjunction f.base A
+  let φ := (SheafOfModules.moduleInverseImageAdjunction f.base A).choose
+  have hφ := (SheafOfModules.moduleInverseImageAdjunction f.base A).choose_spec.1
   let v : I ((R).obj F) ⟶ K := (φ ((R).obj F) K).symm g
-  obtain ⟨E, hE, adE, heE⟩ :=
-    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
+  let E := (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose
+  let hE := (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose
+  let adE :=
+    (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose_spec.choose
+  have heE :=
+    (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose_spec.choose_spec
   let d : SheafOfModules.changeOfRings.{u, u, u} t (I ((R).obj F)) ⟶ N :=
     eqToHom (hE _).symm ≫ (adE.homEquiv _ N).symm v
   have hd (V : (Opens X)ᵒᵖ) (m : ((R).obj F).val.obj V) :
