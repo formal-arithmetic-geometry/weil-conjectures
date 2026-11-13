@@ -219,7 +219,7 @@ private def cancelScalarTransport {X : Scheme.{u}}
     ext x
     rfl
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A] :
