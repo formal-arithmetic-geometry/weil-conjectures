@@ -1101,6 +1101,7 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
   let adj : cbcOpenShriek d j hj ⊣ cbcOpenRestriction d j hj :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
+  trace "PH604: adj constructed"
   have hu (M : pbcModules U (pbcAdicCompletion U d))
       (N : pbcModules T (pbcAdicCompletion T d))
       (α : (cbcOpenShriek d j hj).obj M ⟶ N) (V : U.ProEt)
@@ -1110,11 +1111,15 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
           (op ((cbcOpenSiteFunctor j hj).obj V))
             (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
     rw [compAdjunction_homEquiv_apply, openSliceAdjunction_homEquiv_apply]
+    trace "PH604: hom formula rewritten"
     exact extensionSheafAdjunction_homEquiv_apply S W _ N α (cbcOpenSliceObject j hj V) x
+  trace "PH604: formula proved"
   refine ⟨adj, hu, ?_⟩
+  trace "PH604: witness supplied"
   intro adj' hadj'
   apply Adjunction.ext
   ext M V x
+  trace "PH604: ext complete"
   have h := hadj' M ((cbcOpenShriek d j hj).obj M) (𝟙 _) V.unop x
   have h' := hu M ((cbcOpenShriek d j hj).obj M) (𝟙 _) V.unop x
   rw [Adjunction.homEquiv_id] at h h'
