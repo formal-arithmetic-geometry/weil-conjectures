@@ -241,6 +241,7 @@ private theorem homTerm_hom_ext (L M : CochainComplex Mod ℤ) (n : ℤ)
   intro p
   exact congrArg (fun f ↦ (f.val.app U).hom s) (h p)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Transposing the internal Hom unfolds the localized module structures in two universes.
 set_option synthInstance.maxSize 256 in

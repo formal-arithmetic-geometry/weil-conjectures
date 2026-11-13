@@ -236,6 +236,7 @@ private theorem curry_apply (K L M : CochainComplex Mod ℤ)
   subst r t m
   exact (homTensorDegreewiseMap_spec R K L M n).1 p q U s W x y
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Two nested localized Hom projections require extra elaboration heartbeats.
 set_option synthInstance.maxSize 256 in

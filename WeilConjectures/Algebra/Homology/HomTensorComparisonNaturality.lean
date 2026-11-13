@@ -31,6 +31,7 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Matching the identity scalar restriction in counit naturality needs extra reduction.
 set_option backward.isDefEq.respectTransparency false in
