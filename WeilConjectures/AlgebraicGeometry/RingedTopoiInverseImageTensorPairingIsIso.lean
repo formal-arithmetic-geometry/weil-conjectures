@@ -227,6 +227,7 @@ private theorem transposePair_lift [F.Monoidal]
 -- Keep the tensor construction folded while checking its universal property.
 attribute [local irreducible] monoidalCategory
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
