@@ -190,9 +190,7 @@ private theorem scalar_tensor_presentation
       change q (_ - _) = 0
       rw [map_sub, hrel, sub_self]
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- The affine comparisons unfold dependent section-module scalar restrictions.
 /-- Affine sections of the two tensor operations are the quotient of the first tensor
 product by the diagonal-action relations. The map on unit tensors is canonical.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and key algebra observation.
@@ -336,8 +334,7 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
     apply eh.injective
     change ((eqToHom (hobj G)).val.app (fV (op V)))
       ((γ.app G).val.app (fV (op V)) ((κ.hom.app G).val.app (fV (op V)) (p z))) = _
-    rw [hH.2.1 G (fV (op V)) (p z)]
-    exact (eh.apply_symm_apply _).symm
+    exact (hH.2.1 G (fV (op V)) (p z)).trans (eh.apply_symm_apply _).symm
   have hb (c : Γ(U, f ⁻¹ᵁ V)) :
       (ε.hom.app (op (f ⁻¹ᵁ V))).hom
         ((b.hom.app (op (f ⁻¹ᵁ V))).hom c) = c := by
@@ -349,7 +346,7 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
   refine ⟨q, hq, hk, ?_⟩
   intro n
   change l (p ((1 : Γ(U, f ⁻¹ᵁ V)) ⊗ₜ[Γ(X, V)] n)) = _
-  rw [hpu]
+  refine (congrArg l (hpu n)).trans ?_
   change (γ.app G).val.app (fV (op V))
     ((κ.hom.app G).val.app (fV (op V))
       ((κ.inv.app G).val.app (fV (op V)) _)) = _

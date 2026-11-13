@@ -72,9 +72,7 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- The two transported tensor adjunctions require extra definitional-equality checks.
 /-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-unit-lift).
@@ -151,8 +149,8 @@ theorem affine_module_tensor_unitLift
       z.val.app W p = (γ.app G).val.app W ((κ.hom.app G).val.app W p) := by
     have hz₀ := hε (P.obj G) (H.obj G) (eqToHom (hobj G).symm) W p
     change z.val.app W p = _ at hz₀
-    rw [hz₀]
-    erw [← hH.2 G W p]
+    refine hz₀.trans ((congrArg ((eqToHom (hobj G).symm).val.app W)
+      (hH.2 G W p).symm).trans ?_)
     change ((eqToHom (hobj G) ≫ eqToHom (hobj G).symm).val.app W)
       ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = _
     simp only [eqToHom_trans, eqToHom_refl]
@@ -177,23 +175,22 @@ theorem affine_module_tensor_unitLift
       (eqToHom (pobj G).symm ≫ z) W
       ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)
     change q.val.app W _ = _ at hq₀
-    rw [hq₀]
-    change d.val.app V g = z.val.app W ((eqToHom (pobj G).symm).val.app W _)
-    erw [← hP.2 G V g]
-    change d.val.app V g = z.val.app W
+    symm
+    refine hq₀.trans ((congrArg ((eqToHom (pobj G).symm ≫ z).val.app W)
+      (hP.2 G V g).symm).trans ?_)
+    change z.val.app W
       ((eqToHom (pobj G) ≫ eqToHom (pobj G).symm).val.app W
-        ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g)))
+        ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g))) = _
     simp only [eqToHom_trans, eqToHom_refl]
-    change d.val.app V g = z.val.app W
-      ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g))
-    rw [hz]
-    change d.val.app V g = (γ.app G).val.app W
+    refine (hz W _).trans ?_
+    change (γ.app G).val.app W
       ((κ.inv.app G ≫ κ.hom.app G).val.app W
-        (((adj₀).unit.app ((S).obj G)).val.app V g))
-    rw [κ.inv_hom_id_app]
-    dsimp [d]
-    rw [Adjunction.homEquiv_unit]
-    rfl
+        (((adj₀).unit.app ((S).obj G)).val.app V g)) = _
+    have hk := congrArg (fun a ↦ a.val.app W
+      (((adj₀).unit.app ((S).obj G)).val.app V g)) (κ.inv_hom_id_app G)
+    refine (congrArg ((γ.app G).val.app W) hk).trans ?_
+    exact (congrArg (fun a ↦ a.val.app V g)
+      ((adj₀).homEquiv_unit ((S).obj G) (H.obj G) (γ.app G))).symm
   -- Semilinearity of inverse image and the ring triangle give A-linearity.
   have hscalar (V : (Opens X)ᵒᵖ) (r : (A).obj.obj V) (g : G.val.obj V) :
       d.val.app V (r • g) =
