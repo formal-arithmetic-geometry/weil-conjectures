@@ -236,8 +236,6 @@ private theorem scalar_unit_inv_section
     ← SheafOfModules.comp_val, Iso.hom_inv_id_app, SheafOfModules.id_val,
     PresheafOfModules.id_app, ModuleCat.id_apply] using hh.symm
 
-set_option maxHeartbeats 800000 in
--- The signed tensor comparison has large sheafification and totalization instances.
 /-- A scalar tensor comparison normalized on homogeneous unit tensors is compatible
 with the scalar action unitor. Only the identity coefficient map is involved.
 Source: Stacks 03EL and 07A4; scalar-extension tower coherence, proof step 7
@@ -299,43 +297,46 @@ theorem scalarExtensionTensorUnit
       (coefficientSequenceTopology (Scheme.ProEt.topology W))
       (coefficientSequenceCommRingSheaf.{u, u} l E W)) (NatIso.mapHomologicalComplex
       (integralComparisonSequenceScalarUnit.{u, u} l E W) (.up ℤ))  := by
+  let T := coefficientTotalTensor.{u, u + 1, u}
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf.{u, u} l E W)
+  let e := integralComparisonSequenceScalarUnit.{u, u} l E W
+  let eC := NatIso.mapHomologicalComplex e (.up ℤ)
   apply Iso.ext
   apply NatTrans.ext
   funext PQ
   rcases PQ with ⟨P, Q⟩
   apply HomologicalComplex.hom_ext
   intro n
-  apply (cancel_epi ((integralComparisonSequenceScalarUnit.{u, u} l E W).inv.app
-    (((coefficientTotalTensor.{u, u + 1, u}
-      (coefficientSequenceTopology (Scheme.ProEt.topology W))
-      (coefficientSequenceCommRingSheaf.{u, u} l E W)).obj (P, Q)).X n))).1
+  change (sigma.hom.app (P, Q)).f n ≫
+    (T.map (Prod.mkHom (eC.hom.app P) (eC.hom.app Q))).f n =
+      e.hom.app ((T.obj (P, Q)).X n)
+  -- Cancel the unitors before evaluating on sections.
+  apply (cancel_epi (e.inv.app ((T.obj (P, Q)).X n))).1
+  rw [Iso.inv_hom_id_app]
   apply total_tensor_sections_ext l E W P Q n
   intro p q hpq V x y
   subst n
-  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    NatTrans.comp_app, HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  erw [scalar_unit_inv_section]
-  erw [h P Q p q V x y]
-  erw [generator_map]
+  let z := coefficientTensorGenerator.{u, u + 1, u}
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl V x y
+  let a := (T.map (Prod.mkHom (eC.hom.app P) (eC.hom.app Q))).f (p + q)
+  let b := (sigma.hom.app (P, Q)).f (p + q)
+  change a.val.app V (b.val.app V ((e.inv.app ((T.obj (P, Q)).X (p + q))).val.app V z)) = z
+  -- Apply the section formulas directly, avoiding rewrite searches through the tensor model.
+  refine (congrArg (fun t ↦ a.val.app V (b.val.app V t))
+    (scalar_unit_inv_section l E W ((T.obj (P, Q)).X (p + q)) V z)).trans ?_
+  refine (congrArg (fun t ↦ a.val.app V t) (h P Q p q V x y)).trans ?_
+  refine (generator_map l E W (eC.hom.app P) (eC.hom.app Q) p q (p + q) rfl V
+    (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W
+      (P.X p) V 1 x)
+    (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W
+      (Q.X q) V 1 y)).trans ?_
   have hx := scalar_unit_section l E W (P.X p) V 1 x
   have hy := scalar_unit_section l E W (Q.X q) V 1 y
   simp only [one_smul] at hx hy
-  trans coefficientTensorGenerator.{u, u + 1, u}
+  exact congrArg₂ (fun a b ↦ coefficientTensorGenerator.{u, u + 1, u}
     (coefficientSequenceTopology (Scheme.ProEt.topology W))
-    (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl V x y
-  · exact congrArg₂ (fun a b ↦ coefficientTensorGenerator.{u, u + 1, u}
-      (coefficientSequenceTopology (Scheme.ProEt.topology W))
-      (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl V a b) hx hy
-  · symm
-    have hu := scalar_unit_section l E W
-      (((coefficientTotalTensor.{u, u + 1, u}
-        (coefficientSequenceTopology (Scheme.ProEt.topology W))
-        (coefficientSequenceCommRingSheaf.{u, u} l E W)).obj (P, Q)).X (p + q)) V 1
-        (coefficientTensorGenerator.{u, u + 1, u}
-          (coefficientSequenceTopology (Scheme.ProEt.topology W))
-          (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl V x y)
-    rw [one_smul] at hu
-    exact hu
+    (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl V a b) hx hy
 
 end WeilConjectures
