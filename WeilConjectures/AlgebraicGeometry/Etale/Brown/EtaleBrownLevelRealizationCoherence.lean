@@ -31,6 +31,48 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
+private def brownCoherenceGenericRestriction (W : Scheme.{u})
+    (A B : CommRingCat.{u + 1}) (f : A ⟶ B) :
+    SheafOfModules.restrictScalars.{u + 1}
+        ((sheafCompose W.smallEtaleTopology
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).map f)) ⋙
+      Etale.SystemProjection.constantModule W A ≅
+    Etale.SystemProjection.constantModule W B ⋙
+      Sheaf.restrictScalars W.smallEtaleTopology f.hom := by
+  refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
+    (NatIso.ofComponents (fun U ↦ ModuleCat.isoMk (Iso.refl _) (fun a ↦ ?_)) ?_)) ?_
+  · ext x
+    have hn := congrArg (fun g ↦ g.app U a)
+      (toSheafify_naturality W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).map f))
+    exact congrArg (fun b ↦ b • (show M.val.obj U from x)) hn
+  · intro U V f
+    ext x
+    rfl
+  · intro M N f
+    ext U x
+    rfl
+
+-- State the section equation over arbitrary rings: specializing its proof does not
+-- require the kernel to check the expanded quotient-ring section expression again.
+set_option profiler true in
+private theorem brownCoherenceGenericSections (W : Scheme.{u})
+    (A B : CommRingCat.{u + 1}) (f : A ⟶ B)
+    (e : SheafOfModules.restrictScalars.{u + 1}
+        ((sheafCompose W.smallEtaleTopology
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).map f)) ⋙
+      Etale.SystemProjection.constantModule W A ≅
+    Etale.SystemProjection.constantModule W B ⋙
+      Sheaf.restrictScalars W.smallEtaleTopology f.hom)
+    (he : e = brownCoherenceGenericRestriction W A B f)
+    (M : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1} W.smallEtaleTopology
+      ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).obj B))
+    (U : W.Etaleᵒᵖ) (x : M.val.obj U) :
+    HEq ((e.hom.app M).hom.app U x) x := by
+  subst e
+  exact HEq.rfl
+
 -- The mate equation is categorical; checking it here avoids unfolding the concrete
 -- derived adjunctions when checking the realization theorem.
 private theorem brownCoherenceInverseMate
@@ -77,15 +119,6 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
   · intro M N f
     ext U x
     rfl
-
-set_option profiler true in
-private theorem brownCoherenceRestrictionSections {m n : ℕ} (h : m ≤ n)
-    (M : strictEtaleLevel W O t m) (U : W.Etaleᵒᵖ) (x : M.val.obj U) :
-    HEq (((ordinaryRestrictionIso O t W h).hom.app M).hom.app U x) x := by
-  rw [ordinaryRestrictionIso]
-  simp only [NatIso.ofComponents_hom_app, ObjectProperty.isoMk_hom,
-    ObjectProperty.homMk_hom, ModuleCat.isoMk_hom]
-  rfl
 
 set_option profiler true in
 private theorem brownCoherenceDerivedRestriction
@@ -154,11 +187,11 @@ theorem etaleBrownLevelRealizationCoherence_exists
       restriction := restriction
       scalar := scalar }
   refine ⟨⟨R', ?_⟩⟩
-  change (∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
-      (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((ordinaryRestrictionIso O t W h).hom.app M).hom.app U x) x) ∧ _
   refine ⟨?_, ?_, ?_⟩
-  · exact fun h M U x ↦ brownCoherenceRestrictionSections O t W h M U x
+  · intro m n h
+    exact brownCoherenceGenericSections W _ _
+      (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))
+      (ordinaryRestrictionIso O t W h) rfl
   · exact hrestriction
   · exact hscalar
 
