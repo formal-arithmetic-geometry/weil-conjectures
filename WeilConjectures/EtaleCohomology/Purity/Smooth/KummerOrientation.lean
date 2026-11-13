@@ -245,7 +245,6 @@ lemma unit_comp_rightDerivedLowerStar_map_unit {X Y G : Scheme.{u}} (p : X ⟶ Y
   exact unit_conjugateEquiv _ _ _ M
 
 set_option maxRecDepth 20000 in
-set_option profiler true in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY in
 /-- The global orientation (`thm-pur-affine-line-orientation`) for a rank-one datum whose Kummer
