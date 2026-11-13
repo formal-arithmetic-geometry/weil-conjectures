@@ -70,8 +70,8 @@ private theorem paste_output_computation {𝒞 : Type*} [Category 𝒞]
 private theorem paste_cancel_pair_inv {𝒜 ℬ 𝒞 : Type*}
     [Category 𝒜] [Category ℬ] [Category 𝒞]
     (B : 𝒜 × ℬ ⥤ 𝒞) {X X' : 𝒜} {Y Y' : ℬ} (e : X ≅ X') (f : Y ≅ Y')
-    {A D E H : 𝒞} {a : A ⟶ D} {b : D ⟶ E} {c : E ⟶ B.obj (X, Y)}
-    {l : A ⟶ H} {m : H ⟶ B.obj (X', Y')}
+    {A D E H : 𝒞} {a : A ⟶ D} {b : D ⟶ E} {c : E ⟶ B.obj (X', Y')}
+    {l : A ⟶ H} {m : H ⟶ B.obj (X, Y)}
     (h : l ≫ m = a ≫ b ≫ c ≫ B.map (Prod.mkHom e.inv f.inv)) :
     a ≫ b ≫ c = l ≫ m ≫ B.map (Prod.mkHom e.hom f.hom) := by
   rw [reassoc_of% h]
@@ -246,6 +246,7 @@ comparison isomorphisms. The result is exactly scalarTensorSectionPath.
   simp only [Functor.comp_map, Functor.prod_map] at hqo
   have hqout := (section_derived_tensor_normalization
     (Λ := Λ') (X := T) (Y := T) (f := 𝟙 T)).1 T |>.1 P' Q'
+  simp only [internalLocalizationTensorMap_app] at hqout
   have hq :
       B.map (Prod.mkHom tP.hom tQ.hom) ≫
         (qTensor Λ' T).app
