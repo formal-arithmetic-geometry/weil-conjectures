@@ -497,10 +497,10 @@ private theorem h4_supplied_operations
   · simpa only [u, Equiv.apply_symm_apply] using
       (binary_mate_iff f.adj (msmul B (f.modules.obj H)) (msmul A H) f.ringMap u u).mp hs
 
+-- Keep the linearity witnesses inside the construction of the hom equivalence, so
+-- naturality uses only its underlying-sheaf equation.
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
-private theorem supplied_adjunction
+private theorem supplied_hom_equiv
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
@@ -509,7 +509,10 @@ private theorem supplied_adjunction
     (c : RI ⟶ A)
     (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
       I.ringUnderlying.inv ≫ f.ringMap) :
-    Nonempty (I.modules ⋙ tensorFunctor c ⊣ f.modules) := by
+    ∃ E : ∀ M H, (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) ≃ (M ⟶ f.modules.obj H),
+      ∀ M H a, (mset B).map (E M H a) ≫ f.underlying.hom.app H =
+        f.adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫ (mset RI).map a) := by
   let _ := f.leftExact
   let _ : PreservesLimits f.direct := f.adj.rightAdjoint_preservesLimits
   let eR := I.ringUnderlying.symm
@@ -581,6 +584,22 @@ private theorem supplied_adjunction
       f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
     rw [restrictHomEquiv_map]
     exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
+  exact ⟨B', hB⟩
+
+set_option trace.profiler true in
+private theorem supplied_adjunction
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    (f : RingedToposMorphism.{u} (C := C) (D := D) (J := J) (K := K) (base A) (base B))
+    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI)
+    (c : RI ⟶ A)
+    (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      I.ringUnderlying.inv ≫ f.ringMap) :
+    Nonempty (I.modules ⋙ tensorFunctor c ⊣ f.modules) := by
+  obtain ⟨B', hB⟩ := supplied_hom_equiv f RI I c hc
+  let eI := I.moduleUnderlying
+  let eP := f.underlying
   have hBL {M N} (a : M ⟶ N) H b :
       B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
     apply (mset B).map_injective
