@@ -85,8 +85,6 @@ private theorem isIso_adjunct_left_evaluation
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- The shared derived tensor instances make the witness and pairing elaboration expensive.
 /-- The dual of a perfect complex is perfect, with evaluation, coevaluation, biduality,
 base change, and the tensor--internal-Hom comparison.
 Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
@@ -196,7 +194,11 @@ theorem perfect_rhom_tensor_comparison
                       m.εIso.inv ∧
                 IsIso bc := by
   classical
-  obtain ⟨D, hD, hperfect⟩ := exists_perfect_rhom_dual X K hK
+  let : MonoidalCategory (schemeDerivedCategory X) := schemeDerivedTensorMonoidal X
+  have hdual := exists_perfect_rhom_dual X K hK
+  let D := hdual.choose
+  have hD := hdual.choose_spec.1
+  have hperfect := hdual.choose_spec.2
   let ev := adj D.obj K.obj (𝟙_ (schemeDerivedCategory X)) (eqToHom hD)
   let φ := fun N : schemeDerivedCategory X ↦
     (adj (N ⊗ D.obj) K.obj N).symm
@@ -209,8 +211,10 @@ theorem perfect_rhom_tensor_comparison
   have hη : η ≫ φ K.obj =
       (adj (𝟙_ (schemeDerivedCategory X)) K.obj K.obj).symm ((λ_ K.obj).hom) := by
     simp [η]
-  obtain ⟨hleft, hright⟩ := dualizable_evaluation_criterion X K.obj D.obj adj hadj
+  have htriangles := dualizable_evaluation_criterion X K.obj D.obj adj hadj
     ev φ hφ (fun N ↦ by simp only [φ, id_tensorHom]) η hη
+  have hleft := htriangles.1
+  have hright := htriangles.2
   let p : ExactPairing K.obj D.obj :=
     { evaluation' := ev
       coevaluation' := η
@@ -233,8 +237,7 @@ theorem perfect_rhom_tensor_comparison
       (𝟙_ (schemeDerivedCategory X)) f (𝟙 _) (𝟙 _) q
     have hmap := (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
       X.toRingedSpace.sheaf).map_id (op D.obj, 𝟙_ (schemeDerivedCategory X))
-    rw [op_id, ← prod_id', hmap] at hh
-    simpa only [Category.comp_id, id_tensorHom] using hh
+    simpa only [op_id, ← prod_id', hmap, Category.comp_id] using hh
   refine ⟨D, hD, ev, rfl, hperfect, (fun N ↦ φ N.obj), ?_, hφ M.obj,
     hφ K.obj, bidual, ?_, hb, η, ?_, ?_, ⟨p, rfl, rfl⟩, ?_⟩
   · intro N
@@ -268,7 +271,6 @@ theorem perfect_rhom_tensor_comparison
       have hmap := (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace)
         T.toRingedSpace.sheaf).map_id
         (op ((derivedPullback g).obj K.obj), 𝟙_ (schemeDerivedCategory T))
-      rw [op_id, ← prod_id', hmap] at hh
-      simpa only [Category.comp_id, tensorHom_id] using hh
+      simpa only [op_id, ← prod_id', hmap, Category.comp_id] using hh
 
 end AlgebraicGeometry
