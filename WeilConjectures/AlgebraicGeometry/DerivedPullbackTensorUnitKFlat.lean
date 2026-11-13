@@ -304,6 +304,8 @@ private theorem tensorUnit_complex_coherence
   [MonoidalPreadditive C] [MonoidalPreadditive D]
   [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ (X₁ X₂ : GradedObject ℤ D), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ X₁, Limits.PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
   [∀ X₂, Limits.PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
   [∀ X₁, Limits.PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
