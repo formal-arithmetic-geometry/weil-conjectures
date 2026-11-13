@@ -631,8 +631,7 @@ variable (α : (ProEtale.adicUpperStar l
     (ProEtale.adicUpperStar l
       (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))))
 local notation "Lα" => Endofunctor.IsoAlgebra.mapOfNatIso α
-set_option profiler true in
-set_option maxHeartbeats 4000000 in
+set_option maxHeartbeats 400000 in
 -- Concrete sheaf and derived-category instances require a larger elaboration budget.
 private theorem native_restriction_goal_proof
     (hL : (Endofunctor.IsoAlgebra.mapOfNatIso α).IsLeftAdjoint) :
