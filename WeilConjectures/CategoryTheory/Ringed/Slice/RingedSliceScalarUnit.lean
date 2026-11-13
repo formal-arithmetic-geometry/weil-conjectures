@@ -270,6 +270,98 @@ private theorem scalar_unit_section_surjective (V : Cᵒᵖ) :
 
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
+private theorem scalar_chain_square
+    (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) :
+    let F := ringedSliceComplexRestriction.{c, v, r} J R U
+    let O := ringedTensorUnitComplex.{c, v, r} J R
+    let OU := ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U)
+    ∀ (e : F.obj O ≅ OU)
+      (he : ∀ (V : (Over U)ᵒᵖ) (b : R.obj.obj (op V.unop.left)),
+        (e.hom.f 0).val.app V
+          (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) =
+            ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b)
+      (γ : F.obj ((coefficientTotalTensor.{r, c, v} J R).obj (P, O)) ≅
+        (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).obj
+          (F.obj P, F.obj O))
+      (hγ : ∀ (k : ℤ) (V : Over U) (x : (P.X k).val.obj (op V.left))
+        (a : (O.X 0).val.obj (op V.left)),
+        (γ.hom.f k).val.app (op V)
+          (coefficientTensorGenerator.{r, c, v} J R P O k 0 k
+            (Int.add_zero k) (op V.left) x a) =
+        coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
+          (F.obj P) (F.obj O) k 0 k (Int.add_zero k) (op V) x a)
+      (β : (coefficientTotalTensor.{r, c, v} J R).obj (P, O) ≅ P)
+      (hβ : ∀ (k : ℤ) (V : Cᵒᵖ) (b : R.obj.obj V) (x : (P.X k).val.obj V),
+        (β.hom.f k).val.app V (coefficientTensorGenerator.{r, c, v} J R P O
+          k 0 k (Int.add_zero k) V x (ringedTensorUnitSection.{c, v, r} J R V b)) = b • x)
+      (βU : (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).obj
+        (F.obj P, OU) ≅ F.obj P)
+      (hβU : ∀ (k : ℤ) (V : (Over U)ᵒᵖ) (b : (R.over U).obj.obj V)
+        (x : ((F.obj P).X k).val.obj V),
+        (βU.hom.f k).val.app V (coefficientTensorGenerator.{r, max c v, v}
+          (J.over U) (R.over U) (F.obj P) OU k 0 k (Int.add_zero k) V x
+            (ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b)) = b • x),
+      F.map β.hom = γ.hom ≫
+        (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
+          (𝟙 (F.obj P), e.hom) ≫ βU.hom := by
+  intro F O OU e he γ hγ β hβ βU hβU
+  let B := ((sheafCompose J
+    (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
+  apply (cancel_epi γ.inv).mp
+  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+  apply total_hom_ext.{max c v, v, r} (J.over U) (R.over U)
+  intro k p q hpq
+  by_cases hq : q = 0
+  · subst q
+    have hk : k = p := by omega
+    subst hk
+    apply pure_ext.{max c v, v, r} (J.over U) (R.over U)
+      ((F.obj P).X k) ((F.obj O).X 0) ((F.obj P).X k)
+    intro V x a
+    obtain ⟨b, rfl⟩ := scalar_unit_section_surjective.{c, v, r} J R
+      (op V.unop.left) a
+    have hi : (γ.inv.f k).val.app V
+        (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
+          (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
+            (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b)) =
+        coefficientTensorGenerator.{r, c, v} J R P O k 0 k
+          (Int.add_zero k) (op V.unop.left) x
+          (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) := by
+      have h := congrArg ((γ.inv.f k).val.app V)
+        (hγ k V.unop x
+          (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b))
+      have h' := congrArg (fun f ↦ (f.f k).val.app V
+        (coefficientTensorGenerator.{r, c, v} J R P O k 0 k
+          (Int.add_zero k) (op V.unop.left) x
+          (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b))) γ.hom_inv_id
+      simpa only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
+        PresheafOfModules.comp_app, ModuleCat.comp_apply,
+        HomologicalComplex.id_f, SheafOfModules.id_val, PresheafOfModules.id_app,
+        ModuleCat.id_apply] using h.symm.trans h'
+    change (β.hom.f k).val.app (op V.unop.left)
+        ((γ.inv.f k).val.app V
+          (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
+            (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
+            (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b))) = _
+    -- Apply both scalar formulas before asking Lean to check reflexivity.
+    rewrite [hi]
+    rewrite [hβ k (op V.unop.left) b x]
+    change b • x = (βU.hom.f k).val.app V
+      ((((coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
+        (𝟙 (F.obj P), e.hom)).f k).val.app V
+          (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
+            (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
+            (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b)))
+    rewrite [tensorGenerator_map]
+    simp only [HomologicalComplex.id_f, SheafOfModules.id_val,
+      PresheafOfModules.id_app, ModuleCat.id_apply]
+    rewrite [he, hβU]
+    rfl
+  · apply IsZero.eq_of_src
+    apply (tensorLeft ((F.obj P).X p)).map_isZero
+    exact (SheafOfModules.overFunctor.{max c v r} B U).map_isZero
+      (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ q hq)
+
 -- Keep the representative scalar square at its normalized endpoints.
 include hd in
 set_option profiler true in
@@ -333,72 +425,9 @@ theorem ringedSlice_scalar_unit :
     obtain ⟨β, hβ, heβ⟩ := K.rightUnitor_model P hP
     obtain ⟨βU, hβU, heβU⟩ := KU.rightUnitor_model (F.obj P) (d.kflat P hP fP).1
     rw [K.tensorIso_both P O hP (unit_kflat.{c, v, r} J R)] at heβ
-    have hchain : F.map β.hom = γ.hom ≫
-        (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
-          (𝟙 (F.obj P), e.hom) ≫ βU.hom := by
-      apply (cancel_epi γ.inv).mp
-      simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
-      apply total_hom_ext.{max c v, v, r} (J.over U) (R.over U)
-      intro k p q hpq
-      by_cases hq : q = 0
-      · subst q
-        have hk : k = p := by omega
-        subst hk
-        apply pure_ext.{max c v, v, r} (J.over U) (R.over U)
-          ((F.obj P).X k) ((F.obj O).X 0) ((F.obj P).X k)
-        intro V x a
-        obtain ⟨b, rfl⟩ := scalar_unit_section_surjective.{c, v, r} J R
-          (op V.unop.left) a
-        have hi : (γ.inv.f k).val.app V
-            (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
-              (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
-                (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b)) =
-            coefficientTensorGenerator.{r, c, v} J R P O k 0 k
-              (Int.add_zero k) (op V.unop.left) x
-              (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) := by
-          have h := congrArg ((γ.inv.f k).val.app V)
-            (hγ k 0 k (Int.add_zero k) V.unop x
-              (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b))
-          have h' := congrArg (fun f ↦ (f.f k).val.app V
-            (coefficientTensorGenerator.{r, c, v} J R P O k 0 k
-              (Int.add_zero k) (op V.unop.left) x
-              (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b))) γ.hom_inv_id
-          set_option backward.isDefEq.respectTransparency false in
-           simpa only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-            PresheafOfModules.comp_app, ModuleCat.comp_apply,
-            HomologicalComplex.id_f, SheafOfModules.id_val, PresheafOfModules.id_app,
-            ModuleCat.id_apply] using h.symm.trans h'
-        change (β.hom.f k).val.app (op V.unop.left)
-            ((γ.inv.f k).val.app V
-              (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
-                (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
-                (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b))) = _
-        -- Apply both scalar formulas before asking Lean to check reflexivity.
-        rewrite [hi]
-        rewrite [hβ k (Int.add_zero k) (op V.unop.left) b x]
-        set_option backward.isDefEq.respectTransparency.types false in
-        set_option backward.isDefEq.respectTransparency false in
-         change b • x = (βU.hom.f k).val.app V
-          ((((coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
-            (𝟙 (F.obj P), e.hom)).f k).val.app V
-              (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
-                (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
-                (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b)))
-        rewrite [tensorGenerator_map]
-        simp only [HomologicalComplex.id_f, SheafOfModules.id_val,
-          PresheafOfModules.id_app, ModuleCat.id_apply]
-        have he : (e.hom.f 0).val.app V
-            (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) =
-              ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b := by
-          rfl
-        rewrite [he, hβU]
-        set_option backward.isDefEq.respectTransparency.types false in
-        set_option backward.isDefEq.respectTransparency false in
-         rfl
-      · apply IsZero.eq_of_src
-        apply (tensorLeft ((F.obj P).X p)).map_isZero
-        exact (SheafOfModules.overFunctor.{max c v r} B U).map_isZero
-          (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ q hq)
+    have hchain := scalar_chain_square J R U P e (fun _ _ ↦ rfl) γ
+      (fun k V x a ↦ hγ k 0 k (Int.add_zero k) V x a) β
+      (fun k ↦ hβ k (Int.add_zero k)) βU (fun k ↦ hβU k (Int.add_zero k))
     let α := ringedSliceLocalizationIso.{c, v, r, w, w'} J R U
     have hPU := (d.kflat P hP fP).1
     have hOU := unit_kflat.{max c v, v, r} (J.over U) (R.over U)
