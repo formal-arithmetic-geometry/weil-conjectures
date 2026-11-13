@@ -245,17 +245,12 @@ theorem abelianCechHorseshoe_total_boundary
   let C := T.map (TopCat.Sheaf.cechComplexFunctor U)
   have hC : C.ShortExact := TopCat.Sheaf.shortExact_cechComplex hT hg
   let φα : A ⟶ V :=
-    { τ₁ := abelianCechAlpha U I₁
-      τ₂ := abelianCechAlpha U I₂
-      τ₃ := abelianCechAlpha U I₃
-      comm₁₂ := alpha_naturality U I₁ I₂ α
-      comm₂₃ := alpha_naturality U I₂ I₃ β }
+    ShortComplex.homMk (abelianCechAlpha U I₁) (abelianCechAlpha U I₂)
+      (abelianCechAlpha U I₃) (alpha_naturality U I₁ I₂ α) (alpha_naturality U I₂ I₃ β)
   let φβ : C ⟶ V :=
-    { τ₁ := abelianCechBeta U I₁
-      τ₂ := abelianCechBeta U I₂
-      τ₃ := abelianCechBeta U I₃
-      comm₁₂ := beta_naturality U I₁ I₂ T.f α hα
-      comm₂₃ := beta_naturality U I₂ I₃ T.g β hβ }
+    ShortComplex.homMk (abelianCechBeta U I₁) (abelianCechBeta U I₂)
+      (abelianCechBeta U I₃) (beta_naturality U I₁ I₂ T.f α hα)
+      (beta_naturality U I₂ I₃ T.g β hβ)
   exact boundary_naturality_pair φβ φα hC hS hV q
 
 end AlgebraicGeometry.Scheme.Modules
