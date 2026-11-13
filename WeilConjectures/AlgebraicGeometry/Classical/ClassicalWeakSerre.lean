@@ -21,8 +21,9 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 /-!
 # Classical module sheaves form a weak Serre subcategory
 
-Classical pro-étale module sheaves are closed under kernels, cokernels and extensions
-(blueprint: `corollary-bounded-below-classical-complexes--1`).
+Classical pro-étale module sheaves are closed under kernels, cokernels and extensions.
+
+## Implementation details
 
 Kernels and cokernels: classical sheaves form the essential image of the exact fully faithful
 functor `ν^*`. Extensions: the derived counit of `ν^* ⊣ Rν_*` is invertible on classical
@@ -91,22 +92,19 @@ theorem isClassicalModuleFor_eq_essImage (X : Scheme.{u}) (Λ : Type (u + 1)) [C
   · rintro ⟨M, ⟨e⟩⟩
     exact isClassicalModuleFor_of_iso X Λ e (E.obj M).property
 
-/-- Classical module sheaves are closed under kernels
-(blueprint: `corollary-bounded-below-classical-complexes--1`). -/
+/-- Classical module sheaves are closed under kernels. -/
 instance isClosedUnderKernels_isClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] : ObjectProperty.IsClosedUnderKernels (IsClassicalModuleFor X Λ) := by
   rw [isClassicalModuleFor_eq_essImage]
   exact ObjectProperty.isClosedUnderKernels_of_isClosedUnderLimitsOfShape _
 
-/-- Classical module sheaves are closed under cokernels
-(blueprint: `corollary-bounded-below-classical-complexes--1`). -/
+/-- Classical module sheaves are closed under cokernels. -/
 instance isClosedUnderCokernels_isClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] : ObjectProperty.IsClosedUnderCokernels (IsClassicalModuleFor X Λ) := by
   rw [isClassicalModuleFor_eq_essImage]
   exact ObjectProperty.isClosedUnderCokernels_of_isClosedUnderColimitsOfShape _
 
-/-- Classical module sheaves are closed under extensions
-(blueprint: `corollary-bounded-below-classical-complexes--1`). -/
+/-- Classical module sheaves are closed under extensions. -/
 instance isClosedUnderExtensions_isClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] : ObjectProperty.IsClosedUnderExtensions (IsClassicalModuleFor X Λ) where
   prop_X₂_of_shortExact {S} hS h₁ h₃ := by
@@ -143,8 +141,7 @@ instance isClosedUnderExtensions_isClassicalModuleFor (X : Scheme.{u}) (Λ : Typ
         (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).app S.X₂⟩⟩
 
 /-- Classical module sheaves form a weak Serre subcategory: they are closed under kernels,
-cokernels and extensions
-(blueprint: `corollary-bounded-below-classical-complexes--1`). -/
+cokernels and extensions. -/
 theorem isClassicalModuleFor_isWeakSerre (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ObjectProperty.IsClosedUnderKernels (IsClassicalModuleFor X Λ) ∧
       ObjectProperty.IsClosedUnderCokernels (IsClassicalModuleFor X Λ) ∧

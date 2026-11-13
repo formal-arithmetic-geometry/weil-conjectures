@@ -27,10 +27,11 @@ Let `X` be of finite type over a field `k`, of dimension at most `d`, and suppos
 `cd_ℓ(k) ≤ c`. For every classical pro-étale sheaf `F` of `A`-modules, with `A` a ring in which
 `ℓ` is nilpotent (e.g. a finite `ℓ`-primary ring), and every pro-étale affine `U` over `X`, the
 pro-étale cohomology `Hᵠ(U, F)` vanishes for `q > d + c`
-(`AlgebraicGeometry.ProEtale.isZero_cohomology_of_proAffineEtale_of_isClassicalModuleFor`,
-blueprint `lemma-uniform-bounds-pro-etale-affines--1`).
+(`AlgebraicGeometry.ProEtale.isZero_cohomology_of_proAffineEtale_of_isClassicalModuleFor`).
 
-The proof follows the blueprint: `F = ν^* G` for an étale sheaf `G`, pro-étale cohomology of
+## Implementation details
+
+Write `F = ν^* G` for an étale sheaf `G`, pro-étale cohomology of
 `ν^* G` on `U` is étale cohomology of `G|_U`, which is the filtered colimit of the étale
 cohomology of `G` on the affine étale stages `Uᵢ` of `U`
 (`AlgebraicGeometry.Etale.cohomologyMap_isColimit_of_isLimit`), and on each stage the
@@ -95,8 +96,7 @@ namespace Scheme
 
 /-- Vanishing of higher direct images along the structure morphism `a : X ⟶ Spec K` of a
 `K`-scheme of finite type, from a torsion cohomological-dimension bound `e` on the base change
-of `X` to an algebraic closure of `K`: `Rᵠa_* F = 0` for torsion `F` and `q > e`. This is the
-first half of the proof of `hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure`. -/
+of `X` to an algebraic closure of `K`: `Rᵠa_* F = 0` for torsion `F` and `q > e`. -/
 theorem isZero_rightDerived_lowerStar_of_isAlgClosure {K : Type u} [Field K]
     (L : Type u) [Field L] [Algebra K L] [IsAlgClosure K L] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] {e : ℕ}
@@ -128,8 +128,7 @@ theorem isZero_rightDerived_lowerStar_of_isAlgClosure {K : Type u} [Field K]
 /-- `ℓ`-primary descent of a geometric cohomological-dimension bound: let `X` be of finite type
 over a field `K`, assume the étale cohomology of `ℓ`-power torsion sheaves on `Spec K` vanishes
 above `c` and `cd_tor(X_K̄) ≤ e` for an algebraic closure `K̄`. Then `Hⁿ(X, F) = 0` for
-`n > c + e` and every abelian sheaf `F` killed by a power of `ℓ` (Leray spectral sequence of
-the structure morphism; its higher direct images are again killed by that power). -/
+`n > c + e` and every abelian sheaf `F` killed by a power of `ℓ`. -/
 theorem subsingleton_H_of_nsmul_of_isAlgClosure {K : Type u} [Field K]
     (L : Type u) [Field L] [Algebra K L] [IsAlgClosure K L] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (ℓ : ℕ) (hℓ : ℓ.Prime)
@@ -192,9 +191,7 @@ theorem subsingleton_H_of_cohomologicalDimension_le (ℓ : ℕ) (hℓ : ℓ.Prim
 `k`, of dimension at most `d`, and assume the étale cohomology of `ℓ`-power torsion sheaves on
 `Spec k` vanishes above `c`. For every pro-affine étale `v : U ⟶ X` (a cofiltered limit of
 affine étale `X`-schemes `Uᵢ`) and every abelian étale sheaf `F` on `X` killed by a power of
-`ℓ`, `Hⁿ(U_ét, F|_U) = 0` for `n > d + c`: the group is the filtered colimit of the
-`Hⁿ((Uᵢ)_ét, F|_{Uᵢ})` [Stacks, Tag 03Q6], each of which vanishes by `ℓ`-primary
-affine Artin vanishing, since `dim Uᵢ ≤ dim X`. -/
+`ℓ`, `Hⁿ(U_ét, F|_U) = 0` for `n > d + c`. -/
 theorem subsingleton_H_upperStar_of_proAffineEtale (ℓ : ℕ) (hℓ : ℓ.Prime) {k : Type u}
     [Field k] {c d : ℕ}
     (hk : ∀ G : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1},
@@ -262,18 +259,12 @@ theorem isZero_homology_rightDerivedGlobalSections_comparisonUpperStar
   exact hp'.of_iso (Γp.homologyRightDerivedFunctorObjSingleFunctorIso
     ((comparisonUpperStar C W).obj G) n)
 
-/-- **Uniform bound on pro-étale affines** (blueprint
-`lemma-uniform-bounds-pro-etale-affines--1`). Let `X` be locally of finite type over a field
+/-- **Uniform bound on pro-étale affines.** Let `X` be locally of finite type over a field
 `k`, with `dim X ≤ d` and `cd_ℓ(k) ≤ c` (the `ℓ`-cohomological dimension
 `AlgebraicGeometry.ProEtale.cohomologicalDimension`), and let `A` be a ring in which `ℓ` is
 nilpotent (e.g. a finite `ℓ`-primary ring). For every classical sheaf `F` of `A`-modules on
 `X_proét` and every pro-étale affine `U` over `X` (an object of `X_proét` whose structure map is
-pro-affine étale), `Hᵠ(U, F) = 0` for `q > d + c`.
-
-Proof (blueprint): write `F = ν^* G` (`proEtaleClassicalSheaves`) and `U = lim Uᵢ`; then
-`Hᵠ(U_proét, F|_U) = Hᵠ(U_ét, G|_U)`, whose underlying abelian group is the étale
-cohomology of the underlying abelian sheaf, killed by a power of `ℓ`; it vanishes by
-`subsingleton_H_upperStar_of_proAffineEtale`. -/
+pro-affine étale), `Hᵠ(U, F) = 0` for `q > d + c`. -/
 theorem isZero_cohomology_of_proAffineEtale_of_isClassicalModuleFor (ℓ : ℕ) (hℓ : ℓ.Prime)
     {k : Type u} [Field k] {c d : ℕ} (hk : cohomologicalDimension ℓ hℓ (Spec (.of k)) ≤ c)
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]

@@ -97,8 +97,7 @@ theorem preservesFiniteColimits_lowerStar_of_isCompl :
   exact preservesFiniteColimits_of_reflects_of_preserves _ (Mod.forget B)
 
 omit [QuasiCompact j] in
-/-- The restriction `j^*` along an open immersion is left exact on module sheaves, since on
-underlying sheaves it is right adjoint to the extension by zero. -/
+/-- The restriction `j^*` along an open immersion is left exact on module sheaves. -/
 instance preservesFiniteLimits_upperStar_of_isOpenImmersion :
     PreservesFiniteLimits (upperStar B j) := by
   have := (ProEtale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j
@@ -108,8 +107,7 @@ instance preservesFiniteLimits_upperStar_of_isOpenImmersion :
   exact preservesFiniteLimits_of_reflects_of_preserves _ (Mod.forget _)
 
 omit [QuasiCompact j] in
-/-- The restriction `j^*` along an open immersion is exact on module sheaves.
-(blueprint: `proposition-extension-zero-restriction-closed-subscheme--6`) -/
+/-- The restriction `j^*` along an open immersion is exact on module sheaves. -/
 theorem preservesHomology_upperStar_of_isOpenImmersion : (upperStar B j).PreservesHomology :=
   Functor.preservesHomology_of_preservesEpis_and_kernels _
 

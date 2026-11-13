@@ -19,9 +19,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 # Hypercohomology of pro-étale affines
 
 Let `K ∈ D⁺(X_ét, Λ)` and let `U = lim Uᵢ` be a cofiltered limit of affine étale `X`-schemes.
-Then `RΓ(U_proét, (ν_X^* K)|_U) ≅ colimᵢ RΓ((Uᵢ)_ét, K|_{Uᵢ})`
-(blueprint `corollary-cohomology-pro-etale-affine--1`). Since colimits are not intrinsic in a
-derived category, we state this degreewise: for every `q`, the canonical maps
+Then `RΓ(U_proét, (ν_X^* K)|_U) ≅ colimᵢ RΓ((Uᵢ)_ét, K|_{Uᵢ})`. Since colimits are not intrinsic
+in a derived category, we state this degreewise: for every `q`, the canonical maps
 `Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ⟶ Hᵠ(U_proét, (ν_X^* K)|_U)` are compatible with the transition maps and
 induce a bijection from the filtered colimit
 (`AlgebraicGeometry.ProEtale.proEtaleAffineHypercohomologyMap_isColimit`).
@@ -43,7 +42,8 @@ induce a bijection from the filtered colimit
 - `AlgebraicGeometry.Etale.hypercohomologyRestrictOver_isColimit_of_isLimit`: continuity of
   étale hypercohomology of bounded below complexes along cofiltered limits with affine
   transition maps [Stacks, Tag 0GIT].
-- `AlgebraicGeometry.ProEtale.proEtaleAffineHypercohomologyMap_isColimit`: the clause.
+- `AlgebraicGeometry.ProEtale.proEtaleAffineHypercohomologyMap_isColimit`: cohomology of a
+  pro-étale affine.
 -/
 
 @[expose] public section
@@ -89,8 +89,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 system of quasi-compact quasi-separated schemes over `S` with affine transition maps and limit
 `U`, and let `K ∈ D⁺(S_ét, Λ)`. Then, in every degree `q`, the restriction maps
 `Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ⟶ Hᵠ(U_ét, K|_U)` are compatible with the transition maps and induce a
-bijection `colimᵢ Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ≅ Hᵠ(U_ét, K|_U)`: every class on `U` comes from a stage,
-and a class at a stage vanishing on `U` vanishes at a later stage. -/
+bijection `colimᵢ Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ≅ Hᵠ(U_ét, K|_U)`. -/
 theorem hypercohomologyRestrictOver_isColimit_of_isLimit {S : Scheme.{u}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
@@ -127,10 +126,9 @@ namespace ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The comparison isomorphism `Hᵠ(Y_ét, M) ≅ Hᵠ(Y_proét, ν^* M)` for a bounded below complex
-`M` of étale sheaves: the derived global sections of the unit `M ⟶ Rν_* ν^* M` of the bounded
-below derived comparison adjunction, which is invertible since the unit of `ν^* ⊣ ν_*` is and
-`ν^*` sends injectives to `ν_*`-acyclic sheaves, followed by `RΓ(Y_ét, Rν_* -) ≅
-RΓ(Y_proét, -)`. -/
+`M` of étale sheaves: the derived global sections of the (invertible) unit `M ⟶ Rν_* ν^* M` of
+the bounded below derived comparison adjunction, followed by
+`RΓ(Y_ét, Rν_* -) ≅ RΓ(Y_proét, -)`. -/
 noncomputable def comparisonHypercohomologyIso (Y : Scheme.{u})
     (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) (q : ℤ) :
     (Etale.cohomology A Y q).obj M.obj ≅
@@ -200,20 +198,14 @@ lemma proEtaleAffineHypercohomologyMap_eq {X U V : Scheme.{u}} (pU : U ⟶ X)
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- **Cohomology of a pro-étale affine** (blueprint `corollary-cohomology-pro-etale-affine--1`).
+/-- **Cohomology of a pro-étale affine.**
 Let `K ∈ D⁺(X_ét, Λ)` and let `U = lim Uᵢ` be a cofiltered limit of affine étale `X`-schemes
 `Uᵢ` (a pro-étale affine). Then `RΓ(U_proét, (ν_X^* K)|_U) ≅ colimᵢ RΓ((Uᵢ)_ét, K|_{Uᵢ})`,
 in the following degreewise form: for every `q`, the canonical maps
 `Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ⟶ Hᵠ(U_proét, (ν_X^* K)|_U)` (`proEtaleAffineHypercohomologyMap`) are
 compatible with the étale restriction maps between the stages, every class on `U` comes from
 some stage, and a class at a stage vanishing on `U` vanishes at a later stage; that is, they
-induce an isomorphism from the filtered colimit.
-
-Proof: the canonical map is the étale restriction to `U` followed by the comparison isomorphism
-`Hᵠ(U_ét, K|_U) ≅ Hᵠ(U_proét, ν_U^* (K|_U))` (the bounded below comparison theorem) and
-`ν_U^* (K|_U) ≅ (ν_X^* K)|_U`; conclude by continuity of étale hypercohomology
-(`AlgebraicGeometry.Etale.hypercohomologyRestrictOver_isColimit_of_isLimit`, [Stacks, Tag
-0GIT]). -/
+induce an isomorphism from the filtered colimit. -/
 theorem proEtaleAffineHypercohomologyMap_isColimit {X : Scheme.{u}}
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over X)

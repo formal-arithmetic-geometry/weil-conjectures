@@ -16,17 +16,20 @@ public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 Let `F : C ⥤ D` be an additive functor between abelian categories, where `C` has K-injective
 resolutions and products of shape `J`, and products of shape `J` exist and are exact in `D`. If
 `F` preserves products of shape `J`, then so does its unbounded right derived functor
-`F.rightDerivedFunctor : D(C) ⥤ D(D)`: a product of K-injective complexes is K-injective and is a
-product in `D(C)`, `R(F)` is computed on it by applying `F` termwise, and a termwise product of
-complexes is a product in `D(D)` since products are exact in `D` (Stacks, Tag 08U1).
-
-Being triangulated, `F.rightDerivedFunctor` then also preserves derived inverse limits of towers
-(homotopy limits), when `F` preserves countable products.
+`F.rightDerivedFunctor : D(C) ⥤ D(D)` (Stacks, Tag 08U1). When `F` preserves countable products,
+`F.rightDerivedFunctor` also preserves derived inverse limits of towers (homotopy limits).
 
 ## Main statements
 
 - `CategoryTheory.Functor.preservesLimitsOfShape_discrete_rightDerivedFunctor`;
 - `CategoryTheory.Functor.isHomotopyLimit_rightDerivedFunctor_mapCone`.
+
+## Implementation details
+
+A product of K-injective complexes is K-injective and is a product in `D(C)`, `R(F)` is computed
+on it by applying `F` termwise, and a termwise product of complexes is a product in `D(D)` since
+products are exact in `D`. Derived limits of towers are then handled using that `R(F)` is
+triangulated.
 -/
 
 @[expose] public section

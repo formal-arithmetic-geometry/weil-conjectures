@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCompletedCoeffi
 The comparisons `𝒪_{E,X} ≅ lim_n (𝒪_E/π_E^n)_X`, `E_X ≅ 𝒪_{E,X}[1/ℓ]` and
 `Q̄_{ℓ,X} ≅ colim_E E_X` of `AlgebraicGeometry.ProEtale.sfb_completed_coefficients` are
 compatible with inverse image along every morphism of schemes
-(`AlgebraicGeometry.ProEtale.sfb_completed_coefficients_pullback`, blueprint
-`lemma-comparison-completed-coefficients--4`).
+(`AlgebraicGeometry.ProEtale.sfb_completed_coefficients_pullback`).
 -/
 
 @[expose] public section
@@ -75,8 +74,7 @@ finite extension `E` of `ℚ_ℓ` inside `Q̄_ℓ`, and for `ℤ_ℓ ⊆ ℚ_ℓ
 are compatible with inverse image along every morphism of schemes `f : X ⟶ Y`: the pulled-back
 integral limit cone is a limit cone, the rationalization legs commute with the inverse-image
 comparisons, the pulled-back algebraic-closure cocone is a colimit cocone, and its legs commute
-with the inverse-image comparisons.
-(blueprint: `lemma-comparison-completed-coefficients--4`) -/
+with the inverse-image comparisons. -/
 theorem sfb_completed_coefficients_pullback (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
       (π : PadicAlgCl.integers ℓ E),

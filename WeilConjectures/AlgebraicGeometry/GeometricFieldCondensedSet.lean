@@ -15,8 +15,7 @@ Let `Ω` be a separably closed field. Profinite sets form a dense subsite of the
 `Spec Ω` via `S ↦ (Spec Ω)[S]`
 (`AlgebraicGeometry.ProEtale.geometricFieldProfiniteDenseSubsite`), so restriction along this
 functor identifies sheaves of sets on `(Spec Ω)_proét` with condensed sets
-(`AlgebraicGeometry.ProEtale.geometricFieldSheafEquivCondensedSet`, blueprint
-`proposition-pro-etale-site-separably-closed--2`).
+(`AlgebraicGeometry.ProEtale.geometricFieldSheafEquivCondensedSet`).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ variable (Ω : Type u) [Field Ω] [IsSepClosed Ω]
 /-- For a separably closed field `Ω`, the topos of the pro-étale site of `Spec Ω` is the topos
 of condensed sets (with the set-theoretic cutoff given by the universe `u` of `Ω`): restriction
 along the dense subsite `S ↦ (Spec Ω)[S]` of profinite sets, followed by the equivalence between
-coherent sheaves on profinite sets and on compact Hausdorff spaces.
-(blueprint: `proposition-pro-etale-site-separably-closed--2`) -/
+coherent sheaves on profinite sets and on compact Hausdorff spaces. -/
 noncomputable def geometricFieldSheafEquivCondensedSet :
     Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) (Type (u + 1)) ≌ CondensedSet.{u} :=
   have := geometricFieldProfiniteDenseSubsite Ω

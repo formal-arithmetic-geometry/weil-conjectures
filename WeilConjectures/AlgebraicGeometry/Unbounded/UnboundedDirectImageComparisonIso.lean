@@ -17,6 +17,9 @@ morphism of finite type. The comparison map `ν_Y^* Rg_*^{ét} K ⟶ Rg_*^{proé
 (`AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap`) is an isomorphism for every
 unbounded `K ∈ D(X_ét, A)`.
 
+## Implementation details
+
+No hypothesis on `k` nor on the characteristic of `A` is needed (`A` is automatically torsion).
 In a fixed degree `m`, both sides only depend on a truncation `τ_{≥ N} K` for `N ≪ m`: the
 étale direct image has finite cohomological dimension, and the pro-étale direct image has
 finite amplitude on complexes with cohomology sheaves of étale origin. For the bounded below
@@ -37,16 +40,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- **Unbounded comparison of direct images for finite coefficients.** Let `k` be a field,
 `A` a finite commutative ring, `Y` a scheme of finite type over `k` and `g : X ⟶ Y` a morphism
 of finite type. Then for every `K ∈ D(X_ét, A)` (with no boundedness condition) the comparison
-map `ν_Y^* Rg_*^{ét} K ⟶ Rg_*^{proét} ν_X^* K` is an isomorphism. No hypothesis on `k` nor on
-the characteristic of `A` is needed (`A` is automatically torsion).
-(blueprint: `proposition-unbounded-comparison-finite-coefficients--2`)
-
-Proof: test on cohomology in each degree `m`. Choose `N` with `N` far below `m` and use the
-truncation triangle `τ_{< N} K ⟶ K ⟶ τ_{≥ N} K`. The étale direct image raises degrees
-by at most `cd(g) < ∞`, so `ν_Y^* Rg_*^{ét} τ_{< N} K` vanishes in degrees `m, m + 1`; the
-pro-étale direct image has finite amplitude on `ν_X^* τ_{< N} K`, whose cohomology
-is of étale origin. Hence both sides in degree `m` are unchanged on replacing `K` by `τ_{≥ N} K`,
-by naturality of the comparison, and there it is invertible by the bounded below case. -/
+map `ν_Y^* Rg_*^{ét} K ⟶ Rg_*^{proét} ν_X^* K` is an isomorphism. -/
 theorem isIso_unboundedDirectImageComparisonMap
     {k : Type u} [Field k] (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]

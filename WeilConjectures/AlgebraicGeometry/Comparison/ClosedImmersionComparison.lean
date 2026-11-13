@@ -25,8 +25,15 @@ ring. The comparison functor `ν^*` from étale to pro-étale sheaves of `Λ`-mo
   `AlgebraicGeometry.ProEtale.properOpenSiteExtensionIso` (the derived form of (2.10)) carry
   `ν_X^*` of the étale localization triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶` to a distinguished
   triangle `j_! j^* ν^* K ⟶ ν^* K ⟶ Ri_* i^* ν^* K ⟶` whose first two maps are the counit of
-  `j_! ⊣ j^*` and the unit of `i^* ⊣ Ri_*` on `X_proét`
-  (blueprint: `proposition-comparison-immersions--3`).
+  `j_! ⊣ j^*` and the unit of `i^* ⊣ Ri_*` on `X_proét`.
+
+## Implementation details
+
+The isomorphism `e₁ : ν_X^* j_! j^* K ≅ j_! ν_U^* j^* K ≅ j_! j^* ν_X^* K` comes from
+`properOpenSiteExtensionIso` and `fixedComparisonPullbackPlus`, and
+`e₃ : ν_X^* Ri_* i^* K ≅ Ri_* ν_Z^* i^* K ≅ Ri_* i^* ν_X^* K` from
+`rightDerivedLowerStarComparisonPlusIso` and `fixedComparisonPullbackPlus`. The pro-étale
+triangle needs no quasi-compactness of `j`.
 
 The étale localization triangle on `D⁺` is
 `AlgebraicGeometry.Etale.exists_distTriang_openClosed_plus`, deduced from the unbounded one
@@ -112,16 +119,12 @@ theorem Etale.exists_distTriang_openClosed_plus (hij : Set.range i.base = (Set.r
     simp [adjU]
 
 
-/-- Comparison for closed immersions and the localization triangle: let `i : Z ⟶ X` be a closed
-immersion with open complement `j : U ⟶ X` and `K ∈ D⁺(X_ét, Λ)`. The isomorphisms
-`e₁ : ν_X^* j_! j^* K ≅ j_! ν_U^* j^* K ≅ j_! j^* ν_X^* K` (from (2.10),
-`properOpenSiteExtensionIso`, and the inverse-image comparison `fixedComparisonPullbackPlus`) and
-`e₃ : ν_X^* Ri_* i^* K ≅ Ri_* ν_Z^* i^* K ≅ Ri_* i^* ν_X^* K` (from the direct-image comparison
-`rightDerivedLowerStarComparisonPlusIso` and the inverse-image comparison) carry `ν_X^*` of the
-étale localization triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶` to a distinguished triangle
-`j_! j^* ν^* K ⟶ ν^* K ⟶ Ri_* i^* ν^* K ⟶` whose first two maps are the counit of
-`j_! ⊣ j^*` and the unit of `i^* ⊣ Ri_*` on `X_proét`
-(blueprint: `proposition-comparison-immersions--3`). -/
+/-- Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X` and
+`K ∈ D⁺(X_ét, Λ)`. The comparison isomorphisms
+`e₁ : ν_X^* j_! j^* K ≅ j_! j^* ν_X^* K` and `e₃ : ν_X^* Ri_* i^* K ≅ Ri_* i^* ν_X^* K` carry
+`ν_X^*` of the étale localization triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶` to a distinguished
+triangle `j_! j^* ν^* K ⟶ ν^* K ⟶ Ri_* i^* ν^* K ⟶` whose first two maps are the counit of
+`j_! ⊣ j^*` and the unit of `i^* ⊣ Ri_*` on `X_proét`. -/
 theorem ProEtale.comparisonUpperStar_openClosed_triangle
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (w : (Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) i).obj
@@ -200,10 +203,7 @@ theorem ProEtale.comparisonUpperStar_openClosed_triangle
 
 /-- The pro-étale localization triangle for objects of étale origin: for a closed immersion `i`
 with open complement `j` and `K ∈ D⁺(X_ét, Λ)`, the counit `j_! j^* ν^* K ⟶ ν^* K` and the unit
-`ν^* K ⟶ Ri_* i^* ν^* K` extend to a distinguished triangle in `D⁺(X_proét, Λ)`
-(blueprint: `proposition-comparison-immersions--3`). It is obtained from
-`ProEtale.comparisonUpperStar_openClosed_triangle` and the étale localization triangle
-`Etale.exists_distTriang_openClosed_plus`; no quasi-compactness of `j` is needed. -/
+`ν^* K ⟶ Ri_* i^* ν^* K` extend to a distinguished triangle in `D⁺(X_proét, Λ)`. -/
 theorem ProEtale.exists_distTriang_comparisonUpperStar_openClosed
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

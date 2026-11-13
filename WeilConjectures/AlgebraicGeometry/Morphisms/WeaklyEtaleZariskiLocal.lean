@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 A morphism of schemes `f : U ⟶ X` is weakly étale if and only if its restrictions to the members
 of a Zariski open covering of `U` are
-(`AlgebraicGeometry.weaklyEtale_iff_of_iSup_eq_top`, blueprint `lemma-stability--3`).
+(`AlgebraicGeometry.weaklyEtale_iff_of_iSup_eq_top`).
 -/
 
 @[expose] public section
@@ -24,8 +24,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Let `f : U ⟶ X` be a morphism of schemes and `U = ⋃ᵢ Uᵢ` a Zariski open covering. Then `f`
-is weakly étale if and only if every restriction `Uᵢ ⟶ X` is weakly étale.
-(blueprint: `lemma-stability--3`) -/
+is weakly étale if and only if every restriction `Uᵢ ⟶ X` is weakly étale. -/
 theorem weaklyEtale_iff_of_iSup_eq_top {U X : Scheme.{u}} (f : U ⟶ X) {ι : Type*}
     (V : ι → U.Opens) (hV : iSup V = ⊤) :
     WeaklyEtale f ↔ ∀ i, WeaklyEtale ((V i).ι ≫ f) :=

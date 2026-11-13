@@ -20,6 +20,12 @@ arbitrary commutative ring `Λ`, giving
 `AlgebraicGeometry.ProEtale.comparisonUpperStar_map_openImmersionLowerShriek_counit`: the
 comparison `ν^*` carries the counit of `j_! ⊣ j^*` on `D⁺(X_ét, Λ)` to the counit on
 `D⁺(X_proét, Λ)`, up to the comparison isomorphisms (2.10) and `j^* ν^* ≅ ν^* j^*`.
+
+## Implementation details
+
+The counit identity is proved by transposing under the pro-étale adjunction `j_! ⊣ j^*`: the
+unit normalization of the open comparison and the triangle identities give both sides the same
+transpose. The identity on sheaves then descends to `D⁺` since all functors involved are exact.
 -/
 
 @[expose] public noncomputable section
@@ -32,12 +38,8 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option backward.defeqAttrib.useBackward true
 
-/-- The canonical pullback comparison, expressed using localization restriction on both
-sites. The first factor converts etale restriction to inverse image; the middle factor
-is the recorded canonical comparison, and the last converts pro-etale inverse image to
-restriction. No independent comparison is chosen.
-Source: Stacks Project, Tags 099R and 09AF
-(blueprint: lem-sf-open-comparison-unit-normalization). -/
+/-- The canonical pullback comparison `j^* ν^* ≅ ν^* j^*`, expressed using restriction along
+`j` on both sites. -/
 private def restrictionIso (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
@@ -348,20 +350,8 @@ private theorem plus_unit (A : Type (u + 1)) [CommRing A]
     ObjectProperty.lift, DerivedCategory.Plus.ι, ObjectProperty.ι, inducedFunctor,
     Functor.id_obj] using h
 set_option backward.isDefEq.respectTransparency false in
-/-- Site comparison preserves the evaluation counit of extension by zero.
-Source: Stacks Project, Tags 09AF and 099R; step 7 of
-lem-amb-compact-support-site-comparison-open
-(blueprint: lem-amb-open-site-evaluation-counit).
-
-Proof: transpose the inverse open comparison under the target open adjunction.
-The unit-normalization of the open comparison identifies its transpose with the
-pullback comparison followed by the image of the etale open unit. Naturality of
-pullback comparison and the etale triangle identity show that the transpose of
-the displayed left side has that value. The pro-etale triangle identity gives the
-same transpose for the right side. Injectivity of the Hom adjunction proves the
-identity. The exact functors and transformations act degreewise on complexes and
-preserve quasi-isomorphisms, so this identity descends to the displayed D+ counits.
-The calculation also applies to an empty open and to the zero coefficient ring. -/
+/-- The comparison `ν^*` carries the counit of `j_! ⊣ j^*` on `D⁺(Z_ét, A)` to the counit on
+`D⁺(Z_proét, A)`, up to the comparison isomorphisms `ν^* j_! ≅ j_! ν^*` and `j^* ν^* ≅ ν^* j^*`. -/
 theorem comparisonUpperStar_map_openImmersionLowerShriek_counit (A : Type (u + 1)) [CommRing A]
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :
     ∀ B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),

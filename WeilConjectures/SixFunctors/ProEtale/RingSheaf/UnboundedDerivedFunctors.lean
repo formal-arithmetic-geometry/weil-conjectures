@@ -25,9 +25,12 @@ categories exist:
 Both preserve products (`ProEtale.RingSheaf.preservesLimitsOfShape_discrete_rightDerivedSections`,
 `ProEtale.RingSheaf.preservesLimitsOfShape_discrete_rightDerivedLowerStarMod`) and derived
 inverse limits of towers (`ProEtale.RingSheaf.isHomotopyLimit_rightDerivedSections_mapCone`,
-`ProEtale.RingSheaf.isHomotopyLimit_rightDerivedLowerStarMod_mapCone`): the underived functors
-preserve products and products of `R`-modules and of `f_* ℛ`-module sheaves are exact
-(blueprint `proposition-unbounded-functors-products`).
+`ProEtale.RingSheaf.isHomotopyLimit_rightDerivedLowerStarMod_mapCone`).
+
+## Implementation details
+
+The underived functors preserve products, and products of `R`-modules and of `f_* ℛ`-module
+sheaves are exact.
 -/
 
 @[expose] public section
@@ -66,7 +69,7 @@ instance additive_sections (U : X.ProEt) : (sections ℛ U).Additive := by
   dsimp only [sections]
   infer_instance
 
-/-- The direct image of module sheaves is additive, since it is so on underlying sheaves. -/
+/-- The direct image of module sheaves is additive. -/
 instance additive_lowerStarMod (f : X ⟶ Y) : (lowerStarMod ℛ f).Additive where
   map_add {_ _ a b} := (Mod.forget _).map_injective <| by
     rw [(Mod.forget _).map_add]
@@ -78,8 +81,7 @@ instance preservesLimitsOfShape_sections (U : X.ProEt) (J : Type (u + 1)) :
   dsimp only [sections]
   infer_instance
 
-/-- The direct image of module sheaves preserves products, since the forgetful functor creates
-limits and `f_*` preserves them on underlying sheaves. -/
+/-- The direct image of module sheaves preserves products. -/
 instance preservesLimitsOfShape_lowerStarMod (f : X ⟶ Y) (J : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete J) (lowerStarMod ℛ f) := by
   have : PreservesLimitsOfShape (Discrete J) (lowerStarMod ℛ f ⋙ Mod.forget _) :=
@@ -94,21 +96,17 @@ instance isGrothendieckAbelian_mod :
 
 variable [HasDerivedCategory (Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) ℛ)]
 
-/-- Blueprint `proposition-unbounded-functors-products--1`: the derived sections
-`RΓ(U, -) : D(X_proét, ℛ) ⥤ D(R)` on the unbounded derived category of `ℛ`-module sheaves, the
-total right derived functor of `Γ(U, -)`, computed on K-injective resolutions (which exist since
-`ℛ`-module sheaves form a Grothendieck abelian category). -/
+/-- The derived sections `RΓ(U, -) : D(X_proét, ℛ) ⥤ D(R)` on the unbounded derived category of
+`ℛ`-module sheaves, the total right derived functor of `Γ(U, -)`. -/
 noncomputable abbrev rightDerivedSections [HasDerivedCategory (ModuleCat.{u + 1} R)]
     (U : X.ProEt) :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) ℛ) ⥤
       DerivedCategory (ModuleCat.{u + 1} R) :=
   (sections ℛ U).rightDerivedFunctor
 
-/-- Blueprint `proposition-unbounded-functors-products--1`: the derived direct image
-`Rf_* : D(X_proét, ℛ) ⥤ D(Y_proét, f_* ℛ)` on the unbounded derived categories, the total right
-derived functor of `f_*` from `ℛ`-module sheaves to `f_* ℛ`-module sheaves, computed on
-K-injective resolutions (which exist since `ℛ`-module sheaves form a Grothendieck abelian
-category). -/
+/-- The derived direct image `Rf_* : D(X_proét, ℛ) ⥤ D(Y_proét, f_* ℛ)` on the unbounded derived
+categories, the total right derived functor of `f_*` from `ℛ`-module sheaves to
+`f_* ℛ`-module sheaves. -/
 noncomputable abbrev rightDerivedLowerStarMod (f : X ⟶ Y)
     [HasDerivedCategory (Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))
       ((f)_*[ModuleCat.{u + 1} R].obj ℛ))] :
@@ -117,27 +115,23 @@ noncomputable abbrev rightDerivedLowerStarMod (f : X ⟶ Y)
         ((f)_*[ModuleCat.{u + 1} R].obj ℛ)) :=
   (lowerStarMod ℛ f).rightDerivedFunctor
 
-/-- Blueprint `proposition-unbounded-functors-products--2`, products for `RΓ(U, -)`: the derived
-sections on the unbounded derived category of `ℛ`-module sheaves preserve products, since
-`Γ(U, -)` preserves products and products of `R`-modules are exact. -/
+/-- The derived sections `RΓ(U, -)` on the unbounded derived category of `ℛ`-module sheaves
+preserve products. -/
 instance preservesLimitsOfShape_discrete_rightDerivedSections
     [HasDerivedCategory (ModuleCat.{u + 1} R)] (U : X.ProEt) (J : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete J) (rightDerivedSections ℛ U) :=
   (sections ℛ U).preservesLimitsOfShape_discrete_rightDerivedFunctor
 
-/-- Blueprint `proposition-unbounded-functors-products--2`, products for `Rf_*`: the derived
-direct image from `ℛ`-module sheaves to `f_* ℛ`-module sheaves preserves products, since `f_*`
-preserves products and products of `f_* ℛ`-module sheaves are exact. -/
+/-- The derived direct image `Rf_*` from `ℛ`-module sheaves to `f_* ℛ`-module sheaves preserves
+products. -/
 instance preservesLimitsOfShape_discrete_rightDerivedLowerStarMod (f : X ⟶ Y)
     [HasDerivedCategory (Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))
       ((f)_*[ModuleCat.{u + 1} R].obj ℛ))] (J : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete J) (rightDerivedLowerStarMod ℛ f) :=
   (lowerStarMod ℛ f).preservesLimitsOfShape_discrete_rightDerivedFunctor
 
-/-- Blueprint `proposition-unbounded-functors-products--2`, derived limits for `RΓ(U, -)`: the
-derived sections send a homotopy limit cone of a tower (whose point is the derived limit
-`R lim Kₙ`, defined by the Milnor triangle) to a homotopy limit cone, being triangulated and
-preserving countable products. -/
+/-- The derived sections `RΓ(U, -)` send a homotopy limit cone of a tower (whose point is the
+derived limit `R lim Kₙ`, defined by the Milnor triangle) to a homotopy limit cone. -/
 theorem isHomotopyLimit_rightDerivedSections_mapCone [HasDerivedCategory (ModuleCat.{u + 1} R)]
     (U : X.ProEt)
     {K : ℕᵒᵖ ⥤ DerivedCategory (Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) ℛ)}
@@ -148,10 +142,8 @@ theorem isHomotopyLimit_rightDerivedSections_mapCone [HasDerivedCategory (Module
     preservesLimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) _
   hc.map (rightDerivedSections ℛ U)
 
-/-- Blueprint `proposition-unbounded-functors-products--2`, derived limits for `Rf_*`: the
-derived direct image sends a homotopy limit cone of a tower (whose point is the derived limit
-`R lim Kₙ`, defined by the Milnor triangle) to a homotopy limit cone, being triangulated and
-preserving countable products. -/
+/-- The derived direct image `Rf_*` sends a homotopy limit cone of a tower (whose point is the
+derived limit `R lim Kₙ`, defined by the Milnor triangle) to a homotopy limit cone. -/
 theorem isHomotopyLimit_rightDerivedLowerStarMod_mapCone (f : X ⟶ Y)
     [HasDerivedCategory (Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))
       ((f)_*[ModuleCat.{u + 1} R].obj ℛ))]
@@ -163,7 +155,7 @@ theorem isHomotopyLimit_rightDerivedLowerStarMod_mapCone (f : X ⟶ Y)
     preservesLimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) _
   hc.map (rightDerivedLowerStarMod ℛ f)
 
-/-- Blueprint `proposition-unbounded-functors-products--2`: the unbounded derived functors
+/-- The unbounded derived functors
 `RΓ(U, -) : D(X_proét, ℛ) ⥤ D(R)` and `Rf_* : D(X_proét, ℛ) ⥤ D(Y_proét, f_* ℛ)` preserve
 products (of any family indexed by a type in the universe of the site) and derived inverse
 limits of towers (homotopy limit cones). -/

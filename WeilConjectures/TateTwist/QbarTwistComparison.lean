@@ -16,14 +16,14 @@ import all WeilConjectures.AlgebraicGeometry.PurityTransport.TransportRootPullSt
 /-!
 # The two descriptions of `ℚ̄_ℓ(1)`
 
-Let `ℓ` be a prime invertible on a scheme `X`. The blueprint (`definition-tate-twists`) defines
+Let `ℓ` be a prime invertible on a scheme `X`. The twist
 `ℚ̄_{ℓ,X}(1) = colim_E E_X(1)`, where `E_X(1) = 𝒪_{E,X}(1)[1/ℓ]` and
-`𝒪_{E,X}(1) = lim_n (𝒪_E/ℓ^{n+1})_X ⊗ μ_{ℓ^{n+1}}` (`AlgebraicGeometry.ProEtale.spQbarTwist`), and
-asserts the equivalent description `ℚ̄_{ℓ,X}(1) = ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1)` with
-`ℤ_{ℓ,X}(1) = lim_n μ_{ℓ^n}` (`AlgebraicGeometry.ProEtale.tateTwistOne`). This file proves it
-(`AlgebraicGeometry.ProEtale.nonempty_spQbarTwist_iso_tateTwistOne`).
+`𝒪_{E,X}(1) = lim_n (𝒪_E/ℓ^{n+1})_X ⊗ μ_{ℓ^{n+1}}` (`AlgebraicGeometry.ProEtale.spQbarTwist`), is
+isomorphic to `ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1)` with `ℤ_{ℓ,X}(1) = lim_n μ_{ℓ^n}`
+(`AlgebraicGeometry.ProEtale.tateTwistOne`); this is
+`AlgebraicGeometry.ProEtale.nonempty_spQbarTwist_iso_tateTwistOne`.
 
-## Strategy
+## Implementation details
 
 * For the bottom subextension `E = ℚ_ℓ`, the inclusion `ℤ_{ℓ,X} ⟶ 𝒪_{ℚ_ℓ,X}` is an isomorphism, and
   the levels `ℤ_ℓ ⊗ μ_{ℓ^{n+1}}` of the Tate module are the levels
@@ -79,7 +79,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- The inverse image `p_X^*` from the point is additive, being a left adjoint. -/
+/-- The inverse image `p_X^*` from the point is additive. -/
 private lemma additive_upperStarFromPoint' : (upperStarFromPoint X).Additive := by
   have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
@@ -91,8 +91,7 @@ private lemma additive_upperStarFromPoint' : (upperStarFromPoint X).Additive := 
   exact Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
 
 /-- If `ℓ^{n+1}` kills an abelian sheaf `M`, then tensoring the reduction
-`𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓ^{n+1})_X` with `M` is an isomorphism: the reduction is the cokernel of
-`ℓ^{n+1}`, tensoring with `M` is right exact, and `ℓ^{n+1} ⊗ M = 0`. -/
+`𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓ^{n+1})_X` with `M` is an isomorphism. -/
 lemma isIso_spEllReduction_whiskerRight (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ)
     (M : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (hM : ((ℓ : ℤ) ^ (n + 1)) • 𝟙 M = 0) :
     IsIso (spEllReduction X ℓ E n ▷ M) := by
@@ -185,7 +184,7 @@ lemma tateModuleLevelSuccHom_hom (n : ℕ) :
       (PurityTransport.rootComparison X (ℓ ^ (n + 1))).hom := by
   simp [tateModuleLevelSuccHom, Mod.comapComp]
 
-/-- The level comparison is an isomorphism, since `ℓ^{n+1}` kills `μ_{ℓ^{n+1}}`. -/
+/-- The level comparison is an isomorphism. -/
 instance (n : ℕ) : IsIso (tateModuleLevelSuccHom X ℓ n) := by
   rw [← isIso_iff_of_reflects_iso _ (Mod.forget _)]
   have hM : ((ℓ : ℤ) ^ (n + 1)) • 𝟙 (Scheme.proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1))) = 0 := by
@@ -295,8 +294,7 @@ noncomputable def tateTwistOneIsoExtendScalarsSpRationalTwist :
 
 /-- **Scalar description of the algebraic Tate twist.** If `ℓ` is invertible on `X`, the
 twist `ℚ̄_{ℓ,X}(1) = colim_E E_X(1)`, `E_X(1) = (lim_n (𝒪_E/ℓ^n)_X(1))[1/ℓ]`, is isomorphic to
-`ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1)` with `ℤ_{ℓ,X}(1) = lim_n μ_{ℓ^n,X}`.
-(blueprint: `definition-tate-twists--9`) -/
+`ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1)` with `ℤ_{ℓ,X}(1) = lim_n μ_{ℓ^n,X}`. -/
 theorem nonempty_spQbarTwist_iso_tateTwistOne (hX : IsUnit (ℓ : Γ(X, ⊤))) :
     Nonempty (spQbarTwist X ℓ ≅ tateTwistOne X ℓ) := by
   obtain ⟨q, -⟩ := DiagonalCoefficients.diagonalClosure_ordinaryLine ℓ 𝔼 X hX

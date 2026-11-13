@@ -16,9 +16,7 @@ For a morphism of schemes `g : X ⟶ Y`, let `c_g : ν_Y^* Rg_* ⟶ Rg_* ν_X^*`
 of bounded below direct images (`fixedComparisonDirectImageMatePlus`) and
 `β_g : g^* ν_Y^* ≅ ν_X^* g^*` the comparison of inverse images
 (`fixedComparisonPullbackPlus`). We show that `ν_Y^*` of the étale unit followed by `c_g`
-equals the pro-étale unit followed by `Rg_*(β_g)`
-(blueprint: `lemma-comparison-direct-images-compatibilities--1`). The counit version
-(blueprint: `lemma-comparison-direct-images-compatibilities--2`) is
+equals the pro-étale unit followed by `Rg_*(β_g)`. The counit version is
 `fixedComparisonDirectImageMatePlus_transpose`, the general form of
 `fixedComparisonDirectImageMatePlus_counit` (which assumes `Λ` finite and `g` qcqs).
 -/
@@ -37,9 +35,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Counit compatibility of the comparison of direct images, for an arbitrary morphism `g` and
 coefficient ring `Λ`: `g^*(c_g)` followed by the pro-étale counit equals `β_g` followed by
 `ν_X^*` of the étale counit, where the direction of `β_g` is
-`ν_X^* g^* ⟶ g^* ν_Y^*` (blueprint: `lemma-comparison-direct-images-compatibilities--2`).
-This is `fixedComparisonDirectImageMatePlus_counit` without its unused finiteness and
-qcqs hypotheses, proved by the same mate calculation. -/
+`ν_X^* g^* ⟶ g^* ν_Y^*`. -/
 theorem fixedComparisonDirectImageMatePlus_transpose (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V)
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -90,8 +86,7 @@ theorem fixedComparisonDirectImageMatePlus_transpose (Λ : Type (u + 1)) [CommRi
 
 /-- Unit compatibility of the comparison of direct images: for `L ∈ D⁺(Y_ét, Λ)`, the composite
 `ν_Y^* L ⟶ ν_Y^* Rg_* g^* L ⟶ Rg_* ν_X^* g^* L` of `ν_Y^*` of the étale unit with `c_g` equals
-the pro-étale unit `ν_Y^* L ⟶ Rg_* g^* ν_Y^* L` followed by `Rg_*(β_g)`
-(blueprint: `lemma-comparison-direct-images-compatibilities--1`). -/
+the pro-étale unit `ν_Y^* L ⟶ Rg_* g^* ν_Y^* L` followed by `Rg_*(β_g)`. -/
 theorem fixedComparisonDirectImageMatePlus_unit (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (g : X ⟶ Y)
     (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
