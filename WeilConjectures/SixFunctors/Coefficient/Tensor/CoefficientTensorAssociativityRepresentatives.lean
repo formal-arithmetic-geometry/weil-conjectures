@@ -36,7 +36,6 @@ attribute [local implicit_reducible] CoefficientClosedStructure.tensor
   CategoryTheory.MonoidalCategory.rightAssocTensor
 
 -- Check the categorical pasting once with abstract functors, before specializing to sheaves.
-set_option profiler true in
 private theorem coefficient_tensor_associativity_paste
     {B : Type b} [Category.{vb} B] [MonoidalCategory B]
     {A : Type a} [Category.{va} A] [MonoidalCategory A]
@@ -247,7 +246,6 @@ include cB cA hε hU hκ hμ
 
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
 
-set_option profiler true in
 -- Paste the four model squares without unfolding localization constructions.
 /-- Paste four binary representative squares and the ordinary associativity equation.
 Source: Stacks 07A4 and 0FPT.
