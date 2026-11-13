@@ -49,6 +49,7 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
@@ -114,6 +115,7 @@ lemma baseChangeGaloisModel_j_comp_total :
   simp only [baseChangeGaloisModel, Hom.traitChangeModel_j, Hom.cartesianModel_j, Category.assoc]
   rw [pullback.condition]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the derived pullbacks along the large composites of the base change model are large terms
 /-- The identification `L(j'')^* Lφ^* B ≅ L(ε'')^* A` on the generic fibre of `N''`. -/
@@ -142,6 +144,7 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
+set_option profiler true in
 set_option maxHeartbeats 4000000 in
 -- the integral model is transported along several derived pullbacks of the base change model
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
@@ -219,6 +222,7 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
             (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
 set_option linter.style.whitespace false in
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- comparing the Galois actions of `Gal(L^sep / L)` on the concrete layer is slow
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
