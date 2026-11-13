@@ -29,8 +29,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
--- Elaborating naturality across the composed affine equivalences needs more heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite completed-module equivalence with natural local section cones.
 Source: Stacks Project, Lemma 087W and the affine reduction in Lemma 087X.
@@ -90,14 +88,16 @@ theorem coherentFormalModule_affine_limit_equivalence
         (E.functor.map (T.functor.map f)).hom ≫
           ((p (T.functor.obj G)).app (op n) ≫ (d.inv.app G).app (op n)) =
       ((p (T.functor.obj F)).app (op n) ≫ (d.inv.app F).app (op n)) ≫ _
-    rw [← Category.assoc,
-      hn (T.functor.obj F) (T.functor.obj G) (T.functor.map f) n,
-      Category.assoc, Category.assoc]
     have h := congrArg (fun a ↦ a.app (op n)) (d.inv.naturality f)
     change moduleSpecΓFunctor.map ((T.functor.map f).hom.app (op n)) ≫
         (d.inv.app G).app (op n) = (d.inv.app F).app (op n) ≫
           (SheafOfModules.evaluation V.1.toScheme.ringCatSheaf (op ⊤) ⋙
             ModuleCat.restrictScalars V.1.topIso.inv.hom).map (f.hom.app (op n)) at h
-    exact congrArg ((p (T.functor.obj F)).app (op n) ≫ ·) h
+    exact (Category.assoc _ _ _).symm.trans
+      ((congrArg (· ≫ (d.inv.app G).app (op n))
+        (hn (T.functor.obj F) (T.functor.obj G) (T.functor.map f) n)).trans
+        ((Category.assoc _ _ _).trans
+          ((congrArg ((p (T.functor.obj F)).app (op n) ≫ ·) h).trans
+            (Category.assoc _ _ _).symm)))
 
 end AlgebraicGeometry

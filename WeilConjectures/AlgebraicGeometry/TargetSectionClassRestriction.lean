@@ -78,8 +78,23 @@ private theorem sectionClass_restriction {Y : Scheme.{u}}
   exact congrArg
     (fun t ↦ ((A.sc p).mapHomologyIso (E ⋙ ev.obj (op ⊤))).hom ≫ t) hn
 
+-- Compose the cohomology comparison and section square before specializing their maps.
+private theorem sectionClass_restriction_of_squares
+    {C : Type*} [Category* C] {A₀ A₁ A₂ A₃ A₄ B₀ B₁ B₂ B₃ B₄ B₅ : C}
+    {a : A₀ ⟶ A₁} {b : A₁ ⟶ A₂} {c : A₂ ⟶ A₃} {d : A₃ ⟶ A₄}
+    {q : A₀ ⟶ B₀} {a' : B₀ ⟶ B₁} {b' : B₁ ⟶ B₂} {k : B₂ ⟶ B₃}
+    {r : A₂ ⟶ B₃} {c' : B₃ ⟶ B₄} {d' : B₄ ⟶ B₅} {s : A₄ ⟶ B₅}
+    (hcoh : q ≫ a' ≫ b' ≫ k = a ≫ b ≫ r)
+    (hsec : r ≫ c' ≫ d' = c ≫ d ≫ s) :
+    (a ≫ b ≫ c ≫ d) ≫ s = q ≫ a' ≫ b' ≫ k ≫ c' ≫ d' := by
+  calc
+    (a ≫ b ≫ c ≫ d) ≫ s = (a ≫ b ≫ r) ≫ c' ≫ d' := by
+      simp only [Category.assoc]
+      rw [hsec]
+    _ = (q ≫ a' ≫ b' ≫ k) ≫ c' ≫ d' := congrArg (· ≫ c' ≫ d') hcoh.symm
+    _ = q ≫ a' ≫ b' ≫ k ≫ c' ≫ d' := by simp only [Category.assoc]
+
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 800000 in
 -- Comparing section complexes unfolds both the scheme and ringed-space interfaces.
 private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
     (h : Z ⟶ Y) {G : Z.Modules} (I : InjectiveResolution G)
@@ -98,13 +113,6 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
   have hr := restrictedResolution_cohomology I (h ⁻¹ᵁ V) R p
   have hn := sectionClass_restriction L V p
   dsimp only at hn
-  unfold resolutionSectionClass
-  dsimp only
-  simp only [Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id]
-  erw [CategoryTheory.Functor.map_id]
-  simp only [Category.assoc]
-  erw [Category.id_comp]
-  rw [← hn]
   have hrmap :
       ((NatTrans.mapHomologicalComplex
         (Functor.whiskerLeft (SheafOfModules.forget Z.ringCatSheaf ⋙
@@ -120,15 +128,14 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
         (ComplexShape.up ℕ)).app L) := by
     ext n
     rfl
-  rw [hrmap] at hr
-  have hr' := congrArg (fun q ↦ q ≫
-    (((((SheafOfModules.forget Y.ringCatSheaf).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj L).sc p).mapHomologyIso
-        (PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
-          (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V))).hom ≫
-    ((PresheafOfModules.toPresheaf Y.ringCatSheaf.obj).map
-      (sectionCohomologyTheta L p)).app (op V)) hr
-  simpa only [Category.assoc] using hr'.symm
+  simp only [hrmap] at hr
+  have hs := sectionClass_restriction_of_squares hr hn
+  unfold resolutionSectionClass
+  dsimp only
+  simp only [Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id,
+    CategoryTheory.Functor.map_id]
+  erw [Category.id_comp]
+  exact hs
 
 set_option backward.defeqAttrib.useBackward true in
 /-- The top-open germ of the class computed with a fixed global resolution equals
