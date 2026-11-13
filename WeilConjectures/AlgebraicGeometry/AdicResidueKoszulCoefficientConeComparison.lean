@@ -404,7 +404,6 @@ private theorem existsRingedKoszulConeFamilyComparison
   exact ⟨E, hadd, hlim, hcolim,
     ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc N ν q p hp ε hε⟩
 
-set_option profiler true in
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
 This is a finite comparison: it asserts no eventual vanishing, uses no complex P,
@@ -502,16 +501,16 @@ theorem adicResidue_koszul_coefficient_cone_comparison
               (homOfLE h).op  := by
   have _ := hqA
   cases ha
-  dsimp only
-  intro ε hε
-  exact existsRingedKoszulConeFamilyComparison (A := A)
+  intro O b ε hε
+  let s := fun x : A ↦ ringedKoszulSliceSection
+    (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
+    (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
+      (Ideal.span (Set.range a))) x) U
+  exact existsRingedKoszulConeFamilyComparison.{max v (u + 1)}
+    (C := Over U) (T := (coefficientProEtaleModelTopology.{u, v} X).over U) (A := A)
     ((completed (coefficientProEtaleModelTopology.{u, v} X) A
       (Ideal.span (Set.range a))).over U)
-    (fun x ↦ ringedKoszulSliceSection
-      (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
-      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
-        (Ideal.span (Set.range a))) x) U)
-    r a εA tA qA hεA htA hc
+    s r a εA tA qA hεA htA hc
     (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U)
