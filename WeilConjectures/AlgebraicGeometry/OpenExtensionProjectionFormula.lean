@@ -39,7 +39,6 @@ local instance openExtensionProjectionStandardDerived (X : Scheme.{u}) (U : X.Op
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
-set_option maxHeartbeats 500000 in
 -- The derived-category elaboration needs a larger reduction budget.
 set_option linter.style.haveILetI false in
 /-- Exact extension by zero satisfies the tensor projection formula for any
