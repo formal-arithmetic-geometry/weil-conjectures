@@ -101,8 +101,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   (M : NearbyCyclesModel X X') (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
   [IsOpenImmersion ι]
 
-attribute [local instance 10000000] HasDerivedCategory.standard
-
 -- Elaborating the statement compares the derived categories of the coefficient rings.
 /-- **Restricted nearby cycles of extensions by zero, from the residue field to `𝒪_E`**: let `M`
 be a model of `X` whose total space and geometric generic fibre are quasi-compact and
@@ -159,8 +157,9 @@ of `X` whose inclusion `j` of the geometric generic fibre is quasi-compact and q
 scalars, `Rj_*` on bounded below complexes. -/
 theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicIntegers
     [QuasiCompact M.j] [QuasiSeparated M.j]
-    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) U)))
+    (K₀ : @DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) U)) _ _
+      (HasDerivedCategory.standard _))
     (n : ℤ) (hn : ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
       (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)).IsGE n)
     (h : IsZero ((L((ι)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
