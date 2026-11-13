@@ -115,9 +115,7 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
-  let : Abelian (localEvaluationModules X U) := inferInstance
-  let : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
-  let L : localEvaluationModules X U ⥤
+  let L : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
     (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
@@ -125,11 +123,10 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   have : L.Additive := Functor.additive_of_preserves_binary_products L
   have : PreservesFiniteLimits L := inferInstance
   have : PreservesFiniteColimits L := inferInstance
-  let T : CochainComplex (localEvaluationModules X U) ℤ ⥤
+  let T : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
     L.mapHomologicalComplex (.up ℤ)
-  let E : DerivedCategory.{w} (localEvaluationModules X U) ⥤ schemeDerivedCategory U.toScheme :=
-    L.mapDerivedCategory
+  let E := L.mapDerivedCategory
   let v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
   trace "PH413: functors ready"
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
