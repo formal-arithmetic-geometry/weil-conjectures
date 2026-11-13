@@ -63,6 +63,8 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
+run_cmd IO.FS.writeFile "/tmp/PH468-stage" "imports\n"
+
 omit [Fact (ringChar k').Prime] in
 /-- Descend a Künneth isomorphism along the change of trait, for arbitrary complexes on the
 coordinate slice and on the generic fibre of the second model. -/
@@ -95,6 +97,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
         (Category.comp_id _)).generic)^*⟦𝔽⟧).obj B))) :
     IsIso (kunnethMap 𝔽 (coordinateSliceTraitMap φ₁ b D)
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂)) A B) := by
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper body"
   have hτM :=
     isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hA
   have hBP :=
@@ -107,6 +110,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
       (comp_coordinate_fst hb) D E hBP
   have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
     (K := traitSliceField k') hN E hB
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper exchanges"
   -- the square of Künneth maps along the changes of trait
   have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
     (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
@@ -124,7 +128,10 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
     A B hτM hτN hτP (𝟭 _)
-  run_tac Lean.throwError "PH468: abstract square elaborated"
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper square"
+  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper reflection"
+  exact sq.2 h
 
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
@@ -155,8 +162,31 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
-  run_tac Lean.throwError "PH468: transport skipped for square diagnostic"
-
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport body"
+  -- Infer the complex from its étale-origin proof to reuse the derived-functor instances.
+  have hAS :=
+    ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
+      _ (coordinateSliceTraitGeneric hM b hb D) hA
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport origin"
+  refine isIso_kunnethMap_coordinateSliceTrait_of_isIso_change E hM hN hpb hP hgen hb D
+    hAS hB ?_
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport descent applied"
+  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
+    (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport generic"
+  -- Compose the natural isomorphisms before evaluating them at `A`.
+  have eA := isoWhiskerLeft _
+      (leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).symm ≪≫
+    (leftDerivedUpperStarCompOfEq 𝔽
+      (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+        (traitSlice_over (traitSliceCoord k'))).generic) (q := M.ε) rfl).symm
+  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport natural iso"
+  exact isIso_kunnethMap_of_iso 𝔽
+    (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
+    (eA.app A)
+    ((leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
+      (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
+    h₀
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
