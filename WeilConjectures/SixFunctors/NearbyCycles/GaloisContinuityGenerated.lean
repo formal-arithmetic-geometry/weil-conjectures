@@ -41,6 +41,34 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+-- Reuse the tensor existence proofs when elaborating the derived pullbacks in this file.
+private theorem generatedContinuity_hasTensor₄ObjExt (S : AlgebraicGeometry.Scheme.{u})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology S) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] :
+    ∀ P Q R₁ S₁ : GradedObject ℤ (Mod (Sheaf
+      (AlgebraicGeometry.Scheme.ProEt.topology S) Ab.{u + 1}) R),
+      GradedObject.HasTensor₄ObjExt P Q R₁ S₁ := by
+  infer_instance
+
+private theorem generatedContinuity_hasGoodTensor₁₂Tensor (S : AlgebraicGeometry.Scheme.{u})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology S) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] :
+    ∀ P Q R₁ : GradedObject ℤ (Mod (Sheaf
+      (AlgebraicGeometry.Scheme.ProEt.topology S) Ab.{u + 1}) R),
+      GradedObject.HasGoodTensor₁₂Tensor P Q R₁ := by
+  infer_instance
+
+private theorem generatedContinuity_hasGoodTensorTensor₂₃ (S : AlgebraicGeometry.Scheme.{u})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology S) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] :
+    ∀ P Q R₁ : GradedObject ℤ (Mod (Sheaf
+      (AlgebraicGeometry.Scheme.ProEt.topology S) Ab.{u + 1}) R),
+      GradedObject.HasGoodTensorTensor₂₃ P Q R₁ := by
+  infer_instance
+
+attribute [local instance] generatedContinuity_hasTensor₄ObjExt
+  generatedContinuity_hasGoodTensor₁₂Tensor generatedContinuity_hasGoodTensorTensor₂₃
+
 /-- Cancel an epimorphism after applying functors, and transport through an intertwining iso. -/
 private lemma map_eq_of_epi_comp_of_intertwining
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
