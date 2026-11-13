@@ -70,7 +70,6 @@ private theorem total_map_eq {A : Type*} [Category A] [CategoryTheory.Abelian A]
     HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Keep the four comparison endpoints explicit through the degreewise calculation.
 /-- The hom-oriented total tensor square commutes.
 
@@ -116,35 +115,7 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
     eh ≪≫ H.mapIso ef
   TZ.map (CategoryTheory.Prod.mkHom (γ.app P) (γ.app Q)) ≫ b.hom =
       a.hom ≫ γ.app (TY.obj (P, Q)) := by
-  let F := f.pullback.mapHomologicalComplex (.up ℤ)
-  let G := g.pullback.mapHomologicalComplex (.up ℤ)
-  let H := h.pullback.mapHomologicalComplex (.up ℤ)
-  let K := k.pullback.mapHomologicalComplex (.up ℤ)
-  let γ := (NatIso.mapHomologicalComplex s.modules (.up ℤ)).hom
-  let ef := f.ordinaryTensor.totalIso Y.ring X.ring f.inverseRing
-    f.inverse f.algebraic f.ringMap f.pullback f.object_eq
-    f.pushforward f.moduleAdjunction P Q
-  let eg := g.ordinaryTensor.totalIso Y.ring Y'.ring g.inverseRing
-    g.inverse g.algebraic g.ringMap g.pullback g.object_eq
-    g.pushforward g.moduleAdjunction P Q
-  let eh := h.ordinaryTensor.totalIso X.ring X'.ring h.inverseRing
-    h.inverse h.algebraic h.ringMap h.pullback h.object_eq
-    h.pushforward h.moduleAdjunction (F.obj P) (F.obj Q)
-  let ek := k.ordinaryTensor.totalIso Y'.ring X'.ring k.inverseRing
-    k.inverse k.algebraic k.ringMap k.pullback k.object_eq
-    k.pushforward k.moduleAdjunction (G.obj P) (G.obj Q)
-  let TY := Functor.uncurry.obj
-    ((@MonoidalCategory.curriedTensor (SheafOfModules.{u}
-      ((sheafCompose Y.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring)) _
-      (monoidalCategory Y.ring)).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
-  let TZ := Functor.uncurry.obj
-    ((@MonoidalCategory.curriedTensor (SheafOfModules.{u}
-      ((sheafCompose X'.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj X'.ring)) _
-      (monoidalCategory X'.ring)).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
-  let a : TZ.obj (K.obj (G.obj P), K.obj (G.obj Q)) ≅ K.obj (G.obj (TY.obj (P, Q))) :=
-    ek ≪≫ K.mapIso eg
-  let b : TZ.obj (H.obj (F.obj P), H.obj (F.obj Q)) ≅ H.obj (F.obj (TY.obj (P, Q))) :=
-    eh ≪≫ H.mapIso ef
+  intro F G H K γ ef eg eh ek TY TZ a b
   let := monoidalCategory Y.ring
   let := monoidalCategory X.ring
   let := monoidalCategory Y'.ring
@@ -154,7 +125,7 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
   let := ringedTensorPreadditive Y'.ring
   let := ringedTensorPreadditive X'.ring
   dsimp only [a, b, Iso.trans_hom, Functor.mapIso_hom]
-  rw [total_map_eq]
+  conv_lhs => arg 1; rw [total_map_eq]
   apply HomologicalComplex.Hom.ext
   funext n
   apply HomologicalComplex.mapBifunctor.hom_ext
