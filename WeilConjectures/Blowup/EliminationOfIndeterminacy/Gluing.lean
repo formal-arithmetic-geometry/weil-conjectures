@@ -105,9 +105,24 @@ lemma Scheme.IdealSheafData.homOfVector_awaySlope_compat {X : Scheme.{u}}
   · rw [← Category.assoc, ← Category.assoc, K.specMap_awayMap_blowupChart V ha ha']
   · exact AffineBlowup.awayMap_awaySlope_eq ha ha' (hb j) (hb' j) (hrel j)
 
+/-- Compatible morphisms over a base glue along any jointly surjective family of open
+immersions. Keeping the chart schemes abstract avoids expanding their coordinate rings. -/
+private lemma Scheme.exists_glued_hom_over {B Y Z : Scheme.{u}} {ι : Type u}
+    {U : ι → Scheme.{u}} (c : ∀ i, U i ⟶ Z) [∀ i, IsOpenImmersion (c i)]
+    (hc : ∀ x : Z, ∃ i y, c i y = x) (p : Y ⟶ B) (q : Z ⟶ B)
+    (f : ∀ i, U i ⟶ Y)
+    (hcompat : ∀ i i', pullback.fst (c i) (c i') ≫ f i =
+      pullback.snd (c i) (c i') ≫ f i')
+    (hf : ∀ i, f i ≫ p = c i ≫ q) :
+    ∃ g : Z ⟶ Y, g ≫ p = q ∧ ∀ i, c i ≫ g = f i := by
+  let 𝒰 : Z.OpenCover := Scheme.Cover.mkOfCovers ι U c hc
+  refine ⟨𝒰.glueMorphisms f hcompat, ?_, 𝒰.ι_glueMorphisms f hcompat⟩
+  apply 𝒰.hom_ext
+  intro i
+  exact (Category.assoc _ _ _).symm.trans
+    ((congrArg (fun k ↦ k ≫ p) (𝒰.ι_glueMorphisms f hcompat i)).trans (hf i))
+
 set_option profiler true in
-set_option maxHeartbeats 400000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Gluing the chart-local extensions.** Let `a i` and `b i j` be sections of the centre
 `K` over an affine open `V` satisfying the exact relations `b i j * a i' = b i' j * a i`.
 On the chart of the blow-up at `a i` the degree-one slope `b i j / a i` extends the `j`-th
@@ -160,20 +175,10 @@ lemma Scheme.IdealSheafData.exists_hom_affineSpace_of_awaySlope {X : Scheme.{u}}
       exact K.isPullback_blowupChart V (ha i) (ha i')
     exact hpb.fst_comp_eq_snd_comp _ _
       (K.homOfVector_awaySlope_compat V (ha i) (ha i') (hb i) (hb i') (hrel i i'))
-  let 𝒰 : W.toScheme.OpenCover := Scheme.Cover.mkOfCovers ι _ ci hcov
-  have hcompat' : ∀ i i' : ι, pullback.fst (𝒰.f i) (𝒰.f i') ≫ AffineSpace.homOfVector
-        (K.blowupChart V (ha i) ≫ K.blowupMap)
-        (fun j ↦ (Scheme.ΓSpecIso _).inv
-          (AffineBlowup.awaySlope (K.ideal V) (ha i) (hb i j))) =
-      pullback.snd (𝒰.f i) (𝒰.f i') ≫ AffineSpace.homOfVector
-        (K.blowupChart V (ha i') ≫ K.blowupMap)
-        (fun j ↦ (Scheme.ΓSpecIso _).inv
-          (AffineBlowup.awaySlope (K.ideal V) (ha i') (hb i' j))) := hcompat
-  refine ⟨𝒰.glueMorphisms _ hcompat', ?_, fun i ↦ 𝒰.ι_glueMorphisms _ hcompat' i⟩
-  refine Scheme.Cover.hom_ext 𝒰 _ _ fun i ↦ ?_
-  have h2 : 𝒰.f i ≫ W.ι = K.blowupChart V (ha i) := hci i
-  rw [← Category.assoc, ← Category.assoc, 𝒰.ι_glueMorphisms _ hcompat' i,
-    AffineSpace.homOfVector_over, h2]
+  refine Scheme.exists_glued_hom_over ci hcov (𝔸(σ; X) ↘ X) (W.ι ≫ K.blowupMap)
+    _ hcompat fun i ↦ ?_
+  exact (AffineSpace.homOfVector_over _ _).trans
+    ((congrArg (fun k ↦ k ≫ K.blowupMap) (hci i).symm).trans (Category.assoc _ _ _))
 
 /-- The global sections of the blow-up chart over an affine scheme pull sections of `X` back
 through the structure map of the chart ring. -/

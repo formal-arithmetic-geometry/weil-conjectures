@@ -31,8 +31,6 @@ variable {A : Type u} [CommRing A] {I : Ideal A}
 variable {X : Scheme.{u}}
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Closedness of the graph of the glued extension.** -/
 lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
     (K : X.IdealSheafData) (V : X.affineOpens) {σ ι : Type u}
@@ -62,7 +60,8 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
         K.blowupMap =
       AffineSpace.map σ (K.blowupChart V (hgen k) ≫ K.blowupMap) ≫ 𝔸(σ; X) ↘ X := by
     intro k
-    rw [Category.assoc, AffineSpace.map_over]
+    exact (Category.assoc _ _ _).trans
+      (AffineSpace.map_over (K.blowupChart V (hgen k) ≫ K.blowupMap)).symm
   let qk : ∀ k, 𝔸(σ; Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
       (reesX (K.ideal V) (gen k) (hgen k))))) ⟶ pullback K.blowupMap (𝔸(σ; X) ↘ X) :=
     fun k ↦ pullback.lift _ _ (hlift k)
@@ -125,7 +124,9 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       exact (le_iSup (fun i ↦ PrimeSpectrum.basicOpen
         (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))) i).trans_eq hO.symm
     -- `O` and `B` are passed explicitly: inferring them by unification is slow.
-    refine AffineSpace.isClosed_range_of_basicOpen_fractions (O := K.blowupChart V (hgen k) ⁻¹ᵁ W)
+    refine AffineSpace.isClosed_range_of_basicOpen_fractions
+      (S := .of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+        (reesX (K.ideal V) (gen k) (hgen k)))) (O := K.blowupChart V (hgen k) ⁻¹ᵁ W)
       (B := fun i ↦ PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)))
       (fun i ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))
       (fun i j ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (hb i j)) ?_ ?_
@@ -143,12 +144,8 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       rw [mul_comm (a i), hrel i' i j, mul_comm]
     · -- the coordinate identity on each piece
       intro i j
-      -- The goal and the type of the lemma agree up to unfolding, but not syntactically.
-      -- `convert` matches them argument by argument and closes every resulting goal by `rfl`;
-      -- `exact` checks the definitional equality at once, unfolding the chart rings, and makes
-      -- the file about four times slower.
-      convert K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
-        (hgi i) rfl (hBle i) j using 2
+      exact K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
+        (hgi i) rfl (hBle i) j
 
 end Closedness
 
