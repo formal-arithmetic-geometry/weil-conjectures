@@ -95,7 +95,6 @@ private theorem scalar_route_pasting
   simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hn]
 
-set_option trace.profiler true in
 -- The counit calculation contains several nested derived functor comparisons.
 /-- The scalar route computes the ordinary balanced pullback map.
 
@@ -130,23 +129,14 @@ theorem scalar_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
         (V a X).map (lam.hom.app (DerivedCategory.Qh.obj P)) ≫
         tX.derived.hom.app ((L Λ f).obj (DerivedCategory.Qh.obj P)) ≫
         scalarTensorPullModelTarget a f P = scalarTensorPullModelMap a f P := by
-  rw [scalar_pull_tensor_counit a f tX hX P]
-  have h := scalar_restriction_counit a f lam hlam P
-  have ho := scalar_ordinary_tensor_pull_model a f P
   unfold scalarTensorPullModelMap Functor.tensorModelMapWith
-  erw [IntegralResidueScalarCounitModel.tensorPresentation_app (coefficientMap a Y) P]
-  simp only [Functor.map_comp]
-  dsimp only at h ho
-  erw [reassoc_of% h]
-  simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
-  have ho' := congrArg DerivedCategory.Qh.map ho
-  erw [ho']
-  have hn := (pullCounit (Λ := Λ) f).naturality
-    ((Mod.tensorPresentationHomotopyIso (coefficientMap a Y)).hom.app P)
-  dsimp only [Functor.comp_map] at hn
-  simp only [Functor.map_comp, Category.assoc]
-  erw [← reassoc_of% hn]
-  unfold scalarCounit
   dsimp only [id]
+  exact scalar_route_pasting (L Λ f) DerivedCategory.Qh
+    ((CondensedRing.upperStar Λ f).mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh
+    (pullCounit (Λ := Λ) f) _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+    (scalar_pull_tensor_counit a f tX hX P)
+    (IntegralResidueScalarCounitModel.tensorPresentation_app (coefficientMap a Y) P)
+    (scalar_restriction_counit a f lam hlam P)
+    (by simpa only [Category.assoc] using scalar_ordinary_tensor_pull_model a f P)
 
 end AlgebraicGeometry.ProEtale.QuotientChange
