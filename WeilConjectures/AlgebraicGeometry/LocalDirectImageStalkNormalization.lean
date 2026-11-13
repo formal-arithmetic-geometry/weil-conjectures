@@ -81,15 +81,7 @@ private theorem restriction_iso {Y : Scheme.{u}} (U : Y.Opens) (hU : U = ⊤)
   exact fmap_iso _ _ p
 
 
-private theorem inverse_normalization_of_surjective {A B C : Type*}
-    (e : A → B) (s : B → A) (hs : Function.LeftInverse s e)
-    (r : A → C) (g : C → B) (hr : Function.Surjective r)
-    (q : A → B) (he : ∀ a, e a = q a) (h : ∀ a, q a = g (r a))
-    (c : C) : r (s (g c)) = c := by
-  obtain ⟨a, rfl⟩ := hr c
-  rw [← h a, ← he a, hs a]
-
-set_option trace.profiler true in
+set_option profiler true in
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
 (blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology-normalization)
@@ -145,7 +137,7 @@ theorem localDirectImage_stalk_cohomology_normalization
                 p).obj
                 ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj
                   F))).presheaf V y hy (D.targetClass p xi))) = xi := by
-  intro I K V hy D xi
+  intro I K V hy D
   have hc : (Y.fromSpecStalk y) ⁻¹ᵁ V = ⊤ := by
     apply top_unique
     intro q _
@@ -159,18 +151,18 @@ theorem localDirectImage_stalk_cohomology_normalization
     simp
   have hi := restriction_iso _ hW
     ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p
-  let r := Scheme.Modules.moduleCohomologyRestriction
-    ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V))
-    ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p
-  let g := TopCat.Presheaf.germ
-    ((Scheme.Modules.pushforward (Y.fromSpecStalk y)).obj
-      (((Scheme.Modules.pushforward (pullback.fst (Y.fromSpecStalk y) f)).rightDerived p).obj
-        ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))).presheaf
-    V y hy
+  let r := Scheme.Modules.moduleCohomologyFMap
+    ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι
+    ((Scheme.Modules.restrictAdjunction
+      ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app
+        ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p
   have hr : Function.Surjective r := (ConcreteCategory.bijective_of_isIso r).2
-  have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D
-  have hnormalization := inverse_normalization_of_surjective e e.symm.toLinearMap e.symm_apply_apply
-    r (fun z ↦ g (D.targetClass p z)) hr (localDirectImage_stalk_class f y F p) he hclass xi
-  exact hnormalization
+  apply hr.forall.mpr
+  intro eta
+  have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
+  have heclass := (he eta).trans hclass
+  have hs := congrArg e.symm heclass
+  have hs' := (e.symm_apply_apply eta).symm.trans hs
+  exact congrArg r hs'.symm
 
 end AlgebraicGeometry
