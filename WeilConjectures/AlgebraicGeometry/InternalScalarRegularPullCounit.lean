@@ -181,10 +181,7 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
   erw [hnX]
   erw [reassoc_of% restriction_pull_single a f (Mod.regular (condensedRingObj Λ' Y))]
   simp only [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  conv_lhs =>
-    arg 2
-    rw [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
-  rfl
+  erw [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
 
 end NativeUnit
 
