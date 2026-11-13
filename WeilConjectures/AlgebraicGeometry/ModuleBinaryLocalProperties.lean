@@ -148,7 +148,7 @@ end SiteHelpers
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option profiler true in
+set_option trace.profiler true in
 set_option backward.defeqAttrib.useBackward true in
 -- Transport across iterated slice sites requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
@@ -191,29 +191,18 @@ theorem module_binary_local_properties
     have := hf
     let E := Over.iteratedSliceEquiv (Over.mk (homOfLE hA : A ⟶ W ⊔ V))
     have : E.inverse.IsDenseSubsite (J.over A)
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) := by
-      refine { functorPushforward_mem_iff := ?_ }
-      intro T S
-      simp only [E, GrothendieckTopology.mem_over_iff, Sieve.overEquiv,
-        RelIso.coe_fn_mk, Equiv.coe_fn_mk]
-      dsimp [Over.iteratedSliceEquiv]
-      rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
-      rfl
-    have : E.functor.IsContinuous
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A) := by
-      infer_instance
-    have : E.functor.IsCocontinuous
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A) := by
-      infer_instance
+        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) :=
+      inferInstanceAs ((Over.iteratedSliceEquiv
+        (Over.mk (homOfLE hA : A ⟶ W ⊔ V))).inverse.IsDenseSubsite
+          ((_root_.Opens.grothendieckTopology X).over A)
+          (((_root_.Opens.grothendieckTopology X).over (W ⊔ V)).over
+            (Over.mk (homOfLE hA : A ⟶ W ⊔ V))))
     have (T : Over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) :
         (Over.post (X := T) E.functor).IsContinuous
           (((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))).over T)
-          ((J.over A).over (E.functor.obj T)) := by
-      apply Functor.isContinuous_of_coverPreserving
-        (compatiblePreservingOfFlat _ _) _
-      exact (Functor.IsDenseSubsite.coverPreserving
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V)))
-        (J.over A) E.functor).overPost T
+          ((J.over A).over (E.functor.obj T)) :=
+      Functor.IsCoverDense.isContinuous _ _ _
+        ((Functor.IsDenseSubsite.coverPreserving _ _ E.functor).overPost T)
     let S := (R.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))
     let φ : S ⟶ (E.functor.sheafPushforwardContinuous RingCat
         ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A)).obj

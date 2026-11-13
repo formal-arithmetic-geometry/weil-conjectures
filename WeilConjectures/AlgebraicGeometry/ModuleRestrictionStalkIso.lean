@@ -53,7 +53,7 @@ private theorem bijective_of_restrict_germ
   exact hb
 
 -- Identifying the slice-site restriction with the subspace presheaf unfolds colimit instances.
-set_option profiler true in
+set_option trace.profiler true in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -90,7 +90,11 @@ theorem nonempty_moduleRestrictionStalk_iso
   let S : PresheafedSpace AddCommGrpCat.{u} := ⟨X.carrier, F.val.presheaf⟩
   let N := (U.sheafOfModulesEquivOver (moduleRings X)).functor.obj (F.over U)
   -- Identify the presheaves before taking stalks, avoiding a large colimit type comparison.
-  let d : N.val.presheaf ≅ (S.restrict U.isOpenEmbedding).presheaf := Iso.refl _
+  let d : N.val.presheaf ≅ (S.restrict U.isOpenEmbedding).presheaf :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
+      intro V W f
+      simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+      rfl)
   have hb : Function.Bijective (c F) :=
     bijective_of_restrict_germ S U x hxU N.val.presheaf d (c F) (hc F)
   have : IsIso (c F) := (ConcreteCategory.isIso_iff_bijective (c F)).mpr hb
