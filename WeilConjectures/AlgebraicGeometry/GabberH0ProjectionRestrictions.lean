@@ -83,7 +83,6 @@ private theorem pullbackComp_assoc_hom {C : Type*} [Category C] [HasPullbacks C]
   rw [transport (j ≫ g ≫ f) (Category.assoc j g f).symm, Category.assoc] at hp
   rw [hp, ← Category.assoc, eqToHom_trans, eqToHom_refl, Category.id_comp]
 
-set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 private theorem comparison_assoc {X Y W V : Scheme.{u}}
     (f : Y ⟶ X) (g : W ⟶ Y) (j : V ⟶ W)
@@ -128,12 +127,9 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
     (etaleSetDescentUnit (j ≫ g) ((Scheme.etaleSetPullback f).obj F)
       ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U) s)
   unfold etaleSetDescentComparison
-  trace "comparison: hn₁"
   erw [hn₁]
   simp only [ConcreteCategory.comp_apply] at hn₃
-  trace "comparison: hn₃"
   erw [hn₃]
-  trace "comparison: hn₂"
   erw [hn₂]
   let v := etaleSetDescentUnit j ((Scheme.etaleSetPullback g).obj ((Scheme.etaleSetPullback f).obj
     F))
@@ -145,25 +141,19 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
       f).obj U))))) v
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     ConcreteCategory.comp_apply] at hc'
-  trace "comparison: hc'"
   erw [hc']
   have hv := pullbackComp_assoc_hom (@Etale) f g j U
-  trace "comparison: map_comp"
   refine (heq_of_eq
     (((Scheme.etaleSetPullback (j ≫ g ≫ f)).obj F).obj.map_comp_apply
       (((MorphismProperty.Over.pullback @Etale ⊤ j).map (pc.hom.app U)).op)
       (((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) j (g ≫ f)).hom.app U).op)
       _).symm).trans ?_
-  trace "comparison: map_transport"
   refine (map_transport (Category.assoc j g f) F U
     ((MorphismProperty.Over.pullback @Etale ⊤ j).obj ((MorphismProperty.Over.pullback @Etale ⊤
       g).obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))) _ _ hv _).trans ?_
   simp only [ConcreteCategory.comp_apply] at hn₄
-  trace "comparison: hu"
   erw [hu]
-  trace "comparison: hn₄"
   erw [hn₄]
-  trace "comparison: second map_comp"
   erw [← ((Scheme.etaleSetPullback ((j ≫ g) ≫ f)).obj F).obj.map_comp_apply, ← op_comp]
   erw [@Category.assoc V.Etale inferInstance, Iso.hom_inv_id_app, Category.comp_id]
   rfl
