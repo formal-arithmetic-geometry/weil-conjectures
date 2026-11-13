@@ -98,8 +98,7 @@ private theorem pairPreimage_snd
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Comparing the two scalar actions unfolds the underlying-set restriction presentations.
+-- Compose pointwise equalities to avoid rewriting through the bundled restriction presentations.
 private theorem inverse_change_hom
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]
@@ -136,99 +135,80 @@ private theorem inverse_change_hom
         (show N'.val.obj W from α.hom.app W x) +
           (show N'.val.obj W from α.hom.app W y) := by
     let X := (sets S).obj M
-    let z := pairPreimage L X X W
-      ((A.moduleUnderlying.hom.app MR).hom.app W x)
-      ((A.moduleUnderlying.hom.app MR).hom.app W y)
-    have hA := A.moduleAdd MR (X ⊗ X) (CartesianMonoidalCategory.fst X X)
-      (CartesianMonoidalCategory.snd X X) (addMap M) (fun _ _ ↦ rfl) W z
-    have hB := B.moduleAdd M (X ⊗ X) (CartesianMonoidalCategory.fst X X)
-      (CartesianMonoidalCategory.snd X X) (addMap M) (fun _ _ ↦ rfl) W z
-    change (A.moduleUnderlying.inv.app MR).hom.app W
-      ((L.map (addMap M)).hom.app W z) =
-      (show N.val.obj W from (A.moduleUnderlying.inv.app MR).hom.app W
-        ((L.map (CartesianMonoidalCategory.fst X X)).hom.app W z)) +
-      (show N.val.obj W from (A.moduleUnderlying.inv.app MR).hom.app W
-        ((L.map (CartesianMonoidalCategory.snd X X)).hom.app W z)) at hA
-    change (B.moduleUnderlying.inv.app M).hom.app W
-      ((L.map (addMap M)).hom.app W z) =
-      (show (B.modules.obj M).val.obj W from (B.moduleUnderlying.inv.app M).hom.app W
-        ((L.map (CartesianMonoidalCategory.fst X X)).hom.app W z)) +
-      (show (B.modules.obj M).val.obj W from (B.moduleUnderlying.inv.app M).hom.app W
-        ((L.map (CartesianMonoidalCategory.snd X X)).hom.app W z)) at hB
-    erw [pairPreimage_fst, pairPreimage_snd] at hA hB
-    have he (t : N.val.obj W) :
-        (A.moduleUnderlying.inv.app MR).hom.app W
-          ((A.moduleUnderlying.hom.app MR).hom.app W t) = t :=
+    let u : N.val.obj W → (L.obj X).obj.obj W :=
+      (A.moduleUnderlying.hom.app MR).hom.app W
+    let v : (L.obj X).obj.obj W → N.val.obj W :=
+      (A.moduleUnderlying.inv.app MR).hom.app W
+    let w : (L.obj X).obj.obj W → (B.modules.obj M).val.obj W :=
+      (B.moduleUnderlying.inv.app M).hom.app W
+    let z := pairPreimage L X X W (u x) (u y)
+    have hp := pairPreimage_fst L X X W (u x) (u y)
+    have hq := pairPreimage_snd L X X W (u x) (u y)
+    have hv (t : N.val.obj W) : v (u t) = t :=
       congrArg (fun f ↦ f.hom.app W t) (A.moduleUnderlying.hom_inv_id_app MR)
-    rw [he x, he y] at hA
-    change (B.moduleUnderlying.inv.app M).hom.app W
-        ((A.moduleUnderlying.hom.app MR).hom.app W (x + y)) = _
-    rw [← hA]
-    have hz : (A.moduleUnderlying.hom.app MR).hom.app W
-        ((A.moduleUnderlying.inv.app MR).hom.app W
-          ((L.map (addMap M)).hom.app W z)) = (L.map (addMap M)).hom.app W z :=
-      congrArg (fun f ↦ f.hom.app W ((L.map (addMap M)).hom.app W z))
-        (A.moduleUnderlying.inv_hom_id_app MR)
-    rw [hz]
-    exact hB
+    have hA : v ((L.map (addMap M)).hom.app W z) = x + y :=
+      (A.moduleAdd MR (X ⊗ X) (CartesianMonoidalCategory.fst X X)
+        (CartesianMonoidalCategory.snd X X) (addMap M) (fun _ _ ↦ rfl) W z).trans
+        (congrArg₂ (fun (a b : N.val.obj W) ↦ a + b)
+          ((congrArg v hp).trans (hv x)) ((congrArg v hq).trans (hv y)))
+    have hB : w ((L.map (addMap M)).hom.app W z) = w (u x) + w (u y) :=
+      (B.moduleAdd M (X ⊗ X) (CartesianMonoidalCategory.fst X X)
+        (CartesianMonoidalCategory.snd X X) (addMap M) (fun _ _ ↦ rfl) W z).trans
+        (congrArg₂ (fun (a b : (B.modules.obj M).val.obj W) ↦ a + b)
+          (congrArg w hp) (congrArg w hq))
+    have hu (t : (L.obj X).obj.obj W) : u (v t) = t :=
+      congrArg (fun f ↦ f.hom.app W t) (A.moduleUnderlying.inv_hom_id_app MR)
+    exact (congrArg (fun t ↦ w (u t)) hA).symm.trans
+      ((congrArg w (hu _)).trans hB)
   have hs (W : Dᵒᵖ) (r : RU.obj.obj W) (x : N.val.obj W) :
       α.hom.app W (r • x) = r • (show N'.val.obj W from α.hom.app W x) := by
     let X := (sets S).obj M
     let Y := ringSets R
-    let z := pairPreimage L Y X W
-      ((A.ringUnderlying.inv).hom.app W r)
-      ((A.moduleUnderlying.hom.app MR).hom.app W x)
+    let u : N.val.obj W → (L.obj X).obj.obj W :=
+      (A.moduleUnderlying.hom.app MR).hom.app W
+    let v : (L.obj X).obj.obj W → N.val.obj W :=
+      (A.moduleUnderlying.inv.app MR).hom.app W
+    let w : (L.obj X).obj.obj W → (B.modules.obj M).val.obj W :=
+      (B.moduleUnderlying.inv.app M).hom.app W
+    let z := pairPreimage L Y X W ((A.ringUnderlying.inv).hom.app W r) (u x)
     let t : Y ⊗ X ⟶ X :=
       (CartesianMonoidalCategory.lift
-        (CartesianMonoidalCategory.fst Y X ≫ (sheafCompose K
-          (CategoryTheory.forget CommRingCat.{w})).map a)
+        (CartesianMonoidalCategory.fst Y X ≫
+          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map a)
         (CartesianMonoidalCategory.snd Y X)) ≫ smulMap M
-    have hA := A.moduleSMul MR (Y ⊗ X) (CartesianMonoidalCategory.fst Y X)
-      (CartesianMonoidalCategory.snd Y X) t (fun _ _ ↦ rfl) W z
-    have hB := B.moduleSMul M (Y ⊗ X)
-      (CartesianMonoidalCategory.fst Y X ≫ (sheafCompose K
-          (CategoryTheory.forget CommRingCat.{w})).map a)
-      (CartesianMonoidalCategory.snd Y X) t (fun _ _ ↦ rfl) W z
+    have hp := pairPreimage_fst L Y X W ((A.ringUnderlying.inv).hom.app W r) (u x)
+    have hq := pairPreimage_snd L Y X W ((A.ringUnderlying.inv).hom.app W r) (u x)
     have hr : (A.ringUnderlying.hom).hom.app W
-      ((L.map (CartesianMonoidalCategory.fst Y X)).hom.app W z) = r := by
-      erw [pairPreimage_fst]
-      exact congrArg (fun f ↦ f.hom.app W r) A.ringUnderlying.inv_hom_id
-    have hx : (A.moduleUnderlying.inv.app MR).hom.app W
-      ((L.map (CartesianMonoidalCategory.snd Y X)).hom.app W z) = x := by
-      erw [pairPreimage_snd]
-      exact congrArg (fun f ↦ f.hom.app W x) (A.moduleUnderlying.hom_inv_id_app MR)
+        ((L.map (CartesianMonoidalCategory.fst Y X)).hom.app W z) = r :=
+      (congrArg ((A.ringUnderlying.hom).hom.app W) hp).trans
+        (congrArg (fun f ↦ f.hom.app W r) A.ringUnderlying.inv_hom_id)
+    have hx : v ((L.map (CartesianMonoidalCategory.snd Y X)).hom.app W z) = x :=
+      (congrArg v hq).trans
+        (congrArg (fun f ↦ f.hom.app W x) (A.moduleUnderlying.hom_inv_id_app MR))
     have hr' : (B.ringUnderlying.hom).hom.app W
       ((L.map (CartesianMonoidalCategory.fst Y X ≫
-        (sheafCompose K
-          (CategoryTheory.forget CommRingCat.{w})).map a)).hom.app W z) = b.hom.app W r := by
+        (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map a)).hom.app W z) =
+        b.hom.app W r := by
       have h := congrArg (fun f ↦ f.hom.app W
         ((L.map (CartesianMonoidalCategory.fst Y X)).hom.app W z)) hc
       simp only [eqToHom_refl, Category.id_comp] at h
       erw [L.map_comp]
       exact h.symm.trans (congrArg (fun q ↦ b.hom.app W q) hr)
-    change (A.moduleUnderlying.inv.app MR).hom.app W ((L.map t).hom.app W z) =
-      (show RU.obj.obj W from (A.ringUnderlying.hom).hom.app W
-        ((L.map (CartesianMonoidalCategory.fst Y X)).hom.app W z)) •
-      (show N.val.obj W from (A.moduleUnderlying.inv.app MR).hom.app W
-        ((L.map (CartesianMonoidalCategory.snd Y X)).hom.app W z)) at hA
-    erw [hr, hx] at hA
-    change (B.moduleUnderlying.inv.app M).hom.app W ((L.map t).hom.app W z) =
-      (show SU.obj.obj W from (B.ringUnderlying.hom).hom.app W
-        ((L.map (CartesianMonoidalCategory.fst Y X ≫
-          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map a)).hom.app W z)) •
-      (show (B.modules.obj M).val.obj W from (B.moduleUnderlying.inv.app M).hom.app W
-        ((L.map (CartesianMonoidalCategory.snd Y X)).hom.app W z)) at hB
-    erw [hr', pairPreimage_snd] at hB
-    change (B.moduleUnderlying.inv.app M).hom.app W
-      ((A.moduleUnderlying.hom.app MR).hom.app W (r • x)) = _
-    rw [← hA]
-    have hz : (A.moduleUnderlying.hom.app MR).hom.app W
-        ((A.moduleUnderlying.inv.app MR).hom.app W ((L.map t).hom.app W z)) =
-        (L.map t).hom.app W z :=
-      congrArg (fun f ↦ f.hom.app W ((L.map t).hom.app W z))
-        (A.moduleUnderlying.inv_hom_id_app MR)
-    rw [hz]
-    exact hB
+    have hA : v ((L.map t).hom.app W z) = r • x :=
+      (A.moduleSMul MR (Y ⊗ X) (CartesianMonoidalCategory.fst Y X)
+        (CartesianMonoidalCategory.snd Y X) t (fun _ _ ↦ rfl) W z).trans
+        (congrArg₂ (fun (r : RU.obj.obj W) (x : N.val.obj W) ↦ r • x) hr hx)
+    have hB : w ((L.map t).hom.app W z) = b.hom.app W r • w (u x) :=
+      (B.moduleSMul M (Y ⊗ X)
+        (CartesianMonoidalCategory.fst Y X ≫
+          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map a)
+        (CartesianMonoidalCategory.snd Y X) t (fun _ _ ↦ rfl) W z).trans
+        (congrArg₂ (fun (r : SU.obj.obj W) (x : (B.modules.obj M).val.obj W) ↦ r • x)
+          hr' (congrArg w hq))
+    have hu (q : (L.obj X).obj.obj W) : u (v q) = q :=
+      congrArg (fun f ↦ f.hom.app W q) (A.moduleUnderlying.inv_hom_id_app MR)
+    exact (congrArg (fun q ↦ w (u q)) hA).symm.trans
+      ((congrArg w (hu _)).trans hB)
   let f : N ⟶ N' :=
     { val :=
         { app := fun W ↦
