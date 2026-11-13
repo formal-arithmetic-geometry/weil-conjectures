@@ -345,7 +345,9 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
       ((modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
         (by rw [← hf₁]; rfl)).hom.toNatTrans.app (Modules.unitObj X))
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
-  · simpa only [unitDescentData] using hc
+  · dsimp only [descentData, unitDescentData, Pseudofunctor.toDescentData,
+      Pseudofunctor.DescentData.ofObj] at hc ⊢
+    exact hc
 
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     (M : modulesPseudofunctor.obj (.mk (op X)))
