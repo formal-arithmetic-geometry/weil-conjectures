@@ -188,12 +188,24 @@ theorem coefficientTensorAssociativityOnRepresentatives
           (Y := (A.obj (V.obj P, V.obj Q), V.obj N))
           (chain.hom.app (P, Q), 𝟙 (V.obj N)) ≫ aA.hom := by
     exact hκ P Q N aB aA haB haA
-  simp only [show cB.tensorIso PQ N (Or.inr hN) = TB.iso J R SB PQ N hPQ hN from
-      cB.tensorIso_both PQ N hPQ hN,
-    cB.tensorIso_both P QN hP hQN] at heB
-  simp only [show cA.tensorIso (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inr hUN) =
-      TA.iso J' R' SA _ _ hAPQ hUN from cA.tensorIso_both _ _ hAPQ hUN,
-    cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN] at heA
+  conv at heB =>
+    lhs
+    arg 1
+    rw [cB.tensorIso_both PQ N hPQ hN]
+  conv at heB =>
+    rhs
+    arg 2
+    arg 1
+    rw [cB.tensorIso_both P QN hP hQN]
+  conv at heA =>
+    lhs
+    arg 1
+    rw [cA.tensorIso_both (A.obj (V.obj P, V.obj Q)) (V.obj N) hAPQ hUN]
+  conv at heA =>
+    rhs
+    arg 2
+    arg 1
+    rw [cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN]
   let bPQ := TB.iso J R SB P Q hP hQ
   let bQN := TB.iso J R SB Q N hQ hN
   let bL := TB.iso J R SB PQ N hPQ hN
@@ -239,11 +251,25 @@ theorem coefficientTensorAssociativityOnRepresentatives
   have hnL := cA.tensorIso_naturality (V.obj PQ) (V.obj N)
     (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inl hUPQ) (Or.inl hAPQ)
     (chain.hom.app (P, Q)) (𝟙 (V.obj N))
-  simp only [cA.tensorIso_both _ _ hUPQ hUN, cA.tensorIso_both _ _ hAPQ hUN] at hnL
+  conv at hnL =>
+    lhs
+    arg 2
+    rw [cA.tensorIso_both (A.obj (V.obj P, V.obj Q)) (V.obj N) hAPQ hUN]
+  conv at hnL =>
+    rhs
+    arg 1
+    rw [cA.tensorIso_both (V.obj PQ) (V.obj N) hUPQ hUN]
   have hnR := cA.tensorIso_naturality (V.obj P) (V.obj QN)
     (V.obj P) (A.obj (V.obj Q, V.obj N)) (Or.inl hUP) (Or.inl hUP)
     (𝟙 (V.obj P)) (chain.hom.app (Q, N))
-  simp only [cA.tensorIso_both _ _ hUP hUQN, cA.tensorIso_both _ _ hUP hAQN] at hnR
+  conv at hnR =>
+    lhs
+    arg 2
+    rw [cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN]
+  conv at hnR =>
+    rhs
+    arg 1
+    rw [cA.tensorIso_both (V.obj P) (V.obj QN) hUP hUQN]
   simp only [CoefficientClosedStructure.tensor, tensor_obj, tensor_map,
     DerivedCategory.Q.map_id] at hnL
   erw [tensorHom_id] at hnL
