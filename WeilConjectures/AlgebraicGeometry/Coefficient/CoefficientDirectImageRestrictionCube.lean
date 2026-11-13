@@ -141,15 +141,11 @@ theorem coefficientDirectImageRestrictionCube
   intro U
   ext x
   dsimp only [a, d, H, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    restrictionComp_apply, restrictionComp_inv_apply]
-  dsimp only [pbcRestrict, proEtaleRingRestrictScalars, proEtaleRingModuleDirectImage,
-    SheafOfModules.restrictScalars, SheafOfModules.pushforward,
-    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
-    PresheafOfModules.restrictScalars, Functor.comp_map, ModuleCat.restrictScalars,
-    ModuleCat.RestrictScalars.map']
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp, hiInv, cpApp]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app]
+  simp only [ModuleCat.restrictScalars.map_apply,
+    PresheafOfModules.pushforward_map_app_apply]
+  rw [restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp,
+    hiInv, cpApp, restrictionComp_apply, restrictionComp_inv_apply]
 
 
 end AlgebraicGeometry.Scheme
