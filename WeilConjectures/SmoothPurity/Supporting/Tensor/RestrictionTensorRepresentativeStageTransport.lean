@@ -89,9 +89,7 @@ theorem pairRepresentative_eq_of_stage_transport
   rw [hv]
   exact (StageSystem.PairCategory.mkHom_tr h u).symm
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- The categorical component calculation checks several equivalent coefficient-category instances.
 /--
 At the level of the finite coefficient stage, the mixed scalar square and the
 naturality of the tensor comparison identify the representative at an extension
@@ -171,7 +169,11 @@ theorem restrictionTensorRepresentativeStageTransport
   have square (E K : Index l Ω) (k : E ≤ K) :=
     restrictionTensorNormalizedSquare l Ω f mu mixed E K k
   have hc (K : Index l Ω) (k : H ≤ K) : c K k = (SY.T k).map d := by
-    have hm := mixedTensorStageComponent SX SY R (T X) (T Y) p
+    dsimp only [c, a, z]
+    rw [← commonStagePullback_endpoint l Ω f (commonStageTensorObject l Ω X A B) K k,
+      ← commonStageTensor_endpoint l Ω X A B K k,
+      ← commonStageTensor_endpoint l Ω Y PA PB K k]
+    exact mixedTensorStageComponent SX SY R (T X) (T Y) p
       (rationalPullbackStageComparison_coherent l Ω f) (t X) (t Y) mu
       (fun {_ _} k ↦ square _ _ k) A B
       (fun K k ↦ commonStagePullbackComparison l Ω f A K k)
@@ -179,28 +181,6 @@ theorem restrictionTensorRepresentativeStageTransport
       (fun K k ↦ (commonStagePullback_endpoint l Ω f A K k).symm)
       (fun K k ↦ (commonStagePullback_endpoint l Ω f B K k).symm)
       H K hA hB k
-    let aK := (p k).app ((T X H).obj (A.toStage hA, B.toStage hB)) ≪≫
-      (R K).mapIso ((t X k).app (A.toStage hA, B.toStage hB) ≪≫
-        (T X K).mapIso (Iso.prod ((SX.assoc hA k).app A.obj)
-          ((SX.assoc hB k).app B.obj)))
-    let zK := ((t Y k).app (PA.toStage hA, PB.toStage hB) ≪≫
-      (T Y K).mapIso (Iso.prod ((SY.assoc hA k).app PA.obj)
-        ((SY.assoc hB k).app PB.obj))) ≪≫
-      (T Y K).mapIso (Iso.prod
-        (commonStagePullbackComparison l Ω f A K (hA.trans k))
-        (commonStagePullbackComparison l Ω f B K (hB.trans k)))
-    have ha : a A B K k = aK :=
-      congrArg₂ (fun i j ↦ i ≪≫ (R K).mapIso j)
-        (commonStagePullback_endpoint l Ω f (commonStageTensorObject l Ω X A B) K k).symm
-        (commonStageTensor_endpoint l Ω X A B K k).symm
-    have hz : z A B K k = zK :=
-      congrArg (fun i ↦ i ≪≫ (T Y K).mapIso (Iso.prod
-        (commonStagePullbackComparison l Ω f A K (hA.trans k))
-        (commonStagePullbackComparison l Ω f B K (hB.trans k))))
-        (commonStageTensor_endpoint l Ω Y PA PB K k).symm
-    exact (congrArg₂ (fun (i : _ ≅ _) (j : _ ≅ _) ↦ i.hom ≫
-      (mu K).hom.app (A.toStage (hA.trans k), B.toStage (hB.trans k)) ≫ j.inv)
-        ha hz).trans hm
   exact (hc L h).trans ((SY.tr_map h d).symm.trans
     (congrArg (SY.tr h) (hc H le_rfl).symm))
 
