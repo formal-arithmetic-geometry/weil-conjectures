@@ -160,9 +160,9 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 @[instance 2000]
 private theorem restrictionComp_preservesZero
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{max u r}) {X Y : C} (f : X ⟶ Y) :
-    (SheafOfModules.overFunctor.{max u r} R Y ⋙
-      SheafOfModules.overMap.{max u r} R f).PreservesZeroMorphisms := by
+    (R : Sheaf J CommRingCat.{max u r}) {X Y : C} (f : X ⟶ Y) :
+    (SheafOfModules.overFunctor.{max u r} (ring R) Y ⋙
+      SheafOfModules.overMap.{max u r} (ring R) f).PreservesZeroMorphisms := by
   constructor
   intro M N
   ext W x
