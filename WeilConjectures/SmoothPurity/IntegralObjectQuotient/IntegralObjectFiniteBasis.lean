@@ -423,11 +423,6 @@ private theorem complexBasis_zero (n : ℕ) :
         ((singleModule l E X L).X 0))) ≫ _ = _
   rw [(integralOperationsLevelPullback l E W.hom n).map_id _, Category.id_comp]
 
-attribute [local irreducible] finitePullback degreePullbackBasis complexBasis
-
-set_option maxHeartbeats 800000 in
--- The categorical comparison exceeds the default heartbeat budget; the
--- finite pullback carrier is irreducible locally to keep elaboration bounded.
 /-- A slice basis induces a normalized basis at one finite coefficient level.
 This asserts no compatibility between distinct coefficient levels.
 
@@ -465,11 +460,11 @@ theorem finiteNormalizedBasis (n : ℕ) :
     (Iso.inv_eq_inv d (degreePullbackBasis l E X W L e n)).mpr
       (complexBasis_zero l E X W L e n)
   intro U z
-  rw [hc]
-  have hs := ((degreePullbackBasis l E X W L e n).inv.val.app (op U)).hom.map_smul z
-    (1 : (integralCoefficientSheaf l E W.left n).obj.obj (op U))
-  change (degreePullbackBasis l E X W L e n).inv.val.app (op U) (z * 1) = _ at hs
-  rw [mul_one, degreePullbackBasis_inv_one] at hs
-  exact hs
+  let f := ((degreePullbackBasis l E X W L e n).inv.val.app (op U)).hom
+  have hs : f z = z • f (1 : (integralCoefficientSheaf l E W.left n).obj.obj (op U)) :=
+    (congrArg f (mul_one z).symm).trans
+      (f.map_smul z (1 : (integralCoefficientSheaf l E W.left n).obj.obj (op U)))
+  exact (congrArg (fun g ↦ g.val.app (op U) z) hc).trans
+    (hs.trans (congrArg (fun t ↦ z • t) (degreePullbackBasis_inv_one l E X W L e n U)))
 
 end WeilConjectures.IntegralObjectQuotient
