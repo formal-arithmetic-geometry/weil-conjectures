@@ -146,9 +146,9 @@ theorem adicResidue_koszul_coefficient_augmentation
   let O := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U
   let b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections :=
     fun i ↦ ringedKoszulSliceSection
-    (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
-    (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
-      (a i)) U
+      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
+      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
+        (a i)) U
   let T := ringedKoszulDualTower O r b
   obtain ⟨d, _, hu⟩ :
       ∃ d : ∀ n : ℕ, ringedNegativeKoszul O r b n ≅ T.obj (op n),
@@ -167,10 +167,13 @@ theorem adicResidue_koszul_coefficient_augmentation
     apply (cancel_epi (t n).hom).1
     apply biproduct.hom_ext'
     intro i
+    have hs : ((ringedKoszulScalar O (b i)) ^ (n + 1)).asHom ≫
+        quotientProjection X J U n = 0 := by
+      dsimp only [O, b]
+      exact scalarPower_quotientProjection X J U (a i)
+        (ha (Ideal.subset_span (Set.mem_range_self i))) n
     simpa only [Category.assoc, comp_zero] using
-      (congrArg (fun f ↦ f ≫ quotientProjection X J U n) (ht n i)).trans
-        (scalarPower_quotientProjection X J U (a i)
-          (ha (Ideal.subset_span (Set.mem_range_self i))) n)
+      (congrArg (fun f ↦ f ≫ quotientProjection X J U n) (ht n i)).trans hs
   let p (n : ℕ) : (T.obj (op n)).X 0 ⟶ adicResidueQuotientModule X J U n :=
     (d n).inv.f 0 ≫ (z n).hom ≫ quotientProjection X J U n
   have hp (n : ℕ) (i : ℤ) (hi : (ComplexShape.up ℤ).Rel i 0) :
