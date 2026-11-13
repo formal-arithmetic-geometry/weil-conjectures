@@ -95,6 +95,9 @@ theorem finitePerfectAdicQuotientStrictRealizationIso_square
     ((finitePerfectAdicQuotientTensorIso X d (n + 1)).app N)
     ((finitePerfectAdicQuotientTensorIso X d n).app N) _
     (finitePerfectAdicQuotientTensorIso_transition X d n N)
-  rw [hsquare]
+  dsimp only [finitePerfectAdicQuotientStrictRealizationIso, Iso.trans_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, finitePerfectAdicQuotientRealizationIso]
+  exact hsquare
 
 end AlgebraicGeometry.Scheme
