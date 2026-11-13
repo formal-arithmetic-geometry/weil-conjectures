@@ -600,26 +600,6 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
   have := isIso_exchange_triangleShriekTriangle ℓ T''
   have n₁ := compIso_triangleShriekTriangle_naturality ℓ φ₁
   have n₂ := compIso_triangleShriekTriangle_naturality ℓ φ₂
-  let hcf₀ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T₀.cf
-  let hcf₁ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf T''.cf
-  let hcf₂ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf
-  let hcg₀ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T₀.cg
-  let hcg₁ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg
-  let hcg₂ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg
-  let hcfg₀ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-    (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
-  let hcfg₁ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-    (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
-  let hcfg₂ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-    (Compactification.Triangle.overCfg T₀) (Compactification.Triangle.overCfg T'')
-  let hcfg₃ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-    (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T'')
-  let a₀ := (𝔽).compIso (triangleShriekTriangle T₀)
-  let a := (𝔽).compIso (triangleShriekTriangle T)
-  let a'' := (𝔽).compIso (triangleShriekTriangle T'')
-  let u₀ := NatIso.hcomp hcf₁ hcg₁
-  let u := NatIso.hcomp hcf₂ hcg₂
-  let v := NatIso.hcomp hcf₀ hcg₀
   have hcfg :=
     (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
       (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
@@ -634,16 +614,30 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
     T.cg T₀.cg T''.cg
   have hv := (NatTrans.exchange _ _ _ _).symm.trans
     (congrArg₂ NatTrans.hcomp (congrArg Iso.hom hcf) (congrArg Iso.hom hcg))
-  have n₁' : a₀.hom ≫ hcfg₂.hom = u₀.hom ≫ a''.hom := by
-    simpa only [a₀, hcfg₂, a'', u₀, hcf₁, hcg₁] using n₁
-  have n₂' : a.hom ≫ hcfg₃.hom = u.hom ≫ a''.hom := by
-    simpa only [a, hcfg₃, a'', u, hcf₂, hcg₂] using n₂
-  have e₁ : a₀.inv = hcfg₂.hom ≫ a''.inv ≫ u₀.inv := by
-    rw [← cancel_epi a₀.hom, Iso.hom_inv_id, reassoc_of% n₁']
+  have e₁ :
+      ((𝔽).compIso (triangleShriekTriangle T₀)).inv =
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+            (Compactification.Triangle.overCfg T₀) (Compactification.Triangle.overCfg T'')).hom ≫
+          ((𝔽).compIso (triangleShriekTriangle T'')).inv ≫
+          (NatIso.hcomp
+            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf T''.cf)
+            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg)).inv := by
+    rw [← cancel_epi ((𝔽).compIso (triangleShriekTriangle T₀)).hom, Iso.hom_inv_id,
+      reassoc_of% n₁]
     simp
-  have e₂ : a''.inv = hcfg₃.inv ≫ a.inv ≫ u.hom := by
-    rw [← cancel_epi hcfg₃.hom, Iso.hom_inv_id_assoc, ← cancel_epi a.hom,
-      reassoc_of% n₂']
+  have e₂ :
+      ((𝔽).compIso (triangleShriekTriangle T'')).inv =
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+            (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T'')).inv ≫
+          ((𝔽).compIso (triangleShriekTriangle T)).inv ≫
+          (NatIso.hcomp
+            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf)
+            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg)).hom := by
+    rw [← cancel_epi
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+        (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T'')).hom,
+      Iso.hom_inv_id_assoc, ← cancel_epi ((𝔽).compIso (triangleShriekTriangle T)).hom,
+      reassoc_of% n₂]
     simp
   rw [e₁, reassoc_of% hz, e₂]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, ← hv]
