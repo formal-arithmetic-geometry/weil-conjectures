@@ -96,20 +96,16 @@ private theorem ordinaryEvaluation_component_postcomposition (X : Scheme.{u}) (U
         localEvaluationProjection X U P F' n p (p + n) rfl := by
   simp only [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.id_f,
     CategoryTheory.Functor.map_id, Category.id_comp, curriedTensor_map_app]
-  rw [hf' i j n p hij]
-  have hm := projection_postcomposition X U P F F' t n p
-  erw [hm]
-  rw [reassoc_of% (hf i j n p hij)]
+  simp only [hf' i j n p hij, projection_postcomposition X U P F F' t n p,
+    reassoc_of% (hf i j n p hij)]
   by_cases hr : p + j = 0
-  · rw [ordinaryEvaluation_component_factorization X U P F' i j n p hij hr,
+  · simp only [ordinaryEvaluation_component_factorization X U P F' i j n p hij hr,
       ordinaryEvaluation_component_factorization X U P F i j n p hij hr]
-    rw [← whisker_exchange_assoc]
-    erw [evaluation_postcomposition_assoc.{u}
+    simp only [← whisker_exchange_assoc (t.f i), evaluation_postcomposition_assoc.{u}
       (C := Over U) (J := (Opens.grothendieckTopology X).over U)
-      (X.sheaf.over U) (P.X p) (F.X i) (F'.X i) (t.f i)]
-    simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
-      Category.id_comp]
-    rw [HomologicalComplex.XIsoOfEq_hom_naturality]
+      (X.sheaf.over U) (P.X p) (F.X i) (F'.X i) (t.f i),
+      Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
+      Category.id_comp, HomologicalComplex.XIsoOfEq_hom_naturality]
   · simp only [localEvaluationComponent, dite_eq_right hr, comp_zero,
       zero_comp]
 
