@@ -90,20 +90,10 @@ private theorem supported_unit_isIso_iff
   · intro hz
     exact IsZero.isIso hz htarget _
 
--- Cache the canonical instances used repeatedly by the transported restriction functors.
-private abbrev openSupportModuleAbelian (X : RingedSpace.{u}) :
-    Abelian (SheafOfModules.{u} (moduleRings X)) := inferInstance
-
-private abbrev openSupportOverModuleAbelian (X : RingedSpace.{u})
-    (V : TopologicalSpace.Opens X) :
-    Abelian (SheafOfModules.{u} ((moduleRings X).over V)) := inferInstance
-
-attribute [local instance 2000] openSupportModuleAbelian openSupportOverModuleAbelian
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option profiler true in
+set_option maxHeartbeats 600000 in
 -- The statement repeats transported derived restriction and full-subcategory lifts.
 /-- Restriction of the right adjoint is compatible with the open square precisely when
 it preserves complexes supported on the closed complements.
