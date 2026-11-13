@@ -282,30 +282,27 @@ private lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M�
   simp
 
 private lemma pullHom_twisted_comm {C : Type*} [Category C]
-    {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat} {S Y V₁ V₂ : C}
-    {O M : F.obj (.mk (op S))} (u₁ : V₁ ⟶ S) (u₂ : V₂ ⟶ S)
-    (q : Y ⟶ S) (f₁ : Y ⟶ V₁) (f₂ : Y ⟶ V₂)
-    (h₁ : f₁ ≫ u₁ = q) (h₂ : f₂ ≫ u₂ = q)
-    (x₁ : (F.map u₁.op.toLoc).toFunctor.obj O ⟶ (F.map u₁.op.toLoc).toFunctor.obj M)
-    (x₂ : (F.map u₂.op.toLoc).toFunctor.obj O ⟶ (F.map u₂.op.toLoc).toFunctor.obj M)
-    (s₁ : (F.map f₁.op.toLoc).toFunctor.obj ((F.map u₁.op.toLoc).toFunctor.obj O) ⟶
-      (F.map f₁.op.toLoc).toFunctor.obj ((F.map u₁.op.toLoc).toFunctor.obj O))
+    {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat} {S Y : C}
+    {ι : Type*} {V : ι → C} (u : ∀ i, V i ⟶ S) {i₁ i₂ : ι}
+    {O M : F.obj (.mk (op S))} (q : Y ⟶ S) (f₁ : Y ⟶ V i₁) (f₂ : Y ⟶ V i₂)
+    (h₁ : f₁ ≫ u i₁ = q) (h₂ : f₂ ≫ u i₂ = q)
+    (x₁ : (F.map (u i₁).op.toLoc).toFunctor.obj O ⟶ (F.map (u i₁).op.toLoc).toFunctor.obj M)
+    (x₂ : (F.map (u i₂).op.toLoc).toFunctor.obj O ⟶ (F.map (u i₂).op.toLoc).toFunctor.obj M)
+    (s₁ : (F.map f₁.op.toLoc).toFunctor.obj ((F.map (u i₁).op.toLoc).toFunctor.obj O) ⟶
+      (F.map f₁.op.toLoc).toFunctor.obj ((F.map (u i₁).op.toLoc).toFunctor.obj O))
     (s : (F.map q.op.toLoc).toFunctor.obj O ⟶ (F.map q.op.toLoc).toFunctor.obj O)
-    (hs : (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).hom.toNatTrans.app O
-        ≫ s₁ = s ≫
-          (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).hom.toNatTrans.app O)
-    (hc : (F.map f₁.op.toLoc).toFunctor.map x₁ ≫
-        (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).inv.toNatTrans.app M ≫
-        (F.mapComp' u₂.op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl)).hom.toNatTrans.app M =
-      (s₁ ≫
-        (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).inv.toNatTrans.app O ≫
-        (F.mapComp' u₂.op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl)).hom.toNatTrans.app O) ≫
-          (F.map f₂.op.toLoc).toFunctor.map x₂) :
+    (hs : (F.mapComp' (u i₁).op.toLoc f₁.op.toLoc q.op.toLoc
+        (by rw [← h₁]; rfl)).hom.toNatTrans.app O ≫ s₁ = s ≫
+          (F.mapComp' (u i₁).op.toLoc f₁.op.toLoc q.op.toLoc
+            (by rw [← h₁]; rfl)).hom.toNatTrans.app O)
+    (hc : (F.map f₁.op.toLoc).toFunctor.map x₁ ≫ ((F.toDescentData u).obj M).hom q f₁ f₂ h₁ h₂ =
+      (s₁ ≫ (Pseudofunctor.DescentData.ofObj (F := F) (f := u) O).hom q f₁ f₂ h₁ h₂) ≫
+        (F.map f₂.op.toLoc).toFunctor.map x₂) :
     s ≫ pullHom x₂ f₂ q q h₂ h₂ = pullHom x₁ f₁ q q h₁ h₁ := by
   let e₁ := Cat.Hom.toNatIso
-    (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl))
+    (F.mapComp' (u i₁).op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl))
   let e₂ := Cat.Hom.toNatIso
-    (F.mapComp' u₂.op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl))
+    (F.mapComp' (u i₂).op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl))
   exact (comp_eq_of_comm (e₁.app O) (e₁.app M) (e₂.app O) (e₂.app M)
     ((F.map f₁.op.toLoc).toFunctor.map x₁) ((F.map f₂.op.toLoc).toFunctor.map x₂)
     s₁ s hs hc).symm
@@ -336,10 +333,9 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
       pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
         (f₁ := (V i₁).hom) (f₂ := (V i₁).hom) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
   have hc := φ.comm q f₁ f₂ hf₁ hf₂
-  simp only [torsorDescentData_hom, Pseudofunctor.toDescentData_obj,
-    Pseudofunctor.DescentData.ofObj_hom] at hc
+  rw [torsorDescentData_hom] at hc
   refine pullHom_twisted_comm (F := modulesPseudofunctor) (O := Modules.unitObj X) (M := M)
-    (V i₁).hom (V i₂).hom q f₁ f₂ hf₁ hf₂ (φ.hom i₁) (φ.hom i₂)
+    (fun i ↦ (V i).hom) (i₁ := i₁) (i₂ := i₂) q f₁ f₂ hf₁ hf₂ (φ.hom i₁) (φ.hom i₂)
     (smulMor (Y := Y) ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj
       ((modulesPseudofunctor.map (V i₁).hom.op.toLoc).toFunctor.obj (Modules.unitObj X)))
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)))
@@ -349,8 +345,7 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
       ((modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
         (by rw [← hf₁]; rfl)).hom.toNatTrans.app (Modules.unitObj X))
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
-  · trace_state
-    simpa only [Category.assoc] using hc
+  · exact hc
 
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     (M : modulesPseudofunctor.obj (.mk (op X)))
