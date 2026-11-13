@@ -9,7 +9,7 @@ public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.HomologyFunctorCoherence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
 
 /-!
 
@@ -57,7 +57,6 @@ section HomologyFunctor
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option profiler true in
 /-- The commutation `H^n ⋙ f^* ≅ Lf^* ⋙ H^n` of the exact pullbacks of module objects with
 homology is compatible with the composition isomorphisms, at an object. -/
 lemma leftDerivedFunctorHomologyFunctorIso_upperStarComp {X Y Z : Scheme.{u}} (a : X ⟶ Y)
