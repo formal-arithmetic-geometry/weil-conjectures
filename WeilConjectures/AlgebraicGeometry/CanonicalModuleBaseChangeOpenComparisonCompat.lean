@@ -50,7 +50,6 @@ private theorem canonicalTensorComparison
 
 set_option linter.unusedVariables false in
 -- Keep the original universally quantified comparison-proof binder hc0 unchanged.
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatibility of restriction isomorphisms with the canonical base-change map.
@@ -100,39 +99,5 @@ theorem restricted_base_change_compatibility
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
        := by
-  classical
-  dsimp only
-  intro c0 hc0
-  let U := f ⁻¹ᵁ V
-  let fA := f ∣_ V
-  let gA := g.resLE V W hWV
-  let H : (f ⁻¹ᵁ V).toScheme.Modules := (schemeOpenRestriction X U).obj G
-  let p := pullback.fst fA gA
-  let q := pullback.snd fA gA
-  let t := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g'))
-    |>.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction g')
-  let t0 := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p))
-    |>.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction p)
-  let c₁ := Scheme.Modules.canonicalSinglePullbackMap.{u, w} g' G ≫
-    (DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).map (t.inv.app G)
-  let c₂ := Scheme.Modules.canonicalSinglePullbackMap.{u, w} p H ≫
-    (DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).map (t0.inv.app H)
-  have hc₁ : IsDerivedModulePullbackComparison g' G c₁ := canonicalTensorComparison g' G
-  have hc₂ : IsDerivedModulePullbackComparison p H c₂ := canonicalTensorComparison p H
-  obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism.{u, w} g' G c₁ c hc₁ hc
-  obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism.{u, w} p H c₂ c0 hc₂ hc0
-  obtain ⟨a, b, hb⟩ := restricted_base_change_fixed_counits.{u, w} f g g' f' sq G V W hWV
-  let R := (schemeOpenRestriction S' W).mapDerivedCategory
-  let T := DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0
-  let T0 := DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0
-  let A := R.mapIso ((schemeDerivedDirectImage f').mapIso (T.mapIso α))
-  let B := (schemeDerivedDirectImage q).mapIso (T0.mapIso γ)
-  refine ⟨a, A.symm ≪≫ b ≪≫ B, ?_⟩
-  have h := conjugateSquare _ _ a b A B hb
-  simpa only [A, B, R, T, T0, c₁, c₂, hα, hγ, Functor.map_comp, Functor.mapIso_hom,
-    Functor.mapIso_inv, Iso.trans_hom, Iso.symm_hom, Category.assoc] using h
+  exact restricted_base_change_compatibility_single_degree f g g' f' sq G 0 c hc V W hWV
 end AlgebraicGeometry
