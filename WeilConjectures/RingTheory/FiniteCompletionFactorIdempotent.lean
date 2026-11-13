@@ -115,7 +115,6 @@ private theorem tensor_factor_idempotent
   apply factor_idempotent E i α F hproj (TensorProduct.tmul R 1 g)
   rwa [hright]
 
-set_option profiler true in
 /-- Select the finite completion factor before transferring it to the larger tensor.
 
 Source: Stacks Project, Algebra, proof of Lemma Tag 07NC, the finite-algebra product

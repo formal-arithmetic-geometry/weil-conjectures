@@ -60,12 +60,13 @@ private theorem field_not_cohen (k : Type u) [Field k] (p : ℕ) :
   exact IsDiscreteValuationRing.not_isField k (Field.toIsField k)
 
 private theorem powerSeries_field_regular_complete (k : Type u) [Field k] (n : ℕ) :
-    IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) k))
-      (MvPowerSeries (Fin n) k) ∧ IsRegularLocalRing (MvPowerSeries (Fin n) k) := by
+    ∃ _ : IsLocalRing (MvPowerSeries (Fin n) k),
+      IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) k))
+        (MvPowerSeries (Fin n) k) ∧ IsRegularLocalRing (MvPowerSeries (Fin n) k) := by
   obtain hbase := power_series_field_cohen_regular_complete (Λ := k) n
     (Or.inl (Field.toIsField k))
-  rcases hbase with ⟨_, _, _, _, _, _, _, hcomplete, hregular, _⟩ | ⟨p, hp, _⟩
-  · exact ⟨hcomplete, hregular⟩
+  rcases hbase with ⟨_, _, _, hlocal, _, _, _, hcomplete, hregular, _⟩ | ⟨p, hp, _⟩
+  · exact ⟨hlocal, hcomplete, hregular⟩
   · exact False.elim (field_not_cohen k p hp)
 
 private theorem exists_derivation_isUnit_of_finite_model
@@ -196,7 +197,8 @@ theorem exists_derivation_isUnit_tmul_formalFiber
     rw [div_pow, hx]
     change (c : M) / (s : M) ^ p = a
     rw [hc, mul_div_cancel_left₀ _ (pow_ne_zero _ hs)]
-  obtain ⟨hcomplete, hregular⟩ := powerSeries_field_regular_complete k n
+  obtain ⟨hlocal, hcomplete, hregular⟩ := powerSeries_field_regular_complete k n
+  let := hlocal
   let := hcomplete
   let := hregular
   let : IsRegularRing (MvPowerSeries (Fin n) k) :=
