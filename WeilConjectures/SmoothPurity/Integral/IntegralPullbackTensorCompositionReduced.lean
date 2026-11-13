@@ -79,15 +79,18 @@ private theorem canonicalIntegralPullbackTensor_systemReduction_sequence {X Y : 
   exact canonicalIntegralPullbackTensor_systemReduction l E f M N
 
 set_option profiler true in
-private theorem finiteSystemDerivedComposition_eq_sequence {X Y Z : Scheme.{u}}
-    (h : Z ⟶ X) (f : X ⟶ Y) :
-    (finiteSystemDerivedComposition (integralSystemRings l E)
-      (integralSystemTransition l E) h f :
-        integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
-          integralComparisonDerivedSequencePullback l E f ⋙
-            integralComparisonDerivedSequencePullback l E h) =
-      integralComparisonSystemComposition l E h f :=
-  finiteSystemDerivedComposition_eq l E h f
+private theorem finiteSystemDerivedComposition_hom_app_sequence {X Y Z : Scheme.{u}}
+    (h : Z ⟶ X) (f : X ⟶ Y) (A : coefficientSequenceDerived l E Y) :
+    ((finiteSystemDerivedComposition (integralSystemRings l E)
+      (integralSystemTransition l E) h f).hom.app A :
+        (integralComparisonDerivedSequencePullback l E (h ≫ f)).obj A ⟶
+          (integralComparisonDerivedSequencePullback l E h).obj
+            ((integralComparisonDerivedSequencePullback l E f).obj A)) =
+      (integralComparisonSystemComposition l E h f).hom.app A := by
+  exact congrArg (fun a : integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
+      integralComparisonDerivedSequencePullback l E f ⋙
+        integralComparisonDerivedSequencePullback l E h ↦ a.hom.app A)
+    (finiteSystemDerivedComposition_eq l E h f)
 
 set_option profiler true in
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
@@ -159,16 +162,11 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
               (integralSystemTransition l E) h f).hom.app
                 (((sfIntegralConstructible l E Y).ι ⋙
                   (pullbackTensorCalculus l E Y).reduction).obj K) := hc K
-        _ = _ := by
-          have e := congrArg
-            (fun a : integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
-                integralComparisonDerivedSequencePullback l E f ⋙
-                  integralComparisonDerivedSequencePullback l E h ↦
-              (integralPullbackSystemComparison_sequence l E (h ≫ f)).hom.app K ≫
-                a.hom.app (((sfIntegralConstructible l E Y).ι ⋙
-                  (pullbackTensorCalculus l E Y).reduction).obj K))
-            (finiteSystemDerivedComposition_eq_sequence l E h f)
-          exact e)
+        _ = _ := congrArg
+          ((integralPullbackSystemComparison_sequence l E (h ≫ f)).hom.app K ≫ ·)
+          (finiteSystemDerivedComposition_hom_app_sequence l E h f
+            (((sfIntegralConstructible l E Y).ι ⋙
+              (pullbackTensorCalculus l E Y).reduction).obj K)))
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
     (canonicalIntegralPullbackTensor_systemReduction_sequence l E f)
