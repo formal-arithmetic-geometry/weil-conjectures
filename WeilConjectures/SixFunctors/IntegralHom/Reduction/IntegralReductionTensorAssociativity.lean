@@ -39,14 +39,15 @@ private theorem reduction_map_inverse_cancel
 
 private theorem reduction_normalized_comparison
     {C : Type*} [Category C] {A B D E P Q T : C}
-    {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} (e : P ≅ E)
+    {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} {r : P ⟶ E} {ri : E ⟶ P}
     {v : P ⟶ Q} {w : Q ⟶ P} {ε : A ⟶ Q} {t : E ⟶ T} {s : P ⟶ T}
-    (h : a ≫ b ≫ c ≫ e.inv ≫ v = ε) (hv : v ≫ w = 𝟙 P)
-    (hs : s = e.hom ≫ t) : (a ≫ b ≫ c) ≫ t = ε ≫ w ≫ s := by
+    (h : a ≫ b ≫ c ≫ ri ≫ v = ε) (hv : v ≫ w = 𝟙 P)
+    (hs : s = r ≫ t) (hr : ri ≫ r = 𝟙 E) :
+    (a ≫ b ≫ c) ≫ t = ε ≫ w ≫ s := by
   calc
-    (a ≫ b ≫ c) ≫ t = (a ≫ b ≫ c) ≫ e.inv ≫ s := by
+    (a ≫ b ≫ c) ≫ t = (a ≫ b ≫ c) ≫ ri ≫ s := by
       rw [hs]
-      simp only [Iso.inv_hom_id_assoc]
+      simp only [reassoc_of% hr, Category.id_comp]
     _ = ε ≫ w ≫ s := by
       have hh := congrArg (fun z ↦ z ≫ w ≫ s) h
       simpa only [Category.assoc, reassoc_of% hv, Category.id_comp] using hh
@@ -410,10 +411,11 @@ private theorem nativeReductionMonoidal
       have hcan := reduction_map_inverse_cancel hbκ DerivedCategory.Q
       trace "PH805: cancellation proved"
       trace "PH805: transport square"
-      dsimp only [reductionExtension_eq_scalarExtension, coefficientTotalTensor,
-        totalTensor, ordinaryTensor] at hnorm
-      have hn := reduction_normalized_comparison
-        (m.target.representative.app (⟨_, hEP⟩, ⟨_, hEQ⟩)) hnorm hcan hcs
+      dsimp only [D', finiteCochainModel, reductionExtension_eq_scalarExtension,
+        coefficientTotalTensor, totalTensor, ordinaryTensor] at hnorm hcs
+      have hn := reduction_normalized_comparison hnorm hcan hcs
+        (m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩))
+      trace "PH805: normalization transported"
       rw [hcr]
       with_unfolding_all
         exact (reduction_tensorComparison_transport F e f m.mu
