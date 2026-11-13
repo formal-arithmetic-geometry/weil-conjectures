@@ -100,8 +100,6 @@ private theorem affine_stalkComparison_normalized
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Expanding the stalk comparison and the two localization transports needs this budget.
 /-- The degree-i affine module comparison and its prime localizations, without any
 invertibility hypothesis. Source: Stacks Project, perfect.tex, Tag 0DJ8, affine
 proof, equation-bc and the displayed localization identity.
@@ -189,15 +187,12 @@ theorem exists_affineBaseChangeCohomologyModel
       (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
     let st := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p
     let q := st.mapIso (H'.mapIso c.e')
+    let e := (affineRepresentativeStalkIso (Spec (.of A')) p c.N i).symm ≪≫ q
     let lV := (affineDerivedCohomologyStalkIso A' i p N).trans
-      (q.symm.toLinearEquiv.toAddEquiv.trans
-        (affineRepresentativeStalkIso (Spec (.of A')) p c.N i).toLinearEquiv.toAddEquiv)
+      e.toLinearEquiv.symm.toAddEquiv
     refine ⟨lU, lV, ?_⟩
     intro x
-    apply (CategoryTheory.Iso.toLinearEquiv
-      ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).symm ≪≫ q)).injective
-    change q.hom ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).inv
-      (lV (LocalizedModule.map p.asIdeal.primeCompl (a ≫ T.map v).hom x))) = _
+    apply e.toLinearEquiv.injective
     have hloc : LocalizedModule.map p.asIdeal.primeCompl (a ≫ T.map v).hom x =
         LocalizedModule.map p.asIdeal.primeCompl (T.map v).hom
           (LocalizedModule.map p.asIdeal.primeCompl a.hom x) := by
@@ -213,19 +208,21 @@ theorem exists_affineBaseChangeCohomologyModel
       (Spec.map (CommRingCat.ofHom φg)) g' sq c p i
     have hn' := congrArg (fun z => z (lU x)) hn
     simp only [ModuleCat.comp_apply] at hn'
-    simp only [lV, AddEquiv.trans_apply, CategoryTheory.Iso.toLinearEquiv_apply,
-      LinearEquiv.coe_toAddEquiv]
-    rw [hloc, affineDerivedCohomologyStalkIso_naturality, hlU]
-    change q.hom ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).inv
-      ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).hom
-        (q.inv (st.map (H'.map φ) (affineBaseChangeIntoPullback
+    calc
+      _ = affineDerivedCohomologyStalkIso A' i p N
+          (LocalizedModule.map p.asIdeal.primeCompl (a ≫ T.map v).hom x) :=
+        e.toLinearEquiv.apply_symm_apply _
+      _ = affineDerivedCohomologyStalkIso A' i p N
+          (LocalizedModule.map p.asIdeal.primeCompl (T.map v).hom
+            (LocalizedModule.map p.asIdeal.primeCompl a.hom x)) :=
+        congrArg (affineDerivedCohomologyStalkIso A' i p N) hloc
+      _ = st.map (H'.map φ) (affineDerivedCohomologyStalkIso A' i p L
+          (LocalizedModule.map p.asIdeal.primeCompl a.hom x)) :=
+        affineDerivedCohomologyStalkIso_naturality A' i p v _
+      _ = st.map (H'.map φ) (affineBaseChangeIntoPullback
           (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
-          (Spec.map (CommRingCat.ofHom φg)) g' sq K c.P c.e c.counit_isIso p i (lU x)))))) =
-      q.hom ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).inv
-        (SingleComplexBaseChange.stalkComparison
-          (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
-          (Spec.map (CommRingCat.ofHom φg)) g' sq c p i (lU x)))
-    simp only [Iso.hom_inv_id_apply, Iso.inv_hom_id_apply]
-    exact hn'.symm
+          (Spec.map (CommRingCat.ofHom φg)) g' sq K c.P c.e c.counit_isIso p i (lU x)) :=
+        congrArg (st.map (H'.map φ)) (hlU x)
+      _ = _ := hn'.symm
 
 end AlgebraicGeometry
