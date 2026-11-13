@@ -180,8 +180,7 @@ variable {X Y : Scheme.{u}} (p : X ⟶ Y)
 the tensor comparison `Lp^*(K ⊗ᴸ L) ⟶ Lp^*K ⊗ᴸ Lp^*L`
 (`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`). Its transpose along
 `Lp^* ⊣ Rp_*` is `Lp^*(Rp_*M ⊗ᴸ L) ⟶ Lp^*Rp_*M ⊗ᴸ Lp^*L ⟶ M ⊗ᴸ Lp^*L`
-(`AlgebraicGeometry.ProEtale.CondensedRing.projectionMap_app_app`).
-(blueprint: `definition-projection-formula-map`) -/
+(`AlgebraicGeometry.ProEtale.CondensedRing.projectionMap_app_app`). -/
 noncomputable def projectionMap :
     R((p)_*⟦Λ⟧) ⋙ curriedTensor 𝔻(Y) ⟶
       (Functor.postcompose₂.obj R((p)_*⟦Λ⟧)).obj
