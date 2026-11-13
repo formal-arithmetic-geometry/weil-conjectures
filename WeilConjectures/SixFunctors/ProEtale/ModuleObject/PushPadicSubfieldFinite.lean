@@ -110,7 +110,11 @@ theorem isIso_pushHom_padicSubfieldRingObjMap_app
   have key : DY ≫ push.hom =
       ((f)_*[Ab.{u + 1}].mapBiproduct (fun _ : Fin n ↦ M.X)).inv ≫ (f)_*[Ab.{u + 1}].map DX := by
     refine (biproduct_desc_comp_eq _ _).trans ?_
-    refine Eq.trans ?_ (biproduct.mapBiproduct_inv_map_desc _ _ _).symm
+    refine Eq.trans ?_ (biproduct.mapBiproduct_inv_map_desc ((f)_*[Ab.{u + 1}])
+      (fun _ : Fin n ↦ M.X) (fun i ↦
+        Mod.extendUnitHom (padicSubfieldRingObjMap X ℓ hF) M ≫
+          Mod.globalSmul (padicSubfieldConstSection ℓ X (b i))
+            ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M))).symm
     apply congrArg biproduct.desc
     funext i
     rw [Category.assoc, Mod.globalSmul_comp_hom push,
