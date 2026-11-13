@@ -194,6 +194,10 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     IsIso (((N.galoisLayerRestrict h Ω L').pullbackExchange
       (Profinite.continuousMapRingObj T₀)).app
         (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
+  let Λ₀ := Profinite.continuousMapRingObj T₀
+  let F := L((𝟙 X)^*⟦Λ₀⟧)
+  let F' := L((𝟙 X')^*⟦Λ₀⟧)
+  let C₁ := F.obj C
   -- the finite layer `N_{L'}` satisfies the hypotheses of the projector theorem over `L'`
   have : QuasiCompact (N.galoisLayer h L').j := by
     dsimp [galoisLayer]
@@ -212,9 +216,9 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     exact isUnit_of_mul_isUnit_right hM
   have hC₁ := ObjectProperty.prop_of_iso _
     ((finiteCoefficientDerivedEquivalence _ T₀).functor.mapIso
-      ((leftDerivedUpperStarComp (Profinite.continuousMapRingObj T₀) (pullback.fst h
+      ((leftDerivedUpperStarComp Λ₀ (pullback.fst h
         (Spec.map (CommRingCat.ofHom (algebraMap L L')))) N.ε).symm.app C ≪≫
-      (leftDerivedUpperStarCompOfEq (Profinite.continuousMapRingObj T₀)
+      (leftDerivedUpperStarCompOfEq Λ₀
         (Category.comp_id (pullback.fst h
           (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.ε))).app C))
     (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T₀
@@ -222,21 +226,21 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
   obtain ⟨r, hr, -, hproj⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector
       (N.galoisLayer h L') (pullback.snd _ _) Ω T₀ hp₁
-      (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC₁
+      (C₁) hC₁
   -- the identification `(N_{L'})_Ω ≅ N_Ω` has an invertible exchange intertwining the actions
   have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange
-      (Profinite.continuousMapRingObj T₀)) :=
+      Λ₀) :=
     Hom.isIso_pullbackExchange_of_isIso _ _
   have hact (σ : Ω ≃ₐ[L'] Ω) (q : ℤ) :
       (DerivedCategory.homologyFunctor _ q).map
-        (L((𝟙 X')^*⟦Profinite.continuousMapRingObj T₀⟧).map
-          ((N.galoisLayer h L').galoisLayerAction (Profinite.continuousMapRingObj T₀)
-            (pullback.snd _ _) Ω σ (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj
-              (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))) = 𝟙 _ := by
+        (F'.map
+          ((N.galoisLayer h L').galoisLayerAction Λ₀
+            (pullback.snd _ _) Ω σ (F.obj
+              (C₁)))) = 𝟙 _ := by
     refine map_map_eq_id_of_iso_id (leftDerivedUpperStarId _ X') _ ?_
     refine map_eq_id_of_comp_eq_comp _ _
       (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' _ σ
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) ?_
+        (C₁)) ?_
     refine map_map_eq_id_of_iso_id (leftDerivedUpperStarId _ X') _ ?_
     exact htriv q _ ((IntermediateField.mem_fixingSubgroup_iff L' _).2 fun x hx ↦
       σ.commutes ⟨x, hx⟩)
@@ -246,14 +250,14 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     (fun M a ↦ ⟨a.liftNormal Ω, fun x ↦ a.liftNormal_commutes Ω x⟩)
     (fun σ ↦ (Category.comp_id _).trans (hact σ q))
   have : IsIso ((((N.galoisLayer h L').galoisLayerHom (pullback.snd _ _) Ω).pullbackExchange
-      (Profinite.continuousMapRingObj T₀)).app
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) :=
+      Λ₀).app
+        (C₁)) :=
     (NatIso.isIso_map_iff (leftDerivedUpperStarId _ X') _).1 ((DerivedCategory.isIso_iff _ _).2
-      fun q ↦ isIso_map_of_comp_eq_id (L((𝟙 X')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+      fun q ↦ isIso_map_of_comp_eq_id (F' ⋙
         DerivedCategory.homologyFunctor _ q) hr ((Category.comp_id _).symm.trans (hfix q)))
   -- composition law for `(N_{L'})_Ω ⟶ N_Ω ⟶ N_{L'}`
   exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X')
     (N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _
-      (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
+      (C₁))
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
