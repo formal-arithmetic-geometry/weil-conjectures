@@ -205,6 +205,7 @@ theorem ringedSlice_koszul_coherence
           (d.rho (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)).hom =
         (d.rho (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫
           (d.sigmaU (r.obj (DerivedCategory.Q.obj P)) (r.obj (DerivedCategory.Q.obj Q))).hom := by
+    -- Share the representatives and project their specifications without dependent elimination.
     have hγ := hd.1 P Q hP hQ fP fQ
     let γ := hγ.choose
     have hρ := hγ.choose_spec.2

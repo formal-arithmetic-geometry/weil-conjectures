@@ -623,7 +623,6 @@ private theorem modelSquare
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.inv_hom_id, Category.comp_id] using hh.symm
 
-set_option profiler true in
 /-- The local-family comparison descends to derived Hom with its fixed augmentations.
 Source: Stacks Project, Tags 08JB, 08FI, 0A8X and 0A95
 (blueprint: lem-weil-pbc-ringed-slice-hom-comparison-existence).
@@ -699,6 +698,7 @@ theorem ringedSlice_homComparison_exists
   let r := ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U
   let RC := ringedSliceComplexRestriction.{c, v, u} J A U
   let loc := ringedSliceLocalizationIso.{c, v, u, w, w'} J A U
+  -- Share the witnesses without rebuilding the large dependent goal for each elimination.
   have hΓ := sheafHomRestrictionComparison.{c, v, u} J A U
   let Γ := hΓ.choose
   have hΓ := hΓ.choose_spec
