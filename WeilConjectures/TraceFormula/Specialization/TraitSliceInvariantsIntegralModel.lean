@@ -90,21 +90,6 @@ noncomputable def integralModelIso {Z : Scheme.{u}} (E : PadicAlgCl.FiniteInterm
       ⟨C, hC⟩ :=
   ObjectProperty.isoMk _ e
 
-private theorem integralModel_reduction_pullback_prop
-    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
-    (a : Λ ⟶ Λ') [IsMonHom a] {T W : Scheme.{u}} (w : T ⟶ W)
-    {C : Type*} [Category C]
-    (F : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ' T)) ⥤ C) (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
-    (B : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj Λ W)))
-    (h : P (F.obj (L((w)^*⟦Λ'⟧).obj
-      ((Mod.extendScalars (coefficientMap a W)).leftDerivedFunctor.obj B)))) :
-    P (F.obj ((Mod.extendScalars (coefficientMap a T)).leftDerivedFunctor.obj
-      (L((w)^*⟦Λ⟧).obj B))) := by
-  exact P.prop_of_iso (F.mapIso ((derivedUpperStarExtendScalarsIso a w).app B).symm) h
-
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
@@ -155,39 +140,8 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
-private theorem boundedConstructible_nearbyCycles_residue_pullback
-    [IsSeparated p] [IsSepClosed K] [Fact (ringChar k' ≠ ℓ)]
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (B : DerivedCategory (Mod (Sheaf (ProEt.topology M.total) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) M.total)))
-    (hB : boundedConstructible _ B) :
-    boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))
-        (baseChangeSpecial b v).left)
-      (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
-        (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
-          (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
-            (traitGenericField k') (traitGenericField K))).nearbyCycles
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))).obj
-        (L((𝟙 (baseChangeGaloisModel hM b hb v hv).generic)^*⟦Profinite.continuousMapRingObj.{u}
-          (integersResidueField ℓ E.1)⟧).obj
-          (L(((baseChangeGaloisModel hM b hb v hv).j)^*⟦Profinite.continuousMapRingObj.{u}
-            (integersResidueField ℓ E.1)⟧).obj
-            (L(((baseChangeHom hM b hb v hv).total)^*⟦Profinite.continuousMapRingObj.{u}
-              (integersResidueField ℓ E.1)⟧).obj B)))) := by
-  refine (exists_prime_ne_dvd_of_natCast_eq_zero k'
-    (Fact.out : ringChar k' ≠ ℓ)).elim fun p hp' ↦ ?_
-  have hp := hp'.1
-  have hpℓ := hp'.2.1
-  have hpk := hp'.2.2
-  have : Fact p.Prime := ⟨hp⟩
-  have := hasInvertibleExponent_integersResidueField (k' := k') E
-  exact boundedConstructible_nearbyCycles_galoisLayer_baseChangeGaloisModel_of_finite hM b hb
-    v hv (integersResidueField ℓ E.1) hpk (isUnit_natCast_integersResidueField E.1 hp hpℓ)
-    _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
-
-
-set_option profiler true in
+set_option maxHeartbeats 4000000 in
+-- the integral model is transported along several derived pullbacks of the base change model
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
 an integral model `K₀` (the pullback of an integral model of `B`) such that the nearby cycles of
@@ -225,9 +179,7 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
                 (baseChangeGaloisModel hM b hb v hv).generic)).leftDerivedFunctor.obj
                   K₀.obj))) := by
   have : IsNoetherian M.total := hM.isTraitModel.isNoetherian_total
-  refine (exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB).elim fun E hE ↦ ?_
-  refine hE.elim fun B₀ he₀ ↦ ?_
-  refine he₀.elim fun e₀ ↦ ?_
+  obtain ⟨E, B₀, ⟨e₀⟩⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB
   have hK₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
     (baseChangeGaloisModel hM b hb v hv).j _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
@@ -236,27 +188,33 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
     (integralModelPullbackIso ℓ (baseChangeGaloisModel hM b hb v hv).j E _
       (integralModelPullbackIso ℓ (baseChangeHom hM b hb v hv).total E B₀.obj e₀) ≪≫
       baseChangeGaloisModelPullbackIso hM b hb v hv eB), ?_⟩
+  obtain ⟨p, hp, hpℓ, hpk⟩ := exists_prime_ne_dvd_of_natCast_eq_zero k'
+    (Fact.out : ringChar k' ≠ ℓ)
+  have : Fact p.Prime := ⟨hp⟩
+  have := hasInvertibleExponent_integersResidueField (k' := k') E
   have hred := boundedConstructible_derivedExtendScalars_residueField M.total ℓ E.1 B₀.obj
     B₀.property
-  have h := boundedConstructible_nearbyCycles_residue_pullback hM b hb v hv E
-    ((Mod.extendScalars (coefficientMap
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj B₀.obj)
-    (by exact_mod_proofs hred)
-  let F := L((𝟙 (baseChangeGaloisModel hM b hb v hv).generic)^*⟦
-      Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧) ⋙
-      (((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
-        (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
-          (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
-            (traitGenericField k') (traitGenericField K))).nearbyCycles
-              (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))
-  refine integralModel_reduction_pullback_prop
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-    (baseChangeGaloisModel hM b hb v hv).j F (boundedConstructible _) _ ?_
-  exact integralModel_reduction_pullback_prop
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-    (baseChangeHom hM b hb v hv).total
-    (L(((baseChangeGaloisModel hM b hb v hv).j)^*⟦Profinite.continuousMapRingObj.{u}
-      (integersResidueField ℓ E.1)⟧) ⋙ F) (boundedConstructible _) B₀.obj h
+  have h := boundedConstructible_nearbyCycles_galoisLayer_baseChangeGaloisModel_of_finite hM b hb
+    v hv (integersResidueField ℓ E.1) hpk (isUnit_natCast_integersResidueField E.1 hp hpℓ)
+    (L(((baseChangeHom hM b hb v hv).total)^*⟦Profinite.continuousMapRingObj.{u}
+      (integersResidueField ℓ E.1)⟧).obj ((Mod.extendScalars (coefficientMap
+        (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj
+          B₀.obj))
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ (by exact_mod_proofs hred))
+  refine (boundedConstructible _).prop_of_iso
+    (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
+      (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
+        (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
+          (traitGenericField k') (traitGenericField K))).nearbyCycles
+      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))).mapIso
+      (L((𝟙 (baseChangeGaloisModel hM b hb v hv).generic)^*⟦Profinite.continuousMapRingObj.{u}
+        (integersResidueField ℓ E.1)⟧).mapIso
+        ((L(((baseChangeGaloisModel hM b hb v hv).j)^*⟦Profinite.continuousMapRingObj.{u}
+          (integersResidueField ℓ E.1)⟧)).mapIso
+          ((derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+            (baseChangeHom hM b hb v hv).total).app B₀.obj).symm ≪≫
+          ((derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+            (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
 set_option linter.style.whitespace false in
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
