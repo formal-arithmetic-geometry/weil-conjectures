@@ -131,7 +131,8 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
       simp only [← finiteSystemDerivedComposition_eq l E h f] at hσ
       dsimp only [integralSystemTensorComparison_finite, finiteSystemDerivedPullback,
         integralComparisonDerivedSequencePullback] at hσ ⊢
-      exact hσ) M N
+      convert hσ using 3
+      all_goals trace_state) M N
   exact key
 
 /-- Reduced form of the integral pullback/tensor composition equation.
