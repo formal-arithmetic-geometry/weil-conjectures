@@ -382,6 +382,7 @@ private theorem restrictHomEquiv_map
 end Helpers
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The statement records every operation and its underlying comparison.
 
 /-- Transport module structures and restrict the given set adjunction to linear maps.
