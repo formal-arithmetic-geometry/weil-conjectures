@@ -42,8 +42,7 @@ noncomputable local instance instMonoidalCategoryModulesOfDerivedPullbackTensorP
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
--- Elaborating the transported tensor comparison and its totalization needs extra heartbeats.
+set_option profiler true in
 set_option synthInstance.maxSize 256 in
 /-- (blueprint: lem-pc-derived-pullback-tensor-product) For a morphism of schemes
 `g : T ⟶ S`, derived pullback commutes with derived tensor product:
