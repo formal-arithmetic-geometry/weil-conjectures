@@ -63,6 +63,28 @@ private lemma pushHom_fac_of_unit_compatibility
   rw [← hn, ← Functor.map_comp_assoc]
   exact h
 
+/-- Transport the underived unit square through the comparison maps before taking its mate. -/
+private lemma pushHom_fac_of_comparison_units
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    {F : A ⥤ C} {U : C ⥤ A} {G : B ⥤ D} {V : D ⥤ B}
+    (adjX : F ⊣ U) (adjY : G ⊣ V) (P : A ⥤ B) (P' : C ⥤ D)
+    (β : U ⋙ P ⟶ P' ⋙ V) {Z Z' : A} {ZY H B₁ B₂ : B} {W : C} {DY DE : D}
+    (u : ZY ⟶ P.obj Z) (cX : F.obj Z ⟶ W) (cY : G.obj ZY ⟶ DY)
+    (b : DY ⟶ DE) (r : DE ⟶ P'.obj W)
+    (x : Z ⟶ Z') (z : Z' ⟶ U.obj W) (y : ZY ⟶ H) (v₀ : H ⟶ V.obj DY)
+    (p : ZY ⟶ B₁) (t : B₁ ⟶ P.obj Z') (q : B₁ ⟶ B₂)
+    (v₁ : B₂ ⟶ V.obj DE) (k : H ⟶ B₂)
+    (hX : adjX.unit.app Z ≫ U.map cX = x ≫ z)
+    (hY : adjY.unit.app ZY ≫ V.map cY = y ≫ v₀)
+    (hP : p ≫ t = u ≫ P.map x)
+    (hβ : t ≫ P.map z ≫ β.app W = q ≫ v₁ ≫ V.map r)
+    (hV : k ≫ v₁ = v₀ ≫ V.map b) (hxy : y ≫ k = p ≫ q) :
+    G.map u ≫ ((mateEquiv adjX adjY).symm β).app Z ≫ P'.map cX = cY ≫ b ≫ r := by
+  apply pushHom_fac_of_unit_compatibility adjX adjY P P' β
+  rw [hX, Functor.map_comp, ← Category.assoc, ← hP]
+  simp only [Category.assoc]
+  rw [hβ, ← reassoc_of% hY, ← reassoc_of% hV, reassoc_of% hxy]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme DerivedCategory
@@ -160,29 +182,26 @@ lemma derivedPushHom_app_Qh_fac
       ((f)_*⟦Λ'⟧).rightDerivedFunctorUnit.app
         (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
           ((HomotopyCategory.quotient _ _).obj I)) := by
-  refine pushHom_fac_of_unit_compatibility
+  have hX := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a X)
+    ((HomotopyCategory.quotient _ _).obj I)
+  have hY := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a Y)
+    ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I))
+  have hP := ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.naturality
+    (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
+      (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I))
+  have hβ := derivedComapLowerStarIso_inv_app_Qh a f
+    (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
+      ((HomotopyCategory.quotient _ _).obj I))
+  have hV := (Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.inv.naturality
+    ((NatTrans.mapHomotopyCategory (pushHom a f) _).app ((HomotopyCategory.quotient _ _).obj I))
+  have hxy := congrArg Qh.map (unit_app_comp_map_mapHomotopyCategory_pushHom_app a f I)
+  simp only [Functor.map_comp] at hxy
+  exact pushHom_fac_of_comparison_units
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
     ((f)_*⟦Λ⟧).rightDerivedFunctor ((f)_*⟦Λ'⟧).rightDerivedFunctor
-    (derivedComapLowerStarIso a f).inv _ _ _ _ _ ?_
-  erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a X)
-    ((HomotopyCategory.quotient _ _).obj I)]
-  rw [Functor.map_comp, Category.assoc]
-  erw [← ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.naturality_assoc
-    (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
-      (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I))]
-  erw [derivedComapLowerStarIso_inv_app_Qh a f
-    (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
-      ((HomotopyCategory.quotient _ _).obj I))]
-  erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh_assoc (coefficientMap a Y)
-    ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I))]
-  erw [← (Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.inv.naturality_assoc
-    ((NatTrans.mapHomotopyCategory (pushHom a f) _).app ((HomotopyCategory.quotient _ _).obj I))]
-  have hu := congrArg Qh.map (unit_app_comp_map_mapHomotopyCategory_pushHom_app a f I)
-  simp only [Functor.map_comp] at hu
-  dsimp only [Functor.comp_map]
-  erw [reassoc_of% hu]
-  rfl
+    (derivedComapLowerStarIso a f).inv _ _ _ _ _ _ _ _ _ _ _ _ _ _ hX hY hP hβ hV hxy
+
 
 
 section Integral
