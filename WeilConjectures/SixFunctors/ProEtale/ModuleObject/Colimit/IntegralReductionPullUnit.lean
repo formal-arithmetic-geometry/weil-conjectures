@@ -66,6 +66,7 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
     leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategorySquareIso]
   rfl
 
+/-- Tensor existence and colimit preservation, reused as proof-local instances. -/
 private lemma pullUnit_tensorInstances
     (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     let C₀ := Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R
@@ -76,6 +77,7 @@ private lemma pullUnit_tensorInstances
     (∀ A B C : GradedObject ℤ C₀, GradedObject.HasGoodTensorTensor₂₃ A B C) := by
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
+/-- Compose the counit squares in an abstract category before specializing to sheaves. -/
 private lemma pullUnit_comp_counit_diagram
     {C : Type*} [Category* C] {A₀ A₁ A₂ A₃ A₄ A₅ A₆ A₇ A₈ A₉ A₁₀ A₁₁ A₁₂ : C}
     {a : A₀ ⟶ A₁} {b : A₁ ⟶ A₂} {c : A₂ ⟶ A₃} {d : A₃ ⟶ A₄}
@@ -88,7 +90,6 @@ private lemma pullUnit_comp_counit_diagram
     (a ≫ b ≫ c ≫ d ≫ e) ≫ f ≫ g ≫ h = i ≫ j ≫ k ≫ l := by
   simp only [Category.assoc]
   rw [reassoc_of% h₁, h₂, h₃, reassoc_of% h₄, ← reassoc_of% h₅, reassoc_of% h₆]
-
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
 an object of the homotopy category, is the underived commutation `comapUpperStarIso` modulo
@@ -131,8 +132,6 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.comp_obj, Category.assoc] using
       (pullUnit_comp_counit_diagram s1 s2 s3 s4 s5 s6)
-
-
 
 /-- The underived compatibility of (Pull) with the units of `Ext ⊣ Res`
 (`ProEtale.CondensedRing.upperStar_map_unit_comp_comapUpperStarIso_inv_app`), on the homotopy
@@ -183,7 +182,6 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   simp only [Mod.comp_hom'] at h
   exact h
 
-set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**, on the image of a K-flat complex. -/
 lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (P : CochainComplex (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
