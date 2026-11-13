@@ -35,6 +35,7 @@ universe u v
 
 namespace Algebra
 
+/-- The local fibre equivalence commutes with the maps from the presenting ring. -/
 private theorem exists_localized_fibre_comparison
     {R P T : Type*} [CommRing R] [CommRing P] [CommRing T] [Algebra R P]
     (p : Ideal R) [p.IsPrime] (E : p.Fiber P ≃+* T)
@@ -63,7 +64,6 @@ private theorem exists_localized_fibre_comparison
   exact Localization.localRingHom_to_map U Qk E.toRingHom rfl (j a)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 private theorem exists_counted_polynomial_fibre_comparison
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) (n : ℕ) (φ : MvPolynomial (Fin n) R →ₐ[R] S)
