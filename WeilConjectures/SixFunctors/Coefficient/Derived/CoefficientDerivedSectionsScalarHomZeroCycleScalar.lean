@@ -300,6 +300,7 @@ theorem coefficientScalarSectionsChainMap_unit (D : CoefficientDerivedSystemScal
       coefficientFiniteUnitSection l E W D n :=
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The section-level cycle computation unfolds the scalar-sections comparison.
 /-- The global cycles of the transported scalar unit and of the finite unit agree.
@@ -354,6 +355,7 @@ theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScal
   rw [coefficientUnitCycle_iCycles]
   rw [coefficientScalarSectionsChainMap_unit, coefficientFiniteUnitComparison_unit]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The unit-class computation chains several localized section comparisons.
 /-- The finite scalar adjunction unit followed by the scalar-sections comparison sends
