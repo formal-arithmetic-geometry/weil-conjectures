@@ -27,8 +27,49 @@ attribute [local instance 2000] schemeMVModuleAbelian
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh RingedSpace.moduleDirectImage
 
-set_option maxHeartbeats 900000 in
--- The middle-vertex type contains fixed complex and derived functor comparisons.
+/-- Diagonal roof equations and their component mates assemble under biproduct comparisons. -/
+private theorem relativeMV_roof_pair_mate_comparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive]
+    [PreservesBinaryBiproducts L] [PreservesBinaryBiproducts R]
+    (adj : L ⊣ R)
+    {X X₁ X₂ Z Z₁ Z₂ T T₁ T₂ : C} {Y Y₁ Y₂ A₁ A₂ B₁ B₂ : D}
+    (i : X ≅ X₁ ⊞ X₂) (j : Y ≅ Y₁ ⊞ Y₂) (z : Z ≅ Z₁ ⊞ Z₂)
+    (t : T ≅ T₁ ⊞ T₂)
+    (a : T ⟶ R.obj Y) (a₁ : T₁ ⟶ R.obj Y₁) (a₂ : T₂ ⟶ R.obj Y₂)
+    (p : X ⟶ Z) (p₁ : X₁ ⟶ Z₁) (p₂ : X₂ ⟶ Z₂)
+    (q : T ⟶ Z) (q₁ : T₁ ⟶ Z₁) (q₂ : T₂ ⟶ Z₂) [IsIso q]
+    (b₁ : A₁ ⟶ B₁) (b₂ : A₂ ⟶ B₂)
+    (hp : p ≫ z.hom = i.hom ≫ biprod.map p₁ p₂)
+    (hq : q ≫ z.hom = t.hom ≫ biprod.map q₁ q₂)
+    (ha : a ≫ R.map j.hom ≫ (R.mapBiprod Y₁ Y₂).hom =
+      t.hom ≫ biprod.map a₁ a₂)
+    (h₁ : ∀ hq₁ : IsIso q₁, letI := hq₁
+      ∃ (e₁ : L.obj X₁ ≅ A₁) (e₁' : Y₁ ≅ B₁),
+        p₁ ≫ inv q₁ ≫ a₁ = adj.homEquiv _ _ (e₁.hom ≫ b₁ ≫ e₁'.inv))
+    (h₂ : ∀ hq₂ : IsIso q₂, letI := hq₂
+      ∃ (e₂ : L.obj X₂ ≅ A₂) (e₂' : Y₂ ≅ B₂),
+        p₂ ≫ inv q₂ ≫ a₂ = adj.homEquiv _ _ (e₂.hom ≫ b₂ ≫ e₂'.inv)) :
+    ∃ (e : L.obj X ≅ A₁ ⊞ A₂) (e' : Y ≅ B₁ ⊞ B₂),
+      p ≫ inv q ≫ a = adj.homEquiv _ _ (e.hom ≫ biprod.map b₁ b₂ ≫ e'.inv) := by
+  have hd : biprod.map q₁ q₂ = t.inv ≫ q ≫ z.hom := by
+    apply (cancel_epi t.hom).mp
+    simp only [Iso.hom_inv_id_assoc]
+    exact hq.symm
+  have : IsIso (biprod.map q₁ q₂) := by rw [hd]; infer_instance
+  obtain ⟨hq₁, hq₂⟩ := relativeMV_biprod_components_isIso q₁ q₂
+  obtain ⟨e₁, e₁', he₁⟩ := h₁ hq₁
+  obtain ⟨e₂, e₂', he₂⟩ := h₂ hq₂
+  let e := L.mapIso i ≪≫ L.mapBiprod X₁ X₂ ≪≫ biprod.mapIso e₁ e₂
+  let e' := j ≪≫ biprod.mapIso e₁' e₂'
+  refine ⟨e, e', ?_⟩
+  have hroof := relativeMV_roof_pair R i j z t a a₁ a₂ p p₁ p₂ q q₁ q₂ hp hq ha
+  have hmates := relativeMV_pair_mates adj i j e₁ e₂ e₁' e₂' b₁ b₂
+  rw [he₁, he₂] at hroof
+  apply (cancel_mono (R.map j.hom ≫ (R.mapBiprod Y₁ Y₂).hom)).mp
+  simpa only [Category.assoc, e, e'] using hroof.trans hmates.symm
+
 /-- The diagonal middle component of the normalized resolved row roof has the
 specified mate comparison. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T.
 (blueprint: lem-pc-relative-mv-resolved-roof-middle-mate-comparison).
@@ -161,43 +202,19 @@ theorem relativeMV_resolved_roof_middle_mate_comparison
     simpa only [qU, qV, wU, wV, cH, H, T, z, t, Functor.isoWhiskerRight_hom,
       Functor.whiskerRight_app, Functor.map_comp, Functor.comp_map] using
       relativeMV_roof_denominator_pair H T G' cH.hom sU sV
-  have hd : biprod.map qU qV = t.inv ≫ q ≫ z.hom := by
-    apply (cancel_epi t.hom).mp
-    simp only [Iso.hom_inv_id_assoc]
-    exact hq.symm
-  have : IsIso (biprod.map qU qV) := by rw [hd]; infer_instance
-  obtain ⟨hqU, hqV⟩ := relativeMV_biprod_components_isIso qU qV
-  have := hqU
-  have := hqV
-  have hqU' := hqU
-  dsimp only [qU, wU, T, H, Ff, Ff', F, G, c, JU, J, sU, L] at hqU'
-  obtain ⟨eU, eU', hU⟩ := relativeMV_resolved_open_roof_comparison
-    f f' g g' hpull K K' φ U r s hr hs hqU'
-  have hqV' := hqV
-  dsimp only [qV, wV, T, H, Ff, Ff', F, G, c, JV, J, sV, L] at hqV'
-  obtain ⟨eV, eV', hV⟩ := relativeMV_resolved_open_roof_comparison
-    f f' g g' hpull K K' φ V r s hr hs hqV'
-  let e₂ := (derivedPullback g).mapIso i ≪≫
-    (derivedPullback g).mapBiprod (H.obj IU) (H.obj IV) ≪≫ biprod.mapIso eU eV
-  let e₂' := j ≪≫ biprod.mapIso eU' eV'
-  refine ⟨e₂, e₂', ?_⟩
   have ha : η.app (Ff'.obj (JU ⊞ JV)) ≫ (schemeDerivedDirectImage g).map j.hom ≫
       ((schemeDerivedDirectImage g).mapBiprod (H'.obj JU) (H'.obj JV)).hom =
         t.hom ≫ biprod.map (η.app (Ff'.obj JU)) (η.app (Ff'.obj JV)) :=
     relativeMV_roof_unit_pair T H' (schemeDerivedDirectImage g)
       (Functor.whiskerLeft Ff' η) JU JV
-  have hroof := relativeMV_roof_pair (schemeDerivedDirectImage g) i j z t
+  refine relativeMV_roof_pair_mate_comparison adj i j z t
     (η.app (Ff'.obj (JU ⊞ JV))) (η.app (Ff'.obj JU)) (η.app (Ff'.obj JV))
-    p pU pV q qU qV hp hq ha
-  have hmates := relativeMV_pair_mates adj i j eU eV eU' eV' (b U).hom (b V).hom
-  change pU ≫ inv qU ≫ η.app (Ff'.obj JU) = _ at hU
-  change pV ≫ inv qV ≫ η.app (Ff'.obj JV) = _ at hV
-  rw [hU, hV] at hroof
-  change p ≫ inv q ≫ η.app (Ff'.obj (JU ⊞ JV)) =
-    adj.homEquiv (H.obj (IU ⊞ IV)) (H'.obj (JU ⊞ JV))
-      (e₂.hom ≫ biprod.map (b U).hom (b V).hom ≫ e₂'.inv)
-  apply (cancel_mono ((schemeDerivedDirectImage g).map j.hom ≫
-    ((schemeDerivedDirectImage g).mapBiprod (H'.obj JU) (H'.obj JV)).hom)).mp
-  simpa only [Category.assoc, e₂, e₂'] using hroof.trans hmates.symm
+    p pU pV q qU qV (b U).hom (b V).hom hp hq ha ?_ ?_
+  · dsimp -proj only [pU, qU, wU, H, H', T, Ff, Ff', F, G, c, IU, I, JU, J, sU,
+      L, rU, η, adj, b, Functor.comp_obj, Functor.comp_map]
+    exact relativeMV_resolved_open_roof_comparison f f' g g' hpull K K' φ U r s hr hs
+  · dsimp -proj only [pV, qV, wV, H, H', T, Ff, Ff', F, G, c, IV, I, JV, J, sV,
+      L, rV, η, adj, b, Functor.comp_obj, Functor.comp_map]
+    exact relativeMV_resolved_open_roof_comparison f f' g g' hpull K K' φ V r s hr hs
 
 end AlgebraicGeometry
