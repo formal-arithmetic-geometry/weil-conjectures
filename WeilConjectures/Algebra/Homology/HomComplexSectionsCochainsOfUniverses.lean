@@ -46,7 +46,7 @@ private noncomputable def sectionToLocalizedHom
     (SheafOfModules.overFunctor _ U).obj A ⟶
       (SheafOfModules.overFunctor _ U).obj B := ⟨φ⟩
 
-set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Chosen products and section evaluation require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 /-- Product projections identify degreewise sections with all localized cochains.

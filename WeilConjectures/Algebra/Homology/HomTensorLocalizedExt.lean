@@ -207,6 +207,7 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 -- Transposing the internal Hom unfolds the localized module structures in two universes.
+set_option trace.profiler true in
 set_option synthInstance.maxSize 256 in
 /-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;

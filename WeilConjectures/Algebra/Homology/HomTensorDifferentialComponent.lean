@@ -41,7 +41,7 @@ private lemma homObjMap_add_first {A A' B : Mod} (f g : A' ⟶ A) :
   SheafOfModules.hom_ext
     (PresheafOfModules.homObjMap_add_left (R := R.obj) f.val g.val (𝟙 B.val))
 
-set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- Rewriting the total-complex differential elaborates the dependent coproduct indices.
 set_option synthInstance.maxSize 256 in
 /-- The component of the iterated Hom differential after degreewise currying.
