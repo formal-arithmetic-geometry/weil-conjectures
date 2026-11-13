@@ -122,6 +122,10 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
       (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h)).app
         ((coefficientSequenceEvaluation l E Y n).obj N) := by
   refine horizontalLeftMate
+    (S := coefficientSequenceModules.{u, u} l E Y)
+    (T := coefficientSequenceModules.{u, u} l E X)
+    (A := normalizedDVRModules l E Y m) (B := normalizedDVRModules l E X m)
+    (C := normalizedDVRModules l E Y n) (D := normalizedDVRModules l E X n)
     (Lm := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E m) f)
     (Rm := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f)
     (Ln := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) f)
