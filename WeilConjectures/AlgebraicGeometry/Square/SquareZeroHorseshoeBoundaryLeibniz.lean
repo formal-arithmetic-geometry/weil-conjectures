@@ -118,7 +118,10 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
   have h := boundary_eq_of_comparison _ _ _ _
     (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1) _
     (heq 0) (htriangle S hS 0)
-  simpa only [Category.assoc] using h
+  simp only [Category.assoc] at h
+  dsimp only [RingedSpace.moduleCohomologyBoundary,
+    Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso]
+  exact h
 
 set_option profiler true in
 private theorem cech_cycles_leibniz (X : Scheme.{u})
@@ -291,7 +294,9 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
     exact congrArg (fun m ↦ m (K.homologyπ 1 z)) (hnatural I I (μ s).asHom)
   have he := congrArg (fun z ↦ cmp I z) hclass
   rw [map_add, hn, hn, hcf, hcg, hcfg] at he
-  simpa only [ModuleCat.comp_apply] using he
+  dsimp only [S] at he
+  simp only [ModuleCat.comp_apply]
+  exact he
 
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
@@ -368,6 +373,8 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
   intro f g
   have he := canonical_boundary_leibniz X B C p I i hw hS μ hlift f g
   simp only [ModuleCat.comp_apply, hd]
-  simpa only [ModuleCat.comp_apply] using he
+  dsimp only [S]
+  simp only [ModuleCat.comp_apply] at he
+  exact he
 
 end AlgebraicGeometry
