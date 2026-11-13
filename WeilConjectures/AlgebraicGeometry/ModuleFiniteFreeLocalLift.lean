@@ -135,8 +135,6 @@ private theorem free_comp_eq_of_sections
   rw [unitHomEquiv_comp_apply]
   exact h i
 
-set_option profiler true in
--- Comparing the two restrictions of a free sheaf unfolds slice-site module functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem finite_free_lift
     (X : TopCat.{u}) (R : X.Sheaf RingCat.{u}) (V K : TopologicalSpace.Opens X) (hKV : K ≤ V)
@@ -185,8 +183,7 @@ private theorem finite_free_lift
   have heq : l ≫ F.map p =
       (mapFreeIso FA I (overMapUnitIso (R := R) (homOfLE hUA)).symm).hom ≫ FA.map q := by
     refine free_comp_eq_of_sections FA I _ (M := H.over A) l (F.map p) q (fun i ↦ ?_)
-    simp only [l, Equiv.apply_symm_apply, overMapUnitIso, Iso.symm_hom, Iso.refl_inv,
-      Category.id_comp]
+    simp only [l, Equiv.apply_symm_apply, overMapUnitIso, Iso.symm_hom, Iso.refl_inv]
     apply PresheafOfModules.sections_ext
     intro Z
     change p.val.app (Opposite.op ((Over.map (homOfLE

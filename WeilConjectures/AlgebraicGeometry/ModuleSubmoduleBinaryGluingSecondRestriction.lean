@@ -54,8 +54,6 @@ private theorem overMap_counit_component_isIso
   change Function.Bijective (M.val.presheaf.map ((Over.mapPullbackAdj j).unit.app A).op)
   exact (ConcreteCategory.isIso_iff_bijective _).1 (inferInstance)
 
-set_option profiler true in
--- Evaluating the slice-site adjunction requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The concrete pullback restricts to Q on V.
 Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
