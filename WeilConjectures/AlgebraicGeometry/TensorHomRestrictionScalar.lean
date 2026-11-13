@@ -90,15 +90,9 @@ theorem tensorHom_restriction_of_local_scalar
   change β.app W (tmulSection a g) = _ at hb
   erw [hb]
   rw [hα W hW a]
-  change (((show X.sheaf.obj.obj (op W) from ι.app W a) •
-    PresheafOfModules.restrictOverMap (homOfLE hW) s).app
-    (op (Over.mk (𝟙 W)))) g = _
-  rw [PresheafOfModules.smul_app]
-  erw [ModuleCat.comp_apply, PresheafOfModules.sectionsSMul_app_apply,
-    PresheafOfModules.overSections_coe_apply]
-  have hid (r : X.sheaf.obj.obj (op W)) :
-      X.sheaf.obj.map (𝟙 (op W)) r = r := by simp
-  erw [hid]
+  change X.sheaf.obj.map (𝟙 (op W)) (show Γ(X, W) from ι.app W a) •
+    (s.app (op (Over.mk (homOfLE hW)))) g = _
+  rw [X.sheaf.obj.map_id]
   change (show Γ(X, W) from ι.app W a) • (s.app (op (Over.mk (homOfLE hW)))) g = _
   have hm : ((restrictFunctor U.ι).map (ι ▷ H ≫ (λ_ H).hom)).app V
       (tmulSection (M := A) (N := H) (U := W) a g) =

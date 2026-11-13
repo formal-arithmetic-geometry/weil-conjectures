@@ -96,11 +96,18 @@ theorem coefficientComparisonMorphism_generator {X T : Scheme.{u}} (f : X ⟶ T)
           (tilde N)).app ⊤ ((tilde.toOpen N ⊤) s))) =
     coefficientSectionAddMap f F U Z g g' f' w W hW s at hs
   change _ = _
-  erw [hom_restrict_apply q,
-    hom_restrict_apply ((pullbackPushforwardAdjunction g).unit.app
+  conv_lhs =>
+    arg 1
+    rw [hom_restrict_apply q]
+    arg 1
+    arg 1
+    rw [hom_restrict_apply ((pullbackPushforwardAdjunction g).unit.app
       ((pullback U.toScheme.toSpecΓ).obj (tilde N)))]
   simp only [pushforward_obj_presheaf_map]
-  erw [hom_restrict_apply q]
+  conv_lhs =>
+    arg 1
+    arg 1
+    rw [hom_restrict_apply q]
   rw [hs]
   dsimp only [coefficientSectionAddMap]
   let M := (pullback g').obj F
