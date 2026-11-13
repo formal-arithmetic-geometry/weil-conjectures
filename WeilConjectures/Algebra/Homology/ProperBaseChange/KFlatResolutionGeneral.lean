@@ -203,18 +203,30 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 attribute [local instance] monoidalCategory symmetricCategory
 
+private noncomputable def sheafificationCounitIso_kfg (A : SheafOfModules.{max u v} 𝓡) :
+    (𝓢).obj A.val ≅ A :=
+  (asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit).app A
+
+private lemma tensorObjIsoSheafification_hom_eq_kfg (A T : SheafOfModules.{max u v} 𝓡) :
+    (tensorObjIsoSheafification A T).hom =
+      ((sheafificationCounitIso_kfg A).inv ⊗ₘ (sheafificationCounitIso_kfg T).inv) ≫
+        Functor.LaxMonoidal.μ (𝓢) A.val T.val := rfl
+
 set_option trace.profiler true in
 /-- The tensor comparison is natural in the second factor. -/
 private lemma whiskerLeft_tensorObjIsoSheafification_hom_kfg (A : SheafOfModules.{max u v} 𝓡)
     {T T' : SheafOfModules.{max u v} 𝓡} (f : T ⟶ T') :
     A ◁ f ≫ (tensorObjIsoSheafification A T').hom =
       (tensorObjIsoSheafification A T).hom ≫ (𝓢).map (A.val ◁ f.val) := by
-  let ε := asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit
-  have h : f ≫ ε.inv.app T' = ε.inv.app T ≫ (𝓢).map f.val := ε.inv.naturality f
-  simp only [tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom, tensorIso_inv,
-    Iso.app_inv, Functor.Monoidal.μIso_hom, Category.assoc]
-  exact tensorComparison_naturality_right_kfg (𝓢) (M := A.val) (N := T.val) (N' := T'.val)
-    (ε.inv.app A) (ε.inv.app T) (ε.inv.app T') f f.val h
+  have h : f ≫ (sheafificationCounitIso_kfg T').inv =
+      (sheafificationCounitIso_kfg T).inv ≫ (𝓢).map f.val :=
+    (asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit).inv.naturality f
+  rw [tensorObjIsoSheafification_hom_eq_kfg, tensorObjIsoSheafification_hom_eq_kfg,
+    Category.assoc]
+  exact tensorComparison_naturality_right_kfg (𝓢) (A := A) (T := T) (T' := T')
+    (M := A.val) (N := T.val) (N' := T'.val)
+    (sheafificationCounitIso_kfg A).inv (sheafificationCounitIso_kfg T).inv
+    (sheafificationCounitIso_kfg T').inv f f.val h
 
 /-- **The tensor-hom adjunction for sheaves of modules**: morphisms `A ⊗ T ⟶ N` correspond to
 morphisms `T ⟶ homObj A N`. A morphism `A ⊗ T ⟶ N` is a morphism `a(A ⊗ T) ⟶ N` out of the

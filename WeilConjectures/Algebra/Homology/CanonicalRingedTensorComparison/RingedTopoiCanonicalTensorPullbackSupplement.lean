@@ -642,7 +642,12 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
   have hb (P Q : CochainComplex A ℤ) :
       DerivedCategory.Q.map (b.hom.app (P, Q)) =
         (DerivedCategory.Q.mapIso
-          (k.totalIso R S RI uInv I c uStar hobj V am P Q)).inv := rfl
+          (k.totalIso R S RI uInv I c uStar hobj V am P Q)).inv := by
+    change DerivedCategory.Q.map (b0.app (P, Q)).inv =
+      DerivedCategory.Q.map (k.totalIso R S RI uInv I c uStar hobj V am P Q).inv
+    apply congrArg DerivedCategory.Q.map
+    apply (Iso.inv_eq_inv _ _).2
+    rfl
   refine ⟨hpres, (existsUnique_congr ?_).mp hdes⟩
   intro alpha
   constructor
