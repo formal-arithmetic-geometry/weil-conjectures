@@ -65,7 +65,6 @@ lemma smoothOfRelativeDimension_of_isPullback {Y S P : Scheme.{u}} [IrreducibleS
     rwa [zero_add] at this
   exact smoothOfRelativeDimension_of_pullback_snd g j hj d
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 /-- **Assembling the generic curve model over an open of the base.** Let `S₀` be integral and
 locally noetherian, `F₀ : X₀ ⟶ S₀` proper, `pₐ : Yₐ ⟶ X₀` finitely many finite morphisms whose
@@ -164,13 +163,15 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   have hX'W : X'.ι ⁻¹ᵁ (W₀ ⊓ F₀ ⁻¹ᵁ V) = W' := by
     ext x
     exact ⟨fun h ↦ h.1, fun h ↦ ⟨h, x.2⟩⟩
-  have hDfin : IsFinite (dd ≫ t ≫ F') := by
+  refine ⟨T, t, htci, htsurj, hTred, ι, inferInstance, Y', ν, hνfin, hνs, D, dd, inferInstance,
+    ?_, ?_, fun a ↦ ?_⟩
+  · -- finiteness of `D` over `V`
     have : IsProper F' := inferInstance
     have : IsProper (dd ≫ t ≫ F') := inferInstance
     have : LocallyQuasiFinite (dd ≫ t ≫ F') := by
-      refine LocallyQuasiFinite.of_finite_preimage_singleton _ fun s ↦ ?_
+      refine LocallyQuasiFinite.of_finite_preimage_singleton (dd ≫ t ≫ F') fun s ↦ ?_
       refine ((hfin (V.ι s) s.2).preimage
-        (f := fun y ↦ X'.ι (t (dd y))) ?_).subset ?_
+        (f := fun y : D ↦ X'.ι (t (dd y))) ?_).subset ?_
       · intro y₁ _ y₂ _ hy
         exact dd.isClosedEmbedding.injective (t.isClosedEmbedding.injective
           (X'.ι.isOpenEmbedding.injective hy))
@@ -184,7 +185,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
           rw [hrange] at hy'
           exact hy'
     exact IsFinite.of_isProper_of_locallyQuasiFinite _
-  have hνiso : IsIso (ν ∣_ ⟨(Set.range dd.base)ᶜ, dd.isClosedEmbedding.isClosed_range.isOpen_compl⟩) := by
+  · -- `ν` is an isomorphism outside `D`
     rw [hopen]
     have hci' : IsClosedImmersion (ν' ∣_ W') := by
       obtain ⟨a', -, Ha'⟩ :=
@@ -198,10 +199,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     have : IsClosedImmersion (ν ∣_ (t ⁻¹ᵁ W')) := IsClosedImmersion.of_comp _ (t ∣_ W')
     have : Surjective (ν ∣_ (t ⁻¹ᵁ W')) := IsZariskiLocalAtTarget.restrict hνs _
     exact isIso_of_isClosedImmersion_of_surjective _
-  have hpieces : ∀ a, IsFinite (Sigma.ι Y' a ≫ ν) ∧
-      (SmoothOfRelativeDimension 1 (Sigma.ι Y' a ≫ ν ≫ t ≫ F') ∨
-      (IsFinite (Sigma.ι Y' a ≫ ν ≫ t ≫ F') ∧ Etale (Sigma.ι Y' a ≫ ν ≫ t ≫ F'))) := by
-    intro a
+  · -- the pieces
     have he₀ : (Sigma.ι Y' a ≫ ν) ≫ t = p' a := by
       rw [Category.assoc, hν]
       simp [ν']
@@ -220,7 +218,5 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
       exact ⟨IsFinite.of_isProper_of_locallyQuasiFinite _, this⟩
     · left
       rwa [h1] at this
-  exact ⟨T, t, htci, htsurj, hTred, ι, inferInstance, Y', ν, hνfin, hνs, D, dd, inferInstance,
-    hDfin, hνiso, hpieces⟩
 
 end AlgebraicGeometry
