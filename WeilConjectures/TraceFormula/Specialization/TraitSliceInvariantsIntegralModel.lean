@@ -56,6 +56,12 @@ noncomputable def integralModelLeftDerivedUpperStar
       DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
   L((w)^*⟦Λ⟧)
 
+noncomputable def integralModelDerivedUpperStarExtendScalarsIso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
+    {Z W : Scheme.{u}} (w : Z ⟶ W) :=
+  derivedUpperStarExtendScalarsIso a w
+
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
@@ -74,42 +80,13 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
             ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
       (integralModelLeftDerivedUpperStar w).obj B :=
-  by
-    let integralModelTensorLeftPreservesColimit :
-        ∀ {J : Type} [SmallCategory J] (T : Scheme.{u})
-          (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-          (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-          (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)),
-          PreservesColimit F (MonoidalCategory.tensorLeft P) := by
-      intro J _ T Λ _ _ P F
-      infer_instance
-    letI : ∀ {J : Type} [SmallCategory J] (T : Scheme.{u})
-        (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-        (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-        (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)),
-        PreservesColimit F (MonoidalCategory.tensorLeft P) :=
-      integralModelTensorLeftPreservesColimit
-    let integralModelTensorRightPreservesColimit :
-        ∀ {J : Type} [SmallCategory J] (T : Scheme.{u})
-          (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-          (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-          (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)),
-          PreservesColimit F (MonoidalCategory.tensorRight P) := by
-      intro J _ T Λ _ _ P F
-      infer_instance
-    letI : ∀ {J : Type} [SmallCategory J] (T : Scheme.{u})
-        (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-        (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-        (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)),
-        PreservesColimit F (MonoidalCategory.tensorRight P) :=
-      integralModelTensorRightPreservesColimit
-    exact
-      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-        Z)).leftDerivedFunctor.mapIso
-        ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
-          B₀) ≪≫
-      (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
-      (integralModelLeftDerivedUpperStar w).mapIso e₀
+  (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      Z)).leftDerivedFunctor.mapIso
+      ((integralModelDerivedUpperStarExtendScalarsIso
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app B₀) ≪≫
+    (integralModelDerivedUpperStarExtendScalarsIso
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
+    (integralModelLeftDerivedUpperStar w).mapIso e₀
 
 /-- An isomorphism of an integral model in the ambient derived categories, as an isomorphism of
 bounded constructible complexes (the form required by the stabilization theorem). -/
@@ -189,13 +166,12 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total))}
     (hB : boundedConstructible _ B)
-    (eB : (integralModelLeftDerivedUpperStar M.j).obj B ≅
-      (integralModelLeftDerivedUpperStar M.ε).obj A)
+    (eB : L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B ≅
+      L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
     (hC : boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (baseChangeGaloisModel hM b hb v hv).generic)
-      ((integralModelLeftDerivedUpperStar
-        (baseChangeGaloisModel hM b hb v hv).ε).obj A)) :
+      (L(((baseChangeGaloisModel hM b hb v hv).ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)) :
     ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ)
       (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1)
         (baseChangeGaloisModel hM b hb v hv).generic))
