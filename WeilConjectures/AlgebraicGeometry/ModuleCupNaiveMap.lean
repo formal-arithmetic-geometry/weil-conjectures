@@ -128,7 +128,6 @@ private theorem naiveMapComponent_summand_fast
   exact HomologicalComplex.ι_mapBifunctorDesc _ i j h
 
 -- Rewriting tensor summands unfolds the two induced monoidal structures.
-set_option profiler true in
 /-- The summandwise section tensor maps commute with the total differentials.
 Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
 (blueprint: lem-sc-module-cup-naive-map-chain)
@@ -163,7 +162,8 @@ theorem moduleCup_naiveMap_comm
     conv_rhs => rw [← Category.assoc,
       naiveMapComponent_summand_fast X K L i j n hij]
     have hdiff := congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm)
-    rw [Category.assoc, ← S.map_comp, hdiff]
+    rw [Category.assoc, ← S.map_comp]
+    exact (congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm))
     simp only [Functor.map_add, Functor.map_units_smul, Functor.map_comp,
       Preadditive.comp_add, Linear.comp_units_smul]
     apply congrArg₂ (· + ·)
