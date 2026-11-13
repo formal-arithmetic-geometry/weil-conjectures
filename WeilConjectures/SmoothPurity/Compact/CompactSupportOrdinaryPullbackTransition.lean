@@ -121,7 +121,7 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
         ((compactSupportOrdinaryCoefficientTransition l E Y h).app N) ≫
       (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h)).app
         ((coefficientSequenceEvaluation l E Y n).obj N) := by
-  exact horizontalLeftMate
+  refine horizontalLeftMate
     (Lm := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E m) f)
     (Rm := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f)
     (Ln := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) f)
@@ -146,13 +146,18 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
-    (compactSupportOrdinaryPullbackUnit l E f m)
-    (compactSupportOrdinaryPullbackUnit l E f n)
-    (compactSupportOrdinaryDirectImageTransition l E f h)
-    (fun M ↦ (unit_mateEquiv_symm
+    ?_ ?_ (compactSupportOrdinaryDirectImageTransition l E f h) ?_ N
+  · intro Q
+    dsimp only [Functor.comp_obj, Functor.comp_map]
+    exact compactSupportOrdinaryPullbackUnit l E f m Q
+  · intro Q
+    dsimp only [Functor.comp_obj, Functor.comp_map]
+    exact compactSupportOrdinaryPullbackUnit l E f n Q
+  · intro M
+    exact (unit_mateEquiv_symm
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
       (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
-      M).symm) N
+      M).symm
 
 end WeilConjectures
