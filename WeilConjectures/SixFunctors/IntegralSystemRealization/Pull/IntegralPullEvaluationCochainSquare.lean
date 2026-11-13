@@ -61,9 +61,28 @@ private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X �
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
-  simpa only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    NatTrans.mapHomologicalComplex_app_f] using
-    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  simp only [HomologicalComplex.comp_f]
+  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
+    let tr := target.consumeMData.appArg!.consumeMData
+    let sr := source.consumeMData.appArg!.consumeMData
+    let ts := tr.getAppArgs.back!.consumeMData.getAppArgs
+    let ss := sr.getAppArgs.back!.consumeMData.getAppArgs
+    let td := ts[ts.size - 2]!.consumeMData
+    let sd := ss[ss.size - 2]!.consumeMData
+    let tf := td.getAppArgs
+    let sf := sd.getAppArgs
+    let tm := tf[tf.size - 2]!.consumeMData
+    let sm := sf[sf.size - 2]!.consumeMData
+    Lean.logInfo m!"MAP HEADS {tm.getAppFn} / {sm.getAppFn}"
+    let ta := tm.getAppArgs
+    let sa := sm.getAppArgs
+    for j in [:min ta.size sa.size] do
+      if ta[j]! != sa[j]! then
+        Lean.logInfo m!"ARG {j} TARGET {ta[j]!}\nSOURCE {sa[j]!}"
+  exact h
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
