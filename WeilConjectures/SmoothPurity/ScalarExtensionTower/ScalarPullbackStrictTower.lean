@@ -51,7 +51,7 @@ private theorem section_cast_cancel {A B : AddCommGrpCat.{u + 1}} (h : A = B) (x
   subst h
   rfl
 
-set_option profiler true in
+set_option trace.profiler true in
 -- The strict square contains several nested sheaf scalar-change functors.
 /-- The strict scalar/pullback quotient square on every level and transition.
 Source: Stacks 03D3, 06YY and 07A4, the nested generator calculation.
@@ -134,7 +134,6 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
       Functor.whiskerLeft CE.asFunctor (NatIso.mapHomologicalComplex t (.up ℤ)).hom ≫
       a ≫ τ ≫ q.hom = (scalarPullbackTower l E L ι f).app P.obj := by
   dsimp only
-  let H := ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C
   let σ := (NatIso.mapHomologicalComplex
     (integralComparisonSequenceScalarPullback l E L ι f) (.up ℤ)).hom.app C
   let τ := HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
