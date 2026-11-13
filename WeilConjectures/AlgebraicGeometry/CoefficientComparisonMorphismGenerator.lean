@@ -29,6 +29,7 @@ private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
     φ.app B (A.presheaf.map i.op s) = D.presheaf.map i.op (φ.app C s) := by
   exact congrArg (fun k ↦ k s) (φ.mapPresheaf.naturality i.op)
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Rewriting section morphisms requires unfolding the three composed adjunctions.
 /-- The concrete mate sends the three-unit generator to the pullback-unit section.

@@ -30,6 +30,7 @@ local instance localInst_TensorHomRestrictionScalar_1
         (M.val.obj (op W))) :=
   inferInstanceAs (SMul (X.sheaf.obj.obj (op W)) (M.val.obj (op W)))
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Normalizing the slice and scheme restriction comparisons requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
