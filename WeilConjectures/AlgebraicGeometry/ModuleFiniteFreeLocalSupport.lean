@@ -55,6 +55,7 @@ private theorem factor_restricted_coproduct
   exact ha i
 
 set_option backward.isDefEq.respectTransparency true in
+set_option trace.profiler true in
 set_option maxHeartbeats 350000 in
 -- Dependent finite choices and comparison of restriction functors exceed the default budget.
 private theorem exists_finite_support_of_unit_support

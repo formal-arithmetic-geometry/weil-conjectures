@@ -23,6 +23,7 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Comparing iterated and direct restriction unfolds module pushforward functors.
 set_option backward.isDefEq.respectTransparency false in

@@ -86,6 +86,7 @@ private theorem moduleDirectImage_comp_eq {X Y Z : RingedSpace.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     moduleDirectImage (f ≫ g) = moduleDirectImage f ⋙ moduleDirectImage g := rfl
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The sectionwise composition equality expands scalar restrictions and localization data.
 /-- Derived direct images compose canonically. The inverse of the comparison is
