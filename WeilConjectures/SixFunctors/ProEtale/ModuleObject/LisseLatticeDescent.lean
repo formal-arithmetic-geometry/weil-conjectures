@@ -77,8 +77,8 @@ private lemma finFreeEntry_matrixTriple_eval {K : Type*} [Semiring K]
     ρ (finFreeEntry (finFreeOfMatrix (A * B * D)) i j) =
       (A.map ρ * B.map ρ * D.map ρ) i j := by
   rw [← finFreeMatrix_apply, finFreeMatrix_finFreeOfMatrix]
-  exact congrFun (congrFun ((Matrix.map_mul ρ (A * B) D).trans
-    (congrArg (fun M ↦ M * D.map ρ) (Matrix.map_mul ρ A B))) i) j
+  change ((A * B * D).map ρ) i j = _
+  rw [Matrix.map_mul, Matrix.map_mul]
 
 /-- Evaluation in a field detects the rank of finite free module objects. -/
 private lemma rank_eq_of_finiteFree_iso {K : Type*} [Field K]
@@ -100,7 +100,8 @@ private lemma exists_finFreeIso_of_continuous {X K : Type*} [TopologicalSpace X]
     (hg' : ∀ i i', Continuous fun x ↦ (((g x)⁻¹ : GL (Fin n) K) : Matrix (Fin n) (Fin n) K) i i') :
     ∃ G : finiteFree R n ≅ finiteFree R n,
       ∀ x, (finFreeMatrix G.hom).map (fun t ↦ ev t x) = (g x : Matrix (Fin n) (Fin n) K) ∧
-        (finFreeMatrix G.inv).map (fun t ↦ ev t x) = (((g x)⁻¹ : GL (Fin n) K) : Matrix (Fin n) (Fin n) K) := by
+        (finFreeMatrix G.inv).map (fun t ↦ ev t x) =
+          (((g x)⁻¹ : GL (Fin n) K) : Matrix (Fin n) (Fin n) K) := by
   classical
   let ρ (x : X) : End (regular R) →+* K :=
     ((Pi.evalRingHom (fun _ : X ↦ K) x).comp ContinuousMap.coeFnRingHom).comp ev.toRingHom
@@ -111,7 +112,8 @@ private lemma exists_finFreeIso_of_continuous {X K : Type*} [TopologicalSpace X]
   let A : Matrix (Fin n) (Fin n) (End (regular R)) :=
     Matrix.of fun i i' ↦ ev.symm ⟨fun x ↦ (g x : Matrix (Fin n) (Fin n) K) i i', hg i i'⟩
   let B : Matrix (Fin n) (Fin n) (End (regular R)) :=
-    Matrix.of fun i i' ↦ ev.symm ⟨fun x ↦ (((g x)⁻¹ : GL (Fin n) K) : Matrix (Fin n) (Fin n) K) i i', hg' i i'⟩
+    Matrix.of fun i i' ↦ ev.symm
+      ⟨fun x ↦ (((g x)⁻¹ : GL (Fin n) K) : Matrix (Fin n) (Fin n) K) i i', hg' i i'⟩
   have hA (x : X) : A.map (ρ x) = (g x : Matrix (Fin n) (Fin n) K) :=
     Matrix.ext fun i i' ↦ by simp [A, ρ]
   have hB (x : X) : B.map (ρ x) = (((g x)⁻¹ : GL (Fin n) K) : Matrix (Fin n) (Fin n) K) :=
