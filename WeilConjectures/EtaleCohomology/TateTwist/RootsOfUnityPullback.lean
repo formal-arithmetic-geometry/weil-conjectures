@@ -156,7 +156,7 @@ lemma isIso_upperStar_map_upperStarRootsOfUnitySheafToRootsOfUnitySheaf {X' : Sc
     (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n q)
   exact IsIso.of_isIso_comp_left ((Etale.upperStarComp _ q g (q ≫ g) rfl).hom.app _) _
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- elaborating the iterated pullbacks and their étale instances is slow
 /-- **The pullback of `μₙ` is `μₙ`.** For `g : X ⟶ Y` with `n` invertible on `Y`, the comparison
 `g^* μₙ ⟶ μₙ` is an isomorphism. After the étale cover of `Y` adjoining a primitive `n`-th root of
