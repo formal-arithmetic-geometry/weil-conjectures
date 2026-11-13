@@ -203,6 +203,22 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
             ((integralCompositionFiniteScalar l E L ι Y).map a) := by
   exact (integralCompositionFiniteScalarPullback l E L ι f).hom.naturality a
 
+private theorem integralCompositionCategory_eq (X : Scheme.{u}) :
+    finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) X =
+      coefficientSequenceDerived l E X := by
+  rfl
+
+private theorem integralCompositionCategory_heq (X : Scheme.{u}) :
+    HEq (inferInstance : Category
+      (finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) X))
+      (inferInstance : Category (coefficientSequenceDerived l E X)) := by
+  exact HEq.rfl
+
+private theorem integralCompositionPullback_heq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    HEq (finiteSystemDerivedPullback (integralSystemRings l E)
+      (integralSystemTransition l E) f) (integralComparisonDerivedSequencePullback l E f) := by
+  exact HEq.rfl
+
 universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆ in
 private theorem scalar_mixed_component_heq
     {EV EV' : Type w₁} [iEV : Category.{v₁} EV] [iEV' : Category.{v₁} EV']
@@ -281,30 +297,36 @@ private theorem integralCompositionFinite_mixed
           (integralSystemTransition l L) h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
   refine scalar_mixed_component_heq
-    (by rfl) (by exact HEq.rfl)
-    (by rfl) (by exact HEq.rfl)
-    (by rfl) (by exact HEq.rfl)
-    (by rfl) (by exact HEq.rfl)
-    (by rfl) (by exact HEq.rfl)
-    (by rfl) (by exact HEq.rfl)
+    (integralCompositionCategory_eq l E V) (integralCompositionCategory_heq l E V)
+    (integralCompositionCategory_eq l E W) (integralCompositionCategory_heq l E W)
+    (integralCompositionCategory_eq l E Z) (integralCompositionCategory_heq l E Z)
+    (integralCompositionCategory_eq l L V) (integralCompositionCategory_heq l L V)
+    (integralCompositionCategory_eq l L W) (integralCompositionCategory_heq l L W)
+    (integralCompositionCategory_eq l L Z) (integralCompositionCategory_heq l L Z)
     (finiteSystemDerivedPullback (integralSystemRings l E)
       (integralSystemTransition l E) k)
-    (integralComparisonDerivedSequencePullback l E k) (by exact HEq.rfl)
+    (integralComparisonDerivedSequencePullback l E k)
+    (integralCompositionPullback_heq l E k)
     (finiteSystemDerivedPullback (integralSystemRings l E)
       (integralSystemTransition l E) h)
-    (integralComparisonDerivedSequencePullback l E h) (by exact HEq.rfl)
+    (integralComparisonDerivedSequencePullback l E h)
+    (integralCompositionPullback_heq l E h)
     (finiteSystemDerivedPullback (integralSystemRings l E)
       (integralSystemTransition l E) (h ≫ k))
-    (integralComparisonDerivedSequencePullback l E (h ≫ k)) (by exact HEq.rfl)
+    (integralComparisonDerivedSequencePullback l E (h ≫ k))
+    (integralCompositionPullback_heq l E (h ≫ k))
     (finiteSystemDerivedPullback (integralSystemRings l L)
       (integralSystemTransition l L) k)
-    (integralComparisonDerivedSequencePullback l L k) (by exact HEq.rfl)
+    (integralComparisonDerivedSequencePullback l L k)
+    (integralCompositionPullback_heq l L k)
     (finiteSystemDerivedPullback (integralSystemRings l L)
       (integralSystemTransition l L) h)
-    (integralComparisonDerivedSequencePullback l L h) (by exact HEq.rfl)
+    (integralComparisonDerivedSequencePullback l L h)
+    (integralCompositionPullback_heq l L h)
     (finiteSystemDerivedPullback (integralSystemRings l L)
       (integralSystemTransition l L) (h ≫ k))
-    (integralComparisonDerivedSequencePullback l L (h ≫ k)) (by exact HEq.rfl)
+    (integralComparisonDerivedSequencePullback l L (h ≫ k))
+    (integralCompositionPullback_heq l L (h ≫ k))
     (integralCompositionFiniteScalar l E L ι V)
     (integralComparisonDerivedSequenceScalar l E L ι V) (by exact HEq.rfl)
     (integralCompositionFiniteScalar l E L ι W)
