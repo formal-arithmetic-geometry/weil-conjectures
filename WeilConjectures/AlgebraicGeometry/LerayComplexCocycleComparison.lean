@@ -20,6 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Elaborating the mapped kernel and cokernel lifts unfolds several composed functors.
 set_option backward.isDefEq.respectTransparency false in

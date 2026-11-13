@@ -40,6 +40,7 @@ def LerayEdgeCocycle {X Y : Scheme.{u}} (f : X ⟶ Y) (ε : LerayEdge X Y f) : P
             (I.isoRightDerivedObj
               (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) q).inv) z
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Resolution comparison unfolds both module-valued derived functors and forgetful maps.
 set_option backward.isDefEq.respectTransparency false in
