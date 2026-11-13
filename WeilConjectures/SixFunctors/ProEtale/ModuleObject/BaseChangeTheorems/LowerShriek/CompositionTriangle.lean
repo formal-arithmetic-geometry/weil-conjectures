@@ -624,6 +624,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
             (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg)).inv := by
     rw [← cancel_epi ((𝔽).compIso (triangleShriekTriangle T₀)).hom, Iso.hom_inv_id]
     erw [reassoc_of% n₁]
+    trace_state
     simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.id_comp,
       Category.comp_id]
   have e₂ :
