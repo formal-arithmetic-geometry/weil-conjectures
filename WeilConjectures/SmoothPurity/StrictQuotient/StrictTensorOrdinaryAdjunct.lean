@@ -248,6 +248,7 @@ private theorem recover_from_inverse {A B : Type*} [Category A] [Category B]
   exact (F.mapIso em).hom_inv_id_assoc _
 
 set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The sectionwise tensor calculation elaborates several normalized functor compositions.
 private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
     (S : CoefficientDerivedSystemTensors l E W)
