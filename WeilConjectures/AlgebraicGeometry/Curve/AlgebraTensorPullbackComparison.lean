@@ -148,7 +148,6 @@ private theorem changeOfRingsIso_formula {T : TopCat.{u}} {A B : T.Sheaf CommRin
 
 end
 
-set_option trace.profiler true in
 /-- Canonical algebra pushout comparison for the chosen tensor pullback adjunction.
 
 Source: Stacks Project, Tags 0095 and 0096; Tag 09MS, coefficient quotient.
@@ -167,6 +166,7 @@ private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{
   classical
   let JX := Opens.grothendieckTopology X
   let JZ := Opens.grothendieckTopology Z
+  -- Construct the Kan extensions pointwise instead of searching for colimits of extensions.
   have : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
       (Opens.map j.base).op.HasLeftKanExtension F := fun F ↦ by
     have : (Opens.map j.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
@@ -229,6 +229,7 @@ private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{
       ((changeOfRingsIso r q.symm).hom.val.app W
         ((a₀.unit.app (commAlgebraSheafModule X.sheaf B)).val.app (op V) x)))
   symm
+  -- Apply the section formulas without rewriting the composite's dependent module types.
   refine (congrArg (fun y ↦ v.hom.val.app W ((k IM).inv.val.app W
       ((changeOfRingsIso r q.symm).hom.val.app W y)))
     (Classical.choose_spec (exists_tensorPullbackAdjunction j)
