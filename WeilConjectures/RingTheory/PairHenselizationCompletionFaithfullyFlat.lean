@@ -28,7 +28,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
-set_option trace.profiler true in
 private theorem stage_completion_flat
     (A B H : Type u) [CommRing A] [CommRing B] [CommRing H] [IsNoetherianRing B]
     (I : Ideal A) (f : A →+* B) (η : A →+* H) (ι : B →+* H)
@@ -80,7 +79,6 @@ private theorem stage_completion_flat
   exact ((RingHom.flat_algebraMap_iff).mpr inferInstance).comp
     (RingHom.Flat.of_bijective α.symm.bijective)
 
-set_option trace.profiler true in
 /-- The canonical map from a pair henselization to the base completion is faithfully flat.
 Source: Stacks Project, More on Algebra, Tag 0AGV, middle paragraphs of the proof.
 (blueprint: lem-weil-pbc-henselization-completion-faithfully-flat).
