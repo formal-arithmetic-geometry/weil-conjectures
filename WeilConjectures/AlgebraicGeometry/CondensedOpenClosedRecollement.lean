@@ -757,6 +757,21 @@ theorem condensed_open_closed_recollement
           (∀ K, IsIso ((lowerStar Λ j).rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient _).obj (I.obj K))))) := by
   classical
+  have hTensor₄ (T : Scheme.{u}) (A B C D : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+      GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+  have hTensor₁₂ (T : Scheme.{u}) (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+      GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+  have hTensor₂₃ (T : Scheme.{u}) (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+      GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
+  have hTensorLeft (T : Scheme.{u})
+      (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := inferInstance
+  have hTensorRight (T : Scheme.{u})
+      (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := inferInstance
   have hAb := ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i
   have hi := moduleCounitOfAbelian Λ i hAb
   have hjunit := openUnitIsIso Λ j
@@ -803,13 +818,12 @@ theorem condensed_open_closed_recollement
     (upperStarLowerStarAdjunction Λ i).leftAdjoint_preservesColimits
   refine ⟨hclosed, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, hjcol, hicol, ff.full, ff.faithful, ⟨e⟩, ?_⟩
-  obtain ⟨ishriek, ⟨ash⟩⟩ : ∃ ishriek :
-      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
-        Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z),
-      Nonempty (lowerStar Λ i ⊣ ishriek) :=
+  have hexceptional :=
     exceptionalAdjointOfSupport (upperStar Λ i) (lowerStar Λ i)
       (upperStar Λ j) (lowerStar Λ j) (upperStarLowerStarAdjunction Λ i)
       (upperStarLowerStarAdjunction Λ j) hzeroji hsupport
+  let ishriek := hexceptional.choose
+  let ash := Classical.choice hexceptional.choose_spec
   have := ash.right_adjoint_additive
   have := ash.rightAdjoint_preservesLimits
   let aj := derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus Λ j
@@ -855,16 +869,17 @@ theorem condensed_open_closed_recollement
   have hDji := plusCompositeZero (lowerStar Λ i) (upperStar Λ j) hzeroji
   have hDij := plusCompositeZero (openImmersionLowerShriek Λ j) (upperStar Λ i) hzeroij
   have hDjoint := plusJointZero (upperStar Λ i) (upperStar Λ j) hjoint
-  obtain ⟨δ, hδshift, hδ⟩ := naturalRecollementTriangle
+  have hδ := naturalRecollementTriangle
     D+(openImmersionLowerShriek Λ j) D+(upperStar Λ j)
     D+(upperStar Λ i) D+(lowerStar Λ i) ai aj dffj hDij
     (essImageOfCounit D+(openImmersionLowerShriek Λ j) D+(upperStar Λ j)
       D+(upperStar Λ i) aj hDij hDjoint)
-  obtain ⟨ε, hεshift, hε⟩ := naturalRecollementTriangle
+  have hε := naturalRecollementTriangle
     D+(lowerStar Λ i) ishriek.rightDerivedFunctorPlus
     D+(upperStar Λ j) (lowerStar Λ j).rightDerivedFunctorPlus bj bi dff hDji
     (essImageOfUnit D+(upperStar Λ i) D+(lowerStar Λ i)
       D+(upperStar Λ j) ai hDji hDjoint)
-  exact ⟨δ, ε, hδshift, hεshift, hδ, hε, hresX, hresU⟩
+  exact ⟨hδ.choose, hε.choose, hδ.choose_spec.1, hε.choose_spec.1,
+    hδ.choose_spec.2, hε.choose_spec.2, hresX, hresU⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
