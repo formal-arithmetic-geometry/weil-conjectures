@@ -412,7 +412,7 @@ private theorem tensor_transition_apply (n : ℕ)
       ((((unrestrictedIntegralTransition l E X n).app Q).f q).val.app V y) :=
   (integralOperationsTensorTransition_existsUnique l E X n).exists.choose_spec P Q p q V x y
 
-set_option profiler true in
+-- Check scalar normalization separately so the transition proof can reuse it directly.
 private theorem integralTensorComparison_apply_scalar
     (b : ∀ m : ℕ, coefficientTotalTensor.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology X)
@@ -490,7 +490,6 @@ private theorem integralTensorComparison_apply_scalar
       (fun z ↦ integralOperationsTotalTensorSection l E X m P Q p q V z
         (unrestrictedIntegralTensorSection l E X m _ V 1 y)) hx.symm
 
-set_option profiler true in
 -- Compare the two scalar presentations and their maps on total summand generators.
 /-- The generator-normalized total scalar-extension comparison commutes with the
 actual consecutive quotient transitions.
