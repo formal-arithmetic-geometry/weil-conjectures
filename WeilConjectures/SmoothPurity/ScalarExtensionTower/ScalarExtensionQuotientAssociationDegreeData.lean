@@ -153,9 +153,7 @@ private theorem tensorSection_smul (W : Scheme.{u})
   rw [← TensorProduct.smul_tmul]
   rfl
 
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
--- Instantiating the glued chain at the identity coefficient field elaborates large types.
 /-- Degreewise normalized association datum for fixed strict quotient representatives.
 
 Source: Stacks Tags 03EL and 07A4; the finite balanced tensor association and its
