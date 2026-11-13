@@ -29,7 +29,7 @@ open CategoryTheory MonoidalCategory TopologicalSpace AlgebraicGeometry
 
 namespace CochainComplex
 
-set_option profiler true in
+-- Assemble the degreewise comparison in abstract categories to keep instance terms small.
 private theorem tensorComparison_iso_of_degrees
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [MonoidalCategory C] [MonoidalCategory D]
@@ -146,7 +146,6 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-set_option profiler true in
 /-- (blueprint: lem-pc-stalk-tensor-complex) Stacks Project, Cohomology, Lemma 06YB:
 there is an isomorphism from the stalk of the total tensor complex to the total tensor
 complex of the stalks, natural in both complexes. Both total complexes use direct sums
