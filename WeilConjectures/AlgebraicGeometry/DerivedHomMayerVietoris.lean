@@ -182,7 +182,6 @@ private theorem hom_exact_of_open_triangle
         d (r f) = eA (a ≫ b ≫ f) := by rw [← hb, ← ha]
         _ = 0 := by rw [hzero, map_zero]
 
-set_option profiler true in
 /-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups.
 Source: Stacks, Tag 08BW (blueprint: lem-sc-derived-hom-mayer-vietoris).
 
@@ -213,6 +212,7 @@ theorem derived_hom_mayer_vietoris
           derivedOpenHomRestriction X (homOfLE inf_le_left) p.1 -
             derivedOpenHomRestriction X (homOfLE inf_le_right) p.2) := by
   classical
+  -- Bind the witness first so that `rcases` does not generalize its large functor expression.
   have htriangle :=
     SheafOfModules.open_hom_triangle_realization X (moduleRings X) rfl U V hcover E F
   rcases htriangle with ⟨A, B, a, b, δ, hT, eB, eA, eN, hb, ha⟩
