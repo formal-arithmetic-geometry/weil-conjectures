@@ -149,6 +149,7 @@ theorem localizedHomComplex_cycle_lift
       (congrArg (fun k ↦ k.val.app W) (g.comm p (p + 1))) t
   have hk : x ∈ (S.sc 0).g.hom.ker := by
     change S.d 0 ((ComplexShape.up ℤ).next 0) x = 0
+    rw [CochainComplex.next ℤ (0 : ℤ)]
     exact hd
   refine ⟨(S.sc 0).abCyclesIso.inv ⟨x, hk⟩, ?_⟩
   intro p W
