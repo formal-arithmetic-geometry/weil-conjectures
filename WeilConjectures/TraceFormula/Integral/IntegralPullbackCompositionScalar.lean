@@ -231,6 +231,40 @@ private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
   exact NatTrans.congr_app (congrArg Iso.hom
     (finiteSystemDerivedComposition_eq_integralComparison l E h k)) M
 
+private theorem scalar_mixed_of_compositor_eq {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A B : C} {X Y Z : D} {a a' : A ⟶ B}
+    {g : F.obj B ⟶ X} {k : X ⟶ Y} {s : F.obj A ⟶ Z} {b b' : Z ⟶ Y}
+    (ha : a = a') (hb : b = b') (h : F.map a' ≫ g ≫ k = s ≫ b') :
+    F.map a ≫ g ≫ k = s ≫ b := by
+  rw [ha, hb]
+  exact h
+
+private theorem integralCompositionFinite_mixed
+    {V W Z : Scheme.{u}}
+    [∀ v : V, Invertible (l : V.residueField v)]
+    [∀ w : W, Invertible (l : W.residueField w)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    (h : Z ⟶ W) (k : W ⟶ V)
+    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
+    (integralCompositionFiniteScalar l E L ι Z).map
+        ((finiteSystemDerivedComposition (integralSystemRings l E)
+          (integralSystemTransition l E) h k).hom.app M) ≫
+      (integralCompositionFiniteScalarPullback l E L ι h).hom.app
+        ((finiteSystemDerivedPullback (integralSystemRings l E)
+          (integralSystemTransition l E) k).obj M) ≫
+      (finiteSystemDerivedPullback (integralSystemRings l L)
+        (integralSystemTransition l L) h).map
+          ((integralCompositionFiniteScalarPullback l E L ι k).hom.app M) =
+      (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
+        (finiteSystemDerivedComposition (integralSystemRings l L)
+          (integralSystemTransition l L) h k).hom.app
+          ((integralCompositionFiniteScalar l E L ι V).obj M) := by
+  apply scalar_mixed_of_compositor_eq (integralCompositionFiniteScalar l E L ι Z)
+    (finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k M)
+    (finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
+      ((integralCompositionFiniteScalar l E L ι V).obj M))
+  exact integralComparisonSystemScalarPullback_finite_mixed l E L ι h k M
+
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
 /-- Scalar extension carries the integral pullback compositor at E to the one at L.
@@ -286,7 +320,7 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (((integralPullbackComposition l E).choose h k).hom.app K)
   have CE := (integralPullbackComposition l E).choose_spec.2.2 h k K
   simp only [integralPullbackSystemComparison_choose] at CE
-  have mix := integralComparisonSystemScalarPullback_finite_mixed l E L ι h k
+  have mix := integralCompositionFinite_mixed l E L ι h k
     ((integralSystemReduction l E V).obj K)
   have IIIhk := integralCompositionFiniteScalar_square l E L ι (h ≫ k) K
   have Na := scalar_right_comp_naturality (UL (h ≫ k)) (UL k) (UL h)
@@ -295,22 +329,16 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     ((integralCompositionFiniteScalarIso l E L ι V).hom.app K)
   have CL := (integralPullbackComposition l L).choose_spec.2.2 h k (SV.obj K)
   simp only [integralPullbackSystemComparison_choose] at CL
-  have eE := finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k
-    ((integralSystemReduction l E V).obj K)
-  have eL := finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
-    ((integralCompositionFiniteScalar l E L ι V).obj
-      ((integralSystemReduction l E V).obj K))
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   have IIIk' := scalar_map_three_eq_three (UL h) IIIk
   have CE' := scalar_map_three_eq_two
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
     (integralCompositionFiniteScalar l E L ι Z) CE
-  have eE' := congrArg (integralCompositionFiniteScalar l E L ι Z).map eE
   exact scalar_composition_paste_mapped
     (D := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) Z)
     (hN1 := N1) (hIIIk := IIIk') (hIIIh := IIIh)
-    (hNg := Ng) (hNp := Np) (hCE := CE') (hMix := mix) (hE := eE') (hL := eL)
+    (hNg := Ng) (hNp := Np) (hCE := CE') (hMix := mix) (hE := rfl) (hL := rfl)
     (hIIIhk := IIIhk) (hNa := Na) (hCL := CL)
 
 end SystemScalar
