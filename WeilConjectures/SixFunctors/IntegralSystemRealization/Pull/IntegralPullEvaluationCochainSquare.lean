@@ -102,6 +102,23 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
     (β' := ordinaryPullEvaluationComplex l E f (n + 1))
     (R := (normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ))
     (P := P) rfl rfl ?_
-  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
+  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
+  run_tac
+    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
+    let rec differences (fuel : Nat) (a b : Lean.Expr) : List (Lean.Expr × Lean.Expr) :=
+      if a == b then [] else
+      match fuel, a, b with
+      | 0, _, _ => [(a, b)]
+      | k + 1, .app f x, .app g y =>
+        (differences k f g ++ differences k x y).take 10
+      | k + 1, .forallE _ t x _, .forallE _ s y _ =>
+        (differences k t s ++ differences k x y).take 10
+      | k + 1, .mdata _ a, b => differences k a b
+      | k + 1, a, .mdata _ b => differences k a b
+      | _, _, _ => [(a, b)]
+    for (a, b) in differences 60 target source do
+      Lean.logInfo m!"TARGET: {a}\nSOURCE: {b}"
+  exact h
 
 end WeilConjectures.IntegralSystemRealization
