@@ -181,7 +181,6 @@ private theorem associativity_transport
       simp only [Category.assoc]
       rfl
 
-set_option profiler true in
 /-- Associativity on three localized coherent K-flat representatives.
 Source: Stacks 07A4, total tensor construction; 07A2, K-flat tensor products.
 (blueprint: lem-pur-completed-pullback-tensor-associativity-representatives).
