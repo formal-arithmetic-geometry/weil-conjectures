@@ -435,6 +435,56 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
   exact exists_galoisLayer_retraction_projector Λ N h Ω C R hR hinv
 
+/-- Transport the tower projector through the Galois layer exchange and an additive functor. -/
+private lemma map_galoisLayer_derivedTrace_projector [IsGalois L Ω]
+    (hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
+      (M : Mod (Sheaf (ProEt.topology N.generic) Ab.{u + 1}) (condensedRingObj Λ N.generic)),
+      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M))
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (K : CochainComplex
+      (Mod (Sheaf (ProEt.topology N.generic) Ab.{u + 1}) (condensedRingObj Λ N.generic)) ℤ)
+    (hc : ∀ n, IsColimit ((galoisTower Ω h).moduleCocone Λ (K.X n)))
+    (a : ℤ) [K.IsStrictlyGE a]
+    (hK : let g := pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
+      ∀ n, ((g)_*⟦Λ⟧).rightAcyclic (((g)^*⟦Λ⟧).obj (K.X n)))
+    (e : DerivedCategory.Q.obj K ≅ L((N.ε)^*⟦Λ⟧).obj C)
+    {𝒜 : Type*} [Category 𝒜] [Preadditive 𝒜]
+    (H : DerivedCategory (Mod (Sheaf (ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj Λ X')) ⥤ 𝒜) [H.Additive]
+    (hΦ : IsColimit ((DerivedCategory.Q ⋙ R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧) ⋙ H).mapCocone
+      ((galoisTower Ω h).complexCocone Λ K)))
+    {W : 𝒜} (hW : ∀ j, IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 W))
+    (φ : H.obj (((N.galoisLayer h Ω).nearbyCycles Λ).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) ⟶ W)
+    {κ : Type*} (S : κ → (Ω ≃ₐ[L] Ω))
+    (hS : ∀ (L' : FiniteGaloisIntermediateField L Ω) (b : L' ≃ₐ[L] L'),
+      ∃ k, ∀ x : L', S k x = b x)
+    (hφ : ∀ k, H.map (N.galoisLayerAction Λ h Ω (S k) (L((𝟙 X)^*⟦Λ⟧).obj C)) ≫ φ = φ) :
+    let R := (galoisTower Ω h).derivedTrace Λ hd K hc a hK _ e
+    let eLayer := N.galoisLayerExchangeIso h Ω Λ C
+    H.map (eLayer.inv ≫ (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+      (R ≫ (derivedUpperStarLowerStarAdjunction Λ
+        (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+          (L((N.ε)^*⟦Λ⟧).obj C)) ≫ eLayer.hom) ≫ φ = φ := by
+  dsimp only
+  have hσj (j : FiniteGaloisIntermediateField L Ω) (b : j ≃ₐ[L] j) :
+      ∃ k, pullbackAction h _ specGaloisAction_comp (S k) ≫ (galoisTower Ω h).π j =
+        (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := by
+    obtain ⟨k, hk⟩ := hS j b
+    refine ⟨k, ?_⟩
+    have hb : (S k).restrictNormal j = b := AlgEquiv.ext fun x ↦
+      (algebraMap j Ω).injective ((AlgEquiv.restrictNormal_commutes (S k) j x).trans (hk x))
+    rw [← hb]
+    exact pullbackAction_comp_galoisLevelProjection h j (S k)
+  let eLayer := N.galoisLayerExchangeIso h Ω Λ C
+  have hφ' (k : κ) := hφ k
+  simp only [galoisLayerAction, galoisLayerAut_autAction] at hφ'
+  have key := (galoisTower Ω h).map_derivedTrace_comp_unit_comp Λ hd K hc a hK _ e
+    (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧) ⋙ H) hΦ hW (H.map eLayer.hom ≫ φ)
+    (fun k ↦ pullbackAction h _ specGaloisAction_comp (S k))
+    (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (S k)) hσj
+    (fun k ↦ (map_map_conj_comp_eq_iff (𝟭 _) H eLayer _ φ).1 (hφ' k))
+  exact (map_map_conj_comp_eq_iff (𝟭 _) H eLayer _ φ).2 key
+
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀] [IsGalois L Ω]
 
@@ -519,31 +569,11 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
   intro Z f' q W φ κ S hS hφ
   obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
     K a hKe f' q
-  have hσj (j : FiniteGaloisIntermediateField L Ω) (b : j ≃ₐ[L] j) :
-      ∃ k, pullbackAction h _ specGaloisAction_comp (S k) ≫ (galoisTower Ω h).π j =
-        (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := by
-    obtain ⟨k, hk⟩ := hS j b
-    refine ⟨k, ?_⟩
-    have hb : (S k).restrictNormal j = b := AlgEquiv.ext fun x ↦
-      (algebraMap j Ω).injective ((AlgEquiv.restrictNormal_commutes (S k) j x).trans (hk x))
-    rw [← hb]
-    exact pullbackAction_comp_galoisLevelProjection h j (S k)
-  let F := R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧)
-  let H₁ := L((f')^*⟦Profinite.continuousMapRingObj T₀⟧)
-  let H₂ := DerivedCategory.homologyFunctor
-    (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)) q
-  let eLayer := N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C
-  have hφ' (k : κ) := hφ k
-  simp only [galoisLayerAction, galoisLayerAut_autAction] at hφ'
-  have key := (galoisTower Ω h).map_derivedTrace_comp_unit_comp _ (fun j M ↦ hW j M) K hc a hK _ e
-    (F ⋙ H₁ ⋙ H₂) hΦ (fun j ↦ hW j W) (H₂.map (H₁.map eLayer.hom) ≫ φ)
-    (fun k ↦ pullbackAction h _ specGaloisAction_comp (S k))
-    (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (S k)) hσj
-    (fun k ↦ (map_map_conj_comp_eq_iff H₁ H₂ eLayer _ φ).1 (hφ' k))
   rw [hr₃]
-  exact (map_map_conj_comp_eq_iff H₁ H₂ eLayer _ φ).2 key
+  exact map_galoisLayer_derivedTrace_projector (Profinite.continuousMapRingObj T₀) N h Ω
+    (fun j M ↦ hW j M) C K hc a hK e
+    (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q)
+    hΦ (fun j ↦ hW j W) φ S hS hφ
 
 /-- Use an étale-origin complex to construct the shared-map projector. -/
 private theorem exists_retraction_galoisLayer_projector_of_etaleOrigin
