@@ -57,6 +57,7 @@ private theorem pasting_transport {X Y W : Scheme.{u}}
   subst k
   simp
 
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Evaluating the composition and unit equations requires several dependent conversions.
 set_option backward.defeqAttrib.useBackward true in

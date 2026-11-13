@@ -46,6 +46,7 @@ private theorem shrink_scalarTower
     ← IsScalarTower.algebraMap_apply R B C]
 
 set_option backward.isDefEq.respectTransparency false in
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- The successive localization and shrink structures require additional elaboration heartbeats.
 /-- Core construction of a nonzero localization of a finite étale model.
