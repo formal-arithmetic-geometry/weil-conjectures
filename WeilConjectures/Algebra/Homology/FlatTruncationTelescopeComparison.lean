@@ -35,6 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1400000 in
 -- Comparing the cone maps unfolds repeated dependent sheaf colimits and cochain components.
 /-- A canonical augmentation from the telescope of replacements of good truncations
