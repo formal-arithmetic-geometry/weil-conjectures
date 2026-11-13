@@ -43,6 +43,7 @@ attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
 
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Expanding the total-tensor map and degreewise isomorphism needs extra elaboration heartbeats.
 /-- Transport of one tensor summand followed by one Hom projection.
 Source: Stacks Project, Tag 0A8X, total tensor and Hom-complex projections.
