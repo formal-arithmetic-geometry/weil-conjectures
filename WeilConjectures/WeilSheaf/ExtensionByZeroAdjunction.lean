@@ -42,8 +42,8 @@ under `E₁.functor ⊣ E₁.inverse` and `E₂.functor ⊣ E₂.inverse` is `τ
 lemma mateEquiv_toAdjunction_hom_eq_inv (E₁ : C ≌ D) (E₂ : E ≌ F) {G : C ⥤ E} {H : D ⥤ F}
     (σ : G ⋙ E₂.functor ≅ E₁.functor ⋙ H) (τ : H ⋙ E₂.inverse ≅ E₁.inverse ⋙ G)
     (h : (mateEquiv E₁.symm.toAdjunction E₂.symm.toAdjunction
-      (TwoSquare.mk _ _ _ _ τ.hom)).natTrans = σ.inv) :
-    (mateEquiv E₁.toAdjunction E₂.toAdjunction (TwoSquare.mk _ _ _ _ σ.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ τ.hom)) = σ.inv) :
+    (mateEquiv E₁.toAdjunction E₂.toAdjunction (TwoSquare.mk _ _ _ _ σ.hom)) =
       τ.inv := by
   rw [← cancel_mono τ.hom, Iso.inv_hom_id]
   ext d
@@ -57,7 +57,7 @@ lemma mateEquiv_toAdjunction_hom_eq_inv (E₁ : C ≌ D) (E₂ : E ≌ F) {G : C
     Equivalence.symm_functor, Equivalence.symm_inverse, Equivalence.symm_unit] at h₁ h₂
   rw [NatTrans.comp_app, Functor.map_comp, NatTrans.id_app, Functor.map_id]
   have e₁ : E₂.functor.map ((mateEquiv E₁.toAdjunction E₂.toAdjunction
-      (TwoSquare.mk _ _ _ _ σ.hom)).natTrans.app d) =
+      (TwoSquare.mk _ _ _ _ σ.hom)).app d) =
       σ.hom.app (E₁.inverse.obj d) ≫ H.map (E₁.counit.app d) ≫ E₂.counitInv.app (H.obj d) := by
     rw [← cancel_mono (E₂.counit.app (H.obj d))]
     refine h₁.trans ?_
@@ -89,28 +89,28 @@ lemma mateEquiv_adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso_in
     (mateEquiv (adicOpenImmersionLowerShriekAdjunction l (Scheme.Hom.geometricFiberMap φ h))
       (adicOpenImmersionLowerShriekAdjunction l (Scheme.Hom.geometricFiberMap φ h))
       (TwoSquare.mk _ _ _ _
-        (adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l φ h).inv)).natTrans =
+        (adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l φ h).inv)) =
     (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).hom := by
   set j := Scheme.Hom.geometricFiberMap φ h
   set a := f.geometricGaloisFrobenius
   set b := g.geometricGaloisFrobenius
   set adjUL := adicUpperStarLowerStarAdjunction l j
   set adj := adicOpenImmersionLowerShriekAdjunction l j
-  set Ea := adicLowerStarEquivalence l a.symm
-  set Eb := adicLowerStarEquivalence l b.symm
+  set Ea := adicLowerStarEquivalence l a.asIso.symm
+  set Eb := adicLowerStarEquivalence l b.asIso.symm
   set U := adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h
   set V := adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h
   -- the mate of `U⁻¹` under the inverse Frobenius equivalences is `V⁻¹`
   have h₁ : (mateEquiv Eb.symm.toAdjunction Ea.symm.toAdjunction
-      (TwoSquare.mk _ _ _ _ U.inv)).natTrans = V.inv := by
+      (TwoSquare.mk _ _ _ _ U.inv)) = V.inv := by
     have := iterated_mateEquiv_conjugateEquiv Eb.symm.toAdjunction Ea.symm.toAdjunction adjUL adjUL
       (TwoSquare.mk _ _ _ _ U.inv)
     rw [conjugateEquiv_adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso_inv,
       ← mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv] at this
-    exact congrArg TwoSquare.natTrans
-      ((mateEquiv _ _).injective (TwoSquare.ext _ _ (NatTrans.congr_app this)))
+    exact
+      ((mateEquiv _ _).injective (NatTrans.ext (funext (NatTrans.congr_app this))))
   -- hence the mate of `V` under the Frobenius equivalences is `U`
-  have h₂ : (mateEquiv Eb.toAdjunction Ea.toAdjunction (TwoSquare.mk _ _ _ _ V.hom)).natTrans =
+  have h₂ : (mateEquiv Eb.toAdjunction Ea.toAdjunction (TwoSquare.mk _ _ _ _ V.hom)) =
       U.hom :=
     mateEquiv_toAdjunction_hom_eq_inv Eb Ea V U.symm h₁
   -- the defining property of the exchange isomorphism of the extension by zero
@@ -122,8 +122,8 @@ lemma mateEquiv_adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso_in
       (adj.comp Eb.toAdjunction)).apply_symm_apply U.symm)
     exact this
   rw [h₄, ← h₂] at h₃
-  exact congrArg TwoSquare.natTrans
-    ((mateEquiv _ _).injective (TwoSquare.ext _ _ (NatTrans.congr_app h₃)))
+  exact
+    ((mateEquiv _ _).injective (NatTrans.ext (funext (NatTrans.congr_app h₃))))
 
 end ProEtale
 

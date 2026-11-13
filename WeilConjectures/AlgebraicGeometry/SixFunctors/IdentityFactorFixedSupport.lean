@@ -101,7 +101,7 @@ private theorem identityTriangle_comp
       (F.pf p).map ((F.shId Z).hom.app ((F.pf (𝟙 Z)).obj ((F.sh i).obj K))) ≫
         (F.pf p).map ((F.pfId Z).hom.app ((F.sh i).obj K)) := by
   have hw : 𝟙 Z ≫ 𝟙 Z = 𝟙 Z ≫ 𝟙 Z := rfl
-  have : IsIso (F.baseChange (𝟙 Z) (𝟙 Z) (𝟙 Z) (𝟙 Z) hw).natTrans :=
+  have : IsIso (F.baseChange (𝟙 Z) (𝟙 Z) (𝟙 Z) (𝟙 Z) hw) :=
     CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := F) (IsPullback.of_horiz_isIso ⟨hw⟩)
   have h₁ := congr_app (F.exchange_id_vert (𝟙 Z) hw) ((F.sh i).obj K)

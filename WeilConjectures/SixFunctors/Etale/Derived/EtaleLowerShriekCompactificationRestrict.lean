@@ -260,7 +260,6 @@ lemma compactificationEtaleGraphMap_restrictOpen
   simp only [Functor.map_comp, Category.assoc, Functor.comp_obj] at h ⊢
   exact h
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 /-- **The candidate unit of `Rf_!(c) ⊣ Le^*` under restriction to an open subscheme**: for an
 open immersion `v : X₀ ⟶ X`, the unit for the compactification `c₀` of `v ≫ e` at `N₀` is, up

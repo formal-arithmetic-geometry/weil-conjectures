@@ -73,7 +73,7 @@ theorem realizationScalar_directImage_mate
           (ProEtale.derivedUpperStarLowerStarAdjunction
             (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g)
           (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackProEtaleIso
-            (RingHom.ulift.{u + 1, u + 1, u, u} φ) g).hom)).natTrans.app K) := by
+            (RingHom.ulift.{u + 1, u + 1, u, u} φ) g).hom)).app K) := by
   let a := RingHom.ulift.{u + 1, u + 1, u, u} φ
   let b (T : Scheme.{u}) := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars (ProEt.topology T) a)
@@ -97,7 +97,7 @@ theorem realizationScalar_directImage_mate
         (pbcDerivedScalarAdjunction (scalarRingMap φ T)) (b T)
         (realizationRestrictionRightIso φ T) M
   have hs : (mateEquiv (b Y) (b Z)
-      (ProEtale.scalarPullbackProEtaleIso a g).inv).natTrans =
+      (ProEtale.scalarPullbackProEtaleIso a g).inv) =
       (ProEtale.leftDerivedUpperStarRestrictScalarsIso a g).hom := by
     change (mateEquiv (b Y) (b Z))
       ((mateEquiv (b Y) (b Z)).symm

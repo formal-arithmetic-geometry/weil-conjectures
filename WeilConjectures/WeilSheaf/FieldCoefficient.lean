@@ -71,7 +71,7 @@ isomorphic to the pullback along `Fr_X`
 noncomputable abbrev FieldWeilSheaf.frobeniusPullback :
     FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
       FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᶠ[Λ]
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ]
 
 /-- The Frobenius pullback is an equivalence, `Fr_X` being an automorphism. -/
 instance : (FieldWeilSheaf.frobeniusPullback k₀ Λ X).IsEquivalence :=

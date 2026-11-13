@@ -403,7 +403,7 @@ theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     (F : c.FixedLocus) [IsProper F.F.hom]
     [HasRightDual
       ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)] :
-    trace c.globalOperator = (c.traceClass F).integral := by
+    End.of (trace c.globalOperator) = (c.traceClass F).integral := by
   obtain ⟨T, hT⟩ : ∃ T : c.toPointDiagram.coeff ⟶ c.toPointDiagram.coeff, T =
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
         c.toPointDiagram.coeff ≫ c.toPointDiagram.pushforwardCoeff ≫
@@ -452,7 +452,7 @@ theorem trace_globalOperator_eq_sum_localTerm [IsProper c.c₂.left]
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).left.base)
       (Set.range (j i').left.base))
     (hcover : ⋃ i, Set.range (j i).left.base = Set.univ) :
-    trace c.globalOperator = ∑ i, (c.traceClass F).localTerm (j i) := by
+    End.of (trace c.globalOperator) = ∑ i, (c.traceClass F).localTerm (j i) := by
   rw [c.trace_globalOperator_eq_integral_traceClass F,
     BorelMooreSection.integral_eq_sum_localTerm B j hdisj hcover]
 end Correspondence

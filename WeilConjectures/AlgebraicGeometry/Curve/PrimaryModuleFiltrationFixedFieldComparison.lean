@@ -160,7 +160,7 @@ theorem primaryAssociatedSheaf_zero
       R.obj.ρ (g : Gal(Ks/K)) x ∈ B) :
     IsZero (primaryAssociatedSheaf K Ks H Ω C T e (primarySubmodule K Ks H R B hB)) := by
   have hV : IsZero (primarySubmodule K Ks H R B hB).obj := by
-    apply (Rep.isZero_iff ℤ H.toSubgroup _).mpr
+    apply (Rep.isZero_iff _).mpr
     change Subsingleton B.toIntSubmodule
     subst B
     rw [map_bot]

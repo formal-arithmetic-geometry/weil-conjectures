@@ -12,6 +12,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import WeilConjectures.RingTheory.QuasiFiniteLocalDimension
+public import Mathlib.RingTheory.KrullDimension.Zero
 
 /-!
 # Dimension of a quasi-finite algebra over affine space

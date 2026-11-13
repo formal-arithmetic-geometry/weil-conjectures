@@ -85,7 +85,7 @@ private theorem fixedSiteScalar_mate_with_iso
       (ProEtale.derivedUpperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g)
       (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackProEtaleIso
-        (RingHom.ulift.{u + 1, u + 1, u, u} φ) g).hom)).natTrans.app
+        (RingHom.ulift.{u + 1, u + 1, u, u} φ) g).hom)).app
           ((ProEtale.comparisonUpperStar
             (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Z).mapDerivedCategory.obj H.obj) ≫
       (ProEtale.lowerStar
@@ -125,7 +125,7 @@ private theorem fixedSiteScalar_mate_with_iso
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g)
     (ProEtale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g)
-    (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackProEtaleIso a g).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackProEtaleIso a g).hom))
   let δX := ProEtale.pbcComparisonReduction Z a
   let δY := ProEtale.pbcComparisonReduction Y a
   let βA := ProEtale.directImageComparisonAmbientIso
@@ -237,7 +237,7 @@ theorem properScalar_transport
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g)
     (ProEtale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g)
-    (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackProEtaleIso a g).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackProEtaleIso a g).hom))
   let δX := ProEtale.pbcComparisonReduction Z a
   let δY := ProEtale.pbcComparisonReduction Y a
   let βA := ProEtale.directImageComparisonAmbientIso

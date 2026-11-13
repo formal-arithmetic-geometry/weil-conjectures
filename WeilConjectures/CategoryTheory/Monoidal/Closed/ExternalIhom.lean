@@ -417,7 +417,7 @@ variable {C₁ C₁' C₂ C C' : Type*} [Category* C₁] [Category* C₁'] [Cate
   (hπ₁ : ∀ {M M' : C₁'} (φ : M ⟶ M') (N : C₁),
     L₁.map φ ▷ N ≫ π₁ M' N = π₁ M N ≫ L₁.map (φ ▷ G₁.obj N))
   (Ex : L₁ ⋙ F₁ ⟶ F₁' ⋙ L) [IsIso Ex] (ξ : TwoSquare F₁' L₁ L F₁)
-  (hExξ : ∀ M : C₁', Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
+  (hExξ : ∀ M : C₁', Ex.app M ≫ ξ.app M = 𝟙 _)
   (κ : ∀ N : C₁, F₁'.obj (G₁.obj N) ⟶ G.obj (F₁.obj N)) [∀ N, IsIso (κ N)]
 
 omit [MonoidalClosed C₁] [MonoidalClosed C₁'] [MonoidalClosed C₂] [MonoidalClosed C]
@@ -442,11 +442,11 @@ include hπ hExξ hEx in
 evaluation is, through the base change map `F₁' R₁ ⟶ R F₁` (the mate of `ξ`) and the
 comparison `projectionIhomMap` of `R₁`, the transposed evaluation of `F₁'`. -/
 lemma projectionTensorMap_comp_map_comp_inv_mateEquiv
-    [∀ N, IsIso ((mateEquiv adj₁ adj ξ).natTrans.app N)] (E₁ L₁ : C₁) :
+    [∀ N, IsIso ((mateEquiv adj₁ adj ξ).app N)] (E₁ L₁ : C₁) :
     adj.projectionTensorMap π (F₁.obj ((ihom E₁).obj L₁)) (F₁.obj E₁) ≫
         R.map ((β_ _ _).hom ≫ μ F₁ _ _ ≫ F₁.map ((ihom.ev E₁).app L₁)) ≫
-          inv ((mateEquiv adj₁ adj ξ).natTrans.app L₁) =
-      ((inv ((mateEquiv adj₁ adj ξ).natTrans.app ((ihom E₁).obj L₁)) ≫
+          inv ((mateEquiv adj₁ adj ξ).app L₁) =
+      ((inv ((mateEquiv adj₁ adj ξ).app ((ihom E₁).obj L₁)) ≫
           F₁'.map (adj₁.projectionIhomMap π₁ E₁ L₁)) ⊗ₘ inv (κ E₁)) ≫
         (β_ _ _).hom ≫ μ F₁' _ _ ≫ F₁'.map ((ihom.ev (G₁.obj E₁)).app (R₁.obj L₁)) := by
   have hδb : ∀ {N N' : C₁} (φ : N ⟶ N') (N'' : C₁), F₁.map (φ ▷ N'') ≫
@@ -455,7 +455,7 @@ lemma projectionTensorMap_comp_map_comp_inv_mateEquiv
     fun φ N'' ↦ (Functor.OplaxMonoidal.δ_natural_left F₁ φ N'').symm
   have key := projectionTensorMap_mateEquiv adj₁ adj π₁ π hπ (Functor.OplaxMonoidal.δ F₁')
     (Functor.OplaxMonoidal.δ F₁) hδb κ Ex ξ hExξ hEx ((ihom E₁).obj L₁) E₁
-  set BC := (mateEquiv adj₁ adj ξ).natTrans
+  set BC := (mateEquiv adj₁ adj ξ)
   set H₁ := (ihom E₁).obj L₁
   -- solve `key` for the tensor map of `R`
   have key' : adj.projectionTensorMap π (F₁.obj H₁) (F₁.obj E₁) =
@@ -520,7 +520,7 @@ theorem isIso_map_externalIhomMap_iff
     (hassoc : ∀ (M : C') (N N' : C), π M N ▷ N' ≫ π (M ⊗ G.obj N) N' ≫
       L.map (α_ M (G.obj N) (G.obj N')).hom =
         (α_ _ N N').hom ≫ π M (N ⊗ N') ≫ L.map (M ◁ δG N N'))
-    [∀ N, IsIso ((mateEquiv adj₁ adj ξ).natTrans.app N)]
+    [∀ N, IsIso ((mateEquiv adj₁ adj ξ).app N)]
     (e₂ : F₂ ⋙ G ≅ F₂')
     (he₂ : ∀ X Y : C₂, μ G (F₂.obj X) (F₂.obj Y) ≫ G.map (μ F₂ X Y) ≫ e₂.hom.app (X ⊗ Y) =
       (e₂.hom.app X ⊗ₘ e₂.hom.app Y) ≫ μ F₂' X Y)
@@ -531,7 +531,7 @@ theorem isIso_map_externalIhomMap_iff
   obtain rfl : δ₁' = Functor.OplaxMonoidal.δ F₁' := funext fun M ↦ funext (hδ₁' M)
   obtain rfl : δ₁ = Functor.OplaxMonoidal.δ F₁ := funext fun M ↦ funext (hδ₁ M)
   obtain rfl : δG = Functor.OplaxMonoidal.δ G := funext fun N ↦ funext (hδG N)
-  set BC := (mateEquiv adj₁ adj ξ).natTrans
+  set BC := (mateEquiv adj₁ adj ξ)
   set H₁ := (ihom E₁).obj L₁
   set H₂ := (ihom E₂).obj L₂
   have : IsIso (adj₁.projectionIhomMap π₁ E₁ L₁) := adj₁.isIso_projectionIhomMap π₁ hπ₁ E₁ L₁

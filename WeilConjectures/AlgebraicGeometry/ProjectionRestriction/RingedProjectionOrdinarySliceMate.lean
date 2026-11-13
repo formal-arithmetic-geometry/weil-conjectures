@@ -43,14 +43,14 @@ private theorem localizedInverseMate_isIso
       (x : M.val.obj (op (F.obj T.unop.left))), ((e.hom.app M).val.app T) x = x) :
     IsIso (((mateEquiv (SheafOfModules.pullbackPushforwardAdjunction a)
       (SheafOfModules.pullbackPushforwardAdjunction aV)).symm
-        (TwoSquare.mk _ _ _ _ e.hom)).natTrans) := by
+        (TwoSquare.mk _ _ _ _ e.hom))) := by
   subst aV
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
   have hcomp : (((mateEquiv (SheafOfModules.pullbackPushforwardAdjunction a)
       (SheafOfModules.pullbackPushforwardAdjunction
         (SheafOfModules.RingedSitePullback.locMap.{u + 1, u, 0} a V))).symm
-          (TwoSquare.mk _ _ _ _ e.hom)).natTrans).app M =
+          (TwoSquare.mk _ _ _ _ e.hom))).app M =
       SheafOfModules.RingedSitePullback.localComparison.{u + 1, u, 0} a V M := by
     apply ((SheafOfModules.pullbackPushforwardAdjunction
       (SheafOfModules.RingedSitePullback.locMap.{u + 1, u, 0} a V)).homEquiv _ _).injective
@@ -99,7 +99,7 @@ theorem localOrdinaryInverseMate_isIso
       (x : M.val.obj (op ((proEtaleBaseChange f).obj T.unop.left))),
       ((ordinary.hom.app M).val.app T) x = x) :
     IsIso (((mateEquiv g.operation.moduleAdjunction b.operation.moduleAdjunction).symm
-      (TwoSquare.mk _ _ _ _ ordinary.hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ ordinary.hom))) := by
   let := g.operation.continuous
   let := b.operation.continuous
   let := g.operation.rightAdjoint

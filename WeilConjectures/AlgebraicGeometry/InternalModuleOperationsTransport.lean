@@ -60,7 +60,7 @@ private theorem comparison_existsUnique
     {L' : C ⥤ D} {R' : D ⥤ C} (a : L ⊣ R) (b : L' ⊣ R')
     (r : R ⋙ E.functor ≅ H.functor ⋙ R') :
     ∃! c : L ⋙ H.functor ≅ E.functor ⋙ L',
-      (mateEquiv a b (.mk _ _ _ _ c.inv)).natTrans = r.hom := by
+      (mateEquiv a b (.mk _ _ _ _ c.inv)) = r.hom := by
   obtain ⟨c, hc, huniq, _⟩ := exists_equivalenceAdjunctionComparison E H a b r
   exact ⟨c, hc, fun d hd ↦ huniq d hd⟩
 
@@ -255,8 +255,8 @@ theorem lowerComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
   have h (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) (V : Y.ProEtᵒᵖ) (r : (ring Λ Y).obj.obj V)
       (m : (R.obj M).val.obj V) :
-      ((ModuleCat.smul ((L.obj M).val.obj V) r).hom) m =
-        ((ModuleCat.smul ((R.obj M).val.obj V) r).hom) m := by
+      ((ModuleCat.smul ((L.obj M).val.obj V) r).asHom.hom) m =
+        ((ModuleCat.smul ((R.obj M).val.obj V) r).asHom.hom) m := by
     change ((Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y)
       (((siteMap f).sheafPushforwardContinuous Ab.{u + 1}
@@ -372,25 +372,25 @@ private theorem comparison_unit_counit
     {L' : C ⥤ D} {R' : D ⥤ C} (a : L ⊣ R) (b : L' ⊣ R')
     (r : R ⋙ E.functor ≅ H.functor ⋙ R')
     (c : L ⋙ H.functor ≅ E.functor ⋙ L')
-    (hc : (mateEquiv a b c.inv).natTrans = r.hom) :
+    (hc : (mateEquiv a b c.inv) = r.hom) :
     (∀ M, E.functor.map (a.unit.app M) ≫ r.hom.app (L.obj M) ≫
       R'.map (c.hom.app M) = b.unit.app (E.functor.obj M)) ∧
     (∀ N, L'.map (r.inv.app N) ≫ c.inv.app (R.obj N) ≫
       H.functor.map (a.counit.app N) = b.counit.app (H.functor.obj N)) := by
-  have hi : ((mateEquiv a b).symm r.hom).natTrans = c.inv := by
+  have hi : ((mateEquiv a b).symm r.hom) = c.inv := by
     rw [← hc]
-    exact congrArg TwoSquare.natTrans ((mateEquiv a b).symm_apply_apply c.inv)
+    exact ((mateEquiv a b).symm_apply_apply c.inv)
   constructor
   · intro M
     have h := unit_mateEquiv_symm a b r.hom M
     change _ = b.unit.app (E.functor.obj M) ≫
-      R'.map (((mateEquiv a b).symm r.hom).natTrans.app M) at h
+      R'.map (((mateEquiv a b).symm r.hom).app M) at h
     rw [hi] at h
     rw [← Category.assoc, h, Category.assoc, ← R'.map_comp]
     simp
   · intro N
     have h := mateEquiv_counit_symm a b r.hom N
-    change _ = ((mateEquiv a b).symm r.hom).natTrans.app (R.obj N) ≫
+    change _ = ((mateEquiv a b).symm r.hom).app (R.obj N) ≫
       H.functor.map (a.counit.app N) at h
     rw [hi] at h
     rw [← h, ← Category.assoc, ← L'.map_comp]
@@ -443,8 +443,8 @@ private theorem inverseMate_transport
     (u' : U' ⋙ EC.functor ≅ ED.functor ⋙ Ub')
     (j : J ⋙ EB.functor ≅ EA.functor ⋙ Jb)
     (j' : J' ⋙ ED.functor ≅ EC.functor ⋙ Jb')
-    (hj : (mateEquiv adj adjb j.inv).natTrans = u.hom)
-    (hj' : (mateEquiv adj' adjb' j'.inv).natTrans = u'.hom)
+    (hj : (mateEquiv adj adjb j.inv) = u.hom)
+    (hj' : (mateEquiv adj' adjb' j'.inv) = u'.hom)
     (P : A ⥤ C) (Q : B ⥤ D) (Pb : Ab ⥤ Cb) (Qb : Bb ⥤ Db)
     (p : P ⋙ EC.functor ≅ EA.functor ⋙ Pb)
     (q : Q ⋙ ED.functor ≅ EB.functor ⋙ Qb)
@@ -452,16 +452,16 @@ private theorem inverseMate_transport
     (hb : ∀ Y : B,
       p.hom.app (U.obj Y) ≫ Pb.map (u.hom.app Y) ≫ bb.app (EB.functor.obj Y) =
         EC.functor.map (b.app Y) ≫ u'.hom.app (Q.obj Y) ≫ Ub'.map (q.hom.app Y)) :
-    Functor.whiskerRight (((mateEquiv adj adj').symm b).natTrans) ED.functor ≫
+    Functor.whiskerRight (((mateEquiv adj adj').symm b)) ED.functor ≫
         (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ q ≪≫
           (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight j _ ≪≫
             Functor.associator _ _ _).hom =
       (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ j' ≪≫
         (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight p _ ≪≫
           Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft EA.functor (((mateEquiv adjb adjb').symm bb).natTrans) ∧
-      (IsIso (((mateEquiv adjb adjb').symm bb).natTrans) →
-        IsIso (((mateEquiv adj adj').symm b).natTrans)) := by
+        Functor.whiskerLeft EA.functor (((mateEquiv adjb adjb').symm bb)) ∧
+      (IsIso (((mateEquiv adjb adjb').symm bb)) →
+        IsIso (((mateEquiv adj adj').symm b))) := by
   obtain ⟨hm, hi⟩ := equivalenceAdjunctionComparison_inverseMate
     EA EB EC ED adj adj' adjb adjb' u u' j j' hj hj' P Q Pb Qb p q b bb hb
   refine ⟨?_, hi.mpr⟩
@@ -686,7 +686,7 @@ theorem upperComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! c : CondensedRing.upperStar Λ f ⋙ (equivalence Λ X).functor ≅
         (equivalence Λ Y).functor ⋙ upperStar Λ f,
       (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
-        (.mk _ _ _ _ c.inv)).natTrans =
+        (.mk _ _ _ _ c.inv)) =
         (lowerComparison Λ f).hom := by
   exact comparison_existsUnique (equivalence Λ Y) (equivalence Λ X)
     (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
@@ -740,7 +740,7 @@ theorem openComparison_existsUnique {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImme
     ∃! o : CondensedRing.openImmersionLowerShriek Λ j ⋙ (equivalence Λ T).functor ≅
         (equivalence Λ U).functor ⋙ extension Λ j,
       (mateEquiv (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j)
-        (openAdjunction Λ j) (.mk _ _ _ _ o.inv)).natTrans = (upperComparison Λ j).hom := by
+        (openAdjunction Λ j) (.mk _ _ _ _ o.inv)) = (upperComparison Λ j).hom := by
   exact comparison_existsUnique (equivalence Λ U) (equivalence Λ T)
     (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j) (openAdjunction Λ j)
     (upperComparison Λ j)
@@ -830,7 +830,7 @@ private theorem equivalence_additive (T : Scheme.{u}) :
 
 private theorem upperComparison_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
-      (.mk _ _ _ _ (upperComparison Λ f).inv)).natTrans =
+      (.mk _ _ _ _ (upperComparison Λ f).inv)) =
       (lowerComparison Λ f).hom := by
   unfold upperComparison
   exact (upperComparison_existsUnique Λ f).exists.choose_spec
@@ -937,7 +937,7 @@ noncomputable def internalBaseChange {U' U T' T : Scheme.{u}}
       CondensedRing.openImmersionLowerShriek Λ j ⋙ CondensedRing.upperStar Λ g :=
   ((mateEquiv (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j)
     (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j')).symm
-      (.mk _ _ _ _ (internalSquare Λ sq).hom)).natTrans
+      (.mk _ _ _ _ (internalSquare Λ sq).hom))
 
 /-- The sectionwise map is the same adjunction mate of pullback composition.
 Source: Stacks 07A7 and the node proof Step 7
@@ -947,7 +947,7 @@ noncomputable def sectionBaseChange {U' U T' T : Scheme.{u}}
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : ChosenCartesianSquare g' j' j g) :
     upperStar Λ g' ⋙ extension Λ j' ⟶ extension Λ j ⋙ upperStar Λ g :=
   ((mateEquiv (openAdjunction Λ j) (openAdjunction Λ j')).symm
-    (.mk _ _ _ _ (sectionSquare Λ sq).hom)).natTrans
+    (.mk _ _ _ _ (sectionSquare Λ sq).hom))
 
 /-- Comparison of the source of the open-extension base-change transformation.
 Source: node proof Step 7 (blueprint: lem-sfb-internal-module-operations-transport). -/
@@ -974,7 +974,7 @@ noncomputable def baseChangeTargetComparison {U T T' : Scheme.{u}}
 private theorem openComparison_mate {U T : Scheme.{u}} (j : U ⟶ T)
     [IsOpenImmersion j] :
     (mateEquiv (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j)
-      (openAdjunction Λ j) (.mk _ _ _ _ (openComparison Λ j).inv)).natTrans =
+      (openAdjunction Λ j) (.mk _ _ _ _ (openComparison Λ j).inv)) =
       (upperComparison Λ j).hom := by
   unfold openComparison
   exact (openComparison_existsUnique Λ j).exists.choose_spec
@@ -1030,7 +1030,7 @@ theorem internal_module_operations_transport :
         (S.map (equivalence Λ T).inverse).Exact ↔ S.Exact)) ∧
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
       (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
-          (.mk _ _ _ _ (upperComparison Λ f).inv)).natTrans = (lowerComparison Λ f).hom ∧
+          (.mk _ _ _ _ (upperComparison Λ f).inv)) = (lowerComparison Λ f).hom ∧
       (∀ M,
         (equivalence Λ Y).functor.map
             ((CondensedRing.upperStarLowerStarAdjunction Λ f).unit.app M) ≫
@@ -1045,7 +1045,7 @@ theorem internal_module_operations_transport :
         (adjunction Λ f).counit.app ((equivalence Λ X).functor.obj N))) ∧
     (∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j],
       (mateEquiv (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j)
-        (openAdjunction Λ j) (.mk _ _ _ _ (openComparison Λ j).inv)).natTrans =
+        (openAdjunction Λ j) (.mk _ _ _ _ (openComparison Λ j).inv)) =
         (upperComparison Λ j).hom ∧
       (∀ M,
         (equivalence Λ U).functor.map

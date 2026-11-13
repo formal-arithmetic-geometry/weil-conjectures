@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Topology.DiscreteQuotient
-public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.Topology.Separation.Regular
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.RingTheory.Etale.Weakly
 public import Mathlib.RingTheory.Flat.Localization
@@ -228,7 +228,7 @@ lemma toPrimeSpectrum_injective :
   subst hp
   suffices ht : t = t' by rw [ht]
   by_contra hne
-  have : TotallySeparatedSpace T := loc_compact_t2_tot_disc_iff_tot_sep.mp ‹_›
+  have : TotallySeparatedSpace T := totallyDisconnectedSpace_iff_totallySeparatedSpace.mp ‹_›
   obtain ⟨U, hU, htU, ht'U⟩ := exists_isClopen_of_totally_separated hne
   have h1 : charFn R hU ∈ (toPrimeSpectrum (t', p)).asIdeal := by
     rw [mem_toPrimeSpectrum_asIdeal, charFn_apply_of_notMem hU ht'U]

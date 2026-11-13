@@ -16,7 +16,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import WeilConjectures.Algebra.ModuleDirectedColimitFinitePresentation
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
-import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-! # Universal tensor acyclicity implies K-flatness
 

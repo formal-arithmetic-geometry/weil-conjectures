@@ -43,13 +43,13 @@ Proof: apply the hom equivalence of `L₂ ⊣ R₂`; the unit formula of the inv
 naturality of `β` reduce both sides to `G f ≫ β_Y`. -/
 theorem Adjunction.homEquiv_symm_map_comp_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (β : TwoSquare R₁ H G R₂) {Z : A} {Y : B} (f : Z ⟶ R₁.obj Y) :
-    (adj₂.homEquiv _ _).symm (G.map f ≫ β.natTrans.app Y) =
-      ((mateEquiv adj₁ adj₂).symm β).natTrans.app Z ≫ H.map ((adj₁.homEquiv _ _).symm f) := by
+    (adj₂.homEquiv _ _).symm (G.map f ≫ β.app Y) =
+      ((mateEquiv adj₁ adj₂).symm β).app Z ≫ H.map ((adj₁.homEquiv _ _).symm f) := by
   set g := (adj₁.homEquiv _ _).symm f
   have hf : f = adj₁.unit.app Z ≫ R₁.map g := by
     exact (Equiv.apply_symm_apply _ f).symm.trans (adj₁.homEquiv_unit Z Y g)
   apply (adj₂.homEquiv _ _).injective
-  have hn := β.natTrans.naturality g
+  have hn := β.naturality g
   rw [Functor.comp_map, Functor.comp_map] at hn
   rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit, Functor.map_comp, hf, G.map_comp,
     assoc, hn, ← assoc, unit_mateEquiv_symm adj₁ adj₂ β Z, assoc]
@@ -97,13 +97,13 @@ Proof: the iterated mate is the conjugate (`iterated_mateEquiv_conjugateEquiv`),
 transformation of left adjoints with invertible conjugate is invertible. -/
 theorem isIso_mateEquiv_symm_of_isIso_mateEquiv (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂) (β : TwoSquare R₁ F₂ F₁ R₂)
-    [IsIso (mateEquiv adj₄ adj₃ β).natTrans] :
-    IsIso ((mateEquiv adj₁ adj₂).symm β).natTrans := by
+    [IsIso (mateEquiv adj₄ adj₃ β)] :
+    IsIso ((mateEquiv adj₁ adj₂).symm β) := by
   have h := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄
     ((mateEquiv adj₁ adj₂).symm β)
   rw [Equiv.apply_symm_apply] at h
   have : IsIso (conjugateEquiv (adj₁.comp adj₄) (adj₃.comp adj₂)
-      ((mateEquiv adj₁ adj₂).symm β).natTrans) := by
+      ((mateEquiv adj₁ adj₂).symm β)) := by
     rw [← h]
     infer_instance
   exact conjugateEquiv_of_iso (adj₁.comp adj₄) (adj₃.comp adj₂) _

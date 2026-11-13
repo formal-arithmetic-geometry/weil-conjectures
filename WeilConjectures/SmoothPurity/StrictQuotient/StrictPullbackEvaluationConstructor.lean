@@ -63,12 +63,12 @@ private theorem inverse_mate_unit
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {G : A ⥤ C} {H : B ⥤ D} (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (d : R₁ ⋙ G ≅ H ⋙ R₂) (e : L₁ ⋙ H ≅ G ⋙ L₂)
-    (he : ((mateEquiv a b).symm d.hom).natTrans = e.inv) (M : A) :
+    (he : ((mateEquiv a b).symm d.hom) = e.inv) (M : A) :
     G.map (a.unit.app M) ≫ d.hom.app (L₁.obj M) ≫ R₂.map (e.hom.app M) =
       b.unit.app (G.obj M) := by
   have hu := unit_mateEquiv_symm a b d.hom M
   change G.map (a.unit.app M) ≫ d.hom.app (L₁.obj M) =
-    b.unit.app (G.obj M) ≫ R₂.map (((mateEquiv a b).symm d.hom).natTrans.app M) at hu
+    b.unit.app (G.obj M) ≫ R₂.map (((mateEquiv a b).symm d.hom).app M) at hu
   rw [he] at hu
   rw [← Category.assoc, hu, Category.assoc, ← R₂.map_comp, e.inv_hom_id_app]
   exact (congrArg (b.unit.app (G.obj M) ≫ ·) (R₂.map_id _)).trans (Category.comp_id _)
@@ -116,7 +116,7 @@ private def pullbackEvaluation {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :
       (coefficientSequenceTopology (Scheme.ProEt.topology V)) :=
     AmbientPullbackTensor.baseContinuous g none
   have : IsIso ((mateEquiv (sequenceAdjunction l E g) (evaluationFiniteAdjunction l E g n)).symm
-      (directEvaluation l E g n).hom).natTrans :=
+      (directEvaluation l E g n).hom) :=
     SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (Scheme.ProEt.topology W) (Scheme.ProEt.topology V) (Scheme.proEtaleBaseChange g)
       _ _ n (AmbientPullbackTensor.moduleRingUnit l E g none) _ _
@@ -126,7 +126,7 @@ private def pullbackEvaluation {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :
       (integralComparisonSequencePullback l E g) (integralOperationsLevelPullback l E g n)
       (sequenceAdjunction l E g) (evaluationFiniteAdjunction l E g n) (directEvaluation l E g n)
   exact (asIso ((mateEquiv (sequenceAdjunction l E g) (evaluationFiniteAdjunction l E g n)).symm
-    (directEvaluation l E g n).hom).natTrans).symm
+    (directEvaluation l E g n).hom)).symm
 
 private theorem pullbackEvaluation_unit {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ)
     (M : coefficientSequenceModules l E W) :

@@ -231,7 +231,6 @@ lemma isIso_homEquiv_prodUpperStarCounit_of_eq_snd (j : U ⟶ Y) {p' : X ⨯ Y �
   have := isIso_boundedConstructibleBaseChange_prodMap ℓ (X := X) j
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- the instantiation of the abstract lemmas involves large terms
 /-- **The Künneth map of `g × j` along `(𝟙 × j) ≫ (g × 𝟙)`**: for a proper `g : Z ⟶ X`, if the
 left projection morphism of `L(𝟙_Z × j)^* ⊣ R(𝟙_Z × j)_*` at `(Lp_Z^* N, Lp_U^* B)` is an

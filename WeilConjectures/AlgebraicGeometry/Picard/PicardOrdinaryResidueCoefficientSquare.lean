@@ -214,7 +214,6 @@ private theorem triangle_eq_ordinary
       (picardOrdinaryCoefficientTriangle q q' b hb L).hom := by
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Evaluating the square at L unfolds its tensor and ordinary coefficient isomorphisms.
 set_option maxRecDepth 2048 in
 /-- Ordinary coefficient normalization commutes with the fibre square.

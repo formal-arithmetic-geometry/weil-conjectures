@@ -163,7 +163,6 @@ attribute [local irreducible] picardTermwiseCounit picardTermwiseSingleMap
 
 -- Retain shared local comparison data instead of traversing its choice specifications again.
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 500000 in
 -- The pinned counit and composition choices have large dependent types.
 /-- The canonical maps on arbitrary singles satisfy the composition counit equation.
 No flatness, invertibility, or choice of a comparison family is asserted here.

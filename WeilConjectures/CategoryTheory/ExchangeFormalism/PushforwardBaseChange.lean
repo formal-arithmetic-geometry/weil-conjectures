@@ -187,7 +187,7 @@ the square isomorphism followed by the counit of `r^* ⊣ r_*`. -/
 @[reassoc]
 lemma pfBaseChange_counit (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     (w : t ≫ r = l ≫ b) (M : F.obj U) :
-    (F.pb l).map ((F.pfBaseChange t l r b w).natTrans.app M) ≫
+    (F.pb l).map ((F.pfBaseChange t l r b w).app M) ≫
         (F.adj l).counit.app ((F.pb t).obj M) =
       (F.sqIso t l r b w).inv.app ((F.pf r).obj M) ≫ (F.pb t).map ((F.adj r).counit.app M) :=
   mateEquiv_counit (F.adj r) (F.adj l) _ M
@@ -196,14 +196,14 @@ lemma pfBaseChange_counit (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' �
 followed by the counit of `t^* ⊣ t_*`. -/
 @[reassoc]
 lemma exchange_counit (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) [Fact (𝒪 l)]
-    [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w).natTrans]
+    [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w)]
     (N : F.obj U') :
-    (F.pb b).map ((F.exchange t l r b w).natTrans.app N) ≫
+    (F.pb b).map ((F.exchange t l r b w).app N) ≫
         (F.adj b).counit.app ((F.sh l).obj N) =
-      inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N)) ≫
+      inv ((F.baseChange t l r b w).app ((F.pf t).obj N)) ≫
         (F.sh l).map ((F.adj t).counit.app N) := by
   have h := mateEquiv_counit (F.adj t) (F.adj b)
-    (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l r b w).natTrans)) N
+    (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l r b w))) N
   simpa [exchange] using h
 
 /-- **The exchange maps and the base change maps of the pushforwards on a cube.** For a
@@ -222,39 +222,39 @@ lemma exchange_pfBaseChange_cube (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b
     (z : W' ⟶ Z') (v : W ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 r)] [Fact (𝒪 l')]
     [Fact (𝒪 r')] (w : t ≫ r = l ≫ b) (w' : t' ≫ r' = l' ≫ b') (sx : x ≫ t = t' ≫ y)
     (sl : x ≫ l = l' ≫ z) (sr : y ≫ r = r' ≫ v) (sb : z ≫ b = b' ≫ v)
-    [IsIso (F.baseChange t l r b w).natTrans] [IsIso (F.baseChange t' l' r' b' w').natTrans]
-    [IsIso (F.baseChange y r' r v sr).natTrans] (N : F.obj U') :
-    inv ((F.baseChange y r' r v sr).natTrans.app ((F.pf t).obj N)) ≫
-        (F.sh r').map ((F.pfBaseChange x t' t y sx).natTrans.app N) ≫
-        (F.exchange t' l' r' b' w').natTrans.app ((F.pb x).obj N) ≫
-        (F.pf b').map ((F.baseChange x l' l z sl).natTrans.app N) =
-      (F.pb v).map ((F.exchange t l r b w).natTrans.app N) ≫
-        (F.pfBaseChange z b' b v sb).natTrans.app ((F.sh l).obj N) := by
+    [IsIso (F.baseChange t l r b w)] [IsIso (F.baseChange t' l' r' b' w')]
+    [IsIso (F.baseChange y r' r v sr)] (N : F.obj U') :
+    inv ((F.baseChange y r' r v sr).app ((F.pf t).obj N)) ≫
+        (F.sh r').map ((F.pfBaseChange x t' t y sx).app N) ≫
+        (F.exchange t' l' r' b' w').app ((F.pb x).obj N) ≫
+        (F.pf b').map ((F.baseChange x l' l z sl).app N) =
+      (F.pb v).map ((F.exchange t l r b w).app N) ≫
+        (F.pfBaseChange z b' b v sb).app ((F.sh l).obj N) := by
   -- the cube relation for the base change maps of the extension by zero, with inverses
   have hc := F.baseChange_cube t l r b t' l' r' b' x y z v w w' sx sl sr sb ((F.pf t).obj N)
   have hc' : (F.sh l').map ((F.sqIso x t' t y sx).inv.app ((F.pf t).obj N)) ≫
-      (F.baseChange x l' l z sl).natTrans.app ((F.pb t).obj ((F.pf t).obj N)) =
-      (F.baseChange t' l' r' b' w').natTrans.app ((F.pb y).obj ((F.pf t).obj N)) ≫
-        (F.pb b').map ((F.baseChange y r' r v sr).natTrans.app ((F.pf t).obj N)) ≫
+      (F.baseChange x l' l z sl).app ((F.pb t).obj ((F.pf t).obj N)) =
+      (F.baseChange t' l' r' b' w').app ((F.pb y).obj ((F.pf t).obj N)) ≫
+        (F.pb b').map ((F.baseChange y r' r v sr).app ((F.pf t).obj N)) ≫
         (F.sqIso z b' b v sb).inv.app ((F.sh r).obj ((F.pf t).obj N)) ≫
-        (F.pb z).map (inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N))) := by
+        (F.pb z).map (inv ((F.baseChange t l r b w).app ((F.pf t).obj N))) := by
     rw [← reassoc_of% hc]
     simp
-  have hΞ : (F.pb b').map (inv ((F.baseChange y r' r v sr).natTrans.app ((F.pf t).obj N))) ≫
-      inv ((F.baseChange t' l' r' b' w').natTrans.app ((F.pb y).obj ((F.pf t).obj N))) ≫
+  have hΞ : (F.pb b').map (inv ((F.baseChange y r' r v sr).app ((F.pf t).obj N))) ≫
+      inv ((F.baseChange t' l' r' b' w').app ((F.pb y).obj ((F.pf t).obj N))) ≫
       (F.sh l').map ((F.sqIso x t' t y sx).inv.app ((F.pf t).obj N)) ≫
-      (F.baseChange x l' l z sl).natTrans.app ((F.pb t).obj ((F.pf t).obj N)) =
+      (F.baseChange x l' l z sl).app ((F.pb t).obj ((F.pf t).obj N)) =
       (F.sqIso z b' b v sb).inv.app ((F.sh r).obj ((F.pf t).obj N)) ≫
-        (F.pb z).map (inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N))) := by
+        (F.pb z).map (inv ((F.baseChange t l r b w).app ((F.pf t).obj N))) := by
     rw [hc']
     simp
   -- transpose along `b'^* ⊣ b'_*`
   apply ((F.adj b').homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
-  have hβ' := (inv (F.baseChange t' l' r' b' w').natTrans).naturality
-    ((F.pfBaseChange x t' t y sx).natTrans.app N)
-  have hγ := (F.baseChange x l' l z sl).natTrans.naturality ((F.adj t).counit.app N)
-  have hs := (F.sqIso z b' b v sb).inv.naturality ((F.exchange t l r b w).natTrans.app N)
+  have hβ' := (inv (F.baseChange t' l' r' b' w')).naturality
+    ((F.pfBaseChange x t' t y sx).app N)
+  have hγ := (F.baseChange x l' l z sl).naturality ((F.adj t).counit.app N)
+  have hs := (F.sqIso z b' b v sb).inv.naturality ((F.exchange t l r b w).app N)
   simp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, NatIso.isIso_inv_app]
     at hβ' hγ hs
   erw [(F.adj b').counit_naturality]
@@ -272,7 +272,7 @@ section IdVert
 /-- The base change map of the pushforwards of the square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity, up
 to `(𝟙)_* ≅ 𝟭`. -/
 lemma pfBaseChange_id_vert_app {X Y : 𝒞} (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) (M : F.obj Y) :
-    (F.pfBaseChange g (𝟙 X) (𝟙 Y) g w).natTrans.app M ≫
+    (F.pfBaseChange g (𝟙 X) (𝟙 Y) g w).app M ≫
         (F.pfId X).hom.app ((F.pb g).obj M) =
       (F.pb g).map ((F.pfId Y).hom.app M) := by
   have hId : ∀ {Z : 𝒞} (N : F.obj Z), (F.pfId Z).hom.app N =
@@ -287,7 +287,7 @@ lemma pfBaseChange_id_vert_app {X Y : 𝒞} (g : X ⟶ Y) (w : g ≫ 𝟙 Y = �
       Iso.hom_inv_id_app, F.sqIso_id_vert_hom]
     simp [← Functor.map_comp]
   rw [hId, hId]
-  have hn := (F.pbId X).inv.naturality ((F.pfBaseChange g (𝟙 X) (𝟙 Y) g w).natTrans.app M)
+  have hn := (F.pbId X).inv.naturality ((F.pfBaseChange g (𝟙 X) (𝟙 Y) g w).app M)
   simp only [Functor.id_map] at hn
   rw [reassoc_of% hn, hc, hs]
   simp [← Functor.map_comp]

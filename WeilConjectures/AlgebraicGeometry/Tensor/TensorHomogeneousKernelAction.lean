@@ -93,8 +93,8 @@ theorem tensorHomogeneousKernel_action {X Z : Scheme.{u}} (j : Z ⟶ X)
         b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
-    T.k d ≫ μ ((T.c a).app ⊤ (s.app ⊤ (1 : Γ(Z, ⊤)))) =
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+    T.k d ≫ (μ ((T.c a).app ⊤ (s.app ⊤ (1 : Γ(Z, ⊤))))).asHom =
       tensorHomogeneousKernelMap j L hI a d t h s ≫ T.k t := by
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
@@ -103,7 +103,7 @@ theorem tensorHomogeneousKernel_action {X Z : Scheme.{u}} (j : Z ⟶ X)
     let s₀ := s.app ⊤ (1 : Γ(Z, ⊤))
     let η := tensorGradedUnit j (L.tensorPow a)
     let g := (T.c a).app ⊤ s₀
-    let w := μ g
+    let w := (μ g).asHom
     change T.k d ≫ w = m ≫ T.k t
     have hi : Mono T.i := T.shortExact.mono_f
     let adj := Classical.choice (nonempty_tensorPullbackAdjunction j)
@@ -156,7 +156,7 @@ theorem tensorHomogeneousKernel_action {X Z : Scheme.{u}} (j : Z ⟶ X)
       change T.i.val.app (op V) (w.val.app (op V) ((T.k d).app V y)) =
         T.i.val.app (op V) ((T.k t).app V (m.app V y))
       rw [hko, hc, hcast (d + a) t hdeg]
-      change T.i.val.app (op V) ((μ g).val.app (op V) ((T.k d).app V y)) = _
+      change T.i.val.app (op V) ((μ g).asHom.val.app (op V) ((T.k d).app V y)) = _
       rw [hglobal, ← hp]
       have hh := hlocal V ((T.b a).app V x) ((T.k d).app V y)
       change T.i.val.app (op V) (σ V (T.p.right.hom.app (op V) ((T.b a).app V x))

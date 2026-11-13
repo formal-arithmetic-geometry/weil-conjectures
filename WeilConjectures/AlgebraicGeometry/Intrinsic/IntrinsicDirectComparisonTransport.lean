@@ -48,7 +48,7 @@ private theorem transportRight_counit
     (R'.map (f.counitIso.inv.app N) ≫ c.hom.app (f.inverse.obj N))).symm
   dsimp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hn
   rw [Functor.map_comp, ← Category.assoc, hn, Category.assoc,
-    e.counitIso_functor_comp, Category.comp_id]
+    e.counitInv_functor_comp, Category.comp_id]
 
 private theorem transportRight_normalized
     {C₀ C₁ D₀ D₁ : Type*} [Category C₀] [Category C₁]
@@ -65,7 +65,7 @@ private theorem transportRight_normalized
   have hn := (c.hom.naturality (f.unitIso.inv.app M)).symm
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at hn
   rw [hn]
-  rw [← Category.assoc, ← R'.map_comp, f.counitIso_functor_comp]
+  rw [← Category.assoc, ← R'.map_comp, f.counitInv_functor_comp]
   dsimp only [Functor.id_obj, Functor.comp_obj]
   rw [R'.map_id, Category.id_comp]
 

@@ -45,7 +45,7 @@ namespace CategoryTheory
 of `X` is invertible. -/
 lemma isIso_of_ne_zero_of_surjective {C : Type u} [Category.{v} C] [Preadditive C] {X : C}
     {K : Type*} [Field K] (φ : K →+* End X) (hφ : Function.Surjective φ) (t : End X)
-    (ht : t ≠ 0) : IsIso t := by
+    (ht : t ≠ 0) : IsIso (t).asHom := by
   obtain ⟨a, rfl⟩ := hφ t
   have ha : a ≠ 0 := by
     rintro rfl
@@ -57,14 +57,16 @@ endomorphism of `X` is invertible, so is every nonzero endomorphism of `Y`. -/
 lemma Functor.isIso_of_ne_zero_end {C : Type*} [Category* C] {D : Type*} [Category* D]
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Full]
     [F.PreservesZeroMorphisms] {X : C} {Y : D} (e : F.obj X ≅ Y)
-    (h : ∀ t : End X, t ≠ 0 → IsIso t) (t : End Y) (ht : t ≠ 0) : IsIso t := by
-  obtain ⟨s, hs⟩ := F.map_surjective (e.hom ≫ t ≫ e.inv)
-  have hs' : t = e.inv ≫ F.map s ≫ e.hom := by
+    (h : ∀ t : End X, t ≠ 0 → IsIso (t).asHom) (t : End Y) (ht : t ≠ 0) : IsIso (t).asHom := by
+  obtain ⟨s, hs⟩ := F.map_surjective (e.hom ≫ t.asHom ≫ e.inv)
+  have hs' : t.asHom = e.inv ≫ F.map s ≫ e.hom := by
     simp [hs]
-  have : IsIso s := h s (by
+  have : IsIso s := h (.of s) (by
     intro hs0
     apply ht
-    rw [hs', hs0, F.map_zero, Limits.zero_comp, Limits.comp_zero])
+    apply End.ext
+    have hs0' : s = 0 := by simpa only [End.zero_asHom] using congr($(hs0).asHom)
+    rw [hs', hs0', F.map_zero, Limits.zero_comp, Limits.comp_zero, End.zero_asHom])
   rw [hs']
   infer_instance
 
@@ -76,10 +78,11 @@ lemma Functor.one_ne_zero_end {C : Type*} [Category* C] {D : Type*} [Category* D
     (1 : End Y) ≠ 0 := by
   intro h'
   apply h
+  apply End.ext
   apply F.map_injective
-  have h'' : 𝟙 Y = 0 := h'
-  rw [F.map_zero, End.one_def, F.map_id, ← e.hom_inv_id, ← Category.id_comp e.inv, h'',
-    Limits.zero_comp, Limits.comp_zero]
+  have h'' : 𝟙 Y = 0 := congr($(h').asHom)
+  rw [End.zero_asHom, End.one_asHom, F.map_zero, F.map_id, ← e.hom_inv_id,
+    ← Category.id_comp e.inv, h'', Limits.zero_comp, Limits.comp_zero]
 
 namespace Limits
 
@@ -211,7 +214,7 @@ variable [HasFiniteBiproducts C] [HasBinaryBiproducts C] [HasCokernels C] {U : C
 
 /-- The cokernel of a morphism `U ⟶ Uⁿ` is a finite power of `U`, if every nonzero endomorphism
 of `U` is invertible. -/
-theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 → IsIso t) {n : ℕ}
+theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 → IsIso (t).asHom) {n : ℕ}
     {X : C} (eX : X ≅ ⨁ fun _ : Fin n ↦ U) (g : U ⟶ X) :
     ∃ k : ℕ, Nonempty (cokernel g ≅ ⨁ fun _ : Fin k ↦ U) := by
   induction n generalizing X with
@@ -222,9 +225,11 @@ theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 →
     let e := eX ≪≫ biproductFinSuccIso fun _ : Fin (n + 1) ↦ U
     have hg : g ≫ e.hom = biprod.lift (g ≫ e.hom ≫ biprod.fst) (g ≫ e.hom ≫ biprod.snd) := by
       apply biprod.hom_ext <;> simp
-    by_cases ha : (g ≫ e.hom ≫ biprod.fst : End U) = 0
+    by_cases ha : (.of (g ≫ e.hom ≫ biprod.fst) : End U) = 0
     · obtain ⟨k, ⟨e'⟩⟩ := ih (Iso.refl _) (g ≫ e.hom ≫ biprod.snd)
-      rw [ha] at hg
+      have ha' : g ≫ e.hom ≫ biprod.fst = 0 := by
+        simpa only [End.zero_asHom] using congr($(ha).asHom)
+      rw [ha'] at hg
       exact ⟨k + 1, ⟨(cokernelCompIsIso g e.hom).symm ≪≫ cokernelIsoOfEq hg ≪≫
         IsColimit.coconePointUniqueUpToIso (colimit.isColimit _)
           (isColimitCokernelCoforkBiprodLiftZero _) ≪≫
@@ -237,7 +242,8 @@ theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 →
 /-- **Cokernels of morphisms between finite powers.** If every nonzero endomorphism of `U` is
 invertible, the cokernel of a morphism `Uᵐ ⟶ Uⁿ` between finite biproducts of copies of `U` is
 again a finite biproduct of copies of `U`. -/
-theorem exists_iso_biproduct_cokernel (hU : ∀ t : End U, t ≠ 0 → IsIso t) {m n : ℕ} {X Y : C}
+theorem exists_iso_biproduct_cokernel (hU : ∀ t : End U, t ≠ 0 → IsIso (t).asHom)
+    {m n : ℕ} {X Y : C}
     (eY : Y ≅ ⨁ fun _ : Fin m ↦ U) (eX : X ≅ ⨁ fun _ : Fin n ↦ U) (f : Y ⟶ X) :
     ∃ k : ℕ, Nonempty (cokernel f ≅ ⨁ fun _ : Fin k ↦ U) := by
   induction m generalizing n X Y with

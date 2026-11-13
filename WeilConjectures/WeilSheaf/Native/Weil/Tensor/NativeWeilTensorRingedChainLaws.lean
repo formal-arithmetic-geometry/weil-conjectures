@@ -96,7 +96,6 @@ private theorem chain_comparison_naturality
   simpa only [coefficientTotalTensor, uncurry_total_map] using
     (CommSq.vert_comp (CommSq.mk hc) (CommSq.mk hf)).w
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The total-complex coproducts of the ringed tensor are found by a deep search.
 /-- The signed summand and bifunctor naturality laws for the canonical total map.
 Source: Stacks 06YN and 06YU (blueprint: lem-sf-native-weil-tensor-ringed-chain-data).

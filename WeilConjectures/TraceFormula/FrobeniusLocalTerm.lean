@@ -87,7 +87,7 @@ theorem localTerm_traceClassWithCoeff_closedPieceCoeff (K : WeilBoundedConstruct
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
       K.carrier)] :
     (F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx)).localTerm j =
-      trace (K.stalkFrobenius m x hx) := by
+      End.of (trace (K.stalkFrobenius m x hx)) := by
   let P := K.closedPieceDiagram m x hx
   let Fc : (K.stalkCorrespondence m x hx).FixedLocus :=
     Correspondence.fixedLocusOfEnd (K.stalkFrobenius m x hx)
@@ -154,7 +154,7 @@ theorem localTerm_traceClass_graph_eq_trace {k₀ : Type u} [Field k₀] [Finite
       {(K.fixedLocusPoint m F x hx).left.base (default : Spec (.of k))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
       K.carrier)] :
-    ((K.graph m).traceClass F).localTerm j = trace (K.stalkFrobenius m x hx) := by
+    ((K.graph m).traceClass F).localTerm j = End.of (trace (K.stalkFrobenius m x hx)) := by
   have hc := Correspondence.isContractingAt_ofGraph_frobeniusIterate hΦ hm (K.iterateStr m).hom x
     ((Category.comp_id x).trans hx.symm)
   rw [stalkFrobenius_eq_graphStalkMap]

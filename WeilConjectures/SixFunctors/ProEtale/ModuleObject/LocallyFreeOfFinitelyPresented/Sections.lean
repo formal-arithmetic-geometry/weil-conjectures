@@ -72,7 +72,8 @@ noncomputable def restrictEnd {W' W : Scheme.{u}} (g : W' ⟶ W) :
 lemma restrictEnd_apply {W' W : Scheme.{u}} (g : W' ⟶ W)
     (t : End (Mod.regular (condensedRingObj Λ W))) :
     restrictEnd Λ g t =
-      (upperStarObjRegularIso Λ g).inv ≫ (g)^*⟦Λ⟧.map t ≫ (upperStarObjRegularIso Λ g).hom :=
+      .of ((upperStarObjRegularIso Λ g).inv ≫ (g)^*⟦Λ⟧.map t.asHom ≫
+        (upperStarObjRegularIso Λ g).hom) :=
   rfl
 
 /-- On global sections, the restriction of endomorphisms of the regular module is the pullback
@@ -83,21 +84,22 @@ lemma restrictEnd_regularEndRingHom {W' W : Scheme.{u}} (g : W' ⟶ W)
       Mod.regularEndRingHom
         (Γ.map (condensedPullbackHom Λ g) (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) := by
   rw [restrictEnd_apply]
-  have h₁ : (g)^*⟦Λ⟧.map (Mod.regularEndRingHom s) =
+  apply End.ext
+  have h₁ : (g)^*⟦Λ⟧.map (Mod.regularEndRingHom s).asHom =
       (Mod.extendScalars (condensedPullbackHom Λ g)).map
-        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) := by
+        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)).asHom := by
     rw [← Functor.mapMod_map_regularEndRingHom]
     rfl
   have nat : (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g)).inv.app
         (((g)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ W)).obj
           (Mod.regular (condensedRingObj Λ W))) ≫
       (Mod.extendScalars (condensedPullbackHom Λ g)).map
-        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) ≫
+        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)).asHom ≫
       (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g)).hom.app
         (((g)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ W)).obj
           (Mod.regular (condensedRingObj Λ W))) =
       (Mod.comap (asIso (condensedPullbackHom Λ g)).inv).map
-        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) :=
+        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)).asHom :=
     NatIso.naturality_1 _ _
   rw [h₁, upperStarObjRegularIso, Iso.trans_inv, Iso.trans_hom, Iso.app_inv, Iso.app_hom]
   simp only [Category.assoc]
@@ -229,7 +231,7 @@ lemma isUnit_of_forall_ne_zero {X : Type*} [TopologicalSpace X]
 /-- An endomorphism of `ℚ̲̄_ℓ,W` whose function vanishes nowhere is invertible. -/
 lemma isIso_of_forall_ne_zero
     (t : End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W)))
-    (ht : ∀ x, endValue ℓ t x ≠ 0) : IsIso t := by
+    (ht : ∀ x, endValue ℓ t x ≠ 0) : IsIso t.asHom := by
   rw [← isUnit_iff_isIso]
   exact (isUnit_map_iff (endRegularRingEquiv ℓ W) t).1 (isUnit_of_forall_ne_zero _ ht)
 
@@ -237,7 +239,7 @@ lemma isIso_of_forall_ne_zero
 invertible. -/
 lemma isIso_of_ne_zero_of_subsingleton [Subsingleton W]
     (t : End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W)))
-    (ht : t ≠ 0) : IsIso t := by
+    (ht : t ≠ 0) : IsIso t.asHom := by
   refine isIso_of_forall_ne_zero t fun x hx ↦ ht (eq_zero_of_forall_endValue_eq_zero fun y ↦ ?_)
   rwa [Subsingleton.elim y x]
 

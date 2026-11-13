@@ -63,7 +63,7 @@ theorem geometricFiberWeilSmoothTrace_weilUniversal_point
         (𝟙_ _) ≅ 𝟙_ _)
     (d : ℕ) [SmoothOfRelativeDimension d f.left]
     (K : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.inv)))
+      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.asIso.inv)))
     (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
       X.hom.geometricFiber) ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K)) :
     (weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)

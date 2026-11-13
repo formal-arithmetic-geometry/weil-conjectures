@@ -95,9 +95,9 @@ variable (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (a : F ⊣ G)
       (∀ i : ℤ, FlatA n (P.X i)) ∧ KFB n (((Fl n).mapHomologicalComplex (.up ℤ)).obj P) ∧
         ∀ i : ℤ, FlatB n ((Fl n).obj (P.X i)))
   (hRestr : ∀ {m n : ℕ} (h : n ≤ m),
-    IsIso (mateEquiv (al n) (al m) (TwoSquare.mk _ _ _ _ (β h).hom)).natTrans)
+    IsIso (mateEquiv (al n) (al m) (TwoSquare.mk _ _ _ _ (β h).hom)))
   (hEval : ∀ n,
-    IsIso (mateEquiv a (al n) (TwoSquare.mk _ _ _ _ (α n).inv)).natTrans)
+    IsIso (mateEquiv a (al n) (TwoSquare.mk _ _ _ _ (α n).inv)))
   (hTrans : ∀ {m n : ℕ} (h : n ≤ m) M,
     (PX.strictTransition h).app (F.obj M) ≫ (RB h).map ((α n).hom.app M) =
     (α m).hom.app M ≫ (Fl m).map ((PY.strictTransition h).app M) ≫
@@ -162,7 +162,7 @@ private theorem open_comparison_assembly :
         (eB n).map (χ.hom.app M) =
           (PX.adj n).unit.app ((Fl n).obj M) := by
     have : IsIso (mateEquiv a (al n)
-        (TwoSquare.mk _ _ _ _ (α n).symm.hom)).natTrans := hEval n
+        (TwoSquare.mk _ _ _ _ (α n).symm.hom)) := hEval n
     exact tensorSquare_exists (Fl n) (Gl n) (al n)
       (PY.extension n) (eA n)
       (PX.extension n) (eB n)
@@ -230,14 +230,14 @@ private theorem open_comparison_assembly :
     · intro P hP
       exact PX.computes n _ hP.2.1 hP.2.2
   have hdEv (n : ℕ) : IsIso (mateEquiv ds.adjunction (dl n).adjunction
-      (TwoSquare.mk _ _ _ _ (ev n).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (ev n).inv)) := by
     have := hdE n
     exact fourMate_isIso (dl n).inverse (dl n).direct (dl n).adjunction
       (PY.derivedExtension n) (PY.evaluation n) (PX.derivedExtension n) (PX.evaluation n)
       ds.inverse ds.direct (PY.derivedAdj n) (PX.derivedAdj n) ds.adjunction (ev n).symm (hdE n)
   let de := fun n ↦ (asIso
     (mateEquiv ds.adjunction (dl n).adjunction
-      (TwoSquare.mk _ _ _ _ (ev n).inv)).natTrans)
+      (TwoSquare.mk _ _ _ _ (ev n).inv)))
   let E : CoefficientEvaluationImageData F G a Fl Gl al eA eB
       PY.evaluation PX.evaluation PY.evaluationFactors PX.evaluationFactors α :=
     { system := ds
@@ -267,7 +267,7 @@ private theorem open_comparison_assembly :
       (PY.transition_rep h) (PX.transition_rep h) (hTrans h) H
   have hdR {m n : ℕ} (h : n ≤ m) : IsIso
       (mateEquiv (dl n).adjunction (dl m).adjunction
-        (TwoSquare.mk _ _ _ _ (δ h).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (δ h).hom)) := by
     have := hdT h
     exact fourMate_isIso (dl m).inverse (dl m).direct (dl m).adjunction
       (PY.scalar h).derived (PY.scalar h).restriction
@@ -282,7 +282,7 @@ private theorem open_comparison_assembly :
       _ _ (PY.scalar h) (PX.scalar h) (dl m).inverse (dl n).inverse (δ h))).symm
   let rd := fun {m n : ℕ} (h : n ≤ m) ↦ (asIso
     (mateEquiv (dl n).adjunction (dl m).adjunction
-      (TwoSquare.mk _ _ _ _ (δ h).hom)).natTrans).symm
+      (TwoSquare.mk _ _ _ _ (δ h).hom))).symm
   refine ⟨E, {
     tensor := θ
     tensor_unit := hθ
@@ -417,7 +417,7 @@ public theorem strictEtaleImageWithRestriction_exists
       (I.lift n).modules (I.right n) (I.levelAdj n) (I.rightUnderlying n))
     (fun {_ _} h ↦ ordinaryRestrictionMate_isIso O t _ _ _ I h)
     (fun n ↦ show IsIso (mateEquiv I.systemAdj (I.levelAdj n)
-      (TwoSquare.mk _ _ _ _ (I.inverseEvaluation n).inv)).natTrans by
+      (TwoSquare.mk _ _ _ _ (I.inverseEvaluation n).inv)) by
         rw [ordinaryEvaluationMate_eq O t _ _ _ I n]
         infer_instance)
     (fun {_ _} h ↦ ordinaryInverseTransition O t _ _ _ I PZ PX h)

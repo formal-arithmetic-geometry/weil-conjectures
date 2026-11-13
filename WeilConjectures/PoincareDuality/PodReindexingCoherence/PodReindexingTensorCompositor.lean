@@ -103,7 +103,6 @@ private def sectionComposition {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V)
       (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).symm
     D (ProEt.topology Z) (ProEt.topology W) (ProEt.topology V)).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -145,7 +144,6 @@ private theorem constantComposition {V W Z : Scheme.{u}}
       ((proEtaleIsoPostcompose h).obj U) a]
   exact (isoSectionwiseConstantMap_existsUnique.{u, u} h R).exists.choose_spec U a
 
-set_option maxHeartbeats 800000 in
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -179,7 +177,6 @@ private theorem coefficientComposition {V W Z : Scheme.{u}}
     rw [← Category.assoc, ← Category.assoc, a.hom.naturality]
     simp only [Functor.comp_map, Category.assoc, H]
 
-set_option maxHeartbeats 800000 in
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -213,7 +210,6 @@ private def ordinaryComposition {V W Z : Scheme.{u}}
     H.map (ringCoefficient l E f s).hom ≫ (ringCoefficient l E h s).hom) = _
   rw [← coefficientComposition l E h f s, c.inv_hom_id, d.inv_hom_id]
 
-set_option maxHeartbeats 800000 in
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -256,7 +252,6 @@ private theorem composition_derived_factors
   change _ = (NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app K ≫ 𝟙 _
   exact (Category.comp_id _).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -288,7 +283,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   CoefficientClosedStructure.tensor SheafOfModules.monoidalCategory
   podReindexingHomModel homComplexFunctor homComplexπ derivedInternalHomOfUniverses
 
-set_option maxHeartbeats 800000 in
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in

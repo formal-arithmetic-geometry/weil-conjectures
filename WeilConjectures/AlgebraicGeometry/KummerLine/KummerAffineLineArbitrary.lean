@@ -56,10 +56,10 @@ def coefficientScalarAction (k : Type u) [Field k] (b : Bool)
       ((ModuleCat.restrictScalars (ringCoefficientScalar m A hA) ⋙
         Scheme.kummerAbelianTwist (curve k b) m ⋙
         Sheaf.functorH (curve k b).smallEtaleTopology q).obj (ModuleCat.of A A)) :=
-  (ModuleCat.restrictScalars (ringCoefficientScalar m A hA) ⋙
+  End.of ((ModuleCat.restrictScalars (ringCoefficientScalar m A hA) ⋙
     Scheme.kummerAbelianTwist (curve k b) m ⋙
     Sheaf.functorH (curve k b).smallEtaleTopology q).map
-      (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) a))
+      (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) a)))
 
 /-- The scalar action laws for the canonical multiplication endomorphisms.
 The maps are the actual multiplication maps; the laws are the coefficient-functor
@@ -90,12 +90,14 @@ theorem coefficientScalarRingHom_exists (k : Type u) [Field k] (b : Bool)
             map_mul' := ?_
             map_zero' := ?_
             map_add' := ?_ }, fun _ => rfl⟩
-  · change F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) 1)) = 𝟙 _
+  · apply End.ext
+    change F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) 1)) = 𝟙 _
     convert F.map_id (ModuleCat.of A A) using 1
     congr 1
     ext
     simp [LinearMap.lsmul_apply]
   · intro a c
+    apply End.ext
     change F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) (a * c))) =
       F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) c)) ≫
         F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) a))
@@ -103,12 +105,14 @@ theorem coefficientScalarRingHom_exists (k : Type u) [Field k] (b : Bool)
     congr 1
     ext
     simp [LinearMap.lsmul_apply]
-  · change F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) 0)) = 0
+  · apply End.ext
+    change F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) 0)) = 0
     convert F.map_zero (ModuleCat.of A A) (ModuleCat.of A A) using 1
     congr 1
     ext
     simp
   · intro a c
+    apply End.ext
     change F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) (a + c))) =
       F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) a)) +
         F.map (ModuleCat.ofHom (LinearMap.lsmul A (ModuleCat.of A A) c))

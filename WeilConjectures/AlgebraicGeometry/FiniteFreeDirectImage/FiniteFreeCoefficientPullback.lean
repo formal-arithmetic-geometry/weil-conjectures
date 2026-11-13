@@ -304,7 +304,7 @@ private theorem restrictionPullback_unit {Z W : Scheme.{u}} {q : Z ⟶ W}
   have hm := restrictionPullback_mate q R.target S.target R.source S.source
     a.target a.source R.identification S.identification a.comm
   change (proEtaleRingRestrictScalars a.target).map (adjS.unit.app N) ≫
-    (mateEquiv adjS adjR (TwoSquare.mk _ _ _ _ ρ)).natTrans.app _ = _ at h
+    (mateEquiv adjS adjR (TwoSquare.mk _ _ _ _ ρ)).app _ = _ at h
   rw [hm] at h
   have hh := congrArg (fun f ↦ f.val.app V n) h
   have hd := (Classical.choose_spec (proEtaleRingRestrictionDirectImage_existsUnique q

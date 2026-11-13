@@ -33,7 +33,6 @@ open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Matching the natural coefficient functors unfolds both derived Hom coefficient objects.
 /-- On the affine chart, the two Ext sheaves and their coefficient map are the
 sheafifications of the dual Koszul cohomology modules and their reduction map.

@@ -910,12 +910,12 @@ def rationalWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m : ℤ) :
     sfWeilComplex D l hl Y₀ E :=
-  letI : IsIso (D.geometricFrobenius Y₀).hom := (D.geometricFrobenius Y₀).isIso_hom
+  letI : IsIso (D.geometricFrobenius Y₀).asIso.hom := (D.geometricFrobenius Y₀).asIso.isIso_hom
   letI : ∀ x : (D.geometricFiber Y₀).left,
     Invertible (l : (D.geometricFiber Y₀).left.residueField x) :=
       fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x
   IsoAlgebra.mk (sfRationalTwistingCoefficient l E (D.geometricFiber Y₀).left m)
-    (rationalDerivedLineMap l E (D.geometricFrobenius Y₀).hom m)
+    (rationalDerivedLineMap l E (D.geometricFrobenius Y₀).asIso.hom m)
 
 attribute [local irreducible] rationalWeilLine
 
@@ -927,12 +927,12 @@ def commonWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l �
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (m : ℤ) :
     sfCommonStageWeilComplex D l hl Y₀ Ω :=
-  letI : IsIso (D.geometricFrobenius Y₀).hom := (D.geometricFrobenius Y₀).isIso_hom
+  letI : IsIso (D.geometricFrobenius Y₀).asIso.hom := (D.geometricFrobenius Y₀).asIso.isIso_hom
   letI : ∀ x : (D.geometricFiber Y₀).left,
     Invertible (l : (D.geometricFiber Y₀).left.residueField x) :=
       fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x
   IsoAlgebra.mk (sfQbarTwistingCoefficient l (D.geometricFiber Y₀).left Ω m)
-    (commonDerivedLineMap l Ω (D.geometricFrobenius Y₀).hom m)
+    (commonDerivedLineMap l Ω (D.geometricFrobenius Y₀).asIso.hom m)
 
 attribute [local irreducible] commonWeilLine
 

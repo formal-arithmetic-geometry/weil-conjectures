@@ -74,7 +74,7 @@ theorem galoisToAut_hom_app_eq_of_mem_inertia [ConnectedSpace Y]
     (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] {σ : Ω ≃ₐ[K] Ω}
     (hσ : σ ∈ Q.inertia (Ω ≃ₐ[K] Ω)) (P : Y.FiniteEtale)
     (t : (fiber (pointOfAlgebra Ω (Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ a))).obj P) :
-    (galoisToAut _ σ).hom.app P t = t := by
+    (galoisToAut _ σ).asIso.hom.app P t = t := by
   let _ := Ideal.Quotient.field Q
   have : IsSepClosed (integralClosure R Ω ⧸ Q) := Ideal.isSepClosed_quotient_integralClosure K Q
   set ap := integralClosurePoint Ω a

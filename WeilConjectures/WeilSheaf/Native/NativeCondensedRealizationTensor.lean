@@ -100,7 +100,6 @@ theorem kFlat_condensedRealization_mapHomologicalComplex
   intro N hN i
   exact (h N hN i).of_iso (HomologicalComplex.mapBifunctorFlipIso _ _ _ _).symm
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology _) Ab) _`
 /-- A complex of pro-étale Weil sheaves whose condensed realization is K-flat is native K-flat:
 the condensed realization is exact, conservative and carries the native tensor to the tensor of
@@ -124,7 +123,6 @@ section Transport
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology _) Ab) _`
 /-- Let `F` be an additive functor between pro-étale Weil sheaves on `Y` and on `X` which is
 compatible, through the condensed realizations, with an additive functor `G` of module objects.

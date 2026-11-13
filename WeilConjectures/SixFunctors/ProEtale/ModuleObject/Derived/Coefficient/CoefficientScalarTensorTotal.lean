@@ -41,7 +41,6 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
-set_option maxHeartbeats 800000 in
 -- Normalize the four functor images of each total-complex summand.
 /-- The ordinary scalar tensor square commutes after signed direct-sum totalization.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4.

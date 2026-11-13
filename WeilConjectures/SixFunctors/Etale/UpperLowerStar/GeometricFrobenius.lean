@@ -60,8 +60,8 @@ with the pullbacks along the geometric Galois Frobenii: the square
 commutes up to the isomorphism `φ̄^* ⋙ Fr_X^* ≅ Fr_Y^* ⋙ φ̄^*`, induced by
 `φ̄ ≫ Fr_Y = Fr_X ≫ φ̄`. -/
 noncomputable def Etale.upperStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)^*[A] ⋙ (f.geometricGaloisFrobenius.hom)^*[A] ≅
-      (g.geometricGaloisFrobenius.hom)^*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*[A] :=
+    (Scheme.Hom.geometricFiberMap φ h)^*[A] ⋙ (f.geometricGaloisFrobenius.asIso.hom)^*[A] ≅
+      (g.geometricGaloisFrobenius.asIso.hom)^*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*[A] :=
   (Etale.upperStarComp _ _ _ _
       (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h)).symm ≪≫
     Etale.upperStarComp _ _ _
@@ -81,8 +81,8 @@ noncomputable def Etale.upperStarGeometricFiberMapCompFrobeniusIso :
 commutes up to the isomorphism `D(φ̄^*) ⋙ D(Fr_X^*) ≅ D(Fr_Y^*) ⋙ D(φ̄^*)`. -/
 noncomputable def Etale.mapDerivedCategoryUpperStarGeometricFiberMapCompFrobeniusIso :
     (Scheme.Hom.geometricFiberMap φ h)^*[A].mapDerivedCategory ⋙
-        (f.geometricGaloisFrobenius.hom)^*[A].mapDerivedCategory ≅
-      (g.geometricGaloisFrobenius.hom)^*[A].mapDerivedCategory ⋙
+        (f.geometricGaloisFrobenius.asIso.hom)^*[A].mapDerivedCategory ≅
+      (g.geometricGaloisFrobenius.asIso.hom)^*[A].mapDerivedCategory ⋙
         (Scheme.Hom.geometricFiberMap φ h)^*[A].mapDerivedCategory :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Etale.upperStarGeometricFiberMapCompFrobeniusIso A φ h) ≪≫

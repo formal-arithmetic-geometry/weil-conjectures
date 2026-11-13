@@ -74,9 +74,9 @@ private theorem evaluation_shift
       π.app N) : NatTrans.CommShift e.hom ℤ := by
   let β : TwoSquare R V (𝟭 A) G :=
     .mk _ _ _ _ (R.rightUnitor.hom ≫ π)
-  let α := ((mateEquiv a b).symm β).natTrans
+  let α := ((mateEquiv a b).symm β)
   have hα : NatTrans.CommShift α ℤ := by
-    dsimp only [α, mateEquiv, Equiv.coe_fn_symm_mk, β, TwoSquare.natTrans]
+    dsimp only [α, mateEquiv, Equiv.coe_fn_symm_mk, β]
     infer_instance
   let τ : TwoSquare (𝟭 A) L F V :=
     .mk _ _ _ _ (F.leftUnitor.hom ≫ e.inv)
@@ -87,10 +87,10 @@ private theorem evaluation_shift
   have heq : (mateEquiv a b).symm β = τ := by
     rw [← hm]
     exact (mateEquiv a b).symm_apply_apply τ
-  have : NatTrans.CommShift τ.natTrans ℤ := by
+  have : NatTrans.CommShift τ ℤ := by
     rw [← heq]
     exact hα
-  have he : e.inv = F.leftUnitor.inv ≫ τ.natTrans := by simp [τ]
+  have he : e.inv = F.leftUnitor.inv ≫ τ := by simp [τ]
   have : NatTrans.CommShift e.inv ℤ := by rw [he]; infer_instance
   have : NatTrans.CommShift e.symm.hom ℤ := ‹NatTrans.CommShift e.inv ℤ›
   exact NatTrans.CommShift.of_iso_inv e.symm ℤ

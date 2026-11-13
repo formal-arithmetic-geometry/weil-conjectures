@@ -32,14 +32,14 @@ private theorem cochainMate_unit
     (a₂.mapHomologicalComplex (.up ℤ)).homEquiv
         ((G.mapHomologicalComplex (.up ℤ)).obj P)
         ((H.mapHomologicalComplex (.up ℤ)).obj ((L₁.mapHomologicalComplex (.up ℤ)).obj P))
-        ((((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans.mapHomologicalComplex
+        ((((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).mapHomologicalComplex
           (.up ℤ)).app P) =
       (G.mapHomologicalComplex (.up ℤ)).map ((a₁.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
         (τ.mapHomologicalComplex (.up ℤ)).app ((L₁.mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
   change a₂.homEquiv _ _
-    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans.app (P.X i)) = _
+    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).app (P.X i)) = _
   exact (unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ τ) (P.X i)).symm
 
 /-- An ordinary right comparison between equivalences determines an inverse
@@ -102,7 +102,7 @@ theorem cochainInverseMate_comparison
         HD.map (ε₁.hom.app K) ≫ η.hom.app ((L₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
           DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app K) := by
   classical
-  let δ := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ.hom)).natTrans
+  let δ := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ.hom))
   have : IsIso δ := isIso_inverseMate_of_equivalences a₁ a₂ τ
   let e := (asIso δ).symm
   refine ⟨e, ?_⟩

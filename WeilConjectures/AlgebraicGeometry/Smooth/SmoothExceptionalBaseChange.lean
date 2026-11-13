@@ -148,8 +148,8 @@ private lemma mate_app_eq
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
     (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C ⥤ C'} {H : D ⥤ D'}
     (ξ : TwoSquare G L L' H) (M : D) :
-    (mateEquiv adj adj' ξ).natTrans.app M =
-      (adj'.homEquiv _ _) (ξ.natTrans.app (R.obj M) ≫ H.map (adj.counit.app M)) := by
+    (mateEquiv adj adj' ξ).app M =
+      (adj'.homEquiv _ _) (ξ.app (R.obj M) ≫ H.map (adj.counit.app M)) := by
   apply (adj'.homEquiv _ _).symm.injective
   dsimp only [Functor.comp_obj, Functor.id_obj]
   rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
@@ -636,7 +636,7 @@ theorem smooth_exceptional_base_change
         (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K := by
     symm
     simpa only [smoothExceptionalBaseChangeMap, rightDerivedUpperShriekBaseChangeMap,
-      NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj, TwoSquare.natTrans] using
+      NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj] using
       mate_app_eq
       (rightDerivedUpperShriekAdjunction A f)
       (rightDerivedUpperShriekAdjunction A (pullback.snd f g))

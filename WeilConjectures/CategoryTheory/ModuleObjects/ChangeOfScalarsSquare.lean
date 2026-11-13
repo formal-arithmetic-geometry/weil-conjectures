@@ -228,7 +228,7 @@ scalars. It is the composite
 `L₁ ⟶ L₁ ⋙ Res₁ ⋙ E₁ ≅ L₂ ⋙ Res₂ ⋙ E₁ ⟶ ...` transposed along `E₂ ⊣ Res₂`, and it is not an
 isomorphism in general. -/
 noncomputable def pushHomOfComapIso : L₁ ⋙ E₂ ⟶ E₁ ⋙ L₂ :=
-  TwoSquare.natTrans ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk Res₁ L₂ L₁ Res₂ e.inv))
+  ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk Res₁ L₂ L₁ Res₂ e.inv))
 
 end Adjunction
 

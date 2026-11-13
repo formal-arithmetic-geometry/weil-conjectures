@@ -19,9 +19,7 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- The scalar-adjunction definition of the proper comparison is the geometric
 adjunction mate of the canonical tensor/pullback comparison.
 Source: Stacks Tags 0E46 and 0B56.
@@ -40,7 +38,7 @@ theorem properScalarMate_normalized
         (proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g))
         (TwoSquare.mk _ _ _ _ (proEtaleReductionPullbackIso g
           (R.ring V) (S.ring V) (R.ring U) (S.ring U)
-          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).hom)).natTrans := by
+          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).hom)) := by
   let av := pbcDerivedScalarAdjunction (a.map V)
   let au := pbcDerivedScalarAdjunction (a.map U)
   let ar := proEtaleRingDerivedAdjunction g (R.ring V) (R.ring U) (R.pull g)
@@ -57,10 +55,10 @@ theorem properScalarMate_normalized
   let β := asIso (proEtaleReductionPullbackInv g
     (R.ring V) (S.ring V) (R.ring U) (S.ring U)
     (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g))
-  have hβ : (mateEquiv av au (TwoSquare.mk _ _ _ _ β.hom)).natTrans = b.inv := by
-    exact congrArg TwoSquare.natTrans ((mateEquiv av au).apply_symm_apply
+  have hβ : (mateEquiv av au (TwoSquare.mk _ _ _ _ β.hom)) = b.inv := by
+    exact ((mateEquiv av au).apply_symm_apply
       (TwoSquare.mk _ _ _ _ b.inv))
-  have hd : (mateEquiv az ar (TwoSquare.mk _ _ _ _ b.inv)).natTrans = d.hom := by
+  have hd : (mateEquiv az ar (TwoSquare.mk _ _ _ _ b.inv)) = d.hom := by
     apply NatTrans.ext
     funext N
     have h := (proEtaleRingSheafChangeAdjunction g
@@ -78,7 +76,7 @@ theorem properScalarMate_normalized
     rw [hid] at h
     erw [CategoryTheory.Functor.map_id, Category.id_comp] at h
     rw [← h]
-    simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
       Functor.comp_obj, Functor.comp_map, Functor.rightUnitor_inv_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,

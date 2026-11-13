@@ -112,18 +112,18 @@ private theorem comparisonHomProjection_transpose (K : C) {T : C} {N : D}
 
 private theorem comparisonHom_unit (K M : C) :
     adj.unit.app ((ihom K).obj M) ≫
-      R.map ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M) =
+      R.map ((Functor.LaxMonoidal.ihomComparison F K).app M) =
     (ihom K).map (adj.unit.app M) ≫
       (comparisonHomProjection F R adj K).hom.app (F.obj M) := by
   apply ((comparisonHomAdjunction F R adj K).homEquiv _ _).symm.injective
   rw [comparisonHomProjection_transpose]
   change ((comparisonHomAdjunction F R adj K).homEquiv _ _).symm
-      (adj.homEquiv _ _ ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M)) = _
+      (adj.homEquiv _ _ ((Functor.LaxMonoidal.ihomComparison F K).app M)) = _
   simp only [comparisonHomAdjunction, Adjunction.homEquiv_ofNatIsoLeft_symm_apply,
     Adjunction.comp_homEquiv, Equiv.symm_trans_apply]
   rw [Equiv.symm_apply_apply]
   change Functor.OplaxMonoidal.δ F K ((ihom K).obj M) ≫
-      uncurry ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M) =
+      uncurry ((Functor.LaxMonoidal.ihomComparison F K).app M) =
     (adj.homEquiv _ _).symm (uncurry ((ihom K).map (adj.unit.app M)))
   rw [show (ihom K).map (adj.unit.app M) =
     𝟙 _ ≫ (ihom K).map (adj.unit.app M) by simp,
@@ -138,8 +138,8 @@ private theorem isIso_comparisonHom
     (K M : C) [IsIso (adj.unit.app M)]
     [IsIso (adj.unit.app ((ihom K).obj M))]
     (h : Nonempty (F.obj ((ihom K).obj M) ≅ (ihom (F.obj K)).obj (F.obj M))) :
-    IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M) := by
-  let b := (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M
+    IsIso ((Functor.LaxMonoidal.ihomComparison F K).app M) := by
+  let b := (Functor.LaxMonoidal.ihomComparison F K).app M
   have hr : IsIso (R.map b) := by
     have : IsIso (adj.unit.app ((ihom K).obj M) ≫ R.map b) := by
       rw [comparisonHom_unit F R adj K M]
@@ -258,7 +258,7 @@ private theorem comparisonData_native
     (hD : ∀ K, P K → P ((ihom K).obj W))
     (hδ : ∀ K, P K → IsIso (MonoidalClosed.toIhomIhom W K))
     (hβ : ∀ K, P K →
-      IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W))
+      IsIso ((Functor.LaxMonoidal.ihomComparison F K).app W))
     (eC : ∀ K : C, (ihom K).obj W ⊗ K ⟶ W)
     (eD : ∀ K : D, (ihom K).obj W' ⊗ K ⟶ W')
     (δC : ∀ K : C, K ⟶ (ihom ((ihom K).obj W)).obj W)
@@ -270,11 +270,11 @@ private theorem comparisonData_native
     (e : P.FullSubcategory ≌ P'.FullSubcategory)
     (he : e.functor ⋙ P'.ι ≅ P.ι ⋙ F) :
     (∀ K, P K → ∃ cK : F.obj ((ihom K).obj W) ≅ (ihom (F.obj K)).obj W',
-      cK.hom = (Functor.LaxMonoidal.ihomComparison F K).natTrans.app W ≫
+      cK.hom = (Functor.LaxMonoidal.ihomComparison F K).app W ≫
         (ihom (F.obj K)).map ω.hom ∧
       ∃ cDK : F.obj ((ihom ((ihom K).obj W)).obj W) ≅
           (ihom (F.obj ((ihom K).obj W))).obj W',
-        cDK.hom = (Functor.LaxMonoidal.ihomComparison F ((ihom K).obj W)).natTrans.app W ≫
+        cDK.hom = (Functor.LaxMonoidal.ihomComparison F ((ihom K).obj W)).app W ≫
           (ihom (F.obj ((ihom K).obj W))).map ω.hom ∧
         (cK.hom ▷ F.obj K) ≫ eD (F.obj K) =
           Functor.LaxMonoidal.μ F ((ihom K).obj W) K ≫ F.map (eC K) ≫ ω.hom ∧
@@ -391,7 +391,7 @@ private theorem comparisonData_raw
     (b : ∀ K M, F.obj ((HC.obj (op K)).obj M) ⟶
       (HD.obj (op (F.obj K))).obj (F.obj M))
     (hb : HEq b (fun K M ↦
-      (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M))
+      (Functor.LaxMonoidal.ihomComparison F K).app M))
     (t : ∀ K M, (TD.obj (F.obj K)).obj (F.obj M) ⟶ F.obj ((TC.obj K).obj M))
     (ht : HEq t (fun K M ↦ Functor.LaxMonoidal.μ F K M))
     {W : C} {W' : D} (ω : F.obj W ≅ W')
@@ -444,7 +444,7 @@ private theorem comparisonData_allPairings
     (b : ∀ K M, F.obj ((HC.obj (op K)).obj M) ⟶
       (HD.obj (op (F.obj K))).obj (F.obj M))
     (hb : HEq b (fun K M ↦
-      (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M))
+      (Functor.LaxMonoidal.ihomComparison F K).app M))
     (t : ∀ K M, (TD.obj (F.obj K)).obj (F.obj M) ⟶ F.obj ((TC.obj K).obj M))
     (ht : HEq t (fun K M ↦ Functor.LaxMonoidal.μ F K M))
     {W : C} {W' : D} (ω : F.obj W ≅ W')

@@ -36,7 +36,7 @@ private theorem mate_formula
     {C D V : Type*} [Category C] [Category D] [Category V]
     {F : C ⥤ D} {P : D ⥤ C} {U₁ U₂ : D ⥤ V} {Q : V ⥤ D}
     (a : F ⊣ P) (b : U₂ ⊣ Q) (s : F ⋙ U₂ ≅ F ⋙ U₁) :
-    (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans =
+    (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)) =
       traceAbstractMate a b s := by
   unfold traceAbstractMate
   rfl

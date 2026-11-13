@@ -221,7 +221,7 @@ lemma boundedConstructibleUpperShriekExtendScalars_eq_mateEquiv :
       (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
         (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
         (TwoSquare.mk _ _ _ _
-          (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)).natTrans :=
+          (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)) :=
   rfl
 
 /-- **The exchange for `f^!` is an isomorphism** for `𝒪_E ⟶ E` (blueprint

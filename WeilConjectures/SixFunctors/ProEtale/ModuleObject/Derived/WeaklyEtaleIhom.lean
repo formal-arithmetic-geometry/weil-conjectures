@@ -45,7 +45,7 @@ isomorphism. -/
 theorem isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    IsIso (Functor.LaxMonoidal.ihomComparison L((g)^*⟦Λ⟧) M).natTrans :=
+    IsIso (Functor.LaxMonoidal.ihomComparison L((g)^*⟦Λ⟧) M) :=
   Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
     (derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction Λ g) M
 

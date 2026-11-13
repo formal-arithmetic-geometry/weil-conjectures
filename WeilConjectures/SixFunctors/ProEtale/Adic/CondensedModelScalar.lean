@@ -145,8 +145,8 @@ lemma adicSheafEquivCondensedModUnitIso_inv_comp_map_smul_comp_hom (X : Scheme.{
         (adicSheafEquivCondensedMod l X).functor.map
           (AdicSheaf.smul (ULift.up c) (AdicSheaf.unit l X)) ≫
         (adicSheafEquivCondensedModUnitIso l X).hom =
-      Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
-        (Profinite.PadicAlgCl.constRingHom l) X c) := by
+      (Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
+        (Profinite.PadicAlgCl.constRingHom l) X c)).asHom := by
   refine Mod.regular_hom_ext ?_
   rw [Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular, Mod.comp_hom', Mod.comp_hom',
     adicSheafEquivCondensedModUnitIso_hom_hom, adicSheafEquivCondensedModUnitIso_inv_hom]
@@ -168,13 +168,14 @@ point: through `End (𝟙_ Mod_{Spec Ω}) ≅ ℚ̄_ℓ`, the image of the multi
 theorem endTensorUnitRingEquiv_adicSheafEquivCondensedMod_map_smul (Ω : Type u) [Field Ω]
     [IsSepClosed Ω] (c : PadicAlgCl l) :
     CondensedRing.endTensorUnitRingEquiv l Ω
-        ((adicSheafEquivCondensedModUnitIso l (Spec (.of Ω))).inv ≫
+        (.of ((adicSheafEquivCondensedModUnitIso l (Spec (.of Ω))).inv ≫
           (adicSheafEquivCondensedMod l (Spec (.of Ω))).functor.map
             (AdicSheaf.smul (ULift.up c) (AdicSheaf.unit l (Spec (.of Ω)))) ≫
-          (adicSheafEquivCondensedModUnitIso l (Spec (.of Ω))).hom) = c := by
+          (adicSheafEquivCondensedModUnitIso l (Spec (.of Ω))).hom)) = c := by
   rw [adicSheafEquivCondensedModUnitIso_inv_comp_map_smul_comp_hom]
   refine Eq.trans ?_ (CondensedRing.endTensorUnitRingEquiv_scalarEndRingHom l Ω c)
   rw [CondensedRing.scalarEndRingHom_eq_map]
-  exact congrArg _ (Functor.mapMod_map_regularEndRingHom _ _ _).symm
+  exact congrArg (fun t ↦ CondensedRing.endTensorUnitRingEquiv l Ω (.of t))
+    (Functor.mapMod_map_regularEndRingHom _ _ _).symm
 
 end AlgebraicGeometry.ProEtale

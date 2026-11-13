@@ -65,7 +65,7 @@ theorem nonempty_equiv_globalSections_dual (H : WeilSheaf k₀ l (Spec (CommRing
     Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ (𝟙 _) (Category.id_comp _) _
   set s := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y
   have hs₁ : s ≫ ((Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      1).hom = (specGeometricFrobenius k₀ ^ 1).hom ≫ s :=
+      1).asIso.hom = (specGeometricFrobenius k₀ ^ 1).asIso.hom ≫ s :=
     hdy ▸ Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ y
   have : IsIso s := by
     have : IsIso (pullback.snd (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))

@@ -60,7 +60,10 @@ private theorem finiteType_of_generating_list
       X := id
       coversTop := fun _ ↦ GrothendieckTopology.covering_of_eq_top J (by simp)
       generators := σ }
-  exact ⟨⟨p, ⟨fun U ↦ ⟨Finite.of_equiv (Fin r) (e U).symm⟩⟩⟩⟩
+  apply SheafOfModules.IsFiniteType.mk (M := I)
+  refine ⟨p, ?_⟩
+  refine SheafOfModules.LocalGeneratorsData.IsFiniteType.mk (p := p) (fun U ↦ ?_)
+  exact ⟨Finite.of_equiv (Fin r) (e U).symm⟩
 
 private theorem scalar_extension
     {A : Type*} [Category A] [MonoidalCategory A]

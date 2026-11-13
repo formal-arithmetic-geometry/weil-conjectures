@@ -33,18 +33,14 @@ attribute [local irreducible] HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def ringFullyFaithful (T : Scheme.{u}) (s : RingStage.{u} l) :
     (RingStage.inclusion.{u} l Ω T s).FullyFaithful :=
   match s with
   | .finite E n => (finiteTorConstructible l E.carrier n n.pos T).fullyFaithfulι
   | .integral E => (finiteTorConstructibleIntegral l E.carrier T).fullyFaithfulι
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def scalarComposition {s t r : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
     (b : PurCompactSupport.Change (t.coefficients l) (r.coefficients l))
@@ -106,7 +102,6 @@ private theorem liftedIdentity_exists
     Functor.rightUnitor_hom_app, Category.assoc]
   erw [CategoryTheory.Category.comp_id, CategoryTheory.Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- Replace the coefficient family by identities before splitting the stage.
 private theorem scalarIdentity_nonempty {s : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l))
@@ -138,9 +133,7 @@ private def scalarIdentity {s : RingStage.{u} l}
     (A : Scalar.{u} l Ω a T) : ScalarIdentity.{u} l Ω h T A :=
   Classical.choice (scalarIdentity_nonempty l Ω a h T A)
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def LeftNormalized {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) {s t : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
@@ -157,9 +150,7 @@ private def LeftNormalized {X Y : Scheme.{u}} {f : X ⟶ Y}
       (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫
       (PurCompactSupport.comparison a c).app ((RingStage.inclusion.{u} l Ω X s).obj K)
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem normalizedLeftComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) {s t : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
@@ -226,9 +217,7 @@ private theorem normalizedLeftComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
       exact hunit
     erw [Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem normalizedLeftCocycle {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) {s t r : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
@@ -286,9 +275,7 @@ private theorem normalizedLeftCocycle {X Y : Scheme.{u}} {f : X ⟶ Y}
   rw [reassoc_of% ht]
   rw [← reassoc_of% (cy.normalized (A.F.obj K)), ← hnd K]
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem normalizedIdentityLeft {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) {s : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l))
@@ -353,9 +340,7 @@ private theorem normalizedIdentityLeft {X Y : Scheme.{u}} {f : X ⟶ Y}
       rw [hv, ← Category.assoc]
       exact (congrArg (fun z ↦ z ≫ rA.hom.app K) (iy.normalized (A.F.obj K))).symm
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- Construct scalar extensions, their normalized left proper/open maps, and the
 balanced identity and composition comparisons, before constructing right mates.
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.

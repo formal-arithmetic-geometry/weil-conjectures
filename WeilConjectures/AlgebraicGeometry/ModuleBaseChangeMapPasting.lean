@@ -64,7 +64,8 @@ private theorem pushforwardSquare_pasting
       ((TwoSquare.hComp (pushforwardSquare f' f'' h h' hsq₂)
         (pushforwardSquare f f' g g' hsq₁)).whiskerTop
           (pushforwardComp h' g').inv).whiskerBottom (pushforwardComp h g).hom := by
-  ext M : 1
+  apply NatTrans.ext
+  funext M
   apply hom_ext
   intro U
   simp only [pushforwardSquare, TwoSquare.hComp, TwoSquare.whiskerTop,

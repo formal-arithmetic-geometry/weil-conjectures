@@ -54,32 +54,26 @@ instance hasInducedTStructure_boundedFieldConstructible :
       _root_.DerivedCategory.TStructure.t :=
   .mk' fun _ hK n ↦ ⟨boundedFieldConstructible_truncLE hK n, boundedFieldConstructible_truncGE hK n⟩
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search through the derived category of `Λ_X`-modules is slow
 noncomputable instance : HasShift (boundedFieldConstructible Λ X).FullSubcategory ℤ :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search through the derived category of `Λ_X`-modules is slow
 noncomputable instance : Preadditive (boundedFieldConstructible Λ X).FullSubcategory :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search through the derived category of `Λ_X`-modules is slow
 instance : HasZeroObject (boundedFieldConstructible Λ X).FullSubcategory :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search through the derived category of `Λ_X`-modules is slow
 instance (n : ℤ) : (shiftFunctor (boundedFieldConstructible Λ X).FullSubcategory n).Additive :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search through the derived category of `Λ_X`-modules is slow
 noncomputable instance : Pretriangulated (boundedFieldConstructible Λ X).FullSubcategory :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search through the derived category of `Λ_X`-modules is slow
 instance : IsTriangulated (boundedFieldConstructible Λ X).FullSubcategory :=
   inferInstance

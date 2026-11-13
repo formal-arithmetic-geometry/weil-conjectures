@@ -328,9 +328,7 @@ private theorem underived_swap_square
   rw [reassoc_of% h₀]
   rfl
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
 -- The concrete sheaf tensor comparisons require additional elaboration fuel.
 /-- The normalized ordinary symmetry determines the native underived swap.
 Source: Stacks 03EK, 06YU and 0FPT; the binary mate and tensor symmetry squares.

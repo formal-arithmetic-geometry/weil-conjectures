@@ -78,7 +78,6 @@ private theorem epi_map_of_natIso {C : Type*} [Category C]
   rw [hfac]
   infer_instance
 
-set_option maxHeartbeats 400000 in
 -- The composed homology/stalk functors require substantial definitional-equality checking.
 /-- The local unit calculation for an already supplied strictly perfect representative.
 Source: Stacks Project, Tag 0E62, local argument, and Tag 0BCD.

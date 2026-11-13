@@ -98,11 +98,11 @@ lemma mate_twist_compat (adj : L ⊣ R) (adj' : L' ⊣ R')
     (α : ΨM ⋙ L' ⟶ L ⋙ ΨN)
     (hα : ∀ A, L'.map (κM.hom.app A) ≫ e'.hom.app (ΨM.obj A) ≫ α.app A ▷ TY' =
       α.app (A ⊗ TX) ≫ ΨN.map (e.hom.app A) ≫ κN.hom.app (L.obj A))
-    (χ : R ⋙ ΨM ⟶ ΨN ⋙ R') (hχ : χ = (mateEquiv adj adj' α).natTrans)
+    (χ : R ⋙ ΨM ⟶ ΨN ⋙ R') (hχ : χ = (mateEquiv adj adj' α))
     (βr : R ⋙ tensorRight TX ⟶ tensorRight TY ⋙ R)
-    (hβr : βr = (mateEquiv adj adj e.hom).natTrans)
+    (hβr : βr = (mateEquiv adj adj e.hom))
     (βs : R' ⋙ tensorRight TX' ⟶ tensorRight TY' ⋙ R')
-    (hβs : βs = (mateEquiv adj' adj' e'.hom).natTrans) (K : DY) :
+    (hβs : βs = (mateEquiv adj' adj' e'.hom)) (K : DY) :
     κM.inv.app (R.obj K) ≫ ΨM.map (βr.app K) ≫ χ.app (K ⊗ TY) =
       χ.app K ▷ TX' ≫ βs.app (ΨN.obj K) ≫ R'.map (κN.inv.app K) := by
   subst hχ hβr hβs
@@ -128,16 +128,16 @@ lemma mate_inv_twist_compat (adj : L ⊣ R) (adj' : L' ⊣ R') (adjU : R ⊣ U) 
     (α : ΨM ⋙ L' ⟶ L ⋙ ΨN)
     (hα : ∀ A, L'.map (κM.hom.app A) ≫ e'.hom.app (ΨM.obj A) ≫ α.app A ▷ TY' =
       α.app (A ⊗ TX) ≫ ΨN.map (e.hom.app A) ≫ κN.hom.app (L.obj A))
-    (χ : R ⋙ ΨM ⟶ ΨN ⋙ R') (hχ : χ = (mateEquiv adj adj' α).natTrans) [IsIso χ]
+    (χ : R ⋙ ΨM ⟶ ΨN ⋙ R') (hχ : χ = (mateEquiv adj adj' α)) [IsIso χ]
     (βr : R ⋙ tensorRight TX ⟶ tensorRight TY ⋙ R)
-    (hβr : βr = (mateEquiv adj adj e.hom).natTrans) [IsIso βr]
+    (hβr : βr = (mateEquiv adj adj e.hom)) [IsIso βr]
     (βs : R' ⋙ tensorRight TX' ⟶ tensorRight TY' ⋙ R')
-    (hβs : βs = (mateEquiv adj' adj' e'.hom).natTrans) [IsIso βs]
-    (β : U ⋙ ΨN ⟶ ΨM ⋙ U') (hβ : β = (mateEquiv adjU adjU' (inv χ)).natTrans)
+    (hβs : βs = (mateEquiv adj' adj' e'.hom)) [IsIso βs]
+    (β : U ⋙ ΨN ⟶ ΨM ⋙ U') (hβ : β = (mateEquiv adjU adjU' (inv χ)))
     (γr : U ⋙ tensorRight TY ⟶ tensorRight TX ⋙ U)
-    (hγr : γr = (mateEquiv adjU adjU (inv βr)).natTrans)
+    (hγr : γr = (mateEquiv adjU adjU (inv βr)))
     (γs : U' ⋙ tensorRight TY' ⟶ tensorRight TX' ⋙ U')
-    (hγs : γs = (mateEquiv adjU' adjU' (inv βs)).natTrans) (Z : DX) :
+    (hγs : γs = (mateEquiv adjU' adjU' (inv βs))) (Z : DX) :
     κN.inv.app (U.obj Z) ≫ ΨN.map (γr.app Z) ≫ β.app (Z ⊗ TX) =
       β.app Z ▷ TY' ≫ γs.app (ΨM.obj Z) ≫ U'.map (κM.inv.app Z) := by
   subst hβ hγr hγs
@@ -162,16 +162,16 @@ lemma mate_inv_twist_compat' (adj : L ⊣ R) (adj' : L' ⊣ R') (adjU : R ⊣ U)
     (α : ΨM ⋙ L' ⟶ L ⋙ ΨN)
     (hα : ∀ A, L'.map (κM.hom.app A) ≫ e'.hom.app (ΨM.obj A) ≫ α.app A ▷ TY' =
       α.app (A ⊗ TX) ≫ ΨN.map (e.hom.app A) ≫ κN.hom.app (L.obj A))
-    (χ : R ⋙ ΨM ⟶ ΨN ⋙ R') (hχ : χ = (mateEquiv adj adj' α).natTrans) [IsIso χ]
+    (χ : R ⋙ ΨM ⟶ ΨN ⋙ R') (hχ : χ = (mateEquiv adj adj' α)) [IsIso χ]
     (βr : R ⋙ tensorRight TX ⟶ tensorRight TY ⋙ R)
-    (hβr : βr = (mateEquiv adj adj e.hom).natTrans) [IsIso βr]
+    (hβr : βr = (mateEquiv adj adj e.hom)) [IsIso βr]
     (βs : R' ⋙ tensorRight TX' ⟶ tensorRight TY' ⋙ R')
-    (hβs : βs = (mateEquiv adj' adj' e'.hom).natTrans) [IsIso βs]
-    (β : U ⋙ ΨN ⟶ ΨM ⋙ U') (hβ : β = (mateEquiv adjU adjU' (inv χ)).natTrans)
+    (hβs : βs = (mateEquiv adj' adj' e'.hom)) [IsIso βs]
+    (β : U ⋙ ΨN ⟶ ΨM ⋙ U') (hβ : β = (mateEquiv adjU adjU' (inv χ)))
     (γr : U ⋙ tensorRight TY ⟶ tensorRight TX ⋙ U)
-    (hγr : γr = (mateEquiv adjU adjU (inv βr)).natTrans) [IsIso γr]
+    (hγr : γr = (mateEquiv adjU adjU (inv βr))) [IsIso γr]
     (γs : U' ⋙ tensorRight TY' ⟶ tensorRight TX' ⋙ U')
-    (hγs : γs = (mateEquiv adjU' adjU' (inv βs)).natTrans) [IsIso γs] (ω : DX) :
+    (hγs : γs = (mateEquiv adjU' adjU' (inv βs))) [IsIso γs] (ω : DX) :
     β.app (ω ⊗ TX) ≫ U'.map (κM.hom.app ω) ≫ inv (γs.app (ΨM.obj ω)) =
       ΨN.map (inv (γr.app ω)) ≫ κN.hom.app (U.obj ω) ≫ β.app ω ▷ TY' := by
   have h := mate_inv_twist_compat adj adj' adjU adjU' e e' κM κN α hα χ hχ βr hβr βs hβs β hβ γr
@@ -229,7 +229,7 @@ noncomputable def boundedConstructibleLowerStarZeroTwistMap :
       tensorRight (boundedConstructibleTateTwist ℓ Y 0 n) ⋙ boundedConstructibleLowerStar ℓ i :=
   (mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
-    (boundedConstructibleUpperStarZeroTwistIso ℓ i n).hom).natTrans
+    (boundedConstructibleUpperStarZeroTwistIso ℓ i n).hom)
 
 instance isIso_boundedConstructibleLowerStarZeroTwistMap :
     IsIso (boundedConstructibleLowerStarZeroTwistMap ℓ i n) := by
@@ -248,7 +248,7 @@ noncomputable def upperShriekZeroTwistMap :
     boundedConstructibleUpperShriek ℓ i ⋙ tensorRight (boundedConstructibleTateTwist ℓ Y 0 n) ⟶
       tensorRight (boundedConstructibleTateTwist ℓ X 0 n) ⋙ boundedConstructibleUpperShriek ℓ i :=
   (mateEquiv (lowerStarUpperShriekAdjunction ℓ i) (lowerStarUpperShriekAdjunction ℓ i)
-    (inv (boundedConstructibleLowerStarZeroTwistMap ℓ i n))).natTrans
+    (inv (boundedConstructibleLowerStarZeroTwistMap ℓ i n)))
 
 instance isIso_upperShriekZeroTwistMap : IsIso (upperShriekZeroTwistMap ℓ i n) := by
   have := isEquivalence_tensorRight_of_isInvertible

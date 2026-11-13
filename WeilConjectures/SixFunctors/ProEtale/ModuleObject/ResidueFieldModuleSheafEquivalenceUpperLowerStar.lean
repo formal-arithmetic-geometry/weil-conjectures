@@ -117,10 +117,10 @@ the pushforward of the action of the global section given by `f ∘ g`. -/
 lemma sectionActRingHom_lowerStar_continuousMapCoefficientSectionRingHom
     (M : Mod (Sheaf (ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X')) (f : C(X, T)) :
-    Mod.sectionActRingHom ((g)_*⟦Profinite.continuousMapRingObj.{u} T⟧.obj M)
-        (continuousMapCoefficientSectionRingHom X T f) =
+    (Mod.sectionActRingHom ((g)_*⟦Profinite.continuousMapRingObj.{u} T⟧.obj M)
+        (continuousMapCoefficientSectionRingHom X T f)).asHom =
       (g)_*[Ab.{u + 1}].map (Mod.sectionActRingHom M
-        (continuousMapCoefficientSectionRingHom X' T (f.comp g.base.hom))) := by
+        (continuousMapCoefficientSectionRingHom X' T (f.comp g.base.hom))).asHom := by
   change Mod.sectionAct ((Mod.comap _).obj (((g)_*[Ab.{u + 1}].mapMod _).obj M)).X _ = _
   rw [Mod.sectionAct_comap, continuousMapCoefficientSectionRingHom_hom_comp_condensedPushforwardHom,
     Mod.sectionAct_mapMod]
@@ -167,7 +167,7 @@ lemma sheafCompose_map_smulEnd_comp_residueFieldModuleSheafCompForgetIso_hom_app
         (Sheaf.smulEnd ((residueFieldModuleSheaf X ℓ E).obj N) c) ≫
         (residueFieldModuleSheafCompForgetIso X).hom.app N =
       (residueFieldModuleSheafCompForgetIso X).hom.app N ≫
-        Mod.sectionActRingHom N (residueFieldSectionRingHom X ℓ E c) :=
+        (Mod.sectionActRingHom N (residueFieldSectionRingHom X ℓ E c)).asHom :=
   Sheaf.sheafCompose_map_smulEnd_moduleLift_obj_comp_moduleLiftCompIso_hom_app (Mod.forget _)
     (fun M ↦ (Mod.sectionActRingHom M).comp (residueFieldSectionRingHom X ℓ E))
     (fun f c ↦ Mod.sectionActRingHom_comp_hom f (residueFieldSectionRingHom X ℓ E c)) N c
@@ -180,7 +180,7 @@ constant section `c` with the multiplication by `c`. -/
 lemma sectionActRingHom_comp_residueFieldModuleSheafCompForgetIso_inv_app
     (X : Scheme.{u}) (N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (residueFieldRingObj X ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    Mod.sectionActRingHom N (residueFieldSectionRingHom X ℓ E c) ≫
+    (Mod.sectionActRingHom N (residueFieldSectionRingHom X ℓ E c)).asHom ≫
         (residueFieldModuleSheafCompForgetIso X).inv.app N =
       (residueFieldModuleSheafCompForgetIso X).inv.app N ≫
         (sheafCompose (ProEt.topology X)

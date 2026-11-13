@@ -93,7 +93,6 @@ attribute [local irreducible] coefficientTotalTensor pullbackTensorTensorTower
 attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
   integralOperationsRoosFunctor unrestrictedIntegralReductionFunctor
 
-set_option maxHeartbeats 400000 in
 -- The normalized total-tensor source appears in both adjunctions and the Roos coordinates.
 /-- The ordinary transpose of the balanced scalar tensor chain map has the
 quotient pure-tensor coordinates and zero shifted coordinate in the full Roos

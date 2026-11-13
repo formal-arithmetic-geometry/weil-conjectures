@@ -31,7 +31,7 @@ attribute [local instance] WeilSheaf.neZero_natCast_algebraicClosure
 /-- The canonical geometric Tate line is the unit pair twisted by the cyclotomic
 unit, with its actual root-defined Frobenius comparison. -/
 theorem purity_nonempty_tateTwistOnePair_iso_unitScalar :
-    Nonempty (tateTwistOnePair ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
+    Nonempty (tateTwistOnePair ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom
         (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure ≅
       IsoAlgebra.unitScalarPair _
         (ProEtaleWeilSheaf.regularSmulIso k₀ ℓ X (WeilSheaf.cyclotomicUnit k₀ ℓ))) := by
@@ -39,20 +39,20 @@ theorem purity_nonempty_tateTwistOnePair_iso_unitScalar :
   let e := purityCanonicalTateOneTrivialization ℓ (X ↘ Spec (.of k₀)) hζ hζ'
   refine ⟨IsoAlgebra.isoMk e ?_⟩
   change (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom).map e.hom ≫
+      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom).map e.hom ≫
       (Functor.OplaxMonoidal.η _ ≫
         (ProEtaleWeilSheaf.regularSmulIso k₀ ℓ X (WeilSheaf.cyclotomicUnit k₀ ℓ)).hom) =
-    (upperStarTateTwistOneIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
+    (upperStarTateTwistOneIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom
       (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure).hom ≫ e.hom
   have he := purityCanonicalTateOneTrivialization_weil ℓ (X ↘ Spec (.of k₀)) hζ hζ'
   have hs := ProEtaleWeilSheaf.purity_regularSmulIso_cyclotomic_cancel k₀ ℓ X
   have h := purity_scalarDatum_inverse
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom)
-    (upperStarTateTwistOneIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
+      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom)
+    (upperStarTateTwistOneIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom
       (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure).hom
     (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom)).inv
+      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom)).inv
     (purityCanonicalTateOneTrivialization ℓ (X ↘ Spec (.of k₀)) hζ hζ').hom
     (Nat.card k₀ : ℤ)
     (ProEtaleWeilSheaf.regularSmulIso k₀ ℓ X (WeilSheaf.cyclotomicUnit k₀ ℓ)).hom

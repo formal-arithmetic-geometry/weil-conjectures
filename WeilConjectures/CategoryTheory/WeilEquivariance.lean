@@ -102,7 +102,7 @@ between adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂`: the mate of `e⁻¹`. F
 change `Ex_! : Lh^* Rf_! ≅ Rf'_! Lg^*` it is the exceptional base change
 `Lg^* Rf^! ⟶ Rf'^! Lh^*`. -/
 noncomputable def rightAdjointExchange : R₁ ⋙ G ⟶ H ⋙ R₂ :=
-  (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv)).natTrans
+  (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv))
 
 /-- The right adjoint exchange is characterised by its compatibility with the counits:
 ```
@@ -222,7 +222,7 @@ lemma isWeilEquivariant_curry {A B ω : C} (φA : G.obj A ≅ A) (φB : G.obj B 
 map being the internal-hom comparison of `G` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`).
 -/
 lemma dualWeilDatum_eq {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶ ω) :
-    dualWeilDatum G φA φω = (LaxMonoidal.ihomComparison G A).natTrans.app ω ≫
+    dualWeilDatum G φA φω = (LaxMonoidal.ihomComparison G A).app ω ≫
       (ihom (G.obj A)).map φω ≫ (pre φA.inv).app ω := by
   apply uncurry_injective
   rw [dualWeilDatum, uncurry_curry]
@@ -235,7 +235,7 @@ invertible: the internal-hom comparison of a monoidal equivalence is an isomorph
 (`CategoryTheory.isIso_mateEquiv_of_isEquivalence`). -/
 instance isIso_dualWeilDatum [G.IsEquivalence] {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶ ω)
     [IsIso φω] : IsIso (dualWeilDatum G φA φω) := by
-  have : IsIso (LaxMonoidal.μTwoSquare G A).natTrans := by
+  have : IsIso (LaxMonoidal.μTwoSquare G A) := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro X
     dsimp [LaxMonoidal.μTwoSquare]
@@ -243,7 +243,7 @@ instance isIso_dualWeilDatum [G.IsEquivalence] {A ω : C} (φA : G.obj A ≅ A) 
   have := isIso_mateEquiv_of_isEquivalence (ihom.adjunction A) (ihom.adjunction (G.obj A))
     (LaxMonoidal.μTwoSquare G A)
   rw [dualWeilDatum_eq]
-  change IsIso ((LaxMonoidal.ihomComparison G A).natTrans.app ω ≫ _ ≫ _)
+  change IsIso ((LaxMonoidal.ihomComparison G A).app ω ≫ _ ≫ _)
   infer_instance
 
 end MonoidalClosed

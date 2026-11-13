@@ -359,7 +359,6 @@ private theorem app_eq_of_iso {A B : Type*} [Category A] [Category B]
   exact (α.naturality e.hom).trans
     ((congrArg (fun f ↦ f ≫ G.map e.hom) h).trans (β.naturality e.hom).symm)
 
-set_option maxHeartbeats 250000 in
 -- Bound elaboration of the explicit representative model equations.
 private theorem chain_comparison_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
@@ -399,7 +398,6 @@ private theorem total_hom_ext (W : Scheme.{u}) (s : Option ℕ)
   exact WeilConjectures.coefficient_total_ext.{u, u + 1, u}
     (ProEt.topology W) (podReindexingRing l E W s) P L I f g h
 
-set_option maxHeartbeats 250000 in
 -- Bound elaboration of the explicit representative model equations.
 private theorem tensor_chain_comparison_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
@@ -433,7 +431,6 @@ private theorem tensor_chain_comparison_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
   change (e.hom.f (p + q)).val.app U ((e'.inv.f (p + q)).val.app U gx) = gx
   exact (congrArg (fun z ↦ (e.hom.f (p + q)).val.app U z) hi').trans hc
 
-set_option maxHeartbeats 250000 in
 -- Bound elaboration of the explicit representative model equations.
 private theorem derived_comparison_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
@@ -479,7 +476,6 @@ private theorem derived_comparison_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   let e := eM.symm.op.prod eN
   exact app_eq_of_iso c.derived.hom c'.derived.hom e (hc P I hI)
 
-set_option maxHeartbeats 250000 in
 -- Bound elaboration of the explicit representative model equations.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

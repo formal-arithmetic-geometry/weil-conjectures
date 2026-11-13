@@ -48,7 +48,7 @@ theorem nonempty_etaleDualRestrictionIso
       (ihom ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)).obj (𝟙_ _)) := by
   have := Etale.isIso_ihomComparison_upperStar (ModuleCat.{u + 1} Λ) U.hom F
   let e := asIso ((Functor.LaxMonoidal.ihomComparison
-    (Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom) F).natTrans.app (𝟙_ _))
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom) F).app (𝟙_ _))
   exact ⟨e ≪≫ (ihom ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)).mapIso
     (Functor.Monoidal.εIso (Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom)).symm⟩
 

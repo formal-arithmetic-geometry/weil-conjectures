@@ -24,7 +24,6 @@ universe c z u vc vz vu s
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
-set_option maxHeartbeats 1000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- The supported right adjoint preserves any coproduct preserved by the open
 localization endofunctor.

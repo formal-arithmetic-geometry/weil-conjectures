@@ -261,10 +261,10 @@ theorem coefficientEnd_step (W : Scheme.{u}) (n : ℕ)
       (Padic.coefficientExtensionRing l E (n + 2))) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let Φ := Mod.extendScalars (AdicCompletion.transition l E W n)
-    Φ.map (coefficientEndEquiv l E W (n + 1) z) ≫
+    Φ.map (coefficientEndEquiv l E W (n + 1) z).asHom ≫
         (Mod.regularExtensionIso (AdicCompletion.transition l E W n)).hom =
       (Mod.regularExtensionIso (AdicCompletion.transition l E W n)).hom ≫
-        coefficientEndEquiv l E W n (z.map (scalarStep l E n)) := by
+        (coefficientEndEquiv l E W n (z.map (scalarStep l E n))).asHom := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   have h := FiniteModelQuotient.extendRegular_lift (AdicCompletion.transition l E W n)
     (coefficientSection l E W (n + 1) z)

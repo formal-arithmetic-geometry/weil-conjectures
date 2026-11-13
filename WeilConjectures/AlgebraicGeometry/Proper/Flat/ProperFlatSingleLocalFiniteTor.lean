@@ -70,9 +70,9 @@ private theorem flatOver_openImmersion_square {X T Y B : Scheme.{u}}
   convert hh using 1 <;> try rfl
   ext a m
   change (F.smul (((i.appIso W.1).inv.hom
-    ((p.appLE V.1 W.1 e).hom a)))).hom m =
-      (F.smul (ψ.hom (φ.hom a))).hom m
-  exact congrArg (fun q : Γ(B, V.1) ⟶ Γ(X, W'.1) ↦ (F.smul (q.hom a)).hom m) he.symm
+    ((p.appLE V.1 W.1 e).hom a)))).asHom.hom m =
+      (F.smul (ψ.hom (φ.hom a))).asHom.hom m
+  exact congrArg (fun q : Γ(B, V.1) ⟶ Γ(X, W'.1) ↦ (F.smul (q.hom a)).asHom.hom m) he.symm
 
 open CategoryTheory.Limits MonoidalCategory in
 /-- Tensor with a module in degree zero preserves the termwise vanishing interval. -/

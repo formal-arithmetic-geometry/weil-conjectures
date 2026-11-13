@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.StrictPerfectTensorRelativeTorBound
 import WeilConjectures.Algebra.Homology.KFlatResolution
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Finite relative Tor dimension of a perfect tensor
 

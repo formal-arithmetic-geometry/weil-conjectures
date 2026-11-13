@@ -81,7 +81,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChange :
   ((𝔽).shriekBaseChange (SepFinType.homMk c.overI) (SepFinType.homMk c.overG)
     (SepFinType.homMk c'.overI) (SepFinType.homMk c'.overG) (SepFinType.homMk g')
     (SepFinType.homMk h) (SepFinType.homMk g) (SepFinType.homMk_comp_homMk hi.w)
-    (SepFinType.homMk_comp_homMk hp.w)).natTrans
+    (SepFinType.homMk_comp_homMk hp.w))
 
 /-- The compact-support exchange map of a pair of compactifications is the base-change morphism
 of the proper squares after the extension by zero, followed by the inverse of the
@@ -186,7 +186,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g'₁ ≫ SepFinType.homMk g'₂)
       (SepFinType.homMk c₁.overI) (SepFinType.homMk c.overI)
       (SepFinType.homMk h₁ ≫ SepFinType.homMk h₂)
-      (SepFinType.homMk_comp_homMk (hi₁.paste_horiz hi₂).w)).natTrans :=
+      (SepFinType.homMk_comp_homMk (hi₁.paste_horiz hi₂).w)) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ (hi₁.paste_horiz hi₂)
   have h := (𝔽).shriekBaseChange_paste_horiz (SepFinType.homMk c.overI)
     (SepFinType.homMk c.overG) (SepFinType.homMk c₂.overI) (SepFinType.homMk c₂.overG)

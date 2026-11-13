@@ -297,7 +297,6 @@ private lemma evaluation_single {C D : Type*}
 
 end SingleCompatibility
 
-set_option maxHeartbeats 400000 in
 -- Restriction comparisons contain several large sheaf functors.
 /-- On unshifted singles, the restriction and single comparisons give the explicit
 complex pullback and coefficient map, before applying any homology functor.

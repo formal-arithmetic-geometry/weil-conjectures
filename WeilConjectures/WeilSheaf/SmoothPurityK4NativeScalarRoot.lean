@@ -37,7 +37,7 @@ theorem purity_rationalRootTrivialization_weil :
             (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
               a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
               (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso)).hom) =
-      (a.geometricGaloisFrobenius.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
+      (a.geometricGaloisFrobenius.asIso.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
           (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
             (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
             (upperStarMapModTateModuleIsoUnit a.geometricFiberProj

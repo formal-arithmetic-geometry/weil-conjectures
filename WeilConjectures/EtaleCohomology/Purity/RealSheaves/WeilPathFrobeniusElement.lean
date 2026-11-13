@@ -123,15 +123,15 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 degree `m`, for a path `π : F_x̄ ≅ F_t`. -/
 noncomputable def frobeniusLoop (x : C.finitePoints)
     (π : fiber (p.geometricFiberPointOfFinitePoint x) ≅ fiber B.t) :
-    fiber B.t ≅ fiber (B.t ≫ (p.geometricGaloisFrobenius ^ p.degreeOver x.1).hom) :=
-  π.symm ≪≫ (fiberReparamIso (specGeometricFrobenius K ^ p.degreeOver x.1) _).symm ≪≫
+    fiber B.t ≅ fiber (B.t ≫ (p.geometricGaloisFrobenius ^ p.degreeOver x.1).asIso.hom) :=
+  π.symm ≪≫ (fiberReparamIso (specGeometricFrobenius K ^ p.degreeOver x.1).asIso _).symm ≪≫
     eqToIso (congrArg fiber
       (p.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow x).symm) ≪≫
-    pullbackPathIso (p.geometricGaloisFrobenius ^ p.degreeOver x.1).hom π
+    pullbackPathIso (p.geometricGaloisFrobenius ^ p.degreeOver x.1).asIso.hom π
 
 /-- The endpoint `t ≫ Frᵐ` of the local Frobenius loop has the same image in `C₀` as `t`. -/
 lemma frobeniusLoop_comp_geometricFiberProj (x : C.finitePoints) :
-    (B.t ≫ (p.geometricGaloisFrobenius ^ p.degreeOver x.1).hom) ≫ p.geometricFiberProj =
+    (B.t ≫ (p.geometricGaloisFrobenius ^ p.degreeOver x.1).asIso.hom) ≫ p.geometricFiberProj =
       B.t ≫ p.geometricFiberProj := by
   rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
 
@@ -139,7 +139,7 @@ omit [IsCurve p] in
 /-- The image `x̄ ≫ proj` in `C₀` of the geometric point over `x` is fixed by `σᵐ`,
 `m = [κ(x) : K]`. -/
 lemma specGeometricFrobenius_pow_comp_geometricFiberPointOfFinitePoint (x : C.finitePoints) :
-    (specGeometricFrobenius K ^ p.degreeOver x.1).hom ≫
+    (specGeometricFrobenius K ^ p.degreeOver x.1).asIso.hom ≫
         p.geometricFiberPointOfFinitePoint x ≫ p.geometricFiberProj =
       p.geometricFiberPointOfFinitePoint x ≫ p.geometricFiberProj := by
   rw [← Category.assoc, ← p.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow,
@@ -152,7 +152,7 @@ lemma pullbackPathIso_frobeniusLoop (x : C.finitePoints)
     pullbackPathIso p.geometricFiberProj (B.frobeniusLoop x π) ≪≫
         eqToIso (congrArg fiber (B.frobeniusLoop_comp_geometricFiberProj x)) =
       (pullbackPathIso p.geometricFiberProj π).symm ≪≫
-        fiberPrecompIso _ (specGeometricFrobenius K ^ p.degreeOver x.1)
+        fiberPrecompIso _ (specGeometricFrobenius K ^ p.degreeOver x.1).asIso
           (specGeometricFrobenius_pow_comp_geometricFiberPointOfFinitePoint x) ≪≫
         pullbackPathIso p.geometricFiberProj π := by
   rw [frobeniusLoop, pullbackPathIso_trans, pullbackPathIso_trans, pullbackPathIso_trans,

@@ -173,7 +173,7 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
     (hlift : ∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens)
       (b : B.right.obj.obj (op U)) (x : I.val.obj (op U)),
       p.right.hom.app (op U) b = C.right.obj.map (homOfLE le_top).op f →
-      @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).val.app (op U) x)) =
+      @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).asHom.val.app (op U) x)) =
         b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x)) :
     let d :=
       (RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
@@ -182,8 +182,8 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
         hΓ.δ 0 1 rfl ≫
         (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv
     ∀ f g : C.right.obj.obj (op ⊤), d.hom (f * g) =
-      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f)).hom (d.hom g) +
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g)).hom (d.hom f) := by
+      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f).asHom).hom (d.hom g) +
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map ((μ g)).asHom).hom (d.hom f) := by
   classical
   have _ := hsq
   let := HasDerivedCategory.standard
@@ -209,7 +209,7 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
   let K := (CategoryTheory.cechComplexFunctor U).obj (show X.Modules from I).presheafModuleCat
   let act (f : C.right.obj.obj (op ⊤)) :=
     (CategoryTheory.cechComplexFunctor U).map
-      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (μ f).val)
+      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (μ f).asHom.val)
   have hz : zfg = HomologicalComplex.cyclesMap (act f) 1 zg +
       HomologicalComplex.cyclesMap (act g) 1 zf := by
     have hinj : Function.Injective (K.iCycles 1) :=
@@ -241,12 +241,12 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
       rfl
     have hφ (s : C.right.obj.obj (op ⊤)) (z : K.cycles 1) :
         π (K.iCycles 1 (HomologicalComplex.cyclesMap (act s) 1 z)) =
-          (μ s).val.app (op W) (π (K.iCycles 1 z)) := by
+          (μ s).asHom.val.app (op W) (π (K.iCycles 1 z)) := by
       have hi := congrArg (fun m ↦ m z) (HomologicalComplex.cyclesMap_i (act s) 1)
       have hp := TopCat.Presheaf.cechComplexFunctor_map_f_π U
         (show X.Modules from I).presheafModuleCat
         ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
-          (μ s).val) 1 y
+          (μ s).asHom.val) 1 y
       dsimp only [act] at hi
       simp only [ConcreteCategory.comp_apply] at hi
       erw [hi]
@@ -287,9 +287,9 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
         (HomologicalComplex.homologyπ_naturality (act g) 1)).symm
   have hn (s : C.right.obj.obj (op ⊤)) (z : K.cycles 1) :
       cmp I (HomologicalComplex.homologyMap (act s) 1 (K.homologyπ 1 z)) =
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ s)).hom
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ s).asHom).hom
           (cmp I (K.homologyπ 1 z)) := by
-    exact congrArg (fun m ↦ m (K.homologyπ 1 z)) (hnatural I I (μ s))
+    exact congrArg (fun m ↦ m (K.homologyπ 1 z)) (hnatural I I (μ s).asHom)
   have he := congrArg (fun z ↦ cmp I z) hclass
   rw [map_add, hn, hn, hcf, hcg, hcfg] at he
   simp only [ModuleCat.comp_apply, hd]

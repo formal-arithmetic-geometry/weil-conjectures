@@ -61,7 +61,7 @@ def finiteScalarPullbackComparison (R : Type u) [CommRing R] [Finite R]
       (Functor.rightDerivedFunctorNatIso (eqToIso hg)).symm
   let α := ((mateEquiv a b).symm
     (TwoSquare.mk _ (sfIntrinsicDerivedEquivalence X R).functor
-      (sfIntrinsicDerivedEquivalence Y R).functor _ r.hom)).natTrans
+      (sfIntrinsicDerivedEquivalence Y R).functor _ r.hom))
   have : IsIso α := isIso_inverseMate_of_equivalences a b r
   exact asIso α
 

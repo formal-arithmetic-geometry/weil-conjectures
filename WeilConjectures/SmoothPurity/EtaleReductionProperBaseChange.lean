@@ -63,11 +63,11 @@ the horizontal composite of the squares `inv Pr ≫ (κ⁻¹ ▷ RY)` and `(Pρ 
 lemma hom_app_of_inv_eq_hComp (κ : Sh ≅ P) (κe : Fs ≅ Fp) (Pr : P ⋙ RY ⟶ RX ⋙ Q) [IsIso Pr]
     (Pρ : Q ⋙ ρY ≅ ρX ⋙ Fp) (γ : Sh ⋙ RY ⋙ ρY ≅ (RX ⋙ ρX) ⋙ Fs)
     (hγ : γ.inv = ((TwoSquare.mk _ _ _ _ (inv Pr ≫ Functor.whiskerRight κ.inv RY)).hComp
-      (TwoSquare.mk _ _ _ _ (Pρ ≪≫ Functor.isoWhiskerLeft ρX κe.symm).inv)).natTrans) (M : AX) :
+      (TwoSquare.mk _ _ _ _ (Pρ ≪≫ Functor.isoWhiskerLeft ρX κe.symm).inv))) (M : AX) :
     γ.hom.app M = ρY.map (RY.map (κ.hom.app M) ≫ Pr.app M) ≫ Pρ.hom.app (RX.obj M) ≫
       κe.inv.app (ρX.obj (RX.obj M)) := by
   rw [← cancel_epi (γ.inv.app M), Iso.inv_hom_id_app, hγ]
-  simp only [TwoSquare.hComp, TwoSquare.natTrans, NatTrans.comp_app, Functor.associator_hom_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.id_comp, Category.assoc, Functor.comp_obj]
   rw [← Functor.map_comp_assoc, Category.assoc, ← Functor.map_comp_assoc RY,
@@ -95,9 +95,9 @@ theorem comp_hom_app_comp_map_eq_of_isProper (κ : Sh ≅ P) (κ' : Sh' ≅ P') 
     [IsIso Pr'] (Pρ : Q ⋙ ρY ≅ ρX ⋙ Fp) (Pρ' : Q' ⋙ ρY' ≅ ρX' ⋙ Fp')
     (γ : Sh ⋙ RY ⋙ ρY ≅ (RX ⋙ ρX) ⋙ Fs) (γ' : Sh' ⋙ RY' ⋙ ρY' ≅ (RX' ⋙ ρX') ⋙ Fs')
     (hγ : γ.inv = ((TwoSquare.mk _ _ _ _ (inv Pr ≫ Functor.whiskerRight κ.inv RY)).hComp
-      (TwoSquare.mk _ _ _ _ (Pρ ≪≫ Functor.isoWhiskerLeft ρX κe.symm).inv)).natTrans)
+      (TwoSquare.mk _ _ _ _ (Pρ ≪≫ Functor.isoWhiskerLeft ρX κe.symm).inv)))
     (hγ' : γ'.inv = ((TwoSquare.mk _ _ _ _ (inv Pr' ≫ Functor.whiskerRight κ'.inv RY')).hComp
-      (TwoSquare.mk _ _ _ _ (Pρ' ≪≫ Functor.isoWhiskerLeft ρX' κe'.symm).inv)).natTrans)
+      (TwoSquare.mk _ _ _ _ (Pρ' ≪≫ Functor.isoWhiskerLeft ρX' κe'.symm).inv)))
     (Riso : GA ⋙ RY' ≅ RY ⋙ GB) (Riso' : HA ⋙ RX' ≅ RX ⋙ HB) (cρ : GB ⋙ ρY' ≅ ρY ⋙ GC)
     (cρ' : HB ⋙ ρX' ≅ ρX ⋙ HC) (c : GA ⋙ RY' ⋙ ρY' ≅ (RY ⋙ ρY) ⋙ GC)
     (c' : HA ⋙ RX' ⋙ ρX' ≅ (RX ⋙ ρX) ⋙ HC)
@@ -216,12 +216,12 @@ theorem etaleReductionLowerShriekBaseChangeCompatible_of_isProper (sq : IsPullba
   have : IsIso (mateEquiv
       (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E f)
       (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f)
-      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f).inv).natTrans :=
+      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f).inv) :=
     inferInstanceAs (IsIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n f))
   have : IsIso (mateEquiv
       (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
       (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f')
-      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f').inv).natTrans :=
+      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f').inv) :=
     inferInstanceAs (IsIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n f'))
   have h := CategoryTheory.comp_hom_app_comp_map_eq_of_isProper
     (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E f)
@@ -232,10 +232,10 @@ theorem etaleReductionLowerShriekBaseChangeCompatible_of_isProper (sq : IsPullba
       (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f'.left)
     (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E f)
       (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f)
-      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f).inv).natTrans
+      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f).inv)
     (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
       (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f')
-      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f').inv).natTrans
+      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f').inv)
     (finiteEtaleReadingLowerStarIso ℓ E n f) (finiteEtaleReadingLowerStarIso ℓ E n f')
     (etaleReductionLowerShriekIso ℓ E n f) (etaleReductionLowerShriekIso ℓ E n f')
     (by rw [etaleReductionLowerShriekIso, Iso.symm_inv, asIso_hom]; rfl)
@@ -249,12 +249,12 @@ theorem etaleReductionLowerShriekBaseChangeCompatible_of_isProper (sq : IsPullba
     (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E f)
       (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
       (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
-        sq.toCommSq).hom).natTrans
+        sq.toCommSq).hom)
     (boundedConstructibleLowerShriekBaseChange_padicIntegers_of_isProper_mateEquiv ℓ E sq)
     (mateEquiv (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f)
       (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f')
       (boundedConstructiblePullbackSquareComparison (Profinite.integersModPowRingObj ℓ E n) ℓ
-        sq.toCommSq).hom).natTrans
+        sq.toCommSq).hom)
     (fun K ↦ by
       -- the `Precoherent Profinite` proofs of the two statements differ
       have hR := boundedConstructibleIntegersModPowReduction_baseChange ℓ E n sq.toCommSq K

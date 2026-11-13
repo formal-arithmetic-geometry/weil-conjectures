@@ -65,8 +65,8 @@ theorem frobenius_linear_free_kernel_stratification
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e))
     (n : ℕ) (α : E ≅
       SheafOfModules.free (R := S.ringCatSheaf) (ULift.{u} (Fin n))) :

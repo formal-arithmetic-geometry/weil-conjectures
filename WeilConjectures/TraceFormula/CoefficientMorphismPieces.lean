@@ -53,7 +53,6 @@ variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶
 
 namespace CoefficientMorphism
 
-set_option maxHeartbeats 1000000 in
 -- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
 omit [IsUniversalHomeomorphism ΦZ.left] [IsUniversalHomeomorphism Φ.left] in
 /-- The operator `RΓ_c(ψ) ∘ Φ^♯` commutes with the pullback to a closed piece (blueprint
@@ -132,7 +131,6 @@ noncomputable def closedPieceOperator (hi : ΦZ ≫ i = i ≫ Φ)
     (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)
 
-set_option maxHeartbeats 1000000 in
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism ΦZ.left] [IsUniversalHomeomorphism Φ.left] in
 /-- The square of the closed piece (blueprint `prop-trf-trace-additivity-open-closed`):
@@ -174,7 +172,6 @@ theorem comp_map_unit_eq_map_unit_comp_closedPieceOperator (hi : ΦZ ≫ i = i �
     Category.assoc, h]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
 /-- The square of the open piece (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(a)):
@@ -227,7 +224,6 @@ noncomputable def openPieceCoefficient (hj : ΦU ≫ j = j ≫ Φ)
       ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map ψ)
 
-set_option maxHeartbeats 1000000 in
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
 /-- The operator `E_U` of the open piece is `RΓ_c(X, ψ_U) ∘ Φ^♯` on `RΓ_c(X, Rj_! Lj^* K)`
@@ -292,7 +288,6 @@ noncomputable def closedPieceCoefficient (hi : ΦZ ≫ i = i ≫ Φ)
     ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map ψ)
 
-set_option maxHeartbeats 1000000 in
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦZ.left] in
 /-- The operator `E_Z` of the closed piece is `RΓ_c(X, ψ_Z) ∘ Φ^♯` on `RΓ_c(X, Ri_* Li^* K)`

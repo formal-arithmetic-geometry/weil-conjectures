@@ -70,7 +70,6 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_comp_eqToHom_comp
   subst e
   simp
 
-set_option synthInstance.maxHeartbeats 80000 in
 -- the `Mono` instance of `Functor.map` of an isomorphism needs a longer instance search
 /-- The composition isomorphism of a commutative square `q ≫ p' = p ≫ f` whose top side factors
 as `q = g ≫ h` and whose left side factors as `p = g ≫ p_X` is the composite of the composition

@@ -283,7 +283,6 @@ lemma pullIsoHomotopy_upperStarCompHomotopy
   Functor.mapHomotopyCategoryCommIsoHom_app_comp (.up ℤ) (pullIso a f) (pullIso a g)
     (pullIso a (f ≫ g)) (upperStarComp Λ f g) (upperStarComp Λ' f g) (pullIso_hom_app_comp a f g) K
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The compatibility of `derivedUpperStarExtendScalarsIso a f` with the counits of the left
 derived functors at a complex `K`: through these counits, it is the underived (Pull)
@@ -300,7 +299,6 @@ def DerivedUpperStarExtendScalarsIsoFac
         ((((f)^*⟦Λ⟧).mapHomotopyCategory (.up ℤ)).obj K) ≫
       DerivedCategory.Qh.map ((pullIsoHomotopy a f).app K)
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- Every object of the derived category is the image of a K-flat complex `K`, at which the
 composite of the counits of `L(Ext)`, `Lg^*` and `Lf^*` is an isomorphism: the pullbacks being
@@ -319,7 +317,6 @@ lemma exists_kFlat_isIso_leftDerivedFunctorCounit_extendScalars
     K hK
   exact ⟨K, hK, ⟨e.symm⟩, inferInstance⟩
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- **Coherence of the derived (Pull) isomorphism for an arbitrary coefficient change**, given its
 compatibility with the counits of the left derived functors on K-flat complexes:

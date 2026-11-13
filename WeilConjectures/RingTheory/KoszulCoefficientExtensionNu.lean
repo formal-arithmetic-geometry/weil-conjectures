@@ -56,7 +56,7 @@ private theorem pairing_conormal_det
     change b.coord i (koszulConormalVector A I r f hf (v j)) = _
     simp [koszulConormalVector, Finsupp.linearCombination_apply, Finsupp.sum_fintype,
       hb', Module.Basis.coord_apply, Algebra.smul_def, Finsupp.single_apply]
-  simp only [AlternatingMap.smul_apply, LinearMap.compAlternatingMap_apply,
+  simp only [smul_apply, LinearMap.compAlternatingMap_apply,
     Module.Basis.det_apply, hm, Matrix.det_transpose, smul_eq_mul] at hv
   have hd := (RingHom.map_det (Ideal.Quotient.mk I) (Matrix.of fun i j ↦ v i j)).symm
   exact hv.trans (congrArg (fun a ↦ l (exteriorPower.ιMulti (A ⧸ I) r b) * a) hd)

@@ -21,6 +21,7 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 import Mathlib.CategoryTheory.Sites.LocalSite
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Descent
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Etale replacement: construction and vanishing
 

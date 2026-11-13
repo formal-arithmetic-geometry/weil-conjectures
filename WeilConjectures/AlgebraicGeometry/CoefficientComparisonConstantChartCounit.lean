@@ -56,7 +56,7 @@ private theorem restrictionSquare_mate_isIso :
         (E := ModuleCat.{w} R) (K.over (G.obj V)) K)
       ((Over.forgetAdjStar V).sheafPushforwardContinuous
         (E := ModuleCat.{w} R) (J.over V) J))
-      (restrictionSquare J K G R V).hom).natTrans := by
+      (restrictionSquare J K G R V).hom) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro H
   suffices IsIso ((sheafToPresheaf J (ModuleCat.{w} R)).map
@@ -65,7 +65,7 @@ private theorem restrictionSquare_mate_isIso :
           (E := ModuleCat.{w} R) (K.over (G.obj V)) K)
         ((Over.forgetAdjStar V).sheafPushforwardContinuous
           (E := ModuleCat.{w} R) (J.over V) J))
-        (restrictionSquare J K G R V).hom).natTrans.app H)) from
+        (restrictionSquare J K G R V).hom).app H)) from
     isIso_of_reflects_iso _ (sheafToPresheaf J (ModuleCat.{w} R))
   rw [NatTrans.isIso_iff_isIso_app]
   intro T
@@ -108,14 +108,14 @@ private theorem localizedCounit_isIso
     (E := ModuleCat.{w} R) (J.over V) J
   let β := restrictionSquare J K G R V
   let δ := mateEquiv c d β.hom
-  have hd : IsIso δ.natTrans := restrictionSquare_mate_isIso J K G R V
-  let α := ((mateEquiv a b).symm β.hom).natTrans
+  have hd : IsIso δ := restrictionSquare_mate_isIso J K G R V
+  let α := ((mateEquiv a b).symm β.hom)
   have ha : IsIso α := by
     have he := iterated_mateEquiv_conjugateEquiv_symm a b d c δ
     have hb : (mateEquiv c d).symm δ = β.hom := Equiv.symm_apply_apply _ _
     rw [hb] at he
-    have he' := congrArg TwoSquare.natTrans he
-    change α = (conjugateEquiv (a.comp c) (d.comp b)).symm δ.natTrans at he'
+    have he' := he
+    change α = (conjugateEquiv (a.comp c) (d.comp b)).symm δ at he'
     rw [he']
     infer_instance
   have hh : IsIso (b.counit.app (H.over (G.obj V))) := h

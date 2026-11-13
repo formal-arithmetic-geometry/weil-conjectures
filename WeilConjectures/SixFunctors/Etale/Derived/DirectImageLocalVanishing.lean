@@ -150,7 +150,7 @@ theorem Etale.isZero_higherDirectImage_of_forall_exists (hΛ : IsAddTorsion Λ)
     exact hz'
   · refine Sheaf.IsTorsion.of_iso ((sheafCompose V.left.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).mapIso
-        (asIso ((Etale.upperStarRestrictScalars φ V.hom).natTrans.app M)).symm) ?_
+        (asIso ((Etale.upperStarRestrictScalars φ V.hom).app M)).symm) ?_
     refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
     refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨m, hm, ?_⟩
     let y : ((V.hom)^*[ModuleCat.{u + 1} Λ].obj M).obj.obj U := x

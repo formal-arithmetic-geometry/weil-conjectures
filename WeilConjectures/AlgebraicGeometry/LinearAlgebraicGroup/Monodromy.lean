@@ -173,8 +173,8 @@ theorem DegreeDatum.exists_ker_eq_and_eq_mul_zpow {W : Type*} [Group W]
       neg_mem' := by
         rintro _ ⟨w, rfl⟩
         exact ⟨w⁻¹, by rw [map_inv, toAdd_inv]⟩ }
-  obtain ⟨a, ha⟩ := Int.subgroup_cyclic H
-  rw [← AddSubgroup.zmultiples_eq_closure] at ha
+  obtain ⟨a, ha⟩ := H.isAddCyclic_iff_exists_zmultiples_eq_top.mp H.isAddCyclic
+  have ha := ha.symm
   have hdvd (w : W) : a ∣ Multiplicative.toAdd (deg w) := by
     have : Multiplicative.toAdd (deg w) ∈ H := ⟨w, rfl⟩
     rwa [ha, Int.mem_zmultiples_iff] at this

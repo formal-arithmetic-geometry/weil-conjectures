@@ -94,11 +94,11 @@ comparison on this resolution. Naturality and the quasi-isomorphism from the
 resolution identify the components on every derived object. -/
 theorem strictEtaleBrownCanonicalRestriction_mate :
     ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-      (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)).natTrans =
+      (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)) =
         (B.derivedTensor h).inv := by
   let δ := strictEtaleBrownCanonicalRestriction O t g A PW PV B h
   let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ δ.hom)).natTrans
+    (.mk _ _ _ _ δ.hom))
   have hτ (P : CochainComplex (strictEtaleLevel W O t n) ℤ) :=
     SheafOfModules.derivedLeftSquare_rep (A.lift n).modules
       (coefficientTensor (J := W.smallEtaleTopology) (O := O) (ell := t) h)

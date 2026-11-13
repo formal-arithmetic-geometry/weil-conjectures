@@ -164,7 +164,6 @@ lemma local_over_val_map_apply (M : SheafOfModules.{max u v w} S) (V : D)
     {T T' : Over V} (f : T ⟶ T') (x : M.val.obj (op T'.left)) :
     ((M.over V).val.map f.op).hom x = (M.val.map f.left.op).hom x := rfl
 
-set_option maxHeartbeats 250000 in
 -- Elaborate the comparison of composite adjunctions and their component units.
 /-- The canonical localization comparison agrees with the isomorphism of left adjoints.
 Source: Stacks Project, Modules on Sites, Tag 04J0.

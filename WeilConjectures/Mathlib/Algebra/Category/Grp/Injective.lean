@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Adjunction.Evaluation
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-!
 # Injective abelian groups and presheaves under universe lifts
