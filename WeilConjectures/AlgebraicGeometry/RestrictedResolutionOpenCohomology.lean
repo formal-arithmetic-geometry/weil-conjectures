@@ -256,7 +256,12 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
         (forget₂ _ AddCommGrpCat.{u})).symm
   have hmap := moduleCohomologyFMap_of_augmentedLift j φ R'.resolution R.resolution
     β hβ a ha p
-  have hfinal := map_conjugation_comp H iR iR' (moduleCohomologyFMap j φ p)
+  have hfinal := map_conjugation_comp H
+    (A := (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.resolution.cocomplex)
+    (B := ((RingedSpace.globalSectionsFunctor L.toScheme.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        R'.resolution.cocomplex)
+    iR iR' (moduleCohomologyFMap j φ p)
     ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map β) a
     R'.sections.hom R.sections.hom r hmap hc
   simpa only [iR, iR', Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
