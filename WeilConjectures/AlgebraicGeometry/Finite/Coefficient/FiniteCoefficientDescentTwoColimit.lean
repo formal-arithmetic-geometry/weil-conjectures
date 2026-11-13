@@ -405,7 +405,6 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 /-- All four finite coefficient descent assertions, including the rational identification
 and the ordinary-category filtered two-colimit.
 Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit, assertions (1)--(4)
@@ -493,10 +492,9 @@ theorem finiteCoefficientDescentTwoColimit
     let D' : BoundedConstructible (padicSubfieldRingObj X ℓ E) :=
       ⟨D.obj⟦r⟧, (boundedConstructible _).le_shift r D.obj
         ((congrFun (hE E) D.obj).mp D.property)⟩
-    have hh := coefficient_finite_descent_hom X ℓ (k := k) p hpℓ E C' D' 0
-    dsimp only [C', D'] at hh
-    have hs := hh.2.2.2.2.2.1
-    have hi := hh.2.2.2.2.2.2
+    obtain ⟨hs, hi⟩ :=
+      (coefficient_finite_descent_hom X ℓ (k := k) p hpℓ E C' D' 0).2.2.2.2.2
+    dsimp only [C', D'] at hs hi
     constructor
     · intro ψ
       obtain ⟨F, h, f, hf⟩ := hs (ψ ≫ (shiftFunctorZero _ ℤ).inv.app _)
