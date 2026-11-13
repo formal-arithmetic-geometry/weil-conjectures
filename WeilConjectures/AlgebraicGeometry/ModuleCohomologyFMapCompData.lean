@@ -197,7 +197,7 @@ private theorem comp_data_sections_square {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k 
   have h2 := sections_iso_comp h k B
   have h3 := sections_iso_naturality k l
   simp only [Functor.map_comp]
-  simp only [reassoc_of% h1, reassoc_of% h2, reassoc_of% h3]
+  rw [reassoc_of% h1, reassoc_of% h2, reassoc_of% h3]
 
 private theorem comp_data_single_sections_square {Y Z : Scheme.{u}} (k : Y ⟶ Z)
     {A B : CochainComplex Y.Modules ℕ} {L : CochainComplex Z.Modules ℕ}
@@ -327,7 +327,7 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
     change Hp.map (HZ.map (Ck.lambda ≫ e)) = Hp.map (HZ.map γ) at hh
     have hs : Ck.a.hom ≫ HZ.map γ =
         HY.map αG ≫ HY.map Ch.β ≫ a.hom ≫ HZ.map μ := by
-      simpa only [data_sections_iso Ck, Functor.map_comp, Category.assoc] using
+      simpa only [γ, data_sections_iso Ck, Functor.map_comp, Category.assoc] using
         comp_data_single_sections_square k (αG ≫ Ch.β) μ
     change Hp.map (Ck.a.hom ≫ HZ.map Ck.lambda) ≫ Hp.map (HZ.map e) = _
     refine (map_comp_eq_of_map_comp_eq HZ Hp Ck.a.hom Ck.lambda e γ _ hh hs).trans ?_
