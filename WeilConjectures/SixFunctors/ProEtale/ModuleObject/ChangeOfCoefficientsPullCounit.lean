@@ -105,7 +105,6 @@ lemma mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendSca
   erw [Iso.inv_hom_id_app]
   erw [Mod.id_hom', Category.id_comp, Category.id_comp]
 
-set_option profiler true in
 /-- **(Pull) is the underived (Pull) modulo the counits**: on the image `Qh K` of an object of the
 homotopy category, `derivedUpperStarExtendScalarsIso a f` followed by the counits of `L(Ext_{a_Y})`
 and `Lf^*_Λ'` is the counit of `Lf^*_Λ`, followed by the counit of `L(Ext_{a_X})` and the
