@@ -61,7 +61,7 @@ theorem fixedComparisonDirectImageMatePlus_transpose (Λ : Type (u + 1)) [CommRi
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
   have hb : fixedComparisonDirectImageMatePlus Λ f =
       (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom).natTrans := by
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom) := by
     unfold fixedComparisonDirectImageMatePlus
     rw [ComparisonCore.underived_comparison_mate,
       Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv]

@@ -109,7 +109,7 @@ private lemma restriction_directImage_mate
       (Etale.openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j)
       (TwoSquare.mk _ _ _ _
         (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} A) j).hom)
-      ).natTrans =
+      ) =
         (supportSiteComparisonCoefficientDirectImageIso (ModuleCat.{u + 1} A) j).hom := by
   ext M : 2
   apply Sheaf.hom_ext
@@ -158,15 +158,12 @@ private theorem open_unit_normalization (A : Type (u + 1)) [CommRing A]
   let θ := TwoSquare.mk _ _ _ _ (comparisonLowerStarOpenImmersionRestrictionIso B j).hom
   have ha : mateEquiv cX cU α = θ := by
     apply (mateEquiv s r).injective
-    apply (TwoSquare.equivNatTrans _ _ _ _).injective
-    change (mateEquiv s r (mateEquiv cX cU α)).natTrans =
-      (mateEquiv s r θ).natTrans
+    change (mateEquiv s r (mateEquiv cX cU α)) =
+      (mateEquiv s r θ)
     rw [iterated_mateEquiv_conjugateEquiv]
     exact (restrictionIso_conjugate A j).trans
       (restriction_directImage_mate A j).symm
   have hb : mateEquiv cX cU (mateEquiv e d β) = θ := by
-    apply (TwoSquare.equivNatTrans _ _ _ _).injective
-    change (mateEquiv cX cU (mateEquiv e d β)).natTrans = _
     rw [iterated_mateEquiv_conjugateEquiv]
     exact congrArg Iso.hom
       ((conjugateIsoEquiv (e.comp cX) (cU.comp d)).apply_symm_apply
