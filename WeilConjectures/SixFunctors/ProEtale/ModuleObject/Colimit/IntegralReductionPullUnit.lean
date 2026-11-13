@@ -67,7 +67,6 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
     leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategorySquareIso]
   rfl
 
-
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
 an object of the homotopy category, is the underived commutation `comapUpperStarIso` modulo
 the counits. -/
@@ -235,7 +234,7 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
     (((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
       (ComplexShape.up ℤ)).unit.app K)
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at e1
-  simp only [← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
+  simp only [← Functor.map_comp_assoc, r5, reassoc_of% e1]
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
   simp only [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
@@ -276,9 +275,10 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
       (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
         (ComplexShape.up ℤ)).app K)
   apply (Iso.cancel_iso_hom_right _ _ ((D(Mod.comap (coefficientMap a X))).mapIso c)).1
-  apply (Iso.cancel_iso_hom_right _ _ ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
-    (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
-      (ComplexShape.up ℤ)).obj K))).1
+  apply (Iso.cancel_iso_hom_right _ _
+    ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
+      (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj K))).1
   simpa only [c, Functor.mapIso_hom, Iso.trans_hom, Iso.app_hom, asIso_hom, Category.assoc] using
     upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh_counit a f K
 
