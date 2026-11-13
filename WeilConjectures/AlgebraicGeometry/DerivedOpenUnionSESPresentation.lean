@@ -61,9 +61,7 @@ private theorem map_pair_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Comparing the transported module functors requires additional elaboration heartbeats.
 /-- A short exact sequence of complexes representing the three direct-image terms
 on an arbitrary open union, with the first arrow identified by adjunction.
 No connecting morphism, integer shift, or distinguished triangle is asserted.
@@ -131,15 +129,11 @@ theorem derived_open_union_ses_presentation
   classical
   dsimp only
   let M := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  obtain ⟨I, hKI, hI, ⟨e⟩⟩ : ∃ I : CochainComplex
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-      I.IsKInjective ∧ (∀ n : ℤ, Injective (I.X n)) ∧
-        Nonempty (DerivedCategory.Q.obj I ≅ E) := by
-    have : IsGrothendieckAbelian.{u}
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-      (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
-        (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).1
-    exact exists_injective_representative E
+  have : Abelian M := inferInstance
+  have : IsGrothendieckAbelian.{u} M :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
+      (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).1
+  obtain ⟨I, hKI, hI, ⟨e⟩⟩ := exists_injective_representative E
   let Q : CochainComplex M ℤ ⥤ schemeDerivedCategory X := DerivedCategory.Q
   have : I.IsKInjective := hKI
   change DerivedCategory.Q.obj I ≅ E at e

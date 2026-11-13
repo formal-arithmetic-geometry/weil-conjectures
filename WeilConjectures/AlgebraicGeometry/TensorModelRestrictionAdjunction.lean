@@ -76,9 +76,7 @@ private theorem transport_tensor_adjunction
     simp only [Category.assoc]
 
 set_option linter.style.haveILetI false in
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- Canonical representative coherence requires substantial elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 512 in
@@ -146,6 +144,7 @@ theorem exists_tensorModel_restriction_adjunction
             (HomologicalComplex.mapBifunctorMap (𝟙 P) u (curriedTensor _)
               (ComplexShape.up ℤ))) ≫ r J' E s) := by
   classical
+  have := SheafOfModules.isMonoidal_W X.sheaf
   letI := SheafOfModules.monoidalCategory X.sheaf
   letI := (SheafOfModules.tensorClosed X.sheaf).1.some
   let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
