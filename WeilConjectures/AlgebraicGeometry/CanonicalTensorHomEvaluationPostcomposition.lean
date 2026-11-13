@@ -48,6 +48,7 @@ private theorem tensor_naturality {C : Type*} [Category* C] [MonoidalCategory C]
   rw [← Category.assoc, ← comp_whiskerRight, h, comp_whiskerRight, Category.assoc, k]
   exact (Category.assoc _ _ _).symm
 
+set_option maxHeartbeats 300000 in
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem evaluation_chain_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
