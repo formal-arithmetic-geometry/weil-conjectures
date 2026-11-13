@@ -49,13 +49,7 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-noncomputable def integralModelLeftDerivedUpperStar
-    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-    {Z W : Scheme.{u}} (w : Z ⟶ W) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
-  L((w)^*⟦Λ⟧)
-
+set_option maxHeartbeats 1000000 in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
@@ -72,18 +66,14 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
     (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         Z)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
-            ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
-      (integralModelLeftDerivedUpperStar w).obj B :=
-  by
-    let e₁ := (derivedUpperStarExtendScalarsIso
-      (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app B₀
-    let e₂ := (derivedUpperStarExtendScalarsIso
-      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app
-        ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-          W)).leftDerivedFunctor.obj B₀)
-    let e₃ := (integralModelLeftDerivedUpperStar w).mapIso e₀
-    exact (Mod.extendScalars (coefficientMap
-      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).leftDerivedFunctor.mapIso e₁ ≪≫ e₂ ≪≫ e₃
+            (L((w)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) ≅
+      L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B :=
+  (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      Z)).leftDerivedFunctor.mapIso
+      ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
+        B₀) ≪≫
+    (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
+    L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso e₀
 
 /-- An isomorphism of an integral model in the ambient derived categories, as an isomorphism of
 bounded constructible complexes (the form required by the stabilization theorem). -/
@@ -124,7 +114,6 @@ lemma baseChangeGaloisModel_j_comp_total :
   simp only [baseChangeGaloisModel, Hom.traitChangeModel_j, Hom.cartesianModel_j, Category.assoc]
   rw [pullback.condition]
 
--- the derived pullbacks along the large composites of the base change model are large terms
 /-- The identification `L(j'')^* Lφ^* B ≅ L(ε'')^* A` on the generic fibre of `N''`. -/
 noncomputable def baseChangeGaloisModelPullbackIso
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -151,8 +140,6 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
-set_option maxHeartbeats 4000000 in
--- the integral model is transported along several derived pullbacks of the base change model
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
 an integral model `K₀` (the pullback of an integral model of `B`) such that the nearby cycles of
@@ -190,7 +177,9 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
                 (baseChangeGaloisModel hM b hb v hv).generic)).leftDerivedFunctor.obj
                   K₀.obj))) := by
   have : IsNoetherian M.total := hM.isTraitModel.isNoetherian_total
-  obtain ⟨E, B₀, ⟨e₀⟩⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB
+  refine (exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB).elim fun E hE ↦ ?_
+  refine hE.elim fun B₀ he₀ ↦ ?_
+  refine he₀.elim fun e₀ ↦ ?_
   have hK₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
     (baseChangeGaloisModel hM b hb v hv).j _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
@@ -199,8 +188,11 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
     (integralModelPullbackIso ℓ (baseChangeGaloisModel hM b hb v hv).j E _
       (integralModelPullbackIso ℓ (baseChangeHom hM b hb v hv).total E B₀.obj e₀) ≪≫
       baseChangeGaloisModelPullbackIso hM b hb v hv eB), ?_⟩
-  obtain ⟨p, hp, hpℓ, hpk⟩ := exists_prime_ne_dvd_of_natCast_eq_zero k'
-    (Fact.out : ringChar k' ≠ ℓ)
+  refine (exists_prime_ne_dvd_of_natCast_eq_zero k'
+    (Fact.out : ringChar k' ≠ ℓ)).elim fun p hp' ↦ ?_
+  have hp := hp'.1
+  have hpℓ := hp'.2.1
+  have hpk := hp'.2.2
   have : Fact p.Prime := ⟨hp⟩
   have := hasInvertibleExponent_integersResidueField (k' := k') E
   have hred := boundedConstructible_derivedExtendScalars_residueField M.total ℓ E.1 B₀.obj
@@ -228,7 +220,6 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
             (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
 set_option linter.style.whitespace false in
--- comparing the Galois actions of `Gal(L^sep / L)` on the concrete layer is slow
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
 `ρ : M'' ⟶ N''_{L^sep}` carries the action of `τ` on the Galois layer to that of the generic
 automorphism `galoisEquiv⁻¹ τ`. -/
