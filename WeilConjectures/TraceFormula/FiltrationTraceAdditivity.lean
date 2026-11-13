@@ -21,17 +21,21 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` with 
   pushforward `u_Z` of the restriction `u_{|Z}` of `u` to `Z`, whose exceptional adjoint is
   `Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K`, and `(u_U, u, u_Z)` is a
   morphism of the localization triangles under `Lc₂^*` and `Rc₁^!`
-  (`ProEtale.CondensedRing.Correspondence.openPieceCoeff_closedPieceCoeff_spec`, blueprint
-  `lemma-lift-correspondence-invariant-decomposition--1`).
+  (`ProEtale.CondensedRing.Correspondence.openPieceCoeff_closedPieceCoeff_spec`).
 * For a finite filtration `0 = M₀ ⟶ M₁ ⟶ ⋯ ⟶ Mₙ` given by distinguished triangles
   `M_a ⟶ M_{a+1} ⟶ G_a ⟶`, with coefficient maps on the `M_a` and the graded pieces `G_a`
   forming morphisms of these triangles, the trace class of the coefficient map on `Mₙ` is the sum
   of the trace classes of the graded pieces, provided the corner morphism groups of
   `Correspondence.traceClass_eq_add_of_distTriang` vanish at each step
-  (`ProEtale.CondensedRing.Correspondence.traceClassWithCoeff_eq_sum_of_distTriang`). This is
-  the case of blueprint `proposition-additivity-trace-classes--1` under these vanishing
-  hypotheses; the node itself assumes only a lift of the coefficient maps to the filtered derived
-  category, which is not yet available, and stays open.
+  (`ProEtale.CondensedRing.Correspondence.traceClassWithCoeff_eq_sum_of_distTriang`).
+
+## Implementation details
+
+* As in the rest of this API, the set-theoretic condition `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)` is replaced by the
+  scheme-theoretic factorisation `w₂ : i' ≫ c₂ = c_{2Z} ≫ i`.
+* The general additivity statement assumes only a lift of the coefficient maps to the filtered
+  derived category, which is not yet available. The vanishing hypotheses used here are much
+  stronger and fail for typical filtrations.
 
 -/
 
@@ -63,10 +67,8 @@ variable {Z CZ : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact 
   [IsSeparated Z.hom] [LocallyOfFiniteType CZ.hom] [QuasiCompact CZ.hom] [IsSeparated CZ.hom]
   {i : Z ⟶ X} [IsClosedImmersion i.left] {i' : CZ ⟶ c.C} {c₁Z c₂Z : CZ ⟶ Z}
 
-/-- **Lifting a correspondence to an invariant decomposition** (blueprint
-`lemma-lift-correspondence-invariant-decomposition--1`): let `i : Z ⟶ X` be a closed immersion
-with open complement `U` such that `c₂` maps `C_Z = c₁⁻¹(Z)` into `Z` (so
-`c₂⁻¹(U) ⊆ c₁⁻¹(U)`). Then
+/-- Let `i : Z ⟶ X` be a closed immersion with open complement `U` such that `c₂` maps
+`C_Z = c₁⁻¹(Z)` into `Z`. Then
 
 1. the open piece coefficient `u_U` is the unique coefficient map on `K_U = j_! Lj^* K`
    compatible with `u` along the counit `K_U ⟶ K`;
@@ -75,14 +77,7 @@ with open complement `U` such that `c₂` maps `C_Z = c₁⁻¹(Z)` into `Z` (so
 3. the exceptional adjoint of the restriction `u_{|Z}` of `u` to the correspondence
    `c_Z : C_Z ⟶ Z × Z` is `Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K`;
 4. for every distinguished localization triangle `T = (K_U ⟶ K ⟶ K_Z ⟶)`, the maps
-   `(u_U, u, u_Z)` form a morphism of triangles `Lc₂^* T ⟶ Rc₁^! T`, so they are the graded
-   pieces of a lift of `u` to the two-step filtered object `T`.
-
-The first three items are `eq_openPieceCoeff_of_comp_map_counit`,
-`eq_closedPieceCoeff_of_upperStar_map_unit_comp` and
-`homEquiv_symm_restrictedCoeffOfIsPullback`. As in the rest of this API, the set-theoretic
-condition `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)` of the blueprint is replaced by the scheme-theoretic factorisation
-`w₂ : i' ≫ c₂ = c_{2Z} ≫ i`. -/
+   `(u_U, u, u_Z)` form a morphism of triangles `Lc₂^* T ⟶ Rc₁^! T`. -/
 theorem openPieceCoeff_closedPieceCoeff_spec (U : X.left.Opens)
     (hUi : IsCompl (Set.range (opensOverι U).left.base) (Set.range i.left.base))
     (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i) :
@@ -151,18 +146,12 @@ theorem openPieceCoeff_closedPieceCoeff_spec (U : X.left.Opens)
 
 end Decomposition
 
-/-- **Additivity of trace classes along a finite filtration, under vanishing hypotheses** (the
-case of blueprint `proposition-additivity-trace-classes--1` where the corner morphism groups
-vanish): let `0 = M₀ ⟶ M₁ ⟶ ⋯ ⟶ Mₙ` be a finite filtration with graded pieces `G_a`, given by
+/-- Let `0 = M₀ ⟶ M₁ ⟶ ⋯ ⟶ Mₙ` be a finite filtration with graded pieces `G_a`, given by
 distinguished triangles `M_a ⟶ M_{a+1} ⟶ G_a ⟶`, and let `v_a`, `w_a` be coefficient maps on the
 support of `c` on `M_a` and `G_a` forming, at each step, a morphism of the triangles
 `Lc₂^* (-)` and `Rc₁^! (-)`. If the corner morphism groups of
 `Correspondence.traceClass_eq_add_of_distTriang` vanish at each step, then
-`Tr_c(vₙ) = ∑_a Tr_c(w_a)`.
-
-The blueprint node assumes instead only a lift of the coefficient map to the filtered derived
-category, which is not available; these vanishing hypotheses are much stronger and fail for
-typical filtrations, so this is not the node itself. -/
+`Tr_c(vₙ) = ∑_a Tr_c(w_a)`. -/
 theorem traceClassWithCoeff_eq_sum_of_distTriang (F : c.FixedLocus) (n : ℕ)
     (M G : ℕ → Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (ι : ∀ a, M a ⟶ M (a + 1))
     (π : ∀ a, M (a + 1) ⟶ G a) (δ : ∀ a, G a ⟶ (M a) ⟦(1 : ℤ)⟧)
