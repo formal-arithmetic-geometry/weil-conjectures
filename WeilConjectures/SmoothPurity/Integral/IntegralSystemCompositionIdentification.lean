@@ -50,8 +50,12 @@ pasting isomorphism for the same direct images and adjunctions. -/
 theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSequenceComposition l E h k := by
-  unfold finiteSystemComposition integralComparisonSequenceComposition
-  congr! (closePost := false) 1
+  have he : HEq
+      (finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
+      (integralComparisonSequenceComposition l E h k) := by
+    unfold finiteSystemComposition integralComparisonSequenceComposition
+    congr! (closePost := false) +typeEqs 1
+  exact eq_of_heq he
 
 set_option profiler true in
 /-- The derived finite-system compositor is the derived strict sequence compositor.
@@ -60,7 +64,12 @@ Source: Stacks 0D6D, 015F
 theorem finiteSystemDerivedComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
-  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  congr! (closePost := false) 2
+  have he : HEq
+      (finiteSystemDerivedComposition (integralSystemRings l E)
+        (integralSystemTransition l E) h k)
+      (integralComparisonSystemComposition l E h k) := by
+    unfold finiteSystemDerivedComposition integralComparisonSystemComposition
+    congr! (closePost := false) +typeEqs 2
+  exact eq_of_heq he
 
 end WeilConjectures
