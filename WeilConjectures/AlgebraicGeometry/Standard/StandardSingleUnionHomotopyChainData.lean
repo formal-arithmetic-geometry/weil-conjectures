@@ -48,10 +48,52 @@ private theorem transport_biprod_comparison
   · simpa only [Category.assoc, biprod.map_snd, biprod.map_snd_assoc] using
       congrArg (fun k ↦ biprod.snd ≫ k) i₂.hom.w.symm
 
+-- Transport the finite diagram before specializing its vertices to scheme functors.
+private theorem unionHomotopyChainData_transport
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
+    {a b₁ b₂ b₃ c₁ c₂ c₃ : Arrow (DerivedCategory E)}
+    (h : ∃ (C D C' D' : CochainComplex E ℤ)
+      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),
+      ∃ (H : Homotopy (t ≫ β) (α ≫ t'))
+        (e₁ : DerivedCategory.Q.obj C ≅ a.left)
+        (e₂ : DerivedCategory.Q.obj D ≅ b₁.left ⊞ b₂.left)
+        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ b₃.left)
+        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)
+        (e₂' : DerivedCategory.Q.obj D' ≅ b₁.right ⊞ b₂.right)
+        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ b₃.right),
+        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
+        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map b₁.hom b₂.hom ∧
+        DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =
+          e₃.hom ≫ b₃.hom)
+    (hi₁ : Nonempty (b₁ ≅ c₁)) (hi₂ : Nonempty (b₂ ≅ c₂))
+    (hi₃ : Nonempty (b₃ ≅ c₃)) :
+    ∃ (C D C' D' : CochainComplex E ℤ)
+      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),
+      ∃ (H : Homotopy (t ≫ β) (α ≫ t'))
+        (e₁ : DerivedCategory.Q.obj C ≅ a.left)
+        (e₂ : DerivedCategory.Q.obj D ≅ c₁.left ⊞ c₂.left)
+        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ c₃.left)
+        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)
+        (e₂' : DerivedCategory.Q.obj D' ≅ c₁.right ⊞ c₂.right)
+        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ c₃.right),
+        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
+        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map c₁.hom c₂.hom ∧
+        DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =
+          e₃.hom ≫ c₃.hom := by
+  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ := h
+  obtain ⟨i₁⟩ := hi₁
+  obtain ⟨i₂⟩ := hi₂
+  obtain ⟨i₃⟩ := hi₃
+  refine ⟨C, D, C', D', t, t', α, β, H, e₁,
+    e₂ ≪≫ biprod.mapIso (Arrow.leftFunc.mapIso i₁) (Arrow.leftFunc.mapIso i₂),
+    e₃ ≪≫ Arrow.leftFunc.mapIso i₃, e₁',
+    e₂' ≪≫ biprod.mapIso (Arrow.rightFunc.mapIso i₁) (Arrow.rightFunc.mapIso i₂),
+    e₃' ≪≫ Arrow.rightFunc.mapIso i₃, hα, ?_, ?_⟩
+  · exact transport_biprod_comparison _ e₂ e₂' i₁ i₂ hβ
+  · exact transport_comparison _ e₃ e₃' i₃ hγ
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Transporting the relative comparison requires additional elaboration heartbeats.
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
 (blueprint: lem-pc-standard-single-union-homotopy-chain-data).
@@ -116,24 +158,11 @@ theorem standardSingle_union_homotopy_chain_data
   have hcover : (W.ι ⁻¹ᵁ U) ⊔ (W.ι ⁻¹ᵁ V) = ⊤ := by
     rw [← Scheme.Hom.preimage_sup]
     exact W.ι_preimage_self
-  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ :=
-    relativeMV_cover_homotopy_data f (pullback.snd f g) g (pullback.fst f g)
-      (IsPullback.of_hasPullback f g) K K' φ (W.ι ⁻¹ᵁ U) (W.ι ⁻¹ᵁ V) hcover
-  obtain ⟨iU⟩ := standardSingle_open_relative_arrow p g W U le_sup_left N
-  obtain ⟨iV⟩ := standardSingle_open_relative_arrow p g W V le_sup_right N
-  obtain ⟨iUV⟩ := standardSingle_open_relative_arrow p g W (U ⊓ V)
-    (inf_le_left.trans le_sup_left) N
-  let lU := Arrow.leftFunc.mapIso iU
-  let rU := Arrow.rightFunc.mapIso iU
-  let lV := Arrow.leftFunc.mapIso iV
-  let rV := Arrow.rightFunc.mapIso iV
-  let lUV := Arrow.leftFunc.mapIso iUV
-  let rUV := Arrow.rightFunc.mapIso iUV
-  refine ⟨C, D, C', D', t, t', α, β, H, e₁,
-    e₂ ≪≫ biprod.mapIso lU lV, e₃ ≪≫ lUV, e₁',
-    e₂' ≪≫ biprod.mapIso rU rV, e₃' ≪≫ rUV, ?_, ?_, ?_⟩
-  · exact hα
-  · exact transport_biprod_comparison _ e₂ e₂' iU iV hβ
-  · exact transport_comparison _ e₃ e₃' iUV hγ
+  exact unionHomotopyChainData_transport
+    (relativeMV_cover_homotopy_data f (pullback.snd f g) g (pullback.fst f g)
+      (IsPullback.of_hasPullback f g) K K' φ (W.ι ⁻¹ᵁ U) (W.ι ⁻¹ᵁ V) hcover)
+    (standardSingle_open_relative_arrow p g W U le_sup_left N)
+    (standardSingle_open_relative_arrow p g W V le_sup_right N)
+    (standardSingle_open_relative_arrow p g W (U ⊓ V) (inf_le_left.trans le_sup_left) N)
 
 end AlgebraicGeometry
