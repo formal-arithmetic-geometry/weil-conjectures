@@ -222,7 +222,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
   refine isIso_map_app_of_iso _ _ ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
   dsimp only [Functor.comp_obj] at hgen ⊢
-  exact_mod_proofs hgen
+  cast_proofs hgen
 
 end NearbyCyclesModel
 
