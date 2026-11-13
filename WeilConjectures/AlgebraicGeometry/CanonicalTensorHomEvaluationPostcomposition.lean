@@ -105,7 +105,7 @@ private theorem evaluation_chain_hf (X : Scheme.{u})
     (homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj M))
     (homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj M)) L L M N
     (𝟙 _) (𝟙 L) f (𝟙 _)
-  simp only [Category.comp_id, Category.id_comp, DerivedCategory.Q.map_id] at hf
+  simp only [Category.id_comp, DerivedCategory.Q.map_id] at hf
   simp only [id_tensorHom_id, Category.id_comp] at hf
   exact hf
 
