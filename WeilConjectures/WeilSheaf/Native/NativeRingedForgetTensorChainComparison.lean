@@ -18,18 +18,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-attribute [local irreducible] SheafOfModules.monoidalCategory
-attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
-  SheafOfModules.monoidalCategory
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
 -- Elaborate the two site tensors through their comparison APIs.
 -- The independently chosen site tensors require large definitional equalities.
+attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
