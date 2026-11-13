@@ -38,7 +38,6 @@ private theorem eqToHom_apply_symm {A B : AddCommGrpCat.{u}} (h : A = B) (x : A)
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 /-- Realize a cohomology map already characterized on resolution cocycles as the bottom
 edge of a functorial Leray spectral sequence. The induced map and its cocycle computation
 are inputs; this statement constructs only the spectral sequence and its finite filtration.
@@ -160,10 +159,24 @@ theorem exists_topological_leray_bottom_realization
                         (g p 0).hom = (k p).inv) ∧
                     (∀ p, edge p = (e₀ p).hom ≫ b p (p + 2) (by omega) ≫
                       (k p).hom ≫ ((T p).step p).arrow) := by
-  obtain ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hbt, k, hk,
-    bottom, hbottom, computation⟩ :=
-    exists_topological_leray_cartan_eilenberg_cocycle f HX HZ hX hZ a ha
-  refine ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hbt, k, hk, ?_⟩
+  refine Exists.imp (fun E ↦ ?_)
+    (exists_topological_leray_cartan_eilenberg_cocycle f HX HZ hX hZ a ha)
+  refine Exists.imp (fun e₂ ↦ ?_)
+  refine And.imp_right ?_
+  refine Exists.imp (fun T ↦ ?_)
+  refine And.imp_right ?_
+  refine And.imp_right ?_
+  refine Exists.imp (fun g ↦ ?_)
+  refine Exists.imp (fun e₀ ↦ ?_)
+  refine And.imp_right ?_
+  refine Exists.imp (fun t ↦ ?_)
+  refine And.imp_right ?_
+  refine Exists.imp (fun b ↦ ?_)
+  refine And.imp_right ?_
+  refine And.imp_right ?_
+  refine Exists.imp (fun k ↦ ?_)
+  refine And.imp_right ?_
+  rintro ⟨bottom, hbottom, computation⟩
   intro p
   rw [← hbottom p]
   apply NatTrans.ext

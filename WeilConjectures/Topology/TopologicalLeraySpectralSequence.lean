@@ -52,7 +52,6 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 attribute [instance] topological_pushforwardAb_additive
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -180,11 +179,27 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
   have hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor
       (Opens.grothendieckTopology Z) n ⋙
         (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
+  refine ⟨HX, HZ, hX, hZ, ?_⟩
   obtain ⟨edge, a, ha, hedge⟩ :=
     exists_topological_induced_cohomology_cocycle f HX HZ hX hZ
-  obtain ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hb, k, hk, he⟩ :=
-    exists_topological_leray_bottom_realization f HX HZ hX hZ edge a ha hedge
-  exact ⟨HX, HZ, hX, hZ, E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht,
-    b, hb₂, hb, k, hk, edge, he, a, ha, hedge⟩
+  refine Exists.imp (fun E ↦ ?_)
+    (exists_topological_leray_bottom_realization f HX HZ hX hZ edge a ha hedge)
+  refine Exists.imp (fun e₂ ↦ ?_)
+  refine And.imp_right ?_
+  refine Exists.imp (fun T ↦ ?_)
+  refine And.imp_right ?_
+  refine And.imp_right ?_
+  refine Exists.imp (fun g ↦ ?_)
+  refine Exists.imp (fun e₀ ↦ ?_)
+  refine And.imp_right ?_
+  refine Exists.imp (fun t ↦ ?_)
+  refine And.imp_right ?_
+  refine Exists.imp (fun b ↦ ?_)
+  refine And.imp_right ?_
+  refine And.imp_right ?_
+  refine Exists.imp (fun k ↦ ?_)
+  refine And.imp_right ?_
+  intro he
+  exact ⟨edge, he, a, ha, hedge⟩
 
 end CategoryTheory
