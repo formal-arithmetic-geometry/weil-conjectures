@@ -182,6 +182,7 @@ private theorem hom_exact_of_open_triangle
         d (r f) = eA (a ≫ b ≫ f) := by rw [← hb, ← ha]
         _ = 0 := by rw [hzero, map_zero]
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- Specializing the triangle identifications compares three large derived restriction functors.
 /-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups.
