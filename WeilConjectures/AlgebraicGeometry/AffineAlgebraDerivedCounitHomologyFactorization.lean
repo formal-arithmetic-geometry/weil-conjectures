@@ -25,7 +25,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh
 
 /-! # Cohomology of the affine algebra derived counit
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -37,8 +39,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Under the cohomology comparison, the derived affine algebra counit is the
-underived counit applied to the cohomology module.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof. -/
+underived counit applied to the cohomology module (Stacks, Tag 0AVW). -/
 theorem affine_algebra_derived_counit_homology_factorization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

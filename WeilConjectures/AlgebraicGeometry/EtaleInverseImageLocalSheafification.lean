@@ -17,7 +17,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback. -/
+/-- Description of the sections of an inverse image through local sheafification
+(Stacks, Tag 09XN). -/
 theorem etaleInverseImageSectionDescription_core (S T : Scheme.{u}) (g : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (s : ((Scheme.etaleSetPullback g).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 T)))) :

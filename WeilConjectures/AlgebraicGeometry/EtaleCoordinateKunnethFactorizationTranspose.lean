@@ -27,9 +27,7 @@ namespace AlgebraicGeometry.Etale.CoordinateTrace
 variable (A : Type (u + 1)) [CommRing A]
 
 /-- The two coordinate routes have the same transpose along `pull f ⊣ push f`.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first triangle, coordinate interchange;
-Stacks Tags 07A7, 0B56 and 0D6E. -/
+(Stacks, Tags 07A7, 0B56 and 0D6E). -/
 theorem coordinateKunnethFactorization_transpose [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
     (M : DerivedCategoryModule A X) :

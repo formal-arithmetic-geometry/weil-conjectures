@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulLowDegrees
 
 /-! # The normalized strict Koszul-to-quotient augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, proof.
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -193,7 +195,7 @@ private theorem tensor_boundary_zero
 /-- The strict augmentation preserves the actual ordinary-limit unit and vanishes on
 all tensor summands of nonzero Koszul degree. These formulas normalize the augmentation,
 without involving any presentation or derived completion functor.
-Source: Stacks Project, Tag 099M, proof. -/
+(Stacks Project, Tag 099M) -/
 def KoszulQuotientAugmentationLaws
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r
         (fun i ↦ algebraSection (baseMap J A I b) (a i)) ⟶
@@ -212,8 +214,7 @@ def KoszulQuotientAugmentationLaws
 
 /-- The degree-zero quotient defines a natural strict tower augmentation, including
 its normalization on total-tensor summands. No Noetherian assumption is needed here.
-Source: Stacks Project, Tag 099M, construction in the proof;
-More on Algebra, Tag 0913, the tensor description of the Koszul complex. -/
+(Stacks Project, Tags 099M, 0913) -/
 theorem koszulQuotientAugmentation (ha : Ideal.span (Set.range a) = I) :
     ∃ α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r
         (fun i ↦ algebraSection (baseMap J A I b) (a i)) ⟶

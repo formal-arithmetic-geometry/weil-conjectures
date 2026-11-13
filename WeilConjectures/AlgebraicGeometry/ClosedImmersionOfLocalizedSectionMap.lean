@@ -13,7 +13,9 @@ import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 /-!
 # A surjective localized section map gives a closed immersion
 
-Source: Stacks Project, Tag 04DG, proof, final localization sentence.
+## References
+
+* Stacks Project, Tag 04DG
 -/
 
 @[expose] public section
@@ -58,7 +60,7 @@ private theorem surjective_awayMap_of_localizedMap_surjective
 set_option backward.isDefEq.respectTransparency false in
 /-- Surjectivity of the localized affine section map makes the restriction over the
 corresponding principal open a closed immersion.
-Source: Stacks Project, Tag 04DG, proof, final localization sentence. -/
+(Stacks, Tag 04DG) -/
 theorem isClosedImmersion_restrict_basicOpen_of_localizedMap_surjective
     {X S : Scheme.{u}} (f : X ⟶ S) [IsAffineHom f]
     (U : S.Opens) (hU : IsAffineOpen U) (a : Γ(S, U))

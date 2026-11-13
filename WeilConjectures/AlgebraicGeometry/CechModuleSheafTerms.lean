@@ -8,10 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CechModuleSheafFunctor
 
-/-! # The terms of the concrete module-sheaf Čech complex
-
-Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
--/
+/-! # The terms of the concrete module-sheaf Čech complex -/
 
 @[expose] public section
 
@@ -45,8 +42,7 @@ private noncomputable def cechOpensProductIsoInf
   inv_hom_id := Subsingleton.elim _ _
 
 /-- Each concrete Čech term is the product of extensions from the corresponding
-finite intersections. Source: blueprint `lem-pc-cech-resolution`, displayed complex
-and proof paragraph 1. -/
+finite intersections. -/
 theorem cechModuleSheafComplex_term_iso
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) (p : ℕ) :
     Nonempty ((cechModuleSheafComplex U F).X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>

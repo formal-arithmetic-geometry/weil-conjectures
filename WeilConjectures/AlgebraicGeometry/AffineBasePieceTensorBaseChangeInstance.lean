@@ -257,13 +257,8 @@ private theorem tensor_pullback_arrow
     Category.comp_id] using hh
 
 set_option linter.unusedVariables false in
-/-- The fixed test-object affine tensor base-change construction used in the affine reduction.
-
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Limits, proof of Tag 01ZO.
-
-The proof pastes the two pullback squares with the open restriction squares, transports
-both restricted fibre products through the displayed affine charts, and applies the
-universal property of the tensor-product pullback. -/
+/-- The fixed test-object affine tensor base-change construction used in the affine reduction
+(Stacks, Tags 01JR, 01I4 and 01ZO). -/
 theorem affine_base_piece_tensor_base_change_instance
     {S T : Scheme.{u}} (d : T ⟶ S)
     (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)

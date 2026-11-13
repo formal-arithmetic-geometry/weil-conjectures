@@ -24,8 +24,7 @@ namespace AlgebraicGeometry
 namespace LinearMap
 
 /-- Products of scalar quasi-inverses annihilate kernel and cokernel.
-Source: Stacks Project, Remark 0888, final scalar-composite argument.
--/
+(Stacks, Tag 0888). -/
 theorem annihilated_of_scalar_composites
     {A : Type u} [CommRing A] (K : Ideal A) (t : ℕ)
     {P : Type v} {R : Type w} [AddCommGroup P] [Module A P]
@@ -59,13 +58,7 @@ theorem annihilated_of_scalar_composites
 end LinearMap
 
 /-- The scalar reverse maps on the affine inverse limit.
-Source: Stacks Project, Remark 0888, final paragraph, implication (1) to (2).
-The componentwise annihilation hypotheses give the canonical lift maps at every
-level. Their compatibility with transition maps makes them a map on inverse
-limits; the two scalar composite identities are then checked by the limit
-projections. This is the intermediate scalar-composite assertion used by the
-annihilation criterion.
--/
+(Stacks, Tag 0888). -/
 abbrev affineLimitModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F : CoherentFormalModule X I)
     (U : X.affineOpens) := ↥(limit (F.obj ⋙
@@ -136,13 +129,8 @@ private theorem affine_section_annihilation {X : Scheme.{u}} (K : X.IdealSheafDa
     rw [map_smul, map_zero]
     exact Module.mem_annihilator.mp (hcs hf) (e x)
 
-/-- For scalars in the affine ideal power, construct compatible reverse maps on all
-levels and pass them to the inverse limit. At each level, annihilation of the
-kernel makes the map independent of the chosen lift, while annihilation of the
-cokernel provides a lift. Naturality of the transition maps gives compatibility.
-The two composite identities follow by checking every limit projection.
-Source: Stacks Project, Remark 0888, final paragraph.
--/
+/-- For scalars in the affine ideal power, there are compatible reverse maps on all
+levels, hence on the inverse limit (Stacks, Tag 0888). -/
 theorem coherentFormalModule_affine_limit_scalar_composites
     (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)
     (F G : CoherentFormalModule X I) (α : F ⟶ G) (t : ℕ) (ht : 1 ≤ t)

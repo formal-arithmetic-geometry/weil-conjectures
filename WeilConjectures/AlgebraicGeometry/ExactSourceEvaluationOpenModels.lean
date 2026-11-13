@@ -81,11 +81,7 @@ set_option maxHeartbeats 400000 in
 -- The localized comparison elaborates the sheaf tensor and Hom structures together.
 /-- The ordinary evaluation calculation, entirely on the open scheme. The functor E
 only changes from the over-site to its equivalent scheme site; it does not restrict
-an object or an evaluation arrow from X.
-
-Source: Stacks Project, cohomology.tex, Tag 08DJ,
-Tag 08DM (lemma-Rhom-strictly-perfect), and Tag 08DQ,
-ordinary representative computation without the perfectness-dependent inverse. -/
+an object or an evaluation arrow from X (Stacks, Tags 08DJ, 08DM, 08DQ). -/
 theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (K N : schemeDerivedCategory U.toScheme)

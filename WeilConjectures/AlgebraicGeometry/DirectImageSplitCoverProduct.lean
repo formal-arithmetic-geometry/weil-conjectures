@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SplitCoverSectionsLimit
 /-!
 # Direct image for a split finite cover
 
-Source: literature/stacks-project/etale-cohomology.tex, proof of Lemma 095B.
+Source: Stacks Project, Tag 095B.
 -/
 
 @[expose] public section
@@ -27,33 +27,10 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- If a scheme is a finite disjoint coproduct of open-and-closed pieces each
 isomorphic to the base, its étale direct image is the product of the restrictions.
-Source: Stacks Project, Lemma 095B, lines 9982--9991.
+(Stacks, Tag 095B)
 
-Proof (the five steps of the node):
-1. For each étale `W → X`, base change decomposes `W ×_X Y` into the clopen
-   pieces over `V j`. The inverse of `V j → X` identifies each piece with `W`;
-   the maps `σ j = (id, s j ∘ w)` are their inclusions and form an étale cover.
-   Use def-pc-fibre-product, lem-weil-pbc-open-fibre-product, and
-   lem-weil-pbc-etale-composition-cancellation.
-2. Apply the sheaf equalizer condition to this cover. Distinct pieces have empty
-   overlap and the empty covering gives `H(∅) = 0`; the two projections on a
-   self-overlap agree. Every family of sections is compatible, so the restriction
-   map to the product is bijective and additive, including the empty product.
-3. The restrictions are sheaves by lem-weil-pbc-etale-inverse-image-restriction.
-   Their sectionwise product is a sheaf by
-   lem-weil-pbc-site-sheaf-sets-limits-sectionwise. The identity
-   `h_Y ∘ σ_{j,W'} = σ_{j,W} ∘ h` gives naturality of the restriction maps.
-4. Both coefficient maps `Λ_X → Λ_Y|_{s j}` send a constant `λ` to the same
-   section, hence agree by def-weil-pbc-sheafification. Semilinearity of the
-   restrictions then gives `Λ_X`-linearity (def-weil-sheaf-of-modules-category;
-   Stacks sites-modules, 03D6 and 03DH).
-5. The componentwise inverse is linear and natural, giving the asserted
-   isomorphism with the specified components. The sectionwise product has the
-   module-sheaf product universal property; for empty `J` it is the zero sheaf.
-
-`localizationRestriction` is the source's literal restriction along composition,
-so the equality below specifies the maps of the node, not merely an arbitrary
-isomorphism between the two objects. -/
+`localizationRestriction` is the literal restriction along composition, so the equality below
+specifies the maps, not merely an arbitrary isomorphism between the two objects. -/
 theorem directImage_splitCover_product
     {X Y : Scheme.{u}} {J : Type w} [Finite J]
     {Λ : Type (u + 1)} [CommRing Λ]

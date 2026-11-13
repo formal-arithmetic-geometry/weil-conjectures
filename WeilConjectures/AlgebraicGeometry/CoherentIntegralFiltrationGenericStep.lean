@@ -18,7 +18,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
 /-! # The generic-point step of the coherent integral-ideal filtration
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, final paragraph.
+Stacks Project, Tag 01YF.
 -/
 
 @[expose] public section
@@ -30,9 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The generic-residue-field case of support induction: the coherent cokernel of
-the generic ideal inclusion has smaller support, and its filtration can be appended.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, proof, final paragraph,
-using Lemma 01YE (coherent_generic_point_ideal_inclusion). -/
+the generic ideal inclusion has smaller support, and its filtration can be appended
+(Stacks, Tags 01YF and 01YE). -/
 theorem coherentIntegralFiltration_generic_step
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

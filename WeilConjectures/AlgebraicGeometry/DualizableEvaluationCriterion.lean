@@ -36,22 +36,8 @@ private theorem evaluation_slide {C : Type*} [Category C] [MonoidalCategory C]
     _ = _ := by monoidal
 
 /- The evaluation isomorphism criterion for a dualizable object in `D(O_X)`.
-The bijection `adj` is a tensor--internal-Hom bijection of
-`lem-sc-derived-internal-hom-adjunction`, with the naturality equation of
-`scheme_derivedInternalHom_adjunction` as hypothesis `hadj`.
-Source: Stacks Project, Cohomology, Tag 0FPC.
-
-Proof:
-1. Naturality of the adjunction in its first variable: for `f : A → B` and
-   `g : B ⊗ K → M` with adjunct `g♭ : B → RHom(K,M)`, the adjunct of `(f ⊗ 1_K) ≫ g`
-   is `f ≫ g♭`. Take `A = O_X`, `B = K ⊗ D`, `f = η`, `g = 1_K ⊗ e`, whose adjunct is
-   `φ_K`. The adjunct of `(η ⊗ 1_K) ≫ (1_K ⊗ e)` is `η ≫ φ_K`, the adjunct of `id_K` by
-   the definition of `η`; bijectivity gives the first triangle identity.
-2. Put `g := (1_D ⊗ η) ≫ (e ⊗ 1_D) : D → D`. The map `φ_{O_X} : D = O_X ⊗ D → RHom(K,O_X)`
-   is the adjunct of `e` and an isomorphism. By naturality, `g ≫ φ_{O_X}` is the adjunct of
-   `(g ⊗ 1_K) ≫ e`. Bifunctoriality (`e ⊗ e` computed two ways) and Step 1 give
-   `(g ⊗ 1_K) ≫ e = e`, so `g ≫ φ_{O_X} = φ_{O_X}` and `g = id_D` since `φ_{O_X}` is an
-   isomorphism. Associators and unitors are inserted throughout. -/
+The bijection `adj` is a tensor--internal-Hom bijection, with the naturality equation of
+`scheme_derivedInternalHom_adjunction` as hypothesis `hadj`. (Stacks, Tag 0FPC) -/
 /-- The second triangle identity isolated from the evaluation criterion.
 The formal tensor--Hom naturality and bifunctoriality calculation is the
 second zig-zag identity in Stacks Project, Cohomology, Tag 0FPC. -/
@@ -148,7 +134,8 @@ theorem dualizable_evaluation_second_triangle (X : Scheme.{u})
     simpa only [Category.id_comp] using hgt
   exact hgid.symm
 
-/-- -/
+/-- The evaluation isomorphism criterion for a dualizable object in `D(O_X)`: both triangle
+(zig-zag) identities hold for the evaluation `e` and the coevaluation `η`. (Stacks, Tag 0FPC) -/
 theorem dualizable_evaluation_criterion (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (K D : schemeDerivedCategory X)

@@ -110,8 +110,8 @@ private theorem comparison_refl {C : Type*} [Category C] {S T : Scheme.{u}}
       (𝟙 _) ≫ (F.obj A).obj.hom
     simp
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, its base-change construction and
-coherence discussion following the proof. -/
+/-- The normalized cartesian base change functors come with canonical comparison isomorphisms
+satisfying the coherence conditions (Stacks, Tag 0EYL). -/
 theorem exists_affineEtale_normalized_cartesian_comparisons
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)
     (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤

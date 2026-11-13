@@ -47,9 +47,7 @@ private theorem adicBounded_of_iso
     ((coefficientModelCohomology R q).mapIso e)⟩
 
 /-- Arbitrarily marked bounded constructible finite-Tor etale origins inherit
-all normalized quotient isomorphisms and their cocycle.
-Source: Stacks Project, proetale.tex, Tag 09AL, full faithfulness, applied to
-the quotient balancing in Tag 09C2; parent proof steps 8-10. -/
+all normalized quotient isomorphisms and their cocycle (Stacks, Tags 09AL and 09C2). -/
 theorem adicFiniteEtale_transitions
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

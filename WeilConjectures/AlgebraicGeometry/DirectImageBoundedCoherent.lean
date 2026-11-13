@@ -23,8 +23,7 @@ import all WeilConjectures.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh
 
 /-! # Proper-support direct image preserves bounded coherent complexes
 
-Source: literature/stacks-project/perfect.tex, Derived Categories of Schemes,
-Lemma 36.11.3 (Tag 08E2; label lemma-direct-image-coherent).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.11.3 (Tag 08E2).
 -/
 
 @[expose] public section
@@ -57,7 +56,7 @@ private theorem coherent_pages {S : Scheme.{u}}
 
 /-- If `S` is Noetherian and `f : X ⟶ S` is locally of finite type, then the derived
  direct image of a bounded complex with coherent cohomology and proper support has
- bounded coherent cohomology. Source: Stacks Project, Tag 08E2, Lemma 36.11.3. -/
+ bounded coherent cohomology. (Stacks, Tag 08E2) -/
 theorem directImage_isBounded_coherent
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{wX}

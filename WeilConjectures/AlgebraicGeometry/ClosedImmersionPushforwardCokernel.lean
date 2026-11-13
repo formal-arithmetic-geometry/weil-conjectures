@@ -16,8 +16,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Closed pushforward preserves cokernels
 
-Source: Stacks Project, Sheaves, Lemma 00AE; Modules, Lemma 01AG; Modules on Sites,
-Lemma 03DA. This supplies the exactness used in the proof of Lemma 088A.
+## References
+
+* Stacks Project, Tags 00AE, 01AG and 03DA
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Closed pushforward preserves the cokernel of any module morphism.
-Source: Stacks Project, Sheaves, Lemma 00AE; Modules, Lemma 01AG; Modules on Sites,
-Lemma 03DA. The following stalk argument writes out closed-direct-image exactness,
-as used in Cohomology of Schemes, proof of Lemma 088A, lines 6961--6968. -/
+(Stacks, Tags 00AE, 01AG, 03DA) -/
 theorem closedImmersion_pushforward_preservesCokernel
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {A B : Z.Modules} (f : A ⟶ B) :

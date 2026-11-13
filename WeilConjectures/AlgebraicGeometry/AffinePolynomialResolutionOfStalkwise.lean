@@ -49,8 +49,8 @@ private theorem finite_projectiveDimension_of_localized
 namespace AlgebraicGeometry
 
 /-- A finite polynomial presentation of an affine chart admits a bounded projective
-resolution of its coordinate algebra over the polynomial ring.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1), using Tags 068X and 068W. -/
+resolution of its coordinate algebra over the polynomial ring
+(Stacks, Tags 069C, 068X and 068W). -/
 theorem affinePolynomial_boundedResolution_of_stalkwise
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

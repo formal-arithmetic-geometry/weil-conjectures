@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 /-!
 # Canonical sections of the lifted étale structure-module sheaf
 
-Source: Stacks Tags 0096, 01CA, 03DR, 03DU; the restriction-identification step of
-blueprint `lem-sc-as-sequence-construction-helper`.
+## References
+
+* Stacks Project, Tags 0096, 01CA, 03DR, 03DU
 -/
 
 @[expose] public section
@@ -168,9 +169,7 @@ private theorem tensorStructureMap_sections_hom {A B D : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical section identifications commute with étale restrictions.
-Source: blueprint `lem-sc-as-sequence-construction-helper`, proof step 3;
-Stacks Tags 0096 and 01CA (adjoint structure map), 03DR equation (35.8.1),
-and 03DU item 4 (the étale sections presheaf). -/
+(Stacks, Tags 0096, 01CA, 03DR, 03DU). -/
 theorem etaleStructureSectionsEquiv_naturality (C : Scheme.{u})
     (U V : C.Etaleᵒᵖ) (g : U ⟶ V)
     (x : ((sheafCompose C.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj

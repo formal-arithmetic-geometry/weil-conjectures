@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorBalancingUnique
 
 /-! # Universal property of the change-of-rings balancing map
 
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
+## References
+
+* Stacks Project, Tags 01SB and 0089
 -/
 
 @[expose] public section
@@ -32,8 +34,7 @@ set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
 /-- Maps out of change of rings are exactly maps equalizing the two algebra actions.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
-Sheaves, Lemma 0089 (sheafification universal property). -/
+(Stacks, Tags 01SB and 0089). -/
 theorem changeOfRings_tensor_balancing_universal (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

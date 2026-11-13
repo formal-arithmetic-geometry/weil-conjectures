@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechResolutionExchange
 
 /-! # An alternating acyclic resolution with ordinary exchange
 
-Source: Stacks Project, Tags 02KG and 02KH; blueprint finite affine Čech calculation, Steps 1--2
-of `lem-pc-affine-alternating-cech-pinned-mate`.
+## References
+
+* Stacks Project, Tags 02KG and 02KH
 -/
 
 @[expose] public section
@@ -31,9 +32,8 @@ namespace AlgebraicGeometry
 
 /-- An increasing-tuple resolution computes the explicit section model, remains a
 resolution after ordinary pullback, and has invertible termwise ordinary exchange.
-This statement involves no derived base-change mate and no left-derived counit.
-Source: Stacks Project, Tags 02KG and 02KH; Steps 1--2 of
-`lem-pc-affine-alternating-cech-pinned-mate`. -/
+This statement involves no derived base-change mate and no left-derived counit
+(Stacks, Tags 02KG and 02KH). -/
 theorem exists_affineAlternatingCech_exchange_resolution
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -26,10 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The affine equivalence sends the shifted free rank-one module to the shifted
-structure sheaf. This is the shift-normalization part of Tag 06Z0.
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0.
-The proof identifies the degree-zero tilde of `A` with the structure sheaf and
-then transports this isomorphism through the shift functor. -/
+structure sheaf (Stacks, Tag 06Z0). -/
 theorem affineQCohDerivedEquivalence_shift (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

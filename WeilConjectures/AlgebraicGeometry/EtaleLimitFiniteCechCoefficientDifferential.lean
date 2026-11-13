@@ -13,7 +13,10 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u
@@ -200,8 +203,7 @@ private theorem cech_map_of_transport
 
 set_option linter.unusedVariables false in
 /-- The prescribed tuple maps commute with the Čech differential.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed Čech
-comparison, and Tag 03AM for the alternating differential. -/
+(Stacks, Tags 09YP and 03AM) -/
 theorem etale_limit_finite_cech_coefficient_differential
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

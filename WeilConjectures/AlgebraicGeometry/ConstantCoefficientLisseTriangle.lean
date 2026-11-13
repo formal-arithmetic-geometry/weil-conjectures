@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-! # Finite local constant cohomology and distinguished triangles
 
-Source: Stacks Project, Cohomology on Sites, Tag 094I, using Tag 093U (3).
+## References
+
+* Stacks Project, Tags 094I, 093U
 -/
 
 @[expose] public section
@@ -115,8 +117,7 @@ private theorem closure_of_iso
 
 /-- Finite locally constant cohomology is closed under the middle term of a
 distinguished triangle. Constants are formed in commutative rings as in the
-coefficient reduction API. Source: Stacks Project, Tag 094I, first proof paragraph;
-Modules on Sites, Tag 093U (3). -/
+coefficient reduction API. (Stacks Project, Tags 094I, 093U) -/
 theorem locallyConstantFiniteTypeModules_of_distinguished
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     (B : Type u) [CommRing B] [IsNoetherianRing B]

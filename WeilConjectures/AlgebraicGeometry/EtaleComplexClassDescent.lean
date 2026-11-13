@@ -24,7 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Every limit hypercohomology class has a stage representative.
-Source: Stacks Project, Tag 0EZM, proof of lemma-colimit-variant-complexes;
+Source: Stacks Project, Tag 0EZM;
 Tag 015J (termwise hypercohomology spectral sequence). -/
 theorem exists_etale_complex_class_rep
     {I : Type u} [SmallCategory I] [IsCofiltered I]

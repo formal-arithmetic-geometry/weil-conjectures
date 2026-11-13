@@ -65,8 +65,7 @@ noncomputable def ordinaryChartBaseModule {I : Type u} [Preorder I]
     exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj M, ⊤)
 
 /-- Ordinary affine Hom sets agree with scalar-extension Hom sets, including the
-composition comparison. This asserts comparisons only, not descent of any map.
-Source: Stacks Project, Tags 01ZR (affine proof), 01I6, 0095 and 0096. -/
+composition comparison (Stacks, Tags 01ZR, 01I6, 0095, 0096). -/
 theorem affine_chart_ordinary_hom_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

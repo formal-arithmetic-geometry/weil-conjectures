@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineKernelImageCo
 
 /-! # Affine Artin--Rees bound for formal kernel images
 
-Source: Stacks Project, Lemma 087X, proof of claim (a).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- On one affine open there is a bound, uniform in the two levels, for the kernel images.
-
-Source: Stacks Project, Lemma 087X, proof of claim (a), using Lemma 087W and Artin--Rees. -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_affine_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (U : X.affineOpens) :

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleIntegralMapFactoriza
 /-!
 # Pointwise finite pushforward detectors on a Noetherian scheme
 
-This isolates the local detector construction in the proof of Stacks Project Tag 09Z6 (3).
+## References
+
+* Stacks Project, Tag 09Z6 (3)
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ open AlgebraicGeometry Scheme
 namespace AlgebraicGeometry.Etale
 
 /-- Every point has a finite pushforward of a finitely generated constant module
-with a map from C injective on all geometric stalks above that point.
-Source: Stacks Project, Tag 09Z6 (3), proof of (1) transferred to module sheaves. -/
+with a map from C injective on all geometric stalks above that point. (Stacks, Tag 09Z6 (3)) -/
 theorem exists_noetherian_stalk_detector
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     {U : Scheme.{u}} [IsNoetherian U]

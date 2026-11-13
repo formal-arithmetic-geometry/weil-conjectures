@@ -236,10 +236,8 @@ private theorem clopen_reconstruction_counit {I : Type v} [Finite I] {X : Scheme
 /-- Restriction to the clopen components of a finite coproduct is an equivalence of
 abelian etale sheaf categories, and global sections are naturally the product of
 component global sections. The coproduct is any coproduct cocone
-`hc : IsColimit (Cofan.mk X ι)` (as in lem-weil-pbc-direct-image-split-cover-product), its
-coprojections open and closed by `lem-weil-pbc-scheme-coproduct-family`; global sections
-are sections at `Scheme.Etale.mk (𝟙 X)`. Source: Stacks Project, proof of Lemma 0A5B,
-first paragraph. -/
+`hc : IsColimit (Cofan.mk X ι)`; global sections are sections at `Scheme.Etale.mk (𝟙 X)`
+(Stacks, Tag 0A5B). -/
 theorem Etale.sheaf_clopen_product {I : Type v} [Finite I] {X : Scheme.{u}}
     (C : I → Scheme.{u}) (ι : ∀ i, C i ⟶ X) (hc : IsColimit (Cofan.mk X ι)) :
     let R := Functor.pi' (fun i ↦ Etale.upperStar AddCommGrpCat.{u + 1} (ι i))

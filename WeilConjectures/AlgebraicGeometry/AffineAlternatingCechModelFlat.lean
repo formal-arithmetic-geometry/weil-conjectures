@@ -16,7 +16,9 @@ import Mathlib.RingTheory.RingHom.Flat
 
 /-! # Bounded flat terms in the affine alternating Čech model
 
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D.
+## References
+
+* Stacks Project, Tag 0A1D
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Relative flatness gives flat sections with the specified A-action.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, flatness of the Čech terms.
-Evaluate relative flatness on V and the top affine open of Spec A, then restrict
-scalars along the ring isomorphism ΓSpecIso and use transitivity of flatness. -/
+/-- Relative flatness gives flat sections with the specified A-action. -/
 private theorem flat_affine_sections
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     (G : X.Modules) (hflat : Scheme.Modules.IsFlatOver G f)
@@ -52,10 +51,7 @@ private theorem flat_affine_sections
   · rfl
   · congr 1
 
-/-- The natural-degree section terms are finite products of flat A-modules.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, flatness of the Čech terms.
-Separatedness makes the nonempty finite intersections affine. Apply the section
-calculation to each tuple and identify the finite product with a dependent direct sum. -/
+/-- The natural-degree section terms are finite products of flat A-modules. -/
 private theorem flat_alternating_sections
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i))
@@ -80,8 +76,8 @@ private theorem flat_alternating_sections
 
 
 /-- The explicit finite alternating model is termwise flat over
-its affine base. This is about the ordinary complex, without any derived map.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D. -/
+its affine base. This is about the ordinary complex, without any derived map
+(Stacks, Tag 0A1D). -/
 theorem affineAlternatingCechModel_flat
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i))

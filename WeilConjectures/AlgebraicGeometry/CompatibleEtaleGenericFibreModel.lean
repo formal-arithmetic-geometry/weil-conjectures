@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleGenericResidueFieldModel
 
 /-! # A compatible étale generic-fibre model
 
-Source: Stacks Project, Tags 0551 and 055G.
+Stacks Project, Tags 0551 and 055G.
 -/
 
 @[expose] public section
@@ -23,11 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 
-/-- Spread a specified finite étale generic field extension with compatible fibres.
-
-Source: Stacks Project, Tag 0551, proof, monic polynomial construction, and
-Tag 055G, model construction. This does not construct a closed cover or assert
-anything about nongeneric fibres. -/
+/-- Spread a specified finite étale generic field extension with compatible fibres
+(Stacks, Tags 0551 and 055G). -/
 theorem exists_compatible_etale_generic_fibre_model {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S)
     {L : Type u} [Field L]

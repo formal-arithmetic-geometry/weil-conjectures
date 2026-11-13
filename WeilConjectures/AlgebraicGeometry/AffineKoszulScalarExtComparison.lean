@@ -29,10 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Restriction of scalar Ext to an affine Koszul chart is the associated sheaf
-of the cohomology of the integer-indexed dual Koszul complex.
-
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5, the displayed finite
-free Hom computation; Tag 08DM, Lemma 20.46.9. -/
+of the cohomology of the integer-indexed dual Koszul complex (Stacks, Tags 0BQZ, 08DM). -/
 theorem affine_koszul_scalar_ext_comparison
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

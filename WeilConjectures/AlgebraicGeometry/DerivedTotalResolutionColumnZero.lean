@@ -29,8 +29,7 @@ namespace WeilConjectures.DerivedTotalResolution
 variable {R : Type u} [Ring R]
 
 /-- Exact horizontal homology rows allow every total homology class to be
-represented in column zero.
-Source: Stacks Project, Homology, Tag 09IZ, proof, second paragraph. -/
+represented in column zero (Stacks, Tag 09IZ). -/
 theorem total_resolution_column_zero_surjective
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)
       (ComplexShape.up ℤ))

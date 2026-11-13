@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.ConstantScalarAlgebraicPullback
 
 /-! # Ordinary flat sheaves under coefficient-sized inverse image
 
-Source: Stacks Project, Modules on Sites, Tag 05VD, lemma-pullback-flat.
+Source: Stacks Project, Tag 05VD.
 -/
 
 @[expose] public section
@@ -26,9 +26,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace AlgebraicGeometry.Scheme
 
 /-- Exact coefficient-sized inverse image preserves ordinary flat module sheaves.
-
-Source: Stacks Project, Modules on Sites, Tag 05VD, lemma-pullback-flat;
-Tag 03CY identifies modules over a constant ring with fixed-scalar module sheaves. -/
+ (Stacks, Tag 05VD) -/
 theorem coefficientFixedPullback_preservesFlat
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :

@@ -25,10 +25,8 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Ampleness gives finitely many affine section loci in one positive tensor power.
-
-Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph;
-Properties, Definition 01PS. -/
+/-- Ampleness gives finitely many affine section loci in one positive tensor power
+(Stacks, Tags 01VS and 01PS). -/
 theorem IsAmple.exists_finite_common_power_cover (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible] (hL : IsAmple X L) :
     ∃ (m : ℕ) (_ : 0 < m) (r : ℕ)

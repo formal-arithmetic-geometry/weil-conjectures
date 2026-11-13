@@ -59,7 +59,7 @@ private theorem overChartSectionsIso (W : Scheme.{v}) (U : W.Opens)
     exact (PresheafOfModules.naturality_apply f.val a.hom.op x).symm
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Sheafifying the actual terminal sections reconstructs a termwise finite free complex.
-Source: Stacks Project, Tag 01IB (schemes-lemma-equivalence-quasi-coherent). -/
+(Stacks, Tag 01IB). -/
 theorem affineFree_terminalSections_reconstruction
     (W : Scheme.{v}) (U : W.Opens) (hU : IsAffineOpen U)
     (K : CochainComplex

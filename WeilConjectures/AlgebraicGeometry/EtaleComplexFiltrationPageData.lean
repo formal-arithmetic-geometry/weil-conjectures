@@ -74,9 +74,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 1000000 in
 set_option linter.unusedVariables false in
 /-- Functorial hypercohomology pages identify image-filtration classes with stable pages.
-This constructs the pages and their graded-class dictionary; it does not assert
-continuity or that a kernel class eventually lies in a deeper step.
-Source: Stacks Project, Tag 015J, and Tag 0EZM, proof of Lemma 59.52.1. -/
+(Stacks, Tags 015J and 0EZM). -/
 theorem exists_etaleComplexFiltrationPageData
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

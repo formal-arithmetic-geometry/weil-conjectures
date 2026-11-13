@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFi
 
 /-! # Stalk presentations of stabilized kernel images
 
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -37,8 +37,7 @@ private theorem intersection_filtration_bound
 
 /-- The stabilized image system has compatible surjective stalk presentations with an
 eventually bounded kernel filtration.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b). -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_stalk_presentation
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

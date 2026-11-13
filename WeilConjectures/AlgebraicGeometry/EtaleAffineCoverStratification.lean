@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 /-!
 # Stratifying an etale affine cover and its overlaps
 
-Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, proof,
-second paragraph.
+Source: Stacks Project, Etale Cohomology, the stratification lemma for finite etale covers.
 -/
 
 @[expose] public section
@@ -198,9 +197,7 @@ private theorem separated_of_finite_charts {S V : Scheme.{u}} [IsAffine S]
 
 /-- A finite affine open cover of a qcqs etale scheme over an affine base admits a
 finite partition of the base into constructible locally closed affine subschemes on
-which the charts and their overlaps are finite etale and the whole scheme is separated.
-Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, proof,
-second paragraph. -/
+which the charts and their overlaps are finite etale and the whole scheme is separated. -/
 theorem exists_etale_affine_cover_stratification
     {X U : Scheme.{u}} [IsAffine X] [CompactSpace U] [QuasiSeparatedSpace U]
     (j : U ⟶ X) [Etale j] (m : ℕ) (A : Fin m → U.Opens)

@@ -27,8 +27,7 @@ noncomputable section
 
 /-- Affine pullback sections give canonical degree isomorphisms, with their pure-tensor
 normalization, without asserting compatibility between different degrees.
-Source: Stacks Project, Tag 03P2, affine-case identification before exactness;
-Tags 01I9 and 01IA for the affine fibre-product and module calculations. -/
+(Stacks, Tags 03P2, 01I9 and 01IA) -/
 /- Fixed-degree affine tensor-section calculation. The geometric proof identifies the
 degree-n affine fibre product with the indexed tensor power, applies the affine pullback
 sections formula, and checks the displayed normalization on pure tensors; tensor
@@ -52,7 +51,8 @@ theorem exists_singletonTensorDegreeComparison_degree
       inv_hom_id := hif }
   exact ⟨e, hf⟩
 
-/-- -/
+/-- Affine pullback sections give canonical degree isomorphisms between the Amitsur and
+tensor-section Čech complexes, with their pure-tensor normalization in every degree. -/
 theorem exists_singletonTensorDegreeComparison
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left) :

@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
 
 /-! # Associativity and unit of the transported scalar action
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -125,7 +125,8 @@ private theorem pairSection_eta {C : Type*} [Category C]
   exact ConcreteCategory.congr_hom (C := Type (u + 1))
     (congrArg (fun k ↦ k.hom.app W) e.hom_inv_id) z
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+/-- The transported scalar action on the inverse image is associative and unital
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageScalarAssociativity (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

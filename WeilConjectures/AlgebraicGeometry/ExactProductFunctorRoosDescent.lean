@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution
 /-!
 # Descent of the normalized Roos comparison and its resolution formula
 
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
+## References
+
+* Stacks Project, Tags 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -36,23 +36,8 @@ private theorem descendIso {A B E : Type*} [Category* A] [Category* B] [Category
   exact congr_app (ff.map_preimage e.hom) X
 
 -- The statement contains simultaneous universe-polymorphic cone comparisons.
-/-- Descent of the normalized Roos comparison and its resolution formula.
-
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
-
-Proof in words:
-The natural chain isomorphism kappa, conjugated by thetaA and thetaB and the
-exact-functor localization comparisons, is a natural isomorphism after restriction
-along the localization Q. Full faithfulness of restriction along a localization
-descends it uniquely to lambda; its restriction is the displayed square.
-Apply the separate resolution lemma to this fixed lambda and its localization
-square. That lemma constructs the signed ordinary-limit inclusions, extends the
-injective-term normalization to all complexes by naturality, and proves that the
-derived units on K-injectives are invertible. Its unit comparison and naturality
-then give the formula for every supplied pair of resolutions, with dI and dJ
-normalized by etaA and etaB. -/
+/-- Descent of the normalized Roos comparison and its resolution formula
+(Stacks, Tags 0940, 0941). -/
 theorem exactProductFunctorRoosDescent
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

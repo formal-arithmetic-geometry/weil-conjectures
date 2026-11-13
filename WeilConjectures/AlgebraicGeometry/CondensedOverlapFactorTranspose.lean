@@ -9,8 +9,6 @@ import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 
 /-!
 # Transposing a fixed coefficient factor on an overlap
-
-Source: archived `TwoColimit.lean`, overlap Hom descent, scalar adjunction calculation.
 -/
 
 @[expose] public section
@@ -29,21 +27,13 @@ attribute [local irreducible] upperStar lowerStar upperStarFromPoint
 section Comparison
 variable {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
 
-/-- Forward component with its functor endpoints fixed.
-
-Source: component formula for natural transformations, used in archived `TwoColimit.lean`. -/
+/-- Forward component with its functor endpoints fixed. -/
 def comparisonHom (e : F ≅ G) (M : C) : F.obj M ⟶ G.obj M := e.hom.app M
 
-/-- Inverse component with its functor endpoints fixed.
-
-Source: component formula for natural isomorphisms, used in archived `TwoColimit.lean`. -/
+/-- Inverse component with its functor endpoints fixed. -/
 def comparisonInv (e : F ≅ G) (M : C) : G.obj M ⟶ F.obj M := e.inv.app M
 
-/-- Component presentation of a natural isomorphism; its data is unchanged.
-
-Source: the component presentation of natural isomorphisms in the overlap calculation
-of archived `TwoColimit.lean`. The generic equality `componentComparison_eq` proves
-that this representation is exactly the given isomorphism, with no chosen data. -/
+/-- Component presentation of a natural isomorphism; its data is unchanged. -/
 def componentComparison (e : F ≅ G) : F ≅ G :=
   NatIso.ofComponents (fun M ↦
     { hom := comparisonHom e M
@@ -55,10 +45,7 @@ def componentComparison (e : F ≅ G) : F ≅ G :=
 private theorem componentComparison_eq (e : F ≅ G) : componentComparison e = e := by
   rfl
 
-/-- Component presentation of the specified commutative-square comparison.
-
-Source: archived `TwoColimit.lean`, overlap comparison. The equality
-`overlapComparison_eq_original` identifies this with `upperStarCompIso`. -/
+/-- Component presentation of the specified commutative-square comparison. -/
 noncomputable def overlapComparison
     {W U V X : Scheme.{u}} {p : W ⟶ U} {g : U ⟶ X}
     {q : W ⟶ V} {h : V ⟶ X} (w : p ≫ g = q ≫ h) :
@@ -387,9 +374,7 @@ attribute [local irreducible] finiteCoefficientLocalAdjoint finiteCoefficientLoc
 attribute [local irreducible] squareRing overlapComparison componentComparison
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Transpose an already given E-linear factor at a fixed field F on one overlap.
-
-Source: archived `TwoColimit.lean`, (Obj) overlap descent, adjunction calculation. -/
+/-- Transpose an already given E-linear factor at a fixed field F on one overlap. -/
 theorem finiteCoefficient_overlap_factor_transpose
     (T X : Scheme.{u}) (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

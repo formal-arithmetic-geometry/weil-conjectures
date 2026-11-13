@@ -12,8 +12,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Stratified descent of etale origin in the coefficient universe
 
-Source: Stacks Project, proetale.tex, lemma-compare-constructible (Tag 09AK),
-the finite-partition induction after classicality on each stratum is known.
+## References
+
+* Stacks Project, Tag 09AK
 -/
 
 @[expose] public noncomputable section
@@ -144,9 +145,7 @@ private def eraseEmptyStratum {X : Scheme.{u}} (S : Scheme.Stratification X)
 
 /-- Etale origin glues across a finite constructible locally closed stratification.
 The restrictions may be arbitrary etale inverse images; their models need not be finite.
-
-Source: Stacks Project, Tag 09AK, lemma-compare-constructible, induction step;
-blueprint constructible-comparison proof, finite-stratification paragraph. -/
+(Stacks, Tag 09AK) -/
 theorem coefficientFixed_essImage_of_stratification (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (S : Scheme.Stratification X)

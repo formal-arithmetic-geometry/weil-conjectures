@@ -11,7 +11,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Flatness for the canonical coefficient-model comparison pullback
-Source: Stacks Project, Tag 05VD.
+
+## References
+
+* Stacks Project, Tag 05VD
 -/
 
 @[expose] public section
@@ -37,9 +40,8 @@ private theorem flat_zero {C : Type w} [SmallCategory C]
   exact (ObjectProperty.flat_of_isZero hM).2
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The canonical comparison inverse image preserves flat module sheaves.
-Source: Stacks Project, Tag 05VD, lemma-pullback-flat; blueprint finite-Tor comparison,
-paragraph Flatness is preserved. -/
+/-- The canonical comparison inverse image preserves flat module sheaves
+(Stacks, Tag 05VD). -/
 theorem constructibleComparisonPullback_flat (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (M : ConstantCompletion.Mod (ConstantCompletion.constant
@@ -90,7 +92,7 @@ theorem constructibleComparisonPullback_flat (X : Scheme.{u})
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Termwise comparison carries K-flat complexes with flat terms to K-flat complexes.
-Source: Stacks Project, Tag 0G7E. -/
+(Stacks Project, Tag 0G7E) -/
 theorem constructibleComparisonComplexPullback_kFlat (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (P : ConstantCompletion.Cx (ConstantCompletion.constant

@@ -69,7 +69,7 @@ private theorem descent_inversion
   exact ⟨i, inferInstance, his, hit⟩
 
 /-- A finite saturated set contained in an affine open admits an invariant affine shrinking.
-Source: Stacks Project, Tag 03JE, proof after the choice of the affine open W. -/
+(Stacks, Tag 03JE) -/
 theorem exists_descent_norm_affine_shrinking
     {X Y R : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     (D : Over.DescentDatum p V) (s : R ⟶ V.left) (q : R ⟶ X) (t : R ⟶ V.left)

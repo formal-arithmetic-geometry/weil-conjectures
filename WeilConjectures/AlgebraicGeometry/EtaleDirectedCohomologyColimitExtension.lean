@@ -58,9 +58,7 @@ private theorem sections_isColimit (X : Scheme.{u}) (U : X.Etale)
   exact ⟨isColimitOfReflects G hE⟩
 
 /-- Derived etale cohomology preserves directed colimit cocones indexed in the
-same universe as the abelian coefficients.
-Source: Stacks Project, Tag 03Q5, direct proof, and
-Tag 0739, proof. -/
+same universe as the abelian coefficients (Stacks, Tags 03Q5 and 0739). -/
 theorem etaleCohomology_isColimit_of_isFiltered_coefficientSize
     (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]

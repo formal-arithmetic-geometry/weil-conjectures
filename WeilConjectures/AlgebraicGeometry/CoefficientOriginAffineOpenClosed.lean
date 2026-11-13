@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Affine open-closed gluing of coefficient-sized etale origin
 
-Source: Stacks Project, proetale.tex, Tag 09AK, proof of lemma-compare-constructible.
+## References
+
+* Stacks Project, Tag 09AK
 -/
 
 @[expose] public noncomputable section
@@ -157,9 +159,7 @@ private theorem fixed_extensions (X : Scheme.{u})
     eP.counitIso.app S.X₂⟩⟩
 
 /-- Etale origin glues from the complementary open and closed subschemes of an
- affine scheme, with coefficients of independent size.
-Source: Stacks Project, Tag 09AK, proof of lemma-compare-constructible, the open-closed
-short exact sequence; Tag 09AH, lemma-ses-associated-to-open. -/
+affine scheme, with coefficients of independent size. (Stacks, Tags 09AK, 09AH) -/
 theorem coefficientFixed_essImage_affine_openClosed
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

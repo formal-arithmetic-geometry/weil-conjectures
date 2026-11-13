@@ -17,8 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 /-- A point in an arbitrary open after base change has a descended compact neighborhood.
-Source: Stacks Project, Varieties, proof of Tag 0388,
-the single-principal-open instance of the finite-coefficient construction. -/
+(Stacks, Tag 0388) -/
 theorem exists_descended_qc_neighborhood (k : Type u) [Field k] (X : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A]
     (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))).Opens)

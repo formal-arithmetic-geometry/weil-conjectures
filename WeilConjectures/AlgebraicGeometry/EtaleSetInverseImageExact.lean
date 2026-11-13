@@ -25,14 +25,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Lemma 03Q1(2), Definition 59.36.1 in Section 03PZ,
-and Sites, Definition 00X1.
-
-The inverse image is Mathlib's left Kan extension followed by sheafification,
-exactly the construction used by `Scheme.etaleSetPullback`. The direct image is
-precomposition with base change, hence its sections over `V` are `F(V ×_T T')`.
-Continuity and the two preservation properties are the morphism-of-sites condition
-of def-weil-pbc-sites-and-cohomology(3); no separate site-morphism structure is needed. -/
+/-- The inverse image is left Kan extension followed by sheafification, as in
+`Scheme.etaleSetPullback`. The direct image is precomposition with base change, hence its
+sections over `V` are `F(V ×_T T')` (Stacks, Tags 03Q1, 03PZ, 00X1). -/
 theorem etaleSetInverseImage_exact {T T' : Scheme.{u}} (h : T' ⟶ T) :
     (MorphismProperty.Over.pullback @Etale ⊤ h).IsContinuous
       (T.smallGrothendieckTopology @Etale) (T'.smallGrothendieckTopology @Etale) ∧

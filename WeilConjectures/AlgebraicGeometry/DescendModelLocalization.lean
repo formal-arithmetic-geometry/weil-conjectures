@@ -20,8 +20,7 @@ import Mathlib.Algebra.Algebra.Shrink
 /-!
 # DescendModelLocalization
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
+Descending a nonzero denominator of a finite étale domain model to a principal open of the base.
 -/
 
 @[expose] public section
@@ -47,19 +46,7 @@ private theorem shrink_scalarTower
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 700000 in
 -- The successive localization and shrink structures require additional elaboration heartbeats.
-/-- Core construction of a nonzero localization of a finite étale model.
-
-The proof follows the denominator-clearing and localization argument in the
-smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-steps 4--9. Write the base element as a fraction with numerator `b`. The
-localization at this element is also the localization of `A` at `c0 * b`.
-Localize `A0` at its image, use the finite-module localization theorem, and
-transport along the base localization equivalence. The localization remains
-étale by composition and restriction of scalars, and has fraction field `K'`.
-Its finite module structure over `A[1/(c0*b)]` proves smallness. Shrink the ring
-and transport the algebra maps and their scalar towers through the resulting
-ring equivalence. Finally apply integral lying over to the injective base map.
--/
+/-- Core construction of a nonzero localization of a finite étale model. -/
 private theorem exists_base_element_model_localization
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]
     (K' : Type (max u v)) [Field K'] [Algebra A K']
@@ -201,12 +188,7 @@ private theorem exists_base_element_model_localization
 
 /-- Descend a specified nonzero denominator of a finite étale domain model to a
 principal open of the original base. The resulting small domain is a localization of
-that model at a multiple of the denominator. No finite algebra B or product of fields
-occurs in this statement.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9; steps 3--4 of
-`lem-weil-pbc-spread-generic-product-embedding`. -/
+that model at a multiple of the denominator. -/
 theorem exists_descend_model_localization
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]
     (K' : Type (max u v)) [Field K'] [Algebra A K']

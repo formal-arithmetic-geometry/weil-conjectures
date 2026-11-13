@@ -88,7 +88,7 @@ private theorem underlying_cohomology_bounds
 
 /-- A complete complex with uniformly bounded quotient Tor tests is the derived
 limit of its normalized reduction tower and has the same cohomology bounds.
-Source: Stacks Project, proetale.tex, Tag 09C2 (1), using lemma-naive-completion. -/
+(Stacks, Tag 09C2 (1)). -/
 theorem adicFiniteCompletion_bounds
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

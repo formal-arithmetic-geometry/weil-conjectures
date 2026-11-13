@@ -20,10 +20,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso
 
 Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph, and Lemma 01VT.
 
-The node's `P_n = Proj(A[x₀,…,xₙ])` over `Spec A` is `ℙ(ULift (Fin (n + 1)); Spec A)`, the
+The projective space `P_n = Proj(A[x₀,…,xₙ])` over `Spec A` is `ℙ(ULift (Fin (n + 1)); Spec A)`, the
 projective space `ℙⁿ_{Spec A}` (identified with `Proj(A[x₀,…,xₙ])` over `Spec A` by Stacks,
 Constructions, Lemma 01O3), with structure morphism `ℙ(…; Spec A) ↘ Spec A` and twisting
-module `ProjectiveSpace.twist` (the recorded declaration of `def-pc-projective-space-twist`),
+module `ProjectiveSpace.twist`,
 as in `IsHProjective` and `IsVeryAmple`.
 -/
 
@@ -160,8 +160,7 @@ private theorem positiveTensorPower_iso_tensorPow (X : Scheme.{u}) (L : X.Module
 
 /-- An ample invertible module on a scheme locally of finite type over `Spec A` has a
 positive tensor power obtained by pulling back `𝒪(1)` along an immersion into projective
-space `ℙⁿ_{Spec A} = Proj(A[x₀,…,xₙ])` over `Spec A`.
-Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph; Lemma 01VT (1) ⇒ (5). -/
+space `ℙⁿ_{Spec A} = Proj(A[x₀,…,xₙ])` over `Spec A` (Stacks, Tags 01VS and 01VT). -/
 theorem IsAmple.exists_immersion_affine_base (A : Type u) [CommRing A] (X : Scheme.{u})
     (f : X ⟶ Spec (.of A)) [LocallyOfFiniteType f] (L : X.Modules) [L.IsInvertible]
     (hL : IsAmple X L) :

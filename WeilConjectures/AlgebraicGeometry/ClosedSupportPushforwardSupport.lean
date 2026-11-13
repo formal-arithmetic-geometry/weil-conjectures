@@ -21,7 +21,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Direct image has support inside the given closed ambient support.
-Source: Stacks Project, Lemma 0CYJ, proof (vanishing on the complement). -/
+(Stacks, Tag 0CYJ). -/
 theorem pushforward_support_subset_of_closed_support
     {Y X : Scheme.{u}} (j : Y ⟶ X) (F : Y.Modules)
     (T : TopologicalSpace.Closeds X)

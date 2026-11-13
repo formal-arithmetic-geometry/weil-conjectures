@@ -55,8 +55,7 @@ private theorem unit_isIso_of_acyclic
 
 set_option linter.unusedVariables false in
 /-- Core alternating Cech resolution data and the four comparison isomorphisms.
-Source: Stacks Project, Tags 02KG and 02KH; the Cech resolution and acyclicity
-paragraphs of `lem-pc-affine-alternating-cech-pinned-mate`. -/
+(Stacks, Tags 02KG and 02KH). -/
 theorem affineAlternatingCech_resolution_core
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

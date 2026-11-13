@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The canonical filtered-step cohomology comparison. Its first factor is the
 inverse of the sections lift through the monic step inclusion; its second is
-cohomology of the specified restricted K-injective augmentation.
-Source: Stacks, Tag 015J, proof remark (3), and Tag 0133. -/
+cohomology of the specified restricted K-injective augmentation (Stacks, Tags 015J, 0133). -/
 noncomputable def etaleFilteredStepCohomologyIso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -48,8 +47,8 @@ noncomputable def etaleFilteredStepCohomologyIso
         (etaleRestrictedTotal X K T q) (etaleRestrictedAugmentation X K T q) p
 
 /-- The cohomology of one filtered total step computes derived global sections of
-one fixed stupid truncation, compatibly with its inclusion in the full complex.
-Source: Stacks Project, Tag 015J, proof remark (3), and Tag 0133. -/
+one fixed stupid truncation, compatibly with its inclusion in the full complex
+(Stacks, Tags 015J and 0133). -/
 theorem etale_filtered_step_cohomology_iso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -189,7 +188,8 @@ theorem etale_filtered_step_cohomology_compatibility
   rw [← HomologicalComplex.homologyMap_comp_assoc]
   simp
 
-/-- -/
+/-- The cohomology of one filtered total step is isomorphic to derived global sections of the
+stupid truncation, compatibly with the inclusion in the full complex. -/
 theorem etale_filtered_step_cohomology
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

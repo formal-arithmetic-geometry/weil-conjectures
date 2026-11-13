@@ -27,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- On cohomology the derived affine counit is the ordinary tilde-sections counit,
-after identifying its source with associated sheaf of sections of cohomology.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, counit calculation. -/
+after identifying its source with associated sheaf of sections of cohomology (Stacks, Tag 06Z0). -/
 theorem affineDerivedCounit_homology_factorization (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

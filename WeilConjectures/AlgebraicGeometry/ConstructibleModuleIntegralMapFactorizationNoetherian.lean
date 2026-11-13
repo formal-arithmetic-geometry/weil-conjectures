@@ -112,9 +112,7 @@ private theorem finitelyPresentable_constructible
 
 /-- A map from a constructible module sheaf to an integral pushforward of a finite constant
 module factors through a finite pushforward of that same constant module.
-
-Source: Stacks Project, Tag 09Z6, final paragraph of the proof of (1), transferred to (3),
-using Tags 09YZ, 09Z1 and 09Z4. -/
+(Stacks, Tags 09Z6, 09YZ, 09Z1 and 09Z4) -/
 theorem exists_finite_lowerStar_factorization_noetherian
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

@@ -30,10 +30,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- On an affine open, the section-limit functor is naturally the restriction functor
 followed by the finite completed-module equivalence, inclusion and restriction of scalars.
-This statement supplies the natural comparison, and asserts no exactness or annihilator bound.
-
-Source: Stacks Project, Lemma 087W, the definition of M as the inverse limit in its proof,
-and the affine calculation in Lemma 087X. -/
+(Stacks, Tags 087W and 087X). -/
 theorem coherentFormalModule_affine_limit_model
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

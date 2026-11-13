@@ -101,34 +101,8 @@ private lemma exchange_edge_apply
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Base-changed exchange followed by the edge map carries the pushforward of the unit
-for `π` to pullback along `πZ`, followed by the canonical composition comparison.
-Source: Stacks Project, Lemma 09ZE,
-proof, second paragraph; the compatibility used there is formulated by the node's agent.
-
-Proof (the eight steps of the node):
-1. Set `A = f_* G`, `B = i^* A`, and `A' = (π ≫ f)_* π^* G`. The two cartesian
-squares and the equations for `πZ` identify every composite to `X`. Use the units,
-counits and composition isomorphisms of def-weil-pbc-inverse-image,
-def-weil-pbc-direct-image and lem-weil-pbc-inverse-image-composition. Exchange is the
-adjoint of the square comparison followed by inverse image of the counit. Fix
-resolutions and use lem-weil-pbc-cohomology-pullback-functorial to identify all choices.
-2. By lem-weil-pbc-adjunct-counit-identity and naturality of cohomological pullback,
-exchange followed by the edge map is pullback followed by cohomology of its adjunct.
-3. Naturality and composition of cohomological pullback reduce the required equality
-to the equality of sheaf morphisms from `(fZ')^* B` to `(iY')^* π^* G`.
-4. The counit for `π ≫ f` composed with inverse image of `f_* η_π` is inverse image
-of the counit for `f`, after the composition comparison. This follows from the unit
-formula of lem-weil-pbc-inverse-image-composition, naturality of the unit, and the
-triangle identity of lem-weil-pbc-adjunct-counit-identity.
-5. Expand the adjunct for the second square and move the unit morphism through the
-composition isomorphisms by naturality; apply step 4.
-6. Expand the adjunct for the first square and move its counit through the comparison
-κ by naturality of the composition isomorphisms.
-7. The remaining comparisons agree by associativity of the composition isomorphisms
-(lem-weil-pbc-derived-inverse-image-composition), applied to `(f, π, iY')`,
-`(f, iY, πZ)` and `(i, fZ, πZ)` in the node's order of composition.
-8. Substitute this comparison identity in steps 5 and 6, then apply step 3.
-No finiteness hypothesis is used; the identity base change is included. -/
+for `π` to pullback along `πZ`, followed by the canonical composition comparison
+(Stacks, Lemma 09ZE). -/
 theorem cohomology_baseChange_unit_edge_compatibility
     {X Y Y' Z YZ YZ' : Scheme.{u}} (f : Y ⟶ X) (π : Y' ⟶ Y) (i : Z ⟶ X)
     (iY : YZ ⟶ Y) (fZ : YZ ⟶ Z) (iY' : YZ' ⟶ Y') (fZ' : YZ' ⟶ Z)

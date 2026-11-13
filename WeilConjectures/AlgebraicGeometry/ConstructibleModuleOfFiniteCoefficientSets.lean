@@ -18,9 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Module constructibility from finite sets and finite coefficients
-
-Source: the normalization exact-sequence blueprint, unit `sk-thm-p1`, module refinement
-in lem-weil-pbc-finite-pushforward-finite-stalk-module.
 -/
 
 @[expose] public section
@@ -368,10 +365,7 @@ private theorem finite_constant_module_value {Y : Scheme.{u}}
   exact @Finite.of_equiv _ _ (hfinite _ (s ≫ U.hom)) eStalk.toEquiv
 
 /-- Finite set charts refine to charts with finite constant module values when the
-scalar action factors through a finite quotient ring.
-
-Source: normalization exact-sequence blueprint, finite-operation module refinement in
-`lem-weil-pbc-constructible-module-of-finite-coefficient-sets`, steps 1 and 2. -/
+scalar action factors through a finite quotient ring. -/
 private theorem exists_finite_coefficient_module_charts
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -542,10 +536,7 @@ private theorem finiteLocallyConstant_of_charts
   exact (ModuleCat.isFinitelyGenerated_iff _).mpr Module.Finite.of_finite
 
 /-- A sheaf annihilated by a finite-index ideal is module constructible when its
-underlying set sheaf is constructible.
-
-Source: normalization exact-sequence blueprint, module refinement in
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`, step 3. -/
+underlying set sheaf is constructible. -/
 theorem isConstructibleSheaf_of_finite_coefficient_underlying_sets
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

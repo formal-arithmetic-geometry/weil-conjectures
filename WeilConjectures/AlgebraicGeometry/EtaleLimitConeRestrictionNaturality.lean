@@ -140,11 +140,7 @@ private theorem openSquare_restriction
 
 /-- For arbitrary nested opens A ≤ B of X, restriction from B to A on the limit
 inverse-image opens commutes with the actual cohomology leg from each tail stage.
-The coefficient map is (eG j.val).inv followed by the cocone leg. The cone and
-coefficient cocone need not be limiting or colimiting.
-
-Source: Stacks Project, Tag 01F7 (pullback and coefficient functoriality),
-Tag 09YQ (restricted stage and cone maps); parent proof step 1. -/
+The cone and coefficient cocone need not be limiting or colimiting. -/
 theorem tailOpenCohomologyLegDegree_restriction
     {X : Scheme.{u}} {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesCoimageImage
 
 /-! # Coherent formal modules form an abelian category
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087X, part (1), and the description
-of cokernels in its proof.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -30,10 +29,7 @@ namespace AlgebraicGeometry
 
 /-- The category Coh(X,I) is abelian, and every morphism has a cokernel cofork whose
 image under evaluation at each positive level is a cokernel cofork of that component.
-Thus its cokernel is the inverse system of termwise cokernels, with transitions induced
-by the universal property. Here `op n` denotes positive level `n + 1`.
-
-Source: Stacks, Lemma 087X, part (1), and its proof. -/
+Here `op n` denotes positive level `n + 1` (Stacks, Tag 087X). -/
 theorem coherentFormalModule_abelian (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) :
     Nonempty (Abelian (CoherentFormalModule X I)) ∧

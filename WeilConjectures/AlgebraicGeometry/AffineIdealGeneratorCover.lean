@@ -27,10 +27,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine section ideal has finite generators whose basic opens cover its unit locus.
-
-Source: Stacks Project, Properties, Lemma 01PM, the choice of generators at the
-start of the proof; Schemes, Lemma 01IN, quasi-coherent ideals on affine schemes. -/
+/-- The affine section ideal has finite generators whose basic opens cover its unit locus (Stacks,
+Tags 01PM, 01IN). -/
 theorem affine_ideal_generator_cover
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

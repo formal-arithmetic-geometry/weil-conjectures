@@ -54,7 +54,7 @@ attribute [local irreducible] Functor.mapDerivedCategoryFactors
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
 
 /-- The type of sheaf comparisons for proper vertical and open horizontal edges.
-Source: Stacks Project, Tag 0F7B, first proof paragraph. -/
+(Stacks, Tag 0F7B) -/
 abbrev ProperOpenSheafComparisonFamily (A : Type (u + 1)) [CommRing A] :=
   ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k],
@@ -335,10 +335,8 @@ private theorem exists_normalized_families
   exact ⟨@θ, @Γ, hθ, hΓh⟩
 
 /-- Canonical proper/open interchange, with its support, representative, Cartesian,
-pasting, identity and arbitrary-base-change normalizations.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7B(b), 0F7C, 0F7D, 0F7E and 0F7F;
-the Cartesian mate normalization is the map in lem-sf-etale-proper-open-tensor-square. -/
+pasting, identity and arbitrary-base-change normalizations
+(Stacks, Tags 0F7B, 0F7C, 0F7D, 0F7E and 0F7F). -/
 theorem etaleProperOpenExchangeCube
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     ∃ (θ : ProperOpenSheafComparisonFamily A)

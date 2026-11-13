@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.defeqAttrib.useBackward true in
 /-- A coherent source has a finite free cokernel presentation near each point.
-Source: Stacks Project, Modules, Lemma 01BW (lemma-coherent-finite-presentation). -/
+(Stacks, Tag 01BW). -/
 theorem coherent_local_finite_presentation
     (X : Scheme.{u}) (G : X.Modules)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) :

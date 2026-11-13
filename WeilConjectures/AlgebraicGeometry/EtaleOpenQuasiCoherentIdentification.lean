@@ -36,12 +36,8 @@ noncomputable def etaleOpenSmallRestriction {X U : Scheme.{u}} (j : U ⟶ X)
     AddCommGrpCat.{u} U.smallEtaleTopology X.smallEtaleTopology
 
 /-- The canonical sectionwise identification of the restricted quasi-coherent etale sheaf.
-We use sheafPushforwardContinuous directly so that coefficients remain in the original
-universe of etaleTensorSectionsSheaf. The formula pins down the sheaf isomorphism and
-its naturality in the module: it is inverse normalized pullback composition followed by
-pullback of the canonical tensor-pullback/restriction comparison.
-Source: Stacks Project, Sites, Section 00XZ; Descent, Tag 03DR, equation (35.8.1),
-and Tag 03DU, item 4; module restriction and pullback along an open immersion. -/
+It is inverse normalized pullback composition followed by pullback of the canonical
+tensor-pullback/restriction comparison (Stacks, Tags 00XZ, 03DR and 03DU). -/
 theorem etaleTensorSectionsSheaf_openIdentification {X U : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (F : X.Modules) [F.IsQuasicoherent] :
     ∃ e : (etaleOpenSmallRestriction j).obj

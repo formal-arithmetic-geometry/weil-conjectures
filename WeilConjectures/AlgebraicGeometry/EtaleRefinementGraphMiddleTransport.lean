@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Intersection transport along a proper refinement graph
 
-Source: Stacks Project, Tags 0F7C--0F7D, and step 2 of
-`lem-pur-etale-graph-refinement-normalization`.
+Source: Stacks Project, Tags 0F7C and 0F7D.
 -/
 
 @[expose] public noncomputable section
@@ -125,9 +124,7 @@ private theorem exchange_open_congr
     Iso.refl_hom, NatTrans.id_app, Category.id_comp]
 
 /-- The intersection comparison is unchanged after transport along the proper graph.
-
-Source: Stacks Tags 0F7C--0F7D, vertical and horizontal pasting;
-`lem-pur-etale-graph-refinement-normalization`, steps 2--3. -/
+ (Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleRefinementGraphMiddleTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s r : Compactification f)

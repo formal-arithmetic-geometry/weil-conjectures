@@ -88,8 +88,7 @@ set_option linter.unusedVariables false in
 -- The existing hR and ht binders in the signature are used only implicitly.
 /-- Stationary comparison naturality whenever the two outer filtration steps stabilize.
 There is no support assumption, first-page formula, augmentation, or inverse-image lift.
-Source: Stacks Project, Tag 012K, formulas for cycles, boundaries and graded cohomology;
-explicit outer-step version of steps 4--5 of lem-weil-pbc-supported-ce-filtered-totals. -/
+(Stacks, Tag 012K) -/
 theorem exists_etaleCE_stationary_comparisons_at_bounds
     (D : ∀ (X : Scheme.{u})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

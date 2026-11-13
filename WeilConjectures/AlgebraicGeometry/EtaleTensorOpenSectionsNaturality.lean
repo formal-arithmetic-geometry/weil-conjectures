@@ -299,7 +299,7 @@ theorem etaleTensorOpenSectionIso_component_core
     (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj U.unop) hi)
     (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj V.unop) hi)
 
-/-- -/
+/-- The section isomorphisms `etaleTensorOpenSectionIso` are natural in the open set. -/
 theorem etaleTensorOpenSectionIso_naturality
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules)

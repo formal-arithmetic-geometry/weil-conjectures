@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-! # Bounded classical descent on coefficient-sized derived categories
-Source: blueprint classical derived equivalence, Stacks Tag 09AL.
+Stacks, Tag 09AL.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -87,8 +87,7 @@ private theorem bounded_origin_of_homology_origin
 /-- Derived comparison is fully faithful between bounded objects, and an object
 with bounded classical cohomology has an etale derived antecedent. No constructibility
 or finiteness of its cohomology modules is imposed here.
-Source: blueprint det-pe-classical-derived-equivalence and sk-prop-sf-comparison;
-Stacks Tag 09AL. -/
+(Stacks, Tag 09AL). -/
 theorem coefficientComparison_boundedClassical (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (D : ConstantCompletion.D (ConstantCompletion.constant

@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-
 # Normalization of the two ordered projection presentations -/
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 
 /-! # Factorization through a restricted formal kernel
 
-Source: Stacks Project, Lemma 087X (lemma-inverse-systems-abelian), construction
-(a)--(d) and the final sentence of its proof.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -60,12 +59,7 @@ private theorem restrictedKernelImage {X : Scheme.{u}} (U : X.Opens)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A morphism killed by a restricted formal-module morphism factors through
-its restricted kernel arrow. This concerns kernels only, with no cokernel or finite
-product preservation assertion.
-
-Source: Stacks Project, Lemma 087X (lemma-inverse-systems-abelian), construction
-(a)--(d) and the final sentence of its proof; step 2 of
-lem-weil-pbc-coherent-formal-modules-restriction-limits. -/
+its restricted kernel arrow (Stacks, Tag 087X). -/
 theorem coherentFormalModules_restriction_kernel_factorization {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     [IsNoetherian U.toScheme] {F G : CoherentFormalModule X I} (α : F ⟶ G)

@@ -25,11 +25,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XN, proof, paragraphs beginning "Let V" and
-"By construction"; Tag 09XM for the agreement-open universal property.
-
-This asserts local existence only. It neither chooses sections nor asserts that
-representatives are compatible on common test objects. -/
+/-- Local existence of representatives of sections of an étale sheaf along an fpqc cover
+(Stacks, Tags 09XN and 09XM). Compatibility on common test objects is not asserted. -/
 theorem etaleFpqcSections_exists_local_representatives
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

@@ -188,7 +188,7 @@ private theorem property_restrict_le
   rwa [heq] at h'
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine-base polynomial chart produced in the proof of Tag 00RH. -/
+/-- The affine-base polynomial chart of Stacks, Tag 00RH. -/
 theorem exists_affine_base_flat_quasiFinite_chart_core
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

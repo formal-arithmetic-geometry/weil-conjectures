@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.AdicResidueQuotientTensorModel
 
 /-! # The strict Koszul augmentation on a coefficient slice
 
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex, Tag 0A0E.
+## References
+
+* Stacks Project, Tags 099M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -67,10 +68,8 @@ private theorem tensor_augmentation_projection
 
 /-- The Koszul augmentation has a strict quotient target, a pro-zero cone, and the
 specified finite scalar units. This is a calculation of complexes and transitions;
-there is no total derived inverse limit or residue-projection assertion in its conclusion.
-
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex, Tag 0A0E. -/
+there is no total derived inverse limit or residue-projection assertion in its conclusion
+(Stacks, Tags 099M and 0A0E). -/
 theorem adicResidue_strict_koszul_augmentation
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

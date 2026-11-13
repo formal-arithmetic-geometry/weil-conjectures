@@ -25,9 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Finite stalk Tor dimensions give a finite Tor bound for an affine coordinate ring.
-Source: Stacks Project, Tag 069C, `lemma-check-perfect-stalks`, (3) implies (1),
-and the first sentence of the proof of (1) implies (2). -/
+/-- Finite stalk Tor dimensions give a finite Tor bound for an affine coordinate ring
+(Stacks, Tag 069C). -/
 theorem affineSections_finiteTorDimension_of_stalkwise
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

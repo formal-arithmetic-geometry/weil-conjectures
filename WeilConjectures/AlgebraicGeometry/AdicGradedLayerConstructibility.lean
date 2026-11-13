@@ -20,10 +20,8 @@ universe u v
 open CategoryTheory CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
-/-- Only the graded layer, rather than a higher reduction, has constructible cohomology.
-
-Source: Stacks Project, proetale.tex, Tag 09BR, second displayed isomorphism and tensor
-step; sites-cohomology.tex, Tag 094H, lemma-locally-constant-tensor-product. -/
+/-- Only the graded layer, rather than a higher reduction, has constructible cohomology
+(Stacks, Tags 09BR and 094H). -/
 theorem adicFiniteGradedLayer_constructible (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A)

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Constructibility after forgetting modules with finite stalks
 
-Source: Stacks Project, Tags 095E and 09Z6.
+## References
+
+* Stacks Project, Tags 095E and 09Z6
 -/
 
 @[expose] public section
@@ -56,9 +58,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
     exact Finite.of_equiv M e.toEquiv.symm
 
 /-- Module constructibility and finite geometric stalks imply set constructibility.
-
-Source: Stacks Project, Tags 095E and 09Z6, and the finite-stalk refinement of
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`, step 1. -/
+(Stacks, Tags 095E and 09Z6) -/
 theorem isConstructibleEtaleSheafOfSets_of_finite_module_stalks
     (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

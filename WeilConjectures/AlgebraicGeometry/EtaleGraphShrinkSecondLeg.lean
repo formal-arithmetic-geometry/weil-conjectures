@@ -170,9 +170,7 @@ private theorem openComp_inv
 attribute [local irreducible] openComp
 
 /-- The second triangle commutes with the intersection and neighborhood shrinkings.
-Source: Stacks Project, more-etale.tex, lemma-shriek-proper-and-open-compose-horizontal
-(Tag 0F7D), specialized to the second intersection projection in the product-graph
-extension of the independence calculation of lemma-shriek-composition (Tag 0F7J). -/
+(Stacks, Tags 0F7D and 0F7J). -/
 theorem etaleGraphShrinkSecondLeg
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)

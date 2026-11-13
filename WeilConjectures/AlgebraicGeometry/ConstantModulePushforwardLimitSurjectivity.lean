@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Surjectivity of the constant-module continuity comparison
 
-Source: Stacks Project, Tag 09Z1, degree zero.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -25,15 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The constant-module continuity comparison is an epimorphism.
-
-The arbitrary diagram `K` and cocone `c` are identified with the constant-module
-pushforward diagram by `eK`, `hK`, `e` and `hι`. These hypotheses fix the transition
-maps and comparison components; they do not assume a colimit property.
-Only surjectivity is asserted, not the complementary injectivity assertion.
-
-Source: Stacks Project, Tag 09Z1, degree-zero continuity and its canonical maps;
-Tag 09Z6, finite approximation paragraph. -/
+/-- The constant-module continuity comparison is an epimorphism (Stacks, Tags 09Z1, 09Z6). -/
 theorem epi_constantModulePushforwardComparison
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

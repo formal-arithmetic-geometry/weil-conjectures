@@ -16,8 +16,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 
 /-! # Affine tensor and pullback homology comparison
 
-Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact.
+Source: Stacks Project, Tags 01IB and 01I9.
 -/
 
 @[expose] public section
@@ -30,9 +29,7 @@ open CategoryTheory Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The homology of the module tensor complex is the restricted module of sections
-of the homology of the affine scheme pullback.
-Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact. -/
+of the homology of the affine scheme pullback (Stacks, Tags 01IB and 01I9). -/
 theorem affine_tensor_pullback_homology_comparison (S : Scheme.{u}) [IsAffine S]
     (C : CochainComplex S.Modules ℤ)
     (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)

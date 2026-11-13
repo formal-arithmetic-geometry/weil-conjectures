@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.Sheaf
 
 /-! # Uniform lower bounds on a quasi-compact scheme
 
-Source: Stacks Project, Tag 0A6H, proof of clause (1).
+## References
+
+* Stacks Project, Tag 0A6H
 -/
 
 @[expose] public section
@@ -25,8 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A locally bounded-below derived object on a Noetherian scheme is bounded below.
-Source: Stacks Project, Tag 0A6H, proof of clause (1). -/
+/-- A locally bounded-below derived object on a Noetherian scheme is bounded below
+(Stacks, Tag 0A6H). -/
 theorem derivedLocallyBoundedBelowGlobal (Y : Scheme.{u}) [IsNoetherian Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (E : schemeDerivedCategory Y)

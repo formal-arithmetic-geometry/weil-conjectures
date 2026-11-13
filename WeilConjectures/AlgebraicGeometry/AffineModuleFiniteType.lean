@@ -120,9 +120,8 @@ local notation "PUSH" => SheafOfModules.pushforward.{u} (F := Opens.map f.base)
 set_option maxHeartbeats 400000 in
 -- The explicit finite-free section calculation needs extra elaboration heartbeats.
 /-- On one affine open, finite global generators of the direct image over its
-sectionwise algebra are equivalent to finite generation of the inverse-image sections.
-Source: Stacks Project, Morphisms, Tag 01SB; Properties, Tag 01PB; Cohomology of
-Schemes, Tag 0897, proof, finite-type detail, steps 2 and 3. -/
+sectionwise algebra are equivalent to finite generation of the inverse-image sections
+(Stacks, Tags 01SB, 01PB, 0897). -/
 private theorem affine_pushforward_finite_generators [IsAffineHom f]
     (F : U.Modules) (hF : F.IsQuasicoherent) (V : X.Opens) (hV : IsAffineOpen V) :
     (∃ σ : ((PUSH).obj F |>.over V).GeneratingSections, Finite σ.I) ↔
@@ -184,33 +183,9 @@ private theorem affine_pushforward_finite_generators [IsAffineHom f]
 set_option hygiene false in
 local notation "R" => PUSH
 
-/-- Finite type is preserved in both directions by the affine module correspondence.
-The direct image carries its sectionwise action by `A = f_* O_U`, rather than merely
-its restricted `O_X`-action. Source: Stacks Project, Tag 0897, proof (the omitted
-finite-type detail), with Tags 01SB and 01PB.
-
-Proof (the five steps of the node):
-1. Transport finite generation through the given `A`-linear isomorphism, reducing to
-   `M = f_* F`. An epimorphism from a
-   finite free module means every section is locally a linear combination of its
-   basis images. Generation restricts to smaller
-   opens. Affine opens form a basis, and their inverse images are affine.
-2. On an affine open `V` of `X`, set `B = O_U(f⁻¹ V)`. A finite family generating
-   `M|_V` over `A|_V` generates `F(f⁻¹ V)` over `B`: form the map from the finite
-   free quasi-coherent module on `f⁻¹ V` and use the affine-sections image formula
-, together with
-   `lem-weil-pbc-module-restriction-open-immersion-colimits` and
-   `lem-weil-pbc-spec-tilde-free-module`.
-3. Conversely, sections generating `F|_(f⁻¹ V)` generate `M|_V`: cover any open
-   inside `V` by affine opens. On their affine inverse images the same image formula
-   supplies the coefficients, now read as sections of `A`.
-4. If `M` is finite type, choose generators near `f(y)` and shrink to an affine
-   neighbourhood. Step 2 gives a finite `B`-module of sections. Apply
-   `lem-weil-pbc-quasi-coherent-finite-type-affine` to get finite type near `y`.
-5. If `F` is finite type, that same affine criterion gives a finite `B`-module of
-   sections on every affine inverse image. Its generators generate the sheaf by
-   `lem-weil-pbc-affine-finite-type-generating-sections`. Step 3 gives generators
-   over `A` near every point of `X`. These prove the asserted equivalence. -/
+/-- Finite type is preserved in both directions by the affine module correspondence, where
+the direct image carries its sectionwise action by `A = f_* O_U` (Stacks, Tags 0897, 01SB,
+01PB). -/
 theorem affine_module_finite_type [IsAffineHom f]
     (M : SheafOfModules.{u} AR) (hM : M.IsQuasicoherent)
     (F : U.Modules) (hF : F.IsQuasicoherent) (e : (R).obj F ≅ M) :

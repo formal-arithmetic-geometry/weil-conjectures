@@ -11,7 +11,9 @@ public import Mathlib.Data.Nat.Choose.Basic
 
 /-! # Cancelling the shifted summands of a restricted cone
 
-Source: Stacks Project, Tag 08EK, proof, final paragraph; Derived Categories, Tag 05QT.
+## References
+
+* Stacks Project, Tags 08EK and 05QT
 -/
 
 @[expose] public section
@@ -63,8 +65,8 @@ private theorem exists_projector_triangle (Y : Scheme.{u})
     productTriangle_distinguished T hT, ⟨eZ ≪≫ e₀⟩⟩
 
 /-- The binomial sum of shifts of F admits an endomorphism whose lifted cone restricts
-to F plus F[1]. This is a cone computation, with no affine, support, or perfectness hypothesis.
-Source: Stacks Project, Tag 08EK, proof, final paragraph; Tag 05QT. -/
+to F plus F[1]. This is a cone computation, with no affine, support, or perfectness hypothesis
+(Stacks, Tags 08EK and 05QT). -/
 theorem exists_binomial_projector_cone_restrict (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,

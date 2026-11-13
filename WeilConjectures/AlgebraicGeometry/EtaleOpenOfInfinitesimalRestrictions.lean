@@ -26,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Étaleness on all infinitesimal restrictions yields an étale open neighborhood of
- the closed fiber. This packages the closed-immersion and ideal-sheaf identifications
- in the proof of Stacks Project, Tag 0GS2. -/
+ the closed fiber (Stacks, Tag 0GS2). -/
 theorem etale_open_of_infinitesimal_restrictions
     {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]
     {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)

@@ -27,10 +27,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- A closed affine pair has a henselian neighborhood presented by a small directed
-colimit of rings whose spectra are etale over the original scheme.
-
-Source: Stacks Project, Tags 0A51 (affine proof), 0A02 (henselization of pairs),
-and 0032 (directed presentation of a filtered category). -/
+colimit of rings whose spectra are etale over the original scheme (Stacks, Tags 0A51, 0A02, 0032).
+-/
 theorem Etale.affine_closed_henselian_ring_presentation
     {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i] :
     ∃ (I : Type u) (_ : Preorder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I)

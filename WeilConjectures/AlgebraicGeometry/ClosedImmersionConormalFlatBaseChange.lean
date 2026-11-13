@@ -13,8 +13,9 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Conormal sheaves under flat base change
-Source: Stacks Project, Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat),
-case of closed immersions.
+## References
+
+* Stacks Project, Tag 0473
 -/
 
 @[expose] public section
@@ -23,11 +24,7 @@ universe uc
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 /-- For a cartesian square of closed immersions, the canonical conormal map is an
- epimorphism; if the ambient morphism is flat, it is an isomorphism. The canonical map
- is the unique map supplied by `closedImmersion_conormal_functorial`.
-
-Source: Stacks Project, Morphisms, Lemma 0473 (lemma-conormal-functorial-flat),
-closed-immersion case; Schemes, Lemma 01JU (lemma-fibre-product-immersion), assertion (1). -/
+ epimorphism; if the ambient morphism is flat, it is an isomorphism (Stacks, Tags 0473, 01JU). -/
 theorem closedImmersion_conormal_flat_base_change
     {X Z X' Z' : Scheme.{uc}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

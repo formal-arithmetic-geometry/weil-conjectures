@@ -30,8 +30,7 @@ set_option linter.unusedVariables false in
 -- Elaborate the dependent presentation, page-realization and comparison families together.
 /-- Construct coherent first-page lifts with filtration bounds for every input support bound.
 No stationary comparison or map on the abutment is asserted.
-Source: Stacks Project, Tags 015J and 015K; explicit support refinement of the CE
-construction in steps 1--3 of lem-weil-pbc-supported-ce-filtered-totals. -/
+(Stacks, Tags 015J and 015K) -/
 theorem exists_etaleCE_supported_first_page_lifts :
     ∃ (D : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

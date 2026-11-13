@@ -90,8 +90,7 @@ private theorem adicFiniteStrictReduction_comparison
     (adicFiniteStrictReduction_successor X A J P hP hflat N e)⟩
 
 /-- Completion is a derived limit of the actual normalized finite reductions.
-Source: Stacks Project, proetale.tex, Tag 099M,
-and sites-cohomology.tex, Tags 0940 and 0947. -/
+(Stacks, Tags 099M, 0940 and 0947). -/
 theorem adicFiniteCompletion_tower
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) :

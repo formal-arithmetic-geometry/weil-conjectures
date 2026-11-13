@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafi
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # Classical intrinsic coefficient module descent
-Source: blueprint classical sheaves of modules, essential-image paragraph.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -378,9 +377,7 @@ private theorem fixedOrigin (X : Scheme.{u})
   exact ⟨G, ⟨asIso (adj.counit.app F)⟩⟩
 
 /-- A module with invertible affine continuity maps has an etale module antecedent.
-There is no constructibility or Noetherianity assumption.
-Source: blueprint det-pe-classical-sheaves-modules, essential-image paragraph;
-Bhatt--Scholze, The pro-etale topology for schemes, Lemma 5.1.2. -/
+(Bhatt--Scholze, The pro-etale topology for schemes, Lemma 5.1.2). -/
 theorem coefficientClassicalModule_origin (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : ConstantCompletion.Mod (ConstantCompletion.constant

@@ -24,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Coefficient lift preserves homology of abelian sheaves on the small étale site.
-Source: step 3 of lem-sc-etale-ulift-injective-resolution; Mathlib
-`AddCommGrpCat.uliftFunctor`, `Sheaf.isLocallySurjective_iff_epi'`, and
-`Functor.preservesHomology_of_preservesEpis_and_kernels`. -/
+/-- Coefficient lift preserves homology of abelian sheaves on the small étale site. -/
 theorem etale_ulift_preservesHomology (X : Scheme.{u}) :
     (sheafCompose X.smallEtaleTopology
       AddCommGrpCat.uliftFunctor.{u + 1, u}).PreservesHomology := by

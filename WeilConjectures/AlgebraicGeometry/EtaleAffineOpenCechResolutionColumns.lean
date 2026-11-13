@@ -80,9 +80,7 @@ private theorem cechResolution_columnIso (X : Scheme.{u})
 
 /-- The bottom vertical homology is the sections Čech complex and all positive
 vertical homology rows of the affine-open resolution are zero.
-
-Source: Stacks Project, Tag 03AZ, computation of the vertical cohomology, and
-Tag 03P2, separated-case proof. -/
+(Stacks, Tags 03AZ and 03P2) -/
 theorem etale_affineOpenCech_resolution_columns
     (X : Scheme.{u}) [X.IsSeparated]
     (i : X.Opens ⥤ X.Etale)

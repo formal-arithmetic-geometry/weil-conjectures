@@ -19,7 +19,9 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-! # Constructibility of the higher derived coefficient reductions
 
-Source: Stacks Project, Tag 09BR, lemma-compare-truncations-constructible.
+## References
+
+* Stacks Project, Tag 09BR
 -/
 
 @[expose] public noncomputable section
@@ -210,10 +212,7 @@ end AdicReductionConstructibility
 
 /-- Constructibility propagates from the bounded residue reduction to every higher
 coefficient reduction. This assertion concerns only cohomology sheaves; it supplies
-neither a Tor bound nor an etale origin.
-
-Source: Stacks Project, proetale.tex, Tag 09BR,
-lemma-compare-truncations-constructible, with its exponent n shifted by one. -/
+neither a Tor bound nor an etale origin (Stacks, Tag 09BR). -/
 theorem adicFiniteReduction_constructible_cohomology
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

@@ -26,9 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A class which dies over the local scheme dies on some Zariski neighborhood.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09AX, proof, using continuity
-(Tags 03Q6 and 09YQ) and Cohomology on Sites, Tag 03F3. -/
+(Stacks, Tags 09AX, 03Q6, 09YQ and 03F3) -/
 theorem etale_class_vanishing_spreads {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (q : ℕ) (ξ : Sheaf.H F q) (x : X)

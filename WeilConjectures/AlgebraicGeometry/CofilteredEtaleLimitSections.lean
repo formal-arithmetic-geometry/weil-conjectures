@@ -58,9 +58,7 @@ variable (H : Sheaf R.smallEtaleTopology (Type (u + 1)))
 set_option backward.isDefEq.respectTransparency false
 
 /-- The section cocone whose components pull back by the adjunction unit and then
-restrict along `limitSectionMap`. Unit naturality and compatibility of the cone legs
-prove naturality, without any continuity hypothesis.
-Source: Stacks Project, Tag 03Q9, degree-zero comparison map. -/
+restrict along `limitSectionMap` (Stacks, Tag 03Q9). -/
 noncomputable def limitSectionCocone : Cocone (B.op ⋙ H.obj) where
   pt := ((Scheme.etaleSetPullback p).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt)))
   ι.app j :=

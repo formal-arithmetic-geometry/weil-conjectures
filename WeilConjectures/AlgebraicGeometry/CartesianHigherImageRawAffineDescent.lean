@@ -32,8 +32,7 @@ noncomputable local instance cartesianHigherImageRawAffineDescentHasShift (T : S
   inferInstance
 
 /-- A raw derived class on an affine etale test object factors through a pulled-back
-stage derived image. No assertion about arbitrary homology sections or germs is made.
-Source: Stacks Project, Tag 0EYM, second proof, left vertical arrow; Tags 0EYL and 09YQ. -/
+stage derived image (Stacks, Tags 0EYM, 0EYL, 09YQ). -/
 theorem exists_cartesianHigherImage_raw_affine_factorization
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

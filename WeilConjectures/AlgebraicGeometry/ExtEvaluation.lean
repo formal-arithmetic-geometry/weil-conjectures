@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 
 /-!
 # Evaluation for finite locally free module sheaves
-
-Source: blueprint `lem-sc-ext-locally-free.md`, Proof, first sentence.
 -/
 
 @[expose] public section
@@ -24,9 +22,7 @@ open scoped MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For a finite locally free module sheaf, the canonical evaluation identifies tensoring
-with the dual and internal sheaf Hom, naturally in the coefficient module.
-
-Source: blueprint `lem-sc-ext-locally-free.md`, Proof, first sentence. -/
+with the dual and internal sheaf Hom, naturally in the coefficient module. -/
 theorem dual_tensor_hom_iso (X : Scheme.{u}) (F : X.Modules)
     [F.IsFiniteLocallyFree] :
     ∃ e : (∀ G : X.Modules, Scheme.Modules.tensorObj (dual F) G ≅ homObj F G),

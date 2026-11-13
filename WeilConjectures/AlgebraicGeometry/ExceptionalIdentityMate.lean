@@ -18,12 +18,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-/--
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-poincare-duality/sec-the-trace-map-in-top-degree/sk-cor-trace/sk-thm-regular/
-sk-thm-regular.proof.md
-Step 4(iii): identity normalization of the specified exceptional and pullback comparisons
-in the projection/counit tensor passage. -/
+/-- Identity normalization of the specified exceptional and pullback comparisons in the
+projection/counit tensor passage. -/
 theorem exceptionalIdentityMate (T : Scheme.{u})
     (K L : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     lowerShriekRightAdjointTensorMap (rightDerivedUpperShriekAdjunction Λ (𝟙 T)) K L ≫

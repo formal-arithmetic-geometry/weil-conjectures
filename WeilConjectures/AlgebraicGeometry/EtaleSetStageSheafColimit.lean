@@ -25,12 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The canonical stage push-pull sheaves have the limit push-pull sheaf as their
-colimit on the original affine étale site. This is a sheaf colimit assertion:
-it only requires local representatives and local eventual equality, and does not
-assert that evaluation at an affine object preserves the colimit.
-
-Source: Stacks Project, Étale Cohomology Tag 09YQ, degree-zero proof via 0EYL and
-04HR; Sites Tag 0A35, equation-compute-pullback-to-limit, and Tag 09YN. -/
+colimit on the original affine étale site
+(Stacks, Tags 09YQ, 0EYL, 04HR, 0A35, 09YN). -/
 theorem etaleSetStageSheaf_isColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -18,13 +18,11 @@ universe uA uB vA vB wA wB
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
-/-- For an exact additive functor U:A→B between abelian categories with chosen unbounded derived
-categories [def-weil-abstract-derived-category], objects F in B and H in A and a morphism η:F→U(H),
-define DerivedUnit(U,F,H,η) to say that composition with single(η) followed by the inverse
-exact-functor single comparison induces a bijection Hom(single H,K)→Hom(single F,DU(K)) for every
-unbounded complex K.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+/-- For an exact additive functor U:A→B between abelian categories, objects F in B and H in A
+and a morphism η:F→U(H), `DerivedUnit(U,F,H,η)` says that composition with single(η) followed
+by the inverse exact-functor single comparison induces a bijection
+Hom(single H,K)→Hom(single F,DU(K)) for every unbounded complex K
+(Stacks, Tags 0152, 06YY, 0GLZ). -/
 def DerivedUnit
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B]

@@ -54,9 +54,7 @@ private def fixedScalarsMonoidal {C : Type w} [SmallCategory C]
 
 /-- Exact fixed-scalar inverse image commutes with tensor by a constant module in the
 ordinary derived categories, after the target constant-scalar equivalence.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
-lemma-pullback-tensor-product; Modules on Sites, Tag 03CY. -/
+(Stacks, Tag 07A4; Modules on Sites, Tag 03CY) -/
 theorem coefficient_restricted_tensor_comparison
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A]

@@ -21,8 +21,7 @@ universe u wA wY
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The affine derived adjunction has invertible unit and counit.
-Source: Stacks Project, Tag 06Z0, proof after the elucidation. -/
+/-- The affine derived adjunction has invertible unit and counit (Stacks, Tag 06Z0). -/
 theorem affineQCohDerivedAdjunction_unit_counit (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

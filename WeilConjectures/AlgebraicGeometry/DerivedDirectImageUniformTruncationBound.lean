@@ -32,8 +32,8 @@ namespace AlgebraicGeometry
 unbounded derived direct image has a uniform upper cohomological bound on objects of
 `D_QCoh(𝒪_X)` with no positive cohomology. For every such derived object without the
 upper-bound restriction, the canonical map to its sufficiently low lower truncation
-induces an isomorphism on any fixed cohomology sheaf after derived direct image.
-Source: Stacks Project, Tag 08D5, part (2) and proof. -/
+induces an isomorphism on any fixed cohomology sheaf after derived direct image
+(Stacks, Tag 08D5). -/
 theorem exists_schemeDerivedDirectImage_uniform_truncation_bound
     {X S : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

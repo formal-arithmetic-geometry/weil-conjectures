@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelConditionGluing
 
 /-! # Descent of finite type for a kernel on an open cover
 
-Source: Stacks Project, Modules, Definitions 01BV, 01B5 and Section 01AF.
+Stacks Project, Tags 01BV, 01B5 and 01AF.
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A single kernel on an open `W` is finite type if the finite-type kernel condition
 holds for the restrictions of the target module to the members of an open cover.
 No finite-type hypothesis on the target module is required.
-Source: Stacks Project, Modules, Definitions 01BV (definition-coherent), 01B5
-(definition-finite-type), and Section 01AF (section-kernels). -/
+(Stacks, Tags 01BV, 01B5 and 01AF). -/
 theorem coherent_kernel_condition_descent (X : Scheme.{u}) (F : X.Modules)
     (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)
     (hK : ∀ (i : I) (V : (U i).toScheme.Opens) (n : ℕ)

@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.CartesianScalarDistributivityTransport
 
 /-! # Distributivity of the transported scalar action
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -52,7 +52,8 @@ private theorem pairIso_inv_snd
   exact (limit.isLimit (pair X Y)).conePointUniqueUpToIso_inv_comp
     (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y) ⟨WalkingPair.right⟩
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+/-- The transported scalar action on the inverse image distributes over addition of scalars
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageScalarDistributivity_right (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

@@ -190,8 +190,7 @@ private theorem pullback_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℤ)
   rw [← Category.assoc, ← Functor.map_comp, ← hu]
 
 /-- Canonical pullback along one triangle commutes with replacement by a complex.
-Source: Stacks Project, Tag 0GIT, proof (the pullbacks of a representative represent
-its derived pullbacks); Tag 0EZM, proof (canonical transition maps). -/
+(Stacks, Tags 0GIT and 0EZM). -/
 theorem presentation_pullback_transport {X Y T : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g)
     (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))

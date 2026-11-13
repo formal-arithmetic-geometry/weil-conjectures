@@ -24,7 +24,7 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Testing the factorization property on the two open immersions proves equality. -/
+/-- Two morphisms agreeing on the two open immersions are equal. -/
 private theorem unique_open_etale_subsheaf_final_factorization (S : Scheme.{u})
     (H : Sheaf S.smallEtaleTopology (Type (max u v)))
     [Mono (terminal.from H)] {W W' : S.Opens}
@@ -45,8 +45,7 @@ private theorem unique_open_etale_subsheaf_final_factorization (S : Scheme.{u})
 
 /-- A subsheaf of the final small étale sheaf is represented by a unique open subscheme.
 `H` is a subsheaf of the final sheaf `⊤_ _`: the unique morphism `terminal.from H` is a
-monomorphism. `Nonempty (Unique A)` means that the set `A` is a singleton.
-Source: Stacks Project, Étale Cohomology, Tag 04HV, statement and proof. -/
+monomorphism (Stacks, Tag 04HV). -/
 theorem existsUnique_open_of_etale_subsheaf_final (S : Scheme.{u})
     (H : Sheaf S.smallEtaleTopology (Type (max u v)))
     [Mono (terminal.from H)] :

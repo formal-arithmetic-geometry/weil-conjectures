@@ -24,9 +24,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Direct image identifies the constructed sheaf complex with the affine section model.
-Source: Stacks Project, Tag 02KG (affine module comparison), Tag 02KH, separated-case
-proof before taking cohomology, and Tag 01FM (signed faces). -/
+/-- Direct image identifies the constructed sheaf complex with the affine section model
+(Stacks, Tags 02KG, 02KH and 01FM). -/
 theorem alternatingCechSheafComplex_affineComparison
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i))

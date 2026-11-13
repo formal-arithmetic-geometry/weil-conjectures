@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage
 /-!
 # Global sections under the abelian Galois stalk equivalence
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point.
+Source: Stacks Project, Etale Cohomology, Tag 04JM.
 -/
 
 @[expose] public section
@@ -31,11 +31,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Global sections identify naturally with the invariants of the canonical stalk
-representation. Only degree zero is asserted; no derived or continuous cohomology
-comparison is assumed.
-
-Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point,
-and Tag 04JQ, lemma-equivalence-abelian-sheaves-point. -/
+representation (Stacks, Tags 04JM and 04JQ). -/
 theorem etaleGlobalSections_galoisInvariants
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

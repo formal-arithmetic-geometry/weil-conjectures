@@ -27,10 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A bounded-above restricted complex has a bounded-above K-flat model whose ordinary
 constant tensor computes the restricted derived tensor. This comparison has no finite
-module, Noetherian ring, or local constancy hypotheses.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
-lemma-pullback-tensor-product, and Tag 06YU, definition-derived-tor. -/
+module, Noetherian ring, or local constancy hypotheses. (Stacks, Tags 07A4, 06YU) -/
 theorem coefficient_restricted_tensor_flat_model
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A]

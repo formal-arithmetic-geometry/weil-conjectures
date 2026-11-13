@@ -15,8 +15,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Local constancy of direct image from disjoint components
 
-Source: smooth purity blueprint, final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
+Direct image is locally constant when the source is a finite disjoint union of open components
+with locally constant direct image.
 -/
 
 @[expose] public section
@@ -219,9 +219,7 @@ private theorem locallyConstant_product {T : Scheme.{u}}
       (T.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale j)) F).symm
 
-/-- Assemble locally constant component direct images along a finite disjoint open cover.
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`. -/
+/-- Assemble locally constant component direct images along a finite disjoint open cover. -/
 theorem isLocallyConstant_disjoint_components_directImage
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ) (W : Fin n → X.Opens)

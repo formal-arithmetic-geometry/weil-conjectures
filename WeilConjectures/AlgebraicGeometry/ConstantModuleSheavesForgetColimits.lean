@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Forgetting constant module coefficients preserves colimits
 
-Source: Stacks Project, Tags 03DB and 03CO.
+## References
+
+* Stacks Project, Tags 03DB, 03CO
 -/
 
 @[expose] public section
@@ -24,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Forgetting constant module coefficients preserves colimits of the size of the
-coefficient category, on any small etale site.
-Source: Stacks Project, Tag 03DB, proof of lemma-limits-colimits; Tag 03CO,
-lemma-limits-colimits-abelian-sheaves. -/
+coefficient category, on any small etale site (Stacks, Tags 03DB, 03CO). -/
 theorem constantModuleSheaves_forget_preservesColimits (X : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] :
     PreservesColimitsOfSize.{u + 1, u + 1}

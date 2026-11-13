@@ -59,10 +59,7 @@ private lemma matrix_injective {X : Scheme.{u}} {I J : Type u}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The zero pullbacks of a map of finite free sheaves on an affine scheme are
-represented by a finitely presented closed subscheme. This does not assert
-anything about the kernel or its rank.
-
-Source: Stacks Project, Tag 0BDL, proof, the subscheme cut out by the matrix entries. -/
+represented by a finitely presented closed subscheme (Stacks, Tag 0BDL). -/
 theorem exists_affineFreeMapZeroLocus
     (X : Scheme.{u}) [IsAffine X]
     (M N : SheafOfModules.{u} X.ringCatSheaf) (d : M ⟶ N) (s n : ℕ)

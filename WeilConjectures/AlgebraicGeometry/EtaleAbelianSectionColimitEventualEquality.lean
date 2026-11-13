@@ -31,7 +31,7 @@ private theorem intModules_comp_forget :
 
 /-- Equality in a filtered colimit of abelian sheaves on a fixed scheme is detected
 at a later index on any quasi-compact etale object.
-Source: Stacks Project, Sites Tag 0738, part (2). -/
+(Stacks, Tag 0738) -/
 theorem etale_abelian_section_colimit_eventual_equality
     (X : Scheme.{u}) (U : X.Etale) [CompactSpace U.left]
     {I : Type u} [SmallCategory I] [IsFiltered I]

@@ -37,10 +37,7 @@ private theorem eqToHom_app_tmul_tensorPow {X : Scheme.{u}} (G M : X.Modules)
 
 /-- A finite affine cover by section loci of one invertible module gives finite global
  generators for all sufficiently large powers of that module, after tensoring with a
- finite type quasi-coherent module. No ampleness assumption or residue argument is used.
-
-Source: EGA II, proof of Proposition 4.5.5, paragraphs extending the local generators;
-Stacks Project, Properties, Proposition 01Q3, (1) ⇒ (5), using Lemma 01PW. -/
+ finite type quasi-coherent module (EGA II, Proposition 4.5.5; Stacks, Tag 01Q3). -/
 theorem exists_finite_generatingSections_tensorPow_of_affine_section_cover
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (M G : X.Modules) [M.IsInvertible] [G.IsQuasicoherent] [G.IsFiniteType]

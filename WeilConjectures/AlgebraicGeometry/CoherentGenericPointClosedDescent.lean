@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Descent of the generic maximal-ideal-annihilated part
 
-Source: Stacks Project, Tag 01YE, first two paragraphs of the proof.
+Stacks Project, Tag 01YE.
 -/
 
 @[expose] public section
@@ -33,8 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The part of a coherent module annihilated by the defining ideal descends to the
 integral closed subscheme, and its inclusion has an invertible generic stalk.
-
-Source: Stacks Project, Tag 01YE, first two paragraphs of the proof. -/
+(Stacks, Tag 01YE). -/
 theorem coherent_generic_point_closed_descent {X Z : Scheme.{w}} [IsNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

@@ -108,11 +108,8 @@ private theorem reduction_conjugation
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Hom between reductions of two constant perfect models is the zeroth cohomology
 of the quotient of their algebraic Hom complex, followed by constant-module sections.
-The bijections intertwine the actual successor quotient maps. No completeness,
-Noetherian, affine, or marking hypothesis occurs.
-
-Source: Stacks Project, proetale.tex, Tag 09C6, the displayed description of H_n;
-Tag 09C5, exact sections; More on Algebra, Tag 0A8H, the signed Hom differential. -/
+The bijections intertwine the actual successor quotient maps
+(Stacks, Tags 09C6, 09C5 and 0A8H). -/
 theorem adicPerfectHomCohomologyComparison
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

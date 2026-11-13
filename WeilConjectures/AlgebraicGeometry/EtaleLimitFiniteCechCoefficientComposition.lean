@@ -20,8 +20,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 set_option linter.unusedVariables false in
 /-- The composition law for prescribed descended Cech coefficient maps.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
-Cech comparison. This is the composition part of the agent's explicit etale realization. -/
+(Stacks, Tag 09YP) -/
 theorem etale_limit_finite_cech_coefficient_composition
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

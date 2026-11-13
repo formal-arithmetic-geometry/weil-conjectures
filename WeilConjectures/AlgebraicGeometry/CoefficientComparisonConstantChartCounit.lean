@@ -361,8 +361,7 @@ namespace AlgebraicGeometry.ProEtale
 counit is invertible. There is no finite-presentation assumption, no covering
 family, and no assumption on F away from this single chart.
 
-Source: Stacks Project, Tags 099R, 099T and 099Y, comparison with etale localization
-and the constant model case of lemma-compare-locally-constant. -/
+(Stacks, Tags 099R, 099T and 099Y). -/
 theorem coefficientComparison_counit_isIso_of_constant_over (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

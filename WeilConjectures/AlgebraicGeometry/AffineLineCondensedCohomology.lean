@@ -20,9 +20,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalS
 
 /-! # Ordinary cohomology of the affine line with condensed coefficients
 
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/
-sk-lem-wft-character-integral/lem-fd-affine-line-constant-cohomology.md and its proof.
-
 The coefficients are the recorded finite-subextension-valued condensed ring pulled
 back from the point. Cohomology means the right derived functors of evaluation at
 `X`, the terminal object of the small pro-etale site, on abelian sheaves.
@@ -242,10 +239,7 @@ private theorem condensedQbar_line_isZero
   exact @Equiv.subsingleton _ _ e.addCommGroupIsoToAddEquiv.toEquiv hz
 
 /-- Ordinary constant cohomology of the geometric affine line, including normalization
-by constant sections in degree zero.
-
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/
-sk-lem-wft-character-integral/lem-fd-affine-line-constant-cohomology.md and its proof. -/
+by constant sections in degree zero. -/
 theorem affineLine_condensedQbar_cohomology
     (k : Type u) [Field k] (hk : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : k))

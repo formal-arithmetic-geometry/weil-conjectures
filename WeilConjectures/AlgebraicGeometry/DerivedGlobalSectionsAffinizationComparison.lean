@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsDirectImageKInjectiveAcyc
 
 /-! # Derived global sections after affinization
 
-Source: Stacks Project, Cohomology, Lemma 20.28.2, Tag 0D5T,
-and the construction of derived global sections in Section 20.28, Tag 079V.
+## References
+
+* Stacks Project, Cohomology, Tags 0D5T, 079V
 -/
 
 @[expose] public section
@@ -42,9 +43,7 @@ private noncomputable def underived_comparison (X : Scheme.{u}) :
     rfl
 
 /-- Derived global sections factors through derived pushforward to the spectrum of
-its own coefficient ring. The ring isomorphism `ΓSpecIso` supplies the scalar transport.
-Source: Stacks Project, Cohomology, Lemma 20.28.2
-(lemma-derived-pushforward-composition, Tag 0D5T), and Section 20.28 (Tag 079V). -/
+its own coefficient ring (Stacks, Tags 0D5T, 079V). -/
 theorem derivedGlobalSections_affinization_comparison (X : Scheme.{u})
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY}

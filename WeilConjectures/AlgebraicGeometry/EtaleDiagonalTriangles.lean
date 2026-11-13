@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSupportedDiagonalUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-
 # The triangle identities from the two diagonal integrals -/
 @[expose] public noncomputable section
 set_option autoImplicit false

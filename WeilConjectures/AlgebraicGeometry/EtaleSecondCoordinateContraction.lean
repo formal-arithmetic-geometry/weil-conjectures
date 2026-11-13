@@ -11,9 +11,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # The second coordinate contraction for a symmetric coefficient
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -74,9 +71,8 @@ private theorem combine
   rw [hi, reassoc_of% hn]
   simp only [Iso.inv_hom_id_assoc]
 
-/-- The second-coordinate contraction for any coefficient with identity self symmetry.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle before
-using the diagonal integral; Stacks Tags 07A7 and 0B56. -/
+/-- The second-coordinate contraction for any coefficient with identity self symmetry
+(Stacks, Tags 07A7, 0B56). -/
 theorem secondCoordinateContraction [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
     (hL : (swap A Y L L).hom = 𝟙 _)

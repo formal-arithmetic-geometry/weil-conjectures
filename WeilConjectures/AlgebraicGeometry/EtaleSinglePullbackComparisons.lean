@@ -14,7 +14,6 @@ import all Mathlib.Logic.Small.Defs
 The constant and shifted coefficient comparisons are constructed for a general
 coefficient category before specializing them to modules. This caches their
 structural instances and avoids comparing separate expanded derived constructions.
-Source: blueprint thm-amb-p1-adjunction.proof.md.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

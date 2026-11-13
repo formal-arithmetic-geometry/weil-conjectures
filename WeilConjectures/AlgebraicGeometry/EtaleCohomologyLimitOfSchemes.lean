@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 
 /-- Cohomology continuity for a system of abelian sheaves on a directed inverse system
-of qcqs schemes with affine transition maps. Source: Stacks Project, Tag 09YQ. -/
+of qcqs schemes with affine transition maps. (Stacks, Tag 09YQ) -/
 theorem nonempty_isColimit_etale_cohomology_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -160,15 +160,7 @@ private theorem continuity_constant_pullback
 
 /-- The affine ring case: for a directed system of rings with colimit `C`, the compatible
 pullbacks of one abelian sheaf to `Spec C_i` satisfy continuity at `Spec C`.
-Source: Stacks Project, Tags 01YW and 09YQ.
-
-Proof (step 9 of the node): lem-weil-pbc-spec-colimit-limit gives the limit and affine
-transitions. Set F_i = v_i inverse image of G; inverse-image composition gives their
-transition isomorphisms and the cocycle law. On the limit all these sheaves identify with
-v inverse image of G, with identity transition maps. The directed index is connected,
-so lem-weil-pbc-colimit-constant-connected-diagram identifies their colimit with that
-sheaf. Apply the preceding eight-step argument. Its canonical maps become the pullbacks
-followed by the composition isomorphisms appearing in `hH` and `hB` below. -/
+(Stacks, Tags 01YW and 09YQ) -/
 theorem nonempty_isColimit_etale_cohomology_spec_ring_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

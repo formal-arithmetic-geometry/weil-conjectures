@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleColimitCocone
 /-!
 # Constructible filtered presentations of etale module sheaves
 
-Source: Stacks Project, Tag 03SA, part (3).
+## References
+
+* Stacks Project, Tag 03SA (3)
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ namespace AlgebraicGeometry.Scheme
 with coefficients in a finite commutative ring, admits a filtered colimit presentation
 by constructible module sheaves. The maps and the universal property are in the category
 of module-valued sheaves, the constant-ring module-sheaf encoding used by
-`IsConstructibleEtaleModuleSheaf`.
-
-Source: Stacks Project, Tag 03SA(3). -/
+`IsConstructibleEtaleModuleSheaf`. (Stacks, Tag 03SA (3)) -/
 theorem exists_filtered_colimit_constructible
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

@@ -14,7 +14,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Reflection of one coefficient-model tensor test
-Source: Stacks Project, Tag 07A4, and blueprint finite-Tor comparison.
+
+## References
+
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public section
@@ -135,8 +138,7 @@ private theorem tensorTestReflectsZero {C E : Type w} [SmallCategory C] [SmallCa
     ((HomologicalComplex.homologyFunctor (ConstantCompletion.Mod R) (.up ℤ) q).mapIso eR)
 
 /-- Vanishing of a pulled-back tensor test detects vanishing of the etale tensor test.
-Source: Stacks Project, Tag 07A4, lemma-pullback-tensor-product; blueprint finite-Tor
-comparison, paragraphs Tor amplitude is detected and The equivalence. -/
+(Stacks, Tag 07A4) -/
 theorem constructibleComparisonTensorTest_reflects_zero (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (P : ConstantCompletion.Cx (ConstantCompletion.constant

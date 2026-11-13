@@ -23,8 +23,7 @@ set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
 /-- The three sectionwise formulas for the action and change-of-rings maps.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB.
--/
+(Stacks, Tag 01SB). -/
 def ChangeOfRingsTensorActionFormulas (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right))
@@ -57,7 +56,7 @@ def ChangeOfRingsTensorActionFormulas (Y : Scheme.{u})
         (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p))
 
 /-- Existence of maps satisfying the three elementary section formulas.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089. -/
+(Stacks, Tags 01SB and 0089). -/
 theorem exists_changeOfRings_tensor_action_maps_core (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

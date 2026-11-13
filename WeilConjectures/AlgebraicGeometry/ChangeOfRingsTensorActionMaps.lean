@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorActionMapsBalancing
 
 /-! # Action and balancing maps for change of rings
 
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
+## References
+
+* Stacks Project, Tags 01SB and 0089
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
 /-- The two algebra actions and the canonical balancing map exist on sheaf tensors.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
-Sheaves, Lemma 0089 (sheafification universal property). -/
+(Stacks, Tags 01SB and 0089). -/
 theorem exists_changeOfRings_tensor_action_maps (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

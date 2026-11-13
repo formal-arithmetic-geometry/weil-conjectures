@@ -31,16 +31,14 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : AlgebraicGeometry.Scheme.{t})
 
-/-- The same constant coefficient sheaf, in the universe containing both inputs.
- -/
+/-- The same constant coefficient sheaf, in the universe containing both inputs. -/
 abbrev integralConstantRingOfUniverses :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology W) RingCat.{max u (t + 1)} :=
   (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
     ((constantSheaf _ CommRingCat.{max u (t + 1)}).obj
       (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))
 
-/-- Constant sheafification of the actual quotient homomorphism.
- -/
+/-- Constant sheafification of the actual quotient homomorphism. -/
 def integralConstantQuotientOfUniverses (n : ℕ) :
     integralConstantRingOfUniverses l E W ⟶ integralCoefficientSheaf l E W n :=
   (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
@@ -62,15 +60,13 @@ theorem integralConstantQuotientOfUniverses_compatibility (n : ℕ) :
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 2
 
-/-- The cone of constant scalars, with its actual finite quotient legs.
- -/
+/-- The cone of constant scalars, with its actual finite quotient legs. -/
 def integralConstantConeOfUniverses : Cone (integralCoefficientSheafSystem l E W) :=
   { pt := integralConstantRingOfUniverses l E W
     π := NatTrans.ofOpSequence (integralConstantQuotientOfUniverses l E W)
       (integralConstantQuotientOfUniverses_compatibility l E W) }
 
-/-- The canonical constant-to-completed map is the limit lift of the quotient cone.
- -/
+/-- The canonical constant-to-completed map is the limit lift of the quotient cone. -/
 def integralConstantToCompletionOfUniverses :
     integralConstantRingOfUniverses l E W ⟶ completedIntegralCoefficientSheafUnrestricted l E W :=
   limit.lift _ (integralConstantConeOfUniverses l E W)

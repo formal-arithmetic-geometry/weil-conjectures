@@ -60,15 +60,7 @@ private theorem comparison_transport {X : Scheme.{u}} [EnoughInjectives X.Module
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical Cech-to-cohomology comparison exists, is independent of the resolution,
-and is natural in the coefficient module. Alpha is a quasi-isomorphism for every resolution.
-The comparison is characterized by `IsModuleCechComparison`, whose equation is required
-for every injective resolution; existence is asserted for each coefficient module and
-naturality is asserted for every pair of such comparisons.
-The shared bicomplex places resolution degree first; multiplying the (p,q) summand by
-`(-1)^(p*q)` identifies it with the source's exchanged convention and fixes both axes.
-Source: Stacks Project, Cohomology of Sheaves, Lemma Tag 01EQ; the comparison is obtained
-from an injective resolution, the first-quadrant total Cech double complex, and the
-quasi-isomorphism from global sections. -/
+and is natural in the coefficient module (Stacks, Tag 01EQ). -/
 theorem cechComparisonMapNaturality (X : Scheme.{u}) {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) :
     (∀ (F : X.Modules) (I : InjectiveResolution F), QuasiIso (moduleCechAlpha U I)) ∧

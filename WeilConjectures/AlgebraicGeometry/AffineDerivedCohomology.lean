@@ -32,8 +32,7 @@ namespace AlgebraicGeometry
 
 /-- For an affine morphism, the cohomology sheaves of the unbounded derived direct image
 of an object with quasi-coherent cohomology are the ordinary direct images of its
-cohomology sheaves, and these direct images are quasi-coherent.
-Source: Stacks Project, Tag 0AVW, Lemma 36.5.4, proof. -/
+cohomology sheaves, and these direct images are quasi-coherent (Stacks, Tag 0AVW). -/
 theorem schemeHigherDirectImage_of_affine
     {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

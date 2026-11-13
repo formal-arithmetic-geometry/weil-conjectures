@@ -77,11 +77,7 @@ private theorem isZero_of_empty_support {X : Scheme.{u}} (F : X.Modules)
 
 /-- A coherent module on a Noetherian scheme has a finite filtration by coherent submodules
 whose successive quotients are pushforwards of nonzero coherent ideals on integral closed
-subschemes. A sheaf of ideals of `𝒪_Z` is a `Z.IdealSheafData`, viewed as an `𝒪_Z`-module by
-`IdealSheafData.toModules`; it is nonzero (`≠ ⊥`) and its module is coherent.
-Quotients are cokernels of the canonical subobject inclusions.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 01YF. -/
+subschemes (Stacks, Tag 01YF). -/
 theorem exists_coherent_filtration_integral_subschemes
     (X : Scheme.{u}) [IsNoetherian X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) :

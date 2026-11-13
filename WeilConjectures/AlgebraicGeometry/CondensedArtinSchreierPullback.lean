@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreier
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-! # Pullback of the condensed Artin--Schreier sheaf of a function
-
-Source: latest blueprint, lem-fd-base-change.proof.md, integrand paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -44,10 +42,7 @@ private theorem nonempty_derivedPullback_single_comp
 
 -- Keep the character image abstract during the derived comparisons.
 /-- The degree-zero Artin--Schreier complex pulls back to the complex of the
-pulled-back function, including on the empty scheme.
-
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/
-lem-fd-base-change.proof.md, integrand paragraph. -/
+pulled-back function, including on the empty scheme. -/
 theorem nonempty_iso_condensedArtinSchreierSheafOf_derivedPullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

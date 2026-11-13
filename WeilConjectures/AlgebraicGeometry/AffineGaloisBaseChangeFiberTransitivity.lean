@@ -26,12 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Two points of a Galois base change with the same projection differ by a Galois
- automorphism. No closed subset, finiteness of the extension, or finite-type assumption
- on the scheme is required.
-
-Source: Mathlib, `RingTheory/Invariant/Profinite.lean`,
-`Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite`; Stacks, Tag 0BRI for the
-finite-group case, and Tag 038A for the contravariant scheme action. -/
+automorphism (Stacks, Tags 0BRI, 038A). -/
 theorem exists_galois_map_eq_of_affine_projection_eq
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     (X : Scheme.{u}) [IsAffine X] (f : X ⟶ Spec (.of k))

@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # ClosedFibreInteriorComponent
 
-Source: Stacks Project, Tag 054X, second proof paragraph.
+## References
+
+* Stacks Project, Tag 054X
 -/
 
 @[expose] public section
@@ -80,7 +82,7 @@ private theorem component_of_embedding {A B : Type*}
 set_option backward.isDefEq.respectTransparency false in
 /-- At an ambient fibre component point in the closed interior, the closed fibre
 has the same local dimension and the point is generic in one of its components.
-Source: Stacks Project, Tag 054X, second proof paragraph. -/
+(Stacks, Tag 054X). -/
 theorem common_fibre_component_dimension_of_mem_interior
     {Z X T : Scheme.{u}} (f : X ⟶ T) (i : Z ⟶ X) [IsClosedImmersion i]
     (z : Z)

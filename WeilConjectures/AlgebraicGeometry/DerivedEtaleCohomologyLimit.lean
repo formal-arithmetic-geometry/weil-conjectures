@@ -27,13 +27,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The projection pullbacks exhibit the derived étale cohomology of the limit as the
-filtered colimit of the stage cohomology groups, with arbitrary abelian coefficients.
-Source: Stacks Project, Étale Cohomology, Tag 0GIT.
-
-The diagram and cocone are presented up to object isomorphisms `e` and `eY`.
-Their maps are specified explicitly: apply derived global sections to the derived
-adjunction unit, use the Leray isomorphism, then identify the iterated inverse image
-with the inverse image along the composite. Thus these are the canonical pullback maps. -/
+filtered colimit of the stage cohomology groups, with arbitrary abelian coefficients
+(Stacks, Tag 0GIT). The diagram and cocone are presented up to object isomorphisms
+`e` and `eY`, with the canonical pullback maps. -/
 theorem derivedEtaleCohomology_limit
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (T : Scheme.{u}) (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

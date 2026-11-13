@@ -25,10 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The extensions by zero of the constant rank-one module sheaves on affine etale
-objects form a separating family. This needs neither finite coefficients nor a qcqs base.
-
-Source: Stacks Project, Modules on Sites, Tag 03EW, proof of (3), and Topologies,
-Tag 04HR (affine etale objects are cover-dense). -/
+objects form a separating family (Stacks, Tags 03EW, 04HR). -/
 theorem affine_etale_rankOne_isSeparating
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ObjectProperty.IsSeparating (ObjectProperty.ofObj

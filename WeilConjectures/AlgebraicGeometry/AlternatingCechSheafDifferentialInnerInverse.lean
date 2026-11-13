@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechPresheafPositiveInsertio
 
 /-! # Inner inverses of local alternating face differentials
 
-Source: Stacks Project, Tag 02FU (cohomology-lemma-covering-resolution),
-with increasing tuples as in Tag 01FM.
+Source: Stacks Project, Tags 02FU and 01FM.
 -/
 
 @[expose] public section
@@ -68,9 +67,8 @@ private theorem alternatingCechSheaf_restrict_natural_insertion
   simpa only [Functor.map_add, Functor.map_comp] using (congrArg T.map hst).symm
 
 
-/-- Each local face differential has an inner inverse, independently of the others.
-Source: Stacks Project, Tag 02FU (cohomology-lemma-covering-resolution),
-adapted to the increasing-tuple convention of Tag 01FM. -/
+/-- Each local face differential has an inner inverse, independently of the others
+(Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheaf_restrict_differential_inner_inverse
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)
     (k : ℤ) :

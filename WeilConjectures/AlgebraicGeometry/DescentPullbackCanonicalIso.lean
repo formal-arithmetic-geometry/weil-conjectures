@@ -296,14 +296,7 @@ private theorem pullback_exists {S X T : Scheme.{v}} (a : X ⟶ S) (b : T ⟶ S)
 -- Keep the existing signature, including its named proof argument to `pull`.
 set_option linter.unusedVariables false in
 /-- Canonical comparisons of pullback of descent data over a fixed scheme.
-Source: Stacks Project, Descent, Tags 023Y(1)--(2) and 02VS(3).
-
-The functors are specified by their fibre-product projections `q`, the universal property
-`IsPullback`, the pulled-back datum `IsBaseChange`, and the equation for their maps.
-The two-map comparison is specified by transporting the universal point of the first
-pullback along the pair of maps to `X`. The composition comparison preserves the projection
-back to the original scheme; together with being over `U`, this specifies the canonical
-associativity isomorphism uniquely. -/
+(Stacks, Tags 023Y and 02VS) -/
 theorem descent_pullback_canonical_iso (S : Scheme.{v}) :
     ∃ (pull : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S)
         (r : T ⟶ X) (hr : r ≫ a = b), Over.DescentDataCategory a ⥤ Over.DescentDataCategory b)

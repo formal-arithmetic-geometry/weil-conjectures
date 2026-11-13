@@ -21,8 +21,8 @@ universe u wR w
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Affine sheafification factors through a full functor from the module derived category.
-Source: Stacks Project, Tag 06Z0, Lemma perfect-lemma-affine-compare. -/
+/-- Affine sheafification factors through a full functor from the module derived category (Stacks,
+Tag 06Z0). -/
 theorem affine_localized_derived_sheafification (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U)
     [HasDerivedCategory.{wR} (ModuleCat.{u} (X.presheaf.obj (.op U)))]

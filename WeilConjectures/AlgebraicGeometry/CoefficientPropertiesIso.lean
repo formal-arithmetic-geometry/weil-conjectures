@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStra
 /-!
 # Isomorphism invariance of native coefficient properties
 
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5,
-transport of constructible filtration terms and lissity.
+Transport of constructible filtration terms and lissity along module isomorphisms.
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +42,7 @@ private theorem finiteConstantStratified_of_iso {X : Scheme.{u}}
     ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
 
 /-- Constructibility with finite constant scalar models is invariant under module
-isomorphisms, on qcqs schemes and on the affine-open definition for other schemes.
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5. -/
+isomorphisms, on qcqs schemes and on the affine-open definition for other schemes. -/
 theorem constantModelConstructible_iso_iff {X : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (e : M ≅ N) :
@@ -60,8 +58,7 @@ theorem constantModelConstructible_iso_iff {X : Scheme.{u}}
     exact finiteConstantStratified_of_iso Λ
       ((CondensedRing.upperStar Λ U.ι).mapIso e) (hB U hU)
 
-/-- Lissity is invariant under an isomorphism of coefficient modules.
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5. -/
+/-- Lissity is invariant under an isomorphism of coefficient modules. -/
 theorem lisseCoefficientModule_iso_iff {X : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (e : M ≅ N) : IsLisseCoefficientModule Λ M ↔ IsLisseCoefficientModule Λ N := by

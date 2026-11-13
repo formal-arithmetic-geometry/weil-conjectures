@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-! # Clopen-factor normalization on the etale site
 
-Source: the ordered composition and comparison paragraphs of
-sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md.
+The canonical etale proper comparison for a closed immersion is the clopen direct-image model.
 -/
 
 @[expose] public noncomputable section
@@ -43,9 +42,7 @@ def properEtaleModelComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       (lowerStarComp B c.i c.g f c.comm)
 
 /-- The canonical etale proper comparison is the clopen direct-image model.
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, composition and comparison;
-parent proof Step 3. -/
+-/
 theorem closedProperEtaleDerivedFactor (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] [HasCompactification f] :
     rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f =

@@ -162,16 +162,7 @@ private theorem neighborhood_comparison_of_presentation {X Z Z' T : Scheme.{u}}
 
 /-- Cohomology on a closed subscheme of an affine scheme is the filtered colimit of
 cohomology on its affine étale neighbourhoods, for a torsion sheaf of modules, with all maps
-the canonical pullback maps. There is no injectivity hypothesis and no restriction on the
-degree.
-
-Precisely: there is a directed system of étale maps `v a : Y a ⟶ X` with transition maps
-`w f`, together with factorizations `i = s a ≫ v a` compatible with the transitions, such that
-the diagram `H` of the groups `Hᵠ(Y a, (v a)^* G)` (with `G` the underlying abelian sheaf of
-`J`), whose transition maps are pullback along `w f`, has a colimit cocone whose legs, followed
-by an isomorphism `e` onto `Hᵠ(Z, i^* G)`, are pullback along `s a`.
-
-Source: Stacks Project, Tag 0A51, first paragraph of the proof; Tags 09YQ and 09ZI. -/
+the canonical pullback maps (Stacks, Tags 0A51, 09YQ, 09ZI). -/
 theorem Etale.affine_closed_etale_neighborhood_comparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]

@@ -106,7 +106,7 @@ private lemma extComparison_bijective
         (Abelian.Ext.eq_zero_of_injective (I := R.obj I.J) _) rfl)
 
 /-- The canonical identity-generator map is bijective on object cohomology.
-Source: Stacks Project, Cohomology on Sites, Tag 03F3, proof of cohomology-of-open. -/
+(Stacks, Tag 03F3) -/
 theorem etaleOpenObjectCohomologyMap_bijective {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : X.Opens) :
     Function.Bijective (etaleOpenObjectCohomologyMap F q U) := by

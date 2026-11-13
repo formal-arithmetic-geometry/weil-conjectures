@@ -147,9 +147,7 @@ private theorem exists_rawSectionsComparison_local_zero_sieve
     simpa only [Category.assoc, Limits.comp_zero] using hg
 
 /-- A transitioned cartesian higher-image section vanishes when it vanishes on a finite
-etale cover. This is the sheaf-separatedness part of the affine-section argument.
-Source: Stacks Project, Tag 0EYM, second proof, injectivity on affine etale objects.
--/
+etale cover (Stacks, Tag 0EYM). -/
 theorem cartesianHigherImage_section_eq_zero_of_finite_cover
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]
@@ -186,8 +184,7 @@ theorem cartesianHigherImage_section_eq_zero_of_finite_cover
   rw [← NatTrans.naturality_apply, hzero t, map_zero]
 
 
-/-- Local sieve form of affine-section eventual vanishing.
-Source: Stacks Project, Tag 0EYM, second proof, affine section reduction. -/
+/-- Local sieve form of affine-section eventual vanishing (Stacks, Tag 0EYM). -/
 theorem cartesianHigherImage_affine_section_local_zero_sieve
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]
@@ -265,10 +262,8 @@ theorem cartesianHigherImage_affine_section_local_zero_sieve
     rw [NatTrans.naturality_apply, hsection t, map_zero]
 
 
-/-- Extract a finite cover from the covering sieve of eventual local vanishing.
-Source: Stacks Project, Tag 0EYM, second proof, part (2).
-The affine test object is quasi-compact, so the sieve has a finite affine etale
-refinement; reindex that family in the base universe and retain its vanishing. -/
+/-- Extract a finite cover from the covering sieve of eventual local vanishing
+(Stacks, Tag 0EYM). -/
 theorem exists_cartesianHigherImage_affine_section_local_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

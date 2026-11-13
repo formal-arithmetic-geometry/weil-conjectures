@@ -288,7 +288,7 @@ private theorem lower_transition_factor
   exact Category.id_comp _
 
 /-- The open coefficient counit induces a monic degree-q Leray edge map.
-Source: Stacks Project, Tags 0F07 and 0734. -/
+(Stacks, Tags 0F07 and 0734) -/
 theorem baseChangeTargetTransition_counit_mono
     {X Y T V W : Scheme.{u}} (h : Y ⟶ X) (e : Y ⟶ T) (j : V ⟶ T)
     (eV : W ⟶ V) (a : W ⟶ Y) (h' : W ⟶ X)

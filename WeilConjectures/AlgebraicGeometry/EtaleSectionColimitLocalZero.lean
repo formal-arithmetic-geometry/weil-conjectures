@@ -88,9 +88,7 @@ private theorem comparison_locallyInjective_of_univLE
   infer_instance
 
 
-/-- A zero colimit image gives local eventual vanishing on a covering sieve.
-Source: Stacks Project, Sites, Lemma Tag 0738,
-proof of part (2), the local equality assertion before finite-cover selection. -/
+/-- A zero colimit image gives local eventual vanishing on a covering sieve (Stacks, Tag 0738). -/
 theorem etale_section_colimit_local_zero_sieve
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left]

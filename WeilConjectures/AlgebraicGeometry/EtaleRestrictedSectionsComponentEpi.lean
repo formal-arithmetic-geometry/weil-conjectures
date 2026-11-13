@@ -21,8 +21,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The restricted sections factor map is epimorphic in every degree.
-Source: Stacks Project, Tag 015J, proof remark (3), finite diagonal comparison. -/
+/-- The restricted sections factor map is epimorphic in every degree
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsLift_component_epi
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

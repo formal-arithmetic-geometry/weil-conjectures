@@ -28,7 +28,9 @@ import Mathlib.Algebra.Module.TransferInstance
 
 /-! # A Chow module with finite cohomology and generic rank one
 
-Source: Stacks Project, Proposition 30.19.1, Tag 02O5, Chow construction.
+## References
+
+* Stacks Project, Tag 02O5
 -/
 
 @[expose] public section
@@ -41,10 +43,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option linter.unusedVariables false in
 /-- The Chow construction supplies one coherent module with finite cohomology on each
-integral closed support, with its generic stalk the one-dimensional residue-field module.
-
-Source: Stacks Project, Proposition 30.19.1, Tag 02O5, the construction following the
-short exact sequence argument, label `proposition-proper-pushforward-coherent`. -/
+integral closed support, with its generic stalk the one-dimensional residue-field module
+(Stacks, Tag 02O5). -/
 theorem exists_chow_finite_cohomology_witness {X T : Scheme.{u}}
     (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (W : Scheme.{u}) (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W] :

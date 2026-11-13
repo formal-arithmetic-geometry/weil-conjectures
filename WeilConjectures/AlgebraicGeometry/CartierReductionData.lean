@@ -61,8 +61,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 /-!
 # Cartier boundary and normalized reduction constructions
 
-proof.md, (G1), derived reduction,
-and opening comparison paragraphs.
+Definitions of the pole boundary, the normalized Kummer units and the reduced arrows.
 
 The derived scalar units below are expressed by their Hom adjunction against every
 unbounded complex. This is an equivalent, model-independent specification of derived
@@ -127,8 +126,7 @@ private theorem supported_one_restrict {D Z : Scheme.{u}} (i : D ⟶ Z)
   simp only [ConcreteCategory.comp_apply, Functor.const_obj_map] at hq h1
   exact hq.symm.trans (congrArg ((supportedIntegralUnit i).hom.app U) h1.symm)
 
-/-- The pole extension has one relative extension class.
-Source: blueprint Cartier proof (G1), local lifts paragraph. -/
+/-- The pole extension has one relative extension class. -/
 theorem cartierPoleBoundary_existsUnique {D Z : Scheme.{u}} (i : D ⟶ Z)
     [IsClosedImmersion i] (hI : i.ker.IsInvertible) :
     ∃! β : Ext.{u + 1} ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))
@@ -169,8 +167,7 @@ theorem cartierPoleBoundary_existsUnique {D Z : Scheme.{u}} (i : D ⟶ Z)
     · rw [← hτ]
       exact hfτ
 
-/-- The unique relative pole-extension class. No representative extension is chosen.
-Source: blueprint Cartier proof (G1). -/
+/-- The unique relative pole-extension class. -/
 def cartierPoleBoundary {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
     (hI : i.ker.IsInvertible) :
     Ext.{u + 1} ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))
@@ -185,8 +182,7 @@ attribute [local irreducible] comparisonUpperStar Etale.cartierPoleBoundary
 attribute [local instance 0] IsGroupoid.all_isIso isIso_of_isDiscrete
   HasZeroObject.zero_to_zero_isIso to_initial_isIso terminal_isIso_from initial_isIso_to
 
-/-- Scalar forgetting on the pro-etale site.
-Source: blueprint Cartier proof, integral reduction. -/
+/-- Scalar forgetting on the pro-etale site. -/
 abbrev cartierForget (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :=
   sheafCompose (Scheme.ProEt.topology Z)
     (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
@@ -203,15 +199,13 @@ def cartierForgetComparison (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u})
     ((Etale.moduleAbelianForget A Z).map
       ((comparisonAdjunction (ModuleCat.{u + 1} A) Z).unit.app M))
 
-/-- The units comparison is adjoint to identity on the units of every etale object.
-Source: blueprint Cartier opening comparison paragraph. -/
+/-- The units comparison is adjoint to identity on the units of every etale object. -/
 def cartierUnitsComparison (Z : Scheme.{u}) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj Z.gmSheaf ⟶
       Scheme.ProEt.gmSheaf Z :=
   ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).homEquiv _ _).symm ⟨𝟙 _⟩
 
-/-- The canonical comparison on integral constants, normalized by its adjunction unit.
-Source: blueprint Cartier comparison paragraph. -/
+/-- The canonical comparison on integral constants, normalized by its adjunction unit. -/
 def cartierIntegralConstantComparisonIso (D : Scheme.{u}) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} D).obj
         (Etale.supportedIntegralConstant D) ≅
@@ -228,8 +222,7 @@ def cartierIntegralConstantComparisonIso (D : Scheme.{u}) :
 
 attribute [local irreducible] cartierIntegralConstantComparisonIso
 
-/-- The integral supported source and its canonical mate.
-Source: blueprint Cartier opening comparison paragraph. -/
+/-- The integral supported source and its canonical mate. -/
 def cartierIntegralSourceComparison {D Z : Scheme.{u}} (i : D ⟶ Z) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj
         ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj (Etale.supportedIntegralConstant D)) ⟶
@@ -242,15 +235,14 @@ def cartierIntegralSourceComparison {D Z : Scheme.{u}} (i : D ⟶ Z) :
       (cartierIntegralConstantComparisonIso D).hom
 
 /-- Closed direct image comparison on integral coefficients is the invertible
-adjunction mate. Source: blueprint Cartier proof, comparison paragraph. -/
+adjunction mate. -/
 theorem cartierIntegralSourceComparison_isIso {D Z : Scheme.{u}} (i : D ⟶ Z)
     [IsClosedImmersion i] : IsIso (cartierIntegralSourceComparison i) := by
   have := isIso_lowerStarComparisonUpperStarBaseChange i AddCommGrpCat.{u + 1}
   dsimp only [cartierIntegralSourceComparison]
   infer_instance
 
-/-- The supported mate as an isomorphism, with its actual underlying map.
-Source: blueprint Cartier comparison paragraph. -/
+/-- The supported mate as an isomorphism, with its actual underlying map. -/
 def cartierIntegralSourceIso {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj
         ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj (Etale.supportedIntegralConstant D)) ≅
@@ -281,8 +273,7 @@ def cartierKummerClass
     Ext.{wC} S.X₃ H 1 :=
   (ShortComplex.ShortExact.extClass.{wC} hS).comp (Ext.mk₀ f) (add_zero 1)
 
-/-- The complete integral boundary, pushed from comparison units to the full units.
-Source: blueprint Cartier proof (G1) and comparison paragraph. -/
+/-- The complete integral boundary, pushed from comparison units to the full units. -/
 def cartierProBoundary {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
     (β : Ext.{u + 1} ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj
       (Etale.supportedIntegralConstant D)) Z.gmSheaf 1) :
@@ -307,8 +298,8 @@ theorem cartierRootsComparison_condition (Z : Scheme.{u}) (n : ℕ) :
   simp only [Preadditive.comp_nsmul, Category.comp_id,
     ← Preadditive.nsmul_comp, hk, zero_comp]
 
-/-- The roots-induced target map, fixed by its inclusion in full pro-etale units.
-Source: blueprint Cartier comparison paragraph, Stacks 0GLZ and 03PL. -/
+/-- The roots-induced target map, fixed by its inclusion in full pro-etale units
+(Stacks, Tags 0GLZ, 03PL). -/
 def cartierRootsComparison (Z : Scheme.{u}) (n : ℕ) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj (Z.rootsOfUnitySheaf n) ⟶
       Scheme.ProEt.rootsOfUnitySheaf Z n :=
@@ -327,8 +318,8 @@ private theorem unitsComparison_isIso (Z : Scheme.{u}) : IsIso (cartierUnitsComp
   have := proEtaleUnitsCounit_isIso Z
   infer_instance
 
-/-- Roots comparison is invertible for invertible n.
-Source: blueprint Cartier comparison paragraph, Stacks 0GLZ. -/
+/-- Roots comparison is invertible for invertible n
+(Stacks, Tag 0GLZ). -/
 theorem cartierRootsComparison_isIso (Z : Scheme.{u}) (n : ℕ)
     (hn : 0 < n) (hZ : IsUnit (n : Γ(Z, ⊤))) :
     IsIso (cartierRootsComparison Z n) := by
@@ -359,8 +350,7 @@ theorem cartierRootsComparison_isIso (Z : Scheme.{u}) (n : ℕ)
   rw [heq]
   infer_instance
 
-/-- The canonical roots isomorphism.
-Source: blueprint Cartier comparison paragraph. -/
+/-- The canonical roots isomorphism. -/
 def cartierRootsIso (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
     (hZ : IsUnit (n : Γ(Z, ⊤))) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj (Z.rootsOfUnitySheaf n) ≅
@@ -369,8 +359,7 @@ def cartierRootsIso (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
 
 attribute [local irreducible] cartierRootsComparison cartierRootsIso
 
-/-- The root tensor map to the finite pro-etale Tate line.
-Source: blueprint Cartier finite coefficient extension paragraph. -/
+/-- The root tensor map to the finite pro-etale Tate line. -/
 def cartierProRootMap (A : Type (u + 1)) [CommRing A] (n : ℕ) (hA : (n : A) = 0)
     (Z : Scheme.{u}) (hn : 0 < n) (hZ : IsUnit (n : Γ(Z, ⊤))) :
     Scheme.ProEt.rootsOfUnitySheaf Z n ⟶
@@ -380,8 +369,7 @@ def cartierProRootMap (A : Type (u + 1)) [CommRing A] (n : ℕ) (hA : (n : A) = 
       (Etale.ordinaryFiniteRootMap A n hA Z) ≫
     cartierForgetComparison A Z (Scheme.finiteEtaleTateLine Z n A hA)
 
-/-- The coefficient unit on the supported integral constant, induced by 1 ↦ 1.
-Source: blueprint Cartier source normalization paragraph. -/
+/-- The coefficient unit on the supported integral constant, induced by 1 ↦ 1. -/
 def cartierProIntegralGenerator (A : Type (u + 1)) [CommRing A]
     {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :
     (lowerStar AddCommGrpCat.{u + 1} i).obj
@@ -405,8 +393,8 @@ def cartierProKummerComplex (Z : Scheme.{u}) (n : ℕ) :
   ShortComplex.mk (kernel.ι (n • 𝟙 (Scheme.ProEt.gmSheaf Z)))
     (n • 𝟙 (Scheme.ProEt.gmSheaf Z)) (kernel.condition (n • 𝟙 (Scheme.ProEt.gmSheaf Z)))
 
-/-- Kummer is exact on every pro-etale scheme object.
-Source: Stacks 03PL and blueprint Cartier reduction paragraph. -/
+/-- Kummer is exact on every pro-etale scheme object
+(Stacks, Tag 03PL). -/
 theorem cartierProKummer_exact (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
     (hZ : IsUnit (n : Γ(Z, ⊤))) : (cartierProKummerComplex Z n).ShortExact := by
   have hhn : 0 < n := hn
@@ -435,8 +423,8 @@ theorem cartierProKummer_exact (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
         change Epi (n • 𝟙 (Scheme.ProEt.gmSheaf Z))
         infer_instance }
 
-/-- The normalized Kummer scalar unit on etale units, expressed in abelian Ext.
-Source: blueprint Cartier reduction paragraph, Stacks 0152 and 03PL. -/
+/-- The normalized Kummer scalar unit on etale units, expressed in abelian Ext
+(Stacks, Tags 0152, 03PL). -/
 def cartierEtaleKummerUnit (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : (n : A) = 0) (Z : Scheme.{u}) (hZ : IsUnit (n : Γ(Z, ⊤))) :
     Ext.{u + 1} Z.gmSheaf ((Etale.moduleAbelianForget A Z).obj
@@ -444,8 +432,8 @@ def cartierEtaleKummerUnit (A : Type (u + 1)) [CommRing A] (n : ℕ)
   cartierKummerClass (Z.kummerSequence_shortExact n hZ)
     (Etale.ordinaryFiniteRootMap A n hA Z)
 
-/-- The normalized Kummer scalar unit on full pro-etale units.
-Source: blueprint Cartier reduction paragraph, Stacks 0152 and 03PL. -/
+/-- The normalized Kummer scalar unit on full pro-etale units
+(Stacks, Tags 0152, 03PL). -/
 def cartierProKummerUnit (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : (n : A) = 0) (Z : Scheme.{u}) (hn : 0 < n)
     (hZ : IsUnit (n : Γ(Z, ⊤))) :
@@ -456,10 +444,7 @@ def cartierProKummerUnit (A : Type (u + 1)) [CommRing A] (n : ℕ)
 
 attribute [local irreducible] cartierProBoundary cartierEtaleKummerUnit cartierProKummerUnit
 
-/-- The scalar adjunct equation of a boundary, for exact coefficient forgetting.
-Source: blueprint Cartier reduction paragraphs.
-This factors the common Ext equation through abstract abelian categories, keeping
-its concrete coefficient and site constructions out of the composition API. -/
+/-- The scalar adjunct equation of a boundary, for exact coefficient forgetting. -/
 def cartierScalarBoundaryEquation
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasExt.{wC} C]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasExt.{wB} B]
@@ -469,9 +454,7 @@ def cartierScalarBoundaryEquation
   (Ext.mk₀ η).comp (c.mapExactFunctor U) (zero_add 2) = β.comp κ (rfl : 1 + 1 = 2)
 
 /-- The etale reduction is the scalar adjunct of the entire pole boundary followed
-by the positive Kummer unit. This is an equation on the supported integral sheaf,
-not its section one.
-Source: blueprint Cartier derived reduction paragraphs. -/
+by the positive Kummer unit. -/
 def CartierEtaleReductionSpec (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : (n : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
     (hI : i.ker.IsInvertible) (hZ : IsUnit (n : Γ(Z, ⊤)))
@@ -482,8 +465,7 @@ def CartierEtaleReductionSpec (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (cartierEtaleKummerUnit A n hA Z hZ)
 
 /-- The pro-etale reduction uses the same full-boundary adjunct equation, with the
-canonical supported mate, full units comparison, and roots-induced target.
-Source: blueprint Cartier derived reduction and comparison paragraphs. -/
+canonical supported mate, full units comparison, and roots-induced target. -/
 def CartierProReductionSpec (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : (n : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
     (hI : i.ker.IsInvertible) (hn : 0 < n) (hZ : IsUnit (n : Γ(Z, ⊤)))
@@ -530,8 +512,8 @@ private theorem cartierProIntegralGenerator_ext_bijective
   simpa only [forgetComparisonIso_hom, asIso_hom, cartierForget, Functor.comp_obj,
     GeoCartierClass, geoCartierLine] using h
 
-/-- Existence and uniqueness of the two canonically normalized reduced arrows.
-Source: blueprint Cartier derived reduction paragraphs, Stacks 06YY and 0152. -/
+/-- Existence and uniqueness of the two canonically normalized reduced arrows
+(Stacks, Tags 06YY, 0152). -/
 theorem cartierReduction_existsUnique (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}
     (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
@@ -555,8 +537,7 @@ theorem cartierReduction_existsUnique (A : Type (u + 1)) [CommRing A] [Finite A]
     exact hP.existsUnique ((cartierProBoundary i (Etale.cartierPoleBoundary i hI)).comp
       (cartierProKummerUnit A n hA Z hn hZ) (rfl : 1 + 1 = 2))
 
-/-- The etale reduced arrow, uniquely determined by its scalar adjunct.
-Source: blueprint Cartier reduction paragraph. -/
+/-- The etale reduced arrow, uniquely determined by its scalar adjunct. -/
 def cartierReducedEtale (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}
     (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
@@ -565,8 +546,7 @@ def cartierReducedEtale (A : Type (u + 1)) [CommRing A] [Finite A]
       (Etale.ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine Z n A hA) 2 :=
   Classical.choose (cartierReduction_existsUnique A n hn hA i hI hZ).1
 
-/-- The pro-etale reduced arrow, uniquely determined by its scalar adjunct.
-Source: blueprint Cartier reduction paragraph. -/
+/-- The pro-etale reduced arrow, uniquely determined by its scalar adjunct. -/
 def cartierReducedPro (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}
     (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
@@ -575,25 +555,21 @@ def cartierReducedPro (A : Type (u + 1)) [CommRing A] [Finite A]
 
 attribute [local irreducible] cartierReducedEtale cartierReducedPro
 
-/-- The coefficient ring R = Z/(ℓ^r), lifted to the common sheaf universe.
-Source: blueprint Cartier reduction paragraph. -/
+/-- The coefficient ring R = Z/(ℓ^r), lifted to the common sheaf universe. -/
 abbrev cartierResidueRing (ℓ r : ℕ) := ULift.{u + 1} (ZMod (ℓ ^ r))
 
-/-- The modulus annihilates its residue coefficient ring.
-Source: blueprint Cartier reduction paragraph. -/
+/-- The modulus annihilates its residue coefficient ring. -/
 theorem cartierResidue_cast (ℓ r : ℕ) : ((ℓ ^ r : ℕ) : cartierResidueRing.{u} ℓ r) = 0 := by
   apply ULift.ringEquiv.injective
   simpa only [map_natCast, map_zero] using ZMod.natCast_self (ℓ ^ r)
 
-/-- The prime-power residue ring is finite.
-Source: blueprint Cartier reduction paragraph. -/
+/-- The prime-power residue ring is finite. -/
 theorem cartierResidue_finite (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) :
     Finite (cartierResidueRing.{u} ℓ r) := by
   have : NeZero (ℓ ^ r) := ⟨ne_of_gt (pow_pos hℓ.pos r)⟩
   exact Finite.of_equiv (ZMod (ℓ ^ r)) Equiv.ulift.symm
 
-/-- The normalized residue-coefficient arrow, with finiteness supplied explicitly.
-Source: blueprint Cartier reduction paragraph. -/
+/-- The normalized residue-coefficient arrow, with finiteness supplied explicitly. -/
 def cartierResidueReducedPro (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ)
     {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
     (hZ : IsUnit ((ℓ ^ r : ℕ) : Γ(Z, ⊤))) :

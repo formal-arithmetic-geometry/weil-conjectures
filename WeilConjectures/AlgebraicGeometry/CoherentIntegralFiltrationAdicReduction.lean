@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 
 /-! # Reducing an integral-support filtration to generic residue-field modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, ideal-power paragraph.
+Stacks Project, Tag 01YF.
 -/
 
 @[expose] public section
@@ -122,9 +122,8 @@ private theorem power_quasiCoherent {X : Scheme.{u}} (J : X.IdealSheafData) (n :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- For an irreducible closed support, it suffices to filter the coherent modules
-supported there whose generic stalk is killed by the ambient maximal ideal.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, proof, third paragraph,
-using Lemma 01Y9 and the reduced induced closed subscheme of Schemes Lemma 01J3. -/
+supported there whose generic stalk is killed by the ambient maximal ideal
+(Stacks, Tags 01YF, 01Y9 and 01J3). -/
 theorem coherentIntegralFiltration_of_generic_annihilated
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

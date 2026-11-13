@@ -299,23 +299,10 @@ end Construction
 
 /-- **Gluing schemes along an open cover**. Let `{Y_i ⟶ Y}` be an
 open cover, `p_i : P_i ⟶ Y_i` schemes over its members, and `γ_ij : P_i ×_Y Y_j ⟶ P_j` morphisms
-over `Y_j` (`γ_ij ≫ p_j = pr₂`), i.e. morphisms
-`φ_ij = (γ_ij, p_i ∘ pr₁) : P_i ×_Y Y_j ⟶ P_j ×_Y Y_i`
-over `Y_i ×_Y Y_j`, satisfying `φ_ii = id` and the cocycle condition `φ_jk ∘ φ_ij = φ_ik` over
-the triple intersections: for `u = (x, a)` in `P_i ×_Y Y_j`, `w = (x, b)` in `P_i ×_Y Y_k` and
-`v = (γ_ij (x, a), b)` in `P_j ×_Y Y_k`, we have `γ_jk v = γ_ik w`.
-
-Then there is a `Y`-scheme `n : X ⟶ Y` with morphisms `ι_i : P_i ⟶ X` such that the squares
-```
-  P_i --ι_i--> X
-   |           |
-  p_i          n
-   v           v
-  Y_i -------> Y
-```
-are cartesian (`X ×_Y Y_i ≅ P_i`), compatibly with the `φ_ij`: `ι_i x = ι_j (γ_ij (x, a))`.
-It is unique up to unique isomorphism: any other such `(X', n', ι')` is isomorphic to `X` by a
-unique isomorphism compatible with the `ι_i`. -/
+over `Y_j` satisfying `φ_ii = id` and the cocycle condition `φ_jk ∘ φ_ij = φ_ik` over the triple
+intersections, where `φ_ij = (γ_ij, p_i ∘ pr₁)`. Then there is a `Y`-scheme `n : X ⟶ Y` with
+morphisms `ι_i : P_i ⟶ X` making the squares `P_i ⟶ X`, `Y_i ⟶ Y` cartesian, compatibly with the
+`φ_ij`. It is unique up to unique isomorphism compatible with the `ι_i`. -/
 theorem exists_isPullback_of_cocycle
     (γ : ∀ i j, glueV 𝒰 p i j ⟶ P j) (hγ : ∀ i j, γ i j ≫ p j = pullback.snd _ _)
     (hid : ∀ i, pullback.lift (𝟙 (P i)) (p i) (Category.id_comp _) ≫ γ i i = 𝟙 (P i))

@@ -125,8 +125,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The chart and section scalar actions require additional definitional-equality checks.
 /-- Sheafification of a ring quasi-isomorphism to the sections of a quasi-coherent
 complex supplies a quasi-isomorphism to that complex; finite projective terms give
-flat, quasi-coherent and finitely presented sheaves.
-Source: Stacks Project, Tag 01IB (schemes-lemma-spec-sheaves), and Tag 08EB. -/
+flat, quasi-coherent and finitely presented sheaves (Stacks, Tags 01IB and 08EB). -/
 theorem affine_projective_sections_sheafification
     (Y : Scheme.{u}) [IsAffine Y]
     (D : CochainComplex Y.Modules ℤ)

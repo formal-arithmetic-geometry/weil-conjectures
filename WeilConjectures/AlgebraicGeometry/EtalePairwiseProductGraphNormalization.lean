@@ -155,8 +155,8 @@ end EtaleGraphPresentation.PairwiseProduct
 /-- The displayed lambda word for one projection of the product presentation.
 The first exchange is Gamma_D. The shrinking isomorphism is Gamma_E with its identity-open
 factor removed; its inverse has the orientation in lambda. Both squares are Cartesian, so
-these are exactly the normalized maps of lem-pur-etale-proper-open-exchange-cube.
-Source: Stacks Tags 0F7B--0F7D and 0F7J. -/
+these are exactly the normalized maps of the proper/open exchange cube
+(Stacks, Tags 0F7B, 0F7C, 0F7D and 0F7J). -/
 def etaleProductGraphLambda
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f)

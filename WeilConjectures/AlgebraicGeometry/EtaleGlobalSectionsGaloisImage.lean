@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint
 /-!
 # Global sections under the abelian Galois stalk equivalence
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point.
+Source: Stacks Project, Etale Cohomology, Tag 04JM.
 -/
 
 @[expose] public section

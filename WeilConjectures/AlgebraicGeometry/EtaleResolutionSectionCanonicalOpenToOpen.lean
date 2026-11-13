@@ -22,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Open-to-open restriction identity for a normalized comparison.
-Source: Stacks Project, Tag 03F3 (2), and Tag 0A50, proof;
-the Hom-cocycle expansion of the parent restriction argument. -/
+(Stacks, Tags 03F3 and 0A50) -/
 theorem resolutionSection_canonical_open_to_open {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G)
     (c : ResolutionSectionCanonicalComparison G I) :

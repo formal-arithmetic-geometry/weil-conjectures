@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # CoherentFormalModulesAffineQuotient
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -100,9 +100,8 @@ private theorem finite_of_completion_generators
     exact Submodule.smul_mem _ a ih
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Quotient systems of finite completed modules satisfy the coherent formal conditions.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof reduction to module
-systems; Algebra 05GG (completion modulo an ideal power), and Schemes 01I7/01IB. -/
+/-- Quotient systems of finite completed modules satisfy the coherent formal conditions
+(Stacks, Tag 087W). -/
 theorem coherentFormalModules_affine_quotient_coherent
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -196,10 +195,7 @@ theorem coherentFormalModules_affine_quotient_coherent
     exact formalModuleQuotient_iterated J F (Nat.le_succ (n + 1))
 
 /-- The canonical quotient functor, lifted to coherent formal systems.
-Its objects and maps are the existing sheaf quotient construction; only the proof of
-membership in the full subcategory uses the preceding theorem.
-Source: Stacks Project, Lemma 087W.
--/
+(Stacks, Tag 087W). -/
 noncomputable def coherentFormalModules_affine_quotientFunctor
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

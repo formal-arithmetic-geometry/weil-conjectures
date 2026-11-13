@@ -12,7 +12,9 @@ public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 /-!
 # Sheaf of modules associated to a module over global sections
 
-Source: Stacks Project, Modules, Lemma 01BH construction (3) and Definition 01BI.
+## References
+
+* Stacks Project, Modules, Lemma 01BH construction (3) and Definition 01BI
 -/
 
 @[expose] public section
@@ -45,14 +47,7 @@ noncomputable abbrev associatedExtension
     (U : (Opens (X : Type u))ᵒᵖ) : ModuleCat (X.presheaf.obj U) :=
   (ModuleCat.extendScalars (associatedRestriction X U).hom).obj M
 
-/-- The restriction on scalar extensions sends `a ⊗ m` to `a|_V ⊗ m`.
-For fixed `a`, the map `m ↦ a|_V ⊗ m` is additive, and the resulting map
-in `a` is additive. The tensor balancing relation is preserved because
-`ρ^U_V ∘ ρ^X_U = ρ^X_V`, by the presheaf composition law. Thus the tensor
-universal property gives an additive map. It is `O_X(U)`-linear into the
-restriction of scalars, since `ρ^U_V(ba) = ρ^U_V(b)ρ^U_V(a)`; this equality
-extends from pure tensors by additivity. Any other such linear map agrees
-on pure tensors, hence on their finite sums, proving uniqueness
+/-- The restriction on scalar extensions sends `a ⊗ m` to `a|_V ⊗ m`
 (Stacks, Modules, Lemma 01BH (3)). -/
 theorem associatedExtension_restriction_existsUnique
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
@@ -118,8 +113,7 @@ noncomputable def associatedExtensionRestriction
     {U V : (Opens (X : Type u))ᵒᵖ} (f : U ⟶ V) :=
   Classical.choose (associatedExtension_restriction_existsUnique X M f)
 
-/-- The chosen restriction has its specified pure-tensor formula, by the existence-and-uniqueness
- theorem. Source: Stacks, Modules, Lemma 01BH (3). -/
+/-- The chosen restriction sends `a ⊗ m` to `a|_V ⊗ m` (Stacks, Modules, Lemma 01BH (3)). -/
 private theorem associatedExtensionRestriction_tmul
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
     {U V : (Opens (X : Type u))ᵒᵖ} (f : U ⟶ V)
@@ -129,14 +123,7 @@ private theorem associatedExtensionRestriction_tmul
       (X.presheaf.map f a) ⊗ₜ[_, (associatedRestriction X V).hom] m :=
   (Classical.choose_spec (associatedExtension_restriction_existsUnique X M f)).1 a m
 
-/-- Restriction of scalar extensions respects identities and composition.
-The defining unique map sends `a ⊗ m` to `a|_V ⊗ m`. For the identity,
-`a|_U = a`, and the scalar-restriction identity isomorphism also acts as
-the identity on elements. For composition, applying the two restrictions
-sends `a ⊗ m` to `(a|_V)|_W ⊗ m = a|_W ⊗ m`, by the presheaf composition
-law; the scalar-restriction composition isomorphism acts identically on
-elements. In each case the two linear maps agree on pure tensors, which
-generate the tensor product, so they are equal
+/-- Restriction of scalar extensions respects identities and composition
 (Stacks, Modules, Lemma 01BH (3)). -/
 theorem associatedExtensionRestriction_laws
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))) :
@@ -184,12 +171,7 @@ noncomputable def associatedModulePresheafMapApp
       (associatedModulePresheaf X N).obj U :=
   (ModuleCat.extendScalars (associatedRestriction X U).hom).map f
 
-/-- Base change of a linear map commutes with restriction: scalar extension
-sends `a ⊗ m` to `a ⊗ f(m)`, and the chosen restriction sends it to
-`a|_V ⊗ m` by its defining existence-and-uniqueness theorem. Therefore
-both composites send `a ⊗ m` to `a|_V ⊗ f(m)`. Both are linear over
-`O_X(U)` into the restricted target; since pure tensors generate their
-source, equality on these tensors proves equality of the morphisms
+/-- Base change of a linear map commutes with restriction
 (Stacks, Modules, Lemma 01BH (2), (3)). -/
 theorem associatedModulePresheafMap_naturality
     {M N : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))}
@@ -219,8 +201,7 @@ noncomputable def associatedModulePresheafMap
   naturality i := associatedModulePresheafMap_naturality X f i
 
 /-- On every open, base change sends the identity to the identity and preserves
-composition; hence the induced presheaf morphisms do too (Stacks, Modules,
-Lemma 01BH (2); blueprint: def-weil-pbc-associated-module). -/
+composition; hence the induced presheaf morphisms do too (Stacks, Modules, Lemma 01BH (2)). -/
 theorem associatedModulePresheafMap_laws
     (M N P : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
     (f : M ⟶ N) (g : N ⟶ P) :
@@ -245,26 +226,16 @@ noncomputable def associatedModulePresheafFunctor :
   map_id M := (associatedModulePresheafMap_laws X M M M (𝟙 M) (𝟙 M)).1
   map_comp f g := (associatedModulePresheafMap_laws X _ _ _ f g).2
 
-/-- Sheafification makes the associated-module construction into a functor.
-The component at `M` is the sheafification of `U ↦ O_X(U) ⊗_R M` and its map
-at `f` is the unique map induced by `id ⊗ f` (Stacks, Modules, Lemma 01BH (2),
-(3); blueprint: def-weil-pbc-associated-module). -/
+/-- Sheafification makes the associated-module construction into a functor
+(Stacks, Modules, Lemma 01BH (2), (3)). -/
 noncomputable def associatedModuleFunctor :
     ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))) ⥤
       SheafOfModules.{u} (associatedRingSheaf X) :=
   associatedModulePresheafFunctor X ⋙
     PresheafOfModules.sheafification (𝟙 (associatedRingSheaf X).obj)
 
-/-- The sheafification of the tensor presheaf. For each open `U`, restriction
-from `X` gives an `R`-algebra structure on `O_X(U)`, so base change gives
-`P_M(U) = O_X(U) ⊗_R M`. The restrictions `ρ ⊗ id` respect identity and
-composition and are semilinear, hence form a presheaf of `O_X`-modules.
-Sheafification yields `F_M` and its universal `O_X`-linear map `σ_M`.
-The unit `m ↦ 1 ⊗ m` followed by `σ_M` gives the linear canonical section
-map. A linear map `f` induces `id ⊗ f` on the presheaves, and the universal
-property induces `F_f`; uniqueness proves identity, composition, and
-compatibility with canonical sections. This is Stacks, Modules, Lemma 01BH
-construction (3) and Definition 01BI. -/
+/-- The sheafification `F_M` of the tensor presheaf `U ↦ O_X(U) ⊗_R M`
+(Stacks, Modules, Lemma 01BH construction (3) and Definition 01BI). -/
 noncomputable def associatedModule (X : SheafedSpace CommRingCat.{u})
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))) :
     SheafOfModules.{u}
@@ -301,11 +272,8 @@ noncomputable def associatedModuleCanonicalSection
       (associatedRestriction X (op (⊤ : Opens (X : Type u)))).hom
       (associatedRestriction_top X)).hom.app _
 
-/-- On an element `m`, the canonical section is `σ_{M,X}(1 ⊗ m)`.
-The extension-of-scalars unit sends `m` to `1 ⊗ m`; the final scalar
-restriction isomorphism is the identity on elements because restriction
-from `X` to itself is the identity (Stacks, Modules, Lemma 01BH (3),
-Definition 01BI; blueprint: def-weil-pbc-associated-module). -/
+/-- On an element `m`, the canonical section is `σ_{M,X}(1 ⊗ m)`
+(Stacks, Modules, Lemma 01BH (3), Definition 01BI). -/
 theorem associatedModuleCanonicalSection_apply
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))) (m : M) :
     associatedModuleCanonicalSection X M m =
@@ -318,10 +286,7 @@ theorem associatedModuleCanonicalSection_apply
   rfl
 
 /-- Every `O_X`-linear map from the tensor presheaf to a sheaf factors uniquely
-through the sheafification map. Apply the sheafification adjunction to the
-identity morphism of the structure sheaf; its unit is `associatedModuleSheafificationMap`.
-The adjunction bijection gives existence and uniqueness of the factorization
-(Stacks, Modules, Lemma 01BH (3); blueprint: def-weil-pbc-associated-module). -/
+through the sheafification map (Stacks, Modules, Lemma 01BH (3)). -/
 theorem associatedModuleSheafificationMap_universal
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
     (F : SheafOfModules.{u} (associatedRingSheaf X))
@@ -343,10 +308,8 @@ theorem associatedModuleSheafificationMap_universal
     ext U x
     exact congrArg (fun k => k.app U x) hg
 
-/-- Naturality of sheafification gives the equality after composing with
-`σ_M`: at each open the presheaf map is `id ⊗ f`. Apply the naturality
-square of the unit of the sheafification adjunction (Stacks, Modules,
-Lemma 01BH (2), (3); blueprint: def-weil-pbc-associated-module). -/
+/-- Naturality of sheafification: the induced map `F_f` satisfies `F_f ∘ σ_M = σ_N ∘ P_f`,
+where `P_f` is `id ⊗ f` on each open (Stacks, Modules, Lemma 01BH (2), (3)). -/
 theorem associatedModuleMap_sheafification_natural
     {M N : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))}
     (f : M ⟶ N) :
@@ -356,9 +319,7 @@ theorem associatedModuleMap_sheafification_natural
     (𝟙 (associatedRingSheaf X).obj)).unit.naturality
       (associatedModulePresheafMap X f)).symm
 
-/-- The map `F_f` is uniquely determined by `F_f ∘ σ_M = σ_N ∘ P_f`.
-The functor map has this equality by naturality of the unit. Any other map
-with the equality agrees with it by the universal property of sheafification
+/-- The map `F_f` is uniquely determined by `F_f ∘ σ_M = σ_N ∘ P_f`
 (Stacks, Modules, Lemma 01BH (2), (3)). -/
 theorem associatedModuleMap_unique
     {M N : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))}
@@ -373,10 +334,8 @@ theorem associatedModuleMap_unique
     (hk ((associatedModuleFunctor X).map f)
       (associatedModuleMap_sheafification_natural X f)).symm
 
-/-- The canonical sections are natural in `M`. Evaluate the naturality
-square of sheafification at the whole space and apply it to `1 ⊗ m`;
-`P_f(1 ⊗ m) = 1 ⊗ f(m)` by base change. Thus both composites send `m`
-to `σ_N(1 ⊗ f(m))` (Stacks, Modules, Lemma 01BH (2), (3)). -/
+/-- The canonical sections are natural in `M`: `σ_N (1 ⊗ f(m))` is the image of `m` under both
+composites (Stacks, Modules, Lemma 01BH (2), (3)). -/
 theorem associatedModuleCanonicalSection_natural
     {M N : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))}
     (f : M ⟶ N) :

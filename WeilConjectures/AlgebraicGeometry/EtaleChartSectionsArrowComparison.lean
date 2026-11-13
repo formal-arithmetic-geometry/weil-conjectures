@@ -30,9 +30,7 @@ namespace AlgebraicGeometry.Etale
 /-- The sections map on a chart is the terminal-object unit map of the induced
 morphism to its etale base, up to isomorphism of arrows. No flatness or connectedness
 assumption is needed for this comparison.
-
-Source: Stacks Project, Etale Cohomology, Tag 0EZX, proof, first displayed formula;
-Tag 0A3H, applied after restriction to the etale base. -/
+(Stacks, Tags 0EZX and 0A3H) -/
 theorem nonempty_etaleChartSections_arrowIso
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

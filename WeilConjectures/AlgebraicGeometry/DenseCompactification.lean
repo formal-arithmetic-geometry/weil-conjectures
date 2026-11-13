@@ -13,10 +13,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-!
 # Dense compactifications of the same dimension
 
-Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case): a separated
-scheme `X` of finite type over a field `k` admits a proper compactification `j : X ↪ X̄` with
-dense image, obtained by replacing a Nagata compactification by the scheme-theoretic closure of
-`X`; then `dim X̄ = dim X`.
+A separated scheme `X` of finite type over a field `k` admits a proper compactification
+`j : X ↪ X̄` with dense image, obtained by replacing a Nagata compactification by the
+scheme-theoretic closure of `X`; then `dim X̄ = dim X`.
 
 ## Main results
 
@@ -38,10 +37,7 @@ namespace AlgebraicGeometry
 
 /-- In a noetherian quasi-sober `T₀` space, a maximal point `η` (one without proper
 generalization, i.e. the generic point of an irreducible component) lies in every dense open
-subset `U`: the complement of the closures of the other finitely many maximal points is an open
-neighbourhood of `η`, which meets `U` in a point specializing from `η` only.
-
-Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case). -/
+subset `U`. -/
 theorem mem_of_dense_of_forall_specializes_eq {X : Type*} [TopologicalSpace X]
     [NoetherianSpace X] [QuasiSober X] [T0Space X] {U : Set X} (hU : IsOpen U)
     (hd : Dense U) {η : X} (hη : ∀ y, y ⤳ η → y = η) : η ∈ U := by
@@ -63,11 +59,8 @@ theorem mem_of_dense_of_forall_specializes_eq {X : Type*} [TopologicalSpace X]
       (specializes_iff_mem_closure.mp hξy))
   exact hξy.mem_open hU hyU
 
-/-- Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case): a dense open
-subscheme `U` of a quasi-compact scheme `Y` locally of finite type over a field `k` has at least
-the dimension of `Y`. Every point of `Y` specializes from the generic point `η` of an irreducible
-component, which lies in `U`; the closure of `η` with its reduced structure is integral, so its
-dimension is that of its nonempty open subscheme meeting `U`. -/
+/-- A dense open subscheme `U` of a quasi-compact scheme `Y` locally of finite type over a
+field `k` has at least the dimension of `Y`. -/
 theorem topologicalKrullDim_le_of_dense {k : Type u} [Field k] {Y : Scheme.{u}}
     (a : Y ⟶ Spec (.of k)) [LocallyOfFiniteType a] [QuasiCompact a] (U : Y.Opens)
     (hU : Dense (U : Set Y)) : topologicalKrullDim Y ≤ topologicalKrullDim U := by
@@ -100,13 +93,8 @@ theorem topologicalKrullDim_le_of_dense {k : Type u} [Field k] {Y : Scheme.{u}}
     ← topologicalKrullDim_opens_eq (ι ≫ a) (ι ⁻¹ᵁ U)]
   exact (hemb.restrictPreimage (U : Set Y)).isInducing.topologicalKrullDim_le
 
-/-- Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case): a separated
-scheme `X` of finite type over a field `k` admits a proper compactification `j : X ⟶ X̄` over
-`k` with dense image and `dim X̄ = dim X`. Take a Nagata compactification `X ⟶ Z ⟶ Spec k` and
-replace `Z` by the scheme-theoretic closure `X̄` of `X`: it is a closed subscheme of `Z`, hence
-proper over `k`, the open immersion factors through it with dense image, and the dimension of
-`X̄` is that of its dense open subscheme `X`
-(`AlgebraicGeometry.topologicalKrullDim_le_of_dense`). -/
+/-- A separated scheme `X` of finite type over a field `k` admits a proper compactification
+`j : X ⟶ X̄` over `k` with dense image and `dim X̄ = dim X`. -/
 theorem exists_dense_compactification {k : Type u} [Field k] {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] :
     ∃ (X' : Scheme.{u}) (aX' : X' ⟶ Spec (.of k)) (j : X ⟶ X'), IsProper aX' ∧

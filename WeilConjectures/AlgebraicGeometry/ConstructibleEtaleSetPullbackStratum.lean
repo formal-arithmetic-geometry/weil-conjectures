@@ -15,8 +15,9 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Finite local constancy on pulled-back strata
 
-Source: the fixed-stratum proof of `lem-weil-pbc-constructible-etale-set-pullback`,
-using Stacks Project, Tags 095A, 03Q1 (3), and 03CB.
+## References
+
+* Stacks Project, Tags 095A, 03Q1 (3), and 03CB
 -/
 
 @[expose] public section
@@ -24,10 +25,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The pullback of each stratum in a constructible set sheaf remains finite locally constant.
-Source: the three-step proof of `lem-weil-pbc-constructible-etale-set-pullback`, with the
-stratification fixed.  Pull back the trivializing covers and use the inverse-image
-composition, restriction, constant-sheaf, stalk, and algebraic-structure comparisons. -/
+/-- The pullback of each stratum in a constructible set sheaf remains finite locally constant. -/
 theorem finiteLocallyConstant_pullback_stratum
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

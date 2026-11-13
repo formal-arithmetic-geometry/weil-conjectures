@@ -17,7 +17,9 @@ import Mathlib.Algebra.Module.FinitePresentation
 
 /-! # Affine comparison for completed internal Hom
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, affine-local argument.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section
@@ -28,10 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- A compatible quotient morphism family has a unique compatible lift on each affine open.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, affine-local proof;
-Lemma 087W; Algebra, Lemmas 00MA and 00MB; More on Algebra, Lemma 087R. -/
+/-- A compatible quotient morphism family has a unique compatible lift on each affine open
+(Stacks, Tags 0882, 087W). -/
 theorem completion_internal_hom_affine_sections_lift {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

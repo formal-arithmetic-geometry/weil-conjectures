@@ -74,8 +74,7 @@ def affineModelPullbackComparison {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R
     (DerivedCategory.quotientCompQhIso _).hom.app _
 
 /-- The two canonical comparison maps used to form the affine pullback sections model
-are invertible on a K-flat associated-sheaf complex.
-Source: Stacks Project, perfect.tex, Tags 08DV, 08DW(2), and 06Z0. -/
+are invertible on a K-flat associated-sheaf complex (Stacks, Tags 08DV, 08DW and 06Z0). -/
 theorem affinePullbackModelComparisons_isIso
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     [hT : (tilde.functor R).Additive] [hP : (Scheme.Modules.tensorPullback g).Additive]

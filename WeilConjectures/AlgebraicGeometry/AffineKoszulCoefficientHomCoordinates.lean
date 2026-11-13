@@ -92,9 +92,7 @@ private theorem affine_coefficient_coordinates_for_H
 
 
 /-- The underived Hom complexes of the explicit sheafified Koszul complex give
-precisely the coefficient reduction on dual Koszul homology.
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5, the displayed map of
-Hom complexes; Tag 01HV, exactness of associated sheafification. -/
+precisely the coefficient reduction on dual Koszul homology (Stacks, Tags 0BQZ, 01HV). -/
 theorem affine_koszul_coefficient_hom_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens) (n m : ℕ) (f : Fin n → Γ(Y, U.1))

@@ -23,14 +23,9 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 
 set_option synthInstance.maxSize 256 in
-/-- Vanishing of `H^i(E ⊗ᴸ L)` for two objects of `D(𝒪_X)`: choose a K-flat representative
-`K` of `E` and a complex `N` representing `L`, and require the degree `i` cohomology of
-`Tot(K ⊗ N)` to be zero. Representatives must exist, so this predicate is not vacuous.
-K-flat replacement (Tag 06YS), essential surjectivity of `Q`, and independence of
-representatives (Tag 06YU) identify this with derived tensor cohomology vanishing.
-It extends `schemeDerivedTensorCohomologyVanishes`, whose second argument is a module
-placed in degree zero; it does not replace that existing predicate.
-Source: Stacks Project, Tags 06YS and 06YU; Tag 09M4, spectral sequence in the proof. -/
+/-- Vanishing of `H^i(E ⊗ᴸ L)` for two objects of `D(𝒪_X)`: there are a K-flat representative
+`K` of `E` and a complex `N` representing `L` such that `Tot(K ⊗ N)` has zero cohomology in
+degree `i` (Stacks, Tags 06YS, 06YU and 09M4). -/
 def schemeDerivedTensorComplexCohomologyVanishes (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E L : schemeDerivedCategory X) (i : ℤ) : Prop :=

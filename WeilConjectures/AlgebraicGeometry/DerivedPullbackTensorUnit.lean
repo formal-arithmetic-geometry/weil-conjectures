@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Unit laws for derived pullback tensor comparisons
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -90,8 +91,7 @@ private theorem tensorUnit_right_of_iso
 
 /-- The extended natural tensor comparison admits a unit isomorphism satisfying
 both unit laws. The associativity law is not assumed or asserted here.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; parent descent proof, step 3 (unit). -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_unit {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

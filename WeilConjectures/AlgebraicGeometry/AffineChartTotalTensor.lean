@@ -101,9 +101,8 @@ private noncomputable def tildeTensorNatIso (R : CommRingCat.{u}) :
         Scheme.Modules.whiskerRight_app_tmulSection]
       congr 1
       exact (congrArg (fun k ↦ k m) (tilde.toOpen_map_app f ⊤)).symm)
-/-- Associated sheaf followed by canonical chart restriction commutes with total tensor.
-Source: Stacks Project, Tag 08DX, lemma-quasi-coherence-tensor-product, proof of (2),
-and Tag 01I8 for the underived associated-sheaf tensor identification. -/
+/-- Associated sheaf followed by canonical chart restriction commutes with total tensor (Stacks,
+Tags 08DX, 01I8). -/
 theorem affineChart_totalTensor_iso (X : Scheme.{u}) [IsAffine X]
     (P N : CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ) :
     letI : Functor.PreservesZeroMorphisms

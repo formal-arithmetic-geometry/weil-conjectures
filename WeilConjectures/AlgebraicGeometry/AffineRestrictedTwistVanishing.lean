@@ -115,9 +115,8 @@ private theorem exists_isZero_affine_tensorPow_degree
   exact (ht₀ r t ht).of_iso
     ((RingedSpace.moduleCohomology X.toRingedSpace q).mapIso e₄)
 
-/-- Fixed-degree Serre vanishing on the inverse image of one affine open.
-
-Source: Stacks Project, Tag 0B5T (4), used in the affine-local proof of Tag 02O1. -/
+/-- Fixed-degree Serre vanishing on the inverse image of one affine open
+(Stacks, Tags 0B5T and 02O1). -/
 theorem exists_isZero_restricted_twist_moduleCohomology_degree
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f]
     (F : X.Modules) [F.IsQuasicoherent] (hF : RingedSpace.IsCoherent X.toRingedSpace F)

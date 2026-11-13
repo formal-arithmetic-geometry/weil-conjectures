@@ -80,19 +80,8 @@ private theorem restrictedOver_eventually_zero
 
 end
 
-/-- A single raw cartesian derived class killed at the limit is killed at a later stage.
-
-Source: Stacks Project, Tags 0EYM, 0EYL and 0GIT. Apply affine cohomology continuity
-to the descended qcqs chart system and identify its transition with the displayed
-raw map by exchange naturality.
-
-The proof is the affine cohomology continuity argument for one test object: descend the
-finite-presentation chart and the raw derived class, apply continuity of the resulting
-bounded-below cohomology system, and identify the resulting stage map with the displayed
-cartesian transition by exchange naturality. This is strictly the one-class case; no
-finite-family equalization is included. Empty affine objects and degree zero are covered
-by the same construction.
--/
+/-- A single raw cartesian derived class killed at the limit is killed at a
+later stage (Stacks, Tags 0EYM, 0EYL, 0GIT). -/
 theorem exists_cartesianHigherImage_single_raw_class_eq_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

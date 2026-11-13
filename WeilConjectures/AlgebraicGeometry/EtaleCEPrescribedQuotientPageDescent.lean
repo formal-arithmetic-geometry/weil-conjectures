@@ -33,8 +33,7 @@ set_option linter.unusedVariables false in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Retain prescribed CE bicomplexes in quotient-page presentations and descend supplied
 filtered augmented comparisons. No bicomplex comparison or total lift is constructed.
-Source: Stacks Project, Tag 015J, first-page computation; Tag 015K; Homology,
-Tag 012K, lemma-spectral-sequence-filtered-complex and lemma-functorial. -/
+(Stacks, Tags 015J, 015K and 012K) -/
 theorem exists_etaleCE_prescribed_quotient_page_descent
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

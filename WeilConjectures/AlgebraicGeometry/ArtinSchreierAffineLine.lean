@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover
 
 /-! # The affine-line Artin–Schreier cover
 
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/sk-lem-as-properties/
-lem-fd-as-cover-affine-line.md, node statement.
-
 The affine-line cover is identified with affine one-space by sending the quotient
 coordinate `T` to the affine coordinate `y`. The transported structural morphism
 and prime-field translations are recorded explicitly.
@@ -29,10 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The Artin–Schreier cover of the affine line is the affine line, with its
-structural map and prime-field action in the displayed coordinates.
-
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/sk-lem-as-properties/
-lem-fd-as-cover-affine-line.proof.md, all four proof steps. -/
+structural map and prime-field action in the displayed coordinates. -/
 theorem artinSchreierCover_affineLine (k : Type u) [Field k] (p : ℕ) [Fact p.Prime]
     [Finite k] [CharP k p] :
     ∃ e : (artinSchreierCover p (AffineSpace PUnit (Spec (CommRingCat.of k)))

@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyModuleSquareCompatibility
 /-!
 # Transport of a cohomology square through bijective restriction maps
 
-Source: the restriction-map calculation in Stacks Project, proof of Tag 095T,
-and functoriality of inverse image and Ext pullback.
+Stacks Project, Tag 095T.
 -/
 
 @[expose] public section
@@ -27,10 +26,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- A commuting square whose vertical restrictions are bijective identifies its
-total-space cohomology map with its restricted cohomology map.
-
-Source: Stacks Project, proof of Tag 095T, the final stalk-map calculation;
-Tag 03FD for the underlying abelian coefficient convention. -/
+total-space cohomology map with its restricted cohomology map (Stacks, Tags 095T and 03FD). -/
 theorem Etale.exists_addEquiv_cohomology_restrictionSquare
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' X₀ X₀' : Scheme.{u}} (g : X' ⟶ X) (i : X₀ ⟶ X)

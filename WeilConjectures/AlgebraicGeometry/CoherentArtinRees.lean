@@ -15,12 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Artin-Rees for coherent modules on a Noetherian scheme
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YA (lemma-Artin-Rees).
+Source: Stacks Project, Cohomology of Schemes, Tag 01YA.
+
+## Implementation details
 
 The pullback of the two inclusions represents their sectionwise intersection. Equalities
 and inclusions of subsheaves are expressed by their images in the sections of `F` on every
-open. Powers and multiplication images use the shared definitions from the formal-module
-node, including the zeroth power of the ideal.
+open.
 -/
 
 @[expose] public section
@@ -64,9 +65,8 @@ private theorem range_of_locally_range {X : Scheme.{u}} {M N : X.Modules}
 
 /-- Artin-Rees for a quasi-coherent subsheaf `g : G ⟶ F` of a coherent module `F`.
 The constant `c` is uniform over all opens and all `n ≥ c`. The first clause is the equality
-I^(n-c)(I^c F ∩ G) = I^n F ∩ G; the second is its inclusion in I^(n-c) G, all inside F.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YA (lemma-Artin-Rees). -/
+I^(n-c)(I^c F ∩ G) = I^n F ∩ G; the second is its inclusion in I^(n-c) G, all inside F
+(Stacks, Tag 01YA). -/
 theorem coherent_artin_rees {X : Scheme.{u}} [IsNoetherian X]
     (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (g : G ⟶ F) [Mono g] (hG : G.IsQuasicoherent) (I : X.IdealSheafData) :

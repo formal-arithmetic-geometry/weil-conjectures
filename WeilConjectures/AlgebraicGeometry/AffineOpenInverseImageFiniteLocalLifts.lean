@@ -21,8 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 /-- A terminal inverse-image section has finitely many affine local lifts at one stage.
-Source: Stacks Project, Tags 09XN (local inverse-image sections), 0EYL (descent of
-objects, arrows and finite covers), and 03Q6, proof steps (1)--(3). -/
+(Stacks, Tags 09XN, 0EYL, 03Q6). -/
 theorem affineOpenSections_inverse_image_finite_local_lifts
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

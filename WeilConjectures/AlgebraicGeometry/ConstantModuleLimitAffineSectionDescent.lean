@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 
 /-! # Descent of constant-module sections on affine etale test objects
 
-Source: Stacks Project, Tags 09Z1 and 09YQ, degree zero.
+## References
+
+* Stacks Project, Tags 09Z1, 09YQ
 -/
 
 @[expose] public section
@@ -32,8 +34,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Sections on an affine etale test object descend along an inverse limit.
 
-Source: Stacks Project, Tag 09Z1, proof on affine etale objects in degree zero,
-and Tag 09YQ, continuity of cohomology. -/
+(Stacks Project, Tags 09Z1, 09YQ) -/
 theorem exists_constantModule_limit_affine_section_rep
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

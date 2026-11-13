@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A map from the affine limit to an étale X-scheme factors through an affine stage.
-Source: Stacks Project, Limits, Tag 01ZM, morphism descent; Étale Cohomology,
-Tag 0EYL, proof of full faithfulness. -/
+(Stacks, Tags 01ZM, 0EYL). -/
 theorem affineOpenSections_etale_map_factorization
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

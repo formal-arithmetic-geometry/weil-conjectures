@@ -15,7 +15,7 @@ import Mathlib.LinearAlgebra.Isomorphisms
 
 /-! # Objectwise reconstruction of affine coherent formal modules
 
-Source: Stacks Project, Lemma 087W and the affine sheaf/module correspondence.
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ open Scheme Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Tilde of the module projection is a cokernel of the sheaf ideal-power inclusion.
-Source: Stacks Project, Schemes, Section 01LA, item (8), Lemma 01IC and Lemma 01ID;
-Cohomology of Schemes, Lemma 087W, the reduction to module systems. -/
+(Stacks, Tags 01LA, 01IC, 01ID and 087W). -/
 private theorem affineIdealPower_tilde_cokernel
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -161,8 +160,7 @@ open Scheme Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A surjective section map with ideal-power kernel induces the specified quotient
-isomorphism at a single level. Source: Stacks Project, Lemma 087W, the reduction to
-module systems; Schemes 01I7 and 01IB, and the ideal-product calculation of 01IC. -/
+isomorphism at a single level (Stacks, Tag 087W). -/
 private theorem affineFormalQuotient_projection_iso
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -209,8 +207,8 @@ private theorem affineFormalQuotient_projection_iso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The proof follows the first-isomorphism and affine tilde/Gamma arguments,
-then checks transition and map naturality as in Lemma 087W. -/
+/-- The reconstruction functor `L` is objectwise inverse to the quotient functor: every
+coherent formal module `F` is isomorphic to the quotient system of `L.obj F` (Stacks, Tag 087W). -/
 theorem coherentFormalModules_affine_reconstruction_objectwise
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

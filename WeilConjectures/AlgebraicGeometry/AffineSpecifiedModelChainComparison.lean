@@ -49,9 +49,7 @@ private theorem scalarExtension_bounded_finite_projective
     Module.Projective B (TensorProduct A B (M.X n))
   exact ⟨inferInstance, inferInstance⟩
 
-/-- Base-change comparison from genuine affine perfect models.
-Source: Stacks Project, perfect.tex, lemma-descend-homomorphisms, Tag 09RE;
-Tags 06Z0 and 08DW. -/
+/-- Base-change comparison from genuine affine perfect models (Stacks, Tags 09RE, 06Z0 and 08DW). -/
 theorem exists_affineSpecifiedModelChainComparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

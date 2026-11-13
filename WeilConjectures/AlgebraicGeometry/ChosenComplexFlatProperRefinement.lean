@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!
 # Refining an already chosen complex to flat terms with proper support
 
-Source: Stacks Project, Tags 05LY, 081G and 0CYS; tensor pullback functoriality.
+## References
+
+* Stacks Project, Tags 05LY, 081G and 0CYS
 -/
 
 @[expose] public section
@@ -65,13 +67,9 @@ private theorem zero_flat_proper {X S : Scheme.{u}} (f : X ⟶ S)
       infer_instance
 
 /-- Refine an already chosen bounded finitely presented complex at stage `j`.
-This statement does not descend a complex from the limit: the entire finite-stage
-complex `H`, including its differentials, is an input. Its limit pullback is assumed
-flat with proper support. The output identifies the new limit pullback with the
-pullback of this particular `H`, compatibly with all differentials.
-
-Source: Stacks Project, Limits of Schemes, Tag 05LY and Tag 081G; Cohomology of
-Schemes, Tag 0CYS; pullback pasting and tensor pullback functoriality. -/
+The finite-stage complex `H` is an input, and its limit pullback is assumed flat with
+proper support. The output identifies the new limit pullback with the pullback of `H`,
+compatibly with all differentials (Stacks, Tags 05LY, 081G and 0CYS). -/
 theorem exists_chosen_complex_flat_proper_refinement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

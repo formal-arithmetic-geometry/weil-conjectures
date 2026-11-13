@@ -25,10 +25,7 @@ namespace CategoryTheory
 
 /-- Local ideal completeness is equivalent to invertibility of the actual Cech unit.
 This is a criterion for a single object; it contains no assertion about maps to other
-objects or about the value of completion on arbitrary objects.
-
-Source: Stacks Project, algebraization.tex, Tag 099B, proof of lemma-derived-completion,
-and Tag 099F, proof of proposition-derived-completion. -/
+objects or about the value of completion on arbitrary objects (Stacks, Tags 099B, 099F). -/
 theorem ringedExtendedCech_complete_iff_unit_isIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

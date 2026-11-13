@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 
-/-- Source: Stacks Project, Étale Cohomology, Theorem Tag 09YQ, proof via Tags 0EYL,
-04HR, and 09YN, followed by finite affine-cover descent. -/
+/-- Sections of the stage sheaves which agree in the limit sheaf agree at a later stage
+(Stacks, Tags 09YQ, 0EYL, 04HR, 09YN). -/
 theorem etaleSetSectionEventualEquality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

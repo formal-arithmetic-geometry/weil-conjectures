@@ -19,9 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Every positive-degree cocycle on an open of U_i has a sectionwise boundary.
-
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy). -/
+/-- Every positive-degree cocycle on an open of U_i has a sectionwise boundary. -/
 theorem cech_sheaf_restrict_positive_section_boundary
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

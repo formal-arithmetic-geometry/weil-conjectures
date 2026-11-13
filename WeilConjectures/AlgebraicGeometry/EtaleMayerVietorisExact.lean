@@ -25,7 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Etale Cohomology, Tag 0A50, proof. -/
+/-- The Mayer-Vietoris sequence for a two-open cover is exact, with connecting maps
+(Stacks, Tag 0A50). -/
 theorem etale_mayerVietoris_exact (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
 ∃ δ : ∀ n : ℕ,
       (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙

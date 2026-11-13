@@ -130,7 +130,8 @@ private theorem sections_pullback (X : Scheme.{u}) (U V : X.Opens)
     · exact hm₁.trans (F.property.amalgamateOfArrows_map _ hcov
         (fun b => Bool.casesOn b s.snd s.fst) _ true).symm
 
-/-- Source: Stacks Project, Tag 0A50, proof, first and middle spots. -/
+/-- The sections sequence of a sheaf for a two-open cover is exact at the first and
+middle spots (Stacks, Tag 0A50). -/
 theorem etale_mayerVietoris_sections (X : Scheme.{u}) (U V : X.Opens)
     (hcover : U ⊔ V = ⊤) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Function.Injective (fun x : F.obj.obj (op (Scheme.Etale.mk (𝟙 X))) =>

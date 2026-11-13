@@ -472,8 +472,7 @@ private theorem sectionRingPullbackIso_ofMonHom
   exact sectionRingPullbackIso_existsUnique f RY RX α eta
     (fun V a ↦ congrArg (fun q ↦ q.hom.app V a) heta) (liftRingSheafMap f _ _ φ) hφ
 
-/-- The ring-sheaf encoding of alpha is uniquely fixed by its abelian adjunct.
-Source: blueprint coefficient compatibility, lem-sfb-alpha-iso. -/
+/-- The ring-sheaf encoding of alpha is uniquely fixed by its abelian adjunct. -/
 theorem spCoefficientIso_existsUnique
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] :

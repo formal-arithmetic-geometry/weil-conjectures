@@ -51,9 +51,7 @@ private theorem small_sheaf_in_image (X : Scheme.{u})
   refine ⟨⟨P, hP⟩, ⟨?_⟩⟩
   exact (fullyFaithfulSheafToPresheaf _ _).preimageIso e
 
-/-- Small-valued extension problems descend through coefficient lift.
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO;
-universe descent step of `lem-sc-etale-ulift-injective`. -/
+/-- Small-valued extension problems descend through coefficient lift (Stacks, Tag 01DO). -/
 theorem etale_ulift_injective_extension (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) [Injective I]
     {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}

@@ -22,9 +22,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Local cocycles of the explicit increasing-tuple presheaf complex are boundaries.
-Source: Stacks Project, Tag 02FU (cohomology-lemma-covering-resolution),
-with the increasing tuples of Tag 01FM. -/
+/-- Local cocycles of the explicit increasing-tuple presheaf complex are boundaries
+(Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheafPresheaf_local_cocycles
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)
     (p : ℕ) (V : X.Opens) (hV : V ≤ U i)

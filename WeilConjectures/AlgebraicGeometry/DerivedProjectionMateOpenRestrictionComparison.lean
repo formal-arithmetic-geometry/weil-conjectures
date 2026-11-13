@@ -56,10 +56,7 @@ private theorem mate_square
 -- Keep the fixed localizations opaque during comparison of functor types.
 /-- Restriction of a projection mate to a target open is isomorphic, as an
 arrow, to a projection mate for the inverse-image source over that open, using the
-shared small localizations.
-This is a comparison statement; it does not assert that either mate is invertible.
-
-Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE. -/
+shared small localizations (Stacks, Tags 08EU and 08FE). -/
 theorem exists_derivedProjectionMate_openRestriction_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

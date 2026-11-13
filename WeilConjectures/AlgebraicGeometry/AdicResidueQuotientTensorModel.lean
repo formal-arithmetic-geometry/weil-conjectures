@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.RingedScalarTensorUnit
 
 /-! # The actual quotient coefficient tower and its tensor model
 
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M).
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -59,10 +61,8 @@ private theorem quotientTensorLevel_unit
     ((adicFiniteUnit f).naturality eP.hom).symm
 
 /-- The strict quotient tensor model computes the normalized scalar-adjoint tower.
-No Koszul system, generating list, Noetherian hypothesis, or limit occurs here.
-
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M), and
-sites-cohomology.tex, derived change of rings (06YY). -/
+No Koszul system, generating list, Noetherian hypothesis, or limit occurs here
+(Stacks, Tags 099M and 06YY). -/
 theorem adicResidue_quotient_tensor_model
     (M : AdicResidueLocalDerived.{u, v} X J U)
     (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))

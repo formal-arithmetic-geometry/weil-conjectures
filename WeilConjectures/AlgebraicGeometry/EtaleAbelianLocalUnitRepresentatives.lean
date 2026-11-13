@@ -21,8 +21,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Every inverse-image section has unit representatives on an etale cover.
-Source: Stacks Project, Tag 09XN, proof of lemma-describe-pullback, paragraph
-beginning "By construction"; compatibility with abelian structure and units. -/
+(Stacks, Tag 09XN) -/
 theorem etaleAbelian_local_unit_representatives
     {X T : Scheme.{u + 1}} (p : T ⟶ X)
     (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤

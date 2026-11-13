@@ -16,10 +16,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Work with an abstract pullback functor and its coherence maps so conversion does not
-unfold the inverse-image construction. In a preorder the mapped identity and composite
-are definitionally equal to the identity and composite of mapped arrows. Equality
-witnesses in the coherence maps agree by proof irrelevance. -/
+/-- Work with an abstract pullback functor and its coherence maps, so that conversion does not
+unfold the inverse-image construction. -/
 private theorem reindex_transition_coherence_aux
     (P : ∀ {X Y : Scheme.{u}}, (X ⟶ Y) →
       Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤
@@ -63,7 +61,7 @@ private theorem reindex_transition_coherence_aux
 
 /-- Inverse-image transition identity and composition are preserved by reindexing.
 
-Source: Stacks Project, Tag 09YQ, restriction to a cofinal tail. -/
+(Stacks, Tag 09YQ) -/
 theorem etale_limit_reindex_transition_coherence
     {I J : Type u} [Preorder I] [Preorder J]
     (t : J ⥤ I) (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibil
 
 /-! # The affine algebra counit on K-injective cohomology
 
-Source: Stacks Project, Tag 0AVW, proof of perfect-lemma-affine-morphism-equivalence.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -29,7 +31,7 @@ namespace AlgebraicGeometry
 
 /-- The cohomology of the termwise counit on a K-injective complex is the ordinary
 module counit, under the affine cohomology comparison and the exact pullback comparison.
-Source: Stacks Project, Tag 0AVW, proof, using the unbounded bound of Tag 08D4. -/
+(Stacks, Tags 0AVW and 08D4). -/
 theorem affine_algebra_kinjective_counit_homology_factorization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

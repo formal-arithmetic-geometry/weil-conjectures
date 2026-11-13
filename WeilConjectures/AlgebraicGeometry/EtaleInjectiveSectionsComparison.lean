@@ -25,7 +25,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Sections of an inverse image, using the unit and the underived Leray comparison.
-Source: Stacks, Tag 03Q9, final proof paragraph. -/
+(Stacks, Tag 03Q9). -/
 noncomputable def sectionsPullbackNat {Y Z : Scheme.{v}} (a : Y ⟶ Z) :
     Sheaf.Γ Z.smallEtaleTopology AddCommGrpCat.{v + 1} ⟶
       upperStar AddCommGrpCat.{v + 1} a ⋙
@@ -37,7 +37,7 @@ noncomputable def sectionsPullbackNat {Y Z : Scheme.{v}} (a : Y ⟶ Z) :
       (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} a).hom
 
 /-- Cohomology of the actual complex of sections, before deriving sections.
-Source: Stacks, Tag 03Q9, final proof paragraph. -/
+(Stacks, Tag 03Q9). -/
 noncomputable abbrev termwiseSectionsCohomology (Y : Scheme.{v})
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (n : ℤ) :=
   (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).obj
@@ -46,7 +46,7 @@ noncomputable abbrev termwiseSectionsCohomology (Y : Scheme.{v})
         (.up ℤ)).obj C))
 
 /-- The actual chain-level restriction of sections along a triangle, on cohomology.
-Source: Stacks, Tag 03Q9, final proof paragraph. -/
+(Stacks, Tag 03Q9). -/
 noncomputable def termwiseSectionsRestriction {X Y T : Scheme.{v}}
     (a : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = a ≫ g)
     (J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (n : ℤ) :
@@ -64,7 +64,7 @@ noncomputable def termwiseSectionsRestriction {X Y T : Scheme.{v}}
 
 /-- The canonical comparison from termwise sections to derived sections. Its unit
 is used even if the complex is not acyclic for sections.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph (map to derived sections). -/
+(Stacks, Tag 03Q9). -/
 noncomputable def termwiseSectionsToDerived (Y : Scheme.{v})
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (n : ℤ) :
     termwiseSectionsCohomology Y C n ⟶
@@ -79,7 +79,7 @@ noncomputable def termwiseSectionsToDerived (Y : Scheme.{v})
         ((DerivedCategory.quotientCompQhIso _).hom.app C))
 
 /-- Transport the canonical sections comparison through a specified representative.
-Source: Stacks, Tag 03Q9, final proof paragraph. -/
+(Stacks, Tag 03Q9). -/
 noncomputable def representativeSectionsComparison {Y T : Scheme.{v}} (g : Y ⟶ T)
     {K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1})}
     {J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ}
@@ -121,7 +121,7 @@ private theorem isIso_representativeSectionsComparison_of_etale
 /-- The comparison from termwise sections to stage hypercohomology is invertible,
 and intertwines both neighbourhood and cone restrictions. This theorem concerns
 only the derived-sections unit and its naturality, not derived Hom or the mate.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph. -/
+(Stacks, Tag 03Q9). -/
 theorem injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Compactness of the derived structure sheaf
 
-Source: Stacks Project, Tag 09M1, proof of Proposition
-perfect-proposition-compact-is-perfect, first paragraph.
+## References
+
+* Stacks Project, Tag 09M1
 -/
 
 @[expose] public section
@@ -63,9 +64,8 @@ private theorem qc_single (X : Scheme.{u})
       (hf.iso this) hF
 
 
-/-- The derived tensor unit is represented by a compact quasi-coherent object.
-Source: Stacks Project, Tag 09M1, proof of Proposition
-perfect-proposition-compact-is-perfect, first paragraph. -/
+/-- The derived tensor unit is represented by a compact quasi-coherent object
+(Stacks, Tag 09M1). -/
 theorem exists_compact_derivedTensorUnit (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

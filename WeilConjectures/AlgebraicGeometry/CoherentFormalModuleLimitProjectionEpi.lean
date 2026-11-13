@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Epimorphic projections from coherent formal-module limits
 
-Source: Stacks Project, Lemma 087W, proof of M/I^n M = M_n.
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -45,9 +45,8 @@ private theorem affine_surjective_of_epi {Y : Scheme.{u}} {M N : Y.Modules}
   exact hy
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The projection from a coherent adic system's limit sheaf to any level is epic.
-Source: Stacks Project, Lemma 087W, proof of the surjectivity and quotient formula
-for the projections M -> M_n; Lemma 088B, local uniqueness of alpha. -/
+/-- The projection from a coherent adic system's limit sheaf to any level is epic
+(Stacks, Tags 087W and 088B). -/
 theorem coherentFormalModule_limit_projection_epi {Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (G : CoherentFormalModule Y J) (n : ℕ) :
     Epi (limit.π G.obj (op n)) := by

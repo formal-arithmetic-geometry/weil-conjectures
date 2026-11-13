@@ -52,36 +52,7 @@ private theorem finite_of_finite_fibers_over_field {X Y : Scheme.{u}}
   have : Finite X := Set.finite_univ_iff.mp hX
   exact IsFinite.of_locallyQuasiFinite f
 
-/-- Fibre degree bounds multiply under composition (Stacks Project, Morphisms, Tag 03J6).
-
-Proof, following the seven steps of the node:
-1. Fix `z : Z` and write `k = κ(z)`. The fibre `Y_z` is finite over `k`, hence affine
-   with finite-dimensional global sections `B` of dimension at most `m`
-. Its spectrum is finite discrete
-. Decompose `B` into its
-   localizations `B_i` at maximal ideals.
-   Each factor is Artinian, with nilpotent
-   maximal ideal, and residue field `K_i`.
-2. Cartesian-square pasting identifies
-   `X_z` with `X ×_Y Y_z`, and its fibres over the points of `Y_z` with
-   `X ×_Y Spec K_i`. These are finite over `K_i`, with degree at most `n`
-, hence have finite discrete spectra.
-3. The underlying space of `X_z` is a finite union of these finite fibres; every point
-   is closed, since the corresponding point of `Y_z` is closed. Thus `X_z` is finite
-   discrete, hence affine. Put
-   `A = Γ(X_z, O)`; the morphisms yield `k → B → A`
-.
-4. Affine fibre products identify the
-   fibre over the maximal ideal `n_i` with `Spec (A/n_i A)`, so its dimension over
-   `K_i` is at most `n`.
-5. Tensor the finite product decomposition of `B` with `A` to obtain the decomposition
-   into `A_i = A ⊗_B B_i`; dimensions over `k` add across this finite product.
-6. Lift a `K_i`-basis of `A_i/n_i A_i`, of size `d_i ≤ n`, to `A_i`. Nilpotent Nakayama
- makes the resulting map `B_i^{d_i} → A_i`
-   surjective. Consequently `dim_k A_i ≤ n * dim_k B_i`.
-7. Sum these inequalities to get `dim_k A ≤ n * dim_k B ≤ n * m`. Thus `A` is finite
-   over `k`, and `X_z → Spec k` is finite.
-   This proves both clauses of `BoundsFiberDegrees (f ≫ g) (n * m)` for every `z`. -/
+/-- Fibre degree bounds multiply under composition (Stacks Project, Morphisms, Tag 03J6). -/
 theorem boundsFiberDegrees_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (n m : ℕ) (hf : BoundsFiberDegrees f n) (hg : BoundsFiberDegrees g m) :
     BoundsFiberDegrees (f ≫ g) (n * m) := by

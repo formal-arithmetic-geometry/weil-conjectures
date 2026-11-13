@@ -26,15 +26,8 @@ namespace AlgebraicGeometry
 
 /-- The inverse image over a geometric point is the constant sheaf of its stalk.
 Its global sections on a nonempty connected scheme are exactly the constant sections,
-and further pullback preserves their values, even on an empty or disconnected scheme.
-The comparison is the canonical, germ-normalized family supplied by
-`etaleGeometricFibreInverseImageConstant`; the equality fixes that family's choice.
-Global sections are evaluated at the identity étale object. After base change this
-object is canonically the identity object of the source, so the final equation is
-an equation of global sections there.
-
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph,
-and Remark 59.23.2 (Tag 03P5), set-valued form. -/
+and further pullback preserves their values, even on an empty or disconnected scheme
+(Stacks, Tags 0A3H and 03P5). -/
 theorem etaleGeometricFibreConstantSections
     (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

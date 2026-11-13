@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-! # Lifting an etale cover and finite-source comparison through a thickening
 
-Source: Stacks Project Tag 04DZ; finite splitting descent, step 1 and the
-pullback comparison at the start of step 2.
+Source: Stacks Project Tag 04DZ.
 -/
 
 @[expose] public section
@@ -26,10 +25,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Lift an etale covering of a thickening, together with the comparison maps on
-its pullback of an arbitrary source.
-
-Source: Stacks Project Tag 04DZ; steps 1--2 of
-`lem-weil-pbc-finite-splitting-closed-immersion-descent`. -/
+its pullback of an arbitrary source (Stacks, Tag 04DZ). -/
 theorem exists_etale_cover_thickening_lift
     {X Y R : Scheme.{u}} (f : X ⟶ Y)
     (r : R ⟶ Y) [IsClosedImmersion r] [Surjective r] (U : Y.Opens)

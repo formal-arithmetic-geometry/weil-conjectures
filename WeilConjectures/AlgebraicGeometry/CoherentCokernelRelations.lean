@@ -26,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Relations in the cokernel of a map from a finite type module to a coherent module
-are of finite type.
-Source: Stacks Project, Modules, Lemma 01BY (lemma-coherent-abelian), proof of (3),
-the cokernel paragraph. -/
+are of finite type (Stacks, Tag 01BY). -/
 theorem coherent_cokernel_relations (X : RingedSpace.{u})
     (F G : SheafOfModules.{u} (moduleRings X)) (f : F ⟶ G)
     (hF : F.IsFiniteType) (hG : IsCoherent X G)

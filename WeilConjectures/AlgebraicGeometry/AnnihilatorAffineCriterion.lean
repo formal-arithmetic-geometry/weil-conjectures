@@ -22,8 +22,8 @@ open CategoryTheory TopologicalSpace Opposite
 open scoped AlgebraicGeometry
 namespace AlgebraicGeometry
 
-/-- On an affine open, global ideal annihilation implies local ideal annihilation.
-Source: Stacks Project, Tag 01PO, proof of (2). -/
+/-- On an affine open, global ideal annihilation implies local ideal annihilation
+(Stacks, Tag 01PO). -/
 theorem annihilator_affine_criterion (X : Scheme.{u}) (J : X.IdealSheafData)
     (F : X.Modules) (U : X.affineOpens) (s : Γ(F, U.1)) :
     (∀ (V : X.Opens) (h : V ≤ U.1), ∀ a ∈ J.idealOfOpens V,

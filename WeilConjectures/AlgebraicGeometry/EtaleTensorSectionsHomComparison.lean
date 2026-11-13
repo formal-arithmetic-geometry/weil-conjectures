@@ -48,10 +48,7 @@ private theorem evaluation_bijective {X : Scheme.{u}} (F : X.Modules) (U : X.Eta
     rw [homOfGlobalSection_app_one, presheaf_map_id_apply]
 
 /-- Sections of tensor pullbacks and homomorphisms from the pulled-back structure sheaf
-are naturally isomorphic as presheaves of sets. No quasi-coherence assumption is needed.
-
-Source: Stacks Project, Tag 03DT, proof of Lemma 35.8.1, the reinterpretation of sections
-as module maps; Tag 03DR, equation (35.8.0.1). -/
+are naturally isomorphic as presheaves of sets (Stacks, Tags 03DT, 03DR). -/
 theorem nonempty_etaleTensorSectionsHomIso {X : Scheme.{u}} (F : X.Modules) :
     Nonempty ((etaleTensorSectionsPresheaf F ⋙ CategoryTheory.forget AddCommGrpCat) ≅
       etaleHom (unitObj X) F) := by

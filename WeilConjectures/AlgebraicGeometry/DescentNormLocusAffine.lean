@@ -27,10 +27,7 @@ open CategoryTheory AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
 /-- The finite free norm criterion, transported from prime spectra to an affine open.
-This is the geometric argument of `AlgebraicGeometry.mem_basicOpen_normAt` in
-`WeilConjectures.AlgebraicGeometry.BaseChangeNorm`, with freeness supplied explicitly
-instead of obtained from a finite field extension. The ring criterion is the proved
-`Algebra.norm_notMem_iff` in `WeilConjectures.Mathlib.RingTheory.Localization.NormTrace`. -/
+(compare `AlgebraicGeometry.mem_basicOpen_normAt`) -/
 private theorem mem_basicOpen_norm_of_free
     {X Y : Scheme.{u}} (π : Y ⟶ X) [IsFinite π]
     {B : X.Opens} (hB : IsAffineOpen B) (a : Γ(Y, π ⁻¹ᵁ B))
@@ -70,8 +67,7 @@ private theorem mem_basicOpen_norm_of_free
     change (⟨Q, hQ⟩ : PrimeSpectrum _) ∈ hV.fromSpec ⁻¹ᵁ Y.basicOpen a at this
     rwa [hV.fromSpec_preimage_basicOpen, PrimeSpectrum.mem_basicOpen] at this
 
-/-- A norm locus contained in an affine basic open is affine.
-Source: Stacks Project, Tag 03JE, final norm argument. -/
+/-- A norm locus contained in an affine basic open is affine. (Stacks, Tag 03JE) -/
 theorem isAffineOpen_descent_norm_locus
     {V R : Scheme.{u}} (s t : R ⟶ V)
     [IsFinite s] [Flat s] [LocallyOfFinitePresentation s]

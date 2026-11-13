@@ -152,12 +152,8 @@ noncomputable def representingIso
 end EtaleOpenComparison
 
 /-- Cohomology over an open étale object agrees with cohomology on the open scheme.
-The left side is the large-universe Ext model of object cohomology: free abelian
-sheafification of the universe-lifted representable of `j`. This is the analogue of
-`Sheaf.H'` for coefficients in `AddCommGrpCat.{u + 1}`; unlike global `Sheaf.H G q`,
-it evaluates sections at `j`. Mathlib's `H'` requires coefficients in the Hom universe
-of the site, which here is `u`, so it cannot be applied to this larger coefficient sheaf.
-Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ. -/
+The left side is the large-universe Ext model of object cohomology, the analogue of
+`Sheaf.H'` for coefficients in `AddCommGrpCat.{u + 1}` (Stacks, Tags 03F3 and 00XZ). -/
 noncomputable def etaleCohomologyOverOpenEquiv {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [Etale j]
     [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]

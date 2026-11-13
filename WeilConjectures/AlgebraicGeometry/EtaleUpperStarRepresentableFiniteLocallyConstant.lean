@@ -20,9 +20,9 @@ represented by an étale `S`-scheme `P`, then the underlying sheaf of sets of it
 along `i : Z ⟶ S` is represented by the base change `P ×_S Z`. In particular it is finite
 locally constant when this base change is finite over `Z`.
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb
-(representables commute with inverse image; finite étale representables are finite locally
-constant; forgetting abelian groups commutes with inverse image).
+## References
+
+* Stacks Project, Tag 0GKU
 -/
 
 @[expose] public section

@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Termwise restriction of coherent formal modules
 
-Source: Stacks Project, Lemma 087X (2), construction of restriction.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -29,9 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Termwise restriction preserves the coherent adic object conditions.
-Source: Stacks Project, Lemma 087X (2), and the restriction step of
-lem-weil-pbc-coherent-formal-modules-local-exactness. -/
+/-- Termwise restriction preserves the coherent adic object conditions
+(Stacks, Tag 087X). -/
 theorem coherentFormalModules_restriction_objects {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     (F : CoherentFormalModule X I) :
@@ -58,9 +57,8 @@ theorem coherentFormalModules_restriction_objects {X : Scheme.{u}}
       (a.hom ≫ R.map e.hom) = R.map _
     rw [← Category.assoc, ha, ← R.map_comp, he]
 
-/-- Restriction uses the actual termwise restricted inverse system and morphisms.
-The preceding theorem supplies only its object-property proof.
-Source: Stacks Project, Lemma 087X (2). -/
+/-- Restriction uses the actual termwise restricted inverse system and morphisms
+(Stacks, Tag 087X). -/
 noncomputable def coherentFormalModulesRestriction {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (U : X.Opens) [IsNoetherian U.toScheme] :
     CoherentFormalModule X I ⥤ CoherentFormalModule U.toScheme (I.comap U.ι) :=

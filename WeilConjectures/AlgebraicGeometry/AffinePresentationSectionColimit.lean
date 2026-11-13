@@ -123,10 +123,8 @@ private theorem affineEtale_smallLimit_preservesColimit {X : Scheme.{u}}
     (isLimitOfReflects (Scheme.ProEt.forget X) hc).op hco
 
 /-- Small filtered continuity on the affine ind-etale site gives the actual section
-colimit for every affine etale presentation in the site universe.
-
-Source: Bhatt--Scholze, Lemma 5.1.1; the final paragraph of the blueprint's
-continuity-map definition. -/
+colimit for every affine etale presentation in the site universe
+(Bhatt--Scholze, Lemma 5.1.1). -/
 theorem affinePresentation_sectionCocone_isColimit {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))
     (hF : PreservesFilteredColimitsOfSize.{u, u}

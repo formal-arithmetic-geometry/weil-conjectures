@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme
 set_option autoImplicit false
 
 /-- The finite affine tensor-section Čech complex is a lifted Amitsur complex.
-Source: Stacks Project, Tag 03OZ and Tag 03P2, proof in the affine case. -/
+(Stacks, Tags 03OZ and 03P2) -/
 theorem exists_etaleTensorSectionsSheaf_ulift_cech_amitsur_iso
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

@@ -24,9 +24,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- A natural forward Hom comparison invertible in rank one is invertible
-on every finite free source, with arbitrary coefficients.
-Source: Stacks Project, Tag 01HV (4)-(5); Tag 0BQZ,
-lemma-regular-immersion-ext, finite-free coefficient calculation. -/
+on every finite free source, with arbitrary coefficients (Stacks, Tags 01HV, 0BQZ). -/
 theorem affine_hom_comparison_isIso_of_finite_free
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (T : ModuleCat.{u} Γ(Y, U.1) ⥤ U.1.toScheme.Modules)

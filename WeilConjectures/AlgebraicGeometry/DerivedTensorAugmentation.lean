@@ -29,12 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option synthInstance.maxSize 512 in
 /-- The morphism `β : B ⟶ A` is `id_A ⊗ᴸ u`, followed by the right unitor, for some
-`u : I ⟶ 𝒪_X`, and `B` is `A ⊗ᴸ I`. We express this using K-flat representatives
-`P` of `A` and `J` of `I`, a chain augmentation `J ⟶ 𝒪_X[0]`, and the canonical
-right unitor of total tensor. The isomorphisms merely transport these models to
-`A`, `I`, and `B`. Every derived augmentation admits such a K-flat roof, so the
-existential model imposes no condition beyond the stated derived tensor description.
-Source: Stacks Project, Tags 06YS, 06YU and 08EH. -/
+`u : I ⟶ 𝒪_X`, and `B` is `A ⊗ᴸ I`, expressed through K-flat representatives of `A` and `I`
+(Stacks, Tags 06YS, 06YU and 08EH). -/
 def IsDerivedTensorAugmentation (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (A I B : schemeDerivedCategory X) (β : B ⟶ A) : Prop :=

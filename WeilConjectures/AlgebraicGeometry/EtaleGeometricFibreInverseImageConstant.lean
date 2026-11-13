@@ -28,17 +28,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph.
-The inverse image along `h ≫ s` is naturally the constant sheaf of the geometric stalk.
-The isomorphism at `Spec Ω` sends each pulled-back pointed section to its germ,
-fixing the canonical identification. The family is compatible with every further
-morphism over `Ω`.
-This compatibility is expressed on constant-presheaf generators: pulling a generator
-back through the inverse-image unit and its composition comparison gives the generator
-with the same stalk value on the source. Sheafification makes this equivalent to the
-usual square with the canonical inverse-image comparison for constant sheaves.
-The composition comparison is the unit-preserving witness of
-`etaleSetInverseImageCompositionUnits`, whose uniqueness makes the choice immaterial. -/
+/-- The inverse image along `h ≫ s` is naturally the constant sheaf of the geometric stalk,
+compatibly with every further morphism over `Ω` (Stacks, Tag 0A3H). -/
 theorem etaleGeometricFibreInverseImageConstant
     (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

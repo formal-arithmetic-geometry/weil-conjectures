@@ -17,17 +17,10 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientHeartStatement
 /-!
 # Constructible coefficient sheaves over a general field
 
-Source: blueprint latest,
-`part-six-operations/sec-reduction-finite-coefficients/`
-`sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/_section.md`,
-and `sk-lem-coefficient-heart.proof.md`, clauses (1)--(3), with the standing
-field hypothesis `char(k) ≠ ℓ`.
-
-This file states the current coefficient-heart lemma. The coefficient ring is either a
-finite extension inside the algebraic closure of `ℚ_ℓ` or the finite-subextension-valued
-condensed algebraic closure. The proof is postponed; its route is the three clauses of the
-blueprint: closure and exactness, essential smallness, and finite locally closed lisse
-filtrations.
+This file states the coefficient-heart lemma over a field with `char(k) ≠ ℓ`. The coefficient
+ring is either a finite extension inside the algebraic closure of `ℚ_ℓ` or the
+finite-subextension-valued condensed algebraic closure. The statement has three clauses:
+closure and exactness, essential smallness, and finite locally closed lisse filtrations.
 -/
 
 @[expose] public noncomputable section
@@ -83,28 +76,7 @@ private theorem generalHeart_filtrationImage_eq
 
 /-- Constructible coefficient sheaves over any field of characteristic different from `ℓ`
 form an exact essentially small abelian heart and admit finite filtrations by canonical
-locally closed extensions of lisse sheaves.
-
-Source: blueprint latest,
-`part-six-operations/sec-reduction-finite-coefficients/`
-`sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/_section.md`,
-clauses (1)--(3), and
-`sk-lem-coefficient-heart.proof.md`, steps (1)--(3).
-
-Proof, following the node's five steps:
-1. Finite type over k makes X Noetherian (locally Noetherian and quasi-compact).
-2. Clause (1): `coefficientHeart_closure` gives closure under kernels, cokernels and
-   extensions, the abelian full subcategory and its exact inclusion, and the criterion
-   "constructible iff lisse on the strata of a finite stratification".
-3. Clause (2): `coefficientHeart_essentiallySmall`.
-4. Clause (3): for constructible F take its lisse stratification; a finite free chart is
-   a finite constant local model (`generalHeart_free_model`, rank zero included). Refine
-   it by `coefficientHeart_commonStratification` to ordered strata with open prefixes,
-   on which F stays lisse.
-5. `coefficientHeart_filtration` gives the open-prefix counit images as a filtration from
-   zero to F whose quotients are the locally closed extensions of the lisse restrictions.
-   Repeated terms, rank zero and empty schemes are allowed.
--/
+locally closed extensions of lisse sheaves. -/
 theorem coefficientHeartGeneralStatement (ℓ : ℕ) [Fact ℓ.Prime]
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj L)]

@@ -38,11 +38,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- A map from the restriction of a perfect object of an affine scheme to a quasi-compact
 open lifts on the whole scheme after a perfect tensor augmentation that is invertible on
-the open. Restriction to `U` is first to the localized site and then transported by the
-canonical equivalence with the open's site, so `α` is a map in `D(𝒪_U)`. The lifted
-object keeps every closed support of the original object, support meaning that every
-cohomology sheaf has zero stalks off the closed set.
-Source: Stacks Project, Tag 08EH, Lemma 36.13.7. -/
+the open. The lifted object keeps every closed support of the original object
+(Stacks, Tag 08EH). -/
 theorem exists_perfect_map_lift_of_isAffine
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

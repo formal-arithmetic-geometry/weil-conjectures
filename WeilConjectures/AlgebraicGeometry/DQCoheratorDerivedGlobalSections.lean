@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Coherator detection for morphisms in the derived category
 
-Source: Stacks Project, duality.tex, Tag 0B6I, final proof paragraph.
+## References
+
+* Stacks Project, Tag 0B6I
 -/
 
 @[expose] public section
@@ -25,7 +27,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 /-- An isomorphism after the coherator induces an isomorphism on derived global sections.
-Source: Stacks Project, duality.tex, Tag 0B6I, final proof paragraph. -/
+(Stacks, Tag 0B6I) -/
 theorem dqCoherator_isIso_derivedGlobalSections (Y : Scheme.{u})
     [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -23,11 +23,12 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Coherator adjunction and detection by global sections
 
-Source: Stacks Project, Tag 0B6I, final paragraph of the proof, and Derived Categories
-of Schemes, `perfect-lemma-better-coherator`.
-
 Derived global sections are expressed by their K-injective representatives: applying
 `RingedSpace.globalSectionsFunctor` termwise to a K-injective complex represents RΓ.
+
+## References
+
+* Stacks Project, Tag 0B6I
 -/
 
 @[expose] public section
@@ -38,9 +39,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 /-- The inclusion of the quasi-coherent derived full subcategory on a qcqs scheme
-has a right adjoint. Its adjunction supplies the natural Hom bijection.
-Source: Stacks Project, Tag 0B6I, final proof paragraph, and
-`perfect-lemma-better-coherator`. -/
+has a right adjoint. Its adjunction supplies the natural Hom bijection. (Stacks, Tag 0B6I) -/
 theorem exists_dqCoheratorAdjunction (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w}
@@ -71,8 +70,7 @@ theorem exists_dqCoheratorAdjunction (Y : Scheme.{u}) [CompactSpace Y]
   exact ⟨_, ⟨Adjunction.ofIsLeftAdjoint (schemeDerivedQCohProperty Y).ι⟩⟩
 
 
-/-- Every shift O_Y[-i] is in the quasi-coherent full subcategory.
-Source: Stacks Project, Tag 0B6I, final proof paragraph. -/
+/-- Every shift O_Y[-i] is in the quasi-coherent full subcategory. (Stacks, Tag 0B6I) -/
 theorem structureSheaf_shift_is_derivedQCoh (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w}
@@ -382,8 +380,7 @@ private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
         (DerivedCategory.Q.commShiftIso i).hom.app I) (DerivedCategory.Q.map f)
 
 /-- Global degree-i cohomology of a K-injective representative is the derived Hom
-from O_Y[-i], as an additive group.
-Source: Stacks Project, Tag 0B6I, final proof paragraph. -/
+from O_Y[-i], as an additive group. (Stacks, Tag 0B6I) -/
 theorem globalSections_homology_equiv_structureSheaf_shift (Y : Scheme.{u})
     [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w}
@@ -409,8 +406,7 @@ theorem globalSections_homology_equiv_structureSheaf_shift (Y : Scheme.{u})
 
 
 /-- Any coherator right adjoint detects quasi-isomorphisms on derived global sections,
-computed on K-injective representatives of the source and target.
-Source: Stacks Project, Tag 0B6I, final proof paragraph. -/
+computed on K-injective representatives of the source and target. (Stacks, Tag 0B6I) -/
 theorem dqCoherator_detects_globalSections (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w}

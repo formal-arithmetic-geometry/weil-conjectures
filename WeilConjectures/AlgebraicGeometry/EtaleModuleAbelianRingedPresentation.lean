@@ -100,9 +100,7 @@ private theorem integerToSheafEquivalence (X : Scheme.{u}) :
   exact Functor.isEquivalence_of_comp_left E'.functor _
 
 /-- The two underived functors have simultaneous presentations by module direct images.
-
-Source: Stacks Project, Tag 093I (constant rings and modules), and the coefficient
-restriction and geometric morphisms in the proof of Tag 0D6J(3), using Tag 0D6E. -/
+ (Stacks, Tags 093I, 0D6J and 0D6E) -/
 theorem etaleModuleAbelianRingedPresentation
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     ∃ (C D : Type (u + 1)) (_ : SmallCategory C) (_ : SmallCategory D)

@@ -28,10 +28,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Transposing the open base-change component gives restriction of the transposed
-coefficient map followed by the inverse normalized direct-image/open comparison.
-There is only one open; no cover, boundary, short exact sequence or shift occurs.
-Source: Stacks Tags 08HY, 08FE
-(lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition). -/
+coefficient map followed by the inverse normalized direct-image/open comparison
+(Stacks, Tags 08HY, 08FE, 0D5T). -/
 theorem derivedBaseChange_open_transpose
     {X X' : Scheme.{u}} (g : X' ⟶ X) (W : X.Opens)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

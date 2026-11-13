@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory.ShiftSaturated
 open AlgebraicGeometry
 
-/-- The supported quasi-coherent triangulated property at the whole space is D_QCoh.
-Source: Stacks Tag 0A9A. Proof: identify the two object properties by extensionality
-and apply supported_qcoh_isTriangulated at Set.univ. -/
+/-- The supported quasi-coherent triangulated property at the whole space is D_QCoh
+(Stacks, Tag 0A9A). -/
 theorem qc_triangulated (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     (schemeDerivedQCohProperty X).IsTriangulated := by

@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsIdeal
 
 /-! # Mapping property of the normalized quotient-limit unit
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
+## References
+
+* Stacks Project, Tags 099M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -356,10 +357,8 @@ private theorem reflector_finite_unit_isIso
     exact hx
 
 /-- The normalized map into a quotient Roos limit has the mapping property for complete
-objects. This assertion does not assert completeness of the point of the limit.
-
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul. -/
+objects. This assertion does not assert completeness of the point of the limit
+(Stacks, Tags 099M and 0A0E). -/
 theorem adicResidueQuotientUnit_universal
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

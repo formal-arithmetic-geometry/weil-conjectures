@@ -169,10 +169,7 @@ private theorem shrink_cancel
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
 
 /-- The explicit graph comparison commutes with shrinking the supporting open while
-keeping its ambient proper scheme fixed.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D; the elementary
-neighborhood move in lem-pur-etale-graph-comparison-interchange, steps 1--3. -/
+keeping its ambient proper scheme fixed (Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleGraphComparisonFromOpen_openShrink
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

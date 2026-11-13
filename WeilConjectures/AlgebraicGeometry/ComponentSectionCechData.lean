@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.NormalizedComponentSectionCover
 
 /-! # Normalized component frames and their Čech data
 
-Source: Stacks Project, Varieties Lemma 09NE (lemma-glue-invertible-sheaves). -/
+Stacks Project, Varieties, Tag 09NE. -/
 
 @[expose] public section
 
@@ -196,8 +196,9 @@ private theorem exists_cech_of_component_frame_cover
         component_app_map (i a) (inf_le_right : U b ⊓ U c ≤ U c)]
       exact hsb.symm.trans hsc
 
-/-- Source: Stacks Project, Varieties Lemma 09NE, transition-function paragraphs and
-final paragraph. -/
+/-- Normalized component sections admit Čech data: an open cover of `Y` with transition units
+satisfying the cocycle conditions, and free generators of the pulled-back modules
+(Stacks, Tag 09NE). -/
 theorem exists_component_section_cech_data
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

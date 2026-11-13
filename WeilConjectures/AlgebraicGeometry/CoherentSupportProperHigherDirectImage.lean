@@ -25,8 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 
 /-! # Coherent higher direct images with proper support
 
-Source: Stacks Project, Cohomology of Schemes, Tag 08DS,
-Lemma `coherent-lemma-support-proper-over-base-pushforward`.
+Stacks Project, Tag 08DS.
 -/
 
 @[expose] public section
@@ -75,8 +74,8 @@ private theorem finitePresentation_of_quasicoherent_finiteType
       exact iSup_affineOpens_eq_top Y) hfp
 
 /-- A coherent module whose support is proper over a locally Noetherian base has coherent
-higher direct images along a locally finite type morphism in every nonnegative degree.
-Source: Stacks Project, Cohomology of Schemes, Tag 08DS. -/
+higher direct images along a locally finite type morphism in every nonnegative degree
+(Stacks, Tag 08DS). -/
 theorem isCoherent_schemeModuleHigherDirectImage_of_support_proper
     {X S : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

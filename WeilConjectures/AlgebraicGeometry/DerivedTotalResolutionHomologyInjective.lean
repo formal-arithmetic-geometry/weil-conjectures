@@ -170,8 +170,7 @@ private theorem homology_exact_of_cycles_exact
 
 -- Preserve the inherited, unused negative-column augmentation hypothesis and its binder hp.
 set_option linter.unusedVariables false in
-/-- The total augmentation is injective on homology in every degree.
-Source: Stacks Project, Homology, Tag 09IZ, proof. -/
+/-- The total augmentation is injective on homology in every degree (Stacks, Tag 09IZ). -/
 theorem total_resolution_homology_injective
     (M : CochainComplex (ModuleCat R) ℤ)
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)

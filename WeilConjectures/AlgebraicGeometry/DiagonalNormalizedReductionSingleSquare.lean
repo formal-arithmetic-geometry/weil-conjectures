@@ -38,10 +38,7 @@ private theorem singleCounit_naturality
     Functor.whiskerRight_app, Functor.comp_map, diagonalDerivedSingleCounit] using!
       α.naturality h
 
-/-- A normalized single reduction square commutes after any ordinary endpoint map.
-
-Source: blueprint latest, diagonal coefficient changes (3), naturality of reduction
-on the supported integral source. -/
+/-- A normalized single reduction square commutes after any ordinary endpoint map. -/
 theorem diagonalReduction_normalized_single_square
     {A B C D : Type*}
     [Category A] [Abelian A] [Category B] [Abelian B]

@@ -18,12 +18,13 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Completed adic coefficient datum
 
-Source: sec-proper-base-change/sk-thm-properbasechange, order 1239,
-node def-weil-pbc-adic-coefficient-datum; Stacks Tags 099L and 099M.
-
 The finite coefficient sheaves are exactly the recorded sheafifications of continuous
 functions on connected components. The ambient ring is their inverse limit. In particular,
 no identification with the discrete constant coefficient category is used.
+
+## References
+
+* Stacks Project, Tags 099L and 099M
 -/
 
 @[expose] public noncomputable section
@@ -39,42 +40,35 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
 /-- The Noetherian adic datum, including finiteness of every positive quotient.
-The inherited fields give finite generation, additive torsion of A/I and perfectness.
- -/
+The inherited fields give finite generation, additive torsion of A/I and perfectness. -/
 structure AdicCoefficientDatum (A : Type t) [CommRing A] extends CompleteCoefficientDatum A where
   quotientFinite : ∀ n : ℕ, Finite (A ⧸ ideal ^ (n + 1))
 
 variable {A : Type t} [CommRing A]
 
-/-- The positive quotient in the site's coefficient universe; n denotes exponent n+1.
- -/
+/-- The positive quotient in the site's coefficient universe; n denotes exponent n+1. -/
 abbrev completedAdicQuotient (d : AdicCoefficientDatum A) (n : ℕ) :=
   ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))
 
-/-- Quotient coefficients are finite, by the datum, also after changing universe.
- -/
+/-- Quotient coefficients are finite, by the datum, also after changing universe. -/
 instance completedAdicQuotient_finite (d : AdicCoefficientDatum A) (n : ℕ) :
     Finite (completedAdicQuotient d n) :=
   letI := d.quotientFinite n
   inferInstance
 
-/-- Each finite quotient has the discrete topology specified by the datum.
- -/
+/-- Each finite quotient has the discrete topology specified by the datum. -/
 instance completedAdicQuotient_topology (d : AdicCoefficientDatum A) (n : ℕ) :
     TopologicalSpace (completedAdicQuotient d n) := ⊥
 
-/-- The quotient topology is discrete.
- -/
+/-- The quotient topology is discrete. -/
 instance completedAdicQuotient_discrete (d : AdicCoefficientDatum A) (n : ℕ) :
     DiscreteTopology (completedAdicQuotient d n) := ⟨rfl⟩
 
-/-- The actual finite coefficient sheaf from the recorded continuous-functions construction.
- -/
+/-- The actual finite coefficient sheaf from the recorded continuous-functions construction. -/
 def completedAdicFiniteRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :=
   ProEtale.finiteCoefficientRingSheaf T (completedAdicQuotient d n)
 
-/-- Postcomposition by the quotient homomorphism on the coefficient presheaves.
- -/
+/-- Postcomposition by the quotient homomorphism on the coefficient presheaves. -/
 def completedAdicFinitePresheafStep (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     ProEtale.finiteCoefficientPresheaf T (completedAdicQuotient d (n + 1)) ⟶
       ProEtale.finiteCoefficientPresheaf T (completedAdicQuotient d n) where
@@ -83,20 +77,17 @@ def completedAdicFinitePresheafStep (T : Scheme.{t}) (d : AdicCoefficientDatum A
       (ConnectedComponents U.unop.left) (continuous_of_discreteTopology))
   naturality _ _ _ := by ext s; rfl
 
-/-- Sheafify the specified postcomposition maps, retaining their actual formula.
- -/
+/-- Sheafify the specified postcomposition maps, retaining their actual formula. -/
 def completedAdicFiniteStep (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     completedAdicFiniteRing T d (n + 1) ⟶ completedAdicFiniteRing T d n :=
   (presheafToSheaf (ProEt.topology T) RingCat.{t + 1}).map
     (completedAdicFinitePresheafStep T d n)
 
-/-- The strict inverse sequence of finite coefficient sheaves, with all longer composites.
- -/
+/-- The strict inverse sequence of finite coefficient sheaves, with all longer composites. -/
 def completedAdicRingSystem (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   Functor.ofOpSequence (completedAdicFiniteStep T d)
 
-/-- The completed coefficient ring sheaf A_T, the actual sheaf limit of the finite quotients.
- -/
+/-- The completed coefficient ring sheaf A_T, the actual sheaf limit of the finite quotients. -/
 def completedAdicRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     Sheaf (ProEt.topology T) RingCat.{t + 1} :=
   limit (completedAdicRingSystem T d)
@@ -132,14 +123,12 @@ theorem completedAdicRing_mul_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
   rw [map_mul, map_mul]
   exact finiteRing_comm T d j.unop U _ _
 
-/-- Retain the actual ring data of the limit and supply only its commutativity proof.
- -/
+/-- The ring data of the limit, together with its commutativity proof. -/
 abbrev completedAdicCommRingStructure (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (U : T.ProEtᵒᵖ) : CommRing ((completedAdicRing T d).obj.obj U) :=
   { RingCat.ring _ with mul_comm := completedAdicRing_mul_comm T d U }
 
-/-- The same completed coefficient presheaf with commutativity retained.
- -/
+/-- The same completed coefficient presheaf with commutativity retained. -/
 def completedAdicCommPresheaf (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     T.ProEtᵒᵖ ⥤ CommRingCat.{t + 1} where
   obj U := @CommRingCat.of ((completedAdicRing T d).obj.obj U)
@@ -153,27 +142,23 @@ def completedAdicCommPresheaf (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
   map_comp f g := (forget₂ CommRingCat RingCat).map_injective
     ((completedAdicRing T d).obj.map_comp f g)
 
-/-- The commutative ring sheaf with precisely the completed limit's underlying ring sheaf.
- -/
+/-- The commutative ring sheaf with precisely the completed limit's underlying ring sheaf. -/
 def completedAdicCommRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     Sheaf (ProEt.topology T) CommRingCat.{t + 1} :=
   ⟨completedAdicCommPresheaf T d,
     Presheaf.isSheaf_of_isSheaf_comp _ _ (forget₂ CommRingCat RingCat)
       (completedAdicRing T d).property⟩
 
-/-- Module sheaves over A_T, with Mathlib's actual abelian structure.
- -/
+/-- Module sheaves over A_T, with Mathlib's actual abelian structure. -/
 abbrev CompletedAdicModules (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   SheafOfModules.{t + 1} (completedAdicRing T d)
 
-/-- The sheaf tensor structure over the completed commutative ring, not the constant ring.
- -/
+/-- The sheaf tensor structure over the completed commutative ring, not the constant ring. -/
 instance completedAdicModules_monoidal (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     MonoidalCategory (CompletedAdicModules T d) :=
   SheafOfModules.monoidalCategory (completedAdicCommRing T d)
 
-/-- Standard localization of the completed-coefficient module category.
- -/
+/-- Standard localization of the completed-coefficient module category. -/
 instance completedAdicModules_hasDerived (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     HasDerivedCategory (CompletedAdicModules T d) := HasDerivedCategory.standard _
 
@@ -184,7 +169,7 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
   (F : B ⥤ C) [F.Additive] (P : CochainComplex B ℤ → Prop)
 
 /-- A left derived functor, its counit, and its computation on the resolving class.
-Source: Stacks Tag 06YY. -/
+(Stacks, Tag 06YY). -/
 structure DerivedReductionModelData where
   reduction : DerivedCategory B ⥤ DerivedCategory C
   counit : DerivedCategory.Qh ⋙ reduction ⟶
@@ -195,7 +180,7 @@ structure DerivedReductionModelData where
     IsIso (counit.app ((HomotopyCategory.quotient B (.up ℤ)).obj K))
 
 /-- Retain the universally specified pair in one record, without changing either choice.
-Source: Stacks Tag 06YY. -/
+(Stacks, Tag 06YY). -/
 def derivedReductionModelDataOfExists
     (h : ∃ (LF : DerivedCategory B ⥤ DerivedCategory C)
       (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
@@ -211,7 +196,7 @@ def derivedReductionModelDataOfExists
 variable {F P}
 
 /-- The comparison on complexes, including the localization factor isomorphisms.
-Source: Stacks Tag 06YY. -/
+(Stacks, Tag 06YY). -/
 def DerivedReductionModelData.complexCounit (D : DerivedReductionModelData F P)
     (K : CochainComplex B ℤ) :
     D.reduction.obj (DerivedCategory.Q.obj K) ⟶
@@ -238,21 +223,18 @@ def completedAdicChangeData (T : Scheme.{t})
       (ProEt.topology T) S))
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{t + 2, t + 1, t + 1, t} φ
 
-/-- Ordinary scalar extension, fixed on objects and morphisms by the tensor witness.
- -/
+/-- Ordinary scalar extension, fixed on objects and morphisms by the tensor witness. -/
 def completedAdicChange (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
   (completedAdicChangeData T φ).choose
 
-/-- Additivity from the actual ordinary scalar-extension witness.
- -/
+/-- Additivity from the actual ordinary scalar-extension witness. -/
 instance completedAdicChange_additive (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     (completedAdicChange T φ).Additive :=
   (completedAdicChangeData T φ).choose_spec.choose_spec.choose_spec.choose
 
-/-- Derived scalar extension, chosen with its universal comparison and K-flat computation.
- -/
+/-- Derived scalar extension, chosen with its universal comparison and K-flat computation. -/
 def completedAdicDerivedChange (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
   (completedAdicChangeData T φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
@@ -285,8 +267,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 end FiniteReductionComparison
 
-/-- A sheafified pure tensor in the normalized ordinary scalar-extension functor.
- -/
+/-- A sheafified pure tensor in the normalized ordinary scalar-extension functor. -/
 def completedAdicChangeTensor (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (M : SheafOfModules.{t + 1}

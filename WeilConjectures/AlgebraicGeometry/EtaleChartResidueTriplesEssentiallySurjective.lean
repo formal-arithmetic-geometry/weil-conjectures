@@ -43,8 +43,8 @@ private theorem residueTriple_iso {A : CommRingCat.{v}} {p : Spec A}
   apply Over.OverMorphism.ext
   exact hA
 
-/-- Source: Stacks Project, proof of Tag 04HX,
-translation of pointed affine neighbourhoods into triples, and Tag 04HT. -/
+/-- A functor from pointed affine chart neighbourhoods to residue-field triples compatible with
+the chart data is essentially surjective. (Stacks, Tags 04HX and 04HT) -/
 theorem etale_chart_residue_triples_essentially_surjective
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

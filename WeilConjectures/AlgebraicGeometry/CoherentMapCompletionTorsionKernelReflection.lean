@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SupportedCoherentCompletionReflectsZero
 
 /-! # Reflecting kernel torsion from completion on a closed thickening
 
-Source: Stacks Project, Tags 088A and 0888, the second torsion estimate.
+Stacks Project, Tags 088A and 0888.
 -/
 
 @[expose] public section
@@ -24,11 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Reflect a componentwise torsion bound for the completion of a coherent map whose
-source and target are annihilated by the ideal of a fixed closed thickening.
-Source: Stacks Project, Tag 088A, lemma-existence-tricky, second application of
-Remark 0888, remark-inverse-systems-kernel-cokernel-annihilated-by.
-https://stacks.math.columbia.edu/tag/088A
-https://stacks.math.columbia.edu/tag/0888. -/
+source and target are annihilated by the ideal of a fixed closed thickening
+(Stacks, Tags 088A and 0888). -/
 theorem coherentMap_completion_torsion_kernel_reflection
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (q : ℕ) (hq : 1 ≤ q)

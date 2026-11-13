@@ -9,8 +9,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
 /-!
 # Tensor contraction of a proper section integral
-
-Source: blueprint thm-amb-p1-adjunction.proof.md.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,7 +32,7 @@ attribute [local instance 20000] derivedBraidedCategory
 attribute [local implicit_reducible] sheafMonoidalCategory sheafBraidedCategory
 
 /-- The ordered section projection contracts against any normalized scalar integral.
-Source: blueprint thm-amb-p1-adjunction.proof.md, tensoring a section integral. -/
+-/
 theorem properSection_contraction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (s : X ⟶ Y) (p : Y ⟶ X)

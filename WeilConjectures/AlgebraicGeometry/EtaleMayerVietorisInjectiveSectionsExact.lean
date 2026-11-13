@@ -188,7 +188,7 @@ private noncomputable def degreeIso {X : Scheme.{u}} (U V : X.Opens)
     rw [biprod.mapBiprod_hom_desc]
 
 /-- The section short complex of an open cover is short exact in an injective degree.
-Source: Stacks Project, Tag 0A50, proof. -/
+(Stacks, Tag 0A50) -/
 theorem etaleSectionShortComplex_degreewise_shortExact
     {X : Scheme.{u}} (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)

@@ -15,7 +15,9 @@ import Mathlib.Algebra.Field.ULift
 
 /-! # Integral models on a locally finitely presented stratum
 
-Source: Bhatt--Scholze, Lemmas 6.8.12--6.8.13 and Proposition 6.8.14(2).
+## References
+
+* Bhatt--Scholze, Lemmas 6.8.12--6.8.13 and Proposition 6.8.14 (2)
 -/
 
 @[expose] public section
@@ -32,28 +34,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- A locally finitely presented rational module on one immersed stratum admits an
 ordinary constructible integral model, with both coefficient rings pulled back from X.
-Source: Hemo--Richarz--Scholbach, Example 3.1 (local triviality), and Bhatt--Scholze,
-Lemma 6.8.13, with the coefficient restriction identification of Lemma 6.8.2.
-
-Proof in words. An immersion identifies Y with a locally closed subspace of X, so Y
-is topologically noetherian. Identify the two pulled-back coefficient rings and their
-map with the continuous integral and rational coefficient rings on Y. A finite local
-presentation over the rational ring is locally finite free: realize a presentation
-matrix as continuous E-valued functions, refine by its locally constant rank, and use
-an invertible maximal minor to identify its cokernel with a finite free module.
-For this lisse module, the first paragraph of Lemma 6.8.13 gives lattices on a finite
-refinement. More explicitly, Proposition 6.8.4(6) first gives lattices on an etale cover.
-Take a finite affine subcover and stratify so its maps become finite etale. Etale
-locally split each finite etale cover into sheets. View the finitely many supplied
-lattices in the same rational module and take their sum; it is a finite free full
-lattice over the valuation ring. The sum is invariant under permutations of the
-sheets, and continuous transition maps preserve its locally constant lattice class,
-so it descends. The resulting lisse integral module is locally finitely presented,
-and the singleton identity stratification makes it constructible.
-Apply the separate gluing theorem to these supplied models on the finite refinement,
-and transport the result back across the coefficient identifications. For the zero
-module and the empty stratum use zero. No derived comparison or bounded-complex
-packaging is part of this statement. -/
+No derived comparison or bounded-complex packaging is part of this statement.
+(Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Lemmas 6.8.2 and 6.8.13) -/
 theorem continuousConstructible_integral_stratum (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] {Y : Scheme.{u}} (i : Y ⟶ X) [IsImmersion i]
     (F : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

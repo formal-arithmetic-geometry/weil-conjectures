@@ -31,10 +31,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- An arrow between finite sums of affine etale free sheaves descends to an arrow
-between constructible module sheaves at a common stage.
-
-Source: Stacks Project, Tag 09YU (3), proof of essential surjectivity using Tag 095N;
-Tag 09YQ for sections, Tag 03S6 for free sheaves and base change. -/
+between constructible module sheaves at a common stage
+(Stacks, Tags 09YU, 095N, 09YQ, 03S6). -/
 theorem exists_affine_free_etaleModule_arrow_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

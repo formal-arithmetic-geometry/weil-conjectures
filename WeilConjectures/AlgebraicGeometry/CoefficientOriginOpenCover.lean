@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-! # Zariski locality of coefficient-sized etale origin
 
-Source: Stacks Project, proetale.tex, Tag 09AK, proof of lemma-compare-constructible.
+## References
+
+* Stacks Project, Tag 09AK
 -/
 
 @[expose] public noncomputable section
@@ -519,9 +521,7 @@ private theorem isIso_of_openRestrictions (X : Scheme.{u})
     (inferInstanceAs (IsIso (P.map φ).hom)) (op (ULift.down Z.unop))
 
 /-- Etale origin is local for an open cover, with coefficients of independent size.
-Source: Stacks Project, Tag 09AK, proof of lemma-compare-constructible, the sentence
-"Since it suffices to prove this locally on X"; Tags 099T and 099Y, comparison
-full faithfulness and compatibility with restriction. -/
+(Stacks, Tags 09AK, 099T, 099Y) -/
 theorem coefficientFixed_essImage_of_openCover (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] {I : Type u}
     (U : I → X.Opens) (hU : ∀ x : X, ∃ i, x ∈ U i)

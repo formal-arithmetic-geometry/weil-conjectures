@@ -28,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A finite presentation has fixed finite relations whose base changes characterize
 etaleness by a finite polynomial inverse certificate.
-
-Source: Stacks Project, Algebra, proof of Tag 07RI, lines 47640-47661. -/
+(Stacks, Tag 07RI) -/
 theorem exists_etale_baseChange_polynomialCertificate
     {A₀ : Type u} [CommRing A₀]
     (B₀ C₀ : Type v) [CommRing B₀] [CommRing C₀]

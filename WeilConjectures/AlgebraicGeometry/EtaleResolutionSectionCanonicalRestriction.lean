@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Canonical comparisons commute with whole-to-open and open-to-open restriction.
-Source: Stacks Project, Tag 03F3 (2), and Tag 0A50, proof. -/
+(Stacks, Tag 03F3) -/
 theorem resolutionSection_canonical_restriction {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G)
     (c : ResolutionSectionCanonicalComparison G I) :

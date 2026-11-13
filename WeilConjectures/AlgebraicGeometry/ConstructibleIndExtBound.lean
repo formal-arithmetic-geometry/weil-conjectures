@@ -17,9 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.ConstructibleExtContinuityFinite
 
 /-!
 # Extending a specified constructible Ext bound to ind-constructible sheaves
-
-Source: blueprint latest, sec-six-functors-basics/sk-cor-ind-heart-ii/_section.md,
-vanishing clause, used by the one-cohomology case of det-finite-window-bounded.
 -/
 
 @[expose] public section
@@ -34,9 +31,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The specified bound extends to ind-constructible targets on a Noetherian scheme,
-for either of the canonical field coefficient sheaves.
-
-Source: blueprint `sk-cor-ind-heart-ii`, vanishing clause. -/
+for either of the canonical field coefficient sheaves. -/
 theorem constructibleInd_extBound_noetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
@@ -73,10 +68,7 @@ theorem constructibleInd_extBound_noetherian
 
 /-- A specified bound against constructible sheaves also bounds Ext into an
 ind-constructible sheaf. The coefficient equality includes the multiplication,
-via bundled monoid objects. This is the sheaf input to bounded-complex devissage.
-
-Source: blueprint latest, sk-cor-ind-heart-ii, vanishing clause, and
-sk-lem-finite-window-bounded.proof.md, one-cohomology case. -/
+via bundled monoid objects. -/
 theorem constructibleInd_extBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

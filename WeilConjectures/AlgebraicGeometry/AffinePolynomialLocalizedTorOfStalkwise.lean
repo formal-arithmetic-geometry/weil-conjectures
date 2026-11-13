@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Finite Tor dimension over the affine base for a supported prime localization.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1). -/
+/-- Finite Tor dimension over the affine base for a supported prime localization
+(Stacks, Tag 069C). -/
 theorem affinePolynomial_localized_finiteTorDimension_of_stalkwise_of_kernel_le
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

@@ -57,9 +57,7 @@ private theorem evaluation_rightDerived_isZero
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Positive acyclicity of actual homology sheaves makes the successive lower
-truncation transition invertible in degree i once n >= 1-i.
-Source: Stacks Project, Tag 0BKT (lemma-cohomology-over-U-trivial), bounded-below
-hypercohomology argument, and Tag 08D4, proof of (2). -/
+truncation transition invertible in degree i once n >= 1-i (Stacks, Tags 0BKT and 08D4). -/
 theorem affineBasisLowerTail_sections_step_isIso
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -22,13 +22,8 @@ attribute [local instance] cachedAbSheafify cachedModSheafify
 attribute [local irreducible] comparisonUpperStar
 
 /-- For a scheme Z and commutative ring A, there is a canonical natural isomorphism forget_A,et ⋙
-ν*_Ab ≅ ν*_A ⋙ forget_A,pro
-[def-weil-pbc-site-comparison-morphism,
-def-sbc-raw-module-scalar-pullback-comparison]. Its component is adjoint to the
-coefficient-forgotten
-comparison adjunction unit.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+ν*_Ab ≅ ν*_A ⋙ forget_A,pro. Its component is adjoint to the coefficient-forgotten
+comparison adjunction unit (Stacks, Tags 0152, 06YY and 0GLZ). -/
 def forgetComparisonIso (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     Etale.moduleAbelianForget A Z ⋙
         comparisonUpperStar AddCommGrpCat.{u + 1} Z ≅

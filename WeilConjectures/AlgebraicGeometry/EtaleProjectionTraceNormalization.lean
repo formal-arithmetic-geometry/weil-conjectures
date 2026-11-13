@@ -9,9 +9,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
 
 /-! # Projection naturality followed by a scalar trace
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -75,8 +72,7 @@ private theorem projection_trace
   simp only [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Naturality and unit normalization of the ordinary projection mate.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle;
-Stacks Tag 0B56, projection-formula map. -/
+(Stacks, Tag 0B56) -/
 theorem projectionTraceNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : DerivedCategoryModule A X) (N : DerivedCategoryModule A Y)
     (t : N ⟶ constantComplex A Y) :

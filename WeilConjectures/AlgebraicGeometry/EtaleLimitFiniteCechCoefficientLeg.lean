@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Compatibility of descended finite Čech coefficient legs
 
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical Čech comparison.
+Source: Stacks Project, Tag 09YP.
 -/
 
 @[expose] public section
@@ -26,8 +26,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 set_option linter.unusedVariables false in
 /-- The leg law for prescribed descended Cech coefficient maps.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
-Cech comparison. This is the leg part of the agent's explicit etale realization. -/
+(Stacks, Tag 09YP) -/
 theorem etale_limit_finite_cech_coefficient_leg
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

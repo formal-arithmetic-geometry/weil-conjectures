@@ -867,8 +867,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The transpose of the graph comparison is the graph extension unit.
-Source: Stacks Project Tag 0F4L and SGA 4 XVII 6.2.11; the adjunction-transpose part
-of the graph restriction calculation. -/
+(Stacks, Tag 0F4L; SGA 4 XVII 6.2.11) -/
 theorem compactSupportGraphSheafComparison_normalization_transpose
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X)
     [Etale f] [IsSeparated f] (c : Compactification f)
@@ -904,8 +903,7 @@ theorem compactSupportGraphSheafComparison_normalization_transpose
     exact GraphNormalization.normalizedTransfer_complement A f c M W.unop
 
 /-- The graph transpose extends each sheet section by zero in the compactification.
-Source: Stacks Project Tag 0F4L, lemma-shriek-into-star-separated-etale;
-SGA 4 XVII 6.2.11. -/
+(Stacks, Tag 0F4L; SGA 4 XVII 6.2.11) -/
 theorem compactSupportGraphSheafComparison_normalization
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X)
     [Etale f] [IsSeparated f] (c : Compactification f)

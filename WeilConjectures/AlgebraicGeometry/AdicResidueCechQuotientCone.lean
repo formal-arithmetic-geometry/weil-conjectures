@@ -15,9 +15,9 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # The quotient Roos cone of an augmented Cech completion
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul;
-sites-cohomology.tex, Tags 0940 and 0941.
+## References
+
+* Stacks Project, Tags 099M, 0A0E, 0940 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -196,11 +196,8 @@ private theorem milnor_surjective
 
 /-- The Cech completion of any input has a quotient Roos cone with the actual scalar
 units. Completeness of the input is not required. The augmented local description
-allows any genuine Cech model for the residue kernel, rather than a chosen reflector.
-
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul;
-sites-cohomology.tex, Tags 0940 and 0941. -/
+allows any genuine Cech model for the residue kernel, rather than a chosen reflector
+(Stacks, Tags 099M, 0A0E, 0940 and 0941). -/
 theorem adicResidue_cech_quotient_cone
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.NormalizedGenericDataLifts
 /-!
 # Normalized generic trivialization data
 
-Source: Stacks Project, Tag 09Z6, generic trivialization and normalization, using Tag 09Z5.
+## References
+
+* Stacks Project, Tags 09Z6 and 09Z5
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Generic trivialization on an integral model, together with lifting of geometric points.
-
-Source: Stacks Project, Tag 09Z6, proof
-of (1), the paragraph from the reduced closure through the generic inclusion, transferred
-to (3); Tag 09Z5. -/
+(Stacks, Tags 09Z6 and 09Z5) -/
 theorem exists_constructible_module_normalized_generic_data
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [IsNoetherian X]

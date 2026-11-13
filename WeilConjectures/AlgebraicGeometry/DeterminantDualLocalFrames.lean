@@ -28,9 +28,7 @@ open Scheme.Modules (wedge)
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-free exterior sheaves admit wedge bases, and internal dual evaluation identifies
 sections of the dual exterior sheaf with the linear dual of its sections.
-Source: local pairing node proof steps 1-2, expanding the determinant inversion used in
-Stacks Project, Tag 0BRT; Mathlib `Module.Basis.exteriorPower` and
-`exteriorPower.basis_coord`. -/
+(Stacks, Tag 0BRT) -/
 theorem exterior_dual_local_frames (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens) (r : ℕ)
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))

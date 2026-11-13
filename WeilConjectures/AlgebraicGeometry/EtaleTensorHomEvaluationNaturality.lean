@@ -38,8 +38,7 @@ def tensorSectionsPullbackComparison {X Y : Scheme.{u}} (f : Y ⟶ X) :
     (pullbackPushforwardAdjunction f)
 
 /-- Evaluate a pulled-back module map at one after identifying its source with the
-structure sheaf and its target with tensor pullback.
-Source: Stacks Project, Tag 03DT, proof of Lemma 35.8.1. -/
+structure sheaf and its target with tensor pullback (Stacks, Tag 03DT). -/
 def etaleTensorHomEvaluation {X : Scheme.{u}} (F : X.Modules) (U : X.Etale)
     (φ : (etaleHom (unitObj X) F).obj (.op U)) :
     Γ((tensorPullback U.hom).obj F, ⊤) :=
@@ -266,8 +265,8 @@ private theorem sections_map_hom {X : Scheme.{u}} (F : X.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Evaluation of a pulled-back module map commutes with restriction on the etale site.
-Source: Stacks Project, Tag 03DT, proof of Lemma 35.8.1, and Tag 03DR, (35.8.0.1). -/
+/-- Evaluation of a pulled-back module map commutes with restriction on the etale site
+(Stacks, Tags 03DT, 03DR). -/
 theorem etaleTensorHomEvaluation_naturality {X : Scheme.{u}} (F : X.Modules)
     {U V : X.Etaleᵒᵖ} (g : U ⟶ V) :
     (etaleHom (unitObj X) F).map g ≫

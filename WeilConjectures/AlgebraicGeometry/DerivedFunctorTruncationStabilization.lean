@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # Stabilization of derived cohomology on the lower truncation tower
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08D4, proof of (2).
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 08D4
 -/
 
 @[expose] public section
@@ -51,9 +53,7 @@ private theorem isZero_rightDerived_shifted_single
 
 /-- An additive functor with right derived functors vanishing in degrees at least `N`
 on quasi-coherent modules induces isomorphisms on degree-`i` cohomology between successive
-lower truncations whenever `n ≥ N - i`. The source truncation is `τ≥(-n) E` and the target
-is `τ≥(-n+1) E = τ≥(-(n-1)) E`; the map is the standard t-structure's canonical one.
-Source: Stacks Project, Tag 08D4, proof of (2). -/
+lower truncations whenever `n ≥ N - i` (Stacks, Tag 08D4). -/
 theorem isIso_rightDerivedFunctor_lowerTruncation_step
     (X : Scheme.{u})
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

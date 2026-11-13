@@ -25,9 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The forward affine Hom comparison exists for arbitrary modules, is natural
-in both arguments, and is invertible when the source is the rank-one module.
-Source: Stacks Project, Tag 01HV, lemma-spec-sheaves (4)-(5); Tag 0BQZ,
-lemma-regular-immersion-ext, the coefficient comparison. -/
+in both arguments, and is invertible when the source is the rank-one module
+(Stacks, Tags 01HV, 0BQZ). -/
 theorem exists_affine_hom_comparison_maps {Y : Scheme.{u}} (U : Y.affineOpens) :
     let A := (Γ(Y, U.1) : Type u)
     let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom

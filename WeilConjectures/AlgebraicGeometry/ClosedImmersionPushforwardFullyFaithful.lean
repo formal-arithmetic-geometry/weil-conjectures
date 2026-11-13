@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
 /-!
 # Pushforward along a closed immersion is fully faithful
 
-Source: Stacks Project, Modules, Lemma 08KS (modules-lemma-i-star-equivalence),
-quoted for schemes in Morphisms, Lemma 01QY.
+## References
+
+* Stacks Project, Tags 08KS and 01QY
 -/
 
 @[expose] public section

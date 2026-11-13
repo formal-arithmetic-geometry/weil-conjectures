@@ -187,15 +187,13 @@ local notation "adj" => CondensedRing.upperStarLowerStarAdjunction Λ q
 local notation "e" => condensedArtinSchreierProjector Λ k
 
 /-- The canonical lax monoidal structure on the module pushforward, adjoint to the
-strong monoidal pullback. Source: monoidal adjunction and latest blueprint
-`prop-kernel-lisse.proof.md`. -/
+strong monoidal pullback. -/
 abbrev condensedArtinSchreierLowerStarMonoidal : (CondensedRing.lowerStar Λ q).LaxMonoidal :=
   CondensedRing.moduleLowerStarMonoidal Λ q
 
 attribute [local instance] condensedArtinSchreierLowerStarMonoidal
 
-/-- Pullback along the Artin–Schreier cover reflects isomorphisms.
-Source: descent along an etale surjection. -/
+/-- Pullback along the Artin–Schreier cover reflects isomorphisms. -/
 theorem condensedArtinSchreierPullback_reflectsIsomorphisms :
     (CondensedRing.upperStar Λ q).ReflectsIsomorphisms := by
   have : AlgebraicGeometry.Etale q := Etale.etale_artinSchreierMap (k := k)
@@ -353,9 +351,7 @@ private theorem lisse_of_rankOne_cover {X : Scheme.{u}}
   exact free_of_regularIso el
 
 /-- Counit trivializations and multiplication fixed by the target projector imply all
-local rank-one, character tensor-product, inverse and Tor assertions for every function.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, descent and flatness paragraphs. -/
+local rank-one, character tensor-product, inverse and Tor assertions for every function. -/
 theorem condensedArtinSchreier_properties_of_projectors
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
       IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫

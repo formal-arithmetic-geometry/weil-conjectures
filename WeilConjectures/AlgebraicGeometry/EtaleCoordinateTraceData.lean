@@ -17,9 +17,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-! # Canonical maps for etale coordinate trace contractions
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the two triangle computations, before diagonal integration.
-
 All maps below are composites of the existing projection, exchange, symmetry and
 adjunction-compatible composition maps. Left derived inverse image is canonically
 exact inverse image via leftDerivedUpperStarIsoMapDerivedCategory. The exchange is
@@ -37,37 +34,31 @@ namespace AlgebraicGeometry.Etale.CoordinateTrace
 
 variable (A : Type (u + 1)) [CommRing A]
 
-/-- Evaluation of the existing derived tensor bifunctor (notation-free abbreviation).
-Source: the two triangle computations in thm-amb-p1-adjunction.proof.md. -/
+/-- Evaluation of the existing derived tensor bifunctor (notation-free abbreviation). -/
 abbrev tensor (X : Scheme.{u}) (K E : DerivedCategoryModule A X) :=
   ((derivedTensor (ModuleCat.{u + 1} A) X).obj K).obj E
 
-/-- The existing exact inverse image in its canonically equivalent left-derived presentation.
-Source: thm-amb-p1-adjunction.proof.md, both triangles. -/
+/-- The existing exact inverse image in its canonically equivalent left-derived presentation. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
 
-/-- The existing ordinary unbounded right derived direct image.
-Source: thm-amb-p1-adjunction.proof.md, both triangles. -/
+/-- The existing ordinary unbounded right derived direct image. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor
 
-/-- The canonical signed tensor swap, without choosing an isomorphism of endpoints.
-Source: thm-amb-p1-adjunction.proof.md, even-shift rearrangement. -/
+/-- The canonical signed tensor swap, without choosing an isomorphism of endpoints. -/
 def swap (X : Scheme.{u}) (K E : DerivedCategoryModule A X) :
     tensor A X K E ≅ tensor A X E K :=
   ((derivedTensorSymmetry (ModuleCat.{u + 1} A) X).app K).app E
 
-/-- The common pullback comparison p1* f* N -> p2* f* N.
-Source: thm-amb-p1-adjunction.proof.md, equality of the two maps to the base. -/
+/-- The common pullback comparison p1* f* N -> p2* f* N. -/
 def coordinate {X Y : Scheme.{u}} (f : X ⟶ Y) (N : DerivedCategoryModule A Y) :
     (pull A (pullback.fst f f)).obj ((pull A f).obj N) ≅
       (pull A (pullback.snd f f)).obj ((pull A f).obj N) :=
   (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)
     (CommSq.mk (pullback.condition (f := f) (g := f)).symm)).app N
 
-/-- Ordered projection with the outside coefficient first, conjugated by the actual symmetries.
-Source: thm-amb-p1-adjunction.proof.md, projection formula in both coordinates. -/
+/-- Ordered projection with the outside coefficient first, conjugated by the actual symmetries. -/
 def orderedProjectionIso [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (K : DerivedCategoryModule A Y) (E : DerivedCategoryModule A X) :
     tensor A Y K ((push A f).obj E) ≅
@@ -78,8 +69,7 @@ def orderedProjectionIso [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f
     asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app E).app K) ≪≫
       (push A f).mapIso (swap A X E ((pull A f).obj K))
 
-/-- The specified proper exchange for the second projection, from the existing mate.
-Source: thm-amb-p1-adjunction.proof.md, first triangle, proper base change. -/
+/-- The specified proper exchange for the second projection, from the existing mate. -/
 def exchange2 [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (M : DerivedCategoryModule A X) :
     (pull A f).obj ((push A f).obj M) ≅
@@ -89,8 +79,7 @@ def exchange2 [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
   asIso ((derivedBaseChangeMap (ModuleCat.{u + 1} A)
     (IsPullback.of_hasPullback f f).toCommSq).app M)
 
-/-- The specified proper exchange for the first projection, with the square flipped.
-Source: thm-amb-p1-adjunction.proof.md, first-coordinate integration. -/
+/-- The specified proper exchange for the first projection, with the square flipped. -/
 def exchange1 [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (M : DerivedCategoryModule A X) :
     (pull A f).obj ((push A f).obj M) ≅
@@ -100,14 +89,12 @@ def exchange1 [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
   asIso ((derivedBaseChangeMap (ModuleCat.{u + 1} A)
     (IsPullback.of_hasPullback f f).flip.toCommSq).app M)
 
-/-- H(K) = f* K tensor f* L, as an actual functor, so H(e) has its specified meaning.
-Source: thm-amb-p1-adjunction.proof.md, proposed right adjoint. -/
+/-- H(K) = f* K tensor f* L, as an actual functor, so H(e) has its specified meaning. -/
 def H {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A Y) :
     DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X :=
   pull A f ⋙ derivedTensorRight (ModuleCat.{u + 1} A) X ((pull A f).obj L)
 
-/-- Inverse ordered projection followed by tensoring the given trace and the right unitor.
-Source: thm-amb-p1-adjunction.proof.md, the displayed counit. -/
+/-- Inverse ordered projection followed by tensoring the given trace and the right unitor. -/
 def evaluation [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (L : DerivedCategoryModule A Y)
     (t : (push A f).obj ((pull A f).obj L) ⟶ constantComplex A Y)
@@ -117,8 +104,7 @@ def evaluation [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
       (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y K).hom
 
 /-- Inverse projection for p2, then inverse proper exchange tensor the identity.
-This is precisely C_M; L_W is represented by p2* f* L.
-Source: thm-amb-p1-adjunction.proof.md, the last arrow defining the unit. -/
+This is precisely C_M; L_W is represented by p2* f* L. -/
 def comparison [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :
     (push A (pullback.snd f f)).obj
@@ -134,16 +120,14 @@ def comparison [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     ((derivedTensor (ModuleCat.{u + 1} A) X).mapIso (exchange2 A f M).symm).app
       ((pull A f).obj L)
 
-/-- FRp2* -> FRp1*, via the normalized direct-image compositors and fp1=fp2.
-Source: thm-amb-p1-adjunction.proof.md, coordinate interchange in the first triangle. -/
+/-- FRp2* -> FRp1*, via the normalized direct-image compositors and fp1=fp2. -/
 def directComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     push A (pullback.snd f f) ⋙ push A f ≅ push A (pullback.fst f f) ⋙ push A f :=
   rightDerivedLowerStarComp (ModuleCat.{u + 1} A) (pullback.snd f f) f ≪≫
     eqToIso (congrArg (push A) (pullback.condition (f := f) (g := f)).symm) ≪≫
       (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) (pullback.fst f f) f).symm
 
-/-- Identify p1* HK and p2* HK by the tensor and common-base pullback comparisons.
-Source: thm-amb-p1-adjunction.proof.md, extracting the common coefficient. -/
+/-- Identify p1* HK and p2* HK by the tensor and common-base pullback comparisons. -/
 def coordinateH {X Y : Scheme.{u}} (f : X ⟶ Y) (L K : DerivedCategoryModule A Y) :
     (pull A (pullback.fst f f)).obj ((H A f L).obj K) ≅
       (pull A (pullback.snd f f)).obj ((H A f L).obj K) :=
@@ -153,8 +137,7 @@ def coordinateH {X Y : Scheme.{u}} (f : X ⟶ Y) (L K : DerivedCategoryModule A 
       (pull A (pullback.snd f f)).mapIso
         (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) f K L)
 
-/-- The given sheaf line placed in degree zero and shifted by the specified even integer.
-Source: thm-amb-p1-adjunction.proof.md, the even shifted coefficient. -/
+/-- The given sheaf line placed in degree zero and shifted by the specified even integer. -/
 abbrev shiftedLine {Y : Scheme.{u}}
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) (d : ℤ) :
     DerivedCategoryModule A Y :=

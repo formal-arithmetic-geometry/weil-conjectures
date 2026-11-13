@@ -88,8 +88,8 @@ private theorem fixed_pair_finite {X U S : Scheme.{u}} {f : X ⟶ S} {g : U ⟶ 
   rw [← Scheme.Hom.comp_apply, Scheme.Pullback.tensorCongr_SpecTensorTo]
   exact Scheme.Pullback.SpecTensorTo_SpecOfPoint w.val
 
-/-- Source: Stacks Project, More on Morphisms, proof of Lemma 02LM, paragraph beginning
-"Let y_{i,j}", and Schemes, Lemma 01JT. -/
+/-- Finiteness of a purely inseparable pullback along a split tensor of residue fields
+(Stacks, Tags 02LM, 01JT). -/
 private theorem finite_purelyInseparable_pullback_of_split_tensor
     {X U S : Scheme.{u}} (f : X ⟶ S) (g : U ⟶ S)
     (s : S) (x : X) (u : U) (hx : f x = s) (hu : g u = s)
@@ -175,8 +175,8 @@ private theorem finite_purelyInseparable_pullback_of_split_tensor
   exact RingHom.IsPurelyInseparable.of_comp_eq_comp' e.bijective θ.bijective hc.symm
     (RingHom.isPurelyInseparable_algebraMap_iff.mpr hpure)
 
-/-- Source: Stacks Project, More on Morphisms, proof of Lemma 02LM,
-lines 12056--12079. -/
+/-- There is an étale neighbourhood of `s` splitting the residue points `x i` of `f`
+(Stacks, Tag 02LM). -/
 theorem exists_etale_split_residue_points
     {X S : Scheme.{u}} (f : X ⟶ S) (s : S) (n : ℕ) (x : Fin n → X)
     (hx : ∀ i, f (x i) = s)

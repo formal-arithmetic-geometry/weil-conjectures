@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
 
 /-! # Tensor symmetry of the native etale Kunneth morphism
-
-Source: the common-counit computation in the first triangle of
-sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public section
@@ -57,8 +54,7 @@ private theorem kunneth_transpose {S X Y W : Scheme.{u}}
   simp only [← whiskerLeft_comp, Iso.hom_inv_id_app_assoc]
 
 /-- Swapping the two external factors commutes with the canonical Kunneth morphism.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, common pullback counits;
-Stacks Tags 0B56 and 06YU. -/
+(Stacks, Tags 0B56 and 06YU) -/
 theorem kunnethMap_tensorSymmetry {S X Y W : Scheme.{u}}
     (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
     (hp : p ≫ f = c) (hq : q ≫ g = c)

@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 -- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 namespace AlgebraicGeometry.ProEtale
-/-- Restrict derived comparison to bounded constructible objects.
-Source: blueprint constructible-comparison-equivalence, part (2), Stacks Tag 09AL. -/
+/-- Restrict derived comparison to bounded constructible objects. (Stacks, Tag 09AL) -/
 theorem constructibleComparison_boundedRestriction (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ [CompactSpace X] [QuasiSeparatedSpace X]

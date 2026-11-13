@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologySectionDivision
 
 /-! # Comparison from cohomology fractions
 
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph.
+Stacks Project, Tag 09MR.
 -/
 
 @[expose] public section
@@ -26,9 +26,7 @@ namespace AlgebraicGeometry
 
 /-- Restriction to the nonvanishing open followed by division by the section descends
 through the explicit fraction relations, simultaneously on every open and in every degree.
-No assertion of exactness or bijectivity is made.
-
-Source: Stacks Project, Tag 09MR, canonical map preceding the proof. -/
+No assertion of exactness or bijectivity is made (Stacks, Tag 09MR). -/
 theorem exists_cohomologyFraction_comparison (X : Scheme.{uMV}) (L F : X.Modules) [L.IsInvertible]
     (s : Γ(L, ⊤))
     (S : X.Opens) (_hS : (S : Set X) = nonvanishingLocus L s) :

@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Acyclicity after pullback of an affine-open direct image
 
-Source: Stacks Project, Tag 02KG, and the affine intersection paragraphs of
-`lem-pc-s3-affine-alternating-cech-resolution-core`.
+## References
+
+* Stacks Project, Tag 02KG
 -/
 
 @[expose] public section

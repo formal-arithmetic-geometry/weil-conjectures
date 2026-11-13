@@ -164,7 +164,8 @@ theorem affine_hom_complex_d_components
   intro n
   exact congrArg (fun g ↦ g.f n) hd
 
-/-- -/
+/-- The affine Hom evaluation identification is compatible with the differentials of
+every complex. -/
 theorem affine_hom_complex_d
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤

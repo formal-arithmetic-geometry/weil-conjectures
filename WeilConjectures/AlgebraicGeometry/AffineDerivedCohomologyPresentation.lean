@@ -60,7 +60,7 @@ def affineDerivedCohomologyStalkIso (A : Type u) [CommRing A] (i : ℤ)
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
-/-- -/
+/-- The stalk comparison for `tilde` is natural in the module. -/
 private theorem affineTildeStalk_naturality (A : Type u) [CommRing A]
     (p : PrimeSpectrum A) {U V : ModuleCat.{u} A} (a : U ⟶ V) (x : U) :
     (RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).map

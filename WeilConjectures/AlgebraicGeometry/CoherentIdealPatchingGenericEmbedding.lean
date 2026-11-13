@@ -20,8 +20,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-!
 # A generic embedding of an ideal multiple into an ideal sum
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL, third proof paragraph
-and final ideal intersection argument.
+Stacks Project, Tag 01YL.
 -/
 
 @[expose] public section
@@ -35,10 +34,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The geometric preparation for ideal patching, independent of any property of modules.
 The positive sum of an ideal pushforward is either zero, or contains an ideal multiple
 of the given coherent module, with a bijective generic stalk map.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL
-(`coherent.tex`, `lemma-property-irreducible-higher-rank-cohomological`), third proof
-paragraph and the final ideal intersection argument. -/
+(Stacks, Tag 01YL). -/
 theorem coherent_ideal_patching_generic_embedding
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

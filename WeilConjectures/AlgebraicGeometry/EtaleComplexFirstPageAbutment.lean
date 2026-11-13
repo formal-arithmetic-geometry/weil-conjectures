@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexFirstPageContinuity
 
 /-! # First-page comparison and abutment quotient models
 
-Source: Stacks Project, Tag 0EZM, proof of lemma-colimit-variant-complexes,
-and Tags 015J and 015K.
+Source: Stacks Project, Tag 0EZM, and Tags 015J and 015K.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Etale
 /-- Assemble the termwise continuity comparison and its finite abutment quotient models.
 This statement asserts comparison only on page one, not on the pages modeling the quotients.
 The bidegrees here are (resolution degree, complex degree), matching the finite-page tool.
-Source: Stacks Project, Tag 0EZM, proof;
-Tags 0032, 09YQ, 015J and 015K. -/
+(Stacks, Tags 0EZM, 0032, 09YQ, 015J and 015K). -/
 theorem exists_etale_complex_first_page_and_abutment
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

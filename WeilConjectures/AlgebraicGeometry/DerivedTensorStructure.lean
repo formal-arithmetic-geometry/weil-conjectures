@@ -66,16 +66,8 @@ theorem schemeModule_hasFunctorialFlatResolution :
   exact preservesFiniteLimits_of_natIso
     (BraidedCategory.tensorLeftIsoTensorRight _).symm
 
-/-- The K-flat derived tensor monoidal structure on D(O_X): the upstream derived monoidal
-structure of the localization `Qh` of the homotopy category, for the recorded sheaf tensor
-`SheafOfModules.monoidalCategory X.sheaf` with its symmetry. The additivity and closedness
-of that tensor (the first two clauses of `SheafOfModules.tensorClosed`,
-lem-pc-sheaf-modules-tensor-closed), the Grothendieck structure and the functorial flat resolutions
-(`schemeModule_hasFunctorialFlatResolution`) enter only as propositions used by the
-construction; its tensor on objects and morphisms is the K-flat derived tensor.
-It is a global instance, so every statement about `schemeDerivedCategory X` uses this one
-monoidal structure.
-Source: Stacks, 06YH. -/
+/-- The K-flat derived tensor monoidal structure on `D(𝒪_X)`, for the sheaf tensor
+`SheafOfModules.monoidalCategory X.sheaf` with its symmetry (Stacks, Tag 06YH). -/
 @[instance_reducible]
 noncomputable def schemeDerivedTensorMonoidal
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Homology.RhomGlobalSections
 
 /-! # Tensor-unit normalization of derived Hom sections
 
-Source: Stacks Project, Tags 08JA and 08DJ; step 2 of
-lem-pc-derived-pullback-evaluation-sections.
+## References
+
+* Stacks Project, Tags 08JA and 08DJ
 -/
 
 @[expose] public section
@@ -140,10 +141,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 /-- Zeroth hypercohomology is represented by the derived tensor unit, and its
-identification on internal Hom agrees with uncurrying at that unit.
-
-Source: Stacks Project, Tags 08JA and 08DJ; the representative identification in
-step 2 of lem-pc-derived-pullback-evaluation-sections. -/
+identification on internal Hom agrees with uncurrying at that unit
+(Stacks, Tags 08JA and 08DJ). -/
 theorem exists_derivedTensorHom_sections_unit (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (q : ∀ A K L : schemeDerivedCategory X,

@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section of the inverse image on the affine limit descends to an affine stage.
-Source: Stacks Project, Tag 03Q6, degree zero of lemma-colimit, proof steps (1)--(3);
-Sites, Tag 0A35, lemma-pullback-to-limit; Etale Cohomology, Tag 0EYL. -/
+(Stacks, Tags 03Q6, 0A35, 0EYL). -/
 theorem affineOpenSections_descent
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

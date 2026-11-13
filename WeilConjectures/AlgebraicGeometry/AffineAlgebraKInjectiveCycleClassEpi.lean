@@ -26,9 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Direct image of the cycle-class projection of an affine K-injective complex
-with quasi-coherent cohomology is an epimorphism.
-Source: Stacks Project, Tag 0AVW, the cohomology calculation in its proof;
-Tag 08D4, parts (1) and (2), with bound one. -/
+with quasi-coherent cohomology is an epimorphism (Stacks, Tags 0AVW and 08D4). -/
 theorem affine_algebra_kinjective_cycle_class_epi
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)

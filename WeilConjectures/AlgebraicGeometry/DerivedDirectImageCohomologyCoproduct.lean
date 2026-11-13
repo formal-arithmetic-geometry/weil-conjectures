@@ -16,7 +16,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Cohomology of a derived direct-image coproduct
 
-Source: Stacks Project, Tags 08DZ and 08D5.
+## References
+
+* Stacks Project, Tags 08DZ, 08D5
 -/
 
 @[expose] public section
@@ -28,9 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical direct-sum map on the cohomology sheaves of derived direct image
-is an isomorphism in a fixed integer degree. Here `S` is the ambient derived coproduct;
-its quasi-coherence is a consequence of the coproduct hypothesis, not an extra assumption.
-Source: Stacks Project, Derived Categories of Schemes, Tag 08DZ, proof, with Tag 08D5(2). -/
+is an isomorphism in a fixed integer degree, where `S` is the ambient derived coproduct
+(Stacks, Tags 08DZ, 08D5). -/
 theorem derivedDirectImage_cohomology_coproduct
     {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

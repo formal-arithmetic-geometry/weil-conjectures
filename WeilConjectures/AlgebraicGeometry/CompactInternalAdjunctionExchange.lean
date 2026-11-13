@@ -220,9 +220,7 @@ private theorem compact_exchange_projection
 
 end MateCalculation
 
-/-- Internal compact adjunction commutes with Cartesian exchange.
-Source: blueprint lem-asd-smooth-generic-direct-image.proof.md, final paragraph;
-compact projection/exchange compatibility. -/
+/-- Internal compact adjunction commutes with Cartesian exchange. -/
 theorem compactInternalAdjunctionExchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'}

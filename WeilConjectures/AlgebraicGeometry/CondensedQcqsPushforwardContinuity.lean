@@ -25,7 +25,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Continuity of ordinary condensed-coefficient pushforward
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -44,7 +46,7 @@ noncomputable local instance
       (condensedRingObj Λ X)) := inferInstance
 
 /-- The cocone obtained from good truncation, retaining the original complexes as its
-source. Source: Hemo--Richarz--Scholbach, Lemma 5.3(1). -/
+source. (Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 noncomputable def condensedContinuityCocone
     {A : Type v} [Category.{w} A] [Abelian A]
     {I : Type x} [Category.{y} I] (D : I ⥤ CochainComplex A ℤ) (a : ℤ)
@@ -54,7 +56,7 @@ noncomputable def condensedContinuityCocone
       (colimit.cocone (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A))
 
 /-- The canonical comparison induced by the maps to the termwise truncated colimit.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1). -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 noncomputable def condensedContinuityComparison
     {A : Type v} [Category.{w} A] [Abelian A]
     {B : Type u} [Category.{z} B]
@@ -67,7 +69,7 @@ noncomputable def condensedContinuityComparison
 
 /-- Evaluation of the underlying abelian sheaf at the terminal pro-etale object.
 Its right derived functor is ordinary uncompleted derived global sections of modules.
-Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(1). -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 noncomputable abbrev condensedModuleSections
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :
@@ -125,7 +127,7 @@ set_option synthInstance.maxSize 4096 in
 filtered colimits on cohomology. There is no torsion, completeness, or constructibility
 condition on the coefficient ring or its modules.
 
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1). -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensed_qcqs_pushforward_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -216,7 +218,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary derived global sections of a qcqs scheme satisfy the same comparison.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1). -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensed_qcqs_globalSections_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -306,8 +308,7 @@ theorem condensed_qcqs_globalSections_continuity
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The representative comparison induces the canonical isomorphism on each homology object.
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1), representative
-comparison step. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensedContinuityComparison_representatives_homology
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
     {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]
@@ -370,7 +371,7 @@ theorem condensedContinuityComparison_representatives_homology
 quasi-isomorphic representatives. The equation on each leg requires the specified
 canonical derived map, rather than an arbitrary map of representatives.
 
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), hypercover proof. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensedContinuityComparison_representatives
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
     {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]

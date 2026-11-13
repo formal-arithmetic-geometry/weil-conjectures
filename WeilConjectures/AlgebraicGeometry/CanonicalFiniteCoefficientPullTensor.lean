@@ -13,10 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoeffi
 import all WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ProEtaleSectionModuleFunctors
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
-/-! # Tensor coherence of the canonical finite coefficient pullback comparison
-
-Source: the coefficient-presentation step in det-thm-sf-pf-finite.proof.md.
--/
+/-! # Tensor coherence of the canonical finite coefficient pullback comparison -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -94,10 +91,7 @@ private theorem canonicalFixed_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
 -- The composite adjunctions require large monoidal instance arguments.
 -- The two composite adjunctions carry large monoidal structures.
 /-- The adjoint-normalized finite coefficient pullback comparison is monoidal
-for the section-normalized tensor structures.
-
-Source: det-thm-sf-pf-finite.proof.md, coefficient realization and the proper
-projection square; the geometric adjunction and its tensor comparison. -/
+for the section-normalized tensor structures. -/
 theorem canonicalFiniteCoefficientPullTensor
     (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     [DiscreteTopology A] [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y)

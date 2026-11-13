@@ -15,9 +15,12 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleClosedGenericCriterion
 /-!
 # Constructibility of module subsheaves over Noetherian rings
 
-Source: Stacks Project, Proposition 09BH (3), proof of (3), and Lemma 095E.
-This is the coefficient-hypothesis step of the curve devissage proof, without any
+This is the coefficient-hypothesis step of the curve devissage argument, without any
 cohomology conclusion.
+
+## References
+
+* Stacks Project, Tags 09BH (3) and 095E
 -/
 
 @[expose] public section
@@ -29,8 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A subsheaf of a constructible module sheaf is constructible on a Noetherian scheme,
-with coefficients in any Noetherian commutative ring.
-Source: Stacks Project, Proposition 09BH (3), proof of (3), and Lemma 095E. -/
+with coefficients in any Noetherian commutative ring. (Stacks, Tags 09BH (3) and 095E) -/
 theorem constructible_of_mono_noetherian
     {X : Scheme.{u}} [IsNoetherian X] {Λ : Type (u + 1)} [CommRing Λ]
     [IsNoetherianRing Λ]

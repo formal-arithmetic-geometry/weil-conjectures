@@ -121,8 +121,7 @@ private theorem transport_boundary_naturality
   rw [← hn, ha, transportedBoundary_apply SX hSX eaX ecX q]
 
 /-- There are exact Mayer–Vietoris sequences with pullback-compatible connecting maps.
-Source: Stacks Project, Tag 0A50, construction in its proof; compatibility with pullback
-is the explicit argument of steps 1–4 of the parent node. -/
+(Stacks, Tag 0A50) -/
 theorem etale_mayerVietoris_connecting_pullback
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

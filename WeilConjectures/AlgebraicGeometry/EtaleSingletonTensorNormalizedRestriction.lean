@@ -38,8 +38,7 @@ private theorem restriction_smul {A B : Scheme.{u}} (G : A.Modules) (H : B.Modul
 -- The equality determines the witness completely; no unproved existence is used.
 private theorem exists_equal {α : Sort*} (a : α) : ∃ b : α, b = a := ⟨a, rfl⟩
 
-/-- Keep map values out of kernel reduction while retaining their proved equality.
-The witness is completely fixed by `exists_equal`, whose proof is complete. -/
+/-- A value equal to `a`, chosen so that it stays opaque to kernel reduction. -/
 private noncomputable def pinnedValue {α : Sort*} (a : α) : α :=
   Classical.choose (exists_equal a)
 

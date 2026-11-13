@@ -100,10 +100,8 @@ private theorem isFinite_morphismRestrict_of_cover
     rw [he]
     exact hfin b
 
-/-- Finiteness on one affine target open descends once an affine stage is known.
-
-Source: Stacks Project, Limits, proof of Lemma 01ZO (affine reduction), and Algebra,
-Lemma 07RG. -/
+/-- Finiteness on one affine target open descends once an affine stage is known
+(Stacks, Tags 01ZO and 07RG). -/
 theorem exists_isFinite_morphismRestrict_baseChange_affine_open
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

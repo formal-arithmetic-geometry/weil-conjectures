@@ -27,11 +27,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A compatible spectrum model of an open affine triple remains a model after
-base change along a map whose inverse image of the base open has a spectrum model.
-The source open in the base change is the inverse image of the chosen source open.
-
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph; Schemes,
-Tags 01JR and 01I4 (open fibre products and affine fibre products). -/
+base change along a map whose inverse image of the base open has a spectrum model
+(Stacks, Tags 04AI, 01JR and 01I4). -/
 theorem affine_triple_tensor_base_change
     {S : Scheme.{u}} (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)
     (W₀ : S.Opens) (V₀ : Y₀.left.Opens) (U₀ : X₀.left.Opens)

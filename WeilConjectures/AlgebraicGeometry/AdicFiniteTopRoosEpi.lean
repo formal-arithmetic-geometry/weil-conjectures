@@ -130,8 +130,7 @@ private theorem top_transition_epi
   exact epi_of_epi (H.map e₂.hom) (H.map (adicFiniteTransition X J N n))
 
 /-- The degree-b Roos endomorphism of the normalized reduction product is epic.
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1),
-and sites-cohomology.tex, Tag 0947. -/
+(Stacks, Tags 09C2 and 0947). -/
 theorem adicFiniteTop_roos_epi
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A)

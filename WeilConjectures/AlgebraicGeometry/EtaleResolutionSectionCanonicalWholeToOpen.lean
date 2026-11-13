@@ -200,8 +200,7 @@ private lemma openToInteger_unit {X : Scheme.{u}} (W : X.Opens) :
   exact (ConcreteCategory.congr_hom hu' (globalSectionsEquiv F (𝟙 F))).symm
 
 /-- Whole-to-open restriction identity for a normalized comparison.
-Source: Stacks Project, Tag 03F3 (2), and Tag 0A50, proof;
-the Hom-cocycle expansion of the parent restriction argument. -/
+(Stacks, Tags 03F3 and 0A50) -/
 theorem resolutionSection_canonical_whole_to_open {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G)
     (c : ResolutionSectionCanonicalComparison G I) :

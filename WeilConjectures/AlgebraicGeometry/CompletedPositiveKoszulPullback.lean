@@ -32,8 +32,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
 /-! # The augmented positive Koszul diagram under completed inverse image
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, finite Koszul calculation;
-sites-cohomology.tex, Tag 07A4, tensor pullback.
+## References
+
+* Stacks Project, Tags 0A0E, 07A4
 -/
 
 @[expose] public section
@@ -544,35 +545,8 @@ private theorem koszulRight_natural (S : Sheaf K CommRingCat.{v})
 end KoszulInduction
 
 /-- Completed inverse image preserves the positive ordered Koszul diagram and
-its projections. This assertion contains no duals or internal Hom complexes.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, positive finite free tensors;
-sites-cohomology.tex, Tag 07A4, tensor pullback.
-
-Proof in words: the comparison of constant rings, composed with transport of
-sections, is natural in every commutative ring. Constant-ring section rigidity,
-proved using the universal element of Z[X] and evaluation maps, shows that this
-transport fixes constant elements. The limit projection equations for
-completedMap identify their completed images. Algebraic inverse image and
-extension of scalars transport scalar multiplication accordingly. Every module
-isomorphism of the pulled-back rank-one module with the target rank-one module
-therefore intertwines multiplication by each a_i and all its positive powers.
-
-For an arbitrary supplied u, use its degree-zero component to compare each
-rank-one term of the first two-term factor, and the unique zero-object
-comparisons in the remaining degrees. The scalar identity gives the chain-map
-equation and compatibility with the forward maps (1,a_i). The degree-zero
-projection commutes with u; the other components of its target vanish.
-
-Induct on the number of factors, retaining arbitrary u in the induction
-hypothesis. The empty diagram is constant with comparison u. In the successor
-case compare the first factor using u, compare the tail using the canonical
-ring-complex comparison from ordinary tensor pullback, and tensor these
-comparisons. Tensor naturality gives compatibility with transitions. Its right
-unit compatibility, naturality of the target right unitor, and equality of the
-two unitors on the unit object give the projection equation. Thus no separate
-classification or extension of automorphisms of the ring complex is required.
-Empty lists, repeated or zero scalars, and zero rings use the same formulas. -/
+its projections (Stacks, Tags 0A0E, 07A4). This assertion contains no duals or internal
+Hom complexes. -/
 theorem completedPositiveKoszulPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

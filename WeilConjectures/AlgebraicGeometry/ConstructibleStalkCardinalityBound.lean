@@ -18,8 +18,9 @@ import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 /-!
 # A uniform cardinality bound for constructible abelian sheaves
 
-Source: Stacks Project, Tags 03RW and 095E, and the finite-cover argument in step 1 of
-`lem-weil-pbc-curve-constructible-annihilator`.
+## References
+
+* Stacks Project, Tags 03RW and 095E
 -/
 
 @[expose] public section
@@ -160,9 +161,7 @@ private theorem exists_card_bound_of_locallyConstant (X : Scheme.{u}) [CompactSp
 
 /-- The geometric stalks of a constructible underlying set sheaf on a Noetherian scheme
 are finite and have uniformly bounded cardinality. No torsion hypothesis is needed.
-
-Source: Stacks Project, Definition 03RW and Lemma 095E; the finite-cover part of step 1
-of `lem-weil-pbc-curve-constructible-annihilator`. -/
+(Stacks, Tags 03RW and 095E) -/
 theorem exists_stalk_cardinality_bound_of_constructible
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

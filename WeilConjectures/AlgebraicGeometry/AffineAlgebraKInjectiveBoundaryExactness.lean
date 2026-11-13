@@ -30,9 +30,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- After affine direct image, cycle sections with zero homology class are
-locally boundaries of the section complex.
-Source: Stacks Project, Tag 0AVW, the cohomology calculation in its proof;
-Tag 08D4, parts (1) and (2), with bound one. -/
+locally boundaries of the section complex (Stacks, Tags 0AVW and 08D4). -/
 theorem affine_algebra_kinjective_boundary_exactness
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLaws
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u
@@ -26,8 +29,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 -- The fixed interface names geometric hypotheses outside their conclusion.
 set_option linter.unusedVariables false in
 /-- Fixed descended geometry gives a complex diagram and a compatible cocone.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical maps in its
-Čech comparison; Tag 09YQ for the étale realization. -/
+(Stacks, Tags 09YP and 09YQ) -/
 theorem exists_etale_limit_finite_cech_coefficient_data
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

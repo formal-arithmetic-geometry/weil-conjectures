@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartTensorRecovery
 
 /-! # Canonical affine chart Hom naturality
 
-Source: Stacks Project, Tags 01ZR (affine proof), 01I6, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01ZR, 01I6, 0095 and 0096
 -/
 
 @[expose] public section
@@ -78,9 +80,8 @@ theorem colimitScalarExtensionComp_one_tmul
 
 set_option maxHeartbeats 600000 in
 -- The dependent chart and section-model witnesses require substantial elaboration.
-/-- Affine Hom comparisons commute with the canonical scalar-extension map.
-Source: Stacks Project, Tag 01ZR (first affine proof), Tag 01I6,
-and Tags 0095 and 0096 (pullback functoriality). -/
+/-- Affine Hom comparisons commute with the canonical scalar-extension map
+(Stacks, Tags 01ZR, 01I6, 0095 and 0096). -/
 theorem affine_chart_canonical_hom_naturality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

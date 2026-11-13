@@ -33,8 +33,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An étale sheaf acyclic on affine objects is computed on a separated scheme by
 its sections on a finite affine open covering, in positive degree.
-Source: Stacks Project, Tag 03AZ (the Čech-to-cohomology spectral sequence), and
-Tag 03P2, separated-case proof. -/
+(Stacks, Tags 03AZ and 03P2) -/
 theorem nonempty_rightDerived_etale_affineOpenCech_succ
     (X : Scheme.{u}) [X.IsSeparated]
     (i : X.Opens ⥤ X.Etale)

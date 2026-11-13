@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 /-!
 # Local representatives of sections of an étale inverse image
 
-Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback,
-paragraph beginning “By construction”.
+Source: Stacks Project, Étale Cohomology, Tag 09XN.
 -/
 
 @[expose] public section
@@ -25,9 +24,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback,
-paragraph beginning “By construction”.
-Every global section of the inverse image is locally the restriction of a section pulled
+/-- Every global section of the inverse image is locally the restriction of a section pulled
 back by the adjunction unit. A morphism into the base change of `V` encodes the commuting
 factorization through the étale scheme `V` over `S`. -/
 theorem etaleInverseImageSectionDescription (S T : Scheme.{u}) (g : T ⟶ S)

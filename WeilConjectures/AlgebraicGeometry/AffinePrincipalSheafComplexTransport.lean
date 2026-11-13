@@ -47,9 +47,8 @@ private noncomputable def transport_tilde_localization (A : Type u) [CommRing A]
         ((ModuleCat.extendRestrictScalarsAdj φ.hom).comp
           (tilde.adjunction (R := .of (Localization.Away f))))
 
-/-- Restrict a finite-free sheaf complex and its derived comparison to `Spec(A_f)`.
-Source: Stacks Project, Tag 08E7, converse proof, local-model comparison;
-Tag 01HV (sections on principal opens), and Tag 08BS (exact open restriction). -/
+/-- Restrict a finite-free sheaf complex and its derived comparison to `Spec(A_f)`
+(Stacks, Tags 08E7, 01HV and 08BS). -/
 theorem affine_principal_sheaf_complex_transport (A : Type u) [CommRing A]
     [HasDerivedCategory.{wX}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

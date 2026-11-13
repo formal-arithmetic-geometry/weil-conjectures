@@ -33,7 +33,7 @@ set_option synthInstance.maxSize 2048
 set_option maxHeartbeats 600000 in
 -- Transporting the monoidal model unfolds the exact-functor localization data.
 /-- The objectwise tensor comparisons can be chosen bifunctorially.
-Source: Stacks Project, Tag 079U (proof), and Tag 08DX (1). -/
+(Stacks, Tags 079U and 08DX) -/
 theorem exists_derivedRestriction_tensor_natural
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

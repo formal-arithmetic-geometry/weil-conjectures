@@ -57,8 +57,7 @@ private theorem preservesKernel_of_iso_image
     ((c.isLimitMapConeEquiv T).symm hc)
 
 /-- The comparison from termwise sections to derived sections is invertible on
-an arbitrary complex of associated sheaves.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, module calculation. -/
+an arbitrary complex of associated sheaves (Stacks, Tag 06Z0). -/
 theorem affineTildeDerivedSectionsUnit_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

@@ -15,8 +15,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Exactness of the local alternating complex
 
-Source: Stacks Project, Tag 02FU (cohomology-lemma-covering-resolution),
-with increasing tuples as in Tag 01FM.
+Source: Stacks Project, Tags 02FU and 01FM.
 -/
 
 @[expose] public section
@@ -119,9 +118,8 @@ private theorem alternatingCech_local_exact_nat
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Positive-degree local exactness, without choosing any splittings.
-Source: Stacks Project, Tag 02FU (cohomology-lemma-covering-resolution),
-adapted to the increasing-tuple convention of Tag 01FM. -/
+/-- Positive-degree local exactness, without choosing any splittings
+(Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheaf_restrict_local_exact
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)
     (k : ℤ) :

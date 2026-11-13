@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleRestrictedTensorFiniteLocal
 
 /-! # The local constant tensor calculation on coefficient-sized sites
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094H, and proetale.tex, Tag 09BQ.
+Source: Stacks Project, Tags 094H and 09BQ.
 -/
 
 @[expose] public noncomputable section
@@ -58,11 +58,8 @@ private theorem finite_constant_tensor
 namespace AlgebraicGeometry.Scheme
 
 /-- The local calculation after an arbitrary scheme restriction. The hypotheses concern
-local systems on the whole source of `f`; no stratification or constructibility predicate
-occurs. Only an upper bound on `K` is needed, and no bound below on the result is asserted.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094H,
-lemma-locally-constant-tensor-product; proetale.tex, Tag 09BQ, lemma-tensor-c. -/
+local systems on the whole source of `f`; only an upper bound on `K` is needed.
+(Stacks, Tags 094H, 09BQ) -/
 theorem coefficientConstantTensor_restricted_finite
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]

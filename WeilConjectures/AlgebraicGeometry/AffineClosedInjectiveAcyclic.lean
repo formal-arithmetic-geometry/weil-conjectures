@@ -29,9 +29,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The restriction of a torsion injective module sheaf to a closed subscheme of an
- affine scheme has no positive cohomology.
-
-Source: Stacks Project, Tag 0A51, first paragraph of the proof. -/
+ affine scheme has no positive cohomology (Stacks, Tag 0A51). -/
 theorem Etale.subsingleton_H_affine_closed_of_injective
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]

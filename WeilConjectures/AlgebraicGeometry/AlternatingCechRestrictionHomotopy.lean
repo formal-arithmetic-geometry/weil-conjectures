@@ -29,12 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A complex whose terms are identified with sections on increasing tuples, and a
-cochain map which is restriction in those identifications, has a homotopy inverse.
-No covering hypothesis is needed: this is a comparison of complexes for any family
-of opens and any presheaf of abelian groups.
-
-Source: Stacks Project, Cohomology of Sheaves, Lemmas 20.23.3, 20.23.4 and 20.23.6,
-Tags 01FJ, 01FK and 01FM. -/
+cochain map which is restriction in those identifications, has a homotopy inverse
+(Stacks, Tags 01FJ, 01FK and 01FM). -/
 theorem alternatingCechRestrictionHomotopy (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

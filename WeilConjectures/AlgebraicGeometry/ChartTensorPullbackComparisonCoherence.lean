@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComposition
 
 /-! # Coherence of chart pullback comparisons
 
-Source: Stacks Project, Tags 0095 and 0096; Mathlib's pullback pseudofunctor.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section
@@ -25,11 +27,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The two comparison paths from an iterated ordinary chart pullback to the
 restriction of an iterated tensor pullback agree, on a single module, for any
-chart refinement v satisfying the two projection equations. The supplied ordinary
-comparison isomorphisms d and b are required to equal the canonical constructions.
-Source: Stacks Project, Tags 0095 and 0096, composition of pullback;
-Mathlib `Scheme.Modules.pseudofunctor_associativity` and
-`Adjunction.leftAdjointCompIso_assoc`. -/
+chart refinement `v` satisfying the two projection equations, given that the ordinary
+comparison isomorphisms `d` and `b` are the canonical ones (Stacks, Tags 0095 and 0096). -/
 theorem chart_tensor_pullback_comparison_coherence
     {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)
     (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀) (F : X.Modules) :

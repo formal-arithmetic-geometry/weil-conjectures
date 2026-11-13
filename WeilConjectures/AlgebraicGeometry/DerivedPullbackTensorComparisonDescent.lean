@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.KFlatBifunctorIsoDescent
 
 /-! # Natural tensor comparison of derived pullback
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -73,8 +75,7 @@ noncomputable local instance tensorDescentPullbackDescentQLax (S : Scheme.{uMode
 /-- The tensor comparison of the derived pullback extends to a natural isomorphism
 of bifunctors, with its prescribed computation on K-flat pairs. This statement contains
 neither associativity nor unit coherence; no underived monoidal structure is needed.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; steps 1 and 2 of the parent descent proof. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_comparison_exists {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

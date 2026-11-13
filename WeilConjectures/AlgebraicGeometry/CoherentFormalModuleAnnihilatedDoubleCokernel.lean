@@ -128,12 +128,7 @@ private theorem product_zero_on_affine_cover {X : Scheme.{u}} {J : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An intermediate cokernel-annihilation component of the affine-cover reduction.
-Source: Stacks, Remark 0888.
-The proof is the corresponding kernel/cokernel half of the finite affine-cover
-argument. The finite affine cover is reduced modulo each power of the ideal, the
-commutative-algebra annihilation lemma is applied, and local annihilation is glued
-over the affine cover.
--/
+(Stacks, Tag 0888). -/
 theorem coherentFormalModule_annihilated_double_cokernel (X : Scheme.{u}) [IsNoetherian X]
     (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G)
     (r : ℕ) (U : Fin r → X.affineOpens) (t : ℕ)

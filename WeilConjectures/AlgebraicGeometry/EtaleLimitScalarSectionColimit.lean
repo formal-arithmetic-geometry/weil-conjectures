@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical stage-section cocone is a colimit once its coherence is supplied.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit; Etale Cohomology,
-Tag 09YQ; Cohomology on Sites, Tag 09YP, degree-zero comparison. -/
+(Stacks, Tags 09YN, 09YQ and 09YP) -/
 theorem etale_limit_scalar_section_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -114,9 +114,7 @@ private theorem etaleSection_zero_pointed_witness
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- If a section on an étale object becomes zero on a scheme mapping to that object,
-then it is zero on an open neighbourhood of the image.
-Source: Stacks Project, Tag 03PN, Definition 59.29.6 (filtered-colimit stalks),
-and Tag 03Q1, lemma-stalk-pullback (3), including compatibility with the unit. -/
+then it is zero on an open neighbourhood of the image (Stacks, Tags 03PN, 03Q1). -/
 theorem etaleSection_zero_neighbourhood
     {X T : Scheme.{u + 1}} (V : X.Etale) (a : T ⟶ V.left)
     (p : T ⟶ X) (hp : a ≫ V.hom = p)

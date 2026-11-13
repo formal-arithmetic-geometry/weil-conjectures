@@ -127,10 +127,7 @@ set_option linter.style.haveILetI false in
 -- Inlining these instance proofs avoids costly let-bound instance comparisons.
 -- The composite pushforward objects require dependent sheaf type comparisons.
 /-- The left-derived lift equation followed by the localized underived composite
-counit equals the pasted underived expression. This calculation involves no
-right-derived unit or selected derived pullback/direct-image adjunction.
-Source: Stacks Project, Tags 0096, 079W and 0D5S; steps 2 and 3 of
-lem-sc-derived-pullback-composition-counit-normalization. -/
+counit equals the pasted underived expression (Stacks, Tags 0096, 079W and 0D5S). -/
 theorem derivedPullbackComposition_localized_counit
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

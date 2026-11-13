@@ -138,8 +138,7 @@ theorem openSectionPullback_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit morphism of restriction-pair/difference section complexes induced by a
-complex morphism into the direct image. This construction requires no covering assumption.
-Source: Stacks Project, Tag 0A50, proof. -/
+complex morphism into the direct image. (Stacks, Tag 0A50). -/
 noncomputable def resolutionSectionShortComplexTransfer {X Y : Scheme.{u}} (g : Y ⟶ X)
     (U V : X.Opens)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)

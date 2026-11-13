@@ -11,8 +11,9 @@ import WeilConjectures.RingTheory.NoetherianKoszulAugmentationProZero
 
 /-! # The Noetherian cone calculation for the tensor of the coefficient augmentation
 
-Source: Stacks Project, more-algebra.tex, lemma-sequence-Koszul-complexes,
-and proetale.tex, lemma-naive-completion (099M).
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -77,10 +78,7 @@ private def coneIsoOfSource
 
 -- Comparing the normalized finite complexes and their exact realizations is instance-heavy.
 /-- The cone calculation for a specified coefficient augmentation. There is no
-existence or scalar-adjoint-tower assertion in this statement.
-
-Source: Stacks Project, more-algebra.tex, lemma-sequence-Koszul-complexes,
-and proetale.tex, lemma-naive-completion (099M). -/
+existence or scalar-adjoint-tower assertion in this statement (Stacks, Tag 099M). -/
 theorem adicResidue_koszul_tensor_cone_proZero
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-! # Exact tensor pullback to an affine morphism's direct-image algebra
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 0AVW, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The underived tensor pullback to the direct-image algebra of an affine
-morphism is exact, with its action specified on objects and morphisms.
-Source: Stacks Project, Tag 0AVW, Lemma 36.5.4, stalk calculation in the proof. -/
+morphism is exact, with its action specified on objects and morphisms (Stacks, Tag 0AVW). -/
 theorem affine_algebra_tensorModulePullback_exact
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)) ⥤

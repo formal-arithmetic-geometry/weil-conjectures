@@ -28,8 +28,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The scalar action as a morphism of sheaves of sets.
-Source: Stacks Project, Tag 03D2, multiplication map in lemma-pullback-module.
-Naturality is the semilinearity of the module restriction maps. -/
+Naturality is the semilinearity of the module restriction maps (Stacks, Tag 03D2). -/
 noncomputable def etaleModuleScalarAction (V : Scheme.{u})
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology
@@ -61,7 +60,8 @@ noncomputable def etaleModuleScalarAction (V : Scheme.{u})
       rw [hf, hs]
       exact (G.val.map_smul i _ _).symm }
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+/-- The scalar action on the inverse image of a module sheaf satisfies the module axioms
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageModuleActionLaws (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 /-!
 # Affine global Hom comparison as sections of sheaf base change
 
-Source: Stacks Project, perfect.tex, Tag 0AA7,
-lemma-affine-morphism-and-hom-out-of-perfect, case (1); cohomology.tex, Tag 08I3.
+## References
+
+* Stacks Project, Tags 0AA7, 08I3
 -/
 
 @[expose] public section
@@ -32,11 +33,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The normalized adjunction equations expand the shared derived tensor instances.
 /-- The affine global Hom comparison is the sections of the sheaf base-change map
 on internal Hom, conjugated by the affine source comparison and the perfect-source
-internal-Hom pullback comparison. This statement makes no Tor-independence assumption
-and does not assert that either base-change map is invertible.
-
-Source: Stacks Project, perfect.tex, Tag 0AA7,
-lemma-affine-morphism-and-hom-out-of-perfect, case (1); cohomology.tex, Tag 08I3. -/
+internal-Hom pullback comparison (Stacks, Tags 0AA7, 08I3). -/
 theorem affineGlobalHomBaseChange_factorization
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

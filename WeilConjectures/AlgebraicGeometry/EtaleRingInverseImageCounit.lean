@@ -91,7 +91,8 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
 
 set_option backward.isDefEq.respectTransparency false in
 -- Product comparisons and sectionwise operations require repeated functor reduction.
-/-- Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph. -/
+/-- The counit of the sheaf-of-sets adjunction lifts to sheaves of rings, given a lift of the
+unit (Stacks, Tag 00YV). -/
 theorem etaleRingInverseImageCounit (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

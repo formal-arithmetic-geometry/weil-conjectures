@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # The canonical exact-derived affine algebra counit
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The counit of the canonical derived adjunction of an exact affine algebra pullback
-is invertible on complexes with quasi-coherent cohomology.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof;
-Tag 079W, cohomology-lemma-adjoint, for the derived counit construction. -/
+is invertible on complexes with quasi-coherent cohomology (Stacks, Tags 0AVW and 079W). -/
 theorem affine_algebra_exact_derived_counit_isIso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

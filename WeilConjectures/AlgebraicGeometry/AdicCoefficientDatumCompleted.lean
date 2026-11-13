@@ -74,8 +74,7 @@ attribute [local irreducible] Functor.mapHomotopyCategory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The Noetherian, finitely generated, torsion, perfect and finite quotient hypotheses.
- -/
+/-- The Noetherian, finitely generated, torsion, perfect and finite quotient hypotheses. -/
 structure ProEtaleAdicCoefficientDatum (A : Type (t + 1)) [CommRing A]
     extends CompleteCoefficientDatum A where
   quotientFinite : ∀ n : ℕ, Finite (A ⧸ ideal ^ (n + 1))
@@ -89,16 +88,13 @@ variable [TopologicalSpace P] [DiscreteTopology P]
 
 end FiniteCoefficientComparison
 
-/-- The completed coefficient sheaf, with its genuine compatible-family sections.
- -/
+/-- The completed coefficient sheaf, with its genuine compatible-family sections. -/
 def adicDatumRing := adicLisseCompletedRing T d.ideal
 
-/-- Module sheaves over the completed coefficient sheaf.
- -/
+/-- Module sheaves over the completed coefficient sheaf. -/
 abbrev adicDatumModules := completedConstantModules T (adicDatumRing T d)
 
-/-- Finite biproducts are the usual products in the abelian module category.
- -/
+/-- Finite biproducts are the usual products in the abelian module category. -/
 instance adicDatumFiniteBiproducts : HasFiniteBiproducts (adicDatumModules T d) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
@@ -128,8 +124,7 @@ theorem adicDatumScalar_exists :
     intro n
     exact (hφ n.unop).trans (limit.lift_π c n).symm
 
-/-- The unique compatible-residue coefficient map.
- -/
+/-- The unique compatible-residue coefficient map. -/
 def adicDatumScalar := (adicDatumScalar_exists T d).exists.choose
 
 section ScalarChange
@@ -175,8 +170,7 @@ theorem adicDatumOrdinaryUnit_exists (M : completedConstantModules T R) :
   intro x
   exact (hu U x).trans (ha M U x).symm
 
-/-- The ordinary unit, selected by the unique section formula.
- -/
+/-- The ordinary unit, selected by the unique section formula. -/
 def adicDatumOrdinaryUnit (M : completedConstantModules T R) :
     M ⟶ (SheafOfModules.restrictScalars.{t + 1}
       ((adicLisseForget T).map φ)).obj ((reductionChange T φ).obj M) :=
@@ -196,8 +190,7 @@ theorem adicDatumOrdinaryAdjunction_exists :
   exact (adicDatumOrdinaryUnit_exists T φ M).unique (ha M)
     (adicDatumOrdinaryUnit_exists T φ M).exists.choose_spec
 
-/-- The canonical ordinary scalar adjunction.
- -/
+/-- The canonical ordinary scalar adjunction. -/
 def adicDatumOrdinaryAdjunction : reductionChange T φ ⊣
     SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ) :=
   (adicDatumOrdinaryAdjunction_exists T φ).choose

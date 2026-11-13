@@ -38,8 +38,8 @@ private theorem comparison_comp
   rw [← Category.assoc, h, Category.assoc, h', ← Category.assoc]
 
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
-that it is invertible. Both the restricted scheme and its module are explicit.
-Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE. -/
+that it is invertible. Both the restricted scheme and its module are explicit
+(Stacks, Tags 08IB, 08HY and 08FE). -/
 theorem exists_canonicalModuleBaseChange_affineChart_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

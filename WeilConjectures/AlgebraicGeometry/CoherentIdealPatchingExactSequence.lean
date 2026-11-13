@@ -28,7 +28,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Short exact sequences for integral ideal patching
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL.
+Stacks Project, Tag 01YL.
 -/
 
 @[expose] public section
@@ -42,9 +42,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The geometric part of generic-point patching, without extension closure or descent
 from positive finite sums. Each ideal pushforward has a positive finite sum containing
 an object isomorphic to a module already satisfying P, with a small-support quotient.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL, third proof paragraph and
-its final intersection argument. -/
+(Stacks, Tag 01YL). -/
 theorem coherent_ideal_patching_exact_sequence
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (P : X.Modules → Prop)

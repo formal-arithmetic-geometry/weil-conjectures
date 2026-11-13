@@ -158,10 +158,8 @@ private theorem openCechAugmentation_zero
 
 
 /-- Restriction from the terminal open object augments the pulled-back Čech
-complex of a single injective étale sheaf by a quasi-isomorphism.
-
-Source: Stacks Project, Tags 03AW and 03F6; the row calculation in
-lem-sc-etale-open-cech-resolution-total, proof steps 1 and 2. -/
+complex of a single injective étale sheaf by a quasi-isomorphism
+(Stacks, Tags 03AW and 03F6). -/
 theorem etaleOpenCechInjectiveAugmentation_quasiIso
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hc : CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i)

@@ -18,10 +18,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
 /-- The explicit scalar-inclusion map on complexes is the mate of derived tensor
-transitivity.
-
-Source: the Hom paragraph of archived `ModuleObject/Colimit/TwoColimit.lean`, and
-`new-weil-pbc-condensed-coefficient-complex-model`, step 3. -/
+transitivity. -/
 theorem coefficientComplexToAlgCl_derived_compatibility
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)

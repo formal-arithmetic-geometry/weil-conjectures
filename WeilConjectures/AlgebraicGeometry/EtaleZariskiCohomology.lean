@@ -18,14 +18,15 @@ import WeilConjectures.AlgebraicGeometry.ZariskiDimensionBound
 /-!
 # Étale and Zariski cohomology of quasi-coherent modules on curves
 
-Source: Stacks Project, Descent, Proposition 03DW, part (2), and Cohomology,
-Proposition 02UZ.
-
 The associated étale sheaf of the structure module `Scheme.Modules.unit C` is `Gₐ`.
 Étale cohomology uses `Sheaf.H`; Zariski module cohomology uses the recorded right
 derived functors `RingedSpace.moduleCohomology`, with their underlying additive groups.
 The comparison with the derived-global-sections encoding of étale cohomology is a
-comparison theorem, as specified by `def-weil-pbc-etale-cohomology`.
+comparison theorem.
+
+## References
+
+* Stacks Project, Tags 03DW, 02UZ
 -/
 
 @[expose] public section

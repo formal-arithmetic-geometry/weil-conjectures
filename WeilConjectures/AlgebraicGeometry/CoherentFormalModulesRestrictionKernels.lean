@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Open restriction preserves formal kernels
 
-Source: Stacks Project, Lemma 087X, claims (a)--(d) and final sentence.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -38,8 +38,7 @@ private noncomputable def restrictionQuotientIso {X : Scheme.{u}} [IsNoetherian 
   exact (((formalCompletionFunctor (I.comap U.ι)).mapIso (t.app M)).app (Opposite.op n)).symm ≪≫
     powerQuotientIso U.ι I M hM (n + 1) ≪≫ t.app (formalModuleQuotient I (n + 1) M)
 
-/-- The transported quotient comparison respects its projection; this is the
-projection identity in the proof of Stacks 0887. -/
+/-- The transported quotient comparison respects its projection (Stacks, Tag 0887). -/
 private theorem restrictionQuotientIso_π {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (U : X.Opens) (M : X.Modules)
     (hM : M.IsQuasicoherent) (n : ℕ) :
@@ -109,7 +108,7 @@ private theorem restrictionImage {X : Scheme.{u}} (U : X.Opens)
   exact image.isoStrongEpiMono_hom_comp_ι q (R.map j) hq
 
 /-- Restriction preserves kernels in the formal category, without assuming abelianness.
-Source: Stacks Project, Lemma 087X, claims (a)--(d) and final sentence. -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModules_restriction_preservesKernel {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     [IsNoetherian U.toScheme] {F G : CoherentFormalModule X I} (α : F ⟶ G) :

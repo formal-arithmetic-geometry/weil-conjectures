@@ -14,8 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientPullbackIso
 public import WeilConjectures.AlgebraicGeometry.CondensedProjectorCoefficientNaturality
 
 /-! Coefficient comparison for a pulled-back Artin–Schreier kernel.
-
-Source: the scalar-extension paragraph of the first-formula proof.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -275,9 +273,7 @@ private theorem ordinaryArtinScalar
 
 /-- Scalar extension along `E → Q̄_ℓ` of the condensed Artin–Schreier sheaf of a global
 function `b` is isomorphic to the Artin–Schreier sheaf of the induced `Q̄_ℓ`-character, also for
-a trivial character.
-
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph. -/
+a trivial character. -/
 theorem condensed_fourier_kernel_coefficient_comparison
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

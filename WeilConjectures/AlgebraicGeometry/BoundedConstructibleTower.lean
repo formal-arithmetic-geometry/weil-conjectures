@@ -12,14 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAd
 /-!
 # Uniformly bounded constructible adic towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-bounded-constructible-tower, order 1250; Stacks Tags 09AI and 09BT.
-
 Positive level n+1 is indexed by n : ℕ. Normalizations are stored for every comparable
 pair; their cocycle determines the nonconsecutive ones from the consecutive ones.
 Compatibility is expressed on their adjoints M_b→Res(M_a). The tensor-unit normalized
-scalar-extension adjunction makes this equivalent to the displayed normalization
-identities in the blueprint. This permits restrictions to retain their actual
+scalar-extension adjunction makes this equivalent to the usual normalization
+identities. This permits restrictions to retain their actual
 inverse-image coefficients, without choosing a tensor/pullback comparison.
 
 ## Main definitions
@@ -29,6 +26,10 @@ inverse-image coefficients, without choosing a tensor/pullback comparison.
 * `IsUniformlyBoundedConstructibleAdicTower`: common bounds, finite strata and local models.
 * `pbcLevelConstantComparison` and `pbcCompletedComparison`: canonical coefficient
   presentation comparisons fixed on constant sections.
+
+## References
+
+* Stacks Project, Tags 09AI and 09BT
 -/
 
 @[expose] public noncomputable section
@@ -159,18 +160,15 @@ def IsRelativelyFiniteLisseModule {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 variable (X : Scheme.{u})
 
-/-- The module category over a commutative ring sheaf on the small site.
- -/
+/-- The module category over a commutative ring sheaf on the small site. -/
 abbrev pbcModules (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ringedSiteModules.{u + 1} ((adicLisseForget X).obj R)
 
-/-- Strict inverse sequences, reindexed by n ↦ n+1.
- -/
+/-- Strict inverse sequences, reindexed by n ↦ n+1. -/
 abbrev pbcTowers (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ℕᵒᵖ ⥤ pbcModules X R
 
-/-- The standard derived localization for strict towers.
- -/
+/-- The standard derived localization for strict towers. -/
 instance pbcTowers_hasDerivedCategory
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     HasDerivedCategory (pbcTowers X R) := HasDerivedCategory.standard _
@@ -196,8 +194,7 @@ instance pbcRestrict_additive : (pbcRestrict φ).Additive := by
   dsimp [pbcRestrict, proEtaleRingRestrictScalars]
   infer_instance
 
-/-- Exact scalar restriction on unbounded derived categories.
- -/
+/-- Exact scalar restriction on unbounded derived categories. -/
 def pbcDerivedRestrict := (pbcRestrict φ).mapDerivedCategory
 
 set_option linter.defProp false in
@@ -369,35 +366,30 @@ def pbcRestrictComp : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ :=
 /-- The already constructed quotient coefficient system; n means positive exponent n+1.
 A constant sheaf is canonically also the sheafification of continuous maps from connected
 components to the discrete ring: every such function is locally constant on its open
-fibres, which form a Zariski, hence pro-etale, cover. Constant sections give the comparison.
- -/
+fibres, which form a Zariski, hence pro-etale, cover. Constant sections give the comparison. -/
 abbrev pbcAdicRings (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :=
   AdicCoefficients.ringSystem X d.ideal d.quotientFinite
 
 /-- The completed coefficient sheaf is the actual inverse limit of the quotient sheaves.
-Limits of sheaves are sectionwise compatible families, with pointwise operations.
- -/
+Limits of sheaves are sectionwise compatible families, with pointwise operations. -/
 abbrev pbcAdicCompletion (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :=
   AdicCoefficients.completedRing X d.ideal d.quotientFinite
 
-/-- The n-th coordinate of a compatible family in the completed ring.
- -/
+/-- The n-th coordinate of a compatible family in the completed ring. -/
 def pbcAdicProjection (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (n : ℕ) : pbcAdicCompletion X d ⟶ (pbcAdicRings X d).obj (op n) :=
   limit.π (pbcAdicRings X d) (op n)
 
-/-- The quotient continuous-function presheaf with its prescribed discrete topology.
- -/
+/-- The quotient continuous-function presheaf with its prescribed discrete topology. -/
 def pbcQuotientPresheaf (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) : X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} :=
   letI := d.quotientFinite n
   AdicCoefficients.functionPresheaf X (A ⧸ d.ideal ^ (n + 1))
 
-/-- The constant continuous component function used by the coefficient comparison.
- -/
+/-- The constant continuous component function used by the coefficient comparison. -/
 noncomputable def pbcQuotientConstant (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ)
     (U : X.ProEtᵒᵖ) (b : A ⧸ d.ideal ^ (n + 1))
@@ -484,8 +476,7 @@ theorem pbcLevelConstantComparison_exists (X : Scheme.{u}) {A : Type (u + 1)} [C
   ext U b
   exact (he' U b).trans (he U b).symm
 
-/-- The canonical finite coefficient identification, fixed on constant sections.
- -/
+/-- The canonical finite coefficient identification, fixed on constant sections. -/
 def pbcLevelConstantComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)) ≅ (pbcAdicRings X d).obj (op n) :=
@@ -523,8 +514,7 @@ theorem pbcConstantSystemComparison_naturality (X : Scheme.{u})
       congr 1)
   exact t.naturality f
 
-/-- The comparison of constant and continuous-function quotient coefficient diagrams.
- -/
+/-- The comparison of constant and continuous-function quotient coefficient diagrams. -/
 def pbcConstantSystemComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     adicLisseRingSystem X d.ideal ≅ AdicCoefficients.ringSystem X d.ideal d.quotientFinite :=
@@ -532,8 +522,7 @@ def pbcConstantSystemComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (fun f ↦ pbcConstantSystemComparison_naturality X d f)
 
 /-- The completed-coefficient comparison is induced by the quotient diagram.
-No completed coefficient sheaf is identified with a constant sheaf.
- -/
+No completed coefficient sheaf is identified with a constant sheaf. -/
 def pbcCompletedComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     adicLisseCompletedRing X d.ideal ≅ pbcAdicCompletion X d :=
@@ -544,12 +533,10 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 
 variable {X} {Y : Scheme.{u}} (g : Y ⟶ X)
 
-/-- Restrict any coefficient sheaf by its actual inverse image along the scheme map.
- -/
+/-- Restrict any coefficient sheaf by its actual inverse image along the scheme map. -/
 abbrev adicTowerInverseImage := proEtaleSheafInverseImage g CommRingCat.{u + 1}
 
-/-- Exact derived inverse image with exactly the inverse-image coefficient sheaf.
- -/
+/-- Exact derived inverse image with exactly the inverse-image coefficient sheaf. -/
 abbrev adicTowerPullback (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   proEtaleRingDerivedPullback g R ((adicTowerInverseImage g).obj R) (Iso.refl _)
 

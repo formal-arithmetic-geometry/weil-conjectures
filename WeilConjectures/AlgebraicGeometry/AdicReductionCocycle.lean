@@ -364,8 +364,7 @@ private theorem rho_eq (X : Scheme.{u})
   rfl
 
 /-- The canonical quotient reassociations obey their cocycle before any descent.
-Source: Stacks Project, Tag 09C2, repeated quotient tensor computations; parent
-proof steps 1 and 4. -/
+(Stacks, Tag 09C2). -/
 theorem adicReduction_cocycle (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A)

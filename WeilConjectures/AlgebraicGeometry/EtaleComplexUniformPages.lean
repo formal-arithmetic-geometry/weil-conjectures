@@ -33,7 +33,7 @@ set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent presentation family and its naturality equations.
 set_option linter.unusedVariables false in
 /-- Uniform pages and natural graded comparisons, before choosing any class representatives.
-Source: Stacks Project, Tags 015J and 0EZM, proof of Lemma 59.52.1. -/
+(Stacks, Tags 015J and 0EZM). -/
 theorem exists_etaleComplex_uniform_pages
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

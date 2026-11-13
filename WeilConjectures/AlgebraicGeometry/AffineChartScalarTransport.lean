@@ -17,10 +17,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The chart ring map agrees with the pushforward ring map on the top section.
-Source: Stacks Project, Tag 0098 and Tag 01IB.
-The proof applies the chart ring isomorphism, uses naturality and
-`isoSpec_hom_appTop`, then composes the restriction maps between opens. -/
+/-- The chart ring map agrees with the pushforward ring map on the top section (Stacks, Tags 0098,
+01IB). -/
 private theorem affine_chart_scalar_transport_ring_compatibility (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U) (a : Γ(X, U)) :
     let W := (TopologicalSpace.Opens.overEquivalence U).functor.obj ((Over.star U).obj U)
@@ -54,9 +52,8 @@ private theorem affine_chart_scalar_transport_ring_compatibility (X : Scheme.{u}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport along an affine chart and the slice equivalence carries the
-coordinate-ring scalar action to the action on sections over the chart.
-Source: Stacks Project, Tag 0098 (restriction of sheaves of modules),
-Tag 01HV, Lemma 26.5.4 (7), and Tag 01IB. -/
+coordinate-ring scalar action to the action on sections over the chart (Stacks, Tags 0098, 01HV,
+01IB). -/
 theorem affine_chart_scalar_transport (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U) (a : Γ(X, U))
     (M : (Spec Γ(X, U)).Modules) (f : M ⟶ M)

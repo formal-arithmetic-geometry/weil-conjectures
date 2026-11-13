@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Affine opens intersected with section nonvanishing loci
 
-Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open).
+## References
+
+* Stacks Project, Tag 01PV
 -/
 
 @[expose] public section
@@ -64,10 +66,8 @@ private theorem affine_nonvanishing {R : Type u} [CommRing R]
 
 /-- Intersecting an affine open with the nonvanishing locus of a section of an invertible
 module, or of any positive tensor power of it, gives an affine open. The nonvanishing
-condition is exactly that the germ lies outside the maximal ideal times the stalk module,
-as in `def-weil-pbc-ample-invertible-module`.
-
-Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open). -/
+condition is exactly that the germ lies outside the maximal ideal times the stalk module
+(Stacks, Tag 01PV). -/
 theorem affine_cap_section_open (X : Scheme.{u}) (M : X.Modules) [M.IsInvertible]
     (s : M.val.presheaf.obj (Opposite.op ⊤)) (U : X.Opens) (hU : IsAffineOpen U) :
     (∃ V : X.Opens, IsAffineOpen V ∧ ∀ x : X, x ∈ V ↔ x ∈ U ∧

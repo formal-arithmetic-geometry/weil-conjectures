@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A colimit section has representatives at one stage on a finite covering with
-quasi-compact overlaps. No compatibility of these representatives is asserted.
-Source: Stacks Project, Sites, Tag 0738, proof of (4), and Etale Cohomology, Tag 03Q4. -/
+quasi-compact overlaps (Stacks, Tags 0738, 03Q4). -/
 theorem etale_section_colimit_local_lifts
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]

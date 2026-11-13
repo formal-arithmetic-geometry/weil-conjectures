@@ -36,9 +36,8 @@ noncomputable local instance localInst_CartesianHigherImageAffineComplexPresenta
 
 /-- Present affine cartesian derived classes by a qcqs scheme system and its
 abelian complex cohomology cocone. The presentation has canonical transition and
-leg equations, and contains no cohomology continuity or representative assertion.
-Source: Stacks Project, Tag 0EYM, second proof, the square preceding part (1);
-Tags 0EYL, 03Q8 and 09YQ. -/
+leg equations, and contains no cohomology continuity or representative assertion
+(Stacks, Tags 0EYM, 0EYL, 03Q8 and 09YQ). -/
 theorem exists_cartesianHigherImage_affine_complex_presentation
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

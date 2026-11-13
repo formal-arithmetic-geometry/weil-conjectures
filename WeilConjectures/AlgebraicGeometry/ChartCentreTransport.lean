@@ -20,10 +20,9 @@ public import WeilConjectures.AlgebraicGeometry.ChartNormalDifferential.ChartNor
 /-!
 # Centred diagonal neighbourhood and its differential under an étale source map
 
-Source: current blueprint, `sk-prop-sp-orientation-charts.proof.md`, Steps 1--2:
-remove the off-diagonal components, form the Cartesian centre squares, apply the
-canonical flat conormal graded comparison, and identify its normal map with the
-differential (Stacks Tags 02GE, 0473 and 0635).
+## References
+
+* Stacks Project, Tags 02GE, 0473, 0635 and 08S2
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +43,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 namespace AlgebraicGeometry
 
 /-- The canonical centred-neighbourhood transport, including its graded and tangent maps.
-Source: current blueprint, `sk-prop-sp-orientation-charts.proof.md`, Steps 1--2;
-Stacks Tags 02GE, 0473, 0635 and 08S2. -/
+(Stacks, Tags 02GE, 0473, 0635 and 08S2). -/
 theorem chart_centre_transport (k : Type u) [Field k]
     {X Y V : Scheme.{u}}
     (aX : X ⟶ Spec (CommRingCat.of k))

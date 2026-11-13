@@ -23,7 +23,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- -/
+/-- A morphism of module sheaves commutes with restriction of sections. -/
 private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
     (φ : A ⟶ D) {B C : S.Opens} (i : B ⟶ C) (s : Γ(A, C)) :
     φ.app B (A.presheaf.map i.op s) = D.presheaf.map i.op (φ.app C s) := by

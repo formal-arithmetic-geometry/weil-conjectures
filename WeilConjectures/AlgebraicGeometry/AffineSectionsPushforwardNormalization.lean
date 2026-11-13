@@ -99,9 +99,8 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 set_option maxHeartbeats 500000 in
 -- Scalar-action comparisons unfold global-section and derived-functor identifications.
-/-- Sections of pushforward retain their affine scalar action before and after deriving.
-There are no internal-Hom, perfectness or quasi-coherence inputs in this statement.
-Source: Stacks, Tags 0D5T, 08D5 (proof of (2)), and 0AA7. -/
+/-- Sections of pushforward retain their affine scalar action before and after deriving
+(Stacks, Tags 0D5T, 08D5 and 0AA7). -/
 theorem exists_affineSectionsPushforwardNormalization
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

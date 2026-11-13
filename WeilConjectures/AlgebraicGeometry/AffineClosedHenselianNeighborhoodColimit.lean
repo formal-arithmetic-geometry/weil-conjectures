@@ -27,10 +27,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- A closed affine pair admits a henselian neighborhood whose cohomology is computed
-by a small filtered system of etale neighborhoods. Torsion is not needed here.
-
-Source: Stacks Project, Tag 0A51, second displayed equality in the affine proof;
-Tags 0A02 and 09YQ. -/
+by a small filtered system of etale neighborhoods (Stacks, Tags 0A51, 0A02, 09YQ). -/
 theorem Etale.affine_closed_henselian_neighborhood_colimit
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]

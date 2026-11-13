@@ -225,12 +225,7 @@ private theorem range_le_below_affine {X : Scheme.{u}} {A B F : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An equality of ideal products and intersections of affine section modules yields
-an equality of the corresponding subsheaves on that affine open. This is the geometric
-comparison only; neither coherence, a Noetherian hypothesis, nor an Artin-Rees bound
-is assumed.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 01YA, affine reduction in the proof;
-Schemes, Tags 01I8 and 01IC. -/
+an equality of the corresponding subsheaves on that affine open (Stacks, Tag 01YA). -/
 theorem artin_rees_affine_comparison {X : Scheme.{u}}
     (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]
     (g : G ⟶ F) [Mono g] (I : X.IdealSheafData) (U : X.affineOpens) (c n : ℕ)

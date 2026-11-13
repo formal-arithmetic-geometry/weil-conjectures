@@ -44,8 +44,7 @@ structure SectionModel where
         (R n).map ((adicPerfectQuotientModuleStep X J U n).hom.app M)
 
 /-- Assemble a tower from arbitrary adjunctions by the general mate construction.
-The functors and adjunctions remain parameters throughout this proof.
-Source: Stacks 03CY, 03EK. -/
+(Stacks, Tags 03CY and 03EK). -/
 def SectionModel.ofAdjunctions
     (R : ∀ n : ℕ,
       Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤

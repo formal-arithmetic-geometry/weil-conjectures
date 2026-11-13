@@ -48,7 +48,7 @@ attribute [local instance] preservesBinaryBiproducts_of_preservesBiproducts
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed boundary is exact on both sides for the actual restrictions.
-Source: Stacks Project, Tag 0A50, proof. -/
+(Stacks, Tag 0A50) -/
 private theorem etaleMayerVietorisCanonicalBoundary_exact {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
@@ -144,7 +144,7 @@ private theorem etaleMayerVietorisCanonicalBoundary_exact {X : Scheme.{u}}
       ((ShortComplex.ab_exact_iff_function_exact _).mp (hS.homology_exact₁ q (q + 1) rfl))
 
 /-- Exactness with the intersection supplied by an equality.
-Source: Stacks Project, Tag 0A50, the preceding exactness and intersection identification. -/
+(Stacks, Tag 0A50) -/
 private theorem etaleMayerVietorisBoundaryOn_exact {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
@@ -164,7 +164,7 @@ private theorem etaleMayerVietorisBoundaryOn_exact {X : Scheme.{u}}
   exact etaleMayerVietorisCanonicalBoundary_exact U V hcover F I c q
 
 /-- Exactness of the fixed boundary interface.
-Source: Stacks Project, Tag 0A50, long exact cohomology sequence. -/
+(Stacks, Tag 0A50) -/
 theorem etaleMayerVietorisFixedBoundary_exact {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

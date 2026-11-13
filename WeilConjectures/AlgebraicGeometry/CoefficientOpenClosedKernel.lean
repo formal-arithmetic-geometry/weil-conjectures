@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
 /-! # The open term as a kernel on coefficient-sized sites
 
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open.
+## References
+
+* Stacks Project, Tag 09AH
 -/
 
 @[expose] public noncomputable section
@@ -285,10 +287,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 /-- **Restrictions along a quasi-compact jointly surjective family detect sections.** Let
 `g k : Z k ⟶ U` be finitely many quasi-compact morphisms jointly covering `U`. A section `s` of
 a pro-étale sheaf of modules `F` on `U` whose images under the units `F ⟶ (g k)_* (g k)^* F` all
-vanish is zero: `s` vanishes on weakly étale neighbourhoods of the points of every
-`V ×_U Z k` (`AlgebraicGeometry.ProEtale.rawLocalVanish`), and these
-neighbourhoods form a pro-étale cover of `V`
-(`AlgebraicGeometry.QuasiCompactCover.of_comp_factor`). -/
+vanish is zero. -/
 private theorem rawDetectSections
     (R : Type (max v (u + 1))) [CommRing R] {U : Scheme.{u}}
     {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}
@@ -635,9 +634,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   GrothendieckTopology.hasSheafify_proEtTopology in
 /-- The open extension of the open restriction is the kernel of the closed unit.
 This assertion concerns arbitrary coefficient-sized module sheaves and does not involve
-etale comparison or an etale antecedent.
-
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open. -/
+etale comparison or an etale antecedent. (Stacks, Tag 09AH) -/
 theorem coefficientOpenClosedKernelIso
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

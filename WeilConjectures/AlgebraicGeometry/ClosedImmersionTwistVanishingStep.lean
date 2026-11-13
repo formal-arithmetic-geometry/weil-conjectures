@@ -24,7 +24,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The descending Serre induction step, simultaneously for all coherent coefficients.
-Source: Stacks Project, Tag 01YS (4), proof of part (4). -/
+(Stacks, Tag 01YS) -/
 theorem exists_isZero_closedImmersion_twist_of_next_degree
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

@@ -44,8 +44,7 @@ private theorem linear_lowerStar
     (upperStarFromPoint Y) (upperStarFromPoint X) (upperStarFromPointComp f).hom a.hom
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
-/-- Module pullback is linear for scalars pulled back from the coefficient point.
-Source: the linear module adjunction. -/
+/-- Module pullback is linear for scalars pulled back from the coefficient point. -/
 theorem condensedModulePullback_linear
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -70,10 +69,7 @@ private theorem regularEnd_eq_smul
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- In the linear structure induced from the coefficient ring, the defining condensed
-projector is the usual normalized sum of its translation endomorphisms.
-
-Source: latest blueprint, `def-fd-artin-schreier-sheaf.md`, displayed projector, and
-`prop-kernel-lisse.proof.md`, the character average. -/
+projector is the usual normalized sum of its translation endomorphisms. -/
 theorem condensedArtinSchreierProjector_eq_sum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

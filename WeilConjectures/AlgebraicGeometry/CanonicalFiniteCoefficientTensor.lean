@@ -15,10 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoeffi
 import all WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
 import all WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ProEtaleSectionModuleFunctors
 
-/-! # The normalized tensor structure of the canonical finite coefficient equivalence
-
-Source: the coefficient-presentation step in det-thm-sf-pf-finite.proof.md.
--/
+/-! # The normalized tensor structure of the canonical finite coefficient equivalence -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -344,10 +341,7 @@ private theorem canonicalFixed_tensor_pure (T : Scheme.{u})
 end
 
 /-- The canonical finite coefficient equivalence has its unique section-normalized
-strong monoidal structure.
-
-Source: det-thm-sf-pf-finite.proof.md, coefficient realization; the balanced tensor
-construction of Modules on Sites, Stacks Tags 03CY and 03EK. -/
+strong monoidal structure (Stacks, Tags 03CY and 03EK). -/
 theorem canonicalFiniteCoefficientTensor
     (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     [DiscreteTopology A] [Finite A] (X : Scheme.{u}) :

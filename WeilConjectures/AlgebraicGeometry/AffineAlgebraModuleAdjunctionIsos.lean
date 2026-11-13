@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso
 
 /-! # The underived affine algebra adjunction
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Tensor pullback for the direct-image algebra is exact, and its adjunction
-maps are isomorphisms on quasi-coherent modules.
-Source: Stacks Project, Tag 0AVW, proof, and Tag 01SB,
-morphisms-lemma-affine-equivalence-modules. -/
+maps are isomorphisms on quasi-coherent modules (Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_isos
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

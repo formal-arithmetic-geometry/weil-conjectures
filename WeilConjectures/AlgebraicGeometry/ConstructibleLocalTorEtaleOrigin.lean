@@ -15,13 +15,15 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Etale origin of constructible complexes locally of finite Tor dimension
 
-Source: Stacks Project, proetale.tex, Tags 09C2 and 09AL.
+## Implementation details
 
 We use the recorded coefficient-sized small sites and their constant ring sheaves.
-The inverse image of a derived object C is expressed using a cochain representative P:
-Q(P) is isomorphic to C, and Q of its canonical termwise comparison pullback is isomorphic
-to M. Exactness makes this precisely the inverse image on derived categories, independent
-of the representative. No inverse-image functor or tensor product is chosen anew.
+The inverse image of a derived object C is expressed using a cochain representative P.
+No inverse-image functor or tensor product is chosen anew.
+
+## References
+
+* Stacks Project, Tags 09C2 and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -77,11 +79,8 @@ private theorem boundedConstructible_iso (X : Scheme.{u})
 constructible cohomology and locally finite Tor dimension are equivalent to bounded
 constructible etale origin with finite Tor amplitude. The local condition tests every
 module sheaf on every covering slice, with a possibly different ordered interval on
-each covering member. The etale interval is uniform. The complex P only represents C;
-its image is the actual canonical termwise comparison pullback, not an arbitrary map.
-
-Source: Stacks Project, Tag 09C2, lemma-describe-constructible-complexes, (2) and (4)
-at n = 1, and Tag 09AL, lemma-compare-constructible-derived. -/
+each covering member. The etale interval is uniform.
+(Stacks, Tags 09C2 and 09AL) -/
 theorem constructible_localTor_iff_etaleOrigin
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]

@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.GenericFibrePartialIsoSpreadOpen
 
 /-! # A common affine open with a generic hypersurface model
 
-Source: Stacks Project, Tag 0559, first proof, and Tag 0552.
+Stacks Project, Tags 0559 and 0552.
 -/
 
 @[expose] public section
@@ -28,10 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A generically geometrically integral affine family has a common affine open
 with a hypersurface over its original base. The generic fibre of this open is
-nonempty. No assertion about special fibres is made here.
-
-Source: Stacks Project, Tag 0559, first proof, the separating transcendence basis
-and common-open construction; Tag 0552, birational finite type schemes. -/
+nonempty (Stacks, Tags 0559 and 0552). -/
 theorem exists_common_generic_hypersurface_affine_open
     {X S : Scheme.{u}} [IsAffine X] [IsReduced X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f]

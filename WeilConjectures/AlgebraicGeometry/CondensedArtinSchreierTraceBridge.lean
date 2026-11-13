@@ -12,8 +12,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSect
 import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 
 /-! Comparison data reducing an arbitrary finite-field character to a trace character.
-
-Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md.
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +46,7 @@ private theorem homOfVector_comp_artinSchreierScaling (k : Type u) [Field k]
     scalar]
 
 /-- The condensed Artin–Schreier sheaf of a shifted character `ψ(c ·)`, `c ∈ kˣ`, at a
-function `f` is that of `ψ` at `c f`: `L_{ψ(c ·), f} ≅ L_{ψ, c f}`.
-Source: blueprint lem-wft-as-comparison (2). -/
+function `f` is that of `ψ` at `c f`: `L_{ψ(c ·), f} ≅ L_{ψ, c f}`. -/
 theorem condensedArtinSchreierSheafOf_mulShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (k : Type u) [Field k] [Fintype k] (ψ : AddChar k (MonObj.Γ Λ)) (c : kˣ)
@@ -65,15 +62,8 @@ theorem condensedArtinSchreierSheafOf_mulShift
 /-! The comparison is deliberately only comparison data.  The lisse and tensor
 clauses are obtained from the qlbar trace statements after this bridge. -/
 /-- Every nontrivial condensed character is compared with one qlbar trace character.
-
-Proof source: lem-wft-as-comparison (1)--(2).  Choose a nontrivial character
-`Ψ` of `ZMod (ringChar k₀)` with values in `PadicAlgCl ℓ`, apply the character
-classification to its constant global-section character, and use the unique
-nonzero shift `a`.  The second part of lem-wft-as-comparison transports the
-degree-cardinality projector to the prime-degree trace projector.  The same
-comparison is natural in the function and for the inverse character.  This
-statement records precisely that transport data; it does not include any
-lissity, tensor, or inverse conclusion. -/
+The statement records only the comparison data, not any lissity, tensor, or inverse
+conclusion. -/
 theorem condensedArtinSchreier_trace_bridge
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀).Prime] [Fact (ringChar k₀ ≠ ℓ)]

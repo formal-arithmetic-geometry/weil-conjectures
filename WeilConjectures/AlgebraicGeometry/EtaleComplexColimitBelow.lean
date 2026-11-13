@@ -25,7 +25,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
 /-- A colimit of uniformly lower bounded inverse-image complexes has the same lower bound.
-Source: Stacks Project, Tag 0EZM, proof of Lemma 59.52.1. -/
+(Stacks, Tag 0EZM). -/
 theorem etaleComplex_colimit_below
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

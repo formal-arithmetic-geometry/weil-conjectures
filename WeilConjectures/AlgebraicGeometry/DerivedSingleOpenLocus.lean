@@ -14,10 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenPullbackHomology
 import WeilConjectures.AlgebraicGeometry.Modules.VanishingOnOpen
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
-/-! # The flat single-cohomology open locus
-
-Source: the cohomology-sheaf gluing paragraph of the perfect-locus proof.
--/
+/-! # The flat single-cohomology open locus -/
 
 @[expose] public section
 
@@ -47,10 +44,7 @@ private theorem isZero_restrict_union {T : Scheme.{u}} (M : T.Modules)
     ((leOfHom g).trans inf_le_right)).elim _ _
 
 /-- A connective derived object locally concentrated in one finite locally free degree
-on a set of points is a flat single object on an open neighbourhood of that set.
-
-Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph; the first
-step of lem-pc-derived-pullback-single-cohomology. -/
+on a set of points is a flat single object on an open neighbourhood of that set. -/
 theorem exists_flat_single_open_locus
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

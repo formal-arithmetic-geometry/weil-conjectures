@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Base change of a curve
 
-Source: blueprint
-sec-curve-estimates/sbc-thm-algebraically-closed-invariance/lem-sc-base-change-curve.md.
+Base change of a curve along an extension of algebraically closed fields.
 -/
 
 @[expose] public section
@@ -32,9 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Base change of a curve along an extension of algebraically closed fields preserves the
-curve structure, dimension, and the listed geometric properties.
-
-Source: blueprint node `lem-sc-base-change-curve`, Stacks Tags 00OY, 00GU. -/
+curve structure, dimension, and the listed geometric properties (Stacks, Tags 00OY, 00GU). -/
 theorem baseChange_curve {k k' : Type u} {C : Scheme.{u}} [Field k] [Field k'] [Algebra k k']
     [IsAlgClosed k] [IsAlgClosed k'] (f : C ⟶ Spec (.of k)) [IsCurve f] :
     IsCurve (CategoryTheory.Limits.pullback.snd f

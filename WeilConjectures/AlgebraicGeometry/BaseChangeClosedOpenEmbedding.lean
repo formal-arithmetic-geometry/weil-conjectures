@@ -25,9 +25,8 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
-/-- The open injective embedding and the closed unit jointly embed the coefficient sheaf.
-
-Source: Stacks Project, Tag 0F07, proof of condition (3). -/
+/-- The open injective embedding and the closed unit jointly embed the coefficient sheaf
+(Stacks, Tag 0F07). -/
 theorem mono_closedOpen_coefficient_embedding {T Z : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (V : T.Opens) (i : Z ⟶ T) [IsClosedImmersion i]

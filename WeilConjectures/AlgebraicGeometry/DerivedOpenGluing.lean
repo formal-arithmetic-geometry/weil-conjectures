@@ -52,15 +52,8 @@ set_option synthInstance.maxHeartbeats 400000 in
 set_option maxHeartbeats 500000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Derived complexes and compatible morphisms glue across a two-open cover of a scheme.
-D(O_X), D(O_U), D(O_V), D(O_(U ∩ V)) are `schemeDerivedCategory` of `X`, `U.toScheme`,
-`V.toScheme`, `(U ⊓ V).toScheme`. Restriction from X to an open W is restriction to the
-localized site followed by the canonical equivalence `Scheme.Modules.overEquiv W` with the
-open subscheme's site; restriction from U (or V) to U ∩ V transports back along
-`overEquiv U`, restricts along `U ⊓ V ⟶ U` and transports along `overEquiv (U ⊓ V)`.
-The transition and compatibility equations use the canonical comparison of the iterated
-restriction X → U → U ∩ V with the direct one (unit of `overEquiv U` and
-`SheafOfModules.overFunctorMap`).
-Source: Stacks Project, Cohomology, Tag 08DG (Lemma 20.45.1). -/
+The derived categories are `schemeDerivedCategory` of `X`, `U.toScheme`, `V.toScheme` and
+`(U ⊓ V).toScheme` (Stacks, Tag 08DG). -/
 theorem derived_open_gluing
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

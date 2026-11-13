@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.HomLocalKernelOfPresentation
 /-!
 # Local kernel models for Hom out of a coherent module
 
-Source: Stacks Project, Modules, Lemmas 01BW and 01CQ.
+Stacks Project, Tags 01BW and 01CQ.
 -/
 
 @[expose] public section
@@ -29,10 +29,8 @@ attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For any target module, Hom out of a coherent source is locally a kernel between finite
-sums of the target. No coherence assumption on the target is needed.
-
-Source: Stacks Project, Modules, Lemma 01BW (lemma-coherent-finite-presentation),
-Lemma 01CQ (lemma-internal-hom-locally-kernel-direct-sum), and the proof of Lemma 01CP. -/
+sums of the target. No coherence assumption on the target is needed
+(Stacks, Tags 01BW, 01CQ and 01CP). -/
 theorem homObj_locally_kernel_of_coherent (X : Scheme.{u}) (G F : X.Modules)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) :
     ∃ (U : X.Opens), x ∈ U ∧ ∃ (m n : ℕ)

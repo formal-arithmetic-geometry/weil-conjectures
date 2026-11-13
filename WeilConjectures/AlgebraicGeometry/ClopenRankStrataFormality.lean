@@ -17,8 +17,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 /-! # Formality of modules on disjoint clopen rank strata
 
-Source: Stacks Tag 0BQZ, single-degree truncation, and Tag 0AVW,
-modules over the direct-image algebra.
+## References
+
+* Stacks Project, Tag 0BQZ (single-degree truncation) and Tag 0AVW (modules over the
+  direct-image algebra)
 -/
 
 @[expose] public section
@@ -31,11 +33,7 @@ open scoped ZeroObject
 namespace AlgebraicGeometry
 
 /-- Arbitrary module sheaves on finitely many clopen rank strata can be
-reconstructed from their cohomology in the assigned degrees. The family E
-is arbitrary; no exterior-power or derived-direct-image computation occurs
-in this assertion.
-
-Source: Stacks Tags 0BQZ and 0AVW; reconstruction proof steps 2--4. -/
+reconstructed from their cohomology in the assigned degrees (Stacks, Tags 0BQZ, 0AVW). -/
 theorem clopenRankStrata_formality
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}

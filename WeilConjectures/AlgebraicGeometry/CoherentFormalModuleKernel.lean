@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 /-!
 # Kernels in coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087X.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -50,8 +50,7 @@ private theorem formalMono_of_kernel_transition_zero {X : Scheme.{u}} [IsNoether
   apply (cancel_epi (T.obj.map (homOfLE (Nat.le_add_right n c)).op)).mp
   simpa only [NatTrans.naturality, comp_zero] using hzero
 
-/--
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087X, claims (a)--(d). -/
+/-- Kernels of morphisms of coherent formal modules (Stacks, Tag 087X, claims (a)--(d)). -/
 theorem coherentFormalModule_kernel {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I)
     (α : F ⟶ H) :

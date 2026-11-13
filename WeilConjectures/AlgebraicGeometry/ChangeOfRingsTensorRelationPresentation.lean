@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorBalancingUniversal
 
 /-! # Change of rings as a tensor relation cokernel
 
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
+## References
+
+* Stacks Project, Tags 01SB and 0089
 -/
 
 @[expose] public section
@@ -36,8 +38,7 @@ local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option maxHeartbeats 800000 in
 -- The nested tensor and restriction-of-scalars types need extra elaboration heartbeats.
 /-- The tensor relation presentation, without any quasi-coherence hypotheses.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
-Sheaves, Lemma 0089 (sheafification universal property). -/
+(Stacks, Tags 01SB and 0089). -/
 theorem changeOfRings_tensor_relation_presentation (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

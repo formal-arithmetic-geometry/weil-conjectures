@@ -95,9 +95,7 @@ private theorem perfect_thick_property (X : Scheme.{u})
   exact ⟨ObjectProperty.IsTriangulated.mk, hret⟩
 
 /-- Compact objects in the quasi-coherent derived category are perfect.
-Source: Stacks Project, Tag 09M1, converse direction of
-`perfect-proposition-compact-is-perfect`; restriction to affine opens and the
-finite-projective criterion reduce compactness to perfectness. -/
+(Stacks, Tag 09M1) -/
 theorem compact_isPerfect_of_isNoetherian (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hOpen : ∀ U : X.Opens,
@@ -137,11 +135,7 @@ theorem compact_isPerfect_of_isNoetherian (X : Scheme.{u}) [IsNoetherian X]
   exact hle P.obj hmem
 
 /-- Noetherian schemes have a universe-small family of perfect representatives.
-Source: Stacks Project, Tags 08EB and 09M1, together with the finite affine
-cover gluing argument of `lem-pc-perfect-complexes-compact-set`.
-The affine representatives glue over a finite affine cover; the required
-derived categories on opens and the compact and separated instances are
-provided by the Noetherian hypotheses. -/
+(Stacks, Tags 08EB and 09M1) -/
 theorem noetherian_perfect_representatives (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hOpen : ∀ U : X.Opens,
@@ -167,8 +161,7 @@ theorem noetherian_perfect_compact (X : Scheme.{u}) [IsNoetherian X]
   exact perfectObjectCompact X
 
 /-- Compact objects of the quasi-coherent derived category have small representatives.
-Source: Stacks Project, Tags 09M1 and 09IS, and the set-of-representatives argument
-of `lem-pc-perfect-complexes-compact-set`. -/
+(Stacks, Tags 09M1 and 09IS) -/
 theorem derivedQCoh_compact_representatives (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X

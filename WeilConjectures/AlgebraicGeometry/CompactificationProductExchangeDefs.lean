@@ -23,13 +23,12 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # Product-projection exchange definitions
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors/
-sk-lem-tf-independent-base-change/det-tf-ibc-pasting.md, order 3437;
-Stacks Project, Tag 0E46.
-
-The helpers specialize the published ambient exchange and construct its canonical
+The helpers specialize the ambient exchange and construct its canonical
 right-adjoint composition maps. The supplied factorization is written as `j ≫ p`.
-Declaration ownership:.
+
+## References
+
+* Stacks Project, Tag 0E46
 -/
 
 @[expose] public noncomputable section

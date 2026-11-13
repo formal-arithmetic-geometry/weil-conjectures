@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Exactness and faithfulness on intrinsic comparison modules
-Source: Stacks Project, Tags 00YV and 099T.
+
+## References
+
+* Stacks Project, Tags 00YV, 099T
 -/
 
 @[expose] public noncomputable section
@@ -399,9 +402,8 @@ private theorem comparisonUnderlying (X : Scheme.{u})
   exact ⟨e⟩
 
 /-- The canonical constant-coefficient comparison on intrinsic module sheaves is
-left exact and faithful, in the full coefficient universe.
-Source: Stacks Project, Tags 00YV (6) and 099T; blueprint comparison on classical
-module sheaves. -/
+left exact and faithful, in the full coefficient universe
+(Stacks, Tags 00YV, 099T). -/
 theorem constructibleComparisonPullback_exact_faithful (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     PreservesFiniteLimits (constructibleComparisonPullback X A) ∧

@@ -26,11 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- A connecting-map ladder lowers a successor-degree descent problem by one.
-
-Source: Stacks Project, Cohomology on Sites, proof of Tag 09YP via the
-injective-system construction 0EXZ and dimension shifting 0739; Etale Cohomology
-Tag 09YQ, using its affine-site reduction 0EYL and 04HR. -/
+/-- A connecting-map ladder lowers a successor-degree descent problem by one
+(Stacks, Tags 09YP and 09YQ). -/
 theorem etale_limit_cohomology_connecting_ladder
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

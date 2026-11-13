@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGenericLisseStratum
 /-!
 # Constructibility from generic lissity on integral affine subschemes
 
-Source: finite pushforward constructibility blueprint, steps 2 and 3;
-Stacks Project, Tags 095E and 005L.
+## References
+
+* Stacks Project, Tags 095E and 005L
 -/
 
 @[expose] public section
@@ -84,9 +85,7 @@ private def adjoinLisseStratum {X : Scheme.{u}}
 /-- On a Noetherian scheme, generic lissity on every integral affine locally closed
 subscheme gives a finite constructible lisse stratification. The hypothesis concerns
 restrictions of an arbitrary set sheaf and makes no claim about finite direct images.
-
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, steps 2--3;
-Stacks Project, Tags 095E and 005L. -/
+(Stacks, Tags 095E and 005L) -/
 theorem isConstructibleEtaleSheafOfSets_of_generic_lisse
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

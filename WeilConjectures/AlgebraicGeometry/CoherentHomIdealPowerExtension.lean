@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # HOM ideal-power comparison over an open complement
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
+Stacks Project, Tag 01YB.
 -/
 
 @[expose] public section
@@ -50,8 +50,8 @@ private theorem hom_zero_of_affine {X : Scheme.{u}} {M N : X.Modules}
     rw [← Modules.Hom.app_presheaf_map, map_zero]
     exact h i.1 _
 
-/-- Factor an inclusion through a monomorphism by vanishing of its cokernel projection.
-Source: Stacks Project, proof of Lemma 01YP. -/
+/-- Factor an inclusion through a monomorphism by vanishing of its cokernel projection
+(Stacks, Tag 01YP). -/
 private theorem subobject_le_of_affine_range {X : Scheme.{u}} {M N P : X.Modules}
     (i : M ⟶ P) (j : N ⟶ P) [Mono i] [Mono j]
     (h : ∀ V : X.affineOpens, Set.range (i.app V.1) ⊆ Set.range (j.app V.1)) :

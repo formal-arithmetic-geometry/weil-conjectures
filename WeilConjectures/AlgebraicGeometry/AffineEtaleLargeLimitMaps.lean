@@ -24,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Affine étale objects are finitely copresentable for affine inverse systems,
-including systems whose index lies in a larger universe.
-
-Source: Stacks Project, limits.tex, Proposition 32.6.1 (Tag 01ZC), and proetale.tex,
-lemma-limit-pullback (Tag 099S). -/
+including systems whose index lies in a larger universe (Stacks, Tags 01ZC, 099S). -/
 theorem affineEtale_largeLimit_preservesColimit {X : Scheme.{u}}
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)

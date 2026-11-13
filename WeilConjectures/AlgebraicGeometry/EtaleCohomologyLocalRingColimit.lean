@@ -68,7 +68,7 @@ private theorem cohomologyMap_pullback_triangle_named
 
 /-- Object cohomology on open subschemes identifies with cohomology of the restricted
 sheaf, and its canonical pullbacks to the local scheme form a colimit cocone.
-Source: Stacks Project, Tags 09AX (proof), 03Q6, 09YQ and 03F3. -/
+(Stacks, Tags 09AX, 03Q6, 09YQ and 03F3) -/
 theorem etaleCohomology_localRing_colimit
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : X) (q : ℕ)

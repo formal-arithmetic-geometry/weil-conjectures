@@ -31,8 +31,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Termwise tilde on module complexes, with its zero-map proof fixed once.
-Source: Mathlib's tilde.functor and Functor.mapHomologicalComplex. -/
+/-- Termwise tilde on module complexes, with its zero-map proof fixed once. -/
 noncomputable abbrev affineModelTildeComplex (A : CommRingCat.{u}) :
     CochainComplex (ModuleCat.{u} A) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) ℤ :=

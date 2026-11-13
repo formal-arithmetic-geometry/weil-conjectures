@@ -119,7 +119,7 @@ private noncomputable instance affineTotalTensorColimits (A : Type u) [CommRing 
 
 set_option backward.defeqAttrib.useBackward true in
 /-- Tilde commutes naturally with the total tensor complex, for two arbitrary unbounded
-module complexes. Source: Stacks Project, Tag 08DX, proof of part (2), and Tag 01I8. -/
+module complexes (Stacks, Tags 08DX and 01I8). -/
 theorem affineTilde_totalTensor_natIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] :

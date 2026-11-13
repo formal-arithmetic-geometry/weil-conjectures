@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 
 /-! # Boundary divisors of units as a Picard kernel
 
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph.
+Boundary divisors of units are exactly the divisors with trivial Picard class.
 -/
 
 @[expose] public section
@@ -21,9 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Boundary divisors of units are precisely the divisors with trivial Picard class
-when extended by zero to the compactification.
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
-the upstream point-ideal divisor-class equivalence and the local DVR unit criterion. -/
+when extended by zero to the compactification. -/
 theorem boundary_divisor_pic_kernel
     (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

@@ -17,7 +17,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback. -/
+/-- Description of the sections of an inverse image through representatives
+(Stacks, Tag 09XN). -/
 theorem etaleInverseImageSectionDescription_representation (S T : Scheme.{u}) (g : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Z : T.Etale)

@@ -9,8 +9,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # Interchanging a trace contraction with a symmetric coefficient
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle.
 -/
 
 @[expose] public noncomputable section
@@ -216,9 +214,7 @@ private theorem interchange_general
   exact generic_interchange (derivedUpperStarLowerStarAdjunction B p) K L h t q q' hq hq'
 
 /-- Tensor extraction commutes with an extra copy of a self symmetric coefficient.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, second triangle, rearrangement of the even shifts;
-Stacks 0B56, projection-formula map. -/
+(Stacks, Tag 0B56) -/
 theorem projectionTraceTensorInterchange [Finite A] {W X : Scheme.{u}}
     (p : W ⟶ X) [IsProper p] (K L : DerivedCategoryModule A X)
     (hL : (swap A X L L).hom = 𝟙 _)

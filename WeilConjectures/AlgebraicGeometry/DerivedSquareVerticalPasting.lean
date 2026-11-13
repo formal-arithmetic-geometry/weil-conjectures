@@ -25,9 +25,7 @@ noncomputable section
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- Vertical pasting of canonical derived square comparisons.
-Source: Stacks Project, Tag 0D5S; step 2 of
-lem-sc-picard-coefficient-transpose-pasting. -/
+/-- Vertical pasting of canonical derived square comparisons (Stacks, Tag 0D5S). -/
 theorem canonicalDerivedSquareComparison_vertical
     {A B C W T T' : Scheme.{v}}
     (p : A ⟶ W) (p1 : B ⟶ T) (p2 : C ⟶ T')

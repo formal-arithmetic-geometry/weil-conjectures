@@ -21,9 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 
-/-- Reduction produces an integral affine base and a reduced affine source, before shrinking.
-
-Source: Stacks Project, Tag 0559, second proof, first paragraph; Tags 01IZ and 054M. -/
+/-- Reduction produces an integral affine base and a reduced affine source, before shrinking
+(Stacks, Tags 0559, 01IZ and 054M). -/
 theorem exists_affine_reduction_preparation
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

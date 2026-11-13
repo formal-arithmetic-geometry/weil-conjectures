@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Termwise tilde of a bounded finite-projective complex admits strictly perfect models
-on the localized sites of all points.
-Source: Stacks Project, perfect.tex, Lemma perfect-lemma-perfect-affine (Tag 08EB). -/
+on the localized sites of all points (Stacks, Tag 08EB). -/
 theorem affine_projective_local_strict_model (A : Type u) [CommRing A]
     [HasDerivedCategory.{w} (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace))]

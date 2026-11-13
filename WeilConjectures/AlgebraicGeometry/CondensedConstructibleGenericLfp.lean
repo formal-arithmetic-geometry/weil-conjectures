@@ -24,8 +24,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A constructible module is locally finitely presented everywhere, or on some nonempty open.
-Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), finite-stratum induction;
-Bhatt--Scholze, Definition 6.8.10 and proof of Lemma 6.8.12. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(2); Bhatt--Scholze, Definition 6.8.10, Lemma 6.8.12) -/
 theorem condensed_constructible_generic_lfp
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

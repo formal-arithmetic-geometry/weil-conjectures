@@ -27,8 +27,7 @@ namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
 /-- The section resolution map induces a epimorphism on homology in each degree.
-Source: Stacks Project, Tag 08C2, lemma-alternating-cech-complex-complex-ss,
-and Tag 071B, lemma-K-injective. -/
+(Stacks, Tags 08C2 and 071B). -/
 theorem affineBasisSections_resolution_homology_epi
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F J : CochainComplex X.Modules ℤ) [J.IsKInjective]

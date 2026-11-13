@@ -21,8 +21,8 @@ namespace WeilConjectures.DerivedTotalResolution
 
 variable {R : Type u} [Ring R]
 
-/-- Cycle lifting at column zero makes the total augmentation surjective on homology.
-Source: Stacks Project, Homology, Tag 09IZ, proof and exactness of augmented kernels. -/
+/-- Cycle lifting at column zero makes the total augmentation surjective on homology
+(Stacks, Tag 09IZ). -/
 theorem total_resolution_homology_surjective
     (M : CochainComplex (ModuleCat R) ℤ)
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)

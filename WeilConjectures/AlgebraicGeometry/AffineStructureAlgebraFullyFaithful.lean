@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
 
 /-! # Full faithfulness of the affine structure-algebra functor
 
-Source: Stacks Project, Morphisms, Lemma 01SA, with the local argument in steps 5--6 of
-lem-weil-pbc-affine-morphism-relative-spec.
+Source: Stacks Project, Morphisms, Lemma 01SA.
 -/
 
 @[expose] public section

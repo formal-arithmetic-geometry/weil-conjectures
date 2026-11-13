@@ -19,8 +19,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Pullback cohomology on a locus with one locally free cohomology sheaf
 
-Source: the cohomology-sheaf gluing argument in the proof of the perfect-locus lemma,
-and Stacks Project, Tag 0B9S.
+## References
+
+* Stacks Project, Tag 0B9S
 -/
 
 @[expose] public section
@@ -35,9 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived pullback of a flat sheaf in one degree is ordinary pullback in that degree.
 
-Source: Stacks Project, Tags 06YD and 06YJ; the shifted-single specialization of
-lem-pc-flat-complex-derived-pullback.
-This is the flat-single step of. -/
+(Stacks, Tags 06YD and 06YJ) -/
 private theorem nonempty_derivedPullback_flat_single_iso
     {T T' : Scheme.{u}} (g : T' ⟶ T)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
@@ -89,8 +88,7 @@ private theorem nonempty_derivedPullback_flat_single_iso
 /-- On a locus where a connective derived object has locally free cohomology in one
 nonnegative degree only, derived pullback cohomology is ordinary pullback cohomology.
 
-Source: blueprint lem-pc-perfect-locus, proof, cohomology-sheaf gluing paragraph and
-termwise pullback paragraph; Stacks Project, Tag 0B9S and its perfect-locus input. -/
+(Stacks, Tag 0B9S) -/
 theorem nonempty_homology_derivedPullback_iso_of_locally_single
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

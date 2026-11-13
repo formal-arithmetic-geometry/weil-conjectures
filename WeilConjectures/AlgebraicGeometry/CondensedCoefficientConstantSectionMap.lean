@@ -18,8 +18,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 
 /-! Constant-section coefficient naturality for the finite condensed subfield inclusion.
-
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,12 +25,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
-/-- The global constant section map commutes with the finite-subfield inclusion.
-
-Proof in words. Apply the global-sections naturality theorem for a morphism of condensed
-ring sheaves to the finite-subfield inclusion.  Both source and target families of constant
-sections are natural by construction, and the component equality is the defining inclusion
-`E → Q̄_ℓ`; the theorem then gives equality on global sections. -/
+/-- The global constant section map commutes with the finite-subfield inclusion. -/
 theorem condensed_constant_section_coefficient_map
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (t : E) :

@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.GradedFinitenessCohomology
 
 /-! # Finiteness of cohomology of ideal powers over the Rees algebra
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02O8, and its preceding paragraph.
+Stacks Project, Tag 02O8.
 
 The sheaves `I^n F` are the shared `Scheme.idealModuleProduct (Scheme.idealSheafPower
 J.toModulesι n).2 F` (at `n = 0` the power is `O_X` with identity inclusion, so the product
@@ -38,12 +38,8 @@ namespace AlgebraicGeometry
 
 open Classical in
 /-- For a proper scheme over a Noetherian affine base and a coherent module, the
-cohomology of its ideal powers is finite over the Rees algebra. `J` is the extended ideal
-`I O_X`. The multiplication maps are specified on every open after the inclusions into `F`.
-The double finite sum is the convolution formula: its degree `n` consists exactly of terms
-with `k + m = n`.
-
-Source: Stacks Project, Lemma 02O8 and the preceding paragraph. -/
+cohomology of its ideal powers is finite over the Rees algebra. Here `J` is the extended
+ideal `I O_X` (Stacks, Tag 02O8). -/
 theorem cohomology_powers_ideal_rees_finite {A : Type v} [CommRing A]
     [IsNoetherianRing A] {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]
     (I : Ideal A) (J : X.IdealSheafData)

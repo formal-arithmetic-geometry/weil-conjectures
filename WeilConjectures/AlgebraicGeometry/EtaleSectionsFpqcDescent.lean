@@ -26,15 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XN, second assertion and proof.
-Every compatible family has a unique global section; this is precisely bijectivity
-onto the equalizer. Global sections are evaluated at `Scheme.Etale.mk (𝟙 _)`. The
-pullback of a global section along `e : T ⟶ S` is the adjunction unit followed by
-restriction along the canonical map `Etale.mk (𝟙 T) ⟶ (Etale.mk (𝟙 S)) ×_S T`
-(`pullback.lift e (𝟙 T)`). On an overlap the two pullbacks are compared through the
-composition isomorphism, the unique unit-compatible one of
-`etaleSetInverseImageCompositionUnits`, and `pullback.condition`. For a singleton
-family this says a section descends uniquely iff its two pullbacks agree. -/
+/-- Every compatible family of global sections has a unique global section; this is
+bijectivity onto the equalizer (Stacks, Tag 09XN). -/
 theorem existsUnique_etaleSection_of_fpqc_cover
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

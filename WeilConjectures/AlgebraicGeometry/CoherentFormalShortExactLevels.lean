@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernel
 
 /-! # Levels of a short exact sequence of coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0CYV, remarks (a) and (b),
-and proof of Lemma 087X.
+Stacks Project, Tags 0CYV and 087X.
 -/
 
 @[expose] public section
@@ -27,10 +26,8 @@ namespace AlgebraicGeometry
 
 /-- A short exact sequence in Coh(X,I) is right exact at every positive level, and
 its first term at each level is a quotient of the kernel of a later component.
-Here `op n` denotes positive level `n + 1`. No componentwise monomorphism is asserted.
-
-Source: Stacks, proof of Lemma 0CYV, first paragraph, remarks (a) and (b), referring
-back to the proof of Lemma 087X. -/
+Here `op n` denotes positive level `n + 1`. No componentwise monomorphism is asserted
+(Stacks, Tags 0CYV and 087X). -/
 theorem coherentFormalModule_shortExact_levels (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) (S : ShortComplex (CoherentFormalModule X I))
     (hS : S.ShortExact) :

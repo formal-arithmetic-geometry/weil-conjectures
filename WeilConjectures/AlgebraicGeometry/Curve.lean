@@ -66,28 +66,19 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `def-sc-curves`: Curves and genus
-
-Let `K` be a field (in the blueprint, algebraically closed). A *curve* over `K` is a separated
-scheme of finite type over `K` of dimension at most one. Smoothness and properness of a curve
-are the corresponding properties `Smooth` and `IsProper` of its structure morphism, so they are
-not part of this class; the dimension condition is phrased with `topologicalKrullDim`, which is
-valued in `WithBot ℕ∞` and is `⊥` exactly on the empty scheme.
-
-This is also blueprint `def-sc-curves`. As blueprint `rem-pc-relation-sc` records, a smooth
-projective curve in the sense of the curve-calculation chapter is a smooth connected curve here. -/
+/-- Let `K` be a field. A *curve* over `K` is a separated scheme of finite type over `K` of
+dimension at most one. Smoothness and properness of a curve are the corresponding properties
+`Smooth` and `IsProper` of its structure morphism, so they are not part of this class; the
+dimension condition is phrased with `topologicalKrullDim`, which is valued in `WithBot ℕ∞` and
+is `⊥` exactly on the empty scheme. -/
 class IsCurve (f : C ⟶ Spec (.of K)) : Prop
     extends IsSeparated f, LocallyOfFiniteType f, QuasiCompact f where
   /-- The underlying space of a curve has dimension at most one. -/
   krullDim_le_one : topologicalKrullDim C ≤ 1
 
-/-- Blueprint `def-sc-curves`: Curves and genus
-
-A *connected curve* over `K` is a curve over `K` that is connected (hence nonempty) and of
-dimension exactly one. The last condition excludes points such as `Spec K`, for which the curve
-estimate `sk-thm-curveestimate` fails in degree two. It also implies nonemptiness on its own,
-since `topologicalKrullDim` is `⊥` exactly on the empty space. This is also part of blueprint
-`def-sc-curves`.
+/-- A *connected curve* over `K` is a curve over `K` that is connected (hence nonempty) and of
+dimension exactly one. The last condition excludes points such as `Spec K`. It also implies
+nonemptiness on its own, since `topologicalKrullDim` is `⊥` exactly on the empty space.
 
 The field `IsConnectedCurve.connectedSpace` is not an instance, since `f` cannot be inferred
 from `ConnectedSpace C`; use `have := IsConnectedCurve.connectedSpace (f := f)`. -/
@@ -103,7 +94,7 @@ lemma IsConnectedCurve.nonempty (f : C ⟶ Spec (.of K)) [IsConnectedCurve f] : 
   inferInstance
 
 variable (K) in
-/-- Blueprint `def-sc-curves`: the category `𝒞` of smooth separated connected curves over `K`,
+/-- The category `𝒞` of smooth separated connected curves over `K`,
 the full subcategory of `K`-schemes `C` whose structure morphism is smooth and a connected curve
 (`AlgebraicGeometry.IsConnectedCurve`, which includes separatedness). -/
 def SmoothConnectedCurve : Type (u + 1) :=
@@ -113,23 +104,12 @@ def SmoothConnectedCurve : Type (u + 1) :=
 noncomputable instance : Category (SmoothConnectedCurve K) :=
   inferInstanceAs (Category (ObjectProperty.FullSubcategory _))
 
-/-- Blueprint `def-sc-curves`: Curves and genus
-
-The *genus* of a smooth proper connected curve `C` over `K` is
+/-- The *genus* of a smooth proper connected curve `C` over `K` is
 `g = dim_K H⁰(C, Ω¹_{C/K})`, the `K`-dimension of the space of global sections of the sheaf of
-relative differentials. Since `C` is proper the global sections form a finite-dimensional
-`K`-vector space; the `K`-module structure on `Γ(Ω¹_{C/K}, ⊤)` comes from the `Γ(C, ⊤)`-module
-structure by restriction of scalars along the `K`-algebra structure of `Γ(C, ⊤)`.
-
-This definition makes sense for an arbitrary morphism `f : C ⟶ Spec K`, but is only the genus
-in the intended sense when `f` is a smooth proper connected curve.
-
-For a smooth proper curve, Serre duality identifies this with the arithmetic genus
-`AlgebraicGeometry.Scheme.arithmeticGenus K C = dim_K H¹(C, 𝒪_C)`; see
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. It is finite
-(`AlgebraicGeometry.Scheme.finiteDimensional_H_relativeDifferentials`).
-
-This is also blueprint `def-sc-genus`. -/
+relative differentials. This makes sense for any morphism `f : C ⟶ Spec K`, but is only the
+genus in the intended sense when `f` is a smooth proper connected curve. For such a curve it
+equals the arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus K C`
+(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`). -/
 noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
   letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
@@ -146,16 +126,9 @@ theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
   exact (LinearEquiv.finrank_eq (R := K)
     { e with map_smul' := fun c x ↦ e.map_smul (globalSectionsRingHom K c) x }).symm
 
-/-- Blueprint `def-sc-picard-group`: Pic, degree, Pic⁰
-
-The degree `deg L = χ(L) - χ(𝒪_C)` of the class `L` of an invertible module on a curve `C`
-over `K` (Stacks 0AYQ), where `χ` is the Euler characteristic
-`AlgebraicGeometry.Scheme.Modules.eulerChar` over `K`; this is
-`AlgebraicGeometry.Scheme.Modules.degree` of a representative of `L`.
-
-On a smooth projective geometrically integral curve this is the degree of any associated Weil
-divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds.
- -/
+/-- The degree `deg L = χ(L) - χ(𝒪_C)` of the class `L` of an invertible module on a curve `C`
+over `K` (Stacks, Tag 0AYQ), where `χ` is the Euler characteristic
+`AlgebraicGeometry.Scheme.Modules.eulerChar` over `K`. -/
 noncomputable def Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) (L : C.Pic) : ℤ :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree K ((fromSkeleton C.Modules).obj L.val)
@@ -174,18 +147,11 @@ lemma Scheme.Hom.picDegree_mk (f : C ⟶ Spec (.of K)) (M : C.Modules)
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree_congr K (fromSkeletonToSkeletonIso M)
 
-/-- Blueprint `def-sc-picard-group`: Pic, degree, Pic⁰
-
-Let `C` be a smooth projective geometrically integral curve over a field `K`. Its Picard group
-`Pic(C) = H¹(C_ét, 𝔾ₘ)` is the group of invertible `𝒪_C`-modules up to isomorphism; it is
-`AlgebraicGeometry.Scheme.Pic`. The degree homomorphism `deg : Pic(C) → ℤ` is
-`AlgebraicGeometry.Scheme.Hom.picDegree`, and `Pic⁰(C) := ker(deg)` is the subgroup of classes
-of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
-
-For a smooth proper curve the degree is the group homomorphism
-`AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
-(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
- -/
+/-- Let `C` be a smooth projective geometrically integral curve over a field `K`. Its Picard
+group `Pic(C)` is the group of invertible `𝒪_C`-modules up to isomorphism, and `Pic⁰(C)` is the
+subgroup of classes of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
+For a smooth proper curve it is the kernel of the degree homomorphism
+`AlgebraicGeometry.Scheme.picDegreeHom` (`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`). -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 

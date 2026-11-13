@@ -90,8 +90,7 @@ private theorem root_sheets_colimit
       simp only [Category.assoc, hσ])
     exact False.elim (hab ((hu a rfl).trans (hu b he).symm))
 
-/-- The Artin–Schreier cover is surjective, including over the empty scheme.
-Source: blueprint lem-fd-as-cover, simple transitivity and existence of geometric roots. -/
+/-- The Artin–Schreier cover is surjective, including over the empty scheme. -/
 theorem artinSchreierCover_surjective (p : ℕ) [Fact p.Prime]
     (X : Scheme.{u}) (hchar : (p : Γ(X, ⊤)) = 0) (f : Γ(X, ⊤)) :
     Surjective (artinSchreierCover p X f).hom := by

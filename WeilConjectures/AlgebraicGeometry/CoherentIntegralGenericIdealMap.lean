@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealMono
 
 /-! # An ideal-sum lattice in a coherent module on an integral scheme
 
-Source: Stacks Project, Tag 01YE, integral case in the last paragraph of the proof.
+Stacks Project, Tag 01YE.
 -/
 
 @[expose] public section
@@ -39,9 +39,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent module on an integral Noetherian scheme admits a coherent ideal-sum
 injection with invertible generic stalk.
-
-Source: Stacks Project, Tag 01YE, last paragraph of the proof, including its final
-injectivity assertion. -/
+(Stacks, Tag 01YE). -/
 theorem coherent_integral_generic_ideal_map (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G) :
     ∃ (r : ℕ) (I : Z.IdealSheafData),

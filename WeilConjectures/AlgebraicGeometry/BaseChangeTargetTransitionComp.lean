@@ -91,10 +91,8 @@ private lemma target_transition_eq
         (Etale.lowerStarPlusTransition Λ a h h' wh _ ≫
           R+((h')_*[ModuleCat.{u + 1} Λ]).map c) := rfl
 
-/-- Target transitions compose, including the comparison of the coefficient pullbacks.
-
-Source: Stacks Tag 0F07, proof of condition (1), and the definition of the canonical
-restriction maps in Tag 09Z1. -/
+/-- Target transitions compose, including the comparison of the coefficient pullbacks
+(Stacks, Tags 0F07, 09Z1). -/
 theorem Etale.baseChangeTargetTransition_comp
     {X T Y T₁ T₂ Y₁ Y₂ : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     (π₂ : T₂ ⟶ T) (a₂ : Y₂ ⟶ Y) (e₂ : Y₂ ⟶ T₂) (h₂ : Y₂ ⟶ X)

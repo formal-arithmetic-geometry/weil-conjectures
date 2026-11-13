@@ -23,8 +23,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 /-- Derived global sections takes an ambient coproduct of quasi-coherent complexes
-on a qcqs scheme to a coproduct in the derived module category.
-Source: Stacks Project, Tag 09M1, first paragraph of the proof. -/
+on a qcqs scheme to a coproduct in the derived module category (Stacks, Tag 09M1). -/
 theorem derivedGlobalSections_preserves_coproducts (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

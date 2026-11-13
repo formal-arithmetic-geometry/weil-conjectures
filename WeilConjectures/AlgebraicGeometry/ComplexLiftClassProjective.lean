@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveClassReducedSplitting
 /-!
 # Lifting a derived complex for a projective class
 
-Source: Stacks Project, More on Algebra, Lemma 15.75.2 (Tag 0BCA).
+## References
+
+* Stacks Project, Tag 0BCA
 -/
 
 @[expose] public section
@@ -33,12 +35,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, More on Algebra, Tag 0BCA, lemma-lift-complex.
+/-- Stacks Project, More on Algebra, Tag 0BCA.
 
-Reduction is Mathlib's extension of scalars to `R ⧸ I`, including the differential.
-The class condition is expressed for any model of a binary direct sum. The hypothesis
-on the derived reduction is included in `hK`: a bounded-above projective representative
-computes derived tensor product by ordinary termwise extension of scalars. -/
+Lifting of complexes along reduction modulo `I`, for a class of projective modules. -/
 theorem complex_lift_class_projective
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

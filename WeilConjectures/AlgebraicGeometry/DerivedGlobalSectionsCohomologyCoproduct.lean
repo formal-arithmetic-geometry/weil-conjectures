@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedModuleHomologyCoproduct
 import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Zeroth derived global sections of a coproduct
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph.
+## References
+
+* Stacks Project, Tag 09M1
 -/
 
 @[expose] public section
@@ -29,9 +30,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 open Classical in
-/-- Zeroth derived global sections commutes with coproducts of quasi-coherent complexes.
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph. -/
+/-- Zeroth derived global sections commutes with coproducts of quasi-coherent complexes
+(Stacks, Tag 09M1). -/
 theorem derivedGlobalSections_cohomology_coproduct (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

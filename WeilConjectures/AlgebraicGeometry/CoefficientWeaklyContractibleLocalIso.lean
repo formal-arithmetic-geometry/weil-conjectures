@@ -153,7 +153,7 @@ private theorem coefficientFiniteDisjointRefinement
     simpa only [S', Sieve.functorPullback_functorPushforward_eq] using h
 
 /-- Local isomorphisms of two complexes globalize on a weakly contractible affine.
-Source: Stacks Project, Sites, Tag 090K; Pro-etale Cohomology, proof of Tag 09C6. -/
+(Stacks, Tags 090K, 09C6) -/
 theorem coefficient_weaklyContractible_local_iso
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     (U : coefficientProEtaleSiteModel.{u, v} X)

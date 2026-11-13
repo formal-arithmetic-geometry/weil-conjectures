@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore
 
 /-! # Flat quasi-finite charts at Cohen-Macaulay fibre points
 
-Source: Stacks Project, proof of Tag 00RH.
+Source: Stacks Project, Tag 00RH.
 -/
 
 @[expose] public section
@@ -25,9 +25,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- A Cohen-Macaulay fibre point admits a flat quasi-finite chart over a smooth base model.
-
-Source: Stacks Project, proof of Tag 00RH, using Tags 00QE, 00RE, 00R7 and 00RC. -/
+/-- A Cohen-Macaulay fibre point admits a flat quasi-finite chart over a smooth base model
+(Stacks, Tag 00RH). -/
 theorem exists_flat_quasiFinite_chart_of_fibre_depth_eq_ringKrullDim
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

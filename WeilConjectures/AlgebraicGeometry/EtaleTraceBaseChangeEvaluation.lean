@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
 
 /-! # Base change of a trace evaluation
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle.
 -/
 
 @[expose] public noncomputable section
@@ -165,9 +163,8 @@ end General
 
 variable (A : Type (u + 1)) [CommRing A]
 
-/-- Base change identifies evaluation with integration in the second projection.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, second triangle; Stacks 0E48 and 0B56. -/
+/-- Base change identifies evaluation with integration in the second projection
+(Stacks, Tags 0E48, 0B56). -/
 theorem traceBaseChangeEvaluation [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
     (t : (push A f).obj ((pull A f).obj L) ⟶ constantComplex A Y)

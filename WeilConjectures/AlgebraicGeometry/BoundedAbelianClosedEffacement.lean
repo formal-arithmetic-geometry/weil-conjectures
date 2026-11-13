@@ -34,9 +34,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A positive-degree class on a closed subscheme of an affine scheme can be effaced
-without changing the integer annihilating its coefficients.
-
-Source: Stacks Project, Tag 09ZE, proof with finite Z/n-module coefficients. -/
+without changing the integer annihilating its coefficients (Stacks, Tag 09ZE). -/
 theorem exists_bounded_mono_closed_cohomology_eq_zero
     {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i]
     (n : ℕ) (hn : 0 < n)

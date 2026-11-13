@@ -42,12 +42,7 @@ private theorem transport_triangle
 set_option maxHeartbeats 800000 in
 -- Comparing localized right adjoints and their composite shift isomorphism.
 /-- The inverse rotation of the direct-image Mayer--Vietoris triangle, expressed using
-any right adjoints to localized derived restrictions. Its second arrow is constructed by transposing
-the two canonical restrictions of the union counit. This is geometric triangle data only: neither
-exactness of Hom nor scalar compatibility is asserted.
-
-Source: Stacks Project, Tag 08BV (Lemma cohomology-lemma-exact-sequence-j-star),
-with the derived open adjunction of Tag 079W. -/
+any right adjoints to localized derived restrictions (Stacks, Tags 08BV and 079W). -/
 theorem derived_open_union_adjunction_triangle
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

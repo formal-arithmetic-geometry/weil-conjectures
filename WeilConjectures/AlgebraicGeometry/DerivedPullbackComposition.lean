@@ -53,26 +53,8 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u₁}} (f : X ⟶ Y)
 
 /-- The canonical composition comparisons `c f g : Lf^* ∘ Lg^* ≅ L(g ∘ f)^*` of derived
 pullbacks, together with identity comparisons `i X : L(id_X)^* ≅ id`, both unit laws and
-associativity. The comparison is tied to the left-derived universal property: `ε f` is a
-left-derived counit of `derivedPullback f` for the recorded tensor pullback, and `c f g` is
-the morphism into the left derived functor `derivedPullback (f ≫ g)` induced by the counits
-of `g` and `f` followed by the canonical underived identification
-`tensorPullback g ⋙ tensorPullback f ≅ tensorPullback (f ≫ g)`, the conjugate of
-`pushforwardComp f g` under the pinned tensor-pullback adjunctions.
-The family of derived-category instances only chooses the localizations; it imposes no
-geometric condition on the schemes or morphisms.
-Source: Stacks Project, Cohomology, Tag 0D5S.
-Proof, step 1: choose a K-flat resolution on Z (lem-pc-kflat-resolution). Pullback
-preserves K-flatness (lem-pc-kflat-pullback-preservation), so successive derived
-pullbacks are represented by successive termwise tensor pullbacks (def-pc-derived-pullback):
-the counits at a K-flat complex and at its pullback are invertible. The canonical underived
-identification then makes the induced morphism into `L(g ∘ f)^*` invertible, natural in
-the complex.
-Step 2: identity pullback is the tensor unitor. On a K-flat representative the two
-unit laws are the tensor unit laws, and the two triple-composition paths are the two
-reassociations of the same tensor expression; tensor associativity makes them equal.
-Uniqueness of morphisms into a left derived functor descends these laws to the derived
-categories. -/
+associativity. Here `ε f` is a left-derived counit of `derivedPullback f` for the recorded
+tensor pullback (Stacks, Tag 0D5S). -/
 theorem exists_derivedPullbackComposition
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] :

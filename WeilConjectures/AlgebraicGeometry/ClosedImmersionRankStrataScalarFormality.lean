@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
 /-! # Scalar formality on the rank strata of a closed subscheme
 
-Source: Stacks Project, Tag 0BQZ, single-degree truncation and reconstruction;
-the rank-stratum assembly in lem-sc-koszul-regular-immersion-derived-hom, step 3.
+## References
+
+* Stacks Project, Tag 0BQZ
 -/
 
 @[expose] public section

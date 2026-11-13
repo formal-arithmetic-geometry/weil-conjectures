@@ -25,8 +25,7 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
-/-- Affine-local cohomology calculation for derived pullback.
-Source: Stacks Project, Tag 08DW(1), proof using Tag 08DW(2) and Tag 06Z0. -/
+/-- Affine-local cohomology calculation for derived pullback (Stacks, Tags 08DW and 06Z0). -/
 theorem derivedPullback_cohomology_over_affine {X Y : Scheme.{uX}} (f : X ⟶ Y)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))]

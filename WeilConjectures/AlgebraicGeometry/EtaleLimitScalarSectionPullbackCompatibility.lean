@@ -41,8 +41,7 @@ private theorem section_unit_comp
     Functor.sheafPushforwardContinuousComp'_hom_app_hom_app] using H'
 
 /-- The normalized unit sections commute with the prescribed sheaf transitions.
-Source: Stacks Project, Sites Tags 03CB and 03CC, adjunction unit naturality
-and composition, used in the degree-zero proof of Etale Cohomology Tag 09YQ. -/
+(Stacks, Tags 03CB, 03CC and 09YQ) -/
 theorem etale_limit_scalar_section_pullback_compatibility
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

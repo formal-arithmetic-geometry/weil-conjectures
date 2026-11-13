@@ -27,7 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent module has finitely generated sections on each affine open.
-Source: Stacks Project, Tag 01Y8, proof, using Tags 01BV, 01BO and 01PB. -/
+(Stacks, Tag 01Y8) -/
 theorem coherent_affine_sections_finite (X : Scheme.{u}) (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (U : X.Opens) (hU : IsAffineOpen U) : Module.Finite Γ(X, U) Γ(F, U) := by

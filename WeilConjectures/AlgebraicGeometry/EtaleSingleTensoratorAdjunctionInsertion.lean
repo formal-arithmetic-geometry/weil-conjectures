@@ -22,10 +22,6 @@ Stating it over general coefficient categories keeps the instance paths of the s
 those of `singleFunctorObjTensorIso`, `derivedTensor` and `SiteTensorNormalizationAux`. A
 specialization to module coefficients then only differs from these by small instance subterms,
 which keeps its kernel check cheap.
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
 -/
 
 @[expose] public noncomputable section
@@ -83,11 +79,7 @@ variable {C : Type v} [Category.{u + 1} C] [Abelian C]
 /-- For a site-normalized derived tensor comparison `δ`, the tensor of two exact-single
 adjunction insertions, followed by the flat single tensorator, is the image of the flat single
 tensorator followed by the insertion of the lax tensor of the two maps. The insertions are given
-as morphisms `i₁ i₂ i₁₂` equal to `adjointInsertion`.
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction. -/
+as morphisms `i₁ i₂ i₁₂` equal to `adjointInsertion`. -/
 theorem siteNormalizedTensor_adjointInsertion
     (rep : ∀ P : CochainComplex (Sheaf T.smallEtaleTopology C) ℤ,
       E.obj (DerivedCategory.Q.obj P) ⟶

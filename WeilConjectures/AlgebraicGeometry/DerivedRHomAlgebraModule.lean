@@ -138,7 +138,7 @@ private theorem additive_resolution_inverts
 variable (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
 
 /-- The section carrier of the shared internal Hom, on an open U.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+(Stacks, Tag 0BUZ) -/
 noncomputable abbrev sheafAlgebraHomSections (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (U : (Opens Y)ᵒᵖ) :=
@@ -373,7 +373,7 @@ theorem sheafAlgebraHom_map_smul {F G : SheafOfModules.{u}
   simp only [PresheafOfModules.homObjMap_app_apply]
   exact (Category.assoc _ _ _).symm
 
-/-- The functor map is the existing postcomposition map with its B-linearity proof.
+/-- The functor map: postcomposition, as a `B`-linear map.
 Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
 noncomputable def sheafAlgebraHomMap {F G : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)

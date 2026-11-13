@@ -101,9 +101,7 @@ private theorem annihilatorPresheaf_isSheaf (X : Scheme.{u}) (J : X.IdealSheafDa
     intro i
     exact congrArg Subtype.val (ht i)
 
-/-- The local annihilation condition defines a subsheaf, without any finiteness
-or quasi-coherence hypothesis.
-Source: Stacks Project, Tag 01PO, proof, first sentence. -/
+/-- The local annihilation condition defines a subsheaf (Stacks, Tag 01PO). -/
 theorem exists_annihilator_subsheaf (X : Scheme.{u}) (J : X.IdealSheafData)
     (F : X.Modules) :
     ∃ (G : X.Modules) (ι : G ⟶ F), Mono ι ∧

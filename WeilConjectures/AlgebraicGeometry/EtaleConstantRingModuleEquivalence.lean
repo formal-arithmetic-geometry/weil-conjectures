@@ -206,10 +206,7 @@ def etaleConstantModuleCounitIso :
     rfl
 
 /-- Extending to the constant ring sheaf is an equivalence of categories.
-
-Source: Stacks Project, Modules on Sites, Sections 093I and 03CV, and Sites Example 0H7J.
-The equivalence argument is the constant-scalar construction in steps 1--3 of
-lem-weil-pbc-injective-etale-constant-ring-module. -/
+(Stacks, Sections 093I and 03CV, and Tag 0H7J). -/
 theorem etaleConstantModuleFunctor_isEquivalence :
     (etaleConstantModuleFunctor Y Λ).IsEquivalence :=
   Functor.IsEquivalence.mk' (etaleConstantModuleRestrictionFunctor Y Λ)

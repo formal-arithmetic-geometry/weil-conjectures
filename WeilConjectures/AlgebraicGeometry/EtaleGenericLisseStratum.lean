@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # A generic lisse stratum in an irreducible closed subset
-
-Source: finite pushforward constructibility blueprint, step 3.
 -/
 
 @[expose] public section
@@ -43,11 +41,8 @@ private lemma lisse_of_iso {Y : Scheme.{u}}
       (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
 
 /-- Generic lissity on integral affine immersions supplies one lisse locally closed
-stratum in every irreducible closed subset, leaving a proper closed complement.
-No partition of that complement is asserted here.
-
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 3;
-Stacks Project, Tags 01J3 and 01J4 for the reduced induced scheme. -/
+stratum in every irreducible closed subset, leaving a proper closed complement
+(Stacks, Tags 01J3 and 01J4). -/
 theorem exists_etaleGenericLisseStratum
     {X : Scheme.{u}} [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

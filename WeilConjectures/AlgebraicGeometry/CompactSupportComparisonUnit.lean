@@ -8,13 +8,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 
 /-! # The comparison unit in fixed-coefficient module sheaves
 
-Source: the blueprint, sec-proper-base-change, thm-weil-pbc-site-comparison;
-Stacks Project, Tag 099V.
-
 This exposes the canonical unit in the fixed-ring presentation used by compact support.
 The recorded coefficient realization identifies this presentation with constant-ring
-module sheaves. The proof uses the existing generic injective-acyclicity criterion
-for the canonical bounded-below derived adjunction unit.
+module sheaves.
+
+## References
+
+* Stacks Project, Tag 099V
 -/
 
 @[expose] public section
@@ -27,8 +27,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The actual bounded below comparison-adjunction unit is invertible on all objects.
-Source: Stacks, Tag 099V; blueprint site-comparison theorem. -/
+/-- The actual bounded below comparison-adjunction unit is invertible on all objects
+(Stacks, Tag 099V). -/
 theorem isIso_compactSupportComparisonUnit (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     IsIso (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) T).unit := by

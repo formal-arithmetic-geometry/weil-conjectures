@@ -28,9 +28,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The closed localization unit is surjective, and its kernel is classical if the
 open restriction is classical. Only the open restriction is assumed classical here.
-The assertion holds for any adjunction between the specified inverse and direct images.
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open; Tag 09AF,
-lemma-jshriek-comparison; Tag 09AK, lemma-compare-constructible, open endpoint of the sequence. -/
+(Stacks, Tags 09AH, 09AF, 09AK) -/
 theorem coefficientFixed_localization_kernel_origin
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

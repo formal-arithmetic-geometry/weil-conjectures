@@ -25,8 +25,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A finite-free module complex whose associated sheaf is the principal-open model.
-Source: Stacks Project, Tag 08E7, converse proof, local-model comparison. -/
+/-- A finite-free module complex whose associated sheaf is the principal-open model
+(Stacks, Tag 08E7). -/
 theorem affine_pseudoCoherent_principal_sheaf_model (A : Type u) [CommRing A]
     [HasDerivedCategory.{wX}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

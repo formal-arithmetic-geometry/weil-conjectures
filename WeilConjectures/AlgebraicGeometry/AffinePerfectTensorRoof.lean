@@ -105,9 +105,8 @@ private theorem affinePerfectTensorRoof_aux
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-/-- Construct the Koszul roof and the lifted map for a fixed K-flat model of the source.
-This statement does not assert perfectness or support of the total tensor.
-Source: Stacks Project, Tag 08EH, proof of Lemma 36.13.7. -/
+/-- The Koszul roof and the lifted map for a fixed K-flat model of the source
+(Stacks, Tag 08EH). -/
 theorem exists_affine_perfect_tensor_roof
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

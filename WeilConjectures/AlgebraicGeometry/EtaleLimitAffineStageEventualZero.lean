@@ -25,15 +25,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- A class whose comparison image is zero vanishes at a later stage.
-
-Source: Stacks Project, Tag 09YQ; the cofinal-tail argument of
-lem-weil-pbc-etale-limit-cohomology-affine-stage, followed by finite-stage equality
-in a filtered colimit of abelian groups. -/
+/-- A class whose comparison image is zero vanishes at a later stage
+(Stacks, Tag 09YQ). -/
 /- Tail lemma for the affine cofinal subsystem.
-Source: Stacks Project, Tag 09YQ.
-
-Proof: apply the affine-stage eventual-zero theorem to the tail subsystem. -/
+(Stacks, Tag 09YQ) -/
 theorem etale_limit_affine_stage_eventual_zero_tail
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -92,7 +87,8 @@ theorem etale_limit_affine_stage_eventual_zero_tail
   rw [map_zero] at hf
   exact hf
 
-/-- -/
+/-- If the comparison image of a class at some stage is zero, then the class vanishes at a
+later stage, when some stage is affine. -/
 theorem etale_limit_affine_stage_eventual_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

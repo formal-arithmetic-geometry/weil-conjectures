@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleExtContinuit
 
 /-! # Uniform vanishing on ind-constructible targets
 
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
-sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/
-sk-cor-ind-heart-ii-vanishing.md and its proof.
-
 The fixed bound on constructible targets is retained. Ext in every integer degree is
 written as shifted Hom in the ordinary derived category of internal module objects.
 The comparison is the map induced by the given ambient colimit cocone.
@@ -37,26 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Every filtered constructible presentation gives the canonical Ext isomorphism,
 and the supplied constructible-target cutoff also bounds every ind-constructible target.
-The coefficient equality is between bundled monoid objects, including multiplication.
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
-sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/
-sk-cor-ind-heart-ii-vanishing.md and its proof.
-
-Proof, following the three DAG steps:
-1. Regard each constructible stage as a complex in degree zero. These complexes have
-   common lower bound zero; the termwise colimit is the degree-zero complex of the
-   ambient module colimit. The cocone is the specified module colimit cocone.
-2. Apply clause (1) of sk-lem-constructible-ext-continuity to C in degree zero and
-   this diagram, in every integer degree q. The standing scheme is separated and
-   finite type over a field of positive characteristic different from ell, so its
-   geometric hypotheses hold. The finite constant models and the pulled-back
-   condensed E or finite-subextension-valued algebraic closure are the same ones.
-   The resulting map is exactly colimit.desc of the mapped cocone below.
-3. For q > d every stage Ext group is zero by the supplied bound. Its filtered
-   colimit is zero, hence so is Ext into the colimit by step 2. Every object of
-   IndCons has such a small filtered constructible presentation by sk-prop-ind-heart;
-   apply the same argument to obtain the last clause with the original cutoff d. -/
+The coefficient equality is between bundled monoid objects, including multiplication. -/
 theorem det_ind_heart_ii_vanishing
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [CharP k p]

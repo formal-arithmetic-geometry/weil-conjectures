@@ -27,9 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The local quotient maps glue to a morphism with the homogeneous fraction formula.
-This states the construction and the algebraic formula, without its inverse-image clause.
-Source: Stacks Project, Properties, Tag 01PZ, proof; Constructions, Tag 01N8, construction
-of the local quotient maps. -/
+(Stacks, Tags 01PZ and 01N8). -/
 theorem exists_sectionRing_proj_chart_formula (X : Scheme.{v}) (L : X.Modules)
     [L.IsInvertible]
     (hcover : ∀ x : X, ∃ (d : ℕ) (s : sectionRingGrade L d),

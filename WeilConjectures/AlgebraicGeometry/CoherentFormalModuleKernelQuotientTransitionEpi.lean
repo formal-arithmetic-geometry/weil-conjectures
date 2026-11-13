@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleShiftedQuoti
 
 /-! # Surjective shifted kernel quotient transitions
 
-Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Shifted quotient transitions of the stabilized kernel image system are epimorphisms.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a)--(c). -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_transition_epi {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

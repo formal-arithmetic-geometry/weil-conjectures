@@ -29,11 +29,8 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR.
-Proof (step 1): the projection to `U` is a base change of the affine morphism `h`,
-so it is affine by lem-weil-pbc-affine-morphism-permanence(1). Its target is affine,
-so its source is affine by part (2) of that node. Étaleness of the structure map is
-already supplied by lem-weil-pbc-etale-base-change-finite-limits(1). -/
+/-- The base change of an affine étale object along an affine morphism is affine
+(Stacks, Tags 0EYL, 04HR). -/
 theorem affineEtaleBaseChange_isAffine {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] (U : T.FullAffineEtale) :
     IsAffine (((MorphismProperty.Over.pullback @Etale ⊤ h).obj

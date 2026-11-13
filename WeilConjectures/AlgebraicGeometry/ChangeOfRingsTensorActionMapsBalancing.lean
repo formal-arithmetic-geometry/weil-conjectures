@@ -71,7 +71,7 @@ private theorem tensor_right_triple_hom_ext {Y : Scheme.{u}} {M N L H : Y.Module
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The balancing identity for maps satisfying the section formulas.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB. -/
+(Stacks, Tag 01SB). -/
 theorem changeOfRings_tensor_action_comp_eq (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right))

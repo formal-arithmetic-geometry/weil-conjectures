@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Local contraction of the increasing-tuple sheaf augmentation
 
-Source: Stacks Project, Tag 01FM, alternating faces; local contraction paragraph of
-lem-pc-s3-affine-alternating-cech-augmented-construction.
+Source: Stacks Project, Tag 01FM.
 -/
 
 @[expose] public section
@@ -102,9 +101,8 @@ private theorem local_homotopyEquivalence_tensorPullback {X Y : Scheme.{u}}
   exact ((HomologicalComplex.homotopyEquivalences _ _).arrow_mk_iso_iff
     (Arrow.isoMk (α.app K) (α.app L) (α.hom.naturality f).symm)).mpr hm
 
-/-- The explicit sheaf augmentation is a quasi-isomorphism, also after tensor pullback.
-Source: Stacks Project, Tag 01FM, signed ordered faces, and the local contraction
-paragraph of lem-pc-s3-affine-alternating-cech-augmented-construction. -/
+/-- The explicit sheaf augmentation is a quasi-isomorphism, also after tensor pullback
+(Stacks, Tag 01FM). -/
 theorem alternatingCechSheafAugmentation_quasiIso
     {X Y : Scheme.{u}} (p : Y ⟶ X)
     [(Scheme.Modules.tensorPullback p).Additive]

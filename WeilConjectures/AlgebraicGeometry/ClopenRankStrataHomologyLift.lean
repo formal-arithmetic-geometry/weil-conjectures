@@ -15,10 +15,10 @@ import WeilConjectures.AlgebraicGeometry.ClopenRankStratumDerivedProjector
 
 /-! # Lifting a map from one clopen rank stratum
 
-Source: rank-idempotent splitting and single-degree truncation in steps 1--2
-of clopen rank-stratum formality (the expansion of the reconstruction argument
-motivated by Stacks Tag 0BQZ). Supporting sources: Stacks Tags 00EE
-(clopen idempotents), 0118 (canonical truncation), and 0AVW (algebra setup).
+## References
+
+* Stacks Project, Tags 0BQZ, 00EE (clopen idempotents), 0118 (canonical truncation),
+  0AVW (algebra setup)
 -/
 
 @[expose] public section
@@ -56,11 +56,7 @@ private theorem lift_to_concentrated
 
 /-- The rank-stratum projector gives a concentrated retract of `K`, and maps
 from the module on that stratum are fixed by the induced homology projector.
-The whole object `K` need not be concentrated.
-
-Source: rank-idempotent splitting, steps 1--2 of clopen rank-stratum formality;
-Stacks Tag 00EE for the characteristic idempotent and Tag 08J5 for the
-single-degree presentation of the resulting retract. -/
+The whole object `K` need not be concentrated (Stacks, Tags 00EE, 08J5). -/
 theorem clopenRankStrata_homology_presentation
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}
@@ -129,16 +125,7 @@ theorem clopenRankStrata_homology_presentation
 
 /-- A module in degree n supported on its clopen rank stratum maps into a
 complex through its degree-n homology, provided all other homology degrees
-are supported on their respective different rank strata. The degree-n
-homology need not be prescribed, and the map need not be an isomorphism.
-No finite-image assumption on the rank function is needed for this one-stratum
-lifting statement.
-
-Source: rank-idempotent splitting and single-degree truncation, steps 1--2
-of `lem-sc-clopen-rank-strata-formality` (expanding the reconstruction argument
-motivated by Tag 0BQZ); Stacks Tags 00EE (clopen idempotents), 0118
-(canonical truncation), and 0AVW (direct-image algebra setup).
-The rank-stratum expansion is given here, not stated verbatim in 0BQZ. -/
+are supported on their respective different rank strata (Stacks, Tags 00EE, 0118, 0AVW). -/
 theorem clopenRankStrata_homology_lift
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}

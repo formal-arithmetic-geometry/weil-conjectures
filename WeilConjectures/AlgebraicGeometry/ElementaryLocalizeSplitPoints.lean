@@ -133,8 +133,9 @@ private theorem finite_purelyInseparable_residue_square
   simp only [Scheme.residueFieldMap_comp] at H
   exact congrArg CommRingCat.Hom.hom H
 
-/-- Source: Stacks Project, More on Morphisms, proof of Lemma 02LM,
-lines 12083--12089 and its omitted verification using Schemes, Lemma 01JT. -/
+/-- Elementary étale localization: after an étale neighbourhood of `u`, the prescribed isolated
+points of the fibre split off as open subschemes finite over the neighbourhood.
+(Stacks, Tags 02LM and 01JT) -/
 theorem exists_elementary_localize_split_points
     {X S U : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (φ : U ⟶ S) (u : U) (n : ℕ) (x : Fin n → X) (m : Fin n → ℕ)

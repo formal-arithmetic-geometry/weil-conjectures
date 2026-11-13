@@ -10,9 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionFam
 
 /-! # Compact-support action on a base where the automorphism is the identity
 
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-orientation-from-the-diagonal/
-sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md`, Step 1.
+This is the identity-at-the-zero-section step of the vector-bundle orientation.
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +42,7 @@ private theorem fixed_identity_exchange
     Functor.map_comp, Iso.inv_hom_id_app_assoc] using h'
 
 /-- An automorphism over `Y`, with coefficients pulled back from `Y`, acts trivially
-on compact supports after a Cartesian base change on which it is the identity.
-
-Source: vector-bundle orientation proof, Step 1, identity at the zero section. -/
+on compact supports after a Cartesian base change on which it is the identity. -/
 theorem compactSupport_fixed_base_action
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

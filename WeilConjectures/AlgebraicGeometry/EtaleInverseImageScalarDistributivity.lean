@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageScalarDistributivityRi
 
 /-! # Distributivity of the transported scalar action
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -28,7 +28,8 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+/-- The transported scalar action on the inverse image is distributive in both variables
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageScalarDistributivity (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

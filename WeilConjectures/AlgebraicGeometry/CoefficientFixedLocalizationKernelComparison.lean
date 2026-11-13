@@ -24,8 +24,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace AlgebraicGeometry.ProEtale
 
 /-- The kernel of the canonical closed unit is classical when the open restriction is.
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open, and Tag 09AF,
-lemma-jshriek-comparison. -/
+(Stacks, Tags 09AH, 09AF) -/
 theorem coefficientFixed_localization_kernel_comparison
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

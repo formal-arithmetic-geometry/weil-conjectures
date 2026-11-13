@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Comparing open products with étale fibre products
 
-Source: Stacks Project, Tags 03AK and 03AM; product comparison in
-lem-sc-etale-open-cech-injective-augmentation, proof step 1.
+Source: Stacks Project, Tags 03AK and 03AM.
 -/
 
 @[expose] public section
@@ -148,10 +147,8 @@ private theorem degreeIso_indexMap
   exact congrArg Quiver.Hom.op (productIso_indexMap i ht U (tupleEquiv n s) α)
 
 /-- Finite-limit preservation identifies the pulled-back open Čech complex with
-that of the image family over the terminal object, after lifting its index universe.
-
-Source: Stacks Project, Tags 03AK and 03AM; the product comparison in step 1 of
-lem-sc-etale-open-cech-injective-augmentation. -/
+that of the image family over the terminal object, after lifting its index universe
+(Stacks, Tags 03AK and 03AM). -/
 theorem etaleOpenCechProductComparison
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) [PreservesFiniteLimits i]
     (ht : IsTerminal (i.obj ⊤)) {ι : Type u} (U : ι → X.Opens)

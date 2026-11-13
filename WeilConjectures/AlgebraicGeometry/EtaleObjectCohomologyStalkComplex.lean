@@ -43,9 +43,8 @@ instance (X : Scheme.{u + 1}) (i : X.Opens ⥤ X.Etale) (x : X) :
     (etaleObjectStalkSections X i x).Additive := inferInstance
 
 /-- Object cohomology at a Zariski stalk is the homology of stalkwise sections of
-an injective resolution. This does not assume strict henselianity.
-Source: Stacks Project, Cohomology on Sites, Tag 03F3; Etale Cohomology, Tags 03XA and 09AX,
-second and third sentences of the proof. -/
+an injective resolution. This does not assume strict henselianity
+(Stacks, Tags 03F3, 03XA and 09AX). -/
 theorem etaleObjectCohomology_stalk_complex
     {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale)
     [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]

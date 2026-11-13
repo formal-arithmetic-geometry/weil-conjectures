@@ -66,28 +66,9 @@ private theorem covering_of_comparison
   change t.hom.hom.left (t.inv.hom.left x) = x at ht
   exact heq.symm.trans ht
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, proof of the qcqs case;
-Limits 01ZM, 01YZ, 01Z6, 07RP, and 07RR.
-
-Proof (steps 5--7 of lem-weil-pbc-affine-etale-site-colimit):
-1. Every affine étale object is of finite presentation over the quasi-separated base.
-   The limit is qcqs because its projections are affine. Apply 01ZM to descend an object
-   to a finite-presentation model. Its base-change tail has the given object as limit
-   (01YZ). Apply 01Z6 to make the model affine, then 07RP to make it étale at a later
-   stage. Further base changes preserve affineness. The q-pullback squares identify the
-   resulting isomorphism with the stated v-presentation.
-2. For a map between two v-images, use the q-pullback identifications and 01ZM(2) to
-   descend the map. The p-pullback identifications give a map between the U-images.
-   The delta first-projection equation and pullback uniqueness identify its image with
-   the original map, giving the displayed conjugation formula.
-3. Descend the finitely many objects and arrows of a covering by the first two steps,
-   taking common upper bounds. The finite disjoint union of its source objects is affine,
-   hence qcqs. Its map to the target is étale, hence locally finitely presented. Its
-   base change to the limit is surjective. Apply 07RR to make it surjective at a stage;
-   this means that the descended family covers. Delta gives the stated comparisons.
-4. Conversely, preservation of coverings by v and invariance under the displayed
-   source and target isomorphisms show that any such descended covering covers.
-   This includes n = 0: the coproduct is empty and 07RR applies to its map. -/
+/-- Affine étale objects, maps and coverings over the limit descend to a finite stage,
+compatibly with the base change system `U`, `v` (Stacks, Tags 0EYL, 01ZM, 01YZ, 01Z6, 07RP,
+07RR). -/
 theorem affineEtale_descent_data
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

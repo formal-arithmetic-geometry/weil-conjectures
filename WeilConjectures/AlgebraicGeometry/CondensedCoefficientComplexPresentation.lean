@@ -23,9 +23,8 @@ open Scheme PadicAlgCl
 
 set_option maxHeartbeats 800000 in
 -- Instantiating adjunction naturality in four derived module categories needs extra heartbeats.
-/-- Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, the Hom paragraph
-of the module docstring; the coefficient complex construction in step 3 of
-`prop-weil-pbc-qbar-condensed-two-colimit`. -/
+/-- A bounded-below derived object over a finite coefficient field has a filtered presentation by
+complexes over the finite subfields, compatible with the identification of the colimit. -/
 theorem exists_condensed_coefficient_complex_presentation
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E F : FiniteIntermediateField ℓ)

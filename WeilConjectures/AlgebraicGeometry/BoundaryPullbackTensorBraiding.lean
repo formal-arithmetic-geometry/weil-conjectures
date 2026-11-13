@@ -38,9 +38,8 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {A B C : X.Modules}
   | tmul s t => exact h U.unop s t
   | add z w hz hw => simp only [map_add, hz, hw]
 
-/-- The transported pullback tensor comparison respects symmetry for arbitrary modules.
-
-Source: Stacks Project, Tag 01CD, lemma-tensor-product-pullback, and Tag 01CA. -/
+/-- The transported pullback tensor comparison respects symmetry for arbitrary modules
+(Stacks, Tags 01CD, 01CA). -/
 theorem boundaryPullbackTensorIso_braiding {X Z : Scheme.{u}} (j : Z ⟶ X)
     (A B : X.Modules) :
     (tensorPullback j).map (β_ A B).hom ≫ (boundaryPullbackTensorIso j B A).hom =

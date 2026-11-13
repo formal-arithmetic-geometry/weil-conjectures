@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-! # Finite cohomology of a sufficiently large Chow twist
 
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-construction of the module pi_* L^n.
+## References
+
+* Stacks Project, Tag 02O5
 -/
 
 @[expose] public section
@@ -39,10 +40,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The analytic part of the Chow construction, for a specified projective model.
-No integrality, birationality, or generic-stalk condition is required.
-
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-paragraphs defining L and G and applying the relative Leray spectral sequence. -/
+No integrality, birationality, or generic-stalk condition is required (Stacks, Tag 02O5). -/
 theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
     (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (i : W ⟶ X) [IsClosedImmersion i] (π : Y ⟶ W) [IsProper π]

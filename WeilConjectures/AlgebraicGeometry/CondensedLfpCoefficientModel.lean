@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedLocalModelGluing
 
 /-!
 # Finite coefficient models on one stratum
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
-finite-presentation descent, steps 1--3 of the parent descent node.
 -/
 
 @[expose] public section
@@ -30,10 +27,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A locally finitely presented module on an immersed stratum has a locally finitely
 presented model over a finite coefficient field, with the coefficients kept in their
-actual inverse-image presentation.
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
-steps 1--3 of lem-weil-pbc-condensed-finite-presentation-descent. -/
+actual inverse-image presentation. -/
 theorem exists_lfp_finiteCoefficient_model_on_immersion
     (T X : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (f : X ⟶ T) [IsImmersion f] (ℓ : ℕ) [Fact ℓ.Prime]

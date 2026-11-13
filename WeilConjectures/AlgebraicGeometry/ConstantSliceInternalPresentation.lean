@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Transport of a constant slice presentation to internal modules
 
-Source: Stacks, Tags 03CY and 00YV; the encoding comparison in
-`lem-sfb-discrete-constant-presentation-lifting`, step 1.
+Stacks Project, Tags 03CY and 00YV.
 -/
 
 @[expose] public section
@@ -59,12 +58,8 @@ private noncomputable def free_image
 
 /-- A displayed constant presentation on a slice gives a finite free presentation of
 its internal inverse image on the underlying scheme. This is an encoding comparison;
-it makes no claim that the entries of the internal matrix descend to the condensed point.
-It applies to any condensed coefficient ring, provided the specified constant-ring
-identification on X exists.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV; the first step of
-`lem-sfb-discrete-constant-presentation-lifting`. -/
+it makes no claim that the entries of the internal matrix descend to the condensed point
+(Stacks, Tags 03CY, 00YV). -/
 theorem constant_slice_internal_presentation
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

@@ -27,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Assemble finitely many representing sections into one surjective étale object.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, the disjoint union of U_j. -/
+(Stacks, Tag 09ZF). -/
 theorem etale_finite_family_section_gluing
     {X Z : Scheme.{u}} (i : Z ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

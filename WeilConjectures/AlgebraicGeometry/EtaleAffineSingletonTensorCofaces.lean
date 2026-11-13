@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- The pure-tensor normalized degree comparisons commute with each coface.
-Source: Stacks Project, Tag 03P2, affine proof: omission of one projection inserts
-one into the corresponding tensor factor; Tag 03DR for restriction functoriality. -/
+(Stacks, Tags 03P2 and 03DR) -/
 theorem singletonTensorDegreeComparison_coface
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U)

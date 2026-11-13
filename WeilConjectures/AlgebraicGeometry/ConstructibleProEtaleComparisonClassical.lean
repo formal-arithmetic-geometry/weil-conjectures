@@ -21,7 +21,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- An affine-locally constructible module has invertible continuity maps on a qcqs scheme.
-Source: blueprint constructible-comparison-classical, Stacks Tags 09AJ and 09AK. -/
+(Stacks, Tags 09AJ and 09AK) -/
 theorem constructibleComparison_classical (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ [CompactSpace X] [QuasiSeparatedSpace X],

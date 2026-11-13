@@ -16,8 +16,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
 /-!
 # Smooth duality from the étale and affine-line cases
 
-`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor_of_finite` has the statement of
-`thm-asd-smooth-tensor`. It applies the tip's reduction
+`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor_of_finite` is smooth duality
+for finite coefficients. It applies the reduction
 `exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` to two lemmas: the étale case
 (the unit/tensor comparison for an étale map over an arbitrary base) and the affine-line case
 (the canonical duality on the compactified affine line). This module does not import
@@ -168,11 +168,7 @@ private lemma affineLineSmoothDuality : AffineLineSmoothDuality Λ := by
   exact (ambientTensorMap_compactification Λ p c K) ▸ this
 
 include d in
-/-- Smooth cohomological duality without a chosen orientation (the statement of blueprint
-`thm-asd-smooth-tensor`, `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), proved
-from `exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` by the étale case and the
-affine-line case below. It is kept apart from `SmoothDuality.lean` so that the prime-field case of
-`lem-asd-smooth-generic-direct-image` does not import that file.
+/-- Smooth cohomological duality without a chosen orientation.
 
 Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`
 be a finite ring whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is

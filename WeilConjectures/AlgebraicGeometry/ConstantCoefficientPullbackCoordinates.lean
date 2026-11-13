@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Pulling back constant coordinates on the coefficient ring
 
-Source: Stacks Project, Tags 00YV and 03D2.
+## References
+
+* Stacks Project, Tags 00YV, 03D2
 -/
 
 @[expose] public section
@@ -124,12 +126,8 @@ private theorem transportCoordinates
     using he.trans hd'.symm
 
 /-- Constant coefficient coordinates extend uniquely across inverse image.
-This assertion only concerns ring sheaves and their constant sections; it contains
-no module equivalence, slice, or comparison of module inverse-image functors.
-
-Source: Stacks Project, Sites, Tag 00YV (functoriality of algebraic structures),
-Modules on Sites, Tag 03D2 (inverse image); coefficient transport in step 1 of
-lem-sfb-constant-slice-module-encoding. -/
+This assertion only concerns ring sheaves and their constant sections
+(Stacks, Tags 00YV, 03D2). -/
 theorem constant_coefficient_pullback_coordinates
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

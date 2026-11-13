@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- The categorical Čech functor preserves zero morphisms.
-Source: Stacks 03AO, functoriality of the Čech complex. -/
+(Stacks, Tag 03AO) -/
 instance etale_cech_preservesZero (X : Scheme.{u}) (U : X.Etale)
     {T : Type (u + 1)} (V : T → X.Etale) (f : ∀ t, V t ⟶ U) :
     (cechComplexFunctor (fun t ↦ Over.mk (f t)) :
@@ -47,9 +47,7 @@ instance etale_cech_preservesZero (X : Scheme.{u}) (U : X.Etale)
 
 /-- A short exact sheaf sequence which is surjective on all intersections of a family
 induces a short exact sequence of Čech complexes.
-
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9, proof, the paragraph beginning
-"Hence for any U in Cov we get a short exact sequence of Cech complexes". -/
+(Stacks, Tag 03F9) -/
 theorem etale_cech_shortExact_of_sections
     (X : Scheme.{u})
     (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

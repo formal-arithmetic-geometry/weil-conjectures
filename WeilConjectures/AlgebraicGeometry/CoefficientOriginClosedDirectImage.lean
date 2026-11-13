@@ -176,8 +176,7 @@ private def closedPresentation {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersi
 
 /-- Closed direct image takes a classical sheaf to a classical sheaf, with independent
 coefficient size. No finite-generation, finite-set or Noetherian condition is imposed.
-Source: Stacks Project, Tag 09A6, lemma-morphism-comparison, in degree zero;
-Tag 09AA, lemma-closed-immersion. -/
+(Stacks, Tags 09A6, 09AA) -/
 theorem coefficientFixed_closed_directImage_essImage
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]

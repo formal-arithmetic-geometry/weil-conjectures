@@ -31,8 +31,7 @@ private theorem coordinate_image {B' B : Scheme.{u}} (g : B' ⟶ B)
   exact Scheme.Hom.toIteratedAffineLine_appTop_coord
     (iteratedAffineLineProj B' c ≫ g) (iteratedAffineLine.coord B' c) i
 
-/-- The map on the closed subschemes cut out by the same coordinate.
-Source: the final base-change paragraph of the affine-space zero-section proof. -/
+/-- The map on the closed subschemes cut out by the same coordinate. -/
 def coordinateZeroLocusMap {B' B : Scheme.{u}} (g : B' ⟶ B)
     (c : ℕ) (i : Fin c) :
     (iteratedAffineLine B' c).zeroLocusSubscheme {iteratedAffineLine.coord B' c i} ⟶
@@ -46,11 +45,7 @@ def coordinateZeroLocusMap {B' B : Scheme.{u}} (g : B' ⟶ B)
       exact Scheme.Hom.toIteratedAffineLine_appTop_coord
         (iteratedAffineLineProj B' c ≫ g) (iteratedAffineLine.coord B' c) i)
 
-/-- Each coordinate divisor pulls back to the corresponding coordinate divisor.
-
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, final Cartier-map base-change
-paragraph. -/
+/-- Each coordinate divisor pulls back to the corresponding coordinate divisor. -/
 theorem coordinateZeroLocus_isPullback {B' B : Scheme.{u}} (g : B' ⟶ B)
     (c : ℕ) (i : Fin c) :
     IsPullback (coordinateZeroLocusMap g c i)

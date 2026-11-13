@@ -19,9 +19,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Finitely many stalk tests for a constructible source
 
-Source: the finite irreducible lisse partition argument in blueprint node
-`lem-weil-pbc-constructible-noetherian-finite-selection`, steps 1, 3 and 4;
-Stacks Project, Tag 09Z6, partition alternative.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section
@@ -61,8 +61,7 @@ private theorem geometricPoint_lift {T X : Scheme.{u}} (f : T ⟶ X) [IsImmersio
 
 /-- Finitely many finite geometric stalks test monomorphisms out of a constructible sheaf.
 The chosen points depend only on the source sheaf, not on the target or the morphism.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, finite-selection node steps 1, 3
-and 4; Stacks Project, Tag 09Z6, partition alternative. -/
+(Stacks, Tag 09Z6) -/
 theorem exists_finite_stalk_tests_of_constructible
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

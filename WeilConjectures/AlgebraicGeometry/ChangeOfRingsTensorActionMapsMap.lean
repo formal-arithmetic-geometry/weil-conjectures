@@ -27,7 +27,7 @@ set_option maxHeartbeats 800000 in
 -- Elaborating the nested scalar restrictions and tensor components needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The presheaf change-of-rings map exists with its section formula.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB. -/
+(Stacks, Tag 01SB). -/
 theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

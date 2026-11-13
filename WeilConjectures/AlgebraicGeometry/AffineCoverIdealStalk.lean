@@ -114,12 +114,8 @@ private theorem finiteBasicIdeal_map_germ
       (((Y.mem_basicOpen f.1 y (Y.basicOpen_le f.1 hy)).mp hy).pow N)).mp hm
 
 /-- Compatible ideals on an affine cover have the expected stalks when their
-sections on the larger affine open are defined by an intersection of inverse images.
-
-Source: Stacks Project, Tag 01HR (affine schemes, lemma-affine-sheaves), Tag 01I6
-(quasi-coherent sheaves on affines, lemma-compare-constructions), and Tag 01LA
-(functoriality for quasi-coherent modules, locality of quasi-coherence).
-Tag 0BVH uses this construction for discriminants. -/
+sections on the larger affine open are defined by an intersection of inverse images (Stacks, Tags
+01HR, 01I6, 01LA). -/
 theorem affineCoverIdeal_map_germ
     {Y : Scheme.{u}} [IsLocallyNoetherian Y] (U : Y.affineOpens)
     {ι : Type v} (V : ι → Y.affineOpens) (hV : ∀ i, (V i).1 ≤ U.1)

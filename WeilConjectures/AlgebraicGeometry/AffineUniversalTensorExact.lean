@@ -14,8 +14,7 @@ import Mathlib.Algebra.TrivSqZeroExt.Basic
 
 /-! # Square-zero tests detect tensor exactness on an affine scheme
 
-Source: the square-zero test in the proof of
-lem-pc-affine-universally-exact-opcycles-flat, using Stacks Project, Tag 01IB.
+Source: Stacks Project, Tag 01IB.
 -/
 
 @[expose] public section
@@ -25,9 +24,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Scheme base-change tests imply module tensor exactness in a fixed degree.
-Source: Stacks Project, Tag 01IB, and steps 1--2 of
-lem-pc-affine-universally-exact-opcycles-flat. -/
+/-- Scheme base-change tests imply module tensor exactness in a fixed degree (Stacks, Tag 01IB). -/
 theorem affine_universal_tensor_exact (S : Scheme.{u}) (hS : IsAffine S)
     (C : CochainComplex S.Modules ℤ) (a : ℤ)
     (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)

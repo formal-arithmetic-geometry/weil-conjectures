@@ -33,8 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The lower-truncation projection is invertible on derived affine sections
-in its cutoff degree.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5; Tag 08D4 (3). -/
+in its cutoff degree (Stacks, Tags 06Z0, 08D4). -/
 theorem affineDerivedSections_truncGE_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

@@ -86,8 +86,7 @@ private theorem comparison_of_preserved_left_homology
   simp
 
 /-- The affine K-injective cohomology comparison witness can be chosen to be the
-canonical comparison used by the counit construction.
-Source: Stacks Project, Tag 0AVW, proof of affine-morphism-equivalence; Tag 08D4. -/
+canonical comparison used by the counit construction (Stacks, Tags 0AVW and 08D4). -/
 theorem affine_algebra_kinjective_canonical_comparison_identification
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

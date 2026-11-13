@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectTruncationTriangle
 
 /-! # Extending perfect complexes after adjoining a shifted locally free sheaf
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, Lemma 36.13.6,
-lemma-lift-perfect-complex-plus-locally-free.
+Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, Lemma 36.13.6.
 -/
 
 @[expose] public section
@@ -59,9 +58,8 @@ private theorem qc_single (Y : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A perfect object on a quasi-compact open of an affine scheme extends after adjoining
-an integer shift of a finite locally free sheaf, whose rank is allowed to vary locally.
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, Lemma 36.13.6,
-lemma-lift-perfect-complex-plus-locally-free. -/
+an integer shift of a finite locally free sheaf, whose rank is allowed to vary locally
+(Stacks, Tag 08EG). -/
 theorem exists_perfect_lift_plus_finiteLocallyFree
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

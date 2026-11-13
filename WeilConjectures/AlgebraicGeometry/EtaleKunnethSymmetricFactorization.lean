@@ -10,8 +10,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
 
 /-! # Symmetric normal form for the ordinary Kunneth map
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first coordinate triangle.
 -/
 
 @[expose] public section

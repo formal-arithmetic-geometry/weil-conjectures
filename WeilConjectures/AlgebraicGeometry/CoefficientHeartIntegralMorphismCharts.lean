@@ -48,13 +48,7 @@ theorem exists_integral_lattice_upperStar_comp {X U W : Scheme.{u}}
       ((upperStarComp (Profinite.continuousMapRingObj E) r p).app M).symm⟩⟩
 
 /-- Two locally free continuous `E`-modules on a locally Noetherian scheme admit integral
-lattices on a common connected affine etale neighbourhood of any given point.
-
-Proof in words. Take an affine etale neighbourhood carrying a lattice of `M`, and over it an
-affine etale neighbourhood of a point above `x` carrying a lattice of the pullback of `N`.
-This scheme is affine and etale over a locally Noetherian scheme, hence Noetherian, so the
-connected component of a point above `x` is open; it is also closed, so it is affine. Pull
-back both lattices to this component. -/
+lattices on a common connected affine etale neighbourhood of any given point. -/
 theorem exists_connected_affine_etale_lattices [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
     [IsLocallyNoetherian X]
     (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -97,13 +91,7 @@ theorem exists_connected_affine_etale_lattices [FiniteDimensional ℚ_[ℓ] E] (
 
 /-- On a quasi-compact quasi-separated scheme, every morphism between the rationalizations of
 two integral modules, the source being locally free, becomes the rationalization of an
-integral morphism after multiplication by a power of `ℓ`.
-
-Proof in words. The restricted scalar extension of the target is the colimit of its
-multiplication-by-`ℓ` telescope, whose `k`-th leg is the extension unit followed by `ℓ⁻ᵏ`.
-Transpose the morphism by the extension-restriction adjunction and factor it through a finite
-stage of the telescope. Transposing back gives an integral morphism whose rationalization is
-the given morphism followed by `ℓ⁻ᵏ`. -/
+integral morphism after multiplication by a power of `ℓ`. -/
 theorem exists_extendScalars_map_eq_pow_nsmul {V : Scheme.{u}} [CompactSpace V]
     [QuasiSeparatedSpace V]
     (P Q : Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
@@ -198,14 +186,7 @@ abbrev normedAlgebraOfFiniteIntermediateField (ℓ : ℕ) [Fact ℓ.Prime]
 /-- Integral charts of a morphism of lisse continuous `E`-modules on a locally Noetherian
 scheme: a pro-etale cover by connected affine Noetherian schemes, on each of which the
 pullback of the morphism is the rationalization of a morphism of lisse integral modules.
-The pullback functors are passed as a family `U` equal to `upperStar`, so that the statement
-can be specialized along definitionally equal coefficient rings without unfolding them.
-
-Proof in words: at each point take a connected affine etale neighbourhood carrying lattices
-of both modules (`CondensedRing.exists_connected_affine_etale_lattices`); these form a
-pro-etale cover. On each such qcqs neighbourhood, the pullback of `f` becomes integral after
-multiplication by a power `ℓᵏ` (`CondensedRing.exists_extendScalars_map_eq_pow_nsmul`), and
-`ℓᵏ` is invertible on `E`-modules, so it is absorbed into the source isomorphism. -/
+The pullback functors are passed as a family `U` equal to `upperStar`. -/
 theorem CondensedRing.exists_lisse_integral_morphism_charts (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (X : Scheme.{u}) [IsLocallyNoetherian X]
@@ -248,25 +229,8 @@ theorem CondensedRing.exists_lisse_integral_morphism_charts (ℓ : ℕ) [Fact �
   exact ⟨hV, hVn, hVc, P, Q, g, (isLocallyFree_iff _).1 hP, (isLocallyFree_iff _).1 hQ, eP',
     eQ, h⟩
 
-/-- A rational lisse morphism has compatible integral models on connected affine
-etale neighbourhoods. The source lattice may be rescaled to absorb its denominator.
-
-Source: latest blueprint,
-`part-six-operations/sec-reduction-finite-coefficients/`
-`sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/`
-`sk-lem-coefficient-heart.proof.md`, proof (1),
-"First let Lambda = E", through the construction of h = pi^m f.
-This is a step of the proof of `sk-lem-coefficient-heart`.
-
-Proof in words: at each point of `X`, take a connected affine etale neighbourhood, which is
-Noetherian, carrying integral lattices of both `M` and `N`
-(`CondensedRing.exists_connected_affine_etale_lattices`); these neighbourhoods form a
-pro-etale cover. The integral coefficients with the norm restricted from `ℚ̄_ℓ` are the
-condensed integers of `E`. The rational target is the colimit of the multiplication-by-`ℓ`
-telescope of its lattice, so on the qcqs neighbourhood the pullback of `f` becomes integral
-after multiplication by a power `ℓᵏ` (`CondensedRing.exists_extendScalars_map_eq_pow_nsmul`).
-Since `ℓ` is invertible on `E`-modules, rescaling the source rationalization isomorphism by
-`ℓᵏ` gives the stated commuting square. Rank zero and the empty scheme are allowed. -/
+/-- Integral charts for a rational lisse morphism: compatible integral models on connected affine
+etale neighbourhoods. The source lattice may be rescaled to absorb its denominator. -/
 theorem coefficientHeart_integralMorphismCharts (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) [IsNoetherian X]

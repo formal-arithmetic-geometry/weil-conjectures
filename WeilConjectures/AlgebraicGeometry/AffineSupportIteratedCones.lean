@@ -35,11 +35,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- Successive cones of multiplication by the functions `g` are perfect and supported on
 their common zero set. If the initial restriction to a quasi-compact open `U` is `F ⊕ F[1]`
 and every function acts by zero on `F`, the final restriction is the sum of the shifts of
-`F` with binomial multiplicities. Global functions are encoded as compatible families of
-local sections and act by `schemeDerivedScalar`; `g' i` is the restriction of `g i` to `U`
-(tied by its value on the top open). Restriction to `U` is the localized-site restriction
-followed by `Scheme.Modules.overEquiv U`.
-Source: Stacks Project, Tag 08EK. -/
+`F` with binomial multiplicities (Stacks, Tag 08EK). -/
 theorem affine_support_iterated_cones (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,

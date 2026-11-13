@@ -19,14 +19,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Finite descent of coefficient morphisms over any allowed base field
 
-Source: literature/blueprint/latest/blueprint/part-six-operations/
-sec-reduction-finite-coefficients/sec-descent-to-a-finite-coefficient-field/
-sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md, clauses (1)--(3),
-with the Q30 any-field scope repair of 2026-11-02.
-
-The old positive-characteristic theorem and the canonical maps it defines remain
-available. This statement includes characteristic zero and uses those same maps,
-coefficient rings, ordinary derived categories, and bounded constructible objects.
+This statement includes characteristic zero and uses the canonical maps, coefficient rings,
+ordinary derived categories, and bounded constructible objects of the positive-characteristic
+theorem.
 -/
 
 @[expose] public section
@@ -44,41 +39,7 @@ open Scheme PadicAlgCl
 
 /-- The natural derived scalar adjunctions, uniformly bounded-below coefficient
 complex colimit, and finite descent of every shifted morphism, over any field
-whose characteristic differs from the coefficient prime.
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/
-sec-reduction-finite-coefficients/sec-descent-to-a-finite-coefficient-field/
-sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md (1)--(3) and its
-.proof.md, with the node's Q30 scope repair of 2026-11-02.
-
-Proof, following the five current DAG steps:
-1. A field is Noetherian, including in characteristic zero. A finite type scheme
-   over it is Noetherian by lem-weil-pbc-finite-type-over-noetherian. Finite
-   subextensions form a set directed by composita
-   (def-weil-finite-subextension-directed-set).
-2. Apply lem-weil-pbc-condensed-flat-coefficient-calculus to X. Exact extension
-   is left adjoint to exact restriction on the ordinary derived categories, and
-   the recorded derived extension is termwise tensor. Evaluate the adjunctions
-   on C and D_F[r], also over the algebraic closure. The tensor multiplication,
-   unit and shift comparisons identify their transitions with coefficient
-   inclusions. Adjunction naturality gives the two displayed transition identities.
-3. By sk-prop-sfb-qlbar-colimit-x the algebraic-closure coefficient ring is the
-   filtered colimit of finite fields. The tail above E is cofinal by composita.
-   Tensor preserves this colimit by the coefficient calculus. Apply this termwise
-   to every bounded representative K of D to obtain the specified colimiting
-   coefficientComplexCocone. A zero term below a stays zero after scalar extension
-   and restriction, so every stage has the same lower bound a.
-4. Apply sk-lem-constructible-ext-continuity (1) in its any-field setting to C,
-   this coefficient diagram, and r. Its complexes have the common lower bound
-   just established; its first-argument hypothesis holds for every bounded
-   constructible object over E. This gives the restricted-target Hom colimit
-   bijection.
-5. Identify that comparison using the natural adjunctions of step 2 and the
-   actual colimit of step 3. It is the specified scalar-extension map on Hom.
-   Elements of a filtered colimit have finite-stage representatives and two
-   representatives agree precisely when they agree at a common later stage.
-   The final two conjuncts express exactly its surjectivity and injectivity.
--/
+whose characteristic differs from the coefficient prime. -/
 theorem coefficient_finite_descent_hom_of_char_ne
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] (_hchar : ringChar k ≠ ℓ)

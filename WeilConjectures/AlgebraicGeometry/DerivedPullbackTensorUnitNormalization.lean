@@ -62,8 +62,7 @@ private theorem inverse_unit_comparison
 -- The unfolding of `derivedPullback_tensorUnitIso` against the lax unit of `Q` goes through
 -- the derived monoidal structure; it needs slightly more than the default budget.
 /-- Normalize the explicitly constructed unit comparison before any tensor comparison is used.
-Source: Stacks Project, Cohomology, Tag 079U, parent unit proof, step 1;
-the explicit construction in `derivedPullback_tensorUnitIso`. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensorUnitIso_normalization {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

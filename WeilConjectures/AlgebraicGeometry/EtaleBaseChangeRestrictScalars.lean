@@ -28,10 +28,8 @@ open scoped AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The coefficient comparison supplies isomorphisms on the source and target of the
-base-change arrow, and these isomorphisms intertwine the two arrows.  This is the
-derived-functor comparison part; the arrow-category packaging is proved below.
-
-Source: Stacks Project, Lemma 21.20.7(3), Tag 0D6J, and Remark 21.19.3, Tag 07A7. -/
+base-change arrow, and these isomorphisms intertwine the two arrows.
+(Stacks, Tags 0D6J and 07A7) -/
 theorem restrictScalars_baseChange_comparison
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
@@ -90,15 +88,7 @@ theorem restrictScalars_baseChange_comparison
   rw [Category.assoc, ← hn, ← Category.assoc, w, Category.assoc]
 
 /-- Restriction of coefficients identifies the degreewise base-change arrows.
-
-Sources: Stacks Project, Lemma 21.20.7(3), Tag 0D6J
-(https://stacks.math.columbia.edu/tag/0D6J), for coefficient-independent derived direct
-image; Remark 21.19.3, Tag 07A7 (https://stacks.math.columbia.edu/tag/07A7), for construction
-of the base-change map by adjunction. The assembly below is the comparison part of
-`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients`, the
-change-of-rings paragraph in the module docstring and in
-`isIso_baseChangeHomologyMap_of_nsmul_eq_zero`; the following is the coefficient-comparison
-part of that argument, without any base-change-isomorphism hypothesis. -/
+(Stacks, Tags 0D6J and 07A7) -/
 theorem exists_baseChangeHomologyMap_restrictScalars_arrow_iso
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}

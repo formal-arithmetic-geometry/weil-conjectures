@@ -71,8 +71,8 @@ private theorem restricted_iso_formula
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The complex map obtained by sections of the restricted resolution comparison
-is the prescribed sections inclusion followed by the full comparison.
-Source: Stacks Project, Tag 015J, proof remark (3). -/
+is the prescribed sections inclusion followed by the full comparison
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSections_comparison_map
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

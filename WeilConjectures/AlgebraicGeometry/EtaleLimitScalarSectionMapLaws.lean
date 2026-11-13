@@ -235,8 +235,7 @@ private theorem section_id
   exact hresult he
 
 /-- The displayed stage maps form a diagram and the limit maps form a cocone.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit, and Etale
-Cohomology, Tag 09YQ, inverse-image composition comparisons. -/
+(Stacks, Tags 09YN and 09YQ) -/
 theorem etale_limit_scalar_section_map_laws
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

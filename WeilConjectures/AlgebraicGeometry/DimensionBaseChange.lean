@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FieldBaseChangeAffineCovers
 /-!
 # Dimension under field extension and base change
 
-Source: blueprint `sec-picard-framework/sk-thm-picard-rr/lem-pc-dim-base-change.md`,
-node order 733; Stacks Project, Tag 00P3.
+Source: Stacks Project, Tag 00P3.
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ private theorem ring_dim_base_change
   exact RingEquiv.ringKrullDim (Algebra.TensorProduct.comm k A K).toRingEquiv
 
 /-- Dimension is unchanged by scalar extension, and curves remain one-dimensional.
-Source: blueprint `sec-picard-framework/sk-thm-picard-rr/lem-pc-dim-base-change.md`,
-node order 733; Stacks Project, Tags 00P3 and 04MU. -/
+(Stacks, Tags 00P3 and 04MU) -/
 theorem dim_base_change :
     (∀ (k : Type u) (K : Type v) (A : Type w) [Field k] [Field K] [CommRing A]
       [Algebra k K] [Algebra k A] [Algebra.FiniteType k A],

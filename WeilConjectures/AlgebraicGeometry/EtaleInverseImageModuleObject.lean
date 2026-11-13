@@ -62,8 +62,7 @@ private theorem sectionProdIso_snd (V : Scheme.{u})
   exact congrArg (fun k : R.obj.obj W × A.obj.obj W ⟶ A.obj.obj W ↦ k (r,x)) h
 
 /-- Objectwise transport of the scalar action, before constructing maps or a functor.
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module; the object part of
-lem-weil-pbc-inverse-image-module-construction, step 1(a). -/
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageModuleObject (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

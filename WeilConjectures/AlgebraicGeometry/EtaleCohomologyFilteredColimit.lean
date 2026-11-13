@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSucces
 /-!
 # Filtered colimits of etale cohomology
 
-Source: Stacks Project, Tags 03Q5, 0739 and 03FD; blueprint
-`sec-curve-estimates/lem-sc-second-kummer-divisors`.
+Source: Stacks Project, Tags 03Q5, 0739 and 03FD.
 
 The image cocone has legs induced by the original coprojections. Its colimit property
 expresses that the canonical comparison map is an isomorphism, rather than merely asserting
@@ -83,7 +82,7 @@ private theorem abelianSectionsColimit (Y : Scheme.{u}) [CompactSpace Y]
     (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1} hV).symm hAb⟩
 
 /-- On a quasi-compact quasi-separated scheme, etale cohomology of abelian sheaves commutes
-with filtered colimits, with no torsion hypothesis. Source: Stacks Tags 03Q5 and 0739. -/
+with filtered colimits, with no torsion hypothesis. (Stacks, Tags 03Q5 and 0739) -/
 theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y] {I : Type u} [SmallCategory I] [IsFiltered I]
     {F : I ⥤ Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
@@ -117,16 +116,7 @@ theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y
       (isColimitOfPreserves (Γ.rightDerived q) hc)⟩
 
 /-- The same canonical comparison is an isomorphism for etale sheaves of modules over a
-fixed constant commutative ring. Source: Stacks Tags 03FD, 03CO and 03Q5.
-
-Proof (step 8 of the node): the underlying sheaf functor is a left adjoint by
-restriction/coextension of coefficient scalars and the sheafification adjunction;
-it therefore preserves the input colimit. Apply the abelian theorem to this diagram.
-The natural comparison lem-weil-pbc-etale-module-cohomology-forget is proved by exact
-forgetful functors, underlying injective acyclicity, and the source library's derived
-base-change comparison. Transport the abelian cohomology cocone along this comparison.
-The coefficient forgetful functor preserves colimits and reflects isomorphisms, hence
-reflects colimits. Applying that reflection gives precisely the module image cocone. -/
+fixed constant commutative ring. (Stacks, Tags 03FD, 03CO and 03Q5) -/
 theorem etaleModuleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
     {I : Type u} [SmallCategory I] [IsFiltered I]

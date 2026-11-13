@@ -25,19 +25,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
   [FiniteDimensional ℚ_[ℓ] E]
 
 /-- Every bounded constructible continuous E complex has a constructible integral model.
-Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2).
-
-Proof in words. On each stratum, locally finite presentations over the continuous E
-coefficient sheaf become locally free after finite refinement. Lemma 6.8.13 gives a
-constructible integral lattice for these finite-rank local systems; it does not require
-a globally lisse integral lattice. Extension by zero gives integral models for their
-locally closed extensions. The integral Hom localization theorem, proved using
-bounded-below coproduct compactness, clears the finitely many denominators in the
-extension classes. Induction through the bounded truncation triangles then constructs
-an integral bounded constructible complex M and an isomorphism M[1/ℓ] ≅ K.
-The continuous-function localization isomorphism on compact profinite tests identifies
-M[1/ℓ] with the actual derived functor integralScalarExtension, after exact pullback
-from the point. The empty scheme and zero complex use the zero integral complex. -/
+(Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14 (2)) -/
 theorem continuousConstructible_integral_model (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (K : ProEtale.BoundedConstructible

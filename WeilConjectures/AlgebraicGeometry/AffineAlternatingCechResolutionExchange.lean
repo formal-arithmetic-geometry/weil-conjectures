@@ -19,8 +19,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- The ordinary exchange is invertible for the Cech resolution data.
-Source: Stacks Project, Tags 02KG and 02KH; the affine intersection exchange
-paragraph of `lem-pc-affine-alternating-cech-pinned-mate`. -/
+(Stacks, Tags 02KG and 02KH). -/
 theorem affineAlternatingCech_resolution_exchange
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

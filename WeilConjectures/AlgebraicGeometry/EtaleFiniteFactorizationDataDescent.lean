@@ -80,9 +80,7 @@ private theorem finite_maps_from_models
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Descend finitely many affine étale sources and their two families of arrows.
-No covering assumption or conclusion is involved.
-
-Source: Stacks, Étale Cohomology 0EYL, qcqs proof; Limits 01ZM and 01ZC. -/
+No covering assumption or conclusion is involved (Stacks, Tags 0EYL, 01ZM and 01ZC). -/
 theorem etale_finiteFactorizationDataDescent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

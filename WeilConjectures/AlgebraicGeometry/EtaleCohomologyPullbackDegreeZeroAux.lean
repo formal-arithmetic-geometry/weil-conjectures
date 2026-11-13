@@ -70,7 +70,7 @@ private theorem isIso_map_homology_zero
     ((quasiIsoAt_iff _ 0).2 this)
 
 /-- The augmentation induces an isomorphism on degree-zero sections cohomology.
-Source: Stacks Project, Tag 05TD, proof of (3), and Tag 013K (injective resolutions). -/
+(Stacks, Tags 05TD and 013K) -/
 theorem isIso_degreeZeroCohomology_cycles_factor (T : Scheme.{u})
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)

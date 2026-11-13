@@ -181,8 +181,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 400000 in
 -- Tensor and over-site equivalence comparisons require additional elaboration heartbeats.
 /-- The restricted finite-free lift is exact in all sufficiently low degrees, and
-its outgoing kernels in those degrees are finite locally free.
-Source: Stacks Project, Tag 08EG, first two paragraphs of the proof of Lemma 36.13.6. -/
+its outgoing kernels in those degrees are finite locally free (Stacks, Tag 08EG). -/
 theorem affine_lift_eventual_free_kernels
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

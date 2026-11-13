@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 set_option linter.unusedVariables false in
 -- Elaborate the dependent raw-resolution and presentation families together.
 /-- Construct coherent first-page comparisons while retaining the supplied bicomplexes.
-Source: Stacks Project, Tags 015J and 015K, and the quotient-page construction of
-Tag 012K; step 2 of lem-weil-pbc-ce-supported-first-page-lifts. -/
+(Stacks, Tags 015J, 015K and 012K) -/
 theorem exists_etaleCE_coherent_prescribed_resolutions
     (I : ∀ (X : Scheme.{u})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

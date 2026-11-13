@@ -69,9 +69,7 @@ private theorem presentation_of_iso
 set_option backward.isDefEq.respectTransparency true in
 /-- The prescribed raw diagram and its cocone admit a geometric complex presentation.
 This asserts only the input data for continuity, with no colimit assertion on B.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit, reduction to affine U),
-Tag 03Q8 (restricted cohomology), and Tag 0EZM (lemma-colimit-variant-complexes,
-canonical pullback/coefficient maps). -/
+(Stacks, Tags 09Z1, 03Q8 and 0EZM). -/
 theorem abelianRawCocone_complex_presentation {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

@@ -23,25 +23,9 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- Twisting and ampleness consequences.
 
-Source: Stacks Project, Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5).
-Proof in words: first apply `chow_relative_ample_geometric` to obtain both
-closed immersions. Identify both displayed modules by functoriality of tensor
-pullback, since the two composites to the integral projective model agree
-under `hj`; this gives the displayed `Nonempty` isomorphism.  The standard
-chart trivializations of the integral Proj twist pull back along `j`, proving
-invertibility of the resulting module.  After restricting to an affine open
-of `S` (respectively `Z`), base-change the closed immersion and apply the
-affine-base theorem `projective_closedImmersion_ample_invertible` to obtain
-invertibility and ampleness of the restriction. More explicitly, identify the
-affine open with the spectrum of its section ring, transport the base-changed
-immersion to that spectrum, and identify its twist with the restriction using
-`ProjectiveSpace.liftBaseChange_toProjInt` and composite tensor pullback.
-The standard-chart trivializations give invertibility before restriction; their
-restrictions also give the witnesses `hV` and `hW`. The proof of ampleness is
-independent of these witnesses by proof irrelevance. Transporting these properties
-across the pullback
-isomorphism gives both quantified affine-open clauses.
- -/
+The two twists by `O(1)` pulled back along `j` and along the base-changed immersion are
+isomorphic, the first is invertible, and its restrictions to the preimages of affine opens
+of `S` and of `Z` are invertible and ample (Stacks, Tag 02O5). -/
 theorem chow_relative_ample_twist (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

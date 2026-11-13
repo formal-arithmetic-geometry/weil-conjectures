@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 /-! # Affine sections of the intrinsic comparison of an injective
 
 Source: Stacks Project, Tags 099U and 099V, affine vanishing in the proof of
-comparison; blueprint sk-lem-pe-injective-acyclicity, first two paragraphs.
+comparison.
 -/
 
 @[expose] public section
@@ -240,8 +240,7 @@ private theorem model_affine_basis (X : Scheme.{u})
     exact t.down.1.prop
 
 /-- Positive derived sections of the comparison pullback vanish over affine etale objects.
-Source: Stacks Project, Tag 099U and Tag 099V, first proof paragraph; blueprint
-sk-lem-pe-injective-acyclicity, affine restriction and Cech computation. -/
+(Stacks, Tags 099U and 099V). -/
 theorem coefficientComparison_affineSections_vanishing (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

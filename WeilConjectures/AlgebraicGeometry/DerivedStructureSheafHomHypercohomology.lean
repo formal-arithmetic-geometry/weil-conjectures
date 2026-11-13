@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedStructureSheafGlobalSectionsHom
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 
 /-! # Hom from the derived structure sheaf
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph.
+
+## References
+
+* Stacks Project, Tag 09M1
 -/
 
 @[expose] public section
@@ -28,9 +30,8 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 400000 in
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
-/-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections.
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph. -/
+/-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections
+(Stacks, Tag 09M1). -/
 theorem derivedStructureSheaf_hom_hypercohomology (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := HasDerivedCategory.standard

@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Two-open gluing of continuity
 
-Source: Stacks Project, Tags 09YQ and 0A50 (lemma-mayer-vietoris).
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section
@@ -25,10 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Continuity glues across a union of two quasi-compact opens.
-
-Source: Stacks Project, Tags 09YQ and 0A50 (lemma-mayer-vietoris);
-step 2 of lem-weil-pbc-etale-limit-cohomology-qcqs-gluing. -/
+/-- Continuity glues across a union of two quasi-compact opens
+(Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_cohomology_binary_gluing
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

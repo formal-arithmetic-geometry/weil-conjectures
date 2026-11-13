@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Unit and counit of the affine algebra derived adjunction
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -32,7 +34,7 @@ namespace AlgebraicGeometry
 
 /-- The ambient derived adjunction has invertible unit and counit at objects with
 quasi-coherent cohomology; it need not be an equivalence on the entire derived categories.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof. -/
+(Stacks, Tag 0AVW). -/
 theorem affine_algebra_derived_adjunction_isos
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

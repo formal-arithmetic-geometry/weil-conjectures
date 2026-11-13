@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.GeometricFieldProEtaleEvaluation
 # Scalar functions and geometric evaluation for bounded condensed coefficients
 
 This coefficient interface is independent of any module or finite presentation.
-Source: RefactorInstruction.tex, Section 4, coefficient realization and geometric evaluation.
 -/
 
 @[expose] public section
@@ -35,14 +34,12 @@ section CoefficientUniverse
 open Opposite CategoryTheory.MonObj CategoryTheory.MonoidalCategory
 
 variable (E : Type) [NormedField E]
-/-- Lift a coefficient field into the scheme universe without changing its topology.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- Lift a coefficient field into the scheme universe without changing its topology. -/
 @[instance_reducible]
 noncomputable def liftNormedField : NormedField (ULift.{u} E) :=
   NormedField.induced _ E ULift.ringEquiv.toRingHom ULift.down_injective
 
-/-- The lifted field retains its normed scalar algebra.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The lifted field retains its normed scalar algebra. -/
 @[instance_reducible]
 noncomputable def liftNormedAlgebra (K : Type) [NormedField K] [NormedAlgebra K E] :
     letI := liftNormedField.{u} E
@@ -50,24 +47,21 @@ noncomputable def liftNormedAlgebra (K : Type) [NormedField K] [NormedAlgebra K 
   letI := liftNormedField.{u} E
   exact { norm_smul_le := fun c x ↦ norm_smul_le c x.down }
 
-/-- The down map of the lifted coefficient field is continuous.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The down map of the lifted coefficient field is continuous. -/
 lemma liftContinuousDown :
     letI := liftNormedField.{u} E
     Continuous (ULift.down : ULift.{u} E → E) := by
   let := liftNormedField.{u} E
   exact continuous_induced_dom
 
-/-- The up map of the lifted coefficient field is continuous.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The up map of the lifted coefficient field is continuous. -/
 lemma liftContinuousUp :
     letI := liftNormedField.{u} E
     Continuous (ULift.up : E → ULift.{u} E) := by
   let := liftNormedField.{u} E
   exact continuous_induced_rng.mpr continuous_id
 
-/-- Continuous condensed coefficients are invariant under the explicit universe lift.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- Continuous condensed coefficients are invariant under the explicit universe lift. -/
 noncomputable def liftCondensedRingIso :
     letI := liftNormedField.{u} E
     Profinite.continuousMapRingSheaf.{u} E ≅
@@ -99,8 +93,7 @@ noncomputable def liftCondensedRingIso :
   · ext S f
     rfl
 
-/-- Continuous scheme coefficients are invariant under the explicit universe lift.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- Continuous scheme coefficients are invariant under the explicit universe lift. -/
 noncomputable def liftSchemeRingIso (X : AlgebraicGeometry.Scheme.{u}) :
     letI := liftNormedField.{u} E
     AlgebraicGeometry.ProEtale.continuousMapRingSheaf X E ≅
@@ -132,8 +125,7 @@ noncomputable def liftSchemeRingIso (X : AlgebraicGeometry.Scheme.{u}) :
   · ext S f
     rfl
 
-/-- The canonical finite-extension realization, without a noetherian assumption.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The canonical finite-extension realization, without a noetherian assumption. -/
 @[irreducible] noncomputable def finiteFieldComparisonIso (ℓ : ℕ) [Fact ℓ.Prime]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
     Mon.mk (condensedRingObj (Profinite.continuousMapRingObj E) X) ≅
@@ -164,8 +156,7 @@ Source: RefactorInstruction, Section 4, finite-coefficient comparison and its fi
   let d := Mon.mkIso' L' ≪≫ e ≪≫ (Mon.mkIso' M).symm
   exact d
 
-/-- The finite-extension realization is normalized on profinite test functions.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The finite-extension realization is normalized on profinite test functions. -/
 lemma finiteFieldComparison_test (ℓ : ℕ) [Fact ℓ.Prime]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
     ∀ (S : Profinite.{u}) (f : C(S, E)),
@@ -224,8 +215,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [MonObj c.pt] [∀ j, MonObj (F.obj j)]
   [PreservesColimit₂ F F (curriedTensor C)]
 include hc in
-/-- A sifted-colimit map is multiplicative when each cocone composite is.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- A sifted-colimit map is multiplicative when each cocone composite is. -/
 lemma isMonHom_of_colimit {R : C} [MonObj R] (g : c.pt ⟶ R)
     (hι : ∀ j, IsMonHom (show F.obj j ⟶ c.pt from c.ι.app j)) (hg : ∀ j, IsMonHom (c.ι.app j ≫ g)) :
     IsMonHom g := by
@@ -247,8 +237,7 @@ lemma isMonHom_of_colimit {R : C} [MonObj R] (g : c.pt ⟶ R)
 
 end Colimit
 
-/-- The canonical realizations commute with inclusions of finite extensions.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The canonical realizations commute with inclusions of finite extensions. -/
 @[irreducible] noncomputable def fieldDiagramIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     Profinite.padicSubfieldRingObjFunctor.{u} ℓ ⋙ upperStarFromPoint X ≅
       padicSubfieldSheafFunctor X ℓ ⋙
@@ -287,8 +276,7 @@ Source: RefactorInstruction, Section 4, finite-coefficient comparison and its fi
     exact congrArg (fun z ↦ IntermediateField.inclusion (leOfHom a) (z.down x))
       (he E S.unop f).symm
 
-/-- Each finite-extension comparison preserves the ring operations.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- Each finite-extension comparison preserves the ring operations. -/
 lemma fieldDiagramIso_isMonHom (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     IsMonHom (show condensedRingObj (Profinite.continuousMapRingObj E) X ⟶
@@ -300,8 +288,7 @@ lemma fieldDiagramIso_isMonHom (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
   infer_instance
 
 noncomputable section
-/-- The bounded condensed coefficient ring realizes as the bounded-function sheaf.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
+/-- The bounded condensed coefficient ring realizes as the bounded-function sheaf. -/
 @[irreducible] noncomputable def globalCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) :
     Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) ≅
@@ -355,12 +342,10 @@ namespace CondensedQbarScalarConstruction
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
 
-/-- The abelian presheaf underlying the bounded-function ring presheaf.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- The abelian presheaf underlying the bounded-function ring presheaf. -/
 noncomputable abbrev boundedP := padicAlgClRingPresheaf Y ℓ ⋙ forget₂ RingCat Ab
 
-/-- Precomposition preserves the finite-subextension bound.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- Precomposition preserves the finite-subextension bound. -/
 noncomputable def boundedComp {T T' : Type u} [TopologicalSpace T] [TopologicalSpace T']
     (g : C(T', T)) : PadicAlgCl.finiteIntermediateFieldValued ℓ T →+*
       PadicAlgCl.finiteIntermediateFieldValued ℓ T' :=
@@ -373,8 +358,7 @@ noncomputable def boundedComp {T T' : Type u} [TopologicalSpace T] [TopologicalS
 
 /-- Bounded continuous functions descend uniquely to the actual component quotient.
 The quotient is surjective, so the same finite extension bounds the descended function.
-This includes the empty space.
-Source: RefactorInstruction, Section 4, coefficient realization on the component quotient. -/
+This includes the empty space. -/
 noncomputable def boundedComponentsIso (ℓ : ℕ) [Fact ℓ.Prime]
     (T : Type u) [TopologicalSpace T] :
     PadicAlgCl.finiteIntermediateFieldValued ℓ (ConnectedComponents T) ≃+*
@@ -401,15 +385,13 @@ noncomputable def boundedComponentsIso (ℓ : ℕ) [Fact ℓ.Prime]
     ext x
     exact Continuous.connectedComponentsLift_apply_coe a.1.continuous x
 
-/-- Restriction of a bounded function to a small pro-etale object.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- Restriction of a bounded function to a small pro-etale object. -/
 noncomputable def restrictBounded (U : Y.ProEt) :
     PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
       PadicAlgCl.finiteIntermediateFieldValued ℓ U.left :=
   boundedComp ℓ (show C(U.left, Y) from U.hom.base.hom)
 
-/-- Multiplication by a restricted bounded function on each presheaf section.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- Multiplication by a restricted bounded function on each presheaf section. -/
 noncomputable def boundedMul (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
     boundedP ℓ Y ⟶ boundedP ℓ Y where
   app U := AddCommGrpCat.ofHom
@@ -430,8 +412,7 @@ noncomputable def boundedMul (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y
     congr 1
     exact congrArg a.1 (by rw [← MorphismProperty.Over.w g.unop]; rfl)
 
-/-- Multiplication by a bounded function is internally linear.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- Multiplication by a bounded function is internally linear. -/
 lemma boundedMul_linear (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
     (MonObj.mul : boundedP ℓ Y ⊗ boundedP ℓ Y ⟶ _) ≫ boundedMul ℓ Y a =
       boundedP ℓ Y ◁ boundedMul ℓ Y a ≫ MonObj.mul := by
@@ -443,8 +424,7 @@ lemma boundedMul_linear (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
   change ULift.up ((s.down * t.down) * _) = ULift.up (s.down * (t.down * _))
   rw [mul_assoc]
 
-/-- The explicit ring action of bounded functions on the regular presheaf module.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- The explicit ring action of bounded functions on the regular presheaf module. -/
 noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
     End (Mod.regular (boundedP ℓ Y)) where
   toFun a := .of (Mod.homMk (boundedMul ℓ Y a) (boundedMul_linear ℓ Y a))
@@ -481,8 +461,7 @@ noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ 
 
 /-- Every regular-module endomorphism of the bounded-function presheaf is multiplication
 by a bounded function. Evaluate at one on the terminal object; naturality transports
-this section and module linearity determines the endomorphism at every object.
-Source: RefactorInstruction, Section 4, regular-module scalar realization. -/
+this section and module linearity determines the endomorphism at every object. -/
 lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
     Function.Surjective (presheafScalar ℓ Y) := by
   intro f
@@ -506,16 +485,14 @@ lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
   exact h.symm
 
 
-/-- Monoidal sheafification carries the regular module to the regular module.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- Monoidal sheafification carries the regular module to the regular module. -/
 noncomputable def sheafificationRegularIso :
     ((presheafToSheaf (Scheme.ProEt.topology Y) Ab.{u + 1}).mapMod (boundedP ℓ Y)).obj
       (Mod.regular (boundedP ℓ Y)) ≅ Mod.regular (padicAlgClSheaf Y ℓ) :=
   Mod.isoMk (Iso.refl _) (by
     simp only [Iso.refl_hom, Category.comp_id, whiskerLeft_id, Category.id_comp])
 
-/-- The bounded-function action after monoidal abelian sheafification.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- The bounded-function action after monoidal abelian sheafification. -/
 noncomputable def sheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
     End (Mod.regular (padicAlgClSheaf Y ℓ)) where
   toFun a := .of ((sheafificationRegularIso ℓ Y).inv ≫
@@ -545,8 +522,7 @@ noncomputable def sheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y �
     exact Functor.map_add _
 
 /-- Transport the explicitly constructed bounded-function action through a ring-sheaf
-realization. Every operation is constructed from multiplication and functoriality.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+realization. Every operation is constructed from multiplication and functoriality. -/
 @[irreducible] noncomputable def transportedScalar
     (e : Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) ≅
       Mon.mk (padicAlgClSheaf Y ℓ)) :
@@ -580,8 +556,7 @@ end CondensedQbarScalarConstruction
 
 namespace CondensedQbarCoefficientRealization
 
-/-- The global bounded realization agrees with every finite-extension inclusion.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+/-- The global bounded realization agrees with every finite-extension inclusion. -/
 lemma globalCoefficientIso_fac (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (upperStarFromPoint X).map (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ≫
@@ -599,8 +574,7 @@ lemma globalCoefficientIso_fac (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
         (padicAlgClSheafCocone X ℓ)).symm (isColimitPadicAlgClSheafCocone X ℓ)) E
 /-- The bounded coefficient realization is normalized on every profinite test function.
 Choose the finite extension bounding the function and use the finite comparison's
-normalization; the sheafification unit-counit identity identifies the final inclusion.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+normalization; the sheafification unit-counit identity identifies the final inclusion. -/
 lemma globalCoefficientIso_test (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (S : Profinite.{u}) (a : PadicAlgCl.finiteIntermediateFieldValued ℓ S) :
     (((pointUpperStarLowerStarAdjunction.comp
@@ -654,16 +628,14 @@ lemma globalCoefficientIso_test (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
 end CondensedQbarCoefficientRealization
 
 /-- The canonical scalar action is obtained from the explicit bounded-function
-multiplication and the filtered-colimit coefficient realization.
-Source: RefactorInstruction, Section 4, coefficient realization. -/
+multiplication and the filtered-colimit coefficient realization. -/
 noncomputable abbrev condensedQbarScalar (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
     PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
       End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y)) :=
   CondensedQbarScalarConstruction.transportedScalar ℓ Y
     (CondensedQbarCoefficientRealization.globalCoefficientIso ℓ Y)
 
-/-- The regular module is preserved by normalized condensed-coefficient pullback.
-Source: the coefficient comparison in RefactorInstruction, Section 4. -/
+/-- The regular module is preserved by normalized condensed-coefficient pullback. -/
 @[irreducible] noncomputable def condensedQbarRegularPullbackIso
     (ℓ : ℕ) [Fact ℓ.Prime] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj
@@ -676,9 +648,7 @@ Source: the coefficient comparison in RefactorInstruction, Section 4. -/
 namespace CondensedQbarGeometricEvaluation
 open scoped CategoryTheory.Obj
 variable (K : Type u) [Field K] [IsAlgClosed K]
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 lemma cover_id (S : Sieve (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))
     (hS : S ∈ Scheme.ProEt.topology (Spec (.of K)) _) : S (𝟙 _) := by
   obtain ⟨U, f, s, hf, hs⟩ :=
@@ -686,9 +656,7 @@ lemma cover_id (S : Sieve (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))
       simpa only [Sieve.generate_sieve] using hS)
   simpa only [hs] using S.downward_closed hf s
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 lemma unit_iso (P : (Spec (.of K)).ProEtᵒᵖ ⥤ Ab.{u + 1}) :
     IsIso ((toSheafify (Scheme.ProEt.topology (Spec (.of K))) P).app
       (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))) := by
@@ -706,16 +674,12 @@ lemma unit_iso (P : (Spec (.of K)).ProEtᵒᵖ ⥤ Ab.{u + 1}) :
     refine ⟨a, ?_⟩
     simpa only [op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] using ha
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable instance evaluationMonoidal (U : (Spec (.of K)).ProEtᵒᵖ) :
     ((evaluation _ Ab.{u + 1}).obj U).Monoidal :=
   Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def boundedEval (ℓ : ℕ) [Fact ℓ.Prime] :
     PadicAlgCl.finiteIntermediateFieldValued ℓ (Spec (.of K)) →+* PadicAlgCl ℓ where
   toFun a := a.1 default
@@ -725,9 +689,7 @@ noncomputable def boundedEval (ℓ : ℕ) [Fact ℓ.Prime] :
   map_add' _ _ := rfl
 
 omit [IsAlgClosed K] in
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 lemma boundedEval_bijective (ℓ : ℕ) [Fact ℓ.Prime] : Function.Bijective (boundedEval K ℓ) := by
   constructor
   · intro a b h
@@ -742,9 +704,7 @@ lemma boundedEval_bijective (ℓ : ℕ) [Fact ℓ.Prime] : Function.Bijective (b
       ⟨IntermediateField.adjoin ℚ_[ℓ] {a}, IntermediateField.adjoin.finiteDimensional ha,
         fun _ ↦ IntermediateField.subset_adjoin ℚ_[ℓ] _ (Set.mem_singleton a)⟩⟩, rfl⟩
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def fieldUnitIso (ℓ : ℕ) [Fact ℓ.Prime] :
     let J := Scheme.ProEt.topology (Spec (.of K))
     let P := padicAlgClRingPresheaf (Spec (.of K)) ℓ ⋙ forget₂ RingCat Ab
@@ -766,9 +726,7 @@ noncomputable def fieldUnitIso (ℓ : ℕ) [Fact ℓ.Prime] :
   have : IsIso m := isIso_of_reflects_iso m (Mon.forget Ab.{u + 1})
   exact asIso m
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def boundedPointIso (ℓ : ℕ) [Fact ℓ.Prime] :
     let P := padicAlgClRingPresheaf (Spec (.of K)) ℓ ⋙ forget₂ RingCat Ab
     let E := (evaluation (Spec (.of K)).ProEtᵒᵖ Ab.{u + 1}).obj
@@ -798,9 +756,7 @@ noncomputable def boundedPointIso (ℓ : ℕ) [Fact ℓ.Prime] :
       exact e.map_mul a b
   exact Mon.mkIso' (asIso f)
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def fieldCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime] :
     let J := Scheme.ProEt.topology (Spec (.of K))
     let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))
@@ -817,9 +773,7 @@ namespace Ordinary
 open MonObj TensorProduct
 variable (R : Type u) [Ring R] (M : Mod Ab.{u} (AddCommGrpCat.of R))
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable instance internalModule : Module R M.X where
   smul a m := (γ[AddCommGrpCat.of R,M.X]).hom (a ⊗ₜ[ℤ] m)
   one_smul m := by
@@ -851,9 +805,7 @@ noncomputable instance internalModule : Module R M.X where
     simp only [TensorProduct.add_tmul, map_add]
     rfl
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def internalToModule : Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleCat.{u} R where
   obj M := ModuleCat.of R M.X
   map {M N} f := ModuleCat.ofHom
@@ -870,9 +822,7 @@ noncomputable def internalToModule : Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleC
   map_id M := rfl
   map_comp f g := rfl
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def ordinaryAct (N : ModuleCat.{u} R) :
     AddCommGrpCat.of R ⊗ AddCommGrpCat.of N ⟶ AddCommGrpCat.of N :=
   AddCommGrpCat.ofHom (TensorProduct.lift (LinearMap.mk₂ ℤ (fun (a : R) (m : N) ↦ a • m)
@@ -881,9 +831,7 @@ noncomputable def ordinaryAct (N : ModuleCat.{u} R) :
     (fun a m n ↦ smul_add a m n)
     (fun c a m ↦ smul_comm a c m))).toAddMonoidHom
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def moduleToInternalObj (N : ModuleCat.{u} R) :
     Mod Ab.{u} (AddCommGrpCat.of R) := by
   letI : ModObj (AddCommGrpCat.of R) (AddCommGrpCat.of N) :=
@@ -895,62 +843,44 @@ noncomputable def moduleToInternalObj (N : ModuleCat.{u} R) :
         exact mul_smul a b m))
   exact ⟨AddCommGrpCat.of N⟩
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def moduleToInternalHom {M N : Mod Ab.{u} (AddCommGrpCat.of R)}
     (f : (internalToModule R).obj M ⟶ (internalToModule R).obj N) : M ⟶ N :=
   Mod.homMk (AddCommGrpCat.ofHom f.hom.toAddMonoidHom)
     (AddCommGrpCat.hom_ext_toIntLinearMap (TensorProduct.ext' fun a m ↦ by
       exact f.hom.map_smul a m))
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def internalToModuleFullyFaithful : (internalToModule R).FullyFaithful where
   preimage f := moduleToInternalHom R f
   map_preimage f := by ext m; rfl
   preimage_map f := Mod.hom_ext _ _ rfl
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance : (internalToModule R).Full := (internalToModuleFullyFaithful R).full
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance : (internalToModule R).Faithful := (internalToModuleFullyFaithful R).faithful
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def realizationIso (N : ModuleCat.{u} R) :
     (internalToModule R).obj (moduleToInternalObj R N) ≅ N :=
   ModuleCat.isoMk (Iso.refl _) (fun _ ↦ rfl)
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance : (internalToModule R).EssSurj where
   mem_essImage N := ⟨moduleToInternalObj R N, ⟨realizationIso R N⟩⟩
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance : (internalToModule R).IsEquivalence where
 
 end Ordinary
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def ordinary (R : Type u) [Ring R] :
     Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleCat.{u} R :=
   Ordinary.internalToModule R
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def fieldFiber (ℓ : ℕ) [Fact ℓ.Prime] :
     Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))) ⥤
@@ -966,30 +896,22 @@ noncomputable def fieldFiber (ℓ : ℕ) [Fact ℓ.Prime] :
         ModuleCat.restrictScalars.{u + 1} (ULift.ringEquiv.symm.toRingHom :
           PadicAlgCl ℓ →+* ULift.{u + 1} (PadicAlgCl ℓ))
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable instance ordinary_equivalence (R : Type u) [Ring R] :
     (ordinary R).IsEquivalence := by
   unfold ordinary
   infer_instance
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance ordinary_additive (R : Type u) [Ring R] : (ordinary R).Additive where
   map_add := by intros; rfl
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance fieldFiber_additive (ℓ : ℕ) [Fact ℓ.Prime] : (fieldFiber K ℓ).Additive := by
   unfold fieldFiber
   infer_instance
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance comap_colimits {A B : Ab.{u}} [MonObj A] [MonObj B]
     (f : A ⟶ B) [IsMonHom f] : PreservesFiniteColimits (Mod.comap (D := Ab.{u}) f) where
   preservesFiniteColimits I _ _ := by
@@ -998,9 +920,7 @@ instance comap_colimits {A B : Ab.{u}} [MonObj A] [MonObj B]
     exact preservesColimitsOfShape_of_reflects_of_preserves
       (Mod.comap (D := Ab.{u}) f) (Mod.forget A)
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance fieldFiber_colimits (ℓ : ℕ) [Fact ℓ.Prime] :
     PreservesFiniteColimits (fieldFiber K ℓ) := by
   let J := Scheme.ProEt.topology (Spec (.of K))
@@ -1029,9 +949,7 @@ instance fieldFiber_colimits (ℓ : ℕ) [Fact ℓ.Prime] :
   unfold fieldFiber
   infer_instance
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def ordinaryRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
     (ModuleCat.restrictScalars.{u + 1} (ULift.ringEquiv.symm.toRingHom :
       PadicAlgCl ℓ →+* ULift.{u + 1} (PadicAlgCl ℓ))).obj
@@ -1045,9 +963,7 @@ noncomputable def ordinaryRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def fieldRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
     (fieldFiber K ℓ).obj (Mod.regular
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K)))) ≃ₗ[PadicAlgCl ℓ]
@@ -1069,17 +985,13 @@ noncomputable def fieldRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
   exact ((D.mapIso ((V.mapIso e₁) ≪≫ e₂)).toLinearEquiv).trans
     (ordinaryRegularCoordinates ℓ)
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 noncomputable def geometricPoint (Y : Scheme.{u}) (x : Y) :
     Spec (.of (AlgebraicClosure (Y.residueField x))) ⟶ Y :=
   Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField x)
     (AlgebraicClosure (Y.residueField x)))) ≫ Y.fromSpecResidueField x
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 @[irreducible] noncomputable def fiber (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y) :
     Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) ⥤
@@ -1087,21 +999,15 @@ construction uses the tensor-action proof of internalModuleAb_equivalence. -/
   CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (geometricPoint Y x) ⋙
     fieldFiber (AlgebraicClosure (Y.residueField x)) ℓ
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance fiber_additive (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y) :
     (fiber ℓ Y x).Additive := by unfold fiber; infer_instance
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 instance fiber_colimits (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y) :
     PreservesFiniteColimits (fiber ℓ Y x) := by unfold fiber; infer_instance
 
-/-- Explicit geometric-field evaluation and its module-theoretic properties.
-Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence. -/
+/-- Explicit geometric-field evaluation and its module-theoretic properties. -/
 @[irreducible] noncomputable def fiberRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) (x : Y) :
     (fiber ℓ Y x).obj (Mod.regular
@@ -1115,15 +1021,13 @@ end CondensedQbarGeometricEvaluation
 
 /-- The value of a regular-module endomorphism in chosen linear coordinates.
 Keeping this operation folded avoids reducing inverse-image module constructions
-while comparing the same coordinate data.
-Source: RefactorInstruction, Section 4, geometric scalar evaluation. -/
+while comparing the same coordinate data. -/
 noncomputable def regularScalarValue
     {R : Type w} [CommRing R] {C : Type v} [Category.{z} C]
     (F : C ⥤ ModuleCat.{u} R) {A : C} (c : F.obj A ≃ₗ[R] R) (f : A ⟶ A) : R :=
   c (F.map f (c.symm 1))
 
-/-- Computation rule for the folded regular scalar value.
-Source: RefactorInstruction, Section 4, geometric scalar evaluation. -/
+/-- Computation rule for the folded regular scalar value. -/
 lemma regularScalarValue_def
     {R : Type w} [CommRing R] {C : Type v} [Category.{z} C]
     (F : C ⥤ ModuleCat.{u} R) {A : C} (c : F.obj A ≃ₗ[R] R) (f : A ⟶ A) :

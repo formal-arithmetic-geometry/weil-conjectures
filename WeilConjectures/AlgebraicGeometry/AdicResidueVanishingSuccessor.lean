@@ -13,8 +13,7 @@ import Mathlib.Algebra.Homology.HomologySequence
 
 /-! # Successive quotient vanishing
 
-Source: Stacks Project, More on Algebra, Tag 0G1T, derived vanishing modulo an ideal;
-proetale.tex, Tag 09C6, finite reduction argument.
+Source: Stacks Project, Tags 0G1T and 09C6.
 -/
 
 @[expose] public noncomputable section
@@ -129,8 +128,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- Vanishing of the residue and one finite reduction implies vanishing of the next.
 No completeness or boundedness is required.
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, lemma-derived-vanishing-mod-I;
-proetale.tex, Tag 09C6, finite reduction argument. -/
+(Stacks, Tags 0G1T and 09C6). -/
 theorem adicResidue_vanishing_successor
     (X : AlgebraicGeometry.Scheme.{u}) {A : Type (max v (u + 1))}
     [CommRing A] [IsNoetherianRing A] (J : Ideal A)

@@ -31,16 +31,10 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Let `A` be a
-Noetherian `I`-adically complete ring, `S = Spec A`, `Sₙ = Spec (A/I^(n+1))`
-(with `sn n : Sₙ ⟶ S` and transition maps `Sₙ ⟶ Sₙ₊₁` induced by the quotient maps),
-and `f : X ⟶ S` separated and of finite type (`IsSeparated`, `LocallyOfFiniteType`,
-`QuasiCompact`). Put `Xₙ = X ×_S Sₙ = pullback f (sn n)`, with the induced closed
-immersions `ιn n : Xₙ ⟶ Xₙ₊₁` (`pullback.map`). Given finite `fnY n : Yₙ ⟶ Xₙ` and
-`gn n : Yₙ ⟶ Yₙ₊₁` making every square cartesian, with `Yₙ₀ → S₀` proper, there is a
-finite `g : Y ⟶ X` with `Y → S` proper, and isomorphisms `Y ×_X Xₙ ≅ Yₙ` over `Xₙ`
-compatible with the maps `Yₙ ⟶ Yₙ₊₁` (through the induced map
-`Y ×_X Xₙ ⟶ Y ×_X Xₙ₊₁`, characterized by its two projections). -/
+/-- Let `A` be a Noetherian `I`-adically complete ring, `S = Spec A`, `Sₙ = Spec (A/I^(n+1))`,
+and `f : X ⟶ S` separated and of finite type, with `Xₙ = X ×_S Sₙ`. A compatible system of
+finite schemes `Yₙ` over `Xₙ` with cartesian transition squares and `Y₀` proper over `S₀`
+is induced by a finite `Y ⟶ X` with `Y` proper over `S` (Stacks, Tag 09ZT). -/
 theorem algebraize_finite_over_proper
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

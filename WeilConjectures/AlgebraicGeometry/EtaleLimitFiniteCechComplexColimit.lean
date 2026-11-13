@@ -30,8 +30,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 
 /-- A finite qcqs étale covering has a Čech complex computed by stage Čech complexes.
-Source: Stacks Project, proof of Tag 09YP, the displayed equality of Čech complexes;
-Tag 09YN supplies degree-zero continuity, and 09YQ supplies the scheme-site realization. -/
+(Stacks, Tags 09YP, 09YN and 09YQ) -/
 theorem etale_limit_finite_cech_complex_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

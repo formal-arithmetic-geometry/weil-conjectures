@@ -34,11 +34,8 @@ namespace AlgebraicGeometry
 
 /-- On `Y = Spec A`, termwise associated sheaf induces the equivalence
 `D(A) ≌ D_QCoh(𝒪_Y)`. Its inverse is derived global sections, with the
-`Γ(Y, 𝒪_Y)`-module structure transported to `A` through `ΓSpecIso`. The composite
-with the full-subcategory inclusion is triangulated for a compatible shift structure,
-and it sends `A[k]` to `𝒪_Y[k]` for every integer `k`.
-
-Source: Stacks Project, Lemma 36.3.5, Tag 06Z0. -/
+`Γ(Y, 𝒪_Y)`-module structure transported to `A` through `ΓSpecIso`
+(Stacks, Tag 06Z0). -/
 theorem exists_affineQCohDerivedEquivalence (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 /-!
 # Étale hypercovers without finiteness or splitting
 
-Source: Stacks Project, Hypercoverings, Definition 01G5 and Lemma 01GI;
-matching schemes as in blueprint `def-weil-pbc-finite-split-hypercover`.
+Source: Stacks Project, Hypercoverings, Definition 01G5 and Lemma 01GI.
 -/
 
 @[expose] public section
@@ -24,13 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The all-degree hypercover condition, without splitting or finiteness requirements.
-The matching projections and their universal property use exactly the lower-simplex
-matching diagram of `FiniteSplitEtaleHypercover`. Tests range over all schemes over `X`.
-At degree zero the diagram is empty and its limit is `X`; at degree one it is the
-product of the two vertices. Morphisms in `X.Etale` are automatically étale, so the
-covering condition is precisely surjectivity of the underlying matching arrow.
-Source: Stacks Project, Hypercoverings, Definition 01G5, and the matching-scheme clause
-of blueprint `def-weil-pbc-finite-split-hypercover`. -/
+The matching object is the limit of the lower-simplex matching diagram, and the covering
+condition is surjectivity of the matching arrow (Stacks, Tag 01G5). -/
 def IsEtaleHypercover {X : Scheme.{u}} (U : SimplicialObject X.Etale) : Prop :=
   ∀ n : ℕ, ∃ (M : X.Etale)
     (π : ∀ (Δ : SimplexCategory), Δ.len < n →

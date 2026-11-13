@@ -36,11 +36,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived sections of the part strictly below `a` vanish in degrees at least `a`.
 This is a statement about the lower tail only, without K-injectivity or a raw
-cycle-class map.
-
-Source: Stacks Project, Tag 0BKT, lemma-cohomology-over-U-trivial, applied to
-the strictly lower tail; its proof uses Tag 0D64 and the bounded-below
-hypercohomology spectral sequence. Tag 071B gives the compatible resolution model. -/
+cycle-class map (Stacks, Tags 0BKT, 0D64 and 071B). -/
 theorem affineBasisDerivedSections_lowerTail_isZero
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

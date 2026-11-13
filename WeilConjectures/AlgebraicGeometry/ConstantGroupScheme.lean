@@ -12,8 +12,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Constant group schemes and their points
 
-Source: Stacks Project, Groupoids, Example 39.5.6 (Tag 03YW), and Etale Cohomology,
-Remark 59.23.2 (Tag 03P5).
+## References
+
+* Stacks Project, Tags 03YW, 03P5
 -/
 
 @[expose] public section
@@ -65,13 +66,8 @@ noncomputable def constantGroupSchemeSquareProjection : constantGroupSchemeSquar
   pullback.fst (constantGroupSchemeProjection T E) (constantGroupSchemeProjection T E) ≫
     constantGroupSchemeProjection T E
 
-/-- (blueprint: lem-weil-pbc-constant-group-scheme-multiplication, the existence in (b) and
-`π ∘ m = ρ` in (c)) Existence of the componentwise multiplication morphism over `T`
-(Stacks, Tag 03YW). The coproduct components form a disjoint
-open cover. Pulling it back along both projections covers the fibre square by the pair components.
-On overlaps with different indices the domain is empty; on identical overlaps the formulas agree.
-Glue the component maps, then compare their composites with each cover map to prove the resulting
-morphism lies over `T`. Uniqueness and the remaining component claims belong to the pointer node. -/
+/-- Existence of the componentwise multiplication morphism over `T` on the fibre square of the
+constant group scheme (Stacks, Tag 03YW). -/
 theorem exists_constantGroupSchemeMultiplication :
     ∃ m : constantGroupSchemeSquare T E ⟶ constantGroupScheme T E,
       (∀ ij : E × E,

@@ -186,9 +186,7 @@ private theorem isIso_unit_constantSheaf_of_generic_residueFieldIso
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))
 
 /-- A constructible module sheaf over a Noetherian ring admits an integral pushforward map
-which is injective on every geometric stalk over a prescribed point.
-
-Source: Stacks Project, Tag 09Z6 (3), proof, Steps 1--5. -/
+which is injective on every geometric stalk over a prescribed point. (Stacks, Tag 09Z6 (3)) -/
 theorem exists_integral_lowerStar_stalk_injective_noetherian
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

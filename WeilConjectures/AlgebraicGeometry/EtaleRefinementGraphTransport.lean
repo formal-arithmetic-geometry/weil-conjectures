@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphPresentation
 
 /-! # The proper graph and its two neighborhood transports
 
-Source: Stacks Project, Tags 0F7C--0F7E, the two projection grids in
-`lem-pur-etale-graph-refinement-normalization`, steps 2--3.
+Source: Stacks Project, Tags 0F7C--0F7E.
 -/
 
 @[expose] public noncomputable section

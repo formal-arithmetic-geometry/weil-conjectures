@@ -60,7 +60,7 @@ private theorem exists_tensor_pairing {Y : Scheme.{u}} (M N Q : Y.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The two action maps exist with their section formulas.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB. -/
+(Stacks, Tag 01SB). -/
 theorem exists_changeOfRings_tensor_action_maps_actions (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

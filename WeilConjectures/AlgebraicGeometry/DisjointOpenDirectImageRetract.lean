@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 
 /-! # A disjoint open component gives a direct-image retract
 
-Source: `lem-weil-pbc-finite-module-generic-reflection`, proof step 2,
-the finite product of sections on disjoint pieces.
+Source: Stacks Project, Tag 0A5D.
 -/
 
 @[expose] public section
@@ -26,9 +25,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The direct image of a component of a finite disjoint open partition is a retract
 of the full direct image. No finite-morphism or local-constancy hypothesis is needed.
-
-Source: `lem-weil-pbc-finite-module-generic-reflection`, proof step 2;
-Stacks Project Tag 0A5D, the direct-factor argument refined for module coefficients. -/
+of the full direct image. No finite-morphism or local-constancy hypothesis is needed.
+(Stacks, Tag 0A5D) -/
 theorem nonempty_retract_lowerStar_of_disjoint_open_partition
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ) (W : Fin n → X.Opens) (hcover : (⨆ j, W j) = ⊤)

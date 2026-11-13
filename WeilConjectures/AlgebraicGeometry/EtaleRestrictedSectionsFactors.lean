@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical sections inclusion factors through the filtered step.
-Source: Stacks, Tag 015J, proof remark (3), column filtration. -/
+/-- The canonical sections inclusion factors through the filtered step
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSections_factors
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

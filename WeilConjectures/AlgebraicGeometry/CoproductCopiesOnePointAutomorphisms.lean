@@ -21,8 +21,7 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-/-- Permuting the summands gives every automorphism of copies of a one-point base.
-Source: blueprint lem-fd-as-cover, final split-cover example. -/
+/-- Permuting the summands gives every automorphism of copies of a one-point base. -/
 theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty X]
     (I : Type u) :
     Nonempty (Aut (Over.mk (Sigma.desc (fun _ : I ↦ 𝟙 X))) ≃* Equiv.Perm I) := by

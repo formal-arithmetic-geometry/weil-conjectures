@@ -25,8 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A supported prime of a surjective affine presentation gives a source stalk, compatibly
-with the affine base action. This statement has no Tor or perfectness hypothesis.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1). -/
+with the affine base action (Stacks, Tag 069C). -/
 theorem affinePolynomial_supportedLocalization_stalk
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.Opens) (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)

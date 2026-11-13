@@ -11,9 +11,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Conjugation of a Cartier coefficient Ext square
 
-Source: blueprint sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md,
-coefficient extension and transport by comparison isomorphisms.
-
 The statement concerns arbitrary sheaves and degree-two classes on the ordinary
 pro-etale site. Its transported classes and coefficient maps are expanded explicitly.
 -/
@@ -28,9 +25,7 @@ open CategoryTheory CategoryTheory.Abelian
 
 namespace AlgebraicGeometry.Etale
 
-/-- A coefficient Ext square remains commutative after conjugating its four objects.
-Source: blueprint sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md,
-coefficient extension and transport by comparison isomorphisms. -/
+/-- A coefficient Ext square remains commutative after conjugating its four objects. -/
 theorem cartier_ext_square_conjugation
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})

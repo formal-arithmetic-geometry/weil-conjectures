@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulLowDegrees
 
 /-! # The coefficient Koszul augmentation, before tensoring
 
-Source: Stacks Project, algebraization.tex, lemma-derived-completion-koszul (0A0E),
-and proetale.tex, lemma-naive-completion (099M).
+## References
+
+* Stacks Project, Tags 0A0E and 099M
 -/
 
 @[expose] public noncomputable section
@@ -114,10 +115,8 @@ attribute [local irreducible] completed homComplexFunctor
 set_option maxHeartbeats 600000 in
 -- Elaborating the explicit chain-map components traverses the finite tensor constructions.
 /-- The coefficient augmentation exists before tensoring with any complex.
-In particular neither K-flatness nor Noetherianity is needed for this construction.
-
-Source: Stacks Project, algebraization.tex, lemma-derived-completion-koszul (0A0E),
-and proetale.tex, lemma-naive-completion (099M). -/
+In particular neither K-flatness nor Noetherianity is needed for this construction
+(Stacks, Tags 0A0E and 099M). -/
 theorem adicResidue_koszul_coefficient_augmentation
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) ≤ J) :
     let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U

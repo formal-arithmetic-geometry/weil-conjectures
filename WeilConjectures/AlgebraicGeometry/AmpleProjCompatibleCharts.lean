@@ -26,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Local quotient morphisms on nonvanishing opens agree on overlaps. Their fraction
 identities are equations of sections on the ambient image of each local chart
-preimage. No covering hypothesis or global morphism is asserted here.
-Source: Stacks Project, Properties, Tag 01PZ, proof; Constructions, Tags 01N8 and 01NK. -/
+preimage (Stacks, Tags 01PZ, 01N8 and 01NK). -/
 theorem exists_sectionRing_compatible_quotient_charts
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (I : Type w) (d : I → ℕ) (s : ∀ i, sectionRingGrade L (d i))

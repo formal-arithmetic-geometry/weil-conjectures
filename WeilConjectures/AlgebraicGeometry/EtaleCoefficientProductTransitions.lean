@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The outgoing-arrow product transition, with components obtained by transposing
 projections along the inverse-image/direct-image adjunction. No witnesses are chosen.
-Source: Stacks Project, Tag 0EXZ, canonical component maps of ψ. -/
+(Stacks, Tag 0EXZ) -/
 noncomputable def etaleCoefficientProductTransition
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -38,7 +38,7 @@ noncomputable def etaleCoefficientProductTransition
             (Injective.under (F t.1)))
 
 /-- The canonical outgoing-arrow product transitions satisfy the system laws.
-Source: Stacks Project, Tag 0EXZ, canonical maps ψ in its proof. -/
+(Stacks, Tag 0EXZ) -/
 theorem etale_coefficient_product_transition_laws
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) :

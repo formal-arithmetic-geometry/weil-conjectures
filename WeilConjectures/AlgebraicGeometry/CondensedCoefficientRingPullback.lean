@@ -13,7 +13,9 @@ public import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 
 /-! # The cartesian section-ring coefficient map
 
-Source: Stacks Project, Tags 00YV and 03D2.
+## References
+
+* Stacks Project, Tags 00YV, 03D2
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +28,7 @@ attribute [local instance 2000] AlgebraicGeometry.ProEtale.sheafMonoidalCategory
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The actual coefficient map, reconstructed as commutative rings on the small sites.
-Source: Stacks Tag 00YV; the underlying additive map is eta_f. -/
+(Stacks Project, Tag 00YV) -/
 def condensedSmallRingMap
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -92,10 +94,8 @@ private theorem smallRingAdjunction_unit {X Y : Scheme.{u}} (f : Y ⟶ X)
   simp only [Iso.refl_hom, NatTrans.id_app]
   rfl
 
-/-- The ring-sheaf adjunct of the actual condensed coefficient map is invertible.
-
-Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2;
-ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding. -/
+/-- The ring-sheaf adjunct of the actual condensed coefficient map is invertible
+(Stacks, Tags 00YV, 03D2). -/
 theorem condensedSmallRingMap_pullback_isIso
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

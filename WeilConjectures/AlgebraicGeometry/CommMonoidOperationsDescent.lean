@@ -14,8 +14,7 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Descent of the two operations, without their laws
 
-Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
-Stacks Project, Descent, Tag 02W0.
+Stacks Project, Tag 02W0.
 -/
 
 @[expose] public section
@@ -81,9 +80,7 @@ private theorem descend_local_morphism
   exact ⟨Over.homMk k hw, hk⟩
 
 /-- The invariant multiplication and unit descend as morphisms. This assertion includes
-no associativity, unit law, or commutativity downstairs.
-Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
-Stacks Project, Descent, Tag 02W0. -/
+no associativity, unit law, or commutativity downstairs (Stacks, Tag 02W0). -/
 theorem exists_raw_monoid_operations_of_effective_projection
     {X Y : Scheme.{u}} {p : X ⟶ Y} [Flat p] [Surjective p] [QuasiCompact p]
     {V : Over X} [MonObj V] (D : Over.DescentDatum p V)

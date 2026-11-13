@@ -24,10 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- A fixed affine coordinate Tor bound holds at every source stalk in that affine open.
-Source: Stacks Project, Tag 0B67, `lemma-tor-amplitude-localization`,
-implication (1) to (2), applied to B[0];
-Tag 069C, proof of (1) implies (2). -/
+/-- A fixed affine coordinate Tor bound holds at every source stalk in that affine open
+(Stacks, Tags 0B67 and 069C). -/
 theorem affineSections_torBound_stalk
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.Opens) (hU : IsAffineOpen U)

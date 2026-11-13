@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphProductInterchange
 
 /-! # Proper ambient part of the product interchange grid
 
-Source: Stacks Project, Tag 0F7J, comparison of the proper projection grids A--F;
-the product-graph extension in lem-pur-etale-graph-product-row-pasting.
+Source: Stacks Project, Tag 0F7J.
 -/
 
 @[expose] public noncomputable section

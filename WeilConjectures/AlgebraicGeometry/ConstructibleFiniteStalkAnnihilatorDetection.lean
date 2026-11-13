@@ -19,9 +19,6 @@ import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 
 /-!
 # Finite geometric detection of scalar annihilation
-
-Source: normalization exact-sequence blueprint, finite-coefficient reduction, steps 1 and 3
-of `lem-weil-pbc-finite-coefficient-of-finite-stalks`.
 -/
 
 @[expose] public section
@@ -231,11 +228,7 @@ private theorem finite_range_stalk_annihilator {Λ : Type (u + 1)} [CommRing Λ]
   exact Finset.mem_biUnion.mpr ⟨i, Finset.mem_univ _, h⟩
 
 /-- Finitely many geometric stalks detect scalar annihilation of a constructible module sheaf.
-This does not require finite stalks or a finite coefficient ring.
-
-Source: normalization exact-sequence blueprint, finite-coefficient reduction in
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`; steps 1 and 3 of
-`lem-weil-pbc-finite-coefficient-of-finite-stalks`. -/
+This does not require finite stalks or a finite coefficient ring. -/
 theorem exists_finite_stalk_annihilator_detection
     (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

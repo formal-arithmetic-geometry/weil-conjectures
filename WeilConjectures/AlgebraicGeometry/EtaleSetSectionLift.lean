@@ -61,8 +61,8 @@ private theorem sectionComparison_naturality
   exact congrArg (fun z ↦ H.obj.map z.op) hr.symm
 
 
-/-- Source: Stacks Project, Étale Cohomology, Theorem Tag 09YQ, proof via Tags 0EYL,
-04HR, and 09YN, followed by finite affine-cover descent. -/
+/-- Sections of the limit sheaf lift to a stage sheaf after a finite affine cover
+(Stacks, Tags 09YQ, 0EYL, 04HR, 09YN). -/
 theorem etaleSetSectionLift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

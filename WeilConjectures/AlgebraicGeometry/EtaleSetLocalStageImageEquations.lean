@@ -29,11 +29,8 @@ local notation "η[" S "," T "]" e =>
 -- Expanding units and composition comparisons requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The image equations of a local family are preserved by every stage refinement.
-The cone need not be limiting; affineness, directedness and covering are unnecessary.
-
-Source: Stacks Project, Sites Tags 03CB and 03CC; unit-compatible composition
-in lem-weil-pbc-sets-etale-inverse-image-composition-units. -/
+/-- The image equations of a local family are preserved by every stage refinement
+(Stacks, Tags 03CB, 03CC). -/
 theorem etaleSet_localStageImageEquations
     {I : Type u} [Category I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

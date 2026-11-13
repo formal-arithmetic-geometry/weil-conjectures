@@ -22,9 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralPointComplexHomology
 
 /-! # The four-way condensed integral constructibility criterion
 
-Source: current blueprint, sec-proetale-coefficients/sk-prop-integral-criterion,
-statement and all four proof paragraphs.
-
 All categories and tensors are ordinary unbounded internal-module derived categories.
 A finite free module over the condensed integer ring on the point is a finite sum of
 its regular module. Maps between these sums are matrices over its sections on the
@@ -49,8 +46,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Canonical scalar-complex realization on a chart: pull back the finite free point
 complex termwise and localize. The additive and exact structures are supplied by the
-existing finite-limit and left-adjoint properties of the inverse image from the point.
-Source: current blueprint sk-prop-integral-criterion, condition (3). -/
+existing finite-limit and left-adjoint properties of the inverse image from the point. -/
 noncomputable def condensedIntegralCriterionRealization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
@@ -260,23 +256,7 @@ private theorem boundedConstructible_of_stratified_point_complexes
 /-- The four conditions of the integral criterion are equivalent, including torsion
 scalar models, without a dimension bound or invertibility of the residue characteristic.
 The third entry uses a finite constructible locally closed stratification and the actual
-derived restriction along the composite chart-to-stratum-to-X morphism. Its point complex
-is bounded termwise finite free; its scalar matrices and bounds can depend on the chart.
-Source: current blueprint sk-prop-integral-criterion, conditions (1)--(4).
-
-Proof, following the updated node:
-1. The internal forward criterion gives completeness and constructible first reduction.
-2. Integral local structure gives the stratification, covers and finite free point
-   complexes. A reflexive comparison identifies their realization with the definition above.
-3. Integral point-complex homology is finitely presented. Exact pullback, the derived
-   homology comparison and homology of Q identify its chart realization with restricted
-   cohomology. These models give constructibility in each degree.
-4. Finite affine refinements of the stratum covers give common lower and upper bounds.
-   Exact restriction and Noetherian stratum detection give global cohomological vanishing
-   outside those bounds, hence boundedness. Finite ranges also handle empty index types.
-5. The integral residue criterion identifies bounded constructibility with its intersection
-   with finite Tor amplitude. The reverse implication is projection. Combine the five
-   implications with tfae_finish. -/
+derived restriction along the composite chart-to-stratum-to-X morphism. -/
 theorem condensed_integral_criterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

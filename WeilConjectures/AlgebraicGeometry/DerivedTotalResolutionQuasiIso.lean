@@ -39,9 +39,8 @@ set_option linter.unusedVariables false in
 quasi-isomorphic to the resolved complex (Stacks, Tag 09IZ).
 
 The nonpositive horizontal columns of `K` are the resolution, with column
-`-i` representing `Aᵢ`. Positive columns vanish. The component of `ε` on
-column zero is the augmentation; its components on negative columns vanish.
-Both augmented rows of terms and augmented rows of cycles are exact. -/
+`-i` representing `Aᵢ`. Positive columns vanish, and `ε` is the augmentation on column zero
+and vanishes on negative columns. -/
 theorem total_resolution_quasiIso
     (M : CochainComplex (ModuleCat R) ℤ)
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)

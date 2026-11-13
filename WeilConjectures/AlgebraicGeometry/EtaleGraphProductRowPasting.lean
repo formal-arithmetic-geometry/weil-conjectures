@@ -73,12 +73,8 @@ def productCompositeLambda (second : Bool) :
 end EtaleGraphInterchangeDiagram
 
 /-- A selected side of the product grid evaluates to the fixed common boundary.
-This assertion contains no comparison between the two supplied interchange maps and no
-auxiliary compactification. Its boundary is defined from the product proper/open square
-and the inverse exchange for the closed inclusion of products over Y into products over Z.
-
-Source: Stacks Tag 0F7J, A--F pasting; product-graph extension, steps 6--7 of
-lem-pur-etale-graph-comparison-interchange. -/
+The boundary is defined from the product proper/open square and the inverse exchange for
+the closed inclusion of products over Y into products over Z (Stacks, Tag 0F7J). -/
 theorem etaleGraphProductRowPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

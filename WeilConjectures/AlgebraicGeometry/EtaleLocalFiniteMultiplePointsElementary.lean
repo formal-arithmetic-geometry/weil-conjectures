@@ -132,23 +132,7 @@ private theorem transport_finite_open_piece
     · rfl
 
 /-- Finitely many isolated points of a fibre become finite pieces after an elementary étale
-base change. Source: Stacks Project, More on Morphisms, Lemma 02LL, lines 11974--12011.
-
-Proof (the six steps of the node, following Stacks 02LL):
-1. Induct on `n`; the zero case uses `U = S`, the identity, and no opens.
-2. In the successor case, construct a point of the pullback over the last `x` and the
-   inductive point `t` directly from canonical residue-field spectrum maps. The pullback
-   lift has first projection `x`, second projection `t`, and an isomorphic residue-field
-   map, by the section-from-`Spec` split-field argument.
-3. The second projection is locally of finite type, and the constructed point is isolated
-   in its fibre by `lem-weil-pbc-isolated-fibre-point-base-change`.
-4. Apply the one-point 02LK theorem and identify the iterated pullback with the pullback
-   over the composite etale map using `pullbackLeftPullbackSndIso`.
-5. Transport the new finite open across this isomorphism, preserving finiteness,
-   uniqueness, the point, and the residue-field isomorphism.
-6. Apply `lem-weil-pbc-elementary-etale-finite-piece-persistence` to all earlier opens and
-   combine them with the transported last open.
--/
+base change (Stacks, Tag 02LL). -/
 theorem exists_etale_local_finite_multiple_points_elementary
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (s : S) (n : ℕ) (x : Fin n → X) (hx : ∀ i, f (x i) = s)

@@ -24,9 +24,7 @@ open CategoryTheory Limits Topology
 namespace AlgebraicGeometry
 
 /-- Spread geometric irreducibility for an affine source mapping into an affine
-open of the base.
-
-Source: Stacks Project, Tag 0559, second proof, affine algebra argument; Tag 0557. -/
+open of the base (Stacks, Tags 0559 and 0557). -/
 theorem exists_open_affine_source_geometric_irreducibility_shrink
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

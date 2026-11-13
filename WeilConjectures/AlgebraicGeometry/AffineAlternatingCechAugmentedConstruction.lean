@@ -15,9 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafAffineComparison
 
 /-! # Augmented increasing-tuple complex of module sheaves
 
-Source: Stacks Project, Tags 01FM, 02KG, 02KH (only its Cech comparison),
-and the construction paragraph of
-`lem-pc-s3-affine-alternating-cech-resolution-core`.
+## References
+
+* Stacks Project, Tags 01FM, 02KG, 02KH
 -/
 
 @[expose] public section
@@ -29,9 +29,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- Construct the augmented increasing-tuple sheaf complex and its affine section model.
-Source: Stacks Project, Tag 01FM (alternating complexes), Tag 02KG (affine base
-change), and Tag 02KH, proof of the separated case (comparison of Cech complexes
-before taking cohomology); parent resolution node, construction paragraph. -/
+(Stacks, Tags 01FM, 02KG and 02KH). -/
 theorem exists_affineAlternatingCech_augmented_construction
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [IsSeparated f] (g : Spec B ⟶ Spec A)

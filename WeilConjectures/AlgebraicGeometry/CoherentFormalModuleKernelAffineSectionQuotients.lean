@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSec
 
 /-! # Affine section quotients of stabilized formal kernels
 
-Source: Stacks Project, Tags 087W and 087X, affine calculation for claim (a).
+Stacks Project, Tags 087W and 087X.
 -/
 
 @[expose] public section
@@ -24,9 +24,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Stabilized formal kernel sections are compatible quotients of one completed submodule.
-
-Source: Stacks Project, Lemma 087X (lemma-inverse-systems-abelian), calculation of
-K prime_m, using Lemma 087W (lemma-inverse-systems-affine). -/
+(Stacks, Tags 087X and 087W). -/
 theorem coherentFormalModule_kernel_affine_section_quotients
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

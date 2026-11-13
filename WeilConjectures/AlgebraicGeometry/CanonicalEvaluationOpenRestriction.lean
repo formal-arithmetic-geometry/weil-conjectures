@@ -125,10 +125,8 @@ private theorem closedMonoidal_evaluation
 set_option maxHeartbeats 500000 in
 -- Elaborating the mixed-universe sheaf tensor comparisons needs extra heartbeats.
 /-- Restriction preserves the canonical derived evaluation arrow, including its
-source and target comparisons. This is independent of any ordinary complex model.
-
-Source: Stacks Project, cohomology.tex, Tag 08DJ,
-Tag 08DL (lemma-restriction-RHom-to-U), and Tag 06YH (derived tensor construction). -/
+source and target comparisons. This is independent of any ordinary complex model
+(Stacks, Tags 08DJ, 08DL and 06YH). -/
 theorem exists_canonicalEvaluation_open_restriction (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

@@ -25,15 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 068C and 08C4, finite-basis argument.
-Each transported term of the affine finite-free model is isomorphic to a finite free
-localized structure-sheaf module. This is the finite-basis transport step: choose a finite basis
-of `K.X n`, identify its tilde sheaf with `tildeFinsupp`, and transport that identification
-through restriction and the inverse affine-site equivalence. The extension contributes the zero
-object in the out-of-range degrees. The finite basis theorem and the functorial preservation of
-finite coproducts provide the required isomorphism. The finite basis is indexed by `Fin m`; in
-the zero-rank case use `m = 0`. Functoriality transports the basis isomorphism, and extension
-by zero preserves the resulting term. -/
+/-- Each transported term of the affine finite-free model is isomorphic to a finite free
+localized structure-sheaf module (Stacks, Tags 068C, 08C4). -/
 theorem affine_finite_free_model_term_iso_free {Y : Scheme.{u}}
     (U : Y.Opens) (hU : IsAffineOpen U)
     (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ)

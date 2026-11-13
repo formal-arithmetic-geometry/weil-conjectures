@@ -30,10 +30,8 @@ private theorem topologicalKrullDim_eq_iSup_of_affine_openCover
   exact (((Scheme.homeoOfIso (U.X i).isoSpec).isHomeomorph.topologicalKrullDim_eq _).trans
     (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _)).symm
 
-/-- Dimension is preserved by scalar extension along algebraically closed fields.
-
-Source: blueprint `lem-sc-base-change-curve`, dimension paragraph; Stacks Tags 00P3
-(finite type algebras under field extension) and 04MU (dimension on open covers). -/
+/-- Dimension is preserved by scalar extension along algebraically closed fields
+(Stacks, Tags 00P3 and 04MU). -/
 theorem baseChange_dim {k k' : Type u} {C : Scheme.{u}} [Field k] [Field k']
     [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k']
     (f : C ⟶ Spec (.of k)) [IsCurve f] :

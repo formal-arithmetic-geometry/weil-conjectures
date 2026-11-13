@@ -18,9 +18,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 set_option autoImplicit false
 
-/-- The lifted étale structure-module sheaf has natural additive section identifications.
-Source: blueprint `lem-sc-as-sequence`, the maps paragraph; Stacks, Tags 03DR and 03DU
-for the section presheaf, and Tags 0096 and 01CA for pullback of the structure module. -/
+/-- The lifted étale structure-module sheaf has natural additive section identifications
+(Stacks, Tags 03DR, 03DU, 0096 and 01CA). -/
 theorem artinSchreier_construction (C : Scheme.{u}) :
     ∃ (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
       (_ : G ≅ (sheafCompose C.smallEtaleTopology

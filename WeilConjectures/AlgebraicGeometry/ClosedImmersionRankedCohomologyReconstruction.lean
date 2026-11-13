@@ -17,8 +17,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Reconstruction from cohomology on finitely many rank strata
 
-Source: the rank-stratum assembly step of
-lem-sc-koszul-regular-immersion-algebra-dual, following Stacks Tags 0BQZ and 0AVW.
+## References
+
+* Stacks Project, Tags 0BQZ and 0AVW
 -/
 
 @[expose] public section
@@ -30,11 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Over the algebra of a closed immersion, rank-stratified cohomology determines
-its derived object. M is arbitrary: this is the assembly step, independent of any
-Koszul resolution, regularity, normal bundle, or scalar right adjoint.
-
-Source: Stacks Project, Tag 0BQZ (single-degree reconstruction) and Tag 0AVW
-(algebra-valued direct image); the parent node's proof, step 3. -/
+its derived object. (Stacks, Tags 0BQZ, 0AVW) -/
 theorem closedImmersion_rankedCohomology_reconstruction
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonRepresentableConti
 
 /-! # Affine continuity of coefficient-sized etale inverse images
 
-Source: blueprint continuity-map detail and Stacks Project, proetale.tex,
-lemma-limit-pullback (Tag 099S), and its affine section formula.
+Stacks Project, Tag 099S.
 -/
 
 @[expose] public noncomputable section
@@ -93,8 +92,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The restriction cocone of an etale inverse image is a colimit on every
 specified affine etale presentation. No finite-generation hypothesis is needed.
 
-Source: blueprint det-pe-classical-definition-continuity-map and the affine
-comparison section formula; Stacks Project, Tag 099S, lemma-limit-pullback. -/
+(Stacks, Tag 099S). -/
 theorem coefficientFixedComparison_isColimit (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (G : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

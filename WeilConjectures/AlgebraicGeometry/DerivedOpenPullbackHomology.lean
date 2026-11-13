@@ -11,8 +11,6 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Cohomology of derived pullback along an open inclusion
-
-Source: the exact-open-restriction step of blueprint lem-pc-derived-single-open-locus.
 -/
 
 @[expose] public section
@@ -26,10 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Derived open pullback cohomology is ordinary restriction of cohomology.
-
-Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph; step 3
-of lem-pc-derived-single-open-locus, exactness of open restriction. -/
+/-- Derived open pullback cohomology is ordinary restriction of cohomology. -/
 theorem nonempty_homology_derivedOpenPullback_iso_restrict
     {T : Scheme.{u}} (W : T.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]

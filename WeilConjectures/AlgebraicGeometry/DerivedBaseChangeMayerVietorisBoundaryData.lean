@@ -27,9 +27,7 @@ variable [∀ Y : Scheme.{u},
 
 -- Transporting the concrete complex comparisons requires more elaboration steps.
 /-- Distinguishedness for the specified SES boundary, without existential choices
-of the boundary or its comparisons. Proof: identify both first arrows using the
-localized units and restrictions, and the third using inverse cancellation.
-Source: Stacks Tag 08BV. -/
+of the boundary or its comparisons (Stacks, Tag 08BV). -/
 private theorem pinned_boundary_distinguished (X : Scheme.{u}) (U V W : X.Opens)
     (iU : W ⟶ U) (iV : W ⟶ V) (hW : U ⊓ V = W) (hcover : U ⊔ V = ⊤)
     (K : schemeDerivedCategory X) :

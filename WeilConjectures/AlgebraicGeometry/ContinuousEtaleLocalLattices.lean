@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousLatticeFiniteCoproduct
 
 /-! # Etale local integral lattices
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6) and Lemma 6.8.13.
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4 (6) and Lemma 6.8.13
 -/
 
 @[expose] public section
@@ -94,23 +96,9 @@ private theorem exists_finite_affine_etale_cover_with_property
   obtain ⟨i, hi, y, hy⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
   exact ⟨⟨i, hi⟩, y, hy⟩
 
-/-- Integral lattices exist on a quasi-compact quasi-separated etale cover.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), and the first paragraph of Lemma 6.8.13.
-
-Proof in words. Apply continuousLisse_affine_etale_lattice at every point x of X.
-It encodes the rational module explicitly, applies the existing sectionwise
-etale-local lattice theorem, transports the specified lattice back, and refines
-to an affine neighborhood. The images of these neighborhoods are open because
-the maps are etale, and they cover X because each contains its indexing point.
-Noetherianity implies compactness, so choose a finite subfamily. Its scheme
-coproduct U is affine, hence compact and quasi-separated. The coproduct map to X
-is etale since that is Zariski local at the source, and it is surjective by the
-finite covering property. Apply continuousLattice_finite_coproduct to construct
-the internal integral module on U as a finite biproduct of component extensions
-by zero, with its bound pro-etale free cover and rationalization isomorphism.
-No compatibility among the component lattices is required. The same argument
-includes zero ranks and the empty base. Only a cover and a lattice on it are
-asserted; descent and stratification are separate steps. -/
+/-- Integral lattices exist on a quasi-compact quasi-separated etale cover. Only a cover and a
+lattice on it are asserted; descent and stratification are separate steps.
+(Bhatt--Scholze, Proposition 6.8.4 (6) and Lemma 6.8.13) -/
 theorem continuousLisse_etale_lattice
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

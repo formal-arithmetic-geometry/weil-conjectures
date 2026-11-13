@@ -103,8 +103,8 @@ set_option maxHeartbeats 800000 in
 -- The two nested full subcategories and induced triple category require substantial
 -- definitional equality checking when assembling the functor and its ring isomorphism.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, proof of Tag 04HX,
-first paragraph, and Tag 04HT. -/
+/-- There is a functor from pointed affine chart neighbourhoods to residue-field triples
+compatible with the chart data. (Stacks, Tags 04HX and 04HT) -/
 theorem etale_chart_residue_triples_functor_construction
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

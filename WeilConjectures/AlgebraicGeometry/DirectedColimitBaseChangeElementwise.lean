@@ -33,13 +33,8 @@ namespace TensorProduct
 
 /-- Base change along a directed ring colimit: every element of `colimit F ⊗[F.obj i₀] M₀`
 comes from a stage `F.obj i ⊗[F.obj i₀] M₀` with `i₀ ≤ i`, and an element of a stage whose
-image is zero already vanishes at a later stage. Source: Stacks Project, Algebra, Tags 00D6,
-00D7 and 00DD, used in Tag 07RI.
-
-The `F.obj i₀`-algebra structures on `F.obj i` (`i₀ ≤ i`) and on `colimit F` are those of
-`F.map (homOfLE _)` and `colimit.ι F i₀`; the maps `μ_i = α_i ⊗ id` and
-`μ_{i'i} = α_{i'i} ⊗ id` are `LinearMap.rTensor M₀` of these ring maps viewed as
-`F.obj i₀`-algebra maps. -/
+image is zero already vanishes at a later stage.
+(Stacks, Tags 00D6, 00D7, 00DD and 07RI) -/
 theorem directedColimitBaseChangeElementwise
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

@@ -10,7 +10,9 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # Morphisms into a coproduct of copies of a scheme
 
-Source: Stacks Project, Groupoids, Example 03YW and Schemes, Lemmas 01JB and 01HI.
+## References
+
+* Stacks Project, Tags 03YW, 01JB and 01HI
 -/
 
 @[expose] public section
@@ -23,22 +25,14 @@ namespace AlgebraicGeometry
 
 /-- An indexed clopen decomposition consists of pairwise disjoint open subschemes whose
 union is the whole scheme. Each piece is also closed, since its complement is the union
-of the other pieces. Source: Stacks Project, Groupoids, Example 03YW. -/
+of the other pieces. (Stacks, Tag 03YW) -/
 def IsClopenDecomposition (W : Scheme.{u}) (E : Type v) (P : E → W.Opens) : Prop :=
   (∀ e e' : E, e ≠ e' → Disjoint (P e) (P e')) ∧ (⨆ e, P e) = ⊤
 
 open Classical in
-/-- Source: Stacks Project, Groupoids, Example 03YW, and Schemes, Lemmas 01JB and 01HI.
-
-The coprojections are open immersions with disjoint images covering the coproduct.
-Pulling their images back along a map over `U` gives disjoint open pieces covering `W`;
-their complements are unions of the other pieces. On each piece the map factors through
-the corresponding coprojection, and its factor is forced by the map to `U`.
-Conversely, map each open piece through its coprojection and glue the maps. The empty
-overlaps make gluing automatic, while the open cover makes the glued map unique and
-forces its component preimages. A decomposition is equivalently a locally constant
-function to the discrete index type. The constant and empty-index cases follow from
-these constructions. -/
+/-- Morphisms from `W` into a coproduct of copies of `U` over `U` correspond to decompositions
+of `W` into clopen pieces indexed by the index type.
+(Stacks, Tag 03YW; Tags 01JB and 01HI) -/
 theorem coproductCopiesMorphismsClopen (U W : Scheme.{u}) (E : Type v) [Small.{u} E]
     (s : W ⟶ U) :
     ((∀ f : W ⟶ ∐ fun _ : E => U,

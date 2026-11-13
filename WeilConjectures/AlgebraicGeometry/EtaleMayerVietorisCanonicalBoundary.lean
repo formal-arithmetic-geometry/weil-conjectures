@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Sections of a fixed injective resolution give a short exact complex sequence.
-Source: Stacks Project, Tag 0A50, proof. -/
+(Stacks, Tag 0A50) -/
 theorem etaleSectionShortComplex_resolution_shortExact {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
@@ -36,11 +36,8 @@ theorem etaleSectionShortComplex_resolution_shortExact {X : Scheme.{u}}
   exact etaleSectionShortComplex_degreewise_shortExact U V hcover I.cocomplex q
 
 /-- Transport the actual homology boundary through prescribed normalized comparisons.
-Source: Stacks Project, Tag 0A50, resolution proof.
-
-This construction chooses no existential boundary or comparison. The resolution
-and its normalized comparisons are inputs, and the boundary is the homology
-connecting map of their section short complex, conjugated by these comparisons. -/
+The boundary is the homology connecting map of the section short complex of the
+resolution, conjugated by the comparisons (Stacks, Tag 0A50). -/
 noncomputable def etaleMayerVietorisCanonicalBoundary {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
@@ -84,7 +81,7 @@ noncomputable def etaleSectionShortComplexOn {X : Scheme.{u}}
   exact (X.homOfLE_ι hU).trans (X.homOfLE_ι hV).symm
 
 /-- Exactness of the directly constructed section complex with named intersection.
-Source: Stacks Project, Tag 0A50, the degreewise injective-section criterion. -/
+(Stacks, Tag 0A50) -/
 theorem etaleSectionShortComplexOn_shortExact {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :

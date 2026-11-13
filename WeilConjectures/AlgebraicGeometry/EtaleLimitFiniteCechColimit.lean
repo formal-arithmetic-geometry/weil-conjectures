@@ -160,8 +160,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The canonical descended comparison cocone is colimiting.
-Source: Stacks Project, Sites, Tag 09YN; Étale Cohomology, Tag 09YQ (qcqs inverse
-limits); Cohomology on Sites, Tag 09YP, proof of lemma-colimit. -/
+(Stacks, Tags 09YN, 09YQ and 09YP) -/
 theorem finite_cech_stage_data_is_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

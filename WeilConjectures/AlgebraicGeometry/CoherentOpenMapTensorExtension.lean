@@ -18,8 +18,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 
 /-! # Tensor extension of a coherent local morphism
 
-Source: Stacks Project, Tag 01YB, proof of lemma-homs-over-open, through the
-internal Hom and tensor-Hom adjunction, before descent to the multiplication image.
+Stacks Project, Tag 01YB.
 -/
 
 @[expose] public section
@@ -28,9 +27,7 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A local morphism extends from an ideal-power tensor product.
-Source: Stacks Project, Tag 01YB, proof of lemma-homs-over-open, the paragraphs
-constructing a map from the ideal power into internal Hom and applying tensor-Hom. -/
+/-- A local morphism extends from an ideal-power tensor product. (Stacks, Tag 01YB). -/
 theorem coherent_open_map_tensor_extension
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (H F : X.Modules)

@@ -26,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
 /-- The orbit of a point in the cartesian groupoid associated to a descent datum is saturated.
-Source: Stacks Project, Tag 03JE, orbit used in the first two paragraphs of the proof;
-Tag 0H8K, identification of the cartesian groupoid of a descent datum. -/
+(Stacks, Tags 03JE and 0H8K) -/
 theorem descent_orbit_saturated
     {X Y R : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     (D : Over.DescentDatum p V) (s : R ⟶ V.left) (q : R ⟶ X) (t : R ⟶ V.left)

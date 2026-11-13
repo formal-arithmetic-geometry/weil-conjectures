@@ -17,8 +17,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # The alternating Čech calculation for the pinned derived mate
 
-Source: Stacks Project, Tags 02KH and 08HY; Steps 1--3 of
-`lem-pc-affine-alternating-cech-base-change-factorization`.
+## References
+
+* Stacks Project, Tags 02KH and 08HY
 -/
 
 @[expose] public section
@@ -104,9 +105,8 @@ private theorem pinnedBaseChange_naturality
 -- Comparing the scheme-module and ringed-space category instances needs this budget.
 /-- Compute the mate using precisely the family of counits that defines the
 canonical derived composition and adjunction comparisons. This lemma makes no
-assertion about a comparison supplied by a caller or a different counit.
-Source: Stacks Project, Tags 02KH and 08HY; Steps 1--3 of
-`lem-pc-affine-alternating-cech-base-change-factorization`. -/
+assertion about a comparison supplied by a caller or a different counit
+(Stacks, Tags 02KH and 08HY). -/
 theorem affineAlternatingCech_pinned_mate
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

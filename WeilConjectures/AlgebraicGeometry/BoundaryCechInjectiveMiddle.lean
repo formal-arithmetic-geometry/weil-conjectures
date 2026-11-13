@@ -173,8 +173,7 @@ sequence `S` of `O_X`-modules on a scheme `X` with `I = S.X₂` injective, `U` a
 canonical comparison map `c_A : Ȟ¹(U, A) → H¹(X, A)` (any `c` with `IsModuleCechComparison`)
 sends the class of `z` to the connecting class `∂(q)` of `S`, where `∂` is
 `RingedSpace.moduleCohomologyBoundary` and `q` is read in `H⁰(X, Q)` through
-`toRightDerivedZero`. Source: Stacks, Cohomology, Lemma 01EQ with 01EP; Lemma 0B8S, local-lift
-paragraph. -/
+`toRightDerivedZero` (Stacks, Cohomology of Sheaves, Lemmas 01EQ, 01EP, 0B8S). -/
 theorem boundary_cech_injective_middle (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

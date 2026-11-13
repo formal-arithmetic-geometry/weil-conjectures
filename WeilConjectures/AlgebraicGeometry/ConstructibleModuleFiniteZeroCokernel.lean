@@ -22,7 +22,9 @@ import WeilConjectures.ConstructibleSheaf.Monoidal
 /-!
 # Finite affine free covers with zero cokernel
 
-Source: Stacks Project, Tag 095N, finite selection in the constructible topology.
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section
@@ -33,16 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Finite affine free covers can be chosen with zero cokernel.
-
-Proof plan (from Stacks Project, Tag 095N): represent the finitely many elements of each
-finite geometric stalk by sections on pointed affine etale neighbourhoods, and map the
-corresponding sheafified free modules to `F`.  The cokernel of each finite family is
-constructible; its support is constructible, and enlarging a family shrinks that support.
-Every point is omitted by one family.  Quasi-compactness of the constructible topology
-gives finitely many families with empty intersection of supports.  Their concatenation has
-zero geometric stalks in its cokernel, and conservativity of geometric stalks makes that
-cokernel a zero object. -/
+/-- Finite affine free covers can be chosen with zero cokernel. (Stacks, Tag 095N) -/
 theorem exists_affine_free_etale_zero_cokernel
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

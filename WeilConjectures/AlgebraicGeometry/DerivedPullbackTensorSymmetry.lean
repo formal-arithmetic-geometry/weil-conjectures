@@ -12,8 +12,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 /-!
 # Derived pullback preserves the canonical tensor symmetry
 
-Source: Stacks Project, Tag 06YU; the symmetry conjugation in step 6 of
-`lem-asd-compact-projection-exchange`.
+## References
+
+* Stacks Project, Tag 06YU
 -/
 
 @[expose] public section
@@ -30,7 +31,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.ha
   ModuleCat.hasColimitsOfSize
 
 /-- Exact derived pullback preserves the canonical signed tensor symmetry.
-Source: Stacks Project, Tag 06YU, and step 6 of `lem-asd-compact-projection-exchange`. -/
+(Stacks, Tag 06YU) -/
 theorem derivedPullback_tensorSymmetry
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (g : X ⟶ Y)
     (K M : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

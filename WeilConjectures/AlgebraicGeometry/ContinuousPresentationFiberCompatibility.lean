@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 /-!
 # Compatibility of scalar cokernel classes on presentation covers
 
-Source: HRS Example 3.1 and the geometric evaluation argument in the parent node.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -240,24 +242,7 @@ private noncomputable def pointCoordinates
   exact (G.mapIso (pointRegularIso E Ω z)).toLinearEquiv.trans (liftedRegularCoordinates E)
 
 /-- Evaluation at the final object over one algebraically closed field.
-
-Source: Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1.
-
-Proof in words. Apply final-object sections to the underlying abelian sheaf and its
-internal action. Sections is lax monoidal: its tensorator sends a pair of sections to
-its tensor section, so its image is an internal module over the ring of global sections.
-The canonical continuous realization identifies this ring with ULift E: every continuous
-function on the one-point spectrum is constant, and evaluation at z is its inverse.
-Transport the action along this ring isomorphism and use the tensor universal property
-for internal modules in abelian groups to obtain an ordinary E-module. The internal
-linearity diagrams make all evaluated arrows E-linear; they are unchanged as additive
-maps, hence this functor is additive. Over an algebraically closed field every covering
-of the final object splits. Consequently abelian sections preserves finite colimits.
-The forgetful functor from internal modules computes those colimits, and the ordinary
-module forgetful functor reflects them; hence evaluation preserves finite colimits.
-The regular module gives E with its usual action. Evaluate its endomorphism at 1 to
-get the displayed normalization, since both coefficient identifications are the
-specified continuous realization followed by evaluation at z. -/
+(Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1) -/
 private theorem exists_condensedField_point_evaluation
     (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
@@ -593,25 +578,7 @@ private theorem condensedField_coordinates_of_conjugacy
     ((hb₀ (t.inv ≫ P.map f ≫ t.hom)).trans (hc f))
 
 /-- Transport the normalized regular-module evaluation along one geometric map.
-
-Source: Hemo--Richarz--Scholbach, Example 3.1; the adjoint-test characterization of
-continuous realization in `condensedFieldContinuousMapIso_test`.
-
-Proof in words. Restriction along the inverse coefficient isomorphism sends the
-regular pulled-back coefficient module to the regular coefficient module on V.
-The canonical isomorphism is the coefficient isomorphism itself. Module inverse image
-along a sends that regular module to the regular coefficient module on Spec Ω, by the
-strong monoidality of inverse image and the extension-of-scalars regular-module
-comparison. Let t denote their composite. Apply H to t and compose with the given
-regular-module coordinate b on Spec Ω; this gives the required linear equivalence.
-Conjugation by t transports every regular-module endomorphism f. The normalization
-of H computes its scalar from the canonical continuous realization on Spec Ω.
-The adjoint-test equation for that realization, naturality of the unit, and the
-coefficient pullback comparison identify this transported coefficient with the
-pullback along a of the continuous coefficient of f on V. A continuous function
-pulled back to Spec Ω has value at z equal to its original value at a(z). This proves
-the formula. The argument needs no finite presentation and is valid for any H with
-the stated normalization; a zero functor cannot satisfy that normalization. -/
+(Hemo--Richarz--Scholbach, Example 3.1) -/
 private theorem condensedField_geometric_evaluation_scalars
     (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
@@ -801,7 +768,7 @@ noncomputable def pulledMod (T : Type u) [CommRing T] [TopologicalSpace T]
   ((upperStar Ab.{u + 1} p).mapMod (baseCoeff T X)).obj M
 
 /-- Two presentations of the same sheaf have isomorphic scalar cokernels over a common
-base point. Source: HRS Example 3.1; parent proof step 3. -/
+base point. (Hemo--Richarz--Scholbach, Example 3.1) -/
 theorem presentationFiberType_eq
     (T : Type u) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
     [TotallyDisconnectedSpace T] (X : Scheme.{u})

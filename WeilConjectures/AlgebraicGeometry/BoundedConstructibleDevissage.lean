@@ -9,8 +9,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Finite truncation dévissage for constructible module objects
 
-This is the standard t-structure induction from blueprint
-`lem-sfb-dc-tensor-preserves`, step 10. It is independent of coefficient finiteness:
+This is the standard t-structure induction. It is independent of coefficient finiteness:
 only the target property is required to be triangulated.
 -/
 

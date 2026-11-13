@@ -13,9 +13,9 @@ import WeilConjectures.CategoryTheory.StrictRoosModel
 /-!
 # Resolution formula for the descended Roos comparison
 
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
+## References
+
+* Stacks Project, Tags 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -218,27 +218,8 @@ private theorem towerGrothendieck [IsGrothendieckAbelian.{v} A] :
 end Inclusions
 
 -- The simultaneous cone and localization comparisons require extra elaboration steps.
-/-- The resolution formula for a fixed comparison satisfying the localization square.
-
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
-
-Proof in words:
-Construct the signed inclusion of the ordinary limit into the Roos cone, with
-coordinates (limit projections, zero), and prove its naturality by product projections.
-Functorial K-injective resolutions with injective tower terms extend the assumed
-normalization eta theta = Q(iota) to every complex: apply naturality and cancel
-Q(H(q)), which is invertible by theta. The two coordinate equations for kappa and
-the projection equations for beta give F(iotaA) kappa = beta iotaB. Apply Q and
-the prescribed square to obtain the derived-unit comparison at every complex.
-On K-injectives the derived units are isomorphisms, by the K-injective derivability
-structure: quasi-isomorphisms between K-injectives are homotopy equivalences,
-and the additive ordinary-limit functor preserves those homotopies. Define dI
-and dJ from these units and the inverses of LA(Qq) and LB(Qr). Naturality of
-lambda, the localization comparison, and etaB gives the required resolution formula.
-This proves only the resolution formula for the already fixed lambda; it does
-not construct lambda or prove its localization square. -/
+/-- The resolution formula for a fixed comparison satisfying the localization square
+(Stacks, Tags 0940, 0941). -/
 theorem exactProductFunctorRoosResolution
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

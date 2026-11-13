@@ -15,8 +15,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 /-!
 # The affine nonvanishing locus of a section of an invertible module
 
-Source: Stacks Project, Properties, Lemma 01PV (`properties-lemma-affine-cap-s-open`),
-algebra argument in the proof.
+## References
+
+* Stacks Project, Tag 01PV
 -/
 
 @[expose] public section
@@ -281,10 +282,9 @@ private theorem section_mem_range (R : Type u) [CommRing R]
   rw [b.commutes]
   exact Ideal.algebraMap_residueField_eq_zero
 
-/-- Source: Stacks Project, Lemma 01PV, algebra argument in the proof.
-For an invertible module `N`, the spectrum of `Sym_R(N)/(ι(s)-1)` identifies with the open
-locus of primes `p` where `s ∉ pN`. The base ring is lifted to the common universe
-by `ULift`; primes are transported along its canonical ring equivalence. -/
+/-- For an invertible module `N`, the spectrum of `Sym_R(N)/(ι(s)-1)` identifies with the open
+locus of primes `p` where `s ∉ pN`, after lifting the base ring to the common universe by
+`ULift` (Stacks, Tag 01PV). -/
 theorem affine_cap_section_open_algebra (R : Type u) [CommRing R]
     (N : Type v) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Projective R N]
     (_hN : ∀ p : PrimeSpectrum R, Module.rankAtStalk N p = 1) (s : N) :

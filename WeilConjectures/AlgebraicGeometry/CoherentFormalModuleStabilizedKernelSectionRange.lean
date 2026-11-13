@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.AdicKernelImageBound
 
 /-! # Stabilized kernel section ranges
-Source: Stacks Project, Lemma 087X, proof of claim (a). -/
+Stacks Project, Tag 087X. -/
 
 @[expose] public section
 
@@ -23,8 +23,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The image of the true completed kernel equals the stabilized affine section range.
-
-Source: Stacks Project, Lemma 087X, proof of claim (a), using Lemma 087W. -/
+(Stacks, Tags 087X and 087W). -/
 theorem coherentFormalModule_stabilized_kernel_section_range
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

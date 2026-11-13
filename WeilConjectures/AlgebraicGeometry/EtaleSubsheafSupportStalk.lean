@@ -19,8 +19,8 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The open support of a subterminal étale sheaf is detected by geometric stalks.
-Source: Stacks Project, Étale Cohomology, Tag 04HV, lemma-support-subsheaf-final. -/
+/-- The open support of a subterminal étale sheaf is detected by geometric stalks
+(Stacks, Tag 04HV). -/
 theorem etale_subsheaf_final_stalk_criterion (S : Scheme.{u})
     (H : Sheaf S.smallEtaleTopology (Type (max u v)))
     [Mono (terminal.from H)] (W : S.Opens)

@@ -248,43 +248,7 @@ private theorem higherDirectImage_constructible
 
 /-- Proper higher direct images of constructible finite-field etale module sheaves are
 constructible and vanish outside one interval [0, d], chosen independently of the sheaf.
-
-Source: Bhatt--Scholze, Theorem 6.7.1, proper alternative, specialized to R = A;
-Stacks Project, Tags 0A3V, 095U, 03RW and 0GL0.
-
-Proof plan following the six DAG steps:
-1. Properness gives finite type and the Noetherian target is quasi-compact.
-   The uniform fibre-dimension lemma lem-fin-finite-type-fibre-dimension-bound
-   supplies e with every fibre of h of dimension at most e. Choose d = 2e before F.
-2. The underlying abelian sheaf of an A-module sheaf is torsion
-   (lem-weil-pbc-torsion-sheaf-characterizations). Apply lem-kun-proper-torsion-cd-bound
-   above 2e and transfer its vanishing to modules by
-   lem-sbc-higher-direct-image-forget-comparison; the faithful forgetful functor reflects
-   zero objects. For q < 0, right-derived functors preserve lower bounds
-   (lem-weil-pbc-derived-functor-negative-vanishing) applied to F[0].
-3. Fix F and q >= 0. A nonempty closed T in Y contains a nonempty irreducible relatively
-   open piece T ∩ O (lem-sc-noetherian-closed-subset-finite-components,
-   lem-sfb-noetherian-component-open). Give the closure of its generic point the reduced
-   structure (lem-weil-pbc-reduced-induced-closed-subscheme); it is integral
-   (def-pc-integral-scheme) and locally Noetherian. Choose a nonempty affine open W over O
-   (lem-weil-pbc-noetherian-open-subscheme-noetherian).
-4. Base change h to s : W → Y. Properness persists by lem-pc-proper-base-change, and the
-   pullback of F is constructible by prop-constructible-pullback. Bounded-below proper base
-   change thm-weil-pbc-bounded-below for F[0], with the exact inverse-image/homology
-   comparison lem-sp-exact-functor-preserves-homology, identifies s^* R^q h_*F with the
-   degree-q image of the base change. Apply lem-fd-proper-cohomology-generic-local-constancy
-   to obtain a nonempty open V of W where it is finite locally constant; the range of V in Y
-   is T ∩ (an ambient open).
-5. Well-founded induction on ambient opens O_0
-   (lem-weil-pbc-noetherian-scheme-closed-subsets-minimal) builds a finite partition of
-   the complement of O_0 into locally closed strata, each realised by an immersion on which
-   R^q h_*F is finite locally constant: step 4 gives the new stratum and the induction
-   hypothesis for the larger open gives the rest. At O_0 = ∅, locally closed subsets of a
-   Noetherian space are constructible (def-weil-constructible-subset), so R^q h_*F is
-   constructible (def-weil-pbc-etale-constructible-sheaf).
-6. The zero sheaf is finite locally constant with value the zero A-module, hence
-   constructible. This covers all remaining degrees from step 2. No ground field,
-   absolute dimension bound, or invertibility of ell was used. -/
+(Bhatt--Scholze, Theorem 6.7.1; Stacks, Tags 0A3V, 095U, 03RW and 0GL0). -/
 theorem exists_uniform_bound_constructible_higherDirectImage_of_isProper_finite_field
     (ℓ : ℕ) [Fact ℓ.Prime] (A : Type (u + 1)) [Field A] [Finite A] [CharP A ℓ]
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (h : Z ⟶ Y) [IsProper h] :

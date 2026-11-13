@@ -13,7 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 /-!
 # Closedness of an immersion from valuative factorization
 
-Source: Stacks Project, Morphisms, Tags 02JQ and 01R8, and Schemes, Tag 01IQ.
+## References
+
+* Stacks Project, Tags 02JQ, 01R8 and 01IQ
 -/
 
 @[expose] public section
@@ -26,11 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A quasi-compact immersion whose valuation-ring maps factor whenever their generic
 restrictions factor has closed image and is a closed immersion.
-Source: Stacks Project, Tags 02JQ, 01R8 and 01IQ.
-
-The hypothesis is expressed using `ValuativeCommSq`: its generic map witnesses the
-factorization of the restriction of its bottom map. Only factorization of the bottom
-map is required, without an additional compatibility condition on its factorization. -/
+(Stacks, Tags 02JQ, 01R8, 01IQ) -/
 theorem isClosed_range_and_isClosedImmersion_of_valuativeFactorization
     {Z S : Scheme.{u}} (j : Z ⟶ S) [QuasiCompact j] [IsImmersion j]
     (h : ∀ sq : ValuativeCommSq j,

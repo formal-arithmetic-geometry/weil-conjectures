@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Descent of natural isomorphisms through derived open restriction
 
-Source: Stacks Project, Tag 08BT, lemma-adjoint-lower-shriek-restrict;
-Mathlib CategoryTheory.Localization.fullyFaithfulWhiskeringLeft.
+## References
+
+* Stacks Project, Tag 08BT
 -/
 
 @[expose] public section
@@ -24,9 +25,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Natural isomorphisms descend through exact derived restriction to an open.
-Source: Stacks Project, Tag 08BT, lemma-adjoint-lower-shriek-restrict;
-Mathlib CategoryTheory.Localization.fullyFaithfulWhiskeringLeft. -/
+/-- Natural isomorphisms descend through exact derived restriction to an open
+(Stacks, Tag 08BT). -/
 theorem derived_open_restriction_iso_descent
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

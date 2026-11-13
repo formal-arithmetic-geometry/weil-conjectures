@@ -16,12 +16,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 /-!
 # The completed coefficient ring and its strict derived reduction tower
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-adic-coefficient-datum, order 1239; Stacks Tags 06XN, 06YS, 06YY.
-
 The index n : ℕ denotes the positive exponent n+1. Every quotient reduction retains
 its own coefficient action; tower levels restrict that action along the limit projection.
 No constant/completed coefficient comparison is assumed.
+
+## References
+
+* Stacks Project, Tags 06XN, 06YS, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -105,8 +106,8 @@ def coefficientMap (T : Scheme.{u}) {Λ Λ' : Type (u + 1)}
   (presheafToSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
     (functionPresheafMap T φ)
 
-/-- The strict inverse system of the actual finite quotient coefficient sheaves.
-Source: blueprint coefficient convention, Tag 09BT. -/
+/-- The strict inverse system of the actual finite quotient coefficient sheaves
+(Stacks, Tag 09BT). -/
 def ringSystem (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) :
     ℕᵒᵖ ⥤ Sheaf (ProEt.topology T) CommRingCat.{u + 1} :=
@@ -140,8 +141,7 @@ def constantComparison (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finit
     adicLisseConstantRing T Λ ⟶ coefficientRing T Λ :=
   (presheafToSheaf (ProEt.topology T) CommRingCat.{u + 1}).map (constants T Λ)
 
-/-- The RingCat presentation is precisely the dependency's recorded finite coefficient sheaf.
-Source: blueprint coefficient convention. -/
+/-- The RingCat presentation is precisely the recorded finite coefficient sheaf. -/
 def finiteRingPresentation (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] : Sheaf (ProEt.topology T) RingCat.{u + 1} :=
   letI : TopologicalSpace Λ := ⊥
@@ -228,80 +228,68 @@ end AlgebraicGeometry.Scheme.AdicCoefficients
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The quotient map between arbitrary positive powers, not just consecutive powers.
- -/
+/-- The quotient map between arbitrary positive powers, not just consecutive powers. -/
 noncomputable def reductionQuotientMap {A : Type (t + 1)} [CommRing A] (I : Ideal A)
     (b a : ℕ) (h : a ≤ b) : A ⧸ I ^ (b + 1) →+* A ⧸ I ^ (a + 1) :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-/-- The quotient coefficient sheaf, obtained from continuous component functions.
- -/
+/-- The quotient coefficient sheaf, obtained from continuous component functions. -/
 noncomputable abbrev reductionCoefficient (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   (AdicCoefficients.ringSystem T d.ideal d.quotientFinite).obj (op n)
 
-/-- The strict diagram of all positive quotient coefficient sheaves.
- -/
+/-- The strict diagram of all positive quotient coefficient sheaves. -/
 noncomputable def reductionCoefficientSystem (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : ℕᵒᵖ ⥤ Sheaf (ProEt.topology T) CommRingCat.{t + 1} :=
   AdicCoefficients.ringSystem T d.ideal d.quotientFinite
 
 /-- The actual inverse limit sheaf of commutative rings. Limits of sheaves are computed
-on sections, so its sections are compatible families with pointwise operations.
- -/
+on sections, so its sections are compatible families with pointwise operations. -/
 noncomputable def completedReductionCoefficient (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : Sheaf (ProEt.topology T) CommRingCat.{t + 1} :=
   limit (reductionCoefficientSystem T d)
 
-/-- The n-th coordinate of the limit of quotient coefficient sheaves.
- -/
+/-- The n-th coordinate of the limit of quotient coefficient sheaves. -/
 noncomputable def completedReductionProjection (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     completedReductionCoefficient T d ⟶ reductionCoefficient T d n :=
   limit.π (reductionCoefficientSystem T d) (op n)
 
-/-- The ring underlying a commutative coefficient sheaf on the small pro-etale site.
- -/
+/-- The ring underlying a commutative coefficient sheaf on the small pro-etale site. -/
 noncomputable abbrev reductionModuleRing (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   (sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R
 
-/-- Left module sheaves over a given coefficient ring; this is the recorded category.
- -/
+/-- Left module sheaves over a given coefficient ring; this is the recorded category. -/
 noncomputable abbrev reductionModules (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   ringedSiteModules.{t + 1} (reductionModuleRing T R)
 
-/-- The standard localization for these module sheaves, keeping site sizes t+1 and t.
- -/
+/-- The standard localization for these module sheaves, keeping site sizes t+1 and t. -/
 noncomputable instance reductionModulesHasDerivedCategory (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     HasDerivedCategory (reductionModules T R) := HasDerivedCategory.standard _
 
-/-- D(Mod(R)) with its canonical cochain localization.
- -/
+/-- D(Mod(R)) with its canonical cochain localization. -/
 noncomputable abbrev reductionDerivedCategory (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   DerivedCategory (reductionModules T R)
 
-/-- Standard localization for modules over any coefficient ring sheaf B.
- -/
+/-- Standard localization for modules over any coefficient ring sheaf B. -/
 noncomputable instance reductionRingModulesHasDerivedCategory (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) :
     HasDerivedCategory (ringedSiteModules.{t + 1} B) := HasDerivedCategory.standard _
 
-/-- The existing scalar-extension specification, named without changing its predicate.
-The extractor uses the type of the existence proof and ignores that proof.
-Source: Stacks Tag 06YY. -/
+/-- The existing scalar-extension specification, named without changing its predicate
+(Stacks, Tag 06YY). -/
 def reductionChangeSpec (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     (reductionModules T R ⥤ reductionModules T S) → Prop :=
   (fun {B : Type (t + 2)} {P : B → Prop} (_ : ∃ x, P x) ↦ P)
     (completedAdicChangeData T φ)
 
-/-- Specialize the recorded derived-change-of-rings theorem with standard localizations.
-Its ordinary functor is fixed on objects and maps, and its derived pair is universal.
-Source: Stacks Tag 06YY. -/
+/-- The derived-change-of-rings theorem with standard localizations: the ordinary functor is
+fixed on objects and maps, and its derived pair is universal (Stacks, Tag 06YY). -/
 theorem reductionChangeExistence (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     ∃ E, reductionChangeSpec T φ E := completedAdicChangeData T φ
@@ -487,31 +475,26 @@ attribute [local irreducible] Functor.mapDerivedCategory
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
 attribute [local irreducible] Functor.mapDerivedCategoryFactorsh
 
-/-- The quotient ring tower, indexed by the positive exponent n+1.
-Source: blueprint adic coefficient datum. -/
+/-- The quotient ring tower, indexed by the positive exponent n+1. -/
 noncomputable abbrev AdicCoefficientDatum.ringTower {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :=
   Functor.ofOpSequence (X := fun n ↦ CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))
     (fun n ↦ CommRingCat.ofHom (reductionQuotientMap d.ideal (n + 1) n (Nat.le_succ n)))
 
-/-- The finite quotient ring sheaf.
-Source: blueprint adic coefficient datum. -/
+/-- The finite quotient ring sheaf. -/
 noncomputable abbrev AdicCoefficientDatum.finiteRing {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) (n : ℕ) := reductionCoefficient T d n
 
-/-- The actual completed coefficient ring sheaf.
-Source: blueprint adic coefficient datum. -/
+/-- The actual completed coefficient ring sheaf. -/
 noncomputable abbrev AdicCoefficientDatum.completedRing {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) := completedReductionCoefficient T d
 
-/-- The specified coordinate of the completed coefficient sheaf.
-Source: blueprint adic coefficient datum. -/
+/-- The specified coordinate of the completed coefficient sheaf. -/
 noncomputable abbrev AdicCoefficientDatum.projection {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) (n : ℕ) :=
   completedReductionProjection T d n
 
-/-- Every finite quotient has exactly the finiteness certificate of the arithmetic datum.
- -/
+/-- Every finite quotient has exactly the finiteness certificate of the arithmetic datum. -/
 instance AdicCoefficientDatum.positiveQuotient_finite {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) : Finite (A ⧸ d.ideal ^ (n + 1)) :=
   d.quotientFinite n

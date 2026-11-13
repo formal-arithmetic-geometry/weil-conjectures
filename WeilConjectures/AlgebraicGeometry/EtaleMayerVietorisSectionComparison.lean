@@ -117,8 +117,7 @@ private theorem homologyBiprodEquiv_desc_neg
 set_option backward.isDefEq.respectTransparency false in
 /-- A comparison of the prescribed resolution section complexes, with homology
 identifications respecting the prescribed restriction and pullback maps.
-Source: Stacks Project, Tag 0A50, proof, and the explicit resolution comparison
-of the parent node, steps 1, 2 and 4. -/
+(Stacks, Tag 0A50) -/
 theorem etaleSectionShortComplex_pullback_comparison
     {X Y : Scheme.{u}} (g : Y ⟶ X) (U V : X.Opens)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

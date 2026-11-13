@@ -34,8 +34,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 /-- There are arbitrarily low finite locally free truncation triangles with a perfect
-middle term extending to the ambient affine scheme. No vanishing or splitting is asserted.
-Source: Stacks Project, Tag 08EG, proof of Lemma 36.13.6, first part. -/
+middle term extending to the ambient affine scheme (Stacks, Tag 08EG). -/
 theorem exists_low_perfect_truncation_triangle
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

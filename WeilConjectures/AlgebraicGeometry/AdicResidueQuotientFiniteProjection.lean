@@ -19,7 +19,7 @@ import all WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 
 /-! # Residue recovery from the quotient homotopy limit
 
-Source: Stacks Project, proetale.tex, Tag 099M; algebraization.tex, Tag 0A0E.
+Source: Stacks Project, Tags 099M and 0A0E.
 -/
 
 @[expose] public noncomputable section
@@ -581,10 +581,8 @@ private theorem koszul_finite_unit_isIso
     exact hx
 
 /-- The scalar transpose of the residue leg of a quotient homotopy limit is invertible.
-This computes one finite reduction of the limit; it does not specify a map into it.
-
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul. -/
+This computes one finite reduction of the limit; it does not specify a map into it
+(Stacks, Tags 099M and 0A0E). -/
 theorem adicResidue_quotient_residue_projection_isIso
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

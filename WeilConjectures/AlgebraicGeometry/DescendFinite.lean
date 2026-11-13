@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DescendFiniteAffineOpen
 /-!
 # Finiteness descends to a finite stage of a limit
 
-Source: Stacks Project, Limits, Lemma 01ZO (lemma-descend-finite-finite-presentation),
-under Situation 081D.
+## References
+
+* Stacks Project, Tag 01ZO (under Situation 081D)
 -/
 
 @[expose] public section

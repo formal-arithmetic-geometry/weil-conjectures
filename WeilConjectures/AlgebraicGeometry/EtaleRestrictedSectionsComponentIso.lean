@@ -23,8 +23,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The degree-n factorization of the restricted sections inclusion is invertible.
-Source: Stacks Project, Tag 015J, proof remark (3), column filtration. -/
+/-- The degree-n factorization of the restricted sections inclusion is invertible
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsLift_component_isIso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

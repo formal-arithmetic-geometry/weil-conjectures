@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 
 /-!
 # Assembly of finite coefficient models on strata
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
-noetherian induction and extension descent, steps 4--7 of the parent descent node.
 -/
 
 @[expose] public section
@@ -29,10 +26,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Finite coefficient models of the restrictions to a finite stratification assemble
 to a constructible finite coefficient model of the original module. The fields may
-differ from stratum to stratum; the extension classes must also be descended.
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
-steps 4--7 of lem-weil-pbc-condensed-finite-presentation-descent. -/
+differ from stratum to stratum; the extension classes must also be descended. -/
 theorem exists_finiteCoefficient_model_of_stratum_models
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

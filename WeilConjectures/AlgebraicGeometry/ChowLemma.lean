@@ -82,10 +82,6 @@ over `S`.
 ## References
 
 * [Stacks, Tag 0200](https://stacks.math.columbia.edu/tag/0200)
-
-## Blueprint
-
-The declarations of this file implement `thm:chow-lemma` of the proper-base-change blueprint.
 -/
 
 @[expose] public section
@@ -98,16 +94,11 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
-/-- **Chow's lemma over a quasi-compact quasi-separated base** (the non-Noetherian variant,
-blueprint `rem-chow-lemma-non-noetherian`): let `S` be quasi-compact and quasi-separated and let
+/-- **Chow's lemma over a quasi-compact quasi-separated base** (the non-Noetherian variant):
+let `S` be quasi-compact and quasi-separated and let
 `f : X ⟶ S` be separated and of finite type, with `X` having finitely many irreducible
 components. Then there are a proper surjective morphism `π : X' ⟶ X` which is an isomorphism
-over a dense open subset of `X`, and an immersion `e : X' ⟶ ℙ(N; S)` over `S` with `N` finite.
-
-The proof is that of `AlgebraicGeometry.ChowModification.nonempty_data`: Noetherianity of `S`
-is only used there through the finiteness of the set of irreducible components of `X` and the
-quasi-compactness of the various immersions out of quasi-compact schemes, which here follows
-from quasi-separatedness instead. -/
+over a dense open subset of `X`, and an immersion `e : X' ⟶ ℙ(N; S)` over `S` with `N` finite. -/
 @[stacks 0203]
 theorem exists_chowModification_of_finite_irreducibleComponents {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f] [LocallyOfFiniteType f]
@@ -231,12 +222,7 @@ namespace ChowModification
 /-- All the data the Chow modification of `f : X ⟶ S` is made of, in one structure: the
 modification `X'` together with the proper surjective `π : X' ⟶ X`, which is an isomorphism
 over a dense open subset of `X`, and the immersion of `X'` into a projective space `ℙ(N; S)`
-over `S`.
-
-Bundling the data like this is what makes the choices underlying `ChowModification f`,
-`ChowModification.index f`, `ChowModification.modificationMap f` and
-`ChowModification.toProjectiveSpace f` the *same* choices: all four are fields of
-`ChowModification.data f`. -/
+over `S`. -/
 structure Data {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] where
   /-- the modification `X'` -/
@@ -257,19 +243,7 @@ structure Data {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
   exists_dense_isIso : ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (π ∣_ U)
 
 /-- **Chow's lemma**: a separated morphism of finite type over a Noetherian scheme admits a
-Chow modification.
-
-Steps 1 and 2 of Stacks' proof produce a reduction `R` of `f` (`AlgebraicGeometry.ChowReduction`)
-with a nonempty finite affine open cover `R.U`, step 3 a proper closed model `M i` of each
-member of the cover, step 4 the graph `ChowGraph M` of the family, and step 5 the modification
-`ChowGraph.modificationMap M` obtained by gluing the projections of the graph. It remains to
-check that the latter is proper (it is proper over each `R.U i`, which cover), surjective (it
-is universally closed and dominant, the dense open `U∞` mapping isomorphically onto
-`⋂ i, R.U i`) and an isomorphism over `⋂ i, R.U i` (the open `U∞` of `X'` is dense in the
-preimage of `⋂ i, R.U i` and proper over it, hence all of it); step 7 is the closed immersion
-of the graph into a single projective space over `S`. These steps are carried out in
-`AlgebraicGeometry.exists_chowModification_of_finite_irreducibleComponents`, which applies since
-`X` is Noetherian. -/
+Chow modification (Stacks, Tag 0200). -/
 @[stacks 0200]
 theorem nonempty_data : Nonempty (Data f) := by
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
@@ -288,18 +262,7 @@ end ChowModification
 /-- The **Chow modification** `X'` of a separated morphism of finite type `f : X ⟶ S` over a
 Noetherian scheme `S`: a scheme with a proper surjective morphism to `X` which is an
 isomorphism over a dense open subset of `X`, and an immersion into a projective space over
-`S`, i.e. a scheme making
-
-```
-                     toProjectiveSpace
-  ChowModification f -----------------> ℙ(index f; S)
-          |                                   |
-          | modificationMap                   | ↘
-          ↓                                   ↓
-          X ------------- f ----------------> S
-```
-
-commute. -/
+`S`, compatibly with the maps to `S`. -/
 @[stacks 0200]
 def ChowModification {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] : Scheme.{u} :=
@@ -335,18 +298,7 @@ locally closed immersion. -/
 instance isImmersion_toProjectiveSpace : IsImmersion (toProjectiveSpace f) :=
   (data f).isImmersion_e
 
-/-- The immersion of a Chow modification into projective space is a morphism over `S`:
-
-```
-                     toProjectiveSpace
-  ChowModification f -----------------> ℙ(index f; S)
-          |                                   |
-          | modificationMap                   | ↘
-          ↓                                   ↓
-          X ------------- f ----------------> S
-```
-
-commutes. -/
+/-- The immersion of a Chow modification into projective space is a morphism over `S`. -/
 @[reassoc]
 theorem toProjectiveSpace_over :
     toProjectiveSpace f ≫ ℙ(index f; S) ↘ S = modificationMap f ≫ f :=
@@ -363,11 +315,7 @@ theorem exists_dense_isIso_restrict :
 modification into projective space is a *closed* immersion. Together with
 `AlgebraicGeometry.ChowModification.isProper_modificationMap` and
 `AlgebraicGeometry.ChowModification.surjective_modificationMap` this says that a proper scheme
-over a Noetherian base is dominated by a projective one.
-
-Indeed, `toProjectiveSpace f` composed with the structure morphism of `ℙ(index f; S)` is the
-proper morphism `modificationMap f ≫ f`, and the structure morphism is separated, so
-`toProjectiveSpace f` is itself proper, hence universally closed. -/
+over a Noetherian base is dominated by a projective one. -/
 @[stacks 0202]
 instance isClosedImmersion_toProjectiveSpace {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsProper f] : IsClosedImmersion (toProjectiveSpace f) := by

@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true
 
 /-- Algebraic data for applying complex continuity to the pullbacks of `C`.
-The data record coherence and canonical maps, without any colimit assertion.
-Source: Stacks Project, Tag 0GIT, proof, termwise colimit identification. -/
+(Stacks, Tag 0GIT). -/
 structure ComplexPullbackPresentation
     {I : Type u} [SmallCategory I] (T : Scheme.{u})
     (D : I ⥤ Scheme.{u}) (c : Cone D) (t : D ⟶ (Functor.const I).obj T)
@@ -84,10 +83,7 @@ structure ComplexPullbackPresentation
           (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))
 
 /-- Present a canonical derived cohomology cocone using termwise pullbacks of a
-complex representative. No limit universal property or qcqs/affineness hypothesis
-is required here, and no cohomology colimit is asserted.
-Source: Stacks Project, Étale Cohomology, Tag 0GIT, proof, lines 7869-7873;
-canonical-map identification in the proof of Tag 0EZM. -/
+complex representative (Stacks, Tags 0GIT and 0EZM). -/
 theorem nonempty_complexPullbackPresentation
     {I : Type u}
     [SmallCategory I]

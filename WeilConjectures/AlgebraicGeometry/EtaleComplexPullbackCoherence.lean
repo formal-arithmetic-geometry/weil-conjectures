@@ -67,8 +67,7 @@ private lemma unit_comparison {X T : Scheme.{u}} (a : X ⟶ X) (ha : a = 𝟙 X)
 
 
 /-- Termwise comparisons satisfy the unit, associativity, and cone transition laws.
-Source: Stacks Project, Tag 0GIT, proof, termwise pullbacks, expanded using the
-inverse-image composition and identity comparisons. -/
+(Stacks, Tag 0GIT). -/
 theorem presentation_pullback_coherence
     {I : Type u} [SmallCategory I] (T : Scheme.{u})
     (D : I ⥤ Scheme.{u}) (c : Cone D) (t : D ⟶ (Functor.const I).obj T)

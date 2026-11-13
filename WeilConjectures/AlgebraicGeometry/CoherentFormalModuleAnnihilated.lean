@@ -153,13 +153,8 @@ namespace LinearMap
 
 /-- The commutative algebra fact underlying the four-way equivalence: reduce modulo
 any ideal J. The kernel/cokernel hypothesis is the intrinsic form of the exact sequence
-0 → T → M → N → Q → 0, which identifies T with ker u and Q with N/range u.
-Source: Stacks, Remark 0888.
-Proof (node step 3): for f,g in K^t, lift fy to x and set h(y)=gx. The kernel
-hypothesis makes this independent of x, and linearity gives a linear map. The two
-composites with u are multiplication by fg. Reduce these identities modulo J; every
-product fg kills the reduced kernel and cokernel. Such products generate K^(2t).
--/
+0 → T → M → N → Q → 0, which identifies T with ker u and Q with N/range u
+(Stacks, Tag 0888). -/
 theorem ker_coker_reduction_annihilated_double
     {A : Type u} [CommRing A] {M : Type v} {N : Type w}
     [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]

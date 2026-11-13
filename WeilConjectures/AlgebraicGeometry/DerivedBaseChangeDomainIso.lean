@@ -134,9 +134,8 @@ private theorem pullback_square_precomp
   simp only [eqToHom_trans]
 
 
-/-- Replace the source of the base morphism by an isomorphic scheme.
-Source: Stacks Project, Remark 20.28.3 (08HY), Lemmas 20.27.2 (0D5S)
-and 20.28.2 (0D5T). -/
+/-- Replace the source of the base morphism by an isomorphic scheme
+(Stacks, Tags 08HY, 0D5S, 0D5T). -/
 theorem exists_derivedBaseChange_domain_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

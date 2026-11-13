@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # The canonical comparison of module and set inverse images
 
-Source: Stacks Project, Tags 03D3 and 03D7, and the coefficient-forgetting
-comparison in lem-sc-algclosed-extension-module-sections, proof step 2.
+Source: Stacks Project, Tags 03D3 and 03D7.
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ private theorem pullback_unit_hom (A : Type*) [Category.{u + 1} A]
 
 /-- The canonical comparison from the inverse image of the underlying set sheaf to
  the underlying set sheaf of the module inverse image is an isomorphism.
-Source: Stacks Project, Tags 03D3 and 03D7 (inverse images), and the concrete
-coefficient comparison in lem-sc-algclosed-extension-module-sections, step 2. -/
+(Stacks, Tags 03D3 and 03D7) -/
 theorem isIso_upperStar_forget_comparison (R : Type (u + 1)) [Ring R]
     {X Y : Scheme.{u}} (g : X ⟶ Y)
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :

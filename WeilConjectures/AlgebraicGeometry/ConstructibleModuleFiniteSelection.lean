@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
 /-!
 # Finite selection of module-valued geometric stalk tests
 
-Source: Stacks Project, Tag 09Z6, the partition alternative in the first proof paragraph.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section
@@ -31,10 +33,7 @@ attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 
 /-- A family of module-sheaf maps that contains an injective test at every geometric stalk
 of a constructible source has a finite subfamily whose biproduct lift is monomorphic.
-
-Source: Stacks Project, Tag 09Z6, partition alternative, transferred to (3), and the
-abelian-sheaf finite-selection statement
-`lem-weil-pbc-constructible-noetherian-finite-selection`. -/
+(Stacks, Tag 09Z6) -/
 theorem exists_mono_biproduct_of_constructible_module_stalk_injective
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (X : Scheme.{u}) [IsNoetherian X]

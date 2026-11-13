@@ -246,11 +246,8 @@ end FreeSheafComparisonAux
 namespace AlgebraicGeometry.Scheme
 
 /-- Shifted maps from the free module sheaf on the terminal etale object compute derived
-module global sections, naturally in the coefficient sheaf. No compactness, separation,
-or torsion hypothesis is needed.
-
-Source: Stacks Project, Derived Categories, Definition 015A and Lemma 05TI; the
-identification with derived functors in lem-sp-derived-functor-single-identification. -/
+module global sections, naturally in the coefficient sheaf
+(Stacks, Tags 015A and 05TI). -/
 theorem nonempty_freeSheafDerivedSectionsIso (Z : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] (q : ℕ) :
     Nonempty

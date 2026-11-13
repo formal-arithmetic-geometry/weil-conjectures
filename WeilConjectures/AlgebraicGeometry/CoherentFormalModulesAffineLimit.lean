@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # CoherentFormalModulesAffineLimit
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -30,10 +30,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the finite completed-module limit functor, with its projections.
-This asserts no equivalence and constructs no inverse functor.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof paragraphs on
-Nakayama, the surjective kernel tower and Mittag-Leffler; Schemes 01I7/01IB. -/
+(Stacks, Tag 087W). -/
 theorem coherentFormalModules_affine_limit (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
     (hJ : J = Scheme.IdealSheafData.ofIdealTop

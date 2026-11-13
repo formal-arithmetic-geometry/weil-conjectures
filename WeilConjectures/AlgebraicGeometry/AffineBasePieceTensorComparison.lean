@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChange
 /-!
 # Tensor comparison after one affine base change
 
-Source: Stacks Project, Limits, proof of Tag 01ZO (affine reduction),
-Schemes, Tags 01JR and 01I4, and Morphisms, Tag 01T2.
+## References
+
+* Stacks Project, Tags 01ZO, 01JR, 01I4 and 01T2
 -/
 
 @[expose] public section
@@ -72,10 +73,8 @@ private theorem stageLft {S T : Scheme.{u}} (d : T ⟶ S)
       (IsPullback.of_hasPullback Y₀.hom d)
   exact MorphismProperty.of_isPullback hp inferInstance
 
-/-- An affine finite-type base piece has a single tensor model under further base change.
-
-Source: Stacks Project, Limits, proof of Tag 01ZO (affine reduction),
-Schemes, Tags 01JR and 01I4, and Morphisms, Tag 01T2. -/
+/-- An affine finite-type base piece has a single tensor model under further base change
+(Stacks, Tags 01ZO, 01JR, 01I4 and 01T2). -/
 theorem exists_affine_base_piece_tensor_comparison
     {S T : Scheme.{u}} (d : T ⟶ S) [IsAffineHom d]
     (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left]

@@ -11,8 +11,9 @@ import WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
 
 /-! # Exact realization of the coefficient ring and its finite quotients
 
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M), and
-Modules on Sites, Tags 03CY and 03EK.
+## References
+
+* Stacks Project, Tags 099M, 03CY and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -313,10 +314,8 @@ private theorem quotientMap_isIso
 end Realization
 
 /-- Exact coefficient realization, with the regular-module and quotient normalizations.
-This statement contains no Koszul complexes, exterior powers, cones or derived categories.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M);
-Modules on Sites, Tags 03CY and 03EK. -/
+This statement contains no Koszul complexes, exterior powers, cones or derived categories
+(Stacks, Tags 099M, 03CY and 03EK). -/
 theorem adicResidue_exact_coefficient_realization
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.InternalHomCounitMateIso
 
 /-! # Derived internal Hom adjunction for pullback and direct image
 
-Source: Stacks Project, Cohomology, Remark 08I3 and Lemmas 079W, 08DJ.
+## References
+
+* Stacks Project, Cohomology, Tags 08I3, 079W, 08DJ
 -/
 
 @[expose] public section
@@ -29,19 +31,9 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical internal-Hom comparison, its counit composite as a natural isomorphism,
-and its map on zeroth hypercohomology. The witnesses are the adjunction `a`
-(Lg^* ⊣ Rg_*), the tensor/internal-Hom adjunctions `bS`, `bT`, and the pullback--tensor
-comparison `t` (lem-pc-derived-pullback-tensor-product), in the form of the existing
-lem-pc-sheaf-rhom-projection-formula. The first equation specifies gamma as the mate under
-`a` and `bT` of `t.inv` followed by Lg^* of evaluation (the counit of `bS`, the transpose of
-the identity of internal Hom). The isomorphism `d` is the counit composite, `z` is the
-comparison of global sections with pushforward (lem-pc-derived-sections-pushforward-comparison),
-and `eS`, `eT` are identifications H⁰(RHom(L,M)) = Hom(L,M) natural in both variables, as
-in lem-pur-rhom-global-sections; the final equation says the map induced on H⁰ is
-φ ↦ ε_E ∘ Lg^*φ.
-
-Source: Stacks Project, Cohomology, Remark 08I3, Tags 079W and 08DJ. -/
+/-- The canonical internal-Hom comparison for pullback and direct image, its counit composite
+as a natural isomorphism, and its map on zeroth hypercohomology; the final equation says the
+map induced on `H⁰` is `φ ↦ ε_E ∘ Lg^*φ` (Stacks, Tags 08I3, 079W, 08DJ). -/
 theorem derivedInternalHom_pullback_adjunction
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

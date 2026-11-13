@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.CartesianMonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Proposition 00YV, ring paragraph; equality transport in
-step 1 of.
-Equality of bundled internal rings transports the operations as well as the carrier.
-After eliminating that equality, the two carrier identifications agree by proof irrelevance. -/
+/-- Equality of bundled internal rings transports the operations as well as the carrier
+(Stacks, Tag 00YV). -/
 private theorem transportSectionOperations.{v, w} {C : Type v} [Category C]
     {J : GrothendieckTopology C} [J.HasSheafCompose (forget CommRingCat.{w})]
     (A : Sheaf J CommRingCat.{w}) (Y X : CommRingObjCat (Sheaf J (Type w)))

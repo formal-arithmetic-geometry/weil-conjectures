@@ -13,7 +13,9 @@ import WeilConjectures.RingTheory.NoetherianKoszulAugmentationProZero
 
 /-! # Derived-limit invertibility of the normalized strict augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, and sites-modules.tex, Tag 093M.
+## References
+
+* Stacks Project, Tags 099M, 093M
 -/
 
 @[expose] public noncomputable section
@@ -60,7 +62,7 @@ private theorem proZero_of_exact_realization
 /-- A normalized strict augmentation becomes invertible after total derived inverse
 limit on a flat-term K-flat complex. This concerns strict complexes, before descent
 and independently of either chosen Koszul or quotient presentation.
-Source: Stacks Project, Tag 099M, proof; Tag 093M; More on Algebra, the sequence of Koszul complexes. -/
+(Stacks Project, Tags 099M, 093M) -/
 theorem koszulQuotientAugmentation_isIso [IsNoetherianRing A] (b : Bool) (r : ℕ)
     (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

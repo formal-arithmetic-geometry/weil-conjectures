@@ -58,13 +58,8 @@ set_option maxHeartbeats 700000 in
 -- The diagram chase elaborates several specialized derived-category interfaces.
 /-- On a K-injective complex on the inverse-image open, restricting the normalized
 composition comparison and then applying the base-open counit agrees with first
-using the open-restriction comparison and then pushing forward the source-open counit.
-The parameter β is fixed by hβ to the canonical composite. Keeping it as an
-explicit parameter avoids unfolding its right-derived choice in each projection.
-This concerns an arbitrary complex on the open, not a restriction unit on X.
-
-Source: Stacks Project, Tags 08FE (sectionwise restriction/direct-image identity),
-0D5T (composition of derived direct images), and 08BV (open adjunction computation). -/
+using the open-restriction comparison and then pushing forward the source-open counit
+(Stacks, Tags 08FE, 0D5T and 08BV). -/
 theorem schemeMVOpenComposition_counit_Q
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

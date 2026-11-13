@@ -29,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A section on a quasi-compact etale object which vanishes in a filtered sheaf
-colimit vanishes at a later stage. Quasi-separatedness is not needed for this assertion.
-Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2), and Etale
-Cohomology, Section Tag 03Q4. -/
+colimit vanishes at a later stage (Stacks, Tags 0738, 03Q4). -/
 theorem etale_section_colimit_eventual_zero
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left]

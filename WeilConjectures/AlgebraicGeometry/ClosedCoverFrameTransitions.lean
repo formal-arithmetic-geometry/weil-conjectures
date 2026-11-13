@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Component frames and transition units for a finite closed cover
 
-Source: Stacks Project, Varieties Lemma 09NE, direct proof before gluing the line bundle.
+## References
+
+* Stacks Project, Tag 09NE
 -/
 
 @[expose] public section
@@ -83,11 +85,7 @@ private theorem exists_componentFrame_neighborhood
 
 /-- A finite closed cover with discrete intersections admits local component frames whose
 changes of frame come from a single system of Čech transition units on the ambient scheme.
-This statement constructs only opens, sections of the prescribed modules, and ring units;
-it does not construct a module on the ambient scheme.
-
-Source: Stacks Project, Varieties Lemma 09NE, direct proof, from the definition of `T`
-through the construction of the transition functions on the three kinds of overlaps. -/
+(Stacks, Tag 09NE). -/
 theorem exists_closedCover_frame_transitions
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

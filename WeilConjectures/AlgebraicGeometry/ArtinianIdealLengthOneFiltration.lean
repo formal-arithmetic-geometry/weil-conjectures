@@ -14,7 +14,9 @@ import Mathlib.RingTheory.HopkinsLevitzki
 /-!
 # Length-one filtrations of ideals in Artinian rings
 
-Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT.
+## References
+
+* Stacks Project, Tag 02HT
 -/
 
 @[expose] public section
@@ -23,19 +25,8 @@ universe u
 
 namespace RingTheory
 
-/--
-For an Artinian commutative ring, every ideal admits a finite filtration by ideals
-whose successive quotients have module length one.
-
-Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT. The proof uses
-`lem-weil-pbc-artinian-ring-self-finite-length` and
-`lem-weil-pbc-finite-length-module-simple-filtration`. Regard `B` as a module over
-itself and use the Artinian-ring finite-length lemma to bound strict submodule
-chains. The ideal `J` is a submodule of `B`, so it has finite length. Apply the
-finite-length simple-filtration lemma to `J`; its submodules are precisely the
-ideals contained in `J`, and its successive module quotients are the displayed
-quotients. The zero ideal is handled by taking `r = 0`.
--/
+/-- For an Artinian commutative ring, every ideal admits a finite filtration by ideals
+whose successive quotients have module length one (Stacks, Tag 02HT). -/
 theorem exists_ideal_filtration_length_one (B : Type u) [CommRing B]
     [IsArtinianRing B] (J : Ideal B) :
     ∃ (r : ℕ) (F : Fin (r + 1) → Ideal B),

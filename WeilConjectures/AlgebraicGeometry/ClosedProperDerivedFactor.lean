@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 
 /-! # The clopen-factor description of the canonical proper comparison
 
-Source: the ordered exterior-product and comparison paragraphs of
-sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md.
+The canonical proper comparison for a closed immersion is the direct-image factorization.
 -/
 
 @[expose] public noncomputable section
@@ -79,9 +78,7 @@ def properModelComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       (lowerStarFactor B c.comm.symm)
 
 /-- The published proper comparison equals the direct-image factorization.
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, ordered compact-support composition;
-parent node proof Step 3. -/
+-/
 theorem closedProperDerivedFactor (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] [HasCompactification f] :
     rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar (ModuleCat.{u + 1} A) f =

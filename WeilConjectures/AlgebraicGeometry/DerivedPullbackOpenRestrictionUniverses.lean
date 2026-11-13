@@ -151,8 +151,8 @@ private theorem exact_transport
       @Functor.mapDerivedCategoryFactorsh _ _ _ hA₂ _ _ _ hB₂ F _ _ _
   exact ⟨((Functor.whiskeringLeft _ _ _).obj qA₁).preimageIso (α ≪≫ β.symm)⟩
 
-/-- Restriction comparison with a possibly different localization universe on opens.
-Source: Stacks Project, Tag 08DW, proof of compatibility with restriction. -/
+/-- Restriction comparison with a possibly different localization universe on opens
+(Stacks, Tag 08DW). -/
 theorem derivedPullback_openRestriction_iso_universes {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : X.Opens) (V : Y.Opens) (hUV : U ≤ f ⁻¹ᵁ V)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

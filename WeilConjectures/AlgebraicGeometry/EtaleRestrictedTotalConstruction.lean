@@ -81,8 +81,8 @@ noncomputable def etaleCEMappedTotalIso
   let e := HomologicalComplex₂.total.mapIso j' (ComplexShape.up ℤ) ≪≫ eTotal
   exact e
 
-/-- Restrict complex degree to s ≥ q and extend by zero, retaining resolution degree.
-Source: Stacks, Tag 015J, proof remark (3). -/
+/-- Restrict complex degree to s ≥ q and extend by zero, retaining resolution degree
+(Stacks, Tag 015J). -/
 noncomputable def etaleRestrictedBicomplex (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
@@ -97,9 +97,8 @@ noncomputable def etaleRestrictedTotal (X : Scheme.{u})
     (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))).obj
       (etaleRestrictedBicomplex X K T q)).flip).total (ComplexShape.up ℤ)
 
-/-- The restricted total is zero below q: the retained rows have s ≥ q.
-Source: Stacks, Tags 015J and 0133. Proof: below q the outer stupid truncation
-is a zero complex, since no nonnegative index is sent to s < q. -/
+/-- The restricted total is zero below q: the retained rows have s ≥ q
+(Stacks, Tags 015J, 0133). -/
 theorem etaleRestrictedBicomplex_below (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :

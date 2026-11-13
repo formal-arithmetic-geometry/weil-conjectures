@@ -42,8 +42,8 @@ private theorem section_subsingleton (S : Scheme.{u})
   exact Function.Injective.subsingleton (f := E.map (terminal.from H))
     ((CategoryTheory.mono_iff_injective _).mp hm)
 
-/-- A subterminal étale sheaf has an open support with the section factorization property.
-Source: Stacks Project, Étale Cohomology, Tag 04HV, lemma-support-subsheaf-final. -/
+/-- A subterminal étale sheaf has an open support with the section factorization property
+(Stacks, Tag 04HV). -/
 theorem exists_open_etale_subsheaf_final_factorization (S : Scheme.{u})
     (H : Sheaf S.smallEtaleTopology (Type (max u v)))
     [Mono (terminal.from H)] :

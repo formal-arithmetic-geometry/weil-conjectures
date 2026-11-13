@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
 /-- The fpqc sheaf condition for representables makes a covering singleton effective epi.
-Source: Stacks Project, Descent, Tag 023Q; Mathlib's fpqc subcanonical instance. -/
+(Stacks, Tag 023Q) -/
 private theorem effectiveEpi_of_cover {A B : Scheme.{u}}
     (J : Precoverage Scheme) (hJ : J ≤ Scheme.fpqcPrecoverage)
     (q : A ⟶ B) (hq : Presieve.singleton q ∈ J B) : EffectiveEpi q := by
@@ -37,16 +37,7 @@ private theorem effectiveEpi_of_cover {A B : Scheme.{u}}
     (Precoverage.generate_mem_toGrothendieck (hJ B hq))
 
 /-- Pairwise cartesian lifts and the transition factorization imply the triple cocycle.
-
-Source: Stacks Project, Descent, Tag 0AP4, omitted verification of the gluing identities.
-
-Pull back each double overlap along its map to W_i to obtain an fpqc effective epi c.
-The cartesian lifts give maps a and b to the original pairwise intersections, with the
-same U_i projection. Their other projections define d into U_k times_V U_l. The maps
-e and e' express the two cyclic reorderings of these three points. Descend e along c:
-its second projection factors through c, and that projection is monic, so effective-epi
-compatibility holds. Each cyclic transition sends the corresponding reordered lift to
-the next one. The third sends it back to c. Cancel c to prove the cyclic identity. -/
+(Stacks, Tag 0AP4) -/
 private theorem overlap_cocycle
     {V : Scheme.{u}} {I : Type u} (U : I → V.Opens)
     (W : I → Scheme.{u}) (q : ∀ i, (U i).toScheme ⟶ W i)
@@ -149,9 +140,7 @@ private theorem overlap_cocycle
   rw [← Category.assoc, ← Category.assoc, hce, hee', he'c, Category.comp_id]
 
 /-- Compatibility with the ambient datum preserves factorization through another open.
-Source: Stacks Project, Descent, Tag 0AP4, compatibility of the overlap with descent data.
-Lift the initial point through U_k, transport both lifts, and compare their inclusions
-using hcompat. The transported point still factors through U_k. -/
+(Stacks, Tag 0AP4) -/
 private theorem transport_range_open
     {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     (D : Over.DescentDatum p V) {I : Type u} (U : I → V.left.Opens)
@@ -184,11 +173,7 @@ private theorem transport_range_open
   exact ⟨((E k).transport f₁ f₂ h b').left z, rfl⟩
 
 /-- The intersection open satisfies the double-overlap equality required by open descent.
-Source: Stacks Project, Descent, Tags 0AP4 and 03N0.
-For two maps a and b with the same q_i composite, restrict their test scheme to the
-preimage of U_k under a. Cartesian uniqueness and hinv identify transport of a with b.
-The preceding factorization lemma gives containment of the preimage under a in that
-under b. Interchange a and b for the reverse containment. -/
+(Stacks, Tags 0AP4 and 03N0) -/
 private theorem intersections_invariant
     {X Y : Scheme.{u}} {p : X ⟶ Y}
     {V : Over X} (D : Over.DescentDatum p V)
@@ -243,9 +228,7 @@ private theorem intersections_invariant
       sub (pullback.snd (q i) (q i)) (pullback.fst (q i) (q i)) pullback.condition.symm
 
 /-- The effective local models have open overlap transitions and lifts of the intersections.
-
-Source: Stacks Project, Descent, Tag 0AP4, proof through the construction of gluing data;
-Tags 03N0 and 02W0 for descent of opens and morphisms, respectively. -/
+(Stacks, Tags 0AP4, 03N0, 02W0) -/
 theorem exists_descended_overlap_glue_data
     {X Y : Scheme.{u}} {p : X ⟶ Y}
     (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y)

@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Quasi-coherence in the affine algebra derived adjunction
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Every left adjoint to the canonical affine algebra derived direct image preserves
-quasi-coherent cohomology.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof. -/
+quasi-coherent cohomology (Stacks, Tag 0AVW). -/
 theorem affine_algebra_derived_pullback_preserves_qcoh
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

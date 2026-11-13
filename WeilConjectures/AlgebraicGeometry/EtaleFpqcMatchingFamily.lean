@@ -23,11 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XN, proof, paragraphs beginning "Let V" and
-"By construction", and the agreement-open argument of Tag 09XM.
-
-This produces local sections and their compatibility, before applying the sheaf axiom.
-The matching equation is on the whole base change of each object in the covering sieve. -/
+/-- Local sections of an étale sheaf along an fpqc cover form a matching family, before
+applying the sheaf axiom (Stacks, Tags 09XN and 09XM). -/
 theorem etaleFpqcSections_exists_matching_family
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingRestriction
 
 /-! # Lattice compatibility of the continuous module encoding
 
-Source: Stacks Project, Modules on Sites, and Bhatt--Scholze, Section 6.8.
+## References
+
+* Stacks Project, Modules on Sites
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public section
@@ -26,42 +29,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The explicit continuous module encodings preserve local finite freeness and
 translate any specified etale lattice and its rationalization back to internal modules.
-
-Source: Stacks Project, Modules on Sites, Tags 03DM (local finite freeness),
-03DO (pullback), 03D7 (adjunction), 03EK and 03EL (tensor and pullback);
-Bhatt--Scholze, Definition 6.8.3 and Proposition 6.8.4(6).
-
-Proof in words. A finite free internal module is a finite biproduct of the regular
-module. The proved continuousFieldFreeIso and continuousIntegerFreeIso give the
-corresponding sectionwise free modules, including the coefficient identifications.
-The existing finiteLocallyFree_restrict transports local freeness along those
-coefficient-ring isomorphisms.
-On the slice over a pro-etale chart, the sectionwise encoding of inverse image
-is restriction of the encoded sheaf. This follows from the inverse-image adjunction
-and the unchanged underlying sheaf in sectionModuleEquivalence.
-The proved continuousChart_pullback identifies its coefficient comparison with
-condensedPullbackHom, using the adjoint form of
-continuousChart_scheme_naturality and the pullback projection on sections.
-The supplied free cover therefore gives finite locally free generators for the
-encoded rational module.
-Conversely, a sectionwise finite free trivialization on a covering slice transports
-back through the inverse integral equivalence, and the comparison with inverse
-image gives a pro-etale free cover of that internal module. Covers of the terminal
-object can be replaced by the pro-etale precoverage since it generates the topology.
-For rationalization, extension of scalars in both encodings is left adjoint to
-restriction of scalars. The coefficient square commutes by chartComparison_naturality,
-with lisseScalar_square for the integral and spectral coefficient identifications.
-The proved continuousRing_comap_compatibility compares restriction of scalars
-for the full continuous encodings, using sectionModuleComapIso at the reconstructed-ring
-stage. Transport it further through the spectral and integral coefficient identifications.
-Uniqueness of left adjoints supplies the scalar-extension comparison. Restriction
-along an etale arrow is inverse image on the small pro-etale sites. Its analogous
-adjunction comparison identifies the right side of the specified lattice isomorphism
-with the encoding of the canonical internal pullback. Transport that isomorphism
-back through the fully faithful rational encoding and use the counit of the integral
-equivalence. This asserts compatibility for an already supplied lattice; it does
-not assert that any lattice or etale neighborhood exists. Empty and zero-rank
-trivializations remain empty and zero-rank under these equivalences. -/
+(Stacks, Tags 03DM, 03DO, 03D7, 03EK and 03EL; Bhatt--Scholze, Definition 6.8.3 and
+Proposition 6.8.4 (6)) -/
 theorem continuousModuleEncoding_lattice_compatibility
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

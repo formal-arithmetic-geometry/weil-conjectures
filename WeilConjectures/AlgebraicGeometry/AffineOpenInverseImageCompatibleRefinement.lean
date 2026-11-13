@@ -21,9 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 /-- A finite family of affine local sections with agreeing limit images has a
-covering refinement at a later open stage on which its restrictions are compatible.
-Source: Stacks Project, Tag 03Q6, proof steps (2)--(4), and Tag 09XM
-(equality locus of inverse-image sections). -/
+covering refinement at a later open stage on which its restrictions are compatible
+(Stacks, Tags 03Q6, 09XM). -/
 theorem affineOpenSections_inverse_image_compatible_refinement
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

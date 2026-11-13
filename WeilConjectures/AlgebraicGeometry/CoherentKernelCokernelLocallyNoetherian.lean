@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Coherent kernels, cokernels, sums and quasi-coherent submodules
 
-Source: Stacks Project, Cohomology of Schemes, Tags 01Y0 and 01Y1.
+Stacks Project, Tags 01Y0 and 01Y1.
 -/
 
 @[expose] public section
@@ -27,13 +27,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Restriction to a slice site preserves finite type for an arbitrary sheaf of rings.
-Pull the local generating cover back along
-`Over.forget U`; its local maps preserve colimits and the unit, hence carry each finite
-family of generators to a finite family. Source: Stacks Project, Modules, Tag 01B5,
-the locality of finite type used in the affine submodule argument. This generalizes
-the scheme-only helper to sites with binary products and pullbacks; only weak sheafification
-is assumed on the first-level slices, and sheafification on the iterated slices. -/
+/-- Restriction to a slice site preserves finite type for an arbitrary sheaf of rings
+(Stacks, Tag 01B5). -/
 private theorem isFiniteType_over.{u₁, v₁}
     {C : Type u₁} [Category.{v₁} C] [HasBinaryProducts C] [HasPullbacks C]
     (J : GrothendieckTopology C)
@@ -81,7 +76,7 @@ private theorem isFiniteType_over.{u₁, v₁}
 /-- On a locally Noetherian scheme, kernels and cokernels of maps between coherent modules,
 binary direct sums of coherent modules, and quasi-coherent submodules of coherent modules
 and their quotients are coherent. A submodule inclusion is represented by a monomorphism.
-Source: Stacks Project, Cohomology of Schemes, Tags 01Y0 and 01Y1. -/
+(Stacks, Tags 01Y0 and 01Y1). -/
 theorem isCoherent_kernel_cokernel_biprod_and_submodule
     (X : Scheme.{u}) [IsLocallyNoetherian X] :
     (∀ (F G : X.Modules),

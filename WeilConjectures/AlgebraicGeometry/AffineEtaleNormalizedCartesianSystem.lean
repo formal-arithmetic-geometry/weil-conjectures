@@ -75,8 +75,8 @@ private theorem normalizedPair {I : Type u} [Preorder I]
       fun h ↦ (e h).elim, fun h _ ↦ (e h).elim, ?_⟩
     exact normalizedSquare (D.map (homOfLE h).op)
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, base-change functors and their
-canonical comparison isomorphisms (including the discussion following its proof). -/
+/-- Base change of affine étale objects along the transition maps gives a normalized
+cartesian system of functors with canonical comparison isomorphisms (Stacks, Tag 0EYL). -/
 theorem exists_affineEtale_normalized_cartesian_system
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

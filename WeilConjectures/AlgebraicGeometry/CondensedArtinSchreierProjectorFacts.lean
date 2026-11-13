@@ -67,9 +67,7 @@ local notation "τ" => condensedArtinSchreierTranslationAction Λ k
 local notation "ρ" => condensedArtinSchreierChartProjection Λ k
 
 -- Concrete linear and monoidal module comparisons need additional elaboration heartbeats.
-/-- The character image evaluates to the regular module on the Artin–Schreier cover.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, character projector calculation. -/
+/-- The character image evaluates to the regular module on the Artin–Schreier cover. -/
 theorem condensedArtinSchreierProjector_evaluation (ψ : AddChar k (MonObj.Γ Λ)) :
     IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
@@ -120,9 +118,7 @@ private theorem translation_add (a b : k) :
 
 -- Concrete linear and monoidal module comparisons need additional elaboration heartbeats.
 /-- Products of the two character images and constant functions are fixed by the
-appropriate character projectors.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, character multiplication. -/
+appropriate character projectors. -/
 theorem condensedArtinSchreierProjector_products (ψ ψ' : AddChar k (MonObj.Γ Λ)) :
     (((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫ Functor.LaxMonoidal.μ G
       (Mod.regular (condensedRingObj Λ A)) (Mod.regular (condensedRingObj Λ A)) ≫

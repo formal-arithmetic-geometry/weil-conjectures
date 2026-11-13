@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 /-!
 # Functoriality of conormal sheaves of closed immersions
 
-Source: Stacks Project, Morphisms, Lemma 01R4, Definition 01R2 and Lemma 01R3.
+## References
+
+* Stacks Project, Tags 01R4, 01R2 and 01R3
 -/
 
 @[expose] public section
@@ -29,16 +31,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The extended ideal is contained in the ideal of the source closed subscheme.
-The map `γ` is fixed by its values on pullbacks of ideal sections. The unique map `c`
-is the pullback of `γ`, expressed by the equality of its adjoint with the composite
-of the units and `γ`; pushforward comparison maps implement the commutative square.
-The affine clause uses ideal sections before their conormal classes: by
-`affine_conormal_sections`, the units on these sections are precisely `a mod I²`.
-The final affine equation explicitly sends that class to the class of `g.appLE` applied
-to its ideal representative. The existential section `s` also records ideal containment
-on these affine opens, without choosing coordinates or a second conormal definition.
-
-Source: Stacks Project, Morphisms, Lemma 01R4 (closed immersion case), with 01R2 and 01R3. -/
+There is a unique induced map of conormal sheaves, compatible with the affine description
+of conormal classes (Stacks, Tags 01R4, 01R2, 01R3). -/
 theorem closedImmersion_conormal_functorial
     {X Z X' Z' : Scheme.{uc}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

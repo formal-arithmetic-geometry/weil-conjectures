@@ -131,9 +131,7 @@ set_option linter.unusedVariables false in
 /-- Assemble presentations on prescribed CE resolutions with normalized quotient pages,
 and compute a supplied map of the first page on ordinary sheaf cohomology.
 This statement constructs no spectral-sequence morphism.
-Source: Stacks Project, Tag 015J, lemma-two-ss-complex-functor;
-Tag 015K, remark-functorial-ss; Tag 012K, lemma-spectral-sequence-filtered-complex;
-Tag 06XR, cohomology through injective resolutions. -/
+(Stacks, Tags 015J, 015K, 012K and 06XR) -/
 theorem exists_etaleCE_prescribed_normalized_first_pages
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

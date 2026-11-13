@@ -18,7 +18,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 The short exact sequence is the kernel sequence of the actual strict reduction map.
 Its normalization, residue balancing and representative independence are proved here;
 only the ordinary flat-tensor kernel identification is delegated to its own module.
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), and Tags 06YS and 06YY.
+
+## References
+
+* Stacks Project, Tags 09C2, 06YS and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -141,10 +144,8 @@ private theorem transitionKernel_homology
     (B.sc q).mapHomologyIso U⟩
 
 /--
-The remaining coefficient-kernel part of the normalized adic transition construction.
-
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), using the coefficient
-sequence and K-flat computations of Tags 06YS and 06YY. -/
+The remaining coefficient-kernel part of the normalized adic transition construction
+(Stacks, Tags 09C2, 06YS and 06YY). -/
 theorem adicFiniteTransition_tensor_sequence_core
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ)

@@ -41,9 +41,7 @@ private theorem compactModelAffineLineExchange_aux
     (fun _ _ _ _ _ sq' _ _ ↦ projectiveLineExceptionalBaseChange Λ S sq')
 
 /-- The canonical exceptional exchange for an affine-line projection over an affine base,
-with finite field coefficients.
-Source: blueprint prop-asd-smooth-base-change, affine-line model case, and
-lem-asd-smooth-generic-direct-image.proof.md, relative dual base-change step. -/
+with finite field coefficients. -/
 theorem compactModelAffineLineExchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (_hfield : IsField Λ) :
     AffineLineBaseChange Λ := by

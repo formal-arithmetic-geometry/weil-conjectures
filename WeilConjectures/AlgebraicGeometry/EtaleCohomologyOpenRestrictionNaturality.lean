@@ -52,8 +52,7 @@ private theorem cohomologyMap_transported_comp {X Y Z : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pullback commutes with restriction between nested opens.
-Source: Stacks Project, Tag 01F7; agent-written consequence of pullback functoriality and
-inverse-image composition, also used in the proof of Tag 0A50. -/
+(Stacks, Tag 01F7) -/
 theorem openCohomologyPullback_restriction {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A B : X.Opens} (h : A ≤ B)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

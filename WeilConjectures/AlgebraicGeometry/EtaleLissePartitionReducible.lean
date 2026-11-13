@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # The reducible step for finite lisse partitions
-
-Source: finite pushforward constructibility blueprint, step 2.
 -/
 
 @[expose] public section
@@ -160,9 +158,7 @@ private def unionDisjoint {X : Scheme.{u}}
       exact Q.lisse i
 
 /-- The reducible Noetherian induction step only uses partitions on proper closed subsets;
-it does not require the generic-lissity hypothesis.
-
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 2. -/
+it does not require the generic-lissity hypothesis. -/
 theorem nonempty_etaleLissePartition_of_reducible
     {X : Scheme.{u}} [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

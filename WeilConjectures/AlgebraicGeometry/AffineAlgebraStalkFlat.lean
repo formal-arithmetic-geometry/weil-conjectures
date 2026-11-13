@@ -22,8 +22,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The canonical morphism to the direct-image algebra is stalkwise flat.
-Source: Stacks Project, Tag 0AVW, affine stalk calculation in the proof. -/
+/-- The canonical morphism to the direct-image algebra is stalkwise flat (Stacks, Tag 0AVW). -/
 theorem affine_algebra_stalkMap_flat
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (x : X) :
     ((toDirectImageAlgebraSpace f).hom.stalkMap x).hom.Flat := by

@@ -19,8 +19,9 @@ import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Etale lisse finite-Tor perfect local model
 
-Source: literature/stacks-project/etale-cohomology.tex, Tag 09BI,
-lemma-connected-ctf-locally-constant; finite commutative coefficient ring specialization.
+## References
+
+* Stacks Project, Tag 09BI
 -/
 
 @[expose] public section
@@ -32,44 +33,11 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/--
-A bounded constructible etale complex `L` over a finite commutative ring `A`, with finite Tor
+/-- A bounded constructible etale complex `L` over a finite commutative ring `A`, with finite Tor
 amplitude and finite locally constant cohomology sheaves on a connected scheme `S`, is etale
 locally isomorphic to the termwise constant complex of one bounded complex `P` of finitely
-generated projective `A`-modules (the bounded finite projective model of
-`def-pc-perfect-ring-complex`), the same `P` on every member of a jointly surjective etale
-family. No Noetherian hypothesis on `S` is made.
-Source: literature/stacks-project/etale-cohomology.tex, Tag 09BI,
-lemma-connected-ctf-locally-constant; finite commutative coefficient ring specialization.
-
-Proof (node steps):
-1. The `H^q(L)` are locally constant with finite values; the first clause of
-   lem-weil-pbc-finite-ring-derived-local-constancy (which contains the finite-module-values
-   equivalence) gives a jointly surjective etale family
-   `v_j : V_j → S` and bounded complexes `E_j` of finite `A`-modules with
-   `v_j^* L ≅ E_j` (termwise constant), using only boundedness and lisse cohomology.
-2. `S` connected is nonempty, so some `V_j` has a point `y`; an algebraic closure of
-   `κ(y)` (lem-pc-algebraic-closure-exists-unique) gives a geometric point `ȳ`, and
-   `x̄ = v_j ȳ`. The exact geometric stalk (prop-weil-pbc-geometric-stalks-exact), the
-   inverse-image stalk comparison (lemma-openclosed-stalk-upperstar), the constant-sheaf
-   stalk (lem-weil-pbc-constant-sheaf-geometric-stalk) and exact-functor localization
-   (lem-weil-pbc-exact-functor-derived-factorization) give `L_x̄ ≅ E := E_j` in `D(A)`,
-   `A`-linearly.
-3. Choose a Tor interval `[a, b]` of `L`. For every `A`-module `N` the constant sheaf of
-   `N` is a degree-zero test, and the stalk/tensor comparison
-   (lem-sfb-geometric-stalk-tensor-constant-single) with the exact-stalk cohomology
-   comparison (lem-weil-pbc-exact-functor-complex-cohomology) gives
-   `H^r(L_x̄ ⊗^L N) = 0` for `r ∉ [a, b]`; by step 2, `E` has Tor amplitude in `[a, b]`.
-4. `A` is finite, hence Noetherian (def-weil-pbc-noetherian-ring), and the terms of `E` are
-   finitely generated; the bounded finite-Tor perfectness criterion
-   (lem-weil-bounded-finite-tor-perfect, Stacks 0658) gives a complex `P` of finitely
-   generated projective `A`-modules, zero outside `[a, b]`, with `P ≅ E ≅ L_x̄` in `D(A)`.
-5. The connected clause of lem-weil-pbc-finite-ring-derived-local-constancy gives a jointly
-   surjective etale family `u_i : U_i → S` with `u_i^* L ≅ (L_x̄)` (constant); the exact
-   `ModuleCat`-valued constant sheaf functor applied to `L_x̄ ≅ P`, through exact-functor
-   localization (lem-weil-pbc-exact-functor-derived-factorization), gives
-   `u_i^* L ≅ Q(constant P)` for every `i`.
--/
+generated projective `A`-modules, the same `P` on every member of a jointly surjective etale
+family. No Noetherian hypothesis on `S` is made. -/
 theorem etale_lisse_ctf_perfect_local_model
     {A : Type (u + 1)} [CommRing A] [Finite A]
     {S : Scheme.{u}} [ConnectedSpace S]

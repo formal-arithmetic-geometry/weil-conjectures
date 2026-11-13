@@ -25,10 +25,8 @@ namespace AlgebraicGeometry
 
 /-- If an inverse system of quasi-compact, quasi-separated schemes over a
 quasi-compact, quasi-separated base has affine transition maps and affine
-limit morphism, then all sufficiently late structure morphisms are affine.
-
-Source: Stacks Project, Limits, Lemma 09ZM, proof lines 902--911.
-The structure maps hᵢ of the node are `h.app (op i)`; its induced limit map h is `f`. -/
+limit morphism, then all sufficiently late structure morphisms are affine
+(Stacks, Tag 09ZM). -/
 theorem eventually_affine
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]

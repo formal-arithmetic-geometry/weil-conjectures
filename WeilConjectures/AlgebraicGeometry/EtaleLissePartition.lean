@@ -11,8 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Finite lisse partitions of subsets of a scheme
-
-Source: finite pushforward constructibility blueprint, steps 2 and 3.
 -/
 
 @[expose] public section
@@ -24,10 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite partition of a subset of `X` by images of immersed schemes, with lisse
-pullback of `F` on every part. The support need not be all of `X`, so this records the
-induction claim for closed subsets without changing the ambient sheaf.
-
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, steps 2--3. -/
+pullback of `F` on every part. The support need not be all of `X`. -/
 structure EtaleLissePartition {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (T : Set X) where
   /-- The number of parts, including the possibility of zero parts. -/

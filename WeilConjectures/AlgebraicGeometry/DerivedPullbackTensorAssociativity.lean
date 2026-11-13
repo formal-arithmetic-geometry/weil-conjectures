@@ -19,8 +19,9 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Associativity of derived pullback tensor comparisons
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -255,8 +256,7 @@ private theorem localization_tensor_isIso (S : Scheme.{uModel})
 set_option maxHeartbeats 600000 in
 -- Localization tensor instances require extra elaboration.
 /-- Associativity on three K-flat representatives, before resolving arbitrary objects.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; parent associativity proof, steps 1 and 2. -/
+(Stacks, Tag 079U) -/
 private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
@@ -377,8 +377,7 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
 
 
 /-- The extended natural tensor comparison satisfies the associativity law.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; parent descent proof, step 3 (associativity). -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_associativity {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

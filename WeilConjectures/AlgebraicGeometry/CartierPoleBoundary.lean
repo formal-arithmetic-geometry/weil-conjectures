@@ -28,9 +28,7 @@ namespace AlgebraicGeometry.Etale
 /-- The integral relative extension of the dual ideal, trivialized by the canonical
 Cartier section on the complement. Its torsor map is equivariant and lies over the
 supported section +1. Killing the specified complementary frame fixes the relative
-class, including the sign, rather than only its image in Pic(T).
-proof.md, (G1) and the local lifts
-paragraph. -/
+class, including the sign, rather than only its image in Pic(T). -/
 def CartierPoleBoundarySpec {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
     (hI : i.ker.IsInvertible)
     (β : Ext ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))

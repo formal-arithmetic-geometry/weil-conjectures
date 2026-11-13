@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Sections on a descended qcqs étale object have stage representatives, and a
 representative of zero vanishes at a later stage.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit; Étale Cohomology,
-Tag 09YQ, qcqs inverse-limit realization; Cohomology on Sites, Tag 09YP. -/
+(Stacks, Tags 09YN, 09YQ and 09YP) -/
 theorem etale_limit_scalar_sections_representatives_and_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

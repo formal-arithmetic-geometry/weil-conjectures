@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 
 /-! # Factoring an ideal multiple through a generic coherent inclusion
 
-Source: Stacks Project, Tag 01YL, third proof paragraph.
+Stacks Project, Tag 01YL.
 -/
 
 @[expose] public section
@@ -29,9 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent inclusion which is an isomorphism at a point contains an ideal multiple
 of its target, for a quasi-coherent ideal with full stalk at that point.
-
-Source: Stacks Project, Tag 01YL, third proof paragraph: the ideal annihilating the
-cokernel puts the ideal multiple of the target inside the source. -/
+(Stacks, Tag 01YL). -/
 theorem coherent_generic_mono_ideal_factor
     (X : Scheme.{u}) [IsLocallyNoetherian X]
     {K G : X.Modules}

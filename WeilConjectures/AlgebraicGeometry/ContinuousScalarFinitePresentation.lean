@@ -23,8 +23,7 @@ open scoped CategoryTheory.Obj TensorProduct
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The actual extension of an ordinary scalar module to continuous condensed coefficients.
-Source: blueprint integral-heart triangulated proof, paragraph (2), finite scalar models. -/
+/-- The actual extension of an ordinary scalar module to continuous condensed coefficients. -/
 def continuousScalarFunctor (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] :
     ModuleCat.{u + 1} A ⥤ Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -303,10 +302,7 @@ private theorem ordinary_presentation (N : ModuleCat.{u + 1} A)
 end ContinuousScalarPresentation
 
 /-- Finitely presented modules over continuous condensed coefficients are precisely
-extensions of ordinary finitely presented scalar modules.
-
-Source: blueprint integral-heart triangulated proof, paragraph (2), finite scalar
-presentations; Stacks Tag 0518. -/
+extensions of ordinary finitely presented scalar modules. (Stacks, Tag 0518) -/
 theorem continuousScalarFinitePresentation (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A]
     (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

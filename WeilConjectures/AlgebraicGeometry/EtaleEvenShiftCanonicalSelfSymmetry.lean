@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 
-/-! # Identity derived self symmetry of an even shifted flat object
-
-Source: blueprint latest, second triangle even-shift computation. -/
+/-! # Identity derived self symmetry of an even shifted flat object -/
 
 @[expose] public noncomputable section
 suppress_compilation
@@ -104,7 +102,7 @@ private def shifted_single_iso {C : Type*} [Category.{u + 1} C] [Abelian C]
     (by omega)).app J
 
 /-- Identity derived self symmetry of an even shifted flat object.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle. -/
+-/
 theorem evenShiftCanonicalSelfSymmetry
     {C : Type*} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C]

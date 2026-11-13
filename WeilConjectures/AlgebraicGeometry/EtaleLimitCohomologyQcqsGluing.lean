@@ -38,12 +38,7 @@ set_option linter.unusedVariables false in
 /-- The qcqs gluing reduction for cohomology continuity.
 
 The hypothesis is affine-stage continuity for every system and every degree in
-this universe. It is applied to restrictions of the supplied system, and never
-assumes continuity for the nonaffine system being proved.
-
-Source: Stacks Project, Tag 09YQ; the finite-cover reduction is
-steps 5-8 of lem-weil-pbc-etale-limit-cohomology-eventual-vanishing, using
-Tags 0A50, 01YX and 01KP. -/
+this universe. (Stacks, Tags 09YQ, 0A50, 01YX and 01KP) -/
 theorem etale_limit_cohomology_qcqs_gluing
     (haffine : ∀ {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J]
     (D : Jᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

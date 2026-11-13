@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Triangulated.Orthogonal
 
 /-! # Perfect representatives detect zero
 
-Source: Stacks Project, Tag 09IS, and the orthogonal-class argument in
-lem-pc-derived-qcoh-compact-generation.
+## References
+
+* Stacks Project, Tag 09IS
 -/
 
 @[expose] public section
@@ -28,8 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A family representing every perfect object weakly generates whenever perfect objects
 have the whole category as their localizing closure. No compactness is asserted here.
-Source: Stacks Project, Tag 09IS; the orthogonal-class reduction in the proof of
-lem-pc-derived-qcoh-compact-generation. -/
+(Stacks, Tag 09IS) -/
 theorem schemeDerivedQCoh_representatives_generate (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

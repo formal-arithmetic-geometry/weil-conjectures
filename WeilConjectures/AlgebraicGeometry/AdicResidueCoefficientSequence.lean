@@ -12,7 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # The consecutive finite coefficient sequence on a slice
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, and proetale.tex, Tag 09C6.
+Source: Stacks Project, Tags 0G1T and 09C6.
 -/
 
 @[expose] public noncomputable section
@@ -328,8 +328,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The consecutive finite quotients form a short exact sequence whose kernel has
 an action of the residue coefficient sheaf, on the actual slice site.
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, consecutive-power filtration in
-lemma-derived-vanishing-mod-I; proetale.tex, Tag 09C6, finite reduction argument. -/
+(Stacks, Tags 0G1T and 09C6). -/
 theorem adicResidue_coefficient_sequence
     (X : AlgebraicGeometry.Scheme.{u}) {A : Type (max v (u + 1))}
     [CommRing A] [IsNoetherianRing A] (J : Ideal A)

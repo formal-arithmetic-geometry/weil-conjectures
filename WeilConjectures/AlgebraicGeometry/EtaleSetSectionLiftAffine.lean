@@ -28,8 +28,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 -- Constructing the sheaf diagram involves several nested functor compositions.
-/-- Source: Stacks Project, Étale Cohomology Tag 09YQ, proof via Tags 0EYL,
-04HR and Sites Tag 09YN. -/
+/-- Sections of the limit sheaf over an affine object lift to a stage sheaf
+(Stacks, Tags 09YQ, 0EYL, 04HR, 09YN). -/
 theorem etaleSetSectionLift_affine
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

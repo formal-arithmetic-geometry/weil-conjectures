@@ -26,9 +26,7 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- A specified finite étale generic field extension is the generic residue field
-of an étale scheme over the base, compatibly with its given structure map.
-
-Source: Stacks Project, Tag 0551, proof (monic polynomial construction). -/
+of an étale scheme over the base, compatibly with its given structure map (Stacks, Tag 0551). -/
 theorem exists_etale_generic_residue_field_model {S : Scheme.{u}}
     [IrreducibleSpace S] {L : Type u} [Field L]
     (yη : Spec (CommRingCat.of L) ⟶

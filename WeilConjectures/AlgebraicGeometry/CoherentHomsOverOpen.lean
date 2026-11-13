@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.SectionsOverQuasiCompactOpen
 
 /-! # Coherent homomorphisms over an open complement
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
+Stacks Project, Tag 01YB.
 -/
 
 @[expose] public section
@@ -34,20 +34,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Maps on the complement of `V(𝓘)` extend to maps from `𝓘ⁿ𝓖`. Let `X` be a Noetherian
-scheme (locally Noetherian and quasi-compact), `𝓕` quasi-coherent, `𝓖` coherent and `𝓘` a
-quasi-coherent sheaf of ideals. The open `U = X ∖ V(𝓘)` is given by its points: `x ∈ U` iff
-the stalk inclusion `𝓘ₓ ⟶ 𝒪_{X,x}` is surjective, i.e. `𝓘ₓ = 𝒪_{X,x}` (so `V(𝓘)` is closed).
-`𝓘ⁿ𝓖 ⊆ 𝓖` is `idealModuleProduct (idealSheafPower I.toModulesι n).2 G` with its inclusion
-`idealModuleProductι`; at `n = 0` this is the image of the isomorphism `𝒪_X ⊗ 𝓖 ⟶ 𝓖`,
-i.e. `𝓖` itself. Then `𝓘|_U = 𝒪_U` and `(𝓘ⁿ𝓖)|_U = 𝓖|_U` (the restriction to `U` of the
-inclusion is an isomorphism); `r n m h` is the inclusion `𝓘ᵐ𝓖 ⊆ 𝓘ⁿ𝓖`; the diagram `D` is
-`n ↦ Hom(𝓘ⁿ𝓖, 𝓕)` (identified by `e`) with restriction along `r`; the cocone `c` sends `χ`
-to `χ|_U` read on `𝓖|_U` through `(𝓘ⁿ𝓖)|_U = 𝓖|_U`; and the canonical map
-`colim_n Hom(𝓘ⁿ𝓖, 𝓕) ⟶ Hom_{𝒪_U}(𝓖|_U, 𝓕|_U)` is bijective. In particular every `ψ` on `U`
-is `χ|_U` for some `n` and `χ : 𝓘ⁿ𝓖 ⟶ 𝓕`.
-Restriction to `U` is `SheafOfModules.overFunctor X.ringCatSheaf U`.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB. -/
+/-- Maps on the complement of `V(𝓘)` extend to maps from `𝓘ⁿ𝓖`. Here `X` is a Noetherian scheme,
+`𝓕` is quasi-coherent, `𝓖` is coherent and `𝓘` is a quasi-coherent sheaf of ideals; the
+statement is that `colim_n Hom(𝓘ⁿ𝓖, 𝓕) ⟶ Hom(𝓖|_U, 𝓕|_U)` is bijective for `U = X ∖ V(𝓘)`
+(Stacks, Tag 01YB). -/
 structure CoherentHomsOverOpenData {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) where
   U : X.Opens
@@ -139,14 +129,7 @@ private theorem product_over_iso {X : Scheme.{u}} (I : X.IdealSheafData)
   apply (ConcreteCategory.isIso_iff_bijective _).mpr
   exact hbij W.unop.left (leOfHom W.unop.hom)
 
-/-- The structural data exists (the geometric part of Lemma 01YB).
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
-The proof follows Steps 1--11 and 13 of the displayed proof above: construct the
-complement and transition maps, establish the coherence and finiteness facts,
-apply the sections-over-a-quasi-compact-open result to obtain the cocone and its
-bijective colimit map, and use the support-power-ideal argument for injectivity.
-These constructions are packaged in `CoherentHomsOverOpenData`; no arbitrary
-witness is chosen. -/
+/-- The structural data exists (Stacks, Tag 01YB, geometric part). -/
 theorem coherent_homs_over_open_data {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) :
@@ -255,14 +238,7 @@ theorem coherent_homs_over_open_data {X : Scheme.{u}} [IsLocallyNoetherian X]
           rw [← hχ, IsIso.inv_hom_id_assoc]
         exact (ConcreteCategory.congr_hom (colimit.ι_desc (F := D) ⟨_, c⟩ n) χ).trans hc
 
-/-- The extension clause follows from the structural data in Lemma 01YB.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
-Given `d.hcolim`, use surjectivity of its colimit map to represent any morphism
-on `d.U` by a colimit class. The filtered colimit of the groups `D.obj n` is
-represented by an element at some finite stage; the cocone compatibility in
-`d.hcolim` identifies that representative with the restriction of a map from
-`idealModuleProduct (idealSheafPower I n) G`, giving the required `n` and `χ`.
-This step uses no additional geometric assertion. -/
+/-- The extension clause follows from the structural data (Stacks, Tag 01YB). -/
 theorem coherent_homs_over_open_extension {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]
     (hG : RingedSpace.IsCoherent X.toRingedSpace G)
@@ -287,7 +263,8 @@ theorem coherent_homs_over_open_extension {X : Scheme.{u}} [IsLocallyNoetherian 
     simpa [← ConcreteCategory.comp_apply, colimit.ι_desc] using hz
   simpa only [he, hz'] using hcoc n ((e n).hom z)
 
-/-- -/
+/-- Maps on the complement of `V(𝓘)` extend to maps from `𝓘ⁿ𝓖` for some `n`
+(Stacks, Tag 01YB). -/
 theorem coherent_homs_over_open {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules)
     [F.IsQuasicoherent] (hG : RingedSpace.IsCoherent X.toRingedSpace G) :

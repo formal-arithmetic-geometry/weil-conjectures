@@ -52,8 +52,8 @@ private theorem overEquiv_inverse_qcoh (X : Scheme.{u}) (U : X.Opens)
     (U.overEquivalence.symm.inverse) _
     (U.sheafOfModulesEquivOverInverseUnit (moduleRings X.toRingedSpace))
 
-/-- Exact restriction detects quasi-coherence of the restricted cohomology sheaves.
-Source: Stacks Project, Tag 08DW, proof of (1), and Tag 06Z0. -/
+/-- Exact restriction detects quasi-coherence of the restricted cohomology sheaves
+(Stacks, Tags 08DW and 06Z0). -/
 theorem schemeDerivedQCoh_openRestriction_iff (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]

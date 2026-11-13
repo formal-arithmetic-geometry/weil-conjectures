@@ -34,9 +34,7 @@ namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 attribute [local instance] localEvaluationPreadditive
 
-/-- Assemble evaluation from the degree-zero module comparisons.
-Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`, and
-Tag 08DM, proof of `lemma-Rhom-strictly-perfect`. -/
+/-- Assemble evaluation from the degree-zero module comparisons (Stacks, Tags 08DQ and 08DM). -/
 theorem boundedOrdinaryEvaluation_degree (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (hbounded : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (P.X r))

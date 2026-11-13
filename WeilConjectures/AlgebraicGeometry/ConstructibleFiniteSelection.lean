@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleFiniteStalkTests
 /-!
 # Finite selection of geometric stalk tests
 
-Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1604;
-Stacks Project, Tag 09Z6, partition argument.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section
@@ -31,8 +32,7 @@ attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 
 /-- A stalk-detecting family of maps from a constructible abelian etale sheaf on a
 Noetherian scheme has a finite subfamily whose map to the direct sum is monomorphic.
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, order 1604; Stacks Tag 09Z6,
-partition argument. -/
+(Stacks, Tag 09Z6) -/
 theorem exists_mono_biproduct_of_constructible_stalk_detection
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -75,8 +75,7 @@ theorem exists_mono_biproduct_of_constructible_stalk_detection
   simp
 
 /-- In particular, it suffices that at every geometric point one member of the family
-is injective on the whole stalk. Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-order 1604; Stacks Tag 09Z6, partition argument. -/
+is injective on the whole stalk. -/
 theorem exists_mono_biproduct_of_constructible_stalk_injective
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

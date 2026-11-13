@@ -92,8 +92,7 @@ private theorem exchange_vertical
   congr 2
 
 /-- Ordinary exchange is invertible on a quasi-coherent affine-open direct image.
-Source: Stacks Project, Tag 02KG; the affine-intersection argument of
-`lem-pc-affine-alternating-cech-pinned-mate`. -/
+(Stacks, Tag 02KG). -/
 theorem affineOpen_pushforward_exchange
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [IsSeparated f] (g : Spec B ⟶ Spec A)

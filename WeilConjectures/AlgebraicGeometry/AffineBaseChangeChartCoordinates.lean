@@ -186,7 +186,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two section modules on a compatible pair of affine charts have tensor coordinates,
 and the canonical base change map sends `r ⊗ m` to `(r ⊗ 1) ⊗ m` in these coordinates.
-Source: Stacks Project, Tag 02KG, proof's reduction to spectra; Tag 01I9 (1), (2). -/
+(Stacks, Tags 02KG and 01I9). -/
 theorem exists_affineBaseChange_chart_coordinates {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f]

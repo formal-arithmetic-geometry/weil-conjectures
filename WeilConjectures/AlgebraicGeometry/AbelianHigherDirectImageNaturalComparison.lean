@@ -163,9 +163,7 @@ private lemma canonicalComparison_class {S Y : Scheme.{v}} (h : Y ⟶ S) (p : �
 
 /-- The sheafification comparison can be chosen naturally for every structure map
 and coefficient sheaf over a fixed base, and intertwines raw pullback with the
-canonical higher-direct-image map.
-Source: Stacks Project, Tag 03Q8 (natural presheaf comparison), and Tag 09Z1
-(the comparison maps in the proof). -/
+canonical higher-direct-image map (Stacks, Tags 03Q8 and 09Z1). -/
 theorem exists_abelianHigherDirectImage_natural_comparison (S : Scheme.{v}) (p : ℕ) :
     ∃ e : ∀ {Y : Scheme.{v}} (h : Y ⟶ S)
       (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}),

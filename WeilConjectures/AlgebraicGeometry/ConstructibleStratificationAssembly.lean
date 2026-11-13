@@ -13,7 +13,9 @@ import WeilConjectures.Topology.ConstructibleInConstructible
 /-!
 # Assembling stratifications of the pieces of a partition
 
-Source: Stacks Project, Tag 03S0, final refinement in the proof, and Tag 09YJ.
+## References
+
+* Stacks Project, Tags 03S0 and 09YJ
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Stratify every member of a finite constructible immersed partition, then compose its
 stratum immersions with the original immersion. Any predicate true of these composite
-maps holds on the assembled stratification.
-
-Source: Stacks Project, Tag 03S0, final refinement in the proof; constructibility is
-Stacks Tag 09YJ. -/
+maps holds on the assembled stratification. (Stacks, Tags 03S0 and 09YJ) -/
 theorem exists_stratification_of_stratified_partition
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (n : ℕ) (Y : Fin n → Scheme.{u}) (ι : ∀ i, Y i ⟶ X)

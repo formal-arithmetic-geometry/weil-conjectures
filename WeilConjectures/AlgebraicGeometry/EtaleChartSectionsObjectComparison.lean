@@ -75,9 +75,7 @@ private theorem composition_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The source and target arrows admit compatible object isomorphisms.
-Source: Stacks Project, Tag 0EZX, comparison of section objects.
-The proof constructs the canonical inverse-image restriction and composition
-isomorphisms and checks their compatibility with the two adjunction units. -/
+(Stacks, Tag 0EZX) -/
 theorem etaleChartSections_objectComparison
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

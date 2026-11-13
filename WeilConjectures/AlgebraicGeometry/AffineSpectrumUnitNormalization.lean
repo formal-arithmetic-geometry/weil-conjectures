@@ -27,11 +27,7 @@ variable [∀ Y : Scheme.{u},
 
 -- Work through the constructed pullback functor interface during coherence calculations.
 
-/-- The triangle equation for composition units follows from associativity and the
-left and right unit laws. Transport the two composites of the spectrum isomorphism
-and its inverse to identities, apply those unit laws, and identify the remaining
-transport maps by proof irrelevance. This is the coherence part of the normalization
-proof below. Source: Stacks Project, Tag 0D5S. -/
+/-- The triangle equation for composition units (Stacks, Tag 0D5S). -/
 private theorem composition_unit_triangle
     (F : ∀ {P Q : Scheme.{u}}, (P ⟶ Q) →
       (schemeDerivedCategory Q ⥤ schemeDerivedCategory P))

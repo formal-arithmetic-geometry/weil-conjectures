@@ -14,12 +14,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjuncti
 /-!
 # Shift compatibility of the bounded below derived étale adjunction
 
-Source: Stacks Project, Derived Categories, Tags 0A8D, 0DVC and 05SU;.
-
 The shift structures are the existing termwise structure on `mapDerivedCategoryPlus` and
 resolution-comparison structure on `rightDerivedFunctorPlus`, not structures transported
 from an abstract adjunction. `Adjunction.CommShift ℤ` asserts compatibility of both the
 unit and counit, including all iterated integer shifts.
+
+## References
+
+* Stacks Project, Tags 0A8D, 0DVC and 05SU
 -/
 
 @[expose] public section
@@ -102,28 +104,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The unit and counit of `u⁻¹ ⊣ Ru_*` on bounded below derived categories of abelian
 étale sheaves commute with the specified shift isomorphisms, for every integer shift.
-Source: Stacks Project, Tags 0A8D, 0DVC and 05SU;.
-
-Proof plan from the node:
-1. Compare K-injective resolutions using the unique homotopy classes of comparisons
-. Shifting a resolution remains a resolution
-. The comparison shift isomorphism on a K-injective
-   representative is the termwise identity, after the resolution identifications.
-2. Compute the counit on a K-injective representative by the termwise sheaf counit
-. Its components commute with shift;
-   combine with step 1 and naturality of the inverse-image shift isomorphism.
-3. Transport the counit equality along a K-injective representative isomorphism by
-   naturality.
-4. Compute the unit on a bounded below complex by the termwise unit followed by the
-   direct image of its inverse-image resolution. Shift the resolution and use uniqueness
-   of comparisons to obtain the unit equality.
-5. Transport the unit equality to every derived object using a bounded below
-   representative and naturality.
-6. The composite shift structures are the whiskered composites
-. Induct for positive shifts, use inverses
-   for negative shifts, and use the identity for zero.
-7. The unit equality identifies the resolution-comparison structure with the unique
-   adjunction-induced structure. -/
+(Stacks, Tags 0A8D, 0DVC and 05SU) -/
 theorem derivedPlus_upperStarLowerStar_commShift {U V : Scheme.{u}} (f : U ⟶ V) :
     ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).derivedPlus).CommShift ℤ := by
   have := derivedUnit_commShift (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)

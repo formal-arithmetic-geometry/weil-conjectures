@@ -34,7 +34,7 @@ attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The constant additive sheaf comparison, before reconstructing scalar actions.
-Source: Stacks Tags 03CY and 00YV. -/
+(Stacks, Tags 03CY and 00YV) -/
 def discreteCoefficientAbelianIso (X : Scheme.{u}) (A : Type u) [CommRing A] :
     (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} A)) ≅ condensedRingObj (discreteObj A) X :=
@@ -65,7 +65,7 @@ attribute [local irreducible] discreteCoefficientAbelianIso
 
 /-- Normalization fixes the reconstructed coefficient map on every constant section.
 The scalar relabelling is specified by e, rather than an arbitrary residue-field automorphism.
-Source: Stacks Tags 03CY and 00YV. -/
+(Stacks, Tags 03CY and 00YV) -/
 def DiscreteCoefficientNormalized (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k] (e : ULift.{u + 1} A ≃+* k)
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -132,8 +132,7 @@ private theorem coefficientRingIso_normalized (X : Scheme.{u}) (A : Type u) [Com
   delta discreteCoefficientAbelianIso
   rfl
 
-/-- Normalization uniquely determines the coefficient ring isomorphism.
-Source: the sheafification universal property, Stacks Tag 03CY. -/
+/-- Normalization uniquely determines the coefficient ring isomorphism. (Stacks, Tag 03CY) -/
 theorem discreteCoefficientNormalized_unique (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k] (e : ULift.{u + 1} A ≃+* k)
     {c d : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -150,7 +149,7 @@ theorem discreteCoefficientNormalized_unique (X : Scheme.{u}) (A : Type u) [Comm
 
 /-- Section-action transport, small-site precomposition, and the specified scalar restriction.
 All three functors are existing constructions; no object is selected from an existence theorem.
-Source: Stacks Tags 00YV, 09A5 and 03CY. -/
+(Stacks, Tags 00YV, 09A5 and 03CY) -/
 def discreteCoefficientModel (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k]
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -167,8 +166,7 @@ private theorem scalar_restriction_equivalence
     (ConstantScalarRestriction.restrictCancelIso J c.hom c.inv c.hom_inv_id)
   exact e.isEquivalence_functor
 
-/-- The specified discrete model is an equivalence for every coefficient ring isomorphism.
-Source: section reconstruction, site equivalence and restriction along a ring isomorphism. -/
+/-- The specified discrete model is an equivalence for every coefficient ring isomorphism. -/
 instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k]
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -182,8 +180,7 @@ instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [C
     (smallModules X (condensedRingObj (discreteObj A) X) ⋙
       ConstantCompletion.res c.hom).IsEquivalence
 
-/-- Discrete coefficient transport is additive, since all its maps retain the section maps.
-Source: section-action and scalar restriction. -/
+/-- Discrete coefficient transport is additive, since all its maps retain the section maps. -/
 instance discreteCoefficientModel_additive (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k]
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -211,8 +208,7 @@ attribute [-instance] WeilConjectures.integralOperationsAbSheafify
 /-- Discrete coefficients admit a normalized exact monoidal section-action model, preserving
 finite constructible local models. This is a statement about module sheaves, with no complexes,
 integral completion, residue reduction, or Tor predicate.
-
-Source: Stacks Tags 03CY, 00YV, 09A5 and 09AJ; blueprint integral-models proof (1)--(2). -/
+(Stacks, Tags 03CY, 00YV, 09A5 and 09AJ) -/
 theorem discrete_coefficient_model (X : Scheme.{u}) [IsNoetherian X]
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]
     (e : ULift.{u + 1} A ≃+* k) :

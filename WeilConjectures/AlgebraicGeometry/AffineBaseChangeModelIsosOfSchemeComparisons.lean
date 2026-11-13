@@ -153,7 +153,8 @@ theorem affineBaseChangeModelIsosCore
     hE' hK' σ τ ⟨hgeom.2.2.1, hgeom.2.2.2⟩ d dlim hd hdlim aE aK⟩
 
 
-/-- -/
+/-- Compatible derived equivalences on the affine pieces, together with the model complexes,
+give the affine base change model comparison data. -/
 theorem exists_affineBaseChangeModelIsosOfSchemeComparisons
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

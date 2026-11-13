@@ -23,10 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- This helper is the eventual-zero half of scalar section continuity. Equality in the
-filtered colimit is detected after a later transition. Source: Stacks Tags 09YN and 09YQ.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit; Étale Cohomology,
-Tag 09YQ, qcqs inverse-limit realization; Cohomology on Sites, Tag 09YP. -/
+/-- A stage representative of a vanishing limit section vanishes at a later stage
+(Stacks, Tags 09YN and 09YQ). -/
 theorem etale_limit_scalar_sections_zero_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

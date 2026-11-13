@@ -137,9 +137,7 @@ namespace AlgebraicGeometry
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Composition of the degree-zero comparisons for two exact étale pullbacks.
-
-Source: Stacks Tags 0D6D and 09Z1; the coefficient identity in the proof of
-lem-sbc-pullback-comparison-comp, step 2. -/
+ (Stacks, Tags 0D6D and 09Z1). -/
 theorem Etale.upperStarPlusComp_single
     {T T₁ T₂ : Scheme.{u}} (π₁ : T₁ ⟶ T₂) (π₂ : T₂ ⟶ T)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

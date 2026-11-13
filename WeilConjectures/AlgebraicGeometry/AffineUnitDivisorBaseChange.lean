@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 
 /-!
 # Boundary principal divisors and algebraically closed base change
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-  affine-case proof, unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -33,15 +30,10 @@ namespace AlgebraicGeometry
 Let `k ⊆ k'` be algebraically closed, `C` a smooth affine connected curve over `k` with a
 smooth proper connected compactification `c : C ↪ X = c.Z`, boundary
 `S = {P ∈ X closed, P ∉ C}`, and `X' = X ×_k k'` the compactification `c.baseChange` of
-`C' = C ×_k k'`, with boundary `S'`. Then:
-* every `P ∈ S` has exactly one point `e P ∈ S'` above it and no other point of `X'` lies over
-  `P`, giving a bijection `e : S ≃ S'`, hence `ι = Finsupp.domCongr e`;
-* for every unit `u` of `𝒪_C(C)` with pullback `u'` along `C' ⟶ C`, the boundary part of
-  `div(u')` on `X'` is `ι` of the boundary part of `div(u)` on `X` (units are viewed in the
-  function fields through the restriction maps `φ`, `φ'`, tied to the germs at the points of
-  `C`, `C'`);
-* `ι` maps the set of boundary divisors of units on `C` onto that on `C'`.
--/
+`C' = C ×_k k'`, with boundary `S'`. Then the boundary points of `X` and `X'` correspond via a
+bijection `e : S ≃ S'`, and `ι = Finsupp.domCongr e` carries the boundary part of `div(u)` to
+that of `div(u')` for every unit `u` of `𝒪_C(C)` with pullback `u'`, and maps the set of
+boundary divisors of units on `C` onto that on `C'`. -/
 theorem affine_unit_divisor_base_change
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

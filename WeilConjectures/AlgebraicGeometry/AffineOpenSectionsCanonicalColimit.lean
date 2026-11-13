@@ -19,14 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 /-- The geometric continuity core: a canonical restriction cocone is colimiting.
-Source: Stacks Project, Tag 03Q6, degree zero of Lemma 59.51.5.
-
-The proof is the affine-site continuity argument over a cofiltered limit of affine
-open subschemes.  It identifies the filtered colimit of sections with sections on
-the limit, then transports the result across the supplied adjunction.  This
-intermediate statement isolates the geometric part; the parent theorem only
-identifies a supplied cocone with this canonical one.
--/
+(Stacks, Tag 03Q6). -/
 theorem affineOpenSections_exists_canonical_colimit
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

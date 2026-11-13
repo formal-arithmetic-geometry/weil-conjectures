@@ -19,8 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 /-- A section whose canonical restriction to the affine limit is zero vanishes at a later stage.
-Source: Stacks Project, Tag 03Q6, degree zero of lemma-colimit, proof steps (1)--(3);
-Sites, Tag 0A35, lemma-pullback-to-limit; Etale Cohomology, Tag 0EYL. -/
+(Stacks, Tags 03Q6, 0A35, 0EYL). -/
 theorem affineOpenSections_zero_detection
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

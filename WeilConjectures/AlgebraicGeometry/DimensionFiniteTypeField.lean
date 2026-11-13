@@ -16,9 +16,11 @@ The dimension of a scheme is `topologicalKrullDim` of its underlying space.
 
 ## Main results
 
-- `AlgebraicGeometry.topologicalKrullDim_lt_top_of_finiteType`: a scheme of finite type over a field has finite dimension.
-- `AlgebraicGeometry.topologicalKrullDim_pullback_eq_and_eq_of_isOpenImmersion`: the dimension of a scheme of finite type over a field is
-  invariant under extension of the base field and under passing to a dense open subscheme.
+- `AlgebraicGeometry.topologicalKrullDim_lt_top_of_finiteType`: a scheme of finite type over a
+  field has finite dimension.
+- `AlgebraicGeometry.topologicalKrullDim_pullback_eq_and_eq_of_isOpenImmersion`: the dimension
+  of a scheme of finite type over a field is invariant under extension of the base field and
+  under passing to a dense open subscheme.
 -/
 
 @[expose] public section
@@ -42,10 +44,8 @@ theorem exists_topologicalKrullDim_spec_le_of_field {k : Type u} [Field k] {A : 
     ((ringKrullDim_le_of_surjective f.toRingHom hf).trans ?_)⟩
   simp
 
-/-- Blueprint `lem-kun-dimension-finite-type`: **a scheme of finite type over a field has finite
-dimension.** If `X` is of finite type over a field `K`, then `dim X < ∞`: `X` is covered by
-finitely many affine opens `Spec A`, with `A` a quotient of a polynomial ring in finitely many
-variables, hence of finite dimension. -/
+/-- **A scheme of finite type over a field has finite dimension.** If `X` is of finite type
+over a field `K`, then `dim X < ∞`. -/
 theorem topologicalKrullDim_lt_top_of_finiteType {K : Type u} [Field K] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] :
     topologicalKrullDim X < ⊤ := by
@@ -61,7 +61,7 @@ theorem topologicalKrullDim_lt_top_of_finiteType {K : Type u} [Field K] {X : Sch
       (hn i)).trans (by exact_mod_cast hle i)
   · exact WithBot.coe_lt_coe.mpr (ENat.natCast_lt_top _)
 
-/-- Blueprint `lem-kun-dimension-extension`: **dimension after extension and restriction.** Let
+/-- **Dimension after extension and restriction.** Let
 `X` be a scheme of finite type over a field `K`. For every field `L` over `K`, the base change
 `X_L = X ×_K L` has the same dimension as `X`; and if `j : U ⟶ X` is an open immersion with dense
 image, then `dim U = dim X`. -/

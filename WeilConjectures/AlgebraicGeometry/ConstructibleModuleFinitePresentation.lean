@@ -26,7 +26,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Finite presentations of constructible etale module sheaves
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.73.6, Tag 095N.
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section
@@ -38,39 +40,10 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A constructible module sheaf on a qcqs scheme has a presentation by finite sums of
-extensions by zero from affine etale objects. We use the project's `ModuleCat Λ` encoding
-of modules over the constant ring sheaf. In this encoding `P W` is the sheafification of
-`V ↦ Λ[Hom(V,W)]`, with restriction by precomposition; it is `j_{W!} Λ_W`. Sheafifying
-with constant coefficients or first extending scalars to the constant ring sheaf gives
-the same free sheaf, by the free-Yoneda and sheafification adjunctions.
-
-Proof, following Stacks Project, Etale Cohomology, Lemma 59.73.6 (Tag 095N):
-1. An affine etale object's extension by zero is constructible
-; finite sums are constructible by
-   `thm-constructible-serre`, including the empty sum.
-2. The free-Yoneda bijection and the
-   sheafification adjunction turn a section
-   over an etale object into a map from its extension by zero.
-3. Finite stalks and the filtered
-   colimit description let us represent all stalk elements
-   by finitely many sections; shrink their neighbourhoods to affine ones using
-   `lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`. These maps surject at that stalk.
-4. For each finite family, its cokernel is constructible by `thm-constructible-serre`.
-   Its support is constructible.
-   Exactness of geometric stalks identifies this
-   support with failure of stalkwise surjectivity; enlarging the family decreases it.
-5. Choose a geometric point over each point. Step 3 and
-   independence of vanishing from the geometric point (the support lemma) give a finite
-   family whose cokernel support avoids this point.
-6. The qcqs scheme is spectral. Compactness of its
-   constructible topology
-   makes finitely many such supports have empty intersection; concatenate their families.
-7. The resulting cokernel has zero stalks. Conservativity
- makes it zero, so the map is epi.
-8. Apply this construction to `F`, then to the constructible kernel of the resulting
-   epimorphism `g` (again `thm-constructible-serre`). Compose the latter epimorphism with
-   the kernel inclusion to obtain `f`. In the abelian module-sheaf category, `g` is its
-   cokernel, giving the asserted cofork colimit. -/
+extensions by zero from affine etale objects. The project's `ModuleCat Λ` encoding
+of modules over the constant ring sheaf is used; in it `P W` is the sheafification of
+`V ↦ Λ[Hom(V,W)]`, with restriction by precomposition; it is `j_{W!} Λ_W`.
+(Stacks, Tag 095N) -/
 theorem exists_affine_free_etale_presentation
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

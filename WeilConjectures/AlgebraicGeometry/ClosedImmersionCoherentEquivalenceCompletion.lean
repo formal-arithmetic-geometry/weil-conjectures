@@ -20,10 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 open MonoidalCategory Scheme.Modules
 /-- Completion comparison for closed immersion pushforward.
-Source: Stacks Project, Cohomology of Schemes, equation 0880.
-The proof assembles the canonical quotient comparisons into a natural isomorphism
-and checks the stated projection equation at every positive level.
--/
+(Stacks, equation 0880). -/
 theorem closedImmersion_coherentFormal_equivalence_completion {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData) :
     ∃ θ : ObjectProperty.ι (RingedSpace.IsCoherent Z.toRingedSpace) ⋙

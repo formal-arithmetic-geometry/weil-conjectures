@@ -37,11 +37,8 @@ set_option maxHeartbeats 1000000 in
 -- Elaborating the explicit comparison witnesses needs a larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Open restriction compatibility for single modules in every integer degree.
-Source: Stacks Project, Tags 08FE and 08HY.
-Generalizes the degree-zero compatibility statement of
-CanonicalModuleBaseChangeOpenComparisonCompat, whose proof imports the fixed-counit
-item and therefore cannot be imported here without a cycle. -/
+/-- Open restriction compatibility for single modules in every integer degree
+(Stacks, Tags 08FE, 08HY). -/
 theorem restricted_base_change_compatibility_single_degree
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

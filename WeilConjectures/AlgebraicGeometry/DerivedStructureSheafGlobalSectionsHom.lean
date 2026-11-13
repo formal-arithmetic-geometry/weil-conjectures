@@ -74,9 +74,8 @@ private theorem descendHomEquiv
   simp only [Functor.map_comp, Category.assoc]
   simp
 
-/-- The structure-sheaf case of the derived global-sections adjunction.
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph; Tag 0B6A for the K-injective computation of derived global sections. -/
+/-- The structure-sheaf case of the derived global-sections adjunction
+(Stacks, Tags 09M1 and 0B6A). -/
 theorem derivedStructureSheaf_globalSections_hom (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := HasDerivedCategory.standard

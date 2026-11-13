@@ -52,8 +52,7 @@ theorem adicFiniteGradedModule_torsion {A : Type w} [CommRing A]
   simpa only [← pow_add, Nat.add_comm 1 (n + 1)] using Ideal.mul_mem_mul ha' hc'
 
 /-- The same kernel, with its action descended through the surjective residue map.
-This is a construction from the annihilation proof, with no choice of a module witness.
-Source: Stacks Tag 09BR. -/
+This involves no choice of a module witness (Stacks, Tag 09BR). -/
 def adicFiniteResidueGradedModule {A : Type w} [CommRing A] (J : Ideal A) (n : ℕ) :
     ModuleCat.{w} (adicFiniteCoeff J 0) :=
   let r := adicFiniteFactor J (Nat.zero_le (n + 1))
@@ -310,11 +309,8 @@ end ConstantRestriction
 attribute [local irreducible] gradedConstantIso
 
 /-- The actual graded layer is the restriction of one tensor over the residue ring.
-This comparison has no constructibility or cohomological boundedness assumption.
-
-Source: Stacks Project, proetale.tex, Tag 09BR,
-lemma-compare-truncations-constructible, second displayed isomorphism;
-Cohomology on Sites, Tags 06YY and 06YU, derived change of rings and tensor. -/
+This comparison has no constructibility or cohomological boundedness assumption
+(Stacks, Tags 09BR, 06YY and 06YU). -/
 theorem adicFiniteGradedLayer_residueTensor (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :

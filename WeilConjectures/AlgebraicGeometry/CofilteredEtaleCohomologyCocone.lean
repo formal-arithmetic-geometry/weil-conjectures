@@ -30,8 +30,7 @@ cofiltered qcqs system with affine transitions has a colimit given by limit coho
 The stage isomorphisms identify its objects, and `r` records the compatible restriction
 maps from the fixed base. The last equation specifies the comparison on those maps.
 
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ), with the cofiltered-category reduction
-of `lem-weil-pbc-filtered-category-exists-directed-final`. -/
+(Stacks, Tag 09YQ) -/
 theorem exists_cofiltered_etale_cohomology_cocone
     {J : Type u} [SmallCategory J] [IsCofiltered J] {S : Scheme.{u}}
     (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)

@@ -38,7 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The canonical affine derived Hom comparison is bijective.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof. -/
+(Stacks, Tag 09RE). -/
 theorem affine_perfect_hom_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

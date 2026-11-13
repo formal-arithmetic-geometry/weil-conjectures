@@ -139,10 +139,7 @@ private theorem counit_adjoint_augmentation_f_zero {X Y : Scheme.{u}} (f : X ⟶
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The first comparison construction, before the second homotopy is imposed.
-The proof lifts into the bounded-below injective direct-image resolution using
-K-injective comparison after extension by zero, then reflects homotopies across
-the forgotten augmentation and applies sections.
-Source: Stacks Project, Tags 013P and 013S. -/
+(Stacks, Tags 013P and 013S). -/
 theorem exists_section_map_with_counit_homotopy {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F)
     (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)

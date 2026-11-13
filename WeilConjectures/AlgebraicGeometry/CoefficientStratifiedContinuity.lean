@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonContinuity
 import WeilConjectures.AlgebraicGeometry.CoefficientFpLocalSystemOrigin
 import WeilConjectures.AlgebraicGeometry.CoefficientStratifiedEssentialImage
 /-! # Continuity for modules with one finite constructible stratification
-Source: the classicality detail of blueprint constructible comparison; Stacks 09AK.
+
+## References
+
+* Stacks Project, Tag 09AK
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Finite local systems on one finite constructible partition give continuity.
-Source: blueprint sk-thm-pe-constructible-comparison-classical, Stacks Tag 09AK. -/
+(Stacks, Tag 09AK) -/
 theorem coefficientStratified_continuity (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (F : ConstantCompletion.Mod (ConstantCompletion.constant

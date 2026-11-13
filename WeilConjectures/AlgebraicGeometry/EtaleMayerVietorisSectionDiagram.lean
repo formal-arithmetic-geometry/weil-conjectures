@@ -14,8 +14,7 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-!
 # A section-complex diagram computing étale Mayer–Vietoris pullback
 
-Source: Stacks Project, Tag 0A50, proof; the pullback comparison is the
-resolution argument in the parent node, steps 1, 2 and 4.
+Source: Stacks Project, Tag 0A50.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A morphism of short exact nonnegative section complexes, with homology
 identifications respecting the prescribed restriction and pullback maps.
-Source: Stacks Project, Tag 0A50, proof, and the explicit resolution comparison
-of the parent node, steps 1, 2 and 4. -/
+(Stacks, Tag 0A50) -/
 theorem etale_mayerVietoris_section_diagram
     {X Y : Scheme.{u}} (g : Y ⟶ X) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :

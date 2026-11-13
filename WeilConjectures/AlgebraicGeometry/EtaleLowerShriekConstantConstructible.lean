@@ -48,18 +48,8 @@ private theorem finiteLocallyConstant_constant_module
   exact hM.of_iso ((pointSmallEtale t).sheafFiberConstantSheafIso M).symm
 
 /-- Extension by zero of a finite constant module sheaf along an etale morphism between
-quasi-compact quasi-separated schemes is constructible. Sheaves valued in `ModuleCat Λ`
-encode module sheaves over the constant ring sheaf `Λ_X`. The functor `etaleLowerShriek`
-sheafifies the presheaf whose value on `V` is the direct sum over `Hom_X(V, U)` of the
-constant module sheaf's sections on `V`; restriction reindexes by composition and restricts
-sections. Thus its value here is the node's `j_! underline M_U`, including the free
-rank-one case `M = Λ`.
-
-Source: Stacks Project, Tag 03S8, Lemma 59.73.1(3). -/
+quasi-compact quasi-separated schemes is constructible (Stacks, Tag 03S8). -/
 /- Core stalk constructibility argument for Tag 03S8(3).
-Source: Stacks Project, Tag 03S8, proof lines 12198-12212.
-The finite stratification, base change, finite-etale comparison, and finite pushforward
-steps produce the constructibility witness.
 -/
 theorem isConstructibleSheaf_etaleLowerShriek_constant_core
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
@@ -101,7 +91,8 @@ theorem isConstructibleSheaf_etaleLowerShriek_constant_core
         inferInstance).obj N) := hshriek
   exact IsFiniteLocallyConstantSheaf.of_iso e
 
-/-- -/
+/-- Extension by zero of a finite constant module sheaf along an etale morphism between
+quasi-compact quasi-separated schemes is constructible, as a module sheaf. -/
 theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace U] [QuasiSeparatedSpace U]

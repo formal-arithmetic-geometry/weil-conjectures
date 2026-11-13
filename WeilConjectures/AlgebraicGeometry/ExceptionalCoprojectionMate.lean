@@ -100,12 +100,8 @@ end CategoryTheory.Adjunction
 namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-/--
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-poincare-duality/sec-the-trace-map-in-top-degree/sk-cor-trace/sk-thm-regular/
-sk-thm-regular.proof.md
-Step 4(iii): composition compatibility and twists passing through the exceptional inverse image;
-the co-projection Hom comparison of sk-lem-coprojection. -/
+/-- The co-projection comparison for the exceptional inverse image is the mate of the
+lower-shriek right-adjoint tensor map. -/
 theorem exceptionalCoprojectionMate
     (K L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (e : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj L ≅ constantComplex Λ Y)

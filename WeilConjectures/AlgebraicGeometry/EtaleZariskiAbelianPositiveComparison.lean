@@ -38,12 +38,8 @@ attribute [local irreducible] tensorPullback tensorPullbackObj
 
 /-- In positive degrees, the underlying Zariski abelian sheaf of a quasi-coherent
 module has the same cohomology as its associated tensor-sections étale sheaf.
-The specified sheaf maps are the actual tensor pullbacks on every object.
-This statement concerns abelian sheaf cohomology, not derived sections in the
-category of modules, and makes no assertion in degree zero.
-
-Source: Stacks Project, Descent, Proposition Tag 03DW (2), Étale Cohomology,
-Theorem Tag 03P2, and Cohomology on Sites, Tags 03F3, 072W and 0733(1). -/
+The specified sheaf maps are the actual tensor pullbacks on every object
+(Stacks, Tags 03DW, 03P2, 03F3, 072W, 0733). -/
 theorem etaleZariskiAbelianPositiveComparison (X : Scheme.{u})
     (m : ∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent],
       (F ⟶ G) → (etaleTensorSectionsSheaf F ⟶ etaleTensorSectionsSheaf G))

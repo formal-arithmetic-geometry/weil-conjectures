@@ -20,8 +20,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-! # Derived reduction and restriction of scalars
 
-Source: Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC;
-blueprint `def-weil-derived-direct-image`, order 1468.
+## References
+
+* Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC
 
 The index n denotes exponent n+1. All constructions use the completed coefficient
 sheaf, with no auxiliary finite-field datum or restriction on the characteristic of Y.
@@ -466,8 +467,7 @@ Source: Stacks Tag 05RU. -/
 noncomputable instance scalarReductionTargetDerived (n : ℕ) :
     HasDerivedCategory (scalarReductionTarget l E Y n) := HasDerivedCategory.standard _
 
-/-- The site fits in the chosen module universe via its standard small model.
-Source: blueprint small-site convention. -/
+/-- The site fits in the chosen module universe via its standard small model. -/
 theorem scalarReductionSiteSmall :
     EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
   essentiallySmallSelf _

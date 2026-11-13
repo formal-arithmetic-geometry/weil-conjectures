@@ -273,10 +273,8 @@ private def stalk_right_restriction (X : Scheme.{u})
     (Functor.associator _ _ _).symm
 
 /-- Exact geometric stalks commute with arbitrary derived extension of constant scalars.
-Both functors here are the previously constructed functors, not unspecified scalar
-extensions. No boundedness, constructibility or nilpotence is required.
-Source: Stacks Project, Modules on Sites, Tags 03EL, 05V7 and 05V8;
-Cohomology on Sites, Tag 07A6; Derived Categories, Tag 015F. -/
+No boundedness, constructibility or nilpotence is required.
+(Stacks, Tags 03EL, 05V7, 05V8, 07A6, 015F) -/
 theorem coefficientEtale_stalk_scalarExtension
     (X : Scheme.{u}) {B R : Type (max v (u + 1))} [CommRing B] [CommRing R]
     (f : B →+* R) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

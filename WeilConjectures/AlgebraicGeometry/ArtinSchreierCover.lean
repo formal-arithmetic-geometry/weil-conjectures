@@ -28,8 +28,7 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.Properties
 
 /-! # Artin–Schreier covers of global functions
 
-Source: Fourier–Deligne transform, sk-lem-as-properties,
-lem-fd-as-cover; Stacks Project, Tag 0A3J.
+Source: Stacks Project, Tag 0A3J.
 
 The cover is constructed by base change from the polynomial quotient over the global
 functions. Its affine presentations identify it with the relative spectrum in the source.
@@ -46,22 +45,19 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-/-- The equation defining the Artin–Schreier cover.
-Source: lem-fd-as-cover, first sentence. -/
+/-- The equation defining the Artin–Schreier cover. -/
 def artinSchreierCoverPolynomial (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
     Polynomial Γ(X, ⊤) :=
   Polynomial.X ^ p - Polynomial.X - Polynomial.C f
 
 /-- The Artin–Schreier cover of `f`, as a scheme over `X`. This is the base change along
-`X.toSpecΓ` of the spectrum of the actual quotient ring `Γ(X)[T]/(T^p-T-f)`.
-Source: lem-fd-as-cover, first sentence. -/
+`X.toSpecΓ` of the spectrum of the actual quotient ring `Γ(X)[T]/(T^p-T-f)`. -/
 def artinSchreierCover (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) : Over X :=
   Over.mk (pullback.fst X.toSpecΓ
     (Spec.map (CommRingCat.ofHom
       (algebraMap Γ(X, ⊤) (AdjoinRoot (artinSchreierCoverPolynomial p X f))))))
 
-/-- The class of `T` on the Artin–Schreier cover, pulled back from its quotient-ring model.
-Source: lem-fd-as-cover, the coordinate `T`. -/
+/-- The class of `T` on the Artin–Schreier cover, pulled back from its quotient-ring model. -/
 def artinSchreierCoverCoordinate (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
     Γ((artinSchreierCover p X f).left, ⊤) :=
   (pullback.snd X.toSpecΓ
@@ -71,13 +67,7 @@ def artinSchreierCoverCoordinate (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
       (AdjoinRoot.root (artinSchreierCoverPolynomial p X f)))
 
 /-- All properties of the Artin–Schreier covering, including its translation action and
-canonical equivariant automorphism group. The source of the centralizer is the group of
-locally constant functions, canonically the global sections of the constant étale sheaf.
-The normalization on every open where such a function is constant specifies the canonical
-isomorphism, including on disconnected bases. The sheaf torsor is identified with the
-represented presheaf, and the action of each constant section is identified with the
-specified translation.
-Source: lem-fd-as-cover. -/
+canonical equivariant automorphism group (Stacks, Tag 0A3J). -/
 theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
     (X : Scheme.{u}) (hchar : (p : Γ(X, ⊤)) = 0) (f : Γ(X, ⊤)) :
     IsFinite (artinSchreierCover p X f).hom ∧

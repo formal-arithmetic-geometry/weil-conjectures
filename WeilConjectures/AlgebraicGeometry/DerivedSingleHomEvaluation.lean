@@ -86,9 +86,7 @@ set_option backward.isDefEq.respectTransparency true in
 -- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
-
-Source: Stacks Project, sites-cohomology.tex, Section 08J7 and Lemma 0A95;
-the localization calculation in lem-sc-affine-hom-kinjective-evaluation, step 1. -/
+(Stacks, Tags 08J7 and 0A95) -/
 theorem derived_single_hom_evaluation (Y : Scheme.{u})
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (e : (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj

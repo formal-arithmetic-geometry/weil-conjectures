@@ -31,12 +31,7 @@ namespace AlgebraicGeometry
 -- Elaborating the dependent witness package and its comparisons exceeds the default limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- Constant-ring inverse image is the exact module pullback, with the abelian adjunction.
-Source: Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and Example 0H7J.
-
-The names RV, RU, etaV and etaU are lambda-bound and immediately applied to the
-constant ring sheaves and their sheafification units; these are reducible names, not
-additional hypotheses. Lr is the ring inverse image, L0 the module
-inverse image before transporting scalars, and LM the module inverse image over RU. -/
+(Stacks, Tags 03D2, 03D3, 03D6, 03D7, 04JC and 0H7J). -/
 theorem etaleInverseImageModulesExact (U V : Scheme.{u}) (f : U ⟶ V)
     (R : CommRingCat.{u + 1}) :
     (fun (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})

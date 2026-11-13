@@ -268,10 +268,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- **Restrictions along a quasi-compact jointly surjective family detect sections.** Let
 `g k : Z k ⟶ U` be finitely many quasi-compact morphisms jointly covering `U`. A section `s` of
 a pro-étale sheaf of modules `F` on `U` whose images under the units `F ⟶ (g k)_* (g k)^* F` all
-vanish is zero: `s` vanishes on weakly étale neighbourhoods of the points of every
-`V ×_U Z k` (`AlgebraicGeometry.ProEtale.rawLocalVanish`), and these
-neighbourhoods form a pro-étale cover of `V`
-(`AlgebraicGeometry.QuasiCompactCover.of_comp_factor`). -/
+vanish is zero. -/
 private theorem rawDetectSections
     (R : Type (max v (u + 1))) [CommRing R] {U : Scheme.{u}}
     {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}
@@ -416,8 +413,7 @@ private theorem rawUnitEpi (A : Type (max v (u + 1))) [CommRing A]
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The canonical inverse/direct-image unit of a closed immersion is epic.
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open, and Tag 09BK,
-lemma-closed-immersion-affines. -/
+(Stacks, Tags 09AH, 09BK) -/
 theorem coefficientFixed_closed_unit_epi
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

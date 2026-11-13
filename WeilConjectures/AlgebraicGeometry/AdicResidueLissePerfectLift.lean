@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Limits.Types.Images
 /-!
 # Local perfect lifting from lisse residue complexes
 
-Source: Stacks Project, `proetale.tex`, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8.
+Source: Stacks Project, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8.
 -/
 
 @[expose] public noncomputable section
@@ -76,14 +76,8 @@ private theorem adicResidueHomTower_isIso_zero
     infer_instance
 
 /-- A complete completed-coefficient complex with bounded lisse finite-Tor residue has
-bounded finite-projective constant local models. The residue is an etale complex; its
-comparison is taken only after derived reduction. The Tor test is written on every
-K-flat representative, using the existing total tensor with degree-zero module sheaves.
-The covering sieve is on the transported final object. The termwise completed model
-uses the canonical constant-ring comparison and ordinary scalar extension.
-
-Source: Stacks Project, proetale.tex, Tag 09C6 and Section 099L; Bhatt--Scholze,
-Lemma 6.6.8 and Proposition 6.6.11. -/
+bounded finite-projective constant local models (Stacks, Tags 09C6 and 099L;
+Bhatt--Scholze, Lemma 6.6.8 and Proposition 6.6.11). -/
 theorem adicResidueLissePerfectLift
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

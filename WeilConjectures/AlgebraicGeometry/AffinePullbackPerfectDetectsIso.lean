@@ -29,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry
 
 /-- Affine pullbacks of perfect complexes detect isomorphisms between quasi-coherent
-complexes. Source: Stacks Project, Tag 0AA8, first proof paragraph, and Tag 0BQT. -/
+complexes (Stacks, Tags 0AA8 and 0BQT). -/
 theorem affinePullbackPerfect_detects_iso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

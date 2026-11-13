@@ -259,11 +259,7 @@ private theorem coefficient_product_cast {X : Scheme.{u}} (J L : X.Modules)
   simp only [eqToHom_refl, whiskerLeft_id, id_whiskerRight, Category.id_comp]
 
 /-- The coefficient comparison splits off the initial n factors and compares the
-remaining factors with the section degree. Unlike block interchange this holds
-for arbitrary L; it never permutes its factors.
-
-Source: Stacks Project, Tag 01CD, lemma-tensor-product-pullback, and Tag 09MS,
-coherent-equation-ses (expansion of the canonical tensor identifications). -/
+remaining factors with the section degree (Stacks, Tags 01CD, 09MS). -/
 theorem boundaryCoefficientDegreeIso_split {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (n e : ℕ) :
     let a := n * (e + 1)

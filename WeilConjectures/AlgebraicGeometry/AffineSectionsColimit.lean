@@ -25,11 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Sections on an affine étale object preserve filtered colimits of sheaves for the
-finite affine étale pretopology. The proof uses finite affine refinements of coverings,
-filtered colimit representatives on the finite family and the sheaf equalizer condition.
-The empty covering is included.
-
-Source: Stacks Project, Sites Tag 0738(4) and Tag 00VM; Categories Tag 002W. -/
+finite affine étale pretopology (Stacks, Tags 0738, 00VM and 002W). -/
 theorem affineSections_colimit
     {S : Scheme.{u}} {J : Type u} [SmallCategory J] [IsFiltered J]
     (E : J ⥤ Sheaf (Scheme.fullAffineEtaleTopology S) (Type (u + 1)))

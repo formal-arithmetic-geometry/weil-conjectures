@@ -13,7 +13,7 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Etale trivializing charts for coefficient-sized local systems
 
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
+Source: Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -430,9 +430,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A local system with finitely presented models has constant charts on objects
 coming from the etale site. The images of these objects cover the pro-etale site.
-The conclusion only concerns restrictions and covers, not comparison inverse image.
-
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant. -/
+(Stacks, Tag 099Y) -/
 theorem coefficientFpLocalSystem_etaleCover (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

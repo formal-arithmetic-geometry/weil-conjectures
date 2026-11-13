@@ -25,7 +25,7 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # HOM ideal-power comparison over an open complement
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
+Stacks Project, Tag 01YB.
 -/
 
 @[expose] public section
@@ -110,8 +110,8 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
   exact congrArg (fun P : Submodule Γ(X, U.1) Γ(M, U.1) ↦ (P : Set Γ(M, U.1))) ha
 
 
-/-- Sheaf separatedness detects a zero morphism on the affine basis.
-Source: Stacks Project, proof of Lemma 01YB, affine-local detection of zero maps. -/
+/-- Sheaf separatedness detects a zero morphism on the affine basis
+(Stacks, Tag 01YB). -/
 private theorem hom_zero_of_affine {X : Scheme.{u}} {M N : X.Modules}
     (φ : M ⟶ N) (h : ∀ V : X.affineOpens, ∀ s : Γ(M, V.1), φ.app V.1 s = 0) :
     φ = 0 := by

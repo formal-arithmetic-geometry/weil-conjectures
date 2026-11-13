@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Etale charts for bounded lisse coefficient complexes
 
-Source: Stacks Project, Cohomology on Sites, lemma-locally-constant (Tag 094G),
-and Etale Cohomology, lemma-connected-ctf-locally-constant (Tag 09BI).
+Source: Stacks Project, Tags 094G and 09BI.
 -/
 
 @[expose] public noncomputable section
@@ -179,11 +178,7 @@ private theorem fixed_models
 /-- A bounded lisse complex admits etale charts with individual algebraic models.
 The models identify all geometric stalks over the chart image and realize the
 comparison pullback on every pro-etale object factoring through that chart.
-There is no assertion that different charts have isomorphic models.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-locally-constant (094G);
-etale-cohomology.tex, proof of lemma-connected-ctf-locally-constant (09BI),
-through the choice of the individual complexes; Tags 03PT, 04EQ, 099R and 03DJ. -/
+(Stacks, Tags 094G, 09BI) -/
 theorem coefficient_etale_derived_chart_atlas
     (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]

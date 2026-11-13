@@ -27,36 +27,7 @@ namespace AlgebraicGeometry.Scheme
 set_option synthInstance.maxSize 2048 in
 /-- Finite Tate sheaves are locally free lines, with the normalized inverse-image
 comparisons, their signed tensor products, and exponent-change comparisons.
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E.
-Proof plan:
-1. Apply `lem-asd-finite-etale-twist-line` to `ℤ/m` to trivialize the roots sheaf.
-   Extend its cyclic basis to `A`. This uses only `m A = 0`, not finiteness or flatness
-   of `A`. Tensor powers and the dual basis trivialize all signed powers on this cover.
-2. Over an affine open represent `μ_m` by `Spec R[t]/(t^m-1)`. The root-splitting
-   etaleness lemma makes this an object of the small etale site. The representable
-   inverse-image and Yoneda lemmas identify its pullback with the same root functor.
-   The adjunct sends each root to its restriction along the base-change projection.
-3. Glue these affine comparisons using etale-cover detection of isomorphisms.
-   The algebraic-structures and composition-unit lemmas identify the abelian
-   adjuncts. Restriction preserves powers, giving the displayed normalization.
-4. The left-exact site inverse-image tensor lemma and exact module inverse image
-   preserve coefficient extension and positive powers. On pure tensors the map
-   sends `a ⊗ z` to `a ⊗ v⁻¹z`, which is the generator equation below.
-5. Pull back evaluation. On a local basis and its dual the comparison preserves
-   evaluation and is invertible. This determines every negative comparison.
-6. Concatenation and contraction on signed basis tensors give the product maps.
-   Changes of basis multiply degree `a` by `u^a`, so the maps glue and satisfy
-   associativity, symmetry, units, evaluation, identities, and composition.
-7. Exact inverse image is its own left derived functor. The ringed-topos derived
-   tensor comparison, computed on K-flat flat-term resolutions, gives the natural
-   unbounded derived comparison; additive inverse image preserves shift signs.
-   The derived comparison is the composite of these canonical maps, so its tensor
-   and composition compatibilities follow termwise from those of steps 3--6.
-8. For `m' = q m`, choose a local primitive `m'`-root `ζ`. Its power `ζ^q`
-   trivializes `μ_m`. The power map is reduction in these bases and induces the
-   identity on `A` after scalar extension. Tensor powers and inverse duals give
-   all exponent-change comparisons. Power maps commute with pullback and compose.
--/
+(Stacks, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E). -/
 theorem etaleFiniteTwistPullback (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hm : 0 < m) (hA : (m : A) = 0) :
     ∃ (r : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),
@@ -379,36 +350,7 @@ structure FiniteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A] (m : ℕ)
 
 /-- The structured finite Tate comparisons exist, with the normalized inverse-image
 comparisons, their signed tensor products, and exponent-change comparisons.
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E.
-Proof plan:
-1. Apply `lem-asd-finite-etale-twist-line` to `ℤ/m` to trivialize the roots sheaf.
-   Extend its cyclic basis to `A`. This uses only `m A = 0`, not finiteness or flatness
-   of `A`. Tensor powers and the dual basis trivialize all signed powers on this cover.
-2. Over an affine open represent `μ_m` by `Spec R[t]/(t^m-1)`. The root-splitting
-   etaleness lemma makes this an object of the small etale site. The representable
-   inverse-image and Yoneda lemmas identify its pullback with the same root functor.
-   The adjunct sends each root to its restriction along the base-change projection.
-3. Glue these affine comparisons using etale-cover detection of isomorphisms.
-   The algebraic-structures and composition-unit lemmas identify the abelian
-   adjuncts. Restriction preserves powers, giving the displayed normalization.
-4. The left-exact site inverse-image tensor lemma and exact module inverse image
-   preserve coefficient extension and positive powers. On pure tensors the map
-   sends `a ⊗ z` to `a ⊗ v⁻¹z`, which is the generator equation below.
-5. Pull back evaluation. On a local basis and its dual the comparison preserves
-   evaluation and is invertible. This determines every negative comparison.
-6. Concatenation and contraction on signed basis tensors give the product maps.
-   Changes of basis multiply degree `a` by `u^a`, so the maps glue and satisfy
-   associativity, symmetry, units, evaluation, identities, and composition.
-7. Exact inverse image is its own left derived functor. The ringed-topos derived
-   tensor comparison, computed on K-flat flat-term resolutions, gives the natural
-   unbounded derived comparison; additive inverse image preserves shift signs.
-   The derived comparison is the composite of these canonical maps, so its tensor
-   and composition compatibilities follow termwise from those of steps 3--6.
-8. For `m' = q m`, choose a local primitive `m'`-root `ζ`. Its power `ζ^q`
-   trivializes `μ_m`. The power map is reduction in these bases and induces the
-   identity on `A` after scalar extension. Tensor powers and inverse duals give
-   all exponent-change comparisons. Power maps commute with pullback and compose.
--/
+(Stacks, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E). -/
 theorem nonempty_finiteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) :
     Nonempty (FiniteEtaleTwistPullbackData A m hA) := by

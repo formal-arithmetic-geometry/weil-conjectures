@@ -14,7 +14,7 @@ import all WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 
 /-! # Concatenating coherent integral-ideal filtrations
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, induced-filtration step.
+Stacks Project, Tag 01YF.
 -/
 
 @[expose] public section
@@ -25,9 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Coherent integral-ideal filtrations are closed under coherent extensions.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, proof, the induced
-filtration in the reducible-support paragraph and the last sentence. -/
+/-- Coherent integral-ideal filtrations are closed under coherent extensions
+(Stacks, Tag 01YF). -/
 theorem coherentIntegralFiltration_of_shortExact
     (X : Scheme.{u}) [IsLocallyNoetherian X] (S : ShortComplex X.Modules)
     (hS : S.ShortExact)

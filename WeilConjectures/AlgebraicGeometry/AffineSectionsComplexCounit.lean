@@ -45,8 +45,8 @@ private noncomputable def chartSectionsIso (Y : Scheme.{u}) [IsAffine Y] :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pushing the associated sheaf of the ordinary section complex back through the
-canonical affine chart recovers a complex with quasi-coherent terms.
-Source: Stacks Project, Tag 01IB (schemes-lemma-spec-sheaves), and Tag 06Z0. -/
+canonical affine chart recovers a complex with quasi-coherent terms
+(Stacks, Tags 01IB and 06Z0). -/
 theorem affine_sections_complex_counit (Y : Scheme.{u}) [IsAffine Y]
     (D : CochainComplex Y.Modules ℤ)
     (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent) :

@@ -13,7 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Exact direct image over a closed immersion's algebra
 
-Source: Stacks Tags 01AX, 00AE and 0AVW, closed-embedding stalk calculation.
+## References
+
+* Stacks Project, Tags 01AX, 00AE and 0AVW
 -/
 
 @[expose] public section
@@ -25,12 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Direct image into the direct-image algebra of a closed immersion preserves
-finite colimits; its left exactness follows separately from the pullback adjunction.
-This concerns all module sheaves, independently of any rank decomposition or
-choice of complex.
-
-Source: Stacks Tag 01AX (exact direct image for a closed subset),
-Tag 00AE (stalks), and Tag 0AVW (direct-image algebra); reconstruction proof step 1. -/
+finite colimits (Stacks, Tags 01AX, 00AE, 0AVW). -/
 theorem closedImmersion_algebraDirectImage_preservesFiniteColimits
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     PreservesFiniteColimits

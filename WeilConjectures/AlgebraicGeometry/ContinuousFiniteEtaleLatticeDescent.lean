@@ -27,7 +27,9 @@ public import WeilConjectures.CategoryTheory.SiteModuleCompatibleTuples
 
 /-! # Integral lattices descend along finite etale surjections
 
-Source: Bhatt--Scholze, first paragraph of the proof of Lemma 6.8.13.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13
 -/
 
 @[expose] public section
@@ -41,27 +43,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A lisse rational module with an integral lattice on a finite etale cover
 has an integral lisse lattice on the base. No descent datum on the input lattice
-is required. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
-
-Proof in words. Construct the integral module as the inverse image, under the
-rational adjunction unit P → p_*p^*P, of the image of the pushed lattice map
-p_*M → Res(p_*p^*P). This is a categorical image and pullback, with its canonical
-inclusion into Res(P); it makes no choices of local splittings or descent data.
-The supplied rationalization and the scalar-extension/pushforward mate identify
-the pushed map after extending coefficients. Qcqs pushforward preserves the scalar
-localization telescope, and the localization counit is invertible. Exact scalar
-extension therefore turns the inclusion of the image-pullback into an isomorphism.
-Its adjoint is the required rationalization isomorphism to P.
-
-For local freeness, the finite-sheet local matrix model describes the restriction
-of this constructed module as the kernel of an integral finite matrix which is
-surjective after rationalization. The integral matrix pivot theorem reduces its
-kernel, one source rank at a time, to the zero-matrix case. Its rational cokernel
-is zero, so the pivot hypothesis continues to hold. This proves local finite
-freeness of each model. Undo the coefficient normalization and compose its
-trivializing covers with the cover giving the local models. The resulting cover
-witnesses the local finite freeness required in the conclusion. Rank zero and
-empty schemes are included in these categorical constructions. -/
+is required. (Bhatt--Scholze, Lemma 6.8.13) -/
 theorem continuousLisse_finiteEtale_lattice
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

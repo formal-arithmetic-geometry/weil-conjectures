@@ -216,8 +216,7 @@ private theorem affineOpen_finite_representing_models
       exact (MorphismProperty.Over.w ((d x).hom ≫ b x)).symm
 
 /-- Refine a covering with representing maps and descend its geometric data.
-Source: Stacks Project, Tag 0EYL, finite diagram and finite cover descent;
-Tag 03Q6, proof steps (1)--(3); Tag 01ZM, morphism descent. -/
+(Stacks, Tags 0EYL, 03Q6, 01ZM). -/
 theorem affineOpen_representing_cover_descent
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

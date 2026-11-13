@@ -34,9 +34,7 @@ private theorem naturalDerivedSymmetry {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The shared derived tensor has a natural symmetry.
-Source: Stacks Project, cohomology.tex, Lemma cohomology-lemma-symmetric-monoidal-derived,
-Tag 0FPB, using Tag 064K for invariance under K-flat replacement. -/
+/-- The shared derived tensor has a natural symmetry (Stacks, Tags 0FPB and 064K). -/
 theorem exists_schemeDerivedTensorSymmetry (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     ∃ s : ∀ K L : schemeDerivedCategory X, K ⊗ L ≅ L ⊗ K,

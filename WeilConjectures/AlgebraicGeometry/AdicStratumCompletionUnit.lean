@@ -37,13 +37,15 @@ import WeilConjectures.CategoryTheory.RingedCechKoszulHomLimitComparison
 /-!
 # Restriction of the actual Koszul completion unit
 
-Source: Bhatt--Scholze, Lemma 6.5.8, Remark 6.5.10 and Proposition 6.6.11;
-Stacks Project, proetale.tex, Tags 099L and 099M, and algebraization.tex, Tag 0A0E.
-
 We use the recorded equivalent small model of each pro-etale site. Its object and
 morphism universes are both `u+1`; the original site's morphism universe remains `u`.
 Algebraic inverse-image data fixes operations on all generalized sections. In particular
 its completed coefficient map is the recorded limit lift of the finite projections.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8, Remark 6.5.10 and Proposition 6.6.11
+* Stacks Project, Tags 099L, 099M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -318,11 +320,8 @@ def completedPull :
       ConstantCompletion.D (ConstantCompletion.completed K A I) :=
   (ConstantCompletion.derivedPull F V adj (ConstantCompletion.completedMap F A I)).functor
 
-/-- The finite derived comparison in the actual quotient coefficient category. Its three
-factors are the recorded K-flat-normalized finite scalar comparisons and the uniquely
-normalized completed finite pullback comparison. Thus its source uses the actual
-projection of the completed ring, not a replacement finite coefficient object.
-Source: Stacks Tags 099L and 06YY. -/
+/-- The finite derived comparison in the actual quotient coefficient category
+(Stacks, Tags 099L and 06YY). -/
 def finiteComparison [IsNoetherianRing A] (n : ℕ) :
     completedPull F V adj A I ⋙
         ConstantCompletion.extend (ConstantCompletion.projection K A I n) ≅
@@ -336,14 +335,10 @@ def finiteComparison [IsNoetherianRing A] (n : ℕ) :
     (ConstantCompletion.derivedPull F V adj
       (ConstantCompletion.constantMap F (A ⧸ I ^ (n + 1)))).functor
 
-/-- The three restriction clauses: the specified coefficient map is invertible; the
-universal derived pullback computes on every complex; and the actual strict Koszul units
-agree under a natural completion comparison. The finite comparison satisfies the
-canonical scalar-insertion normalization in each quotient coefficient category. Finally local
-internal-Hom completeness
-restricts. This is just a package of the conclusions, not a replacement definition of
-completeness or of completion.
-Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 099M and 0A0E. -/
+/-- The restriction clauses: the specified coefficient map is invertible; the universal derived
+pullback computes on every complex; the actual strict Koszul units agree under a natural
+completion comparison; and local internal-Hom completeness restricts
+(Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks, Tags 099M and 0A0E). -/
 def UnitRestriction [IsNoetherianRing A] (r : ℕ) (a : Fin r → A) : Prop :=
   IsIso (ConstantCompletion.completedMap F A I) ∧
   (∀ P : ConstantCompletion.Cx (ConstantCompletion.completed J A I),
@@ -606,34 +601,8 @@ end Strata
 
 /-- Immersion and slice restriction preserve the finite-projection completed coefficients,
 the actual Koszul completion units, and local derived ideal completeness, without a
-boundedness assumption. The auxiliary `finiteComparison` gives the normalized comparison
-for every finite derived reduction.
-
-Source: Bhatt--Scholze, Lemma 6.5.8(1),(2), Remark 6.5.10 and Proposition 6.6.11;
-Stacks Project, proetale.tex, Tags 099L and 099M, algebraization.tex, Tag 0A0E.
-
-Proof, following steps 1--4 and the forward part of step 5 of the node:
-1. Constant inverse-image comparisons identify every finite quotient and its transitions.
-   Immersion inverse image preserves limits, by
-   lem-weil-pbc-proetale-immersion-limit-preservation, so the limit lift formed from these
-   projections is invertible. Its module inverse image is exact and preserves products.
-2. Slice restriction is the recorded exact module overFunctor, with extension by zero
-   as a left adjoint, by lem-pur-site-restriction-module-adjunction-exact. It preserves
-   products and the quotient projections. Weakly-etale localization identifies its site
-   with the covering scheme's site; lem-sfb-proetale-object-inverse-image-restriction
-   identifies this restriction with the specified inverse image, also for ring sheaves.
-3. The canonical ringed-topos tensor pullback comparison gives finiteComparison.
-   Pull back a flat-term K-flat model and its finite-free Koszul tensor tower. The powers
-   a_j^(m+1), the transitions (a_j,1), and the degree-zero augmentation all restrict to
-   the corresponding strict maps. No perfectness of A/I^(m+1) over A is needed.
-4. Exact countable products on each pro-etale site and slice allow the normalized strict
-   Roos comparison (lem-weil-strict-roos-comparison). The additive comparison
-   lem-pur-roos-additive-comparison identifies 1-shift on both product coordinates and
-   takes the actual augmentation (gamma_m,0) to its restricted augmentation. This gives
-   the displayed equality of the actual units, not just an isomorphism of their targets.
-5. lem-weil-pbc-constant-completion-equivalence identifies local completeness with
-   invertibility of these units. Their comparison therefore proves preservation.
--/
+boundedness assumption (Bhatt--Scholze, Lemma 6.5.8, Remark 6.5.10 and Proposition 6.6.11;
+Stacks, Tags 099L, 099M and 0A0E). -/
 theorem adicStratumCompletionUnit (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I) :
@@ -666,21 +635,8 @@ theorem adicStratumCompletionUnit (X : Scheme.{u}) [IsNoetherian X]
 
 /-- Finite strata with chosen pro-etale covering sieves detect local derived completeness.
 A covering family is represented by its generated covering sieve; testing its arrows
-also tests every further pullback, so includes arbitrary chosen covering families.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Remark 6.5.10;
-Stacks Project, proetale.tex, Tags 099L and 099M.
-
-Proof, step 5 of the node: apply adicStratumCompletionUnit to every stratum and then
-its covering slices. By lem-weil-pbc-constant-completion-equivalence every restricted
-unit is invertible exactly when the restricted object is locally complete. The module
-underlying-sheaf comparisons identify these exact functors with the inverse images in
-lem-weil-pbc-noetherian-stratum-detection; the object inverse-image/restriction theorem
-identifies the covering localizations. Apply their joint conservativity to the unbounded
-derived completion unit. Invertibility of that unit is local completeness on X. For the
-forward implication use the already proved preservation clauses. Empty schemes and empty
-strata use the empty-cover sheaf axiom; no nonemptiness hypothesis is introduced.
--/
+also tests every further pullback, so includes arbitrary chosen covering families
+(Bhatt--Scholze, Proposition 6.6.11 and Remark 6.5.10; Stacks, Tags 099L and 099M). -/
 theorem adicStratumCompletionUnit_detection (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)

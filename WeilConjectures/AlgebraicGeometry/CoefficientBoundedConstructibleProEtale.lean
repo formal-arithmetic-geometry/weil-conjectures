@@ -32,10 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- On a qcqs scheme, the discrete-coefficient presentation of `Dbc`: bounded cohomology and
 the recorded
-finite constant local models on every affine open. This is a predicate on the ordinary
-standard derived localization, without any completeness condition.
-Source: blueprint sk-def-sfb-constructible and sk-thm-pe-constructible-comparison;
-Stacks Tags 09AJ and 09AL. -/
+finite constant local models on every affine open (Stacks, Tags 09AJ and 09AL). -/
 def coefficientBoundedConstructibleProEtale (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :

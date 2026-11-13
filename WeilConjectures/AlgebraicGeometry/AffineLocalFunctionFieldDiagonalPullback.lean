@@ -23,8 +23,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine-local function-field square is a pullback of the diagonal, without
-assuming separatedness.
-Source: Stacks Project, Varieties Lemma 09NB, first paragraph of the proof. -/
+assuming separatedness (Stacks, Tag 09NB). -/
 theorem Scheme.isPullback_affine_local_functionField_diagonal
     (X : Scheme.{u}) [IsIntegral X]
     (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U]

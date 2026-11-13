@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 
 /-! # Finite type of a kernel restricted to one open intersection
 
-Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF.
+Stacks Project, Tags 01BV, 01B5 and 01AF.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition on a single open `U` controls the restriction to `W ∩ U`
 of a kernel initially defined on `W`. This comparison requires neither an open
 cover nor a finite-type hypothesis on `F`.
-Source: Stacks Project, Modules, Definition 01BV (definition-coherent),
-Definition 01B5 (definition-finite-type), and Section 01AF (section-kernels). -/
+(Stacks, Tags 01BV, 01B5 and 01AF). -/
 theorem coherent_kernel_intersection_finiteType
     (X : Scheme.{u}) (F : X.Modules) (U : X.Opens) (n : ℕ)
     (hK : ∀ (V : U.toScheme.Opens)

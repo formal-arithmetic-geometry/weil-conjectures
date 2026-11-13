@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentAffineFreeResolution
 
 /-! # Coherent modules are pseudo-coherent on Noetherian schemes
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08E8,
-`lemma-identify-pseudo-coherent-noetherian`.
+Stacks Project, Tag 08E8.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A coherent module on a Noetherian scheme, regarded as a complex concentrated in degree
-zero, is pseudo-coherent. Source: Stacks Project, Tag 08E8,
-`lemma-identify-pseudo-coherent-noetherian`. -/
+zero, is pseudo-coherent (Stacks, Tag 08E8). -/
 theorem isPseudoCoherent_singleFunctor_obj_of_isCoherent (Y : Scheme.{u}) [IsNoetherian Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

@@ -25,12 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Restriction of ordinary direct image from an open recovers the original module.
-Source: ordinary module direct image, whose sections on V are sections on V intersect U.
-For V contained in U, the projection U intersect V to V is an isomorphism. Applying
-M to this projection identifies the restriction of direct image with M. The counit
-of restriction/direct image has these maps as components, hence is an isomorphism.
-This is the direct-image step of lem-sc-bounded-free-stalk-complex-lift. -/
+/-- Restriction of ordinary direct image from an open recovers the original module. -/
 private theorem openModuleDirectImage_restrict_iso (X : Scheme.{u}) (U : X.Opens)
     (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :
     Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).obj

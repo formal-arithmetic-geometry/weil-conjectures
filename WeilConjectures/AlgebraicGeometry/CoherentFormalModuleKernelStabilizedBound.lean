@@ -16,12 +16,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A uniform bound for stabilization of the kernel images.
-
-Source: Stacks Project, Lemma 087X, claims (a)--(b), affine Artin--Rees argument.
-The proof chooses a finite affine cover, applies Artin--Rees to the kernel on each
-affine, and takes the maximum of the resulting bounds; equality of the resulting
-quasi-coherent submodules is checked on the cover.
--/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_stabilized_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) :
     ∃ c : ℕ, ∀ (l m : ℕ) (h : m + c ≤ l),

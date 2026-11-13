@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Restriction and local exactness of coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087X, parts (2) and (3).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -58,11 +58,7 @@ private theorem restriction_isZero_of_cover {X : Scheme.{u}} [IsNoetherian X]
 
 /-- Restriction is the additive functor whose underlying inverse systems and maps are
 termwise restrictions. It preserves short exact sequences, and exactness and short
-exactness are detected on every open covering. The auxiliary `hz` supplies the proof
-of zero preservation needed to form the mapped short complexes, without any new hypothesis.
-The witness `hN` states that every open subscheme is Noetherian; `I.comap U.ι` is the restricted
-quasi-coherent ideal. The abelian structure is supplied by `coherentFormalModule_abelian`.
-Source: Stacks Project, Lemma 087X (2)--(3). -/
+exactness are detected on every open covering (Stacks, Tag 087X). -/
 theorem coherentFormalModules_local_exactness (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) :
     ∃ (hN : ∀ U : X.Opens, IsNoetherian U.toScheme)

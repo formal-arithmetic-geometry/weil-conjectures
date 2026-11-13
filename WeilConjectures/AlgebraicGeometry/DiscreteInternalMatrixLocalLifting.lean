@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-! # Local descent of an internal matrix to the discrete condensed point
 
-Source: Stacks, Tags 03CY and 00YV; the finite-section argument in
-`lem-sfb-discrete-constant-presentation-lifting`, step 2.
+Source: Stacks, Tags 03CY and 00YV.
 -/
 
 @[expose] public section
@@ -234,9 +233,7 @@ private theorem matrix_lifting_from_sections
 matrix on the condensed point, up to the finite-free comparison isomorphisms.
 This assertion concerns only morphisms between free modules: there is no arbitrary
 module, constant slice trivialization, cokernel or coefficient relabelling.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV; the second step of
-`lem-sfb-discrete-constant-presentation-lifting`. -/
+(Stacks, Tags 03CY and 00YV) -/
 theorem discrete_internal_matrix_local_lifting
     (A : Type u) [CommRing A] {Y : Scheme.{u}}
     (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y) (m n : ℕ)

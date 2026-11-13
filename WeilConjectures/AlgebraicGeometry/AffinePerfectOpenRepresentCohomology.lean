@@ -34,11 +34,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- Every Koszul tail is perfect, its augmentation is invertible on the finite
 principal open, and the restriction cocone represents the filtered colimit of Hom.
-The target is `Hom(O_U,E|_U)`, the degree-zero cohomology identification in Tag 08DC.
-Restriction to `U` is first to the localized site and then transported by the
-canonical equivalence `Scheme.Modules.overEquiv U`, so the target lives in `D(O_U)`.
-Indices `e : ℕ` here correspond to positive exponents `e+1` in the source.
-Source: Stacks, Tags 08CX, 08DC, and Proposition 08DD. -/
+The target is `Hom(O_U,E|_U)` (Stacks, Tags 08CX, 08DC, 08DD). -/
 theorem affine_perfect_open_represent_cohomology
     (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wMain}

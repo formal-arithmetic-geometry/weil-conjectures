@@ -127,8 +127,8 @@ private theorem cocone_tensor_one_zero_at_stage
   refine ⟨k, hjk, ?_⟩
   simpa only [LinearMap.rTensor_tmul, AlgHom.toLinearMap_apply, map_one] using hk
 
-/-- A section killed at the affine inverse limit is killed at one stage.
-Source: Stacks Project, Limits, Tag 01ZR (3), first proof; Algebra, Tag 05LI (1). -/
+/-- A section killed at the affine inverse limit is killed at one stage
+(Stacks, Tags 01ZR and 05LI). -/
 theorem section_affine_open_zero_at_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

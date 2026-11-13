@@ -50,7 +50,7 @@ private theorem tensor_model_iso (X : Scheme.{u})
   exact ⟨(e.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩⟩
 
 /-- Derived tensor commutes with exact open restriction, allowing independent
-localization universes. Source: Stacks Project, Tag 08DX, proof of (1). -/
+localization universes (Stacks, Tag 08DX). -/
 theorem derivedTensor_openRestriction_iso_universes (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]

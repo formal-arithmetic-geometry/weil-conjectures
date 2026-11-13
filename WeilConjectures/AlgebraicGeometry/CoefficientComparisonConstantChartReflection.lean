@@ -100,8 +100,7 @@ private theorem chartComparisonUnit_isIso (X : Scheme.{u})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A constant comparison chart on one etale object descends with the identical module.
 There are no covering, local-constancy, finiteness or Noetherian assumptions.
-Source: Stacks Project, Tag 099T, lemma-fully-faithful, and Tag 099Y,
-lemma-compare-locally-constant, localization step. -/
+(Stacks, Tags 099T and 099Y). -/
 theorem coefficientComparison_constant_over_reflect (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

@@ -68,9 +68,7 @@ private theorem translation_eq (a : k) :
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- The actual deck translation defining the character projector preserves multiplication
-and constant functions in the algebra of the Artin–Schreier pushforward.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, multiplication of eigensections. -/
+and constant functions in the algebra of the Artin–Schreier pushforward. -/
 theorem condensedArtinSchreierTranslation_algebra (a : k) :
     (μ G R R ≫ (CondensedRing.lowerStar Λ q).map
       (Mod.regularMul (condensedRingObj Λ A))) ≫

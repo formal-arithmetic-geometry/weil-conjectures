@@ -28,8 +28,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph;
-Section 00YR, sextuples. -/
+/-- The unit of the sheaf-of-sets adjunction lifts to sheaves of rings (Stacks, Tag 00YV). -/
 theorem etaleRingInverseImageUnit (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

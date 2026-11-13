@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Addition transport for supplied inverse image comparisons
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -86,8 +86,8 @@ private theorem tensor_to_product_snd
     (CartesianMonoidalCategory.tensorProductIsBinaryProduct X X) ⟨.right⟩
 
 -- The dependent sheaf comparisons require repeated unfolding of the forgetful functors.
-/-- Source: Stacks Project, Tags 00X6, 00YV, and 03D2, proof of
-lemma-pullback-module. -/
+/-- The comparison map of the inverse image of a sheaf of rings is compatible with addition
+(Stacks, Tags 00X6, 00YV and 03D2). -/
 theorem etaleInverseImageComparisonAddition (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

@@ -29,9 +29,8 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 700000 in
 -- The categorical composition below needs additional elaboration heartbeats.
 /-- Restriction identifies the module base-change arrow with the arrow of the
-chosen pullback of the restricted maps. No affine chart is used.
-Source: Stacks Project, Tag 08FE, proof; Tag 08HY, counit construction;
-Tag 08IB, first proof paragraph; Tag 0D5U, exact extension by zero. -/
+chosen pullback of the restricted maps. No affine chart is used
+(Stacks, Tags 08FE, 08HY, 08IB and 0D5U). -/
 theorem exists_canonicalModuleBaseChange_open_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

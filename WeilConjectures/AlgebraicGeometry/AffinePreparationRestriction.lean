@@ -23,10 +23,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restrict an existing reduced affine preparation to an open where its family is flat
-and locally finitely presented, retaining an affine open of the original base.
-
-Source: Stacks Project, Tag 0559, second proof, generic-flat shrinking;
-Tag 01IT for the affine-open basis. -/
+and locally finitely presented, retaining an affine open of the original base
+(Stacks, Tags 0559 and 01IT). -/
 theorem exists_affine_preparation_restriction
     {X T S Z : Scheme.{u}} (f : X ⟶ T)
     (V : T.Opens) (q : S ⟶ V.toScheme)

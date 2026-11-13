@@ -67,8 +67,8 @@ private theorem lift_spec_quotient (R : CommRingCat.{u}) (I : Ideal R)
     rw [hE]
     exact hred r
 
-/-- Source: Stacks Project, Étale Cohomology, Lemma 59.80.6 (Tag 09ZA),
-first sentence of its proof, using Algebra Tag 04D1. -/
+/-- An étale map to a closed subscheme of an affine scheme lifts to an affine étale map over
+the ambient scheme (Stacks, Tags 09ZA, 04D1). -/
 theorem Etale.exists_affine_lift_of_closedImmersion
     {X Z V : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]

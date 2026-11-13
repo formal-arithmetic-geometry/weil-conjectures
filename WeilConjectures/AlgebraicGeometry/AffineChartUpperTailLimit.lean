@@ -22,8 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- The fixed affine chart is the limit of its upper-tail stage charts.
-Source: Stacks Project, Limits Tag 01ZR, first proof, affine case. -/
+/-- The fixed affine chart is the limit of its upper-tail stage charts (Stacks, Tag 01ZR). -/
 theorem exists_affine_chart_upper_tail_limit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -32,7 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Affine acyclicity holds for the universe lift of the associated quasi-coherent sheaf.
-Source: Stacks Project, Tag 03P2, affine case, and its Čech proof using Tag 03F9. -/
+(Stacks, Tags 03P2 and 03F9) -/
 theorem etale_affine_qcoherent_ulift (X : Scheme.{u}) [IsAffine X]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) (hq : 0 < q) :
     Subsingleton (Sheaf.H

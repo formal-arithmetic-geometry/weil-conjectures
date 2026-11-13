@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficie
 
 /-! # Transport of regular-module scalars to a geometric point
 
-Source: Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11
 -/
 
 @[expose] public section
@@ -56,26 +58,8 @@ theorem condensedField_coordinates_of_conjugacy
   exact (conjugatedScalar H t b₀ (P.map f)).trans
     ((hb₀ (t.inv ≫ P.map f ≫ t.hom)).trans (hc f))
 
-/-- Transport the normalized regular-module evaluation along one geometric map.
-
-Source: Hemo--Richarz--Scholbach, Example 3.1; the adjoint-test characterization of
-continuous realization in `condensedFieldContinuousMapIso_test`.
-
-Proof in words. Restriction along the inverse coefficient isomorphism sends the
-regular pulled-back coefficient module to the regular coefficient module on V.
-The canonical isomorphism is the coefficient isomorphism itself. Module inverse image
-along a sends that regular module to the regular coefficient module on Spec Ω, by the
-strong monoidality of inverse image and the extension-of-scalars regular-module
-comparison. Let t denote their composite. Apply H to t and compose with the given
-regular-module coordinate b on Spec Ω; this gives the required linear equivalence.
-Conjugation by t transports every regular-module endomorphism f. The normalization
-of H computes its scalar from the canonical continuous realization on Spec Ω.
-The adjoint-test equation for that realization, naturality of the unit, and the
-coefficient pullback comparison identify this transported coefficient with the
-pullback along a of the continuous coefficient of f on V. A continuous function
-pulled back to Spec Ω has value at z equal to its original value at a(z). This proves
-the formula. The argument needs no finite presentation and is valid for any H with
-the stated normalization; a zero functor cannot satisfy that normalization. -/
+/-- Transport the normalized regular-module evaluation along one geometric map
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem condensedField_geometric_evaluation_scalars
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X V : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]

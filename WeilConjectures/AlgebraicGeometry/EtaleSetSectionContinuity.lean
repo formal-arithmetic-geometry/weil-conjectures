@@ -99,16 +99,10 @@ private theorem etaleSetRestrictionUnit_bijective {X : Scheme.{u}} (V : X.Etale)
   exact (asIso (etaleSetRestrictionUnit V F)).toEquiv.bijective
 
 /-- Continuity for a sheaf of sets pulled back from a chosen stage `i₀`. The category
-`Over (op i₀)` indexes the inverse system on the upper tail `i ≥ i₀`, so its opposite
-indexes the directed system of sections. The isomorphisms `e` identify the objects of
-`E` with the stated section sets; its maps are exactly the unit/composition comparisons.
-Thus the functor laws give both the identity and composition laws for these maps.
-The natural transformation `ν` is the canonical cocone, whose induced colimit map is
-bijective. The final assertion says that the canonical unit/diagonal section map for
-each étale projection is bijective, equivalently that restriction is its inverse.
-
-Source: Stacks Project, Étale Cohomology, Theorem Tag 09YQ, degree zero for sets via
-Tags 0EYL, 04HR and 09YN, and restriction along étale morphisms, Tag 03S2. -/
+`Over (op i₀)` indexes the inverse system on the upper tail `i ≥ i₀`, and the isomorphisms
+`e` identify the objects of `E` with the stated section sets. The natural transformation `ν`
+is the canonical cocone, whose induced colimit map is bijective
+(Stacks, Tags 09YQ, 0EYL, 04HR, 09YN, 03S2). -/
 theorem etaleSetSectionContinuity
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

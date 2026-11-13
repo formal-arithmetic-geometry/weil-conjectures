@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Affine-stage continuity for the specified cohomology comparison.
-
-Source: Stacks Project, Tags 09YQ, 0EYL
-(lemma-colimit-affine-sites), 09YP (lemma-colimit), and 04HR. -/
+/-- Affine-stage continuity for the specified cohomology comparison
+(Stacks, Tags 09YQ, 0EYL, 09YP and 04HR). -/
 theorem etale_limit_cohomology_affine_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

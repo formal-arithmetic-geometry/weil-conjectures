@@ -74,7 +74,7 @@ private noncomputable def liftedModuleCechIso
 
 /-- The lifted associated étale sheaf is computed by the lifted module section
 Čech complex of any finite affine open cover of a separated scheme, in positive degree.
-Source: Stacks Project, Tag 03P2, separated-case proof, and Tag 03DW (2). -/
+(Stacks, Tag 03P2) -/
 theorem nonempty_etaleTensorSectionsSheaf_ulift_finiteCech_succ
     (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]
     (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)

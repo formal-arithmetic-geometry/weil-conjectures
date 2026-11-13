@@ -26,9 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Single-section cohomology identifications compatible with whole-to-open restriction,
 restriction between opens, and a prescribed augmentation-preserving direct-image lift.
-This statement involves neither a biproduct nor a morphism of short complexes.
-Source: Stacks Project, Tag 0A50, proof (resolution sections), Tag 03F3 (localization),
-and steps 3 and 4 of lem-weil-pbc-etale-mayer-vietoris-section-comparison. -/
+(Stacks, Tags 0A50 and 03F3). -/
 theorem exists_resolutionSection_homology_comparison
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

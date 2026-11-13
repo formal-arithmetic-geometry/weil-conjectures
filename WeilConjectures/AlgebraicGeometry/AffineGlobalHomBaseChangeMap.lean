@@ -145,9 +145,7 @@ def canonicalPullbackAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :
 
 omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
 /-- The legacy pullback adjunction is the original-counit adjunction transported
-back along the unique change of universal counit. Proof: both legacy entry points
-select the same normalized adjunction. Apply the proved scheme-level transport.
-Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5. -/
+back along the unique change of universal counit (Stacks, Tags 06YJ, 09T5). -/
 theorem canonicalPullbackAdjunction_eq_original_transport {T S : Scheme.{u}} (g : T ⟶ S) :
     canonicalPullbackAdjunction g =
       (schemeHomOriginalPullbackAdjunction g).ofNatIsoLeft

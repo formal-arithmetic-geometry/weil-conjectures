@@ -59,8 +59,7 @@ private theorem counit_isIso_of_retract {C D : Type*} [Category* C] [Category* D
   exact (MorphismProperty.isomorphisms D).of_retract rr inferInstance
 
 /-- A strictly perfect complex on an affine open is the sheafification of a K-projective
-module complex, up to an actual complex isomorphism.
-Source: Stacks Project, Tag 08CR, second proof, and Tag 06Z0, affine tilde/Gamma equivalence. -/
+module complex, up to an actual complex isomorphism (Stacks, Tags 08CR, 06Z0). -/
 theorem affine_perfect_module_model (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
     (K : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)

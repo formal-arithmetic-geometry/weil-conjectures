@@ -117,11 +117,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A finite type quasi-coherent module on an affine scheme has finitely generated global
 sections and a finite family of global generators. Every finite family spanning its module
-of global sections generates the sheaf. A section in `G.sections` is a compatible family
-on opens, determined by its value at `⊤`; `freeHomEquiv.symm` is the map sending the free
-basis to the specified sections. Its being epi means surjectivity as a map of sheaves.
-
-Source: Stacks Project, Properties, Tag 01PB; Schemes, Tags 01IA and 01HV. -/
+of global sections generates the sheaf (Stacks, Tags 01PB, 01IA, 01HV). -/
 theorem affine_finiteType_generatingSections (U : Scheme.{u}) [IsAffine U]
     (G : U.Modules) [G.IsQuasicoherent] [G.IsFiniteType] :
     Module.Finite Γ(U, ⊤) Γ(G, ⊤) ∧

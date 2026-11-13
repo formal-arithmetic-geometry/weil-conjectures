@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCore
 
 /-! # Coherence of a module is local on an open covering
 
-Source: Stacks Project, Modules, Definitions 01BV and 01B5; locality used in
-Cohomology of Schemes, Lemma 0CYJ.
+Stacks Project, Tags 01BV, 01B5 and 0CYJ.
 -/
 
 @[expose] public section
@@ -29,11 +28,8 @@ namespace AlgebraicGeometry
 
 /-- Coherence of a module is preserved by restriction to opens and is local on an open cover:
 (1) if `F` is coherent then `F|_W` is a coherent `𝒪_W`-module for every open `W`; (2) if every
-`F|_{U i}` is coherent and the `U i` cover `X`, then `F` is coherent. Restriction is Mathlib's
-`Scheme.Modules.restrictFunctor` along the open immersion `W.ι`, coherence the project's
-`RingedSpace.IsCoherent` (pqf-def-coherent).
-Source: Stacks Project, Modules, Definitions 01BV and 01B5; the locality is used in
-Cohomology of Schemes, Lemma 0CYJ. -/
+`F|_{U i}` is coherent and the `U i` cover `X`, then `F` is coherent
+(Stacks, Tags 01BV, 01B5 and 0CYJ). -/
 theorem coherent_module_local_on_open_cover
     (X : Scheme.{u}) (F : X.Modules) (I : Type u)
     (U : I → X.Opens)

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 /-!
 # The Artin–Schreier sequence
 
-Source: `literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
-lem-sc-as-sequence.md`, node `lem-sc-as-sequence`.
+Source: Stacks Project, Tag 0A3J.
 -/
 
 @[expose] public section
@@ -52,14 +51,8 @@ private noncomputable def sheafIsoOfSectionsEquiv {C : Scheme.{u}}
 /-- The Artin–Schreier sequence `0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` on a curve over an algebraically closed
 field of characteristic `p`, with its sectionwise maps specified. It is the sequence
 `Scheme.artinSchreierSequence` of `AlgebraicGeometry.Sites.ArtinSchreier`, with `G = 𝔾ₐ`
-(`Scheme.gaSheaf`), `wp = ℘` (`Scheme.gaArtinSchreier`) and `iota = Scheme.constantZModToGaSheaf`.
-Source: Stacks Project, Étale Cohomology, Section 0A3J, and blueprint
-`lem-sc-as-sequence`.
-
-The isomorphism identifies `G` with the universe lift of the recorded étale
-structure-module sheaf. The natural additive equivalences `a` identify its
-sections with global functions, including their restriction maps. The equation
-on the sheafification unit specifies the unique extension of `c ↦ c • 1`. -/
+(`Scheme.gaSheaf`), `wp = ℘` (`Scheme.gaArtinSchreier`) and `iota = Scheme.constantZModToGaSheaf`
+(Stacks, Tag 0A3J). -/
 theorem artinSchreier_shortExact
     {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]

@@ -274,10 +274,8 @@ private theorem source_grid
     congrArg (fun m ↦ n.hom.app _ ≫ P.map m ≫ cT.hom.app _ ≫ cR.inv.app _) hc
 
 /-- The e-side lift agrees with the source ambient change followed by the inverse B
-exchange. This statement contains no exchange for the supplied k-square or for Q.
-
-Source: Stacks Tag 0F7C (vertical pasting), applied to step 2 of
-lem-pur-etale-graph-product-ambient-pasting; Tag 0F7J, A--F comparison. -/
+exchange. This statement contains no exchange for the supplied k-square or for Q
+(Stacks, Tags 0F7C and 0F7J). -/
 theorem etaleGraphAmbientSourcePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

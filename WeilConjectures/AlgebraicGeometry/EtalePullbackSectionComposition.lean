@@ -17,7 +17,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 /-- Canonical section transitions on iterated etale pullbacks compose.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical Cech comparison. -/
+(Stacks, Tag 09YP) -/
 theorem etale_pullback_section_composition
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

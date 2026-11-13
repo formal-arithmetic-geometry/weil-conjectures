@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Descent of a fixed Chow diagram
 
-Source: Stacks Project, Limits, Tag 081F, the base-changed Chow diagram and Tag 01ZP.
+## References
+
+* Stacks Project, Tags 081F and 01ZP
 -/
 
 @[expose] public section
@@ -36,11 +38,7 @@ private theorem over_natIso_property
   exact Arrow.isoMk ex ey (congrArg (fun k ↦ k.left) (e.hom.naturality f).symm)
 
 /-- A given Chow immersion at a separated stage is closed at a later stage.
-The source at that later stage is the base change of the given Chow modification,
-not an arbitrary witness for properness of the original morphism.
-
-Source: Stacks Project, Limits, Tag 081F, proof after choosing the Chow diagram;
-Tag 01ZP for descent of the closed immersion. -/
+(Stacks, Tags 081F, 01ZP). -/
 theorem exists_closed_chow_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

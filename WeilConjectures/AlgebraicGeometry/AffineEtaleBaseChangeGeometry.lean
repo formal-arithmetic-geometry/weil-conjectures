@@ -107,10 +107,7 @@ private theorem cartesian_hom_ext
   exact a.hom.w.trans b.hom.w.symm
 
 /-- A natural cartesian realization of base change preserves finite étale covers and
-pullbacks. Pullback uniqueness identifies its inclusion with ordinary étale base change;
-cover preservation follows by lifting points in its cartesian arrow squares. The sheaf
-condition on the image covering proves continuity. Source: Stacks 0EYL and Topologies
-021C, 021D; the point-lifting argument is Mathlib Scheme.exists_preimage_of_isPullback. -/
+pullbacks (Stacks, Tags 0EYL, 021C, 021D). -/
 private theorem cartesian_site_geometry
     {S T : Scheme.{u}} (f : T ⟶ S)
     (F : S.FullAffineEtale ⥤ T.FullAffineEtale)
@@ -211,8 +208,8 @@ private theorem cartesian_site_geometry
   exact (isSheaf_iff_isSheaf_of_type _ _).mp G.property |>.isSheafFor_of_mem_precoverage
     (hc A R (hJ ▸ hR))
 
-/-- Source: Stacks Project 0EYL, the base-change system used in its qcqs proof,
-and Sites 00X1 for continuity. -/
+/-- The base change system on affine étale sites of a directed limit has the expected
+geometry: it preserves coverings and pullbacks and is continuous (Stacks, Tags 0EYL, 00X1). -/
 theorem exists_affineEtale_baseChange_geometry
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

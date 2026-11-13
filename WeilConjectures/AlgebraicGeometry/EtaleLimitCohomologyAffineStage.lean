@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- Affine-stage continuity applies when just one chosen stage is affine.
-
-Source: Stacks Project, Tag 09YQ; cofinal-tail reduction in
-step 1 of lem-weil-pbc-etale-limit-cohomology-qcqs-gluing. -/
+/-- Affine-stage continuity applies when just one chosen stage is affine
+(Stacks, Tag 09YQ). -/
 theorem etale_limit_cohomology_affine_stage
     (haffine : ∀ {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J]
     (D : Jᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

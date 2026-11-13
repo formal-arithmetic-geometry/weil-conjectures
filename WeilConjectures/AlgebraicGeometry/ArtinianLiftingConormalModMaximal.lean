@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.TruncatedSectionConormalResidueKernel
 /-!
 # Artinian lifting splits the conormal map modulo the maximal ideal
 
-Source: Stacks Project, Algebra, Lemma 02HT, proof of (4) implies (1),
-third through last paragraphs.
+## References
+
+* Stacks Project, Tag 02HT
 -/
 
 @[expose] public section
@@ -63,40 +64,9 @@ private theorem residue_retraction_of_kernel
   ext x
   exact LinearMap.congr_fun hg (p.mkQ x)
 
-/-- Source: Stacks Project, Algebra, Lemma 02HT, proof of (4) implies (1),
-third through last paragraphs (https://stacks.math.columbia.edu/tag/02HT).
-
-Proof in words:
-Let S = A_q, C = P.Ring, J = ker(C -> S), and m = maximalIdeal C. Surjectivity
-between local rings identifies the preimage of the maximal ideal of S with m,
-so J is contained in m. For each N >= 1, form C/(J^2 + m^N) -> C/(J + m^N).
-These are nonzero Artinian local rings: both defining ideals contain m^N and lie
-in m, and C is Noetherian. Their kernel has square zero. The natural map from A
-into the second quotient has preimage maximal ideal q. Filter the kernel by
-ideals with length-one factors. The intervening quotients are Artinian local.
-Use the lifting hypothesis successively from the last quotient to the first;
-the preimage maximal ideal remains q since a surjection of local rings pulls
-back the maximal ideal. This gives an R-compatible lift from A to the first quotient.
-
-Every element outside q maps to a unit, so the lift extends to S. The maximal
-ideal of S maps into the maximal ideal of the first quotient, whose N-th power
-vanishes. Hence the lift factors through S/(maximalIdeal S)^N, identified with
-the second quotient. The resulting map is a section, by localization and quotient
-uniqueness. Square-zero section conormal retraction gives a left inverse to the
-conormal map for this pair of Artinian quotients.
-
-Artin-Rees for J inside C gives c >= 1 such that m^N intersect J is contained
-in m^(N-c) J for N >= c. Choose N = c+1.
-Tensor the preceding left inverse with the residue field S/maximalIdeal S. The modular law
-identifies the source with J/(J^2 + m J). Differential reduction modulo the maximal ideal,
-first for J with exponent 1 and then for m in C/J^2 with exponent N-1,
-identifies the target with the reduction of S tensor_C Omega(C/R). On generators,
-the resulting map is the reduction of P.cotangentComplex, since both send x to dx.
-Write its left inverse as vk and compose with the quotient projection to obtain
-the displayed equation. Transport test rings to Type (max u v) using ULift when
-necessary; lengths and both lifting equations are preserved. This argument also
-covers J = 0 (the conormal module is zero) and zero-variable presentations.
--/
+/-- For a presentation `P` of the local ring `A_q` satisfying the Artinian lifting hypothesis,
+the conormal map `P.cotangentComplex`, reduced modulo the maximal ideal, has a left inverse
+(Stacks, Tag 02HT). -/
 theorem artinian_lifting_conormal_split_mod_maximal
     {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
     (q : Ideal A) [q.IsPrime]

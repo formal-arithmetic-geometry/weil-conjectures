@@ -44,12 +44,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent derived object on an affine scheme, pseudo-coherent on a
 quasi-compact open, has a module-complex representative and a finite collection
 of localizations where it is pseudo-coherent. Quasi-isomorphisms at these
-localizations become derived isomorphisms after sheafification and restriction.
-This statement supplies the comparison, not a finite-free replacement.
-
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent, affine
-module model, finite principal-open cover, and final sheafification; Tag 06Z0
-and Tag 08E7. -/
+localizations become derived isomorphisms after sheafification and restriction
+(Stacks, Tags 08EE, 06Z0, 08E7). -/
 theorem exists_affine_open_localized_model
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

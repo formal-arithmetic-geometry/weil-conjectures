@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.LocalDvrBaseChange
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # Boundary geometry and forward comparison of unit divisors
-
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -148,8 +146,7 @@ private theorem open_restriction_natural
   rw [hφ' x' _ z hz, ht, rational_pullback_germ X Y π P ρ hρ V t]
   exact Scheme.algebraMap_germ_eq_germToFunctionField Y hxV _
 
-/-- Boundary geometry, compatible rational maps, and preservation of unit orders.
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph. -/
+/-- Boundary geometry, compatible rational maps, and preservation of unit orders. -/
 theorem affine_unit_divisor_base_change_core
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

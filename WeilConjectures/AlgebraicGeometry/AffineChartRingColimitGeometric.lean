@@ -24,8 +24,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- A colimit presentation of the fixed affine chart ring, with geometric chart comparisons.
-Source: Stacks Project, Limits Tag 01ZR, first proof, affine case; Tag 01I6. -/
+/-- A colimit presentation of the fixed affine chart ring, with geometric chart comparisons
+(Stacks, Tags 01ZR, 01I6). -/
 theorem exists_affine_chart_ring_colimit_geometric
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

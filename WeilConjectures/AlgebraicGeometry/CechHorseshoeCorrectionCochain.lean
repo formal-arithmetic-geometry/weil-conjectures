@@ -119,8 +119,8 @@ private theorem cechZeroπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
 set_option maxHeartbeats 400000 in
 -- The sectionwise and two cochain calculations repeatedly compare categorical product modules.
 set_option backward.isDefEq.respectTransparency false in
-/-- A Cech zero cochain with prescribed resolution and Cech differentials.
-Source: Stacks Project, Cohomology, Tag 01EQ (double-complex proof) and Tag 0B8S. -/
+/-- A Cech zero cochain with prescribed resolution and Cech differentials
+(Stacks, Tags 01EQ, 0B8S). -/
 theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
     (S : ShortComplex X.Modules)
     (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)

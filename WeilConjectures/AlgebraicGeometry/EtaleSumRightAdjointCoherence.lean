@@ -91,8 +91,8 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso
   unboundedEtaleCompactSupportBaseChange exactEtaleSumExchange
 
-/-- The specified compact-support-to-sum identification for the chosen compactification.
-Source: Stacks Tags 0F4L, 0F7J, and the blueprint Step 1. -/
+/-- The specified compact-support-to-sum identification for the chosen compactification
+(Stacks, Tags 0F4L, 0F7J). -/
 noncomputable def etaleSumSupportIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -102,8 +102,8 @@ noncomputable def etaleSumSupportIso
   (rightDerivedLowerShriekIso A (HasCompactification.compactification e)).symm ≪≫
     canonicalEtaleCompactSupportComparison A e (HasCompactification.compactification e)
 
-/-- The normalization rho is the adjunction conjugate of the inverse specified comparison.
-Source: blueprint Step 1; Stacks Tags 0037 and 03S6. -/
+/-- The normalization rho is the adjunction conjugate of the inverse specified comparison
+(Stacks, Tags 0037, 03S6). -/
 noncomputable def etaleSumRightAdjointIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -115,8 +115,7 @@ noncomputable def etaleSumRightAdjointIso
     (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance)
     (etaleSumSupportIso A e).symm
 
-/-- The canonical pullback identification of the coefficient unit, in the exact derived model.
-Source: blueprint Step 1, pullback-unit identification. -/
+/-- The canonical pullback identification of the coefficient unit, in the exact derived model. -/
 noncomputable def etaleSumPullbackUnitIso
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (e : U ⟶ X) :
     (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj (constantComplex A X) ≅

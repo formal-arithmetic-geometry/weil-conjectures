@@ -665,10 +665,8 @@ attribute [local irreducible] pullDerivedIso pull RingedKoszulLimitPresentation.
   Functor.mapDerivedCategoryFactors ringedKoszulTensor ringedKoszulDualTower
   ringedKoszulDiagram SheafOfModules.monoidalCategory
 
-/-- Exact inverse image preserving countable products transports the actual Koszul unit.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, proof by the augmented finite
-Koszul tower; sites-cohomology.tex, Tags 07A4 and 0941. -/
+/-- Exact inverse image preserving countable products transports the actual Koszul unit
+(Stacks, Tags 0A0E, 07A4, 0941). -/
 theorem exactCompletedKoszulPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

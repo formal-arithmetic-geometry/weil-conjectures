@@ -25,9 +25,7 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 /-- The affine coordinate calculation for the canonical normalized derivation chosen by
-`exists_diagonalConormalDerivation`.  This is the geometric affine calculation of Tags
-01KJ, 01R3 and 08S2; the proof is intentionally isolated so the supplied-derivation
-statement only performs transport along uniqueness. -/
+`exists_diagonalConormalDerivation`. (Stacks, Tags 01KJ, 01R3 and 08S2) -/
 theorem exists_affine_sections_for_chosen_derivation (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :
     let D := Classical.choose (exists_diagonalConormalDerivation f)

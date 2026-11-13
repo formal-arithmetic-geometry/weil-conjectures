@@ -532,13 +532,9 @@ private theorem boundary_square_identity
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The image Mayer--Vietoris triangle is identified with the target one by
-composition and open-restriction comparison isomorphisms, with identity first component.
-The comparison functor isomorphisms are the normalized constructions
-`schemeMVDirectImageComposition` and `schemeMVOpenRestrictionComparison`,
-with the determining right-derived unit equation and sectionwise restriction identity,
-the same for every object.
-The triangle isomorphism includes compatibility with the connecting maps.
-Source: Stacks, Tags 08BV, 0D5T and 0DJ9. -/
+composition and open-restriction comparison isomorphisms
+`schemeMVDirectImageComposition` and `schemeMVOpenRestrictionComparison`, with identity
+first component (Stacks, Tags 08BV, 0D5T and 0DJ9). -/
 theorem schemeDerived_mayerVietoris_directImage
     (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

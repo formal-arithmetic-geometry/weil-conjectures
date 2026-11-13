@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit augmentation components commute with the total differential.
-Source: Stacks, Tag 015J, proof remark (3); Tag 0133, augmented total. -/
+/-- The explicit augmentation components commute with the total differential
+(Stacks, Tags 015J, 0133). -/
 theorem etaleRestrictedAugmentation_comm
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

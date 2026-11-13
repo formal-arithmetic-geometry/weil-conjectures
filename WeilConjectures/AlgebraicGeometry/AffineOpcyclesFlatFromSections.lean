@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentat
 
 /-! # Flat affine module opcycles give flat sheaf opcycles
 
-Source: Stacks Project, Tags 01IB and 01U4, and step 4 of
-lem-pc-affine-universally-exact-opcycles-flat.
+## References
+
+* Stacks Project, Tags 01IB, 01U4
 -/
 
 @[expose] public section

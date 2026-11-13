@@ -15,8 +15,9 @@ public import Mathlib.Algebra.Homology.Single
 
 /-! # Finite coefficient comparison for normalized Koszul augmentations
 
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M), and
-more-algebra.tex, lemma-sequence-Koszul-complexes.
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -62,11 +63,7 @@ set_option maxHeartbeats 400000 in
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
 This is a finite comparison: it asserts no eventual vanishing, uses no complex P,
-and makes no assertion about derived inverse limits.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M);
-more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex,
-lemma-derived-completion-koszul (0A0E). -/
+and makes no assertion about derived inverse limits (Stacks, Tags 099M and 0A0E). -/
 theorem adicResidue_koszul_coefficient_cone_comparison
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

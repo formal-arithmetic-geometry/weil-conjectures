@@ -21,9 +21,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Open extension and restriction preserve bounded constant-model constructibility,
-without a finite-Tor assumption on their inputs.
-Source: current blueprint def-fix-six-functor-datum and its open factor;
-the finite-stratification extension-by-zero construction. -/
+without a finite-Tor assumption on their inputs. -/
 theorem condensedBoundedOpenOperations
     (ℓ : ℕ) [Fact ℓ.Prime] (p : ℕ) [Fact p.Prime] (hpℓ : p ≠ ℓ)
     (k : Type u) [Field k] [CharP k p]

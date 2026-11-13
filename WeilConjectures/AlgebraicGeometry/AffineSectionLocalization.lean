@@ -27,14 +27,8 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- On an affine scheme the canonical map from degree-zero section fractions to sections on
-the nonvanishing open `Y_s` is an isomorphism. The fraction formula is written without
-choosing an inverse tensor power: `e(t/s^n) ⊗ s^n = t|_U`, i.e. `e(t/s^n) = s⁻ⁿt`.
-Scalar compatibility (scalars restricted along `Γ(Y, O_Y) → Γ(U, O_Y)`) makes it an
-isomorphism of modules. The domain is the existing fraction presentation of the degree-zero
-localization (def-sc-section-fraction-presentation).
-
-Source: Stacks Properties, Lemma 01PW (2), equation module-invert-s, and Cohomology of
-Schemes, Lemma 09MR, affine case. -/
+the nonvanishing open `Y_s` is an isomorphism of modules
+(Stacks, Tags 01PW and 09MR). -/
 theorem affine_section_localization
     (Y : Scheme.{u}) [IsAffine Y]
     (L : Y.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

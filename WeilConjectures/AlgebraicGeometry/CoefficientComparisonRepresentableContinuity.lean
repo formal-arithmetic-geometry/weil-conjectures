@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 
 /-! # Continuity of etale representables at affine presentations
 
-Source: Stacks Project, proetale.tex, Lemmas describe-pullback-from-etale and
-limit-pullback (Tag 099S).
+Source: Stacks Project, Tag 099S.
 -/
 
 @[expose] public section
@@ -64,9 +63,7 @@ private noncomputable def pullbackEtaleRepresentableIso (X : Scheme.{u}) (V : X.
     (A.homEquiv_naturality_right_symm _ g)
 
 /-- Maps from an affine presentation to an etale object commute with its limit.
-
-Source: Stacks Project, proetale.tex, lemma-limit-pullback (Tag 099S), using
-Limits, Proposition 32.6.1 (locally finite presentation). -/
+(Stacks, Tag 099S) -/
 theorem coefficientComparison_representable_preservesColimit (X : Scheme.{u})
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (P : AffinePresentation X I)

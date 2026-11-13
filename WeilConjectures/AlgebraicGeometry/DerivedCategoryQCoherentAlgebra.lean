@@ -14,18 +14,17 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived categories of modules over a quasi-coherent algebra
 
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2.
-
 The quasi-coherent `𝒪_Y`-algebra is the shared form `B : Y.CommAlgebraSheaf`
-(`= Under Y.sheaf`) with `hB : B.toModule.IsQuasicoherent`
-(def-weil-pbc-comm-algebra-sheaf, def-weil-pbc-quasi-coherent-algebra). `B`-modules are
+(`= Under Y.sheaf`) with `hB : B.toModule.IsQuasicoherent`. `B`-modules are
 `SheafOfModules` over the underlying ring sheaf
-`(sheafCompose _ (forget₂ CommRingCat RingCat)).obj B.right`, the carrier of the
-`𝒜`-modules of lem-weil-pbc-affine-module-correspondence; their underlying `𝒪_Y`-module is
+`(sheafCompose _ (forget₂ CommRingCat RingCat)).obj B.right`; their underlying `𝒪_Y`-module is
 the restriction of scalars along `(sheafCompose _ (forget₂ CommRingCat RingCat)).map B.hom`,
 as in `Scheme.CommAlgebraSheaf.toModule`. The localization is the shared
 `[HasDerivedCategory.{w} (SheafOfModules.{u} _)]` binder, as for `schemeDerivedCategory`.
+
+## References
+
+* Stacks Project, Tags 0BV0, 0AX2
 -/
 
 @[expose] public section
@@ -39,9 +38,7 @@ namespace AlgebraicGeometry
 /-- The derived category `D(B)` of sheaves of `B`-modules over a quasi-coherent
 `𝒪_Y`-algebra `B`: Mathlib's `DerivedCategory` (localization of cochain complexes at the
 quasi-isomorphisms, morphisms in universe `w`) of the abelian category of sheaves of modules
-over the ring sheaf underlying `B`.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2. -/
+over the ring sheaf underlying `B` (Stacks, Tags 0BV0, 0AX2). -/
 abbrev sheafAlgebraDerivedCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (_hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u}

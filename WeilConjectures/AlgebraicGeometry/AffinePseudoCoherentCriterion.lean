@@ -47,11 +47,7 @@ private theorem tilde_finite_free_restrict_iso (A : Type u) [CommRing A]
 
 /-- The object obtained by associating sheaves termwise to a complex of `A`-modules on
 `Spec A` is pseudo-coherent precisely when the module complex is quasi-isomorphic to a
-bounded-above complex of finite free modules. The affine equivalence
-`lem-pc-affine-qcoh-derived-equivalence` identifies this termwise construction with its
-image in the quasi-coherent derived category.
-
-Source: Stacks Project, Tag 08E7, Lemma 36.10.2, pseudo-coherent clause. -/
+bounded-above complex of finite free modules (Stacks, Tag 08E7). -/
 theorem isPseudoCoherent_affine_iff (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wX}

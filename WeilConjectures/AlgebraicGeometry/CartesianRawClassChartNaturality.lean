@@ -178,13 +178,7 @@ attribute [local irreducible] restrictedOverCohomologyMap
 set_option backward.isDefEq.respectTransparency true
 
 /-- The finite-stage chart identity propagates to every arrow above the chosen stage.
-
-Source: Stacks Project, Tag 0EYM, with inverse-image composition and raw evaluation
-naturality from Tags 03CB and 03Q8. Factor the transition along a.left followed by b
-using exchange composition and functoriality of shift. Substitute the base-stage
-identity. Chart-lift naturality then identifies the resulting composite with the
-restricted-cohomology image of x. This is the transition part only.
--/
+(Stacks, Tags 0EYM, 03CB, 03Q8). -/
 theorem cartesianRawClass_chart_naturality
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

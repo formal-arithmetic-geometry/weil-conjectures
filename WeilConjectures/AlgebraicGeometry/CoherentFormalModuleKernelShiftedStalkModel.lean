@@ -14,7 +14,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Local quotient models for shifted stabilized kernels
 
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -24,8 +24,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 
 /-- After a uniform shift, the stalk system is the power-quotient system of a module.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b). -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_shifted_stalk_model
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

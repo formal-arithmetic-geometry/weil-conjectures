@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Constructibility of torsion abelian sheaves and of cyclic-coefficient module sheaves
 
-Source: Stacks Project, Tags 03RW(2),(3), 095E and 03RU; the comparison is explicit.
+## References
+
+* Stacks Project, Tags 03RW (2), (3), 095E and 03RU
 -/
 
 @[expose] public section
@@ -153,14 +155,10 @@ private theorem finiteSetLocal_congr {Y : Scheme.{v}}
 -- Comparing coefficient structures and stratifications requires substantial reduction.
 /-- An abelian sheaf killed by a positive integer is torsion and has a unique cyclic-ring
 module structure. Underlying-set constructibility of the curve coefficient pair agrees
-with constructibility of the module sheaf. On every fixed stratification (finite partition
-into constructible locally closed parts with scheme immersions) the three stratum conditions
-agree: finite local constancy of the set-sheaf pullback of the underlying sheaf of sets,
-abelian local constancy of the abelian inverse image with finite geometric stalks, and
-module local constancy with finite constant values. So the same partitions and immersions
-serve for both notions. Uniqueness of the module structure is stated in the fiber of the
-forgetful functor: any other module lift of `F` has exactly one module isomorphism compatible
-with the given identifications with `F`. -/
+with constructibility of the module sheaf, using the same partitions and immersions.
+Uniqueness of the module structure is stated in the fiber of the forgetful functor: any
+other module lift of `F` has exactly one module isomorphism compatible with the given
+identifications with `F`. -/
 theorem constructible_torsion_modules_agree
     {k : Type v} [Field k] [IsAlgClosed k] {C : Scheme.{v}}
     (f : C ⟶ Spec (.of k)) [IsCurve f]

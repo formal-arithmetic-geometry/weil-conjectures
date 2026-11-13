@@ -19,9 +19,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
 /-!
 # The support kernel and the right adjoint of closed etale direct image
 
-Source: Stacks Project, Tag 09XQ, `lemma-sections-with-support-acyclic`, its proof and
-preceding definition of the supported subsheaf; Tag 04CA,
-`proposition-closed-immersion-pushforward`.
+## References
+
+* Stacks Project, Tags 09XQ, 04CA
 
 ## Main definitions
 

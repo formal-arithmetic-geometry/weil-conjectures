@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 
 /-! # The characteristic idempotent acts on module sheaves
 
-Source: the rank-idempotent construction in steps 1--2 of
-`lem-sc-clopen-rank-strata-homology-lift`; Stacks Tag 00EE.
+## References
+
+* Stacks Project, Tag 00EE (clopen idempotents)
 -/
 
 @[expose] public section
@@ -61,11 +62,8 @@ private noncomputable def ringedScalar (X : RingedSpace.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- The characteristic idempotent of a rank stratum acts naturally on all
 modules over the direct-image algebra. It is the identity on modules pushed
-forward from that stratum and zero on modules from any other rank stratum.
-
-Source: the characteristic-idempotent and support calculation in steps 1--2
-of `lem-sc-clopen-rank-strata-homology-lift`, expanding the rank-stratum argument
-of `lem-sc-clopen-rank-strata-formality`; Stacks Tag 00EE (clopen idempotents). -/
+forward from that stratum and zero on modules from any other rank stratum
+(Stacks, Tag 00EE). -/
 theorem clopenRankStratum_module_projector
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (r : LocallyConstant Z ℕ) (q : ℕ) :

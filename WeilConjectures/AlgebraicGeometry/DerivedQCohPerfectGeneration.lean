@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SupportedPerfectGenerator
 
 /-! # Perfect complexes generate the quasi-coherent derived category
 
-Source: literature/stacks-project/derived-categories-of-schemes.tex, Theorem
-perfect-theorem-bondal-van-den-Bergh.
+## References
+
+* Stacks Project, Tag 09IS
 -/
 
 @[expose] public section
@@ -26,9 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- For every quasi-compact and quasi-separated scheme, the localizing closure of all perfect
-complexes is the whole quasi-coherent derived category
-Source: Stacks Project, Theorem 09IS (perfect-theorem-bondal-van-den-Bergh),
-with Derived Categories, Lemma 09SN (lemma-write-as-colimit). -/
+complexes is the whole quasi-coherent derived category.
+(Stacks, Tags 09IS and 09SN) -/
 theorem derivedQCohPerfectGeneration (X : Scheme.{u1}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w1} (SheafOfModules.{u1} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

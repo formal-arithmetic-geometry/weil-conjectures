@@ -25,9 +25,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Maps out of constant sheaves transport compatibly with the chosen composition
-comparison on every constant generator. No invertibility of the map is required.
-
-Source: Stacks Project, Tags 03CB, 03CC, 03P5, and 0A3H, final proof paragraph. -/
+comparison on every constant generator (Stacks, Tags 03CB, 03CC, 03P5, 0A3H). -/
 theorem etaleSetConstantTransportGenerators
     (S P U V : Scheme.{u}) (s : P ⟶ S) (h : U ⟶ P) (v : V ⟶ U)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (A : Type (u + 1))

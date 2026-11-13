@@ -18,7 +18,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- Restrict canonical inverse image to the constructible module subcategories.
-Source: blueprint constructible-comparison-equivalence, part (1), Stacks Tag 09AK. -/
+(Stacks, Tag 09AK) -/
 theorem constructibleComparison_moduleEquivalence (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ [CompactSpace X] [QuasiSeparatedSpace X],

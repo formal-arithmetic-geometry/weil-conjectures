@@ -36,12 +36,9 @@ private theorem unit_of_homEquiv
     e.inv_hom_id, R.map_id]
   exact Category.comp_id _
 
-/-- Source: Stacks Project, Tags 00X6, 00X1, and 00YV.
-The set inverse image is the recorded `Scheme.etaleSetPullback` (def-weil-pbc-etale-sheaves):
-left Kan extension along the opposite of base change, followed by sheafification.
-The direct images are precomposition with base change. The lifted adjunctions
-commute with forgetting, including their hom-set bijections and units. This
-identifies the transported algebraic structures and the abelian inverse image. -/
+/-- The lifted adjunctions between inverse and direct image commute with forgetting, which
+identifies the transported algebraic structures and the abelian inverse image
+(Stacks, Tags 00X6, 00X1 and 00YV). -/
 theorem etaleInverseImageAlgebraicStructures (U V : Scheme.{u}) (f : U ⟶ V) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f
     let L := Scheme.etaleSetPullback f

@@ -13,8 +13,7 @@ universe u
 set_option autoImplicit false
 
 /-- The minimal polynomial of a separable element gives a nonzero separable
-polynomial whose coefficients are evaluated through any specified field map.
-The proof is the standard minimal-polynomial argument. -/
+polynomial whose coefficients are evaluated through any specified field map. -/
 theorem exists_separable_polynomial_of_isSeparable
     {K L : Type u} [Field K] [Field L] [Algebra K L]
     (f : K →+* L) (hf : algebraMap K L = f) (y : L)

@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenRankStratumModuleProjector
 
 /-! # The derived summand cut out by a clopen rank stratum
 
-Source: the rank-idempotent construction in steps 1--2 of
-`lem-sc-clopen-rank-strata-homology-lift`; Stacks Tag 00EE (clopen idempotents).
+## References
+
+* Stacks Project, Tag 00EE (clopen idempotents)
 -/
 
 @[expose] public section
@@ -85,11 +86,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A rank stratum cuts out a retract of every derived direct-image-algebra module.
 Its homology vanishes whenever the original homology is supported on a different
 stratum. Maps from modules on the chosen stratum are fixed by the homology projector.
-This statement constructs the summand, without a concentration hypothesis or a map
-from a single complex.
-
-Source: steps 1--2 of `lem-sc-clopen-rank-strata-homology-lift`, expanding the
-rank-idempotent argument of `lem-sc-clopen-rank-strata-formality`; Stacks Tag 00EE. -/
+(Stacks, Tag 00EE). -/
 theorem clopenRankStratum_derived_projector
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}

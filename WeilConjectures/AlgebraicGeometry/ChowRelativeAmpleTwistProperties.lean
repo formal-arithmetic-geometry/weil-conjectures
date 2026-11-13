@@ -114,10 +114,8 @@ private theorem projective_ample_affine_open (m : ℕ) (S X : Scheme.{u})
 -- The original existential invertibility witness is independent of both conjuncts.
 set_option linter.unusedVariables.funArgs false in
 /-- Auxiliary component of the Chow relative ampleness theorem.
-Source: Stacks Project, Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5).
-Proof in words: this strict component is obtained by the tensor-pullback
-functoriality (for the isomorphism component) or by the affine-local standard
-chart argument (for the properties component), exactly as in the parent proof. -/
+The pulled-back twist is invertible, and its restrictions to the preimages of affine opens
+of `S` and of `Z` are invertible and ample (Stacks, Tag 02O5). -/
 theorem chow_relative_ample_twist_properties (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

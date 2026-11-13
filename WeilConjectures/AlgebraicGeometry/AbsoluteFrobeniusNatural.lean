@@ -36,8 +36,8 @@ characteristic `p`:
 ## Main statements
 
 - `frobenius_spec`: Mathlib's `frobenius` and `iterateFrobenius`.
-- `AlgebraicGeometry.Scheme.absoluteFrobenius_wellDefined`: blueprint
-  `lem-weil-absolute-frobenius-well-defined`.
+- `AlgebraicGeometry.Scheme.absoluteFrobenius_wellDefined`: the Frobenius of the structure sheaf
+  is a morphism of locally ringed spaces.
 - `AlgebraicGeometry.Scheme.comp_iterateFrobenius`: naturality of the absolute Frobenius.
 - `AlgebraicGeometry.Scheme.iterateFrobenius_Spec`: on `Spec A` it is `Spec` of the Frobenius.
 - `AlgebraicGeometry.Scheme.isFrobenius_iterateFrobenius`: it satisfies the predicate
@@ -52,16 +52,8 @@ open CategoryTheory Opposite
 
 section Ring
 
-/-- Blueprint `def-weil-ring-frobenius`: Frobenius endomorphism of a ring of characteristic `p`
-and its iterates.
-
-The Frobenius endomorphism of a ring `A` of characteristic `p` is Mathlib's ring endomorphism
-`frobenius A p`, `a ↦ a ^ p`; its `n`-fold iterate is `iterateFrobenius A p n`, `a ↦ a ^ p ^ n`,
-which is the `n`-th power of `frobenius A p` in the monoid of ring endomorphisms; and every ring
-homomorphism `φ : A →+* B` between such rings satisfies `φ ∘ F_A = F_B ∘ φ`.
-
-Mathlib's `frobenius` needs an `ExpChar A p` instance, which excludes the zero ring; the version
-`iterateFrobeniusOfPrime` only assumes `(p : A) = 0` and agrees with it
+/-- The Frobenius endomorphism `a ↦ a ^ p` of a ring of characteristic `p` and its iterates
+`a ↦ a ^ p ^ n`; it only assumes `(p : A) = 0` and agrees with Mathlib's `frobenius`
 (`iterateFrobeniusOfPrime_eq_iterateFrobenius`). -/
 theorem frobenius_spec (A B : Type*) [CommRing A] [CommRing B] (p : ℕ) [ExpChar A p]
     [ExpChar B p] (φ : A →+* B) (n : ℕ) :
@@ -113,15 +105,8 @@ end Ring
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `def-weil-scheme-characteristic-p`: Scheme of characteristic `p`.
-
-A scheme `X` is *of characteristic `p`* if `p = 0` in the ring of global sections
-`Γ(X, 𝒪_X)`. Equivalently `p = 0` in every ring of sections, in every stalk, or the structure
-morphism `X ⟶ Spec ℤ` factors (uniquely) through `Spec 𝔽_p`
-(`AlgebraicGeometry.Scheme.isOfCharacteristic_tfae`). The empty scheme is of characteristic `p`
-for every `p` (`AlgebraicGeometry.Scheme.isOfCharacteristic_of_isEmpty`).
-
-This is not `CharP Γ(X, ⊤) p`, which fails for the empty scheme. -/
+/-- A scheme `X` is *of characteristic `p`* if `p = 0` in the ring of global sections
+`Γ(X, 𝒪_X)` (see `AlgebraicGeometry.Scheme.isOfCharacteristic_tfae` for equivalent forms). -/
 def IsOfCharacteristic (X : Scheme.{u}) (p : ℕ) : Prop :=
   (p : Γ(X, ⊤)) = 0
 
@@ -179,19 +164,8 @@ section Frobenius
 
 variable {p : ℕ} (hp : p.Prime)
 
-/-- Blueprint `def-weil-absolute-frobenius-scheme`: Absolute q-power Frobenius of a scheme in
-characteristic p.
-
-The *absolute Frobenius* `F_X : X ⟶ X` of a scheme `X` of characteristic `p`: the identity on
-the underlying space (`AlgebraicGeometry.Scheme.iterateFrobenius_apply`) with `g ↦ g ^ p` on
-sections over every open (`AlgebraicGeometry.Scheme.absoluteFrobenius_app_apply`). That this is
-a morphism of locally ringed spaces is `AlgebraicGeometry.Scheme.absoluteFrobenius_wellDefined`.
-The absolute `q = p ^ a`-power Frobenius `Fr_X^{(q)} = F_X^a` is
-`AlgebraicGeometry.Scheme.qPowerFrobenius`; it is `AlgebraicGeometry.Scheme.iterateFrobenius`
-with exponent `a` (`AlgebraicGeometry.Scheme.qPowerFrobenius_eq_iterateFrobenius`), and on an
-affine open `Spec A ⊆ X` it is `Spec` of `a ↦ a ^ q`
-(`AlgebraicGeometry.Scheme.isFrobenius_iterateFrobenius`,
-`AlgebraicGeometry.Scheme.iterateFrobenius_Spec`). -/
+/-- The absolute `q = p ^ a`-power Frobenius `F_X^a : X ⟶ X` of a scheme `X` of characteristic
+`p`: the identity on the underlying space with `g ↦ g ^ q` on sections over every open. -/
 noncomputable def absoluteFrobenius (X : Scheme.{u}) (hX : X.IsOfCharacteristic p) : X ⟶ X :=
   X.iterateFrobenius hp hX 1
 
@@ -274,18 +248,9 @@ lemma isFrobenius_iterateFrobenius (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) 
   ext r
   exact (hφ r).symm
 
-/-- Blueprint `lem-weil-absolute-frobenius-well-defined`: The Frobenius of the structure sheaf
-is a morphism of locally ringed spaces; affine case.
-
-Let `p` be a prime. (i) For a ring `A` with `p = 0`, the Frobenius `F_A : a ↦ a ^ p ^ n` fixes
-every prime ideal, so `Spec F_A` is the identity on points. (ii) `F_A` is a local homomorphism.
-(iii) For a scheme `X` of characteristic `p`, the maps `F_{𝒪_X(U)}` form a morphism of schemes
-`F_X : X ⟶ X` (`AlgebraicGeometry.Scheme.iterateFrobenius`; that it is a morphism of locally
-ringed spaces is part of its construction), the identity on points, whose map on the stalk at
-`x` is `F_{𝒪_{X,x}}`. (iv) On `X = Spec A` it is `Spec F_A`; it is compatible with restriction
-to every open subscheme `U ⊆ X`; and for every open immersion (indeed every morphism)
-`t : Spec A ⟶ X`, `t ≫ F_X = Spec F_A ≫ t`. All this is stated for the iterates
-`a ↦ a ^ p ^ n`, the case `n = 1` being the absolute Frobenius. -/
+/-- For a scheme `X` of characteristic `p`, the maps `a ↦ a ^ p ^ n` on `𝒪_X(U)` form a
+morphism of schemes `X ⟶ X`, which is the identity on points, is the Frobenius on stalks, is
+`Spec` of the Frobenius on `Spec A`, and is natural: `t ≫ F_X = Spec F_A ≫ t`. -/
 theorem absoluteFrobenius_wellDefined (n : ℕ) :
     (∀ (A : Type u) [CommRing A] (hA : (p : A) = 0) (𝔭 : PrimeSpectrum A),
       PrimeSpectrum.comap (iterateFrobeniusOfPrime A hp hA n) 𝔭 = 𝔭) ∧

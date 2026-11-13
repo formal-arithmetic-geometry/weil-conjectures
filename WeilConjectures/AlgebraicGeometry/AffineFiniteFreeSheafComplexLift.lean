@@ -25,8 +25,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false in
 -- Elaborating the two equivalent module-category presentations needs extra heartbeats.
 /-- A bounded-above finite-free sheaf complex on an affine scheme is the associated
-sheaf complex of a bounded-above finite-free module complex.
-Source: Stacks Project, Tag 08E7, converse proof; Tags 01I7 and 01IB. -/
+sheaf complex of a bounded-above finite-free module complex
+(Stacks, Tags 08E7, 01I7, 01IB). -/
 theorem affine_finiteFree_sheaf_complex_lift (A : Type u) [CommRing A]
     (P : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)

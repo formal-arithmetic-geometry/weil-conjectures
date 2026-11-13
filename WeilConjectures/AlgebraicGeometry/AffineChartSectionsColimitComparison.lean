@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The rings of the stage charts have the fixed limit chart ring as their colimit,
-and changing from the fixed limit chart to an iterated chart transports sections.
-There is no finite-presentation assumption and no assertion of a stage module model.
-Source: Stacks Project, Limits Tag 01ZR, first proof, affine case, and Modules on
-Schemes Tag 01I6, together with pullback pasting. -/
+and changing from the fixed limit chart to an iterated chart transports sections (Stacks, Tags
+01ZR, 01I6). -/
 theorem exists_affine_chart_sections_colimit_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

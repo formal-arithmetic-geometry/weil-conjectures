@@ -47,14 +47,7 @@ private theorem amitsurMap_tprod {A B : Type u}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Fixed-degree pure-tensor coface compatibility.
-Source: Stacks Project, Tag 03P2, affine-case tensor differential formula.
-
-This is the fixed `(n,j)` component of the pure-tensor coface equation.  It
-is obtained by evaluating the singleton product at its unique tuple, using the
-normalization formula for `e n` and `e (n+1)`, and the functoriality of section
-restriction.  The inserted Amitsur factor is the unit, while all retained
-factors are carried by the corresponding product projections.
--/
+(Stacks, Tag 03P2) -/
 theorem singletonTensorDegreeComparison_pure_coface_fixed
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U)

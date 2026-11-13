@@ -33,10 +33,7 @@ attribute [local irreducible] isoPullbackAdditiveStalkIso
   Scheme.Modules.tensorPullbackCompositionIso
 
 
-/-- Ordinary pullback transports additive stalk homology along an isomorphism.
-This is constructed from the restriction-stalk isomorphism on complexes and exact
-stalk homology factors; it uses no derived pullback or derived pullback counit.
-Source: Stacks Project, Tag 0098, lemma-stalk-pullback-modules. -/
+/-- Ordinary pullback transports additive stalk homology along an isomorphism (Stacks, Tag 0098). -/
 def ordinaryIsoPullbackStalkHomologyIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (i : ℤ)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :=
@@ -305,7 +302,7 @@ theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
   exact congrArg (fun k ↦ k.hom x) hh
 
 
-/-- -/
+/-- Affine coordinate transport of the stalk homology of the localized tensor comparison. -/
 theorem affineSpectrum_tensor_coordinate_homology_transport
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

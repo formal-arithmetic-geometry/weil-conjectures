@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The graded coefficient filtration triangle
 
-Source: Stacks Project, Tag 09BR, lemma-compare-truncations-constructible.
+## References
+
+* Stacks Project, Tag 09BR
 -/
 
 @[expose] public noncomputable section
@@ -323,10 +325,8 @@ private theorem triangle_transport
   · simp [δ, ← CategoryTheory.Functor.map_comp]
 
 /-- The graded filtration gives a distinguished triangle with the two actual reductions.
-This assertion has no constructibility or boundedness hypothesis or conclusion.
-
-Source: Stacks Project, proetale.tex, Tag 09BR,
-lemma-compare-truncations-constructible, first displayed triangle. -/
+This assertion has no constructibility or boundedness hypothesis or conclusion
+(Stacks, Tag 09BR). -/
 theorem adicFiniteGradedLayer_triangle (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :

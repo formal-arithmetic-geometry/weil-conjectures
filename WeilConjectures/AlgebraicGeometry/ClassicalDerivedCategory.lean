@@ -11,8 +11,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Classical finite-coefficient derived category
 
-Source: the current blueprint, `sk-def-pe-classical-definition`, final complex clause.
-
 For a finite discrete coefficient ring, this is the full subcategory of the unbounded
 pro-etale derived category whose cohomology module sheaves satisfy the classical
 continuity-map condition.  The ambient objects and all morphisms are retained.

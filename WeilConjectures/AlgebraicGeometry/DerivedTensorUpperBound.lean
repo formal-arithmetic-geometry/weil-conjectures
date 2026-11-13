@@ -27,8 +27,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Tensoring a derived object with a module in degree zero preserves its upper bound.
-Source: Stacks Project, Tag 08EV, proof (upper bound), and Tags 06YS and 06YD. -/
+/-- Tensoring a derived object with a module in degree zero preserves its upper bound
+(Stacks, Tags 08EV, 06YS and 06YD). -/
 theorem schemeDerivedTensorCohomologyVanishes_of_upper_bound
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -35,26 +35,7 @@ set_option hygiene false in
 local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
 /-- The ring-sheaf pushout becomes a pushout of section rings on affine inverse images.
-Source: Stacks Project, Morphisms, Tag 01SB.
-The affine inverse image W is affine since f is affine. Write D = Γ(X,V) and
-C = Γ(U,W). The ring map D → C is f.app V.
-Restrict f and the pushout diagram to this inverse image. The sheaf pushout is
-the sheafification of the ring tensor presheaf. Identify its underlying module
-with the pullback of the restricted-scalar regular module of f_*O_U: apply
-the pushout scalar-extension cancellation comparison to the regular algebra
-module. Inverse image of the regular module is the regular inverse-image
-algebra module, and extending that module along t is the regular B-module
-(the maps are x tensor a ↦ x*t(a) and x ↦ x tensor 1). This module is
-quasi-coherent by affine pushforward. The affine module section comparison then
-identifies its sections with C tensor_D C. The inverse-image adjunction unit
-gives the second factor and b gives the first; their products define the
-comparison. The affine comparison is an isomorphism. With the multiplication inherited from
-the ring tensor presheaf, it is a ring isomorphism C tensor_D C → B(W). On
-c tensor 1 it is b(c), and on 1 tensor d it is δ(d), where δ is the composite
-of the inverse-image unit and t. Thus it carries the two canonical tensor
-inclusions to the displayed maps. The tensor-product square is a pushout of
-commutative rings; transport this property along the ring isomorphism. This
-construction and argument also apply to the zero ring and the empty open. -/
+(Stacks, Tag 01SB). -/
 theorem affine_pushout_ring_affine_sections [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpushout : IsPushout r₀ t₀ b t) (V : X.Opens) (hV : IsAffineOpen V) :

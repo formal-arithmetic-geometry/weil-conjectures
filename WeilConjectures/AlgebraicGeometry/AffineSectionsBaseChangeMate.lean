@@ -28,13 +28,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine sections comparison intertwines the extension/restriction mate with
-sheaf base change, followed by the pullback/direct-image mate of any morphism.
-The supplied sections comparison is normalized on sheaves and right-derived units.
-Only the pushforward of E is required to have quasi-coherent cohomology; neither
-Tor independence nor invertibility of the morphism or of base change is required.
-
-Source: Stacks Project, perfect.tex, Tag 0AA7, construction of the canonical map;
-cohomology.tex, Tag 08HY, counit description of base change, and Tag 0D5T. -/
+sheaf base change, followed by the pullback/direct-image mate of any morphism
+(Stacks, Tags 0AA7, 08HY and 0D5T). -/
 theorem exists_affineSectionsBaseChangeMate
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

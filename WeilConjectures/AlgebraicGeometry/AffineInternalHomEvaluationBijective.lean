@@ -16,7 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Evaluation of internal Hom on affine opens
 
-Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine.
+## References
+
+* Stacks Project, Tag 0BUZ
 -/
 
 @[expose] public section
@@ -44,10 +46,8 @@ private theorem spec_map_bijective {R : CommRingCat.{u}}
   exact e.bijective
 
 /-- A morphism from a quasi-coherent module on an affine open is uniquely
-specified by its map on sections, even when the target is not quasi-coherent.
-
-Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine;
-Mathlib, AlgebraicGeometry.tilde.adjunction. -/
+specified by its map on sections, even when the target is not quasi-coherent
+(Stacks, Tag 0BUZ). -/
 theorem affine_internalHom_evaluation_bijective
     {X : Scheme.{u}} (M F : X.Modules) [M.IsQuasicoherent]
     (U : X.Opens) (hU : IsAffineOpen U) :

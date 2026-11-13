@@ -18,12 +18,14 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 /-!
 # Constructible comparison for discrete Noetherian coefficients
 
-Stacks Project, Tags 09AJ, 09AK and 09AL.
-
 We use the recorded equivalent coefficient-sized sites and intrinsic modules over their
 constant ring sheaves. The two full subcategories have all ambient morphisms. The forward
 functors are identified with the canonical comparison inverse image, including its
 localization on complexes; an arbitrary equivalence of categories would not suffice.
+
+## References
+
+* Stacks Project, Tags 09AJ, 09AK and 09AL
 
 ## Main definitions
 
@@ -49,40 +51,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Constructibility is local finite stratification with finite-type constant models.
 On qcqs schemes every such module is classical, and comparison induces equivalences on
 constructible sheaves and on bounded constructible derived categories.
-
-Stacks Tags 09AJ, 09AK and 09AL.
-
-Proof, following the node's four steps:
-1. Over the Noetherian coefficient ring, finite type is equivalent to finite presentation
-   (lem-sc-noetherian-finite-module-finite-presentation). Thus the finite models of
-   sk-def-sfb-constructible give the recorded affine-local condition. Refine point
-   neighborhoods by affine opens using lem-weil-pbc-affine-opens-basis. On qcqs X choose
-   a finite affine cover, then use lem-weil-pbc-etale-stratification-local-gluing-core
-   to obtain a finite global constructible locally closed stratification factoring
-   through the local strata. Pull back the same constant models. Conversely intersect
-   global strata with affine opens; constructibility and the constant models restrict.
-2. Apply det-pe-constructible-comparison-classical, including its locally stratified
-   clause. The continuity map is precisely det-pe-classical-definition-continuity-map:
-   sections on stages form a diagram over the opposite cofiltered presentation category,
-   and the cocone consists of restriction along its projections. Restrict the intrinsic
-   scalar actions along the constant-section unit, using coefficientModelFixedScalars.
-   Transport to the equivalent small sites does not change this map.
-3. Pullback to each stratum commutes with comparison by sk-thm-pe-direct-image-comparison.
-   Apply det-pe-finite-local-systems-twist and finite type = finite presentation to the
-   local models. Comparison is fully faithful by det-pe-classical-sheaves-modules.
-   For constructible F, its classicality gives nu* nu_* F isomorphic to F. On every
-   stratum the local-system comparison and full faithfulness show that nu_* F has the
-   same finite constant models. Hence nu_* F is etale constructible, proving the first
-   equivalence with forward functor the specified module inverse image.
-4. By sk-prop-sf-comparison the derived unit is invertible; apply
-   det-pe-classical-derived-equivalence. Exact inverse image commutes with every
-   cohomology functor and preserves the finite interval of vanishing. Step 3 identifies
-   the constructible cohomology sheaves on both sides. Conversely classicality from
-   step 2 supplies a bounded-below etale antecedent; full faithfulness reflects zero
-   cohomology outside the finite interval and step 3 reflects constructibility inside.
-   Restrict to the full bounded constructible subcategories. Localization identifies
-   the derived forward functor on every cochain complex with termwise inverse image,
-   as expressed by the first natural isomorphism in the final clause. -/
+(Stacks, Tags 09AJ, 09AK and 09AL) -/
 theorem constructibleComparison (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     (∀ F : ConstantCompletion.Mod (ConstantCompletion.constant

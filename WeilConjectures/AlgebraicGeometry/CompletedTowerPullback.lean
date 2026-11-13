@@ -107,7 +107,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Pullback of strict completed-coefficient towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1261;
 Stacks Project, Tag 099N.
 
 The structure map into the completed coefficient ring is built from its finite
@@ -130,8 +129,8 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
-/-- The finite coefficient identification transported by the published constant comparison.
-Source: blueprint four corners; Stacks 098T. -/
+/-- The finite coefficient identification transported by the constant comparison
+(Stacks, Tag 098T). -/
 noncomputable def AdicCoefficientDatum.finiteRingIso {U V : Scheme.{u}} (f : U ⟶ V)
     (n : ℕ) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (d.finiteRing V n) ≅
@@ -142,8 +141,8 @@ noncomputable def AdicCoefficientDatum.finiteRingIso {U V : Scheme.{u}} (f : U �
       (by exact exchangeConstantComparison_isIso f (A ⧸ d.ideal ^ (n + 1))) ≪≫
     pbcLevelConstantComparison U d n
 
-/-- The finite coefficient comparisons retain every quotient transition.
-Source: blueprint four corners; Stacks 098T. -/
+/-- The finite coefficient comparisons are compatible with every quotient transition
+(Stacks, Tag 098T). -/
 theorem AdicCoefficientDatum.integralRingComponent_naturality {U V : Scheme.{u}}
     (f : U ⟶ V) {m n : ℕᵒᵖ} (a : m ⟶ n) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V m.unop) ≫
@@ -206,8 +205,7 @@ def completedFiniteCoefficientMap (n : ℕ) :
       (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))) ≫
     (pbcLevelConstantComparison X d n).hom
 
-/-- The components of the completed coefficient structure map.
- -/
+/-- The components of the completed coefficient structure map. -/
 def completedCoefficientComponent (n : ℕ) :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (pbcAdicCompletion Y d) ⟶
       (pbcAdicRings X d).obj (op n) :=
@@ -220,8 +218,7 @@ theorem completedCoefficientComponent_naturality {b a : ℕᵒᵖ} (f : b ⟶ a)
       completedCoefficientComponent g d a.unop := by
   exact d.integralRingComponent_naturality g f
 
-/-- The canonical coefficient structure map into the actual completed limit.
- -/
+/-- The canonical coefficient structure map into the actual completed limit. -/
 def completedCoefficientMap :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (pbcAdicCompletion Y d) ⟶
       pbcAdicCompletion X d :=

@@ -55,11 +55,8 @@ private theorem externalSectionsComponent_smul
 /-- The external section map on constant tensor coefficients, as an `O_Y`-linear presheaf
 morphism: on an open `V` it is the balanced identification
 `picardConstantTensorBalancedSections` of the constant tensor sections with
-`Γ(X, F) ⊗_k G(V)`, followed by `externalSectionsComponent f g F G V`.
-Source: Stacks Project, Varieties, Tag 0BED, affine-open degree-zero calculation.
-
-Multiplication on tensor sections and `O_Y`-linearity of the second projection's adjunction
-unit give `O_Y(V)`-linearity, and `externalSectionsComponent_naturality` gives naturality. -/
+`Γ(X, F) ⊗_k G(V)`, followed by `externalSectionsComponent f g F G V`
+(Stacks, Tag 0BED). -/
 noncomputable def externalConstantSectionsTensorMap
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

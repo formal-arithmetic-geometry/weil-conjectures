@@ -25,8 +25,7 @@ universe u wA wY
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The affine derived unit induces an isomorphism on every cohomology object.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, module-unit calculation. -/
+/-- The affine derived unit induces an isomorphism on every cohomology object (Stacks, Tag 06Z0). -/
 theorem affineDerivedUnit_homology_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

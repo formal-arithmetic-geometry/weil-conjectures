@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchrei
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierTraceBridge
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
 
-/-! Inverse and inverse-character clauses for the condensed Artin--Schreier sheaf.
-Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md. -/
+/-! Inverse and inverse-character clauses for the condensed Artin--Schreier sheaf. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

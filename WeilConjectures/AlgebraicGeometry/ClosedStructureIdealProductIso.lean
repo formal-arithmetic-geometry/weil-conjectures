@@ -28,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
 /-- The chosen and abelian images have the same section range on every open, without
-quasi-coherence or affineness assumptions.
-Source: Stacks Project, proof of Lemma 01YP. -/
+quasi-coherence or affineness assumptions (Stacks, Tag 01YP). -/
 private theorem image_range_eq_abelian {X : Scheme.{u}} {M N : X.Modules}
     (φ : M ⟶ N) (U : X.Opens) :
     Set.range ((image.ι φ).app U) = Set.range ((Abelian.image.ι φ).app U) := by
@@ -51,8 +50,7 @@ open MonoidalCategory Opposite in
 open scoped TensorProduct in
 /-- The image of any map out of a quasi-coherent tensor product is generated on an
 affine open by the images of pure tensor sections. The target is an arbitrary
-quasi-coherent module; the map need not be ideal multiplication.
-Source: Stacks Project, proof of Lemma 01YP. -/
+quasi-coherent module; the map need not be ideal multiplication (Stacks, Tag 01YP). -/
 private theorem tensor_image_range_affine {X : Scheme.{u}} {J M N : X.Modules}
     (ψ : J ⊗ M ⟶ N) [J.IsQuasicoherent] [M.IsQuasicoherent] [N.IsQuasicoherent]
     (U : X.affineOpens) :
@@ -81,8 +79,8 @@ private theorem tensor_image_range_affine {X : Scheme.{u}} {J M N : X.Modules}
     rintro s ⟨a, t, rfl⟩
     exact ⟨Modules.tmulSection a t, rfl⟩
 
-/-- Equality of arbitrary morphisms is equivalent to equality on affine sections.
-Source: Stacks Project, proof of Lemma 01YP. -/
+/-- Equality of arbitrary morphisms is equivalent to equality on affine sections
+(Stacks, Tag 01YP). -/
 private theorem hom_eq_iff_affine {X : Scheme.{u}} {M N : X.Modules}
     (φ ψ : M ⟶ N) :
     φ = ψ ↔ ∀ V : X.affineOpens, ∀ s : Γ(M, V.1), φ.app V.1 s = ψ.app V.1 s := by
@@ -106,8 +104,7 @@ private theorem hom_eq_iff_affine {X : Scheme.{u}} {M N : X.Modules}
     exact h i.1 _
 
 /-- Subobject order is equivalent to affine section-range inclusion. No quasi-coherence
-is assumed on any of the three modules.
-Source: Stacks Project, proof of Lemma 01YP. -/
+is assumed on any of the three modules (Stacks, Tag 01YP). -/
 private theorem subobject_le_iff_affine_range {X : Scheme.{u}} {M N P : X.Modules}
     (i : M ⟶ P) (j : N ⟶ P) [Mono i] [Mono j] :
     Subobject.mk i ≤ Subobject.mk j ↔

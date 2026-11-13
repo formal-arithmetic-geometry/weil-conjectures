@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
 /-- Scalar extension of a complex of Tor amplitude [a,b] has cohomology in [a,b].
-Source: Stacks Project, Cohomology on Sites, Tags 08G0, 08G1, 06YQ and 06YY; the scalar-extension
-boundedness part of lem-sfb-adic-finite-etale-transitions, proof step 2. -/
+(Stacks, Tags 08G0, 08G1, 06YQ and 06YY). -/
 theorem adicScalarExtension_bound {C : Type w} [SmallCategory C]
     (T : GrothendieckTopology C) {A B : Type w} [CommRing A] [CommRing B]
     (f : A →+* B) (K : ConstantCompletion.D (constant T A)) (a b : ℤ)

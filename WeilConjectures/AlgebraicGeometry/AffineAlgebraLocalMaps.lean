@@ -36,8 +36,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An algebra morphism gives compatible scheme maps on inverse images of affine opens.
-Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemma 01LT;
-parts (i) and (iii) of the local proof of the affine structure-algebra correspondence. -/
+(Stacks, Tags 01SA and 01LT). -/
 theorem affine_algebra_local_maps {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     [IsAffineHom g] (α : (𝒪⁎g : S.CommAlgebraSheaf) ⟶ 𝒪⁎f) :
     ∃ k : ∀ U : S.affineOpens, (f ⁻¹ᵁ U.1).toScheme ⟶ Y,

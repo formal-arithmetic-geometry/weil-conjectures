@@ -72,8 +72,7 @@ private theorem shortComplexTheta_naturality {X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The section resolution map induces a monomorphism on homology in each degree.
-Source: Stacks Project, Tag 08C2, lemma-alternating-cech-complex-complex-ss,
-and Tag 071B, lemma-K-injective. -/
+(Stacks, Tags 08C2 and 071B). -/
 theorem affineBasisSections_resolution_homology_mono
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F J : CochainComplex X.Modules ℤ) [J.IsKInjective]

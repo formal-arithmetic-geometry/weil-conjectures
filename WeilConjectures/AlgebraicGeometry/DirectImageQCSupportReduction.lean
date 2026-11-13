@@ -26,9 +26,7 @@ import Mathlib.Topology.Sheaves.Abelian
 /-!
 # Quasi-compact reduction for a proper-support complex
 
-Source: literature/stacks-project/perfect.tex, Tag 08EV, label
-`perfect-lemma-perfect-direct-image`, proof from “Let T be the union...” through
-“Thus we may replace X by X''.
+Source: Stacks Project, Tag 08EV.
 -/
 
 @[expose] public section
@@ -47,7 +45,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A quasi-compact open containing every cohomological support preserves the derived
  direct image via the adjunction unit and the canonical composition comparison.
-Source: Stacks Project, Tag 08EV, `perfect-lemma-perfect-direct-image`. -/
+(Stacks, Tag 08EV) -/
 theorem directImage_qc_support_reduction
     {X S : Scheme.{u}}
     (f : X ⟶ S) [LocallyOfFiniteType f] [IsNoetherian S]

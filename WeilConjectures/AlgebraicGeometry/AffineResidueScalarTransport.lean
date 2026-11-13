@@ -23,9 +23,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry.Scheme
 
-/-- The field transport in the affine chart equals extension by section evaluation.
-Source: Stacks Project, Tag 0098 (sheaves-lemma-stalk-pullback), and the residue
-map construction in Mathlib.AlgebraicGeometry.ResidueField. -/
+/-- The field transport in the affine chart equals extension by section evaluation
+(Stacks, Tag 0098). -/
 theorem affine_residue_scalar_transport (W : Scheme.{v}) (U : W.Opens)
     (hU : IsAffineOpen U) (z : U) :
     let e := asIso (U.ι.residueFieldMap z) ≪≫

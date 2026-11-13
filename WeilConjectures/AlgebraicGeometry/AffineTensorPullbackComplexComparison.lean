@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 /-! # Affine pullback as sheafified scalar extension
 
-Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact.
+Source: Stacks Project, Tags 01IB and 01I9.
 -/
 
 @[expose] public section
@@ -29,9 +28,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Pulling a quasi-coherent complex on an affine scheme back to Spec B agrees with
-sheafifying its global-sections complex after ordinary scalar extension.
-Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact. -/
+sheafifying its global-sections complex after ordinary scalar extension
+(Stacks, Tags 01IB and 01I9). -/
 theorem affine_tensor_pullback_complex_comparison (S : Scheme.{u}) [IsAffine S]
     (C : CochainComplex S.Modules ℤ)
     (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)

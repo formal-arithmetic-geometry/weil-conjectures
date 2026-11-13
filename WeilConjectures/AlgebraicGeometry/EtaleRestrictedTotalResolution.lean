@@ -22,9 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The augmentation with prescribed degree-zero summand maps.
-Source: Stacks, Tags 015J and 0133. Its data are explicit; only the named
-commutation lemma supplies the chain-map proof. -/
+/-- The augmentation with prescribed degree-zero summand maps (Stacks, Tags 015J, 0133). -/
 noncomputable def etaleRestrictedAugmentation
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -49,8 +47,7 @@ private noncomputable def restrictedRowAugmentation
       HomologicalComplex.stupidTruncMap T.a (ComplexShape.embeddingUpIntGE q)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit restricted augmentation is a K-injective resolution.
-Source: Stacks, Tag 015J, proof remark (3), and Tag 0133. -/
+/-- The explicit restricted augmentation is a K-injective resolution (Stacks, Tags 015J, 0133). -/
 theorem etaleRestrictedTotal_resolution
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

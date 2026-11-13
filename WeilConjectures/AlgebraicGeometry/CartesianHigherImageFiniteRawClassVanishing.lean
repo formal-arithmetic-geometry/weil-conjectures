@@ -32,10 +32,7 @@ noncomputable local instance cartesianHigherImageFiniteRawClassHasZeroMorphisms 
   inferInstance
 
 /-- Finitely many raw derived classes killed by cartesian exchange are killed at a
-common later stage. This is the cohomological part of affine-section injectivity;
-it does not concern arbitrary homology sections or the sheafification comparison.
-
-Source: Stacks Project, Tag 0EYM, second proof, part (2); Tags 0EYL and 0GIT. -/
+common later stage (Stacks, Tags 0EYM, 0EYL, 0GIT). -/
 theorem exists_cartesianHigherImage_finite_raw_classes_eq_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

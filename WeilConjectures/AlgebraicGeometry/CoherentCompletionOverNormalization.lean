@@ -25,9 +25,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restricting a coherent module to an open over-site preserves coherence and has
-an inverse-system quotient comparison normalized by the original projections.
-
-Source: Stacks Project, Tag 0889(1), first sentence of proof; equation 0880. -/
+an inverse-system quotient comparison normalized by the original projections
+(Stacks, Tags 0889 and 0880). -/
 theorem coherentCompletion_over_normalization
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H : CoherentModules X) (W : X.Opens) :

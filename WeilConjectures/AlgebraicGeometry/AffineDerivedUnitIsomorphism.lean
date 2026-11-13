@@ -28,8 +28,7 @@ universe u wA wY
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The unit of the affine derived tilde-sections adjunction is invertible.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, unit calculation. -/
+/-- The unit of the affine derived tilde-sections adjunction is invertible (Stacks, Tag 06Z0). -/
 theorem affineDerivedUnit_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

@@ -21,14 +21,9 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Scheme
 /-! Intermediate base package for finite Tate pullback. -/
-/-- Strict intermediate package for the finite Tate pullback theorem. The construction first
-chooses the primitive-root etale cover, identifies the roots sheaf there with the constant
-cyclic sheaf, extends scalars to `A`, and forms signed tensor powers and duals. The normalized
-adjunction, unit, tensor, evaluation, identity, composition and local-trivialization equations
-are then checked on the local basis and descend by etale-cover detection. This intermediate
-package is used by the parent theorem; its proof is the corresponding group of steps in the
-parent blueprint and remains available as a named proof obligation.
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM. -/
+/-- Intermediate package for the finite Tate pullback theorem: normalized comparisons of
+the roots sheaf and of the finite Tate sheaves under inverse image (Stacks, Tags 03PK, 03Q1,
+03EK, 03EM). -/
 theorem etaleFiniteTwistPullback_base (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hm : 0 < m) (hA : (m : A) = 0) :
     ∃ (r : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),

@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreier
 public import WeilConjectures.FourierTransform.Defs
 
 /-! # The condensed Fourier kernel
-
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/def-fd-kernel.md,
-condensed coefficient convention.
-The ordinary etale construction is re-exported from FourierTransform.Defs.
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +22,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The degree-q Artin--Schreier sheaf of the pairing, with pulled-back condensed
-coefficients. The character is a character of k₀, not its restriction to the prime field.
-Source: latest blueprint, def-fd-kernel.md, condensed application. -/
+coefficients. The character is a character of k₀, not its restriction to the prime field. -/
 def condensedFourierKernel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -39,8 +34,7 @@ def condensedFourierKernel
 
 /-- The prime-field kernel for the full characteristic condition p=0 in global
 sections, including the empty scheme. The canonical prime-field map factors the
-integer map using ringChar divisibility, without requiring characteristic exactly p.
-Source: latest blueprint, def-fd-kernel.md, general condensed formula. -/
+integer map using ringChar divisibility, without requiring characteristic exactly p. -/
 def condensedPrimeFourierKernel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

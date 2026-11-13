@@ -44,11 +44,7 @@ private theorem cancel_proper_ambient_boundaries
   rw [hm, ← Category.assoc, h₁]
 
 /-- The explicit graph comparison commutes with a Cartesian proper change of its ambient
-scheme, before any shrinking of the supporting open.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7C (vertical pasting) and 0F7D
-(horizontal pasting); the proper-projection grids of steps 5--7 in
-lem-pur-etale-pairwise-product-graph-normalization. -/
+scheme, before any shrinking of the supporting open (Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleGraphComparisonFromOpen_properAmbient
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

@@ -155,10 +155,8 @@ private theorem structureAlgebra_bijective (S : Scheme.{u}) (X Y : Over S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A directed inverse limit in schemes affine over `S` is also a limit in `Over S`.
-
-Source: Stacks Project, Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit),
-the universal-property argument, using Lemma 01YW on each affine open of the base. -/
+/-- A directed inverse limit in schemes affine over `S` is also a limit in `Over S`
+(Stacks, Tags 01YX, 01YW). -/
 theorem isLimit_affineOver_inclusion
     {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J]
     (S : Scheme.{u})

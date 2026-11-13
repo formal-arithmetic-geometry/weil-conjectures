@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantPullbackIdentityCoherence
 /-!
 # Functoriality of pullback on étale cohomology
 
-Source: literature/stacks-project/cohomology.tex, Section Tag 01F7
+Source: Stacks Project, Tag 01F7.
 -/
 
 @[expose] public section
@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The pullback on étale cohomology is natural in the sheaf and compatible with composition of
-morphisms: clauses (3) and (4) of lem-weil-pbc-cohomology-pullback-functorial. Independence
-of resolutions and the remaining clauses are not stated here. -/
+morphisms. -/
 theorem cohomologyPullbackFunctorial {X Y Z : Scheme.{u}} (u : X ⟶ Y) (v : Y ⟶ Z)
     (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     (∀ {G : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}}

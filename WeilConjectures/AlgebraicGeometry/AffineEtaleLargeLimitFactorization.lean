@@ -23,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Every map from the affine étale inverse limit to an affine étale object
-factors through one stage, even for the larger index universe.
-
-Source: Stacks Project, limits.tex, Proposition 32.6.1 (Tag 01ZC), surjectivity
-in (1) implies (3), and proetale.tex, lemma-limit-pullback (Tag 099S). -/
+factors through one stage, even for the larger index universe (Stacks, Tags 01ZC, 099S). -/
 theorem affineEtale_largeLimit_factorization {X : Scheme.{u}}
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)

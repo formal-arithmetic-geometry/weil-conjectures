@@ -18,8 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # The generic stalk of a birational line pushforward
 
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-verification of property (a).
+Source: Stacks Project, Tag 02O5.
 -/
 
 @[expose] public section
@@ -76,10 +75,8 @@ private theorem stalk_free_of_restrict_iso {Z W : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 open CategoryTheory.Limits TopologicalSpace in
 /-- On an open where a morphism is an isomorphism, the pushforward of an
-invertible module has a free stalk of rank one at each point of that open.
-
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-verification of property (a). -/
+invertible module has a free stalk of rank one at each point of that open
+(Stacks, Tag 02O5). -/
 private theorem line_pushforward_stalk_on_iso_open {W Y : Scheme.{u}}
     (π : Y ⟶ W) (U : W.Opens) [IsIso (π ∣_ U)]
     (L : Y.Modules) [L.IsInvertible] (x : W) (hx : x ∈ U) :
@@ -109,10 +106,8 @@ private theorem line_pushforward_stalk_on_iso_open {W Y : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- A line pushed forward through a morphism that is an isomorphism on a dense
 open of an integral scheme has the residue-field stalk after closed pushforward.
-The equivalence respects the original stalk action through the residue map.
-
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-property (a) and the closed-immersion stalk comparison preceding Chow's lemma. -/
+The equivalence respects the original stalk action through the residue map
+(Stacks, Tag 02O5). -/
 theorem birational_line_pushforward_generic_stalk {X W Y : Scheme.{u}}
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (π : Y ⟶ W) (U : W.Opens) (hU : Dense (U : Set W))

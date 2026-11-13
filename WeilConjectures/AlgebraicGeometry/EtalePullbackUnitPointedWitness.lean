@@ -48,7 +48,7 @@ private theorem sheafification_unit_locally_injective
 
 /-- Equality of unit sections after restriction is witnessed on an étale
 X-scheme whose image contains the image of the chosen point.
-Source: Stacks Project, Tag 09ZF, first proof paragraph; Sites, Tags 00VE, 00WX, 00WK. -/
+(Stacks, Tag 09ZF) -/
 theorem etale_pullback_unit_pointed_witness
     {X Z : Scheme.{u}} (i : Z ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))

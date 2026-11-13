@@ -12,9 +12,6 @@ import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 
 /-!
 # Functorial normalization of the single-unit comparison
-
-Source: the normalized projective counit calculation in
-`lem-amb-affine-space-top-trace.proof.md`.
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +22,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Postcomposing the image of the canonical single-unit comparison changes no map.
-Source: the projective-line counit identification in the first paragraph of
-`lem-amb-affine-space-top-trace.proof.md`. -/
+/-- Postcomposing the image of the canonical single-unit comparison changes no map. -/
 theorem map_singleFunctorObjUnitIso_hom_comp
     (B : Type v) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

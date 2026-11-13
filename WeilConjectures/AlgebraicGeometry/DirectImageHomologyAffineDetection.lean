@@ -97,7 +97,7 @@ private theorem homology_zero_of_affine_sections (S : Scheme.{u})
 /-- Vanishing of derived sections on every inverse image of an affine open detects
 vanishing of the corresponding cohomology sheaf of derived direct image. No
 quasi-coherence or support hypothesis on the derived object is required.
-Source: Stacks Project, Tag 08D5, proof of (2); Tag 079V. -/
+(Stacks, Tags 08D5 and 079V) -/
 theorem isZero_schemeHigherDirectImage_of_affine_sections
     {X S : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

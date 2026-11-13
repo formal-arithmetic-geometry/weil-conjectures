@@ -86,10 +86,8 @@ private theorem derivedTensorLeft_isLeftAdjoint (X : Scheme.{u})
   let adj := (HomotopyCategory.tensorHomAdjunction P).derived W W ε η
   exact (adj.ofNatIsoLeft ((tensoringLeft _).mapIso (Q.objObjPreimageIso E))).isLeftAdjoint
 
-/-- Tensoring on the right by any derived object preserves scheme-universe coproducts.
-The localization universe w is independent of the scheme universe u.
-Source: Stacks Project, Tag 0A9U, first two sentences of proof;
-Cohomology, Tags 06YH and 0FPB; Injectives, Tag 07D9. -/
+/-- Tensoring on the right by any derived object preserves scheme-universe coproducts
+(Stacks, Tags 0A9U, 06YH, 0FPB and 07D9). -/
 theorem derivedTensorRight_preservesCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) (J : Type u) :

@@ -12,8 +12,10 @@ import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Constructibility under a surjective coefficient restriction
-Source: Stacks Project, Tag 09AJ, definition-constructible; Tag 09BR, scalar restriction
-in the coefficient-filtration argument.
+
+## References
+
+* Stacks Project, Tags 09AJ, 09BR
 -/
 
 @[expose] public section
@@ -141,9 +143,7 @@ private theorem restrictionConstructible (X : Scheme.{u})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Exact restriction along a surjective map of Noetherian coefficient rings preserves
 constructibility of each cohomology sheaf. No boundedness is required.
-
-Source: Stacks Project, proetale.tex, Tag 09AJ, definition-constructible;
-Tag 09BR, lemma-compare-truncations-constructible, scalar restriction in the induction. -/
+(Stacks, Tags 09AJ, 09BR) -/
 theorem coefficientSurjectiveRestriction_constructible (X : Scheme.{u})
     (A B : Type (max v (u + 1))) [CommRing A] [CommRing B]
     [IsNoetherianRing A] [IsNoetherianRing B]

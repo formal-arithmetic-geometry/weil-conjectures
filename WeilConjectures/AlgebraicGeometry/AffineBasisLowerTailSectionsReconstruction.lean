@@ -89,9 +89,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
 -- Transport between the two module-category presentations needs additional elaboration.
 /-- Derived abelian sections reconstruct the lower tail from its canonical lower
-truncations. This is only the reconstruction step, with no homology conclusion.
-Source: Stacks Project, Tag 0D64, Tag 071B
-(lemma-K-injective) and Tag 0BKT (lemma-cohomology-over-U-trivial). -/
+truncations. This is only the reconstruction step, with no homology conclusion
+(Stacks, Tags 0D64, 071B and 0BKT). -/
 theorem affineBasisLowerTail_sections_reconstruction
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

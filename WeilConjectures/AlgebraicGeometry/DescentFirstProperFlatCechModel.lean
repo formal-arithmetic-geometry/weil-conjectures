@@ -223,8 +223,7 @@ theorem ordinary_pullback_model_resolution {X Y : Scheme.{u}} (g : X ⟶ Y)
     exact ⟨r, ⟨(Modules.pullback g).mapIso er ≪≫ pullbackFreeIso g _⟩⟩
 
 
-/-- The Noetherian part uses the already universal ordinary model; no canonical
-scheme derived base-change morphism occurs in the statement or proof. -/
+/-- The Noetherian part of the descent-first bounded flat Čech model. -/
 theorem noetherian_cohomology_model_sections_isPseudoCoherent
     {X T : Scheme.{u}} (f : X ⟶ T) [IsProper f] [IsLocallyNoetherian T]
     [HasInjectiveResolutions X.Modules] (F : X.Modules) [F.IsFinitePresentation]
@@ -366,8 +365,7 @@ theorem universal_ordinary_neighbourhood_model_transfer
     ec ≪≫ (higherDirectImage h n).mapIso eF⟩
 
 
-/-- The full root-facing model from a Noetherian geometric descent certificate.
-This statement and proof require no canonical derived base-change map. -/
+/-- The full root-facing model from a Noetherian geometric descent certificate. -/
 theorem exists_cech_model_of_noetherian_descent
     {X Y Z T U B : Scheme.{u}} (f : X ⟶ T) (p : Y ⟶ B)
     (u : U ⟶ T) [IsOpenImmersion u] (g : U ⟶ B)

@@ -27,14 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tags 0A50 and 03F3 (2).
-
-The natural isomorphisms identify cohomology evaluated at the objects X, U, V and U ∩ V
-of X's small étale site with derived global sections on their small étale sites.
-The maps below are the right derived maps of section restriction; transporting them across
-these identifications gives the pullback restrictions in the displayed Mayer-Vietoris
-sequence. The two-summand direct sum is represented by the product of abelian groups.
-The connecting maps are natural transformations, hence functorial in the coefficient sheaf. -/
+/-- The Mayer-Vietoris sequence for a cover of `X` by two opens `U` and `V`, with connecting
+maps natural in the coefficient sheaf (Stacks, Tags 0A50 and 03F3). -/
 theorem etale_mayerVietoris (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
         (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n ≅

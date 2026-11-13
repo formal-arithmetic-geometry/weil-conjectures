@@ -24,8 +24,7 @@ universe u wA wY
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Derived affine sections commute naturally with cohomology on D_QCoh.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, cohomology calculation. -/
+/-- Derived affine sections commute naturally with cohomology on D_QCoh (Stacks, Tag 06Z0). -/
 theorem affineDerivedSections_homology_comparison (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

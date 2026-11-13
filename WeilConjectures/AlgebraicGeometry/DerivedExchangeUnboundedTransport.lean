@@ -26,10 +26,8 @@ namespace AlgebraicGeometry
 open Etale
 
 /-- The bounded comparison formula implies the formula for arbitrary K-injective
-representatives of a bounded below derived object.
-Source: Stacks Project, sites-cohomology.tex, Lemma 0736 and Remark 07A7;
-derived.tex, Lemmas 070I and 070K; step 7 of the explicit comparison
-in lem-weil-pbc-derived-exchange-termwise. -/
+representatives of a bounded below derived object
+(Stacks, Tags 0736, 07A7, 070I, 070K). -/
 lemma derivedExchangeUnboundedTransport
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)

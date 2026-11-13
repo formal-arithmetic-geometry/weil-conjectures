@@ -101,9 +101,8 @@ private theorem global_agreement_subterminal (T : Scheme.{u})
       exact ⟨(Scheme.pointSmallEtale x).toPresheafFiber U y H.obj ⟨PUnit.unit, hf⟩⟩
 
 /-- The agreement of two sections gives a subterminal sheaf on the small étale site of
-`V.left`. Its stalk is inhabited precisely when the original sections have equal germs.
-Source: Stacks Project, Étale Cohomology, Tag 09XM, first paragraph of the proof;
-Tag 03Q1 for the identification with the original sheaf's germs. -/
+`V.left`. Its stalk is inhabited precisely when the original sections have equal germs
+(Stacks, Tags 09XM, 03Q1). -/
 theorem exists_etaleSections_equality_subterminal (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (V : S.Etale) (s t : F.obj.obj (op V)) :

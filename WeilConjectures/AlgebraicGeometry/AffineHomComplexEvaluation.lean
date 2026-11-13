@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitIso
 
 /-! # Termwise affine Hom evaluation
 
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3.
+## References
+
+* Stacks Project, Tags 0BUZ, 0BV0, 0AX3
 -/
 
 @[expose] public section
@@ -23,11 +25,7 @@ universe u
 open CategoryTheory Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
 /-- The affine Hom comparison and evaluation identity hold before localization, on
-all unbounded complexes. The unit-Hom comparison is chosen by evaluation at one.
-
-Source: Stacks Project, duality.tex, lemma-compute-sheafhom-affine (0BUZ),
-lemma-sheafhom-affine-adjoint (0BV0), and remark-trace-map-finite (0AX3);
-the termwise calculation in the proof of lem-sc-affine-hom-kinjective-evaluation. -/
+all unbounded complexes (Stacks, Tags 0BUZ, 0BV0, 0AX3). -/
 theorem affine_hom_complex_evaluation
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤

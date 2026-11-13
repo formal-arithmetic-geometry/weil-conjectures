@@ -11,8 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersio
 /-! # Quasi-compactness of the open complement of a Cartier divisor
 
 The local principal equations give the scope needed for the supported-Hom
-comparison. Source: lem-pur-divisor-class, Cartier construction, and the scope
-clarification of Wei Yang #1412 item 7.
+comparison.
 -/
 
 @[expose] public section
@@ -21,8 +20,7 @@ universe u
 open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- The complement of an effective Cartier divisor is quasi-compact.
-Source: lem-pur-divisor-class, supported Cartier construction. -/
+/-- The complement of an effective Cartier divisor is quasi-compact. -/
 theorem cartierComplement_quasiCompact {D X : Scheme.{u}} (i : D ⟶ X)
     [IsClosedImmersion i] (hI : i.ker.IsInvertible) : QuasiCompact i.openComplement.ι := by
   classical

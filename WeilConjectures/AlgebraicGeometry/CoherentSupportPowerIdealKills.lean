@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 
 /-! # An ideal power kills a coherent module exactly when its support lies in the zero set
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.10.2 (Tag 01Y9),
-using Algebra, Lemma 10.62.4 (Tag 00L6).
+Stacks Project, Tags 01Y9 and 00L6.
 -/
 
 @[expose] public section
@@ -29,12 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- On a Noetherian scheme, a coherent module is annihilated by some nonnegative power of
 an ideal exactly when its nonzero-stalk locus lies in the locus where the stalk ideal is
-proper. The latter condition is failure of surjectivity of the stalk inclusion, as in
-`quasi_coherent_ideal_zero_set_affine`. The shared `idealSheafPower` has the structure sheaf
-with identity inclusion at exponent zero, so its product with `F` is canonically `F`.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.10.2 (Tag 01Y9), with Algebra,
-Lemma 10.62.4 (Tag 00L6). -/
+proper (Stacks, Tags 01Y9 and 00L6). -/
 theorem coherent_support_power_ideal_kills (X : Scheme.{u}) [IsNoetherian X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (K : X.IdealSheafData) :

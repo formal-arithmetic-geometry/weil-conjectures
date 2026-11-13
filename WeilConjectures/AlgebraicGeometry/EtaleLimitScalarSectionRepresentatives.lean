@@ -61,11 +61,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- This helper is the representative half of scalar section continuity. The affine étale
-site colimit identifies sections on the limit with filtered stage sections, so every
-limit section has a stage representative. Source: Stacks Tags 09YN and 09YQ.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit; Étale Cohomology,
-Tag 09YQ, qcqs inverse-limit realization; Cohomology on Sites, Tag 09YP. -/
+/-- Every section on the limit has a stage representative (Stacks, Tags 09YN and 09YQ). -/
 theorem etale_limit_scalar_sections_representatives
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

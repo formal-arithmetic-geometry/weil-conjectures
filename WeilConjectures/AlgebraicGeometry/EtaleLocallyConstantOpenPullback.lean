@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 /-!
 # Local constancy under open restriction
 
-Source: finite pushforward constructibility blueprint, step 2; Stacks Project, Tag 093R.
+Source: Stacks Project, Tag 093R.
 -/
 
 @[expose] public section
@@ -57,9 +57,7 @@ private lemma constant_setPullback {X Y : Scheme.{u}} (g : Y ⟶ X) [Etale g]
 
 /-- Restricting a locally constant set-valued etale sheaf to an open subscheme preserves
 local constancy. No finiteness or Noetherian hypothesis is needed.
-
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 2;
-Stacks Project, Modules on Sites, Lemma 093R; Etale Cohomology, Tags 03S2 and 00XZ. -/
+(Stacks, Tags 093R, 03S2 and 00XZ) -/
 theorem isLocallyConstantEtaleSheafOfSets_open_pullback
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (U : X.Opens) (hF : IsLocallyConstantEtaleSheafOfSets F) :

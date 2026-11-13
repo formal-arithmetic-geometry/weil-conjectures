@@ -37,28 +37,10 @@ open Opposite
 set_option maxHeartbeats 400000 in
 -- Resolution transports compare both module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Identity property of the cohomology map induced by an h-map.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
-Derived Categories, Tags 013P, 013S, 05TG.
-
-Proof (argument specialized from the parent node):
-Steps 1--3 are packaged in `moduleCohomologyFMap_identity_resolution_homology`;
-the Lean proof combines that factorization with cancellation and Step 4.
-1. For the choices D defining the identity-scheme map, take the ordinary resolution
-   descent alpha of psi from D.J to D.I. The pushforward-identity natural isomorphism
-   identifies the source of D.lambda with D.I; call the resulting map l.
-2. The augmentation equations say that D.beta and alpha followed by l agree after
-   D.J.ι. Extend by zero to integer indices and apply uniqueness of maps into a bounded
-   below injective complex after a quasi-isomorphism (Stacks Tag 013S). Restrict the
-   resulting homotopy to natural indices. Applying additive global sections gives the
-   same map on homology for beta and alpha followed by l.
-3. The pinned sections comparison D.a is the global-sections map of the inverse
-   pushforward-identity comparison. Consequently homology of l is the invertible
-   vertical map in the definition. Cancel it against its inverse.
-4. Naturality of the forgetful homology comparison and of isoRightDerivedObj identifies
-   the remaining composite with the underlying map of H^p(Z,psi). This argument uses
-   the arbitrary choices defining the map and needs no independence theorem.
--/
+/-- Identity property of the cohomology map induced by an h-map: for `h = 𝟙 Z` it is the
+map induced on cohomology by `ψ`
+(Stacks, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB; Derived Categories, Tags 013P, 013S,
+05TG). -/
 theorem moduleCohomologyFMap_basic_identity {Z : Scheme.{u}}
     (GZ FZ : SheafOfModules.{u} Z.ringCatSheaf) (ψ : GZ ⟶ FZ) (p : ℕ) :
     moduleCohomologyFMap (𝟙 Z) ψ p =

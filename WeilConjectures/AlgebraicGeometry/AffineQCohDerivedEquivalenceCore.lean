@@ -22,9 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Core affine derived equivalence data, omitting the normalization on shifts.
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0.
-The proof constructs the derived tilde/global-sections equivalence using exactness of
-termwise tilde, affine acyclicity, and the unit and counit quasi-isomorphisms. -/
+(Stacks, Tag 06Z0). -/
 theorem exists_affineQCohDerivedEquivalence_core (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

@@ -9,9 +9,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleEvenShiftCanonicalSelfSymmetry
 import WeilConjectures.AlgebraicGeometry.EtaleLineFlatBraiding
 
 /-! # Self symmetry of an even shifted etale line
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +24,7 @@ variable (A : Type (u + 1)) [CommRing A]
 
 attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
 /-- An even shifted rank-one line has identity self symmetry.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle,
-last paragraph on even shifts; Stacks Tag 06YU. -/
+(Stacks, Tag 06YU). -/
 theorem evenLineSelfSymmetry {Y : Scheme.{u}}
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
     (hJ : Scheme.IsLisseRankOneSheaf J) (d : ℤ) :

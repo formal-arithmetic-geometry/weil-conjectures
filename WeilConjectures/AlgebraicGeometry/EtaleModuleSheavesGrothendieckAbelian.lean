@@ -31,14 +31,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The module sheaves over the constant ring sheaf on the small etale site are
-Grothendieck abelian. A small family of affine etale objects covers every object,
-and the coproduct of the sheafified free Yoneda modules for this family is a generator.
-The free module on `uliftYoneda U` has sections the direct sum of copies of `R(V)`
-indexed by `V ⟶ U`; `ULift` only adjusts universes. Its sheafification is `j_{U!} R_U`.
-The constant ring sheaf `Λ_T` is the `constantSheaf` of `ULift Λ`, written out in place.
-The last conjunct states the abelian-sheaf case, with integer coefficients.
-
-Source: Stacks Project, Tags 03DA, 03DB, 03DI, 03EW, 021B and 04HR. -/
+Grothendieck abelian. The last conjunct states the abelian-sheaf case, with integer
+coefficients (Stacks, Tags 03DA, 03DB, 03DI, 03EW, 021B and 04HR). -/
 theorem etaleModuleSheaves_grothendieckAbelian (T : Scheme.{u})
     (Λ : Type u) [CommRing Λ] :
     IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1}

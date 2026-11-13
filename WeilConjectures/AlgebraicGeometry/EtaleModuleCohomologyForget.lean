@@ -47,8 +47,7 @@ theorem moduleSheafForgetIsLeftAdjoint (Y : Scheme.{u}) (Λ : Type (u + 1)) [Com
     (Adjunction.ofIsLeftAdjoint U)).ofNatIsoLeft e).isLeftAdjoint
 
 /-- Forgetting the module structure commutes naturally with cohomology of a sheaf
-placed in degree zero. This comparison has no compactness or colimit hypothesis.
-Source: Stacks Project, Tag 03FD and its proof. -/
+placed in degree zero (Stacks, Tag 03FD). -/
 theorem nonempty_etaleModuleCohomology_forgetIso
     (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (q : ℕ) :
     Nonempty

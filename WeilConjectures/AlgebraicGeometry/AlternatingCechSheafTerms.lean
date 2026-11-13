@@ -104,9 +104,8 @@ private noncomputable def capSheafificationIsoPushforward
   exact (asIso (PresheafOfModules.sheafificationAdjunction
     (𝟙 X.ringCatSheaf.obj)).counit).app H
 
-/-- Each increasing-tuple term is a product of direct images from its intersections.
-Source: Stacks Project, Tag 01FM, ordered intersection terms, and the construction
-paragraph of lem-pc-s3-affine-alternating-cech-augmented-construction. -/
+/-- Each increasing-tuple term is a product of direct images from its intersections
+(Stacks, Tag 01FM). -/
 theorem alternatingCechSheafComplex_terms
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (k : ℕ) :
     Nonempty ((alternatingCechSheafComplex U G).X k ≅

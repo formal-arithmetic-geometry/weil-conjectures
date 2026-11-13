@@ -389,10 +389,8 @@ private theorem full_grid
       (D((e)_!open[B]).map (c₀.inv.app M))) ≫ t) hc
 
 /-- The supplied k-square commutes with ambient transport through the mixed
-neighborhood. No f-side ambient change or inverse B exchange occurs here.
-
-Source: Stacks Tags 0F7C and 0F7D (vertical and horizontal pasting), step 3 of
-lem-pur-etale-graph-product-ambient-pasting, and Tag 0F7J, A--F comparison. -/
+neighborhood. No f-side ambient change or inverse B exchange occurs here
+(Stacks, Tags 0F7C, 0F7D and 0F7J). -/
 theorem etaleGraphAmbientSquarePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

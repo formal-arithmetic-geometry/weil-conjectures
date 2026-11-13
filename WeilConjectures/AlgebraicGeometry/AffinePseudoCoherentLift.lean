@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QcOpenDerivedLift
 /-! # Lifting pseudo-coherent objects from quasi-compact opens of affine schemes
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08EE,
-Lemma 36.13.3, lemma-lift-pseudo-coherent.
+Lemma 36.13.3.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- A pseudo-coherent derived object on a quasi-compact open of an affine scheme has a
 bounded-above finite-free complex on the whole scheme representing it after restriction.
-The ranks may vary with the degree, and the complex need not be bounded below.
-Source: Stacks Project, Tag 08EE, lemma-lift-pseudo-coherent. -/
+(Stacks, Tag 08EE). -/
 theorem exists_boundedAbove_finiteFree_lift
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

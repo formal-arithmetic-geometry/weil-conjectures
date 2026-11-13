@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Alternating Čech total complexes on finite open families
 
-Source: Stacks, Cohomology, Section on Čech cohomology of unbounded complexes,
-equation-global-sections-to-alternating-cech and lemma-alternating-cech-complex-complex.
+Source: Stacks Project, Cohomology, Section on Čech cohomology of unbounded complexes.
 
 Čech degree is first. The total differential is d₁ + (-1)^p d₂.
 All data are explicit; only identities needed by the constructions are postponed.
@@ -370,9 +369,7 @@ private theorem alternatingCechPresheafZero_naturality
   exact congrArg (fun f ↦ f.hom s)
     (g.naturality (homOfLE (le_top (a := alternatingCechIntersection U t))).op).symm
 
-/-- Restriction of global sections into the extended zero Čech row.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- Restriction of global sections into the extended zero Čech row. -/
 def alternatingCechZero (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M ⟶
       ((alternatingCechModuleFunctor U).obj M).X 0 :=
@@ -445,9 +442,7 @@ private theorem alternatingCechZero_naturality
   simp only [← Category.assoc]
   congr 1
 
-/-- The augmentation component is restriction in Čech degree zero, included in total degree n.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- The augmentation component is restriction in Čech degree zero, included in total degree n. -/
 def alternatingCechAugmentationComponent (n : ℤ) :
     (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj F).X n ⟶ ((alternatingCechTotalFunctor U).obj F).X n :=
@@ -455,9 +450,7 @@ def alternatingCechAugmentationComponent (n : ℤ) :
     ((alternatingCechDoubleFunctor U).obj F).ιTotal (ComplexShape.up ℤ) 0 n n
       (Int.zero_add n)
 
-/-- The restriction components commute with the total differential.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- The restriction components commute with the total differential. -/
 theorem alternatingCechAugmentation_comm (n m : ℤ) :
     alternatingCechAugmentationComponent U F n ≫
         ((alternatingCechTotalFunctor U).obj F).d n m =
@@ -490,18 +483,14 @@ theorem alternatingCechAugmentation_comm (n m : ℤ) :
   · rw [HomologicalComplex.shape _ n m h, HomologicalComplex.shape _ n m h]
     simp only [comp_zero, zero_comp]
 
-/-- The explicit section-to-total augmentation cochain map.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- The explicit section-to-total augmentation cochain map. -/
 def alternatingCechAugmentationMap :
     ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj F ⟶ (alternatingCechTotalFunctor U).obj F where
   f := alternatingCechAugmentationComponent U F
   comm' := fun n m _ ↦ alternatingCechAugmentation_comm U F n m
 
-/-- The augmentation is natural in the coefficient complex.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- The augmentation is natural in the coefficient complex. -/
 theorem alternatingCechAugmentation_naturality
     (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (g : F ⟶ G) :
@@ -524,9 +513,7 @@ theorem alternatingCechAugmentation_naturality
     ((alternatingCechDoubleFunctor U).obj G).ιTotal (ComplexShape.up ℤ) 0 n n
       (Int.zero_add n)) (alternatingCechZero_naturality U (g.f n))
 
-/-- The section-to-total augmentation as a natural transformation.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- The section-to-total augmentation as a natural transformation. -/
 def alternatingCechAugmentation :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
       (ComplexShape.up ℤ) ⟶ alternatingCechTotalFunctor U where
@@ -538,13 +525,7 @@ variable
   [HasDerivedCategory.{v}
     (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]
 
-/-- The canonical comparison is characterized through every K-injective resolution.
-This equation specifies the roof without choosing any unproved data.
-The resolution need not have injective terms: compare it with one that does. The
-comparison is a homotopy equivalence, preserved by sections and by the explicit
-Čech totalization, so naturality transports the equation to this resolution.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex. -/
+/-- The canonical comparison is characterized through every K-injective resolution. -/
 def IsAlternatingCechDerivedComparison
     (β : DerivedCategory.Q.obj ((alternatingCechTotalFunctor U).obj F) ⟶
       (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj

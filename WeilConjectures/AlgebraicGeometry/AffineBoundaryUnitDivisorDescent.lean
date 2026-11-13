@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 
 /-! # Descent of principal boundary divisors
-
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -24,8 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Every boundary divisor of a unit after extension descends to a boundary divisor of a unit.
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph. -/
+/-- Every boundary divisor of a unit after extension descends to a boundary divisor of a unit. -/
 theorem affine_boundary_unit_divisor_descent
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

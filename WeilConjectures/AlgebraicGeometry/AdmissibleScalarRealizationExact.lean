@@ -30,9 +30,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 /-!
 # Exact scalar realization for admissible continuous coefficients
 
-Source: Stacks Project, Modules on Sites, Tags 093J and 093M; blueprint main-20261015,
-internal-Hom stability proof, paragraphs 2--3.
-
 The scalar realization is the existing `FiniteConstantModel.modelFunctor`. The algebraic
 closure below uses all continuous functions. Universe lifts of the three standard scalar
 rings carry their induced topologies and do not change their rings or sections.

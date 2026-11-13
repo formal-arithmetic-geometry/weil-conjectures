@@ -63,10 +63,7 @@ private theorem cohomologyMap_transported_comp {X Y Z : Scheme.{u}}
 
 /-- For arbitrary nested opens A ≤ B of X, restriction on the inverse-image opens
 commutes with each actual tail-stage cohomology transition, including its arbitrary
-coefficient morphism φ. There is no condition on identities or compositions of φ.
-
-Source: Stacks Project, Tag 01F7 (pullback and coefficient functoriality),
-Tag 09YQ (restricted stage and cone maps); parent proof step 1. -/
+coefficient morphism φ. -/
 theorem tailOpenCohomologyMapDegree_restriction
     {X : Scheme.{u}} {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -29,15 +29,14 @@ set_option autoImplicit false
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- The finite affine covering families over affine objects of the small étale site.
-Source: Stacks Project, Tag 03F9; the collection used in the affine Tag 03P2 proof. -/
+(Stacks, Tags 03F9 and 03P2). -/
 def finiteAffineEtaleCechCover (X : Scheme.{u}) (U : X.Etale)
     (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U) : Prop :=
   IsAffine U.left ∧ Finite I ∧ (∀ i : I, IsAffine (V i).left) ∧
     Sieve.ofArrows V f ∈ X.smallEtaleTopology U
 
 /-- Finite affine covers form a fibre-product-stable cofinal collection over affine objects.
-Source: Stacks Project, Topologies Tag 0218; Schemes Tags 01I4 and 01JQ;
-Cohomology on Sites Tag 03F9, hypotheses (1) and (2). -/
+(Stacks, Tags 0218, 01I4, 01JQ and 03F9). -/
 theorem finiteAffineEtaleCechCover_basis (X : Scheme.{u}) :
     (∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale)
       (f : ∀ i : I, V i ⟶ U), finiteAffineEtaleCechCover X U I V f →

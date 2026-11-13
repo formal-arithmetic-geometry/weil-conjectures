@@ -29,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Every section of a filtered colimit of module sheaves over a qcqs etale object
-comes from a section at a diagram stage.
-Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (4), and Etale
-Cohomology, Section Tag 03Q4. -/
+comes from a section at a diagram stage (Stacks, Tags 0738, 03Q4). -/
 theorem etale_section_colimit_representative
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]

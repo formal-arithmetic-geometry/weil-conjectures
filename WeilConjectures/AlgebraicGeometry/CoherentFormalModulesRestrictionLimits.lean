@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-! # Restriction preserves finite limits and colimits of formal modules
 
-Source: Stacks Project, Lemma 087X (2), final sentence of the proof.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -95,9 +95,8 @@ private theorem restricted_kernel_mono {X : Scheme.{u}} [IsNoetherian X]
   rw [← ha, Functor.map_comp]
   infer_instance
 
-/-- The explicit termwise restriction functor preserves finite limits and colimits.
-Source: Stacks Project, Lemma 087X, construction (a)--(d) and the last sentence
-of its proof; step 2 of lem-weil-pbc-coherent-formal-modules-local-exactness. -/
+/-- The explicit termwise restriction functor preserves finite limits and colimits
+(Stacks, Tag 087X). -/
 theorem coherentFormalModules_restriction_limits {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     [IsNoetherian U.toScheme] :

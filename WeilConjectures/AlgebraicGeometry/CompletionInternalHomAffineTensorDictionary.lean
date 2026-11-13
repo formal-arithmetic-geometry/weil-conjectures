@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Affine tensor dictionary for compatible internal-Hom sections
 
-Source: Stacks Project, Tags 0882, 087W and 00MA.
+## References
+
+* Stacks Project, Tags 0882, 087W, 00MA
 -/
 
 @[expose] public section
@@ -46,12 +48,8 @@ private theorem finite_affine_coherent_sections {X : Scheme.{u}} [IsNoetherian X
 end Scheme.Modules
 
 /-- Affine quotient systems identify the evaluation map with a completed-ring-linear
-map on the tensor product of the module of linear maps. On `1 ⊗ h` it is base change of h.
-The last clause identifies each specified local evaluation equation with one equation
-in the tensor-product Hom module; it asserts no injectivity or surjectivity of beta.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 0882, affine-local proof;
-Tag 087W and Algebra, Tag 00MA. -/
+map on the tensor product of the module of linear maps. On `1 ⊗ h` it is base change of `h`
+(Stacks, Tags 0882, 087W). -/
 theorem completion_internal_hom_affine_tensor_dictionary {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

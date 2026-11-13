@@ -13,17 +13,12 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 /-!
 # Dual base change: pasting compatibilities
 
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-lefschetz-verdier/sec-trace-classes-and-the-lefschetz-verdier-formula/
-sk-d-proper-pushforward/sk-thm-sf-compatibility/thm-sf-dual-base-change.md`,
-node `thm-sf-dual-base-change`.
-
 The dual base change isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!` is the existing
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` (the inverse conjugate
 of the compact-support exchange `Ex_!`, invertible by
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`), and its proper form is
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerShriekBaseChangeIso`. This file states the
-remaining clauses of the node: compatibility of that isomorphism with horizontal and vertical
+remaining clauses: compatibility of that isomorphism with horizontal and vertical
 pasting of Cartesian squares, with respect to the canonical compositors
 `AlgebraicGeometry.Etale.rightDerivedLowerStarComp` and the exceptional compositor
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek` conjugate to
@@ -84,13 +79,8 @@ def DualBaseChangeVerticalPasting {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g�
 /-- Dual base change in the finite-coefficient unbounded datum: compatibility of the dual base
 change isomorphism `rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq : Rf^! Rg_* ≅ Rg'_* Rf'^!`
 with horizontal and vertical pasting of Cartesian squares, and stability of properness of `g`
-under the base change, which is what makes the proper form
-`rightDerivedUpperShriekLowerShriekBaseChangeIso` applicable.
-
-Source place: node `thm-sf-dual-base-change` in
-`literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-lefschetz-verdier/
-sec-trace-classes-and-the-lefschetz-verdier-formula/sk-d-proper-pushforward/
-sk-thm-sf-compatibility/thm-sf-dual-base-change.md`. -/
+under the base change, which makes the proper form
+`rightDerivedUpperShriekLowerShriekBaseChangeIso` applicable. -/
 theorem dualBaseChange (sq : IsPullback g' f' f g) :
     (∀ {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'} {g₂' : X₂ ⟶ X'} {f₂ : X₂ ⟶ Y₂}
       [HasCompactification f₂] [QuasiCompact f₂] (sq₂ : IsPullback g₂' f₂ f' g₂),

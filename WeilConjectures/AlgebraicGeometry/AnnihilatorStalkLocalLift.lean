@@ -27,8 +27,8 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- An annihilated germ has a representative annihilated by every local ideal section.
-Source: Stacks Project, Tag 01PO, proof of (3), the omitted finite-generator argument. -/
+/-- An annihilated germ has a representative annihilated by every local ideal section
+(Stacks, Tag 01PO). -/
 theorem annihilator_stalk_local_lift (X : Scheme.{u}) (J : X.IdealSheafData)
     [J.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] (x : X)
     (s : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)

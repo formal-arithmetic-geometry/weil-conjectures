@@ -10,10 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveSections
-/-! # Positive-degree exactness of a locally restricted Cech complex
-
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
--/
+/-! # Positive-degree exactness of a locally restricted Cech complex -/
 
 @[expose] public section
 
@@ -23,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The restricted Cech-model complex is exact in every positive degree.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy). -/
+/-- The restricted Cech-model complex is exact in every positive degree. -/
 theorem cech_sheaf_restrict_exact_positive
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

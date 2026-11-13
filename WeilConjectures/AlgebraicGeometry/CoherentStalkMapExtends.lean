@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 /-!
 # A map of stalks of coherent modules comes from a map on a neighbourhood
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01Y4 (label
-`lemma-map-stalks-local-map`), using Lemma 01XZ and Modules Lemma 01CP.
+Stacks Project, Tags 01Y4, 01XZ and 01CP.
 -/
 
 @[expose] public section
@@ -68,10 +67,7 @@ private theorem isFinitePresentation_of_coherent (X : Scheme.{u}) (F : X.Modules
   infer_instance
 
 /-- A homomorphism between stalks of coherent modules is induced by a morphism on
-some open neighbourhood.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01Y4
-(label `lemma-map-stalks-local-map`), using Lemma 01XZ and Modules, Lemma 01CP. -/
+some open neighbourhood (Stacks, Tags 01Y4, 01XZ and 01CP). -/
 theorem exists_open_hom_of_coherent_stalk_map
     {X : Scheme.{u}} [IsLocallyNoetherian X]
     (F G : X.Modules)

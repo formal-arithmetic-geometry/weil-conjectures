@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Presentable.Finite
 /-!
 # Factorization from constructible sheaves into filtered colimits
 
-Source: Stacks Project, Tag 09Z4, the surjectivity assertion for module sheaves.
+## References
+
+* Stacks Project, Tag 09Z4
 -/
 
 @[expose] public section
@@ -80,7 +82,7 @@ private theorem affineFree_finitelyPresentable
 /-- Maps from constructible module sheaves into filtered colimits factor through a stage,
 including indexing categories in the coefficient universe.
 
-Source: Stacks Project, Tag 09Z4, module-sheaf case. -/
+(Stacks Project, Tag 09Z4) -/
 theorem exists_constructible_hom_of_isColimit
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

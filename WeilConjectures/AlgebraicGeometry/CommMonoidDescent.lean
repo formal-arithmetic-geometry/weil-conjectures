@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CommMonoidOperationsDescent
 /-!
 # Descent of the commutative monoid operations
 
-Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
-Stacks Project, Descent, Tag 02W0.
+Stacks Project, Tag 02W0.
 -/
 
 @[expose] public section
@@ -65,8 +64,7 @@ private theorem local_hom_ext
   exact congrArg (fun k => k.left) h
 
 /-- Multiplication and the unit descend to a commutative monoid structure, before the
-inverse is descended. Source: blueprint lem-pd-group-scheme-descent, multiplication and
-unit step; Stacks Project, Tag 02W0. -/
+inverse is descended (Stacks, Tag 02W0). -/
 theorem exists_commMonObj_of_effective_projection
     {X Y : Scheme.{u}} {p : X ⟶ Y} [Flat p] [Surjective p] [QuasiCompact p]
     {V : Over X} [MonObj V] [IsCommMonObj V] (D : Over.DescentDatum p V)

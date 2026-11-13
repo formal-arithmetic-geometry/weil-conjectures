@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLeg
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u
@@ -27,9 +30,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 -- Keep the existing signature, including its redundant geometric hypotheses.
 set_option linter.unusedVariables false in
 /-- Cochain maps with the specified coefficient components obey the diagram laws.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the canonical Čech
-comparison. The inverse-image unit laws are expressed in
-WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence. -/
+(Stacks, Tag 09YP) -/
 theorem etale_limit_finite_cech_coefficient_laws
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

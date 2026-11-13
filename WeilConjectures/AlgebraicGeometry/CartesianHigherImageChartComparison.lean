@@ -30,10 +30,8 @@ noncomputable local instance (T : Scheme.{u}) :
 
 /-- Restricted chart cohomology compares with cartesian derived Hom, compatibly
 with the prescribed exchange map. This is a map comparison, without continuity,
-representatives, a limiting cone, affineness, qcqs hypotheses or filteredness.
-Source: Stacks Project, Tags 0EYM (the square in the second proof), 03Q8
-(higher-direct-image evaluation), 03CB (inverse-image composition) and 09YQ
-(canonical cohomology maps). -/
+representatives, a limiting cone, affineness, qcqs hypotheses or filteredness
+(Stacks, Tags 0EYM, 03Q8, 03CB and 09YQ). -/
 theorem exists_cartesianChart_cohomology_comparison
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

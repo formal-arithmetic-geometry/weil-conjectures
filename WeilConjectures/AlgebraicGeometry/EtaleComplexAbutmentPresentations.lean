@@ -28,10 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Transport a first-page colimit comparison across a final reindexing.
-Source: Stacks Project, Tag 0032, final reindexing of filtered systems.
-
-The proof uses the canonical isomorphism between a colimit and the colimit of its
-whiskering by a final functor, and the first-page comparison equations. -/
+(Stacks, Tag 0032). -/
 theorem reindex_first_page_comparison
     {I : Type u} [SmallCategory I] {J : Type (u + 1)} [SmallCategory J]
     (R : J ⥤ I) (hR : R.Final)
@@ -85,8 +82,7 @@ set_option linter.unusedVariables false in
 set_option maxHeartbeats 700000 in
 -- The dependent page and quotient witnesses require elaboration together.
 /-- Construct the functorial pages and abutment quotient projections, without continuity.
-Source: Stacks Project, Tags 015J and 015K; Tag 0EZM, proof of
-lemma-colimit-variant-complexes. -/
+Source: Stacks Project, Tags 015J and 015K; Tag 0EZM. -/
 theorem exists_etale_complex_abutment_presentations
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

@@ -25,10 +25,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Choose finite ideal generators and compatible numerators for one affine chart.
-
-Source: Stacks Project, Properties, Lemma 01PM, proof from the choice of generators
-through replacement of the numerators by further powers of the generators. -/
+/-- Choose finite ideal generators and compatible numerators for one affine chart (Stacks, Tag
+01PM). -/
 theorem affine_compatible_denominator_data
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

@@ -50,7 +50,8 @@ private theorem nonempty_iso_of_common_transitions
     simpa only [hP, smul_smul] using hab)
   rw [hQ, smul_smul, hc]
 
-/-- Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE, proof. -/
+/-- Invertible modules on the closed pieces of a finite cover with discrete overlaps glue to an
+invertible module on `Y` (Stacks, Tag 09NE). -/
 theorem existsGluedInvertible
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

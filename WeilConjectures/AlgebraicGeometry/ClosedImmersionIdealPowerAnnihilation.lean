@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An ideal-power-annihilated quasi-coherent module remains annihilated by the
 inverse image ideal after closed pushforward and any module isomorphism.
-Source: Stacks Project, proof of Theorem 088E and Tags 01Y9, 01I8. -/
+(Stacks, Tag 088E) -/
 theorem closedImmersion_idealPower_annihilation
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     (L : Z.IdealSheafData) (t : ℕ) (F : Z.Modules) [F.IsQuasicoherent]

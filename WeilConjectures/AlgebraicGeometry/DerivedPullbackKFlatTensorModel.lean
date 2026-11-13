@@ -242,8 +242,7 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
 set_option maxHeartbeats 400000 in
 -- Elaborating the representative comparison requires several concrete tensor structures.
 /-- The comparison on K-flat cochain representatives, before localization in either
-variable. Source: Stacks Project, Cohomology, Tags 079U, 06YC and 06YH; steps 1 and 2
-and the representative naturality calculation of the parent proof. -/
+variable (Stacks, Tags 079U, 06YC and 06YH). -/
 theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

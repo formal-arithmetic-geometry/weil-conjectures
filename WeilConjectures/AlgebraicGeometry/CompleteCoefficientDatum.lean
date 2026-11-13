@@ -16,9 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Adic coefficient datum and reduction tower
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md, order 1255.
-
 The construction uses one K-flat model with flat terms. Quotient reductions are actual
 changed complexes. The ordinary balancing and transition maps are specified uniquely on
 local tensor generators; their images under localization are the canonical derived maps.
@@ -57,8 +54,7 @@ noncomputable def adicQuotientPerfect (Λ : Type t) [CommRing Λ] (I : Ideal Λ)
     ((DerivedCategory.singleFunctor (ModuleCat.{t} Λ) 0).obj (ModuleCat.of Λ (Λ ⧸ I ^ n)))
 
 /-- Precisely the coefficient hypotheses, without an assumption of I-adic completeness,
-finiteness of the quotient sets, or flatness of any quotient.
- -/
+finiteness of the quotient sets, or flatness of any quotient. -/
 structure CompleteCoefficientDatum (Λ : Type t) [CommRing Λ] where
   ideal : Ideal Λ
   noetherian : IsNoetherianRing Λ

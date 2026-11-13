@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedComponentDescentTopology
 /-!
 # Finite descent of irreducible components from a separable closure
 
-Source: Stacks Project, Tag 04KZ, parts (1) and (2), and Tag 054R.
+## References
+
+* Stacks Project, Tags 04KZ, 054R
 -/
 
 @[expose] public section
@@ -26,9 +28,8 @@ open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 
 /-- When the base change to a separable closure has finitely many components, one finite
-intermediate field makes the inverse image of each component a single component.
-
-Source: Stacks Project, Tag 04KZ, parts (1) and (2), and the proof of Tag 054R. -/
+intermediate field makes the inverse image of each component a single component
+(Stacks, Tags 04KZ, 054R). -/
 theorem exists_finite_intermediateField_component_preimages {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f]
     (hfinite : (irreducibleComponents

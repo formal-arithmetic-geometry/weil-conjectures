@@ -13,8 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 
 /-! # The ordinary kernel of consecutive flat coefficient reductions
 
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), and
-sites-cohomology.tex, Tags 06YS and 06YY.
+## References
+
+* Stacks Project, Tags 09C2, 06YS and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -241,8 +242,8 @@ private theorem adicFiniteReduction_tensor_presentation
   exact (congrArg (fun (x : (finite T A J n).obj.obj U) ↦
     tensorSection (quotient T A J n) M U x m) h).trans ht.symm
 
-/-- Multiplication by the residue ideal kills the concrete transition kernel.
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1). -/
+/-- Multiplication by the residue ideal kills the concrete transition kernel
+(Stacks, Tag 09C2). -/
 theorem adicFiniteCoefficientKernel_annihilated
     (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     let L := RingHom.ker (adicFiniteFactor J (Nat.le_succ n))
@@ -261,8 +262,8 @@ theorem adicFiniteCoefficientKernel_annihilated
   apply Ideal.Quotient.eq_zero_iff_mem.mpr
   simpa only [← pow_add, Nat.add_comm 1 (n + 1)] using Ideal.mul_mem_mul a.property hb'
 
-/-- The actual successive ideal quotient, with its action of A/J obtained by quotient lift.
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1). -/
+/-- The actual successive ideal quotient, with its action of A/J obtained by quotient lift
+(Stacks, Tag 09C2). -/
 def adicFiniteCoefficientKernelModule
     (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) : ModuleCat.{w} (adicFiniteCoeff J 0) :=
   let L := RingHom.ker (adicFiniteFactor J (Nat.le_succ n))
@@ -271,8 +272,8 @@ def adicFiniteCoefficientKernelModule
     (adicFiniteCoefficientKernel_annihilated A J n).module
   ModuleCat.of (adicFiniteCoeff J 0) L
 
-/-- Constant-module sheafification of the concrete successive ideal quotient.
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1). -/
+/-- Constant-module sheafification of the concrete successive ideal quotient
+(Stacks, Tag 09C2). -/
 def adicFiniteCoefficientKernelSheaf {C : Type w} [SmallCategory C]
     (T : GrothendieckTopology C) (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     Mod (constant T (adicFiniteCoeff J 0)) :=
@@ -353,10 +354,8 @@ private def adicFiniteComplexKernel
     exact congrArg (fun a ↦ a.f q) hm
 
 /-- Flat tensor commutes with the concrete consecutive-reduction kernel.
-This statement uses only ordinary module sheaves and complexes.
-
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1), and
-Modules on Sites, Tags 03CY, 03EK and 03ER. -/
+This statement uses only ordinary module sheaves and complexes
+(Stacks, Tags 09C2, 03CY, 03EK and 03ER). -/
 theorem adicFiniteTransitionKernel_tensor
     {C : Type w} [SmallCategory C] (T : GrothendieckTopology C)
     (A : Type w) [CommRing A] (J : Ideal A)

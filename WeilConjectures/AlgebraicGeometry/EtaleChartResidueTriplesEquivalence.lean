@@ -42,7 +42,8 @@ private theorem affine_global_sections_faithful
 
 -- The legacy statement has unused diagram lets; keep its signature unchanged.
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, proof of Tag 04HX, first paragraph, and Remark Tag 04HT. -/
+/-- The opposite of the category of pointed affine chart neighbourhoods is equivalent to the
+category of residue-field triples. (Stacks, Tags 04HX and 04HT) -/
 /- The affine chart construction supplies an equivalence of the indexing categories.
 The construction follows affine-spectrum duality and residue-point factorization.
 The proof constructs object and morphism maps, proves full faithfulness by
@@ -87,11 +88,10 @@ theorem etale_chart_residue_triples_equivalence_functor
   exact ⟨H.asEquivalence⟩
 
 
-/- The unused arbitrary-equivalence ring-compatibility assertion was retired.
-Abstract equivalences need not preserve the pointed ring diagram.
-The source's compatible equivalence is constructed in the theorem below.
- -/
-/-- -/
+/- Abstract equivalences need not preserve the pointed ring diagram; the compatible
+equivalence is constructed in the theorem below. -/
+/-- The opposite of the category of pointed affine chart neighbourhoods is equivalent to the
+category of residue-field triples, compatibly with the pointed ring diagrams. -/
 theorem etale_chart_residue_triples_equivalence
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

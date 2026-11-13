@@ -28,9 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The affine calculation in finiteness descent, with a common affine base open.
-
-Source: Stacks Project, Limits, proof of Tag 01ZO, and Algebra, Tag 07RG. -/
+/-- The affine calculation in finiteness descent, with a common affine base open
+(Stacks, Tags 01ZO and 07RG). -/
 theorem exists_isFinite_morphismRestrict_baseChange_affine_base_piece
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

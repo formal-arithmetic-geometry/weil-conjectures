@@ -26,45 +26,9 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 0A50 and its proof.
-
-The two sequences have their actual pullback restriction maps and the same difference sign.
-The maps `pU`, `pV`, `pI` are restricted pullback followed by the inverse-image composition
-identifications. All three kinds of squares commute, in every degree.
-The intersection on Y is written as `g ⁻¹ᵁ (U ⊓ V)`, equal to the intersection of the
-two inverse-image opens. Products represent two-summand direct sums of abelian groups.
-Connecting maps are existential, as in lem-weil-pbc-etale-mayer-vietoris.
-
-Proof (the five steps of the node):
-1. Choose bounded below injective resolutions I of G and J of g⁻¹G
-   (lem-weil-pbc-module-sheaves-enough-injectives,
-   lem-weil-pbc-left-exact-injective-resolution-degree-zero,
-   lem-weil-pbc-dplus-injective-representative). Exact inverse image and K-injectivity
-   give a chain map β : g⁻¹I → J over the augmentations
-   (prop-weil-pbc-inverse-image-exact, lem-weil-pbc-kinjective-hom-derived).
-   The possible augmentation homotopy is zero, since J vanishes in degree -1.
-   Pullback is H^q of β after the adjunction unit on sections
-   (lem-weil-pbc-cohomology-pullback-functorial,
-   prop-weil-pbc-cohomology-resolution-independent, def-weil-pbc-cohomology-pullback).
-2. For W = X, U, V, U ∩ V, define φ_W(a) = β(W′)(η_g(a)).
-   Base change identifies W′ with its inverse-image open
-   (lem-weil-pbc-open-fibre-product, def-weil-pbc-direct-image). Naturality of the unit
-   and β makes these maps commute with restriction, hence gives a morphism of the
-   two short exact sequences of complexes of sections, with the same difference sign
-   (def-weil-pbc-inverse-image, lem-weil-pbc-etale-mayer-vietoris).
-3. Naturality of the homology long exact sequence gives all three squares
-   (lem-weil-pbc-complex-ses-long-exact-naturality).
-4. Identify H^q(φ_W) with restricted pullback followed by H^q of the composition
-   comparison. Restricted resolutions remain injective and their sections identify
-   with sections on W (lem-weil-pbc-cohomology-pullback-functorial,
-   lem-weil-pbc-etale-inverse-image-restriction). The comparison is
-   lem-weil-pbc-inverse-image-composition; its compatibility with the unit is
-   lem-weil-pbc-open-restriction-pullback-unit. The identity of the restricted J
-   lifts the coefficient comparison, giving H^q of that comparison
-   (prop-weil-pbc-cohomology-resolution-independent).
-5. Substitute these identifications into step 3. Independence of resolutions and
-   comparison maps follows from lem-weil-pbc-etale-mayer-vietoris and
-   lem-weil-pbc-cohomology-pullback-functorial. -/
+/-- The two Mayer-Vietoris sequences, for `G` on `X` and for `g⁻¹G` on `Y`, are compatible with
+pullback: all squares commute in every degree (Stacks, Tag 0A50). The maps `pU`, `pV`, `pI`
+are restricted pullback followed by the inverse-image composition identifications. -/
 theorem etale_mayerVietoris_pullback
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

@@ -14,7 +14,9 @@ import Mathlib.Topology.Sheaves.Sheaf
 
 /-! # Unique section lifts of compatible quotient morphisms
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, proof.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section
@@ -119,11 +121,8 @@ private theorem compatible_sections_lift_of_affine {X : Scheme.{u}}
     exact (congrArg (fun l ↦ l.val n) hl').trans (hs n U).symm
 
 /-- Every compatible family of maps between the completed quotient terms has a
-unique lift to compatible sections of the quotients of internal Hom. The maps e
-are required to be the quotient factorizations of postcomposition.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, affine-local proof;
-Lemma 087W, and Algebra, Lemmas 00MA and 00MB; More on Algebra, Lemma 087R. -/
+unique lift to compatible sections of the quotients of internal Hom, where the maps `e`
+are the quotient factorizations of postcomposition (Stacks, Tags 0882, 087W). -/
 theorem completion_internal_hom_sections_lift {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

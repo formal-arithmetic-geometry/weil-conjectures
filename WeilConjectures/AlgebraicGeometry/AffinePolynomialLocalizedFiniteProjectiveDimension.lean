@@ -28,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Each prime localization of the coordinate algebra has finite projective dimension
-as a module over the localized polynomial ring.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1), using Tag 068X. -/
+as a module over the localized polynomial ring (Stacks, Tags 069C and 068X). -/
 theorem affinePolynomial_localized_finiteProjectiveDimension_of_stalkwise
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

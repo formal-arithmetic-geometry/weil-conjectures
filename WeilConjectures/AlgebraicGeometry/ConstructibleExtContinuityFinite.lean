@@ -6,9 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.ConstantModelExtContinuity
 /-! Finite-coefficient arbitrary-scheme Ext continuity.
-Source: blueprint `sk-lem-constructible-ext-continuity`, clause (1).
-The proof must assemble affine-local finite constant models into the required
-filtered derived-Hom factorization, without imposing Noetherian hypotheses.
 -/
 @[expose] public section
 set_option autoImplicit false

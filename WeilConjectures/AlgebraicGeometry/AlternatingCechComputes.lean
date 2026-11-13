@@ -90,17 +90,9 @@ private theorem orderedDifferential_squared (X : Scheme.{u}) {I : Type v}
     orderedRestriction_comm, ← Category.assoc, S.differential_squared]
   simp
 
-/-- The alternating Čech comparison for a Zariski open covering.
-
-`S` is any choice of the intersections and their restriction maps, as in
-`def-weil-pbc-site-cech-complex`. Its product universal properties on the poset
-of opens identify `S.W p t` with the intersection of the `U (t i)`.
-The simultaneous degree identifications `e` identify `A` with the products
-on strictly increasing tuples. The first clause specifies its differential,
-the second specifies restriction, and the last says that this very map induces
-isomorphisms on cohomology. Nonnegative indexing represents zero negative terms.
-Source: Stacks Project, Cohomology of Sheaves, Section 20.23, Definitions
-20.23.2 and 20.23.4 and Lemmas 20.23.3, 20.23.5, 20.23.6 (Tags 01FJ, 01FK, 01FM). -/
+/-- The alternating Čech comparison for a Zariski open covering: the complex of products over
+strictly increasing tuples, with the restriction map from the full Čech complex, computes
+Čech cohomology (Stacks, Tags 01FJ, 01FK and 01FM). -/
 theorem alternatingCechComputes
     (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens)
     (hU : iSup U = ⊤)

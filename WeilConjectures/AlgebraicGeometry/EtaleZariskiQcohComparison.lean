@@ -167,11 +167,7 @@ The morphisms `m` have exactly the prescribed components `Γ(U, u^*φ)`. The fam
 is chosen simultaneously for all quasi-coherent modules and all nonnegative degrees.
 In degree zero, its value on the canonical image of a global section is that section
 pulled back to the terminal étale object, i.e. the identity under `id_X^*F ≅ F`.
-We use the standard large Ext model of étale cohomology `Sheaf.H`; it computes the
-right-derived global sections of `def-weil-pbc-etale-cohomology`. This changes no sheaf
-or section group and places no smallness hypothesis on `X` or `F`.
-
-Source: Stacks Project, Descent, Proposition 03DW (2), and Étale Cohomology, Theorem 03P2. -/
+Étale cohomology is the large Ext model `Sheaf.H` (Stacks, Tags 03DW, 03P2). -/
 theorem etale_zariski_qcoh_comparison (X : Scheme.{u}) :
     ∃ m : ∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent],
         (F ⟶ G) → (etaleTensorSectionsSheaf F ⟶ etaleTensorSectionsSheaf G),

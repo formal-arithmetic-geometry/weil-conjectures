@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummer
 /-!
 # Exact derived realization of Cartier classes
 
-Source: blueprint main-20261015, det-sp-p1-trace, clause 3: the canonical
-identification of the Ext cycle class with its derived closed-image arrow.
+The canonical identification of the Ext cycle class with its derived closed-image arrow.
 
 The predicate uses the existing exact-direct-image realization, with specified
 source and target isomorphisms. It applies to any exact additive functor.

@@ -99,9 +99,7 @@ private theorem commonStratification (s : Finset ℤ)
 
 /-- A finite constant tensor factor preserves constructibility degree by degree.
 There is no lower bound or flatness assumption on the constant factor.
-
-Source: Stacks Project, proetale.tex, Tag 09BQ, lemma-tensor-c;
-sites-cohomology.tex, Tag 094H, lemma-locally-constant-tensor-product. -/
+(Stacks, Tags 09BQ, 094H) -/
 theorem coefficientConstructible_constantTensor (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (K : adicFiniteAmbient.{u, v} X A)

@@ -126,9 +126,7 @@ private noncomputable def intersectComplexIso
 
 
 /-- Evaluating the categorical Čech complex of the intersection presheaf gives
- the concrete Čech complex for the family intersected with the evaluating open.
-
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1, Čech coordinates. -/
+ the concrete Čech complex for the family intersected with the evaluating open. -/
 theorem cech_evaluation_comparison
     {X : TopCat.{u}} {ι : Type u} {R : Type u} [Ring R]
     (U : ι → Opens X) (P : (Opens X)ᵒᵖ ⥤ ModuleCat.{u} R) (V : Opens X) :

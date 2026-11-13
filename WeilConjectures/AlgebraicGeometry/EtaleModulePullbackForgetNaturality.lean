@@ -28,8 +28,7 @@ open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Etale
 
 /-- Module inverse image commutes naturally with passage to underlying abelian sheaves.
-Source: Stacks Project, Tags 03D3 and 03D7, and the restriction of module coefficients
-in the proof of Tag 09ZE (first sentence). -/
+(Stacks, Tags 03D3, 03D7 and 09ZE) -/
 theorem exists_upperStar_forget₂_natIso (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Nonempty ((f)^*[ModuleCat.{u + 1} Λ] ⋙

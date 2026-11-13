@@ -30,9 +30,7 @@ local macro_rules
 -- The dependent first-page and graded-class witnesses are elaborated together.
 set_option linter.unusedVariables false in
 /-- Sheaf continuity gives the canonical isomorphism on each first-page term.
-Only the first-page dictionary is used; no stable-page or abutment assertion
-is part of this conclusion.
-Source: Stacks Project, Tag 0EZM, proof of Lemma 59.52.1, and Theorem 59.51.3 (09YQ). -/
+(Stacks, Tags 0EZM and 09YQ). -/
 theorem etale_complex_first_page_continuity
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

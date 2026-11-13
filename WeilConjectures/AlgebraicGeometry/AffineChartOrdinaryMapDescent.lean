@@ -41,8 +41,8 @@ private theorem ordinaryChartBaseModule_finitePresentation
   exact Scheme.Modules.finitePresentation_sections_of_isFinitePresentation P
     (isAffineOpen_top (pullback r g))
 
-/-- Ordinary pullback maps of two fixed modules on one affine chart descend.
-Source: Stacks Project, Tag 01ZR, affine proof; Tag 05N7 (2). -/
+/-- Ordinary pullback maps of two fixed modules on one affine chart descend (Stacks, Tags 01ZR,
+05N7). -/
 theorem affine_chart_ordinary_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

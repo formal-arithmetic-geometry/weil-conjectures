@@ -103,7 +103,7 @@ private theorem singleton_chart
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An equivariant geometric-point map is realized on a neighbourhood of each source point.
-Source: Stacks Project, Tag 03QR, finite-spectrum classification in the equivalence proof. -/
+(Stacks, Tag 03QR). -/
 theorem etaleFieldPointMap_local
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (X Y : Scheme.Etale (Spec (CommRingCat.of K)))

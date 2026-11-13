@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorComparison
 /-!
 # Tensor-product presentation of an affine base piece
 
-Source: Stacks Project, Limits, proof of Tag 01ZO, the affine reduction, with
-Tags 01YX and 01YW.
+## References
+
+* Stacks Project, Tags 01ZO, 01YX and 01YW
 -/
 
 @[expose] public section
@@ -31,10 +32,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Present all base changes of an affine piece by one finite type algebra map.
-
-Source: Stacks Project, Limits, proof of Tag 01ZO, affine reduction, and
-Tags 01YX and 01YW. -/
+/-- Present all base changes of an affine piece by one finite type algebra map
+(Stacks, Tags 01ZO, 01YX and 01YW). -/
 theorem exists_affine_base_piece_tensor_presentation
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

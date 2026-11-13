@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FlatOverAffineOpenRestriction
 
 /-! # Affine locality for relatively flat canonical module base change
 
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Step 1 (local affine reduction),
-and Stacks Project, Tag 08IB, first paragraph of the proof.
+## References
+
+* Stacks Project, Tag 08IB
 -/
 
 @[expose] public section
@@ -32,9 +33,8 @@ namespace AlgebraicGeometry
 
 /-- The affine computation makes the restriction of the canonical composite invertible
 on an affine open W mapping into an affine open V of the base. This lemma identifies
-restricted maps and transports cartesian squares; it does not detect global invertibility.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Step 1; Stacks Tag 08IB,
-first paragraph of the proof, and Tag 08HY for the canonical mate. -/
+restricted maps and transports cartesian squares; it does not detect global invertibility
+(Stacks, Tags 08IB and 08HY). -/
 theorem canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

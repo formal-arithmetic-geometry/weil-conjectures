@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # A coherent source for compatible twisted sections
 
-Source: Stacks Project, proof of Lemma 0885 (lemma-existence-projective).
+Source: Stacks Project, Tag 0885.
 -/
 
 @[expose] public section
@@ -30,10 +30,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible sections of an invertibly twisted inverse system, finitely generating
 at level zero, give compatible maps from a coherent module, epi at level zero.
-This concerns ordinary module maps only, without adic quotients or completion.
-
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885
-(lemma-existence-projective), the displayed maps from the finite negative twist sum. -/
+This concerns ordinary module maps only (Stacks, Tag 0885). -/
 theorem coherent_cover_from_compatible_twisted_sections
     {X : Scheme.{u}} [IsNoetherian X] (F : ℕᵒᵖ ⥤ X.Modules)
     (P : X.Modules) [P.IsInvertible]

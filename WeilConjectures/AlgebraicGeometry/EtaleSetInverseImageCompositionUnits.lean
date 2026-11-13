@@ -102,13 +102,10 @@ private lemma setPullComp_unit {X Y W : Scheme.{u}} (f : Y ⟶ X) (g : W ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Sites, Tags 03CB and 03CC; Étale Cohomology, Tag 09ZF,
-third paragraph of the proof.
-The inverse image `L e` is left Kan extension followed by sheafification, and `η[S, T] e`
-is the unit of its adjunction to restriction along base change. The isomorphisms
-are natural in the sheaf, preserve pulled-back sections, are unique even for a
-fixed sheaf, and satisfy associativity. The base-change comparison in the section
-formula is the canonical fibre-product pasting isomorphism. -/
+/-- The inverse image `L e` is left Kan extension followed by sheafification, and `η[S, T] e`
+is the unit of its adjunction to restriction along base change. The composition isomorphisms
+are natural, unique unit-compatible, and satisfy associativity
+(Stacks, Tags 03CB, 03CC, 09ZF). -/
 theorem etaleSetInverseImageCompositionUnits :
     (∀ (S T : Scheme.{u}) (e : T ⟶ S)
       (G : Sheaf S.smallEtaleTopology (Type (u + 1)))

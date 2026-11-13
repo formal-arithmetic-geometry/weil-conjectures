@@ -29,8 +29,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Local sections whose unit equations hold on the entire closed base changes.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, through the equation
-`t|_{U_j times_X Z} = i⁻¹s_j`. -/
+(Stacks, Tag 09ZF) -/
 theorem etale_closed_section_local_family
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

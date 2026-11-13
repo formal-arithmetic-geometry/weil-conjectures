@@ -14,11 +14,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The stabilized kernel images admit a compatible system of representatives.
-
-Source: Stacks Project, Lemma 087X, construction of claims (a)--(b).
-The proof restricts the stabilized image inclusions on a finite affine cover and
-glues the resulting compatible quasi-coherent systems.
--/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_stabilized_system {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ)

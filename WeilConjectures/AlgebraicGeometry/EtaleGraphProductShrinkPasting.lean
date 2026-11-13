@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProductShrinkSquare
 
 /-! # Shrinking the three supports in the product interchange grid
 
-Source: Stacks Project, Tag 0F7J, cancellation of the graph triangles in A--F;
-the product-graph extension in lem-pur-etale-graph-product-row-pasting.
+Source: Stacks Project, Tag 0F7J.
 -/
 
 @[expose] public noncomputable section

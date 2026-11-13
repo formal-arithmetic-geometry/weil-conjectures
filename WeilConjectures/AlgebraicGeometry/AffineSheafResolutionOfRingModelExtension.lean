@@ -105,8 +105,7 @@ private theorem pushforward_toSpecΓ_isQuasicoherent
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The associated-sheaf/global-sections counit is natural on any affine scheme,
-and invertible on quasi-coherent modules.
-Source: Stacks Project, Lemma 26.7.5 (Tag 01IB)., proof step 1. -/
+and invertible on quasi-coherent modules (Stacks, Tag 01IB). -/
 private theorem exists_affineChart_counit (X : Scheme.{u}) [IsAffine X] :
     ∃ ε : SheafOfModules.evaluation.{u} X.ringCatSheaf (.op ⊤) ⋙
         (tilde.functor Γ(X, ⊤) ⋙ restrictFunctor X.toSpecΓ) ⟶ 𝟭 X.Modules,

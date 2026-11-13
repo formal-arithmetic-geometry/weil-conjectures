@@ -161,9 +161,8 @@ private lemma plus_single_natIso {C D : Type*} [Category C] [Category D]
   exact derived_single_natIso e n X
 
 
-/-- The single-complex comparisons commute with the derived pullback composition.
-Source: Stacks Tags 0D6D and 09Z1. Proof: the degreewise single-complex equality,
-transported through the derived localization and its fully faithful plus inclusion. -/
+/-- The single-complex comparisons commute with the derived pullback composition
+(Stacks, Tags 0D6D and 09Z1). -/
 private theorem abelianUpperStarPlusComp_single
     {T T₁ T₂ : Scheme.{v}} (b : T₁ ⟶ T₂) (a : T₂ ⟶ T)
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) :

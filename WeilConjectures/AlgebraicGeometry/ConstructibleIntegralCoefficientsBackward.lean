@@ -176,9 +176,7 @@ private theorem integralFiniteLocal {Y : Scheme.{u}}
   infer_instance
 
 /-- Backward direction of `isConstructibleSheaf_integral_iff`.
-The proof refines finite set-valued trivializations so that the finite group
-operation tables are constant; these are then integral-module trivializations.
-Source: Stacks Project Tags 03RW and 095E; blueprint q1-constructible-integral-coefficients. -/
+(Stacks, Tags 03RW and 095E) -/
 theorem isConstructibleSheaf_integral_backward {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : X.IsTorsionAbelianSheaf F) :

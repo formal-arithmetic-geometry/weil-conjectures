@@ -18,8 +18,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-!
 # Pushforward of ideal powers along a closed immersion
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 088A, lines 6961--6968;
-Morphisms, Lemmas 01QO and 01QY.
+## References
+
+* Stacks Project, Tags 088A, 01QO and 01QY
 -/
 
 @[expose] public section
@@ -56,7 +57,7 @@ private theorem quotientπ_map {X : Scheme.{u}} (I : X.IdealSheafData)
 
 /-- Pushforward along a closed immersion identifies powers of an extended ideal with
 powers of the original ideal, and identifies the resulting quotient modules.
-Source: Stacks Project, proof of Lemma 088A, lines 6961--6968. -/
+(Stacks, Tag 088A) -/
 theorem closedImmersion_pushforward_idealPowers
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (I : X.IdealSheafData) :

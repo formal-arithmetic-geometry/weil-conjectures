@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Cohomology of the affine algebra derived unit
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -51,8 +53,7 @@ private theorem restriction_exact {Z : TopCat.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Under the cohomology comparison, the derived affine algebra unit is the
-underived unit applied to the cohomology module.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof. -/
+underived unit applied to the cohomology module (Stacks, Tag 0AVW). -/
 theorem affine_algebra_derived_unit_homology_factorization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

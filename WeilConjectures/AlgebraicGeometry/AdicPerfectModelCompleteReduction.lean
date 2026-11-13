@@ -50,13 +50,15 @@ import Mathlib.RingTheory.Nilpotent.Lemmas
 /-!
 # Completeness and residue reduction of completed perfect models
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication;
-Stacks Tags 093J, 093M, 099Q, 06YQ and 0E8K.
-
 We use the equivalent coefficient-sized small model of the pro-etale site. The ring
 and the module universe are independent of the scheme universe. Positive exponents
 are indexed by n : ℕ, meaning n+1. In particular the residue field is A/I^(0+1).
 All helpers below only name the actual complexes and maps in the assertion.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, reverse implication
+* Stacks Project, Tags 093J, 093M, 099Q, 06YQ and 0E8K
 -/
 
 @[expose] public noncomputable section
@@ -965,34 +967,8 @@ open AdicPerfectModel
 attribute [local irreducible] ConstantCompletion.completed
 
 /-- Completed bounded finite-projective models are locally derived complete and their
-canonical derived residue comparison is an isomorphism, on the site and every slice.
-Source: Bhatt--Scholze 6.6.11, reverse implication; Stacks 093J, 093M, 099Q, 06YQ, 0E8K.
-
-Proof, following the seven DAG steps:
-1. Split each finite-projective P^i off a finite free module. Constant sheaves preserve
-   the splitting, so B tensor P^i is the image of the same idempotent on B^r. Sectionwise
-   limits identify this with lim_n of the constant sheaves P^i/I^n P^i, including rank zero.
-2. Noetherianity makes I finitely generated. Torsion-limit completeness applies to these
-   inverse limits and their bounded complex. Restriction of scalars preserves and reflects
-   local derived completeness for the extended ideal, giving completeness over B.
-3. The constant-completion quotient theorem identifies B/IB with the constant residue field,
-   through the first projection. It assumes no finite underlying residue set or regularity.
-4. Each term is a retract of a finite free B-module, hence flat. Bounded-above flat complexes
-   are K-flat, so the universal derived-change-of-rings counit computes reduction ordinarily.
-5. The displayed tensor-generator formula is balanced, natural in the differential, and
-   invertible on finite free modules and their retracts. It gives the canonical chain
-   isomorphism; its composite with the universal counit is the asserted derived isomorphism.
-6. Exactness of constant realization identifies cycles, boundaries and cohomology. The
-   algebraic residue terms are finite-dimensional vector spaces, hence so is their
-   cohomology. Both complexes have zero terms, hence zero cohomology, outside [a,b].
-7. Localization identifies the slice with the pro-etale site of the covering object.
-   Restriction is exact, commutes with tensor and preserves K-flat complexes and limits.
-   Restrict the same chain comparison and apply the preceding argument on the slice.
-   This works for every object, so in particular every covering slice, and for a>b.
-
-The kernel of the first projection is IB by the Noetherian constant-completion quotient
-identification. Thus HasCompleteResidueCalculation uses exactly local derived IB-completeness.
-No completeness or localness assumption on A, or perfectness of its quotients, is used. -/
+canonical derived residue comparison is an isomorphism, on the site and every slice
+(Bhatt--Scholze, Proposition 6.6.11; Stacks, Tags 093J, 093M, 099Q, 06YQ and 0E8K). -/
 theorem adicPerfectModel_complete_reduction
     (T : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (_hI : I.IsMaximal)

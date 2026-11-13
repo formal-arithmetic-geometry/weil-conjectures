@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
-/-- Exact colimits commute with homology of short complexes. The proof follows the
-functor-category comparison used by `FiniteEtaleCechFilteredColimit`. -/
+/-- Exact colimits commute with homology of short complexes. -/
 private theorem shortComplexHomologyColimit
     (C : Type*) [Category* C] [Abelian C]
     (I : Type u) [SmallCategory I] [HasColimitsOfShape I C]
@@ -110,8 +109,7 @@ local instance instHasColimitsOfShape_derivedAmbientDirectSumsHomology
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 /-- Cohomology of a termwise coproduct is the coproduct of the cohomologies, with the
-canonical map induced by the coprojections.
-Source: Stacks Project, Derived Categories of Schemes, proof of Lemma 08DT. -/
+canonical map induced by the coprojections. (Stacks, Tag 08DT) -/
 theorem derivedAmbientDirectSumsHomology (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) (E : I → schemeDerivedCategory X)

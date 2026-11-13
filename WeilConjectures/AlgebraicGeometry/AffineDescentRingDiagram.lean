@@ -83,13 +83,13 @@ noncomputable def affineDescentRingCocone : Cocone (affineDescentRings R i t) wh
           change Spec.map (c.ι.app k.val) ≫ Spec.map (R.map _) = Spec.map (c.ι.app j.val)
           rw [← Spec.map_comp, c.w (homOfLE (leOfHom f))]
         simpa [affineDescentRings] using congrArg Scheme.Hom.appTop h }
-/-- Sheafification through the morphism to the spectrum of the given ring.
-Source: Stacks Project, Tags 09RF and 06Z0. -/
+/-- Sheafification through the morphism to the spectrum of the given ring (Stacks, Tags 09RF,
+06Z0). -/
 noncomputable def affineDescentSheafification (Y : Scheme.{u}) (A : CommRingCat.{u})
     (r : A ⟶ Γ(Y, ⊤)) : ModuleCat.{u} A ⥤ Y.Modules :=
   tilde.functor A ⋙ Scheme.Modules.pullback (Y.toSpecΓ ≫ Spec.map r)
 
-/-- -/
+/-- `affineDescentSheafification` preserves zero morphisms. -/
 instance affineDescentSheafification_preservesZeroMorphisms
     (Y : Scheme.{u}) (A : CommRingCat.{u}) (r : A ⟶ Γ(Y, ⊤)) :
     (affineDescentSheafification Y A r).PreservesZeroMorphisms := by

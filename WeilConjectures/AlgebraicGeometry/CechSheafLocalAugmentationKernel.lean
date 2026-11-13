@@ -10,10 +10,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
-/-! # The degree-zero kernel of a locally restricted Cech augmentation
-
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
--/
+/-! # The degree-zero kernel of a locally restricted Cech augmentation -/
 
 @[expose] public section
 
@@ -59,8 +56,7 @@ private theorem augmentation_injective_on_open
   simpa only [← ConcreteCategory.comp_apply, ← F.presheafModuleCat.map_comp,
     ← op_comp, hr, op_id, F.presheafModuleCat.map_id, ConcreteCategory.id_apply] using hh
 
-/-- A zero cocycle on an open inside a member of the family is a restriction family.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1. -/
+/-- A zero cocycle on an open inside a member of the family is a restriction family. -/
 private theorem cech_local_zero_cocycle_reconstruction
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (i : ι) (V : X.Opens) (hV : V ≤ U i)
@@ -219,8 +215,7 @@ private theorem restricted_kernel_of_sectionwise
       change el.inv ≫ el.hom ≫ kernel.ι bb = kernel.ι bb
       exact el.inv_hom_id_assoc _))⟩
 
-/-- The restricted augmentation is the kernel of the first differential.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1. -/
+/-- The restricted augmentation is the kernel of the first differential. -/
 theorem augmented_cech_sheaf_restrict_kernel
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

@@ -12,9 +12,12 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionIsIso
 
 /-! # Composition using the original derived-pullback presentation
 
-The universal functor and its counit are retained as one presentation. In particular,
-we do not select a fresh counit for an already fixed functor from the composition
-existence theorem. Source: Stacks Project, Tags 06YJ and 0D5S.
+The universal functor and its counit are retained as one presentation, rather than selecting a
+fresh counit for an already fixed functor.
+
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
 -/
 
 @[expose] public section
@@ -30,8 +33,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The tensor functor and universal counit in the original derived-pullback presentation.
-The additive instance is included so all homotopy functors use the same presentation.
-Source: Stacks Project, Tag 06YJ. -/
+The additive instance is included. (Stacks, Tag 06YJ) -/
 structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
   E : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
     SheafOfModules.{u} (moduleRings X.toRingedSpace)
@@ -51,13 +53,7 @@ structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
       CochainComplex.IsKFlatTensor (R := Y.sheaf) P →
         IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))
 
-/-- Project the complete original witness used to define `derivedPullback`.
-The choices project successive fields of that witness. We retain this primary counit
-once, rather than choosing a fresh counit for the fixed functor from a later existence
-statement. Its universal functor/counit pair is determined up to the compatible
-isomorphism used for derived computations. Irreducibility avoids unfolding the nested
-witness selections when using the field equations below.
-Source: Stacks Project, Tag 06YJ. -/
+/-- The complete original witness used to define `derivedPullback`. (Stacks, Tag 06YJ) -/
 @[irreducible] noncomputable def recordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) :
     RecordedPullbackData f := by
   classical

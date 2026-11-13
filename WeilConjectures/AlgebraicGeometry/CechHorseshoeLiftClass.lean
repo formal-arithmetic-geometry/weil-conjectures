@@ -28,9 +28,7 @@ local instance instHasLimitsOfShape_cechHorseshoeLiftClass
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The images of the local difference cocycle and the global horseshoe cycle agree
-in total homology. This is a calculation about alpha and beta, without a cohomology
-boundary or a canonical comparison map.
-Source: Stacks Project, Cohomology, Tag 01EQ, double-complex proof, and Tag 0B8S. -/
+in total homology (Stacks, Tags 01EQ, 0B8S). -/
 theorem cech_horseshoe_lift_class (X : Scheme.{u})
     (S : ShortComplex X.Modules)
     (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)

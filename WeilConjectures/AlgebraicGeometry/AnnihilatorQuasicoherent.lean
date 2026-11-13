@@ -25,8 +25,8 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A subsheaf with the affine-annihilator image is quasi-coherent for a finite-type ideal.
-Source: Stacks Project, Tag 01PO, proof of (1). -/
+/-- A subsheaf with the affine-annihilator image is quasi-coherent for a finite-type ideal
+(Stacks, Tag 01PO). -/
 theorem annihilator_subsheaf_quasicoherent (X : Scheme.{u}) (J : X.IdealSheafData)
     [J.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent]
     (G : X.Modules) (ι : G ⟶ F) [Mono ι]

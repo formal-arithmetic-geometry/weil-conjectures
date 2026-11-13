@@ -27,7 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A local representative can be shrunk so its unit equation holds everywhere on
-its closed base change. Source: Stacks Project, Tag 09ZF, fourth proof paragraph. -/
+its closed base change.
+(Stacks, Tag 09ZF) -/
 theorem etale_closed_section_shrink
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

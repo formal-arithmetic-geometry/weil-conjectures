@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstantClosedEffaceme
 
 /-! # Effacing constructible finite module coefficients on a closed subscheme
 
-Source: Stacks Project, Tag 09ZE, constructible finite-pushforward step of the proof.
+## References
+
+* Stacks Project, Tag 09ZE
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The constructible finite-module part of affine closed-subscheme effacement.
-
-Source: Stacks Project, Tag 09ZE, proof, constructible case; Tags 09Z7 and 09ZD. -/
+(Stacks, Tags 09ZE, 09Z7 and 09ZD) -/
 theorem exists_constructible_module_mono_closed_cohomology_eq_zero
     {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

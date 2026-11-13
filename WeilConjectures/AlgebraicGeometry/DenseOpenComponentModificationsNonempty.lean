@@ -17,10 +17,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Dense-open component modification gluing for a nonempty finite family.
-The proof follows the componentwise construction in the parent theorem: remove all
-other components, restrict each dense isomorphism, and glue the resulting local
-isomorphisms. -/
+/-- Dense-open component modification gluing for a nonempty finite family. -/
 theorem exists_dense_open_isIso_component_modifications_of_pos
     (X : Scheme.{u}) [IsReduced X]
     (n : ℕ) (hn : 0 < n) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X)

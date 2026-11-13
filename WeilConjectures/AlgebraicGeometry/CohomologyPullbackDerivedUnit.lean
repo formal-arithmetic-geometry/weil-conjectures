@@ -15,19 +15,16 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 /-!
 # Cohomology pullback and the derived unit
 
-Source: Stacks Project, cohomology.tex, Lemmas 01EZ and 01F8, equations 01F9 and 01FA;
-sites-cohomology.tex, Remark 08J6 and Lemmas 072Z and 07A6.
+Stacks Project, Tags 01EZ, 01F8, 01F9, 01FA, 08J6, 072Z and 07A6.
 
 The Leray isomorphism used below is `Functor.rightDerivedFunctorPlusCompIso'` applied to
 `Etale.lowerStarCompGlobalSectionsIso`. Its type is a natural isomorphism on all of D⁺.
 `Sheaf.Γ` and its bounded below right derived functor are the recorded global-sections
 functors; their comparison with the unbounded version is canonical.
 
-The pullback `u^* : RΓ(X, K) ⟶ RΓ(Y, u⁻¹K)` on D⁺ of def-weil-pbc-cohomology-pullback (whose
-recorded declaration `Etale.cohomologyMap` covers only the sheaf case) is spelled inline as the
-derived comparison (`Functor.rightDerivedDesc`) of the section map `Γ(X, I) ⟶ Γ(Y, u⁻¹I)` given
-by the underived unit, followed by the unit of `RΓ(Y, -)`: on resolutions `I` and `u⁻¹I → J`
-it is the class of `a ↦ r(η(a))`.
+The pullback `u^* : RΓ(X, K) ⟶ RΓ(Y, u⁻¹K)` on D⁺ is spelled inline as the derived
+comparison (`Functor.rightDerivedDesc`) of the section map `Γ(X, I) ⟶ Γ(Y, u⁻¹I)` given
+by the underived unit, followed by the unit of `RΓ(Y, -)`.
 -/
 
 @[expose] public section
@@ -72,12 +69,8 @@ private theorem isIso_unit_of_kInjective
 
 namespace AlgebraicGeometry.Etale
 
-/-- A bounded below K-injective complex remains K-injective under direct image.
-Source: Stacks Project, Lemma 08BJ and Remark 08J6.
-Proof, step 3 of the node: inverse image is exact and left adjoint to direct image.
-For every acyclic complex `M`, maps `M → f_*J` up to homotopy correspond to maps
-`f⁻¹M → J`, which vanish since `f⁻¹M` is acyclic and `J` is K-injective.
-Boundedness is preserved because the additive direct image preserves zero objects. -/
+/-- A bounded below K-injective complex remains K-injective under direct image
+(Stacks, Tags 08BJ and 08J6). -/
 theorem lowerStar_isKInjective_boundedBelow {X Y : Scheme.{v}} (f : Y ⟶ X)
     (J : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [J.obj.IsKInjective] :
@@ -86,10 +79,9 @@ theorem lowerStar_isKInjective_boundedBelow {X Y : Scheme.{v}} (f : Y ⟶ X)
   exact Functor.PreservesKInjectiveComplexes.isKInjective_map J.obj
 
 /-- On a bounded below K-injective complex `J` the derived direct image and the derived global
-sections on both sites are computed by `J` itself: the units are isomorphisms, so the natural
-Leray isomorphism `Functor.rightDerivedFunctorPlusCompIso'`, characterized by its unit
-compatibility `Functor.rightDerivedFunctorPlusCompIso'_fac`, is the sectionwise identification.
-Source: Stacks Project, Lemma 01EZ and Remark 08J6. -/
+sections on both sites are computed by `J` itself, so the Leray isomorphism
+`Functor.rightDerivedFunctorPlusCompIso'` is the sectionwise identification
+(Stacks, Tags 01EZ and 08J6). -/
 theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
     (J : HomotopyCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [CochainComplex.IsKInjective J.obj.as] :
@@ -107,8 +99,7 @@ theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
 
 
 /-- Pullback of derived global sections is Γ of the derived unit followed by the natural
-Leray identification, for every bounded below derived object (including a sheaf in degree 0).
-Source: Stacks Project, Lemma 01F8 and equations 01F9 and 01FA. -/
+Leray identification, for every bounded below derived object (Stacks, Tags 01F8, 01F9 and 01FA). -/
 theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) :
     (Functor.rightDerivedDesc _

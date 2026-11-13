@@ -51,9 +51,7 @@ private theorem affine_zero_of_sections {T : Scheme.{u}} [IsAffine T]
     restrictFunctorCongr T.isoSpec.hom_inv_id ≪≫ restrictFunctorId).app N
   exact hz.of_iso e.symm
 
-/-- Serre vanishing over a specified affine open, without the global-cover step.
-
-Source: Stacks Project, Tag 02O1, proof of Lemma 30.16.2, and Tag 0B5T. -/
+/-- Serre vanishing over a specified affine open (Stacks, Tags 02O1, 0B5T). -/
 theorem exists_isZero_higherDirectImage_twist_on_affine_open
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f]
     (F : X.Modules) [F.IsQuasicoherent] (hF : RingedSpace.IsCoherent X.toRingedSpace F)

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionTwistVanishingStep
 
 /-! # Fixed-degree projective Serre vanishing
 
-Source: Stacks Project, Tag 01YS (4).
+## References
+
+* Stacks Project, Tag 01YS
 -/
 
 @[expose] public section
@@ -24,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Fixed-degree projective Serre vanishing, split from the affine restriction theorem.
-Source: Stacks Project, Tag 01YS (4), proof by descending induction. -/
+(Stacks, Tag 01YS (4)). -/
 theorem exists_isZero_closedImmersion_twist_degree
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

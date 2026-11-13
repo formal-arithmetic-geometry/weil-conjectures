@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed boundaries commute with one pullback and coefficient morphism.
-Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7. -/
+(Stacks, Tag 0A50) -/
 private theorem etaleMayerVietorisCanonicalBoundary_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V : X.Opens) (U' V' : Y.Opens)
     (hcover : U ⊔ V = ⊤) (hcover' : U' ⊔ V' = ⊤)
@@ -73,7 +73,7 @@ private theorem etaleMayerVietorisCanonicalBoundary_naturality
   rw [← hn, ha]
 
 /-- Naturality with specified source and target intersection opens.
-Source: Stacks Project, Tags 0A50 and 01F7, the preceding naturality identity. -/
+(Stacks, Tags 0A50 and 01F7) -/
 private theorem etaleMayerVietorisBoundaryOn_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V W : X.Opens) (U' V' W' : Y.Opens)
     (hW : W = U ⊓ V) (hW' : W' = U' ⊓ V')
@@ -98,7 +98,7 @@ private theorem etaleMayerVietorisBoundaryOn_naturality
     f U V U' V' hcover hcover' hU hV k hk F G φ I J cI cJ q x
 
 /-- Naturality of the fixed boundary interface.
-Source: Stacks Project, Tags 0A50 and 01F7, functorial resolution argument. -/
+(Stacks, Tags 0A50 and 01F7) -/
 theorem etaleMayerVietorisFixedBoundary_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V W : X.Opens) (U' V' W' : Y.Opens)
     (hW : W = U ⊓ V) (hW' : W' = U' ⊓ V')

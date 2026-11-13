@@ -22,9 +22,7 @@ open Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The exchange comparison equation for a bounded below K-injective source complex.
-Source: Stacks Project, sites-cohomology.tex, Lemma 0736 and Remark 07A7;
-derived.tex, Lemmas 070I, 070K, 0DVC. The comparison is the explicit
-argument in step 6 of lem-weil-pbc-derived-exchange-termwise. -/
+(Stacks, Tags 0736, 07A7, 070I, 070K, 0DVC). -/
 lemma derivedExchangeBoundedComparison
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)

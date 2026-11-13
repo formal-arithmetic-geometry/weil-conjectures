@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteSelection
 /-!
 # Noetherian finite-pushforward embeddings with constructible strata
 
-Source: Stacks Project, Etale Cohomology, Lemma 09Z6 (3).
+## References
+
+* Stacks Project, Tag 09Z6 (3)
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- On a Noetherian scheme, a constructible module sheaf with constructible strata embeds
 into a finite biproduct of finite pushforwards of constant sheaves with finite values.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09Z6 (3), proof of (1) transferred to (3). -/
+(Stacks, Tag 09Z6 (3)) -/
 theorem exists_mono_biproduct_lowerStar_of_isNoetherian_etaleModule
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [IsNoetherian X]

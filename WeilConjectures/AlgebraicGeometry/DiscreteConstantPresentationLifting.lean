@@ -140,9 +140,7 @@ private theorem presentation_of_local_matrix
 /-- One specified finitely presented constant module on a slice lifts locally to finite
 presentations on the condensed point. This concerns one constant module and its given
 trivialization, before any locally constant predicate or covering family is assembled.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-the reverse finite-matrix argument in lem-sfb-discrete-coefficient-local-models, steps 1--2. -/
+(Stacks, Tags 03CY and 00YV) -/
 theorem discrete_constant_presentation_lifting
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]

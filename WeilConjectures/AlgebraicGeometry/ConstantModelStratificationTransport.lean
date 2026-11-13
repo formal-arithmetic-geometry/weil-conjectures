@@ -23,8 +23,6 @@ public import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 /-!
 # Transport of finite constant-model stratification witnesses
 
-proof.md, Constructibility paragraph.
-
 The adapters keep all partition and immersion data. The transport statements fix the
 cover and scalar modules before changing the module being modelled. Constructibility
 and bounded constructible cohomology use the finite constant-model convention.
@@ -41,9 +39,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Forget only constructibility proofs, retaining every partition and immersion field.
-Source: the Constructibility paragraph of sk-prop-proper-image-localizing-open.proof.md,
-stratification adapter. -/
+/-- Forget only constructibility proofs, retaining every partition and immersion field. -/
 def Stratification.toFiniteLocallyClosed {T : Scheme.{u}} (S : Stratification T) :
     FiniteLocallyClosedStratification T where
   n := S.n
@@ -56,9 +52,7 @@ def Stratification.toFiniteLocallyClosed {T : Scheme.{u}} (S : Stratification T)
   isImmersion := S.isImmersion
   range_immersion := S.range_immersion
 
-/-- Adjoin the separate constructibility proofs without choosing new stratum schemes.
-Source: the Constructibility paragraph of sk-prop-proper-image-localizing-open.proof.md,
-stratification adapter. -/
+/-- Adjoin the separate constructibility proofs without choosing new stratum schemes. -/
 def FiniteLocallyClosedStratification.withConstructibleStrata {T : Scheme.{u}}
     (S : FiniteLocallyClosedStratification T)
     (c : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) : Stratification T where
@@ -80,8 +74,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Constructibility in the affine-local finite constant-model convention transports.
-Source: sk-prop-proper-image-localizing-open.proof.md, Constructibility paragraph. -/
+/-- Constructibility in the affine-local finite constant-model convention transports. -/
 theorem constantModelConstructible_transport {T : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)}
     (e : M ≅ N) (hM : IsConstantModelConstructible Λ T M) :

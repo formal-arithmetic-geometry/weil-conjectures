@@ -22,8 +22,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- An affine section killed by the relative limit comparison dies at a later stage.
-Source: Stacks Project, Tag 0EYM, second proof, injectivity on affine etale objects. -/
+/-- An affine section killed by the relative limit comparison
+dies at a later stage (Stacks, Tag 0EYM). -/
 theorem exists_cartesianHigherImage_affine_section_eq_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierLisseLocalModel
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierLisseTensor
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierLisseInverse
 /-! # Lissity and multiplicativity of the Artin–Schreier sheaves
-
-Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md.
 -/
 
 @[expose] public noncomputable section
@@ -31,24 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 and its tensor inverse is the sheaf of the negative function, also the sheaf for the
 inverse character. The local rank-one clause says that the pullback is the regular
 coefficient module, not merely that the underlying sheaf of sets is locally constant.
-Source: current blueprint, lem-fd-as-lisse.md.
-
-The statement is made for every nontrivial character psi of k₀, which contains the
-character psi = Psi ∘ Tr of def-fd-additive-character (the case of the node).
-
-Proof in words: (1) For psi = Psi ∘ Tr_{k₀/F_p}, as in def-fd-additive-character, the
-comparison lem-wft-as-comparison (2), with a=1, identifies the degree-q character image
-of f with the Psi-summand of the prime-degree covering of f. A general nontrivial psi is
-z ↦ Psi(Tr(a z)) with a ≠ 0 by lem-wft-as-comparison (1); then (2) with this a identifies
-L_{psi,f} with the Psi-summand for a f, i.e. with L_{Psi ∘ Tr, a f}. The rank-one assertion
-of lem-fd-as-characters trivializes it over the Artin–Schreier cover; all coefficient
-rings are p_T^* Qbar_l, as in det-def-sfb-pulled-back-coefficients. This gives
-IsLisseCoefficientModule and the rank-one local model. (2) Apply the tensor clause of
-lem-fd-as-characters to a f and a g. (3) Its inverse clause identifies the
-negative-function sheaf as the tensor inverse. Its inverse-character clause, inverted
-if necessary, identifies that sheaf with the inverse-character sheaf (psi⁻¹ is
-z ↦ Psi(Tr(-a z))). No assertion that a nontrivial character summand is nonconstant is
-used: f=0 is allowed. -/
+The statement is made for every nontrivial character `ψ` of `k₀`. -/
 theorem condensedArtinSchreierSheafOf_lisse_tensor_inv
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀ ≠ ℓ)] (X₀ : Scheme.{u}) [X₀.Over (Spec (.of k₀))]

@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPul
 import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
 import Mathlib.Algebra.Module.FinitePresentation
 /-! # The stratum test for coefficient-sized comparison
-Source: blueprint constructible comparison, Stacks Tag 09AK.
+Stacks, Tag 09AK.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,8 +21,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Canonical inverse image preserves and reflects constructibility of etale modules.
 This is a property test on a given etale module, without an essential-surjectivity
 claim or a derived assertion.
-Source: blueprint sk-thm-pe-constructible-comparison, equivalence part;
-finite-local-system comparison, Stacks Tag 09AK. -/
+(Stacks, Tag 09AK). -/
 theorem coefficientComparison_constructibilityTest (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ G : ConstantCompletion.Mod (ConstantCompletion.constant

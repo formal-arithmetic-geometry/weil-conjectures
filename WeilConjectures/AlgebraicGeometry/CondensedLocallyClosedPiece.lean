@@ -19,14 +19,10 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Locally closed single-sheaf generators for a fixed commutative condensed ring.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), open/closed steps.
-
-This is the coefficient-abstract form of the existing finite-field generator predicate.
-Keeping the coefficient abstract avoids repeated expansion of the sheafification and
-monoidal structures when the predicate is eliminated. Its data are exactly a closed
-immersion, a quasi-compact open immersion, a locally finitely presented module, and an
-isomorphism with its extension by zero concentrated in degree zero. -/
+/-- Locally closed single-sheaf generators for a fixed commutative condensed ring
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). Its data are a closed immersion, a quasi-compact open
+immersion, a locally finitely presented module, and an isomorphism with its extension by zero
+concentrated in degree zero. -/
 def condensedLocallyClosedPiece
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) :

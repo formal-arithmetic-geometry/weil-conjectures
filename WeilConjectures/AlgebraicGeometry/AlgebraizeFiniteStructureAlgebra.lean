@@ -84,9 +84,8 @@ private theorem quotient_formula {R S : Type u} [CommRing R] [CommRing S]
     rw [← he x, ← e.map_zero, e.injective.eq_iff]
     exact Ideal.Quotient.eq_zero_iff_mem
 
-/-- Algebraize the structure algebras, retaining the ring maps to each reduction.
-Source: Stacks Project, Lemma 09ZT, proof through the construction of the algebra F;
-Theorem 088E and Remark 088F. -/
+/-- Algebraize the structure algebras, retaining the ring maps to each reduction
+(Stacks, Tag 09ZT). -/
 theorem algebraize_finite_structure_algebra
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

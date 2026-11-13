@@ -50,10 +50,7 @@ set_option synthInstance.maxSize 2048 in
 -- The transported overlap restriction requires additional instance search.
 -- The derived composition comparison requires a larger elaboration budget.
 /-- Restricting the canonical mate from the direct image on P to the direct image
-on O ∩ P gives an isomorphism on O. This concerns a single direct-image summand;
-it does not construct a difference diagram or assert invertibility of a matrix.
-Source: Stacks Project, Cohomology, Tag 08FE and the split restriction calculation
-in the proof of Tag 08DG. -/
+on O ∩ P gives an isomorphism on O (Stacks, Tags 08FE and 08DG). -/
 theorem derived_open_intersection_mate_isIso
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (i : W ⟶ P)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

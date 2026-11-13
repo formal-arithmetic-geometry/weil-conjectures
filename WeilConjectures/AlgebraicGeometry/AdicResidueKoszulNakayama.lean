@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.RingedKoszulCompletionReflector
 
 /-! # Residue-zero detection independent of quotient reconstruction
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1U; algebraization.tex, Tag 0A0E.
+Source: Stacks Project, Tags 0G1U and 0A0E.
 -/
 
 @[expose] public noncomputable section
@@ -143,8 +143,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A locally complete complex with zero residue extension is zero.
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1U, lemma-derived-complete-zero-bis,
-and Tag 0G1T, lemma-derived-vanishing-mod-I; algebraization.tex, Tag 0A0E. -/
+(Stacks, Tags 0G1U, 0G1T and 0A0E). -/
 theorem adicResidue_isZero_of_complete_residue
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

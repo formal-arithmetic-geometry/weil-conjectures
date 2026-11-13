@@ -14,7 +14,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Pullback preserves finite-stalk constructibility
 
-Source: finite pushforward constructibility blueprint, step 1; Stacks Project, Tag 095A.
+## References
+
+* Stacks Project, Tag 095A
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Pullback of an abelian etale sheaf preserves constructibility of its underlying
-set sheaf, including the finiteness of its geometric stalks.
-
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 1;
-Stacks Project, Tag 095A. -/
+set sheaf, including the finiteness of its geometric stalks. (Stacks, Tag 095A) -/
 theorem isConstructibleEtaleSheafOfSets_upperStar
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

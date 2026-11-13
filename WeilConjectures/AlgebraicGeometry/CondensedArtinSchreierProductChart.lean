@@ -24,8 +24,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The normalized restriction to a sheet, for an arbitrary morphism of schemes.
-Source: the counit restriction and monoidal unit comparison. -/
+/-- The normalized restriction to a sheet, for an arbitrary morphism of schemes. -/
 def condensedRegularSheetProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Y : Scheme.{u}} (p : U ⟶ X)
@@ -36,8 +35,7 @@ def condensedRegularSheetProjection
   CondensedRing.stalkLowerStarProj Λ w (Mod.regular (condensedRingObj Λ U)) ≫
     (Mod.regularMapIso (condensedRingObj Λ U) (CondensedRing.upperStar Λ t)).hom
 
-/-- Evaluation on the sheet given by translation by `a`, normalized to the regular module.
-Source: latest blueprint `prop-kernel-lisse.proof.md`, splitting chart. -/
+/-- Evaluation on the sheet given by translation by `a`, normalized to the regular module. -/
 def condensedArtinSchreierChartProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k] (a : k) :
@@ -209,10 +207,7 @@ private theorem sheets_colimit (k : Type u) [Field k] [Fintype k] :
   exact hc
 
 /-- The pullback of the Artin–Schreier pushforward is the product of the regular modules,
-with the counit-defined sheet evaluations enumerated by Fin |k| as coordinates.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, first paragraph, and the proved
-Artin–Schreier torsor decomposition. -/
+with the counit-defined sheet evaluations enumerated by Fin |k| as coordinates. -/
 theorem condensedArtinSchreierChart_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k] :

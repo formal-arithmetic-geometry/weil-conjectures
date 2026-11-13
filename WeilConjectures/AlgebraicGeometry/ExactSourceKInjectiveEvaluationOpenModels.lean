@@ -42,9 +42,8 @@ local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens
 
 set_option maxHeartbeats 1000000 in
 -- Elaborating the transported models unfolds the exact-functor factorization.
-/-- Ordinary representative evaluation when the coefficient complex is K-injective.
-Source: Stacks Project, cohomology.tex, Tags 08DJ,
-08DM (lemma-Rhom-strictly-perfect), and 08DQ (lemma-dual-perfect-complex). -/
+/-- Ordinary representative evaluation when the coefficient complex is K-injective
+(Stacks, Tags 08DJ, 08DM, 08DQ). -/
 theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (K N : schemeDerivedCategory U.toScheme)

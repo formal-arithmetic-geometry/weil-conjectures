@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.ExtremalEpi
 /-!
 # Integral pushforward maps detecting a prescribed point
 
-Source: Stacks Project, Tag 09Z6, the generic trivialization and normalization argument.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section
@@ -31,9 +33,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A constructible module sheaf has a map to an integral pushforward of a finite constant
 module which is injective at every geometric point above a prescribed point.
-
-Source: Stacks Project, Tag 09Z6, proof of (1), the paragraph starting with the reduced
-closure of `x`, transferred to (3). -/
+(Stacks, Tag 09Z6) -/
 theorem exists_integral_lowerStar_stalk_injective
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [IsNoetherian X]

@@ -21,8 +21,7 @@ universe u
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An ample invertible module admits finitely many positive tensor powers with global
-sections whose affine nonvanishing loci cover the scheme.
-Source: Stacks Project, Properties, Definition 01PS and Lemma 01Q1, first proof paragraph. -/
+sections whose affine nonvanishing loci cover the scheme (Stacks, Tags 01PS and 01Q1). -/
 theorem IsAmple.exists_finite_affine_cover (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible] (hL : IsAmple X L) :
     ∃ (m : ℕ) (n : Fin m → ℕ)

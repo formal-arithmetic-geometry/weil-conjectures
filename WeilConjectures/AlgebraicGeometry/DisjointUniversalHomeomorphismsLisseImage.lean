@@ -17,8 +17,8 @@ import WeilConjectures.AlgebraicGeometry.DisjointComponentsLocallyConstantImage
 /-!
 # Locally constant direct image from finitely many universal-homeomorphism components
 
-Source: smooth purity blueprint, final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
+Direct image is locally constant when the source is a finite disjoint union of open components
+each universally homeomorphic to the base.
 -/
 
 @[expose] public section
@@ -32,11 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Direct image is locally constant when the source is a finite disjoint union of
-open components each universally homeomorphic to the base.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, final paragraph;
-steps 3 and 4 of `lem-weil-pbc-finite-map-generic-lisse-preservation`. -/
+open components each universally homeomorphic to the base. -/
 theorem isLocallyConstant_finite_disjoint_universalHomeomorphism_directImage
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ) (W : Fin n → X.Opens)

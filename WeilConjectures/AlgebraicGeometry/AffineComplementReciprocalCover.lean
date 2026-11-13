@@ -59,10 +59,7 @@ private theorem functionField_res (X : Scheme.{u}) [IsIntegral X]
   X.presheaf.germ_res_apply i (genericPoint X) (generic_mem_open X Z) s
 
 /-- An affine open with finite complement admits a reciprocal function on an open
-neighbourhood of its complement.
-
-Source: Stacks Project, Varieties Lemma 09NB (varieties-lemma-find-globally-generated),
-proof through the open-cover construction. -/
+neighbourhood of its complement (Stacks, Tag 09NB). -/
 theorem exists_affine_complement_reciprocal_cover
     (X : Scheme.{u}) [IsIntegral X] [X.IsSeparated] [IsLocallyNoetherian X]
     [CompactSpace X] (hdim : topologicalKrullDim X = 1) (U : X.Opens)

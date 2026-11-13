@@ -54,8 +54,8 @@ private theorem faithful_pullback_cover {X : Scheme.{u}} (C : X.OpenCover) :
   rw [Category.assoc, Category.assoc, NatIso.naturality_1 e φ, NatIso.naturality_1 e ψ]
   exact congrArg ((Modules.pullback (Sigma.ι C.X i)).map) h
 
-/-- A quasi-coherent module embeds in a pushforward from an affine cover source.
-Source: Stacks Project, Cohomology of Schemes, Tag 0BDY, proof of part (1). -/
+/-- A quasi-coherent module embeds in a pushforward from an affine cover source (Stacks, Tag 0BDY).
+-/
 theorem exists_affine_cover_module_embedding (k : Type u) [Field k] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))] [CompactSpace X]
     [IsAffineHom (pullback.diagonal (X ↘ Spec (CommRingCat.of k)))]

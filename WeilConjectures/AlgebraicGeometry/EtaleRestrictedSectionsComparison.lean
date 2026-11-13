@@ -32,8 +32,8 @@ noncomputable def etaleRestrictedSectionsLift
   (T.L.step q).factorThru (etaleRestrictedSectionsInclusion X K T q)
     (etaleRestrictedSections_factors X K T q)
 
-/-- The lift has the prescribed composite with the filtered-step inclusion.
-Source: Stacks, Tag 015J. Proof: the defining universal property of factorThru. -/
+/-- The lift has the prescribed composite with the filtered-step inclusion
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsLift_arrow
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -42,8 +42,8 @@ theorem etaleRestrictedSectionsLift_arrow
       etaleRestrictedSectionsInclusion X K T q := by
   exact Subobject.factorThru_arrow _ _ _
 
-/-- Any lift with the prescribed inclusion composite is the canonical lift.
-Source: Stacks, Tag 015J. Proof: cancel the monic filtered-step inclusion. -/
+/-- Any lift with the prescribed inclusion composite is the canonical lift
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsLift_unique
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -56,8 +56,8 @@ theorem etaleRestrictedSectionsLift_unique
   rw [hg, etaleRestrictedSectionsLift_arrow]
 
 
-/-- The canonical sections lift is an isomorphism of complexes.
-Source: Stacks, Tag 015J, proof remark (3); finite diagonal sums. -/
+/-- The canonical sections lift is an isomorphism of complexes
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsLift_isIso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

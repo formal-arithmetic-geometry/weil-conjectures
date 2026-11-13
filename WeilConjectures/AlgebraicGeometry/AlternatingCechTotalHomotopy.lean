@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # Čech totalization preserves coefficient homotopies
 
-Source: Stacks Project, Tag 08C1, functoriality verification; the explicit signed
-homotopy calculation in the parent node's proof Step 3.
+Source: Stacks Project, Tag 08C1.
 -/
 
 @[expose] public section
@@ -133,11 +132,8 @@ private theorem additiveComplexFunctor_total_map_homotopy
     abel
 
 
-/-- A coefficient homotopy induces a homotopy of the actual Čech total maps.
-No covering hypothesis or injectivity is needed.
-
-Source: Stacks Project, Tag 08C1, functoriality verification; parent node
-lem-sc-kinjective-alternating-cech-augmentation-quasi-iso, proof Step 3. -/
+/-- A coefficient homotopy induces a homotopy of the actual Čech total maps
+(Stacks, Tag 08C1). -/
 theorem alternatingCechTotal_map_homotopy
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}

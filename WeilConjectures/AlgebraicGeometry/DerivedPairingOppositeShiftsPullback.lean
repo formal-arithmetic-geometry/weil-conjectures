@@ -7,8 +7,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 
 /-! # Pullback of pairings after opposite shifts
-
-Source: the evaluation identification in thm-amb-p1-decomposition.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -162,10 +160,7 @@ private theorem shifted_pairing
       simpa only [Category.assoc] using hn) hq
   simpa only [Category.assoc] using h
 
-/-- Opposite shifts preserve a pairing square for derived inverse image.
-
-Source: the tensor-shift comparison of Stacks Tag 06YU and the shift step in
-thm-amb-p1-decomposition.proof.md. -/
+/-- Opposite shifts preserve a pairing square for derived inverse image (Stacks, Tag 06YU). -/
 theorem derivedPairingOppositeShifts_pullback
     (B : Type uB) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

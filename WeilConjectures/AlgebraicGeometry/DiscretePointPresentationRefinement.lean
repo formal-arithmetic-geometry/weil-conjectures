@@ -69,9 +69,7 @@ private theorem local_cokernel_of_slice_matrix
 /-- A single finite presentation on the condensed point gives constant finite presentations
 locally after section reconstruction and arbitrary coefficient relabelling. There is no
 local-model hypothesis on N: the displayed isomorphism is one specified finite-matrix cokernel.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-the forward finite-matrix argument in lem-sfb-discrete-coefficient-local-models, steps 1--2. -/
+(Stacks, Tags 03CY and 00YV) -/
 theorem discrete_point_presentation_refinement
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]

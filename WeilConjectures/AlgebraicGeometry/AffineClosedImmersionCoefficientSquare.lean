@@ -121,9 +121,8 @@ private theorem quotient_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y)
   rw [hker] at hex
   exact hex
 
-/-- On an affine chart the closed-immersion unit is the sheafified quotient map.
-Source: Stacks Project, Tag 01I9, Lemma 26.7.3(2), and Tag 0BQZ,
-Lemma 48.15.5, the coefficient map in its proof. -/
+/-- On an affine chart the closed-immersion unit is the sheafified quotient map (Stacks, Tags 01I9,
+0BQZ). -/
 theorem affine_closedImmersion_coefficient_square
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens)

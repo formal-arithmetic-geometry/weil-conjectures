@@ -34,7 +34,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-! # Flatness and quotients of a completed constant algebra
 
-Source: Stacks Project, Modules on Sites, Tag 093M.
+Stacks Project, Tag 093M.
 The coefficient presentation is allowed to change by specified ring isomorphisms.
 -/
 
@@ -954,9 +954,8 @@ end CompletedConstantAlgebra
 
 /-- Completion of a Noetherian constant algebra is flat, scalar extension is exact,
 and the projection-multiplication map to each constant quotient is invertible.
-The result retains arbitrary isomorphic presentations of the completed and quotient rings.
-Source: Stacks Project, sites-modules.tex, Tag 093M, lemma-completion-flat, and its
-quotient assertion applied to each power of the ideal. -/
+The result retains arbitrary isomorphic presentations of the completed and quotient rings
+(Stacks, Tag 093M). -/
 theorem completed_constant_algebra_flat_quotients
     (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (S : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

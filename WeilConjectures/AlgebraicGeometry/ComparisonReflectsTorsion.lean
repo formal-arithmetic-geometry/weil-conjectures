@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 /-!
 # Reflection of local torsion by the etale to pro-etale comparison
 
-Source: Stacks Tags 099T and 03SA; proper-base-change proof, torsion descent.
+Stacks Project, Tags 099T and 03SA.
 -/
 
 @[expose] public section
@@ -172,8 +172,8 @@ private theorem torsion_comparison_stalkIso
     Functor.isoWhiskerRight e Φ.sheafFiber ≪≫ b.symm ≪≫ hb ≪≫
       (Scheme.pointSmallEtale t).uliftSheafFiberIso.{u + 1} A⟩
 
-/-- Exact fully faithful comparison inverse image reflects local integer torsion.
-Source: Stacks Tags 099T and 03SA, and blueprint sk-thm-properbasechange, opening paragraph. -/
+/-- Exact fully faithful comparison inverse image reflects local integer torsion
+(Stacks, Tags 099T and 03SA). -/
 theorem comparisonUpperStar_reflects_local_torsion (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))

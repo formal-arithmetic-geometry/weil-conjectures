@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesIsoInvariant
 
 /-! # CoherentFormalModulesCokernelClosure
 
-Source: Stacks Project, Lemma 087X.
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -26,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Ambient cokernels of maps between coherent adic systems remain coherent adic.
-This is an object-closure assertion; it does not assume abelianness of Coh(X,I).
-Source: Stacks Project, Lemma 087X, first sentence of the proof (details omitted). -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModules_closedUnderCokernels (X : Scheme.{u})
     [IsNoetherian X] (I : X.IdealSheafData) :
     (IsCoherentFormalModule I).IsClosedUnderCokernels := by

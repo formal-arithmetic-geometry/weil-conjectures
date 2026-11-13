@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleProperOpenExchangeCube
 
 /-! # Graph comparisons and proper/open interchange
 
-Source: Stacks Project, more-etale.tex, Tag 0F7J, independence of choices and
-comparison of diagrams A--F; the product-graph extension recorded in the blueprint.
+Source: Stacks Project, Tag 0F7J.
 
 The auxiliary records only bundle the supplied diagrams. Every arrow is built from the
 recorded graph maps, normalized proper/open exchange, and canonical compositors.

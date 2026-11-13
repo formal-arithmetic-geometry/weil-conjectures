@@ -63,8 +63,7 @@ private theorem ordinaryComparison (X : Scheme.{u})
       (AlgebraicGeometry.ProEtale.constructibleComparisonRingMap X A))⟩
 
 /-- The normalized adic inverse image is the localization of exact module comparison.
-Source: Stacks Project, Tags 03D2, 099R and 09AL; identification of the two
-presentations of inverse image in the parent proof step 3. -/
+(Stacks, Tags 03D2, 099R and 09AL). -/
 theorem adicExactComparison (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     Nonempty (Q (constant (smallModelComparisonEtaleTopology.{u, v} X) A) ⋙

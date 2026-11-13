@@ -10,8 +10,7 @@ import WeilConjectures.RingTheory.IndEtaleSmallIndex
 
 /-! # Sheafification on affine etale presentations
 
-Source: Stacks Project, proetale.tex, Lemmas describe-pullback-from-etale and
-limit-pullback (Tag 099S).
+Source: Stacks Project, Tag 099S.
 -/
 
 @[expose] public section
@@ -293,10 +292,7 @@ private theorem presentationVertexProAffineEtale {X : Scheme.{u}}
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Sheafification of the coefficient-sized comparison Kan extension changes
-neither the vertex nor the stages of an affine etale presentation.
-
-Source: Stacks Project, proetale.tex, lemma-describe-pullback-from-etale and
-lemma-limit-pullback (Tag 099S). -/
+neither the vertex nor the stages of an affine etale presentation. (Stacks, Tag 099S) -/
 theorem coefficientComparison_presentation_toSheafify_isIso (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (G : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

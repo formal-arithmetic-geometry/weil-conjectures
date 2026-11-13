@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.AdicFiniteTransitionTensorSequenceCore
 
 /-! # The tensor sequence underlying one adic reduction transition
 
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), and
-sites-cohomology.tex, Tag 08FZ.
+## References
+
+* Stacks Project, Tags 09C2 and 08FZ
 -/
 
 @[expose] public noncomputable section
@@ -24,10 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- One normalized quotient transition has a short exact cochain presentation whose
 kernel homology is a residue tensor test. There is no Tor bound, product or completeness
-hypothesis in this assertion.
-
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), using the coefficient
-sequence and K-flat computations of Tags 06YS and 06YY. -/
+hypothesis in this assertion (Stacks, Tags 09C2, 06YS and 06YY). -/
 theorem adicFiniteTransition_tensor_sequence
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :

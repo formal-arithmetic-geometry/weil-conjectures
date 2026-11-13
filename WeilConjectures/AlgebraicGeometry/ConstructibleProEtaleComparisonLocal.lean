@@ -63,7 +63,7 @@ private theorem stratified_local {X : Scheme.{u}}
   simpa only [← Category.assoc, hq] using hp
 
 /-- Pointwise stratifications and the affine-local finite-presentation condition agree.
-Source: blueprint constructible-comparison-local, Stacks Tags 09AJ and 09AK. -/
+(Stacks, Tags 09AJ and 09AK) -/
 theorem constructibleComparison_local (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ F : ConstantCompletion.Mod (ConstantCompletion.constant

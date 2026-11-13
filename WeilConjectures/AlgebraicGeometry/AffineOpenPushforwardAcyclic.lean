@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.OpenPushforwardDerivedComparison
 
 /-! # Acyclic direct images from affine opens
-
-Source: blueprint lem-pc-cech-resolution, proof paragraphs 2 and 3.
 -/
 
 @[expose] public section
@@ -26,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- An affine open direct image is acyclic for a separated map to an affine scheme.
-Source: blueprint lem-pc-cech-resolution, proof paragraphs 2 and 3. -/
+/-- An affine open direct image is acyclic for a separated map to an affine scheme. -/
 theorem affine_open_pushforward_rightAcyclic
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     [HasInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

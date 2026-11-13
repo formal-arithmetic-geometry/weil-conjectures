@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 /-! # Transposition of the constant-sheaf pullback comparison
 
-Source: Stacks Project, Tag 08J6; the constant-sheaf/global-sections adjunction.
+## References
+
+* Stacks Project, Tag 08J6
 -/
 
 @[expose] public section
@@ -39,7 +41,7 @@ private lemma leftUniq_transpose
     Adjunction.homEquiv_leftAdjointUniq_hom_app, Adjunction.homEquiv_unit]
 
 /-- The constant-sheaf comparison transposes inverse image to the unit on sections.
-Source: Stacks Project, Tag 08J6 (remark-before-Leray), and Tag 01FA. -/
+(Stacks Project, Tags 08J6, 01FA) -/
 theorem constantSheaf_pullback_transpose {X X' : Scheme.{u}} (g : X' ⟶ X)
     (M : AddCommGrpCat.{u + 1})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -27,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical comparison from the cohomology of Γ of a K-injective resolution to the
-cohomology of RΓ (the computation of H^n(X,K) in def-weil-pbc-etale-cohomology).
-Source: Stacks, Tag 015J; the K-injective recipe. -/
+cohomology of RΓ (Stacks, Tag 015J). -/
 noncomputable def resolutionEtaleCohomologyIso (X : Scheme.{uHyper})
     (K I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1}) ℤ)
     (r : K ⟶ I) [QuasiIso r] [I.IsKInjective] (n : ℤ) :

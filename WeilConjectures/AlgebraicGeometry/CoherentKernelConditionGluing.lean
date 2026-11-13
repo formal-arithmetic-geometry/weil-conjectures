@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelIntersectionFiniteType
 
 /-! # Finite local kernel generators from an open cover
 
-Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF.
+Stacks Project, Tags 01BV, 01B5 and 01AF.
 -/
 
 @[expose] public section
@@ -28,9 +28,7 @@ namespace SheafOfModules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Flatten finite local generating families on a covering of a site.
-The iterated-slice equivalence transports each generating epimorphism, while
-`CoversTop.over` proves that the resulting family covers. This is the generators
-analogue of Mathlib's `QuasicoherentData.bind`. -/
+This is the generators analogue of Mathlib's `QuasicoherentData.bind`. -/
 private theorem finite_generators_of_cover
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}}
@@ -68,13 +66,7 @@ end SheafOfModules
 namespace AlgebraicGeometry
 
 /-- Construct finite local-generators data for a kernel from the corresponding kernel
-condition on an open cover.  The construction restricts the global map to each
-intersection with a member of the cover, uses sectionwise computation of kernels,
-and transports finite generators across the resulting restriction isomorphisms.
-The cover equality supplies, for every point, a member and a neighbourhood on which
-these generators apply; assembling those neighbourhoods is the required local
-generators datum.  This is the gluing step in the proof of finite-type descent.
-Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF. -/
+condition on an open cover (Stacks, Tags 01BV, 01B5 and 01AF). -/
 theorem coherent_kernel_condition_local_generators
     (X : Scheme.{u}) (F : X.Modules)
     (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)

@@ -70,9 +70,7 @@ private theorem pasting_fst {X Y Z : Scheme.{u}} (q : X ⟶ Y) (r : Y ⟶ Z)
   simp [MorphismProperty.Over.pullbackComp_inv_app_left]
 
 /-- Descend a finite covering and construct its canonical complex diagram and cocone.
-Source: Stacks Project, Limits, Tags 01ZM (spreading out), 07RP (étaleness), 07RR
-(surjectivity); Étale Cohomology, Tag 09YQ; Sites, Tag 09YN; Cohomology on Sites,
-Tag 09YP, proof of lemma-colimit. -/
+(Stacks, Tags 01ZM, 07RP, 07RR, 09YQ, 09YN and 09YP) -/
 theorem exists_etale_limit_finite_cech_stage_data
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 /-!
 # Étale acyclicity of a quasi-coherent module on an affine scheme
 
-Source: blueprint `lem-sc-etale-affine-qcoherent`, order 959;
-Stacks Project, Étale Cohomology, Theorem 03P2 (affine case).
+Source: Stacks Project, Étale Cohomology, Theorem 03P2 (affine case).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ set_option autoImplicit false
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Higher étale cohomology of the associated quasi-coherent sheaf vanishes on an affine.
-
-Source: Stacks Project, Étale Cohomology, Theorem 03P2 (affine case). -/
+(Stacks, Tag 03P2) -/
 theorem etale_affine_qcoherent
     (X : Scheme.{u}) [IsAffine X]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) (hq : 0 < q) :

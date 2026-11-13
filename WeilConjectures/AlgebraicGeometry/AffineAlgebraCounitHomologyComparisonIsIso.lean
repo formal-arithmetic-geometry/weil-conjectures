@@ -21,9 +21,7 @@ namespace AlgebraicGeometry
 
 /-- The canonical comparison, rather than an arbitrary isomorphism between its
 source and target, is invertible for a K-injective complex with quasi-coherent
-cohomology under an affine morphism.
-Source: Stacks Project, Tag 0AVW, proof of affine-morphism-equivalence, the displayed
-cohomology comparison; Tag 08D4 supplies its unbounded justification. -/
+cohomology under an affine morphism (Stacks, Tags 0AVW and 08D4). -/
 theorem affineAlgebraCounitHomologyComparison_isIso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

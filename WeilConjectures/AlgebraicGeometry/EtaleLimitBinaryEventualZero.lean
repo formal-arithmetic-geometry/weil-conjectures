@@ -25,11 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- A class killed on the limit is killed at a later stage of a two-open system.
-
-Source: Stacks Project, Tag 09YQ, the finite-open-cover reduction,
-and Tag 0A50. This is the kernel half of steps 1--3 of
-lem-weil-pbc-etale-limit-cohomology-binary-gluing. -/
+/-- A class killed on the limit is killed at a later stage of a two-open system
+(Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_eventual_zero
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

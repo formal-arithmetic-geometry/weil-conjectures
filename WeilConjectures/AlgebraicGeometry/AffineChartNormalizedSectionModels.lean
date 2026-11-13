@@ -145,7 +145,7 @@ private theorem affine_hom_of_section_coordinates
   simpa only [eN.apply_symm_apply] using h
 
 /-- Object reconstruction and full faithfulness in normalized section coordinates.
-Source: Stacks Project, Tag 01ZR (affine proof), and Tag 01I6. -/
+(Stacks, Tags 01ZR and 01I6). -/
 theorem affine_chart_normalized_section_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

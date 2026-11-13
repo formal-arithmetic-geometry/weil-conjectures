@@ -84,8 +84,7 @@ private theorem section_pair
   · exact CategoryTheory.congr_fun (BinaryFan.IsLimit.lift_snd l p q) PUnit.unit
 
 /-- Pullback of a linear map is linear for any objectwise transported scalar actions.
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module; the morphism part of
-lem-weil-pbc-inverse-image-module-construction, step 1(a). -/
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageModuleMapLinearity (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

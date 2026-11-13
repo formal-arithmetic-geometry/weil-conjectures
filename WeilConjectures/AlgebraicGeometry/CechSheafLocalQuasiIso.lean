@@ -12,8 +12,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.CechSheafLocalAugmentationKernel
 import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveExact
 /-! # Local exactness of the augmented module-sheaf Čech complex
-
-Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
 -/
 
 @[expose] public section
@@ -25,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Any augmented complex with the usual Čech sections and restriction augmentation
-is a quasi-isomorphism after restricting to one member of the family of opens.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy). -/
+is a quasi-isomorphism after restricting to one member of the family of opens. -/
 theorem augmented_cech_sheaf_quasiIso_restrict
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

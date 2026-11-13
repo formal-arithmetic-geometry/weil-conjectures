@@ -62,9 +62,7 @@ private theorem fibre_dimension_zero_of_etale_closed_baseChange
       ⟨⟨closure {(⟨g.asFiber x, hU⟩ : U)}, isIrreducible_singleton.closure,
         isClosed_closure⟩⟩
 
-/-- Every point over the closed subscheme has an etale neighbourhood. The proof uses
-smoothness from the Artinian lifting criterion, zero fibre dimension from the etale
-zeroth neighbourhood, and the etale shrinking lemma. -/
+/-- Every point over the closed subscheme has an etale neighbourhood. -/
 theorem etale_infinitesimal_pointwise
     {X S Z : Scheme.{u}} (g : X ⟶ S) (i : Z ⟶ S)
     [IsLocallyNoetherian S] [LocallyOfFiniteType g] [QuasiCompact g]

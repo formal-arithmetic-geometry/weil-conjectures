@@ -39,7 +39,7 @@ local instance localInst_CondensedLfpHomContinuity_1
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
 /-- Continuity for a locally finitely presented module on the scheme itself.
-Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), the locally free calculation. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)) -/
 theorem condensed_lfp_hom_continuity
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

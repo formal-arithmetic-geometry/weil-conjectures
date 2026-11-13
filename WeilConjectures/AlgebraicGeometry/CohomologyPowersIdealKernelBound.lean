@@ -24,8 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Kernel estimate for the transition maps, for every sufficiently large choice of c.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (3). -/
+/-- Kernel estimate for the transition maps, for every sufficiently large choice of c
+(Stacks, Tag 02OA). -/
 theorem cohomology_powers_ideal_kernel_bound
     (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}}
     (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData)

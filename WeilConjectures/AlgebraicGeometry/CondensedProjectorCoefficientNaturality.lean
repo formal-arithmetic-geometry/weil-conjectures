@@ -11,8 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 
 /-! Naturality of the condensed Artin–Schreier character projector under coefficients.
-
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

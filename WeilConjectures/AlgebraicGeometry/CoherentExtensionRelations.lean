@@ -76,9 +76,8 @@ private theorem extension_kernel_iso {C : Type*} [Category C] [Abelian C]
         simp [a, b, b₀, k, Category.assoc] }
   exact ⟨φ, ⟨e⟩⟩
 
-/-- Relations in the middle term of an extension of coherent modules are of finite type.
-Source: Stacks Project, Modules, Lemma 01BY (lemma-coherent-abelian), proof of (4),
-the relation-kernel diagram. -/
+/-- Relations in the middle term of an extension of coherent modules are of finite type
+(Stacks, Tag 01BY). -/
 theorem coherent_extension_relations (X : RingedSpace.{u})
     (S : ShortComplex (SheafOfModules.{u} (moduleRings X))) (hS : S.ShortExact)
     (h₁ : IsCoherent X S.X₁) (h₃ : IsCoherent X S.X₃)

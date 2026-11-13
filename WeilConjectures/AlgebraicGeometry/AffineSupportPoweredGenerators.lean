@@ -44,8 +44,8 @@ private def globalFamily (X : Scheme.{u}) (a : Γ(X, ⊤)) :
   simp
 
 /-- A closed subset of an affine scheme with quasi-compact complement is cut out by
-finitely many global functions whose restrictions annihilate a given supported perfect object.
-Source: Stacks Project, Tag 08EK, proof, first paragraph, and Tag 08EJ. -/
+finitely many global functions whose restrictions annihilate a given supported perfect object
+(Stacks, Tags 08EK and 08EJ). -/
 theorem exists_affine_support_powered_generators (X : Scheme.{u}) [IsAffine X]
     (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)
     (U : X.Opens) (hU : IsCompact (U : Set X))

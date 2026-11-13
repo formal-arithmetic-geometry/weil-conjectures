@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Constant-sheaf adjuncts and pullback
 
-Source: Stacks Project, Tag 03F3; constant-sheaf and inverse-image adjunctions.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section
@@ -36,9 +38,8 @@ private theorem constantSection_adjunct_restrict {Z : Scheme.{u}}
   exact hn.symm
 
 /-- The constant-sheaf adjunct of a pulled-back map is the adjunct followed by the
-inverse-image unit, evaluated at the terminal pullback identification.
-Source: Stacks Project, Tag 03F3, localization and restriction; the first step of
-`lem-weil-pbc-etale-open-section-pullback`. -/
+inverse-image unit, evaluated at the terminal pullback identification
+(Stacks, Tag 03F3). -/
 theorem constantSection_adjunct_pullback {X Y : Scheme.{u}} (i : Y ⟶ X)
     (M : AddCommGrpCat.{u + 1})
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

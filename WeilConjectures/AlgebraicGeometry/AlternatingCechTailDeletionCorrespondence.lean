@@ -430,7 +430,8 @@ theorem cechTailDeletionJunction {I : Type v} [LinearOrder I] (p : ℕ)
       omega
 
 
-/-- -/
+/-- A bijection between the outgoing and incoming tail-deletion indices of the alternating
+Čech complex, compatible with the junction maps. -/
 theorem cechTailDeletionCorrespondence {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :
     ∃ e : cechTailOutgoingIndex p t ≃ cechTailIncomingIndex p t,

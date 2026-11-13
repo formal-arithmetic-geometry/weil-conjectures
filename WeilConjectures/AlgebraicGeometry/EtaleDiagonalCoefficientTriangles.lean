@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleDiagonalTriangles
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCounitCoefficient
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceEvaluationNormalization
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-
 # Triangles from the scalar coordinate integrals, with coefficient transport
 -/
 @[expose] public noncomputable section
@@ -79,8 +77,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   derivedUpperStarLowerStarAdjunction
 
 /-- Scalar coordinate traces and their two diagonal integrals imply the transported
-triangles for the prescribed trace counit.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the two triangle calculations. -/
+triangles for the prescribed trace counit. -/
 theorem evenLineDiagonalUnit_triangles
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProductComparisonDistributivity
 
 /-! # Distributivity of the transported scalar action
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -86,7 +86,8 @@ private theorem product_section_ext {T : Scheme.{u}}
 
 set_option maxHeartbeats 700000 in
 -- Comparing the sectionwise coefficient types requires extended definitional equality checks.
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+/-- The transported scalar action on the inverse image distributes over addition of sections
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageScalarDistributivity_left (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

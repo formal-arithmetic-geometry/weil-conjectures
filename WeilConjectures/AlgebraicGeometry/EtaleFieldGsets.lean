@@ -32,16 +32,9 @@ namespace AlgebraicGeometry
 
 attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
-/-- Stacks Project, Tags 03QR and 03QS.
-The geometric-point functor carries the Galois action by precomposition. An étale scheme
-over a field is a coproduct of spectra of finite separable extensions. Their geometric
-points are finite transitive Galois sets, with open stabilizers, giving continuity.
-The finite Galois correspondence identifies maps between components, proving full
-faithfulness. Decomposing any discrete continuous Galois set into orbits and taking
-the coproduct of the spectra of their fixed fields proves essential surjectivity.
-Finally, every geometric point over a point of an étale scheme lifts through a
-surjective étale family, and every point has a geometric point. Thus a family is
-a cover exactly when its image under this functor is jointly surjective. -/
+/-- The category of étale schemes over a field `K` is equivalent to discrete continuous
+`Gal(Ksep / K)`-sets via geometric points, and a family is a cover exactly when its image
+is jointly surjective (Stacks, Tags 03QR and 03QS). -/
 theorem etaleFieldGsets
     (K : Type u) [Field K]
     (Ksep : Type u) [Field Ksep] [Algebra K Ksep] [IsSepClosure K Ksep] :

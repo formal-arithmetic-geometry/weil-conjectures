@@ -28,8 +28,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The module-independent ring comparison for the direct and finite-stage charts.
-Source: Stacks Project, Tag 01ZR, affine proof; Tags 0095 and 0096. -/
+/-- The module-independent ring comparison for the direct and finite-stage charts (Stacks, Tags
+01ZR, 0095, 0096). -/
 theorem affine_chart_section_ring_presentations
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

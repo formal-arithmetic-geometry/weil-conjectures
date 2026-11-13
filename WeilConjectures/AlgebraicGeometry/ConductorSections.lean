@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Extending conductor-supported sections from one component
 
-Source: Stacks Project, Varieties, Remark 09NW and the conductor equality in the proof
-of Lemma 09NX.
+## References
+
+* Stacks Project, Tags 09NW, 09NX
 -/
 
 @[expose] public section
@@ -34,18 +35,8 @@ open CategoryTheory MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Restriction identifies the sections of the ideal of the other components, tensored
-with an invertible module, with the corresponding sections on the first component.
-
-Source: Stacks Project, Varieties, Remark 09NW and Lemma 09NX, proof.
-
-Here `i` lists the distinct components `Z₁, …, Z_r` (`hdistinct`), `a` labels the first
-component, `j` is the immersion of the reduced union of all other components, `I = j.ker`
-and `I₁ = I.comap (i a)` is the image of `(i a)^* I` in `O_{Z₁}`. Module pullback is
-`tensorPullback` (def-pc-module-pullback); `res₁` and `resZ` are restriction of global
-sections, the units of its canonical adjunction (lem-pc-module-pullback-adjunction). We use
-`(i a)^*(M^{⊗ m})`, canonically isomorphic to `((i a)^* M)^{⊗ m}`. The maps `μ` and `μ₁`
-are the inclusions of the ideal products, injective since tensoring with an invertible
-module is exact. `X_s` is `nonvanishingLocus` (def-weil-pbc-ample-invertible-module). -/
+with an invertible module, with the corresponding sections on the first component
+(Stacks, Tags 09NW, 09NX). -/
 theorem conductor_sections {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y)
     [∀ b : ι, IsReduced (C b)] [∀ b : ι, IsClosedImmersion (i b)]

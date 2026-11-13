@@ -12,11 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionStepNonem
 
 /-!
 # One support-induction step for finite coefficient models
-
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, `(Obj)` descent paragraph,
-with the open-closed and extension-class argument recorded in
-`lem-weil-pbc-condensed-stratum-model-assembly`. The induction hypothesis is an explicit
-input here; the caller carries out the well-founded induction.
 -/
 
 @[expose] public section
@@ -30,10 +25,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- One geometric step assembling a model from the strictly smaller closed supports.
 
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, `(Obj)` descent paragraph;
-Stacks Project, Tags 09AH and 09AA for open-closed localization, including the
-empty-complement case. This is the induction step of the assembly node, not an
-unconditional assertion of the assembly theorem on every closed subscheme. -/
+(Stacks Project, Tags 09AH, 09AA) -/
 theorem exists_finiteCoefficient_model_on_closed_support_step
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

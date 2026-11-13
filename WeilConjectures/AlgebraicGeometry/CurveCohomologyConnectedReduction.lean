@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare
 import WeilConjectures.AlgebraicGeometry.FiniteCoproductCohomologyAssembly
 
 /-! # Reduction of curve comparison to connected curves
-
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step (clopen connected components).
 -/
 
 @[expose] public section
@@ -26,8 +24,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- Comparison on connected smooth curves implies comparison on every qc smooth
-separated curve of relative dimension one.
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step. -/
+separated curve of relative dimension one. -/
 theorem bijective_curve_cohomologyMap_of_connected
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

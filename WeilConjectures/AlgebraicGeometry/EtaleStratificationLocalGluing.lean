@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 
 /-!
 # Gluing finite étale constructible stratifications
-
-Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, the reduction
-"In general, we may assume X is affine".
 -/
 
 @[expose] public section
@@ -30,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 /-- Constructible locally closed partitions with finite étale pullbacks glue over a finite
- affine open cover of a qcqs scheme. Source: Stacks Project, Etale Cohomology,
-`lemma-etale-stratified-finite`, locality reduction. -/
+affine open cover of a qcqs scheme. -/
 theorem exists_constructible_stratification_finite_etale_of_affine_local
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j]

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-!
 # Forgetting module coefficients in a commuting inverse-image square
 
-Source: Stacks Project, Tags 03FD and 095T, the coefficient comparison and
+Stacks Project, Tags 03FD and 095T;
 the functorial restriction-map calculation, respectively.
 -/
 
@@ -37,10 +37,8 @@ private theorem square_iso_cancel {C D E : Type*} [Category C] [Category D]
     Iso.inv_hom_id_map_assoc, Iso.hom_inv_id_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Coefficient-forgetting isomorphisms respect a commuting cohomology square.
-
-Source: Stacks Project, proof of Tag 095T, the final map-on-stalks calculation,
-and Tag 03FD for the underlying abelian cohomology convention. -/
+/-- Coefficient-forgetting isomorphisms respect a commuting cohomology square
+(Stacks, Tags 095T and 03FD). -/
 theorem Etale.exists_addEquiv_cohomology_moduleSquare
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' X₀ X₀' : Scheme.{u}} (g : X' ⟶ X) (i : X₀ ⟶ X)

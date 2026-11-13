@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResiduePol
 
 /-! # Lifting compatible residue embeddings through strict henselizations
 
-Source: Stacks Project, Tags 04GU and 04HX.
+Stacks Project, Tags 04GU and 04HX.
 -/
 
 @[expose] public section
@@ -26,8 +26,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 open Scheme Etale
 
-/-- The image of the first strict-henselization residue field lies in the second.
-Source: Stacks Project, Tag 04HX and the residue inclusion in the proof of Tag 095T. -/
+/-- The image of the first strict-henselization residue field lies in the second
+(Stacks, Tags 04HX and 095T). -/
 theorem Etale.compatibleStrictHenselization_residue_image
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

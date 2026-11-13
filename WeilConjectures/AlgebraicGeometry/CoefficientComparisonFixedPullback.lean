@@ -183,12 +183,7 @@ private def comparison_baseChange {X Y : Scheme.{u}} (f : Y ⟶ X)
 coefficient universe, the canonical intrinsic-module comparison inverse image on X followed by
 constant-scalar restriction and pro-etale inverse image along f is naturally isomorphic to
 constant-scalar restriction on X followed by etale inverse image along f and fixed-scalar
-comparison inverse image on Y. All sites and functors are the recorded coefficient-sized models
-[lem-pe-coefficient-comparison-data], [def-pe-etale-constructible-module], and [def-sfb-affine-
-locally-constructible-proetale-modules]. No constructibility or Noetherianity hypothesis is
-used.
-
-Source: Stacks Project, Tags 099R, 00VC and 03CY. -/
+comparison inverse image on Y (Stacks, Tags 099R, 00VC and 03CY). -/
 theorem coefficientComparison_fixedPullback {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :
     Nonempty

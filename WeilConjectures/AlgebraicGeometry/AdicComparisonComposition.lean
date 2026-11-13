@@ -277,8 +277,7 @@ private theorem inverse_paste {C : Type*} [Category C]
     _ = _ := by simp
 
 /-- Comparison with geometric inverse image respects a composite scalar extension.
-Source: Stacks Project, Tags 06YY, 0G7E and 09AL; the normalized comparison
-calculation in parent proof steps 3 and 4. -/
+(Stacks, Tags 06YY, 0G7E and 09AL). -/
 theorem adicComparison_composition (X : Scheme.{u})
     {A B C : Type (max v (u + 1))} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (e : h = g.comp f)

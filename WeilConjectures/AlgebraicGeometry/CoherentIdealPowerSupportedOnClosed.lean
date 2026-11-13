@@ -14,7 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.CoherentSupportVanishingIdealNilpot
 
 /-! # Concentrating an ideal-power product on a closed subset
 
-Source: Stacks Project, Tags 01YD and 01Y9.
+Stacks Project, Tags 01YD and 01Y9.
 -/
 
 @[expose] public section
@@ -24,9 +24,7 @@ universe u
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An ideal-power product can be made to vanish away from a prescribed closed subset.
-
-Source: Stacks Project, Tag 01YD, proof of Lemma 30.12.1, applying Tag 01Y9,
-Lemma 30.10.2 (https://stacks.math.columbia.edu/tag/01YD). -/
+(Stacks, Tags 01YD and 01Y9). -/
 theorem coherent_ideal_power_supported_on_closed
     (X : Scheme.{u}) [IsNoetherian X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

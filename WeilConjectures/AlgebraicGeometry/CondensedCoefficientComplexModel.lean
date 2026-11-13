@@ -21,11 +21,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
-/-- Termwise scalar extension and restriction give the coefficient colimit diagram.
-
-Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, Hom paragraph,
-and the coefficient construction in step 3 of
-`prop-weil-pbc-qbar-condensed-two-colimit`. -/
+/-- Termwise scalar extension and restriction give the coefficient colimit diagram. -/
 theorem exists_condensed_coefficient_complex_model
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E F : FiniteIntermediateField ℓ)

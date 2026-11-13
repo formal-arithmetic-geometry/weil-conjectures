@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
 /-! # Direct sums in the derived category of module sheaves
 
-Source: Stacks Project, Injectives, Lemma 07D9 (1)-(2), and Derived Categories of Schemes,
-proof of Lemma 08DT.
+## References
+
+* Stacks Project, Tags 07D9 and 08DT
 -/
 
 @[expose] public section
@@ -37,8 +38,7 @@ local instance instHasColimitsOfShape_derivedAmbientDirectSums (X : Scheme.{u}) 
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 /-- Termwise direct sums of any representatives give direct sums in `D(𝒪_X)`, and their
-cohomology is canonically the direct sum of the cohomology sheaves.
-Source: Stacks Project, Lemma 07D9 (1)-(2), and proof of Lemma 08DT. -/
+cohomology is canonically the direct sum of the cohomology sheaves. (Stacks, Tags 07D9, 08DT) -/
 theorem derivedAmbientDirectSums (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) (E : I → schemeDerivedCategory X)

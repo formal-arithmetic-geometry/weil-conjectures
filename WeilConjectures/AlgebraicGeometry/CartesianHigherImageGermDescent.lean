@@ -26,9 +26,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Every germ of the limit higher image is the canonical image of a stage germ.
-This is surjectivity of the relative higher-image continuity comparison, without
-any invertibility hypothesis on stage exchanges.
-Source: Stacks Project, Tag 0EYM, second proof, part (1). -/
+(Stacks, Tag 0EYM). -/
 theorem exists_cartesianHigherImage_germ_rep
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 /-!
 # Subsheaves of constructible module sheaves on Noetherian schemes
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, and Stacks Project,
-Proposition 59.74.1(3), Tag 03RY.
+## References
+
+* Stacks Project, Tag 03RY
 -/
 
 @[expose] public section

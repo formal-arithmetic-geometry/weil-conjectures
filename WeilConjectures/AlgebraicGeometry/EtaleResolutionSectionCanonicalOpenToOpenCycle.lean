@@ -50,14 +50,7 @@ private lemma sectionsEquiv_precomp {X : Scheme.{u}} {A B : X.Etale}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Cocycle-level restriction identity underlying the canonical open comparison.
-Source: Stacks Project, Tags 0A50 and 03F3; normalized Hom-cocycle calculation.
-
-The proof expands the two `open_cocycle` normalization identities, rewrites the
-Ext class of the restricted cocycle using `InjectiveResolution.mk₀_comp_extMk`,
-and applies the identity-generator coherence and exact inverse-image composition
-comparison. This is the cocycle calculation before passing to arbitrary homology
-classes via surjectivity of `homologyπ`.
--/
+(Stacks, Tags 0A50 and 03F3). -/
 theorem resolutionSection_canonical_open_to_open_cycle {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (I : InjectiveResolution G) (c : ResolutionSectionCanonicalComparison G I)

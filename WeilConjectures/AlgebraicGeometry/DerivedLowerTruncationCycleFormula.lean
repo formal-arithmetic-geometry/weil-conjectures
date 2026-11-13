@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationUnitBridge
 
 /-! # The cycle formula for the bottom derived comparison
 
-Source: Stacks Project, Tags 05TC (2), 0AVW and 08D4 (1).
+## References
+
+* Stacks Project, Tags 05TC, 0AVW and 08D4
 -/
 
 @[expose] public section
@@ -26,11 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Bottom derived cohomology identifies the derived edge map on each cycle
-with its image under the original functor. The complex need not be K-injective,
-and no invertibility of the derived truncation map is assumed.
-
-Source: Stacks Project, Tag 05TC (2), lemma-negative-vanishing; Tag 0AVW,
-canonical cohomology calculation; Tag 08D4 (1). -/
+with its image under the original functor
+(Stacks, Tags 05TC, 0AVW and 08D4). -/
 theorem derived_lower_truncation_cycle_formula
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]

@@ -59,8 +59,8 @@ private theorem tilde_preservesKernel (A : Type u) [CommRing A]
   exact Limits.preservesLimit_of_preserves_limit_cone hc'
     ((c.isLimitMapConeEquiv T).symm hc)
 
-/-- Derived associated sheaf commutes with cohomology, naturally in the derived object.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5 (exactness of associated sheaf). -/
+/-- Derived associated sheaf commutes with cohomology, naturally in the derived object (Stacks, Tag
+06Z0). -/
 theorem affineDerivedTilde_homology_comparison (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

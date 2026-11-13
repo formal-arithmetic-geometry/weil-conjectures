@@ -38,8 +38,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The independent localizations and their tensor instances require extra elaboration steps.
 set_option synthInstance.maxSize 2048 in
-/-- Affine-local cohomology calculation for a K-flat tensor representative.
-Source: Stacks Project, Tag 08DX(1), proof using Tag 08DX(2) and Tag 06Z0. -/
+/-- Affine-local cohomology calculation for a K-flat tensor representative
+(Stacks, Tags 08DX and 06Z0). -/
 theorem derivedTensor_cohomology_over_affine {X : Scheme.{uX}}
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)

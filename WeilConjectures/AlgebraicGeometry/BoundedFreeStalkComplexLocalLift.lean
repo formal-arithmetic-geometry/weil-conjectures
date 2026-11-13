@@ -27,9 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Ordinary direct image on an open preserves zero morphisms sectionwise.
-Source: the definition of module direct image in the direct-image step of
-lem-sc-bounded-free-stalk-complex-local-lift. -/
+/-- Ordinary direct image on an open preserves zero morphisms sectionwise. -/
 instance openModuleDirectImage_preservesZeroMorphisms (X : Scheme.{u}) (U : X.Opens) :
     Functor.PreservesZeroMorphisms (SheafOfModules.pushforward.{u}
       (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U)) where

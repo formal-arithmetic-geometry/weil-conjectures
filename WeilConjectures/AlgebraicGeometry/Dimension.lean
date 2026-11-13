@@ -16,9 +16,7 @@ public import Mathlib.Topology.KrullDimension
 /-!
 # Dimension and relative dimension of schemes
 
-Source: the blueprint of the Weil conjectures, chapter `sec-abelian-varieties`, unit
-`def-sc-jacobian`, node order 452; Stacks Project, Properties,
-Tags 04MT and 04MU (dimension of a scheme via its local rings).
+Stacks Project, Properties, Tags 04MT and 04MU (dimension of a scheme via its local rings).
 
 ## Main definitions
 
@@ -44,17 +42,14 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The *dimension* `dim X` of a scheme `X`: the supremum of the
-Krull dimensions `ringKrullDim 𝒪_{X,x}` of its local rings, as `x` ranges over `X`. The node assumes `X` nonempty; then the value lies in `ℕ∞`
-(every local ring is nonzero, so each term is `≥ 0`). No hypothesis is put on the definition:
-for the empty scheme the supremum over the empty family is `⊥` (`dim ∅ = -∞`), the convention
-used by the citers that write `dim X ≤ 1` for a possibly empty `X`. -/
+Krull dimensions `ringKrullDim 𝒪_{X,x}` of its local rings, as `x` ranges over `X`.
+For the empty scheme the supremum over the empty family is `⊥` (`dim ∅ = -∞`). -/
 noncomputable def Scheme.dim (X : Scheme.{u}) : WithBot ℕ∞ :=
   ⨆ x : X, ringKrullDim (X.presheaf.stalk x)
 
-/-- The dimension of a scheme as defined by the
-supremum of the Krull dimensions of its local rings (`Scheme.dim`, def-pc-dimension) equals the
-Krull dimension `topologicalKrullDim X` of its underlying topological space, both sides `⊥` for
-the empty scheme (Stacks, Tag 04MU). -/
+/-- The dimension of a scheme as defined by the supremum of the Krull dimensions of its local
+rings (`Scheme.dim`) equals the Krull dimension `topologicalKrullDim X` of its underlying
+topological space, both sides `⊥` for the empty scheme (Stacks, Tag 04MU). -/
 theorem Scheme.dim_eq_topologicalKrullDim (X : Scheme.{u}) :
     X.dim = topologicalKrullDim X := by
   rw [topologicalKrullDim, Order.krullDim_eq_of_orderIso irreducibleSetEquivPoints]

@@ -26,13 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Extend a sheet along its clopen graph in the compactification, then transpose
-under inverse image/direct image for the proper projection.
-
-Source: Stacks Project, Etale Cohomology, Tag 0F4L, graph extension.
-
-The graph projection is constructed from the unit of inverse image/direct image for
-the graph and the inverse of its open-extension-to-direct-image comparison. Thus the
-map is specified by actual adjunctions and is not a choice of an unspecified witness. -/
+under inverse image/direct image for the proper projection
+(Stacks, Tag 0F4L). -/
 noncomputable def etaleCompactificationGraphMap
     (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u]

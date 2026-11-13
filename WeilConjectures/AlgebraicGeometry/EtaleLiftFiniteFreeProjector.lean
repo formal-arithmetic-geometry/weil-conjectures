@@ -28,10 +28,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- An idempotent endomorphism of a finite free quotient module lifts to an
-idempotent endomorphism over an étale neighbourhood preserving the quotient.
-
-Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, from the choice
-of the lifted matrix through the construction of the lifted projector. -/
+idempotent endomorphism over an étale neighbourhood preserving the quotient
+(Stacks, Tag 07M5). -/
 theorem exists_etale_lift_finite_free_projector
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
     (pbar : Module.End (A ⧸ I) (Fin n → A ⧸ I)) (hpbar : IsIdempotentElem pbar) :

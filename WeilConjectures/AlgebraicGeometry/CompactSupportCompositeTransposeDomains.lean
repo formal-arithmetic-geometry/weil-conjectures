@@ -19,10 +19,6 @@ import Mathlib.Tactic.IrreducibleDef
 /-!
 # Domains for the compact-support composite transpose
 
-Source: latest blueprint file:
-`literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`.
-
 The statement is made on the concrete finite-coefficient small pro-etale derived categories.
 -/
 
@@ -39,63 +35,45 @@ attribute [local instance] DerivedCategory.braidedCategory'
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The ordinary derived category on the small pro-etale site.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The ordinary derived category on the small pro-etale site. -/
 abbrev CompactSupportD (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
   _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
 
-/-- The derived pullback on compact-support coefficients.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The derived pullback on compact-support coefficients. -/
 abbrev compactSupportPullback (A : Type (u + 1)) [CommRing A]
     {V T : Scheme.{u}} (a : V ⟶ T) : CompactSupportD A T ⥤ CompactSupportD A V :=
   L((a)^*[ModuleCat.{u + 1} A])
 
-/-- The compact-support derived lower shriek.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The compact-support derived lower shriek. -/
 abbrev compactSupportLowerShriek (A : Type (u + 1)) [CommRing A]
     {V T : Scheme.{u}} (a : V ⟶ T) [HasCompactification a] :
     CompactSupportD A V ⥤ CompactSupportD A T :=
   rightDerivedLowerShriek (ModuleCat.{u + 1} A) a
 
-/-- The compact-support derived upper shriek.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The compact-support derived upper shriek. -/
 abbrev compactSupportUpperShriek (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T : Scheme.{u}} (a : V ⟶ T) [HasCompactification a] :
     CompactSupportD A T ⥤ CompactSupportD A V :=
   rightDerivedUpperShriek A a
 
-/-- The constructible finite-Tor full subcategory.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The constructible finite-Tor full subcategory. -/
 abbrev CompactSupportDctf (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}} :=
   DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) T
 
-/-- Tensor product in the ordinary derived category.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- Tensor product in the ordinary derived category. -/
 abbrev compactSupportTensor (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     (P Q : CompactSupportD A T) : CompactSupportD A T := P ⊗ Q
 
-/-- A derived-category morphism used in the two transposes.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- A derived-category morphism used in the two transposes. -/
 abbrev compactSupportHom (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     (P Q : CompactSupportD A T) := P ⟶ Q
 
-/-- The upper-shriek image of the coefficient unit.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The upper-shriek image of the coefficient unit. -/
 noncomputable abbrev W (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T : Scheme.{u}} (a : V ⟶ T) [HasCompactification a] : CompactSupportD A V :=
   (compactSupportUpperShriek A a).obj (𝟙_ _)
 
-/-- The inverse of the published projection map, conjugated by the canonical tensor symmetry.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The inverse of the published projection map, conjugated by the canonical tensor symmetry. -/
 noncomputable def canonicalProjectionIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T : Scheme.{u}} (a : V ⟶ T) [HasCompactification a]
@@ -111,9 +89,7 @@ noncomputable def canonicalProjectionIso
       (asIso (((projectionMap (ModuleCat.{u + 1} A) a).app M).app B)).symm ≪≫
       (β_ _ _)
 
-/-- The adjoint transpose of the inverse projection and the coefficient counit.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The adjoint transpose of the inverse projection and the coefficient counit. -/
 noncomputable def canonicalTheta
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T : Scheme.{u}} (a : V ⟶ T) [HasCompactification a]
@@ -133,32 +109,24 @@ noncomputable def canonicalTheta
         ((𝟙 B) ⊗ₘ rightDerivedUpperShriekCounit a (𝟙_ _) hUnitplus) ≫
         (ρ_ B).hom)
 
-/-- The one-step tensor domain `U` for the composite transpose.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The one-step tensor domain `U` for the composite transpose. -/
 noncomputable abbrev U (A : Type (u + 1)) [CommRing A] [Finite A]
     {Y Z : Scheme.{u}} (g : Y ⟶ Z) [HasCompactification g]
     (K : CompactSupportD A Z) : CompactSupportD A Y :=
   (compactSupportPullback A g).obj K ⊗ W A g
 
-/-- The two-step tensor domain `N` for the composite transpose.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The two-step tensor domain `N` for the composite transpose. -/
 noncomputable abbrev N (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] (K : CompactSupportD A Z) :
     CompactSupportD A X :=
   (compactSupportPullback A f).obj (U A g K) ⊗ W A f
 
-/-- The full subcategory used to restrict the compact-support functors.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The full subcategory used to restrict the compact-support functors. -/
 abbrev CompactSupportCtfCategory (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}} :=
   (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) T).FullSubcategory
 
-/-- Restriction of lower shriek to constructible finite-Tor objects.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- Restriction of lower shriek to constructible finite-Tor objects. -/
 abbrev lowerLift (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (hf₁ : ∀ K, CompactSupportDctf A K → CompactSupportDctf A
@@ -169,9 +137,7 @@ abbrev lowerLift (A : Type (u + 1)) [CommRing A] [Finite A]
       compactSupportLowerShriek A f)
     (fun K ↦ hf₁ K.obj K.property)
 
-/-- Restriction of upper shriek to constructible finite-Tor objects.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- Restriction of upper shriek to constructible finite-Tor objects. -/
 abbrev upperLift (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (hf₂ : ∀ L, CompactSupportDctf A L → CompactSupportDctf A
@@ -182,9 +148,7 @@ abbrev upperLift (A : Type (u + 1)) [CommRing A] [Finite A]
       compactSupportUpperShriek A f)
     (fun L ↦ hf₂ L.obj L.property)
 
-/-- The bounded constructible finite-Tor adjunction.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`. -/
+/-- The bounded constructible finite-Tor adjunction. -/
 noncomputable def restrictedAdjF
     (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f]
@@ -199,12 +163,8 @@ noncomputable def restrictedAdjF
     (fun _ hK ↦ hK.plusEtaleOrigin) (fun _ hL ↦ hL.plus) hf₁ hf₂
 
 /-- The concrete pro-etale compact-support compositor transported from the etale compositor.
-
 This is the explicit transport through `comparisonUpperStarPlusEtaleOrigin` and
-`rightDerivedLowerShriekComparisonIso`; no choice of an arbitrary inhabiting isomorphism is made.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+`rightDerivedLowerShriekComparisonIso`. -/
 noncomputable irreducible_def canonicalEtaleOriginLowerShriekCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -219,10 +179,7 @@ noncomputable irreducible_def canonicalEtaleOriginLowerShriekCompIso
   letI := hgq
   exact (originCompositionAmbient A f g).symm
 
-/-- The finite-Tor compositor restricted to the constructible finite-Tor subcategories.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+/-- The finite-Tor compositor restricted to the constructible finite-Tor subcategories. -/
 noncomputable irreducible_def canonicalAlpha
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -255,10 +212,7 @@ noncomputable irreducible_def canonicalAlpha
       (Functor.isoWhiskerLeft (ObjectProperty.ιOfLE hPX) e)
 
 /-- The adjunction conjugate `c : G_h ≅ G_f G_g` of `canonicalAlpha` across the restricted
-Brown adjunctions (statement dependency def-weil-pbc-adjunction-conjugate).
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+Brown adjunctions. -/
 noncomputable irreducible_def canonicalC
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -285,10 +239,7 @@ noncomputable irreducible_def canonicalC
     (restrictedAdjF A (f ≫ g) hZ hfg₁ hfg₂)
     (canonicalAlpha A f g hY hZ hfq hgq hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂)).symm
 
-/-- The component `c_{A_Z} : W_h ≅ G_f G_g A_Z` of the conjugate `c` at the coefficient unit.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+/-- The component `c_{A_Z} : W_h ≅ G_f G_g A_Z` of the conjugate `c` at the coefficient unit. -/
 noncomputable irreducible_def canonicalCUnit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -317,10 +268,7 @@ noncomputable irreducible_def canonicalCUnit
   exact (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X).ι.mapIso i
 
 /-- The component at a constructible finite-Tor object of the compositor `canonicalAlpha`, as an
-ambient derived morphism `P_h B ⟶ P_g P_f B`.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+ambient derived morphism `P_h B ⟶ P_g P_f B`. -/
 noncomputable irreducible_def canonicalAlphaComponent
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -346,10 +294,7 @@ noncomputable irreducible_def canonicalAlphaComponent
     ((canonicalAlpha A f g hY hZ hfq hgq hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂).hom.app ⟨B, hB⟩)
 
 /-- The identification of `N` with `S_h K ⊗ W_h` by monoidal pullback, reassociation, `q`, and the
-inverse pullback compositor, used in `R_K`.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+inverse pullback compositor, used in `R_K`. -/
 noncomputable def canonicalSourceIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -366,10 +311,7 @@ noncomputable def canonicalSourceIso
       (asIso (𝟙 _ ⊗ₘ q.hom)) ≪≫
       (asIso (r.inv ⊗ₘ 𝟙 _))
 
-/-- Concrete normalized data for the final compact-support transposition.
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph. -/
+/-- Concrete normalized data for the final compact-support transposition. -/
 structure CompactSupportCompositeTransposeDomains
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
@@ -575,23 +517,7 @@ structure CompactSupportCompositeTransposeDomains
 
 
 
-/-- The concrete domain and normalization statement for smooth compact-support composition.
-Proof steps:
-(1) finite-Tor pullback and tensor stability put the coefficient objects, `U`, `N`, and all
-reassociations used below in `Dctf`.
-(2) Brown's restricted upper-shriek adjunctions and the constructible comparison provide the
-bounded etale-origin witnesses and the compact-support images for each displayed input.
-(3) The canonical lower-shriek compositor is transposed across those restricted adjunctions;
-its mate `c` satisfies the pasted counit equation, and the coefficient map `q` is the mate of
-`theta` at the unit.
-(4) The inverse of the published finite-Tor projection map, with the tensor braiding, defines
-`pi_f`, `pi_g`, and `pi_h`; their unit, inverse, naturality, and coefficient-associativity laws
-are recorded for every input used by the two transposes.
-(5) Pullback's monoidal compositor and the compositor `alpha` identify the composite projection
-with the two successive projections, including the module input `P_f M`.
-(6) The restricted adjunction Hom equivalences are bijections (hence injective); applying them
-in the two orders gives the displayed `L` and `R` domains and the typed composite-projection
-identity required before the final double-transpose calculation. -/
+/-- The concrete domain and normalization statement for smooth compact-support composition. -/
 theorem compactSupportCompositeTransposeDomains
     (ell : ℕ) [Fact ell.Prime]
     (k : Type u) [Field k] [Fact (ringChar k).Prime]

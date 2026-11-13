@@ -158,8 +158,7 @@ attribute [local irreducible] ringedKoszulTensor
 This is an equality of specified maps; it asserts no existence of a tower isomorphism
 and contains no unit assertion.
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YY, derived scalar extension;
-proetale.tex, Tag 099M, the quotient coefficient transitions. -/
+(Stacks, Tags 06YY and 099M). -/
 theorem adicResidueQuotientTensorLevelIso_successor
     (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))
     (hP : P.IsKFlatTensor) (M : AdicResidueLocalDerived.{u, v} X J U)

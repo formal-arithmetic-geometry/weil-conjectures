@@ -141,8 +141,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- If sections on every member of a finite Čech nerve preserve filtered colimits,
 then its Čech cohomology functors preserve coefficient-size colimits in every degree.
-Source: Stacks Project, Tag 0739, proof of `lemma-colim-works-over-collection`,
-the finite-cover Čech step. -/
+(Stacks, Tag 0739). -/
 private theorem coefficientFiniteEtaleCechHomology
     (X : Scheme.{u}) (U : X.Etale) (K : Type (u + 1)) [Finite K]
     (V : K → X.Etale) (f : ∀ k : K, V k ⟶ U)
@@ -209,8 +208,7 @@ private theorem abelianSectionsColimit (Y : Scheme.{u}) (V : Y.Etale)
 
 /-- A filtered colimit of injective etale abelian sheaves is acyclic for global
 sections on a quasi-compact quasi-separated scheme.
-Source: Stacks Project, Tag 0739, proof, last paragraph, applied to the qcqs
-etale basis as in Tag 03Q5. -/
+(Stacks, Tags 0739 and 03Q5). -/
 theorem isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]

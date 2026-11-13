@@ -63,8 +63,7 @@ private theorem abelianSectionsColimit (Y : Scheme.{u}) (V : Y.Etale)
     (Functor.isoWhiskerRight S.asEquivalence.counitIso Eab) hEU⟩
 
 /-- Filtered colimits of injective abelian étale sheaves are global-sections acyclic
-on a qcqs scheme. The colimit need not itself be injective.
-Source: Stacks Project, Tag 0739, final paragraph; Tag 073E, proof. -/
+on a qcqs scheme (Stacks, Tags 0739 and 073E). -/
 theorem isZero_rightDerived_globalSections_colimit_of_injective
     (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y]
     (I : Type u) [SmallCategory I] [IsFiltered I]

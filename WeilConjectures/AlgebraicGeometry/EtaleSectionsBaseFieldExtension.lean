@@ -15,8 +15,9 @@ import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
 /-!
 # Étale sections after extension of a separably closed base field
 
-Source: Stacks Project, Etale Cohomology, Lemma 0A3I
-(etale-cohomology-lemma-sections-base-field-extension).
+## References
+
+* Stacks Project, Tag 0A3I
 -/
 
 @[expose] public section
@@ -27,15 +28,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Etale Cohomology, Lemma 0A3I.
-Let `k` be separably closed, `K/k` a field extension, and `S` a `k`-scheme.
-Pullback induces a bijection on sections of every sheaf of sets on `S`'s small étale site.
-The map is the inverse-image/direct-image adjunction unit evaluated at the identity
-étale object of `S`. Its target is the inverse image evaluated at the base change of
-that object, canonically isomorphic to the identity object of `S_K`; composing with
-this isomorphism gives exactly the canonical map to global sections on `S_K`.
-The inverse image is the same Kan-extension/sheafification construction as the recorded
-`Scheme.etaleSetPullback`, rather than an independently chosen equivalence of section sets. -/
+/-- Let `k` be separably closed, `K/k` a field extension, and `S` a `k`-scheme.
+Pullback induces a bijection on sections of every sheaf of sets on `S`'s small étale site
+(Stacks, Tag 0A3I). -/
 theorem etale_sections_base_field_extension
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsSepClosed k]
     (S : Scheme.{u}) [S.Over (Spec (.of k))]

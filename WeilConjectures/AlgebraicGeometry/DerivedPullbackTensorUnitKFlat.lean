@@ -15,8 +15,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Unit laws on K-flat representatives
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -299,8 +300,7 @@ set_option maxHeartbeats 600000 in
 -- The concrete sheaf tensor instances require extra elaboration heartbeats.
 /-- The explicitly constructed unit comparison satisfies both unit laws on Q(P)
 when P is K-flat. No statement about arbitrary derived objects is made here.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product;
-parent unit proof, step 2, using the degree-zero unit computation of step 1. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

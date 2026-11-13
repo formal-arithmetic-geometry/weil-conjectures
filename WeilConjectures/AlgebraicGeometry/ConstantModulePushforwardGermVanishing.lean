@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardAffineSectionV
 
 /-! # Eventual vanishing of constant-module direct-image germs
 
-Source: Stacks Project, Tag 09Z1, degree zero.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -62,8 +64,7 @@ private theorem affine_point_refinement
 /-- A germ of a constant-module direct image which vanishes at the limit already
 vanishes after one transition of the inverse system.
 
-Source: Stacks Project, Tag 09Z1, degree-zero injectivity in the proof; Tag 09YQ,
-degree-zero continuity on affine etale test schemes. -/
+(Stacks Project, Tags 09Z1, 09YQ) -/
 theorem exists_constantModulePushforward_germ_eq_zero
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

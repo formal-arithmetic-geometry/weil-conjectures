@@ -14,8 +14,9 @@ public import Mathlib.AlgebraicGeometry.Properties
 /-!
 # Component intersections on a Noetherian scheme of dimension at most one
 
-Source: Stacks Project, Varieties, Lemma 33.38.10 (Tag 09NX), proof, first paragraph
-and the uniqueness assertion in its final paragraph.
+## References
+
+* Stacks Project, Tag 09NX
 -/
 
 @[expose] public section
@@ -26,8 +27,8 @@ namespace AlgebraicGeometry
 
 /-- On a Noetherian scheme of topological dimension at most one, the irreducible components
 are finite in number, their distinct pairwise intersections are finite sets of closed points,
-and outside their union each point belongs to exactly one component.
-Source: Stacks Project, Varieties, Lemma 33.38.10 (Tag 09NX), proof. -/
+and outside their union each point belongs to exactly one component
+(Stacks, Tag 09NX). -/
 theorem component_intersections_finite (Y : Scheme.{u}) [IsLocallyNoetherian Y]
     [CompactSpace Y] (h_dim : topologicalKrullDim Y ≤ 1) :
     let T : Set Y := {y | ∃ Z₁ ∈ irreducibleComponents Y,

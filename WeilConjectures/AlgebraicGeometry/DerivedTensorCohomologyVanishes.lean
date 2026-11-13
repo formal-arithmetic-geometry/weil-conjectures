@@ -25,13 +25,9 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 
 set_option synthInstance.maxSize 256 in
-/-- Vanishing of `H^i(E ⊗ᴸ F)` is expressed by a K-flat representative `P` of `E`
-whose total tensor with `F` in degree zero has zero cohomology in degree `i`.
-The representative is required to exist: this predicate cannot hold vacuously.
-K-flat resolutions exist (Tag 06YS), and different K-flat representatives compute
-isomorphic derived tensor products (Tag 06YU). Thus existential choice of a
-representative gives exactly vanishing of the derived tensor cohomology sheaf.
-Source: Stacks Project, Tags 06YS, 06YU and 08EA. -/
+/-- Vanishing of `H^i(E ⊗ᴸ F)`, expressed by a K-flat representative `P` of `E` whose total
+tensor with `F` in degree zero has zero cohomology in degree `i`
+(Stacks, Tags 06YS, 06YU and 08EA). -/
 def schemeDerivedTensorCohomologyVanishes (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X)

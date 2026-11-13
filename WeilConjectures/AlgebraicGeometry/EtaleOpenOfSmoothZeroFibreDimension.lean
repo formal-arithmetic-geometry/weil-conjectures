@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A morphism smooth on an open neighbourhood of `x`, whose scheme-theoretic fibre has
 local dimension zero at `x`, is étale on a smaller open neighbourhood contained in the given one.
-Source: Stacks Project, Tag 0A43, final sentence of the proof, and Tags 02G1, 02G2, 02GI. -/
+(Stacks, Tag 0A43) -/
 theorem exists_etale_open_of_smooth_of_fibre_dimension_zero
     {X S : Scheme.{u}} (f : X ⟶ S) (x : X) (U : X.Opens) (hx : x ∈ U)
     (hSmooth : Smooth (U.ι ≫ f)) (hDim : topologicalKrullDimAt (f.asFiber x) = 0) :

@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Totalization of the column inclusion before applying global sections.
-Source: Stacks Project, Tag 015J, proof remark (3). -/
+/-- Totalization of the column inclusion before applying global sections (Stacks, Tag 015J). -/
 noncomputable def etaleRestrictedTotalInclusion
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -36,8 +35,8 @@ noncomputable def etaleRestrictedTotalInclusion
             (T.I.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))) (ComplexShape.up ℤ)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The restricted augmentation commutes with the two truncation inclusions.
-Source: Stacks Project, Tag 015J, proof remark (3), and Tag 0133. -/
+/-- The restricted augmentation commutes with the two truncation inclusions
+(Stacks, Tags 015J, 0133). -/
 theorem etaleRestrictedAugmentation_inclusion
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Global sections under the abelian Galois stalk equivalence
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point.
+Source: Stacks Project, Etale Cohomology, Tag 04JM.
 -/
 
 @[expose] public section
@@ -28,9 +28,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical terminal germ map, transported through the supplied stalk
-isomorphism, is injective.
-
-Source: Stacks Project, Tag 04JM, lemma-global-sections-point. -/
+isomorphism, is injective (Stacks, Tag 04JM). -/
 theorem etaleGlobalSections_galoisInvariants_injective
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

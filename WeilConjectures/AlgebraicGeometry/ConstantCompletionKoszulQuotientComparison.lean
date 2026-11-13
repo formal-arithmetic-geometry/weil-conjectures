@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantKoszulQuotientAugmentationIsIso
 
 /-! # Comparison of strict Koszul and quotient completion
 
-Source: Stacks Project, proetale.tex, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -189,8 +191,7 @@ private theorem compareComputations
 /-- For any presentation of the specified strict Koszul tower, its derived limit agrees
 with quotient completion, carrying the degree-zero unit to the quotient augmentation.
 
-Source: Stacks Project, proetale.tex, Tag 099M, with the
-flat completed-coefficient extension of sites-modules.tex, Tag 093M. -/
+(Stacks Project, Tags 099M, 093M) -/
 theorem koszulQuotientComparison [IsNoetherianRing A] (b : Bool) (r : ℕ)
     (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)
     (K : KoszulPresentation J A I b r a) :

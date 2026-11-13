@@ -54,11 +54,7 @@ lemma nsmul_integralScalarMapInvPow_succ (k : ℕ) :
 
 /-- **`E̲ = colim(𝒪̲_E --ℓ--> 𝒪̲_E --ℓ--> ⋯)`** for the closed unit ball `𝒪_E` of a normed
 extension `E` of `ℚ_ℓ`: the maps `ℓ⁻ᵏ φ` exhibit `E̲` as the sequential colimit of the
-multiplications by `ℓ` on `𝒪̲_E`. This is base
-`Profinite.isColimitPadicIntegersRingObjSmulSequenceCocone` for a general normed `E`. Sectionwise,
-every continuous map from a profinite set to `E` has a common denominator `ℓⁿ`
-(`continuousIntegralFunctions_isLocalization`), and the maps `ℓ⁻ᵏ φ` are injective.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+multiplications by `ℓ` on `𝒪̲_E`. (Bhatt--Scholze, Lemma 6.8.2) -/
 noncomputable def isColimitIntegralCoeffSmulSequenceCocone :
     IsColimit (Mod.smulSequenceCocone ℓ (integralScalarMapInvPow.{u} ℓ E)
       (nsmul_integralScalarMapInvPow_succ ℓ E)) := by
@@ -160,10 +156,8 @@ noncomputable def isColimitIntegralExtendScalarsCocone (X : Scheme.{u})
       (coefficientMapInvPow_zero ℓ E X)) M
 
 /-- Integral-to-E scalar extension is exact. `E_X = p_X^* E̲` is the sequential colimit of the
-multiplications by `ℓ` on `𝒪_{E,X} = p_X^* 𝒪̲_E` (`isColimitCoefficientMapSmulSequenceCocone`),
-so base `Mod.preservesFiniteLimits_extendScalars_of_isColimit` applies. This is the proof of base
-`preservesFiniteLimits_extendScalars_padicIntegersToPadicSubfield` for a general normed `E`.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+multiplications by `ℓ` on `𝒪_{E,X} = p_X^* 𝒪̲_E` (`isColimitCoefficientMapSmulSequenceCocone`).
+(Bhatt--Scholze, Lemma 6.8.2) -/
 @[instance] theorem integralScalarExtension_exact (X : Scheme.{u}) :
     PreservesFiniteLimits
       (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)) := by

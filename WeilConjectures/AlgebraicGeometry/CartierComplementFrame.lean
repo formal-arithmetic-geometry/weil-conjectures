@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
 import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 
 /-! # The canonical frame off a Cartier divisor
-Source: blueprint Cartier proof (G1), local inverse equations. -/
+
+The canonical frame off a Cartier divisor, given by local inverse equations.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,7 +47,7 @@ private theorem pullbackSection_eq {D T : Scheme.{u}} (i : D ⟶ T) (W : T.Opens
   erw [e.hom.naturality, e.inv_hom_id_app_assoc]
 
 /-- The canonical divisor section is invertible on the complementary open.
-Source: Stacks Project, Tag 0A45, and blueprint Cartier proof (G1). -/
+(Stacks, Tag 0A45). -/
 theorem cartierDivisorSectionPullback_isIso {D T : Scheme.{u}} (i : D ⟶ T)
     [IsClosedImmersion i] (W : T.Opens)
     (hW : (W : Set T) = (Set.range i.base)ᶜ) :

@@ -88,8 +88,8 @@ def fixedCounitRestrictionStatement
         a.hom ≫
           (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
             pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
-/-- Open restriction for the fixed counits used to define the derived base-change map.
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
+/-- Open restriction for the fixed counits used to define the derived base-change map
+(Stacks, Tags 08FE, 08HY, 08IB, 0D5U). -/
 theorem restricted_base_change_fixed_counits
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

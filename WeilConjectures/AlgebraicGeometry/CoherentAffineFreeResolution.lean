@@ -31,11 +31,7 @@ namespace AlgebraicGeometry
 
 /-- A coherent module on a Noetherian scheme is locally represented by a finite module on an
 affine open, and admits there a bounded-above resolution by finite-rank free modules.
-Source: Stacks Project, Coherent Modules, Lemma 01XZ and Algebra, Lemma 00LP.
-
-The bounded-above condition is expressed by vanishing above an integer bound, each finite-free
-term by an isomorphism with `SheafOfModules.free`, and the augmentation by `QuasiIso` to the
-degree-zero complex. -/
+(Stacks, Tags 01XZ and 00LP) -/
 theorem coherent_affine_free_resolution
     (X : Scheme.{u}) [IsNoetherian X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (x : X) :

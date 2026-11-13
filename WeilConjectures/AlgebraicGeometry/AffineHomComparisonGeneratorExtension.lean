@@ -126,9 +126,7 @@ theorem existsUnique_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affin
   apply (cancel_epi (affineHomComparisonUnitIso U).inv).mp
   simpa only [Category.assoc] using hx.trans hx'.symm
 
-/-- The comparison uniquely determined by its values on global generators.
-The preceding unique-existence theorem determines this morphism up to equality;
-its proof is postponed, while its full generator normalization is specified. -/
+/-- The comparison uniquely determined by its values on global generators. -/
 noncomputable def affineHomComparison {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) :
     (affineHomComparisonFunctor U).obj (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) ⟶

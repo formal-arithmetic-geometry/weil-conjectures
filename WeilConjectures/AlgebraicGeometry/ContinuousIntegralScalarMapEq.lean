@@ -23,7 +23,6 @@ The image of `B` is the colimit of the multiplications by `ℓ` on `B`, and `Hom
 with this sequential colimit since `K` is bounded constructible
 (`CondensedRing.integralConstructible_sheaf_hom_colimit`): two morphisms with the same image are
 equal at a finite stage, where the transition map is `ℓⁿ`.
-
 -/
 
 @[expose] public section

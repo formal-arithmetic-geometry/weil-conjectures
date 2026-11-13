@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Support and quasi-coherence of the derived open-unit cone
-Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;
-Tag 08D5, quasi-coherence of derived direct image.
+## References
+
+* Stacks Project, Tags 09IR and 08D5
 -/
 
 @[expose] public section
@@ -105,9 +106,7 @@ private theorem open_right_adjoint (A : Type u) [CommRing A]
     ((DerivedCategory.homologyFunctor _ n).mapIso (α.app _)) (hpush' n)
 
 /-- The cone of the open restriction unit has quasi-coherent cohomology and vanishes
-on the open. This assertion has no Koszul or orthogonality hypothesis.
-Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;
-Tag 08D5, preservation of quasi-coherent cohomology by qcqs direct image. -/
+on the open (Stacks, Tags 09IR and 08D5). -/
 theorem derived_open_unit_cone_properties
     (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens)
     (hqc : IsCompact (U : Set (Spec (.of A))))

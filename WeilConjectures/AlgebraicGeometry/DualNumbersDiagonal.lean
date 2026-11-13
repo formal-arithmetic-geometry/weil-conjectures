@@ -164,7 +164,7 @@ private theorem iterated_axes (S Y : Scheme.{u})
 
 /-- Maps out of the product of two dual-number thickenings which agree on both axes
 agree on the diagonal.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, square-zero pushout calculation. -/
+(Stacks, Tag 0B2B) -/
 theorem dualNumbers_diagonal_comp_eq_of_axes (S : Scheme.{u}) (X : Over S)
     (f g : dualNumbersOver S ⊗ dualNumbersOver S ⟶ X)
     (h₁ : lift (𝟙 (dualNumbersOver S))

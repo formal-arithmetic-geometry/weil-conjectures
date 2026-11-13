@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleTorsionModulesAgree
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.CurveCoefficientPair
-/-- Constructibility of the subobject in the six step dévissage argument.
-The proof is the finite torsion bound, cyclic module bridge, and the Noetherian
-constructible subobject theorem described in the parent blueprint node. -/
+/-- Constructibility of the subobject in the six step dévissage argument. -/
 theorem constructible_sub_part {k : Type u} [Field k] [IsAlgClosed k]
     (P : AlgebraicGeometry.CurveCoefficientPair k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})

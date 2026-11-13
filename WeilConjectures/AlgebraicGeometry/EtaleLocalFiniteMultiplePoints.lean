@@ -28,32 +28,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, More on Morphisms, Lemma 02LM.
-For finitely many distinct isolated fiber points, an etale neighborhood makes their lifts
-lie in finite open subschemes, with purely inseparable residue fields and no unlisted lifts.
-
-Proof plan:
-1. Local finite type and isolatedness imply finite residue extensions, by
-   `lem-weil-pbc-isolated-fibre-point-residue-finite`.
-2. Choose a finite separable extension splitting their separable parts by
-   `lem-weil-pbc-separable-split-purely-inseparable-residue-fields`, and realize it as the
-   residue field of an etale neighborhood by
-   `lem-weil-pbc-etale-neighbourhood-prescribed-residue-field`.
-3. Enumerate all points over each pair of original point and neighborhood point, using
-   `lem-weil-pbc-fibre-product-points`. Their residue fields are finite purely inseparable
-   by `lem-weil-pbc-fibre-product-point-residue-field` and the choice in step 2.
-4. The projection is locally of finite type by `lem-weil-pbc-lft-base-change`; the listed
-   points are isolated by `lem-weil-pbc-isolated-fibre-point-base-change`.
-5. Apply `lem-weil-pbc-etale-local-finite-multiple-points-elementary` to those points.
-   Identify the iterated pullback by `lem-weil-pbc-cartesian-square-pasting`, and compose
-   the etale maps using `lem-weil-pbc-etale-composition-cancellation`.
-6. The elementary neighborhood preserves the base residue field and the listed point
-   residue fields. Thus the finite purely inseparable extensions persist. The listed
-   points are distinct since their intermediate images are distinct. Every point over
-   an original point and the final base point maps to an enumerated intermediate point;
-   `lem-weil-pbc-fibre-product-points` identifies its remaining lifts with the primes of
-   that point's residue field (the base residue extension is an isomorphism), so there
-   is exactly one lift. This proves exhaustion and uniqueness. -/
+/-- For finitely many distinct isolated fiber points, an etale neighborhood makes their lifts
+lie in finite open subschemes, with purely inseparable residue fields and no unlisted lifts
+(Stacks, Tag 02LM). -/
 theorem exists_etale_local_finite_multiple_points
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (s : S) (n : ℕ) (x : Fin n → X) (hx : ∀ i, f (x i) = s)

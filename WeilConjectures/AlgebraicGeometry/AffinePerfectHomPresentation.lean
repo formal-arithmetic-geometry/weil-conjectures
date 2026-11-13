@@ -66,12 +66,8 @@ private theorem affinePresentation_Q_map_surjective
   simpa using h
 
 /-- A perfect pair on an affine scheme admits a module-derived Hom presentation,
-compatible with both finite-stage transport and transport to the limit.
-This is a comparison theorem only: it asserts neither bijectivity of the colimit
-comparison nor descent of morphisms or homotopies.
-
-Source: Stacks Project, perfect.tex, Tag 09RE, affine part of the proof of
-lemma-descend-homomorphisms; Tags 08EB, 06Z0 and 08DW. -/
+compatible with both finite-stage transport and transport to the limit
+(Stacks, Tags 09RE, 08EB, 06Z0, 08DW). -/
 theorem exists_affinePerfectHomPresentation
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

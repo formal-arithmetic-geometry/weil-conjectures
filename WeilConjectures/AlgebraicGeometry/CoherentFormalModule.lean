@@ -259,11 +259,8 @@ private theorem isFiniteType_of_epi {X : Scheme.{u}} {F G : X.Modules}
   constructor
   exact ⟨q, hq⟩
 
-/-- Linear maps preserve ideal products; inclusion of powers for n ≤ m gives the
-factorization needed for the canonical quotient map. Proof: node steps 1--3: on affine
-opens u sends each sum a_i s_i to the sum a_i u(s_i); I^m F is contained in I^n F.
-The quotient projection kills I^n F. Equality on the affine basis gives the sheaf equality.
-Source: Stacks, equation 0880. -/
+/-- Linear maps preserve ideal products, giving the factorization needed for the canonical
+quotient map (Stacks, Tag 0880). -/
 theorem formalModuleQuotient_map_zero {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
     Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F ≫
@@ -285,10 +282,7 @@ def formalModuleQuotientMap {X : Scheme.{u}} (I : X.IdealSheafData)
   cokernel.desc (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F)
     (f ≫ formalModuleQuotientπ I n G) (formalModuleQuotient_map_zero I f h)
 
-/-- Reduction preserves identities. Proof: node step 6; after precomposing with the
-cokernel projection both sides are the projection, so the cokernel universal property
-identifies them.
-Source: Stacks, equation 0880. -/
+/-- Reduction preserves identities (Stacks, Tag 0880). -/
 theorem formalModuleQuotientMap_id {X : Scheme.{u}} (I : X.IdealSheafData)
     (F : X.Modules) (n : ℕ) :
     formalModuleQuotientMap I (𝟙 F) (Nat.le_refl n) = 𝟙 (formalModuleQuotient I n F) := by
@@ -336,10 +330,7 @@ private theorem formalModuleQuotient_iterated {X : Scheme.{u}} (I : X.IdealSheaf
   refine ⟨⟨a, v, hav, hva⟩, ?_⟩
   exact cokernel.π_desc k t ht
 
-/-- Canonical reductions form an inverse system. Proof: node steps 5--6; quotient
-projections are epi, and both sides of each identity or composition law agree after
-precomposition with the projection, by uniqueness in the cokernel universal property.
-Source: Stacks, equation 0880. -/
+/-- Canonical reductions form an inverse system (Stacks, Tag 0880). -/
 theorem formalCompletionSystem_laws {X : Scheme.{u}} (I : X.IdealSheafData)
     (F : X.Modules) :
     (∀ n : ℕᵒᵖ, formalModuleQuotientMap I (𝟙 F)
@@ -365,10 +356,7 @@ def formalCompletionSystem {X : Scheme.{u}} (I : X.IdealSheafData) (F : X.Module
   map_id := (formalCompletionSystem_laws I F).1
   map_comp f g := (formalCompletionSystem_laws I F).2 _ _ _ f g
 
-/-- Reduction of a module map commutes with transitions. Proof: node step 6; both
-composites after precomposition with the source quotient map are u followed by the target
-quotient map, so uniqueness of cokernel factorization gives equality.
-Source: Stacks, equation 0880. -/
+/-- Reduction of a module map commutes with transitions (Stacks, Tag 0880). -/
 theorem formalCompletionMap_naturality {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (u : F ⟶ G) (a b : ℕᵒᵖ) (f : a ⟶ b) :
     (formalCompletionSystem I F).map f ≫
@@ -388,17 +376,7 @@ def formalCompletionMap {X : Scheme.{u}} (I : X.IdealSheafData)
   naturality := formalCompletionMap_naturality I u
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Completion of a coherent module satisfies the object conditions. Proof: node steps
-1--5. Ideal powers and their products with F are quasi-coherent: tensor products are
-quasi-coherent, and their images are kernels of quasi-coherent cokernels. The quotient
-is quasi-coherent and of finite type, since images of finite local generators generate
-any epimorphic quotient; the locally Noetherian coherence criterion applies.
-Naturality of multiplication and epimorphy of tensoring a quotient projection show that
-I^n acts by zero on F/I^n F. The same calculation identifies maps out of the iterated
-quotient with maps out of F killing I^n F. Construct both directions of the resulting
-quotient isomorphism by cokernel.desc; cancel the quotient projections to prove that
-they are inverse and that the isomorphism induces the specified transition map.
-Source: Stacks, equation 0880. -/
+/-- Completion of a coherent module satisfies the object conditions (Stacks, Tag 0880). -/
 theorem formalCompletionSystem_coherent {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentModules X) :
     IsCoherentFormalModule I (formalCompletionSystem I F.obj) := by
@@ -428,11 +406,7 @@ theorem formalCompletionSystem_coherent {X : Scheme.{u}} [IsNoetherian X]
   · intro n
     exact formalModuleQuotient_iterated I F.obj (Nat.le_succ (n + 1))
 
-/-- The reduced maps satisfy functor laws. Proof: node step 6; check each component and
-precompose with its quotient projection. For identities both sides give the projection;
-for composition both sides give the original composite followed by the projection.
-The cokernel property and componentwise equality identify the natural transformations.
-Source: Stacks, equation 0880. -/
+/-- The reduced maps satisfy functor laws (Stacks, Tag 0880). -/
 theorem formalCompletionMap_laws {X : Scheme.{u}} (I : X.IdealSheafData) :
     (∀ F : X.Modules, formalCompletionMap I (𝟙 F) = 𝟙 (formalCompletionSystem I F)) ∧
     (∀ (F G H : X.Modules) (f : F ⟶ G) (g : G ⟶ H),
@@ -467,7 +441,7 @@ def completion (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :
     (formalCompletionSystem_coherent I)
 
 /-- Annihilation by a quasi-coherent ideal means its product with each term is zero.
-Source: Stacks, paragraph before Lemma 0889 and proof of Theorem 088E. -/
+(Stacks, Tags 0889 and 088E). -/
 def AnnihilatedBy {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) : Prop :=
   ∀ n : ℕ, IsZero (Scheme.idealModuleProduct K.toModulesι (M.obj.obj (op n)))
@@ -530,14 +504,13 @@ theorem formalModule_annihilated_power_iff {X : Scheme.{u}} [IsNoetherian X]
     · exact hzero (Nat.add_le_add_right (Nat.le_of_lt (Nat.lt_of_not_ge hn)) 1)
         _ (M.property.2.1 n)
 
-/-- Support on a closed subscheme means annihilation by its ideal, including its nilpotents.
-Source: Stacks, proof of Theorem 088E. -/
+/-- Support on a closed subscheme means annihilation by its ideal, including its nilpotents
+(Stacks, Tag 088E). -/
 def SupportedOn {X Z : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (M : CoherentFormalModule X I) (i : Z ⟶ X) [IsClosedImmersion i] : Prop :=
   AnnihilatedBy I i.ker M
 
-/-- The analogous scheme-theoretic support condition for a coherent module.
-Source: Stacks, proof of Theorem 088E. -/
+/-- The analogous scheme-theoretic support condition for a coherent module (Stacks, Tag 088E). -/
 def CoherentModuleSupportedOn {X Z : Scheme.{u}} (F : CoherentModules X)
     (i : Z ⟶ X) [IsClosedImmersion i] : Prop :=
   IsZero (Scheme.idealModuleProduct i.ker.toModulesι F.obj)
@@ -573,12 +546,7 @@ theorem formalCompletion_support_subset {X : Scheme.{u}} [IsNoetherian X]
       ((ModuleCat.epi_iff_surjective (S.map (cokernel.π ι))).mp inferInstance)
   exact hx hQ
 
-/-- Completion preserves proper support. Proof: node step 8. A coherent module has closed
-support on a Noetherian scheme. The quotient projection is surjective on affine sections,
-hence on stalks. A zero stalk of F therefore gives a zero stalk of F/IF. Its closed support
-is contained in the closed support of F, and a closed subset of a support proper over the
-base is proper (Lemma 0CYN). Thus the level-1 support has the required properness.
-Source: Stacks, Section 0CYW, equation 088D. -/
+/-- Completion preserves proper support (Stacks, Tag 088D). -/
 theorem formalCompletion_support_proper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData)
     (F : CohModuleSupportProper f) :

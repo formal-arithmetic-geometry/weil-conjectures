@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Abelian.Basic
 
 /-! # Constructible subobject presentations
 
-Source: Stacks Project, Tags 03SA(3), 09BH(3), and 03SC, first proof paragraph.
+## References
+
+* Stacks Project, Tags 03SA (3), 09BH (3) and 03SC
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Every module sheaf on a Noetherian scheme over a finite ring is a filtered union
-of constructible module subsheaves.
-Source: Stacks Project, Tags 03SA(3), 09BH(3), and 03SC, first proof paragraph. -/
+of constructible module subsheaves. (Stacks, Tags 03SA (3), 09BH (3) and 03SC) -/
 theorem exists_filtered_colimit_constructible_subobjects
     {X : Scheme.{u}} [IsNoetherian X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

@@ -15,8 +15,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Algebra-module presentations on an affine open
 
-Source: Stacks Project, Morphisms, Lemma 0H88, proof, second paragraph;
-EGA I, Proposition 9.6.1.
+## References
+
+* Stacks Project, Tag 0H88
+* EGA I, Proposition 9.6.1
 -/
 
 @[expose] public section
@@ -29,10 +31,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A module over a quasi-coherent algebra has a global algebra-module presentation on
 an affine open whenever its underlying structure-sheaf module is quasi-coherent there.
-The conclusion is a presentation on the slice site, rather than quasi-coherence on S.
-
-Source: Stacks Project, Morphisms, Lemma 0H88, proof, second paragraph;
-EGA I, Proposition 9.6.1. -/
+The conclusion is a presentation on the slice site, rather than quasi-coherence on S
+(Stacks, Tag 0H88; EGA I, Proposition 9.6.1). -/
 theorem nonempty_algebraModule_presentation_over (S : Scheme.{u})
     (A : S.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent)
     (G : SheafOfModules.{u}

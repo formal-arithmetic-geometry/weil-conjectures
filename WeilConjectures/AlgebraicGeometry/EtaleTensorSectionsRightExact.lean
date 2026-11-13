@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsCokernelExact
 
 /-! # Right exactness of sheafified tensor sections
 
-Source: blueprint `lem-sc-additive-ideal-image-tensor-comparison`, Proof, Step 2;
-Stacks Project, Descent, Tag 070S, Lemma 35.8.5(2), and Tag 03FH(1).
+## References
+
+* Stacks Project, Tags 070S, 03FH
 -/
 
 @[expose] public section
@@ -96,8 +97,7 @@ def etaleTensorSectionsFunctorObjIso {X : Scheme.{u}} (F : X.Modules)
     AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (etaleTensorSectionsSheaf F))).symm
 
 /-- Sheafified tensor sections preserve cokernels of module morphisms.
-Source: blueprint `lem-sc-additive-ideal-image-tensor-comparison`, Step 2;
-Stacks Project, Descent, Tag 070S, Lemma 35.8.5(2), and Tag 03FH(1). -/
+(Stacks, Tags 070S, 03FH). -/
 theorem preservesCokernels_etaleTensorSectionsFunctor (X : Scheme.{u}) :
     PreservesColimitsOfShape WalkingParallelPair (etaleTensorSectionsFunctor X) := by
   let T := etaleTensorSectionsFunctor X

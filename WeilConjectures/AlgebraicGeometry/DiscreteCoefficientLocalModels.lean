@@ -13,8 +13,7 @@ import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-! # Discrete coefficient local models under section reconstruction
 
-Source: Stacks, Tags 03CY, 00YV and 09AJ; the local finite-presentation step of
-`lem-sfb-discrete-coefficient-model`.
+Source: Stacks, Tags 03CY, 00YV and 09AJ.
 -/
 
 @[expose] public section
@@ -479,9 +478,7 @@ private theorem presentation_local_model_criterion
 /-- The section-action presentation identifies finite constant local models after any
 scheme restriction. This is only a local-model comparison: it asserts no stratification,
 constructibility equivalence, coefficient-map existence, or tensor structure.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV; Pro-etale, Tag 09AJ;
-the finite-matrix argument in step 3 of `lem-sfb-discrete-coefficient-model`. -/
+(Stacks, Tags 03CY, 00YV and 09AJ) -/
 theorem discrete_coefficient_local_models
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]

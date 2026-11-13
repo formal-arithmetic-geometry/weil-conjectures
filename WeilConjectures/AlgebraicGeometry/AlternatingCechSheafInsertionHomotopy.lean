@@ -12,9 +12,7 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafInsertionIdentities
 
 /-! # Ordered insertion contracts the alternating Čech augmentation locally
 
-Source: Stacks Project, Tags 02FU (local insertion) and 01FM (alternating comparison);
-the ordered local insertion argument in
-lem-pc-s3-alternating-cech-sheaf-local-contraction.
+Source: Stacks Project, Tags 02FU and 01FM.
 -/
 
 @[expose] public section
@@ -102,10 +100,8 @@ private noncomputable def homotopyOfInsertionIdentities
     rw [← hh k]
     abel
 
-/-- On a member of the family, the extended augmentation is a homotopy equivalence.
-Source: Stacks Project, Tag 02FU (insertion contraction), adapted to increasing
-tuples as in Tag 01FM, and the local contraction paragraph of
-lem-pc-s3-alternating-cech-sheaf-local-contraction. -/
+/-- On a member of the family, the extended augmentation is a homotopy equivalence
+(Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheafAugmentation_restrict_homotopyEquivalence
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     HomologicalComplex.homotopyEquivalences (U i).toScheme.Modules (ComplexShape.up ℤ)

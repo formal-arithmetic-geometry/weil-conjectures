@@ -9,10 +9,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-! # Dual vector bundles with their evaluation pairing
 
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/def-fd-kernel.md,
-application paragraph (vector bundle, its dual, evaluation pairing `b(x,xi) = <x,xi>`);
-used for the base-changed pairing in lem-fd-base-change.proof.md.
-
 The simultaneous local charts give a bundle and its dual, including their evaluation.
 Preservation of evaluation forces the transition functions of the two factors to be linear
 and inverse-transpose. Thus these are dual frames, rather than arbitrary affine charts.
@@ -31,9 +27,7 @@ namespace AlgebraicGeometry
 /-- A rank-`r` vector bundle, its dual and evaluation function, presented in local dual
 frames. The product chart formula is `sum x_i * xi_i`. The two cartesian squares identify
 local total spaces with restrictions to the open cover. Empty covers on the empty base
-and the empty coordinate sum in rank zero are allowed.
-Source: latest blueprint, def-fd-kernel.md, application paragraph (dual bundle and
-evaluation pairing). -/
+and the empty coordinate sum in rank zero are allowed. -/
 structure DualBundlePairing {S V Vdual : Scheme.{u}} (π : V ⟶ S) (πdual : Vdual ⟶ S)
     (r : ℕ) (b : Γ(pullback π πdual, ⊤)) where
   I : Type u

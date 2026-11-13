@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologySectionLocalizationGluingAux
 
 /-! # Mayer--Vietoris gluing for localization of twisted cohomology
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, Mayer--Vietoris paragraph.
+Stacks Project, Tag 09MR.
 -/
 
 @[expose] public section
@@ -29,11 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- If the canonical degree-zero localization comparisons
 `H^p_*(W,L,F)_(s) → H^p(W ⊓ S, F)`, `ξ/s^n ↦ s^(-n) ξ`, are isomorphisms for `W = U`, `V`
 and `U ⊓ V` in every degree `p`, then so is the comparison for `W = U ⊔ V`.
-`S` is the open `X_s`, identified by its underlying set. Each comparison is an additive
-isomorphism `e` out of the fraction presentation `CohomologyFractionPresentation L F s p W`
-(def-sc-cohomology-fraction-presentation), tied to the canonical map by the equation
-`s^n · e(ξ/s^n) = ξ|_{W ⊓ S}`; since `s` trivializes `L` on `S`, this determines `e`.
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, Mayer--Vietoris paragraph. -/
+`S` is the open `X_s`, identified by its underlying set (Stacks, Tag 09MR). -/
 theorem cohomologyFractionPresentation_gluing
     (X : Scheme.{uG}) [CompactSpace X] [QuasiSeparatedSpace X]
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

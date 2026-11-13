@@ -21,8 +21,6 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 /-!
 # The two-term resolution of the finite coefficient sheaves
 
-md`.
-
 All coefficients are continuous condensed rings pulled back from the point. A natural
 cone is expressed using the standard cone functor on complexes, with its standard maps.
 The comparison with a functor on the derived category also asserts its descent and naturality.
@@ -56,20 +54,17 @@ namespace AlgebraicGeometry.ProEtale.DerivedNakayama
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The continuous condensed integer ring with its spectral absolute-value topology.
-Source: blueprint resolution, On the point, step 1. -/
+/-- The continuous condensed integer ring with its spectral absolute-value topology. -/
 abbrev integerRingSheaf : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingSheaf (Padic.coefficientExtensionIntegers l E)
 
-/-- The finite quotient with the quotient topology, not a constant replacement of the integers.
-Source: blueprint resolution, On the point, step 1. -/
+/-- The finite quotient with the quotient topology, not a constant replacement of the integers. -/
 abbrev quotientRingSheaf (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingSheaf (Padic.coefficientExtensionRing l E n)
 
-/-- Continuous postcomposition with the actual quotient homomorphism.
-Source: blueprint resolution, On the point, step 2. -/
+/-- Continuous postcomposition with the actual quotient homomorphism. -/
 def reductionRingSheaf (n : ℕ) : integerRingSheaf l E ⟶ quotientRingSheaf l E n :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   ⟨{
@@ -80,73 +75,61 @@ def reductionRingSheaf (n : ℕ) : integerRingSheaf l E ⟶ quotientRingSheaf l 
             continuous_quot_mk).comp ULift.ringEquiv.toRingHom))
       naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The internal ring underlying the continuous condensed integer ring.
-Source: blueprint resolution, On X, step 3. -/
+/-- The internal ring underlying the continuous condensed integer ring. -/
 abbrev integerRing : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (integerRingSheaf l E)
 
-/-- Pointwise commutativity of the integer ring object.
-Source: blueprint resolution, On X, step 3. -/
+/-- Pointwise commutativity of the integer ring object. -/
 instance integerRing_isCommMonObj : IsCommMonObj (integerRing l E) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.isCommMonObj_continuousCoefficientRingObj _
 
-/-- The internal finite quotient ring.
-Source: blueprint resolution, On X, step 3. -/
+/-- The internal finite quotient ring. -/
 abbrev quotientRing (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (quotientRingSheaf l E n)
 
-/-- Reduction as a morphism of internal rings.
-Source: blueprint resolution, On X, step 3. -/
+/-- Reduction as a morphism of internal rings. -/
 abbrev reductionRing (n : ℕ) : integerRing l E ⟶ quotientRing l E n :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (reductionRingSheaf l E n)
 
-/-- The quotient with its canonical restricted scalar action from the integers.
-Source: blueprint resolution, On X, step 3. -/
+/-- The quotient with its canonical restricted scalar action from the integers. -/
 abbrev quotientModule (n : ℕ) :
     CategoryTheory.Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (integerRing l E) :=
   (Mod.comap (reductionRing l E n)).obj (Mod.regular (quotientRing l E n))
 
-/-- The exact inverse image on the internal integer-module objects.
-Source: blueprint resolution, On X, step 3. -/
+/-- The exact inverse image on the internal integer-module objects. -/
 abbrev pullback (X : Scheme.{u}) := (upperStarFromPoint X).mapMod (integerRing l E)
 
-/-- The unbounded derived category with the pulled-back condensed integer coefficients.
-Source: blueprint resolution, On X, step 5. -/
+/-- The unbounded derived category with the pulled-back condensed integer coefficients. -/
 abbrev Derived (X : Scheme.{u}) :=
   DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (integerRing l E) X))
 
-/-- The actual derived reduction functor, with the finite quotient in degree zero.
-Source: blueprint resolution, On X, step 5. -/
+/-- The actual derived reduction functor, with the finite quotient in degree zero. -/
 abbrev reductionFunctor (X : Scheme.{u}) (n : ℕ) : Derived l E X ⥤ Derived l E X :=
   (CondensedRing.derivedTensor (integerRing l E) X).flip.obj
     ((DerivedCategory.singleFunctor _ 0).obj ((pullback l E X).obj (quotientModule l E n)))
 
-/-- Degree-zero realization of a coefficient morphism, followed by derived tensor with K.
-Source: blueprint resolution, Triangles, step 7. -/
+/-- Degree-zero realization of a coefficient morphism, followed by derived tensor with K. -/
 def reductionMap (X : Scheme.{u}) {m n : ℕ}
     (f : quotientModule l E m ⟶ quotientModule l E n) :
     reductionFunctor l E X m ⟶ reductionFunctor l E X n :=
   (CondensedRing.derivedTensor (integerRing l E) X).flip.map
     ((DerivedCategory.singleFunctor _ 0).map ((pullback l E X).map f))
 
-/-- Strong monoidal pullback takes the regular module to the regular module.
-Source: blueprint resolution, On X, step 3. -/
+/-- Strong monoidal pullback takes the regular module to the regular module. -/
 theorem pullback_regular (X : Scheme.{u}) :
     (pullback l E X).obj (Mod.regular (integerRing l E)) =
       Mod.regular (condensedRingObj (integerRing l E) X) := by
   rfl
 
-/-- The regular-module comparison, with underlying identity, obtained from its named equality.
-Source: blueprint resolution, On X, step 3. -/
+/-- The regular-module comparison, with underlying identity, obtained from its named equality. -/
 def regularPullbackIso (X : Scheme.{u}) :
     (pullback l E X).obj (Mod.regular (integerRing l E)) ≅
       Mod.regular (condensedRingObj (integerRing l E) X) :=
   eqToIso (pullback_regular l E X)
 
-/-- The scalar action induced by an endomorphism of the regular module, using unitors.
-Source: blueprint resolution, On X, step 5. -/
+/-- The scalar action induced by an endomorphism of the regular module, using unitors. -/
 def scalarOnModules (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E))) :
     𝟭 (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -161,16 +144,14 @@ def scalarOnModules (X : Scheme.{u})
         (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (integerRing l E) X))).map dX.asHom ≫ (leftUnitorNatIso _).hom
 
-/-- Scalar multiplication as an actual chain map, degree by degree.
-Source: blueprint resolution, On X, step 5. -/
+/-- Scalar multiplication as an actual chain map, degree by degree. -/
 def scalarOnComplex (X : Scheme.{u}) (d : End (Mod.regular (integerRing l E)))
     (C : CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integerRing l E) X)) ℤ) : C ⟶ C :=
   (NatTrans.mapHomologicalComplex (scalarOnModules l E X d) (.up ℤ)).app C
 
 /-- The standard cone model, functorial on complexes and then localized.
-Its map is the standard cone map of the square with the same chain map on both sides.
-Source: blueprint resolution, On X, step 5. -/
+Its map is the standard cone map of the square with the same chain map on both sides. -/
 def coneFunctor (X : Scheme.{u}) (d : End (Mod.regular (integerRing l E))) :
     CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integerRing l E) X)) ℤ ⥤ Derived l E X where

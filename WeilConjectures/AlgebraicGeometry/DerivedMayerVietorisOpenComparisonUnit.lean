@@ -174,9 +174,7 @@ private theorem unit_with_composition
   exact ht
 
 /-- Direct image and the canonical open comparison carry a single restriction unit
-on X to the corresponding restriction unit on Y. No cover or triangle is involved.
-Source: Stacks Project, Tag 08FE, proof on K-injective representatives; Tag 0D5T,
-canonical composition of derived direct images; Tag 08BV, first proof paragraph. -/
+on X to the corresponding restriction unit on Y (Stacks, Tags 08FE, 0D5T and 08BV). -/
 theorem schemeMVOpenComparison_unit
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The coefficient comparison can be chosen to commute with every endomorphism
 of the associated abelian sheaf, without assuming that universe lift preserves
 injective objects.
-Source: Stacks Project, Tag 03P2, separated-case finite affine cover proof. -/
+(Stacks, Tag 03P2) -/
 theorem exists_etaleTensorSectionsSheaf_cohomology_ulift_natural
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) :

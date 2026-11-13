@@ -26,9 +26,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Changing the two base coordinates by isomorphisms preserves the canonical
-module base-change arrow. This statement involves no open restriction.
-Source: Stacks Project, Tag 08HY, counit construction; Tag 0D5T, composition;
-Tag 08IB, affine coordinate change in the first proof paragraph. -/
+module base-change arrow. This statement involves no open restriction
+(Stacks, Tags 08HY, 0D5T and 08IB). -/
 theorem exists_canonicalModuleBaseChange_iso_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

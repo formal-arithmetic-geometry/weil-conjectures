@@ -28,9 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- An integer `n ≥ 0` bounds the degrees of the fibres of `f` if every fibre is finite
-over its residue field and its degree is at most `n` (Stacks, Definition Tag 03J4;
-blueprint: def-weil-pbc-fibre-degree-bound).
--/
+over its residue field and its degree is at most `n` (Stacks, Tag 03J4). -/
 def BoundsFiberDegrees {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) : Prop :=
   ∀ y : Y, IsFinite (f.fiberToSpecResidueField y) ∧
     (f.fiberToSpecResidueField y).finrankΓ ≤ n

@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.AffineHomComparisonFiniteFree
 
 /-! # Finite-free affine Hom comparisons with coefficients
 
-Source: Stacks Project, Tag 01HV, lemma-spec-sheaves (4)-(5), and
-Tag 0BQZ, lemma-regular-immersion-ext, the displayed coefficient map. -/
+## References
+
+* Stacks Project, Tags 01HV, 0BQZ
+-/
 
 @[expose] public section
 
@@ -25,9 +27,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Degreewise affine Hom comparisons are natural in boundaries and coefficients.
-Source: Stacks Project, Tag 01HV, lemma-spec-sheaves (4)-(5), and Tag 0BQZ,
-lemma-regular-immersion-ext, the displayed coefficient map. -/
+/-- Degreewise affine Hom comparisons are natural in boundaries and coefficients (Stacks, Tags
+01HV, 0BQZ). -/
 theorem affine_finite_free_coefficient_comparisons
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (K : ChainComplex (ModuleCat.{u} Γ(Y, U.1)) ℕ)
