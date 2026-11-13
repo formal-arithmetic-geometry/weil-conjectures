@@ -24,8 +24,16 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-set_option profiler true in
 -- `erw` unfolds the tensor product of complexes of module objects to its components.
+private lemma upperStarTensorComplexHom_f
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) (n : ℤ) :
+    (upperStarTensorComplexHom Λ f A B).f n =
+      HomologicalComplex.mapBifunctorDesc (fun p q h ↦
+        Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
+          (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)) := by
+  rfl
+
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
 composition isomorphism of the pullbacks of module objects. -/
 @[reassoc]
@@ -44,7 +52,8 @@ lemma upperStarTensorComplexHom_comp
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
   erw [HomologicalComplex.ι_mapBifunctorMap_assoc]
-  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  rw [upperStarTensorComplexHom_f, upperStarTensorComplexHom_f,
+    upperStarTensorComplexHom_f]
   erw [HomologicalComplex.ι_mapBifunctorDesc_assoc,
     HomologicalComplex.ι_mapBifunctorDesc_assoc]
   rw [Category.assoc, ← Functor.map_comp]
