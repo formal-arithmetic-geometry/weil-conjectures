@@ -51,7 +51,13 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 
 attribute [instance] topological_pushforwardAb_additive
 
-set_option trace.profiler true in
+private noncomputable abbrev topologicalSheafCategoryWithHomology (X : TopCat.{u}) :
+    CategoryWithHomology (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :=
+  inferInstance
+
+attribute [local instance] topologicalSheafCategoryWithHomology
+
+set_option profiler true in
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
