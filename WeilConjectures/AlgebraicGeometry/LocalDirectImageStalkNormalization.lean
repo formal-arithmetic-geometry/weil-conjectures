@@ -159,7 +159,7 @@ theorem localDirectImage_stalk_cohomology_normalization
   exact inverse_normalization_of_surjective e.toEquiv
     (Scheme.Modules.moduleCohomologyRestriction _
       ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p)
-    (fun z ↦ TopCat.Presheaf.germ _ V y hy (D.targetClass p z))
+    (fun z ↦ TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ V y hy (D.targetClass p z))
     (ConcreteCategory.bijective_of_isIso
       (Scheme.Modules.moduleCohomologyRestriction _
         ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p)).2

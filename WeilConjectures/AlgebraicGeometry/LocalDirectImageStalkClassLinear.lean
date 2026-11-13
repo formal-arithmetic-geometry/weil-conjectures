@@ -24,6 +24,26 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
+private theorem homology_comparison_commutes
+    {C D T : Type*} [Category* C] [Category* D] [Category* T]
+    [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroMorphisms T]
+    (A : ShortComplex C) (B : ShortComplex D) [A.HasHomology] [B.HasHomology]
+    (F : C ⥤ T) (G : D ⥤ T) [F.PreservesZeroMorphisms] [G.PreservesZeroMorphisms]
+    [F.PreservesLeftHomologyOf A] [F.PreservesRightHomologyOf A]
+    [G.PreservesLeftHomologyOf B] [G.PreservesRightHomologyOf B]
+    (α : F ⟶ F) (β : G ⟶ G) (i : A.map F ⟶ B.map G)
+    (hi : A.mapNatTrans α ≫ i = i ≫ B.mapNatTrans β) :
+    α.app A.homology ≫ (A.mapHomologyIso F).inv ≫
+        ShortComplex.homologyMap i ≫ (B.mapHomologyIso G).hom =
+      (A.mapHomologyIso F).inv ≫ ShortComplex.homologyMap i ≫
+        (B.mapHomologyIso G).hom ≫ β.app B.homology := by
+  have hm := congrArg (fun q ↦ ShortComplex.homologyMap q) hi
+  simp only [ShortComplex.homologyMap_comp, ShortComplex.homologyMap_mapNatTrans] at hm
+  have hm' := congrArg
+    (fun q ↦ (A.mapHomologyIso F).inv ≫ q ≫ (B.mapHomologyIso G).hom) hm
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+    Category.comp_id] using hm'
+
 set_option profiler true in
 private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     {G : Z.Modules} (K : InjectiveResolution G) (p : ℕ)
@@ -57,20 +77,16 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
       ((ModuleCat.smulNatTrans (Z.ringCatSheaf.obj.obj (op ⊤)) (h.appTop.hom t)).asHom) =
       (B.sc p).mapNatTrans τ := by
     ext m <;> rfl
-  have hm := congrArg (fun q ↦ ShortComplex.homologyMap q) hscalar
-  rw [ShortComplex.homologyMap_mapNatTrans,
-    ShortComplex.homologyMap_mapNatTrans] at hm
-  change cA.hom ≫ ((A.sc p).homology.smul (h.appTop.hom t)).asHom ≫ cA.inv =
-    cB.hom ≫ τ.app (B.sc p).homology ≫ cB.inv at hm
-  have hm' := congrArg (fun q ↦ cA.inv ≫ q ≫ cB.hom) hm
   have hc : ((A.sc p).homology.smul (h.appTop.hom t)).asHom ≫ cA.inv ≫ cB.hom =
       cA.inv ≫ cB.hom ≫ τ.app (B.sc p).homology := by
-    simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
-      Category.comp_id] using hm'
+    have hc := homology_comparison_commutes (A.sc p) (B.sc p) U E
+      ((ModuleCat.smulNatTrans (Z.ringCatSheaf.obj.obj (op ⊤)) (h.appTop.hom t)).asHom)
+      τ (𝟙 _) (by simpa only [Category.comp_id, Category.id_comp] using hscalar)
+    simpa only [ShortComplex.homologyMap_id, Category.id_comp] using hc
   have hc' (z : (A.sc p).homology) :
       cB.hom (cA.inv (h.appTop.hom t • z)) =
         t • (show (B.sc p).homology.obj (op ⊤) from cB.hom (cA.inv z)) := by
-    exact congrArg (fun q ↦ q z) hc
+    exact ConcreteCategory.congr_hom hc z
   let e := (K.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p).hom
   let θ := (Scheme.Modules.sectionCohomologyTheta L p).app (op ⊤)
   dsimp only [Scheme.Modules.resolutionSectionClass]

@@ -22,7 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- The map to H and the normalized formal quotient maps jointly separate local sections.
 Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, made explicit
 by the Artin--Rees argument of `coherentMap_torsion_completion_ext_zero`.
