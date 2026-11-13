@@ -228,6 +228,7 @@ theorem affine_lift_eventual_free_kernels
       (∀ i : ℤ, i ≤ r → ((R.mapHomologicalComplex (.up ℤ)).obj K).ExactAt i) ∧
       (kernel (R.map (K.d r (r + 1)))).IsFiniteLocallyFree := by
   classical
+  -- Reuse the sheaf abelian structures throughout the restriction comparisons.
   let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
   let _ (V : X.Opens) :
       Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) := inferInstance

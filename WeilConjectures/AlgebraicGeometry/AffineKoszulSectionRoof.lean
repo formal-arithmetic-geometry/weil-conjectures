@@ -81,7 +81,6 @@ private theorem map_section_of_realization
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option profiler true in
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.
 There is no perfect source, tensor product, or lifted morphism in this statement.
@@ -128,6 +127,7 @@ theorem affine_koszul_section_roof
           IsIso (R.map (DerivedCategory.Q.map u)) ∧
           R.map (DerivedCategory.Q.map u) ≫ s = R.map ξ := by
   classical
+  -- Reuse the sheaf abelian structures throughout the restriction comparisons.
   let _ : Abelian (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) := inferInstance
   let _ (V : X.Opens) :
       Abelian (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V)) := inferInstance

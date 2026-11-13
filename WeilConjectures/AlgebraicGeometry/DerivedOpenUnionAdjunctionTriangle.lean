@@ -97,6 +97,7 @@ theorem derived_open_union_adjunction_triangle
     ∃ (d : N ⟶ A) (c : B ⟶ N⟦(1 : ℤ)⟧),
       Triangle.mk d b c ∈ distTriang (schemeDerivedCategory X) := by
   classical
+  -- Reuse the sheaf abelian structures throughout the restriction comparisons.
   let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
   let _ (W : X.Opens) :
       Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W)) := inferInstance
