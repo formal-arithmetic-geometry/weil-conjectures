@@ -101,6 +101,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The finite-free retractions use the localized and internal-Hom carrier presentations.
 private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ)
@@ -121,6 +122,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 700000 in
+set_option profiler true in
 -- The resolution comparisons use several equivalent carrier presentations.
 /-- Given representatives and an ordinary evaluation chain map, there are compatible
 source and target comparison isomorphisms. The comparisons are existentially
