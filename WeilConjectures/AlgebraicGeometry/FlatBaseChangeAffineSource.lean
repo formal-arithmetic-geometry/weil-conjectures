@@ -22,8 +22,6 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
-set_option trace.profiler true in
--- Comparing the explicit resolution class maps unfolds several homology transports.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
@@ -113,6 +111,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
   · intro s xi
     change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
     have he' : e xi = D.sourceClass p (eH.symm xi) := by
+      -- Expose the resolution formula before matching the comparison theorem.
       unfold Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass
       exact he xi
     exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •

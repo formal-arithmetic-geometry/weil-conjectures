@@ -85,7 +85,6 @@ private theorem flatCohomologyBaseChange_bijective_of_compact_open
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option trace.profiler true in
--- The affine comparisons carry several definitionally equal section and scalar instances.
 /-- Target affine dictionary for a source comparison with a normalized linear lift.
 Source: Stacks Project, Tags 02KH (both parts), 01XJ, 01E4 and 03FD.
 (blueprint: new-flat-base-change-affine-target)
@@ -192,7 +191,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
     exact one_smul _ _
   have ht : a (1 ⊗ₜ[Γ(S, V)] xi) =
       a0 (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi)) := by
-    rw [ha_tmul, ha0, e0.symm_apply_apply]
+    refine (ha_tmul 1 xi).trans ?_
+    simpa only [e0.symm_apply_apply] using (ha0 1 (e0 (eH.symm xi))).symm
   have ht' : a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)) =
       1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi) :=
     (congrArg a0.symm ht).trans (a0.symm_apply_apply _)
