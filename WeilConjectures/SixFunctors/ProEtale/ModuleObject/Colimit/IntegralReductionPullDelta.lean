@@ -312,7 +312,10 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   have Φ :=
     derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExtendScalarsIso_inv
       a f ((HomotopyCategory.quotient _ _).obj P)
-  rw [Mod.derivedExtendComapComparisonh, Functor.map_comp, Mod.derivedExtendComapComparisonh]
+  simp only [Mod.derivedExtendComapComparisonh]
+  conv_lhs =>
+    arg 1
+    rw [Functor.map_comp]
   simp only [Category.assoc]
   conv_rhs => erw [reassoc_of% Φ]
   have : NatTrans.CommShift ((f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory).inv ℤ :=
