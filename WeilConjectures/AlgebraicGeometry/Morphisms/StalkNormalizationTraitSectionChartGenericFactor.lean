@@ -82,6 +82,7 @@ private theorem root_maximalIdeal {R : Type u} [CommRing R] [IsLocalRing R]
     ((show Ideal.span {t} ≤ M ⊔ Ideal.span {t} from le_sup_right)
       ((Ideal.span {t}).mul_mem_right _ (Ideal.subset_span (by simp))))
 
+set_option trace.profiler true in
 set_option maxHeartbeats 2400000 in
 -- The dependent normalization stalks and the root presentation need this elaboration budget.
 /-- The tame local chart, before using splitting of the generic section fibre.

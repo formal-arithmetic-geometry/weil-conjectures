@@ -107,6 +107,7 @@ private theorem composed_pullback {X Y Z B : Scheme.{u}} (f : X ⟶ Z)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Splitting over U first makes the minimality hypotheses unnecessary for this proof.
+set_option trace.profiler true in
 set_option maxHeartbeats 1800000 in
 -- The nested normalization and iterated pullbacks require extra elaboration heartbeats.
 /-- The normalization test is split on the zero slice of its punctured open.
