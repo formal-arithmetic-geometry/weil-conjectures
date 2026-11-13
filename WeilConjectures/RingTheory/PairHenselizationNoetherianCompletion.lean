@@ -32,9 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Descent elaborates tensor products over the colimit vertex and its completion.
 /-- The henselization of a Noetherian pair is Noetherian and flat over the base, has the
 same adic completion, and maps faithfully flatly to the completion of the base.
 Source: Stacks Project, Tag 0AGV
