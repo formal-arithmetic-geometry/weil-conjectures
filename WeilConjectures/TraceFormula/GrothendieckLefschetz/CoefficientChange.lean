@@ -18,9 +18,8 @@ to those of its scalar extension `(K_S, φ_S)`
 `AlgebraicGeometry.ProEtale.StrictWeilComplex.trace_localFrobenius_extendScalars`). Hence an
 identity `tr_R(F_{c,m}) = ∑ₓ tr_R(F_{x,m})` over `R` is carried to the same identity over `S`
 (`AlgebraicGeometry.ProEtale.StrictWeilComplex.trace_globalFrobenius_extendScalars_eq_sum`):
-the trace formula is compatible with the coefficient comparisons (blueprint
-`theorem-grothendieck-lefschetz-trace-formula--7`, for the comparisons between finite
-coefficient rings). The compatibility with the reductions `𝒪_E → 𝒪_E ⧸ π_Eⁿ` is
+the trace formula is compatible with the coefficient comparisons between finite coefficient
+rings. The compatibility with the reductions `𝒪_E → 𝒪_E ⧸ π_Eⁿ` is
 `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_globalOperatorFamily` and
 `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_localOperatorFamily`, and
 the one with the extension `𝒪_E → E` is
@@ -47,10 +46,9 @@ variable {R : Type (u + 1)} [CommRing R] [IsNoetherianRing R] {k : Type u} [Fiel
   (S : Type (u + 1)) [CommRing S] [Algebra R S] [Finite R] [Finite S]
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent R X]
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7` (finite coefficient rings): if the
-trace formula `tr_R(F_{c,m} ∣ RΓ_c(X, K)) = ∑_{x ∈ s} tr_R(F_{x,m} ∣ K_x̄)` holds for a strict
-Weil complex `(K, φ)` over `R`, with the traces the scalars `a` and `b x`, then it holds for its
-scalar extension `(K_S, φ_S)` along `R → S`, with the traces the images of `a` and `b x`. -/
+/-- If the trace formula `tr_R(F_{c,m} ∣ RΓ_c(X, K)) = ∑_{x ∈ s} tr_R(F_{x,m} ∣ K_x̄)` holds for
+a strict Weil complex `(K, φ)` over `R`, with the traces the scalars `a` and `b x`, then it holds
+for its scalar extension `(K_S, φ_S)` along `R → S`, with the traces the images of `a` and `b x`. -/
 theorem trace_globalFrobenius_extendScalars_eq_sum
     (W : StrictWeilComplex (ModuleCat.{u + 1} R) g) (m : ℕ)
     (s : Finset {x : Spec (.of k) ⟶ X // x ≫ iterateHom g.hom m = x})

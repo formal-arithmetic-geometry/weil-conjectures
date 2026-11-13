@@ -23,13 +23,17 @@ the realizations `R lim_n RΓ_c(X, L_n)` and `R lim_n (L_n)_x̄`, which are perf
 
 This file proves the trace formula for them,
 ```
-tr_R(F_{c,m} ∣ RΓ_c(X, L)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_R(F_{x̄,m} ∣ L_x̄),
+tr_R(F_{c,m} ∣ RΓ_c(X, L)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_R(F_{x̄,m} ∣ L_x̄).
 ```
-(blueprint `theorem-grothendieck-lefschetz-trace-formula--2`), from the formula at the finite
-levels `AlgebraicGeometry.Etale.trace_globalOperator_iterateWeilDatum_eq_finsum`: by
+As at the finite levels, the Weil data need not be invertible.
+
+## Implementation details
+
+The formula is deduced from the formula at the finite levels
+`AlgebraicGeometry.Etale.trace_globalOperator_iterateWeilDatum_eq_finsum`: by
 `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_globalOperatorFamily`, both
 sides reduce modulo `Iⁿ⁺¹` to the two sides of the formula at the level `n + 1`, and `R` is
-`I`-adically separated. As at the finite levels, the Weil data need not be invertible.
+`I`-adically separated.
 -/
 
 @[expose] public section
@@ -54,20 +58,19 @@ variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spe
   [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of (AlgebraicClosure k)))]
   {S : AdicSystem I f.geometricFiber}
 
-/-- **The Grothendieck–Lefschetz trace formula with integral coefficients** (blueprint
-`theorem-grothendieck-lefschetz-trace-formula--2`): for a compatible system `ψ_•` of Weil data
-on a normalized system `L_•` over `R` (for instance `R = 𝒪_E`), and every `m ≥ 1`, the trace of
-the lift `V` of the global Frobenius operators `F_{c,m}(ψ_n)` to the realization
-`P_R = R lim_n RΓ_c(X, L_n)` is the sum, over the points `x̄` of `X₀(𝔽_{q^m})`, of the traces
-of the lifts `V_x̄` of the local Frobenius operators `F_{x̄,m}(ψ_n)` to the realizations
-`R lim_n (L_n)_x̄`:
+/-- **The Grothendieck–Lefschetz trace formula with integral coefficients**: for a
+compatible system `ψ_•` of Weil data on a normalized system `L_•` over `R` (for instance
+`R = 𝒪_E`), and every `m ≥ 1`, the trace of the lift `V` of the global Frobenius operators
+`F_{c,m}(ψ_n)` to the realization `P_R = R lim_n RΓ_c(X, L_n)` is the sum, over the points `x̄`
+of `X₀(𝔽_{q^m})`, of the traces of the lifts `V_x̄` of the local Frobenius operators
+`F_{x̄,m}(ψ_n)` to the realizations `R lim_n (L_n)_x̄`:
 ```
 tr_R(F_{c,m} ∣ RΓ_c(X, L)) = ∑_{x̄} tr_R(F_{x̄,m} ∣ L_x̄).
 ```
 The coefficient identifications `α`, `β` are those of the realizations
 (`AlgebraicGeometry.Etale.adicRealization`), compatible with the Frobenius pullbacks. -/
 theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I = Ideal.span {ϖ})
-    (F : S.FrobeniusSystem f.geometricGaloisFrobenius.hom) {m : ℕ} (hm : m ≠ 0)
+    (F : S.FrobeniusSystem f.geometricGaloisFrobenius.asIso.hom) {m : ℕ} (hm : m ≠ 0)
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars f.geometricFiber.smallEtaleTopology
         (I.powSuccFactor n) ⋙ compactlySupportedGlobalSections (ModuleCat.{u + 1}
           (R ⧸ I ^ (n + 1 + 1))) f.geometricFiberToAlgebraicClosure ≅
@@ -110,7 +113,8 @@ theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I 
     x.2.2 (β x) (hβ x) (hβ' x) (hcx x) (hVx x)
   have hlevel (n : ℕ) : I.powSuccMk n r = I.powSuccMk n (∑ x, rx x) := by
     apply DerivedCategory.algebraMap_injective (R ⧸ I ^ (n + 1))
-    rw [← hrn n, map_sum, map_sum]
+    apply End.ext
+    rw [← hrn n, map_sum, map_sum, End.sum_asHom]
     simp_rw [← hrxn _ n]
     rw [← finsum_eq_sum_of_fintype]
     have h := trace_globalOperator_iterateWeilDatum_eq_finsum f (R ⧸ I ^ (n + 1))
@@ -124,7 +128,7 @@ theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I 
     rcases n with _ | n
     · simp
     · exact Ideal.Quotient.eq.1 (hlevel n)
-  rw [hr, hr', map_sum, finsum_eq_sum_of_fintype]
+  rw [hr, hr', map_sum, End.sum_asHom, finsum_eq_sum_of_fintype]
   exact Finset.sum_congr rfl fun x _ ↦ (hrx x).symm
 
 end AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem

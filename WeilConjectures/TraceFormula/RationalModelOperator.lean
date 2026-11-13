@@ -28,10 +28,11 @@ compactly supported cohomology induced by the unit of `LΦ_m^* ⊣ RΦ_{m*}` and
 For an integral model `(K₀, θ)` of `(K, ψ)` with `ℓ^N ψ = θ ⊗ E`
 (`ProEtale.CondensedRing.exists_integralModel_frobeniusCorrespondence`), the operators satisfy
 `ℓ^{N m} T_{c_m}(ψ_m) = T_{c_m}(θ_m) ⊗ E`
-(`ProEtale.CondensedRing.pow_smul_frobeniusCompactOperator_eq`, blueprint
-`lemma-integral-models-rational-frobenius-correspondences--2`). As in
+(`ProEtale.CondensedRing.pow_smul_frobeniusCompactOperator_eq`). As in
 `WeilConjectures.TraceFormula.RationalModel`, the denominator is a power of `ℓ` rather than of
 `π_E`, which is equivalent.
+
+## Implementation details
 
 The proof combines the identity `ℓ^{N m} ψ_m = θ_m ⊗ E` for the iterates
 (`ProEtale.CondensedRing.pow_smul_frobeniusCoefficientIterate_eq`, read through the canonical
@@ -100,8 +101,7 @@ noncomputable def compactPullback (h : Y ⟶ X) [IsProper h.left] :
 variable {ℓ E}
 
 /-- The global operator `T_{c_m}(ψ_m) = RΓ_c(X, ψ_m) ∘ Φ_m^♯` on `RΓ_c(X, K)` of a Frobenius
-correspondence `ψ : LΦ^* K ⟶ K` with `E`-coefficients (blueprint
-`definition-frobenius-correspondences-their-operators`). -/
+correspondence `ψ : LΦ^* K ⟶ K` with `E`-coefficients. -/
 noncomputable def frobeniusCompactOperator {Φ : X ⟶ X} [IsProper Φ.left]
     (ψ : (boundedConstructibleUpperStar 𝔼 ℓ Φ).obj K ⟶ K) (m : ℕ) :
     (boundedConstructibleLowerShriek ℓ E (toPoint X)).obj K ⟶
@@ -129,8 +129,7 @@ noncomputable def compactPullback (h : Y ⟶ X) [IsProper h.left] :
 variable {ℓ E}
 
 /-- The global operator `T_{c_m}(θ_m) = RΓ_c(X, θ_m) ∘ Φ_m^♯` on `RΓ_c(X, K₀)` of a Frobenius
-correspondence `θ : LΦ^* K₀ ⟶ K₀` with `𝒪_E`-coefficients (blueprint
-`definition-frobenius-correspondences-their-operators`). -/
+correspondence `θ : LΦ^* K₀ ⟶ K₀` with `𝒪_E`-coefficients. -/
 noncomputable def frobeniusCompactOperator {Φ : X ⟶ X} [IsProper Φ.left]
     (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K₀ ⟶ K₀) (m : ℕ) :
     (boundedConstructibleLowerShriek ℓ E.1 (toPoint X)).obj K₀ ⟶
@@ -220,9 +219,8 @@ lemma extendScalarsUpperStarIterateIso_eq (Φ : X ⟶ X) (m : ℕ) :
     simpa [extendScalarsUpperStarIterateIso, extendScalarsUpperStarIterateSuccIso, ih] using
       hc K₀
 
-/-- Blueprint `lemma-integral-models-rational-frobenius-correspondences--2`: if `ℓ^N ψ = θ ⊗ E`
-for a Frobenius correspondence `ψ : LΦ^* K ⟶ K` with `E`-coefficients and an integral model
-`θ : LΦ^* K₀ ⟶ K₀`, read through `e : (K₀)_E ≅ K` and the canonical comparison
+/-- If `ℓ^N ψ = θ ⊗ E` for a Frobenius correspondence `ψ : LΦ^* K ⟶ K` with `E`-coefficients and
+an integral model `θ : LΦ^* K₀ ⟶ K₀`, read through `e : (K₀)_E ≅ K` and the canonical comparison
 `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*` (as produced by `exists_integralModel_frobeniusCorrespondence`),
 then for every `m` the operators of the iterates satisfy
 ```

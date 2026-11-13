@@ -22,6 +22,8 @@ Its iterates are the canonical identifications for the iterates of `g`
 `x̄ : Spec k ⟶ X` fixed by `(g, h)`, `k` separably closed, its local Frobenius operator is the
 identity of the stalk (`AlgebraicGeometry.Etale.localOperator_leftDerivedUpperStarUnitIso`).
 
+## Implementation details
+
 The key input is that the transport of derived global sections along an automorphism `h` of
 `Spec k` is compatible with the identification `Lh^* Λ ≅ Λ`
 (`AlgebraicGeometry.Etale.globalSectionsTransport_hom_app_unit`): on sections over the point it

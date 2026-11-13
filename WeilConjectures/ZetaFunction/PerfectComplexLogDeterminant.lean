@@ -22,8 +22,7 @@ det(1 - T v ∣ P)⁻¹ = exp (∑_{m ≥ 1} tr_L(v^m ∣ P) T^m / m)    in 1 + 
 ```
 where `tr_L(v^m ∣ P)` is the categorical trace of `v^m`, for the Koszul braiding
 `DerivedCategory.braidedCategory'` of the derived tensor product
-(`DerivedCategory.IsPerfect.categoricalTrace`). This is the last clause of blueprint
-`lemma-logarithm-determinant`.
+(`DerivedCategory.IsPerfect.categoricalTrace`).
 
 ## Main results
 
@@ -31,9 +30,9 @@ where `tr_L(v^m ∣ P)` is the categorical trace of `v^m`, for the Koszul braidi
   field, the categorical trace of an arbitrary endomorphism `w` of a perfect complex `P` is the
   alternating sum `∑ᵢ (-1)ⁱ Tr(Hⁱ(w) ∣ Hⁱ(P))`.
 - `DerivedCategory.IsPerfect.inv_alternatingCharpolyRevProd_eq_exp`: the logarithm of the
-  determinant (blueprint `lemma-logarithm-determinant--3`).
+  determinant.
 
-## Implementation notes
+## Implementation details
 
 A perfect complex `P ≅ Q(C)` is represented by a bounded complex `C` of finitely generated
 projective modules, which is K-projective; so every endomorphism of `P` comes from a chain
@@ -63,10 +62,10 @@ theorem IsPerfect.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map
     (s : Finset ℤ) (hs : ∀ i ∉ s, IsZero ((homologyFunctor (ModuleCat.{u} L) i).obj P)) :
     letI := braidedCategory' (ModuleCat.{u} L)
     MonoidalCategory.trace w =
-      algebraMap L (End (𝟙_ (DerivedCategory (ModuleCat.{u} L))))
+      (algebraMap L (End (𝟙_ (DerivedCategory (ModuleCat.{u} L))))
         (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace L
           ((homologyFunctor (ModuleCat.{u} L) i).obj P)
-          ((homologyFunctor (ModuleCat.{u} L) i).map w).hom) := by
+          ((homologyFunctor (ModuleCat.{u} L) i).map w).hom)).asHom := by
   obtain ⟨C, a, b, ha, hb, hC, ⟨e⟩⟩ := hP
   have : C.IsStrictlyLE b := hb
   have : C.IsStrictlyGE a := ha
@@ -81,7 +80,7 @@ theorem IsPerfect.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map
     · exact C.isZero_of_isStrictlyLE b i (by lia)
   rw [trace_eq_algebraMap_sum_negOnePow_trace_homologyMap C v (Finset.Icc a b) hCs
     (fun i ↦ (hC i).2) P w e hw]
-  congr 1
+  congr 2
   -- the cohomology of `P` is that of `C`, compatibly with `w` and `v`
   let eH (i : ℤ) : (homologyFunctor (ModuleCat.{u} L) i).obj P ≅ C.homology i :=
     (homologyFunctor (ModuleCat.{u} L) i).mapIso e ≪≫ (homologyFunctorFactors _ i).app C
@@ -90,9 +89,10 @@ theorem IsPerfect.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map
     refine ModuleCat.trace_hom_eq_of_iso (eH i) _ _ ?_
     have h := (homologyFunctorFactors (ModuleCat.{u} L) i).hom.naturality v
     simp only [Functor.comp_map] at h
-    simp only [eH, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, ← Functor.map_comp_assoc,
-      hw, Functor.map_comp, Category.assoc, h]
-    rfl
+    change _ ≫ (homologyFunctor _ i).map e.hom ≫ (homologyFunctorFactors _ i).hom.app C =
+      ((homologyFunctor _ i).map e.hom ≫ (homologyFunctorFactors _ i).hom.app C) ≫ _
+    rw [← Functor.map_comp_assoc, hw, Functor.map_comp_assoc]
+    exact (congrArg (_ ≫ ·) h).trans (Category.assoc _ _ _).symm
   have hzero (i : ℤ) (hi : IsZero ((homologyFunctor (ModuleCat.{u} L) i).obj P)) :
       LinearMap.trace L _ (HomologicalComplex.homologyMap v i).hom = 0 :=
     (htr i).symm.trans (ModuleCat.trace_hom_eq_zero_of_isZero hi _)
@@ -128,16 +128,17 @@ theorem IsPerfect.trace_smul {P : DerivedCategory (ModuleCat.{u} L)} (hP : P.IsP
   obtain ⟨s, hs⟩ := hP.exists_finset_isZero_homology
   rw [hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map _ s hs,
     hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map _ s hs,
-    Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, smul_smul]
+    Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, End.smul_asHom,
+    End.smul_asHom, smul_smul]
   congr 1
   rw [Finset.mul_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [Functor.map_smul, ModuleCat.hom_smul, map_smul, smul_eq_mul, mul_smul_comm]
 
-/-- Blueprint `lemma-logarithm-determinant--3`: for a field `L` of characteristic zero, a perfect
-complex `P` of `D(L)` and an endomorphism `v` of `P`, with
-`det(1 - T v ∣ P) = ∏ᵢ det(1 - T v ∣ Hⁱ(P))^{(-1)^i}` (`LinearMap.alternatingCharpolyRevProd`,
-the product over a finite set `s` of degrees outside of which the cohomology of `P` vanishes),
+/-- For a field `L` of characteristic zero, a perfect complex `P` of `D(L)` and an endomorphism
+`v` of `P`, with `det(1 - T v ∣ P) = ∏ᵢ det(1 - T v ∣ Hⁱ(P))^{(-1)^i}`
+(`LinearMap.alternatingCharpolyRevProd`, the product over a finite set `s` of degrees outside of
+which the cohomology of `P` vanishes),
 ```
 det(1 - T v ∣ P)⁻¹ = exp (∑_{m ≥ 1} tr_L(v^m ∣ P) T^m / m),
 ```
@@ -151,8 +152,9 @@ theorem IsPerfect.inv_alternatingCharpolyRevProd_eq_exp [CharZero L]
     letI (i : ℤ) : FiniteDimensional L ((homologyFunctor (ModuleCat.{u} L) i).obj P) :=
       hP.finite_homology i
     (LinearMap.alternatingCharpolyRevProd s
-        (fun i ↦ ((homologyFunctor (ModuleCat.{u} L) i).map v).hom) 1)⁻¹ =
-      (PowerSeries.exp L).subst (PowerSeries.mk fun m ↦ hP.categoricalTrace (v ^ m) / m) := by
+        (fun i ↦ ((homologyFunctor (ModuleCat.{u} L) i).map v.asHom).hom) 1)⁻¹ =
+      (PowerSeries.exp L).subst
+        (PowerSeries.mk fun m ↦ hP.categoricalTrace (v ^ m).asHom / m) := by
   let := braidedCategory' (ModuleCat.{u} L)
   let (i : ℤ) : FiniteDimensional L ((homologyFunctor (ModuleCat.{u} L) i).obj P) :=
     hP.finite_homology i
@@ -165,12 +167,12 @@ theorem IsPerfect.inv_alternatingCharpolyRevProd_eq_exp [CharZero L]
   · congr 1
     let : HasRightDual P := hP.isDualizable.some
     rw [IsPerfect.categoricalTrace,
-      hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map (v ^ m) s hs,
+      hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map (v ^ m).asHom s hs,
       unitEndScalar_algebraMap]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
-    have h : ((homologyFunctor (ModuleCat.{u} L) i).map (v ^ m)).hom =
-        ((homologyFunctor (ModuleCat.{u} L) i).map v).hom ^ m :=
-      (congrArg ModuleCat.Hom.hom
+    have h : ((homologyFunctor (ModuleCat.{u} L) i).map (v ^ m).asHom).hom =
+        ((homologyFunctor (ModuleCat.{u} L) i).map v.asHom).hom ^ m :=
+      (congrArg (fun x ↦ x.asHom.hom)
         (map_pow (Functor.mapEnd P (homologyFunctor (ModuleCat.{u} L) i)) v m)).trans
           (map_pow (ModuleCat.endRingEquiv _) _ m)
     rw [h]

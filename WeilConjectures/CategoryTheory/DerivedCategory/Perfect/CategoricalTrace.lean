@@ -99,9 +99,9 @@ instance homologyFunctor_linear (n : ℤ) : (homologyFunctor (ModuleCat.{u} R) n
 /-- The degree-`0` scalar of the image of `r ∈ A` in `End (𝟙_ D(A))` is `r`. -/
 @[simp]
 lemma unitEndScalar_algebraMap (r : R) :
-    unitEndScalar R (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r) = r := by
-  rw [unitEndScalar, Algebra.algebraMap_eq_smul_one, End.one_def, Functor.map_smul,
-    CategoryTheory.Functor.map_id]
+    unitEndScalar R (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r).asHom = r := by
+  rw [unitEndScalar, Algebra.algebraMap_eq_smul_one, End.smul_asHom, End.one_asHom,
+    Functor.map_smul, CategoryTheory.Functor.map_id]
   simp
 
 /-- The image of `A` in `End (𝟙_ D(A))` is a copy of `A`. -/

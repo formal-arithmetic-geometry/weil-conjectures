@@ -15,24 +15,24 @@ public import WeilConjectures.ZetaFunction.PerfectComplexLogDeterminant
 Let `E` be a finite extension of `ℚ_ℓ` with ring of integers `R = 𝒪_E`. An object `K_E` of
 `Dᵇc(X, E)` with a Weil structure `ψ_E` has an integral model: a normalized system `L_•` over
 `𝒪_E` with a compatible system `θ_•` of (not necessarily invertible) Frobenius correspondences
-and an integer `N ≥ 0` with `ψ_E = π_E^{-N} (θ ⊗ E)` (blueprint
-`lemma-integral-models-rational-frobenius-correspondences`). Its compact cohomology and its
-stalks are the scalar extensions `G(P) = P ⊗ᴸ_{𝒪_E} E` of the integral realizations `P`, and the
-Frobenius operators of `ψ_E` are `π_E^{-Nm} G(V)` for the lifts `V` of the integral operators
-of `θ` (blueprint `lemma-integral-models-rational-frobenius-correspondences--2`). This file
-proves the trace formula for them (blueprint
-`theorem-grothendieck-lefschetz-trace-formula--3`): by linearity of the categorical trace over
-the field `E` (`DerivedCategory.IsPerfect.trace_smul`), its compatibility with the braided
-monoidal scalar extension `G` (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`) and the
-integral trace formula
-`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.trace_eq_finsum_trace`.
+and an integer `N ≥ 0` with `ψ_E = π_E^{-N} (θ ⊗ E)`. Its compact cohomology and its stalks are
+the scalar extensions `G(P) = P ⊗ᴸ_{𝒪_E} E` of the integral realizations `P`, and the Frobenius
+operators of `ψ_E` are `π_E^{-Nm} G(V)` for the lifts `V` of the integral operators of `θ`. This
+file proves the trace formula for them
+(`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.trace_smul_map_eq_finsum_trace`).
+
+## Implementation details
+
+The proof uses the linearity of the categorical trace over the field `E`
+(`DerivedCategory.IsPerfect.trace_smul`), its compatibility with the braided monoidal scalar
+extension `G` (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`) and the integral trace
+formula `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.trace_eq_finsum_trace`.
 
 The scalar extension `G` is any additive braided monoidal functor `D(𝒪_E) ⥤ D(E)`, and the
 scalar `π_E^{-Nm}` is any `t ∈ E`. No `E`-coefficient sheaf appears in the statement: this is the
-reduction step of clause `--3`, the integral formula transported along `G` and scaled by `t`. The
-identification of `RΓ_c(X, K_E)`, of the stalks `(K_E)_x̄` and of their Frobenius operators with
-`G(P_R)`, `G(P_{x̄,R})` and `t • G(V)`, `t • G(V_x̄)` (clause `--2` of
-`lemma-integral-models-rational-frobenius-correspondences`) is not part of this file.
+reduction step, the integral formula transported along `G` and scaled by `t`. The identification
+of `RΓ_c(X, K_E)`, of the stalks `(K_E)_x̄` and of their Frobenius operators with `G(P_R)`,
+`G(P_{x̄,R})` and `t • G(V)`, `t • G(V_x̄)` is not part of this file.
 -/
 
 @[expose] public section
@@ -59,20 +59,17 @@ variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spe
   {E : Type (u + 1)} [Field E]
 
 /-- **The Grothendieck–Lefschetz trace formula with coefficients in a finite extension `E` of
-`ℚ_ℓ`** (blueprint `theorem-grothendieck-lefschetz-trace-formula--3`): with the notation of
-`trace_eq_finsum_trace`, for `R = 𝒪_E`, the derived scalar extension `G : D(𝒪_E) ⥤ D(E)` and
-`t = π_E^{-Nm}`, the global Frobenius operator `t • G(V)` on `RΓ_c(X, K_E) = G(P_R)` and the
-local Frobenius operators `t • G(V_x̄)` on the stalks `(K_E)_x̄ = G(P_{x̄,R})` satisfy
+`ℚ_ℓ`**: with the notation of `trace_eq_finsum_trace`, for `R = 𝒪_E`, the derived scalar
+extension `G : D(𝒪_E) ⥤ D(E)` and `t = π_E^{-Nm}`, the global Frobenius operator `t • G(V)` on
+`RΓ_c(X, K_E) = G(P_R)` and the local Frobenius operators `t • G(V_x̄)` on the stalks
+`(K_E)_x̄ = G(P_{x̄,R})` satisfy
 ```
 tr_E(Frob_{X,K_E}^m ∣ RΓ_c(X, K_E)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_E(Frob_{x̄,m} ∣ (K_E)_x̄).
 ```
-This is the reduction step only: the statement is about `t • G(V)` and `t • G(V_x̄)` for an
-arbitrary braided functor `G` and scalar `t`, and does not mention an `E`-coefficient sheaf; the
-identification of the Frobenius operators of `K_E` with them is left to the caller.
 -/
 theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
     (hI : I = Ideal.span {ϖ})
-    (F : S.FrobeniusSystem f.geometricGaloisFrobenius.hom) {m : ℕ} (hm : m ≠ 0)
+    (F : S.FrobeniusSystem f.geometricGaloisFrobenius.asIso.hom) {m : ℕ} (hm : m ≠ 0)
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars f.geometricFiber.smallEtaleTopology
         (I.powSuccFactor n) ⋙ compactlySupportedGlobalSections (ModuleCat.{u + 1}
           (R ⧸ I ^ (n + 1 + 1))) f.geometricFiberToAlgebraicClosure ≅
@@ -115,8 +112,12 @@ theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
   have := finite_geometricFixedPoint f hm
   have := Fintype.ofFinite (geometricFixedPoint f m)
   have h := trace_eq_finsum_trace f hϖ hI F hm α hα hα' hc hV β hβ hβ' cx hcx Vx hVx
+  have hs : (End.of (∑ x, trace (Vx x)) : End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) =
+      ∑ x, End.of (trace (Vx x)) :=
+    map_sum End.addEquiv.symm _ _
   rw [hG.trace_smul, G.trace_eq_unitEndRingHom_trace V _ (Iso.refl _) (by simp), h,
-    finsum_eq_sum_of_fintype, finsum_eq_sum_of_fintype, map_sum, Finset.smul_sum]
+    finsum_eq_sum_of_fintype, finsum_eq_sum_of_fintype, hs, map_sum, End.sum_asHom,
+    Finset.smul_sum]
   refine Finset.sum_congr rfl fun x _ ↦ ?_
   rw [(hGx x).trace_smul, G.trace_eq_unitEndRingHom_trace (Vx x) _ (Iso.refl _) (by simp)]
 
