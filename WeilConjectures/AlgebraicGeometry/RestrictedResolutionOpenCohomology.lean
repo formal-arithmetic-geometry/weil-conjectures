@@ -38,6 +38,20 @@ private theorem map_conjugation_comp
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← H.map_comp, ← H.map_comp, hc, H.map_comp]
 
+/-- A natural comparison transports an augmentation through a target isomorphism. -/
+private theorem map_comparison_augmentation
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {S : C ⥤ D} {T : C ⥤ E} (Q : D ⥤ E) (c : S ⋙ Q ⟶ T)
+    {F X : C} {A : D} {B : E} (a : F ⟶ X)
+    (i : S.obj F ⟶ A) (i' : T.obj F ⟶ B)
+    (v : A ⟶ S.obj X) (w : B ≅ T.obj X)
+    (h : i ≫ v = S.map a) (h' : i' ≫ w.hom = T.map a) :
+    Q.map i ≫ Q.map v ≫ c.app X ≫ w.inv = c.app F ≫ i' := by
+  rw [← Category.assoc, ← Q.map_comp, h]
+  have hn : Q.map (S.map a) ≫ c.app X = c.app F ≫ T.map a := c.naturality a
+  rw [← Category.assoc, hn, Category.assoc, ← h', Category.assoc,
+    w.hom_inv_id, Category.comp_id]
+
 /-- Naturality of an adjunction unit transports an augmentation square. -/
 private theorem adjunction_unit_map_augmentation
     {C D : Type*} [Category* C] [Category* D]
@@ -211,27 +225,11 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   let φ : (restrictFunctor U.ι).obj F ⟶ P.obj ((restrictFunctor L.ι).obj F) :=
     (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫
     P.map (c.hom.app F)
-  have ht : Q.map (R.resolution.ι.f 0) ≫ t.f 0 =
-      c.hom.app F ≫ R'.resolution.ι.f 0 := by
-    dsimp only [t]
-    simp only [HomologicalComplex.comp_f]
-    change Q.map (R.resolution.ι.f 0) ≫ Q.map (R.comparison.hom.f 0) ≫
-      c.hom.app (I.cocomplex.X 0) ≫ R'.comparison.inv.f 0 = _
-    rw [← Category.assoc, ← Q.map_comp, R.augmentation]
-    erw [← Category.assoc, c.hom.naturality (I.ι.f 0)]
-    change c.hom.app F ≫ (restrictFunctor L.ι).map (I.ι.f 0) ≫
-      R'.comparison.inv.f 0 = _
-    rw [← R'.augmentation, Category.assoc]
-    have hc : R'.comparison.hom.f 0 ≫ R'.comparison.inv.f 0 = 𝟙 _ := by
-      rw [← HomologicalComplex.comp_f, Iso.hom_inv_id, HomologicalComplex.id_f]
-    rw [hc, Category.comp_id]
-  have hβ : R.resolution.ι.f 0 ≫ β.f 0 = φ ≫ P.map (R'.resolution.ι.f 0) := by
-    dsimp only [β]
-    rw [HomologicalComplex.comp_f]
-    change R.resolution.ι.f 0 ≫ (restrictAdjunction j).unit.app
-      (R.resolution.cocomplex.X 0) ≫ P.map (t.f 0) = _
-    exact adjunction_unit_map_augmentation (restrictAdjunction j)
-      (R.resolution.ι.f 0) (R'.resolution.ι.f 0) (t.f 0) (c.hom.app F) ht
+  have ht := map_comparison_augmentation Q c.hom (I.ι.f 0)
+    (R.resolution.ι.f 0) (R'.resolution.ι.f 0) (R.comparison.hom.f 0)
+    ((HomologicalComplex.eval _ _ 0).mapIso R'.comparison) R.augmentation R'.augmentation
+  have hβ := adjunction_unit_map_augmentation (restrictAdjunction j)
+    (R.resolution.ι.f 0) (R'.resolution.ι.f 0) (t.f 0) (c.hom.app F) ht
   let Γ := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
     forget₂ _ AddCommGrpCat.{u}
   obtain ⟨a, ha⟩ := exists_pushforward_sections_iso j R'.resolution.cocomplex
