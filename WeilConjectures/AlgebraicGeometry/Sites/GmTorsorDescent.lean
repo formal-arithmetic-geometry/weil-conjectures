@@ -350,7 +350,26 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
         (by rw [← hf₁]; rfl)).hom.toNatTrans.app (Modules.unitObj X))
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
   · exact torsorDescentData_hom T V t q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂
-  · exact φ.comm q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂
+  · have hc := φ.comm q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂
+    run_tac
+      let goal ← Lean.Elab.Tactic.getMainGoal
+      goal.withContext do
+        let ctx ← Lean.getLCtx
+        let some decl := ctx.findFromUserName? `hc | throwError "missing hc"
+        let target ← goal.getType
+        let rec firstDiff (a b : Lean.Expr) : Option (Lean.Expr × Lean.Expr) :=
+          if a == b then none else
+          match a, b with
+          | .app f x, .app g y => (firstDiff f g).orElse fun _ ↦ firstDiff x y
+          | .lam _ t x _, .lam _ u y _ => (firstDiff t u).orElse fun _ ↦ firstDiff x y
+          | .forallE _ t x _, .forallE _ u y _ => (firstDiff t u).orElse fun _ ↦ firstDiff x y
+          | .mdata _ x, y => firstDiff x y
+          | x, .mdata _ y => firstDiff x y
+          | _ , _ => some (a, b)
+        if let some (a, b) := firstDiff decl.type target then
+          Lean.logInfo m!"hypothesis difference: {repr a}"
+          Lean.logInfo m!"goal difference: {repr b}"
+    exact hc
 
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     (M : modulesPseudofunctor.obj (.mk (op X)))
