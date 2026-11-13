@@ -41,8 +41,11 @@ theorem finiteSystemAdjunction_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
           finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) f) :=
   rfl
 
+-- Identify the category and functor data before comparing the mates. This keeps each
+-- adjunction in its own presentation throughout the sectionwise calculation.
 universe v₁ v₂ v₃ w₁ w₂ w₃ in
-private theorem finiteSystemCompositor_heq_of_mates {C C' : Type w₁} {D D' : Type w₂} {F F' : Type w₃}
+private theorem finiteSystemCompositor_heq_of_mates
+    {C C' : Type w₁} {D D' : Type w₂} {F F' : Type w₃}
     {iC : Category.{v₁} C} {iD : Category.{v₂} D} {iF : Category.{v₃} F}
     {iC' : Category.{v₁} C'} {iD' : Category.{v₂} D'} {iF' : Category.{v₃} F'}
     (hC : C = C') (hD : D = D') (hF : F = F')
@@ -73,7 +76,6 @@ private theorem finiteSystemCompositor_heq_of_mates {C C' : Type w₁} {D D' : T
       (Adjunction.ofIsRightAdjoint Gh)) (Adjunction.ofIsRightAdjoint Ghk)).injective
   rw [ha, ha', eq_of_heq hd]
 
-set_option profiler true in
 private theorem finiteSystemComposition_heq {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     HEq (finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
@@ -83,6 +85,7 @@ private theorem finiteSystemComposition_heq {V W Z : Scheme.{u}}
   unfold finiteSystemAdjunction ProEtale.VaryingRing.moduleAdj at e1
   have e2 :=
     (integralComparisonSequenceComposition_existsUnique l E h k).exists.choose_spec.choose_spec
+  -- Defer the equality proofs until both presentations have been inferred.
   refine finiteSystemCompositor_heq_of_mates
     (raGk := ProEtale.VaryingRing.push_isRightAdjoint _ _ k)
     (raGk' := integralComparisonSequenceRightAdjoint l E k)
@@ -105,7 +108,6 @@ private theorem finiteSystemComposition_heq {V W Z : Scheme.{u}}
   ext M U x
   exact (e1.2 M U.unop.1 U.unop.2 x).trans (e2.2 M U.unop.1 U.unop.2 x).symm
 
-set_option profiler true in
 /-- The finite-system compositor is the strict sequence compositor.
 Source: Stacks 0D6D, 03D3
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
@@ -116,8 +118,10 @@ theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶
       integralComparisonSequenceComposition l E h k := by
   exact eq_of_heq (finiteSystemComposition_heq l E h k)
 
+-- Localization respects these identifications, including the chosen derived categories.
 universe v₁ v₂ v₃ w₁ w₂ w₃ t₁ t₂ t₃ in
-private theorem finiteSystemDerivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' E'' : Type w₃}
+private theorem finiteSystemDerivedCompositor_heq
+    {C C' : Type w₁} {D D' : Type w₂} {E' E'' : Type w₃}
     [iC : Category.{v₁} C] [iC' : Category.{v₁} C'] [iD : Category.{v₂} D]
     [iD' : Category.{v₂} D'] [iE : Category.{v₃} E'] [iE' : Category.{v₃} E'']
     [aC : Abelian C] [aC' : Abelian C'] [aD : Abelian D] [aD' : Abelian D']
@@ -130,13 +134,19 @@ private theorem finiteSystemDerivedCompositor_heq {C C' : Type w₁} {D D' : Typ
     (haC : HEq aC aC') (haD : HEq aD aD') (haE : HEq aE aE')
     (hdC : HEq dC dC') (hdD : HEq dD dD') (hdE : HEq dE dE')
     (F : C ⥤ D) (F' : C' ⥤ D') (G : D ⥤ E') (G' : D' ⥤ E'')
-    [addF : F.Additive] [limF : Limits.PreservesFiniteLimits F] [colF : Limits.PreservesFiniteColimits F]
-    [addG : G.Additive] [limG : Limits.PreservesFiniteLimits G] [colG : Limits.PreservesFiniteColimits G]
-    [addF' : F'.Additive] [limF' : Limits.PreservesFiniteLimits F'] [colF' : Limits.PreservesFiniteColimits F']
-    [addG' : G'.Additive] [limG' : Limits.PreservesFiniteLimits G'] [colG' : Limits.PreservesFiniteColimits G']
+    [addF : F.Additive] [limF : Limits.PreservesFiniteLimits F]
+    [colF : Limits.PreservesFiniteColimits F]
+    [addG : G.Additive] [limG : Limits.PreservesFiniteLimits G]
+    [colG : Limits.PreservesFiniteColimits G]
+    [addF' : F'.Additive] [limF' : Limits.PreservesFiniteLimits F']
+    [colF' : Limits.PreservesFiniteColimits F']
+    [addG' : G'.Additive] [limG' : Limits.PreservesFiniteLimits G']
+    [colG' : Limits.PreservesFiniteColimits G']
     (H : C ⥤ E') (H' : C' ⥤ E'')
-    [addH : H.Additive] [limH : Limits.PreservesFiniteLimits H] [colH : Limits.PreservesFiniteColimits H]
-    [addH' : H'.Additive] [limH' : Limits.PreservesFiniteLimits H'] [colH' : Limits.PreservesFiniteColimits H']
+    [addH : H.Additive] [limH : Limits.PreservesFiniteLimits H]
+    [colH : Limits.PreservesFiniteColimits H]
+    [addH' : H'.Additive] [limH' : Limits.PreservesFiniteLimits H']
+    [colH' : Limits.PreservesFiniteColimits H']
     (eF : HEq F F') (eG : HEq G G') (eH : HEq H H')
     (a : H ≅ F ⋙ G) (a' : H' ≅ F' ⋙ G') (ha : HEq a a') :
     HEq (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm)
@@ -157,11 +167,11 @@ private theorem finiteSystemDerivedCompositor_heq {C C' : Type w₁} {D D' : Typ
   obtain rfl := eq_of_heq ha
   rfl
 
-set_option profiler true in
 private theorem finiteSystemDerivedComposition_heq {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     HEq (finiteSystemDerivedComposition (integralSystemRings l E)
       (integralSystemTransition l E) h k) (integralComparisonSystemComposition l E h k) := by
+  -- Supply the exactness witnesses directly to avoid searching across presentations.
   exact finiteSystemDerivedCompositor_heq
     (addF := finiteSystemPullbackAdditive
       (integralSystemRings l E) (integralSystemTransition l E) k)
@@ -198,11 +208,13 @@ private theorem finiteSystemDerivedComposition_heq {V W Z : Scheme.{u}}
     (H' := integralComparisonSequencePullback l E (h ≫ k))
     (a := finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
     (a' := integralComparisonSequenceComposition l E h k)
-    (by rfl) (by rfl) (by rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
-    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
+    (by rfl) (by rfl) (by rfl)
+    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
+    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
+    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
+    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
     (finiteSystemComposition_heq l E h k)
 
-set_option profiler true in
 /-- The derived finite-system compositor is the derived strict sequence compositor.
 Source: Stacks 0D6D, 015F
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
