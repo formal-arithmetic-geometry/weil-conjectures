@@ -115,8 +115,8 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
-  have : Abelian (localEvaluationModules X U) := inferInstance
-  have : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
+  let : Abelian (localEvaluationModules X U) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
   let L : localEvaluationModules X U ⥤
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -131,13 +131,17 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   let E : DerivedCategory.{w} (localEvaluationModules X U) ⥤ schemeDerivedCategory U.toScheme :=
     L.mapDerivedCategory
   let v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
+  trace "PH413: functors ready"
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
     exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
+  trace "PH413: transport ready"
   have : CochainComplex.IsKInjective (T.obj F) := hF
   let eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
   let eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
+  trace "PH413: comparisons ready"
   obtain ⟨a', b', h⟩ := exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
+  trace "PH413: scheme models ready"
   exact comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
     v f _ t b a' b' h
 
