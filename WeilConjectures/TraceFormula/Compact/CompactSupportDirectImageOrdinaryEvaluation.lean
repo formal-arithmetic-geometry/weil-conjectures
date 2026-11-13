@@ -36,8 +36,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the section identity traverses the nested sequence-site scalar restrictions.
 /-- The ordinary direct-image comparison is sectionwise the identity.
 
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941.
@@ -118,6 +116,6 @@ theorem compactSupportDirectImageOrdinaryEvaluation
       SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
       SheafOfModules.pushforwardCongr_hom_app_val_app]
     rfl
-  exact ⟨fun n ↦ (level n).choose, fun n ↦ (level n).choose_spec⟩
+  exact Classical.axiomOfChoice level
 
 end WeilConjectures
