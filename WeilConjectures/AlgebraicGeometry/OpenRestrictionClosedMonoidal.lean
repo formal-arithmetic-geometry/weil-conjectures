@@ -68,10 +68,22 @@ private theorem monoidal_restriction_mate_equation
   simpa only [Category.comp_id] using congrArg
     (fun f ↦ (Functor.Monoidal.μIso R A K).hom ≫ R.map f) h.symm
 
-set_option maxHeartbeats 900000 in
 set_option trace.profiler true in
--- The canonical-family predicate unfolds the recorded sheaf tensor instances.
-set_option linter.style.haveILetI false in
+private theorem closedRestriction_tensorHomEquiv_comp (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (A A' K N : schemeDerivedCategory X) (a : A' ⟶ A)
+    (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+      X.sheaf).obj (op K, N)) :
+    schemeDerivedTensorHomEquiv X A' K N (a ≫ f) =
+      (a ⊗ₘ 𝟙 K) ≫ schemeDerivedTensorHomEquiv X A K N f := by
+  have hn := (Classical.choose_spec (exists_canonicalDerivedTensorHom X)).1
+    A A' K K N N a (𝟙 K) (𝟙 N) f
+  change schemeDerivedTensorHomEquiv X A' K N
+    (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+      X.sheaf).map (𝟙 (op K, N))) = _ at hn
+  simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using hn
+
+set_option trace.profiler true in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.
 
 Source: Stacks Project, cohomology.tex, Tags 06YH, 08DJ and 08DL.
@@ -135,12 +147,8 @@ theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})
     (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf
   let e := schemeDerivedTensorHomEquiv X
   let eU := schemeDerivedTensorHomEquiv U.toScheme
-  have he : IsCanonicalDerivedTensorHom X e :=
-    Classical.choose_spec (exists_canonicalDerivedTensorHom X)
-  have heU : IsCanonicalDerivedTensorHom U.toScheme eU :=
-    Classical.choose_spec (exists_canonicalDerivedTensorHom U.toScheme)
   obtain ⟨m⟩ := exists_openRestriction_derivedMonoidal X U
-  letI : R.Monoidal := m
+  let : R.Monoidal := m
   let c := fun K N ↦ (eU (R.obj (H.obj (op K, N))) (R.obj K) (R.obj N)).symm
     ((Functor.Monoidal.μIso R (H.obj (op K, N)) K).hom ≫
       R.map (e (H.obj (op K, N)) K N (𝟙 _)))
@@ -151,14 +159,8 @@ theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})
   intro A K N ξ
   change eU (R.obj A) (R.obj K) (R.obj N) (R.map ξ ≫ c K N) =
     (Functor.Monoidal.μIso R A K).hom ≫ R.map (e A K N ξ)
-  apply monoidal_restriction_mate_equation H HU R e eU ?_ ?_ A K N ξ
-  · intro B B' L M a f
-    have hn := he.1 B B' L L M M a (𝟙 L) (𝟙 M) f
-    change e B' L M (a ≫ f ≫ H.map (𝟙 (op L, M))) = _ at hn
-    simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using hn
-  · intro B B' L M a f
-    have hn := heU.1 B B' L L M M a (𝟙 L) (𝟙 M) f
-    change eU B' L M (a ≫ f ≫ HU.map (𝟙 (op L, M))) = _ at hn
-    simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using hn
+  exact monoidal_restriction_mate_equation H HU R e eU
+    (closedRestriction_tensorHomEquiv_comp X)
+    (closedRestriction_tensorHomEquiv_comp U.toScheme) A K N ξ
 
 end AlgebraicGeometry
