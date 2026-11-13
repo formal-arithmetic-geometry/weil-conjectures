@@ -74,6 +74,20 @@ lemma CategoryTheory.Iso.trans_symm_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, ← hv]
   simp
 
+lemma CategoryTheory.Iso.inv_eq_hom_comp_inv_comp_inv {𝒜 : Type*} [Category* 𝒜]
+    {P₀ P'' Q₀ Q'' : 𝒜} (a : P₀ ≅ Q₀) (a'' : P'' ≅ Q'') (x : Q₀ ≅ Q'')
+    (u₀ : P₀ ≅ P'') (n : a.hom ≫ x.hom = u₀.hom ≫ a''.hom) :
+    a.inv = x.hom ≫ a''.inv ≫ u₀.inv := by
+  rw [← cancel_epi a.hom, Iso.hom_inv_id, reassoc_of% n]
+  simp
+
+lemma CategoryTheory.Iso.inv_eq_inv_comp_inv_comp_hom {𝒜 : Type*} [Category* 𝒜]
+    {P P'' Q Q'' : 𝒜} (a : P ≅ Q) (a'' : P'' ≅ Q'') (y : Q ≅ Q'')
+    (u : P ≅ P'') (n : a.hom ≫ y.hom = u.hom ≫ a''.hom) :
+    a''.inv = y.inv ≫ a.inv ≫ u.hom := by
+  rw [← cancel_epi y.hom, Iso.hom_inv_id_assoc, ← cancel_epi a.hom, reassoc_of% n]
+  simp
+
 namespace AlgebraicGeometry.Compactification.Triangle
 
 variable {k : Type u} [Field k] {X Y S : Over (Spec (.of k))} {f : X ⟶ Y} {g : Y ⟶ S}
@@ -627,24 +641,10 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
   let u := NatIso.hcomp
     (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf)
     (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg)
-  have e₁ : a₀.inv = x.hom ≫ a''.inv ≫ u₀.inv := by
-    rw [← cancel_epi a₀.hom, Iso.hom_inv_id]
-    have h := congrArg (fun q =>
-        q ≫ ((𝔽).compIso (triangleShriekTriangle T'')).inv ≫
-          (NatIso.hcomp
-            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf T''.cf)
-            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg)).inv) n₁
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.id_comp,
-      Category.comp_id] at h
-    simpa only [a₀, x, a'', u₀, Category.assoc] using h.symm
-  have e₂ : a''.inv = y.inv ≫ a.inv ≫ u.hom := by
-    rw [← cancel_epi y.hom, Iso.hom_inv_id_assoc, ← cancel_epi a.hom]
-    calc
-      _ = (u.hom ≫ a''.hom) ≫ a''.inv := by
-        simpa only [a, y, a'', u, Category.assoc] using
-          congrArg (fun q => q ≫ a''.inv) n₂
-      _ = u.hom := by simp
-      _ = a.hom ≫ a.inv ≫ u.hom := by simp
+  have e₁ : a₀.inv = x.hom ≫ a''.inv ≫ u₀.inv :=
+    CategoryTheory.Iso.inv_eq_hom_comp_inv_comp_inv a₀ a'' x u₀ n₁
+  have e₂ : a''.inv = y.inv ≫ a.inv ≫ u.hom :=
+    CategoryTheory.Iso.inv_eq_inv_comp_inv_comp_hom a a'' y u n₂
   rw [e₁, reassoc_of% hz, e₂]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, ← hv]
   simp
