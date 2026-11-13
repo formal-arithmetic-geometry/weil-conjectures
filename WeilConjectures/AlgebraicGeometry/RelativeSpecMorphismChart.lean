@@ -13,6 +13,7 @@ universe u
 open CategoryTheory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The dependent object transports require extra elaboration heartbeats.
 /-- The local chart compatibility for the relative-spectrum anti-equivalence, provided
 its forward functor acts on morphisms by the canonical section maps (`hmap`).
