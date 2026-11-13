@@ -39,14 +39,14 @@ private theorem affine_pullback_limit
         (∀ j, e.hom ≫ c.π.app j ≫ t.app j = pullback.fst b k ≫ b) ∧
         ∀ j, ∃ d : pullback (s.app j) k ≅ D.obj j,
           d.hom ≫ t.app j = pullback.fst (s.app j) k ≫ s.app j := by
-  let L : I ⥤ Over (B) := Over.lift E s
+  let L : I ⥤ Over B := Over.lift E s
   let cL : Cone L := Over.liftCone E s cE b hlegs
   have hcL : IsLimit cL := Over.isLimitLiftCone E s cE b hlegs hcE
   let P := Over.pullback k
   let D : I ⥤ Scheme.{u} := L ⋙ P ⋙ Over.forget V
   let c : Cone D := (P ⋙ Over.forget V).mapCone cL
   have hc : IsLimit c := isLimitOfPreserves (P ⋙ Over.forget V) hcL
-  let t : D ⟶ (Functor.const I).obj (B) :=
+  let t : D ⟶ (Functor.const I).obj B :=
     { app := fun j => pullback.fst (s.app j) k ≫ s.app j
       naturality := by
         intro i j h
@@ -57,13 +57,14 @@ private theorem affine_pullback_limit
         simp only [Category.assoc, pullback.lift_fst_assoc, Category.comp_id]
         have hs := s.naturality h
         have hs' : E.map h ≫ s.app j = s.app i := by
-          change E.map h ≫ s.app j = s.app i ≫ 𝟙 (B) at hs
+          change E.map h ≫ s.app j = s.app i ≫ 𝟙 B at hs
           exact hs.trans (Category.comp_id _)
         rw [hs'] }
   refine ⟨D, c, t, ⟨hc⟩, ?_, Iso.refl _, ?_, ?_⟩
   · intro j
     have : IsAffine (E.obj j) := hE j
-    exact Pullback.isAffine_of_isAffine_isAffine_isAffine (s.app j) k
+    exact Pullback.isAffine_of_isAffine_isAffine_isAffine
+      (show E.obj j ⟶ B from s.app j) k
   · intro j
     change 𝟙 _ ≫
       pullback.lift (pullback.fst b k ≫ cE.π.app j) (pullback.snd b k) _ ≫
@@ -74,6 +75,7 @@ private theorem affine_pullback_limit
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+set_option profiler true in
 /-- Punctured root charts commute with cofiltered affine ring colimits over R.
 
 Source: Stacks Project, Tags 05N9 and 01YW; universal properties of polynomial
@@ -150,10 +152,17 @@ theorem punctured_root_colimit_continuity
     simpa only [Category.assoc] using ha (Opposite.op j)
   have hV₀ : IsAffine V₀.toScheme := IsAffineOpen.Spec_basicOpen _
   have hE : ∀ j, IsAffine (E.obj j) := fun j ↦ inferInstance
+  run_tac Lean.logInfo "PH701: start pullback limit"
   obtain ⟨D, c, t, hc, hD, eD, heD, hstage⟩ :=
     affine_pullback_limit k E s cH hcH (Spec.map b) hlegs hE
+  run_tac Lean.logInfo "PH701: start root base change"
   obtain ⟨e, he⟩ := punctured_root_base_change R H f n b
-  refine ⟨D, c, t, hc, hD, e ≪≫ eD, ?_, ?_⟩
+  run_tac Lean.logInfo "PH701: start packaging"
+  refine ⟨D, ?_⟩
+  run_tac Lean.logInfo "PH701: diagram packaged"
+  refine ⟨c, t, hc, hD, ?_⟩
+  run_tac Lean.logInfo "PH701: cone packaged"
+  refine ⟨e ≪≫ eD, ?_, ?_⟩
   · intro j
     rw [Iso.trans_hom, Category.assoc, heD, ← Category.assoc, he]
     simp only [Category.assoc]
