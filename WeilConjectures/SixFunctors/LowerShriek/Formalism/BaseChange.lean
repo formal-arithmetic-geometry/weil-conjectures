@@ -94,7 +94,7 @@ variable (F : CompactSupportFormalism.{w, v, u})
 class HasProperBaseChange : Prop where
   isIso_pfBaseChange {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z}
     {b : Z' ⟶ Z} [IsProper r] (h : IsPullback t l r b) :
-    IsIso (F.pfBaseChange t l r b h.w).natTrans
+    IsIso (F.pfBaseChange t l r b h.w)
 
 section ShriekBaseChange
 
@@ -130,7 +130,7 @@ in an abstract compact support formalism.
 for the extension by zero and proper base change. -/
 instance isIso_shriekBaseChange [F.HasProperBaseChange] (c : Compactification f)
     (c' : Compactification f') (h : c'.Z ⟶ c.Z) (hi : IsPullback g' c'.i c.i h)
-    (hp : IsPullback h c'.g c.g g) : IsIso (F.shriekBaseChange c c' h hi hp).natTrans := by
+    (hp : IsPullback h c'.g c.g g) : IsIso (F.shriekBaseChange c c' h hi hp) := by
   have := HasBaseChange.isIso_baseChange (F := F) hi
   have := HasProperBaseChange.isIso_pfBaseChange (F := F) hp
   dsimp only [shriekBaseChange, ExchangeFormalism.shriekBaseChange, TwoSquare.hComp]
@@ -141,11 +141,11 @@ the identity, after inserting the identifications `(𝟙 Y)^* ≅ 𝟭` and `(�
 (blueprint: `thm-cbc-finite-torsion`, `fix-lem-exchanges`) -/
 lemma shriekBaseChange_id (c : Compactification f) (hi : IsPullback (𝟙 X) c.i c.i (𝟙 c.Z))
     (hp : IsPullback (𝟙 c.Z) c.g c.g (𝟙 Y)) :
-    (F.shriekBaseChange c c (𝟙 c.Z) hi hp).natTrans =
+    (F.shriekBaseChange c c (𝟙 c.Z) hi hp) =
       Functor.whiskerLeft (F.shriek c) (F.pbId Y).hom ≫ (Functor.rightUnitor _).hom ≫
         (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pbId X).inv (F.shriek c) := by
   have := HasBaseChange.isIso_baseChange (F := F) hi
-  have key : inv (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hi.w).natTrans =
+  have key : inv (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hi.w) =
       ((TwoSquare.mk (F.sh c.i) (𝟭 _) (𝟭 _) (F.sh c.i)
         ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
           (F.pbId c.Z).hom).whiskerLeft (F.pbId X).inv := by
@@ -195,8 +195,8 @@ lemma shriekBaseChange_refinementComparison {c d : Compactification f}
     (hdi : IsPullback g' d'.i d.i hd) (hdp : IsPullback hd d'.g d.g g)
     (hcomm : hc ≫ r.hom = r'.hom ≫ hd) :
     Functor.whiskerRight (F.refinementComparison r hr) (F.pb g) ≫
-        (F.shriekBaseChange c c' hc hci hcp).natTrans =
-      (F.shriekBaseChange d d' hd hdi hdp).natTrans ≫
+        (F.shriekBaseChange c c' hc hci hcp) =
+      (F.shriekBaseChange d d' hd hdi hdp) ≫
         Functor.whiskerLeft (F.pb g') (F.refinementComparison r' hr') := by
   have := HasBaseChange.isIso_baseChange (F := F) hr.flip
   have := HasBaseChange.isIso_baseChange (F := F) hr'.flip
@@ -228,9 +228,9 @@ theorem compIso_shriekBaseChange {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ Y} {g 
     (hfgi : IsPullback gX T'.cfg.i T.cfg.i b) (hfgp : IsPullback b T'.cfg.g T.cfg.g gS)
     (hq : IsPullback a T'.q T.q b) (hp : b ≫ T.p = T'.p ≫ c) :
     Functor.whiskerRight (F.compIso T).hom (F.pb gS) ≫
-        (F.shriekBaseChange T.cfg T'.cfg b hfgi hfgp).natTrans =
+        (F.shriekBaseChange T.cfg T'.cfg b hfgi hfgp) =
       (F.shriekBaseChange T.cf T'.cf a hfi hfp ≫ₕ
-          F.shriekBaseChange T.cg T'.cg c hgi hgp).natTrans ≫
+          F.shriekBaseChange T.cg T'.cg c hgi hgp) ≫
         Functor.whiskerLeft (F.pb gX) (F.compIso T').hom := by
   have := HasBaseChange.isIso_baseChange (F := F) T.isPullback
   have := HasProperExchange.isIso_exchange (F := F) T.isPullback
@@ -270,7 +270,7 @@ noncomputable def lowerShriekBaseChange [HasCompactification f] [HasCompactifica
 
 instance isIso_lowerShriekBaseChange [F.HasProperBaseChange] [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    IsIso (F.lowerShriekBaseChange sq).natTrans := by
+    IsIso (F.lowerShriekBaseChange sq) := by
   dsimp only [lowerShriekBaseChange, TwoSquare.whiskerBottom]
   infer_instance
 
@@ -281,8 +281,8 @@ isomorphisms `F.shriekIso c d` and `F.shriekIso (c.ofIsPullback sq) (d.ofIsPullb
 lemma shriekBaseChangeOfIsPullback_shriekIso [QuasiCompact f] [QuasiCompact f']
     (sq : IsPullback g' f' f g) (c d : Compactification f) :
     Functor.whiskerRight (F.shriekIso c d).hom (F.pb g) ≫
-        (F.shriekBaseChangeOfIsPullback sq d).natTrans =
-      (F.shriekBaseChangeOfIsPullback sq c).natTrans ≫
+        (F.shriekBaseChangeOfIsPullback sq d) =
+      (F.shriekBaseChangeOfIsPullback sq c) ≫
         Functor.whiskerLeft (F.pb g')
           (F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)).hom := by
   have hr₀ := Compactification.isPullback_infFst c d
@@ -360,9 +360,9 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
   have : QuasiCompact f₁ := .of_comp f₁ f₂
   let T := Compactification.Triangle.ofHasCompactification f₁ f₂
   have hKey : Functor.whiskerRight (F.compIso T).hom (F.pb gS) ≫
-      (F.shriekBaseChangeOfIsPullback sq T.cfg).natTrans =
+      (F.shriekBaseChangeOfIsPullback sq T.cfg) =
       (F.shriekBaseChangeOfIsPullback sq₁ T.cf ≫ₕ
-        F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans ≫
+        F.shriekBaseChangeOfIsPullback sq₂ T.cg) ≫
         Functor.whiskerLeft (F.pb gX) (F.compIso (T.ofIsPullback sq₁ sq₂ sq)).hom :=
     F.compIso_shriekBaseChange T (T.ofIsPullback sq₁ sq₂ sq)
       (pullback.fst T.cf.g gY) (pullback.fst T.cg.g gS) (pullback.fst T.cfg.g gS)
@@ -402,14 +402,14 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
   rw [reassoc_of% hcancel, hCI, hCI']
   simp only [NatTrans.comp_app, NatTrans.hcomp_app, Functor.whiskerRight_app, Iso.symm_hom,
     Functor.map_comp, Category.assoc]
-  have hB := (F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans.naturality
+  have hB := (F.shriekBaseChangeOfIsPullback sq₂ T.cg).naturality
     ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)
   simp only [Functor.comp_map] at hB
   have hI : (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).hom.app
         ((F.pb gY).obj ((F.lowerShriek f₁).obj K)) ≫
       (F.lowerShriek f₂').map
         ((F.pb gY).map ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)) ≫
-      (F.lowerShriek f₂').map ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).natTrans.app K) ≫
+      (F.lowerShriek f₂').map ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).app K) ≫
       (F.lowerShriek f₂').map ((F.shriekIso (T.cf.ofIsPullback sq₁)
         (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)) ≫
       (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).inv.app
@@ -417,7 +417,7 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
       (F.shriek (T.cg.ofIsPullback sq₂)).map
         ((F.pb gY).map ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)) ≫
       (F.shriek (T.cg.ofIsPullback sq₂)).map
-        ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).natTrans.app K) ≫
+        ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).app K) ≫
       (F.shriek (T.cg.ofIsPullback sq₂)).map ((F.shriekIso (T.cf.ofIsPullback sq₁)
         (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)) := by
     simp only [← Functor.map_comp, ← Functor.map_comp_assoc]

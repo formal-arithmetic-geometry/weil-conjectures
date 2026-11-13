@@ -244,8 +244,8 @@ lemma exchange_whiskerRight_comp_projectionMorphism_triangle
     [Fact (𝒪 i₁)] [Fact (𝒪 i₂)] [Fact (𝒪 q)] [Fact (𝒪 i)]
     (f : X ⟶ Y) (g : Y ⟶ S) (hf : i₁ ≫ p₁ = f) (hg : i₂ ≫ p₂ = g) (hi : i₁ ≫ q = i)
     (hp : r ≫ p₂ = p) (w : p₁ ≫ i₂ = q ≫ r) (hfg : i ≫ p = f ≫ g)
-    [IsIso (F.baseChange p₁ q i₂ r w).natTrans] (K : F.obj X) (B : F.obj S) :
-    ((F.exchange p₁ q i₂ r w).natTrans.app ((F.sh i₁).obj K) ≫
+    [IsIso (F.baseChange p₁ q i₂ r w)] (K : F.obj X) (B : F.obj S) :
+    ((F.exchange p₁ q i₂ r w).app ((F.sh i₁).obj K) ≫
           (F.pf r).map ((F.shComp' i₁ q i hi).inv.app K)) ▷ (F.pb p₂).obj B ≫
         (F.adj r).projectionMorphism ((F.sh i).obj K) ((F.pb p₂).obj B) ≫
         (F.pf r).map ((F.sh i).obj K ◁ (F.pbComp' r p₂ p hp).inv.app B ≫
@@ -259,7 +259,7 @@ lemma exchange_whiskerRight_comp_projectionMorphism_triangle
           (F.pf p₁).map (inv ((F.shAdj i₁).projectionComparison K
               ((F.pb p₁).obj ((F.pb g).obj B))) ≫
             (F.sh i₁).map (K ◁ (F.pbComp' i₁ p₁ f hf).inv.app ((F.pb g).obj B)))) ≫
-        (F.exchange p₁ q i₂ r w).natTrans.app ((F.sh i₁).obj (K ⊗ (F.pb f).obj ((F.pb g).obj B))) ≫
+        (F.exchange p₁ q i₂ r w).app ((F.sh i₁).obj (K ⊗ (F.pb f).obj ((F.pb g).obj B))) ≫
         (F.pf r).map ((F.shComp' i₁ q i hi).inv.app (K ⊗ (F.pb f).obj ((F.pb g).obj B))) := by
   conv_rhs => rw [Category.assoc, ← Functor.map_comp_assoc,
     Adjunction.projectionMorphism_natural_right_assoc, ← Functor.map_comp, Functor.map_comp,
@@ -287,8 +287,8 @@ theorem compIso_hom_app_whiskerRight_comp_shriekProjection
     [∀ {X Y : 𝒞} (j : X ⟶ Y) [Fact (𝒪 j)] (K : F.obj X) (N : F.obj Y),
       IsIso ((F.shAdj j).projectionComparison K N)]
     {X Y S : 𝒞} (T : ShriekTriangle 𝒪 X Y S)
-    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans]
+    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)]
     {f : X ⟶ Y} {g : Y ⟶ S} (hf : T.i₁ ≫ T.p₁ = f) (hg : T.i₂ ≫ T.p₂ = g)
     (hfg : T.i ≫ T.p = f ≫ g) (K : F.obj X) (B : F.obj S) :
     (F.compIso T).hom.app K ▷ B ≫ F.shriekProjection T.i T.p (f ≫ g) hfg K B ≫
@@ -321,8 +321,8 @@ theorem compIso_inv_app_whiskerRight_comp_of_eq
     [∀ {X Y : 𝒞} (j : X ⟶ Y) [Fact (𝒪 j)] (K : F.obj X) (N : F.obj Y),
       IsIso ((F.shAdj j).projectionComparison K N)]
     {X Y S : 𝒞} (T : ShriekTriangle 𝒪 X Y S)
-    [hbc : IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [hex : IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans]
+    [hbc : IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w)]
+    [hex : IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)]
     {f : X ⟶ Y} {g : Y ⟶ S} (hf : T.i₁ ≫ T.p₁ = f) (hg : T.i₂ ≫ T.p₂ = g)
     (hfg : T.i ≫ T.p = f ≫ g) (K : F.obj X) (B : F.obj S) (W : F.obj X)
     (hW : K ⊗ (F.pb f).obj ((F.pb g).obj B) = W)

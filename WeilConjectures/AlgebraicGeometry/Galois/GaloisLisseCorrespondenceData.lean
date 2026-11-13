@@ -151,7 +151,7 @@ def galoisFiniteEtaleAction
     [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
     (d : GaloisLisseFiniteData y G) : Prop :=
   ∀ (P : Y.FiniteEtale) (g : G) (z : ((pointSmallEtale y).sheafFiber (A := Type (u + 1))).obj
-    (d.Φ.functor.obj P).obj), d.η.hom.app P ((d.γ g).hom.app (d.Φ.functor.obj P) z) = ⟨g •
+    (d.Φ.functor.obj P).obj), d.η.hom.app P ((d.γ g).asIso.hom.app (d.Φ.functor.obj P) z) = ⟨g •
     (d.η.hom.app P z).down⟩
 
 /-- Clause `finiteAbelian` of the finite correspondence.
@@ -233,8 +233,8 @@ def galoisFiniteEvaluationAction
     : (pointSmallEtale y).fiber.obj U) (s : F.obj.obj.obj (op U)), κ ((pointSmallEtale
     y).toPresheafFiber U x F.obj.obj s) = (pointSmallEtale y).toPresheafFiber U x
     (galoisUnderlyingSetSheaf Λ F.obj).obj s) ∧ ∀ (g : G) (z : ((d.e Λ).functor.obj F).obj.V), κ
-    ((d.τ Λ).hom.app F (((d.e Λ).functor.obj F).obj.ρ g z)) = (d.γ g).hom.app (galoisUnderlyingFLC Λ
-    F.obj h) (κ ((d.τ Λ).hom.app F z))
+    ((d.τ Λ).hom.app F (((d.e Λ).functor.obj F).obj.ρ g z)) = (d.γ g).asIso.hom.app
+    (galoisUnderlyingFLC Λ F.obj h) (κ ((d.τ Λ).hom.app F z))
 
 /-- Clause `finiteTensor` of the finite correspondence.
 Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
@@ -477,7 +477,7 @@ def galoisIntegralEvaluationAction
     (pointSmallEtale y).toPresheafFiber U x (galoisUnderlyingSetSheaf
     (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n))).obj z) ∧ ∀ (g : G) (z : ((d.eI
     E).functor.obj F).obj.V), κ (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op
-    n) ((d.τI E).hom.app F (((d.eI E).functor.obj F).obj.ρ g z))) = (c.γ g).hom.app
+    n) ((d.τI E).hom.app F (((d.eI E).functor.obj F).obj.ρ g z))) = (c.γ g).asIso.hom.app
     (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n)) h) (κ
     (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n) ((d.τI E).hom.app F z)))
 

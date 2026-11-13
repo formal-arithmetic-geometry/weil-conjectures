@@ -24,7 +24,6 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
 
 private theorem evaluation_transition_mate
     {A B C D C' D' : Type*}
@@ -36,14 +35,14 @@ private theorem evaluation_transition_mate
     {S : C ⥤ C'} {T : D ⥤ D'}
     (q : F ⋙ v ≅ e ⋙ L) (q' : F ⋙ v' ≅ e' ⋙ L')
     (d : R ⋙ e ⟶ v ⋙ G) (d' : R ⋙ e' ⟶ v' ⋙ G')
-    (hq : (mateEquiv adj a q.inv).natTrans = d)
-    (hq' : (mateEquiv adj b q'.inv).natTrans = d')
+    (hq : (mateEquiv adj a q.inv) = d)
+    (hq' : (mateEquiv adj b q'.inv) = d')
     (t : e' ⟶ e ⋙ S) (s : v' ⟶ v ⋙ T) (r : G ⋙ S ⟶ T ⋙ G')
     (h : ∀ N, t.app (R.obj N) ≫ S.map (d.app N) ≫ r.app (v.obj N) =
       d'.app N ≫ G'.map (s.app N)) (M : A) :
     s.app (F.obj M) ≫ T.map (q.hom.app M) =
       q'.hom.app M ≫ L'.map (t.app M) ≫
-        ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app (e.obj M) := by
+        ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).app (e.obj M) := by
   apply (cancel_epi (q'.inv.app M)).mp
   apply (cancel_mono (T.map (q.inv.app M))).mp
   simp only [Category.assoc, ← T.map_comp, Iso.hom_inv_id_app,
@@ -55,16 +54,16 @@ private theorem evaluation_transition_mate
     Adjunction.homEquiv_naturality_right]
   have hu := unit_mateEquiv adj a q.inv M
   change e.map (adj.unit.app M) ≫
-    ((mateEquiv adj a q.inv).natTrans).app (F.obj M) =
+    ((mateEquiv adj a q.inv)).app (F.obj M) =
       a.unit.app (e.obj M) ≫ G.map (q.inv.app M) at hu
   rw [hq] at hu
   have hu' := unit_mateEquiv adj b q'.inv M
   change e'.map (adj.unit.app M) ≫
-    ((mateEquiv adj b q'.inv).natTrans).app (F.obj M) =
+    ((mateEquiv adj b q'.inv)).app (F.obj M) =
       b.unit.app (e'.obj M) ≫ G'.map (q'.inv.app M) at hu'
   rw [hq'] at hu'
   have hδ : b.homEquiv _ _
-      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app (e.obj M)) =
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).app (e.obj M)) =
         S.map (a.unit.app (e.obj M)) ≫ r.app (L.obj (e.obj M)) := by
     rw [Adjunction.homEquiv_unit]
     exact (unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ r) (e.obj M)).symm
@@ -89,7 +88,7 @@ private theorem evaluation_mate
     (hi : ∀ M, b.homEquiv _ _ (i.hom.app M) =
       e₀.map (a.unit.app M) ≫ d.app (F.obj M))
     (hj : ∀ M, b.unit.app M ≫ U.map (j.hom.app M) = c.unit.app M) :
-    (mateEquiv a c (i.symm ≪≫ Functor.isoWhiskerLeft e₀ j).inv).natTrans = d := by
+    (mateEquiv a c (i.symm ≪≫ Functor.isoWhiskerLeft e₀ j).inv) = d := by
   apply (mateEquiv a c).symm.injective
   rw [Equiv.symm_apply_apply]
   apply NatTrans.ext
@@ -116,7 +115,7 @@ private theorem ordinary_evaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
       ((pullbackTensorSequenceInverseEvaluation l E f n).symm ≪≫
         Functor.isoWhiskerLeft (coefficientSequenceEvaluation l E Y n)
-          (pullbackTensorLevelIntrinsic l E f n)).inv).natTrans =
+          (pullbackTensorLevelIntrinsic l E f n)).inv) =
       (directEvaluation l E f n).hom := by
   unfold directEvaluation
   apply evaluation_mate (pullbackTensorSequenceAdjunction l E f)
@@ -187,7 +186,7 @@ theorem integralPullEvaluation_cochainSquare_component_core_expanded
         ((mateEquiv
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app
+          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)).f i  := by
   have ho := evaluation_transition_mate
     (pullbackTensorSequenceAdjunction l E f)

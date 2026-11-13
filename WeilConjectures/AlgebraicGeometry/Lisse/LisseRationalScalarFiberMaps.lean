@@ -264,7 +264,6 @@ def lisseRationalFiberComparison (F : LisseRationalSheaf l E Y) :
       ((ModuleCat.extendScalars k).mapIso
         (eqToIso (hU ((lisseRationalScalarExtension l E Y L ι).obj F)))).symm
 
-set_option maxHeartbeats 600000 in
 -- Transporting both fibre objects expands the two nested scalar-extension functors.
 /-- Rational fibre comparisons are natural for all rational morphisms.
 Source: Weil II (1.1.1) c), d). Clear a common denominator to write a morphism

@@ -116,8 +116,7 @@ theorem injective_ses_homotopy_boundary_lift
         (DerivedCategory.quotientCompQhIso A).hom.app K.obj := by
       dsimp [e, e₁, e₂, HomotopyCategory.Plus.quotientCompιIso,
         DerivedCategory.Plus.QhCompιIsoιCompQh, ObjectProperty.liftCompιIso]
-      repeat first | erw [Category.id_comp] | erw [Category.comp_id] |
-        erw [Functor.map_id]
+      repeat first | erw [Category.id_comp] | erw [Functor.map_id]
     rw [he, he] at hn
     simpa only [f, d, ShiftedHom.comp_map] using hn
   · let σv (n : ℤ) : ((S.map (v.mapHomologicalComplex (.up ℤ))).map

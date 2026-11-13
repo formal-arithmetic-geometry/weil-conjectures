@@ -72,20 +72,20 @@ private theorem exchangeArrowIso
     (hcube : ∀ M, Adjunction.coefficientPullbackSquare
       θ θe αU αV αG.hom αH.hom M)
     (K : C₂) (B : R₀ ⋙ G ⟶ H ⋙ S) (Be : Re ⋙ Ge ⟶ He ⋙ Se)
-    (hB : B = (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans)
-    (hBe : Be = (mateEquiv ae be (TwoSquare.mk _ _ _ _ θe)).natTrans) :
+    (hB : B = (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)))
+    (hBe : Be = (mateEquiv ae be (TwoSquare.mk _ _ _ _ θe))) :
     Nonempty (Arrow.mk (T₃.map (B.app K)) ≅ Arrow.mk (Be.app (T₂.obj K))) := by
   subst B Be
-  let δ := (mateEquiv a ae αU.inv).natTrans
-  let δ' := (mateEquiv b be αV.inv).natTrans
+  let δ := (mateEquiv a ae αU.inv)
+  let δ' := (mateEquiv b be αV.inv)
   have : IsIso δ := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful a ae T₁ T₂ αU.symm
   have : IsIso δ' := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful b be T₃ T₄ αV.symm
   let source := αG.app (R₀.obj K) ≪≫ Ge.mapIso (asIso (δ.app K))
   let target := asIso (δ'.app (H.obj K)) ≪≫ Se.mapIso (αH.app K)
   refine ⟨Arrow.isoMk source target ?_⟩
   have h := Adjunction.coefficient_exchange_of_counit_at a b ae be θ θe K
-    ((mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans.app K)
-    ((mateEquiv ae be (TwoSquare.mk _ _ _ _ θe)).natTrans.app (T₂.obj K))
+    ((mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).app K)
+    ((mateEquiv ae be (TwoSquare.mk _ _ _ _ θe)).app (T₂.obj K))
     (mateEquiv_counit a b (TwoSquare.mk _ _ _ _ θ) K)
     (mateEquiv_counit ae be (TwoSquare.mk _ _ _ _ θe) (T₂.obj K))
     αU αV αG.hom αH.hom (δ.app K) (δ'.app (H.obj K))

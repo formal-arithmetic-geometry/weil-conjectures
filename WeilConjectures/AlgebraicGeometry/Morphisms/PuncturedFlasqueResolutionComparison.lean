@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! The comparison maps underlying the flasque resolution computation.
 

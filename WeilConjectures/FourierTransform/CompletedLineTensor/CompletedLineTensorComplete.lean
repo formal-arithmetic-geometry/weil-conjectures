@@ -106,9 +106,9 @@ section, and sheaf tensor commutes with such multiplications. -/
 theorem complex_map_koszulScalar (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) (P : CochainComplex (integralTowerModules l E X) ℤ)
     (q : ℤ) (U : X.ProEtᵒᵖ) (x : ((((complex l E X L m).obj P).X q).val.obj U)) :
-    ((((complex l E X L m).map (integralKoszulScalar l E X P)).f q).val.app U) x =
+    ((((complex l E X L m).map (integralKoszulScalar l E X P).asHom).f q).val.app U) x =
       integralCompletionScalarValue l E X U • x := by
-  have hμ : (integralKoszulScalar l E X P).f q =
+  have hμ : (integralKoszulScalar l E X P).asHom.f q =
       ⟨PresheafOfModules.sectionsSMul (S := (completedIntegralCommRingSheafUnrestricted l E X).obj)
         (P.X q).val (uniformizerSection l E X)⟩ := by
     apply SheafOfModules.hom_ext
@@ -158,7 +158,7 @@ theorem complete (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1
       (isDerivedCompleteUnrestricted_of_iso l E X e.symm hK)
   let a : (tensor l E X L m).obj K ≅
       DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion
-        ((complex l E X L m).map μ)) :=
+        (End.of ((complex l E X L m).map μ.asHom))) :=
     (tensor l E X L m).mapIso e.symm ≪≫
       (tensor l E X L m).mapIso (asIso (DerivedCategory.Q.map
         (CochainComplex.PrincipalCone.unit μ))) ≪≫
@@ -166,7 +166,7 @@ theorem complete (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1
       DerivedCategory.Q.mapIso (principalMapIso (sheaf l E X L m) μ)
   have hc := (IntegralPrincipalCone.localCriterion l E X
     (integralCompletionScalarValue l E X) (integralScalar_natural l E X)
-    ((complex l E X L m).obj P) ((complex l E X L m).map μ)
+    ((complex l E X L m).obj P) (End.of ((complex l E X L m).map μ.asHom))
     (complex_map_koszulScalar l E X L m P) _ (Iso.refl _)).1
   exact (complete_iff_local D.p l hl.symm E X _).mpr
     (integralLocallyComplete_iso l E X _ a.symm hc)

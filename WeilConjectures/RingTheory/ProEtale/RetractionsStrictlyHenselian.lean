@@ -87,7 +87,7 @@ theorem Algebra.Etale.exists_algHom_localization_atPrime_comap_eq
   classical
   have : q.LiesOver m := ⟨hq.symm⟩
   -- Step 1: choose `g` isolating `q` among the (finitely many) primes over `m`.
-  obtain ⟨g, hgq, hg⟩ := Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver m q
+  obtain ⟨g, hgq, hg⟩ := Ideal.exists_notMem_forall_mem_of_ne_of_liesOver m q
   set Cg := Localization.Away g with hCgdef
   have hdisj : Disjoint (Submonoid.powers g : Set C) (q : Set C) := by
     rw [Set.disjoint_left]

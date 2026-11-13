@@ -77,7 +77,7 @@ theorem etaleProEtale_scalar_mate
     (_hBJ : ∃ n : ℤ, ((pbcFixedScalarExtension X.smallEtaleTopology a).obj J).IsGE n) :
     (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso a f).hom)).natTrans.app
+      (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso a f).hom)).app
         ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj J) ≫
       R(lowerStar (ModuleCat.{u + 1} B) f).map ((pbcComparisonReduction X a).hom.app J) =
     (pbcFixedScalarExtension (Scheme.ProEt.topology Y) a).map
@@ -88,7 +88,7 @@ theorem etaleProEtale_scalar_mate
         ((mateEquiv
           (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
           (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-          (TwoSquare.mk _ _ _ _ (scalarPullbackEtaleIso a f).hom)).natTrans.app J) ≫
+          (TwoSquare.mk _ _ _ _ (scalarPullbackEtaleIso a f).hom)).app J) ≫
       (directImageComparisonAmbient B f).app
         ((pbcFixedScalarExtension X.smallEtaleTopology a).obj J) := by
   have hc := etaleProEtale_scalar_pullback_cube a f
@@ -186,7 +186,7 @@ private theorem ordinary_reverse_eq
     {T X : Scheme.{u}} (f : T ⟶ X) :
     ((mateEquiv (ProEtale.etaleSheafExtendScalarsAdjunction φ X)
       (ProEtale.etaleSheafExtendScalarsAdjunction φ T)).symm
-        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)).natTrans =
+        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)) =
       (scalarSheafPullbackIso φ f).inv := by
   exact legacyOrdinaryReverseEq φ f
 

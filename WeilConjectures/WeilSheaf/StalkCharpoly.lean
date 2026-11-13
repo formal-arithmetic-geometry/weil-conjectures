@@ -203,13 +203,13 @@ variable (F : WeilSheaf k₀ l X)
 /-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}` is the transport of global sections
 along the square `σᵐ ≫ s = s ≫ Frᵐ` and the iterated Weil structure. -/
 lemma stalkAt_frobenius_hom_eq_globalSectionsTransport (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
         F.stalkObjFrobeniusPowIso m s).hom =
       ProEtale.globalSectionsTransport _ hs.symm (F.frobeniusPowStr m) := by
   exact ProEtale.globalSectionsTransport_eq_hom (WeilCoefficients.{u} l)
-    (specGeometricFrobenius k₀ ^ m) hs.symm
+    (specGeometricFrobenius k₀ ^ m).asIso hs.symm
     ((ProEtale.upperStarIsoLowerStarInv _ _).app F.obj.carrier.X ≪≫
       (ProEtale.AdicSheaf.forget _).mapIso (F.frobeniusPowIso m))
 
@@ -228,10 +228,10 @@ variable (F : WeilSheaf k₀ l X)
 
 /-- The `0`-th iterate of the Weil structure is the identification `(𝟙)^* ≅ 𝟭`. -/
 lemma frobeniusPowStr_zero
-    (p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom = 𝟙 _) :
+    (p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom = 𝟙 _) :
     F.frobeniusPowStr 0 = (ProEtale.upperStarCongr _ p).hom.app F.obj.carrier.X ≫
       (ProEtale.upperStarId _ _).hom.app F.obj.carrier.X := by
-  have hz : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv = 𝟙 _ := by
+  have hz : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.inv = 𝟙 _ := by
     rw [pow_zero]; rfl
   have h₀ : (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso 0).hom =
       (ProEtale.lowerStarCongr _ hz).hom.app F.obj.carrier.X ≫
@@ -247,9 +247,9 @@ lemma frobeniusPowStr_zero
 lemma globalSectionsTransport_frobeniusPowStr_zero {t : Spec (.of (AlgebraicClosure k₀)) ⟶
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ : Spec (.of (AlgebraicClosure k₀)) ⟶
       Spec (.of (AlgebraicClosure k₀))} (hτ : τ = 𝟙 _)
-    (h : τ ≫ t = t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom) :
+    (h : τ ≫ t = t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom) :
     ProEtale.globalSectionsTransport _ h (F.frobeniusPowStr 0) = 𝟙 _ := by
-  have p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom = 𝟙 _ := by
+  have p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom = 𝟙 _ := by
     rw [pow_zero]; rfl
   rw [ProEtale.globalSectionsTransport_congr _ h p _ _ (F.frobeniusPowStr_zero p),
     ProEtale.globalSectionsTransport_congr_left _ _ hτ]
@@ -261,22 +261,22 @@ lemma globalSectionsTransport_frobeniusPowStr_comp
     {t t' t'' : Spec (.of (AlgebraicClosure k₀)) ⟶
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ τ' τ'' : Spec (.of (AlgebraicClosure k₀)) ⟶
       Spec (.of (AlgebraicClosure k₀))} (a b : ℕ) (hb : 1 ≤ b)
-    (ha : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom)
-    (hb' : τ' ≫ t' = t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom)
+    (ha : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).asIso.hom)
+    (hb' : τ' ≫ t' = t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).asIso.hom)
     (hτ : τ' ≫ τ = τ'')
     (hab : τ'' ≫ t =
-      t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a + b)).hom) :
+      t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a + b)).asIso.hom) :
     ProEtale.globalSectionsTransport _ ha (F.frobeniusPowStr a) ≫
         ProEtale.globalSectionsTransport _ hb' (F.frobeniusPowStr b) =
       ProEtale.globalSectionsTransport _ hab (F.frobeniusPowStr (a + b)) := by
   have hg := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom a b
   have h'' : (τ' ≫ τ) ≫ t = t'' ≫
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom) := by
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).asIso.hom ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).asIso.hom) := by
     rw [Category.assoc, ha, ← Category.assoc, hb', Category.assoc]
   have add := upperStarFactor_hom_app_comp_frobeniusPowStr_add F a b hb hg
   have hψ : (ProEtale.upperStarComp _ _ _).hom.app F.obj.carrier.X ≫
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom)^*[_].map
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).asIso.hom)^*[_].map
         (F.frobeniusPowStr a) ≫ F.frobeniusPowStr b =
       (ProEtale.upperStarCongr _ hg).hom.app F.obj.carrier.X ≫ F.frobeniusPowStr (a + b) := by
     rw [← add]
@@ -288,8 +288,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp
 lemma globalSectionsTransport_frobeniusPowStr_congr {t t' : Spec (.of (AlgebraicClosure k₀)) ⟶
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ τ' : Spec (.of (AlgebraicClosure k₀)) ⟶
       Spec (.of (AlgebraicClosure k₀))} {n n' : ℕ} (hn : n = n') (hτ : τ = τ')
-    (h : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom)
-    (h' : τ' ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n').hom) :
+    (h : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom)
+    (h' : τ' ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n').asIso.hom) :
     ProEtale.globalSectionsTransport _ h (F.frobeniusPowStr n) =
       ProEtale.globalSectionsTransport _ h' (F.frobeniusPowStr n') := by
   subst hn hτ
@@ -306,20 +306,20 @@ square. -/
 lemma globalSectionsTransport_frobeniusPowStr_comm {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {g σ : Spec (.of (AlgebraicClosure k₀)) ⟶
       Spec (.of (AlgebraicClosure k₀))} (j m : ℕ) (hj : 1 ≤ j) (hm : 1 ≤ m)
-    (hg : g ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).hom)
-    (hs : σ ≫ s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
-    (hs' : σ ≫ s' = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
+    (hg : g ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).asIso.hom)
+    (hs : σ ≫ s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
+    (hs' : σ ≫ s' = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
     (hcomm : g ≫ σ = σ ≫ g) :
     ProEtale.globalSectionsTransport _ hs (F.frobeniusPowStr m) ≫
         ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j) =
       ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j) ≫
         ProEtale.globalSectionsTransport _ hs' (F.frobeniusPowStr m) := by
   have h₁ : (g ≫ σ) ≫ s = s' ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + j)).hom := by
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + j)).asIso.hom := by
     rw [Category.assoc, hs, ← Category.assoc, hg, Category.assoc,
       CategoryTheory.Aut.pow_hom_comp_pow_hom]
   have h₂ : (σ ≫ g) ≫ s = s' ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (j + m)).hom := by
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (j + m)).asIso.hom := by
     rw [Category.assoc, hg, ← Category.assoc, hs', Category.assoc,
       CategoryTheory.Aut.pow_hom_comp_pow_hom]
   rw [globalSectionsTransport_frobeniusPowStr_comp F m j hj hs hg rfl h₁,
@@ -331,7 +331,8 @@ isomorphism. -/
 lemma isIso_globalSectionsTransport_frobeniusPowStr {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {g : Spec (.of (AlgebraicClosure k₀)) ≅
       Spec (.of (AlgebraicClosure k₀))} (j : ℕ)
-    (hg : g.hom ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).hom) :
+    (hg : g.hom ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
+      j).asIso.hom) :
     IsIso (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j)) := by
   rw [ProEtale.globalSectionsTransport_eq_of_iso _ g hg]
   infer_instance
@@ -345,8 +346,8 @@ private lemma linearEquivOfIso_toLinearMap {M N : WeilCoefficients.{u} l} (e : M
 /-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}`, as a linear map, is the transport of
 global sections along the iterated Weil structure. -/
 lemma frobeniusEnd_stalkAt (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     (F.stalkAt s m hs).frobeniusEnd = ((WeilCoefficients.toModuleCat l).map
       (ProEtale.globalSectionsTransport _ hs.symm (F.frobeniusPowStr m))).hom := by
   have e₁ : (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso
@@ -366,10 +367,10 @@ private lemma toModuleCat_map_comp_hom {M N P : WeilCoefficients.{u} l} (f : M �
 
 /-- A geometric point fixed by `Frᵐ` up to `σᵐ` is fixed by `Frᵏᵐ` up to `σᵏᵐ`. -/
 lemma comp_geometricGaloisFrobenius_pow_mul {m : ℕ}
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (k : ℕ) :
-    s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m)).hom =
-      (specGeometricFrobenius k₀ ^ (k * m)).hom ≫ s := by
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) (k : ℕ) :
+    s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m)).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (k * m)).asIso.hom ≫ s := by
   induction k with
   | zero => simp only [zero_mul, pow_zero]; rfl
   | succ k ih =>
@@ -379,32 +380,37 @@ lemma comp_geometricGaloisFrobenius_pow_mul {m : ℕ}
 /-- The Frobenius relative to `𝔽_{qᵏᵐ}` is the `k`-th power of the Frobenius relative to
 `𝔽_{qᵐ}`. -/
 lemma frobeniusEnd_stalkAt_mul {m : ℕ} (hm : 1 ≤ m)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (k : ℕ) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) (k : ℕ) :
     (F.stalkAt s (k * m) (comp_geometricGaloisFrobenius_pow_mul s hs k)).frobeniusEnd =
       (F.stalkAt s m hs).frobeniusEnd ^ k := by
   induction k with
   | zero =>
-    have h₀ : (specGeometricFrobenius k₀ ^ (0 * m)).hom ≫ s =
-        s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom := by
+    have h₀ : (specGeometricFrobenius k₀ ^ (0 * m)).asIso.hom ≫ s =
+        s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom := by
       rw [zero_mul, pow_zero, pow_zero]; rfl
     rw [frobeniusEnd_stalkAt, pow_zero, globalSectionsTransport_frobeniusPowStr_congr F
       (zero_mul m) rfl _ h₀, globalSectionsTransport_frobeniusPowStr_zero F
         (by rw [zero_mul, pow_zero]; rfl)]
     rfl
   | succ k ih =>
-    have h : (specGeometricFrobenius k₀ ^ m).hom ≫ (specGeometricFrobenius k₀ ^ (k * m)).hom ≫
-        s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m + m)).hom := by
+    have h : (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ (specGeometricFrobenius k₀ ^ (k *
+      m)).asIso.hom ≫
+        s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m +
+          m)).asIso.hom := by
       have hk := comp_geometricGaloisFrobenius_pow_mul s hs (k + 1)
       rw [add_one_mul] at hk
       rw [← Category.assoc, CategoryTheory.Aut.pow_hom_comp_pow_hom]
       exact hk.symm
-    have h' : ((specGeometricFrobenius k₀ ^ m).hom ≫ (specGeometricFrobenius k₀ ^ (k * m)).hom) ≫
-        s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m + m)).hom := by
+    have h' : ((specGeometricFrobenius k₀ ^ m).asIso.hom ≫ (specGeometricFrobenius k₀ ^ (k *
+      m)).asIso.hom) ≫
+        s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m +
+          m)).asIso.hom := by
       rw [Category.assoc]; exact h
     rw [pow_succ', ← ih, frobeniusEnd_stalkAt, frobeniusEnd_stalkAt, frobeniusEnd_stalkAt]
-    have hτ : (specGeometricFrobenius k₀ ^ ((k + 1) * m)).hom =
-        (specGeometricFrobenius k₀ ^ m).hom ≫ (specGeometricFrobenius k₀ ^ (k * m)).hom := by
+    have hτ : (specGeometricFrobenius k₀ ^ ((k + 1) * m)).asIso.hom =
+        (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ (specGeometricFrobenius k₀ ^ (k *
+          m)).asIso.hom := by
       rw [CategoryTheory.Aut.pow_hom_comp_pow_hom, add_one_mul]
     have c₁ := globalSectionsTransport_frobeniusPowStr_congr F (add_one_mul k m) hτ
       (comp_geometricGaloisFrobenius_pow_mul s hs (k + 1)).symm h'
@@ -427,8 +433,8 @@ variable (F : WeilSheaf k₀ l X)
 /-- The Frobenius of the stalk relative to `𝔽_{q⁰}` is the identity. -/
 lemma frobeniusEnd_stalkAt_zero
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom =
-      (specGeometricFrobenius k₀ ^ 0).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom =
+      (specGeometricFrobenius k₀ ^ 0).asIso.hom ≫ s) :
     (F.stalkAt s 0 hs).frobeniusEnd = LinearMap.id := by
   rw [frobeniusEnd_stalkAt, globalSectionsTransport_frobeniusPowStr_zero F
     (by rw [pow_zero]; rfl), CategoryTheory.Functor.map_id]
@@ -440,12 +446,13 @@ lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt
     {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {g : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))} {j m : ℕ}
     (hj : 1 ≤ j) (hm : 1 ≤ m)
-    (hg : g ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).hom)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s')
-    (hcomm : g ≫ (specGeometricFrobenius k₀ ^ m).hom = (specGeometricFrobenius k₀ ^ m).hom ≫ g) :
+    (hg : g ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).asIso.hom)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s')
+    (hcomm : g ≫ (specGeometricFrobenius k₀ ^ m).asIso.hom = (specGeometricFrobenius k₀ ^
+      m).asIso.hom ≫ g) :
     ((WeilCoefficients.toModuleCat l).map
         (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j))).hom ∘ₗ
         (F.stalkAt s m hs).frobeniusEnd =
@@ -468,10 +475,10 @@ lemma nonempty_equiv_stalkAt
         (IsLocalRing.closedPoint (AlgebraicClosure k₀)))
     (hx : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
         (IsLocalRing.closedPoint (AlgebraicClosure k₀)) ∈ X.finitePoints) (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s') :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s') :
     Nonempty ((F.stalkAt s m hs).Equiv (F.stalkAt s' m hs')) := by
   obtain ⟨g, j, hj, hg, hcomm⟩ :=
     (X ↘ Spec (CommRingCat.of k₀)).exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow s s'
@@ -501,23 +508,23 @@ theorem charpoly_frobeniusEnd_stalkAt_of_dvd
     (hx : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
         (IsLocalRing.closedPoint (AlgebraicClosure k₀)) ∈ X.finitePoints)
     {m m' : ℕ} (hmm' : m ∣ m')
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').hom =
-      (specGeometricFrobenius k₀ ^ m').hom ≫ s') :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').asIso.hom =
+      (specGeometricFrobenius k₀ ^ m').asIso.hom ≫ s') :
     (F.stalkAt s' m' hs').frobeniusEnd.charpoly =
       ((F.stalkAt s m hs).frobeniusEnd ^ (m' / m)).charpoly := by
   have congr_index {t} {n n' : ℕ} (h : n = n')
-      (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
-        (specGeometricFrobenius k₀ ^ n).hom ≫ t)
-      (ht' : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n').hom =
-        (specGeometricFrobenius k₀ ^ n').hom ≫ t) :
+      (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
+        (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ t)
+      (ht' : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n').asIso.hom =
+        (specGeometricFrobenius k₀ ^ n').asIso.hom ≫ t) :
       (F.stalkAt t n ht).frobeniusEnd.charpoly = (F.stalkAt t n' ht').frobeniusEnd.charpoly := by
     subst h
     rfl
   rcases Nat.eq_zero_or_pos m' with rfl | hm'
-  · have h₀ : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom =
-        (specGeometricFrobenius k₀ ^ 0).hom ≫ s := by
+  · have h₀ : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom =
+        (specGeometricFrobenius k₀ ^ 0).asIso.hom ≫ s := by
       rw [pow_zero, pow_zero]
       exact (Category.comp_id _).trans (Category.id_comp _).symm
     obtain ⟨e⟩ := F.nonempty_equiv_stalkAt s s' hss' hx 0 h₀ hs'

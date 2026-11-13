@@ -53,7 +53,6 @@ attribute [local instance] SheafOfModules.monoidalCategory
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem finite_unit_step
     (P : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (k : ℤ) :
@@ -81,7 +80,6 @@ private theorem finite_unit_step
   erw [h1] at ht
   exact ht
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem unit_square {A : Type*} [Category A]
     {X L Bm Bn Fm Fn : A} (u : X ⟶ L) (πm : L ⟶ Bm) (πn : L ⟶ Bn)
@@ -95,7 +93,6 @@ private theorem unit_square {A : Type*} [Category A]
   rw [← Category.assoc πm s, hc]
   exact hn.symm
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private def tensorLevel
     (S : CoefficientDerivedSystemReduction l E W)
@@ -115,7 +112,6 @@ private def tensorLevel
           (((M.evaluation n).app P).prod ((M.evaluation n).app Q))) ≪≫
     finiteTensorBridge l E W n P.obj Q.obj
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem nat_eqToIso_section_heq
     {A : Type*} [Category A] {B : Type*} [Category B]
@@ -126,14 +122,12 @@ private theorem nat_eqToIso_section_heq
   cases h
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem ab_eqToHom_section_heq {A B : AddCommGrpCat.{v}} (h : A = B)
     (x : A) : HEq ((eqToHom h) x) x := by
   cases h
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem restrictionEvaluation_section (W : Scheme.{t})
     (M : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ)
@@ -150,7 +144,6 @@ private theorem restrictionEvaluation_section (W : Scheme.{t})
     (coefficientSequenceEvaluationAb_eq l E W M n U).symm x
   exact eq_of_heq (h.trans (hx.trans hy.symm))
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem module_map_presheaf_heq {B : Type c} [Category.{d} B]
     {R : Bᵒᵖ ⥤ RingCat.{r}} (M : PresheafOfModules.{r} R)
@@ -159,14 +152,12 @@ private theorem module_map_presheaf_heq {B : Type c} [Category.{d} B]
       (fun x : M.presheaf.obj V ↦ M.presheaf.map f x) := by
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem presheaf_map_apply {B : Type c} [Category.{d} B]
     {R : Bᵒᵖ ⥤ RingCat.{r}} (M : PresheafOfModules.{r} R)
     {V U : Bᵒᵖ} (f : V ⟶ U) (x : M.obj V) :
     M.presheaf.map f x = M.map f x := rfl
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem generator_presheaf_restrict {B : Type c} [Category.{d} B]
     (J : GrothendieckTopology B) [HasSheafify J AddCommGrpCat.{max c d r}]
@@ -183,7 +174,6 @@ private theorem generator_presheaf_restrict {B : Type c} [Category.{d} B]
   simp only [presheaf_map_apply]
   exact CategoryTheory.ringedSiteTensorGenerator_restrict.{c, d, r} J S P Q p q k h f x y
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem function_heq_apply {A A' : Type v} {B B' : Type r}
     (ha : A = A') (hb : B = B') {f : A → B} {g : A' → B'} (hf : HEq f g)
@@ -194,7 +184,6 @@ private theorem function_heq_apply {A A' : Type v} {B B' : Type r}
   cases hx
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem restricted_transition_section (W : Scheme.{t})
     (M : coefficientSequenceModules l E W) {m n : ℕ} (h : n ≤ m) (U : W.ProEtᵒᵖ)
@@ -306,14 +295,12 @@ private theorem reduction_section_step
   rw [hs, hen, hem] at hh
   exact hh
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem ab_eqToHom_surjective {A B : AddCommGrpCat.{v}} (h : A = B) :
     Function.Surjective (eqToHom h) := by
   subst B
   exact fun x ↦ ⟨x, rfl⟩
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem evaluationSection_surjective
     (C : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ) :
@@ -322,7 +309,6 @@ private theorem evaluationSection_surjective
 
 attribute [local semireducible] coefficientTotalTensor
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem module_unit_section
     {B : Type c} [Category.{d} B] {J : GrothendieckTopology B}
@@ -335,7 +321,6 @@ private theorem module_unit_section
   exact ConcreteCategory.congr_hom (NatTrans.congr_app
     (PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app (𝟙 R.obj) M) U) x
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem finite_coefficient_generator (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ)
@@ -353,7 +338,6 @@ private theorem finite_coefficient_generator (W : Scheme.{t})
   erw [module_unit_section]
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem finiteTensorBridge_hom
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
@@ -364,7 +348,6 @@ private theorem finiteTensorBridge_hom
       (integralCoefficientCommRingSheaf l E W n)).map (𝟙 _)) = 𝟙 _
   simp only [CategoryTheory.Functor.map_id]
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem tensorLevel_generator
     (S : CoefficientDerivedSystemReduction l E W)
@@ -427,7 +410,6 @@ private theorem tensorLevel_generator
     integralCoefficientCommRingSheaf, Functor.comp_obj, ObjectProperty.ι_obj] at hh ⊢
   convert hh using 1
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem tensorLevel_naturality
     (S : CoefficientDerivedSystemReduction l E W)
@@ -637,7 +619,6 @@ private theorem tensorLevel_transition
       (hlevel.trans hxy))
   exact htensor.trans hsource.symm
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
 /-- Strict tensor evaluation assembles to an isomorphism of whole towers, naturally
 on the product of good categories.

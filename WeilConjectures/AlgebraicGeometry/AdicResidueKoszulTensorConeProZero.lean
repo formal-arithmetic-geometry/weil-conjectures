@@ -76,7 +76,6 @@ private def coneIsoOfSource
     (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
     (Arrow.isoMk e (Iso.refl _) (by simp))
 
-set_option maxHeartbeats 400000 in
 -- Comparing the normalized finite complexes and their exact realizations is instance-heavy.
 /-- The cone calculation for a specified coefficient augmentation. There is no
 existence or scalar-adjoint-tower assertion in this statement.

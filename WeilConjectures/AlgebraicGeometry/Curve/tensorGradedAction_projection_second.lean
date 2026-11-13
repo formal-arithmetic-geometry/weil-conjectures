@@ -70,9 +70,9 @@ theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
       T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y)
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y)
     (haction : ∀ g : T.C.right.obj.obj (op ⊤), ρ g =
-      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g)).hom) :
+      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
     let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
     let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
@@ -108,16 +108,16 @@ theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
           _ = _ := congrArg (fun t ↦ t.addCommGroupIsoToAddEquiv.symm
               ((HX.map (T.degree (n * (r + 1))).τ₁).hom y)) hk
       have hh : (HX.map (T.degree (n * ((e + 1) + 1))).τ₁).hom
-          ((HX.map (μ (tensorGradedSection T D0 e x))).hom z) =
+          ((HX.map (μ (tensorGradedSection T D0 e x)).asHom).hom z) =
           (HX.map m).hom w := by
         let t := tensorGradedSection T D0 e x
         let p0 := (T.degree (n * (0 + 1))).τ₁
         let p1 := (T.degree (n * ((e + 1) + 1))).τ₁
-        have hk' : μ t ≫ p1 = p0 ≫ m := hk
+        have hk' : (μ t).asHom ≫ p1 = p0 ≫ m := hk
         calc
-          (HX.map p1).hom ((HX.map (μ t)).hom z) =
-              (HX.map (μ t ≫ p1)).hom z :=
-            congrArg (fun g ↦ g.hom z) (HX.map_comp (μ t) p1).symm
+          (HX.map p1).hom ((HX.map (μ t).asHom).hom z) =
+              (HX.map ((μ t).asHom ≫ p1)).hom z :=
+            congrArg (fun g ↦ g.hom z) (HX.map_comp (μ t).asHom p1).symm
           _ = (HX.map (p0 ≫ m)).hom z :=
             congrArg (fun g ↦ (HX.map g).hom z) hk'
           _ = (HX.map m).hom ((HX.map p0).hom z) :=
@@ -140,12 +140,12 @@ theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
         tensorGradedCoefficientProjection T D0 (e + 1)
             (ρ (tensorGradedSection T D0 e x) z) =
             tensorGradedCoefficientProjection T D0 (e + 1)
-              ((HX.map (μ (tensorGradedSection T D0 e x))).hom z) :=
+              ((HX.map (μ (tensorGradedSection T D0 e x)).asHom).hom z) :=
           congrArg (fun g ↦ tensorGradedCoefficientProjection T D0 (e + 1) (g z))
             (haction (tensorGradedSection T D0 e x))
         _ = (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv
               ((HX.map (T.degree (n * ((e + 1) + 1))).τ₁).hom
-                ((HX.map (μ (tensorGradedSection T D0 e x))).hom z)) := hp _ _
+                ((HX.map (μ (tensorGradedSection T D0 e x)).asHom).hom z)) := hp _ _
         _ = (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv
               ((HX.map m).hom w) :=
           congrArg (fun y ↦ (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv y) hh

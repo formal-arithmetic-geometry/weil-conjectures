@@ -151,7 +151,6 @@ private theorem internalClosureComp_hom {E L : Index l (PadicAlgCl l)} (h : E â‰
       (ProEtale.derivedExtendScalarsCompIso X l h).inv.app M.obj :=
   internalClosureComp_map l X h M
 
-set_option maxHeartbeats 1600000 in
 /-- Section reconstruction carries the condensed closure transition to the inverse
 of the ordinary closure comparison, before restriction to integral objects.
 

@@ -185,7 +185,6 @@ private theorem completedPushUnit_one (l : ℕ) [Fact l.Prime]
     infer_instance
   exact hh.one_hom
 
-set_option maxHeartbeats 400000 in
 -- The normalized sheaf comparisons require several large definitional conversions.
 /-- Ordinary realization carries the actual completed unit map to the coefficient unit.
 Source: diagonal tower coefficient changes (1), the normalized unital coefficient maps.

@@ -28,7 +28,6 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
-set_option maxHeartbeats 2000000 in
 -- The comparison is transferred to site notation before concrete scalar specialization.
 private theorem cancellation_onSite
     (C : Type v) [Category.{u + 1} C] [Abelian C]
@@ -79,7 +78,6 @@ private theorem cancellation_onSite
   dsimp only [derivedTensor, etaleHomTensorShiftCancellation]
   exact h
 
-set_option maxHeartbeats 2000000 in
 -- Specializing the derived adjunction and tensor structures requires large kernel conversions.
 /-- The normalized scalar tensor comparison respects cancellation of opposite shifts.
 Source: Stacks Project, Tags 06YY, 07A4 and 08JC; the tensor-balancing calculation

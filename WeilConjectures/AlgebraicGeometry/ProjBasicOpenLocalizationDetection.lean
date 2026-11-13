@@ -80,7 +80,7 @@ private theorem localization_kernel_isHomogeneous
     rw [hg]
     exact IsLocalization.map_units (M := p.toIdeal.primeCompl) R
       ⟨(DirectSum.decompose 𝒜 (s : A) k : A), hk⟩
-  have hregular := Polynomial.mem_nonzeroDivisors_of_coeff_mem k hunit.mem_nonZeroDivisors
+  have hregular := Polynomial.mem_nonZeroDivisors_of_coeff_mem k hunit.mem_nonZeroDivisors
   have hga : g a = 0 := hregular.1 _ (by rw [← map_mul, hsa, map_zero])
   change algebraMap A R (GradedRing.proj 𝒜 n a) = 0
   rw [GradedRing.proj_apply, ← hg, hga, Polynomial.coeff_zero]

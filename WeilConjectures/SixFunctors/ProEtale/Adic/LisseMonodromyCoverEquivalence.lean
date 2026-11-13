@@ -215,15 +215,15 @@ theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : 
   have hP := WeilCoefficients.bijective_homLinearMap
     (G.property.bijective_evaluationPairing_of_lisse H.obj t)
   obtain ⟨m, hm⟩ := hP.2 φ
-  have hinv (g : Aut (fiber t)) : ((monoIso hU g).hom.app Mh).hom m = m := by
+  have hinv (g : Aut (fiber t)) : ((monoIso hU g.asIso).hom.app Mh).hom m = m := by
     refine hP.1 (LinearMap.ext fun x ↦ ?_)
-    obtain ⟨w, rfl⟩ : ∃ w, ((monoIso hU g).hom.app G).hom w = x :=
-      ⟨((monoIso hU g).inv.app G).hom x, by
+    obtain ⟨w, rfl⟩ : ∃ w, ((monoIso hU g.asIso).hom.app G).hom w = x :=
+      ⟨((monoIso hU g.asIso).inv.app G).hom x, by
         rw [← ModuleCat.comp_apply, Iso.inv_hom_id_app]; rfl⟩
     rw [WeilCoefficients.homLinearMap_apply, WeilCoefficients.homLinearMap_apply,
-      monoIso_evaluationPairing_general hU g G H hGH]
+      monoIso_evaluationPairing_general hU g.asIso G H hGH]
     have h₁ := LinearMap.congr_fun hm w
-    have h₂ := LinearMap.congr_fun hm (((monoIso hU g).hom.app G).hom w)
+    have h₂ := LinearMap.congr_fun hm (((monoIso hU g.asIso).hom.app G).hom w)
     rw [WeilCoefficients.homLinearMap_apply] at h₁ h₂
     rw [h₁, h₂]
     exact (hφ g w).symm

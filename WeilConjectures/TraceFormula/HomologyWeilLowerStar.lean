@@ -148,7 +148,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- **Homology of the pushforward of Weil objects along a finite morphism**: for finite `f`, the
 Weil sheaf `Hʲ(Rf_*^Weil K)` for `e_Y` is the pushforward `f_* Hʲ(K)` of the Weil sheaf `Hʲ(K)`.

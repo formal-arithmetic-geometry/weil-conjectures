@@ -63,11 +63,19 @@ variable {X : Scheme.{u}}
 a ring homomorphism to its endomorphisms. -/
 noncomputable def smulRingHom (M : X.Modules) :
     Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
-  toFun a := (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
-  map_one' := by rw [smulHom_one, CategoryTheory.Functor.map_id]; rfl
-  map_mul' a b := by rw [smulHom_mul, CategoryTheory.Functor.map_comp, End.mul_def]
-  map_zero' := by rw [smulHom_zero, CategoryTheory.Functor.map_zero]
-  map_add' a b := by rw [smulHom_add, CategoryTheory.Functor.map_add]
+  toFun a := End.of ((SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a))
+  map_one' := by
+    apply End.ext
+    rw [smulHom_one, CategoryTheory.Functor.map_id, End.one_asHom]
+  map_mul' a b := by
+    apply End.ext
+    rw [smulHom_mul, CategoryTheory.Functor.map_comp, End.mul_asHom]
+  map_zero' := by
+    apply End.ext
+    rw [smulHom_zero, CategoryTheory.Functor.map_zero, End.zero_asHom]
+  map_add' a b := by
+    apply End.ext
+    rw [smulHom_add, CategoryTheory.Functor.map_add, End.add_asHom]
 
 variable [∀ Z : Scheme.{u},
     HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -98,7 +106,7 @@ noncomputable def homologyDerivedGlobalSectionsLinearEquiv (ℱ : X.Modules) (n 
         AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) n :=
     { e₂ with
       map_smul' := fun a x ↦ by
-        change e₂ (a • x) = (mk₀ ((smulRingHom ℱ) a)).postcomp _ (add_zero n) (e₂ x)
+        change e₂ (a • x) = (mk₀ ((smulRingHom ℱ) a).asHom).postcomp _ (add_zero n) (e₂ x)
         rw [← moduleCohomology_map_smulHom ℱ (injectiveResolution ℱ) n a x,
           moduleCohomologyExtResolutionEquiv_naturality]
         rfl }

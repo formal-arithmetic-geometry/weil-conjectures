@@ -67,7 +67,6 @@ variable {Y : Scheme.{u}}
   (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))
 
-set_option maxHeartbeats 400000 in
 -- the composite of the transports and composition isomorphisms takes some time to elaborate
 /-- The composition isomorphism `(a ≫ b)^* ≅ b^* ⋙ a^*`, followed by the identifications
 `b^* ≅ (𝟙)^* ≅ 𝟭` and `a^* ≅ (𝟙)^* ≅ 𝟭`, for `a = 𝟙` and `b = 𝟙`, is the identification
@@ -108,7 +107,6 @@ lemma upperStarComp_hom_app_comp_map_eqToHom_comp_upperStarId_of_eq (a b : Y ⟶
   rw [eqToIso_refl, Iso.refl_trans, Functor.map_comp, Category.assoc, reassoc_of% hn, e,
     Category.assoc, reassoc_of% hi, eqToHom_trans_assoc, eqToHom_trans_assoc]
 
-set_option maxHeartbeats 400000 in
 -- the composite of the transports and composition isomorphisms takes some time to elaborate
 /-- The composition isomorphism `(x ≫ g)^* ≅ g^* ⋙ x^*`, followed by the identification
 `g^* ≅ (𝟙)^* ≅ 𝟭`, for `g = 𝟙`, is the transport along `x ≫ g = x`. -/
@@ -230,7 +228,6 @@ variable {S Y : Scheme.{u}}
   (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))
 
-set_option maxHeartbeats 400000 in
 -- the composite of the transports and composition isomorphisms takes some time to elaborate
 /-- **The stalk Frobenius of the identity structure is the pullback of sections**: let `x̄ : S ⟶ Y`,
 `g = 𝟙` an endomorphism of `Y` and `σ` an endomorphism of `S` with `x̄ ≫ g = σ ≫ x̄`, and let
@@ -277,7 +274,6 @@ variable {S Y : Scheme.{u}}
   (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))
 
-set_option maxHeartbeats 400000 in
 -- the composite of the transports and composition isomorphisms takes some time to elaborate
 /-- `ProEtale.CondensedRing.comp_stalkFrobeniusOfId_eq_upperStarSectionMap`, with the stalk
 Frobenius written as the component of the stalk comparison
@@ -316,7 +312,6 @@ lemma WeilSheaf.pow_ofId_str_hom_carrier
   rw [WeilSheaf.pow_ofId_str_hom]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- the unfolding of the stalk Frobenius takes some time to elaborate
 /-- **The stalk Frobenius of the identity structure on the base point**: at a geometric point
 `x̄ : Spec Ω ⟶ Spec k` with `x̄ ≫ 𝟙ⁿ⁺¹ = σ ≫ x̄` and `σ ≫ x̄ = x̄`, the `(n + 1)`-st Frobenius of

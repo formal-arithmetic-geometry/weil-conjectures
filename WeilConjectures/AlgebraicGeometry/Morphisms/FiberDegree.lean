@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # The degree of the fibre of an affine morphism at a point

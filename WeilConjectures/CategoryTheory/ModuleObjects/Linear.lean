@@ -147,7 +147,7 @@ variable (R) in
 /-- The global sections of a commutative algebra object `R` act on the category of `R`-module
 objects: a ring homomorphism to the center of `Mod C R`. -/
 noncomputable def toCatCenter : Γ R →+* CatCenter (Mod C R) where
-  toFun s := smulNatTrans s.hom
+  toFun s := End.of (smulNatTrans s.hom)
   map_one' := CatCenter.ext _ _ fun M ↦ by
     refine Mod.hom_ext _ _ ?_
     exact (congrArg (globalSmul · M) (Γ.one_hom (R := R))).trans (globalSmul_one M)

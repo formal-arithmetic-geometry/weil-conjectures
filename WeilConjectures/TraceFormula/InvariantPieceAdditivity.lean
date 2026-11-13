@@ -75,7 +75,7 @@ lemma isZero_upperStar_verdierDual_lowerStar_of_disjoint :
   exact (isZero_ihom_obj_of_isZero
     (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hji A) _).of_iso
     (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)
-      ((boundedConstructibleLowerStar ℓ i).obj A)).natTrans.app _))
+      ((boundedConstructibleLowerStar ℓ i).obj A)).app _))
 
 /-- `j_! B ⊗ D_X (Ri_* A) = 0` when `j` and `i` have disjoint ranges. -/
 lemma isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar_of_disjoint :

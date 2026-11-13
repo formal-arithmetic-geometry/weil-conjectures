@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimensionSupplement
 public import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Torsion cohomological dimension of a separably closed field

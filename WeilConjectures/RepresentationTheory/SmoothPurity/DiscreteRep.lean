@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
-public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.Topology.Separation.Regular
 public import Mathlib.CategoryTheory.Abelian.Exact
 
 import Mathlib.CategoryTheory.Abelian.Subcategory
@@ -96,7 +96,7 @@ theorem discreteRep_abelian_structure (A : Type u) [Ring A] [Finite A]
   have : P.ContainsZero := ⟨by
     obtain ⟨Z, hZ⟩ := HasZeroObject.zero (C := Rep.{w} A G)
     refine ⟨Z, hZ, ?_⟩
-    have : Subsingleton Z.V := (Rep.isZero_iff A G Z).1 hZ
+    have : Subsingleton Z.V := (Rep.isZero_iff Z).1 hZ
     intro x
     convert isOpen_univ (X := G) using 1
     ext g

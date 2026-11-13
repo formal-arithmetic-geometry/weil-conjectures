@@ -36,12 +36,13 @@ lemma purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_c
     (Mod.extendScalars (coefficientMap a f.geometricFiber)).map
           ((geometricFiberProjUpperStarFrobeniusIso Λ f).hom.app M) ≫
         (pullIso a f.geometricFiberProj).hom.app M =
-      (pullIso a f.geometricGaloisFrobenius.hom).hom.app ((f.geometricFiberProj)^*⟦Λ⟧.obj M) ≫
-        (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map ((pullIso a f.geometricFiberProj).hom.app M) ≫
+      (pullIso a f.geometricGaloisFrobenius.asIso.hom).hom.app ((f.geometricFiberProj)^*⟦Λ⟧.obj M) ≫
+        (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧.map
+            ((pullIso a f.geometricFiberProj).hom.app M) ≫
           (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
             ((Mod.extendScalars (coefficientMap a X₀)).obj M) := by
   have h := purity_extendScalars_map_factor_hom_comp_pullIso a f.geometricFiberProj
-    f.geometricGaloisFrobenius.hom f.geometricGaloisFrobenius_hom_comp_geometricFiberProj M
+    f.geometricGaloisFrobenius.asIso.hom f.geometricGaloisFrobenius_hom_comp_geometricFiberProj M
   simp only [purityModuleFactorIso, geometricFiberProjUpperStarFrobeniusIso] at h ⊢
   exact_mod_proofs h
 
@@ -51,8 +52,10 @@ lemma purity_geometricFiberProjUpperStarFrobeniusIso_hom_app_extendScalars_obj
     (M : Mod (Sheaf (ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀)) :
     (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
         ((Mod.extendScalars (coefficientMap a X₀)).obj M) =
-      (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map ((pullIso a f.geometricFiberProj).inv.app M) ≫
-        (pullIso a f.geometricGaloisFrobenius.hom).inv.app ((f.geometricFiberProj)^*⟦Λ⟧.obj M) ≫
+      (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧.map
+          ((pullIso a f.geometricFiberProj).inv.app M) ≫
+        (pullIso a f.geometricGaloisFrobenius.asIso.hom).inv.app
+            ((f.geometricFiberProj)^*⟦Λ⟧.obj M) ≫
           (Mod.extendScalars (coefficientMap a f.geometricFiber)).map
             ((geometricFiberProjUpperStarFrobeniusIso Λ f).hom.app M) ≫
           (pullIso a f.geometricFiberProj).hom.app M := by
@@ -77,21 +80,21 @@ variable (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X
 
 /-- Changing coefficients preserves the scalar relation of an underlying trivialization. -/
 theorem purityChangeCoefficientPullbackIso_weil
-    (he : (f.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e.hom.hom ≫
+    (he : (f.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map e.hom.hom ≫
         (purityAbelianFrobeniusFactorIso f).hom.app N.X =
       c • ((purityAbelianFrobeniusFactorIso f).hom.app M.X ≫ e.hom.hom)) :
     c • ((geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
           ((Mod.extendScalars (coefficientMap a X)).obj M) ≫
         (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M N e).hom) =
-      (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map
+      (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧.map
           (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M N e).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
           ((Mod.extendScalars (coefficientMap a X)).obj N) := by
   exact purity_scalarFunctor_coefficient (f.geometricFiberProj)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X))
     (Mod.extendScalars (coefficientMap a f.geometricFiber)) (f.geometricFiberProj)^*⟦Λ'⟧
-    (f.geometricGaloisFrobenius.hom)^*⟦Λ⟧ (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
-    (pullIso a f.geometricGaloisFrobenius.hom) (pullIso a f.geometricFiberProj)
+    (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ⟧ (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧
+    (pullIso a f.geometricGaloisFrobenius.asIso.hom) (pullIso a f.geometricFiberProj)
     (geometricFiberProjUpperStarFrobeniusIso Λ f)
     (geometricFiberProjUpperStarFrobeniusIso Λ' f) M N
     (fun K ↦
@@ -112,17 +115,17 @@ lemma purityChangeCoefficientTrivialization_eq
 theorem purityChangeCoefficientTrivialization_weil
     (e₁ : ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj M ≅
       ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _))
-    (he : (f.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e₁.hom.hom ≫
+    (he : (f.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map e₁.hom.hom ≫
         (purityAbelianFrobeniusFactorIso f).hom.app (condensedRingObj Λ X) =
       c • ((purityAbelianFrobeniusFactorIso f).hom.app M.X ≫ e₁.hom.hom)) :
     c • ((geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
           ((Mod.extendScalars (coefficientMap a X)).obj M) ≫
         (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom) =
-      (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map
+      (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧.map
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app (𝟙_ _) := by
   have h := purity_scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
-    (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
+    (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧
     (geometricFiberProjUpperStarFrobeniusIso Λ' f)
     (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁)
     (purityCoefficientUnitIso Λ a X)

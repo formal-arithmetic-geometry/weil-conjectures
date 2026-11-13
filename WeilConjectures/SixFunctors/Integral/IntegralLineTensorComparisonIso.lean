@@ -140,22 +140,23 @@ theorem integralLineTensorComparison_iso
       (CochainComplex.PrincipalCone.unit (integralKoszulScalar l E X P.obj))) at hc
     let := hc
     exact IsIso.of_isIso_comp_left e.inv _
-  have hμ : G.map (integralKoszulScalar l E X P.obj) =
+  have hμ : End.of (G.map (integralKoszulScalar l E X P.obj).asHom) =
       integralKoszulScalar l E X (G.obj P.obj) := by
+    apply End.ext
     apply HomologicalComplex.Hom.ext
     funext i
     apply SheafOfModules.LineEvaluation.pure_hom_ext R (P.obj.X i) T
     intro U x y
     have hm := SheafOfModules.LineEvaluation.pure_map R
-      ((integralKoszulScalar l E X P.obj).f i) (𝟙 T) U x y
+      ((integralKoszulScalar l E X P.obj).asHom.f i) (𝟙 T) U x y
     rw [MonoidalCategory.tensorHom_id] at hm
-    change (((integralKoszulScalar l E X P.obj).f i) ▷ T).val.app U _ = _
+    change (((integralKoszulScalar l E X P.obj).asHom.f i) ▷ T).val.app U _ = _
     calc
       _ = SheafOfModules.LineEvaluation.pureTensor R (P.obj.X i) T U
-          (((integralKoszulScalar l E X P.obj).f i).val.app U x) y := hm
+          (((integralKoszulScalar l E X P.obj).asHom.f i).val.app U x) y := hm
       _ = integralCompletionScalarValue l E X U •
           SheafOfModules.LineEvaluation.pureTensor R (P.obj.X i) T U x y := by
-        have hx : ((integralKoszulScalar l E X P.obj).f i).val.app U x =
+        have hx : ((integralKoszulScalar l E X P.obj).asHom.f i).val.app U x =
             integralCompletionScalarValue l E X U • x :=
           (integralKoszulScalar_existsUnique l E X P.obj).exists.choose_spec i U x
         exact (congrArg (fun z ↦
@@ -178,9 +179,7 @@ theorem integralLineTensorComparison_iso
   have hs : IsIso (DerivedCategory.Q.map
       (CochainComplex.PrincipalCone.unit (integralKoszulScalar l E X (G.obj P.obj)))) := by
     have hu : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-        (G.map (integralKoszulScalar l E X P.obj)))) := by
-      change IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-        (End.of (G.map (integralKoszulScalar l E X P.obj)))))
+        (End.of (G.map (integralKoszulScalar l E X P.obj).asHom)))) := by
       rw [← hc, Functor.map_comp]
       infer_instance
     exact (congrArg (fun μ : End (G.obj P.obj) ↦ IsIso (DerivedCategory.Q.map

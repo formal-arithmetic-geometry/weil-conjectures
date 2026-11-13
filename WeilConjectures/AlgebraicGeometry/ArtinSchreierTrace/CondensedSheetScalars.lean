@@ -45,8 +45,8 @@ private theorem pointEnd_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (a : MonObj.Γ Λ) :
     (Mod.regularEndRingHom
-      (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) a)).hom =
-        (ProEtale.upperStarFromPoint X).map (Mod.regularEndRingHom a).hom := by
+      (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) a)).asHom.hom =
+        (ProEtale.upperStarFromPoint X).map (Mod.regularEndRingHom a).asHom.hom := by
   have h := (ProEtale.upperStarFromPoint X).mapMod_map_regularEndRingHom Λ a
   exact (congrArg Mod.Hom.hom h).symm
 
@@ -57,15 +57,16 @@ private theorem pointEnd_pullback_unit
     (a : MonObj.Γ Λ) :
     (ProEtale.CondensedRing.upperStar Λ f).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y) a)) ≫
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y) a)).asHom ≫
       (regularUnitIso Λ f).inv =
     (regularUnitIso Λ f).inv ≫
-      Mod.regularEndRingHom
-        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) a) := by
+      (Mod.regularEndRingHom
+        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) a)).asHom := by
   have he (Z : Scheme.{u}) :
       ProEtale.PullbackScalar.pointScalar Λ Z (Mod.regularEndRingHom a) =
         Mod.regularEndRingHom
           (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Z) a) := by
+    apply End.ext
     apply Mod.hom_ext
     rw [ProEtale.PullbackScalar.pointScalar_hom, pointEnd_hom]
     rfl
@@ -74,7 +75,6 @@ private theorem pointEnd_pullback_unit
   unfold regularUnitIso
   convert h using 1 <;> rfl
 
-set_option maxHeartbeats 400000 in
 -- Internal-module coefficient comparisons need additional kernel conversion.
 /-- Constant coefficient multiplication commutes with restriction to a sheet.
 Source: blueprint lem-fd-as-characters, weighted character averaging
@@ -92,11 +92,11 @@ theorem sheetProjection_scalar
     (ProEtale.CondensedRing.upperStar Λ x).map
         ((ProEtale.CondensedRing.lowerStar Λ π).map
           (Mod.regularEndRingHom
-            (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y) a))) ≫
+            (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y) a)).asHom) ≫
       sheetProjection Λ π x t w =
     sheetProjection Λ π x t w ≫
-      Mod.regularEndRingHom
-        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint T) a) := by
+      (Mod.regularEndRingHom
+        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint T) a)).asHom := by
   simp only [sheetProjection, Category.assoc]
   erw [ProEtale.CondensedRing.stalkLowerStarProj_naturality_assoc]
   rw [pointEnd_pullback_unit]

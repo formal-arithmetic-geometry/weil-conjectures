@@ -407,7 +407,7 @@ private def sequencePullEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
       (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := baseContinuous f none
   have : IsIso ((mateEquiv (adjunction ell E f none)
-      (adjunction ell E f (some n))).symm (sequencePushEvaluation ell E f n).hom).natTrans :=
+      (adjunction ell E f (some n))).symm (sequencePushEvaluation ell E f n).hom) :=
     WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) (Scheme.proEtaleBaseChange f)
       _ _ n (moduleRingUnit ell E f none) _ _
@@ -417,7 +417,7 @@ private def sequencePullEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
       (adjunction ell E f none) (adjunction ell E f (some n))
       (sequencePushEvaluation ell E f n)
   exact (asIso ((mateEquiv (adjunction ell E f none)
-    (adjunction ell E f (some n))).symm (sequencePushEvaluation ell E f n).hom).natTrans).symm
+    (adjunction ell E f (some n))).symm (sequencePushEvaluation ell E f n).hom)).symm
 
 attribute [local irreducible] sequencePullEvaluation
 

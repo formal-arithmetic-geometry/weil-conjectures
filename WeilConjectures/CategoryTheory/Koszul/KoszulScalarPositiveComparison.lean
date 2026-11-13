@@ -48,14 +48,14 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 theorem scalar_intertwines_any (φ : R ⟶ B)
     (s : (R.obj ⋙ forget CommRingCat).sections)
     (e : (extension φ).obj (one R) ≅ one B) :
-    (extension φ).map (ringedKoszulScalar R s) ≫ e.hom =
-      e.hom ≫ ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0) := by
+    (extension φ).map (ringedKoszulScalar R s).asHom ≫ e.hom =
+      e.hom ≫ (ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0)).asHom := by
   let j := SheafOfModules.scalarExtensionUnitIso φ
   have hc :
-      ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0) ≫
+      (ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0)).asHom ≫
           (j.inv ≫ e.hom) =
         (j.inv ≫ e.hom) ≫
-          ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0) := by
+          (ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0)).asHom := by
     rw [ScalarKoszulTransport.scalar_eq_smul]
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -69,10 +69,10 @@ theorem scalar_intertwines_any (φ : R ⟶ B)
         ((j.inv ≫ e.hom).val.app U).hom x
     exact ((j.inv ≫ e.hom).val.app U).hom.map_smul _ _
   calc
-    _ = (extension φ).map (ringedKoszulScalar R s) ≫ j.hom ≫ j.inv ≫ e.hom := by
+    _ = (extension φ).map (ringedKoszulScalar R s).asHom ≫ j.hom ≫ j.inv ≫ e.hom := by
       simp only [Iso.hom_inv_id_assoc]
-    _ = j.hom ≫ ringedKoszulScalar B
-        (imageSections φ (fun _ : Fin 1 ↦ s) 0) ≫ j.inv ≫ e.hom := by
+    _ = j.hom ≫ (ringedKoszulScalar B
+        (imageSections φ (fun _ : Fin 1 ↦ s) 0)).asHom ≫ j.inv ≫ e.hom := by
       rw [← Category.assoc, ← Category.assoc, scalar_intertwines]
       simp only [Category.assoc, j]
     _ = _ := by rw [← Category.assoc _ j.inv, Category.assoc, hc]; simp
@@ -119,9 +119,9 @@ private theorem positiveIso_projection (φ : R ⟶ B) (r : ℕ)
     let P := extension φ
     let s := a 0
     let t := imageSections φ a 0
-    have h : P.map (ringedKoszulScalar R s) ≫
+    have h : P.map (ringedKoszulScalar R s).asHom ≫
           (ScalarKoszulTransport.rankOneIso P u).hom =
-        (ScalarKoszulTransport.rankOneIso P u).hom ≫ ringedKoszulScalar B t :=
+        (ScalarKoszulTransport.rankOneIso P u).hom ≫ (ringedKoszulScalar B t).asHom :=
       scalar_intertwines_any φ s (ScalarKoszulTransport.rankOneIso P u)
     let e := ScalarKoszulTransport.factorsIso P s t (ScalarKoszulTransport.rankOneIso P u) h
     have hp := ScalarKoszulTransport.tensor_augmented H

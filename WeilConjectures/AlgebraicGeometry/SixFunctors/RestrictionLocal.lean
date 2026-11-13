@@ -570,7 +570,6 @@ private theorem closed_preserves
 set_option backward.isDefEq.respectTransparency.types false
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 400000 in
 -- Composite adjunctions and full-subcategory comparisons require explicit elaboration.
 /-- Local factorization of `f^!` on affine charts, together with bounded constructibility.
 

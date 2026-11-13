@@ -105,25 +105,29 @@ variable (hP hchar) in
 /-- The translation by a locally constant function, as an automorphism of the cover. -/
 def locallyConstantAut : Multiplicative (LocallyConstant S (ZMod p)) →* Aut (adjoinRootCover S P)
     where
-  toFun b := (Scheme.Etale.forget S).mapIso (locallyConstantIso (hP := hP) (hchar := hchar) b.toAdd)
+  toFun b := .of <| (Scheme.Etale.forget S).mapIso
+    (locallyConstantIso (hP := hP) (hchar := hchar) b.toAdd)
   map_one' := by
+    apply Aut.ext
+    rw [Aut.one_asIso]
     ext : 1
     exact congr_arg (Scheme.Etale.forget S).map locallyConstantHom_zero
   map_mul' b b' := by
+    apply Aut.ext
+    rw [Aut.mul_asIso]
     ext : 1
-    rw [Aut.Aut_mul_def]
     exact (congr_arg (Scheme.Etale.forget S).map (locallyConstantHom_add b.toAdd b'.toAdd)).trans
       ((Scheme.Etale.forget S).map_comp _ _)
 
 lemma locallyConstantAut_hom_left (b : LocallyConstant S (ZMod p)) :
-    (locallyConstantAut hP hchar (Multiplicative.ofAdd b)).hom.left =
+    (locallyConstantAut hP hchar (Multiplicative.ofAdd b)).asIso.hom.left =
       (locallyConstantHom hP hchar b).left :=
   rfl
 
 /-- An automorphism of the cover, as an endomorphism in the small étale site. -/
 def autEtale (g : Aut (adjoinRootCover S P)) :
     (artinSchreierEtaleTorsor hP hchar).toEtale ⟶ (artinSchreierEtaleTorsor hP hchar).toEtale :=
-  MorphismProperty.Over.homMk g.hom.left (Over.w g.hom)
+  MorphismProperty.Over.homMk g.asIso.hom.left (Over.w g.asIso.hom)
 
 /-- Two points of the cover in the same fibre differ by a translation. -/
 lemma exists_translation_apply_eq {y y' : (adjoinRootCover S P).left}
@@ -164,9 +168,9 @@ theorem artinSchreier_centralizer :
         Subgroup.centralizer (Set.range (artinSchreierAction hP hchar)),
       ∀ (b : LocallyConstant S (ZMod p)) (a : ZMod p) (U : S.Opens),
         (∀ x : U, b x = a) →
-        ((adjoinRootCover S P).hom ⁻¹ᵁ U).ι ≫ (E (Multiplicative.ofAdd b)).val.hom.left =
+        ((adjoinRootCover S P).hom ⁻¹ᵁ U).ι ≫ (E (Multiplicative.ofAdd b)).val.asIso.hom.left =
           ((adjoinRootCover S P).hom ⁻¹ᵁ U).ι ≫
-            (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).hom.left := by
+            (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).asIso.hom.left := by
   classical
   set t := artinSchreierEtaleTorsor hP hchar
   set π := (adjoinRootCover S P).hom
@@ -177,8 +181,9 @@ theorem artinSchreier_centralizer :
         Subgroup.centralizer (Set.range (artinSchreierAction hP hchar)) := by
     rw [Subgroup.mem_centralizer_iff]
     rintro _ ⟨a, rfl⟩
+    apply Aut.ext
+    rw [Aut.mul_asIso, Aut.mul_asIso]
     ext : 1
-    rw [Aut.Aut_mul_def, Aut.Aut_mul_def]
     refine Over.OverMorphism.ext ?_
     exact congr_arg (fun g ↦ g.left) (locallyConstantHom_comm (hP := hP) (hchar := hchar)
       b.toAdd a.toAdd)
@@ -189,7 +194,7 @@ theorem artinSchreier_centralizer :
     intro b b' h
     have h' : locallyConstantHom hP hchar b.toAdd = locallyConstantHom hP hchar b'.toAdd :=
       Scheme.EtaleTorsor.etaleHom_ext (congr_arg (fun g : Subgroup.centralizer _ ↦
-        g.val.hom.left) h)
+        g.val.asIso.hom.left) h)
     have h'' := (t.bijective_smulHom (𝟙 _)).1 h'
     refine Multiplicative.toAdd.injective (LocallyConstant.ext fun x ↦ ?_)
     obtain ⟨y, rfl⟩ := hsurj x
@@ -205,8 +210,8 @@ theorem artinSchreier_centralizer :
       have h1 : autEtale g ≫ translationEtale hP hchar a =
           translationEtale hP hchar a ≫ autEtale g := by
         refine Scheme.EtaleTorsor.etaleHom_ext ?_
-        have h3 := congr_arg (fun g : Aut (adjoinRootCover S P) ↦ g.hom.left) hcomm
-        simp only [Aut.Aut_mul_def, Iso.trans_hom, Over.comp_left] at h3
+        have h3 := congr_arg (fun g : Aut (adjoinRootCover S P) ↦ g.asIso.hom.left) hcomm
+        simp only [Aut.mul_asIso, Iso.trans_hom, Over.comp_left] at h3
         exact h3
       rw [← hc, Scheme.EtaleTorsor.smulHom_comp _ _ _ _ _ (translationEtale_comm a),
         Scheme.EtaleTorsor.comp_smulHom, Category.id_comp, Category.comp_id] at h1
@@ -234,6 +239,7 @@ theorem artinSchreier_centralizer :
         exact π.isClosedMap _ ((isClosed_discrete _).preimage hcont)
       simpa using hclosed.isOpen_compl
     refine ⟨Multiplicative.ofAdd ⟨b₀, hb⟩, Subtype.ext ?_⟩
+    apply Aut.ext
     ext : 1
     refine Over.OverMorphism.ext ?_
     have hlift : liftLocallyConstant ⟨b₀, hb⟩ = c := by
@@ -259,7 +265,7 @@ theorem bijective_artinSchreierAction [ConnectedSpace (adjoinRootCover S P).left
   · have h' : 𝟙 _ ≫ (artinSchreierEtaleTorsor hP hchar).vadd (ULift.up a.toAdd) =
         𝟙 _ ≫ (artinSchreierEtaleTorsor hP hchar).vadd (ULift.up b.toAdd) := by
       rw [Category.id_comp, Category.id_comp]
-      exact congr_arg (fun g : Aut (adjoinRootCover S P) ↦ g.hom.left) h
+      exact congr_arg (fun g : Aut (adjoinRootCover S P) ↦ g.asIso.hom.left) h
     exact congr_arg ULift.down ((artinSchreierEtaleTorsor hP hchar).eq_of_comp_vadd_eq _ h' y₀)
   · obtain ⟨c, hc⟩ := ((artinSchreierEtaleTorsor hP hchar).bijective_smulHom (𝟙 _)).2
       (autEtale g)
@@ -267,6 +273,7 @@ theorem bijective_artinSchreierAction [ConnectedSpace (adjoinRootCover S P).left
       ContinuousMap.ext fun y ↦ PreconnectedSpace.constant
         (inferInstanceAs (PreconnectedSpace (adjoinRootCover S P).left)) c.continuous
     refine ⟨Multiplicative.ofAdd (c y₀).down, ?_⟩
+    apply Aut.ext
     ext : 1
     refine Over.OverMorphism.ext ?_
     have h := (artinSchreierEtaleTorsor hP hchar).smulHom_const (c y₀) (𝟙 _)

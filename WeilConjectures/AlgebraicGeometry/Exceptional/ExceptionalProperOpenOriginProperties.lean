@@ -91,7 +91,7 @@ private theorem direct_mate (a : L ⊣ V) (b : L' ⊣ V')
     (p : L ⋙ H ≅ E ⋙ L') (q : V ⋙ E ≅ H ⋙ V')
     (hc : ∀ M, p.hom.app (V.obj M) ≫ L'.map (q.hom.app M) ≫
       b.counit.app (H.obj M) = H.map (a.counit.app M)) :
-    (mateEquiv a b (.mk _ _ _ _ p.inv)).natTrans = q.hom := by
+    (mateEquiv a b (.mk _ _ _ _ p.inv)) = q.hom := by
   apply NatTrans.ext
   funext M
   apply (b.homEquiv _ _).symm.injective
@@ -228,7 +228,6 @@ private theorem etale_level_support_bound (n : ℕ) M (a : ℤ) (hM : M.IsGE a) 
   exact exactDerivedAdjunction_isGE (S.properImage.lift n).modules _
     (S.properDerived.level n).inverseFactors (S.properDerived.level n).adjunction _ a
 
-set_option maxHeartbeats 400000 in
 -- The cube has eight derived categories; allow elaboration of its concrete instances.
 private theorem proper_evaluation
     (P : ExceptionalProCompactSupport O ell c
@@ -295,7 +294,7 @@ private theorem comparison_evaluation
     (R.openComparison.hom.app M)
   have hl := (mateEquiv (S.properDerived.level n).adjunction
     (P.val.properDerived.level n).adjunction
-    (.mk _ _ _ _ (R.properSquare.derivedLevel n).hom)).natTrans.naturality
+    (.mk _ _ _ _ (R.properSquare.derivedLevel n).hom)).naturality
       ((S.openDerivedEvaluation n).hom.app M)
   dsimp only [Functor.comp_map] at hn hl
   simp only [Functor.map_comp] at ho

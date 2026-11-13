@@ -103,11 +103,10 @@ private theorem scalar_exchange_of_cube
       tb.app (s.obj N) ≫ h'.map (la.app N) ≫ lh.app (a.obj N) =
         d.map (lg.app N) ≫ lc.app (g.obj N) ≫ w.map (ta.app N))
     (M : D) :
-    g'.map ((mateEquiv aa ab la).natTrans.app M) ≫
-        (mateEquiv ab ad tb).natTrans.app (t.obj M) ≫ dr.map (lh.app M) =
-      lg.app (ar.obj M) ≫ v.map ((mateEquiv aa ac ta).natTrans.app M) ≫
-        (mateEquiv ac ad lc).natTrans.app (h.obj M) := by
-  dsimp only [TwoSquare.natTrans]
+    g'.map ((mateEquiv aa ab la).app M) ≫
+        (mateEquiv ab ad tb).app (t.obj M) ≫ dr.map (lh.app M) =
+      lg.app (ar.obj M) ≫ v.map ((mateEquiv aa ac ta).app M) ≫
+        (mateEquiv ac ad lc).app (h.obj M) := by
   apply (ad.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   rw [show d.map (dr.map (lh.app M)) ≫ ad.counit.app _ =

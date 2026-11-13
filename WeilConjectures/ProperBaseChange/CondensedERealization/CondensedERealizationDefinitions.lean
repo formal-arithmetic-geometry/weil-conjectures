@@ -870,7 +870,7 @@ def Data.mate (sq : CommSq g' f' f g) :
     (D.along X Y f).rationalPush ⋙ (D.along Y' Y g).rationalPull ⟶
       (D.along X' X g').rationalPull ⋙ (D.along X' Y' f').rationalPush :=
   (mateEquiv (D.along X Y f).rationalAdjunction (D.along X' Y' f').rationalAdjunction
-    (TwoSquare.mk _ _ _ _ (Data.square l E k D sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Data.square l E k D sq).hom))
 
 /-- The continuous-E pullback square uses the existing normalized composition iso.
 Source: Stacks 0D6G (blueprint: lem-weil-pbc-condensed-e-realization). -/
@@ -907,7 +907,7 @@ def fieldBaseChange (sq : CommSq g' f' f g) :
       (X := X'.model) (Y := X.model)
       (Base.map X' X g') ⋙ fieldLowerStar l E k X' Y' f' :=
   (mateEquiv (fieldAdjunction l E k X Y f) (fieldAdjunction l E k X' Y' f')
-    (TwoSquare.mk _ _ _ _ (fieldSquare l E k sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (fieldSquare l E k sq).hom))
 
 /-- Equality of the specified integral, rational, and condensed exchange maps.
 `completedExchange` is definitionally the ordered `completedBaseChangeMap` on every

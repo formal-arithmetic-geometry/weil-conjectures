@@ -143,12 +143,12 @@ lemma baseChange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) :
 omit [𝒪.ContainsIdentities] in
 /-- The exchange map of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up to `(𝟙)_* ≅ 𝟭`. -/
 lemma exchange_id_horiz (j : X ⟶ Y) [Fact (𝒪 j)] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y)
-    [IsIso (F.baseChange (𝟙 X) j j (𝟙 Y) w).natTrans] :
+    [IsIso (F.baseChange (𝟙 X) j j (𝟙 Y) w)] :
     F.exchange (𝟙 X) j j (𝟙 Y) w =
       ((TwoSquare.mk (𝟭 _) (F.sh j) (F.sh j) (𝟭 _)
         ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
           (F.pfId X).hom).whiskerBottom (F.pfId Y).inv := by
-  have key : inv (F.baseChange (𝟙 X) j j (𝟙 Y) w).natTrans =
+  have key : inv (F.baseChange (𝟙 X) j j (𝟙 Y) w) =
       ((TwoSquare.mk (F.sh j) (𝟭 _) (𝟭 _) (F.sh j)
         ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerLeft
           (F.pbId X).inv).whiskerRight (F.pbId Y).hom := by
@@ -162,12 +162,12 @@ lemma exchange_id_horiz (j : X ⟶ Y) [Fact (𝒪 j)] (w : 𝟙 X ≫ j = j ≫ 
 
 /-- The exchange map of the square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity, up to `(𝟙)_! ≅ 𝟭`. -/
 lemma exchange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g)
-    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans] :
+    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w)] :
     F.exchange g (𝟙 X) (𝟙 Y) g w =
       ((TwoSquare.mk (F.pf g) (𝟭 _) (𝟭 _) (F.pf g)
         ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
           (F.shId Y).hom).whiskerLeft (F.shId X).inv := by
-  have key : inv (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans =
+  have key : inv (F.baseChange g (𝟙 X) (𝟙 Y) g w) =
       ((TwoSquare.mk (𝟭 _) (F.pb g) (F.pb g) (𝟭 _)
         ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
           (F.shId Y).hom).whiskerBottom (F.shId X).inv := by
@@ -335,9 +335,9 @@ open `l : U' ⟶ Z'`, when the extensions by zero along `l` and `r` are fully fa
 lemma isIso_map_baseChange_app (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.shAdj r).unit]
     [IsIso (F.shAdj l).unit] (M : F.obj U) :
-    IsIso ((F.pb l).map ((F.baseChange t l r b w).natTrans.app M)) := by
+    IsIso ((F.pb l).map ((F.baseChange t l r b w).app M)) := by
   have h := unit_mateEquiv_symm (F.shAdj r) (F.shAdj l) (F.sqIso t l r b w).hom M
-  have h' : (F.pb l).map ((F.baseChange t l r b w).natTrans.app M) =
+  have h' : (F.pb l).map ((F.baseChange t l r b w).app M) =
       inv ((F.shAdj l).unit.app _) ≫ (F.pb t).map ((F.shAdj r).unit.app M) ≫
         (F.sqIso t l r b w).hom.app _ := by
     rw [IsIso.eq_inv_comp]

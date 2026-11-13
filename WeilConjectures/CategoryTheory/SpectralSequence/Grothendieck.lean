@@ -509,7 +509,6 @@ noncomputable def grothendieckSpectralObjectFunctorCompMapSpectralObjectIso :
         (fun a a' h X ↦ γ.mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso
           1 a a' h X) EInt)
 
-set_option maxHeartbeats 1000000 in
 -- Unifying the source and target with the composed functors needs unfolding definitions.
 /-- The base change morphism between the spectral objects of two Grothendieck spectral
 sequences related by exact functors, see `Functor.exists_grothendieckSpectralObject_baseChange`. -/

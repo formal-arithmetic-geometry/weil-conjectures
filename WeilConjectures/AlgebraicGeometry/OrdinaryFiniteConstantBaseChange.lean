@@ -71,10 +71,10 @@ private theorem mate_constant_unit
     (d : L₂.obj K' ⟶ P')
     (hc : s.app K ≫ H.map a ≫ c = L₂.map b ≫ d) :
     G.map (a₁.unit.app K ≫ R₁.map a) ≫
-        (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).natTrans.app P ≫ R₂.map c =
+        (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).app P ≫ R₂.map c =
       b ≫ a₂.unit.app K' ≫ R₂.map d := by
   simp only [Functor.map_comp, Category.assoc]
-  erw [((mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).natTrans.naturality_assoc a)]
+  erw [((mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).naturality_assoc a)]
   erw [reassoc_of% unit_mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s) K]
   change a₂.unit.app (G.obj K) ≫ R₂.map (s.app K) ≫ R₂.map (H.map a) ≫ R₂.map c = _
   simp only [← Functor.map_comp, hc]

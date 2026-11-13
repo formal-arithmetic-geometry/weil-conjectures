@@ -53,7 +53,7 @@ noncomputable abbrev strictLocalBaseChangeHomologyMap
         (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
           (IsPullback.of_hasPullback f
             (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-            |>.natTrans.app K)))
+            |>.app K)))
 
 /-- Exact strict-local sections and Leray identify the target with limit cohomology.
 Source: Stacks, Tags 03Q9 and 03QO
@@ -135,7 +135,7 @@ structure StrictLocalMateProjectionData
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-                |>.natTrans.app K))) =
+                |>.app K))) =
       (e i).hom ≫
       (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map
         ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}

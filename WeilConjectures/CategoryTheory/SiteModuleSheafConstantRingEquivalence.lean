@@ -7,6 +7,9 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Constant-coefficient module sheaves on an arbitrary small site
 

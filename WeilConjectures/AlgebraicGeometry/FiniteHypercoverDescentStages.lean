@@ -956,7 +956,6 @@ private instance category {r : ℕ} : SmallCategory (FiniteSplitIndex r) where
       dsimp only [Hom, comp] at * <;> try contradiction
     all_goals first
       | rfl
-      | exact Category.assoc _ _ _
       | (obtain ⟨rfl⟩ := f; rfl)
 private def inclusion (r : ℕ) : (SimplexCategory.Truncated r)ᵒᵖ ⥤ FiniteSplitIndex r where
   obj := simplex

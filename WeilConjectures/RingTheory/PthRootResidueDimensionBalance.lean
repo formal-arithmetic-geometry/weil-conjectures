@@ -18,6 +18,7 @@ import WeilConjectures.RingTheory.JacobiZariskiConnectingMapNaturality
 import WeilConjectures.RingTheory.JacobiZariskiHomologySequence
 import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
+public import Mathlib.Algebra.Exact.Sequence
 
 /-! # Dimension balance for p-root residue differential comparisons
 

@@ -338,7 +338,7 @@ def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
     {TY : AY ⥤ BY} {rY : BY ⥤ AY} {TX : AX ⥤ BX} {rX : BX ⥤ AX}
     (dY : TY ⊣ rY) (dX : TX ⊣ rX) {IA : AY ⥤ AX} {IB : BY ⥤ BX}
     (a : rY ⋙ IA ⟶ IB ⋙ rX) : IA ⋙ TX ⟶ TY ⋙ IB :=
-  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a)).natTrans
+  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a))
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def moduleComparison

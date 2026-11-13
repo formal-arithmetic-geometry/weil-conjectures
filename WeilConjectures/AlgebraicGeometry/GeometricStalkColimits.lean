@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import Mathlib.Algebra.Homology.Additive
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # Colimits and geometric stalks

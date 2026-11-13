@@ -99,7 +99,6 @@ lemma nonempty_overRestrict_compl (hX : IsNormalScheme X.left) {h : Γ(X.left, �
     exact fun H ↦ H h rfl hx
   exact ⟨⟨x, hxU⟩⟩
 
-set_option maxHeartbeats 1000000 in
 -- The finite `ℓ`-group monodromy of the pulled-back étale model is checked degree by degree on
 -- étale sheaves of `𝔽_E`-modules, whose instance search is slow.
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in

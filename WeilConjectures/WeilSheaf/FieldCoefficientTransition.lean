@@ -72,11 +72,12 @@ noncomputable def fieldExtendScalarsFrobeniusIso :
       FieldWeilSheaf.frobeniusPullback k₀ Λ X ⋙
         fieldExtendScalars he hc (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   Functor.isoWhiskerLeft _ (fieldUpperStarIsoLowerStarInv Λ'
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm ≪≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm ≪≫
     (fieldUpperStarCompExtendScalarsIso he hc
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).symm ≪≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).symm ≪≫
     Functor.isoWhiskerRight
-      (fieldUpperStarIsoLowerStarInv Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius) _
+      (fieldUpperStarIsoLowerStarInv Λ
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso) _
 
 /-- The extension of scalars `Λ' ⊗_Λ -` of pro-étale Weil sheaves. -/
 noncomputable def ProEtaleFieldWeilSheaf.extendScalars :
@@ -133,7 +134,7 @@ lemma fieldExtendScalarsCompExtendScalarsToAdicIso_frobenius :
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom := by
   refine NatTrans.ext (funext fun M ↦ ?_)
   have K := congr_app (fieldExtendScalarsCompExtendScalarsToAdicIso_paste he hc he' hc'
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom) M
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom) M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     IsoAlgebra.compCommIso_hom_app, fieldExtendScalarsFrobeniusIso,

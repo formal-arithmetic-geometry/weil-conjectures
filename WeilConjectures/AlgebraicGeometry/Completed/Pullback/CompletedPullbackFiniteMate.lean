@@ -371,7 +371,7 @@ private theorem ordinaryFiniteMate_isIso (n : ℕ)
       cB cS (limit.lift_π _ (op n))
     let mu := ((mateEquiv (pbcScalarAdjunction (completedReductionProjection Y d n))
       (pbcScalarAdjunction (completedReductionProjection X d n))).symm
-        (TwoSquare.mk _ _ _ _ b)).natTrans
+        (TwoSquare.mk _ _ _ _ b))
     have hB : cB = d.integralRingIso g := by
       apply Iso.ext
       exact completedCoefficientMap_eq_integralRingIso g d
@@ -394,7 +394,7 @@ private theorem ordinaryFiniteMate_isIso (n : ℕ)
                 (pbcAdicCompletion Y d) (reductionCoefficient Y d n)
                 (pbcAdicCompletion X d) (reductionCoefficient X d n)
                 (completedReductionProjection Y d n) (completedReductionProjection X d n)
-                b₀ s₀ hc))).natTrans.app M) := by
+                b₀ s₀ hc))).app M) := by
         subst b₀
         subst s₀
         change IsIso ((completedOrdinaryReductionPullbackInv d g n).app M)

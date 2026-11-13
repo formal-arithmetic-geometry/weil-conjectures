@@ -143,6 +143,6 @@ def LeftMates.mate {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     (ha : Allowed l a) :
     (operation s).G ⋙ (z.scalar a ha true).functor ⟶
       (z.scalar a ha false).functor ⋙ (operation t).G :=
-  (mateEquiv (operation s).adjunction (operation t).adjunction (z.q a ha).inv).natTrans
+  (mateEquiv (operation s).adjunction (operation t).adjunction (z.q a ha).inv)
 
 end WeilConjectures.ExceptionalIntegralScalar

@@ -65,7 +65,7 @@ lemma MonoidalCategory.IsFiniteFree.exists_unitBasis {X : C} (hX : IsFiniteFree 
 let `⋯ ⟶ Aʲ ⟶ Bʲ ⟶ Dʲ ⟶ Aʲ⁺¹ ⟶ ⋯` be a long exact sequence of finite free objects, zero outside a
 finite range of degrees, with endomorphisms `φ_A`, `φ_B`, `φ_D` commuting with all the maps.
 Then `∑ⱼ (-1)ʲ Tr(φ_Bʲ) = ∑ⱼ (-1)ʲ Tr(φ_Aʲ) + ∑ⱼ (-1)ʲ Tr(φ_Dʲ)`. -/
-theorem superTrace_eq_add_of_exact (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIso t)
+theorem superTrace_eq_add_of_exact (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIso t.asHom)
     (h₁ : (1 : End (𝟙_ C)) ≠ 0) {A B D : ℤ → C} (φA : ∀ j, A j ⟶ A j) (φB : ∀ j, B j ⟶ B j)
     (φD : ∀ j, D j ⟶ D j) (u : ∀ j, A j ⟶ B j) (v : ∀ j, B j ⟶ D j) (w : ∀ j, D j ⟶ A (j + 1))
     (hu : ∀ j, φA j ≫ u j = u j ≫ φB j) (hv : ∀ j, φB j ≫ v j = v j ≫ φD j)

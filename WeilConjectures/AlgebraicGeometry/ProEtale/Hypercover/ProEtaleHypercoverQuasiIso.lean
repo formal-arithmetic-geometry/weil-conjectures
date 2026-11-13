@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Hypercover.ProEtaleHypercoverTotal
 public import Mathlib.Algebra.Homology.CochainComplexPlus
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleWeaklyContractibleEvaluationExact
 import WeilConjectures.Algebra.Homology.BoundedBelowTotalComparison
 import Mathlib.Algebra.Homology.TotalComplex

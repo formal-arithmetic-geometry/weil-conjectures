@@ -150,7 +150,6 @@ lemma leftDerivedUpperStarComp_inv_app_comp_congr_comp_hom_app_comparisonUpperSt
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
     ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
 
-set_option maxHeartbeats 400000 in
 -- the proof elaborates a long chain of naturality squares between derived categories
 /-- **Sections commute with base change, on complexes of étale origin.** Let `a : P ⟶ B` have a
 section `i`, let `a' : P' ⟶ B'` have a section `i'`, and let `v : P' ⟶ P` lie over

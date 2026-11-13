@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
 import Mathlib.Topology.Sheaves.Skyscraper
 import Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Invertibility of the pushout tensor comparison
 

@@ -89,11 +89,11 @@ structure EtaleQuotientData (W : WeilGroup p) where
   /-- The identification `π₁(C, s) ≃ W.geometric`. -/
   toGeometric : G ≃ₜ* W.geometric
   /-- The transport of the fibre functor along the geometric Galois Frobenius of `C`. -/
-  frobeniusTransport : mapIso p.geometricGaloisFrobenius ⋙ fiber point ≅ fiber point
+  frobeniusTransport : mapIso p.geometricGaloisFrobenius.asIso ⋙ fiber point ≅ fiber point
   /-- The action of the Frobenius on `π₁(C, s)` induced by the transport. -/
   frobeniusConj : G → G
   frobeniusTransport_smul (P : p.geometricFiber.FiniteEtale) (g : G)
-    (x : (fiber point).obj ((mapIso p.geometricGaloisFrobenius).obj P)) :
+    (x : (fiber point).obj ((mapIso p.geometricGaloisFrobenius.asIso).obj P)) :
     frobeniusTransport.hom.app P (g • x) = frobeniusConj g • frobeniusTransport.hom.app P x
   /-- On `W.geometric`, the Frobenius action is conjugation by an element of degree `± 1`. -/
   exists_conj : ∃ w : W.carrier,
@@ -195,7 +195,7 @@ theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyC
         ((t n).monodromy D.point D.G g).toAdd.down := by
     rw [ht, ht]
     exact ((PadicInt.continuousMonoidHomEquiv l D.G b').2 n g)
-  have hfix (n : ℕ) : ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n) := by
+  have hfix (n : ℕ) : ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n) := by
     refine Scheme.EtaleTorsor.isIsomorphic_of_monodromy_eq D.point D.G ?_
     ext g
     rw [Scheme.EtaleTorsor.monodromy_mapIso D.point D.G _ D.frobeniusTransport D.frobeniusConj

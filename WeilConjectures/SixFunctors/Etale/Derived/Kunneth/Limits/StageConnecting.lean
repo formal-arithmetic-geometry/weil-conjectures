@@ -118,7 +118,6 @@ noncomputable instance (priority := high) commShift_functor (α : LimitStage B W
     (functor Λ α).CommShift ℤ :=
   inferInstance
 
-set_option maxHeartbeats 1000000 in
 -- the instance arguments of the whiskered transformations are large
 instance commShift_transition {α β : LimitStage B W} (φ : Hom α β) :
     NatTrans.CommShift (transition Λ φ) ℤ := by

@@ -154,16 +154,19 @@ private def coefficientEnd
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O) ≅ E.obj (ModuleCat.of A A)) :
     A →+* End (SheafOfModules.unit
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)) where
-  toFun x := c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) ≫ c.inv
+  toFun x := .of (c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) ≫ c.inv)
   map_one' := by
+    apply End.ext
     have h : ModuleCat.ofHom (LinearMap.mul A A (1 : A)) = 𝟙 _ := by ext; simp
     change c.hom ≫ E.map _ ≫ c.inv = 𝟙 _
     rw [h, E.map_id, Category.id_comp, c.hom_inv_id]
   map_zero' := by
+    apply End.ext
     have h : ModuleCat.ofHom (LinearMap.mul A A (0 : A)) = 0 := by ext; simp
     change c.hom ≫ E.map _ ≫ c.inv = 0
     rw [h, E.map_zero, zero_comp, comp_zero]
   map_add' x y := by
+    apply End.ext
     have h : ModuleCat.ofHom (LinearMap.mul A A (x + y)) =
         ModuleCat.ofHom (LinearMap.mul A A x) +
           ModuleCat.ofHom (LinearMap.mul A A y) := by
@@ -172,8 +175,9 @@ private def coefficientEnd
       intro z
       exact add_mul x y z
     change c.hom ≫ E.map _ ≫ c.inv = _
-    rw [h, E.map_add, Preadditive.add_comp, Preadditive.comp_add]
+    rw [h, E.map_add, Preadditive.add_comp, Preadditive.comp_add, End.add_asHom]
   map_mul' x y := by
+    apply End.ext
     have h : ModuleCat.ofHom (LinearMap.mul A A (x * y)) =
         ModuleCat.ofHom (LinearMap.mul A A y) ≫
           ModuleCat.ofHom (LinearMap.mul A A x) := by
@@ -238,7 +242,7 @@ theorem exteriorKoszul_scalar_realization
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O) ≅ E.obj (ModuleCat.of A A))
     (s : A → (O.obj ⋙ forget CommRingCat).sections)
     (hs : ∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
-      ringedKoszulScalar O (s x) ≫ c.hom)
+      (ringedKoszulScalar O (s x)).asHom ≫ c.hom)
     (r : ℕ) (a : Fin r → A)
     (t : ∀ n m : ℕ, n ≤ m →
       (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶
@@ -266,10 +270,11 @@ theorem exteriorKoszul_scalar_realization
   let D := ringedKoszulDualTower O r (fun i ↦ s (a i))
   let ρ := coefficientEnd O E c
   have hscalar (x : A) : c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
-      ρ x ≫ c.hom := by
+      (ρ x).asHom ≫ c.hom := by
     change c.hom ≫ E.map _ = (c.hom ≫ E.map _ ≫ c.inv) ≫ c.hom
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   have hρ (i : Fin r) : ρ (a i) = ringedKoszulScalar O (s (a i)) := by
+    apply End.ext
     apply (cancel_mono c.hom).1
     rw [← hscalar, hs]
   obtain ⟨b, hb, hd, htower, hu⟩ := exists_ringedKoszulDualBasis O ρ r a

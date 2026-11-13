@@ -71,9 +71,9 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
       (∀ (U V : X.Opens) (j : V ⟶ U) (f : C.right.obj.obj (op U)) (x : I.val.obj (op U)),
         I.val.map j.op (σ U f x) = σ V (C.right.obj.map j.op f) (I.val.map j.op x)) ∧
       (∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens) (x : I.val.obj (op U)),
-        (μ f).val.app (op U) x = σ U (C.right.obj.map (homOfLE le_top).op f) x) ∧
+        (μ f).asHom.val.app (op U) x = σ U (C.right.obj.map (homOfLE le_top).op f) x) ∧
       (∀ f : C.right.obj.obj (op ⊤), ρ f =
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f)).hom) ∧
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map ((μ f)).asHom).hom) ∧
       (∀ f : C.right.obj.obj (op ⊤), δ f =
         (((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
             (commAlgebraSheafModule X.sheaf C) ≫
@@ -85,7 +85,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
   classical
   obtain ⟨σ, hσ, hres⟩ := square_zero_quotient_local_action X B C p I i hw _hS _hsq
   let μ : C.right.obj.obj (op ⊤) →+* End I :=
-    { toFun := fun f ↦
+    { toFun := fun f ↦ End.of
         { val :=
             { app := fun U ↦ ModuleCat.ofHom
                 (σ U.unop (C.right.obj.map (homOfLE le_top).op f))
@@ -103,6 +103,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
                 simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
                 rfl } }
       map_one' := by
+        apply End.ext
         apply SheafOfModules.hom_ext
         apply PresheafOfModules.hom_ext
         intro U
@@ -112,6 +113,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
         simp
       map_mul' := by
         intro f g
+        apply End.ext
         apply SheafOfModules.hom_ext
         apply PresheafOfModules.hom_ext
         intro U
@@ -122,6 +124,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
             (σ U.unop (C.right.obj.map (homOfLE le_top).op g) x)
         simp
       map_zero' := by
+        apply End.ext
         apply SheafOfModules.hom_ext
         apply PresheafOfModules.hom_ext
         intro U
@@ -131,6 +134,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
         simp
       map_add' := by
         intro f g
+        apply End.ext
         apply SheafOfModules.hom_ext
         apply PresheafOfModules.hom_ext
         intro U
@@ -146,8 +150,8 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
   let H := RingedSpace.moduleCohomology X.toRingedSpace 1
   let e : End I →+* End (H.obj I) :=
     { __ := H.mapEnd I
-      map_zero' := H.map_zero I I
-      map_add' := fun f g ↦ H.map_add }
+      map_zero' := End.ext (H.map_zero I I)
+      map_add' := fun f g ↦ End.ext H.map_add }
   let ρ : C.right.obj.obj (op ⊤) →+*
       Module.End ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) (H.obj I) :=
     (ModuleCat.endRingEquiv (H.obj I)).toRingHom.comp (e.comp μ)
@@ -169,7 +173,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
   · have hlift : ∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens)
         (b : B.right.obj.obj (op U)) (x : I.val.obj (op U)),
         p.right.hom.app (op U) b = C.right.obj.map (homOfLE le_top).op f →
-        @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).val.app (op U) x)) =
+        @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).asHom.val.app (op U) x)) =
           b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x) := by
       intro f U b x hb
       change i.val.app (op U)

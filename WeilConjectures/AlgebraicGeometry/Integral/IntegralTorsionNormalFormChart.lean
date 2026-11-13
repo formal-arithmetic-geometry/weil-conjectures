@@ -304,7 +304,7 @@ theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
             (pbcAdicProjection T d n))).obj
           ((proEtaleRingModulePullback g ((pbcAdicRings T d).obj (op n))
             ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
-            (Iso.refl _)).obj (tor n)) ⟶ cokernel f,
+            (Iso.refl _)).obj (tor n)) ⟶ cokernel f.asHom,
           Epi t := by
   intro d B tor B' P
   let := pbcIntegralRing_isDomain l E
@@ -327,28 +327,28 @@ theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
   have : PreservesFiniteLimits G := comp_preservesFiniteLimits _ _
   have := preservesBinaryBiproducts_of_preservesBinaryProducts G
   obtain ⟨F, hF, ⟨eF⟩⟩ := chart_free_sheaf (l := l) (E := E) T g r
-  let φ : End N₀' := ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id)
+  let φ : End N₀' := .of (ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id))
   refine ⟨r, F, G.obj N₀', hF, ⟨chartHomologyIso T g K q C e ≪≫ G.mapIso ε' ≪≫
-    G.mapBiprod _ _ ≪≫ biprod.mapIso eF (Iso.refl _)⟩, G.map φ, ⟨k, ?_⟩, ?_⟩
+    G.mapBiprod _ _ ≪≫ biprod.mapIso eF (Iso.refl _)⟩, G.mapEnd N₀' φ, ⟨k, ?_⟩, ?_⟩
   · have hpow (m : ℕ) :
-        φ ^ m = ModuleCat.ofHom (pbcUniformizer l E ^ m • LinearMap.id) := by
+        φ ^ m = .of (ModuleCat.ofHom (pbcUniformizer l E ^ m • LinearMap.id)) := by
       induction m with
       | zero =>
-        refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+        refine End.ext (ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_))
         change x = pbcUniformizer l E ^ 0 • x
         rw [pow_zero, one_smul]
       | succ m ih =>
         rw [pow_succ, ih]
-        refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+        refine End.ext (ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_))
         change pbcUniformizer l E ^ m • (pbcUniformizer l E • x) =
           pbcUniformizer l E ^ (m + 1) • x
         rw [pow_succ, mul_smul]
     have hφ : φ ^ k = 0 := by
       rw [hpow]
-      exact ModuleCat.hom_ext (LinearMap.ext fun x ↦ hk x)
+      exact End.ext (ModuleCat.hom_ext (LinearMap.ext fun x ↦ hk x))
     change (G.mapEnd N₀') φ ^ k = 0
     rw [← map_pow, hφ]
-    exact G.map_zero N₀' N₀'
+    exact End.ext (G.map_zero N₀' N₀')
   · exact chart_tor_epi T g K q C hC e r N₀' ε' k hk
 
 end AlgebraicGeometry.Scheme

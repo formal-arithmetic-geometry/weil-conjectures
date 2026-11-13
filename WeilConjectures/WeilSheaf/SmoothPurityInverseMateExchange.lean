@@ -19,7 +19,7 @@ lemma inverseMate_natTrans_eq_exchangeLeft
     {L : A ⥤ B} {R : B ⥤ A} {L' : A' ⥤ B'} {R' : B' ⥤ A'}
     (a : L ⊣ R) (a' : L' ⊣ R') {P : A ⥤ A'} {Q : B ⥤ B'}
     (θ : R ⋙ P ≅ Q ⋙ R') :
-    ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ θ.hom)).natTrans =
+    ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ θ.hom)) =
       exchangeLeft a a' θ := by
   ext K
   simp [mateEquiv_symm_apply, exchangeLeft_app]

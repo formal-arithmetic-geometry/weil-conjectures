@@ -47,7 +47,6 @@ private theorem tower_limit_projection_injective
     have hh := congrArg (fun z ↦ F.map (homOfLE hn').op z) heq
     simpa only [← ConcreteCategory.comp_apply, limit.w] using hh
 
-set_option maxHeartbeats 800000 in
 -- Transport between derived sections, presheaf evaluation and module stalks needs extra reduction.
 /-- Eventual injectivity of open cohomology and vanishing of its first derived inverse
 limit imply injectivity of the specified projection on cohomology stalks.
