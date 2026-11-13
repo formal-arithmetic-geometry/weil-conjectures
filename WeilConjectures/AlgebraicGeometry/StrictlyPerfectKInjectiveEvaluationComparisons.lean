@@ -51,9 +51,9 @@ private theorem exists_iso_comparison_of_inverse {C : Type*} [Category C]
   refine ⟨e ≪≫ b ≪≫ (asIso f).symm, b, ?_⟩
   simp [e, Category.assoc]
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+-- The restriction and Hom models use equivalent localized-site carriers.
 /-- The local evaluation square when its second representative is already K-injective.
 This only handles the resolved case; it does not assert the comparison for an arbitrary
 second complex.
@@ -106,6 +106,7 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
           DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F),
         R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by
   classical
+  -- Reuse the statement's models without elaborating their definitions a second time.
   intro R H D g
   have : ∀ n : ℤ, IsIso (f.f n) :=
     fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F hstrict f hf n
