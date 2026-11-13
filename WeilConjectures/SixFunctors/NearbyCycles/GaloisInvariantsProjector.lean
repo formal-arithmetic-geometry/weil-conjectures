@@ -343,6 +343,9 @@ private theorem projector_hasGoodTensorTensor₂₃ (S : Scheme.{u})
       GradedObject.HasGoodTensorTensor₂₃ P Q R₁ := by
   infer_instance
 
+attribute [local instance] projector_hasTensor₄ObjExt projector_hasGoodTensor₁₂Tensor
+  projector_hasGoodTensorTensor₂₃
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
@@ -379,9 +382,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
-  have := projector_hasTensor₄ObjExt.{u}
-  have := projector_hasGoodTensor₁₂Tensor.{u}
-  have := projector_hasGoodTensorTensor₂₃.{u}
   have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
@@ -480,9 +480,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
-  have := projector_hasTensor₄ObjExt.{u}
-  have := projector_hasGoodTensor₁₂Tensor.{u}
-  have := projector_hasGoodTensorTensor₂₃.{u}
   have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
     (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
