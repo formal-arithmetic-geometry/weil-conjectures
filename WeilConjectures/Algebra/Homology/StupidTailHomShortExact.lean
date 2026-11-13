@@ -83,10 +83,46 @@ private lemma homMap_add {C : Type u} [SmallCategory C]
     ((φ.app W).hom) ((f.val.app _).hom x) + ((φ.app W).hom) ((g.val.app _).hom x)
   exact map_add _ _ _
 
+-- Construct the product splitting in an abstract category so that its identities do not
+-- repeatedly elaborate the internal Hom objects and the chosen Hom-complex functor.
+private noncomputable def stupidTailFanSplitting
+    {D : Type*} [Category* D] [Preadditive D] {I : Type*}
+    (S : ShortComplex D) (T : I → ShortComplex D)
+    (p₁ : ∀ i, S.X₁ ⟶ (T i).X₁) (p₂ : ∀ i, S.X₂ ⟶ (T i).X₂)
+    (p₃ : ∀ i, S.X₃ ⟶ (T i).X₃)
+    (h₁ : IsLimit (Fan.mk _ p₁)) (h₂ : IsLimit (Fan.mk _ p₂))
+    (h₃ : IsLimit (Fan.mk _ p₃)) (σ : ∀ i, (T i).Splitting)
+    (hf : ∀ i, S.f ≫ p₂ i = p₁ i ≫ (T i).f)
+    (hg : ∀ i, S.g ≫ p₃ i = p₂ i ≫ (T i).g) : S.Splitting := by
+  let r : S.X₂ ⟶ S.X₁ := Fan.IsLimit.lift h₁ (fun i ↦ p₂ i ≫ (σ i).r)
+  let s : S.X₃ ⟶ S.X₂ := Fan.IsLimit.lift h₂ (fun i ↦ p₃ i ≫ (σ i).s)
+  have hr (i) : r ≫ p₁ i = p₂ i ≫ (σ i).r := Fan.IsLimit.fac _ _ _
+  have hs (i) : s ≫ p₂ i = p₃ i ≫ (σ i).s := Fan.IsLimit.fac _ _ _
+  refine { r := r, s := s, f_r := ?_, s_g := ?_, id := ?_ }
+  · apply Fan.IsLimit.hom_ext h₁
+    intro i
+    change (S.f ≫ r) ≫ p₁ i = (𝟙 _) ≫ p₁ i
+    rw [Category.assoc, hr, ← Category.assoc, hf, Category.assoc,
+      (σ i).f_r, Category.comp_id, Category.id_comp]
+  · apply Fan.IsLimit.hom_ext h₃
+    intro i
+    change (s ≫ S.g) ≫ p₃ i = (𝟙 _) ≫ p₃ i
+    rw [Category.assoc, hg, ← Category.assoc, hs, Category.assoc,
+      (σ i).s_g, Category.comp_id, Category.id_comp]
+  · apply Fan.IsLimit.hom_ext h₂
+    intro i
+    change (r ≫ S.f + S.g ≫ s) ≫ p₂ i = (𝟙 _) ≫ p₂ i
+    calc
+      (r ≫ S.f + S.g ≫ s) ≫ p₂ i =
+          (r ≫ p₁ i) ≫ (T i).f + (S.g ≫ p₃ i) ≫ (σ i).s := by
+        simp only [Preadditive.add_comp, Category.assoc, hf, hs]
+      _ = p₂ i ≫ ((σ i).r ≫ (T i).f + (T i).g ≫ (σ i).s) := by
+        rw [hr, hg]
+        simp only [Category.assoc, Preadditive.comp_add]
+      _ = (𝟙 _) ≫ p₂ i := by rw [(σ i).id, Category.comp_id, Category.id_comp]
+
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Elaborating the dependent product lifts and their three splitting identities needs extra steps.
 private lemma homComplex_degreewise_split {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}}
     (S : ShortComplex (CochainComplex (SheafOfModules.{u}
@@ -98,11 +134,6 @@ private lemma homComplex_degreewise_split {C : Type u} [SmallCategory C]
     (S.op.map ((homComplexFunctor (R := R)).flip.obj M)).ShortExact := by
   classical
   let F := homComplexFunctor (R := R)
-  let ss : ∀ p, S.X₃.X p ⟶ S.X₂.X p := fun p ↦ (σ p).s
-  let rr : ∀ p, S.X₂.X p ⟶ S.X₁.X p := fun p ↦ (σ p).r
-  have hss (p) : ss p ≫ S.g.f p = 𝟙 _ := (σ p).s_g
-  have hrr (p) : S.f.f p ≫ rr p = 𝟙 _ := (σ p).f_r
-  have hid (p) : rr p ≫ S.f.f p + S.g.f p ≫ ss p = 𝟙 _ := (σ p).id
   obtain ⟨π, hlim, _, hmap⟩ :=
     homComplex_projections_exists.{u, u, u, u} (C := C) (J := J) (R := R)
   have hm {L L' : CochainComplex (SheafOfModules.{u}
@@ -114,62 +145,22 @@ private lemma homComplex_degreewise_split {C : Type u} [SmallCategory C]
       hmap L L' M M f (𝟙 M) n p (p + n) rfl
   apply HomologicalComplex.shortExact_of_degreewise_shortExact
   intro n
-  let r : (((F.obj (op S.X₂)).obj M).X n) ⟶ (((F.obj (op S.X₃)).obj M).X n) :=
-    Fan.IsLimit.lift (Classical.choice (hlim S.X₃ M n))
-      (fun p ↦ π S.X₂ M n p (p + n) rfl ≫ SheafOfModules.homObjMap (R := R) (ss p) (𝟙 _))
-  let t : (((F.obj (op S.X₁)).obj M).X n) ⟶ (((F.obj (op S.X₂)).obj M).X n) :=
-    Fan.IsLimit.lift (Classical.choice (hlim S.X₂ M n))
-      (fun p ↦ π S.X₁ M n p (p + n) rfl ≫ SheafOfModules.homObjMap (R := R) (rr p) (𝟙 _))
-  have hr (p : ℤ) : r ≫ π S.X₃ M n p (p + n) rfl =
-      π S.X₂ M n p (p + n) rfl ≫ SheafOfModules.homObjMap (R := R) (ss p) (𝟙 _) :=
-    Fan.IsLimit.fac _ _ _
-  have ht (p : ℤ) : t ≫ π S.X₂ M n p (p + n) rfl =
-      π S.X₁ M n p (p + n) rfl ≫ SheafOfModules.homObjMap (R := R) (rr p) (𝟙 _) :=
-    Fan.IsLimit.fac _ _ _
-  apply ShortComplex.Splitting.shortExact
-  refine { r := r, s := t, f_r := ?_, s_g := ?_, id := ?_ }
-  · apply Fan.IsLimit.hom_ext (Classical.choice (hlim S.X₃ M n))
-    intro p
-    change (((F.map S.g.op).app M).f n ≫ r) ≫ π S.X₃ M n p (p + n) rfl =
-      𝟙 (((F.obj (op S.X₃)).obj M).X n) ≫ π S.X₃ M n p (p + n) rfl
-    rw [Category.assoc, hr, ← Category.assoc, hm, Category.assoc,
-      (SheafOfModules.homObjMap_comp_homObjMap (R := R)
-        (S.g.f p) (ss p) (𝟙 (M.X (p + n))) (𝟙 _))]
-    simp only [Category.id_comp]
-    change π S.X₃ M n p (p + n) rfl ≫
-      SheafOfModules.homObjMap (R := R) ((ss p) ≫ (S.g.f p)) (𝟙 _) = _
-    rw [hss p]
-    simp
-  · apply Fan.IsLimit.hom_ext (Classical.choice (hlim S.X₁ M n))
-    intro p
-    change (t ≫ ((F.map S.f.op).app M).f n) ≫ π S.X₁ M n p (p + n) rfl =
-      𝟙 (((F.obj (op S.X₁)).obj M).X n) ≫ π S.X₁ M n p (p + n) rfl
-    rw [Category.assoc, hm, ← Category.assoc, ht, Category.assoc,
-      (SheafOfModules.homObjMap_comp_homObjMap (R := R)
-        (rr p) (S.f.f p) (𝟙 (M.X (p + n))) (𝟙 _))]
-    simp only [Category.id_comp]
-    change π S.X₁ M n p (p + n) rfl ≫
-      SheafOfModules.homObjMap (R := R) ((S.f.f p) ≫ (rr p)) (𝟙 _) = _
-    rw [hrr p]
-    simp
-  · apply Fan.IsLimit.hom_ext (Classical.choice (hlim S.X₂ M n))
-    intro p
-    change (r ≫ ((F.map S.g.op).app M).f n +
-      ((F.map S.f.op).app M).f n ≫ t) ≫ π S.X₂ M n p (p + n) rfl =
-      𝟙 (((F.obj (op S.X₂)).obj M).X n) ≫ π S.X₂ M n p (p + n) rfl
-    rw [Preadditive.add_comp, Category.assoc, hm, ← Category.assoc, hr,
-      Category.assoc, (SheafOfModules.homObjMap_comp_homObjMap (R := R)
-        (ss p) (S.g.f p) (𝟙 (M.X (p + n))) (𝟙 _)),
-      Category.assoc, ht, ← Category.assoc, hm,
-      Category.assoc, (SheafOfModules.homObjMap_comp_homObjMap (R := R)
-        (S.f.f p) (rr p) (𝟙 (M.X (p + n))) (𝟙 _))]
-    simp only [Category.id_comp]
-    rw [← Preadditive.comp_add, ← homMap_add]
-    have hs : S.g.f p ≫ (ss p) + (rr p) ≫ S.f.f p = 𝟙 _ := by
-      rw [add_comm]
-      exact hid p
-    rw [hs]
-    simp
+  let G (p : ℤ) := (SheafOfModules.homFunctor R).flip.obj (M.X (p + n))
+  have hG (p : ℤ) : (G p).Additive := by
+    constructor
+    intro X Y a b
+    change SheafOfModules.homObjMap (R := R) (a + b).unop (𝟙 _) = _
+    rw [unop_add]
+    exact homMap_add a.unop b.unop
+  let T (p : ℤ) := (S.map (HomologicalComplex.eval _ (.up ℤ) p)).op.map (G p)
+  have hT (p : ℤ) : (T p).Splitting := (σ p).op.map (G p)
+  exact (stupidTailFanSplitting _ T
+    (fun p ↦ π S.X₃ M n p (p + n) rfl)
+    (fun p ↦ π S.X₂ M n p (p + n) rfl)
+    (fun p ↦ π S.X₁ M n p (p + n) rfl)
+    (Classical.choice (hlim S.X₃ M n)) (Classical.choice (hlim S.X₂ M n))
+    (Classical.choice (hlim S.X₁ M n)) hT
+    (fun p ↦ hm S.g n p) (fun p ↦ hm S.f n p)).shortExact
 
 /-- The Hom maps for the bottom source term, the entire source, and its next stupid
 tail occur as the three components of a morphism of short exact sequences.
