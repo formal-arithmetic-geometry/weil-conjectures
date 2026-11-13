@@ -503,7 +503,10 @@ theorem ringedSlice_scalar_unit :
     let βU := hβU_model.choose
     have hβU := hβU_model.choose_spec.1
     have heβU := hβU_model.choose_spec.2
-    rw [K.tensorIso_both P O hP (unit_kflat.{c, v, r} J R)] at heβ
+    conv at heβ =>
+      lhs
+      arg 1
+      rw [K.tensorIso_both P O hP (unit_kflat.{c, v, r} J R)]
     have hchain : F.map β.hom = γ.hom ≫
         (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
           (𝟙 (F.obj P), e.hom) ≫ βU.hom := by
@@ -537,7 +540,10 @@ theorem ringedSlice_scalar_unit :
     let α := α₀
     have hPU := (d₀.kflat P hP fP).1
     have hOU := unit_kflat.{max c v, v, r} (J.over U) (R.over U)
-    rw [KU.tensorIso_both _ _ hPU hOU] at heβU
+    conv at heβU =>
+      lhs
+      arg 1
+      rw [KU.tensorIso_both _ _ hPU hOU]
     let c := α.app ((coefficientTotalTensor.{r, c, v} J R).obj (P, O)) ≪≫
       DerivedCategory.Q.mapIso γ ≪≫ DerivedCategory.Q.mapIso
         ((coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).mapIso
