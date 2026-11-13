@@ -412,9 +412,14 @@ private theorem nativeReductionMonoidal
         with_unfolding_all
           exact reduction_normalized_comparison hcs hnorm hcan hr
       trace "PH805: normalization transported"
+      have ht := reduction_tensorComparison_transport F e f m.mu
+        (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) hcr εP εQ
+      trace "PH805: tensor comparison transported"
+      dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
+        F, integralDerivedReduction, mu, AS, CoefficientClosedStructure.tensor,
+        CategoryTheory.Functor.prod_obj] at ht hn ⊢
       with_unfolding_all
-        exact (reduction_tensorComparison_transport F e f m.mu
-          (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) hcr εP εQ).trans hn)
+        exact ht.trans hn)
   trace "PH805: resulting tensorator"
   refine ⟨core, ?_⟩
   intro X Z
