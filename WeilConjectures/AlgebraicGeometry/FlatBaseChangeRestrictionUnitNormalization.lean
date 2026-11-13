@@ -24,6 +24,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The statement elaborates nested pullback and pushforward comparisons.
 /-- The unit square pins the double transpose to the canonical pullback comparison.

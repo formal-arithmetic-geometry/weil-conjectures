@@ -28,6 +28,7 @@ attribute [local instance] enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Explicit section comparisons require unfolding several categorical functor composites.
 /-- The canonical section class map intertwines multiplication endomorphisms.

@@ -96,6 +96,7 @@ def cohomologyOpenRestriction {Y : Scheme.{u}} (G : Y.Modules)
       (pushforward j).map c.hom) p
 
 set_option backward.defeqAttrib.useBackward true in
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing section complexes unfolds the scheme and ringed-space module interfaces.
 /-- The normalized resolution class commutes with restriction between arbitrary opens.
