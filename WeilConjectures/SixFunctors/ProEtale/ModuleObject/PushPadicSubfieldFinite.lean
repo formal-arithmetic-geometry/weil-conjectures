@@ -43,7 +43,7 @@ open CategoryTheory Limits MonoidalCategory MonObj Functor.LaxMonoidal
 open scoped CategoryTheory.Obj
 
 private lemma biproduct_desc_comp_eq {C : Type*} [Category* C] [HasZeroMorphisms C]
-    {ι : Type*} {A : ι → C} [HasBiproduct A] {B D : C}
+    {J : Type*} {A : J → C} [HasBiproduct A] {B D : C}
     (g : ∀ i, A i ⟶ B) (f : B ⟶ D) :
     biproduct.desc g ≫ f = biproduct.desc (fun i ↦ g i ≫ f) := by
   apply biproduct.hom_ext'
