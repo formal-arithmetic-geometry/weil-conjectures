@@ -50,6 +50,15 @@ private theorem finiteInsertion_iso_cancel {D : Type*} [Category* D]
   simpa only [Category.assoc, Iso.inv_hom_id_assoc] using
     congrArg (fun k ↦ k ≫ e.hom ≫ g) h.symm
 
+private theorem finiteInsertion_isIso {D : Type*} [Category* D]
+    {X Y Z : D} (f : X ⟶ Y) (e : Y ≅ Z) (e' : X ≅ Z)
+    (h : f ≫ e.hom = e'.hom) : IsIso f := by
+  have hf : f = e'.hom ≫ e.inv := by
+    apply (cancel_mono e.hom).mp
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
+  rw [hf]
+  infer_instance
+
 private theorem finiteInsertion_naturality {R S : Sheaf J CommRingCat.{u}}
     (c : R ⟶ S) {M N : Mod R} (f : M ⟶ N) :
     insertion c M ≫ (underlying S).map ((change c).map f) =
@@ -96,6 +105,7 @@ private theorem finiteScalarComposite_exists {R S T : Sheaf J CommRingCat.{u}}
 include V adj hL
 
 -- The proof forms two successive mates under four adjunctions.
+set_option profiler true in
 private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     ∃ e : (F.algebra R).modules ⋙ change (F.rings.map a) ≅
         change a ⋙ (F.algebra S).modules,
@@ -117,30 +127,23 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
     R (F.rings.obj R) L V adj (F.algebra R)
   obtain ⟨PS, eS, amS, hS⟩ := WeilConjectures.SemilinearSections.normalizedModuleAdjunction_exists
     S (F.rings.obj S) L V adj (F.algebra S)
-  have hi (N : Mod S) : IsIso ((inverseRestriction F a).app N) := by
-    have : IsIso ((underlying (F.rings.obj R)).map ((inverseRestriction F a).app N)) := by
-      change IsIso (restrictionUnderlying F a N).hom
-      infer_instance
-    exact isIso_of_reflects_iso _ (underlying (F.rings.obj R))
-  have : ∀ N, IsIso ((inverseRestriction F a).app N) := hi
-  have := NatIso.isIso_of_isIso_app (inverseRestriction F a)
-  obtain ⟨ri, hri⟩ : ∃ ri : res a ⋙ (F.algebra R).modules ≅
+  obtain ⟨ri, hri⟩ : ∃ ri : res a ⋙ (F.algebra R).modules ⟶
       (F.algebra S).modules ⋙ res (F.rings.map a),
-      ∀ N : Mod S, (underlying (F.rings.obj R)).map (ri.hom.app N) =
+      ∀ N : Mod S, (underlying (F.rings.obj R)).map (ri.app N) =
         (restrictionUnderlying F a N).hom :=
-    ⟨asIso (inverseRestriction F a), fun _ ↦ rfl⟩
+    ⟨inverseRestriction F a, fun _ ↦ rfl⟩
   -- The right mate becomes an underlying-sheaf isomorphism by normalization.
   let pr : PS ⋙ res a ⟶ res (F.rings.map a) ⋙ PR :=
-    (mateEquiv amS amR (TwoSquare.mk _ _ _ _ ri.hom))
+    (mateEquiv amS amR (TwoSquare.mk _ _ _ _ ri))
   have hpr (N : Mod (F.rings.obj S)) :
       (underlying R).map (pr.app N) ≫
           eR.hom.app ((res (F.rings.map a)).obj N) = eS.hom.app N := by
-    let f := ri.hom.app (PS.obj N) ≫
+    let f := ri.app (PS.obj N) ≫
       (res (F.rings.map a)).map (amS.counit.app N)
     have hm : amR.homEquiv _ _ f = pr.app N := by
       apply (amR.homEquiv _ _).symm.injective
       rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
-      exact (mateEquiv_counit amS amR (TwoSquare.mk _ _ _ _ ri.hom) N).symm
+      exact (mateEquiv_counit amS amR (TwoSquare.mk _ _ _ _ ri) N).symm
     have hf : (F.algebra R).moduleUnderlying.inv.app ((res a).obj (PS.obj N)) ≫
         (underlying (F.rings.obj R)).map f =
       (F.algebra S).moduleUnderlying.inv.app (PS.obj N) ≫
@@ -165,12 +168,8 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
             ((congrArg (fun k ↦ k ≫ eS.hom.app N) ((underlying S).map_id _)).trans
               (Category.id_comp _))))))
   have hpri (N : Mod (F.rings.obj S)) : IsIso (pr.app N) := by
-    have he : (underlying R).map (pr.app N) =
-        eS.hom.app N ≫ eR.inv.app ((res (F.rings.map a)).obj N) := by
-      apply (cancel_mono (eR.hom.app _)).1
-      exact (hpr N).trans (by simp only [Category.assoc, Iso.inv_hom_id_app,
-        Category.comp_id])
-    have : IsIso ((underlying R).map (pr.app N)) := by rw [he]; infer_instance
+    have : IsIso ((underlying R).map (pr.app N)) :=
+      finiteInsertion_isIso _ (eR.app _) (eS.app N) (hpr N)
     exact isIso_of_reflects_iso _ (underlying R)
   have : ∀ N, IsIso (pr.app N) := hpri
   have := NatIso.isIso_of_isIso_app pr
@@ -178,11 +177,11 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
   let b : (F.algebra R).modules ⋙ change (F.rings.map a) ⟶
       change a ⋙ (F.algebra S).modules :=
     ((mateEquiv amA amB).symm
-      (TwoSquare.mk _ _ _ _ ri.hom))
+      (TwoSquare.mk _ _ _ _ ri))
   have he : conjugateEquiv (amA.comp amS)
       (amR.comp amB) b = pr := by
     let β := (mateEquiv amA amB).symm
-      (TwoSquare.mk _ _ _ _ ri.hom)
+      (TwoSquare.mk _ _ _ _ ri)
     have h := iterated_mateEquiv_conjugateEquiv
       amA amB amR amS β
     simpa only [β, b, pr, Equiv.apply_symm_apply] using h.symm
@@ -193,9 +192,9 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
   refine ⟨asIso b, ?_⟩
   intro M
   have hu := unit_mateEquiv_symm amA amB
-    (TwoSquare.mk _ _ _ _ ri.hom) M
+    (TwoSquare.mk _ _ _ _ ri) M
   change (F.algebra R).modules.map (amA.unit.app M) ≫
-      ri.hom.app ((change a).obj M) =
+      ri.app ((change a).obj M) =
     amB.unit.app ((F.algebra R).modules.obj M) ≫
       (res (F.rings.map a)).map (b.app M) at hu
   have h := congrArg (fun f ↦ (F.algebra R).moduleUnderlying.inv.app M ≫
