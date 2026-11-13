@@ -38,6 +38,30 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+-- Compute the two actions on ordinary modules, without unfolding sheaf section instances.
+private theorem affine_pushout_first_action
+    {C D N M : Type*} [CommRing C] [CommRing D] [AddCommGroup M] [Module D M]
+    (b : C →+* D) (p : C → N → M) (v : N → M)
+    (hp : ∀ d n, p d n = b d • v n) :
+    (∀ c d n, b c • p d n = p (c * d) n) ∧ ∀ n, p 1 n = v n := by
+  constructor
+  · intro c d n
+    simp only [hp, map_mul, mul_smul]
+  · intro n
+    simp only [hp, map_one, one_smul]
+
+private theorem affine_pushout_second_action
+    {C D N M : Type*} [CommRing C] [CommRing D] [SMul C N]
+    [AddCommGroup M] [Module D M]
+    (b δ : C →+* D) (p : C → N → M) (v : N → M)
+    (hb : ∀ c d n, b c • p d n = p (c * d) n)
+    (hu : ∀ n, p 1 n = v n) (hv : ∀ c n, δ c • v n = v (c • n)) :
+    ∀ c d n, δ c • p d n = p d (c • n) := by
+  have hp (d : C) (n : N) : p d n = b d • v n := by
+    simpa only [mul_one, hu] using (hb d 1 n).symm
+  intro c d n
+  rw [hp, hp, smul_comm, hv]
+
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
 local instance instHasLeftKanExtension_affinePushoutModuleSectionPresentation
@@ -83,30 +107,6 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
-
--- Compute the two actions on ordinary modules, without unfolding sheaf section instances.
-private theorem affine_pushout_first_action
-    {C D N M : Type*} [CommRing C] [CommRing D] [AddCommGroup M] [Module D M]
-    (b : C →+* D) (p : C → N → M) (v : N → M)
-    (hp : ∀ d n, p d n = b d • v n) :
-    (∀ c d n, b c • p d n = p (c * d) n) ∧ ∀ n, p 1 n = v n := by
-  constructor
-  · intro c d n
-    simp only [hp, map_mul, mul_smul]
-  · intro n
-    simp only [hp, map_one, one_smul]
-
-private theorem affine_pushout_second_action
-    {C D N M : Type*} [CommRing C] [CommRing D] [SMul C N]
-    [AddCommGroup M] [Module D M]
-    (b δ : C →+* D) (p : C → N → M) (v : N → M)
-    (hb : ∀ c d n, b c • p d n = p (c * d) n)
-    (hu : ∀ n, p 1 n = v n) (hv : ∀ c n, δ c • v n = v (c • n)) :
-    ∀ c d n, δ c • p d n = p d (c • n) := by
-  have hp (d : C) (n : N) : p d n = b d • v n := by
-    simpa only [mul_one, hu] using (hb d 1 n).symm
-  intro c d n
-  rw [hp, hp, smul_comm, hv]
 
 set_option profiler true in
 -- The affine-section comparison requires transport between restricted section-module instances.
@@ -167,7 +167,10 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
       c ((S).obj G) hS (n ⊗ₜ[Γ(X, V)] d) =
         d • (show Γ((tensorPullback f).obj ((S).obj G), f ⁻¹ᵁ V) from
           (((adj₀).unit.app ((S).obj G)).val.app (op V) n)) := by
-    simpa only [Functor.map_id, ConcreteCategory.id_apply] using htmul ((S).obj G) hS n d
+    have hid : ((tensorPullback f).obj ((S).obj G)).presheaf.map
+        (homOfLE (show f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V from le_rfl)).op = 𝟙 _ :=
+      ((tensorPullback f).obj ((S).obj G)).presheaf.map_id _
+    simpa only [hid, ConcreteCategory.id_apply] using htmul ((S).obj G) hS n d
   have hp (d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)) :
       p (d ⊗ₜ[Γ(X, V)] n) = (b.hom.app (op (f ⁻¹ᵁ V))).hom d •
         (show (P.obj G).val.obj (op (f ⁻¹ᵁ V)) from
