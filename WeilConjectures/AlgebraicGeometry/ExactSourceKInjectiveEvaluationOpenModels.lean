@@ -42,7 +42,6 @@ local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating the transported models unfolds the exact-functor factorization.
 /-- Ordinary representative evaluation when the coefficient complex is K-injective.
 Source: Stacks Project, cohomology.tex, Tags 08DJ (lemma-internal-hom),
