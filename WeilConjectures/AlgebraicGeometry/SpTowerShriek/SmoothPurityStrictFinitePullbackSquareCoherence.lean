@@ -591,7 +591,6 @@ private theorem pasteFunctorComparisonSquares
     (Iso.app iL (ED.obj M)) (Iso.app iR (ED.obj M)) (Iso.app ti (ED.obj M)) hl hr hc
 
 -- Assemble the square over an arbitrary finite ring before specializing its coefficients.
-set_option trace.profiler true in
 private theorem native_pullback_square (A : Type u) [CommRing A] [Finite A]
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -654,7 +653,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
-set_option trace.profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words.
 Source: blueprint operations proof (2), pullback compositor normalization.
