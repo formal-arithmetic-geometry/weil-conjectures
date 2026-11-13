@@ -175,7 +175,6 @@ noncomputable instance localizingLowerShriekCommShift (c : Compactification f)
     (fun K ↦ h K.obj K.property)).CommShift ℤ)
 
 set_option linter.unusedVariables false in
-set_option profiler true in
 /-- The compactification lower shriek on localizing closures has an exact right adjoint,
 unique up to the unique counit-compatible isomorphism, and that adjoint preserves all small
 coproducts. The existential triangulated structures are proofs that the recorded object
@@ -259,6 +258,7 @@ theorem exists_localizingExceptionalAdjoint
   obtain ⟨hsmallY, hY, hrepY, hSY, hisoSY, hretY, hessY, hidY, hsumY, hgenY⟩ := hBY
   let := hX
   let := hY
+  -- Fix the shift before instance search, and reuse the resulting families below.
   have : ∀ n : ℤ,
       (shiftFunctor (localizingClosureProEtale Λ X).FullSubcategory n).Additive :=
     fun n ↦ inferInstance
