@@ -354,7 +354,6 @@ private noncomputable def unitClassDerivedEquiv (Y : Scheme.{u})
 
 open CochainComplex HomComplex in
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {I J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
