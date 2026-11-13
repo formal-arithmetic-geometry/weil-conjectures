@@ -352,6 +352,27 @@ private theorem single_product
     (Discrete.compNatIsoDiscrete F (DerivedCategory.singleFunctor.{w} A 0)) _).symm hc
   exact ⟨IsLimit.ofIsoLimit hc' (Cone.ext (Iso.refl _) (by intro ⟨n⟩; simp))⟩
 
+/-- An additive functor transports the tower endomorphism along a product comparison. -/
+private theorem map_towerTransitionEndomorphism_comp_comparison
+    {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
+    (S : A ⥤ B) [S.Additive] (F : ℕ → A) [HasProduct F]
+    [HasProduct (fun n ↦ S.obj (F n))] (t : ∀ n, F (n + 1) ⟶ F n)
+    (e : S.obj (∏ᶜ F) ⟶ ∏ᶜ (fun n ↦ S.obj (F n)))
+    (he : ∀ n, e ≫ Pi.π (fun n ↦ S.obj (F n)) n = S.map (Pi.π F n)) :
+    S.map (towerTransitionEndomorphism t) ≫ e =
+      e ≫ towerTransitionEndomorphism (fun n ↦ S.map (t n)) := by
+  apply Pi.hom_ext
+  intro n
+  have h₁ := (towerTransitionEndomorphism_eq_iff t _).mp rfl n
+  have h₂ := (towerTransitionEndomorphism_eq_iff
+    (K := fun n ↦ S.obj (F n)) (fun n ↦ S.map (t n)) _).mp rfl n
+  simp only [Category.assoc, he]
+  rw [← S.map_comp, h₁, S.map_sub, S.map_comp, h₂]
+  simp only [Preadditive.comp_sub, he]
+  exact congrArg (fun q ↦ S.map (Pi.π F n) - q)
+    ((congrArg (fun q ↦ q ≫ S.map (t n)) (he (n + 1))).symm.trans
+      (Category.assoc _ _ _))
+
 -- Preserve the original name of the product-instance binder, used only by typeclass search.
 set_option linter.unusedVariables false in
 set_option profiler true in
@@ -464,40 +485,25 @@ theorem proEtale_surjectiveTower_derivedLimit
   have hp0 : Nonempty (IsLimit (Fan.mk (S.obj (∏ᶜ F))
       (fun n : ℕ ↦ S.map (Pi.π F n)))) := single_product F
   obtain ⟨hp⟩ := hp0
-  trace "before tactic 467"
   refine ⟨hz, hSES, hepi, ⟨hk⟩, ⟨hp⟩, hSES.singleTriangle_distinguished, ?_, ?_⟩
   · intro hprod
     let e := hp.conePointUniqueUpToIso (limit.isLimit _)
     have he (n : ℕ) : e.hom ≫ Pi.π (fun n ↦ S.obj (F n)) n = S.map (Pi.π F n) :=
       hp.conePointUniqueUpToIso_hom_comp _ ⟨n⟩
-    trace "before tactic 472"
     refine ⟨e, he, ?_⟩
     have htrans : S.map (towerTransitionEndomorphism t) ≫ e.hom =
         e.hom ≫ towerTransitionEndomorphism (fun n ↦ S.map (t n)) := by
-      apply Pi.hom_ext
-      intro n
-      have h₁ := (towerTransitionEndomorphism_eq_iff t _).mp rfl n
-      have h₂ := (towerTransitionEndomorphism_eq_iff
-        (K := fun n ↦ S.obj (F n)) (fun n ↦ S.map (t n)) _).mp rfl n
-      simp only [Category.assoc, he]
-      trace "before tactic 481"
-      rw [← S.map_comp, h₁, S.map_sub, S.map_comp, h₂]
-      simp only [Preadditive.comp_sub, he]
-      exact congrArg (fun q ↦ S.map (Pi.π F n) - q)
-        ((congrArg (fun q ↦ q ≫ S.map (t n)) (he (n + 1))).symm.trans
-          (Category.assoc _ _ _))
+      exact map_towerTransitionEndomorphism_comp_comparison S F t e.hom he
     let T := Pretriangulated.Triangle.mk (S.map i ≫ e.hom)
       (towerTransitionEndomorphism (K := fun n ↦ S.obj (F n)) (fun n ↦ S.map (t n)))
       (e.inv ≫ hSES.singleδ)
     have eT : hSES.singleTriangle ≅ T := by
-      trace "before tactic 490"
       refine Pretriangulated.Triangle.isoMk hSES.singleTriangle T (Iso.refl _) e e
         ?_ ?_ ?_
       · change S.map i ≫ e.hom = 𝟙 _ ≫ (S.map i ≫ e.hom)
         simp only [Category.id_comp]
       · exact htrans
       · change hSES.singleδ ≫ (𝟙 _)⟦(1 : ℤ)⟧' = e.hom ≫ (e.inv ≫ hSES.singleδ)
-        trace "before tactic 496"
         rw [Iso.hom_inv_id_assoc]
         exact (congrArg (fun q ↦ hSES.singleδ ≫ q)
           ((shiftFunctor (DerivedCategory A) (1 : ℤ)).map_id _)).trans (Category.comp_id _)
@@ -521,10 +527,8 @@ theorem proEtale_surjectiveTower_derivedLimit
       have ha : a ≫ i = Pi.lift g := S.map_injective (by simpa using hh)
       have han := congrArg (fun q ↦ q ≫ Pi.π F n) ha
       simpa [i, Category.assoc, hproj] using han
-    trace "before tactic 519"
     refine ⟨h₀, hproj, ⟨S.map h₀, ?_, huniq⟩, huniq, ?_⟩
     · change S.map h₀ ≫ S.map i = S.map (Pi.lift g)
-      trace "before tactic 521"
       rw [← S.map_comp, htuple]
     · intro k
       exact DerivedCategory.TStructure.t.zero_of_isLE_of_isGE k 0 1 (by decide)
