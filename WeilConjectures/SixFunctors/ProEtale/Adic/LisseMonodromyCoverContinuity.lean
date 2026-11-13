@@ -126,8 +126,8 @@ variable (hU : ∀ (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf 
 
 include hU in
 /-- **The monodromy representations are continuous** (blueprint:
-`cor-galois-lisse-representations`): `φ(ρ(g) v)` is the value of a continuous function on
-`Ỹ_t ×_Y Ỹ_t` at the point `(t̃, g⁻¹ t̃)`. -/
+`proposition-lattices-representations-normal-scheme`): `φ(ρ(g) v)` is the value of a continuous
+function on `Ỹ_t ×_Y Ỹ_t` at the point `(t̃, g⁻¹ t̃)`. -/
 theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (G : LisseSheaf l Y)
     (φ : Module.Dual (PadicAlgCl l) (LisseMonodromy.StalkSpace t G))

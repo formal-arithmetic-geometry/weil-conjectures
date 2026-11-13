@@ -261,10 +261,10 @@ Proof:
 1. The normalized direct-image comparison is adjunction-compatible by
    lem-sfb-ringed-derived-monoidal-comparisons. Thus the composite counit is the
    counit for r after r-pullback of the counit for s. Exact inverse image is the
-   constant-ring module pullback by prop-weil-pbc-inverse-image-modules-exact.
+   constant-ring module pullback by situation-conventions.
 2. Apply lem-sf-scalar-pullback-composition: the K-flat-normalized scalar/pullback
    isomorphism for r followed by s is the pasted pair of scalar/pullback isomorphisms.
-3. By def-kun-projection-formula-map and lem-weil-pbc-adjunct-counit-identity,
+3. By definition-projection-formula-map--1 and situation-conventions,
    the transpose of each scalarMate is its scalar/pullback map followed by scalar
    extension of the A-counit.
 4. Transport the source along scalar extension of the A-compositor and transpose

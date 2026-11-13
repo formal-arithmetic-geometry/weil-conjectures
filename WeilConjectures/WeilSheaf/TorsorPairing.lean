@@ -31,7 +31,7 @@ ring object (the sheaf of functions on the fibres of `π`).
   (`AlgebraicGeometry.ProEtale.isIso_torsorPairingCurry`).
 
 This is the descent argument behind the multiplicativity `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` of the
-Artin–Schreier sheaves (blueprint `lem-fd-as-characters`).
+Artin–Schreier sheaves (blueprint `lemma-artin-schreier-character-sheaf`).
 -/
 
 @[expose] public section
@@ -135,7 +135,7 @@ namespace CategoryTheory.Mod
 variable {C : Type*} [Category C] [MonoidalCategory C] {A : C} [MonObj A]
 
 /-- If the action of `A` on the algebra `P` is multiplication through `u : A ⟶ P`, the
-action commutes with the multiplication (blueprint `lem-fd-as-characters`). -/
+action commutes with the multiplication (blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[reassoc]
 lemma act_whiskerRight_mul {P : Mod C A} [MonObj P.X] (u : A ⟶ P.X)
     (hP : act P.X = u ▷ P.X ≫ MonObj.mul) :
@@ -161,7 +161,7 @@ variable [BraidedCategory C]
 
 /-- If the action of `A` on the commutative algebra `P` is multiplication through
 `u : A ⟶ P`, the action on the second factor commutes with the multiplication
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[reassoc]
 lemma whiskerLeft_act_mul {P : Mod C A} [MonObj P.X] [IsCommMonObj P.X] (u : A ⟶ P.X)
     (hP : act P.X = u ▷ P.X ≫ MonObj.mul) :

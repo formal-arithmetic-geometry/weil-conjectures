@@ -28,11 +28,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProje
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic/
 sk-thm-sf-pf-adic-projection.md, clauses (1)--(2)
-(blueprint: det-thm-sf-pf-adic-projection).
+(blueprint: lemma-projection-formula-integral-coefficients--1).
 
 All operations are the ordinary unbounded module-object derived operations.
 The localizing closures use ambient small sums and the constant-model
-constructibility predicate recorded by sk-def-sfb-constructible.
+constructibility predicate recorded by definition-constructible-sheaves.
 -/
 
 @[expose] public section
@@ -223,7 +223,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 /-- The bounded integral proper projection formula, tensor closure of the localizing
 categories on every standing scheme, and the projection formula on those closures.
 Source: blueprint sk-thm-sf-pf-adic-projection, clauses (1)--(2)
-(blueprint: det-thm-sf-pf-adic-projection).
+(blueprint: lemma-projection-formula-integral-coefficients--1).
 
 Proof:
 1. A standing scheme is quasi-compact and locally Noetherian. The integral

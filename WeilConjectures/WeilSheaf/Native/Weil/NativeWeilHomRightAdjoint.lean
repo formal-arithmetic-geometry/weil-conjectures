@@ -25,7 +25,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 pointwise assertion does not construct a tensor bifunctor or any comparison
 with ordinary tensor.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/transposition paragraph;
+Source: prose-10-20, internal-Hom/transposition paragraph;
 native tensor lift step 1; Stacks Tags 06YS, 08J9 and 0A97
 (blueprint: lem-sf-native-weil-hom-right-adjoint).
 

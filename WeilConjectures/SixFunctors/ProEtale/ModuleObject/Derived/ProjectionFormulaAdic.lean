@@ -15,13 +15,14 @@ Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `
 `𝒪̲_E`, and let `Loc(Dctf(X, 𝒪_E)) = Loc(Dbc(X, 𝒪_E))` be the localizing closure of the bounded
 constructible complexes in `D(X_proét, 𝒪_E) = D(Mod_{𝒪_{E,X}})`
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). This file proves
-blueprint `sk-thm-sf-pf-adic`:
+blueprint `lemma-projection-formula-integral-coefficients`:
 
 * for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dctf(U, 𝒪_E)` into `Dctf(X, 𝒪_E)`
-  (`det-thm-sf-pf-adic-open`);
-* proper base change holds on `Loc(Dbc(-, 𝒪_E))` (`det-thm-sf-pf-adic-base-change`);
+  (`proposition-direct-image-along-open-immersion--1`);
+* proper base change holds on `Loc(Dbc(-, 𝒪_E))`
+(`proposition-proper-base-change-localizing-categories--1`);
 * the categories `Loc(Dbc(-, 𝒪_E))` are closed under `⊗ᴸ_{𝒪_{E,X}}` and the proper projection
-  formula holds on them (`det-thm-sf-pf-adic-projection`).
+  formula holds on them (`lemma-projection-formula-integral-coefficients--1`).
 
 The arguments extending the statements from `Dbc` to `Loc(Dbc)` are those of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProjection`; the inputs on
@@ -31,13 +32,13 @@ The arguments extending the statements from `Dbc` to `Loc(Dbc)` are those of
 ## Main statements
 
 - `boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_padicIntegersRingObj`
-  (`det-thm-sf-pf-adic-open`);
+  (`proposition-direct-image-along-open-immersion--1`);
 - `isIso_baseChangeMap_of_localizingBoundedConstructible_padicIntegersRingObj`
-  (`det-thm-sf-pf-adic-base-change`);
+  (`proposition-proper-base-change-localizing-categories--1`);
 - `isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingObj`
-  (`det-thm-sf-pf-adic-projection`);
+  (`lemma-projection-formula-integral-coefficients--1`);
 - `openDirectImage_baseChange_projectionFormula_padicIntegersRingObj`
-  (`sk-thm-sf-pf-adic`).
+  (`lemma-projection-formula-integral-coefficients`).
 -/
 
 @[expose] public section
@@ -72,32 +73,34 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝐎" => Profinite.padicIntegersRingObj.{u} ℓ E
 
-/-- Blueprint `det-thm-sf-pf-adic-open`: Integral open direct image preserves constructibility.
+/-- Blueprint `proposition-direct-image-along-open-immersion--1`: Integral open direct image
+preserves constructibility.
 
 Let `j : U ⟶ X` be a quasi-compact open immersion and `K ∈ Dbc(U, 𝒪_E)`. Then
 `Rj_*K ∈ Dbc(X, 𝒪_E) = Dctf(X, 𝒪_E)`.
 
 The blueprint proof shows that `Rj_*K` is derived complete with reduction
 `(Rj_*K) ⊗ᴸ 𝐅_{E,X} ≃ Rj_*(K ⊗ᴸ 𝐅_{E,U})` bounded constructible, and concludes by the residue
-criterion; this is the integral case of `sk-prop-open-coefficients`, which is used here. The
-derived completeness and the reduction formula, intermediate steps of that argument, are not
-stated: derived completeness and reduction modulo `π_E` (`sk-def-pe-derived-completion`) are
-not yet available for module objects over `𝒪_{E,X}`. -/
+criterion; this is the integral case of `proposition-direct-image-along-open-immersion`, which is
+used here. The derived completeness and the reduction formula, intermediate steps of that argument,
+are not stated: derived completeness and reduction modulo `π_E`
+(`definition-derived-adic-completeness`) are not yet available for module objects over `𝒪_{E,X}`. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_padicIntegersRingObj
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left] {K : 𝔻[𝐎](X.left)}
     (hK : boundedConstructible (condensedRingObj 𝐎 X.left) K) :
     boundedConstructible (condensedRingObj 𝐎 Y.left) ((R((j.left)_*⟦𝐎⟧)).obj K) :=
   boundedConstructible_rightDerivedLowerStar_openImmersion_padicIntegersRingObj ℓ E j hK
 
-/-- Blueprint `det-thm-sf-pf-adic-base-change`: Integral proper base change on localizing
-categories.
+/-- Blueprint `proposition-proper-base-change-localizing-categories--1`: Integral proper base change
+on localizing categories.
 
 For a cartesian square `g' ≫ p = p' ≫ g` with `p : X ⟶ Y` proper, the base change map
 `g^*Rp_*K ⟶ Rp'_*g'^*K` is an isomorphism for every `K ∈ Loc(Dbc(X, 𝒪_E))`. On `Dbc(X, 𝒪_E)` it
 is an isomorphism by proper base change for integral constructible complexes
-(`det-thm-sfb-proper-base-change-integral`); both sides are exact and preserve direct sums on the
-localizing categories, so the objects on which it is an isomorphism form a localizing
-subcategory containing `Dbc(X, 𝒪_E)` (`det-proper-base-change-unbounded-extension`). -/
+(`proposition-proper-direct-image-constructible-complexes`); both sides are exact and preserve
+direct sums on the localizing categories, so the objects on which it is an isomorphism form a
+localizing subcategory containing `Dbc(X, 𝒪_E)`
+(`proposition-proper-base-change-localizing-categories--1`). -/
 theorem isIso_baseChangeMap_of_localizingBoundedConstructible_padicIntegersRingObj
     {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left]
     (sq : IsPullback g' p' p g) {K : 𝔻[𝐎](X.left)}
@@ -107,7 +110,8 @@ theorem isIso_baseChangeMap_of_localizingBoundedConstructible_padicIntegersRingO
     (fun K hK' ↦
       (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ E p).2.1 sq K hK') hK
 
-/-- Blueprint `det-thm-sf-pf-adic-projection`: The integral proper projection formula.
+/-- Blueprint `lemma-projection-formula-integral-coefficients--1`: The integral proper projection
+formula.
 
 Let `p : X ⟶ Y` be proper.
 
@@ -117,11 +121,11 @@ Let `p : X ⟶ Y` be proper.
 2. The categories `Loc(Dbc(-, 𝒪_E))` are closed under `⊗ᴸ`, and the projection formula map is an
    isomorphism for `K ∈ Loc(Dbc(X, 𝒪_E))` and `L ∈ Loc(Dbc(Y, 𝒪_E))`.
 
-Part (1) is the projection formula of `det-thm-sfb-proper-base-change-integral`. For (2), the
-tensor closure follows from `lem-sfb-dc-tensor-preserves` by the two-variable localizing
-argument, and the projection formula extends from `Dbc` to `Loc(Dbc)` one variable at a time,
-`Rp_*` preserving the localizing categories and direct sums there
-(`det-prop-int-compactness-direct-sums`). -/
+Part (1) is the projection formula of `proposition-proper-direct-image-constructible-complexes`. For
+(2), the tensor closure follows from `proposition-six-operations-dctf--14` by the two-variable
+localizing argument, and the projection formula extends from `Dbc` to `Loc(Dbc)` one variable at a
+time, `Rp_*` preserving the localizing categories and direct sums there
+(`proposition-compactness-proper-direct-image--2`). -/
 theorem isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingObj
     (p : X ⟶ Y) [IsProper p.left] :
     (∀ (K : 𝔻[𝐎](X.left)) (L : 𝔻[𝐎](Y.left)), boundedConstructible (condensedRingObj 𝐎 X.left) K →
@@ -151,7 +155,8 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingO
       (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (X' := X) (Y' := Y) ℓ E
         p).2.2 hK hL⟩
 
-/-- Blueprint `sk-thm-sf-pf-adic`: Open direct image and projection formula.
+/-- Blueprint `lemma-projection-formula-integral-coefficients`: Open direct image and projection
+formula.
 
 For a quasi-compact open immersion `j : U ⟶ X`, `Rj_* : D(U_proét, 𝒪_E) ⥤ D(X_proét, 𝒪_E)` maps
 `Dctf(U, 𝒪_E) = Dbc(U, 𝒪_E)` into `Dctf(X, 𝒪_E)`. Proper base change and the proper projection

@@ -102,7 +102,7 @@ theorem Matrix.charpoly_dvd_X_sub_X_sq_pow_of_isIdempotentElem {R : Type*} [Comm
 `Im (1 - p) = ker p`, and `Im p` is a finite projective `R`-module. (ii) For an `R`-algebra `S`,
 the endomorphism `p_S` of `Sⁿ` with the matrix of `p` mapped to `S` is idempotent, and the
 `S`-linear map `S ⊗[R] Im p → Sⁿ`, `s ⊗ v ↦ s • v`, is injective with image `Im p_S`.
-(blueprint: `lem-weil-pbc-idempotent-endomorphism-image-base-change`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem IsIdempotentElem.range_projective_and_baseChange {R : Type*} [CommRing R] {n : ℕ}
     (p : Module.End R (Fin n → R))
     (hp : IsIdempotentElem p) (S : Type*) [CommRing S] [Algebra R S] :
@@ -149,7 +149,7 @@ theorem IsIdempotentElem.range_projective_and_baseChange {R : Type*} [CommRing R
 /-- An idempotent endomorphism `p̄` of `(A ⧸ I)ⁿ` has an integral commutative model: there are
 an integral commutative `A`-algebra `B`, an `A`-algebra map `ψ : B → Mₙ(A)` and `y ∈ B` such that
 `y mod IB` is idempotent and `ψ y` reduces modulo `I` to the matrix of `p̄`.
-(blueprint: `lem-weil-pbc-integral-model-finite-free-projector`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem Ideal.exists_isIntegral_matrix_model_of_isIdempotentElem {A : Type u} [CommRing A]
     (I : Ideal A) {n : ℕ}
     (p : Module.End (A ⧸ I) (Fin n → A ⧸ I)) (hp : IsIdempotentElem p) :

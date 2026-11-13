@@ -217,7 +217,7 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 # Pullback and symmetry of supported Kummer cup products
 
 Source: Stacks Project, Tags 0FPL, 0FPM, 09XP, 03PL and 0G78; blueprint
-main-20261015, lem-pur-frame-independence, unit multiples, permutations and shears
+main-20261015, proposition-purity-vector-bundles, unit multiples, permutations and shears
 (blueprint: lem-pur-supported-cup-functoriality).
 
 The Boolean site parameter is false for the small etale site and true for the
@@ -299,7 +299,7 @@ def functorialCupComparisonFunctor (P : PurityFiniteSetting.{u}) (X : Scheme.{u}
   ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X
 
 /-- The signed finite Tate sheaf at the actual annihilator ell^n. Source: the
-arbitrary-index Kummer prescription in def-pur-frame-class
+arbitrary-index Kummer prescription in proposition-purity-vector-bundles
 (blueprint: lem-pur-supported-cup-functoriality). -/
 def functorialCupTwist (P : PurityFiniteSetting.{u}) (pro : Bool)
     (X : Scheme.{u}) (r : ℤ) : P.functorialCupSheaves pro X :=
@@ -318,7 +318,7 @@ def functorialCupSingle (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{
     (P.functorialCupHasDerived pro X) 0
 
 /-- The actual underived direct image of constants from the closed support.
-Source: def-pur-supported-cup, supported-Hom model
+Source: proposition-purity-vector-bundles, supported-Hom model
 (blueprint: lem-pur-supported-cup-functoriality). -/
 def functorialCupSource (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) : P.functorialCupSheaves pro X :=
@@ -327,7 +327,7 @@ def functorialCupSource (P : PurityFiniteSetting.{u}) (pro : Bool)
   | true => (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constant C)
 
 /-- Restriction of local constants, exactly the coefficient map of the supported cup.
-Source: def-pur-supported-cup and the etale coefficient lemma
+Source: proposition-purity-vector-bundles and the etale coefficient lemma
 (blueprint: lem-pur-supported-cup-functoriality). -/
 def functorialCupRestriction (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
@@ -386,7 +386,7 @@ instance functorialCupFlatResolutions (P : PurityFiniteSetting.{u}) (pro : Bool)
   infer_instance
 
 /-- The coefficient multiplication fixed by restriction and local scalar multiplication.
-Source: def-pur-supported-cup and its etale analogue
+Source: proposition-purity-vector-bundles and its etale analogue
 (blueprint: lem-pur-supported-cup-functoriality). -/
 def functorialCupMultiplication (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)

@@ -28,16 +28,16 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.FiniteReduction
 
-/-- Size lift of the actual quotient ring. Source: blueprint sk-lem-sp-reduction,
+/-- Size lift of the actual quotient ring. Source: blueprint lemma-sp-reduction,
 finite coefficients (blueprint: def-per-finite-reduction-coefficients). -/
 abbrev Ring (l r : ℕ) := ULift.{u} (ZMod (l ^ r))
 
-/-- Module-size lift of the same coefficient ring. Source: blueprint sk-lem-sp-reduction,
+/-- Module-size lift of the same coefficient ring. Source: blueprint lemma-sp-reduction,
 finite coefficients (blueprint: def-per-finite-reduction-coefficients). -/
 abbrev Coeff (l r : ℕ) := ULift.{u + 1} (Ring.{u} l r)
 
 /-- The actual quotient map, lifted to the module universe. Source: blueprint
-sk-lem-sp-reduction (blueprint: def-per-finite-reduction-coefficients). -/
+lemma-sp-reduction (blueprint: def-per-finite-reduction-coefficients). -/
 def quotient (l : ℕ) {r m : ℕ} (h : m ≤ r) : Coeff.{u} l r →+* Coeff.{u} l m :=
   ((ZMod.castHom (pow_dvd_pow l h) (ZMod (l ^ m))).ulift).ulift
 
@@ -96,7 +96,7 @@ def ordinaryComparison (T : Scheme.{u}) {A B : Type (u + 1)}
 /-- The ordinary tensor associator, fixed by the identity on scalar restriction.
 On local tensors it sends c tensor (b tensor q) to (bc) tensor q, equivalently
 (q tensor b) tensor c to q tensor bc in the right-tensor convention of the source.
-Source: blueprint sk-lem-sp-reduction, associativity
+Source: blueprint lemma-sp-reduction, associativity
 (blueprint: def-pur-finite-reduction-system). -/
 def ordinaryAssociator {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
@@ -136,7 +136,7 @@ set_option genInjectivity false in
 normalizations of its comparison and its associators. All functors are universal derived
 functors of the concrete scalar extensions above. The normalizations remove arbitrary
 choices of natural isomorphisms. Source: Stacks 06YT, 06YY and 03EL; blueprint
-sk-lem-sp-reduction (blueprint: def-pur-finite-reduction-system). -/
+lemma-sp-reduction (blueprint: def-pur-finite-reduction-system). -/
 structure System (T : Scheme.{u}) (l : ℕ) where
   etale : ∀ (r m : ℕ) (h : m ≤ r),
     DerivedExtension T.smallEtaleTopology (quotient.{u} l h)
@@ -201,7 +201,7 @@ structure System (T : Scheme.{u}) (l : ℕ) where
           (ordinaryAssociator (Scheme.ProEt.topology T) l hmr hnm) (.up ℤ)).hom.app P)
 
 /-- Finiteness of the actual coefficients, derived from primality, not an extra
-hypothesis. Source: blueprint sk-lem-sp-reduction
+hypothesis. Source: blueprint lemma-sp-reduction
 (blueprint: def-pur-finite-reduction-system). -/
 instance ringFinite (l : ℕ) [h : Fact l.Prime] (r : ℕ) : Finite (Ring.{u} l r) := by
   let : NeZero l := ⟨h.out.ne_zero⟩

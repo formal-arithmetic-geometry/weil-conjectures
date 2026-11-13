@@ -15,8 +15,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-!
 # Finite filtration induction
 
-Source: the blueprint of the Weil conjectures, chapter `sec-proper-base-change`,
-unit `sk-thm-properbasechange`, node `lem-sp-finite-filtration-induction`
+Source: the blueprint of the Weil conjectures, chapter `chap-Proper-base-change`,
+unit `theorem-proper-base-change-classical-pro`, node `lem-sp-finite-filtration-induction`
 (blueprint: lem-sp-finite-filtration-induction); Stacks Project, Homology,
 Definition 0121 (`definition-filtered`), the paragraph defining `gr` before Lemma 05SP,
 and Lemma 0127 (`lemma-characterize-strict`).

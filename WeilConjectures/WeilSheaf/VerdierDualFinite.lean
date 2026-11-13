@@ -28,7 +28,7 @@ is again a Weil sheaf placed in degree zero (`𝔻_Z G ≅ G^∨`). By dévissag
 `𝔻_Z` is t-exact: it carries complexes concentrated in degrees `[a, b]` to complexes
 concentrated in degrees `[-b, -a]`. In particular `𝓗⁻¹(𝔻_Z A) ≅ (𝓗¹ A)^∨` for every Weil
 complex `A` on `Z`, which is step 5 of the local boundary duality
-(`lem-a1-local-boundary-duality`).
+(`lemma-local-duality-point-c-u--1`).
 
 ## Main statements
 
@@ -372,7 +372,7 @@ theorem nonempty_homologySheaf_neg_verdierDual_iso (A : WeilComplex k₀ l Z) (n
   exact ⟨E₁.symm ≪≫ E₂ ≪≫ E₃ ≪≫
     (homologySheaf 0).mapIso ((verdierDual k₀ l Z).mapIso (WeilSheaf.toComplex.mapIso eH.symm).op)⟩
 
-/-- **`𝔻_Z` in degree `-1`** (blueprint: `lem-a1-local-boundary-duality`, step 5): on a finite
+/-- **`𝔻_Z` in degree `-1`** (blueprint: `lemma-local-duality-point-c-u--1`, step 5): on a finite
 reduced `k₀`-scheme `Z`, `𝓗⁻¹(𝔻_Z A) ≅ 𝓗⁰(𝔻_Z (𝓗¹(A)[0]))` for every Weil complex `A`: the
 case `n = 1` of `AlgebraicGeometry.WeilComplex.nonempty_homologySheaf_neg_verdierDual_iso`. -/
 theorem nonempty_homologySheaf_neg_one_verdierDual_iso (A : WeilComplex k₀ l Z) :

@@ -9,7 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorDerivedComposi
 
 /-! # Tensor composition from localized Roos models
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section

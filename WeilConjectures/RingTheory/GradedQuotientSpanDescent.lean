@@ -24,8 +24,8 @@ universe u v
 namespace MvPolynomial
 
 /-- Generation of the irrelevant quotient yields a one-degree descent for homogeneous elements.
-Source: blueprint `lem-sc-p1-graded-resolution`, expanded graded Nakayama argument, steps 1–2
-(blueprint: lem-sc-p1-graded-quotient-span-descent).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, expanded graded Nakayama argument,
+steps 1–2 (blueprint: lem-sc-p1-graded-quotient-span-descent).
 
 Proof: write `Q` for the polynomial span of the homogeneous lifts. Lift a linear expression
 for the quotient class of `x` to `q ∈ Q`. Then `x - q` belongs to `(x₀,x₁)N`, so it is

@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- A dense open of a curve can be shrunk to a finite disjoint union of irreducible opens.
 Source: Stacks Project, Theorem 03SC, proof, third paragraph
-(blueprint: lem-pbc-q1-dense-irreducible-opens).
+(blueprint: lemma-removing-finitely-many-points--1).
 
 Proof: A finite-type scheme over a field is Noetherian and has finitely many irreducible
 components C_a, each with a generic point. A dense open V contains every generic point:

@@ -14,7 +14,7 @@ import WeilConjectures.SmoothPurity.ProEtale.ProEtaleTotalTensorPullbackGenerato
 
 /-! # Finite-evaluation bridge for the ordinary reduction/tensor pullback component
 
-Source: Stacks 07A4, 07A6 and 0941; lem-fix-operation-reduction, first paragraph.
+Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
 -/
 
 @[expose] public section
@@ -283,7 +283,7 @@ pure-tensor calculation together with the normalized unit formula for the
 sequence pullback tensor comparison.
 
 Source: Stacks 07A4, 07A6 and 0941; the first paragraph of
-`lem-fix-operation-reduction`, after finite evaluation and before cochain
+`proposition-six-operations-change-coefficients`, after finite evaluation and before cochain
 extensionality.  The two hypotheses are exactly the finite-component
 characterizations of `tensorReductionStrictMap` at the source and target.
 (blueprint: lem-sf-canonical-reduction-tensor-pull-complex-component-bridge).

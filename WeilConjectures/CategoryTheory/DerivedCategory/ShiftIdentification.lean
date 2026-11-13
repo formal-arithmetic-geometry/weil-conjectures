@@ -11,9 +11,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Shift identification for bounded below right derived functors
 
-Source: Weil conjectures blueprint, sec-proper-base-change, sk-thm-properbasechange,
-lemma lem-sp-shift-identification; Stacks Project, Tags 05SU, 015A and 05TC
-(blueprint: lem-sp-shift-identification).
+Source: Weil conjectures blueprint, chap-Proper-base-change,
+theorem-proper-base-change-classical-pro, lemma lem-sp-shift-identification; Stacks Project, Tags
+05SU, 015A and 05TC (blueprint: lem-sp-shift-identification).
 
 The three statements specify the shift comparison, its composition with the ordinary
 right-derived-functor comparison in nonnegative degrees, and vanishing in negative degrees.

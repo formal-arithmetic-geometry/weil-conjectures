@@ -20,7 +20,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 We show that the small pro-étale site of a scheme `T` has enough affine weakly contractible
 objects (Stacks 0990), and deduce that vanishing of sheaves and acyclicity of complexes of
 sheaves of modules can be detected on sections over affine weakly contractible objects
-(blueprint `lem-sf-proetale-vanishing-detection`, Stacks 0947).
+(blueprint `corollary-evaluation-weakly-contractible-objects--6`, Stacks 0947).
 
 ## Main results
 
@@ -278,7 +278,7 @@ namespace ProEtale
 
 variable {T : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- **Detection of vanishing**, blueprint `lem-sf-proetale-vanishing-detection` (i)
+/-- **Detection of vanishing**, blueprint `corollary-evaluation-weakly-contractible-objects--6` (i)
 (Stacks 0990, 090M): a sheaf of `Λ`-modules on the small pro-étale site vanishes if and only if
 its sections over all affine weakly contractible objects vanish. -/
 @[stacks 0990]
@@ -293,8 +293,8 @@ theorem isZero_iff_forall_isWeaklyContractible
     (fun V ↦ Scheme.ProEt.exists_isWeaklyContractible_cover V)]
   exact ⟨fun h W hW hW' ↦ h W ⟨hW, hW'⟩, fun h W hW ↦ h W hW.1 hW.2⟩
 
-/-- **Detection of acyclicity**, blueprint `lem-sf-proetale-vanishing-detection` (ii)
-(Stacks 0947 (1), 0990): a complex of sheaves of `Λ`-modules on the small pro-étale site is
+/-- **Detection of acyclicity**, blueprint `corollary-evaluation-weakly-contractible-objects--6`
+(ii) (Stacks 0947 (1), 0990): a complex of sheaves of `Λ`-modules on the small pro-étale site is
 acyclic if and only if its sections over every affine weakly contractible object form an
 acyclic complex of `Λ`-modules. Epimorphisms of sheaves are locally surjective, hence
 surjective on sections over weakly contractible objects, and these cover the site. -/

@@ -155,7 +155,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Frobenius action sites and unbounded resolutions
 
-Source: latest blueprint, cor-coef-verdier-weil-equivariance, internal-Hom/evaluation
+Source: latest blueprint, prose-10-20, internal-Hom/evaluation
 paragraph; native action-site refinement, steps 1--7; Stacks 015F, 06YS, 079P, 0G7E,
 and 08BJ (blueprint: lem-sf-weil-frobenius-action-resolutions).
 

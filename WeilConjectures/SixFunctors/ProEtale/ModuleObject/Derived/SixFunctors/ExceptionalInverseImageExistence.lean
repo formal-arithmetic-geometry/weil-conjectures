@@ -40,7 +40,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-existence/_section.md,
 and det-existence-localizing.proof.md and det-existence-restriction.proof.md
-(blueprint: sk-thm-existence).
+(blueprint: theorem-exceptional-inverse-image).
 
 The lower shriek is the existing restriction of the actual compactification composite.
 All categories are full subcategories of the ordinary unbounded module-object derived

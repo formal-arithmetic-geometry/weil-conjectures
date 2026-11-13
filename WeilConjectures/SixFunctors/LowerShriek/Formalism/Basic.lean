@@ -29,7 +29,7 @@ hypotheses used in the theory:
   `j_! g'_* ≅ g''_* j'_!` for cartesian squares with proper bottom map.
 
 The concrete instance, on the bounded below derived categories of étale sheaves, is used to
-prove the composition law of blueprint `sk-thm-sf-comp-composition`.
+prove the composition law of blueprint `proposition-composition-base-change-rf-shriek--1`.
 -/
 
 @[expose] public section

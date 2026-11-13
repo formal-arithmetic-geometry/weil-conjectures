@@ -54,7 +54,7 @@ support in the `dx_i`. By `lem-weil-pbc-p-independent-differentials-independent`
 support's p-monomials have a nontrivial relation over each `Kα`. The space of relations
 therefore meets every `Kα^N` nontrivially. The index family is nonempty: otherwise the
 intersection condition makes `K` perfect, contradicting the nonempty p-basis support.
-Apply `lem-weil-pbc-intersection-subfields-subspace` to obtain a nontrivial relation over
+Apply `theorem-finite-etale-covers-proper-henselian--2` to obtain a nontrivial relation over
 `K^p`, contradicting the p-basis monomials' independence. This proves the first clause.
 
 3. For the second clause, containment of `L^p` in the intersection is immediate. Prove the

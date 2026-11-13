@@ -33,8 +33,8 @@ complexes to statements about objects of `P` placed in degree `0`:
   (`DerivedCategory.isLE_obj_of_forall_isLE_obj_truncGE`), and one concludes with
   `DerivedCategory.isIso_sigmaComparison_of_bounded`.
 
-This is the formal part of blueprint `det-prop-int-compactness-direct-sums` (2): the commutation
-of the proper direct image with direct sums on `Dic(X, Λ)`, from its behaviour on the
+This is the formal part of blueprint `proposition-compactness-proper-direct-image--2` (2): the
+commutation of the proper direct image with direct sums on `Dic(X, Λ)`, from its behaviour on the
 ind-constructible sheaves.
 -/
 

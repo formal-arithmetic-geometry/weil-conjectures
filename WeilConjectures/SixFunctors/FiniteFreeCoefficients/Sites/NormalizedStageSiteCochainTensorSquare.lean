@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.Sites.Normalize
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
 finite coefficient scalar/site transport in the blueprint
-lem-coef-finite-free-extension, Paragraphs 1--3.
+lemma-change-coefficients-exceptional-inverse-image--3, Paragraphs 1--3.
 (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square)
 -/
 
@@ -225,7 +225,7 @@ end SquareOfSummands
 /-- The scalar/site square for signed total tensors commutes before localization.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
-latest blueprint lem-coef-finite-free-extension, Paragraphs 1--3.
+latest blueprint lemma-change-coefficients-exceptional-inverse-image--3, Paragraphs 1--3.
 (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square)
 
 Proof:

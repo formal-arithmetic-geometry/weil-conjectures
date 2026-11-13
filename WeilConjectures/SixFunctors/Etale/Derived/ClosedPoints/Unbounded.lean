@@ -30,7 +30,8 @@ hence homotopy limits, the towers `Hᵐ(U, τ^{≥ -n} K)` are eventually consta
 sequence has no `lim¹` term), and since `B` covers `X_ét`, an object with vanishing `Hᵠ(U, -)`
 for all `U ∈ B` has `ℋᵠ = 0`. As an application, for `X` of finite type over a separably closed
 field, an unbounded `Q` whose cohomology sheaves are supported at closed points vanishes if and
-only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `lem-kun-0f1g`, Stacks 0F1G).
+only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `corollary-open-direct-image-over-field--2`, Stacks
+0F1G).
 
 ## Main statements
 
@@ -43,7 +44,7 @@ only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `lem-kun-0f1g`, Stacks 0F1G)
 - `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic`
   (`lem-kun-0bkz`).
 - `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections`
-  (`lem-kun-0f1g`).
+  (`corollary-open-direct-image-over-field--2`).
 -/
 
 @[expose] public section
@@ -701,10 +702,10 @@ lemma isClosed_singleton_of_etale {k : Type u} [Field k] {U X : Scheme.{u}} (g :
   exact Algebra.IsAlgebraic.trans k (X.residueField (g u)) _
 
 
-/-- Blueprint `lem-kun-0f1f-vanish` on a quasi-compact étale `X`-scheme `V`: if `X` is locally
-of finite type over a separably closed field and the stalks of `F` vanish at the non-closed
-points of `X`, then `Hᵠ(V, F) = 0` for `q ≠ 0`. Indeed `Hᵠ(V, F) = Hᵠ(V_ét, F|_V)`, `V` is of
-finite type over the field, and the points of `V` over closed points of `X` are closed. -/
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1` on a quasi-compact étale `X`-scheme
+`V`: if `X` is locally of finite type over a separably closed field and the stalks of `F` vanish at
+the non-closed points of `X`, then `Hᵠ(V, F) = 0` for `q ≠ 0`. Indeed `Hᵠ(V, F) = Hᵠ(V_ét, F|_V)`,
+`V` is of finite type over the field, and the points of `V` over closed points of `X` are closed. -/
 lemma isZero_homology_rightDerivedFunctor_sheafSections_of_isZero_sheafFiber {K : Type u}
     [Field K] [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (V : X.Etale) [CompactSpace V.left] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -726,16 +727,17 @@ lemma isZero_homology_rightDerivedFunctor_sheafSections_of_isZero_sheafFiber {K 
     F).2 (hF _ hx)
   simp
 
-/-- Blueprint `lem-kun-0f1g`: **detection of objects supported at closed points** (unbounded
-case). Let `K` be a separably closed field, `X` a scheme of finite type over `K` (structure
-morphism `p`, locally of finite type, `X` quasi-compact), and `Q ∈ D(X_ét, Λ)` (unbounded) such
-that the stalks of all cohomology sheaves `ℋᵠ(Q)` at the geometric points over non-closed
-points of `X` vanish. Then `Q = 0` if and only if `Hⁱ(X_ét, Q) = 0` for all `i`.
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **detection of objects supported at
+closed points** (unbounded case). Let `K` be a separably closed field, `X` a scheme of finite type
+over `K` (structure morphism `p`, locally of finite type, `X` quasi-compact), and `Q ∈ D(X_ét, Λ)`
+(unbounded) such that the stalks of all cohomology sheaves `ℋᵠ(Q)` at the geometric points over
+non-closed points of `X` vanish. Then `Q = 0` if and only if `Hⁱ(X_ét, Q) = 0` for all `i`.
 
 Following the blueprint, the class `B` of quasi-compact étale `X`-schemes covers `X_ét`, and
-the cohomology sheaves of `Q` are acyclic on its members (`lem-kun-0f1f-vanish`), so that
-`Hⁱ(X_ét, Q) = Γ(X, ℋⁱ(Q))` by `lem-kun-0bkz`; the sheaves `ℋⁱ(Q)` are globally generated
-(`lem-kun-0f1f-gen`), hence vanish if they have no global sections. -/
+the cohomology sheaves of `Q` are acyclic on its members
+(`lemma-sheaves-finite-support-finite-morphisms--1`), so that `Hⁱ(X_ét, Q) = Γ(X, ℋⁱ(Q))` by
+`lem-kun-0bkz`; the sheaves `ℋⁱ(Q)` are globally generated
+(`corollary-open-direct-image-over-field--2`), hence vanish if they have no global sections. -/
 theorem isZero_iff_forall_isZero_homology_rightDerivedGlobalSections {K : Type u} [Field K]
     [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     [CompactSpace X]

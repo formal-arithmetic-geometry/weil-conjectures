@@ -13,8 +13,9 @@ public import WeilConjectures.WeilSheaf.TateTwistCohomology
 /-!
 # Tate twists commute with extension of scalars
 
-Following blueprint `lem-wf-tate-twist-compatibility`, the Tate twist `(-)(m)` commutes with
-finite scalar extension: for finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and `m ∈ ℤ`,
+Following blueprint `proposition-weights-under-usual-operations--13`, the Tate twist `(-)(m)`
+commutes with finite scalar extension: for finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and
+`m ∈ ℤ`,
 
 `F ⊗_E E_X(m) ≅ F_X(m)`
 
@@ -672,8 +673,8 @@ lemma _root_.PadicAlgCl.units_map_inclusion_units_map_zpow
   rw [map_zpow, ← MonoidHom.comp_apply, ← Units.map_comp]
   rfl
 
-/-- Blueprint `lem-wf-tate-twist-compatibility`: the Tate twist commutes with finite scalar
-extension.
+/-- Blueprint `proposition-weights-under-usual-operations--13`: the Tate twist commutes with finite
+scalar extension.
 
 For finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and `m ∈ ℤ`, the extension of scalars
 `F ⊗_E E_X(m)` of the Tate twisted constant `E`-Weil sheaf is `F_X(m)`, compatibly with the
@@ -702,8 +703,8 @@ lemma _root_.PadicAlgCl.units_map_val_units_map_zpow (E : IntermediateField ℚ_
   rw [map_zpow, ← MonoidHom.comp_apply, ← Units.map_comp]
   rfl
 
-/-- Blueprint `lem-wf-tate-twist-compatibility`: the Tate twist commutes with scalar extension
-to `ℚ̄_ℓ`.
+/-- Blueprint `proposition-weights-under-usual-operations--13`: the Tate twist commutes with scalar
+extension to `ℚ̄_ℓ`.
 
 For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `m ∈ ℤ`, the extension of scalars
 `ℚ̄_ℓ ⊗_E E_X(m)` of the Tate twisted constant `E`-Weil sheaf is the Tate sheaf `ℚ̄_ℓ(m)`,

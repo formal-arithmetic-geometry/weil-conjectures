@@ -38,7 +38,7 @@ namespace AlgebraicGeometry.ProjectiveLine
 open MvPolynomial
 
 /-- The exact graded Koszul resolution `0 → S(-2) → S(-1)² → S → S/(x₀,x₁) → 0`.
-Source: the blueprint `lem-sc-p1-graded-resolution`, graded-resolution source note;
+Source: the blueprint `theorem-riemann-roch-coherent-serre-duality`, graded-resolution source note;
 Stacks Algebra, Section 00JL, for the shift convention
 (blueprint: lem-sc-p1-koszul-resolution).
 

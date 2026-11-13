@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 /-! # Compatibility of stalk comparison with a second open restriction
 
 Source: lem-pc-finite-free-stalk-degreewise-shrink, step 3, expanding
-lem-pc-perfect-locus's finite matrix calculation.
+lemma-coherent-base-change-invertible-sheaves--3's finite matrix calculation.
 (blueprint: lem-pc-stalk-restriction-subopen-compatibility)
 -/
 

@@ -15,8 +15,8 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Smooth purity on the condensed finite-Tor categories
 
-Source: current blueprint, sk-thm-purity-transport (2026-10-25 correction).
-(blueprint: def-pur-transport-adjunction-restrictions).
+Source: current blueprint, theorem-smooth-purity-all-admissible-coefficients (2026-10-25
+correction). (blueprint: def-pur-transport-adjunction-restrictions).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,27 +31,30 @@ namespace AlgebraicGeometry.ProEtale.PurityTransport
 variable (ell : ℕ) [Fact ell.Prime]
 
 /-- The actual object property defining Dctf, reusing its recorded owner.
-Source: sk-def-sfb-constructible (blueprint: def-pur-transport-adjunction-restrictions). -/
+Source: definition-constructible-sheaves (blueprint: def-pur-transport-adjunction-restrictions). -/
 abbrev property (c : Coefficient ell) (X : Scheme.{u}) :
     ObjectProperty (c.derived ell X) :=
   constantModelBoundedConstructible (c.obj ell) X ⊓
     (fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K)
 
 /-- The same localizing closure on which the published Brown adjoint is defined.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+Source: theorem-existence-exceptional-inverse-image (blueprint:
+def-pur-transport-adjunction-restrictions). -/
 abbrev localizing (c : Coefficient ell) (X : Scheme.{u}) :=
   localizingClosureProEtale (c.obj ell) X
 
 /-- The canonical full inclusion into the localizing constructible closure.
 Only its object-membership proof uses the closure universal property.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+Source: theorem-existence-exceptional-inverse-image (blueprint:
+def-pur-transport-adjunction-restrictions). -/
 def inclusion (c : Coefficient ell) (X : Scheme.{u}) :
     c.ctf ell X ⥤ (localizing ell c X).FullSubcategory :=
   ObjectProperty.ιOfLE (fun K hK _P _hP hS ↦ hS K hK)
 
 /-- The compact-support functor is precisely Rp_* j_!, with its membership
 proof supplied separately; neither its objects nor its maps are chosen.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+Source: theorem-existence-exceptional-inverse-image (blueprint:
+def-pur-transport-adjunction-restrictions). -/
 def support (c : Coefficient ell) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (compactification : Compactification f)
     (preserves : ∀ K, property ell c X K → property ell c Y
@@ -73,7 +76,8 @@ def source (c : Coefficient ell) {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
 
 /-- The exceptional inverse image is the restriction of the actual localizing
 right adjoint, through the canonical full inclusion.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+Source: theorem-existence-exceptional-inverse-image (blueprint:
+def-pur-transport-adjunction-restrictions). -/
 def exceptional (c : Coefficient ell) {X Y : Scheme.{u}}
     (G : (localizing ell c Y).FullSubcategory ⥤ (localizing ell c X).FullSubcategory)
     (preserves : ∀ K : c.ctf ell Y,

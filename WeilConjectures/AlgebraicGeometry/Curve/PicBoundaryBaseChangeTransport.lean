@@ -15,8 +15,8 @@ import WeilConjectures.AlgebraicGeometry.Picard.Degree
 
 /-! # Transport of degree-zero boundary subgroups
 
-Source: the affine case of `thm-sc-constant-invariance`, final compatibility paragraph.
-(blueprint: lem-sc-pic-boundary-base-change-transport).
+Source: the affine case of `proposition-cohomology-smooth-affine-curve`, final compatibility
+paragraph. (blueprint: lem-sc-pic-boundary-base-change-transport).
 -/
 
 @[expose] public section

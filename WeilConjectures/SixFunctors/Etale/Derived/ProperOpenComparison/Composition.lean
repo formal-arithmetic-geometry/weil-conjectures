@@ -19,7 +19,7 @@ For proper maps `u : T₁ ⟶ T₂`, `v : T₂ ⟶ T₃` and open immersions `j�
 `α_{u ≫ v, K} = Rv_* (α_{u,K}) ∘ α_{v,K}`
 
 modulo `R(u ≫ v)_* ≅ Rv_* Ru_*`, and the comparison map of the identity is the identity
-(blueprint `lem-weil-pbc-proper-open-comparison-composition`).
+(blueprint `proposition-construction-independence-rf-shriek--7`).
 
 Both statements follow from the characterisation `Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}` of `α_u`
 (`AlgebraicGeometry.ProperOpenDatum.eq_comparison`), together with the associativity and the
@@ -117,7 +117,7 @@ variable {X T₁ T₂ T₃ : Scheme.{u}} (u : T₁ ⟶ T₂) (v : T₂ ⟶ T₃)
   (j₃ : X ⟶ T₃) [IsProper u] [IsProper v] [IsOpenImmersion j₁] [IsOpenImmersion j₂]
   [IsOpenImmersion j₃] (h₁ : j₁ ≫ u = j₂) (h₂ : j₂ ≫ v = j₃)
 
-/-- Blueprint `lem-weil-pbc-proper-open-comparison-composition`: Composition of proper-open
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Composition of proper-open
 comparison maps. For proper `u : T₁ ⟶ T₂`, `v : T₂ ⟶ T₃` and open immersions `jᵢ : X ⟶ Tᵢ` with
 `j₁ ≫ u = j₂`, `j₂ ≫ v = j₃`,
 
@@ -163,7 +163,7 @@ theorem comparison_comp :
   exact comparison_comp_of_squares hnat hassoc h₁'' h₂'
 
 
-/-- The identity law of blueprint `lem-weil-pbc-proper-open-comparison-composition`: for the
+/-- The identity law of blueprint `proposition-construction-independence-rf-shriek--7`: for the
 identity of `T` (and `j₁ = j₂ = j`), the comparison map is the inverse of the identity
 isomorphism `R(𝟙)_* ≅ 𝟭`. -/
 theorem comparison_id {T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j] :

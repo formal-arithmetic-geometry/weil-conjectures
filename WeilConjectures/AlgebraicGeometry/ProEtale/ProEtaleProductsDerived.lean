@@ -76,7 +76,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 
 Source: Weil conjectures blueprint, snapshot main-20261015,
 sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md
-(blueprint: det-pe-products-derived).
+(blueprint: proposition-exact-products--2).
 -/
 
 @[expose] public section
@@ -94,22 +94,22 @@ category, commute with cohomology, and preserve quasi-isomorphisms.
 
 Source: Weil conjectures blueprint, snapshot main-20261015,
 sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md
-(blueprint: det-pe-products-derived).
+(blueprint: proposition-exact-products--2).
 
 Proof plan:
 1. Form the termwise product using Mathlib's `coneOfHasLimitEval`. Its differential and
    projections are determined degreewise by the product universal property
-   (def-weil-category-product and def-weil-abstract-derived-category).
-2. By det-pe-products-exact, products preserve the short exact sequences with cycles,
+   (proposition-exact-products--2 and proposition-exact-products--2).
+2. By proposition-exact-products--1, products preserve the short exact sequences with cycles,
    boundaries and cohomology. Thus the canonical map induced by projections identifies
    the cohomology of this product with the product of the cohomologies, naturally in K.
 3. For a family of quasi-isomorphisms the cohomology comparison identifies the map on
    product cohomology with the product of the isomorphisms on cohomology. Its inverse
    is the product of their inverses, so this product map is a quasi-isomorphism.
-4. Use def-weil-size-convention and lem-weil-pbc-ring-sheaves-grothendieck to regard the
+4. Use prose-01-10 and proposition-exact-products--2 to regard the
    arbitrary ring-sheaf module category as Grothendieck abelian. Apply
-   lem-sfb-grothendieck-k-injective to choose resolutions K i to J i. By
-   lem-pc-ringed-space-product-kinjective, their termwise product is K-injective and
+   prose-03-02 to choose resolutions K i to J i. By
+   proposition-exact-products--2, their termwise product is K-injective and
    its localization, with the localized projections, is a product in the derived category.
 5. Step 3 makes the product of the resolution maps a quasi-isomorphism. Its projection
    squares commute. Invert it and the individual localized resolution maps to transfer

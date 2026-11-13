@@ -38,7 +38,8 @@ lemma Fiber.comap_includeRight_liesOver (p : Ideal R) [p.IsPrime] (Q : Ideal (p.
 
 /-- **Height formula at a prime of the fibre ring.** Let `R → S` be a flat map of noetherian rings,
 `p` a prime of `R`, `Q` a prime of the fibre ring `p.Fiber S = κ(p) ⊗[R] S` and `q` its contraction
-to `S`. Then `ht q = ht p + ht Q`. (blueprint: `lem-weil-pbc-flat-fiber-prime-height`) -/
+to `S`. Then `ht q = ht p + ht Q`. (blueprint:
+`proposition-proper-direct-image-constructible-complexes`) -/
 theorem height_comap_includeRight_eq_height_add [IsNoetherianRing R] [IsNoetherianRing S]
     [Module.Flat R S] (p : Ideal R) [p.IsPrime] (Q : Ideal (p.Fiber S)) [Q.IsPrime] :
     (Q.comap (includeRight : S →ₐ[R] p.Fiber S)).height = p.height + Q.height := by

@@ -274,7 +274,7 @@ Source: Stacks Project, Tag 06YU, definition-derived-tor and preceding construct
 (auxiliary; not a blueprint node).
 
 Proof plan (the node's seven steps):
-1. Work on a coefficient-universe small model of the site (def-weil-size-convention).
+1. Work on a coefficient-universe small model of the site (prose-01-10).
    Module sheaves are Grothendieck abelian (prop-pur-kinjective-resolutions-exist),
    their tensor is closed symmetric and additive (lem-pc-sheaf-modules-tensor-closed),
    and they have functorial flat resolutions (lem-trf-site-functorial-flat-resolution).
@@ -283,7 +283,7 @@ Proof plan (the node's seven steps):
    has sign (-1)^(ij); its two differential coefficients are (-1)^(ij) and
    (-1)^(ij+j). It gives preservation in the other variable. Conversely test 0 to X
    for acyclic X. Thus it agrees with def-sfb-preserves-kflat-quasi-iso.
-3. Apply lem-sfb-derived-monoidal. Its natural localization multiplication is invertible
+3. Apply prose-03-02. Its natural localization multiplication is invertible
    whenever one argument is K-flat, including the identity resolution of P.
 4. Identify that tensor with the specified site-descent tensor by extending the
    comparison on flat-term K-flat pairs, and its inverse, uniquely

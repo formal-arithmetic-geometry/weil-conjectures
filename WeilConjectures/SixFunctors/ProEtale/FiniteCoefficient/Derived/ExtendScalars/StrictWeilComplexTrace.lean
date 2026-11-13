@@ -15,7 +15,7 @@ Let `ρ : R → S` be a homomorphism of finite commutative rings whose exponent 
 scheme `X` of finite type over a field `k`, and `Ψ = - ⊗ᴸ_R S` derived scalar extension. For a
 strict Weil complex `(K, φ)` over `R` with scalar extension `(K_S, φ_S)`, the categorical traces
 of the global and local Frobenius operators over `S` are the images under `ρ` of those over `R`
-(blueprint `thm-trf-finite-coefficient-map`):
+(blueprint `theorem-grothendieck-lefschetz-trace-formula--7`):
 ```
 ρ (tr_R(F_{c,m} ∣ RΓ_c(X, K))) = tr_S(F_{c,m} ∣ RΓ_c(X, K_S)),
 ρ (tr_R(F_{x,m} ∣ K_x̄)) = tr_S(F_{x,m} ∣ (K_S)_x̄).
@@ -58,7 +58,8 @@ variable {R : Type (u + 1)} [CommRing R] [IsNoetherianRing R] {k : Type u} [Fiel
   (S : Type (u + 1)) [CommRing S] [Algebra R S] [Finite R] [Finite S]
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent R X]
 
-/-- **Coefficient change of the global traces** (blueprint `thm-trf-finite-coefficient-map`):
+/-- **Coefficient change of the global traces** (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`):
 `tr_S(F_{c,m} ∣ RΓ_c(X, K_S)) = ρ (tr_R(F_{c,m} ∣ RΓ_c(X, K)))`, where `ρ t = ε ≫ Ψ t ≫ η` is
 induced by the monoidal functor `Ψ = - ⊗ᴸ_R S`. -/
 theorem trace_globalFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u + 1} R) g)
@@ -100,7 +101,8 @@ theorem trace_globalFrobenius_extendScalars_of_eq_smul
   rw [trace_globalFrobenius_extendScalars c hi hg S W m, ha]
   exact ε_comp_leftDerivedSheafExtendScalars_map_smul_id_comp_η _ a
 
-/-- **Coefficient change of the local traces** (blueprint `thm-trf-finite-coefficient-map`):
+/-- **Coefficient change of the local traces** (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`):
 `tr_S(F_{x,m} ∣ (K_S)_x̄) = ρ (tr_R(F_{x,m} ∣ K_x̄))` at a point `x` fixed by `g^m`, where
 `ρ t = ε ≫ Ψ t ≫ η` is induced by the monoidal functor `Ψ = - ⊗ᴸ_R S`. -/
 theorem trace_localFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u + 1} R) g)

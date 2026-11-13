@@ -19,13 +19,14 @@ Let `f₁, …, f_c` be functions on a scheme `U` and `M` an invertible `c × c`
 The tuples `f` and `M f` cut out the same closed subscheme, and the cup products of Kummer
 boundaries `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` and `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` agree
 (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`). This is Step 3
-of the proof of `sk-thm-regular`.
+of the proof of `lemma-class-of-point--1`.
 
 The proof is universal: on `𝔸^c` over the general linear group `GL_{c,S}`, the coordinate frame
 `t` and the frame `A t` given by the universal matrix differ by an endomorphism of `Λ` on the
-zero section (the adjoint of the coordinate class being an isomorphism, `sk-prop-an`), which is
-the identity along the identity section, hence everywhere since `GL_{c,S} ⟶ S` has connected
-fibres. Pulling back along `(M, f) : U ⟶ 𝔸^c_{GL_{c,U}}` gives the general case.
+zero section (the adjoint of the coordinate class being an isomorphism,
+`proposition-purity-vector-bundles`), which is the identity along the identity section, hence
+everywhere since `GL_{c,S} ⟶ S` has connected fibres. Pulling back along
+`(M, f) : U ⟶ 𝔸^c_{GL_{c,U}}` gives the general case.
 
 ## Main definitions
 
@@ -226,10 +227,10 @@ variable [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S]
 /-- **Universal frame independence.** On `𝔸^c_{GL_{c,S}}`, with coordinates `t` and universal
 matrix `A`, the frames `t` and `A t` of the zero section have the same class: restricting
 `∂κ(At₁) ∪ ⋯` to the support `V(t)` gives `∂κ(t₁) ∪ ⋯`. Both adjoints differ by an endomorphism
-`h` of `Λ` on `V(t) ≅ GL_{c,S}`, the adjoint of the latter being an isomorphism (`sk-prop-an`);
-along the identity section both classes become the coordinate class of `𝔸^c_S`, so `h` is the
-identity along the identity section, hence everywhere, the fibres of `GL_{c,S} ⟶ S` being
-connected. -/
+`h` of `Λ` on `V(t) ≅ GL_{c,S}`, the adjoint of the latter being an isomorphism
+(`proposition-purity-vector-bundles`); along the identity section both classes become the coordinate
+class of `𝔸^c_S`, so `h` is the identity along the identity section, hence everywhere, the fibres of
+`GL_{c,S} ⟶ S` being connected. -/
 theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
     (g : (glAffine c S).zeroLocusSubscheme (Set.range (glCoord c S)) ⟶
       (glAffine c S).zeroLocusSubscheme (Set.range ((glMatrix c S).mulVec (glCoord c S))))

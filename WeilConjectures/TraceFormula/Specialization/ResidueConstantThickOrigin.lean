@@ -17,7 +17,7 @@ import WeilConjectures.Tactic.ExactModProofs
 
 Let `T` be a finite discrete commutative ring in which a prime `ℓ ≠ char k'` vanishes, for instance
 the residue field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`. This file proves the thick origin
-(blueprint `det-sp-thick-origin`) with coefficients `T̲`: for `m ≥ 1`, the defect
+(blueprint `lemma-case-z-v-x-m--1`) with coefficients `T̲`: for `m ≥ 1`, the defect
 `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes
 (`ProEtale.CondensedRing.isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient`).
 
@@ -193,7 +193,7 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin_finiteCoefficient
       (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom
   exact isIso_leftDerivedUpperStar_map_of_comp _ _ _ _ ho
 
-/-- **The thick origin with finite coefficients** (blueprint `det-sp-thick-origin`, with
+/-- **The thick origin with finite coefficients** (blueprint `lemma-case-z-v-x-m--1`, with
 coefficients in a finite ring `T` killed by a prime `ℓ ≠ char k'`): for `m ≥ 1`, the defect
 `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient

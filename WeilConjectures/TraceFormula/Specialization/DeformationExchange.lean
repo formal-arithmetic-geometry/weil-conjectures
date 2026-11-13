@@ -20,7 +20,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFor
 # The compact-support exchanges of the deformation to the normal cone
 
 For a correspondence `c` contracting at `y`, the compact-support exchanges of blueprint
-`det-nearby-exchange-maps` (3) for the support map
+`prose-E-15` (3) for the support map
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.supportCompactSupportExchange`, through
 the compactification `C ⊂ C̄ ⟶ X ⨯ X` deformed along `c̄⁻¹(x, x)`) and for the structure map of `X`
 (`ProEtale.CondensedRing.pointCompactSupportExchangeOfSeparated`, through a compactification
@@ -385,8 +385,8 @@ set_option Elab.async false in
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
 -- (`Elab.async false`), which keeps the memory below 4 GB
 /-- **The compact-support exchanges of the deformation specialize the class of `B`** (blueprint
-`det-tf-sp-theta-proper-constant`, `det-tf-sp-theta-open-constant`, with
-`det-tf-fixed-deformation-points`; Varshavsky, *Lefschetz–Verdier trace formula and a
+`corollary-specialization-when-fixed-point-scheme--1`, with
+`lemma-fixed-point-scheme-deformation--1`; Varshavsky, *Lefschetz–Verdier trace formula and a
 generalization of a theorem of Fujiwara*, §1.4–§2): for the exchanges `ν_c`
 (`supportCompactSupportExchange`) and `ν_X` (`pointCompactSupportExchangeOfSeparated`), the
 exchange `ν_F` of the fixed loci maps the specialization of the unit class of the special fixed

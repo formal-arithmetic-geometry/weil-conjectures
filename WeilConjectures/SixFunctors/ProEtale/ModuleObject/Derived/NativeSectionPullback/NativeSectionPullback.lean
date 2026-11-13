@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 /-! # Restricting native condensed pullbacks along a section
 
 These are the formal compositor and unit identities used when restricting the
-normalized DNC family comparison (blueprint: prop-pur-dnc-family-constancy).
+normalized DNC family comparison (blueprint: lemma-section-normal-bundle--1).
 -/
 
 @[expose] public noncomputable section

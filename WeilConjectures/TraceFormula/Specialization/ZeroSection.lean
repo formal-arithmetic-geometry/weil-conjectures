@@ -17,7 +17,7 @@ Let `x` be a rational point of a `k`-scheme `X`, with ideal `I = ker x`, and let
 `S = Spec k'⟦t⟧` (`ProEtale.CondensedRing.deformationModel`). The section of the deformation space
 over `𝔸¹_k` given by `x` (`Scheme.Hom.deformationSpaceSection`) base changes to a section
 `ẽ : S ⟶ 𝒳` of `𝒳 ⟶ S` (`ProEtale.CondensedRing.deformationZeroSectionTotal`), the closed
-immersion `Z × S ⟶ 𝒟_Z X` of blueprint `det-sp-dnc-definition` for `Z = x`. Its special fibre is
+immersion `Z × S ⟶ 𝒟_Z X` of blueprint `prose-E-04` for `Z = x`. Its special fibre is
 the zero section `e` of the special fibre `N_x X ⊗ k'`
 (`ProEtale.CondensedRing.deformationSpecialFibreZeroSection`).
 
@@ -25,7 +25,7 @@ The trait itself is a model of the point `Spec k` with special fibre the zero lo
 (`ProEtale.CondensedRing.zeroSectionModel`), and `ẽ` is a morphism of models over `x` and `e`
 (`ProEtale.CondensedRing.zeroSectionModelHom`). Its pullback exchange
 `α : Le^* Ψ_𝒳 ⟶ Ψ_S Lx^*` is the first half of the zero-section map `ε_{X,x}` of blueprint
-`det-sp-defect-definition`.
+`prose-E-04`.
 
 -/
 
@@ -57,7 +57,7 @@ lemma deformationSpaceToAffineLine_eq :
 
 /-- The section `ẽ : S ⟶ 𝒳` of the total space of the deformation to the normal cone of the
 rational point `x` over the trait: the base change of the section `𝔸¹_k ⟶ D_x X` given by `x`
-(blueprint `det-sp-dnc-definition`, the closed immersion `Z × S ⟶ 𝒟_Z X` for `Z = x`). -/
+(blueprint `prose-E-04`, the closed immersion `Z × S ⟶ 𝒟_Z X` for `Z = x`). -/
 noncomputable def deformationZeroSectionTotal : trait k' ⟶ deformationTotal X x.left.ker k' :=
   pullback.lift (traitToAffineLine k k' ≫ x.left.deformationSpaceSection) (𝟙 _) (by
     rw [Category.assoc, deformationSpaceToAffineLine_eq,
@@ -162,7 +162,7 @@ lemma deformationZeroSectionGeneric_toTotal :
 
 /-- The trait `S = Spec k'⟦t⟧` as a model of the point `Spec k`, with special fibre the zero locus
 `Z₀` of the special fibre `N_I X ⊗ k'` of the deformation to the normal cone: the *constant
-family* `Z × S` of blueprint `sk-lem-tf-sp-constant-family` for `Z = Spec k`. -/
+family* `Z × S` of blueprint `lemma-nearby-cycles-constant-family` for `Z = Spec k`. -/
 noncomputable def zeroSectionModel (I : X.left.IdealSheafData) :
     NearbyCyclesModel (point k).left (deformationSpecialZeroLocus X I k').left where
   total := trait k'

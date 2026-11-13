@@ -183,7 +183,7 @@ lemma disjoint_range_embX_forbiddenBoundary :
   exact this hmemO
 
 /-- The complement of the forbidden boundary, i.e. the locus `Xᵢ°` of the blueprint.
-(Blueprint: `def-nagata-two-open-intermediate-schemes`.) -/
+(Blueprint: `proposition-compactifying-union-two-opens--1`.) -/
 def interior : σ.X.Opens := ⟨σ.forbiddenBoundaryᶜ, isClosed_closure.isOpen_compl⟩
 
 lemma range_embX_subset_interior : Set.range σ.embX ⊆ (σ.interior : Set σ.X) :=

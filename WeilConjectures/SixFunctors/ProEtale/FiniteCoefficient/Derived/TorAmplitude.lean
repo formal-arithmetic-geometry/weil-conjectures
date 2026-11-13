@@ -71,7 +71,7 @@ variable (X : Scheme.{u})
 
 namespace ProEtale.DerivedCategory
 
-/-- Blueprint `def-weil-finite-tor-amplitude`: Finite Tor amplitude, the amplitude condition.
+/-- Blueprint `definition-constructible-sheaves`: Finite Tor amplitude, the amplitude condition.
 
 An object `M` of `D(X_proét)` has *Tor amplitude in `[a, b]`* if for every pro-étale sheaf
 `F` the derived tensor product `M ⊗ᴸ F` has homology concentrated in `[a, b]`. -/
@@ -102,7 +102,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-finite-tor-amplitude`: Finite Tor amplitude, the category
+/-- Blueprint `definition-constructible-sheaves`: Finite Tor amplitude, the category
 `Dᵇctf(Y, A)` at the finite stages.
 
 Membership in `Dctf(X, A)` as an object property of `D(X_proét)`: bounded constructible and
@@ -182,7 +182,7 @@ lemma DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFinite
 
 variable (A X)
 
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
+/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
 
 The small category `Dctf(X, A)` of bounded constructible pro-étale complexes of finite Tor
 amplitude, as a full subcategory of `D(X_proét)`. -/
@@ -198,7 +198,7 @@ noncomputable def DerivedCategoryFiniteTor.ι :
     DerivedCategoryFiniteTor A X ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   (DerivedCategory.constructibleFiniteTor A X).ι
 
-/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `sk-def-sf-categories`. -/
+/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `definition-constructible-sheaves`. -/
 noncomputable def DerivedCategoryFiniteTor.toBoundedConstructible :
     DerivedCategoryFiniteTor A X ⥤ DerivedCategoryBoundedConstructible A X :=
   ObjectProperty.ιOfLE inf_le_left

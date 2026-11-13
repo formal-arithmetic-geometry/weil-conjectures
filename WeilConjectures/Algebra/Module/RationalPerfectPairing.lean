@@ -32,7 +32,7 @@ cohomology, by the Bockstein sequence
 `ℓ`-power torsion of `Hⁱ⁺¹(X, ℤ_ℓ)` (`LinearMap.exists_eq_pow_smul_of_exact`,
 `LinearMap.pow_smul_mem_range_of_exact`, `Submodule.exists_pow_smul_eq_zero_of_isNoetherian`).
 This is the linear algebra by which the perfectness of the finite-level Poincaré pairings is
-transported to `ℚ̄_ℓ`-coefficients (blueprint `thm-pod-derived-poincare-duality`).
+transported to `ℚ̄_ℓ`-coefficients (blueprint `theorem-poincare-duality--6`).
 -/
 
 @[expose] public section

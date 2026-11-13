@@ -39,7 +39,7 @@ The pair `(K, φ_m)` is a Weil object for `Φ_m`
 
 The rational points `x : s ⟶ X` of `X` fixed by `Φ_m` are the `𝔽_{q^m}`-points of `X₀`
 (`ProEtale.CondensedRing.IsModelFrobenius.fixedPointEquiv` in
-`WeilConjectures.TraceFormula.FixedPoint`, blueprint `thm-trf-frobenius-fixed-points`); there are
+`WeilConjectures.TraceFormula.FixedPoint`, blueprint `lemma-frobenius-fixed-scheme--1`); there are
 finitely many of them, and a closed point of `X₀` of degree `d ∣ m` carries exactly `d` of them
 (`IsModelFrobenius.sum_fixedPoint`).
 
@@ -51,17 +51,17 @@ finitely many of them, and a closed point of `X₀` of degree `d ∣ m` carries 
   `ProEtale.CondensedRing.WeilBoundedConstructible.iterate`: the iterated Weil structure
   `φ_m : LΦ_m^* K ≅ K` and the Weil object `(K, φ_m)` for `Φ_m`.
 - `ProEtale.CondensedRing.IsModelFrobenius`: `Φ` is the base change of the `q`-power Frobenius
-  of a model `X₀` over `k₀` (blueprint `sk-d-weil`).
+  of a model `X₀` over `k₀` (blueprint `definition-frobenius-correspondences-their-operators`).
 
 ## Main statements
 
 - `ProEtale.CondensedRing.IsModelFrobenius.isUniversalHomeomorphism`,
   `ProEtale.CondensedRing.IsModelFrobenius.isFinite`: the iterates of the model Frobenius are
-  finite universal homeomorphisms (blueprint `i-relative-frob`).
+  finite universal homeomorphisms (blueprint `lemma-comparison-via-relative-frobenius--1`).
 - `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`,
   `ProEtale.CondensedRing.IsModelFrobenius.sum_fixedPoint`: there are finitely many fixed
   points of `Φ_m`, counted by the closed points of `X₀`
-  (blueprint `thm-trf-frobenius-fixed-points`); they are proved in
+  (blueprint `lemma-frobenius-fixed-scheme--1`); they are proved in
   `WeilConjectures.TraceFormula.FixedPoint`.
 
 -/
@@ -183,7 +183,7 @@ namespace WeilBoundedConstructible
 ```
 LΦ_{m+1}^* K = L(Φ ≫ Φ_m)^* K ≅ LΦ^* LΦ_m^* K --LΦ^* φ_m--> LΦ^* K --φ--> K
 ```
-(blueprint `def-trf-iterated-weil-map`). -/
+(blueprint `definition-frobenius-correspondences-their-operators--4`). -/
 noncomputable def iterateStr (K : WeilBoundedConstructible ℓ Φ) :
     (m : ℕ) → (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (frobeniusIterate Φ m)).obj K.carrier ≅ K.carrier
@@ -228,7 +228,7 @@ lemma iterate_str (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
 
 /-- The iterates are a cocycle: `φ_{m+n}` is `φ_n` composed with the pullback of `φ_m` along
 `Φ_n`, through the composition isomorphism `L(Φ_n ≫ Φ_m)^* ≅ LΦ_n^* LΦ_m^*` (blueprint
-`lem-trf-iterated-weil-cocycle`). -/
+`definition-frobenius-correspondences-their-operators--4`). -/
 lemma iterateStr_add (K : WeilBoundedConstructible ℓ Φ) (m n : ℕ) :
     (K.iterateStr (m + n)).hom =
       eqToHom (by rw [frobeniusIterate_add]) ≫
@@ -281,7 +281,8 @@ over the finite field `k₀ ⊆ k`: the square
 ```
 is cartesian, so that `X = X₀ ×_{k₀} k`, and `Φ = F₀ × 𝟙` is the base change of the
 `#k₀`-power Frobenius `F₀` of `X₀`, that is `Φ ≫ p = p ≫ F₀`. Since the square is cartesian, the
-two equations `Φ ≫ p = p ≫ F₀` and `Φ ≫ a_X = a_X` determine `Φ` (blueprint `sk-d-weil`). -/
+two equations `Φ ≫ p = p ≫ F₀` and `Φ ≫ a_X = a_X` determine `Φ` (blueprint
+`definition-frobenius-correspondences-their-operators`). -/
 structure IsModelFrobenius : Prop where
   /-- `X` is the base change `X₀ ×_{k₀} k`. -/
   isPullback : IsPullback p X.hom f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
@@ -291,7 +292,7 @@ structure IsModelFrobenius : Prop where
 variable {Φ f₀ p}
 
 /-- The iterates `Φ_m` of the model Frobenius are universal homeomorphisms (blueprint
-`i-relative-frob`, Step 2). -/
+`lemma-comparison-via-relative-frobenius--1`, Step 2). -/
 lemma IsModelFrobenius.isUniversalHomeomorphism (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ) :
     IsUniversalHomeomorphism (frobeniusIterate Φ m).left := by
   obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
@@ -304,7 +305,7 @@ lemma IsModelFrobenius.isUniversalHomeomorphism (hΦ : IsModelFrobenius Φ f₀ 
     infer_instance
 
 /-- The iterates `Φ_m` of the model Frobenius of a model locally of finite type are finite
-(blueprint `i-relative-frob`, Step 1). -/
+(blueprint `lemma-comparison-via-relative-frobenius--1`, Step 1). -/
 lemma IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     (m : ℕ) : IsFinite (frobeniusIterate Φ m).left := by
   obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius

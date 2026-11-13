@@ -710,10 +710,10 @@ ramified extensions.
 lem-weil-pbc-site-sheafification-sections-local lift quotient sections locally.
 The reductions are therefore locally surjective, i.e. epimorphisms of sheaves; the
 sheafified sectionwise cokernel is zero, so they are epimorphic in modules
-(def-weil-sheaf-of-modules-category).
+(situation-conventions).
 3. The multiplication isomorphisms of lem-weil-constant-scalar-strict-unit identify
 the strict tower with the target quotient tower. By
-lem-weil-pbc-module-sheaves-limits-sectionwise its ordinary limit is R_L[0],
+situation-conventions its ordinary limit is R_L[0],
 with exactly the quotient legs (def-weil-completed-integral-coefficients).
 4. lem-weil-proetale-surjective-tower-derived-limit gives that 1-s is degreewise epi
 and its kernel inclusion is the ordinary limit inclusion. Outside degree zero all

@@ -28,9 +28,9 @@ import WeilConjectures.Compactification.CommonDenseRefinement
 /-!
 # Base change for `Rf_!` on the localizing category
 
-Source: the blueprint of the Weil conjectures, chapter `sec-six-functors-basics`, unit
-`sk-thm-sf-comp-composition` (blueprint: det-sf-comp-composition-base-change); Stacks Project,
-Tag 09AH.
+Source: the blueprint of the Weil conjectures, chapter `chap-Construction-of-f`, unit
+`proposition-composition-base-change-rf-shriek--1` (blueprint:
+proposition-composition-base-change-rf-shriek--4); Stacks Project, Tag 09AH.
 
 The statement uses the published module-object definitions of derived pullback and derived
 lower shriek, the literal compactification base-change construction, and the localizing closure

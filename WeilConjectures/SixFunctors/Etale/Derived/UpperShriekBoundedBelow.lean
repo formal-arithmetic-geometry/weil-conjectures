@@ -22,7 +22,7 @@ exceptional inverse image `Rf^!`, sends `D^{≥ n}` into `D^{≥ n - N}` and pre
 objects [SGA 4, Exp. XVIII, 3.1.7].
 
 The amplitude bound is a uniform, unbounded variant of blueprint
-`lem-dg-compact-support-amplitude`, bounded by the fibres of the compactification:
+`theorem-results-from-etale-theory--5`, bounded by the fibres of the compactification:
 
 * the geometric fibres of the proper morphism `g` have uniformly bounded dimension `e`, as `Y` is
   quasi-compact (`AlgebraicGeometry.exists_topologicalKrullDim_le_of_isPullback_of_compactSpace`);
@@ -108,7 +108,7 @@ theorem exists_isZero_rightDerived_lowerStar_of_isProper_of_compactSpace (hΛ : 
     (he _ _ _ _ (IsPullback.of_hasPullback p (T.algClosurePoint t))) G q hq
 
 /-- **Finite cohomological amplitude of `Rf_!`** over a quasi-compact base, a uniform
-unbounded variant of blueprint `lem-dg-compact-support-amplitude` with the fibres of the
+unbounded variant of blueprint `theorem-results-from-etale-theory--5` with the fibres of the
 compactification in place of those of `f`. For a finite coefficient ring `Λ` and a
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` with `Y` quasi-compact, there is `N`
 such that the derived lower shriek `Rf_! = Rg_* ∘ D(i_!)` on the unbounded derived categories

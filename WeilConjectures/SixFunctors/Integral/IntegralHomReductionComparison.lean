@@ -83,8 +83,8 @@ import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurryNorm
 /-! # The evaluation-defined integral Hom reduction comparison
 
 Source: Weil blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-`lem-coef-integral-hom-reduction`, order 2134; Stacks Project, Tags 08J7, 06YY and 0A90
-(blueprint: def-sf-integral-hom-reduction-comparison).
+`proposition-six-operations-change-coefficients--7`, order 2134; Stacks Project, Tags 08J7, 06YY and
+0A90 (blueprint: def-sf-integral-hom-reduction-comparison).
 
 Tensor models below are normalized on K-flat representatives. Their Hom adjunctions
 are normalized by the actual Hom-complex evaluation. Thus the mate is the canonical

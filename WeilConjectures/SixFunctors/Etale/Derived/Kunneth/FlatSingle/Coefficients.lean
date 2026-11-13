@@ -21,7 +21,8 @@ for every sheaf `𝓕` placed in degree `0` as soon as it is for the sheaves kil
 (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_smul_eq_zero`): `J` is
 nilpotent, a sheaf `𝓕` killed by `J^{m+1}` is an extension of a sheaf killed by `J^m` by the
 subsheaf `𝓕[J]` killed by `J`, and both sides are triangulated functors of `𝓕`. This is the
-reduction to prime torsion of the proof of blueprint `lem-kun-0f1j`, for a general finite `Λ`.
+reduction to prime torsion of the proof of blueprint `lemma-kunneth-field-coefficients--1`, for a
+general finite `Λ`.
 -/
 
 @[expose] public section

@@ -248,7 +248,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-p1-cohomology,
 (G2), (G3) and proof steps 1--9; Stacks Project, Tag 0GL5
-(blueprint: sk-lem-geo-p1-cohomology).
+(blueprint: lemma-cohomology-projective-line-trace).
 
 The coefficient object and signed twists are comparison pullbacks of the existing
 ordinary etale objects. This is the ordinary small pro-etale derived category.
@@ -277,26 +277,26 @@ attribute [local irreducible] Etale.ordinaryFiniteTensor Scheme.rootsOfUnityShea
 
 /-- Exact comparison on the entire ordinary derived category; its bounded-below
 restriction is `siteComparisonDerivedPullbackPlus`.
-Source: blueprint (G2), proof step 6 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G2), proof step 6 (blueprint: lemma-cohomology-projective-line-trace). -/
 abbrev geoP1Comparison (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :=
   (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory
 
 /-- The existing exact inverse image, expressed as its left derived functor.
-Source: blueprint (G2), base-change clause (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G2), base-change clause (blueprint: lemma-cohomology-projective-line-trace). -/
 @[implicit_reducible]
 def geoP1Pullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
 
 /-- The existing K-injective derived direct image on ordinary module sheaves.
-Source: blueprint (G2) (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G2) (blueprint: lemma-cohomology-projective-line-trace). -/
 @[implicit_reducible]
 def geoP1Pushforward (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor
 
 /-- Pullback commutes with comparison by the actual site-comparison square.
-Source: blueprint proof step 7 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof step 7 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1PullComparison (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     geoP1Comparison A Y ⋙ geoP1Pullback A f ≅
@@ -312,7 +312,7 @@ def geoP1PullComparison (A : Type (u + 1)) [CommRing A]
 /-- The canonical unbounded comparison mate. Only its bounded-below instances
 are asserted invertible below. Its adjunct is the pull comparison followed by the
 image of the etale counit; no arbitrary pushforward comparison is selected.
-Source: blueprint proof steps 6--7 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof steps 6--7 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1PushComparison (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (K : Etale.DerivedCategoryModule A X) :
     (geoP1Comparison A Y).obj ((Etale.ordinaryFinitePushforward A f).obj K) ⟶
@@ -325,7 +325,7 @@ def geoP1PushComparison (A : Type (u + 1)) [CommRing A]
 attribute [local irreducible] geoP1PushComparison
 
 /-- Comparison preserves the specified ordered sum by its two injections.
-Source: blueprint proof step 6 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof step 6 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1SumComparison (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
     (K L : Etale.DerivedCategoryModule A S) :
     ((geoP1Comparison A S).obj K ⊞ (geoP1Comparison A S).obj L) ⟶
@@ -335,13 +335,13 @@ def geoP1SumComparison (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
 
 /-- The constant coefficient object, canonically the constant pro-etale sheaf
 in degree zero by the exact comparison constant-sheaf identification.
-Source: blueprint (G2) (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G2) (blueprint: lemma-cohomology-projective-line-trace). -/
 abbrev geoP1Unit (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :=
   (geoP1Comparison A S).obj (Etale.ordinaryFiniteUnit A S)
 
 /-- The signed finite Tate object, pulled through comparison and shifted.
 Exact comparison commutes with shifts, so this is Λ_S(a)[b].
-Source: blueprint definition of the twists (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint definition of the twists (blueprint: lemma-cohomology-projective-line-trace). -/
 abbrev geoP1Twist (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (S : Scheme.{u}) (a b : ℤ) :=
   (geoP1Comparison A S).obj (Etale.p1DecompositionTwist A N hA S a b)
@@ -349,7 +349,7 @@ abbrev geoP1Twist (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
 /-- The same normalized Kummer Chern arrow used by the ordinary trace. Its
 specification is the scalar Kummer boundary of the existing projective-space O(1),
 not an arbitrary degree-two class. Its comparison image is the pro-etale class.
-Source: blueprint proof steps 1, 2, 6 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof steps 1, 2, 6 (blueprint: lemma-cohomology-projective-line-trace). -/
 abbrev geoP1EtaleChern (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :=
@@ -357,7 +357,7 @@ abbrev geoP1EtaleChern (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The specified map (G2), obtained from the unit and the adjoint of the
 Kummer Chern class, then the canonical direct-image comparison mate.
-Source: blueprint (G2), proof steps 5--6 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G2), proof steps 5--6 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1DecompositionMap (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -371,7 +371,7 @@ def geoP1DecompositionMap (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The twist of (G2) by (1)[2], expressed in the order Λ(1)[2] plus Λ.
 Its two components are the shifted twisted unit and the very same Chern adjunct.
 The projection formula and evaluation identify this with twisting (G2).
-Source: blueprint proof step 8 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof step 8 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1TwistedMap (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -385,7 +385,7 @@ def geoP1TwistedMap (A : Type (u + 1)) [CommRing A] [Finite A]
       ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
 
 /-- The normalized constant-object pullback through the comparison square.
-Source: blueprint base-change clause (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint base-change clause (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1UnitPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (geoP1Pullback A f).obj (geoP1Unit A Y) ≅ geoP1Unit A X :=
@@ -393,7 +393,7 @@ def geoP1UnitPullback (A : Type (u + 1)) [CommRing A]
     (geoP1Comparison A X).mapIso (Etale.ordinaryFiniteUnitPullback A f)
 
 /-- The roots-normalized signed-twist pullback, with the exact comparison square.
-Source: blueprint base-change clause (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint base-change clause (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1TwistPullback (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) (a b : ℤ) :
@@ -402,7 +402,7 @@ def geoP1TwistPullback (A : Type (u + 1)) [CommRing A]
     (geoP1Comparison A X).mapIso (Etale.p1DecompositionTwistPullback A N hN hA f hY a b)
 
 /-- Canonical comparison on the ordered summands of (G2).
-Source: blueprint proof step 7 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof step 7 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1SourceMap (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {S' S : Scheme.{u}} (g : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -415,7 +415,7 @@ def geoP1SourceMap (A : Type (u + 1)) [CommRing A]
 
 /-- The actual derived exchange map of the Cartesian projective-line square.
 This is the mate specified by the recorded derived adjunction, for every base map.
-Source: blueprint proof step 7 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof step 7 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1Exchange (A : Type (u + 1)) [CommRing A]
     {S' S : Scheme.{u}} (g : S' ⟶ S)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology (ProjectiveLine S))
@@ -427,7 +427,7 @@ def geoP1Exchange (A : Type (u + 1)) [CommRing A]
     (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) g).toCommSq).app K
 
 /-- Exchange on the coefficient object with its canonical constant identification.
-Source: blueprint (G2), base-change clause (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G2), base-change clause (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1UnitExchange (A : Type (u + 1)) [CommRing A]
     {S' S : Scheme.{u}} (g : S' ⟶ S) :
     (geoP1Pullback A g).obj
@@ -439,7 +439,7 @@ def geoP1UnitExchange (A : Type (u + 1)) [CommRing A]
       (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom
 
 /-- Exchange on the shifted positive twist, using the normalized finite-line pullback.
-Source: blueprint proof steps 8--9 (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint proof steps 8--9 (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1TwistExchange (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {S' S : Scheme.{u}} (g : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -455,7 +455,7 @@ def geoP1TwistExchange (A : Type (u + 1)) [CommRing A]
 
 /-- The normalized trace is projection onto the constant second summand after the
 inverse of the twisted (G2). The isomorphism's hom is fixed in the theorem below.
-Source: blueprint (G3) (blueprint: sk-lem-geo-p1-cohomology). -/
+Source: blueprint (G3) (blueprint: lemma-cohomology-projective-line-trace). -/
 def geoP1Trace (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (S : Scheme.{u})
     (b : (geoP1Twist A N hA S 1 2 ⊞ geoP1Unit A S) ≅
@@ -998,7 +998,7 @@ fixed separately to the unit and the same Kummer Chern class.
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-p1-cohomology,
 (G2), (G3), proof steps 1--9; Stacks Project, Tag 0GL5
-(blueprint: sk-lem-geo-p1-cohomology).
+(blueprint: lemma-cohomology-projective-line-trace).
 
 Proof:
 1. Use the ordinary étale projective-line decomposition and the normalized trace

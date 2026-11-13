@@ -34,7 +34,7 @@ proved by induction on `n`:
   (`NearbyCyclesModel.isIso_pullbackExchange_restrictHom`), which reduces to affine `𝒳`
   (`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj_of_isAffine`);
 * **closed embedding**: an affine `𝒳` embeds as a closed subscheme `c : 𝒳 ⟶ 𝔸ⁿ_S`; by the proper
-  exchange `Ψ_{𝔸ⁿ} Rc_* ≅ Rc_{s*} Ψ_𝒳` (blueprint `det-sp-nearby-cycles-exchanges` (2),
+  exchange `Ψ_{𝔸ⁿ} Rc_* ≅ Rc_{s*} Ψ_𝒳` (blueprint `prose-E-03` (2),
   `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), the full faithfulness of
   `Rc_{s*}` and the preservation of bounded constructibility by `Rc_*`
   (`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion`),
@@ -73,10 +73,10 @@ theorem on `𝔸ⁿ_S`, proved first with the finite coefficients `𝔽_E` by De
 `ℚ̄_ℓ` through integral models
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_integral`).
 No blueprint node states the finiteness theorem: the blueprint uses it without a node
-in the proofs of `sk-prop-tf-nearby-duality-foundation` ("bounded constructible by the finiteness
-theorem for nearby cycles") and `det-sp-constant-family-vanishing` ("an exact functor with
-bounded constructible values"). The reductions also use the proper exchange (blueprint
-`det-sp-nearby-cycles-exchanges` (2),
+in the proofs of `proposition-nearby-cycles-commute-verdier-duality` ("bounded constructible by the
+finiteness theorem for nearby cycles") and `lemma-nearby-cycles-constant-family--1` ("an exact
+functor with bounded constructible values"). The reductions also use the proper exchange (blueprint
+`prose-E-03` (2),
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`).
 
 -/
@@ -327,7 +327,7 @@ identification factors as `ε = j ≫ e` through the total space preserve bounde
 complexes: `Lε^* A ≅ Lj^* Le^* A`, the pullback `Le^* A` is bounded constructible, and the
 geometric nearby cycles `Li^* Rj_* Lj^*` preserve bounded constructible complexes
 (`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`). No blueprint node states
-this theorem; it is the analogue over the trait of `lem-sfb-dc-lower-star-preserves`
+this theorem; it is the analogue over the trait of `proposition-six-operations-dctf--5`
 (`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`). -/
 theorem preservesBoundedConstructible_of_isTraitModel (M : NearbyCyclesModel X X'.left)
     (hM : M.IsTraitModel) (hε : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε) :

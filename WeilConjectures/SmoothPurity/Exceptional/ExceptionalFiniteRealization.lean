@@ -173,7 +173,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Finite realization of the strict exceptional adjunction
-Source: blueprint def-weil-exceptional-inverse-image. All changes of quotient-ring
+Source: blueprint theorem-f-shriek-finite-coefficients. All changes of quotient-ring
 presentation act identically on sections. Derived comparisons retain the universal
 right-derived unit, and exceptional comparisons are adjunction mates.
 (blueprint: def-pur-adic-etale-realization).

@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-!
 # Dense compactifications of the same dimension
 
-Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case): a separated
+Blueprint `theorem-verdier-biduality--1` (reduction to the proper case): a separated
 scheme `X` of finite type over a field `k` admits a proper compactification `j : X ↪ X̄` with
 dense image, obtained by replacing a Nagata compactification by the scheme-theoretic closure of
 `X`; then `dim X̄ = dim X`.
@@ -41,7 +41,7 @@ generalization, i.e. the generic point of an irreducible component) lies in ever
 subset `U`: the complement of the closures of the other finitely many maximal points is an open
 neighbourhood of `η`, which meets `U` in a point specializing from `η` only.
 
-Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case). -/
+Blueprint `theorem-verdier-biduality--1` (reduction to the proper case). -/
 theorem mem_of_dense_of_forall_specializes_eq {X : Type*} [TopologicalSpace X]
     [NoetherianSpace X] [QuasiSober X] [T0Space X] {U : Set X} (hU : IsOpen U)
     (hd : Dense U) {η : X} (hη : ∀ y, y ⤳ η → y = η) : η ∈ U := by
@@ -63,7 +63,7 @@ theorem mem_of_dense_of_forall_specializes_eq {X : Type*} [TopologicalSpace X]
       (specializes_iff_mem_closure.mp hξy))
   exact hξy.mem_open hU hyU
 
-/-- Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case): a dense open
+/-- Blueprint `theorem-verdier-biduality--1` (reduction to the proper case): a dense open
 subscheme `U` of a quasi-compact scheme `Y` locally of finite type over a field `k` has at least
 the dimension of `Y`. Every point of `Y` specializes from the generic point `η` of an irreducible
 component, which lies in `U`; the closure of `η` with its reduced structure is integral, so its
@@ -100,7 +100,7 @@ theorem topologicalKrullDim_le_of_dense {k : Type u} [Field k] {Y : Scheme.{u}}
     ← topologicalKrullDim_opens_eq (ι ≫ a) (ι ⁻¹ᵁ U)]
   exact (hemb.restrictPreimage (U : Set Y)).isInducing.topologicalKrullDim_le
 
-/-- Blueprint `thm-weil-etale-geometric-biduality` (reduction to the proper case): a separated
+/-- Blueprint `theorem-verdier-biduality--1` (reduction to the proper case): a separated
 scheme `X` of finite type over a field `k` admits a proper compactification `j : X ⟶ X̄` over
 `k` with dense image and `dim X̄ = dim X`. Take a Nagata compactification `X ⟶ Z ⟶ Spec k` and
 replace `Z` by the scheme-theoretic closure `X̄` of `X`: it is a closed subscheme of `Z`, hence

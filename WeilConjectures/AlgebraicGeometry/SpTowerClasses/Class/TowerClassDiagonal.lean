@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteTateLineUni
 
 /-! # Diagonal for canonical tower classes
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 `sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-diagonal).
 -/
 
@@ -186,7 +186,7 @@ def finiteScalar (n : ℕ) : ZMod (l ^ (n + 1)) →+* FiniteRing l E n :=
     (ZMod.castHom (ringChar.dvd (coefficient_annihilates l E n)) (SpTowerShriek.R l E n))
 
 /-- The recorded finite Tate line, with no independently chosen line object.
-Source: sk-def-sp-tate-twist (blueprint: def-sp-tower-class-diagonal). -/
+Source: definition-tate-twists (blueprint: def-sp-tower-class-diagonal). -/
 abbrev finiteLine (T : Scheme.{u}) (n : ℕ) :=
   Scheme.tateFiniteLine T l (FiniteRing l E n) n (finiteScalar l E n)
 

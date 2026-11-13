@@ -19,7 +19,7 @@ and are exact (for instance sheaves of modules on a replete site, such as the pr
 Then the derived category `D(C)` is *left complete*: every object `K` is the homotopy limit of
 the tower `⋯ ⟶ τ_{≥ -1} K ⟶ τ_{≥ 0} K` of its truncations
 (`DerivedCategory.isHomotopyLimit_truncGECone`, Bhatt–Scholze, *The pro-étale topology for
-schemes*, Proposition 3.3.3, blueprint `sk-prop-pe-left-complete`).
+schemes*, Proposition 3.3.3, blueprint `proposition-left-completeness`).
 
 Indeed, let `W` be the homotopy limit, the fibre of `1 - t` on `∏ₙ τ_{≥ -n} K`. Products being
 exact, `Hⁱ(∏ₙ τ_{≥ -n} K) = ∏ₙ Hⁱ(τ_{≥ -n} K)`, and the tower `Hⁱ(τ_{≥ -n} K)` vanishes for
@@ -145,7 +145,7 @@ instance (K : DerivedCategory C) (n : ℕ) : ((truncGETower K).obj (op n)).IsGE 
 variable [Abelian.HasKInjectiveResolutions C] [HasLimitsOfShape (Discrete ℕ) C]
   [HasExactLimitsOfShape (Discrete ℕ) C]
 
-/-- Blueprint `sk-prop-pe-left-complete`: in the derived category of an abelian category with
+/-- Blueprint `proposition-left-completeness`: in the derived category of an abelian category with
 exact countable products, every object `K` is the homotopy limit of the tower of its truncations
 `τ_{≥ -n} K` (Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 3.3.3). -/
 theorem isHomotopyLimit_truncGECone (K : DerivedCategory C) :

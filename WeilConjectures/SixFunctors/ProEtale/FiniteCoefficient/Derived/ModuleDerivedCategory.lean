@@ -51,7 +51,7 @@ of sheaves of `A`-modules on the small pro-étale site `Y.ProEt`
 The size convention is realised by universes: schemes in `Type u`, the coefficient ring `A` and
 the values in `ModuleCat.{u + 1} A` in `Type (u + 1)`, the site being essentially small in `u + 1`.
 
-(blueprint: `def-weil-pbc-proetale-site`, `def-weil-size-convention`) -/
+(blueprint: `definition-small-pro-etale-site--1`, `prose-01-10`) -/
 abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _ :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))
 

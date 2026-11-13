@@ -901,16 +901,16 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacks
 
 /-! # Integral models and Stacks adic constructibility along the current blueprint
 
-The current blueprint proves `det-lem-integral-models-stacks` by restriction of scalars along
+The current blueprint proves `lemma-integral-models--2` by restriction of scalars along
 the map from the constant coefficient ring, using the integral constructibility criterion
-`sk-prop-integral-criterion`, the constant-coefficient criterion
-`det-prop-integral-criterion-constant-coefficients` and the pro-etale/etale comparison of
+`proposition-integral-constructibility-criterion`, the constant-coefficient criterion
+`lemma-integral-models--1` and the pro-etale/etale comparison of
 constructible complexes. This file states the criterion in the internal presentation and
 assembles the comparison from it. The assembled theorem has exactly the statement of
 `IntegralModelsStacks.integral_models_stacks`; it replaces that proof once the stated inputs
 are proved.
 
-Source: blueprint det-lem-integral-models-stacks; Stacks Tag 09C1.
+Source: blueprint lemma-integral-models--2; Stacks Tag 09C1.
 -/
 
 @[expose] public noncomputable section

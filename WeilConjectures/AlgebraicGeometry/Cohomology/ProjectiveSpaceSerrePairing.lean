@@ -169,7 +169,8 @@ lemma twistLaurentSection_zero (m : ℤ) (s : Set n) :
 isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `F ⊗ G` to `F G`, for Laurent polynomials `F` and
 `G` of degrees `a` and `b` regular on `U_s`.
 
-(blueprint: `lem-pc-twist-tensor`, `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma twistTensorIso_hom_app_twistLaurentSection {s : Set n} (hs : s.Nonempty) {a b : ℤ}
     {x y : (n → ℤ) →₀ A} (hx : x ∈ Finsupp.supported A A (laurentExponents s a))
     (hy : y ∈ Finsupp.supported A A (laurentExponents s b)) :
@@ -289,7 +290,7 @@ complex with the Čech complex of the twisting sheaves on the standard covering 
 multiplication by a polynomial `F` of degree `a` on monomial cochains with the map induced by
 multiplication by the global section of `𝒪(a)` of `F`.
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma cechComplexFunctor_map_twistMulHom_monomialCechToCechFun
     (F : AddMonoidAlgebra A (n → ℤ))
     (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') (p : ℕ)
@@ -449,7 +450,7 @@ variable (A) in
 section `t` of `𝒪(a)` and a class `x` pair to the image `H^q(t ·)(x)` of `x` under the map
 induced by multiplication by `t`, `𝒪(b) ⟶ 𝒪(a + b)` (`twistMulHom`). It is `A`-bilinear.
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def twistMulPairing {a b c : ℤ} (h : a + b = c) (q : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) b) q
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) c) q
@@ -517,7 +518,7 @@ variable (A) in
 rank one, with basis the class of the Čech cocycle `x₀⁻¹ ⋯ x_d⁻¹`.
 
 (blueprint: `lem-pc-projective-space-twist-cohomology` (ii),
-`lem-pc-projective-space-serre-pairing`) -/
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 def twistTopTrace {p : ℕ} (hn : Fintype.card n = p + 1 + 1) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
       (twist n (Spec (.of A)) (-((p + 1 : ℕ) : ℤ) - 1)) (p + 1)
@@ -529,7 +530,7 @@ variable (A) in
 `Hᵈ(ℙᵈ_A, 𝒪(m)) ≅ Hom_A(A[x₀, …, x_d]_{-m-d-1}, A)`. It is the isomorphism induced by the Serre
 pairing and the trace (`twistHTopLinearEquivDual_apply`).
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def twistHTopLinearEquivDual {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
@@ -545,7 +546,7 @@ the Serre pairing (`twistMulPairing`) of the global section of `𝒪(D)` defined
 and `tr : Hᵈ(𝒪(-d-1)) ≅ A` is the trace `twistTopTrace`. In the monomial bases, `x^f` pairs to
 `1` with the class of `x^{-f-1}` and to `0` with the other basis elements.
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem twistHTopLinearEquivDual_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) (x : (twist n (Spec (.of A)) m).H (p + 1))
     (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
@@ -712,7 +713,7 @@ the pairing `H⁰(ℙᵈ_A, 𝒪(D)) × Hᵈ(ℙᵈ_A, 𝒪(m)) → Hᵈ(ℙᵈ_
 of the Serre pairing `twistMulPairing` with the trace `twistTopTrace`. It is perfect
 (`isPerfPair_twistSerrePairing`).
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
@@ -740,7 +741,7 @@ lemma twistSerrePairing_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : �
 by multiplication of sections identifies each side with the `A`-dual of the other. Both sides are
 finite free `A`-modules (`homogeneousSubmoduleLinearEquivTwist`, `twistHTopLinearEquivDual`).
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem isPerfPair_twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
@@ -776,7 +777,8 @@ variable (A) in
 class of `H⁰` is a global section of `𝒪(D)` (`H.zeroLinearEquiv`), which is the section of a
 unique homogeneous polynomial of degree `D` (`homogeneousSubmoduleLinearEquivTwist`).
 
-(blueprint: `lem-pc-projective-space-twist-cohomology` (i), `det-thm-picard-pn`) -/
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i),
+`lemma-coherent-base-change-invertible-sheaves--1`) -/
 def twistHZeroLinearEquiv [Nonempty n] (D : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) D) 0
     (twist n (Spec (.of A)) D).H 0 ≃ₗ[A] MvPolynomial.homogeneousSubmodule n A D :=
@@ -834,7 +836,7 @@ monomial `x^f` (`f` of degree `D`) pairs to `1` with the basis class `x^{-f-𝟏
 `twistHTopBasis` and to `0` with the other basis classes `xᵉ`. The basis is taken for the
 ordering of the coordinates used by the trace, which fixes the signs.
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem twistSerrePairing_basis {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (s : {s : n →₀ ℕ | s.degree = (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat})

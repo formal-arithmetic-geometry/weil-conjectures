@@ -164,8 +164,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingRestricti
 # Canonical comparisons for strict-tower realization
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-Definition 1939 and the proof of thm-cbc-complete-proetale; Stacks 03DI, 09BP, 0A07
-(blueprint: def-cbc-strict-tower-realization-comparisons).
+Definition 1939 and the proof of proposition-composition-base-change-rf-shriek--4; Stacks 03DI,
+09BP, 0A07 (blueprint: def-cbc-strict-tower-realization-comparisons).
 
 All comparisons below are adjunction mates or their exact derived transports.
 The strict composite is constructed before applying either Rlim or evaluation.

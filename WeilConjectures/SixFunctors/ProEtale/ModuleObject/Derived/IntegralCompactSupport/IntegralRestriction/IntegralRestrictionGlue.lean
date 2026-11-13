@@ -19,7 +19,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralCompact
 # Finite-open gluing and restriction of the integral Brown adjunction
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-sk-thm-int-restriction-glue.md (blueprint: det-thm-int-restriction-glue).
+sk-thm-int-restriction-glue.md (blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 The bounded constructible category uses finite constant scalar models. The restricted
 adjunction has exactly the Hom equivalences of the given integral Brown adjunction.
@@ -42,7 +42,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The literal full inclusion Dbc into its ordinary localizing closure.
 Source: blueprint sk-thm-int-restriction-glue, clause 2, final sentence
-(blueprint: det-thm-int-restriction-glue). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def constructibleInclusion (X : Scheme.{u}) :
     (generators Λ X).FullSubcategory ⥤ (localizing Λ X).FullSubcategory :=
   ObjectProperty.ιOfLE (fun K hK _P _hP hS ↦ hS K hK)
@@ -50,7 +50,7 @@ def constructibleInclusion (X : Scheme.{u}) :
 /-- Restriction of the actual compactification composite Rp_* D(j_!) to Dbc,
 using its asserted preservation of Dbc, without changing any morphism.
 Source: blueprint sk-thm-int-restriction-glue, clause 2, final sentence
-(blueprint: det-thm-int-restriction-glue). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def restrictedLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (hF : ∀ K, generators Λ X K → generators Λ Y ((image Λ c).obj K)) :
     (generators Λ X).FullSubcategory ⥤ (generators Λ Y).FullSubcategory :=
@@ -59,7 +59,7 @@ def restrictedLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification
 
 /-- Restriction of the given Brown right adjoint to Dbc using its asserted preservation.
 Source: blueprint sk-thm-int-restriction-glue, clause 2
-(blueprint: det-thm-int-restriction-glue). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def restrictedUpperShriek {X Y : Scheme.{u}}
     (G : (localizing Λ Y).FullSubcategory ⥤ (localizing Λ X).FullSubcategory)
     (hG : ∀ K : (localizing Λ Y).FullSubcategory,

@@ -94,7 +94,7 @@ section General
 
 variable {X : Scheme.{u}} (g : X ≅ X)
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 A *strict Weil complex* on `X` for an automorphism `g` of `X` is a pair `(K, φ)` consisting of
 an object `K` of `Dctf(X, A)` — a bounded constructible pro-étale complex of finite Tor
@@ -114,7 +114,7 @@ namespace StrictWeilComplex
 
 variable {A g}
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 A morphism of strict Weil complexes `(K, φ_K) ⟶ (L, φ_L)` is a morphism `u : K ⟶ L` of the
 underlying objects of `Dctf(X, A)` making the square
@@ -136,7 +136,7 @@ structure Hom (K L : StrictWeilComplex A g) where
   comm : K.frobenius.hom ≫ (DerivedCategoryFiniteTor.ι A X).map hom =
     L((g.hom)^*[A]).map ((DerivedCategoryFiniteTor.ι A X).map hom) ≫ L.frobenius.hom
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 The category of strict Weil complexes: identities and composition are computed on the
 underlying objects of `Dctf(X, A)`, and both are compatible with the Weil structures. -/
@@ -162,7 +162,7 @@ lemma comp_hom {K L M : StrictWeilComplex A g} (f : K ⟶ L) (h : L ⟶ M) :
 
 variable (A g)
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 The forgetful functor `For` from strict Weil complexes to `Dctf(X, A)`, sending `(K, φ)` to the
 underlying object `K` and forgetting the Weil structure. -/
@@ -181,7 +181,7 @@ end General
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k₀))
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 Let `X₀` be a scheme over a finite field `k₀`, with structure morphism `f`, and let
 `X = X₀ ×_{k₀} k̄` be its geometric fiber. The category `D^b_{ctf,W}(X, A)` of strict Weil
@@ -201,7 +201,7 @@ section HomGroups
 
 variable {K : Type u} [Field K] [IsAlgClosed K] {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 The Hom-groups of strict Weil complexes are not Ext groups of Weil sheaves. On a point
 `X ≅ Spec K`, `K` algebraically closed, a strict Weil complex `M` with underlying complex `Λ`
@@ -219,7 +219,7 @@ lemma StrictWeilComplex.map_hom_eq_zero_of_iso_unit {X : Scheme.{u}} (e : X ≅ 
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀]
 
-/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
 
 The Hom-groups of `D^b_{ctf,W}(X, Λ)` are not Ext groups of Weil sheaves: on the geometric
 fiber `X = Spec k̄` of the point `Spec k₀`, there is no nonzero morphism of strict Weil

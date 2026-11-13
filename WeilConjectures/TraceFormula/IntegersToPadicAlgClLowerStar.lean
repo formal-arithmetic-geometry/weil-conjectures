@@ -16,7 +16,7 @@ Write `T_X = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦�
 (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`). This file proves that `T`
 commutes with the pushforward along any morphism of separated `k`-schemes of finite type
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarIntegersToPadicAlgClIso`, blueprint
-`det-prop-scalar-six-direct-image` for `𝒪_E ⟶ ℚ̄_ℓ`) and with the extension by zero along an
+`lemma-change-coefficients-direct-image` for `𝒪_E ⟶ ℚ̄_ℓ`) and with the extension by zero along an
 open immersion
 (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`).
 
@@ -90,8 +90,8 @@ lemma boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs_eq (g : Z ⟶ Y) [IsPro
   Iso.ext rfl
 
 /-- **(Push)** on bounded constructible complexes for `𝒪_E ⟶ ℚ̄_ℓ` (blueprint
-`det-prop-scalar-six-direct-image`), for any morphism `g` of separated `k`-schemes of finite type:
-`Rg_*^{𝒪_E} ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`. It is the comparison for `𝒪_E ⟶ E`
+`lemma-change-coefficients-direct-image`), for any morphism `g` of separated `k`-schemes of finite
+type: `Rg_*^{𝒪_E} ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`. It is the comparison for `𝒪_E ⟶ E`
 (`boundedConstructibleLowerStarExtendScalarsIso`) followed by the one for `E ⟶ ℚ̄_ℓ`, the
 restriction of the derived (Push), which is invertible on bounded below objects
 (`isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`). -/

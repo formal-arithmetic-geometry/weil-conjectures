@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 For an étale morphism `u : U ⟶ X` and `f : X ⟶ Y` admitting compactifications, the exceptional
 inverse image localizes along `u`: `Lu^* Rf^! ≅ R(u ≫ f)^!` (blueprint
-`lem-amb-etale-adjoint-locality`, a node of the blueprint subsection `sk-prop-sf-cbc`).
+`lemma-affine-space-etale-localization--4`, a node of the blueprint subsection `sk-prop-sf-cbc`).
 
 The extension by zero `u_!` is left adjoint to `u^*`, and its derived functor `De_!` agrees with
 the derived lower shriek `Ru_!` (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`).
@@ -42,7 +42,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-amb-etale-adjoint-locality`: Étale localization of the ambient adjoint.
+/-- Blueprint `lemma-affine-space-etale-localization--4`: Étale localization of the ambient adjoint.
 
 For a separated étale morphism `u : U ⟶ X` of finite type, and `f : X ⟶ Y` such that `f` and
 `h = u ≫ f` admit compactifications, the exceptional inverse image localizes along `u`:
@@ -56,7 +56,7 @@ exact and left adjoint to `u^*`. The isomorphism is the uniqueness of right adjo
 `De_! ≅ Ru_!` (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`); only its
 existence is recorded.
 
-This is a node of the blueprint subsection `sk-prop-sf-cbc`. -/
+This is a node of the blueprint subsection `lemma-affine-space-etale-localization--4`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]

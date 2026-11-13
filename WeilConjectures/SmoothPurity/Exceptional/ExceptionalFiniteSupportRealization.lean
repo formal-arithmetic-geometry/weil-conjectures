@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalFiniteSupportP
 import WeilConjectures.CategoryTheory.SixFunctors.MateIsoAlongEquivalences
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Compact-support realization of the actual finite adjunction
-Source: blueprint def-weil-exceptional-inverse-image.
+Source: blueprint theorem-f-shriek-finite-coefficients.
 (blueprint: def-pur-adic-support-realization).
 -/
 @[expose] public noncomputable section

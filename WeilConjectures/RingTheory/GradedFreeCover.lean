@@ -18,7 +18,8 @@ import WeilConjectures.RingTheory.FiniteHomogeneousGenerators
 /-!
 # Finite graded free covers
 
-Source: blueprint `lem-sc-p1-graded-resolution`, construction of the first free module.
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, construction of the first free
+module.
 -/
 
 @[expose] public section
@@ -129,8 +130,8 @@ private theorem shiftedGrade_single {k : Type u} [Field k] {r : ℕ}
   · simp [ha] at ht
 
 /-- A finite graded module admits a surjection from a finite free module with homogeneous basis.
-Source: blueprint `lem-sc-p1-graded-resolution`, proof, choose homogeneous generators
-(blueprint: lem-sc-p1-graded-free-cover).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, choose homogeneous
+generators (blueprint: lem-sc-p1-graded-free-cover).
 
 Proof: apply `exists_finite_homogeneous_generators` to obtain generators `m a` of degrees
 `e a` and its surjective map from `Fin r →₀ S`, where `S = k[x₀,x₁]`. Give this free module

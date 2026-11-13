@@ -14,7 +14,7 @@ public import Mathlib.Topology.Sheaves.Sheaf
 /-! # Underlying modules of commutative algebra sheaves
 
 Source: Stacks Project, Sheaves, Section 009E and Lemma 0087; Modules, Lemma 01AH
-(blueprint: def-weil-pbc-ringed-space-algebra-module).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ local notation "J" => Opens.grothendieckTopology X
 
 /-- The underlying module of an algebra sheaf is its unit module restricted along the
 structure map. Source: Stacks Project, Modules, Lemma 01AH and Sheaves, Lemma 0087
-(blueprint: def-weil-pbc-ringed-space-algebra-module). -/
+(blueprint: proposition-proper-direct-image-constructible-complexes). -/
 noncomputable def commAlgebraSheafModule (O : Sheaf J CommRingCat.{uA})
     (A : Under O) :
     SheafOfModules.{uA} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) :=
@@ -42,7 +42,7 @@ noncomputable def commAlgebraSheafModule (O : Sheaf J CommRingCat.{uA})
 set_option backward.isDefEq.respectTransparency false in
 /-- Algebra-sheaf morphisms act on the underlying modules by the same section maps.
 Source: Stacks Project, Modules, Lemma 01AH and Sheaves, Lemma 0087
-(blueprint: def-weil-pbc-ringed-space-algebra-module). -/
+(blueprint: proposition-proper-direct-image-constructible-complexes). -/
 noncomputable def commAlgebraSheafModuleFunctor (O : Sheaf J CommRingCat.{uA}) :
     Under O ⥤
       SheafOfModules.{uA} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) where

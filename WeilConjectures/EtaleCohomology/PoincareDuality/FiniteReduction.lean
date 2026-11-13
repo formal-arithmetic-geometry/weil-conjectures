@@ -13,12 +13,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PoincareReduction
 Let `Λ, Λ'` be coefficient rings, for instance `A_n = 𝒪_E/ϖⁿ` and `A_m = 𝒪_E/ϖᵐ` with
 `m ≤ n`, and let `G : D(Y, Λ) ⥤ D(Y, Λ')` be a lax monoidal change of coefficients, such as the
 derived reduction `K ↦ K ⊗ᴸ_{A_n} A_m`. The finite reduction of the Poincaré pairing
-(blueprint `thm-pod-finite-reduction`,
+(blueprint `theorem-poincare-duality--9`,
 `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`) assumes that the reduction of the
 derived Poincaré pairing `β_{K_n}` is the pairing `β_{K_m}` of the reduction. This file reduces
 that hypothesis to the constituent squares of the blueprint proof: the reduction of the cup
-product, evaluation and shift part of the pairing (`lem-fix-operation-reduction`), and of the
-orientation and of the counit of `Ra_! ⊣ Ra^!` (`thm-pur-finite-reduction-of-purity`).
+product, evaluation and shift part of the pairing
+(`proposition-six-operations-change-coefficients`), and of the orientation and of the counit of
+`Ra_! ⊣ Ra^!` (`proposition-compatibility-purity-change-coefficients`).
 
 ## Main statements
 
@@ -100,9 +101,9 @@ lemma poincarePairing_eq {T : 𝐃(X, A)} (γ : T⟦(2 * d : ℤ)⟧ ≅ P.obj (
 variable {A'}
 
 omit [Etale.UpperStarPreservesFlat A] [Etale.UpperStarPreservesFlat A'] in
-/-- Blueprint `thm-pur-finite-reduction-of-purity` (the smooth trace): **the smooth trace
-reduces.** Let `G` be a change of coefficients on the base, `ψ : Ra_! ⋙ G ≅ Ψ_X ⋙ Ra_!` its
-commutation with `Ra_!`, `e : G Λ_Y ⟶ Λ'_Y`, `v₀ : Ψ_X(T[2d]) ≅ T'[2d]` and
+/-- Blueprint `proposition-compatibility-purity-change-coefficients` (the smooth trace): **the
+smooth trace reduces.** Let `G` be a change of coefficients on the base, `ψ : Ra_! ⋙ G ≅ Ψ_X ⋙ Ra_!`
+its commutation with `Ra_!`, `e : G Λ_Y ⟶ Λ'_Y`, `v₀ : Ψ_X(T[2d]) ≅ T'[2d]` and
 `vω : Ψ_X ω_X ≅ ω'_X`, where `ω_X = P Λ_Y` for the right adjoint `P` of `Ra_!` (for finite
 coefficients, `P = Ra^!`). If the orientations `γ : T[2d] ≅ ω_X`, `γ'` reduce (`hγ`) and the
 counit of `Ra_! ⊣ P` at `Λ_Y` reduces (`hS`), then `G(Tr_γ) = Tr_{γ'}` read through `ψ`, `v₀`
@@ -124,15 +125,15 @@ theorem map_smoothTrace (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ �
   simp only [smoothTrace, Functor.map_comp, Category.assoc, ← hS]
   rw [reassoc_of% hψ, ← Functor.map_comp_assoc, hγ, Functor.map_comp_assoc]
 
-/-- Blueprint `thm-pod-finite-reduction` (first assertion): **the reduction of the derived
+/-- Blueprint `theorem-poincare-duality--9` (first assertion): **the reduction of the derived
 Poincaré pairing is the Poincaré pairing of the reduction.** Let `G` be a lax monoidal change
 of coefficients on the base (for instance `- ⊗ᴸ_{A_n} A_m`), `K ∈ D(X, A)` and `K' ∈ D(X, A')`
 (the reduction `K_m` of `K = K_n`), with comparisons `c_X : Ra_! K' ⟶ G(Ra_! K)` (compact
 support) and `c_Y : G(Ra_*(K^∨ ⊗ᴸ T)[2d]) ⟶ Ra_*(K'^∨ ⊗ᴸ T')[2d]` (ordinary global sections).
 If the cup product, evaluation and shift part of the pairing reduces (`hE`,
-`lem-fix-operation-reduction`), and so do the orientation (`hγ`) and the counit (`hS`)
-(`thm-pur-finite-reduction-of-purity`), then `G(β_K)` is `β_{K'}` read through `c_X`, `c_Y`
-and `e`. This is the hypothesis of the finite reduction
+`proposition-six-operations-change-coefficients`), and so do the orientation (`hγ`) and the counit
+(`hS`) (`proposition-compatibility-purity-change-coefficients`), then `G(β_K)` is `β_{K'}` read
+through `c_X`, `c_Y` and `e`. This is the hypothesis of the finite reduction
 `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`. -/
 theorem map_poincarePairing (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ 𝐃(Y, A'))
     [G.LaxMonoidal] (ψ : R(a)_![A] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_ _)

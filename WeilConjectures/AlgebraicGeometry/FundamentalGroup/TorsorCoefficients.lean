@@ -14,8 +14,8 @@ Let `φ : M →+ M'` be a homomorphism of finite abelian groups. If `P` is an `M
 an `M'`-torsor with a `φ`-equivariant morphism `P ⟶ P'` over `Y`, then the class of `P'` in
 `H¹(Y_ét, M')` is the image of the class of `P` under the map induced by `φ` on the constant
 sheaves (`AlgebraicGeometry.Scheme.EtaleTorsor.classH1_eq_map_of_hom`). Consequently the
-identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` of blueprint `cor-galois-abelian-h1` turns
-the map induced by `φ` into the composition with `φ`
+identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` of blueprint
+`lemma-invariant-additive-characters` turns the map induced by `φ` into the composition with `φ`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_map`).
 -/
 
@@ -138,8 +138,8 @@ variable [TopologicalSpace M] [DiscreteTopology M] [TopologicalSpace M'] [Discre
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1, naturality in
-the coefficients.
+/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1,
+naturality in the coefficients.
 
 Under the identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`), the map induced by a
@@ -162,8 +162,8 @@ theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
   rfl
 
 variable (M) in
-/-- Blueprint `lem-wf-finite-constant-h1-pi1`: Finite constant torsors and the etale fundamental
-group, additivity.
+/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
+fundamental group, additivity.
 
 The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
 pointwise sum of characters. Writing the pair `(e x, e y)` of characters as the image of a class
@@ -202,8 +202,8 @@ theorem sheafHEquivContinuousMonoidHom_add
   rfl
 
 variable (M) in
-/-- Blueprint `lem-wf-finite-constant-h1-pi1`: Finite constant torsors and the etale fundamental
-group.
+/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
+fundamental group.
 
 The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection
 `AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`: the class of a torsor is

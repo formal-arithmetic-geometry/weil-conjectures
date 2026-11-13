@@ -19,7 +19,7 @@ along the localization functor followed by sheafification: on presheaves it send
 `W ↦ ⨁_{s ∈ Hom_U(W, V)} M(W, s)`, which is exact since direct sums are exact in a Grothendieck
 abelian category. Hence `j_f^*`, and the pullback `f^*`, preserve injective objects. The same
 holds for étale `f` on the small étale sites. This is the pro-étale and étale localization part
-of blueprint `lem-weil-pbc-proetale-restriction-injectives`.
+of blueprint `lemma-acyclicity-pulled-back-injectives`.
 
 ## Main results
 

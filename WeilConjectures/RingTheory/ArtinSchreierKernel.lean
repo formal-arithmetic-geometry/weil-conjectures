@@ -26,8 +26,8 @@ namespace IsLocalRing
 
 /-- In a local commutative ring with `p = 0`, the roots of `X ^ p - X` are exactly the
 unique images of elements of `ZMod p` under the canonical cast.
-Source: blueprint lem-sc-as-sequence, proof, first sentence; Stacks Project, Tag 0A3J.
-(blueprint: lem-sc-local-ring-artin-schreier-kernel)
+Source: blueprint lemma-p-torsion-affine-curve-characteristic--3, proof, first sentence; Stacks
+Project, Tag 0A3J. (blueprint: lem-sc-local-ring-artin-schreier-kernel)
 
 Proof:
 1. Reduce a root `a` modulo the unique maximal ideal to the residue field. By

@@ -90,7 +90,7 @@ private theorem pointHom_constant
 /-- Geometric stalk functors at two points with the same image admit an isomorphism
 which acts as the identity on the value of every constant module sheaf.
 Source: Stacks Project, Tag 04FN, and Tag 09BH (3), generic submodule paragraph.
-(blueprint: lem-weil-pbc-geometric-stalk-comparison-constant).
+(blueprint: corollary-cohomology-geometric-fibres--2).
 
 Proof: Let x be the common image and choose a separable closure K of its residue field.
 The residue-field embeddings defining s and t extend to embeddings of K into their

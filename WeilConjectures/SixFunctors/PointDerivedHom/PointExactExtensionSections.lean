@@ -60,7 +60,7 @@ set_option linter.privateModule false
 /-! # Exact completed extension and sections at a point
 
 Source: Stacks Project, Modules on Sites, Tags 03EI and 093M; blueprint
-main-20261015, lem-pod-point-dualizing-complex, proof, second sentence
+main-20261015, prose-10-04, proof, second sentence
 (blueprint: lem-pod-point-exact-extension-sections).
 
 The extension objects, their maps, local tensor generators and scalar-restricted

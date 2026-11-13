@@ -32,10 +32,10 @@ Noetherian:
   resulting Noetherian induction step, every nonempty closed subset of `U` has a nonempty
   relatively open subset along which `h_* E` is finite locally constant.
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite` (blueprint
-  `lem-weil-pbc-finite-pushforward-constructible-noetherian`): the direct image `h_* E` of a
+  `lemma-detection-proper-direct-image--1`): the direct image `h_* E` of a
   constructible sheaf is constructible.
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_lowerStar_of_isFinite` (blueprint
-  `lem-fin-finite-reflects-constructibility`): conversely, if `h_* F` is constructible and `V`
+  `lemma-detection-proper-direct-image--1`): conversely, if `h_* F` is constructible and `V`
   is Noetherian, then `F` is constructible.
 -/
 
@@ -202,7 +202,7 @@ theorem Etale.exists_isOpen_isFiniteLocallyConstantSheaf_upperStar_lowerStar {U 
   obtain ⟨s, hs⟩ := hS₀.nonempty
   refine ⟨O ∩ O₃, hO.inter hO₃, hrange ▸ ⟨_, ⟨s, hs⟩, rfl⟩, _, ι, inferInstance, hrange, hF⟩
 
-/-- Blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`: Finite pushforward
+/-- Blueprint `lemma-detection-proper-direct-image--1`: Finite pushforward
 preserves constructibility on Noetherian schemes.
 
 Let `U` be Noetherian, `h : V ⟶ U` finite and `E` a constructible sheaf of `Λ`-modules on
@@ -266,7 +266,7 @@ theorem Scheme.IsConstructibleSheaf.lowerStar_of_isFinite {U V : Scheme.{u}} [Is
   choose Y ι hι hrange hF using himm
   exact IsConstructibleSheaf.of_noetherianSpace _ str hlc (by simpa using hcov) hdisj ι hrange hF
 
-/-- Blueprint `lem-fin-finite-reflects-constructibility`: Finite direct image reflects
+/-- Blueprint `lemma-detection-proper-direct-image--1`: Finite direct image reflects
 constructibility.
 
 Let `p : Z ⟶ S` be a finite morphism of Noetherian schemes and `F` an étale sheaf of

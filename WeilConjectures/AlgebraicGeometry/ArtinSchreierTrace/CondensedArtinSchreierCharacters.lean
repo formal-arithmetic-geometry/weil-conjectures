@@ -29,7 +29,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatib
 /-! # Character decomposition with condensed Artin–Schreier coefficients
 
 Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lem-fd-as-characters and its proof, Steps 1–5 (blueprint: lem-fd-as-characters).
+lemma-artin-schreier-character-sheaf and its proof, Steps 1–5 (blueprint:
+lemma-artin-schreier-character-sheaf).
 
 The coefficient ring is the recorded pulled-back condensed ring, not a discrete
 constant ring. The projectors, pullbacks and degree-q sheaves are specializations
@@ -53,19 +54,19 @@ namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- Regard a Qbar-valued character as a character into the global sections of the
 condensed coefficient ring, using its canonical constant-section ring homomorphism.
-Source: blueprint lem-fd-as-characters, coefficient convention in proof Step 1
-(blueprint: lem-fd-as-characters). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, coefficient convention in proof Step 1
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 abbrev qlbarCharacter (ℓ : ℕ) [Fact ℓ.Prime] {G : Type v} [AddMonoid G]
     (χ : AddChar G (PadicAlgCl ℓ)) :
     AddChar G (MonObj.Γ (Profinite.padicAlgClRingObj.{u} ℓ)) :=
   (Profinite.PadicAlgCl.constRingHom ℓ).toMonoidHom.compAddChar χ
 
-/-- The recorded degree-q sheaf of def-fd-artin-schreier-sheaf,
+/-- The recorded degree-q sheaf of lemma-artin-schreier-character-sheaf--1,
 `ProEtale.condensedArtinSchreierSheafOf`, with its actual condensed Qbar coefficients
 and the character Psi composed with the field trace. This is an abbreviation, not a
 second Artin–Schreier construction.
-Source: blueprint lem-fd-as-characters, the clause beginning "In particular"
-(blueprint: lem-fd-as-characters). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, the clause beginning "In particular"
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 abbrev qlbarTraceSheafOf (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
     (k : Type u) [Field k] [Fintype k] [Algebra (ZMod p) k]
     (Ψ : AddChar (ZMod p) (PadicAlgCl ℓ))
@@ -75,16 +76,16 @@ abbrev qlbarTraceSheafOf (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
 
 /-- Tensor addition and the tensor inverse, with inverse-character identification,
 for the trace character psi=Psi o Tr. Both tensor orders express the inverse object.
-Source: blueprint lem-fd-as-characters, final sentence and proof Step 5
-(blueprint: lem-fd-as-characters).
+Source: blueprint lemma-artin-schreier-character-sheaf, final sentence and proof Step 5
+(blueprint: lemma-artin-schreier-character-sheaf).
 
-Proof: lem-wft-as-comparison with a=1 identifies the degree-q sheaves for f, g,
+Proof: lemma-artin-schreier-character-sheaf with a=1 identifies the degree-q sheaves for f, g,
 f+g and -f with the Psi-images for the prime covers. On common splitting charts
 for these three covers choose roots r,s,t. Their difference r+s-t is locally
 F_p-valued by lem-fd-frobenius-fixed-sections; refine so r+s is a component label.
 The eigenfunction v_{f,r}(r+a)=Psi(a) freely generates its image. Send
 (lambda v_{f,r}) tensor (mu v_{g,s}) to lambda mu v_{f+g,r+s}; the balanced-map
-universal property of def-sfb-modobj-relative-tensor constructs this module map
+universal property of prose-03-02 constructs this module map
 and its inverse. Changing roots to r+c,s+d multiplies the generators by
 Psi(-c),Psi(-d), and Psi(-c-d), respectively, so maps and inverses agree on overlaps.
 The sheaf equalizer condition (def-weil-pbc-sites-and-cohomology) glues them.

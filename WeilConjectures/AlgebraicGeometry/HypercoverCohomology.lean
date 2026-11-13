@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 /-!
 # Blueprint statements
 
-thm-weil-pbc-hypercover-cohomology.
+corollary-cohomology-pro-etale-affine.
 -/
 
 @[expose] public section
@@ -22,7 +22,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint: thm-weil-pbc-hypercover-cohomology. -/
+/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
 theorem hypercover_cohomology (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X]
     (q : ℕ) :
     FiniteSplitEtaleHypercover.IsCohomologyColimit AddCommGrpCat.{u₁ + 1} q

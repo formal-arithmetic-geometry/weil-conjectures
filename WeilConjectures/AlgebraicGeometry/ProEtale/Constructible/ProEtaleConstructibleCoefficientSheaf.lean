@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowe
 /-!
 # Intrinsic constructibility in the site coefficient universe
 
-Source: blueprint, def-weil-finite-torsion-constructibility, second paragraph;
+Source: blueprint, definition-constructible-sheaves, second paragraph;
 Stacks Tags 09AI and 09AJ (blueprint: def-weil-proetale-constructible-sheaf).
 
 The existing small-coefficient predicate is re-exported. This interface permits finite
@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.Scheme
 site object universe. Each restricted sheaf is locally a finite constant module; this is
 local constancy with finite geometric stalks. The positive number of strata includes the
 empty scheme by a single empty stratum. No etale-origin condition is part of this notion.
-Source: blueprint def-weil-finite-torsion-constructibility, second paragraph; Stacks 09AJ
+Source: blueprint definition-constructible-sheaves, second paragraph; Stacks 09AJ
 (blueprint: def-weil-proetale-constructible-sheaf). -/
 def IsConstructibleProEtaleCoefficientModuleSheaf
     (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]

@@ -57,7 +57,7 @@ noncomputable def extendScalarsCompRestrictScalarsIsoBiproductPow (X : Scheme.{u
     Functor.mapDerivedCategoryCompIso _ _ ≪≫ Functor.mapDerivedCategoryNatIso e' ≪≫
     Functor.mapDerivedCategoryBiproductPowIso _ d
 
-/-- Blueprint `sk-prop-sfb-cartesian-coefficients`: for finite subextensions `E ≤ F`, the
+/-- Blueprint `lemma-inverse-image-coefficient-sheaves`: for finite subextensions `E ≤ F`, the
 derived extension of scalars along `E_X ⟶ F_X` followed by the restriction of scalars is the
 biproduct power `K ↦ Kᵈ` on the unbounded derived category of `E_X`-modules, for a rank `d`
 independent of the scheme `X`. -/

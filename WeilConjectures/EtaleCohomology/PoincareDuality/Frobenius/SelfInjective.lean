@@ -20,8 +20,8 @@ self-injective ring the dual `RHom(C, Λ)` of a complex is computed degreewise,
 `Hom(C, Λ[0]) = Hom(H⁰(C), Λ)`
 (`DerivedCategory.bijective_homologyFunctor_map_singleFunctor_of_injective`).
 
-This is the finite-level duality `A_{E,n}` of blueprint `sk-thm-transport` in the form needed
-for the transport to `ℚ̄_ℓ` (`LinearMap.mem_torsion_of_finiteLevel`).
+This is the finite-level duality `A_{E,n}` of blueprint `theorem-poincare-duality--9` in the form
+needed for the transport to `ℚ̄_ℓ` (`LinearMap.mem_torsion_of_finiteLevel`).
 -/
 
 @[expose] public section
@@ -126,7 +126,7 @@ variable [Finite Λ] [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)}
 namespace TateOrientation
 
 /-- **Degreewise Poincaré duality over a self-injective coefficient ring** (finite level of
-blueprint `sk-thm-transport`). Let `k` be separably closed, `Λ` a finite self-injective
+blueprint `theorem-poincare-duality--9`). Let `k` be separably closed, `Λ` a finite self-injective
 cogenerating ring (e.g. `ℤ/ℓᵐ`) whose characteristic is invertible on `X`, and `γ` a Tate
 orientation of `a : X ⟶ Spec k`. For every `K ∈ D(X_ét, Λ)` and `i + j = 2d`, the degreewise
 Poincaré pairing `H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ End(Λ_s)` is nondegenerate on both sides.

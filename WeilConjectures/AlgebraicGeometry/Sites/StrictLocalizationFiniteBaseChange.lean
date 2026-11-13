@@ -24,7 +24,7 @@ local scheme over `S'` with a geometric point over `s'`. By the universal proper
 strict localization (`exists_hom_strictLocalization_of_isStrictlyHenselianLocalRing`,
 `hom_strictLocalization_ext`) it is identified with `S'_(s')`.
 
-(blueprint: `det-tf-restriction-zero-covers`)
+(blueprint: `lemma-tangent-cones-on-cover`)
 
 ## Main definitions
 
@@ -79,7 +79,7 @@ variable {S S' : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (g : S' �
 /-- The morphism `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` with components `strictLocalizationMap g s'` and
 the structure morphism `S'_(s') ⟶ S'`.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 noncomputable def strictLocalizationToPullback :
     strictLocalization s' ⟶ pullback (strictLocalizationToBase (s' ≫ g)) g :=
   pullback.lift (strictLocalizationMap g s') (strictLocalizationToBase s')
@@ -149,7 +149,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- **Strict localization and finite base change.** For `g : S' ⟶ S` finite, the morphism
 `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is an open and closed immersion.
 
-(blueprint: `det-tf-restriction-zero-covers`; Stacks, Tag 04GH and Tag 0BSL) -/
+(blueprint: `lemma-tangent-cones-on-cover`; Stacks, Tag 04GH and Tag 0BSL) -/
 theorem isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback [IsFinite g] :
     IsOpenImmersion (strictLocalizationToPullback g s') ∧
       IsClosedImmersion (strictLocalizationToPullback g s') := by
@@ -214,7 +214,7 @@ theorem isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback [IsFi
 /-- **Strict localization and finite base change**: `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is an open
 immersion for `g` finite.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 instance isOpenImmersion_strictLocalizationToPullback [IsFinite g] :
     IsOpenImmersion (strictLocalizationToPullback g s') :=
   (isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback g s').1
@@ -222,7 +222,7 @@ instance isOpenImmersion_strictLocalizationToPullback [IsFinite g] :
 /-- **Strict localization and finite base change**: `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is a closed
 immersion for `g` finite.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 instance isClosedImmersion_strictLocalizationToPullback [IsFinite g] :
     IsClosedImmersion (strictLocalizationToPullback g s') :=
   (isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback g s').2

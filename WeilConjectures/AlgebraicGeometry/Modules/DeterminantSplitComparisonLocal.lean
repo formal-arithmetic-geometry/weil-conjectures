@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 /-!
 # Local split determinant comparisons
 
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph.
-(blueprint: new-determinant-split-local).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph. (blueprint: new-determinant-split-local).
 -/
 
 @[expose] public section

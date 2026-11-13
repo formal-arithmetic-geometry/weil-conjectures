@@ -17,8 +17,8 @@ Let `Λ`, `Λ'` be finite coefficient rings with Tate twist data and let
 Thom frames, and hence the purity isomorphism of a section of a smooth morphism out of which
 the canonical orientation `ω_f ≅ Λ_X(d)[2d]`
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`, blueprint
-`thm-pur-diagonal-dualizing-object`) is built, is compatible with `Ψ` (blueprint
-`det-sp-purity-coefficient-change`).
+`proposition-relative-dualizing-complex--1`) is built, is compatible with `Ψ` (blueprint
+`proposition-compatibility-purity-change-coefficients`).
 
 The change of coefficients is bundled with the comparison data the statement needs
 (`AlgebraicGeometry.Etale.SupportedCoefficientChange`): `Ψ Λ_X ≅ Λ'_X`,
@@ -98,7 +98,8 @@ section Structure
 variable (Λ Λ' : Type (u + 1)) [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasTateTwist Λ] [HasTateTwist Λ']
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 A change of coefficients `Ψ : D(X_ét, Λ) ⥤ D(X_ét, Λ')` (for instance the reduction
 `A_{E,n+1} → A_{E,n}`, i.e. the derived extension of scalars), together with the comparisons
@@ -316,7 +317,8 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
 variable {X Z : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {c : ℕ}
   {i : Z ⟶ X} [IsClosedImmersion i]
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **The change of coefficients of the fundamental class is the fundamental class.** Let
 `i : Z ⟶ X` be a closed immersion with Thom frames over `Λ` and `Λ'` and regular Zariski frames,
@@ -338,7 +340,8 @@ theorem mapSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
     rw [frameRestriction_mapSupportedClass, frameRestriction_thomFundamentalClass, hframe F hF,
       frameRestriction_thomFundamentalClass]
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **The purity map `cl_i : Λ_Z ⟶ Ri^!(Λ_X(c)[2c])` is compatible with the change of
 coefficients**, for a closed immersion with Thom frames whose frame classes are carried to the
@@ -386,7 +389,8 @@ theorem isIso_upperShriekMap_app_of_hasThomFrames (hT : HasThomFrames Λ c i)
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((R(i)^![Λ']).map (Φ.tateShiftIso X c).hom)
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **Purity for a section of a smooth morphism is compatible with the change of coefficients.**
 For `g : V ⟶ B` smooth of relative dimension `c` with a closed section `s`, `B` separated and
@@ -469,7 +473,8 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
   [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : SupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **The section invariant isomorphism `𝒞(g, s) ≅ Λ_B(c)[2c]` is compatible with the change of
 coefficients.** Let `g : V ⟶ B` be smooth of relative dimension `c` with a closed section `s`,
@@ -512,7 +517,8 @@ theorem map_sectionInvariantTwistShiftIsoOfSection {V B : Scheme.{u}} (c : ℕ) 
     Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hτ,
     reassoc_of% (hL vω (Φ.tateShiftIso V c) _ _ _ _ _ _ _ _ hθ hε)]
 
-/-- Blueprint `thm-pur-diagonal-dualizing-object`, `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-relative-dualizing-complex--1`,
+`proposition-compatibility-purity-change-coefficients`
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the change of
 coefficients.** Let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `Y` separated and

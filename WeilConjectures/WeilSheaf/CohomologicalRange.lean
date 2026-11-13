@@ -31,12 +31,13 @@ finite coefficient levels, so this argument cannot be run. Instead, the vanishin
 is reduced, by Noetherian induction, Noether normalization and the lisse locus on the affine line,
 to Poincaré duality for lisse sheaves on smooth curves
 (`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`, blueprint
-`thm-pod-degreewise-perfectness-over-a-field`), see
+`corollary-degreewise-duality-over-fields--1`), see
 `WeilConjectures.WeilSheaf.CohomologicalRangeAffine`. The statement is clause (3) of the
-Euler-product form of the trace formula (blueprint `thm-trf-l-function-euler-product`), for a sheaf
-placed in degree zero on a scheme of dimension at most one; it is stated here for Weil sheaves,
-without the finite-level hypotheses (étale-origin witnesses and compactification admissibility of
-the reductions of a lattice) of the blueprint, which have no counterpart for `ℚ̄_ℓ`-Weil sheaves.
+Euler-product form of the trace formula (blueprint `theorem-trace-formula-euler-product`), for a
+sheaf placed in degree zero on a scheme of dimension at most one; it is stated here for Weil
+sheaves, without the finite-level hypotheses (étale-origin witnesses and compactification
+admissibility of the reductions of a lattice) of the blueprint, which have no counterpart for
+`ℚ̄_ℓ`-Weil sheaves.
 -/
 
 @[expose] public section
@@ -55,7 +56,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `thm-trf-l-function-euler-product`, clause (3): if the separated `k₀`-scheme `X` of
+/-- Blueprint `theorem-trace-formula-euler-product`, clause (3): if the separated `k₀`-scheme `X` of
 finite type has dimension at most one and `G` is a Weil sheaf on `X`, placed in degree zero, then
 `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`, so that the Euler product of the trace formula only
 involves `H_c^0`, `H_c^1` and `H_c^2`.
@@ -147,7 +148,7 @@ is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ 
 curve has dimension at most one, and the compactly supported cohomology of a sheaf on a scheme of
 dimension at most one is concentrated in degrees `0, 1, 2`
 (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_krullDim_le_one`).
-(blueprint: `lem-zl-affine-curve-range`) -/
+(blueprint: `lemma-cohomological-range-curve--1`) -/
 theorem subsingleton_compactlySupportedCohomology_of_isAffine [IsAffine X]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :

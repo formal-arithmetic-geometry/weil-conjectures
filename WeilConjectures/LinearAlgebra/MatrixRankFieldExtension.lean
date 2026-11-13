@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
 Source: Milne, Lectures on Étale Cohomology, Chapter II, §27, proof of Lemma 27.9, last
 sentence; Deligne, La conjecture de Weil I, "Preuve de (1.7) ⇒ (1.6)"; the blueprint of the
-Weil conjectures, chapter `sec-zeta-weil`, `thm-weil-final-rationality`, proof
-(blueprint: lem-weil-matrix-rank-field-extension).
+Weil conjectures, chapter `chap-Proof-of-the-Weil-conjectures`,
+`corollary-point-counting-zeta-function--7`, proof (blueprint:
+lem-weil-matrix-rank-field-extension).
 -/
 
 @[expose] public section

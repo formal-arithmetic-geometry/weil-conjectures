@@ -239,7 +239,7 @@ inverse images on associated representables with the two projection formulas.
 4. At V use the inverse of the type-(c) map from middle V to first (F V), followed by
 its map to second (G V). Taking mates defines the displayed orientation.
 5. Compute the componentwise pullbacks in XI Lemma 1.5. Yoneda and
-lem-weil-pbc-sheafification-sets-exact preserve them. Cancel the type-(c) isomorphisms.
+situation-conventions preserve them. Cancel the type-(c) isomorphisms.
 6. For a cone (a,b,t) form H(Z) by the displayed pullback. Naturality gives its action
 on arrows. Finite limits commute with pullbacks by
 lem-weil-pbc-site-sheaf-sets-limits-sectionwise, so H preserves finite limits.

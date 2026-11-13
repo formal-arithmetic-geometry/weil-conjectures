@@ -22,7 +22,7 @@ algebra commutes with base change to `B`:
 - `AlgebraicGeometry.reesGradingEquivPow` — the degree-`n` piece of the Rees algebra is
   isomorphic to `I ^ n`.
 - `AlgebraicGeometry.reesGradingLocalizationEquiv` — the base change isomorphism
-  (blueprint: `lemma-nagata-localization-rees-piece`).
+  (blueprint: `definition-admissible-blow-up--1`).
 
 -/
 
@@ -60,7 +60,7 @@ variable {B : Type u} [CommRing B] [Algebra A B] (s : A) [IsLocalization.Away s 
 of the Rees algebra of `I` is the degree-`n` piece of the Rees algebra of `I·B`:
 `B ⊗[A] R_A(I)_n ≃ₗ[B] R_B(I·B)_n`. Both sides are identified with `B ⊗[A] Iⁿ` and
 `(I·B)ⁿ = Iⁿ·B`, and `Iⁿ·B` is the localization of `Iⁿ`.
-(blueprint: `lemma-nagata-localization-rees-piece`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 noncomputable def reesGradingLocalizationEquiv (n : ℕ) :
     B ⊗[A] reesGrading I n ≃ₗ[B] reesGrading (I.map (algebraMap A B)) n :=
   ((reesGradingEquivPow I n).baseChange A B _ _).trans <|

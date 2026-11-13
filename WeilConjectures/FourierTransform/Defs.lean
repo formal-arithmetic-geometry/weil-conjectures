@@ -150,14 +150,15 @@ Being an Artin–Schreier sheaf, it is lisse of rank one
 the character (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_mul`), with
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` identifying `𝒦_ψ⁻¹` with
 `𝒦_{ψ⁻¹}`. It is defined for every commutative ring `Λ` in which `p` is invertible.
-(sketch blueprint: `def-fd-kernel`, `prop-kernel-lisse`; blueprint: `def-fd-kernel`) -/
+(sketch blueprint: `sec-Fourier-inversion`, `lemma-artin-schreier-character-sheaf`; blueprint:
+`sec-Fourier-inversion`) -/
 noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   artinSchreierSheafZMod (pullback π π') Ψ b
 
 /-- Over a finite coefficient ring the Fourier kernel is constructible, being an Artin–Schreier
-sheaf. (sketch blueprint: `prop-kernel-lisse`) -/
+sheaf. (sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 instance isConstructibleSheaf_fourierKernel [Finite Λ] [CharP Γ(pullback π π', ⊤) p]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     Scheme.IsConstructibleSheaf (fourierKernel Λ π π' Ψ b) := by
@@ -166,7 +167,7 @@ instance isConstructibleSheaf_fourierKernel [Finite Λ] [CharP Γ(pullback π π
 
 /-- The Fourier kernel is flat, having a tensor inverse, the Artin–Schreier sheaf of `-b`
 (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg`).
-(sketch blueprint: `prop-kernel-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem flat_fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     ObjectProperty.flat (fourierKernel Λ π π' Ψ b) := by
@@ -176,7 +177,8 @@ theorem flat_fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMo
   exact ObjectProperty.flat_of_tensorIso e
 
 /-- Over a finite coefficient ring the Fourier kernel, placed in degree `0`, has Tor amplitude
-in `[0, 0]`, being a flat constructible sheaf. (sketch blueprint: `prop-kernel-lisse`) -/
+in `[0, 0]`, being a flat constructible sheaf. (sketch blueprint:
+`lemma-artin-schreier-character-sheaf`) -/
 theorem torAmplitudeIn_fourierKernel [Finite Λ] [CharP Γ(pullback π π', ⊤) p]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (pullback π π') 0 0
@@ -188,7 +190,8 @@ section Kernel
 variable [CharP Γ(pullback π π', ⊤) p]
 
 /-- The Fourier kernel `𝒦_ψ` is locally constant, as the pullback of the Artin–Schreier sheaf.
-(sketch blueprint: `prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`; blueprint:
+`lemma-artin-schreier-character-sheaf`) -/
 instance isLocallyConstantSheaf_fourierKernel (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     Scheme.IsLocallyConstantSheaf (fourierKernel Λ π π' Ψ b) := by
@@ -197,7 +200,8 @@ instance isLocallyConstantSheaf_fourierKernel (Ψ : AddChar (ZMod p) Λ)
 
 /-- The Fourier kernel is multiplicative in the character: `𝒦_ψ ⊗ 𝒦_ψ' ≅ 𝒦_{ψ ψ'}`, the value
 of the character being additive in the defining function.
-(sketch blueprint: `prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`; blueprint:
+`lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_fourierKernel_mul (Ψ Ψ' : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     Nonempty (fourierKernel Λ π π' Ψ b ⊗ fourierKernel Λ π π' Ψ' b ≅
       fourierKernel Λ π π' (Ψ * Ψ') b) := by
@@ -206,7 +210,8 @@ theorem nonempty_iso_fourierKernel_mul (Ψ Ψ' : AddChar (ZMod p) Λ) (b : Γ(pu
 
 /-- The tensor inverse of the Fourier kernel `𝒦_ψ` is the kernel `𝒦_{ψ⁻¹}` of the inverse
 character: `𝒦_ψ ⊗ 𝒦_{ψ⁻¹} ≅ Λ`.
-(sketch blueprint: `prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`; blueprint:
+`lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_fourierKernel_inv (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     Nonempty (fourierKernel Λ π π' Ψ b ⊗ fourierKernel Λ π π' Ψ⁻¹ b ≅ 𝟙_ _) := by
   let := (pullback π π').overSpecZModOfCharP p
@@ -219,7 +224,8 @@ theorem nonempty_iso_fourierKernel_inv (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullba
 
 /-- The Fourier kernel placed in degree zero is dualizable in `D((V ×_S V')_ét)`, with dual the
 kernel `𝒦_{ψ⁻¹}` of the inverse character.
-(sketch blueprint: `prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`; blueprint:
+`lemma-artin-schreier-character-sheaf`) -/
 theorem isDualizable_fourierKernel (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     IsDualizable ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
   isDualizable_singleFunctor_obj_of_tensorIso (nonempty_iso_fourierKernel_inv Λ π π' Ψ b).some
@@ -231,7 +237,7 @@ functor `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ` from `D(V_ét)` to `D((V ×_S V')_
 projection and `𝒦_ψ` the Fourier kernel placed in degree `0`. The Fourier–Deligne transform is
 its compact-support direct image along the second projection `p₂`, shifted
 (`AlgebraicGeometry.Etale.fourierTransform_eq_fourierIntegrand_comp`).
-(sketch blueprint: `def-fd-kernel`; blueprint: `def-fd-kernel`) -/
+(sketch blueprint: `sec-Fourier-inversion`; blueprint: `sec-Fourier-inversion`) -/
 noncomputable def fourierIntegrand [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
@@ -252,7 +258,7 @@ the same construction with `Ψ⁻¹` in place of `Ψ`; its kernel is the inverse
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`. Like the kernel, it is
 defined for every commutative ring `Λ` in which `p` is invertible; torsion coefficients are
 only assumed by the theorems that need them.
-(sketch blueprint: `def-fd-transform`) -/
+(sketch blueprint: `sec-Fourier-inversion`) -/
 noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
@@ -263,7 +269,7 @@ noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
 
 /-- The Fourier–Deligne transform is the compact-support direct image of the Fourier integrand
 along the second projection, shifted by `r`: `FT_ψ(K) = Rp₂,!(ℱ_ψ(K))[r]`.
-(sketch blueprint: `def-fd-kernel`; blueprint: `def-fd-kernel`) -/
+(sketch blueprint: `sec-Fourier-inversion`; blueprint: `sec-Fourier-inversion`) -/
 lemma fourierTransform_eq_fourierIntegrand_comp [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
@@ -286,11 +292,11 @@ and the shift by `r`, which are triangulated functors.
 
 Together with
 `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`
-this is the statement of `thm-fd-transform-well-defined`, the restriction
+this is the statement of `sec-Fourier-inversion`, the restriction
 `AlgebraicGeometry.Etale.fourierTransformBoundedConstructible` to `Dᵇc` being then exact.
 
 Class: general; no hypothesis on the coefficients.
-(sketch blueprint: `thm-fd-transform-well-defined`) -/
+(sketch blueprint: `sec-Fourier-inversion`) -/
 instance isTriangulated_fourierTransform [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
@@ -311,7 +317,7 @@ bounded constructible derived category `Dᵇc(V, Λ)` into `Dᵇc(V', Λ)`.
 Class: torsion; decided by Deligne finiteness of `Rp₂,!`
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`), which needs
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `thm-fd-transform-well-defined`) -/
+(sketch blueprint: `sec-Fourier-inversion`) -/
 theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : Type u}
     [Field k] (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] [QuasiCompact aV']
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
@@ -329,12 +335,12 @@ theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : T
   exact (DerivedCategory.boundedConstructible _ V').le_shift r _ h₃
 
 /-- For `V'` of finite type over a field, the Fourier–Deligne transform as a functor
-`Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose existence `thm-fd-transform-well-defined` asserts.
+`Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose existence `sec-Fourier-inversion` asserts.
 
 Class: torsion; decided by Deligne finiteness of `Rp₂,!`, through
 `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`,
 which needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `thm-fd-transform-well-defined`) -/
+(sketch blueprint: `sec-Fourier-inversion`) -/
 noncomputable def fourierTransformBoundedConstructible
     (hV' : ∃ (k : Type u) (_ : Field k) (a : V' ⟶ Spec (.of k)),
       LocallyOfFiniteType a ∧ QuasiCompact a)

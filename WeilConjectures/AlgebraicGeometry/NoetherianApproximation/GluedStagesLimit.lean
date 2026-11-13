@@ -94,8 +94,8 @@ lemma fromS_preimage_opensRange_ι (a : G.ι) : l.fromS ⁻¹ᵁ (l.ι a).opensR
 
 end Stage
 
-/-- Blueprint `def-nagata-glued-limit-comparison`: Comparison from the original scheme to the
-inverse limit.
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Comparison from the original scheme to
+the inverse limit.
 
 The compatible morphisms `S ⟶ S_l` (`Stage.fromS`) induced by the inclusions of the coefficient
 subrings `Aₐ ⊆ Γ(S, Uₐ)`, as a cone over the diagram of the glued stages. Instead of forming the
@@ -222,7 +222,7 @@ noncomputable def isLimitStageCone (G : S.FiniteAffineGluingPresentation) :
     (fun a ↦ G.chartOpen (op G.glueStage) a) G.glueStage.iSup_opensRange_ι
     fun a ↦ G.isLimitOpensConeChart (op G.glueStage) a
 
-/-- Blueprint `prop-nagata-noetherian-inverse-system` (constructive form): the Noetherian
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (constructive form): the Noetherian
 approximation of a scheme `S` with a finite affine gluing presentation `G`, given by the glued
 finite-type stages `S_l` (`Stage.scheme`), indexed by the opposite of the directed set of valid
 stages, with the affine transition morphisms `S_{l'} ⟶ S_l` (`Stage.transition`) and the

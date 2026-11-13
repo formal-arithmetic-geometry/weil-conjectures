@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # A finite quasi-coherent filtration of infinitesimal units
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-finite-filtration)
 -/
 
@@ -56,7 +56,7 @@ private theorem isZero_reduction_units_kernel_of_eq_bot (X : Scheme.{u})
 
 /-- The reduction units kernel has a finite filtration with pulled-back additive
 quasi-coherent quotients. This statement concerns sheaves, not their cohomology.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-finite-filtration)
 
 Proof: Let N be the nilradical of X. Noetherianity and a finite affine cover give

@@ -70,7 +70,7 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
 /-- **Acyclic resolutions of complexes compute `R⁺F`.** If `F` is left exact and `φ : K ⟶ L`
 is a quasi-isomorphism from a bounded below complex `K` to a bounded below complex `L` of
 `F`-acyclic objects, then `H^n(R⁺F(K)) ≅ H^n(F(L))` for all `n`.
-(blueprint: `lemma-weil-pbc-leray-acyclicity`, item 3) -/
+(blueprint: `lemma-acyclic-resolutions`, item 3) -/
 theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso [PreservesFiniteLimits F]
     {K L : CochainComplex.Plus C} (φ : K ⟶ L) [QuasiIso φ.hom]
     (hL : ∀ n, F.rightAcyclic (L.obj.X n)) (n : ℤ) :

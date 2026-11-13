@@ -78,8 +78,8 @@ namespace LaurentSeries
 /-- For `n ≥ 2` and `b ≠ 0`, the polynomial `Xⁿ - X - b t⁻¹` is irreducible over `k((t))`. In
 characteristic `p`, for `n` a power of `p`, this says that the Artin–Schreier extension
 `uⁿ - u = b / t` of `k((t))` has degree `n`: it is the step "the cover is totally ramified" of
-the blueprint lemma `lem-a1-artin-schreier-ramified-infinity`, where `k` is algebraically closed
-and `t = 1 / x` is the coordinate at infinity.
+the blueprint lemma `lemma-unramified-at-infinity-no-linear-characters--1`, where `k` is
+algebraically closed and `t = 1 / x` is the coordinate at infinity.
 
 The proof inverts the variable: `u⁻¹` is a root of the Eisenstein polynomial
 `Yⁿ + (t / b) (Yⁿ⁻¹ - 1)` over `k[[t]]`. -/
@@ -166,7 +166,7 @@ the inertia group at infinity, and `u^q - u = a / t` is the Artin–Schreier cov
 defining `ℒ_{ψ(a x)}`. An element `σ` with `σ u = u + c` acts on the geometric generic stalk of
 `ℒ_{ψ(a x)}` by `ψ(±c)`, so for nontrivial `ψ` inertia at infinity acts nontrivially: a
 nonzero linear Artin–Schreier sheaf is ramified at infinity.
-(blueprint: `lem-a1-artin-schreier-ramified-infinity`) -/
+(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
 theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single {k₀ : Type*} [Field k₀] [Finite k₀]
     [Algebra k₀ k] {a : k₀} (ha : a ≠ 0) (L : Type*) [Field L] [Algebra (LaurentSeries k) L]
     [IsAlgClosure (LaurentSeries k) L] {u : L}

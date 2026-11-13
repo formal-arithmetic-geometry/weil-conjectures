@@ -20,7 +20,7 @@ Consequently, if moreover `s` is a section of a morphism `p : V ⟶ X`, then
 
 `Rp_* s_! K ≅ Rp_* Rs_* K ≅ R(s ≫ p)_* K = R(𝟙)_* K ≅ K`
 
-(blueprint `lem-weil-pbc-clopen-section-direct-image`).
+(blueprint `proposition-construction-independence-rf-shriek--7`).
 
 ## Main statements
 
@@ -115,9 +115,9 @@ lemma isIso_openImmersionLowerShriekToLowerStarPlus_of_isClosed_range
 
 variable {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
 
-/-- Blueprint `lem-weil-pbc-clopen-section-direct-image`: Direct image from an open and closed
-section. Let `p : V ⟶ X` be a morphism and `s : X ⟶ V` an open immersion with closed range and
-`s ≫ p = 𝟙 X`. Restriction to the component `s(X)` gives a canonical isomorphism
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Direct image from an open and
+closed section. Let `p : V ⟶ X` be a morphism and `s : X ⟶ V` an open immersion with closed range
+and `s ≫ p = 𝟙 X`. Restriction to the component `s(X)` gives a canonical isomorphism
 
 `Rp_* s_! K ≅ K`
 

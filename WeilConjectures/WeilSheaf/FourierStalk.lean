@@ -30,11 +30,11 @@ and tensoring with it does nothing.
 
 - `AlgebraicGeometry.affineLine.rationalPoint`: the closed point `x = a` of `𝔸¹_{k₀}`.
 - `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint`: the
-  stalk formula at rational points (blueprint `lem-fd-stalk-formula`), by compact support base
-  change along `AlgebraicGeometry.affineLine.rationalPointHom` and the restriction of the kernel
-  to the fibre `AlgebraicGeometry.affineLine.fibreInclusion`.
+  stalk formula at rational points (blueprint `proposition-base-change-fourier-inversion--3`), by
+  compact support base change along `AlgebraicGeometry.affineLine.rationalPointHom` and the
+  restriction of the kernel to the fibre `AlgebraicGeometry.affineLine.fibreInclusion`.
 - `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ` (blueprint
-  `lem-fd-as-characters`), from `AS^* ℒ_ψ ≅ ℚ̄_ℓ`.
+  `lemma-artin-schreier-character-sheaf`), from `AS^* ℒ_ψ ≅ ℚ̄_ℓ`.
 - `AlgebraicGeometry.WeilComplex.tensorLisseObjIsoOfIso`: tensoring with a Weil sheaf isomorphic
   to `ℚ̄_ℓ` is the identity.
 -/
@@ -88,7 +88,8 @@ end WeilComplex
 /-- `ℒ_{ψ(0 · x)}`, the Artin–Schreier sheaf of the zero function, is the constant Weil sheaf
 `ℚ̄_ℓ`: over the zero function the Artin–Schreier cover is split, `#k₀` copies of the line with
 trivial Frobenius, so all the isotypic summands of the pushforward are constant. It is the unit
-of the kernel family `ℒ_{ψ(a x)}`. (blueprint: `lem-fd-as-characters`, the case `f = 0`) -/
+of the kernel family `ℒ_{ψ(a x)}`. (blueprint: `lemma-artin-schreier-character-sheaf`, the case
+`f = 0`) -/
 theorem nonempty_iso_artinSchreier_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) :=
   nonempty_artinSchreier_zero_iso_adicConstant ψ
@@ -251,7 +252,7 @@ projection over `a` is the line `x ↦ (x, a)`, along which the kernel `μ^* ℒ
 `ℒ_{ψ(a x)}`, and compact support base change along `a : Spec k₀ ⟶ 𝔸¹` identifies the stalk of
 `Rpr₂!` with the compactly supported cohomology of the fibre, compatibly with the Weil
 structures; the shift `[1]` of the transform moves `r` to `r + 1`.
-(blueprint: `lem-fd-stalk-formula`) -/
+(blueprint: `proposition-base-change-fourier-inversion--3`) -/
 theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint
     (ψ : AddChar k₀ (PadicAlgCl l)) (K : WeilComplex k₀ l (affineLine k₀)) (a : k₀) (r : ℤ) :
     Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk

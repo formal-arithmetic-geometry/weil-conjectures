@@ -16,7 +16,7 @@ Let `ρ : Λ →+* Λ'` be a surjection of finite coefficient rings whose expone
 separably closed field `k`, and `x̄ : Spec k ⟶ X` a geometric point. The canonical coefficient
 comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄`
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
-`K ∈ Dᵇctf(X, Λ)` (blueprint `thm-trf-finite-coefficient-map`).
+`K ∈ Dᵇctf(X, Λ)` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 
 Both squares of the pasting carry derived base changes to derived base changes, as their
 horizontal functors are computed by exact left adjoints whose right adjoints commute with
@@ -173,10 +173,10 @@ lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ (k := k)).app M) hθ').comp_map_iso
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ' (k := k)).app M').symm
 
-/-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
-isomorphism at a geometric point: for a morphism `ρ : Λ →+* Λ'` of finite rings whose exponent
-is invertible on `k`, the canonical coefficient comparison
-`K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` of geometric stalks
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7` (subsection
+`theorem-grothendieck-lefschetz-trace-formula--7`), the pullback isomorphism at a geometric point:
+for a morphism `ρ : Λ →+* Λ'` of finite rings whose exponent is invertible on `k`, the canonical
+coefficient comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` of geometric stalks
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`. -/
 theorem isCoefficientChange_geometricStalkRestrictScalarsIso [Finite Λ] [Finite Λ']

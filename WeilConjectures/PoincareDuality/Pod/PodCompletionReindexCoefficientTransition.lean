@@ -12,7 +12,7 @@ public import WeilConjectures.PoincareDuality.Integral.IntegralPullbackCompariso
 
 /-! # Coherence of the specified ordinary reindexing comparisons
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941
 (blueprint: def-pod-completion-reindex-coefficient-transition).
 All equations below refer to the displayed family's own reduction, limit and tensor maps.

@@ -17,7 +17,7 @@ Let `G : C ⥤ D` be a strong monoidal functor between monoidal closed categorie
 map `ρ : G [K, M] ⟶ [G K, G M]` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), the
 transpose of `G K ⊗ G [K, M] ≅ G (K ⊗ [K, M]) ⟶ G M`, is compatible with evaluation by
 construction. This file collects formal criteria for `ρ` to be an isomorphism, used for the
-internal-hom comparison of blueprint `lem-weil-geometric-generic-exchange`
+internal-hom comparison of blueprint `lemma-restriction-geometric-generic-fibre`
 (`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom`):
 
 * `ρ` is an isomorphism at `K` if `K` has a left dual

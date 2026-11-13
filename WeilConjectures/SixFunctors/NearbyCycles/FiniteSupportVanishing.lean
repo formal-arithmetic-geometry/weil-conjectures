@@ -31,7 +31,7 @@ form for morphisms (the cone of a morphism) is
 
 The bounded constructible `ℚ̄_ℓ` case is
 `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens` (blueprint
-`det-nearby-kunneth-finite-support`).
+`lemma-finite-support-global-sections--1`).
 
 ## Proof
 

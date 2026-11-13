@@ -43,10 +43,10 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `det-ctf-finite-compact-etale`: on a finite-type scheme `X` over a field `k` of
-finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)` and
-has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on `X`. The reduction
-to the generators `Rg_* Rj_! L` only uses that they generate `Dctf(X_ét, Λ)`. -/
+/-- Blueprint `proposition-compactness-finite-coefficients`: on a finite-type scheme `X` over a
+field `k` of finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in
+`D(X_ét, Λ)` and has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on `X`.
+The reduction to the generators `Rg_* Rj_! L` only uses that they generate `Dctf(X_ét, Λ)`. -/
 theorem compactBoundedHom_of_constructibleFiniteTor_of_generation [Finite Λ] {k : Type u}
     [Field k] (hk : HasFiniteCohomologicalDimension Λ (Spec (.of k))) {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [QuasiSeparated aX]
@@ -95,9 +95,9 @@ lemma exists_compactBoundedHom_of_constructibleFiniteTor_of_generation
   exact ⟨C', Etale.compactBoundedHom_of_constructibleFiniteTor_of_generation Λ hk aX hC't, ⟨e⟩⟩
 
 include hk aX in
-/-- Blueprint `det-ctf-finite-compact-proetale`, the vanishing step: for `C` in `Dctf(X, Λ)`
-there is `N` with `Hom(C, L) = 0` for every pro-étale complex `L` with cohomology sheaves of étale
-origin in degrees `≤ N`. -/
+/-- Blueprint `proposition-compactness-finite-coefficients--1`, the vanishing step: for `C` in
+`Dctf(X, Λ)` there is `N` with `Hom(C, L) = 0` for every pro-étale complex `L` with cohomology
+sheaves of étale origin in degrees `≤ N`. -/
 lemma exists_forall_eq_zero_of_constructibleFiniteTor_of_generation
     {C : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hC : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X C) :

@@ -24,7 +24,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 # A smooth separated connected curve is proper or affine
 
 Source: Stacks Project, Varieties, Lemma 33.43.11 (Tag 0A28), and the blueprint
-compactification route for `thm-sc-constant-invariance` (blueprint: lem-sc-proper-or-affine).
+compactification route for `proposition-cohomology-smooth-affine-curve` (blueprint:
+lem-sc-proper-or-affine).
 -/
 
 universe u
@@ -37,13 +38,13 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Varieties, Lemma 0A28 (Tag 0A28)
 (blueprint: lem-sc-proper-or-affine).
 
-Proof, step 1: by lem-sc-compactification, embed the curve as an open subscheme of a
+Proof, step 1: by lemma-proper-smooth-model--1, embed the curve as an open subscheme of a
 proper smooth connected curve, with boundary a finite set of closed points. The algebraically
 closed field hypothesis is part of def-sc-curves.
 Step 2: if the boundary is empty, the open immersion is surjective and hence an isomorphism;
 properness transfers from the compactification to the original curve. If the boundary is
-nonempty, lem-sc-affine-open-proper says the open curve is affine. These cases exhaust all
-possibilities. -/
+nonempty, proposition-p-torsion-smooth-proper-curve--3 says the open curve is affine. These cases
+exhaust all possibilities. -/
 set_option linter.style.haveILetI false in
 /-- (blueprint: lem-sc-proper-or-affine) -/
 theorem IsConnectedCurve.isProper_or_isAffine

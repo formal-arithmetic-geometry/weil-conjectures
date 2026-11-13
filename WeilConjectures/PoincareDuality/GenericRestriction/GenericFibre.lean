@@ -18,7 +18,8 @@ Let `X` be a separated `k`-scheme of finite type with a morphism `b : X ⟶ 𝔸
 `Spec \overline{k(x)} ⟶ 𝔸¹_k`. For the base change `g : X ×_{𝔸¹_k} Spec L ⟶ X` of `t` along `b`,
 the derived pullback `Lg^*` commutes with internal homs of bounded constructible
 `ℚ̄_ℓ`-complexes (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isPullback`): this is
-blueprint `det-pd-generic-closed-hom` (2) for `B = 𝔸¹_k` (`sk-lem-pd-generic-restriction`).
+blueprint `lemma-restriction-geometric-generic-fibre` (2) for `B = 𝔸¹_k`
+(`lemma-restriction-geometric-generic-fibre`).
 
 ## Proof
 
@@ -53,8 +54,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- **Restriction to a generic fibre over the affine line commutes with internal homs**
-(blueprint `det-pd-generic-closed-hom` (2), for `B = 𝔸¹_k`): let `X` be a separated `k`-scheme
-of finite type with a morphism `b : X ⟶ 𝔸¹_k`, `φ : k(x) ⟶ L` a field extension and
+(blueprint `lemma-restriction-geometric-generic-fibre` (2), for `B = 𝔸¹_k`): let `X` be a separated
+`k`-scheme of finite type with a morphism `b : X ⟶ 𝔸¹_k`, `φ : k(x) ⟶ L` a field extension and
 `g : X' ⟶ X` the base change of `Spec L ⟶ Spec k(x) ⟶ 𝔸¹_k` along `b`. For bounded
 constructible `ℚ̄_ℓ`-complexes `K` and `M` on `X`, the comparison
 `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` is an isomorphism. -/

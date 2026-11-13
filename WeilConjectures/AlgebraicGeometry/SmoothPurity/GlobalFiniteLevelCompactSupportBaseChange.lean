@@ -31,7 +31,8 @@ import WeilConjectures.Compactification.NagataCompactification
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
 thm-cbc-finite-level-proetale.proof.md, steps 1--8; human-authorized global
-compactification restatement, 2026-10-18 (blueprint: thm-cbc-finite-level-proetale).
+compactification restatement, 2026-10-18 (blueprint:
+proposition-composition-base-change-rf-shriek--4).
 
 All operations below are the ordinary bounded below operations. The canonical
 coefficient realization identifies fixed-scalar module sheaves with the prescribed

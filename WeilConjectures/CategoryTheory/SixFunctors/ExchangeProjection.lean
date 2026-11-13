@@ -79,7 +79,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 /-!
 # Exchange and projection transformations
 
-Source: Weil blueprint, sec-smooth-purity, sk-def-sf-operations,
+Source: Weil blueprint, chap-Smooth-purity, sk-def-sf-operations,
 node def-exchange-projection, order 1487 (blueprint: def-exchange-projection).
 
 The finite maps are the existing pro-etale derived exchange, compactification exchange,

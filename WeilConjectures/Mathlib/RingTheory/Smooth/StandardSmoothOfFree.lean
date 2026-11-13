@@ -50,7 +50,7 @@ lemma SquareJacobianPresentation.etale {ι : Type*} [Finite ι]
 
 /-- An `R`-algebra `S` is étale if and only if it admits a square Jacobian presentation
 `S = R[x₁, …, xₘ] / (f₁, …, fₘ)` with `det (∂fᵢ / ∂xⱼ)` a unit in `S` (blueprint
-`lem-exc-etale-jacobian-presentation`).
+`proposition-extension-zero-restriction-closed-subscheme`).
 
 The forward direction starts from a submersive presentation of relative dimension `0`, given
 by `Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero`: its injective map from the

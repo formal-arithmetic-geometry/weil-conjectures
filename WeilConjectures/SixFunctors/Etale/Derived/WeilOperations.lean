@@ -25,7 +25,7 @@ then cartesian
 A *Weil object* of `D(X_ét, Λ)` is an object `K` with an isomorphism `θ_K : Lg^* K ≅ K`; they
 form the category `IsoAlgebra (Lg^*)` (`CategoryTheory.Endofunctor.IsoAlgebra`), whose morphisms
 are the morphisms commuting with the `θ`'s. This file carries out the proof of
-`lem-fix-weil-operations`: the operations carry canonical Weil structures, transported through
+`prose-10-20`: the operations carry canonical Weil structures, transported through
 the exchange isomorphisms of the Frobenius square, and the basic maps between them are
 equivariant.
 

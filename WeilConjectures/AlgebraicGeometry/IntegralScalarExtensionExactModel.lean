@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 
 /-! # Exact model for integral scalar extension
 
-Source: `lem-coef-integral-finite-extension`, first proof paragraph. Finite freeness
+Source: `proposition-six-operations-change-coefficients`, first proof paragraph. Finite freeness
 identifies total derived tensor with the exact functor applied to complexes.
 -/
 
@@ -29,12 +29,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (Y : Scheme.{u})
 
 /-- The finite integral coefficient inclusion on the pro-etale site.
-Source: `lem-coef-integral-finite-extension`, first paragraph. -/
+Source: `proposition-six-operations-change-coefficients`, first paragraph. -/
 noncomputable abbrev integralConstructibleCoefficientMap :=
   coefficientMap (finiteCoefficientIntegersPointMap ℓ h) Y
 
 /-- The exact tensor functor induces a functor on the unbounded derived categories.
-Source: `lem-coef-integral-finite-extension`, first proof paragraph.
+Source: `proposition-six-operations-change-coefficients`, first proof paragraph.
 (blueprint: def-coef-integral-exact-scalar-model) -/
 noncomputable def integralOrdinaryDerivedScalar :=
   letI : PreservesFiniteLimits
@@ -43,7 +43,7 @@ noncomputable def integralOrdinaryDerivedScalar :=
   (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)).mapDerivedCategory
 
 /-- Exact tensor and total derived tensor are canonically isomorphic.
-Source: `lem-coef-integral-finite-extension`, first proof paragraph.
+Source: `proposition-six-operations-change-coefficients`, first proof paragraph.
 Proof: finite freeness gives exactness; apply uniqueness of total left derived functors.
 (blueprint: def-coef-integral-exact-scalar-model) -/
 noncomputable def integralScalarExactDerivedComparison :

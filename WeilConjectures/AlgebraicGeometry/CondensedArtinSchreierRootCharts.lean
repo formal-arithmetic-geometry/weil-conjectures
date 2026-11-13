@@ -91,8 +91,8 @@ private theorem root_sheets_colimit
     exact False.elim (hab ((hu a rfl).trans (hu b he).symm))
 
 /-- The Artin–Schreier cover is surjective, including over the empty scheme.
-Source: blueprint lem-fd-as-cover, simple transitivity and existence of geometric roots
-(blueprint: lem-fd-as-root-sheets-colimit).
+Source: blueprint lemma-artin-schreier-character-sheaf, simple transitivity and existence of
+geometric roots (blueprint: lem-fd-as-root-sheets-colimit).
 
 Proof: lift each point to the spectrum of the algebraic closure of its residue
 field, use existence of a root on that geometric fibre, and take the image of its

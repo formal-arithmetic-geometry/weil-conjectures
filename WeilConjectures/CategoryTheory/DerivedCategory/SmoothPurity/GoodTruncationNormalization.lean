@@ -313,7 +313,7 @@ Source: Stacks Tag 015F and Homology Tag 010N
 (blueprint: lem-pur-good-truncation-exact-normalization).
 Proof (Step 4): lem-weil-pbc-exact-functor-complex-cohomology gives the canonical
 kernel/image/quotient comparison on complexes. Descend it using the factorization
-and localization universal property (lem-weil-pbc-exact-functor-derived-factorization,
+and localization universal property (situation-conventions,
 lem-weil-pbc-localization-universal-property). In nonzero degrees its source is zero,
 since an exact additive functor preserves zero objects. -/
 theorem goodTruncationNormalization_exact_concentrated (F : C ⥤ D) [F.Additive]

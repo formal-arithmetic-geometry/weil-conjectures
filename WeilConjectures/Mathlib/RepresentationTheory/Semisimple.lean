@@ -40,11 +40,11 @@ of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
 
 ## Blueprint
 
-`Representation.isSemisimpleRepresentation_comp_subtype` implements part of `sk-i-restriction`,
-`lem-mg-normal-restriction-semisimple` and `lem-wf-finite-index-restriction-semisimple` (whose
-finite-index hypothesis is not needed).
+`Representation.isSemisimpleRepresentation_comp_subtype` implements part of
+`lemma-restriction-normal-subgroup`, `lemma-restriction-normal-subgroup--1` and
+`lemma-restriction-normal-subgroup--1` (whose finite-index hypothesis is not needed).
 `Representation.IsIrreducible.eq_one_of_isConstituent_trivial` is the case `a = 0` of
-`lem-a1-unramified-nonexceptional`.
+`lemma-unramified-at-infinity-no-linear-characters`.
 `Representation.isSemisimpleRepresentation_iff_exists_iSupIndep` is `def-wf-semisimple-module`.
 -/
 
@@ -58,8 +58,8 @@ variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
 
 /-- **Clifford's theorem**: a finite-dimensional semisimple representation restricts semisimply
 to a normal subgroup, with no finiteness assumption on the quotient.
-(blueprint: `sk-i-restriction`, `lem-mg-normal-restriction-semisimple`,
-`lem-wf-finite-index-restriction-semisimple`) -/
+(blueprint: `lemma-restriction-normal-subgroup`, `lemma-restriction-normal-subgroup--1`,
+`lemma-restriction-normal-subgroup--1`) -/
 instance isSemisimpleRepresentation_comp_subtype :
     IsSemisimpleRepresentation (ρ.comp N.subtype) := by
   set σ : Representation k N V := ρ.comp N.subtype
@@ -113,7 +113,7 @@ of an irreducible finite-dimensional representation `V` acts trivially on `V`. T
 trivial subquotient `B / A` splits off: a complement `C` of `A` meets the class of `B / A` in a
 nonzero `N`-invariant vector. The `N`-invariants are then nonzero, and they are all of `V`
 (`Representation.IsIrreducible.eq_one_of_invariants_ne_bot`).
-(blueprint: `lem-a1-unramified-nonexceptional`, the case `a = 0`) -/
+(blueprint: `lemma-unramified-at-infinity-no-linear-characters`, the case `a = 0`) -/
 theorem IsIrreducible.eq_one_of_isConstituent_trivial [FiniteDimensional k V] [IsIrreducible ρ]
     (h : (trivial k N k).IsConstituent (ρ.comp N.subtype)) {g : G} (hg : g ∈ N) : ρ g = 1 := by
   refine IsIrreducible.eq_one_of_invariants_ne_bot ρ N ?_ hg

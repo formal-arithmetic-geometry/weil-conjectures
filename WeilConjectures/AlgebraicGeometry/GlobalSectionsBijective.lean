@@ -142,7 +142,7 @@ instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘
 
 /-- A proper `k`-scheme that is geometrically connected and geometrically reduced has
 `H⁰(X, 𝒪_X) = k` (Stacks 0BUG). This is the input `Γ(X, 𝒪_X) = k` of Step 4 of blueprint
-`lem-sc-rigidity` (`sk-prop-av-rigidity`).
+`lemma-rigidity` (`lemma-rigidity`).
 
 Let `K` be an algebraic closure of `k`, `A = Γ(X, 𝒪_X)` and `B = Γ(X_K, 𝒪_{X_K})`. By flat base
 change `B = K ⊗_k A`, and `B = K` since `X_K` is proper, reduced and connected over the
@@ -216,7 +216,7 @@ theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (
 /-- A smooth proper connected scheme over a separably closed field `k` has
 `H⁰(X, 𝒪_X) = k`.
 
-(blueprint: `prop-pc-xk-integral`, part (1)) -/
+(blueprint: `prose-C-04`, part (1)) -/
 theorem GlobalSectionsBijective.of_isSepClosed [IsSepClosed k] [Smooth (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [ConnectedSpace X] : GlobalSectionsBijective k X :=
   have := GeometricallyConnected.of_isSepClosed (k := k) X

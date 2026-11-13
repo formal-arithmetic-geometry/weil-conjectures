@@ -12,7 +12,7 @@ public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 # Composition of finite-level point transports
 
 Source: Deligne, Weil II (1.1.7), printed pp. 150--151; the finite-level refinement
-of the proof of blueprint lem-trf-frobenius-operator-compact-description; Stacks
+of the proof of blueprint lemma-scheme-frobenius-geometric-frobenius--3; Stacks
 Tags 03CE, 06UM, 015F and 0D6D (blueprint: lem-trf-point-transport-composition).
 
 The helpers spell out the recipe in the statement for each power of the fixed

@@ -22,7 +22,7 @@ base change isomorphism `L(g'')^* j_! ≅ j'_! Lg'^*`
 (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso`) along
 these adjunctions is the square isomorphism `Lj^* Lg'^* ≅ L(g'')^* Lj'^*` of derived pullbacks.
 This is an input for the compatibility of the compact-support exchange maps with the change of
-coefficients (blueprint `sk-p-trace-coeff`).
+coefficients (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main definitions
 

@@ -17,8 +17,8 @@ public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmi
 
 /-! # Concrete coefficients and the root-tower Tate line
 
-Source: current blueprint sk-thm-purity-transport, coefficient list and formula
-f* K(d)[2d]; Bhatt--Scholze, Section 6.8.
+Source: current blueprint theorem-smooth-purity-all-admissible-coefficients, coefficient list and
+formula f* K(d)[2d]; Bhatt--Scholze, Section 6.8.
 (blueprint: def-pur-transport-concrete-coefficients).
 The index is presentation data for the existing six admissible coefficients.
 Every ring and every line below is constructed, not selected from an existence assertion.
@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.ProEtale.PurityTransport
 
 /-- Presentations of exactly the six admissible coefficient types. The positive
 finite exponent only records an annihilator; its choice does not alter the ring.
-Source: sk-thm-purity-transport, first paragraph
+Source: theorem-smooth-purity-all-admissible-coefficients, first paragraph
 (blueprint: def-pur-transport-concrete-coefficients). -/
 inductive Coefficient (ell : ℕ) [Fact ell.Prime] where
   | finite (A : CommRingCat.{0}) (fin : Finite A) (n : ℕ)
@@ -50,7 +50,7 @@ variable (ell : ℕ) [Fact ell.Prime]
 
 /-- The actual condensed commutative ring, with continuous integral and field
 coefficients and the finite-subextension-valued algebraic closure.
-Source: sk-def-sfb-constructible and coefficient conventions
+Source: definition-constructible-sheaves and coefficient conventions
 (blueprint: def-pur-transport-concrete-coefficients). -/
 def Coefficient.ring : Coefficient ell →
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}
@@ -126,13 +126,13 @@ instance Coefficient.isMonHom_integralMap (c : Coefficient ell) :
 /-- The root-tower line extended along the actual integral coefficient map.
 For finite A this is A tensor mu at any annihilating positive level; for the
 other coefficients it is the completed line followed by ordinary scalar extension.
-Source: Bhatt--Scholze 6.8 and def-coefficient-twists-detailed
+Source: Bhatt--Scholze 6.8 and definition-tate-twists
 (blueprint: def-pur-transport-concrete-coefficients). -/
 def Coefficient.firstLine (c : Coefficient ell) (X : Scheme.{u}) :=
   (Mod.extendScalars (coefficientMap (c.integralMap ell) X)).obj (tateModule X ell)
 
 /-- The positive Tate line, including the regular unit at d=0.
-Source: def-coefficient-twists-detailed, tensor powers
+Source: definition-tate-twists, tensor powers
 (blueprint: def-pur-transport-concrete-coefficients). -/
 def Coefficient.line (c : Coefficient ell) (X : Scheme.{u}) :
     ℕ → Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj (c.obj ell) X)
@@ -140,7 +140,7 @@ def Coefficient.line (c : Coefficient ell) (X : Scheme.{u}) :
   | d + 1 => c.line X d ⊗ c.firstLine ell X
 
 /-- Ambient derived modules on the specified small pro-etale site.
-Source: sk-def-sfb-constructible
+Source: definition-constructible-sheaves
 (blueprint: def-pur-transport-concrete-coefficients). -/
 abbrev Coefficient.derived (c : Coefficient ell) (X : Scheme.{u}) :=
   DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -148,7 +148,7 @@ abbrev Coefficient.derived (c : Coefficient ell) (X : Scheme.{u}) :=
 
 /-- The recorded Dctf full subcategory, without changing its morphisms or
 identifying the integral coefficient with a discrete constant ring.
-Source: sk-def-sfb-constructible
+Source: definition-constructible-sheaves
 (blueprint: def-pur-transport-concrete-coefficients). -/
 abbrev Coefficient.ctf (c : Coefficient ell) (X : Scheme.{u}) :=
   ConstantModelConstructibleFiniteTor (c.obj ell) X
@@ -160,7 +160,7 @@ def Coefficient.derivedLine (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ) :
   ((DerivedCategory.singleFunctor _ 0).obj (c.line ell X d)) ⟦2 * (d : ℤ)⟧
 
 /-- The actual ambient f* K(d)[2d] functor.
-Source: sk-thm-purity-transport, displayed formula
+Source: theorem-smooth-purity-all-admissible-coefficients, displayed formula
 (blueprint: def-pur-transport-concrete-coefficients). -/
 def Coefficient.smoothSource (c : Coefficient ell) {X Y : Scheme.{u}}
     (f : X ⟶ Y) (d : ℕ) : c.derived ell Y ⥤ c.derived ell X :=

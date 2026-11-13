@@ -28,7 +28,7 @@ Write `α_M : p_M^* Ψ_M ⟶ Ψ_{M''} c_M^*` and `α_N` for the pullback exchang
 (the slice exchanges, `NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceExchange`).
 
 This file proves that the exchanges of `φ` and of `φ''` are compatible with `α_M` and `α_N`
-(blueprint `det-tf-nearby-duality-slice`, "the map `θ`"):
+(blueprint `lemma-nearby-duality-slice--1`, "the map `θ`"):
 
 * the **pushforward exchanges** `χ_φ : Ψ_M Ri₁_* ⟶ Ri₂_* Ψ_N` and `χ_{φ''}`, through the base
   change morphisms of `Ri₁_*` and `Ri₂_*`
@@ -299,7 +299,7 @@ private lemma boundedConstructiblePushforwardExchange_slice_app_aux
   transport_exact key K.obj
 
 include htot hgen hαM hαN in
-/-- **The pushforward exchanges and slicing** (blueprint `det-tf-nearby-duality-slice`, "the map
+/-- **The pushforward exchanges and slicing** (blueprint `lemma-nearby-duality-slice--1`, "the map
 `θ`"): for morphisms of models `φ : N ⟶ M`, `φ'' : N'' ⟶ M''`, `s_M : M'' ⟶ M` and
 `s_N : N'' ⟶ N` with `s_N ≫ φ = φ'' ≫ s_M`, and the pullback exchanges `α_M`, `α_N` of `s_M`,
 `s_N` on bounded constructible complexes,
@@ -380,7 +380,7 @@ lemma exceptionalExchange_app_eq_mateEquiv_inv
   simp
 
 include htot hgen hαM hαN in
-/-- **The exceptional exchanges and slicing** (blueprint `det-tf-nearby-duality-slice`, "the map
+/-- **The exceptional exchanges and slicing** (blueprint `lemma-nearby-duality-slice--1`, "the map
 `θ`"): in the situation of
 `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_slice_app`, for proper
 `i₁, i₂, i₁'', i₂''`, cartesian squares of bases and of special fibres, invertible proper

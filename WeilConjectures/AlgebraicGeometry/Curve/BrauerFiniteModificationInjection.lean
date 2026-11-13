@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 
 /-! # Brauer pullback along finite modifications of reduced curves
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 2.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2.
 (blueprint: lem-sc-brauer-finite-modification-injection)
 -/
 

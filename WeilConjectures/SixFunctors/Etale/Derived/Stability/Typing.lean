@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 
 Every operation of the six-functor formalism is defined on the ambient derived categories
 `D(X_ét, Λ)`; the functors between the small categories `Dctf(X, Λ)` are *restrictions* of the
-ambient ones, and that the restriction exists is a theorem (blueprint `sk-rem-sf-typing-rule`). This
-file
+ambient ones, and that the restriction exists is a theorem (blueprint
+`proposition-six-operations-dctf`). This file
 
 * proves the general fact behind the typing rule: a functor into an ambient category restricts
   to a full subcategory (closed under isomorphisms) exactly when it carries every object into
@@ -24,10 +24,10 @@ file
   `CategoryTheory.ObjectProperty.isoLiftOfCompιIso`);
 * restricts the tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` to `Dctf(X, Λ)`
   (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.tensorHomAdjunction`), the restricted
-  bifunctors of clause (ii) of `sk-thm-sf-ctf-stability` being
+  bifunctors of clause (ii) of `proposition-six-operations-dctf` being
   `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedTensor` and
   `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedHom`;
-* proves the part of clause (vi) of `sk-thm-sf-ctf-stability` that concerns the restricted
+* proves the part of clause (vi) of `proposition-six-operations-dctf` that concerns the restricted
   functor: `𝔻_X 𝔻_X K ≅ K` in `Dctf(X, Λ)`, and `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an
   equivalence;
 * states the typing rule: each restricted functor, followed by the inclusion, is the inclusion
@@ -111,8 +111,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasCompactification aX]
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): for `X` separated of finite type over an
-algebraically closed field `k` and a finite `Λ` whose exponent is invertible on `k`, every
+/-- Blueprint `proposition-six-operations-dctf`, clause (vi): for `X` separated of finite type over
+an algebraically closed field `k` and a finite `Λ` whose exponent is invertible on `k`, every
 object `K` of the small category `Dctf(X, Λ)` is isomorphic, inside `Dctf(X, Λ)`, to its double
 Verdier dual `𝔻_X 𝔻_X K`, the Verdier dual being restricted to `Dctf(X, Λ)` by
 `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
@@ -132,7 +132,7 @@ noncomputable def DerivedCategoryFiniteTor.verdierDualEquivalenceFunctorIso :
       fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK :=
   ObjectProperty.isoLiftOfCompιIso _ _ _ (ObjectProperty.liftCompιIso _ _ _)
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): the restricted Verdier dual
+/-- Blueprint `proposition-six-operations-dctf`, clause (vi): the restricted Verdier dual
 `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an equivalence, i.e. `𝔻_X` is a contravariant
 anti-equivalence of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.verdierDualEquivalence`). -/
 theorem DerivedCategoryFiniteTor.isEquivalence_verdierDual :
@@ -153,7 +153,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
   [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [QuasiCompact f]
   [HasCompactification f]
 
-/-- Blueprint `sk-rem-sf-typing-rule`: The typing rule of this section.
+/-- Blueprint `proposition-six-operations-dctf`: The typing rule of this section.
 
 Every operation is defined on the ambient derived categories `D(-_ét, Λ)`, and its version on
 the small categories `Dctf(-, Λ)` is its restriction: for an algebraically closed field `k`, a
@@ -165,7 +165,7 @@ inclusion, is isomorphic to the inclusion followed by the ambient operation. By
 `CategoryTheory.ObjectProperty.isoLiftOfCompιIso` a functor between the small categories with
 this property is unique up to isomorphism, and by
 `CategoryTheory.ObjectProperty.exists_comp_ι_iso_iff` its existence is equivalent to the
-preservation statements of `thm-sf-ctf-stability`
+preservation statements of `proposition-six-operations-dctf`
 (`AlgebraicGeometry.Etale.constructibleFiniteTor_stability`). -/
 theorem typingRule (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
     Nonempty (DerivedCategoryFiniteTor.leftDerivedUpperStar (ModuleCat.{u + 1} Λ) f ⋙
@@ -211,7 +211,8 @@ variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 
 include hf
 
-/-- Blueprint `sk-rem-sf-typing`: Typing table: ambient definition, small-category theorem.
+/-- Blueprint `proposition-six-operations-dctf`: Typing table: ambient definition, small-category
+theorem.
 
 Let `Λ` be a finite ring whose exponent is invertible on an algebraically closed field `k`, and
 `f : X ⟶ Y` a separated morphism of schemes of finite type over `k`, with `X` separated over
@@ -238,7 +239,7 @@ The row `Rf^×` asserts nothing: it is an ambient functor used nowhere. The stat
 `AlgebraicGeometry.Etale.constructibleFiniteTor_preservation`,
 `AlgebraicGeometry.Etale.torAmplitudeIn_preservation`,
 `AlgebraicGeometry.Etale.boundedConstructible_tensor` and the two shift estimates of
-`sk-prop-sf-rf-shriek-preservation`. -/
+`theorem-f-shriek-finite-coefficients`. -/
 theorem sixOperations_typing [QuasiCompact f] [HasCompactification f]
     [IsSeparated aX] [HasCompactification aX] [IsAlgClosed k] :
     ((∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),

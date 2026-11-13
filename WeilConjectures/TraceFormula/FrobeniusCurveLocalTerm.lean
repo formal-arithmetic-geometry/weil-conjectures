@@ -21,29 +21,29 @@ Let `X` be smooth of relative dimension one over `s = Spec k`, with the model Fr
 model `X₀` over a finite field, let `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary (not necessarily
 invertible) map and `x` a rational point fixed by `Φ_m`. For an open and closed subscheme `B` of
 the fixed locus of the graph correspondence `(𝟙, Φ_m)` with underlying set `{x}`, the local term
-of `v` along `B` is the trace of the stalk map `v_x` (blueprint `sk-p-frob`,
-`thm-trf-frobenius-local-term`):
+of `v` along `B` is the trace of the stalk map `v_x` (blueprint
+`proposition-frobenius-local-term-curve`, `proposition-frobenius-local-term-curve--1`):
 ```
 LT_B(v) = tr(v_x | K_x).
 ```
-This file follows the route of blueprint `sk-rem-tf-curve-local-proof` (SGA 5, III B, §§2–4),
+This file follows the route of blueprint `remark-outline-local-computation` (SGA 5, III B, §§2–4),
 without nearby cycles and without Varshavsky's contracting theorem.
 
 * The open–closed filtration `K^U = j_! Lj^* K ⟶ K ⟶ K^Z = Rx_* Lx^* K` at `x` and filtered
   trace-class additivity (`Correspondence.traceClass_ofGraph_eq_add`, blueprint
-  `sk-i-additivity`) split the local term into the local terms of the closed piece and of the open
-  piece. The closed piece is the proper pushforward of the point correspondence `v_x`, whose local
-  term is `tr(v_x)` by proper pushforward compatibility (blueprint `sk-p-proper`) and the point
-  case (blueprint `sk-p-pairing`). Hence the local term is `tr(v_x)` as soon as the open piece
-  contributes zero
-  (`Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero`).
+  `proposition-additivity-trace-classes`) split the local term into the local terms of the closed
+  piece and of the open piece. The closed piece is the proper pushforward of the point
+  correspondence `v_x`, whose local term is `tr(v_x)` by proper pushforward compatibility (blueprint
+  `theorem-proper-pushforward-lefschetz-verdier`) and the point case (blueprint
+  `lemma-local-terms-point`). Hence the local term is `tr(v_x)` as soon as the open piece
+  contributes zero (`Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero`).
 * The open piece has zero stalk at `x`, and on a smooth curve the local term of a coefficient
-  with zero stalk at `x` vanishes (blueprint `sk-i-curve-zero`,
+  with zero stalk at `x` vanishes (blueprint `lemma-vanishing-local-term-zero-stalk--2`,
   `Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`): the local term is the
   integral of the evaluation of the supported restriction `ρ_P` from the Frobenius graph to the
-  diagonal (blueprint `sk-lem-tf-curve-supported-pairing`,
+  diagonal (blueprint `lemma-local-term-restriction-map`,
   `Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_supportedRestriction`), and the
-  stalk of `ρ_P` at `x` vanishes when `K_x = 0` (blueprint `sk-lem-tf-curve-restriction-zero`,
+  stalk of `ρ_P` at `x` vanishes when `K_x = 0` (blueprint `lemma-vanishing-local-term-zero-stalk`,
   `Correspondence.upperStar_map_supportedRestriction_frobeniusGraph_eq_zero`).
 * If `X` has a single point, the open piece is zero and the local term is `tr(v_x)` for every
   endomorphism (`Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_subsingleton`).
@@ -54,16 +54,18 @@ The blueprint carries out the local calculation with a finite `ℓ`-primary coef
 on the classical étale models. The trace classes of this chapter are only defined with
 coefficients `ℚ̄_ℓ`; the statements here are the `ℚ̄_ℓ`-forms. The vanishing of the supported
 restriction is a vanishing of a morphism before any trace is taken, and the `ℚ̄_ℓ`-form follows
-from the finite forms by the integral models of blueprint `sk-lem-tf-rational-model`: a morphism
-of perfect `𝒪_E`-complexes whose reductions modulo every `π_E^n` vanish is zero, since
+from the finite forms by the integral models of blueprint
+`lemma-integral-models-rational-frobenius-correspondences`: a morphism of perfect `𝒪_E`-complexes
+whose reductions modulo every `π_E^n` vanish is zero, since
 `Hom(P, Q) ⊗ 𝒪_E/π_E^n ↪ Hom(P, Q ⊗ 𝒪_E/π_E^n)`.
 
 ## Main statements
 
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`:
-  the Frobenius local term on a smooth curve (blueprint `sk-p-frob`).
+  the Frobenius local term on a smooth curve (blueprint `proposition-frobenius-local-term-curve`).
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`:
-  the Frobenius local vanishing on a smooth curve (blueprint `sk-i-curve-zero`).
+  the Frobenius local vanishing on a smooth curve (blueprint
+  `lemma-vanishing-local-term-zero-stalk--2`).
 
 -/
 
@@ -90,13 +92,14 @@ namespace Correspondence
 
 /-! ### Reduction to the open piece -/
 
-/-- **The local term at a fixed point modulo the open piece** (blueprint `sk-p-frob`, proof:
-the open–closed filtration at `x`, filtered trace-class additivity `sk-i-additivity`, proper
-pushforward `sk-p-proper` and the point case `sk-p-pairing`): let `x` be a rational point fixed by
-`h` and `B` an open and closed subscheme of the fixed locus of the graph correspondence `(𝟙, h)`,
-proper over `s`, with underlying set `{x}`. If the trace class of the open piece
-`u^U = [j]_! (v|_U)` on `K^U = j_! Lj^* K` has local term zero along `B`, the local term of `v`
-along `B` is the trace of the stalk map `v_x`. -/
+/-- **The local term at a fixed point modulo the open piece** (blueprint
+`proposition-frobenius-local-term-curve`, proof: the open–closed filtration at `x`, filtered
+trace-class additivity `proposition-additivity-trace-classes`, proper pushforward
+`theorem-proper-pushforward-lefschetz-verdier` and the point case `lemma-local-terms-point`): let
+`x` be a rational point fixed by `h` and `B` an open and closed subscheme of the fixed locus of the
+graph correspondence `(𝟙, h)`, proper over `s`, with underlying set `{x}`. If the trace class of the
+open piece `u^U = [j]_! (v|_U)` on `K^U = j_! Lj^* K` has local term zero along `B`, the local term
+of `v` along `B` is the trace of the stalk map `v_x`. -/
 theorem localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
     (F : (ofGraph K h v).FixedLocus) (x : RationalPoint X) (hx : x ≫ h = x)
@@ -160,19 +163,19 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_subsingleton [Subsingleton X.le
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
 
-/-- **Frobenius local vanishing on a smooth curve** (blueprint `sk-i-curve-zero`): let `X` be smooth
-of relative dimension one over the algebraically closed field `k`, with the model Frobenius `Φ` of
-a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` arbitrary and `x` a rational point fixed
-by `Φ_m` with `K_x = 0`. Then the local term `LT_B(v)` of the graph correspondence `(𝟙, Φ_m)` along
-an open and closed subscheme `B` of the fixed locus with underlying set `{x}` is zero. No
-invertibility of `v` is assumed.
+/-- **Frobenius local vanishing on a smooth curve** (blueprint
+`lemma-vanishing-local-term-zero-stalk--2`): let `X` be smooth of relative dimension one over the
+algebraically closed field `k`, with the model Frobenius `Φ` of a model over a finite field,
+`m ≥ 1`, `v : LΦ_m^* K ⟶ K` arbitrary and `x` a rational point fixed by `Φ_m` with `K_x = 0`. Then
+the local term `LT_B(v)` of the graph correspondence `(𝟙, Φ_m)` along an open and closed subscheme
+`B` of the fixed locus with underlying set `{x}` is zero. No invertibility of `v` is assumed.
 
 The supported restriction vanishes at `x`
 (`upperStar_map_supportedRestriction_frobeniusGraph_eq_zero`, blueprint
-`sk-lem-tf-curve-restriction-zero`), so its composite with evaluation and integration, which is
+`lemma-vanishing-local-term-zero-stalk`), so its composite with evaluation and integration, which is
 the local term
 (`localTerm_traceClass_frobeniusGraph_eq_zero_of_supportedRestriction`, blueprint
-`sk-lem-tf-curve-supported-pairing`), is zero. -/
+`lemma-local-term-restriction-map`), is zero. -/
 theorem localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : 1 ≤ m)
@@ -190,19 +193,20 @@ theorem localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth [IsAlgClosed k]
       rw [FixedLocus.liftPoint_ι]
       exact hK))
 
-/-- **The Frobenius local term on a smooth curve** (blueprint `sk-p-frob`,
-`thm-trf-frobenius-local-term`): let `X` be smooth of relative dimension one over the
-algebraically closed field `k`, with the model Frobenius `Φ` of a model over a finite field,
-`m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary (not necessarily invertible) map and `x` a rational point
-fixed by `Φ_m`. For an open and closed subscheme `B` of the fixed locus of the graph
-correspondence `(𝟙, Φ_m)`, proper over `s`, with underlying set `{x}`, the local term of `v`
-along `B` is the trace of the stalk map `v_x` on `K_x`. No local constancy of `K` at `x` is
-assumed.
+/-- **The Frobenius local term on a smooth curve** (blueprint
+`proposition-frobenius-local-term-curve`, `proposition-frobenius-local-term-curve--1`): let `X` be
+smooth of relative dimension one over the algebraically closed field `k`, with the model Frobenius
+`Φ` of a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary (not necessarily
+invertible) map and `x` a rational point fixed by `Φ_m`. For an open and closed subscheme `B` of the
+fixed locus of the graph correspondence `(𝟙, Φ_m)`, proper over `s`, with underlying set `{x}`, the
+local term of `v` along `B` is the trace of the stalk map `v_x` on `K_x`. No local constancy of `K`
+at `x` is assumed.
 
 The open–closed filtration at `x` and filtered trace-class additivity reduce this to the point
 and to the open piece (`localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero`), whose stalk
 at `x` vanishes, so that it contributes zero by the Frobenius local vanishing
-(`localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`, blueprint `sk-i-curve-zero`). -/
+(`localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`, blueprint
+`lemma-vanishing-local-term-zero-stalk--2`). -/
 theorem localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : 1 ≤ m)

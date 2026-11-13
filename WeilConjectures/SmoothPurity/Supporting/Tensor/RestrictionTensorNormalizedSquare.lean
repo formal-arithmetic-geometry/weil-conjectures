@@ -97,7 +97,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The given scalar mixed square holds for the normalized stage comparisons.
 
-Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
+Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
 Proof: The stage system transition is equal to the specified scalar extension functor.
 Substitute these two functor equalities in the mixed square. The conjugating eqToIso
 isomorphisms are then reflexive, so whiskering and composition with them cancel.

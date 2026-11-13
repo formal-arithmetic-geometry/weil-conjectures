@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRestrictedChart
 /-! # The change of frame before applying the affine counit
 
 Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-overlap calculation, and lem-amb-linear-trace-invariance.
+overlap calculation, and proposition-purity-vector-bundles.
 (blueprint: lem-amb-vector-integration-overlap-chart-prefix).
 -/
 

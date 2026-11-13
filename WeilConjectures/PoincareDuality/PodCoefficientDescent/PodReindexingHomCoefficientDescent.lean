@@ -91,7 +91,7 @@ import all WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageIntern
 
 /-! # Scalar and localized descent of the reindexed internal Hom
 
-Source: current blueprint, prop-pod-dual-tate-data-compatibility, proof Step 5;
+Source: current blueprint, theorem-poincare-duality-frobenius--2, proof Step 5;
 Stacks Project, Tags 08J9 and 0GMX
 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
 

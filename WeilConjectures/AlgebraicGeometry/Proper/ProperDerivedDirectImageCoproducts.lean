@@ -17,7 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperTorsionDirectImageBound
 # Coproducts and proper derived direct image
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md;
-Stacks Project, Tags 0A3V, 095U and 0F11 (blueprint: lem-amb-proper-coproducts).
+Stacks Project, Tags 0A3V, 095U and 0F11 (blueprint:
+corollary-proper-direct-image-finite-coefficients-localizing).
 -/
 
 @[expose] public section
@@ -35,7 +36,8 @@ coproduct on the ordinary unbounded derived categories. Its restriction to the b
 category agrees with the bounded-below derived direct image.
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md;
-Stacks Project, Tags 0A3V, 095U and 0F11 (blueprint: lem-amb-proper-coproducts).
+Stacks Project, Tags 0A3V, 095U and 0F11 (blueprint:
+corollary-proper-direct-image-finite-coefficients-localizing).
 
 Proof:
 1. By pqf-lem-proper-basic, r is quasi-compact and quasi-separated. Since T is
@@ -48,7 +50,8 @@ Proof:
    Apply lem-kun-proper-torsion-cd-bound to get vanishing above 2e. By
    lem-sbc-higher-direct-image-forget-comparison this also gives module-sheaf vanishing;
    a module sheaf with zero underlying abelian sheaf is zero.
-3. Apply lem-exc-direct-image-coproducts with c = 2e. Its finite acyclic-resolution
+3. Apply corollary-proper-direct-image-finite-coefficients-localizing with c = 2e. Its finite
+acyclic-resolution
    argument proves coproduct preservation for arbitrary unbounded inputs, including
    the empty family. Finally src-right-derived-functor-plus-compatibility, applied to
    the additive module direct image, supplies the bounded-below comparison isomorphism.

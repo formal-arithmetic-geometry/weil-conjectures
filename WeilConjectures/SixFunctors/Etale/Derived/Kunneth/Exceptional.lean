@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasP
 
 Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, and for
 compactifiable morphisms `fᵢ : Xᵢ ⟶ Yᵢ` with `Yᵢ` of finite type over `k`, the exceptional
-Künneth isomorphism (`prop-trf-exceptional-kunneth`) reads
+Künneth isomorphism (`proposition-exceptional-external-kunneth--1`) reads
 
 `α : Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^!(N₁ ⊠ N₂)`
 
@@ -38,7 +38,7 @@ The formula holds for all objects `Nᵢ`, not only for `Nᵢ ∈ Dctf(Yᵢ, Λ)`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor`
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall`
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek`
-  (`prop-trf-exceptional-kunneth`)
+  (`proposition-exceptional-external-kunneth--1`)
 -/
 
 @[expose] public section
@@ -172,7 +172,7 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall
     e₂ ≪≫ ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [h₂])) ≪≫ (β'.app _).app _
   exact ⟨(e₀ ≪≫ (R(φ₂)^![Λ]).mapIso e₁' ≪≫ e₂').symm⟩
 
-/-- Blueprint `prop-trf-exceptional-kunneth`: Exceptional Künneth; the `α` map.
+/-- Blueprint `proposition-exceptional-external-kunneth--1`: Exceptional Künneth; the `α` map.
 
 Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, let
 `fᵢ : Xᵢ ⟶ Yᵢ` (`i = 1, 2`) be quasi-compact morphisms admitting compactifications, with `Yᵢ`

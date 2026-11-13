@@ -15,7 +15,7 @@ The two maps of the restriction triangle
 `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F) ⟶ RΓ_{B ∩ C}(T, F)[1]`
 
 of `AlgebraicGeometry.Etale.exists_distTriang_supportRestriction` (blueprint
-`lem-pur-support-restriction-triangle`) are natural in `F`. Both are built from maps of supported
+`proposition-purity-vector-bundles`) are natural in `F`. Both are built from maps of supported
 terms `Ri_! Ri^! F` which are characterised by their composite with a counit of `Ri_! ⊣ Ri^!`;
 naturality follows from the uniqueness of these factorisations.
 
@@ -139,7 +139,7 @@ theorem supportedInclusion_naturality {F F' : DerivedCategory (Sheaf T.smallEtal
   · rw [assoc, supportedInclusion_comp_counit, hεd]
 
 omit [IsClosedImmersion c] in
-/-- Blueprint `lem-pur-support-restriction-triangle`: Restriction triangle inside a closed
+/-- Blueprint `proposition-purity-vector-bundles`: Restriction triangle inside a closed
 support (naturality of the first map).
 
 The inclusion of supports `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F)`
@@ -225,7 +225,7 @@ theorem supportRestrictionIso₃_hom_naturality
   rw [hdef, hdef, assoc, assoc]
   rw [← h₃, ← Functor.map_comp_assoc, hS', Functor.map_comp_assoc, reassoc_of% h₁]
 
-/-- Blueprint `lem-pur-support-restriction-triangle`: Restriction triangle inside a closed
+/-- Blueprint `proposition-purity-vector-bundles`: Restriction triangle inside a closed
 support (naturality of the second map).
 
 The restriction `RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F)` to the open complement `V` of `C`

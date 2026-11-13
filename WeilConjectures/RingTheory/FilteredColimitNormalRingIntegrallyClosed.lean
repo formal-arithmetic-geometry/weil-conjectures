@@ -193,7 +193,7 @@ theorem integrallyClosed_of_localization_cocone
 
 /-- The localization of a filtered colimit at a prime is integrally closed when
 every stage localization at a contracted prime is an integrally closed domain.
-(blueprint: lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed)
+(blueprint: proposition-proper-direct-image-constructible-complexes)
 
 This is the integral-closedness part of the proof of Stacks Project, Algebra,
 Tag 037D. A monic relation and a fraction are lifted to one common stage;

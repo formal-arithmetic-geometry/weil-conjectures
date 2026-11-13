@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
 /-!
 # Blueprint statements
 
-lem-weil-pbc-etale-finite-data-descent.
+lemma-acyclicity-pulled-back-injectives.
 -/
 
 @[expose] public section
@@ -44,7 +44,7 @@ private theorem comparison_fst {X Y Z : Scheme.{u}}
   subst k
   simpa using pullbackComp_inv_fst f g W
 
-/-- Blueprint: lem-weil-pbc-etale-finite-data-descent. -/
+/-- Blueprint: lemma-acyclicity-pulled-back-injectives. -/
 theorem etale_finite_data_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

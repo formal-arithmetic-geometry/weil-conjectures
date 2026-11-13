@@ -22,8 +22,9 @@ becomes the `ℚ̄_ℓ`-supported restriction of `T P`
 (`FixedLocus.map_supportedRestrictionE_comp`), given the compatibility of base change with the
 coefficient comparisons (blueprint `sk-thm-sf-compatibility`, (7):
 `boundedConstructibleLowerShriekBaseChange_toPadicAlgCl`). With the `f^!` clause of blueprint
-`sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekToPadicAlgCl`) this transports the
-vanishing of a stalk of the supported restriction from `E` to `ℚ̄_ℓ`
+`proposition-six-operations-change-coefficients`
+(`isIso_boundedConstructibleUpperShriekToPadicAlgCl`) this transports the vanishing of a stalk of
+the supported restriction from `E` to `ℚ̄_ℓ`
 (`FixedLocus.upperStar_map_supportedRestriction_eq_zero_of_supportedRestrictionE`).
 
 -/
@@ -102,8 +103,8 @@ theorem map_supportedRestrictionE_comp
 /-- **Transport of the vanishing of the supported restriction from `E` to `ℚ̄_ℓ`**: if the stalk
 along `z : T ⟶ Fix(c)` of the extension of scalars to `ℚ̄_ℓ` of the `E`-supported restriction of
 `P` vanishes, so does the stalk of the `ℚ̄_ℓ`-supported restriction of `ℚ̄_ℓ ⊗ P`. This uses the
-`f^!` clause of blueprint `sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekToPadicAlgCl`)
-for the support `c`. -/
+`f^!` clause of blueprint `proposition-six-operations-change-coefficients`
+(`isIso_boundedConstructibleUpperShriekToPadicAlgCl`) for the support `c`. -/
 theorem upperStar_map_supportedRestriction_eq_zero_of_supportedRestrictionE
     {T : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
     [IsSeparated T.hom] (z : T ⟶ F.F)

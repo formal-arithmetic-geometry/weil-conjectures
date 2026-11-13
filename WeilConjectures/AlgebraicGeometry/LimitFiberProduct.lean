@@ -19,8 +19,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 - `CategoryTheory.Limits.limitPullbackIso`: the canonical comparison
   `lim (Xᵢ ×_{Sᵢ} Yᵢ) ≅ (lim Xᵢ) ×_{lim Sᵢ} (lim Yᵢ)`.
 - `AlgebraicGeometry.Scheme.exists_preimage_eq_of_isAffine` (blueprint
-  `lem-kun-descent-limit-open`): a quasi-compact open of a cofiltered limit of affine schemes
-  descends to a quasi-compact open of some stage.
+  `corollary-open-direct-image-over-field--2`): a quasi-compact open of a cofiltered limit of affine
+  schemes descends to a quasi-compact open of some stage.
 -/
 
 @[expose] public section
@@ -78,10 +78,10 @@ namespace AlgebraicGeometry
 
 variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u})
 
-/-- Blueprint `lem-kun-descent-limit-open`: **descent of a quasi-compact open in an affine
-limit.** Let `X = lim Xᵢ` be a cofiltered limit of affine schemes (so that all transition maps
-are affine) and `U ⊆ X` a quasi-compact open. Then there are an index `i` and a quasi-compact open
-`Uᵢ ⊆ Xᵢ` with `U = pᵢ⁻¹(Uᵢ)`. Write `U` as a finite union of basic opens `D(fₖ)`; the finitely
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **descent of a quasi-compact open in an
+affine limit.** Let `X = lim Xᵢ` be a cofiltered limit of affine schemes (so that all transition
+maps are affine) and `U ⊆ X` a quasi-compact open. Then there are an index `i` and a quasi-compact
+open `Uᵢ ⊆ Xᵢ` with `U = pᵢ⁻¹(Uᵢ)`. Write `U` as a finite union of basic opens `D(fₖ)`; the finitely
 many `fₖ` all come from a common stage `Aᵢ`. -/
 theorem Scheme.exists_preimage_eq_of_isAffine [IsCofiltered I] [∀ i, IsAffine (D.obj i)]
     {c : Cone D} (hc : IsLimit c) (U : c.pt.Opens) (hU : IsCompact (U : Set c.pt)) :

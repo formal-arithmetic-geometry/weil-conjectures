@@ -413,7 +413,7 @@ private def inputNativeTower (W : Scheme.{u})
 
 /-- Restricting the direct quotient reduction to completed coefficients gives the
 specified integral reduction tower, including its actual arrows.
-Source: blueprint lem-coef-integral-compact-support, proof paragraphs 1--2; Stacks
+Source: blueprint lemma-change-coefficients-compact-support, proof paragraphs 1--2; Stacks
 Tags 06YY and 07A6 (blueprint: lem-coef-compact-support-input-tower-compatibility).
 
 Proof: take the native derived coefficient system obtained by reducing K on the

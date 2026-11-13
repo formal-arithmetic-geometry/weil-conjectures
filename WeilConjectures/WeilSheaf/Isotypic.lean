@@ -61,7 +61,7 @@ noncomputable def geometricFiberMapIso (e : X₀ ≅ Y₀) (h : e.hom ≫ g = f)
     exact geometricFiberMap_id
 
 /-- The underlying morphism of `AlgebraicGeometry.Scheme.Hom.geometricFiberMapIso`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[simp]
 lemma geometricFiberMapIso_hom (e : X₀ ≅ Y₀) (h : e.hom ≫ g = f) :
     (geometricFiberMapIso e h).hom = geometricFiberMap e.hom h :=
@@ -86,30 +86,33 @@ noncomputable def ProEtaleWeilSheaf.smulEnd (b : PadicAlgCl l) (A : ProEtaleWeil
     rw [ProEtale.AdicSheaf.adicLowerStar_map_smul, ProEtale.AdicSheaf.smul_comp]⟩
 
 /-- The underlying morphism of `AlgebraicGeometry.ProEtaleWeilSheaf.smulEnd`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[simp]
 lemma ProEtaleWeilSheaf.smulEnd_hom_f (b : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
     (ProEtaleWeilSheaf.smulEnd b A).hom.f = ProEtale.AdicSheaf.smul (ULift.up b) A.carrier :=
   rfl
 
-/-- Scalar multiplication commutes with morphisms (blueprint `lem-fd-as-characters`). -/
+/-- Scalar multiplication commutes with morphisms (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_comp (b : PadicAlgCl l) {A B : ProEtaleWeilSheaf k₀ l X}
     (f : A ⟶ B) : ProEtaleWeilSheaf.smulEnd b A ≫ f = f ≫ ProEtaleWeilSheaf.smulEnd b B :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_comp _ _))
 
 /-- Scalar multiplication is multiplicative in the scalar
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_smulEnd (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd b A ≫ ProEtaleWeilSheaf.smulEnd c A =
       ProEtaleWeilSheaf.smulEnd (c * b) A :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_smul _ _ _))
 
-/-- Scalar multiplication by `1` is the identity (blueprint `lem-fd-as-characters`). -/
+/-- Scalar multiplication by `1` is the identity (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_one (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd 1 A = 𝟙 A :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_one _))
 
-/-- Scalar multiplication is additive in the scalar (blueprint `lem-fd-as-characters`). -/
+/-- Scalar multiplication is additive in the scalar (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_add (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd (b + c) A =
       ProEtaleWeilSheaf.smulEnd b A + ProEtaleWeilSheaf.smulEnd c A :=
@@ -121,7 +124,7 @@ lemma ProEtaleWeilSheaf.smulEnd_add (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf 
     rfl)))
 
 /-- A sum of scalar multiplications is the scalar multiplication by the sum
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.sum_smulEnd {ι : Type*} (s : Finset ι) (b : ι → PadicAlgCl l)
     (A : ProEtaleWeilSheaf k₀ l X) :
     ∑ i ∈ s, ProEtaleWeilSheaf.smulEnd (b i) A = ProEtaleWeilSheaf.smulEnd (∑ i ∈ s, b i) A := by
@@ -140,7 +143,7 @@ end Scalar
 section Torsor
 
 /-- The Weil structure of the constant pro-étale Weil sheaf
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.adicConstant_str_hom_hom (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] :
     (ProEtaleWeilSheaf.adicConstant k₀ l X).str.hom.hom =
@@ -164,7 +167,7 @@ local notation "π̄" => Scheme.Hom.geometricFiberMap π (comp_over π (Spec (Co
 omit [Finite k₀] in
 variable (k₀) in
 /-- The base changes of the automorphisms of a torsor lie over the base
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma geometricTorsorAut_comp (hτ : ∀ g, (τ g).hom ≫ π = π) (g : G) :
     (geometricTorsorAut k₀ τ g).hom ≫ π̄ = π̄ := by
   rw [Scheme.Hom.geometricFiberMapIso_hom, ← Scheme.Hom.geometricFiberMap_comp]
@@ -251,7 +254,7 @@ noncomputable def ProEtaleWeilSheaf.torsorTranslation (g : G) :
     (geometricTorsorAut_comp k₀ π τ hτ) g, ProEtaleWeilSheaf.torsorTranslation_comm π τ hτ g⟩
 
 /-- The underlying morphism of the translation of pro-étale Weil sheaves
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[simp]
 lemma ProEtaleWeilSheaf.torsorTranslation_hom_f (g : G) :
     (ProEtaleWeilSheaf.torsorTranslation (l := l) π τ hτ g).hom.f =

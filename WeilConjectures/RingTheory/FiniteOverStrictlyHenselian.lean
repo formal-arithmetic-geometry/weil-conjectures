@@ -14,9 +14,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 A finite algebra `B` over a henselian local ring `R` is a finite product of henselian local rings
 (Stacks, Tag 04GG, `HenselianLocalRing.finite_over_henselian_exists_algEquiv_pi`). If the
 residue field of `R` is algebraically closed, the factors have the same residue field, so they
-are strictly henselian (blueprint `det-tf-blowup-strict-transform`: the strict transform of a
-curve through the closed point of a strictly local surface is a finite disjoint union of strictly
-local curves).
+are strictly henselian (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`: the strict
+transform of a curve through the closed point of a strictly local surface is a finite disjoint union
+of strictly local curves).
 
 ## Main results
 

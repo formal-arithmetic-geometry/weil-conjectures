@@ -27,7 +27,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTraitChar
 
 # The curves `D'`, `H'`, `B'` of the surface `T'` of a cover datum
 
-Part of blueprint `det-tf-restriction-zero-covers`. The strict local ring `R'` of `T'` is a
+Part of blueprint `lemma-tangent-cones-on-cover`. The strict local ring `R'` of `T'` is a
 regular local ring of dimension two
 (`AlgebraicGeometry.Scheme.isRegularLocalRing_strictHenselization_of_smoothOfRelativeDimension`)
 with maximal ideal `(ξ, η)`, where a point of `T'` lies over `c` in the first (second) factor iff
@@ -607,7 +607,7 @@ lemma exists_mem_b_ne_closedPoint : ∃ P : D.T', D.π P ∈ Set.range M.b ∧
 
 
 /-- The curves `D'`, `H'`, `B'` pass through the closed point of `T'`
-(blueprint `det-tf-restriction-zero-covers`). -/
+(blueprint `lemma-tangent-cones-on-cover`). -/
 theorem nonempty_curves' : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' := by
   have key (Z : Set D.T') (hZ : closedPoint (strictHenselization D.s') ∈ Z) :
       Nonempty (reducedClosed (strictHenselization D.s') Z) := by
@@ -621,7 +621,7 @@ theorem nonempty_curves' : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' := 
     key _ (D.π_closedPoint_mem (pullback.diagonal M.f) M.y M.y_comp_diagonal)⟩
 
 /-- The curve `H'` is regular: its ring is a discrete valuation ring (blueprint
-`det-tf-restriction-zero-covers` (ii): `H'` is the axis `η = 0` of `T'`). -/
+`lemma-tangent-cones-on-cover` (ii): `H'` is the axis `η = 0` of `T'`). -/
 theorem isDiscreteValuationRing_H'' :
     ∃ _ : IsDomain Γ(D.H', ⊤), IsDiscreteValuationRing Γ(D.H', ⊤) := by
   obtain ⟨ξ, η, hm, -, hη⟩ := D.exists_parameters
@@ -646,7 +646,7 @@ theorem isDiscreteValuationRing_H'' :
   exact ⟨inferInstance,
     IsRegularLocalRing.isDiscreteValuationRing _ ((ringKrullDim_eq_of_ringEquiv e).trans hdimq)⟩
 
-/-- The curves `D'` and `B'` have dimension one (blueprint `det-tf-restriction-zero-covers`). -/
+/-- The curves `D'` and `B'` have dimension one (blueprint `lemma-tangent-cones-on-cover`). -/
 theorem ringKrullDim_D'_B'' : ringKrullDim Γ(D.D', ⊤) = 1 ∧ ringKrullDim Γ(D.B', ⊤) = 1 := by
   obtain ⟨ξ, η, hm, hξ, hη⟩ := D.exists_parameters
   obtain ⟨hreg, hdim⟩ := D.regular

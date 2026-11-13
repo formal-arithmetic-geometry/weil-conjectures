@@ -18,9 +18,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.I
 # Localization for the ambient bounded-below exceptional inverse image
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1-kummer,
-`lem-pur-support-localization-triangle` (blueprint: lem-pur-support-localization-triangle).
+`lemma-local-cohomology-right-adjoint--2` (blueprint: lemma-local-cohomology-right-adjoint--2).
 The categories are all constant-coefficient module sheaves, as in
-`def-pur-flasque-support`; there is no constructibility condition. The right derived
+`definition-local-cohomology`; there is no constructibility condition. The right derived
 functors below are the existing ordinary injective-derived functors on `D⁺`.
 -/
 
@@ -46,8 +46,8 @@ variable {C : Type u} {D : Type v} [Category C] [Category D] [Abelian C] [Abelia
   [HasDerivedCategory C] [HasDerivedCategory D]
 
 /-- Transport a model isomorphism through an exact functor, with the fixed derived
-factorization. Source: blueprint lem-pur-support-localization-triangle, step 5
-(blueprint: lem-pur-support-localization-triangle). -/
+factorization. Source: blueprint lemma-local-cohomology-right-adjoint--2, step 5
+(blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def CategoryTheory.Functor.supportExactModelComparison
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (I : CochainComplex C ℤ) (K : DerivedCategory.Plus C)
@@ -58,8 +58,8 @@ noncomputable def CategoryTheory.Functor.supportExactModelComparison
     (F.mapDerivedCategoryPlusCompatibility.app K).symm
 
 /-- Compute a right derived functor on a K-injective model with its fixed unit.
-Source: blueprint lem-pur-support-localization-triangle, steps 1 and 4
-(blueprint: lem-pur-support-localization-triangle). -/
+Source: blueprint lemma-local-cohomology-right-adjoint--2, steps 1 and 4
+(blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def CategoryTheory.Functor.supportRightModelComparison
     [EnoughInjectives C] [CategoryTheory.Abelian.HasKInjectiveResolutions C]
     (F : C ⥤ D) [F.Additive] (I : CochainComplex C ℤ) [I.IsKInjective]
@@ -113,8 +113,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   (hPair : IsCompl (Set.range s) (Set.range j))
 
 /-- The termwise-induced closed direct image on D⁺, using its exactness, rather than
-an independently chosen functor. Source: blueprint lem-pur-support-localization-triangle
-(blueprint: lem-pur-support-localization-triangle). -/
+an independently chosen functor. Source: blueprint lemma-local-cohomology-right-adjoint--2
+(blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def supportClosedDerivedPlus :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
@@ -123,8 +123,8 @@ noncomputable def supportClosedDerivedPlus :
 
 set_option linter.unusedSectionVars false in
 /-- A model in the stated class is K-injective.
-Source: Stacks Tag 070J; blueprint lem-pur-support-localization-triangle, step 1
-(blueprint: lem-pur-support-localization-triangle).
+Source: Stacks Tag 070J; blueprint lemma-local-cohomology-right-adjoint--2, step 1
+(blueprint: lemma-local-cohomology-right-adjoint--2).
 Proof: choose a lower bound from hI. Its terms are injective by hI. Apply
 CochainComplex.isKInjective_of_injective with that bound. -/
 theorem supportModelKInjective (I : SupportComplex Λ X)
@@ -137,11 +137,11 @@ theorem supportModelKInjective (I : SupportComplex Λ X)
 include hj in
 set_option linter.unusedSectionVars false in
 /-- Open restriction of a bounded below injective model is K-injective.
-Source: Stacks Tag 08FI; blueprint lem-pur-support-localization-triangle, step 4
-(blueprint: lem-pur-support-localization-triangle).
+Source: Stacks Tag 08FI; blueprint lemma-local-cohomology-right-adjoint--2, step 4
+(blueprint: lemma-local-cohomology-right-adjoint--2).
 Proof: identify open inverse image with the slice restriction by
 lem-weil-proetale-weakly-etale-localization. Its exact left adjoint, extension by
-zero, implies that it preserves injectives (lem-weil-pbc-proetale-restriction-injectives).
+zero, implies that it preserves injectives (lemma-acyclicity-pulled-back-injectives).
 It preserves the lower bound since it is additive. Apply Stacks Tag 070J. -/
 theorem supportOpenModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) :
@@ -159,8 +159,8 @@ theorem supportOpenModelKInjective (I : SupportComplex Λ X)
 
 /-- The canonical computation of Rs^! on the chosen model, normalized by the derived
 functor unit and by the bounded/unbounded comparison; no model isomorphism is chosen.
-Source: blueprint lem-pur-support-localization-triangle, steps 1 and 3
-(blueprint: lem-pur-support-localization-triangle). -/
+Source: blueprint lemma-local-cohomology-right-adjoint--2, steps 1 and 3
+(blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def supportShriekModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
@@ -173,8 +173,8 @@ noncomputable def supportShriekModelComparison
 
 /-- The canonical first-term comparison, using termwise exact s_* and the preceding
 unit-normalized computation of Rs^!.
-Source: blueprint lem-pur-support-localization-triangle, step 5
-(blueprint: lem-pur-support-localization-triangle). -/
+Source: blueprint lemma-local-cohomology-right-adjoint--2, step 5
+(blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def supportFirstModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
@@ -190,8 +190,8 @@ noncomputable def supportFirstModelComparison
 
 /-- The canonical third-term comparison, using injectivity after open restriction,
 the derived functor unit, and the ordinary bounded/unbounded comparison for Rj_*.
-Source: blueprint lem-pur-support-localization-triangle, steps 4 and 5
-(blueprint: lem-pur-support-localization-triangle). -/
+Source: blueprint lemma-local-cohomology-right-adjoint--2, steps 4 and 5
+(blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def supportThirdModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))

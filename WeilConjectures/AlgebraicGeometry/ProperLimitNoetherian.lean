@@ -36,11 +36,11 @@ Source: Stacks limits.tex, Tag 0A0P (proper-limit-of-proper-finite-presentation-
 Proof:
 1. Use lem-weil-pbc-proper-closed-in-proper-fp (09ZR) to choose a closed immersion
    X → Y over S with Y → S proper and finitely presented.
-2. Apply prop-nagata-noetherian-inverse-system (01ZA) and
+2. Apply theorem-nagata-s-compactification-theorem--1 (01ZA) and
    lem-weil-pbc-cofiltered-limit-directed-reindex to approximate S by finite-type
    schemes Sⱼ over ℤ with affine transitions. If S is affine, use the finitely generated
    subrings from lemma-nagata-noetherian-inverse-system-affine instead.
-3. Descend Y to a finitely presented Yⱼ₀ → Sⱼ₀ by thm-pd-spreading-out (01ZM).
+3. Descend Y to a finitely presented Yⱼ₀ → Sⱼ₀ by proposition-jacobian-over-ground-field--1 (01ZM).
    Its base changes Yⱼ have affine transition maps and limit Y.
 4. Enlarge j₀ using lem-weil-pbc-eventually-proper (081F). All Yⱼ → Sⱼ are now proper
    by lem-weil-pbc-proper-base-change.
@@ -49,7 +49,7 @@ Proof:
    proper by lem-weil-pbc-closed-immersion-proper.
 6. The image ideals are the kernels on affine opens, so transitions Yⱼ' → Yⱼ induce
    unique compatible Zⱼ' → Zⱼ. These are affine: their factorization through
-   Zⱼ ×_{Sⱼ} Sⱼ' is a closed immersion by lem-weil-pbc-closed-immersion-from-composite,
+   Zⱼ ×_{Sⱼ} Sⱼ' is a closed immersion by corollary-extension-proper-target--1,
    followed by an affine projection. The image factorizations give cones from X and S.
 7. On affine opens of Yⱼ₀, write the coordinate ring of X as (B ⊗ R)/𝔞. The rings of
    Zⱼ are (B ⊗ Rⱼ)/ker(B ⊗ Rⱼ → (B ⊗ R)/𝔞). Their filtered colimit is (B ⊗ R)/𝔞:

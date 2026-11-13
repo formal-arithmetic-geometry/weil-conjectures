@@ -29,8 +29,8 @@ cohomology sheaves are finite locally constant on `U`. Then `Le^* Ψ_X(j_! K)` v
 
 ## Proof
 
-This is the blueprint argument of `det-sp-generic-divisor`, with the induction on the degree of a
-trivialising cover replaced by the `ℓ`-Sylow reduction:
+This is the blueprint argument of `lemma-vanishing-generic-points-principal-divisor--1`, with the
+induction on the degree of a trivialising cover replaced by the `ℓ`-Sylow reduction:
 
 * a finite étale `v : W ⟶ U` of degree `d` prime to `ℓ`, over which all `Hⁿ(F')` acquire finite
   `ℓ`-group monodromy (`Scheme.exists_sylow_galoisCover_trivializing`);
@@ -103,9 +103,9 @@ lemma nonempty_overRestrict_compl (hX : IsNormalScheme X.left) {h : Γ(X.left, �
 -- étale sheaves of `𝔽_E`-modules, whose instance search is slow.
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **Generic vanishing along a divisor for lisse finite coefficients** (blueprint
-`det-sp-generic-divisor`, lisse case): let `X` be normal, `Z = V(h)`, `ζ` a generic
-point of `Z`, and `K` a complex of `𝔽_E`-module objects on `U = X ∖ Z` corresponding to a bounded
-complex `F'` of étale sheaves with finite locally constant cohomology sheaves. Then
+`lemma-vanishing-generic-points-principal-divisor--1`, lisse case): let `X` be normal, `Z = V(h)`,
+`ζ` a generic point of `Z`, and `K` a complex of `𝔽_E`-module objects on `U = X ∖ Z` corresponding
+to a bounded complex `F'` of étale sheaves with finite locally constant cohomology sheaves. Then
 `Le^* Ψ_X(j_! K)` vanishes near `ζ`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}

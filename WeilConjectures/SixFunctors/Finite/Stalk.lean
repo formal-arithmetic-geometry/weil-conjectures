@@ -26,7 +26,7 @@ so that `G (U ×_Y X) = ∏_t G (piece_t)`. Finite products commute with the fil
 (`A` satisfies AB5), and the colimit of `G (piece_t)` over the split neighbourhoods is the
 stalk `G_t`, the pieces being cofinal among the pointed étale neighbourhoods of `t`
 (`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_pieceFunctor`). The classical argument through the
-strict henselization (blueprint remark `rem-weil-pbc-finite-stalk-formula-strict-henselian`) is
+strict henselization (blueprint remark `lemma-finite-direct-images--1`) is
 not the one formalised here.
 
 ## Main definitions
@@ -117,7 +117,7 @@ variable (G : Sheaf X.smallEtaleTopology A)
 /-- The restriction of germs at `y` of `f_* G` to germs at a geometric point `t` of `X` over
 `y`: a section of `G` over `U ×_Y X` is a section over the pointed étale neighbourhood
 `(U ×_Y X, (u, t))` of `t` (the restriction of stalks of blueprint
-`lemma-weil-pbc-finite-stalk-formula`). -/
+`lemma-finite-direct-images--1`). -/
 def Etale.stalkRestrict :
     (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) ⟶
       (pointSmallEtale t.1).sheafFiber.obj G :=
@@ -292,7 +292,7 @@ lemma Etale.stalkIsoPi_hom (G : Sheaf X.smallEtaleTopology A) :
     (Etale.stalkIsoPi A f y G).hom = Pi.lift fun t ↦ Etale.stalkRestrict A f y t G := rfl
 
 /-- **The geometric stalk formula for a finite direct image** (blueprint
-`lemma-weil-pbc-finite-stalk-formula`). For a finite morphism
+`lemma-finite-direct-images--1`). For a finite morphism
 `f : X ⟶ Y` and a geometric point `y` of `Y` with algebraically closed residue field, the
 stalk of `f_* G` at `y` is the finite product of the stalks of `G` at the geometric points of
 `X` over `y`, naturally in the sheaf `G`. -/

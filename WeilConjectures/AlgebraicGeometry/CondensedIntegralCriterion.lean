@@ -50,7 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Canonical scalar-complex realization on a chart: pull back the finite free point
 complex termwise and localize. The additive and exact structures are supplied by the
 existing finite-limit and left-adjoint properties of the inverse image from the point.
-Source: current blueprint sk-prop-integral-criterion, condition (3)
+Source: current blueprint proposition-integral-constructibility-criterion, condition (3)
 (blueprint: lem-fix-condensed-integral-criterion). -/
 noncomputable def condensedIntegralCriterionRealization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -263,7 +263,7 @@ scalar models, without a dimension bound or invertibility of the residue charact
 The third entry uses a finite constructible locally closed stratification and the actual
 derived restriction along the composite chart-to-stratum-to-X morphism. Its point complex
 is bounded termwise finite free; its scalar matrices and bounds can depend on the chart.
-Source: current blueprint sk-prop-integral-criterion, conditions (1)--(4)
+Source: current blueprint proposition-integral-constructibility-criterion, conditions (1)--(4)
 (blueprint: lem-fix-condensed-integral-criterion).
 
 Proof, following the updated node:

@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-! # Scalar faithfulness after the ordinary inverse-image adjunction
 
-Source: the two components of blueprint thm-amb-p1-decomposition.
+Source: the two components of blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node).
 -/
 
@@ -89,7 +89,7 @@ private theorem kummer_unit_scalar_naturality
 
 /-- Scalar faithfulness of the actual Kummer class implies scalar faithfulness
 of its specified Chern pushforward under the canonical derived adjunction.
-Source: blueprint thm-amb-p1-decomposition, the geometric Chern component.
+Source: blueprint lemma-cohomology-projective-line-trace, the geometric Chern component.
 (auxiliary; not a blueprint node).
 
 Proof: linearity of inverse image and of the single functors makes the constant

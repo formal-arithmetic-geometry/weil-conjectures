@@ -190,7 +190,8 @@ Proof plan (Stacks 088E, in the form 088F):
    Otherwise, by lem-weil-pbc-noetherian-acc-quasi-coherent choose a maximal failing
    annihilator and replace X by its closed subscheme. Every nonzero ideal then satisfies
    the claim.
-5. Use thm-chow-lemma and lem-chow-closed-model for a proper modification Y,
+5. Use theorem-chow-s-lemma-projective-form and theorem-chow-s-lemma-projective-form for a proper
+modification Y,
    an isomorphism over a dense open U, and a projective compactification Y'.
 6. Pull back and extend the system using lem-weil-pbc-formal-systems-pullback,
    lem-weil-pbc-support-pullback-finite-type and lem-weil-pbc-pushforward-coherent-on-open.

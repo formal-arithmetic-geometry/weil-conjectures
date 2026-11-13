@@ -47,7 +47,7 @@ extension, with its actual unit and counit; normalized Hom formulas specify all
 coefficient comparisons and the selected transition, including repeated next indices.
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
-the adic-stage paragraph of def-weil-exceptional-inverse-image in the main-20261015
+the adic-stage paragraph of theorem-f-shriek-finite-coefficients in the main-20261015
 blueprint, before taking inverse limits; Stacks Tags 03DA, 03DB, 06YS, 06YT, 06XN,
 0FND and 09T5 (blueprint: lem-pur-system-level-left-extension).
 

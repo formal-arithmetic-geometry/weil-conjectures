@@ -27,7 +27,8 @@ by isomorphisms `α i : (s (T i))^* L i ≅ (T i ⟶ T)^* N`. A morphism between
 When `Γ(Y, 𝒪_Y) ⟶ Γ(X_Y, 𝒪_{X_Y})` is surjective, normalized morphisms are unique, and any
 isomorphism can be rescaled by a unit to a normalized one. Consequently normalized gluing
 isomorphisms automatically satisfy the cocycle condition. This is the rigidification in the proof
-that the `σ`-normalized relative Picard functor is an fppf sheaf (blueprint `lem-pc-k-sheaf`).
+that the `σ`-normalized relative Picard functor is an fppf sheaf (blueprint
+`lemma-rigidification-along-section--1`).
 
 ## Main definitions
 

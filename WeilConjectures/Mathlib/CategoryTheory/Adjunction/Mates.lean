@@ -412,7 +412,7 @@ lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
   apply (adj₂.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
 
-/-- Blueprint `lem-trf-adjoint-mate`: mates along an isomorphism of left adjoints. For
+/-- Blueprint `proposition-sp-unique-adjoint--1`: mates along an isomorphism of left adjoints. For
 adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a natural isomorphism `α : L₁ ≅ L₂`, the conjugate
 `β = conjugateIsoEquiv adj₁ adj₂ α.symm : R₁ ≅ R₂`
 

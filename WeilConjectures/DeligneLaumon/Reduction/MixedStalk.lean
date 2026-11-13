@@ -73,7 +73,7 @@ theorem stalkAt_hasWeightsAtMost_of_filtration {ι : PadicAlgCl l →+* ℂ} {q 
 /-- A Weil sheaf which is `ι`-mixed of weights at most `w` has weights at most `w`: at every
 closed point `x`, every eigenvalue `α` of the local Frobenius satisfies `|ι α| ≤ q_x ^ (w / 2)`.
 The stalk functors being exact, this follows by induction along the filtration from the bounds
-for its punctually pure quotients (blueprint: `sk-d-real-weights`). -/
+for its punctually pure quotients (blueprint: `definition-weights`). -/
 theorem IsMixedOfWeightsAtMost.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsMixedOfWeightsAtMost ι w) : F.HasWeightsAtMost ι w := by
   intro x

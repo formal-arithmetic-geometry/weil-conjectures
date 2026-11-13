@@ -13,7 +13,7 @@ import WeilConjectures.PoincareDuality.Pod.Identity.PodIdentityTensorTowerInvers
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -59,7 +59,7 @@ attribute [local irreducible] integralOperationsTotalTensorSection
 
 -- Comparing sheafified total-tensor generators requires substantial instance elaboration.
 /-- Identity relabelling agrees with the strict completed-tensor construction.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-identity-tensor-tower).
 
 Proof: the quotient-generator equation identifies the identity quotient comparison

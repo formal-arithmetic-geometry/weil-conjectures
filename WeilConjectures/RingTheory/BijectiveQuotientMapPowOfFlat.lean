@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Ideal.Pure
 # Isomorphisms modulo powers of an ideal under a flat ring map
 
 Source: Stacks Project, More on Algebra, proof of Tag 0AGU, using Algebra, Tag 051H
-(blueprint: lem-weil-pbc-flat-iso-mod-ideal-powers).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -82,7 +82,7 @@ private theorem injective_of_flat_surjective_nilpotent_ker {R : Type u} {S : Typ
 modulo every positive power of that ideal. Here `Ideal.map` is extension of the ideal,
 and bijectivity of the induced ring homomorphism expresses that this map is an isomorphism.
 Source: Stacks Project, proof of Tag 0AGU, referring to Tag 051H
-(blueprint: lem-weil-pbc-flat-iso-mod-ideal-powers).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: Write βₙ for the induced map on quotients and αₙ for the induced map
 `I^n / I^(n+1) → I^n B / I^(n+1) B`. The inclusion and reduction maps give two short

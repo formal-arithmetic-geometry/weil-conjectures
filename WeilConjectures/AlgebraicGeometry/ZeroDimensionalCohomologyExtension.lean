@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md
-(blueprint: lem-weil-pbc-zero-dimensional-cohomology).
+(blueprint: lemma-sheaves-finite-support-finite-morphisms--1).
 -/
 
 @[expose] public section

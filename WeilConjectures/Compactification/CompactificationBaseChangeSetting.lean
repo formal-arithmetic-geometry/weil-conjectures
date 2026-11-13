@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-open-coefficients/det-def-sfb-shriek-base-change-morphism-compactification.md,
-clauses 1--3 (blueprint: det-def-sfb-shriek-base-change-morphism-compactification).
+clauses 1--3 (blueprint: remark-base-change-compactification--1).
 
 The compactification and its base change are the existing constructions. Objects of
 `Over (Spec (.of k))` and their morphisms retain all the structure maps over the field.
@@ -40,14 +40,14 @@ form the existing base-changed compactification. All three new arrows are over `
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-open-coefficients/det-def-sfb-shriek-base-change-morphism-compactification.md,
-clauses 1--3 (blueprint: det-def-sfb-shriek-base-change-morphism-compactification).
+clauses 1--3 (blueprint: remark-base-change-compactification--1).
 
 Proof plan, following the node's five steps:
 1. The factorization `c.comm` and the given cartesian square make the pair `(g' ≫ i, f')`
 compatible. The universal property of `def-pc-fibre-product` gives its unique lift, namely
 `ofIsPullback`. The proper square is the defining pullback. Cancel that square from the
 outer cartesian rectangle using `lem-weil-pbc-cartesian-square-pasting` to obtain the open
-square. This uses `sk-def-nagata-sketch-data`.
+square. This uses `definition-compactification-refinement`.
 2. Apply `lem-weil-pbc-open-immersion-base-change` and `lem-weil-pbc-proper-base-change`
 to these two squares. Neither application needs a flatness hypothesis.
 3. Give each middle scheme the composite structure map through the target. The projection
@@ -61,8 +61,8 @@ separated and of finite type over `k`.
 5. Apply clause (b) of `lemma-nagata-finite-type-to-separated-target` to the induced open
 arrow and the new middle scheme's separated structure map. Its composite is the finite-type
 structure map of `X'`, so the induced arrow is quasi-compact. Along with step 2 and the
-factorization, this is the compactification of `sk-def-nagata-sketch-data`, obtained by
-`def-nagata-compactification-base-change`.
+factorization, this is the compactification of `definition-compactification-refinement`, obtained by
+`remark-base-change-compactification--1`.
 -/
 theorem baseChange_compactification_in_setting
     (ℓ p₀ : ℕ) (hℓ : ℓ.Prime) (k : Type u) [Field k] [CharP k p₀]

@@ -11,8 +11,8 @@ public import WeilConjectures.RingTheory.ProEtale.WLocal
 # Clopen partitions of a w-local affine spectrum
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node lem-weil-pbc-w-local-partition, order 1221
-(blueprint: lem-weil-pbc-w-local-partition).
+node proposition-w-local-components--1, order 1221
+(blueprint: proposition-w-local-components--1).
 -/
 
 @[expose] public section
@@ -23,8 +23,8 @@ namespace PrimeSpectrum
 
 /-- Patch compactness and the closed-point description of clopen partitions of a w-local
 spectrum. Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node lem-weil-pbc-w-local-partition, order 1221
-(blueprint: lem-weil-pbc-w-local-partition).
+node proposition-w-local-components--1, order 1221
+(blueprint: proposition-w-local-components--1).
 
 Proof:
 1. Mathlib gives compactness of the constructible topology. A compact open is clopen in

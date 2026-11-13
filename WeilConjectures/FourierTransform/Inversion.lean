@@ -85,7 +85,7 @@ is not enough when `Λ` is not a domain
 
 Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `lem-fd-convolution-kernel`) -/
+(sketch blueprint: `proposition-fourier-inversion`) -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -138,7 +138,7 @@ The composition law of kernel transforms also needs the projection
 Class: torsion; decided by the convolution computation
 `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution` (cohomology of `𝔸^r`), which
 needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sk-thm-inversion`) -/
+(sketch blueprint: `sec-Fourier-inversion`) -/
 -- TODO: discharge the `HasCompactification` hypothesis: the composite is a morphism
 -- `𝔸^{3n}_S ⟶ 𝔸^n_S`, which is compactified through projective space by
 -- `AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`, with no need for Nagata.
@@ -203,7 +203,7 @@ hypotheses are those of inversion.
 Class: torsion; decided by inversion
 `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`, which needs
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sk-thm-inversion`) -/
+(sketch blueprint: `sec-Fourier-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_self [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫

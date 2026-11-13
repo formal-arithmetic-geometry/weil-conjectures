@@ -16,8 +16,8 @@ public import WeilConjectures.TraceFormula.StalkFrobeniusGraph
 Let `(K, φ)` be a Weil object on `X` for `Φ`, `m ≥ 1`, `x` a rational point fixed by `Φ_m` and
 `j : U ⟶ X` the open complement of `x`. The open–closed triangle
 `K^U = j_! Lj^* K ⟶ K ⟶ K^Z = Rx_* Lx^* K ⟶` carries the coefficient maps `u^U`, `φ_m`, `u^Z` of
-the graph correspondence `c_m = (𝟙, Φ_m)` (blueprint `d-curve-pieces`), and the trace classes
-are additive (blueprint `prop-trf-trace-class-additivity`, item 2):
+the graph correspondence `c_m = (𝟙, Φ_m)` (blueprint `proposition-frobenius-local-term-curve--1`),
+and the trace classes are additive (blueprint `proposition-additivity-trace-classes--2`, item 2):
 ```
 Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U),
 ```
@@ -68,8 +68,8 @@ lemma closedPieceCoeff_eq_graphClosedPieceCoeff (K : WeilBoundedConstructible �
     (by rw [stalkFrobenius_eq_graphStalkMap]; rfl) _ _ _ _ _ _
 
 /-- **The closed piece coefficient of a Weil object is compatible with the unit** (blueprint
-`prop-trf-trace-class-additivity`, proof of item 2, step (b)): for `x` fixed by `Φ_m`, the closed
-piece coefficient `u^Z = [x, x]_! F_{x,m}` satisfies `u^Z ∘ LΦ_m^* η = η ∘ φ_m` for the unit
+`proposition-additivity-trace-classes--2`, proof of item 2, step (b)): for `x` fixed by `Φ_m`, the
+closed piece coefficient `u^Z = [x, x]_! F_{x,m}` satisfies `u^Z ∘ LΦ_m^* η = η ∘ φ_m` for the unit
 `η : K ⟶ Rx_* Lx^* K`, up to `R(𝟙)^! ≅ 𝟭`. -/
 theorem upperStar_map_unit_comp_closedPieceCoeff (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
@@ -87,11 +87,11 @@ variable (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.of k))}
   [IsOpenImmersion j.left]
 
 /-- **Additivity of trace classes along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the
-Frobenius graph; `sk-i-additivity`): for a rational point `x` fixed by `Φ_m`, `m ≥ 1`, with
-open complement `j : U ⟶ X` such that `Φ_{m,U} ≫ j = j ≫ Φ_m` is cartesian, the trace class of
-the graph correspondence `(𝟙, Φ_m)` with coefficient `φ_m` is the sum of the trace classes with
-the coefficients `u^Z` of `K^Z` and `u^U` of `K^U`. -/
+`proposition-additivity-trace-classes--2`, item 2; `proposition-additivity-trace-classes--2` for the
+Frobenius graph; `proposition-additivity-trace-classes`): for a rational point `x` fixed by `Φ_m`,
+`m ≥ 1`, with open complement `j : U ⟶ X` such that `Φ_{m,U} ≫ j = j ≫ Φ_m` is cartesian, the trace
+class of the graph correspondence `(𝟙, Φ_m)` with coefficient `φ_m` is the sum of the trace classes
+with the coefficients `u^Z` of `K^Z` and `u^U` of `K^U`. -/
 theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
     (sq : IsPullback ΦU j j (frobeniusIterate Φ m))
@@ -126,8 +126,8 @@ theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
       ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier))).trans (add_comm _ _)
 
 /-- **Additivity of local terms along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2): for every open and closed subscheme `B` of the fixed
-locus, proper over `s`, `LT_B(φ_m) = LT_B(u^Z) + LT_B(u^U)`. -/
+`proposition-additivity-trace-classes--2`, item 2): for every open and closed subscheme `B` of the
+fixed locus, proper over `s`, `LT_B(φ_m) = LT_B(u^Z) + LT_B(u^U)`. -/
 theorem localTerm_traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
     (sq : IsPullback ΦU j j (frobeniusIterate Φ m))

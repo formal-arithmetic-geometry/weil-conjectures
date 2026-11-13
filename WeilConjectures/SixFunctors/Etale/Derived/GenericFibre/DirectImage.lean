@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 Let `S` be an integral scheme of finite type over a field `k`, let `Λ` be a finite ring whose
 exponent is invertible on `S`, and let `t : T ⟶ S` be a morphism from a noetherian scheme `T`
 lying over the generic point of `S` — for instance a geometric generic point
-`Spec (k(S)^{alg}) ⟶ S`, the case of blueprint `lem-weil-geometric-generic-exchange` with
+`Spec (k(S)^{alg}) ⟶ S`, the case of blueprint `lemma-restriction-geometric-generic-fibre` with
 `S = B` a curve. For an open immersion `j : X ⟶ Y` of finite-type `S`-schemes and its base change
 `j_T : X_T ⟶ Y_T` along `g : Y_T ⟶ Y`, the derived base change map
 
@@ -25,7 +25,7 @@ lying over the generic point of `S` — for instance a geometric generic point
 (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) is an isomorphism for every bounded
 constructible `L` on `X`.
 
-This is the first comparison of blueprint `lem-weil-geometric-generic-exchange`,
+This is the first comparison of blueprint `lemma-restriction-geometric-generic-fibre`,
 `g_X^* Rh_* L ≅ Rh_{η̄,*} g_T^* L`, for `h` an open immersion; it is the case used by the closed
 support comparison (`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport`).
 
@@ -35,9 +35,9 @@ The blueprint proves the comparison by writing the separable closure of `k(B)` a
 étale neighbourhoods, applying smooth base change at each stage and passing to the limit. Here it
 is instead read off from Deligne's generic base change theorem
 (`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`,
-`thm-fin-deligne-generic-open`): for each constructible sheaf `F` the formation of `Rj_* F`
-commutes with every noetherian base change landing in some nonempty open `U ⊆ S`, and the generic
-point lies in every such `U`. A dévissage over the cohomology sheaves
+`theorem-generic-constructibility-base-change-rj`): for each constructible sheaf `F` the formation
+of `Rj_* F` commutes with every noetherian base change landing in some nonempty open `U ⊆ S`, and
+the generic point lies in every such `U`. A dévissage over the cohomology sheaves
 (`AlgebraicGeometry.Etale.prop_of_boundedConstructible`) passes from sheaves to bounded
 constructible complexes, the locus where `Ex_*` is invertible being a triangulated subcategory
 (`CategoryTheory.NatTrans.isoLocus`). In particular no algebraic closedness of the residue field
@@ -69,7 +69,7 @@ lemma genericPoint_mem_of_nonempty {S : Scheme.{u}} [IsIntegral S] (U : S.Opens)
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-weil-geometric-generic-exchange`, first comparison, for an open immersion.
+/-- Blueprint `lemma-restriction-geometric-generic-fibre`, first comparison, for an open immersion.
 
 Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
 is invertible on `S`, and let `t : T ⟶ S` be a morphism from a noetherian scheme lying over the

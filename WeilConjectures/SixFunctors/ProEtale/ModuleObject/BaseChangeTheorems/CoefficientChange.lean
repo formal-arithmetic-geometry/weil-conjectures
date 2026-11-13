@@ -24,7 +24,7 @@ the composite coefficient map `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` (`ProEtale.boundedCon
 followed by `ProEtale.constructibleToPadicAlgCl`). For a cartesian square of schemes separated
 and of finite type over the field `k`, the scalar comparisons identify `Φ` of the integral
 base-change morphism `BC_sq` with the `ℚ̄_ℓ`-base-change morphism at `Φ K₀`
-(blueprint `sk-lem-sbc-exchange-compatibility`, section `sec-smooth-base-change`). Together with
+(blueprint `lemma-naturality-pasting-comparison`, section `chap-Smooth-base-change`). Together with
 the integral models of `ℚ̄_ℓ`-complexes (`ProEtale.exists_padicAlgCl_iso_integralModel`), this
 reduces the invertibility of a `ℚ̄_ℓ`-base-change morphism to the integral one
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`).
@@ -66,10 +66,10 @@ section Rational
 
 variable (E : FiniteIntermediateField ℓ)
 
-/-- Blueprint `sk-lem-sbc-exchange-compatibility` (section `sec-smooth-base-change`), its last
-assertion for the coefficient map `𝒪_E ⟶ ℚ̄_ℓ` of `sk-prop-scalar-six` (the composite of the
-localization `𝒪_E ⟶ E` and the inclusion `E ⟶ ℚ̄_ℓ`): for a cartesian square of schemes
-separated and of finite type over `k`
+/-- Blueprint `lemma-naturality-pasting-comparison` (section `chap-Smooth-base-change`), its last
+assertion for the coefficient map `𝒪_E ⟶ ℚ̄_ℓ` of `proposition-six-operations-change-coefficients`
+(the composite of the localization `𝒪_E ⟶ E` and the inclusion `E ⟶ ℚ̄_ℓ`): for a cartesian square
+of schemes separated and of finite type over `k`
 
 ```
 X' --g'--> X
@@ -137,9 +137,10 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 -- the bounded constructible and the ambient forms of the exchange morphism are unified
-/-- Blueprint `sk-lem-sbc-exchange-compatibility` (section `sec-smooth-base-change`), its last
-assertion for the residue map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring of `sk-prop-scalar-six`: for a
-cartesian square of schemes separated and of finite type over `k`
+/-- Blueprint `lemma-naturality-pasting-comparison` (section `chap-Smooth-base-change`), its last
+assertion for the residue map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring of
+`proposition-six-operations-change-coefficients`: for a cartesian square of schemes separated and of
+finite type over `k`
 
 ```
 X' --g'--> X

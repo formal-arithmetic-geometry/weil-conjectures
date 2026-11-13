@@ -205,7 +205,7 @@ derived categories with finite coefficients, the exchange map `r_! t_* ⟶ b_* l
 square with `b` proper is an isomorphism. On the open `r` this is formal; on its closed complement
 both sides vanish, by proper base change
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`,
-blueprint `sk-thm-properbasechange`). -/
+blueprint `theorem-proper-base-change-classical-pro`). -/
 instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
   isIso_exchange {U' U Z' Z t l r b} _ _ _ h := by
     have := CompactSupportFormalism.HasBaseChange.isIso_baseChange

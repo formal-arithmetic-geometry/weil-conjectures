@@ -20,7 +20,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The local normal form in the nonempty open-subscheme case.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), normal-form claim.
+Source: `lemma-triviality-fibres--2`, proof (3), normal-form claim.
 (blueprint: lem-pc-constant-rank-map-local-normal-form-nonempty)
 
 Proof: At z choose the field-valued point from hrank. The proved rank-minor

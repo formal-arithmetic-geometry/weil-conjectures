@@ -65,7 +65,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Finite-stratum detection for strict integral completion
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-def-localizing-closure-ctf-equals-bc.proof.md, Strata and Locality;
 Stacks Tags 09Y4, 09AA, 09AH, 09BM
 (blueprint: lem-sfb-finite-strata-completion-detection).
@@ -734,7 +734,7 @@ the quasi-isomorphism/cone-acyclicity criterion gives the asserted cone zero-det
 change of its branch immersion. Hence its further cover restriction is an immersion.
 Pullback composition identifies the branch-cover and original-cover routes, proving both
 directions of the original-cover equivalences.
-(7) Apply det-def-sfb-constructible-local-model to a finite scalar presentation. Exact
+(7) Apply definition-constructible-sheaves--1 to a finite scalar presentation. Exact
 inverse image preserves finite colimits, the regular module and each constant scalar.
 Lem-sfb-finite-colimit-matrix-cokernels therefore preserves the same entries, sizes and
 cokernel, and hence the same scalar module.

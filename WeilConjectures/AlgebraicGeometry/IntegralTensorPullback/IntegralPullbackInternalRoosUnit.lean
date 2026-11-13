@@ -14,7 +14,7 @@ set_option linter.privateModule false
 
 /-! # Ordinary pullback and the actual completion augmentation
 
-Source: blueprint det-lem-int-tensor-pullback, first paragraph; Stacks 099M.
+Source: blueprint lemma-inverse-image-tensor-product, first paragraph; Stacks 099M.
 (blueprint: lem-sfb-internal-pullback-roos-unit).
 -/
 

@@ -20,8 +20,8 @@ The normalization at `𝟙_ D` of `CategoryTheory.Adjunction.ofTraceCounit` (the
 identity) for the unit given by a kernel follows from the integral along `b` of the class
 `𝟙 ⟶ B' (A T)` given by the kernel, against the trace `t_b : B' A T ≅ F G T ⟶ F 𝟙 ≅ 𝟙` along `b`
 (`CategoryTheory.Adjunction.map_kernelAdjunctionUnit_app_comp_traceCounit`). This is the argument
-(G8) of blueprint `sk-prop-geo-p1-adjunction`: after `q_*`, the projection formula for `q` and
-the base change for `a` become the base change and the projection formula for `b`
+(G8) of blueprint `proposition-adjunction-projective-line`: after `q_*`, the projection formula for
+`q` and the base change for `a` become the base change and the projection formula for `b`
 (`CategoryTheory.Adjunction.monoidalProjectionLeft_comp_map_kernelBaseChange`), and the unit of
 `a Δ = 1` becomes the unit of `b Δ = 1` (
 `CategoryTheory.Adjunction.map_unit_comp_kernelPushforwardComparison`).
@@ -113,10 +113,10 @@ lemma kernelPushforwardComparison_naturality {Y Y' : E} (f : Y ⟶ Y') :
   rw [reassoc_of% hn, ← A.map_comp_assoc]
   simp
 
-/-- **Projection formula and base change** (blueprint `sk-prop-geo-p1-adjunction` (G8)). After
-`G`, the projection map of `F ⊣ G` followed by the comparison `Φ` and by `θ` is the left projection
-map of `F ⊣ G` followed by the base change map `F G T ⟶ B' A T` and the projection map of `B ⊣ B'`,
-provided `e` is monoidal. -/
+/-- **Projection formula and base change** (blueprint `proposition-adjunction-projective-line`
+(G8)). After `G`, the projection map of `F ⊣ G` followed by the comparison `Φ` and by `θ` is the
+left projection map of `F ⊣ G` followed by the base change map `F G T ⟶ B' A T` and the projection
+map of `B ⊣ B'`, provided `e` is monoidal. -/
 lemma monoidalProjectionLeft_comp_map_kernelBaseChange
     (he' : ∀ X Y : C, e.inv.app (X ⊗ Y) ≫ A.map (δ F X Y) ≫ δ A (F.obj X) (F.obj Y) =
       B.map (δ F X Y) ≫ δ B (F.obj X) (F.obj Y) ≫ (e.inv.app X ⊗ₘ e.inv.app Y))

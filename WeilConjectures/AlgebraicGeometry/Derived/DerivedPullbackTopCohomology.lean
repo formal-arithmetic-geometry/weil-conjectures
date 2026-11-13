@@ -789,8 +789,8 @@ cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the DAG assem
 Proof:
 1. Represent C by a complex K zero above n using the standard t-structure. Apply
 lem-pc-kflat-bounded-flat-replacement at the same bound n. Its flat replacement P is
-K-flat by lem-pc-bounded-above-flat-kflat, so def-pc-derived-pullback computes Lg*C by
-termwise g*P, with the counit selected by derived pullback composition.
+K-flat by lem-pc-bounded-above-flat-kflat, so lemma-coherent-base-change-invertible-sheaves--2
+computes Lg*C by termwise g*P, with the counit selected by derived pullback composition.
 2. The ordinary tensor pullback is left adjoint to pushforward
 (lem-pc-module-pullback-adjunction), hence preserves cokernels. Its comparison
 coker(g*d^{n-1}) → g*coker(d^{n-1}) is the map induced by the quotient of g*P^n.

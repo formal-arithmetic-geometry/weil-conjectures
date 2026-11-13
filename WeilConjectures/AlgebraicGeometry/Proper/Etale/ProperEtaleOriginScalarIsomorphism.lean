@@ -91,8 +91,8 @@ by lem-sfb-geometric-inverse-image-constant-module. Thus the two boundedness
 hypotheses here are exactly those on K and L in
 lem-sfb-projection-comparison-etale-proetale.
 2. The additive group of finite A has positive exponent, so A is a torsion ring.
-Apply lem-kun-0f0g to E_e and the degree-zero constant module B_Y. It makes
-properOriginEtaleProjection invertible; its last factor is just p*B_Y = B_Z.
+Apply proposition-proper-direct-image-constructible-complexes--9 to E_e and the degree-zero constant
+module B_Y. It makes properOriginEtaleProjection invertible; its last factor is just p*B_Y = B_Z.
 No flatness or Tor bound is required by that theorem.
 3. Specialize lem-sfb-projection-comparison-etale-proetale to these inputs.
 The tensor comparisons are those of lem-weil-pbc-ringed-topoi-derived-tensor-pullback;

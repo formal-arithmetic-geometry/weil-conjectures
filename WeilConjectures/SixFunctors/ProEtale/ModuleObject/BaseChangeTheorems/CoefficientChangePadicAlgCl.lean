@@ -40,7 +40,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- The rational stage of blueprint `sk-lem-sbc-exchange-compatibility`, for the inclusion
+/-- The rational stage of blueprint `lemma-naturality-pasting-comparison`, for the inclusion
 `E ⟶ ℚ̄_ℓ`: given that (Push) for `E ⟶ ℚ̄_ℓ` is invertible on bounded below complexes along
 quasi-compact quasi-separated morphisms, the extension of scalars `ℚ̄_ℓ ⊗ᴸ_E BC_sq(M)` and the
 base-change morphism of `Dᵇc(-)⟦ℚ̄_ℓ⟧` at `ℚ̄_ℓ ⊗ᴸ_E M` are isomorphic arrows. -/

@@ -30,7 +30,7 @@ with `p` smooth and `g` quasi-compact and quasi-separated, and a coefficient rin
 a nonzero integer invertible on `S`. For a bounded constructible complex `K` of pro-étale
 sheaves of `Λ`-modules on `T` (one of étale origin), the pro-étale exchange map
 `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism (blueprint
-`sbc-thm-finite-proetale-smooth-base-change`). It is obtained by conjugating the étale exchange
+`theorem-smooth-base-change-all-admissible--1`). It is obtained by conjugating the étale exchange
 isomorphism (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_boundedConstructible_of_smooth`)
 by the site comparison, as recorded by the transport lemma
 `AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap` of the proper base change
@@ -137,7 +137,7 @@ end Comparison
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 variable (g) in
-/-- Blueprint `lem-weil-pbc-comparison-pullback`: the canonical isomorphism
+/-- Blueprint `proposition-comparison-etale-derived-category--5`: the canonical isomorphism
 `ν_{Y'}^* g^* ≅ Lg^* ν_Y^*`, as functors `D⁺(Y_ét) ⥤ D(Y'_proét)`. It is induced by the
 underived isomorphism `AlgebraicGeometry.ProEtale.comparisonUpperStarCompUpperStarIso`, the
 derived pullback of the exact functor `g^*` being computed degreewise. -/
@@ -185,8 +185,8 @@ noncomputable def baseChangeTargetComparisonIso [QuasiCompact f'] [QuasiSeparate
     Functor.isoWhiskerRight (leftDerivedUpperStarComparisonIso g' Λ)
       R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f')
 
-/-- Blueprint `lem-weil-pbc-transport-identifies-exchange` (subsection
-`sk-thm-properbasechange`): for a Cartesian square
+/-- Blueprint `lemma-naturality-pasting-comparison--3` (subsection
+`theorem-proper-base-change-classical-pro`): for a Cartesian square
 
 ```
   X' ──g'──▶ X
@@ -247,7 +247,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {S T Y X : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
 variable (p) in
-/-- Blueprint `sbc-thm-finite-proetale-smooth-base-change`: for a Cartesian square with `p`
+/-- Blueprint `theorem-smooth-base-change-all-admissible--1`: for a Cartesian square with `p`
 smooth and `g` quasi-compact and quasi-separated, and a coefficient ring `Λ` killed by a
 nonzero integer `N` invertible on `S`, the pro-étale exchange map
 `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism for every bounded constructible pro-étale complex

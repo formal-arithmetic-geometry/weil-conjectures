@@ -21,13 +21,13 @@ public import WeilConjectures.TraceFormula.PointFiberFunctor
 
 Let `k` be a separably closed field and `s = Spec k`. Evaluation at the geometric point identifies
 the bounded constructible derived category `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` with the bounded derived category of
-finite-dimensional `ℚ̄_ℓ`-vector spaces (blueprint `def-weil-finite-coefficient-point`,
+finite-dimensional `ℚ̄_ℓ`-vector spaces (blueprint `lemma-perfect-complexes-geometric-point`,
 `ProEtale.CondensedRing.exists_fiberFunctor_point`). Consequently every object of
 `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is a finite direct sum of shifts of the unit.
 
 This file shows that the categorical trace on `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is the supertrace on the graded
 spaces `Hⁿ(P) = Hom(𝟙⟦n⟧, P)`, and deduces that the trace is additive along every endomorphism of
-a distinguished triangle (blueprint `prop-trf-trace-formal-laws`, items (2) and (4)): over a field
+a distinguished triangle (blueprint `proposition-properties-trace`, items (2) and (4)): over a field
 the filtered origin of the endomorphism is not needed.
 -/
 
@@ -419,7 +419,7 @@ lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
 /-- **The trace is the supertrace on the graded pieces**: for an object `Y` of `D(Mod_{ℚ̲̄_ℓ,s})`
 which is a finite direct sum of shifts `𝟙⟦nⱼ⟧` of the unit, the categorical trace of an
 endomorphism `w` of `Y` is the alternating sum `∑ₙ (-1)ⁿ tr(w | Hⁿ(Y))` of the traces on the
-graded pieces `Hⁿ(Y) = Hom(𝟙⟦n⟧, Y)` (blueprint `prop-trf-trace-formal-laws`, item (4)). -/
+graded pieces `Hⁿ(Y) = Hom(𝟙⟦n⟧, Y)` (blueprint `proposition-properties-trace`, item (4)). -/
 theorem trace_eq_pointScalar_sum {Y : DerivedCategory (PointMod ℓ k)} [HasRightDual Y]
     (D : ShiftDecomposition (𝟙_ _) Y) (s : Finset ℤ) (hs : ∀ j, D.deg j ∈ s)
     [∀ n, FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj Y)] (w : Y ⟶ Y) :

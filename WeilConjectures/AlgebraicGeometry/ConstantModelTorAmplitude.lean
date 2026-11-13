@@ -65,16 +65,16 @@ Proof plan:
 1. Isomorphism invariance. If `M ≅ M'`, restrict the isomorphism to every stratum and every
 member of the pro-étale cover; composing with the local-model isomorphisms gives the same
 finitely presented scalar modules and the same stratification for `M'`
-(det-def-sfb-constructible-local-model), also in the affine-local convention. Cohomology
+(definition-constructible-sheaves--1), also in the affine-local convention. Cohomology
 functors carry `K ≅ L` to `H^q(K) ≅ H^q(L)` (def-weil-abstract-derived-category), and for
 each `N[0]` the relative derived tensor (sk-def-sfb-derived-tensor-hom) carries `K ≅ L` to an
 isomorphism of tensors, so each Tor interval and its existence are unchanged.
 2. Internal-module comparison. The pro-étale site is small relative to the universe of the
-module sheaves (def-weil-sheaf-of-modules-category) and sheafification is strong monoidal
+module sheaves (situation-conventions) and sheafification is strong monoidal
 (det-def-sfb-sheaf-tensor-structure), so local equivalences are monoidal and
 def-weil-pbc-internal-abelian-sheaf-module-equivalence gives an exact equivalence `E` of
 internal `Λ_X`-modules with sectionwise modules. By det-def-sfb-sheaf-tensor-closed the
-hypotheses of def-sfb-modobj-relative-tensor hold, and by
+hypotheses of prose-03-02 hold, and by
 lem-pc-sites-sheaf-tensor-bilinear-universal both relative tensor products represent the
 `Λ_X`-bilinear maps, hence agree naturally, with the same unit.
 3. Derived comparison. `E` preserves cohomology, quasi-isomorphisms, shifts and cones, so it

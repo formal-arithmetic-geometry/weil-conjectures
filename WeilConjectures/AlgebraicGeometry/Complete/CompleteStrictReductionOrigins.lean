@@ -17,8 +17,8 @@ Compatible bounded-below etale origins of a completed object give finite constan
 etale origins at every level of its strict reduction tower, after restriction to constant
 coefficients.
 
-Source: Weil conjectures blueprint, node thm-cbc-complete-proetale, proof step 8
-(blueprint: thm-cbc-complete-proetale).
+Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
+step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public noncomputable section
@@ -35,7 +35,8 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 /-- The constant-coefficient scalar map followed by the n-th projection is the constant
 quotient map followed by the canonical level comparison.
-Source: strict normalization, proof step 5; Stacks 099M (blueprint: thm-cbc-complete-proetale). -/
+Source: strict normalization, proof step 5; Stacks 099M (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcExchangeScalar_projection (V : Scheme.{t}) (n : ℕ) :
     exchangeScalar d V ≫ completedReductionProjection V d n =
       (constantSheaf (ProEt.topology V) CommRingCat.{t + 1}).map
@@ -51,7 +52,7 @@ theorem cbcExchangeScalar_projection (V : Scheme.{t}) (n : ℕ) :
   rfl
 
 /-- The level comparison sends a constant section to the constant component function.
-Source: blueprint order 1250 (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint order 1250 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcLevelComparison_toSheafify (V : Scheme.{t}) (n : ℕ) :
     toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj
         (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) ≫
@@ -62,7 +63,7 @@ theorem cbcLevelComparison_toSheafify (V : Scheme.{t}) (n : ℕ) :
   exact (pbcLevelConstantComparison_exists V d n).exists.choose_spec U b
 
 /-- The continuous-function presentation of constants is the level comparison on constants.
-Source: blueprint order 1300 (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint order 1300 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcPbcFunctionScalars_eq (V : Scheme.{t}) (n : ℕ) :
     pbcFunctionScalars V d n =
       Functor.whiskerRight (toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj
@@ -84,7 +85,7 @@ theorem cbcPbcFunctionScalars_eq (V : Scheme.{t}) (n : ℕ) :
   rfl
 
 /-- Ring maps out of the constant coefficient ring are determined on constant sections.
-Source: Stacks 00W1 (blueprint: thm-cbc-complete-proetale). -/
+Source: Stacks 00W1 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcConstRing_hom_ext (V : Scheme.{t}) {S : Sheaf (ProEt.topology V) RingCat.{t + 1}}
     (f g : (adicLisseForget V).obj (exchangeConstantRing V A) ⟶ S)
     (h : Functor.whiskerRight (toSheafify (ProEt.topology V)
@@ -102,7 +103,7 @@ theorem cbcConstRing_hom_ext (V : Scheme.{t}) {S : Sheaf (ProEt.topology V) Ring
   simpa only [← Category.assoc, hf] using h
 
 /-- The finite scalar map on constant sections. Source: Stacks 03DA
-(blueprint: thm-cbc-complete-proetale). -/
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcFiniteScalarMap_unit (X : Scheme.{t}) (Λ : Type (t + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : A →+* Λ) :
     Functor.whiskerRight
@@ -130,7 +131,7 @@ theorem cbcFiniteScalarMap_unit (X : Scheme.{t}) (Λ : Type (t + 1))
 
 /-- The finite constant-coefficient scalar map, composed with the finite ring comparison,
 is the constant-coefficient scalar map followed by the n-th projection.
-Source: Stacks 03DA, 099M (blueprint: thm-cbc-complete-proetale). -/
+Source: Stacks 03DA, 099M (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcFiniteScalarMap_comparison (V : Scheme.{t}) (n : ℕ) :
     ProEtale.StrictTower.finiteScalarMap A V (ProEtale.PbcQuotient d n)
         (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ≫
@@ -160,7 +161,7 @@ theorem cbcFiniteScalarMap_comparison (V : Scheme.{t}) (n : ℕ) :
   exact h3.symm
 
 /-- Restriction of module scalars along a composite of ring sheaf maps.
-Source: Stacks 03DA (blueprint: thm-cbc-complete-proetale). -/
+Source: Stacks 03DA (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 def cbcSheafRestrictScalarsComp {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R R' R'' : Sheaf J RingCat.{t + 1}} (α : R ⟶ R') (β : R' ⟶ R'') :
     SheafOfModules.restrictScalars.{t + 1} (α ≫ β) ≅
@@ -170,7 +171,7 @@ def cbcSheafRestrictScalarsComp {C : Type*} [Category C] {J : GrothendieckTopolo
       (by intros; ext; rfl))) (by intros; ext; rfl)
 
 /-- Restriction of module presheaf scalars along the identity of a constant ring.
-Source: Stacks 03DA (blueprint: thm-cbc-complete-proetale). -/
+Source: Stacks 03DA (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 def cbcConstRestrictScalarsId {C : Type*} [Category C] (Λ : Type (t + 1)) [CommRing Λ] :
     PresheafOfModules.restrictScalars.{t + 1}
         ((Functor.const Cᵒᵖ).map (RingCat.ofHom (RingHom.id Λ))) ≅ 𝟭 _ :=
@@ -196,7 +197,7 @@ coefficients, agree: realization along constant sections followed by restriction
 A → A/I^(n+1), and realization along continuous functions followed by restriction along the
 n-th projection and the constant-coefficient scalar map.
 Source: blueprint def-cbc-finite-constant-coefficient-transport
-(blueprint: thm-cbc-complete-proetale).
+(blueprint: proposition-composition-base-change-rf-shriek--4).
 Proof sketch: `rawIso` for the finite ring comparison identifies the two realizations up to
 restriction along that comparison; the composite ring maps out of the constant ring agree
 on constant sections, hence agree. -/
@@ -233,7 +234,8 @@ theorem cbcFiniteRealizationRestrictIso (V : Scheme.{t}) (n : ℕ) :
 restriction of the realized n-th witnessed level, given an identification of that realized
 level with the n-th completed reduction of K.
 Source: blueprint def-weil-pbc-bounded-constructible-complete and
-def-cbc-finite-constant-coefficient-transport (blueprint: thm-cbc-complete-proetale). -/
+def-cbc-finite-constant-coefficient-transport (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcStrictReductionLevel_originIso (V : Scheme.{t}) (K : d.derived V) (n : ℕ)
     (X : ProEtale.PbcWitnessAmbient V d n)
     (e : (pbcDerivedFunctionRealization V d n).obj X ≅ (pbcCompletedReduction V d n).obj K) :
@@ -270,7 +272,7 @@ theorem cbcStrictReductionLevel_originIso (V : Scheme.{t}) (K : d.derived V) (n 
 
 /-- Compatible etale origins of a completed object give finite constant-coefficient etale
 origins of every level of its restricted strict reduction tower.
-Source: blueprint step 8 (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint step 8 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcStrictReductionLevel_scalarEtaleOrigin (V : Scheme.{t}) (K : d.derived V)
     (origins : PbcHasCompatibleEtaleOrigins V d K) (n : ℕ) :
     Nonempty (ProEtale.StrictTower.ScalarEtaleOrigin A V

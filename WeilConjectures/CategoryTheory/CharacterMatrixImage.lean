@@ -71,7 +71,7 @@ private theorem character_matrix_factorization
 
 /-- A normalized character matrix on a finite product has rank-one image;
 evaluation at the zero index is the specified isomorphism.
-Source: blueprint lem-fd-as-characters, Step 4, eigenfunction calculation
+Source: blueprint lemma-artin-schreier-character-sheaf, Step 4, eigenfunction calculation
 (blueprint: lem-fd-as-character-matrix-image).
 
 Proof: form the column a mapped to multiplication by χ(a), and the weighted row

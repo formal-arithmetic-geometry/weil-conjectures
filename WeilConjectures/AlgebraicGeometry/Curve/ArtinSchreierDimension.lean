@@ -21,7 +21,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 # Artin–Schreier vanishing on a smooth connected curve
 
 Source: blueprint, `sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension`;
-Stacks Project, Tag 0A3N, dimension one (blueprint: lem-sc-artin-schreier-dimension).
+Stacks Project, Tag 0A3N, dimension one (blueprint: proposition-p-torsion-smooth-proper-curve--3).
 -/
 
 @[expose] public section
@@ -34,27 +34,27 @@ namespace AlgebraicGeometry
 
 /-- Source: blueprint
 `sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension`; Stacks Project, Tag
-0A3N (blueprint: lem-sc-artin-schreier-dimension). For a smooth separated connected curve over an
-algebraically closed field of positive characteristic `p`, the constant étale sheaf `ℤ/p` has zero
-cohomology in degrees above one.
+0A3N (blueprint: proposition-p-torsion-smooth-proper-curve--3). For a smooth separated connected
+curve over an algebraically closed field of positive characteristic `p`, the constant étale sheaf
+`ℤ/p` has zero cohomology in degrees above one.
 
 Proof: The Artin–Schreier short exact sequence `0 → ℤ/p → G_a → G_a → 0`
-(lem-sc-as-sequence) gives the long exact sequence for derived global sections, by
-lem-weil-pbc-abelian-etale-sheaves-grothendieck, lem-sp-grothendieck-enough-injectives,
-lem-sp-kinjective-computes and lem-weil-pbc-right-derived-universal-delta-functor.
-By lem-sc-ga-cohomology, the cohomology of `G_a` vanishes in degrees at least two.
-Thus degrees at least three vanish, and degree two is the cokernel of `F - 1` on
-`H¹(C, G_a)`. Compactification (lem-sc-compactification) and lem-sc-affine-open-proper
-show that the curve is either proper or affine. In the affine case,
-lem-sc-etale-affine-qcoherent makes `H¹(C, G_a)` zero, so its cokernel is zero.
-In the proper case, multiplication by field elements on `G_a` induces a vector-space
+(lemma-p-torsion-affine-curve-characteristic--3) gives the long exact sequence for derived global
+sections, by proposition-p-torsion-smooth-proper-curve--3,
+proposition-p-torsion-smooth-proper-curve--3, proposition-p-torsion-smooth-proper-curve--3 and
+proposition-p-torsion-smooth-proper-curve--3. By proposition-p-torsion-smooth-proper-curve--3, the
+cohomology of `G_a` vanishes in degrees at least two. Thus degrees at least three vanish, and degree
+two is the cokernel of `F - 1` on `H¹(C, G_a)`. Compactification (lemma-proper-smooth-model--1) and
+proposition-p-torsion-smooth-proper-curve--3 show that the curve is either proper or affine. In the
+affine case, lemma-p-torsion-affine-curve-characteristic--4 makes `H¹(C, G_a)` zero, so its cokernel
+is zero. In the proper case, multiplication by field elements on `G_a` induces a vector-space
 structure on `H¹(C, G_a)`, since cohomology is additive. Frobenius induces a `p`-linear
 endomorphism, and the Artin–Schreier map induces this endomorphism minus the identity.
-The structure sheaf is coherent, and lem-pc-coherent-hi and pqf-def-cohomology give
-finite-dimensional Zariski `H¹(C, O_C)`. The comparison of
-lem-sc-etale-zariski-qcoh-comparison is natural in multiplication by scalars, so identifies
-it linearly with `H¹(C, G_a)`. Finally lem-sc-lang-steinberg makes `F - 1` surjective,
-so the degree-two cokernel vanishes as well. -/
+The structure sheaf is coherent, and proposition-p-torsion-smooth-proper-curve--3 and
+proposition-p-torsion-smooth-proper-curve--3 give finite-dimensional Zariski `H¹(C, O_C)`. The
+comparison of proposition-p-torsion-smooth-proper-curve--3 is natural in multiplication by scalars,
+so identifies it linearly with `H¹(C, G_a)`. Finally proposition-p-torsion-smooth-proper-curve--3
+makes `F - 1` surjective, so the degree-two cokernel vanishes as well. -/
 theorem isZero_etaleCohomology_constantZMod_of_one_lt_of_charP
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

@@ -234,7 +234,7 @@ Source: Stacks Project, Cohomology on Sites, Lemma 03F8
 
 Proof:
 1. Short exactness gives a sectionwise injective kernel map, with image the kernel of
-   the second map, using lem-weil-pbc-sheafification-exact and
+   the second map, using situation-conventions and
    def-weil-pbc-exact-sequence.
 2. Given a section of the quotient, the epimorphism has local lifts on a covering by
    lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective.

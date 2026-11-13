@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-! # Presentation data for reindexed tensor and Hom comparisons
 
-Source: blueprint `prop-pod-dual-tate-data-compatibility`, proof Steps 1, 2 and 4;
+Source: blueprint `theorem-poincare-duality-frobenius--2`, proof Steps 1, 2 and 4;
 Stacks Project, Tags 0GMX, 0A8X and 08J9
 (blueprint: def-pod-reindexing-coherence-data).
 -/

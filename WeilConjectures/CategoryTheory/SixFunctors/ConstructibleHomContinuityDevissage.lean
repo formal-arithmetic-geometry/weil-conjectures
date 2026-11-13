@@ -26,7 +26,7 @@ import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartGeneration
 
 Source: blueprint main-20261015, sec-six-functors-basics/
 sk-lem-constructible-ext-continuity/sk-lem-constructible-ext-continuity-devissage.md
-(blueprint: det-lem-constructible-ext-continuity-devissage).
+(blueprint: lemma-continuity-ext-out-constructible-complex--1).
 
 The comparison is built from the actual cocone by the abelian-group colimit universal
 property. The formal assertion imposes no boundedness condition. The final assertion uses
@@ -46,7 +46,7 @@ namespace CategoryTheory
 
 /-- The canonical additive comparison, sending a stage morphism h to h followed by the
 shifted cocone map. Source: blueprint devissage statement, displayed theta formula
-(blueprint: det-lem-constructible-ext-continuity-devissage). -/
+(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
 def homContinuityComparison {T : Type t} [Category.{v} T] [Preadditive T]
     [HasShift T ℤ] {I : Type v} [SmallCategory I] (D : I ⥤ T) (c : Cocone D)
     (C : T) (q : ℤ) :
@@ -56,7 +56,7 @@ def homContinuityComparison {T : Type t} [Category.{v} T] [Preadditive T]
 
 /-- The class defined by bijectivity of the canonical comparison in every integer degree.
 Source: blueprint devissage statement, definition of C
-(blueprint: det-lem-constructible-ext-continuity-devissage). -/
+(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
 def homContinuityLocus {T : Type t} [Category.{v} T] [Preadditive T]
     [HasShift T ℤ] {I : Type v} [SmallCategory I] (D : I ⥤ T) (c : Cocone D) :
     ObjectProperty T :=
@@ -65,7 +65,7 @@ def homContinuityLocus {T : Type t} [Category.{v} T] [Preadditive T]
 /-- Apply the comparison to the images of a diagram of complexes and its termwise
 colimit under the ordinary derived localization Q. This is not a derived-category colimit.
 Source: blueprint devissage statement, first paragraph and theta formula
-(blueprint: det-lem-constructible-ext-continuity-devissage). -/
+(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
 def complexHomContinuityLocus (A : Type a) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{t} A] {I : Type t} [SmallCategory I]
     (D : I ⥤ CochainComplex A ℤ) [HasColimit D] : ObjectProperty (DerivedCategory A) :=
@@ -99,7 +99,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Hom continuity is closed under shifts, isomorphisms, extensions, and any finite
 construction from a supplied collection. Source: blueprint devissage statement, formal
-assertion (blueprint: det-lem-constructible-ext-continuity-devissage).
+assertion (blueprint: lemma-continuity-ext-out-constructible-complex--1).
 
 Proof:
 1. Associativity and cocone compatibility make the postcomposition maps an additive

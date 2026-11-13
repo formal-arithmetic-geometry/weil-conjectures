@@ -35,7 +35,7 @@ Frobenius, which is `q⁻¹`
 This is the finite-level input of the identification of the Tate twist `ℚ̄_ℓ(1)` of roots of
 unity, pulled back to the geometric fibre with its canonical Weil structure, with the constant
 Weil twist by `χ_ℓ(γ)` (`AlgebraicGeometry.WeilSheaf.tateTwistSheaf_one`), blueprint
-`def-weil-frobenius-coefficient-twists`.
+`prose-10-21`.
 -/
 
 @[expose] public section

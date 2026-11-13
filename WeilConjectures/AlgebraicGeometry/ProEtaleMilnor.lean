@@ -32,7 +32,7 @@ import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleMittagLeffler
 
 Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-pe-milnor/_section.md; Stacks Tags 0940, 0941, 0947 and 07KW
-(blueprint: sk-prop-pe-milnor).
+(blueprint: proposition-milnor-sequence).
 
 The strict cone functor and all module/cohomology towers are the existing constructions
 of `IntegralOperationsWellDefined` and `MilnorTower`. No cone is chosen in a bare
@@ -56,8 +56,8 @@ namespace AlgebraicGeometry.Scheme.ProEt
 The universal pair is asserted to exist, with its unit invertible on K-injectives;
 the displayed natural isomorphism uses the positive `1-T` cone, not its negative.
 
-Source: latest blueprint, sk-prop-pe-milnor; Stacks Tags 0940 and 0941
-(blueprint: sk-prop-pe-milnor).
+Source: latest blueprint, proposition-milnor-sequence; Stacks Tags 0940 and 0941
+(blueprint: proposition-milnor-sequence).
 
 Proof:
 1. Module sheaves over the small site form a Grothendieck abelian category, as does
@@ -155,11 +155,11 @@ Here e₁ identifies R¹lim with the cokernel. The left endpoint of the exact se
 is the actual degree-one derived limit of the cohomology sheaves. The final implication
 is tested only on affine weakly contractible objects.
 
-Source: latest blueprint, sk-prop-pe-milnor; Stacks Tag 0947 (6),(7), Tag 07KW
-(blueprint: sk-prop-pe-milnor).
+Source: latest blueprint, proposition-milnor-sequence; Stacks Tag 0947 (6),(7), Tag 07KW
+(blueprint: proposition-milnor-sequence).
 
 Proof:
-1. Apply det-pe-milnor-sequence to the strict cone. The long exact cohomology sequence
+1. Apply proposition-milnor-sequence--2 to the strict cone. The long exact cohomology sequence
    and exact products give the natural cokernel/kernel short exact sequence.
    For a module tower in degree zero, its cohomology is lim in degree zero, coker(1-T)
    in degree one, and zero in every other degree; in particular it vanishes for p>1.
@@ -167,7 +167,7 @@ Proof:
 2. If transitions are epimorphisms, their sections on affine weakly contractible W
    are surjective. For any a=(a_n), choose m_0=0 and recursively lift m_n-a_n along t_n
    to m_(n+1). This solves (1-T)m=a on W. Exactness detection makes 1-T an epimorphism
-   of sheaves, and det-pe-milnor-epimorphic identifies the canonical ordinary-limit
+   of sheaves, and proposition-milnor-sequence--3 identifies the canonical ordinary-limit
    comparison with an isomorphism in the derived category.
 3. More generally apply the algebraic Mittag-Leffler lemma, Tag 07KW, to M_n(W).
    The finite-prefix exact sequence and ML exactness of inverse limit show that 1-T
@@ -289,8 +289,8 @@ theorem milnor (X : Scheme.{t})
 The existential product witness asserts product existence rather than assuming it;
 the following use of IsDerivedLimit uses precisely that product structure.
 
-Source: latest blueprint, sk-prop-pe-milnor; Stacks Tags 08TC and 0941
-(blueprint: sk-prop-pe-milnor).
+Source: latest blueprint, proposition-milnor-sequence; Stacks Tags 08TC and 0941
+(blueprint: proposition-milnor-sequence).
 
 Proof: exact products make Q preserve the termwise product of the representative
 complexes. Rotate the mapping-cone triangle and shift it by -1. Its middle map is

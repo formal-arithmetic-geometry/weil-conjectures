@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
 sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md, proof (2), via
-det-pbc-complete-derived-completion.
+proposition-proper-base-change-complete-integral.
 (blueprint: lem-weil-pbc-direct-image-completion-compatibility-levelwise-detection)
 -/
 
@@ -32,7 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable {T : Scheme.{u}}
 
 /-- Isomorphisms of derived reduction towers are detected at every finite level.
-Source: det-pbc-complete-derived-completion, conservativity of the derived evaluations.
+Source: proposition-proper-base-change-complete-integral, conservativity of the derived evaluations.
 Proof: apply the reverse implication of the evaluation-conservativity clause of
 `completeDerivedCompletion` to the identity morphism of the base scheme.
 (blueprint: lem-weil-pbc-direct-image-completion-compatibility-levelwise-detection) -/

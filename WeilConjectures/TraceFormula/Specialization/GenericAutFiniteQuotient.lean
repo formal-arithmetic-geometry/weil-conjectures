@@ -28,8 +28,8 @@ then form a finite set (`ProEtale.CondensedRing.finite_hom_of_boundedConstructib
 the kernel of the action has finite index (`CategoryTheory.exists_finiteIndex_eq_id_of_finite_end`).
 
 This is the finite-coefficient case of the finiteness of the action of `P'` in the
-generic-slicing identification (blueprint `sk-prop-tf-nearby-external-kunneth`, "Facts about
-traits", identification (2); SGA 4½, [Th. finitude], §3.7).
+generic-slicing identification (blueprint `proposition-external-kunneth-formula-nearby-cycles`,
+"Facts about traits", identification (2); SGA 4½, [Th. finitude], §3.7).
 
 -/
 

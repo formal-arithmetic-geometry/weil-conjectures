@@ -35,8 +35,8 @@ algebra for the `N`-th Frobenius pullback (`AlgebraicGeometry.WeilSheaf.stableIs
 compatibly with the iterated structure `φ_N` of `F` (`AlgebraicGeometry.WeilSheaf.powIsoAlgebra`).
 
 This is the sheaf-theoretic side of the geometric constituents of a Weil sheaf (blueprint
-`lem-zl-geometric-constituents-any-base`): an irreducible lisse Weil sheaf has a geometrically
-irreducible subsheaf defined over a finite extension
+`lemma-geometric-constituents-after-constant-extension--1`): an irreducible lisse Weil sheaf has a
+geometrically irreducible subsheaf defined over a finite extension
 (`AlgebraicGeometry.WeilSheaf.exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq`),
 and its Frobenius conjugates span the whole sheaf
 (`AlgebraicGeometry.WeilSheaf.iSup_frobeniusTwist_iterate_eq_top`).
@@ -656,10 +656,11 @@ section Constituents
 
 variable (F : WeilSheaf k₀ l X)
 
-/-- **Geometric constituents** (blueprint: `lem-zl-geometric-constituents-any-base`, sheaf
-form). A nonzero lisse Weil sheaf `F` on `X`, with `X̄` connected, regular and locally Noetherian,
-has a subsheaf `P ⊆ F̄` which is an irreducible local system and is fixed by some positive
-iterate of the Frobenius twist, i.e. is defined over a finite extension of `k₀`. -/
+/-- **Geometric constituents** (blueprint:
+`lemma-geometric-constituents-after-constant-extension--1`, sheaf form). A nonzero lisse Weil sheaf
+`F` on `X`, with `X̄` connected, regular and locally Noetherian, has a subsheaf `P ⊆ F̄` which is an
+irreducible local system and is fixed by some positive iterate of the Frobenius twist, i.e. is
+defined over a finite extension of `k₀`. -/
 theorem exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq
     [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     [IsRegular (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
@@ -701,8 +702,8 @@ theorem exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq
   · rw [hTP, hCeq, hPC]
 
 /-- **The Frobenius conjugates of a geometric constituent span** (blueprint:
-`thm-zl-real-mixed-by-curves`, descent of the constant extension). Let `F` be an irreducible
-lisse Weil sheaf and `P ⊆ F̄` a nonzero lisse subsheaf fixed by `T^M`, `M > 0`, for the
+`theorem-real-constructible-sheaves-are-mixed--1`, descent of the constant extension). Let `F` be an
+irreducible lisse Weil sheaf and `P ⊆ F̄` a nonzero lisse subsheaf fixed by `T^M`, `M > 0`, for the
 Frobenius twist `T`. Then `P, T P, …, T^{M-1} P` span `F̄`: their sum is fixed by `T`, hence
 underlies a nonzero lisse Weil subsheaf of `F`, which is `F`. -/
 theorem iSup_frobeniusTwist_iterate_eq_top

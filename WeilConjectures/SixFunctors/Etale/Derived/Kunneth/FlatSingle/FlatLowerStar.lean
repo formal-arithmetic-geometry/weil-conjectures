@@ -51,7 +51,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraidedCategory
 
 /-- The direct image of a flat sheaf along a finite morphism is flat. This is used in the proof
-of blueprint `lem-kun-0f1j` for the sheaves `π_* Λ`. -/
+of blueprint `lemma-kunneth-field-coefficients--1` for the sheaves `π_* Λ`. -/
 theorem flat_lowerStar_obj_of_isFinite {X Y : Scheme.{u}} (π : X ⟶ Y) [IsFinite π]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : ObjectProperty.flat F) :
     ObjectProperty.flat ((π)_*[ModuleCat.{u + 1} Λ].obj F) := by

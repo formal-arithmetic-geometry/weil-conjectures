@@ -40,7 +40,7 @@ neighborhoods. Put p_x(m) = d + max(0,m). If p > p_x(m) and m-p < 0, the assumed
 vanishing applies since p > d. If m-p >= 0, then p <= m <= max(0,m)+d, a contradiction.
 Thus lem-pc-ringed-space-pointwise-truncation-limit applies.
 2. By lem-pc-ringed-space-derived-products the product of the truncations exists.
-By lem-weil-derived-limit-existence (1), choose a derived limit (K,p_K,delta_K).
+By lemma-reduction-derived-nakayama (1), choose a derived limit (K,p_K,delta_K).
 The pointwise criterion supplies an isomorphism c : E -> K whose composite with each
 product projection is the canonical truncation map.
 3. Transport the distinguished Roos triangle along c (def-weil-triangulated-category).

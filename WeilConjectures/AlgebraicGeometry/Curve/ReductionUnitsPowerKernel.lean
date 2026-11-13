@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Units congruent to one modulo a power of the nilradical
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: def-sc-reduction-units-power-kernel)
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 closed subscheme cut out by the (j+1)-st power of the nilradical. On an etale affine
 object it consists of units congruent to one modulo the pulled-back ideal power.
 This is a kernel construction, independent of any existence theorem for filtrations.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: def-sc-reduction-units-power-kernel) -/
 noncomputable def reductionUnitsPowerKernel (X : Scheme.{u}) (j : ℕ) :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=

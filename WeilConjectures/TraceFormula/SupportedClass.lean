@@ -14,9 +14,9 @@ public import WeilConjectures.TraceFormula.TraceClassDiagonal
 Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)`. Its *supported class*
 `ũ : Rc_! ℚ̄_ℓ,C ⟶ K ⊠ D_X K` (`ProEtale.CondensedRing.Correspondence.supportedClass`) is the
 class `[u] : Rc_! ℚ̄_ℓ,C ⟶ RHom(Lp₂^* K, Rp₁^! K)` of `u` (blueprint
-`lem-trf-correspondence-class`) read through the inverse of the Künneth–Verdier isomorphism
-`κ_{K,K}` (`ProEtale.CondensedRing.Correspondence.supportedClass_eq_class_comp_inv`, blueprint
-`lem-trf-trace-source-exchange`, Step 0).
+`lemma-external-duality-trace-morphism--2`) read through the inverse of the Künneth–Verdier
+isomorphism `κ_{K,K}` (`ProEtale.CondensedRing.Correspondence.supportedClass_eq_class_comp_inv`,
+blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 0).
 
 The Künneth–Verdier map `κ_{M,N}` is natural in `M`
 (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_left`), so the supported class of the
@@ -122,8 +122,8 @@ namespace Correspondence
 variable (c : Correspondence ℓ K)
 
 /-- The *class* `[u] : Rc_! ℚ̄_ℓ,C ⟶ RHom(Lp₂^* K, Rp₁^! K)` of the coefficient map of an
-endocorrespondence (blueprint `lem-trf-correspondence-class`): the inverse image of `u` under the
-class bijection `correspondenceClassEquiv` for the support map. -/
+endocorrespondence (blueprint `lemma-external-duality-trace-morphism--2`): the inverse image of `u`
+under the class bijection `correspondenceClassEquiv` for the support map. -/
 noncomputable def «class» :
     (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
@@ -132,7 +132,7 @@ noncomputable def «class» :
     (eqToHom (by rw [support_snd]) ≫ c.u ≫ eqToHom (by rw [support_fst]))
 
 /-- **The supported class is the class read through the Künneth–Verdier isomorphism** (blueprint
-`lem-trf-trace-source-exchange`, Step 0): `ũ = κ_{K,K}⁻¹ ∘ [u]`. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 0): `ũ = κ_{K,K}⁻¹ ∘ [u]`. -/
 theorem supportedClass_eq_class_comp_inv :
     c.supportedClass = c.class ≫ inv (kunnethVerdierMap ℓ K K) := by
   rw [supportedClass_eq]
@@ -145,8 +145,9 @@ section Class
 
 variable (ℓ)
 
-/-- The class bijection is natural in the target (blueprint `lem-trf-correspondence-class`): the
-class of `f ≫ R(s ≫ p₁)^! b` is the class of `f` followed by `RHom(1, Rp₁^! b)`. -/
+/-- The class bijection is natural in the target (blueprint
+`lemma-external-duality-trace-morphism--2`): the class of `f ≫ R(s ≫ p₁)^! b` is the class of `f`
+followed by `RHom(1, Rp₁^! b)`. -/
 lemma correspondenceClassEquiv_symm_comp_map {C : Over (Spec (.of k))} [LocallyOfFiniteType C.hom]
     [QuasiCompact C.hom] [IsSeparated C.hom] (s : C ⟶ X ⨯ X)
     {L L' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L')

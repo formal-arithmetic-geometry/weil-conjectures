@@ -203,7 +203,7 @@ lemma eval₂_mulForm {R : Type*} [CommRing R] (a : ULift.{u} (Fin 2) → R)
 
 /-- **The coefficients of the product have no common zero** on the chart
 `D₊(Xᵢ) ×_ℤ D₊(Yⱼ)` of `ℙ¹ ×_ℤ ℙᵏ`.
-(blueprint: `lem-weil-pbc-symmetric-product-properties`, no common zero; the permutation
+(blueprint: `lemma-finite-cover-projective-space--1`, no common zero; the permutation
 invariance is not formalised) -/
 lemma span_range_bilinearChartSection_mulForm (i : ULift.{u} (Fin 2))
     (j : ULift.{u} (Fin (k + 1))) :

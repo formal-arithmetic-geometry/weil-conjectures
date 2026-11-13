@@ -112,7 +112,7 @@ Proof plan from the node:
    (`lem-weil-pbc-kinjective-shift`). The comparison shift isomorphism on a K-injective
    representative is the termwise identity, after the resolution identifications.
 2. Compute the counit on a K-injective representative by the termwise sheaf counit
-   (`prop-weil-pbc-derived-inverse-image-adjunction`). Its components commute with shift;
+   (`prose-04-06`). Its components commute with shift;
    combine with step 1 and naturality of the inverse-image shift isomorphism.
 3. Transport the counit equality along a K-injective representative isomorphism by
    naturality (`lem-weil-pbc-dplus-injective-representative`).

@@ -18,7 +18,7 @@ product with the top homology sheaf: `Hᵠ(B[0] ⊗ᴸ M) ≅ B ⊗ Hᵠ(M)`, na
 isomorphism on `Hᵠ(B[0] ⊗ᴸ -)` (the fibre `τ^{≤q-1} M` gives objects in degrees `≤ q - 1`),
 `τ^{≥q} M ≅ Hᵠ(M)[-q]`, and `H⁰(B[0] ⊗ᴸ C[0]) ≅ B ⊗ C`
 (`AlgebraicGeometry.Etale.isIso_homologyFunctor_map_singleFunctorTensorToSingle_app`).
-This is used in the proof of blueprint `lem-kun-0f1j`.
+This is used in the proof of blueprint `lemma-kunneth-field-coefficients--1`.
 -/
 
 @[expose] public section

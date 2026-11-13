@@ -21,7 +21,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 Let `k` be a perfect field, `Λ` a finite ring whose exponent is invertible on `k`, and `X` a
 separated scheme of finite type over `k` with `dim X ≤ d`. The Verdier dual
 `𝔻_X = RHom(-, ω_X)`, `ω_X = Ra_X^! Λ`, carries `Dctf(X, Λ)` into itself, sending the Tor
-interval `[a, b]` into `[-b - 2d, -a]` (blueprint `lem-weil-verdier-preservation-strata`).
+interval `[a, b]` into `[-b - 2d, -a]` (blueprint
+`lemma-verdier-duality-preserves-constructibility--1`).
 
 The proof follows the blueprint. By Noetherian induction on the support, `K` is built by
 open–closed triangles from objects `Rs_! P`, where `s : S ⟶ X` is a locally closed immersion of
@@ -31,11 +32,12 @@ an irreducible smooth stratum on which `P = s^* K` is site-perfect
 `𝔻_X (Rs_! P) ≅ Rs_* 𝔻_S P`
 
 (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`, blueprint
-`lem-weil-stratum-ambient-hom`), and smooth duality (`thm-asd-smooth-tensor`) gives
-`ω_S ≅ L[2r]` for a lisse invertible `L`, so that `𝔻_S P ≅ P^∨ ⊗ᴸ L[2r]` has Tor amplitude
-`[-b - 2r, -a - 2r]`; the direct image theorem (`thm-sf-direct-image-tor-amplitude`) makes
-`Rs_* 𝔻_S P` bounded constructible of Tor amplitude `[-b - 2r, -a]`. The exactness of `RHom` in
-its first variable (`lem-sf-hom-triangulated`) assembles the pieces.
+`lemma-internal-adjunction-two-exchange-formulas--1`), and smooth duality
+(`proposition-exceptional-inverse-image-smooth-morphism`) gives `ω_S ≅ L[2r]` for a lisse invertible
+`L`, so that `𝔻_S P ≅ P^∨ ⊗ᴸ L[2r]` has Tor amplitude `[-b - 2r, -a - 2r]`; the direct image theorem
+(`proposition-six-operations-dctf--2`) makes `Rs_* 𝔻_S P` bounded constructible of Tor amplitude
+`[-b - 2r, -a]`. The exactness of `RHom` in its first variable
+(`definition-verdier-dual-evaluation--3`) assembles the pieces.
 
 ## Implementation notes
 
@@ -96,14 +98,15 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`, the stratum step: let `s : S ⟶ X` be a
-morphism of finite-type `k`-schemes with `S` smooth of pure relative dimension `r` over `k` and
-`dim S ≤ r`, and let `P ∈ Dctf(S, Λ)` have Tor amplitude in `[a, b]` and a left dual in
+/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`, the stratum step: let
+`s : S ⟶ X` be a morphism of finite-type `k`-schemes with `S` smooth of pure relative dimension `r`
+over `k` and `dim S ≤ r`, and let `P ∈ Dctf(S, Λ)` have Tor amplitude in `[a, b]` and a left dual in
 `Dctf(S, Λ)` (`P` is site-perfect). Then `𝔻_X (Rs_! P) ≅ Rs_* 𝔻_S P`
-(`lem-weil-stratum-ambient-hom`) is bounded constructible of Tor amplitude in `[-b - 2r, -a]`:
-by smooth duality (`thm-asd-smooth-tensor`) `ω_S ≅ L[2r]` with `L` lisse invertible, so that
-`𝔻_S P ≅ P^∨ ⊗ᴸ L[2r]` has Tor amplitude in `[-b - 2r, -a - 2r]`, and `Rs_*` widens the upper
-end by `2r` (`thm-sf-direct-image-tor-amplitude`). -/
+(`lemma-internal-adjunction-two-exchange-formulas--1`) is bounded constructible of Tor amplitude in
+`[-b - 2r, -a]`: by smooth duality (`proposition-exceptional-inverse-image-smooth-morphism`)
+`ω_S ≅ L[2r]` with `L` lisse invertible, so that `𝔻_S P ≅ P^∨ ⊗ᴸ L[2r]` has Tor amplitude in
+`[-b - 2r, -a - 2r]`, and `Rs_*` widens the upper end by `2r`
+(`proposition-six-operations-dctf--2`). -/
 theorem constructibleTorAmplitudeIn_verdierDual_rightDerivedLowerShriek_of_smooth
     {X S : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [HasCompactification aX] (s : S ⟶ X) [IsSeparated s] [HasCompactification s]
@@ -164,16 +167,16 @@ lemma torAmplitudeIn_of_isZero {X : Scheme.{u}} (a b : ℤ)
 
 variable [PerfectField k]
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`, the dévissage: for `X` separated of
-finite type over a perfect field `k` with `dim X ≤ d`, a reduced closed subscheme
+/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`, the dévissage: for `X`
+separated of finite type over a perfect field `k` with `dim X ≤ d`, a reduced closed subscheme
 `ι : Z ⟶ X` and `Q ∈ D^b_c(Z, Λ)` of Tor amplitude in `[a, b]`, the Verdier dual
 `𝔻_X (Rι_! Q)` lies in `Dctf(X, Λ)` with Tor amplitude in `[-b - 2d, -a]`. By Noetherian
 induction on the support: on an irreducible smooth open `W ⊆ Z` on which `Q` is site-perfect
 this is the stratum step
 `AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_verdierDual_rightDerivedLowerShriek_of_smooth`,
 and the open–closed triangle `j_! j^* Q ⟶ Q ⟶ i_* i^* Q` is carried by the exact functor
-`Rι_!` and by `RHom(-, ω_X)` (`lem-sf-hom-triangulated`) to a triangle whose outer terms are
-handled by the stratum step and by induction. -/
+`Rι_!` and by `RHom(-, ω_X)` (`definition-verdier-dual-evaluation--3`) to a triangle whose outer
+terms are handled by the stratum step and by induction. -/
 theorem verdierDual_rightDerivedLowerShriek_of_isClosedImmersion {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
     [HasCompactification aX] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
@@ -323,8 +326,8 @@ theorem verdierDual_rightDerivedLowerShriek_of_isClosedImmersion {X : Scheme.{u}
     (torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * d) (-a)) (dualizingComplex _ aX) _ hw'
   exact ⟨hP₁ key₁.1 key₃.1, hP₂ key₁.2 key₃.2⟩
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Constructible preservation before
-biduality.
+/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`: Constructible preservation
+before biduality.
 
 Let `X` be separated of finite type over a perfect field `k`, `Λ` a finite ring whose exponent
 is invertible on `k`, `ω_X = Ra_X^! Λ` and `𝔻_X = RHom(-, ω_X)`. If `dim X ≤ d` and `K` is

@@ -15,7 +15,7 @@ Let `g : T ⟶ 𝔸¹` be a point of the dual affine line with values in a `k₀
 instance `T = Spec 𝔽_{qⁿ}`), and let `V_T = 𝔸² ×_{pr₂, 𝔸¹, g} T` be the fibre of the second
 projection over it, with projections `g' : V_T ⟶ 𝔸²` and `π' : V_T ⟶ T`. The pullback of the
 Fourier–Deligne transform to `T` is the compactly supported cohomology of the fibre
-(blueprint `lem-fd-stalk-formula`):
+(blueprint `proposition-base-change-fourier-inversion--3`):
 
 `g^* FT_ψ(K) ≅ Rπ'₀!(K|_{V_T} ⊗ ℒ_ψ(⟨x, g⟩))[1]`,
 
@@ -37,7 +37,7 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **The fibres of the Fourier transform are fibre integrals** (blueprint
-`lem-fd-stalk-formula`). For a point `g : T ⟶ 𝔸¹` of the dual line and the
+`proposition-base-change-fourier-inversion--3`). For a point `g : T ⟶ 𝔸¹` of the dual line and the
 fibre `V_T` of `pr₂ : 𝔸² ⟶ 𝔸¹` over it (a cartesian square `g' : V_T ⟶ 𝔸²`,
 `π' : V_T ⟶ T`),
 

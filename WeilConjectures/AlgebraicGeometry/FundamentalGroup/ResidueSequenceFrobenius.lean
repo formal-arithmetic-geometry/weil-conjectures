@@ -17,7 +17,7 @@ automorphism of `C` restricting to an automorphism of `U` and semilinear over an
 `σ₀` of `k`. Transport along `E` acts on torsors over `U` (in the torsor model of `H¹`), and the
 residues of the transported torsor are those of the torsor, moved along `E` and twisted by `σ₀`
 on the roots of unity (`AlgebraicGeometry.Scheme.EtaleTorsor.residue_mapIso`). This is the
-Frobenius equivariance of the residue map of blueprint `lem-wf-open-curve-residue-sequence`.
+Frobenius equivariance of the residue map of blueprint `proposition-no-fixed-class-degree-one--1`.
 
 For a power `Φ ^ m` of the geometric Frobenius fixing a boundary point `z`, `σ₀ = φ ^ m` with
 `σ₀(x) ^ Q = x`, `Q = q ^ m`, so the pullback along `Φ ^ m` (transport along its inverse) acts on
@@ -73,7 +73,7 @@ open FiniteEtale
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: Frobenius equivariance of the residue map.
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: Frobenius equivariance of the residue map.
 
 Let `E_C` be an automorphism of `C`, semilinear over an automorphism `σ₀` of `k`, restricting to
 an automorphism `E_U` of `U`. The residue at `E_C z` against `ξ` of the transport of a torsor `T`
@@ -157,7 +157,7 @@ theorem residue_mapIso (EC : C ≅ C) (EU : U ≅ U) (hE : EU.hom ≫ j = j ≫ 
   · rw [← hconj, hxσ, map_mul, map_pow, hκ, hχ]
     rfl
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: a Frobenius power fixing a boundary point
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: a Frobenius power fixing a boundary point
 acts on the residues there as multiplication by `Q`.
 
 Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` (for a
@@ -220,7 +220,7 @@ lemma castHom_eq_of_compatible (hl : l.Prime)
       ← RingHom.comp_apply, ZMod.castHom_comp]
     rfl
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the inverse-limit boundary module
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the inverse-limit boundary module
 `lim_n Hom(μ_{lⁿ}, ℤ / lⁿ) = ℤ_l(-1)` has no nonzero element fixed by `Φ_Q`, which acts on it as
 multiplication by `Q ≥ 2`: a compatible system `(r_n)` with `Q r_n = r_n` for all `n` is zero. -/
 theorem eq_zero_of_compatible_of_smul_eq_self (hl : l.Prime) {Q : ℕ} (hQ : 2 ≤ Q)
@@ -260,8 +260,8 @@ variable {C U : Scheme.{u}} [IsIntegral C] [IsLocallyNoetherian C] (j : U ⟶ C)
   [IsOpenImmersion j] [Nonempty U] {k : Type u} [Field k] [IsAlgClosed k]
   (p : C ⟶ Spec (.of k))
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence` (as used in
-`prop-wf-open-curve-h1-no-frobenius-fixed`): the residues of a compatible Frobenius-fixed system
+/-- Blueprint `proposition-no-fixed-class-degree-one--1` (as used in
+`proposition-no-fixed-class-degree-one--1`): the residues of a compatible Frobenius-fixed system
 vanish.
 
 Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` for some

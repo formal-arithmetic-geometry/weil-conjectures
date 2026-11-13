@@ -27,7 +27,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparis
 # Interfaces for compact support on strict varying-coefficient towers
 
 Source: Stacks Project, Tags 0F7J and 03S5; blueprint main-20261015,
-`det-sp-tower-gluing`, Local pairs and Levels
+`proposition-sp-tower-geometric`, Local pairs and Levels
 (blueprint: lem-sp-coefficient-tower-shriek-calculus).
 
 All categories are ordinary derived categories. Natural-number level n means exponent

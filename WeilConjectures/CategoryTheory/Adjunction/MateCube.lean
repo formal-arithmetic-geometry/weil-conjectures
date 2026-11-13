@@ -26,7 +26,7 @@ by the mates of `σr`, `σs`, `αf` and `αf'` (base change maps of the right ad
 `αg` and `αg'`: this is `CategoryTheory.mateEquiv_app_cube`.
 
 This is used to show that the change of coefficients of pro-étale sheaves commutes with the
-derived base change maps (blueprint `sk-p-trace-coeff`).
+derived base change maps (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 -/
 
 @[expose] public section

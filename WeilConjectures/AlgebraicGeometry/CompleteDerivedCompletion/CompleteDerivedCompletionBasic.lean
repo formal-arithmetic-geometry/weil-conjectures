@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 The tower category is Grothendieck abelian, evaluation and the free diagram are exact,
 evaluation preserves K-injective complexes, and the derived evaluations detect
 isomorphisms. Source: blueprint Assertions 1--2
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +42,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The free diagram is exact.
-Source: blueprint Assertion 1 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 1 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: at level m it is the coproduct of copies of N indexed by the subsingleton set of
 arrows n to m. Such a finite coproduct is exact; limits of towers are levelwise. -/
 theorem freeDiagram_exact (T : Scheme.{u}) (n : ℕ) :
@@ -68,10 +68,10 @@ theorem freeDiagram_exact (T : Scheme.{u}) (n : ℕ) :
   exact ⟨hG, inferInstance⟩
 
 /-- Evaluation of towers is exact and preserves K-injective complexes, and the free diagram
-is exact. Source: blueprint Assertion 1 (blueprint: det-pbc-complete-derived-completion).
-Proof: evaluation is exact since limits and colimits of towers are levelwise; the free
-diagram is `freeDiagram_exact`, and an exact left adjoint makes its right adjoint preserve
-K-injectives. -/
+is exact. Source: blueprint Assertion 1 (blueprint:
+proposition-proper-base-change-complete-integral). Proof: evaluation is exact since limits and
+colimits of towers are levelwise; the free diagram is `freeDiagram_exact`, and an exact left adjoint
+makes its right adjoint preserve K-injectives. -/
 theorem evaluation_properties (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (ev l E T n) ∧
       PreservesFiniteColimits (ev l E T n) ∧
@@ -86,7 +86,7 @@ theorem evaluation_properties (T : Scheme.{u}) (n : ℕ) :
   exact tower_evaluation_isKInjective _ I (op n)
 
 /-- The derived evaluations detect isomorphisms of derived towers.
-Source: blueprint Assertion 2 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 2 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: exact evaluation commutes with cohomology, and an arrow of towers is an
 isomorphism when all of its levels are. -/
 theorem dev_conservative (T : Scheme.{u}) {M N : DTow l E T} (a : M ⟶ N) :
@@ -110,13 +110,13 @@ theorem dev_conservative (T : Scheme.{u}) {M N : DTow l E T} (a : M ⟶ N) :
   exact (isIso_comp_right_iff _ (e.hom.app N)).mp this
 
 /-- The derived pushforward commutes with derived limits.
-Source: blueprint Assertion 4 (blueprint: det-pbc-complete-derived-completion). -/
+Source: blueprint Assertion 4 (blueprint: proposition-proper-base-change-complete-integral). -/
 theorem pushLimit_nonempty {T T' : Scheme.{u}} (f : T' ⟶ T) :
     Nonempty (rlim l E T' ⋙ rpushModule l E f ≅ rpush l E f ⋙ rlim l E T) :=
   ⟨pushLimitIso l E f⟩
 
 /-- The derived limit is triangulated.
-Source: blueprint Assertion 5 (blueprint: det-pbc-complete-derived-completion). -/
+Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral). -/
 theorem rlim_isTriangulated (T : Scheme.{u}) : (rlim l E T).IsTriangulated :=
   inferInstance
 

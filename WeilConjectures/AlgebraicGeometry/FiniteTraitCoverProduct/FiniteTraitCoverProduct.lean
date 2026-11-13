@@ -20,7 +20,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 /-!
 # Equal-degree finite trait covers and their product
 
-Source: blueprint `det-tf-restriction-zero-covers`, clause (ii), with the
+Source: blueprint `lemma-tangent-cones-on-cover`, clause (ii), with the
 normalization input from proof (i) (blueprint: lem-trf-finite-trait-cover-product).
 -/
 
@@ -35,7 +35,7 @@ open CategoryTheory CategoryTheory.Limits IsLocalRing
 namespace AlgebraicGeometry.FiniteTraitCoverProduct
 
 /-- A smooth pointed curve over an algebraically closed field.
-Source: blueprint `det-tf-restriction-zero-covers`, clause (ii)
+Source: blueprint `lemma-tangent-cones-on-cover`, clause (ii)
 (blueprint: lem-trf-finite-trait-cover-product). -/
 structure CurvePoint (k : Type u) [Field k] [IsAlgClosed k] where
   C : Scheme.{u}

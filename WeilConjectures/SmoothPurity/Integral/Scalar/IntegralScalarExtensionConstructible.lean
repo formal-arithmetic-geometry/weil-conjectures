@@ -168,8 +168,8 @@ Tor hypothesis and no Noetherian hypothesis on $Y$ were used.
 5. Let $N=K\otimes_R S$ be the object defined by [def-weil-integral-scalar-extension]. It is the
 fixed cone $\operatorname{Cone}(1-s)[-1]$ of the strict tower $\operatorname{Res}^L_mM_m$, and is
 a derived limit of that tower by [lem-weil-integral-scalar-extension-well-defined]. Step 2
-verified precisely the normalized-tower hypothesis of [lem-coef-normalized-dvr-effectivity], with
-the DVR $S$ and quotient rings $B_m=A_{L,m}$. Apply that theorem to obtain compatible
+verified precisely the normalized-tower hypothesis of [lemma-sp-tower-adjunction-foundation--2],
+with the DVR $S$ and quotient rings $B_m=A_{L,m}$. Apply that theorem to obtain compatible
 isomorphisms $N\otimes^L_S B_m\cong M_m$ and derived completeness of $N$. This is the same
 derived limit as the normalized-tower theorem: the strict tower theorem
 [lem-weil-pbc-ringed-strict-tower-homotopy-limit] computes total derived inverse limit by its

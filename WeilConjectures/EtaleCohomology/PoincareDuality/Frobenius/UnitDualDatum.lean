@@ -101,7 +101,7 @@ lemma coefficientDualUnitIso_hom :
       (λ_ _).inv ≫ DerivedCategory.coefficientEvaluation (𝟙_ (DerivedCategoryModule Λ X)) :=
   rightAdjointUniq_derivedTensorHomAdjunction_unit_hom_app X (ModuleCat.{u + 1} Λ)
 
-/-- Blueprint `def-pod-dual-tate-datum`: for `K = Λ_X` with its canonical datum
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: for `K = Λ_X` with its canonical datum
 `ε : Lg^* Λ_X ≅ Λ_X`, the contragredient datum on `Λ_X^∨` corresponds to the canonical datum
 under the canonical identification `e : Λ_X^∨ ≅ Λ_X`
 (`AlgebraicGeometry.Etale.coefficientDualUnitIso`): `e` is a morphism of Weil objects
@@ -113,9 +113,10 @@ theorem isWeilMorphism_coefficientDualUnitIso_hom (g : X ⟶ X) :
   map_hom_comp_leftDerivedUpperStarUnitIso_hom (ModuleCat.{u + 1} Λ) g
     (coefficientDualUnitIso Λ X) (coefficientDualUnitIso_hom Λ X)
 
-/-- Blueprint `def-pod-dual-tate-datum`: the identification `e : Λ_X^∨ ≅ Λ_X` intertwines the
-contragredient datum of the canonical datum with the canonical datum, `Lg^* e ≫ ε = φ_{Λ^∨} ≫ e`
-(`AlgebraicGeometry.Etale.isWeilMorphism_coefficientDualUnitIso_hom` in explicit form). -/
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: the identification `e : Λ_X^∨ ≅ Λ_X`
+intertwines the contragredient datum of the canonical datum with the canonical datum,
+`Lg^* e ≫ ε = φ_{Λ^∨} ≫ e` (`AlgebraicGeometry.Etale.isWeilMorphism_coefficientDualUnitIso_hom` in
+explicit form). -/
 theorem map_coefficientDualUnitIso_hom_comp_leftDerivedUpperStarUnitIso_hom (g : X ⟶ X) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map (coefficientDualUnitIso Λ X).hom ≫
         (leftDerivedUpperStarUnitIso _ g).hom =
@@ -144,8 +145,8 @@ lemma IsWeilMorphism.iterateWeilDatum {f : M ⟶ N} (hf : IsWeilMorphism g ψM �
 
 end Iterate
 
-/-- Blueprint `def-pod-dual-tate-datum`: the Frobenius operators of `(Λ_X^∨, φ_{Λ^∨})` are those
-of `(Λ_X, ε)`, read through the identification `Λ_X^∨ ≅ Λ_X`. -/
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: the Frobenius operators of `(Λ_X^∨, φ_{Λ^∨})`
+are those of `(Λ_X, ε)`, read through the identification `Λ_X^∨ ≅ Λ_X`. -/
 theorem frobeniusOperator_contragredientWeilDatum_unit (g : X ⟶ X)
     (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶
       (DerivedCategory.coefficientDual _ X).obj (op (𝟙_ (DerivedCategoryModule Λ X)))) :
@@ -155,7 +156,7 @@ theorem frobeniusOperator_contragredientWeilDatum_unit (g : X ⟶ X)
         (x ≫ (coefficientDualUnitIso Λ X).hom) :=
   ((isWeilMorphism_coefficientDualUnitIso_hom g).frobeniusOperator_comp x).symm
 
-/-- Blueprint `def-pod-dual-tate-datum`: the Frobenius operators of the iterates
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: the Frobenius operators of the iterates
 `φ_{Λ^∨}^{[m]}` of the contragredient datum on `Λ_X^∨` are the iterated global geometric
 Frobenius operators, those of the iterates `ε^{[m]}` of the canonical datum on `Λ_X`, read through
 the identification `Λ_X^∨ ≅ Λ_X`. -/

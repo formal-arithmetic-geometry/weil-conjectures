@@ -23,8 +23,8 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 # From affine to global torsion cohomological dimension
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-`thm-sc-finite-type-torsion-cd`, Leray comparison step (blueprint:
-thm-sc-finite-type-torsion-cd).
+`lemma-uniform-bounds-pro-etale-affines`, Leray comparison step (blueprint:
+lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -192,7 +192,7 @@ set_option linter.unusedVariables false in
 /-- The comparison and Leray step turns the affine bound into the bound for a
 finite-type scheme.
 
-Source: the comparison-site proof of `thm-sc-finite-type-torsion-cd` in the
+Source: the comparison-site proof of `lemma-uniform-bounds-pro-etale-affines` in the
 blueprint subsection `sec-smooth-purity/sk-prop-sf-cbc`.
 
 Proof: X is Noetherian: it is locally Noetherian by local finite type over a

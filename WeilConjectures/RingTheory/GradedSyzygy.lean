@@ -21,7 +21,8 @@ import WeilConjectures.RingTheory.SecondSyzygyTorVanishes
 # Graded syzygies over the two-variable polynomial ring
 
 Source: Weil conjectures blueprint, `sec-picard-framework/det-thm-picard-duality`,
-`lem-sc-p1-graded-resolution`, proof, first sentence (blueprint: lem-sc-p1-graded-syzygy).
+`theorem-riemann-roch-coherent-serre-duality`, proof, first sentence (blueprint:
+lem-sc-p1-graded-syzygy).
 -/
 
 @[expose] public section
@@ -31,7 +32,7 @@ universe u v
 namespace MvPolynomial
 
 /-- A finite graded module over `k[x₀,x₁]` has a finite graded free resolution of length two.
-Source: blueprint `lem-sc-p1-graded-resolution`, proof, first sentence
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, first sentence
 (blueprint: lem-sc-p1-graded-syzygy).
 
 `homogeneousSubmodule` is the total-degree grading, extended by zero in negative degrees.

@@ -16,7 +16,7 @@ import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 /-!
 # Blueprint statements
 
-lem-sc-sylow-module-filtration.
+theorem-cohomology-curves.
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ universe u v
 
 namespace Rep
 
-/-- Blueprint: lem-sc-sylow-module-filtration. -/
+/-- Blueprint: theorem-cohomology-curves. -/
 theorem exists_openSubgroup_primary_module_filtration
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

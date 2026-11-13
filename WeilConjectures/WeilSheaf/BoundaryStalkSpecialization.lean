@@ -29,7 +29,7 @@ punctured part is the spectrum of a field `K'`, and a Galois extension `Ω / K'`
 injective linear map from the stalk `(j_* F)_x̄` to `Γ(Spec Ω, η^* F)` with image the
 `Gal(Ω / K')`-invariants, intertwining the Frobenius of the stalk with the transport along a lift
 of the Frobenius (`AlgebraicGeometry.WeilSheaf.exists_stalk_directImage_linearMap_invariants`).
-This is the stalk side of blueprint `lem-wf-boundary-stalk-invariants`.
+This is the stalk side of blueprint `lemma-boundary-stalk--1`.
 -/
 
 @[expose] public section
@@ -328,7 +328,7 @@ and with the generic point `Spec Ω ⟶ Spec A`, there is an injective linear ma
 `(j_* F)_x̄ ⟶ Γ(Spec Ω, η^* F)`, `η : Spec Ω ⟶ Spec K' ⟶ Ū`, with image the
 `Gal(Ω / K')`-invariants, intertwining the Frobenius of the stalk with the transport along
 `a ≫ η = η ≫ Frᵐ` and the Weil structure of `F`.
-(blueprint: `lem-wf-boundary-stalk-invariants`) -/
+(blueprint: `lemma-boundary-stalk--1`) -/
 theorem exists_stalk_directImage_linearMap_invariants (hF : F.IsLisse)
     (ht : (t.left ≫ pullback.fst h _) (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
       IsLocalRing.closedPoint A)

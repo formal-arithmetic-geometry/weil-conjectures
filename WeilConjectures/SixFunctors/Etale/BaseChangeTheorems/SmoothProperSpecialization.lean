@@ -30,14 +30,14 @@ Spec Ω -t-> Spec R
 
 the base change. Let `Λ` be a coefficient ring killed by an integer `N ≠ 0` invertible in `R`
 and `F` a locally constant sheaf of `Λ`-modules on `X_ét`. This file proves Step 1 of the
-blueprint proof of `prop-zl-smooth-proper-relative-purity` (the specialization isomorphism):
+blueprint proof of `theorem-purity-higher-direct-images-under` (the specialization isomorphism):
 
 - **local acyclicity along the closed fibre**: for every morphism `i : Z ⟶ X` landing in the
   closed fibre, `i^*(F ⟶ Rh_* h^* F)` is an isomorphism
   (`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_smooth`). Étale locally on `X` the
-  sheaf `F` is constant; by smooth base change (`sbc-thm-smooth-base-change`) along `U ⟶ Spec R`
-  and `t`, `Rh_{U*} M ≅ (U → Spec R)^* Rt_* M`, and the stalk at the closed point of
-  `M ⟶ Rt_* t^* M` is an isomorphism since `Spec R` is strictly local and `Ω` is separably
+  sheaf `F` is constant; by smooth base change (`theorem-smooth-base-change-classical-torsion--1`)
+  along `U ⟶ Spec R` and `t`, `Rh_{U*} M ≅ (U → Spec R)^* Rt_* M`, and the stalk at the closed point
+  of `M ⟶ Rt_* t^* M` is an isomorphism since `Spec R` is strictly local and `Ω` is separably
   closed
   (`Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`).
 - **the specialization isomorphism**: if moreover `π` is proper, the closed stalk of
@@ -132,9 +132,9 @@ henselian local ring, `t : Spec Ω ⟶ Spec R` a geometric point with base chang
 invertible in `R`. For every `v : V ⟶ U` landing over the closed point of `Spec R`,
 `v^*(e^* M ⟶ Rh_{U*} h_U^* e^* M)` is an isomorphism.
 
-By smooth base change (`sbc-thm-smooth-base-change`) the unit of `h_U` at `e^* M` is the
-pullback along `e` of the unit `M ⟶ Rt_* t^* M`, whose restriction to the closed point is an
-isomorphism
+By smooth base change (`theorem-smooth-base-change-classical-torsion--1`) the unit of `h_U` at
+`e^* M` is the pullback along `e` of the unit `M ⟶ Rt_* t^* M`, whose restriction to the closed
+point is an isomorphism
 (`Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`).
 -/
 theorem Etale.isIso_upperStar_map_unit_upperStar_constantSheaf_of_smooth
@@ -171,7 +171,7 @@ lemma _root_.CategoryTheory.NatTrans.isIso_map_app_iff_of_iso {C D E : Type*} [C
   NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight α Φ) e
 
 /-- **Local acyclicity along the closed fibre** (Step 1 of the blueprint proof of
-`prop-zl-smooth-proper-relative-purity`). Let `π : X ⟶ Spec R` be smooth over a
+`theorem-purity-higher-direct-images-under`). Let `π : X ⟶ Spec R` be smooth over a
 strictly henselian local ring, `t : Spec Ω ⟶ Spec R` a geometric point with base change
 `h : X_t ⟶ X`, and `F` a locally constant sheaf of modules over a coefficient ring killed by
 an integer `N ≠ 0`
@@ -239,7 +239,7 @@ theorem Etale.isIso_upperStar_map_unit_of_smooth {X Xt Z : Scheme.{u}} (π : X �
   rw [reassoc_of% pullback.condition, hi, Category.assoc]
 
 /-- **The specialization isomorphism over a strictly local base** (Step 1 of the blueprint proof
-of `prop-zl-smooth-proper-relative-purity`). Let `π : X ⟶ Spec R` be smooth and proper over a
+of `theorem-purity-higher-direct-images-under`). Let `π : X ⟶ Spec R` be smooth and proper over a
 strictly henselian local ring, with closed fibre `i : X_s ⟶ X`, let `t : Spec Ω ⟶ Spec R` be a
 geometric point with base change `h : X_t ⟶ X`, and let `F` be a locally constant sheaf of
 modules over a coefficient ring killed by an integer `N ≠ 0` invertible in `R`. Then the

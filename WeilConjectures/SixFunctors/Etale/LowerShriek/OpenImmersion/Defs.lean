@@ -289,7 +289,8 @@ instance Etale.openImmersionRestriction_linear (Λ : Type*) [Semiring Λ] [Linea
 
 namespace Etale
 
-/-- Blueprint `def-weil-pbc-extension-by-zero`: Extension by zero for open immersions
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--7`: Extension by zero for
+open immersions
 
 The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
 étale sites: the left adjoint of the restriction `j^*`

@@ -24,7 +24,7 @@ element `r` with `r ^ N = r` is a scalar, when `r ↦ r ^ N` is a ring endomorph
 `WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic`): `r` is congruent to a root `c` of
 `X ^ N - X` in `k` modulo the maximal ideal, and `n = r - c` satisfies `n ^ N = n` with
 `n ∈ 𝔪`, so `n (1 - n ^ (N - 1)) = 0` forces `n = 0`. This is the scheme-theoretic part of
-blueprint `thm-trf-frobenius-fixed-points`: the fixed scheme of `h` is reduced.
+blueprint `lemma-frobenius-fixed-scheme--1`: the fixed scheme of `h` is reduced.
 
 ## Main statements
 
@@ -45,7 +45,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {k : Type u} [Field k] [IsAl
   {σ : Spec (.of k) ⟶ Spec (.of k₀)}
 
 /-- **A local point fixed by a lift of a Frobenius is constant** (blueprint
-`thm-trf-frobenius-fixed-points`, the fixed scheme is reduced): let `S = X₀ ×_{k₀} k` with `k`
+`lemma-frobenius-fixed-scheme--1`, the fixed scheme is reduced): let `S = X₀ ×_{k₀} k` with `k`
 algebraically closed, let `h` be a `k`-endomorphism of `S` with `h ≫ p = p ≫ G` for a
 `#k₀ ^ m`-power Frobenius `G` of `X₀`, `m ≥ 1`, and let `t : Spec A ⟶ S` be a point with values
 in a local ring fixed by `h`. Then `t` factors through a `k`-rational point `x` of `S` fixed by

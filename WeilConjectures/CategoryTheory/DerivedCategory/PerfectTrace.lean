@@ -91,10 +91,10 @@ lemma ε_Qh_comp_map_single_map_algebraMap_comp_inv (r : R) :
   erw [Category.id_comp]
   erw [Category.id_comp, IsIso.inv_id]
 
-/-- Blueprint `sk-p-trace`, via `lem-trf-chain-supertrace`: for a commutative ring `R`, a
-bounded complex `P` of finitely generated free `R`-modules and a chain endomorphism `v : P ⟶ P`,
-the categorical trace of `v` on the object of `D(R)` represented by `P` is the alternating sum
-of the ordinary `R`-module traces of the components of `v`:
+/-- Blueprint `proposition-properties-trace`, via `proposition-properties-trace--4`: for a
+commutative ring `R`, a bounded complex `P` of finitely generated free `R`-modules and a chain
+endomorphism `v : P ⟶ P`, the categorical trace of `v` on the object of `D(R)` represented by `P` is
+the alternating sum of the ordinary `R`-module traces of the components of `v`:
 
 `tr_R (v ∣ P) = ∑ i, (-1) ^ i * Tr_R (v ^ i ∣ P ^ i)`,
 
@@ -150,11 +150,11 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     rfl
 
 
-/-- Blueprint `sk-p-trace`, via `lem-trf-chain-supertrace`: for the braiding
-`DerivedCategory.braidedCategory'` of the derived tensor product on `D(R)` (the Koszul braiding
-of complexes, descended along K-flat resolutions), the categorical trace of a chain endomorphism
-`v` of a bounded complex `P` of finitely generated free `R`-modules is the alternating sum of
-the traces of its components:
+/-- Blueprint `proposition-properties-trace`, via `proposition-properties-trace--4`: for the
+braiding `DerivedCategory.braidedCategory'` of the derived tensor product on `D(R)` (the Koszul
+braiding of complexes, descended along K-flat resolutions), the categorical trace of a chain
+endomorphism `v` of a bounded complex `P` of finitely generated free `R`-modules is the alternating
+sum of the traces of its components:
 
 `tr_R (v ∣ P) = ∑ i, (-1) ^ i * Tr_R (v ^ i ∣ P ^ i)`. -/
 theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace

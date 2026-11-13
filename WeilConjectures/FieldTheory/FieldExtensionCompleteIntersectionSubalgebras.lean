@@ -60,7 +60,7 @@ Proof plan from the node:
 1. Form the subfield `L = k(E)` and choose a finite transcendence basis, using
    `lem-weil-pbc-finitely-generated-field-finite-transcendence-basis` and
    `def-weil-pbc-transcendence-basis`.
-2. By `lem-weil-pbc-finitely-generated-field-complete-intersection-model`, choose a
+2. By `theorem-finite-etale-covers-proper-henselian--2`, choose a
    domain model `A = k[X]/(f)` with regular sequence `f`, embedded in `L` with
    fraction field `L`.
 3. Write each member of `E` as a fraction in `A` and take the product `g` of its

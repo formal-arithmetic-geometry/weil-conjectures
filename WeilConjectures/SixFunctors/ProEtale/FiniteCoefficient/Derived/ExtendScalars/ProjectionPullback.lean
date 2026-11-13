@@ -24,7 +24,7 @@ We show that the transposes `Ψ (K ⊗ᴸ S_Y) ⟶ Ψ K` of the derived projecti
 with this comparison and with the commutation `Lg^* Ψ ≅ Ψ Lg^*`
 (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso`). This is the input needed to
 compare the base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` with the projection map of `Rg_*` at
-`S_Y` (blueprint `thm-trf-finite-coefficient-map`).
+`S_Y` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main definitions and results
 

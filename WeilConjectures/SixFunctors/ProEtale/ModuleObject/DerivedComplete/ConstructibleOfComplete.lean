@@ -21,7 +21,7 @@ complete when placed in degree `0`. If the cokernel of `ϖ` on `M` is constructi
 of `ϖ` on `M` is a quotient of a constructible module, then `M` is constructible
 (`ProEtale.isConstructibleModuleObject_of_derivedCompleteIntegers`; Bhatt–Scholze, *The
 pro-étale topology for schemes*, proof of Proposition 6.8.11; blueprint
-`sk-prop-integral-criterion`).
+`proposition-integral-constructibility-criterion`).
 
 ## Proof
 
@@ -347,10 +347,10 @@ theorem isLocallyFinitelyPresented_of_derivedCompleteIntegers {X : Scheme.{u}}
 /-! ### Constructibility -/
 
 /-- **Constructibility of derived complete sheaves** (Bhatt–Scholze, proof of
-Proposition 6.8.11; blueprint `sk-prop-integral-criterion`): on a noetherian scheme `X`, let `M`
-be an `𝒪_{E,X}`-module object which is derived complete when placed in degree `0`, such that the
-cokernel of a uniformizer `ϖ` on `M` is constructible and the kernel of `ϖ` on `M` is a quotient
-of a constructible module object. Then `M` is constructible. -/
+Proposition 6.8.11; blueprint `proposition-integral-constructibility-criterion`): on a noetherian
+scheme `X`, let `M` be an `𝒪_{E,X}`-module object which is derived complete when placed in degree
+`0`, such that the cokernel of a uniformizer `ϖ` on `M` is constructible and the kernel of `ϖ` on
+`M` is a quotient of a constructible module object. Then `M` is constructible. -/
 theorem isConstructibleModuleObject_of_derivedCompleteIntegers {X : Scheme.{u}} [IsNoetherian X]
     {ϖ : integers ℓ E} (hϖ : IsLocalRing.maximalIdeal (integers ℓ E) = Ideal.span {ϖ})
     {M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})

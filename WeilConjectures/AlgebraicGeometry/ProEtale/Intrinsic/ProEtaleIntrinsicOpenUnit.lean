@@ -12,7 +12,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 # Restriction of pro-etale extension by zero
 
 Source: Weil blueprint, order 1848, the open-closed triangle unit calculation;
-Stacks Project, Tags 03DI and 09AE (blueprint: lem-exc-proetale-open-unit).
+Stacks Project, Tags 03DI and 09AE (blueprint:
+proposition-extension-zero-restriction-closed-subscheme--7).
 -/
 
 @[expose] public section
@@ -28,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The unit `M → j^* j_! M` is an isomorphism for the canonical open extension adjunction
 on pro-etale module sheaves, in the intrinsic constant-coefficient presentation.
 Source: Weil blueprint, order 1848; Stacks, Tags 03DI and 09AE
-(blueprint: lem-exc-proetale-open-unit).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--7).
 
 Proof: the fixed-scalar extension-by-zero functor is fully faithful by
 `ProEtale.fullyFaithfulOpenImmersionLowerShriek`. The intrinsic extension is its

@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 # Kummer classes and their boundaries
 
 The cohomological constructions out of which the fundamental class of a regular closed
-immersion is glued (`sk-thm-regular`):
+immersion is glued (`lemma-class-of-point--1`):
 
 * the *Kummer class* `κ(u) ∈ H¹(X, Λ(1))` of a unit `u`, the rank-one datum of
   `sk-def-purity-conv`, supplied by `AlgebraicGeometry.Etale.HasKummerClass`;

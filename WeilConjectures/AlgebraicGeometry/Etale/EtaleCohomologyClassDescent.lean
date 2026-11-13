@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
 /-!
 # Descent of an etale cohomology class to a finite stage
 
-Source: the first proof step of blueprint lemma-weil-pbc-etale-cohomology-continuity;
+Source: the first proof step of blueprint corollary-cohomology-pro-etale-affine;
 Stacks Project, Tags 03Q6 and 09YQ.
 (blueprint: lem-weil-pbc-etale-cohomology-class-descent)
 -/
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Etale
 /-- Every class on the limit is the pullback of a class at a stage mapping to `i`.
 This is only the class-descent part of continuity; it asserts no eventual vanishing.
 
-Source: blueprint lemma-weil-pbc-etale-cohomology-continuity, proof step 1 and
+Source: blueprint corollary-cohomology-pro-etale-affine, proof step 1 and
 blueprint_sketch proof paragraph beginning "Let alpha"; Stacks Tags 03Q6 and 09YQ.
 (blueprint: lem-weil-pbc-etale-cohomology-class-descent)
 
@@ -37,7 +37,7 @@ Proof:
 1. Restrict the system to `Over i`. Its forgetful functor is initial, so the
    restricted cone is still a limit. The new stage sheaves are the pullbacks of F.
    The limit is qcqs since the projections of an affine-transition limit are affine.
-2. By thm-weil-pbc-hypercover-cohomology, choose a finite split hypercover and a
+2. By corollary-cohomology-pro-etale-affine, choose a finite split hypercover and a
    degree-q cocycle representing the given class. Compare the derived-global-sections
    encoding there with Sheaf.H using lem-weil-pbc-ext-via-injective-resolution: global
    sections are Hom from the constant integer sheaf, and their resolution complexes
@@ -46,8 +46,8 @@ Proof:
 3. Descend the skeleton through degree q+1 by lemma-weil-pbc-finite-hypercover-descent.
    Only finitely many components, structure maps, identities and matching covers occur.
    The descended skeleton extends to a split hypercover by successively choosing finite
-   etale covers of the matching objects, as in lem-weil-pbc-hypercover-refinement.
-4. On the finite degree-q components, lem-weil-pbc-etale-section-continuity descends
+   etale covers of the matching objects, as in corollary-cohomology-pro-etale-affine.
+4. On the finite degree-q components, proposition-comparison-morphism-inverse-image--3 descends
    the cocycle sections, after a finite refinement if needed. Cofilteredness supplies
    one stage for all components. Apply the equality part of section continuity to the
    finitely many equations saying that the alternating differential is zero. Move to

@@ -11,7 +11,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-derived transport through the etale-to-pro-etale square
 
-Source: blueprint sec-smooth-purity, classes proof (2).
+Source: blueprint chap-Smooth-purity, classes proof (2).
 -/
 
 @[expose] public noncomputable section

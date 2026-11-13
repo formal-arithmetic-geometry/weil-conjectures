@@ -31,10 +31,11 @@ variable (R : Type u) (S : Type v) (ι : Type t) [CommRing R] [CommRing S] [Alge
   [Finite ι]
 
 /-- A square Jacobian presentation of the `R`-algebra `S` (blueprint
-`def-exc-jacobian-presentation`): a presentation `S = R[xᵢ : i ∈ ι] / (fᵢ : i ∈ ι)` such that
-the full Jacobian determinant `det (∂fᵢ / ∂xⱼ)` is a unit in `S`. It is recorded as a submersive
-presentation with relations indexed by `ι` whose relation `fᵢ` is paired with the variable
-`xᵢ`, so that the Jacobian of the submersive presentation is the full Jacobian determinant. -/
+`proposition-extension-zero-restriction-closed-subscheme`): a presentation
+`S = R[xᵢ : i ∈ ι] / (fᵢ : i ∈ ι)` such that the full Jacobian determinant `det (∂fᵢ / ∂xⱼ)` is a
+unit in `S`. It is recorded as a submersive presentation with relations indexed by `ι` whose
+relation `fᵢ` is paired with the variable `xᵢ`, so that the Jacobian of the submersive presentation
+is the full Jacobian determinant. -/
 structure SquareJacobianPresentation extends SubmersivePresentation.{t, t} R S ι ι where
   map_eq_id : map = _root_.id
 

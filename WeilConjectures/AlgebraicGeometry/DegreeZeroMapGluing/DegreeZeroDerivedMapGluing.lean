@@ -29,7 +29,7 @@ The auxiliary predicates only spell out the conclusion, using the actual exact i
 images and their canonical composition isomorphisms. They assume no descent property.
 Both small sites use fixed-ring module sheaves. For finite coefficients the canonical
 coefficient realization identifies this with modules over the constant ring sheaf, as in
-`def-weil-pbc-proetale-modules`. No new derived category or restriction is constructed.
+`definition-small-pro-etale-site--1`. No new derived category or restriction is constructed.
 -/
 
 @[expose] public noncomputable section
@@ -1006,7 +1006,7 @@ Proof:
    affine opens and take finite subcovers (lem-weil-pbc-affine-opens-basis and
    lem-weil-pbc-affine-scheme-qcqs).
 2. Restriction is exact (lem-pur-site-restriction-module-adjunction-exact), so it
-   induces the termwise derived functor (lem-sf-exact-functor-derived-triangulated).
+   induces the termwise derived functor (situation-conventions).
    Kernels, images and quotients commute with it. Hence so do all cohomology sheaves,
    naturally for maps and inverses of quasi-isomorphisms.
 3. A cohomology sheaf vanishing on the cover is zero: its sections over any site
@@ -1016,7 +1016,7 @@ Proof:
    p in degree zero the quotient of cycles by boundaries and zero elsewhere. Both
    are quasi-isomorphisms by concentration; the identification is Q(c)⁻¹ Q(p).
 5. Kernels and quotient maps are natural; their natural transformations descend
-   through localization (lem-weil-pbc-truncation-descends and
+   through localization (theorem-pbc-injective-acyclicity and
    lem-weil-pbc-localization-universal-property). This proves independence of the
    representative, naturality and compatibility with restriction, including iteration.
 6. The single functor is fully faithful (lem-weil-pbc-derived-single-fully-faithful).

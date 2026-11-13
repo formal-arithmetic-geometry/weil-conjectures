@@ -16,7 +16,7 @@ Let `k` be a field, `Y` a `k`-scheme of finite type and `f : X ⟶ Y` separated 
 At a finite coefficient stage `Λ` (a finite ring whose exponent is invertible in `k`), the
 pro-étale exceptional inverse image `Rf^! = ν_X^* ∘ f^× ∘ Rν_{Y,*}`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`, blueprint
-`def-weil-exceptional-inverse-image`) carries `D_c^[a, b](Y_proét, Λ)` into
+`theorem-f-shriek-finite-coefficients`) carries `D_c^[a, b](Y_proét, Λ)` into
 `D_c^[a - 2D, b + 2 dim Y + 1](X_proét, Λ)` and bounded constructible complexes of Tor amplitude
 in `[a, b]` to bounded constructible complexes of Tor amplitude in `[a - 2D, b + 2 dim Y + 1]`,
 where `D` is the maximal embedding dimension of a finite family of affine charts
@@ -28,7 +28,7 @@ complex `G`, and `Rf^! ν^* G ≅ ν^* f^× G`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekMapDerivedCategoryObjIso`), since the unit
 `G ⟶ Rν_* ν^* G` is invertible on bounded below complexes. So this is the étale statement
 `AlgebraicGeometry.Etale.preservationClauses_of_charts_of_topologicalKrullDim_le`
-(`cor-pur-general-admissibility-datum`) transported along `ν^*`, which preserves and detects
+(`theorem-f-shriek-finite-coefficients--1`) transported along `ν^*`, which preserves and detects
 homology concentration and Tor amplitude.
 -/
 
@@ -109,7 +109,7 @@ lemma exists_affineCharts {k : Type u} [Field k] {X Y : Scheme.{u}}
   obtain ⟨y, hy, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
   exact ⟨t.equivFin ⟨y, hy⟩, by simpa [pt] using hx⟩
 
-/-- Blueprint `def-weil-exceptional-inverse-image` (the typing of `Rf_n^!` at the finite
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (the typing of `Rf_n^!` at the finite
 stages): Preservation of bounded constructibility and of finite Tor amplitude by the pro-étale
 exceptional inverse image, with bounds independent of the coefficient stage.
 
@@ -127,11 +127,11 @@ every `n`) and every `d_Y ≥ dim Y`, the pro-étale exceptional inverse image
 
 Bounded constructible pro-étale complexes are those of étale origin
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`, which is the blueprint's
-notion at the finite stages by `lem-sf-proetale-constructible-origin`). Writing `L ≅ ν^* G`, we
+notion at the finite stages by `theorem-comparison-constructible-sheaves`). Writing `L ≅ ν^* G`, we
 have `Rf^! L ≅ ν^* f^× G`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekMapDerivedCategoryObjIso`), and the étale
 statement is `AlgebraicGeometry.Etale.preservationClauses_of_charts_of_topologicalKrullDim_le`
-(`cor-pur-general-admissibility-datum`) for charts chosen once and for all
+(`theorem-f-shriek-finite-coefficients--1`) for charts chosen once and for all
 (`AlgebraicGeometry.ProEtale.exists_affineCharts`); `ν^*` preserves and detects homology
 concentration and Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`). -/

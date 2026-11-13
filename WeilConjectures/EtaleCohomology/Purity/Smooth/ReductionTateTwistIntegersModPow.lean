@@ -29,7 +29,7 @@ open ProEtale.CondensedRing PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] (n : ℕ)
 
-/-- Blueprint `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`
 
 The Tate shift datum of the derived extension of scalars along the reduction
 `𝒪_E ⧸ ℓⁿ⁺¹ → 𝒪_E ⧸ ℓⁿ`, induced by `μ_{ℓ^{n+1}} ⊗ 𝒪_E ⧸ ℓⁿ ≅ μ_{ℓⁿ} ⊗ 𝒪_E ⧸ ℓⁿ`
