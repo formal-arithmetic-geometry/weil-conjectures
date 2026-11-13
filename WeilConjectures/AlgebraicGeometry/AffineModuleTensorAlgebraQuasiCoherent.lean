@@ -104,8 +104,28 @@ private theorem changeOfRings_unit_iso {T : TopCat.{u}} (C D : T.Sheaf CommRingC
     (((SheafOfModules.restrictScalars (𝓻 a)).obj N).unitHomEquiv
       (adj.homEquiv _ N k)) l).symm
 
-set_option trace.profiler true in
--- Transporting sections through three equivalences unfolds dependent module instances.
+private theorem unitIsoOfSectionsEquiv {T T' : TopCat.{u}}
+    (C : T.Sheaf RingCat.{u}) (D : T'.Sheaf RingCat.{u})
+    (Q : SheafOfModules.{u} C ⥤ SheafOfModules.{u} D) (M : SheafOfModules.{u} C)
+    (φ : ∀ N, (M ⟶ N) ≃ (SheafOfModules.unit D ⟶ Q.obj N))
+    (hφ : ∀ N N' (k : M ⟶ N) (l : N ⟶ N'), φ N' (k ≫ l) = φ N k ≫ Q.map l)
+    (se : ∀ (N : SheafOfModules.{u} C), N.sections ≃ (Q.obj N).sections)
+    (hse : ∀ (N N' : SheafOfModules.{u} C) (l : N ⟶ N') s,
+      se N' (SheafOfModules.sectionsMap l s) =
+        SheafOfModules.sectionsMap (Q.map l) (se N s)) :
+    Nonempty (M ≅ SheafOfModules.unit C) := by
+  let e (N : SheafOfModules.{u} C) : (M ⟶ N) ≃ (SheafOfModules.unit C ⟶ N) :=
+    (φ N).trans ((Q.obj N).unitHomEquiv.trans ((se N).symm.trans N.unitHomEquiv.symm))
+  refine ⟨isoOfHomEquiv _ _ e ?_⟩
+  intro N N' k l
+  dsimp only [e, Equiv.trans_apply]
+  rw [SheafOfModules.unitHomEquiv_symm_comp]
+  apply congrArg N'.unitHomEquiv.symm
+  apply (se N').injective
+  rw [Equiv.apply_symm_apply, hse, Equiv.apply_symm_apply, hφ,
+    SheafOfModules.unitHomEquiv_comp_apply]
+
+set_option profiler true in
 private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
     (C : T'.Sheaf CommRingCat.{u}) :
     Nonempty (TopCat.Sheaf.inverseImageModule g C (SheafOfModules.unit (𝓡 C)) ≅
@@ -124,24 +144,8 @@ private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
     Equiv.ofBijective ((Opens.map g).op.sectionsPrecomp)
       (Functor.bijective_sectionsPrecomp (Opens.map g).op
         (N.val.presheaf ⋙ CategoryTheory.forget AddCommGrpCat.{u}))
-  let e (N : SheafOfModules.{u} (𝓡 C')) :
-      (TopCat.Sheaf.inverseImageModule g C (SheafOfModules.unit (𝓡 C)) ⟶ N) ≃
-        (SheafOfModules.unit (𝓡 C') ⟶ N) :=
-    (φ _ N).trans ((Q.obj N).unitHomEquiv.trans ((se N).symm.trans N.unitHomEquiv.symm))
-  refine ⟨isoOfHomEquiv _ _ e ?_⟩
-  intro N N' k l
-  apply N'.unitHomEquiv.injective
-  apply (se N').injective
-  dsimp only [e, Equiv.trans_apply]
-  erw [N'.unitHomEquiv.apply_symm_apply, (se N').apply_symm_apply,
-    SheafOfModules.unitHomEquiv_comp_apply, N.unitHomEquiv.apply_symm_apply]
-  change (Q.obj N').unitHomEquiv (φ _ N' (k ≫ l)) =
-    se N' (SheafOfModules.sectionsMap l ((se N).symm ((Q.obj N).unitHomEquiv (φ _ N k))))
-  erw [hφ, SheafOfModules.unitHomEquiv_comp_apply]
-  have hs := (se N).apply_symm_apply ((Q.obj N).unitHomEquiv (φ _ N k))
-  apply PresheafOfModules.sections_ext
-  intro V
-  exact congrArg (fun z ↦ l.val.app ((Opens.map g).op.obj V) (z.val V)) hs.symm
+  exact unitIsoOfSectionsEquiv (𝓡 C') (𝓡 C) Q _ (φ _) (hφ _) se
+    (fun _ _ _ _ ↦ rfl)
 
 /-- The tensor pushout of the affine direct-image algebra is quasi-coherent.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.
