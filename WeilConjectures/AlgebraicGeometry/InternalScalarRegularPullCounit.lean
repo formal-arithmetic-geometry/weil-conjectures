@@ -157,8 +157,7 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
-  erw [← CategoryTheory.Functor.map_comp_assoc]
-  erw [exact_unit Λ' f]
+  simp only [exact_unit Λ' f]
   simp only [Functor.map_comp, Category.assoc]
   have hc : (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.app
       ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ' Y))) ≫
@@ -169,7 +168,9 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     change (CondensedRing.upperStar Λ' f).leftDerivedFunctorIsoMapDerivedCategory.inv.app _ ≫
       ((CondensedRing.upperStar Λ' f).leftDerivedFunctorIsoMapDerivedCategory.hom.app _ ≫ _) = _
     exact Iso.inv_hom_id_app_assoc _ _ _
-  simp only [← (V a X).map_comp_assoc, hc]
+  simp only [← (V a X).map_comp_assoc
+    ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.app _)
+    ((CondensedRing.upperStar Λ' f).singleFunctorCompLeftDerivedFunctorIso.hom.app _), hc]
   have hn := (CondensedRing.upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory.hom.naturality
     (((V₀ a Y).mapDerivedCategorySingleFunctor 0).inv.app
       (Mod.regular (condensedRingObj Λ' Y)))
