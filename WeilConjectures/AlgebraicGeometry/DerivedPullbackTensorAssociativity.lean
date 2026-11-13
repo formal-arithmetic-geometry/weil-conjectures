@@ -253,6 +253,7 @@ private theorem localization_tensor_isIso (S : Scheme.{uModel})
       DerivedCategory.Qh.map (Functor.LaxMonoidal.μ q K L)) ≫ e.hom.app (K ⊗ L))
   infer_instance
 
+set_option profiler true in
 -- Localization tensor instances require extra elaboration.
 /-- Associativity on three K-flat representatives, before resolving arbitrary objects.
 Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
