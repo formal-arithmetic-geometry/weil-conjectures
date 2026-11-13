@@ -128,7 +128,7 @@ private theorem tensor_square_paste {C D : Type*} [Category C] [Category D]
         s' := by
   rw [show T.map (Prod.mkHom (a₁ ≫ V.map b₁.hom) (a₂ ≫ V.map b₂.hom)) =
     T.map (Prod.mkHom a₁ a₂) ≫ T.map (Prod.mkHom (V.map b₁.hom) (V.map b₂.hom)) from
-      T.map_comp _ _]
+      T.map_comp (Prod.mkHom a₁ a₂) (Prod.mkHom (V.map b₁.hom) (V.map b₂.hom))]
   simp only [← Category.assoc] at hn ⊢
   rw [hn]
   simp only [Category.assoc]
@@ -147,7 +147,6 @@ private theorem inverse_square_paste {C D : Type*} [Category C] [Category D]
   rw [← F.map_comp_assoc, Iso.hom_inv_id, F.map_id, Category.id_comp]
   simpa only [Iso.inv_hom_id, Category.comp_id] using h.symm
 
-set_option profiler true in
 -- The normalization square compares several large functor models.
 private theorem strict_system_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y)
@@ -253,7 +252,6 @@ private theorem pull_reduction {V W : Scheme.{u}} (g : V ⟶ W)
   simpa only [v, strictPullModel_hom, Functor.comp_map, Functor.id_map,
     ← L.map_comp, R, L, pullbackTensorReferencePullback, Functor.comp_obj] using hn
 
-set_option profiler true in
 -- Keep counit cancellation explicit across the derived operation models.
 /-- Source: Stacks 07A4, 0941; the integral comparison counit construction.
 (blueprint: lem-pur-completed-comparison-canonical-square).
