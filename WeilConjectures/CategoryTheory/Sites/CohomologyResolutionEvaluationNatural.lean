@@ -28,8 +28,58 @@ open CategoryTheory
 namespace CategoryTheory.Sheaf
 
 set_option profiler true in
-set_option maxHeartbeats 450000 in
--- Comparing the two Ext universes and the lifted homology composites needs more reductions.
+/-- Transport a derived-functor comparison through evaluation and the universe lift.
+The functors are parameters so that naturality does not unfold their constructions. -/
+private theorem exists_resolution_evaluation_iso
+    {D : Type u} [Category.{v} D] [Abelian D] [HasInjectiveResolutions D]
+    (E : D ⥤ AddCommGrpCat.{w}) [E.Additive]
+    (B : D ⥤ AddCommGrpCat.{max z w}) [B.Additive]
+    (b : B ≅ E ⋙ AddCommGrpCat.uliftFunctor.{z, w})
+    (H : D ⥤ AddCommGrpCat.{max z w}) (F : D) (R : InjectiveResolution F) (n : ℕ)
+    (c : H ≅ B.rightDerived n) :
+    ∃ e : H.obj F ≃+ ((E.mapHomologicalComplex (.up ℕ)).obj R.cocomplex).homology n,
+      ∀ (θ : F ⟶ F) (φ : R.cocomplex ⟶ R.cocomplex)
+        (_ : R.ι.f 0 ≫ φ.f 0 = θ ≫ R.ι.f 0) (x : H.obj F),
+        e (H.map θ x) =
+          HomologicalComplex.homologyMap ((E.mapHomologicalComplex (.up ℕ)).map φ) n (e x) := by
+  let A := AddCommGrpCat.uliftFunctor.{z, w}
+  let k := (NatIso.mapHomologicalComplex b (.up ℕ)).app R.cocomplex
+  let l := (HomologicalComplex.homologyFunctor _ _ n).mapIso k
+  let K := (E.mapHomologicalComplex (.up ℕ)).obj R.cocomplex
+  let t := (K.sc n).mapHomologyIso A
+  let m := (R.isoRightDerivedObj B n) ≪≫ l
+  let e := ((c.app F ≪≫ m ≪≫ t).addCommGroupIsoToAddEquiv.trans AddEquiv.ulift)
+  refine ⟨e, ?_⟩
+  intro θ φ comm x
+  have hc := ConcreteCategory.congr_hom (c.hom.naturality θ) x
+  have hm := R.isoRightDerivedObj_hom_naturality θ R φ comm B n
+  have hk := (NatIso.mapHomologicalComplex b (.up ℕ)).hom.naturality φ
+  have hl := (HomologicalComplex.homologyFunctor _ _ n).congr_map hk
+  simp only [HomologicalComplex.homologyFunctor_map,
+    HomologicalComplex.homologyMap_comp] at hl
+  have ht := ShortComplex.mapHomologyIso_hom_naturality
+    ((HomologicalComplex.shortComplexFunctor _ (.up ℕ) n).map
+      ((E.mapHomologicalComplex (.up ℕ)).map φ)) A
+  change (t.hom (l.hom ((R.isoRightDerivedObj B n).hom
+    ((c.app F).hom (H.map θ x))))).down = _
+  rw [show (c.app F).hom (H.map θ x) =
+      (B.rightDerived n).map θ ((c.app F).hom x) from hc]
+  rw [show (R.isoRightDerivedObj B n).hom
+      ((B.rightDerived n).map θ ((c.app F).hom x)) =
+      HomologicalComplex.homologyMap ((B.mapHomologicalComplex (.up ℕ)).map φ)
+        n ((R.isoRightDerivedObj B n).hom ((c.app F).hom x)) from
+          ConcreteCategory.congr_hom hm ((c.app F).hom x)]
+  have hl' := ConcreteCategory.congr_hom hl
+    ((R.isoRightDerivedObj B n).hom ((c.app F).hom x))
+  change l.hom (HomologicalComplex.homologyMap
+    ((B.mapHomologicalComplex (.up ℕ)).map φ) n _) =
+    HomologicalComplex.homologyMap (((E ⋙ A).mapHomologicalComplex (.up ℕ)).map φ)
+      n (l.hom _) at hl'
+  rw [hl']
+  exact congrArg ULift.down (ConcreteCategory.congr_hom ht
+    (l.hom ((R.isoRightDerivedObj B n).hom ((c.app F).hom x))))
+
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation on a terminal object computes cohomology, naturally for resolution maps.
 Source: Stacks Project, Cohomology on Sites, Section 21.2; Mathlib
@@ -95,13 +145,8 @@ theorem exists_cohomology_resolution_evaluation_natural_succ
       Abelian.Ext.{max u w} Z F (q + 1) :=
     Abelian.Ext.homAddEquiv.{_, z}.trans Abelian.Ext.homAddEquiv.{_, max u w}.symm
   obtain ⟨c⟩ := nonempty_extFunctor_iso_rightDerivedHom Z (q + 1)
-  let k := (NatIso.mapHomologicalComplex b (.up ℕ)).app R.cocomplex
-  let l := (HomologicalComplex.homologyFunctor _ _ (q + 1)).mapIso k
-  let K := (E.mapHomologicalComplex (.up ℕ)).obj R.cocomplex
-  let t := (K.sc (q + 1)).mapHomologyIso A
-  let m := (R.isoRightDerivedObj B (q + 1)) ≪≫ l
-  let e := r.trans ((c.app F ≪≫ m ≪≫ t).addCommGroupIsoToAddEquiv.trans AddEquiv.ulift)
-  refine ⟨e, ?_⟩
+  obtain ⟨e, he⟩ := exists_resolution_evaluation_iso E B b _ F R (q + 1) c
+  refine ⟨r.trans e, ?_⟩
   intro θ φ comm x
   have hr : r (Sheaf.H.map.{z, w, v, u} θ (q + 1) x) =
       ((Abelian.extFunctor (q + 1)).obj (Opposite.op Z)).map θ (r x) := by
@@ -116,41 +161,6 @@ theorem exists_cohomology_resolution_evaluation_natural_succ
     change (x.comp (Abelian.Ext.mk₀ θ) (add_zero _)).hom =
       ((r x).comp (Abelian.Ext.mk₀ θ) (add_zero _)).hom
     simp only [Abelian.Ext.comp_hom, Abelian.Ext.mk₀_hom, hx]
-  have hc := ConcreteCategory.congr_hom (c.hom.naturality θ) (r x)
-  have hm := R.isoRightDerivedObj_hom_naturality θ R φ comm B (q + 1)
-  have hk := (NatIso.mapHomologicalComplex b (.up ℕ)).hom.naturality φ
-  have hl := (HomologicalComplex.homologyFunctor _ _ (q + 1)).congr_map hk
-  simp only [HomologicalComplex.homologyFunctor_map,
-    HomologicalComplex.homologyMap_comp] at hl
-  have ht := ShortComplex.mapHomologyIso_hom_naturality
-    ((HomologicalComplex.shortComplexFunctor _ (.up ℕ) (q + 1)).map
-      ((E.mapHomologicalComplex (.up ℕ)).map φ)) A
-  change (t.hom (l.hom ((R.isoRightDerivedObj B (q + 1)).hom
-    ((c.app F).hom (r (Sheaf.H.map.{z, w, v, u} θ (q + 1) x)))))).down = _
-  rw [hr]
-  rw [show (c.app F).hom
-      (((Abelian.extFunctor (q + 1)).obj (Opposite.op Z)).map θ (r x)) =
-      (B.rightDerived (q + 1)).map θ ((c.app F).hom (r x)) from hc]
-  rw [show (R.isoRightDerivedObj B (q + 1)).hom
-      ((B.rightDerived (q + 1)).map θ ((c.app F).hom (r x))) =
-      HomologicalComplex.homologyMap ((B.mapHomologicalComplex (.up ℕ)).map φ)
-        (q + 1) ((R.isoRightDerivedObj B (q + 1)).hom ((c.app F).hom (r x))) from
-          ConcreteCategory.congr_hom hm ((c.app F).hom (r x))]
-  have hl' := ConcreteCategory.congr_hom hl
-    ((R.isoRightDerivedObj B (q + 1)).hom ((c.app F).hom (r x)))
-  change l.hom (HomologicalComplex.homologyMap
-    ((B.mapHomologicalComplex (.up ℕ)).map φ) (q + 1) _) =
-    HomologicalComplex.homologyMap (((E ⋙ A).mapHomologicalComplex (.up ℕ)).map φ)
-      (q + 1) (l.hom _) at hl'
-  rw [hl']
-  have he : e x = (t.hom (l.hom
-      ((R.isoRightDerivedObj B (q + 1)).hom ((c.app F).hom (r x))))).down := by
-    rfl
-  have hf := congrArg
-    (fun a ↦ HomologicalComplex.homologyMap
-      ((E.mapHomologicalComplex (.up ℕ)).map φ) (q + 1) a) he
-  exact (congrArg ULift.down (ConcreteCategory.congr_hom ht
-    (l.hom ((R.isoRightDerivedObj B (q + 1)).hom ((c.app F).hom (r x)))))).trans hf.symm
-
+  exact (congrArg e hr).trans (he θ φ comm (r x))
 
 end CategoryTheory.Sheaf
