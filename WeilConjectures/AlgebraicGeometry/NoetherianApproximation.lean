@@ -239,6 +239,51 @@ theorem _root_.PrimeSpectrum.exists_finset_eq_iUnion_basicOpen_inter_zeroLocus {
     exact hxb (hxg (Finset.mem_coe.2 (Finset.mem_image_of_mem _ hb)))
 
 
+private theorem stratification_bad_preimage_eq_empty {X Y : Type*} [TopologicalSpace X]
+    (S : Topology.Stratification X) (t : Fin S.n → Set Y) (f : X → Y)
+    (ht : ∀ i, f ⁻¹' t i = S.stratum i) :
+    f ⁻¹' ((⋃ p ∈ {p : Fin S.n × Fin S.n | p.1 ≠ p.2}, t p.1 ∩ t p.2) ∪
+      (⋃ i, t i)ᶜ) = ∅ := by
+  refine Set.eq_empty_of_forall_notMem fun x hx ↦ ?_
+  rcases hx with hx | hx
+  · obtain ⟨p, hp, hx⟩ := Set.mem_iUnion₂.1 hx
+    have h1 : x ∈ S.stratum p.1 := by rw [← ht p.1]; exact hx.1
+    have h2 : x ∈ S.stratum p.2 := by rw [← ht p.2]; exact hx.2
+    exact Set.disjoint_left.1 (S.pairwise_disjoint_stratum hp) h1 h2
+  · apply hx
+    have : x ∈ ⋃ i, S.stratum i := S.iUnion_stratum_eq_univ ▸ Set.mem_univ x
+    obtain ⟨i, hi⟩ := Set.mem_iUnion.1 this
+    rw [← ht i] at hi
+    exact Set.mem_iUnion.2 ⟨i, hi⟩
+
+private theorem exists_stratification_of_empty_bad_preimage {X Y : Type*} [TopologicalSpace Y]
+    {n : ℕ} (t : Fin n → Set X) (f : Y → X)
+    (htl : ∀ i, IsLocallyClosed (f ⁻¹' t i)) (htc : ∀ i, IsConstructible (f ⁻¹' t i))
+    (hbad : f ⁻¹' ((⋃ p ∈ {p : Fin n × Fin n | p.1 ≠ p.2}, t p.1 ∩ t p.2) ∪
+      (⋃ i, t i)ᶜ) = ∅) :
+    ∃ (T : Topology.Stratification Y) (e : Fin T.n ≃ Fin n),
+      ∀ i, T.stratum i = f ⁻¹' t (e i) := by
+  classical
+  have hbad' (x) (hx : f x ∈
+      (⋃ p ∈ {p : Fin n × Fin n | p.1 ≠ p.2}, t p.1 ∩ t p.2) ∪ (⋃ i, t i)ᶜ) : False := by
+    have : x ∈ f ⁻¹' _ := hx
+    rw [hbad] at this
+    exact this
+  refine ⟨{ n := n
+            stratum := fun i ↦ f ⁻¹' t i
+            isLocallyClosed_stratum := htl
+            isConstructible_stratum := htc
+            iUnion_stratum_eq_univ := ?_
+            pairwise_disjoint_stratum := fun i j hij ↦ ?_ }, Equiv.refl _, fun _ ↦ rfl⟩
+  · refine Set.eq_univ_of_forall fun x ↦ ?_
+    by_contra h
+    exact hbad' x (Or.inr fun hx ↦ h (by
+      obtain ⟨i, hi⟩ := Set.mem_iUnion.1 hx
+      exact Set.mem_iUnion.2 ⟨i, hi⟩))
+  · rw [Function.onFun, Set.disjoint_left]
+    intro x hi hj
+    exact hbad' x (Or.inl (Set.mem_iUnion₂.2 ⟨(i, j), hij, hi, hj⟩))
+
 set_option profiler true in
 private theorem exists_finset_stratification_of_comap_eq
     (S : Topology.Stratification (PrimeSpectrum A)) (F₀ : Finset A)
@@ -256,53 +301,23 @@ private theorem exists_finset_stratification_of_comap_eq
   have hbadc : IsConstructible bad :=
     (IsConstructible.biUnion (Set.toFinite _) fun p _ ↦ (ht₀c p.1).inter (ht₀c p.2)).union
       (isConstructible_compl.2 (.iUnion ht₀c))
-  have hbad : comap B₀.val.toRingHom ⁻¹' bad = ∅ := by
-    refine Set.eq_empty_of_forall_notMem fun x hx ↦ ?_
-    rcases hx with hx | hx
-    · obtain ⟨p, hp, hx⟩ := Set.mem_iUnion₂.1 hx
-      have h1 : x ∈ S.stratum p.1 := by rw [← ht₀ p.1]; exact hx.1
-      have h2 : x ∈ S.stratum p.2 := by rw [← ht₀ p.2]; exact hx.2
-      exact Set.disjoint_left.1 (S.pairwise_disjoint_stratum hp) h1 h2
-    · apply hx
-      have : x ∈ ⋃ i, S.stratum i := S.iUnion_stratum_eq_univ ▸ Set.mem_univ x
-      obtain ⟨i, hi⟩ := Set.mem_iUnion.1 this
-      rw [← ht₀ i] at hi
-      exact Set.mem_iUnion.2 ⟨i, hi⟩
+  have hbad : comap B₀.val.toRingHom ⁻¹' bad = ∅ :=
+    stratification_bad_preimage_eq_empty S t₀ (comap B₀.val.toRingHom) ht₀
   obtain ⟨F, hF, hF'⟩ := exists_finset_comap_eq_empty hbadc hbad
   let ι := Subalgebra.inclusion (R := ℤ) (Algebra.adjoin_mono (R := ℤ) (Finset.coe_subset.2 hF))
-  let t (i : Fin S.n) : Set (PrimeSpectrum (Algebra.adjoin ℤ (F : Set A))) :=
-    comap ι.toRingHom ⁻¹' t₀ i
-  have hbad' (x) (hx : comap ι.toRingHom x ∈ bad) : False := by
-    have : x ∈ comap ι.toRingHom ⁻¹' bad := hx
-    rw [hF'] at this
-    exact this
-  refine ⟨F,
-    { n := S.n
-      stratum := t
-      isLocallyClosed_stratum := fun i ↦ ?_
-      isConstructible_stratum := fun i ↦ ?_
-      iUnion_stratum_eq_univ := ?_
-      pairwise_disjoint_stratum := fun i j hij ↦ ?_ }, Equiv.refl _, fun i ↦ ?_⟩
-  · exact (ht₀l i).preimage (continuous_comap ι.toRingHom)
-  · obtain ⟨D, hD⟩ := PrimeSpectrum.exists_constructibleSetData_iff.mpr (ht₀c i)
-    change IsConstructible (comap ι.toRingHom ⁻¹' t₀ i)
+  have htc (i) : IsConstructible (comap ι.toRingHom ⁻¹' t₀ i) := by
+    obtain ⟨D, hD⟩ := PrimeSpectrum.exists_constructibleSetData_iff.mpr (ht₀c i)
     rw [← hD, ← ConstructibleSetData.toSet_map]
     exact ConstructibleSetData.isConstructible_toSet _
-  · refine Set.eq_univ_of_forall fun x ↦ ?_
-    by_contra h
-    exact hbad' x (Or.inr fun hx ↦ h (by
-      obtain ⟨i, hi⟩ := Set.mem_iUnion.1 hx
-      exact Set.mem_iUnion.2 ⟨i, hi⟩))
-  · rw [Function.onFun, Set.disjoint_left]
-    intro x hi hj
-    exact hbad' x (Or.inl (Set.mem_iUnion₂.2 ⟨(i, j), hij, hi, hj⟩))
-  · change comap _ ⁻¹' t i = S.stratum i
-    rw [← ht₀ i]
-    ext x
-    change comap ι.toRingHom (comap _ x) ∈ t₀ i ↔ comap _ x ∈ t₀ i
-    have hv : (Algebra.adjoin ℤ (F : Set A)).val.toRingHom.comp ι.toRingHom = B₀.val.toRingHom :=
-      RingHom.ext fun _ ↦ rfl
-    rw [← comap_comp_apply, hv]
+  obtain ⟨T, e, hT⟩ := exists_stratification_of_empty_bad_preimage t₀ (comap ι.toRingHom)
+    (fun i ↦ (ht₀l i).preimage (continuous_comap ι.toRingHom)) htc hF'
+  refine ⟨F, T, e, fun i ↦ ?_⟩
+  rw [hT i, ← ht₀ (e i)]
+  ext x
+  change comap ι.toRingHom (comap _ x) ∈ t₀ (e i) ↔ comap _ x ∈ t₀ (e i)
+  have hv : (Algebra.adjoin ℤ (F : Set A)).val.toRingHom.comp ι.toRingHom = B₀.val.toRingHom :=
+    RingHom.ext fun _ ↦ rfl
+  rw [← comap_comp_apply, hv]
 
 
 set_option profiler true in
