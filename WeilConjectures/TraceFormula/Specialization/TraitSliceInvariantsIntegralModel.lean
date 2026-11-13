@@ -74,12 +74,28 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
             ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
       (integralModelLeftDerivedUpperStar w).obj B :=
-  (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-      Z)).leftDerivedFunctor.mapIso
-      ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
-        B₀) ≪≫
-    (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
-    (integralModelLeftDerivedUpperStar w).mapIso e₀
+  by
+    letI (priority := 2000) integralModelTensorLeftPreservesColimit
+        {J : Type} [SmallCategory J] (T : Scheme.{u})
+        (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+        (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+        (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+        PreservesColimit F (MonoidalCategory.tensorLeft P) := by
+      infer_instance
+    letI (priority := 2000) integralModelTensorRightPreservesColimit
+        {J : Type} [SmallCategory J] (T : Scheme.{u})
+        (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+        (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+        (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+        PreservesColimit F (MonoidalCategory.tensorRight P) := by
+      infer_instance
+    exact
+      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        Z)).leftDerivedFunctor.mapIso
+        ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
+          B₀) ≪≫
+      (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
+      (integralModelLeftDerivedUpperStar w).mapIso e₀
 
 /-- An isomorphism of an integral model in the ambient derived categories, as an isomorphism of
 bounded constructible complexes (the form required by the stabilization theorem). -/
