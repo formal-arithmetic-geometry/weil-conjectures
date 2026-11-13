@@ -163,9 +163,46 @@ private theorem finiteType_equivOverInverse {X : RingedSpace.{u}} (U : Topologic
   exact finiteType_pushforward_leftAdjoint U.overEquivalence.functor _
     (U.sheafOfModulesEquivOverInverseUnit (moduleRings X))
 
-set_option maxHeartbeats 700000 in
--- Transport through the slice-site equivalence expands several nested module functors.
-set_option synthInstance.maxHeartbeats 200000 in
+private theorem finiteType_kernel_of_exact (X : RingedSpace.{u})
+    (S : ShortComplex (SheafOfModules.{u} (moduleRings X))) (hS : S.Exact)
+    [S.X₁.IsFiniteType] : (kernel S.g).IsFiniteType := by
+  have : Epi (kernel.lift S.g S.f S.zero) := hS.epi_kernelLift
+  exact (finiteType_image_extension X).1 (kernel.lift S.g S.f S.zero)
+
+private theorem finiteType_kernel_comp_of_epi (X : RingedSpace.{u})
+    {F G H : SheafOfModules.{u} (moduleRings X)} (f : F ⟶ G) (g : G ⟶ H)
+    [Epi f] [(kernel f).IsFiniteType] [(kernel g).IsFiniteType] :
+    (kernel (f ≫ g)).IsFiniteType := by
+  have he := kernelCokernelCompSequence_exact f g
+  let S := he.sc 0 (by decide)
+  have hδ : kernelCokernelCompSequence.δ f g = 0 := by
+    have hf : cokernel.π f = 0 := by
+      apply (cancel_epi f).mp
+      simp
+    simp [kernelCokernelCompSequence.δ_fac, hf]
+  have hS : S.ShortExact := by
+    refine { exact := he.exact 0 (by decide), mono_f := ?_, epi_g := ?_ }
+    · change Mono ((kernelCokernelCompSequence f g).map' 0 1)
+      infer_instance
+    · exact ((he.sc 1 (by decide)).exact_iff_epi hδ).mp (he.exact 1 (by decide))
+  have : S.X₁.IsFiniteType := inferInstanceAs (kernel f).IsFiniteType
+  have : S.X₃.IsFiniteType := inferInstanceAs (kernel g).IsFiniteType
+  exact (finiteType_image_extension X).2.2 S hS
+
+private theorem finiteType_kernel_of_equivOver {X : RingedSpace.{u}}
+    (U : TopologicalSpace.Opens X)
+    {M N : SheafOfModules.{u} ((moduleRings X).over U)} (f : M ⟶ N)
+    [(kernel ((U.sheafOfModulesEquivOver (moduleRings X)).functor.map f)).IsFiniteType] :
+    (kernel f).IsFiniteType := by
+  let E := U.sheafOfModulesEquivOver (moduleRings X)
+  have : (E.functor.obj (kernel f)).IsFiniteType :=
+    finiteType_of_iso (R := U.sheafRestrict.obj (moduleRings X))
+      (PreservesKernel.iso E.functor f).symm
+  have : (E.inverse.obj (E.functor.obj (kernel f))).IsFiniteType :=
+    finiteType_equivOverInverse U _
+  exact finiteType_of_iso (R := (moduleRings X).over U)
+    (M := E.inverse.obj (E.functor.obj (kernel f))) (E.unitIso.app (kernel f)).symm
+
 set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The relations of the quotient presentation are of finite type.
@@ -210,44 +247,18 @@ theorem kernel_composite_cokernel_isFiniteType
       (PreservesKernel.iso E.functor P.generators.π)
   -- Exactness gives an epimorphism from the restricted source onto ker(c).
   have hc : (kernel c).IsFiniteType := by
-    have he := ((ShortComplex.exact_cokernel f).map A).map E.functor
     let T := ((ShortComplex.mk f (cokernel.π f) (by simp)).map A).map E.functor
-    have hep : Epi (kernel.lift T.g T.f T.zero) := he.epi_kernelLift
     have : T.X₁.IsFiniteType := by
       change (E.functor.obj (G.over U)).IsFiniteType
       infer_instance
-    exact (finiteType_image_extension Y).1 (kernel.lift T.g T.f T.zero)
+    exact finiteType_kernel_of_exact Y T
+      (((ShortComplex.exact_cokernel f).map A).map E.functor)
   have : Epi π := by dsimp [π]; infer_instance
-  -- Since π is epi, the first three terms of the composition sequence are short exact.
-  have he := kernelCokernelCompSequence_exact π c
-  let S := he.sc 0 (by decide)
-  have hδ : kernelCokernelCompSequence.δ π c = 0 := by
-    have hπ : cokernel.π π = 0 := by
-      apply (cancel_epi π).mp
-      simp
-    simp [kernelCokernelCompSequence.δ_fac, hπ]
-  have hS : S.ShortExact := by
-    refine { exact := he.exact 0 (by decide), mono_f := ?_, epi_g := ?_ }
-    · change Mono ((kernelCokernelCompSequence π c).map' 0 1)
-      infer_instance
-    · exact ((he.sc 1 (by decide)).exact_iff_epi hδ).mp (he.exact 1 (by decide))
-  have : S.X₁.IsFiniteType := by
-    change (kernel π).IsFiniteType
-    infer_instance
-  have : S.X₃.IsFiniteType := hc
   have hN : (kernel (π ≫ c)).IsFiniteType :=
-    (finiteType_image_extension Y).2.2 S hS
+    finiteType_kernel_comp_of_epi Y π c
   -- Transfer the finite-type conclusion back to the slice-site kernel.
   have : (kernel (E.functor.map (P.generators.π ≫ A.map (cokernel.π f)))).IsFiniteType := by
     simpa only [Functor.map_comp] using hN
-  have : (E.functor.obj (kernel (P.generators.π ≫ A.map (cokernel.π f)))).IsFiniteType := by
-    exact finiteType_of_iso (R := U.sheafRestrict.obj R) (PreservesKernel.iso E.functor
-      (P.generators.π ≫ A.map (cokernel.π f))).symm
-  have : (E.inverse.obj
-      (E.functor.obj (kernel (P.generators.π ≫ A.map (cokernel.π f))))).IsFiniteType :=
-    finiteType_equivOverInverse U _
-  exact finiteType_of_iso (R := R.over U)
-    (M := E.inverse.obj (E.functor.obj (kernel (P.generators.π ≫ A.map (cokernel.π f)))))
-    (E.unitIso.app (kernel (P.generators.π ≫ A.map (cokernel.π f)))).symm
+  exact finiteType_kernel_of_equivOver U (P.generators.π ≫ A.map (cokernel.π f))
 
 end AlgebraicGeometry.RingedSpace
