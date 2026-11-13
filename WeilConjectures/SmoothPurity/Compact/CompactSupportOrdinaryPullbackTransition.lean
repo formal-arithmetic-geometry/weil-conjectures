@@ -167,7 +167,9 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     ?_ ?_ ?_ ?_ N
   · intro Q
     dsimp only [Functor.comp_obj, Functor.comp_map]
-    exact systemEval_unit l E f m Q
+    have hu := systemEval_unit l E f m Q
+    trace_state
+    exact hu
   · intro Q
     dsimp only [Functor.comp_obj, Functor.comp_map]
     exact systemEval_unit l E f n Q
