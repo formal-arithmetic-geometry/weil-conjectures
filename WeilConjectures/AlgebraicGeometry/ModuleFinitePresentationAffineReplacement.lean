@@ -168,6 +168,7 @@ private theorem fp_free_slice {X : Scheme.{u}} (U : X.Opens) (n : ℕ) :
       ⟨inferInstanceAs (Finite PEmpty.{u + 1})⟩⟩
   exact P.isFinitePresentation
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Slice equivalences and iterated restriction comparisons require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
