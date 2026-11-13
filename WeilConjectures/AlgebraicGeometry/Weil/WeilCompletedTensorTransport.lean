@@ -36,10 +36,48 @@ private theorem tensor_unit_iso_cancel
     ← rightUnitor_inv_naturality_assoc]
   simp only [Iso.hom_inv_id_assoc, whiskerLeft_id, Category.id_comp]
 
+private theorem tensor_transport_unit_component
+    {B D : Type*} [Category* B] [Category* D] [Preadditive B] [Preadditive D]
+    [MonoidalCategory B] [MonoidalCategory D]
+    [(curriedTensor B).PreservesZeroMorphisms]
+    [∀ M, ((curriedTensor B).obj M).PreservesZeroMorphisms]
+    [(curriedTensor D).PreservesZeroMorphisms]
+    [∀ M, ((curriedTensor D).obj M).PreservesZeroMorphisms]
+    [HasColimitsOfSize.{0, 0} B] [HasColimitsOfSize.{0, 0} D]
+    (F : B ⥤ D) [F.Additive] [PreservesColimitsOfSize.{0, 0} F]
+    (τ : (Functor.postcompose₂.obj F).obj (curriedTensor B) ≅
+      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))
+    (c : 𝟙_ D ⟶ F.obj (𝟙_ B))
+    (P K : CochainComplex B ℤ) (N : CochainComplex D ℤ)
+    (v : (F.mapHomologicalComplex (.up ℤ)).obj P ≅ N)
+    (q : ℤ) (b : 𝟙_ B ⟶ K.X 0) (z : N.X q ≅ F.obj (P.X q))
+    (hz : v.hom.f q = z.inv)
+    (hτ : F.map (ρ_ (P.X q)).inv ≫ (τ.hom.app (P.X q)).app (𝟙_ B) =
+      (ρ_ (F.obj (P.X q))).inv ≫ F.obj (P.X q) ◁ c) :
+    z.hom ≫ F.map ((ρ_ (P.X q)).inv ≫ P.X q ◁ b ≫
+      HomologicalComplex.ιMapBifunctor P K (curriedTensor B) (.up ℤ)
+        q 0 q (add_zero q)) ≫
+      (HomologicalComplex.mapBifunctorComparison τ.hom (.up ℤ) P K ≫
+        HomologicalComplex.mapBifunctorMap v.hom
+          (𝟙 ((F.mapHomologicalComplex (.up ℤ)).obj K)) (curriedTensor D) (.up ℤ)).f q =
+      (ρ_ (N.X q)).inv ≫ N.X q ◁ (c ≫ F.map b) ≫
+        HomologicalComplex.ιMapBifunctor N ((F.mapHomologicalComplex (.up ℤ)).obj K)
+          (curriedTensor D) (.up ℤ) q 0 q (add_zero q) := by
+  have hn := (τ.hom.app (P.X q)).naturality b
+  change F.map (P.X q ◁ b) ≫ (τ.hom.app (P.X q)).app (K.X 0) =
+    (τ.hom.app (P.X q)).app (𝟙_ B) ≫ F.obj (P.X q) ◁ F.map b at hn
+  simp only [Functor.map_comp, HomologicalComplex.comp_f, Category.assoc]
+  rw [HomologicalComplex.mapBifunctorComparison_f,
+    HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX_assoc,
+    HomologicalComplex.ι_mapBifunctorMap]
+  simp only [HomologicalComplex.id_f, curriedTensor_map_app, curriedTensor_obj_map, hz]
+  dsimp only [HomologicalComplex.mapBifunctorComparisonApp]
+  rw [reassoc_of% hn, reassoc_of% hτ]
+  exact tensor_unit_iso_cancel z c (F.map b) _
+
 attribute [local irreducible] completedCechModulesEquiv intrinsicPresentationRoundTrip
   pbcCompletedComparison
 
-set_option maxHeartbeats 700000 in
 -- Elaborate the unbounded tensor comparison across the two coefficient models.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -136,30 +174,8 @@ theorem completedCechTensorTransport
   let K := completedKoszulPowerSheaf X (intrinsicPresentationDatum d) r a m
   let b := completedKoszulSheafUnitZero X (intrinsicPresentationDatum d) r a m
   let z := G.mapIso (η.app (C.X q))
-  have hs := HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
-    τ.hom (.up ℤ) P K q 0 q (add_zero q)
-  change F.map (HomologicalComplex.ιMapBifunctor P K (curriedTensor _) (.up ℤ)
-    q 0 q (add_zero q)) ≫ _ = _ at hs
-  have hn := (τ.hom.app (P.X q)).naturality b
-  change F.map (P.X q ◁ b) ≫ (τ.hom.app (P.X q)).app (K.X 0) =
-    (τ.hom.app (P.X q)).app (𝟙_ _) ≫ F.obj (P.X q) ◁ F.map b at hn
-  rw [G.map_comp]
-  change (G.map (η.hom.app (C.X q)) ≫
-      G.map ((intrinsicPresentationModulesBack X d).map
-        ((ρ_ (P.X q)).inv ≫ P.X q ◁ b ≫
-          HomologicalComplex.ιMapBifunctor P K (curriedTensor _) (.up ℤ)
-            q 0 q (add_zero q)))) ≫
-      (HomologicalComplex.mapBifunctorComparison τ.hom (.up ℤ) P K ≫
-        HomologicalComplex.mapBifunctorMap v.hom (𝟙 (H.obj K))
-          (curriedTensor _) (.up ℤ)).f q = _
-  simp only [Functor.map_comp, HomologicalComplex.comp_f, Category.assoc]
-  erw [HomologicalComplex.mapBifunctorComparison_f, reassoc_of% hs,
-    HomologicalComplex.ι_mapBifunctorMap]
-  simp only [HomologicalComplex.id_f, curriedTensor_map_app, curriedTensor_obj_map]
-  dsimp only [HomologicalComplex.mapBifunctorComparisonApp]
-  erw [reassoc_of% hn, reassoc_of% hτ (P.X q)]
-  exact tensor_unit_iso_cancel z (completedCechCoefficientUnit X d) (F.map b)
-    (HomologicalComplex.ιMapBifunctor N (H.obj K) (curriedTensor _) (.up ℤ)
-      q 0 q (add_zero q))
+  rw [G.map_comp, Category.assoc]
+  exact tensor_transport_unit_component F τ (completedCechCoefficientUnit X d)
+    P K N v q b z rfl (hτ (P.X q))
 
 end AlgebraicGeometry.Scheme
