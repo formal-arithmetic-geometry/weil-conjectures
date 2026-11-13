@@ -155,7 +155,54 @@ theorem openComparison_structure_class (A : Type u) [CommRing A]
     F.map i.inv (derivedStructureGlobalOne U.toScheme) =
       openComparisonRestrictedUnit A U C
         ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A))) := by
-  sorry
+  intro T F O K L C η₀ η j i
+  let B := (moduleRings U.toScheme.toRingedSpace).obj.obj (op ⊤)
+  let := HasDerivedCategory.standard (ModuleCat.{u} B)
+  let S := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) 0
+  let Φ := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) 0
+  let J := (T.mapHomologicalComplex (.up ℤ)).obj C
+  let V := (S.mapHomologicalComplex (.up ℤ)).obj J
+  let D := (CochainComplex.singleFunctor
+    (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj
+      (SheafOfModules.unit (moduleRings U.toScheme.toRingedSpace))
+  let e : J ≅ D :=
+    (T.mapHomologicalComplex (.up ℤ)).mapIso (openComparisonStructureComplexIso A) ≪≫
+      (HomologicalComplex.singleMapHomologicalComplex T (.up ℤ) 0).app _ ≪≫
+      (CochainComplex.singleFunctor
+        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).mapIso
+          (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U _)
+  let VD := (S.mapHomologicalComplex (.up ℤ)).obj D
+  let ε : VD.homology 0 ≅ ModuleCat.of B B :=
+    (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso
+      ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) 0).app _) ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)
+  have hi : i.inv = DerivedCategory.Q.map e.inv ≫ T.mapDerivedCategoryFactors.inv.app C := by
+    exact exact_single_iso T (openComparisonStructureComplexIso A)
+      (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U _)
+  have ho : HomologicalComplex.homologyMap
+      ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 (ε.inv (1 : B)) =
+      (openComparisonOrdinaryIso A U C).inv
+        ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A))) := by
+    exact openComparison_ordinary_structure_class A U
+  have hn := complexUnit_homology_naturality S e.inv
+  have hn' := congrArg (fun f ↦ f (ε.inv (1 : B))) hn
+  simp only [ModuleCat.comp_apply] at hn'
+  dsimp only [derivedStructureGlobalOne]
+  rw [hi, F.map_comp]
+  change F.map (T.mapDerivedCategoryFactors.inv.app C)
+      (H.map (S.rightDerivedFunctor.map (DerivedCategory.Q.map e.inv))
+        (H.map ((openComparisonComplexUnit S).app D)
+          ((Φ.app VD).inv (ε.inv (1 : B))))) = _
+  calc
+    _ = F.map (T.mapDerivedCategoryFactors.inv.app C)
+        (H.map ((openComparisonComplexUnit S).app J)
+          ((Φ.app V).inv
+            (HomologicalComplex.homologyMap
+              ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 (ε.inv (1 : B))))) :=
+      congrArg (fun z ↦ F.map (T.mapDerivedCategoryFactors.inv.app C) z) hn'.symm
+    _ = _ := congrArg (fun z ↦ F.map (T.mapDerivedCategoryFactors.inv.app C)
+      (H.map ((openComparisonComplexUnit S).app J) ((Φ.app V).inv z))) ho
 
 end
 end AlgebraicGeometry
