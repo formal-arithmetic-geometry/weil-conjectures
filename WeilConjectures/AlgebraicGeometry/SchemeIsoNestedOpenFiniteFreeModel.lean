@@ -93,6 +93,11 @@ theorem exists_scheme_iso_nested_open_finite_free_model
   classical
   let j := U.ι ≫ s.hom
   let W := j ''ᵁ V
+  -- The free modules and abelian structures use the same two sheafification sites.
+  let : ((Opens.grothendieckTopology U.toScheme.toRingedSpace).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  let : ((Opens.grothendieckTopology Y.toRingedSpace).over W).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   let a := j.isoImage V
   let EV := Modules.overEquiv V
   let EW := Modules.overEquiv W

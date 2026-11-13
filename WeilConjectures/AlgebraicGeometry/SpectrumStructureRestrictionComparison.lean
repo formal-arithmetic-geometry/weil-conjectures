@@ -101,6 +101,7 @@ theorem exists_spectrum_structure_restriction_comparison
               (Modules.overEquiv V)).mapDerivedCategory ⋙ G.functor) := by
   classical
   subst V
+  obtain ⟨eO, ⟨hO⟩⟩ := exists_scheme_iso_derived_restriction_square s e he U
   let := SheafOfModules.monoidalCategory X.sheaf
   let := (SheafOfModules.tensorClosed X.sheaf).1.some
   let V := s.hom ⁻¹ᵁ U
@@ -115,7 +116,7 @@ theorem exists_spectrum_structure_restriction_comparison
       ((moduleRings X.toRingedSpace).over U)) := inferInstance
   let : Abelian (SheafOfModules.{u}
       (moduleRings U.toScheme.toRingedSpace)) := inferInstance
-  obtain ⟨hLoc⟩ := hasDerivedCategory_of_equivalence EV.symm
+  let hLoc := Classical.choice (hasDerivedCategory_of_equivalence EV.symm)
   let := hLoc
   let EU : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Modules.overEquiv U
@@ -129,7 +130,6 @@ theorem exists_spectrum_structure_restriction_comparison
   have : EU.inverse.Additive := Functor.additive_of_preserves_binary_products _
   let dV := EV.mapDerivedCategory
   let dU := EU.mapDerivedCategory
-  obtain ⟨eO, ⟨hO⟩⟩ := exists_scheme_iso_derived_restriction_square s e he U
   let G := (dV.symm.trans eO).trans dU
   refine ⟨hLoc, G, ?_, ?_⟩
   · let M := SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)
