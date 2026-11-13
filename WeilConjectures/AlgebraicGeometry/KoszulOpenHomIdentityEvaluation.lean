@@ -25,6 +25,42 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem koszulOpen_structure_evaluation_fast
+    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
+    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))]
+    [HasDerivedCategory.{v} (ModuleCat.{u} A)] :
+    let R := ((SheafOfModules.overFunctor.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u}
+          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
+        (D := SheafOfModules.{u}
+          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
+    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
+    let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
+    ∃ b : ∀ E : schemeDerivedCategory (Spec (.of A)),
+      (R.obj (koszulOpenStructure A) ⟶ R.obj E) ≃ H.obj (G.obj E),
+      (∀ (E E' : schemeDerivedCategory (Spec (.of A))) (g : E ⟶ E')
+        (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E),
+        b E' (ψ ≫ R.map g) = H.map (G.map g) (b E ψ)) ∧
+      ∀ (e : ℕ) (v : R.obj (koszulOpenStructure A) ⟶
+          R.obj (koszulOpenObject A r f e)),
+        R.map (koszulOpenUnit A r f e) ≫ v = 𝟙 _ →
+        b (koszulOpenObject A r f e) v =
+          H.map (koszulCechDerivedComparison A r f (koszulOpenSheafComplex A r f e))
+            (H.map (DerivedCategory.Q.map (colimit.ι
+              (koszulCechHomDiagram A r f
+                (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj
+                  (koszulOpenSheafComplex A r f e))) e))
+              (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _))) := by
+  exact koszulOpen_structure_evaluation.{u, w, v} A r f
+
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
 /-- Natural evaluation, normalized only on the identity of each Koszul tail.
@@ -101,7 +137,7 @@ theorem koszulOpenHom_identity_evaluation
         (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj
           (koszulOpenSheafComplex A r f e))) e))
         (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))
-  obtain ⟨b, hb, h₀⟩ := koszulOpen_structure_evaluation.{u, w, v} A r f
+  obtain ⟨b, hb, h₀⟩ := koszulOpen_structure_evaluation_fast.{u, w, v} A r f
   refine ⟨b, hb, ?_⟩
   intro e v hv
   change R.map (koszulOpenUnit A r f e) ≫ v = 𝟙 _ at hv
