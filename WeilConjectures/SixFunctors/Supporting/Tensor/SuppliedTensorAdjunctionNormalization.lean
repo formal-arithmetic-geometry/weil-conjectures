@@ -259,38 +259,53 @@ private theorem privateSuppliedTensorAdjunction_normalized
       (suppliedTensor_mate_linear_iff f RI I c hc M H)
   have hB M H a : (mset B).map (B' M H a) ≫ eP.hom.app H =
       f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
-    rw [restrictHomEquiv_map]
-    exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
+    exact (congrArg (fun b ↦ b ≫ eP.hom.app H)
+      (restrictHomEquiv_map (mset RI) (mset B) (E M H)
+        (suppliedTensor_mate_linear_iff f RI I c hc M H) a)).trans
+      (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
   have hBL {M N} (a : M ⟶ N) H b :
       B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
     apply (mset B).map_injective
     apply (cancel_mono (eP.hom.app H)).mp
-    rw [hB, (mset B).map_comp, Category.assoc, hB, (mset RI).map_comp]
     have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
         f.inverse.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc, f.adj.homEquiv_naturality_left]
+    calc
+      _ = f.adj.homEquiv _ _ (eI.inv.app M ≫
+          (mset RI).map (I.modules.map a ≫ b)) := hB M H _
+      _ = (mset B).map a ≫
+          f.adj.homEquiv _ _ (eI.inv.app N ≫ (mset RI).map b) := by
+        rw [(mset RI).map_comp, ← Category.assoc, hn, Category.assoc,
+          f.adj.homEquiv_naturality_left]
+      _ = _ := by simp only [Functor.map_comp, Category.assoc, hB]
   have hBR M {H H'} a (b : H ⟶ H') :
       B' M H' (a ≫ (restrictScalars ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = B' M H a ≫ f.modules.map b := by
     apply (mset B).map_injective
     apply (cancel_mono (eP.hom.app H')).mp
-    rw [hB, (mset B).map_comp, Category.assoc]
     have hn : (mset B).map (f.modules.map b) ≫ eP.hom.app H' =
         eP.hom.app H ≫ f.direct.map ((mset A).map b) := eP.hom.naturality b
-    rw [hn, ← Category.assoc, hB, (mset RI).map_comp]
-    change f.adj.homEquiv _ _ (eI.inv.app M ≫
-      ((mset RI).map a ≫ (mset A).map b)) = _
-    rw [← Category.assoc, f.adj.homEquiv_naturality_right]
+    calc
+      _ = f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map
+          (a ≫ (restrictScalars ((sheafCompose J
+            (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b)) := hB M H' _
+      _ = f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) ≫
+          f.direct.map ((mset A).map b) := by
+        rw [(mset RI).map_comp]
+        change f.adj.homEquiv _ _ (eI.inv.app M ≫
+          ((mset RI).map a ≫ (mset A).map b)) = _
+        rw [← Category.assoc, f.adj.homEquiv_naturality_right]
+      _ = ((mset B).map (B' M H a) ≫ eP.hom.app H) ≫
+          f.direct.map ((mset A).map b) :=
+        congrArg (fun g ↦ g ≫ f.direct.map ((mset A).map b)) (hB M H a).symm
+      _ = _ := by simp only [Functor.map_comp, Category.assoc, hn]
   let T := I.modules ⋙ tensorFunctor c
   let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ f.modules.obj H) :=
     fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
   have hEL {M N} (a : M ⟶ N) H (b : T.obj N ⟶ H) :
       E' M H (T.map a ≫ b) = a ≫ E' N H b := by
-    dsimp only [E', Equiv.trans_apply, T, Functor.comp_map]
-    change B' M H ((tensorAdjunction c).homEquiv (I.modules.obj M) H
-      ((tensorFunctor c).map (I.modules.map a) ≫ b)) = _
-    rw [(tensorAdjunction c).homEquiv_naturality_left, hBL]
-    rfl
+    exact (congrArg (B' M H)
+      ((tensorAdjunction c).homEquiv_naturality_left (I.modules.map a) b)).trans
+      (hBL a H _)
   let am : T ⊣ f.modules := Adjunction.mkOfHomEquiv {
     homEquiv := E'
     homEquiv_naturality_left_symm := by
@@ -305,16 +320,11 @@ private theorem privateSuppliedTensorAdjunction_normalized
       exact hBR M ((tensorAdjunction c).homEquiv (I.modules.obj M) H a) b }
   refine ⟨am, ?_⟩
   intro M H v
-  dsimp only [am]
-  rw [Adjunction.mkOfHomEquiv_homEquiv]
   change (mset B).map
     (B' M H ((tensorAdjunction c).homEquiv (I.modules.obj M) H v)) ≫
       eP.hom.app H = _
-  rw [hB]
-  change f.adj.homEquiv _ _ (eI.inv.app M ≫
-    (mset RI).map ((tensorAdjunction c).homEquiv (I.modules.obj M) H v)) = _
-  rw [tensorAdjunction_underlying]
-  rfl
+  exact (hB M H _).trans (congrArg (fun a ↦ f.adj.homEquiv _ _ (eI.inv.app M ≫ a))
+    (tensorAdjunction_underlying c (I.modules.obj M) H v))
 
 set_option profiler true in
 -- Transporting the scalar-extension presentation uses dependent functor equalities.
