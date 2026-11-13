@@ -290,27 +290,7 @@ private theorem integral_derived_unit
 
 /-- Naturality of normalized ordinary boundary classes after comparison inverse
 image, with the supported-source mates still displayed in the coefficient map.
-This asserts only an Ext equality, not a scalar-unit universal property.
-Source: blueprint sk-lem-geo-cartier.proof.md, finite coefficient extension and
-opening comparison paragraphs (blueprint: lem-sfb-cartier-boundary-scalar-square).
-Proof: Represent each ordinary class by its relative supported Kummer boundary.
-The pole extension and its complementary splitting are independent of coefficients.
-Successive derived extension from the integral supported constant, first to Z/N,
-then to R and S, gives the same boundary under the tensor associativity map
-(x tensor r) tensor s mapped to x tensor phi(r)s. The supported constant and roots
-line are flat over the source coefficient sheaf, so their derived extensions have
-the ordinary degree-zero source and target even for a nonflat coefficient map.
-The normalized units send constants r to phi(r) and pure roots r tensor z to
-phi(r) tensor z. Thus this scalar naturality is an equality for the specified
-maps, rather than for arbitrary comparison isomorphisms. Relative-boundary
-uniqueness identifies the two resulting Ext representatives with kR and kS.
-Apply exact comparison inverse image to this ordinary square. The comparison
-adjunction unit preserves the two generator formulas. Constant and root generators
-locally generate the sheafified sources, so the supplied eta and theta agree with
-these transported coefficient maps. The closed-source mate then identifies the
-source coefficient map with the displayed composite through the inverse S mate.
-Naturality of exact-functor Ext and Yoneda composition gives the stated equality.
-For empty support or zero coefficients this is an equality of zero classes. -/
+This asserts only an Ext equality, not a scalar-unit universal property. -/
 theorem geoCartier_boundary_scalar_square
     (R S : Type (u + 1)) [CommRing R] [CommRing S] [Finite R] [Finite S]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (hS : (N : S) = 0)

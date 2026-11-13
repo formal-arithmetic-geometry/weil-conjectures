@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! # Derived evaluation and coefficient comparison for a fixed ordinary realization
 
 Source: Zheng Construction 4.1, the paragraph preceding Lemma 4.10 and Lemma 4.10.
-(blueprint: lem-coef-semilinear-geometric-derived-evaluation)
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +42,7 @@ variable (A : Data.{c, v, r} J B τ)
 
 /-- The derived right-evaluation and scalar comparisons of a fixed ordinary realization.
 The left evaluation and both derived adjunctions are fixed canonical localizations.
-Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-coef-semilinear-geometric-derived-evaluation). -/
+Source: Zheng Construction 4.1 and Lemma 4.10. -/
 structure GeometryEvaluation where
   /-- Derived direct-image evaluation; no K-injective evaluation assumption is made. -/
   pushEvaluation : ∀ n : ℕ,
@@ -95,26 +93,7 @@ structure GeometryEvaluation where
 
 /-- Derived direct-image evaluation is obtained by conjugating singleton extension.
 Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10, printed pp. 21, 23;
-Stacks 03EL and 07A6.
-(blueprint: lem-coef-semilinear-geometric-derived-evaluation).
-
-Proof: compatibility for every composite coefficient map follows by induction from
-the adjacent compatibility, using preservation of composition. Apply the existing
-exists_scalarInverseImageIndependent theorem to the actual ordinary scalar adjunctions.
-Its unit equation and the identity-on-underlying-sheaves restriction comparison fix
-the scalar mate. Resolve by flat-term K-flat complexes, where inverse image preserves
-both flatness and K-flatness, and localize. The scalar transpose formula follows from
-the ordinary adjunction formula and naturality of the resolving comparison.
-For evaluation at n use the finite left extension E_n: below n it is coefficient
-extension, and above n it is zero.
-The just-constructed scalar comparison gives V E_n ≅ E'_n V_n on these representatives,
-and hence V L_n ≅ L'_n V_n after localization. Conjugate its inverse through the
-composite adjunctions L_n V ⊣ G e_n and V_n L'_n ⊣ e'_n G_n. This gives the displayed
-push evaluation isomorphism. At level n, the singleton comparison is the ordinary
-multiplication identification; its unit equation follows on representatives from
-the ordinary unit-evaluation equation. The conjugate unit and counit identities give
-exactly the two displayed derived unit/counit equations. This proof does not assume
-that evaluation preserves K-injectives or detects equality of derived morphisms. -/
+Stacks 03EL and 07A6. -/
 theorem semilinearGeometryEvaluation [PreservesFiniteLimits uInv] :
     Nonempty (GeometryEvaluation.{c, v, r} J B τ J' uInv uPush adjSet A O target) := by
   classical

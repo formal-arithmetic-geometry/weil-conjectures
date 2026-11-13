@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 /-!
 # The exact derived unit on one compatible compactification tower
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E
-(blueprint: lem-sfb-exact-compactification-unit-tower).
+Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
 -/
 
 @[expose] public section
@@ -465,18 +464,7 @@ private lemma canonical_derived_tower
 
 /-- The forward unit equation on a single compatible proper/open tower. No invertibility
 of the units, family of compactifications, or chosen-compactification comparison is required.
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E
-(blueprint: lem-sfb-exact-compactification-unit-tower).
-
-Proof: take the ordinary mate of inverse open base change, and normalize it by its
-composite with the support inclusion. Open composition and ordinary direct-image
-associativity show that the resulting sheaf tower map has the normalization in the
-hypothesis; monicity of the compactification inclusion identifies it with a. The mixed
-derived mate respects the right-derived units by their adjunction factorization formulas.
-Paste that identity with direct-image composition and the exact-derived triangle for the
-open immersions. After precomposition with the fully faithful homotopy localization,
-naturality reduces the equality to the ordinary sheaf tower map. The generic categorical
-calculations are proved in the two supporting modules. No resolutions are chosen here. -/
+Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
 theorem exactCompactificationUnit_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T B : Scheme.{u}} [IsNoetherian V] [IsNoetherian T] [IsNoetherian B]

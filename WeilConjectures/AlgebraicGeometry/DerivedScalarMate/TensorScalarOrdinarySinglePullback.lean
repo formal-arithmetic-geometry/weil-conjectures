@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
 /-! # Ordinary tensor pullback with a single coefficient
 
 Source: Stacks Project, Tags 03EL and 07A4.
-(blueprint: lem-sfb-tensor-scalar-ordinary-single-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -122,15 +121,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint proEtaleRingMod
 set_option backward.defeqAttrib.useBackward true
 
 /-- The single-coefficient total pullback is tensor pullback in every degree.
-Source: Stacks Tags 03EL and 07A4
-(blueprint: lem-sfb-tensor-scalar-ordinary-single-pullback).
-
-Proof: the inverse total comparison is the bifunctor comparison, as verified on
-homogeneous summands. Apply the existing single-factor component comparison.
-Functoriality separates the single-complex coefficient isomorphism into its
-singleMapHomologicalComplex and coefficientPullback factors. Naturality in the
-coefficient and the two inverse identities cancel the target single-factor
-isomorphism, leaving ordinary tensor pullback followed by the coefficient map. -/
+Source: Stacks Tags 03EL and 07A4. -/
 theorem tensorScalarOrdinaryPullback_single_f {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (P : CochainComplex (proEtaleRingModules T A) ℤ) (n : ℤ) :

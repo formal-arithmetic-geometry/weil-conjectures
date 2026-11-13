@@ -526,8 +526,7 @@ private theorem actualCommonTransition_id {X Y : Scheme.{u}} (g : Y ⟶ X)
     (actualCommonTransition_comp g d M n n n le_rfl le_rfl).symm
 
 /-- The consecutive actual transitions, restricted to the common constant coefficient ring.
-Source: Stacks Tags 03DA and 06YY.
-(blueprint: lem-weil-pbc-constant-adic-restricted-tower-maps). -/
+Source: Stacks Tags 03DA and 06YY. -/
 def constantAdicRestrictedStep {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : AdicTower X d) (n : ℕ) :=
@@ -540,8 +539,7 @@ def constantAdicRestrictedStep {X Y : Scheme.{u}} (g : Y ⟶ X)
         ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj (M.level n))
 
 /-- The sequential diagram built from the actual consecutive transitions.
-Source: Stacks Tags 03DA and 06YY.
-(blueprint: lem-weil-pbc-constant-adic-restricted-tower-maps). -/
+Source: Stacks Tags 03DA and 06YY. -/
 def constantAdicRestrictedTower {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : AdicTower X d) :
@@ -555,22 +553,7 @@ def constantAdicRestrictedTower {X Y : Scheme.{u}} (g : Y ⟶ X)
 /-- Composing consecutive transitions recovers every actual normalized transition.
 No local systems, bounds, stalk models, markings or covering are used.
 
-Source: Stacks Tags 03DA and 06YY; the semilinear cocycle in
-`def-weil-pbc-bounded-constructible-tower`.
-(blueprint: lem-weil-pbc-constant-adic-restricted-tower-maps).
-
-Proof: scalar restriction compositors are identity on underlying sections, so their
-associativity is checked sectionwise. The inverse-image/scalar-restriction comparisons
-are the mates of the corresponding identity squares and preserve this pasting identity.
-Apply exact derived localization to both identities. Apply these identities to M.cocycle
-and use naturality of the compositors: the displayed restricted all-pairs arrows compose.
-For equal indices M.transition identifies the arrow, after restriction along the completed
-projection, with the identity of the derived evaluation. Exact scalar restriction
-reflects isomorphisms, as checked on homology. Thus the equal-index arrow is invertible.
-Its cocycle makes it idempotent, so cancellation gives the identity. The same pasting
-identity gives identity after restriction to the constant ring. Induction on the
-difference of the indices now identifies the actual arrow with the arrow of the
-sequential diagram; the successor case is its defining step. -/
+Source: Stacks Tags 03DA and 06YY. -/
 theorem constantAdicRestrictedTower_map {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : AdicTower X d) (m n : ℕ) (h : n ≤ m) :

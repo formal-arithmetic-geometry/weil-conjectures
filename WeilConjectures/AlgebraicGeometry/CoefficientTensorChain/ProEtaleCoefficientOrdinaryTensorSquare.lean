@@ -230,18 +230,7 @@ private theorem invert_square {A : Type*} [Category* A]
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.hom_inv_id, Iso.inv_hom_id, Category.comp_id] using hh.symm
 
-/-- Coefficient restriction commutes with the canonical ordinary tensor pullback.
-
-Source: Stacks, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback.
-(blueprint: lem-pbc-coefficient-restriction-ordinary-tensor-square)
-
-Proof: apply the module pullback adjunction to the inverse-oriented square.
-The mate-unit identity and the sectionwise identity direct-image comparison show
-that inverse coefficient transport preserves the pullback unit. Both geometric
-tensor maps carry unit pure tensors to the tensor of the two unit sections.
-The supplied restriction tensorator fixes pure sections, and tensor functoriality
-identifies the other route. Sheafified pure-tensor extensionality proves equality.
-Finally cancel the ordinary tensor and coefficient isomorphisms to reverse the square. -/
+/-- Coefficient restriction commutes with the canonical ordinary tensor pullback. -/
 theorem ordinary_square
     (o : SheafOfModules.RingIsoTensorTransport
       (J := ProEt.topology X)

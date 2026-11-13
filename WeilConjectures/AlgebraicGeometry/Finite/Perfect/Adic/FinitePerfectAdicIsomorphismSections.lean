@@ -30,33 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 Their reduction and evaluation respect the actual strict tower arrows. This constructs
 no covering and chooses no compatible sections.
 
-Source: Stacks Project, Tags 09BV and 0F63, with the scalar comparisons of Tag 09C6;
-finite-level etale presentation and finite-ring derived local constancy.
-(blueprint: lem-weil-pbc-finite-perfect-adic-isomorphism-sections).
-
-Proof: Descend the actual finite quotient diagram on the chart by finite-ring derived
-comparison and its full faithfulness. Lift the supplied algebraic tower to the coefficient
-universe by the exact module equivalences. At each level take the etale sheaf of derived
-isomorphisms from its constant algebraic level to the descended quotient level. Both
-complexes are bounded with finite locally constant cohomology: the supplied perfect
-models give this locally, and boundedness is inherited from their single algebraic level.
-The finite-ring derived mapping-sheaf theorem makes this Isom sheaf finite locally
-constant. The separate local markings give nonempty geometric stalks. Use the two
-normalization universal arrows to define reduction on these sheaves, by conjugating
-scalar extension with the normalization isomorphisms. Sheafify the resulting presheaf
-maps; preservation of the generator normalization equation by source-site evaluation
-proves compatibility on weakly contractible affine pro-etale objects. Evaluate a section
-there and invert its isomorphism to orient it from the actual
-quotient toward the algebraic level. Forget quotient scalars, apply the normalized finite
-coefficient identifications and the constant/completed scalar comparison. The scalar
-compatibility of φ identifies the resulting maps with the actual levelwise arrows of the
-specified strict derived quotient system, rather than independent isomorphic quotients.
-Consecutive transition compatibility is precisely the adjunct normalization square.
-Finally apply exact slice restriction along any W → U; functoriality preserves these
-isomorphisms and their square, and the canonical composition comparison identifies the
-objects with restriction from X to W. All these constructions are finite-level; none
-requires an inverse limit or existence of a common trivializing covering. The zero ring,
-zero complexes and empty charts satisfy the same constructions. -/
+Source: Stacks Project, Tags 09BV and 0F63, with the scalar comparisons of Tag 09C6. -/
 theorem finitePerfectAdic_isomorphism_sections
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

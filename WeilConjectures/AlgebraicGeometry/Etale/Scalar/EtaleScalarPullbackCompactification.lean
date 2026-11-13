@@ -74,21 +74,7 @@ private theorem transport_composition
 
 /-- Scalar change commutes with the canonical compactification pullback compositor.
 Source: Stacks 0D6D and 03D8, scalar/pullback composition and transport through exact
-inverse image; step 2 of lem-pur-etale-open-scalar-projection.
-(blueprint: lem-pur-etale-scalar-pullback-compactification).
-
-Proof: replace the indexed morphism f by j followed by g using c.comm. Apply the
-existing exact scalarPullback_composition to j and g. Precompose its equality with
-the exact/left-derived comparison for the B-pullback of f, and postcompose with
-scalar extension of the inverse exact/left-derived comparison for j and g.
-Naturality of the comparison for j moves the comparison for g across it;
-naturality of scalarPullbackIso for j then cancels the comparison for g.
-The resulting equality is the forward scalar/pullback composition equality for
-the left-derived pullbacks, whose compositor is by definition the exact
-compositor conjugated by these exact/left-derived comparisons. Regard each
-composite as an isomorphism and take inverses. Transport through c.comm gives
-the displayed formula. Only functoriality, naturality and inverse cancellation
-are used; properness, flat coefficients and boundedness play no role. -/
+inverse image. -/
 theorem scalarPullback_compactification
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

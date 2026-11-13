@@ -13,7 +13,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-! # Single finite-level etale descent and its algebraic geometric fibre
 
 Source: Stacks Project, Tags 09C6, 09AL, 09B1 and 03PT.
-(blueprint: def-weil-pbc-finite-perfect-adic-etale-level-data).
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +25,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The exact derived geometric stalk in the finite coefficient universe.
-Source: Stacks Tag 03Q3; exactness of geometric stalks and Tag 05RU.
-(blueprint: def-weil-pbc-finite-perfect-adic-etale-level-data). -/
+Source: Stacks Tag 03Q3; exactness of geometric stalks and Tag 05RU. -/
 def finitePerfectAdicEtaleStalk (Y : Scheme.{t}) (B : Type (t + 1)) [CommRing B]
     (y : Y) : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} B)) ⥤
       DerivedCategory (ModuleCat.{t + 1} B) :=
@@ -37,8 +35,7 @@ def finitePerfectAdicEtaleStalk (Y : Scheme.{t}) (B : Type (t + 1)) [CommRing B]
 
 /-- Lift the module universe and transport coefficients along the ULift ring equivalence.
 This is an exact functor on the chosen derived localizations, constructed termwise.
-Source: Stacks Tag 05RU and Mathlib's exact module-universe lift.
-(blueprint: def-weil-pbc-finite-perfect-adic-etale-level-data). -/
+Source: Stacks Tag 05RU and Mathlib's exact module-universe lift. -/
 def finitePerfectAdicAlgebraLift (B : Type t) [CommRing B] :
     DerivedCategory (ModuleCat.{t} B) ⥤
       DerivedCategory (ModuleCat.{t + 1} (ULift.{t + 1} B)) :=
@@ -60,8 +57,7 @@ def finitePerfectAdicAlgebraLift (B : Type t) [CommRing B] :
 
 The comparison transports any supplied constant model, not merely the chosen fibre.
 There are no comparisons between different coefficient levels in these data.
-Source: Stacks Tags 09AL and 09B1; the single-level descent in Tag 09C6.
-(blueprint: def-weil-pbc-finite-perfect-adic-etale-level-data). -/
+Source: Stacks Tags 09AL and 09B1; the single-level descent in Tag 09C6. -/
 structure FinitePerfectAdicEtaleLevelData (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

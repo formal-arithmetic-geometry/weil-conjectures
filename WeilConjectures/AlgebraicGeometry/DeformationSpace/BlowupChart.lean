@@ -18,9 +18,9 @@ element `t·X` of the Rees algebra of `J` is the spectrum of the extended Rees a
 and the fractions `x / t`, `x ∈ I`.
 
 This is the affine-local comparison between the two descriptions of the deformation to the
-normal cone (blueprint `definition-deformation-normal-bundle`): the Rees model
-`Spec R[t, I t⁻¹]` used by `AlgebraicGeometry.Scheme.IdealSheafData.deformationSpace`, and the
-blow-up model `Bl_{V(I) × 0}(Spec R × 𝔸¹)`.
+normal cone: the Rees model `Spec R[t, I t⁻¹]` used by
+`AlgebraicGeometry.Scheme.IdealSheafData.deformationSpace`, and the blow-up model `Bl_{V(I) ×
+0}(Spec R × 𝔸¹)`.
 
 ## Main definitions
 
@@ -152,9 +152,7 @@ lemma chartToLaurent_mem (z) : chartToLaurent I z ∈ I.extendedReesAlgebra :=
   awayXEquivLaurent_mem_extendedReesAlgebra (homogeneousAwayToChart _ _ z).2
 
 /-- **The blow-up chart at `t·X` is the extended Rees algebra**: for `J = I R[t] + (t)`,
-`Away (reesGrading J) (t·X) ≃+* R[t, I t⁻¹]`, `x·Xⁿ / (t·X)ⁿ ↦ x t⁻ⁿ`.
-(Blueprint `definition-deformation-normal-bundle`, affine-local comparison of the Rees model with
-the blow-up model.) -/
+`Away (reesGrading J) (t·X) ≃+* R[t, I t⁻¹]`, `x·Xⁿ / (t·X)ⁿ ↦ x t⁻ⁿ`. -/
 noncomputable def chartEquivExtendedReesAlgebra :
     HomogeneousLocalization.Away (reesGrading (deformationCenter I))
       (reesX _ X X_mem_deformationCenter) ≃+* I.extendedReesAlgebra :=
@@ -190,7 +188,7 @@ lemma chartEquivExtendedReesAlgebra_comp_awayAlgebraMap :
 
 /-- **The Rees model of the deformation space is the chart `D₊(t·X)` of the blow-up**: the open
 immersion `Spec R[t, I t⁻¹] ⟶ Bl_J (Spec R[t])`, `J = I R[t] + (t)`, onto the basic open of
-`t·X`. (Blueprint `definition-deformation-normal-bundle`, affine-local form.) -/
+`t·X`. -/
 noncomputable def deformationChart :
     Spec (.of I.extendedReesAlgebra) ⟶ AffineBlowup (deformationCenter I) :=
   Spec.map (CommRingCat.ofHom (chartEquivExtendedReesAlgebra I).toRingHom) ≫

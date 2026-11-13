@@ -9,8 +9,6 @@ import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedCoefficie
 import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSourceQuotientNormalization
 import all WeilConjectures.AlgebraicGeometry.Supported.SupportedIntegralGeneratorSections
 /-! # The supported quotient tower as a tower of additive coefficient sheaves
-Source: diagonal tower system proof (3) and diagonal tower limit proof (1).
-(blueprint: lem-sfb-diagonal-supported-quotient-coefficient-tower).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -358,24 +356,7 @@ private theorem supportedQuotientGenerator (l n : ℕ) [Fact l.Prime] (Y : Schem
 
 /-- The normalized finite cokernel comparisons assemble into an abelian tower
 isomorphism. This statement involves only finite coefficients, with no completed
-source object or inverse-limit comparison.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-system.proof.md`, step (3),
-source paragraph, and `sk-prop-diagonal-tower-limit.proof.md`, paragraph (1).
-(blueprint: lem-sfb-diagonal-supported-quotient-coefficient-tower).
-
-Proof: the coefficient cokernel calculation and finite direct-image exactness identify
-each specified quotient with the supported finite constant module with scalars restricted
-along the p-adic residue projection. Forgetting scalars identifies it with the additive
-sheaf of the supported finite constant ring. The constant-sheaf/forgetful comparison
-preserves the sheafification unit. The normalized Cartier integral generator therefore
-becomes the direct image of the integer-cast map, namely
-`diagonalSupportedFiniteGenerator`. For consecutive levels, precompose the required
-naturality square with D's quotient at level n+1. Both sides then become the supported
-coefficient quotient map, by D.transition and the residue homomorphism equation. Cancel
-this epimorphism. Consecutive naturality gives a natural transformation on the opposite
-natural numbers, and the levelwise isomorphisms make it a natural isomorphism. No prime
-invertibility or derived category is used; the calculation includes n=0 and empty support. -/
+source object or inverse-limit comparison. -/
 theorem diagonal_supported_quotient_coefficient_tower (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u})
     (D : DiagonalReductionPresentation l (diagonalScalarExtension l (diagonalSurface Y))) :

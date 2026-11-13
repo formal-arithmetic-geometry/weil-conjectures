@@ -113,7 +113,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerOrdi
 /-! # Derived slice comparison for the finite quotient layer
 
 Source: Stacks Project, sites-cohomology.tex, Tags 094I and 06YU.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-derived-slice-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -557,14 +556,7 @@ isomorphic after restriction to the etale chart.  This is the derived-object
 comparison before applying exact slice homology.  It is the unresolved derived
 tensor and balancing step of the finite-layer argument.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 094I and 06YU.
-Proof: identify the kernel of the successive quotient with the ideal-power
-layer, use the compatible coefficient maps to balance the derived tensor, and
-transport the supplied residue-chart isomorphism through the derived tensor
-descent equivalence.  Restriction to the chart is exact and retains the
-successor coefficient action.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-derived-slice-comparison).
--/
+Source: Stacks Project, sites-cohomology.tex, Tags 094I and 06YU. -/
 theorem finiteQuotient_layer_tensor_derived_slice_comparison
     (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

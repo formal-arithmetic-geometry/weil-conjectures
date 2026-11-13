@@ -13,12 +13,10 @@ public import Mathlib.CategoryTheory.Pi.Monoidal
 
 /-! # Normalization interface for clopen derived tensor restriction
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT;
-finite-clopen application, steps 8-9 of the tensor-calculus construction
-(blueprint: lem-pur-clopen-kflat-monoidal-descent).
+Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT.
 
-Restriction and its localization comparison are those of the module-gluing and unbounded
-localization nodes. The native derived tensor carries the prescribed total-tensor constraints.
+Restriction and its localization comparison are those of module gluing and unbounded
+localization. The native derived tensor carries the prescribed total-tensor constraints.
 -/
 
 @[expose] public noncomputable section
@@ -45,35 +43,35 @@ attribute [local irreducible] DerivedCategory.Q Functor.mapDerivedCategory
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 
 /-- The existing abelian structure with the module universe fixed explicitly.
-Source: Stacks 03D7 (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 03D7. -/
 instance modulesAbelian {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     Abelian (clopenTensorModules.{t, u} R) :=
   ClopenLocalization.modulesAbelian.{t, max u (t + 1), u, 0} _
 
 /-- Exact restriction preserves finite limits.
-Source: Stacks 015F (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 015F. -/
 instance restrictionLimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteLimits (clopenTensorRestriction.{t, u} j R) :=
   ClopenLocalization.restrictionLimits.{t, max u (t + 1), u, 0} j _
 
 /-- Exact restriction preserves finite colimits.
-Source: Stacks 015F (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 015F. -/
 instance restrictionColimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteColimits (clopenTensorRestriction.{t, u} j R) :=
   ClopenLocalization.restrictionColimits.{t, max u (t + 1), u, 0} j _
 
 /-- Standard unbounded localization in the fixed module universe.
-Source: Stacks 05RU (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 05RU. -/
 instance hasDerived {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     HasDerivedCategory.{max (u + 1) (t + 2)} (clopenTensorModules.{t, u} R) :=
   HasDerivedCategory.standard (clopenTensorModules.{t, u} R)
 
 /-- The existing native K-flat monoidal structure, with its prescribed associator and units.
-Source: Stacks 06YU, 0FPT (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 06YU, 0FPT. -/
 @[instance_reducible]
 instance monoidal {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
@@ -81,7 +79,7 @@ instance monoidal {X : Scheme.{t}}
   RingedDerivedNative.monoidal.{t + 1, t, u} (topology X) R
 
 /-- The existing native Koszul symmetry, including its involutivity.
-Source: Stacks 0FPT (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 0FPT. -/
 @[instance_reducible]
 instance symmetric {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
@@ -90,7 +88,7 @@ instance symmetric {X : Scheme.{t}}
 
 /-- The specified exact localization of the dependency's actual restriction.
 No representatives, roofs or derived equivalences are chosen here.
-Source: Stacks 015F, 06YU (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 015F, 06YU. -/
 abbrev derivedRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     DerivedCategory (clopenTensorModules.{t, u} R) ⥤
@@ -100,7 +98,7 @@ abbrev derivedRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
       RingCat.{max u (t + 1)})).obj R)
 
 /-- The canonical degreewise localization comparison of the recorded exact restriction.
-Source: Stacks 015F, 06YU (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 015F, 06YU. -/
 def factors {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     (DerivedCategory.Q.{max (u + 1) (t + 2)} :
@@ -113,7 +111,7 @@ def factors {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   (clopenTensorRestriction.{t, u} j R).mapDerivedCategoryFactors
 
 /-- The bifunctor type of the displayed comparison, for all derived objects and morphisms.
-Source: Stacks 06YU, 0FPT (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 06YU, 0FPT. -/
 abbrev Comparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   tensor (DerivedCategory (clopenTensorModules.{t, u} R)) ⋙ derivedRestriction.{t, u} j R ≅
@@ -122,8 +120,7 @@ abbrev Comparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
 
 /-- The normalized total-complex comparison is exactly the dependency's one: ordinary
 local pure tensors and every direct-sum summand fix it. No bounds on complexes are imposed.
-Source: Stacks 0GMW, 06YN, 0FPQ
-(blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 0GMW, 06YN, 0FPQ. -/
 def TotalNormalization {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (clopenTensorRestriction.{t, u} j R).Braided)
@@ -158,8 +155,7 @@ def TotalNormalization {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
 /-- The K-flat computation square, with the canonical localization comparisons on all
 three complexes. The two routes are maps from restricted localized total tensor to the
 component derived tensor. Flatness is required degreewise, and K-flatness is unbounded.
-Source: Stacks 06YS, 0G7D, 06YU
-(blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 06YS, 0G7D, 06YU. -/
 def ModelNormalization {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙
@@ -194,7 +190,7 @@ def ModelNormalization {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
         ((clopenTensorComplexRestriction.{t, u} j R).obj Q) (Or.inl hiP)).hom
 
 /-- The inverse tensorator of a strong braided derived restriction, as a bifunctor iso.
-Source: Stacks 0FPT (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 0FPT. -/
 def braidedComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (d : (derivedRestriction.{t, u} j R).Braided) : Comparison.{t, u} j R :=
@@ -203,7 +199,7 @@ def braidedComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
 
 /-- The unit isomorphism is the localization of ordinary restriction of the ring module,
 with the canonical comparison for the degree-zero single complex.
-Source: Stacks 0FPT (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 0FPT. -/
 def unitComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (clopenTensorRestriction.{t, u} j R).Braided) :
@@ -236,7 +232,7 @@ def unitComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
       (topology Y) ((clopenTensorRings.{t, u} j).obj R)).symm
 
 /-- The unit isomorphism supplied by a strong braided functor.
-Source: Stacks 0FPT (blueprint: lem-pur-clopen-kflat-monoidal-descent). -/
+Source: Stacks 0FPT. -/
 def braidedUnit {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (d : (derivedRestriction.{t, u} j R).Braided) :

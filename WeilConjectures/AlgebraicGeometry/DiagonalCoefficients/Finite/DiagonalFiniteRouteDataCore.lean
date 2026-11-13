@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizationEndpoints
 
 /-! # Shared input predicates and finite realization record
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: def-diagonal-finite-route-data-core).
 -/
 
 @[expose] public noncomputable section

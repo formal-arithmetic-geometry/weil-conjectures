@@ -11,9 +11,7 @@ set_option linter.privateModule false
 
 /-! # Invertibility of the specified finite tensor-unit comparison
 
-Source: Stacks Project, Tags 03D2, 03D6 and 00WX; step 3 of
-`lem-weil-point-automorphism-derived-transport-inverse`.
-(blueprint: lem-weil-finite-comparison-complex-isomorphism)
+Source: Stacks Project, Tags 03D2, 03D6 and 00WX.
 -/
 
 @[expose] public noncomputable section

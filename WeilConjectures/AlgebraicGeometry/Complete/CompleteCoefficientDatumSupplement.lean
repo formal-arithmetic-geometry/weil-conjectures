@@ -45,10 +45,6 @@ public import WeilConjectures.AlgebraicGeometry.CompleteCoefficientDatum
 /-!
 # Adic coefficient datum and reduction tower
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md, order 1255
-(blueprint: def-weil-pbc-complete-coefficient-datum).
-
 The construction uses one K-flat model with flat terms. Quotient reductions are actual
 changed complexes. The ordinary balancing and transition maps are specified uniquely on
 local tensor generators; their images under localization are the canonical derived maps.
@@ -78,20 +74,17 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The constant commutative ring sheaf, before forgetting commutativity.
-Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- The constant commutative ring sheaf, before forgetting commutativity. -/
 noncomputable abbrev adicConstantRing (X : Scheme.{t}) (A : Type t) [CommRing A] :=
   (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj
     (CommRingCat.of (ULift.{t + 1, t} A))
 
-/-- The underlying constant ring sheaf used by the recorded pro-etale derived category.
-Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- The underlying constant ring sheaf used by the recorded pro-etale derived category. -/
 noncomputable abbrev adicModuleRing (X : Scheme.{t}) (A : Type t) [CommRing A] :=
   (sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (adicConstantRing X A)
 
-/-- The functorial constant sheaf map associated to a coefficient homomorphism.
-Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- The functorial constant sheaf map associated to a coefficient homomorphism. -/
 noncomputable def adicConstantMap (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B) :
     adicConstantRing X A ⟶ adicConstantRing X B :=
@@ -112,16 +105,14 @@ private theorem adicConstantMap_comp (X : Scheme.{t}) {A B C : Type t}
   rw [← Functor.map_comp]
   rfl
 
-/-- The same coefficient map, regarded as a map of ring sheaves.
-Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- The same coefficient map, regarded as a map of ring sheaves. -/
 noncomputable def adicModuleMap (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B) :
     adicModuleRing X A ⟶ adicModuleRing X B :=
   (sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map (adicConstantMap X φ)
 
-/-- Localization into the exact derived category recorded for the small pro-etale site.
-Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- Localization into the exact derived category recorded for the small pro-etale site. -/
 noncomputable def adicLocalization (X : Scheme.{t}) (A : Type t) [CommRing A] :
     CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ ⥤
       proEtaleDerivedCategory X A :=
@@ -129,8 +120,7 @@ noncomputable def adicLocalization (X : Scheme.{t}) (A : Type t) [CommRing A] :
 
 /-- One K-flat flat-term representative of the arbitrary derived object K. The realization
 is part of the choice of model, rather than a restriction on K.
-Source: blueprint order 1255, construction step 1; Stacks Tag 06YS
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+Source: Stacks Tag 06YS. -/
 structure AdicKFlatModel (X : Scheme.{t}) (Λ : Type t) [CommRing Λ]
     (K : proEtaleDerivedCategory X Λ) where
   complex : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ
@@ -141,17 +131,13 @@ structure AdicKFlatModel (X : Scheme.{t}) (Λ : Type t) [CommRing Λ]
   realization :
     (adicLocalization X Λ).obj complex ≅ K
 
-/-- Termwise scalar extension, with the target coefficient action retained.
-Source: blueprint order 1255, steps 1 and 3
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- Termwise scalar extension, with the target coefficient action retained. -/
 noncomputable abbrev adicChange (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ) :=
   SheafOfModules.changeOfRingsComplex.{t + 1, t} (adicConstantMap X φ) P
 
-/-- Termwise restriction of scalars, retaining the same abelian sheaves and differentials.
-Source: blueprint order 1255, step 2
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- Termwise restriction of scalars, retaining the same abelian sheaves and differentials. -/
 noncomputable abbrev adicRestrict (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X B)) ℤ) :=
@@ -159,8 +145,7 @@ noncomputable abbrev adicRestrict (X : Scheme.{t}) {A B : Type t}
     (ComplexShape.up ℤ)).obj P
 
 /-- The local pure tensor s tensor m, mapped into the sheafified scalar extension.
-Source: blueprint order 1255, steps 2 and 3; Stacks Tag 03EK
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def adicTensorSection (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B)
     (M : SheafOfModules.{t + 1} (adicModuleRing X A)) (U : X.ProEtᵒᵖ)
@@ -493,13 +478,7 @@ private noncomputable def adicSheafBalanceIso (X : Scheme.{t}) {A B C : Type t}
       map_one, one_mul]
 
 /-- The ordinary balancing map is uniquely specified on local tensor generators and is
-invertible. Source: blueprint order 1255, step 3; Stacks Tags 03EK and 0D6D.
-Proof: send s tensor (r tensor m) to (s * ψ(r)) tensor m. The balancing relations
-make this well-defined; restriction maps commute with the formula. Sheafification gives
-the sheaf morphism. Its inverse sends s tensor m to s tensor (1 tensor m).
-The differential acts only on m, so these are chain maps. The two composites are
-identities by the balancing relations. Local tensor generators prove uniqueness.
-(blueprint: def-weil-pbc-complete-coefficient-datum) -/
+invertible. Source: Stacks Tags 03EK and 0D6D. -/
 theorem adicBalance_exists (X : Scheme.{t}) {A B C : Type t}
     [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (h : ψ.comp φ = χ)
@@ -541,9 +520,7 @@ theorem adicBalance_exists (X : Scheme.{t}) {A B C : Type t}
     exact (hf.2 p U 1 r m).trans
       (adicSheafBalance_tensorSection X φ ψ χ h (P.X p) U 1 r m).symm
 
-/-- The uniquely characterized ordinary balancing chain map.
-Source: blueprint order 1255, step 3
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- The uniquely characterized ordinary balancing chain map. -/
 noncomputable def adicBalanceHom (X : Scheme.{t}) {A B C : Type t}
     [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (h : ψ.comp φ = χ)
@@ -551,11 +528,7 @@ noncomputable def adicBalanceHom (X : Scheme.{t}) {A B C : Type t}
     adicChange X ψ (adicChange X φ P) ⟶ adicChange X χ P :=
   Classical.choose (adicBalance_exists X φ ψ χ h P)
 
-/-- Compatibility of the quotient maps with the coefficient map from Λ.
-Source: blueprint order 1255, step 2.
-Proof: both composites send the class of x to its class modulo I^a; quotient induction
-reduces the equality to the formula for Ideal.Quotient.factor.
-(blueprint: def-weil-pbc-complete-coefficient-datum) -/
+/-- Compatibility of the quotient maps with the coefficient map from Λ. -/
 theorem adicQuotientMap_comp_mk {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
     (b a : ℕ) (hab : a ≤ b) :
     (adicQuotientMap I b a hab).comp (Ideal.Quotient.mk (I ^ b)) =
@@ -563,8 +536,7 @@ theorem adicQuotientMap_comp_mk {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
   exact Ideal.Quotient.factor_comp_mk _
 
 /-- The quotient-coefficient reduction, computed by the fixed K-flat model.
-Source: blueprint order 1255, step 1; Stacks Tag 06YY
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+Source: Stacks Tag 06YY. -/
 noncomputable def adicReduction (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
     (M : AdicKFlatModel X Λ K) (n : ℕ+) :
@@ -572,9 +544,7 @@ noncomputable def adicReduction (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
   (adicLocalization X (Λ ⧸ d.ideal ^ (n : ℕ))).obj (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n
     : ℕ))) M.complex)
 
-/-- The same reduction after termwise restriction of scalars to Λ.
-Source: blueprint order 1255, step 2
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- The same reduction after termwise restriction of scalars to Λ. -/
 noncomputable def adicReductionUnderlying (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
     (M : AdicKFlatModel X Λ K) (n : ℕ+) : proEtaleDerivedCategory X Λ :=
@@ -608,12 +578,7 @@ private theorem adicSheafTransition_tensorSection (X : Scheme.{t}) {A B C : Type
   rw [adicSheafBalance_tensorSection, one_mul]
 
 /-- The transition chain map is uniquely specified by applying the quotient homomorphism
-on the coefficient tensor factor. Source: blueprint order 1255, step 2; Stacks Tag 03EK.
-Proof: the formula is balanced over Λ and commutes with restrictions. Extend it by the
-universal property of module sheafification. It is Λ-linear after restriction of scalars
-and commutes with the differential, which acts on the model factor. Tensor generators
-locally generate the sheafifications in every degree, proving uniqueness.
-(blueprint: def-weil-pbc-complete-coefficient-datum) -/
+on the coefficient tensor factor. Source: Stacks Tag 03EK. -/
 theorem adicTransitionComplex_exists (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (I : Ideal Λ)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)
@@ -661,9 +626,7 @@ theorem adicTransitionComplex_exists (X : Scheme.{t}) {Λ : Type t} [CommRing Λ
     exact (hg p U r m).trans
       (adicSheafTransition_tensorSection X φ ψ χ h (P.X p) U r m).symm
 
-/-- Apply the quotient map on the scalar factor, with the original Λ-action retained.
-Source: blueprint order 1255, step 2
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+/-- Apply the quotient map on the scalar factor, with the original Λ-action retained. -/
 noncomputable def adicTransitionComplex (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (I : Ideal Λ)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)

@@ -10,10 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAd
 
 /-! # The normalized ordinary identity and composition comparisons
 
-Source: Stacks Tags 03D8 and 0D6D; completed-exchange coherence, proof steps 3--5.
+Source: Stacks Tags 03D8 and 0D6D.
 The declarations are relocated unchanged from CompletedExchangeCoherence so that
 ordinary coherence can be used independently of its completed counterpart.
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons).
 -/
 
 @[expose] public noncomputable section
@@ -27,11 +26,7 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The completed coefficient identification for a composite is the specified composite.
-Source: blueprint coherence, proof step 3; Stacks Tag 098T
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons).
-Proof: the canonical profinite inverse-image comparison respects composition. Its
-projections are the constant-section comparisons. The composite coefficient map has
-these same projections, so limit uniqueness identifies the maps, and hence the isos. -/
+Source: Stacks Tag 098T. -/
 theorem AdicCoefficientDatum.integralRingIso_comp {U V W : Scheme.{t}}
     (h : U ⟶ V) (g : V ⟶ W) :
     d.integralRingIso (h ≫ g) = proEtaleRingCompositeCoefficients h g
@@ -68,8 +63,7 @@ theorem AdicCoefficientDatum.integralRingIso_comp {U V W : Scheme.{t}}
   rfl
 
 /-- Ordinary derived pullback composition with the specified coefficient transport.
-Source: blueprint coherence, proof step 3; Stacks Tag 0D6D
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons). -/
+Source: Stacks Tag 0D6D. -/
 def AdicCoefficientDatum.pullComp {U V W : Scheme.{t}} (h : U ⟶ V) (g : V ⟶ W) :
     d.pull (h ≫ g) ≅ d.pull g ⋙ d.pull h :=
   eqToIso (congrArg
@@ -78,9 +72,7 @@ def AdicCoefficientDatum.pullComp {U V W : Scheme.{t}} (h : U ⟶ V) (g : V ⟶ 
     proEtaleCanonicalDerivedPullbackComparison h g (d.completedRing W) (d.completedRing V)
       (d.completedRing U) (d.integralRingIso g) (d.integralRingIso h)
 
-/-- Direct image composition is exactly the conjugate of pullback composition.
-Source: blueprint coherence, proof step 3; mate-pasting clause (3)
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons). -/
+/-- Direct image composition is exactly the conjugate of pullback composition. -/
 def AdicCoefficientDatum.pushComp {U V W : Scheme.{t}} (h : U ⟶ V) (g : V ⟶ W) :
     d.push h ⋙ d.push g ≅ d.push (h ≫ g) :=
   conjugateIsoEquiv
@@ -174,11 +166,7 @@ private theorem modulePushId_generic (T : Scheme.{t})
     exact (hβ N U.unop m).trans (by rfl)
 
 /-- Identity direct image is uniquely fixed by inverse-image restriction on each section.
-Source: blueprint coherence, unit normalization in proof step 5; Stacks Tag 03D8
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons).
-Proof: the base-change identity identifies U times_T T with U. Restriction along its
-inverse gives the displayed map. Naturality and the canonical coefficient identity make
-it linear; the opposite restriction is inverse. Sectionwise faithfulness gives uniqueness. -/
+Source: Stacks Tag 03D8. -/
 theorem AdicCoefficientDatum.modulePushId_existsUnique (T : Scheme.{t}) :
     ∃! α : proEtaleRingModuleDirectImage (𝟙 T) (d.completedRing T) (d.completedRing T)
         (d.integralRingIso (𝟙 T)) ≅ 𝟭 _,
@@ -189,24 +177,19 @@ theorem AdicCoefficientDatum.modulePushId_existsUnique (T : Scheme.{t}) :
           N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).inv.app U).op m := by
   exact modulePushId_generic T _ _ (integralRingIso_id d T)
 
-/-- The normalized module identity isomorphism, with its section formula retained.
-Source: blueprint coherence, proof step 5
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons). -/
+/-- The normalized module identity isomorphism, with its section formula retained. -/
 def AdicCoefficientDatum.modulePushId (T : Scheme.{t}) :=
   (d.modulePushId_existsUnique T).choose
 
 /-- Ordinary pullback identity, derived from its section-normalized ordinary adjunction.
-Source: blueprint coherence, proof step 5; Stacks Tag 03D8
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons). -/
+Source: Stacks Tag 03D8. -/
 def AdicCoefficientDatum.pullId (T : Scheme.{t}) : d.pull (𝟙 T) ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso
     ((proEtaleRingModuleAdjunction (𝟙 T) (d.completedRing T) (d.completedRing T)
       (d.integralRingIso (𝟙 T))).leftAdjointIdIso (d.modulePushId T)) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
-/-- Derived direct-image identity is conjugate to that same pullback identity.
-Source: blueprint coherence, proof steps 3 and 5
-(blueprint: lem-weil-pbc-completed-ordinary-comparisons). -/
+/-- Derived direct-image identity is conjugate to that same pullback identity. -/
 def AdicCoefficientDatum.pushId (T : Scheme.{t}) : d.push (𝟙 T) ≅ 𝟭 _ :=
   (conjugateIsoEquiv Adjunction.id
     (proEtaleRingDerivedAdjunction (𝟙 T) (d.completedRing T) (d.completedRing T)

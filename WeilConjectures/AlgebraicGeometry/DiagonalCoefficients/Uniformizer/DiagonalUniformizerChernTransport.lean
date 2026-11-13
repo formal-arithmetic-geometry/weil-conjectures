@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.FiniteTrace
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.DiagonalCompletedChernLift
 
 /-! # Explicit coefficient transport for the completed Chern adjunct
-
-Source: diagonal tower coefficient changes proof (1), and trace proof (1).
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +29,7 @@ attribute [local irreducible] quotientLine quotientLineMap derivedScalars
   CompletedRealization.shiftedLine FiniteRealization.derivedUnit
 
 /-- The Chern-arrow equation through four successive coefficient functors.
-All composites use only the supplied functors and endpoint maps.
-Source: diagonal tower coefficient changes proof (1).
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+All composites use only the supplied functors and endpoint maps. -/
 @[irreducible]
 def fourStepChernCommutes
     {C₀ C₁ C₂ C₃ C₄ : Type*}
@@ -59,9 +55,7 @@ private theorem compose_trace_square
   rw [← F.map_comp_assoc, h, F.map_comp]
   simp only [Category.assoc, h']
 
-/-- Four trace squares transport a Chern/trace identity to the last category.
-Source: diagonal tower coefficient changes proof (1), composition of trace squares.
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+/-- Four trace squares transport a Chern/trace identity to the last category. -/
 theorem fourStepChernDegree
     {C₀ C₁ C₂ C₃ C₄ : Type*}
     [Category* C₀] [Category* C₁] [Category* C₂] [Category* C₃] [Category* C₄]
@@ -100,9 +94,7 @@ theorem fourStepChernDegree
     _ = _ := (Category.comp_id u).symm
 
 /-- The coefficient diagrams needed by the formal Chern/trace calculation.
-The coefficient rings are parameters, so the calculation never unfolds their constructions.
-Source: diagonal tower coefficient changes proof (1).
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+The coefficient rings are parameters, so the calculation never unfolds their constructions. -/
 structure ChernCoefficientDiagram
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]
@@ -149,9 +141,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] [Finite A]
   {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0} {hY : IsUnit (N : Γ(Y, ⊤))}
 
-/-- The Chern equation for an abstract coefficient diagram, before composing traces.
-Source: diagonal tower coefficient changes proof (1).
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+/-- The Chern equation for an abstract coefficient diagram, before composing traces. -/
 @[irreducible]
 def ChernCoefficientDiagram.Commutes
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY) : Prop :=
@@ -181,9 +171,7 @@ def ChernCoefficientDiagram.Commutes
 attribute [local semireducible] ChernCoefficientDiagram.Commutes
   FiniteTracePresentation.realizedTrace
 
-/-- The prescribed scalar trace squares transport degree one to finite coefficients.
-Source: diagonal tower coefficient changes proof (1), composition of trace squares.
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+/-- The prescribed scalar trace squares transport degree one to finite coefficients. -/
 theorem ChernCoefficientDiagram.traceDegree
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
     (hc : x.Commutes) (hct : x.c ≫ x.tq.trace = 𝟙 _)
@@ -249,9 +237,7 @@ end AbstractCoefficients
 
 /-- The actual inputs to the positive Chern coefficient comparison.
 Every field is supplied data or a normalization already assumed in that comparison;
-no Chern-arrow equation or trace-degree equation is included.
-Source: diagonal tower coefficient changes proof (1).
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+no Chern-arrow equation or trace-degree equation is included. -/
 structure UniformizerChernNormalizationData
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]
@@ -301,9 +287,7 @@ structure UniformizerChernNormalizationData
 
 attribute [instance] UniformizerChernNormalizationData.hfinite
 
-/-- The formal coefficient diagram supplied by the actual uniformizer data.
-Source: diagonal tower coefficient changes proof (1).
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+/-- The formal coefficient diagram supplied by the actual uniformizer data. -/
 def UniformizerChernNormalizationData.diagram
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]
@@ -336,9 +320,7 @@ def UniformizerChernNormalizationData.diagram
     c := s.c }
 
 /-- The positive Chern comparison for the specified four coefficient changes.
-This is the explicit Chern-arrow equation, before composing any trace.
-Source: diagonal tower coefficient changes proof (1).
-(blueprint: def-diagonal-uniformizer-chern-transport). -/
+This is the explicit Chern-arrow equation, before composing any trace. -/
 @[irreducible]
 def UniformizerChernNormalizationData.ChernNormalized
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

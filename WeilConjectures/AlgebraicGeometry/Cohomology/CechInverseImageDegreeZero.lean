@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCocha
 
 Source: Stacks Project, Tag 01FD, section faces of Lemma 20.15.1;
 Tag 01EQ, degree-zero restriction augmentation.
-(blueprint: lem-pc-cech-inverse-image-degree-zero)
 -/
 
 @[expose] public section
@@ -60,7 +59,7 @@ private theorem cech_augmentation_naturality
   simp only [h]
 
 /-- The canonical constant-sheaf comparison transposes to the inverse-image unit.
-Source: Stacks Project, Tag 01FD; uniqueness of the constant-sheaf adjunction. -/
+Source: Stacks Project, Tag 01FD. -/
 private theorem constant_adjunct_pullback
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
@@ -108,7 +107,7 @@ private theorem constant_adjunct_pullback
       F).hom.app (op ⊤) ≫ m) (((invImage g).obj F).obj.map_id (op ⊤)).symm
 
 /-- In degree zero, exact inverse image acts on sections by the adjunction unit.
-Source: Stacks Project, Tag 01FD; the degree-zero Ext description of sections. -/
+Source: Stacks Project, Tag 01FD. -/
 private theorem ext_zero_sections
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
@@ -133,22 +132,7 @@ private theorem ext_zero_sections
 
 /-- Degree-zero Čech pullback agrees with the constant-sheaf Ext pullback.
 
-Source: Stacks Project, Tags 01FD and 01EQ, degree-zero section augmentations.
-(blueprint: lem-pc-cech-inverse-image-degree-zero)
-
-Proof: Express x as the restriction class of its unique global section s using
-cechCohomologyZeroIso. In each V-member the explicit cochain map sends the
-restriction of s to the restriction of the adjunction unit applied to s.
-Naturality of the unit and composition of restriction maps prove this equality
-of cochains, hence of their degree-zero classes. For Ext, write the degree-zero
-class as mk₀ f for a morphism from the constant integer sheaf. Exact inverse
-image sends this to mk₀ of the composite constIso.inv followed by the inverse
-image of f. The definition of constIso as uniqueness of left adjoints identifies
-its constant-sheaf adjunct with the inverse-image unit composed with f. Evaluating
-at the integer 1 gives precisely the same pulled-back global section. Apply the
-inverse global-section equivalence to conclude. This uses only degree zero and
-no comparison system or positive-degree connecting map. If a cover is empty,
-the covered scheme and its inverse image are empty and all sections are zero. -/
+Source: Stacks Project, Tags 01FD and 01EQ, degree-zero section augmentations. -/
 theorem cechInverseImage_degree_zero
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)

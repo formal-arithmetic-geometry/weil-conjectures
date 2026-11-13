@@ -41,14 +41,6 @@ so the smoothness half is stated separately below rather than derived here.
   characteristic zero is reduced.
 * `AlgebraicGeometry.smooth_of_grpObj_of_charZero`: such a group scheme is smooth over the base
   field.
-
-## Blueprint
-
-`AlgebraicGeometry.isReduced_of_grpObj` and `AlgebraicGeometry.smooth_of_grpObj_of_charZero`
-implement `proposition-cartier-s-theorem`.
-
-The result is due to Cartier, *Questions de rationalité des diviseurs en géométrie algébrique*
-(1958).
 -/
 
 @[expose] public section
@@ -67,13 +59,7 @@ variable {K : Type u} [Field K]
 /-- **Invariant vector fields.** Let `G` be a group scheme over a field `K` and let
 `j : Spec A ⟶ G` be an affine open subscheme. Every tangent vector of `A` at a `K`-point `e` of
 `A`, given as a linear form `φ` on the cotangent space `𝔪/𝔪²` at `e`, extends to a derivation `D`
-of `A`.
-
-Let `x` be the rational point of `G` given by `e` and `v : Spec K[ε] ⟶ G` the tangent vector.
-The morphism `Φ : Spec A[ε] ⟶ G`, `(g, t) ↦ g x⁻¹ v(t)`, restricts to the inclusion `j` along
-`Spec A ⟶ Spec A[ε]`; as `Spec A[ε]` and `Spec A` have the same points, `Φ` factors through
-`j`, as `Spec ψ` for a section `ψ : A → A[ε]`, `ψ a = a + D(a) ε`, of the reduction modulo `ε`.
-Evaluating at `x` recovers `v`, so `e ∘ D` is the derivation `φ`. -/
+of `A`. -/
 theorem GrpObj.exists_derivation_of_isOpenImmersion {G : Over (Spec (.of K))} [GrpObj G]
     {A : Type u} [CommRing A] [Algebra K A] (j : Spec (.of A) ⟶ G.left) [IsOpenImmersion j]
     (hj : j ≫ G.hom = Spec.map (CommRingCat.ofHom (algebraMap K A))) (e : A →ₐ[K] K)
@@ -277,7 +263,7 @@ variable {K : Type u} [Field K] [CharZero K] {G : Scheme} (f : G ⟶ Spec (.of K
 include f in
 /-- **Cartier's theorem** for affine group schemes: an affine group scheme of finite type over a
 field of characteristic zero is reduced. Its coordinate ring is a finitely generated Hopf algebra,
-reduced by `HopfAlgebra.isReduced_of_charZero`. (blueprint: `proposition-cartier-s-theorem`) -/
+reduced by `HopfAlgebra.isReduced_of_charZero`. -/
 theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
   obtain ⟨H, ⟨e⟩⟩ := (essImage_hopfSpec (R := .of K) (G := Grp.mk (Over.mk f))).2 ‹_›
   let e' : Spec (.of H.unop) ≅ G := (Grp.forget _ ⋙ Over.forget _).mapIso e
@@ -294,14 +280,7 @@ theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
 
 include f in
 /-- **Cartier's theorem** over an algebraically closed field: a group scheme locally of finite type
-over an algebraically closed field of characteristic zero is reduced.
-
-Let `Spec A ⟶ G` be an affine open subscheme and `b` a nilpotent element of `A`. Every maximal
-ideal of `A` is the kernel of a `K`-point `e`, and every tangent vector of `A` at `e` extends to a
-derivation of `A` (`GrpObj.exists_derivation_of_isOpenImmersion`). By Cartier's lemma
-(`AlgHom.exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation`) the annihilator of `b` is
-not contained in the kernel of `e`. Hence it is the unit ideal and `b = 0`.
-(blueprint: `proposition-cartier-s-theorem`) -/
+over an algebraically closed field of characteristic zero is reduced. -/
 theorem isReduced_of_grpObj_of_isAlgClosed [IsAlgClosed K] : IsReduced G := by
   have key (R : CommRingCat.{u}) (j : Spec R ⟶ G) [IsOpenImmersion j] : _root_.IsReduced R := by
     let : Algebra K R := (Spec.preimage (j ≫ f)).hom.toAlgebra
@@ -337,7 +316,7 @@ include f in
 /-- A group scheme locally of finite type over a field of characteristic zero has no nilpotents
 in its structure sheaf, i.e. it is reduced: its base change to an algebraic closure is reduced by
 `isReduced_of_grpObj_of_isAlgClosed`, and reducedness descends along the faithfully flat
-morphism `G_K̄ ⟶ G`. (blueprint: `proposition-cartier-s-theorem`) -/
+morphism `G_K̄ ⟶ G`. -/
 theorem isReduced_of_grpObj : IsReduced G := by
   let g : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of K) :=
     Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))
@@ -350,8 +329,7 @@ theorem isReduced_of_grpObj : IsReduced G := by
   exact IsSchemeTheoreticallyDominant.isReduced (Limits.pullback.fst f g)
 
 /-- **Cartier's theorem**: a group scheme locally of finite type over a field of characteristic
-zero is smooth over the base field, equivalently `dim Lie(G) = dim G`.
-(blueprint: `proposition-cartier-s-theorem`) -/
+zero is smooth over the base field, equivalently `dim Lie(G) = dim G`. -/
 theorem smooth_of_grpObj_of_charZero : Smooth f := by
   have : GeometricallyReduced f := by
     refine ⟨(geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms).2 fun L _ _ ↦ ?_⟩

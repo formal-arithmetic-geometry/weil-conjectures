@@ -20,8 +20,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Dense-open finiteness with integral torsion coefficients
 
-Source: Stacks Project, Tag 0GJA, proof, using Tag 095L.
-(blueprint: lem-pbc-h2-dense-open-integral-cohomology-finiteness). -/
+Source: Stacks Project, Tag 0GJA, proof, using Tag 095L. -/
 
 @[expose] public section
 
@@ -39,21 +38,7 @@ private noncomputable def cohomologyEquiv {X : Scheme.{u}}
 
 /-- Finiteness of all cohomology groups transfers across the dense-open counit
 for a constructible torsion abelian sheaf, encoded with integral coefficients.
-Source: Stacks Project, Tag 0GJA, proof (five-term sequence), with Tag 095L.
-(blueprint: lem-pbc-h2-dense-open-integral-cohomology-finiteness).
-
-Proof: Use the open-closed short exact sequence for the integral module sheaf F,
-and forget it to an exact sequence of abelian sheaves. Its boundary term Q has finite
-cohomology in every degree by dense_open_integral_boundary_finiteness. The integral
-open-extension comparison identifies its first term J with the encoded G, hence also
-identifies their cohomology. If F has finite cohomology, H^0(J) injects into H^0(F);
-for each q=n+1 the exact segment H^n(Q) -> H^q(J) -> H^q(F) has finite outer terms,
-so H^q(J) is finite. Conversely the exact segment H^q(J) -> H^q(F) -> H^q(Q)
-has finite outer terms in every degree. Apply ShortComplex.Exact.ab_finite to both
-segments and transport along the cohomology isomorphism J=G. This argument needs only
-finiteness of the boundary groups, not a separate higher-degree comparison theorem.
-No finite coefficient ring or ambient reducedness is required. Empty X and U=X
-are included in the same exact-sequence argument. -/
+Source: Stacks Project, Tag 0GJA, proof (five-term sequence), with Tag 095L. -/
 theorem dense_open_integral_cohomology_finiteness {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

@@ -12,9 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwist
 import WeilConjectures.AlgebraicGeometry.Pur.PurRootTowerPreservation
 
 /-! # Normalized endpoints for completed coefficient pullback
-
-Source: diagonal coefficient changes, paragraph (3), endpoint construction.
-(blueprint: lem-sfb-diagonal-realization-pullback-endpoints).
 -/
 
 @[expose] public noncomputable section
@@ -59,25 +56,7 @@ structure DiagonalRealizationPullbackEndpointData (l : ℕ) [Fact l.Prime]
         ((limit.π (Scheme.proEtaleRootsOfUnityTower S l (Fact.out : l.Prime))
           (op n)).hom.app U z)
 
-/-- The regular and whole-root endpoints have their specified adjoint normalizations.
-Source: diagonal coefficient changes paragraph (3), proof steps 4 and 5.
-(blueprint: lem-sfb-diagonal-realization-pullback-endpoints).
-
-Proof: the normalized regular-module pullback isomorphism has the required
-adjunct by its unit equation. Construct the whole-root comparison from the
-canonical finite-root tower transformation: inverse image preserves this
-particular tower and each finite comparison is invertible. Transpose its
-projection equations under the abelian sheaf adjunction. The canonical
-completed coefficient comparison has the matching finite coefficient projection
-equations. The completed scalar action is coordinatewise, so finite-root
-linearity and joint injectivity of the root-limit projections prove
-semilinearity of the whole-root adjunct. Package it as a module direct-image
-map and transpose under the module adjunction. Its underlying additive map
-composed with the pullback unit mate is the whole-root comparison, by
-adjunction injectivity. That unit mate is invertible when the coefficient
-comparison is an isomorphism; the module forgetful functor reflects
-isomorphisms. Thus the transposed module map is invertible, and its defining
-adjunct gives the stated root normalization. -/
+/-- The regular and whole-root endpoints have their specified adjoint normalizations. -/
 theorem diagonalRealization_pullback_endpoints (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian X] [IsNoetherian S]
     (coeff : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj

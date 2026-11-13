@@ -12,9 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 
 /-! # Identity detection on the universal linear parameter scheme
-
-Source: linear-trace invariance, proof paragraphs 1 and 2.
-(blueprint: lem-amb-affine-linear-action-rigidity).
 -/
 
 @[expose] public noncomputable section
@@ -25,19 +22,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- An endomorphism of the universal affine trace object is the identity if its
-pullback to the identity-matrix section is the identity.
-Source: blueprint proposition-purity-vector-bundles, proof paragraphs 1 and 2
-(blueprint: lem-amb-affine-linear-action-rigidity).
-
-Proof: choose the normalized data supplied by the affine-space top-trace existence
-statement. Its trace is an isomorphism from this source to the constant complex;
-the source does not depend on the chosen data. The constant complex is tensor-invertible,
-so the source is as well. Each point of the determinant-open lies in a preconnected
-set meeting the identity section, by the existing general-linear geometry lemma.
-The existing identity-detection lemma for invertible complexes now applies. Its proof
-identifies unit endomorphisms with ordinary sheaf maps and uses local constancy along
-these preconnected sets. It does not use a cohomology class supported on a zero section.
-The identity section is closed; empty schemes and dimension zero are included. -/
+pullback to the identity-matrix section is the identity. -/
 theorem linearAction_eq_id_of_identitySection
     (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

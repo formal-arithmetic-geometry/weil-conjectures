@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 /-! # Degree-zero compatibility square for the canonical mate
 
 Source: Stacks Project, Cohomology, Remark 08HY.
-(blueprint: lem-pc-canonical-degree-zero-mate-square).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The standard degree-zero direct-image identification, computed by the existing
 comparison of unbounded and bounded below derived functors.
-Source: Stacks, Tags 079V and 0A1G
-(blueprint: lem-pc-canonical-degree-zero-mate-square). -/
+Source: Stacks, Tags 079V and 0A1G. -/
 def canonicalDirectImageH0Iso {X S : Scheme.{u}} (f : X ⟶ S)
     [HasInjectiveResolutions X.Modules] (M : X.Modules) :
     (DerivedCategory.homologyFunctor

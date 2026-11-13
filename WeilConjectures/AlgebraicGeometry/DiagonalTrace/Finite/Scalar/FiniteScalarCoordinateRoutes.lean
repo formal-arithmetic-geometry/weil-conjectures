@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.Fi
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralRootClass
 
 /-! # Scalar transport of an arbitrary finite ordinary arrow
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-scalar-coordinate-routes).
 -/
 
 @[expose] public noncomputable section
@@ -51,9 +48,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Intrinsic arrows from the actual ordinary realized coefficient unit.
-Source: exact ordinary coefficient realization
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Intrinsic arrows from the actual ordinary realized coefficient unit. -/
 def FiniteScalarIntrinsicArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) (Y : Scheme.reductionModules T (SpTowerShriek.B l E T n)) :=
   (DerivedCategory.singleFunctor _ 0).obj
@@ -62,9 +57,7 @@ def FiniteScalarIntrinsicArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
           (Etale.ordinaryFiniteConstant (FiniteRing l E n) T))) ⟶
     ((DerivedCategory.singleFunctor _ 0).obj Y)⟦(2 : ℤ)⟧
 
-/-- Additive comparison arrows from the ordinary coefficient unit after forgetting.
-Source: exact coefficient forgetting and site comparison
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Additive comparison arrows from the ordinary coefficient unit after forgetting. -/
 def FiniteScalarAbelianArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) (Y : DiagonalAb T) :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
@@ -73,17 +66,13 @@ def FiniteScalarAbelianArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
           (Etale.ordinaryFiniteConstant (FiniteRing l E n) T))) ⟶
     ((DerivedCategory.singleFunctor (DiagonalAb T) 0).obj Y)⟦(2 : ℤ)⟧
 
-/-- Integral-source arrows to an arbitrary additive target after normalization.
-Source: the evaluated integer tower
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Integral-source arrows to an arbitrary additive target after normalization. -/
 def FiniteScalarIntegralArrow (n : ℕ) (T : Scheme.{u}) (Y : DiagonalAb T) :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
       ((abEvaluation T n).obj (integers T)) ⟶
     ((DerivedCategory.singleFunctor (DiagonalAb T) 0).obj Y)⟦(2 : ℤ)⟧
 
-/-- Relation expressing the exact scalar comparison of two normalized arrows.
-Source: exact coefficient forgetting and site comparison
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Relation expressing the exact scalar comparison of two normalized arrows. -/
 def FiniteScalarTransportRelation (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {Y : Scheme.reductionModules T (SpTowerShriek.B l E T n)}
     {Y₀ : DiagonalAb T} (a : FiniteScalarIntrinsicArrow l E n T Y)
@@ -94,9 +83,7 @@ def FiniteScalarTransportRelation (n : ℕ) [Finite (SpTowerShriek.R l E n)]
         ((finiteScalarComparison l E n T).app _).inv ≫ d ≫
       ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map β.hom)⟦(2 : ℤ)⟧'
 
-/-- The actual Hom from evaluated integers to the forgotten finite line.
-Source: finite scalar coefficient coordinates
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- The actual Hom from evaluated integers to the forgotten finite line. -/
 def FiniteScalarBoundaryArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
@@ -104,9 +91,7 @@ def FiniteScalarBoundaryArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     ((DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
       ((finiteForget l E T n).obj (finiteLine l E T n)))⟦(2 : ℤ)⟧
 
-/-- Normalize the module route by the actual finite quotient.
-Source: finite scalar coefficient coordinates
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Normalize the module route by the actual finite quotient. -/
 def finiteScalarNormalizedModuleRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
@@ -118,9 +103,7 @@ def finiteScalarNormalizedModuleRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
         mapSingleArrow (finiteForget l E T n) (2 : ℤ)
           (finiteOrdinaryCoordinateArrow l E n T c a)
 
-/-- Normalize the additive route by the integral generator and scalar line coordinate.
-Source: exact site comparison and coefficient coordinates
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Normalize the additive route by the integral generator and scalar line coordinate. -/
 def finiteScalarNormalizedAbelianRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
@@ -137,8 +120,7 @@ def finiteScalarNormalizedAbelianRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)
           (finiteScalarLineCoordinate l E n T c))⟦(2 : ℤ)⟧'
 
 /-- Normalize the actual comparison image of any additive cohomology class
-at the finite line endpoint. Source: the given integer and scalar line coordinates
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+at the finite line endpoint. -/
 def finiteScalarNormalizedCohomologyRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
@@ -153,9 +135,7 @@ def finiteScalarNormalizedCohomologyRoute (n : ℕ) [Finite (SpTowerShriek.R l E
     ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
       (finiteScalarLineCoordinate l E n T c))⟦(2 : ℤ)⟧'
 
-/-- Normalize the actual compared ordinary scalar class at both endpoints.
-Source: exact additive comparison and the specified finite line coordinate
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- Normalize the actual compared ordinary scalar class at both endpoints. -/
 def finiteScalarNormalizedClassRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
@@ -168,9 +148,7 @@ def finiteScalarNormalizedClassRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
       (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
         (ULift.ext (coefficient_annihilates l E n))) 2 a)
 
-/-- The normalized finite scalar image of an arbitrary integral root class.
-Source: the integral roots comparison and finite root insertion
-(blueprint: def-sfb-finite-scalar-coordinate-routes). -/
+/-- The normalized finite scalar image of an arbitrary integral root class. -/
 def finiteScalarNormalizedRootRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) (x : Sheaf.H (T.rootsOfUnitySheaf (l ^ (n + 1))) 2) :
     FiniteScalarBoundaryArrow l E n T :=

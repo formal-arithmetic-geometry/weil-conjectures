@@ -825,8 +825,7 @@ theorem lieEquivTangent_symm_one : (lieEquivTangent G).symm 1 = 0 := by
   exact left_eq_add.mp h
 
 /-- The Lie bracket on `Lie(G)` of a group scheme over a field: the mixed term `[v, w]` of the
-commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two tangent vectors over `k[ε][δ]`.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two tangent vectors over `k[ε][δ]`. -/
 noncomputable instance : Bracket (Lie G) (Lie G) where
   bracket x y := (lieEquivTangent G).symm
     (tangentBracket (lieEquivTangent G x) (lieEquivTangent G y))
@@ -887,7 +886,7 @@ theorem leibniz_lie' (x y z : Lie G) : ⁅x, ⁅y, z⁆⁆ = ⁅⁅x, y⁆, z⁆
   rw [lie_antisymm' x ⁅y, z⁆, ← a₂]
   exact (eq_neg_of_add_eq_zero_left j).symm
 
-/-- `Lie(G)` is a Lie ring. (blueprint: `def-wf-lie-algebra-derivation`) -/
+/-- `Lie(G)` is a Lie ring. -/
 noncomputable instance : LieRing (Lie G) where
   add_lie := lie_add_left
   lie_add := lie_add_right
@@ -939,7 +938,7 @@ theorem lie_smul' (c : k) (x y : Lie G) : ⁅x, c • y⁆ = c • ⁅x, y⁆ :=
   rw [lieEquivTangent_lie, lieEquivTangent_smul, lieEquivTangent_smul, lieEquivTangent_lie,
     tangentBracket_tangentScale]
 
-/-- `Lie(G)` is a Lie algebra over `k`. (blueprint: `def-wf-lie-algebra-derivation`) -/
+/-- `Lie(G)` is a Lie algebra over `k`. -/
 noncomputable instance : LieAlgebra k (Lie G) where
   lie_smul := lie_smul'
 end AlgebraicGeometry.GrpObj

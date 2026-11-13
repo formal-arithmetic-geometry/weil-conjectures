@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryCoefficientModel
 
 /-! # Single comparison in the ordinary coefficient presentation
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-single-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -46,12 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The actual composite single comparison is unchanged by the cached ordinary
-coefficient presentation. Source: exact single-complex comparison
-(blueprint: lem-sfb-finite-ordinary-single-comparison).
-
-Proof: unfold nuSingle and the two cached actual functors. Both sides are the
-realization image of the comparison single isomorphism, followed by the
-realization single isomorphism, so they agree by reflexivity. -/
+coefficient presentation. -/
 theorem finiteOrdinarySingleComparison_eq (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     (M : OrdinaryEtaleModules (FiniteRing l E n) T) :

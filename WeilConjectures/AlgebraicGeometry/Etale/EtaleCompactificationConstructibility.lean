@@ -23,10 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 
 /-!
 # Constructibility of the etale compact-support candidate
-
-Source: Stacks Project, Tag 0GL0, theorem-constructible-shriek,
-finite-ring bounded-below specialization.
-(blueprint: lem-weil-pbc-etale-compactification-constructibility).
 -/
 
 @[expose] public section
@@ -39,16 +35,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A fixed compact-support candidate preserves constructible cohomology on bounded-below
 complexes as soon as it does on constructible sheaves placed in degree zero.
-Source: Stacks Project, Tag 0GL0, final paragraph (the truncation alternative).
-(blueprint: lem-weil-pbc-etale-compactification-constructibility).
-
-Proof: extension by zero is exact and right derived direct image is left t-exact, so their
-composite preserves every lower cohomological bound. For each degree n, truncate the input
-above n. Its constructible cohomology and lower bound make it bounded constructible.
-Bounded truncation dévissage, using the constructible weak Serre class, proves the assertion
-for this truncation from the sheaf hypothesis. Apply the compact-support functor to the
-truncation triangle. The third term still vanishes through degree n, so the induced map in
-degree n is an isomorphism. Transfer constructibility across this isomorphism. -/
+Source: Stacks Project, Tag 0GL0, final paragraph (the truncation alternative). -/
 private lemma constructible_compactSupport_of_sheaf
     {X Y : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (f : X ⟶ Y) (c : Compactification f)
@@ -234,17 +221,7 @@ private lemma compactSupportPlus_affineSpace
       (c.copy (by simpa [Category.assoc] using hfac)) K hEa (fun M hM ↦ ih Y hΛ cb M hM)
 
 /-- The affine-source, affine-base case of compact-support constructibility.
-Source: Stacks Project, Tag 0GL0, second paragraph.
-(blueprint: lem-weil-pbc-etale-compactification-constructibility).
-
-Proof: present the finitely presented coordinate algebra as a quotient of a finite polynomial
-algebra, giving a finitely presented closed immersion into affine space. Its compact-support
-image is constructible by quasi-finite constructibility. Induct on the dimension of affine
-space, factoring its projection into successive relative affine lines. The affine-line sheaf
-theorem, lifted to bounded-below inputs by truncation dévissage, handles each factor.
-Compact-support composition identifies the successive outputs with the desired candidate.
-Exact open extension and left t-exact right derived direct image preserve boundedness below
-at each step. Compactification independence permits every chosen compactification. -/
+Source: Stacks Project, Tag 0GL0, second paragraph. -/
 private lemma constructible_compactSupport_affine
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -526,21 +503,7 @@ private lemma compactSupport_constructible_of_affine_base
   exact Scheme.IsConstructibleSheaf.of_iso eout
 
 /-- The compact-support candidate has constructible cohomology for bounded-below inputs,
-when the additive orders of the coefficients are invertible on the base.
-Source: Stacks Project, Tag 0GL0, theorem-constructible-shriek (torsion prime to the
-characteristics of the base).
-(blueprint: lem-weil-pbc-etale-compactification-constructibility).
-
-Proof: dévissage through bounded truncations promotes the affine-line sheaf theorem to
-bounded-below complexes. Induct on affine-space dimension using the composition theorem.
-A finite-type morphism of affine schemes factors as a finitely presented closed immersion
-into finite-dimensional affine space followed by its projection; quasi-finite constructibility
-handles the closed immersion. Over an affine base, use a finite affine cover of the source
-and induct on its size. Separation makes intersections affine, and the relative Mayer--Vietoris
-triangle together with the constructible weak Serre property gives the induction step.
-Finally restrict the base to its affine opens. Compact-support base change and exact inverse
-image identify these restrictions with the affine-base cases. Affine-local constructibility
-and the compatibility of bounded-below and total compact-support candidates conclude. -/
+when the additive orders of the coefficients are invertible on the base. -/
 theorem isConstructibleEtaleModuleSheaf_homology_compactSupportCandidate
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

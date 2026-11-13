@@ -27,8 +27,7 @@ finite étale over `U`, the universal sections glue to a section of `E` over `P`
 property, and this section is universal because universality can be checked on an open cover.
 
 This is the Zariski-local step in the proof that finite locally constant sheaves are
-represented by finite étale schemes (blueprint
-`lemma-weil-pbc-finite-locally-constant-etale-equivalence`).
+represented by finite étale schemes.
 -/
 
 @[expose] public section
@@ -556,7 +555,7 @@ end GlueRepr
 small étale site of `T` and `u : U ⟶ T` étale. If every point of `U` has an open neighbourhood
 `W` such that the restriction of `E` to étale `W`-schemes is represented by a finite étale
 `W`-scheme, then the restriction of `E` to étale `U`-schemes is represented by a finite étale
-`U`-scheme. (blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+`U`-scheme. -/
 theorem exists_isUniversalSection_of_forall_exists_opens {T : Scheme.{u}}
     {E : T.Etaleᵒᵖ ⥤ Type w} (hE : Presheaf.IsSheaf T.smallEtaleTopology E) {U : Scheme.{u}}
     (u : U ⟶ T) [AlgebraicGeometry.Etale u]

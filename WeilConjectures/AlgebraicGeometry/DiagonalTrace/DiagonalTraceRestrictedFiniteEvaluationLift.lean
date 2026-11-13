@@ -18,13 +18,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory
   Functor.mapDerivedCategory diagonalFiniteToPadic
 
-/-- Every derived arrow of tower systems has a finite residue realization in fixed endpoints.
-Source: exact quotient realization and exact-functor Ext naturality.
-(blueprint: lem-sfb-diagonal-trace-restricted-finite-evaluation-lift).
-
-Proof: scalar annihilation constructs the exact residue quotient functor. Ordinary scalar
-restriction is fully faithful. Apply the generic exactFiniteEvaluation_lift theorem to this
-functor, its natural evaluation isomorphism, the supplied endpoints and the supplied arrow. -/
+/-- Every derived arrow of tower systems has a finite residue realization in fixed endpoints. -/
 theorem restrictedFiniteEvaluation_lift (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
     {X Y : SpTowerClasses.Systems T (SpTowerClasses.Arings l (ULift.{u} (Padic l)) T)}

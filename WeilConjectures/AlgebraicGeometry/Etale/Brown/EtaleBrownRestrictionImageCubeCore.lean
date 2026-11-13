@@ -244,8 +244,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
   {F : Type f} [Category.{fv} F] [Abelian F] [HasDerivedCategory.{df} F]
 
 /-- A square agrees with ordinary cochain maps after the supplied derived units.
-Source: Stacks 07A4; Zheng Lemma 5.16.
-(blueprint: lem-pur-brown-unit-normalized-naturality). -/
+Source: Stacks 07A4; Zheng Lemma 5.16. -/
 def EtaleBrownUnitNorm
     (F₀ : A ⥤ B) (G₀ : C ⥤ D) [F₀.Additive] [G₀.Additive]
     (FD : DerivedCategory A ⥤ DerivedCategory B)
@@ -310,14 +309,7 @@ private theorem normalized_composition
   rfl
 
 /-- Naturality of squares specified by their cochain derived-unit equations.
-Source: Stacks 07A4; Zheng Lemma 5.16.
-(blueprint: lem-pur-brown-unit-normalized-naturality).
-Proof: precompose both routes with the source derived unit and postcompose with
-the exact comparison factor. Substitute both unit normalizations, naturality of
-the edge transformations, and the ordinary cube. On a K-injective complex the
-source unit is invertible, so cancellation gives equality. Every derived object
-has such a representative; naturality transports the equality along its
-representative isomorphism. This includes zero objects and identity edges. -/
+Source: Stacks 07A4; Zheng Lemma 5.16. -/
 theorem etaleBrownNormalizedNaturality
     [Abelian.HasKInjectiveResolutions A]
     (F₀ : A ⥤ B) (G₀ : C ⥤ D) [F₀.Additive] [G₀.Additive]

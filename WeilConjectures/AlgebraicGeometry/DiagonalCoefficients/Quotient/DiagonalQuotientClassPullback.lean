@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Quotient.DiagonalQ
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedPullbackScalarNormalization
 
 /-! # Scalar transport of the diagonal class square
-
-Source: diagonal tower coefficient changes, paragraph (3), scalar base change.
-(blueprint: lem-diagonal-quotient-class-pullback).
 -/
 
 @[expose] public noncomputable section

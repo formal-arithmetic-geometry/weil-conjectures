@@ -18,11 +18,9 @@ consists of a curve `C` over `k` (separated of finite type of dimension at most 
 
 ## Main definitions
 
-- `AlgebraicGeometry.CurveCoefficientPair`: a curve coefficient pair
-  (blueprint: `theorem-cohomology-curves`).
+- `AlgebraicGeometry.CurveCoefficientPair`: a curve coefficient pair.
 - `AlgebraicGeometry.CurveCoefficientPair.IsConstructible`: the sheaf `F` of a curve
-  coefficient pair is constructible, i.e. `AlgebraicGeometry.Scheme.IsConstructibleSheaf F`
-  (blueprint: `def-weil-pbc-constructible-torsion`).
+  coefficient pair is constructible, i.e. `AlgebraicGeometry.Scheme.IsConstructibleSheaf F`.
 -/
 
 @[expose] public section
@@ -34,8 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A *curve coefficient pair* over an algebraically closed field `k`: a curve `C` over `k`
-together with a torsion abelian sheaf `F` on the small étale site of `C`.
-(blueprint: `theorem-cohomology-curves`) -/
+together with a torsion abelian sheaf `F` on the small étale site of `C`. -/
 structure CurveCoefficientPair (k : Type u) [Field k] [IsAlgClosed k] where
   /-- The underlying scheme of the curve. -/
   C : Scheme.{u}
@@ -52,7 +49,7 @@ namespace CurveCoefficientPair
 
 /-- The sheaf `F` of a curve coefficient pair `(C, F)` is *constructible* if `C` has a finite
 partition into locally closed constructible subschemes on each of which `F` is locally
-constant with finite stalks. (blueprint: `def-weil-pbc-constructible-torsion`) -/
+constant with finite stalks. -/
 def IsConstructible {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) :
     Prop :=
   Scheme.IsConstructibleSheaf P.F

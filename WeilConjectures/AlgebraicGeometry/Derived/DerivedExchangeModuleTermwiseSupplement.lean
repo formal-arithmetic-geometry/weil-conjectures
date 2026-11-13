@@ -27,11 +27,10 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
 # The unbounded module exchange on K-injective representatives
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K and 0DVC. Blueprint main-20261015, definition-derived-base-change-map, final
-paragraph. (blueprint: lem-weil-pbc-derived-exchange-module-termwise).
+Tags 070I, 070K and 0DVC.
 
-The comparison below is the agent-formulated unbounded representative statement,
-using the exact inverse-image mate of `definition-derived-base-change-map`.
+The comparison below is the unbounded representative statement, using the exact
+inverse-image mate of the derived base change map.
 The three auxiliary definitions spell out its canonical maps, without additional choices.
 -/
 
@@ -139,8 +138,7 @@ private theorem square_factors
   erw [Iso.hom_inv_id_app_assoc]
 
 /-- The exact derived adjunction mate satisfies the right-derived unit identity on complexes.
-Source: Stacks Project, derived.tex, Tag 0DVC; exact-derived mate factorization
-(blueprint: lem-weil-pbc-derived-exchange-module-termwise). -/
+Source: Stacks Project, derived.tex, Tag 0DVC. -/
 theorem derivedExchangeUnitQ
     {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
     [Abelian C₁] [Abelian C₂] [Abelian C₃] [Abelian C₄]
@@ -234,8 +232,7 @@ private theorem representative_comparison
 
 /-- The canonical direct-image comparison on a specified K-injective representative:
 `Q(u_*I) ≅ Ru_*(QI) ≅ Ru_*K`, with the second arrow induced by `s.symm`.
-Source: Stacks Project, derived.tex, Tags 070K and 070Y
-(blueprint: lem-weil-pbc-derived-exchange-module-termwise). -/
+Source: Stacks Project, derived.tex, Tags 070K and 070Y. -/
 noncomputable def moduleExchangeDirectImageIso
     (Λ : Type (u + 1)) [CommRing Λ] {U V : Scheme.{u}} (f : U ⟶ V)
     {K : DerivedCategoryModule Λ U}
@@ -247,8 +244,7 @@ noncomputable def moduleExchangeDirectImageIso
     (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso s.symm
 
 /-- The isomorphism `t = g'⁻¹(s) ≫ φ ≫ Q(j)` associated to the replacement `j`.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A7, and derived.tex, Tag 070I
-(blueprint: lem-weil-pbc-derived-exchange-module-termwise). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 07A7, and derived.tex, Tag 070I. -/
 noncomputable def moduleExchangeReplacementIso
     (Λ : Type (u + 1)) [CommRing Λ] {X' X : Scheme.{u}} (g' : X' ⟶ X)
     {K : DerivedCategoryModule Λ X}
@@ -264,8 +260,7 @@ noncomputable def moduleExchangeReplacementIso
 
 /-- The complex map `e = Ex⁰_I ≫ f'_*(j)`, using the termwise module mate.
 Naturality of the sheaf mate supplies the chain-map condition in every degree.
-Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7
-(blueprint: lem-weil-pbc-derived-exchange-module-termwise). -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7. -/
 noncomputable def moduleExchangeRepresentativeMap
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -281,22 +276,11 @@ noncomputable def moduleExchangeRepresentativeMap
     (((f')_*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (.up ℤ)).map j
 
 /-- The specified unbounded module exchange is computed on any K-injective representative
-and any K-injective replacement of its inverse image. The two sides are respectively
-`σsrc ≫ Ex_K` and `Q(e) ≫ χ_(J,t)`, with `χ_(I,s)`, `t`, and `e` explicitly defined above.
-Consequently conjugating `Q(e)` by the displayed comparison isomorphisms always yields
-this fixed exchange mate. This includes bounded below injective representatives, and
-requires no K-injectivity of the inverse image of `I`.
+and any K-injective replacement of its inverse image: the two sides are `σsrc ≫ Ex_K` and
+`Q(e) ≫ χ_(J,t)`. No K-injectivity of the inverse image of `I` is required.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K, 08BJ and 0DVC; blueprint main-20261015, definition-derived-base-change-map, final
-paragraph (blueprint: lem-weil-pbc-derived-exchange-module-termwise).
-
-Proof: the composition and natural-isomorphism factorization identities normalize the
-exact derived inverse-image square. Apply the general exact-derived mate identity on
-homotopy complexes and identify its factors with the complex-level comparisons.
-Naturality in `s.inv` transports this identity from `Q(I)` to `K`. Naturality of the
-right-derived unit along `j`, and cancellation in the explicit definition of `t`,
-identify the resulting right side with `Q(e) ≫ χ_(J,t)`. -/
+Tags 070I, 070K, 08BJ and 0DVC. -/
 theorem derivedExchangeModuleTermwise
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}

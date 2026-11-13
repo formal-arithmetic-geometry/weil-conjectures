@@ -12,9 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicPointwiseAssembly
 
 /-! # Ext assembly contract for a supplied cyclic frame
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-frame-assembly-spec).
 -/
 
 @[expose] public noncomputable section
@@ -46,10 +43,8 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   cyclicLine cyclicLineMap derivedScalars
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
-/-- The literal normalized assembly contract with a supplied frame's endpoints.
-Source: coefficient changes (1)
-(blueprint: def-diagonal-cyclic-frame-assembly-spec).
-All classes, arrows, comparison squares and normalization predicates remain parameters. -/
+/-- The literal normalized assembly contract with a supplied frame's endpoints. All classes, arrows,
+comparison squares and normalization predicates remain parameters. -/
 @[irreducible] def cyclicFrameAssemblySpec
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

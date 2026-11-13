@@ -12,9 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicReductionEndpoints
 
 /-! # Literal proposition wrappers for cyclic transport equations
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-equations).
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +49,7 @@ attribute [local irreducible] cyclicLine cyclicLineMap derivedScalars
 attribute [local irreducible] cyclicEvaluationSource cyclicEvaluationTarget
   cyclicEvaluationFunctor CyclicCartierFrame.reduce
 
-/-- The equation for the derived representative, with the original endpoints.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-equations). -/
+/-- The equation for the derived representative, with the original endpoints. -/
 @[irreducible] def cyclicHomEquation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l Y]

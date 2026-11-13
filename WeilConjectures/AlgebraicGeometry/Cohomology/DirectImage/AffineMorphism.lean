@@ -33,14 +33,7 @@ variable {k : Type u} [Field k] [X.Over (Spec (.of k))]
 
 /-- **Finiteness of coherent cohomology.** On a scheme `X` proper over a field `k`, the
 cohomology groups `H^q(X, ℱ)` of a coherent `𝒪_X`-module `ℱ` are finite-dimensional over `k`.
-Coherence is spelled as quasi-coherence together with finite presentation.
-
-This is the case `T = Spec k` of the finiteness of the higher direct images along a proper
-morphism to a Noetherian affine scheme
-(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`), transported along the
-identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`, which holds for every morphism to the
-spectrum of a field (`exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field`).
--/
+Coherence is spelled as quasi-coherence together with finite presentation. -/
 @[stacks 02O5]
 theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]

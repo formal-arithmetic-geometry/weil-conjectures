@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.Fi
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.FiniteKummerBoundaryEquation
 
 /-! # Arbitrary ordinary arrows in the finite coefficient coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-ordinary-coordinate-arrow).
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The comparison image of an arbitrary ordinary degree-two line arrow, in the
-specified intrinsic coordinates. Source: the exact single and shift comparisons
-(blueprint: def-sfb-finite-ordinary-coordinate-arrow). -/
+specified intrinsic coordinates. -/
 def finiteOrdinaryCoordinateArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

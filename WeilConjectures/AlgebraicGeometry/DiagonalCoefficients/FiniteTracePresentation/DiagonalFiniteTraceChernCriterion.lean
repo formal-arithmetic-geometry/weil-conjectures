@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Reconstructing a finite trace from its Chern degree
-
-Source: diagonal tower trace proof, paragraph (1), inverse splitting and projection.
-(blueprint: lem-diagonal-finite-trace-chern-criterion).
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The isomorphism underlying the existing shifted-line comparison.
-Source: the exact single and shift comparisons in the finite trace presentation.
-(blueprint: lem-diagonal-finite-trace-chern-criterion). -/
+/-- The isomorphism underlying the existing shifted-line comparison. -/
 @[irreducible]
 def FiniteRealization.shiftedLineIso
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
@@ -52,9 +47,7 @@ variable (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj R] [IsCommMonObj R] (A : Type (u + 1)) [CommRing A]
 
 /-- The fully normalized isomorphism from a realized pushforward to the finite model.
-This simply composes the three existing comparison isomorphisms.
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-finite-trace-chern-criterion). -/
+This simply composes the three existing comparison isomorphisms. -/
 @[irreducible]
 def FiniteTracePresentation.comparison [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]
@@ -73,9 +66,7 @@ def FiniteTracePresentation.comparison [Finite A]
     (eqToIso p.q_canonical).app _
 
 /-- The supplied trace in the canonical finite pushforward and coefficient-unit model.
-All data are explicit composites of the supplied isomorphisms and the supplied trace.
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-finite-trace-chern-criterion). -/
+All data are explicit composites of the supplied isomorphisms and the supplied trace. -/
 @[irreducible]
 def FiniteTracePresentation.realizedTrace [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]
@@ -89,9 +80,7 @@ def FiniteTracePresentation.realizedTrace [Finite A]
   (p.comparison R A N hN hA Y hY L d eY eP lineP).inv ≫
     eY.F.mapDerivedCategory.map d.traceq ≫ eY.derivedUnit
 
-/-- The single Chern-component test, kept at generic coefficients to share instances.
-Source: diagonal tower trace proof paragraph (1), second summand of the splitting.
-(blueprint: lem-diagonal-finite-trace-chern-criterion). -/
+/-- The single Chern-component test, kept at generic coefficients to share instances. -/
 @[irreducible]
 def FiniteTraceChernDegree [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]
@@ -133,21 +122,7 @@ private theorem positive_to_unit_zero (N : ℕ) (hA : (N : A) = 0) (Y : Scheme.{
   exact DerivedCategory.TStructure.t.zero f (-2) 0 (by decide)
 
 /-- A finite trace is determined by degree one on the Chern summand; its other
-component vanishes by the canonical t-structure, without a coefficient comparison.
-
-Source: diagonal tower trace proof paragraph (1), twisting the decomposition and
-projecting to its second summand; the source's inverse-splitting argument.
-(blueprint: lem-diagonal-finite-trace-chern-criterion).
-
-Proof: after the normalized pushforward/line comparison, write t for the supplied
-trace. Every arrow from the positive finite line shifted by two to the coefficient
-unit vanishes: the source is in degrees at most -2 and the target in degrees at
-least zero. Thus the first component of splitting.hom followed by t is zero.
-The hypothesis and hsplitting make its second component the identity. Biproduct
-extensionality gives splitting.hom followed by t equal to the second projection.
-Cancel the splitting isomorphism to obtain t = splitting.inv followed by the second
-projection. Finally cancel the normalized pushforward comparison to return to the
-supplied models. The argument works for the zero ring and the empty scheme. -/
+component vanishes by the canonical t-structure, without a coefficient comparison. -/
 theorem finitePresentedTraceEquation_of_chern [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]
     (hY : IsUnit (N : Γ(Y, ⊤))) (L : ∀ X : Scheme.{u}, Modules R X)

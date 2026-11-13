@@ -189,18 +189,7 @@ private theorem isoWhiskerLeft_app_eq
     (Functor.isoWhiskerLeft F e).app X = e.app (F.obj X) := by
   rfl
 
-/-- The cached ordinary constant pullback is the canonical derived comparison.
-Source: lemma-section-normal-bundle, Local construction, canonical constant-coefficient
-identifications (blueprint: lem-trf-coordinate-single-constant-pullback-comparison).
-
-Proof: Use the published factorization of ordinaryFiniteUnitPullback through the
-single-degree comparison and the pullback of the constant sheaf. The published
-ordinaryFiniteSingleExactPullbackIso_eq and ordinaryFiniteSingleFunctor_eq replace
-the cached comparisons by the canonical ones. Evaluation of a composite natural
-isomorphism and of left whiskering gives the three factors defining
-leftDerivedUpperStarSingleConstantSheafIso. Associativity of isomorphism composition
-identifies their products. The large derived-functor comparison is kept abstract.
--/
+/-- The cached ordinary constant pullback is the canonical derived comparison. -/
 theorem coordinateUnitPullback_eq_singleConstant
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S T : Scheme.{u}} (v : T ⟶ S) :

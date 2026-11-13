@@ -53,8 +53,6 @@ element of the field `Γ(X, 𝒪_X)`, hence a unit.
   finite locally free `ℱ` the cup-product pairing
   `H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ ⊗ ℱᵛ ⊗ ω) → H¹(X, ω) → k` with the residue trace is
   perfect.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -201,9 +199,7 @@ variable [IsProper (X ↘ Spec (.of k))]
 
 /-- **The residue theorem on a curve.** For `η ∈ Ω[K⁄k]`, `∑_{x closed} res_x(η) = 0`: this is
 Tate's abstract residue theorem `TateResidue.residue_theorem` for the local rings `𝒪_{X,x}`,
-whose hypotheses are the finiteness of `H⁰(X, 𝒪_X)` and `H¹(X, 𝒪_X)`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+whose hypotheses are the finiteness of `H⁰(X, 𝒪_X)` and `H¹(X, 𝒪_X)`. -/
 theorem residueSum_differentialsPrincipalPartsMap [NoetherianSpace X]
     (hdim : topologicalKrullDim X ≤ 1) (η : Ω[X.functionField⁄k]) :
     residueSum k X (differentialsPrincipalPartsMap k hdim η) = 0 := by
@@ -230,9 +226,7 @@ theorem residueSum_differentialsPrincipalPartsMap [NoetherianSpace X]
 `ω = Ω¹_{X/k}`. Under `H¹(X, ω) ≅ (⨁_{x closed} Ω[K⁄k] ⧸ ω_x) ⧸ Ω[K⁄k]`
 (`differentialsH1Equiv`), it sends the class of `(η_x)_x` to the sum of the local residues
 `∑_x res_x(η_x)` (`residueTrace_symm_mk`); it is well defined by the residue theorem
-`residueSum_differentialsPrincipalPartsMap`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`residueSum_differentialsPrincipalPartsMap`. -/
 noncomputable def residueTrace :
     Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1) :=
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
@@ -256,9 +250,7 @@ lemma residueTrace_symm_mk_eq_residueSum [NoetherianSpace X] [Smooth (X ↘ Spec
 
 /-- **The formula for the residue trace.** If the class in `H¹(X, ω)` is represented by
 `d ∈ ⨁_x Ω[K⁄k] ⧸ ω_x`, `d_x = η_x mod ω_x` for differentials `η_x ∈ Ω[K⁄k]`, then
-`t_X` takes the value `∑_x res_x(η_x)`, where `res_x` is Tate's residue at `x`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`t_X` takes the value `∑_x res_x(η_x)`, where `res_x` is Tate's residue at `x`. -/
 lemma residueTrace_symm_mk [NoetherianSpace X] [Smooth (X ↘ Spec (.of k))]
     (hdim : topologicalKrullDim X ≤ 1)
     (d : Π₀ x : closedPoints X, Ω[X.functionField⁄k] ⧸
@@ -310,12 +302,7 @@ section Duality
 variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
 
 /-- **Serre duality on a curve with the residue trace**, in the form `Hom(ℱ, ω) ≅ H¹(X, ℱ)^∨`,
-`φ ↦ t_X ∘ H¹(φ)`, for every finite locally free `ℱ`.
-
-The abstract trace `t` of `exists_trace_bijective_dualPairing` satisfies `t_X = t ∘ H¹(φ₀)` for
-an endomorphism `φ₀` of `ω`; `φ₀` is multiplication by a global function `c`
-(`Modules.exists_eq_smulHom`), `c ≠ 0` since `t_X ≠ 0`, so `c` is a unit of the field
-`Γ(X, 𝒪_X)` and `φ₀` is an isomorphism. -/
+`φ ↦ t_X ∘ H¹(φ)`, for every finite locally free `ℱ`. -/
 theorem bijective_dualPairing_residueTrace (ℱ : X.Modules)
     (hℱ : SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ) :
     Function.Bijective (Modules.dualPairing (residueTrace k X) ℱ) := by
@@ -366,20 +353,10 @@ theorem bijective_dualPairingH_residueTrace (ℱ : X.Modules)
   exact L.dualMap.bijective.comp (Module.evalEquiv k (ℱ.H 1)).bijective
 
 open scoped AlgebraicGeometry.Scheme.Modules in
-/-- **Serre duality on a smooth proper curve with the residue trace.** Let `X` be an integral
-scheme, smooth of relative dimension one and proper over a field `k`, with canonical module
-`ω = Ω¹_{X/k}`, and let `t_X : H¹(X, ω) → k` be the residue trace
-(`residueTrace`: under `H¹(X, ω) ≅ (⨁_{x closed} Ω[K⁄k] ⧸ ω_x) ⧸ Ω[K⁄k]` it is
-`(η_x)_x ↦ ∑_x res_x(η_x)`, with `res_x` Tate's residue at `x`). Then for every finite locally
-free `ℱ` the trace pairing
-```
-  H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) --∪--> H¹(X, ℱ ⊗ ℱᵛ ⊗ ω) --H¹(ev)--> H¹(X, ω) --t_X--> k
-```
-(`Modules.cupPairing`) is perfect: both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and
-`H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. This is the case `n = 1` of Serre duality with the
-explicit trace of the blueprint.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+/-- **Serre duality on a smooth proper curve with the residue trace.** For every finite locally
+free `ℱ` on `X`, the trace pairing `H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) → k` built from the residue trace
+`residueTrace k X` (`Modules.cupPairing`) is perfect: both induced maps
+`H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and `H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. -/
 theorem serreDuality_residueTrace (ℱ : X.Modules)
     (hℱ : SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ) :
     Function.Bijective (Modules.cupPairing (residueTrace k X) ℱ) ∧

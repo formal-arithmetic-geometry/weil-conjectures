@@ -17,10 +17,9 @@ Let `Y` be a scheme. This file proves the two halves of the dictionary between f
 `Y`-schemes and finite locally constant sheaves of sets on the small étale site of `Y`.
 
 * For a finite étale `Y`-scheme `X`, the sheaf `U ↦ Hom_Y(U, X)` is constant over every member
-  of an étale cover trivialising `X`
-  (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`, blueprint
-  `lem-fet-locally-trivial`), and its stalks are the geometric fibres of `X`, which
-  are finite (`AlgebraicGeometry.Scheme.Etale.isConstant_over_uliftYoneda_of_isPullback`,
+  of an étale cover trivialising `X`,
+and its stalks are the geometric fibres of `X`, which are finite
+  (`AlgebraicGeometry.Scheme.Etale.isConstant_over_uliftYoneda_of_isPullback`,
   `AlgebraicGeometry.Scheme.Etale.finite_sheafFiber_uliftYoneda`).
 * Conversely, a sheaf of sets `E` with finite stalks which is constant over the members of an
   étale cover is represented by a finite étale `Y`-scheme

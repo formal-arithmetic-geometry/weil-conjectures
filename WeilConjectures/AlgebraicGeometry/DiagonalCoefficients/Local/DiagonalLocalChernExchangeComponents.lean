@@ -192,25 +192,7 @@ private theorem localChern_base_lift_factorization (l : ℕ) [Fact l.Prime]
 
 set_option linter.unusedVariables false in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
-factoring through the shifted integral Tate line on the new base.
-
-Source: diagonal coefficient changes (3), whole-system Kummer naturality and the
-projective-line hyperplane calculation.
-(blueprint: lem-diagonal-local-chern-exchange-components).
-
-Proof: naturality of the line-bundle extension and its Kummer boundary gives
-pullback of the entire Chern system, with its coefficient-one and root comparisons.
-Use the supplied Picard factorization of the pulled class as
-the new hyperplane plus a base Picard class. Additivity of the whole Kummer system
-writes its Chern arrow as the corresponding sum. The completed local
-normalizations and full faithfulness on complete objects transport that equality
-to completed local arrows. The exact realizations, their underlying-sheaf
-normalizations and the fixed root comparison identify the local pullback maps.
-Take adjuncts. The mate identity turns the base term into its base Chern arrow
-followed by the twisted unit, and turns the relative term into the new local
-adjunct preceded by the normalized base-unit endpoint. Transport through the
-canonical functor equalities. These operations give the asserted factorization;
-no trace or invertibility of exchange is assumed or used. -/
+factoring through the shifted integral Tate line on the new base. -/
 theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S] [IsNoetherian X'] [IsNoetherian S']

@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantPre
 /-!
 # The normalized Koszul-to-quotient comparison over completed coefficients
 
-Source: blueprint, proper base change, Koszul and quotient reconstruction, order 1248;
-Stacks Tags 099L, 099M and 0A0E
-(blueprint: lem-weil-pbc-completed-koszul-quotient-comparison).
+Source: Stacks Tags 099L, 099M and 0A0E.
 
 This is the reconstruction comparison in the actual completed coefficient presentation,
 with coefficient universe one above the scheme universe. The quotient unit is the
@@ -32,18 +30,7 @@ namespace AlgebraicGeometry.Scheme
 limit, carrying its transported (u,0) unit to the actual quotient completion unit.
 No completeness hypothesis on the input is required.
 
-Source: blueprint `prop-weil-pbc-koszul-reconstruction`, comparison assertion;
-Stacks Tags 099L, 099M and 0A0E
-(blueprint: lem-weil-pbc-completed-koszul-quotient-comparison).
-
-Proof: use the joint constant coefficient transport for the actual quotient completion
-and the intrinsic Koszul fiber, with their specified units. Carry the Koszul comparison
-along the supplied representative isomorphism, then compose with the inverse quotient
-comparison. Full faithfulness lifts this composite to the actual derived category.
-Naturality of the constant completion unit and the two transport equations identify its
-composite with the intrinsic unit as the actual quotient completion unit.
-The construction applies equally to an empty generator list, the zero ring and the
-empty scheme: the same normalized towers and completion units are used. -/
+Source: Stacks Tags 099L, 099M and 0A0E. -/
 theorem completedKoszulQuotientComparison
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)

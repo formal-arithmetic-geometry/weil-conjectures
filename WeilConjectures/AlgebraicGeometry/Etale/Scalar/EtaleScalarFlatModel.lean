@@ -17,9 +17,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-! # Constructible flat models under arbitrary finite scalar extension
 
-Source: Stacks Project, etale-cohomology.tex, Tags 03TT (lemma-when-ctf) and
-0GKB (lemma-tensor-constructible), with sites-cohomology.tex, Tags 06YQ, 0G7E,
-06YT, 06YY and 08G1 (blueprint: lem-sp-etale-scalar-flat-model).
+Source: Stacks Project, etale-cohomology.tex, Tags 03TT and 0GKB, with sites-cohomology.tex, Tags
+06YQ, 0G7E, 06YT, 06YY and 08G1.
 
 Scalar extension is the ordinary, uncompleted functor into the B-module derived
 category. The ordinary representative retains the target-ring action; its tensor
@@ -38,29 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A bounded constructible complex of Tor amplitude `[a,b]` has a flat constructible
 model in that interval, and every such model computes arbitrary finite scalar extension.
-Source: Stacks Project, Tags 03TT and 0GKB
-(blueprint: lem-sp-etale-scalar-flat-model).
-
-Proof plan:
-1. Apply lem-sf-etale-flat-constructible to T, A, a, b and K. Its forward implication
-   supplies the existential model with the specified interval and finite-value strata.
-2. Fix any model with these properties. Its upper bound and flatness imply K-flatness
-   by lem-pc-bounded-above-flat-kflat-site (06YQ).
-3. Apply lem-pur-kflat-change-of-rings (0G7E) to A_T to B_T. Ordinary termwise
-   extension has flat B-module terms and is K-flat over B, without assuming B flat
-   over A. Its differential is the extended differential; zero terms stay zero.
-4. The ordinary etale clauses of lem-sp-constructible-coefficient-site-square
-   (0GKB and 03RZ) give constructibility of each extended term and of the cohomology
-   of its derived image. On each finite stratum the value M becomes M tensor_A B.
-   Only the ordinary etale clauses are used, not the pro-etale assertions.
-5. The K-flat computation of lem-pur-derived-change-of-rings (06YT and 06YY), on
-   the identity resolution of P, identifies the derived extension of Q(P) with the
-   localization of the extended complex, in D(B_T). Apply the scalar functor to
-   the representing isomorphism Q(P) to K to obtain the displayed representation.
-6. Transport bounded constructibility along that isomorphism. Apply
-   lem-kun-flat-bounded-tor-amplitude (08G1) over B to its bounded flat model,
-   obtaining the same interval against every degree-zero B-module sheaf.
-No step assumes flatness or finite projective dimension of B over A. -/
+Source: Stacks Project, Tags 03TT and 0GKB. -/
 theorem exists_etaleScalarFlatModel
     (T : Scheme.{u}) [IsNoetherian T]
     (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]

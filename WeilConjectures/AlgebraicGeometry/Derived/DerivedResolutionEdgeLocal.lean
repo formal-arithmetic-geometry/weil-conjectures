@@ -258,35 +258,7 @@ variable [∀ X : Scheme.{u},
 
 /-- The kernel/cokernel resolution edge has the fixed local-class description.
 Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
-construction and local Leray comparison; Tag 079W, normalization by the derived unit.
-(blueprint: lem-weil-pbc-resolution-local-class-edge-local).
-
-Proof: Write I for the fixed K-injective representative of K and B for g_*I.
-The direct-image homology identification in resolutionLocalClassEdge transports
-H^q(Rg_*K) to H^q(B). The corresponding local comparison transports local derived
-sections to H^q of the section complex of B: this follows from the universal-unit
-equation defining localLerayComparison, after evaluating both derived direct-image
-comparisons on I. The specified hom of unboundedDirectImage_sectionPresheaf identifies
-its chosen isomorphism with this comparison; thus there is no choice of local Leray map.
-
-On an arbitrary complex B the sheafification unit followed by
-localSectionComplexSheafificationIso sends a section cocycle to its class in the
-underlying cohomology sheaf. This is the kernel/cokernel universal property: precompose
-with the quotient from cycles, use the exact-sheafification homology comparison, and
-then its counit identity. Apply this observation to B and to I. Preservation of kernels
-by g_* identifies cycles of B with g_* of cycles of I, and the definition of
-leftExactHomologyEdge makes the two maps from these cycles equal after taking their
-cohomology classes. Precomposition by inverse-image opens preserves homology, so its
-published homology comparison makes this equality the inverse-open local-class map.
-
-Finally localHypercohomologySheafificationAt is normalized on fixed representatives
-by localHypercohomologySheafificationModel. Naturality of that comparison transports
-the preceding equation along the resolution isomorphisms on S and T and along the
-direct-image comparison, cancelling the homology-factorization isomorphisms. This is
-the displayed equation of presheaf maps. Evaluation at V proves the assertion.
-The argument uses only kernels, cokernels and isomorphisms; it requires neither
-acyclicity of B for module homology nor any boundedness, and also covers empty opens,
-zero complexes and negative q. -/
+construction and local Leray comparison; Tag 079W, normalization by the derived unit. -/
 theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) (V : (TopologicalSpace.Opens S)ᵒᵖ) :
     (RingedSpace.topEdgeLocalClass S.toRingedSpace q

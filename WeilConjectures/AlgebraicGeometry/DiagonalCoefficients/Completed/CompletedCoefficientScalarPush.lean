@@ -14,9 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalMo
 import Mathlib.CategoryTheory.Limits.Types.Limits
 
 /-! # Compatibility of the normalized coefficient map with direct image
-
-Source: diagonal coefficient changes, paragraph (1), integral coefficient comparison.
-(blueprint: lem-sfb-diagonal-completed-scalar-push).
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +30,7 @@ attribute [local irreducible] upperStarFromPoint condensedPushforwardHom purZlRe
   purZlConstantPullbackIso
   InternalAbelianSheafModule.sectionModuleEquivalenceCore
 
-/-- The actual completed coefficient direct-image map, evaluated using its action on one.
-Source: definition of completed ringed direct image
-(blueprint: lem-sfb-diagonal-completed-scalar-push). -/
+/-- The actual completed coefficient direct-image map, evaluated using its action on one. -/
 def completedPushScalar {l : ℕ} [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     (U : S.ProEtᵒᵖ)
     (a : (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l)).obj.obj U) :
@@ -47,9 +42,7 @@ def completedPushScalar {l : ℕ} [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S
     (1 : (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj.obj
       ((Scheme.proEtaleBaseChange f).op.obj U))
 
-/-- The condensed direct-image coefficient map evaluated on sections.
-Source: the canonical direct-image coefficient morphism
-(blueprint: lem-sfb-diagonal-completed-scalar-push). -/
+/-- The condensed direct-image coefficient map evaluated on sections. -/
 def condensedPushScalarSection {l : ℕ} [Fact l.Prime] {X S : Scheme.{u}}
     (f : X ⟶ S) (U : S.ProEtᵒᵖ)
     (a : (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) S).obj.obj U) :
@@ -466,23 +459,7 @@ private theorem finite_reduction_push (l : ℕ) [Fact l.Prime]
 
 /-- The normalized regular-module comparisons intertwine the two coefficient maps.
 Only coefficients occur here: the completed direct-image action is evaluated at one
-on the regular module, and there is no arbitrary module or functor comparison.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), coefficient identification;
-sk-prop-sfb-qlbar-colimit-x-pullback, integral comparison paragraph.
-(blueprint: lem-sfb-diagonal-completed-scalar-push).
-
-Proof: evaluate both maps at a section of the completed coefficient ring. Compose with
-every finite reduction. The unit normalizations replace each realization's regular-module
-comparison by the specified finite constant-ring identification. The defining completed
-coefficient limit lift and its adjunction mate identify its finite projections. On the
-condensed side, factor each reduction through its point coefficient ring and use naturality
-of the coefficient map. The transported finite map is the canonical constant-ring map:
-ring maps from a constant cyclic ring are unique, by sheafification and integer casts.
-The normalized coefficient-ring comparison and the defining limit then detect equality
-from all positive reductions. Evaluation of the completed action on one is exactly its
-coefficient structure map, by the definition of ringed direct image. -/
+on the regular module, and there is no arbitrary module or functor comparison. -/
 theorem completedRealization_scalar_push (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (eX : CompletedRealization l X) (eS : CompletedRealization l S)

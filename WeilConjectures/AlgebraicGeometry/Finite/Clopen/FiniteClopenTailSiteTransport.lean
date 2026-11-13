@@ -453,8 +453,7 @@ private theorem tail_paste
   simp only [Functor.map_comp, Category.assoc]
 
 /-- The part of the proetale alpha after cartesian base change.
-Source: Stacks Tags 09AF and 0F7B
-(blueprint: lem-cbc-finite-clopen-tail-site-transport). -/
+Source: Stacks Tags 09AF and 0F7B. -/
 def finiteClopenProEtaleTail
     (Λ : Type (u + 1)) [CommRing Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
@@ -484,23 +483,7 @@ attribute [local irreducible] upperStar Etale.upperStar comparisonUpperStar
   openImmersionLowerShriek Etale.openImmersionLowerShriek
 
 /-- Comparison preserves the clopen projection with its outgoing compositors.
-Source: Stacks Project, proetale.tex Tag 09AF and more-etale.tex Tag 0F7B;
-steps 2--3 of lem-cbc-finite-clopen-alpha-site-transport
-(blueprint: lem-cbc-finite-clopen-tail-site-transport).
-
-Proof: write s for the clopen lift V → W ×_T S. On the image of s the
-projection is the identity, and on its complementary open it is zero. The
-sheaf axiom for this disjoint two-open cover uniquely specifies the map,
-including when one component is empty. The comparison pullback preserves
-restriction and the canonical open comparison preserves extension by zero;
-thus these two component maps identify the etale and proetale projections.
-Whisker this equality by pullback along q and extension by zero along b.
-Use naturality of open comparison to move it through the projection. Its
-composition equation for s and b combines the two extension functors, and
-pullback comparison coherence for s and q combines inverse images.
-Finally use equality transport along s;b=k and s;q=r. This is exactly the
-stated equality of the two tails, with their source comparison displayed.
-All assertions are on sheaves, before passing to complexes or localization. -/
+Source: Stacks Project, proetale.tex Tag 09AF and more-etale.tex Tag 0F7B. -/
 theorem finiteClopenTailSiteTransport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)

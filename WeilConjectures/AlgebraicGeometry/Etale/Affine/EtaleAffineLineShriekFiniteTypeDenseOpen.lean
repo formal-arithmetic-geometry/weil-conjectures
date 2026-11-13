@@ -113,23 +113,7 @@ private theorem affineLine_shriek_constructible_of_finite_complement
 
 /-- The dense-open step in affine-line compact-support constructibility, over a base on
 which the additive orders of the coefficients are invertible.
-Source: Stacks Project, Tag 0GKZ, induction paragraph, and Tags 0GKY, 0GK3, 0GKP.
-(blueprint: lem-weil-pbc-affine-line-shriek-finite-type-dense-open)
-
-Proof: The geometric shrinking and generic-constancy theorem supplies a dense open
-affine spectrum over which the input is lisse on an open with finite closed complement.
-Choose compactifications of both pieces. The lisse-open-relative-line theorem proves
-constructibility for the open piece. The finite complement is quasi-finite and finitely
-presented over the Noetherian base, so quasi-finite shriek constructibility applies to
-the pullback of the input placed in degree zero. The relative open-closed triangle has
-these two outputs as outer vertices. Exact inverse image commutes with the single
-functor, and constructible homology is a triangulated property (the Serre five-term
-exact-sequence argument), so the middle output has constructible homology. Compact-support
-base change, exactness of inverse image, and compactification independence identify this
-output with the pullback of the original output. Identify the open affine spectrum with
-its open range to obtain the required dense open of the original base. Empty schemes
-and the zero input require no separate nonemptiness assumption.
--/
+Source: Stacks Project, Tag 0GKZ, induction paragraph, and Tags 0GKY, 0GK3, 0GKP. -/
 theorem exists_dense_open_affineLine_shriek_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y]
     [Algebra.FiniteType ℤ Γ(Y, ⊤)]

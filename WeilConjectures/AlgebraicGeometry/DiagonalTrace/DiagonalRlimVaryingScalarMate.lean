@@ -37,19 +37,7 @@ attribute [local irreducible] SemilinearSections.transition SemilinearSections.c
   Scheme.proEtaleRingModulePullback Scheme.proEtaleRingModuleAdjunction
   Scheme.proEtaleConstantRingComparison Scheme.proEtaleRingDirectImageMap
 
-/-- The section-normalized varying direct-image square has invertible inverse-image mate.
-
-Source: blueprint coefficient proof (1), exact residue scalar restriction.
-At each finite level, forget the fixed scalars and identify the result with the
-underlying abelian sheaf of the actual finite module. The direct-image square
-is the normalized push-evaluation square: both maps are the identity on sections.
-The unit-mate equation, the naturality of restriction's underlying comparison,
-and the evaluated system-unit equation identify the underlying mate with the
-comparison between the fixed-scalar unit and the finite-ring unit. Their abelian
-adjuncts are invertible. Therefore the comparison is invertible by naturality of
-adjunction. Forgetting scalars and evaluation reflect isomorphisms, giving the
-claim for strict systems. The argument includes the zero system and level zero.
-(blueprint: new-sfb-diagonal-rlim-varying-scalar-mate). -/
+/-- The section-normalized varying direct-image square has invertible inverse-image mate. -/
 theorem diagonalRlimVaryingScalarMate (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))

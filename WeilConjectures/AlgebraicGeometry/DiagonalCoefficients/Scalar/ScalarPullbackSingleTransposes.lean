@@ -19,10 +19,6 @@ import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Transpose formulas for shifted scalar and geometric endpoints
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-  sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md,
-  paragraph (3), final sentence (blueprint: lem-sfb-scalar-pullback-single-transposes).
 -/
 
 @[expose] public noncomputable section

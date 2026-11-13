@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientEta
 
 /-! # Finite-module models after one coefficient extension
 
-Source: Stacks Tags 09C2, 094I and 094G
-(blueprint: lem-weil-pbc-finite-quotient-finite-module-models).
+Source: Stacks Tags 09C2, 094I and 094G.
 -/
 
 @[expose] public noncomputable section
@@ -57,26 +56,7 @@ private theorem finiteModels_emptySlice_derived_isZero (X : Scheme.{t})
     (DerivedCategory.Q.objObjPreimageIso K).symm
 
 /-- The coefficient-filtration step gives bounded constant finite-module models.
-It does not assert projectivity of their terms or finite Tor amplitude.
-
-Source: Stacks Project, proetale.tex, lemma-describe-constructible-complexes (09C2),
-sites-cohomology.tex, lemma-bounded (094I) and lemma-locally-constant (094G).
-(blueprint: lem-weil-pbc-finite-quotient-finite-module-models).
-
-Proof: intersect the residue and previous-level trivializing covers. On a flat-term
-K-flat representative tensor the exact coefficient sequence with kernel
-I^(n+1)/I^(n+2). Balancing identifies the kernel term with the residue model tensored
-with this finite A/I-module. Both outer terms have finite locally constant cohomology
-in [a,b]. Their long exact sequence and the weak Serre property over the finite
-Noetherian coefficient ring give the same property for the middle term. The specified
-coefficient squares identify it with the actual next quotient reduction. Finite-ring
-constructible derived origin descends this bounded object to the etale site; full
-faithfulness identifies its cohomology with the already obtained finite local systems.
-Local bounded constant-model descent (094G) supplies
-finite-module complexes in [a,b], including their differentials. Compose the covering
-sieves. A nonempty chart satisfies the first alternative in the last conjunct. On an
-empty chart the localized sheaf category is zero, so choose the zero algebraic complex
-and its unique restriction isomorphism; it satisfies the second alternative. -/
+It does not assert projectivity of their terms or finite Tor amplitude. -/
 theorem finiteQuotient_finiteModule_models_succ
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

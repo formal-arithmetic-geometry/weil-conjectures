@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSourceMateSquare
 
 /-! # Transpose of the left supported endpoint
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: lem-diagonal-source-endpoint-left-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -65,11 +62,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
   (q : UniformizerSquareData l Y E π n A hA)
 
-/-- The actual left endpoint composite has the prescribed quotient transpose.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-endpoint-left-transpose).
-Proof: unfold the constructed left endpoint map and comparison. The generic mate
-transpose formula moves the quotient endpoint and the exact single comparison
-through the cyclic adjunction. These are exactly the constructed extension maps. -/
+/-- The actual left endpoint composite has the prescribed quotient transpose. -/
 theorem source_endpoint_left_transpose
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) :
     q.cyclicAdjunction.homEquiv _ _ (q.sourceEndpointLeft s) =

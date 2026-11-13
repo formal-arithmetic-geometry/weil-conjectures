@@ -73,8 +73,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 # Closed lifted tests detect the specified derived exchange
 
 Source: Stacks Project, Tags 09BK, 09BL, 098F and 098H; Hemo--Richarz--Scholbach,
-Corollary 4.4 and Lemma 4.1; Bhatt--Scholze, Lemmas 6.1.1--6.1.2
-(blueprint: lem-sfb-closed-lifted-test-isomorphism-criterion).
+Corollary 4.4 and Lemma 4.1; Bhatt--Scholze, Lemmas 6.1.1--6.1.2.
 
 The canonical maps are those of `ClosedTestDerivedExchangeModel`. All derived direct
 images are ordinary unbounded K-injective derived functors. No integrality, lisseness,

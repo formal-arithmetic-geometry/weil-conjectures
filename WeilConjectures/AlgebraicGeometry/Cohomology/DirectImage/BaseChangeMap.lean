@@ -58,14 +58,8 @@ variable {X Y S T : Scheme.{u}} {f : X ⟶ S} {f' : Y ⟶ T} {g : T ⟶ S} {g' :
 
 /-- **The base change map** `B ⊗[A] H^q(Č(U, ℱ)) ⟶ H^q(Č(g'⁻¹ U, g'^* ℱ))` of the Čech
 cohomology for a cartesian square with affine bases `S = Spec A` and `T = Spec B`,
-`b ⊗ [z] ↦ b • [g'^* z]`: the base change map on homology
-(`CategoryTheory.ShortComplex.homologyBaseChange`) followed by the identification
-`B ⊗[A] Č(U, ℱ) ≅ Č(g'⁻¹ U, g'^* ℱ)`
-(`AlgebraicGeometry.Scheme.Modules.cechModuleComplexBaseChangeIso`).
-
-For `T = Spec κ(t)` this is the base change map `φ^q(t) : R^q f_* ℱ ⊗ κ(t) ⟶ H^q(X_t, ℱ_t)`.
-
-(blueprint: `lemma-triviality-fibres--2`, part (1)) -/
+`b ⊗ [z] ↦ b • [g'^* z]`. For `T = Spec κ(t)` this is the base change map
+`φ^q(t) : R^q f_* ℱ ⊗ κ(t) ⟶ H^q(X_t, ℱ_t)`. -/
 noncomputable def cechBaseChangeMap (q : ℤ) :
     Γ(T, ⊤) ⊗[Γ(S, ⊤)] (cechModuleComplex f ℱ U).homology q →ₗ[Γ(T, ⊤)]
       (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i)).homology q :=
@@ -236,9 +230,7 @@ finite presentation over a reduced noetherian affine scheme `S = Spec A`, `ℱ` 
 `𝒪_X`-module of finite presentation, flat over `S`, and `U` a finite cover of `X` by affine
 opens. Let `g : Spec K ⟶ S` be a field point, through a point `s = g x`. If the fibre dimension
 `h^q` takes the same value at all generisations of `s` as at `s`, then the base change map
-`Γ(Spec K, ⊤) ⊗[A] H^q(Č(U, ℱ)) ⟶ H^q(Č(g'⁻¹ U, g'^* ℱ))` is bijective.
-
-(blueprint: `lemma-triviality-fibres--2`, part (3), `lemma-triviality-fibres--2`) -/
+`Γ(Spec K, ⊤) ⊗[A] H^q(Č(U, ℱ)) ⟶ H^q(Č(g'⁻¹ U, g'^* ℱ))` is bijective. -/
 theorem bijective_cechBaseChangeMap_of_forall_specializes [IsReduced S]
     [IsNoetherianRing Γ(S, ⊤)]
     [LocallyOfFinitePresentation f] [Nonempty ι] (hℱ : ℱ.IsFlatOver f) (K : Type u) [Field K]

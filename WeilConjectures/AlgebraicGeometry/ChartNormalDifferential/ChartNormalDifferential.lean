@@ -26,9 +26,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 
 /-! # The actual normal comparison of an etale coordinate chart
 
-Source: current blueprint, sec-smooth-purity/sk-prop-sp-orientation,
-sk-prop-sp-orientation-charts.proof.md, Steps 1--2; Stacks Tags 0633--0635, 0473,
-08S2 and 01LX (blueprint: lem-pur-chart-normal-differential).
+Source: Stacks Tags 0633--0635, 0473,
+08S2 and 01LX.
 
 The specification below retains the canonical graded maps, their relative spectra,
 and the difference convention. No map or isomorphism is chosen from its existence.
@@ -50,7 +49,7 @@ open AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.ChartNormalDifferential
 
 /-- The existing relative-spectrum identification for the actual conormal algebra.
-Source: Stacks Tags 0636, 01LX (blueprint: lem-pur-chart-normal-differential). -/
+Source: Stacks Tags 0636, 01LX. -/
 def normalAlgebraIso {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     (ConormalGradedAlgebra.presentation i).algebra ≅
       Under.mk (⟨(PurityNormalBundle.projection i).c⟩ : Z.sheaf ⟶
@@ -61,8 +60,7 @@ def normalAlgebraIso {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
       (PurityNormalBundle.algebraObject i))).symm
 
 /-- Sectionwise normalization of a relative-spectrum map by an algebra pullback.
-The equation includes all sections, not just degree one. Source: Stacks Tag 01LX
-(blueprint: lem-pur-chart-normal-differential). -/
+The equation includes all sections, not just degree one. Source: Stacks Tag 01LX. -/
 def IsSpecMap {Z Z' N N' : Scheme.{u}} (f : Z ⟶ Z')
     (B : Z.CommAlgebraSheaf) (B' : Z'.CommAlgebraSheaf)
     (π : N ⟶ Z) (π' : N' ⟶ Z')
@@ -79,7 +77,7 @@ def IsSpecMap {Z Z' N N' : Scheme.{u}} (f : Z ⟶ Z')
         (α'.hom.right.hom.app (op V) a)
 
 /-- The adjunction sends a section to its pure tensor with one, then applies `c`.
-Source: Stacks Tags 0634--0635 (blueprint: lem-pur-chart-normal-differential). -/
+Source: Stacks Tags 0634--0635. -/
 def pullbackSection {Z Z' : Scheme.{u}} (f : Z ⟶ Z')
     (M : Z.Modules) (M' : Z'.Modules) (c : (tensorPullback f).obj M' ⟶ M)
     (V : Z'.Opens) (a : M'.val.obj (op V)) : M.val.obj (op (f ⁻¹ᵁ V)) :=
@@ -88,7 +86,7 @@ def pullbackSection {Z Z' : Scheme.{u}} (f : Z ⟶ Z')
 
 /-- The differential/conormal identification uses the difference second minus first.
 This works with either the full ambient product or its open neighbourhood.
-Source: Stacks Tag 08S2 (blueprint: lem-pur-chart-normal-differential). -/
+Source: Stacks Tag 08S2. -/
 def IsDifferenceIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y)
     (δ : U ⟶ M) [IsClosedImmersion δ] (p₁ p₂ : M ⟶ U)
     (ω : h.relativeDifferentials ≅ ConormalGradedAlgebra.piece δ 1) : Prop :=
@@ -103,8 +101,7 @@ def IsDifferenceIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y)
 
 /-- A normal/tangent identification is induced by the symmetric-algebra map with the
 specified degree-one identification. It fixes the projection and the zero section.
-Source: Stacks Tags 0637, 08S2, 01LX
-(blueprint: lem-pur-chart-normal-differential). -/
+Source: Stacks Tags 0637, 08S2, 01LX. -/
 def IsNormalTangentIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y) [Smooth h]
     (δ : U ⟶ M) [IsClosedImmersion δ]
     (ω : h.relativeDifferentials ≅ ConormalGradedAlgebra.piece δ 1)
@@ -126,8 +123,7 @@ def IsNormalTangentIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y) [Smooth h]
 
 /-- The actual differential is normalized on every local differential `da` by
 `da ↦ d(e-sharp a)`. Projection fixes scalars, so the symmetric-algebra universal
-property determines the whole scheme map. Source: Stacks Tag 08S2 and the blueprint's
-Step 2 (blueprint: lem-pur-chart-normal-differential). -/
+property determines the whole scheme map. Source: Stacks Tag 08S2. -/
 def IsDifferential {U A Y : Scheme.{u}} (p : A ⟶ Y) (e : U ⟶ A)
     [Smooth p] [Smooth (e ≫ p)]
     (de : RelativeTangentBundle.scheme (e ≫ p) ⟶ RelativeTangentBundle.scheme p) : Prop :=
@@ -157,8 +153,7 @@ attribute [local irreducible] normalAlgebraIso PurityNormalBundle.projection
 
 /-- All clauses of the chart comparison, with every map normalized. This is a package
 of the conclusions of the lemma, not additional hypotheses on a chart.
-Source: current blueprint Step 2; Stacks Tags 0633--0635, 0473, 08S2 and 01LX
-(blueprint: lem-pur-chart-normal-differential). -/
+Source: Stacks Tags 0633--0635, 0473, 08S2 and 01LX. -/
 structure Comparison {U A Y : Scheme.{u}} (d : ℕ) (p : A ⟶ Y) (e : U ⟶ A)
     [IsSeparated p] [IsSeparated (e ≫ p)] [Smooth p] [Smooth (e ≫ p)] where
   /-- The specified open neighbourhood of the diagonal. -/
@@ -1750,36 +1745,7 @@ private theorem comparisonOfChart {k : Type u} [Field k]
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual graded and normal comparisons for an etale affine coordinate chart,
 including dimension zero and the empty source.
-Source: current blueprint sec-smooth-purity/sk-prop-sp-orientation,
-sk-prop-sp-orientation-charts.proof.md Step 2; Stacks 0633--0635, 0473, 08S2, 01LX
-(blueprint: lem-pur-chart-normal-differential).
-
-Proof:
-1. lem-pur-chart-cartesian-domain, with source U and base open Y, gives exactly O,
-   the restricted diagonal, the Cartesian square, and q etale, hence flat. The smooth
-   diagonal calculation gives the two regular sequences and codimensions. For d=0
-   the diagonals are open and closed and the stalk kernels are zero.
-2. Apply lem-pur-conormal-algebra-flat-base-change to this square. Its unique actual
-   graded comparison is invertible, has formula [a] tensor r -> [q-sharp(a) r], fixes
-   degree zero, and in degree one is the canonical map of
-   lem-weil-pbc-closed-immersion-conormal-flat-base-change.
-3. Restriction to O preserves the diagonal ideal, its powers, quotient sheaves, and
-   multiplication (lem-pur-conormal-graded-algebra). This gives the normalized graded
-   restriction isomorphism, including its degree-one component.
-4. Apply lem-weil-pbc-affine-morphism-relative-spec and
-   lem-weil-pbc-relative-spec-base-change. Contravariance gives the specified normal
-   maps, the restriction isomorphism, and the Cartesian normal square. Both graded maps
-   commute with the degree-zero augmentations, hence preserve zero sections.
-5. lem-sc-diagonal-conormal-derivation-exists and
-   lem-sc-diagonal-conormal-affine-sections fix da as the class of p2*a-p1*a.
-   lem-sc-smooth-proper-diagonal-conormal-differentials gives the conormal identifications.
-   The representative formula sends this difference to the same difference of pulled-back
-   sections. Thus the degree-one map sends da to d(e-sharp a). The universal property
-   lem-weil-pbc-quasi-coherent-symmetric-algebra-core identifies the induced normal map
-   with the actual differential under prose-09-15, not merely with some isomorphism.
-6. No step selects a point of U or a coordinate. For empty U all comparisons are unique
-   over the empty base; for d=0 the degree-one modules have rank zero, leaving the identity
-   on scalars. The constructions and the augmentation identities apply in both cases. -/
+Source: Stacks 0633--0635, 0473, 08S2, 01LX. -/
 theorem comparison (D : WeilConjectures.FiniteFieldDatum.{u})
     (_C : D.CoefficientDatum) (n : ℕ) (_hn : 1 ≤ n)
     {Y U : Scheme.{u}} [IsAffine Y]

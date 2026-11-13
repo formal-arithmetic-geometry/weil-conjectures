@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarM
 
 /-! # The ordinary coefficient restriction cube
 Source: Stacks Project, Cohomology on Sites, Tags 0D6E and 07A6.
-(blueprint: lem-pbc-coefficient-direct-image-restriction-cube).
 -/
 
 @[expose] public noncomputable section
@@ -60,13 +59,7 @@ attribute [local irreducible] proEtaleRingRestrictionDirectImage
 set_option maxHeartbeats 400000 in
 -- The dependent coefficient functors require extra elaboration heartbeats for section maps.
 /-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
-Source: Stacks 0D6E and 07A6, ordinary direct image and restriction of coefficients.
-(blueprint: lem-pbc-coefficient-direct-image-restriction-cube).
-
-Proof: every restriction compositor and canonical direct-image coefficient comparison
-is the identity on sections. The supplied comparison has the same property by `hi`;
-its inverse does too, by cancellation. Expand composition and direct image on sections.
-Both paths are the identity map, so sectionwise faithfulness proves the equality. -/
+Source: Stacks 0D6E and 07A6, ordinary direct image and restriction of coefficients. -/
 theorem coefficientDirectImageRestrictionCube
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

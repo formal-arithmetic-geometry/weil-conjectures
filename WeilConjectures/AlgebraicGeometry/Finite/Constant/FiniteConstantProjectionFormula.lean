@@ -27,12 +27,15 @@ import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 /-!
 # The projection formula with a finitely presented constant module
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma proposition-open-direct-image-preserves-finite--1 (blueprint:
-proposition-open-direct-image-preserves-finite--1). The ordinary, uncompleted tensor and K-injective
-direct image are those of the recorded unbounded etale framework. The constant inverse-image
-comparison identifies the target with `Rf_*(K ⊗^L M_X)`. No properness or torsion hypothesis is
-imposed.
+ The ordinary, uncompleted tensor and K-injective direct image are those of the recorded unbounded
+etale framework. The constant inverse-image comparison identifies the target with `Rf_*(K ⊗^L M_X)`.
+No properness or torsion hypothesis is imposed.
+
+## Implementation details
+
+The isomorphism is first proved for bounded finite free complexes, then for `M` by
+approximating it with brutal truncations of a finite free resolution: the uniform
+cohomological-dimension bound shows that the error terms do not affect any fixed degree.
 -/
 
 @[expose] public section
@@ -56,10 +59,7 @@ private theorem isLE_derivedTensor_obj
 /-- The canonical projection map for a constant module, as a natural transformation in
 that module. Its source is `Rf_*K ⊗^L M_Y` and its target is `Rf_*(K ⊗^L M_X)`.
 It is the recorded adjunction-mate projection map, followed by the canonical identification
-of the derived inverse image of the constant sheaf with the constant sheaf on the source.
-Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma proposition-open-direct-image-preserves-finite--1, first proof paragraph
-(blueprint: proposition-open-direct-image-preserves-finite--1). -/
+of the derived inverse image of the constant sheaf with the constant sheaf on the source. -/
 noncomputable def finiteConstantProjectionMap
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategoryModule A X) :
@@ -99,13 +99,8 @@ noncomputable def finiteConstantProjectionMap
       (Functor.associator C_Y (upperStar (ModuleCat.{u + 1} A) f) S_X).inv (T_X ⋙ R) ≫
     Functor.whiskerRight β (T_X ⋙ R)
 
-/-- The projection component before the constant-pullback identification.
-Source: the proof of the finite-constant projection theorem immediately below
-(blueprint: proposition-open-direct-image-preserves-finite--1).
-This is the existing proof's intermediate `hα`, named so proof consumers can use the
-projection component without unfolding `finiteConstantProjectionMap`. The same
-finite-free approximation argument proves it; the public theorem then composes it
-with the constant-pullback isomorphisms. -/
+/-- The projection component, before the constant-pullback identification, is an isomorphism
+under the hypotheses of `isIso_finiteConstantProjectionMap`. -/
 private theorem finiteConstantProjectionComponent_isIso
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ)
@@ -193,40 +188,7 @@ private theorem finiteConstantProjectionComponent_isIso
 /-- With a uniform all-sheaf cohomological-dimension bound and Noetherian coefficients,
 the canonical projection map is an isomorphism for a bounded-above complex and a finitely
 presented constant module. Naturality in `M` is built into `finiteConstantProjectionMap`.
-Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma proposition-open-direct-image-preserves-finite--1
-(blueprint: proposition-open-direct-image-preserves-finite--1).
-
-Proof plan:
-1. Constant sheaves are exact by exact sheafification
-   (lem-weil-pbc-site-r-module-presheaf-sheafification-exact). The constant inverse-image
-   isomorphism respects addition and scalars (lem-weil-pbc-sets-etale-inverse-image-constant-sheaf);
-   inverse image is exact (situation-conventions). Thus the mate is natural
-   on constant complexes and its value on `M[0]` is the displayed map.
-2. The projection mate is compatible with distinguished triangles and is the identity at
-   the tensor unit (lem-weil-pbc-ringed-projection-mate-exact). Finite sums and shifts give
-   the assertion for finite free modules. Brutal truncations, the cohomology long exact
-   sequence (lem-sf-derived-homology-long-exact), the five lemma (lem-weil-pbc-five-lemma),
-   and cohomological detection of isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology)
-   extend it to bounded finite free complexes.
-3. Resolve `M` by finite free modules in nonpositive degrees. Noetherian submodules are
-   finite (lem-weil-pbc-noetherian-submodule-finite), so all syzygies can be covered by finite
-   free modules. For `P_m = σ_{≥-m} P`, the cone of `P_m → M` has cohomology at most `-m-1`:
-   its degree zero cohomology vanishes by surjectivity, also for `m = 0`, and exactness
-   kills degrees `-m` through `-1` for `m > 0`. Only the bottom kernel can survive.
-4. Direct image is additive and left exact (lem-weil-pbc-module-direct-image-left-exact),
-   and module sheaves have enough injectives (lem-weil-pbc-module-sheaves-enough-injectives).
-   The uniform bound and lem-sf-finite-cd-derived-upper-bound (Stacks 07K7, (4)(c)) give
-   `Rf_* D^{≤t} ⊆ D^{≤t+N}`, in particular `Rf_*K ∈ D^{≤b+N}` for an upper bound `b` of `K`.
-5. Bounded-above flat replacements (proposition-open-direct-image-preserves-finite) are K-flat
-   (lem-kun-kflat-criteria). Their total tensor has no summand above the sum of the upper
-   term bounds. Exactness of constant sheaves and Step 4 put both error terms with the
-   constant cone in `D^{≤b+N-m-1}`.
-6. For a fixed `r`, choose `m ≥ 0` with `b+N-m-1 < r-1`. The long exact sequences show
-   that replacing `M` by `P_m` changes neither side's degree `r` cohomology. Naturality
-   gives a square whose other three sides are invertible, so the map for `M` is invertible
-   on degree `r` cohomology. Do this for every `r` and use cohomological detection of
-   isomorphisms. Naturality requires no natural choice of the free resolution. -/
+Source: Stacks 07K7. -/
 theorem isIso_finiteConstantProjectionMap
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ)

@@ -91,23 +91,7 @@ private theorem single_comparison_finish
 -- Keep the pinned functors behind their interfaces while comparing the single maps.
 /-- Derived exchange commutes with the two canonical single-module comparisons.
 This identity concerns an arbitrary module and has no structure-sheaf unit maps.
-Source: Stacks Project, Tag 08HY, the mate construction.
-(blueprint: lem-sc-canonical-single-base-change-comparison).
-
-Proof: Apply derivedBaseChange_unit_compatibility at the homotopy single of M.
-Precompose with derived pullback of the localized inverse single-map comparison
-for pushforward f. Postcompose with derived pushforward of the localized single-map
-comparison for tensor pullback p, followed by the single of the adjunction-preserving
-isomorphism from tensor pullback to ordinary pullback. Naturality of the selected
-left-derived counit moves the first comparison to its source; naturality of the
-right-derived unit moves the second comparison to its target. The single-map
-comparisons intertwine the termwise ordinary exchange with the single of ordinary
-exchange: evaluate in degree zero, where the comparison maps are the canonical
-single-object identifications, and in every other degree the source is zero.
-The comparison from tensor to ordinary g-pullback cancels its inverse. Localizing
-this identity and reassociating gives the equation. All steps are naturality,
-functoriality and isomorphism cancellation, so no flatness, acyclicity, cartesianness
-or nonemptiness of schemes is required. -/
+Source: Stacks Project, Tag 08HY, the mate construction. -/
 theorem canonicalSingleBaseChangeComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

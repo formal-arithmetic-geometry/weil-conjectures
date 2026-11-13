@@ -80,10 +80,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Towers and the derived completion: definitions
 
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/det-pbc-complete-derived-completion.md
-(blueprint: proposition-proper-base-change-complete-integral).
-
 The natural index `n` denotes the positive exponent `n + 1`. The reduction tower is
 constructed as a cone in complexes of towers. Its source has transition multiplication
 by the uniformizer and its target is constant. Thus its transition is precisely
@@ -114,15 +110,10 @@ namespace CompleteDerivedCompletion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The category of inverse towers of integral modules; level `n` means exponent `n+1`.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The category of inverse towers of integral modules; level `n` means exponent `n+1`. -/
 abbrev Tow (T : Scheme.{u}) := ℕᵒᵖ ⥤ AdicCompletion.Modules l E T
 
-/-- Grothendieckness of the actual tower category, with its inherited abelian structure.
-Source: blueprint Assertion 1 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: identify internal modules with sheaves of modules, then use the small-diagram
-Grothendieck theorem. Kernels, cokernels and filtered colimits are computed levelwise;
-the coproduct of the free diagrams on a generator is a generator. -/
+/-- Grothendieckness of the actual tower category, with its inherited abelian structure. -/
 @[instance] theorem towerGrothendieck (T : Scheme.{u}) :
     IsGrothendieckAbelian.{u+1} (Tow l E T) := by
   let A := AdicCompletion.Modules l E T
@@ -161,93 +152,73 @@ the coproduct of the free diagrams on a generator is a generator. -/
   exact IsGrothendieckAbelian.of_equivalence
     (Equivalence.congrLeft (AsSmall.equiv : ℕᵒᵖ ≌ AsSmall.{u+1} ℕᵒᵖ).symm)
 
-/-- The unbounded derived category of towers, with small Hom universe `u+1`.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The unbounded derived category of towers, with small Hom universe `u+1`. -/
 abbrev DTow (T : Scheme.{u}) := DerivedCategory.{u+1} (Tow l E T)
 
-/-- Exact evaluation of module towers.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Exact evaluation of module towers. -/
 abbrev ev (T : Scheme.{u}) (n : ℕ) :=
   (evaluation ℕᵒᵖ (AdicCompletion.Modules l E T)).obj (op n)
 
-/-- Evaluation on the derived category of towers, induced by exact evaluation.
-Source: blueprint Assertion 2 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Evaluation on the derived category of towers, induced by exact evaluation. -/
 abbrev dev (T : Scheme.{u}) (n : ℕ) := (ev l E T n).mapDerivedCategory
 
-/-- The constant tower functor.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The constant tower functor. -/
 abbrev constant (T : Scheme.{u}) := Functor.const ℕᵒᵖ (C := AdicCompletion.Modules l E T)
 
-/-- The constant functor on unbounded derived categories.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The constant functor on unbounded derived categories. -/
 abbrev dconstant (T : Scheme.{u}) := (constant l E T).mapDerivedCategory
 
-/-- The ordinary inverse limit of module towers, right adjoint to the constant functor.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The ordinary inverse limit of module towers, right adjoint to the constant functor. -/
 abbrev inverseLimit (T : Scheme.{u}) : Tow l E T ⥤ AdicCompletion.Modules l E T := lim
 
-/-- Additivity of ordinary inverse limit from the additive constant-limit adjunction.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: the constant functor is additive, and an additive left adjoint has an additive
-right adjoint. Apply this to Mathlib's constant-limit adjunction. -/
+/-- Additivity of ordinary inverse limit from the additive constant-limit adjunction. -/
 @[instance] theorem inverseLimit_additive (T : Scheme.{u}) :
     (inverseLimit l E T).Additive := by
   exact (constLimAdj : constant l E T ⊣ inverseLimit l E T).right_adjoint_additive
 
-/-- The total right derived inverse-limit functor, constructed by K-injective resolutions.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The total right derived inverse-limit functor, constructed by K-injective resolutions. -/
 abbrev rlim (T : Scheme.{u}) := (inverseLimit l E T).rightDerivedFunctor
 
-/-- The canonical derived constant-limit adjunction.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical derived constant-limit adjunction. -/
 def constantLimitAdjunction (T : Scheme.{u}) : dconstant l E T ⊣ rlim l E T :=
   (constLimAdj : constant l E T ⊣ inverseLimit l E T).mapDerivedCategoryRightDerivedAdjunction
 
-/-- Levelwise ordinary pullback of module towers.
-Source: blueprint Notation 2 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Levelwise ordinary pullback of module towers. -/
 abbrev pull {T T' : Scheme.{u}} (f : T' ⟶ T) : Tow l E T ⥤ Tow l E T' :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)
 
-/-- Levelwise ordinary pushforward of module towers.
-Source: blueprint Notation 2 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Levelwise ordinary pushforward of module towers. -/
 abbrev push {T T' : Scheme.{u}} (f : T' ⟶ T) : Tow l E T' ⥤ Tow l E T :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj
     (CondensedRing.lowerStar (DerivedNakayama.integerRing l E) f)
 
-/-- Exact module pullback on the derived category; no resolution is needed.
-Source: blueprint Notation 2 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Exact module pullback on the derived category; no resolution is needed. -/
 abbrev dpullModule {T T' : Scheme.{u}} (f : T' ⟶ T) :=
   (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapDerivedCategory
 
-/-- The existing total right derived module direct image.
-Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The existing total right derived module direct image. -/
 abbrev rpushModule {T T' : Scheme.{u}} (f : T' ⟶ T) :=
   (CondensedRing.lowerStar (DerivedNakayama.integerRing l E) f).rightDerivedFunctor
 
-/-- Exact pullback on derived towers.
-Source: blueprint Notation 2 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Exact pullback on derived towers. -/
 abbrev dpull {T T' : Scheme.{u}} (f : T' ⟶ T) := (pull l E f).mapDerivedCategory
 
-/-- Total right derived pushforward on the derived category of towers.
-Source: blueprint Notation 2 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Total right derived pushforward on the derived category of towers. -/
 abbrev rpush {T T' : Scheme.{u}} (f : T' ⟶ T) := (push l E f).rightDerivedFunctor
 
-/-- The canonical exact-pullback/derived-pushforward module adjunction.
-Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical exact-pullback/derived-pushforward module adjunction. -/
 def moduleAdjunction {T T' : Scheme.{u}} (f : T' ⟶ T) :
     dpullModule l E f ⊣ rpushModule l E f :=
   (CondensedRing.upperStarLowerStarAdjunction (DerivedNakayama.integerRing l E) f)
     |>.mapDerivedCategoryRightDerivedAdjunction
 
-/-- The canonical exact-pullback/derived-pushforward tower adjunction.
-Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical exact-pullback/derived-pushforward tower adjunction. -/
 def towerAdjunction {T T' : Scheme.{u}} (f : T' ⟶ T) : dpull l E f ⊣ rpush l E f :=
   ((CondensedRing.upperStarLowerStarAdjunction (DerivedNakayama.integerRing l E) f)
     |>.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The canonical pullback-evaluation comparison from exact localization.
-Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical pullback-evaluation comparison from exact localization. -/
 def pullEvaluation {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
     dpull l E f ⋙ dev l E T' n ≅ dev l E T n ⋙ dpullModule l E f :=
   towerDerivedEvaluationInterchange
@@ -256,27 +227,21 @@ def pullEvaluation {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
 /-- Multiplication by the specified coefficient uniformizer on the regular module.
 This choice is determined uniquely: the first property of the cited resolution theorem
 specifies its value on every section and every point, so it is not a choice from a bare
-existence assertion. Source: blueprint Notation 3 and derived Nakayama resolution
-(blueprint: proposition-proper-base-change-complete-integral). -/
+existence assertion. -/
 def uniformizer : End (Mod.regular (DerivedNakayama.integerRing l E)) :=
   (DerivedNakayama.derived_nakayama_resolution l E).choose
 
-/-- Scalar multiplication by the uniformizer on integral module sheaves.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Scalar multiplication by the uniformizer on integral module sheaves. -/
 abbrev scalar (T : Scheme.{u}) :=
   DerivedNakayama.scalarOnModules l E T (uniformizer l E)
 
 /-- The source of the reduction power map: the same module at every level with
-uniformizer transitions. Source: blueprint Notation 3
-(blueprint: proposition-proper-base-change-complete-integral). -/
+uniformizer transitions. -/
 def scalarTower (T : Scheme.{u}) : AdicCompletion.Modules l E T ⥤ Tow l E T :=
   (Functor.ofOpSequence (X := fun _ : ℕ ↦ 𝟭 (AdicCompletion.Modules l E T))
     (fun _ ↦ scalar l E T)).flip
 
-/-- The scalar tower functor is additive.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: every component of its map is the original module morphism; addition is
-levelwise in a functor category. -/
+/-- The scalar tower functor is additive. -/
 @[instance] theorem scalarTower_additive (T : Scheme.{u}) : (scalarTower l E T).Additive := by
   refine ⟨?_⟩
   intro M N f g
@@ -284,9 +249,7 @@ levelwise in a functor category. -/
   funext n
   rfl
 
-/-- The power components commute with the scalar-tower transition.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: at level n the equation is π^(n+2) = π · π^(n+1), the power identity. -/
+/-- The power components commute with the scalar-tower transition. -/
 theorem powerMap_condition (T : Scheme.{u}) (M : AdicCompletion.Modules l E T) (n : ℕ) :
     ((scalarTower l E T).obj M).map (homOfLE (Nat.le_succ n)).op ≫
         End.asHom ((End.of ((scalar l E T).app M)) ^ (n+1)) =
@@ -301,17 +264,14 @@ theorem powerMap_condition (T : Scheme.{u}) (M : AdicCompletion.Modules l E T) (
   rw [← pow_succ]
   rfl
 
-/-- The power map on one module, as an actual morphism of towers.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The power map on one module, as an actual morphism of towers. -/
 def powerMapApp (T : Scheme.{u}) (M : AdicCompletion.Modules l E T) :
     (scalarTower l E T).obj M ⟶ (constant l E T).obj M :=
   NatTrans.ofOpSequence
     (fun n ↦ End.asHom ((End.of ((scalar l E T).app M)) ^ (n+1)))
     (powerMap_condition l E T M)
 
-/-- Naturality of the power map in the module.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: naturality of the scalar action implies naturality of all its powers. -/
+/-- Naturality of the power map in the module. -/
 theorem powerMap_naturality (T : Scheme.{u})
     {M N : AdicCompletion.Modules l E T} (f : M ⟶ N) :
     (scalarTower l E T).map f ≫ powerMapApp l E T N =
@@ -335,21 +295,16 @@ theorem powerMap_naturality (T : Scheme.{u})
       rw [← Category.assoc, hs, Category.assoc, ih, Category.assoc]
   exact h _
 
-/-- The power map from the scalar tower to the constant tower.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The power map from the scalar tower to the constant tower. -/
 def powerMap (T : Scheme.{u}) : scalarTower l E T ⟶ constant l E T where
   app M := powerMapApp l E T M
   naturality _ _ f := powerMap_naturality l E T f
 
-/-- The strict reduction power map on complexes of towers.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The strict reduction power map on complexes of towers. -/
 abbrev complexPowerMap (T : Scheme.{u}) :=
   NatTrans.mapHomologicalComplex (powerMap l E T) (.up ℤ)
 
-/-- Identity maps induce the identity on the strict cone tower.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: both functors in the defining square send the identity to the identity;
-apply the standard mapping-cone identity formula. -/
+/-- Identity maps induce the identity on the strict cone tower. -/
 theorem strictRed_map_id (T : Scheme.{u})
     (M : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     CochainComplex.mappingCone.map ((complexPowerMap l E T).app M)
@@ -360,8 +315,7 @@ theorem strictRed_map_id (T : Scheme.{u})
   exact CochainComplex.mappingCone.map_id _
 
 /-- The strict reduction functor, with cone transitions (π,1), on arbitrary complexes.
-The cone is taken in complexes of towers, so it includes all coherence automatically.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+The cone is taken in complexes of towers, so it includes all coherence automatically. -/
 def strictRed (T : Scheme.{u}) :
     CochainComplex (AdicCompletion.Modules l E T) ℤ ⥤ CochainComplex (Tow l E T) ℤ where
   obj M := CochainComplex.mappingCone ((complexPowerMap l E T).app M)
@@ -376,11 +330,7 @@ def strictRed (T : Scheme.{u}) :
       ((complexPowerMap l E T).naturality f).symm _ _
       ((complexPowerMap l E T).naturality g).symm
 
-/-- Reduction inverts quasi-isomorphisms before passage to derived towers.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: exact evaluation identifies the cone at n with Cone(π^(n+1)); a quasi-isomorphism
-on both sides of its defining square induces a quasi-isomorphism of cones. Detect
-quasi-isomorphisms in the tower category levelwise. -/
+/-- Reduction inverts quasi-isomorphisms before passage to derived towers. -/
 theorem strictRed_inverts (T : Scheme.{u}) :
     (HomologicalComplex.quasiIso (AdicCompletion.Modules l E T) (.up ℤ)).IsInvertedBy
       (strictRed l E T ⋙ DerivedCategory.Q) := by
@@ -409,30 +359,24 @@ theorem strictRed_inverts (T : Scheme.{u}) :
     (by change IsIso (DerivedCategory.Q.map b); infer_instance)
 
 /-- The reduction functor on the unbounded derived category of integral modules.
-It is the actual localization of the cone tower, rather than a family of derived cones.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+It is the actual localization of the cone tower, rather than a family of derived cones. -/
 def red (T : Scheme.{u}) : DerivedCategory (AdicCompletion.Modules l E T) ⥤ DTow l E T :=
   Localization.lift (strictRed l E T ⋙ DerivedCategory.Q) (strictRed_inverts l E T)
     DerivedCategory.Q
 
-/-- The canonical factorization of the strict cone tower through its localization.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical factorization of the strict cone tower through its localization. -/
 def redFactors (T : Scheme.{u}) :
     DerivedCategory.Q ⋙ red l E T ≅ strictRed l E T ⋙ DerivedCategory.Q :=
   Localization.fac _ (strictRed_inverts l E T) DerivedCategory.Q
 
-/-- Register the explicit localization comparison for the reduction tower.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Register the explicit localization comparison for the reduction tower. -/
 instance red_lifting (T : Scheme.{u}) :
     Localization.Lifting DerivedCategory.Q
       (HomologicalComplex.quasiIso (AdicCompletion.Modules l E T) (.up ℤ))
       (strictRed l E T ⋙ DerivedCategory.Q) (red l E T) :=
   ⟨redFactors l E T⟩
 
-/-- The strict degree-zero cone inclusion is natural.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: the second square map in the definition of strictRed is the constant functor's
-map. Naturality is the inr equation for the induced cone map. -/
+/-- The strict degree-zero cone inclusion is natural. -/
 theorem strictAugmentation_naturality (T : Scheme.{u})
     {M N : CochainComplex (AdicCompletion.Modules l E T) ℤ} (f : M ⟶ N) :
     ((constant l E T).mapHomologicalComplex (.up ℤ)).map f ≫
@@ -445,42 +389,36 @@ theorem strictAugmentation_naturality (T : Scheme.{u})
     (((constant l E T).mapHomologicalComplex (.up ℤ)).map f)
     ((complexPowerMap l E T).naturality f).symm).comm₂.symm
 
-/-- The degree-zero inclusions give a morphism of strict towers of complexes.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The degree-zero inclusions give a morphism of strict towers of complexes. -/
 def strictAugmentation (T : Scheme.{u}) :
     (constant l E T).mapHomologicalComplex (.up ℤ) ⟶ strictRed l E T where
   app M := CochainComplex.mappingCone.inr ((complexPowerMap l E T).app M)
   naturality _ _ f := strictAugmentation_naturality l E T f
 
-/-- The canonical degree-zero inclusion on derived towers.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical degree-zero inclusion on derived towers. -/
 def augmentation (T : Scheme.{u}) : dconstant l E T ⟶ red l E T :=
   Localization.liftNatTrans DerivedCategory.Q
     (HomologicalComplex.quasiIso (AdicCompletion.Modules l E T) (.up ℤ)) _ _
     (dconstant l E T) (red l E T)
     (Functor.whiskerRight (strictAugmentation l E T) DerivedCategory.Q)
 
-/-- Derived completion as Rlim of the strict, localized reduction tower.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Derived completion as Rlim of the strict, localized reduction tower. -/
 def completion (T : Scheme.{u}) := red l E T ⋙ rlim l E T
 
 /-- The canonical completion unit: the constant-limit adjunction unit followed by
-Rlim of the degree-zero inclusions. Source: blueprint Notation 4
-(blueprint: proposition-proper-base-change-complete-integral). -/
+Rlim of the degree-zero inclusions. -/
 def kappa (T : Scheme.{u}) : 𝟭 (DerivedCategory (AdicCompletion.Modules l E T)) ⟶
     completion l E T :=
   (constantLimitAdjunction l E T).unit ≫
     Functor.whiskerRight (augmentation l E T) (rlim l E T)
 
-/-- The canonical mate of the exact pullback/evaluation comparison.
-Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The canonical mate of the exact pullback/evaluation comparison. -/
 def pushEvaluationMap {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
     rpush l E f ⋙ dev l E T n ⟶ dev l E T' n ⋙ rpushModule l E f :=
   (mateEquiv (towerAdjunction l E f) (moduleAdjunction l E f)
     (.mk _ _ _ _ (pullEvaluation l E f n).inv))
 
-/-- The exact-localization comparison between an exact functor and constant towers.
-Source: blueprint Assertions 4--5 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The exact-localization comparison between an exact functor and constant towers. -/
 def constantInterchange {T T' : Scheme.{u}}
     (F : AdicCompletion.Modules l E T ⥤ AdicCompletion.Modules l E T')
     [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
@@ -493,8 +431,7 @@ def constantInterchange {T T' : Scheme.{u}}
 
 /-- The canonical derived pushforward/limit isomorphism. It is the conjugate of the
 constant/pullback comparison under the two composite derived adjunctions, and therefore
-has the ordinary limit comparison as its K-injective normalization.
-Source: blueprint Assertion 4 (blueprint: proposition-proper-base-change-complete-integral). -/
+has the ordinary limit comparison as its K-injective normalization. -/
 def pushLimitIso {T T' : Scheme.{u}} (f : T' ⟶ T) :
     rlim l E T' ⋙ rpushModule l E f ≅ rpush l E f ⋙ rlim l E T :=
   conjugateIsoEquiv
@@ -504,18 +441,13 @@ def pushLimitIso {T T' : Scheme.{u}} (f : T' ⟶ T) :
       (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).symm
 
 /-- Total tensor with a constant complex on strict towers, using the pointwise tensor
-of module towers and the usual direct-sum total complex.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral). -/
+of module towers and the usual direct-sum total complex. -/
 def strictTensor (T : Scheme.{u}) (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     CochainComplex (Tow l E T) ℤ ⥤ CochainComplex (Tow l E T) ℤ :=
   ((curriedTensor (Tow l E T)).map₂CochainComplex).flip.obj
     (((constant l E T).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Tensoring strict towers with a bounded finite-free complex inverts quasi-isomorphisms.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: finite-free terms are flat, and bounded flat complexes are K-flat. Evaluation
-computes this tensor levelwise, so its preservation of quasi-isomorphisms follows from
-K-flatness at every level and levelwise detection in the tower category. -/
+/-- Tensoring strict towers with a bounded finite-free complex inverts quasi-isomorphisms. -/
 theorem strictTensor_inverts (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ)
     (_hb : ∃ a b : ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE b)
@@ -562,8 +494,7 @@ theorem strictTensor_inverts (T : Scheme.{u})
   exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 inferInstance
 
 /-- The derived tower tensor with a bounded finite-free complex, defined by localization
-of the actual total tensor on strict towers.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral). -/
+of the actual total tensor on strict towers. -/
 def tensorTower (T : Scheme.{u}) (P : CochainComplex (AdicCompletion.Modules l E T) ℤ)
     (hb : ∃ a b : ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE b)
     (hf : ∀ j : ℤ, Mod.IsFree (AdicCompletion.ring l E T) (P.X j)) :
@@ -571,15 +502,13 @@ def tensorTower (T : Scheme.{u}) (P : CochainComplex (AdicCompletion.Modules l E
   Localization.lift (strictTensor l E T P ⋙ DerivedCategory.Q)
     (strictTensor_inverts l E T P hb hf) DerivedCategory.Q
 
-/-- The derived evaluation transition, including the successor transition and identities.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The derived evaluation transition, including the successor transition and identities. -/
 def transition (T : Scheme.{u}) (n : ℕ) : dev l E T (n+1) ⟶ dev l E T n :=
   towerDerivedEvaluationTransition (AdicCompletion.Modules l E T)
     (homOfLE (Nat.le_succ n)).op
 
 /-- The canonical free diagram left adjoint to evaluation; on level m it is a coproduct
-of copies of N indexed by arrows n→m, hence N for m≤n and zero otherwise.
-Source: blueprint Assertion 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+of copies of N indexed by arrows n→m, hence N for m≤n and zero otherwise. -/
 abbrev freeDiagram (T : Scheme.{u}) (n : ℕ) :=
   evaluationLeftAdjoint (AdicCompletion.Modules l E T) (op n)
 

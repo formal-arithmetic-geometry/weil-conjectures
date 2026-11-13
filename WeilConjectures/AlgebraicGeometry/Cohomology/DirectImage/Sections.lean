@@ -25,6 +25,15 @@ Over an affine base, the sections of `R^q f_* ℱ` are the cohomology `H^q(X, �
 quasi-compact separated morphism and a quasi-coherent `ℱ`. Also the compatibility of higher
 direct images with flat base change and with restriction to opens, their quasi-coherence, and
 their vanishing in high degrees.
+
+## Implementation details
+
+The projection formula `Rf_* E ⊗^𝕃 K ≅ Rf_* (E ⊗^𝕃 Lf^* K)` is only stated for `K = 𝒩[0]` with `𝒩`
+invertible, through the higher direct images
+(`AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso`).
+
+The vanishing bound of the higher direct images is only local on `T`: over `T = ⨆ₙ Spec k` with
+`X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
 -/
 
 @[expose] public section
@@ -45,15 +54,7 @@ variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
 
 /-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
 quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
-quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
-
-Over an affine open `V` of `T`, `R^q f_* ℱ|_V` is the higher direct image along the restriction
-`f⁻¹ V ⟶ V` (`AlgebraicGeometry.Scheme.Modules.higherDirectImagePullbackIsoRestrict`), and
-`f⁻¹ V` is a finite union of affine opens; the Mayer–Vietoris sequence of the higher direct
-images then shows quasi-coherence by induction on the number of affine opens
-(`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`, `lem-pc-finite-support-hi`) -/
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ]. -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
   refine isQuasicoherent_of_iSup_opensRange_eq_top _
@@ -369,13 +370,8 @@ end RightDerivedGlobalSections
 
 /-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
 base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
-cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`.
-
-This is the comparison between the right derived functors of `f_*` inside `X.Modules` and the
-`Ext`-groups in abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H`. It holds because
-injective `𝒪_X`-modules are flasque, the pushforward of a flasque module is flasque, flasque
-sheaves are acyclic for `H`, and, `T` being affine and `R^p f_* ℱ` quasi-coherent, the global
-sections functor of `T` is exact on them [Stacks, Tags 01XJ and 0BDY]. -/
+cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`
+[Stacks, Tags 01XJ and 0BDY]. -/
 theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules] (q : ℕ) :
     ∃ e : ∀ (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ],
@@ -395,18 +391,7 @@ theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact 
 /-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
 base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
 `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, by an isomorphism which is linear along `f^♯ : Γ(T, ⊤) → Γ(X, ⊤)`.
-
-This is the comparison between the two cohomology theories used in the Picard-framework block:
-the right derived functors of `f_*` inside `X.Modules` on the one hand, and the `Ext`-groups in
-abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. The additive comparison
-is `AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H`; being natural
-in `ℱ`, it is compatible with multiplication by global functions of `T`, which `R^q f_*` turns
-into multiplication by their images in `Γ(X, ⊤)`
-(`AlgebraicGeometry.Scheme.Modules.higherDirectImage_map_smulHom`).
-
-Over `T = Spec κ` for a field `κ`, this is the identification of the `q`-th direct image to a
-point with `H^q` as `κ`-vector spaces, used in the local model of the proof of
-`lemma-triviality-fibres--2`. -/
+-/
 theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
@@ -495,16 +480,7 @@ f'         f
 v          v
 T' --g---> T
 ```
-Then `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in `D(𝒪_{T'})`.
-
-The base change `g'` is an open immersion, and restriction along an open immersion is exact and
-preserves K-injective complexes (`AlgebraicGeometry.openImmersion_restriction_derived_properties`).
-Hence deriving the underived isomorphism `f_* ⋙ (-)|_{T'} ≅ (-)|_{X'} ⋙ f'_*`
-(`AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`) gives
-`R f_* ⋙ (-)|_{T'} ≅ (-)|_{X'} ⋙ R f'_*`. The per-degree form is
-`AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`; the same argument for
-the restriction `f ∣_ V` to an open `V` of the base, with `schemeDerivedDirectImage`, is
-`AlgebraicGeometry.schemeDerivedDirectImage_openRestriction`. -/
+Then `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in `D(𝒪_{T'})`. -/
 noncomputable def derivedPushforwardIsoRestrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
     (derivedPushforward f').obj
@@ -554,12 +530,7 @@ f'         f
 v          v
 T' --g---> T
 ```
-Then `R^q f'_* (g'^* ℱ) ≅ (R^q f_* ℱ)|_{T'}` for every `q`.
-
-This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: for an
-injective resolution `ℱ → I^•`, the restriction `I^•|_{X'}` is a resolution of `ℱ|_{X'}` by
-flasque, hence `f'_*`-acyclic, modules (restriction is exact), and
-`f'_* (I^•|_{X'}) ≅ (f_* I^•)|_{T'}` (`AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`). -/
+Then `R^q f'_* (g'^* ℱ) ≅ (R^q f_* ℱ)|_{T'}` for every `q`. -/
 theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :
@@ -602,18 +573,7 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
 open MonoidalCategory in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`
 and an invertible `𝒪_T`-module `𝒩`, `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for every `q`: twisting
-by an invertible module pulled back from the base commutes with the higher direct images.
-
-The blueprint states the projection formula `Rf_* E ⊗^𝕃 K ≅ Rf_* (E ⊗^𝕃 Lf^* K)` in the derived
-category `D_QCoh` for `f` quasi-compact and quasi-separated, and deduces this case `K = 𝒩[0]`.
-Only this case is stated here, through the higher direct images rather than the derived
-functors `AlgebraicGeometry.Scheme.Modules.derivedPushforward` and
-`AlgebraicGeometry.Scheme.Modules.derivedPullback`; it holds for every `f` and `ℱ`: twisting
-by an invertible module is an autoequivalence, and the projection formula
-`f_* (ℱ ⊗ f^* 𝒩) ≅ f_* ℱ ⊗ 𝒩` is natural in `ℱ`
-(`AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso`).
-
-(blueprint: `lem-pc-projection-formula`) -/
+by an invertible module pulled back from the base commutes with the higher direct images. -/
 theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [𝒩.IsInvertible]
     (q : ℕ) :
     Nonempty ((higherDirectImage f q).obj (ℱ ⊗ (Modules.pullback f).obj 𝒩) ≅
@@ -649,17 +609,8 @@ variable [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
 
 /-- **Local vanishing of the higher direct images in large degrees.** For `f : X ⟶ T`
 quasi-compact and separated and `ℱ` a quasi-coherent `𝒪_X`-module, every point `t` of `T` has an
-open neighbourhood `U` and a bound `d` with `R^q f_* ℱ|_U = 0` for all `q ≥ d`.
-
-Take for `U` an affine open neighbourhood of `t`: then `f ⁻¹ᵁ U` is covered by finitely many,
-say `d`, affine opens whose intersections are affine, and the Mayer–Vietoris sequence of the
-higher direct images gives `R^q f_* ℱ|_U = 0` for `q ≥ d` by induction on `d` [Stacks, Tag 01XJ]
-(`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
-
-The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
-the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+open neighbourhood `U` and a bound `d` with `R^q f_* ℱ|_U = 0` for all `q ≥ d`
+[Stacks, Tag 01XJ]. -/
 theorem exists_isZero_higherDirectImage_restrict (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧
       ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
@@ -676,9 +627,7 @@ theorem exists_isZero_higherDirectImage_restrict (t : T) :
 /-- **Vanishing of the higher direct images in large degrees over a quasi-compact base.** In the
 situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict`, if `T`
 is quasi-compact then `R^q f_* ℱ = 0` for all large `q`: finitely many of the neighbourhoods
-given there cover `T`, and one takes for `N` the maximum of their bounds.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+given there cover `T`, and one takes for `N` the maximum of their bounds. -/
 theorem exists_isZero_higherDirectImage [CompactSpace T] :
     ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) := by
   classical
@@ -723,18 +672,7 @@ variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
 set_option backward.isDefEq.respectTransparency.types true in
 /-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
 quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
-quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
-
-Proof: the two localization assertions for sections of the higher direct image give the
-quasi-coherence criterion `isQuasicoherent_of_forall_isAffineOpen`: sections on a principal
-open lift after multiplying by a power of its defining function, and sections restricting
-to zero are annihilated by a power. Apply the criterion and restrict to each affine open.
-The two assertions are stated in separate acyclic modules, with proofs through localization
-of cohomology (Stacks, Tag 09MR) and the cohomology-presheaf description (Tag 01E4).
-
-(blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`)
-(blueprint: new-higher-direct-image-affine-local-qcoherent) -/
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ]. -/
 theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
     ∀ U : T.affineOpens,
       (((higherDirectImage f q).obj ℱ).over U.1).IsQuasicoherent := by

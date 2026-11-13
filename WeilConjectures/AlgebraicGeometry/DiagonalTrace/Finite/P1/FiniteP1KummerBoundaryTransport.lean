@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1KummerE
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1KummerUnitEquation
 
 /-! # Transport of the finite Kummer boundary comparison
-
-Source: blueprint latest, diagonal-tower trace proof (1), scalar Kummer
-normalization in paragraph (1).
-(blueprint: lem-sfb-finite-p1-kummer-boundary-transport).
 -/
 
 @[expose] public noncomputable section
@@ -45,10 +41,7 @@ A finite boundary equality transports through the normalized coefficient and
 site comparisons to the displayed derived equality. The comparison t is the
 explicit normalized coordinate; mere existence of an endpoint isomorphism does
 not specify its effect on the positive class. The statement isolates
-the scalar Kummer step from construction of the line comparison isomorphism.
-Source: diagonal-tower trace (1), scalar Kummer normalization in paragraph (1).
-(blueprint: lem-sfb-finite-p1-kummer-boundary-transport).
--/
+the scalar Kummer step from construction of the line comparison isomorphism. -/
 -- STATEMENT-DISPUTED: the old signature allowed arbitrary t, independently of hb.
 -- Composing a normalized t with a nontrivial scalar automorphism changes the class.
 -- The explicit normalization ht repairs that missing hypothesis.

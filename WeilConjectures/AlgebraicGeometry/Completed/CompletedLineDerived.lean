@@ -33,9 +33,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedLineComplete
 
 /-! # Derived reductions and completeness of a completed line
-
-Source: coefficient-twist blueprint, proof steps 9 and 11.
-(blueprint: lem-pur-completed-line-derived)
 -/
 
 @[expose] public section
@@ -76,23 +73,8 @@ private noncomputable def extensionPresheafIso
 /-- A line over the completed coefficient sheaf has underived finite reductions
 and is complete for the actual augmented derived-reduction tower.
 
-Source: coefficient-twist blueprint, proof steps 9 and 11; Bhatt--Scholze,
-Section 6.5; Stacks Project, Tags 06YS, 06YY and 03CO.
-(blueprint: lem-pur-completed-line-derived)
-
-Proof: restriction to a site slice is exact. On a trivializing cover tensor by
-the line is tensor by the unit and therefore exact, so the degree-zero complex
-of the line is K-flat. The canonical K-flat counit computes each derived reduction
-as the degree-zero complex of the ordinary scalar reduction. These identifications
-commute with the quotient transitions and the augmentation, because they use the
-counit and the actual coefficient projections. After restriction to this same
-cover the ordinary quotient tower is the coefficient quotient tower, whose limit
-is the completed coefficient sheaf; its transitions are locally surjective.
-Both limit identification and epimorphy descend from the cover. Apply the
-surjective-tower derived-limit theorem to the ordinary reduction tower. Its Roos
-triangle, with the actual augmentation, is exactly the recorded derived-complete
-predicate. The argument is independent of a global finite-field datum, and also
-applies on an empty scheme, where all these module sheaves are zero. -/
+Source: Bhatt--Scholze,
+Section 6.5; Stacks Project, Tags 06YS, 06YY and 03CO. -/
 theorem completedLine_derived (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : SheafOfModules.{u + 1}

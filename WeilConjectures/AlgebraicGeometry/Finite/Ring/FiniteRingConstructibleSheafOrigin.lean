@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Constructible finite-ring sheaves have etale origin
 
-Source: Stacks Project, Tags 09AK and 099Y, with the blueprint's global finite partitions
-(blueprint: lem-weil-pbc-finite-ring-constructible-sheaf-origin).
+Source: Stacks Project, Tags 09AK and 099Y, with.
 
 The two recorded constructibility predicates use different equivalent encodings of
 constant-coefficient module sheaves. The equivalence below is identified with the
@@ -35,25 +34,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The comparison pullback induces the equivalence of constructible module sheaves.
 The finite ring is allowed to be zero and the scheme is arbitrary, including empty.
 The natural isomorphism identifies the equivalence with `comparisonUpperStar`;
-its constant-scalar compatibility makes this an identification of module sheaves.
-Source: Stacks Project, Tag 09AK, lemma-compare-constructible, and Tag 099Y,
-lemma-compare-locally-constant, with global finite partitions as in the blueprint
-(blueprint: lem-weil-pbc-finite-ring-constructible-sheaf-origin).
-
-Proof: restrict the intrinsic module sheaf to the constant scalars. Module
-sheafification makes this an equivalence with fixed-module-valued sheaves. It
-preserves the underlying additive sheaf and identifies local constancy, finite
-geometric stalks, and canonical pullback. Thus it identifies the two pro-etale
-constructibility predicates, with the same finite global strata. On the etale side
-use the existing comparison of the two constructibility predicates. The existing
-fixed-module constructible-origin theorem supplies essential surjectivity, while
-full faithfulness of comparison pullback supplies full faithfulness. Restrict these
-functors to the constructible full subcategories and take the resulting equivalence.
-Its additive comparison is the inverse encoding counit. This counit is linear over
-the original constant ring, so its sectionwise linearity is exactly the asserted
-constant-scalar formula. Empty schemes, empty strata and the zero ring are included;
-no affine-local constructibility criterion replaces the global partition.
--/
+its constant-scalar compatibility makes this an identification of module sheaves. -/
 theorem finiteRing_constructibleSheaf_origin (T : Scheme.{u})
     (B : Type u) [CommRing B] [Finite B] :
     ∃ e :

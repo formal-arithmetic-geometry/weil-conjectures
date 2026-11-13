@@ -19,7 +19,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The two closed compatibility equations, without a bidual invertibility assertion.
-Source: Stacks 03CE, 03EL, 03EO and 0E8H (blueprint: lem-sf-adic-slice-closed). -/
+Source: Stacks 03CE, 03EL, 03EO and 0E8H. -/
 structure AdicSliceClosedData (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),
@@ -196,23 +196,7 @@ private lemma bidual_restriction (U : X.ProEt)
 end
 
 /-- Internal Hom on further slices and bidual evaluation respect native pullback.
-Source: Stacks 03EO and 0E8H; step 2 of the parent comparison.
-(blueprint: lem-sf-adic-slice-closed).
-
-Proof: after identifying the object site with the localized site, a section
-of internal Hom is exactly a linear morphism on the further slice. Use the
-normalized restriction comparison to identify these morphisms on both sides.
-The transpose of restricted evaluation defines the comparison. The native
-adicUpperStarIhomIso preserves evaluation, so the uniqueness of a transpose
-identifies this comparison with that specified native map. Evaluate the
-resulting equality of further-slice morphisms on a section to obtain hom_slice.
-For biduality apply the same argument to evaluation with the two factors
-exchanged. Both displayed composites are transposes of that same braided
-evaluation: the base bidual_transpose formulas give the base transposes, the
-native Hom comparison preserves evaluation, and the unit pullback identifies
-the regular modules. Uniqueness under the tensor/Hom adjunction proves the
-bidual equation. No invertibility or finite-rank assertion for biduality is
-used. -/
+Source: Stacks 03EO and 0E8H. -/
 theorem adicSliceClosedCompatibility (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),

@@ -22,9 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 /-!
 # Bounded-below classical pro-étale complexes
 
-Source: the Weil conjectures blueprint, `det-pe-classical-derived-equivalence`,
-and `definition-classical-pro-etale-sheaves` (blueprint: det-pe-classical-derived-equivalence).
-
 The module-valued predicate and full subcategory used below are supplied by
 `WeilConjectures.AlgebraicGeometry.Classical.ClassicalDerivedDefinitions`.
 -/
@@ -39,48 +36,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The bounded-below comparison has classical essential image and is an equivalence
-onto that image, with the comparison functors as its forward and inverse functors.
-The explicit counit clause is the essential-surjectivity assertion.
-Source: current blueprint, classical derived-equivalence detail
-(blueprint: corollary-bounded-below-classical-complexes--2).
-
-Proof, following the node's eight steps:
-1. The ringed-site categories are Grothendieck abelian
-   (corollary-bounded-below-classical-complexes--2), hence admit K-injective resolutions
-   (prose-03-02) computing corollary-bounded-below-classical-complexes--2.
-   The module comparison theorem-classical-sheaves-essential-image--1 makes inverse image
-   exact with classical essential image. Its right adjoint is additive and left exact.
-2. By situation-conventions, inverse image commutes with
-   cohomology and preserves lower bounds. Its image is therefore classical.
-   By corollary-bounded-below-classical-complexes--2, the right derived direct
-   image also preserves lower bounds, so both functors act on the stated categories.
-3. Use situation-conventions and
-   corollary-bounded-below-classical-complexes--2 to equip the adjoints with
-   coherent shifts. By corollary-bounded-below-classical-complexes--2 the right adjoint is
-   triangulated. By corollary-bounded-below-classical-complexes--2 the counit
-   gives a morphism of distinguished triangles, including the connecting maps.
-4. Every classical sheaf is an inverse image by theorem-classical-sheaves-essential-image--1.
-   The triangle identity and the assumed unit make the counit invertible on its
-   shifts, using situation-conventions, and on zero.
-5. For a bounded classical object choose lower and upper bounds. Its upper
-   truncation just below the lower bound has zero cohomology by
-   corollary-bounded-below-classical-complexes--2 and is zero by
-   corollary-bounded-below-classical-complexes--2. This starts induction on truncations.
-6. The triangle of theorem-pbc-injective-acyclicity and step 3 give the ladder
-   of corollary-bounded-below-classical-complexes--2. The first and third counits are
-   invertible by induction and step 4. Apply corollary-bounded-below-classical-complexes--2, then
-   corollary-bounded-below-classical-complexes--2. The upper bound identifies the
-   final truncation with the original object, proving its counit invertible.
-7. For a bounded-below classical object and a fixed degree m, choose an upper
-   truncation at N at least m. By corollary-bounded-below-classical-complexes--2 it is bounded
-   classical and the inclusion is a cohomology isomorphism through N, monic in N+1.
-   By corollary-bounded-below-classical-complexes--2 its right derived image is an
-   isomorphism on degree m. Use situation-conventions for the
-   further inverse image. Counit naturality and step 6 give invertibility on degree m.
-   Vary m and apply corollary-bounded-below-classical-complexes--2.
-8. Restrict the adjunction to the full classical subcategory. The assumed unit,
-   step 7's counit, and the unchanged triangle identities give inverse equivalences. -/
+/-- Assuming the derived unit of the comparison adjunction is invertible, the bounded-below
+comparison functor has classical essential image, its counit is invertible on classical objects,
+and it is an equivalence onto the classical full subcategory, with the comparison functors as its
+forward and inverse functors. -/
 theorem classicalDerivedEquivalence (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (hunit : ∀ L : DerivedCategory.Plus

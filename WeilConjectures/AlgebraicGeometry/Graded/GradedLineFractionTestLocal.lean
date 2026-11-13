@@ -11,8 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.Line.LineProjChartPullback
 
 /-! # Local comparison for graded line fraction tests
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9
-(blueprint: lem-trf-graded-line-fraction-test-local).
+Source: Stacks Project, Constructions, Tags 01NK and 01O9.
 -/
 
 @[expose] public section
@@ -259,18 +258,7 @@ private theorem localTest_denominator {R : Type u} [CommRing R]
 attribute [local irreducible] Proj.fromOfGlobalSections
 
 /-- The comparison of a prescribed fraction morphism with the trivialized Proj map
-holds on an open neighbourhood of every point of the test scheme.
-
-This is the local geometric step in the proof of
-`gradedLineFraction_test`.  The unit ideal hypothesis supplies a positive-degree
-basic-open neighbourhood; the free-frame and fraction formulas identify the two
-maps there.  The global equality is obtained from this local statement by
-`Scheme.hom_ext_of_forall`.
-
-Source: Stacks Project, Constructions, Tag 01NK, lemma-invertible-map-into-proj,
-and Tag 01O9, lemma-invertible-map-into-relative-proj, characterizations (2) and
-(3) (blueprint: lem-trf-graded-line-fraction-test-local).
--/
+holds on an open neighbourhood of every point of the test scheme. -/
 theorem gradedLineFraction_test_local
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

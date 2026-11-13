@@ -46,8 +46,7 @@ private lemma unit_transfer_normal
 
 /-- The clopen graph transfer, precomposed with the right-derived unit, is the
 ordinary sheaf graph map followed by the target right-derived unit and exact factors.
-Source: Stacks Project Tags 0F7B and 0F4L; the graph and compositor unit identities.
-(blueprint: lem-pur-proper-graph-transfer-normalization). -/
+Source: Stacks Project Tags 0F7B and 0F4L. -/
 theorem properGraphTransfer_normal
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
 
 /-! # Componentwise curve assertions for finite biproducts
 
-Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C
-(blueprint: lem-pbc-f1-prime-biproduct-invertible). -/
+Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C. -/
 
 @[expose] public section
 
@@ -154,33 +153,7 @@ private theorem cohomology_bijective_sum_iff (Λ : Type (u + 1)) [CommRing Λ]
   exact bijective_sum_iff T S η G e
 
 /-- Componentwise equivalence for the invertible assertions of a prime-killed finite sum.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
-(blueprint: lem-pbc-f1-prime-biproduct-invertible).
-
-Proof: If r is invertible in k, every stalk of each G a and H has invertible-order
-torsion, since r kills it. The given constructibility hypotheses
-supply the C4 hypotheses for H and every component. Cohomology and inverse image
-are additive and comparison maps natural, so finiteness and bijectivity are equivalent to the same
-properties for all components. This proves both C4 and C6 in this case. If r is
-not invertible in the field k, the characteristic is r. Any r-killed sheaf with
-invertible-order torsion has zero stalks: each stalk element is killed by r and
-by an integer invertible in k, hence coprime to r; Bezout then kills it by 1.
-Stalk conservativity makes it the zero sheaf. Its cohomology is zero, finite,
-and all comparison maps bijective. This proves all exceptional conditional
-assertions for H and for any individual component. Empty sums are zero.
-The cohomology here is Mathlib's Ext-based `Sheaf.H`: its coefficient functor is
-additive, so `Functor.mapBiproduct` followed by `AddCommGrpCat.biproductIsoPi`
-identifies its value with the finite product of component groups. No derived-global-sections
-bridge is needed. The product identification sends a class to its images under
-the projections, with inverse the sum of its images under the injections. Thus vanishing
-is tested coordinatewise.
-For a scheme map a, naturality `Etale.cohomologyMap_map` with each injection and
-projection identifies the comparison with the product of component comparisons.
-Injectivity is tested on one coordinate at a time. Surjectivity follows by choosing
-preimages for each coordinate and summing the injections; conversely a preimage of
-a vector supported in one coordinate gives a preimage in that component. A finite
-product is finite iff each factor is finite (each factor is a retract, and all
-cohomology groups contain zero). This also proves the asserted finiteness tests. -/
+Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. -/
 theorem prime_biproduct_invertible_iff (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     (r : ℕ) [Fact r.Prime] {ι : Type} [Finite ι]

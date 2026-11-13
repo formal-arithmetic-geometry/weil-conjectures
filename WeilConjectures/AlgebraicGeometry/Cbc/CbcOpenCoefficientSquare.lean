@@ -10,8 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenScalarLimitCoheren
 import all WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
 
 /-! # The open factor of the completed coefficient square
-
-Source: the coefficient-coherence proof, open tensor and completion-unit steps.
 -/
 
 @[expose] public noncomputable section
@@ -22,25 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Completed open exchange respects the canonical open scalar mates and every
-unit-normalized completed pullback comparison.
-
-Source: current blueprint, coefficient coherence proof steps 6--8.
-(blueprint: lem-cbc-open-coefficient-square).
-
-Proof: first transpose the ordinary square under the open adjunction. Both
-transposes are the same balancing map on extension summands: an indexed section
-x tensor s goes to its pulled-back indexed section with coefficient s. Exact
-extension by zero and K-flat scalar representatives descend this equality to the
-derived categories. Precompose the completed square with the ordinary-to-completed
-unit at the larger coefficient field. Use the unit equations of both supplied
-comparisons and the defining unit equations of both completed open exchanges.
-Naturality of the open scalar mate changes the resulting equation into the
-ordinary square followed by the target completion unit. The target is complete:
-completed pullback preserves completeness, extension by zero preserves it on a
-quasicompact open, and finite free scalar extension preserves it. The source is
-the reflection of ordinary pullback with the same unit, so its Hom bijection
-cancels the precomposition. This argument is independent of the generating tuple
-and applies also to zero inputs, repeated coefficient fields and empty schemes. -/
+unit-normalized completed pullback comparison. -/
 theorem cbcOpenCoefficientSquare
     (l : ℕ) [Fact l.Prime] (Ω : Type w)
     [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

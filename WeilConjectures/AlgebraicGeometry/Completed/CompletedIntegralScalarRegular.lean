@@ -10,9 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralProjecti
 import Mathlib.CategoryTheory.Sites.LeftExact
 import Mathlib.CategoryTheory.Types.Basic
 
-/-! # Uniformizer regularity on completed integral coefficients
-
-(blueprint: lem-pod-completed-integral-scalar-regular) -/
+/-! # Uniformizer regularity on completed integral coefficients -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -82,16 +80,7 @@ private theorem family_regular {A : Type u} [CommRing A] [IsDomain A]
   rw [← F.map_comp, he]
   exact hxy (m + k)
 
-/-- Powers of the constant uniformizer act injectively on the completed coefficient sheaf.
-
-Proof: at each finite level r, multiplication by pi^m identifies O/(pi^r) with its
-image in O/(pi^(m+r)). Constant sheafification and evaluation preserve this injection.
-For two completed sections with equal products by pi^m, their projections at level m+r
-therefore give equal projections at level r. The inverse-limit projections jointly detect
-equality. This argument works for every site object, including the empty object, and for
-m=0; it never interchanges sheafification and an infinite limit.
-Source: Stacks Tags 093J--093M; original blueprint step 1.
-(blueprint: lem-pod-completed-integral-scalar-regular) -/
+/-- Powers of the constant uniformizer act injectively on the completed coefficient sheaf. -/
 theorem completedIntegralScalar_regular
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})

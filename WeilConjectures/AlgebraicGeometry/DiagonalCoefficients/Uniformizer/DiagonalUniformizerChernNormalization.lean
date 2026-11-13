@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalComplet
 import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 
 /-! # Finite normalization of the completed positive Chern adjunct
-
-Source: diagonal tower coefficient changes proof (1), and trace proof (1).
 -/
 
 @[expose] public noncomputable section
@@ -197,31 +195,7 @@ private theorem commutes_of_transport_eq
 
 attribute [local irreducible] Scheme.finiteEtaleTateLine Etale.ordinaryFiniteDegreeZero
 
-/-- The completed positive Chern adjunct becomes the finite positive Chern adjunct.
-
-Source: blueprint latest, diagonal tower coefficient changes proof (1), the finite
-coefficient reduction, and trace proof (1), the class of the positive section.
-(blueprint: lem-diagonal-uniformizer-chern-normalization).
-
-Proof: the normalization hc expresses c as the completed lift of the strict-system
-Chern adjunct. Compare its coefficient and root cones with the finite projections.
-The coefficient-one equations of tq and completedY identify the coefficient cone
-with the actual unit reduction. The integral-root projection equations in lineP,
-and its finite kernel inclusion, identify the line cone with the positive Kummer
-root map, without a scalar or sign ambiguity. Compute the boundary on the same
-K-flat resolution of the integral line-bundle extension and tensor it with the
-finite quotient. The map from Z/l^(n+1) exists by hA. Coefficient naturality of the
-Kummer boundary identifies this reduced class with the finite Kummer class of
-O(1), because q_model is the identity. Adjunction transports the class to its
-Chern adjunct. The ordinary underlying-sheaf normalization and the full derived
-unit equations identify this adjunct transport with the four prescribed
-pushforward comparisons in v. The equality q_canonical and its hcanonical
-normalization fix the final canonical finite pushforward. The fourStepChernCommutes
-predicate composes precisely
-these four unit and pushforward comparisons. This gives equality of Chern arrows
-before any trace is composed. Neither q_trace nor a Chern/trace degree equation is used.
-The exponent n+1 is positive even at n=0; hA handles ramification, and the
-construction also applies to the empty scheme. -/
+/-- The completed positive Chern adjunct becomes the finite positive Chern adjunct. -/
 theorem diagonalUniformizer_chernNormalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

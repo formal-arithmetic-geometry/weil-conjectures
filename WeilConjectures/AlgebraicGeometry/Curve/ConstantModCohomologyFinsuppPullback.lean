@@ -146,27 +146,7 @@ private theorem natural_finsupp_coordinates
 namespace AlgebraicGeometry.Etale
 
 /-- A single prime-field basis of Λ/pΛ gives direct-sum coordinates on both sides
-of a cohomology pullback, and pullback acts separately on every coordinate.
-Source: Stacks Project, Tags 03Q5 and 0739, together with the coefficient-basis
-construction of `proposition-p-torsion-smooth-proper-curve--4`.
-(blueprint: lem-pbc-constant-mod-cohomology-finsupp-pullback)
-
-Proof: Give Λ/pΛ its canonical module structure over the lifted prime field
-ULift (ZMod p), and choose a basis I. Its basis representation identifies the underlying
-additive coefficient group with the direct sum of I copies of ULift (ZMod p).
-Apply the constant abelian sheaf functor and its comparison with coefficient forgetting
-to get the coproduct decomposition of the source sheaf. Express that coproduct as
-the filtered colimit of its finite subcoproducts. On a qcqs scheme, Sheaf.H in degree q
-preserves this colimit by the large filtered-colimit theorem, and its additive functor
-preserves the finite biproducts. The colimit of these finite sums in abelian groups is
-I →₀ H^q(X,Z/p); its universal property gives a. The inverse-image functor preserves
-colimits, so the identical decomposition pulls back to Y. Apply the same argument
-there to obtain b. Naturality of cohomologyMap with respect to each summand inclusion
-makes the two maps agree on every single-coordinate class. Every finitely supported
-family is a finite sum of such classes; additivity gives the coordinate equation.
-The zero coefficient ring or zero quotient gives an empty I and zero groups. The
-argument allows infinite bases, arbitrary q, and empty schemes, and needs no smoothness,
-properness, characteristic assumption on the schemes, or bijectivity of pullback. -/
+of a cohomology pullback, and pullback acts separately on every coordinate. -/
 theorem exists_constantModSheaf_cohomology_finsupp_pullback
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]

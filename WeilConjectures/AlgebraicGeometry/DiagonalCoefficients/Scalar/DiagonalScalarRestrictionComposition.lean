@@ -134,9 +134,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 
 /-! # Composition of normalized scalar/direct-image mates
-
-Source: diagonal tower coefficient changes, paragraph (2), scalar associativity.
-(blueprint: lem-diagonal-scalar-restriction-composition).
 -/
 
 @[expose] public noncomputable section
@@ -508,28 +505,7 @@ private lemma ordinary_square_comp
 
 /-- Normalized restriction squares exist for each coefficient leg, and their scalar
 mates obey the composition equation for every derived object. No endpoint, line,
-class, trace, integration identity or mate invertibility is asserted.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), scalar associativity;
-the normalization is the full-unit equation of DiagonalTrace.ExactSquareOfUniverses.
-(blueprint: lem-diagonal-scalar-restriction-composition).
-
-Proof: Resolve the scalar restriction of a K-injective complex by a K-injective
-complex. The localized-Hom acyclicity test for two adjunctions applies to scalar
-extension/restriction and geometric inverse image/direct image: use K-flat test
-resolutions, with geometric test resolutions whose inverse images are K-flat.
-Inverse image preserves flat objects and is exact, so the direct image of this
-resolution map is a quasi-isomorphism. Naturality of the supplied derived unit
-then proves acyclicity of the restricted complex. The universal comparison of
-the two composites, computed on K-injectives, supplies the normalized squares.
-For composition, the ordinary square has identity underlying sheaf components.
-Evaluate the two derived pastings on K-injective representatives, cancel the
-invertible source unit, and apply the full-unit equations, including on the
-possibly non-K-injective restriction. Naturality and the ordinary identity give
-horizontal composition. Finally use canonical horizontal mate pasting under the
-actual scalar adjunctions and cancel the endpoint associators. No preservation
-of K-injectives by restriction, scalar flatness, or mate invertibility is used. -/
+class, trace, integration identity or mate invertibility is asserted. -/
 theorem scalarRestriction_comp
     {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]

@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 
 /-! # Finite freeness at the chosen geometric point
-
-Source: coefficient-heart proof (1), lifting the geometric point to a free chart.
-(blueprint: lem-sfb-coefficient-heart-point-freeness)
 -/
 
 @[expose] public section
@@ -24,14 +21,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CoefficientHeartTower
 
 /-- A lisse native coefficient module becomes finite free at a geometric point.
-Source: coefficient-heart proof (1), compatible free charts above the chosen point;
-Bhatt--Scholze, Example 4.1.10.
-(blueprint: lem-sfb-coefficient-heart-point-freeness)
-Proof: lift the algebraically closed point to a member of the pro-etale covering in the
-lisse condition. Pull its finite-free presentation back along that lift. The additive
-inverse-image functor preserves finite sums and the regular module. Finally transport
-along the composition isomorphism for native module inverse images. No field or rank
-hypothesis on the coefficient ring is needed. -/
+Source: Bhatt--Scholze, Example 4.1.10. -/
 theorem point_freeness
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}

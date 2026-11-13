@@ -128,8 +128,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
 /-! Derived part of the normalized image realization.
-
-(blueprint: lem-pur-etale-brown-image-realization-derived)
 -/
 
 @[expose] public noncomputable section
@@ -193,11 +191,9 @@ private theorem constant_equivalence
 
 /-- Construction of the normalized derived direct-image comparison.
 Source: Zheng, Lemma 5.16; Stacks 07A4.
-(blueprint: lem-pur-etale-brown-image-realization-derived).
 
 The universal right-derived unit determines the comparison and its representative
-equation after transport through the supplied Brown realizations.
--/
+equation after transport through the supplied Brown realizations. -/
 theorem etaleBrownImageRealization_right_exists
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)

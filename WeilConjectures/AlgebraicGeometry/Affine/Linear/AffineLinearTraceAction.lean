@@ -150,9 +150,6 @@ public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 /-!
 # Linear changes of coordinates preserve the affine-space counit trace
 
-Source: blueprint sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.md,
-Proof paragraphs 1 and 2 (blueprint: def-amb-affine-linear-trace-action).
-
 The coefficient complex is the existing coordinate-tower model of A(d)[2d]. Its
 canonical inverse-image comparison is constructed by descent from the ordered tensor
 of d shifted Tate lines on the base. The action uses compact-support exchange for the
@@ -180,8 +177,7 @@ namespace AlgebraicGeometry
 
 /-- The linear coordinate map in the existing tower model: pull the matrix entries
 back from S, take the usual finite sums, and use the canonical affine-space coordinate
-isomorphism. Source: blueprint linear-trace lemma, statement and proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+isomorphism. -/
 def affineTraceLinearMap (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     affineTraceTower S d ⟶ affineTraceTower S d :=
@@ -259,8 +255,7 @@ private lemma linear_comp (S : Scheme.{u}) (d : ℕ)
     exact Finset.sum_comm
 
 /-- The concrete linear coordinate map is an automorphism, and its square over the
-identity is Cartesian. Source: linear-trace invariance, proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+identity is Cartesian. -/
 theorem affineTraceLinearMap_isPullback (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     IsPullback (affineTraceLinearMap S d g) (affineTraceProjection S d)
@@ -270,17 +265,13 @@ theorem affineTraceLinearMap_isPullback (S : Scheme.{u}) (d : ℕ)
       by rw [linear_comp, mul_inv_cancel, linear_one]⟩⟩
   exact IsPullback.of_horiz_isIso ⟨by simpa only [Category.comp_id] using linear_over S d g⟩
 
-/-- The concrete linear map is over its base.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+/-- The concrete linear map is over its base. -/
 theorem affineTraceLinearMap_over (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     affineTraceLinearMap S d g ≫ affineTraceProjection S d = affineTraceProjection S d :=
   linear_over S d g
 
-/-- Pulling back a tower coordinate gives the corresponding matrix-vector product.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+/-- Pulling back a tower coordinate gives the corresponding matrix-vector product. -/
 theorem affineTraceLinearMap_coordinate (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) (j : Fin d) :
     (affineTraceLinearMap S d g).appTop (affineTraceCoordinate S d j) =
@@ -288,16 +279,12 @@ theorem affineTraceLinearMap_coordinate (S : Scheme.{u}) (d : ℕ)
         affineTraceCoordinate S d i :=
   linear_coord S d g j
 
-/-- The identity matrix gives the identity of the actual tower.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+/-- The identity matrix gives the identity of the actual tower. -/
 theorem affineTraceLinearMap_one (S : Scheme.{u}) (d : ℕ) :
     affineTraceLinearMap S d 1 = 𝟙 _ :=
   linear_one S d
 
-/-- The ordered coordinate tower commutes with base change.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+/-- The ordered coordinate tower commutes with base change. -/
 theorem affineTraceMap_isPullback {S' S : Scheme.{u}} (f : S' ⟶ S) (d : ℕ) :
     IsPullback (affineTraceMap f d) (affineTraceProjection S' d)
       (affineTraceProjection S d) f := by
@@ -327,9 +314,7 @@ private lemma traceMap_coordinate {S' S : Scheme.{u}} (f : S' ⟶ S) (d : ℕ)
         AffineSpace PUnit.{u + 1} (affineTraceTower S d) ↘ affineTraceTower S d).appTop _ = _
       rw [AffineSpace.map_over, Scheme.Hom.comp_appTop, CommRingCat.comp_apply, ih]
 
-/-- Linear coordinate maps commute with base change of their matrix entries.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+/-- Linear coordinate maps commute with base change of their matrix entries. -/
 theorem affineTraceLinearMap_baseChange {S' S : Scheme.{u}} (f : S' ⟶ S) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     affineTraceLinearMap S' d (Matrix.GeneralLinearGroup.map f.appTop.hom g) ≫
@@ -351,9 +336,7 @@ theorem affineTraceLinearMap_baseChange {S' S : Scheme.{u}} (f : S' ⟶ S) (d : 
 
 namespace Etale
 
-/-- The identity inverse-image comparison, using the existing exact-derived comparison.
-Source: blueprint linear-trace lemma, identity normalization in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+/-- The identity inverse-image comparison, using the existing exact-derived comparison. -/
 def affineLinearPullbackId (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     ordinaryFinitePullback A (𝟙 S) ≅ 𝟭 (DerivedCategoryModule A S) :=
   leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (𝟙 S) ≪≫
@@ -361,9 +344,7 @@ def affineLinearPullbackId (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     Functor.mapDerivedCategoryIdIso _
 
 /-- The ordered tensor product of d shifted finite Tate lines on the base, representing
-A_S(d)[2d]. The zero stage is the constant coefficient complex. No orientation is chosen.
-Source: blueprint linear-trace lemma, K_T in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+A_S(d)[2d]. The zero stage is the constant coefficient complex. No orientation is chosen. -/
 def affineLinearBaseCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) : ℕ → DerivedCategoryModule A S
   | 0 => ordinaryFiniteUnit A S
@@ -373,9 +354,7 @@ def affineLinearBaseCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- One coordinate right functor, canonically expressed as inverse image of a tensor
 with the shifted line on its base. This uses tensor inverse image, composition, and
-normalized finite Tate inverse image, in that order.
-Source: blueprint linear-trace lemma, coefficient identification in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+normalized finite Tate inverse image, in that order. -/
 def affineLinearLineDescent (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (K : DerivedCategoryModule A S) :
@@ -398,8 +377,7 @@ def affineLinearLineDescent (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)).symm
 
 /-- One induction step in the canonical coefficient descent, with the preceding
-comparison explicit. Source: blueprint linear-trace lemma, proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+comparison explicit. -/
 def affineLinearCoefficientDescentStep (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -429,9 +407,7 @@ def affineLinearCoefficientDescentStep (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (affineTraceProjection S d)).symm.app (affineLinearBaseCoefficient A N hA S (d + 1))
 
 /-- Descend the existing tower coefficient to the ordered shifted Tate tensor on S.
-Every component is a canonical tensor, inverse-image, or normalized Tate comparison.
-Source: blueprint linear-trace lemma, coefficient identification in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+Every component is a canonical tensor, inverse-image, or normalized Tate comparison. -/
 def affineLinearCoefficientDescent (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
@@ -447,9 +423,7 @@ def affineLinearCoefficientDescent (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- The canonical Tate comparison for an S-endomorphism of affine space, obtained by
 pulling the descended base coefficient through a ≫ p = p. In particular this is the
-usual roots-of-unity/tensor/shift comparison, with no scalar automorphism inserted.
-Source: blueprint linear-trace lemma, theta_a in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+usual roots-of-unity/tensor/shift comparison, with no scalar automorphism inserted. -/
 def affineLinearCoefficientPullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -465,9 +439,7 @@ def affineLinearCoefficientPullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (affineLinearCoefficientDescent A N hA t S hS d).symm
 
 /-- The specified bounded-below tower comparison, read in the ordinary unbounded
-category using the two existing restriction-compatibility isomorphisms.
-Source: blueprint linear-trace lemma, identification with F_S in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+category using the two existing restriction-compatibility isomorphisms. -/
 def affineLinearCompactComparison (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
@@ -487,9 +459,7 @@ def affineLinearCompactComparison (N : ℕ) (hN : 0 < N)
 
 /-- The pullback action: identify the tower with Rp_d!, insert inverse image along the
 identity on S, apply exchange for the actual square, apply the canonical Tate comparison,
-and return through the same tower comparison.
-Source: blueprint linear-trace lemma, definition of rho_g in proof paragraph 1
-(blueprint: def-amb-affine-linear-trace-action). -/
+and return through the same tower comparison. -/
 def affineLinearTraceAction (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

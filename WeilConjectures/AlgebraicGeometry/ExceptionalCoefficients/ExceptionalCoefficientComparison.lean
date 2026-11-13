@@ -28,13 +28,11 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
 
 /-! # Exceptional coefficient comparisons
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-compatibilities.proof.md, (2)--(3); Stacks 0GL6 and 0F7L
-(blueprint: lem-pur-exceptional-coefficient-comparison).
+Source: Stacks 0GL6 and 0F7L.
 
 All scalar functors are the published left adjoints to exact scalar restriction.
 The scalar/pullback identification and the proper coefficient map are the recorded
-`scalarPullbackIso` and `scalarMate` of lem-pur-etale-scalar-mate-projection.
+`scalarPullbackIso` and `scalarMate`.
 The comparison for compact support is constructed from its open and proper parts.
 The auxiliary tensor and pullback identifications are fixed by their ordinary
 adjunctions and their computation on cochain representatives.
@@ -67,9 +65,7 @@ private theorem compactSupport_isIso [Finite A] [Finite B]
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Scalar transport of the dualizing complex, obtained by evaluating the exceptional
-mate at the coefficient unit and then identifying that unit after extension of scalars.
-Source: blueprint compatibilities (3)
-(blueprint: def-pur-exceptional-coefficient-tensor-maps). -/
+mate at the coefficient unit and then identifying that unit after extension of scalars. -/
 def dualizingScalarMap [Finite A] [Finite B] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] :
     (scalarExtension φ X).obj (dualizingComplex A f) ⟶
@@ -88,8 +84,7 @@ attribute [irreducible] dualizingScalarMap
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Scalar transport of the smooth tensor domain, using the canonical tensorator,
-pullback balancing and c at the coefficient unit. Source: blueprint compatibilities (3)
-(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+pullback balancing and c at the coefficient unit. -/
 def tensorDomainMap [Finite A] [Finite B] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] (K : DerivedCategoryModule A Y) :
     (scalarExtension φ X).obj
@@ -108,8 +103,7 @@ def tensorDomainMap [Finite A] [Finite B] {X Y : Scheme.{u}}
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The mixed square on the actual Cartesian pullback. Both paths have source
 S_X' g'^* G_A K and target G'_B g^* S_Y K; beta is the recorded counit transpose.
-Source: Stacks 0F7L and blueprint compatibilities (2)
-(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 0F7L. -/
 def BaseChangeCompatibility [Finite A] [Finite B] {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] (g : Y' ⟶ Y)
     (K : DerivedCategoryModule A Y) : Prop :=

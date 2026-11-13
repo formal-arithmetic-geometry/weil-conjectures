@@ -11,12 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Kernel
 # The centre of a group scheme over an algebraically closed field
 
 Let `G` be a group scheme locally of finite type over an algebraically closed field `k` of
-characteristic zero (the setting of the blueprint). Its centre `Z(G)`
-(`AlgebraicGeometry.GrpObj.center`) is constructed as the intersection of the centralizers
-`C_G(g)` of its rational points `g`: the closed subscheme of `G` cut out by the supremum of their
-ideal sheaves. A morphism `x : X ⟶ G` factors through `Z(G)` if and only if it commutes with every
-rational point of `G` (`AlgebraicGeometry.GrpObj.exists_comp_centerι_iff`), so `Z(G)` is a closed
-subgroup scheme.
+characteristic zero. Its centre `Z(G)` (`AlgebraicGeometry.GrpObj.center`) is constructed as the
+intersection of the centralizers `C_G(g)` of its rational points `g`: the closed subscheme of `G`
+cut out by the supremum of their ideal sheaves. A morphism `x : X ⟶ G` factors through `Z(G)` if and
+only if it commutes with every rational point of `G`
+(`AlgebraicGeometry.GrpObj.exists_comp_centerι_iff`), so `Z(G)` is a closed subgroup scheme.
 
 This is the centre of `G` because `G(k)` is schematically dense in `G`: `G` is reduced (Cartier's
 theorem, `k` of characteristic zero) and its rational points are its closed points, which are dense
@@ -44,10 +43,6 @@ and they are dense.
 - `AlgebraicGeometry.exists_comp_eq_of_forall_points`, `AlgebraicGeometry.ext_of_forall_points`:
   over an algebraically closed field, morphisms from reduced schemes locally of finite type are
   detected on rational points.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`: the centre `Z(G)` of an algebraic group.
 -/
 
 @[expose] public section
@@ -147,14 +142,8 @@ noncomputable def centerIdeal [IsAlgClosed k] [CharZero k] [LocallyOfFiniteType 
 variable [IsAlgClosed k] [CharZero k] [LocallyOfFiniteType G.hom]
 
 /-- The centre `Z(G)` of a group scheme `G` locally of finite type over an algebraically closed
-field `k` of characteristic zero, a closed subgroup scheme of `G`. It is constructed as the
-intersection of the centralizers `C_G(g)` of the rational points `g` of `G`, so its `X`-points are
-the `X`-points of `G` commuting with all rational points (`exists_comp_centerι_iff`). This is the
-centre of `G` because `G(k)` is schematically dense in `G`: `G` is reduced (Cartier, `k` of
-characteristic zero) and its rational points are its closed points, which are dense (`k`
-algebraically closed, `G` locally of finite type). Over a general field this intersection can be
-strictly larger than the centre, hence the hypotheses. (blueprint: `lemma-stable-subspaces-center`,
-`lemma-stable-subspaces-center--2`) -/
+field `k` of characteristic zero, a closed subgroup scheme of `G`: the intersection of the
+centralizers `C_G(g)` of the rational points `g` of `G`. -/
 noncomputable def center : Over (Spec (.of k)) :=
   Over.mk ((centerIdeal G).subschemeι ≫ G.hom)
 
@@ -171,7 +160,7 @@ instance : Mono (centerι G) :=
 variable {G}
 
 /-- **The points of the centre.** An `X`-point of `G` factors through the centre `Z(G)` if and only
-if it commutes with all rational points of `G`. (blueprint: `lemma-stable-subspaces-center`) -/
+if it commutes with all rational points of `G`. -/
 theorem exists_comp_centerι_iff {X : Over (Spec (.of k))} (x : X ⟶ G) :
     (∃ l : X ⟶ center G, l ≫ centerι G = x) ↔
       ∀ g : 𝟙_ (Over (Spec (.of k))) ⟶ G, (toUnit X ≫ g) * x = x * (toUnit X ≫ g) := by

@@ -34,28 +34,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
 
 /-- Construct the proper/open pro-etale operation and its canonical comparison,
 including origin stability before making an exceptional adjunction.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65.
-(blueprint: lem-sf-exceptional-proper-open-origin-comparison).
-
-Proof: lift the open restriction and proper inverse image to ordinary strict
-systems. Their levelwise section maps commute with restriction of scalars. The
-left adjoint of open restriction is extension by zero, constructed by sheafifying
-the direct sum of sections over open lifts; kernels and cokernels are termwise.
-Exact localization gives its derived adjunction and representative factors.
-Construct the inverse-image square on ordinary sections and localize it, with
-its evaluation square retained. Take the proper mate and compose with the open
-comparison. The finite proper mate is invertible for the quasi-compact,
-quasi-separated proper factor on bounded-below inputs. Exact evaluation preserves
-these bounds and detects isomorphisms, so the system map is invertible. The source
-site counit identifies its origin version. This gives left stability on origins,
-on systems and at each finite level. For the finite right bound, realize a
-bounded-below finite input by a system
-concentrated at that level, with every other level zero and zero transitions.
-Exact evaluation of the etale system bound, followed by G.evaluation, gives the
-finite bound; no flat singleton extension is needed. The direct site image
-preserves lower bounds. No absolute separatedness is used. Evaluating the actual
-mate word gives the displayed comparison equation by the recorded unit/counit
-identities and the open evaluation square. -/
+Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65. -/
 theorem exceptionalProperOpenOriginComparison
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

@@ -25,25 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Augmentation-normalized edges intertwine multiplication with scalar action.
 Source: Stacks Project, Tag 03P2, the coefficient edge, and Tag 01EQ,
-functoriality of the augmented injective Čech double complex in coefficients.
-(blueprint: lem-pbc-etale-additive-cech-normalized-scalar)
-
-Proof: Lift μ(r) to an augmentation-preserving endomorphism of a resolution.
-On the coefficient Čech complex its action is coordinatewise multiplication by
-the restriction of r, by hμ. The unit module restrictions are structural-ring
-maps, so this is exactly the scalar endomorphism of cechOver after restriction
-along X.toSpecGamma; GammaSpecIso.inv_hom_id identifies that scalar map with the
-identity. Both augmentations commute with the lifted endomorphism. The extMk
-formula identifies the global-resolution homology endomorphism with
-Sheaf.H.map(μ(r)). Choose a cycle representing a(x) and a global-resolution cycle
-representing x. Since both augmentations are quasi-isomorphisms, first choose
-an ordinary class with beta image equal to the alpha image of x. Normalization
-identifies that class with a(x). Thus every representative of a(x) has this same
-total homology image. Apply the lifted endomorphism to these cycles and to that equality.
-The normalization law ha then gives a(H(μ(r))(x)) as the class of r times the
-original coefficient cycle, which is r • a(x). This works for n=0 by gluing and
-for r=0, r=1 and empty intersections by the same section formulas. An empty
-cover forces all groups zero. No inverse-image comparison is used. -/
+functoriality of the augmented injective Čech double complex in coefficients. -/
 theorem etaleAdditiveCech_normalized_scalar
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

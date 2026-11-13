@@ -137,10 +137,9 @@ lemma mem_torsionBy_iff_exists_sheafHMap_kernelι_one (m : ℕ) (hm : (m : k) �
   rw [h, AddSubgroup.torsionBy.nsmul_iff, ← map_nsmul, AddEquivClass.map_eq_zero_iff]
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
-/-- Blueprint `proposition-h-1-curve-tate-module--1` (first step): the Kummer
-identification `H¹(X, μ_m) ≅ Pic(X)[m]` of a proper scheme `X` over an algebraically closed
-field, for `m` prime to the characteristic: the map induced by `μ_m ⊆ 𝔾ₘ`, followed by the
-canonical identification `H¹(X, 𝔾ₘ) ≅ Pic(X)`
+/-- The Kummer identification `H¹(X, μ_m) ≅ Pic(X)[m]` of a proper scheme `X` over an
+algebraically closed field, for `m` prime to the characteristic: the map induced by `μ_m ⊆ 𝔾ₘ`,
+followed by the canonical identification `H¹(X, 𝔾ₘ) ≅ Pic(X)`
 (`AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`). -/
 noncomputable def kummerTorsionEquiv (m : ℕ) (hm : (m : k) ≠ 0) :
     Sheaf.H (X.rootsOfUnitySheaf m) 1 ≃+ AddSubgroup.torsionBy (Additive X.Pic) (m : ℤ) :=

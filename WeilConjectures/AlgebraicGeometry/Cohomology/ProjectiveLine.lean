@@ -22,10 +22,8 @@ finiteness of the cohomology of coherent sheaves on a smooth projective curve.
 The twisting sheaves are `AlgebraicGeometry.ProjectiveSpace.twist`, which exist and are
 invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`; that they are the twisted
 structure sheaves of the standard cover, unique up to unique isomorphism, is
-`AlgebraicGeometry.ProjectiveLine.nonempty_twistData` (blueprint
-`theorem-riemann-roch-coherent-serre-duality`). The cohomology of the twists on `ℙ¹_k` is the case
-`d = 1` of Serre's computation of the cohomology of `ℙᵈ_k`,
-`lemma-coherent-base-change-invertible-sheaves--1`.
+`AlgebraicGeometry.ProjectiveLine.nonempty_twistData`. The cohomology of the twists on `ℙ¹_k` is the
+case `d = 1` of Serre's computation of the cohomology of `ℙᵈ_k`.
 
 ## Main statements
 
@@ -157,13 +155,8 @@ def degreeEqEquivFin (D : ℕ) :
     simp
 
 /-- **Sections of the twists.** The global sections of `𝒪(d)` on `ℙ¹_k` are the pairs
-`(p, q) ∈ k[t] × k[s]` with `p(t) = tᵈ q(1/t)` in `k[t, t⁻¹]`.
-
-Only the existence of a `k`-linear isomorphism is asserted: the twisting sheaf
-`AlgebraicGeometry.ProjectiveSpace.twist` is not constructed from the generating sections
-`g₀, g₁` of the blueprint, so the isomorphism is not pinned down as "taking coefficients".
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`(p, q) ∈ k[t] × k[s]` with `p(t) = tᵈ q(1/t)` in `k[t, t⁻¹]`. Only the existence of a
+`k`-linear isomorphism is asserted. -/
 theorem nonempty_H_zero_twist_equiv_twistSectionPairs (d : ℤ) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0 ≃ₗ[k]
       twistSectionPairs k d) := by
@@ -182,36 +175,20 @@ theorem nonempty_H_zero_twist_equiv_twistSectionPairs (d : ℤ) :
         (LinearEquiv.ofBijective _ (bijective_twistSectionPairsCoeff k d)).symm⟩
 
 /-- **Global sections of the twists on `ℙ¹_k`, `d ≥ 0`.** `H⁰(ℙ¹_k, 𝒪(d))` is the space of
-homogeneous polynomials of degree `d` in `k[x₀, x₁]`, of dimension `d + 1`.
-
-This is part (i) of the blueprint lemma, the case `ℙ¹` of
-`AlgebraicGeometry.ProjectiveSpace.nonempty_H_zero_twist_equiv`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+homogeneous polynomials of degree `d` in `k[x₀, x₁]`, of dimension `d + 1`. -/
 theorem nonempty_H_zero_twist_equiv (d : ℕ) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0 ≃ₗ[k]
       MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin 2)) k d) :=
   ProjectiveSpace.nonempty_H_zero_twist_equiv _ k 1 (natCard_ulift_fin_two) d
 
-/-- **Global sections of the twists on `ℙ¹_k`, `d < 0`.** `H⁰(ℙ¹_k, 𝒪(d)) = 0` for `d < 0`:
-a pair `(p, q)` with `p(t) = tᵈ q(1/t)` has `p = q = 0`, since every exponent of `tᵈ q(1/t)` is
-negative.
-
-This is the second half of part (i) of the blueprint lemma.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+/-- **Global sections of the twists on `ℙ¹_k`, `d < 0`.** `H⁰(ℙ¹_k, 𝒪(d)) = 0` for `d < 0`. -/
 theorem subsingleton_H_zero_twist_of_neg (d : ℤ) (hd : d < 0) :
     Subsingleton ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0) := by
   obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (ULift.{u} (Fin 2)) k d 0
   have := ProjectiveSpace.subsingleton_monomialCechComplex_homology_zero (ULift.{u} (Fin 2)) k hd
   exact e.toEquiv.subsingleton
 
-/-- **`H¹` of the twists on `ℙ¹_k`, `d ≥ -1`.** `H¹(ℙ¹_k, 𝒪(d)) = 0` for `d ≥ -1`.
-
-This is the first half of part (ii) of the blueprint lemma, the case `ℙ¹` of
-`AlgebraicGeometry.ProjectiveSpace.subsingleton_H_twist_top`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+/-- **`H¹` of the twists on `ℙ¹_k`, `d ≥ -1`.** `H¹(ℙ¹_k, 𝒪(d)) = 0` for `d ≥ -1`. -/
 theorem subsingleton_H_one_twist (d : ℤ) (hd : -1 ≤ d) :
     Subsingleton ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 1) :=
   ProjectiveSpace.subsingleton_H_twist_top _ k 1 one_ne_zero natCard_ulift_fin_two d
@@ -219,12 +196,7 @@ theorem subsingleton_H_one_twist (d : ℤ) (hd : -1 ≤ d) :
 
 /-- **`H¹` of the twists on `ℙ¹_k`, `d ≤ -2`.** `H¹(ℙ¹_k, 𝒪(d))` is dual to the space of
 homogeneous polynomials of degree `-d-2` in `k[x₀, x₁]`; in particular it has dimension `-d-1`,
-and `H¹(ℙ¹_k, 𝒪(-2)) ≅ k`.
-
-This is the second half of part (ii) of the blueprint lemma, the case `ℙ¹` of
-`AlgebraicGeometry.ProjectiveSpace.nonempty_H_twist_top_equiv_dual`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+and `H¹(ℙ¹_k, 𝒪(-2)) ≅ k`. -/
 theorem nonempty_H_one_twist_equiv_dual (d : ℤ) (hd : d ≤ -2) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 1 ≃ₗ[k]
       Module.Dual k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin 2)) k (-d - 2).toNat)) :=
@@ -232,23 +204,14 @@ theorem nonempty_H_one_twist_equiv_dual (d : ℤ) (hd : d ≤ -2) :
   h ▸ ProjectiveSpace.nonempty_H_twist_top_equiv_dual _ k 1 natCard_ulift_fin_two d
     (by simpa using hd)
 
-/-- **The canonical sheaf of `ℙ¹_k`.** `Ω¹_{ℙ¹/k} ≅ 𝒪(-2)`: with the trivialisations `dt` on
-`U₀` and `ds` on `U₁`, `s = 1/t`, one has `dt = -t² ds`, and the transition function `-t²`
-differs from the transition function `t²` of `𝒪(-2)` by the unit `-1`.
-
-This is part (iii) of the blueprint lemma.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+/-- **The canonical sheaf of `ℙ¹_k`.** `Ω¹_{ℙ¹/k} ≅ 𝒪(-2)`. -/
 theorem nonempty_relativeDifferentials_iso_twist :
     Nonempty ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
       ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)) :=
   ⟨relativeDifferentialsIsoTwist k⟩
 
 /-- **Vanishing above the dimension on `ℙ¹_k`.** For every quasi-coherent `𝒪_{ℙ¹_k}`-module `ℱ`,
-`H^q(ℙ¹_k, ℱ) = 0` for all `q ≥ 2`: the Čech complex of the standard cover by the two affine
-opens `U₀`, `U₁` computes the cohomology of `ℱ`, and has length two.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+`H^q(ℙ¹_k, ℱ) = 0` for all `q ≥ 2`. -/
 theorem subsingleton_H_of_two_le (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     {q : ℕ} (hq : 2 ≤ q) :
@@ -256,13 +219,8 @@ theorem subsingleton_H_of_two_le (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
   ProjectiveSpace.subsingleton_H_of_lt _ k natCard_ulift_fin_two ℱ hq
 
 /-- **Finite coherent cohomology on the projective line.** For every coherent
-`𝒪_{ℙ¹_k}`-module `ℱ`, `H⁰(ℙ¹_k, ℱ)` and `H¹(ℙ¹_k, ℱ)` are finite-dimensional over `k`: they
-are the kernel and the cokernel of the Čech differential
-`Γ(U₀, ℱ) ⊕ Γ(U₁, ℱ) → Γ(U₀ ∩ U₁, ℱ)` of the standard cover.
-
-As elsewhere, "coherent" is spelled as quasi-coherent and of finite presentation.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+`𝒪_{ℙ¹_k}`-module `ℱ`, `H⁰(ℙ¹_k, ℱ)` and `H¹(ℙ¹_k, ℱ)` are finite-dimensional over `k`.
+"Coherent" is spelled as quasi-coherent and of finite presentation. -/
 theorem finiteDimensional_H (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
@@ -276,17 +234,7 @@ end ProjectiveLine
 `k` be algebraically closed, `X` a smooth projective curve over `k` (an integral scheme of
 dimension one, smooth over `k`, with a closed immersion `i` into some `ℙⁿ_k` over `k`), and `ℱ`
 a coherent `𝒪_X`-module. Then `H⁰(X, ℱ)` and `H¹(X, ℱ)` are finite-dimensional over `k`, and
-`H^q(X, ℱ) = 0` for `q ≥ 2`.
-
-The finiteness holds since `X` is proper over `k`
-(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`). For the vanishing, choose
-a finite morphism `u : X ⟶ ℙ¹_k` (`AlgebraicGeometry.exists_isFinite_toProjectiveLine`). Since
-`u` is affine, the preimages of the two standard affine opens `U₀`, `U₁` of `ℙ¹_k` are affine
-opens covering `X`, and `X` is separated, so the quasi-coherent cohomology of `X` vanishes in
-degrees `≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`), as on `ℙ¹_k`
-(`AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+`H^q(X, ℱ) = 0` for `q ≥ 2`. -/
 theorem finiteDimensional_H_of_isCurve {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     [X.Over (Spec (.of k))] [IsIntegral X] [IsCurve (X ↘ Spec (.of k))]
     [Smooth (X ↘ Spec (.of k))] (hX : topologicalKrullDim X = 1) {n : Type u} [Finite n]

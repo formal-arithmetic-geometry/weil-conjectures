@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalAlgebraAf
 /-! # Ring operations detected on homogeneous conormal representatives
 
 Source: Stacks Project, Divisors, Tag 0634.
-(blueprint: lem-pur-conormal-algebra-homogeneous-ring-map).
 -/
 
 @[expose] public section
@@ -26,14 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- An additive map with the ideal-power representative formula preserves the unit
 and products. This is the affine algebra-law check in conormal functoriality.
-Source: Stacks Project, Divisors, Tag 0634.
-(blueprint: lem-pur-conormal-algebra-homogeneous-ring-map).
-
-Proof: Lift a product of two ideal-power representatives using the affine ideal
-sections and the power-identification isomorphism. The representative formula and
-the multiplication field of both presentations then prove multiplicativity on
-homogeneous classes. Apply additive homogeneous induction in each variable.
-The degree-zero representative of one maps to one, proving preservation of the unit. -/
+Source: Stacks Project, Divisors, Tag 0634. -/
 theorem homogeneous_preserves_ringOperations {X Z X' Z' : Scheme.{u}}
     (i : Z ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i] [IsClosedImmersion i']
     (A : Presentation i) (A' : Presentation i') (U : X.affineOpens) (U' : X'.affineOpens)

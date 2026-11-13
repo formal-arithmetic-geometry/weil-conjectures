@@ -44,11 +44,9 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   SpTowerClasses.lineModule Coefficients.unitMap
   completedSupportedUnit
 
-/-- The finite source, root and Ext coordinates at a specified level.
-Source: diagonal trace proof (2), finite source projection; diagonal-system proof (4).
-(blueprint: def-sfb-diagonal-trace-finite-cartier-coordinate-normalization).
-This is the explicit conjunction of the given source and root normalizations and
-the canonical finite-cycle equation, with the evaluated Ext expression shared. -/
+/-- The finite source, root and Ext coordinates at a specified level. This is the explicit
+conjunction of the given source and root normalizations and the canonical finite-cycle equation,
+with the evaluated Ext expression shared. -/
 @[irreducible] def FiniteCartierCoordinateNormalization
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

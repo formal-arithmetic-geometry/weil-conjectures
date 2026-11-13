@@ -34,7 +34,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 # Graded immersion criterion for ampleness
 
 Source: Stacks Project, Morphisms, Tag 01VJ, implication (6) implies (1), with
-Constructions, Tag 01O9 (blueprint: lem-trf-graded-immersion-ample-criterion).
+Constructions, Tag 01O9.
 -/
 
 @[expose] public section

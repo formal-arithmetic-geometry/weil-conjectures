@@ -36,28 +36,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Adjunction.mapDerivedCa
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor
 
 /-- Graph evaluation commutes with the sum-extension tensor mate.
-Source: Stacks Project, Tags 0F4L, 0GKF and 0GL5
-(blueprint: lem-pur-compact-support-graph-tensor-evaluation).
-
-Proof:
-1. Transpose the normalized comparison under proper direct image. On a complex this
-is the descent of the ordinary inverse image of the graph-extension map followed by
-its sheaf counit: on a K-injective resolution this follows from counit naturality.
-2. On a local tensor generator indexed by a lift s, both composites evaluate the
-section on the clopen graph of s and tensor it with the restriction of the coefficient
-section. Both composites vanish on the complementary open. The sheaf axiom on this
-clopen cover, linearity and the universal properties of inverse image and sheafification
-prove equality on sheaves. The sum tensor mate is precisely the inverse of the map
-sending (s,m) tensor k to (s,m tensor s^*k), by the sum adjunction.
-3. For flat-term K-flat representatives, totalize this equality degreewise. The maps
-preserve factor order and degree, so the signed differentials agree. Sum extension,
-open extension and inverse image preserve these K-flat representatives. The canonical
-pullback and open-extension tensor comparisons therefore identify the resulting maps
-with the displayed derived maps.
-4. Extend equality first through the localization presenting D(V) and then through the
-localization presenting D(T). Their uniqueness clauses give the equality on all unbounded
-objects, with the normalized inverse comparison fixed on every homotopy representative.
--/
+Source: Stacks Project, Tags 0F4L, 0GKF and 0GL5. -/
 private theorem projection_transpose
     {C D : Type*} [Category C] [Category D]
     {P : C ⥤ D} {R : D ⥤ C} (adj : P ⊣ R)

@@ -22,9 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 
 /-!
 # Constant coefficients under algebraically closed field extension
-
-Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proposition-cohomology-smooth-affine-curve (blueprint: proposition-cohomology-smooth-affine-curve).
 -/
 
 @[expose] public section
@@ -35,36 +32,12 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proposition-cohomology-smooth-affine-curve (blueprint: proposition-cohomology-smooth-affine-curve).
-
-The witness `r` is constrained to be the canonical cohomology pullback followed by the
-constant-sheaf comparison. The witness `t` is the primitive-root trivialization on cohomology.
-The equations for the Kummer inclusion, the units boundary, and the Picard boundary express
-compatibility with Picard torsion and Picard modulo n. In the proper case the degree-two
-identification is constrained by the degree of every line bundle. Compatible bases of Picard
-torsion give the degree-one coordinates with the genus of the chosen compactification.
-In the affine case the equations are the canonical short exact Kummer ladder, whose Picard
-term is the quotient of the compactification's Jacobian described by
-proposition-cohomology-smooth-affine-curve--3.
-
-Proof following the node:
-1. Use baseChange_curve for the smooth connected curve over K. Define r to be the canonical
-   cohomology pullback followed by the constant-sheaf comparison. Degrees zero and one use
-   constant_low_degree_baseChange_bijective. Degree two uses the proper degree coordinates or
-   affine vanishing; in higher degrees both groups vanish by curve
-   cohomological dimension, so r is bijective there too.
-2. Apply the cohomology functor to each primitive-root sheaf isomorphism to construct t and
-   tK with exactly the required underlying maps. constant_kummer_baseChange_naturality gives
-   the inclusion, Picard-boundary and affine units-boundary equations.
-3. For proper C, constant_proper_degree_coordinates gives degree-two coordinates and equality
-   of the source and compactification genera. genus_jacobian_invariant gives the base-change
-   genus equality. Proper cohomology supplies degree-one coordinates over k; composing them
-   with the inverse of the bijective r in degree one supplies compatible coordinates over K.
-4. Apply genus_jacobian_invariant to f when it is proper and to c.g unconditionally, retaining
-   its exact classifying-morphism compatibility. Supply base-changed smoothness by
-   baseChange_curve. Finally, functoriality of Picard pullback and pullback.lift_fst prove the
-   affine compactification restriction equation for every line bundle. -/
+/-- Let `k ⊆ K` be algebraically closed fields, `C` a smooth connected curve over `k` with a
+smooth connected compactification `c`, and `n` invertible in `k`. The canonical pullback
+`r : Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_K, ℤ/n)` is bijective in every degree, and it is compatible, via the
+primitive-root trivializations `t`, `tK` of `ℤ/n ≅ μ_n`, with the Kummer maps to Picard groups
+and with the degree-one and degree-two coordinates in the proper case; moreover the Jacobians of
+`C` (when proper) and of the compactification commute with base change. -/
 theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

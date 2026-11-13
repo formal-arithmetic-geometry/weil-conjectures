@@ -11,9 +11,6 @@ import WeilConjectures.CategoryTheory.Exact.ExactDegreeZeroAdjoint
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Composition of normalized scalar arrows
-
-Source: diagonal tower coefficient changes, paragraph (2), scalar associativity.
-(blueprint: lem-diagonal-scalar-endpoint-composition).
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +33,7 @@ variable {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [IsMonHom a] [IsMonHom b] [IsMonHom c]
 
 /-- Composition of exact scalar restrictions, fixed by the ordinary identity-on-sheaves
-comparison. Source: scalar associativity (blueprint: lem-diagonal-scalar-endpoint-composition).
--/
+comparison. -/
 def scalarRestrictionCompIso (h : a ≫ b = c) (X : Scheme.{u}) :
     (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (coefficientMap c X)).mapDerivedCategory ≅
@@ -51,8 +47,7 @@ def scalarRestrictionCompIso (h : a ≫ b = c) (X : Scheme.{u}) :
         Mod.comapCongr (by rw [← h, coefficientMap_comp]))).symm
 
 /-- The derived scalar associator is the uniqueness comparison of the actual
-adjunctions, rather than an independently chosen tensor isomorphism.
-Source: scalar associativity (blueprint: lem-diagonal-scalar-endpoint-composition). -/
+adjunctions, rather than an independently chosen tensor isomorphism. -/
 def scalarCompIso (h : a ≫ b = c) (X : Scheme.{u}) :
     derivedScalars c X ≅ derivedScalars a X ⋙ derivedScalars b X :=
   (Adjunction.leftAdjointCompIso
@@ -61,8 +56,7 @@ def scalarCompIso (h : a ≫ b = c) (X : Scheme.{u}) :
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap c X))
     (scalarRestrictionCompIso a b c h X).symm).symm
 
-/-- The normalized derived arrow of any semilinear map, before asserting it invertible.
-Source: endpoint normalization (blueprint: lem-diagonal-scalar-endpoint-composition). -/
+/-- The normalized derived arrow of any semilinear map, before asserting it invertible. -/
 def scalarHom {X : Scheme.{u}} {M : Modules Λ₀ X} {N : Modules Λ₁ X}
     {m : M.X ⟶ N.X} (s : Semilinear a M N m) :
     (derivedScalars a X).obj ((DerivedCategory.singleFunctor (Modules Λ₀ X) 0).obj M) ⟶
@@ -71,8 +65,7 @@ def scalarHom {X : Scheme.{u}} {M : Modules Λ₀ X} {N : Modules Λ₁ X}
     ((DerivedCategory.singleFunctor (Modules Λ₀ X) 0).map s.hom ≫
       ((Mod.comap (coefficientMap a X)).mapDerivedCategorySingleFunctor 0).inv.app N)
 
-/-- The corresponding normalized arrow after shifting by two.
-Source: endpoint shifts (blueprint: lem-diagonal-scalar-endpoint-composition). -/
+/-- The corresponding normalized arrow after shifting by two. -/
 def scalarShiftHom {X : Scheme.{u}} {M : Modules Λ₀ X} {N : Modules Λ₁ X}
     {m : M.X ⟶ N.X} (s : Semilinear a M N m) :
     (derivedScalars a X).obj
@@ -81,8 +74,7 @@ def scalarShiftHom {X : Scheme.{u}} {M : Modules Λ₀ X} {N : Modules Λ₁ X}
   ((derivedScalars a X).commShiftIso (2 : ℤ)).hom.app _ ≫
     (scalarHom a s)⟦(2 : ℤ)⟧'
 
-/-- Ordinary composition of semilinear maps using the identity-on-sheaves comparison.
-Source: scalar associativity (blueprint: lem-diagonal-scalar-endpoint-composition). -/
+/-- Ordinary composition of semilinear maps using the identity-on-sheaves comparison. -/
 def Semilinear.comp {X : Scheme.{u}} {M : Modules Λ₀ X} {N : Modules Λ₁ X}
     {P : Modules Λ₂ X} {m : M.X ⟶ N.X} {n : N.X ⟶ P.X}
     (h : a ≫ b = c) (s : Semilinear a M N m) (t : Semilinear b N P n) :
@@ -148,18 +140,7 @@ private theorem shifted_comp
 
 /-- Normalized scalar arrows compose under the actual scalar associator, both before
 and after shifting by two. No invertibility, diagram, trace or direct-image hypothesis
-is involved.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), scalar associativity.
-(blueprint: lem-diagonal-scalar-endpoint-composition).
-
-Proof: Faithfulness of the module forgetful functor identifies the composite of the
-ordinary semilinear maps with the third. Exact degree-zero adjoint insertions compose
-under the conjugate scalar associator. Cancel its inverse to obtain the first equation.
-The conjugate formula in units and counits shows that this associator commutes with
-shifts. Shift the first equation, use this compatibility and naturality of the second
-scalar functor's shift comparison to obtain the second equation. -/
+is involved. -/
 theorem scalarHom_comp (hcoeff : a ≫ b = c) {X : Scheme.{u}}
     {M₀ : Modules Λ₀ X} {M₁ : Modules Λ₁ X} {M₂ : Modules Λ₂ X}
     {m₀₁ : M₀.X ⟶ M₁.X} {m₁₂ : M₁.X ⟶ M₂.X} {m₀₂ : M₀.X ⟶ M₂.X}

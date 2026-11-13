@@ -39,6 +39,10 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
   lie in an affine open of `X`, which can be shrunk into `f⁻¹ V`
   (`AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le_of_finite`).
 
+Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
+every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
+representable.
+
 ## Main statements
 
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`: the affine case, from the
@@ -46,8 +50,7 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
   (`AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`) and the case of an
   affine space over an affine base
   (`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`).
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
-  (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`).
+- `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`.
 -/
 
 @[expose] public section
@@ -74,11 +77,10 @@ lemma Scheme.IdealSheafData.support_comap_baseChangeMap_subset (f : X ⟶ S) {T 
 
 namespace Scheme.IdealSheafData
 
-/-- **Openness of `F_U`** (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, Step 5). Let
-`I` be an ideal sheaf on `X_T` whose closed subscheme `Z` is universally closed over `T`, and let
-`U ⊆ X` be open. Then there is an open `O ⊆ T`, the complement of the image in `T` of the points of
-`Z` lying over `X \ U`, such that for every `a : W ⟶ T` the pullback `Z_W` lies over `U` if and only
-if `a` factors through `O`. -/
+/-- **Openness of `F_U`**. Let `I` be an ideal sheaf on `X_T` whose closed subscheme `Z` is
+universally closed over `T`, and let `U ⊆ X` be open. Then there is an open `O ⊆ T`, the complement
+of the image in `T` of the points of `Z` lying over `X \ U`, such that for every `a : W ⟶ T` the
+pullback `Z_W` lies over `U` if and only if `a` factors through `O`. -/
 theorem exists_opens_support_comap_subset (f : X ⟶ S) {T : Over S}
     (I : (pullback f T.hom).IdealSheafData)
     [UniversallyClosed (I.subschemeι ≫ pullback.snd f T.hom)] (U : X.Opens) :
@@ -229,8 +231,7 @@ lemma IsHilbertSubscheme.comap_pullbackResLEMap {d : ℕ} {W : Over V.toScheme}
   rw [← key]
   exact (isFinite_flat_finrank_iso_comp_iff _ _ d).2 hI
 
-/-- **`F_{V,U}` is the Hilbert functor of `U ⟶ V`** (blueprint
-`theorem-hilbert-schemes-points-smooth-curve--1`, Step 3). For opens `V ⊆ S` and `U ⊆ f⁻¹ V`,
+/-- **`F_{V,U}` is the Hilbert functor of `U ⟶ V`**. For opens `V ⊆ S` and `U ⊆ f⁻¹ V`,
 pushing forward closed subschemes along the open immersions `U ×[V] W ⟶ X ×[S] W` is a natural
 transformation from `Hilb^d_{U/V}` to the restriction of `Hilb^d_{X/S}` to `V`-schemes. It is
 injective with image the `Z ⊆ X_W` lying in `U_W`; this uses that a closed subscheme of `U_W` finite
@@ -301,14 +302,8 @@ lemma exists_hilbertPresheafResLEι_app_eq [IsSeparated f] (d : ℕ) {W : Over V
 
 end ResLE
 
-/-- **The affine claim** (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, Steps 1 and
-4). For a morphism of affine schemes `f : X ⟶ S`, the Hilbert functor `Hilb^d_{X/S}` is
-representable.
-
-The functions on `X` define a closed immersion of `X` into an affine space over `S`, so this
-follows from the case of affine spaces,
-`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`, by the closed-immersion claim
-`AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`. -/
+/-- **The affine claim**. For a morphism of affine schemes `f : X ⟶ S`, the Hilbert functor
+`Hilb^d_{X/S}` is representable. -/
 theorem isRepresentable_hilbertPresheaf_of_isAffine (f : X ⟶ S) [IsAffine X] [IsAffine S]
     (d : ℕ) : (hilbertPresheaf f d).IsRepresentable := by
   let i : X ⟶ 𝔸(Γ(X, ⊤); S) := AffineSpace.homOfVector f id
@@ -322,17 +317,7 @@ theorem isRepresentable_hilbertPresheaf_of_isAffine (f : X ⟶ S) [IsAffine X] [
 every finite set of at most `d` points of the fibre `X_s` there is an affine open of `X`
 containing all of them; this holds for instance when `X ⟶ S` is quasi-projective, or when `X`
 carries an ample invertible module. If moreover `X ⟶ S` is separated, then `Hilb^d_{X/S}` is
-representable by a scheme.
-
-Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
-every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
-representable.
-
-The proof glues the Hilbert schemes of the morphisms of affine schemes `U ⟶ V`, for affine opens
-`V ⊆ S` and `U ⊆ f⁻¹ V`, using the gluing criterion
-`AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+representable by a scheme. -/
 theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
     (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
       ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :

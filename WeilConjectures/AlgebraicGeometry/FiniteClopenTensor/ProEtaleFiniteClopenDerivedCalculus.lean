@@ -64,10 +64,9 @@ import Mathlib.CategoryTheory.PUnit
 # Unbounded derived calculus for a finite clopen partition
 
 Source: Stacks Project, derived.tex, Tags 015F and 05RU; sites-modules.tex, Tag 0GMW;
-sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU; finite-component application
-(blueprint: lem-pur-finite-clopen-derived-calculus).
+sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU.
 
-All restrictions are the sectionwise functors of the module-gluing node. Tensor products
+All restrictions are the sectionwise functors of module gluing. Tensor products
 and their constraints are the existing sheafification and K-flat localization constructions.
 -/
 
@@ -111,27 +110,24 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 namespace AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor
 
 /-- The recorded module category, with a coefficient universe containing the small site.
-Source: Stacks 03D7 (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 03D7. -/
 abbrev Modules {X : Scheme.{t}} (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   clopenTensorModules.{t, u} R
 
 /-- Restrict commutative rings by the same site composition as `clopenRingRestriction`.
-Source: Stacks 04TR (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 04TR. -/
 abbrev rings {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] :=
   clopenTensorRings.{t, u} j
 
 /-- The module restriction of the recorded gluing theorem, without changing its data.
-Source: Stacks 04TR (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 04TR. -/
 abbrev restriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     Modules.{t, u} R ⥤ Modules.{t, u} ((rings.{t, u} j).obj R) :=
   clopenTensorRestriction.{t, u} j R
 
 /-- Exactness of component restriction, including the unbounded case.
-Source: Stacks 015F and 04TR (blueprint: lem-pur-finite-clopen-derived-calculus).
-Proof: identify the component site with the slice at the open immersion. Restriction
-preserves kernels and sheafified cokernels by the exact module-gluing equivalence;
-equivalently sheaf exactness is local on this slice. No exactness of sections is used. -/
+Source: Stacks 015F and 04TR. -/
 theorem restriction_exact {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteLimits (restriction.{t, u} j R) ∧
@@ -139,26 +135,26 @@ theorem restriction_exact {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   exact ⟨ClopenScalar.resLimits j R, ClopenScalar.resColimits j R⟩
 
 /-- Exact restriction preserves finite limits.
-Source: Stacks 015F (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 015F. -/
 instance restrictionLimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteLimits (restriction.{t, u} j R) := (restriction_exact j R).1
 
 /-- Exact restriction preserves finite colimits.
-Source: Stacks 015F (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 015F. -/
 instance restrictionColimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteColimits (restriction.{t, u} j R) := (restriction_exact j R).2
 
 /-- Additivity is the already recorded sectionwise restriction additivity.
-Source: Stacks 04TR (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 04TR. -/
 instance restrictionAdditive {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     (restriction.{t, u} j R).Additive :=
   clopenModuleRestriction_additive j _
 
 /-- Standard localization in the fixed module universe, with no boundedness restriction.
-Source: Stacks 05RU (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 05RU. -/
 @[instance_reducible]
 instance hasDerived {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
@@ -166,34 +162,34 @@ instance hasDerived {X : Scheme.{t}}
   ClopenMonoidalDescent.hasDerived.{t, u} R
 
 /-- Degreewise restriction followed by localization at quasi-isomorphisms.
-Source: Stacks 015F, 05RU (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 015F, 05RU. -/
 abbrev derivedRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   ClopenMonoidalDescent.derivedRestriction.{t, u} j R
 
 /-- The existing native K-flat derived tensor, with its prescribed constraints.
-Source: Stacks 0FPT (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 0FPT. -/
 instance derivedMonoidal {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     MonoidalCategory (DerivedCategory (Modules.{t, u} R)) :=
   ClopenMonoidalDescent.monoidal.{t, u} R
 
 /-- Its existing Koszul symmetry.
-Source: Stacks 0FPT (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 0FPT. -/
 instance derivedSymmetric {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     SymmetricCategory (DerivedCategory (Modules.{t, u} R)) :=
   ClopenMonoidalDescent.symmetric.{t, u} R
 
 /-- The pure tensor in the existing localization tensor of module sheaves.
-Source: Stacks 0GMW (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 0GMW. -/
 def pure {X : Scheme.{t}} (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (F H : Modules.{t, u} R) (U : X.ProEtᵒᵖ) (x : F.val.obj U) (y : H.val.obj U) :
     (F ⊗ H).val.obj U :=
   clopenTensorPure.{t, u} R F H U x y
 
 /-- The inverse tensorator of a braided restriction functor.
-Source: Stacks 0GMW (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 0GMW. -/
 def tensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (restriction.{t, u} j R).Braided) (F H : Modules.{t, u} R) :
@@ -202,7 +198,7 @@ def tensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   clopenTensorComparison.{t, u} j R h F H
 
 /-- The inverse tensorator on the prescribed native derived tensors.
-Source: Stacks 06YU, 0FPT (blueprint: lem-pur-finite-clopen-derived-calculus). -/
+Source: Stacks 06YU, 0FPT. -/
 def derivedTensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (derivedRestriction.{t, u} j R).Braided)

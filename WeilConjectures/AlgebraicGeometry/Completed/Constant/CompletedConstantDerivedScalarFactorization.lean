@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficientTrans
 /-! # Scalar factorization of the relative completed constant realization
 
 Source: Stacks Tags 06YY, 06YU and 0D6D; flat completion (Tag 093M).
-(blueprint: lem-weil-pbc-completed-constant-derived-scalar-factorization).
 -/
 
 @[expose] public noncomputable section
@@ -185,28 +184,7 @@ private theorem coefficientSquare (X Y : Scheme.{u}) (g : Y ⟶ X)
 from the inverse image of the constant algebraic completion to completed coefficients.
 This statement contains no quotient reductions or transition compatibility.
 
-Source: Stacks Tags 06YY, 06YU and 0D6D; the scalar-extension computation in the first step
-of lem-weil-pbc-completed-constant-unbounded-finite-diagram-comparison.
-(blueprint: lem-weil-pbc-completed-constant-derived-scalar-factorization).
-
-Proof: form the evaluation map from the constant completion on X to the limit of its
-finite quotient sheaves. Its composite with the fixed constant-to-continuous ring
-comparison is the limit lift of constantAdicFiniteCone. The evaluation equations for
-phi and beta identify its inverse image with the map on Y, after transporting the
-constant ring by the canonical constant-inverse-image isomorphism. The latter map
-and beta are isomorphisms on the relevant coefficient presentations: for beta this
-is profinite coefficient inverse image applied to the finite quotient rings.
-The extended ideal in the algebraic completion has the same quotient rings as the
-original ideal. Apply flatness of the completed constant algebra to this quotient
-tower to prove that extension along phi preserves finite limits and colimits.
-Its exact derived-category functor therefore computes its universal left derived
-functor. Ordinary inverse image preserves constant module sheaves naturally in the
-algebraic module. Derive this comparison using exact-functor composition. Restriction
-along the two coefficient isomorphisms gives equivalences; the coefficient square
-identifies the composite right adjoints, so uniqueness of left adjoints identifies
-the corresponding derived scalar extensions. Combine this with restriction of
-scalars along the composite coefficient isomorphism and exact-functor composition.
-The resulting natural isomorphism applies to all unbounded complexes. -/
+Source: Stacks Tags 06YY, 06YU and 0D6D. -/
 theorem completed_constant_derived_scalar_factorization
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

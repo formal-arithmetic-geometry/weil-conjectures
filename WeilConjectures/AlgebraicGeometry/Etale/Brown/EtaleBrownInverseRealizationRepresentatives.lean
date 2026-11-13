@@ -34,18 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 
 -- The concrete mate comparison elaborates large coefficient category expressions.
 /-- The inverse-image realization is the localization of the ordinary comparison.
-Source: Zheng Construction 5.15 and Lemma 5.16; Stacks 03CY and 07A4.
-(blueprint: lem-pur-etale-brown-inverse-realization-representatives).
-
-Proof: take the ordinary inverse mate of the section-normalized direct comparison.
-The underlying set-sheaf adjunction and the algebraic inverse-image Hom formula
-identify its components with the section pullback comparison. Constants are preserved,
-so this is linear and invertible. Prolong this comparison to cochain complexes.
-The normalized direct-image unit equation and the two derived Hom transpose formulas
-identify its localization with the inverse derived mate. Cancel the realization
-factorizations. The prescribed mate equation for the supplied image realization
-identifies that mate with its inverse-image comparison, giving the displayed equation.
-The argument uses neither properness nor boundedness. -/
+Source: Zheng Construction 5.15 and Lemma 5.16; Stacks 03CY and 07A4. -/
 theorem etaleBrownInverseRealization_representatives
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)

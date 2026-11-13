@@ -29,8 +29,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Fixed-coefficient tensor normalization on representatives
 
-Source: Stacks Tags 06YY, 07A4 and 07A6
-(blueprint: lem-sfb-fixed-coefficient-tensor-representative-normalization).
+Source: Stacks Tags 06YY, 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -138,15 +137,7 @@ private theorem representativeFixedIso_hom_app
 attribute [local irreducible] representativeFixedIso
 
 /-- A fixed coefficient computes derived tensor on every flat K-flat first factor.
-Source: Stacks 07A4
-(blueprint: lem-sfb-fixed-coefficient-tensor-representative-normalization).
-Proof: choose a flat-term K-flat resolution q of the coefficient complex.
-Tensoring q with a K-flat first factor gives a quasi-isomorphism. Invert its
-localized map and compose with the model representative and tensor(1,Qq).
-The fixed-factor representative comparison identifies the resulting component
-with its canonical component at the coefficient complex. Naturality of that
-comparison proves the same formula for every map from any other flat K-flat H.
-Naturality in the first factor follows by composing natural isomorphisms. -/
+Source: Stacks 07A4. -/
 theorem fixedCoefficientTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}

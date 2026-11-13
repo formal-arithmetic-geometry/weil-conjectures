@@ -11,10 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 For a cone with projections `pᵢ`, construct the diagram `pᵢ⁻¹pᵢ*F` and its
 counit cocone to `F`. The transition maps are defined by adjunction; their
-functoriality follows from coherence of direct-image composition.
-
-Source: the first step of blueprint `lemma-uniform-bounds-pro-etale-affines`.
-(blueprint: def-sc-affine-limit-sheaf-approximation). -/
+functoriality follows from coherence of direct-image composition. -/
 
 @[expose] public section
 universe u
@@ -25,9 +22,7 @@ local notation "L" => upperStar AddCommGrpCat
 local notation "R" => lowerStar AddCommGrpCat
 local notation "adj" => upperStarLowerStarAdjunction AddCommGrpCat
 
-/-- Transition morphism between two pull-push approximations.
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
-(blueprint: def-sc-affine-limit-sheaf-approximation). -/
+/-- Transition morphism between two pull-push approximations. -/
 noncomputable def approximationMap (p : X ⟶ Y) (f : Y ⟶ Z) (r : X ⟶ Z)
     (hr : r = p ≫ f) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (L r).obj ((R r).obj F) ⟶ (L p).obj ((R p).obj F) :=
@@ -114,9 +109,7 @@ variable {I : Type u} [SmallCategory I] (D : I ⥤ Scheme.{u}) (s : Cone D)
     (F : Sheaf s.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The diagram of pull-push approximations along the projections of a scheme cone.
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
-(blueprint: def-sc-affine-limit-sheaf-approximation). -/
+/-- The diagram of pull-push approximations along the projections of a scheme cone. -/
 noncomputable def approximationDiagram :
     Iᵒᵖ ⥤ Sheaf s.pt.smallEtaleTopology AddCommGrpCat.{u + 1} where
   obj i := (L (s.π.app i.unop)).obj ((R (s.π.app i.unop)).obj F)
@@ -130,9 +123,7 @@ noncomputable def approximationDiagram :
         (s.π.app j.unop) (s.π.app i.unop) (s.w g.unop).symm (s.w f.unop).symm F).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The counits form a cocone from the approximation diagram to the original sheaf.
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
-(blueprint: def-sc-affine-limit-sheaf-approximation). -/
+/-- The counits form a cocone from the approximation diagram to the original sheaf. -/
 noncomputable def approximationCocone : Cocone (approximationDiagram D s F) where
   pt := F
   ι :=
@@ -141,9 +132,7 @@ noncomputable def approximationCocone : Cocone (approximationDiagram D s F) wher
         dsimp only [approximationDiagram, Functor.const_obj_map]
         exact (approximationMap_counit _ _ _ _ _).trans (Category.comp_id _).symm }
 
-/-- The canonical map from the colimit of approximations to the original sheaf.
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
-(blueprint: def-sc-affine-limit-sheaf-approximation). -/
+/-- The canonical map from the colimit of approximations to the original sheaf. -/
 noncomputable def approximationComparison :
     colimit (approximationDiagram D s F) ⟶ F :=
   colimit.desc (approximationDiagram D s F) (approximationCocone D s F)

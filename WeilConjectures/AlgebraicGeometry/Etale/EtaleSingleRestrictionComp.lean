@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleSingleRestrictionFactors
 import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 
 /-! # Composition of the degree-zero restriction comparison
-
-Source: blueprint vector integration, compatibility with restriction.
-(blueprint: lem-amb-etale-single-restriction-comp).
 -/
 
 @[expose] public noncomputable section
@@ -87,10 +84,7 @@ private theorem single_comp_comparisons
       (d.hom.app X ≫ r.hom.app X) hc hd.symm
 
 /-- The comparison between derived inverse image and restriction on degree-zero sheaves
-respects the actual pullback and restriction compositors.
-Source: blueprint vector integration, degree-zero restriction; the source composition
-lemmas for derived pullback and upperStarIsoLocalizationRestriction.
-(blueprint: lem-amb-etale-single-restriction-comp). -/
+respects the actual pullback and restriction compositors. -/
 theorem etaleSingleRestrictionIso_comp (A : Type (u + 1)) [CommRing A]
     {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)
     [Etale p] [Etale v] [Etale w] (hw : w = p ≫ v)

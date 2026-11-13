@@ -17,9 +17,6 @@ import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Affine Kummer degree-one base change
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in degree
-one (blueprint: lem-sc-affine-kummer-degree-one-base-change).
 -/
 
 @[expose] public section
@@ -56,17 +53,10 @@ private theorem quotient_eq_one_of_boundary_zero {A B : Type*}
   have hv' : n • v = Additive.ofMul a := by simpa using hv
   simpa only [toMul_nsmul, toMul_ofMul] using congrArg Additive.toMul hv'
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in
-degree one (blueprint: lem-sc-affine-kummer-degree-one-base-change).
-
-Proof: The Kummer sequence gives short exact sequences with outer terms units modulo
-n-th powers and Picard n-torsion. Kummer naturality makes pullback a commuting
-ladder. The units quotient comparison is bijective by units_quotient_base_change.
-The affine clause of kummer_base_change_compatibility gives bijectivity on Picard
-n-torsion. The short five lemma gives bijectivity on the middle H¹(mu_n) term.
-The condition on the second component fixes the first component uniquely, since
-the roots-of-unity inclusion into Gm is monic, so the assertion holds for every φ
-with the displayed condition. This also covers n = 1, when all three terms vanish. -/
+/-- Let `k ⊆ K` be algebraically closed fields, `C` a smooth affine connected curve over `k` and
+`n` invertible in `k`. For a morphism `φ` from the pulled-back Kummer sequence of `C` to the
+Kummer sequence of `C_K` which is the canonical map on `𝔾ₘ`, the induced comparison
+`H¹(C, μ_n) ⟶ H¹(C_K, μ_n)` is bijective. -/
 theorem IsConnectedCurve.affine_kummer_degree_one_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

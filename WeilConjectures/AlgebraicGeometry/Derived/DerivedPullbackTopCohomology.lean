@@ -19,8 +19,7 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Canonical top cohomology of derived module pullback
 
 Source: Stacks Project, derived.tex, Tag 05TC (dual upper-bound and truncation argument),
-cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the agent assembly
-specified in the DAG (blueprint: lem-weil-pbc-derived-pullback-top-cohomology).
+cohomology.tex, Tags 06YJ and 0D5S.
 
 The comparison in degree n is the selected derived counit evaluated at the single
 complex in degree n. The pinned counit shift theorem identifies it with c[-n].
@@ -42,8 +41,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 /-- The canonical projection C → H^n(C)[-n], characterized by identity on H^n.
 The inverse below is the existing bijection of Hom sets. This construction works in
 any abelian category and uses its existing standard truncation interface.
-Source: Stacks, derived.tex, Tags 08J5 and 05TC
-(blueprint: lem-weil-pbc-derived-pullback-top-cohomology). -/
+Source: Stacks, derived.tex, Tags 08J5 and 05TC. -/
 def derivedTopTruncationProjection
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
     (n : ℤ) (C : DerivedCategory A) (hC : C.IsLE n) :
@@ -84,8 +82,7 @@ private theorem topProjection_naturality
 /-- Evaluate a specified derived counit on a single module and apply the canonical
 termwise/single identification. This generic construction avoids expanding the concrete
 sheafification data when checking each use of the same pinned comparison.
-Source: Stacks, cohomology.tex, Tags 06YJ and 08HY
-(blueprint: lem-weil-pbc-derived-pullback-top-cohomology). -/
+Source: Stacks, cohomology.tex, Tags 06YJ and 08HY. -/
 def derivedSingleComparisonOfCounit
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B]
@@ -396,8 +393,7 @@ variable [∀ X : Scheme.{u},
 For n=0 this is the specified counit representative of
 `IsDerivedModulePullbackComparison`, normalized by the ordinary pullback unit.
 For general n it is the shifted comparison, by pinned counit shift compatibility.
-Source: Stacks, cohomology.tex, Tags 06YJ, 08HY and 0D5S
-(blueprint: lem-weil-pbc-derived-pullback-top-cohomology). -/
+Source: Stacks, cohomology.tex, Tags 06YJ, 08HY and 0D5S. -/
 def pinnedModulePullbackComparisonAt {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (M : S.Modules) :
     (derivedPullback g).obj ((DerivedCategory.singleFunctor.{w, u, u + 1}
@@ -414,8 +410,7 @@ def pinnedModulePullbackComparisonAt {T S : Scheme.{u}} (g : T ⟶ S)
 
 /-- The specified κ: apply derived pullback to the top projection, apply the pinned
 comparison on H^n(C)[-n], take H^n, and use the canonical single-complex cohomology iso.
-Source: Stacks, derived.tex, Tag 05TC, dual truncation argument; cohomology.tex, Tag 06YJ
-(blueprint: lem-weil-pbc-derived-pullback-top-cohomology). -/
+Source: Stacks, derived.tex, Tag 05TC, dual truncation argument; cohomology.tex, Tag 06YJ. -/
 def derivedPullbackTopCohomology {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE n) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -781,42 +776,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived pullback preserves the upper bound; H^0 of its normalized module comparison
 and the specified top comparison are isomorphisms. The top comparison is natural for
 all derived morphisms between upper-bounded objects and respects composition.
-The existential `hbound` records the first conclusion and supplies its proof to κ_h.
 Source: Stacks, derived.tex, Tags 05TC and 08J5, dual upper-bound/truncation argument;
-cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the DAG assembly
-(blueprint: lem-weil-pbc-derived-pullback-top-cohomology).
-
-Proof:
-1. Represent C by a complex K zero above n using the standard t-structure. Apply
-lem-pc-kflat-bounded-flat-replacement at the same bound n. Its flat replacement P is
-K-flat by lem-pc-bounded-above-flat-kflat, so lemma-coherent-base-change-invertible-sheaves--2
-computes Lg*C by termwise g*P, with the counit selected by derived pullback composition.
-2. The ordinary tensor pullback is left adjoint to pushforward
-(lem-pc-module-pullback-adjunction), hence preserves cokernels. Its comparison
-coker(g*d^{n-1}) → g*coker(d^{n-1}) is the map induced by the quotient of g*P^n.
-3. The pulled-back complex is zero above n; its top cohomology is that cokernel.
-Thus Lg*C has the asserted upper bound, without a lower bound.
-4. Resolve M[0] with the same upper bound zero. Naturality of the fixed derived
-counit at the resolution map identifies H^0(c_g,M) with the invertible cokernel
-comparison followed by g* of the resolution's H^0 isomorphism. This verifies the
-particular comparison of def-pc-derived-module-base-change-map.
-5. On P the top projection has degree-n component P^n → H^n(P). Counit naturality
-at this map and lem-pc-pinned-pullback-counit-shifts identify κ with the cokernel
-isomorphism of step 3. Transport along Q(P) ≅ C gives the stated κ.
-6. Smart truncation is functorial and preserves quasi-isomorphisms; it descends to
-all derived morphisms. Its projection and the selected counit are natural, giving
-the displayed naturality equation. On a single module in degree n, κ is H^0(c).
-7. Apply lem-pc-canonical-single-pullback-composition to h,g,M. The explicit pinned
-construction of lem-pc-canonical-single-pullback-comparison and the transpose formula
-lem-pc-canonical-single-adjunction-transpose identify its single comparisons with c.
-Transport the ordinary comparisons back through the unique adjunction-preserving
-tensor-to-ordinary identifications. This gives the same equation with tensor pullback
-and tensorPullbackSectionComp.inv. Shift it using the two pinned shift lemmas.
-8. Apply step 6 for h to v = Lg*(τ_C) followed by c_g,H^n(C)[-n]. Its H^n is κ_g,C.
-The target is the single g*H^n(C) in degree n, so its κ_h is H^0(c_h). Postcompose
-with ordinary tensor composition; substitute step 7 and use naturality of derived
-composition at τ_C. This gives exactly the displayed composition equation.
-No inverse of c in the derived category is used. -/
+cohomology.tex, Tags 06YJ and 0D5S. -/
 theorem derivedPullback_topCohomology {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE n) :
     ∃ hbound : ((derivedPullback g).obj C).IsLE n,

@@ -17,9 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The counit equation is preserved by ordered pasting of exchange squares.
-Source: adjunction counit naturality and functoriality
-(blueprint: lem-amb-affine-trace-tower-counit-base-change). -/
+/-- The counit equation is preserved by ordered pasting of exchange squares. -/
 private theorem tower_counit_baseChange {C C' : ℕ → Type*}
     [∀ d, Category (C d)] [∀ d, Category (C' d)]
     {L : ∀ d, C (d + 1) ⥤ C d} {L' : ∀ d, C' (d + 1) ⥤ C' d}
@@ -72,28 +70,7 @@ private theorem tower_counit_baseChange {C C' : ℕ → Type*}
     simp only [Category.assoc]
     rw [ih, ← Functor.map_comp]
 
-/-- The actual coordinate-tower counit commutes with its pasted base-change exchange.
-Source: blueprint lemma-integral-linear-character--1, proof steps 8--9
-(blueprint: lem-amb-affine-trace-tower-counit-base-change).
-
-Proof: first establish the one-coordinate counit square. Expand the affine-line
-exchange into the proper exchange, open-extension exchange and compactification
-comparison. The inverse open exchange is the mate of the open unit, so its two
-counit composites transpose to the identity. Paste with the normalized projective
-counit square hD. The compactification comparisons cancel by naturality.
-Now induct on d, for arbitrary K. At zero every tower comparison and counit is
-identity. At a successor write the composite counit as the preceding left functor
-applied to the inner counit, followed by the preceding counit. The right comparison
-is the inner line comparison followed by the line right functor applied to the
-preceding right comparison. Commute the latter map past the inner counit using
-counit naturality, and apply the one-coordinate square. Exchange naturality moves
-the resulting mapped inner counit past the preceding exchange. Finally apply the
-induction hypothesis and functoriality of pullback. This gives the displayed actual
-morphism equality, including all associativity identifications. Naturality of the
-line exchange follows from its composite natural transformation; induction gives
-naturality of the tower exchange. No stalkwise equality of derived morphisms is
-used. The identity change of base, d=0, empty base and zero coefficient ring obey
-the same unit and triangle equations. -/
+/-- The actual coordinate-tower counit commutes with its pasted base-change exchange. -/
 theorem affineTraceTowerCounit_baseChange (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

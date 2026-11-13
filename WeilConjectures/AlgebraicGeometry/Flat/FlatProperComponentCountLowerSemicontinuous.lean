@@ -21,10 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Proper.Geometric.ProperGeometricFibreCl
 
 /-!
 # Lower semicontinuity of geometric connected component counts
-
-Source: Stacks Project, More on Morphisms, Tag 0BUI,
-`lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous`
-(blueprint: lem-weil-pbc-flat-proper-component-count-lower-semicontinuous).
 -/
 
 @[expose] public section
@@ -87,40 +83,10 @@ private theorem card_le_of_clopen_partition {Y : Type*} [TopologicalSpace Y]
     exact congrArg Sigma.fst (e.symm.injective h)
   simpa only [Nat.card_fin] using Nat.card_le_card_of_injective a ha
 
-/-- Source: Stacks Project, More on Morphisms, Tag 0BUI.
-(blueprint: lem-weil-pbc-flat-proper-component-count-lower-semicontinuous)
-
-The geometric fibres of a proper flat finitely presented morphism have finitely many
-connected components. Their count is zero for an empty fibre and is lower semicontinuous,
-expressed by the neighbourhood inequality. The function `n` is specified by `Nat.card` of
-`ConnectedComponents`, the quotient by equality of maximal connected subsets.
-Properness already implies quasi-compactness and quasi-separatedness, so finite
-presentation is expressed by the remaining locally-of-finite-presentation condition.
-
-Proof:
-1. Every geometric fibre is proper over its algebraically closed field, hence Noetherian.
-   Its connected-component quotient is finite. Define `n` by its natural cardinality;
-   an empty fibre has an empty component quotient.
-2. Apply `exists_etale_geometricFibre_clopen_partition`, the Stein splitting step of
-   Tag 0BUI. It supplies a pointed étale neighbourhood and a finite clopen partition
-   of the pulled-back source. At the marked geometric fibre each piece is connected
-   and nonempty, so the partition indexes its connected components.
-3. Base-change invariance (`lem-weil-pbc-geometric-component-count-base-change`)
-   identifies that number of pieces with `n s`. Finiteness justifies conversion from
-   the extended-natural count in that theorem to the natural count used here.
-4. The pulled-back morphism is flat and locally of finite presentation, hence open.
-   Intersect the finitely many open images of the clopen pieces. The marked point
-   belongs to this intersection. Every geometric fibre over it meets every piece:
-   a point in each ordinary fibre lifts to a compatible point in the scheme pullback
-   with the algebraic closure. This is Mathlib's `Scheme.Pullback.exists_preimage_pullback`.
-5. A disjoint clopen covering partitions the connected-component quotient into a
-   disjoint sum of the piece quotients. Choose one component in every nonempty piece.
-   This gives an injection from the finite index set and proves the lower bound.
-   It also covers the empty partition, whose intersection of images is the whole base.
-6. The étale neighbourhood map is open. Its image of the intersection is therefore
-   an open neighbourhood of `s`. At any point of that image choose a preimage point
-   and use base-change invariance again to transfer the inequality to the original base.
--/
+/-- The geometric fibres of a proper flat finitely presented morphism have finitely many
+connected components. Their count `n` (`Nat.card` of `ConnectedComponents`) is zero for an
+empty fibre and is lower semicontinuous, expressed by the neighbourhood inequality.
+Source: Stacks Project, More on Morphisms, Tag 0BUI. -/
 theorem Scheme.Hom.geometricComponentCount_lowerSemicontinuous
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f] :

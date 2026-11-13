@@ -14,8 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
 Let `A` be a commutative ring and `ℙᵈ_A = ℙ(n; Spec A)` with `Fintype.card n = d + 1`, `d ≥ 1`.
 The canonical module `ω = ⋀ᵈ Ω¹_{ℙ/A}` is isomorphic to `𝒪(-d-1)`
 (`AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`), hence `Hᵈ(ℙᵈ_A, ω) ≅ A`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -35,9 +33,7 @@ variable {n : Type u}
 /-- **`Hᵈ(ℙᵈ_A, ω) ≅ A`**: for `d ≥ 1`, the top cohomology of the canonical module
 `ω = ⋀ᵈ Ω¹_{ℙ/A}` of `ℙᵈ_A` is free of rank one over `A`, since `ω ≅ 𝒪(-d-1)`
 (`canonicalModuleIsoTwist`) and `Hᵈ(ℙᵈ_A, 𝒪(-d-1)) ≅ A`
-(`nonempty_H_twist_top_linearEquiv_self`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+(`nonempty_H_twist_top_linearEquiv_self`). -/
 theorem nonempty_H_canonicalModule_top_linearEquiv (A : Type u) [CommRing A] [Fintype n]
     {d : ℕ} (hn : Fintype.card n = d + 1) (hd : d ≠ 0) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A))

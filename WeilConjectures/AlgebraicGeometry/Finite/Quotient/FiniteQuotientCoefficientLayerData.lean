@@ -57,7 +57,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 The first object uses the actual kernel of the quotient of coefficient sheaves;
 the last object is the restriction of the previous quotient complex.
 Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data).
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +68,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The actual quotient map, regarded as a map of rank-one coefficient modules.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data). -/
+Source: Stacks Project, Tag 0942. -/
 def finiteQuotientUnitMap (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     SheafOfModules.unit (completedAdicFiniteRing X d (n + 1)) ⟶
@@ -96,8 +94,7 @@ def finiteQuotientUnitMap (X : Scheme.{t}) {A : Type t} [CommRing A]
 
 /-- Tensor the successor reduction with the actual kernel of the quotient map.
 The kernel, not a chosen witness of existence, defines the coefficient layer.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data). -/
+Source: Stacks Project, Tag 0942. -/
 def finiteQuotientLayerObject (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (M : DerivedCategory (CompletedAdicModules X d))
     (n : ℕ) : DerivedCategory (SheafOfModules.{t + 1}
@@ -110,8 +107,7 @@ def finiteQuotientLayerObject (X : Scheme.{t}) {A : Type t} [CommRing A]
 
 /-- The previous derived quotient regarded over the successor coefficient ring.
 Restriction is performed on the canonical complex representative of the localization.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data). -/
+Source: Stacks Project, Tag 0942. -/
 def finiteQuotientPreviousObject (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (M : DerivedCategory (CompletedAdicModules X d))
     (n : ℕ) : DerivedCategory (SheafOfModules.{t + 1}

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModel
 
 /-! # The normalized limit data used in diagonal pullback
 
-Source: blueprint diagonal coefficient changes, paragraph (3).
+## Implementation details
+
+`diagonalSurfaceSystemsHasExt` names the `Ext` structure as a constant applied to variables:
+instance search through the class projection `DiagonalTraceLocalizations.ext` at
+`diagonalSurface Y` produces an auxiliary proof whose statement the kernel only matches against
+`HasExt` by unfolding derived categories, in every declaration generated for the structure.
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +31,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
 /-- The `Ext` structure on strict systems over the diagonal surface, as a constant applied to
-variables. Instance search through the class projection `DiagonalTraceLocalizations.ext` at
-`diagonalSurface Y` produces an auxiliary proof whose statement the kernel only matches against
-`HasExt` by unfolding derived categories, in every declaration generated for the structure. -/
+variables. -/
 abbrev diagonalSurfaceSystemsHasExt (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [i : DiagonalTraceLocalizations l (diagonalSurface Y)] :
     HasExt.{u + 1} (DiagonalSystems l (diagonalSurface Y)) :=
@@ -37,10 +40,7 @@ abbrev diagonalSurfaceSystemsHasExt (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 attribute [local instance high] diagonalSurfaceSystemsHasExt
 
 /-- Named fields for the whole-system data of the diagonal limit. This structure
-chooses no witnesses and imposes no new property on the completed class.
-
-Source: the defining predicate `IsDiagonalLimit`, blueprint coefficient proof (3).
-(blueprint: def-diagonal-class-limit-presentation). -/
+chooses no witnesses and imposes no new property on the completed class. -/
 structure ClassLimitPresentation (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (hY : IsUnit (l : Γ(Y, ⊤)))

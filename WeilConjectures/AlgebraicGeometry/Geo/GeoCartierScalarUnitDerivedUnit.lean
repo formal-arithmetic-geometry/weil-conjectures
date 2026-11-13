@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ExactFunctorDerivedUnit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The ordinary derived-unit form of a Cartier scalar unit
-
-Source: the Hom universal property in GeoCartierScalarUnit.
-(blueprint: lem-diagonal-scalar-unit-derived-unit).
 -/
 
 @[expose] public noncomputable section
@@ -26,14 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The Cartier scalar-unit predicate is the derived-unit universal property
-for the exact restriction functor.
-Source: Cartier coefficient clause (4), the definition of GeoCartierScalarUnit
-(blueprint: lem-diagonal-scalar-unit-derived-unit).
-Proof: Unfold the Cartier predicate and IsDerivedBaseChange. The derived
-restriction functor is the exact restriction functor's mapDerivedCategory.
-For each target complex both predicates say that composition with single(eta)
-and the inverse exact-single comparison is bijective. Associativity identifies
-the two parenthesizations of this composition. -/
+for the exact restriction functor. -/
 theorem geoCartierScalarUnit_derivedUnit
     {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) (Z : Scheme.{u})

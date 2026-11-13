@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.
 public import WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.CoefficientSheafificationScalarSquare
 
 /-! # Section normalization for the constructed coefficient square
-
-(blueprint: lem-weil-pbc-coefficient-sheafification-sections).
 -/
 
 @[expose] public noncomputable section

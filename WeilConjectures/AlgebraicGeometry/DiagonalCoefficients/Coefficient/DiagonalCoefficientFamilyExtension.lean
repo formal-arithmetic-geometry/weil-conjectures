@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.Diagon
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientFiniteClosure
 
 /-! # Scalar extension of a diagonal diagram
-
-Source: diagonal tower coefficient changes, paragraphs (1)--(2).
-(blueprint: lem-diagonal-coefficient-family-extension).
 -/
 
 @[expose] public noncomputable section
@@ -29,28 +26,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Extend a Z_l diagonal diagram to the integral, rational and closure
 coefficient stages, with the specified scalar/direct-image mates. This result
-requires neither a chosen Cartier class nor a completed reference.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraphs (1)--(2).
-(blueprint: lem-diagonal-coefficient-family-extension).
-
-Proof: For each finite extension, use finite freeness over Z_l to identify
-extension of scalars with a finite biproduct. This identifies the unit and
-root-line endpoints by their adjoints. Additive right-derived direct images
-preserve finite biproducts, making the canonical scalar mates invertible on
-the two specified lines. Transport the diagonal arrow, the three traces and
-the supported sources through these comparisons; naturality carries each
-integration composite to the image of its original identity. Rationalization
-is localization at l. The unit and shifted line objects have common lower
-bound -2, and the projective-line projections are qcqs. Bounded continuity
-therefore makes the localization/direct-image mates invertible on these
-objects. Apply the same transport. The closure coefficient and its root line
-are the filtered finite-field colimits. Bounded continuity supplies the same
-comparisons for those colimits. Their normalized adjoints determine the maps
-on each finite-field leg, so scalar-extension associativity gives the rational
-transition and closure squares. All constructions preserve the input Z_l
-component literally; no choice of a new diagonal class is made. -/
+requires neither a chosen Cartier class nor a completed reference. -/
 theorem diagonalCoefficientFamily_extension
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

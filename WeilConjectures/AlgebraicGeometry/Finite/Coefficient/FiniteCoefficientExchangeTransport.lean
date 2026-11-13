@@ -12,9 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteLevelRingedProEtale
 # Transport of finite coefficient exchange
 
 This is the coefficient transport step for the finite-level proper base-change theorem.
-Source: Stacks Tags 09C8 and 09C9 (blueprint:
-proposition-proper-direct-image-constructible-complexes--5). (blueprint:
-lem-weil-pbc-finite-origin-exchange-transport).
+Source: Stacks Tags 09C8 and 09C9.
 -/
 
 @[expose] public section
@@ -31,22 +29,10 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- After restriction from the continuous-function coefficient presentation to the constant
-coefficient presentation, the ambient finite exchange is invertible. The proof transports the
-constant-coefficient proper-base-change theorem through the canonical coefficient equivalence,
-using the mate compatibility of exact restriction of scalars. This statement is strictly an
-intermediate transport result: it retains arbitrary coefficient identifications and only asserts
-invertibility after applying `finiteOriginToConstant`.
-Source: Stacks Tags 09C8 and 09C9 (blueprint:
-proposition-proper-direct-image-constructible-complexes--5). (blueprint:
-lem-weil-pbc-finite-origin-exchange-transport). Proof: use the constants-to-functions isomorphism at
-each corner as the scalar-change square. The coherence hypothesis makes the scalar-change comparison
-commute on both paths of the chosen Cartesian square. The derived pullback and direct-image
-comparison isomorphisms from `proEtaleRingSheafChangeAdjunction` identify the restriction of the
-function-coefficient mate with the constant-coefficient mate. Apply
-`finiteConstantRingedExchange_isIso` to the finite-coefficient object obtained by realizing the
-retained étale complex. Finally conjugate by the witness isomorphism `_W.iso`; isomorphism
-reflection for exact restriction gives the displayed restricted map.
--/
+coefficient presentation, the ambient finite exchange is invertible. The coefficient
+identifications are arbitrary, and invertibility is only asserted after applying
+`finiteOriginToConstant`.
+Source: Stacks Tags 09C8 and 09C9. -/
 theorem finiteOriginToConstant_map_ambientExchange_isIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (sq : ChosenCartesianSquare g' f' f g) [IsProper f]

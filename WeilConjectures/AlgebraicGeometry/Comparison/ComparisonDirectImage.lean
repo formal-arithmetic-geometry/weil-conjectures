@@ -11,9 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # The canonical comparison for bounded below direct images
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-theorem-comparison-direct-images--1; Stacks Project, Tag 099R
-(blueprint: theorem-comparison-direct-images--1).
+Source: Stacks Project, Tag 099R.
 
 The comparison is the existing derived base-change transformation of the canonical
 underived mate. The three statements give invertibility, identity compatibility and
@@ -31,8 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical derived composition identification on Etale sheaves, with the
 injective-preservation instance supplied by the exact inverse-image adjunction.
-Source: blueprint theorem-comparison-direct-images--1, final proof paragraph;
-Stacks, Tag 099R (blueprint: theorem-comparison-direct-images--1). -/
+Source: Stacks, Tag 099R. -/
 noncomputable def etaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}} (f : U ⟶ V) (g : V ⟶ W) :
     (Etale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus ⋙
@@ -47,8 +44,7 @@ noncomputable def etaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ
 
 /-- The canonical derived composition identification on ProEtale sheaves, with the
 injective-preservation instance supplied by the exact inverse-image adjunction.
-Source: blueprint theorem-comparison-direct-images--1, final proof paragraph;
-Stacks, Tag 099R (blueprint: theorem-comparison-direct-images--1). -/
+Source: Stacks, Tag 099R. -/
 noncomputable def proEtaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}} (f : U ⟶ V) (g : V ⟶ W) :
     (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus ⋙
@@ -62,25 +58,7 @@ noncomputable def proEtaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring
     (ProEtale.lowerStarComp (ModuleCat.{u + 1} Λ) f g)
 
 /-- The canonical comparison for a quasi-compact quasi-separated morphism is invertible.
-Source: blueprint theorem-comparison-direct-images--1; Stacks, Tag 099R
-(blueprint: theorem-comparison-direct-images--1).
-
-Proof: take the mate of the pulled-back etale counit using the pullback comparison.
-Exact inverse images and bounded below injective representatives keep both sides in D+.
-Localize on affine opens of the target; restriction preserves injectives on both sites.
-On an affine ind-etale basis object W = lim W_i, apply derived cohomology continuity
-first to W_i and then to U times_V W_i. Quasi-compactness and quasi-separatedness of the
-morphism give qcqs stage schemes and affine transition maps. Fixing one index gives the
-fixed-stage complexes required by continuity. Derived evaluation of direct image identifies
-the middle groups. Global cohomology comparison and pro-etale restriction identify the
-result with derived sections of the target. To check this is the specified map, represent
-L by etale injectives I and resolve its comparison pullback by pro-etale injectives J.
-Comparison pullbacks of injectives are section-acyclic on the basis, so the source section
-complex computes derived sections. The comparison-sections formula expresses it as a
-filtered colimit of sections of I; exact filtered colimits commute with cohomology. At each
-finite stage the counit is identity on sections, so its restriction is precisely the map
-used by continuity. Thus the specified mate induces the computed isomorphisms, and basis
-derived detection proves it invertible. This follows the seven proof steps of the node. -/
+Source: Stacks, Tag 099R. -/
 theorem isIso_comparisonDirectImagePlus (Λ : Type (u + 1)) [Ring Λ]
     {U V : Scheme.{u}}
     (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] :
@@ -365,14 +343,7 @@ private theorem derived_identity {C D : Type*} [Category* C] [Category* D]
   erw [Category.comp_id, Category.comp_id] at hL
   exact hL
 
-/-- Identity compatibility of the canonical derived comparison.
-Source: blueprint theorem-comparison-direct-images--1, final proof paragraph
-(blueprint: theorem-comparison-direct-images--1).
-
-Proof: for the identity morphism the defining pulled-back counit mate is the identity
-under the canonical identity identifications. The adjunction triangle identities cancel
-the inserted unit and counit. Deriving preserves this equality by the universal property
-of the bounded below right derived functor and its normalization on injective complexes. -/
+/-- Identity compatibility of the canonical derived comparison. -/
 theorem comparisonDirectImagePlus_id (Λ : Type (u + 1)) [Ring Λ]
     (U : Scheme.{u})
     (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -513,18 +484,7 @@ private theorem derived_comp
   rw [← Category.assoc, ← δ.mapDerivedCategoryPlus.map_comp, Iso.hom_inv_id_app,
     δ.mapDerivedCategoryPlus.map_id, Category.id_comp]
 
-/-- Composition compatibility of the canonical derived comparison.
-Source: blueprint theorem-comparison-direct-images--1, final proof paragraph
-(blueprint: theorem-comparison-direct-images--1).
-
-Proof: the counit of a composite adjunction is the composite of its two counits under
-associativity. Substitute this into the defining mate formula. Pullback comparison
-coherence identifies the two pullback paths, and the triangle identities cancel the
-inserted unit-counit pairs. On bounded below injective representatives, direct images
-preserve injectives because inverse images are exact. Thus the canonical derived
-composition isomorphisms compute the same equality termwise; their universal-property
-normalizations give the displayed formula. Naturality in L is already the naturality
-of the derived base-change transformation. -/
+/-- Composition compatibility of the canonical derived comparison. -/
 theorem comparisonDirectImagePlus_comp (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}}
     (f : U ⟶ V) (g : V ⟶ W)

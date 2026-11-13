@@ -18,8 +18,6 @@ public import Mathlib.CategoryTheory.Abelian.Exact
 
 The existing definitions are factored out so the independent refinement and lisse
 restriction lemmas can be imported by their assembly theorem without an import cycle.
-Source: blueprint common-stratification, clauses (1)--(3).
-(blueprint: lemma-constructible-sheaves).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +31,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Lisse means pro-etale locally free of finite rank, with ranks allowed to vary on the
-cover. Source: blueprint lemma-constructible-sheaves, introductory paragraph
-(blueprint: lemma-constructible-sheaves). -/
+cover. -/
 def IsLisseCoefficientModule
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
@@ -42,9 +39,7 @@ def IsLisseCoefficientModule
   ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : U.I₀,
     Mod.IsFree (condensedRingObj Λ (U.X i)) ((CondensedRing.upperStar Λ (U.f i)).obj M)
 
-/-- The underlying ring object of a condensed ring, with its canonical multiplication.
-Source: blueprint sk-def-sfb-condensed-ring, first paragraph
-(blueprint: lemma-constructible-sheaves). -/
+/-- The underlying ring object of a condensed ring, with its canonical multiplication. -/
 abbrev coefficientHeartRingObj
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) :=
   (sheafCompose (coherentTopology Profinite.{u})
@@ -52,9 +47,7 @@ abbrev coefficientHeartRingObj
 
 /-- All three assertions, with exactness of a pair of arbitrary arrows expressed as equality
 of its image and kernel subobjects. This also forces their composite to vanish. Longer
-sequences are exact precisely when this condition holds at each term.
-Source: blueprint sk-lem-coefficient-heart-common-stratification, clauses (1)--(3)
-(blueprint: lemma-constructible-sheaves). -/
+sequences are exact precisely when this condition holds at each term. -/
 def CoefficientHeartStratificationAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : Prop :=

@@ -33,9 +33,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- An isomorphism of cone points transports a Roos triangle.
-Source: Stacks Tag 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-roos).
-Proof: conjugate the first and last arrows by the point isomorphism and its shift. -/
+Source: Stacks Tag 0941. -/
 theorem finitePerfectAdicRoos_changeObject
     {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
@@ -51,10 +49,7 @@ theorem finitePerfectAdicRoos_changeObject
       e (Iso.refl _) (Iso.refl _) (by simp) (by simp) (by simp))).mp h
 
 /-- An isomorphism of entire inverse diagrams transports a Roos triangle.
-Source: Stacks Tag 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-roos).
-Proof: the product of the component isomorphisms conjugates one minus shift;
-transport the distinguished triangle through that product isomorphism. -/
+Source: Stacks Tag 0941. -/
 theorem finitePerfectAdicRoos_changeDiagram
     {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
@@ -80,9 +75,7 @@ theorem finitePerfectAdicRoos_changeDiagram
       (Iso.refl _) E E (by simp) hE.symm (by simp))).mp h
 
 /-- Exact slice restriction is a right adjoint also on unbounded derived categories.
-Source: Stacks Tag 03DA and Derived Categories, derived adjunction.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-roos).
-Proof: localize the exact extension/restriction adjunction on complexes. -/
+Source: Stacks Tag 03DA and Derived Categories, derived adjunction. -/
 theorem finitePerfectAdicRestriction_rightAdjoint
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (U : X.ProEt) :
@@ -112,8 +105,7 @@ theorem finitePerfectAdicRestriction_rightAdjoint
     E.mapDerivedCategory R.mapDerivedCategory).isRightAdjoint
 
 /-- Exact derived slice restriction preserves Roos limit triangles.
-Source: Stacks Tags 0940 and 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-roos). -/
+Source: Stacks Tags 0940 and 0941. -/
 theorem finitePerfectAdicRestriction_roos
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (U : X.ProEt)
@@ -151,22 +143,7 @@ theorem finitePerfectAdicRestriction_roos
 has its completed constant realization as its Roos limit.
 
 Source: Stacks Project, Tag 09C6, the displayed finite-projective inverse-limit calculation;
-Cohomology on Sites, Tags 0940 and 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-roos).
-
-Proof: uniqueness of left adjoints identifies L_n with derived tensor by A/I^(n+1),
-preserving its unit. The canonical transitions are transposes of these same units,
-so the resulting diagram is the actual quotient diagram of P. A finite-projective
-term is an idempotent summand of a finite free module. Its quotient constant sheaves
-have sectionwise surjective transitions, and their limit is the same idempotent
-summand of the completed coefficient sheaf. These identifications are natural for
-linear maps, hence commute with the differentials of P. Thus their ordinary limit
-complex is ordinary completed constant realization of P. Apply the termwise
-epimorphic-complex Roos theorem. Flatness and bounded projectivity identify ordinary
-realization with completed derived scalar extension. Exact slice restriction is a
-right adjoint and preserves the Roos triangle. Zero terms and empty slices give zero
-triangles. No geometric trivialization, arbitrary algebraic tower or compatible
-marking is supplied to this statement, and completeness of A is not required. -/
+Cohomology on Sites, Tags 0940 and 0941. -/
 theorem finitePerfectAdicMarked_roos
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (U : X.ProEt)

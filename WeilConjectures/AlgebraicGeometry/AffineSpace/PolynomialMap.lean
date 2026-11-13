@@ -147,12 +147,7 @@ lemma affineLine.finite_compl_basicOpen_coord :
 /-- **A finite map of `𝔸¹` which is étale near the origin and sees only a given open there.**
 Let `O` be a nonempty open of the affine line over a perfect field `k`. There are a polynomial
 `P` such that the polynomial map `p : x ↦ P(x)` is finite, and an open `V ∋ 0` of `𝔸¹_k` with
-finite complement such that `p⁻¹(V) ⊆ O` and `p` is étale over `V`.
-
-Proof: `O` contains a basic open `D(h)`, `h ≠ 0`; take a monic irreducible (hence separable)
-`P` coprime to `h`. The bad locus `C = (𝔸¹ ∖ O) ∪ V(P')` is closed and finite, and
-`V = 𝔸¹ ∖ p(C)` works: `p` is finite hence closed, and the fibre `V(P)` of `p` over `0` lies in
-`D(h) ∩ D(P')`. -/
+finite complement such that `p⁻¹(V) ⊆ O` and `p` is étale over `V`. -/
 theorem affineLine.exists_isFinite_polynomialMap_etale [PerfectField k] (O : (affineLine k).Opens)
     (hO : (O : Set (affineLine k)).Nonempty) :
     ∃ P : k[X], IsFinite (polynomialMap P) ∧ ∃ V : (affineLine k).Opens,

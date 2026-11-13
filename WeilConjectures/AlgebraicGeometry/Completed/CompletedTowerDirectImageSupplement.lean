@@ -25,8 +25,7 @@ public import WeilConjectures.AlgebraicGeometry.CompletedTowerDirectImage
 /-!
 # Total direct image of strict completed-coefficient towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1276;
-Stacks Project, Tag 099N (blueprint: proposition-proper-base-change-complete-integral--1).
+Source: Stacks Project, Tag 099N.
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +54,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
-/-- Sectionwise module direct image with the completed coefficient action.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- Sectionwise module direct image with the completed coefficient action. -/
 def completedModuleDirectImage :
     pbcModules X (pbcAdicCompletion X d) ⥤ pbcModules Y (pbcAdicCompletion Y d) :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -66,18 +64,14 @@ def completedModuleDirectImage :
     ⟨Functor.whiskerRight (completedCoefficientDirectImageMap f d).hom
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
-/-- Sectionwise completed direct image is additive.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1).
-Proof: direct image applies the same underlying maps to sections on base-changed objects.
-Addition of linear maps is sectionwise, so direct image preserves addition. -/
+/-- Sectionwise completed direct image is additive. -/
 @[instance]
 theorem completedModuleDirectImage_additive : (completedModuleDirectImage f d).Additive := by
   constructor
   intro M N g h
   rfl
 
-/-- The unbounded total derived completed-coefficient module direct image.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The unbounded total derived completed-coefficient module direct image. -/
 abbrev completedDerivedDirectImage :
     DerivedCategory (pbcModules X (pbcAdicCompletion X d)) ⥤
       DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) :=
@@ -136,15 +130,13 @@ private theorem completedCoefficient_isIso :
       (pbcLevelConstantComparison X d n).hom
   rw [L.map_id, Category.id_comp]
 
-/-- Module direct image with the actual finite quotient coefficient ring.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- Module direct image with the actual finite quotient coefficient ring. -/
 abbrev completedFiniteModuleDirectImage (n : ℕ) :=
   proEtaleRingModuleDirectImage f ((pbcAdicRings Y d).obj (op n))
     ((pbcAdicRings X d).obj (op n))
     (asIso (completedFiniteCoefficientMap f d n))
 
-/-- The finite quotient direct image obtained by total right derivation.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The finite quotient direct image obtained by total right derivation. -/
 abbrev completedFiniteDerivedDirectImage (n : ℕ) :=
   (completedFiniteModuleDirectImage f d n).rightDerivedFunctor
 
@@ -154,11 +146,7 @@ private theorem completedCoefficient_projection (n : ℕ) :
         completedFiniteCoefficientMap f d n := by
   exact limit.lift_π _ (op n)
 
-/-- Restriction commutes with ordinary direct image by identity on underlying sections.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1).
-Proof: the square of completed structure maps and finite projections commutes by the
-component construction of c_f. The two module actions therefore agree. Identity on
-sections is a natural linear isomorphism and sectionwise faithfulness proves uniqueness. -/
+/-- Restriction commutes with ordinary direct image by identity on underlying sections. -/
 theorem completedRestrictionDirectImageIso_exists (n : ℕ) :
     ∃! e : pbcRestrict (pbcAdicProjection X d n) ⋙ completedModuleDirectImage f d ≅
         completedFiniteModuleDirectImage f d n ⋙ pbcRestrict (pbcAdicProjection Y d n),
@@ -188,15 +176,13 @@ theorem completedRestrictionDirectImageIso_exists (n : ℕ) :
       change (e.hom.app M).val.app U ((e.inv.app M).val.app U x) = x at hi
       exact (h.symm.trans hi).symm)
 
-/-- The uniquely section-normalized restriction/direct-image comparison.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The uniquely section-normalized restriction/direct-image comparison. -/
 def completedRestrictionDirectImageIso (n : ℕ) :
     pbcRestrict (pbcAdicProjection X d n) ⋙ completedModuleDirectImage f d ≅
       completedFiniteModuleDirectImage f d n ⋙ pbcRestrict (pbcAdicProjection Y d n) :=
   (completedRestrictionDirectImageIso_exists f d n).exists.choose
 
-/-- The total right-derived comparison on a completed-coefficient cochain complex.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The total right-derived comparison on a completed-coefficient cochain complex. -/
 def completedDirectImageComplexUnit
     (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :
     DerivedCategory.Q.obj
@@ -209,8 +195,7 @@ def completedDirectImageComplexUnit
       ((HomotopyCategory.quotient _ _).obj C) ≫
     (completedDerivedDirectImage f d).map ((DerivedCategory.quotientCompQhIso _).hom.app C)
 
-/-- The total right-derived comparison on a finite-coefficient cochain complex.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The total right-derived comparison on a finite-coefficient cochain complex. -/
 def completedFiniteDirectImageComplexUnit (n : ℕ)
     (C : CochainComplex (pbcModules X ((pbcAdicRings X d).obj (op n))) ℤ) :
     DerivedCategory.Q.obj
@@ -230,12 +215,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived coefficient comparison is fixed by the ordinary identity comparison
 and the universal right-derived units. This normalization prevents an arbitrary
-natural isomorphism from being substituted in the projection-formula construction.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1).
-Proof: finite module inverse image is exact, and direct images of injective finite
-module sheaves are acyclic after scalar restriction. Derive the sectionwise comparison
-using such resolutions. The universal right-derived units give the displayed equation
-on complexes, and the universal derived property gives uniqueness and invertibility. -/
+natural isomorphism from being substituted in the projection-formula construction. -/
 theorem completedDerivedRestrictionDirectImageIso_exists (n : ℕ) :
     ∃! e : pbcDerivedRestrict (pbcAdicProjection X d n) ⋙ completedDerivedDirectImage f d ≅
         completedFiniteDerivedDirectImage f d n ⋙
@@ -339,8 +319,7 @@ theorem completedDerivedRestrictionDirectImageIso_exists (n : ℕ) :
       simpa only [hi, uF, uG, Functor.mapIso_hom, Iso.app_hom] using h)
     exact congrArg Iso.symm hh
 
-/-- The canonical derived restriction/direct-image comparison.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The canonical derived restriction/direct-image comparison. -/
 def completedDerivedRestrictionDirectImageIso (n : ℕ) :
     pbcDerivedRestrict (pbcAdicProjection X d n) ⋙ completedDerivedDirectImage f d ≅
       completedFiniteDerivedDirectImage f d n ⋙
@@ -348,8 +327,7 @@ def completedDerivedRestrictionDirectImageIso (n : ℕ) :
   (completedDerivedRestrictionDirectImageIso_exists f d n).exists.choose
 
 /-- The finite projection-formula arrow is the scalar-adjunction mate of direct image
-of the reduction unit, followed by the canonical restriction/direct-image comparison.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+of the reduction unit, followed by the canonical restriction/direct-image comparison. -/
 def completedDirectImageProjectionFormula (n : ℕ)
     (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) :
     (pbcDerivedExtend (pbcAdicProjection Y d n)).obj
@@ -441,16 +419,7 @@ private theorem finiteComplexUnit_eq (n : ℕ)
 set_option Elab.async false in
 /-- Perfectness of each quotient makes this specified projection-formula arrow an
 isomorphism, functorial in the input.
-Source: blueprint order 1276; Stacks Project, Tag 0944.
-(blueprint: lem-pbc-completed-direct-image-projection-properties).
-Proof: identify the restricted finite-ring unit with the constant-system quotient
-module by the canonical ring comparison and its limit-projection equation. The
-scalar-to-tensor comparison identifies the specified arrow with the tensor projection.
-The existing perfect projection formula applies because this quotient is perfect.
-Cancel the comparison isomorphisms and reflect invertibility along exact restriction
-of scalars, using its conservative action on homology. For naturality transpose the
-equality through the scalar adjunction and use naturality of its unit and of the
-restriction/direct-image comparison. -/
+Source: Stacks Project, Tag 0944. -/
 theorem completedDirectImageProjectionFormula_properties (d : AdicCoefficientDatum A) :
     (∀ (n : ℕ) (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))),
       IsIso (completedDirectImageProjectionFormula f d n K)) ∧

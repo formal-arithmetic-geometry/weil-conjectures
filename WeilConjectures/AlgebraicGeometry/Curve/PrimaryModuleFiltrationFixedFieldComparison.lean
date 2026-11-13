@@ -18,8 +18,7 @@ import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 /-!
 # Restricted subgroup representations and the fixed-field comparison
 
-Source: Stacks Project, Tags 04JQ, 03QT and 03SF; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2.
+Source: Stacks Project, Tags 04JQ, 03QT and 03SF.
 -/
 
 @[expose] public section
@@ -219,22 +218,7 @@ private noncomputable def reindexDiscreteEquiv
                  isIntertwining' := fun g ↦ by ext x; simp [reindexDiscrete] }))
     (by intros; ext x; rfl)
 
-/-- Source: Stacks Project, Tags 0BML, 03QT, 03QW and 04JQ.
-(blueprint: lem-sc-primary-fixed-field-module-comparison)
-
-Proof: The fixed-field correspondence identifies Gal(Ks/L) with H, where L=Ks^H;
-openness gives a finite separable extension L/K. Ks is a separable closure of L.
-The identification sends an L-automorphism to its underlying K-automorphism, and is a
-homeomorphism for the Krull topologies: stabilizers of finite subsets of Ks are the
-neighborhood basis on both sides. Apply the abelian sheaf/module equivalence over L
-and change the acting group along this homeomorphism. Its natural stalk isomorphism
-is unchanged. For g in H any extension tau to Omega fixes L, since every element of
-L is fixed by g and embeds in Omega through Ks. Consequently the germ formula over L
-is exactly the action formula in this structure. This constructs the comparison.
-The stalk and germ action determine its functor on objects and morphisms up to natural
-isomorphism; the inverse sheaves are therefore determined up to the isomorphisms used
-here, rather than arbitrary witnesses of mere existence. No chain or original sheaf
-is assumed or returned. -/
+/-- Source: Stacks Project, Tags 0BML, 03QT, 03QW and 04JQ. -/
 theorem nonempty_primaryFixedFieldComparison
     (K Ks : Type u) [Field K] [Field Ks] [Algebra K Ks]
     (H : OpenSubgroup (Gal(Ks/K))) [IsSepClosure K Ks]

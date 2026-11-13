@@ -57,7 +57,6 @@ import all Mathlib.CategoryTheory.Limits.Preserves.Limits
 /-! # Transport of the two strict completion presentations to the small constant site
 
 Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
-(blueprint: lem-weil-pbc-completed-constant-coefficient-equivalence).
 -/
 
 @[expose] public noncomputable section
@@ -830,17 +829,7 @@ private theorem comparisonCompletedRingIso_scalar
 /-- The constants-to-functions equivalence identifies the completed ring, its scalars,
 its module category and every positive quotient, including their strict quotient units.
 
-Source: Stacks Tags 03CR, 093M and 06YY.
-(blueprint: lem-weil-pbc-completed-constant-coefficient-equivalence).
-
-Proof: sheafification commutes with the canonical equivalence to the small site.
-The constants maps identify finite quotient rings and commute with their transitions;
-the induced limit isomorphism identifies the completed rings. Its composite with the
-coefficient map has the same finite projections, so it preserves every scalar. The
-ringed-site equivalence gives the module equivalence. Adjunction uniqueness identifies
-scalar extension at every finite quotient. Its unit is the tensor insertion, hence
-agrees with the strict quotient unit. Surjectivity of each quotient makes these units
-epimorphisms, and cancelling them proves compatibility with all quotient transitions. -/
+Source: Stacks Tags 03CR, 093M and 06YY. -/
 theorem completed_constant_coefficient_equivalence
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     ∃ β : completedCechRing T d ≅

@@ -19,17 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- The positive residue Cartier class satisfies the geometric Chern equation.
-
-Source: Cartier reduction and site comparison; supported Kummer Chern realization.
-(blueprint: lem-sfb-diagonal-trace-supported-finite-boundary-cartier-kummer).
-
-Proof: apply cartier_reduction_site_comparison to the residue ring at positive
-exponent n+1 and the diagonal Cartier immersion. Its geometric Chern clause is
-exactly this assertion. The residue ring is finite because l is prime. The site
-comparison theorem proves the clause by identifying the uniquely reduced class
-with the ordinary supported Kummer class, applying supported Kummer Chern
-realization, and transporting along the canonical source comparison. -/
+/-- The positive residue Cartier class satisfies the geometric Chern equation. -/
 theorem diagonalTrace_supportedFiniteBoundary_cartierKummer
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

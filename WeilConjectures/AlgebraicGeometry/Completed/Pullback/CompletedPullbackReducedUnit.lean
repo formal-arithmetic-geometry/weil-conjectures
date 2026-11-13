@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! # Finite reduction of the ordinary-to-completed pullback comparison
 
 Source: Stacks Tag 099N (5).
-(blueprint: lem-weil-pbc-completed-pullback-reduced-unit).
 -/
 
 @[expose] public noncomputable section
@@ -137,15 +136,7 @@ private theorem intrinsicUnit_finite (T : Scheme.{u})
   exact isIso_of_reflects_iso _ G.mapDerivedCategory.functor
 
 /-- Finite scalar extension inverts the ordinary-to-completed comparison.
-Source: Stacks Tag 099N (5), finite reduction of the completion reflector unit.
-(blueprint: lem-weil-pbc-completed-pullback-reduced-unit).
-
-Proof: identify the augmented pulled tower with the quotient tower of ordinary
-pullback. Its limit comparison carries the displayed comparison to the completion
-unit. Restricted finite quotient objects are complete because the generators of the
-adic ideal act nilpotently. The reflector's Hom bijection and scalar adjunction
-therefore show that precomposition with the reduced unit is bijective into every
-finite-coefficient target. Coyoneda detects that it is an isomorphism. -/
+Source: Stacks Tag 099N (5), finite reduction of the completion reflector unit. -/
 theorem completedPullbackComparison_reduction_isIso
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))

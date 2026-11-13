@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.TypePointFunctions
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 
 /-! # Abelian constancy and the constant-sheaf counit
-
-Source: coefficient-heart proof (1), pointed finite trivializations.
-(blueprint: lem-sfb-coefficient-heart-abelian-constancy)
 -/
 
 @[expose] public noncomputable section
@@ -24,12 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.CoefficientHeartTower
 
-/-- Constant abelian sheaves on a connected scheme are fully faithful.
-Source: coefficient-heart proof (1), uniqueness of pointed trivializations.
-(blueprint: lem-sfb-coefficient-heart-abelian-constancy)
-Proof: the constant-sheaf unit on global sections is bijective, since a locally constant
-section on a connected scheme is constant. The adjunction unit criterion gives full
-faithfulness. -/
+/-- Constant abelian sheaves on a connected scheme are fully faithful. -/
 def fullyFaithfulAbConstant (X : Scheme.{u}) [ConnectedSpace X] :
     (constantSheaf X.smallEtaleTopology Ab.{u + 1}).FullyFaithful := by
   let adj := constantSheafAdj X.smallEtaleTopology Ab.{u + 1}
@@ -40,12 +32,7 @@ def fullyFaithfulAbConstant (X : Scheme.{u}) [ConnectedSpace X] :
       (Scheme.bijective_toSheafify_app_terminal X P)
   exact adj.fullyFaithfulLOfIsIsoUnit
 
-/-- The same full faithfulness holds on the site localized at a connected etale object.
-Source: coefficient-heart proof (1), uniqueness on connected finite covers.
-(blueprint: lem-sfb-coefficient-heart-abelian-constancy)
-Proof: the localized site is equivalent to the etale site of the object. This equivalence
-commutes with the constant-sheaf functors. Transfer full faithfulness through this natural
-isomorphism and cancel the fully faithful equivalence of sheaf categories. -/
+/-- The same full faithfulness holds on the site localized at a connected etale object. -/
 def fullyFaithfulAbConstantOver {X : Scheme.{u}} (U : X.Etale)
     [ConnectedSpace U.left] :
     (constantSheaf (X.smallEtaleTopology.over U) Ab.{u + 1}).FullyFaithful := by
@@ -56,14 +43,7 @@ def fullyFaithfulAbConstantOver {X : Scheme.{u}} (U : X.Etale)
   exact Functor.FullyFaithful.ofCompFaithful
     ((fullyFaithfulAbConstant U.left).ofIso η.symm)
 
-/-- Constancy of the underlying set inverse image implies constancy of the abelian one.
-Source: coefficient-heart proof (1), recovering finite linear trivializations.
-(blueprint: lem-sfb-coefficient-heart-abelian-constancy)
-Proof: inverse image commutes with the forgetful functor. The underlying-set constant
-functor is fully faithful on a connected scheme, so the constant/global-sections counit
-is an isomorphism for a constant set sheaf. Its abelian counit has that same underlying
-map, up to the canonical constant/forget comparison. The forgetful functor reflects
-isomorphisms. Thus the abelian counit is an isomorphism and supplies constancy. -/
+/-- Constancy of the underlying set inverse image implies constancy of the abelian one. -/
 theorem abelianPullback_isConstant_of_set {X Y : Scheme.{u}} [ConnectedSpace Y]
     (f : Y ⟶ X) (F : Sheaf X.smallEtaleTopology Ab.{u + 1})
     (hF : ((Scheme.etaleSetPullback f).obj

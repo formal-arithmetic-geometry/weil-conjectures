@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalOrdinarySourceMaps
 
 /-! # Constructed derived source transpose maps
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: def-diagonal-derived-source-maps).
 -/
 
 @[expose] public noncomputable section
@@ -59,34 +56,28 @@ local elab "typeOf% " t:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm t none
   return ← Lean.Meta.inferType e
 
-/-- The actual hom type of the cyclic source transpose.
-(blueprint: def-diagonal-derived-source-maps). -/
+/-- The actual hom type of the cyclic source transpose. -/
 def cyclicTransposeType : Type (u + 1) :=
   typeOf% (q.cyclicAdjunction.homEquiv _ _ q.cyclicSource.hom)
 
-/-- The actual hom type of the successive source transpose.
-(blueprint: def-diagonal-derived-source-maps). -/
+/-- The actual hom type of the successive source transpose. -/
 def quotientTransposeType : Type (u + 1) :=
   typeOf% (q.quotientAdjunction.homEquiv _ _ q.quotientSource.hom)
 
-/-- The actual cyclic source transpose as a named ordinary derived morphism.
-(blueprint: def-diagonal-derived-source-maps). -/
+/-- The actual cyclic source transpose as a named ordinary derived morphism. -/
 @[irreducible] def cyclicTranspose : q.cyclicTransposeType :=
   q.cyclicAdjunction.homEquiv _ _ q.cyclicSource.hom
 
-/-- The actual successive source transpose, retaining the bundled category data.
-(blueprint: def-diagonal-derived-source-maps). -/
+/-- The actual successive source transpose, retaining the bundled category data. -/
 @[irreducible] def quotientTranspose : q.quotientTransposeType :=
   q.quotientAdjunction.homEquiv _ _ q.quotientSource.hom
 
-/-- The normalized ordinary cyclic source map in degree zero.
-(blueprint: def-diagonal-derived-source-maps). -/
+/-- The normalized ordinary cyclic source map in degree zero. -/
 @[irreducible] def cyclicSingleNormalized : q.cyclicTransposeType :=
   (DerivedCategory.singleFunctor _ 0).map q.cyclicOrdinary ≫
     (q.cyclicRight.mapDerivedCategorySingleFunctor 0).inv.app _
 
-/-- The normalized ordinary successive source map in degree zero.
-(blueprint: def-diagonal-derived-source-maps). -/
+/-- The normalized ordinary successive source map in degree zero. -/
 @[irreducible] def quotientSingleNormalized : q.quotientTransposeType :=
   (DerivedCategory.singleFunctor _ 0).map q.quotientOrdinary ≫
     (q.quotientRight.mapDerivedCategorySingleFunctor 0).inv.app _

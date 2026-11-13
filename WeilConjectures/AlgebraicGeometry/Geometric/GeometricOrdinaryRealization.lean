@@ -155,7 +155,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 Source: Zheng Construction 4.1 and the paragraph before Lemma 4.10;
 Stacks 03D2 and 03D7.
-(blueprint: lem-coef-semilinear-ordinary-geometric-realization)
 -/
 
 @[expose] public noncomputable section
@@ -178,8 +177,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- Ordinary module operations, including their actual horizontal transitions.
 This interface contains no derived functor, derived evaluation or tensor comparison.
-Source: Zheng Construction 4.1 and the paragraph before Lemma 4.10.
-(blueprint: lem-coef-semilinear-ordinary-geometric-realization). -/
+Source: Zheng Construction 4.1 and the paragraph before Lemma 4.10. -/
 structure GeometryOrdinary where
   /-- The inverse-image coefficient sheaves C_n. -/
   coefficients : ℕ → Sheaf J' CommRingCat.{max c v r}
@@ -293,8 +291,7 @@ attribute [instance] GeometryOrdinary.levelAdditive GeometryOrdinary.levelLimits
 variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
 
 /-- Exact pull evaluation is the localization of the ordinary evaluation comparison.
-Source: Zheng Construction 4.1; localization of exact functors.
-(blueprint: lem-coef-semilinear-ordinary-geometric-realization). -/
+Source: Zheng Construction 4.1. -/
 def geometryPullEvaluation (n : ℕ) :
     O.pull.mapDerivedCategory ⋙ e.{c, v, max c v r} J' O.coefficients
         O.coefficientTransition n ≅
@@ -307,8 +304,7 @@ def geometryPullEvaluation (n : ℕ) :
 
 /-- Add the chosen target calculus and canonical unbounded derived adjunction.
 All ordinary data are retained verbatim; the two resolution instances are supplied separately.
-Source: Zheng Construction 4.1; Stacks 079P and 07A6.
-(blueprint: lem-coef-semilinear-ordinary-geometric-realization). -/
+Source: Zheng Construction 4.1; Stacks 079P and 07A6. -/
 def GeometryOrdinary.toBase
     (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)
     [∀ n : ℕ, Abelian.HasKInjectiveResolutions (Mod.{c, v, max c v r} J' (O.coefficients n))]
@@ -397,26 +393,7 @@ private theorem system_transpose_natural_right
 
 /-- The termwise geometric construction on ordinary strict systems.
 Source: Zheng Construction 4.1 and the paragraph before Lemma 4.10;
-Stacks 03D2 and 03D7.
-(blueprint: lem-coef-semilinear-ordinary-geometric-realization).
-
-Proof: use the supplied coefficient tower and algebraic inverse images, whose
-ring operations and underlying sheaf maps are already fixed. For a module
-system, apply module inverse image at each level. Its horizontal map is inverse image of
-the old horizontal map, conjugated by the underlying-sheaf identifications. The universal
-addition and scalar diagrams prove that it is semilinear. Identity and composition follow
-from those of the old horizontal maps. Define the inverse-image system using exactly
-these component carriers, so its evaluation comparison is identity on their sections.
-Transport modules along the product-preserving right adjoint with coefficient action
-through the transposed ring map. Do this termwise on systems, again using the actual
-component carriers. The set-sheaf adjunction restricts to linear maps; the equations for
-commuting with horizontal transitions correspond under that same bijection. Thus it
-restricts further to a natural bijection of system maps. Its unit evaluated at a level
-is the ordinary module unit, and its underlying map is the original topos unit.
-Inverse image is additive and preserves finite limits and colimits componentwise.
-Finally, restriction of scalars changes only the action, so its inverse-image comparison
-is identity on underlying sheaves. The defining horizontal map gives the displayed
-ordinary pull-transition equation. No derived assertion is used. -/
+Stacks 03D2 and 03D7. -/
 theorem semilinearGeometryOrdinary [PreservesFiniteLimits uInv]
     (F : ℕ → Sheaf J' CommRingCat.{max c v r}) (σ : ∀ n : ℕ, F (n + 1) ⟶ F n)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))

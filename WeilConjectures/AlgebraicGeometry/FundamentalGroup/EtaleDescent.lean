@@ -29,8 +29,7 @@ equivalence between finite étale `Y`-schemes and finite étale `Y'`-schemes wit
   finite étale schemes along a surjective étale morphism.
 - `CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback_of_etale`: compatible
   morphisms descend uniquely along a surjective étale morphism.
-- `AlgebraicGeometry.Scheme.FiniteEtale.galois_descent`: the two statements together
-  (blueprint `lem-galois-descent`).
+- `AlgebraicGeometry.Scheme.FiniteEtale.galois_descent`: the two statements together.
 
 ## Proof
 
@@ -46,6 +45,12 @@ factoring through `p` (`AlgebraicGeometry.Scheme.Etale.exists_representableBy_of
 These opens form a basis, so `F` is represented by a finite étale `Y`-scheme `X`
 (`AlgebraicGeometry.Scheme.Etale.exists_representableBy_of_isBasis`), and the section of `F`
 over `V` given by the identity of `V` exhibits `V` as `X ×_Y Y'`.
+
+## Implementation details
+
+The descent data are in the transport form `CategoryTheory.Over.DescentDatum`, which by the
+Yoneda lemma is the same as an isomorphism `φ : p₁^* V ≅ p₂^* V` over `Y' ×_Y Y'` satisfying
+the cocycle condition over `Y' ×_Y Y' ×_Y Y'`.
 -/
 
 @[expose] public section
@@ -668,17 +673,10 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 étale morphism. Then base change along `p` identifies finite étale `Y`-schemes with finite étale
 `Y'`-schemes endowed with a descent datum relative to `p`:
 
-* every descent datum `D` on a finite étale `Y'`-scheme `V` is effective: `V` is the base change
-  `V₀ ×_Y Y'` of a finite étale `Y`-scheme `V₀`, through a projection `q : V ⟶ V₀` invariant
-  under the transport of `D` (essential surjectivity);
-* for effective descent data on `V` and `W` with descended schemes `V₀` and `W₀`, every
-  morphism `V ⟶ W` over `Y'` compatible with the descent data is the base change of a unique
-  morphism `V₀ ⟶ W₀` over `Y` (full faithfulness).
-
-The descent data are in the transport form `CategoryTheory.Over.DescentDatum`, which by the
-Yoneda lemma is the same as an isomorphism `φ : p₁^* V ≅ p₂^* V` over `Y' ×_Y Y'` satisfying
-the cocycle condition over `Y' ×_Y Y' ×_Y Y'`.
-(blueprint: `lem-galois-descent`) -/
+* every descent datum `D` on a finite étale `Y'`-scheme `V` is effective: `V ≅ V₀ ×_Y Y'` for a
+  finite étale `Y`-scheme `V₀`, via a projection `q : V ⟶ V₀` invariant under `D`;
+* a morphism `V ⟶ W` over `Y'` compatible with effective descent data is the base change of a
+  unique morphism `V₀ ⟶ W₀` over `Y`. -/
 theorem galois_descent {Y Y' : Scheme.{u}} (p : Y' ⟶ Y) [AlgebraicGeometry.Etale p]
     [Surjective p] :
     (∀ (V : Over Y') [IsFinite V.hom] [AlgebraicGeometry.Etale V.hom]

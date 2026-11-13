@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemProj
 /-! # Normalized realization for Brown coefficient projection
 
 Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CV, 06YY and 07A4
-(blueprint: def-pur-etale-brown-projection-realization).
+Stacks 03CV, 06YY and 07A4.
 
 These are comparison interfaces only. They impose no condition on the coefficient
 parameter and make no existence assertion. All ordinary functors are the recorded
@@ -35,28 +34,24 @@ attribute [instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 variable (O : Type (u + 1)) [CommRing O] (t : O)
 
 /-- The already used quotient ring, with positive exponent `n+1`.
-Source: Zheng, Construction 4.1
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 4.1. -/
 abbrev strictEtaleBrownRing (n : ℕ) := O ⧸ (Ideal.span ({t} : Set O)) ^ (n + 1)
 
 /-- The actual quotient homomorphism, including the identity case.
-Source: Zheng, Construction 4.1
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 4.1. -/
 def strictEtaleBrownRingMap {m n : ℕ} (h : m ≤ n) :
     strictEtaleBrownRing O t n →+* strictEtaleBrownRing O t m :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-/-- Reuse the coefficient-projection node's restriction to constant scalars.
-Source: Zheng, Construction 4.1; Stacks 03CV
-(blueprint: def-pur-etale-brown-projection-realization). -/
+/-- The restriction of the coefficient projection to constant scalars.
+Source: Zheng, Construction 4.1; Stacks 03CV. -/
 abbrev strictEtaleBrownConstant (W : Scheme.{u}) (n : ℕ) :=
   Etale.SystemProjection.constantModule W (.of (strictEtaleBrownRing O t n))
 
 /-- Conclusion data realizing the fixed-ring encoding, with all comparisons normalized.
 The ordinary functor is the recorded constant-scalar restriction, not a new realization.
 Scalar comparison is its adjoint mate after exact localization.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV, 06YY
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV, 06YY. -/
 structure StrictEtaleBrownRealizationData (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) where
   [ordinaryAdditive : ∀ n, (strictEtaleBrownConstant O t W n).Additive]
@@ -78,8 +73,7 @@ structure StrictEtaleBrownRealizationData (W : Scheme.{u})
       derived n ⋙ Etale.scalarExtension (strictEtaleBrownRingMap O t h) W
 
 /-- Section, localization and adjunction equations specifying the realization maps.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV, 06YY
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV, 06YY. -/
 def StrictEtaleBrownRealizationCoherence (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
   letI := R.ordinaryAdditive
@@ -107,8 +101,7 @@ def StrictEtaleBrownRealizationCoherence (W : Scheme.{u})
       (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom)
 
 /-- The fixed realization with its canonical comparison equations.
-Source: Zheng, Construction 4.1 and Lemma 5.16
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 4.1 and Lemma 5.16. -/
 def StrictEtaleBrownRealization (W : Scheme.{u}) (P : StrictEtaleEvaluation W O t) :=
   { R : StrictEtaleBrownRealizationData O t W P //
     StrictEtaleBrownRealizationCoherence O t W P R }
@@ -116,26 +109,22 @@ def StrictEtaleBrownRealization (W : Scheme.{u}) (P : StrictEtaleEvaluation W O 
 section
 variable {O t} {W : Scheme.{u}} {P : StrictEtaleEvaluation W O t}
 
-/-- The specified derived realization. Source: Zheng 4.1
-(blueprint: def-pur-etale-brown-projection-realization). -/
+/-- The specified derived realization. Source: Zheng 4.1. -/
 abbrev StrictEtaleBrownRealization.derived (R : StrictEtaleBrownRealization O t W P) :=
   R.val.derived
 
-/-- The specified localization comparison. Source: Zheng 4.1
-(blueprint: def-pur-etale-brown-projection-realization). -/
+/-- The specified localization comparison. Source: Zheng 4.1. -/
 abbrev StrictEtaleBrownRealization.factors (R : StrictEtaleBrownRealization O t W P) :=
   R.val.factors
 
-/-- The specified scalar mate. Source: Zheng 4.1 and 5.16
-(blueprint: def-pur-etale-brown-projection-realization). -/
+/-- The specified scalar mate. Source: Zheng 4.1 and 5.16. -/
 abbrev StrictEtaleBrownRealization.scalar (R : StrictEtaleBrownRealization O t W P)
     {m n : ℕ} (h : m ≤ n) := R.val.scalar h
 
 end
 
 /-- The published right-derived unit on a cochain representative.
-Source: Stacks 07A4
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Stacks 07A4. -/
 def strictEtaleBrownRightUnit {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
     (K : CochainComplex
       (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))) ℤ) :
@@ -153,8 +142,7 @@ def strictEtaleBrownRightUnit {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
 /-- Conclusion data comparing geometric images in the two coefficient encodings.
 The section equation fixes ordinary direct image. Its universal derived-unit square
 fixes derived direct image, and the mate equation fixes inverse image.
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4. -/
 structure StrictEtaleBrownImageRealizationData
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
     (A : StrictEtaleOrdinaryImage O t g)
@@ -172,8 +160,7 @@ structure StrictEtaleBrownImageRealizationData
     B.inverse ⋙ RV.derived n
 
 /-- All comparisons are fixed on sections, representatives and Hom adjunctions.
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4. -/
 def StrictEtaleBrownImageRealizationCoherence
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
     (A : StrictEtaleOrdinaryImage O t g)
@@ -203,8 +190,7 @@ def StrictEtaleBrownImageRealizationCoherence
     (.mk _ _ _ _ R.inverse.hom)) = R.right.hom)
 
 /-- The normalized geometric comparison interface, without an existence assertion.
-Source: Zheng, Construction 5.15 and Lemma 5.16
-(blueprint: def-pur-etale-brown-projection-realization). -/
+Source: Zheng, Construction 5.15 and Lemma 5.16. -/
 def StrictEtaleBrownImageRealization
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
     (A : StrictEtaleOrdinaryImage O t g)
@@ -223,13 +209,11 @@ variable {O t} {V W : Scheme.{u}} {g : V ⟶ W} {n : ℕ}
   {RV : StrictEtaleBrownRealization O t V PV}
   {RW : StrictEtaleBrownRealization O t W PW}
 
-/-- The normalized derived proper comparison. Source: Zheng 5.15 and 5.16
-(blueprint: def-pur-etale-brown-projection-realization). -/
+/-- The normalized derived proper comparison. Source: Zheng 5.15 and 5.16. -/
 abbrev StrictEtaleBrownImageRealization.right
     (R : StrictEtaleBrownImageRealization O t g n A B RV RW) := R.val.right
 
-/-- The adjunction-normalized inverse comparison. Source: Zheng 5.15 and 5.16
-(blueprint: def-pur-etale-brown-projection-realization). -/
+/-- The adjunction-normalized inverse comparison. Source: Zheng 5.15 and 5.16. -/
 abbrev StrictEtaleBrownImageRealization.inverse
     (R : StrictEtaleBrownImageRealization O t g n A B RV RW) := R.val.inverse
 

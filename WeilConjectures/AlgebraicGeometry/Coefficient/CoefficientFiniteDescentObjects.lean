@@ -176,13 +176,9 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Finite coefficient descent of bounded constructible objects
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.md and its proof
-(blueprint: lemma-descent-finite-coefficient-field--2).
-
 The constructibility convention is the finite constant local model convention of
-`det-def-sfb-constructible-tor-amplitude`. The scalar extensions are the specified left
-derived functors on the unbounded categories of internal modules over pulled-back
+`WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude`. The scalar extensions are the
+specified left derived functors on the unbounded categories of internal modules over pulled-back
 condensed rings. Isomorphisms are in these ambient derived categories.
 -/
 
@@ -267,9 +263,7 @@ private lemma constantModel_eq_of_localFree
   exact and_congr_right fun _ ↦ forall_congr' fun n ↦ hmod _
 
 /-- Finite descent of bounded constructible algebraic-closure complexes over a Noetherian
-scheme. The base field of `coefficient_finite_descent_objects` only makes X Noetherian.
-Source: blueprint lemma-descent-finite-coefficient-field--2
-(blueprint: lemma-descent-finite-coefficient-field--2). -/
+scheme. The base field of `coefficient_finite_descent_objects` only makes X Noetherian. -/
 theorem coefficient_finite_descent_objects_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] :
     (∀ K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X,
@@ -307,43 +301,7 @@ theorem coefficient_finite_descent_objects_of_isNoetherian
       exact ⟨(derivedExtendScalarsCompIso X ℓ h).app K_E.obj ≪≫ e⟩
 
 /-- Every bounded constructible algebraic-closure coefficient complex has a finite-field
-model, and every such model remains a model after any finite enlargement of the field.
-Source: blueprint main-20261015, lemma-descent-finite-coefficient-field,
-sk-lem-coefficient-finite-descent-objects.md, both assertions
-(blueprint: lemma-descent-finite-coefficient-field--2).
-
-Proof plan, following the node's five steps:
-1. A standing scheme is Noetherian: Spec k is Noetherian and finite type preserves this
-(lemma-descent-finite-coefficient-field--2). Its locally closed strata are Noetherian and
-qcqs, so the hypotheses of lisse descent and finite constructible generation hold.
-2. Models persist by lemma-extension-scalars-preserves-dctf--1 and the transitivity comparison
-of definition-sp-scalar-extension--2. Scalar extensions are exact by prose-03-27,
-prose-03-27 and the right exact tensor adjunction lemma-descent-finite-coefficient-field--2.
-The exact-functor identification of lemma-descent-finite-coefficient-field--2 and
-situation-conventions makes these specified derived functors
-termwise, triangulated and compatible with shifts. Thus shifts of models are models by
-corollary-coefficient-heart-b--1. Finite composita put any two models over a common
-field (lemma-descent-finite-coefficient-field--2). This proves the second assertion.
-3. For a triangle A → K → B → A[1], put models of A and B over a common E. Transport the
-connecting map to their extensions. By lemma-descent-finite-coefficient-field--1 (3), with
-r = 1, it is represented over some finite F containing E. Complete that representative to
-a triangle B_F → A_F[1] → C_F → B_F[1] using TR1 of lemma-descent-finite-coefficient-field--2.
-Two inverse rotations give A_F → C_F[-1] → B_F → A_F[1], with the original connecting map
-and no sign change. Set K_F = C_F[-1]; triangulated closure puts it in Dbc(X,F). After
-scalar extension, rotate to compare connecting maps. TR3 and
-lemma-descent-finite-coefficient-field--2 give an isomorphism to the given triangle. Hence K
-descends. Rotation also gives descent of cones between descended objects.
-4. For a generator a_!L[n] of corollary-coefficient-heart-b--2, its locally closed
-stratum is qcqs by step 1. Apply lemma-descent-lisse-qbar-sheaves-finite--1 (1) there to get
-L_E. The converse generation assertion puts a_!L_E[n] in Dbc(X,E).
-The identification in prose-03-27 is the same condensed inclusion on
-both schemes. Thus proposition-six-operations-change-coefficients (2), including the closed
-immersion factor, and shift compatibility identify its extension with a_!L[n].
-5. Apply the finite generating sequence of corollary-coefficient-heart-b--2 to K.
-Induct through it using step 4 for generators, step 3 for cones, step 2 for common fields
-and shifts, and composition for isomorphisms. Zero has its zero model over the base field,
-also a rank-zero generator. Finitely many choices and composita yield one finite field E;
-no infinite enlargement occurs. -/
+model, and every such model remains a model after any finite enlargement of the field. -/
 theorem coefficient_finite_descent_objects
     (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact ℓ.Prime]
     (_hp : 0 < p) (_hpℓ : p ≠ ℓ)

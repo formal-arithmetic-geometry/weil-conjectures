@@ -11,8 +11,13 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7
-(blueprint: lem-weil-pbc-inverse-image-composition-module-linear-core).
+Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7.
+
+## Implementation details
+
+The inverse images, comparison maps and adjunctions are the data of
+`etaleInverseImageModulesExact`; the hom-equivalence equations specify that these are
+precisely the module adjunctions with the underlying abelian adjunctions.
 -/
 
 @[expose] public section
@@ -24,8 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 
-/-- Compatibility of composite adjunction hom-equivalences with forgetful comparisons.
-This is the categorical calculation in step 4 of the module proof. -/
+/-- Compatibility of composite adjunction hom-equivalences with forgetful comparisons. -/
 private theorem comp_homEquiv_forget
     {M₁ M₂ M₃ A₁ A₂ A₃ : Type*}
     [Category M₁] [Category M₂] [Category M₃]
@@ -368,29 +372,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms for inverse
-image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
-(blueprint: lem-weil-pbc-inverse-image-composition-module-linear-core).
-
-The lambda-bound ring sheaves, forgetful functors and module direct images below are
-immediately applied to their actual definitions. The gamma maps are characterized by
-constant sections. The inverse images, comparison maps and adjunctions are the data of
-`etaleInverseImageModulesExact`; the hom-equivalence equations specify that these are
-precisely the module adjunctions with the underlying abelian adjunctions.
-
-Proof:
-1. The three constant-section equations and naturality of `toSheafify`, followed
-by `sheafify_hom_ext`, identify the ring maps for successive and composite pullback.
-2. `SheafOfModules.pushforwardCongr₂` along the pullback-pasting isomorphism,
-composed with `pushforwardComp.symm`, constructs the module direct-image comparison.
-Its underlying map on sections is the abelian comparison.
-3. `conjugateIsoEquiv` constructs the module inverse-image comparison from this
-module direct-image comparison. Its mate unit equation is `unit_conjugateEquiv_symm`.
-4. The specified hom-equivalence equations and their naturality identify the
-composite module hom-equivalence with the abelian one. They also identify the
-composite-map unit. Applying the injective abelian hom-equivalence to the desired
-underlying comparison equation reduces it to the module mate equation, naturality
-of the direct-image comparison, and the abelian mate equation. Naturality and
-invertibility of both module comparisons follow from their constructors. -/
+image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7. -/
 theorem etaleInverseImageCompositionModuleLinearCore
     (X Y Z : Scheme.{u}) (uMap : Y ⟶ X) (vMap : Z ⟶ Y) (R : CommRingCat.{u + 1}) :
     (fun (RX : Sheaf (X.smallGrothendieckTopology @Etale) CommRingCat.{u + 1})

@@ -90,7 +90,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 /-! # Etale origin and reflection of local constant models
 
 Source: Stacks Project, Tags 09AL, 09B1, 094T and 0951.
-(blueprint: lem-weil-pbc-finite-perfect-chart-etale-origin).
 -/
 
 @[expose] public noncomputable section
@@ -184,28 +183,7 @@ set_option linter.unusedVariables false in
 bounded perfect constant models on an etale covering has etale origin. Constant models
 of this origin are exactly the constant models of the original complex. This assertion
 only constructs the origin and compares its local models: it does not assert boundedness,
-local constancy of its cohomology, or perfectness of a geometric fibre.
-
-Source: Stacks Project, proetale.tex, lemma-compare-constructible-derived (09AL),
-lemma-compare-locally-constant (09B1), and weakly etale localization (094T, 0951).
-(blueprint: lem-weil-pbc-finite-perfect-chart-etale-origin).
-
-Proof: identify the slice at V with the pro-etale site of V.left. Transport the ring
-along the specified coefficient isomorphism psi, which identifies its restriction with
-the constant B ring. Termwise constant realization commutes with this transport. The
-local models show that every cohomology sheaf is etale locally a constant finite module:
-B is finite, so homology of the given finite-projective complex is finite. Its cohomology
-vanishes outside [a,b]. Descent for finite locally constant sheaves therefore identifies
-each cohomology sheaf with the inverse image of an etale sheaf. Bounded truncation
-induction, lifting connecting morphisms by full faithfulness of derived inverse image,
-produces L (09AL). On any further etale chart W the same site and coefficient
-identifications commute with restriction. Exact inverse image takes constant L-models
-to the displayed constant K-models. Conversely the model isomorphism makes both sides
-bounded below; full faithfulness of derived inverse image lifts it and its inverse.
-This works for every algebraic F, including unbounded F: if its constant realization
-is isomorphic to the bounded restriction of K, exact faithful inverse image reflects
-boundedness of that sheaf complex. Empty charts cause no exception, since both sheaf
-categories there are zero. No neighbouring coefficient levels or adic completion enter. -/
+local constancy of its cohomology, or perfectness of a geometric fibre. -/
 theorem finitePerfectChart_etale_origin
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

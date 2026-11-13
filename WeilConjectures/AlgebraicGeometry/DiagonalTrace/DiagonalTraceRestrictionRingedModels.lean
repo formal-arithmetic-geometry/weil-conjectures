@@ -11,8 +11,6 @@ import all WeilConjectures.SmoothPurity.Supporting.NativeConstantRestrictionAcyc
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionDirectImage
 
 /-! # Ringed-site models for the normalized diagonal scalar restriction
-
-Source: blueprint latest, sk-prop-diagonal-tower-trace.proof.md, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -295,25 +293,7 @@ private def towerRestrictionIso (X : Scheme.{u}) (rX : Restriction l E X) :
       (additive_square (rX.underlying M _ U) (rX.underlying N _ U)
         _ _ (rX.morphisms f _ U)) x
 
-/-- The normalized restriction and tower direct image admit simultaneous ringed-site models.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-scalar restrictions and the direct-image comparison.
-(blueprint: lem-sfb-diagonal-trace-restriction-ringed-models).
-
-Proof: map the constant integral ring to every positive residue ring by toZModPow,
-then into the actual coefficient ring by coefficientMap. Compatibility gives a
-ring map on the sequence site. Curry modules over the constant sequence ring,
-and identify modules over the constant ring sheaf with constant-scalar module
-sheaves. The five normalization equations of Restriction give the sectionwise
-linear isomorphism with this functor, including restriction, transition and map
-naturality. The constant direct-image structural map preserves constant sections
-by the sheafification adjunction. Consequently the constant-ring equivalences
-intertwine geometric direct image. Whisker this square over the sequence index,
-and combine it with the explicit curry/uncurry direct-image comparison. These
-are constructions of the models and both isomorphisms, with no injective or
-derived-category argument. The residue action uses the first positive quotient
-at n = 0; zero modules and empty sites obey the same equations. -/
+/-- The normalized restriction and tower direct image admit simultaneous ringed-site models. -/
 theorem diagonalTrace_restriction_ringedModels {X S : Scheme.{u}} (f : X ⟶ S)
     (rX : Restriction l E X) :
     ∃ (RX : Sheaf (coefficientSequenceTopology (Scheme.ProEt.topology X))

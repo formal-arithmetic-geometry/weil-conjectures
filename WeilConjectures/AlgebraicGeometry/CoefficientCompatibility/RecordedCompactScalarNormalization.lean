@@ -13,9 +13,8 @@ import WeilConjectures.AlgebraicGeometry.CoefficientCompatibility.RecordedOpenSc
 
 /-! # Fixed-module normalization of the recorded intrinsic coefficient arrow
 
-Source: Stacks Project, Tags 00YV, 03D3 and 0GL6, and Step 3 of
-lem-sp-transported-compact-scalar-site-square. This is a comparison of the two
-pro-etale presentations only; no etale input or boundedness is involved.
+ This is a comparison of the two pro-etale presentations only; no etale input or boundedness is
+involved.
 -/
 
 @[expose] public noncomputable section

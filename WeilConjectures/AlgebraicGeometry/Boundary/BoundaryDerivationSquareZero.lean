@@ -21,15 +21,14 @@ import WeilConjectures.AlgebraicGeometry.Boundary.BoundaryDerivationAlgebraicDat
 /-!
 # Boundary maps for square-zero extensions
 
-Source: Stacks Project, Cohomology, Lemma 0B8S
-(blueprint: lem-sc-boundary-derivation-square-zero).
+Source: Stacks Project, Cohomology, Lemma 0B8S.
 
 The algebra sheaves are `Scheme.CommAlgebraSheaf`s and their underlying `𝒪_X`-modules are
 `commAlgebraSheafModule`, with the module map of `p` given by `commAlgebraSheafModuleFunctor`.
 The kernel `I` is tied by the short exactness of `0 → I → O' → O → 0`.
 The connecting map is the snake boundary of any compatible injective resolutions,
-transported to the recorded module cohomology (independent of the choice by
-lem-weil-pbc-horseshoe-delta-functor). No boundary is an arbitrary function.
+transported to the recorded module cohomology (independent of the choice of resolutions).
+No boundary is an arbitrary function.
 -/
 
 @[expose] public section
@@ -52,21 +51,7 @@ computed by the snake boundary of a horseshoe and the canonical resolution isomo
 The compatible resolutions are a presentation of the boundary, not extra geometric
 conditions on the extension.
 
-Source: Stacks Project, Cohomology, Lemma 0B8S
-(blueprint: lem-sc-boundary-derivation-square-zero).
-
-Proof:
-1. I² = 0 makes the product of a local lift with a kernel section independent of
-its lift. Thus multiplication factors through O, giving μ. Applying H¹ to these
-endomorphisms gives ρ. The long exact sequence of pqf-def-cohomology gives δ;
-injective resolutions compute it by the displayed snake-boundary formula.
-2. The boundary is additive, so it remains to check the Leibniz identity.
-3. Choose an open cover with lifts fᵢ and gᵢ. By lem-sc-boundary-cech-local-lifts,
-the differences αᵢⱼ = fᵢ - fⱼ and βᵢⱼ = gᵢ - gⱼ represent δ(f) and δ(g), while
-the differences γᵢⱼ = fᵢgᵢ - fⱼgⱼ represent δ(fg).
-4. On overlaps γᵢⱼ = (fᵢ - fⱼ)gᵢ + fⱼ(gᵢ - gⱼ) = gαᵢⱼ + fβᵢⱼ since I² = 0.
-Naturality of the Cech-to-H¹ map (lem-sc-cech-h1-map-natural) gives the asserted
-identity after passing to cohomology. -/
+Source: Stacks Project, Cohomology, Lemma 0B8S. -/
 theorem boundary_derivation_square_zero (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))

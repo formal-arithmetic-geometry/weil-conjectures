@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # The ordinary singleton mate of geometric evaluation
 
 Source: Zheng Construction 4.1; Stacks 03D2 and 03EL.
-(blueprint: lem-coef-geometric-ordinary-evaluation-mate)
 -/
 
 @[expose] public noncomputable section
@@ -38,17 +37,7 @@ variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
 
 /-- The ordinary singleton mate of geometric evaluation is invertible.
 Source: Zheng, Construction 4.1, printed p. 21, and the paragraph before Lemma 4.10,
-printed p. 23; Stacks 03D2 and 03EL.
-(blueprint: lem-coef-geometric-ordinary-evaluation-mate).
-
-Proof: the recorded ordinary system-unit evaluation identity characterizes the
-right mate of the inverse pull-evaluation square. Transpose both sides, and cancel
-the level pushforward of pull evaluation to identify that mate with the supplied
-ordinary push-evaluation isomorphism. The iterated-mates identity identifies this
-right mate with the conjugate of the singleton mate under the two composite
-adjunctions. Conjugation reflects invertibility, proving the assertion for any
-chosen singleton adjunctions. This uses neither coefficient flatness nor a derived
-construction and applies also at level zero, on the empty site and to zero modules. -/
+printed p. 23; Stacks 03D2 and 03EL. -/
 theorem geometricOrdinaryEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ)
     (L : Mod.{c, v, max c v r} J (B n) ⥤ Systems.{c, v, max c v r} J B τ)
     (L' : Mod.{c, v, max c v r} J' (O.coefficients n) ⥤

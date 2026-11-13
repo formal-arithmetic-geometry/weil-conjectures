@@ -11,10 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Direct
 /-!
 # Derived direct image, reduction towers and completion
 
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.md
-(blueprint: proposition-proper-base-change-complete-integral--1).
-
 The reduction projection is the adjunction mate of the normalized cone pullback
 comparison. This specifies its finite-level projection-formula normalization, including
 the transition maps and the degree-zero inclusions. The limit comparison is the existing
@@ -42,40 +38,18 @@ attribute [local instance] Limits.comp_preservesFiniteLimits
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The reduction/direct-image mate is invertible.
-Source: assertion (2) of proposition-proper-base-change-complete-integral--1.
-(blueprint: proposition-proper-base-change-complete-integral--1) -/
+/-- The reduction/direct-image mate is invertible. -/
 @[instance] theorem pushReductionMap_isIso : IsIso (pushReductionMap l E f) := by
   have : ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       IsIso ((pushReductionMap l E f).app K) :=
     fun K ↦ (directImage_completion_compatibility l E f).1 K
   exact NatIso.isIso_of_isIso_app _
 
-/-- The three direct-image assertions, using the actual integral module derived categories.
-The canonical arrow in (1) is pushLimitIso, constructed by the constant/pullback
-conjugacy, and the evaluation arrow is pushEvaluationMap. Its Milnor-cone description:
-the canonical level projections are the first maps of Roos triangles on both sides, the
-product comparison of Rf* is invertible and commutes with 1-T, and pushLimitIso is
-compatible with the level projections through pushEvaluationMap. The projection in (2) is
-pushReductionMap, the mate of the summand-normalized cone comparison; it is a single
-natural transformation on derived towers. The displayed equality is exactly (3), before
-inverting the projection comparison on its right-hand side.
-Source: assertions (1)--(3) (blueprint: proposition-proper-base-change-complete-integral--1).
-Proof: (1) is the derived constant-limit adjunction comparison from
-completeDerivedCompletion. Its conjugate construction is compatible with the counits,
-hence with the level projections after pushEvaluationMap. The Roos comparison of
-completeDerivedCompletion gives the triangles with these projections. On the Milnor cone
-the map is induced by the product comparison: the right adjoint preserves products, and
-projectionwise naturality commutes with 1-T.
-For (2) use the preceding K-injective cone computation; the finite-free chain projection
-is natural in the resolution, hence respects both the (π,1) transitions and quotient
-units. For (3), the square of constant-tower augmentation and projection commutes on
-complexes. Apply Rlim and its canonical pushforward comparison. Constant-tower
-normalization identifies its initial arrow with Rf*κ. This gives the displayed equality.
-If K is complete, κ is invertible; the two comparison isomorphisms then make κ of Rf*K
-invertible. The completeness criterion and the same composite give reconstruction.
-In Lean, (1) with its Milnor-cone description is `directImage_roos_limit_data`, and
-(2)--(3) are `directImage_completion_compatibility`; the proof assembles the two. -/
+/-- The three direct-image assertions, using the actual integral module derived categories:
+(1) the derived direct image commutes with the derived limit, through `pushLimitIso` and
+`pushEvaluationMap`, compatibly with the Milnor-cone description of both sides; (2) the
+reduction comparison `pushReductionMap` is a natural transformation on derived towers; (3) the
+displayed compatibility equation. -/
 theorem directImage_limits :
     (∀ n : ℕ, IsIso (pushEvaluationMap l E f n)) ∧
     (∃ (_ : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E X)))

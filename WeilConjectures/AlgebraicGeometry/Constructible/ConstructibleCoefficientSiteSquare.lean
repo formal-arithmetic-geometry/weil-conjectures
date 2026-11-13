@@ -78,10 +78,7 @@ import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Constructibility of the ordinary finite coefficient/site square
 
-Source: Stacks Project, Tags 0GKB and 03RZ, and blueprint main-20261015,
-sec-proetale-coefficients/sk-thm-pe-constructible-comparison,
-sk-thm-pe-constructible-comparison-equivalence.proof.md, parts (1)-(2).
-(blueprint: lem-sp-constructible-coefficient-site-square)
+Source: Stacks Project, Tags 0GKB and 03RZ.
 
 All scalar tensors below are ordinary sheafified tensors, with the target ring acting
 on its own factor. No flatness or derived-scalar-extension assertion is present.
@@ -179,7 +176,7 @@ private theorem fixedConstructible_of_models (T : Scheme.{u})
 
 /-- Ordinary termwise scalar extension using the published sheaf tensor functor.
 Its additive structure is supplied by its actual scalar adjunction.
-Source: Stacks 0GKB and 03EK (blueprint: lem-sp-constructible-coefficient-site-square). -/
+Source: Stacks 0GKB and 03EK. -/
 def constructibleCoefficientComplex {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B)
     (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -191,20 +188,7 @@ def constructibleCoefficientComplex {A B : Type (u + 1)} [CommRing A] [CommRing 
 /-- Each original stratum and each original finite constant model survives ordinary
 scalar extension, including on every member of any chosen trivializing cover.
 `ModuleCat.extendScalars` uses B tensor M, canonically the same B-module as M tensor B.
-Source: Stacks 0GKB (blueprint: lem-sp-constructible-coefficient-site-square).
-Proof: (1) Present a finite module by finite free modules, using the lists of its
-and its kernel's elements. Exact inverse image and exact module sheafification carry
-this presentation to the identical constant presentation (def-sf-site-constant-module-functor,
-lem-weil-pbc-site-module-presheaf-sheafification-exact,
-situation-conventions).
-(2) Apply lem-sf-proetale-sheafification-tensor-comparison to constant presheaves.
-The unit is locally bijective by lem-weil-pbc-site-sheafification-iso-locally-bijective.
-The pure tensor formula preserves the B-action. Tensors of the finitely many elements
-with 1 generate the extension over finite B, so it is a finite set.
-(3) Apply lem-weil-pbc-algebraic-inverse-image-tensor-comparison along the stratum
-and its cover; its pure-pairing normalization preserves the B-action.
-(4) The same strata and the same covers thus give the extended finite constant models.
-No flatness is used, and tensoring the zero module still gives zero. -/
+Source: Stacks 0GKB. -/
 theorem constructibleCoefficientSheaf
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -254,23 +238,7 @@ theorem constructibleCoefficientSheaf
 
 /-- Comparison retains every nonempty stratification and its finite constant models.
 The last clause explicitly repairs a zero-stratum partition on the empty scheme by
-one empty stratum with constant zero value.
-Source: blueprint comparison-equivalence proof (1), Stacks 098B and 099R
-(blueprint: lem-sp-constructible-coefficient-site-square).
-Proof: (1) A finite constant module has the finite free presentation in proof step 1
-of the node; lem-sf-comparison-pullback-exact identifies its comparison with the same
-constant module by taking the identical cokernel.
-(2) Apply proposition-comparison-etale-derived-category--5 to a stratum and then a trivializing map.
-The two comparisons identify its restriction with that same finite constant model.
-The original etale cover is a pro-etale cover by lem-pur-etale-proetale-cover.
-(3) The encoding and constructibility equivalences
-lem-weil-pbc-proetale-constant-module-encoding and
-lem-weil-pbc-proetale-constant-module-constructibility identify this with the intrinsic
-constructibility predicate, retaining the partition when it has positive size.
-(4) A partition with no strata forces the underlying scheme to be empty. Its identity
-immersion is a one-stratum partition; the identity cover trivializes its unique module
-sheaf with zero value. This supplies the positive-size convention without excluding
-an empty scheme or an empty input partition. -/
+one empty stratum with constant zero value. -/
 theorem constructibleSiteComparison
     (X : Scheme.{u}) [IsNoetherian X]
     (R : Type (u + 1)) [CommRing R] [Finite R]
@@ -409,22 +377,7 @@ private theorem localizedHomology_isZero
 
 /-- The four ordinary localized complexes have constructible cohomology in the original
 interval; comparison commutes with each cohomology sheaf.
-Source: Stacks 03RZ and blueprint comparison-equivalence proof (2)
-(blueprint: lem-sp-constructible-coefficient-site-square).
-Proof: (1)-(4) The constant presentation, tensor sheafification and inverse-image tensor
-arguments of the node give constructible terms for C_B on the original strata and
-covers, with finite values M tensor B. Zero terms remain zero.
-(5) The comparison argument just stated gives intrinsic constructibility of each
-comparison of a constructible etale sheaf, including the one-empty-stratum convention.
-(6) By thm-constructible-serre, first take the kernel of d^q and then the cokernel
-of the induced map from C^{q-1} into this kernel. Both are constructible, so H^q is
-constructible. A zero middle term gives zero cohomology outside [a,b].
-The localization cohomology functor is the same homology by
- def-weil-derived-cohomology-sheaves.
-(7) lem-sf-comparison-pullback-exact gives H^q(N C') isomorphic to N H^q(C'), naturally
-for C and C_B. Step (5) makes these sheaves intrinsically constructible, and additivity
-preserves their vanishing. Thus all four localized objects have exactly the asserted
-cohomology bounds, without a flatness hypothesis or a derived-tensor identification. -/
+Source: Stacks 03RZ. -/
 theorem constructibleCoefficientSiteSquare
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]

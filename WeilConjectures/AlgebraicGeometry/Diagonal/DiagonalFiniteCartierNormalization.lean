@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictTargetTransport
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalCartierAdjunctUniqueness
 
-/-! # Finite scalar normalization of the Cartier adjunct
-Source: diagonal tower system proof, step (4).
-(blueprint: lem-sfb-diagonal-finite-cartier-normalization). -/
+/-! # Finite scalar normalization of the Cartier adjunct -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,18 +30,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   cartierResidueReducedPro diagonalFiniteToPadic diagonalForget diagonalScalarExtension
   diagonalScalarAdjunction diagonalIntegralBoundary
 
-/-- The full Cartier-adjunct equation gives exactly the finite scalar normalization.
-Source: diagonal tower system proof, step (4), restriction after the full
-residue-linear class comparison
-(blueprint: lem-sfb-diagonal-finite-cartier-normalization).
-
-Proof: the Cartier-adjunct uniqueness theorem identifies e with the canonical
-residue-linear class. Its named family and the original canonical class agree
-heterogeneously by definition. Apply congrArg to the exact-functor image and
-then take HEq; unfolding the family gives precisely the original canonical class.
-This shares the coefficient
-structure comparison before the abstract assembly and does not infer class
-equality from faithfulness of scalar forgetting. -/
+/-- The full Cartier-adjunct equation gives exactly the finite scalar normalization. -/
 theorem diagonal_finite_cartier_normalization (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     (hW : IsUnit (ℓ : Γ(diagonalSurface Y, ⊤))) (n : ℕ)

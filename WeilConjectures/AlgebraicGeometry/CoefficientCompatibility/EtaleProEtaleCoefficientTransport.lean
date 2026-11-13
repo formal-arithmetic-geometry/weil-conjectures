@@ -13,9 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 
 /-! # Transport of the actual recorded reduction comparison
 
-Source: Stacks Tags 00YV, 06YY and 0GL6; blueprint Charts paragraph of
-`lem-sp-et-proet-coefficient-compatibility`
-(blueprint: def-sp-et-proet-coefficient-transport).
+Source: Stacks Tags 00YV, 06YY and 0GL6.
 
 The transported arrow is the fully faithful preimage of the intrinsic arrow, conjugated
 by the canonical support and scalar presentation comparisons. Thus it depends on that
@@ -31,13 +29,12 @@ open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.CoefficientCompatibility
 
 /-- The canonical universe lift of the given ring homomorphism.
-Source: Stacks 00YV, constant coefficient size convention
-(blueprint: def-sp-et-proet-coefficient-transport). -/
+Source: Stacks 00YV, constant coefficient size convention. -/
 abbrev uliftRingHom {R S : Type u} [CommRing R] [CommRing S] (ψ : R →+* S) :
     ULift.{u + 1, u} R →+* ULift.{u + 1, u} S := ψ.ulift
 
 /-- Scalar extension in the universe-lifted fixed-module presentation.
-Source: Stacks 06YY (blueprint: def-sp-et-proet-coefficient-transport). -/
+Source: Stacks 06YY. -/
 abbrev liftedScalarExtension {R S : Type u} [CommRing R] [CommRing S]
     (ψ : R →+* S) (T : Scheme.{u}) :=
   @pbcFixedScalarExtension.{u} T.ProEt inferInstance
@@ -48,8 +45,7 @@ abbrev liftedScalarExtension {R S : Type u} [CommRing R] [CommRing S]
 whose right comparison is identity on the underlying sheafified abelian presheaf.
 The latter is the unique section-normalized comparison of the recorded restriction
 lemma, descended termwise. This fixes the tensor unit without any choice of a bare iso.
-Source: Stacks 00YV, 03DA and 06YY
-(blueprint: def-sp-et-proet-coefficient-transport). -/
+Source: Stacks 00YV, 03DA and 06YY. -/
 def scalarPresentation {R S : Type u} [CommRing R] [CommRing S] [Finite R] [Finite S]
     (ψ : R →+* S) (T : Scheme.{u}) :
     (sfIntrinsicDerivedEquivalence T R).functor ⋙ scalarExtensionFunctor ψ T ≅
@@ -86,8 +82,7 @@ def scalarPresentation {R S : Type u} [CommRing R] [CommRing S] [Finite R] [Fini
 /-- The direct-image presentation also changes from the identified-coefficient ringed
 model to the sectionwise constant-ring model. Their right-adjoint uniqueness comparison
 uses the uniquely unit-normalized pullback coordinates, then derives that isomorphism.
-Source: Stacks 03D3 and 07A5
-(blueprint: def-sp-et-proet-coefficient-transport). -/
+Source: Stacks 03D3 and 07A5. -/
 def directImagePresentation (R : Type u) [CommRing R] [Finite R]
     {V W : Scheme.{u}} (q : V ⟶ W) :
     (sfIntrinsicDerivedEquivalence V R).functor ⋙ directImageConstantPush R q ≅
@@ -103,8 +98,7 @@ def directImagePresentation (R : Type u) [CommRing R] [Finite R]
 /-- Compact-support presentation: cancel the realization unit for open extension, then
 use the direct-image comparison uniquely fixed on K-injective representatives. These
 are precisely the two presentation comparisons for the recorded Rp_* j_!.
-Source: Stacks 00YV, 03DI and 07A5
-(blueprint: def-sp-et-proet-coefficient-transport). -/
+Source: Stacks 00YV, 03DI and 07A5. -/
 def supportPresentation (R : Type u) [CommRing R] [Finite R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (sfIntrinsicDerivedEquivalence X R).functor ⋙ reductionCompactSupport R c.i c.g ≅

@@ -33,13 +33,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
 /-- The proper geometric mate used by the Brown projection is invertible.
-Source: Zheng, Lemma 5.16; Stacks 0F0G and 07A4.
-(blueprint: lem-pur-etale-brown-proper-scalar-mate-is-iso).
-
-The proof is the finite-coefficient proper projection argument after restriction to
-ordinary scalars. The normalized direct-image comparison and scalar pullback mate
-are isomorphisms; the finite proper projection formula makes the remaining scalar
-mate invertible, and exact restriction of scalars reflects isomorphisms. -/
+Source: Zheng, Lemma 5.16; Stacks 0F0G and 07A4. -/
 theorem etaleBrownProperScalarMate_isIso
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]

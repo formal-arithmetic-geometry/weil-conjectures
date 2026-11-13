@@ -12,10 +12,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Classical cohomology of comparison inverse image
-
-Source: the Weil conjectures blueprint, main-20261015,
-`sec-proetale-coefficients/sk-cor-pe-classical-derived/`
-(blueprint: lem-pe-classical-derived-image).
 -/
 
 @[expose] public section
@@ -68,14 +64,7 @@ private theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
   rw [hmap]
   infer_instance
 
-/-- The comparison inverse image has classical bounded-below cohomology.
-Source: the bounded-below image argument in the proof of
-`det-pe-classical-derived-equivalence` (blueprint: lem-pe-classical-derived-image).
-Proof: inverse image commutes with cohomology because it is exact. Each
-underived inverse image is classical by the module equivalence. Classicality
-is invariant under an isomorphism, by naturality of the continuity map.
-Finally compare homology in the small and standard derived models using the
-localization universal property and the equivalence shrinking the Hom types. -/
+/-- The comparison inverse image has classical bounded-below cohomology. -/
 theorem classicalDerivedImage (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (_hunit : ∀ L : DerivedCategory.Plus

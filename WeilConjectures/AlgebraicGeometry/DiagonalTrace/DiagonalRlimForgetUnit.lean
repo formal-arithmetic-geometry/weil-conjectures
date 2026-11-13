@@ -131,14 +131,7 @@ private theorem forgetPullbackIso_unit (l : ℕ) [Fact l.Prime]
 /-- Forgetting constant scalars carries the actual inverse-image unit to an
 invertible abelian inverse-image adjunct.
 
-Source: Stacks Project, Modules on Sites, Tag 03D3.
-The scalar forgetful functor is left adjoint to coinduction, so it preserves
-left Kan extensions and sheafification. The two canonical comparisons give
-an isomorphism commuting with the inverse-image units: expand the units,
-use the sheafification unit equation, naturality, and the left Kan extension
-unit equation. Under the abelian adjunction its inverse is precisely the
-adjunct asserted here, which is therefore invertible.
-(blueprint: new-sfb-diagonal-rlim-forget-unit). -/
+Source: Stacks Project, Modules on Sites, Tag 03D3. -/
 theorem diagonalRlimForgetUnit (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) (M : DiagonalMod l S) :
     IsIso (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv

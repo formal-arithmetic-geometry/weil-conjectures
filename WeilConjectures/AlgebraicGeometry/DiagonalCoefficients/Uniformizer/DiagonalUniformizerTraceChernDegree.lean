@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceTwistedSplit
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceSingleFaithful
 
 /-! # The Chern degree of the reduced completed trace
-
-Source: diagonal tower coefficient changes paragraph (1), and trace paragraph (1).
-(blueprint: lem-diagonal-uniformizer-trace-chern-degree).
 -/
 
 @[expose] public noncomputable section
@@ -108,27 +105,7 @@ private theorem completedChern_trace
 
 /-- The reduced trace has degree one on the canonical positive Kummer Chern
 summand. This is an endomorphism equation of the finite coefficient unit, and
-asserts nothing about the positive-line summand or equality of entire traces.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), coefficient reduction;
-sk-prop-diagonal-tower-trace.proof.md, paragraph (1), finite trace projection.
-(blueprint: lem-diagonal-uniformizer-trace-chern-degree).
-
-Proof: lift the strict-system Chern adjunct to completed coefficients using
-fullness on derived-complete objects. The positive twisted-splitting component
-and the definition of its inverse trace give Chern followed by trace equal to
-one in the system category. The lift and trace normalizations transport this
-equation to constant coefficients; degree-zero faithfulness gives it over the
-completed ring. The coefficient normalization of the positive Chern adjunct is
-isolated in diagonalUniformizer_chernNormalization. Compose q_trace with the
-two scalar trace squares and the finite presentation comparison. These identify
-the finite trace factor with the image of the completed trace. Applying the
-coefficient functor to the completed Chern/trace equation and cancelling the
-coefficient-unit isomorphism proves the result. Only the positive Chern arrow
-needs geometric comparison. No detection of arbitrary derived arrows by finite
-levels is used. Exponent n+1 is positive at n=0, hA handles ramification, and
-the construction includes the empty scheme. -/
+asserts nothing about the positive-line summand or equality of entire traces. -/
 theorem diagonalUniformizer_traceChernDegree
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

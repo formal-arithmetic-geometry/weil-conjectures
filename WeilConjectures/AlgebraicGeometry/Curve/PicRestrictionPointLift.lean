@@ -12,10 +12,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Lifting closed-point classes across a curve compactification
-
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
-first paragraph, restriction and boundary divisors
-(blueprint: lem-sc-pic-restriction-point-lift).
 -/
 
 @[expose] public section
@@ -30,19 +26,7 @@ open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry
 
-/-- Closed points lift to the compactification and their point-ideal classes pull back correctly.
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph;
-restriction and boundary divisors, steps 1 and 4 of lem-sc-pic-restriction-exact
-(blueprint: lem-sc-pic-restriction-point-lift).
-
-Proof: Send Q to c.i(Q). A closed point of a finite-type curve over the algebraically closed
-field is a rational point, so its image in the separated finite-type curve c.Z is closed.
-The open immersion identifies the stalks at Q and its image. Pullback of the vanishing ideal
-of the image is the vanishing ideal of Q: on this open subscheme both are the ideal defining
-that reduced point. Pullback commutes with the dual of an invertible module. Therefore the
-classes of the dual point ideals satisfy the displayed equality. This is the single-point
-case of restricting O(D); arbitrary divisors follow by the group law. No boundary point is
-chosen, and the assertion remains valid when the boundary is empty. -/
+/-- Closed points lift to the compactification and their point-ideal classes pull back correctly. -/
 theorem Scheme.Hom.pic_restriction_point_lift
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

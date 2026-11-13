@@ -36,8 +36,7 @@ variable {T : Scheme.{u}}
 /-- **Finite locally constant sheaves of sets admit finite constant local models**: if a sheaf
 of sets `E` on the small étale site of `T` is constant on the members of an étale cover and all
 its geometric stalks are finite, there is an étale cover of `T` on every member `U` of which
-`E|_U` is isomorphic to the constant sheaf at a finite set `S`. The sets `S` may depend on `U`.
-(blueprint: `lem-weil-pbc-finite-locally-constant-sets-local-models`) -/
+`E|_U` is isomorphic to the constant sheaf at a finite set `S`. The sets `S` may depend on `U`. -/
 theorem finiteLocallyConstant_exists_local_models
     (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (𝒰 : Cover.{u} etalePrecoverage T)
     (h𝒰 : ∀ i, (E.over (𝒰.etalePrecoverageToEtale i)).IsConstant

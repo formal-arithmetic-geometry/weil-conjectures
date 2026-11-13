@@ -23,9 +23,6 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 
 /-!
 # Cohomology of the closed boundary of a dense open curve
-
-Source: Stacks Project, Tag 0GJA, proof of lemma-restrict-to-open.
-(blueprint: lem-pbc-g2-dense-open-boundary-cohomology).
 -/
 
 @[expose] public section
@@ -37,20 +34,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- The closed-boundary sheaf has finite degree-zero cohomology and zero positive-degree cohomology.
-Source: Stacks Project, Tag 0GJA, proof of lemma-restrict-to-open, finite stalk product.
-(blueprint: lem-pbc-g2-dense-open-boundary-cohomology).
-
-Proof: Since X is finite type over k, it is Noetherian. A dense open meets each irreducible
-component at its generic point. Thus its closed complement in a space of dimension at most
-one has dimension zero. It is a finite set of closed points, each with residue field k.
-The vanishing ideal gives the reduced induced closed subscheme Z on that complement.
-The pullback of F to Z has finite stalks: constructibility gives finitely generated
-Lambda-modules, and Lambda is finite. The etale cohomology of this zero-dimensional scheme
-is the finite product of those stalks in degree zero and zero in positive degrees.
-The closed immersion i is finite, so its direct image is exact and Leray identifies
-H^q(X, i_*i^*F) with H^q(Z, i^*F). Forgetting the module structure preserves these
-identifications. This proves the two conclusions. For U = X, Z is empty, the product is the
-zero group, and the same argument applies; for empty X both conclusions are immediate. -/
+-/
 theorem dense_open_boundary_cohomology (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

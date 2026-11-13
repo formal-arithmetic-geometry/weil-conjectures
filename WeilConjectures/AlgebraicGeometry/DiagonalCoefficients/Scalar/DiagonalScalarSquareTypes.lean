@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalDiagonalRight
 /-! # Shared types for normalized scalar squares
 
 These transparent aliases share the derived-category instances before specializing
-coefficient rings. Source: diagonal coefficient changes and their full-unit normalization.
-(blueprint: def-diagonal-scalar-square-types).
+coefficient rings.
 -/
 
 @[expose] public noncomputable section
@@ -23,15 +22,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The original full universal model of coefficient direct image.
-Source: diagonal coefficient changes (blueprint: def-diagonal-scalar-square-types). -/
+/-- The original full universal model of coefficient direct image. -/
 abbrev ScalarRightDerived
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     {X S : Scheme.{u}} (f : X ⟶ S) :=
   DiagonalRightDerived (CondensedRing.lowerStar Λ f)
 
-/-- The original normalized square to the canonical target-coefficient model.
-Source: diagonal coefficient changes (blueprint: def-diagonal-scalar-square-types). -/
+/-- The original normalized square to the canonical target-coefficient model. -/
 abbrev CanonicalScalarSquare
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -39,8 +36,7 @@ abbrev CanonicalScalarSquare
     (R : ScalarRightDerived Λ f) :=
   RestrictionSquare a f R (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ' f))
 
-/-- Invertibility of the actual scalar mate on every unbounded complex.
-Source: diagonal coefficient changes (blueprint: def-diagonal-scalar-square-types). -/
+/-- Invertibility of the actual scalar mate on every unbounded complex. -/
 abbrev ScalarMateIsIso
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

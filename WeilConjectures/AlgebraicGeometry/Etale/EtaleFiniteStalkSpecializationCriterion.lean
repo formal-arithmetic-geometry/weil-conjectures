@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleSectionGermIsoSupplement
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Finite stalks and specialization imply finite local constancy
-
-Source: Stacks Project, Tag 0GKC, lemma-characterize-locally-constant-module, (2) implies (1)
-(blueprint: lem-weil-pbc-etale-finite-stalk-specialization-criterion).
 -/
 
 @[expose] public section
@@ -46,30 +43,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A module sheaf over a finite commutative ring on a Noetherian scheme is finite locally
 constant if its geometric stalks are finite sets and all strict-localization specialization
 maps are bijective. The conclusion gives the finite module and trivialization on every
-member of a jointly surjective étale cover, using restriction to the localized site.
-Source: Stacks Project, Tag 0GKC, lemma-characterize-locally-constant-module, (2) implies (1)
-(blueprint: lem-weil-pbc-etale-finite-stalk-specialization-criterion).
-
-Proof:
-1. At each ordinary point choose its algebraically closed geometric point and let M
-be its finite stalk. Lift its identity to a linear map into sections on one pointed
-etale neighbourhood, using the finite addition and scalar-multiplication tables
-(`lem-weil-pbc-etale-finite-stalk-local-presentation`).
-2. The locus on this neighbourhood where the linear section map induces a bijection
-on geometric stalks is independent of the chosen geometric point and invariant under
-specialization in both directions. Indeed, the strict-localization germ calculation
-expresses one germ map as the other followed by a bijective specialization map
-(`lem-weil-pbc-etale-section-germ-specialization`).
-3. Restrict to an affine open through the chosen lift. This affine scheme is Noetherian
-since its map to S is locally of finite type. Its finitely many irreducible components
-have generic points. Removing the components not containing the lift gives an open
-neighbourhood inside the bijectivity locus
-(`lem-weil-pbc-specialization-invariant-neighborhood`).
-4. Restrict the section map to this open. Its constant-sheaf adjunct is an isomorphism
-because every geometric stalk map is bijective
-(`lem-weil-pbc-etale-section-germ-iso`). The original finite stalk is its constant module.
-These neighbourhoods form a jointly surjective etale cover indexed by the points of S;
-when S is empty this same construction is the empty cover. -/
+member of a jointly surjective étale cover, using restriction to the localized site. -/
 theorem finiteLocallyConstant_of_finite_stalks_of_bijective_specialization
     {S : Scheme.{u}} [IsNoetherian S]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

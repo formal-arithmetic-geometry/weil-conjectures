@@ -26,24 +26,7 @@ namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 /-- Intrinsic realization respects the direct-image scalar mate on the entire
 unbounded fixed-scalar pro-etale category. This assertion involves no change of site.
 
-Source: Stacks Tags 0D6E, 0D6J and 07A6; the realization/restriction cube in
-`lem-finite-proper-scalar-transport`, proof Steps 1 and 2.
-(blueprint: lem-finite-realization-scalar-mate).
-
-Proof: evaluate the restriction/direct-image square on a K-injective B-complex
-and a K-injective resolution of its restriction. The normalizations of
-sfDerivedImageRestriction, fixedScalarRestrictionDirectImage and
-sfIntrinsicDerivedDirectImageComparison identify both paths after realization
-with direct image of the resolution arrow. The underived realization square is
-the sectionwise coefficient square. Cancel the common quasi-isomorphisms and
-use naturality and K-injective representatives to obtain the derived square.
-Transpose that square under the coefficient adjunctions. The comparison of
-left adjoints is realizationScalarIso, since it is defined by the same inverse
-realization/restriction square. The iterated-mates identity identifies the
-fixed-scalar transpose with the geometric mate of scalarPullbackProEtaleIso.
-This gives the displayed equality on every object, without properness,
-boundedness or coefficient flatness. Universal properties and the triangle
-identities include the zero ring, zero complex and empty scheme. -/
+Source: Stacks Tags 0D6E, 0D6J and 07A6. -/
 theorem realizationScalar_directImage_mate
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.FiniteReali
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.RootEndpointTranspose.ShiftHelpers.DiagonalRootEndpointTransposeCore
 
 /-! # Transposition through finite realization
-
-Source: the exact functor single comparisons and adjunction triangle identities.
-(blueprint: lem-diagonal-realized-endpoint-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -53,12 +50,7 @@ private theorem shifted_composition
     (shiftFunctor K k).map_comp, Category.assoc]
   rw [G.commShiftIso_hom_naturality_assoc]
 
-/-- An already normalized endpoint remains normalized after finite realization.
-Source: diagonal tower coefficient changes (1), finite realization
-(blueprint: lem-diagonal-realized-endpoint-transpose).
-Proof: compose the supplied normalization with the finite equivalence transpose.
-Exact-single composition coherence collects the two restrictions into one right
-functor, while the ordinary equivalence unit defines the root insertion. -/
+/-- An already normalized endpoint remains normalized after finite realization. -/
 theorem realizedEndpoint_transpose
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -89,11 +81,7 @@ theorem realizedEndpoint_transpose
       (DerivedCategory.singleFunctor _ 0).map i.hom)
     v (e.rootInsertion N i) hf (finiteEndpoint_transpose e N i)
 
-/-- Finite realization carries a shifted endpoint to the shifted realized endpoint.
-Source: diagonal tower coefficient changes (1), exact shift comparisons
-(blueprint: lem-diagonal-realized-endpoint-transpose).
-Proof: unfold the finite target map. Shift naturality moves the scalar endpoint
-through realization, and the composite shift comparison collects the two factors. -/
+/-- Finite realization carries a shifted endpoint to the shifted realized endpoint. -/
 theorem realizedEndpoint_shift
     {C : Type*} [Category C] [HasShift C ℤ]
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -113,11 +101,7 @@ theorem realizedEndpoint_shift
     ((e.F.mapDerivedCategorySingleFunctor 0).hom.app N ≫
       (DerivedCategory.singleFunctor _ 0).map i.hom) (2 : ℤ)
 
-/-- Prescribing the ordinary insertion determines the realized endpoint transpose.
-Source: diagonal tower coefficient changes (1), normalized root insertions
-(blueprint: lem-diagonal-realized-endpoint-transpose).
-Proof: apply finite realization transposition and substitute the supplied ordinary
-insertion identity under the exact single functor. -/
+/-- Prescribing the ordinary insertion determines the realized endpoint transpose. -/
 theorem realizedEndpoint_transpose_eq
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

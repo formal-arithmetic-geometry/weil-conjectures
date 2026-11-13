@@ -15,10 +15,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Constructible cohomological intervals
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-`def-weil-constructible-intervals`, order 1466
-(blueprint: def-weil-constructible-intervals).
-
 The object predicate combines intrinsic finite-torsion bounded constructibility with
 vanishing of cohomology outside the inclusive integer interval. Its full subcategory
 has exactly the inherited morphisms, identities and composition.
@@ -37,9 +33,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Membership in the constructible interval `[a,b]`: intrinsic bounded constructibility
 and vanishing of every cohomology sheaf in a degree outside `Set.Icc a b`.
 The coefficient ring is the recorded quotient `𝒪_E / ϖ_Eⁿ 𝒪_E`. Invertibility of `l`
-on `Y` is expressed in every local ring of `Y`.
-Source: Weil blueprint, `def-weil-constructible-intervals`, order 1466
-(blueprint: def-weil-constructible-intervals). -/
+on `Y` is expressed in every local ring of `Y`. -/
 noncomputable def finiteTorsionConstructibleIn
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u})

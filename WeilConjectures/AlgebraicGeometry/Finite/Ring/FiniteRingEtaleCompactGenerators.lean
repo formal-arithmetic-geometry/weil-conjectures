@@ -33,7 +33,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.4,
 hypothesis before Example 6.4.1, Example 6.4.1, Lemmas 6.4.2 and 6.4.5,
-and Proposition 6.4.8 (blueprint: lem-pur-etale-finite-ring-compact-generators).
+and Proposition 6.4.8.
 
 Coproducts and the generator set are indexed in universe `u + 1`, the universe of the
 module values and the small presentation of the site. The derived category has objects
@@ -53,27 +53,8 @@ set_option backward.isDefEq.respectTransparency false in
 closed field are compact in the full unbounded étale derived category, and a set of these
 complexes detects isomorphisms. No separatedness is required.
 
-Proof, following the node and Bhatt--Scholze, Section 6.4:
-1. The finite-type assumptions make `T` Noetherian. Grothendieck abelianness gives
-   local smallness, and `derived_hasCoproducts` gives the required coproduct universe.
-2. `compactObjects_isThick` and `boundedConstructible_induction` reduce compactness to the
-   finite locally constant flat stratum objects. Flatness passes to geometric fibres
-   through `Point.flat_sheafFiber_obj`; `uliftSheafFiberIso` aligns the universes.
-   `lem-pur-etale-lisse-stratum-compact` proves these generators compact.
-3. Use the actual type `T.AffineEtale` as the index set. The free Yoneda sheaves are
-   constructible and flat by the source library's `isConstructibleSheaf_freeYoneda`
-   and `flat_freeYoneda`. Their single complexes are bounded constructible, using
-   `isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf` to compare the
-   constructibility conventions.
-   Their explicit single flat models give Tor amplitude `[0,0]` via
-   `hasTorAmplitudeIn_iff_exists_flatModel`.
-4. `lem-pur-affine-etale-free-detection` supplies only the detection of isomorphisms
-   by this explicit family and its shifts. Combine it with the preceding properties.
-
 Source: Bhatt--Scholze, Section 6.4, Example 6.4.1, Lemmas 6.4.2 and 6.4.5, and
-Proposition 6.4.8; perfect-value constructibility is related to bounded constructibility
-and finite Tor amplitude by Lemma 6.3.7 and the finite-Tor perfectness criterion.
-(blueprint: lem-pur-etale-finite-ring-compact-generators) -/
+Proposition 6.4.8. -/
 theorem finiteRing_compactGenerators
     {k : Type u} [Field k] [IsAlgClosed k]
     (ℓ : ℕ) (hℓprime : Nat.Prime ℓ) (hℓunit : IsUnit (ℓ : k))

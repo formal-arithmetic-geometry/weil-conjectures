@@ -32,9 +32,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 /-!
 # Lisse condensed-coefficient descent through a surjective closed immersion
 
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Project, Tag 09AB (lemma-thickening) and Tag 09BK (lemma-closed-immersion-affines).
-(blueprint: lem-sfb-coefficient-heart-curve-lisse-descent)
+Source: Stacks Project, Tag 09AB and Tag 09BK.
 
 The two comparison isomorphisms below specify the finite-free normalization and the
 composition comparison used in compatibility with the prescribed trivializations.
@@ -55,8 +53,7 @@ namespace AlgebraicGeometry.ProEtale
 then identify the transported regular module using extension along the Cartesian
 coefficient isomorphism, restriction along its inverse, and the coefficient map itself.
 This also constructs the rank-zero comparison without a choice of basis.
-Source: blueprint lemma-constructible-sheaves, curve descent, proof step 1;
-Stacks Project Tag 09AB (blueprint: lem-sfb-coefficient-heart-curve-lisse-descent). -/
+Source: Stacks Project Tag 09AB. -/
 def coefficientHeartFiniteFreePullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :
@@ -72,8 +69,7 @@ def coefficientHeartFiniteFreePullbackIso
 to the iterated pullback through its specified refinement map. Only the commutativity
 witness is supplied; every isomorphism is the existing coefficient-module composition
 isomorphism or transport along that equality.
-Source: blueprint lemma-constructible-sheaves, curve descent, proof step 4;
-Stacks Project Tag 09AB (blueprint: lem-sfb-coefficient-heart-curve-lisse-descent). -/
+Source: Stacks Project Tag 09AB. -/
 def coefficientHeartRefinementPullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {W T B C P : Scheme.{u}}
@@ -172,40 +168,7 @@ private theorem compatible_trivializations
 /-- Lissity descends and ascends through a surjective closed immersion, with a covering
 refinement that lifts every specified finite-free trivialization, in its specified rank.
 
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Project Tag 09AB (lemma-thickening), Tag 09BK (lemma-closed-immersion-affines).
-(blueprint: lem-sfb-coefficient-heart-curve-lisse-descent)
-
-Proof:
-1. The actual module pullback is extension along alpha after mapMod of abelian inverse
-   image (prose-03-02). Alpha is invertible for every condensed ring
-   (lemma-inverse-image-coefficient-sheaves--1). Additive monoidal finite-free transport, followed
-   by extension along this isomorphism (lem-sfb-monoidal-finite-free-transport and
-   def-sfb-modobj-extension-along-iso), gives coefficientHeartFiniteFreePullbackIso.
-   Localization identifies this with slice restriction, including the coefficient ring
-   (lem-sfb-coefficient-sections-localization).
-2. Pull back a trivializing cover using weakly etale base change and fpqc covering base
-   change (lem-weil-pbc-weakly-etale-composition-base-change and
-   lem-galois-fpqc-covering-base-change). Composition isomorphisms and step 1 transport
-   its trivializations and prove the forward implication.
-3. For the converse and the explicit assertion, first choose a u-small subfamily of C:
-   for each affine open in T retain the finitely many affine covering witnesses and
-   their indices. This is still a cover. Apply
-   new-lem-weil-pbc-proetale-surjective-closed-cover-refinement to it and obtain B and
-   refinement maps from its closed fibres into the selected original members. Each
-   fibre projection is a surjective closed immersion by
-   lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism and base change.
-4. Pull back each prescribed phi along its refinement map. Compose with the canonical
-   composition comparison coefficientHeartRefinementPullbackIso and the finite-free
-   normalization from step 1. This gives beta on the closed fibre.
-5. By new-lem-weil-pbc-condensed-surjective-closed-equivalence, the actual coefficient
-   pullback on each closed fibre is full and faithful. Lift kappa inverse followed by
-   beta and its inverse by fullness. Faithfulness proves both inverse identities.
-   Their lift psi satisfies exactly the displayed compatibility equality.
-6. These psi trivialize M on B, proving the reverse implication. Ranks vary with the
-   selected index and can be zero. Empty covers of empty schemes and arbitrary nil
-   ideals are allowed; neither Noetherianity nor a nilpotence bound was used.
--/
+Source: Stacks Project Tag 09AB, Tag 09BK. -/
 theorem coefficientHeart_curve_lisse_descent
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {W T : Scheme.{u}} (t : T ⟶ W)

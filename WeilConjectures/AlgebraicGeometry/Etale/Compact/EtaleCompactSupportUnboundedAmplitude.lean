@@ -28,8 +28,7 @@ import Mathlib.RingTheory.KrullDimension.Field
 /-! # Unbounded amplitude and coproducts of finite etale compact supports
 
 Source: Zheng, Six operations and Lefschetz-Verdier formula for Deligne-Mumford stacks,
-Corollary 2.19, printed p. 12, and the coproduct argument of Proposition 2.23
-(blueprint: lem-pur-etale-support-unbounded-amplitude).
+Corollary 2.19, printed p. 12, and the coproduct argument of Proposition 2.23.
 
 The functor below is the existing ordinary unbounded `Rr_*` after the exact derived
 extension by zero for the supplied compactification, not a new compact-support construction.
@@ -52,34 +51,7 @@ set-indexed coproducts, and has unbounded amplitude in `[0, 2d]` for every bound
 geometric fibres of the original morphism. All three schemes are Noetherian, quasi-compact
 and quasi-separated, without any separatedness hypothesis on either structure morphism.
 
-Source: Zheng, Corollary 2.19, printed p. 12; Proposition 2.23, coproduct argument
-(blueprint: lem-pur-etale-support-unbounded-amplitude).
-
-Proof:
-1. Finite type over the Noetherian point gives local Noetherianity and compactness.
-   Properness gives these for the ambient scheme. Apply the finite-type geometry lemma
-   to Y over Spec k, and then to f, obtaining a coefficient-independent fibre bound.
-2. Both factors of Rr_* Dj_! are triangulated. The derived adjunction Dj_! ⊣ Dj^*
-   gives coproduct preservation for the first factor in every indexing universe;
-   proper derived direct image preserves coproducts for the second factor.
-3. Exact extension by zero preserves the lower t-bound, and derived direct image is
-   left t-exact. Thus F preserves every lower t-bound.
-4. The coefficient exponent is invertible on Y. Compare the supplied compactification
-   with the one used by the heart amplitude theorem on bounded-below objects. Together
-   with step 3 this bounds F on the entire heart in [0,2d]. Bounded-heart devissage
-   then bounds F on every bounded interval.
-5. The existing uniform unbounded upper-amplitude theorem gives some N with
-   F(D^{≤v}) contained in D^{≤v+N}; N need not equal 2d. Given K in D^{≤a}, put
-   m = min(a,a+2d-N) and use the triangle τ_{<m}K -> K -> τ_{≥m}K.
-   Its first image is bounded by m-1+N ≤ a+2d. Its third term is bounded in [m,a],
-   so step 4 bounds its image by a+2d. Closure of D^{≤a+2d} under extensions bounds FK.
-6. Combine the upper and lower bounds. The argument applies to zero objects, empty
-   schemes, the zero coefficient ring and d=0 without any nonemptiness assumption.
-
-The uniform auxiliary bound is Stacks Project, more-etale.tex,
-lemma-derived-lower-shriek-bounded, (3), for torsion coefficients; only its already
-proved source-library implementation is used. No sharp bound on compactified fibres
-is asserted. -/
+Source: Zheng, Corollary 2.19, printed p. 12; Proposition 2.23, coproduct argument. -/
 theorem compactSupport_unbounded_amplitude
     (k : Type u) [Field k] [IsAlgClosed k]
     (p : ℕ) [CharP k p] (hp : 0 < p)

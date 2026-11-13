@@ -16,9 +16,9 @@ public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatib
 /-!
 # Canonical coefficient comparisons for direct images and internal Hom
 
-Source: the adopted `AlgebraicGeometry.coefficientChangeCompatibility` docstring and fields.
-The latest blueprint `proposition-six-operations-change-coefficients` supplies the route on its
-narrower stages.
+This file sets up the coefficient extension functor on the small étale site, the principal
+quotient coefficient maps and compact support for a specified compactification, used to compare
+the six operations under change of coefficients.
 -/
 
 @[expose] public section

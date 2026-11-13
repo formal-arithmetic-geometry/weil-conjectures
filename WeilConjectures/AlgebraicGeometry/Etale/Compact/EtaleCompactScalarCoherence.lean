@@ -73,8 +73,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 # Scalar coherence for ordinary etale compact support
 
 Source: Stacks Project, more-etale.tex, Tag 0GL6, with Tags 0F7I, 0F7J and 0F7L;
-sites-cohomology.tex, Tags 07A4, 0GL1 and 0E48
-(blueprint: lem-pur-etale-compact-scalar-coherence).
+sites-cohomology.tex, Tags 07A4, 0GL1 and 0E48.
 -/
 
 @[expose] public noncomputable section
@@ -102,19 +101,7 @@ attribute [local instance] cachedEtaleGroth cachedEtaleSheafify
   cachedEtaleTensorColimits cachedEtaleTensorFlipColimits
 
 /-- The inverse of the published open balancing map has the specified open-unit transpose.
-Source: Stacks 07A4, 0GL1 and 0GL6
-(blueprint: lem-pur-etale-compact-scalar-coherence).
-Proof: regard each exact open adjunction as an adjunction to the left-derived
-pullback by transporting its right adjoint along the canonical exact-pullback comparison.
-The published open comparison is a conjugate under the two composite adjunctions.
-The iterated-mate identity identifies its inverse with the open mate of the inverse
-scalar-restriction mate. The existing scalarPullback_eq identifies that inner mate with
-the inverse of the normalized scalar/pullback comparison. The mate's unit equation
-therefore computes its open-adjunction transpose. Naturality of the exact-pullback
-comparison transports this equation back to the published exact open adjunction;
-cancellation of its inverse and forward components yields exactly the transpose defining
-properOpenCoefficientOpenInverse. Injectivity of the open adjunction's Hom equivalence
-proves equality. This works without finite coefficients or boundedness. -/
+Source: Stacks 07A4, 0GL1 and 0GL6. -/
 theorem compactScalarOpen_normalization (φ : A →+* B) {U T : Scheme.{u}}
     (j : U ⟶ T) [IsOpenImmersion j] (M : DerivedCategoryModule A U) :
     (ExceptionalCoefficients.openIso φ j).inv.app M =
@@ -240,10 +227,7 @@ private theorem compactScalarOpen_exchange
       Category.assoc] using hinv
 
 /-- Naturality of the published proper/open scalar components.
-Source: Stacks 0GL6 (blueprint: lem-pur-etale-compact-scalar-coherence).
-Proof: expand compactSupportMap. Naturality of scalarMate moves the open-extension
-map past the proper scalar component. Naturality of openIso moves it past the open
-component. Functoriality of proper direct image gives the displayed equality. -/
+Source: Stacks 0GL6. -/
 theorem compactScalarMap_naturality (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) {M N : DerivedCategoryModule A X} (a : M ⟶ N) :
     (scalarExtension φ Y).map
@@ -272,7 +256,7 @@ theorem compactScalarMap_naturality (φ : A →+* B) {X Y : Scheme.{u}} {f : X �
   exact congrArg R.map h'
 
 /-- Package the published proper/open scalar components as a natural transformation.
-Source: Stacks 0GL6 (blueprint: lem-pur-etale-compact-scalar-coherence). -/
+Source: Stacks 0GL6. -/
 def compactScalarMap (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
@@ -282,8 +266,7 @@ def compactScalarMap (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}
   naturality _ _ a := compactScalarMap_naturality φ c a
 
 /-- The proper-counit/open-tensor projection, in coefficient-first order.
-Source: Stacks 0GL6, preceding projection lemma
-(blueprint: lem-pur-etale-compact-scalar-coherence). -/
+Source: Stacks 0GL6, preceding projection lemma. -/
 def compactScalarProjection (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
@@ -315,7 +298,7 @@ private theorem compactScalarMap_isIso
   infer_instance
 
 /-- Scalar identification of the target of the ordered projection map.
-Source: Stacks 07A4 (blueprint: lem-pur-etale-compact-scalar-coherence). -/
+Source: Stacks 07A4. -/
 def compactScalarProjectionTarget (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :
     (scalarExtension φ X).obj
@@ -330,7 +313,7 @@ def compactScalarProjectionTarget (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶
       ((scalarPullbackIso φ f).inv.app K)).app ((scalarExtension φ X).obj M)
 
 /-- The specified scalar map for the chosen compactification.
-Source: Stacks 0GL6 (blueprint: lem-pur-etale-compact-scalar-coherence). -/
+Source: Stacks 0GL6. -/
 def compactScalarChosenMap (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] :=
   compactScalarMap φ (HasCompactification.compactification f)
@@ -981,20 +964,9 @@ private theorem orderedDirectProjection_naturality
     (orderedDirectProjectionNat R p K).naturality a
 
 /-- Scalar coherence for the fixed compactification: natural invertibility, the ordered
-projection square on every derived input, and proper-refinement compatibility on precisely
-the bounded-below pair of inputs specified in the node.
-Source: Stacks 0GL6, 0E48 and 0F7I
-(blueprint: lem-pur-etale-compact-scalar-coherence).
-Proof: step 4 combines the proper scalar isomorphism with the open balancing isomorphism.
-The ambient compactification is Noetherian by finite type over its Noetherian target.
-Step 5 applies ringed exchange/tensor coherence to the identity-topos coefficient square,
-then the two tensor symmetries give the ordered proper projection square. Step 6 checks
-the open square on K-flat total tensor generators, including the identical Koszul signs.
-Step 7 substitutes the proper/open definitions and uses naturality to paste those squares.
-Step 8 proves proper composition by counit mate pasting and open composition by open-unit
-transposes. Step 9 applies properOpenComparison_coefficient_refinement to M and Q M in D+,
-then proper composition and common-refinement coherence give the displayed comparison
-for every pair of compactifications. No flatness or Tor bound is used. -/
+projection square on every derived input, and proper-refinement compatibility on the
+bounded-below pair of inputs.
+Source: Stacks 0GL6, 0E48 and 0F7I. -/
 theorem compactScalarMap_coherence
     [Finite A] [Finite B] (φ : A →+* B)
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1054,16 +1026,7 @@ theorem compactScalarMap_coherence
     exact N.property
 
 /-- The normalized proper/open composition square for scalar extension.
-Source: Stacks 0F7J and 0GL6 (blueprint: lem-pur-etale-compact-scalar-coherence).
-Proof: step 10 chooses the proper/open tower of the compact-support comparison theorem.
-Apply the coefficient mate theorem to its cartesian proper/open square. Its input j_!M
-and its scalar extension are bounded below by exactness of open extension and the two
-assumed bounds. Paste with the scalar squares for the outer proper map and inner open.
-Step 8 supplies composition of the proper and open scalar maps. Step 9 transfers the
-result to the chosen compactifications. For the outer compactification this is valid
-because F_f M and Q F_f M are bounded below: use bounded-below injective resolutions,
-exact open extension, and Q F_f M = F_f Q M from the scalar isomorphism. This is exactly
-the specified normalized composition equation, with no claim that arbitrary Q preserves D+. -/
+Source: Stacks 0F7J and 0GL6. -/
 theorem compactScalarChosenMap_comp
     [Finite A] [Finite B] (φ : A →+* B)
     {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]

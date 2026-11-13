@@ -27,7 +27,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 
 /-!
 # AffineTraceRightNormalForm
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6.
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +39,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- The specified shiftedComp construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified shiftedComp construction used by the affine trace normal form. -/
 @[irreducible]
 def shiftedComp {C : Type*} [Category C] [HasShift C ℤ]
     (F G H : C ⥤ C) [G.CommShift ℤ] (e : F ⋙ G ≅ H) (a b : ℤ) :
@@ -56,9 +53,7 @@ def shiftedComp {C : Type*} [Category C] [HasShift C ℤ]
     Functor.isoWhiskerRight e _ ≪≫
     Functor.isoWhiskerLeft _ (shiftFunctorAdd _ a b).symm
 
-/-- The specified tensorShiftCompGeneral construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified tensorShiftCompGeneral construction used by the affine trace normal form. -/
 @[irreducible]
 def tensorShiftCompGeneral
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
@@ -70,9 +65,7 @@ def tensorShiftCompGeneral
       derivedTensorRight B X (((derivedTensor B X).obj L).obj M) ⋙ shiftFunctor _ (a + b) :=
   shiftedComp _ _ _ (tensorRightTensor L M).symm a b
 
-/-- The specified singleProductGeneral construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified singleProductGeneral construction used by the affine trace normal form. -/
 @[irreducible]
 def singleProductGeneral
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
@@ -96,9 +89,7 @@ private def singleLeftUnitGeneral
   ((derivedTensor B X).mapIso (singleFunctorObjUnitIso B X)).app L ≪≫
     derivedTensorLeftUnitor B X L
 
-/-- The specified lineShiftGeneral construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified lineShiftGeneral construction used by the affine trace normal form. -/
 @[irreducible]
 def lineShiftGeneral
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
@@ -128,15 +119,11 @@ variable (B : Type*) [Category.{u + 1} B] [Abelian B]
   (N : ℕ) (E : ∀ X : Scheme.{u}, ℕ → Sheaf X.smallEtaleTopology B)
   [∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (upperStar B f).PreservesFlat]
 
-/-- The specified singleE construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified singleE construction used by the affine trace normal form. -/
 abbrev singleE (X : Scheme.{u}) (d : ℕ) :=
   (DerivedCategory.singleFunctor _ 0).obj (E X d)
 
-/-- The specified lineR construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified lineR construction used by the affine trace normal form. -/
 abbrev lineR (X : Scheme.{u}) :=
   ((upperStar B (ProjectiveLine X ↘ X)).leftDerivedFunctor ⋙
     derivedTensorRight B (ProjectiveLine X) ((singleE B E (ProjectiveLine X) 1)⟦(2 : ℤ)⟧)) ⋙
@@ -145,9 +132,7 @@ abbrev lineR (X : Scheme.{u}) :=
 variable (c : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsUnit (N : Γ(Y, ⊤)) → ∀ d : ℕ,
   (upperStar B f).obj (E Y d) ≅ E X d)
 
-/-- The specified singleEPullback construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified singleEPullback construction used by the affine trace normal form. -/
 @[irreducible]
 def singleEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hY : IsUnit (N : Γ(Y, ⊤))) (d : ℕ) :
@@ -155,9 +140,7 @@ def singleEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
   (singleFunctorCompLeftDerivedUpperStarIso B f).app _ ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (c f hY d)
 
-/-- The specified tensorEPullback construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified tensorEPullback construction used by the affine trace normal form. -/
 @[irreducible]
 def tensorEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hY : IsUnit (N : Γ(Y, ⊤))) (d : ℕ) (a : ℤ) :
@@ -173,9 +156,7 @@ def tensorEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
       ((derivedTensorRightFunctor B X).mapIso (singleEPullback B N E c f hY d)) _)
 
-/-- The specified lineENormalForm construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified lineENormalForm construction used by the affine trace normal form. -/
 @[irreducible]
 def lineENormalForm (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) :
     lineR B E X ≅ (upperStar B (AffineSpace PUnit.{u + 1} X ↘ X)).leftDerivedFunctor ⋙
@@ -193,18 +174,14 @@ variable (e0 : ∀ X : Scheme.{u}, E X 0 ≅ (constantSheaf X.smallEtaleTopology
   (flat : ∀ X : Scheme.{u}, IsUnit (N : Γ(X, ⊤)) → ∀ d, ObjectProperty.flat (E X d))
   (prod : ∀ X : Scheme.{u}, IsUnit (N : Γ(X, ⊤)) → ∀ d, E X d ⊗ E X 1 ≅ E X (d + 1))
 
-/-- The specified productE construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified productE construction used by the affine trace normal form. -/
 @[irreducible]
 def productE (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) (d : ℕ) :
     ((derivedTensor B X).obj (singleE B E X d)).obj (singleE B E X 1) ≅
       singleE B E X (d + 1) :=
   singleProductGeneral B X _ _ _ (flat X hX d) (prod X hX d)
 
-/-- The specified towerENormalForm construction used by the affine trace normal form.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lem-amb-affine-trace-right-normal-form). -/
+/-- The specified towerENormalForm construction used by the affine trace normal form. -/
 @[irreducible]
 def towerENormalForm (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
     affineTraceRightTower (fun e ↦ lineR B E (affineTraceTower S e)) d ≅
@@ -301,23 +278,7 @@ private def twistSheafProduct (A : Type (u + 1)) [CommRing A] (N : ℕ)
   t.p X hX d 1 ≪≫ eqToIso
     (congrArg (Scheme.finiteEtaleTateSheaf A N X hA) (by omega))
 
-/-- The coordinate right functor has its ordinary finite Tate normal form.
-Source: blueprint lemma-integral-linear-character--1, proof steps 6--7
-(blueprint: lem-amb-affine-trace-right-normal-form).
-
-Proof: induct on the number of coordinates. At zero, the zero Tate twist is
-the constant tensor unit, pullback by identity is identity, and shift zero is
-identity. At a successor, commute pullback through the preceding tensor and
-shift by the canonical inverse-image tensor and shift comparisons. Combine the
-two pullbacks using composition. The Tate pullback comparison identifies the
-pulled-back old line with the same twist upstairs. Associativity of derived
-tensor, flatness of Tate sheaves, and their signed tensor product identify the
-two factors with the next positive Tate power. Shift addition changes 2d+2 to
-2(d+1). This yields a natural isomorphism, not just objectwise isomorphisms.
-On the constant input, exact inverse image preserves degree-zero sheaves and
-tensoring flat Tate sheaves computes ordinary tensor. The result is a single
-sheaf shifted by 2d, hence bounded below. All arguments include d=0, the empty
-base and N=1 (zero coefficients). -/
+/-- The coordinate right functor has its ordinary finite Tate normal form. -/
 theorem affineTraceRight_normalForm (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :

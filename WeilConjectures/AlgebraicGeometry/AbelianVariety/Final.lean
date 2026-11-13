@@ -26,13 +26,12 @@ implication inside a conclusion.
 
 ## Main statements
 
-- `AlgebraicGeometry.abelianVariety_estimate`: clauses (a) and (b) of the blueprint theorem,
-  over an arbitrary field.
+- `AlgebraicGeometry.abelianVariety_estimate`: clauses (a) and (b) of the estimate, over an
+  arbitrary field.
 - `AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`: clauses (c) and (d), over an
   algebraically closed field.
 - `AlgebraicGeometry.surjective_comp_torsionSubgroupSchemeMul`: the transition maps
-  `A[ℓ ^ (n + 1)](K̄) ⟶ A[ℓ ^ n](K̄)` of the Tate module are surjective (the remark after the
-  blueprint theorem).
+  `A[ℓ ^ (n + 1)](K̄) ⟶ A[ℓ ^ n](K̄)` of the Tate module are surjective.
 -/
 
 @[expose] public section
@@ -45,7 +44,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `thm-av-final`: Abelian-variety estimate, clauses (a) and (b).
+/-- Abelian-variety estimate, clauses (a) and (b).
 
 Let `A` be an abelian variety of dimension `g` over a field `K`, let `p = char K` and let
 `0 < n`.
@@ -68,7 +67,7 @@ theorem abelianVariety_estimate (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) 
     flat_torsionSubgroupScheme, finrankΓ_torsionSubgroupScheme,
     etale_torsionSubgroupScheme p A⟩
 
-/-- Blueprint `thm-av-final`: Abelian-variety estimate, clauses (c) and (d).
+/-- Abelian-variety estimate, clauses (c) and (d).
 
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K`, let
 `p = char K` and let `0 < n`.
@@ -97,20 +96,9 @@ theorem abelianVariety_estimate_of_isAlgClosed [IsAlgClosed K] (p : ℕ) [CharP 
     surjective_npow_points, fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_tateModule ℓ A p hℓ,
     fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_rationalTateModule ℓ A p hℓ⟩
 
-/-- Blueprint `sk-the-final-theorem-the-abelian-variety-estimate--remark-1`: where the
-abelian-variety estimate feeds in.
-
-The divisibility of clause (d) of `AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed` is
-what makes the transition maps of the Tate module surjective: for an abelian variety `A` over any
-field `K`, `0 < ℓ` and every `n`, multiplication by `ℓ` maps the geometric points
-`A[ℓ ^ (n + 1)](K̄)` onto `A[ℓ ^ n](K̄)`, through `AlgebraicGeometry.torsionSubgroupSchemeMul`.
-
-A geometric point `b` of `A[ℓ ^ n]` lifts along the finite surjective `[ℓ]`
-(`AlgebraicGeometry.exists_comp_eq_of_isFinite_of_surjective`) to a geometric point `a` of `A`
-with `ℓ a = b`; then `ℓ ^ (n + 1) a = ℓ ^ n b = 0`, so `a` is a point of `A[ℓ ^ (n + 1)]`.
-The other uses listed in the remark are clauses (a)–(d) themselves: for `K` of characteristic
-`p > 0`, clause (a) with `n = p` says that `A[p]` is finite flat of order `p ^ (2 * g)`, and
-clause (d) gives `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`. -/
+/-- For an abelian variety `A` over a field `K`, `0 < ℓ` and every `n`, multiplication by `ℓ`
+(`AlgebraicGeometry.torsionSubgroupSchemeMul`) maps the geometric points `A[ℓ ^ (n + 1)](K̄)`
+onto `A[ℓ ^ n](K̄)`. -/
 theorem surjective_comp_torsionSubgroupSchemeMul (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (ℓ : ℕ) (hℓ : 0 < ℓ) (n : ℕ) :
     Function.Surjective fun x : Scheme.specAlgebraicClosure K ⟶

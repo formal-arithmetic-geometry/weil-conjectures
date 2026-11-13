@@ -97,9 +97,7 @@ public import WeilConjectures.AlgebraicGeometry.CompletedAdicCoefficientDatum
 
 /-! # Completed adic coefficient datum
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange, order 1239,
-node def-weil-pbc-adic-coefficient-datum; Stacks Tags 099L and 099M
-(blueprint: def-weil-pbc-adic-coefficient-datum).
+Source: Stacks Tags 099L and 099M.
 
 The finite coefficient sheaves are exactly the recorded sheafifications of continuous
 functions on connected components. The ambient ring is their inverse limit. In particular,
@@ -120,8 +118,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type t} [CommRing A]
 
-/-- The coordinate projections of the completed coefficient sheaf.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The coordinate projections of the completed coefficient sheaf. -/
 def completedAdicProjection (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     completedAdicRing T d ⟶ completedAdicFiniteRing T d n :=
   limit.π (completedAdicRingSystem T d) (op n)
@@ -144,28 +141,21 @@ private theorem finiteRing_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
   change C(ConnectedComponents V.left, completedAdicQuotient d n) at a b
   exact congrArg (η.app (op V)) (mul_comm a b)
 
-/-- The category of strict inverse towers of A_T-module sheaves; index n means n+1.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The category of strict inverse towers of A_T-module sheaves; index n means n+1. -/
 abbrev CompletedAdicTowers (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   ℕᵒᵖ ⥤ CompletedAdicModules T d
 
-/-- Standard localization of the abelian category of strict towers.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Standard localization of the abelian category of strict towers. -/
 instance completedAdicTowers_hasDerived (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     HasDerivedCategory (CompletedAdicTowers T d) := HasDerivedCategory.standard _
 
-/-- The coefficient module (P_(n+1))_T restricted along the actual limit projection.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The coefficient module (P_(n+1))_T restricted along the actual limit projection. -/
 def completedAdicFiniteModule (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     CompletedAdicModules T d :=
   (SheafOfModules.restrictScalars.{t + 1} (completedAdicProjection T d n)).obj
     (SheafOfModules.unit (completedAdicFiniteRing T d n))
 
-/-- The quotient ring map defines a unique A_T-linear map on the restricted unit modules.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: use q on every section. The limit cone identity pi_n=q*pi_(n+1) makes it linear;
-its restrictions commute by naturality of q. Equality of all section functions determines
-a sheaf morphism uniquely. -/
+/-- The quotient ring map defines a unique A_T-linear map on the restricted unit modules. -/
 theorem completedAdicFiniteModuleStep_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (n : ℕ) : ∃! q : completedAdicFiniteModule T d (n + 1) ⟶ completedAdicFiniteModule T d n,
       ∀ (U : T.ProEtᵒᵖ) (s : (completedAdicFiniteRing T d (n + 1)).obj.obj U),
@@ -204,15 +194,13 @@ theorem completedAdicFiniteModuleStep_exists (T : Scheme.{t}) (d : AdicCoefficie
   ext U s
   exact hq' U s
 
-/-- The canonically normalized transition of restricted quotient modules.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The canonically normalized transition of restricted quotient modules. -/
 def completedAdicFiniteModuleStep (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     completedAdicFiniteModule T d (n + 1) ⟶ completedAdicFiniteModule T d n :=
   (completedAdicFiniteModuleStep_exists T d n).exists.choose
 
 /-- Ordinary tensor reductions as one strict tower-valued functor. Its transitions are
-exactly tensor with the quotient maps, not independent choices at each level.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+exactly tensor with the quotient maps, not independent choices at each level. -/
 def completedAdicOrdinaryTower (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     CompletedAdicModules T d ⥤ CompletedAdicTowers T d :=
   (Functor.ofOpSequence
@@ -221,10 +209,7 @@ def completedAdicOrdinaryTower (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     (fun n ↦ (curriedTensor (CompletedAdicModules T d)).flip.map
       (completedAdicFiniteModuleStep T d n))).flip
 
-/-- The strict tensor tower is additive.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: tensor is additive in the original module variable and addition of tower maps is
-componentwise, so the assertion follows by evaluating at every level. -/
+/-- The strict tensor tower is additive. -/
 theorem completedAdicOrdinaryTower_additive (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     (completedAdicOrdinaryTower T d).Additive := by
   let : MonoidalPreadditive (CompletedAdicModules T d) :=
@@ -284,15 +269,7 @@ private theorem tensorRight_quasiIso_of_models
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Existence of the universal left derived reduction-tower pair, computed on K-flat models.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: tensor distributes over the finite cone summands and respects shifts, so the
-ordinary tower gives an exact functor on homotopy categories. Resolve every complex by
-lem-pc-kflat-resolution. A quasi-isomorphism between K-flat complexes stays a
-quasi-isomorphism after tensor with each quotient (lem-pur-derived-change-of-rings).
-Tower cohomology is levelwise, so the entire tower map is a quasi-isomorphism. Apply
-lem-pur-left-derived-from-kflat-class. Its counit is invertible on K-flat representatives,
-which fixes the comparison with the stated strict quotient tower. -/
+/-- Existence of the universal left derived reduction-tower pair, computed on K-flat models. -/
 theorem completedAdicReduction_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     ∃ (F : DerivedCategory (CompletedAdicModules T d) ⥤
         DerivedCategory (CompletedAdicTowers T d))
@@ -378,9 +355,7 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
 variable {F P}
 
 /-- Computation of the complex comparison on the resolving class.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data).
-Proof: the homotopy counit is invertible by the computation law, and every other
-factor is an image of a localization isomorphism. -/
+Source: Stacks Tag 06YY. -/
 theorem DerivedReductionModelData.complexCounit_isIso (D : DerivedReductionModelData F P)
     (K : CochainComplex B ℤ) (hK : P K) : IsIso (D.complexCounit K) := by
   have := D.isIso_counit K hK
@@ -388,7 +363,7 @@ theorem DerivedReductionModelData.complexCounit_isIso (D : DerivedReductionModel
   infer_instance
 
 /-- The right-derived comparison on a complex, with the localization factors retained.
-Source: Stacks Tag 0941 (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+Source: Stacks Tag 0941. -/
 def derivedLimitComplexComparison (L : C ⥤ B) [L.Additive]
     (RF : DerivedCategory C ⥤ DerivedCategory B)
     (δ : L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
@@ -404,7 +379,7 @@ def derivedLimitComplexComparison (L : C ⥤ B) [L.Additive]
     (RF).map ((DerivedCategory.quotientCompQhIso _).hom.app P)
 
 /-- The normalized completion unit on a resolving complex.
-Source: Stacks Tags 06YY and 0941 (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+Source: Stacks Tags 06YY and 0941. -/
 def derivedCompletionModelUnit (D : DerivedReductionModelData F P)
     (L : C ⥤ B) [L.Additive] (RF : DerivedCategory C ⥤ DerivedCategory B)
     (δ : L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
@@ -417,14 +392,14 @@ def derivedCompletionModelUnit (D : DerivedReductionModelData F P)
 end DerivedReductionModels
 
 /-- The universal strict reduction pair over the completed coefficients.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+Source: Stacks Tag 06YY. -/
 abbrev CompletedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   DerivedReductionModelData (completedAdicOrdinaryTower T d)
     (CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d))
 
 /-- Bundle the already chosen universal pair. Its universal property determines it
 up to its unique compatible isomorphism.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+Source: Stacks Tag 06YY. -/
 def completedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     CompletedAdicReductionData T d :=
   derivedReductionModelDataOfExists (completedAdicOrdinaryTower T d)
@@ -432,30 +407,23 @@ def completedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     (completedAdicReduction_exists T d)
 
 /-- The reduction tower functor, chosen from its universal derived pair. The universal
-property and invertible K-flat counit determine it up to its unique comparison.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+property and invertible K-flat counit determine it up to its unique comparison. -/
 def completedAdicReduction (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     DerivedCategory (CompletedAdicModules T d) ⥤ DerivedCategory (CompletedAdicTowers T d) :=
   (completedAdicReductionData T d).reduction
 
-/-- The finite coefficient sheaf has commutative sections.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: continuous functions into the commutative quotient ring commute pointwise.
-The same equation holds locally after sheafification, and the sheaf's separatedness
-makes it hold globally on each object. -/
+/-- The finite coefficient sheaf has commutative sections. -/
 theorem completedAdicFiniteRing_mul_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (n : ℕ) (U : T.ProEtᵒᵖ) (x y : (completedAdicFiniteRing T d n).obj.obj U) :
     x * y = y * x := by
   exact finiteRing_comm T d n U x y
 
-/-- Commutativity on the finite coefficient sheaf, with unchanged underlying ring data.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Commutativity on the finite coefficient sheaf, with unchanged underlying ring data. -/
 abbrev completedAdicFiniteCommRingStructure (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (n : ℕ) (U : T.ProEtᵒᵖ) : CommRing ((completedAdicFiniteRing T d n).obj.obj U) :=
   { RingCat.ring _ with mul_comm := completedAdicFiniteRing_mul_comm T d n U }
 
-/-- The existing finite coefficient presheaf with commutativity retained.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The existing finite coefficient presheaf with commutativity retained. -/
 def completedAdicFiniteCommPresheaf (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     T.ProEtᵒᵖ ⥤ CommRingCat.{t + 1} where
   obj U := @CommRingCat.of ((completedAdicFiniteRing T d n).obj.obj U)
@@ -469,16 +437,14 @@ def completedAdicFiniteCommPresheaf (T : Scheme.{t}) (d : AdicCoefficientDatum A
   map_comp f g := (forget₂ CommRingCat RingCat).map_injective
     ((completedAdicFiniteRing T d n).obj.map_comp f g)
 
-/-- The finite coefficient sheaf, now as commutative rings, with the same ring sheaf.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The finite coefficient sheaf, now as commutative rings, with the same ring sheaf. -/
 def completedAdicFiniteCommRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     Sheaf (ProEt.topology T) CommRingCat.{t + 1} :=
   ⟨completedAdicFiniteCommPresheaf T d n,
     Presheaf.isSheaf_of_isSheaf_comp _ _ (forget₂ CommRingCat RingCat)
       (completedAdicFiniteRing T d n).property⟩
 
-/-- The limit projection with commutativity retained, without changing its section maps.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The limit projection with commutativity retained, without changing its section maps. -/
 def completedAdicCommProjection (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :
     completedAdicCommRing T d ⟶ completedAdicFiniteCommRing T d n where
   hom :=
@@ -492,8 +458,7 @@ def completedAdicCommProjection (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n
 set_option linter.defProp false in
 /-- K tensor^L_(A_T) (P_(n+1))_T with its quotient coefficient action retained.
 The main reduction functor is its scalar restriction; no constant coefficient category
-is identified with the completed category.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+is identified with the completed category. -/
 def completedAdicQuotientReduction (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :=
   completedAdicDerivedChange T (completedAdicCommProjection T d n)
 
@@ -1018,15 +983,7 @@ private theorem balancing_from_adjunctions (T : Scheme.{t})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Balancing is uniquely fixed on pure tensors, including its inverse.
-Source: blueprint order 1239, normalization calculation
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the relation chi=psi*phi makes (s tensor r) tensor x map to
-s*psi(r) tensor x a balanced trilinear map. It commutes with restrictions and
-with the differentials of P, so sheafification gives a chain map. Its inverse
-sends s tensor x to s tensor (1 tensor x). The balanced relations make both
-composites identities. The formula on local pure tensors uniquely determines
-a sheaf map in each degree and therefore uniquely determines the chain map. -/
+/-- Balancing is uniquely fixed on pure tensors, including its inverse. -/
 theorem completedAdicBalance_exists (T : Scheme.{t})
     {R S V : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ V) (χ : R ⟶ V) (_h : φ ≫ ψ = χ)
@@ -1050,8 +1007,7 @@ theorem completedAdicBalance_exists (T : Scheme.{t})
     (completedTensor_smul T ψ) _ (completedAdicChangeTensor T (φ ≫ ψ)) a3 h3
     (completedTensor_smul T (φ ≫ ψ)) P
 
-/-- The canonical balancing chain map; no isomorphism is chosen without its tensor formula.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The canonical balancing chain map; no isomorphism is chosen without its tensor formula. -/
 def completedAdicBalance (T : Scheme.{t})
     {R S V : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ V) (χ : R ⟶ V) (h : φ ≫ ψ = χ)
@@ -1060,8 +1016,7 @@ def completedAdicBalance (T : Scheme.{t})
         (ProEt.topology T) R)) ℤ) :=
   (completedAdicBalance_exists T φ ψ χ h P).exists.choose
 
-/-- Invertibility is the first property of the uniquely normalized balancing witness.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Invertibility is the first property of the uniquely normalized balancing witness. -/
 instance completedAdicBalance_isIso (T : Scheme.{t})
     {R S V : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ V) (χ : R ⟶ V) (h : φ ≫ ψ = χ)
@@ -1070,8 +1025,7 @@ instance completedAdicBalance_isIso (T : Scheme.{t})
         (ProEt.topology T) R)) ℤ) : IsIso (completedAdicBalance T φ ψ χ h P) :=
   (completedAdicBalance_exists T φ ψ χ h P).exists.choose_spec.1
 
-/-- The quotient map between any two positive levels, including the identity level.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The quotient map between any two positive levels, including the identity level. -/
 def completedAdicQuotientCommMap (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (b a : ℕ) (h : a ≤ b) :
     completedAdicFiniteCommRing T d b ⟶ completedAdicFiniteCommRing T d a where
@@ -1084,10 +1038,7 @@ def completedAdicQuotientCommMap (T : Scheme.{t}) (d : AdicCoefficientDatum A)
       naturality := fun _ _ f ↦ (forget₂ CommRingCat RingCat).map_injective
         (((completedAdicRingSystem T d).map (homOfLE h).op).hom.naturality f) }
 
-/-- The projections and quotient maps have their actual limit-cone compatibility.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: forget commutativity and apply the naturality identity of the limit cone to
-the arrow op b -> op a. The forgetful functor is faithful. -/
+/-- The projections and quotient maps have their actual limit-cone compatibility. -/
 theorem completedAdicCommProjection_comp (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (b a : ℕ) (h : a ≤ b) :
     completedAdicCommProjection T d b ≫ completedAdicQuotientCommMap T d b a h =

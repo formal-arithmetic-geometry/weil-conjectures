@@ -15,8 +15,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Constructible sheaves placed in degree zero
 
-Source: coefficient-twist blueprint, order 1505, proof step 10; Stacks Tag 03RZ.
-(blueprint: lem-pur-constructible-single-support)
+Source: Stacks Tag 03RZ.
 -/
 
 @[expose] public section
@@ -115,20 +114,7 @@ private theorem constructible_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A] 
 
 /-- A constructible sheaf in degree zero has finite constructible cohomology, supported
 only in zero. Its support is exactly `{0}` when the sheaf is not a zero object.
-Source: coefficient-twist blueprint, order 1505, step 10; Stacks Tag 03RZ
-(blueprint: lem-pur-constructible-single-support).
-
-Proof: the single complex has vanishing homology in every degree other than zero,
-and its zeroth homology is the original sheaf. Constructibility transports across
-isomorphisms by keeping the stratification, composing the restricted trivializations,
-and transporting finiteness through the stalk functor. The zero sheaf is constructible
-using the single stratum equal to the whole
-scheme and the constant zero module on the identity cover. Its geometric stalks
-are zero because the stalk functor is additive. The kernel of an identity supplies
-this zero object. It is isomorphic to every vanishing homology object. Thus all homology is
-constructible and the support is a subset of the finite set `{0}`. The zeroth
-homology comparison shows that zero belongs to the support precisely when the
-original sheaf is not zero. No nonemptiness of the scheme or of a stalk is assumed. -/
+Source: Stacks Tag 03RZ. -/
 theorem constructible_single_support (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A))
     (hF : IsConstructibleProEtaleModuleSheaf Y A F)

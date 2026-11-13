@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 Source: Stacks Project, Tag 09C6, the normalized algebraic stalk diagram;
 Tags 09AL and 09B1 for finite coefficient descent.
-(blueprint: lem-weil-pbc-finite-perfect-adic-etale-stalk-data).
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +36,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 The transport is conditional on a supplied etale isomorphism with the stalk complex.
 It supplies neither such an isomorphism nor a covering on which one exists. It includes
 further restriction along every arrow to a supplied etale chart.
-Source: Stacks Tags 09C6, 09AL and 09B1.
-(blueprint: lem-weil-pbc-finite-perfect-adic-etale-stalk-data). -/
+Source: Stacks Tags 09C6, 09AL and 09B1. -/
 structure FinitePerfectAdicEtaleStalkData (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -147,26 +145,8 @@ private theorem finitePerfectAdic_connected_model_cover
 
 /-- Descend the quotient diagram and extract its algebraic stalk levels and reduction maps.
 
-This conclusion contains no local isomorphisms with constant stalk complexes and no
-finite-level marking sieves. Those are obtained separately from finite-ring derived
-local constancy on each connected chart.
-
 Source: Stacks Project, Tag 09C6, the paragraph constructing normalized algebraic M_n
-before taking their limit, with Tags 09AL, 09B1 and 094G.
-(blueprint: lem-weil-pbc-finite-perfect-adic-etale-stalk-data).
-
-Proof: refine the model sieve by connected open neighborhoods of points of its charts.
-Pullback of covering sieves preserves the uniform bounds. Descend each finite quotient
-separately, retaining its bounded lisse etale complex, a small perfect algebraic stalk
-model, and transport for any supplied constant-model isomorphism. On a connected chart,
-finite-ring derived local constancy gives local constant models for two consecutive
-levels. Refine the two covers and select a nonempty chart above the chosen point.
-Transport both constant models to the actual quotient objects there. Consecutive
-quotient scalar balancing identifies their algebraic models after scalar extension.
-This gives the required pairwise isomorphisms without descending quotient arrows or
-choosing compatible trivializations. Finally compose any supplied stalk trivialization
-with the chosen algebraic stalk comparison and apply single-level transport. The empty
-base uses the empty point-indexed cover. No inverse limit is used. -/
+before taking their limit, with Tags 09AL, 09B1 and 094G. -/
 theorem finitePerfectAdic_etale_stalk_data
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

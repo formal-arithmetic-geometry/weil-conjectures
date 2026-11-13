@@ -21,20 +21,7 @@ namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 /-- The included D+ site mate is the ambient counit mate, with the prescribed
 intrinsic-realization identifications. This equality contains no change of coefficients.
 
-Source: Stacks Tag 099R; `lem-finite-proper-scalar-transport`, Step 3.
-(blueprint: lem-finite-proper-site-ambient-normalization).
-
-Proof: the ambient geometric adjunction restricts to the D+ adjunction under
-the exact-functor and right-derived inclusion comparisons. Include the counit
-equation fixedComparisonDirectImageMatePlus_counit in the unbounded category.
-The pullback comparison includes to the exact derived comparison square.
-Naturality of that square and of the inclusion comparisons gives the ambient
-counit equation. Injectivity of geometric adjunction transposition identifies
-the included mate with directImageComparisonAmbient. Apply intrinsic realization
-and compose with intrinsicSiteFunctorIso and the normalized direct-image
-realization comparison. These are exactly the factors defining properSiteIso.
-No choice of a new comparison is made. This argument includes zero coefficients,
-empty schemes, and every lower bound. -/
+Source: Stacks Tag 099R. -/
 theorem properSiteIso_hom_ambient
     (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]

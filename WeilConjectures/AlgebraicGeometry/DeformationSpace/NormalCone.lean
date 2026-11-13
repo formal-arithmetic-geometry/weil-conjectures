@@ -15,10 +15,9 @@ Let `g : V ⟶ B` have a section `s`. The projection `π_N : N_s ⟶ B` of the n
 `N_s = Spec_V (⨁ I^r / I^{r+1}) ⟶ V` followed by `g`. Hence it is affine, separated or
 quasi-compact as soon as `g` is. When `g` is smooth of relative dimension `d` and `s` is a closed
 section, `π_N` is smooth of relative dimension `d`, being the fibre over `t = 0` of the smooth
-deformation `g̃` (blueprint `prose-09-11`, `prose-09-12` (1)). It is
-then compactifiable over a quasi-compact quasi-separated base, by Nagata's theorem. These are
-the hypotheses under which the section invariant `𝒞(π_N, 0_N)` of `lemma-section-normal-bundle` is
-defined.
+deformation `g̃`. It is then compactifiable over a quasi-compact quasi-separated base, by Nagata's
+theorem. These are the hypotheses under which the section invariant `𝒞(π_N, 0_N)` of the
+normal bundle is defined.
 
 ## Main statements
 
@@ -53,7 +52,7 @@ instance [QuasiCompact g] : QuasiCompact (normalConeProj g s) := by
 
 variable {g s}
 
-/-- Blueprint `prose-09-11`: the normal cone of a closed section of a morphism smooth of
+/-- The normal cone of a closed section of a morphism smooth of
 relative dimension `d` is smooth of relative dimension `d` over the base, being the fibre of the
 smooth deformation `g̃` over `t = 0`. -/
 theorem smoothOfRelativeDimension_normalConeProj (d : ℕ) [SmoothOfRelativeDimension d g]

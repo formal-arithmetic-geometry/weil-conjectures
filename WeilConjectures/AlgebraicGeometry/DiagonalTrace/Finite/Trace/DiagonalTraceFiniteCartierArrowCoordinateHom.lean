@@ -39,10 +39,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalExactFunctorExtImage
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- The finite arrow is the Hom of the typed finite Cartier class.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-arrow-coordinate-hom).
-Proof: unfold the named finite arrow. -/
+/-- The finite arrow is the Hom of the typed finite Cartier class. -/
 theorem finiteCartierArrow_coordinate_hom
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)] (n : ℕ) :

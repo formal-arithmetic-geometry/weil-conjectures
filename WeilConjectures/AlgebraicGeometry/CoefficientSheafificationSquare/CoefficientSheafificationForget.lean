@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.CoefficientSheafificationIso
 
 /-! # The sheafification scalar square forgets to the identity
-
-(blueprint: lem-weil-pbc-coefficient-sheafification-forget).
 -/
 
 @[expose] public noncomputable section

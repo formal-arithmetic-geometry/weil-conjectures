@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 
 /-! Closed equality-pattern restrictions of a finite family.
-(blueprint: lem-sfb-completed-affine-pattern-cover)
 -/
 
 @[expose] public noncomputable section
@@ -127,26 +126,7 @@ open Classical in
 /-- Pointwise fiber-class cancellation extends to cancellation on a covering family.
 The conclusion records equal arrows and zero coefficient sums, independently of free
 modules, sheafification, or dual maps.
-Source: `CompletedAffineFreeLocalDual.lean`, the closed-pattern part of the proof of
-`completedAffineFree_localDual_detect`; Stacks 097C for the canonical restrictions.
-(blueprint: lem-sfb-completed-affine-pattern-cover)
-
-Proof: for each equivalence relation r on the finite index set, take the locus E(r)
-where r-related residue-field arrows agree and every r-class coefficient sum vanishes.
-The geometric equality loci are intersections of clopen stage equalizers. Each E(r)
-is therefore closed and saturated under connected components: continuous functions
-into the totally disconnected p-adic integers are constant on a component. At each
-point its actual residue-field equality pattern supplies an r for which it lies in E(r).
-Thus these finitely many loci cover W; no closure of an exact-pattern stratum is needed.
-Cover W by affine opens and realize each pulled-back E(r) using the existing ring
-WContractification.Restriction of its closed component subset. Its algebra map is
-ind-Zariski, hence weakly etale, and its spectrum has exactly the required image.
-These affine, hence quasi-compact, maps form a finite pro-etale cover of each affine
-open. The sieve of all arrows whose image is contained in some E(r) is covering by
-transitivity. Such an arrow equalizes every r-related pair as scheme maps, using the
-open equalizer at each etale stage and the limit universal property. Naturality and
-injectivity of M imply that every restricted r-class coefficient sum is zero. This
-construction also works for the empty index set and for an empty test scheme. -/
+Source: Stacks 097C for the canonical restrictions. -/
 theorem completedAffine_pattern_cover (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (M : CompletedAffineCoefficientModel l X)
     (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) (W : X.ProEt)

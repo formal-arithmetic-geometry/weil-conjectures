@@ -13,9 +13,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The underlying additive comparison for finite coefficients
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-coefficient-scalar-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -33,7 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
 
 /-- The actual associated-module-sheaf unit after forgetting coefficients.
-Source: Stacks 00YV (blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+Source: Stacks 00YV. -/
 def finiteRealizationForgetUnit :
     finiteOrdinaryForget (FiniteRing l E n) T ⟶
       finiteOrdinaryRealization l E n T ⋙ finiteForget l E T n where
@@ -50,7 +47,7 @@ def finiteRealizationForgetUnit :
         ((finiteCoefficientModulePresheaf T.ProEt (FiniteRing l E n)).map f.hom))
 
 /-- The comparison is invertible because the underlying additive sheaf is already a sheaf.
-Source: Stacks 00YV (blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+Source: Stacks 00YV. -/
 instance finiteRealizationForgetUnit_isIso :
     IsIso (finiteRealizationForgetUnit l E n T) := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -68,7 +65,7 @@ instance finiteRealizationForgetUnit_isIso :
 
 /-- Exact site comparison commutes with forgetting the finite coefficient action,
 using the actual associated-sheaf unit.
-Source: Stacks 00YV, 03FD (blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+Source: Stacks 00YV, 03FD. -/
 def finiteScalarComparison :
     Etale.moduleAbelianForget (FiniteRing l E n) T ⋙
         comparisonUpperStar AddCommGrpCat.{u + 1} T ≅
@@ -77,9 +74,7 @@ def finiteScalarComparison :
   forgetComparisonIso (FiniteRing l E n) T ≪≫
     Functor.isoWhiskerLeft _ (asIso (finiteRealizationForgetUnit l E n T))
 
-/-- The same scalar comparison with the composite functors grouped on the left.
-Source: the canonical functor associator
-(blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+/-- The same scalar comparison with the composite functors grouped on the left. -/
 def finiteScalarCompositeComparison :
     Etale.moduleAbelianForget (FiniteRing l E n) T ⋙
         comparisonUpperStar AddCommGrpCat.{u + 1} T ≅
@@ -89,9 +84,7 @@ def finiteScalarCompositeComparison :
     (Functor.associator (finiteOrdinaryComparison (FiniteRing l E n) T)
       (finiteOrdinaryRealization l E n T) (finiteForget l E T n)).symm
 
-/-- The target coordinate on the underlying additive sheaf of the etale Tate line.
-Source: scalar comparison and the specified line coordinate
-(blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+/-- The target coordinate on the underlying additive sheaf of the etale Tate line. -/
 def finiteScalarLineCoordinate
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :
@@ -103,9 +96,7 @@ def finiteScalarLineCoordinate
   (finiteScalarComparison l E n T).hom.app _ ≫
     (finiteForget l E T n).map (finiteOrdinaryLineCoordinate l E n T c).hom
 
-/-- The scalar line coordinate has the given comparison component and line map.
-Source: its explicit construction
-(blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+/-- The scalar line coordinate has the given comparison component and line map. -/
 theorem finiteScalarLineCoordinate_eq
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :
@@ -114,8 +105,7 @@ theorem finiteScalarLineCoordinate_eq
         (finiteForget l E T n).map (finiteOrdinaryLineCoordinate l E n T c).hom := rfl
 
 /-- The additive comparison carries the comparison-adjunction generator to the
-actual scalar-unit section. Source: the adjunction mate defining forgetComparisonIso
-(blueprint: def-sfb-finite-coefficient-scalar-comparison). -/
+actual scalar-unit section. -/
 theorem finiteScalarComparison_unit_section
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (FiniteRing l E n)))
     (U : T.Etaleᵒᵖ)

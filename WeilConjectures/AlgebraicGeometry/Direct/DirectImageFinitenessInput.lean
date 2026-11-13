@@ -13,9 +13,6 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.Topology.KrullDimension
 
 /-! # The direct-image finiteness input
-
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/
-`theorem-results-from-etale-theory` (blueprint: theorem-results-from-etale-theory).
 -/
 
 @[expose] public section
@@ -34,9 +31,7 @@ nonnegative higher direct image of a constructible module sheaf along a finite-t
 morphism of finite-type `k`-schemes to be constructible. The second clause quantifies
 over separably closed fields `K` with `N` invertible and finite-type `K`-schemes of
 dimension at most `d`, requiring vanishing above `2 * d` for every locally torsion
-abelian sheaf; it does not require a uniform annihilator for that sheaf.
-Source: blueprint `sec-smooth-purity/sk-prop-a1-kummer/def-exc-direct-image-input.md`
-(blueprint: theorem-results-from-etale-theory). -/
+abelian sheaf; it does not require a uniform annihilator for that sheaf. -/
 def HasDirectImageFinitenessInput
     (k : Type u) [Field k] (N : ℤ) (_hN : IsUnit (N : k))
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

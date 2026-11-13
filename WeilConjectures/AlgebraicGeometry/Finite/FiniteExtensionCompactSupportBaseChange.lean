@@ -51,9 +51,6 @@ import Mathlib.RingTheory.KrullDimension.Field
 /-!
 # Compact-support base change over a finite extension
 
-Source: blueprint main-20261015, `thm-cbc-finite-extension`, order 1991
-(blueprint: thm-cbc-finite-extension).
-
 The integral compact-support exchange is transported through the raw scalar
 localization.  The source and target are the completed compact-support
 composites attached to the chosen compactifications; the displayed naturality
@@ -238,11 +235,7 @@ private theorem finiteExtension_push_linear
   unfold AdicCoefficientDatum.push proEtaleRingDerivedDirectImage
   infer_instance
 
-/-- Additivity interface needed by scalar transport for the completed open operation.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension).
-Proof: extension by zero is additive on module sections. Its exact termwise functor
-respects sums of chain maps, and the equation descends through the derived localization. -/
+/-- Additivity interface needed by scalar transport for the completed open operation. -/
 @[instance] theorem cbcDerivedOpenShriek_additive
     {A : Type (u + 1)} [CommRing A] {U T : Scheme.{u}}
     (d : AdicCoefficientDatum A) (j : U ⟶ T) (hj : IsOpenImmersion j) :
@@ -250,11 +243,7 @@ respects sums of chain maps, and the equation descends through the derived local
   unfold cbcDerivedOpenShriek
   infer_instance
 
-/-- Additivity interface needed by scalar transport for completed pullback.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension).
-Proof: the reduction-tower construction and derived tower pullback respect sums on
-representatives; derived inverse limit is additive. Compose these three equations. -/
+/-- Additivity interface needed by scalar transport for completed pullback. -/
 @[instance] theorem completedPull_additive
     {A : Type (u + 1)} [CommRing A] {U V : Scheme.{u}}
     (d : AdicCoefficientDatum A) (f : U ⟶ V) :
@@ -266,22 +255,14 @@ representatives; derived inverse limit is additive. Compose these three equation
   unfold AdicCoefficientDatum.completedPull
   infer_instance
 
-/-- The source composite is additive.
-Proof: extension by zero, derived direct image, and completed pullback are additive
-on representative maps. Composition preserves these addition equations.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension). -/
+/-- The source composite is additive. -/
 @[instance] theorem cbcCompactSupportSource_additive
     {A : Type (u + 1)} [CommRing A] {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
     (g : Y' ⟶ Y) (c : Compactification f) (d : AdicCoefficientDatum A) :
     (cbcDerivedOpenShriek d c.i c.isOpenImmersion ⋙ d.push c.g ⋙ d.completedPull g).Additive := by
   infer_instance
 
-/-- The target composite is additive.
-Proof: completed pullback, extension by zero, and derived direct image are additive
-on representative maps. Composition preserves these addition equations.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension). -/
+/-- The target composite is additive. -/
 @[instance] theorem cbcCompactSupportTarget_additive
     {A : Type (u + 1)} [CommRing A] {X X' Y' : Scheme.{u}} {f' : X' ⟶ Y'}
     (g' : X' ⟶ X) (c' : Compactification f') (d : AdicCoefficientDatum A) :
@@ -291,25 +272,21 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
   have := cbcDerivedOpenShriek_additive d c'.i c'.isOpenImmersion
   infer_instance
 
-/-- The source compact-support composite in the chosen compactification.
-Source: `def-cbc-completed-exchange-map` (blueprint: thm-cbc-finite-extension). -/
+/-- The source compact-support composite in the chosen compactification. -/
 abbrev cbcCompactSupportSource
     {A : Type (u + 1)} [CommRing A] {X Y Y' : Scheme.{u}}
     {f : X ⟶ Y} (g : Y' ⟶ Y) (c : Compactification f)
     (d : AdicCoefficientDatum A) :=
   cbcDerivedOpenShriek d c.i c.isOpenImmersion ⋙ d.push c.g ⋙ d.completedPull g
 
-/-- The target compact-support composite in the chosen compactification.
-Source: `def-cbc-completed-exchange-map` (blueprint: thm-cbc-finite-extension). -/
+/-- The target compact-support composite in the chosen compactification. -/
 abbrev cbcCompactSupportTarget
     {A : Type (u + 1)} [CommRing A] {X X' Y' : Scheme.{u}}
     {f' : X' ⟶ Y'} (g' : X' ⟶ X) (c' : Compactification f')
     (d : AdicCoefficientDatum A) :=
   d.completedPull g' ⋙ cbcDerivedOpenShriek d c'.i c'.isOpenImmersion ⋙ d.push c'.g
 
-/-- The source lift whose objects retain the constructibility witness.
-Source: the integral category restriction in the proof
-(blueprint: thm-cbc-finite-extension). -/
+/-- The source lift whose objects retain the constructibility witness. -/
 abbrev cbcCompactSupportSourceLift
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -326,9 +303,7 @@ abbrev cbcCompactSupportSourceLift
       (PbcIsBoundedConstructibleComplete X d) (PbcIsBoundedConstructibleComplete Y' d)
       (cbcCompactSupportSource g c d) (fun K hK ↦ hSource ⟨K, hK⟩)
 
-/-- The target lift whose objects retain the constructibility witness.
-Source: the integral category restriction in the proof
-(blueprint: thm-cbc-finite-extension). -/
+/-- The target lift whose objects retain the constructibility witness. -/
 abbrev cbcCompactSupportTargetLift
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -346,11 +321,7 @@ abbrev cbcCompactSupportTargetLift
       (PbcIsBoundedConstructibleComplete X d) (PbcIsBoundedConstructibleComplete Y' d)
       (cbcCompactSupportTarget g' c' d) (fun K hK ↦ hTarget ⟨K, hK⟩)
 
-/-- The source restriction is additive for the inherited full-subcategory addition.
-Proof: the restriction maps each morphism by the ambient composite. Its additivity
-equation is the ambient equation viewed through the faithful full inclusion.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension). -/
+/-- The source restriction is additive for the inherited full-subcategory addition. -/
 @[instance] theorem cbcCompactSupportSourceLift_additive
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -366,11 +337,7 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
   apply ObjectProperty.hom_ext
   exact Functor.map_add (cbcCompactSupportSource g c d)
 
-/-- The target restriction is additive for the inherited full-subcategory addition.
-Proof: the restriction maps each morphism by the ambient composite. Its additivity
-equation is the ambient equation viewed through the faithful full inclusion.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension). -/
+/-- The target restriction is additive for the inherited full-subcategory addition. -/
 @[instance] theorem cbcCompactSupportTargetLift_additive
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -387,11 +354,7 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
   apply ObjectProperty.hom_ext
   exact Functor.map_add (cbcCompactSupportTarget g' c' d)
 
-/-- The source restriction respects the actual constant-section scalar action.
-Proof: tensor, pullback and direct image commute with scalar multiples of maps on
-representatives. These equations survive localization and full-subcategory restriction.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension). -/
+/-- The source restriction respects the actual constant-section scalar action. -/
 @[instance] theorem cbcCompactSupportSourceLift_linear
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -414,11 +377,7 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
   apply ObjectProperty.hom_ext
   exact Functor.map_smul (cbcCompactSupportSource g c d) a f.hom
 
-/-- The target restriction respects the actual constant-section scalar action.
-Proof: tensor, pullback and direct image commute with scalar multiples of maps on
-representatives. These equations survive localization and full-subcategory restriction.
-Source: blueprint thm-cbc-finite-extension, proof step 1
-(blueprint: thm-cbc-finite-extension). -/
+/-- The target restriction respects the actual constant-section scalar action. -/
 @[instance] theorem cbcCompactSupportTargetLift_linear
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -442,9 +401,7 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
   apply ObjectProperty.hom_ext
   exact Functor.map_smul (cbcCompactSupportTarget g' c' d) a f.hom
 
-/-- The two rational functors obtained by scalar transport of these lifts.
-Source: `prop-weil-pbc-rational-transport`
-(blueprint: thm-cbc-finite-extension). -/
+/-- The two rational functors obtained by scalar transport of these lifts. -/
 abbrev cbcCompactSupportSourceTransport
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -457,9 +414,7 @@ abbrev cbcCompactSupportSourceTransport
     (Padic.coefficientExtensionUniformizer l E)
     (cbcCompactSupportSourceLift l E g c d hSource)
 
-/-- The target rational functor obtained by scalar transport of the target lift.
-Source: `prop-weil-pbc-rational-transport`
-(blueprint: thm-cbc-finite-extension). -/
+/-- The target rational functor obtained by scalar transport of the target lift. -/
 abbrev cbcCompactSupportTargetTransport
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -473,9 +428,7 @@ abbrev cbcCompactSupportTargetTransport
     (Padic.coefficientExtensionUniformizer l E)
     (cbcCompactSupportTargetLift l E g' c' d hTarget)
 
-/-- The canonical scalar-localized component for one integral representative.
-Source: the completed exchange in the compact-support square
-(blueprint: thm-cbc-finite-extension). -/
+/-- The canonical scalar-localized component for one integral representative. -/
 def finiteExtensionCompactSupportExchangeComponent
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -520,24 +473,12 @@ attribute [local irreducible] cbcDerivedOpenShriek
 attribute [local irreducible] ScalarLocalization.transport
 
 /-- The category-domain hypotheses used by the identity and pasted-square clauses.
-This only collects the three geometric conditions from the statement.
-Source: blueprint thm-cbc-finite-extension, statement, first paragraph
-(blueprint: thm-cbc-finite-extension). -/
+This only collects the three geometric conditions from the statement. -/
 def CbcFiniteExtensionDomain (l : ℕ) (T : Scheme.{u}) : Prop :=
   IsNoetherian T ∧ (∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞)) ∧
     ∀ x : T, IsUnit (l : T.presheaf.stalk x)
 
-/-- Intrinsic completeness of a selected integral object, for every presentation of I.
-Source: blueprint thm-cbc-finite-extension, proof step 2
-(blueprint: thm-cbc-finite-extension).
-Proof: membership includes invertibility of the intrinsic Koszul completion unit on
-some generating tuple and representative. The canonical coefficient comparison transports
-that unit, retaining its normalization. Koszul reconstruction identifies it with the
-canonical quotient-tower completion map. For any other finite tuple generating the same
-ideal and any other representative, reconstruction identifies its unit with that same map,
-conjugated by the representative comparison. Its invertibility is therefore unchanged.
-Use the specified Q preimage representative to obtain cbcCompleteProperty. This also
-covers the empty tuple when it generates the ideal; no completeness hypothesis is added. -/
+/-- Intrinsic completeness of a selected integral object, for every presentation of I. -/
 theorem finiteExtension_cbcComplete
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -550,9 +491,7 @@ theorem finiteExtension_cbcComplete
 /-- Localization of an ambient arrow between selected integral objects.
 Applied to a path, this is its rational path: the full inclusion and localization preserve
 composition and identities. In particular the following equations use the actual canonical
-integral comparisons, with no arbitrary endpoint isomorphism.
-Source: blueprint thm-cbc-finite-extension, proof steps 3 and 6
-(blueprint: thm-cbc-finite-extension). -/
+integral comparisons, with no arbitrary endpoint isomorphism. -/
 def finiteExtensionRationalArrow
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

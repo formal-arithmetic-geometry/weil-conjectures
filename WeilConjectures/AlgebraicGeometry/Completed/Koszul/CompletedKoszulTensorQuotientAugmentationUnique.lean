@@ -12,7 +12,6 @@ import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSuppl
 /-! # Uniqueness of the finite strict completed Koszul tensor augmentation
 
 Source: Stacks Project, Tags 091N and 099M.
-(blueprint: new-y2-completed-koszul-tensor-quotient-augmentation-unique).
 -/
 
 @[expose] public noncomputable section
@@ -212,17 +211,7 @@ private theorem completedKoszulUnitZero_isIso (r : ℕ) (a : Fin r → A) (n : �
   exact (completedAdicKoszulUnitZero_exists T d r a n).exists.choose_spec V
 
 set_option linter.unusedVariables false in
-/-- The unit and nonzero-summand formulas determine a strict augmentation uniquely.
-
-Source: Stacks Project, Tags 091N and 099M, the degree-zero augmentation in the
-proof of lemma-naive-completion.
-(blueprint: new-y2-completed-koszul-tensor-quotient-augmentation-unique).
-
-Proof: compare two candidate natural transformations after each quotient-level
-and complex-degree projection. The degree-zero total summand is fixed by the
-unit equation, while every other summand is zero by the vanishing equation.
-The total summand injections jointly detect each component map; natural
-transformation extensionality then gives equality. -/
+/-- The unit and nonzero-summand formulas determine a strict augmentation uniquely. -/
 theorem completedKoszulTensorQuotientAugmentation_unique
     (r : ℕ) (a : Fin r → A)
     (β γ : completedKoszulTensorTower T d r a ⟶

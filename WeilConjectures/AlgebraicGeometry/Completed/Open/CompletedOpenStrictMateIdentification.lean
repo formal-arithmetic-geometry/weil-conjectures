@@ -90,10 +90,7 @@ import WeilConjectures.AlgebraicGeometry.CompletedOpenFiniteTranspose.CompletedO
 /-!
 # The actual completed open exchange and its strict constant-coefficient mate
 
-Source: Stacks Project, Tag 03DI, explicit extension-by-zero unit transpose;
-blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-lem-cbc-completed-extension-zero-comparison.proof.md, finite exchange and final limit.
-(blueprint: lem-cbc-completed-open-strict-mate-identification).
+Source: Stacks Project, Tag 03DI, explicit extension-by-zero unit transpose.
 
 The endpoint comparisons reuse the published scalar, strict quotient, and normalized
 inverse-limit comparisons. The actual strict exchange is constructed before evaluation.
@@ -119,24 +116,19 @@ variable {U' U T' T : Scheme.{u}} {v : U' ⟶ U} {j' : U' ⟶ T'}
   {j : U ⟶ T} {g : T' ⟶ T} [IsOpenImmersion j] [IsOpenImmersion j']
   (sq : OpenImmersionSquare v j' j g)
 
-/-- The actual source Q, using reduction of j!K before strict derived pullback.
-Source: blueprint finite open exchange
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+/-- The actual source Q, using reduction of j!K before strict derived pullback. -/
 abbrev cbcOpenMateSource :=
   cbcDerivedOpenShriek d j inferInstance ⋙ completedReductionTower T d ⋙
     completedTowerPullback g d
 
-/-- The actual target Q', with strict pullback preceding strict open extension.
-Source: blueprint finite open exchange
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+/-- The actual target Q', with strict pullback preceding strict open extension. -/
 abbrev cbcOpenMateTarget :=
   completedReductionTower U d ⋙ completedTowerPullback v d ⋙
     cbcStrictOpen d j' inferInstance
 
 /-- The specified actual strict exchange, transported by the canonical quotient/open
 comparison. Both constituent isomorphisms are already defined before evaluation.
-Source: Stacks 03DI and blueprint finite exchange
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 03DI. -/
 def cbcOpenMateOmega (K : d.derived U) :
     (cbcOpenMateSource d (j := j) (g := g)).obj K ≅
       (cbcOpenMateTarget d (j' := j') (v := v)).obj K :=
@@ -144,27 +136,21 @@ def cbcOpenMateOmega (K : d.derived U) :
     (cbcReductionStrictExchange d sq).app K
 
 /-- M is the scalar restriction of the entire strict reduction tower of K.
-Source: Stacks 099M and blueprint finite reductions
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 099M. -/
 abbrev cbcOpenMateM := completedReductionTower U d ⋙ exchangeTowerRes d U
 
-/-- N = G_g J_j M, in the derived category of constant-A strict towers.
-Source: blueprint strict open exchange
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+/-- N = G_g J_j M, in the derived category of constant-A strict towers. -/
 abbrev cbcOpenMateN :=
   cbcOpenMateM d (U := U) ⋙ ProEtale.StrictTower.J A j ⋙ ProEtale.StrictTower.G A g
 
-/-- N' = J_j' G_v M, with the same strict constant-coefficient operations.
-Source: blueprint strict open exchange
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+/-- N' = J_j' G_v M, with the same strict constant-coefficient operations. -/
 abbrev cbcOpenMateN' :=
   cbcOpenMateM d (U := U) ⋙ ProEtale.StrictTower.G A v ⋙ ProEtale.StrictTower.J A j'
 
 /-- The canonical source comparison a: r(Q) is identified with G_g J_j M.
 It uses the normalized actual-to-datum pullback comparison, the scalar/pullback
 comparison, and the quotient/open comparison, in that order.
-Source: Stacks 03DI, 099N and blueprint scalar comparisons
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 03DI, 099N. -/
 def cbcOpenMateA (K : d.derived U) :
     (exchangeTowerRes d T').obj ((cbcOpenMateSource d (j := j) (g := g)).obj K) ≅
       (cbcOpenMateN d (j := j) (g := g)).obj K :=
@@ -178,8 +164,7 @@ def cbcOpenMateA (K : d.derived U) :
 /-- The canonical target comparison b: r(Q') is identified with J_j' G_v M.
 It first transports strict pullback, then commutes scalar restriction with open
 extension, and finally uses the scalar/pullback comparison inside J_j'.
-Source: Stacks 03DI, 099N and blueprint scalar comparisons
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 03DI, 099N. -/
 def cbcOpenMateB (K : d.derived U) :
     (exchangeTowerRes d T').obj ((cbcOpenMateTarget d (j' := j') (v := v)).obj K) ≅
       (cbcOpenMateN' d (j' := j') (v := v)).obj K :=
@@ -191,8 +176,7 @@ def cbcOpenMateB (K : d.derived U) :
       ((exchangeResPull d v).app ((completedReductionTower U d).obj K))
 
 /-- The already specified constant-A strict open unit-mate, at M = r(K_bullet).
-Source: Stacks 03DI, normalized strict open calculus
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 03DI, normalized strict open calculus. -/
 def cbcOpenMateBeta (K : d.derived U) :
     (cbcOpenMateN d (j := j) (g := g)).obj K ≅
       (cbcOpenMateN' d (j' := j') (v := v)).obj K :=
@@ -201,8 +185,7 @@ def cbcOpenMateBeta (K : d.derived U) :
       ((cbcOpenMateM d (U := U)).obj K)
 
 /-- Quasi-compactness of the base-changed open, supplied by the cartesian square.
-Source: Stacks 01K5
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 01K5. -/
 abbrev cbcOpenMateQC [QuasiCompact j] : QuasiCompact j' :=
   MorphismProperty.of_isPullback
     (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
@@ -210,8 +193,7 @@ abbrev cbcOpenMateQC [QuasiCompact j] : QuasiCompact j' :=
 
 /-- The completed source endpoint, including the specified scalar/limit comparison
 and strict quotient/open identification. No endpoint isomorphism is freely chosen.
-Source: Stacks 099M, 099N and blueprint ordered limit
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 099M, 099N. -/
 def cbcOpenMateCompletedA (K : d.derived U) :
     (cbcRealizationRes d T').mapDerivedCategory.obj
         ((d.completedPull g).obj ((cbcDerivedOpenShriek d j inferInstance).obj K)) ≅
@@ -223,8 +205,7 @@ def cbcOpenMateCompletedA (K : d.derived U) :
 
 /-- The completed target endpoint, before applying the normalized constant-A
 open/limit comparison. The coefficient and pullback comparisons retain their units.
-Source: Stacks 03DI, 099N and blueprint ordered limit
-(blueprint: lem-cbc-completed-open-strict-mate-identification). -/
+Source: Stacks 03DI, 099N. -/
 def cbcOpenMateCompletedB (K : d.derived U) :
     (cbcRealizationRes d T').mapDerivedCategory.obj
         ((cbcDerivedOpenShriek d j' inferInstance).obj ((d.completedPull v).obj K)) ≅

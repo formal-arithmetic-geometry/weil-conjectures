@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 # Functoriality of deformation spaces along `J = h⁻¹ I`
 
 Let `h : X' ⟶ X` be a morphism of schemes, `I` an ideal sheaf on `X` and `J = h⁻¹ I · 𝒪_{X'}`.
-Blueprint `lemma-functoriality-deformation`:
+Then:
 
 * if `h` is smooth, so is the morphism of deformation spaces `D_J X' ⟶ D_I X`;
 * the morphism of normal cones `N_J X' ⟶ N_I X` pulls the zero section `V(I) ⟶ N_I X` back to the
@@ -45,8 +45,8 @@ variable {X X' : Scheme.{u}} (h : X' ⟶ X) (I : X.IdealSheafData) (J : X'.Ideal
   (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
     (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U')
 
-/-- (blueprint `lemma-functoriality-deformation`) If `h` is smooth and `J = h⁻¹ I`, then the
-morphism of deformation spaces `D_J X' ⟶ D_I X` is smooth, being a base change of `h`. -/
+/-- If `h` is smooth and `J = h⁻¹ I`, then the morphism of deformation spaces `D_J X' ⟶ D_I X` is
+smooth, being a base change of `h`. -/
 theorem smooth_deformationSpaceMap [Smooth h] (hJI : J = I.comap h) :
     Smooth (deformationSpaceMap h I J hJ) :=
   MorphismProperty.of_isPullback (isPullback_deformationSpaceMap_of_flat h I J hJ hJI).flip
@@ -110,11 +110,9 @@ lemma isPushout_normalConePullbackData_map {U' : X'.AffineZariskiSite} {U : X.Af
     (I.surjective_normalConeToQuotient_app _) (J.surjective_normalConeToQuotient_app _)
     (map_ker_normalConeToQuotient h I J hJ hU hJeq)
 
-/-- **Blueprint `lemma-functoriality-deformation`, `f̃_s⁻¹(Z) = Z'` schematically** (also
-blueprint `lemma-normal-cones-contracting-ideals` (1), scheme-theoretically, with `h = c₁` and
-`J = I₁`). If `J = h^* I · 𝒪_{X'}` (on all pairs of affine opens `U' ⊆ h⁻¹ U`), then the zero
-section `V(J) ⟶ N_J X'` is the pullback of the zero section `V(I) ⟶ N_I X` along the morphism of
-normal cones `N_J X' ⟶ N_I X`. -/
+/-- **`f̃_s⁻¹(Z) = Z'` schematically**. If `J = h^* I · 𝒪_{X'}` (on all pairs of affine opens
+`U' ⊆ h⁻¹ U`), then the zero section `V(J) ⟶ N_J X'` is the pullback of the zero section
+`V(I) ⟶ N_I X` along the morphism of normal cones `N_J X' ⟶ N_I X`. -/
 theorem isPullback_normalConeZeroSection_normalConeMap
     (hJeq : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
       (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom = J.siteIdeal U') :
@@ -136,9 +134,9 @@ theorem isPullback_normalConeZeroSection_normalConeMap
     ← PullbackData.ι_comparison _ _ (normalConePullbackData h I J hJ) hU] at P
   exact P
 
-/-- **Blueprint `lemma-functoriality-deformation`, `f̃_s⁻¹(Z) = Z'` schematically** (also
-blueprint `lemma-normal-cones-contracting-ideals` (1)), for `J = h⁻¹ I` the ideal sheaf of the
-scheme-theoretic preimage. -/
+/-- **`f̃_s⁻¹(Z) = Z'` schematically**: the zero section `V(J) ⟶ N_J X'` is the pullback of the
+zero section `V(I) ⟶ N_I X` along the morphism of normal cones, for `J = h⁻¹ I` the ideal sheaf
+of the scheme-theoretic preimage. -/
 theorem isPullback_normalConeZeroSection_normalConeMap_comap (hJI : J = I.comap h) :
     IsPullback J.normalConeZeroSection (quotientSpecMap h I J hJ) (normalConeMap h I J hJ)
       I.normalConeZeroSection := by

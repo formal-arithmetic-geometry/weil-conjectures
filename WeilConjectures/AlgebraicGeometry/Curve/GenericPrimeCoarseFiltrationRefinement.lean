@@ -11,9 +11,6 @@ import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 
 /-!
 # Refinement of constant-vector-space quotient filtrations
-
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2.
-(blueprint: lem-sc-generic-prime-coarse-filtration-refinement)
 -/
 
 @[expose] public section
@@ -27,17 +24,7 @@ open CategoryTheory CategoryTheory.Limits ZeroObject
 namespace AlgebraicGeometry.IsConnectedCurve
 
 /-- A coarse finite filtration with finite direct sums of prime constant sheaves as
-quotients admits a refinement with rank-one prime constant quotients and unchanged endpoint.
-
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2 (refine a basis flag).
-Proof: prime constant objects generate an isomorphism-closed object property P. Its finite
-filtration closure is closed under extensions. Every finite iterated binary direct sum of
-one prime constant object belongs to that closure, by induction and split exact sequences.
-Induct along the given coarse filtration to put its endpoint in the closure. The explicit
-chain characterization of the closure gives the required refined chain, extended constantly
-past its last index. Zero-dimensional quotients contribute no steps, and a length-zero input
-chain is handled by the zero-object constructor.
-(blueprint: lem-sc-generic-prime-coarse-filtration-refinement) -/
+quotients admits a refinement with rank-one prime constant quotients and unchanged endpoint. -/
 theorem exists_prime_filtration_of_coarse
     (X : Scheme.{u}) (n : ℕ)
     (F : ℕ → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

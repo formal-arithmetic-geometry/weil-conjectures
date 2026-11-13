@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 /-! # Geometric factorization of stratified pro-etale charts
 
 Source: Stacks Tags 09C3 and 09Y4, finite affine cover and base-change argument.
-(blueprint: lem-sf-affine-open-closed-chart-factorization)
 -/
 
 @[expose] public noncomputable section
@@ -377,23 +376,7 @@ private theorem finiteAffineOver {W Y : Scheme.{u}} [CompactSpace W] (f : W ⟶ 
 /-- Given source charts with any property, target charts factor through source charts.
 No preservation of that property under pullback is assumed or asserted.
 
-Source: Stacks proetale.tex, Tag 09C3, local-structure argument; Topology Tag 09Y4.
-(blueprint: lem-sf-affine-open-closed-chart-factorization).
-
-Proof: choose a finite affine cover of U subordinate to inverse images of affine
-opens of Y. Enumerate all leaves of the supplied source trees. Their path maps
-are quasi-compact immersions with constructible images covering each root, by
-induction on the tree and the complementary-range equation at every split.
-Pull them back along the chosen affine maps and compose with the affine open
-inclusions into U. Their constructible images form a finite cover of U. The
-constructible-immersion partition construction produces a finite qcqs open--closed
-tree whose nonempty leaves factor through members of this family, and hence through
-source leaves. Pull back the finite source pro-etale chart cover along this
-factorization. These pullbacks are qcqs, since the source charts are quasi-compact
-over quasi-separated source leaves. The pullback range equation proves coverage.
-The two fibre-product equations give the desired map to the original source chart
-and the equality over Y. The property C remains on that original source chart;
-no transport of C is needed. Empty leaves impose no condition. -/
+Source: Stacks proetale.tex, Tag 09C3, local-structure argument; Topology Tag 09Y4. -/
 theorem affineOpenClosedChartFactorization
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hs : IsSeparated f) (_ht : LocallyOfFiniteType f) (_hq : QuasiCompact f)

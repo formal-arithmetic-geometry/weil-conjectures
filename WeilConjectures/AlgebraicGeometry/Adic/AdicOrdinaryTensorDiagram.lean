@@ -26,9 +26,8 @@ import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-! # Ordinary algebraic quotient tensor diagrams
 
-Source: Stacks Project, More on Algebra, Tag 09AW; More on Algebra, Tag 06Y6.
-(blueprint: lem-weil-pbc-adic-ordinary-tensor-levels).
-The coefficient maps are the actual quotient homomorphisms, viewed as linear maps.
+Source: Stacks Project, More on Algebra, Tag 09AW; More on Algebra, Tag 06Y6. The coefficient maps
+are the actual quotient homomorphisms, viewed as linear maps.
 -/
 
 @[expose] public noncomputable section
@@ -85,9 +84,7 @@ private theorem algebraicFlatResolution (A : Type t) [CommRing A] :
   rfl
 
 /-- K-flatness makes the transpose of the localized ordinary unit invertible.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-weil-pbc-adic-ordinary-tensor-levels).
-Proof: apply the exact-right-adjoint K-flat representative criterion, using free
-module flat resolutions and preservation of K-flat quasi-isomorphisms by scalar extension. -/
+Source: Stacks Project, Tag 06Y6. -/
 theorem adicOrdinaryTranspose_isIso
     {A B : Type t} [CommRing A] [CommRing B] (φ : A →+* B)
     (L : DerivedCategory (ModuleCat.{t} A) ⥤ DerivedCategory (ModuleCat.{t} B))
@@ -110,7 +107,7 @@ theorem adicOrdinaryTranspose_isIso
     ⟨fun _ _ s hs ↦ hP.1 s hs, fun _ _ s hs ↦ hP.2 s hs⟩
 
 /-- Restriction of ordinary scalar extension is tensor with the coefficient module.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-weil-pbc-adic-ordinary-tensor-levels). -/
+Source: Stacks Project, Tag 06Y6. -/
 def adicOrdinaryRestrictedTensorIso
     {A B : Type t} [CommRing A] [CommRing B] (φ : A →+* B) :
     ModuleCat.extendScalars.{t, t, t} φ ⋙ ModuleCat.restrictScalars φ ≅
@@ -131,7 +128,7 @@ def adicOrdinaryRestrictedTensorIso
   exact e ≪≫ BraidedCategory.tensorLeftIsoTensorRight V
 
 /-- The restricted extension complex is the ordinary quotient tensor complex.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-weil-pbc-adic-ordinary-tensor-levels). -/
+Source: Stacks Project, Tag 06Y6. -/
 def adicOrdinaryQuotientComplexIso
     {A : Type t} [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{t} A) ℤ) (n : ℕ) :
@@ -144,7 +141,6 @@ def adicOrdinaryQuotientComplexIso
 
 /-- The restricted transpose of scalar insertion, defined on every complex.
 Source: Stacks Project, Tag 06Y6, K-flat computation of derived scalar extension.
-(blueprint: lem-weil-pbc-adic-ordinary-tensor-levels).
 Compose the restricted transpose with exact scalar restriction and tensor symmetry. -/
 def adicOrdinaryTensorLevelMap
     {A : Type t} [CommRing A] (I : Ideal A)
@@ -166,9 +162,7 @@ def adicOrdinaryTensorLevelMap
     DerivedCategory.Q.map (adicOrdinaryQuotientComplexIso I P n).hom
 
 /-- K-flatness makes the explicitly defined level map invertible.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-weil-pbc-adic-ordinary-tensor-levels).
-Proof: its transpose is invertible by the derived-adjunction criterion; restriction,
-the exact factorization and tensor symmetry preserve invertibility. -/
+Source: Stacks Project, Tag 06Y6. -/
 theorem adicOrdinaryTensorLevelMap_isIso
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

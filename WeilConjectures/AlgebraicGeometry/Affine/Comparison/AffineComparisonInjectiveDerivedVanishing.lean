@@ -34,7 +34,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Comparison.AffineComparisonInjec
 # Affine comparison vanishing for Grothendieck abelian coefficients
 
 The categorical form of the finite Čech argument in Stacks Project, Tag 099U.
-(blueprint: stage3-affine-comparison-injective-derived-vanishing)
 -/
 
 @[expose] public section
@@ -52,31 +51,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
 
 /-- On an affine scheme, the comparison pullback of an injective étale sheaf has zero
 positive derived global sections, with Grothendieck abelian coefficients.
-Source: Stacks Project, Tag 099U, finite Čech proof with exact filtered colimits.
-(blueprint: stage3-affine-comparison-injective-derived-vanishing)
-
-Proof: use affine ind-étale objects over X as a basis. Every cover has a finite refinement
-in this basis, and the basis is closed under fibre products. To check positive Čech
-vanishing for a finite basis cover, present each member as a directed limit of affine
-étale schemes over the covered object. The product of the finitely many directed index
-sets is directed, and each stage family covers, since points lift through the original
-cover. Fibre products commute with these limits. The comparison section formula and
-continuity of étale sections identify each term, compatibly with every face map, with
-the filtered colimit of its stage terms. Finite products and homology commute with this
-colimit because A is Grothendieck abelian.
-
-It remains to check finite affine étale covers of a basis object U. Present U as a directed
-limit of affine étale X-schemes. Finite presentation descends the finite cover to one
-stage, and joint surjectivity holds on a cofinal tail. Its intersections are the base
-changes of the stage intersections. Apply section continuity again, with its naturality
-for the face maps: the Čech complex is the filtered colimit of the Čech complexes of I
-on the original étale site of X. Injectivity of I makes these complexes exact in positive
-degrees. Thus every finite basis cover has vanishing positive Čech cohomology. The Čech
-vanishing criterion gives zero derived evaluation on basis objects; take the terminal
-object X. The empty cover has a zero positive complex, so the empty affine scheme is
-included. This argument uses injectivity only on X's étale site and only finite products;
-it does not assume exact infinite products or injectivity after arbitrary scheme pullback.
--/
+Source: Stacks Project, Tag 099U, finite Čech proof with exact filtered colimits. -/
 theorem isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine
     (X : Scheme.{u}) [IsAffine X]
     (I : Sheaf X.smallEtaleTopology A) [Injective I] (q : ℕ) :

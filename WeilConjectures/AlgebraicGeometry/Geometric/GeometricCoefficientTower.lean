@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! # Explicit transport of a coefficient tower by inverse image
 
 Source: Zheng Construction 4.1; Stacks 03D2.
-(blueprint: lem-coef-geometric-coefficient-tower)
 -/
 
 @[expose] public noncomputable section
@@ -35,19 +34,7 @@ attribute [local irreducible] SheafOfModules.CochainCompositeConstruction.ringIm
   SheafOfModules.CochainCompositeConstruction.algebraicImage
 
 /-- A coefficient tower and its algebraic inverse images are transported explicitly.
-Source: Zheng Construction 4.1; Stacks 03D2.
-(blueprint: lem-coef-geometric-coefficient-tower).
-
-Proof: transport each ring object and its module operations by finite products,
-using the actual ringImage and algebraicImage constructions. For a transition,
-compose its transported underlying map with the fixed ring-underlying isomorphism.
-Its addition, multiplication and unit graphs are preserved: first apply the original
-ring homomorphism to the graph equation and then the algebraic inverse-image graph
-law at the next level. The structuralMap lemma bundles this map into a ring-sheaf
-morphism. Choose that morphism, whose underlying map is specified uniquely. Its
-specified underlying equation and cancellation of the ring-underlying isomorphism
-give compatibility. No existence theorem with an unspecified object is used in a
-definition. -/
+Source: Zheng Construction 4.1; Stacks 03D2. -/
 theorem geometricCoefficientTower
     {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
     (J' : GrothendieckTopology C')

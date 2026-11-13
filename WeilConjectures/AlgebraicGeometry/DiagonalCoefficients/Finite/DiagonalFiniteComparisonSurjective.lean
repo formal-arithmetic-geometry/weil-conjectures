@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Geo.GeoP1Cohomology
 
 /-! # Lifting finite-line morphisms through the site comparison
-
-Source: bounded-below cohomology comparison, specialized to a sheaf shifted by two.
-(blueprint: lem-diagonal-finite-comparison-surjective).
 -/
 
 @[expose] public noncomputable section
@@ -23,15 +20,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 attribute [local irreducible] Functor.mapDerivedCategory HasDerivedCategory.standard
   Scheme.finiteEtaleTateLine
 
-/-- Every arrow to the finite line shifted by two has an ordinary etale preimage.
-Source: bounded-below cohomology comparison (theorem-bounded-below-cohomology-comparison).
-(blueprint: lem-diagonal-finite-comparison-surjective).
-
-Proof: the target is a sheaf in degree zero shifted by two, so it lies in degrees
-at least -2. The existing comparison Hom map is bijective whenever its target
-is bounded below. Apply its surjectivity to w and reverse the resulting equation.
-No positivity, finiteness, or nonemptiness is required; zero rings, N=0, and the
-empty scheme satisfy the same argument. -/
+/-- Every arrow to the finite line shifted by two has an ordinary etale preimage. -/
 theorem finite_comparison_surjective
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (X : Scheme.{u})

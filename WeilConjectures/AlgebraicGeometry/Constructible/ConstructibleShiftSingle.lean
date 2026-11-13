@@ -41,10 +41,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- A constructible module placed in degree zero stays bounded constructible after any shift.
 
-Source: the shifted-single isomorphism and the defining homology criterion for
-`boundedConstructible`. Its cohomology in degree `-n` is the original module, and all
-other cohomology objects are zero. Transport constructibility through these isomorphisms.
-(blueprint: lem-poincare-constructible-shift-single) -/
+ Its cohomology in degree `-n` is the original module, and all other cohomology objects are zero.
+Transport constructibility through these isomorphisms. -/
 theorem boundedConstructible_shift_single
     (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R)
     (hM : IsConstructibleModuleObject R M) (n : ℤ) :

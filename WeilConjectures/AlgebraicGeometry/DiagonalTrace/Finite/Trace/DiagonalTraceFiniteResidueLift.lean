@@ -17,18 +17,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory
   Functor.mapDerivedCategory diagonalFiniteToPadic SpTowerClasses.lineModule
 
-/-- Finite evaluation of the Chern arrow admits a genuine residue representative.
-
-Source: blueprint diagonal tower system, finite coefficient realization before restriction.
-(blueprint: lem-sfb-diagonal-trace-finite-residue-lift).
-
-Proof: the scalar-action equation of r shows that evaluation is annihilated by the positive
-prime power. Quotient reduction of sheaves of modules therefore gives a natural isomorphism
-from this evaluation to residue reduction followed by restriction. Restriction reflects exactness,
-so this residue functor is exact. Lift the two frame endpoints through fully faithful restriction,
-apply the exact residue functor to the tower Ext class, and transport its endpoints.
-Naturality of exact-functor Ext and single comparisons supplies the coordinate equation.
-No assertion that arbitrary p-adic derived restriction is fully faithful is used. -/
+/-- Finite evaluation of the Chern arrow admits a genuine residue representative. -/
 theorem diagonalTrace_finiteResidue_lift (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

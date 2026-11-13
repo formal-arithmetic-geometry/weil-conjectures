@@ -99,12 +99,7 @@ theorem sheafModuleHom_ext_of_local {C : Type*} [Category C] {J : GrothendieckTo
 
 /-- The consecutive arrows of fixed-scalar coordinates normalized on sheafified pure tensors
 are unique.
-Source: Stacks Project, Tags 03CY and 09C6.
-
-Proof: every section of an ordinary scalar extension is locally the sheafification of a finite
-sum of pure tensors. The localization functor of the chart is cocontinuous, so the sections
-over charts are locally of that form within the chart site. Both arrows are additive and
-agree on pure tensors, hence on these local generators; the target is a sheaf. -/
+Source: Stacks Project, Tags 03CY and 09C6. -/
 theorem finitePerfectAdicQuotientTransition_unique
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

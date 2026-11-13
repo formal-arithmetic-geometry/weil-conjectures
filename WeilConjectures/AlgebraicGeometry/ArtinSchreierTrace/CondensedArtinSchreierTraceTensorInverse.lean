@@ -16,10 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 
 /-! # Tensor inverse and inverse character of condensed Artin–Schreier sheaves
 
-Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lemma-artin-schreier-character-sheaf, proof Step 5, tensor inverse (blueprint:
-lem-fd-as-trace-tensor-inverse).
-
 Stated for any condensed coefficient ring in which `q = #k` is a unit and any nontrivial
 character of `k`; the Qbar trace-character case gives the inverse clauses of
 `qlbar_artinSchreier_trace_tensor_properties`.
@@ -463,23 +459,7 @@ end AlgebraicGeometry.ArtinSchreierTrace
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- `L_{ψ,f} ⊗ L_{ψ,-f}` and `L_{ψ,-f} ⊗ L_{ψ,f}` are the regular module, and
-`L_{ψ⁻¹,f} ≅ L_{ψ,-f}`.
-Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5
-(blueprint: lem-fd-as-trace-tensor-inverse).
-
-Proof: the existing character-projector evaluation theorem identifies the pullback of
-the character image to the Artin–Schreier cover with the regular module. Pulling back
-along the zero section, which Artin–Schreier fixes, and then along the structural map
-of `X` proves the zero-function trivialization. Tensor addition at `f, -f` gives the
-first inverse; braiding gives the other order.
-
-Negation is an involution commuting with Artin–Schreier and conjugating translation by
-`a` to translation by `-a`. Functoriality of direct image and the regular-module unit maps
-transport this identity to the pushforward; uniqueness of right adjoints identifies
-pullback and pushforward along negation. Reindexing the projector sum by negation then
-conjugates the `ψ` and `ψ⁻¹` projectors. Pullback preserves their images, and pulling back
-along the morphism defined by `f` gives the last isomorphism. The argument also applies in
-characteristic two and on the empty base. -/
+`L_{ψ⁻¹,f} ≅ L_{ψ,-f}`. -/
 theorem condensedArtinSchreier_tensor_inverse_generic
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]
@@ -616,14 +596,7 @@ private theorem scaling_projector_conjugate (ψ : AddChar k (MonObj.Γ Λ)) :
     mul_neg, ← mul_assoc, Units.mul_inv, one_mul]
 
 /-- Pullback along the scaling `[c] : x ↦ c x` of the affine line by `c ∈ kˣ` carries the
-condensed Artin–Schreier sheaf of `ψ` to that of the shifted character `ψ(c ·)`.
-Source: blueprint lemma-artin-schreier-character-sheaf (2) (blueprint:
-lemma-artin-schreier-character-sheaf--2).
-
-Proof: the scaling `[c]` is an automorphism commuting with Artin–Schreier and conjugating
-translation by `c⁻¹ a` to translation by `a`. As for negation, pullback along `[c]` is
-pushforward along `[c⁻¹]`, and it carries the `ψ`-projector to the `ψ(c ·)`-projector after
-reindexing the average by `a ↦ c⁻¹ a`. Pullback preserves images. -/
+condensed Artin–Schreier sheaf of `ψ` to that of the shifted character `ψ(c ·)`. -/
 theorem nonempty_iso_upperStar_scaling_condensedArtinSchreierSheaf
     (ψ : AddChar k (MonObj.Γ Λ)) :
     Nonempty ((CondensedRing.upperStar Λ S).obj (condensedArtinSchreierSheaf Λ k ψ) ≅

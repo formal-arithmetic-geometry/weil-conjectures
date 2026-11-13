@@ -45,7 +45,7 @@ in which `hg : g ≫ fZ = pullback.fst fX fY ≫ fX` says that `g` is a morphism
 The fibres of `(g, pr₂) = pullback.lift g (pullback.snd fX fY) _` over `Y` are spelled with
 `AlgebraicGeometry.Scheme.Hom.fiberMap`.
 
-The blueprint uses the rigidity lemma to prove that abelian varieties are commutative. That
+The rigidity lemma is the classical route to commutativity of abelian varieties; here that
 corollary is proved instead in `WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic` from
 Mathlib's `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral`, so the results
 below are recorded for their own sake and have no consumer in this repository yet.
@@ -63,6 +63,25 @@ below are recorded for their own sake and have no consumer in this repository ye
   over `y`, then `g` factors through the second projection over a neighbourhood of `y`.
 - `AlgebraicGeometry.exists_eq_snd_comp`: the rigidity lemma, `g` factors through the second
   projection.
+
+## Implementation details
+
+In `AlgebraicGeometry.isClosed_setOf_subsingleton_image`, constancy must be tested on the
+geometric fibre, not on the set-theoretic image of `X ×_K {y}` in `Z`: for `K` algebraically
+closed of characteristic `≠ 2`, `X = Spec K ⊔ Spec K`, `Y = Z = 𝔸¹_K` and
+`g = (t ↦ t, t ↦ -t)`, that image is one point exactly for `y` the generic point or `y = 0`,
+which is not a closed set.
+
+In the rigidity lemma `AlgebraicGeometry.exists_eq_snd_comp`, neither geometric hypothesis on `X`
+can be dropped on its own. For `K = ℝ`, `X = Spec ℂ`, `Y = 𝔸¹_ℝ`, `Z = 𝔸¹_ℂ` and `g` the identity
+of `X ×_K Y = 𝔸¹_ℂ`, `X` is connected and geometrically reduced but not geometrically connected,
+and `g` does not factor. For `K` imperfect of characteristic `p`, `a ∈ K ∖ K^p`,
+`K' = K(a^{1/p})`, `X = Spec K'`, `Y = 𝔸¹_K`, `Z = 𝔸¹_{K'}` and `g` the identity of
+`X ×_K Y = 𝔸¹_{K'}`, `X` is geometrically connected and reduced but not geometrically reduced,
+and `g` does not factor since `pr₂ : 𝔸¹_{K'} ⟶ 𝔸¹_K` is not a monomorphism. In both examples
+`Γ(X, 𝒪_X) ≠ K`. The proof of the rigidity lemma does not use
+`AlgebraicGeometry.eventually_finite_image`, and needs neither `Z` locally of finite type nor `y₀`
+`K`-rational.
 -/
 
 @[expose] public section
@@ -75,19 +94,11 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- The general form of blueprint `lemma-rigidity`. Let `F : A ⟶ B` be a morphism
+/-- Let `F : A ⟶ B` be a morphism
 of schemes over `Y`, with `a : A ⟶ Y` universally open and locally of finite type and with
 `b : B ⟶ Y` separated. Then the locus of `y : Y` such that the base change
 `F_ȳ : A_{κ(y)‾} ⟶ B_{κ(y)‾}` of `F` along the geometric point `ȳ` over `y` has subsingleton
-image is closed.
-
-Following the blueprint, write `Φ : A ×_Y A ⟶ B ×_Y B` for the product of `F` with itself and
-`π : A ×_Y A ⟶ Y` for the projection. The locus is the complement of the image under `π` of the
-open set `U` of points that `Φ` sends off the diagonal of `b`, and `π` is an open map. To see
-that `y` lies outside `π(U)` exactly when the image of `F_ȳ` is a subsingleton, base change
-along `ȳ`: the diagonal of `B_{κ(y)‾}` is the preimage of the diagonal of `b`
-(`Scheme.Pullback.map_fst_mem_range_diagonal_iff`), and if the image of `F_ȳ` is a single point
-then that point is a `κ(y)‾`-point, since `A_{κ(y)‾}` has a closed, hence rational, point. -/
+image is closed. -/
 theorem isClosed_setOf_subsingleton_range_fiberMap {A B Y : Scheme.{u}} (a : A ⟶ Y)
     (b : B ⟶ Y) [UniversallyOpen a] [LocallyOfFiniteType a] [IsSeparated b] (F : A ⟶ B)
     (hF : F ≫ b = a) :
@@ -166,19 +177,12 @@ theorem isClosed_setOf_subsingleton_range_fiberMap {A B Y : Scheme.{u}} (a : A �
         simp [hA, π, pullback.condition]
       rw [← Scheme.Hom.comp_apply, this, Scheme.Hom.comp_apply, hp]
 
-/-- Blueprint `lemma-rigidity`: The locus of constant fibres is closed
-
-Let `X` be a `K`-scheme proper over `K`, let `Z` be separated over `K`, let `Y` be any
+/-- Let `X` be a `K`-scheme proper over `K`, let `Z` be separated over `K`, let `Y` be any
 `K`-scheme and let `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes. For `y : Y` let
 `g_ȳ : X_{κ(y)‾} ⟶ Z_{κ(y)‾}` be the base change of `(g, pr₂) : X ×_K Y ⟶ Z ×_K Y` along the
 geometric point `ȳ` over `y`. Then the locus `L = {y ∈ Y | g_ȳ(X_{κ(y)‾}) is a subsingleton}` is
 closed in `Y`. For nonempty `X` the image of `g_ȳ` is a subsingleton exactly when it is a single
-point.
-
-Constancy must be tested on the geometric fibre, not on the set-theoretic image of
-`X ×_K {y}` in `Z`: for `K` algebraically closed of characteristic `≠ 2`,
-`X = Spec K ⊔ Spec K`, `Y = Z = 𝔸¹_K` and `g = (t ↦ t, t ↦ -t)`, that image is one point
-exactly for `y` the generic point or `y = 0`, which is not a closed set. -/
+point. -/
 theorem isClosed_setOf_subsingleton_image {X Y Z : Scheme.{u}}
     (fX : X ⟶ Spec (.of K)) (fY : Y ⟶ Spec (.of K)) (fZ : Z ⟶ Spec (.of K)) [IsProper fX]
     [IsSeparated fZ] (g : pullback fX fY ⟶ Z) (hg : g ≫ fZ = pullback.fst fX fY ≫ fX) :
@@ -188,22 +192,11 @@ theorem isClosed_setOf_subsingleton_image {X Y Z : Scheme.{u}}
       (pullback.lift_snd _ _ _) (Y.fromSpecAlgebraicClosureResidueField y)).base).Subsingleton} :=
   isClosed_setOf_subsingleton_range_fiberMap _ _ _ _
 
-/-- Finiteness of the image is open in the parameter
-
-Let `X` be proper over `K`, let `Z` be separated and locally of finite type over `K`, let
+/-- Let `X` be proper over `K`, let `Z` be separated and locally of finite type over `K`, let
 `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes and let `y₀ ∈ Y`. For `y : Y` let
 `g_y : X_{κ(y)} ⟶ Z_{κ(y)}` be the fibre of `(g, pr₂) : X ×_K Y ⟶ Z ×_K Y` over `y`. If the
 image of `g_{y₀}` is finite, then the image of `g_y` is finite for every `y` in some open
-neighbourhood of `y₀`.
-
-Following the blueprint, apply Stacks Tag 0AH8
-(`exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage`) to `h = (g, pr₂)` over
-`Y`: as `h ≫ pr₂ = pr₂` is proper and `pr₂ : Z ×_K Y ⟶ Y` is separated and locally of finite type,
-the image of `h` is finite over an open neighbourhood `U` of `y₀`, so its fibres over the points of
-`U` are finite. The image of `g_y` is identified with `h (pr₂⁻¹ {y})` by
-`Scheme.Hom.finite_range_fiberMap_iff`.
-
-The rigidity lemma `AlgebraicGeometry.exists_eq_snd_comp` does not depend on this result. -/
+neighbourhood of `y₀`. -/
 theorem eventually_finite_image {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
     (fY : Y ⟶ Spec (.of K)) (fZ : Z ⟶ Spec (.of K)) [IsProper fX] [IsSeparated fZ]
     [LocallyOfFiniteType fZ] (g : pullback fX fY ⟶ Z)
@@ -231,17 +224,11 @@ theorem eventually_finite_image {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
   refine ⟨h.toImage x, ?_, ?_⟩ <;>
     simp_all [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base]
 
-/-- Step 4 of blueprint `lemma-rigidity` (`lemma-rigidity`): if `X` is proper,
-geometrically connected and geometrically reduced over `K` and `g : X ×_K Y ⟶ Z` contracts the
-fibre `X ×_K {y}` of the second projection `pr₂` to a point, then `g` factors through `pr₂` over
-an open neighbourhood `U` of `y`: there is `h : U ⟶ Z` over `K` such that `a ≫ g = b ≫ h`
-whenever `a : T ⟶ X ×_K Y` and `b : T ⟶ U` agree in `Y`.
-
-Following the blueprint, choose an affine open `V` around the image point. As `pr₂` is closed,
-`Y ∖ pr₂ (g⁻¹ (Z ∖ V))` is an open neighbourhood of `y`; choose an affine open `U` around `y`
-inside it, so that `g` maps `X ×_K U` into `V`. Since `Γ(X, 𝒪_X) = K` (Stacks 0BUG), flat base
-change gives `Γ(X ×_K U, 𝒪) = Γ(U, 𝒪_U)`, so the morphism `X ×_K U ⟶ V` to the affine scheme
-`V` factors through `pr₂ : X ×_K U ⟶ U`. -/
+/-- If `X` is proper, geometrically connected and
+geometrically reduced over `K` and `g : X ×_K Y ⟶ Z` contracts the fibre `X ×_K {y}` of the second
+projection `pr₂` to a point, then `g` factors through `pr₂` over an open neighbourhood `U` of `y`:
+there is `h : U ⟶ Z` over `K` such that `a ≫ g = b ≫ h` whenever `a : T ⟶ X ×_K Y` and `b : T ⟶ U`
+agree in `Y`. -/
 theorem exists_mem_and_comp_eq_of_subsingleton_image {X Y Z : Scheme.{u}}
     (fX : X ⟶ Spec (.of K)) (fY : Y ⟶ Spec (.of K)) (fZ : Z ⟶ Spec (.of K)) [IsProper fX]
     [GeometricallyConnected fX] [GeometricallyReduced fX] (g : pullback fX fY ⟶ Z)
@@ -297,10 +284,8 @@ theorem exists_mem_and_comp_eq_of_subsingleton_image {X Y Z : Scheme.{u}}
       · simp [j, p, hab, pullback.map]
     rw [this, Category.assoc, ← hfac, pullback.lift_snd_assoc]
 
-/-- Blueprint `lemma-rigidity`: The rigidity lemma
-
-Let `X`, `Y`, `Z` be `K`-schemes with `X` proper, geometrically connected and geometrically
-reduced over `K`, with `Y` connected and with `Z` separated over `K`, and let
+/-- **Rigidity lemma.** Let `X`, `Y`, `Z` be `K`-schemes with `X` proper, geometrically connected
+and geometrically reduced over `K`, with `Y` connected and with `Z` separated over `K`, and let
 `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes. If `g (X ×_K {y₀})` is a single point for some
 point `y₀ ∈ Y`, then `g` factors through the second projection: `g = pr₂ ≫ h` for some
 `h : Y ⟶ Z`, that is, the triangle
@@ -313,25 +298,7 @@ point `y₀ ∈ Y`, then `g` factors through the second projection: `g = pr₂ �
                 ╲──────────────────▶ Z
 ```
 
-commutes. The set `g (X ×_K {y₀})` is spelled as the range of the restriction of `g` to the
-scheme-theoretic fibre of `pr₂` over `y₀`; the point `y₀` need not be `K`-rational.
-
-Neither geometric hypothesis on `X` can be dropped on its own. For `K = ℝ`, `X = Spec ℂ`,
-`Y = 𝔸¹_ℝ`, `Z = 𝔸¹_ℂ` and `g` the identity of `X ×_K Y = 𝔸¹_ℂ`, `X` is connected and
-geometrically reduced but not geometrically connected, and `g` does not factor. For `K`
-imperfect of characteristic `p`, `a ∈ K ∖ K^p`, `K' = K(a^{1/p})`, `X = Spec K'`, `Y = 𝔸¹_K`,
-`Z = 𝔸¹_{K'}` and `g` the identity of `X ×_K Y = 𝔸¹_{K'}`, `X` is geometrically connected and
-reduced but not geometrically reduced, and `g` does not factor since `pr₂ : 𝔸¹_{K'} ⟶ 𝔸¹_K` is
-not a monomorphism. In both examples `Γ(X, 𝒪_X) ≠ K`.
-
-This is also blueprint `lemma-rigidity`. The proof follows the blueprint with one change: `L`
-is the set of `y` near which `g` factors through `pr₂`. It is open by definition and contains
-`y₀` by `AlgebraicGeometry.exists_mem_and_comp_eq_of_subsingleton_image` (Step 4). The same
-lemma shows that `L` is the locus of `AlgebraicGeometry.isClosed_setOf_subsingleton_image`, so
-it is closed, hence `L = Y` as `Y` is connected. The local factorizations glue because `pr₂` is
-flat, surjective and quasi-compact, hence an effective epimorphism. This route needs neither
-Step 2 (`AlgebraicGeometry.eventually_finite_image`) nor `Z` locally of finite type, nor `y₀`
-`K`-rational. -/
+commutes. The point `y₀` need not be `K`-rational. -/
 theorem exists_eq_snd_comp {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
     (fY : Y ⟶ Spec (.of K)) (fZ : Z ⟶ Spec (.of K)) [IsProper fX] [GeometricallyConnected fX]
     [GeometricallyReduced fX] [ConnectedSpace Y] [IsSeparated fZ]

@@ -20,7 +20,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E, and 0D6D;
 sites-modules.tex, Tag 093J.
-(blueprint: lem-weil-pbc-finite-model-derived-scalar-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -144,26 +143,7 @@ private theorem liftedDerivedScalarRepresentative
 
 /-- Constant realization intertwines algebraic and sheaf derived scalar extension,
 including transport of the output ring by a ring equivalence. This is independent
-of adic data, local charts, and completed-coefficient objects.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-derived-base-change (06YY),
-lemma-pullback-K-flat (0G7E), lemma-derived-pullback-composition (0D6D);
-sites-modules.tex, lemma-constant-exact (093J).
-(blueprint: lem-weil-pbc-finite-model-derived-scalar-comparison).
-
-Proof: choose a flat-term K-flat resolution in the small module universe.
-The coefficient lift preserves flat objects and integer-indexed colimits, so the
-lifted resolution is K-flat too. Ordinary tensor commutes with coefficient lift
-by its natural pure-tensor isomorphism. On the resolution, the canonical lifted
-derived representative and the specified small universal counit are invertible.
-Restricting along rho inverse transports the scalar-extended resolution to D;
-uniqueness of left adjoints identifies this with extension along rho composed
-with q. Transport the resulting isomorphism along the resolution augmentation
-and the canonical representative of L(Q(P)). Finally identify the sheaf scalar
-adjunctions by uniqueness of left adjoints, apply the existing generic derived
-constant-realization comparison, and use the exact localization factors.
-No ordinary-tensor computation is asserted for P itself. The statement includes
-unbounded complexes, zero rings and empty sites. -/
+of adic data, local charts, and completed-coefficient objects. -/
 theorem finiteModel_derivedScalarComparison
     (X : Scheme.{t}) {B C D : Type t} [CommRing B] [CommRing C] [CommRing D]
     (q : B →+* C) (ρ : C ≃+* D)

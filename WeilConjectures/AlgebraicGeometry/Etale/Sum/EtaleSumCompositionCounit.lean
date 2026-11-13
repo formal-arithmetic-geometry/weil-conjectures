@@ -26,7 +26,7 @@ import Mathlib.CategoryTheory.Localization.Predicate
 /-! # Evaluation and composition of exact etale sum adjunctions
 
 Source: Stacks Project, Etale Cohomology, Tags 03S3 and 03S5; More on Etale
-Cohomology, Tag 0F50 (blueprint: lem-pur-etale-sum-composition-counit).
+Cohomology, Tag 0F50.
 
 The sum compositor is constructed on sheaves from the universal property of sum extension
 against literal restriction along the small-site localization functors. It is then descended
@@ -120,8 +120,7 @@ private lemma cell_counit
   rfl
 
 /-- Literal restriction composes by composition of the small-site localization functors.
-Source: Stacks Tag 03S3, restriction description preceding equation-j-p-shriek
-(blueprint: lem-pur-etale-sum-composition-counit). -/
+Source: Stacks Tag 03S3, restriction description preceding equation-j-p-shriek. -/
 noncomputable def etaleSumRestrictionCompIso
     (A : Type (u + 1)) [CommRing A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] :
@@ -138,8 +137,7 @@ noncomputable def etaleSumRestrictionCompIso
 sum over composite lifts. The restriction comparison is induced by `Over.mapComp`; the
 left-adjoint uniqueness construction therefore sends each nested generator to its composite
 lift generator, including the intervening sheafification.
-Source: Stacks Tags 03S3 (equation-j-p-shriek) and 0F50
-(blueprint: lem-pur-etale-sum-composition-counit). -/
+Source: Stacks Tags 03S3 (equation-j-p-shriek) and 0F50. -/
 noncomputable def etaleSumSheafCompIso
     (A : Type (u + 1)) [CommRing A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] :
@@ -154,16 +152,7 @@ noncomputable def etaleSumSheafCompIso
 /-- The sum compositor sends a nested structural summand to the summand for its
 composite lift. The units here are the structural inclusions into sheafified sums; the
 last restriction transports along the literal small-site composition isomorphism.
-Source: Stacks Tags 03S3 and 0F50; the final etale clause of
-lem-sfb-quasifinite-compact-support-exact
-(blueprint: lem-pur-etale-sum-composition-counit).
-
-Proof: Transpose the sheaf sum compositor across the composite restriction adjunction.
-By the defining left-adjoint uniqueness property this is the unit of the single sum
-adjunction. The composite unit is the two successive structural summand inclusions;
-evaluating it on W gives the displayed equation. The restriction comparison is induced
-by Over.mapComp, which accounts for the last restriction. Thus the comparison has exactly
-the nested-summand normalization specified by lem-sfb-quasifinite-compact-support-exact. -/
+Source: Stacks Tags 03S3 and 0F50. -/
 theorem etaleSumSheafCompIso_summand
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]
@@ -260,8 +249,7 @@ private lemma sheaf_composition_counit
   rw [← L.map_comp_assoc, Iso.hom_inv_id_app, L.map_id, Category.id_comp]
 
 /-- The specified degreewise sum-composition comparison on ordinary unbounded categories.
-Source: Stacks Tags 03S3 and 0F50; exact-functor localization
-(blueprint: lem-pur-etale-sum-composition-counit). -/
+Source: Stacks Tags 03S3 and 0F50. -/
 noncomputable def derivedEtaleSumCompIso
     (A : Type (u + 1)) [CommRing A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] :
@@ -276,23 +264,7 @@ attribute [local irreducible] upperStar etaleLowerShriek Functor.mapDerivedCateg
 set_option backward.isDefEq.respectTransparency false in
 /-- The specified derived nested-sum compositor preserves the evaluation counit, and its
 adjunction conjugate is the canonical exact pullback-composition comparison.
-Source: Stacks Tags 03S3, 03S5 and 0F50
-(blueprint: lem-pur-etale-sum-composition-counit).
-
-Proof:
-1. Left-adjoint uniqueness identifies the sum compositor with the comparison between the
-   composite restriction adjunction and the single restriction adjunction. Its counit
-   equation follows from leftAdjointUniq_hom_app_counit.
-2. Transport these adjunctions along the canonical pullback/restriction comparisons.
-   Their compatibility with upperStarComp, proved in HeartGluing, turns that counit
-   equation into the sheaf composition equation.
-3. Encode this equation as two pasting expressions of exact functors. Exact derived
-   transformation pasting preserves their equality. Identify the invertible cells with
-   the specified derived compositors, and the counit cells with the localized counits.
-   This gives the first equation on every unbounded derived object.
-4. Expand conjugation and substitute the counit equation. Naturality of the composite
-   unit and its right triangle identity give the stated conjugate equality.
--/
+Source: Stacks Tags 03S3, 03S5 and 0F50. -/
 theorem etaleSumCompositionCounit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]

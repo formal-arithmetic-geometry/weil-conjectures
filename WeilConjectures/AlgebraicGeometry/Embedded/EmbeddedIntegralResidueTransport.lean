@@ -147,25 +147,7 @@ private theorem map_square {C D : Type*} [Category C] [Category D]
 
 /-- A continuous coefficient ring isomorphism preserves the first-residue condition.
 
-Source: integral-models-stacks, first-quotient transport; Stacks Tag 09C1
-(blueprint: lem-sfb-embedded-integral-residue-transport).
-
-Proof: evaluating e on the point gives an isomorphism of the integer rings, and
-naturality on points identifies its action on all continuous functions. It carries
-constant functions to constant functions and the maximal ideal to the maximal ideal.
-Since pi generates this ideal, the first quotients are isomorphic, and their quotient
-maps commute with the integer-ring isomorphism. Apply constant sheafification and exact
-inverse image to this square. Associativity of scalar extension and uniqueness of its
-left derived functor identify the two first reductions after the scalar restrictions.
-Restriction along the quotient-ring isomorphism is exact, so it commutes with homology
-and preserves finite constant models: transport the scalar finite presentation, the
-local model on the same cover and each stratum of the same finite stratification.
-Its inverse reflects the same properties. The relative tensor comparison along a ring
-isomorphism identifies tensoring with every test module on each slice. Exact restriction
-preserves and reflects homology vanishing, and hence preserves and reflects each Tor
-interval. Combining the cohomology and Tor comparisons proves the iff. No completeness
-or boundedness of K is used.
--/
+Source: Stacks Tag 09C1. -/
 theorem embeddedIntegralResidueTransport
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)]

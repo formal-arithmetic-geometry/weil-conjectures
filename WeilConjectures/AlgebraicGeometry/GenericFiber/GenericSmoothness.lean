@@ -64,13 +64,7 @@ theorem exists_dense_isClosedImmersion_smooth_of_perfectField {E : Type u} [Fiel
 /-- **Generic smoothness after a finite purely inseparable extension.** Let
 `g : Y ⟶ Spec K` be of finite type. There are a finite purely inseparable extension `L / K`,
 the base change `Y_L = Y ×_K L` (given by a cartesian square), a dense open `W ⊆ Y_L` and a
-surjective closed immersion `Z ⟶ W` with `Z` smooth over `L`.
-
-Over the perfect closure `E` of `K` this is generic smoothness
-(`AlgebraicGeometry.exists_dense_isClosedImmersion_smooth_of_perfectField`); the data descend to
-a finite subextension of the algebraic extension `E / K`
-(`AlgebraicGeometry.exists_open_isClosedImmersion_of_isLimit`), where smoothness holds by fpqc
-descent along `Spec E ⟶ Spec L`. -/
+surjective closed immersion `Z ⟶ W` with `Z` smooth over `L`. -/
 theorem exists_isPurelyInseparable_dense_isClosedImmersion_smooth (K : Type u) [Field K]
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of K)) [LocallyOfFiniteType g] [QuasiCompact g] :
     ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : FiniteDimensional K L)

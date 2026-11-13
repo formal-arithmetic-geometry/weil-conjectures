@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.DiagonalUniformizerChernTransport
 
 /-! # Endpoints for local uniformizer coefficient change
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +37,7 @@ variable {B R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {A : Type (u + 1)} [CommRing A] [Finite A]
   {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0} {hY : IsUnit (N : Γ(Y, ⊤))}
 
-/-- The four unit endpoints as a composite of specified isomorphisms.
-Source: coefficient changes (1).
-(blueprint: def-diagonal-uniformizer-local-endpoints). -/
+/-- The four unit endpoints as a composite of specified isomorphisms. -/
 @[irreducible]
 def ChernCoefficientDiagram.localUnitIso
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY) :
@@ -64,9 +60,7 @@ end AbstractUnit
 
 namespace UniformizerChernNormalizationData
 
-/-- The four coefficient functors on P, without taking direct image.
-Source: coefficient changes (1).
-(blueprint: def-diagonal-uniformizer-local-endpoints). -/
+/-- The four coefficient functors on P, without taking direct image. -/
 @[irreducible]
 def localFunctor (s : UniformizerChernNormalizationData l Y) :
     DerivedCategory (DiagonalCompleted l (ProjectiveLine Y)) ⥤
@@ -75,9 +69,7 @@ def localFunctor (s : UniformizerChernNormalizationData l Y) :
   s.completedP.F.mapDerivedCategory ⋙ derivedScalars (integralMap l s.E) (ProjectiveLine Y) ⋙
     derivedScalars (quotientMap l s.E s.π s.n) (ProjectiveLine Y) ⋙ s.eP.F.mapDerivedCategory
 
-/-- The composite positive-line comparison on P, including its finite shift endpoint.
-Source: coefficient changes (1), positive-root normalization.
-(blueprint: def-diagonal-uniformizer-local-endpoints). -/
+/-- The composite positive-line comparison on P, including its finite shift endpoint. -/
 @[irreducible]
 def localLine (s : UniformizerChernNormalizationData l Y) :
     (s.localFunctor l Y).obj ((DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧) ⟶
@@ -93,9 +85,7 @@ def localLine (s : UniformizerChernNormalizationData l Y) :
                 s.toIntegral.lineP.shift (integralMap l s.E)) ≫
             s.scalar.lineP.shift (quotientMap l s.E s.π s.n)) ≫ s.lineP.shifted l
 
-/-- The inverse of the specified local coefficient-unit isomorphism.
-Source: coefficient changes (1).
-(blueprint: def-diagonal-uniformizer-local-endpoints). -/
+/-- The inverse of the specified local coefficient-unit isomorphism. -/
 @[irreducible]
 def localUnitInv (s : UniformizerChernNormalizationData l Y) :
     geoP1Unit (ULift.{u + 1} (completedResidue l s.E s.π s.n)) (ProjectiveLine Y) ⟶
@@ -103,9 +93,7 @@ def localUnitInv (s : UniformizerChernNormalizationData l Y) :
   unfold localFunctor
   exact ((s.diagram l Y).localUnitIso l Y).inv
 
-/-- The positive finite Kummer equation for a local completed arrow.
-Source: coefficient changes (1), reduction of the positive section class.
-(blueprint: def-diagonal-uniformizer-local-endpoints). -/
+/-- The positive finite Kummer equation for a local completed arrow. -/
 @[irreducible]
 def LocalChernNormalized (s : UniformizerChernNormalizationData l Y)
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

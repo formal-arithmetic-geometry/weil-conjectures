@@ -34,9 +34,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 /-!
 # Finite coefficient change for ordinary direct image
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-node order 2130 (blueprint: lemma-change-coefficients-direct-image--1).
-
 Scalar extension is the published left adjoint to exact derived restriction.
 The coefficient map is uniquely fixed by its scalar-unit/counit equation in D(B).
 The equation is the scalar-adjunction form of extending the A-coefficient counit.
@@ -276,8 +273,7 @@ private theorem coefficient_naturality
   simpa only [Functor.comp_map, heq] using γ.naturality h
 
 /-- Explicit size witness for the small etale site; no universe equality is imposed.
-Source: Mathlib essentiallySmall_of_small_of_locallySmall; blueprint order 2130
-(blueprint: lemma-change-coefficients-direct-image--1). -/
+Source: Mathlib essentiallySmall_of_small_of_locallySmall. -/
 instance AlgebraicGeometry.Etale.finiteCoefficientSiteSize (X : AlgebraicGeometry.Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -287,8 +283,7 @@ instance AlgebraicGeometry.Etale.finiteCoefficientSiteSize (X : AlgebraicGeometr
 namespace AlgebraicGeometry.Etale
 
 /-- Canonical exact restriction/pullback comparison, in the unbounded categories.
-Source: blueprint order 2130; Stacks Tags 07A4 and 07A6
-(blueprint: lemma-change-coefficients-direct-image--1). -/
+Source: Stacks Tags 07A4 and 07A6. -/
 def finiteCoefficientRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X) :
@@ -306,8 +301,7 @@ def finiteCoefficientRestrictionPullback
 transpose with the pulled-back scalar unit gives the A-counit followed by the input
 scalar unit. This is precisely extension of the counit after pullback/scalar
 extension, expressed without choosing flat resolutions or an arbitrary comparison.
-Source: blueprint order 2130, statement and proof Step 3; Stacks Tag 07A6
-(blueprint: lemma-change-coefficients-direct-image--1). -/
+Source: Stacks Tag 07A6. -/
 def IsFiniteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -333,17 +327,7 @@ def IsFiniteCoefficientDirectImageMap
         (Sheaf.derivedRestrictScalars (T.smallEtaleTopology) φ)).unit.app K
 
 /-- Existence and uniqueness of the specified coefficient map, without finiteness or
-flatness of the coefficient morphism. These are properties of its construction.
-Source: blueprint order 2130, coefficient-map definition and proof Steps 2--3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: use lem-pur-derived-change-of-rings to compute scalar extension on flat K-flat
-representatives. Inverse image commutes with it by the canonical balancing comparison
-of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Transpose scalar extension of the
-A-counit through the B inverse-image/direct-image adjunction. The scalar adjunction
-unit identity gives the displayed equation. Conversely that equation determines the
-B-transpose by universality of the pulled-back scalar unit, then determines the map
-by injectivity of the B geometric adjunction. No isomorphism assertion is used here. -/
+flatness of the coefficient morphism. These are properties of its construction. -/
 theorem finiteCoefficientDirectImageMap_existsUnique
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -362,9 +346,8 @@ theorem finiteCoefficientDirectImageMap_existsUnique
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
     (finiteCoefficientRestrictionPullback φ f) (ProEtale.scalarPullbackReverse_isIso φ f).2 K
 
-/-- The actual B-linear coefficient projection map, chosen from a theorem that
-uniquely determines it by the extended counit. Only that proof is postponed.
-Source: blueprint order 2130 (blueprint: lemma-change-coefficients-direct-image--1). -/
+/-- The B-linear coefficient projection map: the unique map determined by the extended
+counit. -/
 def finiteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -383,8 +366,7 @@ namespace AlgebraicGeometry.ProEtale
 transpose with the pulled-back scalar unit gives the A-counit followed by the input
 scalar unit. This is precisely extension of the counit after pullback/scalar
 extension, expressed without choosing flat resolutions or an arbitrary comparison.
-Source: blueprint order 2130, statement and proof Step 3; Stacks Tag 07A6
-(blueprint: lemma-change-coefficients-direct-image--1). -/
+Source: Stacks Tag 07A6. -/
 def IsFiniteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -411,17 +393,7 @@ def IsFiniteCoefficientDirectImageMap
         (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ)).unit.app K
 
 /-- Existence and uniqueness of the specified coefficient map, without finiteness or
-flatness of the coefficient morphism. These are properties of its construction.
-Source: blueprint order 2130, coefficient-map definition and proof Steps 2--3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: use lem-pur-derived-change-of-rings to compute scalar extension on flat K-flat
-representatives. Inverse image commutes with it by the canonical balancing comparison
-of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Transpose scalar extension of the
-A-counit through the B inverse-image/direct-image adjunction. The scalar adjunction
-unit identity gives the displayed equation. Conversely that equation determines the
-B-transpose by universality of the pulled-back scalar unit, then determines the map
-by injectivity of the B geometric adjunction. No isomorphism assertion is used here. -/
+flatness of the coefficient morphism. These are properties of its construction. -/
 theorem finiteCoefficientDirectImageMap_existsUnique
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -457,9 +429,8 @@ theorem finiteCoefficientDirectImageMap_existsUnique
     (pbcFixedScalarExtension (Scheme.ProEt.topology T) φ)
     (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ) adt e hk K
 
-/-- The actual B-linear coefficient projection map, chosen from a theorem that
-uniquely determines it by the extended counit. Only that proof is postponed.
-Source: blueprint order 2130 (blueprint: lemma-change-coefficients-direct-image--1). -/
+/-- The B-linear coefficient projection map: the unique map determined by the extended
+counit. -/
 def finiteCoefficientChangeDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -1045,13 +1016,7 @@ end CoefficientChainHelpers
 
 namespace AlgebraicGeometry.Etale
 
-/-- Naturality of the specified coefficient projection, as an equality in D(X,B).
-Source: blueprint order 2130, naturality clause and proof Step 3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: take B-geometric transposes. Naturality of the A-counit and the scalar units
-makes the two scalar-unit precomposites equal. The scalar-adjunction bijection and
-then the B-geometric adjunction bijection are injective, proving the equality. -/
+/-- Naturality of the specified coefficient projection, as an equality in D(X,B). -/
 theorem finiteCoefficientDirectImageMap_naturality
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -1161,16 +1126,7 @@ private theorem composition_rightAdjointUniq
 attribute [local irreducible] upperStar
 attribute [-instance] ProEtale.pbcRestriction_isRightAdjoint
 
-/-- Geometric composition coherence, with the canonical direct-image compositors.
-Source: blueprint order 2130, composition clause and proof Step 3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: the canonical compositor is normalized by the pasted inverse-image adjunction.
-Take the B-coefficient composite geometric transpose. The one-step map transposes to
-scalar extension of the pasted A-counit. For the two-step map, counit naturality
-moves c_f past the g-counit; the defining transpose equations for c_g and c_f reduce
-it to that same scalar extension of the pasted A-counit. The injectivity of the
-B-coefficient adjunction gives equality, without faithfulness of scalar restriction. -/
+/-- Geometric composition coherence, with the canonical direct-image compositors. -/
 theorem finiteCoefficientDirectImageMap_comp
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X Y : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Y)
@@ -1238,16 +1194,7 @@ attribute [instance] ProEtale.pbcRestriction_isRightAdjoint
 
 attribute [-instance] AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint
 
-/-- Successive coefficient changes, including nonquotient maps and identity changes.
-Source: blueprint order 2130, coefficient-chain clause and proof Step 3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: take C-geometric transposes. The B-to-C defining equation followed by
-naturality reduces the two-step transpose to S_BC(S_AB(ε_A)). On flat K-flat models,
-the scalar compositor is (x tensor b) tensor c ↦ x tensor φ(b)c, with inverse
-x tensor c ↦ (x tensor 1) tensor c. Its compatibility with the same pullback
-balancing map identifies this with S_AC(ε_A). Injectivity of the C-geometric
-adjunction proves equality in D(C). There is no requirement that B be an A_E,m. -/
+/-- Successive coefficient changes, including nonquotient maps and identity changes. -/
 theorem finiteCoefficientDirectImageMap_coefficientChain
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C)
@@ -1290,13 +1237,7 @@ end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Naturality of the specified coefficient projection, as an equality in D(X,B).
-Source: blueprint order 2130, naturality clause and proof Step 3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: take B-geometric transposes. Naturality of the A-counit and the scalar units
-makes the two scalar-unit precomposites equal. The scalar-adjunction bijection and
-then the B-geometric adjunction bijection are injective, proving the equality. -/
+/-- Naturality of the specified coefficient projection, as an equality in D(X,B). -/
 theorem finiteCoefficientDirectImageMap_naturality
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -1488,16 +1429,7 @@ private theorem composition_rightAdjointUniq
     exact Iso.ext (finiteDirectImageComposition_conjugate A f g).symm
   exact congrArg Iso.inv hc
 
-/-- Geometric composition coherence, with the canonical direct-image compositors.
-Source: blueprint order 2130, composition clause and proof Step 3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: the canonical compositor is normalized by the pasted inverse-image adjunction.
-Take the B-coefficient composite geometric transpose. The one-step map transposes to
-scalar extension of the pasted A-counit. For the two-step map, counit naturality
-moves c_f past the g-counit; the defining transpose equations for c_g and c_f reduce
-it to that same scalar extension of the pasted A-counit. The injectivity of the
-B-coefficient adjunction gives equality, without faithfulness of scalar restriction. -/
+/-- Geometric composition coherence, with the canonical direct-image compositors. -/
 theorem finiteCoefficientDirectImageMap_comp
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X Y : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Y)
@@ -1574,16 +1506,7 @@ attribute [instance] pbcRestriction_isRightAdjoint
 
 attribute [-instance] AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint
 
-/-- Successive coefficient changes, including nonquotient maps and identity changes.
-Source: blueprint order 2130, coefficient-chain clause and proof Step 3
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: take C-geometric transposes. The B-to-C defining equation followed by
-naturality reduces the two-step transpose to S_BC(S_AB(ε_A)). On flat K-flat models,
-the scalar compositor is (x tensor b) tensor c ↦ x tensor φ(b)c, with inverse
-x tensor c ↦ (x tensor 1) tensor c. Its compatibility with the same pullback
-balancing map identifies this with S_AC(ε_A). Injectivity of the C-geometric
-adjunction proves equality in D(C). There is no requirement that B be an A_E,m. -/
+/-- Successive coefficient changes, including nonquotient maps and identity changes. -/
 theorem finiteCoefficientDirectImageMap_coefficientChain
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C)
@@ -1932,26 +1855,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Ordinary uncompleted finite coefficient change commutes with a separated
 finite-type direct image on a bounded constructible complex of finite Tor amplitude.
-No flatness of the finite algebra B over A is assumed.
-Source: blueprint order 2130, etale isomorphism clause
-(blueprint: lemma-change-coefficients-direct-image--1).
-
-Proof: the positive-level coefficient ring is finite, hence Noetherian, and B is
-finitely presented as a module over it. The finite-type source has finite Krull
-dimension. The uniform all-sheaf cohomological-dimension bound over the separably
-closed base field and the finite-constant projection theorem make the required
-projection morphism invertible. Constant/restriction commutation identifies its
-constant module with the scalar coefficient sheaf.
-
-The normalized scalar/pullback comparison equals the inverse mate of the exact
-restriction/pullback square, by their cochain scalar-unit equations. Tor amplitude
-gives a lower bound for the scalar extension of K. The projection isomorphism and
-faithful exact restriction give a lower bound for the scalar extension of Rf_*K.
-Consequently all comparisons in the published projection/mate identity apply on
-bounded-below representatives. The ambient restriction/direct-image mate is the
-canonical bounded-below comparison, by the derived adjunction identities. Cancelling
-it in the projection/mate identity makes restriction of the specified coefficient
-map invertible. Faithful exact restriction reflects isomorphisms. -/
+No flatness of the finite algebra B over A is assumed. -/
 theorem finiteCoefficientDirectImageMap_isIso
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

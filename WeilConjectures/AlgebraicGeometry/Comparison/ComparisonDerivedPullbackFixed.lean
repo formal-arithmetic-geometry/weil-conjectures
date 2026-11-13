@@ -15,8 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 /-!
 # Derived comparison in fixed constant coefficients
 
-Source: Stacks Project, Tag 099R; exact termwise inverse image
-(blueprint: def-sf-comparison-derived-pullback).
+Source: Stacks Project, Tag 099R.
 -/
 
 @[expose] public section
@@ -28,11 +27,9 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- The bounded below exact comparison in the fixed-ring sheaf presentation.
-Its realization as modules over the continuous-function coefficient sheaf is the
-previously recorded `finiteCoefficientDerivedComparisonPlus`. Here the fixed-ring
-presentation agrees directly with both open extension and the canonical direct-image mate.
-Source: Stacks Project, Tag 099R
-(blueprint: def-sf-comparison-derived-pullback). -/
+Its realization as modules over the continuous-function coefficient sheaf is
+`finiteCoefficientDerivedComparisonPlus`.
+Source: Stacks Project, Tag 099R. -/
 noncomputable abbrev siteComparisonDerivedPullbackPlus (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] :
     DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤

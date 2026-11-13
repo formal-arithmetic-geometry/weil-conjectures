@@ -19,9 +19,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-!
 # Native adic modules and sectionwise slice Hom
 
-Source: Stacks Project, Modules on Sites, Tags 03EO and 0E8H; the native constructions in
-`WeilConjectures.SixFunctors.ProEtale.Adic.Module`, `Hom`, `InternalHom` and
-`InternalHomEvaluation` (blueprint: lem-sf-adic-module-section-data).
+Source: Stacks Project, Modules on Sites, Tags 03EO and 0E8H.
 
 The records below package the conclusions, with all comparison maps normalized on sections.
 They impose no freeness, constructibility, or rank assumption on a module.
@@ -55,8 +53,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical local pure tensor in the native relative tensor, obtained by first mapping
 into the sheaf tensor and then imposing the balanced relation.
-Source: Stacks 03EO and the native coequalizer `Mod.tensorπ`
-(blueprint: lem-sf-adic-module-section-data). -/
+Source: Stacks 03EO and the native coequalizer `Mod.tensorπ`. -/
 noncomputable def adicComparisonTmul {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M N : AdicSheaf l X) (V : X.ProEtᵒᵖ)
     (x : M.X.obj.obj V) (y : N.X.obj.obj V) :
@@ -66,8 +63,7 @@ noncomputable def adicComparisonTmul {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       (x ⊗ₜ[ULift.{u + 1} (PadicAlgCl l)] y))
 
 /-- The native evaluation on a pair of local sections, using the canonical map into the
-sheaf tensor. Source: Stacks 03EO and native `Mod.evaluation`
-(blueprint: lem-sf-adic-module-section-data). -/
+sheaf tensor. Source: Stacks 03EO and native `Mod.evaluation`. -/
 noncomputable def adicComparisonEval {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M N : AdicSheaf l X) (V : X.ProEtᵒᵖ)
     (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V) (x : M.X.obj.obj V) : N.X.obj.obj V :=
@@ -79,8 +75,7 @@ noncomputable def adicComparisonEval {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 /-- The assertions of the native/sectionwise comparison at one base. The identity conditions
 mean that sections and coefficient functions really are unchanged, rather than arbitrarily
 identified. The Hom comparisons use the recorded slice Hom, not another right adjoint.
-Source: Stacks 03EO, 0E8H and the native adic module presentation
-(blueprint: lem-sf-adic-module-section-data). -/
+Source: Stacks 03EO, 0E8H and the native adic module presentation. -/
 structure AdicModuleSectionComparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) where
   /-- The commutative coefficient sheaf with its specified function sections. -/
   R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}
@@ -189,7 +184,7 @@ structure AdicModuleSectionComparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) 
 namespace AdicModuleSectionComparison
 
 /-- The underlying ring sheaf in a comparison, by the standard forgetful functor.
-Source: Stacks 03CV (blueprint: lem-sf-adic-module-section-data). -/
+Source: Stacks 03CV. -/
 abbrev ring {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : AdicModuleSectionComparison l X) : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1} :=
   (sheafCompose (Scheme.ProEt.topology X)
@@ -200,7 +195,7 @@ end AdicModuleSectionComparison
 /-- Literal sectionwise restriction along a site object, with the coefficient map specified
 by a ring-sheaf isomorphism. This is Mathlib's module pushforward along the composition
 functor of sites, not a new inverse-image construction.
-Source: Stacks 03DH, 0E8H (blueprint: lem-sf-adic-module-section-data). -/
+Source: Stacks 03DH, 0E8H. -/
 noncomputable abbrev adicComparisonRestriction {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (P : AdicModuleSectionComparison l X)
     (Q : AdicModuleSectionComparison l U.left)
@@ -215,8 +210,7 @@ noncomputable abbrev adicComparisonRestriction {l : ℕ} [Fact l.Prime] {X : Sch
     (S := Q.ring) (R := P.ring) c.hom
 
 /-- The actual inverse-image/localization comparison on one section of a native module.
-Source: Stacks 03CE and native `upperStarIsoLocalizationRestriction`
-(blueprint: lem-sf-adic-module-section-data). -/
+Source: Stacks 03CE and native `upperStarIsoLocalizationRestriction`. -/
 noncomputable def adicComparisonPullSection {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (M : AdicSheaf l X) (V : U.left.ProEtᵒᵖ)
     (x : ((adicUpperStar l U.hom).obj M).X.obj.obj V) :
@@ -226,7 +220,7 @@ noncomputable def adicComparisonPullSection {l : ℕ} [Fact l.Prime] {X : Scheme
 
 /-- The specified native dual comparison on a site object: pull back the internal Hom,
 then use the canonical pullback of the regular module. Source: native adic Hom and unit
-pullback, Stacks 0E8H (blueprint: lem-sf-adic-module-section-data). -/
+pullback, Stacks 0E8H. -/
 noncomputable def adicComparisonDualSlice {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (M : AdicSheaf l X) :
     (adicUpperStar l U.hom).obj ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X)) ⟶

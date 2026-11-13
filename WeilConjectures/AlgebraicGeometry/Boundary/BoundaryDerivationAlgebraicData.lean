@@ -33,9 +33,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The algebraic Čech and derivation identities for fixed compatible resolutions.
-This is the local algebra step in the proof of the square-zero boundary derivation theorem.
-Source: Stacks Project, Cohomology, Lemma 0B8S.
-(blueprint: lem-sc-boundary-derivation-square-zero-algebraic-data) -/
+Source: Stacks Project, Cohomology, Lemma 0B8S. -/
 theorem boundary_derivation_algebraic_data (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))

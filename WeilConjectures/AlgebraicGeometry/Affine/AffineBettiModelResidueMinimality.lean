@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Residue.ResidueRankModelDifferentia
 
 /-! # Minimality of affine models at a residue point
 Source: Stacks Project, Tags 0BCD and 0BF2.
-(blueprint: lem-sc-affine-betti-model-residue-minimality)
 -/
 
 @[expose] public section
@@ -23,23 +22,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
 /-- A free affine model whose term ranks are its residue Betti numbers is minimal at w.
-Source: Stacks Project, Tags 0BCD and 0BF2, the minimal source complex.
-(blueprint: lem-sc-affine-betti-model-residue-minimality)
-
-Proof: Apply affineFree_residueSections_cohomologyLinearEquiv to the bounded free
-model to compare the homology of its termwise scalar extension to kappa(w) with
-its derived residue cohomology. The termwise free presentations give finite
-vector spaces of the prescribed dimensions; their subquotient homology is finite.
-The cycles inclusion is injective and the homology projection is surjective.
-Equality of the term and homology finranks makes the cycles inclusion surjective,
-so cancellation in iCycles_d makes every differential zero over kappa(w).
-For each coordinate of a free basis of the target term, the scalar-extension
-adjunction now shows that its value on the original differential evaluates to
-zero. Such a coordinate belongs to p, the kernel of evaluation, and its image
-under the algebra map to kappa(p) is zero. Base change the target free basis,
-distribute tensor over its finite coordinate product, and apply the tensor right
-unitor to see the differential is zero over kappa(p). This uses no properness
-or coefficient trivialization and includes zero terms and arbitrary bounds. -/
+Source: Stacks Project, Tags 0BCD and 0BF2, the minimal source complex. -/
 theorem affine_betti_model_residue_minimality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

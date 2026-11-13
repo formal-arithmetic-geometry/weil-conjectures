@@ -13,10 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientIsoConstruct
 
 /-!
 # Constructible finite-Tor complexes under a condensed coefficient isomorphism
-
-Source: blueprint main-20261015, sk-lem-brown-hypotheses-generation.proof.md,
-coefficient identifications in Compactness
-(blueprint: lem-sfb-condensed-coefficient-iso-constructible).
 -/
 
 @[expose] public section
@@ -143,32 +139,7 @@ private theorem constructible_comap (φ : Λ' ⟶ Λ) [IsMonHom φ] [IsIso φ] (
 end Constructible
 
 /-- Restricting scalars along the inverse of a condensed ring isomorphism preserves
-bounded constructibility with finite constant models and finite Tor amplitude.
-
-Source: blueprint main-20261015, sk-lem-brown-hypotheses-generation.proof.md,
-coefficient identifications in Compactness
-(blueprint: lem-sfb-condensed-coefficient-iso-constructible).
-
-Proof: At the point and on each scheme, restriction along the inverse isomorphism
-is an additive exact equivalence, inverse to restriction along the forward map.
-It sends the regular module to the regular module using the ring isomorphism;
-finite sums and cokernels then carry each finite matrix presentation to a finite
-matrix presentation. For every scheme morphism, naturality of the pulled-back
-coefficient map gives a commutative square of ring objects. The scalar-restriction
-comparison for that square identifies restriction of each constant local model
-with the pullback of the transported presentation on the point. Use the same
-pro-etale cover and finite constructible stratification, or the same affine opens
-in the affine-local convention. Thus constructible sheaves remain constructible.
-Exactness identifies the cohomology of the termwise derived functor with the
-transported cohomology, and reflects its vanishing, preserving boundedness.
-Finally restriction along a ring isomorphism is a strong monoidal equivalence,
-so it preserves flat objects. For the given Tor interval [a,b], use the flat-model
-characterization of Tor amplitude: represent C by a complex of flat objects
-concentrated in [a,b]. Exact scalar restriction takes that complex to a complex
-of flat objects in the same interval, and its derived comparison identifies the
-result with the transported C. The same characterization gives the required
-finite Tor amplitude. The construction works
-for the zero ring and the empty scheme, and uses no finite-type hypothesis. -/
+bounded constructibility with finite constant models and finite Tor amplitude. -/
 theorem constantModelCtf_coefficientIso
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']

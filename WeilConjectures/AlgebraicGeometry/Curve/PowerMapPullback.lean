@@ -11,9 +11,6 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Pullback of power maps from the constant sheaf to units
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case,
-compatible primitive-root trivializations (blueprint: lem-sc-power-map-pullback).
 -/
 
 @[expose] public section
@@ -24,18 +21,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case,
-compatible primitive-root trivializations (blueprint: lem-sc-power-map-pullback).
-
-Proof: transpose both maps under inverse image/direct image and the constant-sheaf/global-
-sections adjunction. Uniqueness of left adjoints defining the constant comparison identifies
-its transpose with the identity on constant global sections. The units comparison is adjoint
-to pullback of functions. On the constant presheaf, a natural-number class a is sent to the
-restriction of ζ^a. Pullback of functions preserves powers, and restriction commutes with
-pullback by the defining pullback square of each object of the small étale site. Thus the
-transposes agree on every a; all classes of ZMod n are natural-number classes. The universal
-property of sheafification and the two adjunctions give the asserted equality. This includes
-n = 1 and empty schemes; no primitivity or field hypothesis is used. -/
+/-- The trivializations `constantZModToGmSheaf` of `ζ` on `Y` and of `η` on `X` are compatible with
+pullback along `g` when `g` sends `ζ` to `η`. -/
 theorem constantZModToGmSheaf_pullback {X Y : Scheme.{u}} (g : X ⟶ Y)
     (n : ℕ) [NeZero n] (ζ : Γ(Y, ⊤)ˣ) (hζ : ζ ^ n = 1)
     (η : Γ(X, ⊤)ˣ) (hη : η ^ n = 1)

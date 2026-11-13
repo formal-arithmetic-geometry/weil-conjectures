@@ -378,10 +378,9 @@ private theorem open_evaluation_mate
 
 -- Perform the two Hom transposes in the abstract mate-pasting lemma.
 /-- Explicit mate-pasting remainder for the open singleton evaluation.
-Source: Zheng, Construction 5.14 and Lemma 5.16.
-(blueprint: lem-pur-etale-brown-open-singleton-evaluation-core).
-The defining conjugate expansion of the insertion is first reduced to this
-explicit composite; the remaining equality is the scalar/open mate square. -/
+Source: Zheng, Construction 5.14 and Lemma 5.16. The defining conjugate expansion of the insertion
+is first reduced to this explicit composite; the remaining equality is the scalar/open mate square.
+-/
 theorem etaleBrownOpenSingletonEvaluationCore
     (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)
     (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅

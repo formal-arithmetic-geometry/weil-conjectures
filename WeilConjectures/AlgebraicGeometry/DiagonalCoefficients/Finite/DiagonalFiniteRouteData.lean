@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizationComposition
 
 /-! # Bundled finite realization endpoints and their proved arrow calculation
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: def-diagonal-finite-route-data).
 -/
 
 @[expose] public noncomputable section
@@ -62,7 +59,7 @@ variable
   (t : F.obj T ⟶ ((DerivedCategory.singleFunctor _ 0).obj
     (L (diagonalSurface Y)))⟦(2 : ℤ)⟧)
 
-/-- Construct the route data by exact realization, with its generic arrow proof. -/
+/-- The route data, constructed by exact realization. -/
 def finiteRouteData :=
   FiniteRouteData.mk
     (classes := finiteRealizedArrowMap (N := N) (hA := hA) (Y := Y)

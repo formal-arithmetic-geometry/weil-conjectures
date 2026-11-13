@@ -11,9 +11,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernelIdeal
 
 /-! # Square-zero kernels of relative restriction on functions
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-square-zero-relative-section-kernel)
 -/
 
 @[expose] public section
@@ -22,20 +19,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Products of functions vanishing on the smaller subscheme are zero.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-square-zero-relative-section-kernel)
-
-Proof: On an affine open Spec A of X the two subschemes are Spec(A/I) and
-Spec(A/J). The kernel of A/J to A/I is the image I/J. Products in this image
-vanish because I*I is contained in J. After base change by an etale object,
-the defining ideal is the extended ideal of I/J. Extension commutes with
-products, so this ideal still has square zero. Cover the etale object by
-such affine charts. Functions whose restriction to the smaller subscheme
-is zero belong to this ideal on every chart. Their product is zero on every
-chart, and hence zero globally by the structure sheaf separation axiom.
-This argument also applies to nonaffine objects. If I=J the restriction is
-an isomorphism; on an empty object the section ring is the zero ring. -/
+/-- Products of functions vanishing on the smaller subscheme are zero. -/
 theorem squareZeroRelativeSectionKernel (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J)
     (V : J.subscheme.Etaleᵒᵖ) (a b : J.subscheme.etaleStructurePresheaf.obj V)

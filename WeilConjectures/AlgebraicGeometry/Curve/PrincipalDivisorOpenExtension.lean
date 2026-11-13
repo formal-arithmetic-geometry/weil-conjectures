@@ -74,19 +74,7 @@ private theorem ring_ordFrac_equiv {R S K L : Type u}
 
 namespace AlgebraicGeometry
 
-/-- Order is invariant under compatible isomorphisms of local rings and function fields.
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph,
-restriction and boundary divisors.
-
-Proof: if the common coheight is not one, both orders are zero by definition. Otherwise
-both stalks are Noetherian domains of Krull dimension one. The local ring equivalence
-identifies the principal quotients by r and by e(r), including their submodule lattices;
-therefore their module lengths agree. Thus the ring order maps agree on all nonzero stalk
-elements. Every function-field element is a quotient of two such elements, and the assumed
-commuting square takes this quotient to the corresponding quotient in the other field.
-The multiplicative fraction order maps agree by multiplicativity and the quotient formula.
-For zero both orders are zero; for nonzero elements taking the additive exponent proves
-the asserted equality. This includes constant units and points of other codimension. -/
+/-- Order is invariant under compatible isomorphisms of local rings and function fields. -/
 private theorem ord_eq_of_stalk_equiv
     {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y]
     [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
@@ -112,21 +100,7 @@ private theorem ord_eq_of_stalk_equiv
       Scheme.ord_eq_zero_of_coheight_neq_one hx]
 
 
-/-- A principal divisor on the open curve has a principal extension with identical orders.
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph,
-restriction and boundary divisors
-(blueprint: lem-sc-principal-divisor-open-extension).
-
-Proof: a nonempty open subset of an integral scheme contains its generic point. Hence the
-open immersion of the connected smooth curve into its integral compactification identifies
-both generic stalks, and thus both function fields. Transport the given unit through the
-inverse of this field isomorphism to a unit b on Z. At Q and its image P the open immersion
-identifies local rings and the maps into the common function field. The discrete valuation
-rings therefore have identical normalized valuations: a uniformizer maps to a uniformizer,
-and units map to units. Applying this to the given rational function yields the displayed
-coefficient equality. No choice of a divisor or trivial Picard class is used, and no boundary
-order is prescribed. For a constant unit all retained orders vanish; an empty boundary
-simply makes the equality hold at every ambient closed point. -/
+/-- A principal divisor on the open curve has a principal extension with identical orders. -/
 theorem Scheme.Hom.exists_principal_divisor_open_extension
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

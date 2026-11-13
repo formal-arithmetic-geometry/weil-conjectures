@@ -143,19 +143,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize in
-/-- Opposite canonical signed swaps cancel.
-Source: Stacks Project, Tag 06YU, definition-derived-tor and its signed tensor symmetry
-(blueprint: lem-amb-derived-tensor-symmetry-involutive).
-
-Proof: on a cochain tensor summand in bidegree `(p,q)`, the two swaps multiply by
-`(-1)^(pq+qp) = 1`, and the two coefficient-category braidings compose to identity.
-The universal property of the total tensor coproduct proves the cochain identity.
-Apply the homotopy quotient functor to obtain the homotopy-category identity.
-Consequently the counits `DerivedMonoidal.braidingCounit` and `braidingInvCounit`
-coincide: their final ordinary braidings agree. Their left-derived lifts coincide as
-well. The existing inverse-law of `DerivedMonoidal.braiding'` now gives the displayed
-identity. This concerns the fixed canonical symmetry, with no choice of an isomorphism.
--/
+/-- Opposite canonical signed swaps cancel. -/
 theorem derivedTensorSymmetry_involutive
     (Λ : Type (u + 1)) [CommRing Λ] (X : AlgebraicGeometry.Scheme.{u})
     (K M : DerivedCategoryModule Λ X) :

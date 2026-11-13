@@ -37,9 +37,7 @@ set_option linter.privateModule false
 
 /-! # Refinement and open coherence of normalized etale tensor families
 
-Source: blueprint sec-six-functors-basics/sk-prop-cohsm,
-lem-pur-co-smooth-etale-locality.proof.md, Step 1; Stacks Tags 03S6 and 0GKF
-(blueprint: lem-pur-etale-normalization-comparison-coherence).
+Source: Stacks Tags 03S6 and 0GKF.
 
 All arrows below are built from the specified graph comparison, proper/open compositor,
 exact inverse-image compositor, and adjunction conjugacy. Right adjoints are arbitrary

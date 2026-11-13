@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.Compactif
 set_option linter.privateModule false
 
 /-! # Normalized scalar data for strict compactification systems
-Source: blueprint direct-image proof, paragraph (2).
-(blueprint: lem-sp-compactification-scalar-data).
 -/
 
 @[expose] public noncomputable section

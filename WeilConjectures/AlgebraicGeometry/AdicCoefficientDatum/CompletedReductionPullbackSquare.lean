@@ -15,8 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
 
 /-! Pullback composition and completed reduction on the strict diagram category.
-Source: Stacks Project, Tags 0D6D and 0E48.
-(blueprint: lem-weil-pbc-completed-reduction-pullback-square) -/
+Source: Stacks Project, Tags 0D6D and 0E48. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,8 +28,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- The integral ringed square retains the specified completed coefficient maps.
-Source: Stacks Tag 0D6D
-(blueprint: lem-weil-pbc-completed-reduction-pullback-square). -/
+Source: Stacks Tag 0D6D. -/
 def AdicCoefficientDatum.integralTowerRingedSquare
     (sq : ChosenCartesianSquare g' f' f g) : StrictTowerRingedSquare sq where
   RY := d.completedRing Y
@@ -77,24 +75,7 @@ private theorem reductionIso_level {U V : Scheme.{t}} (q : U ⟶ V)
 
 /-- The normalized completed reduction comparisons respect the inverse-image square.
 This is an equation before taking mates and in the full derived diagram category.
-Source: blueprint completed-exchange-coherence, tensor/pullback coherence in its
-first two proof sentences; Stacks Tags 0D6D and 0E48
-(blueprint: lem-weil-pbc-completed-reduction-pullback-square).
-
-Proof: take a flat-term K-flat representative P on Y. Its two successive inverse
-images remain flat-term K-flat. The canonical geometric composition comparison is
-localization of the ordinary compositor whose right-adjoint conjugate is restriction
-along Over.pullbackComp. At each coefficient level the ordinary reduction comparison
-is tensor balancing; its two composites around the square send a pure tensor to its
-inverse image with the same quotient scalar. Naturality of the ring projections and
-the quotient transition maps makes this an equality of strict tower-complex maps.
-Use the defining normalization equations for completedReductionPullbackIso on all
-four edges. The ordinary equality and the factorization equations for derived
-pullback give the displayed equation after cancellation of the invertible K-flat
-counits. Finally resolve an arbitrary M by P and use naturality across the resulting
-quasi-isomorphism. This proves equality of strict derived maps, without assuming
-that derived evaluation is faithful. Zero complexes, zero coefficient rings and
-empty schemes satisfy the same tensor formulas. -/
+Source: Stacks Tags 0D6D and 0E48. -/
 theorem completedReductionPullback_square
     (sq : ChosenCartesianSquare g' f' f g) :
     Functor.whiskerRight (d.reductionTowerPullbackIso g).hom (d.towerPull f') ≫

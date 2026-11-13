@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInte
 
 /-! # Finite scalar restriction in the realization's coefficient category -/
 
-/- Repair note: this source is included with its new DAG node so the interface packet
-   carries the declaration and its recorded lean.file together. -/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -21,8 +18,6 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- The specified finite-to-integral restriction, with the ring structure supplied
 by the commutative coefficient ring, as in `FiniteRealization`.
 
-Source: coefficient changes (1), restriction along the positive residue projection.
-(blueprint: def-canonical-finite-padic-restriction).
 The functor is the original restriction itself. Naming this view shares the same
 coefficient-category and localization instances in successive derived functors. -/
 abbrev canonicalFinitePadicRestriction

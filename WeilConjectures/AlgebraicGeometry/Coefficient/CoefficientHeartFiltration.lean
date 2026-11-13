@@ -391,10 +391,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 /-!
 # The filtration associated to an adapted coefficient stratification
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart/
-sk-lem-coefficient-heart-filtration.md and its proof
-(blueprint: lemma-constructible-sheaves--7).
-
 The filtration steps are the images of the actual open-extension counits. The theorem
 asserts that those counits are monomorphisms, so the images represent exactly the given
 extensions by zero as subsheaves of F. Locally closed extension is the open extension
@@ -416,27 +412,21 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The specified object `v_! v^* F` for an open subscheme V.
-Source: blueprint sk-lem-coefficient-heart-filtration, definition of F_k
-(blueprint: lemma-constructible-sheaves--7). -/
+/-- The specified object `v_! v^* F` for an open subscheme V. -/
 abbrev coefficientHeartOpenTerm {X : Scheme.{u}}
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (V : X.Opens) :=
   (CondensedRing.openImmersionLowerShriek Λ V.ι).obj
     ((CondensedRing.upperStar Λ V.ι).obj F)
 
-/-- The canonical map from the open-extension term to F, namely the adjunction counit.
-Source: blueprint sk-lem-coefficient-heart-filtration, definition of the inclusions
-(blueprint: lemma-constructible-sheaves--7). -/
+/-- The canonical map from the open-extension term to F, namely the adjunction counit. -/
 abbrev coefficientHeartOpenCounit {X : Scheme.{u}}
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (V : X.Opens) : coefficientHeartOpenTerm Λ F V ⟶ F :=
   (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ V.ι).counit.app F
 
 /-- The subsheaf represented by the image of the canonical counit. Its equality with the
-open-extension object as a subsheaf follows from the monomorphism assertion below.
-Source: blueprint sk-lem-coefficient-heart-filtration, F_k as a subsheaf of F
-(blueprint: lemma-constructible-sheaves--7). -/
+open-extension object as a subsheaf follows from the monomorphism assertion below. -/
 abbrev coefficientHeartFiltrationStep {X : Scheme.{u}}
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (V : X.Opens) : Subobject F :=
@@ -446,9 +436,7 @@ abbrev coefficientHeartFiltrationStep {X : Scheme.{u}}
 canonical scheme-theoretic closure: `a.toImage` is open and `a.imageι` is closed.
 The source is topologically Noetherian because an immersion is a topological embedding;
 therefore a is quasi-compact and the existing open-immersion instance for `a.toImage`
-applies. No choice of an extension functor is made.
-Source: blueprint sk-lem-coefficient-heart-filtration, definition `a_! = i_* u_!`
-(blueprint: lemma-constructible-sheaves--7). -/
+applies. No choice of an extension functor is made. -/
 def coefficientHeartLocallyClosedExtension {S X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]
     (a : S ⟶ X) (ha : IsImmersion a) :
     Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S) ⥤
@@ -781,28 +769,7 @@ set_option linter.unusedVariables false in
 /-- The given ordered adapted stratification produces the counit filtration, with its
 successive quotients the extensions by zero of the lisse restrictions. `V` is simply a
 presentation of the open prefixes; its carrier equation fixes every V_k, including
-V_0 and V_m. No connectedness or strictness condition is imposed.
-
-Source: blueprint lemma-constructible-sheaves--7 and its proof
-(blueprint: lemma-constructible-sheaves--7).
-
-Proof:
-1. The actual open counits are monic. The empty prefix has zero restriction and zero
-extension; the full prefix inclusion is an isomorphism. Their images are therefore
-bottom and top.
-2. Consecutive open prefixes differ by exactly the given stratum. Lift its immersion
-into the larger prefix and use its closed image to obtain a closed immersion there.
-The open-filtration successor theorem gives a map between the two open extensions,
-its counit identity over F, and its cokernel. Monicity identifies the counit images
-with their represented subobjects. The existing subobject cokernel comparison and
-preservation of cokernels by evaluation give the required quotient object.
-3. The closed-then-open extension vanishes after restriction along every map whose
-image misses the stratum. Its restriction to the stratum is the original module,
-by the open unit and closed counit. Closed support reconstructs it from the closure;
-open support inside the closure reconstructs it from the stratum. Composing these
-adjunction isomorphisms gives the specified open-then-closed extension.
-4. The existing common-stratification lisse theorem, applied to the stratification
-and its identity refinement, makes every adapted restriction lisse. -/
+V_0 and V_m. No connectedness or strictness condition is imposed. -/
 theorem coefficientHeart_filtration (ℓ : ℕ) [Fact ℓ.Prime]
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj L)]

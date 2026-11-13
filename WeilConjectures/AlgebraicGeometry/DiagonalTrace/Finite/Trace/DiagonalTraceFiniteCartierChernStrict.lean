@@ -54,16 +54,7 @@ private theorem combine_projection
 
 /-- The finite Chern calculation from its explicit strict-system presentation.
 This proved interface keeps existential elimination separate from the comparison
-calculation, so their concrete category types are checked independently.
-
-Source: diagonal trace proof (1)--(2), projecting the strict Cartier class.
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-chern-strict).
-
-Proof: construct the normalized linear root isomorphism and identify its ordinary
-cone. Its finite root-projection equation transports the target to the Chern line.
-Precompose the given whole-system equation by the supported unit, then project.
-Naturality moves the strict presentation arrow across the projection. The finite
-supported Cartier/Chern equation identifies the resulting composite. -/
+calculation, so their concrete category types are checked independently. -/
 theorem diagonalTrace_finiteCartierChern_strict
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

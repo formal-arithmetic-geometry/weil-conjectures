@@ -340,9 +340,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 set_option linter.privateModule false
 
 /-! # Ordinary coefficient units and monoidal unit coordinates
-
-Source: the unit identifications in the rank-zero smooth-purity orientation.
-(blueprint: lem-pur-ordinary-finite-unit-coordinate-identification).
 -/
 
 @[expose] public noncomputable section

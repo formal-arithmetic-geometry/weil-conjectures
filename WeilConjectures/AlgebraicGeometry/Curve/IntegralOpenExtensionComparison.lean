@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 
 /-! # Integral coefficients and open extension by zero
 
-Source: Stacks Project, Tags 03S5 and 0GJA.
-(blueprint: lem-pbc-h2-integral-open-extension-comparison). -/
+Source: Stacks Project, Tags 03S5 and 0GJA. -/
 
 @[expose] public section
 
@@ -25,19 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The canonical integral coefficient encoding commutes with restriction followed by
 extension by zero along an open immersion.
-Source: Stacks Project, Tag 03S5 (extension by zero), and Tag 0GJA, proof.
-(blueprint: lem-pbc-h2-integral-open-extension-comparison).
-
-Proof: The canonical integral encoding E preserves limits and colimits. For an open
-immersion, replace upperStar by the isomorphic restriction functor, computed by
-precomposition on presheaves. Restriction commutes with E on sections. Extension by
-zero is the left Kan extension along the open-site map followed by sheafification.
-The comparison E.lanCompIsoOfPreserves commutes E with that Kan extension, and
-sheafComposeNatIso commutes it with sheafification. Compose these two comparisons,
-the sectionwise restriction identity, and the two upperStar-to-restriction isomorphisms.
-This gives the stated isomorphism without a constructibility or torsion hypothesis.
-For empty U the left Kan extension has zero stalks; for U=X the same comparisons
-specialize to the identity. -/
+Source: Stacks Project, Tag 03S5 (extension by zero), and Tag 0GJA, proof. -/
 theorem integral_open_extension_comparison {X : Scheme.{u}}
     (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

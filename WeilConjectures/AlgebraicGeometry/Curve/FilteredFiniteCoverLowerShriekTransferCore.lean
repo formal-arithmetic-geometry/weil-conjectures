@@ -16,24 +16,11 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTr
 universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.IsCurve
-/-- The compactification and filtration part of the filtered-cover transfer.
-
-The proof is the first part of Stacks Project 03SD, using 05K0 to factor the finite
-etale cover through an open immersion into a finite scheme over `X`.  Replace the
-finite scheme by the reduced closure of the open image.  The open image is then a
-dense open of a reduced curve, and over `U` it is also closed: its map to the
-preimage of `U` is finite, while a finite dense open immersion is surjective.
-Thus the resulting square is the cartesian square needed for base change.
-
-Apply `hconstant` to this new reduced curve.  Exactness of extension by zero and
-the short exact sequences supplied by `hquot` allow induction along `W`, starting
-from `hzero`; the induction uses the cokernel identifications and the standard
-short-exact devissage assertion.  Transport the result across `hend`.  Finite
-pushforward and the exchange isomorphism for lower shriek transfer the resulting
-assertions to the lower-star of the upper-star of `G`.  This is precisely the
-conclusion below. No unit retraction is needed for this step; descent along the
-retraction is performed only in the separate retract theorem.
-(blueprint: k1-filtered-finite-cover-lower-shriek-transfer-core) -/
+/-- Let `j : U ⟶ X` be an open immersion into a reduced curve, `v : V ⟶ U` finite étale and `G` a
+finite locally constant sheaf of `𝐅_r`-modules on `U` such that `v^* G` has a finite filtration
+with constant quotients `ℤ/r`. If the eight assertions hold for extensions by zero of constant
+sheaves on all reduced curves, then they hold for `j_! v_* v^* G`.
+Source: Stacks Project, Tags 03SD and 05K0. -/
 theorem filteredFiniteCoverLowerShriekTransfer_core {k : Type u} [Field k] [IsAlgClosed k]
     {X U V : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]

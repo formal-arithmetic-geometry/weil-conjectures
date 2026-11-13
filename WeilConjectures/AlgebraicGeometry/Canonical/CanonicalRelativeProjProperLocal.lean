@@ -19,7 +19,6 @@ The relative Proj of the restricted module on each affine open of a finite-gener
 identified (`exists_canonicalRelativeProj_restrict_iso`) with the restriction of the global
 relative Proj; H-projective properness transports across that comparison and glues by
 target-locality.
-(blueprint: lem-trf-canonical-relative-proj-proper-local).
 -/
 
 @[expose] public section
@@ -61,16 +60,7 @@ private theorem canonicalRelativeProj_global_proper {S : Scheme.{u}} (E : S.Modu
 
 /-- The canonical relative Proj is proper after restriction to any affine open of the base.
 
-Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC.
-Proof: `exists_affine_projectiveBundle_presentations` gives an affine open cover of `S` on
-each member of which the local relative Proj is H-projective, hence proper by
-`hProjective_properness`; `exists_canonicalRelativeProj_restrict_iso` identifies it over the
-member with the restriction of the global relative Proj, and properness is invariant under
-isomorphism of the source.  Properness is local on the target, so the global relative Proj is
-proper, and the restriction of a proper morphism to `U` is proper.
-The comparison between the restricted canonical Proj and the local relative Proj is isolated
-in `exists_canonicalRelativeProj_restrict_iso`.
-(blueprint: lem-trf-canonical-relative-proj-proper-local). -/
+Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC. -/
 theorem canonicalRelativeProj_restrict_proper {S : Scheme.{u}} (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (_hU : IsAffineOpen U) :
     IsProper ((@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom ∣_ U) := by

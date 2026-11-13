@@ -15,8 +15,7 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 
 /-! # The derived pullback square on constant coefficients
 
-Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F
-(blueprint: lem-pur-etale-sum-exchange-constants).
+Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F.
 -/
 
 @[expose] public section
@@ -119,16 +118,7 @@ private lemma sumSquareSingleIsos
   exact sumSquareSingleMaps L R L' R' τ M N N' P c.hom d.hom c'.hom d'.hom h
 
 /-- The canonical derived pullback square commutes with the specified constant comparisons.
-Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F
-(blueprint: lem-pur-etale-sum-exchange-constants).
-
-Proof: expand the sheaf pullback square into the two composition comparisons. Coherence of
-`Scheme.upperStarConstantSheafIso_comp` identifies both routes with the constant comparison
-for the common diagonal. Cancel the invertible diagonal comparison. The exact derived square
-is compatible with the degree-zero embedding by the composition and natural-isomorphism
-single-functor identities. Naturality on the four constant maps transports the sheaf equality
-to the asserted derived equality. The private helpers carry out this transport in abstract
-abelian categories before specializing to the four inverse-image functors. -/
+Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F. -/
 theorem etaleSumExchangeConstantSquare
     (A : Type (u + 1)) [CommRing A]
     {U X X' : Scheme.{u}} (e : U ⟶ X) (w : X' ⟶ X) :

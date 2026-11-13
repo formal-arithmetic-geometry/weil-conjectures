@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
 
 /-! # The regular-module normalization of the sectionwise encoding
-
-Source: finite coefficient reductions in diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-finite-encoding-unit).
 -/
 
 @[expose] public noncomputable section
@@ -51,25 +48,7 @@ def finiteEncodingUnderlying (X : Scheme.{u}) :
         (Scheme.ProEt.topology X) (ULift.{u + 1} B) G hG)
 
 /-- Encoding the regular internal module gives the constant coefficient unit,
-with its actual unital coefficient comparison.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), finite reductions.
-(blueprint: lem-diagonal-finite-encoding-unit).
-
-Proof in words. Restrict the regular module along the pulled-back ring isomorphism;
-its inverse identifies this with the regular module of the sheafified constant ring.
-At the terminal pro-etale object the module-sheafification unit gives a map from
-the regular internal A-module to the sections of this regular sheaf module. Apply
-G and precompose the given regular-module comparison. The constant-sheaf adjunction
-extends this section map to q from the constant A-module to the encoded regular
-module. Naturality of the forgetful comparison and the hypothesis on G identify
-its underlying section with the constant-section unit. The forgetful counit
-formula and the adjunction triangle therefore give U(q) followed by the underlying
-comparison equal to constantCommuteCompose. Thus U(q), and hence q, is invertible.
-Compose the inverse of q with the image of the regular-module ring comparison.
-Naturality and cancellation give exactly the displayed inverse coefficient map.
-This argument includes the zero ring and the empty scheme. -/
+with its actual unital coefficient comparison. -/
 theorem finiteEncoding_unitComparison
     (hregular : ∃ j : G.obj (Mod.regular (AddCommGrpCat.of (ULift.{u + 1} B))) ≅
         ModuleCat.of (ULift.{u + 1} B) (ULift.{u + 1} B),

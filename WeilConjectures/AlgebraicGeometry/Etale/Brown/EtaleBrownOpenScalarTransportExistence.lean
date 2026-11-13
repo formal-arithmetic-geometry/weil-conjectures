@@ -123,12 +123,7 @@ private theorem scalar_inverse_mate
 end MateCalculus
 
 /-- The open scalar projection mate exists and has the prescribed normalized mate.
-Source: Zheng, Constructions 5.14--5.15 and Lemma 5.16; Stacks 07A4.
-(blueprint: lem-pur-etale-brown-open-scalar-transport-existence).
-
-The proof constructs the left mate of the normalized inverse-image scalar
-comparison from the scalar/open adjunctions and verifies its invertibility by the
-cochain localization comparison. -/
+Source: Zheng, Constructions 5.14--5.15 and Lemma 5.16; Stacks 07A4. -/
 theorem etaleBrownOpenScalarTransport_exists
     (O : Type (u + 1)) [CommRing O] (t : O)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

@@ -29,18 +29,20 @@ import WeilConjectures.CategoryTheory.Derived.DerivedTensorRightExact
 
 /-! # Exceptional coefficient comparisons
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-compatibilities.proof.md, (2)--(3); Stacks 0GL6 and 0F7L
-(blueprint: lem-pur-exceptional-coefficient-comparison).
+Source: Stacks 0GL6 and 0F7L.
 
 All scalar functors are the published left adjoints to exact scalar restriction.
 The scalar/pullback identification and the proper coefficient map are the recorded
-`scalarPullbackIso` and `scalarMate` of lem-pur-etale-scalar-mate-projection.
+`scalarPullbackIso` and `scalarMate`.
 The comparison for compact support is constructed from its open and proper parts.
 The auxiliary tensor and pullback identifications are fixed by their ordinary
 adjunctions and their computation on cochain representatives.
 
-(blueprint: def-pur-exceptional-coefficient-normalizations).
+## Implementation details
+
+The all-complex tensor normalization keeps its monoidal arguments inside one generic body; this
+avoids repeated comparison of the nested sheafification and derived-monoidal proofs in
+specialized theorem types.
 -/
 
 @[expose] public noncomputable section
@@ -56,7 +58,7 @@ variable {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
 
 /-- Scalar extension and open extension by zero are left adjoint to canonically
 identified right adjoints; uniqueness gives the identity/zero comparison.
-Source: Stacks 0GL6 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 0GL6. -/
 def openIso {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
         scalarExtension φ Z ≅
@@ -74,7 +76,7 @@ def openIso {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
 /-- The canonical compact-support coefficient arrow, on a fixed compactification: the
 recorded proper coefficient mate `scalarMate` at the open extension, followed by
 proper direct image of the open comparison.
-Source: Stacks 0GL6 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 0GL6. -/
 def compactSupportMap {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategoryModule A X) :
     (scalarExtension φ Y).obj
@@ -88,8 +90,7 @@ def compactSupportMap {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- Inverse of the canonical comparison on its isomorphism domain, extended by zero.
 This extension only makes the term total; every theorem use is on the domain where
-b is an isomorphism. Source: Stacks 0GL6
-(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+b is an isomorphism. Source: Stacks 0GL6. -/
 def comparisonInverse {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategoryModule A X) :
     (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).obj
@@ -102,9 +103,7 @@ def comparisonInverse {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   else 0
 
 /-- A total extension of the counit-transpose construction; its zero fallback is
-irrelevant on the stated domain, where the theorem proves invertibility of b.
-Source: blueprint compatibilities (2)
-(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+irrelevant on the stated domain, where the theorem proves invertibility of b. -/
 def mateMap [Finite A] [Finite B] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] (K : DerivedCategoryModule A Y) :
     (scalarExtension φ X).obj ((rightDerivedUpperShriek A f).obj K) ⟶
@@ -116,21 +115,20 @@ def mateMap [Finite A] [Finite B] {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((rightDerivedUpperShriekAdjunction A f).counit.app K))
 
 /-- The ordinary extension has its actual scalar-restriction adjunction.
-Source: Stacks 06YY (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 06YY. -/
 instance ordinaryIsLeftAdjoint (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).IsLeftAdjoint :=
   (ProEtale.etaleSheafExtendScalarsAdjunction φ T).isLeftAdjoint
 
 /-- The ordinary tensorator is the sheafified scalar balancing map.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 instance ordinaryOplax (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).OplaxMonoidal :=
   composeAndSheafifyOplaxMonoidal T.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
 
 /-- Representative normalization for a scalar tensor comparison, with monoidal data
-kept shared in both categories. Source: Stacks 07A4
-(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+kept shared in both categories. Source: Stacks 07A4. -/
 def TensorNormalizationAux
     {C : Type v} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -155,9 +153,7 @@ def TensorNormalizationAux
 
 /-- The all-complex normalization with site tensor functors kept as shared constants.
 This is exactly `TensorNormalizationAux` on the small etale sheaf categories.
-Keeping its monoidal arguments inside this generic body avoids repeated comparison
-of the nested sheafification and derived-monoidal proofs in specialized theorem types.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 def SiteTensorNormalizationAux
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
@@ -177,7 +173,7 @@ def SiteTensorNormalizationAux
   TensorNormalizationAux F S r δ
 
 /-- Small-etale specialization of the shared all-complex tensor normalization.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 abbrev TensorNormalization (T : Scheme.{u}) :=
   SiteTensorNormalizationAux (ModuleCat.{u + 1} A) (ModuleCat.{u + 1} B) T
     (ProEtale.etaleSheafExtendScalars φ T)
@@ -432,12 +428,7 @@ private def adjointRepresentative
         _ = _ := adj.homEquiv_naturality_right_symm _ _ }
 
 /-- The canonical scalar tensor isomorphism is determined by ordinary balancing.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison).
-Proof: on flat-term K-flat pairs the counits and the localization tensorators
-are invertible. Ordinary balancing therefore defines δ by the displayed equation.
-It commutes with resolutions and differentials. Localize in both variables to obtain
-a natural isomorphism. Every pair admits such resolutions, proving uniqueness;
-naturality with respect to a resolution proves the equation for all complexes. -/
+Source: Stacks 07A4. -/
 theorem tensorIso_existsUnique (T : Scheme.{u}) :
     ∃! δ, TensorNormalization φ T δ := by
   let E := ProEtale.etaleSheafExtendScalars φ T
@@ -486,12 +477,7 @@ theorem tensorIso_existsUnique (T : Scheme.{u}) :
 /-- The same normalized tensor comparison, expressed using the site's tensor functor.
 The heterogeneous equality asserts equality of the very same natural isomorphism,
 including its endpoints, rather than choosing an unrelated comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison).
-Proof: unfold derivedTensor, which is curriedTensor of the canonical derived
-monoidal structure. The normalized isomorphism from tensorIso_existsUnique
-therefore has exactly this type. Reflexive heterogeneous equality supplies the
-witness, and heterogeneous equality to that fixed witness implies uniqueness.
-Keeping the transport opaque prevents expansion of the full monoidal structure. -/
+Source: Stacks 07A4. -/
 theorem siteTensorIso_existsUnique (T : Scheme.{u}) :
     ∃! e : Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} A) T) ⋙
         scalarExtension φ T ≅
@@ -501,7 +487,7 @@ theorem siteTensorIso_existsUnique (T : Scheme.{u}) :
   exact ⟨(tensorIso_existsUnique φ T).choose, HEq.rfl, fun _ h ↦ eq_of_heq h⟩
 
 /-- The site's tensor comparison, uniquely equal to the representative-normalized one.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 def tensorIso (T : Scheme.{u}) :
     Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} A) T) ⋙ scalarExtension φ T ≅
       (scalarExtension φ T).prod (scalarExtension φ T) ⋙
@@ -509,7 +495,7 @@ def tensorIso (T : Scheme.{u}) :
   (siteTensorIso_existsUnique φ T).choose
 
 /-- Unit normalization using shared monoidal data for the ordinary scalar functor.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 def UnitNormalizationAux
     {C : Type v} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -527,7 +513,7 @@ def UnitNormalizationAux
     e.hom ≫ Functor.LaxMonoidal.ε _root_.DerivedCategory.Q
 
 /-- Specialization of scalar-unit normalization to the ordinary small-etale site.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 abbrev UnitNormalization (T : Scheme.{u}) :=
   UnitNormalizationAux (ProEtale.etaleSheafExtendScalars φ T)
     (scalarExtension φ T) (scalarExtensionRepresentative φ T)
@@ -636,10 +622,7 @@ private theorem unitRepresentative_isIso (T : Scheme.{u}) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat.prop_unit
 
 /-- The scalar unit comparison is uniquely normalized by multiplication B tensor_A A -> B.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison).
-Proof: the unit complex is flat and K-flat. Its derived counit, the localization
-unit comparison and ordinary scalar unit are invertible. Solve the normalization
-equation for e; cancellation gives uniqueness. -/
+Source: Stacks 07A4. -/
 theorem unitIso_existsUnique (T : Scheme.{u}) :
     ∃! e, UnitNormalization φ T e := by
   have hrep := unitRepresentative_isIso φ T
@@ -651,7 +634,7 @@ theorem unitIso_existsUnique (T : Scheme.{u}) :
     (scalarExtension φ T) (scalarExtensionRepresentative φ T)
 
 /-- Canonical scalar unit identification, selected by its unique normalization.
-Source: Stacks 07A4 (blueprint: lem-pur-exceptional-coefficient-comparison). -/
+Source: Stacks 07A4. -/
 def unitIso (T : Scheme.{u}) :
     (scalarExtension φ T).obj (𝟙_ (DerivedCategoryModule A T)) ≅
       𝟙_ (DerivedCategoryModule B T) :=

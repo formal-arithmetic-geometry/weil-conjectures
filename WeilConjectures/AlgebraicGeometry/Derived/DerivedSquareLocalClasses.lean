@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareLocalClassNaturality
 /-! # Local classes of the ordinary-unit map in a square
 
 Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-derived-square-local-classes).
 -/
 
 @[expose] public section
@@ -67,27 +66,7 @@ variable [∀ Y : Scheme.{u},
 square. The edge is specified solely by its local sheafification equation. This
 requires no derived-pullback input, top-degree bound, or tensor-pullback unit.
 Source: Stacks Project, Cohomology, Tags 01E4 and 01FB, with the canonical local
-Leray and sheafification comparisons of Tags 0D5X and 0BKJ
-(blueprint: lem-weil-pbc-derived-square-local-classes).
-
-Proof: Resolve F and G by I and J. Resolve v_*J by an injective complex L and
-lift the coefficient map to beta:I -> L. Its augmentation is phi followed by
-v_* of the augmentation of J and the replacement ell:v_*J -> L. The normalized
-right-adjoint comparison of the square identifies Rf(phi[0]) followed by that
-comparison with the roof f_*I -> f_*L <- g_*k_*J. Its arrows are f_*beta and
-f_*ell, including the sectionwise comparison of the square. Restriction preserves
-injective resolutions and the augmentation equations. On U, sections of ell are
-a quasi-isomorphism by the pushforward-injectives section theorem. Thus the map
-on cohomology of this roof is precisely moduleCohomologyFMap of the restricted
-phi, by its independence-of-choices theorem. The local class map sends a cocycle
-to the section of the cohomology sheaf represented by that cocycle. Its naturality
-for both arrows of the roof gives the same equation after passage to cohomology
-sheaves. The edge's defining equation removes the intermediate local cohomology
-of Rg_*Rk_*G. Finally the canonical total/classical comparisons and the two
-augmentation-preserving restricted-resolution comparisons give exactly the
-maps displayed below. No class map is inverted, only comparison isomorphisms
-and the cohomology of sections of ell. The argument includes q=0, empty opens,
-zero coefficients, and nonflat morphisms. -/
+Leray and sheafification comparisons of Tags 0D5X and 0BKJ. -/
 theorem derivedSquareUnit_localClasses {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)

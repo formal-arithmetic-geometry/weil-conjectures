@@ -129,9 +129,7 @@ public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-! # Completeness of finite constant scalar local models
 
-Source: blueprint main-20261015, localizing-closure-ctf-equals-bc, Local models and
-Locality; Bhatt--Scholze, Sections 3.1 and 3.4
-(blueprint: lem-sfb-finite-scalar-local-model-complete).
+Source: Bhatt--Scholze, Sections 3.1 and 3.4.
 
 The ambient category is the ordinary unbounded derived category of internal modules
 on the small pro-etale site. Natural-number level n denotes the exponent n+1.
@@ -182,45 +180,33 @@ private local instance complexCountableProducts :
     HasCountableProducts (CochainComplex (Modules l E T) ℤ) :=
   ⟨fun _ _ ↦ HomologicalComplex.instHasLimitsOfShape⟩
 
-/-- Use the degreewise product directly, avoiding countable-index shrinking.
-Source: categorical limits of homological complexes
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- Use the degreewise product directly, avoiding countable-index shrinking. -/
 local instance (priority := 1100) complexProduct
     {A : Type*} [Category A] [HasZeroMorphisms A]
     [HasLimitsOfShape (Discrete ℕ) A] (H : ℕ → CochainComplex A ℤ) : HasProduct H :=
   (HomologicalComplex.instHasLimitsOfShape (C := A) (J := Discrete ℕ)
     (c := .up ℤ)).has_limit (Discrete.functor H)
 
-/-- The finite free coefficient module, placed in degree zero, including rank zero.
-Source: blueprint Local models, finite free case
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- The finite free coefficient module, placed in degree zero, including rank zero. -/
 def freeComplex (d : ℕ) : CochainComplex (Modules l E T) ℤ :=
   (singleFunctor (Modules l E T) 0).obj (Mod.finiteFree (ring l E T) d)
 
-/-- The finite power of the actual positive quotient, with its integral scalar action.
-Source: blueprint Local models, quotient tower
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- The finite power of the actual positive quotient, with its integral scalar action. -/
 abbrev quotientPower (d n : ℕ) : Modules l E T :=
   ⨁ fun _ : Fin d ↦ finiteModule l E T n
 
-/-- Coordinatewise scalar reduction from the free coefficient module.
-Source: blueprint Local models, specified scalar quotient projections
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- Coordinatewise scalar reduction from the free coefficient module. -/
 def powerQuotient (d n : ℕ) :
     Mod.finiteFree (ring l E T) d ⟶ quotientPower l E T d n :=
   biproduct.map fun _ : Fin d ↦ finiteUnit l E T n
 
-/-- The actual coordinatewise quotient transition from exponent n+2 to n+1.
-Source: blueprint Local models, quotient tower
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- The actual coordinatewise quotient transition from exponent n+2 to n+1. -/
 def powerStep (d n : ℕ) :
     quotientPower l E T d (n + 1) ⟶ quotientPower l E T d n :=
   biproduct.map fun _ : Fin d ↦
     (DerivedNakayama.pullback l E T).map (quotientStep l E n)
 
-/-- Finite biproduct power, retaining the specified coordinate maps.
-Source: blueprint Local models, finite free case
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- Finite biproduct power, retaining the specified coordinate maps. -/
 def finiteBiproductPower {A : Type*} [Category A] [Abelian A]
     [HasFiniteBiproducts A] (d : ℕ) : A ⥤ A where
   obj M := ⨁ fun _ : Fin d ↦ M
@@ -228,15 +214,11 @@ def finiteBiproductPower {A : Type*} [Category A] [Abelian A]
   map_id M := by ext i; simp
   map_comp f g := by ext i; simp
 
-/-- The actual quotient sequence as a functor to degree-zero complexes.
-Source: blueprint Local models, free tower comparison
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- The actual quotient sequence as a functor to degree-zero complexes. -/
 def quotientSequence (d : ℕ) : ℕᵒᵖ ⥤ CochainComplex (Modules l E T) ℤ :=
   coefficientSequence l E T ⋙ finiteBiproductPower d ⋙ singleFunctor (Modules l E T) 0
 
-/-- Assemble a diagram of cochain complexes as a complex of diagrams.
-Source: categorical interchange of functor and complex structures
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- Assemble a diagram of cochain complexes as a complex of diagrams. -/
 def complexOfSequence {A J : Type*} [Category A] [Category J]
     [HasZeroMorphisms A] (F : J ⥤ CochainComplex A ℤ) :
     CochainComplex (J ⥤ A) ℤ where
@@ -246,15 +228,11 @@ def complexOfSequence {A J : Type*} [Category A] [Category J]
   shape k r h := NatTrans.ext (funext fun j ↦ (F.obj j).shape k r h)
   d_comp_d' k r t _ _ := NatTrans.ext (funext fun j ↦ (F.obj j).d_comp_d k r t)
 
-/-- The strict quotient tower in degree zero, using the actual quotient transitions.
-Source: blueprint Local models, free tower comparison
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- The strict quotient tower in degree zero, using the actual quotient transitions. -/
 def quotientTower (d : ℕ) : CochainComplex (ℕᵒᵖ ⥤ Modules l E T) ℤ :=
   complexOfSequence (quotientSequence l E T d)
 
-/-- Scalar reduction as a chain map to a level of the strict quotient tower.
-Source: blueprint Local models, specified scalar quotient projections
-(blueprint: lem-sfb-finite-scalar-local-model-complete). -/
+/-- Scalar reduction as a chain map to a level of the strict quotient tower. -/
 def quotientChainMap (d n : ℕ) :
     freeComplex l E T d ⟶ (quotientTower l E T d).asFunctor.obj (op n) :=
   (singleFunctor (Modules l E T) 0).map (powerQuotient l E T d n)
@@ -1043,51 +1021,11 @@ attribute [local irreducible] freeComplex
 
 /-- Finite constant scalar local models are complete, including global models and
 finite free powers. In the free case the strict cone-to-quotient map is fixed in
-coordinates, is a quasi-isomorphism at every level, and respects the augmentations.
-The derived isomorphism to the quotient Roos limit has exactly the scalar quotient
-projections. Every strict completion augmentation with the coordinate formula of
-`completion_triangle_comparison` maps to this cone under the Roos image of that same
-strict tower map q; thus the comparison carries the specified completion unit to it.
+coordinates, is a quasi-isomorphism at every level, and respects the augmentations; the
+derived isomorphism to the quotient Roos limit has exactly the scalar quotient projections
+and carries the specified completion unit to this cone.
 
-Source: blueprint main-20261015, localizing-closure-ctf-equals-bc, Local models and
-Locality; Bhatt--Scholze, Propositions 3.1.9--3.1.10 and Section 3.4
-(blueprint: lem-sfb-finite-scalar-local-model-complete).
-
-Proof:
-1. The integral coefficient comparison identifies B with the inverse limit of k_n,
-   and flatness over the constant DVR gives the short exact scalar cyclic resolution.
-   Apply its d-fold power and the cone/short-exact quasi-isomorphism. The cone map
-   is quotient on the unshifted coordinate and zero on the shifted coordinate.
-   It intertwines (x,y) -> (x,pi*y) with the actual quotient transition and sends
-   (x,0) to x modulo pi^(n+1). This gives the single strict tower map q below.
-2. The quotient transitions are epimorphisms. The surjective pro-etale tower lemma
-   gives the exact Roos sequence; coordinatewise integral comparison identifies its
-   kernel with B^d and its projections with the scalar quotients. The Roos functor
-   carries q to a quasi-isomorphism and its augmentation to (quotients,0).
-   The completion triangle comparison identifies that augmentation with the specified
-   completion unit. Its coordinate formula and the Roos image of that same q give
-   a.app B^d[0] ≫ roosF.map q = b. Localizing gives the normalized isomorphism e
-   with e.hom = Q.map b; the augmentation comparison therefore uses q itself.
-   For d=0 all these objects and maps are zero.
-3. A finitely presented scalar module over the DVR has a length-one finite free
-   resolution. The scalar-model finite-flat-resolution lemma and coefficient flatness
-   give the corresponding short exact sequence over B, without torsion-freeness.
-   Its degree-zero triangle, and the exact completion functor with its natural unit,
-   give a morphism of distinguished triangles including the boundary square.
-   The free case and two-out-of-three make the third unit invertible. This proves
-   the global scalar-model assertion, including torsion modules and zero.
-4. Over a covering object the weakly-etale localization equivalence identifies
-   restriction with slice restriction; coefficient-sections localization identifies
-   the actual coefficient rings and scalar maps. Exact slice restriction preserves
-   sectionwise products, finite sums, cones, the principal tower transitions and
-   augmentation, hence the Roos construction and completion unit. This gives the
-   completion comparison on covering slices, without asserting product preservation
-   for arbitrary geometric inverse image.
-5. Restrict a local model and its unit to each member of its pro-etale covering.
-   Naturality transports that unit through the model isomorphism to the global
-   scalar-model unit of step 3. Covering restrictions jointly reflect isomorphisms
-   in the unbounded derived category, so the original unit is invertible. No qcqs,
-   Noetherian, dimension or characteristic hypothesis is used. -/
+Source: Bhatt--Scholze, Propositions 3.1.9--3.1.10 and Section 3.4. -/
 theorem finite_scalar_local_model_complete :
     (∀ M : Modules l E T,
       HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) T M →

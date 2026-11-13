@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Pullback of the complete diagonal coefficient family
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-family-pullback).
-
 ## Main definitions
 
 - `QuotientPullMap`: the specified balanced-tensor formula.
@@ -34,8 +31,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- The quotient pullback map is fixed on every balanced tensor generator by
 the coefficient pullback and the projection-normalized integral root map.
 This definition also applies to ramified quotient levels outside the ell-power
-cofinal subsystem. Source: blueprint clause 3 and proof step 3c
-(blueprint: def-sfb-diagonal-coefficient-family-pullback). -/
+cofinal subsystem. -/
 def QuotientPullMap (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     {X S : Scheme.{u}} (f : X ⟶ S)

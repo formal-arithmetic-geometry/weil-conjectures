@@ -41,9 +41,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 # Classical essential image of unbounded finite-coefficient comparison
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 5.2.6(3),
-Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2; blueprint
-`sec-six-functors-basics/sk-lem-geo-affine-local`, opening proof paragraph
-(blueprint: lem-sfb-finite-classical-unbounded-comparison).
+Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2.
 
 We use fixed-ring module sheaves, the ordinary constant-coefficient presentation.
 The recorded `finiteCoefficientRealization` identifies these with modules over the
@@ -540,35 +538,7 @@ private theorem boundedCounit (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
 counit is invertible on every classical complex (so every such complex is isomorphic to an
 inverse image), without any boundedness or constructibility condition.
 Source: Bhatt--Scholze, Proposition 5.2.6(3), Remark 5.2.8 and Proposition 5.3.2,
-and the opening comparison in blueprint `lemma-affine-space-etale-localization`
-(blueprint: lem-sfb-finite-classical-unbounded-comparison).
-
-Proof:
-1. Exact inverse image commutes with cohomology, and its image on sheaves is classical.
-The standard and small derived-category homology functors are naturally isomorphic.
-2. The affine étale module bound gives the uniform bound e = 2 dim(X) + 1.
-Descend a classical sheaf to the étale site, realize it over the constant ring sheaf,
-and transfer the bound back through the comparison of global sections.
-3. On bounded-below objects the unbounded derived adjunction restricts to the usual
-bounded-below adjunction. The compatibility isomorphisms and uniqueness of right
-adjoints identify their counits. The existing bounded-below classical equivalence
-therefore proves invertibility of the actual unbounded counit there.
-4. Induction using truncation triangles gives amplitude b + e for derived affine
-sections of a classical complex supported in a finite interval ending at b.
-Derived sections preserve countable products: use termwise products of K-injectives
-and exact products of modules. Exact countable products of pro-étale module sheaves
-and the generic left-completeness theorem then give amplitude b + e + 1 for an
-arbitrary classical complex supported in degrees at most b.
-5. Compute derived sections and comparison direct image on a K-injective complex.
-Restriction to the affine étale basis is faithful and exact. If the section complexes
-are exact in degree q on that basis, exact sheafification proves exactness of the
-direct-image complex in degree q as well.
-6. For fixed m put n = m - e - 2. Apply Steps 4 and 5 to tau_{<n} K. Its derived
-direct image vanishes in degrees m and m+1, so the truncation triangle makes
-H^m(R nu_* K) -> H^m(R nu_* tau_{>=n} K) invertible. Exact inverse image preserves
-this isomorphism. Counit naturality and Step 3 now make H^m of the counit at K
-invertible. The cohomology criterion proves that the counit itself is invertible.
--/
+and the opening comparison in. -/
 theorem comparisonUpperStar_isClassicalComplexFor
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))

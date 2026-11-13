@@ -17,8 +17,7 @@ import Mathlib.Algebra.Field.ULift
 /-!
 # Constant prime-field quotient identification
 
-Source: Stacks Project, Tag 04JQ; blueprint `theorem-cohomology-curves--2`,
-proof paragraphs 1--2.
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -64,27 +63,7 @@ private theorem constant_fin_power (T : Scheme.{u}) (ℓ d : ℕ) :
       F.mapBiprod (AddCommGrpCat.of (Fin d → ULift.{u + 1} (ZMod ℓ)))
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))) ≪≫ biprod.mapIso hd (Iso.refl _)⟩
 
-/-- Source: Stacks Project, Tags 04JQ, 03QT and 03QW; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2.
-(blueprint: lem-sc-primary-constant-quotient-identification)
-
-Proof: Set L = Ks^H. The canonical map from V to the geometric stalk of
-its constant sheaf on Spec L is an additive isomorphism. Given g in H,
-extend g to a K-automorphism tau of Omega. It fixes L: for a in L the
-extension identity gives tau(a) = g(a) = a. Consequently Spec(tau) followed
-by the geometric point t is t. Apply the stipulated action formula to the
-identity etale neighbourhood, the identical lifts x = x', and the global
-constant section associated to v in V. It says that the action fixes the
-constant germ of v.
-The canonical stalk map is surjective, so this action is trivial on all
-stalk elements. Composing the stalk map with C's inverse fiber isomorphism
-gives an equivariant additive, hence integer-linear, isomorphism between
-the trivial representation V and C applied to its constant sheaf. Full
-faithfulness and C's unit identify C.inverse of that representation with
-the constant sheaf on Spec L. Pullback across e.inv preserves constant
-sheaves by the constant-sheaf adjunction, yielding the displayed isomorphism.
-The argument applies also to the zero group and needs neither finiteness
-nor a prime nor a subgroup quotient. -/
+/-- Source: Stacks Project, Tags 04JQ, 03QT and 03QW. -/
 private theorem primary_trivialRepresentation_constant
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -171,26 +150,7 @@ private theorem primary_trivialRepresentation_constant
     (C.inverse.mapIso r' ≪≫ (C.unitIso.app F).symm) ≪≫
       (upperStarConstantSheafIso AddCommGrpCat.{u + 1} e.inv).app (AddCommGrpCat.of V)⟩
 
-/-- Source: Stacks Project, Tag 04JQ; blueprint `theorem-cohomology-curves--2`,
-proof paragraphs 1--2.
-(blueprint: lem-sc-primary-constant-quotient-identification)
-
-Proof: Let Q be the explicitly constructed additive quotient B/(A ∩ B). Its elements are
-represented by x in B. The condition ell*x in A implies ell*q=0 for every q in Q.
-An abelian group annihilated by ell has the canonical ZMod ell module structure,
-induced by integer multiplication modulo ell. Because ell is prime this ring is a
-field. Q is finite as a quotient of a subgroup of the finite ambient module, hence
-finite-dimensional over this field. Choose a finite basis of cardinal d. Its coordinate
-map identifies Q with d copies of ZMod ell, additively and equivariantly since the
-specified action on both sides is trivial. Under C, a constant sheaf has its value as
-geometric stalk and trivial monodromy: constant germs stay constant when the pointed
-lift changes. Conversely the canonical stalk/action comparison and full faithfulness
-identify the associated sheaf of a trivial representation with that constant sheaf.
-Preservation of finite products and coproducts transports the coordinate isomorphism
-to finite biproducts, with the zero-dimensional case giving the zero sheaf. Pullback
-across e preserves constant sheaves and binary biproducts; induction on d identifies
-this biproduct with the displayed Nat.rec expression. When A=B or B=0, d=0 works.
-There is no terminal sheaf or chain in this assertion. -/
+/-- Source: Stacks Project, Tag 04JQ. -/
 theorem primaryTrivialQuotient_constant
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

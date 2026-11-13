@@ -26,9 +26,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteComparisonCoefficients
 
 /-! # Specified finite coefficient realization and generator predicates
 
-Source: blueprint finite comparison, coefficient paragraph
-(blueprint: lem-ctf-finite-comparison-coefficients).
-
 The constructions are kept separately so their coefficient-presentation lemmas can be
 used by the localizing proof without a cyclic import.
 -/

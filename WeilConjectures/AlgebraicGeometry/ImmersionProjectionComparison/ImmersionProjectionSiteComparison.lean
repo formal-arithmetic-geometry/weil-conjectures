@@ -57,9 +57,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # The normalized immersion projection and site comparison
 
-Source: Stacks Tags 0E8I, 0GL1, 09AF and 07A4; blueprint main-20261015,
-finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-immersion-projection-site-comparison).
+Source: Stacks Tags 0E8I, 0GL1, 09AF and 07A4.
 
 The closed arrow is the ordinary counit transpose. The open arrow is the inverse
 unit transpose, with the signed symmetry putting the ambient factor first.
@@ -91,15 +89,13 @@ namespace AlgebraicGeometry.ImmersionProjectionComparison
 namespace Etale
 
 /-- The exact constant-coefficient inverse image.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 abbrev pull (A : Type (u + 1)) [CommRing A]
     {Y T : Scheme.{u}} (f : Y ⟶ T) :=
   (AlgebraicGeometry.Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
 
 /-- The canonical exact-pullback tensor comparison, transported from left derivation.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def tensorPull (A : Type (u + 1)) [CommRing A] [Finite A]
     {Y T : Scheme.{u}} (f : Y ⟶ T)
     (D P : DerivedCategory (Sheaf (T.smallEtaleTopology) (ModuleCat.{u + 1} A))) :=
@@ -117,8 +113,7 @@ def tensorPull (A : Type (u + 1)) [CommRing A] [Finite A]
           f).app P)
 
 /-- The exact closed direct image for the chosen factorization.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def closedPush (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :=
@@ -129,8 +124,7 @@ def closedPush (A : Type (u + 1)) [CommRing A] [Finite A]
   (AlgebraicGeometry.Etale.lowerStar (ModuleCat.{u + 1} A) c).mapDerivedCategory
 
 /-- The ordinary restriction/direct-image adjunction localized termwise.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def closedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] : pull A c ⊣ closedPush A c v :=
@@ -142,8 +136,7 @@ def closedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c)
 
 /-- The exact functor Q = v_! c_*.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def extension (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :=
@@ -151,8 +144,7 @@ def extension (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
 
 /-- The closed projection arrow, defined by its specified ordinary counit transpose.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def closedProjection (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -164,8 +156,7 @@ def closedProjection (A : Type (u + 1)) [CommRing A] [Finite A]
         ((pull A c).obj D)).map ((closedAdjunction A c v).counit.app P))
 
 /-- The signed symmetry of the native K-flat derived tensor.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def symmetry (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     AlgebraicGeometry.Etale.derivedTensor (ModuleCat.{u + 1} A) T ≅
       (AlgebraicGeometry.Etale.derivedTensor (ModuleCat.{u + 1} A) T).flip :=
@@ -176,8 +167,7 @@ def symmetry (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
   DerivedCategory.canonicalTensorSymmetry (Sheaf (T.smallEtaleTopology) (ModuleCat.{u + 1} A))
 
 /-- The open projection isomorphism, inverse to the open-unit transpose.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def openProjection (A : Type (u + 1)) [CommRing A] [Finite A]
     {V X : Scheme.{u}} (v : V ⟶ X) [IsOpenImmersion v]
     (D : DerivedCategory (Sheaf (X.smallEtaleTopology) (ModuleCat.{u + 1} A)))
@@ -196,8 +186,7 @@ def openProjection (A : Type (u + 1)) [CommRing A] [Finite A]
             (ModuleCat.{u + 1} A) v).app D)).app P)
 
 /-- The canonical immersion projection: the open isomorphism followed by v_! of the closed map.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def projection (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -213,15 +202,13 @@ end Etale
 namespace ProEtale
 
 /-- The exact constant-coefficient inverse image.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 abbrev pull (A : Type (u + 1)) [CommRing A]
     {Y T : Scheme.{u}} (f : Y ⟶ T) :=
   (AlgebraicGeometry.ProEtale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
 
 /-- The canonical exact-pullback tensor comparison, transported from left derivation.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def tensorPull (A : Type (u + 1)) [CommRing A] [Finite A]
     {Y T : Scheme.{u}} (f : Y ⟶ T)
     (D P : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) :=
@@ -240,8 +227,7 @@ def tensorPull (A : Type (u + 1)) [CommRing A] [Finite A]
           A) f).app P)
 
 /-- The exact closed direct image for the chosen factorization.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def closedPush (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :=
@@ -252,8 +238,7 @@ def closedPush (A : Type (u + 1)) [CommRing A] [Finite A]
   (AlgebraicGeometry.ProEtale.lowerStar (ModuleCat.{u + 1} A) c).mapDerivedCategory
 
 /-- The ordinary restriction/direct-image adjunction localized termwise.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def closedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] : pull A c ⊣ closedPush A c v :=
@@ -265,8 +250,7 @@ def closedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c)
 
 /-- The exact functor Q = v_! c_*.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def extension (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :=
@@ -274,8 +258,7 @@ def extension (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
 
 /-- The closed projection arrow, defined by its specified ordinary counit transpose.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def closedProjection (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -287,8 +270,7 @@ def closedProjection (A : Type (u + 1)) [CommRing A] [Finite A]
         ((pull A c).obj D)).map ((closedAdjunction A c v).counit.app P))
 
 /-- The signed symmetry of the native K-flat derived tensor.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def symmetry (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     AlgebraicGeometry.ProEtale.derivedTensor (ModuleCat.{u + 1} A) T ≅
       (AlgebraicGeometry.ProEtale.derivedTensor (ModuleCat.{u + 1} A) T).flip :=
@@ -299,8 +281,7 @@ def symmetry (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
   DerivedCategory.canonicalTensorSymmetry (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
 
 /-- The open projection isomorphism, inverse to the open-unit transpose.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def openProjection (A : Type (u + 1)) [CommRing A] [Finite A]
     {V X : Scheme.{u}} (v : V ⟶ X) [IsOpenImmersion v]
     (D : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
@@ -319,8 +300,7 @@ def openProjection (A : Type (u + 1)) [CommRing A] [Finite A]
             (ModuleCat.{u + 1} A) v).app D)).app P)
 
 /-- The canonical immersion projection: the open isomorphism followed by v_! of the closed map.
-Source: Stacks Tags 0E8I, 0GL1 and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 0E8I, 0GL1 and 07A4. -/
 def projection (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -334,22 +314,19 @@ def projection (A : Type (u + 1)) [CommRing A] [Finite A]
 end ProEtale
 
 /-- Exact comparison pullback in the fixed constant-ring sheaf presentation.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 abbrev comparison (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
   (AlgebraicGeometry.ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
 
 /-- The canonical tensor comparison of exact site pullback.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def comparisonTensor (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
     (D P : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
   (AlgebraicGeometry.ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
     (ModuleCat.{u + 1} A) D).app P
 
 /-- The canonical comparison a_f, descended from the existing ordinary inverse-image square.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def pullComparison (A : Type (u + 1)) [CommRing A]
     {S X : Scheme.{u}} (f : S ⟶ X) :=
   Functor.mapDerivedCategorySquareIso
@@ -357,8 +334,7 @@ def pullComparison (A : Type (u + 1)) [CommRing A]
       (ModuleCat.{u + 1} A) f).symm
 
 /-- The composite a_s for s = c followed by v, in the factorized pullback presentation.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def immersionPullComparison (A : Type (u + 1)) [CommRing A]
     {S V X : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ X)
     (D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
@@ -367,8 +343,7 @@ def immersionPullComparison (A : Type (u + 1)) [CommRing A]
 
 /-- The closed counit-mate comparison, presented by exact termwise descent. On D+ this
 is the specified fixedComparisonDirectImageMatePlus under the published normalization.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def closedComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :
@@ -391,8 +366,7 @@ def closedComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       c (ModuleCat.{u + 1} A)))
 
 /-- Delta is the canonical open comparison followed by v_! of the closed counit mate.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def extensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -403,15 +377,13 @@ def extensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       (ModuleCat.{u + 1} A) v).mapDerivedCategory.mapIso ((closedComparison A c v).app P)
 
 /-- The degree-zero etale sheaf used in the comparison assertion.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 abbrev single (A : Type (u + 1)) [CommRing A] {S : Scheme.{u}}
     (P : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   (DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj P
 
 /-- The stratum tensor s_e^*D tensor P, with the prescribed factorization.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 abbrev stratumTensor (A : Type (u + 1)) [CommRing A]
     {S V X : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ X)
     (D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
@@ -420,8 +392,7 @@ abbrev stratumTensor (A : Type (u + 1)) [CommRing A]
     ((Etale.pull A c).obj ((Etale.pull A v).obj D))).obj (single A P)
 
 /-- Invertibility and simultaneous naturality of the specified Etale projection arrow.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def etaleProjectionProperty (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] : Prop :=
@@ -443,8 +414,7 @@ def etaleProjectionProperty (A : Type (u + 1)) [CommRing A] [Finite A]
           ((Etale.pull A c).obj ((Etale.pull A v).obj D'))).map p))
 
 /-- Invertibility and simultaneous naturality of the specified ProEtale projection arrow.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def proetaleProjectionProperty (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] : Prop :=
@@ -466,8 +436,7 @@ def proetaleProjectionProperty (A : Type (u + 1)) [CommRing A] [Finite A]
           ((ProEtale.pull A c).obj ((ProEtale.pull A v).obj D'))).map p))
 
 /-- The target identification Q_p((a_s tensor 1) after t_S) in the displayed square.
-Source: Stacks Tags 09AF, 099R and 07A4
-(blueprint: lem-sf-immersion-projection-site-comparison). -/
+Source: Stacks Tags 09AF, 099R and 07A4. -/
 def targetMap (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -1998,40 +1967,7 @@ private theorem stratumTensor_bounded
 
 /-- The normalized immersion projection is natural and invertible on both unbounded
 categories and respects site comparison in the stated bounded-below flat-sheaf case.
-Source: Stacks Tags 0E8I, 0GL1, 09AF and 07A4; blueprint main-20261015,
-finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-immersion-projection-site-comparison).
-
-Proof:
-1. Exact termwise descent preserves the closed adjunction and its invertible counit.
-Noetherianity supplies the required exactness on the intermediate open subscheme.
-2. Closed restriction and restriction to the complementary open jointly detect
-isomorphisms. The tensor of an ambient complex with a closed direct image vanishes
-on that open. The closed restriction of its adjunction unit is invertible by the
-triangle identity; its open restriction is a map between zero objects. Hence the
-unit is invertible, and so is the specified closed projection transpose.
-3. Compose the published unbounded open projection with the open direct image of
-this closed projection. Package the maps as bifunctor transformations to prove
-simultaneous naturality in both inputs.
-4. Flat geometric stalks imply a flat sheaf. Its degree-zero single complex has
-Tor amplitude [0,0]. Exact pullback preserves a lower bound for D; the native
-Tor-amplitude tensor bound and signed symmetry preserve it for the stratum tensor.
-5. Transport the native left-derived tensor comparisons through the exact-functor
-normalizations. Naturality makes this transport compatible with composition and
-symmetry. The ordinary monoidal pullback square therefore yields compatibility
-of the exact tensor maps with the specified pullComparison.
-6. The ordinary closed base-change map is the mate of the pullback square.
-Exact mate normalization and the categorical projection-mate identity give the
-closed projection square for the precise closedComparison in the statement.
-7. Invert the published open projection comparison square, move restriction
-normalizations by naturality, and conjugate by the signed tensor symmetries.
-8. Expand projection and extensionComparison into their open and closed factors.
-Naturality moves the closed projection through the open comparison. Insert the
-closed square, move the pullback comparison through the closed projection, and
-insert the open square. Naturality in its stratum input moves the closed comparison
-through the open projection. Tensor functoriality identifies the resulting target
-with targetMap. Combine this equality with steps 3 and 4.
--/
+Source: Stacks Tags 0E8I, 0GL1, 09AF and 07A4. -/
 theorem immersion_projection_site_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)

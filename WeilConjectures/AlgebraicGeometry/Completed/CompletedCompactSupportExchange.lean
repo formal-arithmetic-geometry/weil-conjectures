@@ -61,12 +61,24 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 /-!
 # Completed compact-support exchange for a chosen compactification
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-Definition 1939, main-20261015 (blueprint: def-cbc-completed-exchange-map).
-
 The proper factor is the specified strict-tower exchange, followed by direct
 image of the canonical completed open comparison. The two Cartesian squares
 retain the chosen base-changed compactification and its projection.
+
+## Implementation details
+
+In `completedCompactSupportExchange`, the target compactification is the base change of the
+source one, with the supplied projection `gbar`, rather than an unrelated factorization. The
+coefficient datum contains all Noetherian, finite-quotient, torsion and perfectness hypotheses;
+`K` belongs to the intrinsic derived-complete category, with any finite generating tuple of the
+ideal (including the empty tuple). A compactification already implies that `f` is separated and
+locally of finite type; `[QuasiCompact f]` supplies the remaining finite-type condition.
+
+The first factor `completedExchange` is the derived limit of the strict projection map,
+followed by the derived limit of the specified strict tower exchange and the inverse
+direct-image/derived-limit comparison. No lift is chosen from its individual finite
+evaluations; on witnessed reductions it is `completedBaseChangeMap`. No invertibility or
+compactification-independence assertion is part of the definition.
 -/
 
 @[expose] public noncomputable section
@@ -83,28 +95,8 @@ namespace AlgebraicGeometry.Scheme
 /-- The completed compact-support exchange attached to a compactification and its
 base change. `properSquare` and `openSquare` specify the lower proper and upper
 open Cartesian squares, respectively; their outer square is the given compact-support
-square. The target compactification is thus the base change of the source one,
-with the supplied projection `gbar`, rather than an unrelated factorization.
-
-The coefficient datum contains all Noetherian, finite-quotient, torsion and
-perfectness hypotheses. `K` belongs to the intrinsic derived-complete category,
-with any finite generating tuple of the ideal (including the empty tuple).
-A compactification already implies that `f` is separated and locally of finite
-type; `[QuasiCompact f]` supplies exactly the remaining finite-type condition.
-The quasi-compactness needed by open exchange then follows from properness of
-the compactification map.
-
-The first factor is `completedExchange`: derived limit of the strict projection
-map, followed by derived limit of the specified strict tower exchange and the
-inverse direct-image/derived-limit comparison. The strict exchange is the
-projection-formula realization H inverse, reduction of the ambient mate, H prime;
-no lift is chosen from its individual finite evaluations. On witnessed reductions
-it is precisely `completedBaseChangeMap`. The second factor is direct image of
-`cbcDatumCompletedExchange`, the normalized completed extension-by-zero comparison.
-No invertibility or compactification-independence assertion is part of this definition.
-
-Source: blueprint main-20261015, Definition 1939; strict-tower expansion of the
-same definition, order 1588 (blueprint: def-cbc-completed-exchange-map). -/
+square. The map is `completedExchange` followed by direct image of
+`cbcDatumCompletedExchange`. -/
 def completedCompactSupportExchange
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

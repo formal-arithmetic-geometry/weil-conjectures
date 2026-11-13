@@ -34,11 +34,7 @@ private theorem diagonalUniqueLift
   exact (cancel_mono t).1 (hε.trans he.symm)
 
 /-- Assemble normalized completed data from endpoint comparisons and finite
-comparison equations. Source: diagonal tower limit, paragraph (3)
-(blueprint: lem-sfb-diagonal-completed-data-assembly).
-Proof: lift the conjugated underlying arrow by the assumed hom-set bijection;
-cancel the invertible target comparison for uniqueness, and retain all supplied
-endpoint and finite-reduction normalizations. -/
+comparison equations. -/
 theorem diagonalCompleteData_of_bijective
     {A : Type a} [Category.{v} A] [Abelian A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -91,9 +87,7 @@ theorem diagonalCompleteData_of_bijective
     obtain ⟨e, g, he, hg, hmap⟩ := hfinite δ hδ n
     exact ⟨e, g, he, hg, hmap⟩
 
-/-- Finite endpoint comparisons with their heterogeneous class equations.
-Source: the finite normalization definitions
-(blueprint: lem-sfb-diagonal-completed-data-assembly). -/
+/-- Finite endpoint comparisons with their heterogeneous class equations. -/
 def diagonalFiniteCycleNormalizationHEq
     {A : Type a} [Category.{v} A] [Abelian A]
     [HasExt.{w} A] [HasExt.{w} (ℕᵒᵖ ⥤ A)]
@@ -109,9 +103,7 @@ def diagonalFiniteCycleNormalizationHEq
         (Ext.mk₀.{w} t.hom) (add_zero 2)) (zero_add 2)) (finiteClass n)
 
 /-- Replace homogeneous heterogeneous equalities by equalities in the finite
-normalization. Source: the finite normalization definitions
-(blueprint: lem-sfb-diagonal-completed-data-assembly).
-Proof: retain each pair of endpoint isomorphisms and apply eq_of_heq to its equation. -/
+normalization. -/
 theorem diagonalFiniteCycleNormalization_of_heq
     {A : Type a} [Category.{v} A] [Abelian A]
     [HasExt.{w} A] [HasExt.{w} (ℕᵒᵖ ⥤ A)]
@@ -127,8 +119,7 @@ theorem diagonalFiniteCycleNormalization_of_heq
   exact ⟨s, t, hs, ht, eq_of_heq he⟩
 
 /-- The strict-system part of the diagonal limit assertion, retaining its Ext
-class and finite normalization. Source: the system and limit interfaces
-(blueprint: lem-sfb-diagonal-completed-data-assembly). -/
+class and finite normalization. -/
 def DiagonalStrictDataSpec
     (ℓ : ℕ) {A : Type a} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -147,9 +138,7 @@ def DiagonalStrictDataSpec
       a.hom = diagonalDerivedSingleCounit ℓ L₀ D S ∧
       cycle.hom = a.inv ≫ D.T.map boundary.hom ≫ b.hom ∧ finite H roots cycle
 
-/-- Map only the finite predicate of strict data, preserving all witnesses.
-Source: strict-system normalization (blueprint: lem-sfb-diagonal-completed-data-assembly).
-Proof: unpack the witnesses and apply the supplied implication to their finite equation. -/
+/-- Map only the finite predicate of strict data, preserving all witnesses. -/
 theorem diagonalStrictData_map_finite
     (ℓ : ℕ) {A : Type a} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -166,11 +155,7 @@ theorem diagonalStrictData_map_finite
   obtain ⟨H, roots, a, b, cycle, ha, hc, hf⟩ := system
   exact ⟨H, roots, a, b, cycle, ha, hc, normalize H roots cycle hf⟩
 
-/-- Combine the strict-system part with completed compatibility.
-Source: the simultaneous diagonal limit assertion
-(blueprint: lem-sfb-diagonal-completed-data-assembly).
-Proof: unpack the strict witnesses and retain completed compatibility for the same
-endpoint identifications. -/
+/-- Combine the strict-system part with completed compatibility. -/
 theorem diagonalLimitData_of_strict
     (ℓ : ℕ) {A : Type a} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {B : Type b} [Category.{u} B] [Abelian B]

@@ -17,13 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotien
 /-!
 # Completed pullback through strict completed-coefficient towers
 
-Source: blueprint proper base change, completed pullback; Stacks Tag 099N
-(blueprint: def-weil-pbc-completed-pullback).
+Source: Stacks Tag 099N.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPull`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPull`
 -/
 
 @[expose] public noncomputable section
@@ -34,17 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The quotient-tower unit and the intrinsic Koszul unit give the same complete inputs.
-Source: blueprint completed pullback, last paragraph and its constant-completion comparison
-(blueprint: def-weil-pbc-completed-pullback).
-Proof: restrict along the constant-to-completed coefficient map. The finite quotient
-comparisons commute with all quotient transitions and with the quotient augmentation.
-Restriction preserves the specified strict derived limits. The Noetherian Koszul-to-
-quotient comparison identifies the completion objects and their units; it also commutes
-with scalar restriction. The constant-completion equivalence reflects invertibility,
-so the quotient unit is invertible exactly when every generating-list Koszul unit is.
-Finite generation supplies generating lists, and change of generators preserves this
-unit condition. This is a comparison of the two specified units, not their definition. -/
+/-- The quotient-tower unit and the intrinsic Koszul unit give the same complete inputs. -/
 theorem AdicCoefficientDatum.towerComplete_iff_intrinsic (T : Scheme.{t})
     (K : d.derived T) :
     d.TowerComplete T K ↔
@@ -73,17 +61,14 @@ theorem AdicCoefficientDatum.towerComplete_iff_intrinsic (T : Scheme.{t})
         (h r a ha _ _)
 
 /-- Completed pullback is precisely Rlim of tower pullback of the strict reduction tower.
-The formula extends to ambient inputs; its restriction is the completed pullback of the node.
-Source: blueprint completed pullback; Stacks 099N
-(blueprint: def-weil-pbc-completed-pullback). -/
+The formula extends to ambient inputs.
+Source: Stacks 099N. -/
 def AdicCoefficientDatum.completedPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.derived V ⥤ d.derived U :=
   completedReductionTower V d ⋙ d.towerPull f ⋙ completedRlim U (d.completedRing U)
 
 /-- The canonical ordinary-to-completed comparison: constant-tower unit followed by
-the image of the actual strict quotient augmentation.
-Source: blueprint coherence, proof step 5; completed pullback, comparison paragraph
-(blueprint: def-weil-pbc-completed-pullback). -/
+the image of the actual strict quotient augmentation. -/
 def AdicCoefficientDatum.ordinaryToCompleted {U V : Scheme.{t}} (g : U ⟶ V)
     (K : d.derived V) : (d.pull g).obj K ⟶ (d.completedPull g).obj K :=
   (d.constantRlimAdjunction U).unit.app ((d.pull g).obj K) ≫

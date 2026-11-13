@@ -15,10 +15,7 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFin
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteCartierClassToArrow
 
 /-! # The finite image of the completed diagonal Cartier boundary
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-uniformizer-cartier-reduction).
- -/
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,25 +35,7 @@ attribute [local irreducible] quotientLine quotientLineMap derivedScalars
 
 /-- Reduction of the completed diagonal arrow, after its finite source and
 positive-root endpoint have already been supplied. This states no realization
-existence, direct-image comparison or trace identity.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), reduction of delta.
-(blueprint: lem-diagonal-uniformizer-cartier-reduction).
-
-Proof: Use reference.delta to replace the family's whole Z_l arrow by the
-realization of delta. The IsDiagonalLimit equation identifies that whole arrow
-with the completion of the positive Cartier boundary, and hcompletion identifies
-its reduction at n with the n-th cycle-system component of hsystem. Extend that
-component from Z/l^(n+1) to the finite quotient A. The canonical Cartier boundary
-commutes with this unital coefficient map. Associativity of derived scalar
-extension, family.toIntegral E and scalar.delta identify this composite with the
-finite realization of d.delta. The supported-source normalization fixes the
-source comparison; the projection equation in lineW fixes the target comparison
-and the positive sign. Conjugating by these endpoints gives the displayed full
-arrow equality. The argument reduces the specified completed arrow itself; it
-never infers equality of arbitrary derived arrows from their separate reductions.
-Ramification is harmless because A is explicitly killed by l^(n+1). -/
+existence, direct-image comparison or trace identity. -/
 theorem diagonalUniformizer_cartierReduction
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

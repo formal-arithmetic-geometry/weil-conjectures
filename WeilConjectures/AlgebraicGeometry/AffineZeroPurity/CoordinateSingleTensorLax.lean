@@ -14,10 +14,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
 /-! # The specified degree-zero lax tensorator
-
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, exact single realization of exterior products
-(blueprint: lem-pur-coordinate-single-tensor-lax).
 -/
 
 @[expose] public noncomputable section
@@ -30,15 +26,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open AlgebraicGeometry WeilConjectures
 namespace AlgebraicGeometry.ProEtale.AffineZeroPurity
 
-/-- The specified degree-zero tensor comparison is the tensorator of a lax structure.
-Source: degree-zero realization in the affine-space exterior-product argument.
-(blueprint: lem-pur-coordinate-single-tensor-lax).
-
-Proof: use the proved canonical monoidal structure on single cochain complexes,
-compose with the localization functor, and transport the resulting lax structure
-along singleFunctorIsoCompQ. The transported tensorator is, term for term, the
-specified cupSingleTensorMap: the two single/quotient comparisons, localization
-tensorator, ordinary single-complex tensor comparison, and inverse comparison. -/
+/-- The specified degree-zero tensor comparison is the tensorator of a lax structure. -/
 theorem coordinate_single_tensor_lax
     {C : Type*} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]

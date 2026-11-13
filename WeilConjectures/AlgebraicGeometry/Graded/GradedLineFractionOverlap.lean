@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Graded.GradedLineFractionBaseRefinement
 
 /-! # Agreement of graded line fraction charts
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9
-(blueprint: lem-trf-graded-line-fraction-overlap).
+Source: Stacks Project, Constructions, Tags 01NK and 01O9.
 -/
 
 @[expose] public section
@@ -29,25 +28,7 @@ attribute [local irreducible] Scheme.GradedAlgebraData.relProj
 attribute [local irreducible] Scheme.GradedAlgebraData.relProjι
 
 /-- The spectrum maps of any two framed homogeneous fractions agree over their overlap.
-No generation hypothesis is required.
-
-Source: Stacks Project, Constructions, Tag 01NK, lemma-invertible-map-into-proj,
-and Tag 01O9, lemma-invertible-map-into-relative-proj, affine gluing
-(blueprint: lem-trf-graded-line-fraction-overlap).
-
-Proof: Work locally on the pullback of the two source open immersions. At each
-point choose an affine base open V in the intersection of the two original base
-opens. Apply the local base-refinement lemma to each chart and intersect the inverse
-images of its comparison neighborhoods. This gives two charts over the same V and
-source and target comparison equations. The source equations and the original
-pullback condition give a morphism from this common neighborhood into the pullback
-of the restricted charts. Apply the fixed-base overlap lemma there: it constructs
-the homogeneous coefficient ring maps, uses the fraction formula to identify their
-chart maps with Proj.fromOfGlobalSections, and applies unit-power invariance to
-compare the two frames. Pull this equality back and use the target comparison
-equations. Scheme morphism locality gives the asserted global pullback equality.
-Empty opens and zero divisors require no exception: all scalar cancellation occurs
-either in a free frame or after the corresponding denominator has become a unit. -/
+No generation hypothesis is required. -/
 theorem gradedLineFraction_overlap
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

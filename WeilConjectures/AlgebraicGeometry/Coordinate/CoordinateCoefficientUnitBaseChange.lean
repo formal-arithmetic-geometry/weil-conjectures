@@ -194,17 +194,7 @@ private theorem unit_cancel
   rw [← Category.assoc, h]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
-/-- The ordinary constant-coefficient pullback comparison agrees with derived units.
-Source: lemma-section-normal-bundle, Local construction, canonical constant-coefficient
-identifications (blueprint: lem-trf-coordinate-coefficient-unit-base-change).
-
-Proof: Expanding the ordinary constant pullback comparison and using the recorded
-single/exact-pullback comparison identifies it with the derived single-constant-sheaf
-comparison. The inverse form of unit compatibility is
-P.map(u.inv) followed by that comparison equals the derived-unit pullback followed by
-u'.inv. Precompose the desired identity by P.map(u.inv), use this equality, and cancel
-the two unit isomorphisms. No invertibility or nonzero condition on coefficients is used.
--/
+/-- The ordinary constant-coefficient pullback comparison agrees with derived units. -/
 theorem coordinateCoefficientUnit_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S T : Scheme.{u}} (v : T ⟶ S) :

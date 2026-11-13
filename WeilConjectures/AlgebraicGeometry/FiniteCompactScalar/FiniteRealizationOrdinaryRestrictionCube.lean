@@ -11,8 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 
 /-! # The ordinary realization, restriction, and direct-image cube
 
-Source: Stacks Tags 00YV and 03D1; Step 1 of the realization/restriction cube.
-(blueprint: lem-finite-realization-ordinary-restriction-cube).
+Source: Stacks Tags 00YV and 03D1.
 -/
 
 @[expose] public noncomputable section
@@ -28,15 +27,7 @@ attribute [local implicit_reducible]
   AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage
 
 /-- The realization/restriction cube commutes before passing to derived categories.
-Source: Stacks Tags 00YV and 03D1; section-normalized intrinsic realization.
-(blueprint: lem-finite-realization-ordinary-restriction-cube).
-Proof: precompose by the invertible ordinary coefficient comparison and evaluate
-on a section. Surjectivity of the realization unit expresses that section as a
-unit section. The coefficient comparisons preserve its underlying section, and
-the two direct-image comparisons take unit sections to the corresponding target
-unit sections. Their resulting unit maps agree on underlying abelian sheaves.
-This proof works without properness or restrictions on the coefficient map,
-including zero rings and empty schemes. -/
+Source: Stacks Tags 00YV and 03D1. -/
 theorem realizationRestriction_ordinary_directImage_cube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)

@@ -106,7 +106,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 The Koszul construction is in `CompletedAdicKoszulConstruction`. Bounded flat factors,
 exact countable products and localization give its unit-compatible representative
-comparison. Source: blueprint def-weil-pbc-intrinsic-completion.
+comparison.
 -/
 
 -- After pruning, this module only keeps private declarations.

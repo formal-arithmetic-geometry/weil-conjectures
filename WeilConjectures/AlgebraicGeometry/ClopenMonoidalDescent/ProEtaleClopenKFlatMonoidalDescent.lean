@@ -56,8 +56,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 The finite-family equivalence and uniqueness on flat-term K-flat models are proved here.
 The remaining normalized braided lift is isolated in its own theorem.
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT
-(blueprint: lem-pur-clopen-kflat-monoidal-descent).
+Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -257,21 +256,7 @@ attribute [local irreducible] TotalNormalization ModelNormalization
 inverse is natural for every derived morphism; its tensorator and degree-zero unit make
 restriction a symmetric monoidal equivalence for the prescribed native tensor structures.
 
-Source: Stacks sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT; normalized
-finite-clopen application (blueprint: lem-pur-clopen-kflat-monoidal-descent).
-
-Proof:
-1. Reindex the existing finite clopen derived localization equivalence from Fin to I.
-2. Tensor detection supplies ordinary braided restriction, a normalized comparison on
-   every total summand, preservation of K-flat complexes, and coproduct preservation.
-3. Evaluating the summand equation on a local pure tensor proves TotalNormalization.
-4. The component braided model-normalization theorem gives the coherent derived lift,
-   its computation square, and its canonical unit equation.
-5. Cancel the computation and factorization isomorphisms on flat-term K-flat pairs.
-   Resolving localization is fully faithful on natural transformations; apply its
-   injectivity after transport along quotientCompQhIso to prove uniqueness everywhere.
-6. Assemble the component data. No nonempty index or nonzero coefficient is assumed.
--/
+Source: Stacks sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT. -/
 theorem clopen_kflat_monoidal_descent
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

@@ -173,8 +173,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-! # Standard truncations on the ordinary bounded constructible derived category
 
-Source: current blueprint prop-constructible-truncations. The categories here are full
-subcategories of the ordinary derived categories of pulled-back condensed modules.
+ The categories here are full subcategories of the ordinary derived categories of pulled-back
+condensed modules.
 -/
 
 @[expose] public noncomputable section
@@ -184,9 +184,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Triangulated AlgebraicG
 namespace WeilConjectures
 
 /-- The cohomology endofunctor specified by the proposition: truncate to degree i,
-then shift by i. Its value is a degree-zero heart object.
-Source: blueprint prop-constructible-truncations, cohomology display
-(blueprint: prop-constructible-truncations). -/
+then shift by i. Its value is a degree-zero heart object. -/
 def constructibleTruncationCohomology
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -294,9 +292,7 @@ variable {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
 
 /-- The standard bounded t-structure on the actual full constructible subcategory.
 Its heart is the category of constructible module objects; the final comparisons identify
-its truncations with the ambient canonical truncations, including their triangles.
-Source: current blueprint prop-constructible-truncations, first paragraph
-(blueprint: prop-constructible-truncations). -/
+its truncations with the ambient canonical truncations, including their triangles. -/
 def OrdinaryConstructibleTruncations [(boundedConstructible R).IsTriangulated]
     (t : TStructure (BoundedConstructible R)) : Prop :=
   (∀ (K : BoundedConstructible R) (n : ℤ),

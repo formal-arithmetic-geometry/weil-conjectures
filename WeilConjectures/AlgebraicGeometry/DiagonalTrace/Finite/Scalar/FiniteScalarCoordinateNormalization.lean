@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient.Finite
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Scalar transport of an arbitrary finite ordinary arrow
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-scalar-coordinate-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -50,14 +47,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Source and target normalizations conjugate any pair of related scalar arrows.
-Source: exact single-arrow endpoint naturality and the given unit section equation
-(blueprint: lem-sfb-finite-scalar-coordinate-normalization).
-
-Proof: apply coordinate_transport_of_comparison to the fixed finite forgetful
-functor and the given coefficient coordinates. The source equation is
-finiteScalarUnitCoordinate. The arbitrary target map is specified by hr, and
-the arbitrary middle arrows are related by the cached comparison relation hd. -/
+/-- Source and target normalizations conjugate any pair of related scalar arrows. -/
 theorem finiteScalarCoordinate_normalization (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

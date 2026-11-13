@@ -168,20 +168,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Adjunction.mapHomologicalComplex
 
 /-- The canonical open/scalar adjoint comparison has the prescribed cochain normalization.
-Source: Stacks Tags 0E8I, 03DI and 06YY; parent proof step 1.
-
-Proof: Transpose the two paths using the composite of the open adjunction and
-scalar adjunction. The scalar representative transposes to the localized
-ordinary scalar unit. The exact open adjunction unit is the localization of
-its ordinary unit under the exact localization factor isomorphisms. Naturality
-of those factors and the composition law for the derived right-adjoint square
-identify the transposed paths. At the ordinary level the equality is precisely
-the unit identity for uniqueness of left adjoints defining q-zero. The
-homological-complex comparison applies that identity degree by degree. Cancel
-the composite adjunction hom equivalence. This gives the equation for every
-complex, hence in particular for the K-flat complexes in the normalization
-predicate. The argument is valid for the empty open immersion and zero rings.
-(blueprint: lem-coef-etale-open-extension-normalization). -/
+Source: Stacks Tags 0E8I, 03DI and 06YY. -/
 theorem etaleOpenExtensionNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

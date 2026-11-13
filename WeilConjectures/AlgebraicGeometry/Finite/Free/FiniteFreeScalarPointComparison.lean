@@ -39,7 +39,6 @@ public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 import WeilConjectures.WeilObject.Sheaf.StalkUnit
 /-! # The underlying sheaf map of point module composition
-(blueprint: new-sfb-finite-free-scalar-point-comparison)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -72,13 +71,7 @@ private lemma unitComparison
   exact Functor.extendUnitHom_mapModCompExtendScalarsIso_hom_app_hom F G τ R M
 
 -- Compute the point comparison on its explicit module-composition model.
-/-- The canonical point module comparison has the specified underlying sheaf map.
-Source: blueprint scalar-six formal properties, p_X = f* p_Y.
-(blueprint: new-sfb-finite-free-scalar-point-comparison)
-
-Proof. Identify the inverse underlying scalar-extension map with its extension unit.
-The generic module-composition unit formula then computes the point comparison.
-The proof covers all coefficient modules, including zero modules. -/
+/-- The canonical point module comparison has the specified underlying sheaf map. -/
 theorem finiteFreeScalar_pointComparison_underlying
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

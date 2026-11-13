@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.BoundaryDivisorKernelPowers
 
 /-!
 # Units modulo powers under algebraically closed base change
-
-Source: blueprint
-sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance, affine-case
-proof, unit quotient paragraph (blueprint: lem-sc-units-quotient-base-change).
 -/
 
 @[expose] public section
@@ -83,28 +79,7 @@ private theorem quotient_powers_equiv
   exact ⟨MulEquiv.ofBijective q ⟨hinj, hsurj⟩, fun _ ↦ rfl⟩
 
 /-- Pullback identifies units modulo `n`-th powers after extending algebraically closed fields.
-The equation on representatives specifies that the isomorphism is induced by pullback.
-
-Source: blueprint
-sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance, affine-case
-proof, unit quotient paragraph (blueprint: lem-sc-units-quotient-base-change).
-
-Proof:
-1. Choose a smooth proper connected compactification with finite boundary using
-   lemma-proper-smooth-model--1. By lem-sc-base-change-curve its base change is again a smooth
-   proper connected compactification. Boundary points are rational over the algebraically
-   closed field, so their base changes identify the free boundary divisor groups.
-2. By lem-sc-affine-unit-divisor-base-change this identification carries the subgroup `L`
-   of boundary divisors of units onto `L'` and commutes with pullback of units.
-   The divisor map onto `L` is surjective by its definition. Its kernel consists of global
-   units on the compactification, by lemma-cohomology-multiplicative-group--6 and left exactness of
-   global sections. These are precisely the constants by lem-sc-global-functions.
-   The same argument applies over the extension field.
-3. Constants in both algebraically closed fields are `n`-divisible for `n ≥ 1`.
-   The divisor maps therefore identify the two unit quotients with `L/nL` and `L'/nL'`:
-   equality modulo `n` of divisors means equality up to an `n`-th power and a constant,
-   and the constant has an `n`-th root. The compatible identification of `L` with `L'`
-   induces the desired isomorphism, with the stated equation on unit classes. -/
+The equation on representatives specifies that the isomorphism is induced by pullback. -/
 theorem units_quotient_base_change
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

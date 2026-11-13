@@ -73,8 +73,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Etale to pro-etale comparison preserves signed symmetry
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4
-(blueprint: lem-pur-comparison-tensorator-signed-symmetry).
+Source: Stacks Project, Cohomology on Sites, Tag 07A4.
 -/
 
 @[expose] public section
@@ -89,19 +88,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The etale-to-pro-etale comparison tensorator commutes with the signed derived
 symmetries.  This is the localization of the signed total-complex exchange square.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4
-(blueprint: lem-pur-comparison-tensorator-signed-symmetry).
-Proof: choose flat-term K-flat representatives P and Q using site tensor descent.
-The comparison is exact and induced termwise, so its tensorator is represented by
-Tag 07A4's ordinary total-tensor comparison. ComparisonPullbackExact identifies
-inverse-image constant coefficients with the pro-etale coefficient sheaf; hence
-this is the ringed-topos pullback to which cochainPullbackTensorCoherence applies.
-On each bidegree (p,q) summand, that comparison commutes with the signed exchange
-(-1)^(p*q). Both derived symmetries are the localizations of precisely this signed
-exchange. Localize the chain equation and insert the representative comparison
-isomorphisms from site tensor descent. Their naturality makes this independent of
-representatives, and the uniqueness clause descends the equation to all unbounded
-M and N. Zero objects and degree-zero complexes satisfy the same identities. -/
+Source: Stacks Project, Cohomology on Sites, Tag 07A4. -/
 theorem comparisonTensorator_signedSymmetry
     (A : Type (u + 1)) [CommRing A] [Finite A] [TopologicalSpace A]
     [DiscreteTopology A] (T : Scheme.{u})

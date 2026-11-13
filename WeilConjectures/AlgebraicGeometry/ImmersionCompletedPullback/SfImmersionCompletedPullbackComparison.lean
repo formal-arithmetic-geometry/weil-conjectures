@@ -200,7 +200,7 @@ import all WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibilit
 
 /-! # Ordinary immersion pullback and strict completed pullback
 
-Source: localization Step 6; Stacks Tags 09AA, 099M and 099N (2),(5).
+Source: Stacks Tags 09AA, 099M and 099N (2),(5).
 The canonical coefficient constructions are reexported from CoreA; strict tower
 and Roos constructions remain in this module.
 -/
@@ -259,13 +259,7 @@ variable {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 attribute [local irreducible] pbcIntegralDatum
 
-/-- Identify the two strict constructions by their specified augmentation units.
-Source: localization Step 6, Steps 2 and 5
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: apply moduleIso levelwise and derive its exact tower functor. The chosen
-Rlim functors are the same universal right-derived limit. Their induced comparison
-carries the quotient augmentation to itself, giving the displayed equation.
-Completion is a reflector into complete objects, so its unit forces uniqueness. -/
+/-- Identify the two strict constructions by their specified augmentation units. -/
 theorem strictIso_exists :
     ∃! e : pbcActualStrictCompletedPull (pbcIntegralDatum l E) f ≅
         (pbcIntegralDatum l E).completedPull f,
@@ -298,14 +292,10 @@ theorem strictIso_exists :
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   exact (he' K).trans (he K).symm
 
-/-- The unit-normalized identification of the actual strict construction.
-Source: localization Step 6, Step 5
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The unit-normalized identification of the actual strict construction. -/
 def strictIso := (strictIso_exists l E f).exists.choose
 
-/-- The finite projection of the actual completed pullback, with its finite comparison.
-Source: localization Step 6, Step 5
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The finite projection of the actual completed pullback, with its finite comparison. -/
 def actualCompletedProjection
     (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (n : ℕ) :
     (pbcActualStrictCompletedPull (pbcIntegralDatum l E) f).obj K ⟶
@@ -315,30 +305,20 @@ def actualCompletedProjection
     (restrictedComparison l E f n).hom.app K ≫
     (restrictedReduction l E Y n).map ((derivedIso l E f).inv.app K)
 
-/-- The ordinary module inverse image with canonical completed coefficients.
-Source: localization Step 6, Step 1
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The ordinary module inverse image with canonical completed coefficients. -/
 abbrev modulePull :
     pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) ⥤
       pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E)) := proEtaleRingModulePullback f _ _
   ((pbcIntegralDatum l E).integralRingIso f)
 
-/-- Apply the specified ordinary inverse image to all terms of a complex.
-Source: localization Step 6, Step 1
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Apply the specified ordinary inverse image to all terms of a complex. -/
 abbrev complexPull := (modulePull l E f).mapHomologicalComplex (.up ℤ)
 
-/-- Apply the same inverse image to every level and transition of a strict tower complex.
-Source: localization Step 6, Steps 2 and 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Apply the same inverse image to every level and transition of a strict tower complex. -/
 abbrev towerComplexPull :=
   ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (modulePull l E f)).mapHomologicalComplex (.up ℤ)
 
-/-- Evaluation commutes with applying inverse image term by term.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: both complexes have inverse image of M_n in every degree and inverse image
-of its differential; their chain maps and differential proofs agree by extensionality. -/
+/-- Evaluation commutes with applying inverse image term by term. -/
 theorem complexEvaluation_eq
     (M : CochainComplex (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ)
     (n : ℕ) :
@@ -346,9 +326,7 @@ theorem complexEvaluation_eq
       ((towerComplexPull l E f).obj M).asFunctor.obj (op n) := by
   rfl
 
-/-- The actual product comparison, determined by its projections.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The actual product comparison, determined by its projections. -/
 def productComparison
     (M : CochainComplex (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ) :
     (complexPull l E f).obj (strictRoosProduct M) ⟶
@@ -373,13 +351,7 @@ private theorem modulePull_preservesProducts [IsImmersion f] :
   infer_instance
 
 /-- The coordinatewise Roos comparison, uniquely normalized by the product map.
-Source: localization Step 6, Step 4; Stacks 08TC
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: inverse image preserves countable products for an immersion. Its product
-comparison intertwines 1-s, since each projection gives the same pulled-back
-transition. In the two Roos coordinates use this comparison on each factor.
-The differentials (-dy-(1-s)x,dx) commute with this map; the inverse uses the
-inverse product comparison. The coordinates jointly determine the chain map. -/
+Source: Stacks 08TC. -/
 theorem roosIso_exists [IsImmersion f]
     (M : CochainComplex (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ) :
     ∃! e : (complexPull l E f).obj (strictRoosComplex M) ≅
@@ -396,18 +368,13 @@ theorem roosIso_exists [IsImmersion f]
   rw [hpc]
   exact roos_iso_unique (modulePull l E f) M
 
-/-- The strict Roos isomorphism; its data is fixed on both product coordinates.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The strict Roos isomorphism; its data is fixed on both product coordinates. -/
 def roosIso [IsImmersion f]
     (M : CochainComplex (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ) :=
   (roosIso_exists l E f M).exists.choose
 
 /-- A map of strict towers gives the uniquely coordinate-normalized Roos map.
-Source: localization Step 6, Step 4; Stacks 08TC
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: naturality intertwines the two transition endomorphisms. Apply the shifted
-mapping-cone construction; its two coordinates give the formula and uniqueness. -/
+Source: Stacks 08TC. -/
 theorem roosMap_exists (T : Scheme.{u})
     {M N : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ}
     (a : M ⟶ N) :
@@ -422,18 +389,13 @@ theorem roosMap_exists (T : Scheme.{u})
   apply (cancel_mono (strictRoosCoordinates N p).hom).1
   exact (hb p).trans (roosF_map_χ a p).symm
 
-/-- The strict map of the actual shifted Roos cones.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The strict map of the actual shifted Roos cones. -/
 def roosMap (T : Scheme.{u})
     {M N : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ}
     (a : M ⟶ N) := (roosMap_exists l E T a).exists.choose
 
 /-- The limit embeds into Roos by its zero and compatible-sequence coordinates.
-Source: localization Step 6, Step 4; Stacks 07KC
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: a compatible sequence is killed by 1-s. Therefore these coordinates commute
-with the displayed Roos differential; the coordinates also give uniqueness. -/
+Source: Stacks 07KC. -/
 theorem roosInclusion_exists (T : Scheme.{u})
     (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :
     ∃! a : limit I.asFunctor ⟶ strictRoosComplex I,
@@ -446,18 +408,12 @@ theorem roosInclusion_exists (T : Scheme.{u})
   apply (cancel_mono (strictRoosCoordinates I p).hom).1
   exact (ha p).trans (roosι_χ I p).symm
 
-/-- The compatible-sequence inclusion, fixed on both cone coordinates.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The compatible-sequence inclusion, fixed on both cone coordinates. -/
 def roosInclusion (T : Scheme.{u})
     (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :=
   (roosInclusion_exists l E T I).exists.choose
 
-/-- The termwise limit and the limit of evaluated complexes have the same projections.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: limits of complexes are computed degreewise. Their universal property in
-each degree gives this chain isomorphism and determines it by its projections. -/
+/-- The termwise limit and the limit of evaluated complexes have the same projections. -/
 theorem termwiseLimitIso_exists (T : Scheme.{u})
     (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :
     ∃! e : (Functor.mapHomologicalComplex
@@ -481,9 +437,7 @@ theorem termwiseLimitIso_exists (T : Scheme.{u})
   ext p : 1
   exact (he' n.unop p).trans (he n.unop p).symm
 
-/-- The projection-normalized comparison of the two ordinary limit computations.
-Source: localization Step 6, Step 4
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The projection-normalized comparison of the two ordinary limit computations. -/
 def termwiseLimitIso (T : Scheme.{u})
     (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :=
   (termwiseLimitIso_exists l E T I).exists.choose

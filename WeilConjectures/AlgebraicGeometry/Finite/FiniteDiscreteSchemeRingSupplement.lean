@@ -158,18 +158,7 @@ open scoped CategoryTheory.Obj
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- The monoidal constant-ring identification on a profinite point pulls to every scheme.
-Source: Bhatt--Scholze, Section 5.3; formal uniqueness of monoidal left adjoints
-(blueprint: lem-weil-pbc-finite-discrete-scheme-ring-constant).
-
-Proof. The constant-sheaf functor is left adjoint to sections at a terminal object.
-Pushforward preserves these sections, since base change sends the terminal pro-etale
-object to a terminal object. Conjugate this monoidal sections comparison to obtain
-the monoidal constant-sheaf pullback comparison, first from profinite sets to Spec Z,
-then from Spec Z to T. Apply it to the ring object ULift B. The composite-functor
-monoid structure agrees with successive transport by monObjObj_comp; the constant
-presheaf ring structure agrees with the pointwise transported one. Finally map the
-given point ring isomorphism along upperStarFromPoint. Every map preserves the
-unit and multiplication, including for empty schemes and the zero ring. -/
+Source: Bhatt--Scholze, Section 5.3. -/
 theorem finiteDiscreteSchemeRing_constant (T : Scheme.{u})
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
       (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj

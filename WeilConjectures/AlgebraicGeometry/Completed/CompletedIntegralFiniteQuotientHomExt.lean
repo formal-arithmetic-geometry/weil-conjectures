@@ -10,9 +10,6 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficien
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralProjectionDivisibility
 
 /-! # Uniqueness of normalized maps from completed coefficients to a finite quotient
-
-Source: the finite-quotient uniqueness argument in the coefficient-tower comparison,
-blueprint main-20261015, prose-09-21.
 -/
 
 @[expose] public noncomputable section
@@ -107,21 +104,7 @@ private theorem completedIntegral_approximation
   rw [← hy]
   exact (add_sub_cancel _ _).symm
 
-/-- Maps into one finite constant quotient are determined by their normalized scalar map.
-Source: blueprint main-20261015, coefficient convention in prose-09-21;
-the uniqueness step of its completed-coefficient comparison.
-(blueprint: lem-sp-completed-integral-finite-quotient-hom-ext)
-
-Proof: Choose k with the (k+1)st uniformizer ideal contained in I. Constant
-sheafification commutes with the underlying-set functor. A set-theoretic section of
-the quotient map therefore gives surjectivity on every object's sections. Lift the
-finite projection of x to a section a of the constant integer sheaf. The difference
-x-c(a) has zero projection; `completedIntegralProjection_divisible` writes it as
-c(pi)^(k+1)y. Scalar normalization and naturality of the sheafification unit imply
-that both maps send c(pi)^(k+1) to zero: pi^(k+1) belongs to I. They also agree on
-c(a). Applying the two ring maps to x=c(a)+c(pi)^(k+1)y gives equality on x.
-Extensionality on site objects and sections gives equality of sheaf maps.
--/
+/-- Maps into one finite constant quotient are determined by their normalized scalar map. -/
 theorem completedIntegralFiniteQuotientHom_ext
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})

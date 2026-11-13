@@ -10,6 +10,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 /-! # Ext naturality for a square of exact functors
 
 Source: Stacks Project, Section 01F7, functoriality of derived inverse image.
+
+## Implementation details
+
+`compositionComparison` is adapted from `exactFunctorCompositionComparison`, allowing each Ext
+universe to be chosen independently.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -18,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace CategoryTheory.Abelian.Ext
 
 /-- The composition comparison with independent Ext universes.
-Source: Stacks Project, Tag 015F. Adapted from the complete proof of
-`exactFunctorCompositionComparison` in Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison.
-Identify Ext classes with derived morphisms, verify the single-complex comparison
-degreewise, and apply shifted naturality. Each Ext universe can be chosen independently. -/
+Source: Stacks Project, Tag 015F. -/
 private theorem compositionComparison
     {C : Type u₁} {D : Type u₂} {E : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₄} E]
@@ -137,20 +139,7 @@ private theorem compositionComparison
     exact hh
 
 /-- A natural isomorphism between composite exact functors intertwines their Ext maps.
-Source: Stacks Project, Section 01F7; naturality of maps in derived categories.
-(blueprint: lem-pc-ext-exact-functor-square)
-
-Proof: Apply each exact functor termwise to complexes. The natural isomorphism c
-then induces a chain isomorphism between the two resulting composite functors.
-Its naturality holds for chain maps and hence for roofs representing morphisms
-in the derived category, since its components are isomorphisms. It commutes with
-shifts termwise. A degree-n Ext class is a derived morphism from the single
-complex of A to the n-shift of the single complex of F. Naturality for that
-morphism gives exactly the equality below, after identifying the single-complex
-comparisons for composite functors. Shrinking these morphism sets in HasExt
-preserves the equality. This works in degree zero and in all higher degrees;
-zero objects or zero classes require no separate nonvanishing hypothesis.
--/
+Source: Stacks Project, Section 01F7. -/
 theorem mapExactFunctor_square
     {C₁ : Type u₁} [Category.{v₁} C₁] [Abelian C₁] [HasExt.{w₁} C₁]
     {C₂ : Type u₂} [Category.{v₂} C₂] [Abelian C₂] [HasExt.{w₂} C₂]

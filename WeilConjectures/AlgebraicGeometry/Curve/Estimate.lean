@@ -43,6 +43,14 @@ abelian variety of dimension `g`; its `n`-torsion is `(ℤ/n)^{2g}` and it is `n
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_two`:
   `H²(C, ℤ/n) ≅ ℤ/n`.
 - `AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`: all degrees at once.
+
+## Implementation details
+
+The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`. For a smooth proper curve it agrees, by Serre
+duality, with the arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)`
+(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), which is the dimension of the Jacobian.
+The isomorphisms in degrees one and two depend on the choice of a primitive `n`-th root of unity,
+so they are only asserted to exist.
 -/
 
 @[expose] public section
@@ -58,8 +66,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 omit [IsAlgClosed k] in
 /-- **The curve estimate in degree zero.** Let `C` be a smooth proper connected curve over a
 field `k`, and let `n ≥ 1` be prime to `char k`. Then `H⁰(C_ét, ℤ/n) ≅ ℤ/n`; this only uses
-that `C` is connected, so `k` need not be algebraically closed.
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
+that `C` is connected, so `k` need not be algebraically closed. -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) :=
@@ -78,17 +85,7 @@ lemma Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf (f : C ⟶ 
 
 /-- **The curve estimate in degree one.** Let `C` be a smooth proper connected curve of genus
 `g` over an algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
-`H¹(C_ét, ℤ/n) ≅ (ℤ/n)^{2g}`.
-
-The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint
-(`def-sc-curves`). For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
-`AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch block
-(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), which is the dimension of the Jacobian.
-
-After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H¹(C, μₙ) ≅ Pic(C)[n]`
-(`AlgebraicGeometry.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper`), which is
-`(ℤ/n)^{2g}` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`.
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
+`H¹(C_ét, ℤ/n) ≅ (ℤ/n)^{2g}`. -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) := by
@@ -105,17 +102,7 @@ theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k
 
 /-- **The curve estimate in degree two.** Let `C` be a smooth proper connected curve over an
 algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
-`H²(C_ét, ℤ/n) ≅ ℤ/n`.
-
-The isomorphism depends on the choice of a primitive `n`-th root of unity, that is, of an
-isomorphism `μₙ ≅ ℤ/n` of étale sheaves, so it is only asserted to exist. A connected curve has
-dimension exactly one (`AlgebraicGeometry.IsConnectedCurve.krullDim_eq_one`); without this
-`Spec k` would be a smooth proper connected curve with `H² = 0`.
-
-After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H²(C, μₙ) ≅ Pic(C)/n`
-(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`), which is
-`ℤ/n` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`.
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
+`H²(C_ét, ℤ/n) ≅ ℤ/n`. -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) := by
@@ -134,15 +121,7 @@ theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k
 genus `g` over an algebraically closed field `k` and let `n ≥ 1` be prime to `char k`. Then
 
 `H⁰(C, ℤ/n) ≅ ℤ/n`, `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`, `H²(C, ℤ/n) ≅ ℤ/n`, `H^q(C, ℤ/n) = 0` for
-`q > 2`.
-
-The proof is the one of the remark closing the curve estimates: degree zero is `μₙ(k) = ℤ/n`,
-degree one is `Pic(C)[n] = J(C)[n]`, degree two is `Pic(C)/n = ℤ/n` via the Kummer sequence and
-`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `lem-sc-second-kummer-divisors`), and the vanishing above two is
-the bound on the cohomological dimension (blueprint `theorem-cohomology-curves`).
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`,
-`sk-the-final-theorem-the-curve-estimate--remark-1`,
-`the-final-theorem-the-curve-estimate--remark-1`) -/
+`q > 2`. -/
 theorem IsConnectedCurve.sheafH_constantZMod_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) ∧

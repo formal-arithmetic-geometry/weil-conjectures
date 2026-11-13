@@ -24,10 +24,9 @@ public import WeilConjectures.Mathlib.RingTheory.Unramified.Field
 # A finite generically étale map from an affine curve to the affine line
 
 Let `C` be a smooth affine curve over a finite field `k`. We construct a finite morphism
-`g : C ⟶ 𝔸¹_k` over `k` which is étale over a dense open of `𝔸¹_k`
-(blueprint `lemma-finite-generically-etale-map-line--1`).
+`g : C ⟶ 𝔸¹_k` over `k` which is étale over a dense open of `𝔸¹_k`.
 
-Instead of the smooth projective completion and Riemann–Roch used in the blueprint, we use a
+Instead of the smooth projective completion and Riemann–Roch, we use a
 separable variant of Noether normalization for the coordinate ring `A = Γ(C, ⊤)`:
 
 * Noether normalization gives `x : A` with `A` finite over `k[x]`;
@@ -49,7 +48,7 @@ separable variant of Noether normalization for the coordinate ring `A = Γ(C, �
 - `AlgebraicGeometry.AffineSpace.exists_isFinite_etale_morphismRestrict_of_finite`: for a smooth
   affine geometrically connected curve over a finite field.
 - `AlgebraicGeometry.AffineSpace.exists_isOpenImmersion_isFinite_etale_morphismRestrict`: the
-  statement in the shape of blueprint `lemma-finite-generically-etale-map-line--1`.
+  same statement for a dense open embedding into a curve with finite complement.
 -/
 
 @[expose] public section
@@ -62,9 +61,7 @@ open CategoryTheory Limits Polynomial KaehlerDifferential
 Let `A` be a finitely generated domain of dimension at most one over a perfect field `k` of
 characteristic `p > 0`, with fraction field `K` such that `Ω[K⁄k]` is one-dimensional. Then there
 is an injective `k`-algebra map `ψ : k[X] → A` making `A` a finite flat `k[X]`-algebra which is
-unramified away from some nonzero `h : k[X]`.
-
-Algebraic core of blueprint `lemma-finite-generically-etale-map-line--1`. -/
+unramified away from some nonzero `h : k[X]`. -/
 theorem Algebra.exists_finite_formallyUnramified_away {k A K : Type*} [Field k] [PerfectField k]
     (p : ℕ) [hp : Fact p.Prime] [CharP k p] [CommRing A] [IsDomain A] [Algebra k A]
     [Algebra.FiniteType k A] (hA : ringKrullDim A ≤ 1) [Field K] [Algebra A K]
@@ -197,8 +194,7 @@ variable {k : Type u} [Field k]
 namespace AffineSpace
 
 /-- A smooth affine integral curve `C` over a perfect field `k` of positive characteristic admits
-a finite morphism `g : C ⟶ 𝔸¹_k` over `k` which is étale over a dense open `V` of `𝔸¹_k`
-(blueprint `lemma-finite-generically-etale-map-line--1`). -/
+a finite morphism `g : C ⟶ 𝔸¹_k` over `k` which is étale over a dense open `V` of `𝔸¹_k`. -/
 theorem exists_isFinite_etale_morphismRestrict [PerfectField k] (p : ℕ) [Fact p.Prime]
     [CharP k p] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsAffine C] [IsIntegral C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] :
@@ -270,9 +266,9 @@ theorem exists_isFinite_etale_morphismRestrict [PerfectField k] (p : ℕ) [Fact 
     exact Etale.of_comp _ (ε ''ᵁ W).ι
 
 
-/-- **Finite map to the affine line** (blueprint `lemma-finite-generically-etale-map-line--1`, with
-`C' = C`). A smooth affine geometrically connected curve `C` over a finite field `k` admits a finite
-morphism `g : C ⟶ 𝔸¹_k` over `k` which is étale over a dense open `V` of `𝔸¹_k`. -/
+/-- **Finite map to the affine line**. A smooth affine geometrically connected curve `C` over a
+finite field `k` admits a finite morphism `g : C ⟶ 𝔸¹_k` over `k` which is étale over a dense open
+`V` of `𝔸¹_k`. -/
 theorem exists_isFinite_etale_morphismRestrict_of_finite [Finite k] (C : Scheme.{u})
     [C.Over (Spec (.of k))] [IsAffine C] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
     [GeometricallyConnected (C ↘ Spec (.of k))] :
@@ -288,12 +284,10 @@ theorem exists_isFinite_etale_morphismRestrict_of_finite [Finite k] (C : Scheme.
   have : Fact (ringChar k).Prime := ⟨CharP.char_is_prime k _⟩
   exact exists_isFinite_etale_morphismRestrict (ringChar k) C
 
-/-- **Finite map to the affine line**, in the shape of blueprint
-`lemma-finite-generically-etale-map-line--1`. Let `C` be a smooth affine geometrically connected
+/-- **Finite map to the affine line.** Let `C` be a smooth affine geometrically connected
 curve over a finite field `k`. There is a smooth geometrically connected curve `C'` over `k`
 containing `C` as a dense open with finite complement, and a finite morphism `g : C' ⟶ 𝔸¹_k` over
-`k` which is étale over a dense open of `𝔸¹_k`. One can take `C' = C`, see
-`exists_isFinite_etale_morphismRestrict_of_finite`. -/
+`k` which is étale over a dense open of `𝔸¹_k`. -/
 theorem exists_isOpenImmersion_isFinite_etale_morphismRestrict [Finite k] (C : Scheme.{u})
     [C.Over (Spec (.of k))] [IsAffine C] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
     [GeometricallyConnected (C ↘ Spec (.of k))] :

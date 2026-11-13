@@ -142,27 +142,7 @@ private theorem exact_projection
     (mapDerivedCategoryUpperStarDerivedTensorIso (ModuleCat.{u + 1} A) j).hom K M
 
 /-- Scalar extension intertwines the exact open projection map and the scalar tensor maps.
-Source: Stacks Tags 0E8I, 03EL, 06YY and 0E8J; parent proof step 3,
-the mixed scalar/tensor compatibility assertion.
-
-Proof: The ordinary scalar/restriction comparison is the mate of the sectionwise
-commutation of restriction of coefficients with direct image. This sectionwise
-map is monoidal; the conjugate is therefore monoidal for the canonical scalar
-oplax tensorators. Apply the ordinary equation degreewise and take signed
-direct-sum totalizations. On complexes with flat terms that are K-flat, the
-scalar representative maps and the localization tensorator are invertible.
-The normalization of the scalar tensor comparison transports the ordinary
-monoidal square to the derived restriction square. Every derived object has
-a flat K-flat representative; naturality and cancellation extend this square
-to all objects in both variables. Finally transpose under the two exact open
-adjunctions. The unit identity for q and the definition of r as its scalar
-mate identify the transposed maps. The general projection-map mate identity
-then gives the displayed mixed projection square. Cancel the invertible q,
-r and tensor comparison factors to obtain the stated orientation. All tensor
-products are derived using unbounded flat K-flat representatives; neither a
-flat coefficient homomorphism nor a quasi-compact open immersion is needed.
-The unit identities also cover the empty scheme and the zero coefficient ring.
-(blueprint: lem-coef-etale-open-mixed-tensor-scalar). -/
+Source: Stacks Tags 0E8I, 03EL, 06YY and 0E8J. -/
 theorem etaleOpenMixedTensorScalar
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

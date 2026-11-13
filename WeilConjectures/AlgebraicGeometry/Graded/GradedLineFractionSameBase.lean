@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 /-! # Overlap comparison over a fixed affine base
 
 Source: Stacks Project, Constructions, Tags 01NK and 01O9.
-(blueprint: lem-trf-graded-line-fraction-same-base).
 -/
 
 @[expose] public section
@@ -388,30 +387,7 @@ private theorem fractionBase_chart
     using congrArg (fun g ↦ g ≫ A.relProjι i.U) hfactor
 
 /-- Fraction charts over one fixed affine base agree on their source pullback.
-The source frames, their affine opens, and the positive degrees may differ.
-
-Source: Stacks Project, Constructions, Tag 01NK, proof of
-lemma-invertible-map-into-proj (uniqueness and the affine construction).
-(blueprint: lem-trf-graded-line-fraction-same-base).
-
-Proof: Refine the intersection of the two framed source opens by affine opens B.
-Restrict both frames to B; their ratio is a unit. Induction using hP0 and hPs shows
-that P commutes with restriction and takes a unit multiple of a frame to the same
-unit to the n-th power times its n-th frame power. These powers are free generators,
-so hc identifies the two systems of homogeneous coefficients up to these unit powers.
-The unit, addition, and multiplication laws of psi make either system the homogeneous
-parts of an explicitly constructed ring map A(U) to O(B). Choose B inside the two
-coefficient basic opens, so both selected denominator coefficients are units. On either
-chart the prescribed fraction map agrees with the standard chart factorization of
-Proj.fromOfGlobalSections: both satisfy the same fraction-times-denominator equation,
-and its denominator is a unit. Homogeneous-fraction surjectivity and the affine
-adjunction therefore identify the morphisms. The proved unit-power invariance theorem
-for fromOfGlobalSections then identifies the two maps into Proj A(U). Compose with the
-single common relative-Proj chart embedding. The two source morphisms lift to the
-original pullback; this lift is an open immersion and its range contains the point
-under consideration. Scheme morphism locality on these ranges proves the result.
-Empty opens and nilpotent coefficients give empty localization spectra; no domain
-assumption is used. -/
+The source frames, their affine opens, and the positive degrees may differ. -/
 theorem gradedLineFraction_sameBase
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

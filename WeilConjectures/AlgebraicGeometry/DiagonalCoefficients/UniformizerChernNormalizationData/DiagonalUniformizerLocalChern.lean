@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalUniformizerLocalChernIdentification
 
 /-! # Reduction of a local completed Chern class
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -37,13 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 
 namespace UniformizerChernNormalizationData
 
-/-- Assemble the finite factorization and its positive Kummer identification.
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
-(blueprint: lem-diagonal-uniformizer-local-chern).
-
-Proof: choose a finite comparison factor, identify its comparison image with the
-canonical Chern image using the normalization, and compose the two equalities.
-Both sides use the same protected endpoint expressions, so transitivity applies directly. -/
+/-- Assemble the finite factorization and its positive Kummer identification. -/
 theorem localChern
     (s : UniformizerChernNormalizationData l Y)
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

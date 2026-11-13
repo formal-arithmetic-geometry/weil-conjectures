@@ -282,23 +282,7 @@ private theorem ordinary_constant_map_unit (A : Type (u + 1)) [CommRing A]
 
 /-- A unital map from the constant rank-one module to its ordinary direct image
 represents the canonical finite unit adjunct after the single-complex and finite
-constant comparisons. Source: diagonal tower coefficient changes (1), ordinary
-constant units and the canonical derived adjunction.
-(blueprint: lem-diagonal-finite-constant-adjunct).
-
-Proof: the constant-sheaf adjunction identifies maps out of the constant rank-one
-module with module maps out of A on terminal sections. Such a module map is determined
-by the image of one. The hypothesis identifies that image with constant one on the
-projective line, so m is the adjunct of the canonical constant-sheaf pullback
-isomorphism. The canonical derived adjunction, evaluated on the single complex,
-is the single of this ordinary adjunct followed by the right-derived unit. This
-follows from the derived counit factorization and the ordinary triangle identity.
-Finally the comparison inverse image and both geometric inverse images preserve
-constant sheaves by uniqueness of their left adjoints to sections. Naturality and
-uniqueness of these left-adjoint comparisons identify the constant pullback just
-used with geoP1UnitPullback under finiteUnitComparison. Substituting this identity
-into the derived hom-equivalence proves the equation. These arguments also apply
-on the empty scheme and over the zero ring. -/
+constant comparisons. -/
 theorem finite_constant_adjunct_of_one
     (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     (m : geoCartierConstant A Y ⟶

@@ -20,9 +20,6 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 
 The coefficient functor, its tensor structure, and its pullback comparison are
 constructed here. The remaining equality is a tensor equation on the abelian hearts.
-
-Source: blueprint proper-base-change-finite, transport paragraph and clause (3).
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square).
 -/
 
 @[expose] public noncomputable section
@@ -119,18 +116,14 @@ private theorem internal_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
           ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ p).op.obj V) x y := by
   exact ModuleRingedComparison.canonicalInternalPush_normalized R p M N V x y
 
-/-- The actual coefficient restriction followed by the normalized section encoding.
-Source: finite coefficient transport, heart-level construction
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square). -/
+/-- The actual coefficient restriction followed by the normalized section encoding. -/
 def coefficientHeartEncoding (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) (E : Encoding A T) :
     Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T) ⥤
       Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A)) :=
   Mod.comap (coefficientMap e.inv.hom T) ⋙ (E.ordinary.functor ⋙ E.fixed.functor)
 
-/-- The inverse coefficient map stays invertible after pulling to a scheme.
-Source: functoriality of the coefficient ring pullback
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square). -/
+/-- The inverse coefficient map stays invertible after pulling to a scheme. -/
 instance inverseCoefficient_isIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) : IsIso (coefficientMap e.inv.hom T) := by
   have : IsIso e.inv.hom := by
@@ -139,9 +132,7 @@ instance inverseCoefficient_isIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
   dsimp [coefficientMap]
   infer_instance
 
-/-- All factors of the heart encoding are equivalences.
-Source: scalar restriction along an isomorphism and the normalized encoding
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square). -/
+/-- All factors of the heart encoding are equivalences. -/
 instance coefficientHeartEncoding_isEquivalence
     (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u}) (E : Encoding A T) :
     (coefficientHeartEncoding A e T E).IsEquivalence := by
@@ -151,9 +142,7 @@ instance coefficientHeartEncoding_isEquivalence
   unfold coefficientHeartEncoding
   infer_instance
 
-/-- The heart encoding preserves addition of morphisms.
-Source: additivity of scalar restriction and both encoding factors
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square). -/
+/-- The heart encoding preserves addition of morphisms. -/
 instance coefficientHeartEncoding_additive
     (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u}) (E : Encoding A T) :
     (coefficientHeartEncoding A e T E).Additive := by
@@ -161,9 +150,7 @@ instance coefficientHeartEncoding_additive
   infer_instance
 
 omit [Finite A] [DiscreteTopology A] in
-/-- The direct-image comparison is identity on the common underlying additive sections.
-Source: coefficient-map naturality and normalized constant-section action
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square). -/
+/-- The direct-image comparison is identity on the common underlying additive sections. -/
 def coefficientHeartPushIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (p : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :
     CondensedRing.lowerStar R p ⋙ coefficientHeartEncoding A e Y EY ≅
@@ -176,9 +163,7 @@ def coefficientHeartPushIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (Functor.associator _ _ _).symm
 
 /-- The pullback comparison obtained by uniqueness of left adjoints from the specified
-identity-on-sections direct-image comparison.
-Source: finite coefficient transport and the adjunction mate construction
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square). -/
+identity-on-sections direct-image comparison. -/
 def coefficientHeartPullIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (p : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :
     coefficientHeartEncoding A e Y EY ⋙
@@ -326,24 +311,7 @@ attribute [local irreducible] heartSectionsIso coefficientHeartEncoding
 set_option linter.unusedSectionVars false in
 /-- The normalized mate respects the balanced tensor comparisons on the hearts.
 
-Source: blueprint proper-base-change-finite, transport paragraph and clause (3),
-and step 2 of lem-sfb-finite-coefficient-tensor-pullback-encoding; Stacks 03D3.
-(blueprint: lem-sfb-finite-coefficient-heart-tensor-square).
-
-Proof: use the pure-tensor normalized structures mX and mY supplied by the
-internal/section tensor comparison and the normalized scalar restriction tensor
-comparisons. Restrict the internal action along the inverse coefficient isomorphism.
-The section-action tensor comparison sends a balanced pure tensor x tensor y to
-that same pure tensor, as does restriction to constant scalars. Normalization of
-Encoding identifies each constant scalar with the canonical constant function.
-The direct-image comparison used to define coefficientHeartPullIso is the identity
-on these additive sections over every fibre product. Transpose under the specified
-pullback/direct-image adjunctions. The unit and counit formulas for that mate show
-that both composites in the monoidal tensor equation send a pulled-back pure tensor
-to the same pulled-back pure tensor. The balanced tensor universal property and
-sheafification identify the maps. For the monoidal unit both maps send the constant
-section 1 to 1, and the same adjunction equation identifies them. These arguments
-also apply to the empty scheme and the zero coefficient ring. -/
+Source: Stacks 03D3. -/
 theorem coefficientHeartPullIso_monoidal
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (p : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :

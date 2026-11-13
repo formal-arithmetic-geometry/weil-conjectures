@@ -13,9 +13,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 # Ordinary completed-to-finite scalar compatibility
 
 The coefficient projection intertwines the normalized ordinary inverse exchanges.
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03D7 and 04J0;
-blueprint finite-exchange identification before derived inverse limits.
-(blueprint: lem-cbc-completed-finite-scalar-exchange).
+Source: Stacks Project, Modules on Sites, Tags 03DI, 03D7 and 04J0.
 -/
 
 @[expose] public noncomputable section

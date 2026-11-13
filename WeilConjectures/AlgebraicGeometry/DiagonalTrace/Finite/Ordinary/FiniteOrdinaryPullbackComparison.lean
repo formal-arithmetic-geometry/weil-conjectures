@@ -175,9 +175,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import all WeilConjectures.AlgebraicGeometry.Geo.GeoP1Cohomology
 
 /-! # Pullback of arbitrary ordinary arrows in the finite coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-pullback-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -219,8 +216,7 @@ private theorem normalized_square_arrow
   simp only [Iso.inv_hom_id_app_assoc]
 
 /-- Ordinary pullback commutes with exact site comparison in normalized endpoint
-coordinates. Source: the site-comparison pullback square and normalized Tate transport
-(blueprint: lem-sfb-finite-ordinary-pullback-comparison). -/
+coordinates. -/
 theorem finiteOrdinaryPullback_comparison (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤)))

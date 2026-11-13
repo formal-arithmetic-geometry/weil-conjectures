@@ -16,10 +16,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 /-!
 # The counit on bounded-below classical objects
-
-Source: the Weil conjectures blueprint, main-20261015,
-`sec-proetale-coefficients/sk-cor-pe-classical-derived/`
-(blueprint: lem-pe-classical-derived-counit).
 -/
 
 @[expose] public section
@@ -72,26 +68,7 @@ private theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
   rw [hmap]
   infer_instance
 
-/-- The derived comparison counit is invertible on bounded-below classical objects.
-Source: the truncation induction and bounded-below tail argument in
-`det-pe-classical-derived-equivalence` (blueprint: lem-pe-classical-derived-counit).
-Proof: write F for exact comparison inverse image and R for derived direct
-image. Give R the shift structure adjoint to that of F, so the counit is a
-transformation of triangulated functors. A classical module G is F(M) for
-an etale module M. Exactness identifies each shifted single complex G[-q]
-with F(M[-q]); the triangle identity and the invertible unit show that its
-counit is invertible. For a bounded classical K with cohomology in [a,b],
-start with the zero truncation below a and induct on upper truncations.
-Their distinguished triangles have third term H^q(K)[-q]. Counit naturality
-and shift compatibility give morphisms of these triangles; the long exact
-cohomology sequence and five lemma prove invertibility on the middle term.
-This proves the bounded case. For arbitrary bounded-below classical K and
-fixed m, let T be its truncation at N >= m. The truncation map T -> K is a
-cohomology isomorphism through N and monic in N+1. Right-derived truncation
-comparison shows that R(T) -> R(K) is an isomorphism on H^m; exactness of F
-preserves this. The naturality square for the counit now has three
-invertible sides on H^m, hence its fourth side is invertible. Vary m and
-use cohomology detection of isomorphisms. No upper bound on K is required. -/
+/-- The derived comparison counit is invertible on bounded-below classical objects. -/
 theorem classicalDerivedCounit (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (hunit : ∀ L : DerivedCategory.Plus

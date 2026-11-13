@@ -89,9 +89,7 @@ lemma isEquivalence_tensorRight_of_isInvertible (P : X.Modules) [P.IsInvertible]
 so it is exact and preserves injective objects, and
 `R^q (f_* ∘ (- ⊗ f^* 𝒩)) ≅ R^q f_* ∘ (- ⊗ f^* 𝒩)`;
 twisting by `𝒩` is exact, so `R^q ((- ⊗ 𝒩) ∘ f_*) ≅ (- ⊗ 𝒩) ∘ R^q f_*`; and the two composites
-are isomorphic by the projection formula `projectionNatIso`.
-
-(blueprint: `lem-pc-projection-formula`) -/
+are isomorphic by the projection formula `projectionNatIso`. -/
 noncomputable def higherDirectImageTensorObjPullbackIso [HasInjectiveResolutions X.Modules]
     (f : X ⟶ Y) (ℱ : X.Modules) (𝒩 : Y.Modules) [𝒩.IsInvertible] (q : ℕ) :
     (higherDirectImage f q).obj (ℱ ⊗ (pullback f).obj 𝒩) ≅ (higherDirectImage f q).obj ℱ ⊗ 𝒩 :=

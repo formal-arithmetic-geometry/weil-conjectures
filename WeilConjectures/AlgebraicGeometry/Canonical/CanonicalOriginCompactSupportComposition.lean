@@ -20,9 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationCohere
 /-!
 # Canonical compact-support composition on the etale-origin class
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, construction and coherence
-paragraphs; Stacks Project, Tags 0F7J and 0F7K (blueprint:
-proposition-composition-base-change-rf-shriek--1). The comparison is transported from the specified
+Source: Stacks Project, Tags 0F7J and 0F7K. The comparison is transported from the specified
 etale compositor. Full faithfulness makes it natural for all ambient morphisms, independently of
 retained witnesses.
 -/
@@ -148,9 +146,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
   [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
   [QuasiCompact f] [QuasiCompact g]
 
-/-- Compact support restricted to the full bounded-below etale-origin class.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, first paragraph
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+/-- Compact support restricted to the full bounded-below etale-origin class. -/
 def originCompactSupport :
     (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).FullSubcategory ⥤
       (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Y).FullSubcategory :=
@@ -160,9 +156,7 @@ def originCompactSupport :
     (fun K ↦ K.property.rightDerivedLowerShriek_obj f)
 
 /-- The ordered etale model of the compositor, using the actual compact-support
-comparison, bounded-below compatibility, and the canonical etale compositor.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, proof steps 2 and 7
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+comparison, bounded-below compatibility, and the canonical etale compositor. -/
 def originCompositionModel :
     comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} A) X ⋙
       (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).ι ⋙
@@ -192,9 +186,7 @@ def originCompositionModel :
     (compactSupportSiteComparison A (HasCompactification.compactification (f ≫ g))).symm
 
 /-- Descend the specified model along the canonical etale-origin equivalence.
-This preimage is unique, rather than an arbitrary choice of a natural isomorphism.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, witness conjugation in proof
-step 2 (blueprint: proposition-composition-base-change-rf-shriek--1). -/
+This preimage is unique, rather than an arbitrary choice of a natural isomorphism. -/
 def originCompositionAmbient :
     (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).ι ⋙
       rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
@@ -206,17 +198,13 @@ def originCompositionAmbient :
     (originCompositionModel A f g)
 
 /-- The canonical natural isomorphism alpha on the full origin class. Its homs are
-all ambient derived morphisms, so changing or forgetting witnesses does not affect it.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, displayed isomorphism
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+all ambient derived morphisms, so changing or forgetting witnesses does not affect it. -/
 def originComposition :
     originCompactSupport A f ⋙ originCompactSupport A g ≅ originCompactSupport A (f ≫ g) :=
   let H := (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Z).fullyFaithfulι
   (H.whiskeringRight _).preimageIso (originCompositionAmbient A f g)
 
-/-- Canonical identity comparison, transported from the ordinary etale identity.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, identity convention
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+/-- Canonical identity comparison, transported from the ordinary etale identity. -/
 def originCompactSupportId (T : Scheme.{u}) :
     originCompactSupport A (𝟙 T) ≅ 𝟭 _ :=
   let Φ := comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} A) T
@@ -233,9 +221,7 @@ def originCompactSupportId (T : Scheme.{u}) :
   let H := (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) T).fullyFaithfulι
   (H.whiskeringRight _).preimageIso ambient
 
-/-- Equality transport for the chosen compact-support functors.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, coherent identifications
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+/-- Equality transport for the chosen compact-support functors. -/
 def originCompactSupportCongr {f' : X ⟶ Y} [HasCompactification f'] (h : f = f') :
     originCompactSupport A f ≅ originCompactSupport A f' :=
   h ▸ Iso.refl _
@@ -333,12 +319,7 @@ attribute [local irreducible] originCompactSupportId
   Etale.rightDerivedLowerShriekPlusCompIso Etale.rightDerivedLowerShriekPlus
   CompactSupportFormalism.lowerShriekId CompactSupportFormalism.lowerShriekCongr
 
-/-- The canonical compositor is the identity when its second morphism is an identity.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, unit clause
-(blueprint: proposition-composition-base-change-rf-shriek--1).
-Proof: expand the model after precomposition with the comparison equivalence. Cancel
-adjacent comparisons, apply the etale right-unit equation, and reflect equality by
-full faithfulness. This is independent of any choice of etale-origin witness. -/
+/-- The canonical compositor is the identity when its second morphism is an identity. -/
 theorem originComposition_id_right [HasCompactification (f ≫ 𝟙 Y)] :
     (originComposition A f (𝟙 Y)).hom =
       Functor.whiskerLeft _ (originCompactSupportId A Y).hom ≫
@@ -358,13 +339,7 @@ theorem originComposition_id_right [HasCompactification (f ≫ 𝟙 Y)] :
     (originComparison_congr A f (Category.comp_id f).symm)
     (Etale.rightDerivedLowerShriekPlusCompIso_id_right A f)
 
-/-- Associativity with the specified associator and equality transport.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, associativity clause
-(blueprint: proposition-composition-base-change-rf-shriek--1).
-Proof: expand every model after the fully faithful etale-origin equivalence.
-Comparison composition coherence cancels the intermediate site comparisons. Both
-remaining expressions are the etale associativity equation, conjugated by the same
-end comparisons. Reflect the equality using full faithfulness. -/
+/-- Associativity with the specified associator and equality transport. -/
 theorem originComposition_assoc {T : Scheme.{u}} (h : Z ⟶ T)
     [HasCompactification h] [HasCompactification (g ≫ h)]
     [HasCompactification ((f ≫ g) ≫ h)] [HasCompactification (f ≫ g ≫ h)]

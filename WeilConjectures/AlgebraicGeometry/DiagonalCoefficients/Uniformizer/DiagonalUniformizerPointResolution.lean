@@ -122,24 +122,7 @@ private theorem finiteModels_residue_discrete (ℓ : ℕ) [Fact ℓ.Prime]
     exact (mul_div_cancel₀ _ hq).symm
   exact QuotientAddGroup.discreteTopology hopen
 
-/-- The actual uniformizer quotient has a two-term rank-one free condensed resolution.
-Source: current diagonal coefficient proof, paragraph (1), cofinal uniformizer quotients,
-and scalar-six direct-image proof, finite free coefficient argument.
-(blueprint: lem-diagonal-uniformizer-point-resolution).
-
-Proof: the integer ring is a DVR domain and the maximal-ideal generator pi is nonzero.
-Multiplication by pi^(n+1), followed by the actual quotient map, is a short exact sequence
-of modules. Multiplication is a homeomorphism onto its image: divide in the ambient valued
-field and restrict to the integer ring. A continuous function from a profinite set into
-the kernel therefore divides continuously by pi^(n+1). The quotient is discrete;
-choose one lift per residue class and glue the resulting constant functions on the clopen
-fibres. Thus continuous sections preserve injectivity, exactness, and surjectivity of this
-sequence. The arrows are linear for the continuous integer-valued functions, by pointwise
-multiplication. Sectionwise short exactness gives short exactness of internal condensed
-modules. The first two terms are the regular module, and the last is the quotient regular
-module restricted along quotientMap. These identifications give the asserted isomorphisms.
-The exponent n+1 is positive, including n=0; ramification only changes the nonzero scalar.
--/
+/-- The actual uniformizer quotient has a two-term rank-one free condensed resolution. -/
 theorem diagonalUniformizer_pointResolution
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E)

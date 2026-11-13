@@ -314,9 +314,7 @@ noncomputable def finrankH (M : X.Modules) (q : ℕ) : ℕ := Module.finrank k (
 The sum is a `finsum`, so it is `0` whenever infinitely many terms are nonzero. That makes
 `eulerChar` meaningful only together with a vanishing statement for the higher cohomology,
 such as Grothendieck vanishing
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
-
-(blueprint: `def-pc-euler-characteristic`) -/
+`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`. -/
 noncomputable def eulerChar (M : X.Modules) : ℤ := ∑ᶠ q : ℕ, (-1) ^ q * (M.finrankH k q : ℤ)
 
 /-- `h^q(X, M)` only depends on the isomorphism class of `M`. -/

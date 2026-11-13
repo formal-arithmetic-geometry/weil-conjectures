@@ -128,8 +128,7 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficien
 /-! # Clopen derived scalar comparison and normalized compositor
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D;
-sites-modules.tex, Tag 05V4; the node's restriction/scalar square calculation.
-(blueprint: def-pur-clopen-derived-scalar-comparison-data).
+sites-modules.tex, Tag 05V4.
 
 The helpers expose the recorded functors and package the normalized comparison laws.
 The scalar-first sheaf tensor writes the paper's `p tensor s` as `s tensor p`.
@@ -149,68 +148,59 @@ attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology
 
 attribute [-instance] ClopenLocalization.modulesAbelian ClopenLocalization.hasDerived
 
-/-- The recorded module category; source: Stacks 03D7
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The recorded module category; source: Stacks 03D7. -/
 abbrev Mods {Z : Scheme.{t}} (R : Sheaf (topology Z) CommRingCat.{max u (t + 1)}) :=
   SheafOfModules.SuccessiveDerivedQuotient.Modules.{t + 1, t, max u (t + 1)} R
 
-/-- The inherited standard localization; source: Stacks 05RU
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The inherited standard localization; source: Stacks 05RU. -/
 instance derived (Z : Scheme.{t}) :
     ∀ R : Sheaf (topology Z) CommRingCat.{max u (t + 1)},
       HasDerivedCategory.{max (u + 1) (t + 2)}
         (Mods.{t, u} R) :=
   fun R ↦ HasDerivedCategory.standard (Mods.{t, u} R)
 
-/-- Families of presentations of the existing scalar extension, source: Stacks 06YY
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- Families of presentations of the existing scalar extension, source: Stacks 06YY. -/
 abbrev Presentations (Z : Scheme.{t}) :=
   ∀ {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} (a : R ⟶ S),
     SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
       max u (t + 1), max (u + 1) (t + 2)} a
 
-/-- The recorded restriction on the commutative coefficient sheaf; source: Stacks 04TR
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The recorded restriction on the commutative coefficient sheaf; source: Stacks 04TR. -/
 abbrev rings {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] :=
   clopenTensorRings.{t, u} j
 
-/-- The recorded restriction of module sheaves; source: Stacks 04TR
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The recorded restriction of module sheaves; source: Stacks 04TR. -/
 abbrev res {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     Mods.{t, u} R ⥤ Mods.{t, u} ((rings.{t, u} j).obj R) :=
   ClopenLocalization.restriction.{t, max u (t + 1), u, 0} j
     (derivedChangeRingIndependentCoefficients (topology X) R)
 
-/-- Additivity of the recorded restriction. Source: Stacks 015F
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- Additivity of the recorded restriction. Source: Stacks 015F. -/
 instance resAdditive {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     (res.{t, u} j R).Additive := clopenModuleRestriction_additive j _
 
-/-- Exact restriction, using the existing localization interface. Source: Stacks 015F
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- Exact restriction, using the existing localization interface. Source: Stacks 015F. -/
 instance resLimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteLimits (res.{t, u} j R) :=
   ClopenLocalization.restrictionLimits.{t, max u (t + 1), u, 0} j _
 
-/-- Exact restriction, using the existing localization interface. Source: Stacks 015F
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- Exact restriction, using the existing localization interface. Source: Stacks 015F. -/
 instance resColimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     PreservesFiniteColimits (res.{t, u} j R) :=
   ClopenLocalization.restrictionColimits.{t, max u (t + 1), u, 0} j _
 
-/-- The recorded derived restriction; source: Stacks 05RU
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The recorded derived restriction; source: Stacks 05RU. -/
 abbrev resD {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     DerivedCategory (Mods.{t, u} R) ⥤ DerivedCategory (Mods.{t, u} ((rings.{t, u} j).obj R)) :=
   (res.{t, u} j R).mapDerivedCategory
 
 /-- The canonical counit on cochain representatives, with the standard quotient comparisons.
-Source: Stacks 06YY (blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+Source: Stacks 06YY. -/
 def computation {Z : Scheme.{t}}
     {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} {a : R ⟶ S}
     (p : SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
@@ -224,16 +214,14 @@ def computation {Z : Scheme.{t}}
     (DerivedCategory.quotientCompQhIso (Mods.{t, u} S)).hom.app
       ((p.ordinary.mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Ordinary extension from the recorded presentation. Source: Stacks 06YY
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- Ordinary extension from the recorded presentation. Source: Stacks 06YY. -/
 abbrev ext {Z : Scheme.{t}}
     {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} {a : R ⟶ S}
     (p : SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
       max u (t + 1), max (u + 1) (t + 2)} a) : Mods.{t, u} R ⥤ Mods.{t, u} S :=
   p.ordinary
 
-/-- Derived extension from the recorded universal pair. Source: Stacks 06YY
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- Derived extension from the recorded universal pair. Source: Stacks 06YY. -/
 abbrev extD {Z : Scheme.{t}}
     {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} {a : R ⟶ S}
     (p : SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
@@ -246,8 +234,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory HasDerivedCategory
 
 -- Bound elaboration while checking the representative normalization.
 /-- Unit identifications normalized by multiplication on sections and by the canonical
-K-flat computation counit. Source: Stacks 06YY, 0D6D
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+K-flat computation counit. Source: Stacks 06YY, 0D6D. -/
 structure Units {Z : Scheme.{t}} (p : Presentations.{t, u} Z) where
   ordinary : ∀ R : Sheaf (topology Z) CommRingCat.{max u (t + 1)}, (ext.{t, u} (Z := Z) (p (𝟙 R))) ≅
     𝟭 (Mods.{t, u} R)
@@ -270,8 +257,7 @@ structure Units {Z : Scheme.{t}} (p : Presentations.{t, u} Z) where
 -- Bound elaboration while checking the normalized comparison family.
 /-- The scalar/restriction comparison and its full chain-level normalization. All morphisms
 land in the component module category, so their linearity is part of their type.
-Source: Stacks 06YY, 0D6D, 05V4
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+Source: Stacks 06YY, 0D6D, 05V4. -/
 structure Comparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (p : Presentations.{t, u} X) (q : Presentations.{t, u} Y) where
   ordinary : ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S),
@@ -286,8 +272,7 @@ structure Comparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (extD.{t, u} (Z := X) (p a)) ⋙ resD.{t, u} j S ≅ resD.{t, u} j R ⋙ (extD.{t, u} (Z := Y) (q
       ((rings.{t, u} j).map a)))
 
-/-- The sections law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The sections law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D. -/
 def Comparison.sections {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
     {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
     (d : Comparison.{t, u} j @p @q) : Prop :=
@@ -301,8 +286,7 @@ def Comparison.sections {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
       := (rings.{t, u} j).obj R) (S := (rings.{t, u} j).obj S) (a := (rings.{t, u} j).map a) (q
       ((rings.{t, u} j).map a)) ((res.{t, u} j R).obj M) U s x
 
-/-- The degree law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The degree law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D. -/
 def Comparison.degree {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
     {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
     (d : Comparison.{t, u} j @p @q) : Prop :=
@@ -310,8 +294,7 @@ def Comparison.degree {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
     (P : CochainComplex (Mods.{t, u} R) ℤ) (n : ℤ),
     ((d.chain a).hom.app P).f n = (d.ordinary a).hom.app (P.X n)
 
-/-- The representative law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The representative law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D. -/
 def Comparison.representative {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
     {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
     (d : Comparison.{t, u} j @p @q) : Prop :=
@@ -332,8 +315,7 @@ def Comparison.representative {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion 
           (((ext.{t, u} (Z := X) (p a)).mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((d.chain a).hom.app P)
 
-/-- The computed law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The computed law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D. -/
 def Comparison.computed {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
     {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
     (_d : Comparison.{t, u} j @p @q) : Prop :=
@@ -348,8 +330,7 @@ def Comparison.computed {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
           (q ((rings.{t, u} j).map a))
         (((res.{t, u} j R).mapHomologicalComplex (.up ℤ)).obj P))
 
-/-- The unique law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+/-- The unique law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D. -/
 def Comparison.unique {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
     {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
     (d : Comparison.{t, u} j @p @q) : Prop :=
@@ -374,7 +355,7 @@ def Comparison.unique {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
 
 -- Bound elaboration while checking the coherence diagrams.
 /-- Coherence with the existing normalized scalar compositor and multiplication units.
-Source: Stacks 0D6D (blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+Source: Stacks 0D6D. -/
 structure Coherence {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
     (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)} (C := X.ProEt) (J := topology

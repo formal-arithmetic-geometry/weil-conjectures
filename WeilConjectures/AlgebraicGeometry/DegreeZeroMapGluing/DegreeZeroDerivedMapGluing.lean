@@ -23,13 +23,13 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 # Unique gluing of derived maps locally concentrated in degree zero
 
 Source: Stacks Project, Derived Categories, Tag 06XS; Modules on Sites, Tag 03EM;
-Sites, Tag 04TQ; Homology, Tag 0118 (blueprint: lem-pur-degree-zero-derived-map-gluing).
+Sites, Tag 04TQ; Homology, Tag 0118.
 
 The auxiliary predicates only spell out the conclusion, using the actual exact inverse
 images and their canonical composition isomorphisms. They assume no descent property.
 Both small sites use fixed-ring module sheaves. For finite coefficients the canonical
-coefficient realization identifies this with modules over the constant ring sheaf, as in
-`definition-small-pro-etale-site--1`. No new derived category or restriction is constructed.
+coefficient realization identifies this with modules over the constant ring sheaf. No new
+derived category or restriction is constructed.
 -/
 
 @[expose] public noncomputable section
@@ -56,7 +56,7 @@ variable (B : Scheme.{u} → Type uB) [∀ X, Category.{vB} (B X)]
 
 /-- The canonical comparison for two restrictions, including the equality of the
 composite open immersion with the smaller open's immersion. Source: Stacks 04IX and
-05RU (blueprint: lem-pur-degree-zero-derived-map-gluing). -/
+05RU. -/
 def openComp (T : Scheme.{u}) {U V : T.Opens} (h : U ≤ V) :
     (r V.ι).mapDerivedCategory ⋙ (r (T.homOfLE h)).mapDerivedCategory ≅
       (r U.ι).mapDerivedCategory :=
@@ -66,8 +66,7 @@ def openComp (T : Scheme.{u}) {U V : T.Opens} (h : U ≤ V) :
         eqToIso (congrArg (fun f ↦ r f) (Scheme.homOfLE_ι T h)))
 
 /-- Restrict a local map to a smaller open and identify its endpoints with the
-restrictions of the global endpoints. Source: Stacks 04IX, 05RU
-(blueprint: lem-pur-degree-zero-derived-map-gluing). -/
+restrictions of the global endpoints. Source: Stacks 04IX, 05RU. -/
 def onSmallerOpen (T : Scheme.{u}) (M N : DerivedCategory (B T))
     {U V : T.Opens} (h : U ≤ V)
     (a : (r V.ι).mapDerivedCategory.obj M ⟶ (r V.ι).mapDerivedCategory.obj N) :
@@ -78,8 +77,7 @@ def onSmallerOpen (T : Scheme.{u}) (M N : DerivedCategory (B T))
 /-- The good-truncation identifications on open subschemes of `T`, including `T` itself
 via its identity immersion. Their normalization is the explicit roof through `truncLE 0`;
 its degree-zero map is cycles modulo boundaries. Naturality and restriction use the
-existing single and homology comparisons. Source: Stacks 0118, 05RU and 06XS
-(blueprint: lem-pur-degree-zero-derived-map-gluing). -/
+existing single and homology comparisons. Source: Stacks 0118, 05RU and 06XS. -/
 def HasCanonicalIdentifications (T : Scheme.{u}) : Prop :=
   ∃ e : ∀ (X : Scheme.{u}) (j : X ⟶ T), IsOpenImmersion j →
       ∀ K : DerivedCategory (B X), DerivedCategory.homologyConcentratedIn 0 0 K →
@@ -117,10 +115,9 @@ def HasCanonicalIdentifications (T : Scheme.{u}) : Prop :=
             ((DerivedCategory.homologyFunctorFactors (B X) 0).inv.app K))
 
 /-- The full conclusion of degree-zero derived-map gluing, with the restriction bijection
-written as compatibility iff a unique preimage exists. Thus no choice of a compatibility
-proof is needed to define a map into a subtype. The last two clauses identify this with
+written as compatibility iff a unique preimage exists. The last two clauses identify this with
 sheaf-map gluing through `H⁰` and state the equality test explicitly. Source: Stacks 06XS,
-03EM and 04TQ (blueprint: lem-pur-degree-zero-derived-map-gluing). -/
+03EM and 04TQ. -/
 def Conclusion (T : Scheme.{u}) {I : Type wI} (U : I → T.Opens) : Prop :=
   HasCanonicalIdentifications B r T ∧
   ∀ M N : DerivedCategory (B T),
@@ -994,38 +991,7 @@ private theorem proetale_sheaf_glue (E : Type (u + 2)) [Category.{u + 1} E]
   exact ⟨b, fun i ↦ map_eq_of_conjugate (θ i) b (a i) (hb i)⟩
 
 /-- Unique gluing on both small sites for finite commutative coefficients.
-Source: Stacks 06XS, 03EM, 04TQ, 0118
-(blueprint: lem-pur-degree-zero-derived-map-gluing).
-
-Proof:
-1. The etale localization equivalence (lem-weil-pbc-etale-site-localization-open) and
-   the pro-etale localization equivalence (lem-weil-proetale-weakly-etale-localization)
-   identify open restriction with localized-site restriction. Constant coefficients
-   restrict to the same coefficients (lem-weil-pbc-site-constant-restriction). The given
-   Zariski cover is a cover on either site; for pro-etale covers refine affine opens by
-   affine opens and take finite subcovers (lem-weil-pbc-affine-opens-basis and
-   lem-weil-pbc-affine-scheme-qcqs).
-2. Restriction is exact (lem-pur-site-restriction-module-adjunction-exact), so it
-   induces the termwise derived functor (situation-conventions).
-   Kernels, images and quotients commute with it. Hence so do all cohomology sheaves,
-   naturally for maps and inverses of quasi-isomorphisms.
-3. A cohomology sheaf vanishing on the cover is zero: its sections over any site
-   object inject into the product of its sections on the pulled-back cover. This is
-   the sheaf equalizer axiom (def-weil-pbc-sites-and-cohomology), also for an empty cover.
-4. For a representing complex K use c : truncLE K 0 → K and p to H⁰(K)[0], with
-   p in degree zero the quotient of cycles by boundaries and zero elsewhere. Both
-   are quasi-isomorphisms by concentration; the identification is Q(c)⁻¹ Q(p).
-5. Kernels and quotient maps are natural; their natural transformations descend
-   through localization (theorem-pbc-injective-acyclicity and
-   lem-weil-pbc-localization-universal-property). This proves independence of the
-   representative, naturality and compatibility with restriction, including iteration.
-6. The single functor is fully faithful (lem-weil-pbc-derived-single-fully-faithful).
-   Conjugation by the normalized identifications identifies every derived map with
-   its H⁰ sheaf map. The single and homology comparisons give the restriction square.
-7. Compatible local sheaf maps glue uniquely (lem-pur-sheaf-hom-cover-gluing).
-   Transport through step 6 proves the restriction bijection and the equality test.
-   For the empty scheme the empty-cover sheaf axiom makes all sheaves zero, and all
-   derived objects are zero; both sides of the bijection are singleton sets. -/
+Source: Stacks 06XS, 03EM, 04TQ, 0118. -/
 theorem degreeZeroDerivedMapGluing (A : Type (u + 1)) [CommRing A] [Finite A]
     (T : Scheme.{u}) {I : Type wI} (U : I → T.Opens) (hU : iSup U = ⊤) :
     Conclusion (fun X : Scheme.{u} ↦ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))

@@ -117,29 +117,7 @@ private theorem encoding_congr
 
 /-- Normalized coefficient encoding identifies the actual exchange arrows.
 
-Source: blueprint sk-thm-sfb-proper-base-change-finite.proof.md, steps 1 and 5;
-lem-sfb-finite-coefficient-derived-exchange-identification, proof steps 1--5;
-Stacks Tags 03D3, 07A7 and 09C8.
-(blueprint: lem-sfb-finite-coefficient-exchange-encoding).
-
-Proof:
-1. Restriction along the inverse coefficient isomorphism is exact and preserves the
-underlying section groups. The normalized section-action encoding has the same property.
-Both direct images evaluate a module on the same fibre product, so the resulting
-underived direct-image comparison is the identity on sections and commutes with composition.
-2. Conjugate the two geometric adjunctions by these exact equivalences. Uniqueness of
-left adjoints gives pullback comparisons satisfying the unit and counit equations.
-The identity-on-sections composition equation identifies their pullback compositors.
-3. Compute total direct images on K-injective resolutions. The exact equivalences
-and their exact inverses preserve K-injectives. Localization of step 1 gives derived
-direct-image comparisons; localization of the adjunction equations gives the compatible
-derived pullback comparisons, with the specified derived compositors.
-4. Expand the internal exchange as unit, pullback square, counit. Substitute these
-three comparison equations. Naturality moves the coefficient comparisons past each factor;
-inverse comparisons cancel. The remaining composite is the ordinary exchange.
-The source and target comparison isomorphisms therefore form the asserted arrow
-isomorphism. This argument is on arbitrary schemes and unbounded complexes; no qcqs
-or etale-origin hypothesis is used. -/
+Source: Stacks Tags 03D3, 07A7 and 09C8. -/
 theorem finiteCoefficientExchangeEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)
@@ -236,8 +214,7 @@ theorem finiteCoefficientExchangeEncoding
     (by unfold ProEtale.derivedBaseChangeMap; rfl)
 
 /-- Invertibility can be checked after the canonical coefficient encoding.
-This is a consequence of the arrow comparison and reflection by an equivalence.
-(blueprint: lem-sfb-finite-coefficient-exchange-encoding). -/
+This is a consequence of the arrow comparison and reflection by an equivalence. -/
 theorem finiteCoefficientExchangeEncoding_isIso
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)

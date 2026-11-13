@@ -45,10 +45,6 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTranspor
 
 /-! # Finite-stage duality under the site comparison
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-proposition-six-operations-dctf--15, order 2084
-(blueprint: proposition-six-operations-dctf--15).
-
 The comparison is the evaluation-defined arrow. The dualizing object on the
 pro-etale site is the transported etale exceptional functor applied to the unit.
 The equations below specify preservation of evaluation and its transpose.
@@ -65,9 +61,7 @@ namespace CategoryTheory
 
 /-- Transport a specified degree-zero map through an exact functor and specified
 identifications of the degree-zero source and target. This packages only composition
-of the existing canonical comparisons.
-Source: blueprint order 2084, proof step 9
-(blueprint: proposition-six-operations-dctf--15). -/
+of the existing canonical comparisons. -/
 noncomputable def finiteDualitySingleTransport
     {C : Type c} [Category.{v} C] [Abelian C] [HasDerivedCategory.{v} C]
     {D : Type d} [Category.{w} D] [Abelian D] [HasDerivedCategory.{w} D]
@@ -358,8 +352,7 @@ noncomputable def evaluationDualityConclusions
     Nonempty (d.functor ⋙ P'.ι ≅ P'.ι.op ⋙ HD.flip.obj W')) ∧
   ∀ K, P' K → IsIso (δD K)
 
-/-- Complete duality comparison data, parameterized by the two normalized pairing predicates.
-Source: blueprint order 2084 (blueprint: proposition-six-operations-dctf--15). -/
+/-- Complete duality comparison data, parameterized by the two normalized pairing predicates. -/
 structure EvaluationDualityData
     {C : Type c} [Category.{v} C] {D : Type d} [Category.{w} D]
     (F : C ⥤ D) (HC : Cᵒᵖ ⥤ C ⥤ C) (HD : Dᵒᵖ ⥤ D ⥤ D)
@@ -502,9 +495,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical map from the etale constant unit to the derived direct image of the
-pro-etale constant unit: the comparison adjunction unit followed by constant transport.
-Source: blueprint order 2084, proof step 9
-(blueprint: proposition-six-operations-dctf--15). -/
+pro-etale constant unit: the comparison adjunction unit followed by constant transport. -/
 noncomputable def finiteDualityBaseUnit
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -521,9 +512,7 @@ noncomputable def finiteDualityBaseUnit
 
 /-- The ordinary etale dualizing object using the specified compactification.
 This instantiates the existing ambient compact-support right adjoint; no adjoint
-hypothesis on the pro-etale category is introduced.
-Source: blueprint order 2084, definition of omega_et
-(blueprint: proposition-six-operations-dctf--15). -/
+hypothesis on the pro-etale category is introduced. -/
 noncomputable def finiteDualityEtaleObject
     (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} {a : X ⟶ S} (c : Compactification a) :
@@ -532,9 +521,7 @@ noncomputable def finiteDualityEtaleObject
   Etale.dualizingComplex (ULift.{u + 1, u} A) a
 
 /-- The pro-etale dualizing object is the recorded comparison-transport exceptional
-inverse image applied to the pro-etale constant unit.
-Source: blueprint order 2084, definition of omega_proet
-(blueprint: proposition-six-operations-dctf--15). -/
+inverse image applied to the pro-etale constant unit. -/
 noncomputable def finiteDualityProEtaleObject
     (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} {a : X ⟶ S} (c : Compactification a) :
@@ -544,9 +531,7 @@ noncomputable def finiteDualityProEtaleObject
 
 /-- The canonical dualizing-object arrow: apply the etale exceptional inverse image
 and then comparison pullback to the comparison adjunction unit at the base constant unit.
-This formula supplies the global overlap normalization of the dualizing comparison.
-Source: blueprint order 2084, proof step 9
-(blueprint: proposition-six-operations-dctf--15). -/
+This formula supplies the global overlap normalization of the dualizing comparison. -/
 noncomputable def finiteDualityObjectMap
     (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} {a : X ⟶ S} (c : Compactification a) :
@@ -608,9 +593,7 @@ noncomputable def nativeProEtaleBiduality
 set_option linter.unusedVariables false in
 /-- The site-comparison and Verdier-duality assertions for the supplied, fixed ambient
 objects and constructibility predicates. All comparison arrows and normalized pairings
-are the recorded ones; the coefficient specialization fixes every parameter below.
-Source: blueprint order 2084, final paragraph
-(blueprint: proposition-six-operations-dctf--15). -/
+are the recorded ones; the coefficient specialization fixes every parameter below. -/
 noncomputable def FiniteDualityComparisonData
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -687,9 +670,7 @@ private noncomputable def siteComparison_braided
     (siteComparisonDerivedMonoidal_δ A X)
     (F.leftDerivedFunctor_map_braiding_hom_δ hF) K M).symm
 
-/-- The normalized pro-etale pairing has canonical evaluation and biduality maps.
-Source: blueprint order 2084, normalization of the ambient pairing
-(blueprint: proposition-six-operations-dctf--15). -/
+/-- The normalized pro-etale pairing has canonical evaluation and biduality maps. -/
 theorem pairing_normalized
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -1154,8 +1135,7 @@ is the existing canonical object or functor. In particular the two dualizing obj
 are fixed before the comparison isomorphism is quantified. Its hom is prescribed by
 the base adjunction unit, and the Hom comparison is prescribed by evaluation.
 The last clauses record the induced equivalence of finite-Tor constructible categories,
-the anti-equivalence with the specified Verdier functor, and its canonical biduality map.
-Source: blueprint order 2084 (blueprint: proposition-six-operations-dctf--15). -/
+the anti-equivalence with the specified Verdier functor, and its canonical biduality map. -/
 noncomputable def FiniteDualitySiteComparison
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -1271,42 +1251,7 @@ private theorem finiteTor_comparison_equivalence
 
 /-- The canonical evaluation comparison is invertible for a finite-Tor constructible
 first input and a bounded constructible second input. The canonical dualizing comparison
-identifies evaluations and their double-dual transposes, and transports Verdier duality.
-Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation, order 2084
-(blueprint: proposition-six-operations-dctf--15).
-
-Proof:
-1. Lisse finite flat sheaves have derived exact pairings, so their Hom comparison
-   is invertible for every target. Closed-support comparison and exact open
-   restriction identify stratum exceptional values on bounded-below inputs.
-   The proved projection-adjunction Hom isomorphisms and ordinary direct-image
-   comparison assemble an isomorphism of Hom objects on each stratum generator.
-   For a strong monoidal left adjoint F, the adjunction calculation identifies
-   R(beta) after the unit with Hom of the unit followed by a projection
-   isomorphism. The units are invertible on M and RHom(K,M). The constructed
-   object isomorphism makes the target counit invertible, so counit naturality
-   proves that the canonical beta is invertible. Thick generation and the
-   triangulated, retract-stable comparison locus extend this to every finite-Tor
-   constructible source.
-2. The specified dualizing comparison is obtained by applying the exceptional
-   functor to the unit comparison. The comparison adjunction unit is invertible
-   on the bounded-below constant unit, and the exact degree-zero transport is an
-   isomorphism. Hence the prescribed dualizing arrow is an isomorphism.
-3. Exact coefficient realization identifies intrinsic constructibility and Tor
-   amplitude with their fixed-module predicates. Full faithfulness on bounded
-   below complexes and constructible origin yield the comparison equivalence on
-   finite-Tor constructible full subcategories.
-4. Derive ordinary comparison pullback's braided tensor structure and transport
-   it along the canonical derived-functor isomorphism. The prescribed tensor
-   components determine the resulting braiding equation. Pairing normalization
-   identifies the recorded evaluations and bidual maps with the native closed
-   category evaluations and double-dual maps.
-5. Apply evaluationBidualComparisonTransport to the canonical Hom comparisons,
-   dualizing isomorphism, and full-subcategory equivalence. Etale geometric
-   biduality supplies preservation by duality and invertibility of the source
-   bidual map. The transport theorem gives both requested commuting equations,
-   the target anti-equivalence, and invertibility of every target bidual map.
--/
+identifies evaluations and their double-dual transposes, and transports Verdier duality. -/
 theorem finite_duality_site_comparison
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]

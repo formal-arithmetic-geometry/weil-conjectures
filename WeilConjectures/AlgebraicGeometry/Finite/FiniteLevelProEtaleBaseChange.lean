@@ -15,14 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientExc
 /-!
 # Finite-level pro-etale proper base change
 
-Source: blueprint, proper base change, finite-level pro-etale theorem; Stacks Project
-Tag 09C8, the finite-coefficient step in Tag 09C9
-(blueprint: proposition-proper-direct-image-constructible-complexes--5).
+Source: Stacks Project
+Tag 09C8, the finite-coefficient step in Tag 09C9.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.finiteLevelProEtaleBaseChange`:
-  the recorded construction or statement of this node.
+  finite-coefficient proper exchange is invertible for objects with a bounded-below etale origin.
 -/
 
 @[expose] public section
@@ -39,7 +38,7 @@ namespace AlgebraicGeometry.Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The canonical inverse image of the finite constant coefficient sheaf.
-Source: Stacks Tag 098T (blueprint: proposition-proper-direct-image-constructible-complexes--5). -/
+Source: Stacks Tag 098T. -/
 noncomputable def finiteCoefficientRingIso {U V : Scheme.{u}} (h : U ⟶ V) :
     (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj (finiteOriginFunctionRing V Λ) ≅
       finiteOriginFunctionRing U Λ :=
@@ -83,10 +82,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 
 include sq in
 /-- Finite coefficient identifications agree around the chosen square.
-Source: Stacks Tags 098T and 07A7 (blueprint:
-proposition-proper-direct-image-constructible-complexes--5). Proof: finite constant comparisons
-commute with composition by the finite-level coherence of profinite-coefficient-inverse-image. Apply
-it to both paths of sq and identify their composite scheme maps by sq.w. -/
+Source: Stacks Tags 098T and 07A7. -/
 theorem finiteCoefficientRingIso_coherent :
     HEq (proEtaleRingCompositeCoefficients g' f (finiteOriginFunctionRing Y Λ)
       (finiteOriginFunctionRing X Λ) (finiteOriginFunctionRing X' Λ)
@@ -100,7 +96,7 @@ theorem finiteCoefficientRingIso_coherent :
       fun w ↦ by cases w; rfl) sq.toCommSq.w
 
 /-- The existing ambient exchange specialized to the canonical finite coefficients.
-Source: Stacks Tag 07A7 (blueprint: proposition-proper-direct-image-constructible-complexes--5). -/
+Source: Stacks Tag 07A7. -/
 noncomputable abbrev finiteCoefficientExchange :=
   proEtaleAmbientRingedExchange sq (finiteOriginFunctionRing X Λ) (finiteOriginFunctionRing Y Λ)
     (finiteOriginFunctionRing X' Λ) (finiteOriginFunctionRing Y' Λ)
@@ -111,17 +107,7 @@ noncomputable abbrev finiteCoefficientExchange :=
 /-- Finite-coefficient proper exchange is invertible for an object with the retained
 bounded-below etale-origin witness. The exchange itself is defined independently of
 that witness, so replacing it by an isomorphic witness gives the same arrow.
-Source: blueprint finite-level pro-etale theorem; Stacks Tags 09C8 and 09C9
-(blueprint: proposition-proper-direct-image-constructible-complexes--5).
-Proof: the normalized ringed pullbacks along constant coefficient identifications are
-exact inverse images, so the ambient mate is the displayed inverse-image exchange.
-The bounded-below etale witness has torsion cohomology since Λ is finite. Apply
-theorem-proper-base-change-classical-pro to its etale complex. The fully faithful comparison
-theorem-bounded-below-cohomology-comparison transports this isomorphism. The canonical comparison
-lemma-naturality-pasting-comparison--3 identifies the transported morphism with
-the ringed ambient exchange. Conjugate it using the witness isomorphism. Naturality
-of exchange shows that isomorphic witnesses give the same intrinsic morphism. No
-bound uniform in a coefficient level is used. -/
+Source: Stacks Tags 09C8 and 09C9. -/
 theorem finiteLevelProEtaleBaseChange [IsProper f]
     (K : DerivedCategory (proEtaleRingModules X (finiteOriginFunctionRing X Λ)))
     (_W : FiniteEtaleOriginWitness X Λ K) :

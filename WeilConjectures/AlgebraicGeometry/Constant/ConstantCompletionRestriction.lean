@@ -498,8 +498,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 Restriction of the completions (`completion_restriction`) and of the Koszul comparison.
 
 Part of the split of `WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(blueprint: lem-weil-pbc-constant-completion-equivalence).
+Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
 -/
 
 @[expose] public noncomputable section
@@ -614,12 +613,7 @@ private theorem chosenKoszulRestriction [IsNoetherianRing A]
     (fun i ↦ algebraSection (baseMap J A I false) (a i)) KB KR
 
 /-- Restriction identifies both completions and their specified units.
-Source: Stacks 099L, 099M (blueprint: lem-weil-pbc-constant-completion-equivalence).
-Proof: at the representative level finite reduction comparisons and dual Koszul tensor
-comparisons preserve their strict transitions and degree-zero units. Restriction carries
-K-injective strict tower resolutions to K-injective resolutions, since it is right
-adjoint to flat exact extension of scalars. Apply limits and the universal comparisons.
-This gives the natural isomorphism and the stated equality of the actual units. -/
+Source: Stacks 099L, 099M. -/
 theorem completion_restriction [IsNoetherianRing A] :
     ∃ e : dres (coefficientMap J A I) ⋙ completion J A I false ≅
         completion J A I true ⋙ dres (coefficientMap J A I),

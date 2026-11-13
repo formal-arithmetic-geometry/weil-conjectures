@@ -11,7 +11,6 @@ public import WeilConjectures.Topology.OpenModuleCohomology
 /-! # The cochain unit for local sections of a direct image
 
 Source: Stacks Project, Cohomology, Tags 079V, 0D5W and 0D5X.
-(blueprint: def-weil-pbc-direct-image-section-unit).
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ namespace AlgebraicGeometry
 namespace RingedSpace
 
 /-- The standard derived unit has the universal factorization bijection.
-Source: Stacks, Tag 079V (blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tag 079V. -/
 theorem standardRightDerived_universal
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
@@ -44,7 +43,7 @@ theorem standardRightDerived_universal
           (HomotopyCategory.quasiIso C (.up ℤ)) G a⟩
 
 /-- The unique natural comparison preserving the two derived units.
-Source: Stacks, Tag 079V (blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tag 079V. -/
 def sectionStandardDirectImageIso {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y) :
@@ -56,7 +55,7 @@ def sectionStandardDirectImageIso {X Y : RingedSpace.{u}}
       (standardRightDerived_universal (RingedSpace.moduleDirectImage f)))
 
 /-- The comparison preserves the homotopy-category derived units.
-Source: Stacks, Tag 079V (blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tag 079V. -/
 theorem sectionStandardDirectImageIso_fac {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y) :
@@ -97,7 +96,7 @@ private theorem sectionStandardDirectImageIso_model {X Y : RingedSpace.{u}}
           ((DerivedCategory.quotientCompQhIso _).hom.app I)) hf
 
 /-- The pointwise model comparison is the natural comparison component.
-Source: Stacks, Tag 079V (blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tag 079V. -/
 theorem topEdgeDirectImageComparison_eq {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y)
@@ -125,8 +124,7 @@ theorem topEdgeDirectImageComparison_eq {X Y : RingedSpace.{u}}
 /-- The canonical natural comparison from inverse-open cohomology to local cohomology
 of the standard derived direct image. It is Leray followed by the unique unit-preserving
 comparison of the two derived direct images.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tags 0D5W and 0D5X. -/
 def directImageSectionComparison {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y) (q : ℤ) :
@@ -137,8 +135,7 @@ def directImageSectionComparison {X Y : RingedSpace.{u}}
       (localHypercohomologyPresheaf Y q)
 
 /-- This natural comparison is the inverse of the published pointwise Leray comparison.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tags 0D5W and 0D5X. -/
 theorem directImageSectionComparison_eq {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y) (q : ℤ)
@@ -154,8 +151,7 @@ theorem directImageSectionComparison_eq {X Y : RingedSpace.{u}}
 
 /-- The inverse-open derived unit on cochains. Its source is the actual presheaf of
 sections of the termwise direct image.
-Source: Stacks, Tags 079V and 0D5X
-(blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tags 079V and 0D5X. -/
 def inverseOpenUnitQ {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y) :
@@ -175,7 +171,7 @@ def inverseOpenUnitQ {X Y : RingedSpace.{u}}
         (localSectionsEnoughKInjectives X))).hom
 
 /-- On a K-injective input the inverse-open unit is the inverse model comparison.
-Source: Stacks, Tag 079V (blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tag 079V. -/
 theorem inverseOpenUnitQ_model {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))] (f : X ⟶ Y)
@@ -197,8 +193,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The inverse-open cochain unit, followed by the canonical Leray comparison, gives
 sections of the standard derived direct image. This is natural for every cochain map.
-Source: Stacks, Tags 079V, 0D5W and 0D5X
-(blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks, Tags 079V, 0D5W and 0D5X. -/
 def directImageSectionUnit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ) :
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
         RingedSpace.localAbelianSections S.toRingedSpace).mapHomologicalComplex (.up ℤ) ⋙
@@ -215,7 +210,7 @@ def directImageSectionUnit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ) :
       (RingedSpace.directImageSectionComparison f.toLRSHom.toShHom q)
 
 /-- Evaluate the unit using the exact evaluation/homology comparison on the source.
-Source: Stacks Project, Tag 0D5X (blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks Project, Tag 0D5X. -/
 def directImageSectionUnitAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ) (V : S.Opens)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     (((RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).mapHomologicalComplex
@@ -230,8 +225,7 @@ def directImageSectionUnitAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ) (V : S.O
 
 /-- Naturality of the evaluated cochain unit. Both the evaluation/homology comparison
 and the derived units are natural transformations.
-Source: Stacks Project, Tags 079V and 0D5X
-(blueprint: def-weil-pbc-direct-image-section-unit). -/
+Source: Stacks Project, Tags 079V and 0D5X. -/
 theorem directImageSectionUnitAt_naturality {X S : Scheme.{u}} (f : X ⟶ S)
     (q : ℤ) (V : S.Opens)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}

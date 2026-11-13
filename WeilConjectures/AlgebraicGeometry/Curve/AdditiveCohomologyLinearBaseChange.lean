@@ -24,16 +24,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.IsCurve
 
 /-- Pullback of additive cohomology intertwines structural scalar actions.
-Source: Stacks Project, Tags 03P2 and 02KH, naturality of the comparison.
-
-Proof: Choose the scalar sheaf maps supplied by hscalar and hscalar'. Apply the
-upper-star/lower-star adjunction to the two composites with q. On an etale object,
-their adjoint sections coincide: hq identifies q with structural pullback, which
-preserves products, and the cartesian square identifies the pulled-back scalar c
-with the structural image of algebraMap k k' c. Section coordinates are injective,
-so the two adjoint maps, and hence the two composites, agree. Naturality of the
-canonical Ext pullback and functoriality of H.map now give the scalar identity.
-No cohomological base-change isomorphism or finite-dimensionality is used. -/
+Source: Stacks Project, Tags 03P2 and 02KH, naturality of the comparison. -/
 private theorem additive_cohomology_pullback_smul
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']
@@ -112,26 +103,7 @@ private theorem additive_cohomology_pullback_smul
 /-- The canonical pullback of additive structure-sheaf cohomology is extension
 of scalars. The given actions are required to be induced by structural scalar
 multiplication on sections; no finite-dimensionality is assumed or asserted.
-Source: Stacks Project, Tags 02KH and 03P2; Tag 0A3P, first sentence of proof.
-(blueprint: lem-pbc-additive-cohomology-linear-base-change)
-
-Proof: Identify G and G' with the lifted additive structure sheaves through the
-natural section coordinates a and a'. The scalar section formulas uniquely determine
-all scalar endomorphisms. The natural etale/Zariski comparison, together with the
-Ext/derived and coefficient-universe comparisons, therefore intertwines the given
-scalar actions with the usual actions on coherent cohomology. Choose a finite affine
-cover of C. It exists since IsCurve supplies quasi-compactness; separatedness over the
-affine field spectrum makes all intersections affine. Pull it back to C'. On every
-intersection, affine sections after base change are the tensor product of the old
-sections by k'. The adjoint formula hq identifies the induced cochain map with
-s mapping to 1 tensor s. Naturality of the Cech/cohomology comparisons identifies this
-map with H(q) composed with the canonical etale cohomology pullback. Tensoring over a
-field is exact, so cohomology of the tensor complex is tensor cohomology. This gives
-the k'-linear equivalence e and its normalization on every original class. The
-displayed pullback square is handled by its unique isomorphism to the chosen
-categorical pullback. In degree-one-zero cases (empty schemes, affine curves, and
-zero-dimensional proper curves), the same complexes give the zero equivalence. No
-Frobenius, torsion, connectedness, smoothness, or algebraic closedness is used. -/
+Source: Stacks Project, Tags 02KH and 03P2; Tag 0A3P, first sentence of proof. -/
 theorem exists_additive_cohomology_linear_base_change
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']

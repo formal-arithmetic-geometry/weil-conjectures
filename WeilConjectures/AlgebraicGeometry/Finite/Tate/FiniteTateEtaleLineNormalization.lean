@@ -159,10 +159,6 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescen
 
 /-! # Degree-one finite Tate line normalization
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-sk-lem-geo-cartier.proof.md, pullback paragraph (blueprint:
-lem-amb-finite-tate-etale-line-normalization).
-
 ## Main statement
 
 * `ordinaryFiniteLineNormalization_finiteTateEtalePullback`: the normalized
@@ -183,22 +179,7 @@ namespace AlgebraicGeometry.Etale
 
 /--
 The line normalization of an ordinary finite Tate transport is exactly the
-finite Tate etale pullback predicate in degree one.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md, pullback paragraph
-(blueprint: lem-amb-finite-tate-etale-line-normalization).
-
-Proof: put `N = l ^ (r + 1)` and obtain its invertibility on `T` from the
-invertibility of `l`.  Unfold the degree-one finite Tate pullback predicate.
-The roots normalization of `t` identifies the root over the base change with
-the transported root: transpose the normalization across the inverse-image
-adjunction, evaluate it on the root section, and use injectivity of the kernel
-inclusion into the units.  The degree-one line normalization of `t` then sends
-the one-generator to the one-generator for that transported root, which is
-exactly the required predicate equation.  This argument does not assert an
-existence or flatness property.
--/
+finite Tate etale pullback predicate in degree one. -/
 theorem ordinaryFiniteLineNormalization_finiteTateEtalePullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n r : ℕ)

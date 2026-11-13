@@ -11,15 +11,14 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCo
 
 /-! # Completion augmentation square for direct image
 
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md, (3): the completion map
-is induced by `c(N) → red(N)` and the direct image of this augmentation
-(blueprint: lem-weil-pbc-direct-image-completion-unit-square).
-
 The reduction/direct-image comparison `h` is written as the adjunction mate of the
-canonical pullback/reduction comparison `pullReduction`. This is verbatim the body of
-`pushReductionMap` of `proposition-proper-base-change-complete-integral--1`. That node's proof uses
-the present lemma, so this module does not import its module.
+canonical pullback/reduction comparison `pullReduction`, as in the definition of
+`pushReductionMap`.
+
+## Implementation details
+
+The definition of `pushReductionMap` is repeated here rather than imported, since the module
+defining it uses `directImageCompletionUnitSquare`.
 -/
 
 @[expose] public noncomputable section
@@ -81,16 +80,7 @@ private theorem mate_naturality_general
 
 /-- Direct image carries the completion augmentation through the canonical constant-tower
 comparison. The comparison `χ` is the mate of the constant/pullback interchange, and the
-second edge is the mate of `pullReduction`.
-
-Proof steps:
-1. Use `directImage_constant_mate_isIso` to obtain the isomorphism `χ` from the
-   constant-tower mate.
-2. Apply `directImage_augmentation_pullReduction_coherence` to the underlying
-   pullback/reduction square.
-3. Apply the local mate naturality calculation to this commuting square; its counit
-   identities give the displayed equality at every derived object.
-(blueprint: lem-weil-pbc-direct-image-completion-unit-square) -/
+second edge is the mate of `pullReduction`. -/
 theorem directImageCompletionUnitSquare :
     ∃ χ : rpushModule l E f ⋙ dconstant l E Y ≅ dconstant l E X ⋙ rpush l E f,
       χ.hom = (mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)

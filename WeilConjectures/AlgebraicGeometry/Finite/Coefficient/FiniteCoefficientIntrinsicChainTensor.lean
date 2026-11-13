@@ -34,7 +34,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace FiniteCoefficientTotalComparison
 
 /-- A total-complex tensor comparison with the functor and instance data shared.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 def ChainIso
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [HasZeroObject C] [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalCategory D]
@@ -103,7 +103,7 @@ private theorem liftTensorIso_ι
 namespace FiniteCoefficientTotalComparison
 
 /-- A normalized tensor comparison on all total summands.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 def normalizedTensorEquation
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [HasZeroObject C] [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalCategory D]
@@ -122,7 +122,7 @@ def normalizedTensorEquation
               ((G.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor D) (.up ℤ) p q k h
 
 /-- Total normalization for a specified ordinary tensor normalization.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 def Normalization
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [HasZeroObject C] [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalCategory D]
@@ -249,7 +249,7 @@ private theorem nu_preservesColimits :
   infer_instance
 
 /-- The intrinsic tensor preserves zero maps in its first variable.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 instance finiteCoefficientIntrinsicTensorZero :
     (@curriedTensor.{u + 1, u + 2}
       (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)) _
@@ -259,7 +259,7 @@ instance finiteCoefficientIntrinsicTensorZero :
       (Scheme.ProEt.topology X) (Scheme.proEtaleConstantRing X A)
 
 /-- The intrinsic tensor preserves zero maps in its second variable.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 instance finiteCoefficientIntrinsicTensorObjZero
     (M : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)) :
     ((@curriedTensor.{u + 1, u + 2}
@@ -270,14 +270,14 @@ instance finiteCoefficientIntrinsicTensorObjZero
       (Scheme.ProEt.topology X) (Scheme.proEtaleConstantRing X A) M
 
 /-- The source totalization instance, shared before using its normalized comparison.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 instance finiteCoefficientIntrinsicSourceHasTensor
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) :
     HomologicalComplex.HasTensor P Q := by infer_instance
 
 /-- The target totalization instance, shared before using its normalized comparison.
-Source: Stacks 06YN (blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 06YN. -/
 instance finiteCoefficientIntrinsicTargetHasTensor
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) :
@@ -304,25 +304,16 @@ private theorem ordinaryNormalization_unique
   exact (hd M.1 M.2 U x y).trans (he M.1 M.2 U x y).symm
 
 /-- The total comparison is normalized on each tensor summand by the ordinary comparison.
-Source: Stacks 03EK and 06YN
-(blueprint: lem-sf-finite-intrinsic-chain-tensor-generators).
-The ordinary normalization uniquely fixes the map on all local pure tensors.
-The displayed summand equation is equivalent to its total-section version by
-naturality of the comparison unit, the ordinary pure-tensor formula, and the two
-adjunctions followed by sheaf-tensor extensionality. -/
+Source: Stacks 03EK and 06YN. The ordinary normalization uniquely fixes the map on all local pure
+tensors. The displayed summand equation is equivalent to its total-section version by naturality of
+the comparison unit, the ordinary pure-tensor formula, and the two adjunctions followed by
+sheaf-tensor extensionality. -/
 def FiniteCoefficientChainTensorNormalization :=
   FiniteCoefficientTotalComparison.Normalization (finiteCoefficientIntrinsicComparison X A)
     (FiniteCoefficientTensorNormalization X A)
 
 /-- The termwise finite intrinsic comparison has a unique normalized total tensor isomorphism.
-Source: Stacks 03EK and 06YN
-(blueprint: lem-sf-finite-intrinsic-chain-tensor-generators).
-Proof: choose the ordinary comparison normalized on pure sections. The comparison
-preserves coproducts because it is a composite of a left adjoint and an equivalence.
-The total-bifunctor comparison is an isomorphism and satisfies the summand equation.
-For uniqueness, the two adjunctions and sheaf-tensor extensionality first identify
-the ordinary comparison. Coproduct extensionality then identifies every degree map
-of the total comparison. Additivity respects the signed differential. -/
+Source: Stacks 03EK and 06YN. -/
 theorem finiteCoefficientIntrinsicChainTensor_existsUnique
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) :
@@ -336,8 +327,7 @@ theorem finiteCoefficientIntrinsicChainTensor_existsUnique
 
 /-- The normalized chain comparison, shared before coefficient specialization.
 Its value is determined by the preceding uniqueness theorem.
-Source: Stacks 03EK, 06YN
-(blueprint: lem-sf-finite-intrinsic-chain-tensor-generators). -/
+Source: Stacks 03EK, 06YN. -/
 def finiteCoefficientIntrinsicChainTensor
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) :

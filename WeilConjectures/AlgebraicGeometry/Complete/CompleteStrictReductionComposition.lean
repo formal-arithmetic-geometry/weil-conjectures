@@ -19,8 +19,7 @@ of exact functors, whenever the underlying ordinary comparisons are. In particul
 normalized reduction/pullback comparisons are compatible with the inverse-image
 compositors.
 
-Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
-step 8; Stacks Tags 06YY and 0D6D (blueprint: proposition-composition-base-change-rf-shriek--4).
+Source: Stacks Tags 06YY and 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -61,7 +60,7 @@ variable {BY BY' BX DY DY' DX : Type*}
 /-- Reduction comparisons normalized on good complexes are compatible with composition,
 provided the underlying ordinary comparisons are. The derived compositor `χ` of the source
 need only be the localization of the ordinary one on good complexes.
-Source: Stacks Tags 06YY and 0D6D (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+Source: Stacks Tags 06YY and 0D6D. -/
 theorem derivedReductionTriangle_paste
     (eg : RY ⋙ Gg ≅ Fg ⋙ RY') (ef : RY' ⋙ Gf ≅ Ff ⋙ RX) (eh : RY ⋙ Gh ≅ Fh ⋙ RX)
     (ρg : MY ⋙ Gg.mapDerivedCategory ≅ Fg.mapDerivedCategory ⋙ MY')
@@ -197,7 +196,7 @@ variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The normalized reduction comparisons are compatible with composition, for any module
 compositor whose derived functor is the specified derived compositor.
-Source: Stacks Tags 06YY and 0D6D (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+Source: Stacks Tags 06YY and 0D6D. -/
 theorem reductionTowerPullbackIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f)
     (hκ : d.pullComp f g = Functor.mapDerivedCategoryTriangleIso' κ) (K : d.derived Z) :

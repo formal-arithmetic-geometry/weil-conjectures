@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicRestrictedFrameClass
 
 /-! # Equation of the actual restricted finite frame class
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-restricted-frame-class-equation).
 -/
 
 @[expose] public noncomputable section
@@ -46,10 +43,7 @@ attribute [local irreducible] cyclicLine cyclicLineMap derivedScalars
 
 attribute [local irreducible] CyclicCartierFrame.reduce
 
-/-- The named restricted frame class is its explicit exact-functor construction.
-Source: coefficient changes (1)
-(blueprint: lem-diagonal-cyclic-restricted-frame-class-equation).
-Proof: unfold the constructed class. Both sides are the same exact-functor image. -/
+/-- The named restricted frame class is its explicit exact-functor construction. -/
 theorem cyclicRestrictedFrameClass_eq
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l Y]

@@ -17,15 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- The normalized completed coefficient unit agrees with the coefficient-unit
-adjunct after the limit/direct-image comparison and the varying comparison.
-
-Source: diagonal tower trace proof (2), ordinary coefficient-unit square;
-geometric classes proof (3), coefficient-pullback unit normalization.
-(blueprint: lem-sfb-diagonal-trace-finite-push-unit-seed).
-
-Proof: use the pre-varying common-unit comparison, then compose with the
-varying isomorphism.  Its inverse followed by its hom is the identity, and
-functoriality of the limit direct image transports that identity. -/
+adjunct after the limit/direct-image comparison and the varying comparison. -/
 theorem diagonalTrace_finitePush_unit_seed
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

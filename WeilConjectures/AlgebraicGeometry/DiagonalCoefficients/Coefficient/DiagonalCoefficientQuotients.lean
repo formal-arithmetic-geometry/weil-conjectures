@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Every uniformizer reduction of diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-quotients).
-
 ## Main definitions
 
 - `QuotientCompatibility`, `FiniteReductions`: every positive quotient identification.
@@ -34,8 +31,7 @@ class and unit/Chern trace. The positive ell power is merely a presentation of
 the quotient's annihilator; the quotient itself is the specified pi power.
 The class uses the recorded canonical Cartier arrow. The trace uses the inverse
 of the recorded canonical positive unit/Chern splitting, followed by its constant
-summand projection. Source: blueprint clause 1 and proof step 1
-(blueprint: def-sfb-diagonal-coefficient-quotients). -/
+summand projection. -/
 def QuotientCompatibility (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) [IsNoetherian Y]
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (d : Diagram (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))
@@ -59,8 +55,7 @@ def QuotientCompatibility (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) [IsNoetheria
       (quotientLine l E π n) d eY eP eW (lineP.iso l) (lineW.iso l)
 
 /-- Every positive uniformizer quotient is identified with its torsion class and
-trace, with both integration identities retained under derived reduction.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-quotients). -/
+trace, with both integration identities retained under derived reduction. -/
 def FiniteReductions (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) [IsNoetherian Y]
     (family : Family l Y) : Prop :=
   ∀ (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)

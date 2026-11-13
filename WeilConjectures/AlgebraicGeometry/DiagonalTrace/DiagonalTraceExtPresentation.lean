@@ -14,9 +14,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Abelian
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- Present an Ext class on specified derived endpoints, sharing all category data.
-Source: the strict-class clause of the diagonal-limit characterization.
-(blueprint: def-sfb-diagonal-trace-ext-arrow-presentation). -/
+/-- Present an Ext class on specified derived endpoints, sharing all category data. -/
 @[irreducible]
 def ExtArrowPresentation
     {A : Type*} [Category A] [Abelian A] [HasExt A] [HasDerivedCategory A]
@@ -28,9 +26,7 @@ def ExtArrowPresentation
 
 /-- Chosen derived endpoints and an arrow for a strict degree-two class.
 All single, shift and derived-category structures are formed before specializing
-objects to the concrete supported source.
-Source: the strict-class clause of the diagonal-limit characterization.
-(blueprint: def-sfb-diagonal-trace-ext-derived-presentation). -/
+objects to the concrete supported source. -/
 structure ExtDerivedPresentation
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     (S H : A) where
@@ -40,9 +36,7 @@ structure ExtDerivedPresentation
   target : J ≅ ((DerivedCategory.singleFunctor A 0).obj H)⟦(2 : ℤ)⟧
   arrow : K ⟶ J
 
-/-- The specified arrow data presents the specified strict Ext class.
-Source: the strict-class clause of the diagonal-limit characterization.
-(blueprint: def-sfb-diagonal-trace-derived-presentation-equation). -/
+/-- The specified arrow data presents the specified strict Ext class. -/
 @[irreducible]
 def ExtDerivedPresentation.Presents
     {A : Type*} [Category A] [Abelian A] [HasExt A] [HasDerivedCategory A]

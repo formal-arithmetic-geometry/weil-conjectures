@@ -38,12 +38,7 @@ private theorem normalizedConeOfComparison
 
 /-- Extract just the normalized integral cone from the completed comparison.
 Its components are determined by this normalization: restrict to singleton profinite
-sets and use the finite constant comparison to identify arbitrary sections pointwise.
-Source: completed-coefficient proposition, integral comparison and final paragraph
-(blueprint: lem-pur-condensed-zl-normalized-reduction-cone).
-
-Proof: project the integral comparison at `E = ℚ_ℓ`, retain its cone and its
-normalization on constant sections, and discard the other conjuncts. -/
+sets and use the finite constant comparison to identify arbitrary sections pointwise. -/
 theorem pur_normalized_reduction_cone (ℓ : ℕ) [Fact ℓ.Prime] :
     ∃ ρ : (Functor.const ℕᵒᵖ).obj (Mon.mk (Profinite.continuousMapRingObj.{u} ℤ_[ℓ])) ⟶
         sfbCoefficientQuotientTower ℤ_[ℓ]

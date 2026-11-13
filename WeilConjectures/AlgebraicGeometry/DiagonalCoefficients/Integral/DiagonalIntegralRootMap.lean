@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientDiagrams
 
 /-! # The projection-normalized integral root map
-
-Source: coefficient changes, initial root-limit comparison.
-(blueprint: lem-diagonal-integral-root-map).
 -/
 
 @[expose] public noncomputable section
@@ -77,19 +74,7 @@ private def integralRootsCone (l : ℕ) [Fact l.Prime]
               (homOfLE (Nat.le_succ n)).op).symm) }
 
 /-- The root-to-integral-line map, the limit lift of the root-limit projections
-followed by the free-module units. No local choice of a root generator is made.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), normalized root
-limits. (blueprint: lem-diagonal-integral-root-map).
-
-Proof: At level n, compose the n-th root-limit projection with the free-module
-unit. The next-level root projection reduces by the prescribed root power map.
-The free-module unit commutes with the tensor of this root power map and the
-unital coefficient reduction, so these maps form a cone. Forgetting the fixed
-integral scalar action preserves limits. Its limiting cone therefore gives the
-map into the underlying integral line and every required projection equation.
-The same limiting cone proves uniqueness. -/
+followed by the free-module units. No local choice of a root generator is made. -/
 @[no_expose] def diagonalIntegralRootsHom (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField l) :
     Scheme.purTwistZlOne X l ⟶ (spIntegralTwist X l E).X :=
@@ -118,13 +103,7 @@ def diagonalIntegralRoots (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField l) : IntegralRoots l E X :=
   ⟨diagonalIntegralRootsHom l X E, diagonalIntegralRootsHom_π l X E⟩
 
-/-- The finite projections determine the integral root comparison uniquely.
-
-Source: blueprint coefficient changes, normalized root limits.
-(blueprint: lem-diagonal-integral-root-map).
-
-Proof: forgetting scalars preserves the inverse limit. Its projections jointly
-cancel the two maps, and the prescribed projection formulas agree. -/
+/-- The finite projections determine the integral root comparison uniquely. -/
 theorem diagonalIntegralRoots_unique (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField l)
     (r s : IntegralRoots l E X) : r = s := by

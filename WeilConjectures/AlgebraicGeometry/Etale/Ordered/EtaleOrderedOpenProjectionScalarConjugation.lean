@@ -17,15 +17,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Etale
 /-- The ordered scalar square after postcomposition by the signed symmetry.
-Source: Stacks 0E8I, 0GL6 and 07A4
-(blueprint: lem-pur-etale-ordered-open-projection-scalar-postcomp).
-
-The mixed scalar/open equation is transported through the normalized open and tensor
-comparisons, then conjugated by the signed tensor symmetries.  Both routes agree on
-flat K-flat representatives by the degree-zero scalar balancing formula and the
-Koszul sign; localization and naturality extend this postcomposed equality to all
-inputs.  The final symmetry is an isomorphism, so the original equation is recovered
-by cancellation in the item theorem. -/
+Source: Stacks 0E8I, 0GL6 and 07A4. -/
 theorem etaleOrderedOpenProjectionScalar_postcomp
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

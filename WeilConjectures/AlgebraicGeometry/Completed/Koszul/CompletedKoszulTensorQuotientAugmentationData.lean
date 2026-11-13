@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModel
 /-! # Data for the finite strict completed Koszul tensor augmentation
 
 Source: Stacks Project, Tags 091N and 099M.
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-augmentation).
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +23,7 @@ variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The strict Koszul tensor tower, with complexes and tower indices transposed.
 Its objects and maps are the recorded total tensors, not chosen replacements.
-Source: Stacks Tag 099M
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-augmentation). -/
+Source: Stacks Tag 099M. -/
 @[reducible] def completedKoszulTensorTower (r : ℕ) (a : Fin r → A) :
     CochainComplex (CompletedAdicModules T d) ℤ ⥤
       CochainComplex (CompletedAdicTowers T d) ℤ :=
@@ -80,8 +78,7 @@ Source: Stacks Tag 099M
           (completedAdicKoszul T d r a n.unop)) q }
 
 /-- The actual finite quotient tensor map, specified independently of the Koszul complex.
-Source: Stacks Tag 099M
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-augmentation). -/
+Source: Stacks Tag 099M. -/
 def completedQuotientTensorUnit
     (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) :
     P ⟶ (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj P).asFunctor.obj
@@ -91,8 +88,7 @@ def completedQuotientTensorUnit
       (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The injection of one actual total tensor summand.
-Source: Stacks Tag 099M
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-augmentation). -/
+Source: Stacks Tag 099M. -/
 def completedKoszulTensorSummand (r : ℕ) (a : Fin r → A)
     (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) :
     ((curriedTensor (CompletedAdicModules T d)).obj (P.X p)).obj

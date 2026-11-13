@@ -14,7 +14,6 @@ The sectionwise tensor represents natural bilinear pairings by the module-sheafi
 adjunction. Vector-space sheafification similarly detects tensor diagrams and extends
 presheaf pairings. These are the sheafification steps in the native tensor comparison.
 Source: Stacks, Sites of Modules, Tags 03EK and 03EO.
-(blueprint: lem-sf-adic-section-tensor-universal).
 -/
 
 @[expose] public section
@@ -33,9 +32,7 @@ private lemma nativeTensorator_eq {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       Sheaf.tensorObjComparison (Scheme.ProEt.topology X) M N := by
   rfl
 
-/-- Native tensor maps are determined on their canonical pure-tensor sections.
-Source: native balanced coequalizer descent and sheaf tensor extensionality.
-(blueprint: lem-sf-adic-section-tensor-universal). -/
+/-- Native tensor maps are determined on their canonical pure-tensor sections. -/
 lemma nativeTensor_ext {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M N P : AdicSheaf l X) (f g : (Mod.tensorLeft N).obj M ⟶ P)
     (h : ∀ (V : X.ProEtᵒᵖ) (x : M.X.obj.obj V) (y : N.X.obj.obj V),
@@ -50,9 +47,7 @@ lemma nativeTensor_ext {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   apply TensorProduct.ext'
   exact h V
 
-/-- Native tensor maps act on the two pure-tensor factors sectionwise.
-Source: naturality of the native tensor quotient and vector-space sheaf tensorator.
-(blueprint: lem-sf-adic-section-tensor-universal). -/
+/-- Native tensor maps act on the two pure-tensor factors sectionwise. -/
 lemma nativeTensor_map {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     {M M' N N' : AdicSheaf l X} (f : M ⟶ M') (g : N ⟶ N')
     (V : X.ProEtᵒᵖ) (x : M.X.obj.obj V) (y : N.X.obj.obj V) :
@@ -122,14 +117,7 @@ lemma sectionTensor_map {M M' N N' : SectionModule (l := l) (X := X)}
   rw [Functor.map_comp] at he
   exact he.symm
 
-/-- Natural bilinear pairings extend uniquely across the sectionwise sheaf tensor.
-
-Proof: use `TensorProduct.lift` at every site object, apply the module-sheafification
-adjunction to the resulting presheaf morphism, and compute the extension on pure tensors
-with the adjunction unit. Tensor extensionality and injectivity of the adjunction bijection
-prove uniqueness. This also applies to zero modules and empty site objects.
-Source: Stacks, Sites of Modules, Tag 03EK.
-(blueprint: lem-sf-adic-section-tensor-universal). -/
+/-- Natural bilinear pairings extend uniquely across the sectionwise sheaf tensor. -/
 lemma sectionTensor_exists (M N P : SectionModule (l := l) (X := X))
     (b : ∀ V : X.ProEtᵒᵖ, M.val.obj V →ₗ[(comparisonRing l X).obj.obj V]
       N.val.obj V →ₗ[(comparisonRing l X).obj.obj V] P.val.obj V)

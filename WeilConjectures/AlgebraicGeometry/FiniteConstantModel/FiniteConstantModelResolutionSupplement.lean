@@ -45,7 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
 # Two-term resolutions of finite constant scalar models
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Lemma 6.8.2(1); Stacks Tags 093J,
-093M (blueprint: lem-sfb-finite-constant-model-two-term-free-resolution).
+093M.
 
 The model functor first forms discrete constant modules, extends scalars by the map
 sending a scalar to the constant continuous function, and applies the monoidal inverse
@@ -82,8 +82,7 @@ universe uC vC
 /-- A scalar short exact sequence, its specified scalar-extended short exact sequence,
 and the augmented complex in degrees minus one and zero. The component equations
 fix the differential and augmentation to the images of the original scalar maps.
-Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(blueprint: lem-sfb-finite-constant-model-two-term-free-resolution). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
 def HasResolution {A : Type u} [CommRing A] {C : Type uC} [Category.{vC} C] [Abelian C]
     (F : ModuleCat.{u + 1} A ⥤ C) (free : ℕ → C) (P : ModuleCat.{u + 1} A)
     (rational : Bool) : Prop :=
@@ -406,22 +405,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 
 /-- The continuous integral condensed ring with the specified extension absolute value.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.2(1)
-(blueprint: lem-sfb-finite-constant-model-two-term-free-resolution). -/
+Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.2(1). -/
 abbrev integralCoefficients :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers l E)
 
 /-- The continuous rational condensed ring with the specified extension absolute value.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-sfb-finite-constant-model-two-term-free-resolution). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 abbrev rationalCoefficients :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingObj E
 
 /-- Constant integral scalar modules extended to the actual pulled-back condensed ring.
-Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(blueprint: lem-sfb-finite-constant-model-two-term-free-resolution). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
 def integralModel (T : Scheme.{u}) :
     ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) ⥤
       Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
@@ -430,8 +426,7 @@ def integralModel (T : Scheme.{u}) :
   modelFunctor (Padic.coefficientExtensionIntegers l E) T
 
 /-- Constant rational scalar modules extended to the actual pulled-back condensed ring.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), field case
-(blueprint: lem-sfb-finite-constant-model-two-term-free-resolution). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3), field case. -/
 def rationalModel (T : Scheme.{u}) :
     ModuleCat.{u + 1} E ⥤ Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (rationalCoefficients l E) T) :=
@@ -442,33 +437,7 @@ def rationalModel (T : Scheme.{u}) :
 negative-degree free term can be zero. No condition is placed on the scheme or on
 scalar torsion, and all complexes are ordinary cochain complexes of module sheaves.
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3), with Lemma 6.8.2(1); Stacks 093J, 093M
-(blueprint: lem-sfb-finite-constant-model-two-term-free-resolution).
-
-Proof:
-1. In the integral case take a finite presentation and its finitely generated kernel.
-The kernel is torsion-free as a submodule of a finite free module over the domain O_E.
-The DVR theorem lem-weil-l-adic-extension-integers-dvr and
-lem-sc-dvr-fg-torsionfree-free make it finite free, giving the scalar short exact sequence.
-2. In the field case a finite spanning set contains a basis; take a=0 and let the final
-scalar map be that basis isomorphism, including the empty basis for the zero module.
-3. By lem-weil-pbc-site-r-module-presheaf-sheafification-exact the constant sheaf
-functor preserves this exact sequence, and also identifies finite scalar powers with
-finite powers of the constant ring. The scalar map is constant continuous functions.
-4. Relative tensor identifies B tensor A^n with B^n: send z tensor (x_i) to (zx_i),
-and use (z_i) to sum z_i tensor e_i for its inverse. These maps identify the scalar
-extended differentials with the given matrices, including n=0.
-5. For integral coefficients, lem-weil-pbc-pid-noetherian-normal makes O_E Noetherian.
-The canonical A-algebra comparison lemma-comparison-completed-coefficients--1 identifies
-B with the limit of the constant A/(pi^n). Its projections send constant scalars to
-their residues, so lem-weil-pbc-completed-constant-sheaf-reduction (Stacks 093M)
-preserves the constant short exact sequence under scalar extension. In the field case
-the scalar basis isomorphism stays an isomorphism after both functors; no flatness
-assertion for the discrete constant E is needed.
-6. Form the two-term complex in degrees -1,0 with the specified differential and
-augmentation. Exactness gives zero H^-1 and identifies H^0 with the final model by
-that augmentation. Other cohomology vanishes, so precisely this augmentation is a
-quasi-isomorphism. No completed derived category enters this argument. -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3), with Lemma 6.8.2(1); Stacks 093J, 093M. -/
 theorem finite_constant_model_two_term_free_resolution
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :

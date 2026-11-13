@@ -24,17 +24,7 @@ attribute [local irreducible] lowerStar etaleLowerShriek openImmersionLowerShrie
 
 /-- The inverse graph comparison is normalized by the right-derived unit for the proper
 leg of the compactification.
-Source: SGA 4 XVII 6.2.11 and Stacks Project, Tag 0F4L.
-(blueprint: lem-pur-graph-compactification-unit).
-
-Proof in words: the canonical etale comparison is the inverse of the explicitly
-constructed derived graph map. Its inverse is therefore that graph map itself.
-Apply the homotopy component formula of compactSupportDerivedComparison. Its first
-factor is descent of exact sum extension, its second factor is the degreewise sheaf
-graph map, and its remaining three factors are precisely the canonical comparison
-unit for exact open extension followed by the right-derived proper direct image.
-Expanding that unit gives the asserted equation on every homotopy object, without
-choosing a resolution or imposing boundedness. -/
+Source: SGA 4 XVII 6.2.11 and Stacks Project, Tag 0F4L. -/
 theorem graph_compactification_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W Z : Scheme.{u}} [IsNoetherian W] [IsNoetherian Z]

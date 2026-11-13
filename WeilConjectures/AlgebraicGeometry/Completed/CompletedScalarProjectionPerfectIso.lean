@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Completed.CompletedScalarProject
 /-!
 # Perfectness makes the normalized scalar projection invertible
 
-Source: Stacks Project, Tag 0944, and blueprint order 1276.
+Source: Stacks Project, Tag 0944.
 -/
 
 @[expose] public noncomputable section
@@ -35,14 +35,7 @@ private theorem derivedRestriction_reflectsIsomorphisms (T : Scheme.{u})
   exact isIso_of_reflects_iso _ (pbcRestrict φ)
 
 /-- A scalar projection whose coefficient unit is the positive quotient is invertible.
-Source: Stacks Project, Tag 0944; blueprint order 1276, finite-level projection formula.
-(blueprint: lem-pbc-completed-scalar-projection-perfect-iso).
-Proof: the scalar-to-tensor comparison identifies the projection after two exact
-restrictions of scalars with the tensor projection for the nth quotient. That quotient
-is site-perfect by reductionMap_isIso, so perfect_projection_formula makes the tensor
-projection invertible. Cancel the comparison isomorphisms. Exact scalar restriction
-reflects derived isomorphisms because it commutes with homology and reflects ordinary
-module-sheaf isomorphisms. Reflect twice to recover invertibility of the scalar mate. -/
+Source: Stacks Project, Tag 0944. -/
 theorem completedScalarProjectionPerfectIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]

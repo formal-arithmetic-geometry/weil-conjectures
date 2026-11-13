@@ -21,6 +21,20 @@ That they are locally computed by bounded complexes of finite free modules, for 
 an arbitrary base, is
 `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`, in
 `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange`.
+
+## Implementation details
+
+The Noetherian hypothesis of `isFinitePresentation_higherDirectImage` cannot be dropped, even for
+`ℱ` flat over `T`: for `T = Spec (k ⊕ V)` with `V` an infinite-dimensional square-zero ideal, `E`
+an elliptic curve over `k` and `ℒ` the line bundle on `E × T` with class a nonzero `v ∈ V` in
+`H¹(E, 𝒪_E) ⊗_k V`, the pushforward of `ℒ` along the projection corresponds to the module `V`,
+which is not of finite type over `k ⊕ V`.
+
+In `exists_isFiniteFreeComplex_higherDirectImage` the isomorphisms are only required to exist
+for each `g` and `q` separately: they are not asserted to be the canonical base-change maps, nor
+to be compatible with composition of the `g`. This suffices for semicontinuity of the fibre
+dimension and for the perfect locus, but not for the clause of Grauert's theorem saying that the
+canonical maps `R^q f_* ℱ ⊗ κ(t) → H^q(X_t, ℱ_t)` are isomorphisms.
 -/
 
 @[expose] public section
@@ -42,16 +56,7 @@ variable [IsProper f] [QuasiCompact f]
 /-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
 `f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent
 `𝒪_X`-module, the global sections `Γ(T, R^q f_* ℱ) = H^q(X, ℱ)` of the higher direct image form a
-finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
-
-This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`. Since `T` is affine,
-`Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, and the finiteness of `H^q(X, ℱ)` is
-`AlgebraicGeometry.Scheme.Modules.hasFiniteH_of_isProper` (Chow's lemma, the projective case
-and noetherian induction, Stacks 02O6). It is the only input to
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
-properties of the higher direct images.
-
-(blueprint: `lem-pc-coherent-hi`) -/
+finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1]. -/
 theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) := by
@@ -63,21 +68,9 @@ theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, �
 
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct
-image `R^q f_* ℱ` is a coherent `𝒪_T`-module for every `q` [EGA III₁, 3.2.1],
-[Stacks, Tag 02O5]. Coherence is spelled as quasi-coherence together with finite presentation;
-quasi-coherence of `R^q f_* ℱ` is
-`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`, so only finite
-presentation is stated here.
-
-The Noetherian hypothesis cannot be dropped, even for `ℱ` flat over `T`. Let `k` be a field,
-`V` an infinite-dimensional `k`-vector space, `T = Spec (k ⊕ V)` with `V` a square-zero ideal,
-`E` an elliptic curve over `k` and `f : E × T ⟶ T` the projection. Line bundles on `E × T`
-which are trivial on `E` are classified by `H¹(E, 𝒪_E) ⊗_k V ≅ V`; let `ℒ` be the one with class
-a nonzero `v ∈ V`. The sequence `0 ⟶ 𝒪_E ⊗_k V ⟶ ℒ ⟶ 𝒪_E ⟶ 0` has connecting map
-`k ⟶ H¹(E, 𝒪_E) ⊗_k V` sending `1` to `v`, so `f_* ℒ` corresponds to the module `V`, which is
-killed by `V` and infinite-dimensional over `k`, hence not of finite type over `k ⊕ V`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+image `R^q f_* ℱ` is of finite presentation for every `q` [EGA III₁, 3.2.1],
+[Stacks, Tag 02O5]; quasi-coherence is
+`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`. -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
@@ -170,28 +163,9 @@ v                   v
 T' --g--> U --U.ι--> T
 ```
 and `ℱ'` the pullback of `ℱ` to `X'`, the cohomology of the pullback `g^* P` is `R^q f'_* ℱ'`.
+The isomorphisms are only asserted to exist for each `g` and `q` separately.
 
-Taking `g = 𝟙 U` and for `sq` the square `(isPullback_morphismRestrict f U).flip`, and
-combining with `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`, the
-cohomology of `P` itself is `R^q f_* ℱ|_U`.
-
-The isomorphisms are only required to exist for each `g` and `q` separately: they are not
-asserted to be the canonical base-change maps, nor to be compatible with composition of the
-`g`. This suffices for semicontinuity of the fibre dimension and for the perfect locus, but not
-for the clause of Grauert's theorem saying that the canonical maps
-`R^q f_* ℱ ⊗ κ(t) → H^q(X_t, ℱ_t)` are isomorphisms; stating that needs the base-change map of
-higher direct images, which is not available.
-
-The proof needs, over a Noetherian affine base, Mumford's complex, obtained from the Čech complex
-of a finite affine cover, which is a bounded complex of flat modules by the flatness of `ℱ`,
-together with `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`; the
-general case reduces to this by Noetherian approximation of `(f, ℱ)` [EGA IV₃, §8 and §11.2].
-Alternatively, it follows from Kiehl's theorem that `R f_* ℱ` is pseudo-coherent, and finite
-Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H].
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) 
-(blueprint: lemma-coherent-base-change-invertible-sheaves--1)
--/
+Source: [EGA IV₃, §8 and §11.2], [Stacks, Tags 0B91 and 0A1H]. -/
 theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFinitePresentation f]
     [QuasiCompact f] [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
     (hℱ : ℱ.IsFlatOver f) (t : T) :

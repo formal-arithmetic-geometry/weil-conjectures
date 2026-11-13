@@ -25,9 +25,8 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 
 /-! # Finite truncation dévissage for constructible module objects
 
-This is the standard t-structure induction from blueprint
-`proposition-six-operations-dctf--14`, step 10. It is independent of coefficient finiteness:
-only the target property is required to be triangulated.
+This is the standard t-structure induction on truncations. It is independent of coefficient
+finiteness: only the target property is required to be triangulated.
 -/
 
 @[expose] public section

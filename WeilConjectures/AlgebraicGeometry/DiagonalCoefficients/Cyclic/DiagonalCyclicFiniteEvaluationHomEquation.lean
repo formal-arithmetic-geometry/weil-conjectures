@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizedEvaluationEquation
 
 /-! # Literal finite evaluation representative equation
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-finite-evaluation-hom-equation).
 -/
 
 @[expose] public noncomputable section
@@ -37,10 +34,8 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.homEquiv
   diagonalFiniteToPadic cyclicLine cyclicLineMap derivedScalars
   geoCartierConstant geoCartierLine
 
-/-- Literal representative equation after finite realization and restriction.
-Source: coefficient changes (1).
-(blueprint: def-diagonal-cyclic-finite-evaluation-hom-equation).
-This proposition asserts no equality and chooses no data. -/
+/-- Literal representative equation after finite realization and restriction. This proposition
+asserts no equality and chooses no data. -/
 @[irreducible] def cyclicFiniteEvaluationHomEquation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

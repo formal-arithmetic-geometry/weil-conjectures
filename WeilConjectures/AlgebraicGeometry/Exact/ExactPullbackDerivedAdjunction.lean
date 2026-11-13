@@ -43,19 +43,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.ConstantCompletion
 
-/-- Exact module inverse image has a normalized unbounded derived adjunction.
-
-Source: Stacks Project, Tag 07A6, lemma-adjoint, and Derived Categories,
-Tags 08BJ, 070I and 070K (blueprint: lem-sp-exact-pullback-derived-adjunction).
-
-Proof: module sheaves form a Grothendieck abelian category, hence admit K-injective
-resolutions. On a K-injective target J, the right derived functor is computed by GJ.
-Exactness of pull ensures that GJ is K-injective. The termwise adjunction descends
-through chain homotopies and the two localization Hom bijections into K-injectives.
-These bijections are natural, so they form an adjunction. The universal left-derived
-comparison identifies its left adjoint with the specified derivedPull. Applying the
-bijections to a chain map from pull(P) to J gives exactly the displayed normalization.
-The K-flat and flat-term conditions ensure that its source comparison is invertible. -/
+/-- Exact module inverse image has a normalized unbounded derived adjunction. -/
 theorem exactPullbackDerivedAdjunction
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

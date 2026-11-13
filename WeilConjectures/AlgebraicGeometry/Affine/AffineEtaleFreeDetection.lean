@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 # Detection by the affine étale free complexes
 
 Source: Bhatt--Scholze, Proposition 6.4.8, first paragraph.
-(blueprint: lem-pur-affine-etale-free-detection)
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The free rank-one sheaf at an affine étale object, placed in degree zero.
-Source: Bhatt--Scholze, Proposition 6.4.8, coherent generators.
-(blueprint: lem-pur-affine-etale-free-detection) -/
+Source: Bhatt--Scholze, Proposition 6.4.8, coherent generators. -/
 noncomputable def affineEtaleFreeComplex
     (C : Type (u + 1)) [CommRing C] (T : Scheme.{u}) (U : T.AffineEtale) :
     DerivedCategoryModule C T :=
@@ -211,23 +209,7 @@ private theorem iso_of_tests
 /-- The shifts of the affine free complexes detect isomorphisms.
 
 Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.4.8,
-first paragraph, expanded by the K-injective argument in the parent node.
-
-Proof in words: free Yoneda and cover density of the affine étale basis show that
-these free sheaves separate ordinary sheaf morphisms. For any separating family
-in an abelian category with K-injective resolutions, its degree-zero single
-complexes detect zero derived objects: resolve an object by a K-injective I.
-Vanishing of all shifted Hom groups gives vanishing of the corresponding Hom
-complex cohomology classes. The single-complex formula says every map from a
-generator to cycles lifts through the preceding differential. Separation then
-makes the map to cycles epi, so I is exact and the derived object is zero.
-For a morphism h satisfying the hypothesis, take a distinguished cone triangle.
-The two adjacent postcomposition bijections and the exact Hom sequence show that
-all shifted tests of the cone vanish. In this calculation the shifted triangle
-maps carry the invertible scalar (-1)^n; cancel it explicitly. The cone is zero
-by the preceding argument, so h is invertible. This works for arbitrary
-unbounded objects and includes the empty scheme and zero coefficient ring.
-(blueprint: lem-pur-affine-etale-free-detection) -/
+first paragraph. -/
 theorem isIso_of_affineEtaleFreeComplex
     (C : Type (u + 1)) [CommRing C] (T : Scheme.{u})
     {A B : DerivedCategoryModule C T} (h : A ⟶ B)

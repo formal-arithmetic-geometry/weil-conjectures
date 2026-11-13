@@ -144,24 +144,7 @@ private theorem transport_apply {A B A' B' : AddCommGrpCat.{u + 1}}
   change HEq (f.hom x) (g.hom y)
   rw [hf', hx']
 
-/-- Scalar extension of the root module over the base p-adic coefficient field.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-the finite Tate-line identification, with the ordinary scalar model of Chern data.
-(blueprint: lem-sfb-diagonal-trace-line-identification).
-
-Proof: the map Z/l^(n+1) → O_(ULift Q_l)/(l^(n+1)) is the unital ring
-isomorphism induced by the lifted identity of valuation rings. These maps commute
-with quotient transitions, so they form an isomorphism on the ringed sequence
-site. Restriction and extension along this isomorphism are inverse. For the
-specified ordinary scalar-extension model, its sheafification-adjunction
-normalization identifies the comparison with the tensor unitor: x tensor one
-maps to x, including for nonfree root modules. Apply the section, vertical and
-horizontal equations of r and of c.reduction.forget to obtain the additive tower
-comparison from the scalar-extended root module to c.rootModule. Compose with
-c.rootForget. The unitor equation on pure tensors gives the formula below.
-This uses only the ordinary scalar model; no completed root-limit projection or
-derived trace is used. -/
+/-- Scalar extension of the root module over the base p-adic coefficient field. -/
 @[no_expose] def diagonalTraceLineIdentification (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (c : Chern l (ULift.{u} (Padic l)) T)
     (r : Restriction l (ULift.{u} (Padic l)) T) :

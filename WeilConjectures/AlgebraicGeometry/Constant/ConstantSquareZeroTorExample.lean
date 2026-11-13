@@ -514,36 +514,7 @@ private noncomputable def residue_pullback_iso
 
 /-- The constant square-zero residue has infinite Tor amplitude; its finite-free
 presentation cone is bounded constructible of finite Tor amplitude and its upper
-truncation is not of finite Tor amplitude.
-
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof, Examples
-(blueprint: lem-sfb-constant-square-zero-tor-example).
-
-Proof: set A = Z/ell^2. Primality gives ell^2 = 0 and ann(ell) = ell A.
-The finite-discrete canonical abelian coefficient comparison, composed with the given
-coefficient isomorphism, identifies the underlying internal tensor unit with the
-constant abelian sheaf A. Exact constant sheafification and faithful exact forgetting
-therefore show that multiplication by ell on this unit is square zero and its repeated
-short complex is exact. Constant sections inject on the identity pro-etale object of
-the nonempty scheme Spec k, so the unit is nonzero.
-Construct the internal chain complex with this unit in every nonnegative degree and
-multiplication by ell as differential, augmented to F = coker(ell). Exactness makes
-this a resolution. Reindex in nonpositive cochain degrees; its flat terms and upper
-bound make it K-flat. Ell annihilates F by the cokernel equation, so tensoring the
-resolution with F kills all differentials. The source K-flat tensor comparison gives
-H^(-q)(F[0] tensor-derived F[0]) = F for every natural q. The residue F is nonzero:
-otherwise ell is epic, and its square-zero relation forces the unit to vanish.
-Consequently F[0] has no finite lower Tor bound.
-The condensed cokernel has a one-generator, one-relation finite presentation. Its
-pullback is the internal cokernel because inverse image preserves the unit, integer
-scalars and cokernels. The identity cover and trivial stratification establish its
-constant-model constructibility; pullback handles the affine-local convention.
-Finally construct [unit --ell--> unit] in degrees -1 and 0. Its flat terms give Tor
-amplitude [-1,0]. Its homology is F in both degrees, using the image/coimage comparison
-for ker(ell), and zero elsewhere, hence it is bounded constructible. Its upper
-truncation at zero is isomorphic to F[0] by the single-degree derived-category theorem
-and the degree-zero truncation map on homology. Isomorphism invariance transfers the
-infinite Tor amplitude. The proof includes ell = 2 and every characteristic of k. -/
+truncation is not of finite Tor amplitude. -/
 theorem constant_square_zero_tor_example (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{0}) Ab.{1})
     [MonObj Λ] [IsCommMonObj Λ]

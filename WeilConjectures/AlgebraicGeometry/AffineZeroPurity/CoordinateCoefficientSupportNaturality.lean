@@ -7,10 +7,6 @@ module
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupFunctorialityModels
 import all WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
 /-! # Naturality of normalized coefficient multiplication
-
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, ordered exterior products
-(blueprint: lem-pur-coordinate-coefficient-support-naturality).
 -/
 
 @[expose] public noncomputable section
@@ -30,15 +26,7 @@ private theorem support_map_normalized (P : PurityFiniteSetting.{u})
     cupCoefficientRestriction P i ≫ P.functorialCupSupportMap true i j g hg =
       cupCoefficientRestriction P j :=
   (P.functorialCupSupportMap_existsUnique true i j g hg).choose_spec.1
-/-- Multiplication of supported constants is natural in its first closed support.
-Source: restriction normalization in the affine-space exterior-product argument.
-(blueprint: lem-pur-coordinate-coefficient-support-naturality).
-
-Proof: the tensor of the two constant restriction maps is epic. Precompose both
-proposed maps with it. The left composite is normalized coefficient multiplication
-followed by restriction to the new intersection. On the right, tensor functoriality
-and normalization of the first support map give the same expression by the
-normalization of the new coefficient multiplication. Cancel the epic map. -/
+/-- Multiplication of supported constants is natural in its first closed support. -/
 theorem coordinate_coefficient_support_naturality (P : PurityFiniteSetting.{u})
     {Z Z' W X : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion i'] [IsClosedImmersion j]

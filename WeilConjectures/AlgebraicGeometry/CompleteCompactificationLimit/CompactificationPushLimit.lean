@@ -11,8 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirec
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization
 
 /-! # Direct image and fixed-coefficient strict limits
-Source: blueprint direct-image proof, paragraph (2); Stacks 0A07, 0D6E.
-(blueprint: lem-sp-compactification-push-limit).
+Source: Stacks 0A07, 0D6E.
 -/
 
 @[expose] public noncomputable section

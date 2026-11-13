@@ -52,7 +52,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 /-! # Ordinary tensor preservation for the termwise geometric realization
 
 Source: Zheng Construction 4.1; Stacks 03EL and 0G7E.
-(blueprint: lem-coef-semilinear-geometric-ordinary-tensor)
 -/
 
 @[expose] public noncomputable section
@@ -78,8 +77,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- Ordinary tensor comparisons and preservation of the resolving class.
 There are no derived tensor functors or localized comparisons in this record.
-Source: Zheng Construction 4.1; Stacks 03EL and 0G7E.
-(blueprint: lem-coef-semilinear-geometric-ordinary-tensor). -/
+Source: Zheng Construction 4.1; Stacks 03EL and 0G7E. -/
 structure GeometryOrdinaryTensor where
   /-- The level comparison on ordinary module sheaves. -/
   level : ∀ (n : ℕ) (M N : Mod.{c, v, max c v r} J (B n)),
@@ -248,26 +246,7 @@ private theorem component_square (n : ℕ) (M N : Systems.{c, v, max c v r} J B 
 end ComponentNaturality
 
 /-- The ordinary pure-tensor construction and its K-flat preservation property.
-Source: Zheng Construction 4.1; Stacks 03EL and 0G7E.
-(blueprint: lem-coef-semilinear-geometric-ordinary-tensor).
-
-Proof: the balanced pairing on inverse-image sheaves gives the level tensor comparison.
-The algebraic inverse-image graph equations transport its additivity and balancing;
-the sheaf tensor universal property gives the inverse and naturality. The generalized
-pure-tensor formula determines the comparison uniquely. Apply these level maps to
-the components of a strict system. Naturality for the coefficient-restriction maps,
-and O.ordinaryPullTransition, show compatibility with the actual horizontal maps.
-Thus the maps and their inverses reassemble to system isomorphisms. Their evaluation
-square is the defining component equation; joint faithfulness is used only for
-ordinary system maps. For level K-flatness use ringed-topos pullback (Stacks 0G7E),
-then remove its identity scalar extension by the scalar unit isomorphism. Exact,
-jointly faithful evaluations detect acyclicity of system complexes. The ordinary
-evaluation tensor isomorphism commutes with tensor totals, since evaluation has the
-sectionwise coextension right adjoint and therefore preserves coproducts. It follows
-that a system complex whose evaluations are K-flat is K-flat. Evaluate a flat-term
-K-flat source complex, apply level inverse-image preservation, and transport along
-O.ordinaryPullEvaluation to obtain the system clause. No derived tensor comparison
-is constructed. -/
+Source: Zheng Construction 4.1; Stacks 03EL and 0G7E. -/
 theorem geometricOrdinaryTensor_exists [PreservesFiniteLimits uInv] :
     Nonempty (GeometryOrdinaryTensor.{c, v, r} J B τ J' uInv uPush adjSet O) := by
   classical

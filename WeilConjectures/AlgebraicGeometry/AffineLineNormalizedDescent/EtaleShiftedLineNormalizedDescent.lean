@@ -16,9 +16,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 /-! # Normalized descent of shifted lines on the ordinary etale affine line
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md,
-opening paragraph and Gluing (blueprint: lem-trf-etale-shifted-line-normalized-descent).
-
 All pullbacks are the existing ordinary constant-coefficient etale inverse images.
 Their total left derived functors agree canonically with the termwise exact functors.
 The helper isomorphisms below only compose their prescribed compositors. In particular,
@@ -37,9 +34,7 @@ attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
 
 namespace AlgebraicGeometry.Etale.AffineLineNormalizedDescent
 
-/-- The canonical comparison q* a* C ≅ a_T* b* C for the affine-line base-change square.
-Source: lemma-section-normal-bundle, Gluing, base change to an etale cover
-(blueprint: lem-trf-etale-shifted-line-normalized-descent). -/
+/-- The canonical comparison q* a* C ≅ a_T* b* C for the affine-line base-change square. -/
 def lineBaseChange (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}}
     (b : T ⟶ S) (C : DerivedCategoryModule A S) :
     (upperStar (ModuleCat.{u + 1} A) (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor.obj
@@ -56,9 +51,7 @@ def lineBaseChange (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}}
     (AffineSpace.map (ULift.{u} (Fin 1)) b ≫ AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
     (AffineSpace.map_over b)).app C
 
-/-- Normalization at the unit section, using the specified section compositor.
-Source: lemma-section-normal-bundle, Gluing, identity at t=1
-(blueprint: lem-trf-etale-shifted-line-normalized-descent). -/
+/-- Normalization at the unit section, using the specified section compositor. -/
 def Normalized (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
     {F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)}
     {C : DerivedCategoryModule A S}
@@ -76,9 +69,7 @@ def Normalized (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
 /-- Local normalization: the local comparison evaluated at one is b* theta.
 The existing sectionRestrictionIso includes both the section-square compositor and
 cancellation of a_T* along its section, so equality to the identity expresses precisely
-this normalization, without choosing identifications.
-Source: lemma-section-normal-bundle, Gluing (blueprint:
-lem-trf-etale-shifted-line-normalized-descent). -/
+this normalization, without choosing identifications. -/
 def LocallyNormalized (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}} (b : T ⟶ S)
     {F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)}
     {C : DerivedCategoryModule A S}
@@ -95,9 +86,7 @@ def LocallyNormalized (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}} (b : T 
     (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) T) θ localIso = Iso.refl _
 
 /-- Restrict a local comparison to a further object, identifying both endpoints by
-inverse-image compositors. This is used on the actual fibre-product overlaps.
-Source: lemma-section-normal-bundle, Gluing (blueprint:
-lem-trf-etale-shifted-line-normalized-descent). -/
+inverse-image compositors. This is used on the actual fibre-product overlaps. -/
 def comparisonRestriction (A : Type (u + 1)) [CommRing A]
     {W U X : Scheme.{u}} (f : U ⟶ X) (g : W ⟶ U) (h : W ⟶ X) (hh : h = g ≫ f)
     {F G : DerivedCategoryModule A X}
@@ -224,24 +213,7 @@ private theorem local_comparison_unique (A : Type (u + 1)) [CommRing A]
 /-- Normalized local comparisons of shifted ordinary-etale lines agree, as do their
 inverses, and descend to a globally normalized isomorphism. Global uniqueness quantifies
 over all normalized isomorphisms. The last clause gives independence on every etale
-base change, hence independence of the entire cover and all normalized choices.
-Source: sk-thm-dnc.proof.md, opening paragraph and Gluing
-(blueprint: lem-trf-etale-shifted-line-normalized-descent).
-Proof: Step 1 is sheaf_rigidity, by affine-line fullness (Stacks 0A3H). Step 2 fixes
-F[-m]=P[0] and C[-m]=Q[0]. Exact inverse image commutes with shifts and single complexes
-(015F); the fully faithful single functor (06XS) identifies maps, inverses and their
-compositions with sheaf maps, compatibly with every compositor. Step 3 uses affine-space
-base change to identify X_i and all overlaps with affine lines over the corresponding
-bases. Etale covering-base-change makes the X_i cover X, including empty covers.
-Step 4 takes the ratio of two local comparisons on an overlap; normalization makes
-its value at one the identity, so Step 1 makes the ratio the identity. Inverses agree
-as well. Step 5 applies existsUnique_etaleSheafHom_of_family to glue the maps and
-separately their inverses; uniqueness identifies both composites with identities.
-Return to derived objects by Step 2. Step 6 tests the normalization on the base cover.
-The ratio of any two normalized global comparisons is the identity by Step 1, without
-assuming prescribed restrictions. Apply that argument over every etale base to identify
-any other normalized local comparison with the restriction of the global one. This
-includes empty and nonreduced bases and the zero ring. -/
+base change, hence independence of the entire cover and all normalized choices. -/
 theorem normalized_descent (A : Type (u + 1)) [CommRing A] [Finite A] (S : Scheme.{u})
     (m : ℤ) (C : DerivedCategoryModule A S)
     (F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S))

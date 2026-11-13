@@ -17,9 +17,9 @@ space `k^m` with a homomorphism of group schemes `r : G ⟶ GL_m`, a rational re
 `r`; this is the representation `RationalHom.representation`, and the stable subspaces, the
 simple and the semisimple algebraic-group modules are those of this representation.
 
-Simple and semisimple modules are only defined for `k` algebraically closed of characteristic `0`,
-the setting of the blueprint. There `G(k)` is schematically dense in an algebraic group `G`, so
-stability under `G(k)` is stability under `G`; over a general field it is not.
+Simple and semisimple modules are only defined for `k` algebraically closed of characteristic `0`.
+There `G(k)` is schematically dense in an algebraic group `G` (which is reduced by Cartier's
+theorem), so stability under `G(k)` is stability under `G`; over a general field it is not.
 
 ## Main definitions
 
@@ -35,16 +35,6 @@ stability under `G(k)` is stability under `G`; over a general field it is not.
   if it is nonzero and has no nonzero proper stable subspace.
 - `AlgebraicGeometry.GeneralLinearGroup.RationalHom.isSemisimple_iff`: a module is semisimple if
   and only if it is a direct sum of simple modules.
-
-## Blueprint
-
-- `det-d-linear`: coefficients and representations; the constructions on representations it
-  lists are Mathlib's `Representation`, `Subrepresentation`, `Representation.IsIrreducible`,
-  `Representation.IsSemisimpleRepresentation`, `Representation.tprod` and
-  `Representation.exteriorPower`.
-- `def-wf-algebraic-representations`: `RationalHom` and `RationalHom.representation`.
-- `def-wf-simple-module`: `RationalHom.IsSimple`.
-- `def-wf-semisimple-module`: `RationalHom.IsSemisimple`.
 -/
 
 @[expose] public section
@@ -60,7 +50,7 @@ variable {k : Type u} [CommRing k] {G : Over (Spec (.of k))} [GrpObj G]
   {m : Type u} [Fintype m] [DecidableEq m]
 
 /-- The algebraic-group module of a rational representation `r : G ⟶ GL_m`: the `k`-points of `G`
-act on `k^m` through their images in `GL_m(k)`. (blueprint: `def-wf-algebraic-representations`) -/
+act on `k^m` through their images in `GL_m(k)`. -/
 noncomputable def representation (r : RationalHom G m) [IsMonHom r] :
     Representation k (AlgebraicGeometry.points G k) (m → k) where
   toFun g := Matrix.toLin' (r.points k g : Matrix m m k)
@@ -80,19 +70,13 @@ variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
   {m : Type u} [Fintype m] [DecidableEq m] (r : RationalHom G m) [IsMonHom r]
 
 /-- A *simple* algebraic-group module: `k^m` is nonzero and has no nonzero proper subspace stable
-under `G` (`RationalHom.isSimple_iff`). (blueprint: `def-wf-simple-module`)
-
-Stability is tested on the `k`-points `G(k)` only. This is the scheme-theoretic notion (a
-subcomodule, i.e. stable under `G(R)` for every `k`-algebra `R`) because `G` is an algebraic
-group, i.e. locally of finite type over `k`, and `k` is algebraically closed of characteristic
-`0`, the standing hypotheses of `det-d-linear`: then `G` is reduced (Cartier) and `G(k)` is
-schematically dense in `G`. Without these hypotheses the two notions differ, which is why
-`[LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k]` are imposed. -/
+under `G` (`RationalHom.isSimple_iff`). Stability is tested on the `k`-points `G(k)`, which
+agrees with the scheme-theoretic notion under the imposed hypotheses. -/
 abbrev IsSimple [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] : Prop :=
   r.representation.IsIrreducible
 
 /-- A *semisimple* algebraic-group module: a direct sum of simple modules
-(`RationalHom.isSemisimple_iff`). (blueprint: `def-wf-semisimple-module`)
+(`RationalHom.isSemisimple_iff`).
 
 As for `RationalHom.IsSimple`, testing stability on `G(k)` agrees with the scheme-theoretic notion
 because `G` is locally of finite type over `k` and `k` is algebraically closed of characteristic
@@ -101,7 +85,7 @@ abbrev IsSemisimple [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] : P
   r.representation.IsSemisimpleRepresentation
 
 /-- An algebraic-group module is simple if and only if it is nonzero and its only subspaces
-stable under `G` are `0` and `k^m`. (blueprint: `def-wf-simple-module`) -/
+stable under `G` are `0` and `k^m`. -/
 theorem isSimple_iff [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] :
     r.IsSimple ↔ Nontrivial (m → k) ∧ ∀ U : Submodule k (m → k),
       (∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g))) →
@@ -109,8 +93,7 @@ theorem isSimple_iff [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] :
   Representation.isIrreducible_iff
 
 /-- An algebraic-group module is semisimple if and only if it is a direct sum of simple modules:
-there is a set of subspaces stable under `G`, each simple, which are independent and span `k^m`.
-(blueprint: `def-wf-semisimple-module`) -/
+there is a set of subspaces stable under `G`, each simple, which are independent and span `k^m`. -/
 theorem isSemisimple_iff [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] :
     r.IsSemisimple ↔ ∃ s : Set (Subrepresentation r.representation),
       (∀ U ∈ s, U.toRepresentation.IsIrreducible) ∧

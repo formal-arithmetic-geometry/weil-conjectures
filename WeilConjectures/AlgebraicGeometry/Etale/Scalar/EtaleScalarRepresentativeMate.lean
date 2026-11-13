@@ -23,14 +23,7 @@ attribute [local irreducible] HasDerivedCategory.ofHasKInjectiveResolutions
 
 /-- The fixed scalar cochain representative is the inverse mate of the exact restriction
 localization factor.
-Source: Stacks 03EK, 06YY; normalization proof step 1.
-
-Proof: In each degree the cochain scalar unit is the ordinary scalar unit, so it equals
-scalarRepresentativeUnit. The unit identity for inverse mates therefore agrees with the
-published unit transpose of scalarExtensionRepresentative. Injectivity of the derived
-scalar adjunction's hom equivalence identifies the two maps. This holds for all cochain
-complexes, without flatness and also for zero rings.
-(blueprint: lem-coef-etale-scalar-representative-mate). -/
+Source: Stacks 03EK, 06YY. -/
 theorem etaleScalarRepresentativeMate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})

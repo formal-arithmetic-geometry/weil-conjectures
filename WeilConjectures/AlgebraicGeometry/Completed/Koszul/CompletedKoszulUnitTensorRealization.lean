@@ -237,28 +237,7 @@ private theorem coefficient_transition
 
 /-- The concrete scalar realization of the exterior complexes is the actual
 Koszul tower tensored with the cochain unit. Any regular-module identification
-can be used, with the same scalar twist in every exterior degree.
-
-Source: Stacks Project, more-algebra.tex, lemma-sequence-Koszul-complexes (0921),
-and proetale.tex, proof of lemma-naive-completion (099M).
-(blueprint: lem-weil-pbc-completed-koszul-unit-tensor-realization).
-
-Proof: termwise application of the composite functor is termwise constant
-sheafification followed by completed scalar extension, hence is the construction
-of completedAdicKoszul. The inverse left unitor identifies it with unit tensor
-completedAdicKoszul. The specified regular-module isomorphism differs from the
-canonical one by an automorphism of the completed rank-one module. Such an
-automorphism is multiplication by a unit section. Multiply every exterior term
-by the inverse unit section to adjust the comparison to c; linearity makes this
-commute with the differential and every diagonal transition. In exterior degree
-zero, exteriorPower.zeroEquiv identifies the regular module with the Koszul
-term, and the normalized unit is exactly this map followed by the tensor
-unitor. This proves the last identity. The component formula hsA identifies
-sA with the product of the recorded successors: the diagonal exponent is m-n,
-and exponents add under composition. Complex extension and scalar realization
-preserve the equality. Naturality of the left unitor and of multiplication then
-gives the transition identity for every n<=m, including equality. For r=0 the
-same degree-zero calculation is the entire comparison. -/
+can be used, with the same scalar twist in every exterior degree. -/
 theorem completedKoszulUnitTensorRealization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

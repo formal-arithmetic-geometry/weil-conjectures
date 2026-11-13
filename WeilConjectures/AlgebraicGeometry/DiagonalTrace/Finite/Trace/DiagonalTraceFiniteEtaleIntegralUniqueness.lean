@@ -202,13 +202,7 @@ private theorem etale_chern_of_integral
   rw [Etale.ordinaryFiniteClass_extHomEquiv]
   simpa only [Etale.ordinaryFiniteExtClassCore, Etale.supportedKummerChern] using hb
 
-/-- An integral Kummer normalization identifies a finite class with a Cartier antecedent.
-Source: ordinary finite Chern uniqueness and the geometric Chern equation.
-(blueprint: lem-sfb-diagonal-trace-finite-etale-integral-uniqueness).
-
-Proof: the first hypothesis identifies b with ordinaryFiniteFirstChern of the divisor line.
-The integral adjunct of c identifies it with that same canonical Chern class. Injectivity
-of the ordinary finite Ext/Hom equivalence then identifies b and c. -/
+/-- An integral Kummer normalization identifies a finite class with a Cartier antecedent. -/
 theorem finiteEtale_eq_of_integralChern
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     {D T : Scheme.{u}} (i : D ⟶ T) (hI : i.ker.IsInvertible)

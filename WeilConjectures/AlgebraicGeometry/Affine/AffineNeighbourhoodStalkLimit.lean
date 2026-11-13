@@ -28,18 +28,7 @@ set_option backward.isDefEq.respectTransparency false in
 neighbourhoods, indexed by a directed preorder. The projection equations use the
 canonical morphism from the spectrum of the stalk to the original scheme.
 
-Source: Stacks Project, Sheaves section 0078 and Limits Tag 01YW;
-compare `Scheme.isLimitFunctionFieldCone` for integral schemes.
-(blueprint: lem-weil-pbc-affine-neighbourhood-stalk-limit)
-
-Proof: Order affine neighbourhoods of x by inclusion. Every neighbourhood contains an
-affine one, and the intersection of two contains an affine neighbourhood, so this is
-cofiltered and cofinal among all neighbourhoods. Restriction of the stalk's defining
-ring colimit to this cofinal family is still a colimit. Spec converts it to a limit.
-Reindex by the order-dual preorder to obtain the directed-set convention. The open
-immersions from affine charts identify its objects with open subschemes, and the germ
-maps give the asserted projection equations. No reducedness or irreducibility is used.
--/
+Source: Stacks Project, Sheaves section 0078 and Limits Tag 01YW. -/
 theorem exists_affine_neighbourhood_stalk_limit (X : Scheme.{u}) (x : X) :
     ∃ (I : Type u) (_ : Preorder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I)
       (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

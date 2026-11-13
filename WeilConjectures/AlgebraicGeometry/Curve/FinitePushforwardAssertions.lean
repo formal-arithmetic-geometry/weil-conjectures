@@ -21,6 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardPullbackComparis
 # Finite pushforward of the eight curve assertions
 
 Source: Stacks Project, Etale Cohomology, Lemma 0A5D (59.83.5).
+
+## Implementation details
+
+Abelian sheaves are viewed as modules over `ULift ℤ` through the inverse of the standard
+forgetful equivalence, followed by restriction along `ULift.ringEquiv`. This is only a
+change of coefficient category, and imposes no extra structure on the abelian sheaf.
 -/
 
 @[expose] public section
@@ -66,38 +72,7 @@ private theorem finite_lowerStar_torsion {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFin
 
 /-- Finite pushforward preserves torsion and transfers each of the eight curve assertions
 separately, and therefore their conjunction. Source: Stacks Project, Lemma 0A5D,
-Section 03SB.
-
-Abelian sheaves are viewed as modules over `ULift ℤ` through the inverse of the standard
-forgetful equivalence, followed by restriction along `ULift.ringEquiv`. This is only a
-change of coefficient category, and imposes no extra structure on the abelian sheaf.
-
-Proof (the node's eight steps):
-1. The finite stalk formula (lemma-weil-pbc-finite-stalk-formula) expresses a stalk of the
-pushforward as a finite product of torsion stalks. The torsion characterizations
-(definition-torsion-sheaves--3) then give torsion of the pushforward.
-2. Each source stalk is a direct factor of the pushforward stalk over its image. Thus
-p-primary torsion and torsion prime to the characteristic descend from the pushforward.
-3. The finite cohomology edge map (lemma-finite-morphisms-cohomology--2) is an
-isomorphism in every degree, identifying vanishing and finiteness on the two schemes.
-4. Transfer C1 by this identification. For C2, affineness of Y implies affineness of X;
-for C3 use step 2. These use lem-weil-pbc-finite-morphism-permanence.
-5. Constructibility descends from the pushforward by
-lem-weil-pbc-finite-pushforward-constructible-descent. Combine this with steps 2 and 3
-for C4; for C5 also use that finite over proper is proper.
-6. For C6 and C7, form the base-change square for an algebraically closed field extension.
-Finite exchange (lemma-weil-pbc-finite-exchange) and the finite edge maps are isomorphisms.
-Their compatibility (lem-weil-pbc-edge-map-base-change) identifies the two pullback maps.
-Pasting identifies the source base change with its field extension; composition
-(proposition-cohomology-p-1-over-henselian--1 and lem-weil-pbc-inverse-image-composition)
-transfers bijectivity. Apply step 2 for C6 and properness permanence for C7.
-7. For an open immersion into Y, its pullback into X is open and the induced finite
-morphism has the same exchange and edge isomorphisms. Compatibility gives a commuting
-restriction square; lift the corresponding class by C8 on X and transport it back by
-the inverse edge map. Injectivity of the comparison proves that it restricts to the
-given class on the open of Y.
-8. The eight separate implications give the implication between their conjunctions,
-using theorem-cohomology-curves. Together with step 1 this proves both clauses. -/
+Section 03SB. -/
 theorem IsCurve.finite_pushforward_assertions {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]

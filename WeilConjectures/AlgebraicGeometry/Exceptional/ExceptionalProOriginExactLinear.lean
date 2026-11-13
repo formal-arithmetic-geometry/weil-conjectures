@@ -37,22 +37,7 @@ variable (P : ExceptionalProCompactSupport O ell c
 
 /-- The actual pro-etale compact support and site-transported right functor carry
 triangulated and coefficient-linear structures.
-Source: Zheng Proposition 2.29(2), Construction 5.15 and Lemma 5.22.
-(blueprint: lem-sf-exceptional-pro-origin-exact-linear).
-
-Proof: extension by zero is additive and exact, so localization gives its
-canonical additive and shift structures and preserves distinguished triangles.
-Proper direct image is its universal K-injective right-derived functor and is
-triangulated. The site inverse image is exact; the site direct image is a total
-right-derived functor. Compose these structures with the recorded triangulated
-etale right adjoint. Multiplication by r is the ordinary natural endomorphism
-whose component at level n is multiplication by the image of r in the quotient
-constant ring sheaf. Its compatibility with transitions is scalar linearity.
-Localize that natural transformation on complexes. On representatives each
-inverse image, open extension and proper direct image commutes with this scalar;
-the universal localization or right-derived property extends the identities to
-all derived objects. The etale right adjoint has this property by its recorded
-linearity, so the transported right composite has it as well. -/
+Source: Zheng Proposition 2.29(2), Construction 5.15 and Lemma 5.22. -/
 private def derivedExactIso {A B : Type*} [Category A] [Category B]
     [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]

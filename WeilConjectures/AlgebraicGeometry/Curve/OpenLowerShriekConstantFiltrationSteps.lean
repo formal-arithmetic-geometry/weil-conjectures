@@ -29,20 +29,7 @@ namespace AlgebraicGeometry.IsCurve
 /-- The zero case and successor step for extension by zero of a constant-quotient
 filtration. This states only local induction steps, not the terminal assertion.
 
-Source: Stacks Project 03SD (lemma-vanishing-easier), final paragraph;
-0A5C (lemma-ses-statements).
-(blueprint: r1-open-lower-shriek-constant-filtration-steps)
-
-Proof: Extension by zero is exact and additive, so it sends the zero first term
-to a zero sheaf. All its cohomology groups vanish. Its pullbacks are also zero,
-so both field-extension maps are bijective and the degree-two restriction map
-is surjective. Thus the eight assertions hold at zero. For each monomorphism
-W_i -> W_(i+1), the cokernel sequence is short exact in the abelian sheaf
-category. Exact extension by zero preserves it. The specified cokernel
-isomorphism identifies its third term with a_! R. Transport the constant-case
-assertions along that isomorphism and apply short-exact assertion devissage
-(Assertions.of_shortExact). The prime coefficient ring is Noetherian, as
-required there. The case n=0 has no successor condition. -/
+Source: Stacks Project 03SD, final paragraph. -/
 theorem open_lowerShriek_constant_filtration_steps
     {k : Type u} [Field k] [IsAlgClosed k] {Y V : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (a : V ⟶ Y) [IsOpenImmersion a]

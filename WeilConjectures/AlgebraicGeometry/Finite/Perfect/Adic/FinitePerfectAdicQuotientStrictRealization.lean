@@ -45,13 +45,7 @@ def finitePerfectAdicPullbackRestrictIso {Y Z : Scheme.{t}} (g : Z ⟶ Y)
 /-- The explicit scalar realizations carry the fixed-scalar coordinates to the strict ordinary
 tensor tower restricted to `W`, and the ordinary quotient arrows to its transition maps,
 compatibly with the inverse-image comparison and the ordinary scalar compositor.
-Source: Stacks Project, Tags 03CY, 03DA and 09C6.
-
-Proof sketch: restriction to `W` of the fixed-scalar coordinates of `N`, followed by
-associated module sheafification for the canonical constant scalars, is identified with the
-restriction of the ordinary scalar extension of `N` by the counit of associated module
-sheafification, since `φ` is the canonical comparison; forgetting along the finite projection
-gives `N ⊗ R_n`. On sections both composites of the square send `b ⊗ x` to `q(b) ⊗ x`. -/
+Source: Stacks Project, Tags 03CY, 03DA and 09C6. -/
 theorem finitePerfectAdic_quotient_strict_realization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

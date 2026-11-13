@@ -274,17 +274,7 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Etale
 
 /-- Exact open extension preserves the acyclic total-tensor tests for K-flatness.
-Source: Stacks 0E8I, 06YN, 0GKF (blueprint: lem-coef-etale-open-kflat).
-
-Proof: Given an acyclic complex B on X, exact restriction makes j-star B acyclic.
-K-flatness of P makes its direct-sum total tensor with j-star B acyclic. Apply
-exact extension by zero. The ordinary projection isomorphism in every bidegree,
-and preservation of coproducts by j-shriek, identify the resulting total complex
-with the tensor of j-shriek P and B. The comparison respects both differential
-summands by naturality and additivity. Signed symmetry puts the test complex
-first. Transport through the exact constant-module equivalence preserves the
-acyclicity and gives precisely etaleKFlat. This argument uses arbitrary direct
-sums, so requires neither boundedness nor quasi-compactness of j. -/
+Source: Stacks 0E8I, 06YN, 0GKF. -/
 theorem etaleOpenKFlat
     {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]

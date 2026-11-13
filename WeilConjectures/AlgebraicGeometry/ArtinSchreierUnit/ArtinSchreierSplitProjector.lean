@@ -17,10 +17,6 @@ import Mathlib.Tactic.Ring
 
 /-! # Finite character projectors on a split coefficient module
 
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, first paragraph,
-the character eigenfunctions and their root evaluations
-(blueprint: lem-wft-as-split-character-projector).
-
 Reindexing the finite sum gives eπ_d = χ(d)eπ_0. Construct the character vector j
 with components χ(d)id. The character identity and invertibility of the group
 order imply je = j, while jπ_0 = id. Product extensionality gives e = (eπ_0)j,
@@ -192,9 +188,7 @@ theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
 variable [HasStrongEpiMonoFactorisations C]
 
 /-- The image of the split character average is the coefficient object.
-The section is the actual character vector, rather than a chosen existence witness.
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, first paragraph,
-root evaluation (blueprint: lem-wft-as-split-character-projector). -/
+The section is the actual character vector, rather than a chosen existence witness. -/
 def splitProjectorImageIso (hq : IsUnit (Fintype.card G : R)) :
     image ((splitProjector U χ)).asHom ≅ U := by
   let r := (splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0

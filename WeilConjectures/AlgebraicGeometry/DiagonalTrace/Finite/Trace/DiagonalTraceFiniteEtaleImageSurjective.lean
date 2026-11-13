@@ -16,21 +16,14 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.comp Ext.mk₀
   Ext.mk₀CompMk₀ Ext.mapExactFunctor comparisonUpperStar
 
-/-- Every pro-etale coefficient Ext class has an étale representative with fixed endpoints.
-Source: exact site-comparison Ext bijectivity, with canonical endpoint isomorphisms.
-(blueprint: lem-sfb-diagonal-trace-finite-etale-image-surjective).
-
-Proof: exact site comparison gives a bijection on Ext. Its composition with the explicit
-endpoint-transport equivalence is an equivalence, so its forward map is surjective. -/
+/-- Every pro-etale coefficient Ext class has an étale representative with fixed endpoints. -/
 theorem finiteEtaleProImage_surjective (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) :
     Function.Surjective (finiteEtaleProImage A T N hA) := by
   unfold finiteEtaleProImage
   exact (finiteEtaleProEquiv A T N hA).surjective
 
-/-- The equivalence-based finite image has the usual exact-functor formula.
-Source: definitions of comparison and endpoint transport.
-(blueprint: lem-sfb-diagonal-trace-finite-etale-image-surjective). -/
+/-- The equivalence-based finite image has the usual exact-functor formula. -/
 theorem finiteEtaleProImage_apply (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0)
     (b : Ext (Etale.ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2) :

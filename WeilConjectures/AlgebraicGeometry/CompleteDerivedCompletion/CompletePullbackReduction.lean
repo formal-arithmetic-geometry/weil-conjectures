@@ -17,10 +17,6 @@ import all WeilConjectures.CategoryTheory.Flat.FlatConstantTensorProZeroConesSup
 /-!
 # Completed pullback using the reduction tower
 
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.md
-(blueprint: definition-completed-inverse-image).
-
 The strict comparison is characterized on both cone summands in every degree and
 at every tower level. Its descent is characterized on every complex by localization.
 Thus neither choice below selects an unspecified isomorphism of derived objects.
@@ -183,9 +179,7 @@ private theorem strictCompare_inr
     Category.id_comp] using hn
 
 /-- Normalization of the strict pullback/reduction comparison on the shifted and
-unshifted summands of the actual mapping cone. Level `n` means exponent `n+1`.
-Source: proof (1), exact pullback of the cones and their transitions
-(blueprint: definition-completed-inverse-image). -/
+unshifted summands of the actual mapping cone. Level `n` means exponent `n+1`. -/
 def IsStrictPullReduction
     (e : strictRed l E T ⋙ (pull l E f).mapHomologicalComplex (.up ℤ) ≅
       (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapHomologicalComplex
@@ -205,13 +199,7 @@ def IsStrictPullReduction
         (((CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapHomologicalComplex
           (.up ℤ)).obj M))).f i).app (op n)
 
-/-- There is a unique strict comparison preserving both cone summands.
-Source: proof (1) (blueprint: definition-completed-inverse-image).
-Proof: exact additive pullback commutes with the finite biproduct defining each cone
-term. Its coefficient morphism takes multiplication by π to multiplication by π.
-The two identity summand maps therefore commute with the cone differential and the
-(π,1) transitions. They are natural in the complex and give an isomorphism. The two
-summand equations determine its components, hence the whole natural isomorphism. -/
+/-- There is a unique strict comparison preserving both cone summands. -/
 theorem strictPullReduction_existsUnique :
     ∃! e : strictRed l E T ⋙ (pull l E f).mapHomologicalComplex (.up ℤ) ≅
       (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapHomologicalComplex
@@ -235,12 +223,10 @@ theorem strictPullReduction_existsUnique :
     funext n
     exact (he' M i n.unop).2.trans (hn M i n.unop).2.symm
 
-/-- The strict cone comparison, chosen from its summandwise unique characterization.
-Source: proof (1) (blueprint: definition-completed-inverse-image). -/
+/-- The strict cone comparison, chosen from its summandwise unique characterization. -/
 def strictPullReduction := (strictPullReduction_existsUnique l E f).exists.choose
 
-/-- The localization equation defining the derived pullback/reduction comparison.
-Source: proof (1) (blueprint: definition-completed-inverse-image). -/
+/-- The localization equation defining the derived pullback/reduction comparison. -/
 def IsPullReduction
     (e : red l E T ⋙ dpull l E f ≅ dpullModule l E f ⋙ red l E T') : Prop :=
   ∀ M : CochainComplex (AdicCompletion.Modules l E T) ℤ,
@@ -255,12 +241,7 @@ def IsPullReduction
       (pull l E f).mapDerivedCategoryFactors.hom.app ((strictRed l E T).obj M) ≫
         DerivedCategory.Q.map ((strictPullReduction l E f).hom.app M)
 
-/-- Exact localization descends the strict normalized comparison uniquely.
-Source: proof (1) (blueprint: definition-completed-inverse-image).
-Proof: both composites invert quasi-isomorphisms, because pullback is exact and the
-strict reduction functor inverts quasi-isomorphisms. Descend the strict comparison
-and its inverse through the localization Q. Its universal property gives both the
-normalization equation and uniqueness. -/
+/-- Exact localization descends the strict normalized comparison uniquely. -/
 theorem pullReduction_existsUnique :
     ∃! e : red l E T ⋙ dpull l E f ≅ dpullModule l E f ⋙ red l E T',
       IsPullReduction l E f e := by
@@ -310,12 +291,10 @@ theorem pullReduction_existsUnique :
     (redFactors l E T').hom.app ((H.mapHomologicalComplex (.up ℤ)).obj M))).1
   simpa only [Category.assoc] using (he' M).trans (hn M).symm
 
-/-- The canonical tower isomorphism f* red(M) ≅ red(f*M), not a levelwise choice.
-Source: assertion (1) (blueprint: definition-completed-inverse-image). -/
+/-- The canonical tower isomorphism f* red(M) ≅ red(f*M), not a levelwise choice. -/
 def pullReduction := (pullReduction_existsUnique l E f).exists.choose
 
-/-- Completed inverse image is Rlim of exact pullback of the reduction tower.
-Source: the defining display (blueprint: definition-completed-inverse-image). -/
+/-- Completed inverse image is Rlim of exact pullback of the reduction tower. -/
 def completedPull := red l E T ⋙ dpull l E f ⋙ rlim l E T'
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion

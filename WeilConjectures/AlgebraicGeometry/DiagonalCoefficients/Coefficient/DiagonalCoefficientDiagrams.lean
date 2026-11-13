@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Normalized diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-diagrams).
-
 ## Main definitions
 
 - `Family`: the coefficient stages and scalar compatibilities.
@@ -37,9 +34,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The complete non-torsion coefficient diagram. Its maps are the actual finite
 free, localization, and finite-subextension-colimit maps. Every member contains
-both integration identities as equations in its coefficient-linear derived category.
-Source: blueprint clauses 1--2
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+both integration identities as equations in its coefficient-linear derived category. -/
 structure Family (Y : Scheme.{u}) where
   zl : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l)
   integral : ∀ E : PadicAlgCl.FiniteIntermediateField l,
@@ -65,9 +60,7 @@ structure Family (Y : Scheme.{u}) where
 
 /-- The canonical integral root map, specified by every projection of the actual
 root and coefficient-root limits. This is data with a determining universal
-property, not an arbitrary map of Tate lines. Source: blueprint coefficient
-changes, proof steps 1 and 3a
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+property, not an arbitrary map of Tate lines. -/
 structure IntegralRoots (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u}) where
   hom : Scheme.purTwistZlOne X l ⟶ (spIntegralTwist X l E).X
   projections : ∀ n : ℕ,
@@ -78,9 +71,7 @@ structure IntegralRoots (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{
 
 /-- The finite-root comparison is fixed by the actual kernel inclusions into
 units. Only the finite roots comparison is an isomorphism; the map from pulled
-back etale units to all pro-etale units is the specified adjunction map.
-Source: blueprint proof steps 1 and 3a
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+back etale units to all pro-etale units is the specified adjunction map. -/
 structure FiniteRoots (X : Scheme.{u}) (N : ℕ) where
   iso : (comparisonUpperStar Ab.{u + 1} X).obj (X.rootsOfUnitySheaf N) ≅
     Scheme.proEtaleRootsOfUnitySheaf X N
@@ -89,9 +80,7 @@ structure FiniteRoots (X : Scheme.{u}) (N : ℕ) where
       cartierUnitsComparison X
 
 /-- The canonical root-to-finite-line map, using the kernel-normalized root
-comparison and the scalar-forgetting comparison of site inverse images.
-Source: blueprint proof step 1, torsion Cartier normalization
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+comparison and the scalar-forgetting comparison of site inverse images. -/
 def FiniteRoots.toLine {X : Scheme.{u}} {N : ℕ} (r : FiniteRoots X N)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     Scheme.proEtaleRootsOfUnitySheaf X N ⟶
@@ -102,8 +91,7 @@ def FiniteRoots.toLine {X : Scheme.{u}} {N : ℕ} (r : FiniteRoots X N)
       (forgetComparisonIso A X).hom.app (Scheme.finiteEtaleTateLine X N A hA)
 
 /-- The actual uniformizer quotient map on condensed rings. Level n is exponent
-n+1. Source: blueprint clause 1, every uniformizer quotient
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+n+1. -/
 def quotientMap (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E) (n : ℕ) :
     Profinite.padicIntegersRingObj.{u} l E.1 ⟶
@@ -111,23 +99,20 @@ def quotientMap (E : PadicAlgCl.FiniteIntermediateField l)
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (completedReduction l E π n)
 
-/-- Quotient is a map of ring objects. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+/-- Quotient is a map of ring objects. -/
 instance quotientMap_isMonHom (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E) (n : ℕ) : IsMonHom (quotientMap.{u} l E π n) := by
   dsimp only [quotientMap]
   infer_instance
 
 /-- The ordinary quotient line; derived reduction agrees with it through the
-adjoint-normalized endpoint of ScalarCompatibility. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+adjoint-normalized endpoint of ScalarCompatibility. -/
 def quotientLine (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E) (n : ℕ) (X : Scheme.{u}) :
     Modules (Profinite.continuousMapRingObj.{u} (completedResidue l E π n)) X :=
   (Mod.extendScalars (coefficientMap (quotientMap l E π n) X)).obj (spIntegralTwist X l E)
 
-/-- The integral-to-quotient line map is the actual extension unit. Source:
-blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-diagrams). -/
+/-- The integral-to-quotient line map is the actual extension unit. -/
 def quotientLineMap (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E) (n : ℕ) (X : Scheme.{u}) :
     (spIntegralTwist X l E).X ⟶ (quotientLine l E π n X).X :=

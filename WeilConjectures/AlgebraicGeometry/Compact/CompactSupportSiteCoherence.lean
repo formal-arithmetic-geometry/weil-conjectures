@@ -17,8 +17,7 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Compact-support site coherence
 
-Source: Stacks Project, Tags 0F7C, 0F7D and 0F7F; the agent-formulated normalized
-site-coherence calculation in the DAG (blueprint: lem-pur-compact-support-site-coherence).
+Source: Stacks Project, Tags 0F7C, 0F7D and 0F7F.
 
 The diagram generators are the recorded refinement, composition and open-restriction
 maps on both sites. A diagram may contain identity edges, composites, and whiskering
@@ -40,48 +39,38 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- Finiteness of the existing positive-level coefficient, without a new coefficient ring.
-Source: def-pur-conventions, A = O_E/(varpi_E^n), n positive
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Finiteness of the existing positive-level coefficient, without a new coefficient ring. -/
 instance compactSupportCoherenceCoefficientFinite (P : WeilConjectures.PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   letI : Finite P.Ring :=
     Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
   Finite.of_equiv P.Ring Equiv.ulift.symm
 
-/-- Four successive morphisms, retained as a named map.
-Source: compactification comparison calculus
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Four successive morphisms, retained as a named map. -/
 def coherenceFourMap {C : Type*} [Category* C] {a b c d e : C}
     (f : a ⟶ b) (g : b ⟶ c) (h : c ⟶ d) (i : d ⟶ e) : a ⟶ e :=
   f ≫ g ≫ h ≫ i
 
-/-- Six successive morphisms, retained as a named map.
-Source: compactification comparison calculus
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Six successive morphisms, retained as a named map. -/
 def coherenceSixMap {C : Type*} [Category* C] {a b c d e f g : C}
     (i : a ⟶ b) (j : b ⟶ c) (k : c ⟶ d) (l : d ⟶ e) (m : e ⟶ f) (n : f ⟶ g) :
     a ⟶ g := i ≫ j ≫ k ≫ l ≫ m ≫ n
 
-/-- Cancellation of the four factors against their inverses.
-Source: the isomorphism laws (blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Cancellation of the four factors against their inverses. -/
 theorem coherenceFourMap_hom_inv {C : Type*} [Category* C] {a b c d e : C}
     (i : a ≅ b) (j : b ≅ c) (k : c ≅ d) (l : d ≅ e) :
     coherenceFourMap i.hom j.hom k.hom l.hom ≫
         (l.inv ≫ k.inv ≫ j.inv ≫ i.inv) = 𝟙 a := by
   simp [coherenceFourMap, Category.assoc]
 
-/-- Cancellation in the opposite order.
-Source: the isomorphism laws (blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Cancellation in the opposite order. -/
 theorem coherenceFourMap_inv_hom {C : Type*} [Category* C] {a b c d e : C}
     (i : a ≅ b) (j : b ≅ c) (k : c ≅ d) (l : d ≅ e) :
     (l.inv ≫ k.inv ≫ j.inv ≫ i.inv) ≫
         coherenceFourMap i.hom j.hom k.hom l.hom = 𝟙 e := by
   simp [coherenceFourMap, Category.assoc]
 
-/-- The canonical fourfold composite, with a named hom field.
-Source: compactification comparison calculus
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The canonical fourfold composite, with a named hom field. -/
 def coherenceIsoFour {C : Type*} [Category* C] {a b c d e : C}
     (i : a ≅ b) (j : b ≅ c) (k : c ≅ d) (l : d ≅ e) : a ≅ e where
   hom := coherenceFourMap i.hom j.hom k.hom l.hom
@@ -90,9 +79,7 @@ def coherenceIsoFour {C : Type*} [Category* C] {a b c d e : C}
   inv_hom_id := coherenceFourMap_inv_hom i j k l
 
 /-- The canonical factors of a composition square, with fixed endpoint types.
-This structure records maps only; no field asserts any commutative square.
-Source: the five-square compactification pasting calculation
-(blueprint: lem-pur-compact-support-site-coherence). -/
+This structure records maps only; no field asserts any commutative square. -/
 structure CoherencePastingData {C D : Type*} [Category* C] [Category* D] (N : C ⥤ D)
     (a₀ a₁ a₂ a₃ a₄ : C) (b₀ b₁ b₂ v₀ v₁ v₂ p q : D)
     (bin : N.obj a₀ ⟶ v₀) (bout : N.obj a₄ ⟶ q) where
@@ -113,40 +100,32 @@ structure CoherencePastingData {C D : Type*} [Category* C] [Category* D] (N : C 
   re : p ⟶ q
   n : b₀ ⟶ b₁
 
-/-- The four recorded etale factors.
-Source: canonical composition (blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The four recorded etale factors. -/
 def CoherencePastingData.etaleIso {C D : Type*} [Category* C] [Category* D] {N : C ⥤ D}
     {a₀ a₁ a₂ a₃ a₄ : C} {b₀ b₁ b₂ v₀ v₁ v₂ p q : D}
     {bin : N.obj a₀ ⟶ v₀} {bout : N.obj a₄ ⟶ q}
     (t : CoherencePastingData N a₀ a₁ a₂ a₃ a₄ b₀ b₁ b₂ v₀ v₁ v₂ p q bin bout) : a₀ ≅ a₄ :=
   coherenceIsoFour t.e₀ t.e₁ t.e₂ t.e₃
 
-/-- The six recorded pro-etale factors.
-Source: canonical composition (blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The six recorded pro-etale factors. -/
 def CoherencePastingData.proMap {C D : Type*} [Category* C] [Category* D] {N : C ⥤ D}
     {a₀ a₁ a₂ a₃ a₄ : C} {b₀ b₁ b₂ v₀ v₁ v₂ p q : D}
     {bin : N.obj a₀ ⟶ v₀} {bout : N.obj a₄ ⟶ q}
     (t : CoherencePastingData N a₀ a₁ a₂ a₃ a₄ b₀ b₁ b₂ v₀ v₁ v₂ p q bin bout) : v₀ ⟶ q :=
   coherenceSixMap t.r₁ t.r₂ t.rd t.rb t.o t.re
 
-/-- Evaluate a compositor with explicit object endpoints.
-Source: evaluation of a natural isomorphism
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Evaluate a compositor with explicit object endpoints. -/
 def coherenceEvaluateCompositor {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) (a : F ⋙ G ≅ H) (L : C) :
     G.obj (F.obj L) ≅ H.obj L := a.app L
 
-/-- Evaluate a site-comparison square with explicit object endpoints.
-Source: evaluation of a natural isomorphism
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Evaluate a site-comparison square with explicit object endpoints. -/
 def coherenceEvaluateSquare {C D E B : Type*}
     [Category* C] [Category* D] [Category* E] [Category* B]
     (F : C ⥤ D) (N : D ⥤ B) (M : C ⥤ E) (G : E ⥤ B)
     (a : F ⋙ N ≅ M ⋙ G) (L : C) : N.obj (F.obj L) ≅ G.obj (M.obj L) := a.app L
 
-/-- The evaluated square is natural, with both functor compositions expanded.
-Source: naturality of a natural isomorphism
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The evaluated square is natural, with both functor compositions expanded. -/
 theorem coherenceEvaluateSquare_naturality {C D E B : Type*}
     [Category* C] [Category* D] [Category* E] [Category* B]
     (F : C ⥤ D) (N : D ⥤ B) (M : C ⥤ E) (G : E ⥤ B)
@@ -155,18 +134,14 @@ theorem coherenceEvaluateSquare_naturality {C D E B : Type*}
       (coherenceEvaluateSquare F N M G a L).hom ≫ G.map (M.map t) :=
   a.hom.naturality t
 
-/-- Evaluate a three-factor compositor with explicit object endpoints.
-Source: evaluation of a natural isomorphism
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Evaluate a three-factor compositor with explicit object endpoints. -/
 def coherenceEvaluateTriple {C D E B : Type*}
     [Category* C] [Category* D] [Category* E] [Category* B]
     (N : C ⥤ D) (F : D ⥤ E) (G : E ⥤ B) (H : D ⥤ B)
     (a : N ⋙ F ⋙ G ≅ N ⋙ H) (L : C) :
     G.obj (F.obj (N.obj L)) ≅ H.obj (N.obj L) := a.app L
 
-/-- Naturality of the four canonical factors in a change of compositors.
-Source: naturality and functoriality in the compactification comparison calculus
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Naturality of the four canonical factors in a change of compositors. -/
 theorem coherenceCompositorOfChanges_naturality
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (F F' : C ⥤ D) (G G' : D ⥤ E) (H H' : C ⥤ E)
@@ -183,9 +158,7 @@ theorem coherenceCompositorOfChanges_naturality
   dsimp only [Functor.comp_map] at hc
   rw [hc, d.hom.naturality]
 
-/-- Paste the four change-of-compositor isomorphisms objectwise.
-Source: compactification comparison calculus
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Paste the four change-of-compositor isomorphisms objectwise. -/
 def coherenceCompositorOfChanges
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (F F' : C ⥤ D) (G G' : D ⥤ E) (H H' : C ⥤ E)
@@ -198,49 +171,39 @@ def coherenceCompositorOfChanges
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The ambient derived site comparison, with its functor structure named.
-Source: the derived etale to pro-etale inverse image
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The ambient derived site comparison, with its functor structure named. -/
 def coherenceSiteFunctor (X : Scheme.{u}) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :=
   (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
 
-/-- The derived site comparison on bounded-below etale inputs.
-Source: bounded-below inclusion and derived site comparison
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The derived site comparison on bounded-below etale inputs. -/
 def coherenceBoundedSiteFunctor (X : Scheme.{u}) :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :=
   DerivedCategory.Plus.ι ⋙ coherenceSiteFunctor A X
 
 /-- The bounded-below etale compact-support functor with its functor structure hidden
-behind a definition. Source: etale derived lower shriek
-(blueprint: lem-pur-compact-support-site-coherence). -/
+behind a definition. -/
 def coherenceEtaleFunctor {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c
 
 /-- The ambient pro-etale compact-support functor with its derived construction behind
-a definition. Source: ambient compact support from a compactification
-(blueprint: lem-pur-compact-support-site-coherence). -/
+a definition. -/
 def coherenceProEtaleFunctor {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) :=
   rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
 
-/-- The canonical site comparison with the compact-support functor displayed.
-Source: the bounded-below compact-support site comparison
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The canonical site comparison with the compact-support functor displayed. -/
 def coherenceBoundaryIso {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     coherenceEtaleFunctor A c ⋙ coherenceBoundedSiteFunctor A Y ≅
       coherenceBoundedSiteFunctor A X ⋙ coherenceProEtaleFunctor A c :=
   compactExchangeTransportComparison A c
 
-/-- The canonical comparison at a bounded-below object, with explicit endpoints.
-Source: compactExchangeTransportComparison
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The canonical comparison at a bounded-below object, with explicit endpoints. -/
 def coherenceBoundaryComponent {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     (coherenceBoundedSiteFunctor A Y).obj ((coherenceEtaleFunctor A c).obj L) ≅
@@ -249,17 +212,14 @@ def coherenceBoundaryComponent {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactific
     (coherenceBoundedSiteFunctor A X) (coherenceProEtaleFunctor A c)
     (coherenceBoundaryIso A c) L
 
-/-- The canonical change isomorphism with the displayed compact-support endpoints.
-Source: etale compactification independence
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The canonical change isomorphism with the displayed compact-support endpoints. -/
 def coherenceEtaleChangeIso {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
     (c d : Compactification f) : coherenceEtaleFunctor A c ≅ coherenceEtaleFunctor A d :=
   Etale.rightDerivedLowerShriekOfCompactificationPlusIso A c d
 
 /-- The canonical etale compositor with its chosen compactification functors displayed.
 This records the same isomorphism, while avoiding conversion of whole derived functors
-inside later compositions. Source: Stacks 0F7J and proposition-composition-base-change-rf-shriek--1
-(blueprint: lem-pur-compact-support-site-coherence). -/
+inside later compositions. -/
 def coherenceChosenEtaleCompositorIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact f] [QuasiCompact g] :
@@ -273,8 +233,7 @@ def coherenceChosenEtaleCompositorIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
 
 /-- The canonical origin compositor, viewed in the ambient derived categories.
 The etale-origin inclusion has the same underlying object and morphism maps as this
-bounded-below comparison. Source: originCompositionModel
-(blueprint: lem-pur-compact-support-site-coherence). -/
+bounded-below comparison. -/
 def coherenceChosenProEtaleCompositorIso {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -289,9 +248,7 @@ def coherenceChosenProEtaleCompositorIso {X Y Z : Scheme.{u}}
             (HasCompactification.compactification (f ≫ g)) :=
   originCompositionModel A f g
 
-/-- The chosen etale compositor with explicit object endpoints.
-Source: canonical etale composition
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The chosen etale compositor with explicit object endpoints. -/
 def coherenceChosenEtaleCompositorComponent {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -306,9 +263,7 @@ def coherenceChosenEtaleCompositorComponent {X Y Z : Scheme.{u}}
     (coherenceEtaleFunctor A (HasCompactification.compactification (f ≫ g)))
     (coherenceChosenEtaleCompositorIso A f g) L
 
-/-- The chosen origin compositor with explicit ambient object endpoints.
-Source: canonical origin composition
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The chosen origin compositor with explicit ambient object endpoints. -/
 def coherenceChosenProEtaleCompositorComponent {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -326,8 +281,7 @@ def coherenceChosenProEtaleCompositorComponent {X Y Z : Scheme.{u}}
     (coherenceChosenProEtaleCompositorIso A f g) L
 
 /-- The etale compositor evaluated using precisely the three supplied compactifications.
-Source: Stacks 0F7J; proposition-construction-independence-rf-shriek--7
-(blueprint: lem-pur-compact-support-site-coherence). -/
+Source: Stacks 0F7J. -/
 def coherenceEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) :
@@ -350,9 +304,7 @@ def coherenceEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (coherenceEtaleChangeIso A (HasCompactification.compactification (f ≫ g)) e)
 
 /-- The canonical c-to-d comparison, through the specified common refinement. Each leg
-is the actual proper-composition/inverse-proper-open construction, not a site conjugate.
-Source: proposition-construction-independence-rf-shriek, common-refinement comparison; node step 6
-(blueprint: lem-pur-compact-support-site-coherence). -/
+is the actual proper-composition/inverse-proper-open construction, not a site conjugate. -/
 def coherenceCompactificationChange {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
     (c d : Compactification f)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -364,9 +316,7 @@ def coherenceCompactificationChange {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompa
     properTransportRefinement A (Compactification.infSnd c d) L
 
 /-- The source boundary of the composition square is B_g followed by F_g^p(B_f).
-Only canonical bounded-below inclusions are inserted.
-Source: the displayed composition equation of the node, proof step 5
-(blueprint: lem-pur-compact-support-site-coherence). -/
+Only canonical bounded-below inclusions are inserted. -/
 def coherenceCompositionSource {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (c : Compactification f) (d : Compactification g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -380,9 +330,7 @@ def coherenceCompositionSource {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
       (coherenceBoundaryComponent A c L)
 
 /-- The independently constructed etale and pro-etale composition factors.
-No commutativity proof is stored in this data. Source: the canonical compactification
-comparisons and canonical origin compositor
-(blueprint: lem-pur-compact-support-site-coherence). -/
+No commutativity proof is stored in this data. -/
 def coherenceCompositionDataOfChoice {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -439,8 +387,7 @@ def coherenceCompositionDataOfChoice {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y �
     re := (coherenceCompactificationChange A egf e L).hom
     n := Fd.map (NY.map ((coherenceEtaleChangeIso A c cf).hom.app L)) }
 
-/-- The canonical factors with the choices supplied by the three compactifications.
-Source: compactification independence (blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The canonical factors with the choices supplied by the three compactifications. -/
 def coherenceCompositionData {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
@@ -477,9 +424,7 @@ def coherenceCompositionData {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   letI := e.hasCompactification
   coherenceCompositionDataOfChoice A c d e L
 
-/-- The four canonical etale factors, with explicit object endpoints.
-Source: compactification independence and canonical composition
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The four canonical etale factors, with explicit object endpoints. -/
 def coherenceEtaleCompositorComponent {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
@@ -489,9 +434,7 @@ def coherenceEtaleCompositorComponent {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y 
   (coherenceCompositionData A c d e L).etaleIso
 
 /-- The recorded pro-etale alpha, evaluated on the identity etale-origin witness.
-Its compactifications are the same c, d, e as in the etale compositor.
-Source: proposition-composition-base-change-rf-shriek--1, normalized compatible-tower construction
-(blueprint: lem-pur-compact-support-site-coherence). -/
+Its compactifications are the same c, d, e as in the etale compositor. -/
 def coherenceProEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
@@ -504,9 +447,7 @@ def coherenceProEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (coherenceCompositionData A c d e L).proMap
 
 /-- A boundary comparison C_T(E) to M. This records the endpoints of the site-coherence
-squares, including whiskered endpoints; it does not assert that any square commutes.
-Source: node proof step 10, boundaries B_in and B_out of a pasted diagram
-(blueprint: lem-pur-compact-support-site-coherence). -/
+squares, including whiskered endpoints; it does not assert that any square commutes. -/
 structure CompactSupportSiteBoundary (T : Scheme.{u}) where
   etale : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
   proEtale : _root_.DerivedCategory
@@ -514,9 +455,7 @@ structure CompactSupportSiteBoundary (T : Scheme.{u}) where
   comparison :
     (coherenceBoundedSiteFunctor A T).obj etale ≅ proEtale
 
-/-- The boundary B_f^c = Rp_*(e_j) beta_p at L, in the ambient target category.
-Source: node's defining equation for B, and proof step 2
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The boundary B_f^c = Rp_*(e_j) beta_p at L, in the ambient target category. -/
 def coherenceCompactificationBoundary {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -526,9 +465,7 @@ def coherenceCompactificationBoundary {X Y : Scheme.{u}} {f : X ⟶ Y}
     ((coherenceBoundedSiteFunctor A X).obj L)
   comparison := coherenceBoundaryComponent A c L
 
-/-- The boundary (F_g^p B_f)(B_g F_f^e) of the composition equation.
-Source: node's second displayed coherence equation, proof step 5
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The boundary (F_g^p B_f)(B_g F_f^e) of the composition equation. -/
 def coherenceCompositionBoundary {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (c : Compactification f) (d : Compactification g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -539,9 +476,7 @@ def coherenceCompositionBoundary {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z
     ((coherenceCompactificationBoundary A c L).proEtale)
   comparison := coherenceCompositionSource A c d L
 
-/-- The source boundary v_p^*(B_f), with the canonical inverse-image comparison a_v.
-Source: node's open-restriction equation, proof steps 7--9
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The source boundary v_p^*(B_f), with the canonical inverse-image comparison a_v. -/
 def coherenceRestrictionSource {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
     (v : Y' ⟶ Y) (c : Compactification f)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -552,9 +487,7 @@ def coherenceRestrictionSource {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
     ((coherenceCompactificationBoundary A c L).proEtale)
   comparison := (compactExchangeTransportSource A v c).app L
 
-/-- The target boundary B_f' followed by F_f'^p(a_u), for the pulled-back compactification.
-Source: remark-base-change-compactification--1 and the node's open-restriction equation, step 9
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- The target boundary B_f' followed by F_f'^p(a_u), for the pulled-back compactification. -/
 def coherenceRestrictionTarget {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {u' : X' ⟶ X} {v : Y' ⟶ Y} (sq : IsPullback u' f' f v) (c : Compactification f)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -568,9 +501,7 @@ def coherenceRestrictionTarget {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' �
         ((coherenceBoundedSiteFunctor A X).obj L))
   comparison := (compactExchangeTransportTarget A sq c).app L
 
-/-- Whisker a boundary by the chosen compact-support pair, using its named B comparison.
-Source: node proof step 10, horizontal pasting and naturality of B
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Whisker a boundary by the chosen compact-support pair, using its named B comparison. -/
 def coherencePushBoundary {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (b : CompactSupportSiteBoundary A X) : CompactSupportSiteBoundary A Y where
   etale := (coherenceEtaleFunctor A c).obj
@@ -579,9 +510,7 @@ def coherencePushBoundary {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification
   comparison := (coherenceBoundaryIso A c).app b.etale ≪≫
     (coherenceProEtaleFunctor A c).mapIso b.comparison
 
-/-- Whisker a boundary by inverse image, inserting the canonical comparison a_v.
-Source: proposition-comparison-etale-derived-category--5 and node proof steps 1 and 10
-(blueprint: lem-pur-compact-support-site-coherence). -/
+/-- Whisker a boundary by inverse image, inserting the canonical comparison a_v. -/
 def coherencePullBoundary {X Y : Scheme.{u}} (v : X ⟶ Y)
     (b : CompactSupportSiteBoundary A Y) : CompactSupportSiteBoundary A X where
   etale := (Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus.obj b.etale
@@ -595,9 +524,7 @@ include identity diagrams and horizontal, vertical and mixed pasting. The geomet
 vertices of generators are finite-type k-schemes, with no separatedness of their structure
 maps. Over morphisms retain compatibility with k. The change constructor inserts compatible
 boundary identifications (associators, pullback comparisons, or an etale-origin witness);
-its two hypotheses concern only these endpoint isomorphisms, never a generator square.
-Source: node's three displayed equations and final sentence; proof steps 4--10
-(blueprint: lem-pur-compact-support-site-coherence). -/
+its two hypotheses concern only these endpoint isomorphisms, never a generator square. -/
 inductive CompactSupportSiteDiagram (P : WeilConjectures.PurityFiniteSetting.{u}) :
     {T : Scheme.{u}} → CompactSupportSiteBoundary P.Coefficient T →
       CompactSupportSiteBoundary P.Coefficient T → Type (u + 2)
@@ -670,10 +597,7 @@ inductive CompactSupportSiteDiagram (P : WeilConjectures.PurityFiniteSetting.{u}
       (D : CompactSupportSiteDiagram P b₀ b₁) : CompactSupportSiteDiagram P c₀ c₁
 
 /-- The etale boundary composite, constructed solely with the recorded etale maps.
-The refinement uses the inverse of the upstream comparison because its upstream direction
-is d to c, whereas the node's rho is c to d.
-Source: proposition-construction-independence-rf-shriek--7, prose-05-31, and node proof step 10
-(blueprint: lem-pur-compact-support-site-coherence). -/
+The refinement step uses the inverse of the upstream refinement comparison. -/
 def CompactSupportSiteDiagram.etaleMap {P : WeilConjectures.PurityFiniteSetting.{u}}
     {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T}
     (D : CompactSupportSiteDiagram P b₀ b₁) : b₀.etale ⟶ b₁.etale :=

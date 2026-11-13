@@ -23,18 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Natural section coordinates identify additive etale cohomology with ordinary
-structure-module cohomology, compatibly with the untensored pullback.
-Source: Stacks Project, Tag 03P2, Theorem etale-cohomology-theorem-zariski-fpqc-quasi-coherent,
-and Tag 02KH, the canonical cohomology comparison before tensor extension.
-(blueprint: lem-pbc-additive-cohomology-base-change-square)
-
-Proof: Take the coordinate-normalized additive comparisons. For every c choose
-mu from hscalar c. Its section formula lets the comparison's scalar identity
-apply, while its cohomology formula identifies H(mu) with the supplied c-action.
-This proves scalar compatibility of the first additive equivalence. Repeat with
-hscalar' for the second. Upgrade the two additive equivalences to linear ones;
-their underlying functions are unchanged, so the untensored pullback square is
-the additive square supplied by the comparison theorem. -/
+structure-module cohomology, compatibly with the untensored pullback. -/
 theorem exists_additive_cohomology_baseChange_square
     {k k' : Type u}
     [CommRing k] [CommRing k'] [Algebra k k']

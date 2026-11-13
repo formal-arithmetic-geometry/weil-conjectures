@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Pasting of normalized derived reduction comparisons
 
-Source: Stacks Project, Tags 06YY and 0D6D
-(blueprint: lem-weil-pbc-completed-reduction-pullback-square).
+Source: Stacks Project, Tags 06YY and 0D6D.
 
 Reduction comparisons normalized on good representatives paste along squares of exact
 functors whenever the underlying ordinary comparisons paste.
@@ -39,7 +38,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 
 /-- The derived square of exact functors on the image of a complex is the localization of
 the ordinary square, up to the factorization isomorphisms.
-Source: Stacks Tag 05S7 (blueprint: lem-weil-pbc-completed-reduction-pullback-square). -/
+Source: Stacks Tag 05S7. -/
 theorem mapDerivedCategorySquareIso_hom_app_factors (σ : F₁ ⋙ F₂ ≅ F₃ ⋙ F₄)
     (P : CochainComplex A ℤ) :
     (Functor.mapDerivedCategorySquareIso σ).hom.app (DerivedCategory.Q.obj P) ≫
@@ -289,8 +288,7 @@ variable {BY BY' BX BX' : Type*}
 
 /-- The tower case of `derivedReductionSquare_paste`: the exact functors on towers act
 levelwise, so the ordinary pasting condition may be checked at each level.
-Source: Stacks Tags 06YY, 0D6D
-(blueprint: lem-weil-pbc-completed-reduction-pullback-square). -/
+Source: Stacks Tags 06YY, 0D6D. -/
 theorem derivedReductionTowerSquare_paste
     (eg : RY ⋙ (Functor.whiskeringRight ℕᵒᵖ BY BY').obj Fg ≅ Fg ⋙ RY')
     (ef' : RY' ⋙ (Functor.whiskeringRight ℕᵒᵖ BY' BX').obj Ff' ≅ Ff' ⋙ RX')

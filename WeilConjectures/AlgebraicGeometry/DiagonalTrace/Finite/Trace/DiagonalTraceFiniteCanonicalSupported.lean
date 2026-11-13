@@ -97,13 +97,7 @@ private theorem source_projection
   simp only [Category.assoc]
   erw [Iso.hom_inv_id_app_assoc]
 
-/-- The explicit finite direct-image operation has the supported equation.
-Source: diagonal tower trace proof (2), naturality of completed direct image and
-of the unit-normalized limit projection.
-(blueprint: lem-sfb-diagonal-trace-finite-canonical-supported).
-Proof: use the ordinary supported-source unit identity, naturality of the
-underived-to-derived unit, naturality of the completed square, and projection
-coherence. Functoriality then combines the supported arrow with its source map. -/
+/-- The explicit finite direct-image operation has the supported equation. -/
 theorem diagonalTrace_finiteCanonical_supported
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

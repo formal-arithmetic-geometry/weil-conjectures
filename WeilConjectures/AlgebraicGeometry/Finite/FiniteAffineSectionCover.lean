@@ -20,9 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Free.FiniteFreeAlgebraSpectrum
 
 /-!
 # Finite affine morphisms and finite covers by closed sections
-
-Source: Stacks Project, Morphisms, Tag 03HW, Lemma `lemma-massage-finite`, clauses (1)–(5)
-(blueprint: lem-weil-pbc-finite-affine-section-cover).
 -/
 
 @[expose] public section
@@ -35,27 +32,7 @@ namespace AlgebraicGeometry
 
 /-- A finite morphism to an affine scheme admits, after surjective finite locally free base
 change, a closed immersion into an affine finite locally free scheme covered by finitely many
-closed sections. Source: Stacks Project, Morphisms, Tag 03HW, clauses (1)–(5)
-(blueprint: lem-weil-pbc-finite-affine-section-cover).
-
-Proof:
-1. Use the global-section rings `R` and `B` of the affine schemes. Finite module generators
-   also generate the algebra and satisfy monic equations by finite-algebra integrality.
-2. Successively split the equations over finite free extensions. For the zero base ring use
-   the identity extension. The resulting algebra `S` is faithful, finite and free over `R`.
-3. Lying over gives surjectivity of `Spec S → Spec R`. The finite-free spectrum lemma gives
-   finite local freeness, which is preserved by composing with `X.isoSpec.inv`.
-4. Over `S`, take the finite tensor product of the `AdjoinRoot` algebras of the equations.
-   Its tensor power basis makes its spectrum finite locally free. Evaluation at the
-   base-changed generators is surjective, giving a closed immersion of `Spec (S ⊗[R] B)`.
-5. The tensor-product pushout and the affine comparison isomorphisms identify that spectrum
-   with the actual pullback `Y ×_X Spec S`, compatibly with both projections.
-6. Evaluation at tuples of roots gives surjective algebra maps back to `S`. Their spectra
-   are closed sections. Modulo any prime, each split equation has a vanishing linear factor;
-   the corresponding evaluation section contains the point. The finite family covers.
-7. Surjectivity, finiteness, flatness and local finite presentation are stable under base
-   change, giving the final assertion about the first pullback projection. Zero rings,
-   empty generator families, constant equations and repeated roots require no exception. -/
+closed sections. Source: Stacks Project, Morphisms, Tag 03HW, clauses (1)–(5). -/
 theorem exists_finite_affine_section_cover {X Y : Scheme.{u}} (f : Y ⟶ X)
     [IsFinite f] [IsAffine X] :
     ∃ (X' : Scheme.{u}) (a : X' ⟶ X),

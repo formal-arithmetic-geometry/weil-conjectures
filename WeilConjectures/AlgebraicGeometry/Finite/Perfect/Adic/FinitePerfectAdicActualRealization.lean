@@ -25,8 +25,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Scalar realization and normalized transition comparisons for actual levels.
-Source: Stacks Tags 06YY and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-realization). -/
+Source: Stacks Tags 06YY and 09C6. -/
 structure FinitePerfectAdicActualRealizationData
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -79,12 +78,7 @@ structure FinitePerfectAdicActualRealizationData
 
 /-- The descended actual levels admit scalar realization and both normalized comparison
 systems. The etale levels are chosen together with their actual descent comparison.
-Source: the coefficient restriction and tensor-balancing part of Tags 06YY and 09C6.
-Proof: combine the explicit exact realization and its canonical scalar compositor with
-the actual descent theorem and the independent constant-model comparison. The actual
-descent theorem chooses the levels together with their comparison, rather than
-asserting that arbitrary stalkwise models descend M.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-realization). -/
+Source: the coefficient restriction and tensor-balancing part of Tags 06YY and 09C6. -/
 theorem finitePerfectAdic_actual_realization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

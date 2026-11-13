@@ -420,29 +420,7 @@ private theorem chart_model (T : Scheme.{u}) (n a b : ℕ)
 
 /-- Descent of the local finite quotient calculation to cohomology sheaves.
 
-Source: blueprint latest, ctf-equals-bc, Locality and Strata; Stacks Tag 09AJ
-(blueprint: lem-sfb-finite-model-quotient-cohomology-descent).
-
-Proof: choose the finite constructible stratification and pro-etale covers given
-by hM. Express each scalar model by a finite presentation over the integral DVR,
-whose kernel is finite free, and apply hcalc to that scalar resolution. The local
-two-term calculation vanishes outside degrees -1 and 0. Exact inverse image
-commutes with cohomology. On a cover member, module pullback agrees with localized
-site restriction, so the sheaf cover-local isomorphism criterion descends this
-vanishing to each stratum. Constructible strata in a qcqs scheme have quasi-compact
-immersions. The proved
-finite quasi-compact jointly surjective module pullback detection theorem therefore
-descends vanishing from the strata, including an empty family over the empty scheme.
-For degrees -1 and 0 retain the original strata and covers. Their cohomology is
-constant with finite scalar kernel and cokernel by hcalc. The normalized finite
-coefficient encoding and its pullback comparison turn these into internal finite
-scalar models. They give internal constructibility. In ordinary coordinates the
-same covers give local constancy and finite geometric stalks, hence intrinsic
-constructibility. If the partition has no strata, V is empty; use its one-stratum
-empty partition for the positive-length intrinsic predicate. For every other degree
-use the zero scalar model. This argument
-needs no Noetherianity or completeness assumption.
--/
+Source: Stacks Tag 09AJ. -/
 theorem cohomology_descent
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]
     (M : AdicCompletion.Modules l E V)

@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateEtalePowerGenerat
 /-! # Detection of maps on local lifted finite root tensors
 
 Source: Stacks Project, `proetale.tex`, Lemma `describe-pullback-from-etale`, and
-`sites-modules.tex`, tensor products; the uniqueness argument of the root comparison.
-(blueprint: lem-pur-finite-tate-local-root-tensors-ext)
+`sites-modules.tex`, tensor products.
 -/
 
 @[expose] public section
@@ -125,25 +124,7 @@ private theorem finite_tate_generators_hom_ext
 /-- Maps from a compared finite Tate power are detected by root tensors after local
 lifting to the root tower; the target is any sheaf of modules.
 Source: Stacks Project, `proetale.tex`, Lemma `describe-pullback-from-etale` (0GLZ),
-and `sites-modules.tex`, tensor product of module sheaves; the uniqueness step of
-`def-pur-adic-root-comparisons`.
-(blueprint: lem-pur-finite-tate-local-root-tensors-ext)
-
-Proof: transpose both maps under the etale/pro-etale comparison adjunction. To compare
-these adjuncts it suffices to compare their values on the etale pure root tensors:
-scalar extension is the sheafification of the section tensor, and induction on the
-ordered power gives this generation statement in every degree. Fix one such tensor
-over an etale object U. By the finite-root comparison, each of its roots becomes a
-pro-etale finite root on U. The root-tower projection is locally surjective when l is
-invertible. Lift the finitely many roots on a common refinement of these pro-etale
-covers. On every member W of that refinement the lifted roots satisfy the displayed
-unit equalities, so the hypothesis identifies the two images of the restricted tensor.
-Naturality makes these images the restrictions of the original two images. Separatedness
-of the target sheaf identifies the original images. The tensor and scalar-extension
-universal properties now identify the adjuncts, and the adjunction bijection identifies
-the original maps. In degree zero the tuple is empty and no root lift is needed; the
-constant-sheaf unit generators suffice. Empty schemes and the zero coefficient ring are
-covered by the same separatedness and generation arguments. -/
+and `sites-modules.tex`, tensor product of module sheaves. -/
 theorem finiteTate_local_root_tensors_hom_ext
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (T : Scheme.{u})

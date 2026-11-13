@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicExtDiagonalAssembly
 
 /-! # Ext assembly contract for a supplied cyclic frame
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-frame-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -46,10 +43,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   cyclicLine cyclicLineMap derivedScalars
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
-/-- Proved Ext assembly for a supplied cyclic frame, before geometric classes are inserted.
-Source: coefficient changes (1) (blueprint: lem-diagonal-cyclic-frame-assembly).
-Proof: specialize diagonal evaluation assembly to the frame's actual quotient
-functor, source, target and representative endpoint maps. The remaining data stay abstract. -/
+/-- Proved Ext assembly for a supplied cyclic frame, before geometric classes are inserted. -/
 theorem cyclicExtAssembly_frame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

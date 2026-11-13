@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 # Canonical global transfer with a coefficient morphism
 
 Source: Stacks Project, Tags 0A50, 03F3, 01F8 and 01FB.
-(blueprint: lem-pbc-etale-additive-cech-canonical-coefficient-transfer)
 -/
 
 @[expose] public section
@@ -108,21 +107,7 @@ private theorem section_adjunction_transfer {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical global transfer identity including an adjoint coefficient morphism.
-Source: Stacks Project, Tags 0A50 and 03F3; this is the pointwise cocycle calculation
-used in the global transfer theorem.
-(blueprint: lem-pbc-etale-additive-cech-canonical-coefficient-transfer)
-
-Proof: Represent the chosen homology class by a cycle and identify its representative
-with a morphism from the constant lifted integer sheaf by the sections adjunction.
-Adjoint the augmentation-preserving chain map, apply inverse image to the cocycle,
-and use exactFunctor_resolution_cocycle with the adjoint of the coefficient morphism ψ.
-Exactness of inverse image and the augmentation equation identify the resulting Ext
-class with inverse-image pullback followed by that coefficient map. Normalization
-of the two canonical comparisons and associativity of Ext composition then give
-the displayed equality. The terminal-section adjunction calculation is independent
-of the target coefficient sheaf.
-The argument is valid in every degree, including degree zero and the zero sheaf.
--/
+Source: Stacks Project, Tags 0A50 and 03F3. -/
 theorem resolutionSection_canonical_coefficient_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

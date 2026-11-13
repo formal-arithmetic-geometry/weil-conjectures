@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarRestrictionComposition
 
 /-! # Cancellation of a common scalar route
-
-Source: diagonal coefficient changes, paragraph (2), scalar associativity and
-compatibility of the prescribed finite and colimit legs.
-(blueprint: lem-diagonal-scalar-compatibility-triangle).
 -/
 
 @[expose] public noncomputable section
@@ -298,36 +294,7 @@ private theorem trace_triangle
 /-- Compatibility along a composite coefficient route is equivalent to compatibility
 along its second leg, once compatibility along its first leg is fixed. This is a
 formal statement about three diagrams, with no finiteness or colimit assertion.
-The second line map is required to be semilinear at both line endpoints.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), compatibility of scalar routes.
-(blueprint: lem-diagonal-scalar-compatibility-triangle).
-
-Proof: Compose the derived scalar/restriction adjunctions and identify the composite
-restriction with restriction along a followed by b. Uniqueness of left adjoints gives
-the scalar associator normalized by these units. The prescribed coefficient and line
-map equations and the supplied semilinearity identify the regular, line and supported
-endpoints along the two routes:
-the ordinary semilinear maps are equal, and injectivity of the derived Hom adjunction
-identifies their normalized derived homs. Derive the ordinary restriction/direct-image
-squares using their full units. Their composition agrees with the composite-coefficient
-square by uniqueness of the universal right-derived transformation. Taking scalar
-mates gives the corresponding composition equation for the direct-image mates.
-In the forward direction solve these composition equations for the second endpoint
-and mate, cancelling the isomorphisms for the first leg. Their inverses and the
-composite isomorphisms prove that the second endpoints and the mate on the shifted
-line are invertible. Substitute the class and trace equations for the first leg into
-those for the composite and cancel the first endpoint isomorphisms. This gives the
-second class and trace equations. In the reverse direction compose the two endpoint
-isomorphisms and scalar mates, substitute both class and trace squares and use
-naturality of the scalar associator. Full-unit normalization and adjunction
-injectivity give exactly the required endpoint and restriction normalizations.
-The argument includes identity maps, zero rings, empty schemes and nonflat maps;
-only the supplied semilinearity and the endpoint and mate isomorphisms recorded
-in the compatibilities are used. Semilinearity cannot be deduced merely from the
-composite map: an additive map of a field extension can fix its base field without
-being linear over the extension, so it is retained as an explicit hypothesis. -/
+The second line map is required to be semilinear at both line endpoints. -/
 theorem scalarCompatibility_triangle
     {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]

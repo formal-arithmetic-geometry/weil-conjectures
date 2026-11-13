@@ -11,9 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulUnitZer
 
 /-! # The component normalization square for completed Koszul tensor augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-sites-cohomology.tex, Tag 06YN, the total tensor construction.
-(blueprint: lem-weil-pbc-completed-koszul-tensor-augmentation-component).
+Source: sites-cohomology.tex, Tag 06YN, the total tensor construction.
 -/
 
 @[expose] public noncomputable section
@@ -27,7 +25,7 @@ attribute [local instance] completedKoszulCochainMonoidal
 attribute [local instance] Functor.preservesZeroMorphisms_of_additive
 
 /-- Additivity of the recorded module tensor, with its coefficient sheaf explicit.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-completed-koszul-tensor-cone-comparison). -/
+Source: Stacks 03EK. -/
 local instance augmentationComponentPreadditive
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     MonoidalPreadditive (CompletedAdicModules T d) := by
@@ -189,31 +187,7 @@ private lemma normalization_coefficient
 maps are just maps of complexes; no naturality in P or in the quotient level is assumed.
 The source comparison is tensor of the left unitor of the Koszul complex. The target
 comparison first identifies the quotient tensor at the cochain unit with the quotient
-in degree zero, and then uses the single-degree-zero total tensor comparison.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M), finite
-Koszul augmentation, and sites-cohomology.tex, Definition 06YN, total tensor.
-(blueprint: lem-weil-pbc-completed-koszul-tensor-augmentation-component).
-
-Proof: write K for the completed Koszul complex at n, Q for the finite quotient
-module and U for the cochain tensor unit. Put
-c = lambda_K^{-1} followed by bU followed by the displayed identification
-of the ordinary quotient tensor of U with Q[0]. The degree-zero Koszul unit
-u : O -> K^0 is invertible: exterior degree zero is the rank-one coefficient
-module, constant realization identifies its unit, and scalar extension sends
-the rank-one unit isomorphism to the rank-one unit isomorphism. The unit equation
-for bU therefore gives u followed by c^0 equal to the quotient unit O -> Q.
-In every nonzero degree the target Q[0] is zero, so c has zero component there.
-Compare b with P tensor c followed by the single-degree-zero comparison. The
-total summand inclusions jointly detect maps in each degree. On a (p,q) summand
-with q nonzero the first map is zero by hz and the second by c^q = 0. On the
-(p,0) summand precompose with the isomorphism P^p tensor u. The unit formula hu
-for b and the just-established formula for c^0 give the same map
-P^p -> P^p tensor Q, using naturality of the module right unitor. Cancel that
-isomorphism and conclude equality. Whisker the resulting equality with tensor
-of lambda_K and cancel its inverse. This gives exactly the displayed square.
-All identifications are the existing single-complex isomorphisms, so the argument
-applies to unbounded P, r=0, a unit ideal, the zero ring and the empty scheme. -/
+in degree zero, and then uses the single-degree-zero total tensor comparison. -/
 theorem completedKoszulTensorAugmentationComponent
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (n : ℕ)

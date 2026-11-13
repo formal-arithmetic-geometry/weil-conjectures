@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperTower
 
 /-! # The normalized compactification tower for etale horizontal composition
 
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7J and 0F7L
-(blueprint: lem-pur-etale-horizontal-support-tower).
+Source: Stacks Project, Tags 0F7B, 0F7F, 0F7J and 0F7L.
 -/
 
 @[expose] public section
@@ -75,45 +74,7 @@ inverse-image/direct-image adjunctions. In particular it does not involve invers
 base change, or the full compact-support exchange for f.
 Source: Stacks Project, Tags 0F7B and 0F7F for proper/quasi-finite interchange,
 Tag 0F7J for composition, and Tag 0F7L, item (3), for its base-change compatibility;
-Tag 0F4L for the canonical graph comparison
-(blueprint: lem-pur-etale-horizontal-support-tower).
-
-Proof in words:
-1. Choose a compactification d of v' followed by f, and set e=d.ofComp c. For the
-   other factorization use d transported by sq.w, a compactification q of v, and its
-   ofComp tower. Expand both composition maps by their proper/open tower equations.
-   The comparison cocycles and the equality of the two composites identify their
-   terminal models through a common proper refinement.
-2. For an etale map the inverse canonical comparison is the explicit derived graph
-   map. At the sheaf level its composite into direct image extends a sheet section
-   by zero from its clopen graph. Restricting this graph along j and along j' gives
-   the same graph. Its section is unchanged there and zero on the complement.
-   Transpose under the two sum/evaluation adjunctions: the resulting open factor is
-   the unique composite-left-adjoint comparison a for the inverse-image square.
-3. The remaining proper/quasi-finite interchange is the map of Tag 0F7B. On a
-   K-injective complex I on the upper left scheme, resolve the extension by zero
-   along the upper horizontal arrow by a K-injective complex K. The map is the
-   composite of the common proper-support identification on I with the direct
-   image of that resolution map. The sheaf identification is specified by the common
-   proper-support inclusion. Its inverse-image transpose is inverse etale sum
-   exchange: restriction pulls a sheet and its section to the pulled-back sheet.
-   On that graph both constructions are the same section, and off it both are zero.
-   The sheaf axiom and sum-presheaf sheafification prove equality of these sheaf
-   arrows. Thus transposition under the two proper inverse-image/direct-image
-   adjunctions gives precisely gam, with the direction in the statement.
-4. Apply the equal sheaf arrows degreewise, followed by the total-derived units.
-   The formula compactSupportDerivedComparison_app fixes the derived graph maps on
-   every homotopy representative. Represent proper direct images by K-injectives
-   and resolve each open or sum extension before its next direct image. Naturality
-   of the units and the unit characterization of derived direct-image composition
-   identify the two resulting morphisms. Localization makes this an equality of
-   natural transformations on the entire unbounded categories.
-5. Canonical graph refinement coherence and the normalized proper-refinement
-   equation cancel the refining towers. Associate the surviving factors to obtain
-   S_v(t' inverse), gam at J'(M), P(a at M), and t at S_v'(M). Identity graphs use
-   the graph identity and direct-image right unit; empty graphs and zero
-   coefficients give zero on both sides. No equality of derived morphisms is
-   inferred merely from agreement of their stalk maps. -/
+Tag 0F4L for the canonical graph comparison. -/
 theorem etaleHorizontalSupport_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

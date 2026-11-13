@@ -64,10 +64,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarHomoto
 # Tensor and unbounded derived calculus for a finite clopen partition
 
 Source: Stacks Project, derived.tex, Tags 015F and 05RU; sites-modules.tex, Tag 0GMW;
-sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU; finite-component application
-(blueprint: lem-pur-finite-product-derived-tensor-calculus).
+sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU.
 
-All restrictions are the sectionwise functors of the module-gluing node. Tensor products
+All restrictions are the sectionwise functors of module gluing. Tensor products
 and their constraints are the existing sheafification and K-flat localization constructions.
 -/
 
@@ -150,25 +149,7 @@ end DerivedPi
 symmetric monoidal derived restriction. Each `Braided` structure contains invertible
 tensorators and unit comparison, their naturality, associativity, both unit diagrams,
 and the symmetry diagram; the tensor products are the existing ones on both sides.
-Source: Stacks 0GMW, 06YN, 06YS, 0G7D, 06YU and 0FPT
-(blueprint: lem-pur-finite-product-derived-tensor-calculus).
-
-Proof (node steps 4-9): the bilinear universal property constructs the restriction
-tensorator. Its inverse is obtained by gluing the component bilinear maps. Both
-composites fix pure tensors, so they are identities. Reassociation, exchange and unit
-multiplication agree on generators. Restriction is left adjoint to zero insertion,
-hence preserves the sums over p+q=n. Apply the tensorator on each summand: both
-differentials send x tensor y to dx tensor y + (-1)^p x tensor dy. This gives the natural
-chain isomorphism below. Test exact tensoring first by restriction and then by exact
-zero insertion to obtain both directions of flatness. Test K-flatness against arbitrary
-acyclic complexes, using restriction in one direction and insertion in the other.
-Choose flat-term K-flat resolutions. Their restrictions are again such resolutions.
-The K-flat localization equivalence and its unique natural-transformation extension
-clause descend the chain tensorator and its inverse to all derived morphisms. The
-representative square below fixes this descent to the native K-flat tensor models.
-Associativity, units and Koszul symmetry descend because their diagrams agree on pure
-triple tensors and degree (p,q) generators, with the same sign (-1)^(pq). Empty and zero
-categories have unique maps and satisfy all these formulas. -/
+Source: Stacks 0GMW, 06YN, 06YS, 0G7D, 06YU and 0FPT. -/
 theorem finite_clopen_tensor_calculus
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]
@@ -245,7 +226,7 @@ theorem finite_clopen_tensor_calculus
 open SheafOfModules.SuccessiveDerivedQuotient
 
 /-- The already defined universal coefficient-extension presentations on this site.
-Source: Stacks 06YY (blueprint: lem-pur-finite-product-derived-tensor-calculus). -/
+Source: Stacks 06YY. -/
 abbrev Presentations (X : Scheme.{t}) :=
   ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S),
     Presentation.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
@@ -253,7 +234,7 @@ abbrev Presentations (X : Scheme.{t}) :=
 
 /-- Apply the existing normalized scalar compositor to the restricted ring maps.
 The final equality transport is only functoriality of ring restriction.
-Source: Stacks 0D6D (blueprint: lem-pur-finite-product-derived-tensor-calculus). -/
+Source: Stacks 0D6D. -/
 def scalarComposite {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (p : Presentations.{t, u} Y) (N : Normalization (J := topology Y) p)
     {R S T : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S) (b : S ⟶ T) :

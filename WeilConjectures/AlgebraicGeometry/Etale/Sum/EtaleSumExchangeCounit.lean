@@ -21,9 +21,8 @@ import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumExchangeConstants
 
 /-! # The specified sum exchange preserves evaluation
 
-Source: Stacks Project, Etale Cohomology, Tag 03S6 (lemma-shriek-base-change),
-Categories, Tags 0B65 and 0DV0, and Derived Categories, Tag 015F
-(blueprint: lem-pur-etale-sum-exchange-counit).
+Source: Stacks Project, Etale Cohomology, Tag 03S6, Categories, Tags 0B65 and 0DV0, and Derived
+Categories, Tag 015F.
 
 All functors act on constant-A module sheaves on ordinary small etale sites. The chosen
 fiber product is `pullback w e`; its projections are e' = fst and w' = snd. This is the
@@ -54,24 +53,8 @@ private lemma sumInverseMateComponent
 component formula preserves the sum counit, and its inverse descends to the specified
 sum exchange preserving evaluation on every unbounded derived object. The last equation
 says that the derived pullback square at A_X is the identity under the canonical constants.
-Source: Stacks Project, Etale Cohomology, Tag 03S6 (lemma-shriek-base-change),
-Categories, Tags 0B65 and 0DV0, Derived Categories, Tag 015F, and Sites, Tag 0H7J
-(blueprint: lem-pur-etale-sum-exchange-counit).
-
-Proof:
-1. Conjugate the specified base-change map using the composite adjunctions. The
-iterated-mates identity identifies its conjugate with that of the inverse mate of
-`squareUpperStarIso`; injectivity gives equality of these two sheaf maps.
-2. The inverse-mate component formula and its counit identity give the next two equations.
-3. Exact derivation preserves inverse isomorphisms, identifying the specified derived
-exchange with the inverse derived square of the sheaf base-change map.
-4. Apply the proved exact-localization inverse-mate theorem. Its localized adjunctions
-are the specified derived sum/restriction adjunctions, so the inverse-mate counit identity
-holds at every unbounded derived object.
-5. Constant-sheaf composition coherence gives the commuting sheaf constant square.
-Compatibility of exact derivation with the degree-zero embedding, followed by naturality
-of its single-functor comparison, transports this equation to the required derived square.
--/
+Source: Stacks Project, Etale Cohomology, Tag 03S6, Categories, Tags 0B65 and 0DV0, Derived
+Categories, Tag 015F, and Sites, Tag 0H7J. -/
 theorem etaleSumExchangeCounit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} (e : U ⟶ X) (w : X' ⟶ X)

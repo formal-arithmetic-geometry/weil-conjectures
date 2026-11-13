@@ -28,8 +28,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
 
 /-- The exact-derived transpose of the sheaf-induced map is the homotopy
 transpose and ordinary base-change mate followed by the target right-derived unit.
-Source: Stacks Project Tags 0F7B and 0D6E, localization and mixed-mate unit identities.
-(blueprint: lem-pur-proper-sheaf-transpose-normalization). -/
+Source: Stacks Project Tags 0F7B and 0D6E, localization and mixed-mate unit identities. -/
 theorem properSheaf_transpose_normal
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) (v : V ⟶ Y) [Etale v]

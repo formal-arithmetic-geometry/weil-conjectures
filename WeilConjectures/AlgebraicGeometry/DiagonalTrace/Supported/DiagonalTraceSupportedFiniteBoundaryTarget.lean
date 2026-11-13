@@ -91,22 +91,7 @@ private theorem finite_supported_coordinate_eq
 set_option linter.unusedVariables false in
 /-- A finite class satisfying the geometric Kummer Chern equation gives the
 normalized coefficient Chern arrow. This contains no strict class, source cone,
-or presentation. It applies to any finite Cartier class with the stated equation.
-
-Source: diagonal trace proof (2), coefficient comparison; classes proof (3).
-(blueprint: lem-sfb-diagonal-trace-supported-finite-boundary-target-step).
-
-Proof: construct an étale lift of the finite evaluated Chern arrow using exact
-residue reduction. FiniteChernNormalization identifies the integral class of
-this lift with the positive Kummer class of diagonalPic. Ordinary finite Chern
-uniqueness identifies it with the étale antecedent supplied by hz, whose
-integral adjunct is supportedKummerChern. The diagonal Picard line is the dual
-diagonal ideal. Cancel the constant comparison in the other equation of hz,
-apply exact scalar restriction, and take Ext hom. This identifies the middle
-arrow in the frame. Both composites have the same coefficient projection
-prefix; cancellation of the frame isomorphisms proves the result.
-The normalization hn is not needed after the finite comparison hc is supplied.
-The argument works at positive exponent n+1, including n=0 and the empty scheme. -/
+or presentation. It applies to any finite Cartier class with the stated equation. -/
 theorem diagonalTrace_supportedFiniteBoundary_targetStep
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

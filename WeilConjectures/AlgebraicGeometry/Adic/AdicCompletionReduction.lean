@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NilpotentKoszulComplet
 /-!
 # Reduction of adic completion
 
-Source: Weil conjectures blueprint, proper base change, order 1260,
-`lemma-weil-pbc-adic-completion-reduction.md`
-(blueprint: lemma-weil-pbc-adic-completion-reduction).
-
 The completion object and its evaluation are those of the landed strict product-cone
 construction. Its reduction is computed on an arbitrary K-flat model of that object.
 The comparison is defined by the derived scalar adjunction, using its unit, so the
@@ -34,8 +30,7 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Evaluation from the specified strict product-cone limit at level n+1.
-Source: order 1260, statement (blueprint: lemma-weil-pbc-adic-completion-reduction). -/
+/-- Evaluation from the specified strict product-cone limit at level n+1. -/
 noncomputable def adicCompletionEvaluation (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
     (M : AdicKFlatModel X Λ K) (n : ℕ) :

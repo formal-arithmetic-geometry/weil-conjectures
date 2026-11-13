@@ -16,10 +16,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Double counits in an etale-horizontal square
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md, Step 1;
-Stacks Project, Tags 0037, 0DV0, 0F7J, 0F7K, 0F7L and 03S6
-(blueprint: lem-pur-etale-horizontal-double-counit).
+Source: Stacks Project, Tags 0037, 0DV0, 0F7J, 0F7K, 0F7L and 03S6.
 -/
 
 @[expose] public section
@@ -36,8 +33,7 @@ attribute [local irreducible] upperStar etaleLowerShriek
   Functor.mapDerivedCategory derivedEtaleLowerShriekUpperStarAdjunction
 
 /-- The right-adjoint restriction comparison determined by inverse compact-support exchange.
-Source: Stacks Project, Tags 0037 and 0F7L
-(blueprint: lem-pur-etale-horizontal-double-counit). -/
+Source: Stacks Project, Tags 0037 and 0F7L. -/
 noncomputable def etaleHorizontalCounitRightExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -148,9 +144,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
   (adj' : rightDerivedLowerShriek (ModuleCat.{u + 1} A) h' ⊣ G')
 
 /-- Conjugate the specified inverse delta under the two normalized composite adjunctions.
-This is the map b of the node; the compositor formula is recorded below.
-Source: Stacks Project, Tags 0037 and 0DV0
-(blueprint: lem-pur-etale-horizontal-double-counit). -/
+Source: Stacks Project, Tags 0037 and 0DV0. -/
 noncomputable def etaleHorizontalDoubleCounitIso :
     G ⋙ (upperStar (ModuleCat.{u + 1} A) e').mapDerivedCategory ≅
       (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory ⋙ G' :=
@@ -165,22 +159,7 @@ noncomputable def etaleHorizontalDoubleCounitIso :
 set_option maxRecDepth 10000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Double-counit equality, single-counit equality, and the unique adjunct description.
-Source: blueprint co-smooth etale locality, Step 1; Stacks 0037, 0DV0 and 0F7K
-(blueprint: lem-pur-etale-horizontal-double-counit).
-
-Proof: (1) conjugacy of d inverse preserves the evaluation/counit normalization.
-(2) Conjugate the difference of the two compositors, using contravariant composition.
-(3) Change from the compact-support adjunctions to the sum/evaluation adjunctions;
-mate pasting identifies the resulting conjugate with b and the left map with delta inverse.
-(4) Expand both composite counits by Adjunction.comp to obtain the first equality.
-(5) Apply lem-pur-etale-horizontal-support-mate at G K and use counit naturality.
-(6) Cancel the inverse hom bijection for the sum adjunction, obtaining the second
-identity. The hom bijection for adj' gives the unique adjunct assertion.
-(7) Refinement comparisons preserve d and the compositors; conjugacy preserves their
-counits, so the identities transport under refinement.
-(8) Exchange pasting and lem-pur-etale-support-map-compatibility identify the two
-restricted mates; the sum/evaluation adjunction is the same after open restriction.
-No evaluation counit is cancelled as an isomorphism. -/
+Source: Stacks 0037, 0DV0 and 0F7K. -/
 theorem etaleHorizontalDoubleCounit :
     ∀ K : DerivedCategoryModule A Y,
       ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map
@@ -260,13 +239,7 @@ set_option linter.unusedSectionVars false in
 /-- The explicit formula rho inverse, inverse first conjugate compositor, second
 conjugate compositor, and rho. A common right adjoint for the equal composites is
 arbitrary, and both occurrences use the same adjunction.
-Source: Stacks 0037 and 0DV0, blueprint co-smooth etale locality Step 1
-(blueprint: lem-pur-etale-horizontal-double-counit).
-
-Proof: conjugate alpha for each composite adjunction. Contravariance identifies the
-middle two factors with the conjugate of alpha_h inverse after alpha_e. Mate pasting
-moves d_e inverse and d_e' across the composite adjunctions. These are exactly rho_e
-and rho_e' inverse, respectively, giving the defining conjugate of delta inverse. -/
+Source: Stacks 0037 and 0DV0. -/
 theorem etaleHorizontalDoubleCounit_compositors
     {Ge : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A Y'}
     {Ge' : DerivedCategoryModule A X ⥤ DerivedCategoryModule A X'}
@@ -301,12 +274,7 @@ theorem etaleHorizontalDoubleCounit_compositors
   simp only [etaleHorizontalSupportMateDelta, Iso.trans_inv, Iso.symm_inv,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Category.assoc]
 
-/-- Equality of natural transformations, making naturality in K explicit.
-Source: blueprint co-smooth etale locality Step 1 and Stacks 0037
-(blueprint: lem-pur-etale-horizontal-double-counit).
-
-Proof: the single-counit identity identifies the two transformations under the
-adjunction hom bijection, component by component; injectivity gives equality. -/
+/-- Equality of natural transformations, making naturality in K explicit. -/
 theorem etaleHorizontalDoubleCounit_exchange :
     (etaleHorizontalDoubleCounitIso A sq N adj adj').hom =
       etaleHorizontalCounitRightExchange A (IsPullback.of_iso_pullback sq.toCommSq

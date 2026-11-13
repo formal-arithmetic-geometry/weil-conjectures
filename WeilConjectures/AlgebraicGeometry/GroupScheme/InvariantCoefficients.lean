@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 
 /-!
 # Coefficients of infinitesimal right translations
-
-Source: the invariant-extension argument in the Lie-ring paragraph of
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint
-`def-wf-lie-algebra-derivation`.
 -/
 
 @[expose] public section
@@ -318,20 +314,7 @@ private theorem liftedRightTranslation_snd (v : infPoints G) (U : G.left.Opens)
       simp [hf, hs]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Multiplication of infinitesimal points adds the invariant coefficient operators.
-
-Source: the first coefficient step of the Lie-ring paragraph in
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`.
-(blueprint: lem-ag-invariant-coefficient-add)
-
-Proof: Right translation by v*w is the composition of right translation by v and by w,
-using the same square-zero parameter ε. On an open U, the two comorphisms are
-`a ↦ a + ε D_v(a)` and `a ↦ a + ε D_w(a)`. The lifted maps fix ε, since they are over
-S[ε], and apply their coefficients to functions on G. Their composition therefore
-sends a to `a + ε(D_v(a)+D_w(a))`: the remaining term contains ε² and vanishes.
-The coefficients are precisely the explicit `invariantCoefficient` maps, so they
-agree on every open. This works sheafwise on an arbitrary base scheme, including
-the empty scheme, and uses no division or characteristic assumption. -/
+/-- Multiplication of infinitesimal points adds the invariant coefficient operators. -/
 theorem invariantCoefficient_mul (v w : infPoints G) :
     invariantCoefficient G (v * w) = invariantCoefficient G v + invariantCoefficient G w := by
   ext U a

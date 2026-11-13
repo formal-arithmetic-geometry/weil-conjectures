@@ -70,15 +70,7 @@ set_option maxHeartbeats 2000000 in
 -- The normalization transports adjunctions between two concrete derived-category universes.
 /-- Normalize the comparison maps while retaining the supplied derived functors and
 factorizations. Arbitrary comparison isomorphisms are not automatically normalized.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4.
-(blueprint: lem-pur-etale-brown-level-realization-coherence).
-
-Proof: naturality of the constant-ring sheafification unit makes the identity on
-sections linear for scalar restriction. Lift that square through localization,
-using the supplied factorization maps. The inverse mate is invertible because
-both realization functors are equivalences. Use its inverse as the scalar
-comparison. Its mate equation is the inverse law of the mate equivalence.
-All arguments include identity quotient maps and the zero quotient ring. -/
+Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4. -/
 theorem etaleBrownLevelRealizationCoherence_exists
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)

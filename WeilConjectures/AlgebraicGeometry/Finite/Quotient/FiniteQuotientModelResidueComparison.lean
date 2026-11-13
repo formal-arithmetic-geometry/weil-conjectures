@@ -77,7 +77,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteModelDerivedScalarComparis
 /-! # The coefficient-change square for a finite-quotient constant model
 
 Source: Stacks Project, Tags 06YY, 07A6 and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-model-residue-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -203,22 +202,7 @@ only a coefficient-change comparison: there is no local projective-model hypothe
 and no boundedness or Tor-amplitude conclusion. It also holds on an empty chart.
 
 Source: Stacks Project, Tags 06YY and 07A6, and sites-cohomology.tex,
-Tag 094I, part (2), the derived residue computation.
-(blueprint: lem-weil-pbc-finite-quotient-model-residue-comparison).
-
-Proof: obtain composition of the actual derived scalar-extension functors from
-their existing adjunctions to exact restriction of scalars and uniqueness of left
-adjoints. The limit-projection equation identifies nth reduction followed by residue
-extension with zeroth reduction. Scalar compatibility identifies the finite coefficient
-square after precomposition with the constant quotient map from A. That map is an
-epimorphism, because its lifted ring map is surjective and constant sheafification is
-a left adjoint; cancellation gives the square itself. The separate constant-model
-comparison identifies algebraic derived residue, ring-equivalence transport and the
-canonical representative with constant coefficient extension. The separate slice
-comparison permits applying derived residue extension to the given local isomorphism.
-Compose these isomorphisms, using the exact derived restriction's comparison with the
-representative-based restriction in the statement. No boundedness, finiteness of P,
-projectivity, invertibility of phi, or geometric-stalk argument is used. -/
+Tag 094I, part (2), the derived residue computation. -/
 theorem finiteQuotient_model_residueComparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]

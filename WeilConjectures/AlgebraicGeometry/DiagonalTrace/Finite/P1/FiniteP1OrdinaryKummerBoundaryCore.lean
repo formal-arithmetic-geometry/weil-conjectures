@@ -177,9 +177,6 @@ import WeilConjectures.CategoryTheory.DerivedSingleUnit
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # The finite ordinary Kummer boundary from the scalar class
-
-Source: diagonal-tower trace (1), the finite positive Kummer class and its site comparison.
-(blueprint: lem-sfb-finite-p1-ordinary-kummer-boundary-core).
 -/
 
 @[expose] public noncomputable section
@@ -199,18 +196,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /--
 The normalized scalar Kummer class of the ordinary projective-line Chern arrow
 implies the finite intrinsic boundary equation for the explicitly normalized
-coefficient coordinates.  The scalar-class hypothesis is the independent
-ordinary etale step; the conclusion is the finite site-comparison step.
+coefficient coordinates.
 
-Source: diagonal-tower trace (1), comparison with the scalar Kummer class;
-Stacks 03PL and 03FD.  The proof transports the class through exact evaluation,
-coefficient-coordinate, and scalar-forgetting comparisons.  The normalized
-section equations identify the integral and root endpoint maps with
-`finiteQuotient` and `finiteRootMap`; naturality of the single and shifted
-connecting morphisms then gives the boundary equation.  No tower Chern arrow or
-normalization hypothesis occurs in the conclusion.
-(blueprint: lem-sfb-finite-p1-ordinary-kummer-boundary-core).
--/
+Source: Stacks 03PL and 03FD. -/
 theorem finiteP1_ordinary_kummer_boundary_of_class
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     (e : X ≅ ProjectiveLine S) (k : Kummer l X)

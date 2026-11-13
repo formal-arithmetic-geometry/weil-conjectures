@@ -260,25 +260,7 @@ private theorem coefficientSquares
 /-- An isomorphism of continuous integral coefficients induces commuting isomorphisms
 on constant coefficients and their first quotients.
 
-Source: integral-models-stacks, first-quotient transport; Stacks Tag 09C1
-(blueprint: lem-sfb-embedded-integral-residue-square).
-
-Proof: evaluate the given monoid-object isomorphism on the one-point profinite set.
-Evaluation identifies the continuous functions there with the integer rings and
-preserves addition, multiplication and the unit. Naturality for every map from the
-point shows that the isomorphism acts on all functions by this ring isomorphism.
-In particular it commutes with constant functions. A ring isomorphism of local rings
-carries the maximal ideal onto the maximal ideal. The hypothesis identifies the
-embedded principal ideal with that maximal ideal; the spectral first coefficient
-ideal is also the maximal ideal. The induced quotient ring isomorphism commutes
-with the quotient maps. Apply constant sheafification, the forgetful functor to
-abelian sheaves and its induced monoid-object functor to both ring isomorphisms.
-Functoriality gives the quotient square; the preceding constant-function identity
-and the universal property of sheafification give the scalar square. This is an
-ordinary coefficient assertion: no scheme, complex, completeness, constructibility
-or Tor condition is involved. The identity chart and every automorphism of the
-valuation ring give the same construction, including arbitrary uniformizer generators.
--/
+Source: Stacks Tag 09C1. -/
 theorem embeddedIntegralResidueSquare
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)]

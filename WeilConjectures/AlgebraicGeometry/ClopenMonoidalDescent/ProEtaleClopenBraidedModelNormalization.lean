@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 /-! # Braided lift of clopen restriction with its model square
 
 Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-model-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -95,26 +94,7 @@ attribute [local instance 20000] instMonoidalCategoryHomologicalComplexIntUp_wei
 specified exact derived restriction, satisfying the K-flat computation square and
 canonical degree-zero unit equation.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-model-normalization).
-
-Proof: Coproduct preservation and exactness give preservation of the countable sums
-forming total complexes. The ordinary braided functor therefore induces a braided
-functor on signed cochain complexes. Its inverse tensorator agrees with b: precompose
-with each total summand, use the displayed summand equation, and apply the direct-sum
-universal property. Flat-term K-flat resolutions give the left derivability structure
-for the categorical K-flat subcategory. The independent-coefficient K-flat predicate
-implies categorical K-flatness, and the converse follows by tensoring the
-quasi-isomorphism from zero to an acyclic complex. Thus hk preserves these models.
-The native localization is lax braided, with invertible unit and tensorators when one
-input is K-flat. Apply normalizedBraidedLocalization to the canonical factorization
-factors, obtaining a braided structure whose factorization is monoidal. In its tensor
-equation cancel the native tensorators on a K-flat pair. Their inverses are exactly the
-native computation isomorphisms, giving ModelNormalization for braidedComparison.
-In the unit equation cancel the two native unit maps. The induced cochain unit is the
-single-complex restriction of the ordinary ring unit; the resulting composite is
-unitComparison. This proves the claimed unit equation. The argument uses neither a
-nonzero coefficient ring nor a nonempty scheme. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT. -/
 theorem clopen_braided_model_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

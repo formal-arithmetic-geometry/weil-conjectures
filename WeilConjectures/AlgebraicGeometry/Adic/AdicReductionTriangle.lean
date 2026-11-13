@@ -562,23 +562,7 @@ private theorem tensor_complex_exact
 
 end ReductionTensor
 
-/-- A normalized two-term quotient resolution induces the scalar-extension triangle.
-Source: blueprint integral truncations, steps 1 and 3
-(blueprint: lem-weil-pbc-adic-reduction-triangle).
-
-Proof: tensor the coefficient sequence with a module. The tensor unit isomorphism and the
-restriction/sheafification comparison identify its second arrow with the ordinary scalar
-adjunction unit, using `p(1) = 1`. Tensor preserves cokernels, so the resulting sequence is
-right exact for every module and short exact for a flat module. Choose a flat-term K-flat
-representative of K. The degreewise short exact sequence yields a distinguished triangle;
-the normalized K-flat counit identifies its second arrow with the derived unit. Transport
-along the resolution isomorphism. Tensor multiplication is a natural endomorphism of the
-identity, hence commutes with cohomology. Finally, right exactness identifies its cokernel
-with ordinary scalar extension, with the displayed unit normalization.
-
-The tensor/sheafification calculations adapt the private helpers of
-`DerivedReductionResolutionIndependence`, without its unused sections-exact hypothesis.
-The zero ring and empty site require no exception: all arguments use universal properties. -/
+/-- A normalized two-term quotient resolution induces the scalar-extension triangle. -/
 theorem pbc_adic_reduction_triangle
     (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (φ : R ⟶ S)

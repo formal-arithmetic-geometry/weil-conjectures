@@ -55,9 +55,7 @@ variable {X : Scheme.{u}}
 
 /-- If `H¹(X, J) = 0`, then every global section of the closed subscheme `V(J)` lifts to a global
 function on `X`: this is the long exact cohomology sequence of
-`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` in degree `0`.
-
-(blueprint: `pqf-lem-serre-criterion`) -/
+`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` in degree `0`. -/
 theorem surjective_subschemeι_appTop_of_subsingleton_H_one (J : X.IdealSheafData)
     [Subsingleton (J.toModules.H 1)] : Function.Surjective J.subschemeι.appTop := by
   intro y
@@ -74,15 +72,7 @@ theorem surjective_subschemeι_appTop_of_subsingleton_H_one (J : X.IdealSheafDat
 
 /-- **Reduction to ideal sheaves of finite type.** Let `X` be quasi-compact and
 quasi-separated, and suppose that `Γ(X, 𝒪_X) → Γ(V(K), 𝒪_{V(K)})` is surjective for every ideal
-sheaf `K` of finite type. Then it is surjective for every quasi-coherent ideal sheaf `J`.
-
-A section `s` over `V(J)` lifts to sections `e a` of `𝒪_X` over the members `U a` of a finite
-affine cover. The differences `e a - e b` are sections of `J` over the quasi-compact opens
-`U a ⊓ U b`, so they are sections of a single finite-type subsheaf `K ≤ J`. Modulo `K` the
-`e a` glue to a section over `V(K)`, which lifts to a global function `f`; then `f` restricts to
-`s` on `V(J)`, since `f - e a` is a section of `K ≤ J` over `U a`.
-
-(blueprint: `pqf-lem-serre-criterion`) -/
+sheaf `K` of finite type. Then it is surjective for every quasi-coherent ideal sheaf `J`. -/
 theorem surjective_subschemeι_appTop_of_ofFiniteType [CompactSpace X] [QuasiSeparatedSpace X]
     (h : ∀ K : X.IdealSheafData, K.ofFiniteType → Function.Surjective K.subschemeι.appTop)
     (J : X.IdealSheafData) : Function.Surjective J.subschemeι.appTop := by
@@ -164,14 +154,7 @@ lemma Scheme.mem_radical_span_singleton_of_basicOpen_le [CompactSpace X]
 
 /-- Let `Y` be a quasi-compact quasi-separated scheme along all of whose closed immersions global
 functions lift. If the basic opens `Y_{f i}`, `i ∈ s`, cover `Y`, then the `f i` generate the unit
-ideal of `Γ(Y, 𝒪_Y)`.
-
-By induction on `s`: the remaining functions cover the closed subscheme `V(f i₀)`, so by
-induction they generate the unit ideal there; lifting a relation `1 = ∑ cᵢ fᵢ` from `V(f i₀)`
-to `Y` leaves an error term `h` vanishing on `V(f i₀)`, hence with `Y_h ⊆ Y_{f i₀}`, so that a
-power of `h` is a multiple of `f i₀`.
-
-(blueprint: `pqf-lem-serre-criterion`) -/
+ideal of `Γ(Y, 𝒪_Y)`. -/
 theorem Scheme.span_eq_top_of_forall_mem_basicOpen {ι : Type*} (s : Finset ι) :
     ∀ (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y],
       (∀ {Z : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i], Function.Surjective i.appTop) →
@@ -228,9 +211,7 @@ point `x` of an open `U` has a basic open neighbourhood `X_f ⊆ U`.
 
 Let `V(J)` be the reduced closed subscheme on `(X ∖ U) ∪ {x}`. It is the disjoint union of its
 open subsets over `U` (which is `{x}`) and over `X ∖ {x}`, so it has a global section which is `1`
-on the first and `0` on the second; any lift `f` of it satisfies `x ∈ X_f ⊆ U`.
-
-(blueprint: `pqf-lem-serre-criterion`) -/
+on the first and `0` on the second; any lift `f` of it satisfies `x ∈ X_f ⊆ U`. -/
 lemma Scheme.exists_basicOpen_le_of_isClosed
     (hX : ∀ J : X.IdealSheafData, Function.Surjective J.subschemeι.appTop) {x : X}
     (hx : IsClosed {x}) {U : X.Opens} (hxU : x ∈ U) :
@@ -296,9 +277,7 @@ lemma Scheme.exists_basicOpen_le_of_isClosed
 
 /-- **Serre's criterion for affineness.** Let `X` be a quasi-compact quasi-separated scheme such
 that `H¹(X, ℐ) = 0` for every quasi-coherent sheaf of ideals `ℐ ⊆ 𝒪_X` of finite type. Then `X`
-is affine.
-
-(blueprint: `pqf-lem-serre-criterion`) -/
+is affine. -/
 @[stacks 01XF]
 theorem isAffine_of_subsingleton_H_one (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (h : ∀ I : X.IdealSheafData,

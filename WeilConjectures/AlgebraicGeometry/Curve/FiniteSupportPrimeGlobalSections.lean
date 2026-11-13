@@ -48,24 +48,7 @@ private theorem finite_of_annihilated (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- A constructible sheaf killed by a prime and supported outside a dense open of a
 curve has finite degree-zero cohomology when the coefficient quotient is finite.
-Source: Stacks Project, Tag 0GJA, proof, finite product of boundary stalks;
-module coefficient adaptation of the finite-stalk argument.
-(blueprint: lem-pbc-m1-finite-support-prime-global-sections)
-
-Proof: The complement of the dense open is a finite set of closed points with
-residue fields equal to the algebraically closed base field. Give it its reduced
-closed subscheme structure i:Z -> X. The zero restriction identifies Q with i_*i^*Q
-by the open-closed short exact sequence. Closed direct image preserves global
-sections, and the etale site of the finite disjoint union Z of spectra of k has
-global sections equal to the finite product of the geometric stalks at its points.
-Each stalk is finitely generated as a Lambda-module by constructibility. Since ell
-kills the sheaf, it kills every stalk; the scalar action factors through
-Lambda/(ell), and the same generators generate over this quotient. This quotient
-is a finite ring, so its finitely generated modules are finite sets. The finite
-product of these finite stalks is finite. The canonical degree-zero identification
-of Sheaf.H with global sections gives the conclusion. Empty curves and empty
-complements give the zero group; if the coefficient quotient is the zero ring,
-every stalk is zero. Neither reducedness of X nor Noetherianity of Lambda is used. -/
+Source: Stacks Project, Tag 0GJA, proof, finite product of boundary stalks. -/
 theorem finite_support_prime_global_sections (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

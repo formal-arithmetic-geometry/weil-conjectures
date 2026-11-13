@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryCompositeCoordinateArrow
 
 /-! # Actual finite coordinate images of ordinary P1 and local arrows
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-p1-local-composite-equation).
 -/
 
 @[expose] public noncomputable section
@@ -48,15 +45,7 @@ attribute [local irreducible] Functor.mapDerivedCategory SpTowerP1.nuSingle
   geoP1PullComparison
   Etale.ordinaryFiniteUnitPullback Etale.ordinaryFiniteShiftedLinePullback
 
-/-- The fixed-Hom local image is the actual generic composite coordinate image.
-Source: the original intrinsic single and shift comparison constructions
-(blueprint: lem-sfb-finite-p1-local-composite-equation).
-
-Proof: both constructors compose the inverse source single with nuSingle,
-apply the same intrinsic realization to the same ordinary comparison arrow,
-then compose the same commShift and shifted target single isomorphisms.
-The original and cached category witnesses are the same existing localization;
-heterogeneous reflexivity retains both literal endpoint presentations. -/
+/-- The fixed-Hom local image is the actual generic composite coordinate image. -/
 theorem finiteP1LocalCoordinateImage_composite (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (X : Scheme.{u}) {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)

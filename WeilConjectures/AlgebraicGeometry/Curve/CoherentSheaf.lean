@@ -27,9 +27,6 @@ this gives:
 * the quotient `ℱ / 𝒯` is finite locally free of rank `rk ℱ`
   (`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_torsionQuotient`);
 * `𝒯` vanishes at the generic point, so `rk (ℱ / 𝒯) = rk ℱ`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
-`theorem-riemann-roch-coherent-serre-duality`)
 -/
 
 @[expose] public section
@@ -191,9 +188,7 @@ include k in
 /-- **The torsion-free quotient of a coherent module on a smooth curve is locally free of rank
 `rk ℱ`.** For a coherent `𝒪_X`-module `ℱ` on an integral scheme `X` smooth of relative dimension
 one over a field, `ℱ / ℱ_tors` is finite locally free, with constant rank the generic rank of
-`ℱ`, since the torsion vanishes at the generic point.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+`ℱ`, since the torsion vanishes at the generic point. -/
 theorem isFiniteLocallyFreeOfRank_torsionQuotient (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :

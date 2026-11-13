@@ -12,11 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyConstant
 /-!
 # Finite étale covers as finite locally constant sheaves
 
-Source: Stacks Project, Tags 03RV, 03Q1, 00Y6 and 09ZB
-(blueprint: thm-galois-lc-etale).
-These are `AlgebraicGeometry.Scheme.exists_finiteEtale_flc_equivalence` and
-`AlgebraicGeometry.Scheme.finiteEtale_flc_preserves_torsors`, stated for the category
-`Scheme.FLC`, which is `Scheme.FiniteLocallyConstant`.
+Source: Stacks Project, Tags 03RV, 03Q1, 00Y6 and 09ZB. These are
+`AlgebraicGeometry.Scheme.exists_finiteEtale_flc_equivalence` and
+`AlgebraicGeometry.Scheme.finiteEtale_flc_preserves_torsors`, stated for the category `Scheme.FLC`,
+which is `Scheme.FiniteLocallyConstant`.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The Yoneda equivalence, with base change and stalk compatibility. This is
 `AlgebraicGeometry.Scheme.exists_finiteEtale_flc_equivalence`.
-Source: Stacks Project, Tags 03RV, 03Q1, 00Y6 and 09ZB
-(blueprint: thm-galois-lc-etale). -/
+Source: Stacks Project, Tags 03RV, 03Q1, 00Y6 and 09ZB. -/
 theorem exists_finiteEtale_flc_equivalence_sheaf (Y : Scheme.{v}) :
     ∃ Φ : Y.FiniteEtale ≌ Y.FLC,
       Nonempty (Φ.functor ⋙ ObjectProperty.ι _ ≅
@@ -48,8 +46,7 @@ theorem exists_finiteEtale_flc_equivalence_sheaf (Y : Scheme.{v}) :
 
 /-- The Yoneda equivalence carries a finite abelian torsor and its action to its sheaf torsor.
 This is `AlgebraicGeometry.Scheme.finiteEtale_flc_preserves_torsors`.
-Source: Stacks Project, proof of Tag 09ZB, with Tag 03RV
-(blueprint: thm-galois-lc-etale). -/
+Source: Stacks Project, proof of Tag 09ZB, with Tag 03RV. -/
 theorem finiteEtale_flc_preserves_torsors_sheaf {Y : Scheme.{v}}
     (Φ : Y.FiniteEtale ≌ Y.FLC)
     (α : Φ.functor ⋙ ObjectProperty.ι _ ≅

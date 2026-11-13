@@ -9,10 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSheafExt
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalResidueDerivedFactorization
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! # Finite residue lifting of strict derived arrows
-
-Source: diagonal tower system proof, step (2) and evaluation in step (4).
-(blueprint: lem-sfb-diagonal-finite-arrow-lift). -/
+/-! # Finite residue lifting of strict derived arrows -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,9 +35,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
 
 /-- Residue lifting for evaluated derived-reduction arrows, with all categories
 and scalar functors shared parameters. This is the displayed restriction equation,
-not a choice of a residue class.
-Source: diagonal tower system proof, steps (2) and (4)
-(blueprint: lem-sfb-diagonal-finite-arrow-lift). -/
+not a choice of a residue class. -/
 @[irreducible] def DiagonalFiniteArrowLifting
     (ℓ : ℕ) {A : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     {B : Type*} [Category B] [abB : Abelian B] [hB : HasExt.{w} B]
@@ -67,8 +62,7 @@ Source: diagonal tower system proof, steps (2) and (4)
             (Ext.mk₀ t.hom) (add_zero 2)) (zero_add 2)
 
 /-- The concrete compatibility formula, with its coefficient expressions shared.
-This is a real proposition definition and chooses no data.
-(blueprint: lem-sfb-diagonal-finite-arrow-lift). -/
+This is a real proposition definition and chooses no data. -/
 @[irreducible] def diagonalFiniteArrowLiftingStatement (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]
@@ -209,29 +203,7 @@ private theorem finite_lift_of_factorization
     Iso.inv_hom_id_app, (shiftFunctor (DerivedCategory B) (2 : ℤ)).map_id,
     Category.comp_id]
 
-/-- Evaluation of a strict derived-reduction arrow lifts to residue coefficients.
-
-Source: diagonal tower system proof, steps (2) and (4), before the Kummer
-identification (blueprint: lem-sfb-diagonal-finite-arrow-lift).
-
-Proof: form ordinary extension to the residue ring by taking the quotient of
-scalar extension by the positive prime power, in residue-module sheaves. Its
-restriction to p-adic modules identifies with evaluation of D.ordinary by the
-cokernel universal property. Derive this comparison on common flat-term K-flat
-resolutions. Exact restriction retains the underlying complexes and reflects
-quasi-isomorphisms, and evaluation of strict systems preserves these derived
-comparisons. Consequently evaluation of D.T factors through derived extension
-to the residue ring. The canonical source counit a and s identify its source
-with Q in degree zero. The isomorphism b followed by evaluation and t identifies
-its target after restriction with P[2]. Restriction reflects concentration of
-cohomology; the fully faithful restriction on the hearts lifts this last
-identification to residue modules. Apply the residue derived functor to f,
-conjugate by these two identifications, and use the Ext/Hom equivalence to get
-e. Its restriction is the displayed arrow by naturality of the common
-resolution comparison. This uses no Kummer sequence, roots identification,
-adjunction generator, or sign convention. Arbitrary isomorphisms s,t are
-allowed because restriction is full on the hearts; no assertion of fullness
-on all derived morphisms is used. -/
+/-- Evaluation of a strict derived-reduction arrow lifts to residue coefficients. -/
 theorem diagonal_finite_arrow_lift (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Normalized diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-endpoints).
-
 ## Main definitions
 
 - `derivedScalars`: the actual derived coefficient extension.
@@ -38,23 +35,18 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The actual derived extension functor, named once to share its coefficient
-and derived-category instances. Source: blueprint coefficient-change maps
-(blueprint: def-sfb-diagonal-coefficient-endpoints). -/
+and derived-category instances. -/
 def derivedScalars (X : Scheme.{u}) :
     DerivedCategory (Modules Λ X) ⥤ DerivedCategory (Modules Λ' X) :=
   (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor
 
 /-- Derived extension carries the shift structure induced by its actual
-adjunction to exact restriction, also for nonflat quotient maps.
-Source: blueprint coefficient-change endpoint comparisons
-(blueprint: def-sfb-diagonal-coefficient-endpoints). -/
+adjunction to exact restriction, also for nonflat quotient maps. -/
 instance (priority := 100) scalarCommShift (X : Scheme.{u}) :
     (derivedScalars a X).CommShift ℤ :=
   (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).leftAdjointCommShift ℤ
 
-/-- A coefficient-semilinear map with its specified underlying sheaf map. Source:
-blueprint coefficient-change maps, including quotient maps at every positive level
-(blueprint: def-sfb-diagonal-coefficient-endpoints). -/
+/-- A coefficient-semilinear map with its specified underlying sheaf map. -/
 structure Semilinear {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
     (m : M.X ⟶ N.X) where
   hom : M ⟶ (Mod.comap (coefficientMap a X)).obj N
@@ -62,8 +54,7 @@ structure Semilinear {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
 
 /-- An endpoint identification is fixed by its derived scalar/restriction adjoint.
 Thus the displayed isomorphism cannot rescale a class or a trace. This definition
-uses derived extension even for a nonflat quotient. Source: blueprint clauses 1--2
-(blueprint: def-sfb-diagonal-coefficient-endpoints). -/
+uses derived extension even for a nonflat quotient. -/
 structure Endpoint {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
     (m : M.X ⟶ N.X) where
   semilinear : Semilinear a M N m
@@ -76,9 +67,7 @@ structure Endpoint {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
       ((Mod.comap (coefficientMap a X)).mapDerivedCategorySingleFunctor 0).inv.app N
 
 /-- The supported-source scalar map is the coefficient map pushed along the
-closed diagonal and then the canonical ordinary restriction/direct-image comparison.
-Source: blueprint clause 1 and proof step 3b
-(blueprint: def-sfb-diagonal-coefficient-endpoints). -/
+closed diagonal and then the canonical ordinary restriction/direct-image comparison. -/
 def supportMap (Y : Scheme.{u})
     (v : Mod.regular (condensedRingObj Λ (ProjectiveLine Y)) ⟶
       (Mod.comap (coefficientMap a (ProjectiveLine Y))).obj
@@ -88,8 +77,7 @@ def supportMap (Y : Scheme.{u})
     (CondensedRing.comapLowerStarIso a (diagonalImmersion Y)).inv.app
       (Mod.regular (condensedRingObj Λ' (ProjectiveLine Y)))
 
-/-- Shift an endpoint comparison using the canonical shift of derived extension.
-Source: blueprint coefficient changes (blueprint: def-sfb-diagonal-coefficient-endpoints). -/
+/-- Shift an endpoint comparison using the canonical shift of derived extension. -/
 def Endpoint.shift {X : Scheme.{u}} {M : Modules Λ X} {N : Modules Λ' X}
     {m : M.X ⟶ N.X} (e : Endpoint a M N m) :
     (derivedScalars a X).obj

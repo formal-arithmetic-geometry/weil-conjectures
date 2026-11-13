@@ -31,8 +31,7 @@ variable {C D E F : Type*}
   (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
 
 /-- Inverse mates of isomorphisms are isomorphisms when the vertical functors are
- equivalences. Source: the iterated-mate conjugation identity
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+ equivalences. -/
 theorem inverseMate_isIso [G.IsEquivalence] [H.IsEquivalence]
     (β : TwoSquare R₁ H G R₂) [IsIso β] :
     IsIso ((mateEquiv adj₁ adj₂).symm β) := by
@@ -63,35 +62,27 @@ variable (A : Type u) [CommRing A]
 variable (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj R] [IsCommMonObj R]
 
-/-- Scalar restriction followed by the concrete normalized section encoding.
-Source: the heart functor of coefficientEncoding
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+/-- Scalar restriction followed by the concrete normalized section encoding. -/
 @[irreducible]
 def heart (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u}) (E : Encoding A T) :=
   Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
     (coefficientMap e.inv.hom T) ⋙ sectionEncoding A T E.ringIso ⋙ fixedRestriction A T
 
 omit [IsCommMonObj R] in
-/-- The concrete heart functor equals the one specified by the supplied equivalences.
-Source: the two normalization equations of Encoding
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+/-- The concrete heart functor equals the one specified by the supplied equivalences. -/
 theorem heart_eq (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) (E : Encoding A T) :
     heart A R e T E = Mod.comap (coefficientMap e.inv.hom T) ⋙
       E.ordinary.functor ⋙ E.fixed.functor := by
   simp only [heart, E.ordinary_functor, E.fixed_functor]
 
-/-- The normalized heart encoding is additive.
-Source: the supplied additive equivalences and scalar restriction
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+/-- The normalized heart encoding is additive. -/
 instance heart_additive (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) (E : Encoding A T) : (heart A R e T E).Additive := by
   rw [heart_eq]
   infer_instance
 
-/-- The heart encoding is an equivalence, by scalar restriction along an isomorphism.
-Source: restriction of scalars along an isomorphism
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+/-- The heart encoding is an equivalence, by scalar restriction along an isomorphism. -/
 instance heart_isEquivalence (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) (E : Encoding A T) : (heart A R e T E).IsEquivalence := by
   have : IsIso e.inv.hom := by
@@ -107,8 +98,7 @@ instance heart_isEquivalence (e : Mon.mk R ≅ Mon.mk (coefficient A))
   infer_instance
 
 /-- The identity on sections, as an isomorphism of fixed-scalar sheaves.
-Source: Stacks 03D3 and normalized section-action reconstruction
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+Source: Stacks 03D3 and normalized section-action reconstruction. -/
 def sectionHeartPushIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U) :
     (sectionEncoding A T eT.ringIso ⋙ fixedRestriction A T).obj
@@ -132,8 +122,7 @@ def sectionHeartPushIso (T U : Scheme.{u}) (f : U ⟶ T)
     rfl
 
 /-- The identity-on-sections direct-image comparison is natural in the internal module.
-Source: Stacks 03D3 and normalized section-action reconstruction
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+Source: Stacks 03D3 and normalized section-action reconstruction. -/
 def encodingHeartPush (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) :
     CondensedRing.lowerStar (coefficient A) f ⋙
@@ -147,8 +136,7 @@ def encodingHeartPush (T U : Scheme.{u}) (f : U ⟶ T)
     rfl)
 
 /-- The direct-image comparison is restriction of scalars followed by the identity
-on normalized sections. Source: coefficient-map naturality and normalized section actions
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+on normalized sections. -/
 @[irreducible] def heartPush (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (f : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :
     CondensedRing.lowerStar R f ⋙ heart A R e Y EY ≅
@@ -165,8 +153,7 @@ on normalized sections. Source: coefficient-map naturality and normalized sectio
 
 /-- Conjugate the specified direct-image comparison under the geometric adjunctions.
 The construction uses only proved equivalences and the identity-on-sections comparison.
-Source: Stacks 03D3; uniqueness of adjoints
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+Source: Stacks 03D3. -/
 @[irreducible] def heartPull (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (f : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :
     CondensedRing.upperStar R f ⋙ heart A R e X EX ≅
@@ -181,9 +168,7 @@ Source: Stacks 03D3; uniqueness of adjoints
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f)).symm
       β)).symm
 
-/-- The inverse of heartPull is precisely the mate of the sectionwise heartPush.
-Source: the definition by inverse mates
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
+/-- The inverse of heartPull is precisely the mate of the sectionwise heartPush. -/
 theorem heartPull_mate (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (f : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :
     mateEquiv (CondensedRing.upperStarLowerStarAdjunction R f)

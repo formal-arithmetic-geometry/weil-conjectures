@@ -89,17 +89,7 @@ private lemma chosen_to_model
   rfl
 
 /-- A proper postcomposition only composes the two proper direct images.
-Source: Stacks Project, Tags 0F7I and 0F7J
-(blueprint: lem-pur-graph-proper-postcomposition).
-
-Proof in words: take the triangle with compactifications c, ofIsProper p, and c.postcomp p.
-Its open map between the compactification ambients is the identity, and its Cartesian
-square has both horizontal open maps identities. Thus the exchange is the identity after
-removing identity-open factors. The every-triangle composition equation leaves precisely
-the associator and the canonical right-derived direct-image compositor. The three
-common-refinement comparisons are rightDerivedLowerShriekIso, and their cocycle cancels
-the auxiliary chosen compactifications. The identity case is the direct-image unit law;
-empty opens give zero on both sides. -/
+Source: Stacks Project, Tags 0F7I and 0F7J. -/
 theorem graph_proper_postcomposition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}}

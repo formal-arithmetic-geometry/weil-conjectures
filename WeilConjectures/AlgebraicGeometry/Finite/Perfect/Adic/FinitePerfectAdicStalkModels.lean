@@ -25,8 +25,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Separate finite-level markings by one fixed algebraic tower on an etale chart.
 The covering at a level can depend on that level. No compatibility of markings is asserted.
-Source: Stacks Tags 09C6 and 09B1
-(blueprint: lem-weil-pbc-finite-perfect-adic-stalk-models). -/
+Source: Stacks Tags 09C6 and 09B1. -/
 def FinitePerfectAdicLevelMarkings (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -45,28 +44,7 @@ def FinitePerfectAdicLevelMarkings (X : Scheme.{t}) {A : Type t} [CommRing A]
 There is no common pro-etale covering and no compatible family of markings in this result.
 
 Source: Stacks Project, Tag 09C6, the paragraph constructing the objects M_n and their
-normalized consecutive maps, using Tags 09AL, 09B1 and 094G.
-(blueprint: lem-weil-pbc-finite-perfect-adic-stalk-models).
-
-Proof: Refine the cover in HasUniformFinitePerfectModels by connected Noetherian affine
-etale charts. Noetherian local connectedness supplies these refinements; omit empty
-charts. On each chart descend each finite quotient complex to the etale site by the
-finite-ring constructible derived comparison. Its finite locally constant cohomology
-and boundedness follow from the given local bounded finite-projective models. Full
-faithfulness descends the actual consecutive quotient arrows. Their transposes under
-derived extension and exact restriction are invertible, by the balancing isomorphism
-for the strict reduction tower and the quotient compatibility of φ. Choose one geometric
-point of the nonempty connected chart and apply its exact stalk to this diagram. The
-constant-stalk comparison and tensor-pullback comparison identify its transitions with
-maps of algebraic quotient complexes, with invertible adjoint transposes. Derived scalar
-extension provides the recorded left adjoints, at levels and between consecutive levels.
-Each stalk is perfect: locally it is the stalk of the specified bounded finite-projective
-constant model. Finite-ring derived local constancy on the connected chart identifies
-each etale level locally with that same stalk, independently for each level. Transport
-these separate isomorphisms through the finite coefficient comparisons and exact slice
-restriction to obtain FinitePerfectAdicLevelMarkings. Composing the refinements gives the
-etale cover of X. The empty scheme uses its empty cover. No compatible choice of the
-finite-level markings, inverse limit, or perfect complex over A is used here. -/
+normalized consecutive maps, using Tags 09AL, 09B1 and 094G. -/
 theorem finitePerfectAdic_stalk_models
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

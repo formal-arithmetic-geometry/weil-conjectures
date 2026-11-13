@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Diagonal
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedTracePullback
 
 /-! # Completed diagonal base change before scalar extension
-
-Source: diagonal coefficient changes, paragraph (3).
-(blueprint: lem-diagonal-completed-pullback-compatibility).
 -/
 
 @[expose] public noncomputable section

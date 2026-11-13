@@ -65,8 +65,7 @@ public import WeilConjectures.AlgebraicGeometry.CompletedTowerPullback
 /-!
 # Pullback of strict completed-coefficient towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1261;
-Stacks Project, Tag 099N (blueprint: def-weil-pbc-completed-pullback).
+Source: Stacks Project, Tag 099N.
 
 The structure map into the completed coefficient ring is built from its finite
 projections. It is a morphism, with no invertibility assumption. The functor here
@@ -82,7 +81,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.Functor
 
 /-- Transport a homotopy-level derived counit to its actual complex representatives.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
 This is the composite of the existing quotient comparisons with the supplied counit. -/
 def leftDerivedCounitOnComplex {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -107,42 +105,32 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
 /-- Finite constant coefficient inverse image has its canonical isomorphism.
-Source: Stacks Tags 09AK and 09AL (blueprint: def-weil-pbc-completed-pullback).
-Proof: the constant sheaf inverse image comparison is an isomorphism; the other two
-factors are the fixed constant-section coefficient comparisons. Compose these isomorphisms. -/
+Source: Stacks Tags 09AK and 09AL. -/
 @[instance]
 theorem completedFiniteCoefficientMap_isIso (n : ℕ) :
     IsIso (completedFiniteCoefficientMap g d n) := by
   change IsIso (d.finiteRingIso g n).hom
   infer_instance
 
-/-- Module inverse image followed by extension along the completed structure map.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- Module inverse image followed by extension along the completed structure map. -/
 def completedModulePullback :
     pbcModules Y (pbcAdicCompletion Y d) ⥤ pbcModules X (pbcAdicCompletion X d) :=
   proEtaleModuleInverseImage g (pbcAdicCompletion Y d) ⋙
     reductionChange X (completedCoefficientMap g d)
 
 /-- Completed module pullback is additive.
-Source: Stacks Tag 03EK (blueprint: def-weil-pbc-completed-pullback).
-Proof: inverse image of abelian sheaves respects sums of maps, as does the induced
-module inverse image. Sheafified scalar extension respects sums on tensor generators.
-The composite therefore respects addition. -/
+Source: Stacks Tag 03EK. -/
 @[instance]
 theorem completedModulePullback_additive : (completedModulePullback g d).Additive := by
   dsimp only [completedModulePullback]
   infer_instance
 
-/-- Apply the module pullback to objects and maps at each strict tower level.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- Apply the module pullback to objects and maps at each strict tower level. -/
 def completedTowerModulePullback :
     pbcTowers Y (pbcAdicCompletion Y d) ⥤ pbcTowers X (pbcAdicCompletion X d) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (completedModulePullback g d)
 
-/-- Levelwise pullback is additive, with equality checked at every level.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
-Proof: each component is the additive completed module pullback, and equality of
-natural transformations is componentwise. -/
+/-- Levelwise pullback is additive, with equality checked at every level. -/
 @[instance]
 theorem completedTowerModulePullback_additive :
     (completedTowerModulePullback g d).Additive := by
@@ -198,8 +186,7 @@ private instance completedTowerModulePullback_finiteColimits :
   exact ⟨fun _ _ _ ↦ inferInstance⟩
 
 /-- The universal left-derived property and K-flat representative computation of the
-specified pullback pair. Naming this property keeps later choice terms small.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+specified pullback pair. Naming this property keeps later choice terms small. -/
 def IsCompletedTowerPullbackPair
     (LF : DerivedCategory (pbcTowers Y (pbcAdicCompletion Y d)) ⥤
         DerivedCategory (pbcTowers X (pbcAdicCompletion X d)))
@@ -216,14 +203,7 @@ def IsCompletedTowerPullbackPair
             (op n)).mapHomologicalComplex (.up ℤ) |>.obj P)) →
         IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
-/-- The universal left derived pair is computed on objectwise K-flat representatives.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
-Proof: strict diagram K-flat replacements supply a quasi-isomorphism with objectwise
-K-flat flat-term source. Pullback preserves quasi-isomorphisms between these by exact
-inverse image and K-flat scalar extension. The additive termwise functor preserves
-shifts and cones. Apply the resolving-class left-derived theorem; its counit is
-invertible on every object of this class. All transitions are pulled back with the
-same functor, so the computation remains a strict tower computation. -/
+/-- The universal left derived pair is computed on objectwise K-flat representatives. -/
 theorem completedTowerPullback_exists :
     ∃ (LF : DerivedCategory (pbcTowers Y (pbcAdicCompletion Y d)) ⥤
         DerivedCategory (pbcTowers X (pbcAdicCompletion X d)))
@@ -237,23 +217,20 @@ theorem completedTowerPullback_exists :
   · intro P _
     infer_instance
 
-/-- Canonical total left derived levelwise pullback, with its universal comparison.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- Canonical total left derived levelwise pullback, with its universal comparison. -/
 def completedTowerPullback :
     DerivedCategory (pbcTowers Y (pbcAdicCompletion Y d)) ⥤
       DerivedCategory (pbcTowers X (pbcAdicCompletion X d)) :=
   (completedTowerPullback_exists g d).choose
 
-/-- The universal counit of strict tower pullback.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- The universal counit of strict tower pullback. -/
 def completedTowerPullbackCounit :
     DerivedCategory.Qh ⋙ completedTowerPullback g d ⟶
       (completedTowerModulePullback g d).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
   (completedTowerPullback_exists g d).choose_spec.choose
 
 /-- The universal left-derived property and K-flat representative computation of the
-specified pullback pair. Naming this property keeps later choice terms small.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+specified pullback pair. Naming this property keeps later choice terms small. -/
 def IsCompletedOrdinaryPullbackPair
     (LF : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) ⥤
         DerivedCategory (pbcModules X (pbcAdicCompletion X d)))
@@ -267,11 +244,7 @@ def IsCompletedOrdinaryPullbackPair
         IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 /-- Ordinary derived pullback has the universal pair computed by the one-object
-K-flat resolving class. This is ordinary pullback before completion.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
-Proof: use exact module inverse image followed by the K-flat scalar extension along c_g.
-K-flat flat-term resolutions exist on the small site. Scalar extension preserves
-quasi-isomorphisms between K-flat complexes. Apply the resolving-class theorem. -/
+K-flat resolving class. This is ordinary pullback before completion. -/
 theorem completedOrdinaryPullback_exists :
     ∃ (LF : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) ⥤
         DerivedCategory (pbcModules X (pbcAdicCompletion X d)))
@@ -284,15 +257,13 @@ theorem completedOrdinaryPullback_exists :
   · intro P _
     infer_instance
 
-/-- Ordinary total left derived completed-coefficient pullback.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- Ordinary total left derived completed-coefficient pullback. -/
 def completedOrdinaryPullback :
     DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) ⥤
       DerivedCategory (pbcModules X (pbcAdicCompletion X d)) :=
   (completedOrdinaryPullback_exists g d).choose
 
-/-- The fixed ordinary left-derived counit.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- The fixed ordinary left-derived counit. -/
 def completedOrdinaryPullbackCounit :
     DerivedCategory.Qh ⋙ completedOrdinaryPullback g d ⟶
       (completedModulePullback g d).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
@@ -320,8 +291,7 @@ private theorem independentKFlatRepresentatives
   have := hp
   exact ⟨P, hP, ⟨asIso (DerivedCategory.Q.map p) ≪≫ e⟩⟩
 
-/-- The tower universal counit on actual cochain representatives.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- The tower universal counit on actual cochain representatives. -/
 def completedTowerPullbackComplexCounit
     (P : CochainComplex (pbcTowers Y (pbcAdicCompletion Y d)) ℤ) :
     (completedTowerPullback g d).obj (DerivedCategory.Q.obj P) ⟶
@@ -330,8 +300,7 @@ def completedTowerPullbackComplexCounit
   Functor.leftDerivedCounitOnComplex (completedTowerModulePullback g d)
     (completedTowerPullback g d) (completedTowerPullbackCounit g d) P
 
-/-- The ordinary universal counit on actual cochain representatives.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- The ordinary universal counit on actual cochain representatives. -/
 def completedOrdinaryPullbackComplexCounit
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     (completedOrdinaryPullback g d).obj (DerivedCategory.Q.obj P) ⟶
@@ -349,10 +318,7 @@ private theorem mapComplexObject_eq_of_functor_eq
   subst G
   rfl
 
-/-- The two ordinary constant-tower pullback complexes are the same strict complex.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
-Proof: at each degree and tower index both have g^*(P^q), differential g^*(d^q), and
-identity transition. The structure maps and their proofs agree by extensionality. -/
+/-- The two ordinary constant-tower pullback complexes are the same strict complex. -/
 theorem completedPullbackConstantComplex_eq
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     ((completedTowerConstant d X).mapHomologicalComplex (.up ℤ)).obj
@@ -378,8 +344,7 @@ theorem completedPullbackConstantComplex_eq
     rfl
   exact mapComplexObject_eq_of_functor_eq he P
 
-/-- The representative normalization fixing the canonical comparison uniquely.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- The representative normalization fixing the canonical comparison uniquely. -/
 def HasCompletedPullbackConstantNormalization
     (e : completedOrdinaryPullback g d ⋙ completedDerivedConstant d X ≅
         completedDerivedConstant d Y ⋙ completedTowerPullback g d) : Prop :=
@@ -509,8 +474,7 @@ private theorem exactDerivedCounitComparison
 /-- Counit normalization for an exact presentation of a left-derived functor.
 Naming the entire condition keeps the concrete module-category presentations out of
 repeated elaborations of the choice predicate.
-Source: Stacks 05S7, 099N
-(blueprint: def-weil-pbc-completed-pullback). -/
+Source: Stacks 05S7, 099N. -/
 private def PullbackCounitNormalization
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -830,11 +794,7 @@ private instance pullbackTowerUniversal :
   exact (completedTowerPullback_exists g d).choose_spec.choose_spec.1
 
 /-- Pullback of a constant tower is canonically the constant tower of ordinary pullback.
-The equality on strict representatives and both universal counits fix the comparison.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
-Proof: constant K-flat representatives lie in the tower resolving class. Both sides
-compute the same pulled-back constant complex. Its strict equality gives the displayed
-normalization. Universal left derivation extends it uniquely and proves invertibility. -/
+The equality on strict representatives and both universal counits fix the comparison. -/
 theorem completedPullbackConstantIso_exists :
     ∃! e : completedOrdinaryPullback g d ⋙ completedDerivedConstant d X ≅
         completedDerivedConstant d Y ⋙ completedTowerPullback g d,
@@ -850,16 +810,14 @@ theorem completedPullbackConstantIso_exists :
     (CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d))
     (independentKFlatRepresentatives (pbcAdicCompletion Y d))
 
-/-- The uniquely normalized constant-tower pullback comparison.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+/-- The uniquely normalized constant-tower pullback comparison. -/
 def completedPullbackConstantIso :
     completedOrdinaryPullback g d ⋙ completedDerivedConstant d X ≅
       completedDerivedConstant d Y ⋙ completedTowerPullback g d :=
   (completedPullbackConstantIso_exists g d).exists.choose
 
 /-- Completed pullback is the derived inverse limit of the pulled-back reduction tower.
-Its restriction to intrinsically complete objects is the completed pullback of the node.
-Source: Stacks Tag 099N (blueprint: definition-completed-inverse-image--1). -/
+Source: Stacks Tag 099N. -/
 def completedPullbackObject
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) :
     DerivedCategory (pbcModules X (pbcAdicCompletion X d)) :=
@@ -867,8 +825,7 @@ def completedPullbackObject
     ((completedTowerPullback g d).obj ((completedReductionTower Y d).obj K))
 
 /-- The strict-tower-induced comparison, using the canonical K → Rlim ΔK unit.
-No map between independently selected cones is used.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+No map between independently selected cones is used. -/
 def completedPullbackComparison
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) :
     (completedOrdinaryPullback g d).obj K ⟶ completedPullbackObject g d K :=
@@ -893,9 +850,7 @@ private theorem pullbackDatumTowerModulePull_eq :
   exact congrArg ((Functor.whiskeringRight ℕᵒᵖ _ _).obj) (completedModulePullback_eq_exact g d)
 
 /-- The module comparison on actual complexes, with the additive structures installed.
-Source: Stacks 099N (blueprint: def-weil-pbc-completed-pullback).
-Proof: substitute completedModulePullback_eq_exact; preservation of zero morphisms is a
-proposition, so its two instance witnesses coincide. The mapped complexes agree. -/
+Source: Stacks 099N. -/
 private theorem pullbackDatumModulePullComplex_eq
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     ((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P =
@@ -911,9 +866,7 @@ private theorem pullbackDatumModulePullComplex_eq
   exact aux _ _ (completedModulePullback_eq_exact g d)
 
 /-- The strict comparison on complexes keeps all levels and transitions.
-Source: Stacks 099N (blueprint: def-weil-pbc-completed-pullback).
-Proof: substitute pullbackDatumTowerModulePull_eq. The zero-preservation witnesses
-are proof irrelevant, so the mapped strict tower complexes agree. -/
+Source: Stacks 099N. -/
 private theorem pullbackDatumTowerPullComplex_eq
     (P : CochainComplex (pbcTowers Y (pbcAdicCompletion Y d)) ℤ) :
     ((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P =
@@ -928,12 +881,7 @@ private theorem pullbackDatumTowerPullComplex_eq
   exact aux _ _ (pullbackDatumTowerModulePull_eq g d)
 
 /-- The ordinary derived comparison is uniquely fixed by its resolving counit.
-Source: Stacks 099N, 06YS (blueprint: def-weil-pbc-completed-pullback).
-Proof: the ordinary functors coincide by completedModulePullback_eq_exact. The datum
-presentation is exact, so its termwise factorization is a universal left-derived
-counit. Uniqueness of the universal derived pair gives the isomorphism and the
-displayed counit equation on complexes. Resolve by K-flat complexes to prove
-uniqueness; exactness extends the equation to every representative. -/
+Source: Stacks 099N, 06YS. -/
 private theorem pullbackDatumOrdinaryTransport_exists :
     ∃! e : completedOrdinaryPullback g d ≅ d.pull g,
       PullbackCounitNormalization (completedModulePullback g d)
@@ -948,17 +896,12 @@ private theorem pullbackDatumOrdinaryTransport_exists :
     (pullbackDatumModulePullComplex_eq g d)
 
 /-- Ordinary pullback transport with its universal-counit normalization.
-Source: Stacks 099N (blueprint: def-weil-pbc-completed-pullback). -/
+Source: Stacks 099N. -/
 private def pullbackDatumOrdinaryTransport : completedOrdinaryPullback g d ≅ d.pull g :=
   (pullbackDatumOrdinaryTransport_exists g d).exists.choose
 
 /-- The strict derived tower comparison retains the universal resolving counit.
-Source: Stacks 099N, 06YS (blueprint: def-weil-pbc-completed-pullback).
-Proof: pullbackDatumTowerModulePull_eq identifies the whole ordinary tower functor.
-Its exact termwise derived functor and the objectwise K-flat derived construction
-are universal left-derived pairs. Their unique comparison satisfies the equation
-below. In particular it compares one strict tower, including transitions, rather
-than choosing independent isomorphisms of its finite evaluations. -/
+Source: Stacks 099N, 06YS. -/
 private theorem pullbackDatumTowerTransport_exists :
     ∃! e : completedTowerPullback g d ≅ d.towerPull g,
       PullbackCounitNormalization
@@ -978,7 +921,7 @@ private theorem pullbackDatumTowerTransport_exists :
     (pullbackDatumTowerPullComplex_eq g d)
 
 /-- Canonical comparison of derived strict tower pullback presentations.
-Source: Stacks 099N (blueprint: def-weil-pbc-completed-pullback). -/
+Source: Stacks 099N. -/
 private def pullbackDatumTowerTransport : completedTowerPullback g d ≅ d.towerPull g :=
   (pullbackDatumTowerTransport_exists g d).exists.choose
 
@@ -1073,12 +1016,7 @@ private theorem reductionAugmentationTransport
 /-- On intrinsically complete inputs this construction is ordinary pullback followed
 by intrinsic derived completion, with exactly its completion unit. Under the canonical
 derived-complete constant/completed coefficient equivalences this is Stacks' completed pullback.
-Source: Stacks Tag 099N, clauses (2),(5) (blueprint: def-weil-pbc-completed-pullback).
-Proof: apply the constant/completed coefficient equivalence to a K-flat representative.
-Its finite-reduction comparisons identify the pulled-back strict tower, including
-transitions, with the reduction tower of ordinary pullback. They identify the derived
-limits and their units. The intrinsic Koszul completion comparison identifies that
-limit with the displayed intrinsic completion and takes the comparison to its unit. -/
+Source: Stacks Tag 099N, clauses (2),(5). -/
 theorem completedPullback_isCompletion (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))

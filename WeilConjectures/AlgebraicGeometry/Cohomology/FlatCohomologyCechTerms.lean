@@ -66,22 +66,7 @@ private noncomputable def scalarTensorEquiv (T : ModuleCat.{u} R) :
 /-- Canonical scalar extension gives isomorphisms of the individual Cech terms.
 This assertion concerns only the objects in each degree, not the differentials.
 
-Source: Stacks Project, Tags 02KH (separated-case proof) and 02KG.
-(blueprint: lem-pc-flat-cech-base-change-terms)
-
-Proof: A tuple of length k+1 has at least one entry. Induction on its length and
-separatedness over the affine base show that its intersection is affine. Its
-inverse image is the base change of this affine, hence affine. Apply the affine
-pullback section formula to the quasi-coherent module. Transfer from tensorPullback
-to the library pullback using uniqueness of left adjoints with their units. The
-cartesian affine ring formula and tensor associativity give S tensor_R Gamma(M,W).
-These identifications send b tensor s to b times the restricted adjunction unit.
-There are finitely many tuples in each degree, so extension of scalars commutes
-with their product. Take the product of the section isomorphisms and transport
-through the categorical product-open identifications. This gives the displayed
-isomorphisms and coordinate equation. With no indices the products are zero;
-with an empty intersection its sections are zero. Neither case needs an extra
-hypothesis. No flatness or assumption that the family covers X is used. -/
+Source: Stacks Project, Tags 02KH (separated-case proof) and 02KG. -/
 theorem exists_cechBaseChange_term_isos (f : X ⟶ Spec (.of R)) [IsSeparated f]
     [Finite ι] (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
     (M : X.Modules) [M.IsQuasicoherent]

@@ -692,21 +692,7 @@ private theorem closedExchange_mates
   simp only [← Functor.map_comp_assoc]
   rw [he]
 
-/-- Site comparison intertwines the two closed exchanges on constant modules.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening and final paragraphs
-(blueprint: lem-sfb-cartier-closed-exchange-comparison).
-
-Proof: transpose both composites under the inverse-image/direct-image adjunction for i'.
-Expand the source comparison as the mate of restriction commuting with direct image,
-followed by the constant comparison. The defining counit-mate identity moves this
-comparison across the counit. The inverse-image comparison is conjugate to the same
-restriction square, so its composition law identifies the two inverse-image paths
-around the commutative scheme square. Naturality moves the remaining constant map
-past the comparison. Both transposes are consequently inverse-image commutation,
-followed by the pullback of the counit for i and the constant map for gD. Injectivity
-of the adjunction equivalence gives the equality. This argument does not use
-Cartier ideals or Kummer classes; it applies also to empty schemes and identity maps.
--/
+/-- Site comparison intertwines the two closed exchanges on constant modules. -/
 theorem geoCartier_closed_exchange_comparison (A : Type (u + 1)) [CommRing A]
     {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')
     (g : Z' ⟶ Z) (gD : D' ⟶ D) (sq : CommSq gD i' i g) :

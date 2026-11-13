@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSuppleme
 import Mathlib.NumberTheory.Padics.RingHoms
 
 /-! # The finite root unit for the bottom coefficient field
-
-Source: diagonal coefficient changes, integral root-limit identification.
-(blueprint: lem-diagonal-bottom-finite-root-unit-is-iso).
 -/
 
 @[expose] public noncomputable section
@@ -173,22 +170,7 @@ private theorem bottom_coefficient_iso (l : ℕ) [Fact l.Prime]
   change IsMonHom (qS.hom ≫ eX.hom)
   infer_instance
 
-/-- The free-module unit on a finite root sheaf is invertible for the bottom field.
-
-Source: blueprint latest, sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md,
-finite-level tensor formula, and the bottom-field coefficient convention.
-(blueprint: lem-diagonal-bottom-finite-root-unit-is-iso).
-
-Proof: the integers of the bottom intermediate field are canonically Z_l.
-Their quotient by l^(n+1) is Z/l^(n+1), including its unital ring structure.
-The associated finite condensed coefficient pulls back to the constant residue
-ring. The root sheaf is annihilated by l^(n+1). Tensoring its underlying abelian
-sheaf with this residue ring over Z is therefore the identity: locally a scalar
-is an integer residue, and the inverse sends a tensor x to that integer multiple
-of x. Annihilation makes this independent of the representative. The inverse
-is balanced, natural, and inverse to the free-module unit. Sheafification
-preserves these inverse identities. This uses neither a choice of a primitive
-root nor invertibility of l on the scheme, and includes the empty scheme. -/
+/-- The free-module unit on a finite root sheaf is invertible for the bottom field. -/
 theorem bottomFiniteRootUnit_isIso (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (n : ℕ) :
     IsIso ((Mod.freeForgetAdjunction

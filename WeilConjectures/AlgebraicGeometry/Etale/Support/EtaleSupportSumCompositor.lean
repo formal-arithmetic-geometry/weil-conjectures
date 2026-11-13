@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.Support.EtaleSupportSumCompositor
 /-! # Support and sum compositors under the constructed graph comparison
 
 Source: Stacks Project, More on Etale Cohomology, Tags 0F7J, 0F7K and 0F50.
-(blueprint: lem-pur-etale-support-sum-compositor).
 -/
 
 @[expose] public section
@@ -24,27 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The actual proper/open compositor becomes nested sum composition under the graph maps.
-Source: Stacks Project, Tags 0F7J, 0F7K and 0F50; Step 1 of
-lem-pur-etale-normalized-mates-composition-pasting.
-(blueprint: lem-pur-etale-support-sum-compositor).
-
-Proof: Use the actual section-preserving support construction in the proof of
-quasifiniteCompactSupportExact, with its normalized compactification units, rather than
-arbitrary witnesses of that theorem's existential conclusion. Its graph-normalized etale
-identifications identify the sheaf comparison maps with the canonical graph maps: cancel
-the monic compactification inclusion in direct image. The homotopy-localization formulas
-then identify the corresponding derived comparisons with
-canonicalEtaleCompactSupportComparison. The nested-summand calculation sends each pair
-of lifts to its composite lift, with the prescribed Over.mapComp restriction. The
-sum/restriction adjunction bijection therefore identifies the resulting sheaf compositor
-with etaleSumSheafCompIso. Apply exactCompactificationUnit_composition to these exact
-support functors, their normalized sheaf factorizations, and their inverse derived units.
-It identifies the specified unbounded proper/open compositor with the exact descent of
-that sheaf compositor. Substitute the graph identifications and use the exact-functor
-composition comparison to identify this descent with derivedEtaleSumCompIso. Finally the
-every-tower formula for unboundedEtaleLowerShriekCompIso and the comparison cocycle
-transport the equation to c,d,k. Naturality puts the two graph comparisons in horizontal
-order. The same adjunction bijection covers identities, empty schemes and zero coefficients. -/
+Source: Stacks Project, Tags 0F7J, 0F7K and 0F50. -/
 theorem etaleSupportSumCompositor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]

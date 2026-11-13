@@ -11,9 +11,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.Algebra.Homology.BifunctorSingleNaturality
 
 /-! # Tensor associativity for the internal integral reduction tower
-
-Source: blueprint latest, det-lem-int-tensor-product.proof.md, first paragraph.
-(blueprint: lem-sfb-tensor-integral-reduction-tower).
 -/
 
 @[expose] public noncomputable section
@@ -112,22 +109,7 @@ private theorem reductionTensorTowerIso
 /-- Tensoring the canonical reduction tower agrees with reducing the tensor product.
 No completeness, dualizability or inverse-limit hypothesis occurs in this statement.
 
-Source: blueprint latest, det-lem-int-tensor-product.proof.md, first paragraph,
-"It also commutes with reduction ... by associativity of the derived tensor product."
-(blueprint: lem-sfb-tensor-integral-reduction-tower).
-
-Proof: for each derived object K choose a K-flat representative P. The localization
-lax tensorator, invertible with K-flat left argument, and the single-complex tensor
-comparison give a natural isomorphism K tensor B[0] ≅ Q(P tensor B). The coherent
-scalar realization then identifies the coefficient tower tensored with K with the
-actual integral reduction tower of K. Naturality in B and the scalar realization's
-transition equation prove the consecutive transition squares; NatTrans.ofOpSequence
-packages them as a natural isomorphism. Apply this construction to N and M tensor N.
-Between these two descriptions, the inverse derived associator identifies
-M tensor (N tensor B[0]) with (M tensor N) tensor B[0], naturally in B. Whisker the
-first comparison by tensorLeft M and compose these three isomorphisms. No completeness
-or dualizability is used; the construction also applies to zero objects and the empty
-scheme. -/
+ by associativity of the derived tensor product.". -/
 theorem tensorIntegralReductionTower
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

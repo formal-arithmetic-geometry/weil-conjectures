@@ -37,12 +37,7 @@ attribute [-instance] CategoryTheory.ConstantScalarRestriction.ringPreadditive
   CategoryTheory.ConstantScalarRestriction.fixedZeroMorphisms
 
 
-/-- The comparison data before the two derived-limit invertibility assertions.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), construction of
-the geometric, coefficient, and derived comparison fields.
-(blueprint: new-sfb-diagonal-trace-comparison-partial).
--/
+/-- The comparison data before the two derived-limit invertibility assertions. -/
 structure PartialPresentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (f : X ⟶ S) [DiagonalTraceLocalizations l X]
@@ -222,14 +217,7 @@ private theorem traceLimits (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     iso := data.iso
     normalization := data.normalization }⟩⟩
 
-/-- The geometric and derived comparison fields can be assembled compatibly.
-
-Proof: construct the Kummer Chern systems, their tensor/Hom twists, the transported
-projective-line model, the coefficient restrictions, and the ordinary and derived
-direct-image and limit comparisons. The remaining two assertions are exactly the
-Milnor invertibility step isolated in `diagonalTraceComparisonLimitIsos`.
-(blueprint: new-sfb-diagonal-trace-comparison-partial-existence).
--/
+/-- The geometric and derived comparison fields can be assembled compatibly. -/
 theorem exists_diagonalTraceComparisonPartial
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

@@ -11,10 +11,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact condensed coefficient changes and their derived tensor calculus
 
-Source: archived master ModuleObject/Colimit/Compatibility.lean, A0.2 and Flat;
-ModuleObject/Colimit/TwoColimit.lean, ExtendScalars
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-
 All modules below are the master internal module objects. The constructible categories
 are `PadicSubfieldConstructible` and `PadicAlgClConstructible`, with no completeness
 condition. The adjunctions are on the ambient unbounded derived categories.
@@ -1048,23 +1044,10 @@ private theorem scheme_finiteFree (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 end FiniteFree
 
-/-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
-TwoColimit.lean, ExtendScalars
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-Proof: choose a finite field basis; its coordinate maps are continuous by the
-finite-dimensional linear homeomorphism lemma. Continuous maps on profinite sets
-therefore identify the finite coefficient module with the free module of that rank.
-The exact strong monoidal inverse image from the point preserves this identification.
-The tensor/restriction adjunction is given by `p ↦ 1 ⊗ p` and multiplication.
-Restriction is exact because it only changes the action. Finite-stage tensor is exact
-because its underlying module is a finite direct sum. For the algebraic closure, its
-finite-stage coefficient cocone is a filtered colimit already on the finite-cover
-basis of profinite sets; pullback preserves this colimit. Module sheaf filtered
-colimits are exact and commute with tensor, giving flatness at the closure.
-The exact-functor factorization and exact-derived-functor lemmas identify derivation
-with termwise tensor on every complex, with its canonical shifts and cone triangles.
-Descend the termwise unit and counit through localization; their triangle identities
-are detected before localization, yielding the unbounded derived adjunction. -/
+/-- For finite coefficient fields `E ≤ F`, the coefficient ring of `F` is finite free over
+that of `E`; extension and restriction of scalars are exact and adjoint, and the left derived
+extension of scalars is computed termwise, is triangulated, commutes with shifts and is left
+adjoint to derived restriction. -/
 theorem condensedFiniteCoefficientCalculus
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F) :
@@ -1103,23 +1086,10 @@ theorem condensedFiniteCoefficientCalculus
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact ⟨scheme_finiteFree T ℓ h, scalarCalculus (padicSubfieldRingObjMap T ℓ h)⟩
 
-/-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
-TwoColimit.lean, ExtendScalars
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-Proof: choose a finite field basis; its coordinate maps are continuous by the
-finite-dimensional linear homeomorphism lemma. Continuous maps on profinite sets
-therefore identify the finite coefficient module with the free module of that rank.
-The exact strong monoidal inverse image from the point preserves this identification.
-The tensor/restriction adjunction is given by `p ↦ 1 ⊗ p` and multiplication.
-Restriction is exact because it only changes the action. Finite-stage tensor is exact
-because its underlying module is a finite direct sum. For the algebraic closure, its
-finite-stage coefficient cocone is a filtered colimit already on the finite-cover
-basis of profinite sets; pullback preserves this colimit. Module sheaf filtered
-colimits are exact and commute with tensor, giving flatness at the closure.
-The exact-functor factorization and exact-derived-functor lemmas identify derivation
-with termwise tensor on every complex, with its canonical shifts and cone triangles.
-Descend the termwise unit and counit through localization; their triangle identities
-are detected before localization, yielding the unbounded derived adjunction. -/
+/-- For a finite coefficient field `E`, extension of scalars to the algebraic closure
+coefficients is exact with exact restriction as right adjoint, and its left derived functor
+is computed termwise, is triangulated, commutes with shifts and is left adjoint to derived
+restriction. -/
 theorem condensedAlgClCoefficientCalculus
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
@@ -1155,21 +1125,7 @@ theorem condensedAlgClCoefficientCalculus
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact scalarCalculus (padicSubfieldRingObjToPadicAlgCl T ℓ E)
 
-/-- Coherence of the canonical multiplication and unit comparisons.
-Source: TwoColimit.lean, ExtendScalars; sheaf tensor coherence and localization
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-Proof: multiplication and its inverse are balanced and natural before sheafification.
-The two associativity paths send `d ⊗ (c ⊗ (b ⊗ p))` to `dcb ⊗ p`.
-Together with associativity of functor composition this gives the five-ring pentagon:
-every path sends `h ⊗ (d ⊗ (c ⊗ (b ⊗ p)))` to `hdcb ⊗ p`.
-The unit sends `a ⊗ p` to `ap`; either insertion of it in a multiplication comparison
-has the same value. The same calculations hold with the last ring the closure.
-These are equalities of maps from presheaf tensors and pass through the universal
-property of sheafification, without asserting that global sections are pure tensors.
-Apply these comparisons termwise. Shifts introduce the same differential sign on both
-sides, and all coefficient factors have degree zero. Localization descends these
-transformations and detects their equalities, proving the unit, associativity,
-pentagon and shift compatibility laws. -/
+/-- Coherence of the canonical multiplication and unit comparisons. -/
 theorem condensedCoefficientCoherence
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (E F G H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

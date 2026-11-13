@@ -10,10 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
 
 /-! # Direct-image normalization on any K-injective representative
-
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-resolution-normalization).
 -/
 
 @[expose] public section
@@ -34,15 +30,7 @@ open Scheme.Modules
 -- Normalize two derived functors without unfolding their chosen constructions.
 /-- The comparison between the two fixed direct images is normalized on any supplied
 K-injective model.
-Source: Stacks Project, Tags 079V and 0D5W.
-(blueprint: lem-weil-pbc-direct-image-resolution-normalization).
-
-Proof: Lift r.inv followed by the fixed resolution isomorphism to a complex map between
-K-injective representatives. Naturality of both resolution comparisons gives the same
-map after applying direct image to that lift. This map is invertible since either
-comparison is an isomorphism. Cancel it to identify the prescribed direct-image
-comparison with the one computed on the supplied model.
--/
+Source: Stacks Project, Tags 079V and 0D5W. -/
 theorem directImage_resolution_normalization
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

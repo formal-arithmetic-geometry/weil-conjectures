@@ -9,8 +9,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The unshifted target of an exact realization composite -/
 
-/- Repair note: this explicit constructor is delivered together with its DAG node. -/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
@@ -21,8 +19,6 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 scalar endpoint, the exact-single comparison for the finite realization, its
 ordinary line map and the final exact-single comparison.
 
-Source: coefficient changes (1), exact realization of one finite reduction.
-(blueprint: def-exact-realization-target-zero).
 This is an explicit construction; it uses no existence theorem or chosen endpoint. -/
 @[irreducible] def exactRealizationTargetZero
     {A B C D E : Type*}

@@ -342,22 +342,7 @@ private theorem limit_root_power (T : Scheme.{u}) (r s : ℕ) (h : r ≤ s)
     rw [show s + 1 - r = (s - r) + 1 by omega, pow_succ, Nat.mul_comm]
 
 /-- Normalized comparisons respect scheme pullback and changes of annihilator.
-Source: `lem-amb-finite-tate-site-descent`, proof step 2; Stacks 03PK and 03Q1
-(blueprint: lem-amb-finite-tate-normalized-coherence).
-
-Proof: use the etale finite-twist pullback comparisons and power transitions.
-Define the pro-etale pullback map by transporting the etale pullback comparison
-through b and the canonical comparison/pullback square. On local finite-root
-lifts the root-projection identities and the finite-root comparison formulas show
-that this transported map sends each prescribed pure tensor to the pulled-back
-tensor. Finite root projections are locally surjective and pure tensors locally
-generate the sheafified tensor powers, so these identities descend to all tests.
-The same detection proves that the etale exponent transition makes the comparison
-square commute: its root formula is exactly the transition of the root tower.
-The exponent transition is invertible by `etaleFiniteTwistPullback`. For degree
-zero all formulas are constant scalar maps; in positive degrees tensor the
-first-degree formulas, using monoidality of inverse image and of the comparison
-pullback square. No pullback is commuted with the infinite root limit. -/
+Source: Stacks 03PK and 03Q1. -/
 theorem finite_tate_normalized_coherence
     (b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →
       ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),

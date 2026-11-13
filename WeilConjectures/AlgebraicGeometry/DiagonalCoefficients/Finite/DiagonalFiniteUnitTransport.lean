@@ -101,19 +101,7 @@ private theorem transport_single_unit
       simpa only [Category.assoc] using congrArg
         (fun k ↦ (V.mapDerivedCategorySingleFunctor 0).hom.app N ≫ Q.map iZ.hom ≫ k) hn
 
-/-- A normalized native finite unit equation transports through a finite realization.
-Source: diagonal tower coefficient changes (1), the normalized finite push square.
-(blueprint: lem-diagonal-finite-unit-transport).
-
-Proof: evaluate the full derived-square normalization on the single regular module.
-Naturality of the exact single comparison moves the ordinary map through the source
-realization. Naturality of singlePushComparison moves the target unit isomorphism
-through the supplied right-derived model. Naturality of the model identification
-then expresses the left side using the native map m. The ordinary factorization
-hypothesis and the native derived-unit equation identify it with the source derived
-unit followed by b. The generic private helper proves these operations before
-specializing to scheme sheaves. No assumption on one, traces or line classes is
-needed in this transport calculation. -/
+/-- A normalized native finite unit equation transports through a finite realization. -/
 theorem finite_push_unit_transport
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A : Type (u + 1)) [CommRing A] {X S : Scheme.{u}} (f : X ⟶ S)

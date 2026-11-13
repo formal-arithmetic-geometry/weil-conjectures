@@ -20,18 +20,14 @@ import Mathlib.Algebra.CharP.Algebra
 /-!
 # Cohomological smoothness in finite-coefficient comparison coordinates
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-def-purity-conv,
-proposition-exceptional-inverse-image-smooth-morphism, clauses 1--3 (blueprint:
-proposition-exceptional-inverse-image-smooth-morphism).
-
 This is the constructible pro-etale definition in etale-origin coordinates. The dualizing
 object is comparison pullback of the etale dualizing object. Tensor and base-change maps
 are comparison pullbacks of the specified counit mates, not arbitrary endpoint maps.
 Every pro-etale Dctf object has an etale origin, so testing all etale representatives
 whose images are Dctf tests precisely the original domain, independently of witnesses.
 Comparison is fully faithful and monoidal on these objects. Its canonical unit, tensor,
-pullback and compact-support comparisons identify these maps with the two transposes
-in the node. Thus this uses the transported constructible adjunction, rather than an
+pullback and compact-support comparisons identify these maps with the two
+transposes. Thus this uses the transported constructible adjunction, rather than an
 ambient pro-etale adjunction. The legacy module imports two incompatible versions of
 the inverse-image API; this module uses the published canonical etale maps directly.
 -/
@@ -43,18 +39,14 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- Finiteness of the actual coefficient quotient, including its size lift.
-Source: blueprint finite purity conventions (blueprint:
-proposition-exceptional-inverse-image-smooth-morphism). -/
+/-- Finiteness of the actual coefficient quotient, including its size lift. -/
 noncomputable instance finiteComparedCoefficientFinite (P : PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   letI : Finite P.Ring :=
     Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
   inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
-/-- The existing Nagata compactification in the finite-type field setting.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, separated finite-type
-setting (blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
+/-- The existing Nagata compactification in the finite-type field setting. -/
 noncomputable def finiteComparedCompactification (P : PurityFiniteSetting.{u})
     {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f]
@@ -67,19 +59,7 @@ noncomputable def finiteComparedCompactification (P : PurityFiniteSetting.{u})
   AlgebraicGeometry.HasCompactification.compactification f
 
 /-- The coefficient hypothesis of finite purity supplies an invertible exponent on every
-scheme over the fixed field; no divisibility of the level by the ramification index is needed.
-Source: main-20261015, sk-def-purity-conv/def-pur-co-smoothness, finite coefficients
-and the clause that ell is invertible on the schemes in sight
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism).
-Proof: write ell for the coefficient prime and n for the positive level. In the DVR O_E,
-ell lies in the maximal ideal (varpi_E): its spectral absolute value restricts to the
-ell-adic one, in which ell has norm less than one. Consequently ell^n lies in (varpi_E)^n,
-so its image in A = O_E/(varpi_E^n), and in the specified ULift, is zero. The integer
-ell^n is positive. The finite field k_0 has characteristic p, as does its algebraic
-closure k; since ell and p are distinct primes, ell^n is nonzero and hence a unit in k.
-Map this unit through the spectrum global-sections identification and the structure
-morphism to Gamma(T, top). These witnesses give HasInvertibleExponent. This argument
-also applies to the empty scheme and does not require T to be finite type or separated. -/
+scheme over the fixed field; no divisibility of the level by the ramification index is needed. -/
 theorem finiteComparedInvertibleExponent (P : PurityFiniteSetting.{u})
     {T : AlgebraicGeometry.Scheme.{u}}
     (a : T ⟶ AlgebraicGeometry.Spec (.of P.field.k)) :

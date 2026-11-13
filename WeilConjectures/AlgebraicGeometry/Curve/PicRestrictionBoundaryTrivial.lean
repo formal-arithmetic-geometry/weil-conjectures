@@ -11,10 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 
 /-!
 # Boundary-point classes restrict to the identity
-
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
-first paragraph, restriction and boundary divisors
-(blueprint: lem-sc-pic-restriction-boundary-trivial).
 -/
 
 @[expose] public section
@@ -29,18 +25,7 @@ open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry
 
-/-- The point-ideal class of a point outside the open curve restricts to the identity.
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph;
-restriction and boundary divisors, steps 3 and 4 of lem-sc-pic-restriction-exact
-(blueprint: lem-sc-pic-restriction-boundary-trivial).
-
-Proof: The inverse image of the closed point P under the open immersion is empty. Thus the
-pullback of its vanishing ideal is the unit ideal: at every point of C the ideal's stalk is
-the full local ring. The point ideal on the smooth ambient curve is invertible, and its dual
-represents O(P). Pullback commutes with this dual, so the pulled-back invertible module is
-the dual of the unit module, hence isomorphic to the unit module. Passing to Picard classes
-gives the identity. This argument applies individually to every omitted closed point; when
-there are no such points the assertion has no instances. -/
+/-- The point-ideal class of a point outside the open curve restricts to the identity. -/
 theorem Scheme.Hom.pic_restriction_boundary_trivial
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

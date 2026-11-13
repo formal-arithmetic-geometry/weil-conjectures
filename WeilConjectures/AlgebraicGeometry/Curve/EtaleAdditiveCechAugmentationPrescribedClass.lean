@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaMap
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackChainTransfer
 
 /-! # Čech augmentation compatibility for a prescribed target class
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1.
-(blueprint: lem-pbc-etale-additive-cech-augmentation-prescribed-class) -/
+Source: Stacks Project, Tag 01FD, Lemma 20.15.1. -/
 
 @[expose] public section
 
@@ -25,40 +24,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A target global cycle of the prescribed pullback class has matching total augmentations.
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1, the augmented double-complex
-construction; Tag 01FB, resolution comparison; Tag 03P2, coefficient sections.
-(blueprint: lem-pbc-etale-additive-cech-augmentation-prescribed-class)
-
-Proof: Apply the exact inverse image to I. Its augmented complex is still exact,
-although its terms need not be injective. Extend the adjoint coefficient morphism
-into J degree by degree using injectivity of the terms of J: first extend across
-the degree-zero augmentation, then factor through each differential's image and
-extend across its inclusion into the next term. Adjunction gives a complex map
-from I into the direct image of J preserving the coefficient augmentation.
-Evaluate this map at the terminal object and restrict to the terminal pullback
-to obtain the global section map T. On each tuple intersection, evaluate the same
-map and restrict along hinter. Naturality with respect to deleting entries of a
-tuple gives the horizontal complex equation; the resolution-map equation gives
-the vertical one. Hence these components define a map of the double complexes
-and of their totals, R. For alpha, the restriction square gives
-R(alpha(s)) = alpha(T(s)). For beta, the degree-zero augmentation equation and
-the identification of coefficient sections in Tag 03P2 give exactly structural
-pullback followed by restriction. The coordinate hypothesis therefore gives
-R(beta(z)) = beta(z'). Applying homologyMap(R) to heq equates the target alpha
-class of T(s) and the target beta class. The canonical global-cocycle comparison,
-resolutionSection_canonical_transfer for inverse image, and naturality of extMk
-for the adjoint coefficient morphism identify the class of T(s) with the right
-side of hclass. Thus hclass and injectivity of cY.globalEquiv show that s' and
-T(s) differ by a global boundary. Alpha is a complex map (its horizontal
-component is zero by the alternating restriction identity), so their alpha
-images differ by a total boundary. Beta also takes cycles to cycles: its
-horizontal differential is the coefficient Cech differential, and its vertical
-differential vanishes by the resolution augmentation equation. Take the unique
-cycle lifts of alpha(s') and beta(z') through iCycles; the preceding boundary
-calculation gives equality of their total homology classes. No augmentation is
-inverted, and no cover or acyclicity on opens is needed. For degree zero the
-boundary argument is equality of cycles. Empty index sets give zero total
-complexes; empty schemes and empty intersections likewise introduce no extra
-hypothesis. -/
+construction; Tag 01FB, resolution comparison; Tag 03P2, coefficient sections. -/
 theorem etaleAdditiveCech_augmentation_prescribed_class
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

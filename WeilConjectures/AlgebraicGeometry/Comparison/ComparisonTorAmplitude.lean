@@ -99,9 +99,6 @@ import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.Ringe
 /-!
 # Comparison of étale and pro-étale Tor amplitude
 
-Source: Weil conjectures blueprint, `lem-sf-comparison-tor-amplitude.md`
-(blueprint: lem-sf-comparison-tor-amplitude).
-
 ## Main statements
 
 - `finiteCoefficient_comparison_preserves_torAmplitude`: clause (i).
@@ -123,20 +120,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Clause (i): comparison preserves the specified Tor interval and bounded constructibility.
-Source: blueprint `sec-six-functors/sk-prop-sf-rf-shriek-preservation/`
-`lem-sf-comparison-tor-amplitude.md`, (i) (blueprint: lem-sf-comparison-tor-amplitude).
-
-Proof: first identify the comparison inverse image of the constant coefficient ring with
-its pro-étale constant ring, using the lifted ring-object adjunction and the universal
-property of the constant sheaf. The canonical intrinsic realization implements this
-identification. Exact comparison is applied termwise and commutes with cohomology
-(situation-conventions and its cohomology companion).
-Apply the étale clause of lemma-flat-models-generators--1 to obtain a flat model supported in [a,b].
-By corollary-finite-tor-amplitude-under-comparison its pullback remains flat and has the same
-support. It is K-flat by lem-pc-bounded-above-flat-kflat-site, so tensoring with any degree-zero
-module computes derived tensor and has no cohomology outside [a,b]. Finally clause (ii)
-of theorem-comparison-constructible-sheaves gives bounded constructibility. -/
+/-- Clause (i): comparison preserves the specified Tor interval and bounded constructibility. -/
 theorem finiteCoefficient_comparison_preserves_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)
@@ -164,19 +148,7 @@ theorem finiteCoefficient_comparison_preserves_torAmplitude
   exact ⟨intrinsicComparison_boundedConstructible D l _hlp E n hn T K' _hK',
     intrinsicComparison_torAmplitude D l _hlp E n hn T a b _hab K' _hK' _hTor'⟩
 
-/-- Clause (ii): comparison reflects the Tor interval of a bounded-below étale origin.
-Source: blueprint `sec-six-functors/sk-prop-sf-rf-shriek-preservation/`
-`lem-sf-comparison-tor-amplitude.md`, (ii) (blueprint: lem-sf-comparison-tor-amplitude).
-
-Proof: A = A_{E,n} is finite for n ≥ 1. Regard K' as an object of D⁺ by the
-bounded-below hypothesis; the ordered interval a ≤ b is part of HasProEtaleTorAmplitude. Apply
-the reverse implication of corollary-finite-tor-amplitude-under-comparison--1
-(ProEtale.comparison_torAmplitudeIn_iff). Its pro-étale side is the intrinsic realization
-after the bounded-below site pullback, canonically isomorphic to the derived functor of
-the composite (mapDerivedCategoryCompIso). Compose with the given K ≅ ν*K'; any
-representative isomorphism Q(L) ≅ ν*K' composed with its inverse gives Q(L) ≅ K, so the
-assumed K-flat tensor test on K yields the same vanishing. This is the premise of the
-reverse implication, hence the étale Tor bound. -/
+/-- Clause (ii): comparison reflects the Tor interval of a bounded-below étale origin. -/
 theorem finiteCoefficient_comparison_reflects_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)

@@ -26,28 +26,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 /-- A locally free rank-one module over the actual completed Z_l coefficient sheaf
 has a derived l-complete underlying constant-coefficient complex in degree zero.
 
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-and `sk-prop-diagonal-tower-limit.proof.md`, completed coefficients;
-Stacks Tags 099L, 099M and 091Q.
-(blueprint: lem-sfb-diagonal-completed-line-complete).
-
-Proof: the completed coefficient sheaf is the inverse limit of the constant
-finite quotient sheaves, with its specified projections. On the pro-etale site,
-the quotient tower of the regular module has no higher inverse-limit terms:
-on the weakly contractible pro-etale basis, finite quotient transitions are
-surjective and the tower is Mittag-Leffler. Thus the degree-zero regular module
-is its derived quotient limit, and its canonical quotient completion unit is
-invertible. For the given locally free line, choose its local trivializations.
-The same conclusion holds after restriction to every member of that cover,
-because each such restriction is the regular completed coefficient module.
-Derived completeness is local, so the given line is complete. Exact restriction
-from constant-ring module sheaves to sheaves of constant-coefficient modules
-identifies the finite reductions and the actual completion unit. The
-principal-ideal criterion then identifies this with vanishing of maps from all
-l-invertible complexes, exactly the assertion here. This applies to the unit
-and also to Tate lines, once their local freeness is supplied separately; it
-uses no invertibility of l on the scheme or compatible roots. For the empty
-scheme all the relevant module and Hom objects are zero. -/
+Source: Stacks Tags 099L, 099M and 091Q. -/
 theorem diagonalCompletedLine_complete (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [IsNoetherian S] [DiagonalTraceLocalizations l S]
     (L : DiagonalCompleted l S) (hL : L.IsFiniteLocallyFreeOfRank 1) :

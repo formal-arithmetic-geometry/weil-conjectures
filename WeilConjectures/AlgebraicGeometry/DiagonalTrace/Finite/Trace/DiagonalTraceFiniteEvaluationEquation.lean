@@ -15,9 +15,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- A finite Ext class realizes an evaluated derived arrow in the two supplied coordinates.
-The definition is the explicit coordinate equation, with no chosen witnesses or extra data.
-Source: exact single and shifted-single comparisons in diagonal trace proof (2).
-(blueprint: def-sfb-diagonal-trace-finite-evaluation-equation). -/
+The definition is the explicit coordinate equation, with no chosen witnesses or extra data. -/
 @[irreducible] def finiteEvaluationEquation
     {C B D : Type*} [Category C] [Category B] [Category D]
     [Abelian C] [Abelian B] [Abelian D]

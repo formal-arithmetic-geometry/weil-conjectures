@@ -193,15 +193,8 @@ open TopCat.Presheaf in
 /-- **The Čech complex of a standard covering is exact.** Let `V` be an affine open of `X`, so
 that `V = Spec A` with `A = Γ(X, V)`, let `f₁, …, fₙ ∈ A` generate the unit ideal, i.e. the basic
 opens `D(fᵢ)` cover `V`, and let `ℱ` be a quasi-coherent `𝒪_X`-module, with `M = ℱ(V)`. Then the
-Čech complex `0 → ∏ᵢ M_{fᵢ} → ∏_{i, j} M_{fᵢfⱼ} → ⋯` of the covering is exact in positive degrees.
-
-This is the ordered Čech complex `TopCat.Presheaf.cechComplex`; exactness of the augmented
-complex in degree `0` is the sheaf condition for `ℱ`. The proof localizes at each `fⱼ`: after
-inverting `fⱼ` the covering contains the whole space and the complex is contractible, so every
-cocycle is killed by a power of each `fⱼ` up to a coboundary, and these powers still generate
-the unit ideal.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+Čech complex `0 → ∏ᵢ M_{fᵢ} → ∏_{i, j} M_{fᵢfⱼ} → ⋯` of the covering is exact in positive
+degrees. -/
 theorem exactAt_cechComplex_basicOpen (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {V : X.Opens} (hV : IsAffineOpen V)
     {n : ℕ} (f : Fin n → Γ(X, V)) (hf : ⨆ i, X.basicOpen (f i) = V) (q : ℕ) :
@@ -237,13 +230,7 @@ theorem exactAt_cechComplex_basicOpen (ℱ : X.Modules)
 
 /-- **Vanishing of cohomology on affine schemes.** Let `X = Spec A` be affine. For every
 quasi-coherent `𝒪_X`-module `ℱ` and every `q > 0` we have `H^q(X, ℱ) = 0`; the vanishing of the
-abelian group `ℱ.H (q + 1)` is expressed as it being a subsingleton.
-
-This is the Čech criterion `TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` applied to the
-affine opens and their standard coverings by basic opens, on which the Čech complex of `ℱ` is
-exact in positive degrees by `exactAt_cechComplex_basicOpen`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `pqf-lem-affine-vanishing`) -/
+abelian group `ℱ.H (q + 1)` is expressed as it being a subsingleton. -/
 theorem subsingleton_H_succ_of_isAffine [IsAffine X] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Subsingleton (ℱ.H (q + 1)) := by

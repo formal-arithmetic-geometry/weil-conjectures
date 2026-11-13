@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 /-! # Natural residue homology after transport to the scheme residue field
 
 Source: Stacks Project, Tags 0098 and 010V.
-(blueprint: new-affine-residue-evaluation-homology-naturality)
 -/
 
 @[expose] public section
@@ -41,17 +40,7 @@ private def restrictionHomologyIso
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The affine cycle quotient agrees naturally with homology after residue evaluation.
-Source: Stacks Project, Tags 0098 and 010V.
-(blueprint: new-affine-residue-evaluation-homology-naturality)
-
-Proof: The kernel hypothesis identifies p with the point of the canonical affine
-chart. Its prime residue field and the scheme residue field are canonically
-isomorphic. The natural scalar-transport comparison identifies extension to the
-prime residue field followed by restriction along that isomorphism with extension
-by section evaluation. Restriction preserves homology. Compose its natural
-homology comparison, the natural scalar-transport comparison of complexes, and
-the quotient-to-homology comparison. Naturality of these factors gives the
-equation for every complex map. Perfectness is not required. -/
+Source: Stacks Project, Tags 0098 and 010V. -/
 theorem affine_residue_evaluation_homology_naturality
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]

@@ -10,8 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # The representative equation for derived reduction comparisons
 
-Source: Stacks Project, Tags 06YS and 06YY
-(blueprint: def-weil-pbc-derived-reduction-comparison-formula).
+Source: Stacks Project, Tags 06YS and 06YY.
 
 The predicate records the ordinary comparison transported through the two specified
 reduction counits and the localization factors of exact pullback. Naming the common
@@ -26,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The counit-normalized comparison on a cochain representative.
-Source: Stacks Project, Tags 06YS and 06YY
-(blueprint: def-weil-pbc-derived-reduction-comparison-formula). -/
+Source: Stacks Project, Tags 06YS and 06YY. -/
 def DerivedReductionComparisonFormula
     {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
     [Abelian B] [Abelian C] [Abelian D] [Abelian E]

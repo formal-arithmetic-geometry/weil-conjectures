@@ -61,9 +61,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-! # Scalar realization for an arbitrary commutative condensed ring
 
 Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, Definition 3.5
-and formula (3.1) (blueprint: def-zl-condensed-scalar-realization).
-The scalar map is the constant-sheaf adjunction counit on the point. Derived extension
-uses the universal K-flat construction, then the section-module equivalence and p_X^*.
+and formula (3.1). The scalar map is the constant-sheaf adjunction counit on the point. Derived
+extension uses the universal K-flat construction, then the section-module equivalence and p_X^*.
 -/
 
 @[expose] public noncomputable section
@@ -82,17 +81,17 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The reconstructed ring sheaf has the original sections, restrictions and multiplication.
-Source: HRS, Definition 3.5 (blueprint: def-zl-condensed-scalar-realization). -/
+Source: HRS, Definition 3.5. -/
 abbrev condensedSectionRing :=
   InternalAbelianSheafModule.sectionRingSheaf (coherentTopology Profinite.{u}) Λ
 
 /-- The underlying scalar ring Γ(*,Λ), with the multiplication inherited from Λ.
-Source: HRS, Definition 3.5 (blueprint: def-zl-condensed-scalar-realization). -/
+Source: HRS, Definition 3.5. -/
 abbrev condensedScalarRing : CommRingCat.{u + 1} :=
   (condensedSectionRing Λ).obj.obj (op (⊤_ Profinite.{u}))
 
 /-- The canonical constant-section map, the counit of constant sheaf versus sections at *.
-Source: HRS, Definition 3.5 (blueprint: def-zl-condensed-scalar-realization). -/
+Source: HRS, Definition 3.5. -/
 def condensedScalarMap :
     realizationRing (coherentTopology Profinite.{u}) (condensedScalarRing Λ) ⟶
       condensedSectionRing Λ :=
@@ -100,14 +99,14 @@ def condensedScalarMap :
     terminalIsTerminal).counit.app (condensedSectionRing Λ)
 
 /-- The standard localization size for constant scalar module sheaves.
-Source: Stacks 05RU (blueprint: def-zl-condensed-scalar-realization). -/
+Source: Stacks 05RU. -/
 instance condensedScalarConstantHasDerived :
     HasDerivedCategory.{u + 2}
       (realizationModules (coherentTopology Profinite.{u}) (condensedScalarRing Λ)) :=
   HasDerivedCategory.standard _
 
 /-- The standard localization size for sectionwise condensed module sheaves.
-Source: Stacks 05RU (blueprint: def-zl-condensed-scalar-realization). -/
+Source: Stacks 05RU. -/
 instance condensedScalarSectionHasDerived :
     HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1}
       ((sheafCompose (coherentTopology Profinite.{u})
@@ -117,8 +116,7 @@ instance condensedScalarSectionHasDerived :
 
 /-- The derived coefficient extension, fixed by its universal counit and K-flat computation.
 Its universal property determines the selected object up to counit-compatible isomorphism.
-Source: HRS, formula (3.1), and Stacks 06YY
-(blueprint: def-zl-condensed-scalar-realization). -/
+Source: HRS, formula (3.1), and Stacks 06YY. -/
 def condensedScalarExtensionModel :
     SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
       (condensedScalarMap Λ) :=

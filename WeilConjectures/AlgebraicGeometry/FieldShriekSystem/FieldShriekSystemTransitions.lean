@@ -14,10 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient-system comparison laws
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-transitions).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -55,9 +51,7 @@ attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 attribute [local irreducible] restrictionEvaluation supportEvaluation comparison
 
 /-- Quotient restriction in the actual ell-power sequence model. Its comparison
-with constant-ring restriction is fixed to identity on every section.
-Source: blueprint (2), input transitions (proof step 8)
-(blueprint: def-sp-field-shriek-system-transitions). -/
+with constant-ring restriction is fixed to identity on every section. -/
 structure QuotientRestriction (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m ≤ n) where
   ordinary : SemilinearSections.res
       (SemilinearSections.coefficientMap (Scheme.ProEt.topology T)
@@ -75,8 +69,7 @@ structure QuotientRestriction (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m 
 
 /-- Reduction is the actual derived strict transition transposed under finite scalar
 adjunction, after exact localization of the section-identity restriction comparison.
-Source: blueprint (2), proof step 8; Zheng 4.1
-(blueprint: def-sp-field-shriek-system-transitions). -/
+Source: Zheng 4.1. -/
 @[irreducible] def systemReduction (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m ≤ n)
     (q : QuotientRestriction P E T v) (N : SpTowerShriek.D P.coefficients.l E.val T) :
     (scalarExtensionFunctor (SpTowerCalculus.quotient P.coefficients.l E.val v) T).obj
@@ -95,9 +88,7 @@ Source: blueprint (2), proof step 8; Zheng 4.1
           (Functor.mapDerivedCategoryNatIso q.ordinary).hom.app
             ((SpTowerShriek.Ev P.coefficients.l E.val T m).obj N))
 
-/-- Source evaluation coordinates of b use the specified scalar and support maps.
-Source: blueprint (2), evaluation of the source (proof steps 3 and 8)
-(blueprint: def-sp-field-shriek-system-transitions). -/
+/-- Source evaluation coordinates of b use the specified scalar and support maps. -/
 @[irreducible] def comparisonSource (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (e : EvaluationLaw P D c) {E F : Index P} (h : E ≤ F)
     (n : ℕ) (M : SpTowerShriek.D P.coefficients.l E.val X) :=
@@ -106,9 +97,7 @@ Source: blueprint (2), evaluation of the source (proof steps 3 and 8)
     (scalarExtensionFunctor ((D.coefficients E F h).quotient n) Y).mapIso
       ((supportEvaluation P D E c n (e.supportCoordinates E n)).app M)
 
-/-- Target evaluation coordinates of b retain the actual scalar/open/proper word.
-Source: blueprint (2), evaluation of the target (proof steps 3 and 8)
-(blueprint: def-sp-field-shriek-system-transitions). -/
+/-- Target evaluation coordinates of b retain the actual scalar/open/proper word. -/
 @[irreducible] def comparisonTarget (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (e : EvaluationLaw P D c) {E F : Index P} (h : E ≤ F)
     (n : ℕ) (M : SpTowerShriek.D P.coefficients.l E.val X) :=

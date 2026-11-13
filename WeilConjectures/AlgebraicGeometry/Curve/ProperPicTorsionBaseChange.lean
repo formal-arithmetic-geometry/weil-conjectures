@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 
 /-!
 # Proper Picard torsion under algebraically closed extension
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree
-one (blueprint: lem-sc-proper-pic-torsion-base-change).
 -/
 
 @[expose] public section
@@ -30,19 +27,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in
-degree one (blueprint: lem-sc-proper-pic-torsion-base-change).
-
-Proof: the degree map takes values in the torsion-free group of integers, so an n-torsion
-line bundle has degree zero. The representing Jacobian identifies degree-zero line bundles
-with rational points and respects the group law. Jacobian base change identifies the
-Jacobian of the base-changed curve with the scalar extension of the original Jacobian,
-and its classifying-morphism equation identifies Picard pullback with extension of points.
-As n is invertible, Jacobian n-torsion is finite etale. Over an algebraically closed field
-such a scheme is a disjoint union of rational points; extending the field preserves exactly
-these points. Thus the extension map on Jacobian n-torsion is bijective, and so is the map
-on Picard n-torsion. In particular n = 1 gives the bijection of singleton identity groups.
-No choice of bases or comparison of cardinalities is used to identify the canonical map. -/
+/-- For a proper smooth connected curve `C` over an algebraically closed field `k` and an extension
+`K` of algebraically closed fields, with `n` invertible in `k`, Picard pullback along `C_K → C` is a
+bijection on `n`-torsion classes. -/
 theorem IsConnectedCurve.proper_pic_torsion_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

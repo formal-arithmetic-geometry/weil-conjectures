@@ -18,8 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Affine Picard torsion under extension of algebraically closed fields
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case.
 -/
 
 @[expose] public section
@@ -73,31 +71,7 @@ private theorem quotient_torsion_comparison
     rw [← hc, hzt, ha]
 
 /-- Pullback on the `n`-torsion of the Picard group of a smooth connected affine curve
-is bijective under extension of algebraically closed fields.
-
-Source:
-literature/blueprint/master/blueprint/sec-curve-estimates/sbc-thm-algebraically-closed-invariance/
-_section.md, affine case (blueprint: lem-sc-affine-picard-torsion-base-change).
-
-Proof: Choose a smooth proper connected compactification by lemma-proper-smooth-model--1.
-Its boundary cannot be empty: otherwise the open immersion is an isomorphism, making the
-original curve proper and affine; lem-sc-proper-affine-finite contradicts its dimension one.
-Choose a closed boundary point using the closedness of every boundary point. Apply
-lem-sc-pic-affine-base-change-compatibility to get presentations G/Λ and G'/Λ' of the two
-Picard groups, compatible with restriction and pullback, and an isomorphism Λ ≃* Λ'.
-The compactification's degree-zero Picard group is n-divisible by
-lem-sc-pic-proper-ntorsion-div. The comparison j on its degree-zero subgroup is injective,
-and lifts n-torsion elements, by lem-sc-piczero-torsion-base-change.
-For injectivity on the quotients, lift two classes to a and a'. Equality of their images
-means j(a/a') belongs to Λ'. Lift it to l in Λ; injectivity gives a/a'=l, so the original
-classes agree. For surjectivity, lift a torsion class to y in G'. Then y^n belongs to Λ'.
-Lift it to l in Λ, choose z in G with z^n=l, and lift the n-torsion element y/j(z) to t in G.
-Now j(z*t)=y and (z*t)^n=l, so its quotient class is torsion and maps to the prescribed
-class. This representative argument is proved in the private quotient_torsion_comparison
-lemma and does not require the full torsion short exact sequence. Finally, pullback along
-hπ.isoPullback is bijective on torsion, with inverse pullback along its inverse. Functoriality
-and hπ.isoPullback_hom_fst identify the composite with the specified Pic.map π.
-For n=1 both torsion types are singletons; n=0 is excluded by the given hypotheses. -/
+is bijective under extension of algebraically closed fields. -/
 theorem affine_picard_torsion_base_change
     (k k' : Type u) [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

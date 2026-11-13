@@ -31,8 +31,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- The higher-degree component of dense-open cohomology comparison.
-Source: Stacks Project, Tag 0GJA. (blueprint: lem-pbc-s2-dense-open-high-cohomology-high)
--/
+Source: Stacks Project, Tag 0GJA. -/
 theorem dense_open_high_cohomology_high (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

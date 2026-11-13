@@ -45,9 +45,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The published finite Cartier map equals the generic finite coordinate composite.
-This definition names the explicit equation and asserts no property.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: def-sfb-diagonal-trace-finite-cartier-coordinate-map-equation). -/
+This definition names the explicit equation and asserts no property. -/
 @[irreducible] def finiteCartierCoordinateMapEquation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

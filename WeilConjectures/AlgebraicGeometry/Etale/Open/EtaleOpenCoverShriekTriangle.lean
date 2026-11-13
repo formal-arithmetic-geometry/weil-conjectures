@@ -22,23 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 
-/-- The absolute extension-by-zero triangle of a two-open cover.
-
-Source: Stacks Project, Tag 0GKK, `lemma-mayer-vietoris-shriek`.
-(blueprint: lem-weil-pbc-etale-open-cover-shriek-triangle).
-
-Proof: Choose any cochain representative L of the underlying derived object K.
-The termwise open-cover short exact sequence gives a distinguished triangle
-in the unbounded derived category. Exact restriction and extension by zero
-induce functors on D⁺; their comparison isomorphisms identify the first two
-vertices with the images of the objects displayed in this statement. The
-localization functor and the inclusion D⁺ → D preserve binary biproducts,
-which identifies the middle vertices. Fullness of that inclusion lifts all
-three arrows, using its shift comparison for the last arrow. The lifted
-triangle is distinguished because the fully faithful triangulated inclusion
-reflects distinguished triangles. A bounded-below representative need not
-be chosen: boundedness is already supplied by the identified vertices in D⁺.
--/
+/-- The absolute extension-by-zero triangle of a two-open cover. -/
 theorem exists_distinguished_openCover_lowerShriek
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

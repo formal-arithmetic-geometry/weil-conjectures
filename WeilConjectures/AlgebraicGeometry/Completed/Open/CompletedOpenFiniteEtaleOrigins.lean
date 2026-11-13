@@ -16,7 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-!
 # Finite etale origins after completed-coefficient open extension
 
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof step 2; Stacks 03DI, 09AF
+Source: Stacks 03DI, 09AF
 and 0GL1.
 -/
 

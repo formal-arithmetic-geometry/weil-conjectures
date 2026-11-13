@@ -14,8 +14,7 @@ import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 /-!
 # Inverse image and restriction of the stalk representation
 
-Source: Stacks Project, Tags 03QT, 03SF and 04JQ; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2.
+Source: Stacks Project, Tags 03QT, 03SF and 04JQ.
 -/
 
 @[expose] public section
@@ -24,27 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Tags 03QT, 03SF and 04JQ; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2.
-(blueprint: lem-sc-primary-inverse-image-restriction)
-
-Proof: Write L=Ks^H and b:Spec L -> Spec K. The point of Spec L used by C composes
-with b to the point of Spec K used in i, since both ring maps into Omega factor through
-Ks. The stalk of b^*M at this point is canonically the stalk of M at the composite
-point: pullback of a represented germ uses the base change of its etale neighborhood.
-The comparison is additive, independent of the representative, and natural. For g in
-H choose an extension tau to Omega; it fixes L. On a pulled-back neighborhood, changing
-the pointed lift by tau changes its projection by the same tau. Therefore the stalk
-comparison intertwines C's action with the germ action in haction, not just the
-underlying additive groups. Compose with i to obtain an equivariant integer-linear
-isomorphism from primaryRestrictedModule R to C.functor.obj (b^*M). The supplied
-haction verifies equivariance on represented germs; every stalk element has such a
-representative. The existence of extensions of automorphisms follows by extension to
-an algebraic closure inside Omega and then to Omega. Full faithfulness and the unit
-of C give b^*M isomorphic to C.inverse.obj (primaryRestrictedModule R). Apply
-pullback along e.inv and the inverse-image composition isomorphism to get the stated
-comparison. For R=0 the same argument identifies b^*M with zero; no filtration or
-prime-field quotient is used. -/
+/-- Source: Stacks Project, Tags 03QT, 03SF and 04JQ. -/
 theorem primary_inverseImage_restriction
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

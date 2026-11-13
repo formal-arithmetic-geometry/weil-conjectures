@@ -23,9 +23,7 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # The tensor normalization of the etale sum right adjoint
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
-lem-pur-co-smooth-etale-locality.proof.md, Step 1; Stacks Project Tag 0GKF
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor).
+Source: Stacks Project Tag 0GKF.
 
 The comparison is the existing derived graph comparison. The tensor arrow uses the
 inverse of the specified compactification projection, transported to exact pullback.
@@ -549,8 +547,7 @@ private theorem tensorProjectionCompatibility
   exact (Category.comp_id q).symm
 
 /-- The conjugate of the inverse canonical graph comparison for a fixed compactification.
-Source: blueprint Step 1; Stacks Tag 0GKF
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor). -/
+Source: Stacks Tag 0GKF. -/
 noncomputable def etaleTensorRho
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -564,8 +561,7 @@ noncomputable def etaleTensorRho
 attribute [local irreducible] etaleTensorRho
 
 /-- The coefficient normalization eta is rho at the unit followed by coefficient pullback.
-Source: blueprint Step 1; Stacks Tag 0GKF
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor). -/
+Source: Stacks Tag 0GKF. -/
 noncomputable def etaleTensorEta
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -577,8 +573,7 @@ noncomputable def etaleTensorEta
 attribute [local irreducible] etaleTensorEta
 
 /-- The specified compactification projection, with exact rather than left-derived pullback.
-Source: Stacks Tag 0GKF, support-map compatibility (2)
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor). -/
+Source: Stacks Tag 0GKF, support-map compatibility (2). -/
 noncomputable def etaleTensorProjection
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (e : U ⟶ X)
     (c : Compactification e) (M : DerivedCategoryModule A U) (K : DerivedCategoryModule A X) :
@@ -595,13 +590,7 @@ noncomputable def etaleTensorProjection
 attribute [local irreducible] etaleTensorProjection
 
 /-- The specified projection is invertible, including compactifications with nonfinite proper part.
-Source: Stacks Tag 0GKF; blueprint Step 1
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor).
-
-Proof: Support-map compatibility (2) conjugates this arrow by the canonical graph comparison
-to the derived sum projection. The latter is an isomorphism: on sheaves its generator rule
-is distribution over lift-indexed sums, and flat K-flat resolutions and sum totalization
-descend that rule to arbitrary unbounded inputs. Cancel the graph comparison isomorphisms. -/
+Source: Stacks Tag 0GKF. -/
 theorem isIso_etaleTensorProjection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]
@@ -632,8 +621,7 @@ theorem isIso_etaleTensorProjection
       ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)))
 
 /-- The displayed inverse transpose defining tau, as an actual compact-support morphism.
-Source: blueprint Step 1, displayed inverse-transpose formula; Stacks Tag 0GKF
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor). -/
+Source: Stacks Tag 0GKF. -/
 noncomputable def etaleTensorInverseTranspose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]
@@ -658,8 +646,7 @@ noncomputable def etaleTensorInverseTranspose
 attribute [local irreducible] etaleTensorInverseTranspose
 
 /-- The tensor transpose tau under the chosen compact-support adjunction.
-Source: blueprint Step 1, displayed inverse-transpose formula; Stacks Tag 0GKF
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor). -/
+Source: Stacks Tag 0GKF. -/
 noncomputable def etaleTensorTau
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]
@@ -675,33 +662,7 @@ noncomputable def etaleTensorTau
 attribute [local irreducible] etaleTensorTau
 
 /-- Counit characterization and the tensor equality, as maps natural in every unbounded K.
-Source: blueprint Step 1; Stacks Tag 0GKF
-(blueprint: lem-pur-etale-sum-right-adjoint-tensor).
-
-Proof:
-1. Conjugate the inverse graph comparison. The defining mate equation, composed with d,
-   gives ev S(rho) d = epsilon. Conversely the sum-adjunction Hom bijection makes rho
-   the unique natural transformation satisfying this equation. For a : F N -> K, naturality
-   gives J_S(a d_N^{-1}) = J_F(a) rho_K.
-2. At the sheaf level the sum projection sends (s,b) tensor h to (s,b tensor s^*h).
-   Evaluation followed by coefficient multiplication sends both sides of the unit-counit
-   identity to b h. Linearity, tensor universality and sheafification give equality of maps;
-   inverse image is restriction on etale test objects and respects the constant-ring action.
-3. Choose flat-term K-flat representatives. Pullback and sum extension preserve these;
-   sum totalization identifies the projection with the same generator map in every degree.
-   The termwise sum/restriction adjunction descends its evaluation counit. The coefficient
-   unit has degree zero, so the differentials agree. Tensor descent and localization give
-   the unit-counit identity naturally on all unbounded K.
-4. Apply support-map compatibility (2) to replace the inverse specified projection in the
-   inverse transpose q_F of tau. Naturality of d gives q_F d^{-1} as the sum inverse
-   projection followed by (epsilon at the unit) tensor 1 and the left unitor.
-5. Substitute epsilon d^{-1} = ev S(rho) at the unit. Naturality of sum projection moves
-   rho through it. The identity of step 3 reduces the result to ev S of
-   lambda ((eta tensor 1) sym). Signed symmetry and its unit constraint identify this arrow
-   with the right unitor after 1 tensor eta; no Koszul sign is omitted.
-6. Transpose under the sum adjunction, using step 1. This gives tau rho = (1 tensor eta)
-   unitor. Every construction is natural in K, giving the final naturality clause.
--/
+Source: Stacks Tag 0GKF. -/
 theorem etaleSumRightAdjointTensor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]

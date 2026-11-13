@@ -8,9 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.Etale.EtaleDegreeZeroHom
 
 /-! # The two factors of the degree-zero restriction comparison
-
-Source: blueprint vector integration, compatibility with restriction.
-(blueprint: lem-amb-etale-single-restriction-factors).
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +22,7 @@ attribute [local irreducible] _root_.DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor upperStar
 
 /-- The specified degree-zero restriction comparison is its actual two-factor
-construction, without unfolding the derived functors themselves.
-Source: blueprint vector integration, restriction of the degree-zero correspondence.
-(blueprint: lem-amb-etale-single-restriction-factors). -/
+construction, without unfolding the derived functors themselves. -/
 theorem etaleSingleRestrictionIso_eq (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] :
     etaleSingleRestrictionIso A f =

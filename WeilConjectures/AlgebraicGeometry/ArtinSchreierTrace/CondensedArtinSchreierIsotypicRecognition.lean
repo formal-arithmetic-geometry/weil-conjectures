@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierScalars
 import WeilConjectures.Mathlib.CategoryTheory.Conj
 
 /-! # Recognition of condensed character images
-
-Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5, and the finite-torsor
-isotypic argument in `WeilConjectures.SixFunctors.Finite.Isotypic`.
 -/
 
 @[expose] public noncomputable section
@@ -68,9 +65,7 @@ attribute [local irreducible] ProEtale.CondensedRing.upperStar
   ProEtale.CondensedRing.upperStarLowerStarAdjunction
 
 /-- An eigenmap into the direct image of the regular module whose adjoint trivializes
-its domain. Scalars act on the regular coefficient module before direct image.
-Source: finite-cover isotypic descent in blueprint lemma-artin-schreier-character-sheaf Step 5
-(blueprint: lem-fd-as-condensed-isotypic-recognition). -/
+its domain. Scalars act on the regular coefficient module before direct image. -/
 def CondensedEigenmap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (Y : Over X)
@@ -131,20 +126,7 @@ private theorem exists_cover_satisfying
 
 -- Image and covering comparisons involve the concrete condensed module functors.
 /-- A character eigenmap with invertible adjoint identifies its domain locally with the
-image of the averaging projector on a finite etale torsor.
-Source: blueprint lemma-artin-schreier-character-sheaf Step 5, finite-cover eigenfunctions;
-the argument of `Etale.isIso_upperStar_map_comp_factorThruImage_isotypicIdempotent`
-(blueprint: lem-fd-as-condensed-isotypic-recognition).
-
-Proof: equivariance and invertibility of the group order imply that averaging fixes
-φ. Factor φ through the projector image using φ followed by factorThruImage.
-After splitting the finite etale cover, the pushforward is a finite product of regular
-coefficient modules. Transitivity makes a character eigenfunction determined by one
-coordinate: translation carries every other coordinate to that coordinate and χ(a)
-is a unit with inverse χ(-a). Thus evaluation of the image is monic. Its composite
-with the factored φ is the invertible adjoint, so evaluation is also split epic and
-hence invertible. Cancelling it proves that the factored φ is invertible on every
-splitting chart. These charts cover X by surjectivity; the empty base is included. -/
+image of the averaging projector on a finite etale torsor. -/
 theorem condensed_isotypic_recognition
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (Y : Over X)

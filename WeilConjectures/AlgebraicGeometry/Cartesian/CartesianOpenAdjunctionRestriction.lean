@@ -166,13 +166,11 @@ import all WeilConjectures.AlgebraicGeometry.SmoothPurity.FixSiteOpenExchangeShe
 /-!
 # Cartesian open restriction of the specified derived adjunction
 
-Source: blueprint main-20261015, `prop-sf-pf-coherence.proof.md`, compactification
-independence and the following open-factor/counit calculation; Stacks Project,
-Cohomology on Sites, Tag 07A7, and Derived Categories, Tags 0DVC and 0FND
-(blueprint: lem-sf-cartesian-open-adjunction-restriction).
+Source: Stacks Project,
+Cohomology on Sites, Tag 07A7, and Derived Categories, Tags 0DVC and 0FND.
 
 The comparison is the conjugate of the specified inverse open exchange. Hence its
-Hom map is the five-adjunction chain in the node, including the inverse of beta.
+Hom map is the five-adjunction chain, including the inverse of beta.
 All categories are ordinary uncompleted unbounded constant-ring module categories.
 
 ## Main definitions
@@ -200,8 +198,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The specified inverse-image/direct-image adjunction, obtained from the canonical
 constant-section module adjunction by exact inverse image and K-injective direct image.
 This only names the existing construction in the intrinsic finite-coefficient coordinates.
-Source: Stacks Tags 0DVC and 0FND; blueprint compactification-independence calculation
-(blueprint: lem-sf-cartesian-open-adjunction-restriction). -/
+Source: Stacks Tags 0DVC and 0FND. -/
 def sfCartesianOpenPullPushAdjunction (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     sfIntrinsicDerivedPullback A f ⊣ proEtaleConstantDerivedDirectImage f A :=

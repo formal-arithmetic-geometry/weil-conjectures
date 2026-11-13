@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalUniformizerLocalEndpoints
 
 /-! # Normalization predicates for the model Chern adjunct
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +37,7 @@ variable {B R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {A : Type (u + 1)} [CommRing A] [Finite A]
   {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0} {hY : IsUnit (N : Γ(Y, ⊤))}
 
-/-- The prescribed four endpoint composites, with an arbitrary final arrow.
-Source: coefficient changes (1), functorial transport of adjuncts.
-(blueprint: def-diagonal-uniformizer-adjunct-conditions). -/
+/-- The prescribed four endpoint composites, with an arbitrary final arrow. -/
 @[irreducible]
 def ChernCoefficientDiagram.TransportTo
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
@@ -76,9 +72,7 @@ end AbstractTransport
 
 namespace UniformizerChernNormalizationData
 
-/-- The local arrow has its prescribed whole-system root-limit normalization.
-Source: trace proof (1), coefficient and root limit comparisons.
-(blueprint: def-diagonal-uniformizer-adjunct-conditions). -/
+/-- The local arrow has its prescribed whole-system root-limit normalization. -/
 @[irreducible]
 def LocalNormalized (s : UniformizerChernNormalizationData l Y)
     (theta : SpTowerClasses.unit (ProjectiveLine Y)
@@ -93,9 +87,7 @@ def LocalNormalized (s : UniformizerChernNormalizationData l Y)
       s.tq.coefficientsX.unitMap l (ULift.{u} (Padic l)) s.tq.LX ≫
         s.tq.LX.R.map (s.tq.restrictionX.F.mapDerivedCategory.map theta)
 
-/-- The completed arrow has the prescribed canonical system-Chern normalization.
-Source: trace proof (1), the actual model adjunct and its limit comparison.
-(blueprint: def-diagonal-uniformizer-adjunct-conditions). -/
+/-- The completed arrow has the prescribed canonical system-Chern normalization. -/
 @[irreducible]
 def AdjunctNormalized (s : UniformizerChernNormalizationData l Y)
     (c : DiagonalTrace.completedUnit l Y ⟶
@@ -107,9 +99,7 @@ def AdjunctNormalized (s : UniformizerChernNormalizationData l Y)
 
 end UniformizerChernNormalizationData
 
-/-- A local positive class and its completed adjunct, with their actual normalizations.
-Source: coefficient changes (1), the local class and canonical model adjunct.
-(blueprint: def-diagonal-uniformizer-adjunct-conditions). -/
+/-- A local positive class and its completed adjunct, with their actual normalizations. -/
 structure NormalizedAdjunctPair (s : UniformizerChernNormalizationData l Y) where
   z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
       (DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧
@@ -120,9 +110,7 @@ structure NormalizedAdjunctPair (s : UniformizerChernNormalizationData l Y) wher
       (SpTowerClasses.hyperplanePic Y)) z
   adjunct_normalized : s.AdjunctNormalized l Y c
 
-/-- Transport of a normalized pair through the four specified coefficient comparisons.
-Source: coefficient changes (1), adjunction of the local coefficient image.
-(blueprint: def-diagonal-uniformizer-adjunct-conditions). -/
+/-- Transport of a normalized pair through the four specified coefficient comparisons. -/
 @[irreducible]
 def NormalizedAdjunctPair.Transported
     (s : UniformizerChernNormalizationData l Y) (p : NormalizedAdjunctPair l Y s) : Prop :=

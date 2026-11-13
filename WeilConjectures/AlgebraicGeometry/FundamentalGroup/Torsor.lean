@@ -156,9 +156,7 @@ lemma eq_of_fiber_map_vaddHom_eq (x : (fiber s).obj t.toFiniteEtale) {m n : M}
   have := (sigmaι_eq_iff (fun _ : M ↦ t.P) m n _ _).mp h3
   exact congrArg Sigma.fst this
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-`M` acts simply transitively on the geometric fibre `P_s` of an `M`-torsor `P`. -/
+/-- `M` acts simply transitively on the geometric fibre `P_s` of an `M`-torsor `P`. -/
 lemma existsUnique_fiber_map_vaddHom (x y : (fiber s).obj t.toFiniteEtale) :
     ∃! m, (fiber s).map (t.vaddHom m) x = y := by
   obtain ⟨m, hm⟩ := t.exists_fiber_map_vaddHom s x y
@@ -213,9 +211,7 @@ lemma monodromyFun_eq_iff (g : G) (x : (fiber s).obj t.toFiniteEtale) (m : M) :
 
 variable [TopologicalSpace M] [DiscreteTopology M]
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-The monodromy character `f_P : π₁(Y, s) → M` of an `M`-torsor `P`, characterised by
+/-- The monodromy character `f_P : π₁(Y, s) → M` of an `M`-torsor `P`, characterised by
 `g • p = f_P(g) +ᵥ p` for `p` in the geometric fibre `P_s`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.fiber_map_vaddHom_monodromy`): a continuous
 homomorphism, as the stabilisers of the points of `P_s` are open. -/
@@ -243,9 +239,7 @@ noncomputable def monodromy : G →ₜ* Multiplicative M where
     rw [this]
     exact (continuous_id.smul continuous_const).isOpen_preimage _ (isOpen_discrete _)
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-The defining property of the monodromy character: `g • p = f_P(g) +ᵥ p`. -/
+/-- The defining property of the monodromy character: `g • p = f_P(g) +ᵥ p`. -/
 lemma fiber_map_vaddHom_monodromy (g : G) (x : (fiber s).obj t.toFiniteEtale) :
     (fiber s).map (t.vaddHom (t.monodromy s G g).toAdd) x = g • x :=
   t.fiber_map_vaddHom_monodromyFun s G g x
@@ -255,9 +249,7 @@ lemma monodromy_eq_iff (g : G) (x : (fiber s).obj t.toFiniteEtale) (m : M) :
   rw [← t.monodromyFun_eq_iff s G g x]
   exact ⟨fun h ↦ congrArg Multiplicative.toAdd h, fun h ↦ congrArg Multiplicative.ofAdd h⟩
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-Isomorphic torsors have the same monodromy character. -/
+/-- Isomorphic torsors have the same monodromy character. -/
 lemma monodromy_eq_of_isIsomorphic {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) :
     t₁.monodromy s G = t₂.monodromy s G := by
   obtain ⟨φ, hπ, hv⟩ := h
@@ -284,11 +276,7 @@ variable [ConnectedSpace Y] (G : Type u) [Group G] [TopologicalSpace G] [IsTopol
   [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
   [TopologicalSpace M] [DiscreteTopology M]
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-Torsors with the same monodromy character are isomorphic: matching the points `m +ᵥ p₁` and
-`m +ᵥ p₂` of the geometric fibres is an isomorphism of `π₁(Y, s)`-sets commuting with `M`, so
-it comes from an isomorphism of finite étale `Y`-schemes by the Galois correspondence. -/
+/-- Torsors with the same monodromy character are isomorphic. -/
 lemma isIsomorphic_of_monodromy_eq {t₁ t₂ : EtaleTorsor M Y}
     (h : t₁.monodromy s G = t₂.monodromy s G) : t₁.IsIsomorphic t₂ := by
   let p₁ := (t₁.nonempty_fiber s).some
@@ -331,12 +319,7 @@ lemma isIsomorphic_of_monodromy_eq {t₁ t₂ : EtaleTorsor M Y}
       hΦ, hvadd]
   exact congrArg (fun f ↦ f.hom.left) this
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-Every continuous homomorphism `f : π₁(Y, s) → M` is the monodromy character of a torsor:
-`M` with `π₁(Y, s)` acting by `g • a = f(g) + a` is a finite continuous `π₁(Y, s)`-set on which
-the translations act by automorphisms, and the corresponding finite étale `Y`-scheme with the
-induced action of `M` is a torsor. -/
+/-- Every continuous homomorphism `f : π₁(Y, s) → M` is the monodromy character of a torsor. -/
 lemma exists_monodromy_eq (φ : G →ₜ* Multiplicative M) :
     ∃ t : EtaleTorsor M Y, t.monodromy s G = φ := by
   let V := Shrink.{u} M
@@ -422,9 +405,7 @@ lemma exists_monodromy_eq (φ : G →ₜ* Multiplicative M) :
   change β ((fiber s).map (T (φ g).toAdd) x) = β (g • x)
   rw [hβT, hβsmul, hsmul]
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-The monodromy character `P ↦ f_P` is a bijection between isomorphism classes of `M`-torsors
+/-- The monodromy character `P ↦ f_P` is a bijection between isomorphism classes of `M`-torsors
 over `Y` and continuous homomorphisms `π₁(Y, s) → M`. -/
 theorem bijective_monodromy :
     Function.Bijective (Quotient.lift (s := EtaleTorsor.setoid M Y) (fun t ↦ t.monodromy s G)
@@ -436,18 +417,14 @@ theorem bijective_monodromy :
   · obtain ⟨t, rfl⟩ := exists_monodromy_eq s G φ
     exact ⟨⟦t⟧, rfl⟩
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-Torsors with the same class in `H¹(Y_ét, M)` under the canonical class map
+/-- Torsors with the same class in `H¹(Y_ét, M)` under the canonical class map
 `AlgebraicGeometry.Scheme.EtaleTorsor.classH1` have the same monodromy character. -/
 theorem monodromy_eq_of_classH1_eq {t₁ t₂ : EtaleTorsor M Y}
     (h : classH1 M Y ⟦t₁⟧ = classH1 M Y ⟦t₂⟧) : t₁.monodromy s G = t₂.monodromy s G :=
   monodromy_eq_of_isIsomorphic s G (Quotient.exact (injective_classH1 h))
 
 variable (M) in
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-**`H¹(Y_ét, M) = Hom_cont(π₁(Y, s), M)`.** For a connected scheme `Y` with geometric point `s`,
+/-- **`H¹(Y_ét, M) = Hom_cont(π₁(Y, s), M)`.** For a connected scheme `Y` with geometric point `s`,
 `G = π₁(Y, s)` the étale fundamental group and `M` a finite abelian group, the canonical bijection
 `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`: the inverse of the class bijection
 `AlgebraicGeometry.Scheme.EtaleTorsor.classH1Equiv` followed by the monodromy character
@@ -465,15 +442,12 @@ theorem sheafHEquivContinuousMonoidHom_classH1 (t : EtaleTorsor M Y) :
     Equiv.symm_apply_apply]
   rfl
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1.
-
-Let `Y` be a connected scheme with geometric point `s`, let `G = π₁(Y, s)` be the étale
-fundamental group (a fundamental group of the fibre functor on finite étale `Y`-schemes) and
-let `M` be a finite abelian group. Then the canonical bijections `c = classH1Equiv` from torsor
-classes to `H¹(Y_ét, M)` and `e = sheafHEquivContinuousMonoidHom` from `H¹(Y_ét, M)` to
-`Hom_cont(π₁(Y, s), M)` satisfy: the class of a torsor vanishes exactly when the torsor has a
-section, and the character `e(c(P))` describes the action of `π₁(Y, s)` on the geometric fibre:
-`g • p = e(c(P))(g) +ᵥ p`. This statement forgets the two maps. -/
+/-- Let `Y` be a connected scheme with geometric point `s`, let `G = π₁(Y, s)` be the étale
+fundamental group and let `M` be a finite abelian group. Then the canonical bijections
+`c = classH1Equiv` from torsor classes to `H¹(Y_ét, M)` and `e = sheafHEquivContinuousMonoidHom`
+from `H¹(Y_ét, M)` to `Hom_cont(π₁(Y, s), M)` satisfy: the class of a torsor vanishes exactly when
+the torsor has a section, and the character `e(c(P))` describes the action of `π₁(Y, s)` on the
+geometric fibre: `g • p = e(c(P))(g) +ᵥ p`. -/
 theorem exists_equiv_sheafH_continuousMonoidHom :
     ∃ (c : Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
         ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj

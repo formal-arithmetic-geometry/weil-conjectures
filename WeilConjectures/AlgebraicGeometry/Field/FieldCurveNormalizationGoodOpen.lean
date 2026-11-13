@@ -48,20 +48,7 @@ set_option backward.isDefEq.respectTransparency false in
 finite and surjective, and is a thickening over a dense open of the target. The inverse
 image of that open is dense in each normalized component.
 
-Source: Stacks Project, Tag 0GK7, last paragraph; Varieties, Tag 0BXR.
-(blueprint: lem-weil-pbc-field-curve-normalization-good-open)
-
-Proof: Factor each integral component through the reduction. The reduction is a
-homeomorphism, so these maps still enumerate its distinct irreducible components.
-Each component normalization is finite and is an isomorphism on a dense open.
-The dense-open component-modifications lemma gives a dense open in the reduction
-where their coproduct is an isomorphism. Transport that open through the reduction
-homeomorphism. Over it the original map is the composite of an isomorphism and a
-surjective closed immersion. Finiteness follows componentwise. Surjectivity follows
-from the component cover and surjectivity of normalization. Finally every normalized
-component maps openly onto its component on the isomorphism locus, so the inverse
-image of the chosen dense open is a nonempty open in an integral scheme, hence dense.
--/
+Source: Stacks Project, Tag 0GK7, last paragraph; Varieties, Tag 0BXR. -/
 theorem field_curve_normalization_good_open
     {k : Type u} [Field k] (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] (n : ℕ) (C Y : Fin n → Scheme.{u})

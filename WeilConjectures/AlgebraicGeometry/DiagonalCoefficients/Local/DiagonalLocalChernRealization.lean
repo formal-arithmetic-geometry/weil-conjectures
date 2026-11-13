@@ -21,9 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The completed local class is fixed by the entire restricted Chern system.
-Source: diagonal trace proof (1), coefficient and root-limit comparisons.
-(blueprint: def-sfb-diagonal-local-chern-realization). -/
+/-- The completed local class is fixed by the entire restricted Chern system. -/
 @[irreducible]
 def ModelLocalChernNormalized (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -39,9 +37,7 @@ def ModelLocalChernNormalized (l : ℕ) [Fact l.Prime]
         (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX
           (Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S))))
 
-/-- Realize an actual local completed arrow using the specified unit and line maps.
-Source: diagonal coefficient changes (1).
-(blueprint: def-sfb-diagonal-local-chern-realization). -/
+/-- Realize an actual local completed arrow using the specified unit and line maps. -/
 @[irreducible]
 def CompletedRealization.localChern (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X)
@@ -56,9 +52,7 @@ def CompletedRealization.localChern (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     infer_instance
   inv (e.singleUnit l X) ≫ e.F.mapDerivedCategory.map z ≫ e.shiftedLine l X
 
-/-- The canonical adjunct of a local class, transported to a specified derived model.
-Source: diagonal coefficient changes (3), the normalized exchange mate.
-(blueprint: def-sfb-diagonal-local-chern-realization). -/
+/-- The canonical adjunct of a local class, transported to a specified derived model. -/
 @[irreducible]
 def modelLocalAdjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

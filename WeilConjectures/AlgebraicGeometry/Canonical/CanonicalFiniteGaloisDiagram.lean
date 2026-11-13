@@ -32,7 +32,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicFiberFunctors
 /-! # Canonical finite-level Galois actions on integral stalk towers
 
 Source: Weil II (1.1.1) b), (1.1.6); Stanford L19, Proposition 1.1.9.
-(blueprint: new-e7-canonical-finite-galois-diagram).
 -/
 
 @[expose] public section

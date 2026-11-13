@@ -49,31 +49,7 @@ private def natTotalSymmetry :
 /-- The fixed coefficient augmentation extends to a quasi-isomorphism from the
 lifted ordinary unit Cech complex. No covering or compactness assumption is needed.
 Source: Stacks Project, Theorem 59.22.4 (Tag 03P2), separated affine intersections;
-Lemma 20.11.2 (Tag 01EQ), the beta augmentation, and Homology Lemma 12.25.4.
-(blueprint: lem-pbc-additive-cech-beta-quasi-iso)
-
-Proof: Forget the scalars of the ordinary unit Cech complex and apply ULift.
-For every tuple of opens the inverse of restrictFunctorGamma identifies unit
-sections with functions on the corresponding open subscheme. These maps commute
-with restrictions, including the structural scalar restriction along toSpecGamma.
-Since the tuple index sets are finite, forgetting scalars and ULift commute with
-these products. Thus this identifies the lifted complex with the Cech complex of
-etaleAdditiveSheaf restricted to opens, with exactly the coordinates displayed
-in additiveCechBeta. Apply the resolution augmentation into I^0 on every tuple.
-Naturality makes these maps commute with the alternating horizontal differential;
-the augmentation followed by the vertical differential is zero. Inclusion into
-bidegree (n,0) therefore yields a chain map b with the displayed components.
-Each tuple intersection is affine by hU (categorical products of opens agree with
-their infima). Positive derived evaluation of the additive structure sheaf there
-vanishes by affine quasi-coherent acyclicity, while degree zero is evaluation of
-the sheaf itself. Products of abelian groups are exact, so every augmented
-vertical column is a resolution. The first-quadrant augmentation comparison,
-applied after exchanging indices, makes b a quasi-isomorphism. This does not use
-exactness of augmented horizontal rows or a covering condition. For degree zero
-it is the kernel computation of the resolution. Empty tuple families give zero
-complexes; empty intersections have zero sections; repeated opens cause no change.
-The component equation determines b uniquely, so no arbitrary existence witness
-is used as data in a definition. -/
+Lemma 20.11.2 (Tag 01EQ), the beta augmentation, and Homology Lemma 12.25.4. -/
 theorem exists_additiveCech_beta_quasiIso
     (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]
     (U : ι → X.Opens)

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupp
 
 /-! # Finite etale-local cohomology of the successor coefficient quotient
 
-Source: Stacks Project, Tags 094I, 094H and 09C2
-(blueprint: lem-weil-pbc-finite-quotient-finite-module-cohomology).
+Source: Stacks Project, Tags 094I, 094H and 09C2.
 -/
 
 @[expose] public noncomputable section
@@ -31,35 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option linter.unusedVariables false in
 /-- The successor quotient has bounded finite etale-local cohomology. This
 statement constructs only local models of individual cohomology sheaves, not a
-complex model or any differentials.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I) and
-lemma-locally-constant-tensor (094H); proetale.tex,
-lemma-describe-constructible-complexes (09C2).
-(blueprint: lem-weil-pbc-finite-quotient-finite-module-cohomology).
-
-Proof: intersect the residue and previous-level etale covers and restrict the
-specified derived isomorphisms to this common refinement. Resolve M by a flat-term
-K-flat complex. Tensor the short exact coefficient sequence with terms
-I^(n+1)/I^(n+2), A/I^(n+2), and A/I^(n+1). Flatness gives a short exact sequence
-of complexes. Balancing and the two coefficient compatibility squares identify
-its kernel with the perfect residue model tensored over A/I with the first,
-finite A/I-module, and identify the other two terms with the specified actual
-successor and previous reductions. The residue model is termwise projective, so
-this ordinary tensor computes derived tensor and is zero outside [a,b]. Its
-cohomology modules are finite, since the coefficient ring is finite Noetherian.
-The previous perfect model has the same bounded finite cohomology property.
-The long exact cohomology sequence gives vanishing for the middle term outside
-[a,b]. Kernels, cokernels and extensions of finite locally constant coefficient
-modules are finite locally constant. For etale locality, finite constant module
-sheaves descend along the finite-coefficient etale/pro-etale comparison; exact
-comparison and its bounded-below full faithfulness preserve these kernels,
-cokernels and extension classes. Thus each middle cohomology sheaf is etale
-locally constant with finite module values. Exact slice restriction and
-composition of the covering refinements give the asserted descriptions on every
-chart over V. Coefficient identification by φ supplies exactly the displayed
-module realizations. Empty charts have zero cohomology, with zero module value;
-for a zero quotient ring every term is zero. -/
+complex model or any differentials. -/
 theorem finiteQuotient_finiteModule_cohomology_succ
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

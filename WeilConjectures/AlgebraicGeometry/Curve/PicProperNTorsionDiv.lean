@@ -18,25 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
-/-- Degree-zero Picard divisibility for a proper smooth curve.
-Source: blueprint `corollary-torsion-jacobian-field-extension`, the Jacobian calculation.
-(blueprint: lem-sc-pic-proper-ntorsion-div)
-
-Proof in words: Smoothness gives local Noetherianity and regularity, so connectedness
-makes C integral. Over the algebraically closed (hence separably closed) field,
-connectedness gives geometric connectedness; smoothness then gives geometric
-irreducibility and geometric reducedness, hence geometric integrality. The dimension-one
-hypothesis and smoothness give smooth relative dimension one. Jacobian representability
-therefore applies to the proper curve and identifies its degree-zero Picard subgroup
-with the rational points of a proper, smooth, geometrically integral commutative group
-scheme J. These properties make J an abelian variety. The subgroup used by the Jacobian
-is the kernel of the degree homomorphism, whose underlying set is f.picZero.
-The hypothesis `(n : k) ≠ 0` excludes n = 0, hence n is positive. Clause (d) of the
-abelian-variety estimate says the nth-power map on the Jacobian's rational points is
-surjective. For a degree-zero class L, take an nth root of its image in the Jacobian and
-transport that root back along the group equivalence. It is a degree-zero class M;
-the homomorphism property and injectivity of the equivalence give M ^ n = L.
-For n = 1 one can take M = L. -/
+/-- Degree-zero Picard divisibility for a proper smooth curve: if `n` is nonzero in the
+algebraically closed field `k`, every class in `f.picZero` is the `n`th power of a class in
+`f.picZero`. -/
 theorem Scheme.Hom.pic_proper_ntorsion_div
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

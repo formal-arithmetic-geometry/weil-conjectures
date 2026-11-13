@@ -42,9 +42,8 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 
 /-! # Detection of finite coefficient classes on the integral generator
 
-Source: diagonal-tower trace (1), scalar Kummer normalization; the constant-module
+Source: the constant-module
 class comparison in Stacks 03FD.
-(blueprint: lem-sfb-finite-quotient-derived-detection).
 -/
 
 @[expose] public noncomputable section
@@ -87,25 +86,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Forgetting coefficients and evaluating on the integral generator detects derived
 arrows out of the regular finite coefficient sheaf, with any finite-module target.
 
-Source: diagonal-tower trace (1), constants/scalar-extension adjunction; Stacks 03FD.
-(blueprint: lem-sfb-finite-quotient-derived-detection).
-
-Proof: the evaluated coefficient object is the regular module over the constant
-finite coefficient ring sheaf. Maps from it are global sections by evaluation at
-one. Maps from the integral constant sheaf to an underlying abelian sheaf are
-also global sections by evaluation at one. The characterization of finiteQuotient
-identifies these degree-zero comparisons. Resolve the target by injective module
-sheaves. Their underlying abelian sheaves are acyclic for global sections,
-by the injective-module resolution computation of underlying sheaf cohomology
-in Stacks 03FD. This computation applies to a ringed site, and requires no
-flatness of the coefficient ring as an abelian group. It identifies the two
-universal delta functors, rather than asserting that the forgetful functor
-preserves injectives. Dimension shifting extends the degree-zero identification to
-every degree. The exact forgetful functor and its single and shift comparisons
-identify the degree-two comparison with the displayed map. It is therefore
-injective. This uses no projective-line decomposition, no Chern class, and no
-chosen line comparison. For the empty scheme or the zero coefficient ring all
-maps in question are the unique maps, so the conclusion still holds. -/
+Source: Stacks 03FD. -/
 theorem finiteQuotient_detects_derived_arrows (T : Scheme.{u}) (n : ℕ)
     [Finite (SpTowerShriek.R l E n)]
     (M : SheafOfModules.{u + 1}

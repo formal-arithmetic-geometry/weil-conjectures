@@ -24,9 +24,7 @@ product of the class of a `ℤ/m`-torsor with `H¹(X, μ_m)` followed by the tra
 
 which is bi-additive: additivity in the torsor
 (`AlgebraicGeometry.Scheme.EtaleTorsor.cupMu_eq_add`) comes from the `ℤ/m × ℤ/m`-torsor
-attached to a pair of characters. We show that it is perfect
-(`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_curvePairing`, blueprint
-`proposition-kummer-duality-integral-tate-module--2`):
+attached to a pair of characters. We show that it is perfect:
 
 * its left kernel is trivial: a torsor whose pairing vanishes has a section
   (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_picPairing_eq_zero`);
@@ -226,13 +224,9 @@ lemma card_continuousMonoidHom_zmod [Nonempty X] (m : ℕ) [NeZero m] (hm : (m :
   rw [Nat.card_congr ((sheafHEquivContinuousMonoidHom (ULift.{u + 1} (ZMod m)) s G).symm.trans
     e.toEquiv), Nat.card_fun, Nat.card_zmod, Nat.card_fin]
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Finite-level degree-one Poincaré
-pairing on a curve.
-
-Let `X` be a smooth proper connected curve over an algebraically closed field `k` (e.g. the
-geometric fibre of a curve over a finite field), `s` a geometric point with fundamental group
-`G = π₁(X, s)`, and `A_n = ℤ / lⁿ` with `l` a prime invertible in `k`. The cup product followed
-by the trace,
+/-- Let `X` be a smooth proper connected curve over an algebraically closed field `k`, `s` a
+geometric point with fundamental group `G = π₁(X, s)`, and `A_n = ℤ / lⁿ` with `l` a prime
+invertible in `k`. The cup product followed by the trace,
 
 `H¹(X, A_n) × H¹(X, A_n(1)) ⟶ H²(X, A_n(1)) ≅ A_n`,
 

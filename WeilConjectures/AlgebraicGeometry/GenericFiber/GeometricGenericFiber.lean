@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # The geometric generic fibre of a coordinate
 
-This file provides the geometric glue of the dimension induction in the proof of
-`theorem-verdier-biduality--1` (third and fourth paragraphs). Let `k` be a field, `V` an
+This file provides the geometric glue of a dimension induction over nonclosed points of affine
+schemes of finite type over a field, as used for Verdier biduality. Let `k` be a field, `V` an
 affine scheme over `Spec k` and `x ∈ V` a nonclosed point.
 
 1. Some global section of `V` has transcendental image in `κ(x)`, so the induced coordinate
@@ -29,7 +29,8 @@ affine scheme over `Spec k` and `x ∈ V` a nonclosed point.
    (`AlgebraicGeometry.geometricGenericFiber`). Then `V'` is affine and of finite type over
    `Spec K̄`, and `dim V' + 1 ≤ dim V`
    (`AlgebraicGeometry.topologicalKrullDim_geometricGenericFiber_add_one_le`): the generic fibre
-   over `κ(η)` loses one dimension by `lemma-coordinate-projections--1`, and the base change
+   over `κ(η)` loses one dimension
+   (`AlgebraicGeometry.topologicalKrullDim_fiber_genericPoint_add_one_le`), and the base change
    to the algebraic extension `K̄` is an integral morphism onto it, which does not raise the
    dimension.
 3. The geometric point `V.algClosurePoint x` factors through the projection `V' ⟶ V`
@@ -48,8 +49,7 @@ universe u' u
 open CategoryTheory Limits
 
 /-- In an algebra `R` over a field `k`, a prime ideal `P` which is not maximal admits an element
-whose image in `R ⧸ P` is transcendental over `k`: otherwise the domain `R ⧸ P` would be algebraic
-over `k`, hence a field. -/
+whose image in `R ⧸ P` is transcendental over `k`. -/
 theorem Ideal.exists_transcendental_mk_of_not_isMaximal {k R : Type*} [Field k] [CommRing R]
     [Algebra k R] (P : Ideal R) [P.IsPrime] (hP : ¬ P.IsMaximal) :
     ∃ t : R, Transcendental k (Ideal.Quotient.mk P t) := by
@@ -94,10 +94,9 @@ lemma Scheme.Hom.exists_residueField_hom_of_apply_eq {X Y : Scheme.{u}} (f : X �
 
 variable {k : Type u} [Field k]
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, third paragraph: **a coordinate
-through a nonclosed point.** Let `V` be an affine scheme over a field `k` and `x ∈ V` a nonclosed
-point. Some global section `t` of `V` has transcendental image in `κ(x)`; the induced morphism
-`p : V ⟶ 𝔸¹_k` over `k` sends `x` to the generic point of `𝔸¹_k`. -/
+/-- **A coordinate through a nonclosed point.** Let `V` be an affine scheme over a field `k` and
+`x ∈ V` a nonclosed point. Some global section `t` of `V` has transcendental image in `κ(x)`; the
+induced morphism `p : V ⟶ 𝔸¹_k` over `k` sends `x` to the generic point of `𝔸¹_k`. -/
 theorem exists_hom_affineLine_over_apply_eq_genericPoint {V : Scheme.{u}} [IsAffine V]
     (aV : V ⟶ Spec (.of k)) {x : V} (hx : ¬ IsClosed ({x} : Set V)) :
     ∃ p : V ⟶ 𝔸(PUnit; Spec (.of k)), p ≫ 𝔸(PUnit; Spec (.of k)) ↘ Spec (.of k) = aV ∧
@@ -146,9 +145,8 @@ theorem exists_hom_affineLine_over_apply_eq_genericPoint {V : Scheme.{u}} [IsAff
     exact (congrArg (fun z ↦ (AffineSpace.SpecIso PUnit (.of k)).inv z) hgen).trans
       (Scheme.Hom.apply_genericPoint_of_isIso _)
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, third paragraph: a coordinate
-`p : V ⟶ 𝔸¹_k` over `k` on an affine scheme `V` of finite type over `k` is a closed immersion into
-a relative affine space `𝔸ⁿ_{𝔸¹_k}` of finite rank followed by the projection. -/
+/-- A coordinate `p : V ⟶ 𝔸¹_k` over `k` on an affine scheme `V` of finite type over `k` is a closed
+immersion into a relative affine space `𝔸ⁿ_{𝔸¹_k}` of finite rank followed by the projection. -/
 theorem exists_isClosedImmersion_affineSpace_affineLine {V : Scheme.{u}} [IsAffine V]
     (aV : V ⟶ Spec (.of k)) [LocallyOfFiniteType aV] (p : V ⟶ 𝔸(PUnit; Spec (.of k)))
     (hp : p ≫ 𝔸(PUnit; Spec (.of k)) ↘ Spec (.of k) = aV) :
@@ -187,10 +185,9 @@ noncomputable abbrev geometricGenericFiber {V : Scheme.{u}} (p : V ⟶ 𝔸(PUni
     Scheme.{u} :=
   pullback p (affineLineGeometricGenericPoint k)
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, third paragraph: the geometric generic
-fibre of a coordinate `p : V ⟶ 𝔸¹_k` on an affine scheme `V` of finite type over `k` is affine
-and of finite type over the algebraic closure `K̄` of `k(t)`; in particular its structure
-morphism is separated and quasi-compact. -/
+/-- The geometric generic fibre of a coordinate `p : V ⟶ 𝔸¹_k` on an affine scheme `V` of finite
+type over `k` is affine and of finite type over the algebraic closure `K̄` of `k(t)`; in particular
+its structure morphism is separated and quasi-compact. -/
 theorem geometricGenericFiber_properties {V : Scheme.{u}} [IsAffine V]
     (aV : V ⟶ Spec (.of k)) [LocallyOfFiniteType aV] (p : V ⟶ 𝔸(PUnit; Spec (.of k)))
     (hp : p ≫ 𝔸(PUnit; Spec (.of k)) ↘ Spec (.of k) = aV) :
@@ -208,14 +205,9 @@ theorem geometricGenericFiber_properties {V : Scheme.{u}} [IsAffine V]
     MorphismProperty.pullback_snd (P := @LocallyOfFiniteType) _ _ inferInstance
   exact ⟨isAffine_of_isAffineHom (pullback.snd p _), h1, inferInstance, inferInstance, h2⟩
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, third paragraph: **the geometric
-generic fibre of a coordinate loses one dimension.** Let `V` be locally of finite type over a
-field `k` and `p : V ⟶ 𝔸¹_k` a morphism over `k`. Then the geometric generic fibre `V'` of `p`
-satisfies `dim V' + 1 ≤ dim V`.
-
-By `lemma-coordinate-projections--1` the generic fibre of `p` over the function field `κ(η)`
-of `𝔸¹_k` has dimension at most `dim V - 1`, and `V'` is its base change along the integral
-morphism `Spec K̄ ⟶ Spec κ(η)`, which does not raise the dimension (incomparability). -/
+/-- **The geometric generic fibre of a coordinate loses one dimension.** Let `V` be locally of
+finite type over a field `k` and `p : V ⟶ 𝔸¹_k` a morphism over `k`. Then the geometric generic
+fibre `V'` of `p` satisfies `dim V' + 1 ≤ dim V`. -/
 theorem topologicalKrullDim_geometricGenericFiber_add_one_le {V : Scheme.{u}}
     (aV : V ⟶ Spec (.of k)) [LocallyOfFiniteType aV] (p : V ⟶ 𝔸(PUnit; Spec (.of k)))
     (hp : p ≫ 𝔸(PUnit; Spec (.of k)) ↘ Spec (.of k) = aV) :
@@ -257,11 +249,9 @@ theorem topologicalKrullDim_geometricGenericFiber_le {V : Scheme.{u}}
   WithBot.ENat.le_natCast_sub_one_of_add_one_le
     ((topologicalKrullDim_geometricGenericFiber_add_one_le aV p hp).trans hd)
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, fourth paragraph: **geometric points
-over `x` factor through the geometric generic fibre.** If `p : V ⟶ 𝔸¹_k` sends `x` to the
-generic point, the geometric point `V.algClosurePoint x` factors through the projection
-`V' ⟶ V` of the geometric generic fibre: embed the algebraic closure `K̄` of `κ(η)` into the
-algebraic closure of `κ(x)` over `κ(η)`. -/
+/-- **Geometric points over `x` factor through the geometric generic fibre.** If `p : V ⟶ 𝔸¹_k`
+sends `x` to the generic point, the geometric point `V.algClosurePoint x` factors through the
+projection `V' ⟶ V` of the geometric generic fibre. -/
 theorem exists_comp_geometricGenericFiber_fst_eq_algClosurePoint {V : Scheme.{u}}
     (p : V ⟶ 𝔸(PUnit; Spec (.of k))) {x : V} (hx : p x = genericPoint 𝔸(PUnit; Spec (.of k))) :
     ∃ s' : Spec (.of (AlgebraicClosure (V.residueField x))) ⟶ geometricGenericFiber p,
@@ -286,10 +276,9 @@ theorem exists_comp_geometricGenericFiber_fst_eq_algClosurePoint {V : Scheme.{u}
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, fourth paragraph: if `p : V ⟶ 𝔸¹_k`
-sends `x` to the generic point and the pullback of an étale sheaf `F` on `V` to the geometric
-generic fibre `V'` of `p` has zero stalks at all geometric points, then the stalk of `F` at the
-geometric point `V.algClosurePoint x` is zero. -/
+/-- If `p : V ⟶ 𝔸¹_k` sends `x` to the generic point and the pullback of an étale sheaf `F` on `V`
+to the geometric generic fibre `V'` of `p` has zero stalks at all geometric points, then the stalk
+of `F` at the geometric point `V.algClosurePoint x` is zero. -/
 theorem isZero_sheafFiber_algClosurePoint_of_isZero_sheafFiber_upperStar {V : Scheme.{u}}
     (p : V ⟶ 𝔸(PUnit; Spec (.of k))) {x : V} (hx : p x = genericPoint 𝔸(PUnit; Spec (.of k)))
     (F : Sheaf V.smallEtaleTopology A)
@@ -301,10 +290,9 @@ theorem isZero_sheafFiber_algClosurePoint_of_isZero_sheafFiber_upperStar {V : Sc
   rw [← hs']
   exact IsZero.of_iso (h _ s') ((Etale.upperStarCompSheafFiberIso A _ s').app F).symm
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, fourth paragraph: if `p : V ⟶ 𝔸¹_k`
-sends `x` to the generic point and the pullback of an étale sheaf `F` on `V` to the geometric
-generic fibre of `p` is zero, then the stalk of `F` at the geometric point `V.algClosurePoint x`
-is zero. -/
+/-- If `p : V ⟶ 𝔸¹_k` sends `x` to the generic point and the pullback of an étale sheaf `F` on `V`
+to the geometric generic fibre of `p` is zero, then the stalk of `F` at the geometric point
+`V.algClosurePoint x` is zero. -/
 theorem isZero_sheafFiber_algClosurePoint_of_isZero_upperStar {V : Scheme.{u}}
     (p : V ⟶ 𝔸(PUnit; Spec (.of k))) {x : V} (hx : p x = genericPoint 𝔸(PUnit; Spec (.of k)))
     (F : Sheaf V.smallEtaleTopology A)

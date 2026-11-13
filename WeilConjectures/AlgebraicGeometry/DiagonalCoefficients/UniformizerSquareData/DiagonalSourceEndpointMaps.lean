@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalCoefficientRouteSquare
 
 /-! # Actual supported endpoint morphisms
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: def-diagonal-source-endpoint-maps).
 -/
 
 @[expose] public noncomputable section
@@ -65,20 +62,17 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
   (q : UniformizerSquareData l Y E π n A hA)
 
-/-- The actual common hom type in the supported endpoint criterion.
-(blueprint: def-diagonal-source-endpoint-maps). -/
+/-- The actual common hom type in the supported endpoint criterion. -/
 def sourceEndpointHomType
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) : Type (u + 1) :=
   endpointComponent% (endpointSquare l Y E π n A hA q) s 0
 
-/-- The actual left morphism in the supported endpoint criterion.
-(blueprint: def-diagonal-source-endpoint-maps). -/
+/-- The actual left morphism in the supported endpoint criterion. -/
 @[irreducible] def sourceEndpointLeft
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) : q.sourceEndpointHomType s :=
   endpointComponent% (endpointSquare l Y E π n A hA q) s 1
 
-/-- The actual right morphism in the supported endpoint criterion.
-(blueprint: def-diagonal-source-endpoint-maps). -/
+/-- The actual right morphism in the supported endpoint criterion. -/
 @[irreducible] def sourceEndpointRight
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) : q.sourceEndpointHomType s :=
   endpointComponent% (endpointSquare l Y E π n A hA q) s 2

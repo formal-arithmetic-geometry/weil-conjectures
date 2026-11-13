@@ -45,7 +45,7 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Completion of simultaneous reduction on the pro-etale site
-Source: diagonal tower proof step 4; Stacks Tags 099M, 091S and 091Z. -/
+Source: Stacks Tags 099M, 091S and 091Z. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -482,30 +482,7 @@ set_option backward.isDefEq.respectTransparency.types true
 /-- Simultaneous reduction followed by total derived limit is the integral
 ell-completion reflector, with its constant Z_l action retained.
 
-Source: blueprint diagonal tower proof step 4; Stacks Tags 099M, 091S, 091Z
-(blueprint: lem-sfb-diagonal-reduction-completion).
-
-Proof: use the exact extension/restriction adjunction for Z to Z_l, since Z_l is
-Z-flat. Its levelwise adjunction on strict towers has exact left adjoint, so
-restriction preserves K-injective complexes. Grothendieckness of both tower
-categories supplies K-injective resolutions and the total right derived limits.
-Restriction commutes with their ordinary limits by the projection universal
-property, hence also with their total derived limits. The quotient cokernel
-properties give the normalized ordinary comparison with the integral reduction
-tower, since Z_l/ell^(n+1) is Z/ell^(n+1); its transition squares commute by the
-quotient generators. The exact derived restriction is a right adjoint, hence preserves the pointwise
-right Kan extension defining the left derived reduction. Uniqueness descends
-this comparison by the two left-derived universal properties. This gives the
-natural comparison of the two completed functors required in the conclusion.
-For the integral tower apply the principal-ideal completion theorem to the
-constant integer ring on the small pro-etale site, using the equivalence with
-fixed-scalar module sheaves and then with abelian sheaves. Its unit comes from
-all quotient maps and is natural in the input complex. The principal-ideal
-criterion identifies its complete objects with right orthogonality to complexes
-on which ell is invertible. The completion theorem gives complete outputs and
-the universal Hom bijection. Transport the unit and these two properties along
-the preceding natural comparison. This works for unbounded complexes and uses
-K-injective towers, without assuming exactness of sheaf products. -/
+Source: Stacks Tags 099M, 091S, 091Z. -/
 theorem diagonal_reduction_completion (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]

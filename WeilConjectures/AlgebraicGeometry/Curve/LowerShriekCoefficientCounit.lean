@@ -17,9 +17,8 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-!
 # Coefficient conversion and the extension-by-zero counit
 
-Source: Stacks Project, Lemma 095L (lemma-ses-associated-to-open), the counit arrow,
-and Lemma 0GJA (lemma-restrict-to-open), the coefficient convention in its application.
-(blueprint: lem-pbc-n2-lower-shriek-coefficient-counit).
+Source: Stacks Project, Lemma 095L, the counit arrow, and Lemma 0GJA, the coefficient convention in
+its application.
 -/
 
 @[expose] public section
@@ -32,24 +31,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Coefficient conversion identifies the two extension-by-zero objects and their counits.
-Source: Stacks Project, Lemma 095L (lemma-ses-associated-to-open), the first arrow of
-its sequence; Lemma 0GJA (lemma-restrict-to-open), its use of that arrow.
-(blueprint: lem-pbc-n2-lower-shriek-coefficient-counit).
-
-Proof: The forgetful equivalence from integer modules to abelian groups and the ring
-isomorphism ULift Z -> Z give an equivalence E of coefficient categories. Applied
-objectwise it gives equivalences of sheaf categories, with inverse obtained by forgetting
-scalars and the unit and counit obtained objectwise. Restriction along the localization
-functor of the open immersion is precomposition, so it commutes with E. Identify upperStar
-with this restriction using upperStarIsoOpenImmersionRestriction. Transport the abelian
-adjunction j_! ⊣ j^* through these equivalences. Its right adjoint is then the module
-upperStar, and uniqueness of left adjoints gives the displayed isomorphism e. Choose the
-isomorphism supplied by the adjunction comparison, rather than an arbitrary isomorphism.
-Compatibility of the counits of the two adjunctions says precisely that e.hom followed
-by the converted abelian counit equals the module counit. The construction requires no
-curve, density, constructibility, or torsion hypotheses. For an empty open both lower
-shriek objects are zero; for the whole scheme both counits are isomorphisms, and the same
-adjunction comparison applies in both cases. -/
+Source: Stacks Project, Lemma 095L, the first arrow of its sequence; Lemma 0GJA, its use of that
+arrow. -/
 theorem exists_lowerShriek_coefficient_counit {X : Scheme.{u}}
     (U : X.Opens) (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

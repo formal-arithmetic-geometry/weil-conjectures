@@ -144,26 +144,7 @@ private theorem constantComplete_restriction_iff
 fully faithful on objects with derived-complete underlying constant coefficients.
 The completeness condition is right orthogonality to all l-invertible complexes.
 
-Source: Stacks Tags 099I, 099L and 091Q; blueprint latest,
-`sk-prop-diagonal-tower-trace.proof.md`, paragraph (1).
-(blueprint: lem-sfb-diagonal-complete-scalar-restriction-core).
-
-Proof: use the exact equivalence between module sheaves over the constant ring
-sheaf and sheaves of modules over its coefficient ring. Replace the pro-etale site
-by its equivalent small site and transport the actual constant-to-completed map.
-The finite projections identify the transported completion with the limit of the
-constant Z_l/l^(n+1) sheaves: Z_l/l^(n+1) is canonically Z/l^(n+1), compatibly with
-all quotient transitions. Apply ConstantCompletion.equivalence to the Noetherian
-ring ULift Z_l and its principal ideal (l). The flat restriction criterion reflects
-local derived completeness. For a principal ideal, the local condition agrees
-with right orthogonality to l-invertible objects (Stacks 091Q, 0999); exact
-coefficient and site equivalences preserve this condition. Consequently the
-preimage of the complete constant objects is precisely the complete completed
-objects. The equivalence of full complete categories and their full inclusions
-then give fullness and faithfulness for the indicated composite. These transports
-retain the actual scalar restriction on morphisms, rather than merely giving an
-abstract equivalence of the two complete categories. No scheme smoothness,
-Noetherian hypothesis on the scheme, or invertibility of l on it is needed. -/
+Source: Stacks Tags 099I, 099L and 091Q. -/
 theorem diagonalCompleteScalarRestrictionCore (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l S)]
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l S)] :

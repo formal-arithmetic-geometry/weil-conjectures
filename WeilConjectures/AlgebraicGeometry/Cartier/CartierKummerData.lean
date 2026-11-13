@@ -13,9 +13,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-! # Data for the simultaneous Cartier Kummer map
 
-Source: blueprint main-20261015, lemma-cycle-class-cartier-divisor, paragraphs 1--4.
-(blueprint: def-amb-cartier-kummer-data)
-
 The declarations are the original fixed-coefficient interfaces, without changes
 of signature or body. They are separate from the existence theorem so that
 normalization and transport results can refer to them.
@@ -32,43 +29,43 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- Reuse the existing left-exact sheafification at each etale module site.
-Source: Stacks 00WX (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 00WX. -/
 instance cartierHasSheafifyEtale (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) : HasSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   inferInstance
 
 /-- Cache the existing weak etale sheafification separately from left exactness.
-Source: Stacks 00WX (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 00WX. -/
 instance cartierHasWeakSheafifyEtale (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) : HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   inferInstance
 
 /-- Reuse abelian sheafification for the cohomological Chern-class realization.
-Source: Stacks 00WX (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 00WX. -/
 instance cartierHasSheafifyAbelian (T : Scheme.{u}) :
     HasSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   inferInstance
 
 /-- Reuse small Ext for the existing abelian cohomology realization.
-Source: Stacks 07A6 (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 07A6. -/
 instance cartierHasExtAbelian (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   inferInstance
 
 /-- Name the existing abelian structure on etale module sheaves.
-Source: Stacks 03D0 (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 03D0. -/
 instance cartierAbelianEtale (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Abelian (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
 
 /-- Name the existing abelian structure used by the Chern-class realization.
-Source: Stacks 03D0 (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 03D0. -/
 instance cartierAbelianGroups (T : Scheme.{u}) :
     Abelian (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   inferInstance
 
 /-- Cache the existing small Ext instance without changing its universe or category.
-Source: Stacks 07A6 (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 07A6. -/
 instance cartierHasExtEtale (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
@@ -77,7 +74,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The constant-section comparison for the inclusion of sites, specified by adjunction.
-Source: Stacks 099R and 00WX (blueprint: def-amb-cartier-kummer-data). -/
+Source: Stacks 099R and 00WX. -/
 def cartierConstantComparison (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj
         (ordinaryFiniteConstant A T) ⟶
@@ -89,8 +86,7 @@ def cartierConstantComparison (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
         (toSheafify (Scheme.ProEt.topology T)
           ((Functor.const T.ProEtᵒᵖ).obj (ModuleCat.of A A)))))
 
-/-- The etale witnesses at every annihilating Kummer exponent.
-Source: proof, paragraphs 3--4 (blueprint: def-amb-cartier-kummer-data). -/
+/-- The etale witnesses at every annihilating Kummer exponent. -/
 def CartierEtaleKummerFamily : Type (u + 1) :=
   ∀ (n r : ℕ) (_hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0)
     {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
@@ -100,8 +96,7 @@ def CartierEtaleKummerFamily : Type (u + 1) :=
         (Scheme.finiteEtaleTateLine T (l ^ (r + 1)) (finiteTateCoefficient l E n) _hA) 2
 
 /-- Relative-boundary normalization of all ordinary etale witnesses.
-This retains the actual frame torsor and its canonical section on the complement.
-Source: proof, paragraphs 1--3 (blueprint: def-amb-cartier-kummer-data). -/
+This retains the actual frame torsor and its canonical section on the complement. -/
 @[irreducible]
 def CartierEtaleKummerNormalization (κ : CartierEtaleKummerFamily l E) : Prop :=
   ∀ (n r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0)
@@ -112,9 +107,7 @@ def CartierEtaleKummerNormalization (κ : CartierEtaleKummerFamily l E) : Prop :
 
 /-- Compatibility with every finite coefficient reduction at a common Kummer exponent.
 SupportedKummerScalar specifies both derived scalar units on all unbounded test objects
-and fixes the scalar maps on constants and pure root tensors.
-Source: proof, final scalar-extension sentence
-(blueprint: def-amb-cartier-kummer-data). -/
+and fixes the scalar maps on constants and pure root tensors. -/
 @[irreducible]
 def CartierEtaleKummerReduction (κ : CartierEtaleKummerFamily l E) : Prop :=
   ∀ (a b : ℕ) (hab : a ≤ b) (r : ℕ)
@@ -128,8 +121,7 @@ def CartierEtaleKummerReduction (κ : CartierEtaleKummerFamily l E) : Prop :=
 /-- Descent of each etale witness to the same arrow in the specified pro-etale twist.
 The support comparison is uniquely fixed by the quotient map. The target comparison
 is fixed by inverse-limit projection. Quantifying over every r while c is fixed
-states independence of the Kummer exponent as equality of derived arrows.
-Source: proof, final paragraph (blueprint: def-amb-cartier-kummer-data). -/
+states independence of the Kummer exponent as equality of derived arrows. -/
 @[irreducible]
 def CartierKummerRealization (κ : CartierEtaleKummerFamily l E)
     (c : CartierKummerFamily l E) : Prop :=
@@ -158,8 +150,7 @@ def CartierKummerRealization (κ : CartierEtaleKummerFamily l E)
 
 /-- The asserted pro-etale base-change equation under the canonical comparisons.
 The support comparison is fixed by the constant quotient unit and the twist comparison
-by all root projections. No flatness is imposed on h.
-Source: proof, paragraph 4 (blueprint: def-amb-cartier-kummer-data). -/
+by all root projections. No flatness is imposed on h. -/
 @[irreducible]
 def CartierKummerBaseChange (c : CartierKummerFamily l E) : Prop :=
   ∀ (n : ℕ) {D D' T T' : Scheme.{u}} (i : D ⟶ T) (i' : D' ⟶ T')
@@ -186,8 +177,7 @@ def CartierKummerBaseChange (c : CartierKummerFamily l E) : Prop :=
 comparison, is the composite with the supported quotient map.
 The cohomology class is written directly in Ext: the definition of `ordinaryFiniteClass`
 reduces to this expression by cancelling `Ext.homEquiv.symm (Ext.homEquiv k)`.
-This avoids elaborating the intermediate derived arrow and its inverse realization.
-Source: proof, paragraphs 3--4 (blueprint: def-amb-cartier-kummer-data). -/
+This avoids elaborating the intermediate derived arrow and its inverse realization. -/
 @[irreducible]
 def CartierKummerChern (c : CartierKummerFamily l E) : Prop :=
   ∀ (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]

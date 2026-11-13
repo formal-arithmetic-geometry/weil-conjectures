@@ -17,8 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Residue.ResidueFiniteRootMapIso
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedCartierKummerSupplement
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -61,16 +59,8 @@ private theorem etale_root_scalar (n : ℕ) {R A : Type (u + 1)}
 
 /-- Let n>0, A a finite commutative ring killed by n, Z a scheme on which n is invertible, and i:D→Z
 an effective Cartier closed immersion. The normalized etale Kummer class G_m→forget(A_Z(1))[1] is a
-degree-one unbounded scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-cartier-etale-kummer-derived-unit).
-Proof: For R=ULift(Z/n), the ordinary root map is an isomorphism. Apply the residue Kummer unit
-theorem through this isomorphism to the etale Kummer sequence. The coefficient clause of the
-existing ordinary supported Cartier Kummer theorem supplies the normalized derived unit
-R_Z(1)→Res(A_Z(1)). Compose the two scalar units and identify composite coefficient forgetting with
-direct forgetting. At a root z the composite root map sends z to 1 tensor z, by the pure tensor
-normalization at a=1. Yoneda associativity then identifies its Ext representative with the published
-Kummer unit. -/
+degree-one unbounded scalar unit.
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem etale_kummer_derived_unit
     (A : Type (u + 1)) [CommRing A] [Finite A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]

@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 /-!
 # Fibre dimension after base change
 
-Source: Stacks Project, Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)
-(blueprint: lem-sc-fibre-dimension-after-base-change).
+Source: Stacks Project, Tag 02FY, part (1).
 -/
 
 @[expose] public section
@@ -119,16 +118,9 @@ private theorem localDim_fiber_point {X S : Scheme.{u}} (f : X ⟶ S)
   simpa using hy
 
 /--
-Source: Stacks Project, Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)
-(blueprint: lem-sc-fibre-dimension-after-base-change).
-The fibre `(X')_{s'}` is identified with `X_s ×_{κ(s)} κ(s')` by an isomorphism
-compatible with the maps to `X_s` and to `Spec κ(s')` (the base change of `X_s` along
-`κ(s) → κ(s')`); `f x = s` is the cartesian-square relation `s = g(s') = f(x)`.
-Proof: `Spec κ(s') → S' → S` factors through `Spec κ(s) → S` via the residue-field map,
-so pullback pasting gives the fibre identification. `X_s` is locally of finite type over
-`κ(s)` by base change; the dimension at a point is local, so on an affine neighbourhood
-the field-extension dimension lemma (Tag 00P4) gives `dim_{x'} (X')_{s'} = dim_x X_s`.
--/
+Source: Stacks Project, Tag 02FY, part (1). The fibre `(X')_{s'}` is identified with `X_s ×_{κ(s)}
+κ(s')` by an isomorphism compatible with the maps to `X_s` and to `Spec κ(s')` (the base change of
+`X_s` along `κ(s) → κ(s')`); `f x = s` is the cartesian-square relation `s = g(s') = f(x)`. -/
 theorem fibre_dimension_after_base_change {X S S' : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] (g : S' ⟶ S)
     (x' : ↥(Limits.pullback f g)) :

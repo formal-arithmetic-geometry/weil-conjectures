@@ -11,10 +11,6 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-!
 # Presheaves of derived etale maps
-
-Source: Stacks Project, sites-cohomology.tex, Tag 09BE, lemma-locally-constant-map,
-and the derived Hom presheaf used in the finite-ring extension of that lemma
-(blueprint: def-weil-pbc-etale-derived-map-presheaves).
 -/
 
 @[expose] public section
@@ -216,8 +212,7 @@ namespace AlgebraicGeometry.Etale
 variable {X : Scheme.{u}} (B : Type (u + 1)) [CommRing B]
 
 /-- The comparison between restriction to `U` and restriction first to `V` then to `U`.
-Source: Stacks, Tag 09BE, restriction of derived maps
-(blueprint: def-weil-pbc-etale-derived-map-presheaves). -/
+Source: Stacks, Tag 09BE, restriction of derived maps. -/
 noncomputable def derivedMapRestrictionIso {U V : X.Etale} (f : U ⟶ V)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     (upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.obj K ≅
@@ -228,7 +223,7 @@ noncomputable def derivedMapRestrictionIso {U V : X.Etale} (f : U ⟶ V)
       (Functor.mapDerivedCategoryCompIso _ _).symm).app K
 
 /-- Restrict a derived morphism along an arrow of the small etale site.
-Source: Stacks, Tag 09BE (blueprint: def-weil-pbc-etale-derived-map-presheaves). -/
+Source: Stacks, Tag 09BE. -/
 noncomputable def restrictDerivedMap
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}
     {U V : X.Etale} (f : U ⟶ V)
@@ -241,7 +236,7 @@ noncomputable def restrictDerivedMap
       (derivedMapRestrictionIso B f L).inv
 
 /-- Restrict an isomorphism in the same manner.
-Source: Stacks, Tag 09BE (blueprint: def-weil-pbc-etale-derived-map-presheaves). -/
+Source: Stacks, Tag 09BE. -/
 noncomputable def restrictDerivedIso
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}
     {U V : X.Etale} (f : U ⟶ V)
@@ -353,12 +348,7 @@ private lemma restrictDerivedMap_comp
     (restriction_assoc B f g K) (restriction_assoc B f g L) a
 
 /-- The restriction functions satisfy the presheaf laws.
-Source: Stacks, Tag 09BE (blueprint: def-weil-pbc-etale-derived-map-presheaves).
-Proof: restriction to an identity is the identity by the unit coherence of pullback.
-The pullback associativity coherence identifies restriction along a composite with
-successive restriction. Apply the corresponding composition comparisons on derived
-categories; the middle comparison and its inverse cancel. For isomorphisms the same
-calculation applies to the forward and inverse arrows. -/
+Source: Stacks, Tag 09BE. -/
 theorem derivedMapRestriction_laws
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     (∀ (U : X.Etale) (a), restrictDerivedMap B (K := K) (L := L) (𝟙 U) a = a) ∧
@@ -379,7 +369,7 @@ theorem derivedMapRestriction_laws
     exact restrictDerivedMap_comp B K L U V W f g a.hom
 
 /-- The presheaf `U ↦ Hom(K|U,L|U)` in the derived categories of etale module sheaves.
-Source: Stacks, Tag 09BE (blueprint: def-weil-pbc-etale-derived-map-presheaves). -/
+Source: Stacks, Tag 09BE. -/
 noncomputable def derivedHomPresheaf
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     X.Etaleᵒᵖ ⥤ Type (u + 1) where
@@ -391,7 +381,7 @@ noncomputable def derivedHomPresheaf
     ConcreteCategory.hom_ext _ _ ((derivedMapRestriction_laws B K L).2.1 _ _ _ g.unop f.unop)
 
 /-- The presheaf `U ↦ Isom(K|U,L|U)`, which can take the empty value.
-Source: Stacks, Tag 09BE (blueprint: def-weil-pbc-etale-derived-map-presheaves). -/
+Source: Stacks, Tag 09BE. -/
 noncomputable def derivedIsoPresheaf
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     X.Etaleᵒᵖ ⥤ Type (u + 1) where

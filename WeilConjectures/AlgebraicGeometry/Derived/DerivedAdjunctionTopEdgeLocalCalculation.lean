@@ -182,25 +182,7 @@ private theorem directImage_isGE {T S : Scheme.{u}} (g : T ⟶ S)
 /-- The counit on the upper truncation of Rg_*K has the canonical local-class formula.
 This assertion has no variable source C and no assertion about arbitrary adjuncts.
 Source: Stacks, cohomology.tex, Tags 079W (normalized derived adjunction),
-0BKJ (local classes), 0D5X (local Leray); derived.tex, Tags 08J5 and 06XS.
-(blueprint: lem-weil-pbc-truncated-counit-local-class).
-
-Proof: Construct the local-class edge e by sheafifying the inverse-open local
-cocycle maps. It is natural in K, and its value on a single complex is normalized by
-the right-derived unit. The explicit truncated counit is also natural: use naturality
-of upper truncation and kappa, and the two adjunction bijections. On a single complex,
-transpose the ordinary module counit using the pinned derived adjunction. The explicit
-kappa on a single gives the same normalization, so the two edges agree there after
-cancelling the invertible degree-q single direct-image comparison.
-Two natural edges Hq(RK) -> g_* Hq(K) agreeing on singles agree everywhere. Project K
-to J = tau_{>=q} K and cancel g_* Hq of this projection. For J at least q, include
-P = tau_{<=q} J. This P is a single. The cone of P -> J is at least q+1, and the
-right-derived direct image preserves this lower bound, so Hq(R(P -> J)) is invertible
-by the homology sequence. Naturality and cancellation reduce equality on J to P.
-Replace e by the now equal truncated counit in the sectionwise local-class equation.
-The argument imposes no lower bound on K and works for all integer q, zero objects,
-empty opens, and nonflat g. All local maps retain the fixed resolutions and scalar
-actions from the data module. -/
+0BKJ (local classes), 0D5X (local Leray); derived.tex, Tags 08J5 and 06XS. -/
 theorem topEdgeTruncatedCounit_localClass {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (K : schemeDerivedCategory T) :
     ∀ V : (Opens S)ᵒᵖ,

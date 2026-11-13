@@ -20,9 +20,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 /-!
 # Ambient exceptional right adjoint datum
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`, order 1488
-(blueprint: def-weil-ambient-exceptional-adjoint).
-
 The canonical compact-support candidate uses the ordinary unbounded derived category of
 modules over the constant coefficient sheaf. No compactification-independence theorem or
 preservation theorem is used: the right adjoints and their coherent comparison maps are
@@ -41,8 +38,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The finite-level compact-support candidate for a specified compactification: the
 termwise descent of extension by zero followed by the ordinary K-injective right derived
-direct image. Source: blueprint order 1488
-(blueprint: def-weil-ambient-exceptional-adjoint). -/
+direct image. -/
 noncomputable def sfAmbientCompactSupportCandidate
     (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (d : Compactification f) : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=

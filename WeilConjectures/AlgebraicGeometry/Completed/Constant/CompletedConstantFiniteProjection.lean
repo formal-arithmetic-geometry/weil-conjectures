@@ -246,8 +246,7 @@ private theorem projection_linear (X : Scheme.{u})
 
 end CompletedConstantProjection
 /-- The fixed generator formula and completed-scalar linearity of a finite projection.
-Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-finite-projections). -/
+Source: Stacks Tags 03EK and 093J--093M. -/
 def CompletedConstantProjectionSpec (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -277,17 +276,7 @@ def CompletedConstantProjectionSpec (X : Scheme.{u})
     q.val.app U (r • x) = a • q.val.app U x)
 
 /-- A finite residue map exists with its actual tensor formula. No finiteness of N is
-needed for this construction. Source: Stacks Tag 03EK, followed by Tags 093J--093M.
-
-Proof: give N/I^k N its quotient-ring action. Completion evaluation is compatible with
-this action: a completed scalar and an A-scalar with the same residue differ by I^k C,
-whose products with N belong to I^k N. Sheafify this semilinear residue map and apply the
-extension-of-scalars universal property. The quotient module has the same underlying
-constant abelian sheaf whether its ring is A or A/I^k. The identity on that abelian
-sheaf is A-linear, by the naturality of the constant-ring unit, and gives the displayed
-target. The tensor universal property gives the pure formula. Linearity over H followed
-by restriction to A gives the second formula whenever the two residues coincide.
-(blueprint: def-weil-pbc-completed-constant-finite-projections). -/
+needed for this construction. Source: Stacks Tag 03EK, followed by Tags 093J--093M. -/
 theorem completedConstantProjection_exists (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -305,8 +294,7 @@ theorem completedConstantProjection_exists (X : Scheme.{u})
     CompletedConstantProjection.projection_linear X I φ hφ N n⟩
 
 /-- The finite projection specified by its tensor formula, constructed by the preceding
-proved existence theorem. Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-finite-projections). -/
+proved existence theorem. Source: Stacks Tags 03EK and 093J--093M. -/
 def completedConstantProjection (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -316,8 +304,7 @@ def completedConstantProjection (X : Scheme.{u})
     (N : ModuleCat.{u + 1} (AdicCompletion I A)) (n : ℕ) :=
   (completedConstantProjection_exists X I φ hφ N n).choose
 
-/-- Both finite-projection identities. Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-finite-projections). -/
+/-- Both finite-projection identities. Source: Stacks Tags 03EK and 093J--093M. -/
 theorem completedConstantProjection_spec (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

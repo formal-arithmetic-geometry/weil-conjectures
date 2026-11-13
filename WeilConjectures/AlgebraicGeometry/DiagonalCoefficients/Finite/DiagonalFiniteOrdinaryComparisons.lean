@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientFiniteRealization
 
 /-! # Ordinary finite comparisons at generic coefficients
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: def-diagonal-finite-ordinary-comparisons).
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +22,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 variable (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj R] [IsCommMonObj R] (A : Type (u + 1)) [CommRing A]
 
-/-- The supported coefficient comparison and its exact underlying normalization.
-Source: coefficient changes (blueprint: def-diagonal-finite-ordinary-comparisons). -/
+/-- The supported coefficient comparison and its exact underlying normalization. -/
 structure FiniteSourceComparison (Y : Scheme.{u})
     (eP : FiniteRealization R A (ProjectiveLine Y))
     (eW : FiniteRealization R A (diagonalSurface Y)) where
@@ -41,8 +37,7 @@ structure FiniteSourceComparison (Y : Scheme.{u})
           (sheafCompose (Scheme.ProEt.topology (ProjectiveLine Y))
             (forget₂ (ModuleCat.{u + 1} A) Ab.{u + 1})).map eP.unitIso.hom))
 
-/-- The ordinary direct-image square with its exact underlying normalization.
-Source: coefficient changes (blueprint: def-diagonal-finite-ordinary-comparisons). -/
+/-- The ordinary direct-image square with its exact underlying normalization. -/
 structure FiniteOrdinaryPushSquare {X S : Scheme.{u}} (f : X ⟶ S)
     (eX : FiniteRealization R A X) (eS : FiniteRealization R A S) where
   ordinary : CondensedRing.lowerStar R f ⋙ eS.F ≅

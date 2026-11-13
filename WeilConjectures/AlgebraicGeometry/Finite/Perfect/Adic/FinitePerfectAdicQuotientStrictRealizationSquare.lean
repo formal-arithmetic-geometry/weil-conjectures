@@ -25,11 +25,7 @@ set_option maxHeartbeats 600000 in
 /-- The explicit scalar realizations carry the ordinary quotient arrows to the transition maps of
 the strict ordinary tensor tower restricted to `W`, compatibly with the inverse-image comparison
 and the ordinary scalar compositor.
-Source: Stacks Project, Tags 03CY, 03DA and 09C6.
-
-Proof: the quotient arrow is the ordinary quotient transition, by uniqueness on pure tensors.
-The generic realization square identifies its realization with the restriction of the
-transition to `W`, and under the tensor identifications the transition is the tower map. -/
+Source: Stacks Project, Tags 03CY, 03DA and 09C6. -/
 theorem finitePerfectAdicQuotientStrictRealizationIso_square
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

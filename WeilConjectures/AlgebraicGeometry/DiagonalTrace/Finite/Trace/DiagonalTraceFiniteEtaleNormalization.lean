@@ -200,28 +200,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 This is only the integral comparison. It asserts neither existence of the lift nor equality
 of finite coefficient arrows, and contains no supported class, limit or source projection.
 
-Source: blueprint latest, diagonal-tower trace proof (2), finite coefficient comparison;
-geometric tower classes proof (2), steps 6--8; Stacks 03PL.
-(blueprint: lem-sfb-diagonal-trace-finite-etale-normalization).
-
-Proof: evaluate hc at P and n and unpack its heterogeneous endpoint transports. Forget the
-supplied lift identity to abelian sheaves and precompose with the integral constant generator.
-The underlying-section, restriction and morphism equations of r identify this exact functor
-with intrinsic finite evaluation followed by forgetting. The coefficient-one equation of a
-identifies the transported generator with finiteQuotient: both send each integer k to k times
-one after sheafification. The line_tensor equation of k, line_roots of a and the tensor
-normalization of lineEvaluation identify the transported target map with finiteRootMap.
-Thus hc identifies the integral adjunct of b after site comparison with the positive Kummer
-boundary of P followed by the ordinary root map. Exact evaluation sends the tower Kummer
-sequence to its n-th sequence, whose inclusion and power are the canonical maps by c.kummer.
-Exact étale-to-pro-étale comparison preserves its extension class and Yoneda composition.
-The definition of lineBundleClass is the comparison of Pic.toCohomologicalPicardGroup P,
-so the transported boundary is the comparison image of kummerδ₁ of that Picard class.
-The coefficient-forgetting comparison sends the ordinary integral generator and root map
-to the same maps. Injectivity of comparison on integral Ext cancels site comparison.
-By ordinaryFiniteClass_extHomEquiv the remaining adjunct is ordinaryFiniteClass of b.hom.
-No cancellation of arbitrary derived p-adic scalar restriction is used. The calculation
-uses the positive exponent n+1 and also treats n=0, trivial P and the empty scheme. -/
+Source: Stacks 03PL. -/
 theorem diagonalTrace_finiteEtale_normalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

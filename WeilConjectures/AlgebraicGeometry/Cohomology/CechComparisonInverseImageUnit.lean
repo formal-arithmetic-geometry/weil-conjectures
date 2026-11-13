@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
 /-! # Čech comparison and the inverse-image unit
 
 Source: Stacks Project, Tags 01FD and 01EQ, applied to abelian sheaves.
-(blueprint: lem-pc-cech-comparison-inverse-image-unit)
 -/
 
 @[expose] public section
@@ -34,31 +33,7 @@ Unlike coefficient naturality, this assertion concerns only one abelian sheaf an
 its exact inverse image. There are no module coefficients or scalar restrictions.
 
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1, with the coefficient map equal to
-identity on inverse image; Tag 01EQ, Lemma 20.11.2, for the comparison construction.
-(blueprint: lem-pc-cech-comparison-inverse-image-unit)
-
-Proof: First replace each normalized comparison by the augmented-resolution map.
-For uniqueness, embed F into the product of the direct images of its restrictions
-to the members of the cover. On each tuple intersection one factor retracts the
-embedding, so its cokernel sequence is surjective on tuple sections. Inserting
-the distinguished member contracts the Čech complex of each factor in positive
-degrees; products of abelian groups are exact. Thus the connecting map onto every
-positive Čech group is surjective. Induct on degree, using naturality and the
-connecting laws to compare the two maps on images of these connecting maps.
-Degree zero is their common normalization. This establishes uniqueness.
-
-Choose injective resolutions of F and of its inverse image, and resolve the direct
-image of the latter resolution. Lift the adjunction unit between these resolutions.
-The resulting Čech double complexes form the augmented pentagon of Tag 01FD.
-Its coefficient face commutes by the lift equation and its section faces commute
-by restriction functoriality. The section augmentations are quasi-isomorphisms,
-since injective Čech rows are augmented exact and total diagonals are finite.
-Apply homology and invert these augmentations to obtain the outer square. The
-right side agrees with the Ext map of exact inverse image: both agree in degree
-zero with pullback of global sections through the constant-sheaf isomorphism and
-commute with boundaries, so injective effacement identifies them in every degree.
-Finally uniqueness substitutes the supplied normalized systems. For an empty
-cover hcover makes X empty; then Y is empty as well, and all maps are zero. -/
+identity on inverse image; Tag 01EQ, Lemma 20.11.2, for the comparison construction. -/
 theorem cechComparison_inverseImage_unit
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)

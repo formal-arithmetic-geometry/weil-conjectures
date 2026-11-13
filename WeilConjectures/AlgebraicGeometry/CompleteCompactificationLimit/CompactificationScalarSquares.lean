@@ -12,8 +12,6 @@ import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupport
 set_option linter.privateModule false
 
 /-! # Completed coefficient projection squares
-Source: blueprint direct-image proof, paragraph (2).
-(blueprint: lem-sp-compactification-scalar-data).
 -/
 
 @[expose] public noncomputable section

@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBound
 
 /-! # Boundary compatibility of the augmentation quotient
 
-Source: Stacks Project, Tag 01EQ, augmented injective Čech double complex;
-Homology, the horseshoe lemma and naturality of the homology connecting map.
-(blueprint: lem-pc-abelian-cech-comparison-boundary)
+Source: Stacks Project, Tag 01EQ, augmented injective Čech double complex.
 -/
 
 @[expose] public section
@@ -57,30 +55,7 @@ private theorem comparison_quotient
 surjective on every tuple intersection. Canonicity is an essential hypothesis.
 
 Source: Stacks Project, Tag 01EQ, injective double-complex construction;
-Tags 013T (horseshoe resolutions) and 0117 (connecting-map naturality).
-(blueprint: lem-pc-abelian-cech-comparison-boundary)
-
-Proof: Take horseshoe injective resolutions of the three terms of T. Their
-sequence is split exact in each resolution degree. Applying sections on any
-tuple intersection preserves those splittings, as do products and the finite
-direct sums on total diagonals. This gives short exact sequences of section
-complexes and total complexes. The tuple-surjectivity hypothesis gives the
-short exact sequence of coefficient Čech complexes. The three alpha maps and
-the three beta maps form morphisms of these short exact sequences; each square
-is restriction naturality or the horseshoe augmentation equation. Naturality
-of homology connecting maps yields delta-Cech followed by H(beta on T.X1)
-equals H(beta on T.X3) followed by delta-total, and delta-sections followed by
-H(alpha on T.X1) equals H(alpha on T.X3) followed by delta-total. The
-constant-sheaf Hom adjunction identifies the section-complex boundary with
-the Ext boundary: both are represented by lifting a cocycle to the middle
-resolution, taking its differential, and lifting the result through the first
-inclusion. This is Sheaf.functorHdelta with the same sign convention. Replace
-the two beta maps by the assumed canonical comparison equations on these
-horseshoe resolutions. Cancel the invertible alpha map and the canonical
-Ext/section identification in degree q+1. The resulting identity is the one
-asserted below. No hypothesis of canonicity on the middle sheaf is needed.
-Degree zero uses the same boundary construction; the empty-cover case is zero.
-Finite total diagonals give the argument for arbitrary covering index sets. -/
+Tags 013T (horseshoe resolutions) and 0117 (connecting-map naturality). -/
 theorem abelianCechComparison_boundary
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

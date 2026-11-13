@@ -11,11 +11,6 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Common counit transpose of the site/scalar direct-image composites
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-scalar-six,
-det-prop-scalar-six-direct-image.proof.md, Formal properties and Finite rings paragraphs;
-Stacks Tag 07A7, remark-base-change.
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes).
-
 The comparisons and mates are the existing canonical constructions. The four helpers
 below name only the displayed composites and their counit transpose. All categories
 are ordinary uncompleted unbounded derived categories of constant-coefficient modules.
@@ -35,8 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The composite U: scalar extension of beta_A, then the pro-etale scalar mate,
 then direct image of delta_X.
-Source: scalar-six direct-image proof, Formal properties and Finite rings paragraphs,
-Stacks Tag 07A7 (blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Source: Stacks Tag 07A7. -/
 def scalarSiteDirectImageU
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -57,8 +51,7 @@ def scalarSiteDirectImageU
 
 /-- The composite V: delta_Y, comparison inverse image of the etale scalar mate,
 then beta_B.
-Source: scalar-six direct-image proof, Formal properties and Finite rings paragraphs,
-Stacks Tag 07A7 (blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Source: Stacks Tag 07A7. -/
 def scalarSiteDirectImageV
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -76,8 +69,7 @@ def scalarSiteDirectImageV
     (directImageComparisonAmbient B f).app ((Etale.scalarExtension a X).obj J)
 
 /-- The counit transpose q-flat, for any map with the source and target of U and V.
-Source: scalar-six direct-image proof, counit-transpose calculation, Stacks Tag 07A7
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Source: Stacks Tag 07A7. -/
 def scalarSiteCounitTranspose
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -101,8 +93,7 @@ def scalarSiteCounitTranspose
 
 /-- The specified common normal form: p_B(delta_Y), then d_B, then C_X^B of
 c^e followed by T_X^e of the etale A-counit.
-Source: scalar-six direct-image proof, counit-transpose calculation, Stacks Tag 07A7
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Source: Stacks Tag 07A7. -/
 def scalarSiteCounitNormalForm
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -127,31 +118,7 @@ def scalarSiteCounitNormalForm
             (ModuleCat.{u + 1} A) f).counit.app J))
 
 /-- Both counit transposes have the specified common normal form, assuming the cube
-identity only at P = r_A J.
-Source: blueprint main-20261015 scalar-six direct-image proof, Formal properties and
-Finite rings paragraphs; Stacks Tag 07A7, remark-base-change
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes).
-
-Proof, following the node's seven steps:
-1. Put E = epsilon^e_A,J, K = C_X^A J, h = beta^A_J, D = delta_X,J.
-   Expand U-flat. Naturality of the pro-etale B-counit moves s_B(D) past it.
-   The mate-counit equation for gamma^p leaves D after T_X^p(epsilon^p_A,K),
-   c^p at s_A K, and p_B T_Y^p(h).
-2. Naturality of c^p moves h across c^p. The mate-counit equation for beta^A
-   replaces p_A(h) followed by epsilon^p_A,K by d_A followed by C_X^A(E).
-   Functoriality combines their images under T_X^p.
-3. Naturality of delta_X moves C_X^A(E) past delta_X. Apply the assumed cube
-   identity at P and combine the two adjacent images under C_X^B. This is
-   precisely scalarSiteCounitNormalForm.
-4. Expand V-flat. The mate-counit equation for beta^B replaces p_B(beta^B)
-   followed by the B-counit with d_B followed by C_X^B of the etale B-counit.
-5. Naturality of d_B at gamma^e_J moves that map across d_B. Combine the
-   adjacent images under C_X^B.
-6. The mate-counit equation for gamma^e replaces l_B(gamma^e_J) followed by
-   the etale B-counit with c^e_P followed by T_X^e(E). This is the same normal form.
-7. Every arrow lies in D(X_proet,B), so is B-linear. The calculation uses only
-   functoriality, naturality, mate-counit identities and the assumed cube; no
-   direct-image mate is inverted and no geometric or boundedness condition is used. -/
+identity only at P = r_A J. -/
 theorem etaleProEtale_scalar_counit_transposes
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)

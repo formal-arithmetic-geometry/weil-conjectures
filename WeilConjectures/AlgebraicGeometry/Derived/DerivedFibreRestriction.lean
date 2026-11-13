@@ -456,19 +456,7 @@ private theorem globalGermAt_identity {S : Scheme.{u}}
 /-- The two-square fibre map agrees with the germ of the exchanged global sections
 followed by restriction to the geometric fibre.
 Source: Stacks Project, Tag 0GJV, the pullback-of-cohomology identification;
-Tags 01F8 and 08J6, functoriality of derived exchange.
-(blueprint: lem-weil-pbc-derived-fibre-restriction).
-
-Proof: paste the exchange square with the geometric-point square. Horizontal pasting
-expresses the outer exchange as pullback of the first exchange followed by the second,
-with the inverse-image composition comparisons. The inverse-image stalk isomorphism
-identifies the two stalk sources. Naturality of the global germ moves the first
-exchange past that germ. Apply derivedGlobalGerm_exchange to the geometric-point square:
-its right side is the derived inverse-image unit followed by Leray and the target germ.
-The latter is invertible on the geometric base, so it cancels the inverse target germ
-in etaleDerivedFiberMap. The remaining composite is etaleDerivedRestriction of the
-fibre inclusion. Naturality of Leray gives the displayed order of the factors.
-No exactness of sections on the base or strict-local hypothesis is used. -/
+Tags 01F8 and 08J6, functoriality of derived exchange. -/
 theorem derivedFiberMap_restriction
     {X X' S T : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ T)
     (g : T ⟶ S) (p : X' ⟶ X) (sq : IsPullback p f' f g)

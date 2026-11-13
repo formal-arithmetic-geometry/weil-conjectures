@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedProjectorCo
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.ArtinSchreierCoefficientPull
 
 /-! # Root-normalized negation of Artin–Schreier sheaves
-
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, Duality,
-the negating-roots construction (blueprint: lem-wft-as-root-negation).
 -/
 
 @[expose] public noncomputable section
@@ -128,8 +125,7 @@ theorem universalProjector_image_retraction (χ : AddChar k (MonObj.Γ Λ))
 
 /-- Negation transports the two projector images and the actual root evaluations.
 The remaining comparison with pullback along base negation is separate from this
-isomorphism of covers. Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md,
-Duality, negating roots (blueprint: lem-wft-as-root-negation). -/
+isomorphism of covers. -/
 theorem rootNegation_coverComparison (χ : AddChar k (MonObj.Γ Λ)) :
     ∃ J : image (universalProjector k Λ χ).asHom ≅
         image (condensedProjector Λ k (negativeCover k) (negativeTranslation k) χ⁻¹).asHom,

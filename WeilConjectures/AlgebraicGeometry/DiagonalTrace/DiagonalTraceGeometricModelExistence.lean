@@ -220,26 +220,7 @@ private theorem lineProjection_isIso
   rw [he]
   infer_instance
 
-/-- The normalized line pullback and projection mate exist on the given model.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-and `sk-prop-sp-tower-geometric-classes.proof.md`, clause (4).
-(blueprint: lem-sfb-diagonal-trace-geometric-model-existence).
-
-Proof: use exists_tensorGeometry to choose the sequence-site coefficient calculus
-and normalized ordinary inverse-image/direct-image adjunction, with the unital
-coefficient comparison and the ordinary tensor comparison. Apply
-linePullback_nonempty to the given normalized Chern data. Specialize ordinary
-tensor pullback to the base line and postcompose with tensor in the second factor
-by its line pullback. On pure sections, adjunction naturality identifies the second
-factor with the adjoint of the line comparison; this proves PositivePullback with
-its prescribed normalization, not just an arbitrary functor isomorphism.
-Localize this ordinary comparison. The derived twists are equivalences, so the
-right mate is invertible. Expanding the mate and homEquiv_unit identifies its
-component with exactly the specified projection. Set model to m and over_eq to hm.
-No cohomological splitting, trace, or local-freeness theorem is used for this mate
-argument. Empty schemes and empty charts obey the same formulas.
--/
+/-- The normalized line pullback and projection mate exist on the given model. -/
 theorem exists_diagonalTraceGeometricModel (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     (f : X ⟶ S) (m : X ≅ ProjectiveLine S)

@@ -78,8 +78,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import all WeilConjectures.CategoryTheory.StrictReduction.ReductionPullbackDerivedTower
 /-! # Finite reduction of completed pullback
 
-Source: Stacks Project, Tag 099N (5), and blueprint order 1262
-(blueprint: definition-completed-inverse-image).
+Source: Stacks Project, Tag 099N (5).
 
 ## Main definitions
 
@@ -112,8 +111,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
-/-- The functor whose object map is the published completed pullback.
-Source: blueprint order 1262 (blueprint: definition-completed-inverse-image). -/
+/-- The functor whose object map is the published completed pullback. -/
 def completedPullbackFunctor :
     DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) ⥤
       DerivedCategory (pbcModules X (pbcAdicCompletion X d)) :=
@@ -123,10 +121,7 @@ attribute [local irreducible] proEtaleModelRingUnit
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
   coefficientProEtaleModuleDirectImage_isRightAdjoint
 /-- The small-model module pushforward has its canonical pullback adjunction.
-Source: Stacks 03D2 (blueprint: definition-completed-inverse-image).
-Proof: the small-model site functor is continuous and cocontinuous. Compose its
-module inverse image with module sheafification; Mathlib's pullback construction
-is left adjoint to the specified sectionwise pushforward. -/
+Source: Stacks 03D2. -/
 theorem completedReductionModelPushforward_isRightAdjoint
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     (@SheafOfModules.pushforward.{u + 1} _ _ _ _ _ _ _ _ _
@@ -144,7 +139,7 @@ attribute [local instance] completedReductionModuleTowerFunctor_additive
 
 /-- An inverse-image generator from an object V and a base-change arrow U→g*V.
 It is the small-model module-adjunction unit followed by restriction along that arrow.
-Source: Stacks 03D2, 00VC (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 03D2, 00VC. -/
 def completedReductionInverseImageGenerator
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (M : pbcModules Y R)
     (V : Y.ProEt) (U : X.ProEt) (f : U ⟶ (proEtaleBaseChange g).obj V)
@@ -161,7 +156,7 @@ attribute [irreducible] completedReductionInverseImageGenerator
 
 /-- The standard localization comparison for exact restriction, with its exactness
 instances supplied by the existing coefficient interface.
-Source: Stacks 03D3 (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 03D3. -/
 def completedReductionRestrictionFactors (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     DerivedCategory.Q ⋙ pbcDerivedRestrict φ ≅
@@ -169,19 +164,18 @@ def completedReductionRestrictionFactors (T : Scheme.{u})
   (pbcRestrict φ).mapDerivedCategoryFactors
 
 /-- The existing tensor-formula module pullback over the finite coefficient sheaves.
-Source: Stacks 099N (5) (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 099N (5). -/
 abbrev completedReductionFiniteModules (n : ℕ) :=
   proEtaleRingModulePullback g (reductionCoefficient Y d n)
     (reductionCoefficient X d n) (asIso (completedFiniteCoefficientMap g d n))
 
 /-- Exact finite-coefficient pullback, with the standard localization on both sites.
-Source: Stacks 099N (5) (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 099N (5). -/
 abbrev completedReductionFiniteDerived (n : ℕ) :=
   proEtaleRingDerivedPullback g (reductionCoefficient Y d n)
     (reductionCoefficient X d n) (asIso (completedFiniteCoefficientMap g d n))
 
-/-- Finite pullback of the finite reduction, with its quotient action retained.
-Source: blueprint order 1262 (blueprint: definition-completed-inverse-image). -/
+/-- Finite pullback of the finite reduction, with its quotient action retained. -/
 def completedReductionFiniteTarget (n : ℕ) :
     DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) ⥤
       DerivedCategory (pbcModules X (reductionCoefficient X d n)) :=
@@ -189,7 +183,7 @@ def completedReductionFiniteTarget (n : ℕ) :
     completedReductionFiniteDerived g d n
 
 /-- The actual sheafified pure tensor in the tensor-formula finite pullback.
-Source: Stacks 03EK (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 03EK. -/
 def completedReductionFiniteTensor (n : ℕ)
     (M : pbcModules Y (reductionCoefficient Y d n))
     (U : X.ProEtᵒᵖ) (s : (reductionCoefficient X d n).obj.obj U)
@@ -208,8 +202,7 @@ attribute [irreducible] completedReductionFiniteTensor
 
 /-- A pure tensor generator of the finite pullback of a reduction.
 This uses the recorded scalar-extension tensor, the module inverse-image unit,
-and the actual tensor-formula finite pullback, without any choice of sections.
-Source: blueprint finite arrows (blueprint: definition-completed-inverse-image). -/
+and the actual tensor-formula finite pullback, without any choice of sections. -/
 def completedReductionFiniteGenerator (n : ℕ)
     (M : pbcModules Y (pbcAdicCompletion Y d)) (V : Y.ProEt) (U : X.ProEt)
     (f : U ⟶ (proEtaleBaseChange g).obj V)
@@ -225,7 +218,7 @@ def completedReductionFiniteGenerator (n : ℕ)
 attribute [irreducible] completedReductionFiniteGenerator
 
 /-- Explicitly inherit zero preservation before forming the complex comparison.
-Source: Stacks 03EK (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 03EK. -/
 instance completedReductionOrdinarySource_preservesZero (n : ℕ) :
     (completedReductionModuleTowerFunctor Y d ⋙ completedTowerModulePullback g d ⋙
       (CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
@@ -235,7 +228,7 @@ instance completedReductionOrdinarySource_preservesZero (n : ℕ) :
   Functor.preservesZeroMorphisms_of_additive _
 
 /-- The canonical limit projection, derived from the ordinary projection.
-Source: Stacks 08TC (blueprint: definition-completed-inverse-image). -/
+Source: Stacks 08TC. -/
 def completedReductionLimitProjection (n : ℕ) :
     completedTowerRlim d X ⟶ pbcTowerEvaluation X (pbcAdicCompletion X d) n :=
   Functor.rightDerivedFunctorNatTrans
@@ -243,8 +236,7 @@ def completedReductionLimitProjection (n : ℕ) :
       ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
         (op n)).rightDerivedFunctorIsoMapDerivedCategory.hom
 
-/-- Canonical balancing across two quotient maps, using the existing scalar adjunctions.
-Source: blueprint quotient cocycle (blueprint: definition-completed-inverse-image). -/
+/-- Canonical balancing across two quotient maps, using the existing scalar adjunctions. -/
 def completedReductionQuotientAssoc (T : Scheme.{u}) (a b c : ℕ)
     (hab : a ≤ b) (hbc : b ≤ c)
     (M : DerivedCategory (pbcModules T (reductionCoefficient T d c))) :=
@@ -253,8 +245,7 @@ def completedReductionQuotientAssoc (T : Scheme.{u}) (a b c : ℕ)
     (reductionCoefficientMap T d c a (hab.trans hbc))
     (reductionCoefficientMap_comp T d c b a hab hbc) M
 
-/-- Canonical scalar balancing for the finite reductions of a completed-coefficient object.
-Source: blueprint normalization (blueprint: definition-completed-inverse-image). -/
+/-- Canonical scalar balancing for the finite reductions of a completed-coefficient object. -/
 def completedPullbackSourceNormalization (T : Scheme.{u}) (a b : ℕ) (h : a ≤ b)
     (M : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) :=
   pbcReductionNormalization (completedReductionProjection T d b)
@@ -262,8 +253,7 @@ def completedPullbackSourceNormalization (T : Scheme.{u}) (a b : ℕ) (h : a ≤
     (completedReductionProjection_comp T d b a h) M
 
 /-- An equality of sections of a scalar-semilinear module map, stated over abstract rings.
-Naming this predicate keeps concrete finite-ring constructions out of kernel conversion.
-Source: blueprint finite arrows (blueprint: definition-completed-inverse-image). -/
+Naming this predicate keeps concrete finite-ring constructions out of kernel conversion. -/
 def completedReductionSectionEquation (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
     {M : pbcModules T R} {N : pbcModules T S}
@@ -272,8 +262,7 @@ def completedReductionSectionEquation (T : Scheme.{u})
 
 attribute [irreducible] completedReductionSectionEquation
 
-/-- The representative normalization specifying the ordinary finite comparison uniquely.
-Source: blueprint finite arrows (blueprint: definition-completed-inverse-image). -/
+/-- The representative normalization specifying the ordinary finite comparison uniquely. -/
 def HasCompletedReductionOrdinaryComparisonNormalization (n : ℕ)
     (e : completedReductionModuleTowerFunctor Y d ⋙ completedTowerModulePullback g d ⋙
         (CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj (op n) ≅
@@ -711,14 +700,7 @@ private theorem ordinaryIsoCandidate_unique (n : ℕ)
 
 end OrdinaryComparison
 
-/-- The ordinary finite comparison is fixed on inverse images of the quotient unit.
-Source: blueprint finite evaluation (blueprint: definition-completed-inverse-image).
-Proof: send b tensor the inverse image of (m tensor z) to pi(b) times the pullback
-of z tensor the inverse image of (1 tensor m). The coefficient-map projection
-identity makes this balanced. The inverse inserts 1 in the completed scalar factor.
-The quotient unit sends m to m tensor 1. Balancing determines the map from its
-values on these generators, and both maps respect restrictions. Sheafification
-extends them uniquely. The same formula commutes with maps of M and with quotients. -/
+/-- The ordinary finite comparison is fixed on inverse images of the quotient unit. -/
 theorem completedReductionOrdinaryComparison_exists (n : ℕ) :
     ∃! e : completedReductionModuleTowerFunctor Y d ⋙ completedTowerModulePullback g d ⋙
         (CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj (op n) ≅
@@ -730,8 +712,7 @@ theorem completedReductionOrdinaryComparison_exists (n : ℕ) :
   refine ⟨ordinaryIsoCandidate g d n, ordinaryIsoCandidate_normalized g d n, ?_⟩
   exact fun e he ↦ ordinaryIsoCandidate_unique g d n e he
 
-/-- The finite comparison with its unique local generator normalization.
-Source: blueprint finite evaluation (blueprint: definition-completed-inverse-image). -/
+/-- The finite comparison with its unique local generator normalization. -/
 def completedReductionOrdinaryComparison (n : ℕ) :
     completedReductionModuleTowerFunctor Y d ⋙ completedTowerModulePullback g d ⋙
         (CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj (op n) ≅
@@ -742,8 +723,7 @@ def completedReductionOrdinaryComparison (n : ℕ) :
   (completedReductionOrdinaryComparison_exists g d n).exists.choose
 
 /-- The native reduction-tower comparison is natural on complexes.
-Source: Stacks Tags 06XN and 06YY
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+Source: Stacks Tags 06XN and 06YY. -/
 def completedReductionTowerComplexNat (T : Scheme.{u}) :
     DerivedCategory.Q ⋙ completedReductionTower T d ⟶
       completedReductionComplexTowerFunctor T d ⋙ DerivedCategory.Q where
@@ -755,8 +735,7 @@ def completedReductionTowerComplexNat (T : Scheme.{u}) :
         (completedReductionTower T d) (coherenceReductionTowerCounit T d)).naturality f
 
 /-- The universal homotopy comparison, read naturally on cochain complexes.
-Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+Source: Stacks Tag 06YY. -/
 def completedReductionComplexCounitNat
     {B D : Type*} [Category* B] [Abelian B] [Category* D] [Abelian D]
     [HasDerivedCategory B] [HasDerivedCategory D]
@@ -770,8 +749,7 @@ def completedReductionComplexCounitNat
       Functor.leftDerivedCounitOnComplex] using (complexCounitNat F L ε).naturality f
 
 /-- The exact tower comparison, using its native component maps.
-Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+Source: Stacks Tag 06YY. -/
 def completedReductionPullbackComplexNat :
     DerivedCategory.Q ⋙ completedTowerPullback g d ⟶
       (completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ) ⋙
@@ -781,9 +759,7 @@ def completedReductionPullbackComplexNat :
     exact (completedReductionComplexCounitNat (completedTowerModulePullback g d)
       (completedTowerPullback g d) (completedTowerPullbackCounit g d)).naturality f
 
-/-- Compose already specified comparisons on complexes, retaining their actual maps.
-Source: composition of derived counits
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+/-- Compose already specified comparisons on complexes, retaining their actual maps. -/
 def completedReductionCompositeCounitNat
     {B C D E B' C' D' E' : Type*}
     [Category* B] [Category* C] [Category* D] [Category* E]
@@ -801,8 +777,7 @@ def completedReductionCompositeCounitNat
 attribute [local irreducible] completedReductionCompositeCounitNat
 
 /-- The universal comparison from the pulled derived reduction tower to its ordinary
-computation on a complex. This retains the actual strict tower counits.
-Source: blueprint finite projections (blueprint: definition-completed-inverse-image). -/
+computation on a complex. This retains the actual strict tower counits. -/
 def completedReductionPulledModelMap (n : ℕ)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     (pbcTowerEvaluation X (pbcAdicCompletion X d) n).obj
@@ -826,8 +801,7 @@ def completedReductionPulledModelMap (n : ℕ)
     (((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
       (op n)).mapDerivedCategoryFactors)).app P
 
-/-- The finite target's canonical comparison with a K-flat computation.
-Source: blueprint finite coefficients (blueprint: definition-completed-inverse-image). -/
+/-- The finite target's canonical comparison with a K-flat computation. -/
 def completedReductionFiniteModelMap (n : ℕ)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :=
   (completedReductionFiniteDerived g d n).map
@@ -836,9 +810,7 @@ def completedReductionFiniteModelMap (n : ℕ)
         (((reductionChange Y (completedReductionProjection Y d n)).mapHomologicalComplex
           (.up ℤ)).obj P)
 
-/-- The specified model computation as a natural transformation.
-Source: universal cochain counits
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+/-- The specified model computation as a natural transformation. -/
 def completedReductionFiniteModelNat (n : ℕ) :
     DerivedCategory.Q ⋙ completedReductionFiniteTarget g d n ⟶
       (reductionChange Y (completedReductionProjection Y d n)).mapHomologicalComplex (.up ℤ) ⋙
@@ -854,9 +826,7 @@ def completedReductionFiniteModelNat (n : ℕ) :
           (.up ℤ))
         (completedReductionFiniteModules g d n).mapDerivedCategoryFactors.hom
 
-/-- The specified model computation as a natural transformation.
-Source: universal cochain counits
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+/-- The specified model computation as a natural transformation. -/
 def completedReductionPulledModelNat (n : ℕ) :=
   letI := completedReductionModuleTowerFunctor_additive Y d
   letI := completedTowerModulePullback_additive g d
@@ -870,9 +840,7 @@ def completedReductionPulledModelNat (n : ℕ) :=
     (((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
       (op n)).mapDerivedCategoryFactors))
 
-/-- The component equation of normalized descent.
-Source: universal cochain comparisons
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+/-- The component equation of normalized descent. -/
 def completedReductionComparisonNormalized
     {B C D E C' D' : Type*}
     [Category* B] [Category* C] [Category* D] [Category* E]
@@ -900,9 +868,7 @@ def completedReductionComparisonNormalized
           δ.hom.app ((G'.mapHomologicalComplex (.up ℤ)).obj
             ((F'.mapHomologicalComplex (.up ℤ)).obj P))
 
-/-- The component equation of normalized descent.
-Source: universal cochain comparisons
-(blueprint: def-weil-pbc-completed-pullback-reduction-functor). -/
+/-- The component equation of normalized descent. -/
 def completedReductionTransitionNormalized
     {B C C' D' D : Type*}
     [Category* B] [Category* C] [Category* C'] [Category* D'] [Category* D]
@@ -928,7 +894,7 @@ def completedReductionTransitionNormalized
             ((F'.mapHomologicalComplex (.up ℤ)).obj P))
 
 /-- The representative normalization specifying the derived finite evaluation comparison uniquely.
-Source: blueprint finite arrows (blueprint: definition-completed-inverse-image). -/
+-/
 def HasCompletedReductionFiniteEvaluationNormalization (n : ℕ)
     (e : completedReductionTower Y d ⋙ completedTowerPullback g d ⋙
         pbcTowerEvaluation X (pbcAdicCompletion X d) n ≅
@@ -1234,13 +1200,7 @@ private theorem completedReduction_descend_comparison_iso
     (Functor.isoWhiskerRight (NatIso.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q)
 
 /-- The finite evaluation comparison is the descent of the specified ordinary map.
-Thus it cannot be changed by an automorphism of the finite target.
-Source: blueprint order 1262 (blueprint: definition-completed-inverse-image).
-Proof: take a flat-term K-flat representative. The constant/completed comparison
-computes the pulled reduction tower at each finite level by ordinary pullback.
-Apply completedReductionOrdinaryComparison and the exact restriction comparison.
-All quasi-isomorphisms between these models are inverted. Naturality and the
-universal counits descend the comparison uniquely, with the displayed equation. -/
+Thus it cannot be changed by an automorphism of the finite target. -/
 theorem completedReductionFiniteEvaluation_exists (n : ℕ) :
     ∃! e : completedReductionTower Y d ⋙ completedTowerPullback g d ⋙
         pbcTowerEvaluation X (pbcAdicCompletion X d) n ≅
@@ -1287,8 +1247,7 @@ theorem completedReductionFiniteEvaluation_exists (n : ℕ) :
 
 end DerivedComparisons
 
-/-- The canonical finite evaluation isomorphism fixed by the complex computation.
-Source: blueprint order 1262 (blueprint: definition-completed-inverse-image). -/
+/-- The canonical finite evaluation isomorphism fixed by the complex computation. -/
 def completedReductionFiniteEvaluation (n : ℕ) :
     completedReductionTower Y d ⋙ completedTowerPullback g d ⋙
         pbcTowerEvaluation X (pbcAdicCompletion X d) n ≅
@@ -1297,8 +1256,7 @@ def completedReductionFiniteEvaluation (n : ℕ) :
   (completedReductionFiniteEvaluation_exists g d n).exists.choose
 
 /-- The projection-induced reduction arrow is the scalar-extension adjunct of the
-actual derived-limit projection, followed by the normalized finite evaluation map.
-Source: blueprint alpha_n (blueprint: definition-completed-inverse-image). -/
+actual derived-limit projection, followed by the normalized finite evaluation map. -/
 def completedPullbackReductionArrow
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (n : ℕ) :
     (reductionDerivedChange X (completedReductionProjection X d n)).obj
@@ -1308,8 +1266,7 @@ def completedPullbackReductionArrow
         ((completedTowerPullback g d).obj ((completedReductionTower Y d).obj K)) ≫
       (completedReductionFiniteEvaluation g d n).hom.app K)
 
-/-- The sectionwise normalization specifying the ordinary quotient transition uniquely.
-Source: blueprint finite arrows (blueprint: definition-completed-inverse-image). -/
+/-- The sectionwise normalization specifying the ordinary quotient transition uniquely. -/
 def HasCompletedReductionOrdinaryTransitionNormalization (a b : ℕ) (h : a ≤ b)
     (τ : reductionChange Y (completedReductionProjection Y d b) ⋙
         completedReductionFiniteModules g d b ⟶
@@ -1596,12 +1553,7 @@ private theorem finiteGenerator_eq (n : ℕ)
   unfold completedReductionFiniteGenerator completedReductionFiniteTensor ringTensor
   rfl
 
-/-- The finite quotient transition before localization, fixed on all local generators.
-Source: blueprint transition clause (blueprint: definition-completed-inverse-image).
-Proof: apply the quotient to each coefficient in an inverse-image tensor. The square
-of finite coefficient structure maps commutes with the quotients, so balancing and
-restriction are respected. Local generators determine the map uniquely. Naturality
-in the module follows from the same formula. -/
+/-- The finite quotient transition before localization, fixed on all local generators. -/
 theorem completedReductionOrdinaryTransition_exists (a b : ℕ) (h : a ≤ b) :
     ∃! τ : reductionChange Y (completedReductionProjection Y d b) ⋙
         completedReductionFiniteModules g d b ⟶
@@ -1630,8 +1582,7 @@ theorem completedReductionOrdinaryTransition_exists (a b : ℕ) (h : a ≤ b) :
     rw [finiteGenerator_eq, finiteGenerator_eq] at hn
     exact hn
 
-/-- The actual quotient transition on ordinary finite pullback reductions.
-Source: blueprint transitions (blueprint: definition-completed-inverse-image). -/
+/-- The actual quotient transition on ordinary finite pullback reductions. -/
 def completedReductionOrdinaryTransition (a b : ℕ) (h : a ≤ b) :
     reductionChange Y (completedReductionProjection Y d b) ⋙
         completedReductionFiniteModules g d b ⟶
@@ -1642,7 +1593,7 @@ def completedReductionOrdinaryTransition (a b : ℕ) (h : a ≤ b) :
   (completedReductionOrdinaryTransition_exists g d a b h).exists.choose
 
 /-- The representative normalization specifying the derived quotient transition comparison uniquely.
-Source: blueprint finite arrows (blueprint: definition-completed-inverse-image). -/
+-/
 def HasCompletedReductionTargetTransitionNormalization (a b : ℕ) (h : a ≤ b)
     (τ : completedReductionFiniteTarget g d b ⟶
         completedReductionFiniteTarget g d a ⋙
@@ -1663,12 +1614,7 @@ def HasCompletedReductionTargetTransitionNormalization (a b : ℕ) (h : a ≤ b)
 
 attribute [irreducible] HasCompletedReductionTargetTransitionNormalization
 
-/-- The derived quotient transition, characterized by the universal K-flat comparisons.
-Source: blueprint transitions (blueprint: definition-completed-inverse-image).
-Proof: the ordinary quotient formula is natural on K-flat complexes and commutes
-with differentials. Both finite pullback and coefficient restriction are exact.
-Invert the scalar-extension comparisons on K-flat representatives and descend the
-ordinary map. The universal derived comparisons give its unique natural descent. -/
+/-- The derived quotient transition, characterized by the universal K-flat comparisons. -/
 theorem completedReductionTargetTransition_exists (a b : ℕ) (h : a ≤ b) :
     ∃! τ : completedReductionFiniteTarget g d b ⟶
         completedReductionFiniteTarget g d a ⋙
@@ -1711,8 +1657,7 @@ theorem completedReductionTargetTransition_exists (a b : ℕ) (h : a ≤ b) :
       exact completedReductionFiniteModelMap_isIso g d a P hP)
     (completedReductionOrdinaryTransition g d a b h)
 
-/-- The canonical derived transition before scalar-extension adjunction.
-Source: blueprint transitions (blueprint: definition-completed-inverse-image). -/
+/-- The canonical derived transition before scalar-extension adjunction. -/
 def completedReductionTargetTransition (a b : ℕ) (h : a ≤ b) :
     completedReductionFiniteTarget g d b ⟶
         completedReductionFiniteTarget g d a ⋙
@@ -1720,17 +1665,13 @@ def completedReductionTargetTransition (a b : ℕ) (h : a ≤ b) :
   (completedReductionTargetTransition_exists g d a b h).exists.choose
 
 /-- Normalization of the pulled reduction tower is the scalar-extension adjunct of
-its genuine quotient transition, with no reference to alpha or an arbitrary map.
-Source: blueprint normalization clause (blueprint: definition-completed-inverse-image). -/
+its genuine quotient transition, with no reference to alpha or an arbitrary map. -/
 def completedReductionTargetNormalization
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (a b : ℕ) (h : a ≤ b) :=
   ((pbcDerivedScalarAdjunction (reductionCoefficientMap X d b a h)).homEquiv _ _).symm
     ((completedReductionTargetTransition g d a b h).app K)
 
-/-- Equal-index restriction is the identity, fixed sectionwise.
-Source: blueprint unit clause (blueprint: definition-completed-inverse-image).
-Proof: the equal-index quotient is identity. Forgetting the restricted action leaves
-every section unchanged, defining inverse natural maps whose section maps are identities. -/
+/-- Equal-index restriction is the identity, fixed sectionwise. -/
 theorem completedReductionOrdinaryRestrictionUnit_exists (T : Scheme.{u}) (a : ℕ) :
     ∃! e : SheafOfModules.restrictScalars.{u + 1}
         ((adicLisseForget T).map (reductionCoefficientMap T d a a (le_refl a))) ≅ 𝟭 _,
@@ -1760,8 +1701,7 @@ theorem completedReductionOrdinaryRestrictionUnit_exists (T : Scheme.{u}) (a : �
     ext x
     exact he' M U x
 
-/-- The sectionwise identity comparison for equal-index restriction.
-Source: blueprint unit clause (blueprint: definition-completed-inverse-image). -/
+/-- The sectionwise identity comparison for equal-index restriction. -/
 def completedReductionRestrictionUnit (T : Scheme.{u}) (a : ℕ) :
     pbcDerivedRestrict (reductionCoefficientMap T d a a (le_refl a)) ≅ 𝟭 _ :=
   letI := HasDerivedCategory.standard
@@ -1770,8 +1710,7 @@ def completedReductionRestrictionUnit (T : Scheme.{u}) (a : ℕ) :
     (completedReductionOrdinaryRestrictionUnit_exists d T a).exists.choose ≪≫
       Functor.mapDerivedCategoryIdIso _
 
-/-- The canonical equal-index scalar-extension unitor, from the normalized adjunction.
-Source: blueprint unit clause (blueprint: definition-completed-inverse-image). -/
+/-- The canonical equal-index scalar-extension unitor, from the normalized adjunction. -/
 def completedReductionUnit (T : Scheme.{u}) (a : ℕ)
     (M : DerivedCategory
       (pbcModules T (reductionCoefficient T d a))) :=

@@ -141,23 +141,7 @@ private theorem conjugation_natural
   simp only [Category.assoc]
   rw [hl]
 
-/-- The derived mapping presheaves commute with localization of the etale site.
-
-Source: Stacks Project, Tag 09BE, lemma-locally-constant-map, restriction of derived maps.
-(blueprint: lem-weil-pbc-derived-mapping-presheaves-restriction)
-
-Proof: An object V of U.left's small etale site corresponds to the etale X-scheme
-with structure map V.hom followed by U.hom. The derived pullback composition
-isomorphism identifies K restricted to this X-scheme with V.hom's pullback of
-K restricted to U. Conjugation by this isomorphism and the corresponding one for L
-gives the required bijection of Hom sets; the same conjugation of isomorphisms gives
-the bijection of Isom sets. These bijections are inverse to conjugation by the inverse
-comparisons. For an arrow V to W over U.left, the two naturality composites agree by
-associativity of pullback: the underived upperStarComp associativity law lifts along
-Functor.mapDerivedCategoryNatIso, using mapDerivedCategoryCompIso's associativity
-and its naturality in each exact functor. Cancelling the middle comparison and its
-inverse gives the naturality equations for both presheaves. No finiteness, boundedness
-or nonemptiness assumption enters this argument. -/
+/-- The derived mapping presheaves commute with localization of the etale site. -/
 theorem derived_mapping_presheaves_restriction
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))

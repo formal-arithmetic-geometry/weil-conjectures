@@ -147,8 +147,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 
 /-! # Ordinary scalar extension and canonical locally closed extension
-
-Source: blueprint integral-models-generators proof (1), rationalization of the extensions.
 -/
 
 @[expose] public noncomputable section
@@ -247,20 +245,7 @@ private theorem closed_scalar_iso
 /-- Ordinary change of condensed coefficients commutes with locally closed extension.
 No flatness or lisseness is needed for this comparison.
 
-Source: blueprint integral-models-generators proof (1), final scalar-extension identity;
-Stacks Project, Tags 03DI, 03DJ and 09BM.
-(blueprint: lem-sfb-condensed-locally-closed-scalar-extension).
-
-Proof. For an open immersion use the scalar/open-extension adjunction comparison
-`CondensedRing.openImmersionShriekIso`. For the closed factor, form the scalar/direct-image
-comparison as the mate of the coefficient restriction square. Its restriction to the
-closed subscheme is an isomorphism, since the closed counit and the scalar/pullback
-comparison are isomorphisms. On the complementary open both modules vanish: closed
-extension has zero restriction, scalar extension preserves zero, and scalar extension
-commutes with pullback. Open/closed detection therefore makes this comparison invertible.
-Apply this to the closed inclusion of the scheme-theoretic closure and compose with the
-open comparison. This identifies the actual open-then-closed functors in the statement.
-Zero modules and empty immersions are included by the same restriction argument. -/
+Source: Stacks Project, Tags 03DI, 03DJ and 09BM. -/
 theorem condensedLocallyClosedExtension_scalar
     (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]

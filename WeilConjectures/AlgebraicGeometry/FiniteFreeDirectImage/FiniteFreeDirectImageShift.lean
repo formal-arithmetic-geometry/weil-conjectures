@@ -75,15 +75,7 @@ private theorem restriction_shift {Z W : Scheme.{u}} {q : Z ⟶ W}
   exact heq ▸ hm
 
 /-- The canonical scalar/direct-image mate commutes with the prescribed shifts.
-Source: Stacks Project, Tags 07A6 and 0DVC.
-(blueprint: lem-sp-finite-free-direct-image-shift).
-
-Proof: restriction/pullback is induced termwise, hence commutes with shifts.
-The normalized restriction/direct-image comparison is its mate under the canonical
-unbounded derived adjunctions. Those adjunctions commute with shifts, as do scalar
-adjunctions with their induced left shifts. Conjugation therefore gives shift
-compatibility of balancing, and a second application of the mates correspondence
-gives shift compatibility of comparison. -/
+Source: Stacks Project, Tags 07A6 and 0DVC. -/
 theorem finiteFreeDirectImageShift {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :

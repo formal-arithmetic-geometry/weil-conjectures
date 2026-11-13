@@ -18,8 +18,7 @@ import Mathlib.Algebra.Homology.SingleHomology
 /-!
 # The sheaf graph comparison in a finite compactification
 
-Source: Stacks Project, Tags 0GKM, 0F4Y and 015F
-(blueprint: lem-sfb-etale-finite-compactification-sheaf-iso).
+Source: Stacks Project, Tags 0GKM, 0F4Y and 015F.
 -/
 
 @[expose] public section
@@ -135,18 +134,7 @@ private theorem isIso_of_derived_comparison
 /-- In a compactification with finite proper part, the sheaf graph map for a separated
 quasi-compact etale map is invertible. This follows by applying degree-zero detection to
 the normalized unbounded graph comparison, since the finite pushforward is exact.
-Source: Stacks Project, Tags 0GKM, 0F4Y and 015F
-(blueprint: lem-sfb-etale-finite-compactification-sheaf-iso).
-
-Proof: the derived graph map is invertible. On a homotopy representative its formula
-is the termwise sheaf graph map followed by the finite-pushforward derived unit and the
-localization factorization isomorphisms. The latter factors are invertible, hence the
-termwise sheaf graph map becomes invertible after localization. Evaluate on the complex
-concentrated in degree zero at an arbitrary sheaf. The termwise map identifies, through
-the canonical single-complex isomorphisms, with the single of the original sheaf map.
-A quasi-isomorphism induces an invertible degree-zero homology map, and the homology
-of a single complex is its sheaf. Thus every component
-of the sheaf graph map is invertible, proving invertibility of the transformation. -/
+Source: Stacks Project, Tags 0GKM, 0F4Y and 015F. -/
 theorem isIso_etaleCompactificationGraphMap_of_isFinite
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsSeparated f] [QuasiCompact f]

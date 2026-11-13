@@ -14,9 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicReductionEndpoints
 
 /-! # The solution predicate for realized cyclic representatives
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-limit-class-solution-spec).
 -/
 
 @[expose] public noncomputable section
@@ -62,9 +59,8 @@ attribute [local irreducible] cyclicLine cyclicLineMap derivedScalars
 attribute [local irreducible] cyclicEvaluationSource cyclicEvaluationTarget
   cyclicEvaluationFunctor CyclicCartierFrame.reduce
 
-/-- The universal solution for realized representatives of the supplied arrow.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-limit-class-solution-spec).
-This names a literal equation predicate with no strict class or family selected. -/
+/-- The universal solution for realized representatives of the supplied arrow. This names a literal
+equation predicate with no strict class or family selected. -/
 @[irreducible] def cyclicLimitClassSolutionSpec
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

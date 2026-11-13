@@ -14,10 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ConstantModelStratificationTrans
 /-!
 # Transport of finite constant-model stratification witnesses
 
-Source: blueprint main-20261015, sec-six-functors/sk-lem-sf-open-ctf/
-sk-prop-proper-image-localizing-open.proof.md, Constructibility paragraph
-(blueprint: lem-sf-constant-model-stratification-transport).
-
 The adapters keep all partition and immersion data. The transport statements fix the
 cover and scalar modules before changing the module being modelled. Constructibility
 and bounded constructible cohomology use the finite constant-model convention.

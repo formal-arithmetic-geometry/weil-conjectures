@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseIma
 /-!
 # Transport of an invariant primary module filtration to etale sheaves
 
-Source: the generic-filtration argument in blueprint `theorem-cohomology-curves--2`,
-proof paragraphs 1--2; Stacks Project, Tags 04JQ, 03QT and 03SF.
+Source: Stacks Project, Tags 04JQ, 03QT and 03SF.
 -/
 
 @[expose] public section
@@ -35,29 +34,7 @@ namespace AlgebraicGeometry.Scheme
 set_option linter.unusedVariables false
 
 /-- Transport a supplied invariant subgroup chain, rather than construct a Sylow chain.
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2;
-Stacks Project, Tags 04JQ, 03QT and 03SF.
-(blueprint: lem-sc-primary-module-filtration-sheaf-transport)
-
-Proof: Regard every subgroup in the chain as an integer submodule; additive subgroups
-are automatically stable under integer scalar multiplication. Restrict the representation
-to H. The stability hypotheses give continuous discrete actions on the submodules and
-quotients, since stabilizers contain the corresponding open stabilizers in the ambient
-module. The chain inclusions and quotient maps are equivariant and form short exact
-sequences. Each quotient is finite, killed by ell, and has trivial H-action by the two
-successor hypotheses. Give it its canonical ZMod ell vector space structure and choose
-a finite basis, identifying it with a finite direct sum of copies of ZMod ell.
-The field L fixed by H has absolute Galois group H. Under the equivalence between
-abelian etale sheaves and discrete Galois modules, inverse image from Spec K to Spec L
-is restriction to H: on germs it leaves a section unchanged, and the displayed action
-compatibility identifies its monodromy with the restricted action. Transport the
-submodules and their short exact sequences through this equivalence. Equivalences
-preserve zero objects, exactness and finite biproducts, and trivial modules correspond
-to constant sheaves. The bottom and top terms give zero and the inverse image of M.
-Finally pull everything across the scheme isomorphism e, and use composition of
-inverse images and preservation of constant sheaves. For the natural-number indexing,
-use the given chain on indices at most n and its last term on all larger indices.
-This also treats n = 0: the bottom and top equalities force the module to be zero. -/
+Source: Stacks Project, Tags 04JQ, 03QT and 03SF. -/
 theorem exists_sheaf_filtration_of_invariant_primary_chain
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

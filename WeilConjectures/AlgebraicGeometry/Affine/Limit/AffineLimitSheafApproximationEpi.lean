@@ -10,10 +10,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteDiagramDescent
 import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-/-! # The approximation comparison is an epimorphism
-
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
-(blueprint: lem-sc-affine-limit-sheaf-approximation-epi). -/
+/-! # The approximation comparison is an epimorphism -/
 
 @[expose] public section
 universe u
@@ -75,18 +72,7 @@ private theorem sheafHom_ext_of_lowerStar
   rw [← a.hom.naturality, ← b.hom.naturality]
   exact congrArg (fun k ↦ F.obj.map e.hom.op ≫ k) hi
 
-/-- The counits of the pull-push approximation jointly cover the limit sheaf.
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
-(blueprint: lem-sc-affine-limit-sheaf-approximation-epi).
-
-Proof: A final directed reindexing reduces descent of a qcqs étale object to
-finite-diagram descent. Affine étale objects therefore descend to stages.
-Consequently the direct-image functors along the projections are jointly
-faithful: equality can be checked on the affine étale basis, then transported
-along a descended object's pullback isomorphism. If two maps agree after the
-colimit comparison, they agree after every counit. Applying each adjunction
-identifies this with equality of the direct images. Joint faithfulness now
-gives equality of the two maps, which is precisely epimorphy. -/
+/-- The counits of the pull-push approximation jointly cover the limit sheaf. -/
 theorem epi_affineLimitSheafApproximationComparison
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]

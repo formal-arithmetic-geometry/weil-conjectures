@@ -23,24 +23,7 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- Coefficient-level compatibility of the pullback unit with structural maps.
 Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
-Mathlib's pullback-unit adjunction identity.
-(blueprint: lem-pbc-structural-unit-coefficient-composition)
-
-Proof: Write e for pullbackObjUnitIso f. The adjunction identity gives
-unit(f) followed by pushforward(f)(e.hom) equal to the structural unit map.
-Coefficient naturality then moves e.hom across the coefficient map for f.
-For g, naturality in the source identifies coeff(g)(e.hom followed by the
-structural map) with inverseImage(g)(forget(e.hom)) followed by the structural
-coefficient map for g. Structural unit maps compose because on each open
-both composites are the structure-sheaf ring map for g followed by f.
-Apply the composite abelian adjunction to identify the composed coefficients;
-its left-adjoint comparison is invImageComp g f. Equivalently, apply
-coefficientUnit_comp and the naturality and composition comparisons for the
-unit pullback isomorphisms. Cancel the forgotten unit isomorphisms to obtain
-the equality. This is an equality of sheaf morphisms, independent of degree,
-scalars, cartesian squares or cohomology. Identity morphisms give the unit
-law; empty schemes and zero rings impose no extra hypothesis.
--/
+Mathlib's pullback-unit adjunction identity. -/
 theorem structuralUnitCoefficient_comp {X Y Z : Scheme.{u}}
     (g : Z ⟶ Y) (f : Y ⟶ X) :
     (invImage g).map (coefficientUnit f (SheafOfModules.unit X.ringCatSheaf)) ≫

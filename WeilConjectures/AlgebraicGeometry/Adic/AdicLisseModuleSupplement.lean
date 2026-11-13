@@ -46,9 +46,6 @@ public import WeilConjectures.AlgebraicGeometry.AdicLisseModule
 /-!
 # Adic-lisse modules over completed constant coefficients
 
-Source: Stacks Project, proetale.tex, Tag 09BT, Definition `definition-adic`, clause (3)
-(blueprint: def-weil-pbc-adic-lisse-module).
-
 The index `n : ℕ` denotes exponent `n + 1`. All limits are genuine limits of sheaves.
 Linearity over completed coefficients is expressed on the quotient projections, locally
 lifting a scalar in a quotient to a section of the constant coefficient ring. This also
@@ -64,7 +61,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Quotient-module sheaves, with quotient transitions, before completing.
-Source: Tag 09BT (blueprint: def-weil-pbc-adic-lisse-module). -/
+Source: Tag 09BT. -/
 def adicLisseModuleSystem (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (N : ModuleCat.{u + 1} A) :
     ℕᵒᵖ ⥤ ringedSiteModules.{u + 1} (adicLisseRing X A) :=
@@ -76,7 +73,7 @@ def adicLisseModuleSystem (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 
 /-- The completed constant module as a sheaf over the constant coefficient ring.
 Its extension to completed scalars is specified by quotient projections in the local model.
-Source: Tag 09BT (blueprint: def-weil-pbc-adic-lisse-module). -/
+Source: Tag 09BT. -/
 abbrev adicLisseCompletedModule (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (N : ModuleCat.{u + 1} A) := limit (adicLisseModuleSystem X I N)
 
@@ -85,13 +82,9 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
 /-- A local isomorphism to the completed constant module, linear over the completed
-coefficient sheaf. The abelian-sheaf isomorphism is tested on every quotient projection.
-For a completed scalar `r`, locally lift its `n`th residue to a constant-ring section `a`;
-the displayed equality says that the projection of `r • x` is `a` times that of `x`.
-The quotient-ring maps are epimorphisms, so such lifts exist locally. This is precisely
-componentwise completed-scalar linearity; it also specifies the action after inverse image.
-The limit in module sheaves has the sectionwise compatible-family underlying abelian sheaf.
-Source: Tag 09BT (blueprint: def-weil-pbc-adic-lisse-module). -/
+coefficient sheaf: the abelian-sheaf isomorphism `e` is compatible with every quotient
+projection, the projection of `r • x` being a local lift of the `n`th residue of `r` times that
+of `x`. Source: Tag 09BT. -/
 def IsAdicLisseLocalModel (X : Scheme.{u})
     (R₀ Rhat : Sheaf (ProEt.topology X) RingCat.{u + 1})
     (Rₙ : ℕ → Sheaf (ProEt.topology X) RingCat.{u + 1})
@@ -113,7 +106,7 @@ def IsAdicLisseLocalModel (X : Scheme.{u})
 `Module.Finite A (N / IN)` is equivalently finite generation over `A/I`: the scalar
 map is surjective and `I` annihilates this quotient. There is no freeness condition.
 The sieve is a covering of the final object, hence a pro-etale covering of `X`.
-Source: Tag 09BT, clause (3) (blueprint: def-weil-pbc-adic-lisse-module). -/
+Source: Tag 09BT, clause (3). -/
 def IsAdicLisseModule (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     [IsNoetherianRing A] (I : Ideal A)
     (F : ringedSiteModules.{u + 1}
@@ -136,8 +129,7 @@ Take inverse images of each quotient-module sheaf first and then their inverse l
 The scalar test uses the image of each completed-ring projection, so its action factors
 through the canonical map to the limit of inverse-image quotient rings. No preservation
 of an infinite limit by inverse image is assumed, including for the identity morphism.
-Source: Tag 09BT and the relative local-model clause of the blueprint
-(blueprint: def-weil-pbc-adic-lisse-module). -/
+Source: Tag 09BT and the relative local-model clause of. -/
 def IsRelativelyAdicLisseModule {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (F : ringedSiteModules.{u + 1} ((adicLisseForget Y).obj

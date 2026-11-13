@@ -72,13 +72,7 @@ private def targetStep
 
 /-- Scalar tensors of constant generators determine an ordinary realization map.
 
-Source: Stacks Project, Tags 06YY and 093J.
-(blueprint: new-s3-finite-perfect-adic-scalar-target-coherence)
-
-Proof: precompose with the identity restriction isomorphism and apply scalar-tensor
-extensionality. Pure tensors generate the tensor presheaf, and constant generators
-locally generate its module argument; sheafification extends the equality to all
-sections. -/
+Source: Stacks Project, Tags 06YY and 093J. -/
 theorem finitePerfectAdicScalarOrdinary_hom_ext
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : ModuleCat.{t} A) (T : CompletedAdicModules X d)

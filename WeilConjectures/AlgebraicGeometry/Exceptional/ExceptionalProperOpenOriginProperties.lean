@@ -328,16 +328,7 @@ private theorem comparison_evaluation
 -- Keep the original interface assumptions; the construction only needs hX.
 set_option linter.unusedVariables false in
 /-- The canonical proper/open comparison has the bounded-origin properties.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65.
-(blueprint: lem-sf-exceptional-proper-open-origin-properties).
-
-Proof: the finite proper mate is invertible on bounded-below inputs, and exact
-evaluation transports this fact to strict systems.  The site equivalence clauses
-transport origins through the open and proper factors.  For a finite origin, the
-right etale adjoint is bounded below by the uniform cohomological bound.  Finally,
-substituting the proper mate and the open evaluation square into the mate word,
-and cancelling the unit and counit identities, gives the displayed equality of
-actual derived morphisms. -/
+Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65. -/
 theorem exceptionalProperOpenOriginProperties
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

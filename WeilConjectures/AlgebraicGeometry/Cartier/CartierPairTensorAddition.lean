@@ -47,9 +47,7 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 /-! # Tensor addition of framed Cartier pairs
 
-Source: Stacks Project, Tags 01WT, 01WU, 03AJ, 010L, 0117 and 0G78;
-blueprint main-20261015, lemma-cycle-class-cartier-divisor, clause (b).
-(blueprint: lem-pur-cartier-pair-tensor-addition)
+Source: Stacks Project, Tags 01WT, 01WU, 03AJ, 010L, 0117 and 0G78.
 
 The geometric, framed-torsor, relative-class, extension-class and naturality clauses
 are recorded separately. Restriction uses the actual shifted cone, and the relative
@@ -73,8 +71,7 @@ local instance : MorphismProperty.ContainsIdentities
 
 /-- The existing frame torsor of the dual Cartier ideal, with its canonical invertibility
 instances supplied by the recorded divisor-line-bundle theorem.
-Source: Stacks 03AJ and blueprint divisor-class clause (b).
-(blueprint: lem-pur-cartier-pair-tensor-addition). -/
+Source: Stacks 03AJ. -/
 def cartierPairFrameTorsor {D T : Scheme.{u}} (i : D ⟶ T) (hI : i.ker.IsInvertible) :
     Sheaf.Torsor T.gmSheaf :=
   letI := hI.isInvertible_dual_toModules
@@ -83,8 +80,7 @@ def cartierPairFrameTorsor {D T : Scheme.{u}} (i : D ⟶ T) (hI : i.ker.IsInvert
   Scheme.Modules.etaleIsoTorsor (Scheme.Modules.dual i.ker.toModules)
 
 /-- The underlying ordinary-pullback frame, using the recorded frame-torsor API.
-Source: Stacks 03AJ, frames of O(D).
-(blueprint: lem-pur-cartier-pair-tensor-addition). -/
+Source: Stacks 03AJ, frames of O(D). -/
 def cartierPairFrameVal {D T : Scheme.{u}} (i : D ⟶ T) (hI : i.ker.IsInvertible)
     {U : T.Etaleᵒᵖ} (x : (cartierPairFrameTorsor i hI).sheaf.obj.obj U) :
     (Scheme.Modules.pullback U.unop.hom).obj (Scheme.Modules.unit T) ⟶
@@ -92,17 +88,13 @@ def cartierPairFrameVal {D T : Scheme.{u}} (i : D ⟶ T) (hI : i.ker.IsInvertibl
   x.down.1
 
 /-- Inclusion of one open in another as an object of the small etale site.
-Source: Stacks 0G78, restriction of the open term.
-(blueprint: lem-pur-cartier-pair-tensor-addition). -/
+Source: Stacks 0G78, restriction of the open term. -/
 def cartierPairOpenInclusion {T : Scheme.{u}} {W V : T.Opens} (h : W ≤ V) :
     Scheme.Etale.mk W.ι ⟶ Scheme.Etale.mk V.ι :=
   MorphismProperty.Over.homMk (T.homOfLE h) (T.homOfLE_ι h)
 
 /-- The identity on global sections and restriction on open sections form a commuting
-square. Source: Stacks 0G78, signed-cone refinement.
-(blueprint: lem-pur-cartier-pair-tensor-addition).
-Proof: restriction from the terminal object factors through V; functoriality of
-sections gives the equality degreewise, and extension by zero preserves it. -/
+square. Source: Stacks 0G78, signed-cone refinement. -/
 theorem cartierPairRestriction_square {T : Scheme.{u}} {W V : T.Opens} (h : W ≤ V)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     (𝟙 (relativeSections (Scheme.Etale.mk (𝟙 T)) I)) ≫
@@ -124,7 +116,7 @@ theorem cartierPairRestriction_square {T : Scheme.{u}} {W V : T.Opens} (h : W �
 
 /-- Enlargement of support in the actual signed shifted-cone model. Its coordinates
 are (x,y) to (x,y restricted to W), so there is no independently chosen sign.
-Source: Stacks 0G78 (blueprint: lem-pur-cartier-pair-tensor-addition). -/
+Source: Stacks 0G78. -/
 def cartierPairRestriction {T : Scheme.{u}} {W V : T.Opens} (h : W ≤ V)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     relativeSectionComplex T (Scheme.Etale.mk V.ι) I ⟶

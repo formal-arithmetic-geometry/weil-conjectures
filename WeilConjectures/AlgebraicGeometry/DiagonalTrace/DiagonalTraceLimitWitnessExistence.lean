@@ -12,8 +12,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! Existence of the degree-zero tower witness for a normalized diagonal source.
-Source: diagonal tower trace proof paragraph (2), evaluation and limit steps
-(blueprint: lem-sfb-diagonal-trace-limit-witness-existence).
 -/
 
 @[expose] public noncomputable section
@@ -51,18 +49,7 @@ private theorem coefficientProjection_jointly_monic
     ((congrArg ((a.coefficientForget.hom.app n).hom.app U) hn).trans
       (a.coefficient_projection n.unop U x))
 
-/-- The normalized source comparison carries the diagonal composite to one tower map.
-
-Source: diagonal tower trace proof paragraph (2), evaluation and limit steps
-(blueprint: lem-sfb-diagonal-trace-limit-witness-existence).
-Proof: the completed integral is between coefficient sheaves in degree zero.
-Full faithfulness writes it as a sheaf endomorphism. Its finite coefficient
-projections are identities by finite diagonal integration. The actual inverse-limit
-presentation of the completed coefficient sheaf detects equality of these sheaf maps,
-so the integral is the identity. Use the identity on the specified degree-zero tower
-and the recorded invertible unit/limit comparison to construct the required witness.
-This argument uses finite detection only for ordinary sheaf maps, not arbitrary
-derived morphisms. -/
+/-- The normalized source comparison carries the diagonal composite to one tower map. -/
 theorem diagonalTrace_limitWitness_exists
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

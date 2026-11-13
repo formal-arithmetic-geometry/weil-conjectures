@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 /-! # Existence of an augmentation quotient in one degree
 
 Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2.
-(blueprint: new-abelian-cech-comparison-core)
 -/
 
 @[expose] public section
@@ -86,30 +85,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A quotient comparison exists in one degree, without a normalization assertion.
 
 Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2, the quotient of beta by
-alpha; resolution independence expands the functoriality verification there.
-(blueprint: new-abelian-cech-comparison-core)
-
-Proof: Fix an injective resolution I. The section-homology identification
-exists_abelianResolutionSectionsIso gives an isomorphism e from its section
-homology to Ext, with the specified cocycle formula. Define c by H(beta),
-inverse H(alpha), and e, in that order; hα I makes the middle map invertible.
-
-For any resolution J, use InjectiveResolution.homotopyEquiv J I to lift the
-identity of F to a chain map J -> I. Applying sections to this homotopy
-equivalence makes its homology map s invertible. Applying the Čech functor,
-flipping the double complex and totalizing gives a map with homology map t.
-Restriction naturality and the augmentation identity prove the commuting alpha
-and beta squares explicitly. The alpha square and hα make t invertible.
-Transport the specified cycle z on J along the sections map. The adjunction's
-naturality identifies this cycle with a composed with the resolution lift.
-InjectiveResolution.extMk_comp_mk₀ for the identity shows its Ext class is
-unchanged. The cocycle formula for e and c(x)=extMk(a) therefore identify its
-homology class with inverse H(alpha)(H(beta)(x)). Apply the two augmentation
-squares, and cancel the invertible t, to obtain the required equation on J.
-
-The argument uses neither hcover nor a finite-cover assumption: the supplied
-quasi-isomorphisms suffice. If F is zero, or the space and cover are empty, the
-same quotient construction uses the zero groups and still applies. -/
+alpha. -/
 theorem exists_abelianCechComparison_core
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

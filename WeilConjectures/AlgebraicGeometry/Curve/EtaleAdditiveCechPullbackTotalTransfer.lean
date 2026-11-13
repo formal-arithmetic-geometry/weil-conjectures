@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalBeta
 
 /-! # Augmentation-preserving pullback maps of the additive Čech complexes
-Source: Stacks Project, Tags 01FD, 01FB and 03P2.
-(blueprint: lem-pbc-etale-additive-cech-pullback-total-transfer) -/
+Source: Stacks Project, Tags 01FD, 01FB and 03P2. -/
 
 @[expose] public section
 
@@ -22,38 +21,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- A supplied augmented coefficient comparison induces a map of the Cech totals.
-Source: Stacks Project, Tag 01FD, explicit tuple restriction maps in the proof.
-(blueprint: lem-pbc-etale-additive-cech-pullback-total-transfer)
-
-Proof: For a p-tuple y write A_y for the product of its source opens and
-B_y for the product of its target opens, identified with their intersections.
-The inclusion hinter gives B_y -> g^{-1}(A_y). Compose its open-subscheme map
-with openSectionPullback g A_y to get k_y:B_y -> g.Etale(A_y).
-In bidegree (p,q), define the map by its y-coordinate: project to the A_y
-section of I^q, apply (α.f q).hom.app (op A_y), then apply
-(J.cocomplex.X q).obj.map k_y.op. Products assemble these coordinates.
-For deletion of a tuple entry the square between the two k_y commutes:
-both maps have the same projections to A_y and Y in the defining pullback.
-Thus resolutionSectionTransfer_naturality identifies the two restricted
-coordinates. Taking the alternating sum gives the horizontal cochain equation.
-The equation α.comm and naturality of the J differential give the vertical
-one. Flip and totalize; the bidegree is preserved, so the total signs agree.
-This constructs t, and total summand inclusion naturality computes its components.
-
-In Cech degree zero, the square of k_y with the maps to the terminal objects
-commutes by the same pullback projection calculation. Section transfer naturality
-therefore gives the alpha equation. In resolution degree zero, naturality of J.ι
-and hα identify the coordinate composite with the structural coefficient map
-followed by J.ι at B_y. The inverse restrictFunctorΓ isomorphism used in beta
-identifies a function on the open with a function on its open subscheme.
-Naturality of this isomorphism identifies restriction to B_y with restriction
-along hinter; structural pullback on these functions is precisely
-unitToPushforwardObjUnit g.toRingCatSheafHom. After lifting by ULift, the supplied
-coordinate equation identifies these sections with the corresponding beta(x')
-sections. Product projection extensionality and total inclusion naturality give
-the beta equation. This uses no cover or acyclicity. Empty families have zero
-products; empty intersections have zero structural functions. Degree zero uses
-the same equations, with no negative degree or boundary selection. -/
+Source: Stacks Project, Tag 01FD, explicit tuple restriction maps in the proof. -/
 theorem exists_additiveCech_pullback_total_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

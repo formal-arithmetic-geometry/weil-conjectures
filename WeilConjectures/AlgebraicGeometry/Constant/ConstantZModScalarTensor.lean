@@ -10,8 +10,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 
 /-! # Absolute tensor and scalar extension from a constant cyclic ring
-
-Source: the finite-level tensor comparison in the Tate-twist construction.
 -/
 
 @[expose] public noncomputable section
@@ -303,21 +301,7 @@ private noncomputable def abResidueLinearLift (X : Scheme.{u}) (ℓ n : ℕ)
   exact ⟨(PresheafOfModules.restrictHomEquivOfIsLocallySurjective a P.isSheaf).symm g⟩
 
 /-- For a module over the constant cyclic ring, tensoring its underlying abelian
-sheaf with the constant coefficient group computes scalar extension.
-
-Source: blueprint `sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md`,
-finite-level formula and local-generator paragraph
-(blueprint: lem-sp-constant-zmod-scalar-tensor).
-
-Proof: sheafify the presheaf of integer tensor products A(V) tensor_Z M(V).
-A bilinear map out of this presheaf is balanced over the constant cyclic ring:
-locally each scalar lifts to an integer, and integer balancing follows from
-additivity. The balancing equality descends by separatedness of the target sheaf.
-Thus its sheafification has the scalar-extension universal property. Explicitly,
-the comparison sends b tensor m to the scalar-extension pure tensor b tensor m;
-the inverse uses the same formula on local representatives. Both composites are
-the identity on pure tensors, hence on their sums and after sheafification.
-This includes the zero coefficient ring and the empty scheme. -/
+sheaf with the constant coefficient group computes scalar extension. -/
 theorem constantZMod_scalarTensor (X : Scheme.{u}) (ℓ n : ℕ)
     (A : Type (u + 1)) [CommRing A] (a : ZMod (ℓ ^ (n + 1)) →+* A)
     (M : SheafOfModules.{u + 1} (purTwistRing X (purTwistFiniteRing X ℓ n))) :

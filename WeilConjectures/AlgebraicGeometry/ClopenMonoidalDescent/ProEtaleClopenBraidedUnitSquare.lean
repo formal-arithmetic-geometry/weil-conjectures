@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ClopenMonoidalDescent.ProEtaleCl
 /-! # Unit normalization of native braided restriction
 
 Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-unit-square).
 -/
 
 @[expose] public noncomputable section
@@ -62,7 +61,8 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 
-/-- Expand the specified unit isomorphism without unfolding it in the cancellation proof. -/
+/-- The forward map of `unitComparison` is the composite of the derived unit isomorphisms, the
+factorization `factors`, and the single-complex image of the sheaf-level unit comparison. -/
 private theorem unitComparison_hom_aux
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
@@ -85,16 +85,7 @@ private theorem unitComparison_hom_aux
   rfl
 
 /-- The inverse unit of derived restriction is the canonical degree-zero comparison.
-Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-unit-square).
-
-Proof: the unit equation for the monoidal factorization identifies the composite of
-localization and restriction unit maps. Cancel the invertible derived restriction unit
-and the target localization unit. Substitute the supplied single-complex description
-of the cochain inverse unit. Applying localization to its two factors, and associating
-composites, gives precisely the five factors defining unitComparison. Equality of the
-hom maps gives equality of the unit isomorphisms. No K-flatness, flatness, boundedness,
-nonzero coefficient, or nonempty scheme hypothesis is needed for the unit equation. -/
+Source: Stacks Project, Tags 06YU and 0FPT. -/
 theorem clopen_braided_unit_square
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

@@ -58,9 +58,7 @@ def affineVectorTraceAction (A : Type (u + 1)) [CommRing A] [Finite A]
       (vectorIntegrationBaseCoefficientPullback A N hA t v hX d).hom
 
 /-- Ordered Tate transport and compact-support exchange compose strictly after
-removing identity pullback. This statement contains no integration or trace map.
-Source: vector integration, exchange pasting and Tate composition.
-(blueprint: lem-pur-affine-vector-trace-action-comp). -/
+removing identity pullback. This statement contains no integration or trace map. -/
 theorem affineVectorTraceAction_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X X' X'' B : Scheme.{u}}

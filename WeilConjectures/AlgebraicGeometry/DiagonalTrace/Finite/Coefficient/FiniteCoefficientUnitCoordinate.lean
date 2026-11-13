@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Integral normalization of the finite additive coordinate
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-coefficient-unit-coordinate).
 -/
 
 @[expose] public noncomputable section
@@ -119,21 +116,7 @@ private theorem integerComparison_section (T : Scheme.{u}) (k : ULift.{u + 1} �
   convert hh' using 1 <;> rfl
 
 /-- The source coordinate carries the integral generator to the actual finite
-quotient. This is an equality of degree-zero sheaf maps, with no cohomology class.
-Source: diagonal-tower trace (1), constant-section normalization
-(blueprint: lem-sfb-finite-coefficient-unit-coordinate).
-
-Proof: move integerComparison to the other side of the equality and apply the
-comparison adjunction. The mate equation for finiteScalarComparison identifies
-its adjunction-unit sections with the actual associated-module-sheaf unit.
-The two constant-sheaf adjunctions defining integerComparison identify the etale
-integer generator with the same pro-etale integer generator, including its sign.
-The map ordinaryFiniteIntegralGenerator sends the integer k to k times one.
-Apply unit_sections to this scalar and the identity restriction: the result is
-the pro-etale constant-ring section k times one. This is precisely the section
-formula in finiteQuotient_existsUnique. Constant-sheaf adjunction and the
-comparison adjunction are injective on Hom, so the maps coincide. This argument
-also applies to the zero ring and the empty scheme. -/
+quotient. This is an equality of degree-zero sheaf maps, with no cohomology class. -/
 theorem finiteScalarUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :

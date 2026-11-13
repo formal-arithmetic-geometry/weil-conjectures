@@ -12,11 +12,6 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 /-!
 # Filtered presentations by finite constructible complex hearts
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-ind-heart,
-sk-prop-ind-heart.proof.md, filtered-colimit heart construction, and the finite-complex
-formulation of lem-sfb-finite-complex-heart-filtered-approximation
-(blueprint: def-sfb-finite-constructible-complex-heart-presentations).
-
 The complexes have arbitrary module differentials. Their zeroth cohomology modules
 are the finite stages; arrows of the filtered presentation are arbitrary module maps.
 -/

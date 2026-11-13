@@ -138,15 +138,7 @@ private def scalarRestrictionSquare
     rfl
 
 /-- Normalized finite coefficient encodings carry scalar restriction to ordinary
-restriction along the same constant-ring map.
-Source: the finite coefficient filtration in integral-finite-levels, first paragraph.
-(blueprint: lem-pe-finite-normalized-scalar-restriction).
-
-Proof: the sheafification adjunction transports the specified equality on constant
-sections to the scheme inverse image. Test the coefficient square after the constant
-presheaf unit and use both encoding normalizations. Reconstruct the internal scalar
-restriction as sectionwise restriction; the square identifies the two composite
-scalar actions. The identity on sections supplies a natural linear isomorphism. -/
+restriction along the same constant-ring map. -/
 theorem finite_normalized_scalar_restriction
     (a : A →+* B) (ρ : coefficient A ⟶ coefficient B) [IsMonHom ρ]
     (hρ : pointConstants A ≫ ρ.hom =

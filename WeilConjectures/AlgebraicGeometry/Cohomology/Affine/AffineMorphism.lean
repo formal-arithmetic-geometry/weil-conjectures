@@ -29,8 +29,7 @@ variable {X : Scheme.{u}}
 
 /-- **Cohomology along an affine morphism, for abelian sheaves.** Let `g : X ⟶ Y` be an affine
 morphism. Then `H^q(X, F) ≅ H^q(Y, g_* F)`, naturally in the abelian sheaves `F` on `X` which are
-Čech-acyclic on affine opens. Indeed `g_*` is exact on short exact sequences starting in such a
-sheaf, since these are surjective on the sections over the affine opens `g ⁻¹ᵁ V`. -/
+Čech-acyclic on affine opens. -/
 theorem nonempty_functorH_iso_pushforwardAb_of_isAffineHom {Y : Scheme.{u}} (g : X ⟶ Y)
     [IsAffineHom g] (q : ℕ) :
     Nonempty ((cechAcyclicOnAffines X).ι ⋙
@@ -48,13 +47,7 @@ variable (k : Type u) [Field k] {Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over
 
 /-- **Cohomology along an affine morphism.** Let `g : X ⟶ Y` be an affine morphism of
 `k`-schemes. Then `H^q(X, ℱ) ≅ H^q(Y, g_* ℱ)`, `k`-linearly and naturally in the quasi-coherent
-`𝒪_X`-module `ℱ`. The higher direct images `R^p g_* ℱ` vanish, since on an affine open `V` of `Y`
-they are computed by the cohomology of `ℱ` on the affine scheme `g ⁻¹ᵁ V`, which vanishes by
-`subsingleton_H_succ_of_isAffine`; the Leray spectral sequence then degenerates.
-
-For a closed immersion this is the cohomology clause of the blueprint lemma.
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+`𝒪_X`-module `ℱ`. In particular this applies to closed immersions. -/
 theorem nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom (g : X ⟶ Y)
     [g.IsOver (Spec (.of k))] [IsAffineHom g] (q : ℕ) :
     Nonempty ((SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ cohomologyFunctor k q ≅

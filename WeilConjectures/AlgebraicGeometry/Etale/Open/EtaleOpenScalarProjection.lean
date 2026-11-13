@@ -32,8 +32,7 @@ attribute [local irreducible] derivedTensorSymmetry
   Functor.leftDerivedFunctorIsoMapDerivedCategory
 
 /-- The ordered open projection followed by the compactification pullback comparison.
-Source: Stacks 0GL6, projection formula preceding change of rings
-(blueprint: lem-pur-etale-open-scalar-projection). -/
+Source: Stacks 0GL6, projection formula preceding change of rings. -/
 @[irreducible] def compactOpenProjection (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
@@ -156,21 +155,7 @@ private theorem compactPullback_tensor_scalar
   simp only [Functor.map_comp, NatTrans.comp_app, Functor.comp_obj]
 
 /-- Scalar compatibility of the open tensor map and composite pullback identification.
-Source: Stacks 0GL6 and 07A4; compact-scalar coherence proof step 2, open part.
-(blueprint: lem-pur-etale-open-scalar-projection).
-Proof: use the mixed open scalar/tensor square of etaleOpenScalarComparisons.
-Its scalar open comparison equals ExceptionalCoefficients.openIso by the
-open-unit transpose normalization; its restriction comparison equals the exact
-form of scalarPullbackIso. Invert the open projection and the scalar tensor
-comparisons to put this equation in forward projection orientation. Transport
-from exact restriction to left-derived inverse image through their canonical
-comparison. The scalar/pullback composition equation for c.i and c.g, followed
-by transport along c.comm, commutes with leftDerivedUpperStarCompactificationIso.
-Paste these two squares and conjugate by the signed tensor symmetries. The
-symmetry/scalar square holds on homogeneous flat K-flat tensors with the same
-Koszul sign on each side and descends by localization. Thus the displayed
-square holds for arbitrary K and M, including zero objects and the empty open;
-no boundedness, flatness, or finite coefficient hypothesis is used. -/
+Source: Stacks 0GL6 and 07A4. -/
 theorem compactOpenProjection_scalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

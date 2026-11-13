@@ -54,14 +54,7 @@ private theorem supported_image_eq
   apply source_iso_cancel (finiteEtaleConstantIso A T)
   simpa only [finiteEtaleConstantIso] using h
 
-/-- Forget support, apply any exact functor, and take the derived hom of an étale antecedent.
-Source: the second equation of GeoCartierChernEquation and exact Ext functoriality.
-(blueprint: lem-sfb-diagonal-trace-finite-supported-comparison).
-
-Proof: precompose the geometric equation with the inverse constant comparison. Ext
-associativity cancels that isomorphism and yields the canonical finiteEtaleProImage.
-Apply the exact functor and take Ext hom; degree-zero composition becomes ordinary
-composition with the single-functor image of the support-forgetting map. -/
+/-- Forget support, apply any exact functor, and take the derived hom of an étale antecedent. -/
 theorem finiteSupportedComparison_hom
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     {D T : Scheme.{u}} (i : D ⟶ T) (z : GeoCartierClass A N hA i)

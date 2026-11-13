@@ -240,21 +240,7 @@ private theorem homotopy_of_above
   · exact (hbelow n (by omega)).eq_of_src _ _
 
 /-- Maps from a bounded finite free constant complex into an acyclic complex
-are null-homotopic on an etale cover.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 08FP, lemma-local-homotopy (1).
-(blueprint: lem-weil-pbc-finite-free-etale-acyclic-homotopy).
-
-Proof: choose bounds a,b for P. Descend from b to a, constructing the homotopy
-components. Once the equation holds above n, the difference between the n-th
-map component and d_P followed by the component already constructed is a cycle
-in F^n. Acyclicity says that F^(n-1) maps epimorphically onto these cycles.
-Use a finite basis of P^n to lift this cycle map on an etale covering, and take
-that lift as the next homotopy component. Refine the preceding covering at each
-of the finitely many steps. Below a and above b all equations hold because the
-source terms are zero. The resulting components define one homotopy on each
-member of the composite cover. Zero ranks require no lifts, and an empty base
-admits the empty cover. -/
+are null-homotopic on an etale cover. -/
 theorem finiteFree_etale_acyclic_homotopy
     (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (P : CochainComplex (ModuleCat.{u + 1} B) ℤ)

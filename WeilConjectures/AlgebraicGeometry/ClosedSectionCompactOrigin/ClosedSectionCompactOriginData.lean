@@ -41,9 +41,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-! # Canonical data for the closed-section compact-origin equation
 
 The constant objects, proper and exact closed-image identifications, source maps and
-retained witnesses are the existing data of lem-pur-closed-section-compact-origin.
+retained witnesses are the data used by
+`AlgebraicGeometry.ClosedSectionCompactOrigin.closed_section_compact_origin`.
 This module separates their construction from the source-normalization theorem.
-(blueprint: def-pur-closed-section-compact-origin-data).
 -/
 
 @[expose] public noncomputable section
@@ -60,44 +60,37 @@ namespace AlgebraicGeometry.ClosedSectionCompactOrigin
 
 variable (P : WeilConjectures.PurityFiniteSetting.{u})
 
-/-- Finiteness of the retained coefficient quotient and its standard size lift.
-Source: def-pur-conventions, positive coefficient level
-(blueprint: lem-pur-closed-section-compact-origin). -/
+/-- Finiteness of the retained coefficient quotient and its standard size lift. -/
 local instance coefficientFinite : Finite P.Coefficient :=
   letI : Finite P.Ring :=
     Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
   Finite.of_equiv P.Ring Equiv.ulift.symm
 
-/-- The degree-zero etale coefficient unit, using the recorded constant sheaf.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The degree-zero etale coefficient unit, using the recorded constant sheaf. -/
 def etaleUnit (T : Scheme.{u}) :=
   (DerivedCategory.Plus.singleFunctor
     (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) 0).obj
     (SupportedConstantNormalization.constant P.Coefficient false T)
 
-/-- The degree-zero pro-etale coefficient unit on the same small site.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The degree-zero pro-etale coefficient unit on the same small site. -/
 def proUnit (T : Scheme.{u}) :=
   (DerivedCategory.Plus.singleFunctor
     (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)) 0).obj
     (SupportedConstantNormalization.constant P.Coefficient true T)
 
-/-- The degree-zero closed direct image of the etale constant module.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The degree-zero closed direct image of the etale constant module. -/
 def etaleSource {B X : Scheme.{u}} (s : B ⟶ X) :=
   (DerivedCategory.Plus.singleFunctor
     (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) 0).obj
     (SupportedConstantNormalization.supported P.Coefficient false s)
 
-/-- The degree-zero closed direct image of the pro-etale constant module.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The degree-zero closed direct image of the pro-etale constant module. -/
 def proSource {B X : Scheme.{u}} (s : B ⟶ X) :=
   (DerivedCategory.Plus.singleFunctor
     (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)) 0).obj
     (SupportedConstantNormalization.supported P.Coefficient true s)
 
-/-- Chi is the actual scalar-preserving constant comparison, descended in degree zero.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- Chi is the actual scalar-preserving constant comparison, descended in degree zero. -/
 def constantComparison (T : Scheme.{u}) :
     (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.obj
       (etaleUnit P T).obj ≅ (proUnit P T).obj :=
@@ -106,9 +99,7 @@ def constantComparison (T : Scheme.{u}) :
   (DerivedCategory.singleFunctor _ 0).mapIso
     (SupportedConstantNormalization.compareUnit P.Coefficient T)
 
-/-- Epsilon is the actual closed-constant counit mate, not a chosen isomorphism.
-Source: blueprint Step 1; supported-constant normalization
-(blueprint: lem-pur-closed-section-compact-origin). -/
+/-- Epsilon is the actual closed-constant counit mate, not a chosen isomorphism. -/
 def supportedComparison {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s] :
     (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj
       (etaleSource P s).obj ≅ (proSource P s).obj :=
@@ -119,16 +110,14 @@ def supportedComparison {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s] :
     (asIso (SupportedConstantNormalization.gamma P.Coefficient s))
 
 /-- Closed pro-etale direct image is exact by the recorded complementary-open theorem.
-Source: Stacks Tag 09BM (blueprint: lem-pur-closed-section-compact-origin). -/
+Source: Stacks Tag 09BM. -/
 instance closedPushExact {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s]
     [QuasiCompact s.openComplement.ι] :
     PreservesFiniteColimits (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) s) :=
   ProEtale.preservesFiniteColimits_lowerStar_of_isCompl s s.openComplement.ι
     (eq_compl_iff_isCompl.mp s.range_eq_compl_range_openComplement_ι)
 
-/-- Properness, exactness and the single-complex comparison identify Rs_! with s_*.
-Source: blueprint Step 1, identity/proper compactification
-(blueprint: lem-pur-closed-section-compact-origin). -/
+/-- Properness, exactness and the single-complex comparison identify Rs_! with s_*. -/
 def etaleClosedIso {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s] :
     (Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} P.Coefficient) s).obj
       (etaleUnit P B) ≅ etaleSource P s :=
@@ -141,14 +130,12 @@ def etaleClosedIso {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s] :
       s).rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
     ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) s).mapDerivedCategorySingleFunctor 0).app _)
 
-/-- The constant etale-origin object used to evaluate the published origin compositor.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The constant etale-origin object used to evaluate the published origin compositor. -/
 def originUnit (T : Scheme.{u}) :=
   (comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) T).obj
     (etaleUnit P T)
 
-/-- The pro-etale proper/exact closed-image identification, including chi at its input.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The pro-etale proper/exact closed-image identification, including chi at its input. -/
 def proClosedIso {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s]
     [QuasiCompact s.openComplement.ι] :
     (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) s).obj
@@ -162,8 +149,7 @@ def proClosedIso {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s]
   ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) s).mapDerivedCategorySingleFunctor 0).app _
 
 /-- Sigma_e uses closed identification, the canonical compositor, fs=id and the identity
-comparison, conjugated from the supplied compactification to the standing one.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+comparison, conjugated from the supplied compactification to the standing one. -/
 def etaleSigma {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     (c : Compactification f) (s : B ⟶ X) [IsClosedImmersion s] (hs : s ≫ f = 𝟙 B) :
     (Etale.rightDerivedLowerShriekOfCompactificationPlus
@@ -179,8 +165,7 @@ def etaleSigma {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
   (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).app _
 
 /-- Sigma_p uses the specified origin compositor and identity comparison, with the same
-chosen compactification c. Only canonical compactification comparisons intervene.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+chosen compactification c. Only canonical compactification comparisons intervene. -/
 def proSigma {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     (c : Compactification f) (s : B ⟶ X) [IsClosedImmersion s]
     [QuasiCompact s.openComplement.ι] (hs : s ≫ f = 𝟙 B) :
@@ -199,8 +184,7 @@ def proSigma {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     ((originCompactSupportId P.Coefficient B).app (originUnit P B)) ≪≫
   constantComparison P B
 
-/-- The specified inverse-direction beta, including the D+ inclusion comparison.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The specified inverse-direction beta, including the D+ inclusion comparison. -/
 def compactComparison {X B : Scheme.{u}} {f : X ⟶ B} (c : Compactification f)
     (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) :
     (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.obj
@@ -215,8 +199,7 @@ def compactComparison {X B : Scheme.{u}} {f : X ⟶ B} (c : Compactification f)
       (ModuleCat.{u + 1} P.Coefficient) c).app M) ≪≫
   ((compactSupportSiteComparison P.Coefficient c).app M).symm
 
-/-- The specified psi = F^p(theta) beta_M; its type retains the actual isomorphism.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The specified psi = F^p(theta) beta_M; its type retains the actual isomorphism. -/
 def targetComparison {X B : Scheme.{u}} {f : X ⟶ B} (c : Compactification f)
     (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)))
     (K : DerivedCategory.Plus
@@ -232,8 +215,7 @@ def targetComparison {X B : Scheme.{u}} {f : X ⟶ B} (c : Compactification f)
     (ProEtale.rightDerivedLowerShriekOfCompactification
       (ModuleCat.{u + 1} P.Coefficient) c).mapIso theta
 
-/-- The actual etale representative tau_e, without any invertibility assumption.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The actual etale representative tau_e, without any invertibility assumption. -/
 def etaleTau {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     (c : Compactification f) (s : B ⟶ X) [IsClosedImmersion s] (hs : s ≫ f = 𝟙 B)
     {M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))}
@@ -244,8 +226,7 @@ def etaleTau {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     (Etale.rightDerivedLowerShriekOfCompactificationPlus
       (ModuleCat.{u + 1} P.Coefficient) c).map ce
 
-/-- The actual pro-etale tau_p, with its identity-normalized source identification.
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The actual pro-etale tau_p, with its identity-normalized source identification. -/
 def proTau {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     (c : Compactification f) (s : B ⟶ X) [IsClosedImmersion s]
     [QuasiCompact s.openComplement.ι] (hs : s ≫ f = 𝟙 B)
@@ -258,8 +239,7 @@ def proTau {B X : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     (ProEtale.rightDerivedLowerShriekOfCompactification
       (ModuleCat.{u + 1} P.Coefficient) c).map cp
 
-/-- The retained constant source witness is exactly (A_B^e, chi_B).
-Source: blueprint Step 1 (blueprint: lem-pur-closed-section-compact-origin). -/
+/-- The retained constant source witness is exactly (A_B^e, chi_B). -/
 def sourceWitness (B : Scheme.{u}) :
     Scheme.FixedEtaleOriginWitness B P.Coefficient (proUnit P B) where
   complex := etaleUnit P B

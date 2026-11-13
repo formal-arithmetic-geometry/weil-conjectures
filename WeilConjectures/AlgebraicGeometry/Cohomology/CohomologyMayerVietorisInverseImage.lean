@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation
 /-! # Mayer--Vietoris naturality before scalar extension
 Source: Stacks Project, Tags 01EB and 02KH.
-(blueprint: lem-pc-cohomology-mayer-vietoris-inverse-image)
 -/
 @[expose] public section
 universe u
@@ -101,33 +100,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- Ext transport elaboration unfolds large categorical terms.
 /-- The original and pulled-back Mayer--Vietoris sequences are compatible with
-`H.baseChangeLinear`, before tensoring. Neither flatness nor quasi-coherence is needed.
-
-Source: Stacks Project, Tag 01EB, cohomology-lemma-mayer-vietoris, and Tag 02KH,
-coherent-lemma-flat-base-change-cohomology, Mayer--Vietoris alternative.
-(blueprint: lem-pc-cohomology-mayer-vietoris-inverse-image)
-
-Proof: Form the Mayer--Vietoris sequences for M and its pullback using Tag 01EB.
-Restriction and connecting maps commute with scalar endomorphisms of M by
-naturality, giving R-linear maps in the original sequence and S-linear maps in
-the pulled-back sequence. The inverse-image opens cover the pullback scheme;
-the cartesian open-subscheme isomorphisms and pullback composition isomorphisms
-identify their restricted cohomology with the displayed B terms. Exact inverse
-image on abelian sheaves transports the Mayer--Vietoris short exact sequence of
-free abelian sheaves to that for the inverse-image cover: inverse image of the
-free sheaf represented by W is the free sheaf represented by its preimage,
-since both represent sections of pushforward on W under the adjunction and
-the free-sheaf universal property. These identifications commute with inclusions.
-Applying Ext to this
-short exact sequence gives the original cohomology sequence. The constant-sheaf
-comparison and adjoint coefficient map used in H.baseChangeLinear induce a
-morphism to the pulled-back sequence. Ext functoriality gives the restriction
-and difference squares. Each connecting homomorphism is Yoneda composition with
-the short exact sequence class; exact inverse image preserves that class and
-Yoneda composition, giving the boundary square. The free-sheaf identifications
-for the union and individual opens identify these vertical maps with precisely
-H.baseChangeLinear. The initial injections and exactness of the two rows come
-from their Mayer--Vietoris sequences. No tensor product or flatness is used. -/
+`H.baseChangeLinear`, before tensoring. Neither flatness nor quasi-coherence is needed. -/
 theorem H.baseChangeLinear_mayerVietoris
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules)

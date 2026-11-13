@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareD
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalDerivedSourceNormalization
 
 /-! # Equality of the two actual endpoint transposes
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: lem-diagonal-source-endpoint-transpose-square).
 -/
 
 @[expose] public noncomputable section
@@ -39,11 +36,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
   (q : UniformizerSquareData l Y E π n A hA)
 
-/-- The two actual endpoint morphisms have equal cyclic-adjunction transposes.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-endpoint-transpose-square).
-Proof: the left endpoint transpose is the extended quotient source transpose.
-The normalized derived source square identifies it with the extended cyclic source
-transpose. The inverse right endpoint transpose identity finishes the equality. -/
+/-- The two actual endpoint morphisms have equal cyclic-adjunction transposes. -/
 theorem source_endpoint_transpose_square
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (hs : q.RestrictionNormalized s) :

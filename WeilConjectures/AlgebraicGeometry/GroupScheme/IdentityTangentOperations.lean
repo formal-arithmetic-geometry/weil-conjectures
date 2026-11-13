@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentAddition
 
 /-!
 # Compatibility of identity tangent transport with the vector-space operations
-
-Source: blueprint `def-wf-lie-algebra-derivation` and
-`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph.
 -/
 
 @[expose] public section
@@ -50,28 +47,8 @@ namespace GrpObj
 set_option backward.isDefEq.respectTransparency false in
 /-- Any map with the prescribed underlying morphism carries infinitesimal multiplication
 and scaling to the specified tangent addition and scalar multiplication.
-Source: blueprint `def-wf-lie-algebra-derivation`;
-`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph; Stacks Project, Tag
-0B2B, the construction of the vector-space operations.
-
-Proof: The addition formula in `exists_tangentVectors_vectorSpace` uses the pushout
-of two dual-number spectra over their closed points. For two infinitesimal points,
-extend each point over the two-direction spectrum using the corresponding coordinate
-projection, and multiply the two extended points. Its restriction to the first axis
-is the first point times the identity; its restriction to the second is the identity
-times the second point. The unit laws therefore make this the unique gluing of the
-two tangent vectors. Pulling back by the sum map gives the product of the original
-points, since both coordinate projections composed with the sum map are identities.
-Transport by the identity residue isomorphism commutes with these coordinate maps.
-Thus the prescribed map takes multiplication to tangent addition.
-For scaling, `infPointsScale` is precomposition by `dualNumbersScaleOver`.
-Under `dualNumbersToSpecOver`, that morphism sends epsilon to `t * epsilon`, where
-`t` is the scalar read through `Scheme.ΓSpecIso`. Mapping both coefficients by `r`
-turns it into the scaling map of the tangent vector-space specification. Its scalar
-is `r t`, which is precisely the action of `t` under `Module.compHom`.
-The two precomposition formulas agree, including when the scalar is zero.
-Subtype extensionality turns these equalities of morphisms into the asserted identities.
-No bijectivity or equivalence is assumed or concluded here. -/
+Source: Stacks Project, Tag
+0B2B, the construction of the vector-space operations. -/
 theorem identity_tangent_transport_operations
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)

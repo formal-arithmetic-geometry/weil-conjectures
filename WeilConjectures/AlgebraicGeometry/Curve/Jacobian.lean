@@ -87,12 +87,7 @@ theorem Scheme.exists_jacobian_addEquiv_prod :
 
 `Pic(C)[n] ≅ (ℤ/n)^{2g}`, `Pic(C) / n Pic(C) ≅ ℤ/n`,
 
-and `Pic⁰(C)` is `n`-divisible.
-
-By `AlgebraicGeometry.Scheme.exists_jacobian_addEquiv_prod`, `Pic(C) ≅ ℤ × J(k)` for the Jacobian
-`J` of `C`, an abelian variety of dimension `g`, whose group of `k`-points is divisible with
-`n`-torsion `(ℤ/n)^{2g}` (`AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`).
-(blueprint: `corollary-torsion-jacobian-field-extension`) -/
+and `Pic⁰(C)` is `n`-divisible. -/
 theorem Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient {n : ℕ} (hn : (n : k) ≠ 0) :
     Nonempty (AddSubgroup.torsionBy (Additive C.Pic) n ≃+
         (Fin (2 * (C ↘ Spec (.of k)).genus) → ZMod n)) ∧

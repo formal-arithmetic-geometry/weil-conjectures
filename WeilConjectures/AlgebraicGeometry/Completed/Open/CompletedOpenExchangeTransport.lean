@@ -37,8 +37,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Completed open exchange on the shared pullback presentation
 
-Source: blueprint order 1587; Stacks Tags 03DI, 09BP and 099N
-(blueprint: lem-cbc-completed-extension-zero-comparison).
+Source: Stacks Tags 03DI, 09BP and 099N.
 
 The old open exchange is retained. Its transport to `d.completedPull` is induced
 by the actual coefficient maps and universal derived counits on strict towers.
@@ -50,7 +49,6 @@ The completion-unit equation retains its ordinary adjoint-mate normalization.
 - `cbcDatumCompletedExchange`: completed open exchange on `d.completedPull`.
 
 ## Main statements
-
 -/
 
 @[expose] public noncomputable section
@@ -107,8 +105,7 @@ private theorem exactDerivedCounitComparison
 /-- Counit normalization for an exact presentation of a left-derived functor.
 Naming the entire condition keeps the concrete module-category presentations out of
 repeated elaborations of the choice predicate.
-Source: Stacks 05S7, 099N
-(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 05S7, 099N. -/
 def CategoryTheory.Functor.ExactDerivedCounitNormalization
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -419,20 +416,13 @@ private instance cbcTowerUniversal :
   exact (completedTowerPullback_exists h d).choose_spec.choose_spec.1
 
 /-- Both finite coefficient maps are induced by the same constant-section map.
-Source: Stacks 099N, finite reductions (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: expand finiteRingIso and completedFiniteCoefficientMap. Their outer maps
-are the same constant/function comparisons, and their middle map is the same
-constant inverse-image comparison. Thus their composites agree. -/
+Source: Stacks 099N, finite reductions. -/
 theorem cbcDatumFiniteCoefficient_eq (n : ℕ) :
     completedFiniteCoefficientMap h d n = (d.finiteRingIso h n).hom := by
   rfl
 
 /-- The completed scalar structures coincide, with every quotient projection retained.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: both maps are limit lifts. After the n-th projection they are inverse
-image of that projection followed by the finite map of cbcDatumFiniteCoefficient_eq.
-Joint monicity of the limit projections gives equality. Naturality in every
-quotient transition is the finite constant-comparison naturality square. -/
+Source: Stacks 099N. -/
 theorem cbcDatumCoefficient_eq :
     completedCoefficientMap h d = (d.integralRingIso h).hom := by
   apply limit.hom_ext
@@ -448,11 +438,7 @@ theorem cbcDatumCoefficient_eq :
         (d.projection T n.unop) ≫ ·) (cbcDatumFiniteCoefficient_eq d h n.unop)
 
 /-- Both ordinary functors use identical inverse image and sheafified tensor data.
-Source: Stacks 03EK, 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: use cbcDatumCoefficient_eq. The recorded scalar-extension object formula
-identifies every object with changeOfRings; its recorded map formula identifies
-every map with changeOfRingsHom after the object equality transports. Functor
-extensionality gives the equality. These formulas fix the tensor unit 1 tensor x. -/
+Source: Stacks 03EK, 099N. -/
 theorem cbcDatumModulePull_eq :
     completedModulePullback h d =
       proEtaleRingModulePullback h (d.completedRing T) (d.completedRing S)
@@ -465,18 +451,13 @@ theorem cbcDatumModulePull_eq :
       ((proEtaleModuleInverseImage h (d.completedRing T)).map f)
 
 /-- Strict tower functors agree on levels AND transition maps.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: whisker cbcDatumModulePull_eq by the identity on the entire strict tower
-category. Both constructions apply that module functor to every transition,
-including the actual quotient maps of the reduction tower. -/
+Source: Stacks 099N. -/
 theorem cbcDatumTowerModulePull_eq :
     completedTowerModulePullback h d = d.towerModulePull h := by
   exact congrArg ((Functor.whiskeringRight ℕᵒᵖ _ _).obj) (cbcDatumModulePull_eq d h)
 
 /-- The module comparison on actual complexes, with the additive structures installed.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: substitute cbcDatumModulePull_eq; preservation of zero morphisms is a
-proposition, so its two instance witnesses coincide. The mapped complexes agree. -/
+Source: Stacks 099N. -/
 theorem cbcDatumModulePullComplex_eq
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     ((completedModulePullback h d).mapHomologicalComplex (.up ℤ)).obj P =
@@ -492,9 +473,7 @@ theorem cbcDatumModulePullComplex_eq
   exact aux _ _ (cbcDatumModulePull_eq d h)
 
 /-- The strict comparison on complexes keeps all levels and transitions.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: substitute cbcDatumTowerModulePull_eq. The zero-preservation witnesses
-are proof irrelevant, so the mapped strict tower complexes agree. -/
+Source: Stacks 099N. -/
 theorem cbcDatumTowerPullComplex_eq
     (P : CochainComplex (pbcTowers T (pbcAdicCompletion T d)) ℤ) :
     ((completedTowerModulePullback h d).mapHomologicalComplex (.up ℤ)).obj P =
@@ -509,12 +488,7 @@ theorem cbcDatumTowerPullComplex_eq
   exact aux _ _ (cbcDatumTowerModulePull_eq d h)
 
 /-- The ordinary derived comparison is uniquely fixed by its resolving counit.
-Source: Stacks 099N, 06YS (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the ordinary functors coincide by cbcDatumModulePull_eq. The datum
-presentation is exact, so its termwise factorization is a universal left-derived
-counit. Uniqueness of the universal derived pair gives the isomorphism and the
-displayed counit equation on complexes. Resolve by K-flat complexes to prove
-uniqueness; exactness extends the equation to every representative. -/
+Source: Stacks 099N, 06YS. -/
 theorem cbcDatumOrdinaryTransport_exists :
     ∃! e : completedOrdinaryPullback h d ≅ d.pull h,
       ExactDerivedCounitNormalization (completedModulePullback h d)
@@ -529,17 +503,12 @@ theorem cbcDatumOrdinaryTransport_exists :
     (cbcDatumModulePullComplex_eq d h)
 
 /-- Ordinary pullback transport with its universal-counit normalization.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 099N. -/
 def cbcDatumOrdinaryTransport : completedOrdinaryPullback h d ≅ d.pull h :=
   (cbcDatumOrdinaryTransport_exists d h).exists.choose
 
 /-- The strict derived tower comparison retains the universal resolving counit.
-Source: Stacks 099N, 06YS (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: cbcDatumTowerModulePull_eq identifies the whole ordinary tower functor.
-Its exact termwise derived functor and the objectwise K-flat derived construction
-are universal left-derived pairs. Their unique comparison satisfies the equation
-below. In particular it compares one strict tower, including transitions, rather
-than choosing independent isomorphisms of its finite evaluations. -/
+Source: Stacks 099N, 06YS. -/
 theorem cbcDatumTowerTransport_exists :
     ∃! e : completedTowerPullback h d ≅ d.towerPull h,
       ExactDerivedCounitNormalization
@@ -559,19 +528,19 @@ theorem cbcDatumTowerTransport_exists :
     (cbcDatumTowerPullComplex_eq d h)
 
 /-- Canonical comparison of derived strict tower pullback presentations.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 099N. -/
 def cbcDatumTowerTransport : completedTowerPullback h d ≅ d.towerPull h :=
   (cbcDatumTowerTransport_exists d h).exists.choose
 
 /-- Apply Rlim to the strict tower transport of the very same reduction functor.
 The inverse-limit functors in the two interfaces are definitionally identical.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 099N. -/
 def cbcDatumCompletedTransport : cbcCompletedPullback d h ≅ d.completedPull h :=
   isoWhiskerLeft (completedReductionTower T d)
     (isoWhiskerRight (cbcDatumTowerTransport d h) (completedTowerRlim d S))
 
 /-- The current recorded strict completed pullback has the same normalized transport.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 099N. -/
 abbrev cbcDatumActualStrictTransport :
     pbcActualStrictCompletedPull d h ≅ d.completedPull h :=
   cbcDatumCompletedTransport d h
@@ -637,14 +606,7 @@ private theorem datumConstantComparison (K : d.derived T) :
     (completedPullbackConstantIso h d) hc he K
 
 /-- The transport preserves the actual ordinary-to-completed quotient unit.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: expand both units into constant-tower/Rlim unit, constant-pullback
-comparison and strict quotient augmentation. The constant-tower comparisons
-are fixed by the same ordinary and tower counits. The quotient augmentation
-sends x to 1 tensor x on both sides by cbcDatumModulePull_eq. The constant-limit
-adjunction is fixed by compatible-family projections, so its unit agrees too.
-Naturality and the derived counit equations then give the displayed identity.
-This argument retains all quotient transitions and applies to ambient inputs. -/
+Source: Stacks 099N. -/
 theorem cbcDatumCompletedTransport_unit (K : d.derived T) :
     (cbcCompletedPullbackComparison d h).app K ≫
         (cbcDatumCompletedTransport d h).hom.app K =
@@ -666,11 +628,7 @@ theorem cbcDatumCompletedTransport_unit (K : d.derived T) :
   exact hu
 
 /-- The currently recorded strict-tower unit obeys the same normalization.
-Source: Stacks 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: expand pbcActualStrictCompletedPullUnit and the old comparison. Both are
-the same constant-tower unit followed by the same normalized constant-pullback
-comparison and the same strict quotient augmentation. Functor associativity
-identifies their components. Apply cbcDatumCompletedTransport_unit. -/
+Source: Stacks 099N. -/
 theorem cbcDatumActualStrictTransport_unit (K : d.derived T) :
     (pbcActualStrictCompletedPullUnit d h).app K ≫
         (cbcDatumActualStrictTransport d h).hom.app K =
@@ -686,7 +644,7 @@ variable {U' U X' X : Scheme.{t}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
 
 /-- Ordinary exchange transported with the universal counits; hence it is the
 same generator-normalized adjoint mate as the retained ordinary exchange.
-Source: Stacks 03DI, 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 03DI, 099N. -/
 def cbcDatumOrdinaryExchange :
     cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ d.pull g ⟶
       d.pull gU ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' :=
@@ -699,7 +657,7 @@ def cbcDatumOrdinaryExchange :
 /-- Canonical completed open exchange on the same presentation as proper exchange.
 It is Rlim of the finite exchange followed by the extension/Rlim comparison,
 transported through the strict tower counits, with no new endpoint choice.
-Source: Stacks 09BP, 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Stacks 09BP, 099N. -/
 def cbcDatumCompletedExchange [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     (cbcCompleteProperty d U r a ha).ι ⋙
@@ -717,41 +675,7 @@ def cbcDatumCompletedExchange [QuasiCompact j]
 
 /-- Quasi-compact open extension preserves intrinsic completeness, and its canonical
 completed exchange is invertible and natural, with both sides intrinsically complete.
-Source: blueprint order 1587; Stacks 03DI, 09BP, 099N
-(blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof:
-1. Use lem-weil-proetale-weakly-etale-localization and sectionwise module limits
-to identify completed rings on both slices by every finite projection.
-lem-pc-quasi-compact-base-change makes the second open quasi-compact.
-2. lem-pur-site-restriction-module-adjunction-exact gives exact sheafified
-extension and restriction; situation-conventions descends
-them termwise. Scalar restriction leaves the direct-sum summands unchanged.
-3. lem-pc-kflat-resolution and lem-weil-pbc-ringed-slice-extension-tensor show
-that extension preserves K-flat complexes and identifies strict reductions,
-including every quotient transition, by the same pure tensor formula.
-4. lem-weil-pbc-proetale-ringed-open-closed expresses extension as a kernel of
-product-preserving functors. Closed inverse image preserves products by
-lem-weil-pbc-proetale-immersion-limit-preservation, including the empty product.
-5. Exact countable products and lem-weil-derived-limit-products-core give the
-functorial signed Roos fiber. prop-weil-pbc-rlim-functoriality and
-lem-weil-derived-limit-roos-complex identify it with the specified Rlim.
-Extension commutes with its two products and structure maps, as required by
-lem-cbc-exact-functor-rlim and the ringed strict tower homotopy-limit lemma.
-6. Apply that comparison to the finite-free Koszul tower and its unit from
-def-weil-pbc-intrinsic-completion to preserve completeness. Use
-lemma-weil-pbc-completed-pullback-reduction for completeness of pullback.
-7. prop-weil-pbc-proetale-constant-exact and
-proposition-extension-zero-restriction-closed-subscheme--11 give finite adjoint-mate exchanges.
-The summand and scalar-restriction formulas and site-morphism composition show
-they commute with quotient transitions. Constant/completed finite comparisons
-from lem-weil-pbc-constant-completion-equivalence retain those transitions.
-8. Apply functorial Rlim to that strict tower exchange and the inverse
-extension/Rlim comparison. This is the old canonical completed exchange.
-Transport it by cbcDatumCompletedTransport, which retains coefficients,
-transitions, resolving counits and quotient units. Its mate normalization is
-cbcDatumCompletedExchange_unit. Completeness is invariant under these
-isomorphisms; the two applications of step 6 give the displayed complete
-endpoints. All constituents are natural, so their composite is natural. -/
+Source: Stacks 03DI, 09BP, 099N. -/
 theorem completedOpenExchangeComparison [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     IsIso (cbcDatumCompletedExchange d sq r a ha) ∧

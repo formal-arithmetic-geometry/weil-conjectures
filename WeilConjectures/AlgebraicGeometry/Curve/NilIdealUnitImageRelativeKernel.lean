@@ -11,10 +11,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import all WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsEpi
 
 /-! # The image of nil-ideal units is the pushforward of the relative unit kernel.
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
-the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
-(blueprint: lem-sc-nil-ideal-unit-image-relative-kernel)
 -/
 
 @[expose] public section
@@ -84,26 +80,7 @@ private lemma image_kernel_comp_iso {C : Type*} [Category C] [Abelian C]
   have : StrongEpi k := strongEpi_of_epi k
   exact ⟨(image.isoStrongEpiMono k (kernel.ι r) hk).symm⟩
 
-/-- The image of nil-ideal units is the pushforward of the relative unit kernel.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
-the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
-(blueprint: lem-sc-nil-ideal-unit-image-relative-kernel)
-
-Proof: Since J ≤ I ≤ the nilradical, the closed immersion of the J subscheme
-is surjective on points. After base change to an affine etale object it is
-surjective on functions. Any lift of a unit is a unit: its basic open pulls
-back to the whole source, hence is the whole target by surjectivity on points.
-The affine open cover therefore makes the map p from Gm_X to (i_J)_*Gm_J
-locally surjective, so it is epi. Put r = (i_J)_*q_j. Pullback pasting gives an
-isomorphism e identifying p followed by r with q_I. The induced map
-ker(q_I) to ker(r) is the pullback of p along the kernel inclusion, so it is
-epi in the abelian category of sheaves. Its factorization followed by the
-kernel inclusion is the displayed map. Uniqueness of strong epi-mono image
-factorizations identifies its image with ker(r). Finally direct image
-preserves kernels, identifying ker(r) with (i_J)_*ker(q_j).
-This argument needs only J to be nil; the given hypotheses imply that.
-For I=J or I=0 both sides are zero. The empty affine object causes no
-exception: functions and units are trivial and the empty cover is covering. -/
+/-- The image of nil-ideal units is the pushforward of the relative unit kernel. -/
 theorem nonempty_nilIdealUnitImageRelativeKernelIso (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) (hIN : I ≤ X.nilradical) :
     Nonempty (image (kernel.ι (gmSheafToLowerStarGmSheaf I.subschemeι) ≫

@@ -36,14 +36,7 @@ private noncomputable def pullbackScalarIso {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- The pulled-back consecutive tower transition is an isomorphism.
 
-Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient
-normalization.  Apply the supplied normalization isomorphism of the adic
-tower at `(n+1,n)`, transport it through inverse image, and paste the
-canonical scalar restriction comparison.  The resulting map is exactly the
-displayed pulled-back transition, so it is invertible.  This statement is the
-tower-only part of the realization reduction.
-(blueprint: lem-weil-pbc-constant-adic-quotient-realization-tower-transition).
--/
+Source: Stacks Project, proetale.tex, Tag 09C6. -/
 theorem adicTowerPullback_consecutive_transition_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

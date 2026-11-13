@@ -21,8 +21,6 @@ curve over `k` at a closed point). Then for every `f ∈ K` the `k`-subspaces `f
 are commensurable: `(f O + O) / O` is finite-dimensional, and so is `(f O + O) / (f O ∩ O)` for
 `f ≠ 0` (`Subalgebra.finiteDimensional_sup_quotient_inf`). This is the hypothesis on the local
 rings in Tate's construction of residues.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section

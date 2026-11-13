@@ -19,10 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 
 /-!
 # Degree-normalized proper cohomology coordinates
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper case in degree two
-(blueprint: lem-sc-constant-proper-degree-coordinates).
 -/
 
 @[expose] public section
@@ -159,21 +155,11 @@ private theorem proper_kummer_degree_coordinates_aux
   rw [AddEquiv.symm_apply_apply]
   rfl
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper case in degree two
-(blueprint: lem-sc-constant-proper-degree-coordinates).
-
-Proof: a proper curve's open immersion into its smooth connected proper compactification is
-proper, so its image is closed as well as open and nonempty; connectedness makes the image
-all of the compactification. The immersion is an isomorphism over k and preserves genus.
-Over both fields the Kummer sequence, Brauer vanishing and divisibility of Picard degree
-zero identify H2(mu_n) with Pic/n and then with ZMod n by degree. Surjectivity of degree
-follows from a rational point of degree one. Compose these degree identifications with the
-specified primitive-root trivializations to obtain e and eK. They satisfy the displayed
-boundary equations by construction. Kummer naturality and preservation of line-bundle
-degree under extension give eK(r x) = e x; the Kummer boundary is surjective, so checking
-this equality on its image checks every class. These maps are equivalences also for n = 1,
-when both groups are zero. -/
+/-- Let `k ⊆ K` be algebraically closed fields, `C` a smooth proper connected curve over `k` with
+compactification `c` and `n` invertible in `k`. Then `C` and `c` have the same genus, and there
+are identifications `H²(C, ℤ/n) ≃ ℤ/n` and `H²(C_K, ℤ/n) ≃ ℤ/n`, compatible with the canonical
+pullback, which send the Kummer boundary of a line bundle (through the primitive-root
+trivializations) to its degree modulo `n`. -/
 theorem IsConnectedCurve.constant_proper_degree_coordinates
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

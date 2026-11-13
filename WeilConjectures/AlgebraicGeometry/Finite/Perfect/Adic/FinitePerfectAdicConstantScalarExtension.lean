@@ -94,21 +94,7 @@ private def constantFactorization (X : Scheme.{t}) (A : Type t) [CommRing A] :
 algebraic derived scalar extension on a perfect complex.
 
 Source: Stacks Project, Modules on Sites, Tag 093J; Cohomology on Sites,
-Tags 06YY and 0D6D.
-(blueprint: lem-weil-pbc-finite-perfect-adic-constant-scalar-extension).
-
-Proof: represent P by a bounded complex of finite projective A-modules. Such a
-complex is K-flat, and its termwise scalar extension computes algebraic derived
-extension along q. Universe lift preserves its finite-projective splittings, so
-its lifted complex is still bounded projective and K-flat. Apply the constant
-realization tensor comparison to these lifted complexes. On ordinary tensor
-products the comparison identifies a constant b tensor a lifted m with the lift
-of b tensor m; the inverse follows from the tensor universal property. These
-maps preserve the B-action, commute with differentials, and are natural in module
-maps. The K-flat representative counits identify their localization with the two
-derived functors in the conclusion. Transport along the chosen perfect model
-isomorphism. No adic datum, completion, chart, or nonemptiness is used; the zero
-ring and zero complex are included. -/
+Tags 06YY and 0D6D. -/
 theorem finitePerfectAdicConstant_scalarExtension
     (X : Scheme.{t}) {A B : Type t} [CommRing A] [CommRing B] (q : A →+* B)
     (P : DerivedCategory (ModuleCat.{t} A)) (hP : DerivedCategory.IsPerfect P) :

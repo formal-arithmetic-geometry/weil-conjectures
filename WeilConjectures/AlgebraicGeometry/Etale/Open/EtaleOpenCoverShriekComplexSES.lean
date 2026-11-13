@@ -12,8 +12,6 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenCoverShriekNaturalSES
 
 /-! # The termwise extension-by-zero short exact sequence
-
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
 -/
 
 @[expose] public section
@@ -23,23 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The short exact complex before passage to the derived category.
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
-(blueprint: lem-weil-pbc-etale-open-cover-shriek-complex-ses).
-
-Proof: For each degree of L take the canonical nested-open extension maps
-from the intersection, with a negative sign on the V component, and the
-sum of the two extension-by-zero counits. Naturality makes these maps of
-complexes. The composite is zero because the composites of the two nested
-maps with their respective counits are both the intersection counit.
-On a geometric stalk in both opens the sequence is diagonal difference
-followed by addition; in precisely one open it is the identity sequence
-on the only nonzero summand. The covering assumption excludes the fourth
-case. Thus the sheaf sequence in each degree is short exact by exactness
-and conservativity of geometric stalks, and degreewise short exactness
-is short exactness in the abelian category of complexes. Empty opens,
-coincident opens, and the zero ring give the same exact stalk sequences.
--/
+/-- The short exact complex before passage to the derived category. -/
 theorem exists_shortExact_openCover_lowerShriek_complex
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

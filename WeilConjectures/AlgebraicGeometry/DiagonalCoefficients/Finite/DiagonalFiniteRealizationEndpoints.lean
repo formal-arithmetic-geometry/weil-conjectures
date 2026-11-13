@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicCartierFrame
 
 /-! # Shared exact realization of source and target endpoints
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: def-diagonal-finite-realization-endpoints).
 -/
 
 @[expose] public noncomputable section

@@ -72,21 +72,7 @@ map gives a connected nonempty geometric fibre. No properness, etaleness, or fin
 partition is assumed here.
 
 Source: Stacks Project, More on Morphisms, Tag 0BUI, sentence "Then the schemes
-X_{s_i'} are geometrically connected over κ(s)".
-(blueprint: lem-weil-pbc-geometric-fibre-connected-preimage)
-
-Proof: Let W be V.toScheme and f its map to U. The residue-field point
-Spec κ(v) → W has universally injective composite to U: this factors through the
-purely inseparable map Spec κ(v) → Spec κ(u) and the monomorphism Spec κ(u) → U.
-After pullback to the geometric point its source has at most one point. Pullback
-point-surjectivity and uniqueness of v show that this source surjects onto W_Ω,
-so W_Ω has at most one point too. Another application of point-surjectivity gives
-a point of W_Ω. Its image under the open-immersion pullback map is precisely the
-inverse image of V in T_Ω, hence this inverse image is a singleton. The base change
-of q to T_Ω is geometrically connected, and its inverse image of this singleton
-is connected and nonempty by Scheme.Hom.isConnected_preimage_singleton. The
-projection identities identify it with the displayed subset of X_Ω.
--/
+X_{s_i'} are geometrically connected over κ(s)". -/
 theorem Scheme.Hom.isConnected_geometricFibre_preimage
     {X T U : Scheme.{u}} (q : X ⟶ T) [GeometricallyConnected q]
     (r : T ⟶ U) (p : X ⟶ U) (h : q ≫ r = p) (u : U) (V : T.Opens)

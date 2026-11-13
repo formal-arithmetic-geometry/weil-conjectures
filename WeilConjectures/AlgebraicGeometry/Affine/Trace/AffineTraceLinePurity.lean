@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # AffineTraceLinePurity
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6.
 -/
 
 @[expose] public noncomputable section
@@ -84,24 +83,7 @@ private theorem splitTraceIsIsoOfSection {C : Type u} [Category.{v} C] [Preaddit
     rw [Category.assoc, ht]
     simp [e]
 
-/-- The affine-line counit is invertible on every coefficient complex.
-Source: blueprint lemma-integral-linear-character--1, proof steps 2--6
-(blueprint: lem-amb-affine-trace-line-counit-iso).
-
-Proof: apply open-closed localization to the shifted Tate line on the projective
-line, then apply proper direct image. The closed vertex is the shifted Tate line
-on the base, because the infinity section is finite and its composite with the
-projection is identity. In the normalized projective-line decomposition the map
-to this vertex has first component identity. The trace is second projection.
-An elementary triangular change of the two summands makes restriction first
-projection while leaving trace second projection. A morphism to the split
-distinguished triangle then makes the restricted trace an isomorphism.
-The composite adjunction identifies this map
-with its counit at the tensor unit. For arbitrary K, open tensor comparison and
-the proper projection formula identify the counit with K tensor this trace.
-The open comparison commutes with counits by the adjunction triangle identity;
-proper projection naturality gives the remaining square. Tensoring preserves
-isomorphisms. This also covers unbounded K, the empty base, and the zero ring. -/
+/-- The affine-line counit is invertible on every coefficient complex. -/
 theorem affineTraceLineCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ)
     (hN : 0 < N) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))

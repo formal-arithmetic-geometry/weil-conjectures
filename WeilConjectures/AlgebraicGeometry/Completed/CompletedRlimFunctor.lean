@@ -51,13 +51,11 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!
 # The derived inverse-limit functor on strict completed-coefficient towers
 
-Source: blueprint, proper base change, proposition Rlim functoriality;
-Stacks Tags 079P and 08TC (blueprint: prop-weil-pbc-rlim-functoriality).
+Source: Stacks Tags 079P and 08TC.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.completedRlim_computation`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.completedRlim_computation`
 -/
 
 @[expose] public noncomputable section
@@ -81,16 +79,14 @@ attribute [instance] reductionTower_isGrothendieckAbelian
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The ordinary inverse limit of strict towers, with its canonical limit maps.
-Source: blueprint Rlim functoriality; Stacks Tag 079P
-(blueprint: prop-weil-pbc-rlim-functoriality). -/
+Source: Stacks Tag 079P. -/
 abbrev completedTowerLimit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     reductionTowerCategory T (reductionModuleRing T R) ⥤ reductionModules T R :=
   lim
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Inverse limit is additive because it is a right adjoint and preserves binary products.
-Source: blueprint Rlim functoriality (blueprint: prop-weil-pbc-rlim-functoriality). -/
+/-- Inverse limit is additive because it is a right adjoint and preserves binary products. -/
 instance coherenceTowerLimit_additive (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     (completedTowerLimit T R).Additive :=
@@ -99,8 +95,7 @@ instance coherenceTowerLimit_additive (T : Scheme.{t})
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Rlim is the total right derived functor of the actual strict inverse-limit functor.
 Its universal unit, not a choice of triangulated cones, determines its action on maps.
-Source: blueprint Rlim functoriality; Stacks Tag 079P
-(blueprint: prop-weil-pbc-rlim-functoriality). -/
+Source: Stacks Tag 079P. -/
 abbrev completedRlim (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     DerivedCategory (reductionTowerCategory T (reductionModuleRing T R)) ⥤
@@ -109,8 +104,7 @@ abbrev completedRlim (T : Scheme.{t})
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The universal comparison to the K-injective computation of Rlim.
-Source: blueprint Rlim functoriality; Stacks Tag 079P
-(blueprint: prop-weil-pbc-rlim-functoriality). -/
+Source: Stacks Tag 079P. -/
 def completedRlimUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   (completedTowerLimit T R).rightDerivedFunctorUnit
@@ -118,13 +112,7 @@ def completedRlimUnit (T : Scheme.{t})
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Rlim is computed by inverse limits of K-injective tower resolutions. It is
 triangulated, and its universal derived pair identifies all resolution choices.
-Source: blueprint proposition Rlim functoriality; Stacks Tags 079P and 08TC.
-Proof: strict towers are Grothendieck abelian by the adic coefficient datum, hence have
-functorial K-injective resolutions. The K-injective derivability structure constructs
-the total right derived functor of inverse limit. Its unit is invertible on K-injectives,
-and the derived functor is triangulated. The universal property gives a unique compatible
-isomorphism between any two derived pairs; these are the resolution-choice comparisons.
-(blueprint: prop-weil-pbc-rlim-functoriality). -/
+Source: Stacks Tags 079P and 08TC. -/
 theorem completedRlim_computation (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
     (J : CochainComplex (reductionTowerCategory T (reductionModuleRing T R)) ℤ)
@@ -136,8 +124,7 @@ theorem completedRlim_computation (T : Scheme.{t})
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The canonical derived projection is obtained by deriving the actual limit projection.
-Source: blueprint Rlim functoriality and its K-injective construction; Stacks 079P
-(blueprint: prop-weil-pbc-rlim-functoriality). -/
+Source: Stacks 079P. -/
 def completedRlimProjection (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) (n : ℕ) :
     completedRlim T R ⟶
@@ -148,8 +135,7 @@ def completedRlimProjection (T : Scheme.{t})
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The first Roos arrow is the product of the actual derived limit projections.
-Source: blueprint Rlim functoriality and derived inverse limit; Stacks 07KC and 08TC
-(blueprint: prop-weil-pbc-rlim-functoriality). -/
+Source: Stacks 07KC and 08TC. -/
 def completedRlimRoosProjection (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (reductionTowerCategory T
@@ -190,16 +176,7 @@ private theorem completedRlimProjection_unit (T : Scheme.{t})
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The K-injective computation of Rlim gives the distinguished Roos triangle with
 its specified projections, rather than a cone map chosen in a triangulated category.
-Source: blueprint Rlim functoriality and derived inverse limit; Stacks 07KC and 08TC
-(blueprint: prop-weil-pbc-rlim-functoriality).
-Proof: represent M by a K-injective strict tower J. Exact countable products of
-pro-etale module sheaves give the canonical localized Roos triangle for the actual
-limit cone of J.asFunctor. The invertible derived unit identifies its first object
-with completedRlim(M). Exact evaluation comparison isomorphisms identify its other
-objects with the prescribed derived sequence. Naturality of localization lifts
-identifies the transitions, and the universal right-derived comparison identifies
-each limit projection. Their product is precisely completedRlimRoosProjection.
-Transport the distinguished triangle along these isomorphisms. -/
+Source: Stacks 07KC and 08TC. -/
 theorem completedRlim_roos (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (reductionTowerCategory T

@@ -12,8 +12,7 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Ordinary quotient extension of a free model complex
 
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks 093M and 0G7E.
-(blueprint: lem-sfb-finite-model-ordinary-free-complex). -/
+Source: Stacks 093M and 0G7E. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -233,23 +232,8 @@ private lemma model_additive (T : Scheme.{u}) :
 
 /-- Ordinary quotient extension retains the matrix in normalized fixed coordinates.
 
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks Tags 03EK,
-093M and 0G7E (blueprint: lem-sfb-finite-model-ordinary-free-complex).
-
-Proof: identify the model of A^r with the r-fold direct sum of the integral
-regular module, using its standard basis. Scalar extension preserves finite sums
-and sends the regular module to the quotient regular module by the tensor unit
-map. In normalized section coordinates the quotient regular module is the
-constant free rank-one sheaf: the ring isomorphism in e sends every constant
-scalar section to its canonical continuous constant section. After restricting
-along constant scalars, the same identification is the constant module sheaf.
-For the map v, compose with each basis inclusion and coordinate projection.
-Each resulting scalar multiplication reduces by the actual quotient map and is
-sent by the normalized encoding to multiplication by that residue. The matrix
-maps therefore commute with the basis identifications. Map the double complex
-termwise and use this commuting square to obtain the claimed cochain isomorphism.
-Both constructions preserve the empty direct sum, covering ranks zero.
--/
+Source: Stacks Tags 03EK,
+093M and 0G7E. -/
 theorem ordinary_free_complex (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T)
     (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

@@ -135,26 +135,7 @@ private noncomputable def overRestrictionIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Local finite cohomology models give bounded finite complex models on an etale cover.
-
-Source: Stacks Project, Tag 094G, proof of lemma-locally-constant; transport of
-`CategoryTheory.exists_site_bounded_constant_model` along `AsSmall.equiv`.
-(blueprint: lem-weil-pbc-etale-site-bounded-constant-models)
-
-Proof: Replace X.Etale by AsSmall X.Etale. Both its objects and morphisms then lie
-in Type (u + 1). Transport the topology along AsSmall.down and use its associated
-precoverage, whose covering families are all families generating a covering sieve.
-The equivalence transports the terminal etale object and induces exact equivalences
-on sheaf categories and their slices. These commute with constant sheaves and
-slice restriction. Their derived functors preserve homology and identify the given
-bounded object and local cohomology trivializations with ones on this small site.
-Apply exists_site_bounded_constant_model there; a finite ring is Noetherian and
-finite modules are finitely generated. Transport the resulting constant-complex
-models and covering family back through the slice equivalences. Choose an arrow
-above each point of X from the resulting jointly surjective family, making the cover
-index a type in universe u. This does not change any model or degree bound. Finite
-modules over the finite ring have finite underlying sets. On an empty scheme use
-the empty cover. Zero complexes and bounds a = b satisfy the same construction. -/
+/-- Local finite cohomology models give bounded finite complex models on an etale cover. -/
 theorem etale_site_bounded_constant_models
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))

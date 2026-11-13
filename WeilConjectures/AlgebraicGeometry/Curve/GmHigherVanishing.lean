@@ -18,10 +18,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 Let `C` be an integral curve over an algebraically closed field `k`, with generic point
 `η : Spec k(C) ⟶ C`. Assume that `Hᵠ(Spec L, 𝔾ₘ) = 0` for `q ≥ 1` and every algebraic
-extension `L` of `k(C)` (blueprint `lemma-cohomology-multiplicative-group`). Then `Hᵠ(C_ét, 𝔾ₘ) = 0`
-for `q ≥ 2` (blueprint `lemma-cohomology-multiplicative-group--2`).
+extension `L` of `k(C)`. Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`.
 
-The argument follows the blueprint at the generic point, without spectral sequences:
+The argument works at the generic point, without spectral sequences:
 
 * `Hᵠ(C, 𝔾ₘ) ≅ Hᵠ(C, η_* η^* 𝔾ₘ)` for `q ≥ 2`
   (`AlgebraicGeometry.IsCurve.bijective_H_map_unit_fromSpecFunctionField`), and
@@ -133,11 +132,7 @@ omit [IsAlgClosed k] in
 include f in
 /-- **Cohomology of `η_* N`.** Let `C` be an integral curve over an algebraically closed field,
 with generic point `η : Spec k(C) ⟶ C`, and let `N` be a sheaf on `Spec k(C)` without higher
-cohomology on affine étale `k(C)`-schemes. Then `Hᵖ(C, η_* N) = 0` for `p ≥ 1`: for `p = 1` the
-edge map `H¹(C, η_* N) ⟶ H¹(k(C), N) = 0` is injective, and for `p ≥ 2` an injective envelope
-`0 → N → I → N' → 0` stays exact after `η_*`
-(`AlgebraicGeometry.IsCurve.epi_lowerStar_map_fromSpecFunctionField`), `η_* I` is injective, and
-`N'` again has no higher cohomology on affine étale `k(C)`-schemes. -/
+cohomology on affine étale `k(C)`-schemes. Then `Hᵖ(C, η_* N) = 0` for `p ≥ 1`. -/
 theorem subsingleton_sheafH_lowerStar_of_forall_isAffine (p : ℕ) :
     ∀ (N : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}),
       (∀ W : (Spec C.functionField).Etale, IsAffine W.left → ∀ b : ℕ,
@@ -190,14 +185,7 @@ theorem subsingleton_sheafH_lowerStar_of_forall_isAffine (p : ℕ) :
 include f in
 /-- **Higher cohomology of `𝔾ₘ` on an integral curve.** Let `C` be an integral curve over an
 algebraically closed field `k`. Assume that `Hᵠ(Spec L, 𝔾ₘ) = 0` for `q ≥ 1` and every
-algebraic extension `L` of `k(C)` (blueprint `lemma-cohomology-multiplicative-group`). Then
-`Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`.
-
-By `AlgebraicGeometry.IsCurve.bijective_H_map_unit_fromSpecFunctionField`,
-`Hᵠ(C, 𝔾ₘ) ≅ Hᵠ(C, η_* η^* 𝔾ₘ)` for `q ≥ 2`, and `η^* 𝔾ₘ = 𝔾ₘ`. An affine étale `k(C)`-scheme
-is a finite disjoint union of spectra of finite separable extensions of `k(C)`, so `𝔾ₘ` has
-no higher cohomology on it, and
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_lowerStar_of_forall_isAffine` applies. -/
+algebraic extension `L` of `k(C)`. Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`. -/
 theorem subsingleton_sheafH_gmSheaf_of_forall_field
     (hL : ∀ (L : Type u) [Field L] [Algebra C.functionField L]
       [Algebra.IsAlgebraic C.functionField L] (q : ℕ),
@@ -228,8 +216,7 @@ algebraically closed field `k`. Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`. T
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_forall_field` together with the
 vanishing for algebraic extensions of `k(C)`
 (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField`). Neither
-smoothness nor properness is needed.
-(blueprint: `lemma-cohomology-multiplicative-group--2`, for integral curves) -/
+smoothness nor properness is needed. -/
 theorem subsingleton_sheafH_gmSheaf_of_isIntegral (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H C.gmSheaf q) :=
   subsingleton_sheafH_gmSheaf_of_forall_field f
@@ -247,8 +234,7 @@ finite type over an algebraically closed field `k`. Then `Hᵠ(C_ét, 𝔾ₘ) =
 
 The finitely many connected components of `C` are clopen, so it suffices to treat each of them
 (`AlgebraicGeometry.Etale.subsingleton_H_of_isClopen`); a connected smooth curve is integral,
-and `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isIntegral` applies.
-(blueprint: `lemma-cohomology-multiplicative-group--2`) -/
+and `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isIntegral` applies. -/
 theorem subsingleton_sheafH_gmSheaf_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f]
     (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H C.gmSheaf q) := by
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f

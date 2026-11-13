@@ -24,14 +24,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Restriction from global resolution sections gives a total cycle. No covering
 or acyclicity assumption is required for this chain-map property.
-Source: Stacks Project, Tag 01FD, the left augmentation of the double complex.
-(blueprint: new-w2-additive-cech-alpha-representative)
-
-Proof: The two restrictions of a global section to a pairwise intersection agree,
-so its horizontal Cech differential is zero. Naturality of the resolution
-differential identifies its vertical differential with the restriction of the
-global differential, which is zero on cycles. The total differential is their
-sum, with vertical sign +1 in horizontal degree zero. Lift through iCycles. -/
+Source: Stacks Project, Tag 01FD, the left augmentation of the double complex. -/
 theorem additiveCech_alpha_representative
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerTens
 /-! # Derived chart homology comparison for the finite quotient layer
 
 Source: Stacks Project, sites-cohomology.tex, Tags 094I and 06YU.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-derived-homology-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -40,21 +39,10 @@ private theorem homology_iso_of_derived_iso
 
 /--
 The chartwise homology of the actual layer agrees with the chartwise homology of
-its derived constant tensor model.  This is the derived-tensor and exact-slice
-part of the comparison; the final identification with ordinary algebraic
-homology is recorded separately.
+its derived constant tensor model.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 094I (balancing identity)
-and Tag 06YU (bounded-above flat-complex calculation).
-Proof: resolve the residue reduction by the bounded-above projective complex,
-apply derived tensor descent to the kernel defining the actual layer, restrict
-to the slice over Z, and transport along the supplied residue-model
-isomorphism. Exact slice restriction and the homology functor carry the
-resulting derived isomorphism to the displayed chart homology isomorphism.
-The remaining replacement of the derived constant model by ordinary homology
-is deliberately isolated in the companion identification theorem.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-derived-homology-comparison).
--/
+and Tag 06YU (bounded-above flat-complex calculation). -/
 theorem finiteQuotient_layer_tensor_derived_homology_comparison
     (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

@@ -46,14 +46,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 /-!
 # Continuity of Ext from constructible complexes
 
-Source: blueprint main-20261015, sec-six-functors-basics/
-sk-lem-constructible-ext-continuity/_section.md, statement and proof
-(blueprint: lemma-continuity-ext-out-constructible-complex--1).
-
 All derived categories below are ordinary derived categories of internal module objects.
 The comparison is induced by a colimit cocone of complexes, hence by the termwise
 colimit cocone. Field coefficients use the finite constant-model constructibility
-recorded by definition-constructible-sheaves.
+`IsConstantModelConstructible`.
 -/
 
 @[expose] public noncomputable section
@@ -80,18 +76,14 @@ local instance extContinuityHasColimit
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
-/-- The additive functor `K ↦ Hom(C, Q(K)[q])`.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, displayed Hom groups
-(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
+/-- The additive functor `K ↦ Hom(C, Q(K)[q])`. -/
 def extContinuityTestFunctor
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (C : DerivedCategory A) (q : ℤ) : CochainComplex A ℤ ⥤ AddCommGrpCat.{w} :=
   DerivedCategory.Q ⋙ shiftFunctor (DerivedCategory A) q ⋙ preadditiveCoyoneda.obj (op C)
 
 /-- The canonical comparison induced by the arrows of the given colimit cocone.
-On the i-th Hom group it sends f to f followed by Q(c.ι_i)[q].
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, displayed natural map
-(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
+On the i-th Hom group it sends f to f followed by Q(c.ι_i)[q]. -/
 def extContinuityComparison
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     {I : Type w} [SmallCategory I]
@@ -104,9 +96,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The sheaves a_!L, expressed by an open immersion into a closed subscheme and
-finite locally free pro-etale coefficient modules. All such factorizations are allowed.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, generator paragraph
-(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
+finite locally free pro-etale coefficient modules. All such factorizations are allowed. -/
 def IsExtContinuityStratum (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop :=
   ∃ (S Z : Scheme.{u}) (j : S ⟶ Z) (i : Z ⟶ X)
@@ -117,9 +107,7 @@ def IsExtContinuityStratum (X : Scheme.{u})
         ((CondensedRing.openImmersionLowerShriek Λ j).obj L))
 
 /-- Generators with allowed integer shifts N. Taking N = univ allows every shift;
-N = {0} describes the unshifted generators used in the integral sheaf clause.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, finite extension hypothesis
-(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
+N = {0} describes the unshifted generators used in the integral sheaf clause. -/
 def extContinuityShiftedStrata (X : Scheme.{u}) (N : Set ℤ) :
     ObjectProperty (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
@@ -128,9 +116,7 @@ def extContinuityShiftedStrata (X : Scheme.{u}) (N : Set ℤ) :
 
 /-- Finite iterated extensions of the indicated generators, up to isomorphism.
 Mathlib's extensionProductIter counts n extensions from n+1 factors. Zero is included
-because the zero module is locally free of rank zero and is a stratum generator.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, finite extension hypothesis
-(blueprint: lemma-continuity-ext-out-constructible-complex--1). -/
+because the zero module is locally free of rank zero and is a stratum generator. -/
 def IsExtContinuityGenerated (X : Scheme.{u}) (N : Set ℤ)
     (C : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) : Prop :=
@@ -220,25 +206,7 @@ private theorem continuity_stratum_locus
   exact (constructibleHomContinuity_devissage (coefficientHeartRingObj R) X K).2.1
     _ _ ((DerivedCategory.singleFunctor _ 0).mapIso e).symm hgen
 
-/-- Continuity for finite extensions and shifts of locally closed lisse generators.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, displayed comparison
-(blueprint: lemma-continuity-ext-out-constructible-complex--1).
-
-Proof:
-1. For the fixed diagram, consider objects whose comparisons are isomorphisms in
-all degrees. Hom out of a distinguished triangle gives the five-term exact segment
-in the node, also after rotating the triangle. Filtered colimits of abelian groups
-are exact. The five lemma therefore gives extension closure. Shift identities replace
-q by q-n, and precomposition gives invariance under isomorphisms. Zero also belongs.
-Rotating a cone triangle gives closure under cones.
-2. Noetherianity makes X qcqs and every open quasi-compact. A locally closed
-immersion is quasi-compact and factors as an open immersion j followed by a closed
-i. Their complementary opens are quasi-compact as well. The stratum continuity
-lemma lemma-continuity-ext-out-constructible-complex--1 applies to the finite locally
-free L, each of the three coefficient rings, and the common lower bound b. Its
-comparison is the map below, since its arrows are the same cocone arrows.
-3. Induct on the finite extension expression, applying step 2 to the factors and
-step 1 to every shift, isomorphism and extension. -/
+/-- Continuity for finite extensions and shifts of locally closed lisse generators. -/
 theorem constructible_ext_continuity
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
@@ -273,14 +241,7 @@ theorem constructible_ext_continuity
   exact continuity_of_locus C K c hc hD q
 
 /-- Every bounded constructible complex with field coefficients has the generator
-hypothesis of continuity. Constructibility here means finite constant scalar models.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, clause 1
-(blueprint: lemma-continuity-ext-out-constructible-complex--1).
-
-Proof: corollary-coefficient-heart-b--2 expresses every such C by finitely many
-cones of shifted a_!L with L lisse, under precisely the Noetherian hypothesis here.
-Rotate each cone triangle A → B → Cone → A[1] to B → Cone → A[1] → B[1]. This rewrites
-the finite cone expression using extensions, shifts and isomorphisms as required. -/
+hypothesis of continuity. Constructibility here means finite constant scalar models. -/
 theorem bounded_constructible_ext_generated
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
@@ -425,15 +386,7 @@ private theorem constant_model_of_isZero
   · exact fun U _ ↦ hstr _ _ ((CondensedRing.upperStar Λ U.ι).map_isZero hM)
 
 /-- In particular all integer Ext functors from a constructible field-coefficient
-sheaf commute with filtered colimits of module objects.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1, clause 1, in particular
-(blueprint: lemma-continuity-ext-out-constructible-complex--1).
-
-Proof: a constructible sheaf in degree zero is bounded constructible. Apply
-bounded_constructible_ext_generated, then constructible_ext_continuity to its
-degree-zero diagram. This diagram has common lower bound zero, and its termwise
-colimit is the degree-zero embedding of the module colimit. The induced cocone is
-therefore exactly the Ext comparison of the source. -/
+sheaf commute with filtered colimits of module objects. -/
 theorem constructible_sheaf_ext_continuity
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})

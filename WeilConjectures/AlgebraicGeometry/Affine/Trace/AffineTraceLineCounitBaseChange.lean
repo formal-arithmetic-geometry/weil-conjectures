@@ -48,17 +48,7 @@ private theorem counitSquareComposite
   rw [reassoc_of% hoK]
   rw [← hp]
 
-/-- The affine-line counit square, before coordinate pasting.
-Source: blueprint lemma-integral-linear-character--1, proof step 8
-(blueprint: lem-amb-affine-trace-line-counit-base-change).
-
-Proof: expand the compact-support exchange into proper exchange followed by the
-inverse open exchange and the compactification comparison. The inverse open exchange
-is the mate of the open unit; the two open counit composites therefore have the same
-identity adjunct. Paste that equality with the normalized projective-line counit
-square supplied by hD, and cancel the coherent compactification comparisons.
-This is an equality of the defining unbounded mate formulas for every K. The empty
-base, zero coefficient ring and identity base change use the same triangle identities. -/
+/-- The affine-line counit square, before coordinate pasting. -/
 theorem affineTraceLineCounit_baseChange (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

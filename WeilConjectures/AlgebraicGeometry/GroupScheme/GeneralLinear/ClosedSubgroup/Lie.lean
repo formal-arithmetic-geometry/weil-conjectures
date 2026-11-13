@@ -52,18 +52,9 @@ development only has in Hopf-ideal form, and to the matrix description of the po
   are the dual of the cotangent space `𝔪/𝔪²` of `k[GL_n] ⧸ I` at the identity.
 - `AlgebraicGeometry.GeneralLinearGroup.eq_of_le_of_bijective_lieAlgebraMap`: a closed subgroup
   of a connected matrix group with the same Lie algebra is the whole group.
-The group–Lie comparison (`lemma-stable-subspaces-center`) and the central–geometric product
-(`lemma-identity-component`) for these groups are in
+The group–Lie comparison and the central–geometric product for these groups are in
 `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison` and
 `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product`.
-
-## Blueprint
-
-- `def-wf-lie-algebra-derivation`: the Lie algebra of an algebraic group as its tangent space at the
-  identity.
-- `proposition-cartier-s-theorem`: the Lie algebra clauses of Cartier's theorem.
-- `lemma-restriction-normal-subgroup`: pairs `V(J) ⊆ V(I)` with `⁅V(I), V(I)⁆ ⊆ V(J)`.
-- `lemma-identity-component`: the multiplication morphism `Z(G°)° × H° ⟶ G°`.
 -/
 
 @[expose] public section
@@ -85,7 +76,7 @@ variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
   {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
 /-- The differential `Lie(V(J)) → Lie(V(I))` of the closed immersion `V(J) ⟶ V(I)`, an injective
-homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`) -/
+homomorphism of Lie algebras. -/
 noncomputable abbrev lieAlgebraMap (h : I ≤ J) :
     GrpObj.Lie (subgroupScheme J) →ₗ⁅k⁆ GrpObj.Lie (subgroupScheme I) :=
   GrpObj.differential (subgroupSchemeHom h)
@@ -95,8 +86,7 @@ theorem lieAlgebraMap_injective (h : I ≤ J) : Function.Injective (lieAlgebraMa
 
 /-- If the closed subgroup `V(J) ⊆ V(I)` contains the commutators of `V(I)`, then the bracket of two
 tangent vectors of `V(I)` is a tangent vector of `V(J)`: the bracket is the mixed term of the
-commutator of the points `1 + εX` and `1 + δY` over `k[ε, δ]/(ε², δ²)`.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+commutator of the points `1 + εX` and `1 + δY` over `k[ε, δ]/(ε², δ²)`. -/
 theorem lie_mem_range_lieAlgebraMap (h : I ≤ J) [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     (X Y : GrpObj.Lie (subgroupScheme I)) : ⁅X, Y⁆ ∈ (lieAlgebraMap h).range :=
   GrpObj.lie_mem_range_differential_of_containsCommutators (subgroupSchemeHom h) X Y
@@ -118,14 +108,7 @@ theorem fst_comp_evalAlgHom_dualUnit (X : Matrix n n k) :
 
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component, in matrix form: a point `1 + εX` of `V(I)` with values in the dual numbers is a point
-of `V(identityComponent I)`.
-
-`identityComponent I` is the ideal of the *reduced* identity component. By Cartier's lemma
-(`Bialgebra.isPrime_iInf_pow_ker_counitAlgHom`) the functions on `G` vanishing near the identity
-form a prime ideal `P`, so `V(P)` is an irreducible closed subset of `V(I)` through the identity,
-contained in the identity component. A function vanishing on the identity component thus lies
-in `P`, hence vanishes in the local ring at the identity and on every tangent vector there.
-(blueprint: `lemma-connected-components-images-homomorphisms--3`, clause (3)) -/
+of `V(identityComponent I)`. -/
 theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X : Matrix n n k}
     (hX : dualUnit X ∈ zeroLocus I (DualNumber k)) :
     dualUnit X ∈ zeroLocus (identityComponent I) (DualNumber k) := by
@@ -195,14 +178,7 @@ theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.I
 
 -- the group structure on points of the quotient scheme makes instance search slow
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
-component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.
-
-`CharZero` is needed because `identityComponent I` is the ideal of the *reduced* identity
-component. The matrix form, for the points `1 + εX` of `V(I)` over the dual numbers, is
-`dualUnit_mem_zeroLocus_identityComponent`: a tangent vector `1 + εX` of `V(I)` satisfies the
-equations of `identityComponent I`, so it is the image of a tangent vector of
-`V(identityComponent I)` (`exists_kerPost_eq_of_mem_zeroLocus`). (blueprint:
-`proposition-cartier-s-theorem`) -/
+component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective. -/
 theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
     Function.Bijective (lieAlgebraMap (le_identityComponent I)) := by
   refine ⟨lieAlgebraMap_injective _, fun x ↦ ?_⟩
@@ -224,8 +200,7 @@ theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
   rw [GrpObj.lieEquivTangent_differential, Equiv.apply_symm_apply, hq, hpx]
 
 /-- Over an algebraically closed field of characteristic zero, the Lie algebra of an algebraic
-group is the Lie algebra of its reduced identity component. (blueprint:
-`proposition-cartier-s-theorem`) -/
+group is the Lie algebra of its reduced identity component. -/
 noncomputable def lieAlgebraEquivIdentityComponent [IsAlgClosed k] [CharZero k] :
     GrpObj.Lie (subgroupScheme (identityComponent I)) ≃ₗ⁅k⁆ GrpObj.Lie (subgroupScheme I) :=
   LieEquiv.ofBijective _ (lieAlgebraMap_identityComponent_bijective I)
@@ -370,8 +345,7 @@ theorem range_lieToMatrix :
 a closed subgroup scheme `V(I)` has dimension the Krull dimension of its coordinate ring. This is
 `AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim` for the affine scheme
 `V(I) = Spec (k[GL_n] ⧸ I)`: `Lie(V(I))` is the dual of the cotangent space at the identity, whose
-dimension is `dim (k[GL_n] ⧸ I)` by `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`.
-(blueprint: `proposition-cartier-s-theorem`) -/
+dimension is `dim (k[GL_n] ⧸ I)` by `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`. -/
 theorem finrank_lie_eq_ringKrullDim [CharZero k] :
     (Module.finrank k (GrpObj.Lie (subgroupScheme I)) : WithBot ℕ∞) =
       ringKrullDim (CoordinateRing n k ⧸ I) := by
@@ -383,8 +357,7 @@ theorem finrank_lie_eq_ringKrullDim [CharZero k] :
 /-- A closed subgroup `V(J)` of a connected matrix group `V(I)` with the same Lie algebra is all of
 `V(I)`, in characteristic zero: the Lie algebras have the dimensions of the groups
 (`finrank_lie_eq_ringKrullDim`), and `V(I)` is irreducible
-(`Matrix.GeneralLinearGroup.IsConnected.isPrime`).
-(blueprint: `lemma-connected-components-images-homomorphisms--3`, clause (1)) -/
+(`Matrix.GeneralLinearGroup.IsConnected.isPrime`). -/
 theorem eq_of_le_of_bijective_lieAlgebraMap [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
     {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (hIJ : I ≤ J)
     (h : Function.Bijective (lieAlgebraMap hIJ)) : J = I := by
@@ -401,8 +374,7 @@ Let `H = V(J) ⊆ G = V(I)` be closed subgroup schemes of `GL_n`, `I ≤ J`, suc
 `H ⟶ G` contains the commutators of `G` (`AlgebraicGeometry.IsMonHom.ContainsCommutators`), the
 scheme-theoretic form of `⁅G, G⁆ ⊆ H`; then `H` is normal in `G`
 (`AlgebraicGeometry.IsMonHom.Normal.of_containsCommutators`). The arithmetic and geometric
-monodromy groups of a represented degree datum are such a pair, and the statements of the blueprint
-about them are instances of the statements of this section. -/
+monodromy groups of a represented degree datum are such a pair. -/
 
 section Pair
 
@@ -413,7 +385,7 @@ variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
 `H° = V(identityComponent J)`, when `H = V(J) ⊆ G = V(I)` contains the commutators of `G`: in
 characteristic zero the identity components have the same Lie algebras as `G` and `H`
 (`lieAlgebraEquivIdentityComponent`), and the differentials of `H° ⟶ G° ⟶ G` and `H° ⟶ H ⟶ G`
-agree. (blueprint: `lemma-restriction-normal-subgroup`) -/
+agree. -/
 theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero k] (h : I ≤ J)
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     (X Y : GrpObj.Lie (subgroupScheme (identityComponent I))) :
@@ -433,8 +405,7 @@ theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero 
 
 /-- The standard representation of the `k`-points of `V(I)` on `kⁿ`: a point `Spec k ⟶ V(I)` acts
 through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`: the algebraic-group
-module of `V(I) ⟶ GL_n`. (blueprint: `definition-monodromy-groups`,
-`def-wf-algebraic-representations`) -/
+module of `V(I) ⟶ GL_n`. -/
 noncomputable def standardRepresentation (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Representation k (points (subgroupScheme I) k) (n → k) :=
   RationalHom.representation (subgroupSchemeι I)
@@ -443,7 +414,7 @@ variable [IsAlgClosed k]
 
 /-- The multiplication morphism `Z(G°)° × H° ⟶ G°` of group schemes, for closed subgroups
 `H = V(J) ⊆ G = V(I)` of `GL_n`: the composite of the closed immersions of the two factors into
-`G°` with the multiplication of `G°`. (blueprint: `lemma-identity-component`) -/
+`G°` with the multiplication of `G°`. -/
 noncomputable def mulCenterIdentityComponent (h : I ≤ J) :
     subgroupScheme (identityComponent (center (identityComponent I))) ⊗
         subgroupScheme (identityComponent J) ⟶

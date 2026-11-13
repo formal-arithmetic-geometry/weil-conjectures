@@ -63,24 +63,7 @@ private lemma constant_adjunct_invImage {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 /-- Inverse-image maps on cohomology compose under the canonical comparison.
 Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
-Mathlib's exact-functor action on Ext and uniqueness of left-adjoint comparisons.
-(blueprint: lem-pbc-inverse-image-cohomology-composition)
-
-Proof: The constant integer comparison for the composite is the comparison
-for g followed by the inverse image under g of the comparison for f, then
-invImageComp g f evaluated at the constant integer sheaf. This follows by
-applying the composite adjunction: both comparisons are adjoint to the same
-constant sections map, so uniqueness of adjuncts identifies them. Expand
-H.mapFunctor as precomposition by the constant comparison followed by the
-exact-functor action on Ext. The exact-functor action preserves composition
-and degree-zero morphisms. Its action for a composite functor agrees with
-the successive actions; naturality in the natural isomorphism invImageComp
-identifies the composite action with the action of inverse image along g ≫ f.
-Associativity of Ext composition and the constant comparison identity give
-the displayed equality. No coefficient morphisms occur here. This works for
-any abelian sheaf, including zero, every nonnegative degree, identities and
-empty schemes.
--/
+Mathlib's exact-functor action on Ext and uniqueness of left-adjoint comparisons. -/
 theorem inverseImageCohomology_comp {X Y Z : Scheme.{u}}
     (g : Z ⟶ Y) (f : Y ⟶ X)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

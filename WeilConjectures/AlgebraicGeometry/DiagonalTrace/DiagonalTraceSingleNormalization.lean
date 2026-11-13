@@ -51,9 +51,7 @@ private theorem rightSingle_naturality
     Functor.whiskerLeft_app, Functor.comp_map] using! t.naturality f
 
 /-- The degree-zero square for an exact scalar restriction. This named proposition
-keeps concrete system-category specializations from expanding the equality repeatedly.
-Source: normalized scalar restriction (blueprint:
-lem-sfb-diagonal-trace-varying-full-normalization). -/
+keeps concrete system-category specializations from expanding the equality repeatedly. -/
 @[irreducible]
 def DiagonalSingleSquare
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
@@ -231,16 +229,7 @@ private theorem natTrans_ext_kInjective
 
 /-- Normalization on K-injective representatives determines the full derived square.
 
-Source: diagonal tower trace proof (1), normalized scalar restriction before the
-Milnor step; Stacks Tag 070G, uniqueness of total right derived functors.
-(blueprint: lem-sfb-diagonal-trace-varying-full-normalization).
-
-Proof: acyclicity constructs the exact derived square with its full normalization.
-On a K-injective complex the cochain unit is the inverse of the canonical computation
-isomorphism. Cancelling this unit identifies the constructed comparison with the
-supplied comparison there. Every derived object is isomorphic to a K-injective
-complex, so naturality identifies the two comparison transformations everywhere.
-Substitute this equality into the normalization of the constructed square. -/
+Source: Stacks Tag 070G, uniqueness of total right derived functors. -/
 theorem diagonalTrace_full_normalization_of_kInjective
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
     [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -383,9 +372,7 @@ private theorem limitSquare_single
       LS.R.map (Rt.η.app P)) hc
   simpa only [Functor.map_comp, Category.assoc] using! hc'
 
-/-- Compatibility of a varying derived arrow with the single-object scalar comparisons.
-Source: coefficient unit square (blueprint:
-lem-sfb-diagonal-trace-varying-full-normalization). -/
+/-- Compatibility of a varying derived arrow with the single-object scalar comparisons. -/
 @[irreducible]
 def DiagonalSingleUnitCompatible
     {VX VS TX TS : Type a} [Category.{v} VX] [Category.{v} VS]
@@ -440,9 +427,7 @@ private theorem singleUnitCompatible_of_singleSquare
   erw [RG.R.map_id, Category.comp_id]
 
 /-- The definition equation for a completed pushforward unit, recorded without expanding
-its derived comparison at concrete coefficient rings.
-Source: completed coefficient unit (blueprint:
-lem-sfb-diagonal-trace-varying-full-normalization). -/
+its derived comparison at concrete coefficient rings. -/
 @[irreducible]
 def DiagonalFinitePushUnitFormula
     {CX CS A B : Type (a + 1)}
@@ -465,9 +450,7 @@ def DiagonalFinitePushUnitFormula
     e.hom.app ((DerivedCategory.singleFunctor CX 0).obj MX)
 
 /-- The exact scalar cone's definition equation, with its derived maps kept in a named
-proposition until it is used in a generic diagram calculation.
-Source: coefficient cone comparison (blueprint:
-lem-sfb-diagonal-trace-varying-full-normalization). -/
+proposition until it is used in a generic diagram calculation. -/
 @[irreducible]
 def DiagonalExactConeFormula
     {CX VX A : Type (a + 1)} [Category.{a} CX] [Category.{a} VX] [Category.{a} A]

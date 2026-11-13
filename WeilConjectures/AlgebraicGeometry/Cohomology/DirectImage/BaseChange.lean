@@ -47,10 +47,7 @@ v          v
 T' --g---> T
 ```
 and let `ℱ'` be the pullback of `ℱ` to `X'`. Then `h^q_{ℱ'}(t') = h^q_ℱ(g t')` for every point
-`t'` of `T'`: the fibre `X'_{t'}` is the base change of `X_{g t'}` along the field extension
-`κ(g t') ⟶ κ(t')`, and cohomology commutes with flat base change.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`t'` of `T'`. -/
 theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
     ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') := by
@@ -101,14 +98,7 @@ theorem eulerCharFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T
 /-- **The fibre Euler characteristic is locally constant.** With `f : X ⟶ T` proper of finite
 presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the Euler
 characteristic `t ↦ Σ_q (-1)^q dim_{κ(t)} H^q(X_t, ℱ_t)` of the fibres is locally constant on
-`T`.
-
-Near a point of `T` it is the alternating sum of the ranks of the bounded complex `P` of finite
-free modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`,
-since the Euler characteristic of a bounded complex of finite-dimensional vector spaces is that
-of its cohomology.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`T`. -/
 theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :
     IsLocallyConstant (ℱ.eulerCharFiber f) := by
   rw [IsLocallyConstant.iff_eventually_eq]
@@ -171,9 +161,7 @@ theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :
 /-- **The fibre dimension is locally constant on the perfect locus.** On the perfect locus `U_i`
 the fibre dimension `t ↦ dim_{κ(t)} H^i(X_t, ℱ_t)` is locally constant: there it equals
 `(-1)^i` times the fibre Euler characteristic, which is locally constant by
-`AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber`. -/
 theorem isLocallyConstant_hFiber_restrict (hℱ : ℱ.IsFlatOver f) (i : ℕ) :
     IsLocallyConstant ((ℱ.perfectLocus f i).domRestrict (ℱ.hFiber f i)) := by
   have h : (ℱ.perfectLocus f i).domRestrict (ℱ.hFiber f i) =
@@ -187,9 +175,7 @@ theorem isLocallyConstant_hFiber_restrict (hℱ : ℱ.IsFlatOver f) (i : ℕ) :
 
 /-- **Openness of the rank-`r` perfect locus.** The locus `U_{i,r}` is open in `T`: it is the
 preimage of `{r}` under the fibre dimension, which is locally constant on the open set `U_i` by
-`AlgebraicGeometry.Scheme.Modules.isLocallyConstant_hFiber_restrict`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.isLocallyConstant_hFiber_restrict`. -/
 theorem isOpen_perfectLocusOfRank (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen (ℱ.perfectLocusOfRank f i r) := by
   convert (isOpen_perfectLocus f ℱ hℱ i).isOpenMap_subtype_val _
@@ -201,9 +187,7 @@ theorem isOpen_perfectLocusOfRank (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
 
 /-- **Openness of `U_{i,r}`.** The locus of points `t` of `T` at which the fibre cohomology
 `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension `r` in degree `i` is open in `T`. This
-is `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+is `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`. -/
 theorem isOpen_setOf_hFiber_eq (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen {t : T | (∀ q ≠ i, ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r} :=
   isOpen_perfectLocusOfRank f ℱ hℱ i r

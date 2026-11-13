@@ -272,14 +272,7 @@ private theorem brown_restriction_factors
   R.property.2.1 h
 
 /-- Exact scalar restriction commutes with the normalized Brown image square.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E.
-(blueprint: lem-pur-brown-restriction-image-cube).
-Proof: normalize the two composed squares on cochain representatives, using the
-coefficient and geometric right-mate unit equations. The ordinary cube follows
-by transposing its counit and evaluating sections. On a K-injective representative
-the source derived unit is invertible, so the normalized ordinary cube implies
-the derived cube. Transport across representative isomorphisms and cancel the
-two restriction comparison isomorphisms. -/
+Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E. -/
 theorem etaleBrownRestrictionImageCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

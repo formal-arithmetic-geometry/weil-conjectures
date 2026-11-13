@@ -253,12 +253,7 @@ namespace AlgebraicGeometry.Scheme
 
 -- The tensor comparisons require elaborating several large sheafification functor composites.
 /-- The constant-scalar tensor comparison is natural in both factors.
-Source: Stacks Project, Modules on Sites, Tag 0GMW
-(blueprint: lem-pur-etale-constant-module-tensor).
-Proof: identify realization with module sheafification of the sectionwise constant
-scalar encoding. Apply the natural tensor comparison for module sheafification,
-then the monoidal comparison for sheafification of module-valued presheaves. The
-sheafification counit identifies the two original sheaves. -/
+Source: Stacks Project, Modules on Sites, Tag 0GMW. -/
 theorem etaleConstantModule_tensor_comparison (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] :
     let R := (constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj
@@ -298,24 +293,7 @@ theorem etaleConstantModule_tensor_comparison (T : Scheme.{u})
 
 -- The tensor comparisons require elaborating several large sheafification functor composites.
 /-- Realizing constant coefficients commutes naturally with right tensor.
-Source: Stacks Project, Modules on Sites, Sections 03EK, 093I and 03CV
-(blueprint: lem-pur-etale-constant-module-tensor).
-
-Proof: the universal bilinear map on module-valued sheaves is A-balanced. On any
-cover on which a section of the constant ring sheaf is a constant scalar, that map
-is also balanced over the ring sheaf. Refine the covers for the finitely many
-coefficients in each tensor expression. The separatedness axiom then gives the
-ring-sheaf balanced relation globally. The universal property of the sectionwise
-tensor, followed by module sheafification, therefore gives a morphism from tensor
-of realizations to realization of the A-tensor. Conversely the universal pure-tensor
-map for the sectionwise ring-sheaf tensor is A-balanced by the scalar-extension unit;
-sheafifying gives a map in the opposite direction. Both composites fix all pure
-tensors, so tensor generation and uniqueness of sheafification make them identities.
-The two maps commute with a morphism in the first factor on every pure tensor,
-which proves naturality. The canonical coefficient-ring isomorphism changes scalar
-actions by restriction only, so the same formulas commute with its transport.
-Empty covers, zero coefficients and zero sheaves use the same universal properties.
-The statement involves neither flatness nor an extension-by-zero morphism. -/
+Source: Stacks Project, Modules on Sites, Sections 03EK, 093I and 03CV. -/
 theorem etaleConstantModule_tensorRight_comparison (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :

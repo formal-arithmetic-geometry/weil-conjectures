@@ -12,7 +12,6 @@ import Mathlib.Algebra.DirectSum.Algebra
 /-! # Total algebra of a graded sheaf algebra
 
 Source: Stacks Project, Modules, Section 01CF; Modules on Sites, Tag 03DB.
-(blueprint: lem-trf-graded-sheaf-algebra-total).
 -/
 
 @[expose] public section
@@ -339,18 +338,7 @@ end
 
 /-- A graded sheaf algebra has a total commutative algebra sheaf whose underlying
 module is the coproduct of its pieces. The inclusions respect multiplication and scalars.
-Source: Stacks Project, Modules, Section 01CF; Modules on Sites, Tag 03DB
-(blueprint: lem-trf-graded-sheaf-algebra-total).
-
-Proof: Give the sectionwise direct sum its graded ring structure, using the specified
-bilinear products and the degree-zero unit. Restrictions preserve these operations.
-Sheafify this presheaf of commutative rings and compose its structure morphism with
-the sheafification unit. The resulting unit map from the direct-sum module presheaf is
-locally bijective: its underlying sections and restriction functions are those of ring
-sheafification. Maps from this presheaf into a module sheaf therefore extend uniquely.
-Together with the sectionwise direct-sum universal property, this proves the coproduct
-universal property. The two displayed formulas follow by applying the ring
-sheafification map to homogeneous multiplication and the degree-zero algebra map. -/
+Source: Stacks Project, Modules, Section 01CF; Modules on Sites, Tag 03DB. -/
 theorem exists_total {X : Scheme.{u}} (P : ℕ → X.Modules)
     (G : GradedSheafAlgebra P) :
     ∃ (B : X.CommAlgebraSheaf) (i : ∀ n, P n ⟶ B.toModule),

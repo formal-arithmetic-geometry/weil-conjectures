@@ -23,7 +23,7 @@ import WeilConjectures.Algebra.Homology.CochainUniverseTransport.CochainCoeffici
 # Algebraic spaces, their small étale sites, and line modules
 
 Source: Stacks Project, Tag 025Y; Properties of Spaces, Tags 03ED and 03G7;
-Modules on Sites, Tags 0409 and 0B8Q (blueprint: def-trf-algebraic-space).
+Modules on Sites, Tags 0409 and 0B8Q.
 
 Representability is expressed by actual scheme-valued pullback squares of presheaves.
 No presentation or atlas is chosen as part of the data of an algebraic space.
@@ -41,8 +41,7 @@ namespace AlgebraicSpace
 
 /-- Representability with a property of every scheme base change. The witness is a scheme
 `U` over `S`, a projection `p : U ⟶ T`, and a pullback square representing `h_T ×_F G`.
-Source: Stacks, Spaces, relative representable properties preceding Tag 025Y
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Spaces, relative representable properties preceding Tag 025Y. -/
 def IsRepresentableWith {S : Scheme.{u}}
     (P : MorphismProperty (Over S)) {G F : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ F) : Prop :=
   ∀ (T : Over S) (a : yoneda.obj T ⟶ F),
@@ -50,25 +49,23 @@ def IsRepresentableWith {S : Scheme.{u}}
       IsPullback q (yoneda.map p) f a ∧ P p
 
 /-- A map of presheaves is representable if all its scheme base changes are schemes.
-Source: Stacks, Spaces, Tag 025Y (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Spaces, Tag 025Y. -/
 def IsRepresentable {S : Scheme.{u}} {G F : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ F) : Prop :=
   IsRepresentableWith ⊤ f
 
 /-- A representable map is étale if its scheme base changes are étale.
-Source: Stacks, Spaces, relative representable properties, Tag 025Y
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Spaces, relative representable properties, Tag 025Y. -/
 def IsEtale {S : Scheme.{u}} {G F : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ F) : Prop :=
   IsRepresentableWith (fun _ _ p ↦ Etale p.left) f
 
 /-- A representable map is surjective if its scheme base changes are surjective.
-Source: Stacks, Spaces, relative representable properties, Tag 025Y
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Spaces, relative representable properties, Tag 025Y. -/
 def IsSurjective {S : Scheme.{u}} {G F : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ F) : Prop :=
   IsRepresentableWith (fun _ _ p ↦ Surjective p.left) f
 
 /-- The representable diagonal and existence of a surjective étale scheme atlas.
 The fppf sheaf condition is supplied by the type of `F`.
-Source: Stacks, Tag 025Y (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tag 025Y. -/
 def IsAlgebraicSpace {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) :
     Prop :=
   IsRepresentable (prod.lift (𝟙 F.obj) (𝟙 F.obj)) ∧
@@ -78,7 +75,7 @@ end AlgebraicSpace
 
 /-- Algebraic spaces over `S`: fppf sheaves with representable diagonal and a surjective
 étale scheme atlas. Morphisms are natural transformations, via the full subcategory.
-Source: Stacks, Tag 025Y (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tag 025Y. -/
 abbrev AlgebraicSpace (S : Scheme.{u}) :=
   ObjectProperty.FullSubcategory (AlgebraicSpace.IsAlgebraicSpace (S := S))
 
@@ -87,12 +84,7 @@ namespace AlgebraicSpace
 variable {S : Scheme.{u}}
 
 /-- Composite representable étale maps are representable étale.
-Source: Stacks, Spaces, relative representable properties preceding Tag 025Y
-(blueprint: def-trf-algebraic-space).
-Proof: base change the second map by a test scheme and represent its fibre product by a
-scheme `V`. Base change the first map by `V` and represent that fibre product by `W`.
-Pasting the two pullback squares gives the required representing square for the composite;
-the scheme projection `W → V → T` is étale because both factors are étale. -/
+Source: Stacks, Spaces, relative representable properties preceding Tag 025Y. -/
 theorem isEtale_comp {G H K : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ H) (g : H ⟶ K)
     (hf : IsEtale f) (hg : IsEtale g) : IsEtale (f ≫ g) := by
   intro T a
@@ -107,18 +99,18 @@ theorem isEtale_comp {G H K : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ H) (g : H �
 
 /-- The objects of the small étale site of `F` are schemes over `S` with representable
 étale maps to `F`; morphisms are commuting triangles of natural transformations.
-Source: Stacks, Properties of Spaces, Tag 03ED (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Properties of Spaces, Tag 03ED. -/
 abbrev EtaleSite (F : AlgebraicSpace S) :=
   ObjectProperty.FullSubcategory
     (fun T : CostructuredArrow yoneda F.obj.obj ↦ IsEtale T.hom)
 
 /-- The underlying scheme of an object of the small étale site.
-Source: Stacks, Tag 03ED (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tag 03ED. -/
 def etaleForget (F : AlgebraicSpace S) : F.EtaleSite ⥤ Scheme.{u} :=
   ObjectProperty.ι _ ⋙ CostructuredArrow.proj yoneda F.obj.obj ⋙ Over.forget S
 
 /-- Covering presieves are jointly surjective families of étale scheme morphisms.
-Source: Stacks, Tag 03ED (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tag 03ED. -/
 def etalePrecoverage (F : AlgebraicSpace S) : Precoverage F.EtaleSite where
   coverings T := {R |
     (∀ (U : F.EtaleSite) (f : U ⟶ T), R f → Etale ((etaleForget F).map f)) ∧
@@ -127,7 +119,7 @@ def etalePrecoverage (F : AlgebraicSpace S) : Precoverage F.EtaleSite where
         ∃ y : (etaleForget F).obj U, ((etaleForget F).map f).base y = x}
 
 /-- The topology generated by the jointly surjective étale coverings.
-Source: Stacks, Tag 03ED (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tag 03ED. -/
 abbrev etaleTopology (F : AlgebraicSpace S) : GrothendieckTopology F.EtaleSite :=
   F.etalePrecoverage.toGrothendieck
 
@@ -239,17 +231,11 @@ private theorem etaleForget_isContinuous (F : AlgebraicSpace S) :
   exact (precoverage_eq_comap F).le
 
 /-- The structure presheaf has value `Γ(T, O_T)` and the usual restriction maps.
-Source: Stacks, Tag 03G7 (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tag 03G7. -/
 def structurePresheaf (F : AlgebraicSpace S) : F.EtaleSiteᵒᵖ ⥤ RingCat.{u} :=
   (etaleForget F).op ⋙ Scheme.Γ ⋙ forget₂ CommRingCat RingCat
 
-/-- The structure presheaf is a sheaf.
-Source: Stacks, Properties of Spaces, lemma-sheaf-condition-holds preceding Tag 03G7
-(blueprint: def-trf-algebraic-space).
-Proof: an étale covering of an object of the small site is a jointly surjective étale
-cover of its underlying scheme. The usual descent equalizer for regular functions on
-that cover is the sheaf equalizer for this presheaf. The same holds for every generated
-covering sieve, by the sheaf criterion for a generating precoverage. -/
+/-- The structure presheaf is a sheaf. -/
 theorem structurePresheaf_isSheaf (F : AlgebraicSpace S) :
     Presheaf.IsSheaf F.etaleTopology F.structurePresheaf := by
   have := etaleForget_isContinuous F
@@ -258,21 +244,20 @@ theorem structurePresheaf_isSheaf (F : AlgebraicSpace S) :
     (Functor.op_comp_isSheaf_of_isSheaf F.etaleForget _ _ _
       (Scheme.isSheaf_Γ Scheme.etaleTopology))
 
-/-- The structure sheaf: its data are the explicit global-sections presheaf; only the
-sheaf-condition proof is postponed in the preceding named theorem.
-Source: Stacks, Tag 03G7 (blueprint: def-trf-algebraic-space). -/
+/-- The structure sheaf of an algebraic space: the global-sections presheaf
+`structurePresheaf`, which is a sheaf by `structurePresheaf_isSheaf`.
+Source: Stacks, Tag 03G7. -/
 def structureSheaf (F : AlgebraicSpace S) : Sheaf F.etaleTopology RingCat.{u} :=
   ⟨F.structurePresheaf, F.structurePresheaf_isSheaf⟩
 
 /-- Sheaves of modules over the structure sheaf on the small étale site.
-Source: Stacks, Tags 03G7 and 0409 (blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Tags 03G7 and 0409. -/
 abbrev Modules (F : AlgebraicSpace S) :=
   ringedSiteModules.{u} F.structureSheaf
 
 /-- An étale map induces the inclusion of small étale sites by composition of maps.
 It leaves underlying schemes and scheme morphisms unchanged.
-Source: Stacks, Properties of Spaces, Tag 03ED and the restriction after Tag 03G7
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Properties of Spaces, Tag 03ED and the restriction after Tag 03G7. -/
 def etaleMap {G F : AlgebraicSpace S} (f : G ⟶ F) (hf : IsEtale f.hom.hom) :
     G.EtaleSite ⥤ F.EtaleSite :=
   ObjectProperty.lift _
@@ -280,12 +265,7 @@ def etaleMap {G F : AlgebraicSpace S} (f : G ⟶ F) (hf : IsEtale f.hom.hom) :
     (fun T ↦ isEtale_comp T.obj.hom f.hom.hom T.property hf)
 
 /-- Inclusion of small étale sites along an étale map is continuous.
-Source: Stacks, Properties of Spaces, Tag 03ED and the restriction after Tag 03G7
-(blueprint: def-trf-algebraic-space).
-Proof: a covering family is unchanged on underlying schemes, so is still jointly
-surjective and étale. Pullback squares in the source small site are scheme pullback
-squares, and composition with the given map leaves those squares unchanged. Thus the
-covering equalizers for a sheaf restrict to covering equalizers on the source site. -/
+Source: Stacks, Properties of Spaces, Tag 03ED and the restriction after Tag 03G7. -/
 theorem etaleMap_isContinuous {G F : AlgebraicSpace S} (f : G ⟶ F)
     (hf : IsEtale f.hom.hom) :
     Functor.IsContinuous (etaleMap f hf) G.etaleTopology F.etaleTopology := by
@@ -310,23 +290,20 @@ theorem etaleMap_isContinuous {G F : AlgebraicSpace S} (f : G ⟶ F)
 
 /-- Pullback of modules along an étale map is precomposition on the small étale sites.
 The ring map is the identity on the regular functions of each underlying scheme.
-Source: Stacks, Properties of Spaces, restriction of the structure sheaf after Tag 03G7
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Properties of Spaces, restriction of the structure sheaf after Tag 03G7. -/
 noncomputable def pullback {G F : AlgebraicSpace S} (f : G ⟶ F)
     (hf : IsEtale f.hom.hom) : F.Modules ⥤ G.Modules :=
   letI := etaleMap_isContinuous f hf
   SheafOfModules.pushforward (F := etaleMap f hf) ⟨𝟙 _⟩
 
 /-- Pullback to an étale object is restriction to its localized étale site.
-Source: Stacks, Properties of Spaces, restriction of the structure sheaf after Tag 03G7
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Properties of Spaces, restriction of the structure sheaf after Tag 03G7. -/
 noncomputable def etalePullback (F : AlgebraicSpace S) (T : F.EtaleSite) :=
   SheafOfModules.overFunctor F.structureSheaf T
 
 /-- A line module is locally isomorphic to the structure sheaf. Such modules are called
 invertible here; on this locally ringed site this agrees with tensor invertibility.
-Source: Stacks, Modules on Sites, Tags 0409 and 0B8Q
-(blueprint: def-trf-algebraic-space). -/
+Source: Stacks, Modules on Sites, Tags 0409 and 0B8Q. -/
 def IsLineModule (F : AlgebraicSpace S) (M : F.Modules) : Prop :=
   ∀ T : F.EtaleSite, ∃ R : Sieve T, R ∈ F.etaleTopology T ∧
     ∀ (U : F.EtaleSite) (f : U ⟶ T), R f →

@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Specialization of abelian étale stalks
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0GJ2, section-specialization
-(blueprint: def-weil-pbc-etale-stalk-specialization).
+Source: Stacks Project, etale-cohomology.tex, Tag 0GJ2, section-specialization.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 /-- Restrict a strict-local section to the germ at a geometric point, then identify
 its inverse-image stalk with the stalk at the composite point of the original scheme.
 Preceding this by the canonical pointed-neighbourhood restriction gives specialization.
-Source: Stacks Project, etale-cohomology.tex, Tag 0GJ2, section-specialization
-(blueprint: def-weil-pbc-etale-stalk-specialization). -/
+Source: Stacks Project, etale-cohomology.tex, Tag 0GJ2, section-specialization. -/
 noncomputable def etaleStalkSpecialization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']

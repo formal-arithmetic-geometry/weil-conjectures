@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-! # Normalized completed realization on unbounded derived categories
 
 Source: Stacks Project, Modules on Sites, Tags 093J and 093M; Derived Categories,
-Tag 015F; Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3)
-(blueprint: lem-weil-pbc-completed-realization-derived-cohomology).
+Tag 015F; Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3).
 
 The realization is the existing `integralConstantModule`, including restriction along
 `(pbcCompletedComparison T d).inv`. The comparisons below are actual constructions from
@@ -36,10 +35,8 @@ namespace AlgebraicGeometry.Scheme
 attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 /-- Localization factorization of the termwise completed realization, with its canonical
-normalization. Source: Stacks Tag 015F, parts (3)--(4)
-(blueprint: lem-weil-pbc-completed-realization-derived-cohomology).
-This is `mapDerivedCategoryFactors`, so its shift structure is the one descended from
-identity maps on the terms of shifted complexes. -/
+normalization. Source: Stacks Tag 015F, parts (3)--(4). This is `mapDerivedCategoryFactors`, so its
+shift structure is the one descended from identity maps on the terms of shifted complexes. -/
 def integralRealizationFactors (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     completedConstantQ (ModuleCat.{u + 1} A) ⋙ integralConstantDerived T d ≅

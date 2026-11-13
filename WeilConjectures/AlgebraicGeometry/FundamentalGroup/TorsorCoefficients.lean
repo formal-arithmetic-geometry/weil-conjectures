@@ -14,8 +14,9 @@ Let `φ : M →+ M'` be a homomorphism of finite abelian groups. If `P` is an `M
 an `M'`-torsor with a `φ`-equivariant morphism `P ⟶ P'` over `Y`, then the class of `P'` in
 `H¹(Y_ét, M')` is the image of the class of `P` under the map induced by `φ` on the constant
 sheaves (`AlgebraicGeometry.Scheme.EtaleTorsor.classH1_eq_map_of_hom`). Consequently the
-identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` of blueprint
-`lemma-invariant-additive-characters` turns the map induced by `φ` into the composition with `φ`
+identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`) turns the map induced by `φ`
+into the composition with `φ`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_map`).
 -/
 
@@ -138,10 +139,7 @@ variable [TopologicalSpace M] [DiscreteTopology M] [TopologicalSpace M'] [Discre
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1,
-naturality in the coefficients.
-
-Under the identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
+/-- Under the identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`), the map induced by a
 homomorphism `φ : M →+ M'` on the constant sheaves is the composition with `φ`. -/
 theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
@@ -162,14 +160,8 @@ theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
   rfl
 
 variable (M) in
-/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
-fundamental group, additivity.
-
-The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
-pointwise sum of characters. Writing the pair `(e x, e y)` of characters as the image of a class
-`z ∈ H¹(Y_ét, M × M)`, the classes `x` and `y` are the images of `z` under the projections, by
-naturality in the coefficients (`sheafHEquivContinuousMonoidHom_map`), so `x + y` is the image of
-`z` under the sum map `M × M → M`, as `H¹` and the constant sheaf functor are additive. -/
+/-- The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
+pointwise sum of characters. -/
 theorem sheafHEquivContinuousMonoidHom_add
     (x y : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M)) 1) :
@@ -202,10 +194,7 @@ theorem sheafHEquivContinuousMonoidHom_add
   rfl
 
 variable (M) in
-/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
-fundamental group.
-
-The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection
+/-- The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection
 `AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`: the class of a torsor is
 sent to its monodromy character, and sums of classes to products of characters
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_add`). -/

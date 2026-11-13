@@ -100,8 +100,6 @@ import WeilConjectures.CategoryTheory.DerivedUnit.DerivedScalarExtUnitZero
 import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierCycleClass
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -311,43 +309,7 @@ private theorem class_clauses (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) (hr : 0 <
   simpa only [cartierResidueReducedPro] using hscalar
 
 /-- The full normalized Cartier pole-reduction comparison, including its scalar units,
-coefficient extension, relative boundary, and characterization as the class c_D.
-
-Source: blueprint main-20261015, sk-lem-geo-cartier.proof.md, (G1), derived reduction
-and opening comparison paragraphs (blueprint: lem-sp-cartier-reduction-site-comparison).
-
-Proof:
-1. Finite geometric stalks of the supported integral constant are Z on D and zero
-   elsewhere. Exact conservative stalks make multiplication by ℓ^r monic and identify
-   its quotient, preserving one, with the supported residue constant.
-2. The qcqs direct-image comparison on discrete coefficients, etale finite exactness,
-   and the pro-etale degree-zero injective-resolution calculation give the canonical
-   supported mates. Their unit equations preserve restriction to D and reduction.
-3. Kummer on Z and on every pro-etale object U makes the power maps epic. Comparison
-   preserves the kernel on comparison units. The section formula and etale roots
-   pullback identify its map to full pro-etale roots with cartierRootsComparison.
-4. Exact inverse image preserves the cone, its positive projection p, and the quotient
-   quasi-isomorphism v. Thus it preserves the boundary -p v inverse. Push the pulled
-   extension out along cartierUnitsComparison; its boundary is cartierProBoundary.
-5. Apply divisible-extension derived reduction to the etale extension, its comparison
-   pullback, and that pushout. Naturality gives equality of the complete R-linear
-   arrows, under the quotient and Kummer-normalized identifications.
-6. For the Kummer sequence, the homotopy with degree-zero component identity gives
-   u v + k p = 0 in the derived category. Hence k inverse u = -p v inverse: the
-   scalar unit is the positive Kummer connecting map. Shift comparisons give [2].
-7. Extend scalars R to A. Supported constants and the etale rank-one roots line are
-   flat, so source and target have the stated degree-zero identifications even when
-   A is not R-flat. K-flat tensor comparison commutes extension with exact comparison
-   inverse image. The scalar units uniquely characterize these identifications.
-8. The local inverse equations are the frames of the dual ideal O(D), and the
-   complementary canonical frame is zero in the relative extension. The torsor-H1
-   boundary is therefore its positive line-bundle class. This proves both the
-   supported relative boundary and the Chern equation; the integral generator is the
-   scalar unit on the full supported sheaf. Its Hom universal property makes the
-   normalized reduction unique as a module-derived arrow, not only after forgetting
-   coefficients or after precomposing by the global constant-to-support map.
-9. The class of lemma-cycle-class-cartier-divisor has this relative normalization and comparison
-   mate. Uniqueness identifies it with cartierReducedPro, giving the last clause. -/
+coefficient extension, relative boundary, and characterization as the class c_D. -/
 theorem cartier_reduction_site_comparison (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) (hr : 0 < r)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ℓ ^ r : ℕ) : A) = 0)
     {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)

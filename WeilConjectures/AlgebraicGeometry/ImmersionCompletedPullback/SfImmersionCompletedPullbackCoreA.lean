@@ -108,9 +108,8 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-!
 # Ordinary immersion pullback and strict completed pullback
 
-Source: smooth-purity localization, returned proof Step 6; Stacks proetale.tex,
-Tags 09AA, 099M and 099N (2),(5)
-(blueprint: lem-sf-immersion-completed-pullback-coefficients).
+Source: Stacks proetale.tex,
+Tags 09AA, 099M and 099N (2),(5).
 
 The coefficient identifications below only transport the two published presentations
 of the same quotient system. All comparisons are normalized by their quotient maps,
@@ -148,12 +147,7 @@ namespace ImmersionCompletedPullback
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The unique size-change identification of the actual positive quotient rings.
-Source: coefficient identification in localization Step 6
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: quotient induction defines the displayed map and its inverse from ULift.down;
-the principal ideal powers correspond under ULift.ringEquiv. The formula on quotient
-representatives proves both inverse identities and uniqueness. -/
+/-- The unique size-change identification of the actual positive quotient rings. -/
 theorem quotientEquiv_exists (n : ℕ) :
     ∃! e : PbcQuotient (pbcIntegralDatum l E) n ≃+*
         ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)),
@@ -177,14 +171,10 @@ theorem quotientEquiv_exists (n : ℕ) :
     obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
     exact hq' a
 
-/-- Canonical quotient size transport, fixed on every quotient representative.
-Source: localization Step 6
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Canonical quotient size transport, fixed on every quotient representative. -/
 def quotientEquiv (n : ℕ) := (quotientEquiv_exists l E n).exists.choose
 
-/-- Canonical finite coefficient sheaf identification, retaining commutativity.
-Source: localization Step 6, finite projections
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Canonical finite coefficient sheaf identification, retaining commutativity. -/
 def finiteRingIso (T : Scheme.{u}) (n : ℕ) :
     (pbcAdicRings T (pbcIntegralDatum l E)).obj (op n) ≅
       integralCoefficientCommRingSheaf l E T n :=
@@ -192,12 +182,7 @@ def finiteRingIso (T : Scheme.{u}) (n : ℕ) :
     (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).mapIso
       (quotientEquiv l E n).toCommRingCatIso
 
-/-- The two completed rings have the unique identification with these finite projections.
-Source: localization Step 6, coefficient inverse-image normalization
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: the finiteRingIso maps intertwine every quotient homomorphism, by quotient
-induction. Their limits give the isomorphism. The limit projections are jointly
-monic, proving the displayed normalization and uniqueness. -/
+/-- The two completed rings have the unique identification with these finite projections. -/
 theorem completedRingIso_exists (T : Scheme.{u}) :
     ∃! e : pbcAdicCompletion T (pbcIntegralDatum l E) ≅
         completedIntegralCommRingSheafUnrestricted l E T,
@@ -207,14 +192,10 @@ theorem completedRingIso_exists (T : Scheme.{u}) :
   exact (h (quotientEquiv l E)
     (fun n ↦ (quotientEquiv_exists l E n).exists.choose_spec)).2.2.1
 
-/-- The projection-normalized identification of the two completed coefficient sheaves.
-Source: localization Step 6
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The projection-normalized identification of the two completed coefficient sheaves. -/
 def completedRingIso (T : Scheme.{u}) := (completedRingIso_exists l E T).exists.choose
 
-/-- Exact coefficient transport to the recorded integral module category.
-Source: localization Step 6, completed coefficients
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Exact coefficient transport to the recorded integral module category. -/
 abbrev transport (T : Scheme.{u}) :
     PbcCompletedDerived T (pbcIntegralDatum l E) ⥤
       DerivedCategory (scalarReductionSource.{u, u} l E T) :=
@@ -228,20 +209,13 @@ private theorem moduleFunctor_eq :
   exact completedModulePullback_eq_exact f (pbcIntegralDatum l E)
 
 /-- Equality of the two specified ordinary tensor-pullback objects.
-Source: localization Step 6, Step 1; Stacks 03EK
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: the canonical exact-pullback theorem identifies the full module functors.
-Evaluating that functor equality at M gives the displayed object equality. -/
+Source: Stacks 03EK. -/
 theorem moduleObj_eq (M : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) :
     (pbcActualModulePull f (pbcIntegralDatum l E)).obj M =
       (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f)).obj M := by
   exact CategoryTheory.Functor.congr_obj (moduleFunctor_eq l E f) M
 
-/-- The object identifications intertwine the actual tensor maps.
-Source: localization Step 6, Step 1
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: both maps act as identity on the coefficient tensor factor and as inverse
-image of the supplied arrow on the module factor; tensor generators give equality. -/
+/-- The object identifications intertwine the actual tensor maps. -/
 theorem moduleObj_eq_naturality
     {M N : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))} (a : M ⟶ N) :
     (pbcActualModulePull f (pbcIntegralDatum l E)).map a ≫
@@ -251,21 +225,14 @@ theorem moduleObj_eq_naturality
   have h := moduleFunctor_eq l E f
   simpa only [eqToIso.hom, eqToHom_app] using (eqToIso h).hom.naturality a
 
-/-- The identity-on-tensor-data ordinary pullback identification.
-Source: localization Step 6, Step 1
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The identity-on-tensor-data ordinary pullback identification. -/
 def moduleIso : pbcActualModulePull f (pbcIntegralDatum l E) ≅
     proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f) :=
   NatIso.ofComponents (fun M ↦ eqToIso (moduleObj_eq l E f M))
     (fun a ↦ moduleObj_eq_naturality l E f a)
 
 /-- Exact descent is the ordinary left derived pullback with its original counit.
-Source: localization Step 6, Step 1; Stacks 06YY
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: exact inverse image sends every quasi-isomorphism to a quasi-isomorphism.
-On a K-flat representative both counits identify the same termwise tensor complex,
-through moduleIso. The universal left-derived property extends this equation
-uniquely and supplies an inverse on every object. -/
+Source: Stacks 06YY. -/
 theorem derivedIso_exists :
     ∃! e : pbcActualDerivedPull f (pbcIntegralDatum l E) ≅
         (pbcIntegralDatum.{u} l E).pull.{u} f,
@@ -284,36 +251,26 @@ theorem derivedIso_exists :
     infer_instance
   exact exact_left_derived_iso _ _ _ _ (moduleIso l E f)
 
-/-- The counit-normalized comparison Lu* = u*, with u* computed termwise.
-Source: localization Step 6, Step 1
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The counit-normalized comparison Lu* = u*, with u* computed termwise. -/
 def derivedIso := (derivedIso_exists l E f).exists.choose
 
-/-- The canonical finite-ring-linear tensor comparison, transported to the actual Lu*.
-Source: localization Step 6, Step 2
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The canonical finite-ring-linear tensor comparison, transported to the actual Lu*. -/
 def finiteComparison (n : ℕ) :
     (pbcIntegralDatum l E).reduction X n ⋙ (pbcIntegralDatum l E).finitePull f n ≅
       pbcActualDerivedPull f (pbcIntegralDatum l E) ⋙ (pbcIntegralDatum l E).reduction Y n :=
   (pbcIntegralDatum l E).chi f n ≪≫
     isoWhiskerRight (derivedIso l E f).symm ((pbcIntegralDatum l E).reduction Y n)
 
-/-- A reduction with its completed scalar action retained.
-Source: localization Step 6, Step 2
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- A reduction with its completed scalar action retained. -/
 abbrev restrictedReduction (T : Scheme.{u}) (n : ℕ) :=
   (pbcIntegralDatum l E).reduction T n ⋙
     pbcDerivedRestrict ((pbcIntegralDatum l E).projection T n)
 
-/-- The canonical tensor-unit map to a finite reduction.
-Source: localization Step 6, Step 2
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The canonical tensor-unit map to a finite reduction. -/
 def reductionUnit (T : Scheme.{u}) (n : ℕ) :=
   (pbcDerivedScalarAdjunction ((pbcIntegralDatum l E).projection T n)).unit
 
-/-- All quotient transitions, including equal indices and successive quotients.
-Source: localization Step 6, Steps 2 and 5
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- All quotient transitions, including equal indices and successive quotients. -/
 def reductionTransition (T : Scheme.{u}) (b a : ℕ) (h : a ≤ b)
     (K : PbcCompletedDerived T (pbcIntegralDatum l E)) :
     (restrictedReduction l E T b).obj K ⟶ (restrictedReduction l E T a).obj K :=
@@ -328,9 +285,7 @@ def reductionTransition (T : Scheme.{u}) (b a : ℕ) (h : a ≤ b)
       (pbcAdicProjection_comp T (pbcIntegralDatum l E) b a h)).hom.app
         (((pbcIntegralDatum l E).reduction T a).obj K)
 
-/-- Restrict the canonical finite-ring-linear comparison to completed coefficients.
-Source: localization Step 6, Steps 2 and 5
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Restrict the canonical finite-ring-linear comparison to completed coefficients. -/
 def restrictedComparison (n : ℕ) :
     restrictedReduction l E X n ⋙ (pbcIntegralDatum l E).pull f ≅
       (pbcIntegralDatum l E).pull f ⋙ restrictedReduction l E Y n :=
@@ -356,11 +311,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
 attribute [local irreducible] Functor.mapDerivedCategoryFactorsh
 
-/-- Evaluation of tower pullback is ordinary pullback of the evaluated tower.
-Source: localization Step 6, Step 2
-(blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: whiskering and evaluation have identical objects and maps. Functor
-extensionality identifies these functors, including their structural proofs. -/
+/-- Evaluation of tower pullback is ordinary pullback of the evaluated tower. -/
 theorem moduleTowerEvaluation_eq (n : ℕ) :
     (pbcIntegralDatum l E).towerModulePull f ⋙
         reductionTowerEvaluation Y
@@ -370,9 +321,7 @@ theorem moduleTowerEvaluation_eq (n : ℕ) :
         proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f) := by
   rfl
 
-/-- Derive the identity-on-levels evaluation comparison.
-Source: localization Step 6, Step 2
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- Derive the identity-on-levels evaluation comparison. -/
 def towerEvaluationIso (n : ℕ) :=
   (Functor.mapDerivedCategoryCompIso ((pbcIntegralDatum l E).towerModulePull f)
     (reductionTowerEvaluation Y
@@ -383,9 +332,7 @@ def towerEvaluationIso (n : ℕ) :=
         (reductionModuleRing X ((pbcIntegralDatum l E).completedRing X)) n)
       (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f))).symm
 
-/-- The actual finite projection from the pulled-back strict quotient tower limit.
-Source: localization Step 6, Steps 4 and 5
-(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+/-- The actual finite projection from the pulled-back strict quotient tower limit. -/
 def completedProjection
     (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (n : ℕ) :
     ((pbcIntegralDatum l E).completedPull f).obj K ⟶

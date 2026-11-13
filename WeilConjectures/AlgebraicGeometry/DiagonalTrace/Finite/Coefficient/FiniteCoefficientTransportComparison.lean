@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteE
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryAdditiveWitnesses
 
 /-! # Scalar transport of an arbitrary finite ordinary arrow
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-coefficient-transport-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -54,8 +51,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The comparison of the two successive exact scalar transports before endpoint
-normalization. Source: exact comparison and the realization unit
-(blueprint: lem-sfb-finite-coefficient-transport-comparison). -/
+normalization. -/
 theorem finiteOrdinaryScalarTransportComparison (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

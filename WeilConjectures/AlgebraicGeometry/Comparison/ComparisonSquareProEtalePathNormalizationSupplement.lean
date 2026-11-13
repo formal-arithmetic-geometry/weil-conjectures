@@ -21,9 +21,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Normalization of the pro-etale comparison-square path under exact derivation
-
-Source: blueprint comparison-square transport, expanded proof step 4.
-(blueprint: stage3-proetale-comparison-square-proetale-path-normalization)
 -/
 
 @[expose] public section
@@ -287,36 +284,7 @@ composition factors. This identity concerns one path and assumes no square coher
 The heterogeneous equality retains the two endpoint presentations; these endpoints
 are definitionally equal. It avoids unfolding the derived functor constructions
 when joining the two normalization identities.
-Source: blueprint `stage3-proetale-comparison-square`, proof step 4; Stacks, Tag 0B65.
-(blueprint: stage3-proetale-comparison-square-proetale-path-normalization)
-
-Proof: write C(F,G) for mapDerivedCategoryCompIso F G and J(f) for
-leftDerivedUpperStarIsoMapDerivedCategory at f. Expand the ordinary path as the
-comparison at f' whiskered by g_et, the comparison at g whiskered by f'_proet, and
-the pro-etale square whiskered by nu_Y. Apply mapDerivedCategoryNatIso_trans and its
-left/right whiskering equations. The associativity equation for C collects the
-source factors into comparisonSquareSourceIso and the target factors into the exact
-part of comparisonSquareTargetIso; all intermediate C-inverse pairs cancel. This
-leaves the two exact derived edge comparisons followed by the derived ordinary
-pro-etale square.
-
-Expand leftDerivedUpperStarComparisonIso at f' and g. Its ordinary comparison is
-definitionally comparisonCoefficientPullbackIso, and its final factor is J.inv.
-Naturality of J(f').inv moves the factor for f' past the exact derived comparison
-at g. Thus the first two displayed arrows give the same exact derived edge path,
-followed by the two inverse J factors for g and f'. Expand
-leftDerivedUpperStarSquareIso into its inverse composition comparison, equality
-transport, and forward composition comparison. In leftDerivedFunctorNatIso and
-leftDerivedFunctorCompIso the J factor for a composite cancels with its inverse.
-The remaining composition factors are C conjugated by the individual J factors.
-Equality induction for leftDerivedUpperStarCongr identifies the middle transport
-with the derived transport in proEtaleComparisonSquare. Cancel the J factors for
-g and f' against those from the edge path. The surviving inverse J factors for
-f and g' are exactly the final factors of comparisonSquareTargetIso. Evaluate at
-M.obj and associate the composites. Restriction to D+ only contributes the identity
-mapDerivedCategoryPlusCompatibility on the source edges; no etale square identity
-or coherence hypothesis is used. Identity edges and zero input obey the same
-naturality and cancellation equations. -/
+Source: Stacks, Tag 0B65. -/
 theorem comparisonSquareProEtalePath_normalization
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

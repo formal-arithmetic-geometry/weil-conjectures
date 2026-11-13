@@ -24,17 +24,7 @@ namespace AlgebraicGeometry
 
 /-- First cohomology of the additive structure sheaf carries its finite-dimensional
 scalar action, with scalar multiplication represented by actual sheaf endomorphisms.
-Source: Stacks 0A3N, proof; blueprint `proposition-p-torsion-smooth-proper-curve--3`, steps 3--6.
-(blueprint: lem-sc-additive-cohomology-finite-scalar-model)
-
-Proof: Transport multiplication by the pullback of each c in k through the
-natural section equivalences. Naturality of the scalar ring maps and a proves
-that these section maps assemble into sheaf endomorphisms μ_c. Check μ_0 = 0,
-μ_1 = id, μ_(c+d) = μ_c + μ_d and μ_(cd) = μ_d ≫ μ_c sectionwise. Applying the
-additive cohomology functor yields every module axiom, with scalar action
-c • x = H^1(μ_c)(x). The finite-dimensionality theorem for this scalar model
-then gives finiteness. This construction involves no Frobenius or choice of
-cohomology comparison. -/
+Source: Stacks 0A3N, proof. -/
 theorem exists_finiteDimensional_etaleCohomology_one_scalar_model
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

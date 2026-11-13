@@ -69,26 +69,7 @@ attribute [local instance 100000] integralAbDerived
 
 /-- The integral adjunct of a supplied lift is the evaluated tower Kummer composite.
 The right side uses only the tower extension and the pro-etale root map; it makes
-no assertion identifying that composite with an etale cohomology class.
-
-Source: geometric tower classes proof (2), finite scalar-unit square and evaluation;
-diagonal trace proof (2), coefficient-one and root-tensor coordinates.
-(blueprint: lem-sfb-diagonal-trace-finite-etale-integral-boundary).
-
-Proof: apply hc to P,n and remove its HEq witnesses. Forget hb to abelian sheaves
-using forgottenFiniteEquation. The natural isomorphism evalIso identifies the
-underlying restricted functor with intrinsic finite evaluation. Transport the
-coefficient source through this isomorphism and the frame. On constant one,
-finiteQuotient, restrictionInverseSection and a.coefficient_one show that it
-is the site-comparison integral generator. The constant-sheaf adjunction and
-additivity extend this equality to all sections. At the target use rootEndpoint,
-whose proved section calculation uses the scalar unit and k.line_tensor.
-Naturality of exact single-arrow transport now pastes the two endpoint squares
-with the finite boundary equality. Ext.homEquiv is injective, so the resulting
-hom identity is the stated Ext identity. Ext.mapExactFunctor and the natural
-forgetComparisonIso move ordinary coefficient forgetting past site comparison.
-This argument does not compare the tower Kummer extension with the etale one,
-and never cancels arbitrary derived scalar restriction. -/
+no assertion identifying that composite with an etale cohomology class. -/
 theorem diagonalTrace_finiteEtale_integralBoundary
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

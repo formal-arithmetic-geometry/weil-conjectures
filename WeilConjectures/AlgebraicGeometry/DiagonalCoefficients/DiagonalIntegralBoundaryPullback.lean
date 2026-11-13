@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Pullback of the positive integral diagonal boundary
-
-Source: the latest blueprint, diagonal coefficient changes, paragraph (3).
 -/
 
 @[expose] public noncomputable section
@@ -94,9 +92,7 @@ private theorem transport_square
     Ext.mk₀_comp_mk₀, hχ'] using h'
 
 /-- The supported integral endpoint obtained by transporting the canonical etale
-closed exchange through the two fixed site comparisons.
-Source: blueprint coefficient proof (3), Cartier extension pullback
-(blueprint: lem-diagonal-integral-boundary-pullback). -/
+closed exchange through the two fixed site comparisons. -/
 def diagonalBoundarySource {Y Y' : Scheme.{u}}
     (v : diagonalSurface Y' ⟶ diagonalSurface Y)
     (w : ProjectiveLine Y' ⟶ ProjectiveLine Y)
@@ -109,9 +105,7 @@ def diagonalBoundarySource {Y Y' : Scheme.{u}}
       (Etale.relativeExtensionExchange (diagonalImmersion Y) (diagonalImmersion Y') v w sq) ≫
     (cartierIntegralSourceIso (diagonalImmersion Y')).hom
 
-/-- The units endpoint is the canonical units pullback through the comparison square.
-Source: blueprint coefficient proof (3), units map
-(blueprint: lem-diagonal-integral-boundary-pullback). -/
+/-- The units endpoint is the canonical units pullback through the comparison square. -/
 def diagonalBoundaryUnits {Y Y' : Scheme.{u}}
     (v : diagonalSurface Y' ⟶ diagonalSurface Y) :
     (upperStar Ab.{u + 1} v).obj (diagonalComparisonUnits Y) ⟶
@@ -120,17 +114,7 @@ def diagonalBoundaryUnits {Y Y' : Scheme.{u}}
     (comparisonUpperStar Ab.{u + 1} (diagonalSurface Y')).map
       (Scheme.upperStarGmSheafToGmSheaf v)
 
-/-- Pullback of the positive integral boundary, before reduction or completion.
-
-Source: blueprint coefficient changes (3); Cartier pole-extension naturality.
-(blueprint: lem-diagonal-integral-boundary-pullback).
-
-Proof: the closed source exchange is invertible by finite base change. The
-Cartier pole-boundary pullback equation is transported by exact site comparison.
-The comparison square commutes on Ext by functoriality. Conjugating its source
-by cartierIntegralSourceIso gives diagonalBoundarySource. The positive boundary
-is the negative of the transported pole boundary on both schemes, so additivity
-preserves its equation. The proof works for empty schemes and arbitrary base maps. -/
+/-- Pullback of the positive integral boundary, before reduction or completion. -/
 theorem diagonalIntegralBoundary_pullback {Y Y' : Scheme.{u}}
     (v : diagonalSurface Y' ⟶ diagonalSurface Y)
     (w : ProjectiveLine Y' ⟶ ProjectiveLine Y)

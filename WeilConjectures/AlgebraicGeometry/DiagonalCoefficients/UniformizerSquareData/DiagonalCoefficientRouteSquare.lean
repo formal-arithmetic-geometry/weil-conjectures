@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalExtMateSquare
 
 /-! # The proved endpoint criterion for the concrete coefficient routes
-
-Source: diagonal tower coefficient changes (1), derived naturality.
-(blueprint: lem-diagonal-coefficient-route-square).
 -/
 
 @[expose] public noncomputable section
@@ -49,13 +46,8 @@ attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFuncto
 attribute [local semireducible] CyclicCartierFrame.reduce
 
 set_option linter.defProp false in
-/-- The fully proved endpoint criterion specialized to the supplied coefficient
-routes. Its four arguments are the independent source comparison, target
-comparison, and two realization identities. These independent hypotheses remain
-proof arguments to the criterion.
-Source: coefficient changes (1) (blueprint: lem-diagonal-coefficient-route-square).
-Proof: specialize the proved generic naturality and Ext/Hom calculation to the
-actual restriction functor, derived mate, source and root-line endpoints. -/
+/-- The endpoint criterion specialized to the supplied coefficient routes. Its four arguments
+are the source comparison, the target comparison, and two realization identities. -/
 @[irreducible] def UniformizerSquareData.endpointSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

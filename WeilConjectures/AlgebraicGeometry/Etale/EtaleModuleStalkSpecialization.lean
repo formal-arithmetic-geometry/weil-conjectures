@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Specialization of geometric module stalks
 
-Source: Stacks Project, Tag 0GJ2, section-specialization
-(blueprint: def-weil-pbc-etale-module-stalk-specialization).
+Source: Stacks Project, Tag 0GJ2, section-specialization.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The specialization map is characterized on affine pointed neighbourhood germs by
 restricting the limit projection along `t`. The quantified lift `v` is the composite
 of `t` with the specified projection, not an arbitrary lift of its image in the base.
-Source: Stacks Project, Tag 0GJ2, section-specialization
-(blueprint: def-weil-pbc-etale-module-stalk-specialization). -/
+Source: Stacks Project, Tag 0GJ2, section-specialization. -/
 def IsEtaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ]
@@ -55,15 +53,7 @@ def IsEtaleModuleStalkSpecialization
         v G.obj
 
 /-- There is a unique map with the specified germ formula.
-Source: Stacks Project, Tag 0GJ2, section-specialization
-(blueprint: def-weil-pbc-etale-module-stalk-specialization).
-
-Proof: the structural-map identity for each limit leg makes its composite with `t`
-a lift of the image geometric point. Naturality of the cone makes the resulting
-maps from neighbourhood sections to the target stalk compatible with every pointed
-neighbourhood map. Affine pointed neighbourhoods are initial among all pointed
-neighbourhoods, so the stalk colimit gives a map with these components. The colimit
-universal property also gives uniqueness, since all affine germs are specified. -/
+Source: Stacks Project, Tag 0GJ2, section-specialization. -/
 theorem existsUnique_etaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ]
@@ -148,9 +138,7 @@ theorem existsUnique_etaleModuleStalkSpecialization
 
 /-- Specialization of geometric module stalks, the unique map carrying each affine
 pointed-neighbourhood germ to its germ along the strict-localization projection.
-Only the proof of its unique characterization is postponed; the object is determined.
-Source: Stacks Project, Tag 0GJ2, section-specialization
-(blueprint: def-weil-pbc-etale-module-stalk-specialization). -/
+Source: Stacks Project, Tag 0GJ2, section-specialization. -/
 noncomputable def etaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ]

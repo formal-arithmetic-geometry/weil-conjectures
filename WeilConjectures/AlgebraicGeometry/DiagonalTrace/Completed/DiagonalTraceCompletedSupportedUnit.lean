@@ -20,9 +20,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalCompletedCoefficientMap
 
-/-- The ordinary constant-to-supported map induced by the completed coefficient map.
-Source: diagonal tower trace proof (2), forgetting support of the diagonal divisor.
-(blueprint: def-sfb-diagonal-trace-completed-supported-unit). -/
+/-- The ordinary constant-to-supported map induced by the completed coefficient map. -/
 def completedSupportedUnit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     SheafOfModules.unit.{u, u + 1, u + 1}
       (Scheme.purTwistRing (diagonalSurface Y)

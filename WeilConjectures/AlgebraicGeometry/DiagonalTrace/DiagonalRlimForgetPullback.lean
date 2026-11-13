@@ -21,12 +21,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- The constant-scalar forgetful functor commutes with inverse image.
 
-Source: Stacks Project, Modules on Sites, Tag 03D3.
-Proof: use the explicit comparison constructed for the normalized unit.
-Scalar forgetting preserves left Kan extensions and sheafification; their
-canonical comparison isomorphisms compose to the required natural isomorphism.
-This construction also covers the empty site and the zero sheaf.
-(blueprint: new-sfb-diagonal-rlim-forget-pullback). -/
+Source: Stacks Project, Modules on Sites, Tag 03D3. -/
 theorem diagonalRlimForgetPullback (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     Nonempty (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f ⋙ diagonalForget l X ≅

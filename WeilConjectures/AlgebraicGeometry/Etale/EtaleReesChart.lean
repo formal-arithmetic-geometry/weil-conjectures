@@ -20,8 +20,6 @@ universe u v
 
 /-!
 # Étale deformation chart and its smooth projection
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md
-(blueprint: lem-pur-dnc-etale-rees-chart)
 
 The helpers use the published extended-Rees algebra and origin-chart API.
 
@@ -49,10 +47,7 @@ private theorem etale_comp {B C D : Type*} [CommRing B] [CommRing C] [CommRing D
 
 /--
 The canonical chart map from the polynomial presentation of the origin chart to the
-extended Rees algebra after the étale base change.
-Source: blueprint `chap-Smooth-purity`, clause (2), coordinates `u_i = x_i/t`
-(blueprint: lem-pur-dnc-etale-rees-chart).
--/
+extended Rees algebra after the étale base change. -/
 noncomputable def etaleReesChartMap
     (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ)
     [Algebra (MvPolynomial (Fin d) A) R] :
@@ -63,10 +58,7 @@ noncomputable def etaleReesChartMap
     (Ideal.mvPolynomialExtendedReesAlgebraEquiv A (Fin d)).toRingHom
 
 /--
-The affine-line structure map in the polynomial presentation of the origin chart.
-Source: blueprint `chap-Smooth-purity`, clause (2), affine-space projection
-(blueprint: lem-pur-dnc-etale-rees-chart).
--/
+The affine-line structure map in the polynomial presentation of the origin chart. -/
 noncomputable def etaleReesBaseMap
     (A : Type u) [CommRing A] (d : ℕ) :
     Polynomial A →+* MvPolynomial (Fin d) (Polynomial A) :=
@@ -75,10 +67,7 @@ noncomputable def etaleReesBaseMap
 /--
 The canonical tensor map induced by coefficientwise Laurent-polynomial functoriality
 of the extended-Rees algebra.  Its data is the tensor-product lift of the existing
-`Ideal.extendedReesAlgebraAlgHom`.
-Source: blueprint `chap-Smooth-purity`, clause (2), flat tensor identification
-(blueprint: lem-pur-dnc-etale-rees-chart).
--/
+`Ideal.extendedReesAlgebraAlgHom`. -/
 noncomputable def etaleReesTensorMap
     (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ)
     [Algebra (MvPolynomial (Fin d) A) R] :
@@ -92,9 +81,7 @@ noncomputable def etaleReesTensorMap
 
 /-- The canonical universe-lifted ring map used to form the affine scheme morphism.
 The `ULift` transport puts the source and target rings in the common universe
-`max u v`, preserving the underlying map for arbitrary ring universes.
-Source: blueprint `chap-Smooth-purity`, clause (2), affine spectra
-(blueprint: lem-pur-dnc-etale-rees-chart). -/
+`max u v`, preserving the underlying map for arbitrary ring universes. -/
 noncomputable def etaleReesChartSchemeMap
     (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ)
     [Algebra (MvPolynomial (Fin d) A) R] :
@@ -110,28 +97,11 @@ noncomputable def etaleReesBaseSchemeMap
     ULift.{v} (Polynomial A) →+* ULift.{v} (MvPolynomial (Fin d) (Polynomial A)) :=
   RingHom.ulift.{v, v} (etaleReesBaseMap A d)
 
-/--
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md,
-clause (2), local deformation algebra and étale base change.
-The scheme notions are `def-weil-etale-morphism`, `def-weil-affine-spectrum`,
-`def-sbc-affine-space`, and `def-sbc-smooth-morphisms`.
-The proof proceeds as follows. (1) The existing equivalence
-`Ideal.mvPolynomialExtendedReesAlgebraEquiv` identifies the origin extended-Rees
-algebra with `A[t,u_1, ..., u_d]`, sending `x_i` to `t u_i`. (2) The étale hypothesis
-is flat, so tensoring the inclusion into Laurent polynomials remains injective; this
-is `lem-weil-pbc-flat-ring-map-iff-flat-affine`, `def-weil-pbc-flat-ring-map`, and
-`lem-weil-pbc-flat-tensor-exact`. (3) The tensor-product universal property
-`lem-weil-pbc-algebra-tensor-pushout-universal-property` identifies the image with
-`R[t,I/t]`; the canonical map is `etaleReesTensorMap`, and the displayed equation
-records its coefficientwise Laurent action. (4) The affine tensor fibre-product
-identification `lem-weil-pbc-fibre-product-affine-spectra` and étale base-change
-statement `lem-weil-pbc-etale-scheme-base-change` make `etaleReesChartMap` étale.
-(5) The affine-space smoothness statement `sbc-lem-affine-space-smooth`, the
-étale relative-dimension-zero comparison
-`lem-weil-pbc-etale-smooth-zero-dimensional-fibres`, and composition permanence
-`lem-sbc-smooth-relative-dimension-permanence` give smooth relative dimension `d`.
-(blueprint: lem-pur-dnc-etale-rees-chart).
--/
+/-- Étale deformation chart: for an étale algebra `R` over `A[x_1, ..., x_d]`, the extended
+Rees algebra of the origin is `A[t,u_1, ..., u_d]` with `x_i ↦ t u_i`, the canonical map
+`etaleReesTensorMap` is bijective with the displayed coefficientwise Laurent action, the morphism
+of spectra induced by `etaleReesChartMap` is étale, and its composite with the base map is
+smooth of relative dimension `d`. -/
 theorem etale_rees_chart
     (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ)
     [Algebra (MvPolynomial (Fin d) A) R]

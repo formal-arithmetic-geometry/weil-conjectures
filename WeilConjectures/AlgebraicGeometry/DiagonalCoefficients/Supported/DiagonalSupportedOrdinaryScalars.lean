@@ -10,10 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedLocallyClosedSca
 import all WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ScalarExtensionMonoidal
 
 /-! # Ordinary scalar extension of the supported regular module
-
-Source: closed/open localization and its tensor projection formula, as used in
-paragraph (1) of the diagonal tower coefficient changes.
-(blueprint: lem-sfb-diagonal-supported-ordinary-scalars).
 -/
 
 @[expose] public noncomputable section
@@ -49,27 +45,7 @@ attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   CondensedRing.upperStar CondensedRing.lowerStar
   CondensedRing.upperStarLowerStarAdjunction
 
-/-- The specified supported coefficient map is an ordinary extension-of-scalars unit.
-
-Source: literature/stacks-project/proetale.tex, lemma-closed-immersion and
-lemma-closed-immersion-complement-retrocompact-exact; closed projection formula;
-blueprint latest, diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-sfb-diagonal-supported-ordinary-scalars).
-
-Proof: Let i be the diagonal and j its open complement. The Noetherian hypothesis
-makes j quasi-compact. The closed counit identifies i^*i_*Lambda with Lambda;
-j^*i_*Lambda is zero. These exact tensor restriction functors jointly detect
-isomorphisms, by the closed/open localization sequence.
-For the ordinary scalar adjoint q, closed restriction of q is the usual
-multiplication Lambda' tensor_Lambda Lambda -> Lambda', which is invertible.
-Open restriction has zero source and target and is invertible. Restriction commutes
-with extension of scalars, by associativity of the ordinary relative tensor product.
-Joint reflection gives that q is invertible. The formula for supportMap is the
-pushed coefficient unit followed by the restriction/direct-image comparison, so
-adjunction identifies this q with the displayed transpose. The equality imposed
-on the underlying regular map fixes that unit, rather than an arbitrary scalar
-multiple. There is no flatness assumption on the coefficient map; empty schemes
-and zero rings give the same calculation, with zero restrictions allowed. -/
+/-- The specified supported coefficient map is an ordinary extension-of-scalars unit. -/
 theorem diagonal_supported_ordinary_scalars
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

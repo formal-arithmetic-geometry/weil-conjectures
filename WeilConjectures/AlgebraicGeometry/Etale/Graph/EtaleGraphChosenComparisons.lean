@@ -27,7 +27,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   mapDerivedCategoryOpenImmersionLowerShriekId rightDerivedLowerStarIdIso
 
 /-- Compare the chosen compactification with the specified derived sum extension.
-Source: SGA 4 XVII 6.2.11 (blueprint: def-pur-graph-chosen-etale-comparison). -/
+Source: SGA 4 XVII 6.2.11. -/
 @[irreducible]
 noncomputable def graphChosenEtaleComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -39,8 +39,7 @@ noncomputable def graphChosenEtaleComparison
     canonicalEtaleCompactSupportComparison A f (HasCompactification.compactification f)
 
 /-- Compute a proper map using its identity open immersion, then remove that identity.
-Source: Stacks Project, Tags 0F7I and 0F7J
-(blueprint: def-pur-graph-chosen-proper-comparison). -/
+Source: Stacks Project, Tags 0F7I and 0F7J. -/
 @[irreducible]
 noncomputable def graphChosenProperComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -57,8 +56,7 @@ noncomputable def graphChosenProperComparison
     Functor.leftUnitor _
 
 /-- Compute an open immersion using the identity proper map, then remove that identity.
-Source: Stacks Project, Tags 0F7I and 0F7J
-(blueprint: def-pur-graph-chosen-open-comparison). -/
+Source: Stacks Project, Tags 0F7I and 0F7J. -/
 @[irreducible]
 noncomputable def graphChosenOpenComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]

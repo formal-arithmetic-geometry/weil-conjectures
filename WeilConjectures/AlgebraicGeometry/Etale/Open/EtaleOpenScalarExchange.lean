@@ -17,10 +17,6 @@ set_option linter.privateModule false
 
 /-! # Scalar extension respects ordinary étale open base change
 
-Source: Stacks Project, etale-cohomology.tex, Tag 03S6,
-`lemma-shriek-base-change`, with the coefficient/unit calculation in the DAG
-(blueprint: lem-pur-etale-open-scalar-exchange).
-
 All functors act on the ordinary unbounded small étale derived categories.
 The open coefficient map is the existing balancing isomorphism `openScalarExtension`.
 The exact pullback comparison is `properOpenCoefficientPullbackIso`, and the open

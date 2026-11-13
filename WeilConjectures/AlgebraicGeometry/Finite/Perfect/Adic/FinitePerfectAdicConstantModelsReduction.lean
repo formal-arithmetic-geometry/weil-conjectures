@@ -126,7 +126,6 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafification
 
 Source: Stacks Project, Tag 09C6, the consecutive quotient balancing isomorphism;
 Tags 0D6D and 03Q3 for derived scalar transitivity and geometric stalks.
-(blueprint: lem-weil-pbc-finite-perfect-adic-constant-models-reduction).
 -/
 
 @[expose] public noncomputable section
@@ -277,25 +276,8 @@ private theorem reflectConstantIso (X : Scheme.{t}) (B : Type t) [CommRing B]
 quotients are related by the algebraic derived quotient extension. This assertion
 uses no descended etale complexes or local constancy theorem.
 
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6),
-consecutive quotient balancing; derived scalar transitivity (Tag 0D6D), and the
-constant-stalk comparison (Tag 03Q3).
-(blueprint: lem-weil-pbc-finite-perfect-adic-constant-models-reduction).
-
-Proof: apply exact slice restriction to the normalized consecutive quotient balancing
-isomorphism. Derived scalar transitivity identifies the (n+1)-quotient extended along
-the actual coefficient projection with the n-quotient. The two compatibility squares
-for phi turn this extension into extension along A/I^(n+2) to A/I^(n+1), and identify
-the two given constant coefficient realizations. Constant realization commutes with
-derived scalar extension, hence gives an isomorphism between the constant realizations
-of E' tensor^L (A/I^(n+1)) and E on this same chart. Pull back to its pro-etale site
-using the weakly etale slice equivalence. Apply the geometric stalk at an algebraic
-closure of the residue field of w. Its tensor compatibility and the constant-stalk
-comparison identify this isomorphism with the coefficient-universe lift of the desired
-algebraic isomorphism. Exact fully faithful universe lift reflects the isomorphism.
-Perfectness permits bounded projective representatives throughout; zero rings and
-zero complexes work identically. Nonemptiness is essential: on an empty chart any two
-constant realizations are isomorphic. -/
+Source: derived scalar transitivity (Tag 0D6D), and the
+constant-stalk comparison (Tag 03Q3). -/
 theorem finitePerfectAdic_constant_models_reduction
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

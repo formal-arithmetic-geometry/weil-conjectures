@@ -15,8 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Extension.ProEtaleExtensio
 /-!
 # The canonical compact-support restriction comparison
 
-Source: Stacks Tags 0GL5, 0GL6 and 0D6E; blueprint
-(blueprint: lem-sf-compact-support-restriction-of-scalars).
+Source: Stacks Tags 0GL5, 0GL6 and 0D6E.
 All categories are the standard fixed-scalar presentation of modules over the constant ring.
 -/
 
@@ -28,8 +27,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- The exact open adjunction, with the published derived pullback as right adjoint.
-Source: Stacks Tag 03S2
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tag 03S2. -/
 noncomputable def fixedScalarOpenAdjunction (A : Type (u + 1)) [CommRing A]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     D((j)_!open[ModuleCat.{u + 1} A]) ⊣ L((j)^*[ModuleCat.{u + 1} A]) :=
@@ -39,8 +37,7 @@ noncomputable def fixedScalarOpenAdjunction (A : Type (u + 1)) [CommRing A]
 
 /-- Open extension and scalar restriction, normalized by the unit of the open adjunction.
 It is the inverse mate of the actual restriction/pullback isomorphism.
-Source: Stacks Tags 03S2 and 07A6
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tags 03S2 and 07A6. -/
 noncomputable def fixedScalarRestrictionOpenMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -53,7 +50,7 @@ noncomputable def fixedScalarRestrictionOpenMap
 
 /-- The mate of `upperStarRestrictScalarsIso` along the pullback/pushforward adjunctions is the
 identity of `g_* ⋙ Res = Res ⋙ g_*`, both being computed sectionwise.
-Source: Stacks Tag 07A6 (blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tag 07A6. -/
 theorem mateEquiv_upperStarRestrictScalarsIso_hom
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -74,7 +71,7 @@ theorem mateEquiv_upperStarRestrictScalarsIso_hom
 
 /-- Along an open immersion, `upperStarRestrictScalarsIso` is the identity of the restrictions,
 read through the identifications of the pullbacks with the restrictions.
-Source: Stacks Tags 03DI and 07A6 (blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tags 03DI and 07A6. -/
 theorem upperStarRestrictScalarsIso_hom_app_comp_of_isOpenImmersion
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
@@ -110,7 +107,7 @@ theorem upperStarRestrictScalarsIso_hom_app_comp_of_isOpenImmersion
 
 /-- The pullback along an open immersion is the restriction, and the extension-by-zero
 adjunctions are transported along this identification.
-Source: Stacks Tag 03DI (blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tag 03DI. -/
 theorem openImmersionLowerShriekUpperStarAdjunction_eq (A : Type (u + 1)) [CommRing A]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j =
@@ -120,9 +117,7 @@ theorem openImmersionLowerShriekUpperStarAdjunction_eq (A : Type (u + 1)) [CommR
 
 /-- The underived open comparison: the inverse mate of `upperStarRestrictScalarsIso` along the
 extension-by-zero adjunctions is invertible.
-Source: Stacks Tags 03DI and 0GL6 (blueprint: lem-sf-compact-support-restriction-of-scalars).
-Proof: through the identification of the pullbacks with the restrictions, it is the inverse
-mate of the identity square of restrictions, which is invertible. -/
+Source: Stacks Tags 03DI and 0GL6. -/
 theorem isIso_mateEquiv_symm_upperStarRestrictScalarsIso_inv
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -148,13 +143,7 @@ theorem isIso_mateEquiv_symm_upperStarRestrictScalarsIso_inv
   exact scalarMap_isIso φ j
 
 /-- Restriction commutes with the exact extension by zero.
-Source: Stacks Tags 03S2 and 0GL6
-(blueprint: lem-sf-compact-support-restriction-of-scalars).
-Proof: on sheaves both composites have the same underlying extension-by-zero groups,
-restriction maps and scalar actions. The identity on these groups is an isomorphism.
-Its transpose is restriction of the unit of the open adjunction, hence it is exactly
-the inverse mate displayed above. The equality descends termwise because all open
-functors and restriction of scalars are exact. -/
+Source: Stacks Tags 03S2 and 0GL6. -/
 theorem fixedScalarRestrictionOpenMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -198,7 +187,7 @@ theorem fixedScalarRestrictionOpenMap_isIso
   infer_instance
 
 /-- The canonical open comparison, with its unit normalization.
-Source: Stacks Tag 0GL6 (blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tag 0GL6. -/
 noncomputable def fixedScalarRestrictionOpen
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
@@ -206,8 +195,7 @@ noncomputable def fixedScalarRestrictionOpen
   asIso (fixedScalarRestrictionOpenMap φ j)
 
 /-- The specified proper/open composite, in the forward restriction direction.
-Source: Stacks Tags 0GL5 and 0GL6
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+Source: Stacks Tags 0GL5 and 0GL6. -/
 noncomputable def compactSupportRestrictionIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :

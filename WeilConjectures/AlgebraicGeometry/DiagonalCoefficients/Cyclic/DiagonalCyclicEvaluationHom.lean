@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyc
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicRestrictedFrameClassEquation
 
 /-! # Derived Hom representative of the explicit cyclic scalar reduction
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-evaluation-hom).
 -/
 
 @[expose] public noncomputable section
@@ -56,14 +53,7 @@ attribute [local irreducible] cyclicEvaluationSource cyclicEvaluationTarget
 attribute [local semireducible] cyclicFiniteEvaluationHomEquation
   finiteRealizedEvaluationEquation
 
-/-- The explicit representative of the realized cyclic scalar reduction.
-
-Source: diagonal tower coefficient changes (1).
-(blueprint: lem-diagonal-cyclic-evaluation-hom).
-
-Proof: substitute Reference.delta, apply the exact-functor Ext-to-Hom formula,
-then expand the two exact realizations and the scalar functor. Functoriality and
-associativity give exactly the source, arrow and shifted target composites. -/
+/-- The explicit representative of the realized cyclic scalar reduction. -/
 theorem cyclicEvaluation_hom
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l Y]

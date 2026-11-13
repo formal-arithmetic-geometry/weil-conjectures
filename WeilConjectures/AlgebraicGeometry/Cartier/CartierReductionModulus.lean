@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierCanonicalClass
 
 /-! # Naturality of the normalized Cartier reduction
-
-Source: blueprint main-20261015, sk-lem-geo-cartier.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -101,21 +99,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Compatibility of normalized reduction with a specified modulus projection.
 This lemma constructs neither a root projection nor a Tate-line isomorphism: those
 are the existing finite-twist comparisons. It identifies their action on the reduced
-boundary of the same integral pole extension.
-Source: blueprint sk-lem-geo-cartier.proof.md, paragraph 4, exponent sentence;
-(blueprint: lem-sfb-cartier-reduction-modulus).
-Proof: write m = dn. The morphism from the m-Kummer sequence to the n-Kummer sequence
-has components q on the kernels, multiplication by d on the middle units, and the
-identity on the right units. The equation q followed by the kernel inclusion equals
-d times the m-kernel inclusion is precisely its left square; nd=m gives its right
-square. Naturality of the short exact triangle thus identifies the two positive
-Kummer connecting maps. The pure-tensor equation identifies their further A-linear
-root maps. Both relative boundaries use the same integral pole extension followed
-by these connecting maps. Uniqueness of the normalized relative boundary identifies
-the resulting A-linear Ext classes. Exact comparison inverse image preserves this
-equality and its specified source mate. For m=n the kernel equation forces q to be
-the identity and the generator equation forces e to be the identity. For n=1 the
-coefficient ring is zero, and both Ext classes vanish. Empty support also gives zero. -/
+boundary of the same integral pole extension. -/
 theorem geoCartierCanonicalClass_modulus (ℓ : ℕ) (hℓ : ℓ.Prime)
     (r s : ℕ) (_hr : 0 < r) (_hs : 0 < s) (hrs : r ≤ s)
     (A : Type (u + 1)) [CommRing A] [Finite A]

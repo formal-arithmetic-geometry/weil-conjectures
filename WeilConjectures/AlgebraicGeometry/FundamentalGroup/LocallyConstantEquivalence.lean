@@ -13,9 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Pullb
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-!
-# Blueprint statements
+# Finite étale schemes and finite locally constant sheaves
 
-thm-galois-lc-etale.
+For a scheme `Y`, the functor `P ↦ Hom_Y(-, P)` is an equivalence between finite étale
+`Y`-schemes and finite locally constant sheaves of sets on the small étale site of `Y`,
+compatible with geometric fibres, base change and torsor structures.
 -/
 
 @[expose] public section
@@ -104,7 +106,9 @@ noncomputable def FiniteEtale.toFLCPullbackIso {X : Scheme.{v}} (f : X ⟶ Y) :
 
 end Equivalence
 
-/-- Blueprint: thm-galois-lc-etale. -/
+/-- There is an equivalence between finite étale `Y`-schemes and finite locally constant sheaves
+of sets on `Y`, given by `P ↦ Hom_Y(-, P)`, which identifies stalks at geometric points with
+geometric fibres and is compatible with base change. -/
 theorem exists_finiteEtale_flc_equivalence (Y : Scheme.{v}) :
     ∃ Φ : Y.FiniteEtale ≌ Y.FiniteLocallyConstant,
       Nonempty (Φ.functor ⋙ ObjectProperty.ι _ ≅
@@ -122,7 +126,9 @@ theorem exists_finiteEtale_flc_equivalence (Y : Scheme.{v}) :
     ⟨FiniteEtale.toFLCCompSheafFiberIso s⟩, fun X f ↦ ⟨(FiniteEtale.toFLC X).asEquivalence,
       ⟨Iso.refl _⟩, ⟨FiniteEtale.toFLCPullbackIso f⟩⟩⟩
 
-/-- Blueprint: thm-galois-lc-etale. -/
+/-- An equivalence `Φ` between finite étale `Y`-schemes and finite locally constant sheaves which
+is `P ↦ Hom_Y(-, P)` sends an étale `M`-torsor to its sheaf torsor, compatibly with the
+action of `M`. -/
 theorem finiteEtale_flc_preserves_torsors {Y : Scheme.{v}}
     (Φ : Y.FiniteEtale ≌ Y.FiniteLocallyConstant)
     (α : Φ.functor ⋙ ObjectProperty.ι _ ≅

@@ -10,8 +10,7 @@ public import WeilConjectures.RepresentationTheory.Filtration
 /-!
 # Composition factors of prescribed graded pieces
 
-Refinement and Jordan–Hölder, as used in paragraph 3 of
-`lemma-tensor-exterior-powers-filtered-representations--3`.
+Refinement and Jordan–Hölder, as used for filtered tensor and exterior powers.
 -/
 
 @[expose] public section
@@ -25,10 +24,7 @@ universe u v w z
 /-- Refine each graded piece by a composition series, then compare the resulting composition
 series with the prescribed series by Jordan–Hölder. The refinement indices are pairs consisting
 of a graded-piece index and a factor index, so multiplicities are retained, including empty
-series for zero pieces.
-Source: `lemma-tensor-exterior-powers-filtered-representations--3`, proof paragraph 3,
-filtration-refinement step (blueprint: lem-mg-filtered-representation-factors).
--/
+series for zero pieces. -/
 theorem filteredRepresentationFactors
     {k : Type u} [Field k] {W : Type w} [Group W]
     {V : Type v} [AddCommGroup V] [Module k V]

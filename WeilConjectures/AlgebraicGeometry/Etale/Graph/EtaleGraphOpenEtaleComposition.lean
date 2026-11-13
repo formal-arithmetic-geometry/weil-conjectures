@@ -65,19 +65,7 @@ private theorem graph_chosen_open_eq_etale
 
 /-- Graph extension for an open immersion followed by an etale map agrees with
 composition of their left adjoints. There is no proper square in this assertion.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L, and more-etale.tex Tag 0F7J
-(blueprint: lem-pur-graph-open-etale-composition).
-
-Proof in words: choose a compactification of b and compactify j over its open part.
-Expand the compact-support compositor in this tower. A lift section on the open source
-extends by zero onto exactly its clopen graph, whether one first applies j or first uses
-the graph comparison for b. On the complement both sections are zero; on the graph they
-are the original section. The sheaf axiom and sum-presheaf sheafification identify the
-maps. The transpose under the composite sum/open adjunction is the inverse-image
-compositor for r = j followed by b, so its conjugate is precisely s. Apply the equality
-degreewise, compose with the right-derived units, and use their composition equation.
-Homotopy localization and graph refinement coherence remove the auxiliary tower and
-prove the equation for the chosen comparisons. Identity and empty opens are included. -/
+Source: Stacks Project, etale-cohomology.tex Tag 0F4L, and more-etale.tex Tag 0F7J. -/
 theorem graph_open_etale_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X W Z : Scheme.{u}}

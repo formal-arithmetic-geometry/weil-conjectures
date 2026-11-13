@@ -192,8 +192,7 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing finite quotient ring, lifted only to the sheaf universe.
-Source: coefficient notation (blueprint: def-pur-finite-tate-site-comparison). -/
+/-- The existing finite quotient ring, lifted only to the sheaf universe. -/
 abbrev finiteTateCoefficient (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :=
   ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))
@@ -202,7 +201,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (n : ℕ) (T : Scheme.{u})
 
 /-- Restrict the recorded finite Tate module to its constant scalar action.
-Source: Stacks Tag 03CY (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 03CY. -/
 def finiteTateConstantRestriction :
     SheafOfModules.{u + 1} (integralCoefficientSheaf l E T n) ⥤
       Sheaf (ProEt.topology T)
@@ -214,14 +213,12 @@ def finiteTateConstantRestriction :
           (CommRingCat.of (finiteTateCoefficient l E n))).inv ⋙
     constantRingModuleRestriction (ProEt.topology T) (finiteTateCoefficient l E n)
 
-/-- The original finite pro-etale twist, in the fixed-coefficient encoding.
-Source: coefficient-twist blueprint, order 1505
-(blueprint: def-pur-finite-tate-site-comparison). -/
+/-- The original finite pro-etale twist, in the fixed-coefficient encoding. -/
 abbrev finiteTateProSheaf (a : ℕ) :=
   (finiteTateConstantRestriction l E n T).obj (finiteCoefficientTwist l E T n (a : ℤ))
 
 /-- A sectionwise pure tensor in the first finite twist.
-Source: Stacks Tag 03EK (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 03EK. -/
 def finiteTateProGenerator (W : T.ProEtᵒᵖ)
     (a : finiteTateCoefficient l E n)
     (x : (purTwistZlOne T l).obj.obj W) :
@@ -236,7 +233,7 @@ def finiteTateProGenerator (W : T.ProEtᵒᵖ)
       (purTwistIntegralTensor T l E W 1 x))
 
 /-- Pure local tensors in the prescribed nonnegative pro-etale powers.
-Source: Stacks Tag 03EK (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 03EK. -/
 def finiteTateProPowerGenerator (W : T.ProEtᵒᵖ)
     (a : finiteTateCoefficient l E n) :
     (k : ℕ) → (Fin k → (purTwistZlOne T l).obj.obj W) →
@@ -251,7 +248,7 @@ def finiteTateProPowerGenerator (W : T.ProEtᵒᵖ)
       (finiteTateProGenerator l E n T W 1 (x (Fin.last (k + 1))))
 
 /-- Pure local tensors in the recorded etale Tate powers.
-Source: Stacks Tags 03PK and 03EK (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tags 03PK and 03EK. -/
 def finiteTateEtalePowerGenerator (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hA : (m : A) = 0) (W : T.Etaleᵒᵖ) (a : A) :
     (k : ℕ) → (Fin k → (T.rootsOfUnitySheaf m).obj.obj W) →
@@ -266,13 +263,13 @@ def finiteTateEtalePowerGenerator (A : Type (u + 1)) [CommRing A]
           finiteEtaleTateOneGenerator A m T hA W 1 (x (Fin.last (k + 1))))
 
 /-- The actual unit underlying a finite root section on the etale site.
-Source: Stacks Tag 03PK (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 03PK. -/
 def finiteTateEtaleRootValue (m : ℕ) (W : T.Etaleᵒᵖ)
     (z : (T.rootsOfUnitySheaf m).obj.obj W) : Γ(W.unop.left, ⊤)ˣ :=
   Additive.toMul (((kernel.ι (m • 𝟙 T.gmSheaf)).hom.app W z).down)
 
 /-- The actual unit in a specified projection of the root limit.
-Source: Stacks Tag 03PK (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 03PK. -/
 def finiteTateLimitRootValue (r : ℕ) (W : T.ProEtᵒᵖ)
     (x : (purTwistZlOne T l).obj.obj W) : Γ(W.unop.left, ⊤)ˣ :=
   Additive.toMul (((proEtaleRootsOfUnityInclusion T (l ^ (r + 1))).hom.app W
@@ -281,8 +278,7 @@ def finiteTateLimitRootValue (r : ℕ) (W : T.ProEtᵒᵖ)
 /-- Root-projection normalization of the comparison, on every local pure tensor.
 The arrow `f` allows arbitrary pro-etale tests over an etale object, so roots may be
 lifted to the infinite root tower pro-etale locally, without requiring an etale lift.
-Source: Stacks Tags 03PK and 0GLZ
-(blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tags 03PK and 0GLZ. -/
 def IsFiniteTateSiteComparison (r : ℕ)
     (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ)
     (b : (ProEtale.comparisonUpperStar
@@ -306,8 +302,7 @@ def IsFiniteTateSiteComparison (r : ℕ)
       finiteTateProPowerGenerator l E n T W a k x
 
 /-- The pullback comparison on etale powers is fixed on root tensors.
-Source: Stacks Tags 03PK and 03Q1
-(blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tags 03PK and 03Q1. -/
 def IsFiniteTateEtalePullback {T' : Scheme.{u}} (v : T' ⟶ T) (r : ℕ)
     (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ)
     (c : (Etale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj
@@ -327,8 +322,7 @@ def IsFiniteTateEtalePullback {T' : Scheme.{u}} (v : T' ⟶ T) (r : ℕ)
       finiteTateEtalePowerGenerator T' _ (l ^ (r + 1)) hA _ a k z'
 
 /-- The usual pro-etale pullback comparison, fixed by every root projection.
-Source: Stacks Tag 09A5; the root tower limit universal property
-(blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 09A5. -/
 def IsFiniteTateProPullback {T' : Scheme.{u}} (v : T' ⟶ T) (k : ℕ)
     (b : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj
       (finiteTateProSheaf l E n T k) ≅ finiteTateProSheaf l E n T' k) : Prop :=
@@ -345,7 +339,7 @@ def IsFiniteTateProPullback {T' : Scheme.{u}} (v : T' ⟶ T) (k : ℕ)
       finiteTateProPowerGenerator l E n T' _ a k x'
 
 /-- The exponent-change comparison is induced by the specified root power map.
-Source: Stacks Tag 03PK (blueprint: def-pur-finite-tate-site-comparison). -/
+Source: Stacks Tag 03PK. -/
 def IsFiniteTateEtaleTransition (r r' : ℕ)
     (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0)
     (hA' : ((l ^ (r' + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ)

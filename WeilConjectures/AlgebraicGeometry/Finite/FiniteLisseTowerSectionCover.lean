@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentabili
 
 /-! # Compatible sections of finite locally constant sheaf towers
 
-Source: Stacks Project, Tags 03RV, 01YW, 09BV and 0990; the finite-stalk
-adaptation in the compatible derived trivializations proof, steps 1--5.
-(blueprint: lem-weil-pbc-finite-lisse-tower-section-cover).
+Source: Stacks Project, Tags 03RV, 01YW, 09BV and 0990.
 -/
 
 @[expose] public section
@@ -29,24 +27,7 @@ namespace AlgebraicGeometry.Scheme
 stalks admits simultaneous compatible sections on an affine weakly contractible cover.
 The transition maps need not be epimorphisms.
 
-Source: Stacks Project, Tags 03RV, 01YW, 09BV and 0990; steps 1--5 of the
-compatible finite derived trivializations proof.
-(blueprint: lem-weil-pbc-finite-lisse-tower-section-cover).
-
-Proof: Represent each sheaf by a finite etale scheme, using 03RV. Yoneda turns the
-transitions into scheme maps. Over each affine open of X these schemes are affine.
-Their inverse limit is the spectrum of the direct limit of their rings. The algebra
-is ind-etale, so the limit is weakly etale. At a geometric point the tower of finite
-nonempty stalks has a compatible tuple (finite inverse-system compactness). The
-representing isomorphisms identify this tuple with compatible geometric points of
-the finite etale schemes. The affine limit property gives a geometric point of the
-limit above the chosen point. Thus the limit surjects onto the affine open and its
-singleton is a pro-etale cover. The universal sections pull back along its projections
-to compatible sections of the comparison inverse images: use the comparison adjunction
-unit and naturality, rather than any preservation of infinite limits. Cover the limit
-by affine opens and replace each by a faithfully flat ind-etale contractible extension
-in the same universe. Compose these covers and restrict the compatible sections.
-All indices remain in Type u; the empty base is covered by the empty family. -/
+Source: Stacks Project, Tags 03RV, 01YW, 09BV and 0990. -/
 theorem finite_lisse_tower_section_cover
     (X : Scheme.{u}) (I : ℕ → Sheaf X.smallEtaleTopology (Type (u + 1)))
     (r : ∀ n : ℕ, I (n + 1) ⟶ I n)

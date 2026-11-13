@@ -10,9 +10,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Exact single and shift coherence for root insertion squares
-
-Source: exact-functor single comparisons and coefficient changes (1).
-(blueprint: lem-diagonal-shifted-root-insertion-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -52,14 +49,7 @@ private theorem shifted_square
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun z ↦ z⟦n⟧' ≫ (R.commShiftIso n).inv.app Z') hh
 
-/-- An ordinary insertion square gives its exact derived square after shifting.
-
-Source: coefficient changes (1), exact single and shift coherence.
-(blueprint: lem-diagonal-shifted-root-insertion-comparison).
-Proof: compose with the monic right single comparison, and use the composition and
-natural-isomorphism single coherence to turn the ordinary equality into its degree-zero
-derived equality. Shift it, use the shift compatibility of the induced natural
-isomorphism and composition comparison, and cancel inverse shift comparisons. -/
+/-- An ordinary insertion square gives its exact derived square after shifting. -/
 theorem shiftedRootInsertion_comparison
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]

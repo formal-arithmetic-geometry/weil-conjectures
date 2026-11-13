@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.Fi
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Exact image of the realized ordinary scalar class
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-scalar-class-image).
 -/
 
 @[expose] public noncomputable section
@@ -34,13 +31,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.standard DerivedCategory.singleFunctors
 
 /-- Any exact functor sends the realized ordinary scalar class to the image
-of the integral generator followed by its twice-transported ordinary arrow.
-Source: ordinaryFiniteClass_hom and naturality of the exact single comparison
-(blueprint: lem-sfb-finite-ordinary-scalar-class-image).
-
-Proof: substitute the realized scalar-class formula, then use exact single-arrow
-naturality for precomposition by the integral generator. The target category,
-exact functor and coefficient ring are arbitrary. -/
+of the integral generator followed by its twice-transported ordinary arrow. -/
 theorem ordinaryFiniteClass_exact_image (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{t₂} D]
@@ -56,11 +47,7 @@ theorem ordinaryFiniteClass_exact_image (A : Type (u + 1)) [CommRing A]
   rw [ordinaryFiniteClass_hom, mapSingleArrow_precomp]
 
 /-- The exact scalar-class formula remains valid after arbitrary derived
-source and target normalizations. Source: the preceding exact image formula
-and associativity (blueprint: lem-sfb-finite-ordinary-scalar-class-image).
-
-Proof: substitute ordinaryFiniteClass_exact_image on the right and associate
-both composites. All normalization arrows are arbitrary. -/
+source and target normalizations. -/
 theorem ordinaryFiniteClass_exact_image_prepost (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{t₂} D]

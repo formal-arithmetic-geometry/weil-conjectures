@@ -13,8 +13,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 import all WeilConjectures.Algebra.Homology.OpenCoverMateComplexShortExact
 
 /-! # Natural open-cover short exact sequences of etale sheaves
-
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
 -/
 
 @[expose] public section
@@ -85,25 +83,7 @@ private lemma counitSequence_shortExact_right
   have : IsIso (biprod.desc eU eV) := e.isIso_hom
   exact (ShortComplex.Splitting.ofIsZeroOfIsIso _ hW inferInstance).shortExact
 
-/-- The natural sheaf-level sequence needed before applying a complex functor.
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
-(blueprint: lem-weil-pbc-etale-open-cover-shriek-natural-ses).
-
-Proof: For W contained in T, compose the inverse of the restriction-composition
-isomorphism with restriction of the unit for T, then apply the adjunction for W.
-This gives a natural transformation from jW! jW* to jT! jT*. Its composite with
-counit T is counit W by the right triangle identity and naturality of the
-restriction-composition isomorphism. Thus the signed pair of these maps,
-followed by the pair of counits, has zero composite. On a geometric stalk in
-both opens this is the split sequence with maps (1,-1) and (1,1). In only U or
-only V, the intersection stalk and the other summand vanish, and the remaining
-counit is an isomorphism. The covering assumption rules out a point in neither
-open. Exact geometric stalk functors jointly reflect short exactness, proving
-the assertion. The natural transformations are constructed before specializing
-to F, so they commute with arbitrary morphisms. No finiteness hypothesis is
-used. Empty opens, equal opens, empty X, characteristic two, and the zero ring
-satisfy the same three stalk calculations.
--/
+/-- The natural sheaf-level sequence needed before applying a complex functor. -/
 theorem exists_natural_shortExact_openCover_lowerShriek
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤) :

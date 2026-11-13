@@ -15,11 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Base.BaseFieldCohomologicalDimension
 /-!
 # Finite ℓ-cohomological dimension of the base field
 
-Source: blueprint definition-cohomological-dimension and proposition-compactness-finite-coefficients
-("finite type over the base field, so all cd_ℓ are finite"): the compactness input of
-lemma-hypotheses-brown-representability, and so the six-functor existence results built on it,
-assume cd_ℓ(k) < ∞ for the base field `k`.
-
 `BaseFieldFiniteCD ℓ k` is the hypothesis
 `cohomologicalDimension ℓ (Fact.out : ℓ.Prime) (Spec (.of k)) < ⊤` of `brownHypotheses`, as a
 definition whose body is not exposed. Statements carrying it then need only this module
@@ -34,9 +29,8 @@ universe u
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The base field `k` has finite ℓ-cohomological dimension, cd_ℓ(k) < ∞
-(definition-cohomological-dimension), in the form `cohomologicalDimension ℓ _ (Spec k) < ⊤` used by
-`brownHypotheses`. -/
+/-- The base field `k` has finite ℓ-cohomological dimension, cd_ℓ(k) < ∞,
+in the form `cohomologicalDimension ℓ _ (Spec k) < ⊤` used by `brownHypotheses`. -/
 public def BaseFieldFiniteCD (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] : Prop :=
   cohomologicalDimension ℓ (Fact.out : ℓ.Prime) (Spec (.of k)) < ⊤
 

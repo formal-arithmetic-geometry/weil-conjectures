@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # Skeletons for compatible ind-etale model maps
 
-Source: Bhatt--Scholze 6.3.16, Step 7
-(blueprint: lem-per-ind-etale-constructible-mapping-model-skeleton).
+Source: Bhatt--Scholze 6.3.16.
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +31,7 @@ variable (K' M' : DerivedCategoryModule A X) (α : K' ⟶ K) (β : M ⟶ M')
 /-- The simultaneous strict representative construction, with the geometric cone
 square omitted. The omitted field is exactly the separately supplied equation
 `hv`; all chain-level normalization fields remain part of the skeleton.
-Source: Bhatt--Scholze 6.3.16, proof Step 7
-(blueprint: lem-per-ind-etale-constructible-mapping-model-skeleton).
--/
+Source: Bhatt--Scholze 6.3.16. -/
 theorem compatible_model_map_skeleton_exists [Finite A] [IsAffine X] [IsNoetherian X]
     [IsCofiltered I] [IsCofiltered J]
     (hc : IsLimit ((Over.forget X).mapCone c))

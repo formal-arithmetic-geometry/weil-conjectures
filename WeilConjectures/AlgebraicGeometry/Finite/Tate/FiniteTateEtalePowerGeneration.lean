@@ -10,9 +10,6 @@ import WeilConjectures.CategoryTheory.Sites.SheafAdjunctionUnitProjection
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # Local generation of finite etale Tate powers
-
-Source: Stacks Project, sites-modules.tex, section-tensor-product (03EK),
-and sites.tex, lemma-sections-sheafification (00WK).
 -/
 
 @[expose] public section
@@ -148,23 +145,7 @@ private theorem rawGenerator_span (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
           simp only [rawGenerator, Fin.snoc_castSucc, Fin.snoc_last]
           rfl
 
-/-- Sections of finite etale Tate powers locally belong to the span of pure root tensors.
-Source: Stacks Project, sites-modules.tex, section-tensor-product (03EK),
-and sites.tex, lemma-sections-sheafification (00WK).
-(blueprint: lem-pur-finite-tate-etale-power-generation)
-
-Proof: form the unsheafified ordered powers of the scalar-extension presheaf,
-using the constant scalar presheaf in degree zero. Their maps to the finite Tate
-sheaves are locally surjective: the degree-zero and degree-one maps are sheafification
-units; the higher-degree maps are tensors of local equivalences followed by the
-lax tensor comparison of sheafToPresheaf, also a local equivalence. Tensor induction
-shows that sections of each raw power are spanned by ordered pure root tensors.
-In the successor step, move the scalar in the final scalar-extension factor outside
-the tensor and append its root with Fin.snoc. Induction identifies the images of
-these generators with finiteTateEtalePowerGenerator. The image sieve of a section
-is covering by local surjectivity, and mapping the raw span gives the required span
-on each member. Degree zero, the empty sum and the zero ring require no exceptions.
-No invertibility or finiteness assumption on the coefficient ring is needed. -/
+/-- Sections of finite etale Tate powers locally belong to the span of pure root tensors. -/
 theorem finiteTateEtalePowerGenerator_locally_span
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hA : (m : A) = 0) (d : ℕ) (U : T.Etaleᵒᵖ)

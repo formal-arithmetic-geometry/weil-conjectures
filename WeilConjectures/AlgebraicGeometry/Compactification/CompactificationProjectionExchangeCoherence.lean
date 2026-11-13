@@ -646,7 +646,7 @@ private theorem derivedOpenImmersionLowerShriekProjectionMap_baseChange
 
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- The inverse form of `derivedOpenImmersionLowerShriekProjectionMap_baseChange`, with the
-blueprint's projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
+inverse projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
 private theorem derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange
     (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A))

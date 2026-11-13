@@ -76,19 +76,7 @@ theorem hFiber_eq_finrank_homology {U : T.Opens} {P : CochainComplex U.toScheme.
 
 /-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
 and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
-`t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T`.
-
-Locally on `T` the fibre dimension is `dim_{κ(t)} H^q(P ⊗ κ(t))` for the bounded complex `P` of
-finite free modules of
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`: the pullback of
-`P` to `Spec κ(t)` computes the higher direct images of the fibre `ℱ_t` to the point, whose global
-sections are `H^q(X_t, ℱ_t)`
-(`AlgebraicGeometry.Scheme.Modules.hFiber_eq_finrank_sections_higherDirectImage`). The dimension
-of the cohomology of a complex of finite free modules is upper semicontinuous in the point, by the
-lower semicontinuity of the ranks of its differentials
-(`AlgebraicGeometry.Scheme.Modules.exists_finrank_homology_pullback_le`).
-
-(blueprint: `lemma-triviality-fibres--2`) -/
+`t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T`. -/
 theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
     UpperSemicontinuous (ℱ.hFiber f q) := by
   intro t m hm
@@ -129,14 +117,7 @@ theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
 /-- **The fibre cohomology is finite dimensional.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, for every point `t` of `T` the
 cohomology `H^q(X_t, ℱ_t)` of the fibre is a finite dimensional `κ(t)`-vector space, so that the
-fibre dimension `AlgebraicGeometry.Scheme.Modules.hFiber` is its dimension.
-
-Near `t` the higher direct images are computed by a bounded complex `P` of finite free modules
-(`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`): the global
-sections of `R^q (f_t)_* ℱ_t`, which are `H^q(X_t, ℱ_t)`, are the cohomology of the complex
-`P ⊗ κ(t)` of finite dimensional vector spaces.
-
-(blueprint: `lemma-triviality-fibres--2`, part (1)) -/
+fibre dimension `AlgebraicGeometry.Scheme.Modules.hFiber` is its dimension. -/
 theorem finiteDimensional_H_fiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) (t : T) :
     letI := f.fiberOverSpecResidueField t
     FiniteDimensional (T.residueField t) (((Modules.pullback (f.fiberι t)).obj ℱ).H q) := by
@@ -166,12 +147,8 @@ theorem finiteDimensional_H_fiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) (t : T) :
 /-- **Grauert's theorem.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, if moreover `T` is reduced and
 the `q`-th fibre dimension is locally constant, then `R^q f_* ℱ` is locally free of finite rank,
-the rank at a point being the fibre dimension there.
-
-The rank is only attached to a neighbourhood of each point, not to `T` as a whole: on a
-disconnected base the fibre dimension can be locally constant without being constant.
-
-(blueprint: `lemma-triviality-fibres--2`) -/
+the rank at a point being the fibre dimension there. The rank is only attached to a
+neighbourhood of each point. -/
 theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant [IsReduced T]
     (hℱ : ℱ.IsFlatOver f) (q : ℕ) (hq : IsLocallyConstant (ℱ.hFiber f q)) (t : T) :
     ∃ U : T.Opens, t ∈ U ∧
@@ -248,14 +225,7 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
 /-- **The fibre cohomology vanishes in large degrees, locally on the base.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, every point `t` of `T` has an open
 neighbourhood `U` and a bound `d` with `H^q(X_{t'}, ℱ_{t'}) = 0` for all `t' ∈ U` and all `q > d`.
-
-Take for `U` and `d` the neighbourhood and the length of the bounded complex `P` of finite free
-modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`. For
-`t' ∈ U` its pullback to `Spec κ(t')` computes the higher direct images of `ℱ_{t'}` along
-`X_{t'} ⟶ Spec κ(t')`, whose global sections are `H^q(X_{t'}, ℱ_{t'})`; it vanishes in degrees
-`q > d`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) -/
+-/
 theorem exists_forall_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧ ∀ t' ∈ U, ∀ q, d < q → ℱ.hFiber f q t' = 0 := by
   obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
@@ -297,13 +267,7 @@ theorem exists_forall_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) (t : T) :
 /-- **Openness of the bounded perfect locus.** With `f : X ⟶ T` proper of finite presentation and
 `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the locus `U_{i,≤r}` of points
 `t` of the perfect locus `U_i` at which `H^i(X_t, ℱ_t)` has dimension at most `r` is open in `T`.
-
-Near a point `t`, the fibre cohomology vanishes in degrees `q > d`
-(`AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero`), so there `U_{i,≤r}` is cut out
-by the finitely many conditions `h^q < 1` for `q ≤ d`, `q ≠ i`, and `h^i < r + 1`, each of which is
-open by upper semicontinuity (`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+-/
 theorem isOpen_setOf_hFiber_le (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen {t ∈ ℱ.perfectLocus f i | ℱ.hFiber f i t ≤ r} := by
   have hopen (q n : ℕ) : IsOpen {t | ℱ.hFiber f q t < n} :=

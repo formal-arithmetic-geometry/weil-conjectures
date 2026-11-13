@@ -280,22 +280,7 @@ private theorem comparisonAux
     ((congrArg (fun t ↦ τ.val.app _ t) hb').trans (ht'.trans ha'.symm))
 
 /-- Ordinary finite pullback balancing respects the actual strict reduction transitions.
-Source: main-20261015, sk-prop-sf-cbc, completed extension-by-zero comparison,
-finite-reduction compatibility, Step 4; Stacks Tags 03EK and 03EL
-(blueprint: lem-cbc-ordinary-finite-quotient-comparison).
-
-Proof: transport the sectionwise surjectivity of the completed constant projection
-through the fixed coefficient comparisons. The sheaf quotient unit M to its finite
-reduction is therefore epic. Transpose the desired equality through the composite
-of canonical inverse image and scalar extension, and cancel that quotient unit.
-Naturality of the strict reduction-tower unit identifies its composite with the
-tower arrow with the smaller quotient unit. The normalized inverse-image and scalar
-units evaluate the transposes on 1 tensor inverse image of the quotient-unit section.
-The ordinary comparison sends this to the finite generator (1,1,m), and the quotient
-transition sends that generator to (1,1,m) at the smaller level. Restriction
-composition is identity on underlying sections. These formulas give equal sections
-for both transposes, hence equal maps. The argument covers equal indices, the zero
-ring, zero modules, and empty site objects. -/
+Source: Stacks Tags 03EK and 03EL. -/
 theorem ordinary_finite_quotient_comparison
     (M : pbcModules Y (pbcAdicCompletion Y d)) (a b : ℕ) (h : a ≤ b) :
     (completedReductionOrdinaryComparison g d b).hom.app M ≫

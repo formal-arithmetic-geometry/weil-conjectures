@@ -67,9 +67,7 @@ variable (d : AdicCoefficientDatum A)
 open AlgebraicGeometry.ProEtale in
 /-- Every finite coefficient projection is sectionwise surjective. Kept here, as in the
 published module, for the modules that read it through `import all` of this module.
-Source: Stacks Tag 099N (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: identify the projection with the limit projection of the constant quotient
-system; constant sections lift through the completed constant comparison. -/
+Source: Stacks Tag 099N. -/
 private theorem projection_surjective {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{u}) (n : ℕ) (U : T.ProEtᵒᵖ) :
     Function.Surjective ((completedReductionProjection T d n).hom.app U) := by
@@ -152,31 +150,7 @@ functoriality, transition maps, normalization, quotient cocycle and equal-index 
 The parameter n denotes the positive level n+1; representatives are arbitrary.
 No boundedness, nonempty scheme, nonzero ring, or nonempty generator tuple is required.
 
-Source: blueprint order 1262; Stacks Tag 099N (5)
-(blueprint: definition-completed-inverse-image).
-
-Proof:
-1. Restrict to constant A-coefficients using lem-weil-pbc-constant-completion-equivalence.
-The defining pulled strict tower becomes the reduction tower of ordinary pullback N,
-including its quotient units and finite projections; no infinite limit is pulled back.
-2. Apply lem-weil-pbc-ringed-koszul-completion-reflector. Its completed value is complete.
-The constant/completed comparison identifies its Koszul unit with the unit for L;
-exact scalar restriction reflects invertibility, giving intrinsic completeness over A_X.
-3. Use the strict-perfect coefficient package and projection-formula totalization to
-commute reduction by P_a with the Koszul derived limit. On the tail m>=a the reduced
-Koszul differential vanishes. The degree-zero summand is constant N_a; negative
-summands have zero transition across a gap of a. The strict-tower homotopy-limit
-lemma kills their derived limit, and also permits discarding the finite initial tail.
-The product triangle computes the constant tower as N_a by finite partial sums.
-Thus reduction of the completion unit is invertible.
-4. The projection-induced arrow composed with that reduced unit is identity by the
-normalized scalar adjunction: x tensor s maps to (x tensor 1)s. Hence alpha is the
-inverse of the reduced unit. Natural finite comparisons give functoriality.
-5. Naturality of tensoring the single completion unit with each quotient gives the
-transition square. Apply scalar associativity to the same unit and invert its
-reductions to obtain normalization compatibility. Associativity of scalar multiplication
-in the ordinary balanced formulas gives the quotient cocycle; the identity quotient
-gives the stated unitor. All maps here are the uniquely normalized maps above. -/
+Source: Stacks Tag 099N (5). -/
 theorem completedPullback_reduction
     (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal)
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))

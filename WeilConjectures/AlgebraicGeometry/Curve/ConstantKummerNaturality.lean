@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
 
 /-!
 # Kummer naturality in primitive-root coordinates
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, Kummer naturality in the proper and affine
-cases (blueprint: lem-sc-constant-kummer-naturality).
 -/
 
 @[expose] public section
@@ -30,20 +26,10 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, Kummer naturality in the proper and affine
-cases (blueprint: lem-sc-constant-kummer-naturality).
-
-Proof: the primitive-root sheaf map sends an integer class a to the power ζ^a. Pulling this
-section back sends it to (algebraMap k K ζ)^a; thus the two trivializations commute with the
-roots-of-unity pullback. Apply cohomology to this square. Use the inclusion square in
-kummer_base_change_compatibility and its identification of Gm degree-one pullback with
-Picard pullback to obtain the first equation. Naturality of the Kummer connecting maps in
-degrees zero and one gives the Picard-boundary and units-boundary equations. Transport them
-through the inverse trivializations. The prescribed homomorphisms determine t and tK
-uniquely, so the equations hold for any equivalences satisfying ht and htK. The units
-identity holds even without affineness; restrict it to the affine clause requested here.
-The n = 1 case has zero roots-of-unity cohomology, hence also satisfies all equations. -/
+/-- Let `k ⊆ K` be algebraically closed fields, `C` a smooth connected curve over `k` and `n`
+invertible in `k`. The canonical cohomology pullback `r`, transported through the primitive-root
+trivializations `t`, `tK` of `ℤ/n ≅ μ_n`, is compatible with the Kummer inclusion of Picard
+`n`-torsion, the Picard boundary and, in the affine case, the units boundary. -/
 theorem IsConnectedCurve.constant_kummer_baseChange_naturality
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

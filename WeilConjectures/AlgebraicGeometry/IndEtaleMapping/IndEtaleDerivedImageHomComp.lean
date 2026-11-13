@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 The comparison `imageTensorIso` of the left adjoints computing global Hom is compatible with
 inverse-image composition, and restriction along a morphism `g` has the counit normalization
 `restriction_counit`. These are the coherence inputs of `imageHomIso_naturality`.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
+Source: Stacks 08JA.
 -/
 
 @[expose] public noncomputable section

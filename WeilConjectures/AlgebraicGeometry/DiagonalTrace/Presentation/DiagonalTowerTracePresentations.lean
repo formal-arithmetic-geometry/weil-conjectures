@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTowerTraceCoefficients
 
 /-! # The normalized trace construction
-Source: blueprint main-20261015, sk-prop-diagonal-tower-trace, proof steps 1--8
-(blueprint: def-sfb-diagonal-trace-presentation).
 
 ## Main definitions
 - `DiagonalTrace.Presentation` fixes the geometric and coefficient comparisons.
@@ -42,9 +40,7 @@ attribute [-instance] CategoryTheory.ConstantScalarRestriction.ringPreadditive
   CategoryTheory.ConstantScalarRestriction.fixedZeroMorphisms
 
 /-- A presentation of the canonical trace construction. These are specified derived
-functors and normalized comparisons, not arbitrary arrows with specified level values.
-Source: blueprint trace proof steps 1--8
-(blueprint: def-sfb-diagonal-trace-presentation). -/
+functors and normalized comparisons, not arbitrary arrows with specified level values. -/
 structure Presentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (f : X ⟶ S) [DiagonalTraceLocalizations l X]
@@ -110,8 +106,7 @@ structure Presentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 end Presentation
 
 /-- The unit-plus-section splitting, as a morphism of strict constant-coefficient
-systems. The biproduct comparison is the canonical one for the exact restriction.
-Source: blueprint trace clause 1 (blueprint: def-sfb-diagonal-trace-presentation). -/
+systems. The biproduct comparison is the canonical one for the exact restriction. -/
 def Presentation.splitting (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} {f : X ⟶ S} [DiagonalTraceLocalizations l X]
@@ -126,9 +121,7 @@ def Presentation.splitting (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     p.varying.hom.app _
 
 /-- Twist the specified splitting, take its inverse and second projection, and
-restrict scalars. This is one strict-system morphism before applying any limit.
-Source: blueprint trace clause 1 and proof step 4
-(blueprint: def-sfb-diagonal-trace-presentation). -/
+restrict scalars. This is one strict-system morphism before applying any limit. -/
 def Presentation.systemTrace (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} {f : X ⟶ S} [DiagonalTraceLocalizations l X]
@@ -139,9 +132,7 @@ def Presentation.systemTrace (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   p.varying.inv.app _ ≫ p.restrictionS.F.mapDerivedCategory.map (p.model.trace l E)
 
 /-- The limit of the specified strict-system trace, with its source comparison
-normalized by the completed direct-image unit and its coefficient cones.
-Source: blueprint trace proof steps 5--7
-(blueprint: def-sfb-diagonal-trace-presentation). -/
+normalized by the completed direct-image unit and its coefficient cones. -/
 def Presentation.IsTrace (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} {f : X ⟶ S} [DiagonalTraceLocalizations l X]
@@ -161,8 +152,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 open SpTowerClasses WeilConjectures
 
-/-- The unit component of the twisted splitting, using the specified line pullback.
-Source: blueprint trace clause 1 (blueprint: def-sfb-diagonal-trace-presentation). -/
+/-- The unit component of the twisted splitting, using the specified line pullback. -/
 def Model.twistedUnit (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {b : SpTowerShriek.Base l E} {S X : Scheme.{u}} {f : X ⟶ S}
@@ -176,9 +166,7 @@ def Model.twistedUnit (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       (((SpTowerShriek.pull l E b m.geometry).commShiftIso (2 : ℤ)).hom.app _ ≫
         ((m.linePullback.derivedIso l E).hom)⟦(2 : ℤ)⟧')
 
-/-- The canonical source comparison before taking the limit of the system trace.
-Source: blueprint trace proof steps 5--7
-(blueprint: def-sfb-diagonal-trace-presentation). -/
+/-- The canonical source comparison before taking the limit of the system trace. -/
 def Presentation.sourceMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} {f : X ⟶ S} [DiagonalTraceLocalizations l X]
@@ -194,9 +182,7 @@ def Presentation.sourceMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
         (p.coefficientsX.lineMap l E p.LX) 2) ≫ p.limits.iso.hom.app _
 
 /-- The splitting, its completed trace, and the actual projection equations expressing
-finite reduction. The evaluated trace is normalized by the torsion unit/Chern splitting.
-Source: blueprint trace clause 1 and proof steps 3--8
-(blueprint: def-sfb-diagonal-trace-presentation). -/
+finite reduction. The evaluated trace is normalized by the torsion unit/Chern splitting. -/
 structure Result (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (f : X ⟶ S) [DiagonalTraceLocalizations l X]

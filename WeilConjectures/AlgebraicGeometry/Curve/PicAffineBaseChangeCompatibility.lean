@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionBoundary
 import WeilConjectures.AlgebraicGeometry.Curve.PicBoundaryBaseChangeTransport
 
 /-! # Compatibility of the affine Picard quotient with field extension
-
-Source: `literature/stacks-project/etale-cohomology.tex`, Tags 03RQ and 01JF
-(blueprint: lem-sc-pic-affine-base-change-compatibility).
 -/
 
 @[expose] public section
@@ -28,13 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The affine Picard quotient description is compatible with extension of algebraically closed
-fields.  The proof uses base change of the compactification, the boundary restriction theorem,
-and the Jacobian base-change compatibility.
-
-Source: Stacks Tags 03RQ and 01JF, and the affine case of
-`proposition-cohomology-smooth-affine-curve` (blueprint:
-lem-sc-pic-affine-base-change-compatibility).
--/
+fields. -/
 theorem pic_affine_base_change_compatibility
     {k k' : Type u} [Field k] [Field k'] [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k']
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

@@ -10,9 +10,7 @@ import all WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 
 /-! # Deriving an ordinary completed coefficient square
 
-Source: coefficient changes, paragraph (1), coefficient/direct-image comparison;
-Stacks Tags 05RR and 0941.
-(blueprint: lem-diagonal-completed-push-square).
+Source: Stacks Tags 05RR and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -27,14 +25,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- An exact equivalence square has a right-derived comparison fixed by the
 full units on complexes, retaining the two independent localization universes.
 
-Source: coefficient changes, paragraph (1); Stacks Tags 05RR and 0941.
-(blueprint: lem-diagonal-completed-push-square).
-
-Proof: the two recorded right-derived models have universal cochain units,
-hence are left Kan extensions. Precomposition and postcomposition by the two
-exact equivalences preserve this universal property. The uniqueness comparison
-between the transported universal pairs gives the isomorphism. Its universal
-factorization equation is exactly the displayed normalization on each complex. -/
+Source: Stacks Tags 05RR and 0941. -/
 theorem diagonalExactSquare_exists
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
     [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -69,9 +60,7 @@ end AlgebraicGeometry.ProEtale.DiagonalCoefficients
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 universe u
 
-/-- The ordinary coefficient square, before applying right derivation.
-Source: coefficient changes, initial coefficient identification.
-(blueprint: lem-diagonal-completed-push-square). -/
+/-- The ordinary coefficient square, before applying right derivation. -/
 structure CompletedOrdinarySquare (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (eX : CompletedRealization l X) (eS : CompletedRealization l S) where
@@ -84,8 +73,7 @@ structure CompletedOrdinarySquare (l : ℕ) [Fact l.Prime]
 
 /-- Derive an ordinary square by its universal-unit-normalized comparison.
 The normalization uniquely fixes the derived isomorphism by the two universal
-right-derived units. Source: coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-completed-push-square). -/
+right-derived units. -/
 def CompletedOrdinarySquare.derive
     {l : ℕ} [Fact l.Prime] {X S : Scheme.{u}} {f : X ⟶ S}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

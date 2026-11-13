@@ -51,18 +51,16 @@ theorem natCard_torsionBy_geometricPoints (hℓ : (ℓ : K) ≠ 0) :
   refine (Nat.card_congr f.toEquiv).trans ?_
   rw [Nat.card_fun, Nat.card_zmod, Nat.card_eq_fintype_card, Fintype.card_fin]
 
-/-- Blueprint `proposition-integral-tate-module--2` over an arbitrary field: for a prime `ℓ`
-invertible in `K`, the Tate module of an abelian variety of dimension `g` over `K` is
-`T_ℓ A ≅ ℤ_ℓ ^ (2 g)`. -/
+/-- For a prime `ℓ` invertible in `K`, the Tate module of an abelian variety of dimension `g` over
+`K` is `T_ℓ A ≅ ℤ_ℓ ^ (2 g)`. -/
 theorem nonempty_linearEquiv_tateModule_of_natCast_ne_zero (hℓ : (ℓ : K) ≠ 0) :
     Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ])) :=
   AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq ℓ _
     (exists_zsmul_eq_geometricPoints A ℓ (Fact.out : ℓ.Prime).pos) _
     (natCard_torsionBy_geometricPoints ℓ A hℓ)
 
-/-- Blueprint `proposition-integral-tate-module--2` over an arbitrary field: for a prime `ℓ`
-invertible in `K`, the rational Tate module of an abelian variety of dimension `g` over `K` is
-`V_ℓ A ≅ ℚ_ℓ ^ (2 g)`. -/
+/-- For a prime `ℓ` invertible in `K`, the rational Tate module of an abelian variety of dimension
+`g` over `K` is `V_ℓ A ≅ ℚ_ℓ ^ (2 g)`. -/
 theorem nonempty_linearEquiv_rationalTateModule_of_natCast_ne_zero (hℓ : (ℓ : K) ≠ 0) :
     Nonempty (rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℚ_[ℓ])) :=
   AddCommGroup.rationalTateModule.nonempty_linearEquiv_of_natCard_eq ℓ _
@@ -86,9 +84,8 @@ section FiniteField
 
 variable [Fintype K]
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector` (integral form): the arithmetic Frobenius
-`σ : z ↦ z ^ q` of `Gal(K̄ / K)`, acting on `T_ℓ A` through the Galois representation, fixes no
-nonzero vector: `(T_ℓ A)^{σ = 1} = 0`. -/
+/-- The arithmetic Frobenius `σ : z ↦ z ^ q` of `Gal(K̄ / K)`, acting on `T_ℓ A` through the
+Galois representation, fixes no nonzero vector: `(T_ℓ A)^{σ = 1} = 0`. -/
 theorem eq_zero_of_galoisRepresentation_frobenius_eq_self {t : tateModule ℓ A}
     (ht : galoisRepresentation ℓ A
       (FiniteField.frobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)) t = t) :
@@ -96,11 +93,8 @@ theorem eq_zero_of_galoisRepresentation_frobenius_eq_self {t : tateModule ℓ A}
   Subtype.ext <| AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed _
     (finite_setOf_frobenius_fixed A) t.2 fun n ↦ congrFun (congrArg Subtype.val ht) n
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector` (rational form): for a prime `ℓ` invertible in
-`K`, the endomorphism `σ - 1` of `V_ℓ A` is bijective, where `σ` is the arithmetic Frobenius
-acting on geometric points by coordinates. It is injective since `σ` has no nonzero fixed vector
-(`AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self`), hence bijective as `V_ℓ A` is finite
-dimensional. -/
+/-- For a prime `ℓ` invertible in `K`, the endomorphism `σ - 1` of `V_ℓ A` is bijective, where `σ`
+is the arithmetic Frobenius acting on geometric points by coordinates. -/
 theorem bijective_rationalTateModuleGaloisMap_frobenius_sub_id (hℓ : (ℓ : K) ≠ 0) :
     Function.Bijective (rationalTateModuleGaloisMap ℓ A
       (FiniteField.frobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)) -
@@ -116,9 +110,8 @@ theorem bijective_rationalTateModuleGaloisMap_frobenius_sub_id (hℓ : (ℓ : K)
       (finite_setOf_frobenius_fixed A) hv
   exact ⟨hinj, LinearMap.injective_iff_surjective.1 hinj⟩
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector` (rational form): for a prime `ℓ` invertible in
-`K`, `σ - 1` is an automorphism of the rational Tate module `V_ℓ A`, `σ` the arithmetic
-Frobenius. -/
+/-- For a prime `ℓ` invertible in `K`, `σ - 1` is an automorphism of the rational Tate module
+`V_ℓ A`, `σ` the arithmetic Frobenius. -/
 noncomputable def frobeniusSubOneLinearEquiv (hℓ : (ℓ : K) ≠ 0) :
     rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] rationalTateModule ℓ A :=
   LinearEquiv.ofBijective _ (bijective_rationalTateModuleGaloisMap_frobenius_sub_id ℓ A hℓ)

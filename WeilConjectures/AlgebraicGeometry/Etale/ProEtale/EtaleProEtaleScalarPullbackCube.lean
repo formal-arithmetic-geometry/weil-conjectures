@@ -78,10 +78,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # The etale/pro-etale scalar and inverse-image cube
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6D,
-`lemma-derived-pullback-composition`, with Tags 06YS, 0G7E, 06YY and 07A4;
-Modules on Sites, Tags 03EK and 03EL.
-(blueprint: lem-sfb-etale-proetale-scalar-pullback-cube).
+Source: Modules on Sites, Tags 03EK and 03EL.
 -/
 
 @[expose] public section
@@ -353,24 +350,7 @@ private theorem reverse_scalar_cube
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical inverse-image square commutes with derived scalar extension.
-Source: Stacks Project, Tag 0D6D, `lemma-derived-pullback-composition`.
-(blueprint: lem-sfb-etale-proetale-scalar-pullback-cube).
-
-Proof:
-1. Conjugate the ordinary restriction cube under the geometric and coefficient
-   restriction/coextension adjunctions. The two right-adjoint composites agree
-   sectionwise, so their conjugates agree.
-2. Exact localization preserves this equality. Conjugating with the canonical
-   exact/left-derived pullback isomorphisms gives derived_restriction_cube.
-3. Paste the coefficient-extension adjunction mates. Compatibility of mates with
-   top whiskering gives reverse_scalar_cube for the fixed scalar adjunctions.
-4. Cancel the inverse pro-etale scalar comparison and the inverse etale scalar
-   comparison. The proved scalarPullbackEtaleIso_eq_fromMate identifies the latter
-   with the published representative-normalized Etale.scalarPullbackIso.
-This proof applies to every M directly and uses no common flat-model assertion.
-It retains the scalar-six unit's etale/pro-etale comparison route and assumes no
-finiteness of f, boundedness of M, or flatness of a. -/
+/-- The canonical inverse-image square commutes with derived scalar extension. -/
 theorem etaleProEtale_scalar_pullback_cube
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -10,10 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureShea
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # The additive ideal image is the pushforward of the relative additive kernel.
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
-the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
-(blueprint: lem-sc-ideal-additive-image-relative-kernel)
 -/
 
 @[expose] public section
@@ -99,25 +95,7 @@ private theorem image_kernel_factor {C : Type*} [Category C] [Abelian C]
   have : StrongEpi e := strongEpi_of_epi e
   exact ⟨(image.isoStrongEpiMono e (kernel.ι g) he).symm⟩
 
-/-- The additive ideal image is the pushforward of the relative additive kernel.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
-the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
-(blueprint: lem-sc-ideal-additive-image-relative-kernel)
-
-Proof: Restriction of additive functions along a closed immersion is locally
-surjective: cover each etale test scheme by affine opens; the base-changed closed
-immersion has affine target and is surjective on global functions. The affine
-cover is an etale cover, so this proves the restriction map is an epimorphism.
-Restriction along a composite agrees with the composition isomorphism of direct
-images, by the identity for the two pullback projections. Apply this to the
-inclusion of the I subscheme in the J subscheme and its map to X. The map from
-the kernel of restriction to I to the kernel of the pushed-forward relative
-restriction is a pullback of the epimorphism restricting to J. It is therefore
-an epimorphism. Together with the second kernel inclusion, it is a strong
-epi-mono factorization of the displayed composite. Uniqueness of images and
-preservation of kernels by direct image give the asserted isomorphism. This
-uses no nilpotence or square-zero assumption and applies also when I=J, I=0,
-or X is empty. -/
+/-- The additive ideal image is the pushforward of the relative additive kernel. -/
 theorem nonempty_idealAdditiveImageRelativeKernelIso (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) :
     Nonempty (image (kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) ≫

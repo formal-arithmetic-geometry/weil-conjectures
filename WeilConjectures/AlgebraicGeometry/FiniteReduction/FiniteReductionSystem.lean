@@ -15,8 +15,7 @@ public import Mathlib.Data.ZMod.Basic
 /-!
 # Fixed scalar extensions and their normalized derived comparison system
 
-Source: main-20261015 blueprint, sec-smooth-purity/sk-lem-sp-reduction,
-first paragraph; Stacks Tags 06YT, 06YY and 03EL.
+Source: Stacks Tags 06YT, 06YY and 03EL.
 The interface is extracted from `FiniteReductionConstructibility` without changing its meaning.
 The quotient-composition proof is written explicitly to keep elaboration bounded.
 -/
@@ -28,16 +27,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.FiniteReduction
 
-/-- Size lift of the actual quotient ring. Source: blueprint lemma-sp-reduction,
-finite coefficients (blueprint: def-per-finite-reduction-coefficients). -/
+/-- Size lift of the actual quotient ring. -/
 abbrev Ring (l r : ℕ) := ULift.{u} (ZMod (l ^ r))
 
-/-- Module-size lift of the same coefficient ring. Source: blueprint lemma-sp-reduction,
-finite coefficients (blueprint: def-per-finite-reduction-coefficients). -/
+/-- Module-size lift of the same coefficient ring. -/
 abbrev Coeff (l r : ℕ) := ULift.{u + 1} (Ring.{u} l r)
 
-/-- The actual quotient map, lifted to the module universe. Source: blueprint
-lemma-sp-reduction (blueprint: def-per-finite-reduction-coefficients). -/
+/-- The actual quotient map, lifted to the module universe. -/
 def quotient (l : ℕ) {r m : ℕ} (h : m ≤ r) : Coeff.{u} l r →+* Coeff.{u} l m :=
   ((ZMod.castHom (pow_dvd_pow l h) (ZMod (l ^ m))).ulift).ulift
 
@@ -47,18 +43,16 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   {A B : Type (u + 1)} [CommRing A] [CommRing B] (f : A →+* B)
 
 /-- Scalar extension is sheafification of sectionwise scalar extension; it does not
-assume the quotient is flat. Source: Stacks 06YY
-(blueprint: def-pur-finite-reduction-system). -/
+assume the quotient is flat. Source: Stacks 06YY. -/
 def extend : Sheaf J (ModuleCat.{u + 1} A) ⥤ Sheaf J (ModuleCat.{u + 1} B) :=
   Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} f)
 
 /-- The standard tensor/restriction adjunction, fixing all tensor units. Source: Stacks
-06YY (blueprint: def-pur-finite-reduction-system). -/
+06YY. -/
 def extendAdjunction : extend J f ⊣ Sheaf.restrictScalars J f :=
   Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1} f)
 
-/-- Additivity comes from the tensor/restriction adjunction. Source: Stacks 06YY
-(blueprint: def-pur-finite-reduction-system). -/
+/-- Additivity comes from the tensor/restriction adjunction. Source: Stacks 06YY. -/
 instance extend_additive : (extend J f).Additive :=
   (extendAdjunction J f).left_adjoint_additive
 
@@ -66,8 +60,7 @@ set_option genSizeOf false in
 set_option genInjectivity false in
 /-- A universal derived tensor extension, including its canonical K-flat computation.
 This records the universal pair, rather than an unspecified functor or isomorphism.
-Source: Stacks 06YT and 06YY
-(blueprint: def-pur-finite-reduction-system). -/
+Source: Stacks 06YT and 06YY. -/
 structure DerivedExtension where
   functor : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))
@@ -82,8 +75,7 @@ end Site
 
 /-- Canonical ordinary comparison: both sides are left adjoint to the same restriction
 functor. Its normalization is the identity on that right adjoint, hence on local pure
-tensors. Source: Stacks 03EL
-(blueprint: def-pur-finite-reduction-system). -/
+tensors. Source: Stacks 03EL. -/
 def ordinaryComparison (T : Scheme.{u}) {A B : Type (u + 1)}
     [CommRing A] [CommRing B] (f : A →+* B) :
     extend T.smallEtaleTopology f ⋙ ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T ≅
@@ -95,9 +87,7 @@ def ordinaryComparison (T : Scheme.{u}) {A B : Type (u + 1)}
 
 /-- The ordinary tensor associator, fixed by the identity on scalar restriction.
 On local tensors it sends c tensor (b tensor q) to (bc) tensor q, equivalently
-(q tensor b) tensor c to q tensor bc in the right-tensor convention of the source.
-Source: blueprint lemma-sp-reduction, associativity
-(blueprint: def-pur-finite-reduction-system). -/
+(q tensor b) tensor c to q tensor bc in the right-tensor convention of the source. -/
 def ordinaryAssociator {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
     (l : ℕ) {r m n : ℕ} (hmr : m ≤ r) (hnm : n ≤ m) :
@@ -124,8 +114,7 @@ by
           (quotient l (hnm.trans hmr)) hq))
     (extendAdjunction J (quotient l (hnm.trans hmr)))
 
-/-- The actual termwise comparison on complexes. Source: Stacks 03EL
-(blueprint: def-pur-finite-reduction-system). -/
+/-- The actual termwise comparison on complexes. Source: Stacks 03EL. -/
 abbrev ordinaryComparisonComplex (T : Scheme.{u}) {A B : Type (u + 1)}
     [CommRing A] [CommRing B] (f : A →+* B) :=
   NatIso.mapHomologicalComplex (ordinaryComparison T f) (.up ℤ)
@@ -135,8 +124,7 @@ set_option genInjectivity false in
 /-- Canonical coefficient extension on the two sites, including representative
 normalizations of its comparison and its associators. All functors are universal derived
 functors of the concrete scalar extensions above. The normalizations remove arbitrary
-choices of natural isomorphisms. Source: Stacks 06YT, 06YY and 03EL; blueprint
-lemma-sp-reduction (blueprint: def-pur-finite-reduction-system). -/
+choices of natural isomorphisms. Source: Stacks 06YT, 06YY and 03EL. -/
 structure System (T : Scheme.{u}) (l : ℕ) where
   etale : ∀ (r m : ℕ) (h : m ≤ r),
     DerivedExtension T.smallEtaleTopology (quotient.{u} l h)
@@ -201,15 +189,14 @@ structure System (T : Scheme.{u}) (l : ℕ) where
           (ordinaryAssociator (Scheme.ProEt.topology T) l hmr hnm) (.up ℤ)).hom.app P)
 
 /-- Finiteness of the actual coefficients, derived from primality, not an extra
-hypothesis. Source: blueprint lemma-sp-reduction
-(blueprint: def-pur-finite-reduction-system). -/
+hypothesis. -/
 instance ringFinite (l : ℕ) [h : Fact l.Prime] (r : ℕ) : Finite (Ring.{u} l r) := by
   let : NeZero l := ⟨h.out.ne_zero⟩
   infer_instance
 
 /-- The canonical realization in the intrinsic constant-ring presentation, used solely
 to apply the recorded intrinsic constructibility and Tor predicates. Source: Stacks 00YV
-and 09AL (blueprint: def-pur-finite-reduction-system). -/
+and 09AL. -/
 def realize (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : ℕ) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Coeff.{u} l r))) ⥤
       Scheme.proEtaleDerivedCategory T (Ring.{u} l r) :=

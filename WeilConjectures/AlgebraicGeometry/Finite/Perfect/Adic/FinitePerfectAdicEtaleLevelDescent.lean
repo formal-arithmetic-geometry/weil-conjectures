@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 Source: Stacks Project, Tag 09C6, the construction of L_n and its algebraic fibre;
 Tags 09AL, 09B1 and 03Q3.
-(blueprint: lem-weil-pbc-finite-perfect-adic-etale-level-descent).
 -/
 
 @[expose] public noncomputable section
@@ -157,26 +156,7 @@ private def stalk_constant_model
 
 /-- One finite quotient with etale local perfect constant models descends to an etale
 complex, and its geometric fibre at the specified point has a perfect small model.
-There is no consecutive scalar-extension assertion and no choice of a cover here.
-
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6), the
-construction of L_n; lemma-compare-constructible-derived (Tag 09AL), and Tag 09B1.
-(blueprint: lem-weil-pbc-finite-perfect-adic-etale-level-descent).
-
-Proof: use the weakly etale slice equivalence on V and transport coefficients through
-phi_n. The given finite-projective constant models imply bounded finite locally
-constant cohomology, with the specified interval. Finite-ring constructible derived
-origin descends this single quotient to an etale complex L. Exact cohomology comparison
-reflects the interval and finite local constancy. Lift the geometric point at v to a
-member of the model covering. Exact geometric stalk and the constant-stalk comparison
-identify the stalk of L with the universe lift of that member's finite-projective
-complex P. Set the small algebraic object to Q(P); its bounded projective representative
-proves perfectness. For a supplied constant-model isomorphism on U, apply finite
-coefficient inverse image and its constant-realization comparison. Compose with the
-descent isomorphism for the actual quotient, then restrict along W. This construction
-works for every supplied algebraic F, and asserts no local trivialization by itself.
-Zero rings and zero complexes are included; the chosen point ensures the chart is
-nonempty, but neither connectedness nor a neighboring coefficient level is required. -/
+There is no consecutive scalar-extension assertion and no choice of a cover here. -/
 theorem finitePerfectAdic_etale_level_descent
     (X : Scheme.{t}) [IsLocallyNoetherian X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

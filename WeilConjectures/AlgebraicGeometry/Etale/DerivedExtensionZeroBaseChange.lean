@@ -15,9 +15,7 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-!
 # Derived extension-by-zero base change
 
-Source: blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-proposition-extension-zero-restriction-closed-subscheme--11; Stacks Tags 03S6, 0F70 and 015F
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
+Source: Stacks Tags 03S6, 0F70 and 015F.
 -/
 
 @[expose] public section
@@ -48,10 +46,9 @@ end Underived
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The inverse of the canonical adjunction mate, applied termwise and localized,
-restricted to bounded below derived categories. Source: Stacks 03S6, 015F
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
-The `IsPullback` argument is the property underlying `OpenImmersionSquare`;
-its chosen pullback identification does not affect this canonical map. -/
+restricted to bounded below derived categories. Source: Stacks 03S6, 015F. The `IsPullback` argument
+is the property underlying `OpenImmersionSquare`; its chosen pullback identification does not affect
+this canonical map. -/
 noncomputable def extensionZeroBaseChangeDerivedPlusIso
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']

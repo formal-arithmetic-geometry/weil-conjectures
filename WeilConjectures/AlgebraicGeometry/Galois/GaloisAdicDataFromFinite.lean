@@ -27,13 +27,10 @@ set_option genSizeOfSpec false in
 set_option genInjectivity false in
 /-- Construction witnesses for the three coefficient stages, including normalization.
 Source: Weil II (1.1.1) b)-d), (1.1.6); Stanford Weil II seminar L19, Proposition 1.1.9.
-(blueprint: new-c5-galois-adic-data-from-finite).
 
 At the integral stage the representation is the limit of the finite stalk actions
 specified by `c.γ`, and its projections agree with `τI`. At the field stages the displayed
-linear equivalences identify every pure tensor and intertwine the actions. Thus these
-hypotheses determine the actions through the fibre comparisons; an independently twisted
-equivalence cannot satisfy them. -/
+linear equivalences identify every pure tensor and intertwine the actions. -/
 structure GaloisAdicCanonicalConstruction
     {Y : Scheme.{u}} [ConnectedSpace Y]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

@@ -5,11 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedCoefficientFamilies
-/-! Localization extension of the integral normalized square.
-Source: rational transport proof step 16.
-(blueprint: lem-cbc-localized-coefficient-square).
-Proof: every raw rational object is an integral representative; scalar localization is
-full and additive, so the integral equality transports to every object and morphism. -/
+/-! Localization extension of the integral normalized square. Proof: every raw rational object is an
+integral representative; scalar localization is full and additive, so the integral equality
+transports to every object and morphism. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u w

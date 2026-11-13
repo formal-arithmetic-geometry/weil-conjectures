@@ -183,23 +183,7 @@ private theorem comparison_supported_unit (A : Type (u + 1)) [CommRing A]
     pro_constant_section]
   rfl
 
-/-- The normalized ordinary Cartier boundary satisfies the pro-etale Chern equation.
-Source: blueprint sk-lem-geo-cartier.proof.md, paragraphs 1 and 5
-(blueprint: lemma-cycle-class-cartier-divisor--1).
-Proof: ordinary_supported_kummer supplies a boundary representative and its Kummer
-Chern class. Uniqueness identifies that representative with geoCartierEtaleClass.
-For a closed immersion, the exact direct-image comparison intertwines the degree-zero
-constant unit with supportedDerivedUnit; its single-complex comparison intertwines
-supportedExactDerivedMap with Ext.homEquiv. Thus the ordinary unit equation is the
-Yoneda equation obtained by precomposition with the ordinary supported constant unit.
-The comparison mate commutes with units, by the two adjunction triangle identities.
-Apply exact comparison inverse image to this equation, identify the constants by
-comparisonUpperStarConstantSheafIso, and cancel the invertible supported-source mate.
-The resulting equation is precisely GeoCartierChernEquation, with the same ordinary
-Chern witness and the same integral generator. No sign is changed: the pole frame is
-the inverse Cartier equation, the frame of the dual ideal. For empty support both
-sides are zero; for the zero coefficient ring all objects and equations are zero.
--/
+/-- The normalized ordinary Cartier boundary satisfies the pro-etale Chern equation. -/
 theorem geoCartierCanonicalClass_chern (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}
     (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)

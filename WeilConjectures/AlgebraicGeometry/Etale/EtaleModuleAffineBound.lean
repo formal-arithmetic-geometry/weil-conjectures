@@ -28,8 +28,7 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 /-!
 # The uniform affine étale bound for ordinary finite-coefficient module sheaves
 
-Source: blueprint, `sk-prop-pe-unbounded-classical-unit.proof.md`, Fixed-degree truncation;
-Stacks Project, Tags 099W and 03FD (blueprint: lem-sfb-etale-module-affine-bound).
+Source: Stacks Project, Tags 099W and 03FD.
 -/
 
 @[expose] public section
@@ -46,32 +45,9 @@ set_option backward.isDefEq.respectTransparency.types false in
 above the uniform bound `2 * d_X + 1`. The module inverse image is expressed using the
 canonical constant-scalar restriction and extension equivalence around `Etale.upperStar`.
 The conclusion evaluates an arbitrary injective resolution of that module inverse image
-at the terminal étale object of W and takes its cohomology. Integer degrees above the
-positive bound are nonnegative, so `q.toNat` retains precisely the stated degree.
+at the terminal étale object of W and takes its cohomology.
 
-Source: blueprint, `sk-prop-pe-unbounded-classical-unit.proof.md`, Fixed-degree truncation;
-Stacks Project, Tags 099W and 03FD (blueprint: lem-sfb-etale-module-affine-bound).
-
-Proof (the six steps of the node):
-1. Put N = ℓ^a. The scalar N * 1 is zero, so N kills every section of the underlying
-abelian sheaf of G. It is torsion, with no finiteness requirement on its sections.
-2. Mathlib supplies that the étale map w is weakly étale. The one-object constant
-presentation of the affine scheme W is a pro-étale affine presentation over X in the
-sense of `definition-ind-etale-pro-etale-weakly`; its only transition is the affine identity.
-3. Apply `lemma-uniform-bounds-pro-etale-affines` (1) with Y = X and g = identity. It gives
-vanishing on W's pro-étale site above exactly the displayed bound, including empty X.
-4. `comparisonUpperStarCompUpperStarIso` identifies the two pulled-back coefficients.
-`lem-cbc-abelian-etale-proetale-cohomology-comparison` (Stacks 099W) transfers the
-vanishing to abelian cohomology on W's étale site. The positive bound ensures q ≥ 0.
-5. `upperStarForget₂Comparison` identifies the underlying abelian sheaf of module
-inverse image with the abelian inverse image, using the constant-ring module equivalence.
-6. The constant-ring equivalence supplies enough injectives and preserves injectivity.
-`subsingleton_H_forget₂_of_injective` makes their underlying abelian sheaves acyclic.
-The exact-composite comparison `exists_rightDerived_exact_comp_iso` (Stacks 03FD and
-015M) computes abelian sections on the chosen module injective resolution. Exact scalar
-forgetting commutes with homology and reflects zero objects, giving the claimed vanishing.
-No flatness, constructibility, finite generation, or injectivity after forgetting scalars
-is needed. -/
+Source: Stacks Project, Tags 099W and 03FD. -/
 theorem etaleModule_affine_cohomology_isZero
     {k : Type u} [Field k] (hk : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) (hℓ : ℓ.Prime) (hℓk : IsUnit (ℓ : k))

@@ -118,29 +118,8 @@ private theorem quotientRootProjection_epi
     (by simpa only [p, B, Category.assoc] using hq)
 
 /-- A root-normalized projection from the scalar quotient of the completed positive
-Tate line to the free module on the finite root sheaf is invertible.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), expected reductions;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, positive inverse-limit
-construction; sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, compatible root bases.
-(blueprint: lem-diagonal-quotient-root-projection-iso).
-
-Proof in words. The root-tower projection is locally surjective. Applying the free
-module functor preserves its epimorphism. By the displayed normalization it factors
-through q, so q is epic. Choose the common compatible-root cover. The integral line
-is free of rank one there, and extending this basis to the quotient retains rank
-one without flatness. The finite root basis gives a basis for its free B-module:
-tensor the cyclic root basis with B, and use that N annihilates B to identify
-B tensor_Z Z/N with B. The presheaf tensor comparison is locally bijective and
-restriction preserves this property, so the basis survives sheafification.
-Thus q is locally an epic endomorphism of the regular module over a commutative
-ring sheaf. Such an endomorphism is multiplication by its value on 1. Local
-surjectivity lifts 1 locally, making that value a unit; separatedness then proves
-injectivity. It is therefore an isomorphism on the cover and hence globally.
-The same reasoning includes the zero ring, empty scheme and n=0. It uses only
-the annihilation equation, not a flatness or ramification divisibility hypothesis. -/
+Tate line to the free module on the finite root sheaf is invertible. Only the annihilation
+equation is assumed, no flatness or ramification divisibility hypothesis. -/
 theorem diagonalQuotientRootProjection_isIso
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) (hX : IsUnit (l : Γ(X, ⊤)))
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

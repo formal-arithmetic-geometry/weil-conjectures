@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarPullback
 /-! # Projection normalization of the scalar mate
 
 Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 07A6.
-(blueprint: lem-sfb-derived-scalar-projection-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -22,20 +21,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Scheme.DerivedScalarMate
 
 /-- The normalized scalar mate restricts to the specified projection arrow.
-Source: Stacks 03EL, 06YY, 07A4, 07A6; steps 2--3 of the scalar-mate argument
-(blueprint: lem-sfb-derived-scalar-projection-normalization).
-Proof: resolve the input and the coefficient by flat K-flat complexes. The ordinary
-scalar/pullback comparison and the tensor/pullback comparison send a pure tensor
-s tensor x to pullback(x) tensor pullback(s). The normalized scalar adjunction fixes
-the inverse mate to be this comparison. Tensor generation proves equality of chain
-maps, and resolving localization proves it for every derived input. Apply the
-adjunction-compatible restriction/direct-image comparison to the adjunct of beta.
-Naturality of the normalized tensor identification at the geometric counit changes
-this adjunct to the pullback tensor comparison followed by counit tensor identity.
-This is the defining adjunct of the projection arrow. Injectivity of the geometric
-adjunction bijection gives the displayed equation with exactly sourceIso and targetIso.
-Resolving the coefficient is valid without its flatness because the first factor is
-K-flat; no projection-formula invertibility is used. -/
+Source: Stacks 03EL, 06YY, 07A4, 07A6. -/
 theorem scalarMate_projection_normalization
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

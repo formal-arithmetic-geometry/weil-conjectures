@@ -246,27 +246,7 @@ private theorem compactSiteIso_factors_iso
 /-- Canonical transport identifies the scalar transpose, including its units and counits.
 This is an equality of maps, rather than merely an isomorphism between their endpoints.
 
-Source: Stacks Tags 0GL6, 09AL and 0D6J; the scalar-mate compatibility of
-`etaleProEtale_scalar_mate`, followed by intrinsic realization.
-(blueprint: lem-finite-compact-support-scalar-transport).
-
-Proof: factor compact support as open extension followed by proper direct image.
-Adjunction naturality factors its scalar transpose as the proper scalar transpose
-followed by proper image of the open scalar transpose. For open extension the two
-scalar composites are left adjoint to the same restriction composite. Its
-unit-preserving uniqueness map is precisely openScalarIso; transporting the
-sectionwise realization restriction square gives sfOpenRestriction. For proper
-image, compute the restriction square and the realization square on a K-injective
-B-complex and a K-injective resolution after restriction. The defining equations of
-sfDerivedImageRestriction and sfIntrinsicDerivedDirectImageComparison identify both
-paths with the same direct image of the resolution arrow, so cancellation of its
-quasi-isomorphism gives equality. On the fixed-scalar sites apply
-etaleProEtale_scalar_mate; boundedness of G and GB supplies its two bounded-below
-hypotheses. The K-flat normalization of the inverse pullback mate identifies its
-etale scalar pullback comparison with scalarPullbackIso. Whisker these identities,
-then cancel the site and realization unit/counit isomorphisms. The resulting
-composite is exactly intrinsicCompactScalarIsoOfOrigin, proving the equality.
-The argument also covers zero rings, empty schemes and identity coefficient maps. -/
+Source: Stacks Tags 0GL6, 09AL and 0D6J. -/
 theorem intrinsicCompactScalarIsoOfOrigin_hom
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

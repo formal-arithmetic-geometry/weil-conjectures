@@ -9,9 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 
 /-! # Comparing unit and additive kernels from square-zero section kernels
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-square-zero-relative-units-additive-kernel-sections)
 -/
 
 @[expose] public section
@@ -21,21 +18,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- If the section kernels of restriction have square zero, its unit and additive sheaf
-kernels are isomorphic. No closed-immersion or ideal-sheaf hypothesis is needed.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-square-zero-relative-units-additive-kernel-sections)
-
-Proof: On every etale object V, the unit kernel consists of units u restricting to 1.
-Send u to u-1, which restricts to zero. For u,v in the kernel, square-zero gives
-(u-1)(v-1)=0 and therefore uv-1=(u-1)+(v-1). Conversely send an additive kernel
-section a to the unit 1+a, with inverse 1-a, since a*a=0. Products correspond to
-sums since a*b=0. Ring restriction maps commute with both formulas, including
-the coefficient universe lift. These maps therefore give sheaf morphisms into
-the ambient coefficient sheaves, and the zero-composition identities factor them
-through the two categorical kernels. Their composites are identity maps after
-composition with the kernel inclusions, by the formulas (1+a)-1=a and 1+(u-1)=u.
-The inclusions are monomorphisms, so the factorizations are mutually inverse.
-Empty objects have the zero ring; the same formulas still give the unique maps. -/
+kernels are isomorphic. No closed-immersion or ideal-sheaf hypothesis is needed. -/
 theorem nonempty_unitsAdditiveKernelIso_of_sections {X Y : Scheme.{u}} (g : X ⟶ Y)
     (hsq : ∀ (V : Y.Etaleᵒᵖ) (a b : Y.etaleStructurePresheaf.obj V),
       (etaleStructurePresheafToPullback g).app V a = 0 →

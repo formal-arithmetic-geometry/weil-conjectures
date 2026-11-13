@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! Local dual separation before sheafification.
-(blueprint: lem-sfb-completed-affine-free-local-dual-local-presheaf)
 -/
 
 @[expose] public noncomputable section
@@ -89,32 +88,7 @@ private theorem sum_smul_eq_zero_of_class_sums
     _ = 0 := by rw [hs, zero_smul]
 
 /-- Finite-support local dual separation for the free presheaf on a pro-affine etale
-representable, provided its section has nonzero image in sheafification.
-
-Source: the finite-support argument in `completedAffineFree_localDual_detect`, in
-`CompletedAffineFreeLocalDual.lean`; coefficient-twist blueprint, paragraph (1).
-(blueprint: lem-sfb-completed-affine-free-local-dual-local-presheaf)
-
-Proof: write the section as a finite free sum of maps to U with completed
-coefficients. In a cofiltered affine etale presentation of U, each stage graph is
-clopen. Its characteristic function defines a natural scalar-valued test on the
-slice over W. Extend the test through the free-module and sheafification adjunctions.
-Suppose every such test vanishes. After restricting W to an affine open, completed
-coefficients are continuous functions on its profinite component space with values
-in Z_l. At each component one common stage distinguishes the finitely many distinct
-limit maps, so every equality-class coefficient sum vanishes. There are finitely
-many equality patterns. On the closure of each pattern stratum, equalities persist
-and coefficient sums remain zero by continuity into Hausdorff Z_l. The canonical
-closed component restrictions, constructed by localizing at clopen-neighborhood
-idempotents, give a finite jointly surjective pro-etale cover. On each restriction
-the finite sum cancels class by class. Its sheafification image therefore vanishes
-by separatedness, contrary to the hypothesis. Thus a stage test is nonzero, and its
-extension is the required map. Empty support and an empty test object already have
-zero sheafification image and cannot satisfy the hypothesis.
-
-The former hypothesis `y ≠ 0` was false: four globally distinct maps on two disjoint
-components may pair up differently on the components. The formal swap-kernel lemma
-above certifies this obstruction; the change record gives the scheme example. -/
+representable, provided its section has nonzero image in sheafification. -/
 theorem completedAffineFree_presheaf_localDual (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom)
     (W : X.ProEt) :

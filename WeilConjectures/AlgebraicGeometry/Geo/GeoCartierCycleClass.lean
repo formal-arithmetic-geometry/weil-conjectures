@@ -12,9 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionScalar
 import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionPullback
 import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionModulus
 
-/-! # Canonical supported Cartier cycle classes
-
-Source: blueprint lemma-cycle-class-cartier-divisor. -/
+/-! # Canonical supported Cartier cycle classes -/
 
 @[expose] public noncomputable section
 
@@ -31,27 +29,7 @@ independence, and every Cartier-preserving base change. The auxiliary etale clas
 the canonical construction by its relative torsor boundary; `geoCartierSourceComparison`
 is the specified comparison mate, so no arbitrary source isomorphism occurs.
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-cartier, statement
-and proof paragraphs 1--6; Stacks Project, Tag 03PL (blueprint: lemma-cycle-class-cartier-divisor).
-
-Proof:
-1. The ordinary supported Kummer theorem constructs the integral pole extension,
-   its positive relative boundary and the scalar-reduced ordinary Cartier class.
-   Its uniqueness clause fixes geoCartierEtaleClass without any arbitrary data.
-2. The qcqs comparison mate is invertible for a closed immersion. Apply exact
-   comparison inverse image to the ordinary class and precompose with its inverse.
-   Cancellation proves the required comparison equation.
-3. The unit compatibility of comparison carries the ordinary Kummer Chern equation
-   to the pro-etale equation, retaining the same integral generator and dual ideal.
-4. Derived coefficient transitivity, normalized on constants and pure root tensors,
-   gives arbitrary coefficient compatibility for this canonical construction.
-5. For exponent change, the Kummer sequence morphism (q, m/n, identity) carries the
-   larger relative boundary to the smaller one. Boundary uniqueness, exact functoriality
-   and associativity of Ext composition prove equality of the canonical classes.
-6. Cartier-preserving pullback carries the pole extension and its normalized
-   relative boundary to the pulled-back extension. Comparison respects the counit
-   mate defining exchange and the normalized roots transport, giving base change.
--/
+Source: Stacks Project, Tag 03PL. -/
 theorem exists_geoCartierCycleClass (ℓ : ℕ) (hℓ : ℓ.Prime) :
     ∃ c : GeoCartierClassFamily.{u} ℓ,
       (∀ (r : ℕ) (hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A]

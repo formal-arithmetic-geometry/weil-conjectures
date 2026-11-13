@@ -138,13 +138,9 @@ theorem Scheme.exists_isAffineOpen_isUnit_not_exists_pow (X : Scheme.{u}) [IsInt
   exact IsIntegrallyClosed.not_exists_pow_eq_algebraMap (R := X.presheaf.stalk y)
     (P := maximalIdeal _) haM ha.2 hn
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`: an abelian variety `E` of positive dimension over a
-field is covered by finitely many affine opens `U i`, each carrying a unit `f i ∈ Γ(E, U i)` which
-is not an `r`-th power in the function field of `E`, for `2 ≤ r`.
-
-`E` is integral, regular and Jacobson, and it has at least two points since its dimension is
-positive; so `AlgebraicGeometry.Scheme.exists_isAffineOpen_isUnit_not_exists_pow` provides such an
-open around every point, and finitely many of them cover the quasi-compact `E`. -/
+/-- An abelian variety `E` of positive dimension over a field is covered by finitely many affine
+opens `U i`, each carrying a unit `f i ∈ Γ(E, U i)` which is not an `r`-th power in the function
+field of `E`, for `2 ≤ r`. -/
 theorem IsAbelianVariety.exists_finite_cover_units_not_pow {K : Type u} [Field K]
     (E : Over (Spec (.of K))) [IsAbelianVariety E] (hE : 0 < IsAbelianVariety.dim E) {r : ℕ}
     (hr : 2 ≤ r) :

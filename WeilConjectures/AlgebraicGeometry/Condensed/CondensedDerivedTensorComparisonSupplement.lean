@@ -24,9 +24,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- The total derived extension between two finite coefficient fields.
-Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restriction.
-(blueprint: def-weil-pbc-finite-derived-tensor-comparison) -/
+/-- The total derived extension between two finite coefficient fields. -/
 @[reducible]
 noncomputable def finiteCoefficientDerivedExtension {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) :
@@ -34,9 +32,7 @@ noncomputable def finiteCoefficientDerivedExtension {E F : FiniteIntermediateFie
       DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) :=
   (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctor
 
-/-- The total derived extension to the specified condensed algebraic closure.
-Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restriction.
-(blueprint: def-weil-pbc-finite-derived-tensor-comparison) -/
+/-- The total derived extension to the specified condensed algebraic closure. -/
 @[reducible]
 noncomputable def finiteCoefficientDerivedToAlgCl (E : FiniteIntermediateField ℓ) :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
@@ -44,11 +40,9 @@ noncomputable def finiteCoefficientDerivedToAlgCl (E : FiniteIntermediateField �
   (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).leftDerivedFunctor
 
 /-- Canonical tensor transitivity from a finite coefficient field through a larger
-finite field to the algebraic closure.
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, ExtendScalars.
-(blueprint: def-weil-pbc-finite-derived-tensor-comparison)
-This is the existing exact-derived composite comparison followed by the derivation
-of the underived tensor multiplication isomorphism and equality of coefficient maps. -/
+finite field to the algebraic closure. This is the existing exact-derived composite comparison
+followed by the derivation of the underived tensor multiplication isomorphism and equality of
+coefficient maps. -/
 noncomputable def finiteCoefficientDerivedTensorCompIso
     {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     finiteCoefficientDerivedExtension X ℓ h ⋙ finiteCoefficientDerivedToAlgCl X ℓ F ≅

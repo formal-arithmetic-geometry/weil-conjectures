@@ -84,14 +84,7 @@ lemma hom_left_comp {P Q : Y.FiniteEtale}
     (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
   simp
 
-/-- Blueprint `rem-ptr-galois-categories-1`: the geometric fibre of a finite étale `Y`-scheme
-at a geometric point is finite.
-
-The geometric fibre `|P_s|` is the set of `Y`-morphisms `Spec Ω ⟶ P`, which are the sections of
-the base change `P ×_Y Spec Ω ⟶ Spec Ω`; by blueprint `lem-galois-geometric-fibre`
-(`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`) this base change is finite
-étale, so its sections are the `Ω`-algebra maps out of a finite `Ω`-algebra, of which there are
-finitely many. -/
+/-- The geometric fibre of a finite étale `Y`-scheme at a geometric point is finite. -/
 lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P.obj) := by
   have : IsFinite P.obj.hom := P.property
   set h := pullback.snd P.obj.hom s
@@ -111,9 +104,7 @@ lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P
     ((h.overHomEquivAlgHom Ω).injective hxy)
   exact Over.OverMorphism.ext (by simpa [φ] using this)
 
-/-- Blueprint `def-galois-fibre-functor`: The fibre functor.
-
-The fibre functor `F_s : FÉt(Y) ⥤ FintypeCat` at a geometric point `s : Spec Ω ⟶ Y`, sending a
+/-- The fibre functor `F_s : FÉt(Y) ⥤ FintypeCat` at a geometric point `s : Spec Ω ⟶ Y`, sending a
 finite étale `P ⟶ Y` to the finite set of `Y`-morphisms `Spec Ω ⟶ P`. -/
 noncomputable def fiber : Y.FiniteEtale ⥤ FintypeCat.{u} :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ (pointSmallEtale s).fiber) (finite_fiber s)

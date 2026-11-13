@@ -20,7 +20,6 @@ to `U`) along which the target ring is finite free, the inverse scalar mate of t
 restriction/direct-image comparison is invertible.
 
 Source: Stacks Project, Tags 0B56 and 07A6.
-(blueprint: lem-pur-finite-free-restriction-direct-image-mate).
 -/
 
 @[expose] public section
@@ -33,14 +32,7 @@ namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 /-- The inverse scalar mate of the canonical restriction/direct-image square is invertible
 for a globally finite-free coefficient extension.
 
-Source: Stacks Project, Tags 0B56 (projection formula) and 07A6 (derived adjunction).
-(blueprint: lem-pur-finite-free-restriction-direct-image-mate).
-
-Proof: replace the finite-product basis by a coproduct basis indexed by `ULift (Fin d)`.
-The finite-free direct-image coherence theorem proves that the comparison for its
-normalized scalar models is invertible. The iterated-mates identity identifies its
-mate with the inverse canonical restriction/direct-image square. Invertibility of an
-inverse mate does not depend on the chosen left adjoints of scalar restriction. -/
+Source: Stacks Project, Tags 0B56 (projection formula) and 07A6 (derived adjunction). -/
 theorem restrictionDirectImageMate_isIso {U V : Scheme.{u}} (g : U ⟶ V)
     (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
     (RU SU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})

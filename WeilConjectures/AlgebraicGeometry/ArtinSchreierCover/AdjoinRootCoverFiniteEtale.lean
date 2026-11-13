@@ -14,8 +14,6 @@ import WeilConjectures.Mathlib.RingTheory.AdjoinRoot
 
 For a monic polynomial `P`, the base change `adjoinRootCover S P` of `Spec Γ(S)[T]/(P)` is
 finite locally free of degree `deg P`; when moreover `P'` is a unit modulo `P` it is étale.
-Source: blueprint, lemma-artin-schreier-character-sheaf, step (1); lem-weil-pbc-monic-quotient-free,
-lem-weil-pbc-standard-etale-monic-derivative.
 -/
 
 @[expose] public section

@@ -11,10 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenCoverShriekTriangle
 
 /-!
 # Relative Mayer--Vietoris for etale compact support
-
-Source: Stacks Project, more-etale.tex, Tag 0GKN, lemma-relative-mayer-vietoris,
-finite-ring bounded-below specialization
-(blueprint: lem-weil-pbc-etale-shriek-relative-mayer-vietoris).
 -/
 
 @[expose] public section
@@ -25,24 +21,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 
-/-- Relative Mayer--Vietoris for any chosen compactifications.
-Source: Stacks Project, Tag 0GKN, lemma-relative-mayer-vietoris.
-(blueprint: lem-weil-pbc-etale-shriek-relative-mayer-vietoris).
-
-Proof:
-1. Compact opens in a quasi-separated scheme have compact intersection. The open
-   subschemes inherit quasi-separatedness. Thus the qcqs shriek-composition
-   theorem applies to each of the three open inclusions followed by f.
-2. For an open inclusion T.ι, use its compactification with proper part the
-   identity. The derived identity-pushforward comparison identifies its shriek
-   with the exact extension-by-zero functor on D⁺. Composition then identifies
-   extension by zero followed by the candidate for cX with the candidate for cT.
-3. Apply the existing triangulated functor associated to cX to the absolute
-   open-cover extension-by-zero triangle. Additivity identifies the middle
-   biproduct. Transport its vertices through the three composition isomorphisms,
-   and its last arrow through the shifted intersection isomorphism. The resulting
-   triangle is isomorphic to a distinguished triangle, hence distinguished.
--/
+/-- Relative Mayer--Vietoris for any chosen compactifications. -/
 theorem exists_distinguished_relativeMayerVietoris
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

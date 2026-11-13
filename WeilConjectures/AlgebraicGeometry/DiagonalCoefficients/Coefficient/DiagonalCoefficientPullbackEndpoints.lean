@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Canonical pullback of diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-pullback-endpoints).
-
 ## Main definitions
 
 - `PullEndpoint`: the ordinary module endpoint fixed by its underlying adjoint.
@@ -33,8 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- A module pullback endpoint is fixed by the actual inverse-image map on
-underlying sheaves, through the ordinary module adjunction. Source: blueprint
-clause 3 (blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+underlying sheaves, through the ordinary module adjunction. -/
 structure PullEndpoint (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S)
     (M : Modules R S) (N : Modules R X)
@@ -45,9 +41,7 @@ structure PullEndpoint (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       (upperStarLowerStarAdjunction Ab.{u + 1} f).homEquiv _ _ m
 
 /-- The coefficient-unit endpoint under its actual condensed pullback map.
-This names its fixed regular-module parameters once.
-Source: blueprint base-change unit normalization
-(blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+This names its fixed regular-module parameters once. -/
 def UnitPullEndpoint (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) :=
   PullEndpoint R f (Mod.regular (condensedRingObj R S))
@@ -55,8 +49,7 @@ def UnitPullEndpoint (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The canonical exact inverse-image comparison on a degree-zero module.
 Naming its component fixes both categories before elaborating any geometric
-supported-source expression. Source: blueprint base-change identifications
-(blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+supported-source expression. -/
 def singlePullback (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) (M : Modules R S) :
     (derivedUpper R f).obj ((DerivedCategory.singleFunctor (Modules R S) 0).obj M) ≅
@@ -64,8 +57,7 @@ def singlePullback (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
         ((CondensedRing.upperStar R f).obj M) :=
   (Functor.singleFunctorCompLeftDerivedFunctorIso (CondensedRing.upperStar R f)).app M
 
-/-- The exact pullback single comparison followed by the normalized endpoint.
-Source: blueprint clause 3 (blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+/-- The exact pullback single comparison followed by the normalized endpoint. -/
 def PullEndpoint.derived {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} {f : X ⟶ S}
     {M : Modules R S} {N : Modules R X}
@@ -77,8 +69,7 @@ def PullEndpoint.derived {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (singlePullback R f M).hom ≫
     (DerivedCategory.singleFunctor (Modules R X) 0).map e.iso.hom
 
-/-- The shifted exact-pullback endpoint uses its canonical shift comparison.
-Source: blueprint clause 3 (blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+/-- The shifted exact-pullback endpoint uses its canonical shift comparison. -/
 def PullEndpoint.shift {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} {f : X ⟶ S}
     {M : Modules R S} {N : Modules R X}
@@ -91,8 +82,7 @@ def PullEndpoint.shift {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     e.derived⟦(2 : ℤ)⟧'
 
 /-- The direct-image comparison evaluated in universally specified models of
-right derivation, conjugated only by their equalities to the canonical functors.
-Source: blueprint clause 3 (blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+right derivation, conjugated only by their equalities to the canonical functors. -/
 def modelExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)
@@ -108,8 +98,7 @@ def modelExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     (derivedExchange R f f' hX hS h).app K ≫
     (eqToIso e').inv.app _
 
-/-- One trace's base-change equation under the specified canonical mate.
-Source: blueprint clause 3 (blueprint: def-sfb-diagonal-coefficient-pullback-endpoints). -/
+/-- One trace's base-change equation under the specified canonical mate. -/
 def TracePullback (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)

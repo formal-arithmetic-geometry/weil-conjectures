@@ -12,8 +12,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.RealSheaves.Condensed.Filte
 /-!
 # Comparing representations with the same graded pieces
 
-This is the common-refinement comparison in paragraph 3 of
-`lemma-tensor-exterior-powers-filtered-representations--3`.
+This is the common-refinement comparison of filtered representations with the same graded
+pieces, used for filtered tensor and exterior powers.
 -/
 
 @[expose] public section
@@ -27,10 +27,7 @@ universe u v w z
 /-- Choose a composition series in every common graded piece. Refinement matches both sets of
 composition factors with the same disjoint union; compose the two bijections and their factor
 isomorphisms. Every irreducible subquotient occurs in a composition series, so these same
-bijections also give both constituent inclusions.
-Source: `lemma-tensor-exterior-powers-filtered-representations--3`, proof paragraph 3, comparison of
-the two refinements (blueprint: lem-mg-common-graded-representation-factors).
--/
+bijections also give both constituent inclusions. -/
 theorem commonGradedRepresentationFactors
     {k : Type u} [Field k] {W : Type w} [Group W]
     {V V' : Type v} [AddCommGroup V] [Module k V]

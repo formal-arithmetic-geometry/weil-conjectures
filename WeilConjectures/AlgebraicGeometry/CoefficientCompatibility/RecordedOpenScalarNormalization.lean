@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenScalarCounitSquare
 
 /-! # Realization normalization for the open scalar factor
 
-Source: Stacks Tags 00YV, 03DI and 07A6; the open-factor argument in
-`lem-sp-recorded-compact-scalar-fixed-normalization`.
+Source: Stacks Tags 00YV, 03DI and 07A6.
 -/
 
 @[expose] public noncomputable section

@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalRootLimitC
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRootCoefficientComparison
 
 /-! # The ordinary coefficient square on root insertions
-
-Source: diagonal tower coefficient changes (1), root projection normalizations.
-(blueprint: lem-diagonal-ordinary-root-route-square).
 -/
 
 @[expose] public noncomputable section
@@ -105,20 +102,7 @@ private theorem root_square
       simp only [hv, Category.assoc, hn]
       rw [reassoc_of% hb₀]
 
-/-- The ordinary root insertion square follows from the supplied finite normalizations.
-
-Source: latest blueprint, diagonal tower coefficient changes (1), root projections.
-(blueprint: lem-diagonal-ordinary-root-route-square).
-
-Proof: forget to abelian sheaves, compose with the inverse-realization underlying
-isomorphism and precompose with the invertible bottom IntegralRoots map. The
-normalization of s cancels the cyclic inverse-realization factors. Naturality of the
-inverse underlying comparison moves the supplied line map outside the realization.
-The finite-equivalence triangle identity replaces each root insertion by the original
-realized root map. The bottom-to-E transition preserves the root-limit map, so both
-LineEndpoint normalizations apply to the same root limit. The resulting maps are the
-n-th root projection followed by the two finite-root arrows; coefficient normalization
-makes them equal. Cancel the two isomorphisms and use faithful module forgetting. -/
+/-- The ordinary root insertion square follows from the supplied finite normalizations. -/
 theorem diagonalOrdinaryRootRouteSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

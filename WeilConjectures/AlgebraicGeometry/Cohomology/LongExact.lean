@@ -30,8 +30,6 @@ long exact sequence give the additivity `χ(M₂) = χ(M₁) + χ(M₃)` of the 
 - `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact`: the Euler characteristic is
   additive in short exact sequences of modules with finite-dimensional cohomology vanishing in
   large degrees.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`)
 -/
 
 @[expose] public section
@@ -150,14 +148,7 @@ noncomputable def H.δLinearMap (hS : S.ShortExact) (n : ℕ) : S.X₃.H n →�
 
 /-- **Additivity of the Euler characteristic.** Let `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` be a short exact
 sequence of `𝒪_X`-modules on a `k`-scheme `X` whose cohomology groups are finite-dimensional and
-vanish in degrees above `N`. Then `χ(M₂) = χ(M₁) + χ(M₃)`.
-
-Write `a_q`, `b_q` and `c_q` for the ranks of `H^q(M₁) ⟶ H^q(M₂)`, `H^q(M₂) ⟶ H^q(M₃)` and
-`δ : H^q(M₃) ⟶ H^{q+1}(M₁)`. Exactness of the long exact sequence gives `h^q(M₁) = c_{q-1} + a_q`,
-`h^q(M₂) = a_q + b_q` and `h^q(M₃) = b_q + c_q`, and the alternating sum of
-`h^q(M₂) - h^q(M₁) - h^q(M₃) = -(c_{q-1} + c_q)` telescopes to `± c_N = 0`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+vanish in degrees above `N`. Then `χ(M₂) = χ(M₁) + χ(M₃)`. -/
 theorem eulerChar_eq_add_of_shortExact (hS : S.ShortExact) (N : ℕ)
     [∀ q, FiniteDimensional k (S.X₁.H q)] [∀ q, FiniteDimensional k (S.X₂.H q)]
     [∀ q, FiniteDimensional k (S.X₃.H q)]

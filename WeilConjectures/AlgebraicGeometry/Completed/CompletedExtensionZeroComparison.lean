@@ -55,10 +55,8 @@ public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-! # Completed open-immersion base change
 
-Source: blueprint order 1587; Stacks Tags 03DI, 09BP, 099N
-(blueprint: lem-cbc-completed-extension-zero-comparison).
-All extension functors below are the specified direct-sum presheaf followed by
-module sheafification, transported along the ringed slice-site identification.
+Source: Stacks Tags 03DI, 09BP, 099N. All extension functors below are the specified direct-sum
+presheaf followed by module sheafification, transported along the ringed slice-site identification.
 -/
 
 @[expose] public noncomputable section
@@ -68,8 +66,7 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 /-- The counit equation determining a derived exchange on specified representatives.
-Naming the generic condition avoids repeated expansion in its concrete module instances.
-Source: universal derived counits (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Naming the generic condition avoids repeated expansion in its concrete module instances. -/
 def CategoryTheory.Functor.DerivedExchangeCounitNormalization
     {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
     [Abelian C] [Abelian C'] [Abelian D] [Abelian D']
@@ -94,9 +91,7 @@ def CategoryTheory.Functor.DerivedExchangeCounitNormalization
       J'.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex b (.up ℤ)).app P)
 
-/-- Derive a square using exact presentations and their normalized counits.
-Source: composition-factorization equations for exact derived functors
-(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- Derive a square using exact presentations and their normalized counits. -/
 private theorem exactExchange_normalization
     {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
     [Abelian C] [Abelian C'] [Abelian D] [Abelian D']
@@ -146,9 +141,7 @@ private theorem exactExchange_normalization
   simp only [Iso.inv_hom_id_app_assoc]
   rw [hs, ← Functor.map_comp_assoc, he]
 
-/-- A normalized exchange is invertible if the counits and the underived exchange are.
-Source: cancellation and naturality on derived representatives
-(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- A normalized exchange is invertible if the counits and the underived exchange are. -/
 private theorem derivedExchange_isIso
     {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
     [Abelian C] [Abelian C'] [Abelian D] [Abelian D']
@@ -231,14 +224,13 @@ private theorem ringAdj_second
 namespace AlgebraicGeometry.Scheme
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- Positive quotients retain the finiteness in the arithmetic datum, at size t+1.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- Positive quotients retain the finiteness in the arithmetic datum, at size t+1. -/
 instance cbcQuotient_finite (n : ℕ) : Finite (A ⧸ d.ideal ^ (n + 1)) :=
   d.quotientFinite n
 
 /-- Direct-image form of the recorded completed coefficient map, without assuming
 that the structure map is invertible.
-Source: Tag 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 099N. -/
 def cbcCompletedCoefficientDirectMap {X Y : Scheme.{t}} (g : X ⟶ Y) :
     completedReductionCoefficient Y d ⟶
       (proEtaleSheafDirectImage g CommRingCat.{t + 1}).obj
@@ -247,7 +239,7 @@ def cbcCompletedCoefficientDirectMap {X Y : Scheme.{t}} (g : X ⟶ Y) :
     (completedCoefficientMap g d)
 
 /-- Sectionwise direct image with the recorded completed scalar action.
-Source: Tag 03D7 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03D7. -/
 def cbcCompletedModuleDirectImage {X Y : Scheme.{t}} (g : X ⟶ Y) :
     pbcModules X (pbcAdicCompletion X d) ⥤ pbcModules Y (pbcAdicCompletion Y d) :=
   SheafOfModules.pushforward.{t + 1} (F := proEtaleBaseChange g)
@@ -257,7 +249,7 @@ def cbcCompletedModuleDirectImage {X Y : Scheme.{t}} (g : X ⟶ Y) :
 
 /-- The existing module pullback adjunction on the fixed small models. The explicit
 continuity witness prevents inference from choosing an unrelated larger model.
-Source: Tags 03D2, 03D7 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tags 03D2, 03D7. -/
 def cbcModelPullbackAdjunction {X Y : Scheme.{t}} (g : X ⟶ Y) :=
   letI := proEtaleModelBaseChange_isContinuous g
   SheafOfModules.pullbackPushforwardAdjunction.{t + 1}
@@ -267,11 +259,7 @@ def cbcModelPullbackAdjunction {X Y : Scheme.{t}} (g : X ⟶ Y) :=
 
 /-- The pullback adjunction is uniquely normalized by the model-site inverse-image
 unit followed by the actual sheafified tensor section 1 tensor m.
-Source: Tags 03D7, 03EK (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: use the model-site module adjunction followed by scalar extension, whose
-unit is the specified pure tensor. Transport back leaves sections unchanged.
-The tensor generators and sheafification determine the Hom bijection uniquely,
-so the formula determines exactly one adjunction. No coefficient isomorphism is assumed. -/
+Source: Tags 03D7, 03EK. -/
 theorem cbcModulePullbackAdjunction_exists {X Y : Scheme.{t}} (g : X ⟶ Y) :
     ∃! adj : completedModulePullback g d ⊣ cbcCompletedModuleDirectImage d g,
       ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (V : Y.ProEt)
@@ -329,21 +317,18 @@ theorem cbcModulePullbackAdjunction_exists {X Y : Scheme.{t}} (g : X ⟶ Y) :
   exact (hadj' M V.unop x).trans (hu M V.unop x).symm
 
 /-- The tensor-unit normalized adjunction for the recorded pullback construction.
-Source: Tag 03D7 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03D7. -/
 def cbcModulePullbackAdjunction {X Y : Scheme.{t}} (g : X ⟶ Y) :=
   (cbcModulePullbackAdjunction_exists d g).exists.choose
 
 /-- The recorded strict reduction, tower pullback and Rlim, as a composite functor.
 Its object function is exactly completedPullbackObject.
-Source: Tag 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 099N. -/
 abbrev cbcCompletedPullback {X Y : Scheme.{t}} (g : X ⟶ Y) :=
   completedReductionTower Y d ⋙ completedTowerPullback g d ⋙ completedTowerRlim d X
 
 /-- Naturality of the recorded ordinary-to-completed pullback comparison.
-Source: Tag 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the constant-tower/Rlim unit, the normalized constant-pullback comparison,
-and the strict quotient augmentation are natural transformations. Functoriality
-of Rlim and their three naturality identities give the displayed equality. -/
+Source: Tag 099N. -/
 theorem cbcCompletedPullbackComparison_naturality {X Y : Scheme.{t}} (g : X ⟶ Y)
     {K L : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))} (f : K ⟶ L) :
     (completedOrdinaryPullback g d).map f ≫ completedPullbackComparison g d L =
@@ -356,22 +341,21 @@ theorem cbcCompletedPullbackComparison_naturality {X Y : Scheme.{t}} (g : X ⟶ 
   exact η.naturality f
 
 /-- The recorded completion-unit comparison with its naturality statement.
-Source: Tag 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 099N. -/
 def cbcCompletedPullbackComparison {X Y : Scheme.{t}} (g : X ⟶ Y) :
     completedOrdinaryPullback g d ⟶ cbcCompletedPullback d g where
   app := completedPullbackComparison g d
   naturality _ _ f := cbcCompletedPullbackComparison_naturality d g f
 
 /-- An open immersion is weakly etale.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: an open immersion is etale, and etale morphisms are weakly etale. -/
+Source: Tag 098K. -/
 theorem cbcOpenWeaklyEtale {U T : Scheme.{t}} (j : U ⟶ T)
     (_hj : IsOpenImmersion j) : WeaklyEtale j := by
   let := _hj
   infer_instance
 
 /-- Forget the ambient structure map in a pro-etale slice object.
-Source: Tag 0951 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 0951. -/
 def cbcSliceFunctor (T : Scheme.{t}) (W : T.ProEt) : Over W ⥤ W.left.ProEt where
   obj V := MorphismProperty.Over.mk ⊤ V.hom.left
     ((ProEt.weaklyEtale_localization.{t, t + 1, t + 1} T W
@@ -380,11 +364,7 @@ def cbcSliceFunctor (T : Scheme.{t}) (W : T.ProEt) : Over W ⥤ W.left.ProEt whe
     (congrArg (fun h ↦ h.left) f.w)
 
 /-- The concrete localization functor is continuous.
-Source: Tags 098K, 094T, 0951 (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the functor keeps the underlying schemes and arrows. The pro-etale covering
-condition is the same finite affine fpqc covering condition on those arrows;
-therefore inverse images of covering sieves cover. This is exactly the site
-identification in weaklyEtale_localization, with its concrete underlying maps. -/
+Source: Tags 098K, 094T, 0951. -/
 @[instance] theorem cbcSliceFunctor_continuous (T : Scheme.{t}) (W : T.ProEt) :
     (cbcSliceFunctor T W).IsContinuous ((ProEt.topology T).over W)
       (ProEt.topology W.left) := by
@@ -460,10 +440,7 @@ private theorem finiteSliceIso_unit {T : Scheme.{t}} (W : T.ProEt)
 attribute [local irreducible] finiteSliceIso
 
 /-- The finite ring identification in the slice is fixed by local function sections.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: localization keeps each underlying scheme, so its connected-component
-functions agree literally. Their sheafification units induce this unique map.
-Localization is an equivalence of sites, hence this map is an isomorphism. -/
+Source: Tag 098K. -/
 theorem cbcFiniteSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :
     ∃! φ : ((reductionCoefficient T d n)).over W ⟶
         ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
@@ -500,7 +477,7 @@ theorem cbcFiniteSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :
       (congrArg (fun f ↦ f ≫ (finiteSliceIso W d n).hom.hom.app V) hV.symm))
 
 /-- The finite slice coefficient map with the specified function normalization.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcFiniteSliceMap (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :=
   (cbcFiniteSliceMap_exists d T W n).exists.choose
 
@@ -607,10 +584,7 @@ private theorem completedSliceIso_projection {T : Scheme.{t}} (W : T.ProEt)
   rfl
 
 /-- The completed coefficient identification is fixed by every finite projection.
-Source: Tags 098K, 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: localization commutes with limits since it keeps sections. The finite maps
-commute with quotient maps since they identify the same functions. Take their
-inverse limit; joint monicity of its projections proves uniqueness. -/
+Source: Tags 098K, 099N. -/
 theorem cbcCompletedSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) :
     ∃! φ : ((completedReductionCoefficient T d)).over W ⟶
         ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
@@ -632,12 +606,12 @@ theorem cbcCompletedSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) :
   exact (hφ n.unop).trans (completedSliceIso_projection W d n.unop).symm
 
 /-- The completed ring map identifying the ringed slice site.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcCompletedSliceMap (T : Scheme.{t}) (W : T.ProEt) :=
   (cbcCompletedSliceMap_exists d T W).exists.choose
 
 /-- A module over the open's completed ring, viewed on the ambient ringed slice.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03DI. -/
 def cbcModuleToSlice (T : Scheme.{t}) (W : T.ProEt) :
     (pbcModules W.left (pbcAdicCompletion W.left d)) ⥤ SheafOfModules.{t + 1}
       ((reductionModuleRing T (completedReductionCoefficient T d)).over W) :=
@@ -647,13 +621,13 @@ def cbcModuleToSlice (T : Scheme.{t}) (W : T.ProEt) :
       (cbcCompletedSliceMap d T W))
 
 /-- The pro-etale object supplied by an open immersion.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcOpenObject {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) : T.ProEt :=
   letI := hj
   MorphismProperty.Over.mk ⊤ j (inferInstance : WeaklyEtale j)
 
 /-- Extension by zero is the recorded module direct-sum presheaf, then sheafification.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03DI. -/
 def cbcOpenShriek {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (pbcModules U (pbcAdicCompletion U d)) ⥤ (pbcModules T (pbcAdicCompletion T d)) :=
   cbcModuleToSlice d T (cbcOpenObject j hj) ⋙
@@ -663,9 +637,7 @@ def cbcOpenShriek {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
       (𝟙 (reductionModuleRing T (completedReductionCoefficient T d)).obj)
 
 /-- Extension by zero is additive.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the slice transport keeps addition of maps; direct sums and module
-sheafification are additive. Their composite is therefore additive. -/
+Source: Tag 03DI. -/
 @[instance] theorem cbcOpenShriek_additive {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : (cbcOpenShriek d j hj).Additive := by
   have : (cbcModuleToSlice d T (cbcOpenObject j hj)).Additive := by
@@ -679,11 +651,7 @@ sheafification are additive. Their composite is therefore additive. -/
   infer_instance
 
 /-- Extension by zero is exact, without any quasi-compactness assumption.
-Source: Tag 03DJ (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: restriction to a slice is exact and its direct-sum/sheafification left
-adjoint is exact. Ringed slice transport is an equivalence. The argument is
-unchanged at distinct site object and Hom universes; equivalently transport to
-AsSmall at t+1, apply the recorded localization theorem, and transport back. -/
+Source: Tag 03DJ. -/
 @[instance] theorem cbcOpenShriek_finiteLimits {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : PreservesFiniteLimits (cbcOpenShriek d j hj) := by
   have : (cbcSliceFunctor T (cbcOpenObject j hj)).IsContinuous
@@ -706,9 +674,7 @@ AsSmall at t+1, apply the recorded localization theorem, and transport back. -/
   infer_instance
 
 /-- Extension by zero preserves finite colimits.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: it is left adjoint to restriction, via the direct-sum Hom bijection and
-sheafification. Hence it preserves colimits, in particular finite colimits. -/
+Source: Tag 03DI. -/
 @[instance] theorem cbcOpenShriek_finiteColimits {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : PreservesFiniteColimits (cbcOpenShriek d j hj) := by
   have h : cbcCompletedSliceMap d T (cbcOpenObject j hj) =
@@ -732,23 +698,21 @@ sheafification. Hence it preserves colimits, in particular finite colimits. -/
   infer_instance
 
 /-- The exact extension functor applied termwise and descended to the derived category.
-Source: Tag 03DJ (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03DJ. -/
 def cbcDerivedOpenShriek {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     DerivedCategory (pbcModules U (pbcAdicCompletion U d)) ⥤
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) :=
   (cbcOpenShriek d j hj).mapDerivedCategory
 
 /-- Composition of a pro-etale arrow with the open immersion.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcOpenSiteFunctor {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     U.ProEt ⥤ T.ProEt :=
   letI := hj
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
 
 /-- Open-site composition is continuous.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: its maps are unchanged scheme arrows and hence preserve the finite-affine
-fpqc covering condition. This is the inverse side of slice-site localization. -/
+Source: Tag 098K. -/
 @[instance] theorem cbcOpenSiteFunctor_continuous {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (cbcOpenSiteFunctor j hj).IsContinuous (ProEt.topology U) (ProEt.topology T) := by
@@ -756,10 +720,7 @@ fpqc covering condition. This is the inverse side of slice-site localization. -/
   exact ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
 
 /-- The finite restriction coefficient map identifies the very same local functions.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the composition functor keeps the underlying scheme. Sheafify the identity
-on functions on connected components. Localization commutes with sheafification;
-the sheafification unit determines the resulting map uniquely. -/
+Source: Tag 098K. -/
 theorem cbcFiniteRestrictionMap_exists {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :
     ∃! φ : (reductionCoefficient U d n) ⟶
@@ -794,7 +755,7 @@ theorem cbcFiniteRestrictionMap_exists {U T : Scheme.{t}}
     exact (hφ V).trans (NatTrans.congr_app he V).symm
 
 /-- The finite restriction map fixed by local functions.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcFiniteRestrictionMap {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :=
   (cbcFiniteRestrictionMap_exists d j hj n).exists.choose
@@ -879,10 +840,7 @@ private theorem completedRestrictionIso_projection {U T : Scheme.{t}}
   rfl
 
 /-- The completed restriction map is fixed by its finite projections.
-Source: Tags 098K, 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: restriction computes sections and commutes with limits. The finite maps
-are compatible with every quotient transition, so their limit is the uniquely
-specified map. This is an isomorphism because all finite slice maps are. -/
+Source: Tags 098K, 099N. -/
 theorem cbcCompletedRestrictionMap_exists {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     ∃! φ : (completedReductionCoefficient U d) ⟶
@@ -903,13 +861,13 @@ theorem cbcCompletedRestrictionMap_exists {U T : Scheme.{t}}
   exact (hφ n.unop).trans (completedRestrictionIso_projection d j hj n.unop).symm
 
 /-- The canonical inverse of the open's completed coefficient identification.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcCompletedRestrictionMap {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :=
   (cbcCompletedRestrictionMap_exists d j hj).exists.choose
 
 /-- Actual restriction of completed-ring modules to the open pro-etale site.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03DI. -/
 def cbcOpenRestriction {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (pbcModules T (pbcAdicCompletion T d)) ⥤ (pbcModules U (pbcAdicCompletion U d)) :=
   SheafOfModules.pushforward.{t + 1} (F := cbcOpenSiteFunctor j hj)
@@ -918,7 +876,7 @@ def cbcOpenRestriction {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j)
       (cbcCompletedRestrictionMap d j hj))
 
 /-- The slice object corresponding to a pro-etale object of the open.
-Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 098K. -/
 def cbcOpenSliceObject {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j)
     (V : U.ProEt) : Over (cbcOpenObject j hj) :=
   Over.mk (@id ((cbcOpenSiteFunctor j hj).obj V ⟶ cbcOpenObject j hj)
@@ -1042,13 +1000,7 @@ set_option maxHeartbeats 1000000 in
 -- Unfolding the concrete composite adjunction and its generator formula needs more heartbeats.
 open Classical in
 /-- The extension/restriction adjunction is fixed by the direct-sum generator formula.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the sheafification Hom equivalence identifies a map out of j!M with a
-presheaf map out of its direct sum. Restricting this map to the summand indexed
-by the structure arrow V to U gives exactly the displayed formula. Conversely,
-apply a restriction map to each such summand and use the direct-sum universal
-property. These operations are inverse, natural, and linear by the coefficient
-identifications. The formula fixes the Hom equivalence, hence the adjunction. -/
+Source: Tag 03DI. -/
 theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     ∃! adj : cbcOpenShriek d j hj ⊣ cbcOpenRestriction d j hj,
@@ -1093,7 +1045,7 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
   exact h.trans h'.symm
 
 /-- The generator-normalized extension/restriction adjunction.
-Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Source: Tag 03DI. -/
 def cbcOpenAdjunction {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :=
   (cbcOpenAdjunction_exists d j hj).exists.choose
 
@@ -1393,12 +1345,7 @@ private theorem rightCompletedSquare :
 
 -- Elaborating all four completed scalar-restriction functors needs a larger budget.
 /-- The right-adjoint exchange is uniquely fixed by restriction along the canonical
-cartesian comparison of pro-etale objects, with its actual completed scalar action.
-Source: blueprint order 1587, Step 7 (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: for V over U, the cartesian comparison from V times_U U' to V times_X X'
-is an isomorphism. Restrict sections of M along it. The finite coefficient
-projection equations show scalar compatibility, and pass to the completed limit.
-Naturality is functoriality of restriction. Equality on every section proves uniqueness. -/
+cartesian comparison of pro-etale objects, with its actual completed scalar action. -/
 theorem cbcRightExchange_exists :
     ∃! γ : cbcCompletedModuleDirectImage d g ⋙ cbcOpenRestriction d j sq.isOpenImmersion ⟶
         cbcOpenRestriction d j' sq.isOpenImmersion' ⋙ cbcCompletedModuleDirectImage d gU,
@@ -1482,12 +1429,10 @@ theorem cbcRightExchange_exists :
       (T := reductionModuleRing X' (completedReductionCoefficient X' d))
       (S' := reductionModuleRing U' (completedReductionCoefficient U' d)) φ ψ φ' ψ' α he M V x).symm
 
-/-- The cartesian comparison on actual section modules.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- The cartesian comparison on actual section modules. -/
 def cbcRightExchange := (cbcRightExchange_exists d sq).exists.choose
 
-/-- The canonical underived inverse exchange is the adjoint conjugate of right exchange.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- The canonical underived inverse exchange is the adjoint conjugate of right exchange. -/
 def cbcUnderivedInverseExchange :
     completedModulePullback gU d ⋙ cbcOpenShriek d j' sq.isOpenImmersion' ⟶
       cbcOpenShriek d j sq.isOpenImmersion ⋙ completedModulePullback g d :=
@@ -1497,11 +1442,7 @@ def cbcUnderivedInverseExchange :
     ((cbcModulePullbackAdjunction d gU).comp
       (cbcOpenAdjunction d j' sq.isOpenImmersion'))).symm (cbcRightExchange d sq)
 
-/-- Ordinary open base change is invertible for the cartesian square.
-Source: blueprint order 1587, Step 7 (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: right exchange restricts along the cartesian comparison isomorphism, hence
-is invertible. Its adjoint conjugate is invertible. This is the usual finite
-coefficient open base-change map, with completed coefficient scalar actions. -/
+/-- Ordinary open base change is invertible for the cartesian square. -/
 @[instance] theorem cbcUnderivedInverseExchange_isIso :
     IsIso (cbcUnderivedInverseExchange d sq) := by
   have hsq := IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback
@@ -1543,9 +1484,7 @@ coefficient open base-change map, with completed coefficient scalar actions. -/
   infer_instance
 
 /-- The K-flat counit condition determining the derived inverse exchange.
-Naming the condition shares the predicate used by its unique choice.
-Source: blueprint order 1587, Steps 2, 3, 7
-(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+Naming the condition shares the predicate used by its unique choice. -/
 def cbcDerivedInverseExchangeNormalization
     (α : completedOrdinaryPullback gU d ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' ⟶
         cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ completedOrdinaryPullback g d) : Prop :=
@@ -1557,9 +1496,7 @@ def cbcDerivedInverseExchangeNormalization
     (completedOrdinaryPullbackComplexCounit g d) (cbcUnderivedInverseExchange d sq)
     (CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d)) α
 
-/-- Exactness makes the ordinary pullback counit invertible on every complex.
-Source: universal left-derived uniqueness
-(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- Exactness makes the ordinary pullback counit invertible on every complex. -/
 private theorem ordinaryComplexCounit_isIso {S T : Scheme.{t}} (f : S ⟶ T)
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     IsIso (completedOrdinaryPullbackComplexCounit f d P) := by
@@ -1572,16 +1509,7 @@ private theorem ordinaryComplexCounit_isIso {S T : Scheme.{t}} (f : S ⟶ T)
     (completedOrdinaryPullback f d) (completedOrdinaryPullbackCounit f d) P
 
 /-- The derived inverse exchange is fixed by the actual underived exchange on
-K-flat representatives and the universal pullback counits.
-Source: blueprint order 1587, Steps 2, 3, 7
-(blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: the recorded completed module pullbacks are exact. Universal left-derived
-uniqueness compares them with their termwise exact derived functors, compatibly
-with their counits. Derive the underived adjoint mate and conjugate by these
-comparisons. Composition factorization and naturality give the displayed counit
-normalization. Every derived object has a K-flat representative. On those
-representatives cancel the invertible target counit to prove uniqueness, then
-transport the equality to every object by naturality. -/
+K-flat representatives and the universal pullback counits. -/
 theorem cbcDerivedInverseExchange_exists :
     ∃! α : completedOrdinaryPullback gU d ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' ⟶
         cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ completedOrdinaryPullback g d,
@@ -1635,16 +1563,10 @@ theorem cbcDerivedInverseExchange_exists :
   apply (cancel_epi ((LF ⋙ J'.mapDerivedCategory).map eP.hom)).1
   rw [β.naturality, α.naturality, he]
 
-/-- The canonical derived inverse exchange.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- The canonical derived inverse exchange. -/
 def cbcDerivedInverseExchange := (cbcDerivedInverseExchange_exists d sq).exists.choose
 
-/-- The derived mate remains an isomorphism.
-Source: blueprint order 1587, Step 7 (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: on each K-flat representative the normalized derived exchange is a
-composition of invertible counits and the termwise underived base-change
-isomorphism. Every derived object has such a representative; hence every
-component is an isomorphism, so the natural transformation is an isomorphism. -/
+/-- The derived mate remains an isomorphism. -/
 @[instance] theorem cbcDerivedInverseExchange_isIso :
     IsIso (cbcDerivedInverseExchange d sq) := by
   have hrep (K : DerivedCategory (pbcModules U (pbcAdicCompletion U d))) :
@@ -1665,15 +1587,13 @@ component is an isomorphism, so the natural transformation is an isomorphism. -/
     (ordinaryComplexCounit_isIso d gU) (ordinaryComplexCounit_isIso d g) hrep
     (cbcDerivedInverseExchange d sq) (cbcDerivedInverseExchange_exists d sq).exists.choose_spec
 
-/-- Ordinary derived exchange in the direction used by the completed comparison.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- Ordinary derived exchange in the direction used by the completed comparison. -/
 def cbcOrdinaryExchange :
     cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ completedOrdinaryPullback g d ⟶
       completedOrdinaryPullback gU d ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' :=
   inv (cbcDerivedInverseExchange d sq)
 
-/-- The intrinsic complete-object predicate, using any finite generating tuple of I.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+/-- The intrinsic complete-object predicate, using any finite generating tuple of I. -/
 def cbcCompleteProperty (T : Scheme.{t}) (r : ℕ) (a : Fin r → A)
     (ha : Ideal.span (Set.range a) = d.ideal) :
     ObjectProperty (DerivedCategory ((pbcModules T (pbcAdicCompletion T d)))) :=
@@ -1685,28 +1605,7 @@ derived completeness. The completed base-change map is the unique natural map
 compatible with ordinary base change and the specified completion units. It is
 an isomorphism, and both sides are derived complete.
 
-Source: blueprint order 1587, node lem-cbc-completed-extension-zero-comparison;
-Stacks Tags 03DI, 09BP, 099N
-(blueprint: lem-cbc-completed-extension-zero-comparison).
-
-Proof plan: identify completed coefficients on the two ringed slice sites by
-the projection-normalized localization maps. Exact extension by zero commutes
-with tensor after restriction, preserving K-flat complexes and their strict
-quotient reduction towers, including every transition. For a quasi-compact open,
-recollement expresses j! as the kernel of j* to i*i^-1j*. Both direct images
-preserve products, and closed inverse image preserves products on the pro-etale
-site; thus j! preserves all products, including the empty one. Exact countable
-products identify Rlim with the signed Roos fibre, naturally for maps of strict
-towers. Applying j! to that fibre gives its canonical Rlim comparison, compatible
-with structure maps. Apply this first to the finite free Koszul tower and its
-unit: j!K is complete when K is. Finite coefficient base-change is the inverse
-adjoint mate above; its local-section formulas commute with quotient transitions.
-Apply functorial Rlim to those strict tower maps and use the j'! Rlim comparison.
-This constructs the displayed completed map. It commutes with ordinary-to-completed
-units by the quotient-unit normalization. Source and target are complete, so the
-completion universal property proves uniqueness. The finite maps and the Rlim
-comparison are isomorphisms; so is the completed map. Completeness of completed
-pullback and the first assertion for j' give completeness of both sides. -/
+Source: Stacks Tags 03DI, 09BP, 099N. -/
 theorem cbcCompletedExchange_exists [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     ∃! β : (cbcCompleteProperty d U r a ha).ι ⋙
@@ -1722,29 +1621,14 @@ theorem cbcCompletedExchange_exists [QuasiCompact j]
   sorry
 
 /-- The canonical completed base-change map, natural on the full complete subcategory.
-It is fixed by the ordinary adjoint mate and the strict quotient completion units.
-Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+It is fixed by the ordinary adjoint mate and the strict quotient completion units. -/
 def cbcCompletedExchange [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :=
   (cbcCompletedExchange_exists d sq r a ha).exists.choose
 
 /-- Completed extension by zero commutes with pullback, naturally in complete K.
 It preserves completeness and both sides of the canonical exchange are complete.
-Source: blueprint order 1587; Tags 09BP, 099N
-(blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: exact extension by zero commutes with tensor after restricting the other
-factor, hence with strict finite reduction including quotient transitions.
-Quasi-compactness and ringed open/closed recollement give product preservation
-by expressing extension by zero as the kernel of two product-preserving functors.
-Exact countable products identify Rlim with the functorial signed Roos fibre;
-therefore extension by zero commutes with that Rlim and its structure maps.
-Apply this to the Koszul tower and its unit to obtain preservation of intrinsic
-completeness. Apply it to the pulled strict quotient tower and the finite
-coefficient adjoint-mate base-change isomorphisms to obtain a natural isomorphism.
-Its quotient units agree with the specified ordinary-to-completed comparison,
-so uniqueness in cbcCompletedExchange_exists identifies it with the displayed
-canonical map. Completed pullback is complete; applying completeness preservation
-to the base-changed quasi-compact open gives completeness of the second side. -/
+Source: Tags 09BP, 099N. -/
 theorem completedExtensionZeroComparison [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     IsIso (cbcCompletedExchange d sq r a ha) ∧

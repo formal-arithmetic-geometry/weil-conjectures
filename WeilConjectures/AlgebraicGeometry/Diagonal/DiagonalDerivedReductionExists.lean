@@ -56,7 +56,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Simultaneous derived reduction of integral sheaves
 
-Source: blueprint diagonal tower proof step 3; Stacks Tags 06XN and 06YY.
+Source: Stacks Tags 06XN and 06YY.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -374,15 +374,7 @@ private theorem derivedReductionForExactExtension
 
 /-- The ordinary quotient tower has an everywhere-defined pointwise, triangulated
 left derived functor, computed by every complex whose positive prime-power maps
-are degreewise monomorphisms. Source: blueprint diagonal tower proof step 3, Stacks 06XN,
-06YY (blueprint: lem-sfb-diagonal-derived-reduction-exists).
-Proof: construct each level as the cokernel of multiplication by the positive prime
-power, with quotient transitions. A complex of flat sheaves has injective scalar
-multiplications, including after the exact extension to Z_l. The corresponding short
-exact sequences show that reduction preserves quasi-isomorphisms between these
-complexes. Flat-term resolutions give the resolving class. The resolving-class theorem
-constructs a triangulated pointwise left derived pair; full essential surjectivity of
-the homotopy quotient transfers its universal comparison to cochain complexes. -/
+are degreewise monomorphisms. -/
 theorem exists_diagonalDerivedReduction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

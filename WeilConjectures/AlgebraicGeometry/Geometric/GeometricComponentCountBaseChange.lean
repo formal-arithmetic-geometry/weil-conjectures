@@ -17,10 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SepClosedFieldComponen
 
 /-!
 # Geometric component counts and base change
-
-Source: Stacks Project, More on Morphisms, Tag 055F,
-`lemma-base-change-fibres-nr-geometrically-connected-components`
-(blueprint: lem-weil-pbc-geometric-component-count-base-change).
 -/
 
 @[expose] public section
@@ -97,22 +93,7 @@ extension of the residue field and commute with arbitrary base change. The count
 `ENat.card` of `ConnectedComponents`: zero for an empty fibre and infinity for infinitely
 many components.
 
-Source: Stacks Project, More on Morphisms, Tag 055F
-(blueprint: lem-weil-pbc-geometric-component-count-base-change).
-
-Proof: First embed two algebraically closed extensions of the same residue field into a
-common field using `Field.exists_common_extension` [lem-weil-common-extension-fields].
-Algebraically closed fields are separably closed [def-pc-separably-closed]. The projections
-from the common extension induce component bijections by
-[lem-weil-pbc-sepclosed-field-components-bijection]. The pullback universal property
-[def-pc-fibre-product] identifies their source schemes, proving independence of the field.
-Next, for `t` over `s`, use the residue-field embedding from `κ(s)` to `κ(t)`
-[def-weil-residue-field] to embed the two chosen closed fields into a common field over
-`κ(s)`. The pullback universal property identifies both further base changes with the
-same scheme over that field. Apply the same component bijections and compose them with
-the homeomorphism induced by this identification. Their extended-natural cardinalities
-agree, including the empty and infinite cases. Independence already proved makes this
-exactly the claimed equality of geometric component counts. -/
+Source: Stacks Project, More on Morphisms, Tag 055F. -/
 theorem geometricComponentCount_baseChange {X S : Scheme.{u}} (f : X ⟶ S) :
     (∀ (s : S) (K L : Type u) [Field K] [Field L] [IsAlgClosed K] [IsAlgClosed L]
       (i : S.residueField s ⟶ CommRingCat.of K)

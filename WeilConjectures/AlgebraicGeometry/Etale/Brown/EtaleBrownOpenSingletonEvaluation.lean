@@ -37,20 +37,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
 
 /-- The open singleton insertion evaluates to the open coefficient projection.
 Source: Zheng, Construction 5.14, Lemma 5.16 and Construction 4.1,
-printed pp. 21 and 34--35
-(blueprint: lem-pur-etale-brown-open-singleton-evaluation).
-
-Proof: apply the open extension/inverse-image Hom transpose, followed by the
-scalar extension/restriction transpose. The mate equation for q rewrites its open
-coefficient factor as the inverse of derivedTensor. The singleton below-level
-comparison intertwines its Hom transpose with the strict derived transition: on
-flat-term K-flat representatives this is derivedBelow_rep and hom_formula; exact
-localization then gives the statement on every derived object. The inverseTransition
-identity moves that transition through inverse image. Finally the defining conjugate
-identity for insertion and the evaluated open adjunction identity reduce the two
-sides to the same map. Injectivity of the transposes gives the equality. Thus the
-identity coefficient map is included, and no faithfulness of derived evaluation or
-invertibility of any proper singleton mate enters the proof. -/
+printed pp. 21 and 34--35. -/
 theorem etaleBrownOpenSingletonEvaluation
     (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)
     (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅

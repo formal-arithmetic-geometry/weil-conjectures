@@ -10,10 +10,6 @@ public import Mathlib.Algebra.Group.Subgroup.Ker
 public import Mathlib.Algebra.Group.TypeTags.Basic
 
 /-! # Equivariance on the geometric subgroup and a degree-one lift
-
-Source: latest blueprint, prop-wf-weil-sheaf-representation-equivalence.proof.md,
-Frobenius descent, the assertion about morphisms.
-(blueprint: lem-wrp-weil-action-intertwining).
 -/
 
 @[expose] public section
@@ -24,17 +20,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedWeilRepresentation
 
 /-- A map is equivariant for the Weil group exactly when it is equivariant for the
 geometric subgroup and commutes with the chosen degree-one operator. The statement
-applies to arbitrary group actions, including zero-dimensional representations.
-
-Source: prop-wf-weil-sheaf-representation-equivalence.proof.md, Frobenius descent,
-"A morphism is W-equivariant exactly when it is P-equivariant and commutes with Phi."
-(blueprint: lem-wrp-weil-action-intertwining).
-
-Proof: the elements for which the equivariance identity holds form a subgroup H:
-identity and multiplication follow from the action laws, and inversion follows by
-applying the bijection given by the original element. If H contains ker(deg) and gamma,
-it contains every w: put n = deg(w) and h = w gamma^(-n). Then deg(h) = 0 and
-w = h gamma^n. The converse is restriction to the subgroup and the chosen element. -/
+applies to arbitrary group actions, including zero-dimensional representations. -/
 theorem equivariant_iff_kernel_and_degreeOne
     {W : Type u} [Group W] (deg : W →* Multiplicative ℤ)
     (γ : W) (hγ : deg γ = Multiplicative.ofAdd 1)

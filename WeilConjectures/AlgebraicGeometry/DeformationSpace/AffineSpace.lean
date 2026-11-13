@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 # The deformation to the normal cone of the zero section of affine space
 
 For the standard pair `(𝔸^n_B ⟶ B, 0)`, the deformation space of the zero section is
-`𝔸^n_{𝔸¹_B} = 𝔸^n_B ×_B 𝔸¹_B`, with coordinates `u_k = x_k / t`, so that `x_k = t u_k`. This is
-blueprint `prose-09-12` (4).
+`𝔸^n_{𝔸¹_B} = 𝔸^n_B ×_B 𝔸¹_B`, with coordinates `u_k = x_k / t`, so that `x_k = t u_k`.
 
 ## Main statements
 
@@ -20,7 +19,7 @@ blueprint `prose-09-12` (4).
   `D_0 𝔸^n_B ⟶ 𝔸^n_{𝔸¹_B}` given by the coordinates `u_k = x_k t⁻¹`, with `x_k = t u_k`;
 - `AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`: it is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`: the deformation space of the
-  standard pair commutes with base change in `B` (blueprint `prose-09-12` (5)).
+  standard pair commutes with base change in `B`.
 -/
 
 @[expose] public section
@@ -430,7 +429,7 @@ lemma isPullback_deformationSpaceToAffineSpace :
       deformationSpaceProj_over, Scheme.Hom.comp_preimage]
     exact toBase_preimage _ (affineOpenOver hW)
 
-/-- Blueprint `prose-09-12` (4), **the standard pair**: the deformation space of the zero
+/-- **The standard pair**: the deformation space of the zero
 section of `𝔸^n_B ⟶ B` is `𝔸^n_{𝔸¹_B} = 𝔸^n_B ×_B 𝔸¹_B`, with coordinates `u_k = x_k t⁻¹`. -/
 instance isIso_deformationSpaceToAffineSpace : IsIso (deformationSpaceToAffineSpace n B) := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := MorphismProperty.isomorphisms Scheme)
@@ -463,7 +462,7 @@ noncomputable def deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
   deformationSpaceToAffineSpace n B' ≫ AffineSpace.map n (AffineSpace.map _ b) ≫
     inv (deformationSpaceToAffineSpace n B)
 
-/-- Blueprint `prose-09-12` (5) for the standard pair: the deformation space of the zero
+/-- For the standard pair, the deformation space of the zero
 section commutes with base change in `B`,
 `D_0 𝔸^n_{B'} = D_0 𝔸^n_B ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
 lemma isPullback_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
@@ -481,7 +480,7 @@ lemma isPullback_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
     P₃
   simpa [deformationSpaceMap] using this
 
-/-- Blueprint `prose-09-12` (5) for the standard pair: the base change of the section `s̃` is
+/-- For the standard pair, the base change of the section `s̃` is
 the section `s̃` over `B'`. -/
 lemma deformationSpaceSection_comp_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
     (AffineSpace.zeroSection n B').deformationSpaceSection ≫ deformationSpaceMap b =

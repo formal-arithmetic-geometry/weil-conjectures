@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Exact.ExactCompactificationUnitTower
 /-!
 # Compatibility of normalized exact compact-support units with composition
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E
-(blueprint: lem-sfb-exact-compactification-unit-composition).
+Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
 -/
 
 @[expose] public section
@@ -73,20 +72,7 @@ private lemma invert_unit_square
 
 set_option maxRecDepth 4096 in
 /-- The inverse normalized units respect the proper/open composition map.
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E
-(blueprint: lem-sfb-exact-compactification-unit-composition).
-
-Proof: choose a compatible proper/open tower for h,e. On a homotopy representative J,
-resolve j!J to I and then b!I to M. Proper direct image preserves K-injectives, so resolve
-i!q*I to L and lift its proper/open comparison to p*M. Naturality of the section-preserving
-sheaf identification and its normalization into ordinary direct image identify the two
-paths after applying s*. The equality of resolution paths is precisely
-properOpenTowerDerivedUnit. The composite b!j!J to b!I to M is a K-injective resolution
-because b! is exact. The derived-composition normalization therefore identifies the
-successive units with the single unit, after D(sigma). Localization descends the equality
-on all representatives. Refinement compatibility transports it from the tower to the
-chosen compactifications. Finally invert the three units and cancel their invertible
-whiskerings. This gives exactly the displayed equation. -/
+Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
 theorem exactCompactificationUnit_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T B : Scheme.{u}} [IsNoetherian V] [IsNoetherian T] [IsNoetherian B]

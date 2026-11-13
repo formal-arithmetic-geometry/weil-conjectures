@@ -14,7 +14,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Single-module transposes for the pinned derived adjunction
 
 Source: Stacks Project, Tags 079W and 0FP1.
-(blueprint: lem-pc-canonical-single-adjunction-transpose).
 -/
 
 @[expose] public section
@@ -76,22 +75,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The pinned derived adjunction transposes the ordinary single-module comparison.
-Source: Stacks Project, Tags 079W and 0FP1; the factorization defining
-`exists_schemeDerivedAdjunction`.
-(blueprint: lem-pc-canonical-single-adjunction-transpose).
-
-Proof: Let ε be the selected left-derived counit and t the unique isomorphism
-from tensor pullback to ordinary pullback preserving their common right adjoint.
-Represent a by the homotopy-category single map after the single-map comparison
-for tensor pullback and t. Apply the factorization in
-`Classical.choose_spec (exists_schemeDerivedAdjunction ...)` to this morphism.
-Naturality of the single-map comparison identifies its underived transpose with
-the single map of the tensor adjunction transpose. The unit law for
-`leftAdjointUniq` identifies this transpose with the ordinary adjunction transpose.
-The inverse single-map comparison for direct image followed by the specified
-right-derived unit is exactly `canonicalSingleDirectImageMap`. Reassociate the
-result to obtain the equality. No invertibility of a pullback comparison is used;
-zero modules and empty schemes satisfy the same naturality and counit identities. -/
+Source: Stacks Project, Tags 079W and 0FP1. -/
 theorem canonicalSingleAdjunctionTranspose {X S : Scheme.{u}} (f : X ⟶ S)
     (N : S.Modules) (M : X.Modules) (a : (pullback f).obj N ⟶ M) :
     (Classical.choose (exists_schemeDerivedAdjunction f

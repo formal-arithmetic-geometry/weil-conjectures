@@ -39,10 +39,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalExactFunctorExtImage
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- The named finite arrow is the Hom of the canonical finite Ext class.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-arrow-hom).
-Proof: this is the definition of finiteCartierArrow. -/
+/-- The named finite arrow is the Hom of the canonical finite Ext class. -/
 theorem finiteCartierArrow_hom
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)] (n : ℕ) :

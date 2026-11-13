@@ -72,9 +72,7 @@ every sheaf of modules vanishes in degrees `q > n`.
 
 This is what makes the `finsum` defining `AlgebraicGeometry.Scheme.Modules.eulerChar` a finite
 sum, hence makes `χ`, the genus and the degree meaningful, for instance on a curve, where
-`n = 1`. 
-(blueprint: lem-sc-noetherian-cohomology-above-dimension)
--/
+`n = 1`. -/
 @[stacks 02UZ]
 theorem Modules.subsingleton_H_of_topologicalKrullDim_lt {X : Scheme.{u}} [IsNoetherian X]
     (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) := by
@@ -124,16 +122,8 @@ variable (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
 /-- The **arithmetic genus** `dim_k H^1(X, 𝒪_X)` of a `k`-scheme `X`.
 
 When `X` is a smooth proper curve over `k` with `H⁰(X, 𝒪_X) = k`
-(`AlgebraicGeometry.Scheme.GlobalSectionsBijective`) this is the genus of `X`; no hypotheses
-are imposed on `X` here, so for other `X` the value carries no meaning.
-
-For a smooth proper curve `X ↘ Spec k`, Serre duality identifies this with
-`AlgebraicGeometry.Scheme.Hom.genus (X ↘ Spec k) = dim_k H^0(X, Ω¹_{X/k})`; see
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
-
-(blueprint: `def-pc-genus`) 
-(blueprint: def-pc-genus)
--/
+(`AlgebraicGeometry.Scheme.GlobalSectionsBijective`) this is the genus of `X`
+(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`). -/
 noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
 
@@ -149,21 +139,7 @@ quasi-separated scheme over a field `k`, let `K/k` be a field extension and let 
 quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
 `X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`.
 
-Proof (Stacks 02KH): first suppose `X` is separated. A finite affine open cover has affine
-intersections, so its Čech complex computes quasi-coherent cohomology. The affine pullback
-section formula identifies the base-changed complex with its tensor product by `K`.
-Tensoring over the field `k` is exact, hence commutes with cohomology. For general
-quasi-separated `X`, use compact-open induction. Its step adds an affine open `V` to a
-compact open `U`. The overlap `U ∩ V` is compact by quasi-separatedness and separated
-because it is open in the affine scheme `V`; it need not be affine. The separated case
-applies to `V` and the overlap, while the induction hypothesis applies to `U`.
-Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪ V` in
-all degrees. Apply the induction at the whole scheme and invert the resulting
-`K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) 
-(blueprint: lem-pc-flat-base-change-cohom)
--/
+Source: Stacks Project, Tag 02KH. -/
 @[stacks 02KH]
 theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
@@ -223,11 +199,7 @@ theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k
 
 /-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`,
-`dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) 
-(blueprint: lem-pc-flat-base-change-cohom)
--/
+`dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`. -/
 theorem Modules.finrankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
     ((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
@@ -248,11 +220,7 @@ theorem Modules.eulerChar_pullback [QuasiCompact (X ↘ Spec (.of k))]
 /-- **The genus is invariant under base change.** Let `X` be a quasi-compact quasi-separated
 scheme over a field `k` and let `K/k` be a field extension. Then the base change
 `X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
-`H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
-
-(blueprint: `corollary-serre-duality-field-extension--2`) 
-(blueprint: corollary-serre-duality-field-extension--2)
--/
+`H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH). -/
 theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] :
     arithmeticGenus K
@@ -273,11 +241,7 @@ variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 The value is the degree in the usual sense only for an invertible `ℒ` on a proper curve, where
 it agrees with the degree of the associated divisor class; for other sheaves it is just a
-difference of Euler characteristics.
-
-(blueprint: `def-pc-degree-line-bundle`) 
-(blueprint: def-pc-degree-line-bundle)
--/
+difference of Euler characteristics. -/
 noncomputable def Modules.degree (M : X.Modules) : ℤ :=
   M.eulerChar k - Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf)
 
@@ -290,15 +254,10 @@ lemma Modules.degree_unit :
     Modules.degree (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 0 :=
   sub_self _
 
-/-- **The degree is invariant under base change** (blueprint
-`theorem-riemann-roch-coherent-serre-duality--1`, part (1)). For a quasi-coherent module `M` on a
+/-- **The degree is invariant under base change**. For a quasi-coherent module `M` on a
 quasi-compact quasi-separated scheme `X` over `k` and a field extension `K/k`,
 `deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in `deg M = χ(M) - χ(𝒪_X)` are invariant
-under flat base change.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) 
-(blueprint: theorem-riemann-roch-coherent-serre-duality--1)
--/
+under flat base change. -/
 theorem Modules.degree_pullback (K : Type u) [Field K] [Algebra k K]
     [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules)
     [M.IsQuasicoherent] :
@@ -361,14 +320,7 @@ private theorem finrankH_eq_sum_of_pairwise_disjoint_aux {ι : Type} [Fintype ι
 /-- **Cohomology of a finite disjoint union.** If `X` is the disjoint union of finitely many
 open subschemes `U i`, then `H^q(X, M) ≅ ⊕ᵢ H^q(U i, M|_{U i})`; in particular, when
 `H^q(X, M)` is finite-dimensional, `h^q(X, M) = ∑ᵢ h^q(U i, M|_{U i})`. Each `U i` is a scheme
-over `k` through `X`.
-
-Each `U i` is open and closed, `M` is the direct sum of the pushforwards of its restrictions to
-the `U i` (`AlgebraicGeometry.Scheme.Modules.isIso_biproduct_lift_restrictAdjunction_unit`), and
-the pushforward along the inclusion of an open and closed subscheme does not change cohomology
-(`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`).
-
-This is used in the proof of blueprint `proposition-multiplication-n--1`. -/
+over `k` through `X`. -/
 theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ)
     [FiniteDimensional k (M.H q)] :
@@ -437,12 +389,7 @@ theorem eulerChar_eq_sum_range_of_subsingleton (M : X.Modules) {D : ℕ}
 /-- **The Euler characteristic of a quasi-coherent module is additive over a finite disjoint
 union.** If a quasi-compact separated scheme `X` is the disjoint union of finitely many open
 subschemes `U i`, and the cohomology of the quasi-coherent module `M` is finite-dimensional, then
-`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`.
-
-This is `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint` without the
-appeal to Grothendieck vanishing: the cohomology of quasi-coherent modules on `X` and on the `U i`
-vanishes above the number of affine opens needed to cover them
-(`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isQuasicoherent`). -/
+`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`. -/
 theorem eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent [CompactSpace X]
     [IsSeparated (Limits.terminal.from X)] {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules)

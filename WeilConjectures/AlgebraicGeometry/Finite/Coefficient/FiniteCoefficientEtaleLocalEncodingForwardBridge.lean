@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Finiteness.Cardinality
 /-! # Etale local models imply the fixed-coefficient pro-etale local-system condition
 
 Source: Stacks Project, proetale.tex, Tag 099Y; sites-modules.tex, Tag 04IX.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding-forward-bridge).
 -/
 
 @[expose] public noncomputable section
@@ -31,13 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- The displayed etale-local condition yields the fixed-coefficient pro-etale local-system
 condition for the slice restriction.
 
-Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX.
-Proof: take the identity etale chart, regard each etale covering sieve as a pro-etale
-covering, and pull it back along every pro-etale object. The scalar restriction,
-localization, and normalized constant-module comparisons identify the resulting models
-with fixed-scalar constant sheaves. This is the transport step needed before applying
-the intrinsic fixed-model comparison.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding-forward-bridge). -/
+Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX. -/
 theorem finiteCoefficient_etaleLocal_encoding_forward_bridge
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

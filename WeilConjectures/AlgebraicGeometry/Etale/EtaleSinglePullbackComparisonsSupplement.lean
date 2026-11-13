@@ -18,8 +18,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackComparisons
 The constant and shifted coefficient comparisons are constructed for a general
 coefficient category before specializing them to modules. This caches their
 structural instances and avoids comparing separate expanded derived constructions.
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(blueprint: lem-z8-etale-single-pullback-comparisons).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -42,32 +42,7 @@ open CategoryTheory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- The two canonical B-linear composites transporting the scalar mate agree.
-Source: blueprint main-20261015, scalar-six direct-image proof, finite rings paragraph
-(blueprint: lem-sfb-etale-proetale-scalar-mate).
-
-Proof, following the node's five steps:
-1. Write C for comparison inverse image and l,p,r,s for the etale/pro-etale
-   inverse/direct images. Beta is the mate of the inverse-image square d. Hence
-   p(beta) followed by the pro-etale counit is d followed by C of the etale counit.
-   The qcqs direct-image comparison is invertible on J and on its scalar extension.
-2. On flat-term K-flat representatives, the scalar/pullback comparisons c and delta
-   are ordinary balancing maps. Both paths through the site/scalar cube send each
-   pure tensor to the same pure tensor. The composition and 2-isomorphism coherence
-   of lem-sfb-ringed-derived-monoidal-comparisons and the tensor-pullback comparison
-   identify these paths on unbounded derived objects, without coefficient flatness.
-3. Precompose the desired equation with scalar extension of beta_A. Transpose both
-   resulting maps under p_B ⊣ s_B. For the pro-etale path, naturality of c and the
-   A-counit equation replace p_A(beta_A) followed by the pro-etale counit by
-   d_A followed by C_X of the etale A-counit.
-4. Naturality of delta moves that counit past delta_X. The cube equality of step 2
-   then rewrites this transpose as C_X of (c_et followed by scalar extension of
-   the A-counit), preceded by d_B and p_B(delta_Y). Every map is B-linear.
-5. For the other path, the B-counit equation and naturality of d_B give the same
-   expression, using the defining transpose of the etale scalar mate. Injectivity
-   of the geometric adjunction Hom equivalence gives equality. Precompose with
-   scalar extension of beta_A inverse. Neither scalar mate is inverted and the
-   intermediate scalar extension on Y need not be bounded below. -/
+/-- The two canonical B-linear composites transporting the scalar mate agree. -/
 theorem etaleProEtale_scalar_mate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -57,11 +57,7 @@ namespace AlgebraicGeometry
 /-- **The reduction step of Chow's lemma** for a morphism `f : X ⟶ S`: a surjective closed
 immersion `c : X* ⟶ X` together with a finite affine open cover `X* = ⋃ i, Uᵢ` whose
 intersection `⋂ i, Uᵢ` is scheme-theoretically dense in `X*`, and which is the preimage under
-`c` of a dense open `V ⊆ X` over which `c` is an isomorphism.
-
-Since `c` is a closed immersion, `X*` is again separated, locally of finite type and
-quasi-compact over `S`, so the remaining steps of the proof of Chow's lemma may be run on `X*`
-in place of `X`. -/
+`c` of a dense open `V ⊆ X` over which `c` is an isomorphism. -/
 structure ChowReduction {X S : Scheme.{u}} (f : X ⟶ S) where
   /-- the number of members of the cover -/
   n : ℕ
@@ -89,14 +85,7 @@ attribute [instance] ChowReduction.isClosedImmersion_c ChowReduction.surjective_
 components.** A quasi-compact quasi-separated scheme `X` with finitely many irreducible
 components admits a surjective closed model `X*` with a finite affine open cover whose
 intersection is scheme-theoretically dense in `X*` and lies over a dense open of `X` over which
-`X* ⟶ X` is an isomorphism.
-
-Step 1 covers `X` by finitely many affine opens `Wᵢ` all containing the generic points of the
-irreducible components of `X`; their intersection `V` is then dense, and quasi-compact since
-`X` is quasi-separated. Step 2 replaces `X` by the scheme-theoretic image `X*` of the
-quasi-compact immersion `V ⟶ X`, in which the copy of `V` is scheme-theoretically dense.
-This is the form of steps 1 and 2 used in the non-Noetherian variant of Chow's lemma
-(blueprint `rem-chow-lemma-non-noetherian`). -/
+`X* ⟶ X` is an isomorphism. -/
 @[stacks 0203]
 theorem nonempty_chowReduction_of_finite_irreducibleComponents {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : (irreducibleComponents X).Finite) :
@@ -132,11 +121,7 @@ theorem nonempty_chowReduction_of_finite_irreducibleComponents {X S : Scheme.{u}
 /-- **Steps 1 and 2 of the proof of Chow's lemma.** A scheme `X` that is separated and of finite
 type over a Noetherian scheme `S` admits a surjective closed model `X*` with a finite affine
 open cover whose intersection is scheme-theoretically dense in `X*` and lies over a dense open
-of `X` over which `X* ⟶ X` is an isomorphism.
-
-Indeed, `X` is Noetherian, hence quasi-compact, quasi-separated and with finitely many
-irreducible components, so this is a special case of
-`AlgebraicGeometry.nonempty_chowReduction_of_finite_irreducibleComponents`. -/
+of `X` over which `X* ⟶ X` is an isomorphism. -/
 @[stacks 0200 "Steps 1 and 2 of the proof"]
 theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] :
@@ -147,9 +132,8 @@ theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
   exact nonempty_chowReduction_of_finite_irreducibleComponents f
     (finite_irreducibleComponents_of_isNoetherian (X := X))
 
-/-- The cover of a `AlgebraicGeometry.ChowReduction` may always be assumed to be nonempty: if it
-is indexed by `Fin 0`, then `X*` is empty and the one-element cover by `⊤` satisfies all the
-requirements. -/
+/-- The cover of a `AlgebraicGeometry.ChowReduction` may always be assumed to be nonempty:
+there is a `AlgebraicGeometry.ChowReduction` of the same morphism with `n ≠ 0`. -/
 theorem ChowReduction.exists_n_ne_zero {X S : Scheme.{u}} {f : X ⟶ S} (R : ChowReduction f) :
     ∃ R' : ChowReduction f, R'.n ≠ 0 := by
   rcases eq_or_ne R.n 0 with hn | hn
@@ -173,10 +157,9 @@ theorem ChowReduction.exists_n_ne_zero {X S : Scheme.{u}} {f : X ⟶ S} (R : Cho
     infer_instance
   · exact ⟨R, hn⟩
 
-/-- **Steps 1 and 2 of the proof of Chow's lemma**, with a nonempty cover. This is
-`AlgebraicGeometry.nonempty_chowReduction` normalised via
-`AlgebraicGeometry.ChowReduction.exists_n_ne_zero`, so that the constructions consuming the cover
-may assume it has at least one member. -/
+/-- **Steps 1 and 2 of the proof of Chow's lemma**, with a nonempty cover: a scheme separated
+and of finite type over a Noetherian scheme admits a `AlgebraicGeometry.ChowReduction` with
+`n ≠ 0`. -/
 @[stacks 0200 "Steps 1 and 2 of the proof"]
 theorem exists_chowReduction_n_ne_zero {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :

@@ -39,7 +39,6 @@ import all WeilConjectures.CategoryTheory.Flat.FlatConstantTensorProZeroConesSup
 /-! # Pro-zero cones of the completed strict Koszul tensor augmentation
 
 Source: Stacks Project, Tags 0921 and 099M.
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero).
 -/
 
 @[expose] public noncomputable section
@@ -79,29 +78,7 @@ private theorem proZero_of_exact_realization
 -- Preserve the inherited name hq in the statement.
 set_option linter.unusedVariables false in
 /-- The strict tensor augmentation cone is eventually zero at each fixed level
-in the derived category. No product, Roos fibre or derived limit occurs here.
-
-Source: Stacks Project, More on Algebra, sequence-Koszul-complexes (Tag 0921),
-and proetale.tex, lemma-naive-completion (Tag 099M).
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero).
-
-Proof: the normalization and vanishing on the other total summands identify beta
-with tensoring the finite coefficient augmentation. Over A, use the Noetherian
-Koszul augmentation pro-zero theorem. Its Artin--Rees argument kills the negative
-Koszul homology, and boundedness gives eventual vanishing of the cone maps in
-D(A). Generator-power ideals are cofinal with powers of I: counting exponents
-in monomials gives I^(r*n+1) contained in (a_i^(n+1)). Thus the strict augmentation
-to A/I^(n+1) has pro-zero cones. Exact constant sheafification and flat completed
-scalar extension carry these zero derived maps to zero maps over the completed
-coefficient sheaf. Finite coefficient identification carries the quotient maps
-to the recorded finite function modules. Tensoring with the K-flat P descends
-to an additive functor on the derived category, hence preserves zero morphisms.
-The tensor-cone comparison multiplies the shifted source summand in tensor degree
-p by (-1)^p; it commutes with the actual strict cone transitions. Transposing the
-tower and complex indices gives exactly the cone in the conclusion. This uses
-no boundedness of P and does not interchange tensor with an infinite product.
-For r=0 the coefficient augmentation is an isomorphism; I=A and the zero ring
-are covered by the same algebraic pro-zero theorem. -/
+in the derived category. No product, Roos fibre or derived limit occurs here. -/
 theorem completedKoszulTensorQuotientConeProZero
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)

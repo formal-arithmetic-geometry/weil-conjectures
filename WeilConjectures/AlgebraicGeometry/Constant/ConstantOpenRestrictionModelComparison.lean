@@ -61,9 +61,7 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Constant module inverse image in open-slice coordinates
 
-Source: Stacks Project, Tags 098K, 03D2, 03DI and 00VC; Step 11 of
-lem-sf-constant-semilinear-generator-comparison.
-(blueprint: lem-sf-constant-open-restriction-model-comparison).
+Source: Stacks Project, Tags 098K, 03D2, 03DI and 00VC.
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -20,17 +20,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A prime-annihilated sheaf has invertible-order torsion when the prime is a unit
 on the base field; otherwise invertible-order torsion forces the sheaf to be zero.
-Source: Stacks Project, Tag 0GJA, proof, remark (a); elementary Bezout argument
-and geometric stalk conservativity.
-(blueprint: lemma-removing-finitely-many-points--1).
-
-Proof: Stalk functors are additive, so r kills every stalk element. If r is a unit in
-the global sections of Spec k, this same positive integer witnesses invertible-order
-torsion. Otherwise, via the canonical isomorphism of those sections with k, r is zero
-in k and the field has characteristic r. If a stalk element is killed by an integer n
-invertible in these sections, r does not divide n. Since r is prime, r and n are
-coprime, and Bezout's identity makes the element zero. All stalks are zero, so stalk
-conservativity makes F zero. No constructibility or finiteness assumption is used. -/
+Source: Stacks Project, Tag 0GJA, proof, remark (a). -/
 theorem prime_annihilated_invertible_cases (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (r : ℕ) [Fact r.Prime]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : r • 𝟙 F = 0) :

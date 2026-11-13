@@ -13,9 +13,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 /-!
 # Canonical coefficient comparisons for the six-functor transformations
 
-Source: the adopted `AlgebraicGeometry.coefficientChangeCompatibility` docstring and fields.
-The latest blueprint `proposition-six-operations-change-coefficients` supplies the route on its
-narrower stages.
+This file records the component of the compact-support projection transformation, used to
+compare the six-functor transformations under change of coefficients.
 -/
 
 @[expose] public section

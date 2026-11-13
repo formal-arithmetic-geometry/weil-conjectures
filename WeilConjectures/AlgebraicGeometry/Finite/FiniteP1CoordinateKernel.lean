@@ -924,10 +924,6 @@ import all WeilConjectures.AlgebraicGeometry.SfP1CoordinateIntegrals
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # Changing coordinates in the finite projective-line diagonal integrals
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the diagonal kernel and its two coordinate traces.
-(blueprint: lem-sp-finite-p1-coordinate-kernel).
 -/
 
 public section
@@ -943,10 +939,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The coefficient comparison of the standard-chart projective line `q : P ⟶ S`: the shifted
 finite Tate line `A_P(1)[2]` on `P` is the pullback along `q` of `A_S(1)[2]`, via the
-normalized finite twist comparison `ordinaryFiniteShiftedLinePullback`.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the coefficient isomorphism `e`
-of the diagonal kernel (blueprint: lem-sp-finite-p1-coordinate-kernel). -/
+normalized finite twist comparison `ordinaryFiniteShiftedLinePullback`. -/
 @[expose] noncomputable def finiteP1CoordinateKernelIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)
@@ -960,10 +953,7 @@ of the diagonal kernel (blueprint: lem-sp-finite-p1-coordinate-kernel). -/
   (ordinaryFiniteShiftedLinePullback A N hA t _ hS).symm
 
 /-- The supported diagonal class on the self-product of `ProjectiveLine S` over `S` whose
-existence is asserted by the Prop-valued `finiteP1DiagonalProperty`; it is chosen.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the supported diagonal class
-(auxiliary; not a blueprint node). -/
+existence is asserted by the Prop-valued `finiteP1DiagonalProperty`; it is chosen. -/
 noncomputable def finiteP1DiagonalClass
     (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0)
@@ -1003,10 +993,7 @@ theorem finiteP1DiagonalClass_integral
 diagonal class `κ` on the self-product of `ProjectiveLine S`: the trace of the supplied
 splitting over `S` and `κ`, transported along the coordinate renaming `P ≅ ProjectiveLine S`
 and the compact-support comparisons. The transported datum is only asserted to exist by
-`sfP1IntegralTransport`, so it is chosen.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the supported diagonal and the trace
-of the diagonal kernel (blueprint: lem-sp-finite-p1-coordinate-kernel). -/
+`sfP1IntegralTransport`, so it is chosen. -/
 noncomputable def finiteP1CoordinateKernel
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)
@@ -1036,36 +1023,7 @@ noncomputable def finiteP1CoordinateKernel
 /-- The datum `finiteP1CoordinateKernel` with the coefficient comparison
 `finiteP1CoordinateKernelIso` satisfies both diagonal integral identities. The conclusion
 concerns only coefficient objects and degree-zero integral equations, with no triangle identity
-or adjunction on arbitrary complexes.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the supported diagonal
-and the identification of both coordinate traces by base change.
-(blueprint: lem-sp-finite-p1-coordinate-kernel).
-
-Proof in words: send none to the first homogeneous coordinate and some of the
-unique element of ULift (Fin 1) to the second. Renaming the polynomial variables
-and its inverse preserve total degree. Their Proj morphisms are inverse and
-base change gives an isomorphism eP from the standard-chart P to ProjectiveLine S
-over S. The induced isomorphism on the self-products carries each projection and
-the diagonal to its counterpart. Pull back (d S hS).trace and the supported class
-kappa through these isomorphisms. Use the canonical proper
-forget-supports isomorphism to express them as the trace and diagonalClass fields
-of TraceDiagonalDatum. The target of diagonalClass is the second pullback of B:
-identify the finite line on the self-product using t.line and its shifted
-comparison. The same comparison along P -> S gives the coefficient isomorphism e.
-For either projection, the trace equation of hbc along ProjectiveLine S -> S,
-composed with the projective-line diagonal-chart comparison, says that its trace
-is inverse proper exchange followed by pullback of the original trace. For the
-second projection use the common-base pullback comparison to change the target
-from the first to the second coefficient pullback. These are precisely traceFirst
-and traceSecond. The derived direct-image composition maps carry the canonical
-alpha for p_i Delta = id to diagonalFirst and idIsoDiagonalSnd. Substitute the
-transported supported class into each integral equation in hi S hS. Naturality
-of proper exchange and composition cancels each adjacent comparison with its
-inverse, giving the two equations in Integrals for the same datum. This is
-conjugation of morphism equalities by isomorphisms, so uses neither detection of
-arbitrary derived arrows on a cover nor a boundedness assertion. It also applies
-to the empty base and zero coefficient ring. -/
+or adjunction on arbitrary complexes. -/
 theorem finiteP1CoordinateKernel_integrals
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)

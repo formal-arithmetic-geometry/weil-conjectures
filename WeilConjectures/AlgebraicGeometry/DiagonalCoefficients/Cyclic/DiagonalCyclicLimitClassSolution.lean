@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyc
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicLimitClassSolutionSpec
 
 /-! # Calculation of cyclic transport with a named equation type
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-limit-class-solution).
 -/
 
 @[expose] public noncomputable section
@@ -70,10 +67,7 @@ attribute [local semireducible] cyclicNormalizedLimitEquation
 attribute [local semireducible] DiagonalTrace.FiniteCartierNormalization
   cyclicFixedArrowAssemblySpec cyclicEndpointAssemblySpec cyclicResolvedAssemblySpec
 
-/-- Strict class and cone data determine every realized representative.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-limit-class-solution).
-Proof: specialize endpoint assembly, apply finite normalization and arrow
-compatibility at n, and leave the realized class and its representative arbitrary. -/
+/-- Strict class and cone data determine every realized representative. -/
 theorem cyclicExtAssembly_limitClass
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

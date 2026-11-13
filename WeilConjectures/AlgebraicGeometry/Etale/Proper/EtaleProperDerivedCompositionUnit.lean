@@ -62,8 +62,7 @@ private lemma right_comp_inv_unit
 
 /-- The inverse proper direct-image compositor carries the unit to the two
 successive right-derived units and the inverse ordinary compositor.
-Source: Stacks Project Tag 0F7B; the ordinary derived-composition unit identity.
-(blueprint: lem-pur-proper-derived-composition-unit). -/
+Source: Stacks Project Tag 0F7B. -/
 theorem properDerivedComposition_inv_unit
     (A : Type (u + 1)) [CommRing A]
     {W Z V : Scheme.{u}} (a : W ⟶ Z) (b : Z ⟶ V) (d : W ⟶ V) (w : a ≫ b = d)

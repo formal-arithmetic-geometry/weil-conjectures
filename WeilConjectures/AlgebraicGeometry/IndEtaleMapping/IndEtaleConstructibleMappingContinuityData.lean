@@ -62,8 +62,7 @@ import Mathlib.Algebra.Category.Grp.AB
 /-! # Constructible derived mapping continuity on affine ind-etale limits
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.3.14 and
-proof of Lemma 6.3.16, pp. 47--48
-(blueprint: lem-per-ind-etale-constructible-mapping-continuity).
+proof of Lemma 6.3.16, pp. 47--48.
 
 The comparison is the localization of the map out of the termwise filtered
 colimit of compatible complex representatives. It is not a categorical colimit
@@ -101,8 +100,7 @@ variable (K' M' : DerivedCategoryModule A X) (α : K' ⟶ K) (β : M ⟶ M')
 
 /-- Global RHom of the two exact inverse images along a scheme over X.
 This is the existing RΓ of the existing derived internal Hom.
-Source: Bhatt--Scholze 6.3.16, p. 48
-(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+Source: Bhatt--Scholze 6.3.16, p. 48. -/
 def value (T : Over X) : DerivedCategory (ModuleCat.{u + 1} A) :=
   ((ExternalRHom.globalHom A T.left).obj
     (op ((ExternalRHom.pull A T.hom).obj K))).obj
@@ -111,8 +109,7 @@ def value (T : Over X) : DerivedCategory (ModuleCat.{u + 1} A) :=
 /-- Pullback of derived morphisms, transported along the canonical composition
 isomorphisms for inverse image. Its source is the evaluation transpose already
 provided by `ExternalRHom.restriction`; no map or isomorphism is chosen.
-Source: Bhatt--Scholze 6.3.16, p. 48
-(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+Source: Bhatt--Scholze 6.3.16, p. 48. -/
 def pullback {T S : Over X} (f : T ⟶ S) : value A K M S ⟶ value A K M T :=
   ExternalRHom.restriction A f.left
       ((ExternalRHom.pull A S.hom).obj K) ((ExternalRHom.pull A S.hom).obj M) ≫
@@ -129,18 +126,15 @@ variable {K' M'} in
 /-- The map of global RHom induced by the coefficient maps `α : K' ⟶ K`
 (contravariantly) and `β : M ⟶ M'` (covariantly), after exact inverse image
 to a scheme over X.
-Source: Bhatt--Scholze 6.3.16, Step 7
-(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+Source: Bhatt--Scholze 6.3.16. -/
 def coefficientMap (T : Over X) : value A K M T ⟶ value A K' M' T :=
   ExternalRHom.homMap A ((ExternalRHom.pull A T.hom).map α)
     ((ExternalRHom.pull A T.hom).map β)
 
 /-- Compatible strict representatives for the global RHom diagram and its
 pullback cocone. The two equations normalize every transition and every leg
-against the canonical pullback of morphisms. This is computational input for an
-exact filtered colimit, not an assumed continuity isomorphism.
-Source: Bhatt--Scholze 6.3.16, p. 48; the node's proof, Steps 2--6
-(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+against the canonical pullback of morphisms.
+Source: Bhatt--Scholze 6.3.16, p. 48. -/
 structure Model where
   /-- The strict diagram of representatives. -/
   diagram : Iᵒᵖ ⥤ CochainComplex (ModuleCat.{u + 1} A) ℤ
@@ -159,17 +153,14 @@ structure Model where
 
 /-- The canonical comparison, computed by the exact colimit of complexes and
 then localized. The normalization in `Model` fixes its pullback legs.
-Source: Bhatt--Scholze 6.3.16, p. 48
-(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+Source: Bhatt--Scholze 6.3.16, p. 48. -/
 def comparison (P : Model A K M D c) :
     DerivedCategory.Q.obj (colimit P.diagram) ⟶ value A K M c.pt :=
   DerivedCategory.Q.map (colimit.desc P.diagram P.cocone) ≫ P.apex.hom
 
 /-- A compatible representative map without the cone-square field.
 The geometric cone equation is supplied separately by the square hypothesis.
-Source: Bhatt--Scholze 6.3.16, Step 7
-(blueprint: lem-per-ind-etale-constructible-mapping-model-skeleton).
--/
+Source: Bhatt--Scholze 6.3.16. -/
 structure ModelMapSkeleton (P : Model A K M D c) (Q : Model A K' M' E d)
     (η : E ⟶ r ⋙ D) (v : d.pt ⟶ c.pt) where
   stages : r.op ⋙ P.diagram ⟶ Q.diagram

@@ -21,10 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesBoundaryQuasiFinite
 
 /-!
 # Geometric compactification of the inverse image of a good-curves open
-
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, proof after
-replacing the dense open by its inverse image under the finite good-curves cover.
-(blueprint: lem-weil-pbc-good-curves-preimage-boundary)
 -/
 
 @[expose] public section
@@ -73,25 +69,7 @@ private theorem proper_sigma_desc
     infer_instance
 
 /-- The inverse image of a fibrewise dense open has a quasi-finite boundary in the
-finite disjoint union of proper good-curve models.
-
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, the second
-boundary Zprime. (blueprint: lem-weil-pbc-good-curves-preimage-boundary)
-
-Proof: Pullback distributes over the finite disjoint union Y. On each component
-its inverse image W_i is an open of Y_i. Composing its open immersion with j_i gives
-an open immersion into Ybar_i. Their disjoint union identifies the pullback with an
-open O in the disjoint union C of the Ybar_i. The compatibility hcomm gives the
-stated equality of the two maps to V. Each p_i followed by t_i is proper, since t_i
-is finite, so C to V is proper by finite coproducts. It is of finite type over the
-Noetherian V; hence C is Noetherian. Surjectivity of Y_i to T_i makes each fibre
-nonempty, and hWi makes its open W_i fibre nonempty. A smooth geometrically connected
-fibre of p_i is regular and connected, hence irreducible, so this open is dense
-in that fibre. The good-curves-boundary quasi-finiteness theorem now applies to the
-open component inclusions W_i into Ybar_i. Take Z with its embedding i to be the
-canonical reduced closed complement of O. Its image is the complement of O. This
-proves quasi-finiteness of its map to V, including empty families and
-zero-dimensional fibres. -/
+finite disjoint union of proper good-curve models. -/
 theorem goodCurvesPreimage_boundary
     {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]
     (f : X ⟶ V) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

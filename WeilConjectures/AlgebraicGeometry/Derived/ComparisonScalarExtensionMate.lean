@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
 /-! # Derived scalar extension commutes with the etale/pro-etale comparison
 
-Source: Stacks Tags 09B1, 0F63, 06YY and 07A4
-(blueprint: def-sfb-finite-coefficient-system-evaluation).
+Source: Stacks Tags 09B1, 0F63, 06YY and 07A4.
 
 For a ring map `φ : A →+* B`, the mate of the canonical square
 `Scheme.comparisonRestrictScalarsIso` (derived restriction of scalars commutes with the
@@ -139,12 +138,7 @@ private theorem comparison_computed_mate_isIso {A B : Type (u + 1)} [CommRing A]
 /-- The derived scalar-extension mate of the etale/pro-etale comparison square
 `Scheme.comparisonRestrictScalarsIso` is invertible: derived scalar extension commutes with
 the exact comparison pullback `ν^*`, for an arbitrary ring map `φ`.
-Source: Stacks 09B1, 0F63, 06YY and 07A4
-(blueprint: def-sfb-finite-coefficient-system-evaluation).
-Proof: `ν^*` preserves flat sheaves, so flat K-flat resolutions compute both derived scalar
-extensions; there the mate is the ordinary one, which is invertible by iterated mates since
-the conjugate square of right adjoints is the identity. Finally transport the result across
-the uniqueness of the derived scalar left adjoints. -/
+Source: Stacks 09B1, 0F63, 06YY and 07A4. -/
 theorem isIso_mate_comparisonRestrictScalarsIso {A B : Type (u + 1)} [CommRing A]
     [CommRing B] (φ : A →+* B) (X : Scheme.{u}) :
     IsIso (((mateEquiv

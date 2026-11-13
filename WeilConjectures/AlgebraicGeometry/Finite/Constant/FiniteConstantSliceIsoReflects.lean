@@ -18,7 +18,6 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 /-! # Recovering algebraic constant values on a nonempty slice
 
 Source: Stacks Project, Tags 03CY, 0F6B and 05RU.
-(blueprint: lem-weil-pbc-finite-constant-slice-iso-reflects).
 -/
 
 @[expose] public noncomputable section
@@ -128,23 +127,7 @@ private theorem ulift_reflects_derived_iso (B : Type t) [CommRing B]
 values. The coefficient change is an isomorphism; no finite generation, bounds,
 projectivity, adic datum, or residue hypothesis is used.
 
-Source: Stacks Project, Tags 03CY, 0F6B, 00Y8(3) and 05RU.
-(blueprint: lem-weil-pbc-finite-constant-slice-iso-reflects).
-
-Proof: choose a geometric point of W by algebraically closing the residue field
-of any point of W. Identify the slice at W with the pro-etale site of W. Restrict
-scalars along the supplied coefficient isomorphism and apply the
-exact geometric module stalk functor. The constant-germ maps identify its composite
-with constant realization with the universe-lift functor, naturally in module maps,
-hence in every differential. Exactness lets this identification descend to the
-unbounded derived categories. Apply the resulting derived stalk functor to the given
-isomorphism. Finally choose a small filtered-free resolution of P. Its universe lift
-remains filtered free and hence K-projective. Represent the resulting large derived
-isomorphism by a chain map out of that resolution. Fullness of universe lift on
-complexes descends the chain map, and exact fully faithful universe lift reflects its
-quasi-isomorphism property. Localizing this map and the resolution gives the required
-small derived isomorphism.
-This argument needs a point only on W, and applies to zero rings and zero complexes. -/
+Source: Stacks Project, Tags 03CY, 0F6B, 00Y8(3) and 05RU. -/
 theorem finiteConstantSlice_iso_reflects
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

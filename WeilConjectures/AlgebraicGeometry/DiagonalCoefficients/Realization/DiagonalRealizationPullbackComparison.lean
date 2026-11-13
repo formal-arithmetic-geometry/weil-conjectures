@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Mod
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Realization.DiagonalRealizationPullbackUnitComponent
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Realization.DiagonalRealizationPullbackLineComponent
 
-/-! # Endpoint components of the derived completed realization comparison
-(blueprint: lem-sfb-diagonal-realization-pullback-derived). -/
+/-! # Endpoint components of the derived completed realization comparison. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -112,24 +111,7 @@ structure DiagonalRealizationPullbackComparisonData (l : ℕ) [Fact l.Prime]
                 d.completedLine))).hom ≫
       eX.shiftedLine l X
 
-/-- The derived pullback comparison has the prescribed unit and shifted line components.
-Source: diagonal coefficient changes paragraph (3), proof steps 2, 3 and 6.
-(blueprint: lem-sfb-diagonal-realization-pullback-derived).
-
-Proof: first identify diagonalTracePush with the right adjoint of the completed
-pullback. Both are sheaf direct image with scalar action through the adjoint
-coefficient map; the tensor/direct-image Hom formula identifies their specified
-adjunctions. Transfer the normalized ordinary direct-image square along this
-identification and form its inverse mate across the two exact realization
-equivalences. The full adjunction Hom
-equation fixes the inverse-image comparison. Forgetting this equation and using
-the underlying normalization identifies its abelian transpose with the inverse
-image of the realization comparison. The endpoint adjoint normalizations then
-identify the ordinary unit and root components. Localize this ordinary natural
-isomorphism term by term. Exact derivation preserves inverses and naturality;
-the exact single-functor formula gives the unit component, and its shifted
-version gives the line component. These localized transformations commute with
-the canonical integer shifts. -/
+/-- The derived pullback comparison has the prescribed unit and shifted line components. -/
 theorem diagonalRealization_pullback_comparison (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian X] [IsNoetherian S]
     (coeff : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj

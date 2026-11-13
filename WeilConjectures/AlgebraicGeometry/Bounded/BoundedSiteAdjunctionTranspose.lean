@@ -53,10 +53,6 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.SpecifiedExceptionalClassHo
 
 /-! # Chosen-compactification normalization of bounded site adjunction transposes
 
-Source: Stacks Project, Tag 0B65, lemma-transformation-between-functors-and-adjoints;
-blueprint thm-sf-ambient-adjoint-class, bounded Hom chain
-(blueprint: lem-pur-bounded-site-adjunction-transpose).
-
 The comparison is the inverse of `compactSupportSiteComparison`, hence is built from
 exact extension by zero and the named proper counit mate. The specified Hom map below
 is defined by that comparison and the two existing adjunctions. Its inverse uniquely
@@ -70,9 +66,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- The positive finite coefficient quotient is finite, including its standard size lift.
-Source: blueprint def-pur-conventions; coefficient finiteness
-(blueprint: lem-pur-bounded-site-adjunction-transpose). -/
+/-- The positive finite coefficient quotient is finite, including its standard size lift. -/
 instance boundedSiteCoefficientFinite (P : WeilConjectures.PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   letI : Finite P.Ring := Padic.finite_coefficientExtensionRing
@@ -88,8 +82,7 @@ variable (H : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
 variable (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ H)
 
 /-- The specified Hom-chain function, using the identity etale-origin witness and the
-same compactification throughout. Source: Stacks Tag 0B65; blueprint bounded Hom chain
-(blueprint: lem-pur-bounded-site-adjunction-transpose). -/
+same compactification throughout. Source: Stacks Tag 0B65. -/
 def boundedSiteTranspose
     (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
     (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)))
@@ -103,8 +96,7 @@ def boundedSiteTranspose
         ((compactSupportSiteComparison A c).inv.app J ≫ z)))
 
 /-- The comparison of right-adjoint objects is the image of the actual comparison unit.
-Source: Stacks Tag 0B65; blueprint bounded site transpose, rho
-(blueprint: lem-pur-bounded-site-adjunction-transpose). -/
+Source: Stacks Tag 0B65. -/
 def boundedSiteRho
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     D(ν^*(X)[ModuleCat.{u + 1} A]).obj (H.obj K) ⟶

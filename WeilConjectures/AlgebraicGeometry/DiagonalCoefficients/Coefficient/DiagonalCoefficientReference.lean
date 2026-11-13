@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Whole-system completed reference for diagonal coefficients
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-reference).
-
 ## Main definitions
 
 - `CompletedRealization`: the exact coefficient realization with fixed endpoints.
@@ -33,8 +30,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- An exact realization of completed modules as modules over the actual
 condensed Z_l coefficient, retaining its underlying-sheaf comparison. All
 subsequent normalizations refer to this comparison, rather than to an unnamed
-equivalence. Source: blueprint coefficient changes, clause 1
-(blueprint: def-sfb-diagonal-coefficient-reference). -/
+equivalence. -/
 structure CompletedRealization (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) where
   F : DiagonalCompleted l X ⥤ Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X
   [additive : F.Additive]
@@ -66,8 +62,7 @@ attribute [instance] CompletedRealization.additive CompletedRealization.limits
 
 /-- A realization/direct-image square, normalized on underlying sheaves and by
 the full derived universal unit. The independent localization universes are
-retained. Source: blueprint clause 1, coefficient/direct-image comparison
-(blueprint: def-sfb-diagonal-coefficient-reference). -/
+retained. -/
 structure CompletedPushSquare (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -85,8 +80,7 @@ structure CompletedPushSquare (l : ℕ) [Fact l.Prime]
     (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
     eX.F eS.F R R' ordinary
 
-/-- The line realization, with canonical single and shift comparisons.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-reference). -/
+/-- The line realization, with canonical single and shift comparisons. -/
 def CompletedRealization.shiftedLine (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X) :
     e.F.mapDerivedCategory.obj ((DiagonalTrace.completedLine l X)⟦(2 : ℤ)⟧) ⟶
@@ -98,8 +92,7 @@ def CompletedRealization.shiftedLine (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     ((DerivedCategory.singleFunctor
       (Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X) 0).map e.lineIso.hom)⟦(2 : ℤ)⟧'
 
-/-- The coefficient-unit realization in degree zero.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-reference). -/
+/-- The coefficient-unit realization in degree zero. -/
 def CompletedRealization.singleUnit (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X) :
     e.F.mapDerivedCategory.obj (DiagonalTrace.completedUnit l X) ⟶
@@ -108,8 +101,7 @@ def CompletedRealization.singleUnit (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (DerivedCategory.singleFunctor
       (Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X) 0).map e.unitIso.hom
 
-/-- Compatibility of one completed trace with its condensed Z_l realization.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-reference). -/
+/-- Compatibility of one completed trace with its condensed Z_l realization. -/
 def CompletedTraceCompatibility (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -127,8 +119,7 @@ def CompletedTraceCompatibility (l : ℕ) [Fact l.Prime]
 /-- The initial member of the coefficient family is the recorded whole-system
 limit class and the recorded completed traces, with source and root
 normalizations. It cannot be an unrelated class satisfying only its finite
-components. Source: blueprint clauses 1--2
-(blueprint: def-sfb-diagonal-coefficient-reference). -/
+components. -/
 structure Reference (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l Y]
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

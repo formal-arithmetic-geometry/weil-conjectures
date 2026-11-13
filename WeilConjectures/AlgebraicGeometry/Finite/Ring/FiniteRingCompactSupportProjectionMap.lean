@@ -24,9 +24,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Compact-support projection with arbitrary finite primary coefficients
 
-Source: Weil blueprint, main-20261015, sec-smooth-purity/sk-lem-sp-reduction,
-`sk-lem-sp-reduction-compatibilities.proof.md`, Proof (3); Stacks Project, Tag 0F0G
-(blueprint: def-sp-finite-ring-compact-support-projection-map).
+Source: Stacks Project, Tag 0F0G.
 
 The canonical coefficient realization changes only the presentation of module sheaves.
 The projection arrow below is the published counit-defined compactification projection
@@ -51,8 +49,7 @@ namespace AlgebraicGeometry.Scheme
 Without these shortcuts Lean abstracts the constructed proofs separately in the map and
 in its users, and comparing the derived tensor expressions can exceed the compile limit.
 All statements below are existing instances; no additional hypotheses or data are introduced.
-Source: the imported Mathlib and fixed-coefficient instances
-(blueprint: def-sp-finite-ring-compact-support-projection-map). -/
+Source: the imported Mathlib and fixed-coefficient instances. -/
 
 /-- Atomic instance proof for the canonical coefficient transport. -/
 theorem finiteProjection_moduleSheafify (R : Type u) [CommRing R] {X : Scheme.{u}} :
@@ -118,8 +115,7 @@ open projection and the pullback-composition identification. Apply the canonical
 realization after evaluating it on the inverse realizations of `M,K`. In particular this
 is a natural transformation, with no chosen projection-formula isomorphism or Tor assumption.
 Naturality in both arguments is inherited from the published natural transformation.
-Source: blueprint Proof (3), tensor-map paragraph; Stacks Tag 0F0G
-(blueprint: def-sp-finite-ring-compact-support-projection-map). -/
+Source: Stacks Tag 0F0G. -/
 noncomputable def finiteRingCompactSupportProjection
     (R : Type u) [CommRing R] [Finite R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=

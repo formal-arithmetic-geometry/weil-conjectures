@@ -38,9 +38,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!
 # Lifting geometric specializations to strict local schemes
-
-Source: Stacks Project, Tag 0GJ5, remark-can-lift
-(blueprint: lem-weil-pbc-geometric-specialization-strict-local-lift).
 -/
 
 @[expose] public section
@@ -54,24 +51,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A prescribed geometric generization lifts through the structural map of the strict
-henselization at the specialized geometric point.
-Source: Stacks Project, Tag 0GJ5, remark-can-lift
-(blueprint: lem-weil-pbc-geometric-specialization-strict-local-lift).
-
-Proof:
-1. The strict henselization is local and its closed point maps to s, by
-`strictHenselizationResidue`. Choose an affine open chart containing s. Every point
-of a local spectrum generalizes its closed point, so the structural morphism factors
-through this chart.
-2. `smallStrictHenselization_indEtale_of_affine_chart` makes the resulting chart ring map
-ind-etale, hence weakly etale. Composing with the open immersion shows that the
-structural morphism is weakly etale and in particular flat.
-3. Flat morphisms lift generalizations. Lift t along the structural morphism starting
-at its closed point, obtaining an ordinary point x above t.
-4. The fibre product with barT has a point above x and the unique point of Spec Ωt.
-Its projection to Spec Ωt is weakly etale by base change, hence has a section by
-`exists_comp_eq_id_of_weaklyEtale`. Compose this section with the other projection.
-The pullback identity and section equation give exactly the prescribed barT. -/
+henselization at the specialized geometric point. -/
 theorem exists_geometricPoint_strictHenselization_lift
     {S : Scheme.{u}} (t s : S) (hts : t ⤳ s)
     {Ωt Ωs : Type u} [Field Ωt] [IsAlgClosed Ωt] [Field Ωs] [IsAlgClosed Ωs]

@@ -15,9 +15,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import Mathlib.Tactic.LinearCombination
 
 /-! # Recognition of condensed character images
-
-Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5, and the finite-torsor
-isotypic argument in `WeilConjectures.SixFunctors.Finite.Isotypic`.
 -/
 
 @[expose] public noncomputable section
@@ -408,24 +405,7 @@ private theorem average_evaluation_mono
   exact (cancel_mono (image.ι e)).1 (by simpa using hz)
 
 -- Explicit internal-module comparisons require additional elaboration heartbeats.
-/-- Evaluation on a character-projector image is monic on a transitive finite cover.
-Source: blueprint lemma-artin-schreier-character-sheaf Step 5, the eigenfunction calculation, and
-Etale.mono_sheafFiber_map_image_ι_isotypicIdempotent_comp_stalkRestrict
-(blueprint: lem-fd-as-condensed-character-image-evaluation-mono).
-
-Proof: base change by Y identifies the pulled-back direct image with the direct
-image along the second projection of Y ×_X Y. The graphs of the deck maps are
-sections of that projection and jointly cover the fibre product, by geometric
-transitivity. They are closed immersions, hence quasi-compact; their pullbacks
-detect zero morphisms of pro-etale sheaves, and therefore of internal modules.
-Adjunction and base-change compatibility identify evaluation at these sections
-with the counit after the corresponding deck operator. Reindexing the character
-average shows that these translated evaluations on its image are scalar multiples
-of the original evaluation. Hence any morphism killed by the original evaluation
-is killed by every translated evaluation and must vanish. Pullback preserves
-images, so this proves the stated monicity. Empty fibres and nonfree actions
-are allowed. The argument even works without invertibility of the group order.
-No choice of an eigenmap or a trivialization is needed. -/
+/-- Evaluation on a character-projector image is monic on a transitive finite cover. -/
 theorem condensed_character_image_evaluation_mono
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (Y : Over X)

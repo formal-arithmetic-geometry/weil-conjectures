@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimitInterface
 import Mathlib.Algebra.Category.Ring.Limits
 /-! # The supported coefficient ring limit as an abelian sheaf
-Source: diagonal tower limit proof (1), ordinary coefficient limit.
-(blueprint: lem-sfb-diagonal-supported-coefficient-limit).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,9 +16,7 @@ set_option backward.isDefEq.respectTransparency.types true
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
-/-- Forget the multiplication on coefficient sheaves, then apply closed direct image.
-Source: diagonal tower limit proof (1)
-(blueprint: lem-sfb-diagonal-supported-coefficient-limit). -/
+/-- Forget the multiplication on coefficient sheaves, then apply closed direct image. -/
 abbrev diagonalSupportedCoefficientFunctor (Y : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology (ProjectiveLine Y)) CommRingCat.{u + 1} ⥤
       DiagonalAb (diagonalSurface Y) :=
@@ -29,15 +25,11 @@ abbrev diagonalSupportedCoefficientFunctor (Y : Scheme.{u}) :
       forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1}) ⋙
     lowerStar AddCommGrpCat.{u + 1} (diagonalImmersion Y)
 
-/-- The actual supported finite coefficient tower, with quotient ring transitions.
-Source: diagonal tower limit proof (1)
-(blueprint: lem-sfb-diagonal-supported-coefficient-limit). -/
+/-- The actual supported finite coefficient tower, with quotient ring transitions. -/
 abbrev diagonalSupportedCoefficientTower (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :=
   Scheme.purTwistZlTower (ProjectiveLine Y) l ⋙ diagonalSupportedCoefficientFunctor Y
 
-/-- The canonical integer-cast map into an additive coefficient sheaf.
-Source: diagonal tower system proof (3), coefficient-unit normalization
-(blueprint: lem-sfb-diagonal-supported-coefficient-limit). -/
+/-- The canonical integer-cast map into an additive coefficient sheaf. -/
 def diagonalCoefficientIntegerMap (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}) :
     (constantSheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).obj
@@ -58,9 +50,7 @@ def diagonalCoefficientIntegerMap (X : Scheme.{u})
         exact (map_intCast (R.obj.map f).hom n.down).symm }
   exact ⟨sheafifyLift J t Q.property⟩
 
-/-- Send an integer to its cast in the finite coefficient sheaf and push it forward.
-Source: diagonal tower system proof (3), quotient-unit normalization
-(blueprint: lem-sfb-diagonal-supported-coefficient-limit). -/
+/-- Send an integer to its cast in the finite coefficient sheaf and push it forward. -/
 def diagonalSupportedFiniteGenerator (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ) :
     diagonalIntegralSource Y ⟶ (diagonalSupportedCoefficientTower l Y).obj (op n) :=
   (lowerStar AddCommGrpCat.{u + 1} (diagonalImmersion Y)).map
@@ -161,23 +151,7 @@ private theorem completedGenerator_eq (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) 
 /-- Forgetting the completed supported unit identifies it with the limit of the
 supported finite coefficient rings, with the canonical integer unit.
 
-Source: blueprint latest, `sk-prop-diagonal-tower-limit.proof.md`, paragraph (1),
-ordinary coefficient limit; Stacks Tag 099L.
-(blueprint: lem-sfb-diagonal-supported-coefficient-limit).
-
-Proof: the underlying abelian sheaf of the ringed direct image defining
-`diagonalCompletedSource` is closed direct image of the additive sheaf of the
-completed ring on the diagonal. Restricting its scalar action changes no
-underlying additive sections. Forgetting ring structure preserves limits,
-because ring operations on a limit are componentwise; closed direct image,
-being a right adjoint, also preserves limits. Apply these two preservation
-comparisons to the defining finite-ring limit of `purTwistZlCompletion`.
-The resulting isomorphism's projection is the additive direct image of the
-finite ring projection. The completed integer generator is uniquely determined
-by taking each locally constant integer to that integer times one. Ring
-projections preserve integer casts, so its composite with this projection is
-exactly `diagonalSupportedFiniteGenerator`. This works for n=0 and the empty
-scheme, without invertibility of l or any derived hypothesis. -/
+Source: Stacks Tag 099L. -/
 theorem diagonal_supported_coefficient_limit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     ∃ e : (diagonalForget l (diagonalSurface Y)).obj
         ((diagonalCompletedRestriction l (diagonalSurface Y)).obj

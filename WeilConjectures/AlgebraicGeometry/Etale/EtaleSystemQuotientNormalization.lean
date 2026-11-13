@@ -91,7 +91,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Nonflat coefficient mates and normalized ordinary étale systems
 
 Source: Zheng, Proposition 2.29(2), Construction 2.26, Lemma 5.22 and Proposition 5.24,
-printed pp. 16, 36--37 (blueprint: lem-pur-etale-system-quotient-normalization).
+printed pp. 16, 36--37.
 
 The first theorem identifies the actual coefficient mate by its counit and by the
 constant-tensor map. The second uses the recorded evaluated transitions. All inputs
@@ -114,8 +114,7 @@ open CategoryTheory CategoryTheory.Limits SheafOfModules
 namespace AlgebraicGeometry.Etale
 
 /-- The coefficient complex D[0] with its C-action through the given ring map.
-Source: Zheng, Proposition 2.29(2)
-(blueprint: lem-pur-etale-system-quotient-normalization). -/
+Source: Zheng, Proposition 2.29(2). -/
 def quotientCoefficientComplex {C D : Type (u + 1)} [CommRing C] [CommRing D]
     (a : C →+* D) : DerivedCategory (ModuleCat.{u + 1} C) :=
   (DerivedCategory.singleFunctor _ 0).obj
@@ -124,8 +123,7 @@ def quotientCoefficientComplex {C D : Type (u + 1)} [CommRing C] [CommRing D]
 /-- Restricted derived extension is constant tensor, in coefficient-first order.
 This is the recorded representative-normalized scalar/tensor iso, the constant-sheaf
 comparison, exact descent of the single complex, and the signed tensor symmetry.
-Source: Zheng, Proposition 2.29(2); Stacks 03EK, 06YY
-(blueprint: lem-pur-etale-system-quotient-normalization). -/
+Source: Zheng, Proposition 2.29(2); Stacks 03EK, 06YY. -/
 def quotientConstantTensorIso {C D : Type (u + 1)} [CommRing C] [CommRing D]
     (a : C →+* D) (W : Scheme.{u}) (K : DerivedCategoryModule C W) :
     (Sheaf.derivedRestrictScalars W.smallEtaleTopology a).obj
@@ -172,8 +170,7 @@ variable {C D : Type (u + 1)} [CommRing C] [CommRing D]
       rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} D) c)
 
 /-- The six natural Hom bijections defining the restriction identification, in order.
-Source: Zheng, Lemma 5.22, and the scalar adjunction of Stacks 07A6
-(blueprint: lem-pur-etale-system-quotient-normalization). -/
+Source: Zheng, Lemma 5.22, and the scalar adjunction of Stacks 07A6. -/
 def quotientRestrictionHomChain (K : DerivedCategoryModule C X)
     (H : DerivedCategoryModule D Y) :
     (K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology a).obj (gD.obj H)) ≃
@@ -187,8 +184,7 @@ def quotientRestrictionHomChain (K : DerivedCategoryModule C X)
     |>.trans (adjC.homEquiv K _)
 
 /-- The actual coefficient mate, for arbitrary fixed exceptional adjunctions.
-Source: Zheng, Construction 2.26, equation (2.26.1)
-(blueprint: lem-pur-etale-system-quotient-normalization). -/
+Source: Zheng, Construction 2.26, equation (2.26.1). -/
 def etaleCoefficientQuotientMate :
     gC ⋙ scalarExtension a X ⟶ scalarExtension a Y ⋙ gD :=
   (mateEquiv adjC adjD (.mk _ _ _ _ q.inv))
@@ -261,29 +257,7 @@ end SingleRing
 /-- Finite-ring restriction commutes canonically with the exceptional adjoint. The
 coefficient mate is invertible even for nonflat quotients. Its restricted map is exactly
 the constant-tensor counit transpose, using the canonical scalar/tensor identifications.
-Source: Zheng, Proposition 2.29(2), Construction 2.26 and Lemma 5.22
-(blueprint: lem-pur-etale-system-quotient-normalization).
-
-Proof (steps 1--4 of the node):
-1. Compose the six adjunction Hom bijections in quotientRestrictionHomChain. Yoneda
-produces rho and its inverse from the two identity maps. Naturality gives a natural
-isomorphism. The scalar-unit normalization of q identifies this Hom bijection with
-transposition of U(epsilon_D) after the inverse singleRestriction map; setting the input
-map equal to the identity gives the displayed rho counit equation.
-2. On flat-term K-flat representatives, restricted scalar extension is tensor by D[0].
-The recorded change-of-rings tensor comparison, constant-sheaf comparison and signed
-symmetry give quotientConstantTensorIso, independent of representatives. The coefficient
-projection q, after restriction and singleRestriction, is the constant projection P.
-3. Define b as the mate of q inverse. Its transpose is q inverse followed by the scalar
-image of epsilon_C. Put w = rho after U(b). Apply F_C and epsilon_C. The counit equation
-for rho and naturality of singleRestriction turn this into U(T(epsilon_C)) after U(q
-inverse) and inverse singleRestriction. Step 2 identifies it with tensor(epsilon_C)
-after P inverse. Injectivity of the adjunction Hom bijection proves the last equality.
-4. The constant-tensor theorem applies to D[0] without finite projective dimension, so
-this transpose is invertible. Thus U(b) is invertible, and exact scalar restriction
-reflects isomorphisms: it leaves the underlying cohomology sheaves of the cone unchanged.
-Therefore b is invertible. All constructions are natural on the whole unbounded
-categories, and their deriving comparisons make them independent of resolutions. -/
+Source: Zheng, Proposition 2.29(2), Construction 2.26 and Lemma 5.22. -/
 theorem etaleCoefficientQuotientNormalization
     (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ k.p)
     {X Y : Scheme.{u}}

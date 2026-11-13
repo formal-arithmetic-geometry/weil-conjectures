@@ -14,9 +14,6 @@ import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 /-!
 # A uniform annihilator from a finite primary geometric stalk
-
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2.
-(blueprint: lem-sc-generic-primary-annihilator)
 -/
 
 @[expose] public section
@@ -24,12 +21,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject
 namespace AlgebraicGeometry.IsConnectedCurve
-/-- A finite primary geometric stalk yields an ell-power annihilator.
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2.
-Proof: the finite primary stalk has a largest exponent among the exponents
-needed to kill its elements. The stalk functor is faithful on this site, so
-the corresponding scalar multiple of the identity of `M` is zero.
-(blueprint: lem-sc-generic-primary-annihilator) -/
+/-- A finite primary geometric stalk yields an ell-power annihilator. -/
 theorem exists_primary_annihilator
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsIntegral C]

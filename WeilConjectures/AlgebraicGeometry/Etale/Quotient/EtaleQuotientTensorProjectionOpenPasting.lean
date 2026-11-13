@@ -21,7 +21,6 @@ This assembly step pastes the proper mate projection square with the open
 restriction and constant-tensor comparison. It is stated conditionally on the
 proper mate square so that the unbounded mate calculation is an independent
 intermediate result.
-(blueprint: lem-pur-etale-quotient-tensor-projection-open-pasting)
 -/
 
 @[expose] public noncomputable section
@@ -101,7 +100,7 @@ private theorem projection_construction_components
   rfl
 
 /-- The specified constant projection has its three defining components.
-Source: Zheng, Construction 2.26; expand the generic projection constructor. -/
+Source: Zheng, Construction 2.26. -/
 private theorem constant_projection_components
     (C : Type (u + 1)) [CommRing C]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -495,13 +494,7 @@ private theorem constant_projection_word
 
 /-- Paste the open restriction comparison and the constant tensor maps after a
 proper mate projection identity.
-Source: Zheng, Proposition 2.29(2), Construction 2.26; Stacks Tag 0GL6.
-(blueprint: lem-pur-etale-quotient-tensor-projection-open-pasting).
-
-Proof: use naturality of the open coefficient comparison and of the restriction
-mate, then expand the two signed tensor symmetries. The resulting composite is
-the defining `exceptionalConstantProjectionMap`.
--/
+Source: Zheng, Proposition 2.29(2), Construction 2.26; Stacks Tag 0GL6. -/
 theorem etaleQuotientTensorProjection_of_proper_mate
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

@@ -52,10 +52,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 /-!
 # Essential smallness of the constructible coefficient heart
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart,
-`sk-lem-coefficient-heart-small.md` and its proof
-(blueprint: lemma-constructible-sheaves--6).
-
 The coefficient is the actual condensed ring pulled back from the point. The full
 constructible category uses finite constant scalar models. This reopened stage-2
 record retains the same canonical statement and proof interface. The smallness universe is
@@ -279,31 +275,7 @@ private theorem stratifiedModelsSmall
   exact (le_iSup P S) M hS
 
 /-- The constructible heart for a finite subextension E of Qbar_l, or for Qbar_l itself,
-has a set of isomorphism classes in the fixed larger universe.
-Source: blueprint lemma-constructible-sheaves--6 and its proof, with the nine-step
-DAG refinement (blueprint: lemma-constructible-sheaves--6).
-
-Proof:
-Finite presentations over the coefficient on the point form an essentially small
-property: encode a presentation by two natural numbers and a morphism between the
-corresponding finite free modules, and take its cokernel. Functorial images of this
-property remain essentially small.
-
-For a fixed cover, choose small representatives of the local models. Adjunction
-transposes their restriction isomorphisms into a map to the product of their direct
-images. Each restriction of this map is monic by the counit equation, so the map
-itself is monic. Cover restrictions jointly detect this by localization of abelian
-sheaves and the coefficient-forgetful comparison. The module category is well-powered,
-so subobjects of these small families of products form an essentially small property.
-Taking the small union over covers proves smallness of finite constant local models.
-
-Repeat this argument over a fixed finite stratification. Joint detection for the
-actual quasi-compact stratum immersions is the abelian section-detection argument
-`abDetectMaps`; the coefficient-forgetful comparison transfers it to module maps.
-Noetherianity makes the immersions quasi-compact. Finally take the small union over
-stratifications and use the qcqs branch of the constructibility definition. Empty
-covers, empty strata, the empty scheme, and rank-zero presentations are included.
-The argument works for every commutative condensed coefficient ring. -/
+has a set of isomorphism classes in the fixed larger universe. -/
 theorem coefficientHeart_essentiallySmall (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})

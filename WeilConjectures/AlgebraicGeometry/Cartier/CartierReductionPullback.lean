@@ -12,8 +12,6 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Naturality of the normalized Cartier reduction
-
-Source: blueprint main-20261015, sk-lem-geo-cartier.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -90,23 +88,7 @@ private theorem transport_ext_square
 namespace AlgebraicGeometry.ProEtale
 
 /-- Pullback of the integral pole extension commutes with its normalized reduction
-when the inverse-image divisor is Cartier.
-Source: blueprint sk-lem-geo-cartier.proof.md, paragraph 6 and opening comparison
-paragraph (blueprint: lemma-cycle-class-cartier-divisor--2).
-Proof: choose regular equations t for D. Their pullbacks are regular because the
-inverse-image ideal is again Cartier. Sending u times t inverse to the pullback unit
-and pulled-back inverse equation gives a map of pole extensions, independent of the
-chosen equations. The finite-stalk formula makes closed exchange an isomorphism:
-it is the identity on the constant stalk on D and the unique map between zero stalks
-off D. Exact inverse image and naturality of the short exact triangle commute with
-the extension boundary and its Kummer reduction. Flatness of the roots line and
-tensor compatibility commute this equality with extension to A. Use the one fixed
-roots-normalized finite-line transport for all schemes. Finally the comparison square
-respects counits. Adjunction injectivity identifies its exchange with geoCartierExchange,
-whose adjunct is inverse-image commutation followed by the pulled-back counit.
-The resulting equality is an equality of derived morphisms by functoriality; stalks
-were used only to identify the ordinary source exchange. Empty support and identity
-base change give the zero and identity squares respectively. -/
+when the inverse-image divisor is Cartier. -/
 theorem geoCartierCanonicalClass_pullback (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) :
     ∃ t : Etale.OrdinaryFiniteTwistTransport A n hA,

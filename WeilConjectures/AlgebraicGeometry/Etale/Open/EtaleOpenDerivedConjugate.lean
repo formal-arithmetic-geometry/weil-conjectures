@@ -35,14 +35,7 @@ private theorem uniq_conjugate
 
 /-- The canonical derived open/scalar comparison is conjugate to the exact derived
 restriction/scalar comparison.
-Source: Stacks 0E8I, 06YY; normalization proof step 2.
-
-Proof: The canonical comparison is defined by uniqueness of left adjoints after identifying
-the two composite right adjoints with openDerivedRestrictScalarsIso. Uniqueness of left
-adjoints is the inverse of the conjugation equivalence; expanding its unit and counit
-formula proves this assertion. Apply conjugation and cancel this equivalence. No hypothesis
-on flatness, nonzero rings or nonempty schemes is used.
-(blueprint: lem-coef-etale-open-derived-conjugate). -/
+Source: Stacks 0E8I, 06YY. -/
 theorem etaleOpenScalarDerivedConjugate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

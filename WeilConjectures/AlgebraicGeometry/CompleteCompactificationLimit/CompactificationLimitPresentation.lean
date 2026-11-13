@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.CompleteCompactificationLimitSupport
 
 /-! # Specializing the normalized coefficient reduction and total-limit adjunction
-Source: blueprint direct-image proof, paragraph (2).
-(blueprint: lem-sp-compactification-limit-presentation).
 -/
 
 @[expose] public noncomputable section

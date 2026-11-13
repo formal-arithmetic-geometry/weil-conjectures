@@ -77,17 +77,7 @@ private theorem lineComparison_isIso
   unfold Coefficients.lineMap
   exact exactConeComparison_isIso _ _ _ _ _ _ hcone hlim
 
-/-- The two coefficient-cone maps in a partial presentation are invertible.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), the Milnor
-comparison for quotient and root towers.
-(blueprint: new-sfb-diagonal-trace-comparison-limit-isos).
-
-Proof: the quotient and root transitions are epimorphic, so the Milnor comparison
-is an isomorphism. The defining projection equations identify the ordinary limits
-with the completed unit and root line, and the derived unit identifies the resulting
-maps with the two coefficient cone maps.
--/
+/-- The two coefficient-cone maps in a partial presentation are invertible. -/
 theorem diagonalTraceComparisonLimitIsos
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

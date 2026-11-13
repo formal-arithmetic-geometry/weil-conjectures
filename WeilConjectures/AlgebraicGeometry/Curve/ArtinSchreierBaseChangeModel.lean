@@ -27,24 +27,7 @@ namespace AlgebraicGeometry.IsCurve
 /-- The characteristic-p degree-one comparison has an Artin--Schreier fixed-point model.
 Source: Stacks Project, Tag 0A3P, proof, and Tag 02KH; arbitrary coefficients use
 `Etale.exists_constantModSheaf_finite_sum_colimit` and
-`Scheme.sheafH_isColimit_large_filtered` (Tags 03Q5 and 0739).
-(blueprint: lem-sc-artin-schreier-base-change-model)
-
-Proof: Take V = H¹(C, O_C), with its k-vector-space structure. Proper coherent
-cohomology is finite-dimensional. Frobenius on O_C induces the p-semilinear F on V.
-The Artin--Schreier long exact sequence identifies H¹(C, Z/p) with ker(F-1), because
-F-1 is onto in H⁰: it is onto on every finite-dimensional additive cohomology group
-by Lang--Steinberg (in the connected smooth case H⁰(O_C) = k).
-Flat coherent base change identifies H¹(C', O_C') with k' tensor V and transports
-Frobenius to F', with F'(1 tensor v) = 1 tensor F(v). Naturality of the sequence
-identifies the pullback map with v mapping to 1 tensor v on the two kernels.
-Choose a basis I of the F_p-vector space Λ/pΛ. Its constant abelian sheaf is the
-coproduct of copies of Z/p. Express it as the filtered colimit of finite sums;
-étale H¹ on the qcqs schemes C and C' commutes with this colimit. Additivity on
-finite sums identifies the two groups with finitely supported I-families of the
-kernels. Pullback preserves these coproducts, and naturality gives the coordinate
-identity below. If Λ/pΛ is zero, I is empty. Dimension-zero curves have V = 0.
-This statement identifies the comparison; it does not assert fixed-point invariance. -/
+`Scheme.sheafH_isColimit_large_filtered` (Tags 03Q5 and 0739). -/
 theorem exists_constantModSheaf_one_frobenius_baseChange_model
     {Λ : Type (u + 1)} [CommRing Λ] {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']

@@ -196,28 +196,7 @@ There is no upper open-square comparison in this equation: the only geometric
 interchange is the Cartesian square of the proper maps c'.g and p.
 Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F (proper/quasi-finite
 interchange and change of base), Tag 0F7J (composition), and Tag 0F7L, final
-proof paragraph item (3); etale-cohomology.tex Tag 0F4L (graph normalization).
-(blueprint: lem-pur-etale-graph-proper-tower).
-
-Proof in words:
-Expand the composition of f' and v on a nested proper/open compactification
-tower. Represent an input by a K-injective complex I, and resolve its extension
-by zero before taking the next proper direct image. Tag 0F7B defines the
-interchange by the common proper-support identification followed by direct
-image of that resolution map. The common-support sheaf composition theorem
-specifies this identification by its inclusion into ordinary direct image.
-Transpose under inverse image and direct image for c'.g and p. On a lift
-summand, restriction carries a sheet section to the same pulled-back sheet
-section; off the clopen graph both sides vanish. Gluing and sheafification
-identify this transpose with inverse sum exchange. Consequently its mate is
-gam, with exactly the orientation below. The open factor is the sum/open
-composite-adjunction comparison s. Apply the equal sheaf maps degreewise and
-compose with the derived units. Naturality and the unit equation for derived
-direct-image composition give the displayed composite k on homotopy
-representatives. Localization extends it to all unbounded inputs. Graph
-refinement coherence and the normalized refinement equation cancel the auxiliary
-towers and leave e.postcomp p at the endpoint. Identity proper maps use the
-direct-image unit equation; empty graphs and zero modules give zero maps. -/
+proof paragraph item (3); etale-cohomology.tex Tag 0F4L (graph normalization). -/
 theorem etaleGraph_proper_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X' Y' Y Z : Scheme.{u}}

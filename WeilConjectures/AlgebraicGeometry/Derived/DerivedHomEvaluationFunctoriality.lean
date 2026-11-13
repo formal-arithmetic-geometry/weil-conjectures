@@ -108,15 +108,7 @@ private theorem comparisonHom_natural
 the second.
 
 Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; Cohomology on Sites, Tags 0946
-and 09BE; the blueprint amplification proof, finite-source extension.
-
-Proof: Apply naturality of the comparison slice isomorphisms to f and g. Local derived pullback
-then intertwines precomposition and postcomposition. Sheafification and adjunction transposition
-preserve this equality of presheaf maps. Finally invert the pro-etale sheafification unit, whose
-naturality in both objects follows from its definition, to get the stated conjugation-free
-formula.
-(blueprint: lem-weil-pbc-derived-hom-evaluation-naturality)
--/
+and 09BE. -/
 theorem derivedHomEvaluation_natural
     (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
     (f : A' ⟶ A) (g : D ⟶ D') (U : X.ProEt) [IsAffine U.left]
@@ -188,12 +180,7 @@ private theorem iso_hom (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (derivedComparisonLocalIso X B A D V.unop f)).symm
 
 /-- Evaluation sends the Isom-to-Hom projection to the underlying evaluated arrow.
-Source: Stacks Tags 09BV and 0F63.
-(blueprint: lem-weil-pbc-derived-isomorphism-evaluation-hom).
-
-Proof: Transpose the local comparison identity for the Isom-to-Hom projection under
-sheafification and comparison adjunctions. Evaluate that identity and use naturality
-of the pro-etale sheafification unit. Its bijectivity identifies the two arrows. -/
+Source: Stacks Tags 09BV and 0F63. -/
 theorem derivedIsoEvaluation_hom
     (U : X.ProEt) [IsAffine U.left]
     (hw : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)

@@ -14,10 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient-system comparison laws
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-mixed).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -54,9 +50,7 @@ attribute [local irreducible] restrictionEvaluation supportEvaluation comparison
 /-- The transition square of the actual system comparison, in both scalar paths.
 The reductions are transposes of SemilinearSections.derivedTransition. Evaluation
 coordinates are the ones in the inherited EvaluationLaw, and the common right side
-contains compact support of the input transition, not just a finite coefficient cocycle.
-Source: blueprint (2), mixed quotient compatibility, proof step 8
-(blueprint: def-sp-field-shriek-system-mixed). -/
+contains compact support of the input transition, not just a finite coefficient cocycle. -/
 structure MixedLaw (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     extends EvaluationLaw P D c where
   quotientCoordinates : ∀ (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m ≤ n),

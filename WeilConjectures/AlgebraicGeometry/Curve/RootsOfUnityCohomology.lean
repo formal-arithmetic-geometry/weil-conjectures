@@ -116,8 +116,7 @@ namespace IsConnectedCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`, parts 1–4: the canonical
-identifications of the cohomology of `μₙ` on a smooth proper curve.
+/-- The canonical identifications of the cohomology of `μₙ` on a smooth proper curve.
 
 Let `C` be a smooth proper connected curve of genus `g` over an algebraically closed field `k`
 and `n ≥ 1` prime to `char k`. Write `δ² : Pic(C) = H¹(C, 𝔾ₘ) → H²(C, μₙ)` for the Kummer
@@ -129,13 +128,7 @@ boundary (`AlgebraicGeometry.Scheme.kummerδ₁`). Then
    order `n^{2g}`;
 3. `δ²` is surjective, and there is a unique isomorphism `degₙ : H²(C, μₙ) ≅ ℤ/n` with
    `degₙ (δ² [L]) = deg L mod n` for every line bundle `L`;
-4. `Hᵠ(C, μₙ) = 0` for `q > 2`.
-
-The Kummer sequence is exact, `H¹(C, 𝔾ₘ) = Pic(C)` and `Hᵠ(C, 𝔾ₘ) = 0` for `q ≥ 2`
-(`AlgebraicGeometry.IsCurve.sheafH_gmSheaf_of_smooth`); global units are `n`-divisible, so the
-long exact sequence gives `H¹(C, μₙ) = Pic(C)[n]` and `H²(C, μₙ) = Pic(C)/n`. The degree
-sequence `0 → Pic⁰(C) → Pic(C) → ℤ → 0` with `Pic⁰(C) = J(k)` `n`-divisible with `n`-torsion
-`(ℤ/n)^{2g}` gives the rest. -/
+4. `Hᵠ(C, μₙ) = 0` for `q > 2`. -/
 theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
     [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     (Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧
@@ -251,8 +244,8 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
   · intro q hq
     exact IsCurve.subsingleton_sheafH_of_three_le f _ (C.isTorsion_rootsOfUnitySheaf hn0) q hq
 
-/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`, part 5: invariance under extension
-of algebraically closed fields.
+/-- Invariance of the cohomology of `μₙ` on a smooth proper curve under extension of
+algebraically closed fields.
 
 Let `C` be a smooth proper connected curve over an algebraically closed field `k`, let
 `k ⊆ k'` be an extension of algebraically closed fields, `π : C_{k'} ⟶ C` the projection and
@@ -265,16 +258,7 @@ identifications of `AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_
 * `ρ¹` is the restriction of the base change map `π^* : Pic(C) ⟶ Pic(C_{k'})` to `n`-torsion,
   which on `Pic⁰(C) = J(k)` is the base change map `J[n](k) ⟶ J[n](k')`;
 * `ρ²` is the identity of `ℤ/n`: `degₙ' ∘ ρ² = degₙ` for the isomorphisms `degₙ` and `degₙ'`
-  characterised by `degₙ (δ² [L]) = deg L mod n`.
-
-The pullback commutes with the Kummer sequences, hence with all maps of their long exact
-sequences (`AlgebraicGeometry.Scheme.map_kernelι_rootsOfUnityCohomologyMap`,
-`AlgebraicGeometry.Scheme.rootsOfUnityCohomologyMap_kummerδ₁`), the identification
-`Pic = H¹(-, 𝔾ₘ)` is natural (`AlgebraicGeometry.Scheme.gmCohomologyMap_toCohomologicalPicardGroup`)
-and pullback preserves degrees (`AlgebraicGeometry.Scheme.Hom.picDegree_map_baseChangeField`).
-Bijectivity follows from the comparison `π^* μₙ ≅ μₙ` and the invariance of the cohomology of
-`ℤ/n ≅ μₙ` (`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper`).
--/
+  characterised by `degₙ (δ² [L]) = deg L mod n`. -/
 theorem rootsOfUnityCohomologyMap_baseChangeField (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
     [Smooth f] [IsProper f] (k' : Type u) [Field k'] [Algebra k k'] [IsAlgClosed k'] (n : ℕ)
     (hn : (n : k) ≠ 0) :
@@ -347,16 +331,9 @@ lemma _root_.AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup_pow (X : Sc
   map_nsmul (Scheme.Pic.toCohomologicalPicardGroupAddEquiv X) n (Additive.ofMul L)
 
 open MonoidalCategory MonObj in
-/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`, the identification
-`H¹(C, μₙ) = J[n](k)`.
-
-Let `C` be a smooth proper connected curve of genus `g` over an algebraically closed field `k`
-and `n ≥ 1` prime to `char k`. The Jacobian `J` of `C` is an abelian variety of dimension `g`
-whose group of `k`-points is `Pic⁰(C)` (`AlgebraicGeometry.Scheme.exists_jacobian_addEquiv_prod`).
-The injection `H¹(C, μₙ) ⟶ H¹(C, 𝔾ₘ) = Pic(C)` of the Kummer sequence has image `Pic(C)[n]`
-(`AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`), which lies in
-`Pic⁰(C)` since `ℤ` is torsion-free; hence `H¹(C, μₙ) ≅ J[n](k)`, compatibly with the maps to
-`Pic(C)`. -/
+/-- The identification `H¹(C, μₙ) = J[n](k)`. Let `C` be a smooth proper connected curve over an
+algebraically closed field `k`, `J` its Jacobian and `n ≥ 1` prime to `char k`. Then
+`H¹(C, μₙ) ≅ J[n](k)`, compatibly with the maps to `Pic(C)` and `Pic⁰(C) = J(k)`. -/
 theorem exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     letI : C.Over (Spec (.of k)) := ⟨f⟩
@@ -457,8 +434,7 @@ theorem exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian (f : C ⟶ Spec (.
 
 
 open MonoidalCategory MonObj in
-/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`: smooth proper curves with invertible
-torsion.
+/-- Smooth proper curves with invertible torsion.
 
 Let `C` be a smooth, proper and connected curve of genus `g` over an algebraically closed field
 `k`, let `n ≥ 1` be invertible in `k` and let `J` be the Jacobian of `C`. There are canonical
@@ -467,26 +443,10 @@ identifications
 `H⁰(C, μₙ) = μₙ(k)`, `H¹(C, μₙ) = J[n](k)`, `H²(C, μₙ) = ℤ/n`, `Hᵠ(C, μₙ) = 0` for `q > 2`.
 
 The degree-two isomorphism sends the Kummer boundary of a line bundle `L` to `deg L mod n`, and
-these identifications commute with extension of algebraically closed fields. Precisely:
-
-1. parts 1–4 of blueprint `proposition-smooth-proper-curves-torsion-prime`
-   (`AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`): the maps
-   `H⁰(C, μₙ) → 𝒪(C)ˣ` and `H¹(C, μₙ) → Pic(C)` of the Kummer sequence are injective, the
-   first with image `μₙ(k)` and the second with image `Pic(C)[n]`, of order `n^{2g}`; the
-   Kummer boundary `δ²` is surjective and there is a unique `degₙ : H²(C, μₙ) ≃ ℤ/n` with
-   `degₙ (δ² [L]) = deg L mod n`; and `Hᵠ(C, μₙ) = 0` for `q > 2`;
-2. `H¹(C, μₙ) ≅ J[n](k)` compatibly with `Pic⁰(C) = J(k)`
-   (`AlgebraicGeometry.IsConnectedCurve.exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian`);
-3. part 5 of blueprint `proposition-smooth-proper-curves-torsion-prime`
-   (`AlgebraicGeometry.IsConnectedCurve.rootsOfUnityCohomologyMap_baseChangeField`): for every
-   extension `k ⊆ k'` of algebraically closed fields the pullback maps are bijective and are the
-   inclusion `μₙ(k) ⟶ μₙ(k')`, the base change of line bundles and the identity of `ℤ/n`.
-
-These are statements about the small étale site; the comparison with the pro-étale site
-(blueprint `theorem-bounded-below-cohomology-comparison`) identifies them with the pro-étale
-cohomology of `ν^* μₙ`. (In the split chapter of the sketch blueprint this statement is labelled
-`proposition-smooth-proper-curves-torsion-prime`, blueprint
-`sk-the-final-theorem-the-curve-estimate--remark-2`.) -/
+these identifications commute with extension of algebraically closed fields: this is the
+conjunction of `AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`,
+`AlgebraicGeometry.IsConnectedCurve.exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian` and
+`AlgebraicGeometry.IsConnectedCurve.rootsOfUnityCohomologyMap_baseChangeField`. -/
 theorem sheafH_rootsOfUnitySheaf_canonical_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     ((Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧

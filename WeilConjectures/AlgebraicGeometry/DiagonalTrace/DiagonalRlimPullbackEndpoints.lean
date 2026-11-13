@@ -82,10 +82,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Derived-limit pullback comparison with normalized endpoints
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/
-`sk-prop-diagonal-tower-coefficients.proof.md`, paragraph (3), constant-system/right-derived-limit
-comparison and its coefficient/root isomorphism
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints).
 -/
 
 @[expose] public noncomputable section
@@ -97,26 +93,20 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open AlgebraicGeometry.ProEtale
 open SpTowerClasses
 
-/-- The actual exact inverse image of fixed discrete scalar sheaves.
-Source: blueprint coefficient proof (3)
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- The actual exact inverse image of fixed discrete scalar sheaves. -/
 abbrev diagonalRlimPull (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] :
     DiagonalMod l S ⥤ DiagonalMod l X :=
   upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f
 
-/-- Its strict termwise tower functor.
-Source: blueprint coefficient proof (3)
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- Its strict termwise tower functor. -/
 abbrev diagonalRlimTowerPull (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] :
     DiagonalSystems l S ⥤ DiagonalSystems l X :=
   (Functor.whiskeringRight ℕᵒᵖ (DiagonalMod l S) (DiagonalMod l X)).obj
     (diagonalRlimPull l f)
 
-/-- Evaluation after termwise pullback, induced by the ordinary termwise identity.
-Source: blueprint coefficient proof (3)
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- Evaluation after termwise pullback, induced by the ordinary termwise identity. -/
 def diagonalRlimPullbackEvaluation (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] (n : ℕ) :
     (diagonalRlimTowerPull l f).mapDerivedCategory ⋙
@@ -129,9 +119,7 @@ def diagonalRlimPullbackEvaluation (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (
   (Functor.mapDerivedCategoryCompIso
     ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n)) (diagonalRlimPull l f)).symm
 
-/-- The mate uses the canonical identity-on-components constant-tower interchange.
-Source: blueprint coefficient proof (3)
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- The mate uses the canonical identity-on-components constant-tower interchange. -/
 def diagonalRlimPullbackMate (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (LX : DiagonalRlim (DiagonalMod l X)) (LS : DiagonalRlim (DiagonalMod l S))
@@ -142,9 +130,7 @@ def diagonalRlimPullbackMate (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X 
   (mateEquiv adjS adjX (TwoSquare.mk _ _ _ _
     (ringedConstantTowerPullback (diagonalRlimPull l f)).inv))
 
-/-- The full pulled cone, using the canonical constant-tower interchange.
-Source: blueprint coefficient proof (3), ordinary cone normalization
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- The full pulled cone, using the canonical constant-tower interchange. -/
 def diagonalRlimPulledCone (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (M : DiagonalMod l S) (H : DiagonalSystems l S)
@@ -154,9 +140,7 @@ def diagonalRlimPulledCone (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X �
   (Functor.compConstIso ℕᵒᵖ (diagonalRlimPull l f)).hom.app M ≫
     (diagonalRlimTowerPull l f).map π
 
-/-- Pull back an exact scalar cone, retaining the canonical derived composition maps.
-Source: blueprint coefficient proof (3), scalar restriction and endpoint cones
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- Pull back an exact scalar cone, retaining the canonical derived composition maps. -/
 def diagonalRlimPulledScalarConeMap (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     (f : X ⟶ S) [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (LX : DiagonalRlim (DiagonalMod l X))
@@ -176,9 +160,7 @@ def diagonalRlimPulledScalarConeMap (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
   LX.R.map ((Functor.mapDerivedCategoryCompIso r.F
     (diagonalRlimTowerPull l f)).inv.app _)
 
-/-- Canonical localization of an exact scalar/pullback square.
-Source: blueprint coefficient proof (3), exact restriction squares
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- Canonical localization of an exact scalar/pullback square. -/
 def diagonalRlimExactSquare
     {A : Type a} {B : Type b} {C : Type c} {D : Type d}
     [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]
@@ -197,9 +179,7 @@ def diagonalRlimExactSquare
   Functor.mapDerivedCategoryCompIso U F ≪≫
     Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso G V).symm
 
-/-- Localize the varying scalar square using its recorded exact inverse image.
-Source: blueprint coefficient proof (3), varying scalar restriction
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+/-- Localize the varying scalar square using its recorded exact inverse image. -/
 def diagonalRlimVaryingSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     (f : X ⟶ S) [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))
@@ -225,35 +205,7 @@ def diagonalRlimVaryingSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
 -- `whiskeringRight` functor of `LocalChernConeMate`. Mixed spellings under projections such as
 -- `Functor.obj` make the kernel unfold derived-category functors on every comparison.
 /-- The normalized mate on the actual quotient and root towers, its full ordinary cones,
-shifted coefficient and root-line arrows, scalar restrictions, and derived morphisms.
-Source: blueprint coefficient proof (3).
-
-Proof plan:
-1. Use derived_tower_counit_projections to normalize the constant/limit adjunctions.
-   The full counit on K-injective towers is the ordinary cone; its evaluation is the
-   specified derived projection. These equations exclude sign-modified adjunctions.
-2. Transpose the canonical constant-tower interchange followed by the source counit.
-   Adjunction injectivity gives the counit equation. Evaluation gives every finite
-   projection equation; naturality of the mate gives equality before evaluation.
-3. For an ordinary cone transpose both routes into the pulled derived limit. Both
-   transposes are its full pulled strict cone, so the routes agree. No faithfulness
-   of derived evaluation is used. Apply this to the coefficient and root cones in aS.
-4. The coefficientForget and lineForget fields identify the two specified towers with
-   (Z/l^(n+1))_S and mu_(l^(n+1),S), including transitions and unit/root normalization.
-   Profinite coefficient inverse image preserves the coefficient limit and quotients.
-   Cartesian integral Tate pullback preserves the root limit and every root projection.
-5. Quotient and power transitions are epic. Apply new-sfb-diagonal-trace-ordinary-rlim-epi
-   on both schemes. The ordinary-to-derived comparisons are invertible; step 3 then
-   expresses the mate as a composite of these maps and the ordinary limit isomorphism.
-6. The scalar squares commute on each scalar, with residue action at each finite level.
-   The underlying-sheaf adjunction equations fix the exact restriction/pullback squares.
-   Localize those exact comparisons to obtain the derived scalar squares.
-7. Insert the canonical single comparisons into step 3. By exactConeComparison this is
-   the coefficient-unit/lineMap equation. The normalized cones give every endpoint.
-8. The normalized unit, constant/limit adjunction, exact inverse image and restrictions
-   commute with canonical shifts. Transpose after shifting; injectivity gives the shift
-   equation, hence the shifted endpoint equations and compatibility with Chern arrows.
-(blueprint: lem-sfb-diagonal-rlim-pullback-endpoints). -/
+shifted coefficient and root-line arrows, scalar restrictions, and derived morphisms. -/
 theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     [∀ x : X, Invertible (l : X.residueField x)]

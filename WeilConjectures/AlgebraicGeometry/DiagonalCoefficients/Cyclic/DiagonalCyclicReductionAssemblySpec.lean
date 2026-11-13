@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicQuotientFunctors
 
 /-! # Normalized Ext assembly with fixed reduction and cone data
-
-Source: diagonal limit (3).
-(blueprint: def-diagonal-cyclic-reduction-assembly-spec).
 -/
 
 @[expose] public noncomputable section
@@ -51,10 +48,9 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 attribute [local semireducible] cyclicCompletedQuotient cyclicDiscreteRestriction
 attribute [local irreducible] diagonalSourceLimitMap diagonalTargetLimitMap
 
-/-- Literal normalized assembly after fixing the quotient and derived boundary.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-reduction-assembly-spec).
-The normalization predicates, Ext classes, representative equations, completed
-arrow, finite cycle equation and coefficient comparison remain arguments. -/
+/-- Literal normalized assembly after fixing the quotient and derived boundary. The normalization
+predicates, Ext classes, representative equations, completed arrow, finite cycle equation and
+coefficient comparison remain arguments. -/
 @[irreducible] def cyclicReductionAssemblySpec
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

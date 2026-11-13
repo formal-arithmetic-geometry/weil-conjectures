@@ -49,21 +49,7 @@ private theorem bijective_finite_pushforward_comparison
 
 /-- The dense-open counit has a short exact cokernel with acyclic degree-one
 cohomology on both sides of the field extension and bijective degree-zero comparison.
-Source: Stacks Project, Tag 0GJA, proof (five-term exact sequence and remark (c)).
-(blueprint: lem-pbc-k2-dense-open-closed-term)
-
-Proof: take the reduced induced closed complement i:Z → X and let B be the underlying
-abelian sheaf of i_*i^*F. The open-closed exact sequence, followed by the exact forgetful
-functor, gives the asserted short complex. Density excludes the generic points of the
-Noetherian curve, so Z is zero dimensional and finite. Its closed points have residue
-field k. Finite direct image is exact, so Leray identifies the cohomology of B with
-that of i^*F on Z. The latter is a finite product of stalks in degree zero and vanishes
-in positive degrees. Closed-immersion base change identifies the inverse image of B
-with the analogous closed direct image over k'. The complement after base change is
-again a finite union of algebraically closed points. The canonical degree-zero
-comparison is the product of the inverse-image stalk identifications, hence bijective.
-Empty schemes and the full open give zero closed terms and satisfy the same assertions.
--/
+Source: Stacks Project, Tag 0GJA, proof (five-term exact sequence and remark (c)). -/
 theorem dense_open_closed_term (Λ : Type (u + 1)) [CommRing Λ]
     {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]

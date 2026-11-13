@@ -22,10 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.AffineKummerDegreeOneBaseChange
 
 /-!
 # Canonical pullback in degrees zero and one
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper and affine cases in degrees zero and one
-(blueprint: lem-sc-constant-low-degree-base-change).
 -/
 
 @[expose] public section
@@ -36,22 +32,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper and affine cases in degrees zero and one
-(blueprint: lem-sc-constant-low-degree-base-change).
-
-Proof: baseChange_curve preserves the smooth connected curve hypotheses. Choose a primitive
-root in k and transport it to K; exponentiation by it identifies constant coefficients with
-roots of unity and commutes with pullback. In degree zero both groups are the roots of unity
-in the ground fields, and the primitive-root coordinates identify the map with the identity.
-For a proper curve, divisibility of global units and the Kummer sequence identify degree one
-with Picard n-torsion. Identify this with Jacobian n-torsion;
-genus_jacobian_invariant and the finite-etale n-torsion assertion of thm-av-final make its
-pullback bijective. For an affine curve, the Kummer short exact ladder has bijective outer
-maps by units_quotient_base_change and the affine Picard-torsion clause of
-kummer_base_change_compatibility, so its middle map in degree one is bijective by the short
-five lemma. The proper-or-affine dichotomy exhausts all connected smooth curves.
-For n = 1 the groups are zero and the same argument applies. -/
+/-- Let `k ⊆ K` be algebraically closed fields, `C` a smooth connected curve over `k` and `n`
+invertible in `k`. The canonical pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_K, ℤ/n)` is bijective for
+`q ≤ 1`. -/
 theorem IsConnectedCurve.constant_low_degree_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

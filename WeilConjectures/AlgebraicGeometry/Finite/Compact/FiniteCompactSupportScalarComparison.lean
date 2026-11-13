@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 /-!
 # The canonical finite coefficient comparison for compact support
 
-Source: Stacks Tags 0F0G, 0GL1, 0GL6; blueprint finite compact support, Steps 7--10
-(blueprint: lem-finite-compact-support-scalar-comparison).
+Source: Stacks Tags 0F0G, 0GL1, 0GL6.
 -/
 
 @[expose] public noncomputable section
@@ -92,29 +91,7 @@ when the input and its ordinary derived reduction are bounded constructible.
 Only invertibility is asserted here: constructibility and interval bounds are supplied
 independently by finite compact-support finiteness.
 
-Source: Stacks Tags 0F0G, 0GL1 and 0GL6; blueprint
-theorem-results-from-etale-theory--3, Steps 7--10
-(blueprint: lem-finite-compact-support-scalar-comparison).
-
-Proof: descend K to a bounded constructible etale complex G by finite-ring
-constructible origin. Exact fully faithful comparison, and its K-flat scalar
-comparison, show that the actual reduction G_B is bounded constructible, since
-its pullback is the assumed constructible reduction of K. Write J = j_! G.
-The open tensor identity on a K-flat resolution gives the B-linear isomorphism
-L_B J = j_!^B G_B: extension by zero preserves K-flatness since its tensor identity
-and exactness preserve acyclicity. The proper torsion projection formula gives
-(Rp_* J) tensor_A^L B = Rp_*(J tensor_A^L B). Its right side is bounded by proper
-constructibility applied to the restriction of j_!^B G_B, so the left side, and
-hence its B-linear version, are bounded as well. Apply scalarMate_restrict_eq_projection
-to these bounded objects. The restriction of the canonical B-linear proper scalar
-mate is the projection isomorphism, so conservativity of exact scalar restriction
-makes that mate invertible. Compose with the open B-linear comparison. Transport
-through the canonical compact-support site comparisons at A and B and the scalar
-comparison on the target. Their unit/counit normalizations identify this composite
-with precisely the displayed scalar-adjunction transpose using
-sfCompactSupportRestriction. Consequently this particular map is invertible.
-There is no finite Tor dimension assumption on the quotient map. The zero object,
-empty schemes and m = n obey the same comparison identities. -/
+Source: Stacks Tags 0F0G, 0GL1 and 0GL6. -/
 theorem finiteCompactSupportScalarComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

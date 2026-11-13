@@ -35,8 +35,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 # The Čech local-lift representative computes the connecting boundary
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 0B8S, local-lift description of the
-boundary, with Lemma 01EQ for the Čech-to-cohomology map
-(blueprint: lem-sc-boundary-cech-compatibility).
+boundary, with Lemma 01EQ for the Čech-to-cohomology map.
 -/
 
 @[expose] public section
@@ -133,30 +132,14 @@ private theorem boundary_naturality (X : RingedSpace.{u})
   exact rightDerived_boundary_naturality (RingedSpace.globalSectionsFunctor X) hS hT f 0
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: lem-sc-boundary-cech-compatibility) Let `0 → A → B → C → 0` be a short exact
-sequence `S` of `O_X`-modules on a scheme `X`, `U` an open covering, `s` a global section of
-`C` and `t i ∈ B(U i)` lifts of `s|_{U i}`. Then the differences
-`t_{i₁}|_{U_{i₀} ∩ U_{i₁}} - t_{i₀}|_{U_{i₀} ∩ U_{i₁}}` are the images of the components of a
-Čech `1`-cocycle `z` with values in `A` (unique, as `A → B` is injective on sections), and the
-canonical comparison map `c_A : Ȟ¹(U, A) → H¹(X, A)` (any `c` with `IsModuleCechComparison`)
-sends the class of `z` to the connecting class `∂(s)` of the long exact cohomology sequence
-of `S`, where `∂` is `RingedSpace.moduleCohomologyBoundary` and `s` is read in `H⁰(X, C)`
-through `toRightDerivedZero`. Source: Stacks, Cohomology, Lemma 0B8S, local-lift paragraph;
-Lemma 01EQ.
-
-Proof:
-1. Choose a monomorphism `A → I` into an injective `O_X`-module
-(lem-weil-pbc-scheme-modules-enough-injectives). Injectivity extends it across `A → B` to
-`φ : B → I`. With `Q = coker(A → I)`, `φ` induces `ψ : C → Q`, and `(id_A, φ, ψ)` is a morphism
-from `0 → A → B → C → 0` to `0 → A → I → Q → 0`. Naturality of the connecting maps of the
-universal δ-functor (lem-weil-pbc-right-derived-universal-delta-functor) gives
-`∂_B(s) = ∂_I(ψ(s))`.
-2. The sections `φ(t_i)` are local lifts of `ψ(s)` in `I`. As `φ` restricts to the chosen
-inclusion `A → I`, their pairwise differences are the image in `I` of `t_{i₁} - t_{i₀}`: the
-`A`-valued Čech cocycle of the original sequence and that of the injective sequence coincide
-(def-weil-pbc-site-cech-complex).
-3. Apply lem-sc-boundary-cech-injective-middle to `0 → A → I → Q → 0`, `q = ψ(s)` and the lifts
-`φ(t_i)`: `c_A([t_{i₁} - t_{i₀}]) = ∂_I(ψ(s))`, which is `∂_B(s)` by Step 1. -/
+/-- Let `0 → A → B → C → 0` be a short exact sequence `S` of `O_X`-modules on a scheme `X`, `U` an
+open covering, `s` a global section of `C` and `t i ∈ B(U i)` lifts of `s|_{U i}`. Then the
+differences `t_{i₁}|_{U_{i₀} ∩ U_{i₁}} - t_{i₀}|_{U_{i₀} ∩ U_{i₁}}` are the images of the components
+of a Čech `1`-cocycle `z` with values in `A` (unique, as `A → B` is injective on sections), and the
+canonical comparison map `c_A : Ȟ¹(U, A) → H¹(X, A)` (any `c` with `IsModuleCechComparison`) sends
+the class of `z` to the connecting class `∂(s)` of the long exact cohomology sequence of `S`, where
+`∂` is `RingedSpace.moduleCohomologyBoundary` and `s` is read in `H⁰(X, C)` through
+`toRightDerivedZero`. Source: Stacks, Cohomology, Lemma 0B8S, local-lift paragraph; Lemma 01EQ. -/
 theorem boundary_cech_compatibility (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

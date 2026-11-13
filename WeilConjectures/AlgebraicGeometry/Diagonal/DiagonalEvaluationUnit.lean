@@ -12,9 +12,7 @@ import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Mathlib.CategoryTheory.Adjunction.Evaluation
 
-/-! # The underlying unit of evaluated simultaneous reduction
-Source: diagonal tower system proof, steps (2) and (4).
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+/-! # The underlying unit of evaluated simultaneous reduction -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,24 +33,18 @@ variable {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
   (ad : L ⊣ U) (D : DiagonalDerivedReduction ℓ L) (n : ℕ)
 
-/-- Evaluate a strict system and forget its coefficient action.
-Source: diagonal tower system proof, step (4)
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+/-- Evaluate a strict system and forget its coefficient action. -/
 abbrev diagonalEvaluationForget : (ℕᵒᵖ ⥤ B) ⥤ A :=
   (evaluation ℕᵒᵖ B).obj (op n) ⋙ U
 
-/-- The ordinary quotient unit before deriving it.
-Source: diagonal tower system proof, step (2)
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+/-- The ordinary quotient unit before deriving it. -/
 def diagonalEvaluationQuotient : 𝟭 A ⟶ D.ordinary.E ⋙ diagonalEvaluationForget U n :=
   ad.unit ≫ Functor.whiskerRight (D.ordinary.π n) U
 
 /-- A unit of evaluated reduction, normalized on complexes by the universal
 counit. This records an actual natural transformation, rather than a collection
 of unrelated maps on extension groups. The last field is its degree-zero
-specialization, retaining the specified single-complex comparisons.
-Source: diagonal tower system proof, steps (2) and (4)
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+specialization, retaining the specified single-complex comparisons. -/
 structure DiagonalEvaluationUnit where
   unit : 𝟭 (DerivedCategory A) ⟶ D.T ⋙ (diagonalEvaluationForget U n).mapDerivedCategory
   complexes : ∀ K : CochainComplex A ℤ,
@@ -78,9 +70,7 @@ end
 section FiniteForgetting
 attribute [local semireducible] diagonalForget
 
-/-- Restricting a finite module to p-adic scalars retains its underlying abelian sheaf.
-Source: diagonal tower proof, step (4)
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+/-- Restricting a finite module to p-adic scalars retains its underlying abelian sheaf. -/
 @[irreducible] def diagonalFiniteForgetIso (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     cartierForget (diagonalResidue.{u} ℓ n) W ≅
       diagonalFiniteToPadic ℓ n W ⋙ diagonalForget ℓ W :=
@@ -89,9 +79,7 @@ Source: diagonal tower proof, step (4)
     rfl)
 
 /-- The inverse of the finite forgetting comparison transports an underlying-map
-HEq into the corresponding ordinary equality.
-Source: diagonal tower proof, step (4)
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+HEq into the corresponding ordinary equality. -/
 theorem diagonalFiniteForgetIso_transport (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (S : DiagonalAb W)
     (Q : Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))
@@ -103,9 +91,7 @@ theorem diagonalFiniteForgetIso_transport (ℓ n : ℕ) [Fact ℓ.Prime] (W : Sc
 
 end FiniteForgetting
 
-/-- The evaluation left adjoint is exact because every arrow-indexing coproduct is finite.
-Source: the evaluation-adjoint argument in diagonal tower proof step (5).
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+/-- The evaluation left adjoint is exact because every arrow-indexing coproduct is finite. -/
 private theorem evaluationLeft_exact
     {B : Type*} [Category B] [Abelian B] (n : ℕᵒᵖ) :
     PreservesFiniteLimits (evaluationLeftAdjoint B n) := by
@@ -137,9 +123,7 @@ attribute [local semireducible] DerivedCategory.singleFunctors
 
 /-- A derived right adjoint preserves the universal right Kan extension defining reduction.
 Lift the ordinary quotient transformation through this extension; its factorization is the
-complexes equation, and naturality of the single-complex comparisons gives the single equation.
-Source: diagonal tower system proof steps (2) and (4).
-(blueprint: lem-sfb-diagonal-evaluation-unit). -/
+complexes equation, and naturality of the single-complex comparisons gives the single equation. -/
 private theorem evaluationUnit_of_rightAdjoint
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
@@ -291,25 +275,7 @@ private theorem evaluationUnit_of_rightAdjoint
 
 end EvaluationUnitProof
 
-/-- Evaluating simultaneous reduction has its quotient-normalized underlying unit.
-
-Source: diagonal tower system proof, steps (2) and (4)
-(blueprint: lem-sfb-diagonal-evaluation-unit).
-
-Proof: resolve an abelian-sheaf complex by a termwise flat K-flat complex P.
-Scalar extension to the constant p-adic ring is flat. Reduction at level n is
-computed by P tensor Z/ell^(n+1), and the integral quotient map gives its unit.
-The universal left-derived counit is invertible on P. Compose its inverse with
-the quotient map, using the exact evaluation-and-forgetting comparison.
-Comparison maps of K-flat resolutions commute with the quotient maps; their
-quasi-isomorphisms remain quasi-isomorphisms after reduction. Thus these maps
-descend to a natural transformation on the unbounded derived category.
-Computing on a resolution of any K and using naturality of the universal
-counit proves the complexes equation. Specialize to the single complex of S
-and insert the single-complex comparison isomorphisms to obtain single.
-On K-flat representatives the counit is invertible, so complexes determines
-the unit there; essential surjectivity of such representatives gives uniqueness.
-Neither Kummer exactness nor any choice of a roots system is involved. -/
+/-- Evaluating simultaneous reduction has its quotient-normalized underlying unit. -/
 theorem diagonal_evaluation_unit_exists (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

@@ -228,32 +228,7 @@ private theorem etale_root_pullback_value (A : Type (u + 1)) [CommRing A]
   exact congrArg (fun f ↦ Additive.toMul ((f.hom.app U z).down)) h.symm
 
 /-- Transport of one normalized etale pullback respects the prescribed pro-etale roots.
-Source: `lem-amb-finite-tate-normalized-coherence`, pullback generator calculation;
-Stacks Tags 03PK, 03Q1, 099R and 0GLZ.
-(blueprint: lem-amb-finite-tate-transported-pullback-normalization)
-
-Proof: fix a pro-etale object W over T and tuples x on W and x' on W times_T T'
-whose projections to every finite root level agree under pullback. Work at the
-single annihilating level r. The comparison of finite root sheaves identifies the
-r-th projections with the same units on both sites. Locally on W, the finitely many
-finite roots are restrictions of etale roots: use the etale root scheme and its
-universal root for each coordinate, take their finite product over T, and refine
-W by its resulting pro-etale cover. Restrict the already given tuple x to this
-cover, so no new choice of a root-tower lift is required.
-The normalization of b identifies the source pure tensor with the image of the
-etale generator on this cover. Transpose the displayed composite under the
-pro-etale inverse-image adjunction. The canonical comparison/pullback isomorphism
-is the mate of the identity between the two restriction direct images; hence its
-adjunct carries this generator to the comparison unit applied to the etale
-pullback adjunct of c. Its prescribed root formula is hc. The r-th projection of
-x' is precisely the pulled-back r-th projection of x, so hb' identifies the last
-image with the target pure tensor. Separatedness of the target identifies the two
-sections on W times_T T'. In degree zero the tuples are empty and the same mate
-calculation is the identity on constant scalars. In positive degrees the formulas
-are tensored coordinate by coordinate using the monoidal adjunction; sheafification
-and separatedness preserve the equalities. This proof uses finite root projections
-only and does not commute inverse image with the infinite root limit. The empty
-scheme and zero coefficient ring satisfy the same sheaf identities. -/
+Source: Stacks Tags 03PK, 03Q1, 099R and 0GLZ. -/
 theorem finite_tate_transported_pullback_normalized
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ)

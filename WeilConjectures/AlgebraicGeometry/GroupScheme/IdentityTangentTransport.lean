@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 /-!
 # Transport of infinitesimal points to tangent vectors at the identity
 
-Source: blueprint `def-wf-lie-algebra-derivation` and the identity tangent-space argument of
-`lemma-connected-components-images-homomorphisms--3`.
-
 ## Main definitions
 
 * `AlgebraicGeometry.GrpObj.identityTangentTransport`: the bijection between infinitesimal
@@ -34,17 +31,7 @@ namespace AlgebraicGeometry.GrpObj
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Precomposing an element of `tangentGroup G` with the dual-number map of the structural
-residue map gives a tangent vector at the identity, and this assignment is bijective.
-
-Proof: Let `a` be the structural residue map. `identity_residue_rational` proves that
-it is bijective and that `Spec.map a` followed by the unit section is the canonical
-residue point. The functor `CommRingCat.dualNumber` sends its ring isomorphism to an
-isomorphism of dual-number rings. Naturality of `dualNumberFst` gives the closed-point
-condition. Naturality of `dualNumberInl`, the over-morphism equation, and
-`unitSection_comp_hom` give the base condition. Conversely precompose a tangent vector by
-the inverse dual-number isomorphism. The same naturality equations give an over-morphism
-reducing to the unit section, hence an element of `tangentGroup G`. Both composites are
-identities by the two isomorphism cancellation equations. -/
+residue map gives a tangent vector at the identity, and this assignment is bijective. -/
 theorem identityTangentTransport_aux
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)
@@ -138,9 +125,7 @@ theorem identityTangentTransport_aux
 /-- Infinitesimal points of `G` are tangent vectors of the scheme `G.left` at the identity:
 transport both coefficients of the dual numbers by the structural residue map `k → κ(e)`.
 This is only an equivalence of types; compatibility with the operations is
-`identity_tangent_transport_operations`.
-Source: blueprint `def-wf-lie-algebra-derivation`, and
-`lemma-connected-components-images-homomorphisms--3`, Dimension paragraph. -/
+`identity_tangent_transport_operations`. -/
 def identityTangentTransport {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     infPoints G ≃ schemeTangentSpace k G.left G.hom (unitSection G (IsLocalRing.closedPoint k)) :=
   (infPointsEquivTangentGroup G).toEquiv.trans

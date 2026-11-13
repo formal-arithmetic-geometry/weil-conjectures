@@ -102,8 +102,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- The normalized chain tensor isomorphism supplied by ring-isomorphism transport.
-(blueprint: def-pbc-coefficient-restriction-tensor-iso) -/
+/-- The normalized chain tensor isomorphism supplied by ring-isomorphism transport. -/
 def tensorIso (o : SheafOfModules.RingIsoTensorTransport
     (J := ProEt.topology X)
     (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c) :
@@ -115,12 +114,7 @@ def tensorIso (o : SheafOfModules.RingIsoTensorTransport
     (fun v ↦ tensorIso_naturality f R S c o _ _ v)
 
 /-- The normalized tensor isomorphism has the prescribed map on every total summand.
-Source: RingIsoTensorTransport.total_summand; Stacks Tag 07A4.
-(blueprint: def-pbc-coefficient-restriction-tensor-iso)
-
-Proof: the isomorphism is built from the supplied totalIso components. Substitute
-that definition and apply the given summand normalization. This is an equation of
-actual total complexes, including zero complexes and the identity coefficient map. -/
+Source: Stacks Tag 07A4. -/
 theorem tensorIso_summand
     (o : SheafOfModules.RingIsoTensorTransport (J := ProEt.topology X)
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)

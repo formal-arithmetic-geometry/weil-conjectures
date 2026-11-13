@@ -80,8 +80,7 @@ private def exceptionalEvaluationDerivedIso
         (ell := ell) n).mapDerivedCategoryFactors.symm)
 
 /-- The finite inverse image preserves lower bounds.
-Source: Zheng Lemma 4.10; Stacks 09B1.
-(blueprint: lem-sf-exceptional-site-origin-comparison-level-bound). -/
+Source: Zheng Lemma 4.10; Stacks 09B1. -/
 theorem exceptionalSiteOriginComparison_level_inverse_bound
     (O : Type (u + 1)) [CommRing O] (ell : O)
     (T : Scheme.{u}) (PE : StrictEtaleEvaluation T O ell)
@@ -724,15 +723,10 @@ private theorem exceptional_transpose_conjugate
     Category.comp_id] using h
 
 -- Assemble the derived comparison and all evaluation and scalar-mate clauses.
-/-- The site comparison core, before the final evaluation-origin projection.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.
-(blueprint: lem-sf-exceptional-site-origin-comparison-core).
-
-Construct the ordinary and derived comparison at the prescribed evaluation package,
-then apply the finite comparison at each quotient level. The system unit and counit
-are detected by the evaluations, and the scalar mate squares give normalization. This
-statement records the construction and comparison properties; evaluation-origin
-projection is handled separately by the preceding exactness lemma. -/
+/-- The site comparison core, before the final evaluation-origin projection: the ordinary and
+derived comparison at the prescribed evaluation package, with its levelwise unit, counit and
+normalization properties.
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1. -/
 theorem exceptionalSiteOriginComparison_core
     (O : Type (u + 1)) [CommRing O] (ell : O)
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]

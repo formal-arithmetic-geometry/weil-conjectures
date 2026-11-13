@@ -70,30 +70,7 @@ private theorem completedMap_ext (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   exact hfg
 
 /-- The ordinary completed-to-finite supported unit is fixed by its integral generator.
-There are no Ext classes, derived presentations, roots, or derived limits in this statement.
-
-Source: blueprint latest, diagonal trace proof (2), source projection, together with
-its diagonal-limit source normalization (3).
-(blueprint: lem-sfb-diagonal-trace-supported-ordinary-finite-unit).
-
-Proof: the finite supported constant is killed by l^(n+1). The hypothesis on f says
-that its value on the integral supported generator is the canonical residue generator.
-The completed supported unit sends one to one on the pulled-back diagonal chart.
-Consequently the left composite sends every local coefficient one to the image of one
-under the constant-to-supported finite unit. For the right composite,
-k.coefficient_projection identifies the coefficient cone component with the actual
-completed ring projection. This unital ring map sends one to one; ha measures
-normalization through coefficientForget and identifies its image under a with
-the sheafification of residue one. This condition remains meaningful for every
-isomorphic presentation of the source coefficient object. The finite unit
-again sends this to the same supported residue generator. Both sides therefore agree
-on one over every object. To extend this equality to an arbitrary completed section,
-reduce modulo l^(n+1). The completed coefficient sheaf has the actual constant finite
-ring as this quotient: equivalently every section is locally an integer plus
-l^(n+1) times a section. Additivity makes the two maps agree on the integer part, and
-the remaining part vanishes in the finite supported target. Sheaf separatedness gives
-the equality globally. Positive exponent n+1 includes n=0, and the sheaf axiom handles
-the empty object. -/
+There are no Ext classes, derived presentations, roots, or derived limits in this statement. -/
 theorem diagonalTrace_supportedOrdinaryFiniteUnit
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

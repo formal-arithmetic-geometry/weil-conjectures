@@ -14,10 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusEx
 
 /-!
 # Direct image from an open and closed section
-
-Source: blueprint, sec-smooth-purity/sk-def-sf-operations,
-lemma proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7).
 -/
 
 @[expose] public section
@@ -67,25 +63,11 @@ private theorem exact_derived_counit_isIso
   exact NatIso.isIso_of_isIso_app _
 
 /-- Restriction to an open and closed section gives `Rp_* s_! ≅ id` on bounded below
-étale derived categories with coefficients in any commutative ring. Source: blueprint,
-part-six-operations/sec-six-functors-basics/sec-brown-construction/
-sec-construction-of-rf/sk-prop-sf-comp-coherence, lemma
-proposition-construction-independence-rf-shriek--7 (blueprint:
-proposition-construction-independence-rf-shriek--7).
+étale derived categories with coefficients in any commutative ring.
 
 The equation characterizes the canonical isomorphism: after the unit identifying `K`
 with `s^* s_! K`, its component is restriction along `s`, namely the derived unit for
-`s^* ⊣ s_*`, followed by `Rp_* Rs_* ≅ R(ps)_* ≅ id`.
-
-Proof: The proved clopen comparison identifies `s_!` with `s_*`, so `s_*` is exact.
-The counit of `s^* ⊣ s_*` is invertible, and remains so after passing to bounded below
-derived categories: on the image of a bounded below complex this follows from the counit
-factorization and exactness of `s_*`; essential surjectivity of localization handles
-all objects. Thus `Rs_*` is fully faithful. Since the exact derived functor of `s_!`
-is isomorphic to `Rs_*`, the derived unit is invertible on its image. Apply `Rp_*`
-to this unit, then the composition isomorphism `Rp_* Rs_* ≅ R(ps)_* ≅ id`.
-Finally invert the derived unit of `s_! ⊣ s^*`. This constructs the isomorphism with
-exactly the asserted canonical-map equation. -/
+`s^* ⊣ s_*`, followed by `Rp_* Rs_* ≅ R(ps)_* ≅ id`. -/
 theorem clopenSectionDirectImage_of_commRing (Λ : Type (u + 1)) [CommRing Λ]
     {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
     (hs : IsClosed (Set.range s.base)) (hsp : s ≫ p = 𝟙 X) :
@@ -182,8 +164,7 @@ theorem clopenSectionDirectImage_of_commRing (Λ : Type (u + 1)) [CommRing Λ]
   simp only [Category.id_comp, Category.comp_id]
 
 /-- The finite-coefficient case of `clopenSectionDirectImage_of_commRing`, kept for its existing
-users. Source: blueprint, lemma proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+users. -/
 theorem clopenSectionDirectImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
     (hs : IsClosed (Set.range s.base)) (hsp : s ≫ p = 𝟙 X) :

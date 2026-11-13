@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Projection.ProjectionFormulaCompactifie
 /-!
 # Identity compactification and the projection formula
 
-Source: Weil conjectures blueprint, proper base change, order 1272, identity
-compactification lemma; detailed proper_base_change.tex, lines 5600--5616
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification).
-
 We use the normalized presentation of the identity open immersion: its extension
 by zero and its restriction are the identity functor, with identity unit and counit.
 Thus the definition Rp_* j_! is the actual composite (identity functor) followed by
@@ -101,19 +97,13 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (E : DerivedCategory (proEtaleRingModules X S))
   (Q : DerivedCategory (proEtaleRingModules Y R))
 
-/-- Rp_* j_! for j=1_X, with the normalized exact identity extension by zero.
-Source: blueprint order 1272
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification). -/
+/-- Rp_* j_! for j=1_X, with the normalized exact identity extension by zero. -/
 abbrev directImage := 𝟭 _ ⋙ proEtaleRingDerivedDirectImage f R S c
 
-/-- The open-piece tensor and composite-pullback identifications for the identity open.
-Source: blueprint order 1272
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification). -/
+/-- The open-piece tensor and composite-pullback identifications for the identity open. -/
 def theta := 𝟙 (aX.tensor.obj (E, (proEtaleRingDerivedPullback f R S c).obj Q))
 
-/-- The ordered compactification composite, with its actual final Rp_* theta arrow.
-Source: blueprint orders 1271--1272
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification). -/
+/-- The ordered compactification composite, with its actual final Rp_* theta arrow. -/
 def forward :
     aY.tensor.obj ((directImage f R S c).obj E, Q) ⟶
       (directImage f R S c).obj
@@ -121,14 +111,7 @@ def forward :
   proEtaleProjectionFormulaMate f R S c aY aX E Q ≫
     (proEtaleRingDerivedDirectImage f R S c).map (theta f R S c aX E Q)
 
-/-- The canonical mate is invertible at the perfect coefficient used in the formula.
-Source: blueprint orders 1271--1272
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification).
-Proof: specialize the compactified perfect projection formula to (1_X,f).
-The identity open-piece comparison and composite-pullback constraint are identities;
-its ordered composite is the projection mate. Its invertibility is therefore exactly
-that supplied by the compactified formula. No boundedness of E or global bound for Q
-is used. -/
+/-- The canonical mate is invertible at the perfect coefficient used in the formula. -/
 theorem mate_isIso [IsProper f] (hQ : SheafOfModules.IsPerfectOnSmallRingedSite R Q) :
     IsIso (proEtaleProjectionFormulaMate f R S c aY aX E Q) := by
   let ci := identityCoefficients X S
@@ -164,16 +147,12 @@ theorem mate_isIso [IsProper f] (hQ : SheafOfModules.IsPerfectOnSmallRingedSite 
 
 variable [hf : IsProper f]
 
-/-- The inverse rho of the same canonical mate, determined by its inverse identities.
-Source: blueprint order 1272
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification). -/
+/-- The inverse rho of the same canonical mate, determined by its inverse identities. -/
 def rho (hQ : SheafOfModules.IsPerfectOnSmallRingedSite R Q) :=
   @inv _ _ _ _ (proEtaleProjectionFormulaMate f R S c aY aX E Q)
     (mate_isIso f R S c aY aX E Q hQ)
 
-/-- The reverse ordered compactification composite, with theta inverse followed by rho.
-Source: blueprint orders 1271--1272
-(blueprint: lemma-weil-pbc-projection-formula-identity-compactification). -/
+/-- The reverse ordered compactification composite, with theta inverse followed by rho. -/
 def backward (hQ : SheafOfModules.IsPerfectOnSmallRingedSite R Q) :=
   (proEtaleRingDerivedDirectImage f R S c).map
     (𝟙 (aX.tensor.obj (E, (proEtaleRingDerivedPullback f R S c).obj Q))) ≫

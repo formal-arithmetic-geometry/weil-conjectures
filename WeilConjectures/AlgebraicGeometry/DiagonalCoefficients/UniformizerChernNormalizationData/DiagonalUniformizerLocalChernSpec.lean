@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceIntegralKumm
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteEtaleComparison
 
 /-! # Reduction of a local completed Chern class
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -41,28 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 
 namespace UniformizerChernNormalizationData
 
-/-- The finite factor has the normalized finite Kummer specification.
-
-Source: diagonal tower coefficient changes proof (1), finite Kummer normalization.
-(blueprint: lem-diagonal-uniformizer-local-chern-finite-spec).
-
-Proof: use hz to express the scalar restriction of z as the limit of the
-strict-system Chern arrow. Compute that arrow and its reduction on a common
-K-flat resolution of the integral line-bundle extension. Tensor first with the
-integral coefficient ring and then with its uniformizer quotient. Since hA
-kills the quotient by l^(n+1), this reduction factors through level n of the
-strict system. Naturality of the connecting morphism identifies its value with
-the Kummer boundary of the hyperplane bundle. The coefficient-unit endpoint
-sends one to one, by completedP.unit_normalization, toIntegral.units,
-scalar.units, and eP.unit_normalization. The root endpoint is the finite root
-projection followed by the scalar root map, by completedP.line_normalization,
-the scalar line endpoints, and lineP's normalization. Thus the same boundary,
-with its positive sign, is the ordinary finite Kummer class after site
-comparison and forgetting scalars. Substitute hk and use the integral
-constant-generator adjunction to recover the coefficient-linear class of k.
-This is precisely ordinaryFiniteP1ChernSpec, hence its canonical wrapper.
-The argument uses neither a trace nor a degree equation. It also covers n=0,
-the zero coefficient ring, and the empty scheme. -/
+/-- The finite factor has the normalized finite Kummer specification. -/
 -- The normalization hypothesis hz retains the repair of the former missing hypothesis.
 theorem localChern_transport_finite_spec
     {s : UniformizerChernNormalizationData l Y}

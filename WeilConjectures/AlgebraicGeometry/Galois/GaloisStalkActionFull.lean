@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermFamilySection
 import Mathlib.CategoryTheory.Limits.Preserves.Ulift
 
 /-! Fullness of the canonical Galois stalk functor.
-Source: Stacks Project, Tags 03QT and 04JM (blueprint: lem-exc-galois-stalk-action-full).
+Source: Stacks Project, Tags 03QT and 04JM.
 -/
 
 @[expose] public section

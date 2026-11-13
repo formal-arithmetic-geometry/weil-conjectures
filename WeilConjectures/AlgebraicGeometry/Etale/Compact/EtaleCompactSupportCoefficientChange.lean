@@ -18,10 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Ordinary-etale coefficient comparison for compact support
 
-Source: Stacks Project, Tags 0GL5, 0GL6 and 07A6
-(blueprint: lemma-sp-reduction--1).
-These are universal tensor presentations on the ordinary-etale site. The existing
-pro-etale presentations and their normalized comparisons are imported unchanged.
+Source: Stacks Project, Tags 0GL5, 0GL6 and 07A6. These are universal tensor presentations on the
+ordinary-etale site. The existing pro-etale presentations and their normalized comparisons are
+imported unchanged.
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse mate of the canonical restriction/inverse-image identification on
-sheaves. Source: Stacks Tags 03S2 and 0GL6
-(blueprint: lemma-sp-reduction--1). -/
+sheaves. Source: Stacks Tags 03S2 and 0GL6. -/
 def coefficientRestrictionOpenMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -44,12 +42,7 @@ def coefficientRestrictionOpenMap
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).symm
       (asIso (upperStarRestrictScalars φ j)).inv
 
-/-- The open coefficient mate is invertible. Source: Stacks Tags 03S2 and 0GL6
-(blueprint: lemma-sp-reduction--1).
-Proof: on the open both composites are the same module with restricted scalars;
-off the open both are zero. The identity comparison has inverse the same identity.
-Its transpose is the restriction/inverse-image identification, since both transposes
-are the open unit. Thus it is the displayed mate, not an arbitrary isomorphism. -/
+/-- The open coefficient mate is invertible. Source: Stacks Tags 03S2 and 0GL6. -/
 theorem coefficientRestrictionOpenMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -104,7 +97,7 @@ theorem coefficientRestrictionOpenMap_isIso
   exact NatIso.isIso_of_isIso_app _
 
 /-- The open restriction comparison descends termwise to bounded-below complexes.
-Source: Stacks Tag 0GL6 (blueprint: lemma-sp-reduction--1). -/
+Source: Stacks Tag 0GL6. -/
 def coefficientRestrictionOpenPlus
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
@@ -115,7 +108,7 @@ def coefficientRestrictionOpenPlus
 
 /-- The canonical proper/open scalar restriction comparison, with its direction
 fixed by the open unit and the direct-image resolution map.
-Source: Stacks Tag 0GL6 (blueprint: lemma-sp-reduction--1). -/
+Source: Stacks Tag 0GL6. -/
 def compactSupportCoefficientRestrictionPlus
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -130,8 +123,7 @@ def compactSupportCoefficientRestrictionPlus
     (Functor.associator _ _ _).symm
 
 /-- A bounded-below presentation of the actual derived tensor, retaining its universal
-arrow in the ambient derived category. Source: Stacks Tags 06YY and 07A6
-(blueprint: lemma-sp-reduction--1). -/
+arrow in the ambient derived category. Source: Stacks Tags 06YY and 07A6. -/
 structure CoefficientTensorModel
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) where
@@ -141,7 +133,7 @@ structure CoefficientTensorModel
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Scalar extension of a morphism, uniquely specified by the universal arrows.
-Source: Stacks Tag 07A6 (blueprint: lemma-sp-reduction--1). -/
+Source: Stacks Tag 07A6. -/
 def CoefficientTensorModel.map
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B} {T : Scheme.{u}}
     {K L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))}
@@ -151,8 +143,7 @@ def CoefficientTensorModel.map
     (f.hom ≫ N.unit.hom))
 
 /-- The canonical B-linear comparison is the unique arrow with the proper/open
-restriction adjunct. Source: Stacks Tags 0GL5, 0GL6 and 07A6
-(blueprint: lemma-sp-reduction--1). -/
+restriction adjunct. Source: Stacks Tags 0GL5, 0GL6 and 07A6. -/
 def compactSupportCoefficientComparisonPlus
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

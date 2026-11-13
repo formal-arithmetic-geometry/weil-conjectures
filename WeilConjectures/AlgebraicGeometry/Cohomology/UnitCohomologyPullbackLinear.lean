@@ -19,7 +19,6 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- The cohomology map of a module morphism over the displayed common affine base.
 Source: Stacks Project, Tag 01F7, cohomology-equation-functorial.
-(blueprint: def-pbc-unit-cohomology-pullback-linear)
 
 The map is the adjoint coefficient map after exact inverse image on Ext. The
 projection identity identifies the structural scalars; coefficient naturality
@@ -53,20 +52,7 @@ def unitCohomologyPullbackLinear
 
 /-- Transport through a scheme isomorphism and a specified unit-module isomorphism
 is bijective on ordinary cohomology.
-Source: Stacks Project, Tag 01F7; `Sheaf.H.mapFunctor_bijective`.
-(blueprint: lem-pbc-unit-cohomology-pullback-linear-bijective)
-
-Proof: Inverse image along d is an equivalence of abelian sheaf categories: its
-inverse is inverse image along the inverse scheme morphism, with unit and counit
-from the inverse-image composition and identity comparisons. Thus it is fully
-faithful and preserves injectives, and mapFunctor_bijective applies to its action
-on Ext. The adjoint of the structural unit map is an isomorphism because d is an
-isomorphism of ringed spaces. Precomposing the structural map by e.hom transports
-this adjoint by the forgotten isomorphism e, so coeff d of the displayed composite
-is an isomorphism too. Its cohomology map is bijective by functoriality on
-isomorphisms. Compose these two bijections. The defined linear map has exactly
-this underlying composite. No flatness hypothesis is needed; zero rings, empty
-schemes and all nonnegative degrees are included. -/
+Source: Stacks Project, Tag 01F7. -/
 theorem unitCohomologyPullbackLinear_bijective
     {R : Type u} [CommRing R] {X Y : Scheme.{u}}
     (f : Y ⟶ Spec (.of R)) (f' : X ⟶ Spec (.of R)) (d : X ⟶ Y) [IsIso d]

@@ -11,9 +11,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-! # Dual invariant functionals and coinvariants
-
-Source: latest blueprint, `sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/`
-`sk-l-dl-a1-endpoints.proof.md`, displayed top-cohomology formula.
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +26,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedCurve
 variable {R : Type u} [Field R] {P : Type v} [Monoid P]
   {V W : Type w} [AddCommGroup V] [Module R V] [AddCommGroup W] [Module R W]
 
-/-- Functionals that kill all monodromy differences.
-Source: latest blueprint, `sk-lem-wrp-hc2.proof.md`, dual invariants
-(blueprint: lem-per-invariant-forms-coinvariants). -/
+/-- Functionals that kill all monodromy differences. -/
 def invariantForms (ρ : Representation R P V) : Submodule R (Module.Dual R V) where
   carrier := { f | ∀ g v, f (ρ g v) = f v }
   zero_mem' := by simp
@@ -42,13 +37,7 @@ def invariantForms (ρ : Representation R P V) : Submodule R (Module.Dual R V) w
     intro r f hf p v
     exact congrArg (r • ·) (hf p v)
 
-/-- Pullback from the quotient identifies its dual with invariant functionals.
-Source: latest blueprint, `sk-lem-wrp-hc2.proof.md`, dual invariants
-(blueprint: lem-per-invariant-forms-coinvariants).
-
-Proof: pull back along the coinvariant quotient. Conversely an invariant
-functional descends by the universal property of that quotient. The two composites
-are identities by surjectivity of the quotient map. This needs no semisimplicity. -/
+/-- Pullback from the quotient identifies its dual with invariant functionals. -/
 def coinvariantDualEquiv (ρ : Representation R P V) :
     Module.Dual R (Representation.Coinvariants ρ) ≃ₗ[R] invariantForms ρ where
   toFun f := ⟨f.comp (Representation.Coinvariants.mk ρ), by
@@ -61,29 +50,20 @@ def coinvariantDualEquiv (ρ : Representation R P V) :
   map_add' f g := by apply Subtype.ext; rfl
   map_smul' r f := by apply Subtype.ext; rfl
 
-/-- The dual of invariant functionals is the coinvariant quotient itself.
-Source: latest blueprint, `sk-lem-wrp-hc2.proof.md`, second paragraph
-(blueprint: lem-per-invariant-forms-coinvariants).
-
-Proof: dualize the preceding quotient-pullback equivalence and use finite
-vector-space biduality for the quotient. This includes rank zero. -/
+/-- The dual of invariant functionals is the coinvariant quotient itself. -/
 def dualInvariantFormsEquiv (ρ : Representation R P V) [Module.Finite R V] :
     Module.Dual R (invariantForms ρ) ≃ₗ[R] Representation.Coinvariants ρ :=
   (coinvariantDualEquiv ρ).dualMap.trans
     (Module.evalEquiv R (Representation.Coinvariants ρ)).symm
 
-/-- Evaluation characterizes the preceding equivalence without choosing a basis.
-Source: latest blueprint, evaluation in the top-coinvariant formula
-(blueprint: lem-per-invariant-forms-coinvariants). -/
+/-- Evaluation characterizes the preceding equivalence without choosing a basis. -/
 theorem dualInvariantFormsEquiv_apply [Module.Finite R V]
     (ρ : Representation R P V) (z : Module.Dual R (invariantForms ρ))
     (f : Module.Dual R (Representation.Coinvariants ρ)) :
     f (dualInvariantFormsEquiv ρ z) = z (coinvariantDualEquiv ρ f) := by
   simp [dualInvariantFormsEquiv]
 
-/-- Equivariant maps act contravariantly on invariant functionals.
-Source: latest blueprint, naturality of top coinvariants
-(blueprint: lem-per-invariant-forms-coinvariants). -/
+/-- Equivariant maps act contravariantly on invariant functionals. -/
 def invariantFormsPullback {ρ : Representation R P V} {σ : Representation R P W}
     (q : Representation.IntertwiningMap ρ σ) : invariantForms σ →ₗ[R] invariantForms ρ where
   toFun f := ⟨f.val.comp q.toLinearMap, by
@@ -93,14 +73,7 @@ def invariantFormsPullback {ρ : Representation R P V} {σ : Representation R P 
   map_add' f g := by apply Subtype.ext; rfl
   map_smul' r f := by apply Subtype.ext; rfl
 
-/-- The quotient-dual identification commutes with every equivariant linear map.
-Source: latest blueprint, canonicality of the top-coinvariant formula
-(blueprint: lem-per-invariant-forms-coinvariants).
-
-Proof: evaluate both sides against any functional on the target coinvariants.
-The quotient-pullback equivalence turns this into equality of functionals on the
-original representation, where it is simply associativity of precomposition.
-The dual separates points, so the two coinvariants coincide. -/
+/-- The quotient-dual identification commutes with every equivariant linear map. -/
 theorem dualInvariantFormsEquiv_natural [Module.Finite R V] [Module.Finite R W]
     {ρ : Representation R P V} {σ : Representation R P W}
     (q : Representation.IntertwiningMap ρ σ) (z : Module.Dual R (invariantForms ρ)) :
@@ -117,22 +90,14 @@ theorem dualInvariantFormsEquiv_natural [Module.Finite R V] [Module.Finite R W]
   congr 1
 
 /-- Tensoring the invariant-dual equivalence by any coefficient module gives the
-coinvariant identification, without choosing a basis of that module.
-Source: latest blueprint, the negative Tate line in the top-coinvariant formula
-(blueprint: lem-per-invariant-forms-coinvariants). -/
+coinvariant identification, without choosing a basis of that module. -/
 def dualInvariantFormsTensorIso [Module.Finite R V]
     (ρ : Representation R P V) (T : ModuleCat.{max u w} R) :
     ModuleCat.of R (Module.Dual R (invariantForms ρ) ⊗[R] T) ≅
       ModuleCat.of R (Representation.Coinvariants ρ ⊗[R] T) :=
   ((dualInvariantFormsEquiv ρ).rTensor T).toModuleIso
 
-/-- The tensor identification commutes with every equivariant map.
-Source: latest blueprint, naturality of the Tate-twisted coinvariant formula
-(blueprint: lem-per-invariant-forms-coinvariants).
-
-Proof: pure tensors generate the tensor product. On a pure tensor the assertion
-is the naturality of the double-dual quotient identification in the first factor,
-with the identity on the second factor. -/
+/-- The tensor identification commutes with every equivariant map. -/
 theorem dualInvariantFormsTensorIso_natural [Module.Finite R V] [Module.Finite R W]
     {ρ : Representation R P V} {σ : Representation R P W}
     (q : Representation.IntertwiningMap ρ σ) (T : ModuleCat.{max u w} R) :

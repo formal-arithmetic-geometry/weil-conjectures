@@ -164,21 +164,7 @@ private theorem symmetry_inv
   rw [Iso.hom_inv_id_app_app, derivedTensorSymmetry_involutive]
 
 /-- Normalize the source-side scalar transport and the exact open projection.
-Source: Stacks 0E8I, 0GL6 and 07A4; the source normalization in the local open square
-(blueprint: lem-pur-ordered-scalar-source-normalization).
-
-Proof: the two adjacent signed symmetries inside extension by zero are inverse,
-by involutivity of the Koszul swap. The exact/left-derived pullback comparison
-then converts canonicalGammaExact to the canonical open projection, which cancels
-its inverse. Move the open comparison past the ambient inverse symmetry by
-naturality. The open comparison and openScalarExtension have the same unit
-transpose and hence cancel. Finally tensorIso is the inverse normalized scalar
-tensorator. On flat K-flat representatives the scalar tensorator commutes with the
-signed swap: both routes send a homogeneous tensor of bidegree (p,q) to its swap
-with sign (-1)^(p*q), and the scalar has degree zero. Equality on tensor generators
-gives equality of chain maps; localization and naturality of resolutions extend it
-to all inputs. This gives the image of the ambient inverse symmetry displayed here,
-including empty opens, zero objects and zero coefficient rings. -/
+Source: Stacks 0E8I, 0GL6 and 07A4. -/
 theorem etaleOrderedScalar_sourceNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

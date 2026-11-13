@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientUnitPush
 
 /-! # Scalar transport of the coefficient-unit arrow
-
-Source: diagonal tower coefficient changes (1), mate and unit normalization.
 -/
 
 @[expose] public noncomputable section
@@ -50,21 +48,7 @@ private theorem mate_transpose
   rw [hn]
 
 -- Elaborating the dependent coefficient categories and both endpoint adjunctions.
-/-- The scalar/direct-image mate carries the canonical coefficient-unit arrow to itself.
-Source: diagonal tower coefficient changes (1), scalar adjunction of coefficient one.
-(blueprint: lem-diagonal-scalar-unit-push).
-
-Proof: transpose the equation under extension/restriction on Y. The mate identity
-turns its left side into the restriction-square comparison after the extension unit
-on P. Endpoint.normalization replaces the two transposed endpoint isomorphisms by
-the specified semilinear coefficient maps. On ordinary modules the resulting square
-commutes because the structural ring map sends one to one. Evaluate the full
-restriction-square derived-unit normalization on the single regular module and
-cancel the exact single-complex comparisons. This is the transposed equality, hence
-the required equality by injectivity of the adjunction bijection. Exactness of
-extension is never used, so the same calculation applies to a nonflat quotient and
-the zero ring. There is no local Chern arrow, line endpoint, completed coefficient
-or finite realization in this equation. -/
+/-- The scalar/direct-image mate carries the canonical coefficient-unit arrow to itself. -/
 theorem scalar_unit_push
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

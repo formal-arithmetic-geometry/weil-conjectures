@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalDerivedSourceMaps
 
 /-! # Explicit quotient transpose constructor
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: def-diagonal-quotient-transpose-map).
 -/
 
 @[expose] public noncomputable section
@@ -62,8 +59,7 @@ local elab "typeOf% " t:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm t none
   return ← Lean.Meta.inferType e
 
-/-- The explicit collected adjunction transpose, retaining the actual endpoint type.
-(blueprint: def-diagonal-quotient-transpose-map). -/
+/-- The explicit collected adjunction transpose, retaining the actual endpoint type. -/
 @[irreducible] def quotientExplicitTranspose : q.quotientTransposeType :=
   (((ScalarCompatibility.compositeAdjunction q.route.first q.route.second).comp
     (finiteAdjunction q.eW)).ofNatIsoRight

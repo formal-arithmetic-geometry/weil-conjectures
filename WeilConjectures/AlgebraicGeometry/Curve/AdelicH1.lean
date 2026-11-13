@@ -32,8 +32,6 @@ diagonal map `V → ⨁_x V ⧸ V_x` (`AlgebraicGeometry.Scheme.Modules.principa
 - `AlgebraicGeometry.Scheme.Modules.principalPartsMap`: the map `V → ⨁_{x closed} V ⧸ V_x`.
 - `AlgebraicGeometry.Scheme.Modules.adelicH1Equiv`: `H¹(X, M) ≃ₗ[k] (⨁_x V ⧸ V_x) ⧸ V`.
 - `AlgebraicGeometry.Scheme.Modules.adelicH0Equiv`: `H⁰(X, M) ≃ₗ[k] ⋂_x V_x`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -295,9 +293,7 @@ lemma ker_adelicToH1 :
 scheme of dimension at most one over `k`, and `φ : M ⟶ V_η` injective on sections with every
 `v ∈ V` the value of a local section. Then the connecting map of the residue sequence induces a
 canonical `k`-linear isomorphism
-`H¹(X, M) ≅ (⨁_{x closed} V ⧸ V_x) ⧸ V`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`H¹(X, M) ≅ (⨁_{x closed} V ⧸ V_x) ⧸ V`. -/
 noncomputable def adelicH1Equiv :
     M.H 1 ≃ₗ[k] (Π₀ x : closedPoints X, V ⧸ stalkLattice k φ x.1) ⧸
       LinearMap.range (principalPartsMap k φ hdim hgen) :=

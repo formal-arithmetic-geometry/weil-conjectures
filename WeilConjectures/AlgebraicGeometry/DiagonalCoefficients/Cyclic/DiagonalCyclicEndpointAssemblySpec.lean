@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyc
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicReductionAssemblySpec
 
 /-! # Calculation of cyclic transport with a named equation type
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-endpoint-assembly-spec).
 -/
 
 @[expose] public noncomputable section
@@ -64,9 +61,8 @@ attribute [local semireducible] cyclicReductionAssemblySpec cyclicArrowAssemblyS
 
 attribute [local semireducible] cyclicFixedArrowAssemblySpec
 
-/-- Literal class transport contract after the two endpoint squares are known.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-endpoint-assembly-spec).
-This names a universal equation; the following module proves it from comparison. -/
+/-- Literal class transport contract after the two endpoint squares are known. This names a
+universal equation; the following module proves it from comparison. -/
 @[irreducible] def cyclicEndpointAssemblySpec
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

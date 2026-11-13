@@ -55,15 +55,7 @@ with all three properties over one stage. The cartesian square retains its speci
 limit scheme, so this applies to a prescribed purely inseparable field extension.
 
 Source: Stacks Project, Limits, Tags 01ZM, 01ZO and 07RR; universal injectivity is
-surjectivity of the diagonal (Morphisms, Tag 01S4).
-(blueprint: lem-weil-pbc-finite-radicial-model-descent)
-
-Proof: Descend the finite-presentation object. Identify its limit pullback with the
-original finite radicial surjection. Descend finiteness and surjectivity of the model,
-and descend universal injectivity by applying surjectivity descent to the diagonal.
-A common refinement of these three stages preserves all three properties by base
-change. Pullback pasting produces the displayed cartesian square at that refinement.
--/
+surjectivity of the diagonal (Morphisms, Tag 01S4). -/
 theorem exists_finite_radicial_model_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

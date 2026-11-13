@@ -153,9 +153,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 /-!
 # The finite curve complement and its coefficient-module localization sequence
 
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Tags 01J3, 0AAX and 09AH
-(blueprint: lem-sfb-coefficient-heart-curve-complement).
+Source: Stacks Tags 01J3, 0AAX and 09AH.
 
 The reduced induced closed complement is specified by its unique characterization:
 a reduced closed subscheme with underlying image the complement of the given open.
@@ -182,29 +180,7 @@ to zero on the open. In particular, when the open restriction is lisse in the se
 `IsLisseCoefficientModule`, this is the extension of the finite closed-support term
 `i_* i^* F` by `u_! L`, with `L = u^* F`.
 
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Tags 01J3, 0AAX and 09AH
-(blueprint: lem-sfb-coefficient-heart-curve-complement).
-
-Proof:
-1. Every point in the closed complement specializes from the generic point of an
-irreducible component, and that generic point lies in U. The closed-subspace dimension
-inequality therefore bounds the dimension of the complement by zero. The closed
-zero-dimensional Noetherian-subset theorem makes it finite with closed singletons.
-The closed immersion identifies Z with its image, transferring dimension and finiteness.
-2. Use the canonical coefficient isomorphism to identify the underlying sheaf of
-module pullback with abelian pullback. Disjointness makes open restriction of a closed
-direct image zero. Reuse the existing
-module-support lemmas from `CondensedOpenClosedRecollement`: they lift the abelian
-closed counit and supported unit across the scalar equivalence, and show the open
-unit invertible by full faithfulness of extension by zero and scalar restriction.
-3. These units and counits imply that the open and closed restrictions jointly detect
-zero objects. Exactness of the restrictions then makes them jointly detect isomorphisms,
-by applying them to kernels and cokernels. The actual open counit and closed unit
-compose to zero by adjunction and disjointness. On each piece, one of the two arrows is
-invertible by the corresponding triangle identity, and the other has zero source or
-target. Thus both restricted sequences are short exact. Joint reflection of short
-exactness gives the asserted sequence on X, including every empty or zero case. -/
+Source: Stacks Tags 01J3, 0AAX and 09AH. -/
 theorem coefficientHeart_curve_complement
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

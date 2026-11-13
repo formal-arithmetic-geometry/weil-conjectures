@@ -51,9 +51,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # Exceptional adjunction on strict pro-etale coefficient systems
 
-Source: Zheng, Construction 4.1, Lemmas 4.10 and 5.22, Proposition 5.24;
-blueprint exceptional inverse-image construction, system transport steps 8--9
-(blueprint: lem-sf-exceptional-system-transport).
+Source: Zheng, Construction 4.1, Lemmas 4.10 and 5.22, Proposition 5.24.
 
 All comparisons are maps of derived strict systems before evaluation. The integer
 index `n` denotes the positive coefficient exponent `n+1`. The records package
@@ -83,7 +81,7 @@ attribute [local instance 20000] strictEtaleRingCompose strictEtaleRingSetCompos
   strictEtaleCommRingSheafify strictEtaleTypeSheafify strictEtaleAddCommGrpLocal
 
 /-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 00W1. -/
 instance (priority := 5000) exceptionalTransportProEtaleCommRingSheafify (X : Scheme.{u}) :
     HasWeakSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} := inferInstance
 
@@ -92,24 +90,24 @@ attribute [local instance 5000] WeilConjectures.sfAbSheafify
 attribute [local instance 5000] WeilConjectures.sfAbBijective
 
 /-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 00W1. -/
 instance (priority := 5000) exceptionalTransportProEtaleRingCompose (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).HasSheafCompose
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := inferInstance
 
 /-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 00W1. -/
 instance (priority := 5000) exceptionalTransportProEtaleTypeSheafify (X : Scheme.{u}) :
     HasWeakSheafify (Scheme.ProEt.topology X) (Type (u + 1)) := inferInstance
 
 /-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 00W1. -/
 instance (priority := 5000) exceptionalTransportProEtaleRingSetCompose (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1}) :=
       inferInstance
 
 /-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 00W1. -/
 instance (priority := 5000) exceptionalTransportProEtaleAddCommGrpSetCompose (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
       inferInstance
@@ -120,16 +118,14 @@ attribute [local instance 20000] exceptionalTransportProEtaleCommRingSheafify
   exceptionalTransportProEtaleRingSetCompose exceptionalTransportProEtaleAddCommGrpSetCompose
 
 /-- Use Mathlib's standard localization for the strict system category.
-Source: Zheng, Construction 4.1; Stacks Tag 05RU
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng, Construction 4.1; Stacks Tag 05RU. -/
 @[irreducible]
 instance (priority := 100) exceptionalProSystemDerived (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) :
     HasDerivedCategory.{u + 2} (CoefficientSystem (J := Scheme.ProEt.topology T) O ell) :=
   HasDerivedCategory.standard _
 /-- Use the same standard localization at every finite coefficient level.
-Source: Zheng, Construction 4.1; Stacks Tag 05RU
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng, Construction 4.1; Stacks Tag 05RU. -/
 @[irreducible]
 instance (priority := 100) exceptionalProLevelDerived (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) (n : ℕ) :
@@ -137,7 +133,7 @@ instance (priority := 100) exceptionalProLevelDerived (T : Scheme.{u}) (O : Type
   HasDerivedCategory.standard _
 
 /-- Cache the already existing additive evaluation instance at the concrete site size.
-Source: Zheng Construction 4.1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1. -/
 instance (priority := 3000) exceptionalProEvaluationAdditive
     (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O] (ell : O) :
     ∀ n, (coefficientEvaluation.{u + 1, u, u + 1}
@@ -145,8 +141,7 @@ instance (priority := 3000) exceptionalProEvaluationAdditive
   fun n ↦ coefficientEvaluation_additive.{u + 1, u, u + 1} n
 
 /-- The canonical pro-etale set-sheaf image, with its full strict-system normalization.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1 and Lemma 4.10. -/
 abbrev ExceptionalProOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
     {T S : Scheme.{u}} (g : T ⟶ S) :=
   CoefficientSystemOrdinaryImage (J := Scheme.ProEt.topology S)
@@ -154,7 +149,7 @@ abbrev ExceptionalProOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
     (Scheme.proEtaleSheafAdjunction g (Type (u + 1)))
 
 /-- Derived evaluation on the actual strict pro-etale systems.
-Source: Zheng Construction 4.1 (blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1. -/
 abbrev ExceptionalProEvaluation (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O] (ell : O) :=
   CoefficientEvaluationDerivedPackage.{u + 1, u, u + 1, u + 2}
     (J := Scheme.ProEt.topology T) (O := O) (ell := ell)
@@ -168,8 +163,7 @@ variable (PX : ExceptionalProEvaluation X O ell) (PY : ExceptionalProEvaluation 
 /-- Termwise pro-etale open extension and the universal proper derived image.
 The open functor is the left adjoint of geometric restriction; all evaluations
 and localizations are included to fix the maps before evaluation.
-Source: Zheng Constructions 4.1 and 5.15
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Constructions 4.1 and 5.15. -/
 structure ExceptionalProCompactSupportData where
   openImage : ExceptionalProOrdinaryImage O ell c.i
   properImage : ExceptionalProOrdinaryImage O ell c.g
@@ -208,8 +202,7 @@ attribute [instance] ExceptionalProCompactSupportData.openAdditive
   ExceptionalProCompactSupportData.levelOpenAdditive
 
 /-- The specified data and canonical coherence of `ExceptionalProCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def ExceptionalProCompactSupportCoherence
     (record : ExceptionalProCompactSupportData O ell c PX PY PZ) : Prop :=
     -- openExact
@@ -248,15 +241,13 @@ def ExceptionalProCompactSupportCoherence
           ((NatIso.mapHomologicalComplex (record.openEvaluation n) (.up ℤ)).hom.app K))
 
 /-- The specified data and canonical coherence of `ExceptionalProCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def ExceptionalProCompactSupport :=
   { record : ExceptionalProCompactSupportData O ell c PX PY PZ //
     ExceptionalProCompactSupportCoherence O ell c PX PY PZ record }
 
 /-- Site comparison with the actual system unit and counit.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1. -/
 structure ExceptionalSystemSiteComparison (T : Scheme.{u})
     (P : StrictEtaleEvaluation T O ell) where
   proEvaluation : ExceptionalProEvaluation T O ell
@@ -270,8 +261,7 @@ structure ExceptionalSystemSiteComparison (T : Scheme.{u})
 variable {O ell c}
 
 /-- Bounded-below systems with levelwise etale origin; the bound is uniform in the level.
-Source: Zheng Lemma 4.10; Stacks 09B1
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Lemma 4.10; Stacks 09B1. -/
 def ExceptionalSystemSiteComparison.origin {T : Scheme.{u}}
     {P : StrictEtaleEvaluation T O ell} (C : ExceptionalSystemSiteComparison O ell T P) :
     ObjectProperty (DerivedCategory (CoefficientSystem (J := Scheme.ProEt.topology T) O ell)) :=
@@ -280,8 +270,7 @@ def ExceptionalSystemSiteComparison.origin {T : Scheme.{u}}
       (C.proEvaluation.evaluation n).obj M)
 
 /-- The equivalence and normalization clauses, on the prescribed full classes.
-Source: Zheng Lemma 4.10 and Stacks 09B1
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Lemma 4.10 and Stacks 09B1. -/
 structure ExceptionalSystemSiteEquivalence {T : Scheme.{u}}
     {P : StrictEtaleEvaluation T O ell} (C : ExceptionalSystemSiteComparison O ell T P) : Prop where
   inverseBound : ∀ (a : ℤ) M, M.IsGE a → (C.image.system.inverse.obj M).IsGE a
@@ -299,8 +288,7 @@ structure ExceptionalSystemSiteEquivalence {T : Scheme.{u}}
 
 /-- A system pullback square fixed on underlying sheaves and on complex representatives.
 It includes the ordinary evaluation square, so the derived square is constructed before
-finite evaluation. Source: Zheng Construction 4.1; Stacks 099R and 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+finite evaluation. Source: Zheng Construction 4.1; Stacks 099R and 0B65. -/
 structure ExceptionalSystemPullbackSquareData
     {T S : Scheme.{u}} (g : T ⟶ S)
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -321,8 +309,7 @@ structure ExceptionalSystemPullbackSquareData
     (ED.level n).inverse ⋙ (CT.image.level n).inverse
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 def ExceptionalSystemPullbackSquareCoherence
     {T S : Scheme.{u}} (g : T ⟶ S)
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -386,8 +373,7 @@ def ExceptionalSystemPullbackSquareCoherence
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex record.ordinary (.up ℤ)).hom.app H))
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 def ExceptionalSystemPullbackSquare
     {T S : Scheme.{u}} (g : T ⟶ S)
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -403,8 +389,7 @@ def ExceptionalSystemPullbackSquare
     ExceptionalSystemPullbackSquareCoherence g CT CS E P ED PD record }
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemPullbackSquare.ordinary
     {T S : Scheme.{u}} {g : T ⟶ S}
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -420,8 +405,7 @@ abbrev ExceptionalSystemPullbackSquare.ordinary
   record.val.ordinary
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemPullbackSquare.level
     {T S : Scheme.{u}} {g : T ⟶ S}
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -437,8 +421,7 @@ abbrev ExceptionalSystemPullbackSquare.level
   record.val.level
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemPullbackSquare.square
     {T S : Scheme.{u}} {g : T ⟶ S}
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -454,8 +437,7 @@ abbrev ExceptionalSystemPullbackSquare.square
   record.val.square
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemPullbackSquare.derivedLevel
     {T S : Scheme.{u}} {g : T ⟶ S}
     {PT : StrictEtaleEvaluation T O ell} {PS : StrictEtaleEvaluation S O ell}
@@ -471,16 +453,14 @@ abbrev ExceptionalSystemPullbackSquare.derivedLevel
   record.val.derivedLevel
 
 /-- The actual pro-etale compact-support operation, formed on derived systems.
-Source: Zheng Construction 5.15
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 5.15. -/
 def exceptionalProSupport {PX : ExceptionalProEvaluation X O ell}
     {PY : ExceptionalProEvaluation Y O ell} {PZ : ExceptionalProEvaluation c.Z O ell}
     (P : ExceptionalProCompactSupport O ell c PX PY PZ) :=
   P.val.derivedOpen ⋙ P.val.properDerived.system.direct
 
 /-- Its actual finite evaluation, obtained from open and proper evaluation isomorphisms.
-Source: Zheng Lemma 5.16
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Lemma 5.16. -/
 def exceptionalProSupportEvaluation {PX : ExceptionalProEvaluation X O ell}
     {PY : ExceptionalProEvaluation Y O ell} {PZ : ExceptionalProEvaluation c.Z O ell}
     (P : ExceptionalProCompactSupport O ell c PX PY PZ) (n : ℕ) :
@@ -492,8 +472,7 @@ def exceptionalProSupportEvaluation {PX : ExceptionalProEvaluation X O ell}
     isoWhiskerRight (P.val.openDerivedEvaluation n) _ ≪≫ Functor.associator _ _ _
 
 /-- Proper and open comparison data, whose mate equations fix the canonical maps.
-Source: Zheng Construction 5.15; Stacks 0B65; blueprint system-transport step 3
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 5.15; Stacks 0B65. -/
 structure ExceptionalSystemCompactificationComparisonData
     (S : StrictEtaleCompactSupport O ell c)
     (CX : ExceptionalSystemSiteComparison O ell X S.PX)
@@ -511,8 +490,7 @@ structure ExceptionalSystemCompactificationComparisonData
     (CX.image.level n).inverse ⋙ P.val.levelDerivedOpen n
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 def ExceptionalSystemCompactificationComparisonCoherence
     (S : StrictEtaleCompactSupport O ell c)
     (CX : ExceptionalSystemSiteComparison O ell X S.PX)
@@ -539,8 +517,7 @@ def ExceptionalSystemCompactificationComparisonCoherence
       (record.levelOpenComparison n).hom.app ((S.PX.evaluation n).obj M))
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 def ExceptionalSystemCompactificationComparison
     (S : StrictEtaleCompactSupport O ell c)
     (CX : ExceptionalSystemSiteComparison O ell X S.PX)
@@ -552,8 +529,7 @@ def ExceptionalSystemCompactificationComparison
     ExceptionalSystemCompactificationComparisonCoherence S CX CY CZ P record }
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemCompactificationComparison.properSquare
     {S : StrictEtaleCompactSupport O ell c}
     {CX : ExceptionalSystemSiteComparison O ell X S.PX}
@@ -565,8 +541,7 @@ abbrev ExceptionalSystemCompactificationComparison.properSquare
   record.val.properSquare
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemCompactificationComparison.openSquare
     {S : StrictEtaleCompactSupport O ell c}
     {CX : ExceptionalSystemSiteComparison O ell X S.PX}
@@ -578,8 +553,7 @@ abbrev ExceptionalSystemCompactificationComparison.openSquare
   record.val.openSquare
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemCompactificationComparison.openComparison
     {S : StrictEtaleCompactSupport O ell c}
     {CX : ExceptionalSystemSiteComparison O ell X S.PX}
@@ -591,8 +565,7 @@ abbrev ExceptionalSystemCompactificationComparison.openComparison
   record.val.openComparison
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 abbrev ExceptionalSystemCompactificationComparison.levelOpenComparison
     {S : StrictEtaleCompactSupport O ell c}
     {CX : ExceptionalSystemSiteComparison O ell X S.PX}
@@ -611,8 +584,7 @@ variable {S : StrictEtaleCompactSupport O ell c}
     CX.proEvaluation CY.proEvaluation CZ.proEvaluation}
 
 /-- The proper derived mate followed by open comparison, as one actual system map.
-Source: blueprint system-transport steps 3--4; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 0B65. -/
 def exceptionalSystemComparison
     (R : ExceptionalSystemCompactificationComparison S CX CY CZ P) :
     S.functor ⋙ CY.image.system.inverse ⟶ CX.image.system.inverse ⋙ exceptionalProSupport P :=
@@ -624,9 +596,7 @@ def exceptionalSystemComparison
     whiskerRight R.openComparison.hom P.val.properDerived.system.direct ≫
     (Functor.associator _ _ _).hom
 
-/-- The comparison on origin systems includes the actual site counit at the source.
-Source: blueprint system-transport step 4
-(blueprint: lem-sf-exceptional-system-transport). -/
+/-- The comparison on origin systems includes the actual site counit at the source. -/
 def exceptionalSystemOriginComparison
     (R : ExceptionalSystemCompactificationComparison S CX CY CZ P) :
     CX.image.system.direct ⋙ S.functor ⋙ CY.image.system.inverse ⟶ exceptionalProSupport P :=
@@ -636,16 +606,14 @@ def exceptionalSystemOriginComparison
     (Functor.leftUnitor _).hom
 
 /-- The transported right functor is the stated composite, on whole derived systems.
-Source: Zheng Lemma 5.22; blueprint system-transport step 5
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Lemma 5.22. -/
 def exceptionalSystemRight (G : StrictEtaleExceptionalAdjoint O ell c S)
     (CX : ExceptionalSystemSiteComparison O ell X S.PX)
     (CY : ExceptionalSystemSiteComparison O ell Y S.PY) :=
   CY.image.system.direct ⋙ G.right ⋙ CX.image.system.inverse
 
 /-- The finite proper/open map, with the very same mate convention as on systems.
-Source: Stacks 0B65; blueprint system-transport steps 3--6
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 0B65. -/
 def exceptionalSystemLevelComparison
     (R : ExceptionalSystemCompactificationComparison S CX CY CZ P) (n : ℕ) :
     S.levelFunctor n ⋙ (CY.image.level n).inverse ⟶
@@ -659,9 +627,7 @@ def exceptionalSystemLevelComparison
     whiskerRight (R.levelOpenComparison n).hom (P.val.properDerived.level n).direct ≫
     (Functor.associator _ _ _).hom
 
-/-- The finite origin comparison also uses the source site's actual counit.
-Source: blueprint system-transport steps 4--6
-(blueprint: lem-sf-exceptional-system-transport). -/
+/-- The finite origin comparison also uses the source site's actual counit. -/
 def exceptionalSystemLevelOriginComparison
     (R : ExceptionalSystemCompactificationComparison S CX CY CZ P) (n : ℕ) :
     (CX.image.level n).direct ⋙ S.levelFunctor n ⋙ (CY.image.level n).inverse ⟶
@@ -671,8 +637,7 @@ def exceptionalSystemLevelOriginComparison
     whiskerRight (CX.image.level n).adjunction.counit _ ≫ (Functor.leftUnitor _).hom
 
 /-- Finite etale origin, retaining the bounded-below condition at each positive level.
-Source: Stacks 09B1; blueprint system-transport step 6
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 09B1. -/
 def ExceptionalSystemSiteComparison.levelOrigin {T : Scheme.{u}}
     {PE : StrictEtaleEvaluation T O ell} (C : ExceptionalSystemSiteComparison O ell T PE)
     (n : ℕ) :
@@ -690,8 +655,7 @@ universe a b x y av bv xv yv
 transpose equation is the forward Hom-chain formula with the source site counit
 composed on the left; this avoids choosing any inverse before proving invertibility.
 It fixes both the unit and the counit on whole objects of the full subcategories.
-Source: Stacks 0037; blueprint system-transport steps 5--6
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Stacks 0037. -/
 structure ExceptionalOriginAdjunction
     {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
     {X : Type x} [Category.{xv} X] {Y : Type y} [Category.{yv} Y]
@@ -720,8 +684,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
 
 /-- Multiplication by constants on pro-etale strict systems, with its unique exact
 localization on complexes. This is the scalar action used for linearity below.
-Source: Zheng Construction 4.1 and Proposition 2.29(2)
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1 and Proposition 2.29(2). -/
 structure ExceptionalProScalarAction (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) where
   ordinary : O → (𝟭 (CoefficientSystem (J := Scheme.ProEt.topology T) O ell) ⟶ 𝟭 _)
@@ -737,8 +700,7 @@ structure ExceptionalProScalarAction (T : Scheme.{u}) (O : Type (u + 1))
       DerivedCategory.Q.map (((ordinary r).mapHomologicalComplex (.up ℤ)).app K)
 
 /-- Right evaluation before the final target-site direct-image identification.
-Source: Zheng Lemma 5.22; blueprint system-transport steps 6--7
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Lemma 5.22. -/
 def exceptionalSystemRightEtaleEvaluation (G : StrictEtaleExceptionalAdjoint O ell c S)
     (CX : ExceptionalSystemSiteComparison O ell X S.PX)
     (CY : ExceptionalSystemSiteComparison O ell Y S.PY) (n : ℕ) :
@@ -750,8 +712,7 @@ def exceptionalSystemRightEtaleEvaluation (G : StrictEtaleExceptionalAdjoint O e
         Functor.associator _ _ _)
 
 /-- Right evaluation is the canonical composite of the three recorded evaluations.
-Source: Zheng Lemma 5.22; blueprint system-transport step 6
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Lemma 5.22. -/
 def exceptionalSystemRightEvaluation (G : StrictEtaleExceptionalAdjoint O ell c S)
     (CX : ExceptionalSystemSiteComparison O ell X S.PX)
     (CY : ExceptionalSystemSiteComparison O ell Y S.PY) (n : ℕ) :
@@ -771,9 +732,8 @@ variable (G : StrictEtaleExceptionalAdjoint O ell c S)
   (R : ExceptionalSystemCompactificationComparison S CX CY CZ P)
 
 /-- The adjunction, finite evaluations, quotient transposes, exactness and uniform bound
-of system transport. All geometric data are the previously specified constructions.
-Source: Zheng Lemmas 4.10 and 5.22, Proposition 5.24; Stacks 0037, 09B1 and 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+of system transport.
+Source: Zheng Lemmas 4.10 and 5.22, Proposition 5.24; Stacks 0037, 09B1 and 0B65. -/
 structure ExceptionalSystemTransportData where
   siteX : ExceptionalSystemSiteEquivalence CX
   siteY : ExceptionalSystemSiteEquivalence CY
@@ -797,8 +757,7 @@ structure ExceptionalSystemTransportData where
   scalarY : ExceptionalProScalarAction Y O ell
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 def ExceptionalSystemTransportCoherence
     (record : ExceptionalSystemTransportData G CX CY CZ P R) : Prop :=
     -- comparisonIso
@@ -873,8 +832,7 @@ def ExceptionalSystemTransportCoherence
     ((exceptionalSystemRight G CX CY).obj N).IsGE (a - c_f))
 
 /-- Canonical construction data and its normalization equations.
-Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65
-(blueprint: lem-sf-exceptional-system-transport). -/
+Source: Zheng Construction 4.1, Lemma 4.10 and Lemma 5.22; Stacks 0B65. -/
 def ExceptionalSystemTransport :=
   { record : ExceptionalSystemTransportData G CX CY CZ P R //
     ExceptionalSystemTransportCoherence G CX CY CZ P R record }
