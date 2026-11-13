@@ -77,6 +77,12 @@ private theorem summand_chase {C : Type*} [Category C]
   simp only [Category.assoc]
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ l ≫ j) hm
 
+private theorem pinnedSummand_inverse {C : Type*} [Category C]
+    {A B D E : C} (e : B ≅ E) (t : A ≅ D) (j : A ⟶ B) (i : D ⟶ E)
+    (h : j ≫ e.hom = t.hom ≫ i) : i ≫ e.inv = t.inv ≫ j := by
+  apply (cancel_mono e.hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, h, Iso.inv_hom_id_assoc]
+
 private theorem pinnedTensorStalk_transport_naturality {X X' : Scheme.{u}}
     (g' : X' ⟶ X) (z : X')
     (a : X.presheaf.stalk (g' z) →+* X'.presheaf.stalk z)
@@ -247,16 +253,8 @@ theorem pinned_tensor_square_left_summand
       (SingleComplexBaseChange.stalkComplex g' z Q)
       (curriedTensor _) (.up ℤ) p q n h ≫ (e P Q).inv.f n =
       (ty (P.X p) (Q.X q)).inv ≫ T.map iPQ := by
-    apply (cancel_mono ((e P Q).hom.f n)).1
-    have hs0 : T.map iPQ ≫ (e P Q).hom.f n =
-        (ty (P.X p) (Q.X q)).hom ≫
-          HomologicalComplex.ιMapBifunctor
-            (SingleComplexBaseChange.stalkComplex g' z P)
-            (SingleComplexBaseChange.stalkComplex g' z Q)
-            (curriedTensor _) (.up ℤ) p q n h := hs
-    erw [Category.assoc, ← HomologicalComplex.comp_f, Iso.inv_hom_id,
-      HomologicalComplex.id_f, Category.comp_id, Category.assoc, hs0,
-      Iso.inv_hom_id_assoc]
+    exact pinnedSummand_inverse ((HomologicalComplex.eval _ _ n).mapIso (e P Q))
+      (ty (P.X p) (Q.X q)) _ _ hs
   have hk (L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
       (i : ℤ) : k L i =
       eqToHom (congrArg (fun a : SingleComplexBaseChange.A g' z →+*

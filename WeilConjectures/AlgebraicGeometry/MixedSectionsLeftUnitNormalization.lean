@@ -107,18 +107,6 @@ private theorem generic_first_layer
   simpa only [Category.assoc] using hfinish
 
 
--- Paste the component equations without comparing entire derived functors.
-private theorem mixedSections_firstLayerPaste {C D : Type*} [Category C] [Category D]
-    (H : C ⥤ D) {A B C₀ E : C} {T V W : D}
-    (s : T ⟶ H.obj A) (a : A ⟶ B) (b : B ⟶ C₀) (v : A ⟶ E) (w : E ⟶ C₀)
-    (c : H.obj C₀ ⟶ V) (c₀ : H.obj E ⟶ W) (t : W ⟶ V) (d : T ⟶ W)
-    (he : a ≫ b = v ≫ w) (hn : H.map w ≫ c = c₀ ≫ t)
-    (hg : s ≫ H.map v ≫ c₀ = d) :
-    (s ≫ H.map a ≫ H.map b) ≫ c = d ≫ t := by
-  simp only [Category.assoc]
-  rw [← H.map_comp_assoc, he, H.map_comp, Category.assoc, hn]
-  simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ t) hg
-
 private theorem finish_unit_paste {C D : Type*} [Category C] [Category D]
     (S : C ⥤ D) {A : D} {B E F G J : C} {T : D}
     (p : A ⟶ T) (c : T ⟶ S.obj F) (b : A ⟶ S.obj B)
@@ -235,9 +223,13 @@ theorem mixedSections_left_unit_normalization
         (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
-    have hp := mixedSections_firstLayerPaste (schemeDerivedGlobalSections Z)
-      _ _ _ _ _ _ _ _ _ he hn hg₀
-    simpa only [Category.assoc] using hp
+    dsimp only [p]
+    simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc, he, Functor.map_comp]
+    rw [Category.assoc, hn]
+    simpa only [Category.assoc] using congrArg
+      (fun z ↦ z ≫ (schemeGlobalScalarRestriction g).map
+        ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))) hg₀
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
