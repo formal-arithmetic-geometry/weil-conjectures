@@ -120,6 +120,8 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
     exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
   trace "PH413: transport ready"
+  let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
   let L : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -140,6 +142,7 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   trace "PH413: comparisons ready"
   apply comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
     v f g t b
+  trace "PH413: categorical transport ready"
   exact exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
 
