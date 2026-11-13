@@ -173,6 +173,7 @@ private theorem finiteCochainModel_counit (n : ℕ)
   rfl
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Compare the fixed tensorator through its recorded localization model.
 /-- The fixed finite tensorator is the inverse tensorator of a monoidal functor.
 Source: Stacks 07A4 and 06YY.
