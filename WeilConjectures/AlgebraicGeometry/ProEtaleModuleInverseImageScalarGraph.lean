@@ -229,6 +229,22 @@ private noncomputable def fromModelForgetSetIso (X : Scheme.{u})
   exact Functor.isoWhiskerLeft (modelSetEquivalence X).inverse
     (Functor.isoWhiskerRight q (modelSetEquivalence Y).functor)
 
+private theorem scalarGraph_comparison_inv
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {X Z : D} {Y : C} (f : X ⟶ F.obj Y) (g : F.obj Y ⟶ Z) :
+    ((f ≫ F.map (𝟙 Y)) ≫ g) ≫ 𝟙 Z = f ≫ g := by
+  rw [F.map_id, Category.comp_id, Category.comp_id]
+
+private theorem scalarGraph_naturality
+    {C D : Type*} [Category* C] [Category* D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {L L' : Sheaf J (Type u) ⥤ Sheaf K (Type u)} (q : L ≅ L')
+    {T S : Sheaf J (Type u)} (g : T ⟶ S) (V : Dᵒᵖ)
+    (x : (L'.obj T).obj.obj V) :
+    (q.inv.app S).hom.app V ((L'.map g).hom.app V x) =
+      (L.map g).hom.app V ((q.inv.app T).hom.app V x) :=
+  congrArg (fun z ↦ z.hom.app V x) (q.inv.naturality g)
+
 -- The comparison is normalized by simp, then identity maps with transported endpoints
 -- are rewritten explicitly. This intentionally uses the simplified goal in the next step.
 set_option linter.flexible false in
@@ -329,20 +345,9 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
         (SheafOfModules.toSheaf A ⋙
           sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) ⋙
             proEtaleSheafInverseImage f (Type (u + 1)) :=
-    NatIso.ofComponents (fun M ↦
-      v.mapIso (em.app ((proEtaleModuleToModel A).obj M)) ≪≫
-        q.app ((SheafOfModules.toSheaf A ⋙
-          sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M))
-      (by
-        intro M N g
-        have h := (p ≪≫ e₀ ≪≫ t₀ ≪≫ Functor.isoWhiskerLeft
-          (SheafOfModules.toSheaf A ⋙
-            sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1}))
-          q).hom.naturality g
-        simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-          Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-          p, e₀, t₀, toModelForgetSetIso, fromModelForgetSetIso, NatIso.ofComponents_hom_app,
-          Iso.refl_hom, Functor.map_id, Category.id_comp, Category.comp_id] using h)
+    p ≪≫ e₀ ≪≫ t₀ ≪≫ Functor.isoWhiskerLeft
+    (SheafOfModules.toSheaf A ⋙
+      sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) q
   let r₀ := v.mapIso pr.iso
   let eR : (proEtaleSheafInverseImage f (Type (u + 1))).obj
       ((sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj R) ≅
@@ -382,30 +387,21 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
     ((SheafOfModules.pullback φ).obj ((proEtaleModuleToModel A).obj M))
       pr pm hs' Tm am bm tm htm (AsSmall.up.op.obj V)
         ((q.inv.app T).hom.app V x)
-  have hqa := congrArg (fun z ↦ z.hom.app V x) (q.inv.naturality a)
-  have hqb := congrArg (fun z ↦ z.hom.app V x) (q.inv.naturality b)
-  have hqt := congrArg (fun z ↦ z.hom.app V x) (q.inv.naturality t)
-  change (q.inv.app _).hom.app V
-      (((proEtaleSheafInverseImage f (Type (u + 1))).map a).hom.app V x) =
-    ((sheafPullback (proEtaleModelBaseChange f) (Type (u + 1))
-      (proEtaleModelTopology X) (proEtaleModelTopology Y)).map am).hom.app
-        (AsSmall.up.op.obj V) ((q.inv.app T).hom.app V x) at hqa
-  change (q.inv.app _).hom.app V
-      (((proEtaleSheafInverseImage f (Type (u + 1))).map b).hom.app V x) =
-    ((sheafPullback (proEtaleModelBaseChange f) (Type (u + 1))
-      (proEtaleModelTopology X) (proEtaleModelTopology Y)).map bm).hom.app
-        (AsSmall.up.op.obj V) ((q.inv.app T).hom.app V x) at hqb
-  change (q.inv.app _).hom.app V
-      (((proEtaleSheafInverseImage f (Type (u + 1))).map t).hom.app V x) =
-    ((sheafPullback (proEtaleModelBaseChange f) (Type (u + 1))
-      (proEtaleModelTopology X) (proEtaleModelTopology Y)).map tm).hom.app
-        (AsSmall.up.op.obj V) ((q.inv.app T).hom.app V x) at hqt
+  have hqa := scalarGraph_naturality q a V x
+  have hqb := scalarGraph_naturality q b V x
+  have hqt := scalarGraph_naturality q t V x
   rw [hme] at hg
   have h₁ := congrArg (fun z ↦
     (em.inv.app ((proEtaleModuleToModel A).obj M)).hom.app (AsSmall.up.op.obj V) z) hqt
   have h₂ := congrArg (fun z ↦ pr.iso.inv.hom.app (AsSmall.up.op.obj V) z) hqa
   have h₃ := congrArg (fun z ↦
     (em.inv.app ((proEtaleModuleToModel A).obj M)).hom.app (AsSmall.up.op.obj V) z) hqb
+  have hE : eM.inv.app M =
+      q.inv.app ((SheafOfModules.toSheaf A ⋙
+        sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M) ≫
+      v.map (em.inv.app ((proEtaleModuleToModel A).obj M)) := by
+    exact scalarGraph_comparison_inv (Ls ⋙ v) _ _
+  rw [hE]
   exact h₁.trans (hg.trans (congrArg₂ (fun (r : Bm.obj.obj (AsSmall.up.op.obj V))
       (m : Nm.val.obj (AsSmall.up.op.obj V)) ↦ r • m) h₂.symm h₃.symm))
 
