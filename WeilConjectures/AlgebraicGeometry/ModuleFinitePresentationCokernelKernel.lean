@@ -166,6 +166,7 @@ private theorem finiteType_equivOverInverse {X : RingedSpace.{u}} (U : Topologic
 set_option maxHeartbeats 700000 in
 -- Transport through the slice-site equivalence expands several nested module functors.
 set_option synthInstance.maxHeartbeats 200000 in
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The relations of the quotient presentation are of finite type.
 Source: Stacks Project, Modules, Lemma 0H96, proof, lines 1440-1454
