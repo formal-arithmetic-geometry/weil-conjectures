@@ -34,8 +34,7 @@ private theorem pinned_comparison_isComparison
 
 set_option linter.unusedVariables false in
 -- Keep the original comparison-proof binder hc0; it is introduced again after the lets.
-set_option maxHeartbeats 1000000 in
--- Elaborating the explicit comparison witnesses needs a larger heartbeat budget.
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Open restriction compatibility for single modules in every integer degree.

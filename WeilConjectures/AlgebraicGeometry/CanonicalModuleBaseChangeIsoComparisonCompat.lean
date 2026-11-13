@@ -27,8 +27,7 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
--- Elaborating the coordinate functors repeatedly compares nested chosen pullback objects.
+set_option profiler true in
 /-- Coordinate-change isomorphisms identify the canonical module base-change maps.
 Source: Stacks Project, Tag 08HY, counit construction and coordinate transport;
 Tag 0D5T, composition of derived functors.
