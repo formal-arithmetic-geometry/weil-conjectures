@@ -119,7 +119,7 @@ noncomputable local instance
 
 set_option backward.isDefEq.respectTransparency false in
 -- The proof compares explicit composed cocones in internal module categories.
-set_option synthInstance.maxHeartbeats 100000 in
+set_option profiler true in
 -- Colimit inference for internal module objects needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 /-- The canonical pushforward continuity comparison is invertible after evaluation

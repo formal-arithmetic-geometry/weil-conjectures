@@ -57,7 +57,7 @@ private theorem coefficientComparison_apply
 
 attribute [local irreducible] proEtaleRingRestrictionDirectImage
 
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The dependent coefficient functors require extra elaboration heartbeats for section maps.
 /-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
 Source: Stacks 0D6E and 07A6, ordinary direct image and restriction of coefficients.

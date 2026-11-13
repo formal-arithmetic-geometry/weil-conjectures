@@ -142,7 +142,7 @@ private theorem finiteUnit_eq (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Comparing the two normalized derived presentations requires unfolding their factor isos.
 private theorem derivedComparison (n : ℕ) :
     completedDerivedRestrictionDirectImageIso f d n =
