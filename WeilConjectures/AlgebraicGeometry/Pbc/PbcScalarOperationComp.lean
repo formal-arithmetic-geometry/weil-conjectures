@@ -314,7 +314,6 @@ private theorem scalarOrdinaryCoefficients
       Category.comp_id, Category.assoc, ← Functor.map_comp_assoc,
       Iso.hom_inv_id_app, (pbcActualModulePull g dG).map_id] using ht'
 
-set_option profiler true in
 private theorem scalarDerivedCoefficients
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (dE : AdicCoefficientDatum A) (dF : AdicCoefficientDatum B)
