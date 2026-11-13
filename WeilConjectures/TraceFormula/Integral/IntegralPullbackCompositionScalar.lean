@@ -259,7 +259,19 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (integralComparisonDerivedSequenceScalar l E L ι Z) CE
   have eE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map eE
   simp only [Functor.map_comp] at IIIk'
-  exact scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
+  apply scalar_composition_paste_mapped
+  · exact N1
+  · exact IIIk'
+  · exact IIIh
+  · exact Ng
+  · exact Np
+  · exact CE'
+  · exact mix
+  · exact eE'
+  · exact eL
+  · exact IIIhk
+  · exact Na
+  · exact CL
 
 end SystemScalar
 
