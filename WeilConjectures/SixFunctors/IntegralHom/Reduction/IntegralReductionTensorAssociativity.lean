@@ -424,6 +424,7 @@ private theorem nativeReductionMonoidal
         CategoryTheory.Functor.prod_obj, Functor.comp_obj, ObjectProperty.ι_obj] at ht hn ⊢
       have hsquare := ht.trans hn
       trace "PH805: square composed"
+      trace_state
       with_unfolding_all
         exact hsquare)
   trace "PH805: resulting tensorator"
