@@ -188,14 +188,11 @@ private theorem compatBoundary_map
   apply HomologicalComplex.Hom.ext
   funext i
   have hda : δ.f i ≫ (χ i).hom = -biprod.inr := by
-    simpa only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
-      Iso.refl_hom, Category.id_comp, Category.comp_id] using hδ i
+    simpa [CochainComplex.shiftFunctorObjXIso] using hδ i
   have hdb : δ'.f i ≫ (χ' i).hom = -biprod.inr := by
-    simpa only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
-      Iso.refl_hom, Category.id_comp, Category.comp_id] using hδ' i
-  simp only [HomologicalComplex.comp_f, Functor.map_comp, Category.assoc]
-  change (F.map (δ.f i) ≫ 𝟙 _) ≫ k.f (i + 1) = ψ.f i ≫ δ'.f i
-  rw [Category.comp_id]
+    simpa [CochainComplex.shiftFunctorObjXIso] using hδ' i
+  change F.map (δ.f i) ≫ 𝟙 _ ≫ k.f (i + 1) = ψ.f i ≫ δ'.f i
+  rw [Category.id_comp]
   apply (cancel_mono (χ' i).hom).mp
   apply biprod.hom_ext
   · simp only [Category.assoc, (hd i).1]
