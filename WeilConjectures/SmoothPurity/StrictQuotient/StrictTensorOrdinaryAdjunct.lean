@@ -247,8 +247,6 @@ private theorem recover_from_inverse {A B : Type*} [Category A] [Category B]
   rw [h]
   exact (F.mapIso em).hom_inv_id_assoc _
 
-set_option trace.profiler true in
--- The sectionwise tensor calculation elaborates several normalized functor compositions.
 private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
     (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m)
@@ -313,11 +311,11 @@ private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
             (level l E P m) (level l E Q m) p q k hpq U x y)))) = _
     refine (congrArg ((((finiteTensor l E W n).map (Prod.mkHom f g)).f k).val.app U)
       (tensor_generators_on_unit.{t + 1, t, u}
-      (R := integralCoefficientCommRingSheaf l E W m)
-      (S := integralCoefficientCommRingSheaf l E W n) (normalizedDVRQuotient l E W hmn)
-      (coefficientFiniteQuotientExtension l E W hmn) (D.ordinaryAdjunction hmn)
-      (coefficientFiniteQuotientUnitSection l E W hmn) (D.ordinary_unit hmn)
-      (level l E P m) (level l E Q m) e he p q k hpq U x y)).trans ?_
+        (R := integralCoefficientCommRingSheaf l E W m)
+        (S := integralCoefficientCommRingSheaf l E W n) (normalizedDVRQuotient l E W hmn)
+        (coefficientFiniteQuotientExtension l E W hmn) (D.ordinaryAdjunction hmn)
+        (coefficientFiniteQuotientUnitSection l E W hmn) (D.ordinary_unit hmn)
+        (level l E P m) (level l E Q m) e he p q k hpq U x y)).trans ?_
     refine (CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}
       (R := integralCoefficientCommRingSheaf l E W n) f g p q k hpq U _ _).trans ?_
     refine (congrArg₂
