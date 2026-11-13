@@ -84,7 +84,6 @@ private theorem flatCohomologyBaseChange_bijective_of_compact_open
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
 /-- Target affine dictionary for a source comparison with a normalized linear lift.
 Source: Stacks Project, Tags 02KH (both parts), 01XJ, 01E4 and 03FD.
 (blueprint: new-flat-base-change-affine-target)

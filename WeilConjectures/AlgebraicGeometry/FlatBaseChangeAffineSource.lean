@@ -22,6 +22,7 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
+set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
@@ -78,7 +79,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
   classical
   let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
   intro h N P
-  obtain ⟨E, hE⟩ :=
+  choose E hE using
     Scheme.Modules.exists_moduleCohomology_source_comparison (f ⁻¹ᵁ V).toScheme p
   let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
       ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+
@@ -86,13 +87,13 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
     (E ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
       (Scheme.Modules.H.mapLinearEquiv
         ((Scheme.Modules.restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F) p).toAddEquiv
-  obtain ⟨e, he⟩ :=
+  choose e he using
     Scheme.Modules.exists_affine_cohomology_section_equiv f F I p V hV D.source E hE
   have hP : P.IsQuasicoherent := ordinaryHigherImage_isQuasicoherent f F inferInstance p
   let : ∀ G : S.Modules, Module Γ(S, V)
       Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
     fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
-  obtain ⟨c, hc, hs, ht, _⟩ :=
+  choose c hc hs ht _ using
     Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
   let k : (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) →ₗ[Γ(S', W)]
       Γ((Scheme.Modules.tensorPullback g).obj P, W) :=
