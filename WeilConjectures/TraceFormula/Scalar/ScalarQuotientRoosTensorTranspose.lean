@@ -65,7 +65,7 @@ private def towerScalarNat
     intro i
     exact (ScalarRoosLiftProof.scalarComponentNat l L F j X n.unop).naturality (f.f i)
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Tensor section types involve several equivalent presentations of the scalar functor.
 private theorem quotientScalarChainComparison
     (l : ℕ) [Fact l.Prime]
