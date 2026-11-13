@@ -33,7 +33,6 @@ private theorem koszulOpenHom_inverse_naturality
     _ = v' ≫ R.map u' ≫ v := by rw [← Category.assoc (R.map m), ← R.map_comp, hm]
     _ = v := by rw [← Category.assoc, hu', Category.id_comp]
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Intermediate representability and colimit assertion; source Tags 08DC and 08DD.
 (blueprint: lem-sc-affine-perfect-open-represent-cohomology-colimit) -/
