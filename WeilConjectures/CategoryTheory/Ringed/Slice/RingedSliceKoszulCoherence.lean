@@ -161,7 +161,6 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (f
 
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
-set_option profiler true in
 -- The representative squares compare long dependent tensor endpoints at independent universes.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction preserves the normalized Koszul exchange.

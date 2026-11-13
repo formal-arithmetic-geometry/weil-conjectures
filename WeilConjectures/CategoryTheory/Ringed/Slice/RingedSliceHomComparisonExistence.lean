@@ -724,8 +724,8 @@ theorem ringedSlice_homComparison_exists
       homComplex (R := A.over U) (RC.obj L) (RC.obj I) := Γ.app (op L, I)
   refine ⟨κ, κU, gammaIso, hκ, hκU, ?_, ?_⟩
   · exact homComparison_local.{c, v, u} J A U L I gammaIso (hΓ L I)
-  · have hh := hη L I
-    simp only [← hκinv] at hh
+  · have hh := congrArg (fun f ↦ r.map f ≫
+      η.hom.app (op (Q.obj L), Q.obj I)) hκinv
     let HU := derivedInternalHomOfUniverses.{max c v, v, u, w'}
       (J.over U) (A.over U)
     let delta := (Functor.isoWhiskerRight
@@ -736,7 +736,7 @@ theorem ringedSlice_homComparison_exists
     have hhs : (r.mapIso κ).inv ≫ (η.app (op (Q.obj L), Q.obj I)).hom =
         loc.hom.app (homComplex (R := A) L I) ≫ QU.map gammaIso.hom ≫
           κU.inv ≫ delta.inv := by
-      exact hh.trans ht.symm
+      exact hh.trans ((hη L I).trans ht.symm)
     have hs := modelSquare (r.mapIso κ) (η.app (op (Q.obj L), Q.obj I))
       delta κU (loc.hom.app (homComplex (R := A) L I)) (QU.map gammaIso.hom) hhs
     change (r.mapIso κ).hom ≫ loc.hom.app (homComplex (R := A) L I) ≫
