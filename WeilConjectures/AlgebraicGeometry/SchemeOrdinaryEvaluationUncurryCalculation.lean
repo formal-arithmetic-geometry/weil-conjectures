@@ -84,6 +84,7 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
           ((DerivedCategory.quotientCompQhIso _).app O).inv) ≫
       (ρ_ (DerivedCategory.Q.obj F)).hom := by
   classical
+  dsimp only
   have := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
   let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
     (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
@@ -103,7 +104,6 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
   dsimp only [eta] at hres
   have hrO := hres O
   dsimp only [O] at hrO
-  dsimp only
   rw [hF, hO]
   simp only [Functor.map_comp, Category.assoc]
   rw [hres F, Category.comp_id, reassoc_of% hrO]
