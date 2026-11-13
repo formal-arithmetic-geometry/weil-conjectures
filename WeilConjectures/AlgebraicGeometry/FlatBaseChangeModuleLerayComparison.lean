@@ -57,7 +57,6 @@ private theorem linearEquiv_from_scalar_transports
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 -- Combining the two geometric transports compares explicit module cohomology functors.
 /-- The target Leray identification commutes with module cohomology pullback.
 The displayed algebra is required to be the canonical map on sections.
@@ -128,6 +127,7 @@ theorem exists_flatBaseChange_module_leray_comparison
   let T := baseChangedScheme (S := Γ(S', W)) h
   let A := baseChangedModule (S := Γ(S', W)) h N
   let C := RingedSpace.moduleCohomology T.toRingedSpace p
+  -- Name the existence proofs before eliminating them, avoiding expensive generalization.
   have htransport := exists_flatBaseChange_chart_cohomology_transport
     f g F I J p V W hV hW eVW D hAlgebra
   rcases htransport with ⟨t, ht, hunit⟩

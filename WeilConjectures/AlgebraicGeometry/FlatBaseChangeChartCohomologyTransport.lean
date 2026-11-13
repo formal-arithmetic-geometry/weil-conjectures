@@ -96,7 +96,6 @@ private theorem chart_fmap_unit_square {Z T U L : Scheme.{u}}
   simp only [Category.assoc] at hc ⊢
   rw [hc, moduleCohomologyFMap_comp]
 
-set_option profiler true in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- Transport along the affine chart identifies its unit map with open restriction
 of the specified coefficient h-map. No Leray edge or higher image is involved.
@@ -164,6 +163,7 @@ theorem exists_flatBaseChange_chart_cohomology_transport
             D.psi p x)) := by
   classical
   intro h N T A C G U L e M C' k
+  -- Eliminate a named hypothesis to avoid generalizing the full coefficient-transport proof.
   have hcoefficient :=
     exists_flatBaseChange_chart_coefficient_transport f g F I J V W hV hW eVW D hAlgebra
   rcases hcoefficient with ⟨σ, φ, ψ, hφψ, hψφ, hscalar, ef, hunit⟩
