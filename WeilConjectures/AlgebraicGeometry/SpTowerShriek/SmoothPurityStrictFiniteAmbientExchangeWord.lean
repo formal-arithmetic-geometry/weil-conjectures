@@ -450,14 +450,18 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     (comparisonFinitePull l E b h n) (comparisonFiniteOpen l E b (c.ofIsPullback sq).i n)
     (coordinates.val (c.ofIsPullback sq).g n).right N
     hp ho
-  simpa only [comparisonFiniteF, comparisonLevelExchange, finiteF,
+  simp only [comparisonFiniteF, comparisonLevelExchange, finiteF,
+    nativeOpen, nativePush, nativePull,
     rightDerivedLowerShriekOfCompactification, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.comp_map, Functor.comp_obj,
-    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc] using H
+    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc] at H ⊢
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+    exactByConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
