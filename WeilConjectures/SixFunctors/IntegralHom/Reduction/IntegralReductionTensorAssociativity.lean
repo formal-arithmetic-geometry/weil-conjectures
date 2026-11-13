@@ -41,8 +41,8 @@ private theorem reduction_normalized_comparison
     {C : Type*} [Category C] {A B D E P Q T : C}
     {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} {r : P ⟶ E} {ri : E ⟶ P}
     {v : P ⟶ Q} {w : Q ⟶ P} {ε : A ⟶ Q} {t : E ⟶ T} {s : P ⟶ T}
-    (h : a ≫ b ≫ c ≫ ri ≫ v = ε) (hv : v ≫ w = 𝟙 P)
-    (hs : s = r ≫ t) (hr : ri ≫ r = 𝟙 E) :
+    (hs : s = r ≫ t) (h : a ≫ b ≫ c ≫ ri ≫ v = ε)
+    (hv : v ≫ w = 𝟙 P) (hr : ri ≫ r = 𝟙 E) :
     (a ≫ b ≫ c) ≫ t = ε ≫ w ≫ s := by
   calc
     (a ≫ b ≫ c) ≫ t = (a ≫ b ≫ c) ≫ ri ≫ s := by
@@ -412,11 +412,11 @@ private theorem nativeReductionMonoidal
       trace "PH805: cancellation proved"
       trace "PH805: transport square"
       dsimp only [D', finiteCochainModel, reductionExtension_eq_scalarExtension,
-        J, R, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
+        cS, J, R, S, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
         ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj] at hnorm hcan hcs
       have hn := by
         with_unfolding_all
-          exact reduction_normalized_comparison hnorm hcan hcs
+          exact reduction_normalized_comparison hcs hnorm hcan
             (m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩))
       trace "PH805: normalization transported"
       rw [hcr]
