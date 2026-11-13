@@ -81,13 +81,30 @@ private theorem exists_derivation_isUnit_of_finite_model
     (R₀ : Type u) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀]
     [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀]
     [Algebra R₀ B] [Algebra.FiniteType R₀ B]
-    (a : M) (c s : B) (hc : (c : M) = (s : M) ^ p * a)
-    (hcn : ¬ ∃ x : M, x ^ p = algebraMap B M c) :
+    (a : M) (hnot : ¬ ∃ x : M, x ^ p = a)
+    (hfrac : ∀ x : M, ∃ b s : B, (s : M) ≠ 0 ∧ x = (b : M) / (s : M)) :
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
       (Localization.AtPrime q)
     let R := TensorProduct (⊥ : Ideal A).ResidueField M ((⊥ : Ideal A).Fiber C)
     ∃ E : Derivation ℤ R R, IsUnit (E (Algebra.TensorProduct.includeLeftRingHom a)) := by
   intro C R
+  obtain ⟨b, s, hs, hab⟩ := hfrac a
+  let c : B := s ^ (p - 1) * b
+  have hc : (c : M) = (s : M) ^ p * a := by
+    rw [hab]
+    dsimp [c]
+    field_simp
+    have hp : p = (p - 1) + 1 := (Nat.sub_add_cancel
+      (Nat.Prime.one_lt (Fact.out : p.Prime)).le).symm
+    conv_rhs => rw [hp, pow_succ]
+    ring
+  have hcn : ¬ ∃ x : M, x ^ p = algebraMap B M c := by
+    rintro ⟨x, hx⟩
+    apply hnot
+    refine ⟨x / (s : M), ?_⟩
+    rw [div_pow, hx]
+    change (c : M) / (s : M) ^ p = a
+    rw [hc, mul_div_cancel_left₀ _ (pow_ne_zero _ hs)]
   obtain ⟨D, hD⟩ := Derivation.exists_apply_ne_zero_of_not_pth_power
     (p := p) (B := B) (M := M) (R₀ := R₀) c hcn
   obtain ⟨E, hE⟩ := Derivation.exists_formalFiber_extension
@@ -181,23 +198,6 @@ theorem exists_derivation_isUnit_tmul_formalFiber
     obtain ⟨b, s, _, hs⟩ := hfrac x
     exact ⟨b, s, hs⟩
   let : CharP B p := (algebraMap B M).charP Subtype.val_injective p
-  obtain ⟨b, s, hs, hab⟩ := hfrac a
-  let c : B := s ^ (p - 1) * b
-  have hc : (c : M) = (s : M) ^ p * a := by
-    rw [hab]
-    dsimp [c]
-    field_simp
-    have hp : p = (p - 1) + 1 := (Nat.sub_add_cancel
-      (Nat.Prime.one_lt (Fact.out : p.Prime)).le).symm
-    conv_rhs => rw [hp, pow_succ]
-    ring
-  have hcn : ¬ ∃ x : M, x ^ p = algebraMap B M c := by
-    rintro ⟨x, hx⟩
-    apply hnot
-    refine ⟨x / (s : M), ?_⟩
-    rw [div_pow, hx]
-    change (c : M) / (s : M) ^ p = a
-    rw [hc, mul_div_cancel_left₀ _ (pow_ne_zero _ hs)]
   obtain ⟨hlocal, hcomplete, hregular⟩ := powerSeries_field_regular_complete k n
   let := hlocal
   let := hcomplete
@@ -216,6 +216,6 @@ theorem exists_derivation_isUnit_tmul_formalFiber
     Algebra.FiniteType.trans (inferInstance : Algebra.FiniteType
       (MvPowerSeries (Fin n) k) A) (inferInstance : Algebra.FiniteType A B)
   exact exists_derivation_isUnit_of_finite_model A q M B p
-    (MvPowerSeries (Fin n) k) a c s hc hcn
+    (MvPowerSeries (Fin n) k) a hnot hfrac
 
 end MvPowerSeries
