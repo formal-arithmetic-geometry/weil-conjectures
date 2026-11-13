@@ -248,7 +248,6 @@ private theorem curry_apply (K L M : CochainComplex Mod ℤ)
   subst r t m
   exact (homTensorDegreewiseMap_spec R K L M n).1 p q U s W x y
 
-set_option profiler true in
 set_option synthInstance.maxSize 256 in
 /-- The iterated Hom differential agrees with the three tensor differential terms
 on one localized pure tensor.

@@ -23,6 +23,21 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite
 
 namespace CategoryTheory
 
+private lemma homTensorComparison_naturality_of_unit
+    {D E : Type*} [Category D] [Category E] [MonoidalCategory D] [MonoidalCategory E]
+    (F : D ⥤ E) [F.LaxMonoidal] (G : E ⥤ D) (η : 𝟭 E ⟶ G ⋙ F)
+    {A A' B B' : E} (f : A' ⟶ A) (g : B' ⟶ B) :
+    (f ⊗ₘ g) ≫ (η.app A ⊗ₘ η.app B) ≫ Functor.LaxMonoidal.μ F (G.obj A) (G.obj B) =
+      ((η.app A' ⊗ₘ η.app B') ≫ Functor.LaxMonoidal.μ F (G.obj A') (G.obj B')) ≫
+        F.map (G.map f ⊗ₘ G.map g) := by
+  have hf := η.naturality f
+  have hg := η.naturality g
+  change f ≫ η.app A = η.app A' ≫ F.map (G.map f) at hf
+  change g ≫ η.app B = η.app B' ≫ F.map (G.map g) at hg
+  rw [← Category.assoc, tensorHom_comp_tensorHom, hf, hg,
+    ← tensorHom_comp_tensorHom, Category.assoc, Functor.LaxMonoidal.μ_natural,
+    Category.assoc]
+
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max u v})
 
@@ -31,7 +46,6 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of the tensor comparison isomorphism.
 Source: Stacks Project, Section 03EK and Lemma 03CY.
@@ -58,19 +72,11 @@ theorem homTensorComparison_natural {A A' B B' : Mod}
   let := SheafOfModules.monoidalCategory R
   let adj := PresheafOfModules.sheafificationAdjunction
     (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
-  have hf := (asIso adj.counit).inv.naturality f
-  have hg := (asIso adj.counit).inv.naturality g
   let S := PresheafOfModules.sheafification
     (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
-  change f ≫ (asIso adj.counit).inv.app A =
-    (asIso adj.counit).inv.app A' ≫ S.map f.val at hf
-  change g ≫ (asIso adj.counit).inv.app B =
-    (asIso adj.counit).inv.app B' ≫ S.map g.val at hg
-  simp only [SheafOfModules.tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom,
-    tensorIso_inv, Iso.app_inv, asIso_inv, Functor.Monoidal.μIso_hom, Category.assoc,
-    ← Functor.LaxMonoidal.μ_natural]
-  simp only [← Category.assoc, tensorHom_comp_tensorHom]
-  simp only [asIso_inv] at hf hg
-  exact congrArg (fun z ↦ z ≫ _) (congrArg₂ (fun a b ↦ a ⊗ₘ b) hf hg)
+  let G := SheafOfModules.forget
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+  let η : 𝟭 Mod ⟶ G ⋙ S := (asIso adj.counit).inv
+  exact homTensorComparison_naturality_of_unit S G η f g
 
 end CategoryTheory

@@ -169,24 +169,6 @@ private noncomputable def homObjEquiv (M P N : PresheafOfModules.{max u v w} (R 
       (naturality_apply ψ W.unop.hom.op p)).trans ?_
     exact restrictOver_hom_app_congr (ψ.app X p) (Category.id_comp W.unop.hom) m
 
-/-- Transpose the two inputs of an internal-Hom morphism. -/
-private noncomputable def homObjTranspose (f : M ⟶ homObj P N) : P ⟶ homObj M N :=
-  homObjEquiv M P N ((β_ M P).hom ≫ (homObjEquiv P M N).symm f)
-
-private lemma homObjTranspose_injective :
-    Function.Injective (homObjTranspose (M := M) (P := P) (N := N)) := by
-  intro f g h
-  apply (homObjEquiv P M N).symm.injective
-  apply (cancel_epi (β_ M P).hom).1
-  exact (homObjEquiv M P N).injective h
-
-private lemma homObjTranspose_app_apply (f : M ⟶ homObj P N) (U : Cᵒᵖ)
-    (t : P.obj U) (W : (Over U.unop)ᵒᵖ) (s : M.obj (op W.unop.left)) :
-    ((((homObjTranspose f).app U).hom t).app W).hom s =
-      (((f.app (op W.unop.left)).hom s).app
-        (op (Over.mk (𝟙 W.unop.left)))).hom (P.map W.unop.hom.op t) := by
-  rfl
-
 end IsoTensorHom
 
 
@@ -259,7 +241,6 @@ private theorem homTerm_hom_ext (L M : CochainComplex Mod ℤ) (n : ℤ)
   intro p
   exact congrArg (fun f ↦ (f.val.app U).hom s) (h p)
 
-set_option profiler true in
 set_option synthInstance.maxSize 256 in
 /-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;
@@ -300,11 +281,15 @@ private theorem tensorLocalized_ext
   let T := (CochainComplex.mapBifunctor K L (curriedTensor Mod)).X p
   let flip : (X ⟶ SheafOfModules.homObj (R := R) T N) →
       (T ⟶ SheafOfModules.homObj (R := R) X N) := fun f ↦
-    ⟨IsoTensorHom.homObjTranspose (R := R.obj) f.val⟩
+    ⟨IsoTensorHom.homObjEquiv.{u, v, max u v} X.val T.val N.val
+      ((β_ X.val T.val).hom ≫
+        (IsoTensorHom.homObjEquiv.{u, v, max u v} T.val X.val N.val).symm f.val)⟩
   have hf : Function.Injective flip := by
     intro f g he
     apply SheafOfModules.hom_ext
-    exact IsoTensorHom.homObjTranspose_injective (R := R.obj)
+    apply (IsoTensorHom.homObjEquiv.{u, v, max u v} T.val X.val N.val).symm.injective
+    apply (cancel_epi (β_ X.val T.val).hom).1
+    exact (IsoTensorHom.homObjEquiv.{u, v, max u v} X.val T.val N.val).injective
       (congrArg SheafOfModules.Hom.val he)
   apply hf
   apply HomologicalComplex.mapBifunctor.hom_ext
@@ -330,8 +315,6 @@ private theorem tensorLocalized_ext
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro s
-  dsimp only [flip]
-  rw [IsoTensorHom.homObjTranspose_app_apply, IsoTensorHom.homObjTranspose_app_apply]
   let q := homTensorCurrySectionMap R (K.X i) (L.X j) ≫
     (CochainComplex.ιMapBifunctor K L (curriedTensor Mod) i j p hij).val
   change ((a.val.app (op W.unop.left)).hom s).app (op (Over.mk (𝟙 W.unop.left)))
