@@ -364,7 +364,7 @@ private lemma leftDerivedFunctorFactorIso_assoc_eq_app (hc : FGH = FGH')
     (K : DerivedCategory C₁) :
     (leftDerivedFunctorFactorIso e₁).hom.app K ≫
         (leftDerivedFunctorFactorIso eFG).hom.app (H.leftDerivedFunctor.obj K) =
-      eqToHom (by subst hc; rfl) ≫
+      eqToHom (by clear c; subst hc; rfl) ≫
         (leftDerivedFunctorFactorIso e₂).hom.app K ≫
           F.leftDerivedFunctor.map ((leftDerivedFunctorFactorIso eGH).hom.app K) := by
   rw [← leftDerivedFunctorNatIso_eqToIso_hom_app hc K]
