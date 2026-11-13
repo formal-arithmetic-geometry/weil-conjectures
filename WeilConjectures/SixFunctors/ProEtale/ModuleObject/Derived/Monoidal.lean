@@ -702,10 +702,8 @@ lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
   have := hasTensor₄ObjExt_gradedModule Λ
   have := hasGoodTensor₁₂Tensor_gradedModule Λ
   have := hasGoodTensorTensor₂₃_gradedModule Λ
-  have h : ((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
-      ((leftDerivedUpperStarTensorRightCounit Λ f).app A).app B =
-      ((leftDerivedUpperStarTensorLeftCounit Λ f).app A).app B :=
-    congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
+  have h := congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
+  simp only [NatTrans.comp_app] at h
   rw [leftDerivedUpperStarTensorRightCounit_app_app] at h
   have hδ := upperStarTensorComplexHom_Qh_δ Λ f A B
   have h' := congrArg
