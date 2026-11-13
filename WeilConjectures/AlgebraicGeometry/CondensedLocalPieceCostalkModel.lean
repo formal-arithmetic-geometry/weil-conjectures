@@ -243,10 +243,6 @@ private theorem localPieceBoundedInjectiveCocone
     exact hβvq
   exact ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩
 
-set_option maxHeartbeats 400000 in
--- The derived adjunction and diagram instances need a larger elaboration budget.
-set_option synthInstance.maxHeartbeats 100000 in
--- Internal module colimits require a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
