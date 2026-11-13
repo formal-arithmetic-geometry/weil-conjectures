@@ -22,8 +22,12 @@ composite
 of `Lf^*(γ_g(K))(d)[2d]` and `γ_f(Rg^! K)`, the sources being identified by
 `AlgebraicGeometry.Etale.twistShiftCompIso` and the targets by the composition isomorphism of the
 exceptional inverse images conjugate to the composition isomorphism of `R_!`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`). This is blueprint
-`proposition-compatibility-purity-composition--1` (finite coefficients).
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`), for finite coefficients.
+
+## Implementation details
+
+The proof is still open: it should reduce, by the tensor form of the purity maps, to the
+compatibility of the canonical orientations `θ` (the diagonal classes) with composition.
 -/
 
 @[expose] public section
@@ -48,18 +52,15 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
   {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
   (aZ : Z ⟶ Spec (.of k)) [IsSeparated aZ] [LocallyOfFiniteType aZ]
 
-/-- Blueprint `proposition-compatibility-purity-composition--1`: **compatibility of the
-canonical purity map with composition**, finite coefficients. For `K ∈ D(Z_ét, Λ)`,
+/-- **Compatibility of the canonical purity map with composition**, finite coefficients.
+For `K ∈ D(Z_ét, Λ)`,
 
 `γ_{f ≫ g}(K) = c_{g,f}⁻¹ ∘ γ_f(Rg^! K) ∘ Lf^*(γ_g(K))(d)[2d]`
 
 after the identification `L(f ≫ g)^* K(d + e)[2d + 2e] ≅ Lf^*(Lg^* K(e)[2e])(d)[2d]`
 (`AlgebraicGeometry.Etale.twistShiftCompIso`), where `c_{g,f}⁻¹ : Rf^! Rg^! ≅ R(f ≫ g)^!` is the
 composition isomorphism conjugate to `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`).
-
-TODO: the blueprint proof reduces, by the tensor form of the purity maps, to the compatibility
-of the canonical orientations `θ` (the diagonal classes) with composition. -/
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`). -/
 theorem canonicalSmoothPurityMap_comp
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     canonicalSmoothPurityMap Λ (f ≫ g) (d + e) aZ K =

@@ -22,18 +22,27 @@ comparison `b : Ψ (Rf_! M) ⟶ Rf_! (Ψ M)`
 `c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)`,
 
 is defined as the transpose, for the exceptional adjunction `Rf_! ⊣ Rf^!` with `S`-coefficients,
-of `Ψ(ε_R(K)) ∘ b(Rf^! K)⁻¹` (blueprint `lemma-sp-reduction`, equation (9.16)).
+of `Ψ(ε_R(K)) ∘ b(Rf^! K)⁻¹`.
 
 ## Main definitions and results
 
 - `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekExtendScalarsMap`: the comparison
-  `c_{R,S}(K)` (blueprint `lemma-sp-reduction--2`).
+  `c_{R,S}(K)`.
 - `rightDerivedLowerShriek_map_rightDerivedUpperShriekExtendScalarsMap_comp_counit`: the
-  counit equation (9.16), and
+  counit equation characterising `c_{R,S}(K)`, and
   `AlgebraicGeometry.ProEtale.eq_rightDerivedUpperShriekExtendScalarsMap_iff`: it determines
-  `c_{R,S}(K)` (blueprint `lemma-sp-reduction--3`).
+  `c_{R,S}(K)`.
 - `AlgebraicGeometry.ProEtale.isIso_rightDerivedUpperShriekExtendScalarsMap`: `c_{R,S}(K)` is an
-  isomorphism on `Dᵇctf(Y, R)` (blueprint `lemma-sp-reduction--2`).
+  isomorphism on `Dᵇctf(Y, R)`.
+
+## Implementation details
+
+The isomorphism property of `c_{R,S}(K)` is still open. Restricted back to `R`, `c_{R,S}(K)` should
+be the tensor map `Rf^! K ⊗ᴸ S_X ⟶ Rf^!(K ⊗ᴸ S_Y)` for the constant sheaf `S_Y`, whose étale
+counterpart is an isomorphism by the exceptional Künneth formula
+(`AlgebraicGeometry.Etale.isExceptionalKunneth`). This needs the commutation of restriction of
+scalars with the pro-étale `Rf^!`, the identification of `b` restricted to `R` with the projection
+map, and the comparison of both with their étale counterparts.
 -/
 
 @[expose] public section
@@ -51,16 +60,15 @@ open Scheme
 variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [Finite R] [Finite S]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
 
-/-- Blueprint `lemma-sp-reduction--2`: the **comparison for the exceptional inverse image**
-`c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)`, for `Ψ = - ⊗ᴸ_R S`. It is the transpose for the
-exceptional adjunction `Rf_! ⊣ Rf^!` with `S`-coefficients of
+/-- The **comparison for the exceptional inverse image**
+`c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)`, for `Ψ = - ⊗ᴸ_R S`: the transpose for the exceptional
+adjunction `Rf_! ⊣ Rf^!` with `S`-coefficients of
 
 `Rf_! Ψ (Rf^! K) ≅ Ψ (Rf_! Rf^! K) ⟶ Ψ K`,
 
 the inverse of the comparison `b(Rf^! K)` for `Rf_!`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekExtendScalarsMap`, an isomorphism as
-`Rf^! K` is bounded constructible of finite Tor amplitude, `hfK`) followed by `Ψ` of the counit
-`ε_R(K)`. The remaining hypotheses are those under which the exceptional adjunction applies. -/
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekExtendScalarsMap`, invertible since `Rf^! K`
+is in `Dᵇctf(X, R)`) followed by `Ψ` of the counit `ε_R(K)`. -/
 noncomputable def rightDerivedUpperShriekExtendScalarsMap
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
     (hK : DerivedCategory.TStructure.t.plus K)
@@ -78,7 +86,7 @@ noncomputable def rightDerivedUpperShriekExtendScalarsMap
 
 variable {R S f}
 
-/-- Blueprint `lemma-sp-reduction--3`: the **counit equation** (9.16),
+/-- The **counit equation** characterising `c_{R,S}(K)`:
 `ε_S(Ψ K) ∘ Rf_!(c_{R,S}(K)) = Ψ(ε_R(K)) ∘ b(Rf^! K)⁻¹`. -/
 theorem rightDerivedLowerShriek_map_rightDerivedUpperShriekExtendScalarsMap_comp_counit
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
@@ -96,8 +104,8 @@ theorem rightDerivedLowerShriek_map_rightDerivedUpperShriekExtendScalarsMap_comp
       (L(sheafExtendScalars (algebraMap R S) Y)).map (rightDerivedUpperShriekCounit f K hK) :=
   (rightDerivedUpperShriekHomEquiv f hΨfK hΨK).symm_apply_apply _
 
-/-- Blueprint `lemma-sp-reduction--3`: the counit equation (9.16) **determines** the comparison
-`c_{R,S}(K)`: a morphism `c : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)` is `c_{R,S}(K)` if and only if
+/-- The counit equation **determines** the comparison `c_{R,S}(K)`: a morphism
+`c : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)` is `c_{R,S}(K)` if and only if
 `ε_S(Ψ K) ∘ Rf_!(c) = Ψ(ε_R(K)) ∘ b(Rf^! K)⁻¹`. -/
 theorem eq_rightDerivedUpperShriekExtendScalarsMap_iff
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
@@ -156,16 +164,9 @@ lemma constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field :
   haveI : HasInvertibleExponent R Y := .of_hom aY
   constructibleFiniteTor_leftDerivedSheafExtendScalars aY hK
 
-/-- Blueprint `lemma-sp-reduction--2`: for `K ∈ Dᵇctf(Y, R)`, `f` separated of finite type
-between schemes of finite type over a field `k` in which the exponents of `R` and `S` are
-invertible, the comparison `c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)` is an **isomorphism**. The
-hypotheses of `rightDerivedUpperShriekExtendScalarsMap` follow from `K ∈ Dᵇctf(Y, R)`.
-
-TODO: restricted back to `R`, `c_{R,S}(K)` is the tensor map `Rf^! K ⊗ᴸ S_X ⟶ Rf^!(K ⊗ᴸ S_Y)` for
-the constant sheaf `S_Y`, whose étale counterpart is an isomorphism by the exceptional Künneth
-formula (`AlgebraicGeometry.Etale.isExceptionalKunneth`). This needs the commutation of
-restriction of scalars with the pro-étale `Rf^!`, the identification of `b` restricted to `R`
-with the projection map, and the comparison of both with their étale counterparts. -/
+/-- For `K ∈ Dᵇctf(Y, R)`, `f` separated of finite type between schemes of finite type over a
+field `k` in which the exponents of `R` and `S` are invertible, the comparison
+`c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)` is an **isomorphism**. -/
 theorem isIso_rightDerivedUpperShriekExtendScalarsMap
     [HasInvertibleExponent S (Spec (.of k))] [IsSeparated aY] [IsSeparated f] :
     IsIso (rightDerivedUpperShriekExtendScalarsMap R S f K hK.plus

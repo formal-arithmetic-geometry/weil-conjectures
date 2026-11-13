@@ -21,9 +21,16 @@ universal property of the left derived functor `Ψ_{R,T}`, by the isomorphism
 `T ⊗_S (S ⊗_R -) ≅ T ⊗_R -` of the underived extensions of scalars
 (`AlgebraicGeometry.ProEtale.sheafExtendScalarsCompIso`).
 
-The comparison `b` for `Rf_!` of blueprint `lemma-sp-reduction` is transitive along `τ`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekExtendScalarsMap_trans`,
-`lemma-sp-reduction--4`).
+The comparison `b : Ψ (Rf_! M) ⟶ Rf_! (Ψ M)` is transitive along `τ`
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekExtendScalarsMap_trans`).
+
+## Implementation details
+
+The comparison `b` is built through a compactification `f = g ∘ i` from the base change map of
+the extension of scalars along `Rg_*` and its commutation with `i_!`. Both are mates of the
+commutation with `Lg^*` (resp. `Li^*`), whose transitivity follows from the associativity of the
+tensor product (`AlgebraicGeometry.ProEtale.sheafExtendScalarsCompIso`) by
+`CategoryTheory.Functor.leftDerived_square_trans`.
 -/
 
 @[expose] public section
@@ -246,9 +253,7 @@ lemma leftDerivedUpperStarExtendScalarsIso_hom_trans [IsNoetherianRing R] [IsNoe
 variable (R S T) in
 /-- **Transitivity of the base change map of derived scalar extension along `Rg_*`.** Along
 `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`, the base change map `Ψ_{R,T} (Rg_* N) ⟶ Rg_* (Ψ_{R,T} N)` is
-the composite of the base change maps for `Ψ_{R,S}` and `Ψ_{S,T}`: it is the mate of the
-commutation with `Lg^*`, which is transitive
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso_hom_trans`). -/
+the composite of the base change maps for `Ψ_{R,S}` and `Ψ_{S,T}`. -/
 lemma rightDerivedLowerStarExtendScalarsMap_trans [IsNoetherianRing R] [IsNoetherianRing S]
     {Y Z : Scheme.{u}} (g : Z ⟶ Y)
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R))) :
@@ -269,9 +274,7 @@ lemma rightDerivedLowerStarExtendScalarsMap_trans [IsNoetherianRing R] [IsNoethe
 variable (R S T) in
 /-- **Transitivity of the commutation of derived scalar extension with `j_!`.** Along
 `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`, the isomorphism `Ψ_{R,T} (j_! K) ≅ j_! (Ψ_{R,T} K)` is the
-composite of the isomorphisms for `Ψ_{R,S}` and `Ψ_{S,T}`: the mates of their inverses are the
-commutations with `Lj^*`, which are transitive
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso_hom_trans`). -/
+composite of the isomorphisms for `Ψ_{R,S}` and `Ψ_{S,T}`. -/
 lemma openImmersionLowerShriekExtendScalarsIso_hom_app_trans [IsNoetherianRing R]
     [IsNoetherianRing S] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} R))) :
@@ -327,15 +330,11 @@ lemma rightDerivedLowerShriekOfCompactificationExtendScalarsMap_trans [IsNoether
 
 variable [Finite R] [Finite S] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `lemma-sp-reduction--4`: **transitivity of the comparison for `Rf_!`**. For
-`R → S → T` and every `M`, the comparison `b_{R,T}(M)` is the composite of `b_{R,S}`
-and `b_{S,T}`, along `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`:
+/-- **Transitivity of the comparison for `Rf_!`**. For `R → S → T` and every `M`, the
+comparison `b_{R,T}(M)` is the composite of `b_{R,S}` and `b_{S,T}`, along
+`τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`:
 
-`b_{R,T}(M) ∘ τ(Rf_! M) = Rf_!(τ(M)) ∘ b_{S,T}(Ψ_{R,S} M) ∘ Ψ_{S,T}(b_{R,S}(M))`.
-
-Both comparisons are built through the compactification from the base change maps of the
-extensions of scalars along `Rg_*` and from their commutation with `i_!`, and these are transitive
-by associativity of the tensor product (`sheafExtendScalarsCompIso`). -/
+`b_{R,T}(M) ∘ τ(Rf_! M) = Rf_!(τ(M)) ∘ b_{S,T}(Ψ_{R,S} M) ∘ Ψ_{S,T}(b_{R,S}(M))`. -/
 theorem rightDerivedLowerShriekExtendScalarsMap_trans
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
     (leftDerivedSheafExtendScalarsCompMap R S T Y).app ((R(f)_![ModuleCat.{u + 1} R]).obj M) ≫

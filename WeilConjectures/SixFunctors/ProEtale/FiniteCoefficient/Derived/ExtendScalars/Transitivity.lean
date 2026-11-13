@@ -19,14 +19,19 @@ universal property of the left derived functor `Ψ_{R,T}`, by the isomorphism
 `T ⊗_S (S ⊗_R -) ≅ T ⊗_R -` of the underived extensions of scalars
 (`AlgebraicGeometry.ProEtale.sheafExtendScalarsCompIso`).
 
-The comparisons `b` for `Rf_!` and `c` for `Rf^!` of blueprint `lemma-sp-reduction` are
-transitive along `τ`:
+The comparisons `b` for `Rf_!` and `c` for `Rf^!` are transitive along `τ`:
 
 - `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekExtendScalarsMap_trans`: the comparison `b`
-  for `R → T` is the composite of those for `R → S` and `S → T` (`lemma-sp-reduction--4`);
+  for `R → T` is the composite of those for `R → S` and `S → T`;
 - `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekExtendScalarsMap_trans`: the same for the
-  comparison `c` (`lemma-sp-reduction--5`), deduced from the transitivity of `b` and the counit
-  equation (9.16) characterising `c`.
+  comparison `c`.
+
+## Implementation details
+
+The transitivity of `c` is proved on transposes for the exceptional adjunction `Rf_! ⊣ Rf^!`: the
+transposes are computed by the counit equation characterising `c`
+(`rightDerivedLowerShriek_map_rightDerivedUpperShriekExtendScalarsMap_comp_counit`)
+and agree by the transitivity of `b`.
 -/
 
 @[expose] public section
@@ -46,16 +51,11 @@ variable {R S T : Type (u + 1)} [CommRing R] [CommRing S] [CommRing T] [Algebra 
   [Finite R] [Finite S] [Finite T] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
   [CompactSpace Y]
 
-/-- Blueprint `lemma-sp-reduction--5`: **transitivity of the comparison for `Rf^!`**. For
-`R → S → T` and `K` such that the comparisons `c_{R,S}(K)`, `c_{R,T}(K)` and `c_{S,T}(Ψ_{R,S} K)`
-are defined, the comparison `c_{R,T}(K)` is the composite of `c_{R,S}` and `c_{S,T}`, along
-`τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`:
+/-- **Transitivity of the comparison for `Rf^!`**. For `R → S → T` and `K` such that the
+comparisons `c_{R,S}(K)`, `c_{R,T}(K)` and `c_{S,T}(Ψ_{R,S} K)` are defined, the comparison
+`c_{R,T}(K)` is the composite of `c_{R,S}` and `c_{S,T}`, along `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`:
 
-`c_{R,T}(K) ∘ τ(Rf^! K) = Rf^!(τ(K)) ∘ c_{S,T}(Ψ_{R,S} K) ∘ Ψ_{S,T}(c_{R,S}(K))`.
-
-The two sides are transposes for the exceptional adjunction, and their transposes agree by the
-counit equations (9.16) (`lemma-sp-reduction--3`) and the transitivity of the comparison for
-`Rf_!` (`lemma-sp-reduction--4`). -/
+`c_{R,T}(K) ∘ τ(Rf^! K) = Rf^!(τ(K)) ∘ c_{S,T}(Ψ_{R,S} K) ∘ Ψ_{S,T}(c_{R,S}(K))`. -/
 theorem rightDerivedUpperShriekExtendScalarsMap_trans
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
     (hK : DerivedCategory.TStructure.t.plus K)
@@ -124,9 +124,8 @@ variable {k : Type u} [Field k] [HasInvertibleExponent R (Spec (.of k))]
   [HasInvertibleExponent S (Spec (.of k))] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
   [QuasiCompact aY] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- Blueprint `lemma-sp-reduction--5` for `K ∈ Dᵇctf(Y, R)`, over a scheme `Y` of finite type over
-a field in which the exponents of `R` and `S` are invertible: the hypotheses of
-`rightDerivedUpperShriekExtendScalarsMap_trans` follow from `K ∈ Dᵇctf(Y, R)`. -/
+/-- **Transitivity of the comparison for `Rf^!`** on `K ∈ Dᵇctf(Y, R)`, for `Y` of finite type
+over a field in which the exponents of `R` and `S` are invertible. -/
 theorem rightDerivedUpperShriekExtendScalarsMap_trans_of_constructibleFiniteTor
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) Y K) :
