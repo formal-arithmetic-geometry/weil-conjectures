@@ -278,6 +278,69 @@ private meta partial def conversionSharedCongruence
       cache.modify fun m => m.insert (a, b) h
       return h
     catch _ => pure ()
+  let reduce (e : Lean.Expr) : Lean.MetaM (Option Lean.Expr) := do
+    if let .letE _ _ v body _ := e then return some (body.instantiate1 v)
+    if e.getAppFn.isFVar then
+      let decl ← e.getAppFn.fvarId!.getDecl
+      if let some value := decl.value? then
+        return some (Lean.mkAppN value e.getAppArgs)
+    let projection ← match e.getAppFn with
+      | .proj n i major => pure (some (n, i, major, e.getAppArgs))
+      | .const name _ => do
+        match (← Lean.getProjectionFnInfo? name) with
+        | none => pure none
+        | some info => do
+          let args := e.getAppArgs
+          if args.size < info.numParams + 1 then pure none else do
+            let major := args[info.numParams]!
+            let ty ← Lean.Meta.whnf (← Lean.Meta.inferType major)
+            pure (some (ty.getAppFn.constName!, info.i, major,
+              args.extract (info.numParams + 1) args.size))
+      | _ => pure none
+    if let some (n, i, major, args) := projection then
+      let structural := #[``CategoryTheory.Iso.symm, ``CategoryTheory.Iso.trans,
+        ``CategoryTheory.Functor.mapIso, ``CategoryTheory.Iso.app,
+        ``CategoryTheory.Functor.comp, ``Compactification.ofIsPullback,
+        ``CategoryTheory.Functor.isoWhiskerLeft, ``CategoryTheory.Functor.isoWhiskerRight,
+        ``comparisonFiniteF, ``comparisonLevelExchange, ``finiteF,
+        ``rightDerivedLowerShriekOfCompactification]
+      if major.getAppFn.isConst && structural.contains major.getAppFn.constName! then
+        if let some major' ← Lean.Meta.unfoldDefinition? major
+            (ignoreTransparency := true) then
+          let major' ← Lean.Meta.withTransparency .reducible (Lean.Meta.whnf major')
+          let field := Lean.Expr.proj n i major'
+          let field := (← field.reduceProjStruct?).getD field
+          return some (Lean.mkAppN field args).headBeta
+    if let .proj n i major := e.getAppFn then
+      let env ← Lean.getEnv
+      let some info := Lean.getStructureInfo? env n | throwError "unknown structure {n}"
+      let some proj := Lean.getProjFnForField? env n info.fieldNames[i]! |
+        throwError "unknown projection of {n}"
+      let majorType ← Lean.Meta.whnf (← Lean.Meta.inferType major)
+      unless majorType.getAppFn.isConstOf n do
+        throwError "unexpected projection type {majorType}"
+      let head := Lean.mkAppN (Lean.mkConst proj majorType.getAppFn.constLevels!)
+        (majorType.getAppArgs.push major)
+      return some (Lean.mkAppN head e.getAppArgs)
+    if e.headBeta != e then return some e.headBeta
+    if let some e' ← e.reduceProjStruct? then return some e'
+    return none
+  if let some a' ← reduce a then
+    return ← conversionTrans (← conversionReduction a a')
+      (← conversionSharedCongruence cache congrCache a' b)
+  if let some b' ← reduce b then
+    return ← conversionTrans (← conversionSharedCongruence cache congrCache a b')
+      (← conversionSymm (← conversionReduction b b'))
+  if a.isAppOf ``CategoryTheory.Functor.obj then
+    let a' ← Lean.Meta.withTransparency .all (Lean.Meta.whnf a)
+    if a' != a then
+      return ← conversionTrans (← conversionReduction a a')
+        (← conversionSharedCongruence cache congrCache a' b)
+  if b.isAppOf ``CategoryTheory.Functor.obj then
+    let b' ← Lean.Meta.withTransparency .all (Lean.Meta.whnf b)
+    if b' != b then
+      return ← conversionTrans (← conversionSharedCongruence cache congrCache a b')
+        (← conversionSymm (← conversionReduction b b'))
   conversionCongruence cache congrCache a b
 
 private meta def exactBySharedConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit :=
