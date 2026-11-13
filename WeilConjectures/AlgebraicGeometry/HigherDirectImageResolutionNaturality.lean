@@ -105,7 +105,6 @@ private theorem naturality_chain_four {C : Type*} [Category* C]
     g₀ ≫ b₁ ≫ b₂ ≫ b₃ ≫ b₄ = a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ g₄ := by
   rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃, h₄]
 
-set_option profiler true in
 -- The naturality squares compare several termwise composite functors.
 /-- The canonical resolution-section map commutes with coefficient maps.
 

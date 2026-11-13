@@ -176,7 +176,6 @@ private theorem map_comparison_square {A B : Type*} [Category* A] [Category* B]
   rw [H.map_comp, Category.assoc, hl, ← Category.assoc, ← H.map_comp,
     ha, H.map_comp, H.map_comp, Category.assoc]
 
-set_option profiler true in
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)

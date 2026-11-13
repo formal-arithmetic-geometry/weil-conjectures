@@ -39,7 +39,6 @@ private theorem homology_scalar_comm
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option profiler true in
 -- The comparisons involve several nested evaluation and homology functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The resolution map admits a semilinear lift over the map on global functions.
