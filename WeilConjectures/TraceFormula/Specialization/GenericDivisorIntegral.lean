@@ -228,10 +228,12 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
     (padicIntegersRingObjToContinuousMapRingObj ℓ E)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) M o e ι K₀ n (by transport_mod_proofs hn)
     (fun K n hn ↦ by
-      exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j K n)
+      transport_mod_proofs (@isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ
+        ‹Fact ℓ.Prime› E M.generic M.total M.j ‹QuasiCompact M.j› ‹QuasiSeparated M.j› K n hn))
     (fun K n hn ↦ by
-      exact_mod_proofs isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE
-        ℓ E M.j K n) (by transport_mod_proofs h)
+      transport_mod_proofs (@isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ
+        ‹Fact ℓ.Prime› E M.generic M.total M.j ‹QuasiCompact M.j› ‹QuasiSeparated M.j› K n hn))
+    (by transport_mod_proofs h)
   transport_mod_proofs key
 
 end NearbyCyclesModel
@@ -318,11 +320,10 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
     (zeroSectionSpecialFibreMap X I k').left
     (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι) N₀.obj n hn' h₀
   refine h₁.of_iso ?_
-  exact (L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
-    Profinite.padicAlgClRingObj ℓ⟧)).mapIso
-    ((L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
-      (((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).mapIso
-        ((D(((overRestrictι X I.support.compl).left)_!open⟦
-          Profinite.padicAlgClRingObj ℓ⟧)).mapIso ((ObjectProperty.ι _).mapIso e).symm)))
+  exact (D(((overRestrictι X I.support.compl).left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
+    (deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
+    L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
+    L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
+      ((ObjectProperty.ι _).mapIso e).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
