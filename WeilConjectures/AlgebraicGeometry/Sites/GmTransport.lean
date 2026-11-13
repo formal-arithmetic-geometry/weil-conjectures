@@ -106,23 +106,31 @@ instance isIso_presheafHomRestrict (M : modulesPseudofunctor.obj (.mk (op Y))) (
   rw [presheafHomRestrict_eq]
   infer_instance
 
-set_option maxHeartbeats 600000 in
--- the defeq checks through the pseudofunctor of modules are slow
+-- Prove the compatibility abstractly so that naturality does not unfold module pullbacks.
+private lemma presheafHom_precomp_restrict_naturality
+    {C : Type*} [Category C] (F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat)
+    {S S' : C} (q : S' ⟶ S) (A B : F.obj (.mk (op S))) (P : F.obj (.mk (op S')))
+    (a : P ⟶ (F.map q.op.toLoc).toFunctor.obj A) {T T' : Over S'} (g : T' ⟶ T)
+    (x : (F.presheafHom A B).obj (op ((Over.map q).obj T))) :
+    (F.map T'.hom.op.toLoc).toFunctor.map a ≫
+        (F.overMapCompPresheafHomIso A B q).hom.app (op T')
+          ((F.presheafHom A B).map ((Over.map q).map g).op x) =
+      (F.presheafHom P ((F.map q.op.toLoc).toFunctor.obj B)).map g.op
+        ((F.map T.hom.op.toLoc).toFunctor.map a ≫
+          (F.overMapCompPresheafHomIso A B q).hom.app (op T) x) := by
+  rw [Pseudofunctor.presheafHom_map_comp (F := F)]
+  exact congrArg₂ (fun b c ↦ b ≫ c)
+    (pullHom_map (F := F) a T.hom g.left T'.hom (Over.w g)).symm
+    (NatTrans.naturality_apply (F.overMapCompPresheafHomIso A B q).hom g.op x)
+
 lemma presheafHomRestrict_naturality (M : modulesPseudofunctor.obj (.mk (op Y))) {T T' : Over X}
     (g : T' ⟶ T)
     (x : (modulesPseudofunctor.presheafHom (unitObj Y) M).obj (op ((Over.map f).obj T))) :
     presheafHomRestrict f M T'
         ((modulesPseudofunctor.presheafHom (unitObj Y) M).map ((Over.map f).map g).op x) =
       (modulesPseudofunctor.presheafHom (unitObj X) _).map g.op (presheafHomRestrict f M T x) := by
-  have h := ConcreteCategory.congr_hom
-    ((Pseudofunctor.overMapCompPresheafHomIso modulesPseudofunctor (unitObj Y) M
-      f).hom.naturality g.op) x
-  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, Functor.comp_map, Functor.op_map,
-    Quiver.Hom.unop_op] at h
-  rw [presheafHomRestrict, presheafHomRestrict, Pseudofunctor.presheafHom_map_comp]
-  refine congrArg₂ (fun a b ↦ a ≫ b) ?_ ?_
-  · exact (pullHom_map _ _ _ _ (Over.w g)).symm
-  · exact h
+  exact presheafHom_precomp_restrict_naturality modulesPseudofunctor f (unitObj Y) M
+    (unitObj X) (unitRestrictIso f).inv g x
 
 lemma presheafHomRestrict_smulMor (M : modulesPseudofunctor.obj (.mk (op Y))) (T : Over X)
     (x : (modulesPseudofunctor.presheafHom (unitObj Y) M).obj (op ((Over.map f).obj T)))
@@ -136,8 +144,6 @@ lemma presheafHomRestrict_smulMor (M : modulesPseudofunctor.obj (.mk (op Y))) (T
 
 variable [Etale f]
 
-set_option maxHeartbeats 500000 in
--- the defeq checks through the small étale and pro-étale sites are slow
 /-- **Restriction of `Isom(𝒪, M)`.** The restriction along an étale `f : X ⟶ Y` of the
 `𝔾ₘ`-torsor `Isom(𝒪_Y, M)` is the torsor `Isom(𝒪_X, f^* M)`. -/
 lemma etaleIsoTorsor_restrict_equiv (M : modulesPseudofunctor.obj (.mk (op Y)))
@@ -154,19 +160,11 @@ lemma etaleIsoTorsor_restrict_equiv (M : modulesPseudofunctor.obj (.mk (op Y)))
   refine ⟨Sheaf.Torsor.Iso.ofHom ⟨{
       app U := TypeCat.ofHom (ψ U)
       naturality U V g := ?_ }⟩ fun U a x ↦ ?_⟩
-  · ext x
-    apply ULift.ext
-    apply Subtype.ext
-    change presheafHomRestrict f M (G.obj V.unop)
-        ((modulesPseudofunctor.presheafHom (unitObj Y) M).map ((Over.map f).map
-          (G.map g.unop)).op x.down.1) =
-      (modulesPseudofunctor.presheafHom (unitObj X) _).map (G.map g.unop).op
-        (presheafHomRestrict f M (G.obj U.unop) x.down.1)
+  · apply ConcreteCategory.hom_ext
+    intro x
+    apply etaleIsoTorsorVal_injective
     exact presheafHomRestrict_naturality f M (G.map g.unop) _
-  · apply ULift.ext
-    apply Subtype.ext
-    change presheafHomRestrict f M (G.obj U.unop) (smulMor _ _ ≫ x.down.1) =
-      smulMor _ _ ≫ presheafHomRestrict f M (G.obj U.unop) x.down.1
+  · apply etaleIsoTorsorVal_injective
     exact presheafHomRestrict_smulMor f M _ _ _
 
 end AlgebraicGeometry.Scheme.Modules
