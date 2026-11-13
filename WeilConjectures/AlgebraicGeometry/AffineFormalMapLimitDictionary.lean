@@ -65,6 +65,7 @@ private theorem finite_presentation_module
     moduleSpecΓFunctor.mapIso e
   exact Module.Finite.equiv eP.toLinearEquiv.symm
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The affine equivalence and two natural comparisons require extra elaboration heartbeats.
 /-- The affine dictionary identifies a formal morphism with a completed linear map,

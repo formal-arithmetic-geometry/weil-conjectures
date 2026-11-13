@@ -28,6 +28,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Comparing section maps elaborates the nested resolution and homology transports.
 /-- The base-change map constructed from resolutions is independent of the resolutions

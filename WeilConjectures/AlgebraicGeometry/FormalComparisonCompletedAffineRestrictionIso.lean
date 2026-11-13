@@ -37,6 +37,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- The nested affine-limit and section functors require additional elaboration heartbeats.
 /-- A coherent realization of the canonical comparison is invertible off the
