@@ -259,6 +259,9 @@ private theorem localPieceCostalkModelComplexColimits
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) := by
   infer_instance
 
+set_option profiler true in
+set_option synthInstance.maxHeartbeats 100000 in
+-- Internal module colimits require a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
@@ -305,8 +308,7 @@ theorem condensed_local_piece_costalk_model
         (v : F.obj (DerivedCategory.Q.mapCocone (colimit.cocone N)).pt ≅
           G.obj (colimit.cocone L).pt),
         ∀ s : I, F.map ((DerivedCategory.Q.mapCocone (colimit.cocone N)).ι.app s) ≫ v.hom =
-          (e.hom.app s : F.obj ((N ⋙ DerivedCategory.Q).obj s) ⟶ G.obj (L.obj s)) ≫
-            G.map ((colimit.cocone L).ι.app s) := by
+          e.hom.app s ≫ G.map ((colimit.cocone L).ι.app s) := by
   /- Proof: choose the exceptional right adjoint H₀ of exact closed pushforward and
   compose it with exact open restriction j*. Its exact left adjoint is i_*j_!.
   Their ordinary derived adjunction identifies the two shifted Hom functors.
