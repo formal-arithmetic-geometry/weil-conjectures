@@ -220,6 +220,37 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.ConstantCompletion
 
+-- Naturality can be checked through faithful underlying functors, without unfolding
+-- the module functors or the chosen lifts of underlying morphisms.
+private theorem supplied_homEquiv_naturality
+    {C₁ C₂ C₃ D₁ D₂ : Type*}
+    [Category C₁] [Category C₂] [Category C₃] [Category D₁] [Category D₂]
+    (I : C₁ ⥤ C₂) (S : C₃ ⥤ C₂) (G : C₃ ⥤ C₁)
+    (U : C₁ ⥤ D₁) (V : C₂ ⥤ D₂) [U.Faithful]
+    {L : D₁ ⥤ D₂} {R : D₂ ⥤ D₁} (adj : L ⊣ R)
+    (eI : I ⋙ V ≅ U ⋙ L) (eP : G ⋙ U ≅ (S ⋙ V) ⋙ R)
+    (E : ∀ M H, (I.obj M ⟶ S.obj H) ≃ (M ⟶ G.obj H))
+    (hE : ∀ M H a, U.map (E M H a) ≫ eP.hom.app H =
+      adj.homEquiv _ _ (eI.inv.app M ≫ V.map a)) :
+    (∀ {M N} (a : M ⟶ N) H b, E M H (I.map a ≫ b) = a ≫ E N H b) ∧
+    (∀ M {H H'} a (b : H ⟶ H'), E M H' (a ≫ S.map b) = E M H a ≫ G.map b) := by
+  constructor
+  · intro M N a H b
+    apply U.map_injective
+    apply (cancel_mono (eP.hom.app H)).mp
+    rw [hE, U.map_comp, Category.assoc, hE, V.map_comp]
+    have hn : eI.inv.app M ≫ V.map (I.map a) =
+        L.map (U.map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
+    rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
+  · intro M H H' a b
+    apply U.map_injective
+    apply (cancel_mono (eP.hom.app H')).mp
+    rw [hE, U.map_comp, Category.assoc]
+    have hn : U.map (G.map b) ≫ eP.hom.app H' =
+        eP.hom.app H ≫ R.map (V.map (S.map b)) := eP.hom.naturality b
+    rw [hn, ← Category.assoc, hE, V.map_comp,
+      ← Category.assoc, adj.homEquiv_naturality_right]
+
 open SheafOfModules SheafOfModules.GeometricConstruction in
 private theorem supplied_module_add_spec
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -349,14 +380,6 @@ private theorem supplied_module_homEquiv
     exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
   exact ⟨B', hB⟩
 
-open SheafOfModules SheafOfModules.GeometricConstruction in
-private theorem supplied_restrictScalars_map
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    {R S : Sheaf J CommRingCat.{u}} (c : R ⟶ S)
-    {M N : SheafOfModules.{u} (base S)} (b : M ⟶ N) :
-    (mset R).map ((restrictScalars ((sheafCompose J
-      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = (mset S).map b := rfl
-
 -- Construct the adjunction from the normalized module Hom equivalence.
 open SheafOfModules SheafOfModules.GeometricConstruction in
 set_option backward.defeqAttrib.useBackward true in
@@ -378,24 +401,9 @@ private theorem supplied_module_adjunction
   let eI := I.moduleUnderlying
   let eP := f.underlying
   obtain ⟨B', hB⟩ := supplied_module_homEquiv f RI I c hc
-  have hBL {M N} (a : M ⟶ N) H b :
-      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
-    apply (mset B).map_injective
-    apply (cancel_mono (eP.hom.app H)).mp
-    rw [hB, (mset B).map_comp, Category.assoc, hB, (mset RI).map_comp]
-    have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
-        f.inverse.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc, f.adj.homEquiv_naturality_left]
-  have hBR M {H H'} a (b : H ⟶ H') :
-      B' M H' (a ≫ (restrictScalars ((sheafCompose J
-        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = B' M H a ≫ f.modules.map b := by
-    apply (mset B).map_injective
-    apply (cancel_mono (eP.hom.app H')).mp
-    rw [hB, (mset B).map_comp, Category.assoc]
-    have hn : (mset B).map (f.modules.map b) ≫ eP.hom.app H' =
-        eP.hom.app H ≫ f.direct.map ((mset A).map b) := eP.hom.naturality b
-    rw [hn, ← Category.assoc, hB, (mset RI).map_comp]
-    rw [supplied_restrictScalars_map, ← Category.assoc, f.adj.homEquiv_naturality_right]
+  obtain ⟨hBL, hBR⟩ := supplied_homEquiv_naturality I.modules
+    (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map c))
+    f.modules (mset B) (mset RI) f.adj eI eP B' hB
   let T := I.modules ⋙ tensorFunctor c
   let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ f.modules.obj H) :=
     fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
