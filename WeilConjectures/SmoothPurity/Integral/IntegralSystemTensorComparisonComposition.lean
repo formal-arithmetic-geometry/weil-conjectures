@@ -372,7 +372,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E f P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    run_tac
+    run_tac Lean.Elab.Tactic.withMainContext do
       let hs ← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `hs)
       let actual ← Lean.instantiateMVars (← Lean.Meta.inferType (.fvar hs))
       let expected ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
