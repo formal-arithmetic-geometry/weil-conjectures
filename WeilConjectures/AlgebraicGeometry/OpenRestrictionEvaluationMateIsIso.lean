@@ -100,8 +100,6 @@ private theorem mate_isIso_of_projection
   rw [heq]
   exact b.bijective
 
-set_option profiler true in
--- The canonical-family predicate unfolds the recorded sheaf tensor instances.
 set_option linter.style.haveILetI false in
 /-- The mate of restricted evaluation is invertible for any strong monoidal
 structure on the exact restriction functor, with independently specified localizations.
@@ -171,6 +169,7 @@ theorem openRestriction_evaluationMate_isIso (X : Scheme.{u})
     Classical.choose_spec (exists_canonicalDerivedTensorHom U.toScheme)
   intro m K N
   letI : R.Monoidal := m
+  -- Eliminate the witnesses without normalizing the concrete derived functors.
   refine (exists_openExtension_projectionFormula X U m).elim fun J hJ ↦ ?_
   refine hJ.elim fun adj hp ↦ ?_
   have hi (A : schemeDerivedCategory U.toScheme) :
