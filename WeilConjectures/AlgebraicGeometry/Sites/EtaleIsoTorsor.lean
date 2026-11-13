@@ -72,9 +72,14 @@ noncomputable def etaleIsoTorsor [SheafOfModules.IsInvertible.{u, u, u} (L : X.M
       ≫ smulMor _ ((Additive.toMul b.down : Γ(V.unop.left, ⊤)ˣ) : Γ(V.unop.left, ⊤)) ≫ t.down.1
     erw [toMul_add, Units.val_mul, mul_comm, smulMor_mul]
     exact Category.assoc _ _ _
-  map_vadd f a t := by
+  map_vadd {U V} f a t := by
     apply ULift.ext
     apply Subtype.ext
+    change (etaleHom (unitObj X) L).map f
+        (smulMor _ (Additive.toMul a.down : Γ(U.unop.left, ⊤)) ≫ t.down.1) =
+      smulMor _ (Additive.toMul (X.gmPresheaf.map f a).down : Γ(V.unop.left, ⊤)) ≫
+        (etaleHom (unitObj X) L).map f t.down.1
+    rw [gmPresheaf_map_apply f.unop a]
     exact presheafHom_map_smulMor_comp (unitObj X) L ((toProEt X ⋙ ProEt.forget X).map f.unop) _
       t.down.1
   bijective_vadd V t := by

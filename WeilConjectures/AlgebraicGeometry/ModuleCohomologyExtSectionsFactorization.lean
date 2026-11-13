@@ -50,6 +50,7 @@ private theorem moduleComparisonEquiv_apply_of_component
   rw [h]
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.

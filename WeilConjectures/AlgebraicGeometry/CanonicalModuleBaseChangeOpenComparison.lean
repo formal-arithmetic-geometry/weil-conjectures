@@ -27,6 +27,7 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- The categorical composition below needs additional elaboration heartbeats.
 /-- Restriction identifies the module base-change arrow with the arrow of the
