@@ -29,6 +29,7 @@ open CategoryTheory MonoidalCategory TopologicalSpace AlgebraicGeometry
 
 namespace CochainComplex
 
+set_option profiler true in
 private theorem tensorComparison_iso_of_degrees
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [MonoidalCategory C] [MonoidalCategory D]
@@ -71,7 +72,7 @@ private theorem tensorComparison_iso_of_degrees
             (e F' K').hom =
           (e F K).hom ≫ HomologicalComplex.mapBifunctorMap
             ((T.mapHomologicalComplex (.up ℤ)).map f)
-          ((T.mapHomologicalComplex (.up ℤ)).map g) (curriedTensor _) (.up ℤ) := by
+            ((T.mapHomologicalComplex (.up ℤ)).map g) (curriedTensor _) (.up ℤ) := by
   have h_ext (F K : CochainComplex C ℤ) (n : ℤ)
       (M : D)
       (a b : ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).X n ⟶ M)
@@ -105,6 +106,7 @@ private theorem tensorComparison_iso_of_degrees
     _ = T.map ((f.f p ⊗ₘ g.f q) ≫ HomologicalComplex.ιMapBifunctor F' K'
         (curriedTensor _) (.up ℤ) p q n hpq) ≫ (e F' K' n).hom := by
       rw [← Functor.map_comp_assoc, HomologicalComplex.ι_mapBifunctorMap]
+      simp only [tensorHom_def, Category.assoc]
       rfl
     _ = T.map (f.f p ⊗ₘ g.f q) ≫ (φ (F'.X p) (K'.X q)).hom ≫
         HomologicalComplex.ιMapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F')
@@ -144,6 +146,7 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rw [Functor.map_add, Functor.map_add]
     rfl
 
+set_option profiler true in
 /-- (blueprint: lem-pc-stalk-tensor-complex) Stacks Project, Cohomology, Lemma 06YB:
 there is an isomorphism from the stalk of the total tensor complex to the total tensor
 complex of the stalks, natural in both complexes. Both total complexes use direct sums
@@ -168,8 +171,8 @@ theorem exists_stalk_tensor_complex_iso :
             (e F' K').hom =
           (e F K).hom ≫ HomologicalComplex.mapBifunctorMap
             ((S).map f) ((S).map g) (curriedTensor _) (.up ℤ) := by
-  obtain ⟨φ, _, hφ⟩ := SheafOfModules.stalkTensorIso X x
-  obtain ⟨e, he⟩ := exists_stalk_tensor_degree_iso X x φ
+  refine (SheafOfModules.stalkTensorIso X x).elim fun φ hφ ↦ ?_
+  refine (exists_stalk_tensor_degree_iso X x φ).elim fun e he ↦ ?_
   let := stalk_additive X x
   let : ∀ F K : CochainComplex (SheafOfModules.{u₁} O) ℤ,
       HomologicalComplex.HasMapBifunctor F K (curriedTensor _) (.up ℤ) :=
@@ -177,7 +180,7 @@ theorem exists_stalk_tensor_complex_iso :
   let : ∀ F K : CochainComplex (ModuleCat.{u₁} (X.presheaf.stalk x)) ℤ,
       HomologicalComplex.HasMapBifunctor F K (curriedTensor _) (.up ℤ) :=
     fun F K ↦ inferInstance
-  exact tensorComparison_iso_of_degrees (RingedSpace.moduleStalkFunctor X x) φ hφ e he
-    (stalk_tensor_degree_differential X x φ hφ e he)
+  exact tensorComparison_iso_of_degrees (RingedSpace.moduleStalkFunctor X x) φ hφ.2 e he
+    (stalk_tensor_degree_differential X x φ hφ.2 e he)
 
 end CochainComplex

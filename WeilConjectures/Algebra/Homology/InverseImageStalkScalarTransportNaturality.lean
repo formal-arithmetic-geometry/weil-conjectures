@@ -77,9 +77,11 @@ private theorem explicitStalkMap_naturality
         (((TopCat.Sheaf.inverseImageConstruction f C).map a).hom) := by
   apply TopCat.Presheaf.stalk_hom_ext
   intro V hx
-  rw [← Category.assoc, TopCat.Presheaf.stalkFunctor_map_germ, Category.assoc,
-    explicitStalkMap_germ, ← Category.assoc, explicitStalkMap_germ, Category.assoc,
-    TopCat.Presheaf.stalkFunctor_map_germ, ← Category.assoc]
+  simp only [← Category.assoc]
+  rw [TopCat.Presheaf.stalkFunctor_map_germ, explicitStalkMap_germ]
+  simp only [Category.assoc]
+  rw [explicitStalkMap_germ, TopCat.Presheaf.stalkFunctor_map_germ]
+  simp only [← Category.assoc]
   congr 1
   exact congrArg (fun q ↦ q.hom.app (Opposite.op V))
     ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
