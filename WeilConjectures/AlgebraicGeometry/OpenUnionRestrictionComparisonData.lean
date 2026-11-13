@@ -81,7 +81,6 @@ private theorem directComparison (X : Scheme.{u}) {A Y : X.Opens} (i : A ⟶ Y)
 
 attribute [local irreducible] Functor.mapDerivedCategory transportDerived
 
-set_option profiler true in
 /-- Comparison equivalences and restriction isomorphisms on the three inverse image opens.
 Source: Stacks Project Tag 08BW, canonical restriction diagram.
 (blueprint: lem-sc-open-union-restriction-comparison-data).
@@ -140,6 +139,7 @@ theorem open_union_restriction_comparison_data
   classical
   rename_i dX dW dV dWV dY
   intro PW PV U T
+  -- Bind each witness before elimination to avoid generalizing the dependent goal.
   have hO := nonempty_derivedOpenLocalization (W ⊔ V).toScheme
   obtain ⟨hO⟩ := hO
   let := hO

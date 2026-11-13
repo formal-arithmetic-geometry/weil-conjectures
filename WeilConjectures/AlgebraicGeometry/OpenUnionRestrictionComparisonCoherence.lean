@@ -31,7 +31,6 @@ private theorem cancel_mapped_iso_pasting
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- Supplied direct restriction comparisons descend to commuting overlap comparisons.
 Source: Stacks Project Tag 08BW, cohomology.tex, lemma-mayer-vietoris-hom;
 Tag 08BT, lemma-adjoint-lower-shriek-restrict.
@@ -175,9 +174,8 @@ theorem open_union_restriction_comparison_coherence
       (congrArg (fun e ↦ e.hom.app G) haW)
     simp only [Functor.isoWhiskerLeft_hom, Iso.trans_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.whiskerLeft_app] at hc
-    have h : cW.hom.app (RU.obj (L.obj G)) ≫ bWR.hom.app G = bWL.hom.app G := by
-      rw [hc]
-      simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    have h := congrArg (fun f ↦ f ≫ bWR.hom.app G) hc
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at h
     simp only [bWR, bWL, rW, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,
@@ -189,9 +187,8 @@ theorem open_union_restriction_comparison_coherence
       (congrArg (fun e ↦ e.hom.app G) haV)
     simp only [Functor.isoWhiskerLeft_hom, Iso.trans_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.whiskerLeft_app] at hc
-    have h : cV.hom.app (RT.obj (L.obj G)) ≫ bVR.hom.app G = bVL.hom.app G := by
-      rw [hc]
-      simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    have h := congrArg (fun f ↦ f ≫ bVR.hom.app G) hc
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at h
     simp only [bVR, bVL, rV, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,

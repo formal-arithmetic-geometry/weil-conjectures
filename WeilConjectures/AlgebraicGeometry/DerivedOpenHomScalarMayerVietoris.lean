@@ -125,7 +125,6 @@ private theorem boundary_of_adjunction_triangle
     change eW (eO.symm (aO s γ) ≫ d) = aW s (eW (eO.symm γ ≫ d))
     rw [hn, Category.assoc, hw]
 
-set_option profiler true in
 /-- The boundary for Hom on an open union commutes with global scalar endomorphisms.
 Its preceding term is Hom into the negative shift on the overlap. No compactness,
 perfectness, quasi-coherence or support hypothesis is required.
@@ -174,6 +173,7 @@ theorem derived_open_hom_scalar_mayer_vietoris
   let bV := (adj V).homEquiv A ((R V).obj (E'⟦k⟧))
     (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β₀)
   let b := biprod.lift bU bV
+  -- Bind the witnesses first to avoid generalizing these expressions through the goal.
   have htriangle := derived_open_union_adjunction_triangle X U V G adj E' k
   obtain ⟨d, c, hT⟩ := htriangle
   have hbU (f : E ⟶ A) :
