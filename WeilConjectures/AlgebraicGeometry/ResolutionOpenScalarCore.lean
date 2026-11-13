@@ -27,6 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the two exact homology calculations needs additional elaboration.
 /-- The fixed comparison intertwines the scalar endomorphisms.
 Source: Stacks Project, Tags 01E1 and 01E4.

@@ -69,6 +69,7 @@ lemma le_of_image_preimage_ι_comp {W W' : X.Opens} (h : W' ≤ W) (V : T.Opens)
   exact inf_le_inf_left _ h
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- composing the restriction maps unfolds the sections of pushforwards and restrictions
 lemma pushforwardRestrictMapApp_app {W W' : X.Opens} (h : W' ≤ W) (M : X.Modules)
     (V : T.Opens) :
