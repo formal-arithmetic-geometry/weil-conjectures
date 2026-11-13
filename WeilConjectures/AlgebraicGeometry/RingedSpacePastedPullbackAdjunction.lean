@@ -131,11 +131,21 @@ private theorem pasted_adjunction_unit_fac
       Q₀.map (ag.unit.app K) ≫ βg.app (Pg.obj K))
     (hf : ∀ K, df.unit.app (Q₁.obj K) ≫ Rf.map (αf.app K) =
       Q₁.map (af.unit.app K) ≫ βf.app (Pf.obj K)) (K : C₀) :
-    (dg.comp df).unit.app (Q₀.obj K) ≫
-        (Rf ⋙ Rg).map (Lf.map (αg.app K) ≫ αf.app (Pg.obj K)) =
-      Q₀.map ((ag.comp af).unit.app K) ≫
-        (βg.app (Ff.obj (Pf.obj (Pg.obj K))) ≫ Rg.map (βf.app (Pf.obj (Pg.obj K)))) := by
-  simp only [Adjunction.comp_unit_app, Functor.comp_map, Functor.map_comp, Category.assoc]
+    let α : Q₀ ⋙ (Lg ⋙ Lf) ⟶ (Pg ⋙ Pf) ⋙ Q₂ :=
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight αg Lf ≫
+        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Pg αf ≫
+        (Functor.associator _ _ _).inv
+    let β : (Ff ⋙ Fg) ⋙ Q₀ ⟶ Q₂ ⋙ (Rf ⋙ Rg) :=
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Ff βg ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight βf Rg ≫
+        (Functor.associator _ _ _).hom
+    (dg.comp df).unit.app (Q₀.obj K) ≫ (Rf ⋙ Rg).map (α.app K) =
+      Q₀.map ((ag.comp af).unit.app K) ≫ β.app ((Pg ⋙ Pf).obj K) := by
+  intro α β
+  simp only [Adjunction.comp_unit_app, α, β, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.associator_hom_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
+    Category.comp_id, Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc]
   have hn := df.unit.naturality (αg.app K)
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hn
   have hb := βg.naturality (af.unit.app (Pg.obj K))
@@ -254,14 +264,10 @@ theorem exists_pasted_tensorPullback_adjunction
       Functor.whiskerLeft_app, Functor.comp_obj, Category.id_comp, Category.comp_id]
     exact hi
   · intro K
-    simpa only [α, G, L, R, β, NatTrans.comp_app,
-      Functor.associator_inv_app, Functor.associator_hom_app,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
-      Category.comp_id, Functor.comp_obj, Category.assoc] using
-      pasted_adjunction_unit_fac DerivedCategory.Qh DerivedCategory.Qh DerivedCategory.Qh
-        (ag.mapHomotopyCategory (.up ℤ)) (af.mapHomotopyCategory (.up ℤ)) dg df
-        αg αf (moduleDirectImage g).rightDerivedFunctorUnit
-        (moduleDirectImage f).rightDerivedFunctorUnit hdg hdf K
+    exact pasted_adjunction_unit_fac DerivedCategory.Qh DerivedCategory.Qh DerivedCategory.Qh
+      (ag.mapHomotopyCategory (.up ℤ)) (af.mapHomotopyCategory (.up ℤ)) dg df
+      αg αf (moduleDirectImage g).rightDerivedFunctorUnit
+      (moduleDirectImage f).rightDerivedFunctorUnit hdg hdf K
 
 end
 
