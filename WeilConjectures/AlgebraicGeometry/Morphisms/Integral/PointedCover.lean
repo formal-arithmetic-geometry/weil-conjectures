@@ -49,14 +49,26 @@ lemma Scheme.Hom.appTopPoint_comp {Ω : Type u} [Field Ω] {Z Z' : Scheme.{u}}
     (p ≫ g).appTopPoint = p.appTopPoint.comp g.appTop.hom := by
   simp [Scheme.Hom.appTopPoint]
 
+-- Restrict a point of a base-changed algebra before specializing the coefficient rings.
+private lemma tensorPoint_restrict_comp {R A C D Ω : Type*}
+    [CommRing R] [CommRing A] [CommRing C] [CommRing D] [CommRing Ω]
+    [Algebra R A] [Algebra R C] [Algebra A D]
+    (e : A ⊗[R] C ≃ₐ[A] D) (χ : D →+* Ω) (ψ : A →+* Ω)
+    (hχ : χ.comp (algebraMap A D) = ψ) :
+    (χ.comp (e.toAlgHom.toRingHom.comp
+      (Algebra.TensorProduct.includeRight (R := R) (A := A)).toRingHom)).comp
+        (algebraMap R C) = ψ.comp (algebraMap R A) := by
+  ext b
+  change χ (e (Algebra.TensorProduct.includeRight (algebraMap R C b))) = _
+  rw [AlgHom.commutes, IsScalarTower.algebraMap_apply R A (A ⊗[R] C),
+    AlgEquiv.commutes, ← RingHom.comp_apply, hχ]
+  rfl
+
 namespace Scheme.Hom.Nbhd
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   {y : Spec (.of Ω) ⟶ Y}
 
-set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- the descent and the split neighbourhood are constructed in a single proof
 /-- **Pointed lifting along an integral morphism.** -/
 theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
     {J : Type*} (P : J → StandardEtalePair Γ(pullback c₀.1.hom f, ⊤))
@@ -186,11 +198,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
       (Algebra.TensorProduct.includeRight (R := B₁) (A := B)).toRingHom)
   have hσ (t'' : GeometricFiber gU c₀.2.left) : (σ t'').comp (algebraMap B₁ _) =
       (basePt f c₀ (L t'')).appTopPoint.comp (algebraMap B₁ B) := by
-    ext b
-    change χ _ _ (e₁ (j t'') (Algebra.TensorProduct.includeRight (algebraMap B₁ _ b))) = _
-    rw [AlgHom.commutes, IsScalarTower.algebraMap_apply B₁ B (B ⊗[B₁] _), AlgEquiv.commutes,
-      ← RingHom.comp_apply, hχ]
-    rfl
+    exact tensorPoint_restrict_comp (e₁ (j t'')) _ _ (hχ _ _)
   -- the inclusion `B₁ ⊆ B₂`
   let ι₁₂ : B₁ →+* B₂ := (Subalgebra.inclusion hB₁₂).toRingHom
   have hι₁₂ : (algebraMap B₂ B).comp ι₁₂ = algebraMap B₁ B := rfl
@@ -284,7 +292,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
       exact (s₀.disjoint _ _ hne).le_bot ⟨s₀.mem (img t), h₁⟩
     subst hl
     refine ⟨hmL t, ?_⟩
-    set j₀ := j (img t) with hj₀
+    let j₀ := j (img t)
     -- the points `L (img t)` and `t` agree on `B₂`
     have hB₂ : (basePt f c₀ (L (img t))).appTopPoint.comp (algebraMap B₂ B) =
         (basePt f c₀ t).appTopPoint.comp (algebraMap B₂ B) := by
@@ -298,11 +306,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
         (Algebra.TensorProduct.includeRight (R := B₁) (A := B)).toRingHom)
     have hσt' : σt.comp (algebraMap B₁ _) =
         (basePt f c₀ t).appTopPoint.comp (algebraMap B₁ B) := by
-      ext b
-      change χ _ _ (e₁ j₀ (Algebra.TensorProduct.includeRight (algebraMap B₁ _ b))) = _
-      rw [AlgHom.commutes, IsScalarTower.algebraMap_apply B₁ B (B ⊗[B₁] _), AlgEquiv.commutes,
-        ← RingHom.comp_apply, hχ]
-      rfl
+      exact tensorPoint_restrict_comp (e₁ j₀) _ _ (hχ _ _)
     have hσt : σ (img t) = σt := by
       let : Algebra B₁ Ω := ((basePt f c₀ t).appTopPoint.comp (algebraMap B₁ B)).toAlgebra
       let φ₁ : (Q₁ j₀).Ring →ₐ[B₁] Ω :=
