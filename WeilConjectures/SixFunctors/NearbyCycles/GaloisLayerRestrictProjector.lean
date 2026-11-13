@@ -171,7 +171,6 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option maxHeartbeats 1600000 in
 -- the pullback exchanges of the three layers are large terms
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
