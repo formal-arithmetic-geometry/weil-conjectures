@@ -68,13 +68,8 @@ private theorem tensorRight_additive_reconstruction (N : 𝒜) :
         Functor.LaxMonoidal.μ S M'.val N.val) =
       (c.inv.app M ⊗ₘ c.inv.app N) ≫ Functor.LaxMonoidal.μ S M.val N.val ≫
         S.map (f.val ▷ N.val)
-    rw [← Functor.LaxMonoidal.μ_natural_left, ← Category.assoc, ← Category.assoc]
-    congr 1
-    rw [← tensorHom_id, ← tensorHom_id, tensorHom_comp_tensorHom,
-      tensorHom_comp_tensorHom]
-    simp only [Category.id_comp]
-    rw [h]
-    erw [Category.comp_id]
+    rw [← Functor.LaxMonoidal.μ_natural_left, ← Category.assoc, ← Category.assoc,
+      whiskerRight_comp_tensorHom, tensorHom_comp_whiskerRight, h]
   refine ⟨?_⟩
   intro M M' f g
   apply (cancel_mono (SheafOfModules.tensorObjIsoSheafification (R := R) M' N).hom).1
