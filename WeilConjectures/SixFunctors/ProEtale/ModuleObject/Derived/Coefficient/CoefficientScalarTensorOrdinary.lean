@@ -214,6 +214,7 @@ private theorem coefficient_pure_smul_unit (Z : Scheme.{u})
   exact hh
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Comparing the two normalized tensor structures involves several equivalence projections.
 /-- The ordinary scalar tensor square under the section equivalence.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
