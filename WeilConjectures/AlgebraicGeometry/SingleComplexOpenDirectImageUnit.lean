@@ -161,8 +161,7 @@ private theorem derived_square_unit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- The comparison unfolds several derived universal-property constructions.
+set_option profiler true in
 /-- Evaluating the constructed derived direct-image comparison on its right-derived
 units gives the underived sectionwise comparison on the homotopy category.
 Source: Stacks Project, Tags 08FE and 08BS.

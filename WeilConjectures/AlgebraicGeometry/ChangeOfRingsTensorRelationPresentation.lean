@@ -34,8 +34,7 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-set_option maxHeartbeats 800000 in
--- The nested tensor and restriction-of-scalars types need extra elaboration heartbeats.
+set_option profiler true in
 /-- The tensor relation presentation, without any quasi-coherence hypotheses.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
 Sheaves, Lemma 0089 (sheafification universal property).
