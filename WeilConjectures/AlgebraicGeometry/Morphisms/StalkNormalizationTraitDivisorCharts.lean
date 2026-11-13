@@ -175,8 +175,6 @@ private theorem smooth_trait_affine_generic_open_over
 
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Elaborating the nested pullbacks and product root algebras exceeds the default budget.
 /-- A tame affine chart using the pullback of an actual trait uniformizer.
 
 Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH.
@@ -372,7 +370,7 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
     rw [Scheme.Hom.comp_apply, hz, hy]
   · change (E.hom ≫ α₀.hom) ≫ r = pullback.snd n φ'
     rw [Category.assoc, hα₀]
-    simp [E, pullback.map]
+    simp only [E, asIso_hom, pullback.map_snd, Category.id_comp]
 
 
 end AlgebraicGeometry.Scheme

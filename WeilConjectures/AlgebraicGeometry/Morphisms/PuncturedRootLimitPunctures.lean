@@ -28,8 +28,6 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Comparing the iterated over-category cones needs additional elaboration heartbeats.
 /-- Punctured root charts commute with cofiltered affine ring colimits over R.
 
 Source: Stacks Project, Tags 05N9 and 01YW; universal properties of polynomial
@@ -91,10 +89,10 @@ theorem punctured_root_colimit_continuity
         rw [← Spec.map_comp]
         congr 1
         simpa using (a.naturality h.op).symm }
-  let cE := Scheme.Spec.mapCone (coneRightOpOfCocone c₀)
+  let cE : Cone E := Scheme.Spec.mapCone (coneRightOpOfCocone c₀)
   have hcE : IsLimit cE := isLimitOfPreserves Scheme.Spec
     (isLimitConeRightOpOfCocone F hc₀)
-  let cH := cE.extend (Spec.map e₀.hom)
+  let cH : Cone E := cE.extend (Spec.map e₀.hom)
   have hcH : IsLimit cH := hcE.extendIso (Spec.map e₀.hom)
   have hlegs : ∀ j, cH.π.app j ≫ s.app j = Spec.map b := by
     intro j
@@ -103,12 +101,12 @@ theorem punctured_root_colimit_continuity
     rw [← Spec.map_comp, ← Spec.map_comp]
     congr 1
     simpa only [Category.assoc] using ha (Opposite.op j)
-  let L := Over.lift E s
-  let cL := Over.liftCone E s cH (Spec.map b) hlegs
+  let L : I ⥤ Over (Spec R) := Over.lift E s
+  let cL : Cone L := Over.liftCone E s cH (Spec.map b) hlegs
   have hcL : IsLimit cL := Over.isLimitLiftCone E s cH (Spec.map b) hlegs hcH
   let P := Over.pullback k
-  let D := L ⋙ P ⋙ Over.forget V₀.toScheme
-  let c := (P ⋙ Over.forget V₀.toScheme).mapCone cL
+  let D : I ⥤ Scheme.{u} := L ⋙ P ⋙ Over.forget V₀.toScheme
+  let c : Cone D := (P ⋙ Over.forget V₀.toScheme).mapCone cL
   have hc : IsLimit c := isLimitOfPreserves (P ⋙ Over.forget V₀.toScheme) hcL
   let t : D ⟶ (Functor.const I).obj (Spec R) :=
     { app := fun j => pullback.fst (s.app j) k ≫ s.app j
@@ -126,26 +124,28 @@ theorem punctured_root_colimit_continuity
         rw [hs'] }
   have hV₀ : IsAffine V₀.toScheme := IsAffineOpen.Spec_basicOpen _
   obtain ⟨e, he⟩ := punctured_root_base_change R H f n b
-  refine ⟨D, c, t, ⟨hc⟩, ?_, e, ?_, ?_⟩
+  refine ⟨D, c, t, ⟨hc⟩, ?_, ?_⟩
   · intro j
     change IsAffine (pullback (s.app j) k)
     change IsAffine (pullback (Spec.map (a.app (Opposite.op j))) k)
     exact Pullback.isAffine_of_isAffine_isAffine_isAffine _ _
-  · intro j
-    change e.hom ≫
-      pullback.lift (pullback.fst (Spec.map b) k ≫ cH.π.app j)
-        (pullback.snd (Spec.map b) k) _ ≫
-      (pullback.fst (s.app j) k ≫ s.app j) = _
-    simp only [Category.assoc, pullback.lift_fst_assoc]
-    rw [hlegs, ← Category.assoc, he]
-    simp only [Category.assoc]
-  · intro j
-    obtain ⟨d, hd⟩ := punctured_root_base_change R (F.obj (Opposite.op j)) f n
-      (a.app (Opposite.op j))
-    refine ⟨d, ?_⟩
-    change d.hom ≫ pullback.fst (s.app j) k ≫ s.app j = _
-    rw [← Category.assoc, hd]
-    simp only [Category.assoc]
-    rfl
+  · refine ⟨e, ?_, ?_⟩
+    · intro j
+      change e.hom ≫
+        pullback.lift (pullback.fst (Spec.map b) k ≫ cH.π.app j)
+          (pullback.snd (Spec.map b) k) _ ≫
+        (pullback.fst (s.app j) k ≫ s.app j) = _
+      simp only [Category.assoc, pullback.lift_fst_assoc]
+      rw [hlegs, ← Category.assoc, he]
+      simp only [Category.assoc]
+    · intro j
+      obtain ⟨d, hd⟩ := punctured_root_base_change R (F.obj (Opposite.op j)) f n
+        (a.app (Opposite.op j))
+      refine ⟨d, ?_⟩
+      change d.hom ≫ pullback.fst (s.app j) k ≫ s.app j = _
+      rw [← Category.assoc, hd]
+      simp only [Category.assoc]
+      rfl
+
 
 end AlgebraicGeometry.Scheme

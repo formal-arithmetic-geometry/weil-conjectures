@@ -76,8 +76,6 @@ private theorem root_local {R : Type u} [CommRing R] [IsLocalRing R]
   exact (hmem M hM q).trans (hmem P hP q).symm
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- The dependent normalization stalks and localization transport need this elaboration budget.
 /-- The geometric normal form, retaining the actual local root algebra and a uniformizer
 of the auxiliary section trait. No maximal-ideal formula for the root algebra and no
 integer-valued valuation are asserted here.
@@ -167,12 +165,13 @@ theorem GaloisCover.stalk_normalization_trait_section_root_presentation {S C : S
       (inferInstance : QuasiCompact U.ι)
   dsimp only
   intro hn x hx
-  obtain ⟨R, hR, f, e, he, hf, P, hP, β, hβlocal, hβflat, hJ,
-      A, hA, hAtrait, K, hK, hAK, hfrac, ϖ, π, b, hϖ, hπ, g, hg, hw⟩ :=
-    GaloisCover.stalk_normalization_trait_section_localized_root_chart
+  have hchart := GaloisCover.stalk_normalization_trait_section_localized_root_chart
       (S := S) (C := C) (Cη := Cη)
       c σ hσ G hG q j hCη sη hsj Z U jU PA ψ hjU hψ s hs hmin hdvr
-      hn x hx
+  dsimp only at hchart
+  have hchartx := hchart hn x hx
+  obtain ⟨R, hR, f, e, he, hf, P, hP, β, hβlocal, hβflat, hJ, hsection⟩ := hchartx
+  obtain ⟨A, hA, hAtrait, K, hK, hAK, hfrac, ϖ, π, b, hϖ, hπ, g, hg, hw⟩ := hsection
   let := hR
   let p := (Polynomial.X : Polynomial R) ^ e - Polynomial.C f
   let D := AdjoinRoot p
