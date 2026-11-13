@@ -94,15 +94,15 @@ private theorem inverseMate_unit
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     (a : L ⊣ R) (b : L' ⊣ R') (E : A ⥤ C) (F : B ⥤ D)
     (d : R ⋙ E ≅ F ⋙ R')
-    [IsIso ((mateEquiv a b).symm d.hom).natTrans] (N : A) :
+    [IsIso ((mateEquiv a b).symm d.hom)] (N : A) :
     E.map (a.unit.app N) ≫ d.hom.app (L.obj N) ≫
-      R'.map ((asIso ((mateEquiv a b).symm d.hom).natTrans).inv.app N) =
+      R'.map ((asIso ((mateEquiv a b).symm d.hom)).inv.app N) =
         b.unit.app (E.obj N) := by
   rw [← Category.assoc, unit_mateEquiv_symm a b d.hom N, Category.assoc,
     ← R'.map_comp]
   change b.unit.app (E.obj N) ≫ R'.map
-    ((asIso ((mateEquiv a b).symm d.hom).natTrans).hom.app N ≫
-      (asIso ((mateEquiv a b).symm d.hom).natTrans).inv.app N) = _
+    ((asIso ((mateEquiv a b).symm d.hom)).hom.app N ≫
+      (asIso ((mateEquiv a b).symm d.hom)).inv.app N) = _
   rw [Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
@@ -121,7 +121,7 @@ theorem compactSupportOrdinaryOpenMate_isIso
         (compactSupportSystemQuotient l E) j)
       (ProEtale.StrictTower.moduleJAdj (compactSupportSystemLevel l E n) j)).symm
       (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
-        (compactSupportSystemQuotient l E) j n).hom).natTrans := by
+        (compactSupportSystemQuotient l E) j n).hom) := by
   exact ProEtale.VaryingRing.ordinaryOpenMateIso (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) j n
 
@@ -140,7 +140,7 @@ def compactSupportOrdinaryOpenEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
   have := compactSupportOrdinaryOpenMate_isIso l E j n
   exact (asIso ((mateEquiv (ProEtale.VaryingRing.moduleJAdj R q j)
       (ProEtale.StrictTower.moduleJAdj (R n) j)).symm
-        (ProEtale.VaryingRing.moduleEvalG R q j n).hom).natTrans).symm ≪≫
+        (ProEtale.VaryingRing.moduleEvalG R q j n).hom)).symm ≪≫
     Functor.isoWhiskerLeft _
       (compactSupportOpenModel j (Padic.coefficientExtensionRing l E (n + 1)))
 
@@ -182,7 +182,7 @@ private def nativeOpenEval {X Z : Scheme.{u}} (j : X ⟶ Z)
       (compactSupportSystemQuotient l E) j)
     (ProEtale.StrictTower.moduleJAdj (compactSupportSystemLevel l E n) j)).symm
     (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j n).hom).natTrans).symm
+      (compactSupportSystemQuotient l E) j n).hom)).symm
 
 private theorem nativeOpenEval_unit {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (n : ℕ) (N : coefficientSequenceModules.{u, u} l E X) :

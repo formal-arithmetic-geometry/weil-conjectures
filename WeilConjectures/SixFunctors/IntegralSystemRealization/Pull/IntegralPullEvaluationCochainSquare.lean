@@ -77,7 +77,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         ((mateEquiv
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app
+          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i

@@ -71,7 +71,7 @@ Part (3), the compatibility of `β` with refinements of compactifications, is
 theorem isIso_derivedPlusFormalism_baseChange_and_shriekBaseChange
     (sq : IsPullback u' f' f v) (c : Compactification f) :
     IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange u' (c.ofIsPullback sq).i c.i
-        (pullback.fst c.g v) (c.isPullback_i_ofIsPullback sq).w).natTrans ∧
+        (pullback.fst c.g v) (c.isPullback_i_ofIsPullback sq).w) ∧
       IsIso (rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap Λ sq c) :=
   ⟨isIso_derivedPlusFormalism_baseChange Λ (c.isPullback_i_ofIsPullback sq), inferInstance⟩
 
@@ -91,8 +91,8 @@ theorem derivedPlusFormalism_shriekBaseChange_refinementComparison {c d : Compac
     (hcomm : hc ≫ r.hom = r'.hom ≫ hd) :
     Functor.whiskerRight ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).refinementComparison r hr)
         ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).pb v) ≫
-        ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChange c c' hc hci hcp).natTrans =
-      ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChange d d' hd hdi hdp).natTrans ≫
+        ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChange c c' hc hci hcp) =
+      ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChange d d' hd hdi hdp) ≫
         Functor.whiskerLeft ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).pb u')
           ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).refinementComparison r' hr') :=
   CompactSupportFormalism.shriekBaseChange_refinementComparison _ r hr r' hr' hc hci hcp hd hdi

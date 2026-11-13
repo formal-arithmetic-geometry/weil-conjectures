@@ -115,7 +115,7 @@ def purReindexingModuleMate {X' X Y' Y : Scheme.{t}}
       (d.integralRingIso p))
     (proEtaleRingModuleAdjunction p' (d.completedRing Y') (d.completedRing X')
       (d.integralRingIso p'))
-    (TwoSquare.mk _ _ _ _ (purReindexingRingedSquare d sq).exchangeModuleSquare.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (purReindexingRingedSquare d sq).exchangeModuleSquare.hom))
 
 /-- The actual ordinary strict-diagram mate, including every index arrow.
 Source: Stacks Tag 07A7 on the ringed diagram site

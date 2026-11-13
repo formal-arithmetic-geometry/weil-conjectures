@@ -169,7 +169,6 @@ theorem HasUniformCohomologicalDimensionLE.of_compactification {f : X ⟶ Y} [Is
 
 end General
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale site
 -- take long to synthesize
 /-- The constant pro-étale sheaf `Λ` on the spectrum of an algebraically closed field is

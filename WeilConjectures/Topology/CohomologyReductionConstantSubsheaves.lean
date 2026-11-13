@@ -15,6 +15,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 import WeilConjectures.Topology.TopologicalFilteredCohomology
 import WeilConjectures.Topology.AbelianSheafFiniteGenerationExhaustion
 import WeilConjectures.Topology.AbelianIntegerExtensionMono
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Finite-generation reduction for topological cohomology
 

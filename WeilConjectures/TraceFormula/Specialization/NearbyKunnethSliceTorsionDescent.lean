@@ -115,8 +115,6 @@ lemma isIso_kunnethMap_leftDerivedUpperStar_id {X₀ Y₀ Z₀ X₀' Y₀' Z₀'
     ((leftDerivedUpperStarId Λ Y₀).app _ ≪≫ (leftDerivedUpperStarId Λ Y₀).app _ ≪≫
       (leftDerivedUpperStarId Λ Y₀).app _) h
 
-set_option maxHeartbeats 400000 in
--- the Künneth maps of the three product configurations are large terms
 /-- **The Künneth map descends along a Galois slice** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, identification (2) and projection formula (3); finite field
 coefficients `T₀`): in the situation of the module docstring, if the Künneth map of
@@ -148,6 +146,9 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
     (hS : IsIso (kunnethMap Λ μS νS ((L((σM)^*⟦Λ⟧)).obj A) B)) :
     IsIso (L((rP')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) := by
   subst hrM hrP
+  -- Share the derived functors and their module-category instances across the two squares.
+  let pullX := L((𝟙 X)^*⟦Λ⟧)
+  let pullY := L((𝟙 Y)^*⟦Λ⟧)
   have := hBa
   have : IsIso (Hom.id N).total := inferInstanceAs (IsIso (𝟙 _))
   have : IsIso (Hom.id N).generic := inferInstanceAs (IsIso (𝟙 _))
@@ -157,7 +158,10 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
   have hT : IsField T₀ := Field.toIsField T₀
   -- the square along `ψ`
   have sqψ := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange' Λ φ₁ φ₂ μ₁ (ψP.comp φ₂)
-    ψM (Hom.id N) ψP htotψ hgenψ (by simp) (by simp) (by simp) hsψ (by simp) (by simp) A B
+    ψM (Hom.id N) ψP htotψ hgenψ
+    (Category.comp_id _) (Category.comp_id _)
+    ((Category.comp_id _).trans (Category.id_comp _).symm) hsψ
+    (Category.comp_id _) (Category.comp_id _) A B
     ?iM ?iN ?iP (𝟭 _)
   case iM => cast_proofs hψM A
   case iN => infer_instance
@@ -176,18 +180,20 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
       T₀ hT f₁ (𝟙 Z ≫ f₂) hA₂ hB₂)
   have hC := ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
     T₀ M₁.ε hA₂
-  obtain ⟨r, hr, hco⟩ := exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor M₁
+  have hret := exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor M₁
     resM Ω T₀ hp _ hC μs id (fun L' σ ↦ ⟨σ.liftNormal Ω, fun x ↦ σ.liftNormal_commutes Ω x⟩)
-  have hGE : (L((𝟙 ZS' ≫ rP' ≫ f₂')^*⟦Λ⟧).obj ((N.nearbyCycles Λ).obj
-      ((L((𝟙 Y)^*⟦Λ⟧)).obj ((L((𝟙 Y)^*⟦Λ⟧)).obj B)))).IsGE a := by
-    have := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) B a
-    have := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) ((L((𝟙 Y)^*⟦Λ⟧)).obj B) a
-    have := isGE_nearbyCycles_obj Λ N ((L((𝟙 Y)^*⟦Λ⟧)).obj ((L((𝟙 Y)^*⟦Λ⟧)).obj B)) a
-    exact isGE_leftDerivedUpperStar_obj Λ _ _ a
+  let r := hret.choose
+  have hr := hret.choose_spec.1
+  have hco := hret.choose_spec.2
+  -- Infer each intermediate complex from its bound instead of rebuilding the derived functors.
+  have hB₁GE := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) B a
+  have hB₂GE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 Y) _ a hB₁GE
+  have hNGE := @isGE_nearbyCycles_obj Λ _ _ _ _ N _ a hB₂GE
+  have hGE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 ZS' ≫ rP' ≫ f₂') _ a hNGE
   have sqρ := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange' Λ
     (galoisLayerFst μ₁ h₁ Ω) (galoisLayerSnd (hP := resP) (ψP.comp φ₂) Ω) μS νS ρM (Hom.id N) ρP
-    htotρ hgenρ ?e1 ?e2 hbρ ?e3 ?e4 ?e5 ((L((𝟙 X)^*⟦Λ⟧)).obj ((L((𝟙 X)^*⟦Λ⟧)).obj A))
-    ((L((𝟙 Y)^*⟦Λ⟧)).obj ((L((𝟙 Y)^*⟦Λ⟧)).obj B)) ?jM ?jN ?jP (𝟭 _)
+    htotρ hgenρ ?e1 ?e2 hbρ ?e3 ?e4 ?e5 (pullX.obj (pullX.obj A))
+    (pullY.obj (pullY.obj B)) ?jM ?jN ?jP (𝟭 _)
   case jM => cast_proofs hρM _
   case jN => infer_instance
   case jP =>
@@ -206,7 +212,7 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
       (hsν.trans ((Category.id_comp _).symm.trans (Category.id_comp _).symm))
   -- the Künneth map descends along the Galois layer
   have hG := isIso_kunnethMap_of_isIso_galoisLayer μ₁ (ψP.comp φ₂) h₁ Ω T₀ ?hp
-    ((L((𝟙 X)^*⟦Λ⟧)).obj A) ((L((𝟙 Y)^*⟦Λ⟧)).obj B) ?hAB ?r ?hr ?hco ?hK
+    (pullX.obj A) (pullY.obj B) ?hAB ?r ?hr ?hco ?hK
   case r => exact_by_kernel r
   case hp => exact_by_kernel hp
   case hAB => exact_by_kernel hAB

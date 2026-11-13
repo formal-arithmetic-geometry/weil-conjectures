@@ -27,7 +27,6 @@ local instance (X : Scheme.{u}) (M : X.Modules) :
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 400000 in
 -- The concrete chart construction has large homology types.
 /-- The concrete chart comparison has its specified common-resolution hom.
 

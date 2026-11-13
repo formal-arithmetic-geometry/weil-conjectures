@@ -45,7 +45,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
 Source: Stacks 0FND (blueprint: lem-pur-extension-evaluation-comparison). -/
 def derivedExtensionMate :
     GD ⋙ d₂.derived ⟶ d₁.derived ⋙ H.mapDerivedCategory :=
-  ((mateEquiv d₁.adjunction d₂.adjunction).symm (TwoSquare.mk _ _ _ _ τD)).natTrans
+  ((mateEquiv d₁.adjunction d₂.adjunction).symm (TwoSquare.mk _ _ _ _ τD))
 
 /-- A normalized derived mate has the prescribed cochain comparison.
 Source: Stacks 0FND and 09T5

@@ -83,7 +83,6 @@ theorem coefficientTensorGenerator_val_map
 
 end TotalTensor
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating the transported adjunction units on sections is expensive.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -1054,7 +1054,7 @@ private theorem closedComparison_mate
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :
     (mateEquiv (Etale.closedAdjunction A c v) (ProEtale.closedAdjunction A c v)
-      (pullComparison A c).symm.hom).natTrans = (closedComparison A c v).hom := by
+      (pullComparison A c).symm.hom) = (closedComparison A c v).hom := by
   have : IsLocallyNoetherian V := isLocallyNoetherian_of_isOpenImmersion v
   have : CompactSpace V :=
     ⟨v.isOpenEmbedding.isInducing.isCompact_iff.2
@@ -1065,7 +1065,7 @@ private theorem closedComparison_mate
     (ModuleCat.{u + 1} A) c
   let d := AlgebraicGeometry.ProEtale.lowerStarComparisonUpperStarBaseChange
     c (ModuleCat.{u + 1} A)
-  have hd : (mateEquiv e p a.hom).natTrans = d := by
+  have hd : (mateEquiv e p a.hom) = d := by
     apply NatTrans.ext
     funext P
     rw [AlgebraicGeometry.ProEtale.derivedImmersionClosed_sheaf_transpose A c P]
@@ -1084,7 +1084,7 @@ private theorem closedComparison_mate
   have he : (mateEquiv (Etale.closedAdjunction A c v) (ProEtale.closedAdjunction A c v)).symm
       (TwoSquare.mk _ _ _ _ (closedComparison A c v).hom) =
         TwoSquare.mk _ _ _ _ (pullComparison A c).inv := by exact hm
-  exact congrArg TwoSquare.natTrans ((Equiv.eq_symm_apply _).mp he.symm)
+  exact ((Equiv.eq_symm_apply _).mp he.symm)
 
 private theorem flipComparisonCompatible
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']

@@ -32,7 +32,6 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-set_option maxHeartbeats 600000 in
 -- The concrete mate comparison elaborates large coefficient category expressions.
 /-- The inverse-image realization is the localization of the ordinary comparison.
 Source: Zheng Construction 5.15 and Lemma 5.16; Stacks 03CY and 07A4.

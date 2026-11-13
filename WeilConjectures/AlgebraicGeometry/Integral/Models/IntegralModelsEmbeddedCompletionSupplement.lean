@@ -151,7 +151,6 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
   IntegralModelsStacks.smallModules IntegralModelsStacks.smallMap
   ConstantCompletion.kernelIdeal RingedSiteIdeal.extension
 
-set_option maxHeartbeats 400000 in
 -- Transport compares the standard local derived instances and two complete subcategories.
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
@@ -204,6 +203,14 @@ theorem integralModelsEmbeddedCompletion
   let (U : Scheme.coefficientProEtaleSiteModel.{u, u} X) :=
     HasDerivedCategory.standard
       (ConstantCompletion.Mod ((IntegralModelsStacks.smallRing X B).over U))
+  -- Construct the small-site equivalence before introducing the derived transport data.
+  have hcoeff := integralModelsEmbeddedCoefficientKernels ℓ E π hπ X
+  have hkernel : I.extension φ = ConstantCompletion.kernelIdeal qB := hcoeff.2.2.2
+  obtain ⟨e, ⟨he⟩⟩ := kernelCompleteEquivalence
+    (C := Scheme.coefficientProEtaleSiteModel.{u, u} X)
+    (J := Scheme.coefficientProEtaleModelTopology.{u, u} X)
+    (R := IntegralModelsStacks.smallRing X R)
+    (B := IntegralModelsStacks.smallRing X B) φ q hcoeff.1 hcoeff.2.1 hcoeff.2.2.1
   let FR := IntegralModelsStacks.smallModules X R
   let FB := IntegralModelsStacks.smallModules X B
   have : FR.IsEquivalence := smallModulesEquivalence X R
@@ -243,9 +250,6 @@ theorem integralModelsEmbeddedCompletion
       Functor.mapDerivedCategoryNatIso
         (smallRestrictionIso X (IntegralModelsEmbedded.scalarMap ℓ E X)) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
-  obtain ⟨hfinite, hflat, hquot, hkernel⟩ :=
-    integralModelsEmbeddedCoefficientKernels ℓ E π hπ X
-  change I.extension φ = ConstantCompletion.kernelIdeal qB at hkernel
   have hB (K) : P' K ↔ IsLocallyDerivedRingedIdealComplete
       (IntegralModelsStacks.smallRing X B) (I.extension φ).module
         (I.extension φ).inclusion K := by
@@ -263,11 +267,6 @@ theorem integralModelsEmbeddedCompletion
           (I.extension φ).inclusion K
     have : L.IsClosedUnderIsomorphisms :=
       ⟨fun e h ↦ (hB _).mp ((completeIso qB e).mp ((hB _).mpr h))⟩
-    obtain ⟨e, ⟨he⟩⟩ := kernelCompleteEquivalence
-      (C := Scheme.coefficientProEtaleSiteModel.{u, u} X)
-      (J := Scheme.coefficientProEtaleModelTopology.{u, u} X)
-      (R := IntegralModelsStacks.smallRing X R)
-      (B := IntegralModelsStacks.smallRing X B) φ q hfinite hflat hquot
     exact transportCompleteEquivalence EB ER r s P Q L Q'
       (fun K ↦ (hP K).trans (hB _)) hQ α e he
   · exact hiff

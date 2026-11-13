@@ -91,7 +91,6 @@ private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
     Functor.mapIso_hom, Functor.mapIso_inv, Iso.prod_hom, Category.assoc]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Compare the two normalized representative interfaces without unfolding their tensor data.
 /-- A tensor model is naturally identified with the published derived tensor, with
 its specified representative comparison.

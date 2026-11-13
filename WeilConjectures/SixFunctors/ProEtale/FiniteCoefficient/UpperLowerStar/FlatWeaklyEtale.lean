@@ -41,7 +41,6 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {W X : Scheme.{u}} (g : W ⟶ X) [WeaklyEtale g]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize
 /-- **Pullback along a weakly étale morphism preserves flat sheaves of modules**, over an

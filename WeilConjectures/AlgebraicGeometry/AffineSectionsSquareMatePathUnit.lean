@@ -411,6 +411,15 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
+private theorem affineBaseChangedSectionsDerivedIso_eq
+    {R B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :
+    affineBaseChangedSectionsDerivedIso f g =
+      Functor.rightDerivedFunctorCompMapDerivedCategoryIso
+          (affineGlobalSections (pullback.snd f g))
+          (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)) ≪≫
+        Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (pullback.snd f g))
+          (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory := rfl
+
 -- Keep localization constructions folded while calculating with their API.
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   Functor.mapDerivedCategory Functor.rightDerivedFunctorCompUnit
@@ -420,7 +429,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 -- Profiling found expensive linting of the fixed, nondependent forall binders.
 set_option linter.all false in
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 600000 in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
 unit for p_* followed by affine sections. This formula does not involve the derived
@@ -565,7 +573,10 @@ theorem affineSections_square_mate_path_unit
       (aρ).hom.app F := by
   intro P₀ Q₀ F₀ G₀ P Q RF RG A₀ B₀ S₀ T₀ A D S T aA aB aS aT ρ₀ aρ
     t b ht hb z d hz hd v r hv hr s hs J a p k δ
-  obtain ⟨e, he, hδ⟩ := exists_derivedPushforwardSquareMateUnit f g
+  rw [show aρ = _ from affineBaseChangedSectionsDerivedIso_eq f g]
+  -- Elaborate the mate witness before unpacking the existential.
+  have hmate := exists_derivedPushforwardSquareMateUnit f g
+  obtain ⟨e, he, hδ⟩ := hmate
   let α : P₀ ⋙ S₀ ≅ T₀ ⋙ ρ₀ :=
     Functor.isoWhiskerLeft P₀ t.symm ≪≫ (Functor.associator P₀ F₀ A₀).symm ≪≫
       Functor.isoWhiskerRight e A₀ ≪≫ Functor.associator Q₀ G₀ A₀ ≪≫
@@ -587,7 +598,12 @@ theorem affineSections_square_mate_path_unit
   have h := sections_unit_pasting P₀ Q₀ F₀ G₀ A₀ B₀ S₀ T₀ ρ₀
     aA aB aS aT t b hb z d hd v r hr e δ hδ J
   dsimp (config := { zetaDelta := false }) only at h
-  rw [hα] at h
-  exact h
+  refine h.trans ?_
+  exact congrArg (fun τ : P₀ ⋙ S₀ ⟶ T₀ ⋙ ρ₀ ↦
+    DerivedCategory.Qh.map ((τ.mapHomotopyCategory (.up ℤ)).app J) ≫
+      (T₀ ⋙ ρ₀).rightDerivedFunctorUnit.app J ≫
+      (Functor.rightDerivedFunctorCompMapDerivedCategoryIso T₀ ρ₀ ≪≫
+        Functor.isoWhiskerRight aT ρ₀.mapDerivedCategory).hom.app
+          (DerivedCategory.Qh.obj J)) hα
 
 end AlgebraicGeometry

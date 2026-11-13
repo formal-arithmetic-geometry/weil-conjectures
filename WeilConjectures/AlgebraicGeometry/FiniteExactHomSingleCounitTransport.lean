@@ -183,8 +183,31 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem directImageAlgebra_factorization {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙
+      SheafOfModules.restrictScalars.{u}
+        (R := moduleRings Y.toRingedSpace)
+        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom =
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
+
+private theorem directImageAlgebra_restrictScalars_reflects
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (SheafOfModules.restrictScalars.{u}
+      (R := moduleRings Y.toRingedSpace)
+      (R' := moduleRings (directImageAlgebraSpace f))
+      f.toRingCatSheafHom).ReflectsIsomorphisms := by
+  let T := SheafOfModules.restrictScalars.{u}
+    (R := moduleRings Y.toRingedSpace)
+    (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom
+  have heT : T ⋙ SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace) ≅
+      SheafOfModules.toSheaf.{u} (moduleRings (directImageAlgebraSpace f)) := Iso.refl _
+  have : (T ⋙ SheafOfModules.toSheaf.{u}
+      (moduleRings Y.toRingedSpace)).ReflectsIsomorphisms :=
+    reflectsIsomorphisms_of_iso heT.symm
+  exact reflectsIsomorphisms_of_comp T
+    (SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace))
+
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 600000 in
 -- Elaborating the canonical factorization unfolds the two ring-sheaf presentations.
 /-- Lift an algebra-valued derived isomorphism between single complexes, keeping
 track of the scalar adjunction counit through the canonical pushforward factorization.
@@ -276,16 +299,11 @@ theorem finite_exactHom_single_counit_transport
   let T := SheafOfModules.restrictScalars.{u}
     (R := moduleRings Y.toRingedSpace)
     (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom
-  have heT : T ⋙ SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace) ≅
-      SheafOfModules.toSheaf.{u} (moduleRings (directImageAlgebraSpace f)) := Iso.refl _
-  have : T.ReflectsIsomorphisms := by
-    have : (T ⋙ SheafOfModules.toSheaf.{u}
-        (moduleRings Y.toRingedSpace)).ReflectsIsomorphisms :=
-      reflectsIsomorphisms_of_iso heT.symm
-    exact reflectsIsomorphisms_of_comp T
-      (SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace))
-  have hFT : F ⋙ T = RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
+  have : T.ReflectsIsomorphisms := directImageAlgebra_restrictScalars_reflects f
+  have hFT : F ⋙ T = RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
+    directImageAlgebra_factorization f
   have hf := affine_singlePushforward_unit_isIso f M hM
+  rw [← eqToIso_refl (rfl : F ⋙ T = F ⋙ T)] at hγ
   have result := CategoryTheory.assembly_transport F T H
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) adjH M L hFT hf γ hγ e
   simpa only [eqToHom_refl, Category.id_comp, cast_eq] using result

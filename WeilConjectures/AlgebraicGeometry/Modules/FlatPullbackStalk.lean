@@ -74,7 +74,7 @@ theorem LinearMap.bijective_of_bijective_comp {A : Type u₁} {B : Type u₂} {M
     ⟨Function.LeftInverse.injective (g := w) fun t ↦ congr($hw t),
       Function.RightInverse.surjective (g := w) fun t ↦ congr($hvw t)⟩
   rw [← Module.FaithfullyFlat.lTensor_bijective_iff_bijective A B]
-  rwa [← LinearMap.baseChange_eq_ltensor]
+  rwa [← LinearMap.baseChange_eq_lTensor]
 
 noncomputable section
 

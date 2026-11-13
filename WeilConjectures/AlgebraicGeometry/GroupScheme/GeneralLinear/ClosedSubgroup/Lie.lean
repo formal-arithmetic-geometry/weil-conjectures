@@ -172,8 +172,6 @@ theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X
   rw [map_mul, map_zero] at h
   exact (hunit.mul_right_eq_zero).1 h
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the group structure on points of the quotient scheme makes instance search slow
 /-- A tangent vector of `V(I)` whose matrix satisfies the equations of `J ≥ I` is tangent to
 `V(J)`. -/
 theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
@@ -191,13 +189,10 @@ theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.I
   have hmem : q₀ ∈ GrpObj.pointsKer (subgroupScheme J) (GrpObj.aug₁ (k := k)) := by
     rw [GrpObj.mem_pointsKer]
     apply (cancel_mono (subgroupSchemeHom h)).1
-    rw [MonObj.one_comp]
-    change (_ ≫ q₀) ≫ subgroupSchemeHom h = 1
-    rw [Category.assoc, hq₀]
+    rw [MonObj.one_comp, points.map, Category.assoc, hq₀]
     exact GrpObj.mem_pointsKer.1 p.2
   exact ⟨⟨q₀, hmem⟩, Subtype.ext hq₀⟩
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the group structure on points of the quotient scheme makes instance search slow
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.

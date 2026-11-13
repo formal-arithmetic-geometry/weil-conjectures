@@ -16,6 +16,8 @@ public import Mathlib.CategoryTheory.Limits.Over
 
 import Mathlib.Topology.Category.Profinite.CofilteredLimit
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import Mathlib.CategoryTheory.Sites.Subcanonical
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # Relative profinite test schemes

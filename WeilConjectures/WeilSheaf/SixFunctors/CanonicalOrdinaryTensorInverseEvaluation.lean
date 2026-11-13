@@ -59,9 +59,7 @@ private def nativePure {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     (x : P.X.obj.obj V) (y : Q.X.obj.obj V) : (P ⊗ Q).X.obj.obj V :=
   (Mod.tensorObjπ P Q).hom.app V (nativePair P.X Q.X V x y)
 
-set_option maxHeartbeats 1600000 in
 -- Explicit native and small-site module comparisons require substantial elaboration.
-set_option synthInstance.maxHeartbeats 200000 in
 -- Coefficient and site universes differ in the two module models.
 private theorem nativePure_associator {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     (P Q N : ProEtale.AdicSheaf l Y) (V : Y.ProEtᵒᵖ)
@@ -150,9 +148,7 @@ private def kIso (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (Functor.uncurry.obj (SheafOfModules.homFunctor
       (R := ProEtale.NativeFrobenius.ring Y l))) (hIso l Y H)
 
-set_option maxHeartbeats 1600000 in
 -- Explicit native and small-site module comparisons require substantial elaboration.
-set_option synthInstance.maxHeartbeats 200000 in
 -- Coefficient and site universes differ in the two module models.
 private theorem unit_sections (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (M : Modules (ProEtale.NativeFrobenius.ring Y l)) (V : Y.ProEtᵒᵖ)
@@ -193,9 +189,7 @@ private theorem counit_sections (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   rw [Equivalence.unitInv_app_inverse]
   rfl
 
-set_option maxHeartbeats 1600000 in
 -- Explicit native and small-site module comparisons require substantial elaboration.
-set_option synthInstance.maxHeartbeats 200000 in
 -- Coefficient and site universes differ in the two module models.
 private theorem inverse_comparison_evaluation (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : ProEtale.AdicModuleHomComparisonCore l Y) (P I : ProEtale.AdicSheaf l Y)

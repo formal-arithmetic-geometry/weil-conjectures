@@ -241,6 +241,7 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 noncomputable abbrev derivedSliceRestriction (U : C) :=
   (J.overPullback (ModuleCat.{u + 1} B) U).mapDerivedCategory
 
+omit [EssentiallySmall.{u + 1} C] in
 /-- Relocalization is exact: in particular it preserves finite colimits.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and

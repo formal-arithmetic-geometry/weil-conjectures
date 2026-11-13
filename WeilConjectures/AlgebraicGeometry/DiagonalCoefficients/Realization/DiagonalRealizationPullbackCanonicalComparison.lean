@@ -58,7 +58,7 @@ def diagonalPullbackOrdinaryComparison [IsIso (diagonalCompletedCoefficientMap l
   let adjb := CondensedRing.upperStarLowerStarAdjunction
     (Profinite.continuousMapRingObj.{u} ℤ_[l]) f
   let alpha := ((mateEquiv adj adjb).symm
-    (diagonalPullbackRightComparison l f eX eS).hom).natTrans
+    (diagonalPullbackRightComparison l f eX eS).hom)
   have : IsIso alpha := isIso_inverseMate_of_equivalences adj adjb
     (diagonalPullbackRightComparison l f eX eS)
   exact (asIso alpha).symm
@@ -72,9 +72,9 @@ theorem diagonalPullbackOrdinaryComparison_mate
         (Scheme.purTwistZlCompletion X l) (diagonalPullbackCoefficientIso l f))
       (CondensedRing.upperStarLowerStarAdjunction
         (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
-      (diagonalPullbackOrdinaryComparison l f eX eS).inv).natTrans =
+      (diagonalPullbackOrdinaryComparison l f eX eS).inv) =
         (diagonalPullbackRightComparison l f eX eS).hom := by
-  exact congrArg TwoSquare.natTrans ((mateEquiv
+  exact ((mateEquiv
     (Scheme.proEtaleRingModuleAdjunction f (Scheme.purTwistZlCompletion S l)
       (Scheme.purTwistZlCompletion X l) (diagonalPullbackCoefficientIso l f))
     (CondensedRing.upperStarLowerStarAdjunction
@@ -112,7 +112,7 @@ theorem diagonalPullbackOrdinaryComparison_transpose
       (Scheme.purTwistZlCompletion X l) (diagonalPullbackCoefficientIso l f))
     (CondensedRing.upperStarLowerStarAdjunction
       (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
-    (diagonalPullbackOrdinaryComparison l f eX eS).inv).natTrans.app N) at h
+    (diagonalPullbackOrdinaryComparison l f eX eS).inv).app N) at h
   rw [diagonalPullbackOrdinaryComparison_mate] at h
   exact h
 

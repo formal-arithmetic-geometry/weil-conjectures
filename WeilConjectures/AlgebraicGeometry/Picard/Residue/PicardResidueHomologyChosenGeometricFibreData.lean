@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
@@ -35,8 +36,17 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap structureSheafAb structureSheafCohomologyPullback
 
-set_option maxHeartbeats 800000 in
--- The dependent family of derived-category maps requires extra elaboration heartbeats.
+/-- Combine independent witnesses with a compatible choice for each index. -/
+private theorem exists_compatible_family
+    {ι A E : Type*} {B : ι → Type*} {P Q : A → ι → Prop}
+    {R : E → (i : ι) → B i → Prop}
+    (hA : ∃ a, ∀ i, P a i ∧ Q a i) (hE : ∃ e, ∀ i, ∃ b, R e i b) :
+    ∃ (a : A) (e : E) (b : ∀ i, B i), ∀ i, P a i ∧ Q a i ∧ R e i (b i) := by
+  obtain ⟨a, ha⟩ := hA
+  obtain ⟨e, he⟩ := hE
+  exact ⟨a, e, fun i ↦ Classical.choose (he i),
+    fun i ↦ ⟨(ha i).1, (ha i).2, Classical.choose_spec (he i)⟩⟩
+
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives intertwining the canonical affine residue comparisons, and geometric fibre
 comparisons `e`, `ei` intertwine the derived coefficient arrows with structure-sheaf pullback.
@@ -109,11 +119,9 @@ theorem picard_residue_homology_chosen_geometric_fibre_data
             (((Over.pullback (S.fromSpecResidueField s)).map
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                 (ui i) (hui i))).left) 1 (e z) := by
-  obtain ⟨φ, hφ⟩ := picard_residue_homology_chosen_geometric_data
-    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m'
-  obtain ⟨e, he⟩ := picard_derived_fibre_naturality
-    f Xi fi ui hui L W k w s hw τ
-  choose ei hei using he
-  exact ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, (hφ i).2, hei i⟩⟩
+  exact exists_compatible_family
+    (picard_residue_homology_chosen_geometric_data
+      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m')
+    (picard_derived_fibre_naturality f Xi fi ui hui L W k w s hw τ)
 
 end AlgebraicGeometry.Scheme

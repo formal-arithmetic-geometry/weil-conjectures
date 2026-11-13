@@ -112,7 +112,6 @@ private theorem compare_via_resolution_naturality
   simp only [IsIso.inv_hom_id_assoc]
   rw [reassoc_of% hη, α.naturality]
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module categories require deeper colimit and derived-category instance search.
 set_option synthInstance.maxSize 4096 in
 /-- On bounded-below complexes, the cohomology of pushforward evaluated at a weakly

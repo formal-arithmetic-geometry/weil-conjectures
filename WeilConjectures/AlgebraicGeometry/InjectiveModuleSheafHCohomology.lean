@@ -20,6 +20,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.FreeCechComplexExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Abelian sheaf cohomology of injective module sheaves
 

@@ -41,7 +41,7 @@ lemma endAsHom_pow_mem (P : MorphismProperty C) [P.IsMultiplicative] {Z : C} {Φ
   induction m with
   | zero => exact P.id_mem Z
   | succ m ih =>
-    rw [pow_succ, End.mul_def]
+    rw [pow_succ, End.mul_asHom]
     exact P.comp_mem _ _ hΦ ih
 
 end CategoryTheory.MorphismProperty

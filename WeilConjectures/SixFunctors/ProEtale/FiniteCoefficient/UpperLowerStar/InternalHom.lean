@@ -154,21 +154,21 @@ omit [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
 /-- **Pullback along a weakly étale morphism commutes with internal homs**: the comparison map
 `g^* [P, Q] ⟶ [g^* P, g^* Q]` is an isomorphism. -/
 theorem ProEtale.isIso_ihomComparison_upperStar (P : Sheaf (Scheme.ProEt.topology X) A) :
-    IsIso (ihomComparison (g)^*[A] P).natTrans := by
+    IsIso (ihomComparison (g)^*[A] P) := by
   let h : WeaklyEtale g := hg
   let R := (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
     (Scheme.ProEt.topology V) (Scheme.ProEt.topology X)
   let W := (Functor.whiskeringLeft _ _ A).obj (MorphismProperty.Over.map ⊤ h).op
   have : ∀ k : V.ProEtᵒᵖ, (Under.post (MorphismProperty.Over.map ⊤ h).op (X := k)).IsEquivalence :=
     fun k ↦ MorphismProperty.Over.isEquivalence_post_map_op h k.unop
-  have hW : IsIso (ihomComparison W ((sheafToPresheaf _ A).obj P)).natTrans := inferInstance
+  have hW : IsIso (ihomComparison W ((sheafToPresheaf _ A).obj P)) := inferInstance
   have hι : ∀ Y : Sheaf (Scheme.ProEt.topology X) A,
-      IsIso (ihomComparison (sheafToPresheaf _ A) Y).natTrans :=
+      IsIso (ihomComparison (sheafToPresheaf _ A) Y) :=
     Monoidal.Reflective.isIso_ihomComparison (sheafificationAdjunction (Scheme.ProEt.topology _) A)
   have hιV : ∀ Y : Sheaf (Scheme.ProEt.topology V) A,
-      IsIso (ihomComparison (sheafToPresheaf _ A) Y).natTrans :=
+      IsIso (ihomComparison (sheafToPresheaf _ A) Y) :=
     Monoidal.Reflective.isIso_ihomComparison (sheafificationAdjunction (Scheme.ProEt.topology _) A)
-  have h1 : IsIso (ihomComparison (sheafToPresheaf _ A ⋙ W) P).natTrans := by
+  have h1 : IsIso (ihomComparison (sheafToPresheaf _ A ⋙ W) P) := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro Q
     rw [ihomComparison_comp_app]
@@ -176,16 +176,16 @@ theorem ProEtale.isIso_ihomComparison_upperStar (P : Sheaf (Scheme.ProEt.topolog
   let τ := Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
     (MorphismProperty.Over.map ⊤ h) A (Scheme.ProEt.topology V) (Scheme.ProEt.topology X)
   have : NatTrans.IsMonoidal τ.symm.hom := inferInstanceAs (NatTrans.IsMonoidal τ.inv)
-  have h2 : IsIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans :=
+  have h2 : IsIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P) :=
     isIso_ihomComparison_of_iso τ.symm P
-  have hR : IsIso (ihomComparison R P).natTrans := by
+  have hR : IsIso (ihomComparison R P) := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro Q
-    have := NatIso.isIso_app_of_isIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans Q
+    have := NatIso.isIso_app_of_isIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P) Q
     rw [ihomComparison_comp_app] at this
     have := IsIso.of_isIso_comp_right ((sheafToPresheaf _ A).map
-      ((ihomComparison R P).natTrans.app Q))
-      ((ihomComparison (sheafToPresheaf _ A) (R.obj P)).natTrans.app (R.obj Q))
+      ((ihomComparison R P).app Q))
+      ((ihomComparison (sheafToPresheaf _ A) (R.obj P)).app (R.obj Q))
     exact isIso_of_reflects_iso _ (sheafToPresheaf _ A)
   exact isIso_ihomComparison_of_iso (upperStarIsoSheafPushforward A g h) P
 

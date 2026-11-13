@@ -91,7 +91,6 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
 
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Product comparisons and sectionwise operations require repeated functor reduction.
 /-- Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph.
 (blueprint: lem-weil-pbc-etale-ring-inverse-image-counit).

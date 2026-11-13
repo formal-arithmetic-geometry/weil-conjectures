@@ -258,7 +258,6 @@ theorem nonempty_specializationDefect_iso_of_distTriang
 
 /-! ### The exchanges of the defect -/
 
-set_option maxHeartbeats 2000000 in
 -- The defeq checks of `Functor.mapTriangle` on the derived categories exceed the default limit.
 /-- **Smooth exchange for the defect, given the smooth exchanges of nearby cycles**: if the
 pullback exchanges of `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` at `L` and of `f̃_Z : Z' × S ⟶ Z × S` at `Li^* L` are

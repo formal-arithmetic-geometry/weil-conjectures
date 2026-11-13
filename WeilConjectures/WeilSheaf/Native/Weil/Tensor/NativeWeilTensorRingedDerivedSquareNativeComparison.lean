@@ -201,7 +201,6 @@ attribute [local irreducible] AlgebraicGeometry.ProEtaleWeilSheaf.nativeWeilRing
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option maxHeartbeats 400000 in
 -- Specializing product localization compares large dependent functor types.
 -- Local irreducibility above avoids expanding the tensor-model implementations.
 /-- The specified one-K-flat models determine a derived tensor-forgetting comparison

@@ -550,6 +550,7 @@ private theorem continuousDerivedScalars
   let D := DerivedCategory
     (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
   have h : Linear.toCatCenter A D r = Linear.toCatCenter B D (c r) := by
+    apply End.ext
     apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
     intro K
     have hK : (r • 𝟙 K : K ⟶ K) = c r • 𝟙 K := by
@@ -559,7 +560,7 @@ private theorem continuousDerivedScalars
     change r • 𝟙 (DerivedCategory.Q.obj K) = c r • 𝟙 (DerivedCategory.Q.obj K)
     simpa only [Functor.map_smul, Functor.map_id] using
       congrArg (fun g : K ⟶ K ↦ DerivedCategory.Q.map g) hK
-  have hX := congrArg (fun z ↦ z.app X) h
+  have hX := congrArg (fun z ↦ z.asHom.app X) h
   change r • 𝟙 X = c r • 𝟙 X at hX
   calc
     r • f = (r • 𝟙 X) ≫ f := by simp

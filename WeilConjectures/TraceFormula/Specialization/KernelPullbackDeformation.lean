@@ -57,7 +57,6 @@ section
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (M : NearbyCyclesModel X X')
 
-set_option maxHeartbeats 1000000 in
 -- the unit comparisons of the derived pullbacks are identified by unfolding
 /-- The unit of the lax monoidal structure of nearby cycles is the specialization unit. -/
 lemma nearbyCyclesLaxMonoidal_ε :
@@ -294,7 +293,6 @@ noncomputable def specialExceptionalHomInv :
     (boundedConstructibleUpperShriekAdjunction ℓ (𝛄))
     (boundedConstructibleExceptionalProjection ℓ (𝛄)) 𝐀' 𝐁')
 
-set_option maxHeartbeats 1000000 in
 -- matching the abstract lemma against the concrete composites
 /-- **The specialized coefficient as a section of the kernel** (blueprint
 `det-tf-sp-kernel-pullback`, the displayed identity
@@ -343,7 +341,6 @@ lemma laxMonoidal_ε_specialization :
     Functor.LaxMonoidal.ε 𝐒 = supportSpecializationUnit (ℓ := ℓ) (y := y) k' :=
   NearbyCyclesModel.boundedConstructibleNearbyCyclesLaxMonoidal_ε _
 
-set_option maxHeartbeats 1000000 in
 -- matching the abstract lemma against the concrete composites
 /-- **The section of the specialized coefficient** (blueprint `det-tf-sp-kernel-pullback`, second
 part): if `u : c^* p₂^* K ⟶ c^! p₁^! K` corresponds to the section `k_u : ℚ̄_ℓ ⟶ c^! (K ⊠ D K)`,

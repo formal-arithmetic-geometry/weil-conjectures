@@ -56,8 +56,6 @@ def unboundedLocalizingPullbackCommShift
 
 attribute [local instance] unboundedLocalizingPullbackCommShift
 
-set_option maxHeartbeats 400000 in
--- Elaborating inherited full-subcategory shift structures needs a larger heartbeat budget.
 /-- The clauses of inverse-image preservation, including its restriction along the full
 inclusions. `Lg^*` carries its canonical shift-commutation
 `unboundedLocalizingPullbackCommShift`; the restriction is Mathlib's `ObjectProperty.lift` of

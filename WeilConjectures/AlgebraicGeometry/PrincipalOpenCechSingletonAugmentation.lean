@@ -58,7 +58,6 @@ private theorem augmentation_transport_restrict
   exact ((modulesSpecToSheaf.obj (I.X a)).obj.map_comp
     (homOfLE hWU).op (homOfLE hZW).op).symm
 
-set_option maxHeartbeats 400000 in
 -- The pair calculation contains dependent transports of the section modules.
 /-- A separate construction step for the finite subset Čech argument.
 Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1).

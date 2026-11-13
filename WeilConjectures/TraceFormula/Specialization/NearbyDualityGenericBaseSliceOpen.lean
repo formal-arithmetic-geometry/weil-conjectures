@@ -272,8 +272,6 @@ noncomputable def tateTwistZeroShiftUpperStarIso (f : Y ⟶ X) (n : ℤ) :
 
 variable {ℓ} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : Y ⟶ X} {f' : Y' ⟶ X'}
 
-set_option maxHeartbeats 1000000 in
--- the twists `ℚ̄_ℓ(0)` are the units only up to deep definitional unfoldings
 /-- The unit law of the pullback exchange
 (`NearbyCyclesModel.Hom.map_unit_comp_pullbackExchange_app`) for the specialization maps of
 `ℚ̄_ℓ(0)` in degree `0`. -/
@@ -288,15 +286,37 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
           (leftDerivedUpperStarTateTwistDerivedZeroIso N.ε ℓ ≪≫
             (leftDerivedUpperStarTateTwistDerivedZeroIso N.j ℓ).symm)) ≫
         (N.nearbyCycles _).map (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv := by
-  rw [twistSpecializationMap_tateTwistZero, twistSpecializationMap_tateTwistZero,
-    leftDerivedUpperStarTateTwistDerivedZeroIso_eq M.i, Iso.inv_hom_id_assoc,
-    leftDerivedUpperStarTateTwistDerivedZeroIso_eq N.i, Iso.inv_hom_id_assoc,
-    leftDerivedUpperStarTateTwistDerivedZeroIso_eq f',
-    leftDerivedUpperStarTateTwistDerivedZeroIso_eq f]
-  refine (congrArg (_ ≫ ·) ?_).trans (Iso.inv_hom_id_assoc _ _)
-  transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
+  -- Identify the zero twists with the units on small expressions before simplifying the exchange.
+  have hM : (leftDerivedUpperStarTateTwistDerivedZeroIso M.i ℓ).inv ≫
+      M.twistSpecializationMap _ (leftDerivedUpperStarTateTwistDerivedZeroIso M.ε ℓ ≪≫
+        (leftDerivedUpperStarTateTwistDerivedZeroIso M.j ℓ).symm) = M.unit _ := by
+    rw [twistSpecializationMap_tateTwistZero, leftDerivedUpperStarTateTwistDerivedZeroIso_eq,
+      Iso.inv_hom_id_assoc]
+  have hN : (leftDerivedUpperStarTateTwistDerivedZeroIso N.i ℓ).inv ≫
+      N.twistSpecializationMap _ (leftDerivedUpperStarTateTwistDerivedZeroIso N.ε ℓ ≪≫
+        (leftDerivedUpperStarTateTwistDerivedZeroIso N.j ℓ).symm) = N.unit _ := by
+    rw [twistSpecializationMap_tateTwistZero, leftDerivedUpperStarTateTwistDerivedZeroIso_eq,
+      Iso.inv_hom_id_assoc]
+  have hf' : (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv := by
+    rw [leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
+  have hf : (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
+    rw [leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
+  have hu : (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
+      L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+        (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
+      N.unit _ ≫ (N.nearbyCycles _).map
+        (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
+    have hu0 : L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+        (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
+        (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
+          (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+            (Profinite.padicAlgClRingObj ℓ) f).inv := by
+      transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
+    rw [hu0, Iso.inv_hom_id_assoc]
+  simpa only [hM, hN, hf', hf] using hu
 
-set_option maxHeartbeats 1000000 in
 -- the shifts of the derived categories of module objects unfold deeply
 /-- The specialization map of `ℚ̄_ℓ(0)[n]` is the shift of that of `ℚ̄_ℓ(0)`
 (`NearbyCyclesModel.twistSpecializationMap_shift_comp`). -/
@@ -502,8 +522,6 @@ private lemma boundedConstructibleNearbyCycles_map_hom'' {X X' : Scheme.{u}}
       (N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map f.hom :=
   rfl
 
-set_option maxHeartbeats 1000000 in
--- the motive checks of the rewrites in the proof take a few seconds each on the large goal
 /-- **The square law of the pullback exchanges** on bounded constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_square`), for a commutative square of morphisms of
 models `φ₀ : M₂ ⟶ M`, `ψ : M ⟶ M_c`, `ψ' : M₂ ⟶ M₂,c`, `φ₁ : M₂,c ⟶ M_c` in which `ψ` and `ψ'`
@@ -552,14 +570,11 @@ lemma boundedConstructiblePullbackExchange_square (φ₀ : M₂.Hom M c p)
           A).hom := by
   subst hα hαc
   apply ObjectProperty.hom_ext
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    boundedConstructibleUpperStarOfMap_map, ObjectProperty.homMk_hom,
-    boundedConstructibleUpperStar_map_hom, liftExchange_app_hom, liftExchange_app_hom,
+  -- Simplify the underlying morphisms together to avoid repeated rewrite motive checks.
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
+    ObjectProperty.homMk_hom, boundedConstructibleUpperStar_map_hom, liftExchange_app_hom,
     Hom.boundedConstructiblePullbackExchange_app_hom,
-    Hom.boundedConstructiblePullbackExchange_app_hom,
-    boundedConstructibleUpperStarSquareIso_hom_hom, boundedConstructibleNearbyCycles_map_hom'',
-    boundedConstructibleUpperStarSquareIso_hom_hom]
+    boundedConstructibleUpperStarSquareIso_hom_hom, boundedConstructibleNearbyCycles_map_hom'']
   transport_exact pullbackExchange_square' ℓ φ₀ ψ ψ' φ₁ htot hgen hb hs A.obj
 
 end SquareExchange
@@ -588,8 +603,6 @@ noncomputable def boundedConstructibleTateTwistZeroUpperStarIso (f : Y.left ⟶ 
         (boundedConstructibleTateTwist ℓ X 0 n) ≅ boundedConstructibleTateTwist ℓ Y 0 n :=
   ObjectProperty.isoMk _ (tateTwistZeroShiftUpperStarIso ℓ f n)
 
-set_option maxHeartbeats 1000000 in
--- the motive checks of the rewrites in the proof take a few seconds each
 /-- **The pullback exchange and the specialization maps of `ℚ̄_ℓ(0)[n]`** on bounded
 constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_ambientZeroTwistSpecializationMap`),
@@ -615,12 +628,11 @@ lemma Hom.liftExchange_zeroTwistSpecializationMap (φ : N.Hom M f f')
         (boundedConstructibleTateTwistZeroUpperStarIso ℓ (X := X) (Y := Y) f n).inv := by
   subst hβ
   apply ObjectProperty.hom_ext
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, liftExchange_app_hom, boundedConstructibleNearbyCycles_map_hom'']
-  unfold boundedConstructibleTateTwistZeroUpperStarIso zeroTwistSpecializationMap
-  rw [ObjectProperty.isoMk_inv, ObjectProperty.homMk_hom, ObjectProperty.homMk_hom,
-    ObjectProperty.isoMk_inv, ObjectProperty.homMk_hom, ObjectProperty.homMk_hom]
+  -- Simplify the underlying morphisms together to avoid repeated rewrite motive checks.
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
+    ObjectProperty.homMk_hom, liftExchange_app_hom, boundedConstructibleNearbyCycles_map_hom'',
+    boundedConstructibleTateTwistZeroUpperStarIso, ObjectProperty.isoMk_inv,
+    zeroTwistSpecializationMap]
   transport_exact φ.pullbackExchange_ambientZeroTwistSpecializationMap (ℓ := ℓ) n
 
 /-- **The twist isomorphisms `κ` and the pullback exchange** on bounded constructible complexes:

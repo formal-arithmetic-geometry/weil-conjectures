@@ -114,7 +114,7 @@ theorem localTerm_traceClass_frobeniusGraph_eq_supportedRestriction
     haveI := F.isOpenImmersion_left_of_isModelFrobenius hΦ hm y
     haveI := F.isClosedImmersion_left y
     ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm y =
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ y)).hom ≫
+      .of ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ y)).hom ≫
         (boundedConstructibleUpperStar _ ℓ y).map
           ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
             (boundedConstructibleUpperStar _ ℓ F.ι).map
@@ -123,7 +123,7 @@ theorem localTerm_traceClass_frobeniusGraph_eq_supportedRestriction
         (boundedConstructibleUpperStar _ ℓ y).map (F.supportedRestriction _) ≫
         (boundedConstructibleUpperStar _ ℓ y).map F.supportedEvaluation ≫
         (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ y).inv.app _ ≫
-        (dualizingComplexComp ℓ y).hom ≫ (dualizingComplexPointIso ℓ k).hom :=
+        (dualizingComplexComp ℓ y).hom ≫ (dualizingComplexPointIso ℓ k).hom) :=
   haveI := F.isOpenImmersion_left_of_isModelFrobenius hΦ hm y
   haveI := F.isClosedImmersion_left y
   localTerm_point_traceClass_eq_supportedRestriction _ F y

@@ -48,7 +48,6 @@ namespace NearbyCyclesModel
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)]
 
-set_option maxHeartbeats 1000000 in
 -- the extension of scalars and the pushforward comparison at concrete models
 /-- **From `𝒪_E` to `E`**: the nearby cycles of `E ⊗ᴸ_{𝒪_E} K₀`, for a bounded constructible
 `𝒪_E`-complex `K₀` on `𝔸ⁿ_S`, are bounded constructible: they are `E ⊗ᴸ_{𝒪_E} Ψ K₀`. -/
@@ -81,7 +80,6 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj_padicSubfield (n : ℕ
   have hE := boundedConstructible_derivedExtendScalars_obj _ ℓ E ⟨_, h𝒪⟩
   exact (boundedConstructible _).prop_of_iso e₁ (by exact_mod_proofs hE)
 
-set_option maxHeartbeats 1000000 in
 -- the extension of scalars and the pushforward comparison at concrete models
 omit [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)] in
 /-- **From `E` to `ℚ̄_ℓ`**: if the nearby cycles of a bounded below `E`-complex `K₁` on `𝔸ⁿ_S` are

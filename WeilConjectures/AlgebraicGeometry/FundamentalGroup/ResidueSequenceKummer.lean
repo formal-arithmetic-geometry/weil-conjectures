@@ -76,7 +76,6 @@ lemma toFunctionField_appTop_topIso_inv (W : C.Opens) (m : U ⟶ W.toScheme) (hm
 variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k)) {N : ℕ}
   [NeZero N] [NeZero (N : k)] [HasEnoughRootsOfUnity k N] [ConnectedSpace U]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` is slow
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: residues of Kummer torsors.
 

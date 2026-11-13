@@ -25,6 +25,35 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open CategoryTheory.BraidedCategory
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
+-- Prove the tensor calculation with abstract monoidal structures, so its proof
+-- does not repeatedly reduce the concrete sheafification tensor constructions.
+private theorem tensorComparison_binaryMate
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) (μ : MonoidalCategory.tensor C ⋙ F ≅
+      (F.prod F) ⋙ MonoidalCategory.tensor D)
+    {P Q H I : C} {H' : D} (f : Q ⟶ H) (h : F.obj H ⟶ H')
+    (ev : H ⊗ P ⟶ I) (ev' : H' ⊗ F.obj P ⟶ F.obj I)
+    (he : μ.hom.app (H, P) ≫ (MonoidalCategory.tensor D).map
+      (X := (F.obj H, F.obj P)) (Y := (H', F.obj P)) (h, 𝟙 (F.obj P)) ≫ ev' = F.map ev) :
+    μ.hom.app (Q, P) ≫ ((F.map f ≫ h) ⊗ₘ 𝟙 (F.obj P)) ≫ ev' =
+      F.map ((f ⊗ₘ 𝟙 P) ≫ ev) := by
+  have hn := μ.hom.naturality (show (Q, P) ⟶ (H, P) from (f, 𝟙 P))
+  change F.map (f ⊗ₘ 𝟙 P) ≫ μ.hom.app (H, P) =
+    μ.hom.app (Q, P) ≫ (F.map f ⊗ₘ F.map (𝟙 P)) at hn
+  rw [F.map_id] at hn
+  change μ.hom.app (H, P) ≫ (h ⊗ₘ 𝟙 (F.obj P)) ≫ ev' = F.map ev at he
+  have hc := tensorHom_comp_tensorHom (F.map f) (𝟙 (F.obj P)) h (𝟙 (F.obj P))
+  simp only [Category.comp_id] at hc
+  rw [Functor.map_comp, ← hc, Category.assoc, ← reassoc_of% hn, he]
+
+private theorem iso_square_from_inverse_mates
+    {C : Type*} [Category* C] {X Y Z W : C}
+    (a : X ≅ Y) (c : Z ≅ W) (s : X ⟶ Z) (t : Y ⟶ W)
+    (h : a.inv ≫ s = t ≫ c.inv) : a.hom ≫ t = s ≫ c.hom := by
+  apply (Iso.eq_inv_comp a).mp
+  rw [← Category.assoc, h, Category.assoc, c.inv_hom_id, Category.comp_id]
+
 section SiteMates
 
 variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
@@ -144,7 +173,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
           (((adj.adj P).homEquiv Q I).symm f) =
       ((Mod.ihomAdjunction P.carrier).homEquiv Q.carrier I.carrier).symm f.hom.f)
 
-set_option maxHeartbeats 1200000 in
 -- Compare the two concrete sheaf tensor constructions in the evaluation square.
 private theorem binaryMate_forget
     (P Q I : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
@@ -163,38 +191,20 @@ private theorem binaryMate_forget
   let := SheafOfModules.isMonoidal_W_independentCoefficients b.Q
   let := SheafOfModules.monoidalCategory b.Q
   let := SheafOfModules.symmetricCategory b.Q
-  have he := b.underived.evaluation P I
-    (RingedForgetTensorTransposition.ordinaryEvaluation.{u + 1, u + 1, u + 1} b.J b.R P I)
-    (RingedForgetTensorTransposition.ordinaryEvaluation.{u + 1, u + 1, u + 1} b.K b.Q
-      (b.forget.obj P) (b.forget.obj I))
-    (RingedForgetTensorTransposition.ordinaryEvaluation_pure.{u + 1, u + 1, u + 1} b.J b.R P I)
-    (RingedForgetTensorTransposition.ordinaryEvaluation_pure.{u + 1, u + 1, u + 1} b.K b.Q
-      (b.forget.obj P) (b.forget.obj I))
-  have hn := b.underived.tensor.hom.naturality
-    (X := (Q, P)) (Y := (SheafOfModules.homObj (R := b.R) P I, P)) (f, 𝟙 P)
-  change b.forget.map (f ⊗ₘ 𝟙 P) ≫ b.underived.tensor.hom.app (_, P) =
-    b.underived.tensor.hom.app (Q, P) ≫
-      (b.forget.map f ⊗ₘ b.forget.map (𝟙 P)) at hn
-  simp only [CategoryTheory.Functor.map_id] at hn
-  change b.underived.tensor.hom.app (_, P) ≫
-      (b.underived.hom.hom.app (op P, I) ⊗ₘ 𝟙 (b.forget.obj P)) ≫ _ = _ at he
-  rw [binaryMate_eq, binaryMate_eq, Functor.map_comp]
-  have hc : ((b.forget.map f ≫ b.underived.hom.hom.app (op P, I)) ⊗ₘ
-      𝟙 (b.forget.obj P)) =
-      (b.forget.map f ⊗ₘ 𝟙 (b.forget.obj P)) ≫
-        (b.underived.hom.hom.app (op P, I) ⊗ₘ 𝟙 (b.forget.obj P)) := by
-    simpa only [Category.comp_id] using (tensorHom_comp_tensorHom
-      (b.forget.map f) (𝟙 (b.forget.obj P))
-      (b.underived.hom.hom.app (op P, I)) (𝟙 (b.forget.obj P))).symm
-  rw [hc, Category.assoc, ← reassoc_of% hn]
-  exact congrArg (b.forget.map (f ⊗ₘ 𝟙 P) ≫ ·) he
+  rw [binaryMate_eq, binaryMate_eq]
+  exact tensorComparison_binaryMate b.forget b.underived.tensor f
+    (b.underived.hom.hom.app (op P, I)) _ _
+    (b.underived.evaluation P I
+      (RingedForgetTensorTransposition.ordinaryEvaluation.{u + 1, u + 1, u + 1} b.J b.R P I)
+      (RingedForgetTensorTransposition.ordinaryEvaluation.{u + 1, u + 1, u + 1} b.K b.Q
+        (b.forget.obj P) (b.forget.obj I))
+      (RingedForgetTensorTransposition.ordinaryEvaluation_pure.{u + 1, u + 1, u + 1}
+        b.J b.R P I)
+      (RingedForgetTensorTransposition.ordinaryEvaluation_pure.{u + 1, u + 1, u + 1}
+        b.K b.Q (b.forget.obj P) (b.forget.obj I)))
 
 include he
 
-set_option synthInstance.maxHeartbeats 200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
 private theorem binary_square
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :
@@ -263,26 +273,14 @@ private theorem binary_square
   have hv := congrArg (b.underived.tensor.hom.app
     (b.native.functor.obj Q, b.native.functor.obj P) ≫ ·) hb
   erw [← Category.assoc, ht] at hv
-  apply (cancel_epi (b.forget.map (A.underived P Q).inv)).1
-  apply (cancel_mono (d.underived P.carrier Q.carrier).inv).1
-  -- An explicit `Mono` instance: generic instance search leaves a universe metavariable here.
-  have : Mono (b.ordinary.functor.map (e.inv.app (P, Q))) :=
-    inferInstanceAs (Mono (b.ordinary.functor.mapIso (e.app (P, Q))).inv)
-  apply (cancel_mono (b.ordinary.functor.map (e.inv.app (P, Q)))).1
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← b.forget.map_comp_assoc, Iso.inv_hom_id, b.forget.map_id,
-    Category.id_comp]
-  erw [← b.ordinary.functor.map_comp, Iso.hom_inv_id_app,
-    b.ordinary.functor.map_id, Category.comp_id]
-  have hv' := hv.symm
-  simp only [Functor.comp_obj, Functor.uncurry_obj_obj, I] at hv'
-  exact hv'
+  exact iso_square_from_inverse_mates (b.forget.mapIso (A.underived P Q))
+    (b.ordinary.functor.mapIso (e.app (P, Q)) ≪≫ d.underived P.carrier Q.carrier)
+    (b.square.hom.app I)
+    (b.underived.tensor.hom.app (b.native.functor.obj Q, b.native.functor.obj P) ≫
+      (b.square.hom.app Q ⊗ₘ b.square.hom.app P))
+    (by simpa only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv,
+      Category.assoc, Functor.comp_obj, Functor.uncurry_obj_obj, I] using hv)
 
-
-set_option synthInstance.maxHeartbeats 200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
 private theorem underived_swap_square
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :
@@ -316,9 +314,9 @@ private theorem underived_swap_square
   have hn := b.square.hom.naturality s.hom
   change b.forget.map (E.map s.hom) ≫ b.square.hom.app ((T.obj P).obj Q) =
     b.square.hom.app ((T.obj Q).obj P) ≫ O.map (U.map s.hom) at hn
-  apply (cancel_epi (O.map (e.hom.app (Q, P)))).1
-  apply (cancel_epi (b.square.hom.app ((T.obj Q).obj P))).1
-  simp only [Functor.map_comp, Category.assoc]
+  apply (Iso.cancel_iso_hom_left (O.mapIso (e.app (Q, P))) _ _).mp
+  apply (Iso.cancel_iso_hom_left (b.square.app ((T.obj Q).obj P)) _ _).mp
+  simp only [Functor.mapIso_hom, Iso.app_hom, Functor.map_comp, Category.assoc]
   rw [← O.map_comp_assoc, Iso.hom_inv_id_app, O.map_id, Category.id_comp]
   rw [← reassoc_of% hn, ← h₁, ← b.forget.map_comp_assoc, hs]
   simp only [b.forget.map_comp, Category.assoc]
@@ -328,10 +326,6 @@ private theorem underived_swap_square
   rw [reassoc_of% h₀]
   rfl
 
-set_option synthInstance.maxHeartbeats 200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
 /-- The normalized ordinary symmetry determines the native underived swap.
 Source: Stacks 03EK, 06YU and 0FPT; the binary mate and tensor symmetry squares.
 (blueprint: new-sf-native-weil-ringed-swap-underived).

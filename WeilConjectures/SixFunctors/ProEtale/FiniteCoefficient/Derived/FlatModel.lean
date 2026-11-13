@@ -92,7 +92,6 @@ noncomputable def derivedTensorQObjSingleFunctorObjIso {a b : ℤ}
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale site
 -- take long to synthesize
 /-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model, on the small

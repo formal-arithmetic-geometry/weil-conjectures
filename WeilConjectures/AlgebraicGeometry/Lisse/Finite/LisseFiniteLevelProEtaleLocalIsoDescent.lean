@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerEtaleDescentData
+public import Mathlib.CategoryTheory.Functor.TypeValuedFlat
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedMorphismSheafComparison
 import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalConstancy
 import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar

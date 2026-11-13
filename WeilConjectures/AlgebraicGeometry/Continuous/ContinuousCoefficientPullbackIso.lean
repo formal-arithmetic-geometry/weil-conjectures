@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientComplet
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientLocalization
 import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteTowerLimit
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Invertibility of continuous coefficient pullback along immersions -/
 

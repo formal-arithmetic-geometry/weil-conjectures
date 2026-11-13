@@ -110,7 +110,7 @@ import all Mathlib.CategoryTheory.Sites.Grothendieck
 import all Mathlib.CategoryTheory.Sites.Limits
 import all Mathlib.CategoryTheory.Sites.Sheaf
 import all Mathlib.Combinatorics.Quiver.ReflQuiver
-import all Mathlib.Data.Int.ConditionallyCompleteOrder
+import all Mathlib.Order.Int.ConditionallyCompleteOrder
 import all Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import all Mathlib.Geometry.RingedSpace.PresheafedSpace
 import all Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -153,6 +153,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerS
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.Data.Fintype.Shrink
 import Mathlib.Algebra.Ring.Shrink
 import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenBoundaryZero
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.OpenPullbackGenerators

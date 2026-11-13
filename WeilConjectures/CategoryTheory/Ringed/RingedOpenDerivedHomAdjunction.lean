@@ -105,7 +105,6 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w}
     (RingedDerivedNative.Modules.{max c v, v, r} (J.over U) (R.over U))]
 
-set_option maxHeartbeats 2000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- For any right adjoint G of slice restriction, internal Hom out of a slice
 extension is G of the internal Hom into the restricted argument.

@@ -153,7 +153,7 @@ theorem etaleOpenRestrictedTensorProjection
       R.map (adj'.unit.app L) ≫ r.inv.app (J'.obj L) =
         adj.unit.app (R.obj L) ≫ P.map (o.hom.app L) := by
     have hh := unit_mateEquiv adj' adj (TwoSquare.mk _ _ _ _ o.hom) L
-    change _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ o.hom)).natTrans.app _ = _ at hh
+    change _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ o.hom)).app _ = _ at hh
     rw [SystemProjection.single_open_mate, ← hr] at hh
     exact hh
   have h := restricted_left_mate_tensor adj adj' S S' R R' T T'

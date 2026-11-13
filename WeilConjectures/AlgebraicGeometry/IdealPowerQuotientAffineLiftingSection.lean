@@ -85,7 +85,7 @@ theorem ideal_power_quotient_affine_lifting_section
       s ∈ Set.range ((a n).app W) ↔
         ∀ (W' : X.Opens) (h : W' ≤ W)
           (b : Γ((idealSheafPower ι n).1, W')),
-          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom
+          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).asHom.hom
             (F.presheaf.map (homOfLE h).op s) = 0)
     (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →
       Function.Bijective ((cokernel.π (a n)).app W))
@@ -117,7 +117,7 @@ theorem ideal_power_quotient_affine_lifting_section
       (b : Γ((idealSheafPower ι n).1, V.1)) :
       (cokernel (a n)).presheaf.map (homOfLE hWV).op (g b) =
         ((cokernel (a n)).smul (U := W) ((idealSheafPower ι n).2.val.app (op W)
-          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op b))).hom
+          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op b))).asHom.hom
           ((cokernel (a n)).presheaf.map (homOfLE hWU).op
             ((cokernel.π (a n)).app U s)) := by
     obtain ⟨x, hx⟩ := K.mkQ_surjective (f b)
@@ -154,7 +154,7 @@ theorem ideal_power_quotient_affine_lifting_section
         Over.mk (homOfLE hWV)).op)
   have hφ (W : X.Opens) (hWU : W ≤ U) (hWV : W ≤ V.1) (b : Γ(P, W)) :
       app W hWV b =
-        (Q.smul (U := W) (j.val.app (op W) b)).hom
+        (Q.smul (U := W) (j.val.app (op W) b)).asHom.hom
           (Q.presheaf.map (homOfLE hWU).op sQ) := by
     apply TopCat.Presheaf.IsSheaf.section_ext (Modules.isSheaf Q)
     intro x hxW
@@ -169,7 +169,7 @@ theorem ideal_power_quotient_affine_lifting_section
     refine ⟨D, hrW, hxr, ?_⟩
     have hglobal : app D hDV (P.presheaf.map (homOfLE hDV).op c) =
         (Q.smul (U := D) (j.val.app (op D)
-          (P.presheaf.map (homOfLE hDV).op c))).hom
+          (P.presheaf.map (homOfLE hDV).op c))).asHom.hom
           (Q.presheaf.map (homOfLE hDU).op sQ) := by
       rw [app_nat V.1 D (le_refl V.1) hDV, hφV]
       exact hg D hDU hDV c

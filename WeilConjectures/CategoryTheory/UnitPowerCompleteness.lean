@@ -70,16 +70,16 @@ private theorem principal_generators
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
     (c : (O.obj ⋙ forget CommRingCat).sections) (U : C) :
-    IsRingedIdealGeneratingList O (image (ringedKoszulScalar O c))
-      (image.ι (ringedKoszulScalar O c)) U 1 (fun _ ↦ c.val (op U)) := by
+    IsRingedIdealGeneratingList O (image (ringedKoszulScalar O c).asHom)
+      (image.ι (ringedKoszulScalar O c).asHom) U 1 (fun _ ↦ c.val (op U)) := by
   let R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj O
-  let p := factorThruImage (ringedKoszulScalar O c)
+  let p := factorThruImage (ringedKoszulScalar O c).asHom
   let σ := (unitGenerators (R.over U)).ofEpi (p.over U)
   refine ⟨σ, Equiv.ulift, ?_⟩
   intro i
-  have h := congrArg (fun f ↦ f.val.app (op U)) (image.fac (ringedKoszulScalar O c))
+  have h := congrArg (fun f ↦ f.val.app (op U)) (image.fac (ringedKoszulScalar O c).asHom)
   have h' := DFunLike.congr_fun (congrArg (fun f ↦ f.hom) h) (1 : O.obj.obj (op U))
-  change (image.ι (ringedKoszulScalar O c)).val.app (op U)
+  change (image.ι (ringedKoszulScalar O c).asHom).val.app (op U)
     (p.val.app (op U) (show R.obj.obj (op U) from 1)) = c.val (op U)
   refine h'.trans ?_
   change (1 : O.obj.obj (op U)) * sectionValue O c (op U) = sectionValue O c (op U)

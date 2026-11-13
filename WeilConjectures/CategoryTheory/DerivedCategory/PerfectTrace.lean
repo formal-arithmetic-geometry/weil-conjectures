@@ -77,14 +77,15 @@ unit of `D(R)`. -/
 lemma ε_Qh_comp_map_single_map_algebraMap_comp_inv (r : R) :
     ε Qh ≫ Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).map
-          (algebraMap R (End (𝟙_ (ModuleCat.{u} R))) r))) ≫ inv (ε Qh) =
-      algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r := by
+          ((algebraMap R (End (𝟙_ (ModuleCat.{u} R))) r)).asHom)) ≫ inv (ε Qh) =
+      (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r).asHom := by
   have : (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).Linear R :=
     inferInstanceAs ((CochainComplex.singleFunctor _ 0).Linear R)
   have hF := Functor.map_smul (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0 ⋙
     HomotopyCategory.quotient _ (.up ℤ) ⋙ Qh) r (𝟙 (𝟙_ (ModuleCat.{u} R)))
   rw [CategoryTheory.Functor.map_id] at hF
-  rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, End.one_def, End.one_def]
+  rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one,
+    End.smul_asHom, End.smul_asHom, End.one_asHom, End.one_asHom]
   erw [hF]
   rw [Linear.smul_comp, Linear.comp_smul]
   erw [Category.id_comp]
@@ -113,8 +114,8 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     (K : DerivedCategory (ModuleCat.{u} R)) [HasRightDual K] (w : K ⟶ K)
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
     MonoidalCategory.trace w =
-      algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
-        (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom) := by
+      (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
+        (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom)).asHom := by
   obtain ⟨a, ha⟩ := s.bddBelow
   obtain ⟨b, hb⟩ := s.bddAbove
   have : P.IsStrictlyGE a :=
@@ -130,18 +131,19 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
   · let _ := CochainComplex.hasRightDual P a b
     have hT : MonoidalCategory.trace v = (HomologicalComplex.single _ (.up ℤ) 0).map
         (algebraMap R (End (𝟙_ (ModuleCat.{u} R)))
-          (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom)) := by
+          (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom)).asHom := by
       refine HomologicalComplex.from_single_hom_ext ?_
       rw [CochainComplex.trace_f_zero_eq P a b v, HomologicalComplex.single_map_f_self]
       congr 2
       have key (i : ℤ) : (i.negOnePow : ℤ) • MonoidalCategory.trace (v.f i) =
-          algebraMap R (End (𝟙_ (ModuleCat.{u} R)))
-            ((i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom) := by
-        rw [ModuleCat.trace_eq_algebraMap_linearMapTrace, map_zsmul]
-      rw [map_sum]
+          (algebraMap R (End (𝟙_ (ModuleCat.{u} R)))
+            ((i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom)).asHom := by
+        rw [ModuleCat.trace_eq_algebraMap_linearMapTrace, map_zsmul, End.zsmul_asHom]
+      rw [map_sum, End.sum_asHom]
       refine (Finset.sum_subset (fun i hi ↦ Finset.mem_Icc.2 ⟨ha hi, hb hi⟩)
         fun i _ hi ↦ ?_).symm.trans (Finset.sum_congr rfl fun i _ ↦ key i)
-      rw [key i, (hs i hi).eq_of_src (v.f i) 0, ModuleCat.hom_zero, map_zero, smul_zero, map_zero]
+      rw [key i, (hs i hi).eq_of_src (v.f i) 0, ModuleCat.hom_zero, map_zero, smul_zero, map_zero,
+        End.zero_asHom]
     rw [hT, ε_Qh_comp_map_single_map_algebraMap_comp_inv]
   · rw [Iso.trans_hom, Iso.symm_hom, Iso.app_inv, reassoc_of% hw, Category.assoc,
       (quotientCompQhIso _).inv.naturality v]
@@ -163,8 +165,8 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
     letI := braidedCategory' (ModuleCat.{u} R)
     MonoidalCategory.trace w =
-      algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
-        (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom) :=
+      (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
+        (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom)).asHom :=
   letI := braidedCategory' (ModuleCat.{u} R)
   trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     (fun X Y _ _ ↦ braiding_hom_μ_Qh X Y) P v s hs hfree hfin K w e hw

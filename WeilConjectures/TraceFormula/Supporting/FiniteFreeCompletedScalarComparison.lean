@@ -1107,7 +1107,6 @@ attribute [local irreducible] completedScalarIdentityMultiplication
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-set_option maxHeartbeats 600000 in
 -- Concrete sheaf transports and evaluated cone identities require additional elaboration.
 private theorem identityInverseChainComparison_properties :
   let μ := completedScalarIdentityMultiplication l E Y

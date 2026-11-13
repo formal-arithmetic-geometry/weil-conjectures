@@ -74,7 +74,7 @@ theorem regularQuotientOppositeCompactSupportMate
       IsIso ((mateEquiv ax ay).symm
         (d.q (s := .integral E) (t := .finite E ⟨n + 1, Nat.succ_pos n⟩)
           (PurCompactSupport.reduction l E.carrier (n + 1) (Nat.succ_pos n))
-          (Allowed.reduction E ⟨n + 1, Nat.succ_pos n⟩)).inv).natTrans := by
+          (Allowed.reduction E ⟨n + 1, Nat.succ_pos n⟩)).inv) := by
   sorry
 
 end WeilConjectures.ExceptionalIntegralScalar

@@ -260,7 +260,6 @@ lemma condensedModUpperStarIso_hom_app (M : AdicSheaf l Y) :
         (condensedModUpperStarIsoAux l f).hom.app M :=
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The rewrites take place in module objects over the heavy condensed coefficient rings.
 /-- The key computation behind `condensedModUpperStarIso_tensor`, after precomposition with the
 comparison `comap α_f⁻¹ ≅ Ext_{α_f}` and the tensorator of the condensed pullback. -/

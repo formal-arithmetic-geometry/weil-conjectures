@@ -86,8 +86,6 @@ variable (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
   [IsOpenImmersion j.left]
 
-set_option maxHeartbeats 1000000 in
--- unifying the curve pieces of `K` with the general open–closed triangle is expensive
 /-- **Additivity of trace classes along the curve pieces** (blueprint
 `prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the
 Frobenius graph; `sk-i-additivity`): for a rational point `x` fixed by `Φ_m`, `m ≥ 1`, with
@@ -103,17 +101,29 @@ theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
       F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx) +
         F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
           (boundedConstructibleUpperShriekId ℓ X).inv.app _) := by
-  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_lowerStar j x hcompl K.carrier
-  rw [add_comm]
-  refine (K.graph m).traceClass_eq_add_of_distTriang F hT _ _ ?_ ?_
-    (eq_zero_of_lowerShriek_graph j x hcompl.disjoint _ _ _ hx)
-    (eq_zero_of_externalProduct_openPiece j x hcompl.disjoint _ _ K.carrier _)
-    (eq_zero_of_externalProduct_closedPiece j x hcompl.disjoint _ _ K.carrier _)
-    (eq_zero_of_externalProduct_shift_to_diag j x hcompl.disjoint _ _)
-  · exact comp_inv_app_eq_of_comp_eq (boundedConstructibleUpperShriekId ℓ X)
-      (K.openPieceCoeff_comp_counit j m sq)
-  · exact eq_comp_inv_app_comp_map (boundedConstructibleUpperShriekId ℓ X)
-      (K.upperStar_map_unit_comp_closedPieceCoeff m x hx)
+  refine (exists_distTriang_openImmersionLowerShriek_lowerStar
+    (ℓ := ℓ) j x hcompl K.carrier).elim (fun δ hT ↦ ?_)
+  have hu := comp_inv_app_eq_of_comp_eq (boundedConstructibleUpperShriekId ℓ X)
+    (K.openPieceCoeff_comp_counit j m sq)
+  have hz := eq_comp_inv_app_comp_map (boundedConstructibleUpperShriekId ℓ X)
+    (K.upperStar_map_unit_comp_closedPieceCoeff m x hx)
+  exact ((K.graph m).traceClass_eq_add_of_distTriang F hT
+    (K.openPieceCoeff j m sq ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _)
+    (K.closedPieceCoeff m x hx) hu hz
+    (eq_zero_of_lowerShriek_graph (ℓ := ℓ) j x hcompl.disjoint
+      ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
+      ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier) (frobeniusIterate Φ m) hx)
+    (eq_zero_of_externalProduct_openPiece (ℓ := ℓ) j x hcompl.disjoint
+      ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
+      ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier) K.carrier
+      ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier))
+    (eq_zero_of_externalProduct_closedPiece (ℓ := ℓ) j x hcompl.disjoint
+      ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
+      ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier) K.carrier
+      ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier))
+    (eq_zero_of_externalProduct_shift_to_diag (ℓ := ℓ) j x hcompl.disjoint
+      ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
+      ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier))).trans (add_comm _ _)
 
 /-- **Additivity of local terms along the curve pieces** (blueprint
 `prop-trf-trace-class-additivity`, item 2): for every open and closed subscheme `B` of the fixed

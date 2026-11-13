@@ -135,7 +135,6 @@ instance rationalTensorTransition_shift {E L : Index l (PadicAlgCl l)} (h : E �
     infer_instance
   exact commShift_of_localization Q (integralTensorW l X E) _
 
-set_option maxHeartbeats 600000 in
 /-- The localized comparisons obey the field-tower equation.
 Source: BS 6.8.14(2), Remark 6.8.15
 (blueprint: lem-sf-native-rational-tensor-cocone). -/
@@ -175,27 +174,23 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
       (rationalTensor l X C M).map ((S.assoc h k).hom.app (Q.obj K)) =
         (rationalTensorTransition l X C (h.trans k)).hom.app (Q.obj K)
     dsimp only [Q, S]
-    rw [rationalTensorTransition_hom_app l X C h K,
+    simp only [rationalTensorTransition_hom_app l X C h K,
       rationalTensorTransition_hom_app l X C (h.trans k) K]
     simp only [Category.assoc]
     have hn := (rationalTensorTransition l X C k).hom.naturality
       ((rationalIntegralTransition l X h).inv.app K)
     simp only [Functor.comp_obj, Functor.comp_map] at hn
-    rw [← Category.assoc ((rationalTensor l X C L).map
-      ((rationalIntegralTransition l X h).inv.app K)), hn]
-    simp only [Category.assoc]
-    rw [rationalTensorTransition_hom_app l X C k (T.obj K)]
-    dsimp only [T]
+    simp only [reassoc_of% hn]
+    simp only [rationalTensorTransition_hom_app l X C k]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.comp_map, Functor.comp_obj]
-    rw [← Functor.map_comp_assoc, ← Functor.map_comp]
-    simp only [Category.assoc]
+    simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
     dsimp only [S, q, q', q'', T, Q, Q'] at hq
-    rw [hq, Functor.map_comp]
+    simp only [hq, Functor.map_comp]
     have hf := (rationalTensorIntegral l X C M).inv.naturality
       ((integralTensorAssociator l X (PadicAlgCl l) h k).hom.app K)
     simp only [Functor.comp_obj, Functor.comp_map] at hf
-    rw [← (reassoc_of% hf)]
-    rw [reassoc_of% ((integralTensorComparison_coherent l X C).2 h k K)]
+    simp only [← (reassoc_of% hf)]
+    simp only [reassoc_of% ((integralTensorComparison_coherent l X C).2 h k K)]
 
 /-- The inverse comparisons have the contravariant cocone orientation.
 Source: BS 6.8.14(2) (blueprint: lem-sf-native-rational-tensor-cocone). -/

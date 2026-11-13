@@ -38,11 +38,6 @@ section
 
 variable [HenselianLocalRing R] [IsSepClosed (IsLocalRing.ResidueField R)] [WeaklyEtale R S]
 
-set_option synthInstance.maxHeartbeats 400000 in
--- Instance searches on tensor products with the integral closure of `R` in `L` unfold long
--- chains of subalgebra and tensor product instances and exceed the default heartbeat limits.
-set_option maxHeartbeats 1600000 in
--- Elaboration unfolds the same long instance chains as the instance searches.
 /-- If `R → S` is a local homomorphism of local rings, `R` is strictly henselian and `S` is
 weakly-étale over `R`, then for any algebraic field extension `L` of `κ(p)` the
 tensorproduct `L ⊗[R] S` has no nontrivial idempotent elements. -/
@@ -145,11 +140,6 @@ lemma subsingleton_primeSpectrum_fiber (p : Ideal R) [p.IsPrime] :
   · exact h0 h'
   · exact h1 h'
 
-set_option synthInstance.maxHeartbeats 400000 in
--- Instance searches on tensor products with residue fields of primes of the fibre ring
--- unfold long quotient/localization chains and exceed the default heartbeat limits.
-set_option maxHeartbeats 1600000 in
--- Elaboration unfolds the same long quotient/localization chains as the instance searches.
 attribute [-instance] IsLocalRing.ResidueField.instAlgebra in
 /-- If `R → S` is a local homomorphism of local rings, `R` is henselian with separably
 closed residue field and `S` is weakly étale over `R`, the residue field extensions of the

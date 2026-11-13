@@ -74,8 +74,6 @@ lemma classTest_kunnethVerdierMap :
 
 end Test
 
-set_option maxHeartbeats 2000000 in
--- the adjunctions of bounded constructible complexes are unfolded in the defeq checks
 /-- The left projection morphism of a proper morphism after a unit. -/
 lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom]
     [QuasiCompact A.hom] [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
@@ -91,7 +89,10 @@ lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOf
         ((boundedConstructibleUpperStar _ ℓ g).obj (M ⊗ W)) ≫
       (boundedConstructibleLowerShriek ℓ g).map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g) M W) :=
-  Verdier.leftProjection_unit_app _ _ _ _
+  Verdier.leftProjection_unit_app (boundedConstructibleUpperStar _ ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
+    (boundedConstructibleExceptionalProjection ℓ g)
     (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
     (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M W
@@ -111,7 +112,6 @@ section ExceptionalKunneth
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The adjoint of the exceptional Künneth map precomposed with a map `t : N ⟶ ω_Y` in the second
 factor: the counit of `Ra_Y! ⊣ Ra_Y^!` is precomposed with `Ra_Y! t`. -/
@@ -184,7 +184,6 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
-set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The base-change core of the exceptional Künneth part of identity (a) (blueprint
 `lem-trf-trace-source-exchange`, Step 3): the projection formula for `p₁'`, compact-support base

@@ -33,10 +33,10 @@ private theorem mate_transport
     (α : G' ⋙ L₂' ⟶ L₁' ⋙ H') (M : B) :
     (mateEquiv a b (TwoSquare.mk _ _ _ _
       (Functor.whiskerRight g.hom L₂ ≫ Functor.whiskerLeft G' f.hom ≫ α ≫
-        Functor.whiskerRight e.inv H' ≫ Functor.whiskerLeft L₁ h.inv))).natTrans.app M ≫
+        Functor.whiskerRight e.inv H' ≫ Functor.whiskerLeft L₁ h.inv))).app M ≫
         (conjugateIsoEquiv b b' f.symm).hom.app (H.obj M) ≫ R₂'.map (h.hom.app M) =
       g.hom.app (R₁.obj M) ≫ G'.map ((conjugateIsoEquiv a a' e.symm).hom.app M) ≫
-        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ α)).natTrans.app M := by
+        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ α)).app M := by
   let w : TwoSquare G' L₁ L₂ H' := .mk _ _ _ _
     (Functor.whiskerLeft G' f.hom ≫ α ≫ Functor.whiskerRight e.inv H')
   have he : (TwoSquare.mk _ _ _ _ α).whiskerLeft e.inv =
@@ -46,8 +46,8 @@ private theorem mate_transport
   have hh := mateEquiv_whiskerTop_conjugateEquiv a a' b b' e.inv f.inv w
     (TwoSquare.mk _ _ _ _ α) he
   have hs := mateEquiv_whiskerTop_whiskerBottom a b w g.hom h.inv
-  have ht := congrArg (fun t ↦ t.natTrans.app M) hs
-  have hu := congrArg (fun t ↦ t.natTrans.app M) hh
+  have ht := congrArg (fun t ↦ t.app M) hs
+  have hu := congrArg (fun t ↦ t.app M) hh
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     TwoSquare.whiskerLeft, TwoSquare.whiskerRight, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj] at ht hu
@@ -73,10 +73,10 @@ private theorem mate_transport_with_data
     (δ : R₁' ⋙ G' ⟶ H' ⋙ R₂') (m : R₁ ⋙ G ⟶ H ⋙ R₂)
     (h₁ : d₁ = conjugateIsoEquiv a a' e.symm)
     (h₂ : d₂ = conjugateIsoEquiv b b' f.symm)
-    (hδ : δ = (mateEquiv a' b' (TwoSquare.mk _ _ _ _ α)).natTrans)
+    (hδ : δ = (mateEquiv a' b' (TwoSquare.mk _ _ _ _ α)))
     (hm : m = (mateEquiv a b (TwoSquare.mk _ _ _ _
       (Functor.whiskerRight g.hom L₂ ≫ Functor.whiskerLeft G' f.hom ≫ α ≫
-        Functor.whiskerRight e.inv H' ≫ Functor.whiskerLeft L₁ h.inv))).natTrans)
+        Functor.whiskerRight e.inv H' ≫ Functor.whiskerLeft L₁ h.inv))))
     (M : B) :
     m.app M ≫ d₂.hom.app (H.obj M) ≫ R₂'.map (h.hom.app M) =
       g.hom.app (R₁.obj M) ≫ G'.map (d₁.hom.app M) ≫ δ.app M := by
@@ -135,11 +135,11 @@ private def modelMate : modelPush l E r ⋙ modelShriek l E i ⟶
   (mateEquiv (ProEtale.SemilinearProperOpen.adj (scalarRings l E) (scalarTransitions l E) r)
     (ProEtale.SemilinearProperOpen.adj (scalarRings l E) (scalarTransitions l E) p)
       (TwoSquare.mk _ _ _ _ (ProEtale.SemilinearProperOpen.alpha
-        (scalarRings l E) (scalarTransitions l E) k r p i h))).natTrans
+        (scalarRings l E) (scalarTransitions l E) k r p i h)))
 
 private theorem model_mate_normalized : modelMate l E k r p i h =
     (mateEquiv (modelAdj l E r) (modelAdj l E p)
-      (TwoSquare.mk _ _ _ _ (modelAlpha l E k r p i h))).natTrans := by
+      (TwoSquare.mk _ _ _ _ (modelAlpha l E k r p i h))) := by
   rfl
 
 private theorem transport_mate_normalized : properOpenTransportMate l E o b k r p i h =
@@ -148,7 +148,7 @@ private theorem transport_mate_normalized : properOpenTransportMate l E o b k r 
         Functor.whiskerLeft (modelShriek l E i) (modelBridgePull l E o b p).hom ≫
         modelAlpha l E k r p i h ≫
         Functor.whiskerRight (modelBridgePull l E o b r).inv (modelShriek l E k) ≫
-        Functor.whiskerLeft (pull l E r) (modelBridgeShriek l E o b k).inv))).natTrans := by
+        Functor.whiskerLeft (pull l E r) (modelBridgeShriek l E o b k).inv))) := by
   rfl
 
 attribute [local irreducible] modelPull modelPush modelShriek modelAdj
@@ -180,7 +180,7 @@ theorem properOpenTransportMate_bridge
           (scalarTransitions l E) r) (ProEtale.SemilinearProperOpen.adj
             (scalarRings l E) (scalarTransitions l E) p)
           (TwoSquare.mk _ _ _ _ (ProEtale.SemilinearProperOpen.alpha
-            (scalarRings l E) (scalarTransitions l E) k r p i h))).natTrans.app M := by
+            (scalarRings l E) (scalarTransitions l E) k r p i h))).app M := by
   exact @mate_transport_with_data
     (System l E W) (System l E U) (System l E Z) (System l E V)
     (inferInstanceAs (Category.{u + 2} (System l E W)))

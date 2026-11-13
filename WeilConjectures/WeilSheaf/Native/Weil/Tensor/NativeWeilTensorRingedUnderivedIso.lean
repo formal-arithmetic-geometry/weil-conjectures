@@ -81,7 +81,6 @@ private theorem parameter_adjunct_map
       ((ihomBifunctor k₀ l X).map p.op).app ((T.obj P').obj Q')) ht
 
 set_option linter.unusedSectionVars false in
-set_option maxHeartbeats 1000000 in
 -- The monoidal unfolding of the ringed tensor mate needs extra time.
 private theorem inverse_naturality
     (U : NativeWeilRingedTensorUnderivedData b T adj)

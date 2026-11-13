@@ -41,14 +41,14 @@ Source: blueprint lem-weil-finite-duality-site-comparison, final proof paragraph
 (blueprint: lem-sf-evaluation-bidual-comparison-transport). -/
 noncomputable def evaluationDualComparison (F : C ⥤ C') [F.LaxMonoidal]
     {W : C} {W' : C'} (w : F.obj W ≅ W') (K : C)
-    (hβ : IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W)) :
+    (hβ : IsIso ((Functor.LaxMonoidal.ihomComparison F K).app W)) :
     F.obj ((ihom K).obj W) ≅ (ihom (F.obj K)).obj W' :=
-  @asIso _ _ _ _ ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W) hβ ≪≫
+  @asIso _ _ _ _ ((Functor.LaxMonoidal.ihomComparison F K).app W) hβ ≪≫
     (ihom (F.obj K)).mapIso w
 
 private lemma comparison_ev (F : C ⥤ C') [F.LaxMonoidal]
     {W : C} {W' : C'} (w : F.obj W ≅ W') (K : C)
-    (hβ : IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W)) :
+    (hβ : IsIso ((Functor.LaxMonoidal.ihomComparison F K).app W)) :
     F.obj K ◁ (evaluationDualComparison F w K hβ).hom ≫ (ihom.ev (F.obj K)).app W' =
       Functor.LaxMonoidal.μ F K _ ≫ F.map ((ihom.ev K).app W) ≫ w.hom := by
   dsimp only [evaluationDualComparison, Iso.trans_hom, asIso_hom, Functor.mapIso_hom]
@@ -57,8 +57,8 @@ private lemma comparison_ev (F : C ⥤ C') [F.LaxMonoidal]
 
 private lemma comparison_natural (F : C ⥤ C') [F.LaxMonoidal]
     {W : C} {W' : C'} (w : F.obj W ≅ W') {K L : C} (f : L ⟶ K)
-    (hK : IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W))
-    (hL : IsIso ((Functor.LaxMonoidal.ihomComparison F L).natTrans.app W)) :
+    (hK : IsIso ((Functor.LaxMonoidal.ihomComparison F K).app W))
+    (hL : IsIso ((Functor.LaxMonoidal.ihomComparison F L).app W)) :
     F.map ((pre f).app W) ≫ (evaluationDualComparison F w L hL).hom =
       (evaluationDualComparison F w K hK).hom ≫ (pre (F.map f)).app W' := by
   dsimp only [evaluationDualComparison, Iso.trans_hom, asIso_hom, Functor.mapIso_hom]
@@ -67,8 +67,8 @@ private lemma comparison_natural (F : C ⥤ C') [F.LaxMonoidal]
 
 private lemma comparison_bidual [SymmetricCategory C] [SymmetricCategory C']
     (F : C ⥤ C') [F.Braided] {W : C} {W' : C'} (w : F.obj W ≅ W') (K : C)
-    (hK : IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W))
-    (hDK : IsIso ((Functor.LaxMonoidal.ihomComparison F ((ihom K).obj W)).natTrans.app W)) :
+    (hK : IsIso ((Functor.LaxMonoidal.ihomComparison F K).app W))
+    (hDK : IsIso ((Functor.LaxMonoidal.ihomComparison F ((ihom K).obj W)).app W)) :
     toIhomIhom W' (F.obj K) = F.map (toIhomIhom W K) ≫
       (evaluationDualComparison F w ((ihom K).obj W) hDK).hom ≫
       (pre (evaluationDualComparison F w K hK).inv).app W' := by
@@ -123,7 +123,7 @@ theorem evaluationBidualComparisonTransport
     (hF : ∀ K : C, B K → B' (F.obj K))
     [(B'.lift (B.ι ⋙ F) (fun K ↦ hF K.obj K.property)).IsEquivalence]
     (hβ : ∀ (K : C), B K →
-      IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W)) :
+      IsIso ((Functor.LaxMonoidal.ihomComparison F K).app W)) :
     ∃ hD' : ∀ P : C', B' P → B' ((ihom P).obj W'),
       (∃ c : B.liftDual (internalHom.flip.obj W) hD ⋙
           B'.lift (B.ι ⋙ F) (fun K ↦ hF K.obj K.property) ≅

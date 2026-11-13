@@ -134,7 +134,6 @@ instance isMonoidal_lowerStarForgetAbIso_hom (f : Y ⟶ X) :
     NatTrans.IsMonoidal (lowerStarForgetAbIso l f).hom :=
   Functor.isMonoidal_sheafPushforwardContinuousCompSheafComposeIso_hom _ _ _ _
 
-set_option maxHeartbeats 400000 in
 -- Rewriting with the monoidality of `f_* ⋙ forgetAb ≅ forgetAb ⋙ f_*` unfolds the sheafified
 -- tensor products when unifying the two lax monoidal structures.
 variable (l) in

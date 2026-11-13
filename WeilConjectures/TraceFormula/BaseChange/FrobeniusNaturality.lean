@@ -42,7 +42,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-set_option maxHeartbeats 400000 in
 -- the rewrites of `eqToHom` in the categories of module objects are slow to elaborate
 /-- Compatibility of trivializations of pullbacks with `g^*` is invariant under transporting the
 trivializations along equalities `F_X = F_X'`, `F_T = F_T'` of the endomorphisms. -/
@@ -110,7 +109,6 @@ theorem upperStarComp_hom_app_comp_map_upperStarFrobeniusIso_hom_app (f : X ⟶ 
       (natCast_ringChar_left_eq_zero Y) (natCast_ringChar_left_eq_zero X)
       (FiniteField.frobeniusExponent k * N) f.left) M
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived `#k ^ N`-power Frobenius trivialization**: for a morphism
 `f : X ⟶ Y` of schemes over the finite field `k`, the two identifications

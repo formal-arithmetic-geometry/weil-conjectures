@@ -46,7 +46,6 @@ private theorem reflects_on_essential_image
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
 -- The transported overlap restriction requires additional instance search.
 -- Its derived adjunction and comparison need a larger elaboration budget.
 

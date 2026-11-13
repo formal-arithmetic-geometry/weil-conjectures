@@ -44,7 +44,7 @@ def localOrdinaryPullbackSquare
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_X)
         ((proEtaleBaseChange f).obj V) :=
   ((mateEquiv g.operation.moduleAdjunction l.operation.moduleAdjunction).symm
-    (TwoSquare.mk _ _ _ _ l.ordinaryDirectImage.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ l.ordinaryDirectImage.hom))
 
 section OperationNormalization
 variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
@@ -276,7 +276,7 @@ theorem localPullbackNormalization
   let adjv := l.operation.moduleAdjunction.mapHomologicalComplex (.up ℤ)
   let sd := TwoSquare.mk l.restrictionY.model.functor g.operation.left
     l.operation.left l.restrictionX.model.functor l.pullback.inv
-  have hm : (mateEquiv g.operation.derivedAdjunction l.operation.derivedAdjunction sd).natTrans =
+  have hm : (mateEquiv g.operation.derivedAdjunction l.operation.derivedAdjunction sd) =
       l.directImage.hom := by
     apply NatTrans.ext
     funext E
@@ -299,7 +299,7 @@ theorem localPullbackNormalization
       sd (DerivedCategory.Q.obj P)
     change l.restrictionY.model.functor.map
         (g.operation.derivedAdjunction.unit.app (DerivedCategory.Q.obj P)) ≫
-        (mateEquiv g.operation.derivedAdjunction l.operation.derivedAdjunction sd).natTrans.app
+        (mateEquiv g.operation.derivedAdjunction l.operation.derivedAdjunction sd).app
           (g.operation.left.obj (DerivedCategory.Q.obj P)) = _ at hu
     rw [hm] at hu
     exact hu

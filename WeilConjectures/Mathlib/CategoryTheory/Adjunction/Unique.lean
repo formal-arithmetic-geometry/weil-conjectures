@@ -66,11 +66,11 @@ of the transported 2-square `G ⋙ L₂ ⟶ G ⋙ L₂' ⟶ L₁' ⋙ H ⟶ L₁
 lemma mateEquiv_leftAdjointUniq (adj₁ : L₁ ⊣ R₁) (adj₁' : L₁' ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (adj₂' : L₂' ⊣ R₂) (w : TwoSquare G L₁' L₂' H) :
     mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _
-      (Functor.whiskerLeft G (adj₂.leftAdjointUniq adj₂').hom ≫ w.natTrans ≫
+      (Functor.whiskerLeft G (adj₂.leftAdjointUniq adj₂').hom ≫ w ≫
         Functor.whiskerRight (adj₁.leftAdjointUniq adj₁').inv H)) =
       mateEquiv adj₁' adj₂' w := by
   have h : TwoSquare.mk _ _ _ _
-      (Functor.whiskerLeft G (adj₂.leftAdjointUniq adj₂').hom ≫ w.natTrans ≫
+      (Functor.whiskerLeft G (adj₂.leftAdjointUniq adj₂').hom ≫ w ≫
         Functor.whiskerRight (adj₁.leftAdjointUniq adj₁').inv H) =
       (w.whiskerRight (adj₂.leftAdjointUniq adj₂').hom).whiskerLeft
         (adj₁.leftAdjointUniq adj₁').inv := by

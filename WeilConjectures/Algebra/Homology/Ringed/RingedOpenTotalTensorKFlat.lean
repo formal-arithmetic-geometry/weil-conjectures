@@ -832,7 +832,6 @@ private theorem tensorNatural_from_squares {D D' : Type*} [Category* D] [Categor
   rw [← Category.assoc, tensorHom_comp_tensorHom, ha, hb, ← tensorHom_comp_tensorHom,
     Category.assoc, Functor.LaxMonoidal.μ_natural, Category.assoc]
 
-set_option maxHeartbeats 500000 in
 -- Keep the inverse counit as a natural transformation throughout the tensor calculation.
 private theorem tensorSheafification_natural
     {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}

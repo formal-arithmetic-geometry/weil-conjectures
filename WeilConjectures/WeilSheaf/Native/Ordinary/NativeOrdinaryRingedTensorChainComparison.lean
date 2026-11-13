@@ -36,9 +36,7 @@ abbrev NativeOrdinaryRingedTensorChainComparison
   OrdinaryRingedTensorChainComparison l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
     b.K b.Q b.ordinary b.ordinaryHom κ d
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Compare the ordinary and ringed tensor instances through their APIs.
-set_option maxHeartbeats 1200000 in
 -- The concrete tensor constructions require large definitional equalities.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in

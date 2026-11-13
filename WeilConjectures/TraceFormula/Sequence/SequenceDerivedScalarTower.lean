@@ -95,7 +95,6 @@ private theorem scalarTower_pasting
       rw [hO, ← reassoc_of% hX, reassoc_of% hd]
     _ = _ := by rw [hC]
 
-set_option maxHeartbeats 800000 in
 -- The comparison types require repeated independent-universe sheaf instance synthesis.
 /-- Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
 (blueprint: lem-trf-sequence-derived-scalar-tower).

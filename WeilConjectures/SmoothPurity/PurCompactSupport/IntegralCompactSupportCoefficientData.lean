@@ -257,7 +257,7 @@ def openRestrictionMap {R S : Coefficients.{u}} (a : Change R S)
   ((mateEquiv (openAdjunction S j) (openAdjunction R j)).symm
     (TwoSquare.mk _ _ _ _ (inv (proEtaleRingRestrictionPullbackInv
       j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
-        (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j))))).natTrans
+        (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)))))
 
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall
@@ -380,7 +380,7 @@ def comparison {R S : Coefficients.{u}} (a : Change R S)
       pbcDerivedExtend (a.map X) ⋙ image S c :=
   ((mateEquiv (pbcDerivedScalarAdjunction (a.map X))
     (pbcDerivedScalarAdjunction (a.map Y))).symm
-      (TwoSquare.mk _ _ _ _ (restriction a c).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (restriction a c).hom))
 
 /-- The canonical composition of module direct images, fixed on every section.
 Source: Stacks Tags 03D8, 0D6D

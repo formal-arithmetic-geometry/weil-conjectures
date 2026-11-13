@@ -81,8 +81,74 @@ private theorem strictlyPerfect_overEquiv_isKFlat (S : Scheme.{u}) (U : S.Opens)
     infer_instance
   exact CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat C hbounded hflat B hB
 
-set_option maxHeartbeats 600000 in
--- The residue and over-site comparisons involve several chosen derived localizations.
+/-- An invertible counit on selected complexes gives natural homology comparisons. -/
+private theorem exists_homology_comparison_of_counit
+    {C A B D : Type*} [Category* C] [Category* A] [Category* B] [Category* D]
+    [Abelian C] [Abelian A] [Abelian B] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory A] [HasDerivedCategory B]
+    (O : C ⥤ A) [O.Additive] [PreservesFiniteLimits O] [PreservesFiniteColimits O]
+    (F : A ⥤ B) [F.Additive] (L : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (Γ : B ⥤ D) [Γ.Additive] [Γ.PreservesHomology]
+    (R : C ⥤ D) [R.PreservesZeroMorphisms] (d : O ⋙ F ⋙ Γ ≅ R)
+    (p : CochainComplex C ℤ → Prop)
+    (hε : ∀ K, p K → IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj
+      ((O.mapHomologicalComplex (.up ℤ)).obj K)))) :
+    ∃ t : ∀ (K : CochainComplex C ℤ) (_hK : p K),
+        ((R.mapHomologicalComplex (.up ℤ)).obj K).homology 0 ≅
+          (O.mapDerivedCategory ⋙ L ⋙ DerivedCategory.homologyFunctor B 0 ⋙ Γ).obj
+            (DerivedCategory.Q.obj K),
+      ∀ K K' (hK : p K) (hK' : p K') (α : K ⟶ K'),
+        HomologicalComplex.homologyMap ((R.mapHomologicalComplex (.up ℤ)).map α) 0 ≫
+            (t K' hK').hom =
+          (t K hK).hom ≫
+            (O.mapDerivedCategory ⋙ L ⋙ DerivedCategory.homologyFunctor B 0 ⋙ Γ).map
+              (DerivedCategory.Q.map α) := by
+  let Oc := O.mapHomologicalComplex (.up ℤ)
+  let Fc := F.mapHomologicalComplex (.up ℤ)
+  let H := DerivedCategory.homologyFunctor B 0
+  let HM := HomologicalComplex.homologyFunctor D (.up ℤ) 0
+  let hΓ := (Γ.mapHomologicalComplexHomologyIso (.up ℤ) 0).symm
+  let v := NatIso.mapHomologicalComplex d (.up ℤ)
+  let z := Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft (Oc ⋙ Fc) (DerivedCategory.homologyFunctorFactors B 0)) Γ ≪≫
+    Functor.isoWhiskerLeft (Oc ⋙ Fc) hΓ ≪≫ Functor.isoWhiskerRight v HM
+  let εc : DerivedCategory.Q ⋙ L ⟶ Fc ⋙ DerivedCategory.Q :=
+    (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A).symm L).hom ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient A (.up ℤ)) ε ≫
+      (Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ))
+        DerivedCategory.Qh).hom ≫
+      (Functor.isoWhiskerLeft Fc (DerivedCategory.quotientCompQhIso B)).hom
+  have hεc (K : CochainComplex C ℤ) (hK : p K) : IsIso (εc.app (Oc.obj K)) := by
+    have := hε K hK
+    dsimp only [εc, NatTrans.comp_app, Functor.whiskerLeft_app]
+    infer_instance
+  let η : DerivedCategory.Q ⋙ O.mapDerivedCategory ⋙ L ⟶
+      Oc ⋙ Fc ⋙ DerivedCategory.Q :=
+    (Functor.isoWhiskerRight O.mapDerivedCategoryFactors L).hom ≫
+      Functor.whiskerLeft Oc εc
+  have hη (K : CochainComplex C ℤ) (hK : p K) : IsIso (η.app K) := by
+    have := hεc K hK
+    dsimp only [η, NatTrans.comp_app, Functor.whiskerLeft_app]
+    infer_instance
+  let τ : DerivedCategory.Q ⋙ O.mapDerivedCategory ⋙ L ⋙ H ⋙ Γ ⟶
+      R.mapHomologicalComplex (.up ℤ) ⋙ HM :=
+    Functor.whiskerRight η (H ⋙ Γ) ≫ z.hom
+  have hτ (K : CochainComplex C ℤ) (hK : p K) : IsIso (τ.app K) := by
+    have := hη K hK
+    change IsIso ((H ⋙ Γ).map (η.app K) ≫ (z.app K).hom)
+    infer_instance
+  let t := fun K hK ↦ by
+    have := hτ K hK
+    exact (asIso (τ.app K)).symm
+  refine ⟨t, ?_⟩
+  intro K K' hK hK' α
+  have := hτ K hK
+  have := hτ K' hK'
+  dsimp only [t, Iso.symm_hom, asIso_inv]
+  exact inverse_naturality_of_isIso_app τ α
+
 /-- Termwise residue stalk homology of strictly perfect localized complexes agrees
 naturally with localized derived residue homology. The comparisons are simultaneous
 for all strictly perfect complexes and all their chain maps.
@@ -141,6 +207,13 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
           (t P hP).hom ≫ (localizedResidueHomology S U x).map (DerivedCategory.Q.map α) :=
   by
     classical
+    let C := SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)
+    let A := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
+    let B := SheafOfModules.{u}
+      (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace)
+    let : Abelian C := inferInstanceAs (Abelian C)
+    let : Abelian A := inferInstanceAs (Abelian A)
+    let : Abelian B := inferInstanceAs (Abelian B)
     let O := (Scheme.Modules.overEquiv U).functor
     have : O.Additive := Functor.additive_of_preserves_binary_products _
     have : (ModuleCat.extendScalars (IsLocalRing.residue
@@ -157,9 +230,6 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
           intro M N
           simp only [Functor.comp_map]
           rw [Functor.map_zero, Functor.map_zero, Functor.map_zero] }
-    let A := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
-    let B := SheafOfModules.{u}
-      (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace)
     let : HasDerivedCategory.{u + 1} U.toScheme.Modules := HasDerivedCategory.standard _
     let : HasDerivedCategory.{u + 1} A := HasDerivedCategory.standard _
     let : HasDerivedCategory.{u + 1} B := HasDerivedCategory.standard _
@@ -173,8 +243,6 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
     subst F
     let F := Scheme.Modules.tensorPullback f
     have : F.Additive := hAdd
-    let Fc := F.mapHomologicalComplex (.up ℤ)
-    let Oc := O.mapHomologicalComplex (.up ℤ)
     let Γ : B ⥤ ModuleCat.{u} (U.toScheme.residueField x) :=
       SheafOfModules.evaluation
         (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace) (Opposite.op ⊤) ⋙
@@ -196,82 +264,11 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
     have : PreservesFiniteColimits Γ := comp_preservesFiniteColimits _ _
     have : Γ.Additive := Functor.additive_of_preserves_binary_products _
     have : Γ.PreservesHomology := inferInstance
-    let H := DerivedCategory.homologyFunctor B 0
-    let HM := HomologicalComplex.homologyFunctor
-      (ModuleCat.{u} (U.toScheme.residueField x)) (.up ℤ) 0
-    let hΓ := (Γ.mapHomologicalComplexHomologyIso (.up ℤ) 0).symm
     obtain ⟨d⟩ := Scheme.nonempty_residuePullback_globalSections_iso U.toScheme x
-    let v := NatIso.mapHomologicalComplex (Functor.isoWhiskerLeft O d) (.up ℤ)
-    let z := Functor.isoWhiskerRight
-      (Functor.isoWhiskerLeft (Oc ⋙ Fc) (DerivedCategory.homologyFunctorFactors B 0)) Γ ≪≫
-      Functor.isoWhiskerLeft (Oc ⋙ Fc) hΓ ≪≫ Functor.isoWhiskerRight v HM
-    obtain ⟨εc, hεc⟩ : ∃ εc :
-        DerivedCategory.Q ⋙ derivedPullback.{u, u + 1} f ⟶ Fc ⋙ DerivedCategory.Q,
-        ∀ (P : CochainComplex
-            (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ),
-          Scheme.IsStrictlyPerfect S U P → IsIso (εc.app (Oc.obj P)) := by
-      refine ⟨(Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A).symm
-          (derivedPullback f)).hom ≫
-        Functor.whiskerLeft (HomotopyCategory.quotient A (.up ℤ)) ε ≫
-        (Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ))
-          DerivedCategory.Qh).hom ≫
-        (Functor.isoWhiskerLeft Fc (DerivedCategory.quotientCompQhIso B)).hom, ?_⟩
-      intro P hP
-      have hε : IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj (Oc.obj P))) :=
-        hcompute _ (strictlyPerfect_overEquiv_isKFlat S U P hP)
-      change IsIso
-        (((Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A).symm
-          (derivedPullback f)).app (Oc.obj P)).hom ≫
-        ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj (Oc.obj P)) ≫
-        ((Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ))
-          DerivedCategory.Qh).app (Oc.obj P)).hom ≫
-        ((Functor.isoWhiskerLeft Fc (DerivedCategory.quotientCompQhIso B)).app
-          (Oc.obj P)).hom)
-      exact IsIso.comp_isIso'
-        ((Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A).symm
-          (derivedPullback f)).app (Oc.obj P)).isIso_hom
-        (IsIso.comp_isIso' hε (IsIso.comp_isIso'
-          ((Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ))
-            DerivedCategory.Qh).app (Oc.obj P)).isIso_hom
-          ((Functor.isoWhiskerLeft Fc (DerivedCategory.quotientCompQhIso B)).app
-            (Oc.obj P)).isIso_hom))
-    obtain ⟨η, hη⟩ : ∃ η :
-        DerivedCategory.Q ⋙ O.mapDerivedCategory.{w, u + 1} ⋙ derivedPullback f ⟶
-          Oc ⋙ Fc ⋙ DerivedCategory.Q,
-        ∀ (P : CochainComplex
-            (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ),
-          Scheme.IsStrictlyPerfect S U P → IsIso (η.app P) := by
-      refine ⟨(Functor.isoWhiskerRight O.mapDerivedCategoryFactors
-        (derivedPullback f)).hom ≫ Functor.whiskerLeft Oc εc, ?_⟩
-      intro P hP
-      change IsIso
-        (((Functor.isoWhiskerRight O.mapDerivedCategoryFactors
-          (derivedPullback f)).app P).hom ≫ εc.app (Oc.obj P))
-      exact IsIso.comp_isIso'
-        ((Functor.isoWhiskerRight O.mapDerivedCategoryFactors
-          (derivedPullback f)).app P).isIso_hom (hεc P hP)
-    obtain ⟨τ, hτ⟩ : ∃ τ :
-        DerivedCategory.Q ⋙ localizedResidueHomology S U x ⟶
-          ((O ⋙ RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace x ⋙
-            ModuleCat.extendScalars (IsLocalRing.residue
-              (U.toScheme.presheaf.stalk x))).mapHomologicalComplex (.up ℤ)) ⋙ HM,
-        ∀ (P : CochainComplex
-            (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ),
-          Scheme.IsStrictlyPerfect S U P → IsIso (τ.app P) := by
-      refine ⟨Functor.whiskerRight η (H ⋙ Γ) ≫ z.hom, ?_⟩
-      intro P hP
-      have : IsIso (η.app P) := hη P hP
-      change IsIso ((H ⋙ Γ).map (η.app P) ≫ (z.app P).hom)
-      exact IsIso.comp_isIso' ((H ⋙ Γ).map_isIso (η.app P)) (z.app P).isIso_hom
-    let t := fun P hP ↦ by
-      have : IsIso (τ.app P) := hτ P hP
-      exact (asIso (τ.app P)).symm
-    refine ⟨t, ?_⟩
-    intro P Q hP hQ α
-    have : IsIso (τ.app P) := hτ P hP
-    have : IsIso (τ.app Q) := hτ Q hQ
-    dsimp only [t, Iso.symm_hom, asIso_inv]
-    simpa only [Functor.comp_map, HM, HomologicalComplex.homologyFunctor_map] using
-      inverse_naturality_of_isIso_app τ α
+    exact exists_homology_comparison_of_counit O F (derivedPullback f) ε Γ
+      (O ⋙ RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace x ⋙
+        ModuleCat.extendScalars (IsLocalRing.residue (U.toScheme.presheaf.stalk x)))
+      (Functor.isoWhiskerLeft O d) (Scheme.IsStrictlyPerfect S U)
+      (fun P hP ↦ hcompute _ (strictlyPerfect_overEquiv_isKFlat S U P hP))
 
 end AlgebraicGeometry

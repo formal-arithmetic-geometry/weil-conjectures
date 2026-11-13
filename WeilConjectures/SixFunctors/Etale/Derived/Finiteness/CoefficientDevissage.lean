@@ -119,13 +119,13 @@ theorem isConstructibleSheaf_restrictScalars_iff_of_finite [Finite Λ] [Finite �
     rw [← isFiniteLocallyConstantSheaf_restrictScalars_iff φ]
     exact IsFiniteLocallyConstantSheaf.of_iso
       (F := (Etale.upperStar _ (S.immersion i)).obj ((Sheaf.restrictScalars _ φ).obj G))
-      (asIso ((Etale.upperStarRestrictScalars φ (S.immersion i)).natTrans.app G))
+      (asIso ((Etale.upperStarRestrictScalars φ (S.immersion i)).app G))
   · rintro ⟨S, hS⟩
     refine ⟨S, fun i ↦ ?_⟩
     have := (isFiniteLocallyConstantSheaf_restrictScalars_iff φ _).2 (hS i)
     exact IsFiniteLocallyConstantSheaf.of_iso
       (F := (Sheaf.restrictScalars _ φ).obj ((Etale.upperStar _ (S.immersion i)).obj G))
-      (asIso ((Etale.upperStarRestrictScalars φ (S.immersion i)).natTrans.app G)).symm
+      (asIso ((Etale.upperStarRestrictScalars φ (S.immersion i)).app G)).symm
 
 end Scheme
 

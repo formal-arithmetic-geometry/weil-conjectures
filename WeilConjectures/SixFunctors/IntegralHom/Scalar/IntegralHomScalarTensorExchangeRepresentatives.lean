@@ -42,7 +42,6 @@ private theorem exchange_naturality
   rw [ha, Category.assoc, tensorAdjunctionExchange_naturality_second,
     ← Category.assoc, tensorAdjunctionExchange_naturality_first, Category.assoc, ← hb]
 
-set_option maxHeartbeats 800000 in
 -- Paste the representative and counit squares with the tensor models kept abstract.
 attribute [-instance] derivedCategory in
 /-- The two normalized scalar tensor comparisons commute with adjunction exchange

@@ -95,7 +95,7 @@ private theorem transport_eq_mate
     (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ b.unit ≫
         (Functor.squareTransport R₁ R₂ θ).hom ≫
         Functor.whiskerRight a.counit _ ≫ (Functor.leftUnitor _).hom =
-      (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom)).natTrans := by
+      (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom)) := by
   ext K
   simp only [mateEquiv, Equiv.coe_fn_mk,
     NatTrans.comp_app, Functor.squareTransport_hom_app, Functor.whiskerLeft_app,

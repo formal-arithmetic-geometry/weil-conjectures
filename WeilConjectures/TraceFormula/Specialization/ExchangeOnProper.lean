@@ -214,8 +214,8 @@ variable {DB DC DP SB SC SP : Type*} [Category DB] [Category DC] [Category DP] [
   (αg : ΨC ⋙ Lg' ⟶ Lg ⋙ ΨB) (αh : ΨP ⋙ Lh' ⟶ Lh ⋙ ΨC) (αhg : ΨP ⋙ Lhg' ⟶ Lhg ⋙ ΨB)
   (hα : ∀ K, αhg.app K ≫ ΨB.map (c.hom.app K) =
     c'.hom.app (ΨP.obj K) ≫ Lg'.map (αh.app K) ≫ αg.app (Lh.obj K))
-  (χg : Rg ⋙ ΨC ⟶ ΨB ⋙ Rg') (hχg : χg = (mateEquiv adjg adjg' αg).natTrans)
-  (χhg : Rhg ⋙ ΨP ⟶ ΨB ⋙ Rhg') (hχhg : χhg = (mateEquiv adjhg adjhg' αhg).natTrans)
+  (χg : Rg ⋙ ΨC ⟶ ΨB ⋙ Rg') (hχg : χg = (mateEquiv adjg adjg' αg))
+  (χhg : Rhg ⋙ ΨP ⟶ ΨB ⋙ Rhg') (hχhg : χhg = (mateEquiv adjhg adjhg' αhg))
   (b : Rhg ⋙ Lh ⟶ Rg)
   (hb : ∀ N, Lg.map (b.app N) ≫ adjg.counit.app N =
     c.inv.app (Rhg.obj N) ≫ adjhg.counit.app N)
@@ -233,7 +233,7 @@ lemma exchange_baseChange_aux (N : DB) :
   subst hχg hχhg
   apply (adjg'.homEquiv _ _).symm.injective
   have h1 := αg.naturality (b.app N)
-  have h2 := c'.inv.naturality (((mateEquiv adjhg adjhg') αhg).natTrans.app N)
+  have h2 := c'.inv.naturality (((mateEquiv adjhg adjhg') αhg).app N)
   simp only [Functor.comp_map] at h1 h2
   have h3 : c'.inv.app (ΨP.obj (Rhg.obj N)) ≫ αhg.app (Rhg.obj N) =
       Lg'.map (αh.app (Rhg.obj N)) ≫ αg.app (Lh.obj (Rhg.obj N)) ≫
