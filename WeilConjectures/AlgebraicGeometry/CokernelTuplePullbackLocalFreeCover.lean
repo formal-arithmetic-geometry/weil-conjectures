@@ -103,6 +103,21 @@ private theorem tuple_over_eval (X : RingedSpace.{u})
   exact hs.trans (((M.over U).val.sections_property ((M.over U).freeHomEquiv g i)
     (Over.homMk (homOfLE hVU) : Over.mk (homOfLE hVU) ⟶ Over.mk (𝟙 U)).op).symm)
 
+-- Enumerate finite free sources without unfolding the target or its construction.
+private theorem finite_free_cover_of_finite_coprod
+    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    (I K : Type u) [Finite I] [Finite K] {M : SheafOfModules.{u} R}
+    (p : SheafOfModules.free (R := R) I ⨿ SheafOfModules.free K ⟶ M) [Epi p] :
+    ∃ (m : ℕ) (q : SheafOfModules.free (R := R) (ULift.{u} (Fin m)) ⟶ M), Epi q := by
+  classical
+  let : Fintype (I ⊕ K) := Fintype.ofFinite (I ⊕ K)
+  let eI : ULift.{u} (Fin (Fintype.card (I ⊕ K))) ≃ (I ⊕ K) :=
+    Equiv.ulift.trans (Fintype.equivFin (I ⊕ K)).symm
+  let eFree := (SheafOfModules.freeFunctor (R := R)).mapIso (Equiv.toIso eI)
+  let q := eFree.hom ≫ (SheafOfModules.freeSumIso (R := R) I K).inv ≫ p
+  exact ⟨Fintype.card (I ⊕ K), q, by dsimp [q]; infer_instance⟩
+
 -- Convert a family of section lifts to a commuting free-sheaf map for arbitrary modules.
 private theorem free_tuple_lift_of_sections (X : RingedSpace.{u})
     (G H : SheafOfModules.{u} (moduleRings X)) (q : G ⟶ H)
@@ -221,16 +236,7 @@ theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
     (pullback.lift e.hom l hl)
   have : Epi pF := by dsimp [pF]; infer_instance
   have : Epi p := epi_pullback_generators fV q hfV he (D.map g) pF e l hl
-  -- Enumerate both finite lists without excluding the empty-list case.
-  let I := a.I ⊕ ULift.{u} (Fin n)
-  let : Fintype I := Fintype.ofFinite I
-  let eI : ULift.{u} (Fin (Fintype.card I)) ≃ I :=
-    Equiv.ulift.trans (Fintype.equivFin I).symm
-  let eFree := (SheafOfModules.freeFunctor (R := (moduleRings X).over V)).mapIso
-    (Equiv.toIso eI)
-  let p' := eFree.hom ≫
-    (SheafOfModules.freeSumIso (R := (moduleRings X).over V) a.I
-      (ULift.{u} (Fin n))).inv ≫ p
-  exact ⟨V, hVU, hxV, Fintype.card I, p', by dsimp [p']; infer_instance⟩
+  obtain ⟨m, p', hp'⟩ := finite_free_cover_of_finite_coprod a.I (ULift.{u} (Fin n)) p
+  exact ⟨V, hVU, hxV, m, p', hp'⟩
 
 end AlgebraicGeometry.RingedSpace
