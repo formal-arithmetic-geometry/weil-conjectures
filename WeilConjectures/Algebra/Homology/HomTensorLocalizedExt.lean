@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.HomTensorDegreewise
+import WeilConjectures.Algebra.Homology.HomTensorSummandRestriction
+import WeilConjectures.Algebra.Homology.HomTensorSummandLocalizedExt
 
 /-!
 # Localized pure-tensor extensionality
@@ -207,7 +209,6 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 -- Transposing the internal Hom unfolds the localized module structures in two universes.
-set_option trace.profiler true in
 set_option synthInstance.maxSize 256 in
 /-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;
@@ -243,52 +244,11 @@ theorem homTensorLocalized_ext
           (((homTensorSectionMap R (K.X i) (L.X j)).app (op W.unop.left)).hom
             (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)))) → a = b := by
   let := SheafOfModules.monoidalCategory R
-  let := SheafOfModules.symmetricCategory R
   intro a b h
-  let T := (CochainComplex.mapBifunctor K L (curriedTensor Mod)).X p
-  let flip : (X ⟶ SheafOfModules.homObj (R := R) T N) →
-      (T ⟶ SheafOfModules.homObj (R := R) X N) := fun f ↦
-    ⟨LocalTensorHom.homObjEquiv X.val T.val N.val
-      ((β_ X.val T.val).hom ≫
-        (LocalTensorHom.homObjEquiv T.val X.val N.val).symm f.val)⟩
-  have hf : Function.Injective flip := by
-    intro f g he
-    apply SheafOfModules.hom_ext
-    apply (LocalTensorHom.homObjEquiv T.val X.val N.val).symm.injective
-    apply (cancel_epi (β_ X.val T.val).hom).1
-    exact (LocalTensorHom.homObjEquiv X.val T.val N.val).injective
-      (congrArg SheafOfModules.Hom.val he)
-  apply hf
-  apply HomologicalComplex.mapBifunctor.hom_ext
+  apply homTensorSummandRestriction_ext R K L p X N a b
   intro i j hij
-  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification
-    (R := R) (K.X i) (L.X j)).inv).mp
-  apply ((PresheafOfModules.sheafificationAdjunction
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).homEquiv
-      ((K.X i).val ⊗ (L.X j).val) _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.MonoidalCategory.tensor_ext
-  intro x y
-  change (((flip a).val.app U).hom
-    (((CochainComplex.ιMapBifunctor K L (curriedTensor Mod) i j p hij).val.app U).hom
-      (((homTensorSectionMap R (K.X i) (L.X j)).app U).hom
-        (x ⊗ₜ[R.obj.obj U] y)))) = _
-  apply PresheafOfModules.hom_ext
-  intro W
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro s
-  let q := homTensorSectionMap R (K.X i) (L.X j) ≫
-    (CochainComplex.ιMapBifunctor K L (curriedTensor Mod) i j p hij).val
-  change ((a.val.app (op W.unop.left)).hom s).app (op (Over.mk (𝟙 W.unop.left)))
-      (T.val.map W.unop.hom.op ((q.app U).hom (x ⊗ₜ[R.obj.obj U] y))) =
-    ((b.val.app (op W.unop.left)).hom s).app (op (Over.mk (𝟙 W.unop.left)))
-      (T.val.map W.unop.hom.op ((q.app U).hom (x ⊗ₜ[R.obj.obj U] y)))
-  rw [← PresheafOfModules.naturality_apply q W.unop.hom.op]
-  erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
-  exact h (op W.unop.left) s (op (Over.mk (𝟙 W.unop.left))) i j hij
-    ((K.X i).val.map W.unop.hom.op x) ((L.X j).val.map W.unop.hom.op y)
+  apply homTensorSummandLocalized_ext R (K.X i) (L.X j) N X
+  intro U s W x y
+  exact h U s W i j hij x y
 
 end CategoryTheory
