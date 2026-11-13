@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-set_option profiler true in
 /-- Separability of ring elements implies separability of every residue-field fraction. -/
 private theorem isSeparable_residueField_of_images
     {B k : Type*} [CommRing B] [Field k] (q : Ideal B) [q.IsPrime]
