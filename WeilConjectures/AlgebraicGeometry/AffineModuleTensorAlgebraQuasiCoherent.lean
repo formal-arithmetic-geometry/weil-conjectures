@@ -104,6 +104,7 @@ private theorem changeOfRings_unit_iso {T : TopCat.{u}} (C D : T.Sheaf CommRingC
     (((SheafOfModules.restrictScalars (𝓻 a)).obj N).unitHomEquiv
       (adj.homEquiv _ N k)) l).symm
 
+-- Keep naturality abstract so that transporting sections does not unfold inverse images.
 private theorem unitIsoOfSectionsEquiv {T T' : TopCat.{u}}
     (C : T.Sheaf RingCat.{u}) (D : T'.Sheaf RingCat.{u})
     (Q : SheafOfModules.{u} C ⥤ SheafOfModules.{u} D) (M : SheafOfModules.{u} C)
@@ -125,12 +126,12 @@ private theorem unitIsoOfSectionsEquiv {T T' : TopCat.{u}}
   rw [Equiv.apply_symm_apply, hse, Equiv.apply_symm_apply, hφ,
     SheafOfModules.unitHomEquiv_comp_apply]
 
-set_option profiler true in
 private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
     (C : T'.Sheaf CommRingCat.{u}) :
     Nonempty (TopCat.Sheaf.inverseImageModule g C (SheafOfModules.unit (𝓡 C)) ≅
       SheafOfModules.unit (𝓡 (TopCat.Sheaf.inverseImageRing g C))) := by
   let C' := TopCat.Sheaf.inverseImageRing g C
+  -- Construct the Kan extension directly instead of searching for initial extension objects.
   have : ∀ (F : (TopologicalSpace.Opens T')ᵒᵖ ⥤ CommRingCat.{u}),
       (Opens.map g).op.HasLeftKanExtension F := fun F ↦
     Functor.HasLeftKanExtension.mk _ ((Opens.map g).op.pointwiseLeftKanExtensionUnit F)
