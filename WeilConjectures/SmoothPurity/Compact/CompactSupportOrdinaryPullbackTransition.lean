@@ -146,13 +146,16 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
-    ?_ ?_ (compactSupportOrdinaryDirectImageTransition l E f h) ?_ N
+    ?_ ?_ ?_ ?_ N
   · intro Q
     dsimp only [Functor.comp_obj, Functor.comp_map]
     exact compactSupportOrdinaryPullbackUnit l E f m Q
   · intro Q
     dsimp only [Functor.comp_obj, Functor.comp_map]
     exact compactSupportOrdinaryPullbackUnit l E f n Q
+  · intro M
+    dsimp only [Functor.comp_obj, Functor.comp_map]
+    exact compactSupportOrdinaryDirectImageTransition l E f h M
   · intro M
     exact (unit_mateEquiv_symm
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
