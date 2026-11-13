@@ -45,7 +45,6 @@ set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
 -- Comparing scalar restrictions unfolds several dependent section module instances.
 set_option backward.isDefEq.respectTransparency false in
 /-- Change of rings between quasi-coherent algebras preserves quasi-coherence of the
@@ -92,16 +91,16 @@ theorem quasiCoherent_algebra_changeOfRings (Y : Scheme.{u})
   classical
   let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
   let S := tensorObj C.toModule P₀
-  let : B.toModule.IsQuasicoherent := hB
-  let : C.toModule.IsQuasicoherent := hC
-  let : P₀.IsQuasicoherent := hP
+  have := hB
+  have := hC
+  have := hP
   have hS := quasiCoherent_tensor_product_affine_sections C.toModule P₀
-  let : S.IsQuasicoherent := hS.1
+  have := hS.1
   have hF := quasiCoherent_tensor_product_affine_sections B.toModule S
-  let : (tensorObj B.toModule S).IsQuasicoherent := hF.1
+  have := hF.1
   obtain ⟨δ, e, hrel, he⟩ := changeOfRings_tensor_relation_presentation Y B C φ P
   have hδ := quasiCoherent_cokernel_image δ
-  have hqc : (CategoryTheory.Limits.cokernel δ).IsQuasicoherent := hδ.2.2.2.2.2.2.1
+  have hqc := hδ.2.2.2.2.2.2.1
   refine ⟨(SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso e.symm hqc, ?_⟩
   intro W hW
   have hsections := hδ.2.2.2.2.2.2.2.2 ⟨W, hW⟩

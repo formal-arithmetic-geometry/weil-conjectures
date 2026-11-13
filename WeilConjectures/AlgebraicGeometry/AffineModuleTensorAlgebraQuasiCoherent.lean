@@ -105,7 +105,6 @@ private theorem changeOfRings_unit_iso {T : TopCat.{u}} (C D : T.Sheaf CommRingC
       (adj.homEquiv _ N k)) l).symm
 
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
 -- Transporting sections through three equivalences unfolds dependent module instances.
 private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
     (C : T'.Sheaf CommRingCat.{u}) :
@@ -114,7 +113,7 @@ private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
   let C' := TopCat.Sheaf.inverseImageRing g C
   let η : (𝓡 C) ⟶ ((Opens.map g).sheafPushforwardContinuous RingCat.{u}
       (𝓙 T') (𝓙 T)).obj (𝓡 C') := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map
-    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous.{u, u, u, u + 1, u, u}
       (Opens.map g) CommRingCat.{u} (𝓙 T') (𝓙 T)).unit.app C)
   let Q := SheafOfModules.pushforward.{u} (F := Opens.map g) η
   obtain ⟨φ, _, _, hφ⟩ := SheafOfModules.moduleInverseImageAdjunction g C
