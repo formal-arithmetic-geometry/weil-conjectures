@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChange
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
 
 /-!
@@ -42,56 +41,12 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
--- Reuse the graded tensor and colimit proofs needed by every derived functor below.
--- Public restatements of the shortcut instances of `ShortcutInstances`, which is imported
--- privately (a public import would be re-exported to every dependent and change its instance
--- resolution); the local instance attribute needs them in the exported view (theorem headers).
-theorem hasTensor₄ObjExt_kunnethCoefficientChangeResidue
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
-  hasTensor₄ObjExt_mod T R X₁ X₂ X₃ X₄
-
-theorem hasGoodTensor₁₂Tensor_kunnethCoefficientChangeResidue
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
-  hasGoodTensor₁₂Tensor_mod T R X₁ X₂ X₃
-
-theorem hasGoodTensorTensor₂₃_kunnethCoefficientChangeResidue
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
-  hasGoodTensorTensor₂₃_mod T R X₁ X₂ X₃
-
-theorem hasColimitsOfShape_int_kunnethCoefficientChangeResidue
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
-    HasColimitsOfShape ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :=
-  hasColimitsOfShape_int_mod T R
-
-theorem preservesColimitsOfShape_int_curriedTensor_obj_kunnethCoefficientChangeResidue
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_obj_mod T R M
-
-theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethCoefficientChangeResidue
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod T R M
-
-attribute [local instance] hasTensor₄ObjExt_kunnethCoefficientChangeResidue
-  hasGoodTensor₁₂Tensor_kunnethCoefficientChangeResidue
-  hasGoodTensorTensor₂₃_kunnethCoefficientChangeResidue
-  hasColimitsOfShape_int_kunnethCoefficientChangeResidue
-  preservesColimitsOfShape_int_curriedTensor_obj_kunnethCoefficientChangeResidue
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethCoefficientChangeResidue
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
+set_option maxHeartbeats 1000000 in
+-- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` and
 `Lh^* Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` are isomorphic arrows, for every `h : W ⟶ Z'`. -/
@@ -133,7 +88,8 @@ theorem nonempty_arrowIso_map_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ 
     φ₁ φ₂ h A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
     (by exact_mod_proofs hAB)
   exact_mod_proofs k
-
+set_option maxHeartbeats 1000000 in
+-- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` and
 `Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` are isomorphic arrows. -/

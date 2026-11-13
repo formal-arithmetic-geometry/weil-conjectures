@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidueIff
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedPointsDetection
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobalTorsion
@@ -50,11 +49,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
--- Reuse the tensor and colimit instances needed by the derived pullback functors.
-attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
-  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
-
 variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k' : Type u}
   [Field k'] [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)] {X Y Z : Scheme.{u}}
   {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
@@ -72,6 +66,7 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
+set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the product are large terms
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
@@ -104,14 +99,12 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
   have ha' : B₀.IsGE hB₀.1.1.choose := hB₀.1.1.choose_spec
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
-  have hqc : QuasiCompact (traitGenericPoint k') := inferInstance
-  have hqs : QuasiSeparated (traitGenericPoint k') := inferInstance
-  have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip hqc
-  have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip hqs
-  have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip hqc
-  have : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip hqs
-  have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip hqc
-  have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip hqs
+  have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
+  have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
+  have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
+  have : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
+  have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
+  have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
   have hT : IsField (PadicAlgCl.integersResidueField ℓ E.1) := Field.toIsField _
   have hAe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hA₀
   have hBe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hB₀
@@ -126,9 +119,7 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
       (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
-  let c := hAB.1.1.choose
-  have hc : (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀).IsGE c :=
-    hAB.1.1.choose_spec
+  obtain ⟨c, hc⟩ := hAB.1.1
   -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
   have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
       (w : W), h w = z ∧ IsIso ((L((h)^*⟦𝔽⟧)).map (kunnethMap 𝔽 φ₁ φ₂

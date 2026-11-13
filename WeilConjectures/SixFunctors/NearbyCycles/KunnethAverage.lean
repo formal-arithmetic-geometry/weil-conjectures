@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
-import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -47,53 +45,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
--- Reuse the graded tensor and colimit proofs at each derived pullback.
--- Public restatements of the shortcut instances of `ShortcutInstances`, which is imported
--- privately (a public import would be re-exported to every dependent and change its instance
--- resolution); the local instance attribute needs them in the exported view (theorem headers).
-theorem hasTensor₄ObjExt_kunnethAverage
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
-  hasTensor₄ObjExt_mod T R X₁ X₂ X₃ X₄
-
-theorem hasGoodTensor₁₂Tensor_kunnethAverage
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
-  hasGoodTensor₁₂Tensor_mod T R X₁ X₂ X₃
-
-theorem hasGoodTensorTensor₂₃_kunnethAverage
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
-  hasGoodTensorTensor₂₃_mod T R X₁ X₂ X₃
-
-theorem hasColimitsOfShape_int_kunnethAverage
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
-    CategoryTheory.Limits.HasColimitsOfShape ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :=
-  hasColimitsOfShape_int_mod T R
-
-theorem preservesColimitsOfShape_int_curriedTensor_obj_kunnethAverage
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    CategoryTheory.Limits.PreservesColimitsOfShape ℤ
-      ((CategoryTheory.MonoidalCategory.curriedTensor _).obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_obj_mod T R M
-
-theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethAverage
-    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
-    CategoryTheory.Limits.PreservesColimitsOfShape ℤ
-      ((CategoryTheory.MonoidalCategory.curriedTensor _).flip.obj M) :=
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod T R M
-
-attribute [local instance] hasTensor₄ObjExt_kunnethAverage hasGoodTensor₁₂Tensor_kunnethAverage
-  hasGoodTensorTensor₂₃_kunnethAverage hasColimitsOfShape_int_kunnethAverage
-  preservesColimitsOfShape_int_curriedTensor_obj_kunnethAverage
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethAverage
-
+set_option maxHeartbeats 800000 in
+-- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
 `sk-prop-tf-nearby-external-kunneth`). Let finite families of automorphisms `σM i`, `σN i`, `σP i`
@@ -141,25 +94,21 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
         (L((r)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))) :
     IsTensorRetract (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
       hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) := by
-  refine isTensorRetract_of_sum'
-    (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
-      hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) s n hn
+  refine isTensorRetract_of_sum' _ s n hn
     (L((e₁')^*⟦Λ⟧).map rM ≫
-      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ ?_
+      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ hrP
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
     (fun i ↦ (σP i).autAction Λ _) (fun i ↦ (σP i).autAction Λ _)
-    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ ?_
+    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ havgP
   · have e := congrArg L((e₁')^*⟦Λ⟧).map hrM
     simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at e
     simp only [Category.assoc, reassoc_of% e, Iso.hom_inv_id_app]
     rfl
-  · cast_proofs hrP
   · intro i
     have h := hequiv i
     simp only [hN i, CategoryTheory.Functor.map_id, tensorHom_id] at h
     exact h
   · simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp,
       ← CategoryTheory.Functor.map_nsmul, havgM, CategoryTheory.Functor.map_sum]
-  · cast_proofs havgP
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
