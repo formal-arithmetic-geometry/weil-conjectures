@@ -43,6 +43,8 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory
 
+/-- The evaluated associator formula holds on arbitrary finite-level sections, by surjectivity
+of the section transport. Source: Stacks 03EK, 07A4, 0941. -/
 private theorem evaluatedAssociator_generator_section (n : ℕ)
     (X Y Z : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (b' : (coefficientTotalTensor.{u, t + 1, t}
@@ -173,7 +175,7 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
     (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P))
     (coefficientScalarTensorIso l E W n Q N).hom
     p (q + r) k hk' V (u _ x) (u _ (g Q N q r (q + r) rfl V y z))
-  simp only [coefficientScalarTensorIso_hom_unitSection] at L4
+  simp only [u, g, coefficientScalarTensorIso_hom_unitSection] at L4
   have R1 := coefficientScalarTensorIso_hom_unitSection l E W n
     ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))
@@ -183,7 +185,7 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
     (coefficientScalarTensorIso l E W n P Q).hom
     (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj N))
     i r k hik V (u _ (g P Q p q i hpq V x y)) (u _ z)
-  simp only [coefficientScalarTensorIso_hom_unitSection] at R2
+  simp only [u, g, coefficientScalarTensorIso_hom_unitSection] at R2
   have hθ (X : CochainComplex (scalarReductionSource l E W) ℤ) (j : ℤ)
       (v : (X.X j).val.obj V) :
       (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app X).f j).val.app V
