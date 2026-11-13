@@ -196,12 +196,15 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
   have ht' : a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)) =
       1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi) :=
     (congrArg a0.symm ht).trans (a0.symm_apply_apply _)
+  have hb_c (z : Γ(S', W) ⊗[Γ(S, V)] Scheme.Modules.HOver h N p) :
+      b (c z) = b0 (c (a0.symm (a z))) := by
+    change b0 (c (a0.symm (ae (c.symm (c z))))) = b0 (c (a0.symm (a z)))
+    rw [c.symm_apply_apply]
   change b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) = _
   calc
     b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) =
         b (c (1 ⊗ₜ[Γ(S, V)] xi)) := congrArg b (hc xi).symm
-    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) :=
-      congrArg (fun z ↦ b0 (c (a0.symm (a z)))) (c.symm_apply_apply _)
+    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) := hb_c _
     _ = b0 (c (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi))) := congrArg (fun z ↦ b0 (c z)) ht'
     _ = b0 (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p
         (e0 (eH.symm xi))) := congrArg b0 (hc _)
