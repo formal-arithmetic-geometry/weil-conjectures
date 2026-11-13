@@ -280,6 +280,7 @@ lemma hColimitProp_zero (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HColimitP
     rw [← Sheaf.H.equiv₀_naturality, map_zero, ha, map_zero]
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- The elaboration of the many cohomology maps between sheaves on `X` is slow.
 /-- The dimension shifting step: if `Hⁿ` commutes with all filtered colimits, so does `Hⁿ⁺¹`,
 on the first term of a short exact sequence of diagrams whose middle term is pointwise flasque.
