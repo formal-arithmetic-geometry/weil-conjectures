@@ -66,6 +66,7 @@ noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom))
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- The kernel needs time to unfold the module structures of the lifted functors.
 omit [WeaklyEtale j] [WeaklyEtale j'] in
 /-- The underlying map of sheaves of `ℚ̄_ℓ`-modules of the base change map of `ℓ`-adic sheaves is
