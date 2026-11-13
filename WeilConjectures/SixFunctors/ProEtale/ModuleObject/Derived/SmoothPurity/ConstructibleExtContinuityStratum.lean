@@ -231,55 +231,38 @@ private theorem complexColimits
 
 attribute [local instance 2000] complexColimits
 
-set_option maxHeartbeats 800000 in
--- Derived functor comparisons require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
-private theorem qcqsCostalkContinuity
-    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    {Z V : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
-    (k : V ⟶ T) [IsOpenImmersion k] [QuasiCompact k]
-    (hik : Set.range k = (Set.range i)ᶜ)
-    (H : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T) ⥤
-      Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
-    [H.Additive] (adj : CondensedRing.lowerStar Λ i ⊣ H)
+-- Keep the categorical comparison independent of the concrete module instances.
+private theorem qcqsCostalkContinuityOfRecollement
+    {A B C : Type*} [Category.{u + 1} A] [Category.{u + 1} B] [Category.{u + 1} C]
+    [Abelian A] [Abelian B] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} A] [IsGrothendieckAbelian.{u + 1} B]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [HasDerivedCategory.{u + 1} A] [HasDerivedCategory.{u + 1} B]
+    [HasDerivedCategory.{u + 1} C]
+    (ipush : B ⥤ A) [ipush.Additive] [PreservesFiniteLimits ipush]
+    [PreservesFiniteColimits ipush] [ipush.Full] [ipush.Faithful]
+    (kstar : A ⥤ C) [kstar.Additive] [PreservesFiniteLimits kstar]
+    [PreservesFiniteColimits kstar]
+    (kpush : C ⥤ A) [kpush.Additive]
+    (H₀ H : A ⥤ B) [H₀.Additive] [H.Additive]
+    (ash : ipush ⊣ H₀) (adj : ipush ⊣ H)
+    (bi : ipush.mapDerivedCategoryPlus ⊣ H₀.rightDerivedFunctorPlus)
+    (bj : kstar.mapDerivedCategoryPlus ⊣ kpush.rightDerivedFunctorPlus)
+    (ε : kstar.mapDerivedCategoryPlus ⋙ kpush.rightDerivedFunctorPlus ⟶
+      H₀.rightDerivedFunctorPlus ⋙ ipush.mapDerivedCategoryPlus ⋙ shiftFunctor _ (1 : ℤ))
+    (hClosed : ∀ K, Triangle.mk (bi.counit.app K) (bj.unit.app K) (ε.app K) ∈
+      distTriang (DerivedCategory.Plus A))
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
-    (D : I ⥤ CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ)
-    (a : ℤ) (hD : ∀ s, (D.obj s).IsStrictlyGE a) (q : ℤ) :
+    [PreservesColimitsOfShape I kstar]
+    (hcont : ∀ (R : I ⥤ CochainComplex C ℤ) (a : ℤ),
+      (∀ s, (R.obj s).IsStrictlyGE a) → ∀ r : ℤ,
+      IsIso (condensedContinuityComparison R a
+        (DerivedCategory.Q ⋙ kpush.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor A r)))
+    (D : I ⥤ CochainComplex A ℤ) (a : ℤ)
+    (hD : ∀ s, (D.obj s).IsStrictlyGE a) (q : ℤ) :
     IsIso (condensedContinuityComparison D a
-      (DerivedCategory.Q ⋙ H.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ q)) := by
+      (DerivedCategory.Q ⋙ H.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q)) := by
   classical
-  let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
-  let B := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
-  have : HasColimitsOfShape I A := inferInstance
-  have : HasExactColimitsOfShape I A := inferInstance
-  have : HasColimitsOfShape I B := inferInstance
-  have : HasExactColimitsOfShape I B := inferInstance
-  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
-  have : HasColimitsOfShape I (CochainComplex B ℤ) := inferInstance
-  obtain ⟨hclosed, hr⟩ := CondensedRing.condensed_open_closed_recollement Λ i k hik
-  let _ := hclosed
-  have hFull := hr.2.2.2.2.2.2.2.2.2.1
-  have hFaith := hr.2.2.2.2.2.2.2.2.2.2.1
-  rcases hr.2.2.2.2.2.2.2.2.2.2.2.2 with ⟨H₀, hAdd, hLim, ash, aj, bj, ai, bi, hjs, his, hdata⟩
-  let _ := hAdd
-  let _ := hLim
-  let _ := hjs
-  let _ := his
-  let _ := hFull
-  let _ := hFaith
-  have htri := hdata.2.2.2.2.2.2.2.2.2.2.2.2
-  let ε := htri.choose_spec.choose
-  have hClosed := htri.choose_spec.choose_spec.2.2.2.1
-  let C := Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V)
-  have : HasColimitsOfShape I C := inferInstance
-  have : HasColimitsOfShape I (CochainComplex C ℤ) := inferInstance
-  let kstar : A ⥤ C := CondensedRing.upperStar Λ k
-  let kpush : C ⥤ A := CondensedRing.lowerStar Λ k
-  let ipush : B ⥤ A := CondensedRing.lowerStar Λ i
   let rawi := H₀.rightDerivedFunctorPlus ⋙ ipush.mapDerivedCategoryPlus
   let rawk := kstar.mapDerivedCategoryPlus ⋙ kpush.rightDerivedFunctorPlus
   let loc := localizationTriangleFunctor rawi rawk bi.counit bj.unit ε
@@ -331,16 +314,12 @@ private theorem qcqsCostalkContinuity
       rw [CochainComplex.isStrictlyGE_iff]
       intro t ht
       exact kstar.map_isZero ((D.obj s).isZero_of_isStrictlyGE a t ht)
-    have : PreservesColimitsOfShape I kstar :=
-      (CondensedRing.upperStarLowerStarAdjunction Λ k).leftAdjoint_preservesColimits
-        |>.preservesColimitsOfShape
     have hcd : IsColimit cd := isColimitOfPreserves K hd
     let V := DerivedCategory.Q ⋙ kpush.rightDerivedFunctor ⋙
       DerivedCategory.homologyFunctor A r
     have hb : IsIso (colimit.desc (R ⋙ V)
         (V.mapCocone (condensedContinuityCocone R a))) :=
-      condensed_qcqs_pushforward_continuity Λ k R a
-        (fun s t ht ↦ by have := hR s; exact (R.obj s).isZero_of_isGE a t ht) r
+      hcont R a hR r
     have hbc : IsIso (colimit.desc (R ⋙ V) (V.mapCocone cd)) :=
       comparison_of_colimitCocone R (condensedContinuityCocone R a) cd
         (canonicalContinuityIsColimit R a hR) hcd V
@@ -398,9 +377,60 @@ private theorem qcqsCostalkContinuity
   change IsIso (colimit.desc (D ⋙ V) (V.mapCocone d))
   exact isIso_of_reflects_iso _ ipush
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
+set_option synthInstance.maxSize 4096 in
+private theorem qcqsCostalkContinuity
+    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {Z V : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
+    (k : V ⟶ T) [IsOpenImmersion k] [QuasiCompact k]
+    (hik : Set.range k = (Set.range i)ᶜ)
+    (H : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+    [H.Additive] (adj : CondensedRing.lowerStar Λ i ⊣ H)
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    (D : I ⥤ CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ)
+    (a : ℤ) (hD : ∀ s, (D.obj s).IsStrictlyGE a) (q : ℤ) :
+    IsIso (condensedContinuityComparison D a
+      (DerivedCategory.Q ⋙ H.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ q)) := by
+  classical
+  let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
+  let B := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasExactColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I B := inferInstance
+  have : HasExactColimitsOfShape I B := inferInstance
+  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
+  have : HasColimitsOfShape I (CochainComplex B ℤ) := inferInstance
+  obtain ⟨hclosed, hr⟩ := CondensedRing.condensed_open_closed_recollement Λ i k hik
+  let _ := hclosed
+  have hFull := hr.2.2.2.2.2.2.2.2.2.1
+  have hFaith := hr.2.2.2.2.2.2.2.2.2.2.1
+  rcases hr.2.2.2.2.2.2.2.2.2.2.2.2 with ⟨H₀, hAdd, hLim, ash, aj, bj, ai, bi, hjs, his, hdata⟩
+  let _ := hAdd
+  let _ := hLim
+  let _ := hjs
+  let _ := his
+  let _ := hFull
+  let _ := hFaith
+  have htri := hdata.2.2.2.2.2.2.2.2.2.2.2.2
+  let ε := htri.choose_spec.choose
+  have hClosed := htri.choose_spec.choose_spec.2.2.2.1
+  let C := Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V)
+  have : HasColimitsOfShape I C := inferInstance
+  have : HasColimitsOfShape I (CochainComplex C ℤ) := inferInstance
+  let kstar : A ⥤ C := CondensedRing.upperStar Λ k
+  let kpush : C ⥤ A := CondensedRing.lowerStar Λ k
+  let ipush : B ⥤ A := CondensedRing.lowerStar Λ i
+  have : PreservesColimitsOfShape I kstar :=
+    (CondensedRing.upperStarLowerStarAdjunction Λ k).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  exact qcqsCostalkContinuityOfRecollement ipush kstar kpush H₀ H ash adj bi bj ε hClosed
+    (fun R a hR r ↦ condensed_qcqs_pushforward_continuity Λ k R a
+      (fun s t ht ↦ by have := hR s; exact (R.obj s).isZero_of_isGE a t ht) r)
+    D a hD q
+
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsInjectiveCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
@@ -422,53 +452,9 @@ private theorem qcqsInjectiveCostalkContinuity
     (hq : QuasiIso (colimit.desc J c)) :
     QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
-  classical
-  let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
-  let B := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
-  have hJk (s : I) : (J.obj s).IsKInjective := by
-    have := hJ s
-    have := hJi s
-    exact CochainComplex.isKInjective_of_injective (J.obj s) a
-  have hck : c.pt.IsKInjective := by
-    have := hc
-    have := hci
-    exact CochainComplex.isKInjective_of_injective c.pt a
-  let d := condensedContinuityCocone J a
-  have hd : IsColimit d := canonicalContinuityIsColimit J a hJ
-  let g := hd.desc c
-  have hg : colimit.desc J d ≫ g = colimit.desc J c := by
-    apply colimit.hom_ext
-    intro s
-    simp only [colimit.ι_desc_assoc, colimit.ι_desc]
-    exact hd.fac c s
-  have hqd : IsIso (colimit.desc J d) := by
-    change IsIso ((IsColimit.coconePointUniqueUpToIso (colimit.isColimit J) hd).hom)
-    infer_instance
-  have hqg : QuasiIso g := by
-    rw [← quasiIso_iff_comp_left (colimit.desc J d) g, hg]
-    exact hq
-  let P := J ⋙ H.mapHomologicalComplex (.up ℤ)
-  let e : J ⋙ DerivedCategory.Q ⋙ H.rightDerivedFunctor ≅ P ⋙ DerivedCategory.Q :=
-    NatIso.ofComponents (fun s ↦ H.rightDerivedFunctorObjQIso (J.obj s))
-      (fun f ↦ rightDerivedObjQIso_naturality H (J.map f))
-  let ε := H.rightDerivedFunctor.mapIso (asIso (DerivedCategory.Q.map g)) ≪≫
-    H.rightDerivedFunctorObjQIso c.pt
-  have hcont (q : ℤ) : IsIso (condensedContinuityComparison J a
-      (DerivedCategory.Q ⋙ H.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q)) :=
-    qcqsCostalkContinuity T Λ i k hik H adj J a hJ q
-  apply condensedContinuityComparison_representatives J a H.rightDerivedFunctor
-    hcont P ((H.mapHomologicalComplex (.up ℤ)).obj c.pt) e ε
-    ((H.mapHomologicalComplex (.up ℤ)).mapCocone c).ι
-  intro s
-  dsimp only [e, NatIso.ofComponents_hom_app, ε, Iso.trans_hom,
-    Functor.mapIso_hom, asIso_hom]
-  rw [← H.rightDerivedFunctor.map_comp_assoc, ← DerivedCategory.Q.map_comp,
-    hd.fac c s]
-  exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
+  exact injectiveContinuity_of_derived H J c a hJ hJi hc hci hq
+    (fun q ↦ qcqsCostalkContinuity T Λ i k hik H adj J a hJ q)
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsCostalkModel
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
@@ -518,6 +504,11 @@ private theorem qcqsCostalkModel
   classical
   let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
   let B := Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)
+  have : HasColimitsOfShape I A := moduleColimits Λ T I
+  have : HasExactColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I B := moduleColimits Λ U I
+  have : HasColimitsOfShape I (CochainComplex A ℤ) := complexColimits Λ T I
+  have : HasColimitsOfShape I (CochainComplex B ℤ) := complexColimits Λ U I
   let H₀ := CondensedRing.closedSupport Λ i k
   have hik' : Set.range i.base = (Set.range k.base)ᶜ := by
     rw [hik, compl_compl]
@@ -531,65 +522,16 @@ private theorem qcqsCostalkModel
   obtain ⟨a, ha⟩ := hN
   have hNa (s : I) : (N.obj s).IsStrictlyGE a :=
     (CochainComplex.isStrictlyGE_iff _ _).2 (ha s)
-  have hNcol : (colimit N).IsStrictlyGE a := colimit_isStrictlyGE N a hNa
-  let Np : I ⥤ CochainComplex.Plus A :=
-    (CochainComplex.plus A).lift N (fun s ↦ ⟨a, hNa s⟩)
-  let cp : Cocone Np :=
-    { pt := ⟨colimit N, ⟨a, hNcol⟩⟩
-      ι := { app s := ⟨colimit.ι N s⟩
-             naturality s t f := by
-               apply ObjectProperty.hom_ext
-               exact (colimit.w N f).trans (Category.comp_id _).symm } }
   have : IsGrothendieckAbelian.{u + 1} A := Mod.isGrothendieckAbelian _
-  let S := CochainComplex.singleFunctor A 0
-  let E₀ := HomologicalComplex.eval A (ComplexShape.up ℤ) 0
-  let R₀ := CochainComplex.kInjectiveResolutionFunctor.{u + 1} A
-  let ηR := CochainComplex.toKInjectiveResolution.{u + 1} A
-  let J₀ := S ⋙ R₀ ⋙ E₀
-  let η : 𝟭 A ⟶ J₀ :=
-    (HomologicalComplex.singleCompEvalIsoSelf A (ComplexShape.up ℤ) 0).inv ≫
-      Functor.whiskerLeft S (Functor.whiskerRight ηR E₀)
-  have hη (M : A) : Mono (η.app M) := by
-    have hmono : Mono (ηR.app (S.obj M)) :=
-      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} A (S.obj M)).1
-    have hmapmono : Mono (E₀.map (ηR.app (S.obj M))) := by
-      change Mono ((ηR.app (S.obj M)).f 0)
-      infer_instance
-    have hisomono : Mono ((HomologicalComplex.singleCompEvalIsoSelf A (.up ℤ) 0).inv.app M) :=
-      inferInstanceAs (Mono (((HomologicalComplex.singleCompEvalIsoSelf A (.up ℤ) 0).app M).inv))
-    change Mono ((HomologicalComplex.singleCompEvalIsoSelf A (.up ℤ) 0).inv.app M ≫
-      E₀.map (ηR.app (S.obj M)))
-    exact @mono_comp _ _ _ _ _ _ hisomono _ hmapmono
-  have hJ₀ (M : A) : Injective (J₀.obj M) :=
-    CochainComplex.injective_kInjectiveResolutionFunctor_obj_X (S.obj M) 0
-  obtain ⟨R, α, hα, hRi, hRb⟩ :=
-    CochainComplex.exists_functorial_bounded_injective_resolution J₀ η hη hJ₀
-  let J := Np ⋙ R ⋙ CochainComplex.Plus.ι A
-  let c : Cocone J := ((R ⋙ CochainComplex.Plus.ι A).mapCocone cp)
-  let β : N ⟶ J := Functor.whiskerLeft Np α
-  let βv : colimit N ⟶ c.pt := α.app cp.pt
-  have hβ (s : I) : colimit.ι N s ≫ βv = β.app s ≫ c.ι.app s := by
-    exact α.naturality (cp.ι.app s)
-  have hJa (s : I) : (J.obj s).IsStrictlyGE a := hRb (Np.obj s) a (hNa s)
-  have hca : c.pt.IsStrictlyGE a := hRb cp.pt a hNcol
-  have hJi (s : I) (r : ℤ) : Injective ((J.obj s).X r) := hRi (Np.obj s) r
-  have hci (r : ℤ) : Injective (c.pt.X r) := hRi cp.pt r
-  have hβq (s : I) : QuasiIso (β.app s) := hα (Np.obj s)
-  have hβvq : QuasiIso βv := hα cp.pt
-  have hcolq : QuasiIso (colimMap β) :=
-    (HomologicalComplex.quasiIso A (.up ℤ)).colimMap β (fun s ↦ hβq s)
-  have heq : colimMap β ≫ colimit.desc J c = βv := by
-    apply colimit.hom_ext
-    intro s
-    simpa only [ι_colimMap_assoc, colimit.ι_desc] using (hβ s).symm
-  have hq : QuasiIso (colimit.desc J c) := by
-    rw [← quasiIso_iff_comp_left (colimMap β) (colimit.desc J c), heq]
-    exact hβvq
+  obtain ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩ :=
+    localPieceBoundedInjectiveCocone N a hNa
   have hH₀ := qcqsInjectiveCostalkContinuity T Λ i k hik H₀ ash J c a
     hJa hJi hca hci hq
   have : PreservesColimitsOfShape I (CondensedRing.upperStar Λ j) :=
     (CondensedRing.upperStarLowerStarAdjunction Λ j).leftAdjoint_preservesColimits
       |>.preservesColimitsOfShape
+  have : HasColimit (J ⋙ H.mapHomologicalComplex (.up ℤ)) :=
+    HasColimitsOfShape.has_colimit _
   have hH : QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
     exact quasiIso_desc_mapCocone (CondensedRing.upperStar Λ j)
@@ -607,9 +549,6 @@ private theorem qcqsCostalkModel
     exact H.map_isZero ((J.obj s).isZero_of_isStrictlyGE a r hr)
   · exact homCoconeOfInjectiveCocone E H adj P n N J c β βv hβ
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsFiniteFreeHomEvaluation
     (X : Scheme.{u})
@@ -650,9 +589,6 @@ private theorem qcqsFiniteFreeHomEvaluation
     Functor.isoWhiskerRight F.mapDerivedCategoryFactors
       (Γ.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ n)⟩
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsFiniteFreeHomContinuity
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
@@ -671,6 +607,12 @@ private theorem qcqsFiniteFreeHomContinuity
     IsIso (colimit.desc _
       ((condensedShiftedHom Λ X
         ((DerivedCategory.singleFunctor _ 0).obj P) n).mapCocone (colimit.cocone N))) := by
+  have : HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    moduleColimits Λ X I
+  have : HasColimitsOfShape I (CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) :=
+    complexColimits Λ X I
   let H := Mod.ihom P
   have : PreservesColimitsOfSize.{u + 1, u + 1} H :=
     condensed_locally_free_ihom_preservesColimits (condensedRingObj Λ X) P hP
@@ -685,6 +627,9 @@ private theorem qcqsFiniteFreeHomContinuity
     rw [CochainComplex.isStrictlyGE_iff]
     intro r hr
     exact H.map_isZero (ha i r hr)
+  have : HasColimit (M ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
+    HasColimitsOfShape.has_colimit _
   have hT : IsIso (condensedContinuityComparison M a T) :=
     condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
       let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
@@ -716,9 +661,6 @@ private theorem freeComap {X : Scheme.{u}}
       biproduct.mapIso (fun _ ↦ ?_)⟩⟩
   simpa using Mod.regularIsoOfIsIso (inv φ)
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 private theorem lisseRawCover
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
