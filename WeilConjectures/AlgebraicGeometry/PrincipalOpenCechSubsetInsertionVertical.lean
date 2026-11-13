@@ -59,6 +59,22 @@ private theorem sectionTransport_natural
     N.presheaf.map (eqToHom hW).op ((g.app (principalSubsetOpen A r f S.val)) s) at hq
   exact (congrArg ((e.app N).app W) hq.symm).trans he
 
+private theorem alternatingCechTermsMap_single {X : Scheme.{u}} {r : ℕ}
+    (U : Fin r → X.Opens)
+    {P Q : X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))}
+    (γ : P ⟶ Q) (p : ℕ) (t : Fin (p + 1) ↪o Fin r)
+    (x : P.obj (op (alternatingCechIntersection U t))) :
+    (alternatingCechTermsMap U γ p).hom (Pi.single t x) =
+      Pi.single t ((γ.app (op (alternatingCechIntersection U t))).hom x) := by
+  classical
+  funext t'
+  change (γ.app (op (alternatingCechIntersection U t'))).hom
+    ((Pi.single (M := fun t ↦ P.obj (op (alternatingCechIntersection U t))) t x) t') = _
+  by_cases h : t' = t
+  · subst t'
+    simp only [Pi.single_eq_same]
+  · rw [Pi.single_eq_of_ne h, map_zero, Pi.single_eq_of_ne h]
+
 -- Perform the total-complex calculation before specializing to the sheaf constructions.
 private theorem verticalTotal_conjugate {R : Type u} [Ring R]
     (K : HomologicalComplex₂ (ModuleCat.{u} R) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
@@ -130,7 +146,7 @@ private theorem principalSubsetInsertOne_vertical
       (ComplexShape.up ℤ) ((p : ℤ), q') = n + 1 := by
     change (p : ℤ) + q' = n + 1
     change (p : ℤ) + q = n at hpq
-    dsimp [q, q'] at *
+    dsimp only [q, q'] at hpq ⊢
     omega
   let R := SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) V ⋙
     (Scheme.Modules.overEquiv V).functor
@@ -153,22 +169,7 @@ private theorem principalSubsetInsertOne_vertical
   have ha (y : P.obj (op (alternatingCechIntersection U (principalSubsetTuple r S)))) :
       (H.map a) (v y) = v' ((γ.app
         (op (alternatingCechIntersection U (principalSubsetTuple r S)))).hom y) := by
-    change (alternatingCechTermsMap U γ p).hom
-      (Pi.single (principalSubsetTuple r S) y) =
-        Pi.single (principalSubsetTuple r S) ((γ.app
-          (op (alternatingCechIntersection U (principalSubsetTuple r S)))).hom y)
-    funext t
-    by_cases ht : t = principalSubsetTuple r S
-    · subst t
-      change (γ.app (op (alternatingCechIntersection U (principalSubsetTuple r S)))).hom
-        ((Pi.single (M := fun t : Fin (p + 1) ↪o Fin r ↦
-          P.obj (op (alternatingCechIntersection U t))) (principalSubsetTuple r S) y)
-            (principalSubsetTuple r S)) = _
-      simp only [Pi.single_eq_same]
-    · change (γ.app (op (alternatingCechIntersection U t))).hom
-        ((Pi.single (M := fun t : Fin (p + 1) ↪o Fin r ↦
-          P.obj (op (alternatingCechIntersection U t))) (principalSubsetTuple r S) y) t) = _
-      rw [Pi.single_eq_of_ne ht, map_zero, Pi.single_eq_of_ne ht]
+    exact alternatingCechTermsMap_single U γ p (principalSubsetTuple r S) y
   have hs (y : (modulesSpecToSheaf.obj (J.X q')).obj.obj (op (D S.val))) :
       (-1 : A) ^ p • y = ((p : ℤ).negOnePow : ℤ) • y := by
     rw [← Int.cast_smul_eq_zsmul A, Int.cast_negOnePow_natCast]
