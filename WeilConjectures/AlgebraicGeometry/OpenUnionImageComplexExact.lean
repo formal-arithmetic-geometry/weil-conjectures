@@ -92,9 +92,9 @@ private theorem shortExact_of_degreewise_pullback
   let e : (ShortComplex.mk (biprod.lift a b) (biprod.desc c (-d)) hz).map F ≅
       (h n).shortComplex' :=
     ShortComplex.isoMk (Iso.refl _) (F.mapBiprod B D) (Iso.refl _) (by
-      simpa only [Category.id_comp] using (biprod.map_lift_mapBiprod F a b).symm) (by
+      simpa only [Category.id_comp] using (biprod.map_lift_mapBiprod F B D a b).symm) (by
       simpa only [Category.comp_id, Functor.map_neg] using
-        (biprod.mapBiprod_hom_desc F c (-d)))
+        (biprod.mapBiprod_hom_desc F B D c (-d)))
   exact ShortComplex.shortExact_of_iso e.symm he
 
 set_option profiler true in
