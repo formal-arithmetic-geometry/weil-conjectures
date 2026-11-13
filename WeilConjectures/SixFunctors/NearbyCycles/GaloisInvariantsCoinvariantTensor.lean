@@ -371,10 +371,36 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
-  obtain ⟨r, hr, hcoinv⟩ :=
-    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
-      hact
-  refine ⟨r, hr, ?_⟩
+  obtain ⟨R, hRC, hcoinv⟩ := exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
+    T₀ h Ω hp (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC act hact
+  have hα := pullbackExchange_galoisLayerHom_app_eq_comp_unit
+    (Profinite.continuousMapRingObj T₀) N h Ω C
+  refine Exists.imp ?_ (exists_retraction_of_eq_comp_map_comp_of_coinvariant
+    (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
+    (A₀ := L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)
+    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
+      Profinite.continuousMapRingObj T₀⟧).obj
+      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+        Profinite.continuousMapRingObj T₀⟧).obj
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))
+    (((N.galoisLayerHom h Ω).pullbackExchange (Profinite.continuousMapRingObj T₀)).app C)
+    ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app
+      ((N.nearbyCycles (Profinite.continuousMapRingObj T₀)).obj C))
+    (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C)
+    ((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
+    R hα hRC
+      (fun k ↦ derivedUnitTransport (Profinite.continuousMapRingObj T₀)
+        (pullbackAction h _ specGaloisAction_comp (act k))
+        (pullbackAction_fst h _ specGaloisAction_comp (act k))
+        (pullbackAction_fst h _ specGaloisAction_comp (act k))
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
+      (fun k ↦ N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω (act k)
+        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
+      (fun k ↦ galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω (act k) C))
+  intro r hr
+  refine ⟨hr.1, ?_⟩
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
