@@ -66,7 +66,6 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
-set_option trace.profiler true in
 -- the Künneth maps of the product are large terms
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
@@ -113,10 +112,11 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
     DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
   have : B₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right _ _)
+  -- Infer the external product from the preservation lemmas to reuse its derived tensor structure.
   have hAB := boundedConstructible_tensorObj
-      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
+    (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
   refine hAB.1.1.elim fun c hc ↦ ?_
   -- its global sections are invertible
   have hΓ := isIso_lowerStar_kunnethMap_residueField ℓ E hM hN hpb hP hgen

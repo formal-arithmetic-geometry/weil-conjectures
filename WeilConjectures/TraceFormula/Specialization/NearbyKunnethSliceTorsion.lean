@@ -63,7 +63,6 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
-set_option trace.profiler true in
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
 /-- **From the geometric slice to the slice over a generic slice trait** (SGA 4½,
@@ -93,6 +92,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
+  -- Infer the complexes from their étale-origin proofs to reuse the derived-functor instances.
   have hAS :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       _ (coordinateSliceTraitGeneric hM b hb D) hA
@@ -129,8 +129,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
   refine sq.2 ?_
   have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽 _ _ A B).1 h
   exact isIso_kunnethMap_of_iso 𝔽 _ _
-    (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app
-      _).symm ≪≫
+    (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app _).symm ≪≫
       ((leftDerivedUpperStarCompOfEq 𝔽
         (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
           (traitSlice_over (traitSliceCoord k'))).generic) (q := M.ε) rfl).app A).symm)
