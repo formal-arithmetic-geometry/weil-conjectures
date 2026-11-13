@@ -129,8 +129,8 @@ private theorem koszulOpenHomStageClass_colimit_of_cycle
     let C := koszulCechHomColimit A r f M
     let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
     let η := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0
-    ∀ (g : L ⟶ M) (ht : koszulOpenHomTranspose A r f F e t = g)
-      (z : K.cycles 0) (hz : K.iCycles 0 z = CochainComplex.HomComplex.Cochain.ofHom g),
+    ∀ (g : L ⟶ M), koszulOpenHomTranspose A r f F e t = g →
+      ∀ (z : K.cycles 0), K.iCycles 0 z = CochainComplex.HomComplex.Cochain.ofHom g →
       H.map (DerivedCategory.Q.map (colimit.ι D e))
           (koszulOpenHomStageClass A r f F e t) =
         (η.app C).inv (HomologicalComplex.homologyMap (colimit.ι D e) 0
