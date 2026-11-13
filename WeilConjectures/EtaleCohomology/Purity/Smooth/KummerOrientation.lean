@@ -52,7 +52,7 @@ lemma Adjunction.homEquiv_comp_conjugateEquiv_app {C D : Type*} [Category C] [Ca
     Category.assoc, ← R₂.map_comp]
 
 /-- The transpose under a composite adjunction is the successive transpose. -/
-lemma Adjunction.homEquiv_comp_apply {C D E : Type*} [Category C] [Category D] [Category E]
+private lemma Adjunction.homEquiv_comp_apply {C D E : Type*} [Category C] [Category D] [Category E]
     {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ E} {I : E ⥤ D}
     (adj₁ : F ⊣ G) (adj₂ : H ⊣ I) (X : C) (Y : E) (f : H.obj (F.obj X) ⟶ Y) :
     (adj₁.comp adj₂).homEquiv X Y f = adj₁.homEquiv X _ (adj₂.homEquiv _ Y f) := by
@@ -450,15 +450,17 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     have h := Rp.commShiftIso_hom_naturality w (1 : ℤ)
     have hw' : Rp.map (w⟦(1 : ℤ)⟧') = (Rp.commShiftIso (1 : ℤ)).hom.app _ ≫
         (Rp.map w)⟦(1 : ℤ)⟧' ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ := by
-      exact ((Iso.eq_comp_inv ((Rp.commShiftIso (1 : ℤ)).app _)).2 h).trans
-        (Category.assoc _ _ _)
+      apply (cancel_mono ((Rp.commShiftIso (1 : ℤ)).hom.app _)).1
+      simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+      exact h
     have := isIso_homology_zero_map_shift_of_isIso_shiftMap T.mor₃ hδ
     have hm₃ : (Rp.map w)⟦(1 : ℤ)⟧' = T.mor₃⟦(1 : ℤ)⟧' ≫
         ((Rp.commShiftIso (1 : ℤ)).inv.app _)⟦(1 : ℤ)⟧' := by
       have hm : Rp.map w = T.mor₃ ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ :=
-        (Iso.eq_comp_inv ((Rp.commShiftIso (1 : ℤ)).app _)).2 rfl
-      exact (congrArg (shiftFunctor _ (1 : ℤ)).map hm).trans
-        ((shiftFunctor _ (1 : ℤ)).map_comp _ _)
+        by
+          change Rp.map w = (Rp.map w ≫ (Rp.commShiftIso (1 : ℤ)).hom.app _) ≫ _
+          rw [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+      simpa only [Functor.map_comp] using congrArg (shiftFunctor _ (1 : ℤ)).map hm
     rw [hw', hm₃, Functor.map_comp, Functor.map_comp, Functor.map_comp]
     infer_instance
   -- the target of the adjoint is concentrated in degree zero
