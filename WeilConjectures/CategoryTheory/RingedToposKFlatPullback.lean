@@ -535,7 +535,6 @@ private theorem faithful_mate_naturality_right
 
 -- Keep the linearity witnesses inside the construction of the hom equivalence, so
 -- naturality uses only its underlying-sheaf equation.
-set_option trace.profiler true in
 private theorem supplied_hom_equiv
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -622,7 +621,6 @@ private theorem supplied_hom_equiv
     exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
   exact ⟨B', hB⟩
 
-set_option trace.profiler true in
 private theorem supplied_adjunction
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
