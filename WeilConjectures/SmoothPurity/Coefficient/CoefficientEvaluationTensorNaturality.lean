@@ -112,9 +112,9 @@ theorem pullbackTensorEvaluationTensor_naturality (W : Scheme.{u}) (n : ℕ)
     (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
     (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q) k _
   intro p q hpq U
-  apply (evaluationSection_surjective l E W (P.X p) n U).forall.mpr
+  refine (evaluationSection_surjective l E W (P.X p) n U).forall.2 ?_
   intro x0
-  apply (evaluationSection_surjective l E W (Q.X q) n U).forall.mpr
+  refine (evaluationSection_surjective l E W (Q.X q) n U).forall.2 ?_
   intro y0
   have hn := pullbackTensorEvaluationTensor_generator_cast l E W n P Q p q k hpq U x0 y0
   have hi := cochainIso_inv_section e k U _ _ hn
