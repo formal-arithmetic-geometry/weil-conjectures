@@ -88,12 +88,13 @@ private theorem exists_derivation_isUnit_of_finite_model
     let R := TensorProduct (⊥ : Ideal A).ResidueField M ((⊥ : Ideal A).Fiber C)
     ∃ E : Derivation ℤ R R, IsUnit (E (Algebra.TensorProduct.includeLeftRingHom a)) := by
   intro C R
-  obtain ⟨D, hD⟩ := Derivation.exists_apply_ne_zero_of_not_pth_power p B M R₀ c hcn
-  obtain ⟨E, hE⟩ := Derivation.exists_formalFiber_extension A q M B D
+  obtain ⟨D, hD⟩ := Derivation.exists_apply_ne_zero_of_not_pth_power
+    (p := p) (B := B) (M := M) (R₀ := R₀) c hcn
+  obtain ⟨E, hE⟩ := Derivation.exists_formalFiber_extension
+    (A := A) (q := q) (M := M) (B := B) D
   exact ⟨E, unit_derivative M p R Algebra.TensorProduct.includeLeftRingHom E
     a c s (D c) hc (hE c) (fun h ↦ hD (Subtype.ext h))⟩
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A derivation detects the specified degree-p coefficient in the extended formal fibre.
 Source: Stacks Project, More on Algebra, Tags 07PR, 07PH and 07PE.
