@@ -99,7 +99,6 @@ private theorem transport_functor_square
     (x M) (J.map (x₀ M)) (y (r.obj M)) (J.map (y₀ (r.obj M)))
     (h₁ M) (h₂ (r.obj M)) hshift
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural restriction isomorphisms commute with the base-change mate for the
 single components of the pinned counits. This contains only the geometric part

@@ -107,7 +107,6 @@ private theorem combine_restriction_square
     _ = a ≫ (y ≫ z) ≫ c₀ := by rw [hc]; simp [Category.assoc]
     _ = _ := by rw [hy]; simp [Category.assoc]
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct the target comparison and prove mate compatibility from two
 independent ingredients: restriction of the pinned tensor counit and invariance
