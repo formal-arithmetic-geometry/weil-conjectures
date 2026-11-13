@@ -32,6 +32,17 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- Compose the functor mapping a cocone before specializing the ambient categories. -/
+private theorem homColimitProperty_mapCocone_comp
+    {A : Type*} [Category A] {B : Type*} [Category.{u + 1} B]
+    [Preadditive B] [HasShift B ℤ]
+    {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ A) (c : Cocone N) (F : A ⥤ B) (K : B)
+    (h : homColimitProperty (N ⋙ F) (F.mapCocone c) K) (n : ℤ) :
+    IsIso (colimit.desc _
+      ((F ⋙ shiftFunctor B n ⋙ preadditiveCoyoneda.obj (op K)).mapCocone c)) :=
+  h n
+
 noncomputable local instance localInst_CondensedSheafExtContinuity_1
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :
@@ -49,17 +60,6 @@ local instance localInst_CondensedSheafExtContinuity_2
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
-private theorem homColimitProperty_mapCocone_comp
-    {A : Type*} [Category A] {B : Type*} [Category.{u + 1} B]
-    [Preadditive B] [HasShift B ℤ]
-    {I : Type (u + 1)} [SmallCategory I]
-    (N : I ⥤ A) (c : Cocone N) (F : A ⥤ B) (K : B)
-    (h : homColimitProperty (N ⋙ F) (F.mapCocone c) K) (n : ℤ) :
-    IsIso (colimit.desc _
-      ((F ⋙ shiftFunctor B n ⋙ preadditiveCoyoneda.obj (op K)).mapCocone c)) :=
-  h n
-
-set_option profiler true in
 /-- Derived Hom from a constructible condensed `E`-module sheaf commutes with a small
 filtered colimit of complexes with a common termwise lower bound, in every integer shift.
 Source: upstream ModuleObject/Colimit/TwoColimit.lean, Sorried input (Hom), sheaf base case;
