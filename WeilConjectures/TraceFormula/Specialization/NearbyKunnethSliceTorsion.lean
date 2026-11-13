@@ -158,6 +158,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
   -- Infer the complex from its étale-origin proof to reuse the derived-functor instances.
+  fail "PH468: transport skipped for square diagnostic"
   have hAS :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       _ (coordinateSliceTraitGeneric hM b hb D) hA
