@@ -67,8 +67,6 @@ private theorem transport_square
   simp only [Iso.inv_hom_id, Category.comp_id, Iso.inv_hom_id_assoc]
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
--- Transporting the explicit derived functor comparisons needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural restriction isomorphisms commute with the base-change mate for the
 single components of the pinned counits. This contains only the geometric part
@@ -141,7 +139,7 @@ theorem open_pinned_single_degree_square
             (pinnedSingleDegreeTensorComparison p ((schemeOpenRestriction X U).obj G) n))
     := by
   classical
-  dsimp only
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let U := f ⁻¹ᵁ V
   let fA := f ∣_ V
   let gA := g.resLE V W hWV
