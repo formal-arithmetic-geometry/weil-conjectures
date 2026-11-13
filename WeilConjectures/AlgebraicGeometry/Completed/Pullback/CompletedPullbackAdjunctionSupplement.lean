@@ -220,7 +220,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.ConstantCompletion
 
-set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The normalized module Hom equivalence elaborates the two transported operation diagrams.
 open SheafOfModules SheafOfModules.GeometricConstruction in
 set_option backward.defeqAttrib.useBackward true in
