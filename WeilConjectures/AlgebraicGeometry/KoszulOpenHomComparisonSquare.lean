@@ -20,8 +20,6 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 /-- The stage Hom and restricted structure-Hom identifications intertwine the canonical
 Koszul comparison with restriction and augmentation.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5, and Tag 08D1.
