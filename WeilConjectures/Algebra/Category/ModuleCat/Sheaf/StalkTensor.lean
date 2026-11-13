@@ -114,7 +114,6 @@ private theorem tensorUnitMap_stalk_isIso (F G : SheafOfModules.{u} 𝓡) :
   rw [S.map_comp]
   infer_instance
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensorUnitMap_natural
     {F G F' G' : SheafOfModules.{u} 𝓡} (f : F ⟶ F') (g : G ⟶ G') :

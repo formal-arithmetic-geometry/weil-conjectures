@@ -66,7 +66,7 @@ private theorem stalk_sheafification_bijective {X : TopCat.{u}}
   change Function.Bijective t
   exact ConcreteCategory.bijective_of_isIso t
 
-private theorem sheafification_unit_naturality_apply {X : TopCat.{u}}
+private theorem stalkSheafification_unit_app_naturality {X : TopCat.{u}}
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     {P Q : PresheafOfModules.{u} R.obj} (f : P ⟶ Q)
     (U : Opens X) (s : P.obj (op U)) :
@@ -78,7 +78,6 @@ private theorem sheafification_unit_naturality_apply {X : TopCat.{u}}
     ((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.naturality f)
   exact (ConcreteCategory.congr_hom h s).symm
 
-set_option profiler true in
 /-- Change of rings commutes with stalks, naturally in the module and compatibly with germs.
 Mathlib writes extension of scalars with the coefficient factor first: `a ⊗ s`
 represents the paper's `s ⊗ a` under the canonical tensor commutation.
@@ -192,6 +191,6 @@ theorem stalkChangeOfRingsIso (X : TopCat.{u})
     { app := fun W ↦ (ModuleCat.extendScalars (α.hom.app W).hom).map (f.val.app W)
       naturality := changeOfRingsHom_naturality α F f }
   apply congrArg (germ (changeOfRings α G).val.presheaf (U ⊓ V) x hx)
-  exact sheafification_unit_naturality_apply R k (U ⊓ V) _
+  exact stalkSheafification_unit_app_naturality R k (U ⊓ V) _
 
 end SheafOfModules
