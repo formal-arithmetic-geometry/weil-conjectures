@@ -369,42 +369,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
-  have := hasTensor₄ObjExt_mod.{u}
-  have := hasGoodTensor₁₂Tensor_mod.{u}
-  have := hasGoodTensorTensor₂₃_mod.{u}
-  have := hasColimitsOfShape_int_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  letI := galoisTensorModuleColimit
-  letI := galoisTensorLeftColimit
-  letI := galoisTensorRightColimit
-  obtain ⟨r, hr, hcoinv⟩ :=
-    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
-      hact
-  refine ⟨r, hr, ?_⟩
-  intro q V b hV W φ hφ
-  refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
-    DerivedCategory.homologyFunctor _ q) ?_ φ hφ
-  intro K a _ hcab
-  -- the cohomology of the tensor product is continuous along the finite layers
-  let F := DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ L((f')^*⟦Profinite.continuousMapRingObj T₀⟧)
-  have hGE : ∀ (Y : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T₀) N.generic)) ℤ), Y.IsStrictlyGE a →
-        (F.obj Y).IsGE a := fun Y hY ↦ by
-    have := Functor.isGE_rightDerivedFunctor_obj ((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧)
-      (DerivedCategory.Q.obj Y) a
-    have := isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj T₀) N.i
-      (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).obj (DerivedCategory.Q.obj Y)) a
-    exact isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj T₀) f' _ a
-  have hpt : ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).pt.IsStrictlyGE
-      a := (CochainComplex.isStrictlyGE_iff _ a).2 fun i hi ↦
-    (ProEtale.GaloisTower.infFunctor (Profinite.continuousMapRingObj T₀) _).map_isZero
-      (CochainComplex.isZero_of_isStrictlyGE K a i hi)
-  exact isColimit_homology_tensorRight_mapCocone' T₀
-    ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K) F a
-    (fun j ↦ hGE _ inferInstance) (hGE _ hpt)
-    (fun p ↦ (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N
-      (galoisTower Ω h) K hcab a f' p).some) V b hV q
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
