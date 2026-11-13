@@ -314,7 +314,7 @@ theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
     simp only [Functor.map_comp] at hadj
     simp only [Category.assoc] at hadj
     rw [← reassoc_of% hadj]
-    simp only [Category.assoc]
+    rw [Functor.map_comp]
   change χ.app _ ≫ SX.realization.hom.app _ ≫ _ ≫ c = _
   rw [hCoord]
   have hNat := SX.realization.hom.naturality γ
