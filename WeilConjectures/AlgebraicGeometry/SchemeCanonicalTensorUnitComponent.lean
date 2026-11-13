@@ -254,7 +254,8 @@ theorem schemeCanonicalTensorUnit_component (Y : Scheme.{u})
   apply ha'.trans
   apply congrArg (fun t ↦ t ≫ (eta.app F).f k)
   split_ifs with h
-  · simp only [he 0, hcoeff h]
+  · simp only [he 0]
+    rw [hcoeff h]
   · rfl
 
 end AlgebraicGeometry
