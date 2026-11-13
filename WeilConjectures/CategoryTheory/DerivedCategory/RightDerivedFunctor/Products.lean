@@ -14,8 +14,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 Let `F : C ⥤ D` be an additive functor between abelian categories with K-injective
 resolutions. If `F` preserves products of shape `J` and products of shape `J` are exact
 in `D`, then the unbounded right derived functor `RF : D(C) ⥤ D(D)` preserves products of
-shape `J`: it is computed by applying `F` termwise to K-injective complexes, these are closed
-under products, and products of complexes are products in `D(D)` since products are exact.
+shape `J`.
+
+## Implementation details
+
+`RF` is computed by applying `F` termwise to K-injective complexes, these are closed under
+products, and products of complexes are products in `D(D)` since products are exact.
 -/
 
 @[expose] public section

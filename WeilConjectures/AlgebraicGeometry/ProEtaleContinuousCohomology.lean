@@ -24,11 +24,19 @@ import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 
 Source: Weil conjectures blueprint, latest, sec-proetale-coefficients,
 `sk-prop-pe-continuous-cohomology`; Stacks Project, Tags 0CQD and 07KY.
-(blueprint: proposition-continuous-cohomology-pro-etale-cohomology).
 
 The `milnorTowerCokernel` in the statement is the canonical cokernel model for
 `lim^1` of a tower of abelian groups. The derived-limit predicate in the
 first clause is `IsDerivedLimit`.
+
+## Implementation details
+
+Epimorphic transitions make `1 - T` an epimorphism of sheaves (`milnor_epimorphic`), so
+`0 ⟶ lim F ⟶ ∏ Fₙ ⟶ ∏ Fₙ ⟶ 0` is short exact. Since `RΓ` preserves countable products, the
+image of its distinguished triangle is a derived-limit triangle. In the long exact cohomology
+sequence, the connecting map factors through `milnorTowerCokernel` and the cohomology of
+`lim F ⟶ ∏ Fₙ` lands in the kernel of `1 - T`, which gives the Milnor sequence. For a tower of
+finite groups, `1 - T` is surjective by the Mittag-Leffler argument.
 -/
 
 @[expose] public section
@@ -305,30 +313,14 @@ private lemma continuousCohomology_isDerivedLimit
 
 end Milnor
 
-/-- A tower of finite abelian groups is Mittag-Leffler, so `1 - T` on its product is
-surjective. -/
+/-- For a tower of finite abelian groups, the cokernel of `1 - T` on its product vanishes. -/
 private lemma isZero_milnorTowerCokernel_of_finite (M : ℕᵒᵖ ⥤ AddCommGrpCat.{t + 1})
     (hM : ∀ n : ℕᵒᵖ, Finite (M.obj n)) : IsZero (milnorTowerCokernel M) := by
   obtain ⟨_, _, e₁, _, _⟩ := derivedLimitRoosAbelianGroups.{t + 1}
   exact (finiteTower_mittagLeffler_vanishing M hM).2.of_iso (e₁ M).symm
 
 /-- The comparison, Milnor exact sequence, naturality, and finite-level vanishing
-for an epimorphic inverse system of abelian sheaves on the small pro-étale site.
-
-Proof:
-1. Epimorphic transitions make `1 - T` an epimorphism of sheaves (`milnor_epimorphic`), so
-   `0 ⟶ lim F ⟶ ∏ Fₙ ⟶ ∏ Fₙ ⟶ 0` is short exact. Apply `RΓ` to its distinguished
-   triangle. Since `RΓ` preserves countable products, this is a derived-limit triangle.
-2. In its long exact cohomology sequence, cohomology commutes with countable products of
-   abelian groups and turns `1 - T` into the transition endomorphism of the cohomology
-   towers. The connecting map factors through `milnorTowerCokernel` and the cohomology
-   of `lim F ⟶ ∏ Fₙ` lands in the kernel of `1 - T`, namely the limit. Exactness gives the
-   short exact sequence; naturality of the connecting map gives the naturality squares.
-3. For a tower of finite groups, `1 - T` is surjective (Mittag-Leffler), so its cokernel
-   vanishes.
-(blueprint: proposition-continuous-cohomology-pro-etale-cohomology,
-proposition-continuous-cohomology-pro-etale-cohomology--1).
--/
+for an epimorphic inverse system of abelian sheaves on the small pro-étale site. -/
 theorem continuousCohomology
     (X : Scheme.{t})
     [HasDerivedCategory.{w} (continuousCohomologyAbelianSheaves X)]
