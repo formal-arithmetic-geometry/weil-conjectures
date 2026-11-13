@@ -623,6 +623,23 @@ private theorem native_restriction_data
         heq_of_eq (congrArg (fun S ↦ fun M N ↦ S.obj (M, N))
           (eq_of_heq hc.2.2.1)), hc.2.2.2⟩
 
+/-- Paste the two balanced quotient equations with the pullback tensorator. -/
+private theorem balanced_restriction_summand
+    {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)
+    {A B O W T : C} {A' B' O' W' T' : D}
+    {π : A ⟶ B} {π₀ : A ⟶ O} {i : B ⟶ W} {c : W ⟶ T} {i₀ : O ⟶ T}
+    {π' : A' ⟶ B'} {π₀' : A' ⟶ O'} {i' : B' ⟶ W'} {c' : W' ⟶ T'}
+    {i₀' : O' ⟶ T'} {μ : T' ⟶ G.obj T} {μ₀ : O' ⟶ G.obj O}
+    {μA : A' ⟶ G.obj A} {r : B' ⟶ G.obj B}
+    (hu : π' ≫ i' ≫ c' = π₀' ≫ i₀')
+    (hi : i₀' ≫ μ = μ₀ ≫ G.map i₀)
+    (hs : π₀' ≫ μ₀ = μA ≫ G.map π₀)
+    (hr : π' ≫ r = μA ≫ G.map π)
+    (hz : π ≫ i ≫ c = π₀ ≫ i₀) :
+    π' ≫ i' ≫ c' ≫ μ = π' ≫ r ≫ G.map i ≫ G.map c := by
+  rw [reassoc_of% hu, hi, reassoc_of% hs, reassoc_of% hr]
+  simp only [← G.map_comp, ← G.map_comp_assoc, hz]
+
 section AbstractTransport
 variable (α : (ProEtale.adicUpperStar l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))) ⋙
@@ -714,7 +731,6 @@ private theorem native_restriction_chain
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
   dsimp only [nativeOpenTensorInsertion] at restriction_summands hcZ hcU
   dsimp only [RP, RT, Functor.mapHomologicalComplex_obj_X] at hcU
-  simp only [Category.assoc]
   ext n : 1
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
   apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
@@ -757,14 +773,7 @@ private theorem native_restriction_chain
   conv_lhs => rw [Iso.inv_hom_id_assoc]
   apply Mod.tensorLeft_obj_hom_ext
   simp only [Mod.comp_hom']
-  erw [reassoc_of% (hcU p q n hpq)]
-  erw [reassoc_of% (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
-    (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
-      (P.X p).carrier (T.X q).carrier)]
   simp only [R, ProEtale.adicUpperStar_map_hom]
-  have hcz := congrArg (fun f ↦ G.map f) (hcZ p q n hpq)
-  simp only [Functor.map_comp] at hcz
-  rw [hcz]
   have hι := congrArg
     (fun f :
       (((R.mapHomologicalComplex (.up ℤ)).obj P₀).X p ⊗
@@ -772,16 +781,12 @@ private theorem native_restriction_chain
         ((R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀)).X n ↦ f.hom)
     (R.ιTensorObj_mapCochainComplexμIso_hom_f P₀ T₀ p q n hpq)
   simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
-  conv_lhs =>
-    arg 2
-    rw [hι]
-  have hsheaf := ordinary_sheaf_restriction_tensor k₀ l j
-    (P.X p).carrier (T.X q).carrier
-  have hfinal := congrArg
-    (fun f ↦ f ≫ G.map (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom) hsheaf
-  simp only [Category.assoc] at hfinal
-  convert hfinal using 1
-  rfl
+  exact balanced_restriction_summand G (hcU p q n hpq) hι
+    (ordinary_sheaf_restriction_tensor k₀ l j (P.X p).carrier (T.X q).carrier)
+    (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
+      (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
+        (P.X p).carrier (T.X q).carrier)
+    (hcZ p q n hpq)
 
 
 set_option profiler true in
@@ -891,7 +896,7 @@ private theorem native_restriction_goal_proof
   let utotal := (((nativeTensorTotal k₀ l U).obj RP).obj RT)
   have hchain := native_restriction_chain k₀ l j α hL sr hsr P T
     (totalRestriction P T) cZ cU (restriction_summands P T) hcZ hcU
-  obtain ⟨mU, hmU', hsquare⟩ :=
+  have hdiagram :=
     final_total_diagram (Lα) FU F R e
       (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l U)
       (nativeDerivedClosedComparison k₀ l U).ordinaryClosed.tensor
@@ -901,14 +906,12 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
       cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) (by
-        dsimp only [complex_square] at hchain ⊢
         rw [native_restriction_complex_square_hom k₀ l j α P,
           native_restriction_complex_square_hom k₀ l j α T,
           native_restriction_complex_square_hom k₀ l j α ztotal]
-        simpa only [← Prod.id_eq, Functor.map_id, Category.id_comp, Category.comp_id]
+        simpa only [Functor.map_id, Category.id_comp, Category.comp_id]
           using hchain) mZ rfl
-  refine ⟨mZ, mU, hmZ', hmU', ?_⟩
-  exact hsquare
+  exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
 -- Preserve the named restriction functor when specializing the Frobenius comparison.
 /-- Match the named pullback in the inputs before transporting its Frobenius comparison. -/
