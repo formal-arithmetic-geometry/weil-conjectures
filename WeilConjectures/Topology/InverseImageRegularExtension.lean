@@ -178,18 +178,13 @@ theorem inverseImageRegularExtension
   change p.val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
   trans p.val.app V a
-  · symm
-    dsimp only [p]
-    rw [hφ, ← he]
-    exact hadj I (unit S) e.hom _ _
-  rw [show a = a • (1 : A.obj.obj V) by exact (mul_one a).symm]
-  rw [p.val.app V |>.hom.map_smul, hv]
-  change (t.hom.app ((Opens.map g).op.obj V)).hom
-    (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
-      (Opens.grothendieckTopology T)).unit.app A).hom.app V a) * 1 = _
-  rw [mul_one]
-  simp only [smul_eq_mul, mul_one]
+  · have hadj' := hadj I (unit S) e.hom ((Opens.map g).op.obj V)
+    rw [he] at hadj'
+    exact ((hφ M (L.obj (unit S)) (adj.homEquiv I (unit S) e₀.hom) V a).trans
+      (hadj' _)).symm
+  have ha := (p.val.app V).hom.map_smul a (1 : A.obj.obj V)
+  rw [show a • (1 : A.obj.obj V) = a from mul_one a, hv] at ha
+  exact ha.trans (mul_one _)
 
 
 end
