@@ -158,7 +158,16 @@ theorem coefficientDirectImageRestrictionCube
       restrictionComp_apply, restrictionComp_inv_apply]
   ext x
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  erw [hd, hcz, cdApp, hi, cpApp, ha]
+  have hl := (congrArg (fun y ↦
+      (cd.hom.app ((pbcRestrict cS.hom).obj M)).val.app U
+        (((pbcRestrict χ).map (cz.hom.app M)).val.app U y)) (hd x)).trans
+    ((congrArg (fun y ↦ (cd.hom.app ((pbcRestrict cS.hom).obj M)).val.app U y)
+      (hcz x)).trans (cdApp _ U x))
+  have hr := (congrArg (fun y ↦ (H.map (a.hom.app M)).val.app U
+      ((cp.hom.app ((pbcRestrict φX).obj M)).val.app U y)) (hi x)).trans
+    ((congrArg (fun y ↦ (H.map (a.hom.app M)).val.app U y)
+      (cpApp _ U x)).trans (ha x))
+  exact hl.trans hr.symm
 
 
 end AlgebraicGeometry.Scheme
