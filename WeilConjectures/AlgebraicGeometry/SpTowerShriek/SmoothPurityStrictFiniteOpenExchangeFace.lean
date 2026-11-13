@@ -518,7 +518,6 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
-set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}
@@ -598,7 +597,6 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
-set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
     (o : Operations l E b) (levels : ComparisonLevels l E b o)
@@ -640,34 +638,32 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU)
     (by
-      intro M
-      have HU := native_open_unit_mate (R l E n) sq M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h)
+      as_aux_lemma =>
+        intro M
+        have HU := native_open_unit_mate (R l E n) sq M
+        simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+        exact HU)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
-      dsimp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
-        Iso.symm_inv, NatTrans.comp_app, eqToIso.inv,
-        Functor.comp_obj, Functor.id_obj] at he ⊢
-      simp only [Category.assoc] at he ⊢
+      simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
+        Iso.symm_inv, NatTrans.comp_app, Category.assoc,
+        eqToIso.inv, Functor.comp_obj, Functor.id_obj] at he ⊢
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
         exactByConversion h)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HC) N
-  dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj] at H
+  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
