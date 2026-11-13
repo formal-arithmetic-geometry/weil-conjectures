@@ -427,7 +427,6 @@ private noncomputable def tensorPullbackTotalNatIso
 end CanonicalTensorPullbackProof
 
 set_option synthInstance.maxSize 2048 in
-set_option trace.profiler true in
 set_option linter.style.longLine false in
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
@@ -647,17 +646,21 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
       DerivedCategory.Q.map (k.totalIso R S RI uInv I c uStar hobj V am P Q).inv
     apply congrArg DerivedCategory.Q.map
     apply (Iso.inv_eq_inv _ _).2
+    delta CanonicalRingedTensorComparison.totalIso
     rfl
   refine ⟨hpres, (existsUnique_congr ?_).mp hdes⟩
   intro alpha
   constructor
   · intro ha P Q hp hq
     refine ⟨hF P hp, hF Q hq, ?_⟩
-    simpa only [heps, hb] using ha P Q hp hq
+    have hh := ha P Q hp hq
+    simp only [heps, hb] at hh
+    exact hh
   · intro ha P Q hp hq
     set_option backward.isDefEq.respectTransparency true in
       have hh := (ha P Q hp hq).choose_spec.choose_spec
-    simpa only [heps, hb] using hh
+    simp only [heps, hb]
+    exact hh
 
 set_option synthInstance.maxSize 2048 in
 -- Keep both tensor representative interfaces explicit.

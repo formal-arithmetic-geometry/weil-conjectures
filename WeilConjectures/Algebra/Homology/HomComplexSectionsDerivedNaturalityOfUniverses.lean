@@ -32,7 +32,6 @@ private lemma map_homCongr_naturality_hcs
   simpa only [Category.assoc] using
     congrArg (fun z ↦ z ≫ F.map f ≫ c.hom.app B ≫ Q.map s) ht.symm
 
-set_option trace.profiler true in
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.
 The maps `s` and `t` need not be quasi-isomorphisms.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), and Tag 0A94.

@@ -212,7 +212,6 @@ private lemma tensorObjIsoSheafification_hom_eq_kfg (A T : SheafOfModules.{max u
       ((sheafificationCounitIso_kfg A).inv ⊗ₘ (sheafificationCounitIso_kfg T).inv) ≫
         Functor.LaxMonoidal.μ (𝓢) A.val T.val := rfl
 
-set_option trace.profiler true in
 /-- The tensor comparison is natural in the second factor. -/
 private lemma whiskerLeft_tensorObjIsoSheafification_hom_kfg (A : SheafOfModules.{max u v} 𝓡)
     {T T' : SheafOfModules.{max u v} 𝓡} (f : T ⟶ T') :
@@ -220,7 +219,8 @@ private lemma whiskerLeft_tensorObjIsoSheafification_hom_kfg (A : SheafOfModules
       (tensorObjIsoSheafification A T).hom ≫ (𝓢).map (A.val ◁ f.val) := by
   have h : f ≫ (sheafificationCounitIso_kfg T').inv =
       (sheafificationCounitIso_kfg T).inv ≫ (𝓢).map f.val :=
-    (asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit).inv.naturality f
+    (asIso (PresheafOfModules.sheafificationAdjunction.{max u v}
+      (𝟙 (𝓡).obj)).counit).inv.naturality f
   rw [tensorObjIsoSheafification_hom_eq_kfg, tensorObjIsoSheafification_hom_eq_kfg,
     Category.assoc]
   exact tensorComparison_naturality_right_kfg (𝓢) (A := A) (T := T) (T' := T')
