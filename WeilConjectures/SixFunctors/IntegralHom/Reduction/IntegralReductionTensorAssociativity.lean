@@ -416,10 +416,14 @@ private theorem nativeReductionMonoidal
         (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) hcr εP εQ
       trace "PH805: tensor comparison transported"
       dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
-        F, integralDerivedReduction, mu, AS, CoefficientClosedStructure.tensor,
+        F, integralDerivedReduction, mu, AS, CoefficientClosedStructure.tensor, εP, εQ,
+        J, R, S, completedIntegralCommRingSheaf, totalTensor, coefficientTotalTensor,
+        ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj,
         CategoryTheory.Functor.prod_obj] at ht hn ⊢
+      have hsquare := ht.trans hn
+      trace "PH805: square composed"
       with_unfolding_all
-        exact ht.trans hn)
+        exact hsquare)
   trace "PH805: resulting tensorator"
   refine ⟨core, ?_⟩
   intro X Z
