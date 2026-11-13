@@ -94,8 +94,11 @@ private theorem inverseImage_unit_iso :
     have hm := I.moduleSMul U Z (𝟙 Z) one (𝟙 Z)
       (fun W x ↦ (mul_one (show R.obj.obj W from x)).symm) W t
     simp only [uInv.map_id] at hm
-    simp only [ht, hi] at hm
-    exact hm
+    change (I.moduleUnderlying.inv.app U).hom.app W t =
+      I.ringUnderlying.hom.hom.app W t •
+        (I.moduleUnderlying.inv.app U).hom.app W ((uInv.map one).hom.app W t) at hm
+    exact hm.trans (congrArg₂ (· • ·) ht
+      (congrArg ((I.moduleUnderlying.inv.app U).hom.app W) hi))
   let eW (W : Dᵒᵖ) : RI.obj.obj W ≃ₗ[RI.obj.obj W] (I.modules.obj U).val.obj W :=
     { toEquiv := (((sheafToPresheaf JD (Type u)).mapIso e).app W).toEquiv.symm
       map_add' := by
@@ -335,7 +338,9 @@ theorem canonicalRingedTensorComparison_unit_exists
       ((I.moduleUnderlying.inv.app U).hom.app W ((uInv.map one).hom.app W t)) =
         (uInv.map one).hom.app W t at hcancel
     simp only [id_eq] at hOne
-    simpa only [hcancel, heS, hOne, map_one] using hh
+    refine hh.trans ((heS W _).trans ?_)
+    exact (congrArg (c.hom.app W)
+      ((congrArg (I.ringUnderlying.hom.hom.app W) hcancel).trans hOne)).trans (map_one _)
   have hp' : (k.mu M U).hom.val.app W
       ((L.map (ρ_ M).inv).val.app W ((k.q M).hom.app W m)) =
       RingedTensor.pure S (L.obj M) (L.obj U) W ((k.q M).hom.app W m)
