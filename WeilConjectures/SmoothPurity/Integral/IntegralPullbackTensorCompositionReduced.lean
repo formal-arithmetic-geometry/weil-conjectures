@@ -44,8 +44,8 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
--- Use the sequence-site presentations throughout the transport calculation.
-set_option profiler true in
+-- Use the sequence-site presentations throughout the transport calculation. These
+-- adapters avoid repeatedly comparing the two presentations of the derived categories.
 private def integralPullbackSystemComparison_sequence {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -55,7 +55,6 @@ private def integralPullbackSystemComparison_sequence {X Y : Scheme.{u}} (f : X 
         integralComparisonDerivedSequencePullback l E f :=
   (integralPullbackSystemComparison l E).choose f
 
-set_option profiler true in
 private theorem canonicalIntegralPullbackTensor_systemReduction_sequence {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -78,7 +77,8 @@ private theorem canonicalIntegralPullbackTensor_systemReduction_sequence {X Y : 
             (constructibleIntegralPullback l E f).obj N) := by
   exact canonicalIntegralPullbackTensor_systemReduction l E f M N
 
-set_option profiler true in
+-- Infer the compositor equality in its finite-system presentation before extracting
+-- its component; elaborating it directly against the sequence type unfolds the functors.
 private theorem finiteSystemDerivedComposition_hom_app_sequence {X Y Z : Scheme.{u}}
     (h : Z ⟶ X) (f : X ⟶ Y) (A : coefficientSequenceDerived l E Y) :
     ((finiteSystemDerivedComposition (integralSystemRings l E)
@@ -91,7 +91,6 @@ private theorem finiteSystemDerivedComposition_hom_app_sequence {X Y Z : Scheme.
     (finiteSystemDerivedComposition_eq l E h f)
   exact e
 
-set_option profiler true in
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
