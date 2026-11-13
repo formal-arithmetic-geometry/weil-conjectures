@@ -101,6 +101,7 @@ private theorem mate_isIso_of_projection
   exact b.bijective
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The canonical-family predicate unfolds the recorded sheaf tensor instances.
 set_option linter.style.haveILetI false in
 /-- The mate of restricted evaluation is invertible for any strong monoidal
