@@ -22,9 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 500000 in
 set_option profiler true in
--- The over-site equivalence and evaluated biproduct require extra definitional reductions.
 /-- The map to H and the normalized formal quotient maps jointly separate local sections.
 Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, made explicit
 by the Artin--Rees argument of `coherentMap_torsion_completion_ext_zero`.
@@ -83,7 +81,12 @@ theorem torsion_local_section_separation
   obtain ⟨n, hn⟩ := coherentMap_torsion_completion_ext_zero (J.comap (U i).ι)
     (Fi i) (Hlocal i) (ai i) ⟨s, hs, hk⟩
   let E := (Scheme.Modules.overEquiv (U i)).functor
+  have : E.PreservesZeroMorphisms := inferInstance
+  have : IsIso (li i).hom := (li i).isIso_hom
+  have : IsIso ((βi i).inv.app (op n)) := ((βi i).app (op n)).isIso_inv
   let p := formalModuleQuotientπ (J.comap (U i).ι) (n + 1) (Fi i).obj
+  have : HasBinaryBiproduct (H.obj.over (U i)) ((N.obj.obj (op n)).over (U i)) :=
+    inferInstance
   let c := biprod.lift (bi i) (qi i (op n))
   have : Mono c := by
     apply Preadditive.mono_of_cancel_zero

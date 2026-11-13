@@ -24,9 +24,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 700000 in
 set_option profiler true in
--- Elaborating the nested derived, forgetful and evaluation comparisons needs a larger limit.
 private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     {G : Z.Modules} (K : InjectiveResolution G) (p : ℕ)
     (t : S.presheaf.obj (op ⊤))
@@ -62,10 +60,13 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
   have hm := congrArg (fun q ↦ ShortComplex.homologyMap q) hscalar
   rw [ShortComplex.homologyMap_mapNatTrans,
     ShortComplex.homologyMap_mapNatTrans] at hm
+  change cA.hom ≫ ((A.sc p).homology.smul (h.appTop.hom t)).asHom ≫ cA.inv =
+    cB.hom ≫ τ.app (B.sc p).homology ≫ cB.inv at hm
   have hm' := congrArg (fun q ↦ cA.inv ≫ q ≫ cB.hom) hm
   have hc : ((A.sc p).homology.smul (h.appTop.hom t)).asHom ≫ cA.inv ≫ cB.hom =
       cA.inv ≫ cB.hom ≫ τ.app (B.sc p).homology := by
-    simpa [cA, cB, U, Category.assoc, ModuleCat.smulNatTrans] using hm'
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+      Category.comp_id] using hm'
   have hc' (z : (A.sc p).homology) :
       cB.hom (cA.inv (h.appTop.hom t • z)) =
         t • (show (B.sc p).homology.obj (op ⊤) from cB.hom (cA.inv z)) := by
