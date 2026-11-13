@@ -89,19 +89,16 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
       (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
         sq)).app K)) :
     IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq').app K.obj) := by
-  have hθ (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-      ((boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
-        sq).hom.app K).hom =
-        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq').hom.app K.obj :=
-    (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicIntegersRingObj ℓ E) sq K).trans
-        (congrArg (fun s ↦
-          (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) s).hom.app K.obj)
-          (Subsingleton.elim _ sq'))
+  obtain rfl := Subsingleton.elim sq'
+    (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)
+  have hθ := boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    ℓ (Profinite.padicIntegersRingObj ℓ E) sq
+  unfold baseChangeMap
   apply isIso_exchangeRight_of_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
-    (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq')
+    (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E)
+      (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left))
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj
       (Profinite.padicIntegersRingObj ℓ E) ℓ f K)
     (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
