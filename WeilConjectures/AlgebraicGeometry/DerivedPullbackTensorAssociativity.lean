@@ -340,12 +340,12 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
             ((derivedPullback g).obj C)).hom ≫
             (derivedPullback g).obj A ◁ ((μ.app B).app C).hom ≫
             ((μ.app A).app (B ⊗ C)).hom  := by
-  let : MonoidalCategory (CochainComplex
-      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) := inferInstance
-  let : MonoidalCategory (CochainComplex
-      (SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) ℤ) := inferInstance
-  let : MonoidalCategory (schemeDerivedCategory X) := inferInstance
-  let : MonoidalCategory (schemeDerivedCategory T) := inferInstance
+  have : CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
+      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) :=
+    CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uModel, uModel} _
+  have : CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
+      (SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) :=
+    CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uModel, uModel} _
   let := mF.toMonoidal
   have : F.IsLeftAdjoint := by
     have hFE : F = Scheme.Modules.tensorPullback g :=
