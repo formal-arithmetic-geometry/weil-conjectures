@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChange
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
 
 /-!
@@ -46,11 +45,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod
-  hasGoodTensorTensor₂₃_mod hasColimitsOfShape_int_mod
-  preservesColimitsOfShape_int_curriedTensor_obj_mod
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod in
-attribute [-instance] preservesColimit_of_createsColimit_and_hasColimit in
+set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` and
@@ -80,35 +75,20 @@ theorem nonempty_arrowIso_map_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ 
   have := isGE_leftDerivedUpperStar_obj _ P.ε
     (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
       L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) m
-  have hA : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.j).app
-      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀)) :=
-    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
-      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
-  have hB : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) N.j).app
-      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) :=
-    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
-      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
-  have hAB : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) P.j).app
-      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
-          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀))) :=
-    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
-      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
-          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
-  with_reducible_and_instances
-    have k := nonempty_arrowIso_map_map_kunnethMap
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-      φ₁ φ₂ h A₀ B₀ hA hB hAB
-    cast_proofs k
-attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod
-  hasGoodTensorTensor₂₃_mod hasColimitsOfShape_int_mod
-  preservesColimitsOfShape_int_curriedTensor_obj_mod
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod in
-attribute [-instance] preservesColimit_of_createsColimit_and_hasColimit in
+  have hA := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
+    (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
+  have hB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
+    (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
+  have hAB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
+    (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+      (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+        L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
+  have k := nonempty_arrowIso_map_map_kunnethMap
+    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+    φ₁ φ₂ h A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
+    (by exact_mod_proofs hAB)
+  exact_mod_proofs k
+set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` and
@@ -136,29 +116,17 @@ theorem nonempty_arrowIso_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ f₁
   have := isGE_leftDerivedUpperStar_obj _ P.ε
     (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
       L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) m
-  have hA : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.j).app
-      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀)) :=
-    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
-      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
-  have hB : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) N.j).app
-      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) :=
-    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
-      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
-  have hAB : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) P.j).app
-      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
-          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀))) :=
-    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
-      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
-          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
-  with_reducible_and_instances
-    have k := nonempty_arrowIso_map_kunnethMap
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-      φ₁ φ₂ A₀ B₀ hA hB hAB
-    cast_proofs k
+  have hA := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
+    (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
+  have hB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
+    (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
+  have hAB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
+    (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+      (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+        L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
+  have k := nonempty_arrowIso_map_kunnethMap
+    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+    φ₁ φ₂ A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB) (by exact_mod_proofs hAB)
+  exact_mod_proofs k
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
