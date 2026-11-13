@@ -58,6 +58,23 @@ lemma CochainComplex.exists_quasiIso_isKFlat (L : CochainComplex 𝒜 ℤ) :
 
 end
 
+/-- Factoring a map through an exact cokernel presentation and a quasi-isomorphism gives a
+quasi-isomorphism from the cokernel. -/
+lemma CochainComplex.quasiIso_cokernelDesc_of_exact_factor
+    {𝒜 : Type*} [Category 𝒜] [Abelian 𝒜] {X Y Z T : CochainComplex 𝒜 ℤ}
+    (f : X ⟶ Y) (ρ : Y ⟶ Z) (w : f ≫ ρ = 0) (hS : (ShortComplex.mk f ρ w).Exact)
+    [Epi ρ] (g : Z ⟶ T) [QuasiIso g] (t : Y ⟶ T) (ht : ρ ≫ g = t)
+    (wt : f ≫ t = 0) : QuasiIso (cokernel.desc f t wt) := by
+  let c := (cokernelIsCokernel f).coconePointUniqueUpToIso hS.gIsCokernel
+  have hc : cokernel.π f ≫ c.hom = ρ :=
+    (cokernelIsCokernel f).comp_coconePointUniqueUpToIso_hom hS.gIsCokernel
+      WalkingParallelPair.one
+  have heq : cokernel.desc f t wt = c.hom ≫ g := by
+    apply coequalizer.hom_ext
+    rw [cokernel.π_desc, reassoc_of% hc, ht]
+  rw [heq]
+  infer_instance
+
 namespace DerivedCategory
 
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
@@ -462,7 +479,6 @@ lemma quasiIso_cokernelDesc_towerFunctor_self (n : ℕ) :
     ⟨cokernel.π _, by rw [← cancel_epi (cokernel.π _), reassoc_of% hπ, Category.comp_id], hπ⟩
   infer_instance
 
-set_option profiler true in
 include hφ hψ₀ hsurj hker ht in
 lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
     QuasiIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
@@ -516,25 +532,15 @@ lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
   have : Epi ρ := HomologicalComplex.epi_of_epi_f _ fun i ↦ by
     have := D.epi_r ((M (n + k + 1)).P.X i)
     exact (Sheaf.restrictScalars J (ψ (n + k + 1))).map_epi (D.r.app _)
-  let c := (cokernelIsCokernel _).coconePointUniqueUpToIso hS.gIsCokernel
-  have hc : cokernel.π _ ≫ c.hom = ρ :=
-    (cokernelIsCokernel _).comp_coconePointUniqueUpToIso_hom hS.gIsCokernel
-      WalkingParallelPair.one
   have hT := towerFunctor_map_homOfLE φ ψ hψ L t hφ n k
-  rw [← hg] at hT
-  have heq : cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
-      ((towerFunctor φ ψ hψ L t).map (homOfLE (Nat.le_add_right n (k + 1))).op) (by
-        rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id
-          ((towerFunctor φ ψ hψ L t).map _), ← Linear.comp_smul,
-          smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t, Limits.comp_zero]) =
-      c.hom ≫ ((Sheaf.restrictScalars J (ψ (n + k + 1))).mapHomologicalComplex (.up ℤ)).map
+  refine CochainComplex.quasiIso_cokernelDesc_of_exact_factor _ ρ hρ hS
+    (((Sheaf.restrictScalars J (ψ (n + k + 1))).mapHomologicalComplex (.up ℤ)).map
         (((Sheaf.restrictScalars J (φ h)).mapHomologicalComplex (.up ℤ)).map g) ≫
         (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J (ψ (n + k + 1))
-          (φ (Nat.le_add_right n (k + 1))) (ψ n) (hψ _).symm) (.up ℤ)).hom.app _ := by
-    refine coequalizer.hom_ext ?_
-    rw [cokernel.π_desc, reassoc_of% hc, hT, Functor.map_comp, Category.assoc]
-  rw [heq]
-  infer_instance
+          (φ (Nat.le_add_right n (k + 1))) (ψ n) (hψ _).symm) (.up ℤ)).hom.app _) _ ?_ _
+  dsimp only [ρ]
+  rw [← Functor.map_comp_assoc, hg]
+  exact hT.symm
 
 include hφ hψ₀ hexact hsurj hker ht in
 /-- The strict model of a normalized tower is a normalized adic tower of complexes. -/
