@@ -209,7 +209,6 @@ private theorem signed_power_scalar {A : Type z} [CommRing A] (ρ : A →+* S) (
   rw [zsmul_eq_mul]
   simp only [map_mul, map_pow, map_neg, map_one, Int.cast_pow, Int.cast_neg, Int.cast_one]
 
-set_option profiler true in
 -- The transport compares the canonical sheaf tensor and Hom scalar instances.
 private theorem signed_scalar_degree_transport
     {A : Type z} [CommRing A]
@@ -244,8 +243,7 @@ private theorem signed_scalar_degree_transport
   intro β
   have hs := unitor_tensor_scalar O (K.X p) (ρ b)
   have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
+  simp only [Functor.map_comp, Category.assoc]
   rw [← Category.assoc, hs]
   change ((-1 : ℤˣ) ^ p) •
       (((ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv) ≫ _ ≫ _) = _
