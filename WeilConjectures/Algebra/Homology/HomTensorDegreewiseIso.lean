@@ -241,8 +241,6 @@ private theorem homTerm_hom_ext (L M : CochainComplex Mod ℤ) (n : ℤ)
   intro p
   exact congrArg (fun f ↦ (f.val.app U).hom s) (h p)
 
-set_option maxHeartbeats 800000 in
--- Transposing the internal Hom unfolds the localized module structures in two universes.
 set_option synthInstance.maxSize 256 in
 /-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;
@@ -323,10 +321,14 @@ private theorem tensorLocalized_ext
       (T.val.map W.unop.hom.op ((q.app U).hom (x ⊗ₜ[R.obj.obj U] y))) =
     ((b.val.app (op W.unop.left)).hom s).app (op (Over.mk (𝟙 W.unop.left)))
       (T.val.map W.unop.hom.op ((q.app U).hom (x ⊗ₜ[R.obj.obj U] y)))
-  rw [← PresheafOfModules.naturality_apply q W.unop.hom.op]
-  erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
-  exact h (op W.unop.left) s (op (Over.mk (𝟙 W.unop.left))) i j hij
-    ((K.X i).val.map W.unop.hom.op x) ((L.X j).val.map W.unop.hom.op y)
+  have hq := (PresheafOfModules.naturality_apply q W.unop.hom.op
+    (x ⊗ₜ[R.obj.obj U] y)).symm
+  have ha := congrArg
+    (((a.val.app (op W.unop.left)).hom s).app (op (Over.mk (𝟙 W.unop.left)))).hom hq
+  have hb := congrArg
+    (((b.val.app (op W.unop.left)).hom s).app (op (Over.mk (𝟙 W.unop.left)))).hom hq
+  exact ha.trans ((h (op W.unop.left) s (op (Over.mk (𝟙 W.unop.left))) i j hij
+    ((K.X i).val.map W.unop.hom.op x) ((L.X j).val.map W.unop.hom.op y)).trans hb.symm)
 
 
 set_option backward.isDefEq.respectTransparency true in
