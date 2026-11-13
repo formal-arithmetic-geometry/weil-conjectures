@@ -107,6 +107,18 @@ private theorem systemEval_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
       ((coefficientSequenceEvaluation l E Y n).obj N) := by
   exact compactSupportOrdinaryPullbackUnit l E f n N
 
+private theorem systemEval_transition {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E X) :
+    (compactSupportOrdinaryCoefficientTransition l E Y h).app ((systemPush l E f).obj M) ≫
+      (proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E m n h)).map
+        ((evP l E f n).hom.app M) ≫
+      (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom.app
+        ((coefficientSequenceEvaluation l E X n).obj M) =
+    (evP l E f m).hom.app M ≫
+      (ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f).map
+        ((compactSupportOrdinaryCoefficientTransition l E X h).app M) := by
+  exact compactSupportOrdinaryDirectImageTransition l E f h M
+
 private theorem scalarPullback_unit {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B)
     (M : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
@@ -169,7 +181,7 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     exact systemEval_unit l E f m Q
   · intro Q
     exact systemEval_unit l E f n Q
-  · exact compactSupportOrdinaryDirectImageTransition l E f h
+  · exact systemEval_transition l E f h
   · intro M
     exact scalarPullback_unit f (compactSupportLevelQuotient l E m n h) M
 
