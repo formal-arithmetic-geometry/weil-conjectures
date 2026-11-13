@@ -134,6 +134,74 @@ private theorem extRow_exact
     · exact transport_exact (E.eI n) (E.eX (n + 1)) (E.eP (n + 1)) _ _
         ((ShortComplex.ab_exact_iff_function_exact _).mp
           (CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃' hK F n (n + 1) (by omega)))
+private theorem extRows_naturality
+    {T T' : Type u} [CommRing T] [CommRing T']
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    [Abelian C] [Abelian D] [HasExt.{u} C] [HasExt.{u} D]
+    (G : C ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    {K : ShortComplex C} {F : C} {N : D} (φ : G.obj F ⟶ N)
+    {ρ : T →+* End F} {τ : T' →+* End N}
+    {A B I A' B' I' : ℕ → Type u}
+    [∀ n, AddCommGroup (A n)] [∀ n, AddCommGroup (B n)] [∀ n, AddCommGroup (I n)]
+    [∀ n, AddCommGroup (A' n)] [∀ n, AddCommGroup (B' n)] [∀ n, AddCommGroup (I' n)]
+    [∀ n, Module T (A n)] [∀ n, Module T (B n)] [∀ n, Module T (I n)]
+    [∀ n, Module T' (A' n)] [∀ n, Module T' (B' n)] [∀ n, Module T' (I' n)]
+    (hK : K.ShortExact) (E : H.ExtRowPresentation T K F ρ A B I)
+    (E' : H.ExtRowPresentation T' (K.map G) N τ A' B' I')
+    (a : ∀ n, A n → A' n) (b : ∀ n, B n → B' n) (i : ∀ n, I n → I' n)
+    (hx : ∀ n x, E'.eX n (a n x) = ((E.eX n x).mapExactFunctor G).comp
+      (CategoryTheory.Abelian.Ext.mk₀ φ) (add_zero n))
+    (hp : ∀ n x, E'.eP n (b n x) = ((E.eP n x).mapExactFunctor G).comp
+      (CategoryTheory.Abelian.Ext.mk₀ φ) (add_zero n))
+    (hi : ∀ n x, E'.eI n (i n x) = ((E.eI n x).mapExactFunctor G).comp
+      (CategoryTheory.Abelian.Ext.mk₀ φ) (add_zero n)) :
+    ∃ (r : ∀ n, A n →ₗ[T] B n) (d : ∀ n, B n →ₗ[T] I n)
+      (δ : ∀ n, I n →ₗ[T] A (n + 1))
+      (r' : ∀ n, A' n →ₗ[T'] B' n) (d' : ∀ n, B' n →ₗ[T'] I' n)
+      (δ' : ∀ n, I' n →ₗ[T'] A' (n + 1)),
+      Function.Injective (r 0) ∧ Function.Injective (r' 0) ∧
+      (∀ n, Function.Exact (r n) (d n) ∧ Function.Exact (d n) (δ n) ∧
+        Function.Exact (δ n) (r (n + 1))) ∧
+      (∀ n, Function.Exact (r' n) (d' n) ∧ Function.Exact (d' n) (δ' n) ∧
+        Function.Exact (δ' n) (r' (n + 1))) ∧
+      (∀ n x, r' n (a n x) = b n (r n x)) ∧
+      (∀ n x, d' n (b n x) = i n (d n x)) ∧
+      (∀ n x, δ' n (i n x) = a (n + 1) (δ n x)) := by
+  let hK' := hK.map_of_exact G
+  let r := fun n ↦ extTransport ρ (CategoryTheory.Abelian.Ext.mk₀ K.g) (zero_add n)
+    (E.eX n) (E.eP n) (E.scalarX n) (E.scalarP n)
+  let d := fun n ↦ extTransport ρ (CategoryTheory.Abelian.Ext.mk₀ K.f) (zero_add n)
+    (E.eP n) (E.eI n) (E.scalarP n) (E.scalarI n)
+  let δ := fun n ↦ extTransport ρ hK.extClass (by omega : 1 + n = n + 1)
+    (E.eI n) (E.eX (n + 1)) (E.scalarI n) (E.scalarX (n + 1))
+  let r' := fun n ↦ extTransport τ (CategoryTheory.Abelian.Ext.mk₀ (K.map G).g) (zero_add n)
+    (E'.eX n) (E'.eP n) (E'.scalarX n) (E'.scalarP n)
+  let d' := fun n ↦ extTransport τ (CategoryTheory.Abelian.Ext.mk₀ (K.map G).f) (zero_add n)
+    (E'.eP n) (E'.eI n) (E'.scalarP n) (E'.scalarI n)
+  let δ' := fun n ↦ extTransport τ hK'.extClass (by omega : 1 + n = n + 1)
+    (E'.eI n) (E'.eX (n + 1)) (E'.scalarI n) (E'.scalarX (n + 1))
+  obtain ⟨hr, he⟩ := extRow_exact hK E
+  obtain ⟨hr', he'⟩ := extRow_exact hK' E'
+  refine ⟨r, d, δ, r', d', δ', hr, hr', he, he', ?_, ?_, ?_⟩
+  · intro n x
+    exact extTransport_naturality G φ ρ τ _ _
+      (CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀ G K.g) (zero_add n)
+      (E.eX n) (E.eP n) (E'.eX n) (E'.eP n)
+      (E.scalarX n) (E.scalarP n) (E'.scalarX n) (E'.scalarP n)
+      _ _ (hx n) (hp n) x
+  · intro n x
+    exact extTransport_naturality G φ ρ τ _ _
+      (CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀ G K.f) (zero_add n)
+      (E.eP n) (E.eI n) (E'.eP n) (E'.eI n)
+      (E.scalarP n) (E.scalarI n) (E'.scalarP n) (E'.scalarI n)
+      _ _ (hp n) (hi n) x
+  · intro n x
+    exact extTransport_naturality G φ ρ τ _ _
+      (CategoryTheory.Abelian.Ext.mapExactFunctor_extClass G hK) (by omega)
+      (E.eI n) (E.eX (n + 1)) (E'.eI n) (E'.eX (n + 1))
+      (E.scalarI n) (E.scalarX (n + 1)) (E'.scalarI n) (E'.scalarX (n + 1))
+      _ _ (hi n) (hx (n + 1)) x
+
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
 /-- The original and pulled-back Mayer--Vietoris sequences are compatible with
@@ -201,44 +269,5 @@ theorem H.baseChangeLinear_mayerVietoris
   obtain ⟨K, hK, E, E', hx, hp, hi⟩ :=
     H.exists_mayerVietoris_extPresentation (S := S) f M U V hcover
   let G := invImage (baseChangeFst (S := S) f)
-  let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
-  let N := (SheafOfModules.toSheaf (baseChangedScheme (S := S) f).ringCatSheaf).obj
-    (baseChangedModule (S := S) f M)
-  let ρ := (scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom)
-  let τ := (scalarRep (baseChangedModule (S := S) f M)).comp
-    (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom)
-  let hK' := hK.map_of_exact G
-  let r := fun n ↦ extTransport ρ (CategoryTheory.Abelian.Ext.mk₀ K.g) (zero_add n)
-    (E.eX n) (E.eP n) (E.scalarX n) (E.scalarP n)
-  let d := fun n ↦ extTransport ρ (CategoryTheory.Abelian.Ext.mk₀ K.f) (zero_add n)
-    (E.eP n) (E.eI n) (E.scalarP n) (E.scalarI n)
-  let δ := fun n ↦ extTransport ρ hK.extClass (by omega : 1 + n = n + 1)
-    (E.eI n) (E.eX (n + 1)) (E.scalarI n) (E.scalarX (n + 1))
-  let r' := fun n ↦ extTransport τ (CategoryTheory.Abelian.Ext.mk₀ (K.map G).g) (zero_add n)
-    (E'.eX n) (E'.eP n) (E'.scalarX n) (E'.scalarP n)
-  let d' := fun n ↦ extTransport τ (CategoryTheory.Abelian.Ext.mk₀ (K.map G).f) (zero_add n)
-    (E'.eP n) (E'.eI n) (E'.scalarP n) (E'.scalarI n)
-  let δ' := fun n ↦ extTransport τ hK'.extClass (by omega : 1 + n = n + 1)
-    (E'.eI n) (E'.eX (n + 1)) (E'.scalarI n) (E'.scalarX (n + 1))
-  obtain ⟨hr, he⟩ := extRow_exact hK E
-  obtain ⟨hr', he'⟩ := extRow_exact hK' E'
-  refine ⟨r, d, δ, r', d', δ', hr, hr', he, he', ?_, ?_, ?_⟩
-  · intro n x
-    exact extTransport_naturality G _ ρ τ _ _
-      (CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀ G K.g) (zero_add n)
-      (E.eX n) (E.eP n) (E'.eX n) (E'.eP n)
-      (E.scalarX n) (E.scalarP n) (E'.scalarX n) (E'.scalarP n)
-      _ _ (hx n) (hp n) x
-  · intro n x
-    exact extTransport_naturality G _ ρ τ _ _
-      (CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀ G K.f) (zero_add n)
-      (E.eP n) (E.eI n) (E'.eP n) (E'.eI n)
-      (E.scalarP n) (E.scalarI n) (E'.scalarP n) (E'.scalarI n)
-      _ _ (hp n) (hi n) x
-  · intro n x
-    exact extTransport_naturality G _ ρ τ _ _
-      (CategoryTheory.Abelian.Ext.mapExactFunctor_extClass G hK) (by omega)
-      (E.eI n) (E.eX (n + 1)) (E'.eI n) (E'.eX (n + 1))
-      (E.scalarI n) (E.scalarX (n + 1)) (E'.scalarI n) (E'.scalarX (n + 1))
-      _ _ (hi n) (hx (n + 1)) x
+  exact extRows_naturality G _ hK E E' _ _ _ hx hp hi
 end AlgebraicGeometry.Scheme.Modules

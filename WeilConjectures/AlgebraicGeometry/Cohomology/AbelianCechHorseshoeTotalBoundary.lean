@@ -106,6 +106,20 @@ private lemma beta_naturality {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
     Functor.map_comp, HomologicalComplex.comp_f, Category.assoc]
   rfl
 
+private theorem boundary_naturality_pair
+    {C : Type u} [Category C] [Abelian C]
+    {A B V : ShortComplex (CochainComplex C ℕ)}
+    (φ : A ⟶ V) (ψ : B ⟶ V)
+    (hA : A.ShortExact) (hB : B.ShortExact) (hV : V.ShortExact) (q : ℕ) :
+    ∃ δ : V.X₃.homology q ⟶ V.X₁.homology (q + 1),
+      hA.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap φ.τ₁ (q + 1) =
+        HomologicalComplex.homologyMap φ.τ₃ q ≫ δ ∧
+      hB.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap ψ.τ₁ (q + 1) =
+        HomologicalComplex.homologyMap ψ.τ₃ q ≫ δ :=
+  ⟨hV.δ q (q + 1) rfl,
+    HomologicalComplex.HomologySequence.δ_naturality φ hA hV q (q + 1) rfl,
+    HomologicalComplex.HomologySequence.δ_naturality ψ hB hV q (q + 1) rfl⟩
+
 private theorem total_shortExact_of_shortExact
     (D : ShortComplex (HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ)))
     (hD : D.ShortExact) :
@@ -234,8 +248,6 @@ theorem abelianCechHorseshoe_total_boundary
       τ₃ := abelianCechBeta U I₃
       comm₁₂ := beta_naturality U I₁ I₂ T.f α hα
       comm₂₃ := beta_naturality U I₂ I₃ T.g β hβ }
-  refine ⟨hV.δ q (q + 1) rfl, ?_, ?_⟩
-  · exact HomologicalComplex.HomologySequence.δ_naturality φβ hC hV q (q + 1) rfl
-  · exact HomologicalComplex.HomologySequence.δ_naturality φα hS hV q (q + 1) rfl
+  exact boundary_naturality_pair φβ φα hC hS hV q
 
 end AlgebraicGeometry.Scheme.Modules
