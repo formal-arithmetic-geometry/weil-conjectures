@@ -193,9 +193,15 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     obtain ⟨e, he⟩ := exists_normalizedHomotopyTensorHom X P L I
     have hcomm : (t (Q.obj P) (Q.obj L) (Q.obj M)) ∘ src = dst ∘ e := by
       funext v
-      obtain ⟨φ, rfl⟩ := q.map_surjective v
-      obtain ⟨ψ, hψ, htψ⟩ := ht.2 P L M hP φ
-      obtain ⟨ψ', hψ', heψ⟩ := he φ
+      let φ : P ⟶ homComplex (R := X.sheaf) L I := v.out
+      have hv : q.map φ = v := HomotopyCategory.quotient_map_out v
+      have hψ_exists := ht.2 P L M hP φ
+      let ψ := hψ_exists.choose
+      have hψ := hψ_exists.choose_spec.1
+      have htψ := hψ_exists.choose_spec.2
+      let ψ' := (he φ).choose
+      have hψ' := (he φ).choose_spec.1
+      have heψ := (he φ).choose_spec.2
       have hψeq : ψ = ψ' := by
         apply HomologicalComplex.hom_ext
         intro n
@@ -217,13 +223,16 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
         exact congrArg
           (fun f ↦ pullbackTensorModelMap X P L ≫ f ≫ schemeHomResolutionInverse X M)
           (localizedHomEquiv_map X (pullbackTensorTotal X P L) I ψ)
-      change t (Q.obj P) (Q.obj L) (Q.obj M) (src (q.map φ)) = dst (e (q.map φ))
+      change t (Q.obj P) (Q.obj L) (Q.obj M) (src v) = dst (e v)
       calc
+        _ = t (Q.obj P) (Q.obj L) (Q.obj M) (src (q.map φ)) :=
+          congrArg (fun v ↦ t (Q.obj P) (Q.obj L) (Q.obj M) (src v)) hv.symm
         _ = t (Q.obj P) (Q.obj L) (Q.obj M) (Q.map φ ≫ j.inv) := congrArg _ hs
         _ = pullbackTensorModelMap X P L ≫ Q.map ψ ≫ schemeHomResolutionInverse X M := htψ
         _ = dst (q.map ψ) := hd.symm
         _ = dst (q.map ψ') := congrArg (fun f ↦ dst (q.map f)) hψeq
         _ = dst (e (q.map φ)) := congrArg dst heψ.symm
+        _ = dst (e v) := congrArg (fun v ↦ dst (e v)) hv
     have hb := dst.bijective.comp e.bijective
     rw [← hcomm] at hb
     exact (Function.Bijective.of_comp_iff _ src.bijective).mp hb
