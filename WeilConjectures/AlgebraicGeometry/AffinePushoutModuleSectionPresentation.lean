@@ -139,20 +139,16 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
   let p : (Γ(U, f ⁻¹ᵁ V) ⊗[Γ(X, V)] (G.val.obj (op V))) ≃ₗ[Γ(X, V)]
       ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) := ((TensorProduct.comm Γ(X, V) Γ(U, f ⁻¹ᵁ V)
     (G.val.obj (op V))).trans e).trans kl
+  have htmul' (n : G.val.obj (op V)) (d : Γ(U, f ⁻¹ᵁ V)) :
+      c ((S).obj G) hS (n ⊗ₜ[Γ(X, V)] d) =
+        d • (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by
+    simpa only [Functor.map_id, ConcreteCategory.id_apply] using htmul ((S).obj G) hS n d
   have hp (d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)) :
       p (d ⊗ₜ[Γ(X, V)] n) = (b.hom.app (op (f ⁻¹ᵁ V))).hom d •
         (show (P.obj G).val.obj (op (f ⁻¹ᵁ V)) from
           (κ.inv.app G).val.app (fV (op V))
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n)) := by
-    change (κ.inv.app G).val.app (fV (op V))
-      (c ((S).obj G) hS (n ⊗ₜ[Γ(X, V)] d)) = _
-    rw [htmul ((S).obj G) hS n d]
-    have hid : ((tensorPullback f).obj ((S).obj G)).presheaf.map
-        (homOfLE (show f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V from le_rfl)).op = 𝟙 _ := by
-      exact ((tensorPullback f).obj ((S).obj G)).presheaf.map_id _
-    rw [hid]
-    exact ((κ.inv.app G).val.app (fV (op V))).hom.map_smul d
-      (((adj₀).unit.app ((S).obj G)).val.app (op V) n)
+    exact (congrArg k (htmul' n d)).trans (k.map_smul d _)
   refine ⟨p, ?_, ?_⟩
   · intro a d n
     rw [hp d n, hp (a * d) n]
@@ -236,8 +232,8 @@ theorem affine_pushout_module_section_presentation [IsAffineHom f]
   let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
   let : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=
     Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)
-  obtain ⟨p, hb, hu⟩ := affine_pushout_module_section_presentation_equiv
-    f B b P κ G hG V hV
+  have he := affine_pushout_module_section_presentation_equiv f B b P κ G hG V hV
+  rcases he with ⟨p, hb, hu⟩
   let v (n : G.val.obj (op V)) : (P.obj G).val.obj (op (f ⁻¹ᵁ V)) :=
     (κ.inv.app G).val.app (fV (op V))
       (((adj₀).unit.app ((S).obj G)).val.app (op V) n)
