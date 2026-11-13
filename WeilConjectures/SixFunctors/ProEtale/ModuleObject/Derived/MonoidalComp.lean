@@ -24,7 +24,6 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-set_option profiler true in
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
 composition isomorphism of the pullbacks of module objects. -/
 @[reassoc]
@@ -43,6 +42,7 @@ lemma upperStarTensorComplexHom_comp
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  -- Expose the tensor map once so the summand rewrites can use reducible transparency.
   change _ ≫ (HomologicalComplex.mapBifunctorMap
       ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A)
       ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app B)
