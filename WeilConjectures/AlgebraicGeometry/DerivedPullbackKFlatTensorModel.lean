@@ -257,7 +257,6 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
       (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _)).app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) _
 
-set_option trace.profiler true in
 /-- The comparison on K-flat cochain representatives, before localization in either
 variable. Source: Stacks Project, Cohomology, Tags 079U, 06YC and 06YH; steps 1 and 2
 and the representative naturality calculation of the parent proof.
