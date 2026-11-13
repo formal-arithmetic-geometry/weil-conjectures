@@ -546,7 +546,6 @@ end ChosenTriangle
 
 section AnyTriangle
 
-set_option profiler true in
 /-- The inverse composition maps of two triangles agree after comparison with a common
 compactification. Keeping both triangles arbitrary avoids unfolding chosen compactifications
 in the common-refinement argument. -/
@@ -608,7 +607,6 @@ lemma compIso_triangleShriekTriangle_inv_comparison
 
 variable (f g)
 
-set_option profiler true in
 /-- **The composition isomorphism of the lower shriek is computed by any triangle of
 compactifications** `T` of `f` and `g`: it is the comparison with the compactification
 `T.cfg` of `f ≫ g`, followed by the inverse of the composition isomorphism of `T` and the
