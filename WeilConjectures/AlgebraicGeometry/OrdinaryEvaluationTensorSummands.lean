@@ -122,6 +122,7 @@ private theorem braided_descent (L : C ⥤ D) [L.Braided] (W : MorphismProperty 
   intro X Y
   exact congrArg (fun k ↦ (k.app X).app Y) hab
 
+/-- Descend and normalize before specializing to concrete sheaf categories. -/
 private theorem normalizedCoreMonoidalOfLocalization
     (L : C ⥤ D) [L.Braided] (W : MorphismProperty C)
     [L.IsLocalization W] [W.ContainsIdentities]
@@ -159,6 +160,7 @@ variable {C : Type u₁} [Category.{v₁} C] [Preadditive C] [MonoidalCategory C
   {D : Type u₂} [Category.{v₂} D] [Preadditive D] [MonoidalCategory D]
   [MonoidalPreadditive D] [HasCoproducts.{0} D]
 
+/-- The standard comparison of total complexes, with its equation on each tensor summand. -/
 private theorem exists_tensorTotalIso (R : C ⥤ D) [R.Additive]
     [PreservesColimitsOfSize.{0, 0} R] (m : R.CoreMonoidal)
     (F K : CochainComplex C ℤ) :
@@ -180,7 +182,6 @@ private theorem exists_tensorTotalIso (R : C ⥤ D) [R.Additive]
 
 end TensorTotal
 
-set_option trace.profiler true in
 /-- The open-site equivalence has a symmetric core monoidal structure with its prescribed unit.
 Source: Stacks Project, Tag 01CD, tensor transport along an equivalence of ringed sites.
 
@@ -246,7 +247,6 @@ private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens
     (Scheme.Modules.overEquivFunctorObjUnitIso U)
 
 
-set_option trace.profiler true in
 /-- The open-site tensor comparison has the prescribed unit, symmetry and total summands.
 Source: Stacks Project, Tag 0A8X, tensor totalization; Mathlib `overEquiv`.
 (blueprint: lem-pc-ordinary-evaluation-tensor-summands).
