@@ -395,6 +395,7 @@ attribute [local irreducible]
 
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Elaborating the four tensor-model normalization squares uses extra heartbeats.
 /-- Associativity of the scalar tensorator on three good representatives.
 Source: Stacks 07A4, total tensor construction (blueprint: lem-pur-system-scalar-tensor-braiding).
