@@ -263,39 +263,42 @@ lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Pri
       (∀ i, LocallyOfFiniteType (b i)) ∧ (∀ v : U, (∀ i, IsClosed {b i v}) → IsClosed {v}) ∧
       ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))
         (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧
-        IsIso ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ (pullback.fst (b i) ξ)).map
-          ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ (U.ι)).map f))) :
+        IsIso ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) (pullback.fst (b i) ξ)).map
+          ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) U.ι).map f))) :
     ∃ (S : Finset Y.left) (hS : ∀ x ∈ S, IsClosed {x}),
-      IsIso ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ ((finsetComplOpens S hS).ι)).map f) := by
+      IsIso ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ)
+        (finsetComplOpens S hS).ι).map f) := by
   have := isNoetherian_left Y
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f
   have hC := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
     Y.left)).ext_of_isTriangulatedClosed₃ _ hT hA hB
   suffices h : ∃ (S : Finset Y.left) (hS : ∀ x ∈ S, IsClosed {x}),
-      IsZero ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ ((finsetComplOpens S hS).ι)).obj C) by
+      IsZero ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ)
+        (finsetComplOpens S hS).ι).obj C) by
     obtain ⟨S, hS, hz⟩ := h
     exact ⟨S, hS, (Triangle.isZero₃_iff_isIso₁ _
-      ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ ((finsetComplOpens S hS).ι)).map_distinguished _
-        hT)).1 hz⟩
+      ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ)
+        (finsetComplOpens S hS).ι).map_distinguished _ hT)).1 hz⟩
   refine exists_finset_isZero_of_forall_exists_coordinates Y hC fun y ↦ ?_
   obtain ⟨U, hy, ι, hι, b, hb, hcl, hgen⟩ := H y
   refine ⟨U, hy, ι, hι, b, hb, hcl, fun i ↦ ?_⟩
   obtain ⟨K, hK, ξ, t, ht, hf⟩ := hgen i
   refine ⟨K, hK, ξ, t, ht, ?_⟩
   exact Triangle.isZero₃_of_isIso₁ _
-    ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ (pullback.fst (b i) ξ)).map_distinguished _
-      ((finiteSupportUpperStar Profinite.padicAlgClRingObj ℓ (U.ι)).map_distinguished _ hT)) hf
+    ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) (pullback.fst (b i) ξ)).map_distinguished _
+      ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) U.ι).map_distinguished _ hT)) hf
 
 /-- Invertibility after derived pullback is preserved by a further factorization. -/
 lemma isIso_upperStar_map_of_factorization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {W V Y : Scheme.{u}} {p : W ⟶ Y} {q : V ⟶ Y} (l : W ⟶ V) (hl : l ≫ q = p)
+    {W V Y : Scheme.{u}} {p : W ⟶ Y} {q : V ⟶ Y} (hl : ∃ l : W ⟶ V, l ≫ q = p)
     {A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))} (f : A ⟶ B) (hf : IsIso ((finiteSupportUpperStar Λ (q)).map f)) :
-    IsIso ((finiteSupportUpperStar Λ (p)).map f) := by
-  subst p
+      (condensedRingObj Λ Y))} (f : A ⟶ B) (hf : IsIso ((finiteSupportUpperStar Λ q).map f)) :
+    IsIso ((finiteSupportUpperStar Λ p).map f) := by
+  obtain ⟨l, rfl⟩ := hl
   exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp Λ l q) f).2
-    (inferInstanceAs (IsIso ((finiteSupportUpperStar Λ (l)).map ((finiteSupportUpperStar Λ (q)).map f))))
+    (inferInstanceAs (IsIso ((finiteSupportUpperStar Λ l).map
+      ((finiteSupportUpperStar Λ q).map f))))
 
 /-! ### The finite-support step -/
 
@@ -351,7 +354,7 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
       ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))
         (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧
         IsIso ((finiteSupportUpperStar Λ (pullback.fst (b i) ξ)).map
-          ((finiteSupportUpperStar Λ (U.ι)).map (kunnethMap Λ φ₁ φ₂ A B))) := by
+          ((finiteSupportUpperStar Λ U.ι).map (kunnethMap Λ φ₁ φ₂ A B))) := by
   have : LocallyOfFiniteType X'.hom := MorphismProperty.of_isPullback
     hM.isPullback_i hM.locallyOfFiniteType
   have : LocallyOfFiniteType Y'.hom := MorphismProperty.of_isPullback
@@ -439,14 +442,16 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
       exact hy'
     exact (P.i ⁻¹ᵁ U).ι.isClosed_singleton_of_isClosed_singleton
       (isClosed_singleton_special hM hN hpb hP _ hx'' hy'')
-  · -- the cone vanishes over the generic point of each coordinate line
+  · -- the map is invertible over the generic point of each coordinate line
     refine ⟨traitSliceField k', inferInstance, traitSlicePoint (traitSliceCoord k'),
       ⟨⊥, Ideal.isPrime_bot⟩,
       isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
     have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
     have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-    have hslice : IsIso ((finiteSupportUpperStar Λ (sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))).map
-        (kunnethMap Λ ψ₁ ψ₂ ((finiteSupportUpperStar Λ (𝟙 X)).obj A) ((finiteSupportUpperStar Λ (𝟙 Y)).obj B))) := by
+    have hslice : IsIso ((finiteSupportUpperStar Λ
+        (sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))).map
+        (kunnethMap Λ ψ₁ ψ₂ ((finiteSupportUpperStar Λ (𝟙 X)).obj A)
+          ((finiteSupportUpperStar Λ (𝟙 Y)).obj B))) := by
       rcases i with a | a
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
           (traitSlice (traitSliceCoord k'))
@@ -466,11 +471,12 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
           (hslice (by omega)) (by omega) (hm.restrict V)
           (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
     let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι
-    have hslice' : IsIso ((finiteSupportUpperStar Λ (sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))).map
-        ((finiteSupportUpperStar Λ (r')).map (kunnethMap Λ φ₁ φ₂ A B))) := by
+    have hslice' : IsIso ((finiteSupportUpperStar Λ
+        (sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))).map
+        ((finiteSupportUpperStar Λ r').map (kunnethMap Λ φ₁ φ₂ A B))) := by
       exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR _ A B).2 hslice
-    obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)
-    exact isIso_upperStar_map_of_factorization _ l hl _ hslice'
+    exact isIso_upperStar_map_of_factorization _
+      (exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)) _ hslice'
 
 set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
