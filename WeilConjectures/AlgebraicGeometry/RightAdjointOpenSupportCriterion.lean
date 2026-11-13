@@ -90,6 +90,16 @@ private theorem supported_unit_isIso_iff
   · intro hz
     exact IsZero.isIso hz htarget _
 
+-- Cache the canonical instances used repeatedly by the transported restriction functors.
+private abbrev openSupportModuleAbelian (X : RingedSpace.{u}) :
+    Abelian (SheafOfModules.{u} (moduleRings X)) := inferInstance
+
+private abbrev openSupportOverModuleAbelian (X : RingedSpace.{u})
+    (V : TopologicalSpace.Opens X) :
+    Abelian (SheafOfModules.{u} ((moduleRings X).over V)) := inferInstance
+
+attribute [local instance 2000] openSupportModuleAbelian openSupportOverModuleAbelian
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
