@@ -270,7 +270,7 @@ private theorem integralCompositionFinite_mixed
         (finiteSystemDerivedComposition (integralSystemRings l L)
           (integralSystemTransition l L) h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  exact scalar_mixed_component
+  refine scalar_mixed_component
     (integralCompositionFiniteScalarPullback l E L ι h)
     (integralCompositionFiniteScalarPullback l E L ι k)
     (integralCompositionFiniteScalarPullback l E L ι (h ≫ k))
@@ -282,7 +282,9 @@ private theorem integralCompositionFinite_mixed
     (integralComparisonSystemComposition l L h k)
     (finiteSystemDerivedComposition_eq_integralComparison l E h k)
     (finiteSystemDerivedComposition_eq_integralComparison l L h k)
-    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
+    ?_ M
+  convert (integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k using 3 <;>
+    rfl
 
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
