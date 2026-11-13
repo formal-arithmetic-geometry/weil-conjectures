@@ -21,6 +21,7 @@ Source: Stacks Project, Algebra, Tag 0334, Step 5. -/
 universe u v
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The existential ring structures and localization algebra make elaboration expensive.
 /-- A finite localized splitting cover carries a single positive-degree split polynomial
 whose evaluation belongs to every maximal contraction.

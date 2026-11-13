@@ -34,6 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Comparing the algebra structures on localizations and their completions needs extra fuel.
 /-- The Noetherian and maximal-local regularity part of the G-ring theorem for a
 henselization of a pair.  It packages the completion comparison, finite separable
