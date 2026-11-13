@@ -295,22 +295,28 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
   have h1 := congrArg (fun x ↦ P.map (homOfLE h).op x) h0
   simp only [map_add, map_zsmul, map_zero] at h1
   have e0 : ![p, r, q] ∘ Fin.succAbove 0 = ![r, q] := by
-    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
+    apply funext
+    apply Fin.forall_fin_two.2
+    exact ⟨rfl, rfl⟩
   have e1 : ![p, r, q] ∘ (Fin.succ 0).succAbove = ![p, q] := by
-    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
+    apply funext
+    apply Fin.forall_fin_two.2
+    exact ⟨rfl, rfl⟩
   have e2 : ![p, r, q] ∘ (Fin.succ 0).succ.succAbove = ![p, r] := by
-    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
+    apply funext
+    apply Fin.forall_fin_two.2
+    exact ⟨rfl, rfl⟩
   simp only [TopCat.Presheaf.map_homOfLE_map_homOfLE_apply] at h1
   rw [TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e0 _ h₃,
     TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e1 _ h₁,
     TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e2 _ h₂] at h1
-  change (-1 : ℤ) ^ 0 • P.map (homOfLE h₃).op (c ![r, q]) + ((-1 : ℤ) ^ 1 • P.map (homOfLE h₁).op (c ![p, q]) +
-    (-1 : ℤ) ^ 2 • P.map (homOfLE h₂).op (c ![p, r])) = 0 at h1
+  change (-1 : ℤ) ^ 0 • P.map (homOfLE h₃).op (c ![r, q]) +
+    ((-1 : ℤ) ^ 1 • P.map (homOfLE h₁).op (c ![p, q]) +
+      (-1 : ℤ) ^ 2 • P.map (homOfLE h₂).op (c ![p, r])) = 0 at h1
   simp only [pow_zero, pow_one, neg_one_sq, one_smul, neg_smul] at h1
-  have hsum : P.map (homOfLE h₂).op (c ![p, r]) +
-      P.map (homOfLE h₃).op (c ![r, q]) - P.map (homOfLE h₁).op (c ![p, q]) = 0 := by
-    simpa only [sub_eq_add_neg, add_comm, add_left_comm, add_assoc] using h1
-  exact (sub_eq_zero.mp hsum).symm
+  rw [add_comm (-P.map (homOfLE h₁).op (c ![p, q]))
+    (P.map (homOfLE h₂).op (c ![p, r])), ← add_assoc, ← sub_eq_add_neg] at h1
+  exact (sub_eq_zero.mp h1).symm.trans (add_comm _ _)
 
 -- the proof checks many index cases of the Čech cocycle condition
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers
@@ -443,8 +449,8 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       (hDD _ (Fin.forall_fin_two.2 ⟨h1, h4⟩))
       (hDD _ (Fin.forall_fin_two.2 ⟨h1, h3⟩))
       (hDD _ (Fin.forall_fin_two.2 ⟨h3, h4⟩))
-    exact (sub_eq_sub_iff_add_eq_add).2 (by
-      simpa only [add_comm] using c1.symm.trans c2)
+    exact (sub_eq_sub_iff_add_eq_add).2
+      ((add_comm _ _).trans ((c1.symm.trans c2).trans (add_comm _ _)))
   obtain ⟨e, he₁, he₂⟩ := TensorProduct.exists_eq_rTensor_sub_and_eq_lTensor_sub
     (fun a a' ↦ resIdeal (K := K) I (inf_le_left : Ux a ⊓ Ux a' ≤ Ux a))
     (fun a a' ↦ resIdeal (K := K) I (inf_le_right : Ux a ⊓ Ux a' ≤ Ux a'))
@@ -511,7 +517,9 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   set p := y 0
   set q := y 1
   have hy : y = ![p, q] := by
-    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
+    apply funext
+    apply Fin.forall_fin_two.2
+    exact ⟨rfl, rfl⟩
   have hyle : ⨅ l, Wc (y l) ≤ ⨅ l, Wc (![p, q] l) := hy ▸ le_rfl
   rw [show c y = P.map (homOfLE hyle).op (c ![p, q]) from
     ((TopCat.Presheaf.map_homOfLE_self_apply P le_rfl (c y)).symm.trans
@@ -520,10 +528,11 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   -- compare on `U_{a a'} × V_{b b'}`
   set D := prodOpen K X Y (Ux p.1 ⊓ Ux q.1) (Vy p.2 ⊓ Vy q.2)
   have hDy : D = ⨅ l, Wc (y l) := by
-    refine le_antisymm (le_iInf fun l ↦ ?_) fun x hx ↦ ?_
-    · exact (Fin.forall_fin_two.2
-        ⟨hle (.inl rfl) (.inl rfl), hle (.inr rfl) (.inr rfl)⟩) l
-    · have h0 : x ∈ Wc p := (iInf_le (fun l ↦ Wc (y l)) 0) hx
+    refine le_antisymm (le_iInf ?_) ?_
+    · apply Fin.forall_fin_two.2
+      exact ⟨hle (.inl rfl) (.inl rfl), hle (.inr rfl) (.inr rfl)⟩
+    · intro x hx
+      have h0 : x ∈ Wc p := (iInf_le (fun l ↦ Wc (y l)) 0) hx
       have h1 : x ∈ Wc q := (iInf_le (fun l ↦ Wc (y l)) 1) hx
       exact ⟨⟨h0.1, h1.1⟩, ⟨h0.2, h1.2⟩⟩
   refine eq_of_presheaf_map_eq hDy ?_

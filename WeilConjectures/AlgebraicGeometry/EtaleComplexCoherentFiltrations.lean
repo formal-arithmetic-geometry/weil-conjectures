@@ -333,6 +333,13 @@ theorem exists_etale_complex_coherent_filtrations
   have hbot : W.step (max a (p + 1)) = ⊥ :=
     coherentFiltration_step_bot c.pt ⟨L.pt, hLK⟩ (T₀ c.pt ⟨L.pt, hLK⟩) p
       (max a (p + 1)) (by omega)
+  choose t ht hc hs using fun i : I ↦ hfiltered (X := D.obj i) (Y := c.pt) (c.π.app i)
+    ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩ ((eG i).inv ≫ L.ι.app (op i)) p
+  have ht' (i : I) (z : ℤ) : t i z ≫ (W.step z).arrow =
+      ((V i).step z).arrow ≫ P (c.π.app i) (F i) ≫
+        (cohomology AddCommGrpCat.{u + 1} c.pt p).map
+          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))) := by
+    simpa only [hP₀, Category.assoc] using ht i z
   refine ⟨E, E', v, ?_,
     (fun i r s ↦ (T₀ (D.obj i) ⟨F i, hFK i⟩).firstPageIso r s),
     (fun r s ↦ (T₀ c.pt ⟨L.pt, hLK⟩).firstPageIso r s),
@@ -362,12 +369,7 @@ theorem exists_etale_complex_coherent_filtrations
     let e' := eInf c.pt ⟨L.pt, hLK⟩ q p N one_le hR'
     refine ⟨N, one_le, e, e', ?_⟩
     intro i
-    obtain ⟨t, ht, hc, hs⟩ := hfiltered (X := D.obj i) (Y := c.pt) (c.π.app i)
-      ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩ ((eG i).inv ≫ L.ι.app (op i)) p
-    refine ⟨t, ?_, hc, ?_⟩
-    · intro z
-      simpa only [hP₀, Category.assoc] using ht z
-    · exact hs q N one_le (hR i) hR'
+    exact ⟨t i, ht' i, hc i, hs i q N one_le (hR i) hR'⟩
 
 
 end AlgebraicGeometry.Etale
