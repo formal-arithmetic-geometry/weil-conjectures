@@ -44,7 +44,6 @@ private theorem finiteType_of_affine_enlargement_iso.{u₁, v₁}
   refine ⟨q', ⟨fun i ↦ ?_⟩⟩
   exact ⟨(hq.isFiniteType i).finite⟩
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent module finite type on W has a quasi-coherent submodule
 finite type on W union V, equal to the original on W, when V is affine.
