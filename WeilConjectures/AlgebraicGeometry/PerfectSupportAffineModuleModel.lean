@@ -56,8 +56,54 @@ private theorem affineSheafification_preservesFiniteLimits
   unfold affinePerfectSheafification
   exact comp_preservesFiniteLimits _ _
 
-set_option maxHeartbeats 500000 in
--- Elaborating the two derived localization comparisons and the model witnesses needs this limit.
+/-- Affine sheafification has a full additive realization on derived categories. -/
+private theorem exists_affinePerfect_full_realization
+    (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
+    let A := ↑(X.presheaf.obj (op U))
+    letI : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
+      HasDerivedCategory.standard (ModuleCat.{u} A)
+    ∃ F : DerivedCategory (ModuleCat.{u} A) ⥤
+        DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)),
+      F.Full ∧ F.Additive ∧ Nonempty (DerivedCategory.Q ⋙ F ≅
+        (affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ) ⋙
+          DerivedCategory.Q) := by
+  let A := ↑(X.presheaf.obj (op U))
+  let : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
+    HasDerivedCategory.standard (ModuleCat.{u} A)
+  -- Reuse the abelian structures throughout the derived comparisons.
+  let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+    inferInstance
+  let : Abelian
+      (SheafOfModules.{u} (moduleRings (Spec (X.presheaf.obj (op U))).toRingedSpace)) :=
+    inferInstance
+  let H := affinePerfectSheafification X U hU
+  let : PreservesFiniteLimits H := affineSheafification_preservesFiniteLimits X U hU
+  let : H.Additive := Functor.additive_of_preserves_binary_products H
+  let : PreservesFiniteColimits H := by
+    dsimp [H, affinePerfectSheafification]
+    exact comp_preservesFiniteColimits _ _
+  let F : DerivedCategory (ModuleCat.{u} A) ⥤
+      DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+    H.mapDerivedCategory.{u + 1, w}
+  let : HasDerivedCategory.{u + 1}
+      (SheafOfModules.{u} (moduleRings (Spec (X.presheaf.obj (op U))).toRingedSpace)) :=
+    HasDerivedCategory.standard _
+  obtain ⟨e, ⟨ce⟩, _, _⟩ := exists_affineQCohDerivedEquivalence.{u, u + 1, u + 1}
+      (X.presheaf.obj (op U))
+  obtain ⟨t, ⟨ct⟩⟩ := affine_localized_site_derived_transport.{u, u + 1, w} X U hU
+  let G := e.functor ⋙
+    (schemeDerivedQCohProperty (Spec (X.presheaf.obj (op U)))).ι ⋙ t.functor
+  let : G.Full := inferInstance
+  let c : DerivedCategory.Q ⋙ G ≅
+      H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.isoWhiskerRight ce t.functor ≪≫ ct
+  let d : G ≅ F := Localization.liftNatIso DerivedCategory.Q
+    (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ))
+    (DerivedCategory.Q ⋙ G) (H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    G F c
+  exact ⟨F, Functor.Full.of_iso d, inferInstance, ⟨H.mapDerivedCategoryFactors⟩⟩
+
 set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target
 whose cohomology is elementwise power torsion. The comparison is full and additive
@@ -115,43 +161,12 @@ theorem perfect_support_affine_module_model
         ∀ a : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}),
           F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj P)) ≫ eP.hom =
             eP.hom ≫ R.map (schemeDerivedScalar X a (𝟙 E.obj)) := by
-  let A := ↑(X.presheaf.obj (op U))
-  let : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
-    HasDerivedCategory.standard (ModuleCat.{u} A)
-  let H := affinePerfectSheafification X U hU
-  let : PreservesFiniteLimits H := affineSheafification_preservesFiniteLimits X U hU
-  let : H.Additive := Functor.additive_of_preserves_binary_products H
-  let : PreservesFiniteColimits H := by
-    dsimp [H, affinePerfectSheafification]
-    exact comp_preservesFiniteColimits _ _
-  let F : DerivedCategory (ModuleCat.{u} A) ⥤
-      DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
-    H.mapDerivedCategory.{u + 1, w}
-  let : HasDerivedCategory.{u + 1}
-      (SheafOfModules.{u} (moduleRings (Spec (X.presheaf.obj (op U))).toRingedSpace)) :=
-    HasDerivedCategory.standard _
-  obtain ⟨e, ⟨ce⟩, _, _⟩ := exists_affineQCohDerivedEquivalence.{u, u + 1, u + 1}
-      (X.presheaf.obj (op U))
-  obtain ⟨t, ⟨ct⟩⟩ := affine_localized_site_derived_transport.{u, u + 1, w} X U hU
-  let G := e.functor ⋙
-    (schemeDerivedQCohProperty (Spec (X.presheaf.obj (op U)))).ι ⋙ t.functor
-  let : G.Full := inferInstance
-  let c : DerivedCategory.Q ⋙ G ≅
-      H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
-    Functor.isoWhiskerRight ce t.functor ≪≫ ct
-  let d : G ≅ F := Localization.liftNatIso DerivedCategory.Q
-    (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ))
-    (DerivedCategory.Q ⋙ G) (H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
-    G F c
-  let : F.Full := Functor.Full.of_iso d
-  have hF : Nonempty (DerivedCategory.Q ⋙ F ≅
-      H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) :=
-    ⟨H.mapDerivedCategoryFactors⟩
+  obtain ⟨F, hfull, hadd, hF⟩ := exists_affinePerfect_full_realization X U hU
   obtain ⟨P, hb, hf, hp, ⟨eP⟩⟩ :=
     affine_open_perfect_source_model X E hE U hU F hF
   obtain ⟨M, htors, ⟨eM⟩⟩ :=
     affine_open_supported_target_model X f E' hSupport U hU k F hF
-  refine ⟨P, M, F, inferInstance, inferInstance, hb, hf, hp, htors, eP, eM, ?_⟩
+  refine ⟨P, M, F, hfull, hadd, hb, hf, hp, htors, eP, eM, ?_⟩
   intro a
   exact affine_open_realization_scalar X U hU F hF P E.obj eP a
 

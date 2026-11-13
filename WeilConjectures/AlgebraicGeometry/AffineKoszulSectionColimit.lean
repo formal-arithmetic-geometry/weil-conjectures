@@ -146,8 +146,6 @@ private theorem transportHomColimit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 500000 in
--- The restored localization comparison exhausted 200000 heartbeats; retain its original budget.
 /-- The whole Hom-colimit comparison, transported from the spectrum presentation.
 This asserts a compatible system of perfect derived augmentations and its colimit;
 it does not choose a finite-stage representative or any chain map or K-flat complex.
@@ -210,16 +208,14 @@ theorem affine_koszul_section_colimit
             ι.app n (cast (hD n).symm ξ) = v n ≫ R.map ξ) ∧
           Nonempty (IsColimit (Cocone.mk _ ι)) := by
   classical
-  let := SheafOfModules.monoidalCategory X.sheaf
-  let := (SheafOfModules.tensorClosed X.sheaf).1.some
-  let T := HomologicalComplex.tensorUnit
-    (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)
-  let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)).mapDerivedCategory
+  intro T R
+  -- Keep the chosen restriction functor and abelian structures shared.
+  let : Abelian (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace)) :=
+    inferInstance
   let A := Γ(X, ⊤)
+  let : Abelian (SheafOfModules.{uX} (moduleRings (Spec (.of A)).toRingedSpace)) :=
+    inferInstance
   let s : Spec (.of A) ≅ X := X.isoSpec.symm
   let V := s.hom ⁻¹ᵁ U
   have hV : IsCompact (V : Set (Spec (.of A))) := by
@@ -241,24 +237,15 @@ theorem affine_koszul_section_colimit
   let := hK
   obtain ⟨_, hperf, _, v, hav, hva, ι, hι, hc⟩ :=
     affine_perfect_open_represent_cohomology A r f ES
-  let RS := ((SheafOfModules.overFunctor.{uX}
-      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX}
-        ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-      (D := SheafOfModules.{uX} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-      (Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
   have hp : ∀ n, IsPerfect X (F.functor.obj (koszulOpenObject A r f n)) := by
     intro n
     exact scheme_iso_derived_inverse_preserves_perfect s.symm F.symm hi _ (hperf n)
-  obtain ⟨v', hav', hva', D, hD, ι', hι', hc'⟩ :=
-    transportHomColimit F G RS R β (koszulOpenStructure A) ES.obj
-      (DerivedCategory.Q.obj T) E.obj q (F.counitIso.app E.obj)
-      (koszulOpenObject A r f) (koszulOpenUnit A r f) v hav hva
-      (koszulOpenHomDiagram A r f ES.obj) (fun _ ↦ rfl) ι
-      (by simpa only [cast_eq] using hι) hc
-  exact ⟨fun n ↦ F.functor.obj (koszulOpenObject A r f n),
-    fun n ↦ F.functor.map (koszulOpenUnit A r f n) ≫ q.hom, hp,
-    v', hav', hva', D, hD, ι', hι', hc'⟩
+  refine ⟨fun n ↦ F.functor.obj (koszulOpenObject A r f n),
+    fun n ↦ F.functor.map (koszulOpenUnit A r f n) ≫ q.hom, hp, ?_⟩
+  exact transportHomColimit F G _ R β (koszulOpenStructure A) ES.obj
+    (DerivedCategory.Q.obj T) E.obj q (F.counitIso.app E.obj)
+    (koszulOpenObject A r f) (koszulOpenUnit A r f) v hav hva
+    (koszulOpenHomDiagram A r f ES.obj) (fun _ ↦ rfl) ι
+    (by simpa only [cast_eq] using hι) hc
 
 end AlgebraicGeometry.Scheme
