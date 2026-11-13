@@ -101,6 +101,12 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       hhalg, hσε, ← Category.assoc, hhalg]
 
+-- Select the pointwise ideal action directly, avoiding unrelated scalar-action searches.
+local instance boundaryIntegralClosureIdealAction (W : C.Opens) :
+    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
+  (Ideal.pointwiseDistribMulAction (M := Gal(Ω/C.functionField))
+    (R := integralClosure Γ(C, W) Ω)).toMulAction
+
 set_option profiler true in
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
   [Smooth (C ↘ Spec (.of K))] in
@@ -134,13 +140,11 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         Spec.map (CommRingCat.ofHom
           (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) ≫ α := by
   let _ := Fintype.ofFinite K
-  obtain ⟨Φ, hΦ⟩ : ∃ Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K,
-      Φ = FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n :=
-    ⟨_, rfl⟩
+  let Φ := FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n
   have hσε (y : AlgebraicClosure K) :
       Ideal.inertiaInvariantsMap C.functionField Q hσF (ε y) = ε (Φ y) :=
     Ideal.injective_inertiaInvariantsToField _ Q (by
-      rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk, hΦ])
+      rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk])
   have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
       r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
     have h0 : r (a - ε (r a)) = 0 := by
@@ -174,9 +178,11 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
   refine ⟨Spec.map (CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF)),
     ?_, ?_, ?_⟩
   · exact specMap_comp_eq_comp_geometricGaloisFrobenius_pow hW.fromSpec _ _ hσalg _ n (by
-      rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hσεc]) h
+      rw [specGeometricFrobenius_pow_hom, ← Spec.map_comp, ← Spec.map_comp]
+      exact congrArg Spec.map hσεc) h
       hhproj hhalg
-  · rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hrσc]
+  · rw [specGeometricFrobenius_pow_hom, ← Spec.map_comp, ← Spec.map_comp]
+    exact congrArg Spec.map hrσc
   · rw [← Spec.map_comp, ← Spec.map_comp]
     exact congrArg Spec.map htfc
 
@@ -221,13 +227,13 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     simp only [specInertiaInvariantsTo, Category.assoc, hfp, Scheme.specAlgebraicClosure,
       Over.mk_hom, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ]
   -- the neighbourhood `h`
-  obtain ⟨h, hhW, hhproj, hhalg⟩ : ∃ h : Spec (.of (Ideal.inertiaInvariants C.functionField Q)) ⟶
-      (C ↘ Spec (.of K)).geometricFiber, WeaklyEtale h ∧
-      h ≫ (C ↘ Spec (.of K)).geometricFiberProj = specInertiaInvariantsTo hW Q ∧
-      h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
-        Spec.map (CommRingCat.ofHom ε) :=
-    ⟨_, weaklyEtale_specInertiaInvariantsToGeometricFiber hW Q x hxW ε hgAp,
-      pullback.lift_fst _ _ _, pullback.lift_snd _ _ _⟩
+  let h := specInertiaInvariantsToGeometricFiber hW Q ε hgAp
+  have hhW : WeaklyEtale h :=
+    weaklyEtale_specInertiaInvariantsToGeometricFiber hW Q x hxW ε hgAp
+  have hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj = specInertiaInvariantsTo hW Q :=
+    pullback.lift_fst _ _ _
+  have hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
+      Spec.map (CommRingCat.ofHom ε) := pullback.lift_snd _ _ _
   -- the lift of `x̄`
   have hpt := specMap_comp_specInertiaInvariantsTo_of_compatible hW Q x hxW _ ε r hrε hr hε _ hQ
   have hw : Spec.map (CommRingCat.ofHom r) ≫ h =
