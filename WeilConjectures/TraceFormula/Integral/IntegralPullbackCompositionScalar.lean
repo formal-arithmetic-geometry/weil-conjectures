@@ -300,16 +300,17 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have eL := finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
     ((integralCompositionFiniteScalar l E L ι V).obj
       ((integralSystemReduction l E V).obj K))
-  cases eE
-  cases eL
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   have IIIk' := scalar_map_three_eq_three (UL h) IIIk
   have CE' := scalar_map_three_eq_two
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
     (integralCompositionFiniteScalar l E L ι Z) CE
-  exact scalar_composition_paste_mapped (N1 := N1) (IIIk := IIIk') (IIIh := IIIh)
-    (Ng := Ng) (Np := Np) (CE := CE') (mix := mix) (eE := rfl) (eL := rfl)
+  have eE' := congrArg (integralCompositionFiniteScalar l E L ι Z).map eE
+  exact scalar_composition_paste_mapped
+    (D := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) Z)
+    (N1 := N1) (IIIk := IIIk') (IIIh := IIIh)
+    (Ng := Ng) (Np := Np) (CE := CE') (mix := mix) (eE := eE') (eL := eL)
     (IIIhk := IIIhk) (Na := Na) (CL := CL)
 
 end SystemScalar
