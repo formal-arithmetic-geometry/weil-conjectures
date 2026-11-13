@@ -250,8 +250,7 @@ private def transportedCoefficientBasis {Z W : Scheme.{u}} {q : Z ⟶ W}
 -- Compute the coordinate before specializing to the geometric pullback functors.
 private theorem transportedBasisCoordinate {C D : Type*} [Category* C] [Category* D]
     (F : C ⥤ D) {ι : Type*} (O : C) (O' : D)
-    [HasProduct (fun _ : ι ↦ O)] [HasProduct (fun _ : ι ↦ F.obj O)]
-    [HasProduct (fun _ : ι ↦ O')]
+    [HasProduct (fun _ : ι ↦ O)] [HasProductsOfShape ι D]
     [PreservesLimit (Discrete.functor (fun _ : ι ↦ O)) F]
     {A : C} {B B' : D} (e : F.obj O ≅ O')
     (θ : (∏ᶜ fun _ : ι ↦ O) ≅ A) (ρ : F.obj A ≅ B) (σ : B ≅ B') (i : ι) :
