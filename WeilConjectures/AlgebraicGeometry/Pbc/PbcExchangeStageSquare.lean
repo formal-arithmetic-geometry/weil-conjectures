@@ -476,22 +476,6 @@ theorem pbcExchangeStageSquare_integral
   have bLg'₀ := bLg' h rfl rfl K
   simp only [eqToIso_refl, Iso.refl_symm, Functor.isoWhiskerRight_refl,
     Functor.isoWhiskerLeft_refl, Iso.refl_trans, Iso.trans_refl] at bRf₀ bRf'₀ bLg₀ bLg'₀
-  have eRf := hom_eq_of_heq_objects ?x₁ ?y₁ bRf₀
-  rotate_left
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  have eRf' := hom_eq_of_heq_objects ?x₂ ?y₂ bRf'₀
-  rotate_left
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  have eLg := hom_eq_of_heq_objects ?x₃ ?y₃ bLg₀
-  rotate_left
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  have eLg' := hom_eq_of_heq_objects ?x₄ ?y₄ bLg'₀
-  rotate_left
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
   -- The localized ambient comparisons characterizing the four chosen rational ones.
   have rRf := (pbcScalarDirectImage_rational l (pbcFiniteField.{u} l Ω E)
     (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) f
@@ -509,18 +493,23 @@ theorem pbcExchangeStageSquare_integral
   have rLg' := (pbcScalarCompletedPull_rational l (pbcFiniteField.{u} l Ω E)
     (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) g'
     dX'.out dX.out iX'.out iX.out (presLg' E) (presLg' F)).exists.choose_spec ⟨K⟩
-  have hτE := hτ E K
-  have rRf₁ := hom_eq_of_heq_objects rfl rfl rRf
-  have rRf'₁ := hom_eq_of_heq_objects rfl rfl rRf'
-  have rLg₁ := hom_eq_of_heq_objects rfl rfl rLg
-  have rLg'₁ := hom_eq_of_heq_objects rfl rfl rLg'
-  have hτE₁ := hom_eq_of_heq_objects rfl rfl hτE
-  simp only [eqToHom_refl, Category.id_comp] at rRf₁ rRf'₁ rLg₁ rLg'₁ hτE₁
-  rw [rRf₁] at eRf
-  rw [rRf'₁] at eRf'
-  rw [rLg₁] at eLg
-  rw [rLg'₁] at eLg'
-  rw [← Iso.app_inv, Iso.inv_comp_eq] at eRf eRf'
+  have eRf := hom_eq_of_heq_objects ?x₁ ?y₁ (bRf₀.trans rRf)
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have eRf' := hom_eq_of_heq_objects ?x₂ ?y₂ (bRf'₀.trans rRf')
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have eLg := hom_eq_of_heq_objects ?x₃ ?y₃ (bLg₀.trans rLg)
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have eLg' := hom_eq_of_heq_objects ?x₄ ?y₄ (bLg'₀.trans rLg')
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have hτE₁ := eq_of_heq (hτ E K)
   have βLg_inv := eq_inv_comp_comp_inv
     ((pbcDescentPullback l Ω g presLg F).mapIso
       ((pbcScalarIntegralComparison l Ω Y dY.out iY.out h).app
@@ -547,42 +536,50 @@ theorem pbcExchangeStageSquare_integral
     ((βLg h).app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩))
     ((pbcDescentDirectImage l Ω f' presRf' F).mapIso ((βLg' h).app ⟨K⟩)) _ _ _ _ ?_
   simp only [Iso.app_inv, Functor.mapIso_inv]
-  have βRf_hom := eq_comp_inv_of_comp_hom _
+  have βRf_hom := eq_inv_comp_comp_inv
+    ((pbcScalarIntegralComparison l Ω Y dY.out iY.out h).app
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)).symm _
     ((pbcDescentDirectImage l Ω f presRf F).mapIso
       ((pbcScalarIntegralComparison l Ω X dX.out iX.out h).app K)) _ eRf
-  have βRf'_hom := eq_comp_inv_of_comp_hom _
+  have βRf'_hom := eq_inv_comp_comp_inv
+    ((pbcScalarIntegralComparison l Ω Y' dY'.out iY'.out h).app
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)) (presRf' E)).obj
+        ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+          (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))).symm _
     ((pbcDescentDirectImage l Ω f' presRf' F).mapIso
       ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
         ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
           (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))) _ eRf'
-  erw [βLg_inv, βLg'_inv, βRf_hom, βRf'_hom]
+  simp only [βLg_inv, βLg'_inv, βRf_hom, βRf'_hom]
   by_cases hEF : E = F
   · sorry
   simp only [Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, Iso.symm_inv]
-  obtain ⟨e₁, h₁⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y dY.out iY.out h hEF
+  have h₁ := (pbcScalarIntegralComparison_hom_app_ne l Ω Y dY.out iY.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
-      (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)
-  obtain ⟨e₄, h₄⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X' dX'.out iX'.out h hEF
+      (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)).choose_spec
+  have h₄ := (pbcScalarIntegralComparison_inv_app_ne l Ω X' dX'.out iX'.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
-      (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)
-  obtain ⟨e₅, h₅⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω X dX.out iX.out h hEF K
-  obtain ⟨e₆, h₆⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X dX.out iX.out h hEF K
-  obtain ⟨e₇, h₇⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω Y' dY'.out iY'.out h hEF
+      (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)).choose_spec
+  have h₅ := pbcScalarIntegralComparison_hom_app_ne l Ω X dX.out iX.out h hEF K
+  let e₅ := h₅.choose
+  have h₅ := h₅.choose_spec
+  have h₆ := (pbcScalarIntegralComparison_inv_app_ne l Ω X dX.out iX.out h hEF K).choose_spec
+  have h₇ := (pbcScalarIntegralComparison_inv_app_ne l Ω Y' dY'.out iY'.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
       (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
-        (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))
-  obtain ⟨e₈, h₈⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y' dY'.out iY'.out h hEF
+        (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))).choose_spec
+  have h₈ := (pbcScalarIntegralComparison_hom_app_ne l Ω Y' dY'.out iY'.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
       (pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)) (presRf' E)).obj
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
-        (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))
+        (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))).choose_spec
   simp only [h₁, h₄, h₅, h₆, h₇, h₈]
   -- τ-naturality: move `τ F` to the localized integral scalar extension and use `hτ F`.
-  have hτF₁ := hom_eq_of_heq_objects rfl rfl
+  have hτF₁ := eq_of_heq
     (hτ F ((pbcIntegralScalarExtension l Ω X dX.out iX.out h).obj K))
-  simp only [eqToHom_refl, Category.id_comp] at hτF₁
-  erw [Category.comp_id] at hτF₁ hτE₁
   erw [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
   erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
     (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
