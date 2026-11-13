@@ -68,9 +68,7 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- The explicit inverse-image and tensor transports require additional elaboration fuel.
 /-- Scalar compatibility of the transported pullback counit.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-counit-smul).
@@ -182,7 +180,7 @@ theorem affine_module_tensor_counit_smul
                   ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m))) = m := by
     have hv := congrArg (fun a ↦ a.val.app V m)
       ((φ ((R).obj F) K).apply_symm_apply g)
-    rw [hφ] at hv
+    have hv' := (hφ ((R).obj F) K v V m).symm.trans hv
     have hd' := heE (I ((R).obj F)) N d ((Opens.map f.base).op.obj V)
       (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
         (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
@@ -190,7 +188,7 @@ theorem affine_module_tensor_counit_smul
     have heq : eqToHom (hE _) ≫ d = (adE.homEquiv _ N).symm v := by
       simp [d]
     rw [heq, Equiv.apply_symm_apply] at hd'
-    exact hd'.symm.trans hv
+    exact hd'.symm.trans hv'
   -- Restriction along b is O_U-linear because b followed by ε is the identity.
   let dP : P.obj ((R).obj F) ⟶ N := eqToHom (pobj _) ≫ d
   let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F := by
@@ -224,8 +222,8 @@ theorem affine_module_tensor_counit_smul
       ((eqToHom (pobj _)).val.app ((Opens.map f.base).op.obj V)
         ((κ.inv.app ((R).obj F)).val.app ((Opens.map f.base).op.obj V)
           (((adj₀).unit.app ((S).obj ((R).obj F))).val.app V m))) = m
-    rw [hP.2]
-    exact hd V m
+    exact (congrArg (d.val.app ((Opens.map f.base).op.obj V))
+      (hP.2 ((R).obj F) V m)).trans (hd V m)
   have hac : a = (adj₀).counit.app F := by
     rw [← (adj₀).homEquiv_symm_id F]
     exact ((adj₀).homEquiv ((S).obj ((R).obj F)) F).injective

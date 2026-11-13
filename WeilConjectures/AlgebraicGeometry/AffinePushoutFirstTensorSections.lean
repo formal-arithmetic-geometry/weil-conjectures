@@ -84,9 +84,7 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-set_option maxHeartbeats 700000 in
 set_option profiler true in
--- The categorical expressions in this theorem require extra elaboration time.
 /-- Affine identification of the pushout algebra and the first tensor pullback, with
 both actions and the canonical unit; no assertion about the final extension module.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction.
@@ -176,31 +174,9 @@ theorem affine_pushout_first_tensor_sections [IsAffineHom f]
   have hgen : ∀ r : B.obj.obj (op (f ⁻¹ᵁ V)),
       ∃ l : List (Γ(U, f ⁻¹ᵁ V) × Γ(U, f ⁻¹ᵁ V)),
         r = (l.map fun x ↦ (b.hom.app (op (f ⁻¹ᵁ V))).hom x.1 * δ x.2).sum := by
-    let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
-    have hs := affine_pushout_ring_affine_sections f B b t hring.1 V hV
-    let ht := CommRingCat.isPushout_tensorProduct
-      Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V)
-    let e := (ht.isoIsPushout _ _ hs).commRingCatIsoToRingEquiv
-    have hl (c : Γ(U, f ⁻¹ᵁ V)) :
-        e (c ⊗ₜ[Γ(X, V)] 1) = (b.hom.app (op (f ⁻¹ᵁ V))).hom c := by
-      exact congrArg (fun q ↦ q.hom c) (IsPushout.inl_isoIsPushout_hom _ _ ht hs)
-    have hr (d : Γ(U, f ⁻¹ᵁ V)) : e (1 ⊗ₜ[Γ(X, V)] d) = δ d := by
-      exact congrArg (fun q ↦ q.hom d) (IsPushout.inr_isoIsPushout_hom _ _ ht hs)
-    have htmul (c d : Γ(U, f ⁻¹ᵁ V)) :
-        e (c ⊗ₜ[Γ(X, V)] d) = (b.hom.app (op (f ⁻¹ᵁ V))).hom c * δ d := by
-      rw [← hl c, ← hr d, ← map_mul]
-      simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
-    intro r
-    obtain ⟨x, rfl⟩ := e.surjective r
-    induction x using TensorProduct.inductionOn with
-    | tmul c d => exact ⟨[(c, d)], by simpa using htmul c d⟩
-    | add x y hx hy =>
-      obtain ⟨l, hl⟩ := hx
-      obtain ⟨m, hm⟩ := hy
-      exact ⟨l ++ m, by simp [map_add, hl, hm]⟩
-  obtain ⟨p, hpb, hpd, hpu⟩ :=
-    affine_pushout_module_section_presentation f B b t ε hring P pobj κ hP G hG V hV δ rfl
-  exact ⟨δ, hεδ, hgen, p, hpb, hpd, hpu⟩
+    exact affinePushoutSection_products f B b t hring.1 V hV
+  refine ⟨δ, hεδ, hgen, ?_⟩
+  exact affine_pushout_module_section_presentation f B b t ε hring P pobj κ hP G hG V hV δ rfl
 
 end
 end AlgebraicGeometry.Scheme.Modules
