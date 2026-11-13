@@ -412,9 +412,12 @@ private theorem nativeReductionMonoidal
       trace "PH805: cancellation proved"
       trace "PH805: transport square"
       dsimp only [D', finiteCochainModel, reductionExtension_eq_scalarExtension,
-        coefficientTotalTensor, totalTensor, ordinaryTensor] at hnorm hcs
-      have hn := reduction_normalized_comparison hnorm hcan hcs
-        (m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩))
+        J, R, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
+        ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj] at hnorm hcan hcs
+      have hn := by
+        with_unfolding_all
+          exact reduction_normalized_comparison hnorm hcan hcs
+            (m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩))
       trace "PH805: normalization transported"
       rw [hcr]
       with_unfolding_all
