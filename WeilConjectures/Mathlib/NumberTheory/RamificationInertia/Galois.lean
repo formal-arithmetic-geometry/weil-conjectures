@@ -112,6 +112,44 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   have : x ∈ RingHom.ker ψ.toRingHom := hx
   rwa [hker, Ideal.mem_bot] at this
 
+private lemma inertia_comap_integralClosureMap_le_fixingSubgroup
+    {T : Type*} [CommRing T] [Algebra R T] (ψ : T →ₐ[R] Ω)
+    (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal]
+    (M : IntermediateField K Ω) [Normal K M] (hM : adjoin K (Set.range ψ) ≤ M)
+    (hI : ∀ σ ∈ Q.inertia Gal(Ω/K), ∀ x, σ (ψ x) = ψ x) :
+    (Q.comap (integralClosureMap ((M.val.restrictScalars R).comp (integralClosure R M).val))).inertia
+      Gal(M/K) ≤ fixingSubgroup Gal(M/K) (restrict hM : Set M) := by
+  let TM := integralClosure R M
+  let iTB : TM →+* integralClosure R Ω :=
+    integralClosureMap ((M.val.restrictScalars R).comp (integralClosure R M).val)
+  intro τ hτ
+  obtain ⟨τ', hτ'⟩ := AlgEquiv.restrictNormalHom_surjective (F := K) (K₁ := M) (E := Ω) τ
+  have hτ'M (x : M) : τ' (x : Ω) = (τ x : Ω) := by
+    rw [← hτ']
+    exact (AlgEquiv.restrictNormal_commutes τ' M x).symm
+  obtain ⟨σ, hσ, hσM⟩ := exists_mem_inertia_eqOn M Q τ' fun b hb ↦ by
+    let t : TM := ⟨⟨b, hb⟩,
+      (isIntegral_algHom_iff (M.val.restrictScalars R) Subtype.val_injective).1 b.2⟩
+    have ht := hτ t
+    have hiτ : iTB (τ • t) = τ' • b := Subtype.ext (hτ'M ⟨b, hb⟩).symm
+    have : iTB (τ • t - t) ∈ Q := ht
+    rwa [map_sub iTB, hiτ] at this
+  have hσL : adjoin K (Set.range ψ) ≤ IntermediateField.fixedField (Subgroup.zpowers σ) := by
+    refine adjoin_le_iff.2 ?_
+    rintro _ ⟨x, rfl⟩
+    rw [SetLike.mem_coe, IntermediateField.mem_fixedField_iff]
+    intro f hf
+    have hst : σ ∈ MulAction.stabilizer Gal(Ω/K) (ψ x) := hI σ hσ x
+    exact (Subgroup.zpowers_le.2 hst) hf
+  rw [_root_.mem_fixingSubgroup_iff]
+  intro x hx
+  apply Subtype.ext
+  have hxL : (x : Ω) ∈ adjoin K (Set.range ψ) := (mem_restrict hM x).1 hx
+  have h1 : σ (x : Ω) = x :=
+    (IntermediateField.mem_fixedField_iff _ _).1 (hσL hxL) σ (Subgroup.mem_zpowers σ)
+  change (τ x : Ω) = x
+  rw [← hτ'M, ← hσM _ x.2, h1]
+
 set_option profiler true in
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
@@ -208,34 +246,8 @@ theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
   have : (P.under S).LiesOver (Q.comap (integralClosureMap ψ)) := ⟨by
     rw [Ideal.under, Ideal.under, Ideal.comap_comap, Ideal.comap_comap, ← hcomp]⟩
   -- the inertia group of `P` fixes `L'`
-  have hle : P.inertia Gal(M/K) ≤ H := by
-    intro τ hτ
-    obtain ⟨τ', hτ'⟩ := AlgEquiv.restrictNormalHom_surjective (F := K) (K₁ := M) (E := Ω) τ
-    have hτ'M (x : M) : τ' (x : Ω) = (τ x : Ω) := by
-      rw [← hτ']
-      exact (AlgEquiv.restrictNormal_commutes τ' M x).symm
-    obtain ⟨σ, hσ, hσM⟩ := exists_mem_inertia_eqOn M Q τ' fun b hb ↦ by
-      let t : TM := ⟨⟨b, hb⟩,
-        (isIntegral_algHom_iff (M.val.restrictScalars R) Subtype.val_injective).1 b.2⟩
-      have ht := hτ t
-      have hiτ : iTB (τ • t) = τ' • b := Subtype.ext (hτ'M ⟨b, hb⟩).symm
-      have : iTB (τ • t - t) ∈ Q := ht
-      rwa [map_sub iTB, hiτ] at this
-    have hσL' : L' ≤ IntermediateField.fixedField (Subgroup.zpowers σ) := by
-      refine adjoin_le_iff.2 ?_
-      rintro _ ⟨x, rfl⟩
-      rw [SetLike.mem_coe, IntermediateField.mem_fixedField_iff]
-      intro f hf
-      have hst : σ ∈ MulAction.stabilizer Gal(Ω/K) (ψ x) := hI σ hσ x
-      exact (Subgroup.zpowers_le.2 hst) hf
-    rw [_root_.mem_fixingSubgroup_iff]
-    intro x hx
-    apply Subtype.ext
-    have hxL' : (x : Ω) ∈ L' := (mem_restrict hL'M x).1 hx
-    have h1 : σ (x : Ω) = x :=
-      (IntermediateField.mem_fixedField_iff _ _).1 (hσL' hxL') σ (Subgroup.mem_zpowers σ)
-    change (τ x : Ω) = x
-    rw [← hτ'M, ← hσM _ x.2, h1]
+  have hle : P.inertia Gal(M/K) ≤ H :=
+    inertia_comap_integralClosureMap_le_fixingSubgroup ψ Q M hL'M hI
   have : (P.under S).IsMaximal := Ideal.IsMaximal.of_liesOver_isMaximal (P.under S) m
   have hperfS : PerfectField (P.under S).ResidueField :=
     perfectField_residueField_of_finite m (P.under S)
