@@ -52,8 +52,20 @@ theorem comparisonIntoPullback_comp_counit
     ← Functor.map_comp, IsIso.inv_hom_id]
   simp
 
-set_option maxHeartbeats 1000000 in
--- Elaborating coefficient transport through the four stalk rings needs this budget.
+private theorem open_comparison_paste
+    {C₀ C D : Type*} [Category C₀] [Category C] [Category D]
+    (F₀ : C₀ ⥤ D) (F : C ⥤ D)
+    {A₀ B₀ E₀ G₀ : C₀} {A B E : C}
+    (m₀ : A₀ ⟶ B₀) (m : A ⟶ B) (k₀ : B₀ ⟶ E₀) (k : B ⟶ E)
+    (β : E₀ ⟶ G₀) (ν : F₀.obj G₀ ⟶ F.obj E)
+    (r : F₀.obj B₀ ⟶ F.obj B) (l : F₀.obj A₀ ⟶ F.obj A)
+    (ht : F₀.map k₀ ≫ F₀.map β ≫ ν = r ≫ F.map k)
+    (hl : F₀.map m₀ ≫ r = l ≫ F.map m) :
+    F₀.map (m₀ ≫ k₀) ≫ F₀.map β ≫ ν = l ≫ F.map (m ≫ k) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [ht, ← Category.assoc, hl]
+  simp only [Category.assoc]
+
 /-- Scalar transport of the base-derived tensor comparison to the ordinary pullback.
 This statement concerns arbitrary complexes, without K-flatness or derived counits.
 
@@ -108,6 +120,7 @@ theorem exists_singleComplexOpen_ordinary_comparison
           ν.hom.app (DerivedCategory.Q.obj
             (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) =
       l.hom ≫ F.map (comparisonIntoTensorPullback f f' g g' sq z.val P i) := by
+  dsimp only
   have : (schemeOpenRestriction X (f ⁻¹ᵁ V)).Additive :=
     schemeOpenRestriction_additive X (f ⁻¹ᵁ V)
   let Q₀ := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P
@@ -121,11 +134,12 @@ theorem exists_singleComplexOpen_ordinary_comparison
   let := HasDerivedCategory.standard (ModuleCat.{u} (B (f' ∣_ V') z))
   let := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z.val))
   let := HasDerivedCategory.standard (ModuleCat.{u} (B f' z.val))
-  obtain ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ht⟩ :=
+  -- Select the data without nested existential eliminations over the large comparison goal.
+  choose eR eA eB eC hRA hRB hCA hCB α hα τ hτ ht using
     exists_openOrdinaryTensor_germ_transport f f' g g' sq V V' hV' j hj sq₀ P z i
   let M := cohomologyModel (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
   let N := cohomologyModel f f' g g' sq z.val P
-  obtain ⟨l, hl⟩ := ModuleCat.exists_baseDerivedTensor_ring_transport
+  choose l hl using ModuleCat.exists_baseDerivedTensor_ring_transport
     (stalkComplex j z Q₀) (stalkComplex g' z.val P) M N
     eR eA eB eC hRA hRB hCA hCB α hα τ hτ i
   let F₀ := forget₂ (ModuleCat.{u} ((f' ⁻¹ᵁ V').toScheme.presheaf.stalk z)) AddCommGrpCat.{u}
@@ -151,15 +165,12 @@ theorem exists_singleComplexOpen_ordinary_comparison
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
   have ht' : F₀.map k₀ ≫ F₀.map (H₀.map β) ≫ ν.hom.app W = r ≫ F.map k := ht
   have hl' : F₀.map (M.localizedComparison i) ≫ r =
-      l.hom ≫ F.map (N.localizedComparison i) := by
-    simpa only [r, M, N, T, T₀, F₀, F, tensorComplex, RingHom.algebraMap_toAlgebra,
-      Category.assoc] using hl
+      l.hom ≫ F.map (N.localizedComparison i) := hl
   refine ⟨l, ?_⟩
   change F₀.map (M.localizedComparison i ≫ k₀) ≫
       F₀.map (H₀.map β) ≫ ν.hom.app W =
     l.hom ≫ F.map (N.localizedComparison i ≫ k)
-  simp only [Functor.map_comp, Category.assoc]
-  rw [ht', ← Category.assoc, hl']
-  simp only [Category.assoc]
+  exact open_comparison_paste F₀ F (M.localizedComparison i) (N.localizedComparison i)
+    k₀ k (H₀.map β) (ν.hom.app W) r l.hom ht' hl'
 
 end AlgebraicGeometry
