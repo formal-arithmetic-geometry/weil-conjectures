@@ -39,6 +39,22 @@ private theorem higherDirectImagePresheaf_universal_aux
     ((((asIso c) ≪≫ e.symm).symm.homFromEquiv).trans
       (A.homEquiv P Q)).bijective.existsUnique a
 
+private theorem sectionCohomologyComparison_isIso {Y : Scheme.{u}}
+    (K : CochainComplex Y.Modules ℕ) (p : ℕ) :
+    IsIso (Scheme.Modules.sectionCohomologyComparison K p) := by
+  let A := PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)
+  have : IsIso ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K) := by
+    have : ∀ n, IsIso
+        (((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K).f n) := by
+      intro n
+      change IsIso (A.counit.app (K.X n))
+      dsimp [A]
+      infer_instance
+    exact HomologicalComplex.Hom.isIso_of_components _
+  exact IsIso.comp_isIso' (inferInstance)
+    ((HomologicalComplex.homologyFunctor Y.Modules (ComplexShape.up ℕ) p).map_isIso
+      ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
@@ -121,17 +137,8 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
       (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) := by
     change PreservesFiniteLimits (Scheme.Modules.pushforward f)
     infer_instance
-  have hc : IsIso (Scheme.Modules.sectionCohomologyComparison K p) := by
-    unfold Scheme.Modules.sectionCohomologyComparison
-    have : IsIso ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K) := by
-      have : ∀ n, IsIso
-          (((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K).f n) := by
-        intro n
-        change IsIso (A.counit.app (K.X n))
-        dsimp [A]
-        infer_instance
-      exact HomologicalComplex.Hom.isIso_of_components _
-    infer_instance
+  have hc : IsIso (Scheme.Modules.sectionCohomologyComparison K p) :=
+    sectionCohomologyComparison_isIso K p
   refine ⟨?_, ?_, ?_, ?_, by infer_instance⟩
   · change IsIso (Scheme.Modules.sectionCohomologyComparison K p ≫ e.inv)
     infer_instance
