@@ -25,6 +25,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition on a single open `U` controls the restriction to `W ∩ U`
 of a kernel initially defined on `W`. This comparison requires neither an open
@@ -121,15 +122,10 @@ theorem coherent_kernel_intersection_finiteType
       ((Scheme.Modules.restrictFunctor s.inv).obj
         ((Scheme.Modules.overEquiv V).functor.obj (kernel g)))
   have hA : PreservesLimit (parallelPair f 0) A := by
-    apply preservesLimit_of_preserves_limit_cone (kernelIsKernel f)
-    apply isLimitOfReflects (SheafOfModules.forget (X.ringCatSheaf.over Z))
-    apply PresheafOfModules.evaluationJointlyReflectsLimits
-    intro B
-    let Q := SheafOfModules.evaluation (X.ringCatSheaf.over W)
-      (Opposite.op ((Over.map i).obj B.unop))
-    let S := ModuleCat.restrictScalars
-      (RingCat.Hom.hom ((Sheaf.pushforwardOverMapIso X.ringCatSheaf i).inv.hom.app B))
-    exact isLimitOfPreserves (Q ⋙ S) (kernelIsKernel f)
+    change PreservesLimit (parallelPair f 0)
+      (SheafOfModules.pushforward (F := Over.map i)
+        (Sheaf.pushforwardOverMapIso X.ringCatSheaf i).inv)
+    infer_instance
   let ek : T.obj (kernel f) ≅ kernel g :=
     PreservesKernel.iso T f ≪≫
       kernel.mapIso (T.map f) g efree.symm eF (by simp [g])
