@@ -461,6 +461,7 @@ section Global
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
+omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Bounded constructible complexes on the total space of a trait model are closed under
 tensor products. -/
 private lemma IsTraitModelOver.boundedConstructible_tensor_total
@@ -487,7 +488,6 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
