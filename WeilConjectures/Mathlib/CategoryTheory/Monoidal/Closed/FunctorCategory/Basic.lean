@@ -40,12 +40,12 @@ variable {M : Type u₁} [Category.{v₁} M] [MonoidalCategory M] [MonoidalClose
 /-- The comparison map of the restriction along `e`, followed by a projection of the end, is the
 projection at the image under `Under.post e`. -/
 lemma ihomComparison_whiskeringLeft_app_app_π (P Q : J ⥤ M) (k : K) (k' : Under k) :
-    ((Functor.LaxMonoidal.ihomComparison ((Functor.whiskeringLeft K J M).obj e) P).natTrans.app
+    ((Functor.LaxMonoidal.ihomComparison ((Functor.whiskeringLeft K J M).obj e) P).app
         Q).app k ≫ enrichedHomπ M (Under.forget k ⋙ e ⋙ P) (Under.forget k ⋙ e ⋙ Q) k' =
       enrichedHomπ M (Under.forget (e.obj k) ⋙ P) (Under.forget (e.obj k) ⋙ Q)
         ((Under.post e).obj k') := by
   let W := (Functor.whiskeringLeft K J M).obj e
-  let κ := (Functor.LaxMonoidal.ihomComparison W P).natTrans.app Q
+  let κ := (Functor.LaxMonoidal.ihomComparison W P).app Q
   have hev := Functor.LaxMonoidal.ihomComparison_ev W P Q
   have hμ : Functor.LaxMonoidal.μ W P ((ihom P).obj Q) = 𝟙 _ := by
     ext X : 2
@@ -92,7 +92,7 @@ instance (P Q : J ⥤ M) (k : K) :
 /-- The comparison map of the restriction along `e` at `k` is precomposition with
 `Under.post e`. -/
 lemma ihomComparison_whiskeringLeft_app_app (P Q : J ⥤ M) (k : K) :
-    ((Functor.LaxMonoidal.ihomComparison ((Functor.whiskeringLeft K J M).obj e) P).natTrans.app
+    ((Functor.LaxMonoidal.ihomComparison ((Functor.whiskeringLeft K J M).obj e) P).app
         Q).app k =
       precompEnrichedHom M (Under.forget (e.obj k) ⋙ P) (Under.forget (e.obj k) ⋙ Q)
         (Under.post e (X := k)) := by
@@ -105,7 +105,7 @@ internal homs. -/
 instance isIso_ihomComparison_whiskeringLeft [∀ k : K, (Under.post e (X := k)).IsEquivalence]
     (P : J ⥤ M) :
     IsIso (Functor.LaxMonoidal.ihomComparison
-      ((Functor.whiskeringLeft K J M).obj e) P).natTrans := by
+      ((Functor.whiskeringLeft K J M).obj e) P) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro Q
   rw [NatTrans.isIso_iff_isIso_app]

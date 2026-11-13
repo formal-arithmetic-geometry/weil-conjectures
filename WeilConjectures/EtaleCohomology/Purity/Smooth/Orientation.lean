@@ -58,6 +58,18 @@ open Scheme
 
 namespace Etale
 
+/-- A morphism into an object isomorphic to the constant complex vanishes if all its
+derived pullbacks to geometric points vanish. -/
+private lemma constantComplex_eq_zero_of_leftDerivedUpperStar_map_eq_zero
+    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : K ≅ constantComplex Λ X) (φ : constantComplex Λ X ⟶ K)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
+      (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = 0) :
+    φ = 0 := by
+  exact constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq e fun Ω _ _ x ↦ by
+    rw [h Ω x, Functor.map_zero]
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : Scheme.{u})
   [HasInvertibleExponent Λ Y] {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
   [LocallyOfFiniteType aY]
@@ -126,9 +138,6 @@ theorem isZero_homology_rightDerivedUpperShriek_affineLineZeroLocus
       ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app _) ≪≫
       (_root_.DerivedCategory.homologyFunctorFactors _ n).app _)
 
-set_option maxHeartbeats 3000000 in
--- the instance arguments of the derived pullbacks along geometric points of the zero locus are
--- expensive to unify
 include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
 orientation
@@ -153,13 +162,9 @@ theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
       (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = 0) :
     φ = 0 := by
   have := isIso_affineLineOrientation Λ Y aY
-  exact constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq
-    (asIso (affineLineOrientation Λ Y)).symm fun Ω _ _ x ↦ by
-      rw [h Ω x, Functor.map_zero]
+  exact constantComplex_eq_zero_of_leftDerivedUpperStar_map_eq_zero Λ
+    (asIso (affineLineOrientation Λ Y)).symm φ h
 
-set_option maxHeartbeats 3000000 in
--- the instance arguments of the derived pullbacks along geometric points of the zero locus are
--- expensive to unify
 include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
 orientation
@@ -179,9 +184,9 @@ theorem affineLineOrientation_hom_ext [HasKummerClass.IsNormalized Λ]
         {AffineSpace.coord Y (ULift.up 0)}),
       (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = (L((x)^*[ModuleCat.{u + 1} Λ])).map ψ) :
     φ = ψ := by
-  rw [← sub_eq_zero]
-  exact eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus Λ Y aY _ fun Ω _ _ x ↦ by
-    rw [Functor.map_sub, h Ω x, sub_self]
+  have := isIso_affineLineOrientation Λ Y aY
+  exact constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq
+    (asIso (affineLineOrientation Λ Y)).symm h
 
 variable {Y} {Y' : Scheme.{u}}
 
@@ -292,7 +297,6 @@ theorem restrictAffineLineZeroLocusHom_affineLineOrientation [HasInvertibleExpon
 
 variable (Y)
 
-set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
 include aY in

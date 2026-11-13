@@ -69,17 +69,17 @@ private lemma commShift_exchange_aux
     [NatTrans.CommShift θi ℤ] [NatTrans.CommShift θj ℤ] [NatTrans.CommShift θε ℤ]
     (α : (EN ⋙ JNs ⋙ IN) ⋙ Fp' ⟶ F ⋙ EM ⋙ JMs ⋙ IM)
     (hα : α = Functor.whiskerLeft (EN ⋙ JNs) θi ≫
-          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj).natTrans ≫
+          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj) ≫
             Functor.whiskerRight θε JMs) IM) :
     NatTrans.CommShift α ℤ := by
-  have : NatTrans.CommShift (mateEquiv adjN adjM θj).natTrans ℤ :=
+  have : NatTrans.CommShift (mateEquiv adjN adjM θj) ℤ :=
     NatTrans.CommShift.mateEquiv adjN adjM (TwoSquare.mk _ _ _ _ θj)
   have e : α = Functor.whiskerRight (Functor.associator EN JNs IN).inv Fp' ≫
       (Functor.associator (EN ⋙ JNs) IN Fp').hom ≫
       Functor.whiskerLeft (EN ⋙ JNs) θi ≫
       (Functor.associator (EN ⋙ JNs) T IM).inv ≫
       Functor.whiskerRight ((Functor.associator EN JNs T).hom ≫
-        Functor.whiskerLeft EN (mateEquiv adjN adjM θj).natTrans ≫
+        Functor.whiskerLeft EN (mateEquiv adjN adjM θj) ≫
         (Functor.associator EN G JMs).inv ≫ Functor.whiskerRight θε JMs ≫
         (Functor.associator F EM JMs).hom) IM ≫
       (Functor.associator F (EM ⋙ JMs) IM).hom ≫

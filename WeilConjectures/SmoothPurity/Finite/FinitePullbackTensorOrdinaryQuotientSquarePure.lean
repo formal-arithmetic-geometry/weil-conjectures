@@ -171,7 +171,6 @@ private theorem square_of_generators
     _ = k (b vL) := congrArg k h₈.symm
     _ = k (b (c w)) := congrArg (fun z ↦ k (b z)) h₇.symm
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the mapped complexes with the quotient calculus held abstract.
 private theorem ordinary_quotient_square_calculus {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m)

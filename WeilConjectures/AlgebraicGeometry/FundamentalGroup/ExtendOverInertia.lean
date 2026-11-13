@@ -240,7 +240,7 @@ theorem isFinite_and_etale_restrict_of_forall_inertia (Z : U.FiniteEtale)
     [IsIntegral Z.obj.left] [ConnectedSpace U]
     (hZ : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
       ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
-        (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+        (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t) :
     IsFinite ((Z.obj.hom ≫ j).fromNormalization ∣_ W) ∧
       Etale ((Z.obj.hom ≫ j).fromNormalization ∣_ W) := by
   have : IsFinite Z.obj.hom := Z.property
@@ -386,7 +386,7 @@ lemma galoisToAut_hom_app_pullback_eq_of_mem_inertia [ConnectedSpace V]
     {σ : Ω ≃ₐ[C.functionField] Ω} (hσ : σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω))
     (P : V.toScheme.FiniteEtale)
     (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj ((pullback (toOpen j V hjV)).obj P)) :
-    (galoisToAut (genericPointLift j) σ).hom.app _ t = t := by
+    (galoisToAut (genericPointLift j) σ).asIso.hom.app _ t = t := by
   have : IsFractionRing Γ(C, W) C.functionField :=
     functionField_isFractionRing_of_isAffineOpen C W hW
   have h := pointOfAlgebra_genericPointLift_comp_toOpen j hW V hjV hWV (Ω := Ω)
@@ -407,7 +407,7 @@ theorem exists_pullback_toOpen_iso_of_forall_inertia (Z : U.FiniteEtale)
     [IsIntegral Z.obj.left] [ConnectedSpace U] (hV : V ≤ j.opensRange ⊔ W)
     (hZ : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
       ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
-        (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+        (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t) :
     ∃ Z' : V.toScheme.FiniteEtale, Nonempty ((pullback (toOpen j V hjV)).obj Z' ≅ Z) :=
   exists_pullback_iso_of_fromNormalization j Z
     (isFinite_and_etale_restrict_of_forall_inertia j hW ϖ hϖ hWU m hϖm Q Z hZ) V hjV hWV hV

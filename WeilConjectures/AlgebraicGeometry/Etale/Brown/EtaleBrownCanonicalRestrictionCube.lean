@@ -436,7 +436,7 @@ private theorem brownRestrictionMate_underlying (N : B₀) :
     Ua.map ((mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).app N) ≫
       γ₁.hom.app (RB.obj N) ≫ V.map (rb.hom.app N) =
         ra.hom.app (G₀.obj N) ≫ γ₀.hom.app N := by
-  let α := (mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).natTrans
+  let α := (mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom))
   let M := G₀.obj N
   let ε := a₀.counit.app N
   have ha : α.app N = a₁.homEquiv _ _
@@ -447,7 +447,7 @@ private theorem brownRestrictionMate_underlying (N : B₀) :
       Functor.leftUnitor_hom_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.comp_obj]
     simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.id_comp]
-    dsimp only [Functor.comp_map, TwoSquare.natTrans]
+    dsimp only [Functor.comp_map]
     erw [Category.comp_id]
   rw [ha]
   erw [← Category.assoc, h₁]
@@ -518,9 +518,9 @@ private theorem brown_inverse_cube
     (ra : RA ⋙ U₁ ≅ U₀ ⋙ SA) (rb : RB ⋙ V₁ ≅ V₀ ⋙ SB)
     (γ₀ : G₀ ⋙ U₀ ≅ V₀ ⋙ R₀) (γ₁ : G₁ ⋙ U₁ ≅ V₁ ⋙ R₁)
     (ε : R₀ ⋙ SA ≅ SB ⋙ R₁)
-    (h₀ : (mateEquiv a₀ b₀ α₀).natTrans = γ₀.hom)
-    (h₁ : (mateEquiv a₁ b₁ α₁).natTrans = γ₁.hom)
-    (hτ : (mateEquiv b₀ b₁ τ.hom).natTrans = ε.hom)
+    (h₀ : (mateEquiv a₀ b₀ α₀) = γ₀.hom)
+    (h₁ : (mateEquiv a₁ b₁ α₁) = γ₁.hom)
+    (hτ : (mateEquiv b₀ b₁ τ.hom) = ε.hom)
     (comm : ∀ N, U₁.map ((mateEquiv a₀ a₁ σ.hom).app N) ≫
         γ₁.hom.app (RB.obj N) ≫ R₁.map (rb.hom.app N) =
       ra.hom.app (G₀.obj N) ≫ SA.map (γ₀.hom.app N) ≫ ε.hom.app (V₀.obj N))
@@ -558,7 +558,6 @@ variable {A B Ap Bp : Type*}
   [Abelian A] [Abelian B] [Abelian Ap] [Abelian Bp]
   [HasDerivedCategory A] [HasDerivedCategory B]
   [HasDerivedCategory Ap] [HasDerivedCategory Bp]
-set_option maxHeartbeats 10000000 in
 -- Normalize the four exact-derived factorization isomorphisms.
 private theorem brown_squareFactors
     (Fp : Bp ⥤ Ap) (F : B ⥤ A) (r : Ap ⥤ A) (s : Bp ⥤ B)
@@ -684,14 +683,64 @@ private theorem brown_generic_right_cube
 
 end GenericOrdinaryCube
 
-set_option maxHeartbeats 800000 in
+-- Form the section predicate before specializing to the quotient coefficient rings.
+private def brown_generic_restriction_section_law
+    (W : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
+    (r : brownGenericRestriction W φ ⋙ Etale.SystemProjection.constantModule W (.of R) ≅
+      Etale.SystemProjection.constantModule W (.of S) ⋙
+        Sheaf.restrictScalars W.smallEtaleTopology φ) : Prop :=
+  ∀ (M : brownGenericLevel W S) (U : W.Etaleᵒᵖ) (x : M.val.obj U),
+    HEq ((r.hom.app M).hom.app U x) x
+
+-- The section law is independent of the derived coherence fields.
+private def brown_restriction_section_law
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  ∀ {m n : ℕ} (h : m ≤ n),
+    brown_generic_restriction_section_law W (strictEtaleBrownRingMap O t h)
+      (R.ordinaryRestriction h)
+
+-- Keep the localization and mate laws shared when projecting the ordinary section law.
+private def brown_restriction_derived_laws
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  letI := R.ordinaryAdditive
+  (∀ {m n : ℕ} (h : m ≤ n)
+    (K : CochainComplex (strictEtaleLevel W O t m) ℤ),
+    (R.restriction h).hom.app (DerivedCategory.Q.obj K) ≫
+      (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)).map ((R.factors m).hom.app K) ≫
+      (Sheaf.restrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
+          (((strictEtaleBrownConstant O t W m).mapHomologicalComplex (.up ℤ)).obj K) =
+    (R.derived n).map ((P.scalar h).restrictionFactors.hom.app K) ≫
+      (R.factors n).hom.app
+        (((coefficientRestriction (J := W.smallEtaleTopology) O t h).mapHomologicalComplex
+          (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (R.ordinaryRestriction h) (.up ℤ)).hom.app K)) ∧
+  (∀ {m n : ℕ} (h : m ≤ n),
+    (mateEquiv (P.scalar h).derivedAdj
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)))
+      (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom)
+
+private theorem brown_restriction_coherence_iff
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) :
+    StrictEtaleBrownRealizationCoherence O t W P R ↔
+      brown_restriction_section_law O t W P R ∧
+        brown_restriction_derived_laws O t W P R := Iff.rfl
+
 -- Project the section law without retaining the derived coherence conjunction.
 private theorem brown_restriction_section_normalized
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealization O t W P)
     : ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m) (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x :=
-  R.property.1
+      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x := by
+  exact @And.left (brown_restriction_section_law O t W P R.val)
+    (brown_restriction_derived_laws O t W P R.val)
+    ((brown_restriction_coherence_iff O t W P R.val).mp R.property)
 
 private theorem brown_right_section_normalized
     (O : Type (u + 1)) [CommRing O] (t : O) {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
@@ -706,7 +755,6 @@ private theorem brown_right_section_normalized
         ((A.rightUnderlying n).hom.app M).hom.app U x :=
   r.property.1
 
-set_option maxHeartbeats 1600000 in
 -- Cache the derived restriction normalization before specializing a cube face.
 private theorem brown_restriction_derived_normalized
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
@@ -738,7 +786,6 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (rg : ∀ k, StrictEtaleBrownImageRealization O t g k A (B.level k) RV RW)
   {m n : ℕ} (h : m ≤ n)
 
-set_option maxHeartbeats 10000000 in
 -- Comparing the two transported ordinary adjunctions unfolds coefficient equivalences.
 private theorem ordinary_inverse_isIso (k : ℕ) :
     IsIso (strictEtaleBrownOrdinaryInverse O t g k A (B.level k) (rg k)) := by
@@ -761,7 +808,6 @@ private theorem ordinary_inverse_iso_hom (k : ℕ) :
       strictEtaleBrownOrdinaryInverse O t g k A (B.level k) (rg k) := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Keep the abstract sheaf equation opaque before evaluation on sections.
 private theorem ordinary_underlying_raw (N : strictEtaleLevel V O t m) :
     (coefficientUnderlying (J := W.smallEtaleTopology) O t n).map
@@ -790,7 +836,6 @@ private theorem ordinary_underlying_raw (N : strictEtaleLevel V O t m) :
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) N
 
-set_option maxHeartbeats 1600000 in
 -- Compare the ordinary right-adjoint restriction cube on underlying sections.
 private theorem ordinary_right_cube (N : strictEtaleLevel V O t m) :
     (strictEtaleBrownConstant O t W n).map
@@ -809,7 +854,7 @@ private theorem ordinary_right_cube (N : strictEtaleLevel V O t m) :
     (strictEtaleBrownRing O t m) (strictEtaleBrownRingMap O t h) g
     (A.right m) (A.right n)
     (mateEquiv (A.levelAdj m) (A.levelAdj n)
-      (.mk _ _ _ _ (A.restrictInverse h).hom)).natTrans
+      (.mk _ _ _ _ (A.restrictInverse h).hom))
     (A.rightUnderlying m) (A.rightUnderlying n)
     (RW.val.ordinaryRestriction h) (RV.val.ordinaryRestriction h)
     (rg m).val.ordinaryRight (rg n).val.ordinaryRight
@@ -821,7 +866,6 @@ private theorem ordinary_right_cube (N : strictEtaleLevel V O t m) :
     (fun M U x ↦ brown_right_section_normalized O t g n A (B.level n) RV RW
       (rg n) M U x) N
 
-set_option maxHeartbeats 10000000 in
 -- Compare ordinary sectionwise normalizations with the abstract inverse-mate cube.
 private theorem ordinary_inverse_cube (M : strictEtaleLevel W O t m) :
     (strictEtaleBrownOrdinaryInverse O t g n A (B.level n) (rg n)).app
@@ -846,12 +890,11 @@ private theorem ordinary_inverse_cube (M : strictEtaleLevel W O t m) :
     (RW.val.ordinaryRestriction h) (RV.val.ordinaryRestriction h)
     (rg m).val.ordinaryRight (rg n).val.ordinaryRight
     (Etale.lowerStarRestrictScalarsIso (strictEtaleBrownRingMap O t h) g)
-    (congrArg TwoSquare.natTrans ((mateEquiv _ _).apply_symm_apply _))
-    (congrArg TwoSquare.natTrans ((mateEquiv _ _).apply_symm_apply _))
+    (((mateEquiv _ _).apply_symm_apply _))
+    (((mateEquiv _ _).apply_symm_apply _))
     (Etale.underived_mate (strictEtaleBrownRingMap O t h) g)
     (ordinary_right_cube O t g A PW PV B RV RW rg h) M
 
-set_option maxHeartbeats 1600000 in
 -- Specialize the inverse-face identity to the ordinary comparisons.
 private theorem ordinary_inverse_symm_cube (M : strictEtaleLevel W O t m) :
       (strictEtaleBrownConstant O t V n).map ((A.restrictInverse h).hom.app M) ≫
@@ -890,7 +933,6 @@ private theorem ordinary_inverse_symm_cube (M : strictEtaleLevel W O t m) :
 
 end OrdinaryCube
 
-set_option maxHeartbeats 1600000 in
 -- Invert the normalized cochain comparison at the exact functor factors.
 private theorem brown_inverse_cochain_face
     (O : Type (u + 1)) [CommRing O] (t : O)
@@ -962,7 +1004,6 @@ private theorem brown_inverse_cochain_face
   simpa only [Category.assoc, Iso.app_inv, Functor.mapIso_inv,
     NatIso.mapHomologicalComplex, Iso.symm_hom] using hh
 
-set_option maxHeartbeats 1600000 in
 -- Specialize the ordinary-functor localization cube to coefficient sheaves.
 private theorem brown_exact_restriction_cube
     (O : Type (u + 1)) [CommRing O] (t : O)
@@ -1080,7 +1121,6 @@ private theorem brown_exact_restriction_cube
       (Etale.upperStarRestrictScalarsIsoSheaf φ g)) (h6 := hcan)
     (comm := ordinary)
 
-set_option maxHeartbeats 1600000 in
 -- The localization cube simultaneously compares twelve factorization isomorphisms.
 /-- The exact ordinary restriction cube commutes after Brown realization.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 05RU and 07A4.

@@ -66,7 +66,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv'
       (HasCompactification.compactification f))]
     (hm : IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _
       (inv (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
-        (HasCompactification.compactification f))))).natTrans) :
+        (HasCompactification.compactification f)))))) :
     IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
   have hEx := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   have h : inv (rightDerivedLowerShriekBaseChangeMap Λ sq) =
@@ -87,7 +87,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv'
           ((HasCompactification.compactification f).ofIsPullback sq)).inv := by
     rw [h]
     ext K
-    simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.natTrans, TwoSquare.mk,
+    simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
       NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.refl_hom,
       NatTrans.id_app]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
@@ -98,7 +98,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv'
     _ hm
   change IsIso (mateEquiv (rightDerivedUpperShriekAdjunction _ f)
     (rightDerivedUpperShriekAdjunction _ f')
-    (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)))).natTrans
+    (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))))
   rw [hinv]
   exact this
 
@@ -134,9 +134,9 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_unit (sq : IsPullback g' f
       erw [Category.comp_id])
   have : IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _
       (inv (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
-        (HasCompactification.compactification f))))).natTrans := by
+        (HasCompactification.compactification f))))) := by
     rw [hm]
-    dsimp only [TwoSquare.natTrans, TwoSquare.mk]
+    dsimp only [TwoSquare.mk]
     infer_instance
   exact isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv' Λ sq adj₁ adj₂ this
 

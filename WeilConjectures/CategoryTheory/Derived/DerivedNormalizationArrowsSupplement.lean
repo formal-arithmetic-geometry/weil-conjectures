@@ -141,7 +141,7 @@ noncomputable def normalizationPullbackMate (q : R →+* S) :
   ((mateEquiv
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F (ModuleCat.{u + 1} S) J K)
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F (ModuleCat.{u + 1} R) J K)).symm
-      (TwoSquare.mk _ _ _ _ (𝟙 _))).natTrans
+      (TwoSquare.mk _ _ _ _ (𝟙 _)))
 
 -- Keep the existing essentially-small instance binders in the public signature.
 set_option linter.unusedSectionVars false in
@@ -170,6 +170,7 @@ theorem normalizationPullbackMate_isIso (q : R →+* S) :
     (sheafCompose J (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q)) (𝟙 _)
   have hγ : (mateEquiv adjK adjJ).symm γ = TwoSquare.mk _ _ _ _ (𝟙 _) := by
     ext X : 2
+    apply Sheaf.hom_ext
     simp only [Functor.comp_obj, mateEquiv_symm_apply, NatTrans.comp_app, Functor.id_obj,
       Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map,
       Functor.associator_inv_app, Functor.associator_hom_app, Functor.map_id,
@@ -182,7 +183,7 @@ theorem normalizationPullbackMate_isIso (q : R →+* S) :
   unfold normalizationPullbackMate
   rw [← hγ]
   rw [iterated_mateEquiv_conjugateEquiv_symm adjS adjR adjJ adjK]
-  exact conjugateEquiv_symm_iso (adjS.comp adjK) (adjJ.comp adjR) γ.natTrans
+  exact conjugateEquiv_symm_iso (adjS.comp adjK) (adjJ.comp adjR) γ
 
 /-- The canonical inverse-image comparison with coefficient restriction.
 Source: Stacks Tag 00WX (blueprint: def-weil-pbc-derived-normalization-arrows). -/

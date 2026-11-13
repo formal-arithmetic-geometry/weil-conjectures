@@ -355,7 +355,6 @@ lemma isLocalization_away_integralClosure :
     change a * algebraMap _ A (algebraMap R _ π ^ n) = (π ^ n) • a
     rw [map_pow, ← IsScalarTower.algebraMap_apply, Algebra.smul_def, map_pow, mul_comm]
 
-set_option maxHeartbeats 1000000 in
 -- the elaboration of the localisation and integral closure instances is slow
 include R' in
 /-- **Covers on which inertia acts trivially extend.** Let `π ∈ R` vanish exactly at the maximal

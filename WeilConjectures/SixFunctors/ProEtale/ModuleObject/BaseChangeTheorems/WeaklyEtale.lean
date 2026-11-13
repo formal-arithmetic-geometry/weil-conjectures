@@ -68,7 +68,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The pullback comparison `Lg^* ⋙ Lp'^* ≅ Lp^* ⋙ Lg'^*` of a commutative square on the ambient
 derived categories is the isomorphism of total left derived functors induced by the comparison
@@ -82,7 +81,6 @@ lemma pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (sq : CommSq g' p'
   simp only [pullbackSquareComparison, leftDerivedUpperStarComp, Iso.trans_hom, Iso.symm_hom,
     Iso.trans_inv, NatTrans.comp_app, eqToIso.hom, eqToHom_app, Category.assoc]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Weakly étale base change on the ambient derived categories**: for a cartesian square
 `g' ≫ p = p' ≫ g` of schemes with `g` and `g'` weakly étale, the base change map

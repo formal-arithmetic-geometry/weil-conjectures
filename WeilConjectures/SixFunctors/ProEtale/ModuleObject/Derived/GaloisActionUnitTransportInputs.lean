@@ -252,7 +252,6 @@ instance isIso_pullbackAction (σ : L' ≃ₐ[L] L') :
   · rw [pullbackAction_mul h _ specGaloisAction_comp specGaloisAction_mul]
     ext <;> simp [h1]
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The pullback exchange of a finite Galois layer is split by the averaged action on nearby
 cycles**, given only the underived identification of the Galois actions `galoisAction (e σ)`

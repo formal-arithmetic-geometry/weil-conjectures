@@ -49,11 +49,11 @@ private theorem inverseMateIso
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     {E : A ⥤ C} {H : B ⥤ D} [E.IsEquivalence] [H.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (k : R ⋙ E ≅ H ⋙ R') :
-    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ k.hom)).natTrans) := by
-  let s := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ k.hom)).natTrans
+    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ k.hom))) := by
+  let s := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ k.hom))
   let ko : TwoSquare H.op R.op R'.op E.op := TwoSquare.mk _ _ _ _ (NatTrans.op k.hom)
   have hi := isIso_mateEquiv_of_isEquivalence a.op b.op ko
-  have he : NatTrans.op s = (mateEquiv a.op b.op ko).natTrans := by
+  have he : NatTrans.op s = (mateEquiv a.op b.op ko) := by
     ext X
     simp [s, ko, mateEquiv]
   have : IsIso (NatTrans.op s) := by rw [he]; exact hi
@@ -81,16 +81,16 @@ private theorem scalarMateArrowTransport
     (hc : ((v ≫ᵥ TwoSquare.mk _ _ _ _ n.hom).whiskerLeft y.hom) =
       ((TwoSquare.mk _ _ _ _ k.hom ≫ᵥ v').whiskerRight x.hom))
     (M : A) :
-    Nonempty (Arrow.mk (((mateEquiv a b).symm v).natTrans.app M) ≅
-      Arrow.mk (J.inverse.map (((mateEquiv a' b').symm v').natTrans.app (E.functor.obj M)))) := by
+    Nonempty (Arrow.mk (((mateEquiv a b).symm v).app M) ≅
+      Arrow.mk (J.inverse.map (((mateEquiv a' b').symm v').app (E.functor.obj M)))) := by
   let s := (mateEquiv a a').symm (TwoSquare.mk _ _ _ _ k.hom)
   let t := (mateEquiv b b').symm (TwoSquare.mk _ _ _ _ n.hom)
   let w := (mateEquiv a b).symm v
   let w' := (mateEquiv a' b').symm v'
-  have : IsIso s.natTrans := inverseMateIso a a' k
-  have : IsIso t.natTrans := inverseMateIso b b' n
-  let si := asIso s.natTrans
-  let ti := asIso t.natTrans
+  have : IsIso s := inverseMateIso a a' k
+  have : IsIso t := inverseMateIso b b' n
+  let si := asIso s
+  let ti := asIso t
   have he : ((w ≫ₕ t).whiskerBottom y.hom) =
       ((s ≫ₕ w').whiskerTop x.hom) := by
     apply (mateEquiv a b').injective
@@ -103,9 +103,9 @@ private theorem scalarMateArrowTransport
     rw [mateEquiv_vcomp a b b', mateEquiv_vcomp a a' b']
     simpa only [Equiv.apply_symm_apply] using hc
   have hM := congrArg (fun z ↦ z.app M) he
-  have hM' : ti.hom.app (G.obj M) ≫ J.functor.map (w.natTrans.app M) ≫
+  have hM' : ti.hom.app (G.obj M) ≫ J.functor.map (w.app M) ≫
         y.hom.app (L.obj M) =
-      K'.map (x.hom.app M) ≫ w'.natTrans.app (E.functor.obj M) ≫ Q'.map (si.hom.app M) := by
+      K'.map (x.hom.app M) ≫ w'.app (E.functor.obj M) ≫ Q'.map (si.hom.app M) := by
     simpa only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
       si, ti, asIso_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -113,8 +113,8 @@ private theorem scalarMateArrowTransport
       Functor.comp_obj, Category.assoc] using hM
   have hcancel : Q'.map (si.hom.app M) ≫ Q'.map (si.inv.app M) = 𝟙 _ :=
     (Q'.mapIso (si.app M)).hom_inv_id
-  let i : Arrow.mk (J.functor.map (w.natTrans.app M)) ≅
-      Arrow.mk (w'.natTrans.app (E.functor.obj M)) :=
+  let i : Arrow.mk (J.functor.map (w.app M)) ≅
+      Arrow.mk (w'.app (E.functor.obj M)) :=
     Arrow.isoMk
       ((ti.app (G.obj M)).symm ≪≫ K'.mapIso (x.app M))
       (y.app (L.obj M) ≪≫ Q'.mapIso ((si.app M).symm)) (by
@@ -125,8 +125,8 @@ private theorem scalarMateArrowTransport
         rw [hcancel]
         simpa only [Functor.comp_obj, Category.assoc] using
           (Category.comp_id
-            (K'.map (x.hom.app M) ≫ w'.natTrans.app (E.functor.obj M))).symm)
-  exact ⟨(Functor.mapArrowEquivalence J).unitIso.app (Arrow.mk (w.natTrans.app M)) ≪≫
+            (K'.map (x.hom.app M) ≫ w'.app (E.functor.obj M))).symm)
+  exact ⟨(Functor.mapArrowEquivalence J).unitIso.app (Arrow.mk (w.app M)) ≪≫
     J.inverse.mapArrow.mapIso i⟩
 
 end CategoryTheory
@@ -191,7 +191,7 @@ private theorem scalarCompositeMate (l : ℕ) [Fact l.Prime]
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj l E.1) U))) :
     (((mateEquiv (scalarCompositeAdjunction l E U) (scalarCompositeAdjunction l E V)).symm
-      (nativeScalarCompositeRestrictionSquare l E g)).natTrans.app M) =
+      (nativeScalarCompositeRestrictionSquare l E g)).app M) =
         nativeScalarCondensedComposite l E g M := by
   have h := @nativeScalarDerivedCompositeMate.{u}
     (Profinite.padicIntegersRingObj l E.1) (Profinite.continuousMapRingObj E.1)
@@ -219,7 +219,7 @@ private theorem nativeMateProjection
     (M : DerivedCategory (pbcModules U (R.ring U))) :
     (((mateEquiv (pbcDerivedScalarAdjunction (a.map U))
         (pbcDerivedScalarAdjunction (a.map V))).symm
-      (nativeRingRestrictionSquare a g)).natTrans.app M) =
+      (nativeRingRestrictionSquare a g)).app M) =
         (PurCompactSupport.properComparison a g).app M := by
   delta nativeRingRestrictionSquare PurCompactSupport.properComparison
     pbcDerivedRestrict pbcRestrict

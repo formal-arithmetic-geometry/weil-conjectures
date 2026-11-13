@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 @[expose] public section
 

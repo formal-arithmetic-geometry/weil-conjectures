@@ -213,21 +213,22 @@ variable {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}} [X.Over (Spec (CommRingC
   {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of L))]
   (j : (Y ↘ Spec (CommRingCat.of L)).geometricFiber ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
   (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      Module.finrank k₀ L).hom = (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+      Module.finrank k₀ L).asIso.hom =
+    (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
   (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L)
 
 include hj in
 /-- The iterates of `j ≫ Fr^N = Fr_Y ≫ j`. -/
 theorem comp_geometricGaloisFrobenius_pow_finrank_mul (n : ℕ) :
     j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (Module.finrank k₀ L * n)).hom =
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom ≫ j := by
+        (Module.finrank k₀ L * n)).asIso.hom =
+      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom ≫ j := by
   induction n with
   | zero =>
     rw [Nat.mul_zero, pow_zero, pow_zero]
     exact (Category.comp_id _).trans (Category.id_comp _).symm
   | succ n ih =>
-    rw [Nat.mul_succ, ← Aut.pow_hom_comp_pow_hom, reassoc_of% hj, ih, pow_succ, Aut.Aut_mul_def,
+    rw [Nat.mul_succ, ← Aut.pow_hom_comp_pow_hom, reassoc_of% hj, ih, pow_succ, Aut.mul_asIso,
       Iso.trans_hom, Category.assoc]
 
 include hj in
@@ -238,10 +239,10 @@ theorem comp_geometricGaloisFrobenius_pow_of_comp_eq [Mono j]
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hss' : s' ≫ j = (specAlgHomAlgebraicClosureIso θ).hom ≫ s) {n : ℕ}
     (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (Module.finrank k₀ L * n)).hom =
-      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ L * n)).hom ≫ s) :
-    s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius L ^ n).hom ≫ s' := by
+        (Module.finrank k₀ L * n)).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ L * n)).asIso.hom ≫ s) :
+    s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius L ^ n).asIso.hom ≫ s' := by
   rw [← cancel_mono j, Category.assoc, ← comp_geometricGaloisFrobenius_pow_finrank_mul j hj,
     reassoc_of% hss', hs, Category.assoc, hss', specAlgHomAlgebraicClosureIso_hom,
     specGeometricFrobenius_pow_hom_comp_spec_map_algHom_assoc]

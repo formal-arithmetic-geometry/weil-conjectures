@@ -78,7 +78,7 @@ theorem isIso_biproductDesc_derivedUnit_smul
         (comap φ).mapDerivedCategory.map
           (b i • 𝟙 ((extendScalars φ).leftDerivedFunctor.obj K))) := by
   let adj := derivedExtendMapDerivedCategoryAdjunction φ
-  let sc (i : Fin d) := Linear.toCatCenter k (DerivedCategory (Mod C S)) (b i)
+  let sc (i : Fin d) := (Linear.toCatCenter k (DerivedCategory (Mod C S)) (b i)).asHom
   let q := HomotopyCategory.quotient (Mod C R) (ComplexShape.up ℤ)
   suffices h : ∀ M : CochainComplex (Mod C R) ℤ,
       IsIso ((adj.biproductDescUnit sc).app (DerivedCategory.Qh.obj (q.obj M))) by
@@ -118,7 +118,7 @@ theorem isIso_biproductDesc_derivedUnit_smul
         Category.id_comp, Category.comp_id]
     simp only [Functor.comp_obj, Functor.comp_map] at hnat
     simp only [Adjunction.biproductDescUnit_app, biproduct.ι_desc_assoc, biproduct.ι_desc,
-      Category.assoc, c, sc, Linear.toCatCenter_apply_app, Functor.comp_map, Functor.map_comp]
+      Category.assoc, c, sc, Linear.toCatCenter_apply_asHom_app, Functor.comp_map, Functor.map_comp]
     rw [reassoc_of% hcomm, hsmul]
     erw [hnat, reassoc_of% hfac]
     rfl

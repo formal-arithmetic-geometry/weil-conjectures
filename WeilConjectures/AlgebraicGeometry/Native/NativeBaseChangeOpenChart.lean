@@ -48,9 +48,8 @@ private theorem heart_open_mate (l : ℕ) [Fact l.Prime]
     (sq : CommSq v p' p g) :
     (mateEquiv (adicUpperStarLowerStarAdjunction l p)
       (adicUpperStarLowerStarAdjunction l p')
-      (TwoSquare.mk _ _ _ _ (adicUpperStarCompIso l sq.w.symm).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (adicUpperStarCompIso l sq.w.symm).hom)) =
         adicBaseChangeMap l sq.flip := by
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv (adicUpperStarLowerStarAdjunction l v)
     (adicUpperStarLowerStarAdjunction l g)).injective
   rw [adicBaseChangeMap, Equiv.apply_symm_apply]
@@ -58,7 +57,7 @@ private theorem heart_open_mate (l : ℕ) [Fact l.Prime]
     (adicUpperStarLowerStarAdjunction l g)
     (mateEquiv (adicUpperStarLowerStarAdjunction l p)
       (adicUpperStarLowerStarAdjunction l p')
-      (TwoSquare.mk _ _ _ _ (adicUpperStarCompIso l sq.w.symm).hom))).natTrans =
+      (TwoSquare.mk _ _ _ _ (adicUpperStarCompIso l sq.w.symm).hom))) =
         (adicSquareLowerStarIso l sq.flip).hom
   rw [iterated_mateEquiv_conjugateEquiv]
   change conjugateEquiv

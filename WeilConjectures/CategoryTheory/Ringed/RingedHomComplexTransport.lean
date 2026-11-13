@@ -36,7 +36,6 @@ namespace CategoryTheory.NativeRestriction
 
 attribute [local irreducible] homComplexFunctor
 
-set_option maxHeartbeats 1000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- An additive functor preserving countable products transports Hom complexes
 naturally whenever it transports ordinary sheaf Hom naturally.

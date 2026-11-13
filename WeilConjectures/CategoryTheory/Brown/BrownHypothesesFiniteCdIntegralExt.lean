@@ -273,7 +273,6 @@ private theorem reductionArrow_eq
     (by infer_instance) (by infer_instance) (by infer_instance)
     _ (IntegralQuotient.reduction_continuous l E n) continuous_quot_mk
 
-set_option maxHeartbeats 2000000 in
 -- Kernel checking unfolds both scalar-change functors in the coefficient-arrow transport.
 private theorem finite_reduction_bound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -300,7 +299,6 @@ attribute [local instance 40000] AdicCompletion.ringMonoidalObject
   AdicCompletion.finiteRingMonoidalObject AdicCompletion.modulesDerived
   AdicCompletion.finiteModulesDerived AdicCompletion.modulesMonoidal
 
-set_option maxHeartbeats 2000000 in
 -- Compare the finite-bound presentation with the native completion-level API once.
 private theorem completion_reduction_bound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

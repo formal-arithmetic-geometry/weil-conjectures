@@ -563,7 +563,6 @@ private theorem normalized_hom_naturality
       ((moduleSets BI).map h ≫ (moduleSets BI).map v)) = _
     rw [← Category.assoc, f.adj.homEquiv_naturality_right]
 
-set_option maxHeartbeats 800000 in
 -- The large conjunction checks both transported operations and every Hom naturality equation.
 /-- The module adjunction, free-module bijection, and inverse set adjunction form the
 claimed natural chain, whose composite is restriction to the inverse-image generator.

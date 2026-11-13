@@ -152,7 +152,6 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
 
 variable [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The general derived API carries graded tensor colimit instances.
 /-- The total left derived extension of scalars, with its structural arguments shared
 once for consumers. Its body is the existing generic total left derived functor.

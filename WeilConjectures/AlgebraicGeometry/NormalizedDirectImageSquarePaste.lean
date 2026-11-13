@@ -45,8 +45,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 set_option linter.all false in
-set_option maxHeartbeats 500000 in
--- The explicit categorical carrier conversions require the larger elaboration budget.
 /-- Component assembly from the two comparison-unit equations and transport.
 Source: Stacks Project, Cohomology, Tag 0D5T.
 (blueprint: lem-pc-normalized-direct-image-square-unit-component-assembly).
@@ -83,21 +81,11 @@ theorem normalizedDirectImageSquare_component
           (Scheme.Modules.pushforwardComp f' g).symm).hom (.up ℤ)).app K) ≫
       (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f')
       (Scheme.Modules.pushforward g)).app K := by
-  have hs := square_paste
+  refine square_paste
     ((schemeNormalizedDirectImageCompIso gX f).app (DerivedCategory.Qh.obj K))
     ((schemeNormalizedDirectImageCompIso f' g).app (DerivedCategory.Qh.obj K))
-    ((RingedSpace.moduleDirectImage (gX ≫ f).toLRSHom.toShHom).rightDerivedFunctorUnit.app K)
-    ((RingedSpace.moduleDirectImage (f' ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K)
-    ((Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward gX)
-      (Scheme.Modules.pushforward f)).app K)
-    ((Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f')
-      (Scheme.Modules.pushforward g)).app K)
-    ((eqToHom (congrArg (fun v ↦ schemeDerivedDirectImage v) h)).app
-      (DerivedCategory.Qh.obj K))
-    (DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory
-      (directImageSquareIso gX f f' g h).hom (.up ℤ)).app K))
-    h₁ h₂ ht
-  simp only [directImageSquareIso, Iso.app_hom, Iso.app_inv] at hs
-  exact hs
+    _ _ _ _ _ _ h₁ h₂ ?_
+  simp only [directImageSquareIso] at ht
+  exact ht
 
 end AlgebraicGeometry

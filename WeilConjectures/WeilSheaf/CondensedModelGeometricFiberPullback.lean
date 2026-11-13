@@ -34,8 +34,8 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
 
 /-- The components of the inverse mate of a square along two adjunctions. -/
 lemma mateEquiv_symm_natTrans_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (β : TwoSquare R₁ H G R₂)
-    (a : A) : ((mateEquiv adj₁ adj₂).symm β).natTrans.app a =
-      L₂.map (G.map (adj₁.unit.app a)) ≫ L₂.map (β.natTrans.app (L₁.obj a)) ≫
+    (a : A) : ((mateEquiv adj₁ adj₂).symm β).app a =
+      L₂.map (G.map (adj₁.unit.app a)) ≫ L₂.map (β.app (L₁.obj a)) ≫
         adj₂.counit.app (H.obj (L₁.obj a)) := by
   simp [mateEquiv_symm_apply]
 
@@ -43,13 +43,25 @@ lemma mateEquiv_symm_natTrans_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R�
 adjunctions with `α`. -/
 lemma mateEquiv_eq_of_unit_comp_map (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H)
     (β : TwoSquare R₁ H G R₂)
-    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.natTrans.app (L₁.obj a) =
-      adj₂.unit.app (G.obj a) ≫ R₂.map (α.natTrans.app a)) :
+    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.app (L₁.obj a) =
+      adj₂.unit.app (G.obj a) ≫ R₂.map (α.app a)) :
     mateEquiv adj₁ adj₂ α = β := by
   rw [← Equiv.eq_symm_apply]
-  refine TwoSquare.ext _ _ fun a ↦ ?_
+  refine NatTrans.ext (funext fun a ↦ ?_)
   rw [mateEquiv_symm_natTrans_app, ← Functor.map_comp_assoc, h]
   simp
+
+/-- Unit compatibility with the forward comparison determines the mate of its inverse. -/
+private lemma mateEquiv_inv_eq_of_unit_comp_map_hom (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : TwoSquare R₁ H G R₂)
+    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.app (L₁.obj a) ≫ R₂.map (α.hom.app a) =
+      adj₂.unit.app (G.obj a)) :
+    mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.inv) = β := by
+  apply mateEquiv_eq_of_unit_comp_map
+  intro a
+  rw [← h, Category.assoc, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- **An abstract coherence square for comparisons of structure isomorphisms.** Let
 `c : P ⋙ E' ≅ E ⋙ P'` be a comparison of two functors `P` and `P'` along `E` and `E'`. Suppose
@@ -153,7 +165,7 @@ lemma mateEquiv_adicUpperStarCompCondensedModIso_inv (f : S ⟶ T) :
       (adicUpperStarCompCondensedModIso l f).inv =
         (condensedModInverseCompAdicLowerStarIso l f).hom :=
     (conjugateEquiv _ _).apply_symm_apply _
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   have h3 := NatTrans.congr_app (h1.trans h2) M
   refine h3.trans ?_
   simp [condensedModInverseCompAdicLowerStarIso, mateEquiv_apply]
@@ -187,7 +199,7 @@ lemma adicUpperStarCompCondensedModIso_comp_inv {R : Scheme.{u}} (f : S ⟶ T) (
         (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)),
     mateEquiv_hcomp, mateEquiv_adicUpperStarCompCondensedModIso_inv,
     mateEquiv_adicUpperStarCompCondensedModIso_inv, hold, hnew]
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   refine Mod.Hom.ext ?_
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
@@ -261,8 +273,6 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
   rfl
 
-set_option maxHeartbeats 1000000 in
--- the kernel unfolds the equivalences of the pushforwards along `e`
 /-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
 adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
 lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
@@ -270,11 +280,8 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
         (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
         (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
-  refine CategoryTheory.mateEquiv_eq_of_unit_comp_map _ _ _ _ fun x ↦ ?_
-  rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
-    ← Functor.map_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  rfl
+  exact mateEquiv_inv_eq_of_unit_comp_map_hom _ _
+    (adicLowerStarCompCondensedModIso l e.inv) _ (adicSheafEquivCondensedMod_map_unit_comp l e)
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/
@@ -291,7 +298,7 @@ lemma adicUpperStarCompCondensedModIso_inv_of_iso (e : S ≅ T) :
       (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e),
     conjugateEquiv_adicUpperStarIsoLowerStarInv_inv, conjugateEquiv_upperStarIsoLowerStarInv_hom]
   rw [mateEquiv_adicLowerStarCompCondensedModIso_inv]
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
 
 /-- The pullback comparison of the two models is compatible with the transports of the
@@ -302,7 +309,7 @@ lemma adicUpperStarCompCondensedModIso_inv_congr {f f' : S ⟶ T} (h : f = f') :
         (CondensedRing.upperStarCongr (Profinite.padicAlgClRingObj l) h).inv).whiskerLeft
         (adicUpperStarCongr l h).hom := by
   subst h
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, CondensedRing.upperStarCongr,
     adicUpperStarCongr]
 
@@ -370,8 +377,8 @@ lemma geometricFiberPullbackFrobeniusIso_eq :
     geometricFiberPullbackFrobeniusIso k₀ l X =
       Functor.isoWhiskerLeft ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l]
           (adicUpperStarIsoLowerStarInv l
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm ≪≫
-        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm ≪≫
+        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).symm ≪≫
         adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) :=
   rfl
@@ -382,7 +389,7 @@ lemma geometricFiberPullback_comp_toCondensed_eq :
     geometricFiberPullback k₀ l X ⋙ toCondensed k₀ l X =
       Endofunctor.IsoAlgebra.functorOfNatIso _ (geometricFiberPullbackFrobeniusIso k₀ l X) ⋙
         Endofunctor.IsoAlgebra.mapOfNatIso (adicLowerStarCompCondensedModIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).symm :=
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).symm :=
   rfl
 
 /-- **Pulled-back Weil sheaves in the two models**: the old-model Weil sheaf `p^* H` with its

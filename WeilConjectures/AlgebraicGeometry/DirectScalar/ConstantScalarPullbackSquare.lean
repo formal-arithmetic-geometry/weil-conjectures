@@ -124,15 +124,14 @@ private lemma comparison_mate {A B : Type u} [CommRing A] [CommRing B]
     mateEquiv (padj B f) (padj A f) (TwoSquare.mk _ _ _ _ (ordinaryRestrictionComparison φ f)) =
       TwoSquare.mk _ _ _ _ (directComparison φ f).hom := by
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_symm_apply, ordinaryRestrictionComparison,
     Scheme.proEtaleRingRestrictionPullbackInv, Scheme.proEtaleRingRestrictionPullbackApp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
     Functor.rightUnitor_hom_app, Functor.comp_map, Category.id_comp]
   simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   exact (Category.comp_id _).symm
 
@@ -185,8 +184,7 @@ private lemma comparison_comp {A B : Type u} [CommRing A] [CommRing B]
           (StrictTower.moduleRComp (ULift.{u + 1, u} C) f g).hom :=
       Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
     rw [hG A, hG B]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro Y
@@ -195,7 +193,7 @@ private lemma comparison_comp {A B : Type u} [CommRing A] [CommRing B]
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    simp only [ModuleCat.comp_apply]
     erw [directComparison_apply φ g ((push B f).obj N) Y n]
     change ((StrictTower.moduleRComp (ULift.{u + 1, u} A) f g).hom.app
         ((ordinaryScalarRestriction φ V).obj N)).val.app Y
@@ -324,10 +322,10 @@ private theorem mateCube
       ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).app (J.obj N) ≫
         H'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).app N) ≫
         d.app (S₀.obj N) := by
-  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).natTrans
-  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).natTrans
-  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG)).natTrans
-  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI)).natTrans
+  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ))
+  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH))
+  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG))
+  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI))
   have hj (K : C₀) : J.map (a₀.unit.app K) ≫ qJ.app (S₀.obj K) =
       a₁.unit.app (J.obj K) ≫ R₁.map (lJ.app K) :=
     unit_mateEquiv_symm a₀ a₁ (TwoSquare.mk _ _ _ _ qJ) K

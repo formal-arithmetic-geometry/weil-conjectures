@@ -56,7 +56,6 @@ attribute [local irreducible] compactSupportOrdinaryDirectEvaluation
   ProEtale.VaryingRing.moduleEvalP
   compactSupportOrdinaryCoefficientTransition
 
-set_option maxHeartbeats 400000 in
 -- The formula compares scalar actions on the same underlying section carriers.
 /-- The right ordinary coefficient-transition composite is horizontal restriction.
 Source: Stacks 03DI and 0D6E.

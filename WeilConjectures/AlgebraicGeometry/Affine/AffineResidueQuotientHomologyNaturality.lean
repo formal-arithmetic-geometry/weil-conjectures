@@ -209,7 +209,6 @@ private theorem abstractCycle_naturality
       (termIso_map W U p φ 1 x.val).symm
     _ = _ := (abstractCycle_i W U p C (affineResidueCycleMap φ x)).symm
 
-set_option maxHeartbeats 1300000 in
 -- The statement compares tensor-product and quotient module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -239,13 +238,27 @@ theorem affine_residue_quotient_homology_naturality :
           HomologicalComplex.homologyMap (G.map φ) 1 (e K z) := by
   dsimp only
   refine ⟨quotientIso W U p, ?_⟩
-  intro K C φ z
-  obtain ⟨x, rfl⟩ := (affineResidueCycleClass_surjective_kernel W U p K).1 z
-  rw [affineResidueCycleHomologyMap_class, quotientIso_class_abstract,
-    quotientIso_class_abstract, ← abstractCycle_naturality]
-  exact (ConcreteCategory.congr_hom
-    (HomologicalComplex.homologyπ_naturality ((residueComplexFunctor W U p).map φ) 1)
-      (abstractCycle W U p K x)).symm
+  intro K C φ
+  -- Work on cycle classes without substituting through the quotient structures.
+  refine (affineResidueCycleClass_surjective_kernel W U p K).1.forall.2 ?_
+  intro x
+  calc
+    _ = ((residueComplexFunctor W U p).obj C).homologyπ 1
+        (abstractCycle W U p C (affineResidueCycleMap φ x)) :=
+      quotientIso_class_abstract W U p C (affineResidueCycleMap φ x)
+    _ = ((residueComplexFunctor W U p).obj C).homologyπ 1
+        (HomologicalComplex.cyclesMap ((residueComplexFunctor W U p).map φ) 1
+          (abstractCycle W U p K x)) :=
+      congrArg (((residueComplexFunctor W U p).obj C).homologyπ 1)
+        (abstractCycle_naturality W U p φ x).symm
+    _ = HomologicalComplex.homologyMap ((residueComplexFunctor W U p).map φ) 1
+        (((residueComplexFunctor W U p).obj K).homologyπ 1 (abstractCycle W U p K x)) :=
+      (ConcreteCategory.congr_hom
+        (HomologicalComplex.homologyπ_naturality ((residueComplexFunctor W U p).map φ) 1)
+          (abstractCycle W U p K x)).symm
+    _ = _ := congrArg
+      (HomologicalComplex.homologyMap ((residueComplexFunctor W U p).map φ) 1)
+      (quotientIso_class_abstract W U p K x).symm
 
 end
 end AlgebraicGeometry.Scheme

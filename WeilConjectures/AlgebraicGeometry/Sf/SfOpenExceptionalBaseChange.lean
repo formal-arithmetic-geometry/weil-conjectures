@@ -101,8 +101,8 @@ private theorem inverseMateIso
     {G : C' ⥤ C} {U : C ⥤ C'} {H : D' ⥤ D} {V : D ⥤ D'}
     {L : C ⥤ D} {L' : C' ⥤ D'}
     (a : G ⊣ U) (b : H ⊣ V) [IsIso a.unit] [IsIso b.unit]
-    (δ : TwoSquare U L L' V) [IsIso δ.natTrans] (e : L' ⋙ H ≅ G ⋙ L) :
-    IsIso ((mateEquiv a b).symm δ).natTrans := by
+    (δ : TwoSquare U L L' V) [IsIso δ] (e : L' ⋙ H ≅ G ⋙ L) :
+    IsIso ((mateEquiv a b).symm δ) := by
   have : H.Full := b.fullyFaithfulLOfIsIsoUnit.full
   have : H.Faithful := b.fullyFaithfulLOfIsIsoUnit.faithful
   rw [NatTrans.isIso_iff_isIso_app]
@@ -110,7 +110,7 @@ private theorem inverseMateIso
   have : IsIso (b.counit.app (L.obj (G.obj M))) :=
     b.isIso_counit_app_of_iso (e.app M).symm
   have : IsIso (H.map (L'.map (a.unit.app M))) := inferInstance
-  have : IsIso (H.map (δ.natTrans.app (G.obj M))) := inferInstance
+  have : IsIso (H.map (δ.app (G.obj M))) := inferInstance
   dsimp only [mateEquiv, Equiv.symm, Equiv.coe_fn_mk, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj,
     Functor.comp_map, Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,

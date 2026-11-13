@@ -1091,7 +1091,7 @@ private def uniformizerMap : DerivedNakayama.integerRing l E ⟶ DerivedNakayama
 
 private def uniformizerEnd : End (Mod.regular (DerivedNakayama.integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  refine Mod.homMk (uniformizerMap l E) ?_
+  refine .of (Mod.homMk (uniformizerMap l E) ?_)
   change MonObj.mul ≫ uniformizerMap l E =
     DerivedNakayama.integerRing l E ◁ uniformizerMap l E ≫ MonObj.mul
   apply Sheaf.tensor_hom_ext
@@ -1114,14 +1114,14 @@ private def uniformizerEnd : End (Mod.regular (DerivedNakayama.integerRing l E))
 
 private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
     (f : (DerivedNakayama.integerRing l E).obj.obj S) (x : S.unop) :
-    (((uniformizerEnd l E).hom.hom.app S) f).down x =
+    (((uniformizerEnd l E).asHom.hom.hom.app S) f).down x =
       Padic.coefficientExtensionUniformizer l E * f.down x := by
   rfl
 
 private theorem uniformizer_exists :
     ∃ d : End (Mod.regular (DerivedNakayama.integerRing l E)),
       ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-        (x : S.unop), ((d.hom.hom.app S) a).down x =
+        (x : S.unop), ((d.asHom.hom.hom.app S) a).down x =
           Padic.coefficientExtensionUniformizer l E * a.down x :=
   ⟨uniformizerEnd l E, uniformizerEnd_apply l E⟩
 
@@ -1138,7 +1138,7 @@ private theorem action_mul
       DerivedNakayama.scalarOnModules l E X b ≫
         DerivedNakayama.scalarOnModules l E X a := by
     unfold DerivedNakayama.scalarOnModules
-    simp only [End.mul_def, Functor.map_comp, Category.assoc,
+    simp only [End.mul_asHom, Functor.map_comp, Category.assoc,
       Iso.hom_inv_id_assoc]
     simp only [← Functor.map_comp_assoc]
     congr 2
@@ -1192,7 +1192,7 @@ Proof plan (the ten steps of the node):
 theorem principal_reduction_cone_calculus :
     ∃ d : End (Mod.regular (DerivedNakayama.integerRing l E)),
       (∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-        (s : S.unop), ((d.hom.hom.app S) a).down s =
+        (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
           Padic.coefficientExtensionUniformizer l E * a.down s) ∧
       ∃ (D : ℕ → CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ)
         (hobj : ∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ),
@@ -1338,7 +1338,7 @@ Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E
 def PrincipalReductionConeData.IsCanonical (data : PrincipalReductionConeData l E X) : Prop :=
   ∀ (S : Profinite.{u}ᵒᵖ)
     (a : (DerivedNakayama.integerRing l E).obj.obj S) (s : S.unop),
-    ((data.d.hom.hom.app S) a).down s = Padic.coefficientExtensionUniformizer l E * a.down s ∧
+    ((data.d.asHom.hom.hom.app S) a).down s = Padic.coefficientExtensionUniformizer l E * a.down s ∧
     ∃ (sD : ∀ n : ℕ, (data.D n).CommShift ℤ)
       (sF : ∀ n : ℕ, (reductionFunctor l E X n).CommShift ℤ)
       (κ : ∀ n : ℕ, data.D n ⋙ DerivedCategory.Q ≅

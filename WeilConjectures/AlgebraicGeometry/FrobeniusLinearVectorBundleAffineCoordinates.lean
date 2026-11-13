@@ -96,8 +96,8 @@ theorem exists_frobenius_linear_vector_bundle_affine_coordinates
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e)) :
     ∀ (U : S.Etale) (x : U.left),
       ∃ (V : S.Etale) (g : V ⟶ U) (v : V.left),

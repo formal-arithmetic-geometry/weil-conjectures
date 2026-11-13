@@ -91,7 +91,7 @@ def returnEnd (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     (sq : CommSq a f f b) (σ : Spec (.of k) ⟶ Spec (.of k))
     (x : Spec (.of k) ⟶ X) (hx : x ≫ b = σ ≫ x) :
     End ((upperStar Λ x).obj (push Λ f)) :=
-  (pointComparison Λ
+  End.of <| (pointComparison Λ
     (upperStarIsoIdOfIsSepClosed Λ σ) b hx).hom.app
       (push Λ f) ≫
     (upperStar Λ x).map (exchange Λ sq)

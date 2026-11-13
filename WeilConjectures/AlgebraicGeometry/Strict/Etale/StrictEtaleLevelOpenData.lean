@@ -511,12 +511,12 @@ private theorem inverseMate_iso_of_full
     {J : A ⥤ B} {P : B ⥤ A} {K : C ⥤ D} {Q : D ⥤ C}
     [J.Full] [J.Faithful] [K.Full] [K.Faithful]
     {R : A ⥤ C} {S : B ⥤ D} (a : J ⊣ P) (b : K ⊣ Q)
-    (β : TwoSquare P S R Q) [IsIso β.natTrans]
+    (β : TwoSquare P S R Q) [IsIso β]
     (e : ∀ N, S.obj (J.obj N) ≅ K.obj (R.obj N)) :
-    IsIso (((mateEquiv a b).symm β).natTrans) := by
-  let (N : A) : IsIso ((((mateEquiv a b).symm β).natTrans).app N) := by
+    IsIso (((mateEquiv a b).symm β)) := by
+  let (N : A) : IsIso ((((mateEquiv a b).symm β)).app N) := by
     have hη : IsIso (a.unit.app N) := inferInstance
-    have hβ : IsIso (β.natTrans.app (J.obj N)) := inferInstance
+    have hβ : IsIso (β.app (J.obj N)) := inferInstance
     have hε : IsIso (b.counit.app (S.obj (J.obj N))) :=
       b.isIso_counit_app_of_iso (e N)
     simp only [mateEquiv_symm_apply, NatTrans.comp_app, id_obj, comp_obj,
@@ -566,7 +566,7 @@ structure StrictEtaleLevelOpenData where
       level n ⋙ coefficientRestriction (J := Z.smallEtaleTopology) O t h
   restrictionMate : ∀ {m n : ℕ} (h : n ≤ m),
     (mateEquiv (levelAdjunction n) (levelAdjunction m)
-      (.mk _ _ _ _ (restriction h).hom)).natTrans = (I.restrictInverse h).inv
+      (.mk _ _ _ _ (restriction h).hom)) = (I.restrictInverse h).inv
 
 attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
@@ -609,7 +609,7 @@ theorem strictEtaleLevelOpenData_exists :
   let a := StrictEtaleOpenProof.levelAdjunction O t j I
   have hm {m n : ℕ} (h : n ≤ m) :
       IsIso (((mateEquiv (a n) (a m)).symm
-        (.mk _ _ _ _ (I.restrictInverse h).inv)).natTrans) := by
+        (.mk _ _ _ _ (I.restrictInverse h).inv))) := by
     have hi := StrictEtaleOpenScalarMate.fixed_scalar_mate_iso
       (StrictEtaleOpenProof.coefficient O t m) (StrictEtaleOpenProof.coefficient O t n)
         (StrictEtaleOpenProof.quotientMap O t h) j
@@ -625,7 +625,7 @@ theorem strictEtaleLevelOpenData_exists :
         (ModuleCat.{u + 1} (StrictEtaleOpenProof.coefficient O t n)) j)
       (Etale.openImmersionLowerShriekAdjunction
         (ModuleCat.{u + 1} (StrictEtaleOpenProof.coefficient O t m)) j)).symm
-          (.mk _ _ _ _ (𝟙 _))).natTrans)
+          (.mk _ _ _ _ (𝟙 _))))
     exact StrictEtaleOpenProof.inverseMate_iso_of_full (a n) (a m)
       (.mk _ _ _ _ (I.restrictInverse h).inv)
       (StrictEtaleOpenProof.transportObjectIso
@@ -645,7 +645,7 @@ theorem strictEtaleLevelOpenData_exists :
         (StrictEtaleOpenProof.fixedRestriction Z O t h) α')
   let α {m n : ℕ} (h : n ≤ m) :=
     @asIso _ _ _ _ (((mateEquiv (a n) (a m)).symm
-      (.mk _ _ _ _ (I.restrictInverse h).inv)).natTrans) (hm h)
+      (.mk _ _ _ _ (I.restrictInverse h).inv))) (hm h)
   refine ⟨{
     level := J
     levelExact := fun n ↦ ⟨inferInstance, inferInstance⟩
@@ -653,7 +653,7 @@ theorem strictEtaleLevelOpenData_exists :
     restriction := α
     restrictionMate := ?_ }⟩
   intro m n h
-  exact congrArg TwoSquare.natTrans
+  exact
     ((mateEquiv (a n) (a m)).apply_symm_apply (.mk _ _ _ _ (I.restrictInverse h).inv))
 
 end AlgebraicGeometry

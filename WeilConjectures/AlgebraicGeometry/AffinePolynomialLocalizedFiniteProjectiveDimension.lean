@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
+public import Mathlib.RingTheory.Localization.Finiteness
 import WeilConjectures.AlgebraicGeometry.AffinePolynomialLocalizedTorOfStalkwise
 import WeilConjectures.RingTheory.LocalizedPolynomialFiniteProjectiveDimension
 

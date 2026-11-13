@@ -153,14 +153,14 @@ lemma μ_map_swapEvPairing (Q : C₁ ⥤ E₁) [Q.LaxMonoidal] (Q' : C₂ ⥤ E�
     (hα : μ G P (Q.obj ω) ≫ G.map α ≫ t = (φ ⊗ₘ (σ.app ω ≫ Q'.map w)) ≫ α') (N : C₁) :
     μ G (Q.obj N) (P ⊗ Q.obj ((ihom N).obj ω)) ≫ G.map (swapEvPairing Q α N) ≫ t =
       (σ.app N ⊗ₘ (Functor.OplaxMonoidal.δ G P _ ≫ (φ ⊗ₘ (σ.app _ ≫
-        Q'.map ((ihomComparison J N).natTrans.app ω ≫ (ihom (J.obj N)).map w))))) ≫
+        Q'.map ((ihomComparison J N).app ω ≫ (ihom (J.obj N)).map w))))) ≫
         swapEvPairing Q' α' (J.obj N) := by
   have hα' : G.map α ≫ t = Functor.OplaxMonoidal.δ G P (Q.obj ω) ≫
       (φ ⊗ₘ (σ.app ω ≫ Q'.map w)) ≫ α' := by
     rw [← hα, Functor.Monoidal.δ_μ_assoc]
   have hK : μ G (Q.obj N) (Q.obj ((ihom N).obj ω)) ≫ G.map (μ Q _ _) ≫
       G.map (Q.map ((ihom.ev N).app ω)) ≫ σ.app ω ≫ Q'.map w =
-      (σ.app N ⊗ₘ (σ.app _ ≫ Q'.map ((ihomComparison J N).natTrans.app ω ≫
+      (σ.app N ⊗ₘ (σ.app _ ≫ Q'.map ((ihomComparison J N).app ω ≫
         (ihom (J.obj N)).map w))) ≫ μ Q' _ _ ≫ Q'.map ((ihom.ev (J.obj N)).app ω') := by
     have hn : G.map (Q.map ((ihom.ev N).app ω)) ≫ σ.app ω =
         σ.app (N ⊗ (ihom N).obj ω) ≫ Q'.map (J.map ((ihom.ev N).app ω)) :=
@@ -171,7 +171,7 @@ lemma μ_map_swapEvPairing (Q : C₁ ⥤ E₁) [Q.LaxMonoidal] (Q' : C₂ ⥤ E�
     simp [tensorHom_def]
   have hR : G.obj P ◁ μ G (Q.obj N) (Q.obj ((ihom N).obj ω)) ≫ G.obj P ◁ G.map (μ Q _ _) ≫
       G.obj P ◁ G.map (Q.map ((ihom.ev N).app ω)) ≫ (φ ⊗ₘ (σ.app ω ≫ Q'.map w)) =
-      (φ ⊗ₘ (σ.app N ⊗ₘ (σ.app _ ≫ Q'.map ((ihomComparison J N).natTrans.app ω ≫
+      (φ ⊗ₘ (σ.app N ⊗ₘ (σ.app _ ≫ Q'.map ((ihomComparison J N).app ω ≫
         (ihom (J.obj N)).map w)))) ≫ P' ◁ μ Q' _ _ ≫
           P' ◁ Q'.map ((ihom.ev (J.obj N)).app ω') := by
     rw [tensorHom_def', ← MonoidalCategory.whiskerLeft_comp_assoc,
@@ -208,9 +208,9 @@ def preIsoApp {A A' : D} (a : A ≅ A') (T : D) : (ihom A).obj T ≅ (ihom A').o
 lemma map_curry_comp (G : C ⥤ D) [G.LaxMonoidal] {A B T : C} {A' B' T' : D}
     (p : A ⊗ B ⟶ T) (p' : A' ⊗ B' ⟶ T') (a : G.obj A ≅ A') (b : G.obj B ⟶ B')
     (t : G.obj T ⟶ T') (h : μ G A B ≫ G.map p ≫ t = (a.hom ⊗ₘ b) ≫ p') :
-    G.map (curry p) ≫ (ihomComparison G A).natTrans.app T ≫ (ihom (G.obj A)).map t ≫
+    G.map (curry p) ≫ (ihomComparison G A).app T ≫ (ihom (G.obj A)).map t ≫
       (pre a.inv).app T' = b ≫ curry p' := by
-  have hu : uncurry (G.map (curry p) ≫ (ihomComparison G A).natTrans.app T) =
+  have hu : uncurry (G.map (curry p) ≫ (ihomComparison G A).app T) =
       μ G A B ≫ G.map p := by
     rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, μ_natural_right_assoc,
       ← G.map_comp, ← uncurry_eq, uncurry_curry]

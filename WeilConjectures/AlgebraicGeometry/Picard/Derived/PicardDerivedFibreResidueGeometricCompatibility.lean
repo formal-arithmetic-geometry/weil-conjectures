@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
@@ -89,8 +90,25 @@ private theorem residue_fibre_isomorphisms
   choose ei heif heis using hFi
   exact ⟨r, hr, e, ei, hef, hes, heif, heis⟩
 
-set_option maxHeartbeats 600000 in
--- Comparing the derived and concrete homology functors needs extra elaboration heartbeats.
+/-- Transport a family of squares along its chosen comparison isomorphisms. -/
+private theorem transport_square_family_of_exists
+    {D : Type*} [Category* D] {R : Type*} [Ring R] (H : D ⥤ ModuleCat R)
+    {I : Type*} {A A' : D} {B B' : I → D}
+    (u : ∀ i, A ⟶ B i) {J : Sort*} (t : J → ∀ i, A' ⟶ B' i)
+    (h : ∃ (a : A ≅ A') (b : ∀ i, B i ≅ B' i),
+      ∃ j : J, ∀ i, u i ≫ (b i).hom = a.hom ≫ t j i)
+    {P : Type*} {Q : I → Type*} [Add P] [∀ i, Add (Q i)]
+    (e : H.obj A' ≃+ P) (ei : J → ∀ i, H.obj (B' i) ≃+ Q i) (g : ∀ i, P → Q i)
+    (hg : ∀ j i z, ei j i (H.map (t j i) z) = g i (e z)) :
+    ∃ (d : H.obj A ≃+ P) (di : ∀ i, H.obj (B i) ≃+ Q i),
+      ∀ i z, di i (H.map (u i) z) = g i (d z) := by
+  obtain ⟨a, b, j, h⟩ := h
+  refine ⟨(H.mapIso a).toLinearEquiv.toAddEquiv.trans e,
+    fun i ↦ (H.mapIso (b i)).toLinearEquiv.toAddEquiv.trans (ei j i), ?_⟩
+  intro i
+  exact transport_square_apply H (u i) a (b i) (t j i) (h i)
+    (AddEquiv.refl _) (AddEquiv.refl _) (H.map (u i)) (fun _ ↦ rfl)
+    e (ei j i) (g i) (hg j i)
 
 /-- Degree-one derived fibre cohomology of the coefficient direct images is identified with
 structure-sheaf cohomology of the fibres, compatibly with the coefficient arrows.
@@ -138,26 +156,31 @@ theorem picard_derived_fibre_residue_geometric_compatibility
   classical
   obtain ⟨r, hr, eF, eFi, heFfst, heFsnd, heFifst, heFisnd⟩ :=
     residue_fibre_isomorphisms f Xi fi k w s hw
-  obtain ⟨a, ai, hj, hnorm⟩ := picard_derived_residue_normalization
-    f Xi fi ui hui L W k (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
-    eF heFfst heFsnd eFi heFifst heFisnd τ
   let q := pullback.snd f (S.fromSpecResidueField s) ≫ r.inv
-  let qi := fun i ↦ pullback.snd (fi i) (S.fromSpecResidueField s) ≫ r.inv
   let j := fun i ↦ ((Over.pullback (S.fromSpecResidueField s)).map
     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{v} (moduleRings (Spec (W.residueField w)).toRingedSpace)) 1 ⋙
     SheafOfModules.evaluation (moduleRings (Spec (W.residueField w)).toRingedSpace) (.op ⊤)
-  let e := structureDerivedImageCohomologyEquiv q
-  let ei := fun i ↦ structureDerivedImageCohomologyTargetEquiv q (j i) (hj i)
-  let d := (H.mapIso a).toLinearEquiv.toAddEquiv
-  let di := fun i ↦ (H.mapIso (ai i)).toLinearEquiv.toAddEquiv
-  refine ⟨d.trans e, fun i ↦ (di i).trans (ei i), ?_⟩
-  intro i
-  exact transport_square_apply H _ a (ai i) _ (hnorm i) (AddEquiv.refl _) (AddEquiv.refl _)
-    ((derivedFiberCohomologyFunctor W w 1).map
-      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)) (fun _ ↦ rfl) e (ei i)
-    (structureSheafCohomologyPullback (j i) 1)
-    (structure_derived_image_cohomology_naturality q (j i) (hj i))
+  let E := (schemeDerivedDirectImage (pullback.snd f k)).obj
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
+        ((Modules.tensorPullback (pullback.fst f k)).obj L))
+  let Ei := fun i ↦ (schemeDerivedDirectImage (pullback.snd (fi i) k)).obj
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
+        ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
+          ((Modules.tensorPullback (ui i)).obj L)))
+  let F := derivedPullback (W.fromSpecResidueField w)
+  let u : ∀ i, F.obj E ⟶ F.obj (Ei i) := fun i ↦
+    F.map (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)
+  exact transport_square_family_of_exists H u _
+    (picard_derived_residue_normalization f Xi fi ui hui L W k
+      (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
+      eF heFfst heFsnd eFi heFifst heFisnd τ)
+    (structureDerivedImageCohomologyEquiv q)
+    (fun hj i ↦ structureDerivedImageCohomologyTargetEquiv q (j i) (hj i))
+    (fun i ↦ structureSheafCohomologyPullback (j i) 1)
+    (fun hj i ↦ structure_derived_image_cohomology_naturality q (j i) (hj i))
 
 end AlgebraicGeometry.Scheme

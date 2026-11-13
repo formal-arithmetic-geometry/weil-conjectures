@@ -97,7 +97,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
 
-set_option maxHeartbeats 800000 in
 -- the mate is matched against the large types of the nearby cycles functors
 /-- **The restricted base change morphism of the change of geometric generic fibre is split by
 the unit**: `Li^*` of the base change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of `φ.toCartesian` is

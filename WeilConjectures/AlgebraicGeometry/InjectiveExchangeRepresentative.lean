@@ -95,7 +95,7 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
             (pullback.snd f (Scheme.strictLocalizationToBase s))).derivedPlus
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
-              (Scheme.strictLocalizationToBase s)).toCommSq).hom)).natTrans.app K) =
+              (Scheme.strictLocalizationToBase s)).toCommSq).hom)).app K) =
     DerivedCategory.Q.map a ≫
       (DerivedCategory.quotientCompQhIso _).inv.app
         ((F.mapHomologicalComplex (.up ℤ)).obj D) ≫
@@ -123,7 +123,7 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
       (pullback.snd f (Scheme.strictLocalizationToBase s))).derivedPlus
-    (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom))
   have fac := Adjunction.derivedPlus_mateEquiv_app_fac
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f

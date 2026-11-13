@@ -51,7 +51,7 @@ private theorem properRestriction_shift {R S : Coefficients.{u}} (a : Change R S
     dsimp only [b, proEtaleRingRestrictionDerivedPullback, Iso.trans_hom, Iso.symm_hom]
     infer_instance
   let := hb
-  let m := (mateEquiv as' ar (TwoSquare.mk _ _ _ _ b.inv)).natTrans
+  let m := (mateEquiv as' ar (TwoSquare.mk _ _ _ _ b.inv))
   have hm : NatTrans.CommShift m ℤ := NatTrans.CommShift.mateEquiv as' ar _
   have heq : m = (proEtaleRingRestrictionDerivedDirectImage g
       (R.ring Y) (S.ring Y) (R.ring X) (S.ring X)
@@ -66,7 +66,7 @@ private theorem properRestriction_shift {R S : Coefficients.{u}} (a : Change R S
     simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_comp,
       Adjunction.right_triangle_components, CategoryTheory.Functor.map_id,
       Category.id_comp] at h
-    simpa only [m, ar, as', b, mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans,
+    simpa only [m, ar, as', b, mateEquiv_apply, TwoSquare.mk,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,

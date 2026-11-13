@@ -97,7 +97,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] HasDerivedCategory.standard
 
-set_option maxHeartbeats 700000 in
 -- Elaborating the independent coefficient universes needs extra definitional-equality steps.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Restricted reduction is tensor with a dualizable coefficient object.

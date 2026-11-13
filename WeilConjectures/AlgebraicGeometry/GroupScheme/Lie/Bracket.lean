@@ -739,43 +739,58 @@ theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := 
   rw [← (commute_tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
     aug₃_mon₃ mon₃_mul u q).eq, mul_inv_cancel_right]
 
-set_option synthInstance.maxHeartbeats 200000 in
--- The instances on points over `k[α][β][γ]` are slow to synthesize.
-set_option maxHeartbeats 1000000 in
--- The Hall–Witt identity unfolds three iterated dual-number rings.
-/-- The Hall–Witt identity for tangent vectors: the Hall–Witt identity of the group of points
-over `k[α][β][γ]`, applied to `x^{(α)}`, `y^{(β)}` and `z^{(γ)}`. -/
-theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
-    tangentBracket (tangentBracket x⁻¹ y) z * tangentBracket (tangentBracket z⁻¹ x) y *
-      tangentBracket (tangentBracket y⁻¹ z) x = 1 := by
-  apply tangentMon_injective
-  have hw := conj_commutatorElement_left_commutatorElement_mul (tangentAlp x) (tangentBet y)
-    (tangentGam z)
-  have e₁ : ⁅⁅(tangentAlp x)⁻¹, tangentBet y⁆, tangentGam z⁆ =
-      tangentMon (tangentBracket (tangentBracket x⁻¹ y) z) := by
+/-- The Hall–Witt identity after substitution into a local algebra, when the product of the
+three square-zero parameters kills the maximal ideal. -/
+private theorem tangentMap_tangentBracket_hallWitt (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0)
+    (h₂ : m₂ * m₂ = 0) (h₃ : m₃ * m₃ = 0) (hπ₁ : π m₁ = 0) (hπ₂ : π m₂ = 0)
+    (hπ₃ : π m₃ = 0) (m : A) (hπ : π m = 0) (hm : ∀ a, π a = 0 → m * a = 0)
+    (h : m₁ * m₂ * m₃ = m) (x y z : pointsKer G aug₁) :
+    tangentMap m (hm m hπ) hπ
+      (tangentBracket (tangentBracket x⁻¹ y) z * tangentBracket (tangentBracket z⁻¹ x) y *
+        tangentBracket (tangentBracket y⁻¹ z) x) = 1 := by
+  let f₁ := tangentMap (G := G) m₁ h₁ hπ₁
+  let f₂ := tangentMap (G := G) m₂ h₂ hπ₂
+  let f₃ := tangentMap (G := G) m₃ h₃ hπ₃
+  let t := tangentMap (G := G) m (hm m hπ) hπ
+  have hw := conj_commutatorElement_left_commutatorElement_mul (f₁ x) (f₂ y) (f₃ z)
+  have e₁ : ⁅⁅(f₁ x)⁻¹, f₂ y⁆, f₃ z⁆ =
+      t (tangentBracket (tangentBracket x⁻¹ y) z) := by
     rw [← map_inv]
-    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _ rfl _ _ _
-  have e₂ : ⁅⁅(tangentGam z)⁻¹, tangentAlp x⁆, tangentBet y⁆ =
-      tangentMon (tangentBracket (tangentBracket z⁻¹ x) y) := by
+    exact commutator_commutator_tangentMap m₁ m₂ m₃ h₁ h₂ h₃ hπ₁ hπ₂ hπ₃ m
+      (hm m hπ) hπ h _ _ _
+  have e₂ : ⁅⁅(f₃ z)⁻¹, f₁ x⁆, f₂ y⁆ =
+      t (tangentBracket (tangentBracket z⁻¹ x) y) := by
     rw [← map_inv]
-    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _
-      (by rw [mul_comm gam₃ alp₃, mul_right_comm]) _ _ _
-  have e₃ : ⁅⁅(tangentBet y)⁻¹, tangentGam z⁆, tangentAlp x⁆ =
-      tangentMon (tangentBracket (tangentBracket y⁻¹ z) x) := by
+    exact commutator_commutator_tangentMap m₃ m₁ m₂ h₃ h₁ h₂ hπ₃ hπ₁ hπ₂ m
+      (hm m hπ) hπ (by rw [mul_comm m₃ m₁, mul_right_comm, h]) _ _ _
+  have e₃ : ⁅⁅(f₂ y)⁻¹, f₃ z⁆, f₁ x⁆ =
+      t (tangentBracket (tangentBracket y⁻¹ z) x) := by
     rw [← map_inv]
-    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _
-      (by rw [mul_comm _ alp₃, ← mul_assoc]) _ _ _
+    exact commutator_commutator_tangentMap m₂ m₃ m₁ h₂ h₃ h₁ hπ₂ hπ₃ hπ₁ m
+      (hm m hπ) hπ (by rw [mul_comm _ m₁, ← mul_assoc, h]) _ _ _
   rw [e₁, e₂, e₃] at hw
-  have hc := tangentMon_conj (G := G)
+  have hc (u : pointsKer G aug₁) (q : pointsKer G π) : q * t u * q⁻¹ = t u := by
+    rw [← (commute_tangentMap m hπ hm u q).eq, mul_inv_cancel_right]
   have key : ∀ {P : Type u} [Group P] (a b c t₁ t₂ t₃ : P), a * t₁ * a⁻¹ = t₁ →
       c * t₂ * c⁻¹ = t₂ → b * t₃ * b⁻¹ = t₃ →
       a * t₁ * a⁻¹ * c * t₂ * c⁻¹ * b * t₃ * b⁻¹ = 1 → t₁ * t₂ * t₃ = 1 := by
     intro P _ a b c t₁ t₂ t₃ h₁ h₂ h₃ h
     rw [← h₁, ← h₂, ← h₃, ← h]
     group
-  have := key _ _ _ _ _ _ (hc _ _) (hc _ _) (hc _ _) hw
-  simp only [tangentMon, map_mul, map_one] at this ⊢
-  exact this
+  exact (map_mul t _ _).trans ((congrArg (· * t _) (map_mul t _ _)).trans
+    (key _ _ _ _ _ _ (hc _ _) (hc _ _) (hc _ _) hw))
+
+/-- The Hall–Witt identity for tangent vectors: the Hall–Witt identity of the group of points
+over `k[α][β][γ]`, applied to `x^{(α)}`, `y^{(β)}` and `z^{(γ)}`. -/
+theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
+    tangentBracket (tangentBracket x⁻¹ y) z * tangentBracket (tangentBracket z⁻¹ x) y *
+      tangentBracket (tangentBracket y⁻¹ z) x = 1 := by
+  apply tangentMon_injective
+  exact (tangentMap_tangentBracket_hallWitt
+    (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) (G := G)
+    alp₃ bet₃ gam₃ alp₃_mul_self bet₃_mul_self gam₃_mul_self
+    aug₃_alp₃ aug₃_bet₃ aug₃_gam₃ mon₃ aug₃_mon₃ mon₃_mul rfl x y z).trans
+    (map_one _).symm
 /-! ### The Lie algebra -/
 
 theorem tangentBracket_one_left (w : pointsKer G aug₁) : tangentBracket 1 w = 1 := by

@@ -218,7 +218,7 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
           exact Ideal.mem_map_of_mem _ (by
             rw [← IsLocalRing.residue_eq_zero_iff, map_natCast, CharP.cast_eq_zero])
         exact (IsLocalRing.mem_maximalIdeal _).1 h3 ((isUnit_map_iff H.ψ _).1 h1))
-      obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω₁ q
+      obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω₁ q
       have hζL : (primitiveRoots q L).Nonempty :=
         ⟨algebraMap Ω₁ L ζ, (mem_primitiveRoots hqp.pos).2
           (hζ.map_of_injective (algebraMap Ω₁ L).injective)⟩

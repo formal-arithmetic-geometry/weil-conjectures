@@ -325,7 +325,6 @@ lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap_app_eq
     Functor.whiskerRight_app, Category.id_comp]
   erw [Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 /-- **The candidate unit of `Rf_!(c) ⊣ Le^*` commutes with base change**: for a cartesian square
 `g' ≫ e = e' ≫ g` and the base change `c'` of the compactification `c`, the unit at

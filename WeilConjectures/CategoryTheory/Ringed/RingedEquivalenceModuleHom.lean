@@ -177,7 +177,6 @@ private theorem equivalence_of_underlying_adjunction
   have := hc
   exact b.toEquivalence.isEquivalence_functor
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the transported operation comparisons and the two lifted adjunctions.
 private theorem inverse_image_equivalence
     {C D : Type u} [SmallCategory C] [SmallCategory D]

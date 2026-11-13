@@ -16,6 +16,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 
 /-!
 # Étale cohomology of the constant sheaf `ℤ` on the spectrum of a field

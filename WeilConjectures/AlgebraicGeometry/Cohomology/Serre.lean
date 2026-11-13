@@ -20,7 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSectio
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Order.Int.ConditionallyCompleteOrder
 
 /-!
 # Serre's theorems on the cohomology of projective schemes

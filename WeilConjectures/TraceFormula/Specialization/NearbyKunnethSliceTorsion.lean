@@ -158,7 +158,6 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     ((leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
       (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
     h₀
-set_option maxHeartbeats 1000000 in
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the

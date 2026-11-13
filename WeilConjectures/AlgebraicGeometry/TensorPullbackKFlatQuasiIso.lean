@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.KFlat
 import WeilConjectures.Algebra.Homology.DerivedChangeOfRings
 import WeilConjectures.AlgebraicGeometry.InverseImageExactKFlat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Tensor pullback of quasi-isomorphisms between K-flat complexes
 

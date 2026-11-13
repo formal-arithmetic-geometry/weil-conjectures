@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage

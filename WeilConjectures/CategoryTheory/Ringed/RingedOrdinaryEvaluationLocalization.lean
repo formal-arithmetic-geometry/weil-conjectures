@@ -990,7 +990,6 @@ attribute [local irreducible] CoefficientClosedStructure.tensor
   CoefficientClosedStructure.transpose ringedOrdinaryHomComparison ringedDualTensorHom
   derivedInternalHomOfUniverses CoefficientTensorModels.iso ringedTensorUnitComplex
 
-set_option maxHeartbeats 400000 in
 -- The localized evaluation square needs more time after the upstream bump.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

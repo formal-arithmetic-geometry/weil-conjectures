@@ -74,13 +74,12 @@ adjunctions `g''^* ⊣ g''_*` and `g'^* ⊣ g'_*`, of the square isomorphism of 
 lemma baseChangeMap_eq_mateEquiv (sq : CommSq g' j' j g'') :
     ProEtale.baseChangeMap A sq =
       (mateEquiv (upperStarLowerStarAdjunction A g'') (upperStarLowerStarAdjunction A g')
-        (upperStarCompIso A sq.w).hom).natTrans := by
+        (upperStarCompIso A sq.w).hom) := by
   have h := iterated_mateEquiv_conjugateEquiv (upperStarLowerStarAdjunction A g'')
     (upperStarLowerStarAdjunction A g') (upperStarLowerStarAdjunction A j)
     (upperStarLowerStarAdjunction A j') (upperStarCompIso A sq.w).hom
   rw [conjugateEquiv_upperStarCompIso_hom A sq] at h
   rw [ProEtale.baseChangeMap]
-  congr 1
   rw [Equiv.symm_apply_eq]
   exact (congrArg (TwoSquare.mk _ _ _ _) h).symm
 
@@ -105,7 +104,8 @@ lemma mateEquiv_openImmersionLowerShriekBaseChangeMap [IsOpenImmersion j] [IsOpe
       (openImmersionLowerShriekBaseChangeMap A sq) = ProEtale.baseChangeMap A sq := by
     rw [openImmersionLowerShriekBaseChangeMap, Equiv.apply_symm_apply]
   rw [hc, baseChangeMap_eq_mateEquiv] at h
-  ext1 X
+  apply NatTrans.ext
+  funext X
   exact NatTrans.congr_app h X
 
 /-- The transport `Lf^* ≅ Lg^*` along `f = g` is induced by `f^* ≅ g^*`. -/

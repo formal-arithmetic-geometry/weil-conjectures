@@ -71,7 +71,6 @@ set_option hygiene false in
 /-- The coefficient ring `ℚ̲̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
-set_option maxHeartbeats 1000000 in
 -- matching the mate square unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **The mate of the Künneth square** (blueprint `lem-trf-trace-source-exchange`, Step 3): for
 `T = Lp₂'^* Rf_* B`, the mate `Lf^* Rp₁'_! T ⟶ Rp₁_! Lq^* T` of the composition isomorphism of

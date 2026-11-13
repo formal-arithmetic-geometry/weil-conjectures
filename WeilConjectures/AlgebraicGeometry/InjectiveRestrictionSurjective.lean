@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Injective sheaves have surjective restriction maps
 

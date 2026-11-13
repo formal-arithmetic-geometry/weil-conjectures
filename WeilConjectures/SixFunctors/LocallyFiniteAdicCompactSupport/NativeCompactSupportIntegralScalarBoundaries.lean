@@ -48,7 +48,68 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-set_option maxHeartbeats 400000 in
+private theorem native_integral_source_boundary [G : NativeGeometry.{u} l]
+    (target : Realization l Y) (stage : StageAction l D hl P c)
+    (E : Index l (PadicAlgCl l))
+    (K : finiteTorConstructibleIntegralCategory l (Coefficient l (PadicAlgCl l) E) X) :
+    IntegralSourceBoundary l D hl P c target E K
+      ((NativeIntegralBoundary.sourceIntegral l D hl P c target stage E).hom.app
+        ((PurCompactSupport.finiteTorIntegralInclusion l
+          (Coefficient l (PadicAlgCl l) E) X).obj K)) := by
+  let L := (PurCompactSupport.finiteTorIntegralInclusion l
+    (Coefficient l (PadicAlgCl l) E) X).obj K
+  let R := (sfRationalConstructibleLocalization l
+    (Coefficient l (PadicAlgCl l) E) X).obj L
+  obtain ⟨A, B, r, hr, h₀⟩ :=
+    NativeIntegralBoundary.sourceRational_component l D hl P c target stage E R
+  let a₀ := (target.J ⋙ (sections l Y).mapDerivedCategory).map
+    ((NativeIntegralBoundary.sourceRational l D hl P c stage E).hom.app R)
+  let a₁ := (target.integral E).hom.app
+    ((sfCompactSupportFiniteIntegralFunctor l D.k
+      (PurCompactSupport.coefficientPrimeUnit l D hl) c
+      (Coefficient l (PadicAlgCl l) E)).obj L)
+  let a₂ := (pbcDerivedExtend ((target.coefficient E).integralMap l Y)).map
+    ((sfQcqsCompactSupportRealization l (Coefficient l (PadicAlgCl l) E)
+      D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c).inv.app L)
+  let M₁ := (target.J ⋙ (sections l Y).mapDerivedCategory).obj
+    ((GeneralAlgebraicallyClosedCoefficients.inclusion
+      (l := l) (Ω := PadicAlgCl l) (Y := Y) E).obj
+      ((sfCompactSupportFiniteFunctor l D.k
+        (PurCompactSupport.coefficientPrimeUnit l D hl) c
+        (Coefficient l (PadicAlgCl l) E)).obj R))
+  let M₂ := (pbcDerivedExtend ((target.coefficient E).integralMap l Y)).obj
+    ((sfCompactSupportFiniteIntegralFunctor l D.k
+      (PurCompactSupport.coefficientPrimeUnit l D hl) c
+      (Coefficient l (PadicAlgCl l) E)).obj L).obj
+  refine ⟨A, B, r, ?_, M₁, M₂, a₀, a₁, a₂, h₀,
+    ArrowHEq.refl _, ArrowHEq.refl _, ?_⟩
+  · exact hr
+  · exact NativeIntegralBoundary.sourceIntegral_hom_app l D hl P c target stage E L
+
+omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
+private theorem native_integral_target_boundary [G : NativeGeometry.{u} l]
+    (source : Realization l X) (E : Index l (PadicAlgCl l))
+    (K : finiteTorConstructibleIntegralCategory l (Coefficient l (PadicAlgCl l) E) X) :
+    IntegralTargetBoundary l c source E K
+      ((NativeIntegralBoundary.targetIntegral l c source E).hom.app
+        ((PurCompactSupport.finiteTorIntegralInclusion l
+          (Coefficient l (PadicAlgCl l) E) X).obj K)) := by
+  let L := (PurCompactSupport.finiteTorIntegralInclusion l
+    (Coefficient l (PadicAlgCl l) E) X).obj K
+  let R := (sfRationalConstructibleLocalization l
+    (Coefficient l (PadicAlgCl l) E) X).obj L
+  let a₄ := (PurCompactSupport.image (nativeCoefficients l) c).map
+    ((source.integral E).inv.app L)
+  let a₅ := (operationTransport l c).inv.app
+    (source.J.obj ((GeneralAlgebraicallyClosedCoefficients.inclusion
+      (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj R))
+  let M₅ := (PurCompactSupport.image (nativeCoefficients l) c).obj
+    ((sections l X).mapDerivedCategory.obj
+      (source.J.obj ((GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj R)))
+  refine ⟨M₅, a₄, a₅, ArrowHEq.refl _, ArrowHEq.refl _, ?_⟩
+  exact NativeIntegralBoundary.targetIntegral_hom_app l c source E L
+
 -- The component formulas compare cached presentations of the coefficient categories.
 /-- Construct the two natural boundary isomorphisms and their prescribed components.
 Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15.
@@ -89,50 +150,9 @@ theorem native_integral_scalar_boundaries [G : NativeGeometry.{u} l]
     IntegralTargetBoundary l c source E K
       (d.hom.app ((PurCompactSupport.finiteTorIntegralInclusion l
         (Coefficient l (PadicAlgCl l) E) X).obj K)) := by
-  let b := NativeIntegralBoundary.sourceIntegral l D hl P c target stage E
-  let d := NativeIntegralBoundary.targetIntegral l c source E
-  refine ⟨b, d, fun K ↦ ?_⟩
-  dsimp only [rationalization, Functor.comp_obj]
-  let L := (PurCompactSupport.finiteTorIntegralInclusion l
-    (Coefficient l (PadicAlgCl l) E) X).obj K
-  let R := (sfRationalConstructibleLocalization l
-    (Coefficient l (PadicAlgCl l) E) X).obj L
-  obtain ⟨A, B, r, hr, h₀⟩ :=
-    NativeIntegralBoundary.sourceRational_component l D hl P c target stage E R
-  let a₀ := (target.J ⋙ (sections l Y).mapDerivedCategory).map
-    ((NativeIntegralBoundary.sourceRational l D hl P c stage E).hom.app R)
-  let a₁ := (target.integral E).hom.app
-    ((sfCompactSupportFiniteIntegralFunctor l D.k
-      (PurCompactSupport.coefficientPrimeUnit l D hl) c
-      (Coefficient l (PadicAlgCl l) E)).obj L)
-  let a₂ := (pbcDerivedExtend ((target.coefficient E).integralMap l Y)).map
-    ((sfQcqsCompactSupportRealization l (Coefficient l (PadicAlgCl l) E)
-      D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c).inv.app L)
-  let a₄ := (PurCompactSupport.image (nativeCoefficients l) c).map
-    ((source.integral E).inv.app L)
-  let a₅ := (operationTransport l c).inv.app
-    (source.J.obj ((GeneralAlgebraicallyClosedCoefficients.inclusion
-      (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj R))
-  let M₁ := (target.J ⋙ (sections l Y).mapDerivedCategory).obj
-    ((GeneralAlgebraicallyClosedCoefficients.inclusion
-      (l := l) (Ω := PadicAlgCl l) (Y := Y) E).obj
-      ((sfCompactSupportFiniteFunctor l D.k
-        (PurCompactSupport.coefficientPrimeUnit l D hl) c
-        (Coefficient l (PadicAlgCl l) E)).obj R))
-  let M₂ := (pbcDerivedExtend ((target.coefficient E).integralMap l Y)).obj
-    ((sfCompactSupportFiniteIntegralFunctor l D.k
-      (PurCompactSupport.coefficientPrimeUnit l D hl) c
-      (Coefficient l (PadicAlgCl l) E)).obj L).obj
-  let M₅ := (PurCompactSupport.image (nativeCoefficients l) c).obj
-    ((sections l X).mapDerivedCategory.obj
-      (source.J.obj ((GeneralAlgebraicallyClosedCoefficients.inclusion
-        (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj R)))
-  refine ⟨?_, ?_⟩
-  · refine ⟨A, B, r, ?_, M₁, M₂, a₀, a₁, a₂, h₀,
-      ArrowHEq.refl _, ArrowHEq.refl _, ?_⟩
-    · exact hr
-    · exact NativeIntegralBoundary.sourceIntegral_hom_app l D hl P c target stage E L
-  · refine ⟨M₅, a₄, a₅, ArrowHEq.refl _, ArrowHEq.refl _, ?_⟩
-    exact NativeIntegralBoundary.targetIntegral_hom_app l c source E L
+  exact ⟨NativeIntegralBoundary.sourceIntegral l D hl P c target stage E,
+    NativeIntegralBoundary.targetIntegral l c source E, fun K ↦
+      ⟨native_integral_source_boundary l D hl P c target stage E K,
+        native_integral_target_boundary l c source E K⟩⟩
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport

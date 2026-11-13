@@ -228,7 +228,7 @@ theorem Continuous.bijective_connectedComponentsMap [CompactSpace X] [CompactSpa
   · by_contra hc
     have hcl : IsClosed (Set.range hf.connectedComponentsMap) :=
       (isCompact_range hf.connectedComponentsMap_continuous).isClosed
-    obtain ⟨V, hV, hcV, hVsub⟩ := compact_exists_isClopen_in_isOpen hcl.isOpen_compl
+    obtain ⟨V, hV, hcV, hVsub⟩ := exists_isClopen_mem_of_isOpen hcl.isOpen_compl
       (fun h ↦ hc (by simpa using h))
     obtain ⟨y, rfl⟩ := ConnectedComponents.surjective_coe c
     obtain ⟨x, hx⟩ := hmeet _ (hV.preimage ConnectedComponents.continuous_coe) ⟨y, hcV⟩
@@ -251,7 +251,7 @@ variable {S T : Type*} [CommRing S] [CommRing T]
 theorem PrimeSpectrum.exists_isIdempotentElem_of_connectedComponents_mk_ne
     {p₁ p₂ : PrimeSpectrum T} (h : ConnectedComponents.mk p₁ ≠ ConnectedComponents.mk p₂) :
     ∃ c : T, IsIdempotentElem c ∧ c ∉ p₁.asIdeal ∧ c ∈ p₂.asIdeal := by
-  obtain ⟨V, hV, h₁, h₂⟩ := compact_exists_isClopen_in_isOpen
+  obtain ⟨V, hV, h₁, h₂⟩ := exists_isClopen_mem_of_isOpen
     (isClosed_singleton (x := ConnectedComponents.mk p₂)).isOpen_compl h
   obtain ⟨c, hc, hcV⟩ := PrimeSpectrum.isClopen_iff.mp
     (hV.preimage ConnectedComponents.continuous_coe)

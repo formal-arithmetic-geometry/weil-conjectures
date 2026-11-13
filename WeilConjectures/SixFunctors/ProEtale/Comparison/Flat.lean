@@ -47,7 +47,6 @@ lemma coverPreserving_toProEt :
 
 variable {X} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale and
 -- pro-étale sites take long to synthesize
 /-- Blueprint `lem-exc-constant-inverse-image-flat`: Constant-coefficient inverse image
@@ -66,7 +65,6 @@ theorem flat_comparisonUpperStar_obj {F : Sheaf X.smallEtaleTopology (ModuleCat.
     ObjectProperty.flat ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F) :=
   flat_sheafPullback_obj (coverPreserving_toProEt X) hF
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- as for `flat_comparisonUpperStar_obj`
 /-- The comparison pullback `ν^*` preserves flat sheaves of `Λ`-modules, for a Noetherian ring
 `Λ` (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). -/

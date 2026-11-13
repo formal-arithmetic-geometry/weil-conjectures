@@ -61,7 +61,6 @@ private theorem transportComposition
   rw [← Category.assoc ((pg j j').hom.app _), cpg]
   rw [cph]
 
-set_option maxHeartbeats 800000 in
 -- The concrete derived-module functors require more than the default elaboration budget.
 /-- Composition for the specified normalized comparison family.
 

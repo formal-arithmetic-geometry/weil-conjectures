@@ -88,14 +88,14 @@ private theorem mate_of_unit
     (α : F ⋙ L' ⟶ L ⋙ G) (β : R ⋙ F ⟶ G ⋙ R')
     (h : ∀ P, b.homEquiv _ _ (α.app P) =
       F.map (a.unit.app P) ≫ β.app (L.obj P)) :
-    (mateEquiv a b (.mk _ _ _ _ α)).natTrans = β := by
+    (mateEquiv a b (.mk _ _ _ _ α)) = β := by
   apply (mateEquiv a b).symm.injective
   rw [Equiv.symm_apply_apply]
   apply NatTrans.ext
   funext P
   apply (b.homEquiv _ _).injective
   change b.homEquiv _ _ (α.app P) = b.homEquiv _ _
-    ((((mateEquiv a b).symm (.mk _ _ _ _ β)).natTrans).app P)
+    ((((mateEquiv a b).symm (.mk _ _ _ _ β))).app P)
   exact (h P).trans (unit_mateEquiv_symm a b (.mk _ _ _ _ β) P)
 
 private def transposeTransition
@@ -113,7 +113,7 @@ private theorem tensor_transition
     {TB : C ⥤ D} {RB : D ⥤ C} (b : TB ⊣ RB)
     {Fm : A ⥤ C} {Fn : B₀ ⥤ D}
     (γ : TA ⋙ Fn ≅ Fm ⋙ TB) (δ : RA ⋙ Fm ≅ Fn ⋙ RB)
-    (hmate : (mateEquiv a b (.mk _ _ _ _ γ.inv)).natTrans = δ.hom)
+    (hmate : (mateEquiv a b (.mk _ _ _ _ γ.inv)) = δ.hom)
     {Nm : C} {Nn : D} {Mm : A} {Mn : B₀}
     (em : Nm ≅ Fm.obj Mm) (en : Nn ≅ Fn.obj Mn)
     (τM : Mm ⟶ RA.obj Mn) (τN : Nm ⟶ RB.obj Nn)
@@ -182,9 +182,9 @@ private theorem left_tensor_transition_of_right
     (γ : TA ⋙ Fn ≅ Fm ⋙ TB)
     (rm : Gs ⋙ EAm ≅ EBm ⋙ Gm) (rn : Gs ⋙ EAn ≅ EBn ⋙ Gn)
     (δ : TB ⋙ Gn ≅ Gm ⋙ TA)
-    (hm : (mateEquiv asys am (.mk _ _ _ _ em.inv)).natTrans = rm.hom)
-    (hn : (mateEquiv asys an (.mk _ _ _ _ en.inv)).natTrans = rn.hom)
-    (hγ : (mateEquiv am an (.mk _ _ _ _ γ.hom)).natTrans = δ.inv)
+    (hm : (mateEquiv asys am (.mk _ _ _ _ em.inv)) = rm.hom)
+    (hn : (mateEquiv asys an (.mk _ _ _ _ en.inv)) = rn.hom)
+    (hγ : (mateEquiv am an (.mk _ _ _ _ γ.hom)) = δ.inv)
     (tA : EAm ⋙ TA ⟶ EAn) (tB : EBm ⋙ TB ⟶ EBn)
     (ht : ∀ H, Gn.map (tB.app H) ≫ rn.inv.app H =
       δ.hom.app (EBm.obj H) ≫ TA.map (rm.inv.app H) ≫ tA.app (Gs.obj H))
@@ -193,10 +193,6 @@ private theorem left_tensor_transition_of_right
       γ.hom.app (EAm.obj K) ≫ TB.map (em.inv.app K) ≫ tB.app (Fs.obj K) := by
   apply left_tensor_transition asys am an em en γ tA tB ?_ K
   intro H
-  change TA.map (((mateEquiv asys am (.mk _ _ _ _ em.inv)).natTrans).app H) ≫
-      ((mateEquiv am an (.mk _ _ _ _ γ.hom)).natTrans).app (EBm.obj H) ≫
-        Gn.map (tB.app H) =
-    tA.app (Gs.obj H) ≫ ((mateEquiv asys an (.mk _ _ _ _ en.inv)).natTrans).app H
   rw [hm, hn, hγ]
   apply (cancel_epi (TA.map (rm.inv.app H))).1
   rw [← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
@@ -220,7 +216,7 @@ private theorem scalar_inverse_mate
     (hc : conjugateIsoEquiv (am.comp b) (a.comp an) γ = δ)
     (hβ : ∀ P, am.homEquiv _ _ (β.hom.app P) =
       RA.map (an.unit.app P) ≫ δ.inv.app (Fn.obj P)) :
-    (mateEquiv a b (.mk _ _ _ _ γ.inv)).natTrans = β.hom := by
+    (mateEquiv a b (.mk _ _ _ _ γ.inv)) = β.hom := by
   apply (mateEquiv an am).injective
   have hh := iterated_mateEquiv_conjugateEquiv a b am an
     (.mk _ _ _ _ γ.inv)
@@ -233,7 +229,7 @@ end MateCalculus
 
 private theorem proper_scalar_mate {m n : ℕ} (h : n ≤ m) :
     (mateEquiv (S.PZ.scalar h).derivedAdj (S.PY.scalar h).derivedAdj
-      (.mk _ _ _ _ (B.properProjection h).inv)).natTrans =
+      (.mk _ _ _ _ (B.properProjection h).inv)) =
     (S.properDerived.restrictedDirect h).hom := by
   rw [B.properMate]
   rw [iterated_mateEquiv_conjugateEquiv
@@ -247,7 +243,7 @@ private theorem proper_scalar_mate {m n : ℕ} (h : n ≤ m) :
 
 private theorem inverse_scalar_mate {m n : ℕ} (h : n ≤ m) :
     (mateEquiv (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
-      (.mk _ _ _ _ (S.openDerived.derivedTensor h).inv)).natTrans =
+      (.mk _ _ _ _ (S.openDerived.derivedTensor h).inv)) =
     (S.openDerived.restrictedInverse h).hom := by
   exact scalar_inverse_mate (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
     (S.openDerived.level m).adjunction (S.openDerived.level n).adjunction

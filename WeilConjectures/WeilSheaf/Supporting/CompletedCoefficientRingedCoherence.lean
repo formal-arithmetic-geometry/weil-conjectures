@@ -319,7 +319,7 @@ private theorem completed_inverseMate_app
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     {G : A ⥤ C} {H : B ⥤ D} (a : L ⊣ R) (b : L' ⊣ R')
     (β : R ⋙ G ⟶ H ⋙ R') (X : A) :
-    (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)).natTrans).app X =
+    (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β))).app X =
       L'.map (G.map (a.unit.app X)) ≫ L'.map (β.app (L.obj X)) ≫
         b.counit.app (H.obj (L.obj X)) := by
   simp [mateEquiv]
@@ -330,7 +330,7 @@ private theorem completed_inverseMate_adjunct
     {G : A ⥤ C} {H : B ⥤ D} (a : L ⊣ R) (b : L' ⊣ R')
     (β : R ⋙ G ⟶ H ⋙ R') {X : A} {Y : B} (f : L.obj X ⟶ Y) :
     b.homEquiv _ _
-      ((((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)).natTrans).app X ≫ H.map f) =
+      ((((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β))).app X ≫ H.map f) =
       G.map (a.homEquiv _ _ f) ≫ β.app Y := by
   rw [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc]
   have hu := unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ β) X
@@ -347,10 +347,9 @@ private theorem completed_iteratedInverseMate_isIso
     {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (c : F₁ ⊣ U₁) (d : F₂ ⊣ U₂)
-    (α : TwoSquare U₂ R₂ R₁ U₁) [IsIso α.natTrans] :
-    IsIso (((mateEquiv a b).symm ((mateEquiv d c).symm α)).natTrans) := by
+    (α : TwoSquare U₂ R₂ R₁ U₁) [IsIso α] :
+    IsIso (((mateEquiv a b).symm ((mateEquiv d c).symm α))) := by
   rw [iterated_mateEquiv_conjugateEquiv_symm]
-  change IsIso ((conjugateEquiv (a.comp d) (c.comp b)).symm α.natTrans)
   infer_instance
 
 private abbrev completedRestrictFunctor {W : Scheme.{t}} (U : W.ProEt) :=
@@ -597,12 +596,12 @@ private def completedSliceGamma {T W : Scheme.{t}} (g : T ⟶ W) (U : W.ProEt) :
 private def completedSliceBeta {T W : Scheme.{t}} (g : T ⟶ W) (U : W.ProEt) :=
   ((mateEquiv (completedRestrictionAdj.{t, u} ((proEtaleBaseChange g).obj U))
     (completedRestrictionAdj.{t, u} U)).symm
-      (TwoSquare.mk _ _ _ _ (completedSliceGamma.{t, u} g U).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (completedSliceGamma.{t, u} g U).hom))
 
 private def completedSliceLambda {T W : Scheme.{t}} (g : T ⟶ W) (U : W.ProEt) :=
   ((mateEquiv (completedRingAdj.{t, u} g)
     (completedRingAdj.{t, u} (completedRingSliceArrow g U))).symm
-      (TwoSquare.mk _ _ _ _ (completedSliceBeta.{t, u} g U))).natTrans
+      (TwoSquare.mk _ _ _ _ (completedSliceBeta.{t, u} g U)))
 
 private theorem completedProEt_comp_left {W : Scheme.{t}} {A B C : W.ProEt}
     (f : A ⟶ B) (g : B ⟶ C) : (f ≫ g).left = f.left ≫ g.left := rfl

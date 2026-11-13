@@ -713,7 +713,6 @@ private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
           (((stageSystem l Ω W).T h).obj Z)).hom :=
   fun h X Y Z ↦ commonScalarAssociator l Ω W h X Y Z
 
-set_option maxHeartbeats 400000 in
 -- assembling the common-stage associator unfolds long composites of stage comparisons
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -148,7 +148,7 @@ noncomputable abbrev globalSectionsFrobeniusHom (G : WeilSheaf k₀ l X) :
     (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj G.obj.carrier.X ⟶
       (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj G.obj.carrier.X :=
   ((ProEtale.globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app G.obj.carrier.X).inv ≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app G.obj.carrier.X).inv ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map G.obj.str.hom)
 
 omit [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
@@ -157,7 +157,7 @@ lemma globalSectionsMap_comp_frobeniusHom {G G' : WeilSheaf k₀ l X} (f : G ⟶
     globalSectionsMap f ≫ globalSectionsFrobeniusHom G' =
       globalSectionsFrobeniusHom G ≫ globalSectionsMap f := by
   have h₁ := ((ProEtale.globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality
     ((AdicSheaf.forget _).map f.hom.hom.f))
   have h₂ := congrArg (fun g ↦ (Sheaf.Γ _ (WeilCoefficients.{u} l)).map
     ((AdicSheaf.forget _).map g)) f.hom.hom.h

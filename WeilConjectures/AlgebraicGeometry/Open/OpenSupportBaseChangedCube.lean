@@ -121,7 +121,7 @@ theorem openSupportBaseChanged_cube
     (e.hom.app K)
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hG
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc]
   rw [supportFactor_hom, supportFactor_hom]

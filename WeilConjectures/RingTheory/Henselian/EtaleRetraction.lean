@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.StandardEtale
 public import Mathlib.RingTheory.Etale.QuasiFinite
+public import Mathlib.RingTheory.Unramified.LocalRing
 public import Mathlib.RingTheory.Unramified.LocalStructure
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian

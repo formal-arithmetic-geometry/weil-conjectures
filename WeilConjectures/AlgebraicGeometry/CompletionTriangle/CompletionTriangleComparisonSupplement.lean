@@ -282,6 +282,7 @@ private theorem quotientUnit_eq (n : ℕ) :
 private theorem scalar_eq (data : PrincipalReduction.PrincipalReductionConeData l E X)
     (hdata : data.IsCanonical l E X) : data.d = uniformizerEnd l E := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  apply End.ext
   apply Mod.Hom.ext
   apply (sheafToPresheaf _ _).map_injective
   apply NatTrans.ext
@@ -297,9 +298,9 @@ private theorem coefficient_ses (n : ℕ) :
         𝟙 (𝟙_ (Modules l E X))) ≫ finiteUnit l E X n = 0,
       (ShortComplex.mk _ _ w).ShortExact := by
   let e := regularPullbackIso l E X
-  let d := (pullback l E X).map (uniformizerEnd l E ^ (n + 1))
+  let d := (pullback l E X).map (uniformizerEnd l E ^ (n + 1)).asHom
   let p := (pullback l E X).map (reductionHom l E (n + 1))
-  let S := (ShortComplex.mk (uniformizerEnd l E ^ (n + 1)) (reductionHom l E (n + 1))
+  let S := (ShortComplex.mk (uniformizerEnd l E ^ (n + 1)).asHom (reductionHom l E (n + 1))
     (reduction_zero l E (n + 1))).map (pullback l E X)
   have hs : S.ShortExact := (pointResolution l E (n + 1)).map_of_exact (pullback l E X)
   have hscalar : unitEndOnX l E X (uniformizerEnd l E ^ (n + 1)) •
@@ -1458,7 +1459,6 @@ private def roosTriangleIso
   let := cs
   exact TowerCalculus.coneTriangleIso roosF f (Φ f) (hc.2 f).1 (hc.2 f).2
 
-set_option maxHeartbeats 400000 in
 -- The final cone-triangle transport elaborates large mapping-cone triangle isomorphisms.
 /-- Principal completion descends with its specified augmentation, coherent shifts,
 and morphism of distinguished triangles.

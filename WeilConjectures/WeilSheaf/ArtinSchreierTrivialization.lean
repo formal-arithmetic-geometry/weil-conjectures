@@ -59,7 +59,6 @@ noncomputable abbrev affineLine.artinSchreierImage (ψ : AddChar k₀ (PadicAlgC
     ProEtale.AdicSheaf l Ā :=
   image (affineLine.artinSchreierIdempotentHom l ψ)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The underlying sheaf of the image of the projector `e_ψ` in Weil sheaves is the image of the
 underlying morphism. -/

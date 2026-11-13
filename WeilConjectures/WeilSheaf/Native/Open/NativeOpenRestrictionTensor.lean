@@ -109,7 +109,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 omit [Fact (ringChar k₀ ≠ l)] in
 private lemma tensor_str (A B : ProEtaleWeilSheaf k₀ l Z) :
     (tensor k₀ l Z A B).str =
-      ProEtale.tensorStr (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+      ProEtale.tensorStr (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
         A.str B.str := by
   unfold ProEtale.tensorStr
   exact Endofunctor.IsoAlgebra.mk_str _ _

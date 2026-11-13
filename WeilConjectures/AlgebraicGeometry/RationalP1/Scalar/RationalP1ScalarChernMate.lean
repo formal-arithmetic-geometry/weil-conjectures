@@ -183,7 +183,7 @@ private theorem local_square_adjuncts
         (mateEquiv ad ad' (TwoSquare.mk _ _ _ _ θ)).app B ≫ R'.map d =
       j ≫ (ad'.homEquiv _ _) y := by
   rw [Adjunction.homEquiv_unit, G.map_comp]
-  have hn := (mateEquiv ad ad' (TwoSquare.mk _ _ _ _ θ)).natTrans.naturality x
+  have hn := (mateEquiv ad ad' (TwoSquare.mk _ _ _ _ θ)).naturality x
   change G.map (R.map x) ≫
       (mateEquiv ad ad' (TwoSquare.mk _ _ _ _ θ)).app B =
     (mateEquiv ad ad' (TwoSquare.mk _ _ _ _ θ)).app (L.obj A) ≫

@@ -82,7 +82,7 @@ noncomputable def push {X Y : Scheme.{u}} (f : X ⟶ Y) :
   (mateEquiv (residueExchangeAdjunction (integralCoeff ℓ E) f)
       (residueExchangeAdjunction
         (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f)
-      (TwoSquare.mk _ _ _ _ (c.pull f).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (c.pull f).inv))
 
 /-- The defining counit equation for the actual direct-image comparison.
 Source: Mathlib, mateEquiv_counit.

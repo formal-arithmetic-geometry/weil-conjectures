@@ -59,7 +59,6 @@ private theorem roos_equation_congr
   rw [hf, hg, hc]
   exact h
 
-set_option maxHeartbeats 800000 in
 -- Check the three specified coefficient transports together.
 /-- Realizing the strict tensor-tower composition square gives the full Roos square.
 Source: blueprint Steps 1 and 5; Stacks 07A4, 0941

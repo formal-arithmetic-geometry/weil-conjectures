@@ -60,7 +60,6 @@ private theorem mixedSections_eq_naturality
   erw [CategoryTheory.Functor.map_id]
   erw [Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 500000 in
 -- Give the path calculation fixed natural transformations rather than expanded mate data.
 private theorem mixedSections_compare_paths
     {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')

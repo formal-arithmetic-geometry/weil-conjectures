@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageFibreCohomologyNegative
 import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageFibreCohomologyZero
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Fibre Betti numbers for a descended line bundle
 

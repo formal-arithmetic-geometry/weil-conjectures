@@ -116,12 +116,12 @@ private theorem reverse_mate_comp
     (hc : ∀ M : B₀, eh.hom.app M ≫ R₂.map (e'.hom.app M) =
       e.hom.app (R₀.obj M) ≫ Lg.map (ef.hom.app M) ≫ eg.hom.app (Lf'.obj M)) :
     Adjunction.ExchangeCompCompatible
-      (((mateEquiv adj₀ adj₁).symm (TwoSquare.mk _ _ _ _ ef.hom)).natTrans)
-      (((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ eg.hom)).natTrans)
-      (((mateEquiv adj₀ adj₂).symm (TwoSquare.mk _ _ _ _ eh.hom)).natTrans) e e' := by
-  let kf := ((mateEquiv adj₀ adj₁).symm (TwoSquare.mk _ _ _ _ ef.hom)).natTrans
-  let kg := ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ eg.hom)).natTrans
-  let kh := ((mateEquiv adj₀ adj₂).symm (TwoSquare.mk _ _ _ _ eh.hom)).natTrans
+      (((mateEquiv adj₀ adj₁).symm (TwoSquare.mk _ _ _ _ ef.hom)))
+      (((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ eg.hom)))
+      (((mateEquiv adj₀ adj₂).symm (TwoSquare.mk _ _ _ _ eh.hom))) e e' := by
+  let kf := ((mateEquiv adj₀ adj₁).symm (TwoSquare.mk _ _ _ _ ef.hom))
+  let kg := ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ eg.hom))
+  let kh := ((mateEquiv adj₀ adj₂).symm (TwoSquare.mk _ _ _ _ eh.hom))
   have hf (M : A₀) : Lf.map (adj₀.unit.app M) ≫ ef.hom.app (S₀.obj M) =
       adj₁.unit.app (Lf.obj M) ≫ R₁.map (kf.app M) :=
     unit_mateEquiv_symm adj₀ adj₁ (TwoSquare.mk _ _ _ _ ef.hom) M
@@ -169,12 +169,12 @@ private theorem coefficient_existsUnique
     (S' : A ⥤ C) (R' : C ⥤ A) (adjT : S' ⊣ R')
     (e : R ⋙ Q ≅ Q' ⋙ R')
     (hk : IsIso (((mateEquiv adjX adjT).symm
-      (TwoSquare.mk _ _ _ _ e.hom)).natTrans)) (K : A) :
+      (TwoSquare.mk _ _ _ _ e.hom)))) (K : A) :
     ∃! c : S.obj (P.obj K) ⟶ P'.obj (S'.obj K),
       Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) ≫
         R'.map (Q'.map c ≫ adjB.counit.app (S'.obj K)) =
           adjA.counit.app K ≫ adjT.unit.app K := by
-  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom))
   have : IsIso k := hk
   let t := inv (k.app (P.obj K)) ≫ S'.map (adjA.counit.app K)
   let c := adjB.homEquiv _ _ t
@@ -217,16 +217,16 @@ private theorem coefficient_eq_mate
     (S' : A ⥤ C) (R' : C ⥤ A) (adjT : S' ⊣ R')
     (e : R ⋙ Q ≅ Q' ⋙ R')
     (hk : IsIso (((mateEquiv adjX adjT).symm
-      (TwoSquare.mk _ _ _ _ e.hom)).natTrans))
+      (TwoSquare.mk _ _ _ _ e.hom))))
     (K : A) (c : S.obj (P.obj K) ⟶ P'.obj (S'.obj K))
     (hu : ∀ d, Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) ≫
       R'.map (Q'.map d ≫ adjB.counit.app (S'.obj K)) =
         adjA.counit.app K ≫ adjT.unit.app K → d = c) :
     c = (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _
-      (@asIso _ _ _ _ _ hk).inv)).natTrans.app K := by
+      (@asIso _ _ _ _ _ hk).inv)).app K := by
   symm
   apply hu
-  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom))
   have hunit := unit_mateEquiv_symm adjX adjT
     (TwoSquare.mk _ _ _ _ e.hom) (P.obj K)
   change Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) =
@@ -248,7 +248,7 @@ private theorem coefficient_naturality
     (S' : A ⥤ C) (R' : C ⥤ A) (adjT : S' ⊣ R')
     (e : R ⋙ Q ≅ Q' ⋙ R')
     (hk : IsIso (((mateEquiv adjX adjT).symm
-      (TwoSquare.mk _ _ _ _ e.hom)).natTrans))
+      (TwoSquare.mk _ _ _ _ e.hom))))
     (c : ∀ K, S.obj (P.obj K) ⟶ P'.obj (S'.obj K))
     (hu : ∀ K (d : S.obj (P.obj K) ⟶ P'.obj (S'.obj K)),
       Q.map (adjX.unit.app (P.obj K)) ≫ e.hom.app (S.obj (P.obj K)) ≫
@@ -256,9 +256,9 @@ private theorem coefficient_naturality
           adjA.counit.app K ≫ adjT.unit.app K → d = c K)
     {K L : A} (h : K ⟶ L) :
     S.map (P.map h) ≫ c L = c K ≫ P'.map (S'.map h) := by
-  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom))
   have : IsIso k := hk
-  let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv)).natTrans
+  let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv))
   have heq (M : A) : γ.app M = c M := by
     apply hu M
     have hunit := unit_mateEquiv_symm adjX adjT
@@ -528,18 +528,18 @@ private theorem reverse_chain
     (he : ∀ M, e₀₂.app M = Q₀.map (r.inv.app M) ≫
       e₀₁.app (R₂₁.obj M) ≫ U₁₀.map (e₁₂.app M) ≫ t.hom.app (Q₂.obj M))
     (M : A₀) :
-    ((mateEquiv a₀₂ b₀₂).symm (TwoSquare.mk _ _ _ _ e₀₂)).natTrans.app M =
+    ((mateEquiv a₀₂ b₀₂).symm (TwoSquare.mk _ _ _ _ e₀₂)).app M =
       (Adjunction.leftAdjointCompIso b₀₁ b₁₂ b₀₂ t).inv.app (Q₀.obj M) ≫
-      T₁₂.map (((mateEquiv a₀₁ b₀₁).symm (TwoSquare.mk _ _ _ _ e₀₁)).natTrans.app M) ≫
-      ((mateEquiv a₁₂ b₁₂).symm (TwoSquare.mk _ _ _ _ e₁₂)).natTrans.app (S₀₁.obj M) ≫
+      T₁₂.map (((mateEquiv a₀₁ b₀₁).symm (TwoSquare.mk _ _ _ _ e₀₁)).app M) ≫
+      ((mateEquiv a₁₂ b₁₂).symm (TwoSquare.mk _ _ _ _ e₁₂)).app (S₀₁.obj M) ≫
       Q₂.map ((Adjunction.leftAdjointCompIso a₀₁ a₁₂ a₀₂ r).hom.app M) := by
-  let k₀₁ := ((mateEquiv a₀₁ b₀₁).symm (TwoSquare.mk _ _ _ _ e₀₁)).natTrans
-  let k₁₂ := ((mateEquiv a₁₂ b₁₂).symm (TwoSquare.mk _ _ _ _ e₁₂)).natTrans
+  let k₀₁ := ((mateEquiv a₀₁ b₀₁).symm (TwoSquare.mk _ _ _ _ e₀₁))
+  let k₁₂ := ((mateEquiv a₁₂ b₁₂).symm (TwoSquare.mk _ _ _ _ e₁₂))
   apply (b₀₂.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]
   have hu : Q₀.map (a₀₂.unit.app M) ≫ e₀₂.app (S₀₂.obj M) =
       b₀₂.unit.app (Q₀.obj M) ≫ U₂₀.map
-        (((mateEquiv a₀₂ b₀₂).symm (TwoSquare.mk _ _ _ _ e₀₂)).natTrans.app M) :=
+        (((mateEquiv a₀₂ b₀₂).symm (TwoSquare.mk _ _ _ _ e₀₂)).app M) :=
     unit_mateEquiv_symm a₀₂ b₀₂ (TwoSquare.mk _ _ _ _ e₀₂) M
   rw [← hu, he]
   slice_lhs 1 2 => rw [← Q₀.map_comp, unit_comp_hom a₀₁ a₁₂ a₀₂ r M, Q₀.map_comp, Q₀.map_comp]
@@ -590,9 +590,9 @@ private theorem mate_chain
     (γ : U ⋙ Q'' ⟶ Q ⋙ U') (c : S ⋙ T ≅ U) (c' : S' ⋙ T' ≅ U')
     (hγ : ∀ M : B, γ.app M = Q''.map (c.inv.app M) ≫ β.app (S.obj M) ≫
       T'.map (α.app M) ≫ c'.hom.app (Q.obj M)) (K : A) :
-    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ γ)).natTrans.app K =
-      c.inv.app (P.obj K) ≫ T.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α)).natTrans.app K) ≫
-        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ β)).natTrans.app (S'.obj K) ≫
+    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ γ)).app K =
+      c.inv.app (P.obj K) ≫ T.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α)).app K) ≫
+        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ β)).app (S'.obj K) ≫
         P''.map (c'.hom.app K) := by
   apply Adjunction.ext_of_comp_counit (adj := adj'')
   simp only [Functor.map_comp, Category.assoc]
@@ -600,7 +600,7 @@ private theorem mate_chain
   rw [mateEquiv_counit]
   rw [reassoc_of% (mateEquiv_counit adj' adj'' (TwoSquare.mk _ _ _ _ β) (S'.obj K)), hγ]
   simp only [Category.assoc]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   erw [β.naturality_assoc]
   simp only [Functor.comp_map]
   slice_rhs 3 4 => rw [← T'.map_comp, mateEquiv_counit, T'.map_comp]
@@ -714,7 +714,6 @@ private theorem e_unit {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom) M
   have hm := underived_mate φ f
-  dsimp only [TwoSquare.natTrans] at hm
   rw [hm] at h
   simpa [lowerStarRestrictScalarsIso] using h.symm
 
@@ -755,18 +754,13 @@ private theorem underived_mate
     {T X : Scheme.{u}} (f : T ⟶ X) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)) =
         𝟙 (lowerStar (ModuleCat.{u + 1} B) f ⋙
           Sheaf.restrictScalars (Scheme.ProEt.topology X) φ) := by
   have := @cachedEtaleGroth.{u}
   have := @cachedEtaleSheafify.{u}
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) φ)
-    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))).natTrans = _
   rw [iterated_mateEquiv_conjugateEquiv]
   simp only [upperStarRestrictScalarsIso, conjugateIsoEquiv_symm_apply_hom, Iso.refl_hom,
     TwoSquare.mk]
@@ -790,7 +784,6 @@ private theorem e_unit {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom) M
   have hm := underived_mate φ f
-  dsimp only [TwoSquare.natTrans] at hm
   rw [hm] at h
   simpa using h.symm
 
@@ -1090,7 +1083,7 @@ private theorem finiteCoefficientDirectImageMap_eq_mate
     finiteCoefficientDirectImageMap φ f K =
       (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
         (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-        (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackEtaleIso φ f).hom)).natTrans.app K := by
+        (TwoSquare.mk _ _ _ _ (ProEtale.scalarPullbackEtaleIso φ f).hom)).app K := by
   rw [ProEtale.scalarPullbackEtaleIso_eq_fromMate]
   have := @cachedEtaleGroth.{u}
   have := @cachedEtaleSheafify.{u}
@@ -1423,7 +1416,7 @@ private theorem finiteCoefficientDirectImageMap_eq_mate
           u + 2, u + 2, u + 2, u + 2}
         (derivedUpperStarLowerStarAdjunction.{u + 2, u} (ModuleCat.{u + 1} A) f)
         (derivedUpperStarLowerStarAdjunction.{u + 2, u} (ModuleCat.{u + 1} B) f)
-        (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso.{u} φ f).hom)).natTrans.app K := by
+        (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso.{u} φ f).hom)).app K := by
   have := @cachedEtaleGroth.{u}
   have := @cachedEtaleSheafify.{u}
   let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
@@ -1707,11 +1700,11 @@ private theorem restriction_exact_mate
         (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
         (TwoSquare.mk _ _ _ _
           (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ f)).hom)
-        ).natTrans := by
+        ) := by
   rw [mapDerivedUpperStarLowerStarAdjunction_eq, mapDerivedUpperStarLowerStarAdjunction_eq]
   ext K
   simp only [scalarRestrictionDirectImageMap, scalarRestrictionPullbackIso,
-    mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
       Category.id_comp, Functor.comp_map,
@@ -1774,7 +1767,7 @@ private theorem restriction_plus_mate
   rw [← derived_mate φ f]
   rw [← Adjunction.derivedAdjunctionPlus_eq_derivedPlus,
     ← Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
-  simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
       Category.id_comp, Functor.comp_map,
@@ -1810,7 +1803,6 @@ private theorem restriction_plus_mate
   repeat first
     | erw [CategoryTheory.Functor.map_id]
     | erw [Category.id_comp]
-    | erw [Category.comp_id]
   have ha : (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).derivedAdjunction.ofNatIsoLeft
       (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorIsoMapDerivedCategory =
       mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f := by

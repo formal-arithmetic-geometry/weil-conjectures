@@ -13,6 +13,12 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.CategoryTheory.Category.Preorder
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import WeilConjectures.CategoryTheory.SiteSystemStrictificationObstruction
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.Data.Set.Finite.Basic
+public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Refutation of the finite-precoverage strictification interface

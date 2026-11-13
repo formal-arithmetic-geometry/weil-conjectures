@@ -36,8 +36,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 section StalkAt
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-    (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+    (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
 
 /-- The linear isomorphism between the stalks at `s` induced by an isomorphism of Weil
 sheaves. -/

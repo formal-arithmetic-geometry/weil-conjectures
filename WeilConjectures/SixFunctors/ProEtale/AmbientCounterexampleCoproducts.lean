@@ -99,7 +99,6 @@ theorem exists_forall_hom_ne_zero_rightDerivedLowerStar (hE : 0 < IsAbelianVarie
     fun h ↦ hy ?_
   rw [← hz, h, map_zero]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `HasSheafCompose` and `PreservesSheafification` on the small pro-étale site
 -- take long to synthesize
 /-- Blueprint `sk-rem-sf-fullcd-scope` (ii): for the structure morphism `a_E` of an elliptic

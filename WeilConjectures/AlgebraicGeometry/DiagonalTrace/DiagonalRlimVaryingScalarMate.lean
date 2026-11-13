@@ -63,7 +63,7 @@ theorem diagonalRlimVaryingScalarMate (l : ℕ) [Fact l.Prime]
     IsIso (((mateEquiv g.ordinaryAdjunction
       (((upperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).whiskerRight ℕᵒᵖ))).symm
-        (TwoSquare.mk _ _ _ _ d.hom)).natTrans) := by
+        (TwoSquare.mk _ _ _ _ d.hom))) := by
   let am := ((upperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).whiskerRight ℕᵒᵖ)
   let aa := upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
@@ -71,7 +71,7 @@ theorem diagonalRlimVaryingScalarMate (l : ℕ) [Fact l.Prime]
   let FX := diagonalForget l X
   let P := lowerStar AddCommGrpCat.{u + 1} f
   let δ := ((mateEquiv g.ordinaryAdjunction am).symm
-    (TwoSquare.mk _ _ _ _ d.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ d.hom))
   have hde (n : ℕ) (M : SpTowerShriek.S l (ULift.{u} (Padic l)) X) :
       FS.map ((d.hom.app M).app (op n)) =
         (levelUnderlying l f b g rS rX n).hom.app M := by

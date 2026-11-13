@@ -31,7 +31,6 @@ variable {R K Ω : Type*} [CommRing R] [IsDedekindDomain R] [Field K] [Algebra R
   [IsFractionRing R K] [Field Ω] [Algebra K Ω] [Algebra R Ω] [IsScalarTower R K Ω]
   [IsGalois K Ω]
 
-set_option maxHeartbeats 1000000 in
 -- the elaboration of the integral closure instances is slow
 /-- **Kummer elements fixed by inertia have unramified valuation.** Let `x ∈ Ω` be nonzero with
 `x ^ N = f ∈ K`, fixed by the inertia group of a maximal ideal `Q` of the integral closure of `R`

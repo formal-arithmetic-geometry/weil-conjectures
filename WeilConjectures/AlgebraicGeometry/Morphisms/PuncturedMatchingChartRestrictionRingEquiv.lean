@@ -131,7 +131,7 @@ private theorem matching_chart_kernel
   obtain ⟨n, hn⟩ := a.property
   refine ⟨n, ?_⟩
   have hb := congrArg b ha
-  simp only [map_smul, smul_zero, map_zero, b.apply_symm_apply,
+  simp only [map_smul, smul_zero, LinearEquiv.map_zero, b.apply_symm_apply,
     Submonoid.smul_def, ← hn, g', Fin.cons_zero, Algebra.smul_def, map_pow] at hb
   have hbase : algebraMap A D.matchingRing = D.baseMap.hom := rfl
   rw [hbase] at hb

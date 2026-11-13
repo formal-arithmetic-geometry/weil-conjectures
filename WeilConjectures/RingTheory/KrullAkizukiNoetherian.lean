@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Ring.Hom.InjSurj
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.FractionRing

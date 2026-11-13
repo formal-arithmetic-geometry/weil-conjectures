@@ -62,7 +62,7 @@ private lemma model_factorization
           (F.pfId c.Z).hom.app ((F.sh c.i).obj K)) := by
   let T := factorTriangle c
   have hw : (𝟙 c.Z) ≫ (𝟙 c.Z) = (𝟙 c.Z) ≫ (𝟙 c.Z) := by simp
-  have : IsIso (F.baseChange (𝟙 c.Z) (𝟙 c.Z) (𝟙 _) (𝟙 c.Z) hw).natTrans :=
+  have : IsIso (F.baseChange (𝟙 c.Z) (𝟙 c.Z) (𝟙 _) (𝟙 c.Z) hw) :=
     CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_vert_isIso ⟨hw⟩)
   have h₁ := congr_app (F.exchange_id_vert (𝟙 c.Z) hw) ((F.sh c.i).obj K)
   have h₂ := congr_app (F.shComp'_id_right c.i) K

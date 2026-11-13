@@ -13,6 +13,7 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.Algebra.Field.ULift
 import WeilConjectures.RingTheory.PolynomialCoefficientKernelRescaling
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Polynomial parameters with stable multiplication kernels

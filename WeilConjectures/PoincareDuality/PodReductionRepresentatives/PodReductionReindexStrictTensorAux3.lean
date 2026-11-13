@@ -97,7 +97,6 @@ theorem coefficientTensorGenerator_restrict
 
 end TotalTensor
 
-set_option maxHeartbeats 1000000 in
 -- The transported comparison is unfolded through two equality transports.
 /-- The transported system tensor comparison sends the inverse-image unit of a pure tensor to
 the tensor of the two inverse-image units.

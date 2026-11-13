@@ -42,7 +42,6 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
 attribute [local irreducible] CondensedRing.lowerStar proEtaleRingModuleDirectImage
   NativeScalarRingModel.integralEquivalence NativeScalarRingModel.closureEquivalence
 
-set_option maxHeartbeats 800000 in
 -- Normalizing concrete site functors elaborates both ringed-site presentations.
 /-- Exact localization carries the ordinary scalar cube to the specified inverse derived cube.
 Source: Stacks, Cohomology on Sites, Tag 0D6E; step 4 of the native scalar cube.

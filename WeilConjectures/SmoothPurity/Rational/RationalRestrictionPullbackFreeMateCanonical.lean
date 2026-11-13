@@ -47,7 +47,7 @@ theorem rationalRestrictionPullback_freeMate_canonical
     IsIso (((mateEquiv
       (rationalScalarExtension_leftAdjunction l E F ι Y)
       (rationalScalarExtension_leftAdjunction l E F ι X)).symm
-      (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).natTrans.app
+      (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).app
         ((sfRationalScalarExtension l E Y 0
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).obj M)) := by
   let TX := sfRationalScalarExtension l E X 0

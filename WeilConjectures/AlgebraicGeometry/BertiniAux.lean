@@ -309,7 +309,7 @@ variable {k : Type u} [Field k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k)) 
 /-- Under `X₀ ×_k k̄ ≅ Spec (k̄ ⊗[k] R)`, the geometric Galois Frobenius `𝟙 × σ` of the geometric
 fiber acts on global sections as `σ ⊗ 𝟙`. -/
 theorem geometricGaloisFrobenius_hom_comp_geometricFiberIsoSpec_hom [Fintype k] :
-    f.geometricGaloisFrobenius.hom ≫ (geometricFiberIsoSpec f eR heR).hom =
+    f.geometricGaloisFrobenius.asIso.hom ≫ (geometricFiberIsoSpec f eR heR).hom =
       (geometricFiberIsoSpec f eR heR).hom ≫
         Spec.map (ofHom (geometricFrobeniusTensor k R).toRingHom) := by
   refine (isPullback_Spec_tensorProduct k (AlgebraicClosure k) R).hom_ext ?_ ?_
@@ -337,7 +337,7 @@ theorem geometricGaloisFrobenius_hom_comp_geometricFiberIsoSpec_hom [Fintype k] 
 /-- Under `X₀ ×_k k̄ ≅ Spec (k̄ ⊗[k] R)`, the `m`-th power of the geometric Galois Frobenius acts
 on global sections as `(σ ⊗ 𝟙) ^ m`. -/
 theorem geometricGaloisFrobenius_pow_hom_comp_geometricFiberIsoSpec_hom [Fintype k] (m : ℕ) :
-    (f.geometricGaloisFrobenius ^ m).hom ≫ (geometricFiberIsoSpec f eR heR).hom =
+    (f.geometricGaloisFrobenius ^ m).asIso.hom ≫ (geometricFiberIsoSpec f eR heR).hom =
       (geometricFiberIsoSpec f eR heR).hom ≫
         Spec.map (ofHom (geometricFrobeniusTensor k R ^ m).toRingHom) := by
   induction m with
@@ -347,7 +347,7 @@ theorem geometricGaloisFrobenius_pow_hom_comp_geometricFiberIsoSpec_hom [Fintype
     rw [pow_zero, pow_zero, h, Spec.map_id, Category.comp_id]
     exact Category.id_comp _
   | succ m ih =>
-    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom, Category.assoc, ih,
+    rw [pow_succ, Aut.mul_asIso, Iso.trans_hom, Category.assoc, ih,
       reassoc_of% geometricGaloisFrobenius_hom_comp_geometricFiberIsoSpec_hom, ← Spec.map_comp,
       pow_succ']
     rfl

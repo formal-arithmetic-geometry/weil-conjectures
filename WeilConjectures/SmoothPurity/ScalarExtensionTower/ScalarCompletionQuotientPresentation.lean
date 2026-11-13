@@ -34,7 +34,6 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   constantSheaf completedIntegralCommRingSheafUnrestricted coefficientSequenceCommRingSheaf
   coefficientSequenceEvaluation coefficientSequenceRestriction
 
-set_option maxHeartbeats 800000 in
 -- Naturality across the large coefficient-site instance expressions needs extra elaboration fuel.
 private theorem restrictedSection_map (Y : Scheme.{u})
     {D C : coefficientSequenceModules l E Y} (f : D ⟶ C) (n : ℕ)

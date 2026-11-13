@@ -243,7 +243,6 @@ private theorem scalar_good (W : Scheme.{u}) (P : Complex l E W) (hP : Good l E 
       (coefficientSequenceCommRingSheaf.{u, u} l L W)
       (((scalar l E L ι W).obj P).X n)).symm (h.2 n)
 
-set_option maxHeartbeats 800000 in
 -- Compare the restricted tensor models and counits simultaneously.
 
 /-- The derived comparison is determined by the same strict sigma on good representatives.

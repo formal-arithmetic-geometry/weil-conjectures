@@ -253,7 +253,7 @@ theorem subsingleton_H_adicConstantSheafAb_of_two_mul_lt {K : Type u} [Field K] 
         Λ.down.ballSubgroup_succ_le Λ.down.eq_zero_of_forall_mem_ballSubgroup q hq
 
 instance : IsAddTorsionFree (ULift.{u + 1} (PadicAlgCl l)) where
-  nsmul_right_injective _ hn _ _ h :=
+  eq_of_nsmul_eq_nsmul_of_addCommute _ hn _ _ _ h :=
     ULift.ext (nsmul_right_injective hn (congrArg ULift.down h))
 
 /-- **Cohomological dimension of `ℚ̄_ℓ`.** For a scheme `S` of finite type and of dimension at

@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.Flat.Stability
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Topology.Sheaves.Presheaf
+public import Mathlib.Algebra.Module.LocalizedModule.Away
 
 /-!
 # Sections of quasi-coherent modules over basic opens of an affine open

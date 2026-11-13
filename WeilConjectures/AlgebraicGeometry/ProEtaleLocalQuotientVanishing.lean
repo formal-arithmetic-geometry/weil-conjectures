@@ -60,30 +60,28 @@ variable {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
 private lemma reverse_mate (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂)
     (α : TwoSquare F₁ L₁ L₂ F₂) (β : TwoSquare U₂ R₂ R₁ U₁)
-    (h : conjugateEquiv (adj₁.comp adj₄) (adj₃.comp adj₂) α.natTrans = β.natTrans) :
-    (mateEquiv adj₁ adj₂ α).natTrans =
-      ((mateEquiv adj₄ adj₃).symm β).natTrans := by
+    (h : conjugateEquiv (adj₁.comp adj₄) (adj₃.comp adj₂) α = β) :
+    (mateEquiv adj₁ adj₂ α) =
+      ((mateEquiv adj₄ adj₃).symm β) := by
   have he := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄ α
   rw [h] at he
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv adj₄ adj₃).eq_symm_apply.mpr
-  apply TwoSquare.ext
-  intro K
+  refine NatTrans.ext (funext fun K ↦ ?_)
   exact congrArg (fun t => t.app K) he
 
 private lemma mate_zero [HasZeroMorphisms C] [HasZeroMorphisms D]
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [Functor.PreservesZeroMorphisms R₂]
     (α : TwoSquare F₁ L₁ L₂ F₂) {X : A} {Y : B} {P : C}
     (q : P ⟶ F₁.obj X) (c : L₁.obj X ⟶ Y)
-    [Mono ((mateEquiv adj₁ adj₂ α).natTrans.app Y)]
-    (h : L₂.map q ≫ α.natTrans.app X ≫ F₂.map c = 0) :
+    [Mono ((mateEquiv adj₁ adj₂ α).app Y)]
+    (h : L₂.map q ≫ α.app X ≫ F₂.map c = 0) :
     q ≫ F₁.map ((adj₁.homEquiv X Y) c) = 0 := by
-  let γ := (mateEquiv adj₁ adj₂ α).natTrans
+  let γ := (mateEquiv adj₁ adj₂ α)
   have hn := γ.naturality c
   change F₁.map (R₁.map c) ≫ γ.app Y = γ.app (L₁.obj X) ≫ R₂.map (F₂.map c) at hn
   have hu := unit_mateEquiv adj₁ adj₂ α X
   change F₁.map (adj₁.unit.app X) ≫ γ.app (L₁.obj X) =
-    adj₂.unit.app (F₁.obj X) ≫ R₂.map (α.natTrans.app X) at hu
+    adj₂.unit.app (F₁.obj X) ≫ R₂.map (α.app X) at hu
   have hq := (adj₂.unit_naturality q).symm
   change q ≫ adj₂.unit.app (F₁.obj X) = adj₂.unit.app P ≫ R₂.map (L₂.map q) at hq
   apply (cancel_mono (γ.app Y)).mp
@@ -102,7 +100,7 @@ private lemma mate_square_iso {W A B X : Scheme.{u}} {p : W ⟶ A} {s : W ⟶ B}
     (h : IsPullback p s i j) :
     IsIso (mateEquiv (upperStarLowerStarAdjunction Ab.{u + 1} j)
       (upperStarLowerStarAdjunction Ab.{u + 1} p)
-      (TwoSquare.mk _ _ _ _ (upperStarCompIso Ab.{u + 1} h.w).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (upperStarCompIso Ab.{u + 1} h.w).hom)) := by
   have he := reverse_mate
     (upperStarLowerStarAdjunction Ab.{u + 1} j)
     (upperStarLowerStarAdjunction Ab.{u + 1} p)
@@ -170,10 +168,10 @@ theorem localSubobjectQuotientMap_zero_of_compatible
   let θ := TwoSquare.mk _ _ _ _
     (upperStarCompIso Ab.{u + 1} (pullback.condition (f := U.f i) (g := U.f j))).hom
   have hθ : IsIso (mateEquiv (upperStarLowerStarAdjunction Ab.{u + 1} (U.f j))
-      (upperStarLowerStarAdjunction Ab.{u + 1} p) θ).natTrans :=
+      (upperStarLowerStarAdjunction Ab.{u + 1} p) θ) :=
     mate_square_iso (IsPullback.of_hasPullback (U.f i) (U.f j))
   have : Mono ((mateEquiv (upperStarLowerStarAdjunction Ab.{u + 1} (U.f j))
-      (upperStarLowerStarAdjunction Ab.{u + 1} p) θ).natTrans.app (cokernel (q j))) :=
+      (upperStarLowerStarAdjunction Ab.{u + 1} p) θ).app (cokernel (q j))) :=
     inferInstance
   apply mate_zero (upperStarLowerStarAdjunction Ab.{u + 1} (U.f j))
     (upperStarLowerStarAdjunction Ab.{u + 1} p) θ (q i) (cokernel.π (q j))

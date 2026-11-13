@@ -69,22 +69,21 @@ private lemma isIso_map_counit_of_local_adjunction
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
     (ai : L₁ ⊣ R₁) (ai' : L₂ ⊣ R₂) (aj : F₁ ⊣ U₁) (aj' : F₂ ⊣ U₂)
-    (α : TwoSquare U₂ R₂ R₁ U₁) [IsIso α.natTrans]
-    (hb : IsIso (((mateEquiv aj' aj).symm α).natTrans))
+    (α : TwoSquare U₂ R₂ R₁ U₁) [IsIso α]
+    (hb : IsIso (((mateEquiv aj' aj).symm α)))
     (hc : IsIso ai'.counit) (M : B) : IsIso (F₂.map (ai.counit.app M)) := by
   let β := (mateEquiv aj' aj).symm α
   let γ := (mateEquiv ai ai').symm β
-  have : IsIso β.natTrans := hb
-  have : IsIso γ.natTrans := by
+  have : IsIso β := hb
+  have : IsIso γ := by
     dsimp [γ, β]
     rw [iterated_mateEquiv_conjugateEquiv_symm ai ai' aj aj']
-    change IsIso ((conjugateEquiv (ai.comp aj') (aj.comp ai')).symm α.natTrans)
     infer_instance
   have h := mateEquiv_counit_symm ai ai' β M
   have : IsIso ai'.counit := hc
   have : IsIso (L₂.map (β.app M) ≫ ai'.counit.app (F₂.obj M)) := inferInstance
   rw [h] at this
-  exact IsIso.of_isIso_comp_left (γ.natTrans.app _) _
+  exact IsIso.of_isIso_comp_left (γ.app _) _
 
 section
 
@@ -162,14 +161,14 @@ private lemma isIso_closedCounit_localization {U' U Z' Z : Scheme.{u}}
   let aj' := localizationRestrictionLowerStarAdjunction C j' inferInstance
   let α := TwoSquare.mk _ _ _ _ (squareLowerStarIso C sq.toCommSq).hom
   let β := (mateEquiv aj' aj).symm α
-  have hβ : β.natTrans = localizationRestrictionBaseChangeMap
+  have hβ : β = localizationRestrictionBaseChangeMap
       C sq.toCommSq := by
     apply (mateEquiv aj' aj).injective
     change (mateEquiv aj' aj) ((mateEquiv aj' aj).symm α) = _
     rw [Equiv.apply_symm_apply]
     exact (mateEquiv_localizationRestrictionBaseChangeMap
       C sq.toCommSq).symm
-  have : IsIso β.natTrans := by
+  have : IsIso β := by
     rw [hβ]
     exact isIso_localizationRestrictionBaseChangeMap_of_isPullback _ sq
   exact isIso_map_counit_of_local_adjunction ai ai' aj aj' α this hc F

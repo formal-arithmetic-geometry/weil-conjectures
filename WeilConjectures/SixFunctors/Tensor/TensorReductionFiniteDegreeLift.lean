@@ -71,7 +71,6 @@ attribute [local irreducible] tensorReductionStrictConeMap
 
 attribute [local irreducible] pullbackTensorFiniteAdjunction
 
-set_option maxHeartbeats 600000 in
 -- Keep the fixed coefficient models folded while elaborating the projection equation.
 private theorem transpose_projection (W : Scheme.{u})
     (M : integralTowerModules l E W) (N : coefficientSequenceModules l E W)
@@ -181,7 +180,6 @@ private theorem transpose_coordinate
   simpa only [Category.assoc] using (congrArg (fun a ↦ β ≫ a) ht).symm.trans ha
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Several fixed model identifications occur in the two adjunctions.
 /-- In each degree the prescribed finite tensor maps are evaluations of one
 sequence-module map. Source: Stacks 07A4 and 0941. Transport the strict tensor cone

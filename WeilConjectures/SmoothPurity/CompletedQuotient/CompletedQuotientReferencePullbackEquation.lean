@@ -50,7 +50,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local implicit_reducible] value expression IntegralCoherence.value scalarQuotients
-  pullbackTensorRestrictedTower CategoryTheory.TwoSquare pullbackTensorReferencePullback
+  pullbackTensorRestrictedTower pullbackTensorReferencePullback
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   pullbackTensorSequenceDerived
   integralComparisonDerivedSequencePullback
