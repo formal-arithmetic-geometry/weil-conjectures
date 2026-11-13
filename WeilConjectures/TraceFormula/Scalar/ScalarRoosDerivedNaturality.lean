@@ -60,7 +60,7 @@ attribute [local implicit_reducible] coefficientSequenceLimit
 attribute [local irreducible] completedDerivedScalarExtension
   completedOrdinaryScalarExtension completedScalarCounit
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Fraction naturality contains large but fixed coefficient-functor signatures.
 /-- A natural ordinary scalar map of whole towers is natural on derived morphisms
 once the source cochain counit becomes invertible after total limit.
