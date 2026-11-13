@@ -1127,6 +1127,50 @@ section
 
 attribute [local semireducible] ConstantCompletion.pull
 
+-- Scalar insertion along a ring isomorphism is the unit of an equivalence.
+private theorem scalarInsertion_isIso (U : Site.{u})
+    {R S : Sheaf U.topology CommRingCat.{u}} (t : R ⟶ S) [IsIso t]
+    (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.insertion t M) := by
+  have : (ConstantCompletion.res t).IsEquivalence :=
+    ConstantCompletion.restrictScalars_equivalence
+      ((sheafCompose U.topology (forget₂ CommRingCat RingCat)).mapIso (asIso t))
+  have := (ConstantCompletion.scalarAdj t).isEquivalence_left_of_isEquivalence_right
+  have := (ConstantCompletion.scalarAdj t).unit_isIso_of_L_fully_faithful
+  rw [ConstantCompletion.insertion_eq_unit]
+  infer_instance
+
+set_option profiler true in
+private theorem restrictionPullAdjunct_exists {V U : Site.{u}} (f : Morphism V U)
+    {R S : Sheaf V.topology CommRingCat.{u}} {R' S' : Sheaf U.topology CommRingCat.{u}}
+    (a : R ⟶ S) (b : R' ⟶ S')
+    (c : f.algebra.rings.obj R ⟶ R') (d : f.algebra.rings.obj S ⟶ S')
+    (hs : f.algebra.rings.map a ≫ d = c ≫ b) :
+    ∃ q₀ : ConstantCompletion.res a ⋙ (f.algebra.algebra R).modules ⟶
+        ConstantCompletion.pull f.algebra d ⋙
+          ConstantCompletion.res b ⋙ ConstantCompletion.res c,
+      ∀ M : ConstantCompletion.Mod S,
+        (ConstantCompletion.underlying (f.algebra.rings.obj R)).map (q₀.app M) =
+          (f.algebra.algebra R).moduleUnderlying.hom.app
+              ((ConstantCompletion.res a).obj M) ≫
+            ConstantCompletion.pullInsertion f.algebra d M := by
+  let F := f.algebra
+  let q₀ := ConstantCompletion.inverseRestriction F a ≫
+    Functor.whiskerLeft (F.algebra _).modules
+      (Functor.whiskerRight (ConstantCompletion.scalarAdj d).unit
+        (ConstantCompletion.res (F.rings.map a))) ≫
+    Functor.whiskerLeft (ConstantCompletion.pull F d)
+      (ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom
+  refine ⟨q₀, ?_⟩
+  intro M
+  ext W x
+  dsimp only [q₀, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  change ((ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom.app
+    _).val.app W _ = _
+  rw [ConstantCompletion.squareRestriction_apply]
+  rw [ConstantCompletion.pullInsertion, ConstantCompletion.insertion_eq_unit]
+  rfl
+
 -- Prove the scalar-restriction comparison over an abstract coefficient square.
 -- This keeps quotient-ring constructions out of the normalization argument.
 set_option profiler true in
@@ -1142,12 +1186,7 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
           (ConstantCompletion.underlying R').map (e.hom.app M) =
         ConstantCompletion.pullInsertion f.algebra d M := by
   let F := f.algebra
-  let q₀ := ConstantCompletion.inverseRestriction F a ≫
-    Functor.whiskerLeft (F.algebra _).modules
-      (Functor.whiskerRight (ConstantCompletion.scalarAdj d).unit
-        (ConstantCompletion.res (F.rings.map a))) ≫
-    Functor.whiskerLeft (ConstantCompletion.pull F d)
-      (ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom
+  obtain ⟨q₀, hq₀⟩ := restrictionPullAdjunct_exists f a b c d hs
   let q : ConstantCompletion.res a ⋙ ConstantCompletion.pull F c ⟶
       ConstantCompletion.pull F d ⋙ ConstantCompletion.res b :=
     { app := fun M ↦ ((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M)
@@ -1169,33 +1208,15 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
         (((ConstantCompletion.scalarAdj c).homEquiv _ _)
           (((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M))) = _
     rw [Equiv.apply_symm_apply]
-    have hq₀ : (ConstantCompletion.underlying _).map (q₀.app M) =
-        (F.algebra _).moduleUnderlying.hom.app ((ConstantCompletion.res a).obj M) ≫
-          ConstantCompletion.pullInsertion F d M := by
-      ext W x
-      dsimp only [q₀, NatTrans.comp_app, Functor.whiskerLeft_app,
-        Functor.whiskerRight_app]
-      change ((ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom.app
-        _).val.app W _ = _
-      rw [ConstantCompletion.squareRestriction_apply]
-      rw [ConstantCompletion.pullInsertion, ConstantCompletion.insertion_eq_unit]
-      rfl
     rw [hq₀]
     simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-  have hinsert {R : Sheaf U.topology CommRingCat.{u}}
-      {S : Sheaf U.topology CommRingCat.{u}} (t : R ⟶ S) [IsIso t]
-      (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.insertion t M) := by
-    let r := sheafCompose U.topology (forget₂ CommRingCat RingCat)
-    have : (ConstantCompletion.res t).IsEquivalence :=
-      ConstantCompletion.restrictScalars_equivalence (r.mapIso (asIso t))
-    rw [ConstantCompletion.insertion_eq_unit]
-    infer_instance
   have hp {R : Sheaf V.topology CommRingCat.{u}}
       {S : Sheaf U.topology CommRingCat.{u}} (t : F.rings.obj R ⟶ S) [IsIso t]
       (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.pullInsertion F t M) := by
-    have := hinsert t ((F.algebra R).modules.obj M)
+    have := scalarInsertion_isIso U t ((F.algebra R).modules.obj M)
     dsimp only [ConstantCompletion.pullInsertion]
     infer_instance
+  clear_value q
   have hqi (M : ConstantCompletion.Mod S) : IsIso (q.app M) := by
     have := hp c ((ConstantCompletion.res a).obj M)
     have := hp d M
@@ -1210,11 +1231,10 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
   apply Iso.ext
   apply NatTrans.ext
   funext M
-  apply ((ConstantCompletion.scalarAdj c).homEquiv _ _).injective
-  apply (ConstantCompletion.underlying (F.rings.obj _)).map_injective
-  apply (cancel_epi ((F.algebra _).moduleUnderlying.inv.app
+  have := hp c ((ConstantCompletion.res a).obj M)
+  apply (ConstantCompletion.underlying R').map_injective
+  apply (cancel_epi (ConstantCompletion.pullInsertion F c
     ((ConstantCompletion.res a).obj M))).mp
-  rw [ConstantCompletion.pull_homEquiv, ConstantCompletion.pull_homEquiv]
   exact (he M).trans (hn M).symm
 
 
