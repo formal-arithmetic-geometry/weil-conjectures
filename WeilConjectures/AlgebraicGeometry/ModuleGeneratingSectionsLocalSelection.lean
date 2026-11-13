@@ -23,6 +23,7 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option profiler true in
 private theorem epi_overMap_of_factorization
     {X : TopCat.{u}} (R : X.Sheaf RingCat.{u})
     {V U W : TopologicalSpace.Opens X} (hUV : U ≤ V) (hWU : W ≤ U)
@@ -36,12 +37,12 @@ private theorem epi_overMap_of_factorization
     [Epi (l ≫ (overMap R (homOfLE hUV)).map p)] :
     Epi ((overMap R (homOfLE (hWU.trans hUV))).map (m ≫ p)) := by
   let F := overMap R (homOfLE hWU)
-  have : Epi (F.map (l ≫ (overMap R (homOfLE hUV)).map p)) := F.map_epi _
+  have hE : Epi (F.map (l ≫ (overMap R (homOfLE hUV)).map p)) := F.map_epi _
   have hfac : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map (m ≫ p) =
       F.map (l ≫ (overMap R (homOfLE hUV)).map p) := by
     rw [Functor.map_comp, ← Category.assoc, ha, Functor.map_comp]
     rfl
-  exact epi_of_epi_fac hfac
+  exact @epi_of_epi_fac _ _ _ _ _ a _ _ hE hfac
 
 set_option profiler true in
 -- Comparing iterated slice restrictions requires additional elaboration steps.
