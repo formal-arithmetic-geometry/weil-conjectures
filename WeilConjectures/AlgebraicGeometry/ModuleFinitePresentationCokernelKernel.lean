@@ -38,7 +38,7 @@ private theorem finiteType_of_data
   exact ⟨q.shrink, this⟩
 
 open SheafOfModules in
-private theorem finiteType_of_finite_generators
+private theorem finiteType_of_generatingSectionsData
     {C : Type u} [Category.{u} C] [HasBinaryProducts C]
     {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -244,7 +244,7 @@ theorem kernel_composite_cokernel_isFiniteType
   let Y : RingedSpace := X.restrict U.isOpenEmbedding
   -- The finite relation family generates the kernel of the presentation map.
   have hP : (kernel P.generators.π).IsFiniteType :=
-    finiteType_of_finite_generators P.relations
+    finiteType_of_generatingSectionsData (R := R.over U) P.relations
   have hG : (G.over U).IsFiniteType := by
     exact finiteType_pushforward_leftAdjoint (Over.forget U) (𝟙 _) (Iso.refl _)
   have : (E.functor.obj (G.over U)).IsFiniteType := finiteType_equivOver U _
