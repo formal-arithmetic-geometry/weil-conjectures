@@ -61,6 +61,7 @@ lemma compIsoTransfer_mapHomotopyCategory_subfieldExtendScalars (k : PadicSubfie
     (HomotopyCategory.quotient _ _).map ((subfieldExtendScalarsCocone X ℓ hE hF Y).ι.app k) :=
   Adjunction.compIsoTransfer_mapHomotopyCategory_quotient _ _ _ _ _ Y _ fun _ ↦ rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Unifying the generic `compIsoTransfer_comparison` with the derived categories of module objects
 -- (and their many instances) is slow.
