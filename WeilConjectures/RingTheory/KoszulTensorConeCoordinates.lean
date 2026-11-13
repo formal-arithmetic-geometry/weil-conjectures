@@ -115,6 +115,7 @@ private theorem boundary_assembly_zero {R : Type u} [CommRing R] {r : ℕ}
   rfl
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Tensoring the dependent exterior-power equivalences needs extra elaboration heartbeats.
 /-- Source: Stacks Project, Tags 0628 and 0629
 (blueprint: lem-weil-pbc-koszul-tensor-cone-coordinates).

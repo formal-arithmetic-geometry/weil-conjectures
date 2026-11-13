@@ -28,6 +28,7 @@ namespace Algebra
 set_option maxHeartbeats 800000 in
 -- Quotient and corner structures require many dependent instance comparisons.
 set_option backward.isDefEq.respectTransparency false in
+set_option trace.profiler true in
 /-- A localization isomorphism transfers a specified section factor of the closed fibre,
 provided its parameter is already idempotent in the smaller closed fibre.
 
