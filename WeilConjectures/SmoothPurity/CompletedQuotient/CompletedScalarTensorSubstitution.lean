@@ -157,9 +157,10 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
     S TE TL (prime_unit l W) M N
     ((constructibleIntegralTensor l E W).obj (M, N)).property.1
   have hn := (ScalarExtensionTower.derivedSigma_existsUnique l E L ι W SE SL).exists.choose_spec
-  change ScalarExtensionTower.DerivedSigmaModel l E L ι W SE SL
-    (ScalarExtensionTower.derivedSigma l E L ι W SE SL) at hn
-  obtain ⟨_, _, hnorm⟩ := hn A B hA hB
+  with_unfolding_all
+    change ScalarExtensionTower.DerivedSigmaModel l E L ι W SE SL
+      (ScalarExtensionTower.derivedSigma l E L ι W SE SL) at hn
+  rcases hn A B hA hB with ⟨_, _, hnorm⟩
   let FE := integralComparisonDerivedSequenceScalar l E L ι W
   let LE := coefficientSequenceLimit l E W
   let LL := coefficientSequenceLimit l L W
