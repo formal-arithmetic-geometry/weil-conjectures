@@ -87,6 +87,7 @@ private theorem inverse_normalization_of_surjective {A B C : Type*} (e : A ≃ B
   obtain ⟨a, rfl⟩ := hr c
   rw [← h a, e.symm_apply_apply]
 
+set_option profiler true in
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
 (blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology-normalization)
