@@ -90,9 +90,25 @@ lemma etaleIsoTorsorVal_vadd {U : X.Etaleᵒᵖ} (a : X.gmSheaf.obj.obj U)
         etaleIsoTorsorVal L x :=
   rfl
 
+private lemma etaleIsoTorsorVal_restrict {U V : X.Etaleᵒᵖ} (f : U ⟶ V)
+    (x : (etaleIsoTorsor L).sheaf.obj.obj U) :
+    etaleIsoTorsorVal L ((etaleIsoTorsor L).sheaf.obj.map f x) =
+      (etaleHom (unitObj X) L).map f (etaleIsoTorsorVal L x) :=
+  rfl
+
+private lemma etaleHom_map_comp {M N K : modulesPseudofunctor.obj (.mk (op X))}
+    {U V : X.Etaleᵒᵖ} (f : U ⟶ V) (φ : (etaleHom M N).obj U)
+    (ψ : (etaleHom N K).obj U) :
+    (etaleHom M K).map f (φ ≫ ψ) =
+      (etaleHom M N).map f φ ≫ (etaleHom N K).map f ψ :=
+  Pseudofunctor.presheafHom_map_comp ((toProEt X ⋙ ProEt.forget X).map f.unop) φ ψ
+
+private lemma etaleHom_map_inv {M N : modulesPseudofunctor.obj (.mk (op X))}
+    {U V : X.Etaleᵒᵖ} (f : U ⟶ V) (φ : (etaleHom M N).obj U) [IsIso φ] :
+    (etaleHom N M).map f (inv φ) = inv ((etaleHom M N).map f φ) :=
+  Pseudofunctor.presheafHom_map_inv ((toProEt X ⋙ ProEt.forget X).map f.unop) φ
+
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the defeq checks through the small étale and pro-étale sites are slow
 /-- **The torsor `Isom(𝒪, L)` determines `L`.** An isomorphism of `𝔾ₘ`-torsors
 `Isom(𝒪, L) ≅ Isom(𝒪, L')` comes from an isomorphism `L ≅ L'`: the local isomorphisms
 `t⁻¹ ≫ e(t)`, for local trivialisations `t` of `L`, do not depend on `t` and glue. -/
@@ -118,18 +134,13 @@ lemma nonempty_iso_of_etaleIsoTorsor_iso
       F.obj.map f (g U x) = g V ((etaleIsoTorsor L).sheaf.obj.map f x) := by
     intro U V f x
     apply ULift.ext
-    have : IsIso x.down.1 := x.down.2
-    have hn := NatTrans.naturality_apply e.iso.hom.hom f x
-    have : IsIso ((modulesPseudofunctor.presheafHom (unitObj X) L).map (G.map f.unop).op
-        x.down.1) := Pseudofunctor.isIso_presheafHom_map (F := modulesPseudofunctor) _ _
-    change (modulesPseudofunctor.presheafHom L L').map (G.map f.unop).op
-        (inv x.down.1 ≫ (e.iso.hom.hom.app U x).down.1) =
-      inv ((modulesPseudofunctor.presheafHom (unitObj X) L).map (G.map f.unop).op x.down.1) ≫
-        (e.iso.hom.hom.app V ((etaleIsoTorsor L).sheaf.obj.map f x)).down.1
-    erw [hn]
-    exact (Pseudofunctor.presheafHom_map_comp (G.map f.unop) (inv x.down.1)
-      (e.iso.hom.hom.app U x).down.1).trans
-        (congrArg (· ≫ _) (Pseudofunctor.presheafHom_map_inv (G.map f.unop) x.down.1))
+    change (etaleHom L L').map f
+        (inv (etaleIsoTorsorVal L x) ≫ etaleIsoTorsorVal L' (e.iso.hom.hom.app U x)) =
+      inv (etaleIsoTorsorVal L ((etaleIsoTorsor L).sheaf.obj.map f x)) ≫
+        etaleIsoTorsorVal L' (e.iso.hom.hom.app V ((etaleIsoTorsor L).sheaf.obj.map f x))
+    rw [NatTrans.naturality_apply e.iso.hom.hom f x,
+      etaleIsoTorsorVal_restrict, etaleIsoTorsorVal_restrict,
+      etaleHom_map_comp, etaleHom_map_inv]
   have hinv : ∀ U (a : X.gmSheaf.obj.obj U) (x : (etaleIsoTorsor L).sheaf.obj.obj U),
       g U ((etaleIsoTorsor L).vadd U a x) = g U x := by
     intro U a x
@@ -165,8 +176,6 @@ lemma nonempty_iso_of_etaleIsoTorsor_iso
     (Cat.Hom.toNatIso (modulesPseudofunctor.mapId _)).app L'⟩
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the defeq checks through the small étale and pro-étale sites are slow
 /-- Isomorphic modules have isomorphic torsors of trivialisations. -/
 lemma etaleIsoTorsor_equiv_of_iso (e : L ≅ L') : etaleIsoTorsor L ≈ etaleIsoTorsor L' := by
   have : MorphismProperty.ContainsIdentities
@@ -202,14 +211,13 @@ lemma etaleIsoTorsor_equiv_of_iso (e : L ≅ L') : etaleIsoTorsor L ≈ etaleIso
     ⟨{ app U := TypeCat.ofHom (ψ U)
        naturality U V f := by
           ext x
-          apply ULift.ext
-          apply Subtype.ext
-          change (modulesPseudofunctor.presheafHom (unitObj X) L).map (G.map f.unop).op
-              x.down.1 ≫ ε' V =
-            (modulesPseudofunctor.presheafHom (unitObj X) L').map (G.map f.unop).op
-              (x.down.1 ≫ ε' U)
-          exact ((Pseudofunctor.presheafHom_map_comp (G.map f.unop) x.down.1
-            (ε U)).trans (congrArg (_ ≫ ·) (hεmap f))).symm }⟩
+          apply etaleIsoTorsorVal_injective L'
+          change etaleIsoTorsorVal L' (ψ V ((etaleIsoTorsor L).sheaf.obj.map f x)) =
+            etaleIsoTorsorVal L' ((etaleIsoTorsor L').sheaf.obj.map f (ψ U x))
+          dsimp only [ψ]
+          rw [etaleIsoTorsorVal_mk, etaleIsoTorsorVal_restrict,
+            etaleIsoTorsorVal_restrict, etaleIsoTorsorVal_mk, etaleHom_map_comp]
+          exact congrArg (_ ≫ ·) (hεmap f).symm }⟩
   exact ⟨Sheaf.Torsor.Iso.ofHom φ fun U a x ↦ etaleIsoTorsorVal_injective L'
     (Category.assoc _ _ _)⟩
 
