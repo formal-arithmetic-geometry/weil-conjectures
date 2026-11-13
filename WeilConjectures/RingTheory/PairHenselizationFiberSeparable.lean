@@ -29,8 +29,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the ind-object under-category transport needs more than the default heartbeats.
 /-- The canonical residue extension of a Noetherian pair henselization is separable algebraic.
 
 Source: Stacks Project, More on Algebra, Tag 0AH1; Tag 0A02 for filteredness.

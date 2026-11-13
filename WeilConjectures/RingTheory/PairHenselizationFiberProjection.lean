@@ -128,8 +128,6 @@ private theorem fiber_product_bijective
   exact E.bijective
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Matching the cocone algebra instances and tensor equivalences needs additional heartbeats.
 /-- The canonical map of fibres is a surjective projection with idempotent kernel annihilator.
 
 Source: Stacks Project, More on Algebra, Tag 0AH1 and the product calculation in Tag 0AH3.
