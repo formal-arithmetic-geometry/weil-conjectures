@@ -76,19 +76,6 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf
-  have := SheafOfModules.isMonoidal_W X.sheaf
-  have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
-    inferInstance
-  have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} :=
-    inferInstance
-  let := SheafOfModules.monoidalCategory X.sheaf
-  let := schemeDerivedTensorMonoidal X
-  let := SheafOfModules.symmetricCategory X.sheaf
-  let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
-  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
-  have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
-  have : Limits.HasColimitsOfSize.{0, 0} C :=
-    Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
   funext K L M
   apply Equiv.ext
   intro f
@@ -103,6 +90,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   let Mc := Q.objPreimage M
   let c : Q.obj Mc ≅ M := Q.objObjPreimageIso M
   let I := (schemeHomKInjectiveResolution X).obj Mc
+  have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
   have : I.IsKInjective :=
     CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{uCD} C Mc
   have : (homComplex (R := X.sheaf) Lc I).IsKInjective :=
@@ -129,6 +117,17 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   obtain ⟨ψ, hψ, he⟩ := h.2 P Lc Mc hP φ
   obtain ⟨ψ', hψ', he'⟩ := h'.2 P Lc Mc hP φ
   have eqψ : ψ = ψ' := by
+    have := SheafOfModules.isMonoidal_W X.sheaf
+    have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
+      inferInstance
+    have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} :=
+      inferInstance
+    let := SheafOfModules.monoidalCategory X.sheaf
+    let := SheafOfModules.symmetricCategory X.sheaf
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+    have : Limits.HasColimitsOfSize.{0, 0} C :=
+      Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
     apply HomologicalComplex.hom_ext
     intro n
     apply HomologicalComplex.mapBifunctor.hom_ext
