@@ -72,7 +72,6 @@ private theorem identity_diagram_cancel {C : Type*} [Category* C]
   rw [IsIso.hom_inv_id_assoc, reassoc_of% hn, Iso.inv_hom_id_assoc,
     Iso.hom_inv_id, Category.comp_id]
 
-set_option profiler true in
 -- Resolution transports compare both module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Identity property of the cohomology map induced by an h-map.
