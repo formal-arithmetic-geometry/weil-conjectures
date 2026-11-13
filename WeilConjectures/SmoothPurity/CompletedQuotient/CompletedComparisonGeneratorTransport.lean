@@ -287,18 +287,18 @@ theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hbridge :
       NatIso.mapHomologicalComplex
           (eqToIso eF) (.up ℤ) =
-        (NatIso.mapHomologicalComplex
-          (eqToIso (sequencePullback_eq l E f)) (.up ℤ)).symm := by
+        (pullBridge l E f).symm := by
+    unfold pullBridge
     exact mapComplex_eqToIso_symm (sequencePullback_eq l E f)
   unfold generatorNorm at hs
   specialize hs P Q p q k hpq (n, V) x y
   rw [hbridge] at hs
-  dsimp [pullBridge, rI, rP] at hs ⊢
-  dsimp only [Functor.mapIso, Iso.trans, Iso.symm, Iso.prod] at hs ⊢
+  dsimp only [rI, rP] at hs ⊢
+  simp only [Functor.mapIso_hom, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
+    Iso.app_hom, Iso.app_inv, Iso.prod_hom] at hs
   dsimp only [sequenceDirect, pullbackTensorSequenceDirect,
     pullbackTensorSequenceAdjunction, pullbackTensorSequenceInverse,
     IntegralCoherence.PullbackComparison.tensor] at hs ⊢
-  trace_state
   exact hs
 
 end WeilConjectures.CompletedQuotient
