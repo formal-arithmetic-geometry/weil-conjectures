@@ -189,15 +189,8 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
       (eW.hom ≫ ((L.sc p).mapHomologyIso EW).hom) =
         eV.hom ≫ ((L.sc p).mapHomologyIso EV).hom ≫ τ.app (L.sc p).homology
     rw [I.rightDerived_app_eq α p]
-    change (eV.hom ≫
-      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
-        ((NatTrans.mapHomologicalComplex α _).app I.cocomplex) ≫ eW.inv) ≫
-          (eW.hom ≫ ((L.sc p).mapHomologyIso EW).hom) = _
     simp only [Category.assoc, Iso.inv_hom_id_assoc]
     rw [cancel_epi]
-    change ShortComplex.homologyMap ((L.sc p).mapNatTrans τ) ≫
-      ((L.sc p).mapHomologyIso EW).hom =
-        ((L.sc p).mapHomologyIso EV).hom ≫ τ.app (L.sc p).homology
     have h := congrArg (fun t ↦ t ≫ ((L.sc p).mapHomologyIso EW).hom)
       ((L.sc p).homologyMap_mapNatTrans τ)
     simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
