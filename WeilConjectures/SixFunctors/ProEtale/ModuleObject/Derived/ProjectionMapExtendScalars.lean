@@ -43,6 +43,37 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
+private theorem comparisonCompatible_symm_of_tensorComparison
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
+    {F : D ⥤ C} {F' : D' ⥤ C'} {N : D ⥤ D'} {M : C ⥤ C'}
+    (α : F ⋙ M ≅ N ⋙ F')
+    (t : (Functor.postcompose₂.obj F).obj (curriedTensor D) ⟶
+      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
+    (t' : (Functor.postcompose₂.obj F').obj (curriedTensor D') ⟶
+      (((Functor.whiskeringLeft₂ C').obj F').obj F').obj (curriedTensor C'))
+    (m : (Functor.postcompose₂.obj M).obj (curriedTensor C) ≅
+      (((Functor.whiskeringLeft₂ C').obj M).obj M).obj (curriedTensor C'))
+    (n : (Functor.postcompose₂.obj N).obj (curriedTensor D) ≅
+      (((Functor.whiskeringLeft₂ D').obj N).obj N).obj (curriedTensor D'))
+    {β : F ⋙ M ≅ N ⋙ F'}
+    {s : (Functor.postcompose₂.obj F).obj (curriedTensor D) ⟶
+      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C)}
+    {s' : (Functor.postcompose₂.obj F').obj (curriedTensor D') ⟶
+      (((Functor.whiskeringLeft₂ C').obj F').obj F').obj (curriedTensor C')}
+    (hα : α = β) (ht : t = s) (ht' : t' = s')
+    (h : ∀ X Y, F'.map ((n.hom.app X).app Y) ≫ (s'.app (N.obj X)).app (N.obj Y) =
+      β.inv.app (X ⊗ Y) ≫ M.map ((s.app X).app Y) ≫
+        (m.hom.app (F.obj X)).app (F.obj Y) ≫ (β.hom.app X ⊗ₘ β.hom.app Y)) :
+    Adjunction.ComparisonCompatible α.symm t t' m n := by
+  subst β s s'
+  intro X Y
+  simp only [Iso.symm_inv, Iso.symm_hom, curriedTensor_obj_obj,
+    curriedTensor_map_app, curriedTensor_obj_map, Functor.comp_obj]
+  rw [reassoc_of% (h X Y), Iso.hom_inv_id_app_assoc, ← tensorHom_def,
+    tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
+  simp only [id_tensorHom_id, Category.comp_id]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -69,9 +100,7 @@ noncomputable def derivedExtendScalarsTensorIso (X : Scheme.{u}) :
 variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option maxHeartbeats 4000000 in
 set_option profiler true in
--- the derived categories of module objects are unfolded when matching the comparisons
 /-- The derived (Pull) isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor
 comparisons of the derived pullbacks (`leftDerivedUpperStarTensor`) and of the derived extensions
 of scalars (`derivedExtendScalarsTensorIso`): it is the isomorphism of composites of left derived
@@ -86,23 +115,15 @@ theorem comparisonCompatible_derivedPullIso :
   let := Mod.extendScalarsMonoidal (coefficientMap a X)
   let := Mod.extendScalarsMonoidal (coefficientMap a Y)
   have := isMonoidal_pullIso_hom a f
-  intro K M
-  have h := Functor.map_leftDerivedTensorComparison_comp_eq_of_iso
+  refine comparisonCompatible_symm_of_tensorComparison (derivedPullIso a f) _ _ _ _
+    (derivedPullIso_eq_leftDerivedFunctorCompNatIso a f)
+    (leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison Λ f)
+    (leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison Λ' f) ?_
+  exact Functor.map_leftDerivedTensorComparison_comp_eq_of_iso
     (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ (f)^*⟦Λ⟧
-    (Mod.extendScalars (coefficientMap a X)) (pullIso a f) K M
-  rw [← derivedPullIso_eq_leftDerivedFunctorCompNatIso] at h
-  rw [leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison,
-    leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison]
-  simp only [derivedExtendScalarsTensorIso, asIso_hom, Iso.symm_inv, Iso.symm_hom,
-    curriedTensor_obj_obj, curriedTensor_map_app, curriedTensor_obj_map, Functor.comp_obj]
-  rw [reassoc_of% h, Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
-    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
-  erw [MonoidalCategory.id_tensorHom_id, Category.comp_id]
+    (Mod.extendScalars (coefficientMap a X)) (pullIso a f)
 
-set_option maxHeartbeats 2000000 in
 set_option profiler true in
--- unifying the projection maps with `Adjunction.rightAdjointProjectionMap` unfolds the derived
--- categories of module objects
 /-- **The projection formula under a flat change of coefficients**: if the projection map
 `Rf_* K ⊗ᴸ M ⟶ Rf_*(K ⊗ᴸ Lf^* M)` with coefficients `Λ` is an isomorphism at `(K, M)` and the
 (Push) comparison `T Rf_* ⟶ Rf_* T` is an isomorphism at `K` and at `K ⊗ᴸ Lf^* M`, then the
@@ -137,6 +158,9 @@ theorem isIso_projectionMap_app_app_extendScalars
     (inferInstance : IsIso (((projectionMap Λ f).app K).app M))
   exact Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv
     (derivedUpperStarLowerStarAdjunction Λ f) (derivedUpperStarLowerStarAdjunction Λ' f)
+    (φ := leftDerivedUpperStarTensor Λ f) (φ' := leftDerivedUpperStarTensor Λ' f)
+    (α := (derivedPullIso a f).symm)
+    (m_C := derivedExtendScalarsTensorIso a X) (m_D := derivedExtendScalarsTensorIso a Y)
     (comparisonCompatible_derivedPullIso a f) K M
 
 end AlgebraicGeometry.ProEtale.CondensedRing
