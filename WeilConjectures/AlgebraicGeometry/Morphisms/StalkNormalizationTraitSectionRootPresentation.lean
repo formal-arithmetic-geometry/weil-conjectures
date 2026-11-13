@@ -75,7 +75,6 @@ private theorem root_local {R : Type u} [CommRing R] [IsLocalRing R]
   obtain ⟨q, rfl⟩ := AdjoinRoot.mk_surjective (g := p) z
   exact (hmem M hM q).trans (hmem P hP q).symm
 
-set_option profiler true in
 /-- The geometric normal form, retaining the actual local root algebra and a uniformizer
 of the auxiliary section trait. No maximal-ideal formula for the root algebra and no
 integer-valued valuation are asserted here.

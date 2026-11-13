@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
 /-- Punctured root charts commute with cofiltered affine ring colimits over R.
 
 Source: Stacks Project, Tags 05N9 and 01YW; universal properties of polynomial
@@ -124,7 +123,10 @@ theorem punctured_root_colimit_continuity
         rw [hs'] }
   have hV₀ : IsAffine V₀.toScheme := IsAffineOpen.Spec_basicOpen _
   obtain ⟨e, he⟩ := punctured_root_base_change R H f n b
-  refine ⟨D, c, t, ⟨hc⟩, ?_, ?_⟩
+  refine ⟨D, ?_⟩
+  refine ⟨c, ?_⟩
+  refine ⟨t, ?_⟩
+  refine ⟨⟨hc⟩, ?_, ?_⟩
   · intro j
     change IsAffine (pullback (s.app j) k)
     change IsAffine (pullback (Spec.map (a.app (Opposite.op j))) k)
@@ -146,6 +148,5 @@ theorem punctured_root_colimit_continuity
       rw [← Category.assoc, hd]
       simp only [Category.assoc]
       rfl
-
 
 end AlgebraicGeometry.Scheme

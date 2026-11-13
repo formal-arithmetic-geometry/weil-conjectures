@@ -174,7 +174,6 @@ private theorem smooth_trait_affine_generic_open_over
   exact ⟨β, IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _⟩
 
 
-set_option profiler true in
 /-- A tame affine chart using the pullback of an actual trait uniformizer.
 
 Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH.
@@ -247,8 +246,10 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
   let d := pullback.snd c a
   let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
   let : IsFinite n := hn
-  obtain ⟨W, β, hβ⟩ := GaloisCover.stalk_normalization_generic_comparison
+  have hcomparison := GaloisCover.stalk_normalization_generic_comparison
     c G q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr
+  dsimp only at hcomparison
+  obtain ⟨W, β, hβ⟩ := hcomparison
   let : IsFinite W.π := W.isFinite
   let b := Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField))
   let p := W.π ≫ pullback.fst d b
@@ -256,9 +257,10 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
   obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible (S.presheaf.stalk s)
   have hGA : IsUnit (Nat.card G : S.presheaf.stalk s) := by
     simpa using hG.map (S.presheaf.Γgerm s).hom
-  obtain ⟨R, φ, y, hφ, hy, ar, hsm, hφd, γ₀, hγ₀⟩ :=
-    smooth_trait_affine_generic_open_over (S.presheaf.stalk s) S.functionField
+  have hchart := smooth_trait_affine_generic_open_over (S.presheaf.stalk s) S.functionField
       ϖ hϖ d (n x)
+  dsimp only at hchart
+  obtain ⟨R, φ, y, hφ, hy, ar, hsm, hφd, γ₀, hγ₀⟩ := hchart
   let : Algebra (S.presheaf.stalk s) R := ar
   have : Algebra.Smooth (S.presheaf.stalk s) R := hsm
   obtain ⟨hR, hf, hRf⟩ := smooth_trait_regular_quotient (S.presheaf.stalk s) R ϖ hϖ
@@ -370,7 +372,7 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
     rw [Scheme.Hom.comp_apply, hz, hy]
   · change (E.hom ≫ α₀.hom) ≫ r = pullback.snd n φ'
     rw [Category.assoc, hα₀]
-    simp only [E, asIso_hom, pullback.map_snd, Category.id_comp]
+    simp only [E, asIso_hom, pullback.map, pullback.lift_snd, Category.comp_id]
 
 
 end AlgebraicGeometry.Scheme
