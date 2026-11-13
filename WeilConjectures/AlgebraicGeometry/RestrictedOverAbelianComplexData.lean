@@ -25,13 +25,13 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The abelian coefficient sheaf pulled back from the fixed scheme W. 
+/-- The abelian coefficient sheaf pulled back from the fixed scheme W.
 -/
 noncomputable def restrictedOverCoefficient {W : Scheme.{u}}
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (A : Over W) :=
   (upperStar AddCommGrpCat.{u + 1} A.hom).obj F
 
-/-- Integer-degree cohomology on the actual etale fibre product. 
+/-- Integer-degree cohomology on the actual etale fibre product.
 -/
 noncomputable def restrictedOverCohomology {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
@@ -42,7 +42,7 @@ noncomputable def restrictedOverCohomology {W S : Scheme.{u}} (k : W ⟶ S)
         (restrictedOverCoefficient F A))))
 
 /-- The canonical map is derived pullback followed by the coefficient identification.
-It is written explicitly and is not selected from an existence theorem. 
+It is written explicitly and is not selected from an existence theorem.
 -/
 noncomputable def restrictedOverCohomologyMap {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)

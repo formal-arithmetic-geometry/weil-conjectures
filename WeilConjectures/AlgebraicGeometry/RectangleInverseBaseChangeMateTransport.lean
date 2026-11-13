@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The source comparison built from the canonical pullback composition family.
 The chosen family is fixed by its left-derived universal property, not an arbitrary
-witness of existence. 
+witness of existence.
 -/
 noncomputable def successiveBaseChangeSourceIso
     [∀ Z : Scheme.{u},

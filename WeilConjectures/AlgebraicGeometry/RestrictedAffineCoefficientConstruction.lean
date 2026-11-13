@@ -36,7 +36,7 @@ noncomputable def restrictedAffineDiagram {S : Scheme.{v}} {I : Type v} [Preorde
   map_comp f g := by
     apply pullback.hom_ext <;> simp [rawAffineRestrictedMap, Category.assoc]
 
-/-- The actual fibre-product cone. 
+/-- The actual fibre-product cone.
 -/
 @[implicit_reducible]
 noncomputable def restrictedAffineCone {S : Scheme.{v}} {I : Type v} [Preorder I]
@@ -52,7 +52,7 @@ noncomputable def restrictedAffineCone {S : Scheme.{v}} {I : Type v} [Preorder I
           simp [restrictedAffineDiagram, rawAffineRestrictedMap, Category.assoc,
             ← Over.comp_left, c.w f] }
 
-/-- The restricted stage sheaf, placed in degree zero. 
+/-- The restricted stage sheaf, placed in degree zero.
 -/
 @[implicit_reducible]
 noncomputable def restrictedAffineK {S : Scheme.{v}} {I : Type v} [Preorder I]
@@ -64,14 +64,14 @@ noncomputable def restrictedAffineK {S : Scheme.{v}} {I : Type v} [Preorder I]
   (CochainComplex.singleFunctor _ 0).obj
     ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom (D.obj i).hom)).obj (F i.unop))
 
-/-- Restriction followed by the degree-zero single-complex functor. 
+/-- Restriction followed by the degree-zero single-complex functor.
 -/
 @[implicit_reducible]
 noncomputable def restrictedAffineSingle {S : Scheme.{v}} {Y : Scheme.{v}}
     (h : Y ⟶ S) (U : S.Etale) :=
   upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom h) ⋙ CochainComplex.singleFunctor _ 0
 
-/-- The prescribed coefficient diagram, reindexed by double opposite. 
+/-- The prescribed coefficient diagram, reindexed by double opposite.
 -/
 @[implicit_reducible]
 noncomputable def restrictedAffineG {S : Scheme.{v}} {I : Type v} [Preorder I]
@@ -79,7 +79,7 @@ noncomputable def restrictedAffineG {S : Scheme.{v}} {I : Type v} [Preorder I]
     (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :=
   unopUnop I ⋙ H ⋙ restrictedAffineSingle c.pt.hom U
 
-/-- The image of the actual coefficient colimit cocone. 
+/-- The image of the actual coefficient colimit cocone.
 -/
 @[implicit_reducible]
 noncomputable def restrictedAffineL {S : Scheme.{v}} {I : Type v} [Preorder I]
@@ -112,7 +112,7 @@ noncomputable def restrictedAffineConeIsLimit {S : Scheme.{v}} {I : Type v}
   apply pullback.hom_ext <;>
     simp [P, e, restrictedAffineCone, rawAffineRestrictedMap, Category.assoc]
 
-/-- The restricted stages are compact because they are quasi-compact over affine U. 
+/-- The restricted stages are compact because they are quasi-compact over affine U.
 -/
 theorem restrictedAffineDiagram_compact {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]
@@ -121,7 +121,7 @@ theorem restrictedAffineDiagram_compact {S : Scheme.{v}} {I : Type v} [Preorder 
   dsimp [restrictedAffineDiagram]
   infer_instance
 
-/-- The restricted stages are quasi-separated by base change over affine U. 
+/-- The restricted stages are quasi-separated by base change over affine U.
 -/
 theorem restrictedAffineDiagram_quasiSeparated {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]
@@ -132,7 +132,7 @@ theorem restrictedAffineDiagram_quasiSeparated {S : Scheme.{v}} {I : Type v} [Pr
     (pullback U.hom (D.obj i).hom : Scheme.{v}) U.left
     (pullback.fst U.hom (D.obj i).hom) ‹QuasiSeparatedSpace U.left› inferInstance
 
-/-- Transitions in the restricted diagram are base changes of affine morphisms. 
+/-- Transitions in the restricted diagram are base changes of affine morphisms.
 -/
 theorem restrictedAffineDiagram_affine {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)
@@ -143,7 +143,7 @@ theorem restrictedAffineDiagram_affine {S : Scheme.{v}} {I : Type v} [Preorder I
   exact MorphismProperty.pullbackMap (P := @IsAffineHom)
     (by infer_instance) (by infer_instance) (by simp) (Over.w (D.map f)).symm
 
-/-- Restricting and taking degree-zero single complexes preserves the coefficient colimit. 
+/-- Restricting and taking degree-zero single complexes preserves the coefficient colimit.
 -/
 noncomputable def restrictedAffineLIsColimit {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) (c : Cone D)
