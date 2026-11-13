@@ -80,7 +80,6 @@ local instance instEssentiallySmallProfinite_integralResidueOrdinaryTensorSquare
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] upperStarLowerStarAdjunction comapUpperStarIso
   comapLowerStarIso profinitePointModuleForgetPullbackIso
-set_option maxHeartbeats 400000 in
 -- Coefficient pullback compares several explicitly constructed module actions.
 private theorem scalar_unit_inv
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -254,7 +253,6 @@ private theorem coefficient_pull_hom
 attribute [local irreducible] Mod.monoidalCategoryStruct
   Mod.tensorObjπ Mod.extendπ residueOrdinaryUpperStarMonoidal
 
-set_option maxHeartbeats 400000 in
 -- Compare the constructed module maps on their explicit coequalizer presentations.
 /-- The ordinary scalar pull square is the balanced tensor comparison.
 Source: Bhatt--Scholze, Remark 6.8.15 and the ordinary tensor-pullback identity

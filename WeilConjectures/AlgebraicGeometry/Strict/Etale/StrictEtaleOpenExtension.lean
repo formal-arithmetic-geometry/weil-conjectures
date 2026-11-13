@@ -45,13 +45,13 @@ structure StrictEtaleOrdinaryOpen where
     (J := Z.smallEtaleTopology) (O := O) (ell := t) n ≅
       coefficientEvaluation (J := X.smallEtaleTopology) (O := O) (ell := t) n ⋙ level n
   evaluationMate : ∀ n, (I.inverseEvaluation n).hom =
-    (mateEquiv adjunction (levelAdjunction n) (.mk _ _ _ _ (evaluation n).inv)).natTrans
+    (mateEquiv adjunction (levelAdjunction n) (.mk _ _ _ _ (evaluation n).inv))
   restriction : ∀ {m n : ℕ} (h : n ≤ m),
     coefficientRestriction (J := X.smallEtaleTopology) O t h ⋙ level m ≅
       level n ⋙ coefficientRestriction (J := Z.smallEtaleTopology) O t h
   restrictionMate : ∀ {m n : ℕ} (h : n ≤ m),
     (mateEquiv (levelAdjunction n) (levelAdjunction m)
-      (.mk _ _ _ _ (restriction h).hom)).natTrans = (I.restrictInverse h).inv
+      (.mk _ _ _ _ (restriction h).hom)) = (I.restrictInverse h).inv
   transition : ∀ {m n : ℕ} (h : n ≤ m) M,
     (PZ.strictTransition h).app (extension.obj M) ≫
       (coefficientRestriction (J := Z.smallEtaleTopology) O t h).map

@@ -42,6 +42,6 @@ def finiteProperComparison {R S : Coefficients.{u}} (a : Change R S)
       (TwoSquare.mk _ _ _ _
         (proEtaleRingRestrictionDerivedDirectImage g
           (R.ring V) (S.ring V) (R.ring U) (S.ring U)
-          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv)).natTrans
+          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv))
 
 end WeilConjectures.PurCompactSupport

@@ -21,7 +21,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the statement unfolds the deep cochain tensor instance terms of the chain data.
 /-- The comparison of total complexes respects reassociation before localization.
 Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT; homogeneous-triple step of native tensor transport.

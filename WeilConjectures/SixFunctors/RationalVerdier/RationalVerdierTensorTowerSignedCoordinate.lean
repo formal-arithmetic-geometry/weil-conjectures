@@ -183,7 +183,6 @@ attribute [local irreducible] IntegralAmbient.tensorTowerIso
   coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
   coefficientSequenceCommRingSystem coefficientSequenceTopology
 
-set_option maxHeartbeats 800000 in
 -- The generator comparison unfolds the sheafified tensor tower at every level.
 /-- At one finite quotient, scalar extension of a signed chain map agrees with
 interchange of the two quotient tensor factors. This assertion concerns only

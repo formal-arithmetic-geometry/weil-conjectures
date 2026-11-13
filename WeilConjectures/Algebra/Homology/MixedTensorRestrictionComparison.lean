@@ -11,6 +11,7 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Homology.Functor
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.LinearAlgebra.TensorProduct.Tower
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 

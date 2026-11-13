@@ -202,8 +202,9 @@ lemma fiberRankFun_eq_of_specializes
   choose t ht using fun (a : Fin n) (b : Fin m) ↦
     exists_endValue_eq_const (W := Spec (.of k)) (endValue ℓ (Mod.finFreeEntry φ a b) w₁)
   let ψ : Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) (Spec (.of k))) m ⟶
-      Mod.finiteFree _ n := biproduct.matrix fun b a ↦ t a b
+      Mod.finiteFree _ n := biproduct.matrix fun b a ↦ (t a b).asHom
   have hψ (a : Fin n) (b : Fin m) : Mod.finFreeEntry ψ a b = t a b := by
+    apply End.ext
     simp [ψ, Mod.finFreeEntry]
   obtain ⟨d, -, -, ⟨e'⟩⟩ := exists_le_iso_cokernel_biproduct_fin
     (isIso_of_ne_zero_of_subsingleton (W := Spec (.of k))) ψ

@@ -90,9 +90,9 @@ lemma rebase_pushforwardExchange_aux {DF DX Dη DXη Dk Ds : Type*} [Category DF
     (β : ∀ K, ΨF.obj K ⟶ Ψη.obj (ιU.obj K))
     (hyp : ∀ K, αa.app K ≫ ρ (aU.obj K) =
       sU.map (β K) ≫ αe.app (ιU.obj K) ≫ ΨM'.map (θ.app K))
-    (χa : aL ⋙ ΨF ⟶ ΨM ⋙ sL) (hχa : χa = (mateEquiv adjA adjS αa).natTrans)
-    (χe : eL ⋙ Ψη ⟶ ΨM' ⋙ sL) (hχe : χe = (mateEquiv adjE adjS αe).natTrans)
-    (bc : aL ⋙ ιU ⟶ πU ⋙ eL) (hbc : bc = (mateEquiv adjA adjE θ).natTrans) (E : DX) :
+    (χa : aL ⋙ ΨF ⟶ ΨM ⋙ sL) (hχa : χa = (mateEquiv adjA adjS αa))
+    (χe : eL ⋙ Ψη ⟶ ΨM' ⋙ sL) (hχe : χe = (mateEquiv adjE adjS αe))
+    (bc : aL ⋙ ιU ⟶ πU ⋙ eL) (hbc : bc = (mateEquiv adjA adjE θ)) (E : DX) :
     χa.app E ≫ sL.map (ρ E) = β (aL.obj E) ≫ Ψη.map (bc.app E) ≫ χe.app (πU.obj E) := by
   subst hχa hχe hbc
   apply (adjS.homEquiv _ _).symm.injective
@@ -121,9 +121,9 @@ lemma rebase_pushforwardExchange_aux_of_eq {DF DX Dη DXη Dk Ds : Type*} [Categ
     (β : ∀ K, ΨF.obj K ⟶ Ψη.obj (ιU.obj K))
     (hyp : ∀ K, αa.app K ≫ ρ (aU.obj K) =
       sU.map (β K) ≫ αe.app (ιU.obj K) ≫ ΨM'.map (θ.app K))
-    (χa : aL ⋙ ΨF ⟶ ΨM ⋙ sL) (hχa : χa = (mateEquiv adjA adjS αa).natTrans)
-    (χe : eL ⋙ Ψη ⟶ ΨM' ⋙ sL) (hχe : χe = (mateEquiv adjE adjS αe).natTrans)
-    (bc : aL ⋙ ιU ⟶ πU ⋙ eL) (hbc : bc = (mateEquiv adjA adjE θ).natTrans) (E : DX)
+    (χa : aL ⋙ ΨF ⟶ ΨM ⋙ sL) (hχa : χa = (mateEquiv adjA adjS αa))
+    (χe : eL ⋙ Ψη ⟶ ΨM' ⋙ sL) (hχe : χe = (mateEquiv adjE adjS αe))
+    (bc : aL ⋙ ιU ⟶ πU ⋙ eL) (hbc : bc = (mateEquiv adjA adjE θ)) (E : DX)
     (P : DXη) (hP : πU.obj E = P) :
     χa.app E ≫ sL.map (ρ E ≫ ΨM'.map (eqToHom hP)) =
       β (aL.obj E) ≫ Ψη.map (bc.app E ≫ eL.map (eqToHom hP)) ≫ χe.app P := by

@@ -84,7 +84,6 @@ private theorem stationary_cycle_comparison
   refine ⟨e, z, hz_epi, hz, ?_⟩
   simpa only [filteredComplexPageπ, haq] using he
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent presentation, page-realization and comparison families together.
 set_option linter.unusedVariables false in
 -- The existing hR and ht binders in the signature are used only implicitly.

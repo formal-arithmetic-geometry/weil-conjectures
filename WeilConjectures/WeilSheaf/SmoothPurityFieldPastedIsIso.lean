@@ -43,7 +43,7 @@ lemma isIso_purityFieldOpenRestrictedExchange_mate
     IsIso ((mateEquiv
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l c.overI)
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l c'.overI)
-      (inv (purityFieldOpenRestrictedExchange l f f' c c' hi).hom)).natTrans.app N) :=
+      (inv (purityFieldOpenRestrictedExchange l f f' c c' hi).hom)).app N) :=
   Adjunction.isIso_mateEquiv_app_of_isIso_unit _ _ _
     (boundedConstructibleUpperStarCompUpperStarOfMapIso l c.overI c'.overI hi.flip.w) N
 

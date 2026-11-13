@@ -58,7 +58,6 @@ lemma isZero_leftDerivedFunctor_extendScalars_obj₃
   exact (Triangle.isZero₃_iff_isIso₁ _
     ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.map_distinguished _ hT)).2 h
 
-set_option maxHeartbeats 1000000 in
 -- the derived extensions of scalars are large terms
 /-- **Isomorphisms are detected by reduction and rationalization**: a morphism `f` of
 `𝒪_E`-complexes on `X_proét` whose reduction `𝔽_E ⊗ᴸ_{𝒪_E} f` and rationalization

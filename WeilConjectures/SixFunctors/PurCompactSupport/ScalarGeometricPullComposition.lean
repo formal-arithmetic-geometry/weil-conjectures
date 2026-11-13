@@ -42,11 +42,11 @@ private theorem left_mate_compositor_square
     (χ'' : R₀ ⋙ F'' ⟶ P'' ⋙ R₂)
     (α : P'' ⟶ P ⋙ P') (β : F'' ⟶ F ⋙ F')
     (h : ∀ X : A₂,
-      (mateEquiv a b χ).natTrans.app (Q'.obj X) ≫
-          G.map ((mateEquiv a' b' χ').natTrans.app X) ≫
+      (mateEquiv a b χ).app (Q'.obj X) ≫
+          G.map ((mateEquiv a' b' χ').app X) ≫
           (conjugateEquiv (b.comp b') b'' β).app (R₂.obj X) =
         R₀.map ((conjugateEquiv (a.comp a') a'' α).app X) ≫
-          (mateEquiv a'' b'' χ'').natTrans.app X) :
+          (mateEquiv a'' b'' χ'').app X) :
     (TwoSquare.vComp χ χ').whiskerRight β =
       (TwoSquare.mk _ _ _ _ χ'').whiskerLeft α := by
   apply (mateEquiv (a.comp a') b'').injective
@@ -55,7 +55,7 @@ private theorem left_mate_compositor_square
   apply NatTrans.ext
   funext X
   simpa only [TwoSquare.hComp, TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerRight_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app,
     Functor.associator_inv_app, CategoryTheory.Functor.map_id, Category.id_comp,
     Category.comp_id, Functor.comp_obj, Category.assoc] using h X
@@ -65,7 +65,7 @@ private abbrev mate {AY BY AX BX : Type*}
     {TY : AY ⥤ BY} {rY : BY ⥤ AY} {TX : AX ⥤ BX} {rX : BX ⥤ AX}
     (dY : TY ⊣ rY) (dX : TX ⊣ rX) {IA : AY ⥤ AX} {IB : BY ⥤ BX}
     (a : rY ⋙ IA ⟶ IB ⋙ rX) : IA ⋙ TX ⟶ TY ⋙ IB :=
-  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a)).natTrans
+  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a))
 
 private theorem mate_composition_square
     {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
@@ -120,7 +120,7 @@ private theorem scalarPull_eq_mate {R S : Coefficients.{u}} (a : Change R S)
         (pbcDerivedScalarAdjunction (a.map X))).symm
         (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback g
           (R.ring Y) (S.ring Y) (R.ring X) (S.ring X)
-          (a.map Y) (a.map X) (R.pull g) (S.pull g) (a.square g)).inv)).natTrans := by
+          (a.map Y) (a.map X) (R.pull g) (S.pull g) (a.square g)).inv)) := by
   let ar := proEtaleRingDerivedAdjunction g (R.ring Y) (R.ring X) (R.pull g)
   let bs := proEtaleRingDerivedAdjunction g (S.ring Y) (S.ring X) (S.pull g)
   let dx := pbcDerivedScalarAdjunction (a.map X)
@@ -131,7 +131,7 @@ private theorem scalarPull_eq_mate {R S : Coefficients.{u}} (a : Change R S)
   let d := proEtaleRingRestrictionDerivedDirectImage g
     (R.ring Y) (S.ring Y) (R.ring X) (S.ring X)
     (a.map Y) (a.map X) (R.pull g) (S.pull g) (a.square g)
-  have hd : (mateEquiv bs ar (TwoSquare.mk _ _ _ _ t)).natTrans = d.hom := by
+  have hd : (mateEquiv bs ar (TwoSquare.mk _ _ _ _ t)) = d.hom := by
     ext M
     apply (ar.homEquiv _ _).symm.injective
     have hs := (proEtaleRingSheafChangeAdjunction g
@@ -279,9 +279,9 @@ theorem scalarPull_geometric_composition
           (rX.obj N) T.unop m).trans
             ((modulePushComposition_existsUnique S h k hS).exists.choose_spec
               N T.unop m).symm)
-    have he := congrArg (fun z ↦ z.natTrans.app M) hs
+    have he := congrArg (fun z ↦ z.app M) hs
     simpa only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
-      TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+      TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc] using he.symm
@@ -317,7 +317,7 @@ theorem scalarPull_geometric_composition
     (Functor.mapDerivedCategorySquareIso (actionIso a (h ≫ k))).hom hi L
   dsimp only [pR, pS] at hm
   simp only [mate, actionIso_derived, ← scalarPull_eq_mate, Iso.symm_hom,
-    Iso.symm_inv, TwoSquare.natTrans] at hm
+    Iso.symm_inv] at hm
   have he := congrArg (fun z ↦ z ≫ CS.inv.app ((pbcDerivedExtend (a.map Y)).obj L)) hm
   simp only [Category.assoc, Iso.hom_inv_id_app] at he
   erw [Category.comp_id] at he

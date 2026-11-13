@@ -116,7 +116,6 @@ private lemma cube_aux {C : Type*} [Category* C] {O₁ O₂ O₃ O₄ O₅ O₆ 
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The cube condition of `CategoryTheory.mateEquiv_app_cube` for the derived pullbacks with
 coefficients `Λ` and `Λ'` along a commutative square, their pullback square comparisons and the

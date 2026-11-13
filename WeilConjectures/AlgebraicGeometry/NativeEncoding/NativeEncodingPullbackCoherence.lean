@@ -34,7 +34,7 @@ private theorem ordinary_mate (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (adicUpperStarLowerStarAdjunction l f)
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
-      (TwoSquare.mk _ _ _ _ (pullComparison l f).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullComparison l f).inv)) =
         (pushComparison l f).hom := by
   dsimp only [pullComparison, pushComparison]
   exact (Classical.choose_spec

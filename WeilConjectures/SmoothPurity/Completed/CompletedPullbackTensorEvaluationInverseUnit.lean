@@ -54,7 +54,6 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientSequenceCommRingSystem coefficientSequenceTopology
   SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 -- Pointwise section transports of the two adjunctions have large implicit types.
 /-- Inverse evaluation transports finite unit generators to evaluated sequence units.
 Source: Stacks Tags 07A4, 0941 and 03D2

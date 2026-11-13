@@ -20,7 +20,7 @@ set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
-attribute [local implicit_reducible] TwoSquare
+-- `TwoSquare` is already reducible in Mathlib.
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor upperStar
   conjugateIsoEquiv conjugateEquiv derivedUpperStarLowerStarAdjunction
   leftDerivedUpperStarComp derivedSquareUpperStarIso

@@ -519,7 +519,6 @@ theorem isIso_derivedBaseChangeMap_app_constantComplex_affineLine :
   exact (NatTrans.isIso_app_iff_of_iso BC (leftDerivedUpperStarConstantComplexIso Λ p)).1 h₁
 
 set_option maxRecDepth 20000 in
-set_option maxHeartbeats 1000000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY aY' in
 /-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorConeCoordinates
 public import WeilConjectures.AlgebraicGeometry.SmoothPurity.DivisorTorsorBoundarySigns
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Signed representatives of relative cohomology classes

@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # The Krull topology on the fixing subgroup of an intermediate field

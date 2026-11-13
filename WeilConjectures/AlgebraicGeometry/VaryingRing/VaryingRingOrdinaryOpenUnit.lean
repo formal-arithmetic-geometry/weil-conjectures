@@ -66,7 +66,7 @@ private def ordinaryOpenInverse (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
     eval R φ U n ⋙ StrictTower.moduleJ (R n) j ≅ extension R φ j ⋙ eval R φ X n := by
   have := ordinaryOpenMateIso R φ j n
   exact asIso ((mateEquiv (moduleJAdj R φ j)
-    (StrictTower.moduleJAdj (R n) j)).symm (moduleEvalG R φ j n).hom).natTrans
+    (StrictTower.moduleJAdj (R n) j)).symm (moduleEvalG R φ j n).hom)
 
 private theorem ordinaryOpenInverse_unit (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (N : Modules R φ U) :
@@ -280,9 +280,8 @@ private theorem constantSingle_mate
     (TwoSquare.mk _ _ _ _
       (((Functor.whiskeringRight ℕᵒᵖ C D).obj L).mapDerivedCategorySingleFunctor 0).hom)
   rw [constant_mate, single_mate] at h
-  apply TwoSquare.ext
-  intro N
-  have he := congrArg (fun t ↦ t.natTrans.app N) h
+  refine NatTrans.ext (funext fun N ↦ ?_)
+  have he := congrArg (fun t ↦ t.app N) h
   simpa only [ordinaryConstantSingleComparison, TwoSquare.hComp, TwoSquare.vComp,
     TwoSquare.mk, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
@@ -319,9 +318,8 @@ private theorem pasteComparison_inv (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : L₂ 
     (pasteComparison α β eA eB).inv =
       (((TwoSquare.mk _ _ _ _ α.inv).hComp
         (TwoSquare.mk _ _ _ _ β.inv)).whiskerTop eA.hom).whiskerBottom eB.inv := by
-  apply TwoSquare.ext
-  intro N
-  simp only [pasteComparison, TwoSquare.natTrans, TwoSquare.hComp,
+  refine NatTrans.ext (funext fun N ↦ ?_)
+  simp only [pasteComparison, TwoSquare.hComp,
     TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.mk,
     Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -333,9 +331,8 @@ private theorem pasteComparison_hom (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : L₂ 
     (pasteComparison α β eA eB).hom =
       (((TwoSquare.mk _ _ _ _ α.hom).vComp
         (TwoSquare.mk _ _ _ _ β.hom)).whiskerRight eB.hom).whiskerLeft eA.inv := by
-  apply TwoSquare.ext
-  intro N
-  simp only [pasteComparison, TwoSquare.natTrans, TwoSquare.vComp,
+  refine NatTrans.ext (funext fun N ↦ ?_)
+  simp only [pasteComparison, TwoSquare.vComp,
     TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.mk,
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app,

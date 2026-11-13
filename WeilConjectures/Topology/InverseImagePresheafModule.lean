@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Algebra.Module.TransferInstance
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Modules on the presheaf inverse image

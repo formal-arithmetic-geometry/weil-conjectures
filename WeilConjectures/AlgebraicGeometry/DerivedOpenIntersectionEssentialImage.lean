@@ -42,7 +42,6 @@ private noncomputable def moduleIsoEquivalence {T U : Scheme.{u}} (s : T ≅ U) 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
 -- Transport through the open and isomorphism adjunctions needs more instance search.
 -- The nested derived-functor comparisons require a larger elaboration budget.
 

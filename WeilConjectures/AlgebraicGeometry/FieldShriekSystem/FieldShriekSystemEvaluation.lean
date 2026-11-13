@@ -83,7 +83,7 @@ any claim of conservativity. Source: blueprint (2), scalar evaluation normalizat
     {L : A ⥤ B} {R : B ⥤ A} {L' : A' ⥤ B'} {R' : B' ⥤ A'}
     {U : A ⥤ A'} {V : B ⥤ B'} (adj : L ⊣ R) (adj' : L' ⊣ R')
     (left : L ⋙ V ≅ U ⋙ L') (right : R ⋙ U ≅ V ⋙ R') : Prop :=
-  (mateEquiv adj adj' left.inv).natTrans = right.hom
+  (mateEquiv adj adj' left.inv) = right.hom
 
 /-- The specified finite scalar adjunction with its functors made explicit.
 Source: blueprint (2), finite scalar normalization

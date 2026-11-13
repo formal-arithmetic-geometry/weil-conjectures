@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- The explicit additivity witnesses require a larger typeclass-search budget.
 /-- Restricting `Rf_*` to an open `V` is naturally isomorphic to first restricting to
 `f ⁻¹ᵁ V` and then applying the derived direct image of the induced morphism `f ∣_ V`.

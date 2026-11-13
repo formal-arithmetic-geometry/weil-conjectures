@@ -103,19 +103,19 @@ theorem isIso_mateEquiv_symm_of_equivalences
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
     {G : C ⥤ C'} {H : D ⥤ D'}
     (a : L ⊣ R) (b : L' ⊣ R') [G.IsEquivalence] [H.IsEquivalence]
-    (β : TwoSquare R H G R') [IsIso β.natTrans] :
-    IsIso ((mateEquiv a b).symm β).natTrans := by
+    (β : TwoSquare R H G R') [IsIso β] :
+    IsIso ((mateEquiv a b).symm β) := by
   let eG := G.asEquivalence.toAdjunction
   let eH := H.asEquivalence.toAdjunction
   let α := (mateEquiv a b).symm β
-  have hi : IsIso (mateEquiv eH eG β).natTrans := by
+  have hi : IsIso (mateEquiv eH eG β) := by
     dsimp only [mateEquiv, Equiv.coe_fn_mk]
     infer_instance
   have he := iterated_mateEquiv_conjugateEquiv a b eG eH α
-  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))).natTrans = _ at he
+  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))) = _ at he
   rw [Equiv.apply_symm_apply] at he
-  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α.natTrans) := he ▸ hi
-  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α.natTrans
+  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α) := he ▸ hi
+  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α
 
 section Tower
 
@@ -175,7 +175,7 @@ def AdicCoefficientDatum.levelExtendMap (n : ℕ) :
         pbcDerivedRestrict (d.levelIso d' φ hφ T n).hom :=
   ((mateEquiv (pbcDerivedScalarAdjunction (pbcAdicProjection T d' n))
     (pbcDerivedScalarAdjunction (pbcAdicProjection T d n))).symm
-    (TwoSquare.mk _ _ _ _ (d.levelRestrictIso d' φ hφ T n).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (d.levelRestrictIso d' φ hφ T n).hom))
 
 /-- The base change map of reductions is invertible. (auxiliary; not a blueprint node). -/
 instance (n : ℕ) : IsIso (d.levelExtendMap d' φ hφ T n) :=

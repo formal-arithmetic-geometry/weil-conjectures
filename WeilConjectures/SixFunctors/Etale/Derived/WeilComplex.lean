@@ -177,7 +177,7 @@ one with underlying complex `Λ[1]`, so a nonsplit Frobenius extension of `Λ` b
 block) gives no nonzero map `Λ ⟶ Λ[1]` of pairs. -/
 lemma WeilComplex.map_hom_eq_zero_of_iso_unit_geometricFiber
     {M N : WeilComplex (ModuleCat.{u + 1} Λ)
-      (Scheme.Hom.geometricGaloisFrobenius (𝟙 (Spec (.of k₀))))}
+      (Scheme.Hom.geometricGaloisFrobenius (𝟙 (Spec (.of k₀)))).asIso}
     (eM : (DerivedCategoryFiniteTor.ι _ _).obj M.obj ≅ 𝟙_ _)
     (eN : (DerivedCategoryFiniteTor.ι _ _).obj N.obj ≅ (𝟙_ _)⟦(1 : ℤ)⟧) (f : M ⟶ N) :
     (DerivedCategoryFiniteTor.ι _ _).map f.hom = 0 :=

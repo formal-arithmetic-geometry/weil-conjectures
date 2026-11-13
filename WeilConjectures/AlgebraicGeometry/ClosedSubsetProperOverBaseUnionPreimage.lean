@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperUniversallyClosedImage
 import WeilConjectures.AlgebraicGeometry.ProperCoproduct
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Finite unions and proper preimages of closed subsets proper over a base

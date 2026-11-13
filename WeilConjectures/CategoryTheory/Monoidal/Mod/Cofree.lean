@@ -147,10 +147,10 @@ lemma act_mapMod_obj (M : Mod C A) :
 /-- The image of a cofree module under a lax monoidal functor maps to a cofree module. -/
 def mapModCofreeHom (Y : C) :
     (F.mapMod A).obj ((cofree A).obj Y) ⟶ (cofree (F.obj A)).obj (F.obj Y) :=
-  homMk ((ihomComparison F A).natTrans.app Y) (by
+  homMk ((ihomComparison F A).app Y) (by
     change (Functor.LaxMonoidal.μ F A ((ihom A).obj Y) ≫ F.map (cofreeAct A Y)) ≫
-        (ihomComparison F A).natTrans.app Y =
-      F.obj A ◁ (ihomComparison F A).natTrans.app Y ≫ cofreeAct (F.obj A) (F.obj Y)
+        (ihomComparison F A).app Y =
+      F.obj A ◁ (ihomComparison F A).app Y ≫ cofreeAct (F.obj A) (F.obj Y)
     apply uncurry_injective
     rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, uncurry_natural_left,
       uncurry_cofreeAct]
@@ -206,20 +206,20 @@ variable {C D : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
 
 /-- If `F` commutes with internal homs out of `A`, the left adjoint on modules sends cofree
 `A`-modules to cofree `B`-modules. -/
-noncomputable def modLeftCofreeIso [IsIso (Functor.LaxMonoidal.ihomComparison F A).natTrans] :
+noncomputable def modLeftCofreeIso [IsIso (Functor.LaxMonoidal.ihomComparison F A)] :
     cofree A ⋙ adj.modLeft φ ≅ F ⋙ cofree B :=
   NatIso.ofComponents (fun Y ↦
     have : IsIso (mapModCofreeHom A F Y) := by
       have : IsIso ((forget _).map (mapModCofreeHom A F Y)) :=
-        inferInstanceAs (IsIso ((Functor.LaxMonoidal.ihomComparison F A).natTrans.app Y))
+        inferInstanceAs (IsIso ((Functor.LaxMonoidal.ihomComparison F A).app Y))
       exact isIso_of_reflects_iso _ (forget _)
     (comap (inv ((adj.homEquiv _ _).symm φ))).mapIso (asIso (mapModCofreeHom A F Y)) ≪≫
       comapCofreeIso _ (F.obj Y)) (fun {Y Y'} f ↦ Mod.hom_ext _ _ (by
-    change F.map ((ihom A).map f) ≫ (Functor.LaxMonoidal.ihomComparison F A).natTrans.app Y' ≫
+    change F.map ((ihom A).map f) ≫ (Functor.LaxMonoidal.ihomComparison F A).app Y' ≫
         (MonoidalClosed.pre _).app (F.obj Y') =
-      ((Functor.LaxMonoidal.ihomComparison F A).natTrans.app Y ≫
+      ((Functor.LaxMonoidal.ihomComparison F A).app Y ≫
         (MonoidalClosed.pre _).app (F.obj Y)) ≫ (ihom B).map (F.map f)
-    have h1 := (Functor.LaxMonoidal.ihomComparison F A).natTrans.naturality f
+    have h1 := (Functor.LaxMonoidal.ihomComparison F A).naturality f
     have h2 := (MonoidalClosed.pre (inv ((adj.homEquiv _ _).symm φ))).naturality (F.map f)
     simp only [Functor.comp_map] at h1 h2
     rw [reassoc_of% h1, h2, Category.assoc]))

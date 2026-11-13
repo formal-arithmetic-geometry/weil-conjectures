@@ -43,7 +43,7 @@ private theorem rotated_counit {C D C' D' : Type*}
     (htheta : theta = conjugateEquiv (a.comp ah) (ag.comp a') k)
     (E : C) :
     L'.map (((mateEquiv ah ag).symm
-      (TwoSquare.mk _ _ _ _ theta)).natTrans.app E) ≫ a'.counit.app (H.obj E) =
+      (TwoSquare.mk _ _ _ _ theta)).app E) ≫ a'.counit.app (H.obj E) =
         k.app (R.obj E) ≫ H.map (a.counit.app E) := by
   have hi := iterated_mateEquiv_conjugateEquiv a a' ag ah
     (TwoSquare.mk _ _ _ _ k)
@@ -51,8 +51,7 @@ private theorem rotated_counit {C D C' D' : Type*}
       mateEquiv a a' (TwoSquare.mk _ _ _ _ k) := by
     apply (mateEquiv ah ag).injective
     rw [Equiv.apply_symm_apply]
-    apply TwoSquare.ext
-    intro X
+    refine NatTrans.ext (funext fun X ↦ ?_)
     exact congr_app (htheta.trans hi.symm) X
   rw [hb]
   exact mateEquiv_counit a a' (TwoSquare.mk _ _ _ _ k) E
@@ -95,7 +94,7 @@ private theorem rotated_counit_transport {C D C' D' : Type*}
     (k : G ⋙ L' ⟶ L ⋙ H) (theta : HR ⋙ R ⟶ R' ⋙ GR)
     (m : R ⋙ G₀ ⟶ H₀ ⋙ R')
     (htheta : theta = conjugateEquiv (a.comp ah) (ag.comp a') k)
-    (hm : m = ((mateEquiv ah₀ ag₀).symm (TwoSquare.mk _ _ _ _ theta)).natTrans)
+    (hm : m = ((mateEquiv ah₀ ag₀).symm (TwoSquare.mk _ _ _ _ theta)))
     (E : C) :
     let sg := (conjugateIsoEquiv ag ag₀).symm (Iso.refl _)
     let sh := (conjugateIsoEquiv ah ah₀).symm (Iso.refl _)
@@ -237,7 +236,6 @@ set_option linter.all false in
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 600000 in
 -- Comparing fixed derived adjunctions requires extra instance conversion.
 /-- On K-injective representatives the derived sectionwise comparison satisfies
 the counit equation for the fixed pullback-composition comparison and canonical adjunctions.

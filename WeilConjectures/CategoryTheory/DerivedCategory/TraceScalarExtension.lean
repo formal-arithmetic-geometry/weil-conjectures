@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.RingTheory.TensorProduct.Finite
 public import Mathlib.RingTheory.TensorProduct.Free
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 
@@ -93,10 +94,10 @@ theorem exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap
     ∃ a : R,
       (letI := braidedCategory' (ModuleCat.{u} R)
       MonoidalCategory.trace w =
-        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a) ∧
+        (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a).asHom) ∧
       (letI := braidedCategory' (ModuleCat.{u} B)
       MonoidalCategory.trace w' =
-        algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)) := by
+        (algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)).asHom) := by
   refine ⟨_, trace_eq_algebraMap_sum_negOnePow_linearMapTrace P v s hs hfree hfin K w e hw, ?_⟩
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace _ _ s
     (fun i hi ↦ (ModuleCat.extendScalars φ).map_isZero (hs i hi))
@@ -106,6 +107,7 @@ theorem exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap
     (fun i ↦
       have := hfin i
       ModuleCat.finite_extendScalars_obj φ (P.X i)) K' w' e' hw', map_sum φ]
+  apply congrArg End.asHom
   refine congrArg _ (Finset.sum_congr rfl fun i _ ↦ ?_)
   rw [map_zsmul]
   exact congrArg _ (ModuleCat.trace_extendScalars_map φ (P.X i) (v.f i))

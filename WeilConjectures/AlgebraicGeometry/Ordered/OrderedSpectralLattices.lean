@@ -376,7 +376,7 @@ private theorem transport_lattice_arrow
       U.functor.map i := by
     rw [Adjunction.homEquiv_unit]
     change U.counitIso.inv.app _ ≫ U.functor.map (U.unitIso.inv.app M₀ ≫ i) = _
-    rw [Functor.map_comp, ← Category.assoc, U.counitIso_functor_comp]
+    rw [Functor.map_comp, ← Category.assoc, U.counitInv_functor_comp]
     exact Category.id_comp _
   have hi : adj'.homEquiv (U.functor.obj M₀) L t' = U.functor.map i ≫ e.hom.app L := by
     rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv,

@@ -32,8 +32,8 @@ private theorem supportedInverseMate {C D C' D' : Type*}
     (a : L ⊣ R) (b : L' ⊣ R') [IsIso a.unit] [IsIso b.unit]
     {F : C ⥤ C'} {H : D ⥤ D'} (β : R ⋙ F ≅ H ⋙ R')
     (e : L ⋙ H ≅ F ⋙ L') :
-    IsIso (((mateEquiv a b).symm (.mk _ _ _ _ β.hom)).natTrans) := by
-  let α := ((mateEquiv a b).symm (.mk _ _ _ _ β.hom)).natTrans
+    IsIso (((mateEquiv a b).symm (.mk _ _ _ _ β.hom))) := by
+  let α := ((mateEquiv a b).symm (.mk _ _ _ _ β.hom))
   have hu := unit_mateEquiv_symm a b (.mk _ _ _ _ β.hom)
   have hi (M : C) : IsIso (R'.map (α.app M)) := by
     have hh := hu M
@@ -64,7 +64,7 @@ private theorem unitIsoTransport
     (a : L ⊣ R) (b : l ⊣ r) [IsIso b.unit]
     {F : A ⥤ C} {H : B ⥤ D} [F.IsEquivalence] [H.IsEquivalence]
     (e : R ⋙ F ≅ H ⋙ r) : IsIso a.unit := by
-  let α := ((mateEquiv a b).symm e.hom).natTrans
+  let α := ((mateEquiv a b).symm e.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences a b e
   have hunit (X : A) : IsIso (a.unit.app X) := by
     have hh := unit_mateEquiv_symm a b e.hom X
@@ -107,7 +107,7 @@ theorem exceptionalSystemLevelOpenMate_isIso
       S.openImage P.val.openImage S.openDerived P.val.openDerived) :
     ∀ n, IsIso (((mateEquiv (S.val.levelOpenAdjunction n)
       (P.val.levelOpenAdjunction n)).symm
-      (.mk _ _ _ _ (R.level n).inv)).natTrans) := by
+      (.mk _ _ _ _ (R.level n).inv))) := by
   intro n
   let A := O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)
   let B := CommRingCat.of A
@@ -134,8 +134,8 @@ theorem exceptionalSystemLevelOpenMate_isIso
   let bp := ProEtale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i
   have : IsIso a.unit := unitIsoTransport a ae u
   have : IsIso b.unit := unitIsoTransport b bp v
-  let α := ((mateEquiv a ae).symm u.hom).natTrans
-  let β := ((mateEquiv b bp).symm v.hom).natTrans
+  let α := ((mateEquiv a ae).symm u.hom)
+  let β := ((mateEquiv b bp).symm v.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences a ae u
   have : IsIso β := isIso_inverseMate_of_equivalences b bp v
   let je := (asIso α).symm

@@ -30,7 +30,7 @@ theorem integralSystemIntrinsicMate
       (scalarTransitions l E) r) (ProEtale.SemilinearProperOpen.adj
         (scalarRings l E) (scalarTransitions l E) p)
       (TwoSquare.mk _ _ _ _ (ProEtale.SemilinearProperOpen.alpha
-        (scalarRings l E) (scalarTransitions l E) k r p i h))).natTrans.app M =
+        (scalarRings l E) (scalarTransitions l E) k r p i h))).app M =
       (ProEtale.SemilinearProperOpen.gamma (scalarRings l E)
         (scalarTransitions l E) k r p i h).app M := by
   rfl

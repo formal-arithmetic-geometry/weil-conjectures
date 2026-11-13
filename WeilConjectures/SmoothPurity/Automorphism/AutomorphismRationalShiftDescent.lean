@@ -40,7 +40,6 @@ attribute [local irreducible] sfIntrinsicModuleEquivalence
   scalarReductionDerivedExistence completedIntegralCoefficientSheafUnrestricted
 
 set_option allowUnsafeReducibility true in
-attribute [local reducible] CategoryTheory.Aut
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
 
 set_option allowUnsafeReducibility true in
@@ -182,39 +181,39 @@ private theorem rational_square_shift
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom)
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom)
     [(constructibleIntegralPullback l E f).CommShift ℤ]
-    [(constructibleIntegralPullback l E eX.hom).CommShift ℤ]
-    [(constructibleIntegralPullback l E eY.hom).CommShift ℤ]
+    [(constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
+    [(constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ]
     [(rationalDerivedPullback l E f).CommShift ℤ]
-    [(rationalDerivedPullback l E eX.hom).CommShift ℤ]
-    [(rationalDerivedPullback l E eY.hom).CommShift ℤ]
+    [(rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
+    [(rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ]
     (hf : ∀ K : sfRationalConstructibleCategory l E X,
       HEq (((rationalDerivedPullback l E f).commShiftIso (1 : ℤ)).hom.app K)
         ((sfRationalConstructibleLocalization l E Y).map
           (((constructibleIntegralPullback l E f).commShiftIso (1 : ℤ)).hom.app K.obj)))
     (hx : ∀ K : sfRationalConstructibleCategory l E X,
-      HEq (((rationalDerivedPullback l E eX.hom).commShiftIso (1 : ℤ)).hom.app K)
+      HEq (((rationalDerivedPullback l E eX.asIso.hom).commShiftIso (1 : ℤ)).hom.app K)
         ((sfRationalConstructibleLocalization l E X).map
-          (((constructibleIntegralPullback l E eX.hom).commShiftIso (1 : ℤ)).hom.app K.obj)))
+          (((constructibleIntegralPullback l E eX.asIso.hom).commShiftIso (1 : ℤ)).hom.app K.obj)))
     (hy : ∀ K : sfRationalConstructibleCategory l E Y,
-      HEq (((rationalDerivedPullback l E eY.hom).commShiftIso (1 : ℤ)).hom.app K)
+      HEq (((rationalDerivedPullback l E eY.asIso.hom).commShiftIso (1 : ℤ)).hom.app K)
         ((sfRationalConstructibleLocalization l E Y).map
-          (((constructibleIntegralPullback l E eY.hom).commShiftIso (1 : ℤ)).hom.app K.obj)))
+          (((constructibleIntegralPullback l E eY.asIso.hom).commShiftIso (1 : ℤ)).hom.app K.obj)))
     [NatTrans.CommShift (automorphismStageIntegralSquare l E C f eX eY h).hom ℤ] :
     NatTrans.CommShift (automorphismStageRationalSquare l E C f eX eY h).hom ℤ := by
   apply commShift_of_one
   constructor
   ext K
-  let A := constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.hom
-  let B := constructibleIntegralPullback l E eX.hom ⋙ constructibleIntegralPullback l E f
-  let Ar := rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.hom
-  let Br := rationalDerivedPullback l E eX.hom ⋙ rationalDerivedPullback l E f
+  let A := constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.asIso.hom
+  let B := constructibleIntegralPullback l E eX.asIso.hom ⋙ constructibleIntegralPullback l E f
+  let Ar := rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.asIso.hom
+  let Br := rationalDerivedPullback l E eX.asIso.hom ⋙ rationalDerivedPullback l E f
   let Q := sfRationalConstructibleLocalization l E Y
   let α := automorphismStageIntegralSquare l E C f eX eY h
   let β := automorphismStageRationalSquare l E C f eX eY h
-  have oA := rational_composite_obj l E f eY.hom
-  have oB := rational_composite_obj l E eX.hom f
+  have oA := rational_composite_obj l E f eY.asIso.hom
+  have oB := rational_composite_obj l E eX.asIso.hom f
   have cx := localization_shift_obj l E X
   have cy := localization_shift_obj l E Y
   have hb (J : sfRationalConstructibleCategory l E X) :
@@ -229,8 +228,8 @@ private theorem rational_square_shift
   have tgtB := (congrArg (shiftFunctor _ (1 : ℤ)).obj (oB K)).trans (cy _)
   dsimp only [sfRationalConstructibleLocalization, ScalarLocalization.localization,
     Functor.comp_obj] at srcA srcB tgtA tgtB
-  have hl := heq_comp srcA tgtA tgtB (rational_composite_shift l E f eY.hom hf hy K) hm
-  have hr := heq_comp srcA srcB tgtB hn (rational_composite_shift l E eX.hom f hx hf K)
+  have hl := heq_comp srcA tgtA tgtB (rational_composite_shift l E f eY.asIso.hom hf hy K) hm
+  have hr := heq_comp srcA srcB tgtB hn (rational_composite_shift l E eX.asIso.hom f hx hf K)
   have he := congrArg Q.map (NatTrans.shift_app_comm α.hom (1 : ℤ) K.obj)
   simp only [Functor.map_comp] at he
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
@@ -249,19 +248,19 @@ theorem automorphismRationalShiftDescent
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom) :
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
       ∃ (cf : (rationalDerivedPullback l E f).CommShift ℤ)
-        (cX : (rationalDerivedPullback l E eX.hom).CommShift ℤ)
-        (cY : (rationalDerivedPullback l E eY.hom).CommShift ℤ),
+        (cX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ)
+        (cY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ),
         automorphismStageRationalShiftNormalization l E f cf ∧
-        automorphismStageRationalShiftNormalization l E eX.hom cX ∧
-        automorphismStageRationalShiftNormalization l E eY.hom cY ∧
+        automorphismStageRationalShiftNormalization l E eX.asIso.hom cX ∧
+        automorphismStageRationalShiftNormalization l E eY.asIso.hom cY ∧
         (fun [sf : (rationalDerivedPullback l E f).CommShift ℤ]
-          [sX : (rationalDerivedPullback l E eX.hom).CommShift ℤ]
-          [sY : (rationalDerivedPullback l E eY.hom).CommShift ℤ] ↦
+          [sX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
+          [sY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ] ↦
           (rationalDerivedPullback l E f).IsTriangulated ∧
-            (rationalDerivedPullback l E eX.hom).IsTriangulated ∧
-            (rationalDerivedPullback l E eY.hom).IsTriangulated ∧
+            (rationalDerivedPullback l E eX.asIso.hom).IsTriangulated ∧
+            (rationalDerivedPullback l E eY.asIso.hom).IsTriangulated ∧
             NatTrans.CommShift (automorphismStageRationalSquare l E C f eX eY h).hom ℤ)
           (sf := cf) (sX := cX) (sY := cY) := by
   classical
@@ -292,11 +291,11 @@ theorem automorphismRationalShiftDescent
       c • (Q.ι ⋙ integralDerivedPullback l E g).map a
     exact (Q.ι ⋙ integralDerivedPullback l E g).map_smul c a
   let := hlin f
-  let := hlin eX.hom
-  let := hlin eY.hom
+  let := hlin eX.asIso.hom
+  let := hlin eY.asIso.hom
   obtain ⟨rf, ef, hf, bf, nbf, sbf⟩ := rationalPullbackShiftLocalization l E f
-  obtain ⟨rx, ex, hx, bx, nbx, sbx⟩ := rationalPullbackShiftLocalization l E eX.hom
-  obtain ⟨ry, ey, hy, by_, nby, sby⟩ := rationalPullbackShiftLocalization l E eY.hom
+  obtain ⟨rx, ex, hx, bx, nbx, sbx⟩ := rationalPullbackShiftLocalization l E eX.asIso.hom
+  obtain ⟨ry, ey, hy, by_, nby, sby⟩ := rationalPullbackShiftLocalization l E eY.asIso.hom
   let := rf
   let := rx
   let := ry

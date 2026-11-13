@@ -40,7 +40,7 @@ that is the geometric Galois Frobenius `g_Y` for `Y₀ = Spec k₀`, is distinct
 theorem specGeometricFrobenius_hom_ne_qPowerFrobenius {p : ℕ} (hp : p.Prime) (a : ℕ)
     (hq : Nat.card k = p ^ a)
     (hX : (Spec (.of (AlgebraicClosure k))).IsOfCharacteristic p) :
-    (specGeometricFrobenius k).hom ≠
+    (specGeometricFrobenius k).asIso.hom ≠
       (Spec (.of (AlgebraicClosure k))).qPowerFrobenius hp hX a := by
   intro h
   let := Fintype.ofFinite k

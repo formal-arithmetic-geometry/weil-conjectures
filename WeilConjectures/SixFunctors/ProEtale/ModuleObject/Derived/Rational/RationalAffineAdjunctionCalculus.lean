@@ -126,7 +126,6 @@ theorem rationalOpenCompactSupportAdjunction
   · exact Functor.isoWhiskerLeft (localizingClosureProEtale Λ X).ι
       (leftDerivedUpperStarIsoMapDerivedCategory Λ j).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep compactification and full-subcategory transports folded.
 /-- Compact-support adjunctions compose with the ambient right adjoints in reverse order.
 Source: blueprint induction, Step 5

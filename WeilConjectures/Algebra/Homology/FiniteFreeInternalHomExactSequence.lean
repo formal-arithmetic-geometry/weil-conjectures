@@ -9,6 +9,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.CategoryTheory.Abelian.ShortExact
 import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
 import Mathlib.CategoryTheory.Sites.EpiMono

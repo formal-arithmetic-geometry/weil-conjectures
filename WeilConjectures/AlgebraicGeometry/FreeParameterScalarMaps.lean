@@ -166,7 +166,7 @@ def scalarPullComparison {Y X : Scheme.{u}} (f : Y ⟶ X)
   ((mateEquiv
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap φ X))
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap φ Y))).symm
-    (TwoSquare.mk _ _ _ _ (CondensedRing.derivedComapUpperStarIso φ f).inv)).natTrans.app M
+    (TwoSquare.mk _ _ _ _ (CondensedRing.derivedComapUpperStarIso φ f).inv)).app M
 
 attribute [local irreducible] scalarPullComparison
 
@@ -216,20 +216,20 @@ of the coefficient map. -/
     delta QuotientChange.normalizationRestrictionPull
     dsimp only [eR, eS, id, TwoSquare.whiskerRight, TwoSquare.whiskerLeft]
     delta QuotientChange.L CondensedRing.moduleObjectDerivedPullback
-    dsimp only [TwoSquare.mk, TwoSquare.natTrans, QuotientChange.V, QuotientChange.V₀]
+    dsimp only [TwoSquare.mk, QuotientChange.V, QuotientChange.V₀]
     simp only [Iso.trans_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
       Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Category.assoc]
-  have hi : IsIso (((a.whiskerTop eR.hom).whiskerBottom eS.hom).natTrans.app M) := by
+  have hi : IsIso (((a.whiskerTop eR.hom).whiskerBottom eS.hom).app M) := by
     rw [he, ← QuotientChange.normalized_inverse φ f b hb]
     infer_instance
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Category.assoc] at hi
-  have : IsIso (a.natTrans.app M) := by
+  have : IsIso (a.app M) := by
     have := IsIso.of_isIso_comp_left
       ((QuotientChange.D φ Y).map (eR.hom.app M))
-      (a.natTrans.app M ≫
+      (a.app M ≫
         eS.hom.app ((QuotientChange.D φ X).obj M))
     exact IsIso.of_isIso_comp_right _
       (eS.hom.app ((QuotientChange.D φ X).obj M))

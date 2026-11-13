@@ -58,7 +58,6 @@ def ordinaryIsoPullbackStalkComplexIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j
       (Iso.refl (RingedSpace.moduleStalkFunctor Y.toRingedSpace y ⋙ F0))
       (.up ℤ)).symm.app ((E.mapHomologicalComplex (.up ℤ)).obj P)
 
-set_option maxHeartbeats 500000 in
 -- The stalk comparison has several nested complex functor compositions.
 /-- Canonical affine coordinates with chain-level pullback-stalk coherence.
 Source: Stacks Project, Tag 0098 (stalk pullback formula), Tag 0096 (adjunction),

@@ -26,7 +26,6 @@ private theorem stalkMap_comp_hom {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
       (f.stalkMap x).hom.comp (g.stalkMap (f x)).hom := by
   exact congrArg CommRingCat.Hom.hom (Scheme.Hom.stalkMap_comp f g x)
 
-set_option maxHeartbeats 800000 in
 -- Dependent stalk types across the chart isomorphism require extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- A root product chart, localized at a specified point, is the localization of one

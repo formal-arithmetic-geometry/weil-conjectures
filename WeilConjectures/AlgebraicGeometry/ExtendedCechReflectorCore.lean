@@ -57,7 +57,6 @@ private def homUnitOnRepresentatives
     simp only [Category.assoc]
     rw [hc]
 
-set_option maxHeartbeats 400000 in
 -- Naturality compares the product-localization factorization with chosen representatives.
 private theorem completion_unit_natural_core
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -233,7 +232,7 @@ private def derivedHomUnitIso
     let e := DerivedCategory.Q.objObjPreimageIso E
     dsimp only [ringedDerivedHomUnit]
     repeat' apply IsIso.comp_isIso'
-    all_goals first | infer_instance | skip
+    all_goals try infer_instance
     change IsIso ((derivedInternalHom J O).mapIso ((Iso.refl _).prod e)).hom
     infer_instance
   refine NatIso.ofComponents (fun E ↦ @asIso _ _ _ _ (ringedDerivedHomUnit O E)

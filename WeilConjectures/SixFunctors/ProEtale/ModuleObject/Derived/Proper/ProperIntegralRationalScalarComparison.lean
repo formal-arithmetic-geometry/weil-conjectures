@@ -281,8 +281,8 @@ private theorem push_pasting
       Category.id_comp, Iso.inv_hom_id_app_assoc]
     rw [← G.map_comp, Iso.inv_hom_id_app, G.map_id]
     rfl
-  have hγ : γ.natTrans = Adjunction.pushHomOfComapIso cx cy kc :=
-    congrArg TwoSquare.natTrans ((mateEquiv cx cy).injective
+  have hγ : γ = Adjunction.pushHomOfComapIso cx cy kc :=
+    ((mateEquiv cx cy).injective
       (he.trans ((mateEquiv cx cy).apply_symm_apply _).symm))
   intro K
   have hh := congr_app hγ K

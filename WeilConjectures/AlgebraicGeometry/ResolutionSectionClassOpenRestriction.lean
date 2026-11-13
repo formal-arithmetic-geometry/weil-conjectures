@@ -147,7 +147,6 @@ theorem resolutionSectionClass_open_restriction
     resolutionSectionClass R.resolution K V R.sections p ≫
       (K.homology p).presheaf.map (homOfLE eWV).op := by
     unfold resolutionSectionClass
-    try dsimp only
     simp only [Category.assoc]
     rw [← hn]
     have hrmap :

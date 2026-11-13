@@ -226,7 +226,7 @@ structure RestrictionImage {X Y : Scheme.{u}} {g : X ⟶ Y}
   inverseImage : res (ringMap Y a) ⋙ d.inverse ≅ e.inverse ⋙ res (ringMap X a)
   inverseImage_mate : inverseImage.hom =
     ((mateEquiv e.adjunction d.adjunction).symm
-      (TwoSquare.mk _ _ _ _ ordinary.inv)).natTrans
+      (TwoSquare.mk _ _ _ _ ordinary.inv))
   derivedInverse : restriction Y a ⋙ d.P ≅ e.P ⋙ restriction X a
   derivedInverse_termwise : derivedInverse =
     (letI := d.inverseAdditive
@@ -239,7 +239,7 @@ structure RestrictionImage {X Y : Scheme.{u}} {g : X ⟶ Y}
   derived : e.R ⋙ restriction Y a ≅ restriction X a ⋙ d.R
   derived_mate : derived.hom =
     (mateEquiv e.derivedAdjunction d.derivedAdjunction
-      (TwoSquare.mk _ _ _ _ derivedInverse.hom)).natTrans
+      (TwoSquare.mk _ _ _ _ derivedInverse.hom))
 
 /-- Open restriction is the mate of the fixed inverse-image comparison.
 Source: Stacks 03S2 and 0GL6
@@ -250,7 +250,7 @@ structure RestrictionOpen {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
   image : RestrictionImage a d.toImage e.toImage
   ordinary : res (ringMap X a) ⋙ d.extension ≅ e.extension ⋙ res (ringMap Z a)
   mate : ordinary.hom = ((mateEquiv e.openAdjunction d.openAdjunction).symm
-    (TwoSquare.mk _ _ _ _ image.inverseImage.inv)).natTrans
+    (TwoSquare.mk _ _ _ _ image.inverseImage.inv))
 
 /-- Exact localization of the canonical open restriction identification.
 Source: Stacks 03S2 and 0GL6
@@ -301,7 +301,7 @@ def projection {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {s : Support c B} {t : Support c C} (r : RestrictionSupport a s t)
     (x : Scalar X a) (y : Scalar Y a) : s.F ⋙ y.model.T ⟶ x.model.T ⋙ t.F :=
   ((mateEquiv x.adjunction y.adjunction).symm
-    (TwoSquare.mk _ _ _ _ r.iso.inv)).natTrans
+    (TwoSquare.mk _ _ _ _ r.iso.inv))
 
 /-- Restriction from the constant ring sheaf to constant scalars, leaving sections
 unchanged. Source: Stacks 03CV
@@ -377,7 +377,7 @@ structure ImageEvaluation {X Y : Scheme.{u}} {g : X ⟶ Y}
     HEq (((ordinary.hom.app M).hom.app U) x) x
   inverse : level Y B n ⋙ L ≅ d.inverse ⋙ level X B n
   inverse_mate : inverse.hom = ((mateEquiv d.adjunction adj).symm
-    (TwoSquare.mk _ _ _ _ ordinary.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ ordinary.hom))
   derivedInverse : ey.E ⋙ L.mapDerivedCategory ≅ d.P ⋙ ex.E
   derivedInverse_termwise : derivedInverse =
     (letI := ex.additive
@@ -394,7 +394,7 @@ structure ImageEvaluation {X Y : Scheme.{u}} {g : X ⟶ Y}
     (lowerStar (ModuleCat.{u + 1} (B.obj (op n))) g).rightDerivedFunctor
   derived_mate : derived.hom = (mateEquiv d.derivedAdjunction
     adj.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ derivedInverse.hom)).natTrans
+      (TwoSquare.mk _ _ _ _ derivedInverse.hom))
 
 /-- Open restriction preserves finite colimits because it is left adjoint to
 ordinary direct image. Source: Stacks 03S2
@@ -421,7 +421,7 @@ structure OpenEvaluation {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     level X B n ⋙ openImmersionLowerShriek (ModuleCat.{u + 1} (B.obj (op n))) j
   mate : ordinary.inv = ((mateEquiv d.openAdjunction
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} (B.obj (op n))) j)).symm
-      (TwoSquare.mk _ _ _ _ image.inverse.inv)).natTrans
+      (TwoSquare.mk _ _ _ _ image.inverse.inv))
 
 /-- Exact localization of normalized open evaluation.
 Source: Zheng 4.1, 5.14 (blueprint: def-pur-etale-system-projection-data). -/
@@ -492,7 +492,7 @@ structure ScalarEvaluation (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u 
   mate : iso.inv = ((mateEquiv s.adjunction
     (Adjunction.ofIsRightAdjoint
       (Sheaf.derivedRestrictScalars W.smallEtaleTopology (a.app (op n)).hom))).symm
-        (TwoSquare.mk _ _ _ _ restriction.hom)).natTrans
+        (TwoSquare.mk _ _ _ _ restriction.hom))
 
 /-- Finite coefficient sequences with unrestricted, possibly nonflat, transition maps.
 The exponent may depend on the level; exponent zero includes the zero ring.

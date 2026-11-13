@@ -72,7 +72,7 @@ private theorem inverse_mate_cube
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc] using
-    congrArg (fun w ↦ w.natTrans.app N) hc
+    congrArg (fun w ↦ w.app N) hc
 
 private theorem right_derived_unit_naturality
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -199,7 +199,7 @@ private theorem origin_restriction_push_normalization
       (CommRingCat.ofHom (RingHom.ulift φ))).symm
   let b := (mateEquiv (directImageConstantAdjunction B p)
     (directImageConstantAdjunction A p)
-    (TwoSquare.mk _ _ _ _ (originRestrictionPullback φ p))).natTrans
+    (TwoSquare.mk _ _ _ _ (originRestrictionPullback φ p)))
   have hb : MixedDerivedCube.unitNormalized (F B) (F A) x y
       x.mapDerivedCategory y.mapDerivedCategory x.mapDerivedCategoryFactors
       y.mapDerivedCategoryFactors c.hom b := by
@@ -256,7 +256,7 @@ private def realization_pullback (A : Type u) [CommRing A] [Finite A]
   ((mateEquiv
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p)
     (directImageConstantAdjunction A p)).symm
-      (TwoSquare.mk _ _ _ _ (originRealizationPushIso A p).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (originRealizationPushIso A p).inv))
 
 private theorem realization_restriction_right_cube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -390,7 +390,7 @@ private theorem origin_pullback_decomposition
     apply (mateEquiv ae ai).injective
     rw [mateEquiv_whiskerBottom, mate_whisker_top, mateEquiv_vcomp ae ap ai]
     simp only [originPullback, r, realization_pullback, ae, ap, ai,
-      TwoSquare.mk, TwoSquare.natTrans,
+      TwoSquare.mk,
       Equiv.apply_symm_apply]
     ext M
     simp only [originMate, TwoSquare.vComp, TwoSquare.whiskerLeft,
@@ -402,7 +402,7 @@ private theorem origin_pullback_decomposition
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc] using
-    congrArg (fun w ↦ w.natTrans.app N) hc
+    congrArg (fun w ↦ w.app N) hc
 
 private theorem origin_restriction_inv_app
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]

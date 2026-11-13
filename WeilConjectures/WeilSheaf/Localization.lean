@@ -507,7 +507,7 @@ theorem WeilComplex.exists_closedUpperShriek_comp_forget_iso :
       ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))
       (Scheme.Hom.geometricFiberMap j (comp_over j _))
       (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)) eI.inv
-  have (K : WeilComplex k₀ l X) : IsIso (β.natTrans.app K) := by
+  have (K : WeilComplex k₀ l X) : IsIso (β.app K) := by
     obtain ⟨w, hw, -⟩ := WeilComplex.existsUnique_distTriang_closedSupportTriangle i j hij K
     obtain ⟨w', hw', -⟩ :=
       ProEtale.existsUnique_distTriang_boundedConstructibleAdicClosedSupportTriangle
@@ -525,8 +525,8 @@ theorem WeilComplex.exists_closedUpperShriek_comp_forget_iso :
         have h := e.hom.comm₁
         simp only [he, Category.comp_id] at h
         exact h.symm)
-  have : IsIso β.natTrans := NatIso.isIso_of_isIso_app _
-  exact ⟨eI, asIso β.natTrans, fun K ↦ mateEquiv_counit _ _ eI.inv K⟩
+  have : IsIso β := NatIso.isIso_of_isIso_app _
+  exact ⟨eI, asIso β, fun K ↦ mateEquiv_counit _ _ eI.inv K⟩
 
 end Equivariance
 

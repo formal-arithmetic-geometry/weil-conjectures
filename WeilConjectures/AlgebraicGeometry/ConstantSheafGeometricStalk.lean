@@ -9,6 +9,8 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.LeftExact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
@@ -74,6 +76,11 @@ theorem constantSheaf_geometricStalk_isIso (T : Scheme.{u})
   have hi : IsIso ((Φ.presheafFiberConstIso E).inv ≫
       Φ.presheafFiber.map (toSheafify T.smallEtaleTopology
         ((Functor.const T.Etaleᵒᵖ).obj E))) := by
+    have : T.smallEtaleTopology.WEqualsLocallyBijective AddCommGrpCat.{(max u v) + 1} :=
+      GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
+    have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget AddCommGrpCat.{(max u v) + 1}) :=
+      Limits.preservesFilteredColimitsOfSize_shrink.{u, (max u v) + 1, u, (max u v) + 1} _
     infer_instance
   rw [← hcomp]
   exact hi

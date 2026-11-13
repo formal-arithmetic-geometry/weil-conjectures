@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.RingHom.LocallyStandardSmooth
 public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.RingTheory.Etale.Descent
 
 /-!
 # Descent of properties of schemes along field extensions

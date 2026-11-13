@@ -159,7 +159,6 @@ private theorem stalkMap_germ {Y : Scheme.{u}} (y : Y) {M N : Y.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 250000 in
 -- Explicit resolution comparisons require additional elaboration steps.
 /-- A canonical theta sends the fixed direct-image augmentation of a germ of a section
 of any module to the global-sections augmentation of its tensor-pullback unit image.

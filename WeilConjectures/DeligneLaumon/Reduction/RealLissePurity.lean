@@ -54,7 +54,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- Powers of an automorphism commute, in the form `g⁻ᵃ ≫ gᵇ = gᵇ ≫ g⁻ᵃ`. -/
 lemma _root_.CategoryTheory.Aut.pow_inv_comp_pow_hom {C : Type*} [Category C] {Z : C}
-    (g : Aut Z) (a b : ℕ) : (g ^ a).inv ≫ (g ^ b).hom = (g ^ b).hom ≫ (g ^ a).inv := by
+    (g : Aut Z) (a b : ℕ) :
+    (g ^ a).asIso.inv ≫ (g ^ b).asIso.hom = (g ^ b).asIso.hom ≫ (g ^ a).asIso.inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv, Aut.pow_hom_comp_pow_hom,
     Aut.pow_hom_comp_pow_hom, add_comm]
 
@@ -65,7 +66,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of L))]
   (j : (Y ↘ Spec (CommRingCat.of L)).geometricFiber ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
   (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      Module.finrank k₀ L).hom = (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+      Module.finrank k₀ L).asIso.hom =
+    (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
   (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L)
 
 /-- **Purity at a closed point read off on a curve** (blueprint: `thm-zl-real-mixed-by-curves`,
@@ -128,9 +130,9 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
     (hpts : ∀ a : Fin M, ∃ s' : Spec (.of (AlgebraicClosure L)) ⟶
         (Y ↘ Spec (CommRingCat.of L)).geometricFiber,
       s' ≫ j = (specAlgHomAlgebraicClosureIso θ).hom ≫
-        ((specGeometricFrobenius k₀ ^ (a : ℕ)).inv ≫
+        ((specGeometricFrobenius k₀ ^ (a : ℕ)).asIso.inv ≫
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x₀ ≫
-            ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a : ℕ)).hom)) :
+            ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a : ℕ)).asIso.hom)) :
     ∃ w : ℝ, ((curvePullback j hj).obj V).IsPunctuallyPureOfWeight ι w := by
   have : Module.Finite k₀ L := Module.Finite.of_finite
   let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
@@ -164,10 +166,10 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
   let t₀ := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x₀
   let e₀ := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x₀.1
   have he₀ : 0 < e₀ := Nat.pos_of_ne_zero (Scheme.Hom.degreeOver_ne_zero _ x₀.2)
-  have ht₀ : t₀ ≫ (Fr ^ e₀).hom = (σ ^ e₀).hom ≫ t₀ :=
+  have ht₀ : t₀ ≫ (Fr ^ e₀).asIso.hom = (σ ^ e₀).asIso.hom ≫ t₀ :=
     Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow (k := k₀) _ x₀
-  have hsa (a : ℕ) : ((σ ^ a).inv ≫ t₀ ≫ (Fr ^ a).hom) ≫ (Fr ^ e₀).hom =
-      (σ ^ e₀).hom ≫ (σ ^ a).inv ≫ t₀ ≫ (Fr ^ a).hom := by
+  have hsa (a : ℕ) : ((σ ^ a).asIso.inv ≫ t₀ ≫ (Fr ^ a).asIso.hom) ≫ (Fr ^ e₀).asIso.hom =
+      (σ ^ e₀).asIso.hom ≫ (σ ^ a).asIso.inv ≫ t₀ ≫ (Fr ^ a).asIso.hom := by
     rw [Category.assoc, Category.assoc, Aut.pow_hom_comp_pow_hom, add_comm,
       ← Aut.pow_hom_comp_pow_hom, reassoc_of% ht₀, ← Category.assoc, ← Category.assoc,
       Aut.pow_inv_comp_pow_hom]
@@ -204,9 +206,9 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
         (Nat.card k₀ ^ (Module.finrank k₀ L * e₀))
           (V.stalkSubspace t₀ ((⇑V.frobeniusTwist)^[a] P)) (w a) := by
     have h := hstalk a ⟨0, hM⟩
-    have h0 : (σ ^ ((⟨0, hM⟩ : Fin M) : ℕ)).inv ≫ t₀ ≫ (Fr ^ ((⟨0, hM⟩ : Fin M) : ℕ)).hom =
-        t₀ := by
-      change (σ ^ 0).inv ≫ t₀ ≫ (Fr ^ 0).hom = t₀
+    have h0 : (σ ^ ((⟨0, hM⟩ : Fin M) : ℕ)).asIso.inv ≫ t₀ ≫
+        (Fr ^ ((⟨0, hM⟩ : Fin M) : ℕ)).asIso.hom = t₀ := by
+      change (σ ^ 0).asIso.inv ≫ t₀ ≫ (Fr ^ 0).asIso.hom = t₀
       rw [pow_zero, pow_zero]
       exact (Category.id_comp _).trans (Category.comp_id _)
     exact (isPureOfWeightOn_stalkSubspace_congr V h0 _ _ _ _ _).1 h
@@ -297,7 +299,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
   have key (x : X₀.finitePoints) : ∃ w : ℝ,
       (V.stalk x₀).IsPureOfWeight ι (f.residueCard x₀.1) w ∧
         (V.stalk x).IsPureOfWeight ι (f.residueCard x.1) w := by
-    let sa (a : Fin M) := (σ ^ (a : ℕ)).inv ≫ t₀ ≫ (Fr ^ (a : ℕ)).hom
+    let sa (a : Fin M) := (σ ^ (a : ℕ)).asIso.inv ≫ t₀ ≫ (Fr ^ (a : ℕ)).asIso.hom
     let S := insert (f.geometricFiberPointOfFinitePoint x) (Finset.univ.image sa)
     have hS' : ∀ s ∈ S, s ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ := by
       intro s hs
@@ -324,8 +326,8 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
     have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of L)) := hYlft
     have : QuasiCompact (Y ↘ Spec (CommRingCat.of L)) := hYqc
     let jY : (Y ↘ Spec (CommRingCat.of L)).geometricFiber ⟶ f.geometricFiber := e.hom ≫ iC
-    have hjY : jY ≫ (Fr ^ Module.finrank k₀ L).hom =
-        (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ jY := he
+    have hjY : jY ≫ (Fr ^ Module.finrank k₀ L).asIso.hom =
+        (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ jY := he
     have : Mono jY := mono_comp _ _
     have hpt {s} (hs : s ∈ S) : ∃ s' : Spec (.of (AlgebraicClosure L)) ⟶
         (Y ↘ Spec (CommRingCat.of L)).geometricFiber,
@@ -340,7 +342,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
     obtain ⟨s₀, hs₀⟩ :=
       hpt (Finset.mem_insert_of_mem (Finset.mem_image_of_mem sa (Finset.mem_univ ⟨0, hM⟩)))
     have hsa0 : sa ⟨0, hM⟩ = t₀ := by
-      change (σ ^ 0).inv ≫ t₀ ≫ (Fr ^ 0).hom = t₀
+      change (σ ^ 0).asIso.inv ≫ t₀ ≫ (Fr ^ 0).asIso.hom = t₀
       rw [pow_zero, pow_zero]
       exact (Category.id_comp _).trans (Category.comp_id _)
     rw [hsa0] at hs₀

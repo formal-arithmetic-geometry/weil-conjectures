@@ -80,7 +80,6 @@ private theorem complexMap_shift
   simpa only [HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f',
     Category.assoc] using congrArg (fun f ↦ f ≫ k₀ (j + r)) h
 
-set_option maxHeartbeats 1200000 in
 -- Elaborating concrete product and cocone coordinates unfolds large coefficient models.
 private def ordinarySquare (i : PbcProperIntegralPullbackIdentification l E g) :
     ordinaryIntegralPullComplex l E g ⋙ pbcIntegralTransportComplex X l E ≅
@@ -154,7 +153,6 @@ private theorem comparison_shift_of_coordinates
   erw [F.map_id, Category.id_comp]
   exact hP_eq
 
-set_option maxHeartbeats 1200000 in
 -- Several derived localization comparisons share large concrete coefficient presentations.
 set_option backward.inferInstanceAs.wrap false in
 set_option backward.inferInstanceAs.wrap false in

@@ -16,7 +16,6 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 500000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Extension by zero and sheafification are natural for the chart tensor map. -/
 theorem tensorResolutionChartExtendedHomology_naturality

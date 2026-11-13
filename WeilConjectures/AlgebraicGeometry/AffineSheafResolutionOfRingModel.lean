@@ -13,6 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-! # Sheafifying an actual affine ring resolution -/
 

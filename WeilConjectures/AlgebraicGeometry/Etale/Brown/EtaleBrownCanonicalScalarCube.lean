@@ -91,7 +91,7 @@ theorem strictEtaleBrownCanonicalScalarCube
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory
         (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).symm
     let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-      (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)).natTrans
+      (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom))
     ∀ X : DerivedCategory (strictEtaleLevel W O t n),
       (Etale.scalarExtension (strictEtaleBrownRingMap O t h) V).map (pn.inv.app X) ≫
           (RV.scalar h).inv.app ((B.level n).inverse.obj X) ≫
@@ -114,20 +114,20 @@ theorem strictEtaleBrownCanonicalScalarCube
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).symm
   let δ := strictEtaleBrownCanonicalRestriction O t g A PW PV B h
   let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ δ.hom)).natTrans
+    (.mk _ _ _ _ δ.hom))
   have ht : (mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-      (.mk _ _ _ _ τ)).natTrans = δ.hom :=
-    congrArg TwoSquare.natTrans ((mateEquiv _ _).apply_symm_apply _)
+      (.mk _ _ _ _ τ)) = δ.hom :=
+    ((mateEquiv _ _).apply_symm_apply _)
   have hs : (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)).natTrans =
+      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)) =
         (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom := by
     have he := congrArg Iso.inv
       (Etale.scalarPullback_eq (strictEtaleBrownRingMap O t h) g)
     change ((mateEquiv an av).symm (.mk _ _ _ _
-      (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom)).natTrans =
+      (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom)) =
         (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv at he
     rw [← he]
-    exact congrArg TwoSquare.natTrans ((mateEquiv _ _).apply_symm_apply _)
+    exact ((mateEquiv _ _).apply_symm_apply _)
   have hc := strictEtaleBrownCanonicalRestrictionCube O t g A PW PV B RV RW rg hinverse h
   intro Y
   apply mateEquiv_app_cube_converse (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av

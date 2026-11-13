@@ -9,6 +9,7 @@ module
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Skyscraper modules on a ringed space

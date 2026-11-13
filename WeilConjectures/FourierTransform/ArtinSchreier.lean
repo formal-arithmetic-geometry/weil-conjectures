@@ -424,7 +424,8 @@ lemma artinSchreierIdempotent_comp_artinSchreierTranslationAction (Ψ : AddChar 
 
 /-- `e_Ψ` is an idempotent. -/
 lemma isIdempotentElem_artinSchreierIdempotent (Ψ : AddChar k Λ) :
-    IsIdempotentElem (M := End 𝒫[Λ, k]) (artinSchreierIdempotent Ψ) := by
+    IsIdempotentElem (M := End 𝒫[Λ, k]) (.of (artinSchreierIdempotent Ψ)) := by
+  apply End.ext
   change artinSchreierIdempotent Ψ ≫ artinSchreierIdempotent Ψ = artinSchreierIdempotent Ψ
   conv_lhs => arg 2; rw [artinSchreierIdempotent]
   simp only [Preadditive.comp_sum, Linear.comp_smul,
@@ -451,7 +452,7 @@ lemma image_ι_comp_factorThruImage_artinSchreierIdempotent (Ψ : AddChar k Λ) 
       𝟙 _ := by
   rw [← cancel_mono (image.ι _), ← cancel_epi (factorThruImage _)]
   simp only [Category.assoc, image.fac_assoc, image.fac, Category.id_comp]
-  exact isIdempotentElem_artinSchreierIdempotent Ψ
+  exact congr($((isIdempotentElem_artinSchreierIdempotent Ψ).eq).asHom)
 
 /-- Each `σ_b` acts on `ℒ_Ψ ⊆ (AS_q)_* Λ` by the scalar `Ψ(b)`: `s_Ψ ≫ σ_b = Ψ(b) • s_Ψ`. -/
 lemma image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction

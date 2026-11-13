@@ -42,7 +42,7 @@ private theorem sheaf_mate_app
       (TwoSquare.mk (L.sheafPushforwardContinuous A JZ JZ')
         (J'.sheafPushforwardContinuous A JU' JZ')
         (J.sheafPushforwardContinuous A JU JZ) (K.sheafPushforwardContinuous A JU JU')
-        (Functor.sheafPushforwardContinuousNatTrans τ A JU JZ'))).natTrans.app F).hom.app
+        (Functor.sheafPushforwardContinuousNatTrans τ A JU JZ'))).app F).hom.app
           (op b) =
       F.obj.map (a'.unit.app (K.obj (R.obj b)) ≫
         R'.map (τ.app (R.obj b)) ≫ R'.map (L.map (a.counit.app b))).op := by
@@ -230,7 +230,7 @@ private theorem isIso_counitRestrictionMate (sq : CommSq g' j' j g'') :
     IsIso (mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (counitRestrictionBaseChangeMap A sq))).natTrans := by
+      (TwoSquare.mk _ _ _ _ (counitRestrictionBaseChangeMap A sq))) := by
   apply (NatTrans.isIso_iff_isIso_app _).mpr
   intro F
   rw [← isIso_iff_of_reflects_iso _ (sheafToPresheaf (Scheme.ProEt.topology Z) A)]
@@ -254,16 +254,16 @@ private theorem isIso_localized_counit
   let a₄ := localizationRestrictionLowerStarAdjunction A j' inferInstance
   let β := TwoSquare.mk _ _ _ _ (counitRestrictionBaseChangeMap A hsq.toCommSq)
   let α := (mateEquiv a₁ a₂).symm β
-  have hβ : IsIso β.natTrans :=
+  have hβ : IsIso β :=
     isIso_counitRestrictionBaseChangeMap_of_isPullback A hsq
-  have hm : IsIso ((mateEquiv a₄ a₃ β).natTrans) :=
+  have hm : IsIso ((mateEquiv a₄ a₃ β)) :=
     isIso_counitRestrictionMate A hsq.toCommSq
-  have hα : IsIso α.natTrans := by
+  have hα : IsIso α := by
     have he := iterated_mateEquiv_conjugateEquiv a₁ a₂ a₃ a₄ α
-    have : IsIso (conjugateEquiv (a₁.comp a₄) (a₃.comp a₂) α.natTrans) := by
+    have : IsIso (conjugateEquiv (a₁.comp a₄) (a₃.comp a₂) α) := by
       rw [← he]
       simpa only [α, Equiv.apply_symm_apply] using hm
-    exact conjugateEquiv_of_iso (a₁.comp a₄) (a₃.comp a₂) α.natTrans
+    exact conjugateEquiv_of_iso (a₁.comp a₄) (a₃.comp a₂) α
   have hc := mateEquiv_counit_symm a₁ a₂ β F
   have : IsIso (α.app ((lowerStar A g'').obj F) ≫
       (localizationRestriction A j' inferInstance).map (a₁.counit.app F)) := by

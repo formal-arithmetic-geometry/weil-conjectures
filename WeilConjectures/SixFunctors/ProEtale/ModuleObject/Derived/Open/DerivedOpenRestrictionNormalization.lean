@@ -35,7 +35,7 @@ private theorem canonical_comparison
       (upperStarLowerStarAdjunction Λ f')
       (TwoSquare.mk _ _ _ _
         (((upperStarComp Λ i f).symm ≪≫ upperStarCongr Λ sq.w ≪≫
-          upperStarComp Λ f' j).inv))).natTrans =
+          upperStarComp Λ f' j).inv))) =
       directImageOpenRestriction Λ sq.toCommSq := by
   simp only [directImageOpenRestriction, openCoherencePullbackSquare,
     Iso.trans_inv, Iso.symm_inv, upperStarCongr,
@@ -121,13 +121,13 @@ private theorem normalized_mate
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans.app
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app
         (DerivedCategory.Q.obj I) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I) =
     G.mapDerivedCategory.map (R.rightDerivedFunctorObjQIso I).hom ≫
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans (.up ℤ)).app I) ≫
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) (.up ℤ)).app I) ≫
       (R'.rightDerivedFunctorObjQIso ((H.mapHomologicalComplex (.up ℤ)).obj I)).inv := by
   have h := AlgebraicGeometry.Etale.derivedExchangeUnitQ adj adj' e I
   rw [Functor.rightDerivedFunctorUnitQ_eq, Functor.rightDerivedFunctorUnitQ_eq] at h
@@ -158,12 +158,12 @@ private theorem normalized_mate_maps
     (β : R ⋙ G ⟶ H ⋙ R')
     (ρ : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
-    (hβ : β = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans)
+    (hβ : β = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)))
     (hρ : ρ = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans)
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)))
     (I : CochainComplex C₁ ℤ) [I.IsKInjective]
     [H.PreservesKInjectiveComplexes] :
     ρ.app (DerivedCategory.Q.obj I) ≫
@@ -197,12 +197,12 @@ private theorem normalized_mate_isIso
     (β : R ⋙ G ⟶ H ⋙ R')
     (ρ : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
-    (hβ : β = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans)
+    (hβ : β = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)))
     (hρ : ρ = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans)
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)))
     [H.PreservesKInjectiveComplexes] [IsIso β] : IsIso ρ := by
   apply (NatTrans.isIso_iff_isIso_app ρ).mpr
   intro K

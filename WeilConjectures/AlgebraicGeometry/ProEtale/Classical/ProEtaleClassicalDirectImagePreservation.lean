@@ -16,6 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-!
 # Classicality of bounded-below direct images

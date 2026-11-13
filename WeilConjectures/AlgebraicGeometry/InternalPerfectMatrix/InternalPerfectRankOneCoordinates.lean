@@ -41,7 +41,7 @@ theorem coefficientSection_integral (W : Scheme.{u}) (n : ℕ) (x : A l E) :
       (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x)) =
       ((MonObj.one : 𝟙_ (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) ⟶
         AdicCompletion.ring l E W) ≫
-          (upperStarFromPoint W).map (torsionIntegerMultiply l E x)) ≫
+          (upperStarFromPoint W).map (torsionIntegerMultiply l E x).asHom) ≫
         AdicCompletion.quotient l E W n := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let U : W.ProEt := Scheme.ProEt.mk (𝟙 W)
@@ -65,11 +65,11 @@ theorem quotientRegular_scalar (W : Scheme.{u}) (n : ℕ) (x : A l E) :
       Mod.regularExtensionIso (AdicCompletion.quotient l E W n)
     F.map ((FiniteConstantModel.modelFunctor (A l E) W).map
         (ModuleCat.ofHom (LinearMap.lsmul (A l E) (ULift.{u + 1} (A l E)) x))) ≫ e.hom =
-      e.hom ≫ coefficientEndEquiv l E W n (LocallyConstant.const _
-        (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x)) := by
+      e.hom ≫ (coefficientEndEquiv l E W n (LocallyConstant.const _
+        (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x))).asHom := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let F := Mod.extendScalars (AdicCompletion.quotient l E W n)
-  let s := MonObj.one ≫ (upperStarFromPoint W).map (torsionIntegerMultiply l E x)
+  let s := MonObj.one ≫ (upperStarFromPoint W).map (torsionIntegerMultiply l E x).asHom
   have hi := F.congr_map (FiniteModelQuotient.integralRegular_scalar l E W x)
   have he := FiniteModelQuotient.extendRegular_lift
     (AdicCompletion.quotient l E W n) s
@@ -108,9 +108,9 @@ theorem quotientFreeMatrix_scalar (W : Scheme.{u}) (n a b : ℕ)
         biproduct.mapIso (fun _ ↦ e)).hom =
     ((H.mapBiproduct (fun _ : Fin a ↦ S)) ≪≫
       biproduct.mapIso (fun _ ↦ e)).hom ≫
-        biproduct.matrix (fun i j ↦ coefficientEndEquiv l E W n
+        biproduct.matrix (fun i j ↦ (coefficientEndEquiv l E W n
           (LocallyConstant.const _
-            (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) (v i j)))) := by
+            (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) (v i j)))).asHom) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let F := FiniteConstantModel.modelFunctor (A l E) W
   let : F.Additive :=

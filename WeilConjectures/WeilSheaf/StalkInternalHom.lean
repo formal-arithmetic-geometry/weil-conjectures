@@ -88,8 +88,8 @@ noncomputable def ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse) (F : WeilSheaf 
   property := IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf hD F.property
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
 
 /-- The pairing `[D, F]_s × D_s → F_s` of stalks induced by the evaluation is compatible with
 the Frobenius of the stalks. -/

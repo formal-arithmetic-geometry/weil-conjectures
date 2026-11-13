@@ -51,7 +51,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the concrete coefficient rings are unfolded when comparing elaborations from different files
 /-- **The `ℚ̄_ℓ` projection formula from the integral one**: if the projection map
 `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism on bounded constructible `𝒪_E`-complexes for
