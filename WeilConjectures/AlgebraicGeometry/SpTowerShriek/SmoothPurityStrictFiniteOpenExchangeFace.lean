@@ -242,6 +242,12 @@ private meta partial def conversionSharedCongruence
   let b := b.consumeMData
   if a == b then return ← Lean.Meta.mkHEqRefl a
   if let some h := (← cache.get).get? (a, b) then return h
+  if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then
+    return ← Lean.Meta.mkAppM ``proof_irrel_heq #[a, b]
+  if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
+    let h ← conversionReduction a b
+    cache.modify fun m => m.insert (a, b) h
+    return h
   if a.getAppFn == b.getAppFn && a.isApp && a.getAppNumArgs == b.getAppNumArgs then
     try
       let aa := a.getAppArgs
