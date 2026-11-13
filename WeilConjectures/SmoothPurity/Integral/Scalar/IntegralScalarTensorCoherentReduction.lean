@@ -48,7 +48,6 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequenceScalar
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-set_option profiler true in
 -- The proof compares the completed and entire-system derived normalizations.
 /-- The prescribed scalar tensor comparison respects the coherent tensor reductions.
 This assertion contains no braiding or signed-swap equation.
