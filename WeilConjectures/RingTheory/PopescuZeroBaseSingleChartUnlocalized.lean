@@ -95,6 +95,7 @@ private theorem iteratedQuotient
   exact (Ideal.quotientKerAlgEquivOfSurjective_mk (f := φ) hφ p).symm
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the two presentations requires several nested ideal and polynomial transports.
 set_option backward.isDefEq.respectTransparency false in
 /-- Before localization, scalar extension removes precisely the pi terms.
