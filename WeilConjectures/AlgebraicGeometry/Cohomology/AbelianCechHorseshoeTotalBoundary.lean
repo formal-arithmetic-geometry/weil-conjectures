@@ -106,11 +106,49 @@ private lemma beta_naturality {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
     Functor.map_comp, HomologicalComplex.comp_f, Category.assoc]
   rfl
 
+private theorem total_shortExact_of_shortExact
+    (D : ShortComplex (HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ)))
+    (hD : D.ShortExact) :
+    (ShortComplex.mk (HomologicalComplex₂.total.map D.f (.up ℕ))
+      (HomologicalComplex₂.total.map D.g (.up ℕ))
+      (by rw [← HomologicalComplex₂.total.map_comp, D.zero,
+        HomologicalComplex₂.total.map_zero])).ShortExact := by
+  classical
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  let π := ComplexShape.π (.up ℕ) (.up ℕ) (.up ℕ)
+  let J := {i : ℕ × ℕ // π i = n}
+  have : Finite J := by
+    refine Set.Finite.to_subtype ((Set.finite_Iic (n, n)).subset ?_)
+    rintro ⟨p, q⟩ (h : p + q = n)
+    simp only [Set.mem_Iic, Prod.mk_le_mk]
+    omega
+  let E : HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ) ⥤
+      (Discrete J ⥤ AddCommGrpCat.{u}) :=
+    { obj := fun A ↦ Discrete.functor (fun i : J ↦ (A.X i.val.1).X i.val.2)
+      map := fun f ↦ Discrete.natTrans (fun i : Discrete J ↦ (f.f i.as.val.1).f i.as.val.2) }
+  have : PreservesFiniteLimits E := preservesFiniteLimits_of_evaluation E (fun i ↦ by
+    change PreservesFiniteLimits
+      (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
+        HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
+    infer_instance)
+  have : PreservesFiniteColimits E := preservesFiniteColimits_of_evaluation E (fun i ↦ by
+    change PreservesFiniteColimits
+      (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
+        HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
+    infer_instance)
+  have : E.PreservesZeroMorphisms := by
+    constructor
+    intro A B
+    ext ⟨i⟩
+    simp [E]
+  let F := E ⋙ colim
+  change (D.map F).ShortExact
+  exact hD.map_of_exact F
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 600000 in
 set_option profiler true in
--- Comparing the two nested complex functors with finite-diagonal totalization is expensive.
 /-- A prescribed horseshoe gives a common total boundary for alpha and beta.
 Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality).
 (blueprint: lem-pc-abelian-cech-horseshoe-total-boundary)
@@ -178,38 +216,7 @@ theorem abelianCechHorseshoe_total_boundary
     exact (((hrows n).splittingOfInjective.map (TopCat.Sheaf.cechComplexFunctor U)).map
       (HomologicalComplex.eval _ (.up ℕ) p)).shortExact
   let V := R.map (totalCechFunctor U)
-  have hV : V.ShortExact := by
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro n
-    let π := ComplexShape.π (.up ℕ) (.up ℕ) (.up ℕ)
-    let J := {i : ℕ × ℕ // π i = n}
-    have : Finite J := by
-      refine Set.Finite.to_subtype ((Set.finite_Iic (n, n)).subset ?_)
-      rintro ⟨p, q⟩ (h : p + q = n)
-      simp only [Set.mem_Iic, Prod.mk_le_mk]
-      omega
-    let E : HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ) ⥤
-        (Discrete J ⥤ AddCommGrpCat.{u}) :=
-      { obj := fun A ↦ Discrete.functor (fun i : J ↦ (A.X i.val.1).X i.val.2)
-        map := fun f ↦ Discrete.natTrans (fun i : Discrete J ↦ (f.f i.as.val.1).f i.as.val.2) }
-    have : PreservesFiniteLimits E := preservesFiniteLimits_of_evaluation E (fun i ↦ by
-      change PreservesFiniteLimits
-        (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
-          HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
-      infer_instance)
-    have : PreservesFiniteColimits E := preservesFiniteColimits_of_evaluation E (fun i ↦ by
-      change PreservesFiniteColimits
-        (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
-          HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
-      infer_instance)
-    have : E.PreservesZeroMorphisms := by
-      constructor
-      intro A B
-      ext ⟨i⟩
-      simp [E]
-    let F := E ⋙ colim
-    change (D.map F).ShortExact
-    exact hD.map_of_exact F
+  have hV : V.ShortExact := total_shortExact_of_shortExact D hD
   let A := (ShortComplex.mk α β hαβ).map
     ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj
       (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))

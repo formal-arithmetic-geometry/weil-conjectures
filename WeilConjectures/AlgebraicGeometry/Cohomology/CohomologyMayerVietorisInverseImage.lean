@@ -47,6 +47,43 @@ private lemma extTransport_apply
     (he' : ∀ a x, e' (a • x) =
       (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) (add_zero m)) (x : A) :
     extTransport ρ α h e e' he he' x = e'.symm (α.comp (e x) h) := rfl
+private lemma extTransport_naturality
+    {T T' : Type u} [CommRing T] [CommRing T']
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    [Abelian C] [Abelian D] [HasExt.{u} C] [HasExt.{u} D]
+    (G : C ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    {P Q F : C} {F' : D} (φ : G.obj F ⟶ F')
+    (ρ : T →+* End F) (ρ' : T' →+* End F')
+    {A B A' B' : Type u}
+    [AddCommGroup A] [AddCommGroup B] [AddCommGroup A'] [AddCommGroup B']
+    [Module T A] [Module T B] [Module T' A'] [Module T' B']
+    {n k m : ℕ} (α : CategoryTheory.Abelian.Ext P Q k)
+    (α' : CategoryTheory.Abelian.Ext (G.obj P) (G.obj Q) k)
+    (hα : α.mapExactFunctor G = α') (h : k + n = m)
+    (e : A ≃+ CategoryTheory.Abelian.Ext Q F n)
+    (eB : B ≃+ CategoryTheory.Abelian.Ext P F m)
+    (e' : A' ≃+ CategoryTheory.Abelian.Ext (G.obj Q) F' n)
+    (eB' : B' ≃+ CategoryTheory.Abelian.Ext (G.obj P) F' m)
+    (he : ∀ a x, e (a • x) = (e x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom)
+      (add_zero n))
+    (heB : ∀ a x, eB (a • x) = (eB x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom)
+      (add_zero m))
+    (he' : ∀ a x, e' (a • x) = (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ' a).asHom)
+      (add_zero n))
+    (heB' : ∀ a x, eB' (a • x) = (eB' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ' a).asHom)
+      (add_zero m))
+    (a : A → A') (b : B → B')
+    (ha : ∀ x, e' (a x) = ((e x).mapExactFunctor G).comp
+      (CategoryTheory.Abelian.Ext.mk₀ φ) (add_zero n))
+    (hb : ∀ x, eB' (b x) = ((eB x).mapExactFunctor G).comp
+      (CategoryTheory.Abelian.Ext.mk₀ φ) (add_zero m)) (x : A) :
+    extTransport ρ' α' h e' eB' he' heB' (a x) =
+      b (extTransport ρ α h e eB he heB x) := by
+  apply eB'.injective
+  rw [extTransport_apply, eB'.apply_symm_apply, ha, hb,
+    extTransport_apply, eB.apply_symm_apply,
+    CategoryTheory.Abelian.Ext.mapExactFunctor_comp, hα,
+    CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero]
 private lemma transport_exact
     {A B C D E F : Type u}
     [AddCommGroup A] [AddCommGroup B] [AddCommGroup C]
@@ -98,9 +135,7 @@ private theorem extRow_exact
         ((ShortComplex.ab_exact_iff_function_exact _).mp
           (CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃' hK F n (n + 1) (by omega)))
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Ext transport elaboration unfolds large categorical terms.
 /-- The original and pulled-back Mayer--Vietoris sequences are compatible with
 `H.baseChangeLinear`, before tensoring. Neither flatness nor quasi-coherence is needed.
 
@@ -189,32 +224,21 @@ theorem H.baseChangeLinear_mayerVietoris
   obtain ⟨hr', he'⟩ := extRow_exact hK' E'
   refine ⟨r, d, δ, r', d', δ', hr, hr', he, he', ?_, ?_, ?_⟩
   · intro n x
-    apply (E'.eP n).injective
-    rw [extTransport_apply, (E'.eP n).apply_symm_apply]
-    change (CategoryTheory.Abelian.Ext.mk₀ (G.map K.g)).comp
-        (E'.eX n (H.baseChangeLinear (S := S) f M n x)) (zero_add n) = _
-    rw [hx, hp]
-    rw [extTransport_apply, (E.eP n).apply_symm_apply]
-    rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp,
-      CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀,
-      CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero]
+    exact extTransport_naturality G _ ρ τ _ _
+      (CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀ G K.g) (zero_add n)
+      (E.eX n) (E.eP n) (E'.eX n) (E'.eP n)
+      (E.scalarX n) (E.scalarP n) (E'.scalarX n) (E'.scalarP n)
+      _ _ (hx n) (hp n) x
   · intro n x
-    apply (E'.eI n).injective
-    rw [extTransport_apply, (E'.eI n).apply_symm_apply]
-    change (CategoryTheory.Abelian.Ext.mk₀ (G.map K.f)).comp
-        (E'.eP n _) (zero_add n) = _
-    rw [hp, hi]
-    rw [extTransport_apply, (E.eI n).apply_symm_apply]
-    rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp,
-      CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀,
-      CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero]
+    exact extTransport_naturality G _ ρ τ _ _
+      (CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀ G K.f) (zero_add n)
+      (E.eP n) (E.eI n) (E'.eP n) (E'.eI n)
+      (E.scalarP n) (E.scalarI n) (E'.scalarP n) (E'.scalarI n)
+      _ _ (hp n) (hi n) x
   · intro n x
-    apply (E'.eX (n + 1)).injective
-    rw [extTransport_apply, (E'.eX (n + 1)).apply_symm_apply]
-    change hK'.extClass.comp (E'.eI n _) (by omega : 1 + n = n + 1) = _
-    rw [hi, hx]
-    rw [extTransport_apply, (E.eX (n + 1)).apply_symm_apply]
-    rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp,
-      CategoryTheory.Abelian.Ext.mapExactFunctor_extClass,
-      CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero]
+    exact extTransport_naturality G _ ρ τ _ _
+      (CategoryTheory.Abelian.Ext.mapExactFunctor_extClass G hK) (by omega)
+      (E.eI n) (E.eX (n + 1)) (E'.eI n) (E'.eX (n + 1))
+      (E.scalarI n) (E.scalarX (n + 1)) (E'.scalarI n) (E'.scalarX (n + 1))
+      _ _ (hi n) (hx (n + 1)) x
 end AlgebraicGeometry.Scheme.Modules
