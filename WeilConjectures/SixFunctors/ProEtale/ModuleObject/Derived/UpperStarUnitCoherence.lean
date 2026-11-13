@@ -246,10 +246,11 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
         L((f)^*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ g).hom ≫
           (leftDerivedUpperStarUnitIso Λ f).hom =
       (leftDerivedUpperStarUnitIso Λ (f ≫ g)).hom := by
-  simpa only [upperStarComp_hom_app_unit,
-    ← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso] using
-    Functor.leftDerivedFunctorFactorIso_hom_app_single (upperStarComp Λ f g)
+  have h := Functor.leftDerivedFunctorFactorIso_hom_app_single (upperStarComp Λ f g)
       (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv
+  simp only [upperStarComp_hom_app_unit,
+    ← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso] at h
+  exact h
 
 /-! ### Bounded constructible complexes -/
 
