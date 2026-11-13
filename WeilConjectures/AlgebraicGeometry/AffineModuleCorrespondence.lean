@@ -54,17 +54,6 @@ local instance instHasLeftKanExtension_affineModuleCorrespondence
   exact Functor.HasLeftKanExtension.mk _
     (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
 
--- Share the sheafification instances used by the quasi-coherence predicates.
-local instance instHasWeakSheafifyOver_affineModuleCorrespondence
-    (Y : Scheme.{u}) (V : Opens Y) :
-    HasWeakSheafify ((Opens.grothendieckTopology Y).over V) AddCommGrpCat.{u} :=
-  inferInstance
-
-local instance instWEqualsLocallyBijectiveOver_affineModuleCorrespondence
-    (Y : Scheme.{u}) (V : Opens Y) :
-    (Opens.grothendieckTopology Y).over V |>.WEqualsLocallyBijective AddCommGrpCat.{u} :=
-  inferInstance
-
 set_option hygiene false in
 local notation "𝓙" T => Opens.grothendieckTopology T
 set_option hygiene false in
@@ -212,6 +201,19 @@ theorem affine_module_correspondence [IsAffineHom f] :
               Nonempty (E.functor ⋙ (qA).ι ≅ (qU).ι ⋙ R) ∧
               Nonempty (E.inverse ⋙ (qU).ι ≅ (qA).ι ⋙ H) := by
   classical
+  trace "PH743: proof start"
+  let : ∀ V : Opens X,
+      HasWeakSheafify ((Opens.grothendieckTopology X).over V) AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
+  let : ∀ V : Opens U,
+      HasWeakSheafify ((Opens.grothendieckTopology U).over V) AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
+  let : ∀ V : Opens X,
+      ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
+  let : ∀ V : Opens U,
+      ((Opens.grothendieckTopology U).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
   let RA := 𝓡 A
   let Rf : U.Modules ⥤ SheafOfModules.{u} RA := R
   let Sf : SheafOfModules.{u} RA ⥤ X.Modules := S
@@ -224,10 +226,11 @@ theorem affine_module_correspondence [IsAffineHom f] :
       ((affine_morphism_relative_spec X).1 f inferInstance) G
   have hpush (F : U.Modules) (hF : pU F) :
       pA (Rf.obj F) := by
-    let := hF
+    have : F.IsQuasicoherent := hF
     let := IsSeparated.of_isAffineHom f
     apply (hqc (Rf.obj F)).mpr
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
+  trace "PH743: quasi-coherence complete"
   refine ⟨hqc, hpush, ?_⟩
   refine Exists.elim (affine_module_tensor_construction f) (fun B hB ↦ ?_)
   refine ⟨B, ?_⟩
@@ -253,9 +256,11 @@ theorem affine_module_correspondence [IsAffineHom f] :
   refine ⟨α, ?_⟩
   refine Exists.elim hβ₀ (fun β hcomp ↦ ?_)
   refine ⟨β, hcomp.1, hcomp.2, ?_⟩
+  trace "PH743: witnesses unpacked"
   have hiso := affine_module_tensor_comparison_isIso f B b t ε
     ⟨hring.1, hring.2.1, hring.2.2.1⟩ P pobj κ ⟨hP.1, hP.2.1⟩ H hobj γ
     ⟨hH.1, hH.2.1, hH.2.2.1⟩ α β hcomp
+  trace "PH743: comparison applied"
   refine ⟨hiso.1, hiso.2, ?_⟩
   exact equivalence_on_full_subcategories pU pA Rf H hpush hH.2.2.1 α β hiso.1 hiso.2
 
