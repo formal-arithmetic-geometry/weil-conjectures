@@ -14,7 +14,7 @@ The middle extension `(j_*M)[1]` of an irreducible lisse Weil sheaf `M` on a den
 affine line has no nonzero punctual subobject
 (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_of_mono_middleExtension`) and no nonzero
 punctual quotient (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_of_epi_middleExtension`)
-in the curve perverse heart. (blueprint: `lemma-simple-objects--2`)
+in the curve perverse heart.
 -/
 
 @[expose] public section
@@ -55,9 +55,7 @@ open WeilComplex
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- The middle extension `(j_*M)[1]` of an irreducible lisse sheaf `M` has no nonzero punctual
-subobject in the curve perverse heart: a subobject is `0` or everything
-(`AlgebraicGeometry.WeilComplex.eq_zero_or_isIso_of_mono_middleExtension`), and `(j_*M)[1]` is
-not punctual, its `𝓗⁻¹ = j_*M` being nonzero. (blueprint: `lemma-simple-objects--2`) -/
+subobject in the curve perverse heart. -/
 theorem isZero_of_mono_middleExtension (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) (G : WeilSheaf k₀ l (affineLine k₀))
     (hG : G.support.Finite)
@@ -77,9 +75,7 @@ theorem isZero_of_mono_middleExtension (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     exact h1.of_iso (Iso.refl _ : (WeilSheaf.lowerStar D.j).obj D.sheaf ≅ D.directImage)
 
 /-- The middle extension `(j_*M)[1]` of a lisse sheaf `M` has no nonzero punctual quotient in the
-curve perverse heart: `(j_*M)[1]` is concentrated in degree `-1` and a punctual object in degree
-`0`, so every morphism from the former to the latter vanishes.
-(blueprint: `lemma-simple-objects--2`) -/
+curve perverse heart. -/
 theorem isZero_of_epi_middleExtension (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : G.support.Finite)
     (f : (⟨D.middleExtension, D.isCurvePerverse_middleExtension⟩ :

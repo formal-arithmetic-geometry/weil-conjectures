@@ -20,18 +20,17 @@ Let `a : 𝔸ⁿ_k ⟶ Spec k` be affine space of dimension `r = #n` over a fiel
 coefficient ring whose exponent is invertible on `k`, and `γ : Λ(r)[2r] ≅ Ra^! Λ` any Tate
 orientation of `a`. The untwisted smooth trace `(Ra_! Λ)[2r] ⟶ Λ(-r)`
 (`AlgebraicGeometry.Etale.TateOrientation.untwistedSmoothTrace`) is an isomorphism: the
-isomorphism `RΓ_c(𝔸^r, Λ) ≅ Λ(-r)[-2r]` is the trace map for compactly supported cohomology
-(blueprint `lemma-integral-linear-character--3`).
+isomorphism `RΓ_c(𝔸^r, Λ) ≅ Λ(-r)[-2r]` is the trace map for compactly supported cohomology.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_counit_affineSpace`: the
   counit `Ra_! Ra^! Λ ⟶ Λ` of `Ra_! ⊣ Ra^!` is an isomorphism, for `a : 𝔸ⁿ_S ⟶ S` over a
   Noetherian base `S`.
-- `AlgebraicGeometry.Etale.TateOrientation.isIso_untwistedSmoothTrace_affineSpace`
-  (`lemma-integral-linear-character--3`).
+- `AlgebraicGeometry.Etale.TateOrientation.isIso_untwistedSmoothTrace_affineSpace`: the untwisted
+  smooth trace `(Ra_! Λ)[2r] ⟶ Λ(-r)` of affine space over a field is an isomorphism.
 
-## Proof
+## Implementation details
 
 The counit is invertible for the coordinate tower `𝔸¹(𝔸¹(⋯ S))` with its ordered adjunction
 (`AlgebraicGeometry.Etale.exists_affineSpaceTopTrace`), whose left adjoint is `R(-)_!`
@@ -40,6 +39,10 @@ depend on the presentation of the left adjoint (by conjugation of adjunctions), 
 to the canonical adjunction `Ra_! ⊣ Ra^!`, and along the isomorphism of the tower with `𝔸ⁿ_S`.
 The smooth trace is `Ra_!(γ)` followed by the counit, and the untwisted smooth trace is the
 smooth trace up to the (invertible) projection map and the Tate twist identifications.
+
+This is the étale, finite-coefficient form of the statement. The `ℚ̄_ℓ`-Weil isomorphism
+`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction`
+is only known to exist, so it is not identified with this trace map here.
 -/
 
 @[expose] public section
@@ -57,8 +60,7 @@ section Adjunction
 variable {C D : Type*} [Category C] [Category D] {L L' : C ⥤ D} {R R' : D ⥤ C}
 
 /-- Being invertible for the counit of an adjunction at an object does not depend on the
-presentation of the left adjoint: the two counits differ by the conjugate isomorphism of the
-right adjoints. -/
+presentation of the left adjoint. -/
 private lemma isIso_counit_app_of_iso_left (adj : L ⊣ R) (adj' : L' ⊣ R') (φ : L ≅ L') (K : D)
     [hK : IsIso (adj.counit.app K)] : IsIso (adj'.counit.app K) := by
   have h := conjugateEquiv_counit adj' adj φ.hom K
@@ -66,7 +68,7 @@ private lemma isIso_counit_app_of_iso_left (adj : L ⊣ R) (adj' : L' ⊣ R') (�
   exact IsIso.of_isIso_comp_left (φ.hom.app _) _
 
 /-- Being invertible for the counit of an adjunction at an object only depends on the object up
-to isomorphism, by naturality of the counit. -/
+to isomorphism. -/
 private lemma isIso_counit_app_of_iso (adj : L ⊣ R) {K K' : D} (e : K ≅ K')
     [hK : IsIso (adj.counit.app K)] : IsIso (adj.counit.app K') := by
   have h : L.map (R.map e.hom) ≫ adj.counit.app K' = adj.counit.app K ≫ e.hom :=
@@ -81,7 +83,7 @@ end Adjunction
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 /-- The counit `Rp_! Rp^! Λ ⟶ Λ` of the coordinate-tower projection `p : 𝔸¹(⋯ 𝔸¹(S)) ⟶ S`
-is an isomorphism (`AlgebraicGeometry.Etale.exists_affineSpaceTopTrace`). -/
+is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekAdjunction_counit_affineTraceProjection (S : Scheme.{u})
     [IsNoetherian S] [HasInvertibleExponent Λ S] (d : ℕ) :
     IsIso ((rightDerivedUpperShriekAdjunction Λ (affineTraceProjection S d)).counit.app
@@ -95,7 +97,7 @@ theorem isIso_rightDerivedUpperShriekAdjunction_counit_affineTraceProjection (S 
   exact isIso_counit_app_of_iso _ (unitIsoSingleFunctorConstantSheaf Λ S).symm (hK := this)
 
 /-- The counit `Ra_! Ra^! Λ ⟶ Λ` of `Ra_! ⊣ Ra^!` for affine space `a : 𝔸ⁿ_S ⟶ S` over a
-Noetherian base is an isomorphism: `RΓ_c(𝔸ⁿ_S, Ra^! Λ) ≅ Λ` through the counit. -/
+Noetherian base is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekAdjunction_counit_affineSpace (n : Type u) [Finite n]
     (S : Scheme.{u}) [IsNoetherian S] [HasInvertibleExponent Λ S] :
     IsIso ((rightDerivedUpperShriekAdjunction Λ (𝔸(n; S) ↘ S)).counit.app
@@ -126,8 +128,7 @@ variable [HasTateTwist Λ] {X Y : Scheme.{u}} {a : X ⟶ Y} [HasCompactification
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 /-- If the counit `Ra_! Ra^! Λ ⟶ Λ` is invertible, so is the untwisted smooth trace
-`(Ra_! Λ)[2d] ⟶ Λ(-d)` of any Tate orientation `γ`: it is the smooth trace `Ra_!(γ)` followed
-by the counit, up to the projection map and the Tate twist identifications. -/
+`(Ra_! Λ)[2d] ⟶ Λ(-d)` of any Tate orientation `γ`. -/
 theorem isIso_untwistedSmoothTrace_of_isIso_counit (γ : TateOrientation Λ a d)
     [IsIso ((rightDerivedUpperShriekAdjunction Λ a).counit.app
       (𝟙_ (DerivedCategoryModule Λ Y)))] :
@@ -144,16 +145,9 @@ theorem isIso_untwistedSmoothTrace_of_isIso_counit (γ : TateOrientation Λ a d)
 
 end TateOrientation
 
-/-- Blueprint `lemma-integral-linear-character--3`: for affine space `a : 𝔸ⁿ_k ⟶ Spec k` of
-dimension `r = #n` over a field `k`, a finite coefficient ring `Λ` with exponent invertible on
-`k` and any Tate orientation `γ : Λ(r)[2r] ≅ Ra^! Λ`, the untwisted smooth trace
-`(Ra_! Λ)[2r] ⟶ Λ(-r)` is an isomorphism: the isomorphism `RΓ_c(𝔸^r, Λ) ≅ Λ(-r)[-2r]` is the
-trace map for compactly supported cohomology.
-
-This is the étale, finite-coefficient form of the clause. The `ℚ̄_ℓ`-Weil isomorphism of
-`lemma-integral-linear-character--1`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction`)
-is only known to exist, so it is not identified with this trace map here. -/
+/-- For affine space `a : 𝔸ⁿ_k ⟶ Spec k` of dimension `r = #n` over a field `k`, a finite
+coefficient ring `Λ` with exponent invertible on `k` and any Tate orientation
+`γ : Λ(r)[2r] ≅ Ra^! Λ`, the untwisted smooth trace `(Ra_! Λ)[2r] ⟶ Λ(-r)` is an isomorphism. -/
 theorem TateOrientation.isIso_untwistedSmoothTrace_affineSpace [HasTateTwist Λ]
     {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] (n : Type u) [Fintype n]
     (γ : TateOrientation Λ (𝔸(n; Spec (.of k)) ↘ Spec (.of k)) (Fintype.card n)) :

@@ -16,8 +16,18 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Hea
 On a smooth curve `C` over the finite field `k₀`, the classes `ᵖD^{≤0}`
 (`AlgebraicGeometry.WeilComplex.IsCurvePerverseUpper`) and `ᵖD^{≥0}`
 (`AlgebraicGeometry.WeilComplex.IsCurvePerverseLower`) form a bounded t-structure on the Weil
-complexes on `C`, whose heart, the category of perverse sheaves on `C`, is abelian
-(blueprint `lemma-perverse-sheaves-curve--1`).
+complexes on `C`, whose heart, the category of perverse sheaves on `C`, is abelian.
+
+## Main declarations
+
+- `AlgebraicGeometry.WeilComplex.IsCurvePerverseGE`: the shifted lower classes `ᵖD^{≥n}`.
+- `AlgebraicGeometry.WeilComplex.exists_tStructure_of_punctual`: the curve perverse classes form
+  a bounded t-structure with abelian heart, given maximal punctual subsheaves.
+- `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure`: the perverse t-structure on a
+  smooth curve, and its instance
+  `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure_affineLine` on the affine line.
+
+## Implementation details
 
 The orthogonality axiom is
 `AlgebraicGeometry.WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero`. The truncation
@@ -30,15 +40,6 @@ lies in `ᵖD^{≤0}`. The abelianness of the heart is the general fact
 The only sheaf-theoretic input is the existence of the maximal punctual subsheaf of a Weil sheaf,
 `AlgebraicGeometry.WeilSheaf.exists_mono_support_finite_cokernel`: it is the kernel of the unit
 `F ⟶ j_* j^* F` of a dense open on which `F` is lisse, the punctual part of `F`.
-
-## Main declarations
-
-- `AlgebraicGeometry.WeilComplex.IsCurvePerverseGE`: the shifted lower classes `ᵖD^{≥n}`.
-- `AlgebraicGeometry.WeilComplex.exists_tStructure_of_punctual`: the curve perverse classes form
-  a bounded t-structure with abelian heart, given maximal punctual subsheaves.
-- `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure`: the clause
-  `lemma-perverse-sheaves-curve--1` on a smooth curve, and its instance
-  `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure_affineLine` on the affine line.
 -/
 
 @[expose] public section
@@ -55,8 +56,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The shifted lower class `ᵖD^{≥n} = ᵖD^{≥0}[-n]` of the perverse t-structure on a smooth
-curve: `𝓗ᵃK = 0` for `a < n - 1`, and `𝓗ⁿ⁻¹K` has no nonzero subsheaf of finite support.
-(blueprint: `lemma-perverse-sheaves-curve--1`) -/
+curve: `𝓗ᵃK = 0` for `a < n - 1`, and `𝓗ⁿ⁻¹K` has no nonzero subsheaf of finite support. -/
 def IsCurvePerverseGE (n : ℤ) (K : WeilComplex k₀ l X) : Prop :=
   (∀ a : ℤ, a < n - 1 → IsZero ((homologySheaf a).obj K)) ∧
     ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ (homologySheaf (n - 1)).obj K), Mono i →
@@ -127,11 +127,10 @@ theorem mono_homologySheaf_map_mor₂ (T : Triangle (WeilComplex k₀ l X)) (hT 
     Mono ((homologySheaf a).map T.mor₂) :=
   (homologySheaf_exact₂ T a hT).mono_g (h.eq_of_src _ _)
 
-/-- **Perverse truncation on a smooth curve** (`lemma-perverse-sheaves-curve--1`): if every
+/-- **Perverse truncation on a smooth curve**: if every
 Weil sheaf `F` on `X` has a punctual subsheaf `P` such that `F / P` has no nonzero punctual
 subsheaf, then every Weil complex `K` sits in a distinguished triangle `A ⟶ K ⟶ B ⟶ A[1]` with
-`A ∈ ᵖD^{≤0}` and `B ∈ ᵖD^{≥1}`. With `P ⊆ 𝓗⁰K` maximal punctual, `B` is the cone of
-`P[0] ⟶ τ_{≥0} K` and `A` the fibre of `K ⟶ B`. -/
+`A ∈ ᵖD^{≤0}` and `B ∈ ᵖD^{≥1}`. -/
 theorem exists_distTriang_isCurvePerverseLE_isCurvePerverseGE
     (hX : ∀ F : WeilSheaf k₀ l X, ∃ (P : WeilSheaf k₀ l X) (i : P ⟶ F), Mono i ∧
       P.support.Finite ∧ ∀ (G : WeilSheaf k₀ l X) (j : G ⟶ cokernel i), Mono j →
@@ -233,8 +232,7 @@ section TStructure
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Morphisms from `ᵖD^{≤0}` to `ᵖD^{≥1}` vanish on a smooth curve: after the shift by `1`
-this is `AlgebraicGeometry.WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero`. -/
+/-- Morphisms from `ᵖD^{≤0}` to `ᵖD^{≥1}` vanish on a smooth curve. -/
 theorem hom_eq_zero_of_isCurvePerverseLE_of_isCurvePerverseGE {K L : WeilComplex k₀ l X}
     (hK : K.IsCurvePerverseLE 0) (hL : L.IsCurvePerverseGE 1) (f : K ⟶ L) : f = 0 := by
   apply (shiftFunctor (WeilComplex k₀ l X) (1 : ℤ)).map_injective
@@ -243,10 +241,10 @@ theorem hom_eq_zero_of_isCurvePerverseLE_of_isCurvePerverseGE {K L : WeilComplex
     ((isCurvePerverseGE_zero_iff _).1 (hL.shift 1 0 (by norm_num))) _
     (hK.shift 1 (-1) (by norm_num)) _
 
-/-- **The perverse t-structure on a smooth curve** (blueprint `lemma-perverse-sheaves-curve--1`),
-given the existence of maximal punctual subsheaves: there is a t-structure on the Weil complexes
-whose classes `≤ n` and `≥ n` are `ᵖD^{≤n}` and `ᵖD^{≥n} = ᵖD^{≥0}[-n]`; it is bounded, its
-heart is the class of curve perverse complexes, and the heart is abelian. -/
+/-- **The perverse t-structure on a smooth curve**, given the existence of maximal punctual
+subsheaves: there is a t-structure on the Weil complexes whose classes `≤ n` and `≥ n` are
+`ᵖD^{≤n}` and `ᵖD^{≥n} = ᵖD^{≥0}[-n]`; it is bounded, its heart is the class of curve perverse
+complexes, and the heart is abelian. -/
 theorem exists_tStructure_of_punctual
     (hX : ∀ F : WeilSheaf k₀ l X, ∃ (P : WeilSheaf k₀ l X) (i : P ⟶ F), Mono i ∧
       P.support.Finite ∧ ∀ (G : WeilSheaf k₀ l X) (j : G ⟶ cokernel i), Mono j →
@@ -283,10 +281,9 @@ theorem exists_tStructure_of_punctual
 
 end TStructure
 
-/-- **The perverse t-structure on a smooth curve** (blueprint `lemma-perverse-sheaves-curve--1`):
-on a smooth curve `X` over `k₀`, the classes `ᵖD^{≤0}` and `ᵖD^{≥0}` form a bounded t-structure
-on the Weil complexes, with `≤ n` and `≥ n` parts their shifts, and its heart, the category of
-perverse sheaves on `X`, is abelian. -/
+/-- **The perverse t-structure on a smooth curve**: on a smooth curve `X` over `k₀`, the classes
+`ᵖD^{≤0}` and `ᵖD^{≥0}` form a bounded t-structure on the Weil complexes, with `≤ n` and `≥ n`
+parts their shifts, and its heart, the category of perverse sheaves on `X`, is abelian. -/
 theorem exists_curvePerverse_tStructure [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
@@ -300,9 +297,9 @@ theorem exists_curvePerverse_tStructure [LocallyOfFiniteType (X ↘ Spec (CommRi
         h.toPreadditive = (inferInstance : Preadditive t.heart.FullSubcategory) :=
   exists_tStructure_of_punctual WeilSheaf.exists_mono_support_finite_cokernel
 
-/-- **The perverse t-structure on the affine line** (blueprint `lemma-perverse-sheaves-curve--1`):
-the classes `ᵖD^{≤0}` and `ᵖD^{≥0}` form a bounded t-structure on the Weil complexes on `𝔸¹`,
-with `≤ n` and `≥ n` parts their shifts, whose heart `curvePerverse` is abelian. -/
+/-- **The perverse t-structure on the affine line**: the classes `ᵖD^{≤0}` and `ᵖD^{≥0}` form a
+bounded t-structure on the Weil complexes on `𝔸¹`, with `≤ n` and `≥ n` parts their shifts,
+whose heart `curvePerverse` is abelian. -/
 theorem exists_curvePerverse_tStructure_affineLine :
     ∃ t : TStructure (WeilComplex k₀ l (affineLine k₀)),
       t.le 0 = IsCurvePerverseUpper ∧ t.ge 0 = IsCurvePerverseLower ∧

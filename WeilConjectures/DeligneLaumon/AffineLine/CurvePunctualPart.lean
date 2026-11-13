@@ -25,6 +25,14 @@ punctual, and a punctual sheaf maps to zero in the direct image of a lisse sheaf
   smooth curve vanishing on a dense open is punctual.
 - `AlgebraicGeometry.WeilSheaf.eq_zero_of_support_finite_of_isLisse`: every morphism from a
   punctual Weil sheaf to the direct image of a lisse sheaf on an open of a smooth curve vanishes.
+
+## Implementation details
+
+For `eq_zero_of_support_finite_of_isLisse`, let `V₀` be the complement of the support of `G`.
+Every point of the geometric fibre `Ū` specializes from a generic point of `Ū`, which lies over
+a generic point of `X` (the projection `X̄ ⟶ X` is flat), hence in `V₀`. The adjoint
+`j̄^* G ⟶ N` therefore vanishes on `Ū ∩ V̄₀`, so it vanishes since `N` is lisse
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`).
 -/
 
 @[expose] public section
@@ -38,8 +46,7 @@ section Topology
 variable {α : Type*} [TopologicalSpace α] [QuasiSober α] [T0Space α]
 
 /-- In a quasi-sober `T₀` space of dimension at most one, a point outside an open set containing
-all generic points is closed: a proper specialization of it would give a chain of three
-irreducible closed subsets, the last one being its irreducible component. -/
+all generic points is closed. -/
 theorem isClosed_singleton_of_genericPoints_subset (h : topologicalKrullDim α ≤ 1) {U : Set α}
     (hU : genericPoints α ⊆ U) {x : α} (hx : x ∉ U) : IsClosed ({x} : Set α) := by
   by_contra hcl
@@ -77,8 +84,7 @@ theorem isClosed_singleton_of_genericPoints_subset (h : topologicalKrullDim α �
   exact absurd h2 (by decide)
 
 /-- In a Noetherian quasi-sober `T₀` space of dimension at most one, an open set containing all
-generic points has finite complement: the irreducible components of the complement are closed
-points. -/
+generic points has finite complement. -/
 theorem IsOpen.finite_compl_of_genericPoints_subset [NoetherianSpace α]
     (h : topologicalKrullDim α ≤ 1) {U : Set α} (hU : IsOpen U) (hg : genericPoints α ⊆ U) :
     Uᶜ.Finite := by
@@ -101,7 +107,7 @@ end Topology
 namespace AlgebraicGeometry
 
 /-- On a scheme smooth of relative dimension one over a field, the generic point of an
-irreducible component is not a closed point: closed points have codimension one. -/
+irreducible component is not a closed point. -/
 theorem not_isClosed_singleton_of_mem_genericPoints {K : Type u} [Field K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) [SmoothOfRelativeDimension 1 f] {c : X} (hc : c ∈ genericPoints X) :
     ¬ IsClosed ({c} : Set X) := by
@@ -154,12 +160,7 @@ theorem support_finite_of_isZero_upperStar_of_dense
 open scoped ProEtale in
 /-- **The direct image of a lisse sheaf has no punctual subsheaf**: every morphism from a Weil
 sheaf `G` of finite support on a smooth curve `X` to the direct image `j_* N` of a lisse Weil
-sheaf on an open `j : U ↪ X` vanishes. Let `V₀` be the complement of the support of `G`, so that
-`G|_{V₀} = 0`. Every point of the geometric fibre `Ū` specializes from a generic point `η` of
-`Ū`; it lies over a generic point of `X` (the projection `X̄ ⟶ X` is flat), which is not a closed
-point, hence lies in `V₀`. The adjoint `j̄^* G ⟶ N` thus vanishes on `Ū ∩ V̄₀`, and a morphism to
-the lisse `N` vanishing there vanishes
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`). -/
+sheaf on an open `j : U ↪ X` vanishes. -/
 theorem eq_zero_of_support_finite_of_isLisse
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]

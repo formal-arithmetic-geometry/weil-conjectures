@@ -29,13 +29,24 @@ isomorphisms needed to read an isomorphism of tensor products and duals at a poi
 * `AlgebraicGeometry.WeilSheaf.tensorObjIsoOfIso`: functoriality of `⊗` in isomorphisms;
 * `AlgebraicGeometry.WeilSheaf.adicConstantTensorObjIso`: `ℚ̄_ℓ ⊗ G ≅ G`.
 
-The blueprint clauses of `lemma-artin-schreier-character-sheaf` stating that the multiplication
-and duality isomorphisms respect these trivializations are
-`AlgebraicGeometry.exists_iso_tensorObj_artinSchreierOf_compatible` and
-`AlgebraicGeometry.exists_iso_dual_artinSchreier_compatible`. They are proved by rescaling any
-such isomorphism by a scalar: every automorphism of `ℚ̄_ℓ` on `Spec k₀` is a scalar, scalars
-commute with all morphisms and pullbacks, so every automorphism of the restriction to a rational
-point of a sheaf trivial there lifts (`AlgebraicGeometry.WeilSheaf.exists_upperStar_mapIso_eq`).
+## Main statements
+
+- `AlgebraicGeometry.exists_iso_tensorObj_artinSchreierOf_compatible`: the multiplication
+  isomorphism `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` can be chosen to respect the trivializations.
+- `AlgebraicGeometry.exists_iso_dual_artinSchreier_compatible`: the duality isomorphism
+  `ℒ_{ψ(a x)}^∨ ≅ ℒ_{ψ⁻¹(a x)}` can be chosen to respect the trivializations at zero.
+
+## Implementation details
+
+The two compatibility statements are proved by rescaling any such isomorphism by a scalar: every
+automorphism of `ℚ̄_ℓ` on `Spec k₀` is a scalar, scalars commute with all morphisms and
+pullbacks, so every automorphism of the restriction to a rational point of a sheaf trivial there
+lifts (`AlgebraicGeometry.WeilSheaf.exists_upperStar_mapIso_eq`). They are stated as existence
+statements because the multiplication and duality isomorphisms
+(`AlgebraicGeometry.nonempty_iso_tensorObj_artinSchreierOf`,
+`AlgebraicGeometry.nonempty_iso_dual_artinSchreier`) are only known to exist. When `X` is
+connected, isomorphisms of rank-one sheaves are unique up to a scalar, so the normalized
+isomorphism is unique.
 -/
 
 @[expose] public section
@@ -156,9 +167,7 @@ noncomputable def WeilSheaf.upperStarArtinSchreierImageIso {X : Scheme.{u}}
     (WeilSheaf.upperStar φ).mapIso (WeilSheaf.upperStarArtinSchreierMapImageIso ψ) ≪≫
     WeilSheaf.upperStarAdicConstantIso φ
 
-/-- Unfolding `0^* ℒ_{ψ(a x)} = 0^* [a]^* ℒ_ψ`, with the named instance
-`AlgebraicGeometry.WeilSheaf.hasImage_artinSchreierIdempotent` for the image (this keeps the
-kernel from unfolding the pullback functors). -/
+/-- The identification `0^* ℒ_{ψ(a x)} = 0^* [a]^* ℒ_ψ`. -/
 noncomputable def upperStarZeroArtinSchreierIso (a : k₀) :
     (WeilSheaf.upperStar (affineLine.zero k₀)).obj (artinSchreier ψ a) ≅
       (WeilSheaf.upperStar (affineLine.zero k₀)).obj
@@ -180,8 +189,7 @@ noncomputable def upperStarZeroUpperStarSMulArtinSchreierImageIso (a : k₀) :
       affineLine.zero_comp_artinSchreierMap
 
 /-- **The specified trivialization at zero** of the Artin–Schreier sheaf `ℒ_{ψ(a x)}`:
-`0^* ℒ_{ψ(a x)} ≅ 0^* ℒ_ψ ≅ ℚ̄_ℓ`, through the root `u = 0` of `u^q - u = 0` over `x = 0`
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+`0^* ℒ_{ψ(a x)} ≅ 0^* ℒ_ψ ≅ ℚ̄_ℓ`, through the root `u = 0` of `u^q - u = 0` over `x = 0`. -/
 noncomputable def artinSchreierZeroIso (a : k₀) :
     (WeilSheaf.upperStar (affineLine.zero k₀)).obj (artinSchreier ψ a) ≅
       WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)) :=
@@ -189,7 +197,7 @@ noncomputable def artinSchreierZeroIso (a : k₀) :
 
 /-- The trivialization of the Artin–Schreier sheaf `ℒ_{ψ,f}` at a rational point `x` at which
 `f` vanishes: `x^* ℒ_{ψ,f} ≅ 0^* ℒ_ψ ≅ ℚ̄_ℓ`, induced by the specified trivialization at zero
-`AlgebraicGeometry.artinSchreierZeroIso` (blueprint `lemma-artin-schreier-character-sheaf`). -/
+`AlgebraicGeometry.artinSchreierZeroIso`. -/
 noncomputable def artinSchreierOfTrivialization {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (f : Γ(X, ⊤)) (x : Spec (CommRingCat.of k₀) ⟶ X)
     [x.IsOver (Spec (CommRingCat.of k₀))] (hf : x.appTop f = 0) :
@@ -265,8 +273,7 @@ lemma WeilSheaf.eq_of_smulEnd_adicConstant_spec_eq {c d : PadicAlgCl l}
   rw [← hs c, ← hs d, h]
 
 /-- An automorphism of the restriction `x^* B` of a Weil sheaf `B` to a rational point `x`, at
-which `B` is trivial, is the restriction of an automorphism of `B`: it is the multiplication by a
-scalar. -/
+which `B` is trivial, is the restriction of an automorphism of `B`. -/
 lemma WeilSheaf.exists_upperStar_mapIso_eq (x : Spec (CommRingCat.of k₀) ⟶ X)
     [x.IsOver (Spec (CommRingCat.of k₀))] {B : WeilSheaf k₀ l X}
     (τ : (WeilSheaf.upperStar x).obj B ≅ WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))
@@ -305,21 +312,12 @@ section Compatibility
 
 variable (ψ : AddChar k₀ (PadicAlgCl l))
 
-/-- **The multiplication isomorphism respects the trivializations at zero**
-(blueprint `lemma-artin-schreier-character-sheaf--4`). For global functions `f, g` on `X` and a
-rational point `x` at which both vanish, there is an isomorphism
+/-- **The multiplication isomorphism respects the trivializations at zero**: for global functions
+`f, g` on `X` and a rational point `x` at which both vanish, there is an isomorphism
 `μ : ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` whose pullback to `x`, read through the canonical
 isomorphism `x^* (ℒ_{ψ,f} ⊗ ℒ_{ψ,g}) ≅ x^* ℒ_{ψ,f} ⊗ x^* ℒ_{ψ,g}` and the specified
 trivializations `x^* ℒ_{ψ,h} ≅ ℚ̄_ℓ` (`AlgebraicGeometry.artinSchreierOfTrivialization`), is
-the unit isomorphism `ℚ̄_ℓ ⊗ ℚ̄_ℓ ≅ ℚ̄_ℓ`. For `X = 𝔸²`, `f = x₁`, `g = x₂` and `x = (0, 0)`,
-this is the statement that `m^* ℒ_ψ ≅ pr₁^* ℒ_ψ ⊗ pr₂^* ℒ_ψ` respects the trivializations at
-zero: the root `0` over `0` of the Artin–Schreier cover is sent to `0 + 0 = 0`.
-
-The statement carries no information beyond `lemma-artin-schreier-character-sheaf--2` and the
-trivializations: any isomorphism `A ≅ B` with `x^* B` trivial can be rescaled to be normalized
-at `x`, and this is how it is proved. It is stated this way because the multiplication
-isomorphism of `--2` is only known to exist. When `X` is connected, isomorphisms of rank-one
-sheaves are unique up to a scalar, so the normalized isomorphism is unique. -/
+the unit isomorphism `ℚ̄_ℓ ⊗ ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
 theorem exists_iso_tensorObj_artinSchreierOf_compatible {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (f g : Γ(X, ⊤)) (x : Spec (CommRingCat.of k₀) ⟶ X) [x.IsOver (Spec (CommRingCat.of k₀))]
@@ -337,17 +335,11 @@ theorem exists_iso_tensorObj_artinSchreierOf_compatible {X : Scheme.{u}}
   exact WeilSheaf.exists_iso_upperStar_mapIso_eq x
     (artinSchreierOfTrivialization ψ (f + g) x (by rw [map_add, hf, hg, add_zero])) μ₀ _
 
-/-- **The duality isomorphism respects the trivializations at zero**
-(blueprint `lemma-artin-schreier-character-sheaf--5`). There is an isomorphism
+/-- **The duality isomorphism respects the trivializations at zero**: there is an isomorphism
 `δ : ℒ_{ψ(a x)}^∨ ≅ ℒ_{ψ⁻¹(a x)}` whose pullback to the origin, read through the canonical
 isomorphism `0^* (ℒ^∨) ≅ (0^* ℒ)^∨` and the specified trivializations at zero
 (`AlgebraicGeometry.artinSchreierZeroIso`) of `ℒ_{ψ(a x)}` and `ℒ_{ψ⁻¹(a x)}`, is the canonical
-isomorphism `ℚ̄_ℓ^∨ ≅ ℚ̄_ℓ`.
-
-As for `exists_iso_tensorObj_artinSchreierOf_compatible`, this only rescales the duality
-isomorphism of `lemma-artin-schreier-character-sheaf--3`, which is only known to exist, so that
-it is normalized at zero; rank-one isomorphisms on the connected `𝔸¹` are unique up to a
-scalar. -/
+isomorphism `ℚ̄_ℓ^∨ ≅ ℚ̄_ℓ`. -/
 theorem exists_iso_dual_artinSchreier_compatible (a : k₀) :
     ∃ δ : (artinSchreier ψ a).dual (isLisse_artinSchreier ψ a) ≅ artinSchreier ψ⁻¹ a,
       (WeilSheaf.upperStar (affineLine.zero k₀)).mapIso δ =

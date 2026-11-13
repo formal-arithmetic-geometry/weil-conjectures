@@ -19,7 +19,7 @@ public import WeilConjectures.WeilSheaf.WeilAffineSpaceBundleTrace
 Let `λ = ∑ᵢ cᵢ xᵢ` be a linear form on `𝔸ⁿ` over the finite field `k₀`, with coefficients
 `cᵢ ∈ k₀`, `p : 𝔸ⁿ ⟶ Spec k₀` the structure morphism and `ℒ_{ψ,λ} = λ^* ℒ_ψ` the
 Artin–Schreier sheaf of `λ`. This file computes the compactly supported cohomology
-`Rp₀! ℒ_{ψ,λ}` as a Weil complex on `Spec k₀` (blueprint `lemma-integral-linear-character`):
+`Rp₀! ℒ_{ψ,λ}` as a Weil complex on `Spec k₀`:
 
 * if `λ = 0`, then `Rp₀! ℒ_{ψ,λ} ≅ ℚ̄_ℓ(-r)[-2r]` with `r = #n`;
 * if `λ ≠ 0` and `ψ` is nontrivial, then `Rp₀! ℒ_{ψ,λ} = 0`.
@@ -30,12 +30,12 @@ Artin–Schreier sheaf of `λ`. This file computes the compactly supported cohom
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction`
-  (`lemma-integral-linear-character--1`).
-- `AlgebraicGeometry.WeilComplex.isZero_derivedLowerShriek_artinSchreierOf_linearFunction`
-  (`lemma-integral-linear-character--2`).
+- `AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction`:
+  `Rp₀! ℒ_{ψ,0} ≅ ℚ̄_ℓ(-r)[-2r]`.
+- `AlgebraicGeometry.WeilComplex.isZero_derivedLowerShriek_artinSchreierOf_linearFunction`:
+  `Rp₀! ℒ_{ψ,λ} = 0` for `λ ≠ 0` and `ψ` nontrivial.
 
-## Proof
+## Implementation details
 
 For `λ = 0`, `ℒ_{ψ,0} ≅ ℚ̄_ℓ = p^* ℚ̄_ℓ` and `Rp₀! p^* ≅ (-r)[-2r]` (the standard affine-space
 trace, `WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_affineSpace_of_isPullback`).
@@ -114,9 +114,8 @@ namespace WeilComplex
 
 variable {n : Type u} [Fintype n]
 
-/-- Blueprint `lemma-integral-linear-character--1`: for the zero linear form `λ = ∑ᵢ cᵢ xᵢ`,
-`c = 0`, on `𝔸ⁿ` over `k₀` with structure morphism `p`, the compactly supported cohomology of
-`ℒ_{ψ,λ}` is `Rp₀! ℒ_{ψ,λ} ≅ ℚ̄_ℓ(-r)[-2r]`, `r = #n`. -/
+/-- For the zero linear form `λ = ∑ᵢ cᵢ xᵢ`, `c = 0`, on `𝔸ⁿ` over `k₀` with structure morphism
+`p`, the compactly supported cohomology of `ℒ_{ψ,λ}` is `Rp₀! ℒ_{ψ,λ} ≅ ℚ̄_ℓ(-r)[-2r]`, `r = #n`. -/
 theorem nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((derivedLowerShriek k₀ l
@@ -135,9 +134,9 @@ theorem nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction
   exact ⟨(derivedLowerShriek k₀ l p).mapIso (WeilSheaf.toComplex.mapIso e₀ ≪≫
     (upperStarAdicConstantIso p).symm) ≪≫ T.app _⟩
 
-/-- Blueprint `lemma-integral-linear-character--2`: for a nonzero linear form
-`λ = ∑ᵢ cᵢ xᵢ`, `c ≠ 0`, on `𝔸ⁿ` over `k₀` with structure morphism `p`, and a nontrivial
-character `ψ`, the compactly supported cohomology of `ℒ_{ψ,λ}` vanishes: `Rp₀! ℒ_{ψ,λ} = 0`. -/
+/-- For a nonzero linear form `λ = ∑ᵢ cᵢ xᵢ`, `c ≠ 0`, on `𝔸ⁿ` over `k₀` with structure
+morphism `p`, and a nontrivial character `ψ`, the compactly supported cohomology of `ℒ_{ψ,λ}`
+vanishes: `Rp₀! ℒ_{ψ,λ} = 0`. -/
 theorem isZero_derivedLowerShriek_artinSchreierOf_linearFunction
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) {c : n → k₀} (hc : c ≠ 0) :
     IsZero ((derivedLowerShriek k₀ l
