@@ -66,7 +66,6 @@ private theorem nestedOpenModel_localizationIso
     F.mapDerivedCategory.mapIso q ≪≫ F.mapDerivedCategoryFactors.app P⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 /-- Transport one specified bounded-above finite-free model on a nested open across a
 scheme isomorphism. Neither scheme is assumed affine, and no module localization is used.
 
