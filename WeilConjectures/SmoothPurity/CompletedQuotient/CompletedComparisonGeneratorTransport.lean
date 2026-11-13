@@ -220,7 +220,7 @@ private theorem mapComplex_eqToIso_symm
   subst G
   rfl
 
-set_option maxHeartbeats 4000000 in
+set_option profiler true in
 -- Elaborate the tensor-generator type across both sequence inverse-image interfaces.
 /-- Generator normalization after transport across the sequence pullback bridge.
 Source: Stacks 07A4 and 0941; the generator-normalization step of canonical
