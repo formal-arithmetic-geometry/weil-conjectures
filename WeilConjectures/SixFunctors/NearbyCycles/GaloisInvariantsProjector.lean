@@ -515,7 +515,8 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
   have hret := exists_galoisLayer_retraction_projector (Profinite.continuousMapRingObj T₀)
     N h Ω C R hR hinv
   obtain ⟨r, hr₁, hr₂, hr₃⟩ := hret
-  refine ⟨r, hr₁, hr₂, fun {Z} f' q W φ κ S hS hφ ↦ ?_⟩
+  refine ⟨r, hr₁, hr₂, ?_⟩
+  intro Z f' q W φ κ S hS hφ
   obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
     K a hKe f' q
   have hσj (j : FiniteGaloisIntermediateField L Ω) (b : j ≃ₐ[L] j) :
@@ -527,20 +528,22 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
       (algebraMap j Ω).injective ((AlgEquiv.restrictNormal_commutes (S k) j x).trans (hk x))
     rw [← hb]
     exact pullbackAction_comp_galoisLevelProjection h j (S k)
+  let F := R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧)
+  let H₁ := L((f')^*⟦Profinite.continuousMapRingObj T₀⟧)
+  let H₂ := DerivedCategory.homologyFunctor
+    (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)) q
+  let eLayer := N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C
   have hφ' (k : κ) := hφ k
   simp only [galoisLayerAction, galoisLayerAut_autAction] at hφ'
   have key := (galoisTower Ω h).map_derivedTrace_comp_unit_comp _ (fun j M ↦ hW j M) K hc a hK _ e
-    (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q)
-    hΦ (fun j ↦ hW j W) ((DerivedCategory.homologyFunctor _ q).map
-      (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom) ≫ φ)
+    (F ⋙ H₁ ⋙ H₂) hΦ (fun j ↦ hW j W) (H₂.map (H₁.map eLayer.hom) ≫ φ)
     (fun k ↦ pullbackAction h _ specGaloisAction_comp (S k))
     (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (S k)) hσj
-    (fun k ↦ (map_map_conj_comp_eq_iff _ _ _ _ _).1 (hφ' k))
+    (fun k ↦ (map_map_conj_comp_eq_iff H₁ H₂ eLayer _ φ).1 (hφ' k))
   rw [hr₃]
-  exact (map_map_conj_comp_eq_iff _ _ _ _ _).2 key
+  exact (map_map_conj_comp_eq_iff H₁ H₂ eLayer _ φ).2 key
 
 /-- Use an étale-origin complex to construct the shared-map projector. -/
 private theorem exists_retraction_galoisLayer_projector_of_etaleOrigin
