@@ -298,6 +298,7 @@ theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [sequenceDirect, pullbackTensorSequenceDirect,
     pullbackTensorSequenceAdjunction, pullbackTensorSequenceInverse,
     IntegralCoherence.PullbackComparison.tensor] at hs ⊢
+  trace_state
   exact hs
 
 end WeilConjectures.CompletedQuotient
