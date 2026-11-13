@@ -58,6 +58,7 @@ private theorem restriction_mate_equation
 
 set_option maxHeartbeats 800000 in
 -- Naturality of the canonical family unfolds the sheaf tensor-Hom instance data.
+set_option trace.profiler true in
 /-- Exact open restriction has simultaneous tensor and internal-Hom comparisons
 compatible with the canonical tensor-Hom bijections.
 Source: Stacks Project, Tags 079U, 08DL and 08DJ.

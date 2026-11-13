@@ -32,6 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
 set_option maxHeartbeats 1000000 in
 -- The derived localization and full restriction comparisons require extra heartbeats.
+set_option trace.profiler true in
 /-- Isomorphism transport identifies the spectrum structure complex and the full
 restriction functor, including transport from localized sites to open subschemes.
 Source: Stacks Project, Tag 08DC (equation-comparison, structure object);
