@@ -79,6 +79,29 @@ private theorem exists_unitIso_of_sections
     (congrArg (fun z ↦ se (unit S) ((unit S).unitHomEquiv z))
       ((eqv (unit S)).apply_symm_apply (𝟙 (unit S))))
 
+/-- Compose an adjunction with a natural hom equivalence before identifying the regular module. -/
+private theorem exists_unitIso_of_adjunction_sections
+    {T T' : TopCat.{u}} {R : T'.Sheaf RingCat.{u}} {S : T.Sheaf RingCat.{u}}
+    {D : Type*} [Category.{u} D]
+    (Q : D ⥤ SheafOfModules.{u} R) (L : SheafOfModules.{u} S ⥤ D)
+    (E : D ⥤ SheafOfModules.{u} S) (adj : E ⊣ L) (I : D)
+    (φ : ∀ N, (I ⟶ N) ≃ (unit R ⟶ Q.obj N))
+    (hnφ : ∀ N N' (a : I ⟶ N) (b : N ⟶ N'), φ N' (a ≫ b) = φ N a ≫ Q.map b)
+    (se : ∀ N, N.sections ≃ (Q.obj (L.obj N)).sections)
+    (hse : ∀ N N' (b : N ⟶ N') (s : N.sections),
+      se N' (sectionsMap b s) = sectionsMap (Q.map (L.map b)) (se N s)) :
+    ∃ e : E.obj I ≅ unit S,
+      (Q.obj (L.obj (unit S))).unitHomEquiv
+        (φ (L.obj (unit S)) (adj.homEquiv I (unit S) e.hom)) =
+          se (unit S) ((unit S).unitHomEquiv (𝟙 (unit S))) := by
+  let q (N : SheafOfModules.{u} S) : (E.obj I ⟶ N) ≃ (unit R ⟶ Q.obj (L.obj N)) :=
+    (adj.homEquiv I N).trans (φ (L.obj N))
+  have hnq (N N' : SheafOfModules.{u} S) (a : E.obj I ⟶ N) (b : N ⟶ N') :
+      q N' (a ≫ b) = q N a ≫ Q.map (L.map b) := by
+    dsimp only [q, Equiv.trans_apply]
+    rw [adj.homEquiv_naturality_right, hnφ]
+  exact exists_unitIso_of_sections (L ⋙ Q) (E.obj I) q hnq se hse
+
 set_option profiler true in
 /-- Extending the inverse image of the regular module gives the regular target module,
 with the canonical unit normalization.
@@ -142,30 +165,25 @@ theorem inverseImageRegularExtension
     Equiv.ofBijective ((Opens.map g).op.sectionsPrecomp)
       (Functor.bijective_sectionsPrecomp (Opens.map g).op
         (N.val.presheaf ⋙ CategoryTheory.forget AddCommGrpCat.{u}))
-  let q (N : SheafOfModules.{u} S) : (E.obj I ⟶ N) ≃ (M ⟶ Q.obj (L.obj N)) :=
-    (adj.homEquiv I N).trans (φ M (L.obj N))
-  have hnq (N N' : SheafOfModules.{u} S) (a : E.obj I ⟶ N) (b : N ⟶ N') :
-      q N' (a ≫ b) = q N a ≫ Q.map (L.map b) := by
-    dsimp only [q, Equiv.trans_apply]
-    rw [adj.homEquiv_naturality_right]
-    exact hnφ M (L.obj N) (L.obj N') _ (L.map b)
-  obtain ⟨e₀, hs⟩ := exists_unitIso_of_sections (L ⋙ Q) (E.obj I) q hnq se
-    (fun _ _ _ _ ↦ rfl)
+  obtain ⟨e₀, hs⟩ := exists_unitIso_of_adjunction_sections Q L E adj I (φ M) (hnφ M)
+    se (fun _ _ _ _ ↦ rfl)
   let e : F ≅ unit S := (eqToIso (hE I)).symm ≪≫ e₀
   have he : eqToHom (hE I) ≫ e.hom = e₀.hom := by
     simp [e]
+  let p : M ⟶ Q.obj (L.obj (unit S)) :=
+    φ M (L.obj (unit S)) (adj.homEquiv I (unit S) e₀.hom)
   refine ⟨e, ?_⟩
   intro V a
   have hv := congrArg (fun z ↦ z.val V) hs
-  change (q (unit S) e₀.hom).val.app V (1 : A.obj.obj V) =
+  change p.val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
-  trans (q (unit S) e₀.hom).val.app V a
+  trans p.val.app V a
   · symm
-    dsimp only [q, Equiv.trans_apply]
+    dsimp only [p]
     rw [hφ, ← he]
     exact hadj I (unit S) e.hom _ _
   rw [show a = a • (1 : A.obj.obj V) by exact (mul_one a).symm]
-  rw [(q (unit S) e₀.hom).val.app V |>.hom.map_smul, hv]
+  rw [p.val.app V |>.hom.map_smul, hv]
   change (t.hom.app ((Opens.map g).op.obj V)).hom
     (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
