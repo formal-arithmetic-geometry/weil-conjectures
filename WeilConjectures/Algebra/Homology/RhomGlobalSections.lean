@@ -26,7 +26,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-set_option profiler true in
 private theorem rhomGlobalSectionsHomComparison
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (I : CochainComplex A ℤ ⥤ CochainComplex A ℤ)
@@ -89,7 +88,9 @@ private theorem rhomGlobalSectionsHomComparison
     rw [hn])
   exact ⟨b⟩
 
-set_option profiler true in
+set_option backward.isDefEq.respectTransparency false in
+set_option synthInstance.maxHeartbeats 40000 in
+-- Additive Hom inference traverses the derived and sheaf categories in each repeated binder.
 /-- The canonical additive identification `H⁰(C, R𝓗om(L, M)) ≃+ Hom_D(O)(L, M)`,
 natural contravariantly in `L` and covariantly in `M`.
 
@@ -166,6 +167,6 @@ theorem rhom_global_sections
   have hz' := congrArg ULift.down hz
   change E P' ((ringedSiteZerothHypercohomology J R).map
     ((derivedInternalHom J R).map f) x) = (f.1.unop ≫ E P x) ≫ f.2 at hz'
-  simpa only [Category.assoc] using hz' 
+  simpa only [Category.assoc] using hz'
 
 end CategoryTheory
