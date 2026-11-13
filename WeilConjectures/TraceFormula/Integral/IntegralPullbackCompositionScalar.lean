@@ -247,27 +247,23 @@ private theorem integralCompositionFinite_mixed
     [∀ z : Z, Invertible (l : Z.residueField z)]
     (h : Z ⟶ W) (k : W ⟶ V)
     (M : coefficientSequenceDerived l E V) :
-    (integralCompositionFiniteScalar l E L ι Z).map
+    (integralComparisonDerivedSequenceScalar l E L ι Z).map
         ((finiteSystemDerivedComposition (integralSystemRings l E)
           (integralSystemTransition l E) h k).hom.app M) ≫
-      (integralCompositionFiniteScalarPullback l E L ι h).hom.app
-        ((finiteSystemDerivedPullback (integralSystemRings l E)
-          (integralSystemTransition l E) k).obj M) ≫
-      (finiteSystemDerivedPullback (integralSystemRings l L)
-        (integralSystemTransition l L) h).map
-          ((integralCompositionFiniteScalarPullback l E L ι k).hom.app M) =
-      (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
+      (integralComparisonSystemScalarPullback l E L ι h).hom.app
+        ((integralComparisonDerivedSequencePullback l E k).obj M) ≫
+      (integralComparisonDerivedSequencePullback l L h).map
+        ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
+      (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (finiteSystemDerivedComposition (integralSystemRings l L)
           (integralSystemTransition l L) h k).hom.app
-          ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  apply scalar_mixed_of_compositor_eq
-    (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
-    (D := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) Z)
-    (integralCompositionFiniteScalar l E L ι Z)
+          ((integralComparisonDerivedSequenceScalar l E L ι V).obj M) := by
+  exact scalar_mixed_of_compositor_eq
+    (integralComparisonDerivedSequenceScalar l E L ι Z)
     (finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k M)
     (finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
-      ((integralCompositionFiniteScalar l E L ι V).obj M))
-  exact integralComparisonSystemScalarPullback_finite_mixed l E L ι h k M
+      ((integralComparisonDerivedSequenceScalar l E L ι V).obj M))
+    (integralComparisonSystemScalarPullback_finite_mixed l E L ι h k M)
 
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
