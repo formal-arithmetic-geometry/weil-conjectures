@@ -207,6 +207,7 @@ private theorem fibre_pullback_pushforward {Z X : TopCat.{u}} (f : Z ⟶ X)
 
 
 set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The explicit pullback and lifting-torsor types require extra definitional reduction.
 /-- Direct image of an extension, pulled back along restriction of constant integer
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
