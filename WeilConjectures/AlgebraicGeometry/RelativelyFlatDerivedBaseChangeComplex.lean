@@ -118,8 +118,6 @@ private theorem relativelyFlat_tensorHasMapBifunctor (X : Scheme.{u})
   exact ((hasColimitsOfSizeShrink.{0, 0, u, u}
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))).has_colimits_of_shape _).has_colimit _
 
-attribute [local instance] relativelyFlat_tensorHasMapBifunctor
-
 private theorem relativelyFlat_isIso_transport
     {C D : Type*} [Category C] [Category D] (F : D ⥤ C)
     {A B U V : D} (a : A ≅ B) (b : U ≅ V) (c : B ⟶ U) (t : A ⟶ V)
@@ -192,6 +190,7 @@ theorem relativelyFlat_derivedBaseChange_complex
                 (.up ℤ)).obj (CochainComplex.mapBifunctor P G
                   (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
   classical
+  letI := relativelyFlat_tensorHasMapBifunctor X P G
   simp only [cast_eq]
   let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
     IsPullback.of_hasPullback f g
@@ -240,7 +239,6 @@ theorem relativelyFlat_derivedBaseChange_complex
       (tensor_cancel_iso ((derivedPullback (pullback.fst f g)).mapIso e)
         ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))
-  erw [← hab] at hi
   have hn := baseChange_naturality f (pullback.snd f g) g (pullback.fst f g)
     pullback.condition a.hom
   have := relativelyFlat_isIso_transport (schemeDerivedDirectImage (pullback.snd f g))
