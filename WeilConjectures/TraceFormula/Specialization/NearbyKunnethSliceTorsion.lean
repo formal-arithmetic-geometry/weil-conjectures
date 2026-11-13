@@ -127,7 +127,10 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    A B hτM hτN hτP (𝟭 _)
+    A B hτM hτN hτP (𝟭 (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology
+      (baseChangeSpecial (φ₁.total ≫ b) (traitSlice (traitSliceCoord k'))).left) Ab.{u + 1})
+      (condensedRingObj 𝔽
+        (baseChangeSpecial (φ₁.total ≫ b) (traitSlice (traitSliceCoord k'))).left))))
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper square"
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper reflection"
@@ -175,7 +178,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport generic"
   -- Compose the natural isomorphisms before evaluating them at `A`.
-  have eA := isoWhiskerLeft _
+  have eA := isoWhiskerLeft L((M.ε)^*⟦𝔽⟧)
       (leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).symm ≪≫
     (leftDerivedUpperStarCompOfEq 𝔽
       (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
