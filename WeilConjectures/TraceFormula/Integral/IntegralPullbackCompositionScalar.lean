@@ -52,11 +52,8 @@ attribute [local reducible] integralSystemReduction
 /-- Scalar extension with the finite-system source and target displayed explicitly. -/
 private abbrev integralCompositionFiniteScalar (X : Scheme.{u}) :
     finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) X ⥤
-      finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) X where
-  obj := (integralComparisonDerivedSequenceScalar l E L ι X).obj
-  map := (integralComparisonDerivedSequenceScalar l E L ι X).map
-  map_id := (integralComparisonDerivedSequenceScalar l E L ι X).map_id
-  map_comp := (integralComparisonDerivedSequenceScalar l E L ι X).map_comp
+      finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) X :=
+  integralComparisonDerivedSequenceScalar l E L ι X
 
 private abbrev integralCompositionFiniteScalarPullback {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -206,24 +203,27 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
             ((integralCompositionFiniteScalar l E L ι Y).map a) := by
   exact (integralCompositionFiniteScalarPullback l E L ι f).hom.naturality a
 
+set_option profiler true in
 private theorem integralComparisonSystemScalarPullback_finite_mixed
     {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]
     [∀ z : Z, Invertible (l : Z.residueField z)]
     (h : Z ⟶ W) (k : W ⟶ V)
-    (M : coefficientSequenceDerived l E V) :
-    (integralComparisonDerivedSequenceScalar l E L ι Z).map
+    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
+    (integralCompositionFiniteScalar l E L ι Z).map
         ((integralComparisonSystemComposition l E h k).hom.app M) ≫
-      (integralComparisonSystemScalarPullback l E L ι h).hom.app
-        ((integralComparisonDerivedSequencePullback l E k).obj M) ≫
-      (integralComparisonDerivedSequencePullback l L h).map
-          ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
-      (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
+      (integralCompositionFiniteScalarPullback l E L ι h).hom.app
+        ((finiteSystemDerivedPullback (integralSystemRings l E)
+          (integralSystemTransition l E) k).obj M) ≫
+      (finiteSystemDerivedPullback (integralSystemRings l L)
+        (integralSystemTransition l L) h).map
+          ((integralCompositionFiniteScalarPullback l E L ι k).hom.app M) =
+      (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (integralComparisonSystemComposition l L h k).hom.app
-          ((integralComparisonDerivedSequenceScalar l E L ι V).obj M) := by
-  exact NatTrans.congr_app
-    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
+          ((integralCompositionFiniteScalar l E L ι V).obj M) := by
+  convert NatTrans.congr_app
+    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M using 3 <;> rfl
 
 private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
@@ -234,25 +234,14 @@ private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
   exact NatTrans.congr_app (congrArg Iso.hom
     (finiteSystemDerivedComposition_eq_integralComparison l E h k)) M
 
-private theorem scalar_mixed_component
-    {EV EW EZ LV LW LZ : Type*}
-    [Category EV] [Category EW] [Category EZ] [Category LV] [Category LW] [Category LZ]
-    {UEk : EV ⥤ EW} {UEh : EW ⥤ EZ} {UEhk : EV ⥤ EZ}
-    {ULk : LV ⥤ LW} {ULh : LW ⥤ LZ} {ULhk : LV ⥤ LZ}
-    {SV : EV ⥤ LV} {SW : EW ⥤ LW} {SZ : EZ ⥤ LZ}
-    (gh : UEh ⋙ SZ ≅ SW ⋙ ULh) (gk : UEk ⋙ SW ≅ SV ⋙ ULk)
-    (ghk : UEhk ⋙ SZ ≅ SV ⋙ ULhk)
-    (aE aE' : UEhk ≅ UEk ⋙ UEh) (aL aL' : ULhk ≅ ULk ⋙ ULh)
-    (hE : aE = aE') (hL : aL = aL')
-    (mixed : Functor.whiskerRight aE'.hom SZ ≫ Functor.whiskerLeft UEk gh.hom ≫
-        Functor.whiskerRight gk.hom ULh =
-      ghk.hom ≫ Functor.whiskerLeft SV aL'.hom) (M : EV) :
-    SZ.map (aE.hom.app M) ≫ gh.hom.app (UEk.obj M) ≫ ULh.map (gk.hom.app M) =
-      ghk.hom.app M ≫ aL.hom.app (SV.obj M) := by
-  subst aE' aL'
-  exact NatTrans.congr_app mixed M
+private theorem scalar_mixed_of_compositor_eq {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A B : C} {X Y Z : D} {a a' : A ⟶ B}
+    {g : F.obj B ⟶ X} {k : X ⟶ Y} {s : F.obj A ⟶ Z} {b b' : Z ⟶ Y}
+    (ha : a = a') (hb : b = b') (h : F.map a' ≫ g ≫ k = s ≫ b') :
+    F.map a ≫ g ≫ k = s ≫ b := by
+  rw [ha, hb]
+  exact h
 
-set_option profiler true in
 private theorem integralCompositionFinite_mixed
     {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -273,21 +262,11 @@ private theorem integralCompositionFinite_mixed
         (finiteSystemDerivedComposition (integralSystemRings l L)
           (integralSystemTransition l L) h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  refine scalar_mixed_component
-    (integralCompositionFiniteScalarPullback l E L ι h)
-    (integralCompositionFiniteScalarPullback l E L ι k)
-    (integralCompositionFiniteScalarPullback l E L ι (h ≫ k))
-    (finiteSystemDerivedComposition (integralSystemRings l E)
-      (integralSystemTransition l E) h k)
-    (integralComparisonSystemComposition l E h k)
-    (finiteSystemDerivedComposition (integralSystemRings l L)
-      (integralSystemTransition l L) h k)
-    (integralComparisonSystemComposition l L h k)
-    (finiteSystemDerivedComposition_eq_integralComparison l E h k)
-    (finiteSystemDerivedComposition_eq_integralComparison l L h k)
-    ?_ M
-  convert (integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k using 3 <;>
-    rfl
+  apply scalar_mixed_of_compositor_eq (integralCompositionFiniteScalar l E L ι Z)
+    (finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k M)
+    (finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
+      ((integralCompositionFiniteScalar l E L ι V).obj M))
+  exact integralComparisonSystemScalarPullback_finite_mixed l E L ι h k M
 
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
