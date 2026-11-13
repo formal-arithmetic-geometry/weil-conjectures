@@ -29,8 +29,22 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
 
+private theorem finiteType_of_affine_enlargement_iso.{u₁, v₁}
+    {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ A, HasSheafify (J.over A) AddCommGrpCat.{u}]
+    [∀ A, (J.over A).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M N : SheafOfModules.{u} R} (e : M ≅ N) [M.IsFiniteType] : N.IsFiniteType := by
+  obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData M
+  let q' : N.LocalGeneratorsData :=
+    { I := q.I
+      X := q.X
+      coversTop := q.coversTop
+      generators i := (q.generators i).ofEpi (e.hom.over (q.X i)) }
+  refine ⟨q', ⟨fun i ↦ ?_⟩⟩
+  exact ⟨(hq.isFiniteType i).finite⟩
+
 set_option profiler true in
--- Transport of local generators and restricted image factorizations needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent module finite type on W has a quasi-coherent submodule
 finite type on W union V, equal to the original on W, when V is affine.
@@ -93,18 +107,8 @@ theorem exists_finiteType_affine_enlargement
   have : Epi (Q.map q) := Q.map_epi q
   have : IsIso (Q.map q) := isIso_of_mono_of_epi _
   let e : (Abelian.image ψ).over U ≅ G := (asIso (Q.map q)).symm ≪≫ α
-  have hft : ((Abelian.image ψ).over U).IsFiniteType := by
-    obtain ⟨a, ha⟩ := IsFiniteType.exists_localGeneratorsData G
-    let a' : ((Abelian.image ψ).over U).LocalGeneratorsData :=
-      { I := a.I
-        X := a.X
-        coversTop := a.coversTop
-        generators i := (a.generators i).ofEpi (e.inv.over (a.X i)) }
-    have : a'.IsFiniteType :=
-      { isFiniteType := fun i ↦ by
-          have := ha.isFiniteType i
-          exact inferInstanceAs ((a.generators i).ofEpi _).IsFiniteType }
-    exact { exists_localGeneratorsData := ⟨a', inferInstance⟩ }
+  have hft : ((Abelian.image ψ).over U).IsFiniteType :=
+    finiteType_of_affine_enlargement_iso e.symm
   have hψW : IsIso (P.map ψ) := by
     have heq : P.map ψ = (η.app K).inv ≫ T.map (Q.map ψ) ≫ (η.app H).hom := by
       have hn := η.hom.naturality ψ

@@ -34,8 +34,22 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
 
+private theorem finiteType_of_submodule_extension_iso.{u₁, v₁}
+    {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ A, HasSheafify (J.over A) AddCommGrpCat.{u}]
+    [∀ A, (J.over A).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M N : SheafOfModules.{u} R} (e : M ≅ N) [M.IsFiniteType] : N.IsFiniteType := by
+  obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData M
+  let q' : N.LocalGeneratorsData :=
+    { I := q.I
+      X := q.X
+      coversTop := q.coversTop
+      generators i := (q.generators i).ofEpi (e.hom.over (q.X i)) }
+  refine ⟨q', ⟨fun i ↦ ?_⟩⟩
+  exact ⟨(hq.isFiniteType i).finite⟩
+
 set_option profiler true in
--- Transporting generators and the image factorization need extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme.
 
@@ -73,19 +87,7 @@ theorem exists_quasicoherent_finiteType_submodule_extension
   obtain ⟨H, hH, ψ, α, hψ⟩ :=
     exists_quasiCoherent_extension_of_quasiCompact_open X U inferInstance F G ι
   have : H.IsQuasicoherent := hH
-  have : (H.over U).IsFiniteType := by
-    obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData G
-    have (i : q.I) : Epi (α.inv.over (q.X i)) := IsIso.epi_of_iso _
-    let q' : (H.over U).LocalGeneratorsData :=
-      { I := q.I
-        X := q.X
-        coversTop := q.coversTop
-        generators i := (q.generators i).ofEpi (α.inv.over (q.X i)) }
-    have : q'.IsFiniteType :=
-      { isFiniteType := fun i ↦ by
-          have := hq.isFiniteType i
-          exact inferInstanceAs ((q.generators i).ofEpi _).IsFiniteType }
-    exact { exists_localGeneratorsData := ⟨q', inferInstance⟩ }
+  have : (H.over U).IsFiniteType := finiteType_of_submodule_extension_iso α.symm
   obtain ⟨E, hE, hEft, j, hj, hjU⟩ := exists_finiteType_global_approximation X U hU H
   have : E.IsQuasicoherent := hE
   have : E.IsFiniteType := hEft
