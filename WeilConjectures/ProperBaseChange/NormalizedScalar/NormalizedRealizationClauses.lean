@@ -92,7 +92,6 @@ def DerivedScalarData : Prop :=
           (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
 set_option profiler true in
--- The derived scalar square unfolds the exact derived extension and restriction.
 /-- All-complex derived computation and the normalized derived unit.
 Source: exact derived functor comparisons and the exact derived adjunction unit.
 (blueprint: lem-weil-pbc-normalized-realization-clauses).
@@ -103,12 +102,8 @@ is the component formula for the localization of the ordinary adjunction. -/
 theorem derived_scalar_data : DerivedScalarData l E T := by
   let F := ordinaryExtension l E T
   let G := ordinaryRestriction l E T
-  have : F.Additive := inferInstance
-  have : G.Additive := inferInstance
-  have : PreservesFiniteLimits F := inferInstance
-  have : PreservesFiniteColimits F := inferInstance
-  have : PreservesFiniteLimits G := inferInstance
-  have : PreservesFiniteColimits G := inferInstance
+  -- Reuse exactness proofs when elaborating the derived comparisons and unit.
+  obtain ⟨hF, hG, hFlim, hFcolim, hGlim, hGcolim, _⟩ := scalar_adjunction_data l E T
   refine ⟨⟨F.leftDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨G.rightDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨inferInstance⟩, ⟨inferInstance⟩, inferInstance, inferInstance,
