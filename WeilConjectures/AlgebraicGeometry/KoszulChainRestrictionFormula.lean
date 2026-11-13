@@ -72,6 +72,49 @@ private theorem moduleHomologyFactors_inv_naturality_apply
   (ConcreteCategory.congr_hom
     ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) n).inv.naturality g) x).symm
 
+private theorem koszulOpenHomTranspose_tilde_counit
+    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
+    (F : CochainComplex
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
+    (s : ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).obj
+      (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F) ≅ F)
+    (hs : ∀ n : ℤ, s.hom.f n = Scheme.Modules.fromTildeΓ (R := .of A) (F.X n))
+    (e : ℕ) (g : (koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat ⟶
+      ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F) :
+    koszulOpenHomTranspose A r f F e
+      (((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).map g ≫ s.hom) = g := by
+  let : (tilde.functor (.of A)).Additive :=
+    ⟨fun {_ _} g h ↦ tilde.map_add g h⟩
+  let : (moduleSpecΓFunctor (R := .of A)).Additive :=
+    ⟨fun {_ _} _ _ ↦ rfl⟩
+  let adj := (tilde.adjunction (R := .of A)).mapHomologicalComplex (.up ℤ)
+  have hc : adj.counit.app F = s.hom := by
+    apply HomologicalComplex.Hom.ext
+    funext n
+    exact (hs n).symm
+  change adj.homEquiv _ _ (_ ≫ s.hom) = g
+  rw [← hc, ← Adjunction.homEquiv_counit, Equiv.apply_symm_apply]
+
+private theorem naturalEquiv_transport_chain
+    {C D : Type*} [Category C] [Category D] {A : Type*} [CommRing A]
+    (R : C ⥤ D) (S : C ⥤ ModuleCat A) (P : C)
+    (b : ∀ E : C, (R.obj P ⟶ R.obj E) ≃ S.obj E)
+    (hb : ∀ (E E' : C) (g : E ⟶ E') (ψ : R.obj P ⟶ R.obj E),
+      b E' (ψ ≫ R.map g) = S.map g (b E ψ))
+    {X Y Z : C} (u : X ⟶ P) (t : X ⟶ Y) (e : Y ≅ Z) (x : S.obj Y)
+    (hx : ∀ ψ₀ : R.obj P ⟶ R.obj Y, R.map u ≫ ψ₀ = R.map t → b Y ψ₀ = x)
+    (ψ : R.obj P ⟶ R.obj Z) (hψ : R.map u ≫ ψ = R.map (t ≫ e.hom)) :
+    b Z ψ = S.map e.hom x := by
+  let ψ₀ := ψ ≫ R.map e.inv
+  have hψ₀ : R.map u ≫ ψ₀ = R.map t := by
+    dsimp only [ψ₀]
+    rw [← Category.assoc, hψ, ← R.map_comp, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  have hψ' : ψ₀ ≫ R.map e.hom = ψ := by
+    dsimp only [ψ₀]
+    rw [Category.assoc, ← R.map_comp, Iso.inv_hom_id, R.map_id, Category.comp_id]
+  rw [← hψ', hb, hx ψ₀ hψ₀]
+
 set_option profiler true in
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
@@ -157,34 +200,17 @@ theorem koszulChain_restriction_formula
   refine ⟨b', ?_⟩
   intro e g z hz ψ hψ
   let t : koszulOpenSheafComplex A r f e ⟶ F := T.map g ≫ s.hom
-  have ht : koszulOpenHomTranspose A r f F e t = g := by
-    let : (tilde.functor (.of A)).Additive :=
-      ⟨fun {_ _} g h ↦ tilde.map_add g h⟩
-    let : (moduleSpecΓFunctor (R := .of A)).Additive :=
-      ⟨fun {_ _} _ _ ↦ rfl⟩
-    let adj := (tilde.adjunction (R := .of A)).mapHomologicalComplex (.up ℤ)
-    change adj.homEquiv _ _ t = g
-    apply (adj.homEquiv _ _).symm.injective
-    rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
-    have hc : adj.counit.app F = s.hom := by
-      apply HomologicalComplex.Hom.ext
-      funext n
-      exact (hs n).symm
-    rw [hc]
-    rfl
-  let ψ₀ := ψ ≫ R.map eF.inv
-  have hψ₀ : R.map (koszulOpenUnit A r f e) ≫ ψ₀ =
-      R.map (DerivedCategory.Q.map t) := by
-    dsimp only [ψ₀]
-    rw [← Category.assoc, hψ, ← R.map_comp]
-    apply congrArg R.map
-    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    exact (DerivedCategory.Q.map_comp (T.map g) s.hom).symm
-  have hψ' : ψ₀ ≫ R.map eF.hom = ψ := by
-    dsimp only [ψ₀]
-    rw [Category.assoc, ← R.map_comp, Iso.inv_hom_id, R.map_id, Category.comp_id]
+  have ht : koszulOpenHomTranspose A r f F e t = g :=
+    koszulOpenHomTranspose_tilde_counit A r f F s hs e g
+  have hψt : R.map (koszulOpenUnit A r f e) ≫ ψ =
+      R.map (DerivedCategory.Q.map t ≫ eF.hom) := by
+    rw [hψ]
+    exact congrArg R.map (by rw [Functor.map_comp]; rfl)
+  have htransport := naturalEquiv_transport_chain R (G ⋙ H) (koszulOpenStructure A)
+    b hb (koszulOpenUnit A r f e) (DerivedCategory.Q.map t) eF _
+      (hchain F hF e t) ψ hψt
   change b E.obj ψ = _
-  rw [← hψ', hb, hchain F hF e t ψ₀ hψ₀]
+  rw [htransport]
   dsimp only [koszulOpenHomStageClass]
   rw [ht, koszulHomChainClass_eq_homologyπ g z hz]
   let K := CochainComplex.moduleHomComplex
