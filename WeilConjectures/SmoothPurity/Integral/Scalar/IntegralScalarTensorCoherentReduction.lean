@@ -95,10 +95,10 @@ theorem integralScalarTensorCoherentReduction
             (R.obj M, R.obj N) := by
   let SE := pullbackTensorCalculus l E W
   let SL := pullbackTensorCalculus l L W
-  obtain ⟨ρE⟩ := ambientRoos l E W SE
-  obtain ⟨ρL⟩ := ambientRoos l L W SL
-  obtain ⟨S⟩ := primitiveQuotientScalarModelExistence l E L ι W
-    (fun w ↦ isUnit_of_invertible (l : W.residueField w)) SE ρL
+  have ρE := Classical.choice (ambientRoos l E W SE)
+  have ρL := Classical.choice (ambientRoos l L W SL)
+  have S := Classical.choice (primitiveQuotientScalarModelExistence l E L ι W
+    (fun w ↦ isUnit_of_invertible (l : W.residueField w)) SE ρL)
   let TE : ScalarExtensionTower.TensorModel l E W SE ρE :=
     ⟨ScalarExtensionTower.tensorModelRealization l E W SE,
       ScalarExtensionTower.tensorModelRealization_normalized l E W SE ρE⟩
