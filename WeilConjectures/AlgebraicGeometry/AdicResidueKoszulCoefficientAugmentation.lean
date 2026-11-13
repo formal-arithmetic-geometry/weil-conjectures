@@ -217,7 +217,7 @@ theorem adicResidue_koszul_coefficient_augmentation
         (homOfLE (Nat.le_succ n)).op =
         (HomologicalComplex.single (Mod O) (.up ℤ) 0).map
           (adicResidueQuotientModuleStep X J U n) := by
-      simp only [adicResidueQuotientCoefficientTower, Functor.ofOpSequence_map_homOfLE_succ]
+      simp only [adicResidueQuotientCoefficientTower, Functor.ofOpSequence_map_homOfLE_succ, O]
     rw [hmap]
     apply HomologicalComplex.to_single_hom_ext
     let u := HomologicalComplex.singleObjXSelf (.up ℤ) 0 _ ≪≫
