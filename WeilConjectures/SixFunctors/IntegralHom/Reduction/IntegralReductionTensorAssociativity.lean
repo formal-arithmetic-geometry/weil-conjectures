@@ -32,8 +32,8 @@ private theorem reduction_iso_inv_section_of_hom_section
   exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
 
 private theorem reduction_map_inverse_cancel
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {X Y : C} (e : X ≅ Y) (f : Y ≅ X) (h : e.symm = f) :
+    {C : Type*} [Category C] {X Y : C} {e : X ≅ Y} {f : Y ≅ X}
+    (h : e.symm = f) {D : Type*} [Category D] (F : C ⥤ D) :
     F.map e.hom ≫ F.map f.hom = 𝟙 (F.obj X) := by
   rw [← h, Iso.symm_hom, ← F.map_comp, e.hom_inv_id, F.map_id]
 
@@ -393,7 +393,7 @@ private theorem nativeReductionMonoidal
         rw [hTS']
         exact hrepS.symm
       trace "PH805: target comparison proved"
-      have hcan := reduction_map_inverse_cancel DerivedCategory.Q (asIso beta) _ hbκ
+      have hcan := reduction_map_inverse_cancel hbκ DerivedCategory.Q
       trace "PH805: cancellation proved"
       let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
         m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
