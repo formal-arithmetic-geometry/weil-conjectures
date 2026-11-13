@@ -385,7 +385,6 @@ variable {R : Type*} (K : Type*) {Ω : Type*} [CommRing R] [IsDedekindDomain R] 
   [IsGalois K Ω] (m : Ideal R) [m.IsMaximal] [PerfectField m.ResidueField]
   (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] [Q.LiesOver m]
 
-set_option maxHeartbeats 1000000 in
 -- the elaboration of the localization and integral closure instances is slow
 include m in
 /-- **Finite subsets of `B_Q^{I_Q}` lie in étale subalgebras.** Write the elements as fractions

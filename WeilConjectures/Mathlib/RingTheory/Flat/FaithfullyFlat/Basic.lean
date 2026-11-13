@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Adjoining a root of a monic polynomial is faithfully flat
@@ -91,5 +92,5 @@ lemma Module.FaithfullyFlat.of_nontrivial_tensor_quotient
     Module.FaithfullyFlat R M where
   submodule_ne_top m hm := by
     rw [ne_eq, ← Submodule.Quotient.subsingleton_iff, not_subsingleton_iff_nontrivial,
-      (TensorProduct.quotTensorEquivQuotSMul M m).symm.nontrivial_congr]
+      (TensorProduct.quotTensorEquivQuotSMul M m).symm.toEquiv.nontrivial_congr]
     exact H m hm

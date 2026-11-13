@@ -75,6 +75,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelation
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FrobeniusChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FrobeniusUnitComp
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule

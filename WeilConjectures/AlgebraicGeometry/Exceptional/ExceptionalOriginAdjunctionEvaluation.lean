@@ -104,14 +104,14 @@ private theorem mate_of_unit
     (α : F ⋙ L' ⟶ L ⋙ G) (β : R ⋙ F ⟶ G ⋙ R')
     (h : ∀ P, b.homEquiv _ _ (α.app P) =
       F.map (a.unit.app P) ≫ β.app (L.obj P)) :
-    (mateEquiv a b (.mk _ _ _ _ α)).natTrans = β := by
+    (mateEquiv a b (.mk _ _ _ _ α)) = β := by
   apply (mateEquiv a b).symm.injective
   rw [Equiv.symm_apply_apply]
   apply NatTrans.ext
   funext P
   apply (b.homEquiv _ _).injective
   change b.homEquiv _ _ (α.app P) = b.homEquiv _ _
-    ((((mateEquiv a b).symm (.mk _ _ _ _ β)).natTrans).app P)
+    ((((mateEquiv a b).symm (.mk _ _ _ _ β))).app P)
   exact (h P).trans (unit_mateEquiv_symm a b (.mk _ _ _ _ β) P)
 
 private theorem scalar_inverse_mate
@@ -124,7 +124,7 @@ private theorem scalar_inverse_mate
     (hc : conjugateIsoEquiv (am.comp b) (a.comp an) γ = δ)
     (hβ : ∀ P, am.homEquiv _ _ (β.hom.app P) =
       RA.map (an.unit.app P) ≫ δ.inv.app (Fn.obj P)) :
-    (mateEquiv a b (.mk _ _ _ _ γ.inv)).natTrans = β.hom := by
+    (mateEquiv a b (.mk _ _ _ _ γ.inv)) = β.hom := by
   apply (mateEquiv an am).injective
   have hh := iterated_mateEquiv_conjugateEquiv a b am an
     (.mk _ _ _ _ γ.inv)
@@ -138,7 +138,7 @@ private theorem inverse_transition_transpose
     {TB : C ⥤ D} {RB : D ⥤ C} (b : TB ⊣ RB)
     {Fm : A ⥤ C} {Fn : B₀ ⥤ D}
     (γ : TA ⋙ Fn ≅ Fm ⋙ TB) (δ : RA ⋙ Fm ≅ Fn ⋙ RB)
-    (hmate : (mateEquiv a b (.mk _ _ _ _ γ.inv)).natTrans = δ.hom)
+    (hmate : (mateEquiv a b (.mk _ _ _ _ γ.inv)) = δ.hom)
     {Nm : C} {Nn : D} {Mm : A} {Mn : B₀}
     (em : Nm ≅ Fm.obj Mm) (en : Nn ≅ Fn.obj Mn)
     (τM : Mm ⟶ RA.obj Mn) (τN : Nm ⟶ RB.obj Nn)
@@ -185,7 +185,7 @@ private theorem evaluation_hom_of_mate
     {l : C ⥤ D} {r : D ⥤ C} (b : l ⊣ r)
     {E : A ⥤ C} {F : B₀ ⥤ D}
     (α : L ⋙ F ≅ E ⋙ l) (β : R ⋙ E ≅ F ⋙ r)
-    (hβ : β.hom = (mateEquiv a b (.mk _ _ _ _ α.inv)).natTrans)
+    (hβ : β.hom = (mateEquiv a b (.mk _ _ _ _ α.inv)))
     {M : A} {N : B₀} (h : L.obj M ⟶ N) :
     E.map (a.homEquiv M N h) ≫ β.hom.app N =
       b.homEquiv (E.obj M) (F.obj N) (α.inv.app M ≫ F.map h) := by
@@ -203,7 +203,7 @@ private theorem iterated_evaluation_hom
     {EX : A ⥤ C} {EY : B₀ ⥤ D} {EP : E₀ ⥤ F₀}
     (α : L ⋙ EY ≅ EX ⋙ l) (β : R ⋙ EX ≅ EY ⋙ r)
     (σ : I ⋙ EP ≅ EY ⋙ i) (τ : J ⋙ EY ≅ EP ⋙ j)
-    (hβ : β.hom = (mateEquiv a b (.mk _ _ _ _ α.inv)).natTrans)
+    (hβ : β.hom = (mateEquiv a b (.mk _ _ _ _ α.inv)))
     (hu : ∀ M, EY.map (c.unit.app M) ≫ τ.hom.app (I.obj M) ≫
       j.map (σ.hom.app M) = d.unit.app (EY.obj M))
     {M : A} {H N : E₀} {P : C}

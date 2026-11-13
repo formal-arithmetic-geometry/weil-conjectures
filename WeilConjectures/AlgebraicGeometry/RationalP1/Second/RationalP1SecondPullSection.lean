@@ -63,7 +63,6 @@ theorem second_pull_section_core
       ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv := by
   exact ⟨second_pull_section_core_comm l c k p hpl Y K⟩
 
-set_option maxHeartbeats 800000 in
 -- The statement compares the fixed derived pullback and tensor interfaces.
 /-- The two canonical pullback identifications agree after restriction to the diagonal.
 

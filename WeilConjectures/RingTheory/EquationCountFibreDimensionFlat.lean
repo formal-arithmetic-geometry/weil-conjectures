@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionFlat
 import WeilConjectures.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Flatness from the number of equations and fibre dimension

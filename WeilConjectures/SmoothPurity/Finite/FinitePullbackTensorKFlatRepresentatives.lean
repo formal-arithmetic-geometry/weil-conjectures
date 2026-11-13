@@ -106,7 +106,6 @@ private theorem finiteRepresentative_eq (W : Scheme.{u}) (n : ℕ)
   unfold FinitePullbackTensorRep.representative pullbackTensorFiniteModelIso
   exact heq_comp_eqToIso h.1 _ _ _ (h.2 ⟨P, hP⟩ ⟨Q, hQ⟩)
 
-set_option maxHeartbeats 1000000 in
 -- The two-input resolution argument includes the full tensor naturality square.
 /-- The prescribed finite tensor square on arbitrary K-flat complexes whose ordinary
 pullbacks are K-flat. Source: Stacks 06YS and 07A4

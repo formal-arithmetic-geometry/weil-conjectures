@@ -177,7 +177,6 @@ def schemeMVDirectImageComposition {Z : Scheme.{u}}
   (Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
     p.toLRSHom.toShHom f.toLRSHom.toShHom)).symm
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Explicit additivity witnesses require a larger typeclass-search budget.
 /-- The derived sectionwise identity comparing direct image and open restriction.
 Source: Stacks Tag 08FE (blueprint: def-pc-derived-mayer-vietoris-canonical-data).

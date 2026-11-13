@@ -160,7 +160,6 @@ open Scheme
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-set_option maxHeartbeats 1000000 in
 -- the integral splitting is matched against the large types of the slice models
 /-- **(M2) The pro-`p` averaging splitting on the generic slice trait** (SGA 4½, [Th. finitude],
 Lemme 3.4): for a bounded constructible complex `B` on `X = 𝔸ⁿ⁺¹_S`, the pullback exchange of the

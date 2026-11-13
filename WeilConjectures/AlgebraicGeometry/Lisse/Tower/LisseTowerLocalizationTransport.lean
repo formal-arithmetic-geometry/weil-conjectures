@@ -87,7 +87,7 @@ theorem realizationScalar_comm
       H₁.map ((realizationLevel F₁ K₁).inv.app (q.obj C')) = 𝟙 _ := by
     rw [← H₁.map_comp, Iso.hom_inv_id_app, H₁.map_id]
   rw [hs]
-  repeat first | erw [Category.id_comp] | erw [Category.comp_id]
+  repeat erw [Category.id_comp]
   rw [M.map_comp]
   simp only [Category.assoc]
   rw [← Category.assoc (M.map (r.hom.app C')) (M.map (r.inv.app C')), hr,

@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Transport of a module contraction on an open subscheme
 

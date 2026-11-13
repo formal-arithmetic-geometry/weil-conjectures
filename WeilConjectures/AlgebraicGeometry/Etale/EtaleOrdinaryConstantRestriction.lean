@@ -121,12 +121,11 @@ theorem etaleOrdinaryConstantRestrictionPullback
     (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)
     ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)).obj M)
   change _ ≫ (mateEquiv b a (TwoSquare.mk _ _ _ _
-    (upperStarRestrictScalarsIsoSheaf φ f).hom)).natTrans.app _ = _ at hu
+    (upperStarRestrictScalarsIsoSheaf φ f).hom)).app _ = _ at hu
   dsimp only [a, b] at hu
   rw [underived_mate] at hu
   dsimp only [lowerStarRestrictScalarsIso, Iso.refl_hom, NatTrans.id_app,
-    Category.comp_id, Functor.comp_obj, Functor.id_obj, TwoSquare.mk,
-    TwoSquare.natTrans] at hu
+    Category.comp_id, Functor.comp_obj, Functor.id_obj, TwoSquare.mk] at hu
   change (upperStar (ModuleCat.{u + 1} A) f).map cY.hom ≫
       (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).hom.app
         ((ModuleCat.restrictScalars.{u + 1} φ).obj M) =

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.InertiaNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.StalkTransport
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
@@ -243,7 +244,7 @@ theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Fini
       FiniteLocallyConstant.stalkEquiv_toPresheafFiber]
     rfl
   have ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app P t = t := by
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app P t = t := by
     intro σ hσ
     have h := hx σ hσ
     rw [← hx₀, galoisStalkMap] at h
@@ -431,7 +432,6 @@ instance : Fact (IsAffineOpen c.W) := ⟨c.isAffineOpen⟩
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level): for a dense open
 `j : U₀ ⟶ C₀` of a smooth curve over a finite field, a boundary point `z` with an affine chart

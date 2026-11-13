@@ -111,7 +111,6 @@ attribute [local instance] finiteProperCache1 finiteProperCache2 finiteProperCac
 
 attribute [local instance] sectionDerived modulesClosed modulesSymmetric modulesFlat
 
-set_option maxHeartbeats 800000 in
 -- Compare canonical derived maps without expanding their resolving constructions.
 private theorem quotient_formulas
     (l : ℕ) [Fact l.Prime]

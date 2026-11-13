@@ -66,26 +66,27 @@ section Equivariant
 
 variable {L : Type u} [Field L] [Finite L] {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of L))]
   {Z : Scheme.{u}} (g : Aut Z) (j : (Y ↘ Spec (CommRingCat.of L)).geometricFiber ⟶ Z)
-  (hj : j ≫ g.hom = (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+  (hj : j ≫ g.asIso.hom = (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
 
 /-- The exchange isomorphism `j^* ∘ Fr_Y^* ≅ g^* ∘ j^*` of pullbacks of `ℓ`-adic sheaves, from
 `Fr_Y ≫ j = j ≫ g`, with the pullbacks along automorphisms realized as pushforwards along their
 inverses. -/
 noncomputable def adicUpperStarCompFrobeniusIsoOfComm :
-    (j)^*ᵃ[l] ⋙ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.inv)_*ᵃ[l] ≅
-      (g.inv)_*ᵃ[l] ⋙ (j)^*ᵃ[l] :=
+    (j)^*ᵃ[l] ⋙ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ≅
+      (g.asIso.inv)_*ᵃ[l] ⋙ (j)^*ᵃ[l] :=
   Functor.isoWhiskerLeft _
       (adicUpperStarIsoLowerStarInv l
-        (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).symm ≪≫
+        (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso).symm ≪≫
     (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l hj.symm ≪≫ adicUpperStarComp l _ _ ≪≫
-    Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g) _
+    Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.asIso) _
 
 private lemma adicUpperStarCompFrobeniusIsoOfComm_eq :
     adicUpperStarCompFrobeniusIsoOfComm g j hj =
       Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l
-          (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).symm ≪≫
+          (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso).symm ≪≫
         (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l hj.symm ≪≫
-        adicUpperStarComp l _ _ ≪≫ Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g) _ :=
+        adicUpperStarComp l _ _ ≪≫
+        Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.asIso) _ :=
   rfl
 
 /-- The exchange isomorphism `j^* ∘ Fr_Y^* ≅ g^* ∘ j^*`, on the underlying sheaves:
@@ -93,20 +94,21 @@ private lemma adicUpperStarCompFrobeniusIsoOfComm_eq :
 lemma adicUpperStarCompFrobeniusIsoOfComm_hom_app_hom (M : AdicSheaf l Z) :
     ((adicUpperStarCompFrobeniusIsoOfComm g j hj).hom.app M).hom =
       (upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-          (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).inv.app ((j)^*ᵃ[l].obj M).X ≫
-        (upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom j).inv.app
+          (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso).inv.app
+          ((j)^*ᵃ[l].obj M).X ≫
+        (upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom j).inv.app
           M.X ≫ (upperStarCongr _ hj.symm).hom.app M.X ≫
-        (upperStarComp _ j g.hom).hom.app M.X ≫
+        (upperStarComp _ j g.asIso.hom).hom.app M.X ≫
         (j)^*[WeilCoefficients.{u} l].map
-          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l) g).hom.app M.X) :=
+          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l) g.asIso).hom.app M.X) :=
   (congrArg (fun i ↦ (i.hom.app M).hom) (adicUpperStarCompFrobeniusIsoOfComm_eq g j hj)).trans
-    (exchange_hom_app_hom' j _ g hj.symm M)
+    (exchange_hom_app_hom' j _ g.asIso hj.symm M)
 
 /-- The pullback along `j : Ȳ ⟶ Z` of `ℓ`-adic sheaves `A` on `Z` with a structure
 `g^* A ≅ A`, for an automorphism `g` of `Z` with `j ≫ g = Fr_Y ≫ j`: the sheaf `j^* A` with the
 Weil structure `Fr_Y^* j^* A ≅ j^* g^* A ≅ j^* A`. -/
 noncomputable def ProEtaleWeilSheaf.equivariantPullback :
-    IsoAlgebra ((g.inv)_*ᵃ[l]) ⥤ ProEtaleWeilSheaf L l Y :=
+    IsoAlgebra ((g.asIso.inv)_*ᵃ[l]) ⥤ ProEtaleWeilSheaf L l Y :=
   IsoAlgebra.mapOfNatIso (adicUpperStarCompFrobeniusIsoOfComm g j hj)
 
 end Equivariant

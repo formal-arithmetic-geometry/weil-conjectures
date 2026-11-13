@@ -183,7 +183,6 @@ lemma pullback_hom_ext_of {f : Spec (.of B) ⟶ Spec (.of A)} {M : (Spec (.of A)
     rw [this, he, Hom.app_smul_of, Hom.app_smul_of, h]
   | add x y hx hy => simp only [map_add, hx, hy]
 
-set_option maxHeartbeats 900000 in -- sections of pullbacks along `Spec.map`s are slow
 open Pseudofunctor in
 /-- **Descent of morphisms along a faithfully flat map of affine schemes** (abstract version):
 for `f : Spec B ⟶ Spec A` with `A → B` faithfully flat, `f^*` is fully faithful on

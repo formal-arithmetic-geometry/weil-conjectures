@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionBaseC
 import WeilConjectures.RingTheory.RelativeCompleteIntersectionClosedFiberRegularSequence
 import WeilConjectures.RingTheory.PolynomialLocalFlatQuotientDescent
 import WeilConjectures.RingTheory.RegularSequenceFlatClosedFiber
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Flatness of successive localized complete-intersection quotients

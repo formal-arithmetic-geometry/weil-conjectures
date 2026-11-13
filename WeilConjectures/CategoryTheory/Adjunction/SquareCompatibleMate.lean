@@ -307,8 +307,8 @@ variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* 
 
 /-- The mate of a 2-square precomposed with a transformation of its top side. -/
 lemma mateEquiv_whiskerRight_comp (β : G' ⟶ G) (α : TwoSquare G L₁ L₂ H) :
-    mateEquiv adj₁ adj₂ (Functor.whiskerRight β L₂ ≫ α.natTrans) =
-      Functor.whiskerLeft R₁ β ≫ (mateEquiv adj₁ adj₂ α).natTrans := by
+    mateEquiv adj₁ adj₂ (Functor.whiskerRight β L₂ ≫ α) =
+      Functor.whiskerLeft R₁ β ≫ (mateEquiv adj₁ adj₂ α) := by
   ext K
   simp only [mateEquiv_apply, Functor.comp_obj, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
@@ -316,8 +316,8 @@ lemma mateEquiv_whiskerRight_comp (β : G' ⟶ G) (α : TwoSquare G L₁ L₂ H)
 
 /-- The mate of a 2-square postcomposed with a transformation of its bottom side. -/
 lemma mateEquiv_comp_whiskerLeft (α : TwoSquare G L₁ L₂ H) (γ : H ⟶ H') :
-    mateEquiv adj₁ adj₂ (α.natTrans ≫ Functor.whiskerLeft L₁ γ) =
-      (mateEquiv adj₁ adj₂ α).natTrans ≫ Functor.whiskerRight γ R₂ := by
+    mateEquiv adj₁ adj₂ (α ≫ Functor.whiskerLeft L₁ γ) =
+      (mateEquiv adj₁ adj₂ α) ≫ Functor.whiskerRight γ R₂ := by
   ext K
   simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerRight_app]
   simp [← Functor.map_comp]
@@ -326,7 +326,7 @@ lemma mateEquiv_comp_whiskerLeft (α : TwoSquare G L₁ L₂ H) (γ : H ⟶ H') 
 lemma mateEquiv_ofNatIsoRight {R₁' : D ⥤ C} {R₂' : F ⥤ E} (e₁ : R₁ ≅ R₁') (e₂ : R₂ ≅ R₂')
     (α : TwoSquare G L₁ L₂ H) :
     mateEquiv (adj₁.ofNatIsoRight e₁) (adj₂.ofNatIsoRight e₂) α =
-      Functor.whiskerRight e₁.inv G ≫ (mateEquiv adj₁ adj₂ α).natTrans ≫
+      Functor.whiskerRight e₁.inv G ≫ (mateEquiv adj₁ adj₂ α) ≫
         Functor.whiskerLeft H e₂.hom := by
   ext K
   simp only [Functor.comp_obj, mateEquiv_apply, Adjunction.ofNatIsoRight_unit,
@@ -336,7 +336,7 @@ lemma mateEquiv_ofNatIsoRight {R₁' : D ⥤ C} {R₂' : F ⥤ E} (e₁ : R₁ �
     Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerRight_app,
     Functor.comp_map, Functor.leftUnitor_hom_app, Category.comp_id, Category.id_comp,
     NatTrans.naturality, NatTrans.naturality_assoc]
-  have hα := α.natTrans.naturality (e₁.inv.app K)
+  have hα := α.naturality (e₁.inv.app K)
   simp only [Functor.comp_map] at hα
   rw [← adj₂.unit_naturality_assoc, ← e₂.hom.naturality_assoc]
   have hα' := congrArg R₂'.map hα
@@ -349,7 +349,7 @@ lemma mateEquiv_symm_ofNatIsoRight {R₁' : D ⥤ C} {R₂' : F ⥤ E} (e₁ : R
     (e₂ : R₂ ≅ R₂') (β : TwoSquare R₁' H G R₂') :
     (mateEquiv (adj₁.ofNatIsoRight e₁) (adj₂.ofNatIsoRight e₂)).symm β =
       (mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight e₁.hom G ≫ β.natTrans ≫ Functor.whiskerLeft H e₂.inv)) := by
+        (Functor.whiskerRight e₁.hom G ≫ β ≫ Functor.whiskerLeft H e₂.inv)) := by
   rw [Equiv.symm_apply_eq]
   ext d
   rw [mateEquiv_ofNatIsoRight, Equiv.apply_symm_apply]
@@ -367,8 +367,8 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
 /-- Compatibility with commutation squares can be checked on the mates of the commutation
 squares, along adjunctions `T ⊣ Res` and `T' ⊣ Res'`. -/
 lemma NatTrans.SquareCompatible.of_mateEquiv {α : F ⟶ G} {α' : F' ⟶ G'}
-    (h : Functor.whiskerLeft Res α ≫ (mateEquiv adjT adjT' (TwoSquare.mk _ _ _ _ ιG.hom)).natTrans =
-      (mateEquiv adjT adjT' (TwoSquare.mk _ _ _ _ ιF.hom)).natTrans ≫
+    (h : Functor.whiskerLeft Res α ≫ (mateEquiv adjT adjT' (TwoSquare.mk _ _ _ _ ιG.hom)) =
+      (mateEquiv adjT adjT' (TwoSquare.mk _ _ _ _ ιF.hom)) ≫
         Functor.whiskerRight α' Res') :
     SquareCompatible ιF ιG α α' := by
   have h' : Functor.whiskerRight α T' ≫ ιG.hom = ιF.hom ≫ Functor.whiskerLeft T α' := by
@@ -392,7 +392,7 @@ variable {A₁ A₂ A₃ B₁ B₂ B₃ : Type*} [Category* A₁] [Category* A�
 lemma Functor.pasteSquareIso_hom_eq_hComp (ι₁ : F₁ ⋙ T₂ ≅ T₁ ⋙ F₁')
     (ι₂ : F₂ ⋙ T₃ ≅ T₂ ⋙ F₂') :
     (Functor.pasteSquareIso ι₁ ι₂).hom =
-      (TwoSquare.hComp (TwoSquare.mk _ _ _ _ ι₁.hom) (TwoSquare.mk _ _ _ _ ι₂.hom)).natTrans := by
+      (TwoSquare.hComp (TwoSquare.mk _ _ _ _ ι₁.hom) (TwoSquare.mk _ _ _ _ ι₂.hom)) := by
   ext K
   simp [TwoSquare.hComp]
 

@@ -158,7 +158,6 @@ private theorem hom_square
     exact (eq_of_heq (hc n p q hpq)).trans (homIso_projection P I n p q hpq).symm
   simpa only [he, Iso.app_hom, UC, HO, nativeForget] using hs
 
-set_option maxHeartbeats 800000 in
 -- Instantiating all representative naturality squares involves several localization functors.
 private theorem hom_square_all
     (M : NativeClosedHomModels k₀ l X)

@@ -81,11 +81,11 @@ lemma adicScalar_add (c d : PadicAlgCl l) :
 
 /-- The action of `ℚ̄_ℓ` on the underlying abelian sheaf of `ℚ̄_ℓ,S`. -/
 noncomputable def adicScalarRingHom : PadicAlgCl l →+* End (adicConstantSheafAb l S) where
-  toFun c := adicScalar l S c
-  map_one' := adicScalar_one l S
-  map_mul' c d := adicScalar_mul l S c d
-  map_zero' := adicScalar_zero l S
-  map_add' c d := adicScalar_add l S c d
+  toFun c := .of (adicScalar l S c)
+  map_one' := End.ext (adicScalar_one l S)
+  map_mul' c d := End.ext (adicScalar_mul l S c d)
+  map_zero' := End.ext (adicScalar_zero l S)
+  map_add' c d := End.ext (adicScalar_add l S c d)
 
 /-- The inclusion `C(-, ℤ_ℓ) ⟶ ℚ̄_ℓ,S` of abelian sheaves: `ℤ_ℓ`-valued functions are locally
 finite, their values spanning the line `ℚ_ℓ`. -/
@@ -112,9 +112,9 @@ noncomputable def continuousSheafToAdicConstantSheaf :
      naturality _ _ _ := rfl }⟩
 
 lemma integralSmulRingHom_comp_continuousSheafToAdicConstantSheaf (c : ℤ_[l]) :
-    integralSmulRingHom S l c ≫ continuousSheafToAdicConstantSheaf l S =
+    (integralSmulRingHom S l c).asHom ≫ continuousSheafToAdicConstantSheaf l S =
       continuousSheafToAdicConstantSheaf l S ≫
-        adicScalarRingHom l S (algebraMap ℤ_[l] (PadicAlgCl l) c) := by
+        (adicScalarRingHom l S (algebraMap ℤ_[l] (PadicAlgCl l) c)).asHom := by
   ext V f
   let g : C(V.unop.left, ℤ_[l]) := f.down
   refine congrArg ULift.up (Subtype.ext (ContinuousMap.ext fun t ↦ ?_))
@@ -144,10 +144,10 @@ noncomputable def integralToAdicConstantH (n : ℕ) :
     x (Ext.mk₀ (continuousSheafToAdicConstantSheaf l S)) (add_zero n)
   map_add' x y := Ext.add_comp _ _ _ _
   map_smul' c x := by
-    change (Ext.comp x (Ext.mk₀ (integralSmulRingHom S l c)) (add_zero n)).comp
+    change (Ext.comp x (Ext.mk₀ (integralSmulRingHom S l c).asHom) (add_zero n)).comp
         (Ext.mk₀ (continuousSheafToAdicConstantSheaf l S)) (add_zero n) =
       (Ext.comp x (Ext.mk₀ (continuousSheafToAdicConstantSheaf l S)) (add_zero n)).comp
-        (Ext.mk₀ (adicScalarRingHom l S (algebraMap ℤ_[l] (PadicAlgCl l) c))) (add_zero n)
+        (Ext.mk₀ (adicScalarRingHom l S (algebraMap ℤ_[l] (PadicAlgCl l) c)).asHom) (add_zero n)
     rw [Ext.comp_assoc_of_third_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,
       Ext.mk₀_comp_mk₀, integralSmulRingHom_comp_continuousSheafToAdicConstantSheaf]
 
@@ -274,7 +274,7 @@ theorem isBaseChange_integralToAdicConstantH [CompactSpace S] [QuasiSeparatedSpa
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       have e : continuousSheafMap S (Λ.mulHom (Λ.basis i) (Λ.basis i).2) ≫
           (compactLatticeDiagram l S).map a ≫ continuousSheafMap S (Λ'.coordHom k) =
-          integralSmulRingHom S l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩) := by
+          (integralSmulRingHom S l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩)).asHom := by
         have e1 : (compactLatticeDiagram l S).map a ≫ continuousSheafMap S (Λ'.coordHom k) =
             continuousSheafMap S ((Λ'.coordHom k).comp
               ⟨AddSubgroup.inclusion hΛΛ', continuous_subtype_val.subtype_mk _⟩) :=

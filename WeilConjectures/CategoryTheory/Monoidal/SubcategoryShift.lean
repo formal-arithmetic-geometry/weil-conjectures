@@ -183,7 +183,6 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] (P : ObjectProperty C) [
   [∀ X : C, ((curriedTensor C).flip.obj X).CommShift A]
 
 set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 1000000 in
 -- the instance problems for the composite functors are large
 /-- The associator of `P`, natural in its middle variable, commutes with the shifts if that of
 `C` does. -/

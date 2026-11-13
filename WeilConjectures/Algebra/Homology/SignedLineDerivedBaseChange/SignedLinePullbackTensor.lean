@@ -191,7 +191,6 @@ private theorem pull_section_map
   exact (congrArg (fun g ↦ g.val.app (op V) x)
     ((pullbackPushforwardAdjunction a).unit.naturality f)).symm
 
-set_option maxHeartbeats 400000 in
 -- The generalized pairing formula includes three underlying-sheaf comparisons.
 private theorem inverse_tensor_source_unit
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
@@ -279,7 +278,6 @@ private theorem inverse_tensor_source_unit
     (h.trans (congrArg₂ (CochainScalarConstruction.pure.{max u v w, u, v} S _ _ (op (U.obj V)))
       hx hy))
 
-set_option maxHeartbeats 400000 in
 -- The proof compares the algebraic and explicit site tensors through their unit sections.
 /-- Coefficient-identified pullback preserves tensor, with the source-unit normalization.
 Source: Stacks Project, Modules on Sites, Tag 03EL.

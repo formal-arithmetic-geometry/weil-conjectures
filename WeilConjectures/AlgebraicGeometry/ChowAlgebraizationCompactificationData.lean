@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback

@@ -61,9 +61,9 @@ theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ 
         b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
-    T.k (n * (0 + 1)) ≫ μ (tensorGradedSection T D e x) =
+    T.k (n * (0 + 1)) ≫ (μ (tensorGradedSection T D e x)).asHom =
       tensorBoundaryKernelMap j L hI n 0 (e + 1) (F ◁ x) ≫
         T.k (n * ((e + 1) + 1))  := by
   classical
@@ -77,7 +77,7 @@ theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ 
   let s := (x ≫ (boundarySectionDegreeIso j L n e).inv).app ⊤ (1 : Γ(Z, ⊤))
   let η := tensorGradedUnit j (L.tensorPow a)
   let g := (T.c a).app ⊤ s
-  let w := μ g
+  let w := (μ g).asHom
   change T.k d ≫ w = m ≫ T.k b
   have hi : Mono T.i := T.shortExact.mono_f
   obtain ⟨_, hη, _⟩ := closedImmersion_unit_quotient j
@@ -134,7 +134,7 @@ theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ 
     change T.i.val.app (op V) (w.val.app (op V) ((T.k d).app V y)) =
       T.i.val.app (op V) ((T.k b).app V (m.app V y))
     rw [hko, hc, hcast (a + d) b hdeg]
-    change T.i.val.app (op V) ((μ g).val.app (op V) ((T.k d).app V y)) = _
+    change T.i.val.app (op V) ((μ g).asHom.val.app (op V) ((T.k d).app V y)) = _
     rw [hglobal, ← hp]
     have hh := hlocal V ((T.b a).app V t) ((T.k d).app V y)
     change T.i.val.app (op V) (σ V (T.p.right.hom.app (op V) ((T.b a).app V t))

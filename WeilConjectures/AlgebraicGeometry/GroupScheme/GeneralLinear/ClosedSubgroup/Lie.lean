@@ -197,7 +197,6 @@ theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.I
     exact GrpObj.mem_pointsKer.1 p.2
   exact ⟨⟨q₀, hmem⟩, Subtype.ext hq₀⟩
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the group structure on points of the quotient scheme makes instance search slow
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.

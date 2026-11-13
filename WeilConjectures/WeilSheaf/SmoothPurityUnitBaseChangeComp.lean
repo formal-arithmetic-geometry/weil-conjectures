@@ -62,7 +62,7 @@ stacked squares, `unitBaseChange` of the composite is, through the composition i
 `Rf'` of `unitBaseChange` of the second square. -/
 theorem unitBaseChange_comp :
     unitBaseChange adjh adjh' Exh ε =
-      Ga.map (ρ.hom.app U) ≫ (mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj U) ≫
+      Ga.map (ρ.hom.app U) ≫ (mateEquiv adjf adjf' (inv Exf)).app (Rg.obj U) ≫
         Rf'.map (unitBaseChange adjg adjg' Exg ε) ≫ ρ'.inv.app U' := by
   have hξ : ∀ M : Cx, (inv Exh).app M ≫ Gc.map (e.hom.app M) =
       e'.hom.app (Ga.obj M) ≫ Lg'.map ((inv Exf).app M) ≫ (inv Exg).app (Lf.obj M) :=
@@ -76,12 +76,12 @@ theorem unitBaseChange_comp :
   have key := mateEquiv_inv_comp adjf adjg adjh adjf' adjg' adjh' (inv Exf) (inv Exg) (inv Exh)
     e e' hξ ρ.hom hρ ρ'.hom hρ' U
   calc unitBaseChange adjh adjh' Exh ε
-      = (mateEquiv adjh adjh' (inv Exh)).natTrans.app U ≫ Rh'.map ε := rfl
-    _ = (mateEquiv adjh adjh' (inv Exh)).natTrans.app U ≫ ρ'.hom.app (Gc.obj U) ≫
+      = (mateEquiv adjh adjh' (inv Exh)).app U ≫ Rh'.map ε := rfl
+    _ = (mateEquiv adjh adjh' (inv Exh)).app U ≫ ρ'.hom.app (Gc.obj U) ≫
           (Rg' ⋙ Rf').map ε ≫ ρ'.inv.app U' := by
         rw [NatIso.naturality_2]
-    _ = Ga.map (ρ.hom.app U) ≫ (mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj U) ≫
-          Rf'.map ((mateEquiv adjg adjg' (inv Exg)).natTrans.app U) ≫
+    _ = Ga.map (ρ.hom.app U) ≫ (mateEquiv adjf adjf' (inv Exf)).app (Rg.obj U) ≫
+          Rf'.map ((mateEquiv adjg adjg' (inv Exg)).app U) ≫
           (Rg' ⋙ Rf').map ε ≫ ρ'.inv.app U' := by
         rw [← reassoc_of% key]
     _ = _ := by
@@ -93,7 +93,7 @@ include hEx hρ hρ' in
 followed by `Rf'(unitBaseChange_g)` is. -/
 theorem isIso_unitBaseChange_comp_iff :
     IsIso (unitBaseChange adjh adjh' Exh ε) ↔
-      IsIso ((mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj U) ≫
+      IsIso ((mateEquiv adjf adjf' (inv Exf)).app (Rg.obj U) ≫
         Rf'.map (unitBaseChange adjg adjg' Exg ε)) := by
   rw [unitBaseChange_comp adjf adjg adjh adjf' adjg' adjh' Exf Exg Exh e e' hEx ρ hρ ρ' hρ' ε,
     isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff]
@@ -102,7 +102,7 @@ include hEx hρ hρ' in
 /-- If the mate of `Exf` is invertible at `Rg U` and `unitBaseChange` of the second square is
 invertible, so is `unitBaseChange` of the composite. -/
 theorem isIso_unitBaseChange_comp
-    [IsIso ((mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj U))]
+    [IsIso ((mateEquiv adjf adjf' (inv Exf)).app (Rg.obj U))]
     [IsIso (unitBaseChange adjg adjg' Exg ε)] :
     IsIso (unitBaseChange adjh adjh' Exh ε) :=
   (isIso_unitBaseChange_comp_iff adjf adjg adjh adjf' adjg' adjh' Exf Exg Exh e e' hEx ρ hρ ρ'
@@ -181,7 +181,7 @@ abbrev upperShriekMateOfMap :
     boundedConstructibleUpperShriek l f ⋙ boundedConstructibleUpperStarOfMap l πX ⟶
       boundedConstructibleUpperStarOfMap l πY ⋙ boundedConstructibleUpperShriek l f' :=
   (mateEquiv (boundedConstructibleUpperShriekAdjunction l f)
-    (boundedConstructibleUpperShriekAdjunction l f') (inv bcf.hom)).natTrans
+    (boundedConstructibleUpperShriekAdjunction l f') (inv bcf.hom))
 
 include hbc in
 /-- **Pasting of exceptional base change maps at the unit (step 3)**: for stacked squares with

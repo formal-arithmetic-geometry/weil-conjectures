@@ -61,6 +61,6 @@ def moduleObjectDerivedExchange {X Y X' Y' : Scheme.{u}}
       moduleObjectDerivedPullback Λ g' ⋙ moduleObjectDerivedPushforward Λ p' :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ p)
     (derivedUpperStarLowerStarAdjunction Λ p')
-    (TwoSquare.mk _ _ _ _ (moduleObjectDerivedPullbackSquareComparison Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (moduleObjectDerivedPullbackSquareComparison Λ sq).hom))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

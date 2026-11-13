@@ -47,13 +47,13 @@ theorem inverseMate_pasting
       c.app (R₀.obj N) ≫ G.map (qf.app N) ≫ qg.app (F'.obj N) =
         qh.app N ≫ R₂.map (c'.app N)) (K : A₀) :
     E₂.map (c.app K) ≫
-        ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ qg)).natTrans.app (F.obj K) ≫
-        G'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qf)).natTrans.app K) =
-      ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qh)).natTrans.app K ≫
+        ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ qg)).app (F.obj K) ≫
+        G'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qf)).app K) =
+      ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qh)).app K ≫
         c'.app (E₀.obj K) := by
-  let pf := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qf)).natTrans
-  let pg := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ qg)).natTrans
-  let ph := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qh)).natTrans
+  let pf := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qf))
+  let pg := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ qg))
+  let ph := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qh))
   have hf := unit_mateEquiv_symm a₀ a₁ (TwoSquare.mk _ _ _ _ qf) K
   have hg := unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ qg) (F.obj K)
   have hh := unit_mateEquiv_symm a₀ a₂ (TwoSquare.mk _ _ _ _ qh) K

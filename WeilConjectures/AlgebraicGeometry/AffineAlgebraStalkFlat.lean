@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategor
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardStalkLocalization
+public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Stalkwise flatness over the direct-image algebra
 Source: Stacks Project, Tag 0AVW.

@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 public import WeilConjectures.Algebra.Homology.KFlatPullback
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Inverse image as tensor pullback along the identity adjoint ring map
 

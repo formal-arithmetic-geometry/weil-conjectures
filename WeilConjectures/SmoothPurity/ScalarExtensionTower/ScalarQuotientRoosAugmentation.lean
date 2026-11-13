@@ -61,7 +61,6 @@ private theorem scalar_roos_unit_eq (W : Scheme.{u})
         (pullbackTensorRoosAugmentation_condition l E W I) i j h
   · exact (integralComparisonLimitToRoos_existsUnique l E W I).exists.choose_spec
 
-set_option maxHeartbeats 800000 in
 -- Whole-system localization and several exact-restriction comparisons are composed here.
 private theorem coherent_roos_augmentation (X : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E X)
@@ -181,7 +180,6 @@ private theorem coherent_roos_augmentation (X : Scheme.{u})
       integralOperationsRoosFunctor.map_id]
     exact congrArg DerivedCategory.Q.map (Category.comp_id b).symm
 
-set_option maxHeartbeats 800000 in
 -- Compare both Roos coordinates through the large ordinary tensor interfaces.
 /-- A coherent scalar quotient augmentation has the prescribed entire Roos map.
 Source: Stacks 06YY and 0941; the tensor-unit augmentation in step 2 of

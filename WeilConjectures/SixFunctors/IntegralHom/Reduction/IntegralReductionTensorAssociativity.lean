@@ -131,7 +131,6 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   coefficientFiniteHasDerived coefficientFiniteDerivedExtension derivedCategory
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem nativeIso_representative

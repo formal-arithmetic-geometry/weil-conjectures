@@ -292,7 +292,6 @@ theorem restrictAffineLineZeroLocusHom_affineLineOrientation [HasInvertibleExpon
 
 variable (Y)
 
-set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
 include aY in

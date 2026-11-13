@@ -99,7 +99,6 @@ private theorem scalarOne_inverseUnit (k : Type u) [Field k]
   have hn' := ConcreteCategory.congr_hom hn (cX.unit.app (ModuleCat.of k k) (1 : k))
   exact hn'.symm
 
-set_option maxHeartbeats 400000 in
 -- The composite sheaf adjunctions require unfolding pointwise evaluation comparisons.
 /-- The integer-unit map commutes with the comparison before it is inverted.
 Source: Stacks Project, Tags 0096 and 01F7.

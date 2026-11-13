@@ -55,7 +55,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
 /-- The endomorphisms of the unit module `Λ_X` act on the unit of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: an endomorphism
 of `Λ_X` is placed in degree `0`. -/
@@ -70,7 +69,7 @@ noncomputable def homologyUnitEndRingHom :
     DerivedCategory.Qh
   have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_
       (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
-    (ObjectProperty.fullyFaithfulι _).map_bijective _ _
+    ((ObjectProperty.fullyFaithfulι _).mulEquivEnd _).bijective
   have : IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := CategoryTheory.Mod (Sheaf
       (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           X.left)))) :=
@@ -90,16 +89,16 @@ lemma ι_map_homologyUnitEndRingHom
     (x : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-        (homologyUnitEndRingHom ℓ X x) =
-      DerivedCategory.singleFunctorUnitEndRingHom _ x := by
+        (homologyUnitEndRingHom ℓ X x).asHom =
+      (DerivedCategory.singleFunctorUnitEndRingHom _ x).asHom := by
   unfold homologyUnitEndRingHom
   simp only [RingHom.coe_comp, Function.comp_apply, RingEquiv.toRingHom_eq_coe,
     RingEquiv.coe_toRingHom]
   have hb : Function.Bijective ((ObjectProperty.ι (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))).mapEndRingHom (𝟙_
           (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
-    (ObjectProperty.fullyFaithfulι _).map_bijective _ _
-  refine ((RingEquiv.ofBijective _ hb).apply_symm_apply _).trans ?_
+    ((ObjectProperty.fullyFaithfulι _).mulEquivEnd _).bijective
+  refine (congrArg End.asHom ((RingEquiv.ofBijective _ hb).apply_symm_apply _)).trans ?_
   have hε : Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := CategoryTheory.Mod
       (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj
           (Profinite.padicAlgClRingObj ℓ) X.left))) = 𝟙 _ :=
@@ -125,10 +124,10 @@ are `(-1)ⁿ r` for the endomorphism `r` of the unit inducing the block
 theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)]
     (P : Dᵇc((point Ω).left)⟦Profinite.padicAlgClRingObj ℓ⟧) [HasRightDual P] (v : P ⟶ P) :
-    trace v = homologyUnitEndRingHom ℓ (point Ω)
+    trace v = (homologyUnitEndRingHom ℓ (point Ω)
       (superTrace
         (fun j ↦ (DerivedCategory.homologyFunctor _ j).obj P.obj)
-        (fun j ↦ (DerivedCategory.homologyFunctor _ j).map v.hom)) := by
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).map v.hom))).asHom := by
   let A := PointMod ℓ Ω
   let I := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
     (point Ω).left)).ι
@@ -137,14 +136,22 @@ theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsS
     @HasRightDual.mk _ _ _ _ (I.obj (Pᘁ)) (ExactPairing.map I P (Pᘁ))
   have hinj : Function.Injective I.unitEndRingHom := fun a b h ↦ by
     rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
-    change 𝟙 _ ≫ I.map a ≫ 𝟙 _ = 𝟙 _ ≫ I.map b ≫ 𝟙 _ at h
+    apply End.ext
+    have h := congrArg End.asHom h
+    change 𝟙 _ ≫ I.map a.asHom ≫ 𝟙 _ = 𝟙 _ ≫ I.map b.asHom ≫ 𝟙 _ at h
     exact I.map_injective (by simpa only [Category.id_comp, Category.comp_id] using h)
   have hY (i : ℤ) : IsDualizable ((DerivedCategory.homologyFunctor A i).obj (I.obj P)) := by
     obtain ⟨n, ⟨e⟩⟩ := isFiniteFree_upperStar_homology ℓ (Field.toIsField Ω)
       IsField.isSepClosed_toField P i (𝟙 _)
     exact ⟨{ rightDual := _
              exact := (UnitBasis.ofIso (((upperStarId _ _).app _).symm ≪≫ e)).exactPairing }⟩
+  suffices h : End.of (trace v) = homologyUnitEndRingHom ℓ (point Ω)
+      (superTrace
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).obj P.obj)
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).map v.hom)) from
+    congrArg End.asHom h
   apply hinj
+  apply End.ext
   rw [← I.trace_eq_unitEndRingHom_trace v (I.map v) (Iso.refl _) (by simp),
     DerivedCategory.trace_eq_singleFunctor_map_superTrace
       ((nonempty_shiftDecomposition_point ℓ Ω P).some.map I) hY (I.map v),

@@ -188,7 +188,6 @@ local instance finiteProperCoefficientComm (A : Type u) [CommRing A] :
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the two composed derived pullbacks unfolds their module scalar transports.
 /-- The canonical ambient exchange for internal condensed-coefficient modules.
 Source: blueprint sk-thm-sfb-proper-base-change-finite, clause (2), and the
@@ -206,7 +205,6 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
   DerivedCategory.monoidalClosed
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem finiteProperCoefficientRing_iso
     (A : Type u) [CommRing A] [Finite A]
@@ -227,7 +225,6 @@ private theorem finiteProperCoefficientRing_iso
     infer_instance
   exact ⟨Mon.mkIso' e⟩
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem continuous_finiteProper_preserves
     (A : Type u) [CommRing A] [Finite A]
@@ -318,7 +315,6 @@ private theorem continuous_finiteProper_preserves
   exact ⟨ObjectProperty.prop_of_iso _ ep D.property.1,
     ObjectProperty.prop_of_iso _ ep ⟨a', b + (d : ℤ), D.property.2⟩⟩
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem preserves_coefficientIso
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -366,7 +362,6 @@ private theorem preserves_coefficientIso
   have : (constantModelBoundedConstructible R Y).IsClosedUnderIsomorphisms :=
     (constantModelConstructibleFiniteTor_wellDefined R Y).2.1
   exact ObjectProperty.prop_of_iso _ (ec.app _) hU
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem isIso_app_app_of_iso
     {C D H : Type*} [Category C] [Category D] [Category H]
@@ -379,7 +374,6 @@ private theorem isIso_app_app_of_iso
       (show IsIso ((τ.app K).app M) from inferInstance)
   exact (NatTrans.isIso_app_iff_of_iso (τ.app K') eM).1 ht
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem ordinary_projection_of_etale_tor
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -424,7 +418,6 @@ private theorem ordinary_projection_of_etale_tor
     (((comparisonUpperStar (ModuleCat.{u + 1} A) Y).leftDerivedFunctorIsoMapDerivedCategory).app
       D)
 
-set_option maxHeartbeats 800000 in
 -- Specialize naturality before substituting the coefficient-encoding categories.
 private theorem ordinary_projection_transport
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -456,7 +449,6 @@ private abbrev EncodedEtaleOrigin
       Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} A) T C ∧
         Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} A) T a b C }
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem coefficientEncoding_etaleOrigin
     (A : Type u) [CommRing A] [Finite A]
@@ -489,7 +481,6 @@ private theorem coefficientEncoding_etaleOrigin
   exact ((E T.left).fixedDerived.counitIso.app _).symm ≪≫
     (E T.left).fixedDerived.functor.mapIso ec
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem ordinary_exchange_of_etale
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -513,7 +504,6 @@ attribute [local irreducible] FiniteDiscreteOrdinary.coefficientEncoding
   ProEtale.rightDerivedLowerStarProjectionMap finiteCoefficientProjectionIsIso
   ordinaryFiniteCoefficientProjectionIsIso
 
-set_option maxHeartbeats 800000 in
 -- Transport only between the named ordinary and internal projection arrows.
 private theorem projection_of_encoded_origins
     (A : Type u) [CommRing A] [Finite A]

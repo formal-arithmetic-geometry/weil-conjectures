@@ -951,7 +951,7 @@ theorem normalized_naturality (sq : ChosenCartesianSquare g' f' f g)
     let ar := proEtaleRingDerivedAdjunction f (exchangeConstantRing Y A)
       (exchangeConstantRing X A) (exchangeConstantIso f A)
     let pi0 := (mateEquiv ar aj
-      (TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom))
     have hpi (M : D (A := A) X) : pi0.app M = projection d f M := by
       apply (aj.homEquiv _ _).symm.injective
       change (aj.homEquiv _ _).symm (pi0.app M) =

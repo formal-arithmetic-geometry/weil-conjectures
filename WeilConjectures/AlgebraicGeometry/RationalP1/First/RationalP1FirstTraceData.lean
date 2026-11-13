@@ -49,7 +49,7 @@ def firstTraceExchange
   unfold moduleObjectDerivedPushforward
   exact (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y))
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (firstProjection Y))
-    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ (square Y)).inv)).natTrans.app
+    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ (square Y)).inv)).app
       T ≫ (CondensedRing.lowerStar Λ (firstProjection Y)).rightDerivedFunctor.map e.hom
 
 end AlgebraicGeometry.ProEtale.RationalP1

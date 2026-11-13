@@ -131,7 +131,6 @@ noncomputable def whiskeringRightTensorRightIso (X : ModuleCat.{u + 1} R) :
       simp))
     (fun g ↦ by ext : 2; simp)
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- `HasWeakSheafify` for sheaves of modules over the two rings is slow to synthesize
 /-- **Restricting the scalars of the reduction gives the tensor product with `R ⧸ I`.** For a
 sheaf `F` of `R`-modules, the reduction `F / I F` with scalars restricted back to `R` is

@@ -403,7 +403,6 @@ variable {B F C X Y : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCom
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxHeartbeats 600000 in
 -- matching the composites of `Dᵇc` functors in the rewrites is slow
 /-- **The fixed-square route in normal form**: for a square `ι ≫ c = d ≫ Δ` with `ι`, `Δ` proper
 and `j` with `j`, `j ≫ ι`, `j ≫ d` proper,
@@ -608,7 +607,6 @@ variable {B F C P X Y : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiC
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxHeartbeats 400000 in
 -- unifying the two routes with the hand-written statement is slow
 /-- **The ambient compactification route is the fixed-square route**: the composite of
 `ExchangeOnProperBdc` at `g = j ≫ ι` (`compactificationLowerShriekIso`, compatibilities,

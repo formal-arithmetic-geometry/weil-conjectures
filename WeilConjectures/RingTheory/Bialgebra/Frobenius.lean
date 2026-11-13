@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Finite local bialgebras in characteristic `p` have `p`-power dimension

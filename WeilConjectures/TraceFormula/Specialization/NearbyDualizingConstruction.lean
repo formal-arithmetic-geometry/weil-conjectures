@@ -66,7 +66,6 @@ noncomputable def dualizingMap (h : N.IsTraitModelOfBase k q g) :
       (dualizingComplex ℓ Y) ⟶ dualizingComplex ℓ Y' :=
   dualizingExchange ℓ (traitSpecializationUnit k k' (ℓ := ℓ)) (h.compactSupportExchange ℓ)
 
-set_option maxHeartbeats 1600000 in
 -- matching the objects `ω_Y` and `Ra^! ℚ̄_ℓ` of the two sides unfolds the monoidal units
 /-- **The dualizing map of a proper model is compatible with the traces**:
 `tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)`, for `q` proper and geometric generic fibre

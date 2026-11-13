@@ -54,8 +54,8 @@ variable {𝒞 : Type u'} [Category.{v} 𝒞] {𝒪 : MorphismProperty 𝒞} [�
 `X ⟶[𝟙] X ⟶[f ≫ g] S`, the identifications `(𝟙)_! ⋙ f_* ≅ f_*` intertwine the composition
 isomorphism with the composition isomorphism `(f ≫ g)_* ≅ f_* ⋙ g_*` of the pushforwards. -/
 lemma hcomp_shId_eq_compIso_ofProper {X Y S : 𝒞} (f : X ⟶ Y) (g : Y ⟶ S)
-    (w : f ≫ 𝟙 Y = 𝟙 X ≫ f) [IsIso (F.baseChange f (𝟙 X) (𝟙 Y) f w).natTrans]
-    [IsIso (F.exchange f (𝟙 X) (𝟙 Y) f w).natTrans] :
+    (w : f ≫ 𝟙 Y = 𝟙 X ≫ f) [IsIso (F.baseChange f (𝟙 X) (𝟙 Y) f w)]
+    [IsIso (F.exchange f (𝟙 X) (𝟙 Y) f w)] :
     NatTrans.hcomp (Functor.whiskerRight (F.shId X).hom (F.pf f) ≫ (Functor.leftUnitor _).hom)
         (Functor.whiskerRight (F.shId Y).hom (F.pf g) ≫ (Functor.leftUnitor _).hom) =
       (F.compIso (⟨X, Y, X, 𝟙 X, f, 𝟙 Y, g, 𝟙 X, f ≫ g, 𝟙 X, f, Category.id_comp _, rfl, w⟩ :
@@ -125,11 +125,11 @@ lemma compIso_triangleShriekTriangle_unitLeft_hom_app (f : X ⟶ Y) (c : Compact
   have w : 𝟙 (SepFinType.mk X) ≫ SepFinType.homMk c.overI = SepFinType.homMk c.overI ≫ 𝟙 _ := by
     simp
   have h₁ : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk c.overI)
-      (SepFinType.homMk c.overI) (𝟙 _) w).natTrans :=
+      (SepFinType.homMk c.overI) (𝟙 _) w) :=
     isIso_baseChange_triangleShriekTriangle ℓ (f := 𝟙 X) (g := f)
       (Compactification.Triangle.unitLeft c)
   have h₂ : IsIso ((𝔽).exchange (𝟙 (SepFinType.mk X)) (SepFinType.homMk c.overI)
-      (SepFinType.homMk c.overI) (𝟙 _) w).natTrans :=
+      (SepFinType.homMk c.overI) (𝟙 _) w) :=
     isIso_exchange_triangleShriekTriangle ℓ (f := 𝟙 X) (g := f)
       (Compactification.Triangle.unitLeft c)
   have := isIso_baseChange_triangleShriekTriangle ℓ (f := 𝟙 X) (g := f)
@@ -259,11 +259,11 @@ lemma compIso_triangleShriekTriangle_unitRight_hom_app (f : X ⟶ Y) (c : Compac
       𝟙 (SepFinType.mk c.overObj) ≫ SepFinType.homMk c.overG := by
     simp
   have h₁ : IsIso ((𝔽).baseChange (SepFinType.homMk c.overG) (𝟙 _) (𝟙 _)
-      (SepFinType.homMk c.overG) w).natTrans :=
+      (SepFinType.homMk c.overG) w) :=
     isIso_baseChange_triangleShriekTriangle ℓ (f := f) (g := 𝟙 Y)
       (Compactification.Triangle.unitRight c)
   have h₂ : IsIso ((𝔽).exchange (SepFinType.homMk c.overG) (𝟙 _) (𝟙 _)
-      (SepFinType.homMk c.overG) w).natTrans :=
+      (SepFinType.homMk c.overG) w) :=
     isIso_exchange_triangleShriekTriangle ℓ (f := f) (g := 𝟙 Y)
       (Compactification.Triangle.unitRight c)
   have := isIso_baseChange_triangleShriekTriangle ℓ (f := f) (g := 𝟙 Y)

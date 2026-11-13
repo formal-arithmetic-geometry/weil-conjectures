@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.InertiaNeighbourhood
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryNeighbourhoodData
 public import WeilConjectures.WeilSheaf.BoundaryStrictHenselization
@@ -87,11 +88,11 @@ given by `Spec A ⟶ Spec R ⟶ C` and `Spec ε`. -/
 lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
     (g : Spec R ⟶ C) (alg : R ⟶ A) (σ : A ⟶ A) (hσalg : alg ≫ σ = alg)
     (ε : CommRingCat.of (AlgebraicClosure K) ⟶ A) (n : ℕ)
-    (hσε : Spec.map σ ≫ Spec.map ε = Spec.map ε ≫ (specGeometricFrobenius K ^ n).hom)
+    (hσε : Spec.map σ ≫ Spec.map ε = Spec.map ε ≫ (specGeometricFrobenius K ^ n).asIso.hom)
     (h : Spec A ⟶ (C ↘ Spec (.of K)).geometricFiber)
     (hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj = Spec.map alg ≫ g)
     (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure = Spec.map ε) :
-    Spec.map σ ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).hom := by
+    Spec.map σ ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso.hom := by
   apply Scheme.Hom.geometricFiber_hom_ext
   · rw [Category.assoc, Category.assoc,
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj, hhproj,
@@ -128,8 +129,8 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       Spec.map (CommRingCat.ofHom ε)) :
     ∃ α : Spec (.of (Ideal.inertiaInvariants C.functionField Q)) ⟶
         Spec (.of (Ideal.inertiaInvariants C.functionField Q)),
-      α ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).hom ∧
-      (specGeometricFrobenius K ^ n).hom ≫ Spec.map (CommRingCat.ofHom r) =
+      α ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso.hom ∧
+      (specGeometricFrobenius K ^ n).asIso.hom ≫ Spec.map (CommRingCat.ofHom r) =
         Spec.map (CommRingCat.ofHom r) ≫ α ∧
       Spec.map (CommRingCat.ofHom (σF : Ω →+* Ω)) ≫ Spec.map (CommRingCat.ofHom
         (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) =

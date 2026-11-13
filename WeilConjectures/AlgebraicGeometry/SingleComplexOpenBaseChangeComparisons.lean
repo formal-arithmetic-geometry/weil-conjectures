@@ -22,7 +22,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- The explicit additivity witnesses require a larger typeclass-search budget.
 /-- The sectionwise open direct-image comparison, derived using exact restriction
 and preservation of K-injectives. This constructs the isomorphism rather than

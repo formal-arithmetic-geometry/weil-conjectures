@@ -55,7 +55,7 @@ comparison `G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` of internal homs followed by 
 lemma nearbyDualityMap_eq_ihomComparison (G : C ⥤ D) [G.LaxMonoidal] {W : C} {W' : D}
     (e : G.obj W ⟶ W') (X : C) :
     nearbyDualityMap (Functor.LaxMonoidal.μ G) e X =
-      (Functor.LaxMonoidal.ihomComparison G X).natTrans.app W ≫ (ihom (G.obj X)).map e := by
+      (Functor.LaxMonoidal.ihomComparison G X).app W ≫ (ihom (G.obj X)).map e := by
   apply uncurry_injective
   rw [uncurry_nearbyDualityMap, uncurry_natural_right, uncurry_eq, Category.assoc,
     Functor.LaxMonoidal.ihomComparison_ev_assoc]
@@ -240,7 +240,6 @@ variable {V W : Over (Spec (.of k'))} [LocallyOfFiniteType V.hom] [QuasiCompact 
   [IsSeparated V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   (i : V ⟶ W) [IsOpenImmersion i.left]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The projection map of `j_! ⊣ Lj^*` on `Dᵇc` is invertible
 (`isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction`),

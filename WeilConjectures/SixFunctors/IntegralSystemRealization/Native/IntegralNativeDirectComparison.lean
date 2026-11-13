@@ -142,7 +142,7 @@ theorem integralNativeDirectComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     have hi := congrArg (fun z ↦ z.inv.app N) he
     exact hi.symm
   have hm : (mateEquiv d.adj (finiteAdj l E f n)
-      (TwoSquare.mk _ _ _ _ e.inv)).natTrans = (ed.evaluation n).hom := by
+      (TwoSquare.mk _ _ _ _ e.inv)) = (ed.evaluation n).hom := by
     apply NatTrans.ext
     funext N
     apply ((finiteAdj l E f n).homEquiv _ _).symm.injective
@@ -153,7 +153,7 @@ theorem integralNativeDirectComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (TwoSquare.mk _ _ _ _ e.inv) (TwoSquare.mk _ _ _ _ e'.inv) ht M
   have hs := NativeComparison.finite_derived_conjugate l E f n
   change (mateEquiv d.adj (finiteAdj l E f n)
-      (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app M ≫
+      (TwoSquare.mk _ _ _ _ e.inv)).app M ≫
       (conjugateEquiv (finiteAdj l E f n) (ProEtale.VaryingRing.levelAdj R f n)
         s.hom).app ((coefficientSequenceDerivedEvaluation l E X n).obj M) =
     (coefficientSequenceDerivedEvaluation l E Y n).map

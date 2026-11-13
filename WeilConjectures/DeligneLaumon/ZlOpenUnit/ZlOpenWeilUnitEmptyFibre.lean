@@ -404,7 +404,7 @@ Source: Part 2; recorded integral operations
 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
 abbrev integralG (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
-  @constructibleIntegralPullback l _ E _ _ _ _ _ (D.geometricFrobenius X₀).hom
+  @constructibleIntegralPullback l _ E _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
 /-- Rational open restriction, on the recorded coefficient category.
@@ -427,13 +427,13 @@ def integralAlpha (E : Type u) [Field E] [Algebra ℚ_[l] E]
   letI : ∀ x : (D.geometricFiber X₀).left,
       Invertible (l : (D.geometricFiber X₀).left.residueField x) :=
     sfWeilPrimeInvertible D l hl X₀
-  (zlIntegralPullComp l E (D.geometricFrobenius U₀).hom (zlFiberMap D j₀)).symm ≪≫
+  (zlIntegralPullComp l E (D.geometricFrobenius U₀).asIso.hom (zlFiberMap D j₀)).symm ≪≫
     eqToIso (congrArg
       (fun f : (D.geometricFiber U₀).left ⟶ (D.geometricFiber X₀).left ↦
         @constructibleIntegralPullback l _ E _ _ _ _ _ f
           (sfWeilPrimeInvertible D l hl U₀) (sfWeilPrimeInvertible D l hl X₀))
       (zlFrobenius_naturality D j₀)) ≪≫
-      zlIntegralPullComp l E (zlFiberMap D j₀) (D.geometricFrobenius X₀).hom
+      zlIntegralPullComp l E (zlFiberMap D j₀) (D.geometricFrobenius X₀).asIso.hom
 
 /-- Component of the rational pullback-composition square, localized from the
 specified integral compositors.
@@ -452,13 +452,13 @@ def rationalAlphaComponent (E : Type u) [Field E] [Algebra ℚ_[l] E]
   letI : ∀ x : (D.geometricFiber X₀).left,
       Invertible (l : (D.geometricFiber X₀).left.residueField x) :=
     sfWeilPrimeInvertible D l hl X₀
-  (localPullbackComposition l E (D.geometricFrobenius U₀).hom (zlFiberMap D j₀) K).symm ≪≫
+  (localPullbackComposition l E (D.geometricFrobenius U₀).asIso.hom (zlFiberMap D j₀) K).symm ≪≫
     eqToIso (congrArg
       (fun f : (D.geometricFiber U₀).left ⟶ (D.geometricFiber X₀).left ↦
         (@rationalDerivedPullback l _ E _ _ _ _ _ f
           (sfWeilPrimeInvertible D l hl U₀) (sfWeilPrimeInvertible D l hl X₀)).obj K)
       (zlFrobenius_naturality D j₀)) ≪≫
-    localPullbackComposition l E (zlFiberMap D j₀) (D.geometricFrobenius X₀).hom K
+    localPullbackComposition l E (zlFiberMap D j₀) (D.geometricFrobenius X₀).asIso.hom K
 
 set_option linter.unusedSectionVars false in
 /-- Naturality of the specified comparison alpha.
@@ -480,7 +480,7 @@ theorem rationalAlpha_natural (E : Type u) [Field E] [Algebra ℚ_[l] E]
   simpa only [rationalAlphaComponent, rationalP, sfWeilFrobeniusPullback,
     Iso.trans_hom, Iso.symm_hom, eqToIso.hom] using
     @square_natural l _ E _ _ _ (D.geometricFiber U₀).left (D.geometricFiber X₀).left
-      (zlFiberMap D j₀) (D.geometricFrobenius U₀).hom (D.geometricFrobenius X₀).hom
+      (zlFiberMap D j₀) (D.geometricFrobenius U₀).asIso.hom (D.geometricFrobenius X₀).asIso.hom
       (zlFrobenius_naturality D j₀) (sfWeilPrimeInvertible D l hl U₀)
       (sfWeilPrimeInvertible D l hl X₀) K L a
 
@@ -602,7 +602,7 @@ def rationalFrobeniusStageScalar
       sfWeilFrobeniusPullback D l hl X₀
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) := by
   unfold sfWeilFrobeniusPullback
-  exact @rationalStageScalar l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).hom
+  exact @rationalStageScalar l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀) E L h
 
 attribute [local irreducible] rationalFrobeniusStageScalar
@@ -704,13 +704,13 @@ def FiniteScalarCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
         (AlgebraicallyClosedCoefficients.Coefficient l Ω E) _ _ _
         (AlgebraicallyClosedCoefficients.Coefficient l Ω L) _ _ _
         (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L h) _ _
-        (D.geometricFrobenius U₀).hom
+        (D.geometricFrobenius U₀).asIso.hom
         (sfWeilPrimeInvertible D l hl U₀) (sfWeilPrimeInvertible D l hl U₀) K) ∧
       (∀ K, gX.app K = @integralPullbackScalarComparison l _
         (AlgebraicallyClosedCoefficients.Coefficient l Ω E) _ _ _
         (AlgebraicallyClosedCoefficients.Coefficient l Ω L) _ _ _
         (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L h) _ _
-        (D.geometricFrobenius X₀).hom
+        (D.geometricFrobenius X₀).asIso.hom
         (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀) K) ∧
       ScalarLaws
         (J := integralJ D l hl X₀ U₀ j₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E))
@@ -815,13 +815,13 @@ def CommonStageCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
       (∀ K : sfRationalConstructibleCategory l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
           (D.geometricFiber U₀).left, HEq (gU.hom.app K)
-        (@pullbackStageIso l _ Ω _ _ _ _ _ (D.geometricFrobenius U₀).hom
+        (@pullbackStageIso l _ Ω _ _ _ _ _ (D.geometricFrobenius U₀).asIso.hom
           (sfWeilPrimeInvertible D l hl U₀) (sfWeilPrimeInvertible D l hl U₀)
           E K).inv) ∧
       (∀ K : sfRationalConstructibleCategory l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
           (D.geometricFiber X₀).left, HEq (gX.hom.app K)
-        (@pullbackStageIso l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).hom
+        (@pullbackStageIso l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
           (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
           E K).inv) ∧
       ScalarLaws

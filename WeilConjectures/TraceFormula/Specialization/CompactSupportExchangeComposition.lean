@@ -105,7 +105,7 @@ lemma lowerShriekExchangeOfInv_comp_app {ΨC : DC ⥤ DC'} {ΨX : DX ⥤ DX'} {�
   let ν : ΨC ⋙ Djι' ⟶ Djι ⋙ ΨP := Functor.whiskerLeft ΨC E'.hom ≫
     Functor.whiskerRight νj Dι' ≫ Functor.whiskerLeft Dj νι ≫ Functor.whiskerRight E.inv ΨP
   have hν : ν = lowerShriekExchangeOfInv adjjι adjjι' αjι := by
-    have hm : (mateEquiv adjjι adjjι' ν).natTrans = inv αjι := by
+    have hm : (mateEquiv adjjι adjjι' ν) = inv αjι := by
       ext A
       have h := mateEquiv_app_comp_conjugateIsoEquiv_hom_app adjj adjι adjjι adjj' adjι' adjjι'
         E E' νj νι ν (fun a ↦ by simp [ν]) A

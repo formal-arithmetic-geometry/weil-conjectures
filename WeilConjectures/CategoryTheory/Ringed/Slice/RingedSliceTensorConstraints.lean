@@ -162,7 +162,6 @@ private theorem nested_right_model
   simpa only [Category.assoc] using congrArg
     (fun f ↦ f ≫ SU.tensor.map (X := (PU, QNU))
       (Y := (PU, SU.tensor.obj (QU, NU))) (𝟙 PU, j.hom)) hL
-set_option maxHeartbeats 800000 in
 -- The associativity square has dependent comparison endpoints.
 private theorem associator_of_models :
     ∀ {P Q N X Y : D} {PU QU NU XU YU : E}
@@ -505,7 +504,6 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (RingedSliceFlatRestriction.{c, v, r} J R U))
   (hd : RingedSliceEvaluationNormalized.{c, v, r, w, w'} J R U S T SU TU d)
 
-set_option maxHeartbeats 600000 in
 -- Keep the representative predicate parametric in the localized functor.
 /-- The tensor normalization formula with its restriction functor and localization
 comparison as parameters, so coherence checks do not unfold their constructions. -/
@@ -778,7 +776,6 @@ private def SliceTensorModelComplex
           ((F₀).obj Q)
           (Fflat P hP fP) (Fflat Q hQ fQ)).hom
 
-set_option maxHeartbeats 600000 in
 -- Check the normalization predicate through its section and flatness interfaces.
 /-- Package native restriction using its section and flatness interfaces. -/
 private theorem sliceTensorModel_complex
@@ -826,7 +823,6 @@ private def TensorAssociatorFormula
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 600000 in
 -- Keep the section and total-tensor endpoints fixed during the comparison calculation.
 omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
   [HasDerivedCategory.{w'} (RingedTensorModules.{max c v, v, r} (J.over U) (R.over U))]
@@ -1017,7 +1013,6 @@ attribute [local irreducible] DerivedCategory.Q ringedSliceComplexRestriction
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 -- Use the normalization API without unfolding the constructed derived functor.
 include K KU in
 /-- Associativity follows from the representative tensor-square predicate for any
@@ -1243,7 +1238,6 @@ private theorem sliceTensorModel_associator
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 300000 in
 -- Normalize localization comparisons without unfolding the tensor construction.
 include K KU hd in
 /-- The normalized slice tensor comparison preserves the derived associator.

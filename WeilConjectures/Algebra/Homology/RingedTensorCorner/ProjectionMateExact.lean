@@ -419,7 +419,6 @@ set_option maxHeartbeats 50000 in
 -- Specialize the published unique comparison to the edge's normalized models.
 attribute [local irreducible] monoidalCategory
 
-set_option maxHeartbeats 500000 in
 -- Compare the normalized fixed-factor computation maps before transporting exactness.
 set_option maxHeartbeats 50000 in
 -- Elaboration must compare the large two-variable localization interfaces.

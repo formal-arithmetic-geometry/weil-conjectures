@@ -376,7 +376,6 @@ lemma commSq_baseChangeModelFrobenius :
       ((geometricBaseChange k Ω).map f) (baseChangeModelFrobenius Ω Y N eY.hom) :=
   ⟨baseChangeModelFrobenius_comp_map N hf⟩
 
-set_option maxHeartbeats 800000 in
 -- the objects of the bounded constructible and of the ambient derived categories are compared
 omit [IsProper f.left] in
 /-- **The pullback cube**: on bounded constructible complexes, the comparisons of the derived

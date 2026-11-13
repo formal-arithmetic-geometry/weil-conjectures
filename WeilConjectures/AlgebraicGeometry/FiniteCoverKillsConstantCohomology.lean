@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

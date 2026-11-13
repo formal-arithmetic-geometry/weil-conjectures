@@ -69,7 +69,7 @@ theorem integral_sp_eq_map_integral_restrict [IsProper F'.F.hom]
     (hθ : T.θF = dualizingExchange ℓ σpt νF) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hS : T.SpecializesComponentClass σpt νF j) (z : BorelMooreSection ℓ F.F) :
-    (T.sp z).integral = σpt ≫ Ψpt.map (z.restrict j).integral ≫ inv σpt := by
+    (T.sp z).integral.asHom = σpt ≫ Ψpt.map (z.restrict j).integral.asHom ≫ inv σpt := by
   have hS' : BorelMooreSection.unitClass ℓ F'.F ≫
       (boundedConstructibleLowerShriek ℓ (toPoint F'.F)).map T.σF ≫ νF.app (𝟙_ _) =
         σpt ≫ Ψpt.map (BorelMooreSection.componentClass ℓ j) := hS
@@ -103,8 +103,8 @@ integration: `∫ sp_F(z) = σ_s⁻¹ ∘ Ψ_s(∫_B z|_B) ∘ σ_s`, and `Ψ_s`
 theorem integral_sp_eq_map_integral_restrict {B : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hS : hc.SpecializesComponentClass k' νc νX F j) (z : BorelMooreSection ℓ F.F) :
-    ((hc.deformationTraceSpecialization k' νc νX F).sp z).integral =
-      traitSpecializationUnit k k' ≫ (traitSpecialization k k').map (z.restrict j).integral ≫
+    ((hc.deformationTraceSpecialization k' νc νX F).sp z).integral.asHom =
+      traitSpecializationUnit k k' ≫ (traitSpecialization k k').map (z.restrict j).integral.asHom ≫
         inv (traitSpecializationUnit k k') :=
   TraceSpecialization.integral_sp_eq_map_integral_restrict
     (hc.deformationTraceSpecialization k' νc νX F)
