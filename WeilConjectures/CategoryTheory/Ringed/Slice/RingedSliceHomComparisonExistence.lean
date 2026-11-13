@@ -623,6 +623,7 @@ private theorem modelSquare
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.inv_hom_id, Category.comp_id] using hh.symm
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Elaborating the four fixed representative comparisons requires extra steps.
 /-- The local-family comparison descends to derived Hom with its fixed augmentations.
