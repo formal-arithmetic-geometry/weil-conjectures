@@ -225,6 +225,22 @@ private theorem integralCompositionCompositor_heq {V W Z : Scheme.{u}}
       (integralSystemTransition l E) h k) (integralComparisonSystemComposition l E h k) := by
   exact heq_of_eq (finiteSystemDerivedComposition_eq_integralComparison l E h k)
 
+/-- The scalar functor is unchanged by displaying its finite-system endpoints. -/
+private theorem integralCompositionScalar_heq (X : Scheme.{u}) :
+    HEq (integralCompositionFiniteScalar l E L ι X)
+      (integralComparisonDerivedSequenceScalar l E L ι X) := by
+  exact HEq.rfl
+
+/-- The scalar/pullback comparison is unchanged by displaying its finite-system endpoints. -/
+private theorem integralCompositionScalarPullback_heq {X Y : Scheme.{u}}
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :
+    HEq (integralCompositionFiniteScalarPullback l E L ι f)
+      (integralComparisonSystemScalarPullback l E L ι f) := by
+  exact HEq.rfl
+
+/-- Transport mixed coherence across identified presentations before taking components.
+This keeps the coherence equation in its own categories throughout the comparison. -/
 universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆ in
 private theorem scalar_mixed_component_heq
     {EV EV' : Type w₁} [iEV : Category.{v₁} EV] [iEV' : Category.{v₁} EV']
@@ -281,7 +297,6 @@ private theorem scalar_mixed_component_heq
   obtain rfl := eq_of_heq eaL
   exact NatTrans.congr_app mixed M
 
-set_option profiler true in
 private theorem integralCompositionFinite_mixed
     {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -334,17 +349,23 @@ private theorem integralCompositionFinite_mixed
     (integralComparisonDerivedSequencePullback l L (h ≫ k))
     (integralCompositionPullback_heq l L (h ≫ k))
     (integralCompositionFiniteScalar l E L ι V)
-    (integralComparisonDerivedSequenceScalar l E L ι V) (by exact HEq.rfl)
+    (integralComparisonDerivedSequenceScalar l E L ι V)
+    (integralCompositionScalar_heq l E L ι V)
     (integralCompositionFiniteScalar l E L ι W)
-    (integralComparisonDerivedSequenceScalar l E L ι W) (by exact HEq.rfl)
+    (integralComparisonDerivedSequenceScalar l E L ι W)
+    (integralCompositionScalar_heq l E L ι W)
     (integralCompositionFiniteScalar l E L ι Z)
-    (integralComparisonDerivedSequenceScalar l E L ι Z) (by exact HEq.rfl)
+    (integralComparisonDerivedSequenceScalar l E L ι Z)
+    (integralCompositionScalar_heq l E L ι Z)
     (integralCompositionFiniteScalarPullback l E L ι h)
-    (integralComparisonSystemScalarPullback l E L ι h) (by exact HEq.rfl)
+    (integralComparisonSystemScalarPullback l E L ι h)
+    (integralCompositionScalarPullback_heq l E L ι h)
     (integralCompositionFiniteScalarPullback l E L ι k)
-    (integralComparisonSystemScalarPullback l E L ι k) (by exact HEq.rfl)
+    (integralComparisonSystemScalarPullback l E L ι k)
+    (integralCompositionScalarPullback_heq l E L ι k)
     (integralCompositionFiniteScalarPullback l E L ι (h ≫ k))
-    (integralComparisonSystemScalarPullback l E L ι (h ≫ k)) (by exact HEq.rfl)
+    (integralComparisonSystemScalarPullback l E L ι (h ≫ k))
+    (integralCompositionScalarPullback_heq l E L ι (h ≫ k))
     (finiteSystemDerivedComposition (integralSystemRings l E)
       (integralSystemTransition l E) h k)
     (integralComparisonSystemComposition l E h k)
@@ -354,8 +375,8 @@ private theorem integralCompositionFinite_mixed
     (integralComparisonSystemComposition l L h k)
     (integralCompositionCompositor_heq l L h k)
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
-set_option profiler true in
--- The defeq checks identify two presentations of the same reduction systems.
+
+-- Mixed coherence is transported once between the two presentations of reduction systems.
 /-- Scalar extension carries the integral pullback compositor at E to the one at L.
 Source: Stacks 06YY, 07A4, 0941, 0D6D; Bhatt--Scholze, Lemma 3.5.7
 (blueprint: lem-pod-integral-pullback-composition-scalar).
