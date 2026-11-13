@@ -14,7 +14,7 @@ For a morphism `g : X' ⟶ X` and base changes `i' : Z' ⟶ X'`, `j' : U' ⟶ X'
 immersion `i` and its quasi-compact open complement `j`, the pullback `g^*` from `B`-module
 sheaves to `g^* B`-module sheaves carries the open–closed sequence of `M` to the open–closed
 sequence of `g^* M` (`ProEtale.RingSheaf.openClosedShortComplexBaseChangeIso`), part (4) of
-blueprint `det-sf-open-closed-sequence-ring-sheaf`.
+blueprint `proposition-extension-zero-restriction-closed-subscheme`.
 -/
 
 @[expose] public section
@@ -35,13 +35,14 @@ variable {R : Type (u + 1)} [CommRing R] {Z U X Z' U' X' : Scheme.{u}}
   (g : X' ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i'] (j' : U' ⟶ X') [IsOpenImmersion j']
   [QuasiCompact j'] (gZ : Z' ⟶ Z) (gU : U' ⟶ U)
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4), and the base change assertion
-of blueprint `sk-prop-sf-open-closed-triangle` for the sequence: for a sheaf of `R`-algebras
-`B`, the pullback `g^*` carries the open–closed sequence `0 ⟶ j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ 0`
-of a `B`-module sheaf `M` to the open–closed sequence of the `g^* B`-module sheaf `g^* M`, by
-an isomorphism of short complexes which is the identity on `g^* M`. Both are short exact, and
-the first map of each composes to zero with the second map of the other, as it does on
-underlying sheaves (`AlgebraicGeometry.ProEtale.upperStar_map_counit_comp_unit_eq_zero`,
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4), and the base
+change assertion of blueprint `proposition-extension-zero-restriction-closed-subscheme` for the
+sequence: for a sheaf of `R`-algebras `B`, the pullback `g^*` carries the open–closed sequence
+`0 ⟶ j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ 0` of a `B`-module sheaf `M` to the open–closed sequence of the
+`g^* B`-module sheaf `g^* M`, by an isomorphism of short complexes which is the identity on `g^* M`.
+Both are short exact, and the first map of each composes to zero with the second map of the other,
+as it does on underlying sheaves
+(`AlgebraicGeometry.ProEtale.upperStar_map_counit_comp_unit_eq_zero`,
 `AlgebraicGeometry.ProEtale.counit_comp_upperStar_map_unit_eq_zero`). -/
 noncomputable def openClosedShortComplexBaseChangeIso
     (hij : IsCompl (Set.range i.base) (Set.range j.base))

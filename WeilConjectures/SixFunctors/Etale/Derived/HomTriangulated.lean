@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 Let `A` be a monoidal closed Grothendieck abelian coefficient category as in
 `WeilConjectures.SixFunctors.Etale.Derived.Hom` and `X` a scheme. This file records that the
 derived internal hom `RHom(-, -)` of `D(X_ét, A)` is exact in each variable (blueprint
-`lem-sf-hom-triangulated`):
+`definition-verdier-dual-evaluation--3`):
 
 * for a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` and any `M`, the induced maps
   `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` extend to a distinguished triangle
@@ -51,10 +51,10 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X : Scheme.{u}}
 
-/-- Blueprint `lem-sf-hom-triangulated`: Exactness of the internal Hom in each variable, first
-variable. For a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(X_ét, A)` and any `M`, the
-maps `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` induced by `K ⟶ K''` and `K' ⟶ K` extend to a
-distinguished triangle `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M) ⟶ RHom(K'', M)[1]`. -/
+/-- Blueprint `definition-verdier-dual-evaluation--3`: Exactness of the internal Hom in each
+variable, first variable. For a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(X_ét, A)` and
+any `M`, the maps `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` induced by `K ⟶ K''` and `K' ⟶ K` extend
+to a distinguished triangle `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M) ⟶ RHom(K'', M)[1]`. -/
 theorem exists_distTriang_derivedHom_left
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
@@ -63,9 +63,9 @@ theorem exists_distTriang_derivedHom_left
       (((RHom(X)[A]).map T.mor₁.op).app M) w ∈ distTriang _ :=
   DerivedCategory.exists_distinguished_ihom_pre T hT M
 
-/-- Blueprint `lem-sf-hom-triangulated`: Exactness of the internal Hom in each variable, second
-variable. For a distinguished triangle `M' ⟶ M ⟶ M'' ⟶ M'[1]` of `D(X_ét, A)` and any `K`, the
-maps `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` extend to a distinguished triangle
+/-- Blueprint `definition-verdier-dual-evaluation--3`: Exactness of the internal Hom in each
+variable, second variable. For a distinguished triangle `M' ⟶ M ⟶ M'' ⟶ M'[1]` of `D(X_ét, A)` and
+any `K`, the maps `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` extend to a distinguished triangle
 `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'') ⟶ RHom(K, M')[1]`: the functor `RHom(K, -)` is
 triangulated, being right adjoint to the triangulated functor `K ⊗ᴸ -`. -/
 theorem exists_distTriang_derivedHom_right
@@ -77,7 +77,7 @@ theorem exists_distTriang_derivedHom_right
   have := (derivedTensorHomAdjunction A K.unop).isTriangulated_rightAdjoint
   exact ⟨_, ((RHom(X)[A]).obj K).map_distinguished T hT⟩
 
-/-- Blueprint `lem-sf-hom-triangulated`, dévissage in the first variable: if
+/-- Blueprint `definition-verdier-dual-evaluation--3`, dévissage in the first variable: if
 `K' ⟶ K ⟶ K'' ⟶ K'[1]` is a distinguished triangle and `RHom(K', M)`, `RHom(K'', M)` lie in a
 subcategory `P` of `D(X_ét, A)` closed under isomorphisms and extensions, then so does
 `RHom(K, M)`. -/
@@ -92,7 +92,7 @@ theorem derivedHom_mem_of_distTriang_left
   obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left M T hT
   exact P.ext_of_isTriangulatedClosed₂ _ hw h₃ h₁
 
-/-- Blueprint `lem-sf-hom-triangulated`, dévissage in the second variable: if
+/-- Blueprint `definition-verdier-dual-evaluation--3`, dévissage in the second variable: if
 `M' ⟶ M ⟶ M'' ⟶ M'[1]` is a distinguished triangle and `RHom(K, M')`, `RHom(K, M'')` lie in a
 subcategory `P` of `D(X_ét, A)` closed under isomorphisms and extensions, then so does
 `RHom(K, M)`. -/

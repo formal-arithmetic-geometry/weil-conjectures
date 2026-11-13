@@ -50,7 +50,7 @@ every torsion sheaf `F` on `X_ét`, the base change maps `g^* Rᵠf_* F ⟶ Rᵠ
 cohomology sheaves are isomorphisms for all `q`. The forward direction places `F` in degree `0`;
 conversely a bounded below complex with torsion cohomology is reached from its cohomology sheaves
 by truncation triangles, both sides of the derived base change map being left `t`-exact.
-(blueprint: `sk-thm-iff`, equivalence of (1) and (2)) -/
+(blueprint: `theorem-pbc-injective-acyclicity`, equivalence of (1) and (2)) -/
 theorem Etale.hasTorsionBaseChange_iff_forall_isIso_baseChangeHomologyMap (f : X ⟶ Y) :
     Etale.HasTorsionBaseChange Λ f ↔
       ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄
@@ -79,7 +79,7 @@ theorem Etale.hasTorsionBaseChange_iff_forall_isIso_baseChangeHomologyMap (f : X
    `g^* Rᵠf_* F ⟶ Rᵠf'_*(g'^* F)` are isomorphisms for all `q`;
 3. `f` has injective acyclicity with `Λ ⧸ pΛ`-coefficients for every prime `p`.
 
-(blueprint: `sk-thm-iff`) -/
+(blueprint: `theorem-pbc-injective-acyclicity`) -/
 @[stacks 0A4B]
 theorem Etale.tfae_hasTorsionBaseChange (f : X ⟶ Y) [IsProper f] :
     List.TFAE [Etale.HasTorsionBaseChange Λ f,
@@ -115,7 +115,7 @@ following are equivalent:
 3. `IA_r(f)` with `𝐅_r`-coefficients holds for every prime `r`
    (`AlgebraicGeometry.Etale.HasAllPrimeInjectiveAcyclicity`).
 
-(blueprint: `sk-thm-iff`) -/
+(blueprint: `theorem-pbc-injective-acyclicity`) -/
 @[stacks 0A4B]
 theorem Etale.tfae_hasTorsionBaseChange_int (f : X ⟶ Y) [IsProper f] :
     List.TFAE [Etale.HasTorsionBaseChange (ULift.{u + 1} ℤ) f,

@@ -396,7 +396,7 @@ lemma frobeniusLoop_eq_frobeniusLoopAt (x : C.finitePoints)
 /-- **The local Frobenius at a closed point and the Weil fundamental representation.** For a
 closed point `x` of degree `m` and a path `π : F_xb ≅ F_t`, transport along `π` carries the
 local Frobenius `Fₓ` on `ℱ_xb` to `Φᵐ ρ_geom(h)`, where `h` is the local Frobenius loop
-followed by `β_m⁻¹` (`def-wf-fundamental-representation`). -/
+followed by `β_m⁻¹` (`situation-weil`). -/
 theorem monoLinear_stalk_frobenius (F : WeilSheaf K l C) (hF : F.IsLisse) (x : C.finitePoints)
     (π : fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) ≅ fiber B.t)
     (v : (F.stalk x).carrier) :

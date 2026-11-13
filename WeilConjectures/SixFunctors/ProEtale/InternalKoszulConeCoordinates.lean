@@ -12,8 +12,8 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 /-! # Singleton Koszul coordinates after exact coefficient transport
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-the finite free dual calculation; blueprint det-thm-sf-pf-adic-open, Reduction paragraph.
-(auxiliary; not a blueprint node).
+the finite free dual calculation; blueprint proposition-direct-image-along-open-immersion--1,
+Reduction paragraph. (auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -274,8 +274,8 @@ The unshifted inclusion is the Koszul unit. The shifted inclusion factors throug
 Koszul degree -1, with its coefficient change and totalization sign absorbed into z.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-finite free dual calculation; blueprint det-thm-sf-pf-adic-open, Reduction paragraph.
-(auxiliary; not a blueprint node).
+finite free dual calculation; blueprint proposition-direct-image-along-open-immersion--1, Reduction
+paragraph. (auxiliary; not a blueprint node).
 
 Proof in words: multiplication by the constant uniformizer pi is monic on the
 constant integer sheaf, since inverse image is exact. The locally principal kernel

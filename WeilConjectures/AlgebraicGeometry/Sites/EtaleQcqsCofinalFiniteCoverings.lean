@@ -46,7 +46,7 @@ Proof:
    (Stacks, Tag 0218) to obtain finitely many affine opens of the restricted sources.
    Index their union by pairs `(j, k)` and compose their maps with `U_j → U`.
 4. The composites are étale, since open immersions are étale and étale morphisms
-   compose (`lem-weil-pbc-etale-composition-cancellation`). The fibre square gives
+   compose (`definition-torsion-sheaves--3`). The fibre square gives
    their factorization through the selected `T_a → U` (`def-pc-fibre-product`).
    Their images cover each `U_j`, hence their union covers `U`.
 5. Each affine `V_b` is quasi-compact by

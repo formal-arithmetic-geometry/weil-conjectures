@@ -245,7 +245,7 @@ first paragraph
 Proof:
 1. For an etale object U over the coproduct, pull back the coprojections to obtain
 pairwise disjoint clopen U_i covering U (`lem-weil-pbc-scheme-coproduct-family`). The
-sheaf equalizer condition (`def-weil-pbc-abelian-etale-sheaves`) gives F(U) = product F(U_i);
+sheaf equalizer condition (`situation-conventions`) gives F(U) = product F(U_i);
 the empty covering gives F(empty) = 0.
 2. Localization of the etale site at a component is its small etale site
 (`lem-weil-pbc-etale-site-localization-open`). Inverse image is restriction, naturally
@@ -254,7 +254,7 @@ sections of the component inverse image.
 3. Conversely, reconstruct a sheaf from G_i by assigning to U the product of
 G_i(U x_C C_i). Products preserve the sheaf equalizer condition. Disjointness and
 G_i(empty) = 0 give the quasi-inverse identifications, using
-`lem-weil-pbc-scheme-coproduct-family` and `def-weil-pbc-abelian-etale-sheaves`.
+`lem-weil-pbc-scheme-coproduct-family` and `situation-conventions`.
 4. Naturality of the decomposition recovers morphisms componentwise. Evaluate at
 U = C, using `lem-weil-pbc-etale-inverse-image-restriction`, to obtain the natural
 isomorphism of global-sections functors. -/

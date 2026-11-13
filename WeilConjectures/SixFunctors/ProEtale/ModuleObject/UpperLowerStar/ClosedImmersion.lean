@@ -17,7 +17,7 @@ Let `Λ` be a commutative condensed ring and `i : Z ⟶ X` a closed immersion. T
 (`ProEtale.CondensedRing.fullyFaithfulLowerStarOfIsClosedImmersion`), i.e. the counit
 `i^* i_* N ⟶ N` of `i^* ⊣ i_*` is an isomorphism
 (`ProEtale.CondensedRing.isIso_upperStarLowerStarAdjunction_counit_of_isClosedImmersion`,
-blueprint `lem-exc-proetale-closed-fully-faithful`).
+blueprint `proposition-extension-zero-restriction-closed-subscheme--5`).
 
 The adjunction `i^* ⊣ i_*` on module objects is the lift `mapMod(i^*) ⊣ mapMod(i_*)` of the
 adjunction on abelian sheaves, whose counit is the counit on underlying sheaves, an isomorphism
@@ -60,8 +60,8 @@ instance : ((i)_*⟦Λ⟧).Full := (fullyFaithfulLowerStarOfIsClosedImmersion Λ
 
 instance : ((i)_*⟦Λ⟧).Faithful := (fullyFaithfulLowerStarOfIsClosedImmersion Λ i).faithful
 
-/-- Blueprint `lem-exc-proetale-closed-fully-faithful`, for module objects over `Λ`: the counit
-`i^* i_* N ⟶ N` of `i^* ⊣ i_*` along a closed immersion is an isomorphism. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5`, for module objects over
+`Λ`: the counit `i^* i_* N ⟶ N` of `i^* ⊣ i_*` along a closed immersion is an isomorphism. -/
 instance isIso_upperStarLowerStarAdjunction_counit_of_isClosedImmersion :
     IsIso (upperStarLowerStarAdjunction Λ i).counit :=
   (upperStarLowerStarAdjunction Λ i).counit_isIso_of_R_fully_faithful

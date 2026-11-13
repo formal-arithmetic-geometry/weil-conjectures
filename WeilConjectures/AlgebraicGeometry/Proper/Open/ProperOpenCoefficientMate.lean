@@ -1098,7 +1098,7 @@ lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The definition of
 finiteCoefficientDirectImageMap is the B-adjoint transpose of tensor of the A-counit.
 The open comparisons are the summandwise tensor comparisons of lem-coef-etale-open-tensor.
 The normalization in lem-amb-unbounded-proper-open-interchange identifies Gamma as
-adjunct of inverse open exchange of def-kun-unbounded-exchange followed by inverse
+adjunct of inverse open exchange of definition-derived-base-change-map followed by inverse
 open unit. Apply lem-weil-pbc-mate-pasting to the rectangle of the two proper
 adjunctions, the two open adjunctions and scalar extension. Both displayed paths
 transpose to the same inverse-image composite. Injectivity of the adjunction Hom
@@ -1235,10 +1235,10 @@ def properOpenSiteComposite (A : Type (u + 1)) [CommRing A] [Finite A]
 unbounded category via the fully faithful bounded-below inclusion.
 Source: Stacks 0F7B and blueprint exceptional coefficient comparison, existence,
 uniqueness and naturality (blueprint: lem-sp-proper-open-coefficient-mate).
-Proof: use lem-weil-pbc-comparison-pullback for exact inverse-image compatibility.
+Proof: use proposition-comparison-etale-derived-category--5 for exact inverse-image compatibility.
 The proper edges are exactly the counit mates of
 lem-weil-pbc-comparison-direct-image-canonical-mate, with its counit normalization.
-The open edges are the natural comparison of lem-cbc-proetale-extension-zero-comparison.
+The open edges are the natural comparison of proposition-comparison-immersions--1.
 Transport the coefficient mate rectangle across exact comparison. The inverse exchange
 and inverse open unit give properOpenSiteRestrictionInverse; its open adjunct is
 properOpenSiteInterchange. Mate pasting (lem-weil-pbc-mate-pasting) identifies the two

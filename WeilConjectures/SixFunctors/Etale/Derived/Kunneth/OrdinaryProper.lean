@@ -22,7 +22,8 @@ product with a constant complex on `Y` (Stacks, Lemma 0F14).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isProper` (`lem-kun-0f14b`).
+- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isProper`
+(`proposition-ordinary-external-kunneth--1`).
 
 -/
 
@@ -42,7 +43,8 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
 
-/-- Blueprint `lem-kun-0f14b`: the Künneth formula with one proper factor.
+/-- Blueprint `proposition-ordinary-external-kunneth--1`: the Künneth formula with one proper
+factor.
 
 Let `k` be separably closed, `Λ` a finite ring, `X` a
 proper `k`-scheme and `Y` a `k`-scheme of finite type. For a cartesian square
@@ -60,10 +62,11 @@ and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`, unbounded,
 `RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`.
 
 Following the blueprint: by the Leray isomorphism for `p₂`, the projection formula for the
-proper morphism `p₂` (`lem-kun-0f0g`) and proper base change `La_Y^* Ra_{X*} E ≅ Rp₂_* Lp₁^* E`
-(`lem-kun-0f0c`), the right-hand side is `RΓ(Y, La_Y^* Ra_{X*} E ⊗ᴸ K)`; the tensor product with
-a constant complex (`lem-kun-0f12`) and the symmetry of `⊗ᴸ` identify it with the left-hand
-side. -/
+proper morphism `p₂` (`proposition-proper-direct-image-constructible-complexes--9`) and proper base
+change `La_Y^* Ra_{X*} E ≅ Rp₂_* Lp₁^* E` (`theorem-results-from-etale-theory--1`), the right-hand
+side is `RΓ(Y, La_Y^* Ra_{X*} E ⊗ᴸ K)`; the tensor product with a constant complex
+(`proposition-open-direct-image-preserves-finite`) and the symmetry of `⊗ᴸ` identify it with the
+left-hand side. -/
 theorem nonempty_iso_kunneth_of_isProper {X Y W : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [IsProper aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
     (p₁ : W ⟶ X) (p₂ : W ⟶ Y) (sq : IsPullback p₁ p₂ aX aY)

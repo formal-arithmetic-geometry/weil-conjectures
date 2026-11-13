@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 
 /-! Naturality of the condensed Artin–Schreier character projector under coefficients.
 
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
+Source: latest blueprint, lemma-fourier-transform-constant-sheaf proof, coefficient paragraph
 (blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
 -/
 @[expose] public noncomputable section

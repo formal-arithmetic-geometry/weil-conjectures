@@ -18,8 +18,8 @@ import Mathlib.Data.Finset.Piecewise
 /-!
 # Linear part of the split determinant construction
 
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph.
-(blueprint: lem-sc-split-determinant-linear-maps).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph. (blueprint: lem-sc-split-determinant-linear-maps).
 -/
 
 @[expose] public section
@@ -434,8 +434,8 @@ private theorem wedge_lifts_eq {X : Scheme.{v}} {A B : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Construct linear wedge maps without asserting invertibility or a rank for the quotient.
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph,
-construction and independence of lifts (blueprint: lem-sc-split-determinant-linear-maps).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph, construction and independence of lifts (blueprint: lem-sc-split-determinant-linear-maps).
 
 Proof: On the restricted scheme U, take the linear sheaf splitting
 `b ↦ e.inv (0,b)`. Wedge its images with the images under f, first on exterior

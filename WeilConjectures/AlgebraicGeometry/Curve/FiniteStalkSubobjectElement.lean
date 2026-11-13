@@ -17,7 +17,7 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 /-!
 # A stalk element lies in a finite-stalk subobject
 
-Source: blueprint `lem-sc-affine-generic-second`, paragraph 4; Stacks 04JQ.
+Source: blueprint `theorem-cohomology-curves--2`, paragraph 4; Stacks 04JQ.
 -/
 
 @[expose] public section
@@ -109,7 +109,7 @@ set_option linter.style.haveILetI false in
 /-- Every element of the geometric stalk of a torsion sheaf over a field comes from
 one finite-stalk subobject.
 
-Source: blueprint `lem-sc-affine-generic-second`, paragraph 4, and Stacks 04JQ.
+Source: blueprint `theorem-cohomology-curves--2`, paragraph 4, and Stacks 04JQ.
 (blueprint: lem-sc-field-finite-stalk-subobject-element)
 
 Proof: Take the separable closure inside AlgebraicClosure K and identify the sheaf

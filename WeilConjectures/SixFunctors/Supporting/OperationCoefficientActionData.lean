@@ -40,7 +40,7 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientActi
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 sk-prop-sf-pf-reduction/lem-fix-operation-reduction.md
-(blueprint: lem-fix-operation-reduction).
+(blueprint: proposition-six-operations-change-coefficients).
 -/
 
 @[expose] public noncomputable section
@@ -60,7 +60,8 @@ namespace WeilConjectures
 
 /-- The scalar direct-image comparison is the prescribed proper projection mate.
 Its components are natural in the input, including zero objects and identity field maps.
-Source: blueprint main-20261015, proof step 8 (blueprint: lem-fix-operation-reduction). -/
+Source: blueprint main-20261015, proof step 8 (blueprint:
+proposition-six-operations-change-coefficients). -/
 def directImageScalarExtensionLaws (l : ℕ) [Fact l.Prime] : Prop :=
   ∀ (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -73,7 +74,7 @@ def directImageScalarExtensionLaws (l : ℕ) [Fact l.Prime] : Prop :=
 
 /-- Integral compact-support scalar comparison on its stated constructible domain.
 The map is the actual proper/open mate, not a chosen isomorphism.
-Source: blueprint proof step 8 (blueprint: lem-fix-operation-reduction). -/
+Source: blueprint proof step 8 (blueprint: proposition-six-operations-change-coefficients). -/
 def compactSupportScalarIsomorphisms (l : ℕ) [Fact l.Prime] : Prop :=
   ∀ (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -88,7 +89,7 @@ def compactSupportScalarIsomorphisms (l : ℕ) [Fact l.Prime] : Prop :=
 /-- Both geometric-adjunction equations for the actual coefficient mate, for finite
 reductions and integral scalar extension alike. The inverse scalar-pullback comparison
 is the map a of proof step 10. Source: Stacks 07A6
-(blueprint: lem-fix-operation-reduction). -/
+(blueprint: proposition-six-operations-change-coefficients). -/
 def coefficientOperationMateEquations : Prop :=
   ∀ {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S)
     {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -108,7 +109,7 @@ def coefficientOperationMateEquations : Prop :=
 /-- The compact-support scalar-extension laws are the canonical proper/open
 comparison composition laws.  They include naturality, identity and tower
 compatibility through `comparison_composition` and `comparison_identity`.
-Source: Stacks Tags 07A6, 0E8I (blueprint: lem-fix-operation-reduction). -/
+Source: Stacks Tags 07A6, 0E8I (blueprint: proposition-six-operations-change-coefficients). -/
 def purCompactSupportScalarExtensionLaws : Prop :=
   ∀ {R S T : PurCompactSupport.Coefficients.{u}}
     (a : PurCompactSupport.Change R S) (b : PurCompactSupport.Change S T)
@@ -127,7 +128,7 @@ def purCompactSupportScalarExtensionLaws : Prop :=
 
 /-- Tower coherence for the actual ordinary direct-image mates, including every
 three-field scalar tower. Source: blueprint proof steps 8 and 10
-(blueprint: lem-fix-operation-reduction). -/
+(blueprint: proposition-six-operations-change-coefficients). -/
 def directImageScalarTowerLaws : Prop :=
   ∀ {R S T : PurCompactSupport.Coefficients.{u}}
     (a : PurCompactSupport.Change R S) (b : PurCompactSupport.Change S T)
@@ -146,7 +147,7 @@ def directImageScalarTowerLaws : Prop :=
 
 /-- Identity normalization of direct-image and compact-support mates with the
 canonical multiplication unitor. Source: blueprint proof steps 8 and 10
-(blueprint: lem-fix-operation-reduction). -/
+(blueprint: proposition-six-operations-change-coefficients). -/
 def coefficientOperationIdentityLaws : Prop :=
   ∀ {R : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R R)
     (h : ∀ W : Scheme.{u}, a.map W = 𝟙 (R.ring W))
@@ -175,7 +176,7 @@ open scoped TensorProduct
 
 /-- The integral stage associator is the published balanced-tensor associator,
 transported along the actual composition law of the coefficient inclusions.
-Source: blueprint proof step 8 (blueprint: lem-fix-operation-reduction). -/
+Source: blueprint proof step 8 (blueprint: proposition-six-operations-change-coefficients). -/
 def operationIntegralStageAssociator
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})
@@ -192,7 +193,7 @@ def operationIntegralStageAssociator
     ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k))
 
 /-- The integral stage unit is normalized by ordinary multiplication and completion.
-Source: blueprint proof step 8 (blueprint: lem-fix-operation-reduction). -/
+Source: blueprint proof step 8 (blueprint: proposition-six-operations-change-coefficients). -/
 def operationIntegralStageUnit
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (W : Scheme.{u}) (E : Index l Ω) :
@@ -208,7 +209,7 @@ def operationIntegralStageUnit
 
 /-- Naturality is built into the natural isomorphisms; these are the identity and
 three-field tower equations on those same comparisons, including repeated stages.
-Source: blueprint proof steps 8--10 (blueprint: lem-fix-operation-reduction). -/
+Source: blueprint proof steps 8--10 (blueprint: proposition-six-operations-change-coefficients). -/
 def operationIntegralCoefficientCoherent
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u})
@@ -233,7 +234,7 @@ module map sends every sheafified pure tensor to that same pure tensor. Its deri
 map is fixed by the universal derived counit on every cochain representative. Thus
 this transport is determined, rather than an arbitrary equivalence of categories.
 Source: Stacks 03EK, 06YY; blueprint proof step 8
-(blueprint: lem-fix-operation-reduction). -/
+(blueprint: proposition-six-operations-change-coefficients). -/
 structure OperationScalarTransport (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -255,7 +256,7 @@ structure OperationScalarTransport (l : ℕ) [Fact l.Prime]
           ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P)
 
 /-- The specified ordinary model transport, restricted to the intrinsic category.
-Source: blueprint proof step 8 (blueprint: lem-fix-operation-reduction). -/
+Source: blueprint proof step 8 (blueprint: proposition-six-operations-change-coefficients). -/
 def operationConstructibleScalarTransport (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -275,7 +276,7 @@ normalizations. The rational family is fixed on unchanged objects and pure tenso
 its coefficient maps are the localized integral maps. Its `system.coh` is the tower
 law and `system.functor` is the prescribed common-stage conjugation on representatives.
 Source: blueprint main-20261015, proof steps 4, 8 and 9
-(blueprint: lem-fix-operation-reduction). -/
+(blueprint: proposition-six-operations-change-coefficients). -/
 def OperationDirectImageCoefficientAction
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u}) (f : X ⟶ Y) : Prop :=

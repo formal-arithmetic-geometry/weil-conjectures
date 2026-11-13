@@ -26,7 +26,7 @@ finite `ℓ`-group, then the number of invariant sections is divisible by `ℓ`,
 section of order `ℓ`, that is a monomorphism `ℤ/ℓ ⟶ N`, whose cokernel is again split by `L`, with
 fewer sections over `Spec L`. By induction `N` is filtered by constant sheaves `ℤ/ℓ`
 (`AlgebraicGeometry.Scheme.IsSplitBy.induction`). This is the sheaf form of the Sylow reduction of
-a finite `ℓ`-primary Galois module (blueprint `lem-sc-sylow-module-filtration`).
+a finite `ℓ`-primary Galois module (blueprint `theorem-cohomology-curves`).
 
 ## Main statements
 

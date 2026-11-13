@@ -16,7 +16,7 @@ Let `g` be an automorphism of a scheme `X` lying over an automorphism `h` of the
 has a *global Frobenius operator* `F_c(φ) = RΓ_c(X, φ) ∘ g_c^*` on compact cohomology
 (`AlgebraicGeometry.Etale.globalOperator`) and, at a point `x̄` fixed by `(g, h)`, a *local
 Frobenius operator* `F_x̄(φ) = φ_x̄ ∘ τ_x̄` on the geometric stalk
-(`AlgebraicGeometry.Etale.localOperator`), blueprint `def-trf-frobenius-operators`.
+(`AlgebraicGeometry.Etale.localOperator`), blueprint `definition-frobenius-operator--1`.
 
 A *compatible system of Frobenius coefficient morphisms* on a normalized adic system `L_•`
 (`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem`) is a family `ψ_n : Lg^* L_n ⟶ L_n` reducing
@@ -52,12 +52,12 @@ of the lifts are the limits of the levelwise traces.
 
 The blueprint writes Frobenius coefficient morphisms `ψ : LΦ^* K ⟶ K` with respect to the
 `q`-power scheme Frobenius `Φ`, and their global operators as the action of the graph
-correspondence of `(𝟙, Φ^m)`. By blueprint `prop-trf-graph-frobenius-operator` (general clause),
-that action is `RΓ_c(X, v) ∘ g_{γ,c}^{m,*}` for the morphism `v = ψ_m ∘ (κ^{(m)})⁻¹` attached to
-the geometric Frobenius `g_γ` through the comparison `κ^{(m)} : LΦ^{m*} ≅ Lg_γ^{m*}` of
-`prop-trf-scheme-galois-comparison`. Here the data are taken directly relative to `g = g_γ`
-(as for the strict Weil complexes `AlgebraicGeometry.Etale.WeilComplex` of
-`sk-def-sf-weil-complexes`), and the operators are defined by that formula, with the
+correspondence of `(𝟙, Φ^m)`. By blueprint `lemma-scheme-frobenius-geometric-frobenius--3` (general
+clause), that action is `RΓ_c(X, v) ∘ g_{γ,c}^{m,*}` for the morphism `v = ψ_m ∘ (κ^{(m)})⁻¹`
+attached to the geometric Frobenius `g_γ` through the comparison `κ^{(m)} : LΦ^{m*} ≅ Lg_γ^{m*}` of
+`lemma-scheme-frobenius-geometric-frobenius--1`. Here the data are taken directly relative to
+`g = g_γ` (as for the strict Weil complexes `AlgebraicGeometry.Etale.WeilComplex` of
+`definition-weil-structure`), and the operators are defined by that formula, with the
 compact-support base change `g_c^*` of `AlgebraicGeometry.Etale.compactPullback`.
 
 The compatibility of the operators with the coefficient change comes from the compatibility of
@@ -83,7 +83,7 @@ section Operators
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X s : Scheme.{u}} {g : X ⟶ X} {h : s ⟶ s}
 
-/-- Blueprint `def-trf-frobenius-operators` (1): the *global Frobenius operator*
+/-- Blueprint `definition-frobenius-operator--1` (1): the *global Frobenius operator*
 `F_c(φ) = RΓ_c(X, φ) ∘ g_c^*` on `RΓ_c(X, K)` of a Weil datum `φ : Lg^* K ⟶ K`, for an
 automorphism `g` of `X` over an automorphism `h` of the base, `g_c^*` being the compact-support
 base change `AlgebraicGeometry.Etale.compactPullback`. The datum `φ` need not be invertible. -/
@@ -95,7 +95,7 @@ noncomputable def globalOperator [Finite Λ] {a : X ⟶ s} [QuasiCompact a]
       (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K :=
   (compactPullback Λ sq).app K ≫ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).map φ
 
-/-- Blueprint `def-trf-frobenius-operators` (2): the *local Frobenius operator*
+/-- Blueprint `definition-frobenius-operator--1` (2): the *local Frobenius operator*
 `F_x̄(φ) = φ_x̄ ∘ τ_x̄` on the geometric stalk `K_x̄` of a Weil datum `φ : Lg^* K ⟶ K`, at a point
 `x̄` fixed by the pair `(g, h)`, `τ_x̄` being the stalk transport
 `AlgebraicGeometry.Etale.stalkPullback`. -/
@@ -212,7 +212,8 @@ lemma endIterate_comp_of_comp {X s : Scheme.{u}} {g : X ⟶ X} {h : s ⟶ s} {x 
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} (g : X ⟶ X)
 
-/-- Blueprint `def-trf-frobenius-coefficient-morphism` (2), `def-trf-iterated-weil-map`: the
+/-- Blueprint `definition-frobenius-correspondences-their-operators` (2),
+`definition-frobenius-correspondences-their-operators--4`: the
 *iterates* `φ^{[m]} : L(g^m)^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K`, defined by
 `φ^{[0]} = (L(𝟙)^* K ≅ K)` and
 `φ^{[m+1]} : L(g ≫ g^m)^* K ≅ Lg^* L(g^m)^* K ──Lg^* φ^{[m]}──▶ Lg^* K ──φ──▶ K`. -/
@@ -254,7 +255,7 @@ variable {S} {g : X ⟶ X} (F : S.FrobeniusSystem g)
 
 /-- A compatible system of Frobenius coefficient morphisms is a *compatible tower of Weil pairs* if
 every `ψ_n` is invertible: a strict Weil structure `Lg^* L_n ≅ L_n` at every level
-(`sk-def-sf-weil-complexes`), compatible with the transitions. -/
+(`definition-weil-structure`), compatible with the transitions. -/
 def IsWeil : Prop :=
   ∀ n, IsIso (F.coeff n)
 

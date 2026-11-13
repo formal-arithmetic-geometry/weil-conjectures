@@ -18,7 +18,7 @@ The left projection morphisms `A ⊗ Rx_! T ⟶ Rx_! (Lx^* A ⊗ T)` of the comp
 images compose (`ProEtale.CondensedRing.leftProjection_lowerShriek_comp`), and for a proper `g`
 the left projection morphism at the unit is the unit of `Lg^* ⊣ Rg_*`
 (`ProEtale.CondensedRing.leftProjection_lowerShriek_unit`). These are steps of the class of the
-coefficient pushforward (blueprint `lem-trf-trace-source-exchange`, Step 2).
+coefficient pushforward (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 2).
 
 -/
 

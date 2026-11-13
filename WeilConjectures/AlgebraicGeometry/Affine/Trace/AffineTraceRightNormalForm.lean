@@ -27,7 +27,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 
 /-!
 # AffineTraceRightNormalForm
-Source: blueprint sk-prop-an, Steps 5(b) and 6.
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6.
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +41,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance] Sheaf.monoidalCategory
 
 /-- The specified shiftedComp construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def shiftedComp {C : Type*} [Category C] [HasShift C ℤ]
@@ -57,7 +57,7 @@ def shiftedComp {C : Type*} [Category C] [HasShift C ℤ]
     Functor.isoWhiskerLeft _ (shiftFunctorAdd _ a b).symm
 
 /-- The specified tensorShiftCompGeneral construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def tensorShiftCompGeneral
@@ -71,7 +71,7 @@ def tensorShiftCompGeneral
   shiftedComp _ _ _ (tensorRightTensor L M).symm a b
 
 /-- The specified singleProductGeneral construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def singleProductGeneral
@@ -97,7 +97,7 @@ private def singleLeftUnitGeneral
     derivedTensorLeftUnitor B X L
 
 /-- The specified lineShiftGeneral construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def lineShiftGeneral
@@ -129,13 +129,13 @@ variable (B : Type*) [Category.{u + 1} B] [Abelian B]
   [∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (upperStar B f).PreservesFlat]
 
 /-- The specified singleE construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 abbrev singleE (X : Scheme.{u}) (d : ℕ) :=
   (DerivedCategory.singleFunctor _ 0).obj (E X d)
 
 /-- The specified lineR construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 abbrev lineR (X : Scheme.{u}) :=
   ((upperStar B (ProjectiveLine X ↘ X)).leftDerivedFunctor ⋙
@@ -146,7 +146,7 @@ variable (c : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsUnit (N : Γ(Y, ⊤)) → 
   (upperStar B f).obj (E Y d) ≅ E X d)
 
 /-- The specified singleEPullback construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def singleEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -156,7 +156,7 @@ def singleEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (DerivedCategory.singleFunctor _ 0).mapIso (c f hY d)
 
 /-- The specified tensorEPullback construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def tensorEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -174,7 +174,7 @@ def tensorEPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((derivedTensorRightFunctor B X).mapIso (singleEPullback B N E c f hY d)) _)
 
 /-- The specified lineENormalForm construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def lineENormalForm (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) :
@@ -194,7 +194,7 @@ variable (e0 : ∀ X : Scheme.{u}, E X 0 ≅ (constantSheaf X.smallEtaleTopology
   (prod : ∀ X : Scheme.{u}, IsUnit (N : Γ(X, ⊤)) → ∀ d, E X d ⊗ E X 1 ≅ E X (d + 1))
 
 /-- The specified productE construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def productE (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) (d : ℕ) :
@@ -203,7 +203,7 @@ def productE (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) (d : ℕ) :
   singleProductGeneral B X _ _ _ (flat X hX d) (prod X hX d)
 
 /-- The specified towerENormalForm construction used by the affine trace normal form.
-Source: blueprint sk-prop-an, Steps 5(b) and 6
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: lem-amb-affine-trace-right-normal-form). -/
 @[irreducible]
 def towerENormalForm (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
@@ -302,7 +302,7 @@ private def twistSheafProduct (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (congrArg (Scheme.finiteEtaleTateSheaf A N X hA) (by omega))
 
 /-- The coordinate right functor has its ordinary finite Tate normal form.
-Source: blueprint lem-amb-affine-space-top-trace, proof steps 6--7
+Source: blueprint lemma-integral-linear-character--1, proof steps 6--7
 (blueprint: lem-amb-affine-trace-right-normal-form).
 
 Proof: induct on the number of coordinates. At zero, the zero Tate twist is

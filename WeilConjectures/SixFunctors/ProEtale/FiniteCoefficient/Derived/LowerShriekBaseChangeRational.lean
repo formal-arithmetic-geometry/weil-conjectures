@@ -206,8 +206,8 @@ noncomputable def rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap
 /-- Compact-support base change over a finite extension.
 
 For a finite extension `E/ℚ_ℓ`, a cartesian square `g' ≫ f = f' ≫ g` with `g` arbitrary and a
-compactification `c` of `f` (`def-cbc-compact-support-square`), and an object of the rational
-stage `D_comp(X_proét, E)` given by an integral lattice `K ∈ D_comp(X_proét, 𝒪_E)` whose
+compactification `c` of `f` (`remark-base-change-compactification--1`), and an object of the
+rational stage `D_comp(X_proét, E)` given by an integral lattice `K ∈ D_comp(X_proét, 𝒪_E)` whose
 reductions `K_n = K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` carry étale-origin witnesses, the rational compact-support
 exchange map `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` is an isomorphism in `D_comp(Y'_proét, E)`. It is
 natural, being a component of a natural transformation, and it does not depend on the lattice:
@@ -215,7 +215,8 @@ it is the component at the rationalization of `K` of a natural transformation of
 rational stage
 (`AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`).
 
-The isomorphism is transported from the integral one, `thm-cbc-complete-proetale`
+The isomorphism is transported from the integral one,
+`proposition-composition-base-change-rf-shriek--4`
 (`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`), along the
 rationalization. -/
 theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app

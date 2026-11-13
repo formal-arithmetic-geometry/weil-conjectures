@@ -16,7 +16,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 
 /-! # Sectionwise calculus for native and translated internal-Hom evaluation
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 native ringed-model proof, steps 2 and 3; Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 -/
@@ -52,7 +52,7 @@ private theorem sectionPair_map {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- Native morphisms into internal Hom are determined by sectionwise evaluation.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 
@@ -81,7 +81,7 @@ theorem evaluation_ext {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
 
 /-- Native internal-Hom evaluation commutes with precomposition.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 
@@ -108,7 +108,7 @@ theorem evaluation_map_source {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- Native internal-Hom evaluation commutes with postcomposition.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 
@@ -134,7 +134,7 @@ theorem evaluation_map_target {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- Native evaluation commutes with restriction of sections.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 
@@ -191,7 +191,7 @@ private theorem sectionPair_pushforward (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
 
 /-- Native inverse-pushforward Hom transport preserves sectionwise evaluation.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 
@@ -274,7 +274,7 @@ private theorem ordinary_pure_map
 
 /-- Every twisted presentation has the specified translated evaluation on local maps.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-evaluation-calculus)
 

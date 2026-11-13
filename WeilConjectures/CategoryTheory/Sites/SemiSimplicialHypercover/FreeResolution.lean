@@ -360,7 +360,7 @@ include hU
 
 variable (R) in
 /-- **The free complex of a hypercover is exact in positive degrees** (blueprint
-`lem-weil-pbc-hypercover-free-resolution`). -/
+`corollary-cohomology-pro-etale-affine`). -/
 theorem exactAt_freeComplex (n : ℕ) :
     (U.freeComplex J R).ExactAt (n + 1) := by
   rw [HomologicalComplex.exactAt_iff' _ (n + 2) (n + 1) n (by simp) (by simp)]
@@ -411,7 +411,7 @@ lemma exists_cochainDifferential_eq_of_injective (I : Sheaf J (ModuleCat.{max u 
   rw [this, Equiv.apply_symm_apply]
 
 /-- **The cochain complex of an injective sheaf on a hypercover is exact in positive degrees**
-(blueprint `lem-weil-pbc-hypercover-free-resolution`). -/
+(blueprint `corollary-cohomology-pro-etale-affine`). -/
 theorem exactAt_cochainComplex_of_injective (I : Sheaf J (ModuleCat.{max u v} R)) [Injective I]
     (n : ℕ) : (U.cochainComplex I.obj).ExactAt (n + 1) := by
   rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 1 + 1) (by simp) (by simp),
@@ -442,7 +442,7 @@ lemma isIso_freeYonedaToConst {T : C} (hT : IsTerminal T) :
   exact NatIso.isIso_of_isIso_app _
 
 /-- **The degree zero cocycles of an injective sheaf on a hypercover are its global sections**
-(blueprint `lem-weil-pbc-hypercover-free-resolution`): if `T` is a terminal object, the sequence
+(blueprint `corollary-cohomology-pro-etale-affine`): if `T` is a terminal object, the sequence
 `0 ⟶ I(T) ⟶ I(U₀) ⟶ I(U₁)` is exact. -/
 theorem exact_cochainComplex_zero_of_injective (I : Sheaf J (ModuleCat.{max u v} R))
     [Injective I] {T : C} (hT : IsTerminal T) :

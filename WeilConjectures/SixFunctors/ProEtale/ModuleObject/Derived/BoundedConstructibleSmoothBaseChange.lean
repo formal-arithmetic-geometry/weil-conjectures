@@ -29,8 +29,8 @@ it at `Λ = ℚ̲̄_ℓ`.
 ## Sorried input
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_smooth`: **smooth
-  base change** for `Λ = ℚ̲̄_ℓ`, blueprint `sk-thm-sbc-coefficients` (section
-  `sec-six-functors-basics`): for a cartesian square with `v` smooth, the base change map is an
+  base change** for `Λ = ℚ̲̄_ℓ`, blueprint `theorem-smooth-base-change-all-admissible` (section
+  `chap-Construction-of-f`): for a cartesian square with `v` smooth, the base change map is an
   isomorphism on bounded constructible complexes.
 
 -/
@@ -57,9 +57,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {p : X ⟶ Y} {v : Y' ⟶ Y} {p' : X' ⟶ Y'} {u : X' ⟶ X}
 
 /-- **Smooth base change** for bounded constructible `ℚ̄_ℓ`-complexes (blueprint
-`sk-thm-sbc-coefficients`, section `sec-six-functors-basics`, at the coefficient ring `ℚ̄_ℓ`):
-for a cartesian square with `v` smooth, the base change map `Lv^* Rp_* K ⟶ Rp'_* Lu^* K` is an
-isomorphism for every bounded constructible `K`.
+`theorem-smooth-base-change-all-admissible`, section `chap-Construction-of-f`, at the coefficient
+ring `ℚ̄_ℓ`): for a cartesian square with `v` smooth, the base change map
+`Lv^* Rp_* K ⟶ Rp'_* Lu^* K` is an isomorphism for every bounded constructible `K`.
 
 As in the blueprint proof, `K` has an integral model `K₀` over some `𝒪_E`, the scalar comparisons
 reduce the claim to the integral base change morphism at `K₀`

@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 # Reflection of constancy for cyclic module coefficients
 
 Source: Stacks Project, Tags 03RU and 03RW(2),(3), with cyclic coefficients.
-(blueprint: lem-weil-pbc-cyclic-module-constant-reflection).
+(blueprint: theorem-cohomology-curves).
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Forgetting cyclic coefficients reflects constancy on a localized small etale site.
 Source: Stacks Project, Definitions 03RU and 03RW(2),(3), and the cyclic coefficient
 identification used in Theorem 03SC.
-(blueprint: lem-weil-pbc-cyclic-module-constant-reflection)
+(blueprint: theorem-cohomology-curves)
 
 Proof: Let E be a constant abelian value of the underlying sheaf. The quotient
 E/nE is canonically a Z/n-module; lift its scalar action to ULift (ZMod n).

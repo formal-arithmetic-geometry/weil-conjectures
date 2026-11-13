@@ -258,7 +258,7 @@ Proof plan following the six DAG steps:
    The uniform fibre-dimension lemma lem-fin-finite-type-fibre-dimension-bound
    supplies e with every fibre of h of dimension at most e. Choose d = 2e before F.
 2. The underlying abelian sheaf of an A-module sheaf is torsion
-   (lem-weil-pbc-torsion-sheaf-characterizations). Apply lem-kun-proper-torsion-cd-bound
+   (definition-torsion-sheaves--3). Apply lem-kun-proper-torsion-cd-bound
    above 2e and transfer its vanishing to modules by
    lem-sbc-higher-direct-image-forget-comparison; the faithful forgetful functor reflects
    zero objects. For q < 0, right-derived functors preserve lower bounds
@@ -271,7 +271,7 @@ Proof plan following the six DAG steps:
    (lem-weil-pbc-noetherian-open-subscheme-noetherian).
 4. Base change h to s : W → Y. Properness persists by lem-pc-proper-base-change, and the
    pullback of F is constructible by prop-constructible-pullback. Bounded-below proper base
-   change thm-weil-pbc-bounded-below for F[0], with the exact inverse-image/homology
+   change theorem-proper-base-change-classical-pro for F[0], with the exact inverse-image/homology
    comparison lem-sp-exact-functor-preserves-homology, identifies s^* R^q h_*F with the
    degree-q image of the base change. Apply lem-fd-proper-cohomology-generic-local-constancy
    to obtain a nonempty open V of W where it is finite locally constant; the range of V in Y

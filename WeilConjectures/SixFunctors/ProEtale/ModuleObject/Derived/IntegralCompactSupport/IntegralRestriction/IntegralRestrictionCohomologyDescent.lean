@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 /-! # Finite-open descent for integral restriction
 
 Source: blueprint main-20261015, sk-thm-int-restriction-glue.proof.md,
-expanded by det-thm-int-restriction-glue.
+expanded by theorem-f-shriek-ell-adic-coefficients.
 -/
 
 @[expose] public noncomputable section
@@ -352,7 +352,7 @@ private theorem finiteStrat_finite_index
     (fun n W hc hlocal ↦ finiteStrat_open_descent Λ X n W hc H hlocal) I U hc hlocal
 
 /-- Finite constant-model constructibility of all cohomology modules descends.
-Source: det-thm-int-restriction-glue, proof steps 1 and 3; blueprint
+Source: theorem-f-shriek-ell-adic-coefficients, proof steps 1 and 3; blueprint
 sk-thm-int-restriction-glue.proof.md, paragraph (1).
 (blueprint: lem-int-restriction-cohomology-descent).
 

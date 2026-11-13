@@ -54,7 +54,7 @@ total left derived functors `L(g^*)` through the isomorphism
   of_disjoint_range`: `j^* (Ri_* N) = 0`.
 - `AlgebraicGeometry.Etale.exists_distTriang_openClosed`: the open–closed triangle
   `j_! j^* M ⟶ M ⟶ Ri_* i^* M ⟶ (j_! j^* M)[1]`
-  (blueprint: `sk-prop-sf-open-closed-triangle`).
+  (blueprint: `proposition-extension-zero-restriction-closed-subscheme`).
 - `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_closedComplement_map` and
   `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_closedComplement_obj_\
   openImmersionLowerShriek`: the two results for `i = j.closedComplement`.
@@ -238,7 +238,7 @@ variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [I
   [Abelian.HasFunctorialFlatResolution A]
 
 open Pretriangulated in
-/-- Blueprint `sk-prop-sf-open-closed-triangle`: The open–closed triangle
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: The open–closed triangle
 
 Let `j : U ⟶ X` and `i : Z ⟶ X` be complementary open and closed immersions. For every
 `M ∈ D(X_ét, A)` the counit of `D(j_!) ⊣ D(j^*)` and the unit of `D(i^*) ⊣ Ri_*` extend to a

@@ -57,12 +57,12 @@ Proof:
    isomorphisms. This proves Stacks continuity of the composite. Precomposition
    agrees objectwise and on restriction maps, hence agrees as a functor, for sets
    and abelian groups (lem-weil-pbc-site-continuous-pushforward-sheaf and
-   lem-weil-pbc-sheaf-algebraic-structures-objects).
+   situation-conventions).
 2. Compose the adjunctions of
    lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction using
    def-weil-pbc-composite-adjunction. The composite right adjoint is the functor in
    step 1. Uniqueness of left adjoints gives the unique isomorphism compatible with
-   units (lem-weil-pbc-conjugate-iso-unit-equation). Its component equation below
+   units (situation-conventions). Its component equation below
    is exactly the composite unit: eta_v followed by v^s applied to eta_u at v_s F.
 3. Finite limits and colimits are preserved by successive application of the two
    preservation hypotheses. Transport along the isomorphism of step 2. This is

@@ -16,10 +16,10 @@ public import WeilConjectures.Tactic.TransportExact
 The lax tensor maps of nearby cycles on bounded constructible complexes
 (`ProEtale.CondensedRing.NearbyCyclesModel.boundedConstructibleNearbyCyclesLaxMonoidal`) commute
 with the Koszul braidings (`ProEtale.CondensedRing.boundedConstructibleBraiding`): this is the
-symmetry of `μ` of blueprint `sk-lem-tf-nearby-mate-coherences` on `Dᵇc`
+symmetry of `μ` of blueprint `sec-Base-change-for-nearby-cycles` on `Dᵇc`
 (`ProEtale.CondensedRing.NearbyCyclesModel.boundedConstructibleNearbyCycles_μ_braiding`), from
 the ambient `ProEtale.CondensedRing.NearbyCyclesModel.tensorMap_braiding`. It is the hypothesis
-`hbr` of the first identity of blueprint `det-tf-sp-universal-kernel`
+`hbr` of the first identity of blueprint `lemma-nearby-cycles-universal-kernel`
 (`CategoryTheory.map_curry_kunnethPairing_comp_eq`) for the specialization of `X ⨯ X`.
 
 -/
@@ -79,7 +79,7 @@ lemma boundedConstructibleNearbyCycles_μ
 
 omit [IsSeparated X.hom] [IsSeparated X'.hom] in
 /-- **Nearby cycles on bounded constructible complexes are lax braided** (blueprint
-`sk-lem-tf-nearby-mate-coherences`, "`μ` is symmetric"). -/
+`sec-Base-change-for-nearby-cycles`, "`μ` is symmetric"). -/
 lemma boundedConstructibleNearbyCycles_μ_braiding
     (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

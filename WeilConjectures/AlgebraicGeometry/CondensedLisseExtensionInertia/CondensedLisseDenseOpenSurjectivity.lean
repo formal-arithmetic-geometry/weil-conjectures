@@ -20,7 +20,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedLisseExtensionInertia
 
 /-- The open immersion and fundamental-group surjectivity needed by the reverse extension.
-Source: `lem-wf-dense-open-pi1-surjective` and the projective-line open construction.
+Source: `theorem-purity-real-sheaves-curves` and the projective-line open construction.
 (blueprint: lem-dl-a1-condensed-lisse-dense-open-surjectivity).
 
 The source proof obtains regularity and connectedness from the projective-line pullback,

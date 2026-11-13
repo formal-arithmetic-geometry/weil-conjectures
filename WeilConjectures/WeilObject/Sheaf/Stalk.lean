@@ -129,8 +129,8 @@ variable {Ω : Type u} [Field Ω]
 
 /-- For a separably closed field `Ω`, the pullback `p^* : Mod_Λ ⥤ Mod_{Λ_{Spec Ω}}` from
 condensed `Λ`-modules is an equivalence: the pro-étale site of `Spec Ω` is equivalent to
-profinite sets, through `S ↦ Spec C(S, Ω)` (blueprint `sk-prop-pe-condensed-point`, with
-`det-pe-condensed-point-coefficients` for the coefficient ring). -/
+profinite sets, through `S ↦ Spec C(S, Ω)` (blueprint `proposition-pro-etale-site-separably-closed`,
+with `proposition-pro-etale-site-separably-closed--3` for the coefficient ring). -/
 instance isEquivalence_upperStarFromPointMod [IsSepClosed Ω] :
     (upperStarFromPointMod Λ (Spec (.of Ω))).IsEquivalence :=
   ProEtale.isEquivalence_mapMod_upperStarFromPoint Ω Λ

@@ -78,7 +78,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 
 Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-trace-perfectness,
 order 1824; Stacks Tags 0GL5 and 0GL6
-(blueprint: lem-fix-compact-support-coefficient-change).
+(blueprint: lemma-sp-reduction--1).
 
 Derived scalar extension is expressed by the published universal property
 `Sheaf.IsDerivedBaseChange`. A model includes its universal arrow, so the comparison
@@ -98,7 +98,7 @@ The universal property is the published definition of derived base change; it de
 this object up to the unique isomorphism respecting that arrow. K-flat scalar extension
 supplies such presentations (lem-pur-derived-change-of-rings).
 Source: Stacks Tags 06YY and 07A6
-(blueprint: lem-fix-compact-support-coefficient-change). -/
+(blueprint: lemma-sp-reduction--1). -/
 structure CoefficientTensorModel
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) where
@@ -109,7 +109,7 @@ structure CoefficientTensorModel
 namespace CoefficientTensorModel
 
 /-- The canonical scalar extension of a map, fixed by the universal arrows.
-Source: Stacks Tag 07A6 (blueprint: lem-fix-compact-support-coefficient-change). -/
+Source: Stacks Tag 07A6 (blueprint: lemma-sp-reduction--1). -/
 noncomputable def map
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B} {T : Scheme.{u}}
     {K L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))}
@@ -119,7 +119,7 @@ noncomputable def map
 
 /-- The composite universal arrow for successive reductions, with the canonical
 restriction-of-scalars associativity map. Source: Stacks Tag 0D6D
-(blueprint: lem-fix-compact-support-coefficient-change). -/
+(blueprint: lemma-sp-reduction--1). -/
 noncomputable def comp
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     {φ : A →+* B} {ψ : B →+* C} {T : Scheme.{u}}
@@ -133,7 +133,7 @@ noncomputable def comp
 
 /-- Pullback of the universal tensor arrow remains universal.
 Source: Stacks Tags 07A4 and 06YY
-(blueprint: lem-fix-compact-support-coefficient-change).
+(blueprint: lemma-sp-reduction--1).
 Proof: compute scalar extension on a K-flat complex with flat terms. Exact inverse
 image preserves these models, and on a pure tensor its coefficient comparison is
 f^{-1}(x tensor b) = f^{-1}(x) tensor b. Its transpose is the canonical published
@@ -163,7 +163,7 @@ theorem pullback_universal
       (fixedScalarRestrictionPullback φ g).hom K).symm) M.unit M.universal N
 
 /-- The canonical pullback of a tensor presentation, with its normalized universal arrow.
-Source: Stacks Tag 07A4 (blueprint: lem-fix-compact-support-coefficient-change). -/
+Source: Stacks Tag 07A4 (blueprint: lemma-sp-reduction--1). -/
 noncomputable def pullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B}
     {T V : Scheme.{u}} (g : V ⟶ T)
@@ -178,7 +178,7 @@ noncomputable def pullback
 end CoefficientTensorModel
 
 /-- The unit of derived extension of scalars exhibits a derived base change.
-Source: Stacks Tag 07A6 (blueprint: lem-fix-compact-support-coefficient-change). -/
+Source: Stacks Tag 07A6 (blueprint: lemma-sp-reduction--1). -/
 theorem isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
     (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
@@ -190,7 +190,7 @@ theorem isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
 
 /-- The open restriction comparison is the mate, along derived extension of scalars, of the
 commutation of scalar extension with extension by zero.
-Source: Stacks Tags 03DI and 07A6 (blueprint: lem-fix-compact-support-coefficient-change). -/
+Source: Stacks Tags 03DI and 07A6 (blueprint: lemma-sp-reduction--1). -/
 theorem mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom
     (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -212,7 +212,7 @@ theorem mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom
 /-- Compact support carries derived base changes of bounded constructible complexes of finite
 Tor amplitude to derived base changes, through the canonical restriction comparison.
 Source: Stacks Tags 0GL5, 0GL6 and 07A6
-(blueprint: lem-fix-compact-support-coefficient-change).
+(blueprint: lemma-sp-reduction--1).
 Proof: write the universal arrow as the unit of derived extension of scalars followed by an
 isomorphism. The open and proper restriction comparisons are the mates of the commutations of
 scalar extension with extension by zero and with inverse image, so compact support of the unit
@@ -279,7 +279,7 @@ unit followed by the canonical proper/open restriction comparison.
 This is equivalently the tensor comparison: on the proper factor its transpose is
 coefficient extension of the counit, and on the open factor it is the unit mate.
 Source: Stacks Tags 0GL5, 0GL6 and 07A6
-(blueprint: lem-fix-compact-support-coefficient-change). -/
+(blueprint: lemma-sp-reduction--1). -/
 noncomputable def compactSupportCoefficientComparison
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     {φ : A →+* B} {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -294,7 +294,7 @@ noncomputable def compactSupportCoefficientComparison
 /-- The canonical comparison for the actual quotient A_{E,n} to A_{E,m}. The lift
 only places scalars in the standard coefficient universe u+1; no site universe is changed.
 Source: Weil blueprint order 1824
-(blueprint: lem-fix-compact-support-coefficient-change). -/
+(blueprint: lemma-sp-reduction--1). -/
 noncomputable def finiteReductionCompactSupportComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n)
@@ -322,7 +322,7 @@ constructible K of finite Tor amplitude, in the finite-field datum.
 The conclusion is an isomorphism in the B-coefficient category, for every universal
 presentation of each derived tensor. In particular it includes m=n.
 Source: Weil blueprint order 1824; Stacks Tags 0GL5, 0GL6 and 0F0G
-(blueprint: lem-fix-compact-support-coefficient-change).
+(blueprint: lemma-sp-reduction--1).
 Proof:
 1. Compute scalar extension on a K-flat resolution with flat terms
 (lem-pur-derived-change-of-rings, lem-pc-kflat-resolution); forgetting its B action
@@ -331,11 +331,11 @@ identifies it with the ordinary A-derived tensor
 restriction is compatible with inverse images and counits
 (lem-weil-pbc-ring-sheaf-change-adjunction).
 2. Write Rf! = Rp* j! in the fixed compactification. Bounded constructible K has
-bounded etale origin (lem-sf-proetale-constructible-origin). Exact extension by zero
+bounded etale origin (theorem-comparison-constructible-sheaves). Exact extension by zero
 preserves this origin. Finite Tor amplitude bounds its tensor with the degree-zero
 B sheaf; the open tensor formula gives the same boundedness after j!. Comparison
 with the etale site is exact and reflects zero cohomology, so the etale tensors are
-also bounded below (lem-cbc-extension-zero-projection-formula,
+also bounded below (lemma-change-coefficients-compact-support,
 prop-weil-pbc-site-comparison-finite-level).
 3. The proper comparison is the mate of inverse image commuting with coefficient
 extension. The restriction/counit adjunct formula identifies its restriction with
@@ -348,8 +348,8 @@ lem-weil-pbc-comparison-direct-image-canonical-mate,
 lem-weil-pbc-ringed-exchange-tensor-coherence). Exact scalar restriction reflects
 isomorphisms, so the proper comparison is invertible in D(B).
 4. The open comparison is the unique unit-normalized adjunction mate, hence an
-isomorphism (lem-cbc-proetale-extension-zero). Compose it with the proper comparison.
-The canonical compact-support restriction square identifies its adjunct with the
+isomorphism (proposition-extension-zero-restriction-closed-subscheme). Compose it with the proper
+comparison. The canonical compact-support restriction square identifies its adjunct with the
 universal-arrow formula defining the comparison above
 (lem-sf-compact-support-restriction-of-scalars, def-exchange-projection).
 5. On K-flat representatives successive reductions send (x tensor b) tensor c to
@@ -359,7 +359,8 @@ proper transpose is coefficient extension of the same counit, and the open
 transpose is extension of the same unit, giving projection compatibility. The
 subsequent declarations state these identities without using faithfulness of
 derived scalar restriction (lem-weil-pbc-mate-pasting,
-lem-cbc-proetale-extension-zero-base-change, thm-cbc-finite-level-proetale). -/
+proposition-extension-zero-restriction-closed-subscheme--11,
+proposition-composition-base-change-rf-shriek--4). -/
 theorem finiteReductionCompactSupportComparison_isIso
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

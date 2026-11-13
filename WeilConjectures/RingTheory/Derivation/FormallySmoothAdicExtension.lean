@@ -127,7 +127,7 @@ Proof (the node's six steps, without locality or Noetherian hypotheses):
    `n^m`; separatedness of `S` gives `⋂ n^m = 0`, hence `⋂ (J + I^m) = J`.
    Finally the identity of `S = A/J` maps `n` into `q(I) = n`.
 5. Apply lem-weil-pbc-fs-adic-lift-into-complete (Tag 07NJ), using
-   def-weil-pbc-formally-smooth-adic and the completeness and closedness just checked.
+   theorem-finite-etale-covers-proper-henselian--2 and the completeness and closedness just checked.
    It gives an `R`-algebra map `σ : S → A` with `qσ = id`. The discrete lifting
    condition alone does not directly apply to this identity map unless `n` is nilpotent.
 6. Write `σ(s) = s + ε D'(s)`. Additivity and multiplicativity of `σ` show that `D'`

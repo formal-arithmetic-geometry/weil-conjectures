@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.ProperBaseChange.IndEtaleStability
 /-! # Properties of the retained localization
 
 Source: blueprint, proper base change, order 1225, Properties of the retained localization
-(blueprint: lem-weil-pbc-retained-localization).
+(blueprint: theorem-existence-contractible-covers--1).
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ namespace PrincipalWLocalization.Retained
 variable {R : Type u} [CommRing R]
 
 /-- The canonical composite `R → R^w → R_[T]`.
-Source: blueprint order 1225 (blueprint: lem-weil-pbc-retained-localization). -/
+Source: blueprint order 1225 (blueprint: theorem-existence-contractible-covers--1). -/
 noncomputable def structuralMap (T : Set (PrimeSpectrum R)) (hT : IsClosed T) :
     R →+* algebra T hT :=
   (algebraMap (PrincipalWLocalization.algebra R) (algebra T hT)).comp
@@ -408,18 +408,18 @@ private theorem closedPoints_homeomorph_of_range
 /-- The retained localization is ind-Zariski, has the listed prime pairs and canonical local
 rings, and under the closed-point hypothesis is w-local with patch closed-point space `T`.
 The quotient assertion concerns the canonical map, not merely an abstract ring equivalence.
-Source: blueprint order 1225 (blueprint: lem-weil-pbc-retained-localization).
+Source: blueprint order 1225 (blueprint: theorem-existence-contractible-covers--1).
 
 Proof:
 1. Express the retained algebra as the filtered colimit of the single principal selector
 localizations. Compose this ind-principal-Zariski presentation with that of `R^w` using
-lem-weil-pbc-ind-etale-stability.
+lemma-stability.
 2. Construct the evaluation map `R^w → R_x` directly from the finite product stages. Every
 fraction comes from the stage with partition `D(s), V(s)` and denominators `s, 1`, so this
 map is surjective. It sends the selector of `E` to one or zero according as `x ∈ E`.
 Its closed point lies in the component with first coordinate `x`. Since the selector basic
 open is clopen, it is constant on that component. Thus a selector avoids the prime `(x,y)`
-exactly when `x ∈ E` (lem-weil-pbc-w-localization-points).
+exactly when `x ∈ E` (theorem-existence-contractible-covers--1).
 3. Each idempotent localization map is surjective, so the map from `R^w` to the retained
 algebra is surjective. Its spectrum is a closed subspace, consisting exactly of primes
 avoiding every selector: for the converse, map the colimit to the ambient prime localization.

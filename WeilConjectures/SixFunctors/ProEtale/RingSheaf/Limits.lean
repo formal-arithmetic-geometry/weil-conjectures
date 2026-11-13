@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.Defs
 
 Let `X` be quasi-compact and quasi-separated, `j : U ⟶ X` a quasi-compact open immersion with
 closed complement `i : Z ⟶ X`, and `B` a sheaf of `R`-algebras on `X_proét`. On `B`-module
-sheaves (blueprint `sk-prop-sf-open-closed-triangle`):
+sheaves (blueprint `proposition-extension-zero-restriction-closed-subscheme`):
 
 * `i^*` preserves all small limits and colimits
   (`ProEtale.RingSheaf.preservesLimitsOfSize_upperStar_of_isCompl`);
@@ -42,9 +42,10 @@ variable {R : Type (u + 1)} [CommRing R] {Z U X : Scheme.{u}} [CompactSpace X]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
 include j hij in
-/-- Blueprint `sk-prop-sf-open-closed-triangle` (and `det-sf-open-closed-pullback-limits`) for
-module sheaves over a sheaf of rings `B`: the pullback `i^*` along a closed immersion with
-quasi-compact open complement, on a qcqs scheme, preserves all small limits. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (and
+`proposition-extension-zero-restriction-closed-subscheme`) for module sheaves over a sheaf of rings
+`B`: the pullback `i^*` along a closed immersion with quasi-compact open complement, on a qcqs
+scheme, preserves all small limits. -/
 theorem preservesLimitsOfSize_upperStar_of_isCompl :
     PreservesLimitsOfSize.{u + 1, u + 1} (upperStar B i) := by
   have := ProEtale.preservesLimitsOfSize_upperStar_of_isCompl (R := R) i j hij
@@ -54,15 +55,16 @@ theorem preservesLimitsOfSize_upperStar_of_isCompl :
   exact preservesLimits_of_reflects_of_preserves (upperStar B i) (Mod.forget _)
 
 omit [CompactSpace X] [QuasiSeparatedSpace X] [IsClosedImmersion i] in
-/-- Blueprint `sk-prop-sf-open-closed-triangle` for module sheaves over a sheaf of rings `B`: the
-pullback `i^*` preserves all small colimits, being a left adjoint. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` for module sheaves over a
+sheaf of rings `B`: the pullback `i^*` preserves all small colimits, being a left adjoint. -/
 theorem preservesColimitsOfSize_upperStar :
     PreservesColimitsOfSize.{u + 1, u + 1} (upperStar B i) :=
   (upperStarLowerStarAdjunction B i).leftAdjoint_preservesColimits
 
-/-- Blueprint `sk-prop-sf-open-closed-triangle` and `det-sf-open-closed-extension-zero-limits`
-for module sheaves over a sheaf of rings `B`: on a qcqs scheme, the extension by zero along a
-quasi-compact open immersion with closed complement `i` preserves products. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` and
+`proposition-extension-zero-restriction-closed-subscheme` for module sheaves over a sheaf of rings
+`B`: on a qcqs scheme, the extension by zero along a quasi-compact open immersion with closed
+complement `i` preserves products. -/
 theorem preservesLimitsOfShape_discrete_openImmersionLowerShriek (β : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete β) (openImmersionLowerShriek B i j hij) := by
   have : PreservesLimitsOfShape (Discrete β) (j)_!open[ModuleCat.{u + 1} R] :=

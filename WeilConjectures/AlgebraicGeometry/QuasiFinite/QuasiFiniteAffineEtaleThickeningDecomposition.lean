@@ -415,22 +415,24 @@ Proof:
    many reduced locally closed affine strata on which the morphism is finite. Use
    lem-weil-pbc-separated-lqf-base-change, lem-pc-quasi-compact-base-change,
    pqf-lem-qf-locqf-qc, pqf-lem-qf-finitefibres,
-   lem-weil-pbc-generic-finite-morphism-open-neighborhood, lem-zl-affine-partition,
+   lem-weil-pbc-generic-finite-morphism-open-neighborhood,
+   lemma-relative-noether-normalization-over-stratification--1,
    lem-sc-affine-noetherian-underlying-space and def-weil-pbc-scheme-reduction.
 3. On each stratum apply lem-weil-pbc-finite-affine-section-cover. After a surjective finite
    locally free affine base change the finite source embeds in an affine scheme covered by
    finitely many closed sections. The new base is still Noetherian.
 4. Refine the base by the Boolean atoms of the sections' intersections with the source and
-   of their pairwise equalizers, then by reduced affine strata (lem-zl-affine-partition).
-   Closed immersions survive base change (lem-weil-pbc-closed-immersion-base-change).
-   Each intersection and equalizer is now either empty or the whole reduced stratum:
-   lem-sc-reduced-ideals-zero-intersection makes its ideal zero in the latter case.
+   of their pairwise equalizers, then by reduced affine strata
+   (lemma-relative-noether-normalization-over-stratification--1). Closed immersions survive base
+   change (lem-weil-pbc-closed-immersion-base-change). Each intersection and equalizer is now either
+   empty or the whole reduced stratum: lem-sc-reduced-ideals-zero-intersection makes its ideal zero
+   in the latter case.
 5. Choose one representative of each coinciding section contained in the source. They
    are disjoint and cover its points. The Chinese remainder theorem
    (lem-pc-crt-ideal-quotient-product) identifies their union with finitely many copies of
    the base and makes its inclusion a closed immersion surjective on points. This is
    def-sbc-first-order-thickening's general thickening notion. The composite is finite
-   and etale by def-weil-finite-integral-morphism and lem-weil-pbc-scheme-coproduct-copies.
+   and etale by def-weil-finite-integral-morphism and definition-torsion-sheaves--3.
    Zero sections mean an empty source and the empty finite etale scheme.
 6. Assemble the finitely many affine base strata by disjoint union
    (lem-weil-pbc-scheme-coproduct-family). It is affine, since a finite disjoint union of

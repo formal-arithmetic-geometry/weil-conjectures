@@ -60,7 +60,8 @@ even when it is only a commutative ring.
 
 - `def-wf-lie-algebra-derivation`: the Lie algebra of `GL_n` as its tangent space at the identity,
   rational representations and their differentials.
-- `sk-p-comparison`: subspaces stable under the group are stable under its Lie algebra.
+- `lemma-stable-subspaces-center`: subspaces stable under the group are stable under its Lie
+algebra.
 -/
 
 @[expose] public section
@@ -499,7 +500,7 @@ subspace stable under `G(k)` is stable under the points of `G` with values in th
 The condition `r(g) U ⊆ U` is cut out by the matrix coefficients `g ↦ l(r(g) w)`, `U ≤ ker l`,
 `w ∈ U`, which are functions on `G`. They vanish at the `k`-points, so they vanish on the reduced
 scheme `G` (`AlgebraicGeometry.eq_zero_of_forall_appTop_eq_zero`), and `r(g)` preserves
-`U ⊗ k[ε]` for every `g ∈ G(k[ε])`. (blueprint: `sk-p-comparison`) -/
+`U ⊗ k[ε]` for every `g ∈ G(k[ε])`. (blueprint: `lemma-stable-subspaces-center`) -/
 theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g)))
@@ -558,7 +559,7 @@ vector `X` is the infinitesimal right translation by `1 + εX`
 `D_X l(r(·) w) = l(r(·) dr(X) w)` and these functions form a set stable under all `D_X`, vanishing
 at `e`. By Cartier's lemma (`AlgHom.mem_iInf_pow_ker_of_forall_exists_derivation`) they vanish
 in the local ring at `e`, hence on the irreducible reduced scheme `G`.
-(blueprint: `sk-p-comparison`) -/
+(blueprint: `lemma-stable-subspaces-center`) -/
 theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ X : GrpObj.Lie G, U ≤ U.comap (Matrix.toLin' (r.differential X)))
@@ -755,7 +756,7 @@ theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.le
 /-- The group–Lie comparison for invariant subspaces: over an algebraically closed field of
 characteristic zero, a subspace is stable under a connected group scheme locally of finite type
 acting by a rational representation if and only if it is stable under the differential of the
-representation. (blueprint: `sk-p-comparison`, `lem-ag-lie-stable-subspace`) -/
+representation. (blueprint: `lemma-stable-subspaces-center`, `lemma-stable-subspaces-center--1`) -/
 theorem _root_.AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant
     [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k)) :

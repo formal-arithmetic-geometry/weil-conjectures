@@ -35,7 +35,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsS
 
 /-! # Derived quotient reduction of a flat line
 
-Source: Stacks 06YY and 07A4; prop-weil-twist-preserves, integral finite-level step.
+Source: Stacks 06YY and 07A4; definition-tate-twists--10, integral finite-level step.
 (blueprint: lem-weil-flat-line-derived-reduction).
 -/
 
@@ -98,7 +98,7 @@ private theorem derived_tensor_identification
 
 /-- Derived quotient extension computes a line in degree zero and commutes with
 exact tensor by that line, after any specified ordinary reduction identification.
-Source: Stacks 06YY and 07A4; prop-weil-twist-preserves, integral finite-level step.
+Source: Stacks 06YY and 07A4; definition-tate-twists--10, integral finite-level step.
 (blueprint: lem-weil-flat-line-derived-reduction).
 
 Proof: a locally free rank-one sheaf is flat, so its degree-zero single complex is

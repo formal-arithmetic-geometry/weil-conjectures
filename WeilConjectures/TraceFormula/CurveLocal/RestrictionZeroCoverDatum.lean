@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.Model
 
 # The cover datum of the prime-to-`ℓ` covers
 
-The construction of blueprint `det-tf-restriction-zero-covers` is organised around a
+The construction of blueprint `lemma-tangent-cones-on-cover` is organised around a
 *cover datum* (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum`): a smooth curve `C` with a
 finite morphism `p : C ⟶ X`, a `k`-point `c` over `y` at which `p` has ramification index `e`
 prime to `ℓ`, an open neighbourhood `W` of `y` over whose punctured part `W ∖ y` the morphism `p`
@@ -63,7 +63,7 @@ lemma isClosed_y : IsClosed ({M.y.base (default : Spec (.of k))} : Set M.X) := b
       exact ⟨_, rfl⟩
   rwa [hr] at h
 
-/-- **The cover datum** of blueprint `det-tf-restriction-zero-covers` for bounded complexes
+/-- **The cover datum** of blueprint `lemma-tangent-cones-on-cover` for bounded complexes
 `PL`, `PK` of sheaves on `X` (flat constructible models of `L` and `K`): a smooth curve `C` finite
 over an open neighbourhood `U` of `y`, a `k`-point `c` over `y` with ramification index `e` prime
 to `ℓ` (the image of a uniformizer at `y` is a unit times the `e`-th power of a uniformizer at

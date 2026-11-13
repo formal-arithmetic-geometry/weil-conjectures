@@ -201,9 +201,9 @@ lemma monoIso_evaluationPairing_general {y z : Spec (.of (AlgebraicClosure Ω)) 
 include hU in
 omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
 /-- **The stalk functor is full onto equivariant maps** (blueprint:
-`cor-galois-lisse-representations`). An equivariant map `φ : G_t → H_t` is an invariant element
-of the stalk `𝓗om(G, H)_t = Hom(G_t, H_t)`, hence the restriction of a global section of the
-lisse sheaf `𝓗om(G, H)`
+`proposition-lattices-representations-normal-scheme`). An equivariant map `φ : G_t → H_t` is an
+invariant element of the stalk `𝓗om(G, H)_t = Hom(G_t, H_t)`, hence the restriction of a global
+section of the lisse sheaf `𝓗om(G, H)`
 (`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`),
 that is, of a morphism `G ⟶ H`. -/
 theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y}
@@ -242,10 +242,10 @@ theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : 
 include hU in
 omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
 /-- **Every continuous finite-dimensional representation is a monodromy representation**
-(blueprint: `cor-galois-lisse-representations`, essential surjectivity for `Λ = ℚ̄_ℓ`). On a
-connected regular Noetherian scheme, every continuous finite-dimensional `ℚ̄_ℓ`-representation
-`ρ` of `π₁(Y, t)` is isomorphic to the monodromy representation on the stalk `G_t` of a lisse
-sheaf `G`.
+(blueprint: `proposition-lattices-representations-normal-scheme`, essential surjectivity for
+`Λ = ℚ̄_ℓ`). On a connected regular Noetherian scheme, every continuous finite-dimensional
+`ℚ̄_ℓ`-representation `ρ` of `π₁(Y, t)` is isomorphic to the monodromy representation on the stalk
+`G_t` of a lisse sheaf `G`.
 
 This is the standard construction of the lisse sheaf attached to a representation
 (SGA 4½, *Rapport*, 2.10; Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.7 and
@@ -266,8 +266,8 @@ theorem lisseMonodromy_essSurj (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
 
 omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
 /-- **The monodromy from universal covers is an equivalence at every base point** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`), on an irreducible scheme, e.g. a
-connected normal locally Noetherian scheme. -/
+`proposition-lattices-representations-normal-scheme`, the case `Λ = ℚ̄_ℓ`), on an irreducible
+scheme, e.g. a connected normal locally Noetherian scheme. -/
 theorem lisseMonodromy_isEquivalenceAt_of_irreducibleSpace [IrreducibleSpace Y]
     (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : (U.lisseMonodromy hU).IsEquivalenceAt t where
   continuous_rep := lisseMonodromy_continuous_rep hU t
@@ -277,8 +277,8 @@ theorem lisseMonodromy_isEquivalenceAt_of_irreducibleSpace [IrreducibleSpace Y]
 
 omit [CompactSpace Y] in
 /-- **The monodromy from universal covers is an equivalence at every base point** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`), on a connected regular Noetherian
-scheme, which is irreducible (`AlgebraicGeometry.IsRegular.irreducibleSpace`). -/
+`proposition-lattices-representations-normal-scheme`, the case `Λ = ℚ̄_ℓ`), on a connected regular
+Noetherian scheme, which is irreducible (`AlgebraicGeometry.IsRegular.irreducibleSpace`). -/
 theorem lisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
     (U.lisseMonodromy hU).IsEquivalenceAt t :=
   have := IsRegular.irreducibleSpace Y

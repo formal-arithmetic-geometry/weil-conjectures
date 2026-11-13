@@ -79,7 +79,7 @@ over an affine scheme `S` with Noetherian ring of global sections
 base changes of `f` over `V` are base changes of `p`. The per-degree form is
 `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`.
 
-(blueprint: `det-thm-picard-coherence`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem exists_isFiniteFreeComplex_derivedPushforward [IsProper f] [LocallyOfFinitePresentation f]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
@@ -163,12 +163,13 @@ presentation with `S = Spec A` affine, and `ℱ` an `𝒪_X`-module of finite pr
 
 * locally on `S`, `Rf_* ℱ` is represented by a bounded complex of finite free modules whose
   pullback along every `g : T' ⟶ S` computes the higher direct images of `ℱ_{T'}`; this is the
-  classical input `exists_isFiniteFreeComplex_higherDirectImage` of `det-thm-picard-coherence`
-  [Stacks, Tag 0B91];
+  classical input `exists_isFiniteFreeComplex_higherDirectImage` of
+  `lemma-coherent-base-change-invertible-sheaves` [Stacks, Tag 0B91];
 * over the affine base, `Rf_* ℱ` is represented by the bounded complex `K` of flat `A`-modules
   of `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`, and for every
   cartesian square with `T = Spec B` affine, `Lg^* Rf_* ℱ = B ⊗[A] K ≅ Rf_{T*} ℱ_T` in `D(B)`
-  (`lem-pc-rf-base-change-flat-module`; proper morphisms are quasi-compact and separated);
+  (`lemma-coherent-base-change-invertible-sheaves--2`; proper morphisms are quasi-compact and
+  separated);
 * if `A` is noetherian, `Rf_* ℱ` is a perfect object of `D(A)`, and so are all its base changes
   `Rf_{T*} ℱ_T` in `D(B)`
   (`AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isNoetherianRing`,
@@ -178,7 +179,7 @@ Perfectness in `D(A)` over a non-noetherian base is the classical input of the f
 not deduced here from it, as the comparison of the two representatives of `Rf_* ℱ` would need
 the finite free complexes to be quasi-isomorphic to the Čech complex.
 
-(blueprint: `lem-pc-rf-perfect-base-change`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem perfect_and_baseChange_cechModuleComplex_of_isProper [IsProper f]
     [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] [Fintype ι]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :

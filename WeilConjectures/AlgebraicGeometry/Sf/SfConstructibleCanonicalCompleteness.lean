@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An intrinsic presentation witness makes every actual Koszul unit and the canonical
 strict quotient-tower unit invertible.
-Source: blueprint `def-wf-tensor-product`, first sentence, base proof Step 10;
+Source: blueprint `prose-03-02`, first sentence, base proof Step 10;
 Stacks Tags 0A0E and 099M
 (blueprint: lem-sf-constructible-canonical-completeness).
 

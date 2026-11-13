@@ -180,8 +180,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstruc
 
 Source: blueprint latest, sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md.
 The main theorem assumes finite ℓ-cohomological dimension of the base field, as the blueprint's
-compactness input does (det-ctf-finite-compact-etale: "finite type over the base field, so all
-cd_ℓ are finite"); the former arbitrary-field statement was false. The bundle lives
+compactness input does (proposition-compactness-finite-coefficients: "finite type over the base
+field, so all cd_ℓ are finite"); the former arbitrary-field statement was false. The bundle lives
 in `BrownHypothesesDefinitions`; proved criteria and conditional obstructions live in
 `BrownHypothesesCriteria`. The integral and rational specializations below retain the
 finite or separably closed base-field hypothesis of the upstream Ext bounds.
@@ -294,25 +294,25 @@ ring-object isomorphism, including the discrete finite rings killed by a power o
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 sk-lem-brown-hypotheses/_section.md and sk-lem-brown-hypotheses.proof.md
-(blueprint: sk-lem-brown-hypotheses).
+(blueprint: lemma-hypotheses-brown-representability).
 
-Proof: First unpack sk-def-sfb-dc-setting: the datum is a prime ℓ, a field of
-characteristic p > 0 distinct from ℓ with cd_ℓ(k) < ∞ (sk-def-cd), and a separated
-finite-type k-scheme X; by Stacks 0F10 all cd_ℓ in the setting are then finite.
-Unpack sk-def-localizing-closure: Λ is one of the six specified condensed rings;
+Proof: First unpack lemma-hypotheses-brown-representability--1: the datum is a prime ℓ, a field of
+characteristic p > 0 distinct from ℓ with cd_ℓ(k) < ∞ (definition-cohomological-dimension), and a
+separated finite-type k-scheme X; by Stacks 0F10 all cd_ℓ in the setting are then finite.
+Unpack definition-localizing-subcategory: Λ is one of the six specified condensed rings;
 the ambient category is the unbounded derived category of modules over Λ_X;
 S is the bounded constructible finite-Tor property and L is its replete localizing
 intersection, with coproducts in the fixed universe and no completeness restriction.
-Second apply det-brown-hypotheses-ambient to this datum to obtain local smallness,
+Second apply lemma-hypotheses-brown-representability to this datum to obtain local smallness,
 triangulation, arbitrary sums and split idempotents of L. Apply
- det-brown-hypotheses-small to obtain thickness and essential smallness of S.
+ lemma-hypotheses-brown-representability--5 to obtain thickness and essential smallness of S.
 Choosing one representative per isomorphism class gives a small skeleton.
-Third let G be any such skeleton and apply det-brown-hypotheses-generation:
+Third let G be any such skeleton and apply lemma-hypotheses-brown-representability:
 each representative is compact in L, and vanishing of Hom(C[n], K) for all
 representatives C and all integers n forces K to be zero. Compactness is exactly
-def-pc-compact-object. To identify the second conclusion with def-pc-generators,
-use Hom(coproduct C, K[-n]) = product Hom(C[n], K). If every morphism from the
-coproduct into every shift of K is zero, the component Hom groups vanish,
+lemma-hypotheses-brown-representability--1. To identify the second conclusion with
+lemma-hypotheses-brown-representability--1, use Hom(coproduct C, K[-n]) = product Hom(C[n], K). If
+every morphism from the coproduct into every shift of K is zero, the component Hom groups vanish,
 so K is zero; contrapositively every nonzero K receives a nonzero map from the
 coproduct into some shift. This is IsTriangulatedGeneratingFamily. All these
 arguments apply to every small skeleton, with the inherited shift and any chosen

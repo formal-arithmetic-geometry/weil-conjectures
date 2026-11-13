@@ -24,7 +24,7 @@ Together with the identifications `Ψ Λ_X ≅ Λ'_X` pulled back from the termi
 compatible family of identifications `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]`
 (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData`), this makes `Ψ` a change of
 coefficients with supports (`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`,
-blueprint `det-sp-purity-coefficient-change`), to which
+blueprint `proposition-compatibility-purity-change-coefficients`), to which
 `AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso` applies.
 
 ## Main definitions
@@ -262,7 +262,8 @@ structure DerivedExtendScalarsTateShiftData where
 
 variable [Finite Λ] [Finite Λ']
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **The reduction of coefficients as a change of coefficients with supports.** For a surjective
 morphism `ρ : Λ →+* Λ'` of finite coefficient rings with principal kernel (for instance

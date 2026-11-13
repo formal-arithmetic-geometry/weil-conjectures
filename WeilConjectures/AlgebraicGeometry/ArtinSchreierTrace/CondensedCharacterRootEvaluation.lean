@@ -80,7 +80,7 @@ private theorem evaluation_pull
 
 /-- The value of an averaged coefficient function at a root is the weighted sum
 of its values at the translated roots.
-Source: blueprint lem-fd-as-characters, explicit averaging projector
+Source: blueprint lemma-artin-schreier-character-sheaf, explicit averaging projector
 (blueprint: lem-fd-as-character-root-evaluation).
 
 Proof: expand the finite sum defining the projector, move each constant scalar
@@ -129,7 +129,7 @@ private theorem evaluation_translation
 
 /-- On a chart with root-labelled sheets, evaluation at the root trivializes the
 image of the character projector.
-Source: blueprint lem-fd-as-characters, Step 4, eigenfunction evaluation
+Source: blueprint lemma-artin-schreier-character-sheaf, Step 4, eigenfunction evaluation
 (blueprint: lem-fd-as-character-root-evaluation).
 
 Proof: the sheet projections identify the direct image with the finite product
@@ -212,7 +212,7 @@ theorem condensedCharacterImage_rootEvaluation_isIso
 
 /-- Constants give the inverse of root evaluation on the trivial-character
 image, after pullback to a root chart.
-Source: blueprint lem-fd-as-characters, trivial-character clause
+Source: blueprint lemma-artin-schreier-character-sheaf, trivial-character clause
 (blueprint: lem-fd-as-character-root-evaluation).
 
 Proof: the image factorization replaces the composite with the image inclusion

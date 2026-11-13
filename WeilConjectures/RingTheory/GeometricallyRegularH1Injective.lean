@@ -41,7 +41,8 @@ Source: Stacks Project, More on Algebra, Proposition Tag 07E5, implication (1) â
 (blueprint: lem-weil-pbc-geometrically-regular-h1-injective).
 
 Proof, following the node's ten steps:
-1. The trivial finite purely inseparable extension in def-weil-pbc-g-ring gives regularity
+1. The trivial finite purely inseparable extension in
+theorem-finite-etale-covers-proper-henselian--2 gives regularity
    of A. Locality gives regular locality; lem-weil-pbc-regular-local-cotangent-dimension
    identifies its dimension d with the dimension of its conormal space.
 2. Use lem-weil-pbc-nl-presentation-h1-functoriality and

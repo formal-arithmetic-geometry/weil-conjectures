@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 Write `red_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ)` for the reduction modulo `ℓⁿ` read on the small
 étale site (`ProEtale.CondensedRing.etaleReduction`). For every morphism `f : X ⟶ Y` of separated
 `k`-schemes of finite type, this file constructs canonical isomorphisms (blueprint
-`det-prop-scalar-six-exceptional`, for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`)
+`lemma-change-coefficients-exceptional-inverse-image`, for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`)
 
 * `ProEtale.CondensedRing.etaleReductionLowerShriekIsoOfCompactification`:
   `Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!`, attached to a compactification `X ⟶[i] P ⟶[p] Y` of `f`;
@@ -155,7 +155,7 @@ instance isIso_etaleReductionLowerShriekSquareOfIsOpenImmersion :
       exact ⟨0, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩
   exact NatIso.isIso_of_isIso_app _
 
-/-- Blueprint `det-prop-scalar-six-compact-support` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
+/-- Blueprint `lemma-change-coefficients-compact-support` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
 site, for an open immersion `j`. **The canonical isomorphism `Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!`**:
 the inverse of `etaleReductionLowerShriekSquareOfIsOpenImmersion`, the transpose of the canonical
 `etaleReductionUpperShriekIsoOfIsOpenImmersion`. -/
@@ -316,7 +316,7 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {f : X ⟶ Y}
 
-/-- Blueprint `det-prop-scalar-six-compact-support` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
+/-- Blueprint `lemma-change-coefficients-compact-support` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
 site. **The canonical isomorphism `Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` attached to a compactification
 `X ⟶[i] P ⟶[p] Y` of `f`**: the composite (`etaleReductionLowerShriekIsoOfComp`) of the canonical
 comparisons along the open immersion `i` (`etaleReductionLowerShriekIsoOfIsOpenImmersion`) and
@@ -359,10 +359,10 @@ theorem hasEtaleReductionLowerShriekIso_of_compactification (c : Compactificatio
   ⟨_, isIso_mateEquiv_etaleReductionLowerShriekIsoOfCompactification ℓ E n c⟩
 
 variable (f) in
-/-- Blueprint `det-prop-scalar-six-exceptional` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read
-on the étale site. **Reduction modulo `ℓⁿ` commutes with `Rf^!`, canonically**:
-`Rf^! ⋙ red_X ≅ red_Y ⋙ Rf^!` for every morphism `f` of separated `k`-schemes of finite type.
-It is the transpose under `Rf_! ⊣ Rf^!` of the canonical comparison
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image` for the coefficient map
+`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site. **Reduction modulo `ℓⁿ` commutes with `Rf^!`,
+canonically**: `Rf^! ⋙ red_X ≅ red_Y ⋙ Rf^!` for every morphism `f` of separated `k`-schemes of
+finite type. It is the transpose under `Rf_! ⊣ Rf^!` of the canonical comparison
 `etaleReductionLowerShriekIsoOfCompactification` for the chosen compactification
 `compactificationOverField f`, invertible by
 `isIso_mateEquiv_etaleReductionLowerShriekIsoOfCompactification`. -/

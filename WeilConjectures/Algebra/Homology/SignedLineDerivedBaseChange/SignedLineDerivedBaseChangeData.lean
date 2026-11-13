@@ -69,7 +69,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-! # Signed line comparisons on unbounded derived categories
 
 Source: Stacks Project, Tags 03EL, 0GMX, 0FNY and 07A4; the current blueprint,
-Powers and duals in det-prop-sfb-cartesian-coefficients-twists.
+Powers and duals in lemma-inverse-image-coefficient-sheaves--2.
 (blueprint: def-pur-signed-line-derived-action-data)
 -/
 

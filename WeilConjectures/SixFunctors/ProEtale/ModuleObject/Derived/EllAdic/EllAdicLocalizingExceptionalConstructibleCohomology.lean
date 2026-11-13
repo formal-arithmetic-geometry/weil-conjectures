@@ -49,8 +49,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- Every cohomology object of the supplied localizing right adjoint on a bounded
 constructible input is constructible.
 
-Source: blueprint `sk-thm-existence` (4), `det-existence-restriction.proof.md`, Part (2).
-Proof: compare local finite-presentation charts with the field, algebraic-closure, and
+Source: blueprint `theorem-exceptional-inverse-image` (4), `det-existence-restriction.proof.md`,
+Part (2). Proof: compare local finite-presentation charts with the field, algebraic-closure, and
 integral adic models using the cited local triviality and resolution theorems.  The smooth
 and closed local restriction calculations preserve constructibility; finite affine descent
 and uniqueness of right adjoints identify the result with the supplied `G`.
@@ -131,7 +131,7 @@ private theorem homology_constructible_of_key (hkey : ExceptionalKey Λ g)
 
 /-- `ellAdic_localizing_rightAdjoint_obj_homology_constructible` for the coefficients `E` and
 `Q̄_ℓ`: the exceptional inverse image comes from Brown representability and the rational
-restriction theorem alone (blueprint: sk-thm-restriction).
+restriction theorem alone (blueprint: theorem-f-shriek-ell-adic-coefficients).
 (blueprint: lem-sfb-adic-localizing-exceptional-cohomology)
 -/
 theorem ellAdic_localizing_rightAdjoint_obj_homology_constructible_rational

@@ -121,7 +121,7 @@ end
 /-- **The Chow embedding over `X`**: for `f : X ⟶ S` proper, the morphism
 `(π, ι) : X' ⟶ ℙ(index f; X)` of `toProjectiveSpaceSource` is a closed immersion, the diagram
 being the one of `AlgebraicGeometry.ChowModification.toProjectiveSpaceSource_map`.
-(blueprint: `lem-weil-pbc-projective-embedding`) -/
+(blueprint: `theorem-chow-s-lemma-projective-form--2`) -/
 instance isClosedImmersion_toProjectiveSpaceSource {X S : Scheme.{u}} (f : X ⟶ S)
     [IsNoetherian S] [IsProper f] :
     IsClosedImmersion (toProjectiveSpaceSource f) :=

@@ -15,7 +15,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
 Let `κ : F ≅ La^* 𝒞(g, s)` be the constancy comparison of the pro-étale family object of a
 deformation to the normal cone
 (`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.proEtaleFamilyObjectIso`). This file
-proves the pro-étale forms of `prop-pur-dnc-family-constancy` (3) and (4):
+proves the pro-étale forms of `lemma-section-normal-bundle--1` (3) and (4):
 
 * `κ` restricts at `t = 1` to the fibre identification `θ₁ : Li₁^* F ≅ 𝒞(g, s)`
   (`proEtaleFamilyObjectIso_normalization`);
@@ -49,9 +49,9 @@ namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y : Scheme.{u}} [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `sk-prop-a1-inv`, pro-étale, on complexes of étale origin: *invariance along the
-line.* Let `F` on `𝔸¹_Y` be invertible and `C` on `Y` be étale complexes such that `F`, `La^* C`
-and `Li₁^* La^* C` are bounded below. Two isomorphisms `α, β : F' ≅ La^* C'` of pro-étale
+/-- Blueprint `lemma-section-normal-bundle--1`, pro-étale, on complexes of étale origin: *invariance
+along the line.* Let `F` on `𝔸¹_Y` be invertible and `C` on `Y` be étale complexes such that `F`,
+`La^* C` and `Li₁^* La^* C` are bounded below. Two isomorphisms `α, β : F' ≅ La^* C'` of pro-étale
 complexes, for `F' ≅ ν^* F` and `C' ≅ ν^* C`, with `Li₁^* α = Li₁^* β` are equal: `D(ν^*)` is
 fully faithful on bounded below complexes, which reduces the statement to the étale one
 (`AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`). -/
@@ -214,7 +214,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : �
   (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact D.proj]
   [QuasiSeparatedSpace B] [QuasiCompact g]
 
-/-- Blueprint `prop-pur-dnc-family-constancy` (3), pro-étale: *normalization at `t = 1`.* The
+/-- Blueprint `lemma-section-normal-bundle--1` (3), pro-étale: *normalization at `t = 1`.* The
 constancy comparison `κ : F ≅ La^* 𝒞(g, s)` restricts at the unit section to the fibre
 identification `θ₁ : Li₁^* F ≅ 𝒞(g, s)`, under `Li₁^* La^* ≅ 𝟭`. -/
 theorem proEtaleFamilyObjectIso_normalization :
@@ -268,7 +268,7 @@ theorem boundedConstructible_familyObject_and_sectionInvariant :
       D.sect).2.1,
     (isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant Λ (d := d) g s).2.1⟩
 
-/-- Blueprint `prop-pur-dnc-family-constancy` (3), pro-étale: *uniqueness.* The constancy
+/-- Blueprint `lemma-section-normal-bundle--1` (3), pro-étale: *uniqueness.* The constancy
 comparison is the only isomorphism `F ≅ La^* 𝒞(g, s)` restricting at the unit section to the
 fibre identification `θ₁ : Li₁^* F ≅ 𝒞(g, s)`. -/
 theorem eq_proEtaleFamilyObjectIso
@@ -295,7 +295,7 @@ theorem eq_proEtaleFamilyObjectIso
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] at h
   exact (cancel_mono _).1 h
 
-/-- Blueprint `prop-pur-dnc-family-constancy` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
+/-- Blueprint `lemma-section-normal-bundle--1` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
 with base change `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B`. The restriction of the constancy comparison,
 `Lv₁^* κ : Lv₁^* F ≅ Lv₁^* La^* 𝒞(g, s) ≅ La'^* Lu^* 𝒞(g, s)`, restricts at `t = 1` to the
 restriction `Lu^* θ₁` of the fibre identification, and it is the only comparison

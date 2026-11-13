@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Compactification.Compactificatio
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, defining composite
 and chosen-compactification paragraph
-(blueprint: det-def-sfb-dc-lower-shriek-definition).
+(blueprint: proposition-construction-independence-rf-shriek).
 
 ## Main definitions
 
@@ -52,7 +52,7 @@ with no restriction to the three example coefficient families.
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, first displayed composite
-(blueprint: det-def-sfb-dc-lower-shriek-definition). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreserves
     {f : X ⟶ Y} (c : Compactification.BoundaryCompactification f.left) :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
@@ -61,13 +61,13 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreserves
     boundedConstructibleLowerStarOfPreserves Λ H c.obj.obj.overG
 
 /-- The derived lower shriek is the preceding composite for the chosen compactification
-of the dependency `def-sfb-compactification-over-field`. Both factors already take values
-in the bounded constructible full subcategories, so this construction needs no further
+of the dependency `proposition-construction-independence-rf-shriek`. Both factors already take
+values in the bounded constructible full subcategories, so this construction needs no further
 preservation assertion.
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, final paragraph
-(blueprint: det-def-sfb-dc-lower-shriek-definition). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 noncomputable def boundedConstructibleLowerShriekOfPreserves (f : X ⟶ Y) :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
       ProEtale.BoundedConstructible (condensedRingObj Λ Y.left) :=

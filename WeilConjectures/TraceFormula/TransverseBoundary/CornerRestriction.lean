@@ -16,7 +16,7 @@ Let `S` be the strict localization of the surface `Z` of a transverse corner
 (`AlgebraicGeometry.Scheme.TransverseCorner`) at a geometric point `z̄` over the corner point,
 `X_S, Y_S` the two transverse divisors and `ℓ` a prime invertible in `k`. The restriction map
 `RΓ(S - Y_S, 𝔽_ℓ) ⟶ RΓ(X_S - z, 𝔽_ℓ)` is an isomorphism (blueprint
-`det-tf-transverse-corner-constant`).
+`lemma-punctured-surface-punctured-curve--1`).
 
 Both sides have cohomology `𝔽_ℓ` in degrees `0` and `1` and none in higher degrees: for the
 surface by purity along the regular divisor `Y`
@@ -55,21 +55,21 @@ lemma range_zbar_subset_range_iY : Set.range zbar ⊆ Set.range C.iY := by
 
 include hℓ hz
 
-/-- Blueprint `det-tf-transverse-corner-constant`, *the surface*: `H^q(S - Y_S, ℤ/ℓ) = 0` for
-`q ≥ 2`. -/
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, *the surface*: `H^q(S - Y_S, ℤ/ℓ) = 0`
+for `q ≥ 2`. -/
 theorem subsingleton_sheafH_puncturedStrictLocalization (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H ((C.puncturedStrictLocalization zbar).constantZMod ℓ) q) :=
   subsingleton_sheafH_pullback_strictLocalizationToBase C.aZ C.isEtaleLimitOfSmoothSurfaces C.iY
     C.j C.range_j hℓ zbar (C.range_zbar_subset_range_iY zbar hz) q hq
 
-/-- Blueprint `det-tf-transverse-corner-constant`, *the surface*: `H^0(S - Y_S, ℤ/ℓ)` and
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, *the surface*: `H^0(S - Y_S, ℤ/ℓ)` and
 `H^1(S - Y_S, ℤ/ℓ) ≅ 𝔽_ℓ(-1)` are free of rank one over `𝔽_ℓ`. -/
 theorem nonempty_addEquiv_sheafH_puncturedStrictLocalization (q : ℕ) (hq : q ≤ 1) :
     Nonempty (Sheaf.H ((C.puncturedStrictLocalization zbar).constantZMod ℓ) q ≃+ ZMod ℓ) :=
   nonempty_addEquiv_sheafH_pullback_strictLocalizationToBase C.aZ C.isEtaleLimitOfSmoothSurfaces
     C.iY C.j C.range_j hℓ zbar (C.range_zbar_subset_range_iY zbar hz) q hq
 
-/-- Blueprint `det-tf-transverse-corner-constant`: Constant coefficients near a transverse
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: Constant coefficients near a transverse
 corner. The restriction map `RΓ(S - Y_S, 𝔽_ℓ) ⟶ RΓ(X_S - z, 𝔽_ℓ)` is an isomorphism: in every
 degree `q` the restriction `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` is bijective. In degree `0`
 both sides are the constants of connected schemes; in degrees `q ≥ 2` both sides vanish; in

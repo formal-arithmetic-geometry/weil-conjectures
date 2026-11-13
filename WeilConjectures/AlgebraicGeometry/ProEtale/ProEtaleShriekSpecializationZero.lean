@@ -233,10 +233,10 @@ Proof plan:
 1. Apply `lem-weil-pbc-site-sheafification-sections-local` to the underlying set
    presheaf. Addition, negation and zero are defined on local representatives and descend
    by local equality. The group laws and universal property identify this with abelian
-   sheafification (`lem-weil-pbc-algebraic-sheaf-iff-underlying-sets`).
+   sheafification (`situation-conventions`).
 2. Refine representatives to a finite affine covering of `V`, and express the pulled-back
    closed immersions as arbitrary ideals in these affine rings
-   (`def-weil-pbc-proetale-covering`, `lem-weil-pbc-closed-immersion-base-change`).
+   (`definition-small-pro-etale-site--1`, `lem-weil-pbc-closed-immersion-base-change`).
 3. Localize each ring at elements invertible modulo its closed-fibre ideal, using
    `lem-weil-pbc-affine-closed-specialization-localization`. These weakly etale affine
    objects cover `V`: lift generalizations along the flat covering maps using

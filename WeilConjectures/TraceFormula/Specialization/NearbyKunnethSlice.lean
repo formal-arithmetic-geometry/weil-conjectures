@@ -23,7 +23,7 @@ generic point of the special-fibre line `𝔸¹_{k'}` is in the image of the spe
 `(𝒳 ×_{𝔸¹_S} Spec K⟦t⟧)_s ⟶ 𝒳_s` of the slice
 (`NearbyCyclesModel.mem_range_sliceSpecialMap`). This is how the vanishing of the cone of the
 Künneth map over the slices is turned into its vanishing over the generic point of the coordinate
-line (blueprint `sk-prop-tf-nearby-external-kunneth`, "Finite support").
+line (blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite support").
 
 -/
 

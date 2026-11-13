@@ -19,16 +19,16 @@ This file records the preservation statements for the exceptional inverse image 
 cases where it is explicit:
 
 - `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_leftDerivedUpperStar`
-  (`lem-sf-pullback-tor-amplitude`): the pullback preserves bounded constructibility and the
+  (`proposition-six-operations-dctf--1`): the pullback preserves bounded constructibility and the
   Tor amplitude interval;
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isOpenImmersion` and
   `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isFinite_of_etale`
-  (`thm-exc-explicit-preservation`): for an open immersion or a finite étale `f`, `Rf^! ≅ f^*`
-  preserves the constructible intervals and the Tor amplitude, and commutes with the reduction
-  of coefficients `K ↦ K ⊗ᴸ (Λ/J)`;
+  (`theorem-f-shriek-finite-coefficients`): for an open immersion or a finite étale `f`,
+  `Rf^! ≅ f^*` preserves the constructible intervals and the Tor amplitude, and commutes with the
+  reduction of coefficients `K ↦ K ⊗ᴸ (Λ/J)`;
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension`
-  (`cor-pur-smooth-admissibility`): for `f` smooth of pure relative dimension `d`, `Rf^!` shifts
-  the constructible interval and the Tor amplitude by `-2d`.
+  (`theorem-f-shriek-finite-coefficients`): for `f` smooth of pure relative dimension `d`, `Rf^!`
+  shifts the constructible interval and the Tor amplitude by `-2d`.
 
 The reduction of coefficients along `Λ → B = Λ/J` is `AlgebraicGeometry.Etale.reductionModIdeal`,
 `K ↦ K ⊗ᴸ (Λ/J)_X`, read in `D(X_ét, Λ)` (for `Λ = A_{E,n}` and `J = ϖ^m` this is the finite
@@ -55,7 +55,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-! ### The pullback -/
 
-/-- Blueprint `lem-sf-pullback-tor-amplitude`: Pullback preserves finite Tor amplitude.
+/-- Blueprint `proposition-six-operations-dctf--1`: Pullback preserves finite Tor amplitude.
 
 Let `f : X ⟶ Y` be a morphism of schemes and `K` a bounded constructible complex on `Y_ét` with
 Tor amplitude in `[a, b]`. Then `Lf^* K` is bounded constructible, with homology concentrated in
@@ -132,7 +132,8 @@ theorem preservation_of_iso_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y
         ((leftDerivedUpperStarReductionModIdealIso Λ J f).app K).symm ≪≫ (e.app _).symm)
       (hred X (hF K hK))⟩
 
-/-- Blueprint `thm-exc-explicit-preservation`: Preservation in the open and finite etale cases.
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation in the open and finite etale
+cases.
 
 Open immersion case. Let `f : U ⟶ Y` be a quasi-compact open immersion and `Λ` a finite ring. The
 exceptional inverse image `Rf^! ≅ f^*` satisfies `Rf^! D_c^[a, b](Y, Λ) ⊆ D_c^[a, b](U, Λ)` and
@@ -162,10 +163,11 @@ theorem preservation_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{u
     (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ f ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ f).symm) J
 
-/-- Blueprint `thm-exc-explicit-preservation`: Preservation in the open and finite etale cases.
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation in the open and finite etale
+cases.
 
 Finite étale case. Let `f : V ⟶ X` be finite étale and `Λ` a finite ring. The exceptional
-inverse image `Rf^! ≅ f^*` (`prop-exc-finite-etale-adjoint`) satisfies
+inverse image `Rf^! ≅ f^*` (`lemma-affine-space-etale-localization--4`) satisfies
 `Rf^! D_c^[a, b](X, Λ) ⊆ D_c^[a, b](V, Λ)` and preserves Tor amplitude in `[a, b]`; for every
 quotient `B = Λ/J` the coefficient comparison `(Rf^! K) ⊗ᴸ B ≅ Rf^!(K ⊗ᴸ B)` is an isomorphism,
 and for `K ∈ Dctf(X, Λ)` both sides are bounded constructible. No bound depends on `Λ`. -/
@@ -214,7 +216,8 @@ lemma exists_flat_rightDerivedUpperShriek_iso_tensor_shift {X Y : Scheme.{u}}
   exact ⟨t.symm ≪≫ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).mapIso eω ≪≫
     ((((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).commShiftIso (2 * d : ℤ)).app _)⟩
 
-/-- Blueprint `cor-pur-smooth-admissibility`: Smooth morphisms satisfy the preservation clauses.
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Smooth morphisms satisfy the preservation
+clauses.
 
 Let `f : X ⟶ Y` be smooth of pure relative dimension `d`, admitting a compactification, and `Λ`
 a finite ring whose exponent is invertible on `Y`. Then `f` satisfies the two preservation

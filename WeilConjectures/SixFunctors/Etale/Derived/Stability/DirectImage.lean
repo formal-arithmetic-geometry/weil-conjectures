@@ -56,14 +56,14 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 /-! ### Torsion coefficients with invertible exponent
 
 The statements of this section are the ones of `sk-thm-sf-direct-image-tor-amplitude`,
-`sk-thm-sf-hom-ctf`, `sk-prop-sf-rf-shriek-preservation` (ii)–(iv) and
-`sk-thm-sf-ctf-stability` (iii), (v), (vi) whose content is a bound on étale cohomological
+`sk-thm-sf-hom-ctf`, `theorem-f-shriek-finite-coefficients` (ii)–(iv) and
+`proposition-six-operations-dctf` (iii), (v), (vi) whose content is a bound on étale cohomological
 dimension, a constructibility theorem for direct images or purity. They are made in the setting
-of `def-sf-setting`: the coefficients are a finite ring `Λ` whose exponent is invertible on
-the schemes in sight, and the schemes are of finite type over a field `k`. Neither hypothesis
-can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier),
-so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and over a
-general Noetherian base étale cohomology need not vanish above twice the dimension. -/
+of `definition-constructible-sheaves--6`: the coefficients are a finite ring `Λ` whose exponent is
+invertible on the schemes in sight, and the schemes are of finite type over a field `k`. Neither
+hypothesis can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite
+(Artin–Schreier), so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and
+over a general Noetherian base étale cohomology need not vanish above twice the dimension. -/
 
 section Torsion
 
@@ -180,7 +180,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : 
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
   exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
@@ -203,7 +203,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`

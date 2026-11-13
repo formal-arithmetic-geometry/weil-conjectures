@@ -195,7 +195,7 @@ Proof plan:
 are levelwise. Apply prop-pur-kinjective-resolutions-exist on this small ringed site.
 Transport algebraic operations through the geometric inverse image, which is exact;
 its adjunction on modules gives the system adjunction level by level. Apply
-lem-weil-pbc-exact-functor-derived-factorization and
+situation-conventions and
 lem-weil-pbc-kinjective-total-derived to construct the derived functors.
 2. Use lem-weil-pbc-termwise-adjunction-homotopy and
 lem-pc-pre-derived-adjoint-functors-general to normalize the derived adjunctions.

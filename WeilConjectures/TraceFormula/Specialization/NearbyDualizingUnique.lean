@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchan
 # Uniqueness of the dualizing maps of nearby cycles
 
 The two properties of a family of dualizing maps (`NearbyCyclesModel.NearbyDualizingData`)
-determine it (blueprint `det-nearby-exchange-maps`):
+determine it (blueprint `prose-E-15`):
 
 * on a proper `k'`-scheme `Z`, a map `A ⟶ ω_Z` is determined by its trace
   `RΓ(A) ⟶ RΓ(ω_Z) ⟶ ℚ̄_ℓ` (`NearbyCyclesModel.eq_of_map_comp_trace_eq`), the trace being the
@@ -85,7 +85,7 @@ theorem NearbyDualizingData.θ_eq_of_isProper (D₁ D₂ : NearbyDualizingData k
   rw [← h₂, cancel_epi] at h₁
   exact eq_of_map_comp_trace_eq ℓ X' h₁
 
-/-- **Uniqueness of the dualizing maps** (blueprint `det-nearby-exchange-maps`): two families of
+/-- **Uniqueness of the dualizing maps** (blueprint `prose-E-15`): two families of
 dualizing maps of nearby cycles over the trait agree. The model is an open sub-model of a proper
 model with full geometric generic fibre, on which they agree
 (`NearbyCyclesModel.NearbyDualizingData.θ_eq_of_isProper`), and open restriction determines the

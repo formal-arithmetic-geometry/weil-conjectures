@@ -34,7 +34,8 @@ Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, 
 (blueprint: lem-sc-perfect-finite-free-residue-model).
 
 Proof:
-1. By `def-pc-perfect-complex` and its affine characterization (Tag 08EB), choose an affine
+1. By `lemma-coherent-base-change-invertible-sheaves--1` and its affine characterization (Tag 08EB),
+choose an affine
    neighbourhood `Spec A` of `x` with a bounded finite projective representative `P`.
    Pull it to the residue field. By `lem-sc-perfect-pullback-perfect-residue` this fibre
    is perfect. Its cohomology is finite dimensional and has finite support.

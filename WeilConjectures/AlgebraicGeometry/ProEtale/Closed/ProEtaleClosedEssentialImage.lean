@@ -19,10 +19,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-!
 # Essential image of closed direct image on pro-etale module sheaves
 
-Source: blueprint smooth purity, `sk-prop-sf-closed-unit`,
-`lem-exc-proetale-closed-essential-image`; Stacks Project, Pro-etale Cohomology,
+Source: blueprint smooth purity, `lemma-local-cohomology-right-adjoint--1`,
+`lemma-passing-schematic-closure--1`; Stacks Project, Pro-etale Cohomology,
 Tag 09AH, `lemma-ses-associated-to-open`
-(blueprint: lem-exc-proetale-closed-essential-image).
+(blueprint: lemma-passing-schematic-closure--1).
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -83,13 +83,13 @@ its essential image. On these sheaves the canonical module adjunction unit is in
 The arbitrary commutative coefficient sheaves and their inverse-image identifications are
 fixed explicitly; the unit is that of the tensor-unit-normalized adjunction.
 
-Source: blueprint smooth purity, `sk-prop-sf-closed-unit`,
-`lem-exc-proetale-closed-essential-image`; Stacks Project, Tag 09AH,
+Source: blueprint smooth purity, `lemma-local-cohomology-right-adjoint--1`,
+`lemma-passing-schematic-closure--1`; Stacks Project, Tag 09AH,
 `lemma-ses-associated-to-open`
-(blueprint: lem-exc-proetale-closed-essential-image).
+(blueprint: lemma-passing-schematic-closure--1).
 
 Proof:
-1. Normalize coefficients as in def-weil-pbc-proetale-operations. Tensor extension along
+1. Normalize coefficients as in prose-03-02. Tensor extension along
    ci or cj is scalar transport: m tensor a maps to c.inv(a)m, with inverse m maps to
    m tensor 1. The balancing relation proves both inverse identities. Transport an
    Ri-module back to an inverse-image-R-module by b acting as ci(b). Its direct-image

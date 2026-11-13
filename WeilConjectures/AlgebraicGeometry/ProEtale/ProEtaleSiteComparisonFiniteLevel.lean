@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 /-!
 # Exactness, the unit, and injective acyclicity of finite-coefficient comparison
 
-Source: blueprint, sec-proper-base-change, sk-thm-properbasechange,
+Source: blueprint, chap-Proper-base-change, theorem-proper-base-change-classical-pro,
 prop-weil-pbc-site-comparison-finite-level, statement and proof, order 1285
 (blueprint: prop-weil-pbc-site-comparison-finite-level).
 -/
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- For a finite discrete ring, comparison inverse image is exact, the canonical unit
 is invertible on every etale module sheaf, and pulled-back injectives have zero positive
 higher comparison direct images.
-Source: blueprint, sec-proper-base-change, sk-thm-properbasechange,
+Source: blueprint, chap-Proper-base-change, theorem-proper-base-change-classical-pro,
 prop-weil-pbc-site-comparison-finite-level, order 1285
 (blueprint: prop-weil-pbc-site-comparison-finite-level).
 

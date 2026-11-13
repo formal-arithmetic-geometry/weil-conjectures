@@ -16,9 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Pullback
 The remark `rem-sf-kv-formal` (`sk-rem-sf-kv-formal`) observes that the statement
 `𝔻_{X × Y} (M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, equivalent to the Künneth–Verdier isomorphism, is *formal*
 for perfect `M`, `N` on smooth `X`, `Y`: under orientations the Verdier dual of a perfect complex
-is its twisted shifted coefficient dual (`sk-thm-sf-dual-perfect`), and the coefficient dual of
+is its twisted shifted coefficient dual (`theorem-poincare-duality--2`), and the coefficient dual of
 an external product of perfect complexes is the external product of the coefficient duals
-(`sk-prop-sf-dualizable-biduality`). This file records that formal case.
+(`theorem-poincare-duality--4`). This file records that formal case.
 
 ## Main statements
 
@@ -98,14 +98,14 @@ products.
 
 Let `a : X ⟶ S` and `b : Y ⟶ S` carry orientations of relative dimensions `d` and `e`, and let
 the structure morphism of `X ×_S Y` carry one of relative dimension `d + e` (by smooth purity,
-`sk-thm-smooth-purity`, orientations exist for smooth `X`, `Y` over a field,
-`AlgebraicGeometry.Etale.Orientation.nonempty`). Then for perfect (dualizable) `P` on `X` and
+`proposition-smooth-purity-finite-coefficients`, orientations exist for smooth `X`, `Y` over a
+field, `AlgebraicGeometry.Etale.Orientation.nonempty`). Then for perfect (dualizable) `P` on `X` and
 `Q` on `Y`,
 
 `𝔻_{X ×_S Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`.
 
-Indeed `𝔻 K ≅ K^∨ ⊗ᴸ Λ(c)[2c]` for perfect `K` (`sk-thm-sf-dual-perfect`), the coefficient dual
-of `P ⊠ Q = p^* P ⊗ᴸ q^* Q` is `P^∨ ⊠ Q^∨` (`sk-prop-sf-dualizable-biduality`), and
+Indeed `𝔻 K ≅ K^∨ ⊗ᴸ Λ(c)[2c]` for perfect `K` (`theorem-poincare-duality--2`), the coefficient dual
+of `P ⊠ Q = p^* P ⊗ᴸ q^* Q` is `P^∨ ⊠ Q^∨` (`theorem-poincare-duality--4`), and
 `Λ(d)[2d] ⊠ Λ(e)[2e] ≅ Λ(d + e)[2(d + e)]`. This is the base of the induction, not a substitute
 for it: for non-perfect complexes the statement needs the exceptional Künneth formula. -/
 theorem Orientation.nonempty_iso_verdierDual_externalProduct {X Y S : Scheme.{u}} (a : X ⟶ S)

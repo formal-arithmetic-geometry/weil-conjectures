@@ -32,9 +32,9 @@ modules. Induction through the filtration finishes the proof.
 The blueprint proof opens with two further steps: a base change to a finite constant extension
 `𝔽_{q^m}` and a reduction to geometrically irreducible graded pieces. They are not needed here,
 and no statement of this block corresponds to them: the Fourier route of
-`sk-p-dl-a1-middle` only assumes arithmetic irreducibility, so the composition filtration of
-the Weil representation over `k₀` is already fine enough, and neither the filtration nor a
-semisimplicity theorem for pure sheaves is used.
+`proposition-fourier-transform-middle-extension` only assumes arithmetic irreducibility, so the
+composition filtration of the Weil representation over `k₀` is already fine enough, and neither the
+filtration nor a semisimplicity theorem for pure sheaves is used.
 
 ## Main statements
 
@@ -146,7 +146,7 @@ at most `w + 1`. Write `F ≅ j'^* G` for a lisse `G` on an open `W ⊆ ℙ¹` c
 `N = j'^* M` for `M` irreducible lisse on `W`. Such an `N` is irreducible and unramified at
 infinity; it is either geometrically constant, hence a constant twist with `H_c^1 = 0`, or it is
 covered by `hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`.
-(blueprint: `thm-a1-line-middle-extension-upper`) -/
+(blueprint: `theorem-weight-bound-affine-line`) -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
     (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
@@ -158,7 +158,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l
 
 /-- Let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense open immersion and let `F` be a lisse Weil sheaf on `U₀`,
 punctually `ι`-pure of weight `w` and unramified at infinity. Then `H_c^r(𝔸¹, j_*F)` has
-weights at most `w + r` for every integer `r`. (blueprint: `sk-thm-dl-a1-upper`) -/
+weights at most `w + r` for every integer `r`. (blueprint: `theorem-weight-bound-affine-line`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_directImage (ι : PadicAlgCl l →+* ℂ)
     (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (r : ℤ) :
@@ -188,7 +188,7 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_directImage (ι : PadicAlg
           D.j D.sheaf ι D.lisse hw).hasWeightsAtMostOver
 
 /-- In degree zero the compactly supported cohomology of `j_*F` on the line vanishes.
-(blueprint: `sk-thm-dl-a1-upper`) -/
+(blueprint: `theorem-weight-bound-affine-line`) -/
 theorem subsingleton_compactlySupportedCohomology_directImage_zero
     (D : LisseOnDenseOpen k₀ l) :
     Subsingleton (D.directImage.compactlySupportedCohomology 0).carrier := by
@@ -200,7 +200,7 @@ theorem subsingleton_compactlySupportedCohomology_directImage_zero
     D.lisse
 
 /-- In degree two the compactly supported cohomology of `j_*F` on the line is pure of weight
-`w + 2`, not merely of weights at most `w + 2`. (blueprint: `sk-thm-dl-a1-upper`) -/
+`w + 2`, not merely of weights at most `w + 2`. (blueprint: `theorem-weight-bound-affine-line`) -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :

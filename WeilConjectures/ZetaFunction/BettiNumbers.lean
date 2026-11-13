@@ -43,8 +43,8 @@ power series, which this repository also does not have.
 
 namespace AlgebraicGeometry
 
-/-- Blueprints `def-weil-betti-numbers` and `det-def-roots` (Betti numbers): for a family
-`P₀, …, P_n` of integral
+/-- Blueprints `theorem-weil-conjectures-smooth-proper-schemes--6` and `definition-reciprocal-root`
+(Betti numbers): for a family `P₀, …, P_n` of integral
 Frobenius factors, the `i`-th Betti number is `bᵢ = deg Pᵢ` for `0 ≤ i ≤ n`, and `bᵢ = 0` for
 `i < 0` or `i > n`. -/
 noncomputable def weilBettiNumber {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) (i : ℤ) : ℕ :=
@@ -59,27 +59,27 @@ theorem weilBettiNumber_eq_zero {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) {
     (hi : i < 0 ∨ (n : ℤ) < i) : weilBettiNumber P i = 0 := by
   rw [weilBettiNumber, dite_eq_right (by omega)]
 
-/-- Blueprints `def-weil-determinant-constants` and `det-def-roots` (determinant constants): the
-determinant constant
+/-- Blueprints `corollary-functional-equation--3` and `definition-reciprocal-root` (determinant
+constants): the determinant constant
 `D = (-1)^b [T^b] P(T)` of an integral Frobenius factor `P` of degree `b`; under
 `P^{(ℓ)} = det(1 - T F | V)` its image in `ℚ̄_ℓ` is `det F`. -/
 def weilDeterminantConstant (P : Polynomial ℤ) : ℤ :=
   (-1) ^ P.natDegree * P.coeff P.natDegree
 
-/-- Blueprint `def-weil-determinant-constants`: the alternating determinant scalar
+/-- Blueprint `corollary-functional-equation--3`: the alternating determinant scalar
 `Δ = ∏ᵢ Dᵢ^{(-1)ⁱ} ∈ ℚ` of a family of integral Frobenius factors. The Euler characteristic
 `χ = ∑ᵢ (-1)ⁱ bᵢ` of the family is `Polynomial.alternatingNatDegreeSum`. -/
 noncomputable def weilDeterminantScalar {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) : ℚ :=
   ∏ i : Fin (n + 1), (weilDeterminantConstant (P i) : ℚ) ^ ((-1 : ℤ) ^ (i : ℕ))
 
-/-- Blueprint `def-weil-determinant-constants`: the determinant constant of a polynomial with
+/-- Blueprint `corollary-functional-equation--3`: the determinant constant of a polynomial with
 constant coefficient `1` is a nonzero integer. -/
 theorem weilDeterminantConstant_ne_zero {P : Polynomial ℤ} (h0 : P.coeff 0 = 1) :
     weilDeterminantConstant P ≠ 0 := by
   have hP : P ≠ 0 := fun h ↦ by simp [h] at h0
   exact mul_ne_zero (pow_ne_zero _ (by decide)) (Polynomial.leadingCoeff_ne_zero.2 hP)
 
-/-- Blueprint `def-weil-determinant-constants`: the alternating determinant scalar
+/-- Blueprint `corollary-functional-equation--3`: the alternating determinant scalar
 `Δ = ∏ᵢ Dᵢ^{(-1)ⁱ}` of a family of polynomials with constant coefficients `1` lies in `ℚ^×`. -/
 theorem weilDeterminantScalar_ne_zero {n : ℕ} {P : Fin (n + 1) → Polynomial ℤ}
     (h0 : ∀ i, (P i).coeff 0 = 1) : weilDeterminantScalar P ≠ 0 :=

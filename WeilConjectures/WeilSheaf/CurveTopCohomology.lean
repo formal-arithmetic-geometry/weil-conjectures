@@ -28,9 +28,9 @@ The geometric coinvariants are `AlgebraicGeometry.WeilSheaf.geometricCoinvariant
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`
-  (`lem-a1-affine-hc2`), from the lisse Poincaré pairing
+  (`lemma-degree-zero-top-cohomology--2`), from the lisse Poincaré pairing
   `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul` (from the
-  lisse case of `thm-pod-degreewise-perfectness-over-a-field`).
+  lisse case of `corollary-degreewise-duality-over-fields--1`).
 -/
 
 @[expose] public section
@@ -49,7 +49,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.
+/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on an affine curve.
 
 Let `U₀` be a smooth geometrically connected affine curve over `k₀ = 𝔽_q` and `F` a lisse Weil
 sheaf on `U₀`, with local generic fibre `V`. There is a Frobenius-equivariant isomorphism
@@ -69,7 +69,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     rw [hPF, neg_neg, zpow_one, pow_one]).trans
       ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
-/-- Blueprint `lem-a1-affine-hc2-pure`: Purity of `H_c²` on an affine curve.
+/-- Blueprint `lemma-degree-zero-top-cohomology--7`: Purity of `H_c²` on an affine curve.
 
 Let `U₀` be a smooth geometrically connected affine curve and `F` a lisse Weil sheaf on `U₀`,
 punctually `ι`-pure of weight `w`. Then `H_c²(U, F)` is `ι`-pure of weight `w + 2` (possibly

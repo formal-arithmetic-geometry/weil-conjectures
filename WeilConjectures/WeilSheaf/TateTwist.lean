@@ -52,8 +52,8 @@ Tate twist `K ↦ K(m)` of Weil complexes is the derived tensor product with `�
 ## Blueprint
 
 `AlgebraicGeometry.WeilSheaf.tateTwistSheaf` and `AlgebraicGeometry.WeilComplex.tateTwist`
-implement `def-wf-tate-twist`. The cyclotomic Tate module `ℤ_ℓ(1)` of the subsection
-`det-d-ab-cyclotomic` is `cyclotomicTateModule`.
+implement `definition-tate-twists`. The cyclotomic Tate module `ℤ_ℓ(1)` of the subsection
+`definition-tate-twists--8` is `cyclotomicTateModule`.
 -/
 
 @[expose] public section
@@ -73,7 +73,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 /-- The scalar `χ_ℓ(σ) ∈ ℚ̄_ℓˣ` by which the geometric Frobenius `σ : x ↦ x ^ (1 / q)` of the
 algebraic closure `k̄` of `k₀` acts on the cyclotomic Tate module `ℤ_ℓ(1)(k̄)`: the value at `σ`
 of the `ℓ`-adic cyclotomic character, mapped along `ℤ_ℓ ⟶ ℚ_ℓ ⟶ ℚ̄_ℓ`. For `ℓ ≠ p` it is `q⁻¹`
-(`cyclotomicUnit_eq`); for `ℓ = p` its value is meaningless. (blueprint: `def-wf-tate-twist`) -/
+(`cyclotomicUnit_eq`); for `ℓ = p` its value is meaningless. (blueprint:
+`definition-tate-twists`) -/
 noncomputable def cyclotomicUnit : (PadicAlgCl l)ˣ :=
   letI := Fintype.ofFinite k₀
   Units.map ((algebraMap ℚ_[l] (PadicAlgCl l)).comp PadicInt.Coe.ringHom).toMonoidHom
@@ -114,7 +115,7 @@ variable (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 /-- The non-negative Tate sheaves `ℚ̄_ℓ(n) = ℚ̄_ℓ(1)^{⊗ n}`: `ℚ̄_ℓ(0)` is the constant Weil
 sheaf `ℚ̄_ℓ`, `ℚ̄_ℓ(1) = ℤ_ℓ(1) ⊗_{ℤ_ℓ} ℚ̄_ℓ` is the constant sheaf `ℚ̄_ℓ` whose Weil structure is
 multiplied by the scalar `χ_ℓ(σ)` by which the geometric Frobenius acts on roots of unity, and
-`ℚ̄_ℓ(n + 2) = ℚ̄_ℓ(1) ⊗ ℚ̄_ℓ(n + 1)`. (blueprint: `def-wf-tate-twist`) -/
+`ℚ̄_ℓ(n + 2) = ℚ̄_ℓ(1) ⊗ ℚ̄_ℓ(n + 1)`. (blueprint: `definition-tate-twists`) -/
 noncomputable def tateTwistSheafNat : ℕ → WeilSheaf k₀ l X
   | 0 => adicConstant k₀ l X
   | 1 => (adicConstant k₀ l X).constantTwist (cyclotomicUnit k₀ l)
@@ -131,7 +132,7 @@ theorem isLisse_tateTwistSheafNat : ∀ n : ℕ, (tateTwistSheafNat k₀ l X n).
 /-- The Tate sheaves `ℚ̄_ℓ(m)` on a `k₀`-scheme `X`, for `m ∈ ℤ`: for `m ≥ 0` the tensor power
 `ℚ̄_ℓ(1)^{⊗ m}` of `ℚ̄_ℓ(1) = ℤ_ℓ(1) ⊗_{ℤ_ℓ} ℚ̄_ℓ`, with `ℚ̄_ℓ(0) = ℚ̄_ℓ`, and for `m < 0` the dual
 `[ℚ̄_ℓ(-m), ℚ̄_ℓ]`. These are lisse Weil sheaves, so that the derived tensor products and internal
-homs of the blueprint are the underived ones. (blueprint: `def-wf-tate-twist`) -/
+homs of the blueprint are the underived ones. (blueprint: `definition-tate-twists`) -/
 noncomputable def tateTwistSheaf : ℤ → WeilSheaf k₀ l X
   | (n : ℕ) => tateTwistSheafNat k₀ l X n
   | .negSucc n => (tateTwistSheafNat k₀ l X (n + 1)).dual (isLisse_tateTwistSheafNat k₀ l X _)
@@ -164,7 +165,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 variable (k₀ l X) in
 /-- The Tate twist `K ↦ K(m) = K ⊗^L ℚ̄_ℓ(m)` of Weil complexes on a `k₀`-scheme `X`, the derived
 tensor product with the Tate sheaf `ℚ̄_ℓ(m)` (`AlgebraicGeometry.WeilSheaf.tateTwistSheaf`).
-(blueprint: `def-wf-tate-twist`) -/
+(blueprint: `definition-tate-twists`) -/
 noncomputable def tateTwist (m : ℤ) : WeilComplex k₀ l X ⥤ WeilComplex k₀ l X :=
   tensorLisse (WeilSheaf.tateTwistSheaf k₀ l X m) (WeilSheaf.isLisse_tateTwistSheaf k₀ l X m)
 

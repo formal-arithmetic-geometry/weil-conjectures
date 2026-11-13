@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 
 /-! # Proper direct image preserves coproducts of classical complexes
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-prop-ctf-finite-proper-localizing.proof.md, Étale statements and Transfer
 (blueprint: lem-sfb-finite-proper-classical-coproducts).
 -/

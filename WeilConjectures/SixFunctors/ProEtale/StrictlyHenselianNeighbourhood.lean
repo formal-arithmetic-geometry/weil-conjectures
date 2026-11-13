@@ -26,7 +26,7 @@ vanishes on a neighbourhood `V' ⟶ Spec A`
 (`AlgebraicGeometry.ProEtale.exists_map_eq_zero_of_germ_eq_zero`), which has a section.
 
 This is the first step of the computation of boundary stalks of direct images as inertia
-invariants (blueprint `lem-wf-boundary-stalk-invariants`): the stalk of `j_* F` at a geometric
+invariants (blueprint `lemma-boundary-stalk--1`): the stalk of `j_* F` at a geometric
 point is the module of sections of `F` over the punctured strictly henselian neighbourhood.
 -/
 

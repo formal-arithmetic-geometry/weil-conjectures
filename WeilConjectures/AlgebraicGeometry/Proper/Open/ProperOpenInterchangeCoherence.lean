@@ -1049,26 +1049,27 @@ stated normalization for any K-injective representative, even if it is not itsel
 termwise. Exactness of $k_!$ is used to descend it through localization; no claim that $k_!$
 preserves injectives is made. Uses: lem-weil-pbc-kinjective-hom-derived,
 lem-weil-pbc-extension-by-zero-exact.
-4. In the refinement case use [def-weil-pbc-proper-open-comparison]. Its construction identifies
-$V=u^{-1}(j_2(X))$ and its clopen component $s(X)$, with $bs=j_1$, $ps=\mathrm{id}_X$. Restrict
-the arrow just constructed to $j_2$. Under the restriction isomorphism
-[lem-weil-pbc-derived-open-restriction], the extension-by-zero comparison
-[cor-cbc-derived-extension-zero-base-change], and the component restriction
-[lem-weil-pbc-clopen-section-direct-image], its source and target become $K$. The underived
-$\delta$ sends a section on $X$ to itself on $s(X)$ and zero on the other component. Thus this
-restricted arrow is exactly $\theta_{u,K}^{-1}$ from the comparison definition; the resolution map
-is the canonical derived comparison and does not change that identity on the component. The
+4. In the refinement case use [proposition-construction-independence-rf-shriek--7]. Its construction
+identifies $V=u^{-1}(j_2(X))$ and its clopen component $s(X)$, with $bs=j_1$, $ps=\mathrm{id}_X$.
+Restrict the arrow just constructed to $j_2$. Under the restriction isomorphism
+[proposition-construction-independence-rf-shriek--7], the extension-by-zero comparison
+[proposition-extension-zero-restriction-closed-subscheme--11], and the component restriction
+[proposition-construction-independence-rf-shriek--7], its source and target become $K$. The
+underived $\delta$ sends a section on $X$ to itself on $s(X)$ and zero on the other component. Thus
+this restricted arrow is exactly $\theta_{u,K}^{-1}$ from the comparison definition; the resolution
+map is the canonical derived comparison and does not change that identity on the component. The
 adjunction [lem-weil-pbc-extension-by-zero-adjunction], descended degreewise since extension by
 zero and inverse image are exact [lem-weil-pbc-extension-by-zero-exact]
-[prop-weil-pbc-inverse-image-modules-exact], makes the arrow $j_{2!}K\to Ru_*j_{1!}K$ uniquely
+[situation-conventions], makes the arrow $j_{2!}K\to Ru_*j_{1!}K$ uniquely
 determined by this restriction. It is consequently $\alpha_{u,K}$, the adjoint of
-$\theta_{u,K}^{-1}$. Uses: def-weil-pbc-proper-open-comparison,
-lem-weil-pbc-derived-open-restriction, cor-cbc-derived-extension-zero-base-change,
-lem-weil-pbc-clopen-section-direct-image, lem-weil-pbc-extension-by-zero-adjunction,
-lem-weil-pbc-extension-by-zero-exact, prop-weil-pbc-inverse-image-modules-exact.
+$\theta_{u,K}^{-1}$. Uses: proposition-construction-independence-rf-shriek--7,
+proposition-construction-independence-rf-shriek--7,
+proposition-extension-zero-restriction-closed-subscheme--11,
+proposition-construction-independence-rf-shriek--7, lem-weil-pbc-extension-by-zero-adjunction,
+lem-weil-pbc-extension-by-zero-exact, situation-conventions.
 5. For vertically stacked $Q_1,Q_2$, choose $J$ bounded-below injective on the upper-left scheme
 and $t:k_{1!}J\to I$ bounded-below injective on the upper-right scheme. Direct image preserves
-injectives by [lem-weil-pbc-direct-image-preserves-injectives], so $r_{1,*}J$ and $p_{1,*}I$ are
+injectives by [lemma-composition-cancellation], so $r_{1,*}J$ and $p_{1,*}I$ are
 bounded-below injective complexes. Put $E=i_{1!}r_{1,*}J$ and $a=p_{1,*}t\circ\delta_{Q_1}:E\to
 p_{1,*}I$. This is a quasi-isomorphism by step 2. For $Q_2$, every term of $E$ is
 $p_{2,*}$-acyclic by [lem-cbc-open-extended-injective-proper-acyclic], applied to the injective
@@ -1081,7 +1082,7 @@ Step 1 identifies this composite with $\delta_{Q_2Q_1}$ followed by $(p_2p_1)_*t
 [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] is normalized on these injective
 direct images with the identity as the extra resolution. Consequently these are exactly the
 representatives of the displayed vertical equation, with the canonical compositors inserted. Uses:
-lem-weil-pbc-direct-image-preserves-injectives, lem-cbc-open-extended-injective-proper-acyclic,
+lemma-composition-cancellation, lem-cbc-open-extended-injective-proper-acyclic,
 lemma-weil-pbc-leray-acyclicity, lem-weil-pbc-ringed-topoi-derived-pushforward-composition.
 6. For horizontal composition choose bounded-below injective $J$ on the left, $t:k_!J\to I$ in the
 middle, and $v:l_!I\to L$ on the right. By [lem-weil-pbc-extension-by-zero-exact], $w=v\circ
@@ -1104,19 +1105,19 @@ the extension-by-zero comparisons give the pullback comparison for that same com
 Thus the ordinary version of the required base-change diagram commutes. More explicitly, after
 inclusion into $(p_1k_1)_*d^{-1}F=(i_1r_1)_*d^{-1}F$, either path pulls a local section of $F$ to
 the same section on the base-changed test scheme. These are injective inclusions; inverse image
-preserves them by [prop-weil-pbc-inverse-image-modules-exact]. Hence equality in the common
+preserves them by [situation-conventions]. Hence equality in the common
 ordinary direct image is equality in the support subsheaf. The open comparisons here are the
-specific $\beta_i,\beta_k$ of [cor-cbc-derived-extension-zero-base-change], not isomorphisms
-chosen independently of the pullback maps. Their construction is the restriction of the ordinary
-pullback comparison to the support subsheaf. The ordinary-comparison pasting is also the
+specific $\beta_i,\beta_k$ of [proposition-extension-zero-restriction-closed-subscheme--11], not
+isomorphisms chosen independently of the pullback maps. Their construction is the restriction of the
+ordinary pullback comparison to the support subsheaf. The ordinary-comparison pasting is also the
 unit/counit mate equation in clauses (1),(2) of [lem-weil-pbc-mate-pasting] for the module
 inverse-image adjunctions; all constant-ring pullbacks are the identifications of
-[prop-weil-pbc-inverse-image-modules-exact]. Uses: lem-cbc-proper-support-sheaf-composition,
-prop-weil-pbc-inverse-image-modules-exact, cor-cbc-derived-extension-zero-base-change,
+[situation-conventions]. Uses: lem-cbc-proper-support-sheaf-composition,
+situation-conventions, proposition-extension-zero-restriction-closed-subscheme--11,
 lem-weil-pbc-mate-pasting.
 8. Now take $J,t:k_!J\to I$ as in step 2, and choose a bounded-below injective resolution
 $s:d^{-1}J\to J_1$. Exact inverse image and exact extension by zero
-[prop-weil-pbc-inverse-image-modules-exact] [lem-weil-pbc-extension-by-zero-exact] make the
+[situation-conventions] [lem-weil-pbc-extension-by-zero-exact] make the
 diagram start with quasi-isomorphisms $$k_{1!}d^{-1}J\xrightarrow{k_{1!}s}k_{1!}J_1,\qquad
 k_{1!}d^{-1}J\xrightarrow{\beta_k^{-1}}a^{-1}k_!J\xrightarrow{a^{-1}t}a^{-1}I.$$ Choose a
 bounded-below injective resolution $v:k_{1!}J_1\to I_1$. By [lem-weil-pbc-kinjective-hom-derived],
@@ -1128,7 +1129,7 @@ homotopy-commutative resolution diagram, not a claim that $d^{-1}J$ or $a^{-1}I$
 module exchange maps are represented by the ordinary comparisons $b^{-1}p_*I\to p_{1,*}a^{-1}I$
 followed by $p_{1,*}z$, and $c^{-1}r_*J\to r_{1,*}d^{-1}J$ followed by $r_{1,*}s$. To verify this
 computation rather than take it from a definition, use the exact module adjunction of
-[prop-weil-pbc-inverse-image-modules-exact], its termwise adjunction on homotopy categories
+[situation-conventions], its termwise adjunction on homotopy categories
 [lem-weil-pbc-termwise-adjunction-homotopy], and the K-injective Hom bijection. Exactness of
 inverse image shows its additive right adjoint preserves K-injectives: if $H$ is acyclic and $P$
 is K-injective, $\operatorname{Hom}_K(H,p_*P)=\operatorname{Hom}_K(p^{-1}H,P)=0$. Thus the two
@@ -1136,13 +1137,13 @@ homotopy-category Hom sets in this adjunction identify with the corresponding de
 injective target resolutions, with the same counit represented by $\varepsilon_{p,P}$. For a
 source representative $P$ and a target resolution $z:a^{-1}P\to I_1$, the transpose of
 $p_{1,*}z\circ\operatorname{Ex}^0_P$ is the chain map $z\circ a^{-1}\varepsilon_{p,P}\circ\theta$,
-by the defining adjoint formula of [def-weil-pbc-underived-exchange] and the underived adjunction
-triangle identities. That formula is stated for abelian sheaves;
-[prop-weil-pbc-inverse-image-modules-exact] gives exactly those same units and counits on
+by the defining adjoint formula of [definition-underived-base-change-map--1] and the underived
+adjunction triangle identities. That formula is stated for abelian sheaves;
+[situation-conventions] gives exactly those same units and counits on
 constant-ring modules, and its section-restriction maps are linear, so the displayed formula is
 the module formula too. Maps into $I_1$ are computed modulo homotopy by
 [lem-weil-pbc-kinjective-hom-derived], so this is also its derived transpose. This is exactly the
-defining derived mate in [def-weil-pbc-derived-exchange], formed for module adjunctions as
+defining derived mate in [definition-derived-base-change-map], formed for module adjunctions as
 specified in [lem-weil-pbc-exchange-forget-coefficients]. For the left proper map, the chain map
 $r_{1,*}s\circ\operatorname{Ex}^0_{r,J}$ has transpose $s\circ
 d^{-1}\varepsilon_{r,J}\circ\theta_r:r_1^{-1}c^{-1}r_*J\to J_1$. The termwise adjunction and the
@@ -1161,10 +1162,10 @@ respectively. Thus all comparisons used here are of the stated kind for arbitrar
 exchanges stay in the constant-$\Lambda$ module categories; the comparison
 [lem-weil-pbc-exchange-forget-coefficients] identifies their underlying abelian exchanges but is
 not used to infer equality from derived forgetting. Uses:
-prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-extension-by-zero-exact,
-lem-weil-pbc-kinjective-hom-derived, def-weil-pbc-derived-exchange,
+situation-conventions, lem-weil-pbc-extension-by-zero-exact,
+lem-weil-pbc-kinjective-hom-derived, definition-derived-base-change-map,
 lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change,
-lem-weil-pbc-exchange-forget-coefficients, def-weil-pbc-underived-exchange,
+lem-weil-pbc-exchange-forget-coefficients, definition-underived-base-change-map--1,
 lem-weil-pbc-termwise-adjunction-homotopy.
 -/
 theorem properOpenInterchangeCoherence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :

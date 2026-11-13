@@ -21,7 +21,7 @@ import Mathlib.RingTheory.Localization.Free
 
 Source: Stacks Project, Algebra, Tag 00NX, Lemma 10.78.2, (2) ⇒ (3) ⇒ (1) ⇒ (7),
 and Tag 0GWM, Lemma 10.79.3
-(blueprint: lem-weil-pbc-finite-projective-prime-local-free).
+(blueprint: proposition-projective-line-rational-coefficients--1).
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ namespace Module
 
 /-- A finite projective module becomes finite free after inverting an element outside any
 specified prime. Source: Stacks Project, Algebra, Tags 00NX and 0GWM.
-(blueprint: lem-weil-pbc-finite-projective-prime-local-free)
+(blueprint: proposition-projective-line-rational-coefficients--1)
 
 Proof:
 1. A surjection from a finite free module onto `M` splits by projectivity. Its kernel is

@@ -26,7 +26,8 @@ universe u v w
 Algebra, Lemma 07QG (blueprint: lem-weil-pbc-geometrically-regular-over-subfields).
 
 Proof:
-1. By def-weil-pbc-g-ring, fix a finite purely inseparable field extension k'/k. Choose a
+1. By theorem-finite-etale-covers-proper-henselian--2, fix a finite purely inseparable field
+extension k'/k. Choose a
    finite k-basis of k', giving a surjection from a polynomial algebra to k'. The field k
    is Noetherian (def-weil-pbc-noetherian-ring), and the polynomial algebra is Noetherian
    by lem-weil-pbc-finite-type-algebra-noetherian. Its kernel is finitely generated, so k'
@@ -38,12 +39,13 @@ Proof:
    lem-weil-pbc-polynomial-scalar-extension, and lem-weil-pbc-tensor-quotient-base-change
    identify k tensor over K i with k_i' with k' as k-algebras. In Stacks' printed identity
    the left side k_i is a misprint for k'.
-4. By lem-weil-pbc-finite-purely-inseparable-scalar-descent, k_i' is a field and is finite
+4. By theorem-finite-etale-covers-proper-henselian--2, k_i' is a field and is finite
    purely inseparable over K i (def-weil-pbc-finite-purely-inseparable-extension).
 5. By lem-weil-pbc-tensor-cancel-base-change and symmetry of tensor products, the rings
    k' tensor over k with A and k_i' tensor over K i with A are isomorphic. The latter is
-   regular by hgeom and def-weil-pbc-g-ring. Regularity is preserved by ring isomorphisms.
-   Since k'/k was arbitrary and A is Noetherian, A is geometrically regular over k.
+   regular by hgeom and theorem-finite-etale-covers-proper-henselian--2. Regularity is preserved by
+   ring isomorphisms. Since k'/k was arbitrary and A is Noetherian, A is geometrically regular over
+   k.
 -/
 theorem geometricallyRegular_of_directed_subfields
     (k : Type u) [Field k]

@@ -41,7 +41,7 @@ Proof (Stacks 05YU):
 4. The source is quasi-compact and its surjective continuous image is quasi-compact;
    the separated target is quasi-separated (`lem-weil-pbc-qcqs-over-affine`,
    `lem-weil-pbc-closed-immersion-integral-separated-uc`,
-   `lem-weil-pbc-affine-morphism-permanence`, `def-weil-pbc-scheme-conventions`).
+   `lem-weil-pbc-affine-morphism-permanence`, `definition-ind-etale-pro-etale-weakly--3`).
 5. Approximate the integral morphism over this qcqs target by finite, finitely presented
    morphisms with affine transitions (`lem-weil-pbc-integral-morphism-limit-of-finite`,
    Stacks 09YZ, `def-weil-finite-integral-morphism`).

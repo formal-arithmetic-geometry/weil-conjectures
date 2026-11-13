@@ -97,7 +97,7 @@ comparison of `lem-sf-native-weil-basic-comparisons` to obtain J2 isomorphic to 
 3. Whisker by Rr2_* and use the inverse composite-direct-image comparison of the same
 basic-comparisons node. The equation v r2 = r1 identifies the last functor with F_c1.
 Each arrow and its inverse is native and natural.
-4. `prop-nagata-compactification-category` supplies a common proper refinement d of any
+4. `remark-base-change-compactification--1` supplies a common proper refinement d of any
 two models. Composing F_c2 -> F_d with the inverse F_c1 -> F_d gives the comparison.
 The chosen model is admissible too: its proper leg is separated and h is quasi-compact,
 so its open leg is quasi-compact by `lemma-nagata-open-immersion-qc-over-separated-target`.

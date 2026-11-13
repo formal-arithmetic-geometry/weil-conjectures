@@ -275,7 +275,7 @@ private theorem identity_tensor_unit {X : Scheme.{u}}
   · exact (derivedUnit_complex R Q hq).symm
 
 /-- Identity scalar balancing preserves the multiplication unit.
-Source: current blueprint lem-coef-integral-finite-extension, final paragraph;
+Source: current blueprint proposition-six-operations-change-coefficients, final paragraph;
 the flat-representative normalization of scalarTensor.
 (blueprint: lem-sf-integral-scalar-tensor-identity)
 

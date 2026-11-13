@@ -102,13 +102,14 @@ theorem IsPureOfWeight.of_surjective (hsurj : Function.Surjective g) {ι : K →
   fun α hα ↦ h α (hasEigenvalue_of_surjective g hg hsurj hα)
 
 /-- A Frobenius-stable subspace of a Frobenius module of weights at most `w` has weights at most
-`w` (blueprint: `lem-a1-mixed-direct-summand`, the Frobenius module analogue). -/
+`w` (blueprint: `proposition-weights-under-usual-operations--2`, the Frobenius module analogue). -/
 theorem HasWeightsAtMost.of_injective (hinj : Function.Injective g) {ι : K →+* ℂ} {q : ℕ}
     {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=
   fun α hα ↦ h α (hasEigenvalue_of_injective g hg hinj hα)
 
 /-- A Frobenius-equivariant quotient of a Frobenius module of weights at most `w` has weights at
-most `w` (blueprint: `lem-a1-mixed-direct-summand`, the Frobenius module analogue). -/
+most `w` (blueprint: `proposition-weights-under-usual-operations--2`, the Frobenius module
+analogue). -/
 theorem HasWeightsAtMost.of_surjective (hsurj : Function.Surjective g) {ι : K →+* ℂ} {q : ℕ}
     {w : ℝ} (h : M.HasWeightsAtMost ι q w) : N.HasWeightsAtMost ι q w :=
   fun α hα ↦ h α (hasEigenvalue_of_surjective g hg hsurj hα)
@@ -148,8 +149,8 @@ theorem hasEigenvalue_or_of_exact (hinj : Function.Injective g)
     rw [← hh, hFy, map_smul]
 
 /-- The middle term of a Frobenius-equivariant exact sequence `M ↪ N ⟶ P` whose outer terms have
-weights at most `w` has weights at most `w` (blueprint: `lem-a1-mixed-direct-summand`, the
-Frobenius module analogue). -/
+weights at most `w` has weights at most `w` (blueprint:
+`proposition-weights-under-usual-operations--2`, the Frobenius module analogue). -/
 theorem HasWeightsAtMost.of_exact (hinj : Function.Injective g)
     (hex : LinearMap.range g = LinearMap.ker h) {ι : K →+* ℂ} {q : ℕ} {w : ℝ}
     (hM : M.HasWeightsAtMost ι q w) (hP : P.HasWeightsAtMost ι q w) :

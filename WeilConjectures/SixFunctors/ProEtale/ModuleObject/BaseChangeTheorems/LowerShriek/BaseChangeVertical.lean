@@ -18,7 +18,7 @@ bounded constructible `ℚ̄_ℓ`-sheaves is the horizontal composite of those o
 through the composition isomorphisms `R(v₂ ≫ w₂)_! ≅ Rv₂_! ⋙ Rw₂_!` and
 `R(v₁ ≫ w₁)_! ≅ Rv₁_! ⋙ Rw₁_!`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert'`,
-blueprint `fix-lem-exchanges`, item (2)).
+blueprint `proposition-composition-base-change-rf-shriek`, item (2)).
 
 The proof computes all the compact-support base changes through the triangle of compactifications
 `T₂` defining the composition isomorphism of `(v₂, w₂)` and its base change `T₁'` along the two

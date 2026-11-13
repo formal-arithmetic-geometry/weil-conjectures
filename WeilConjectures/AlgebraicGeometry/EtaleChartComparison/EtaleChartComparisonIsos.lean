@@ -69,7 +69,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 /-! # Canonical scalar and chart comparisons between etale and pro-etale sites
 
 Source: Stacks Project, proetale.tex, Tag 0GLZ; sites-cohomology.tex,
-Tags 06YY, 0D6D and 07A4; the Charts paragraph of det-sp-reduction-exceptional
+Tags 06YY, 0D6D and 07A4; the Charts paragraph of lemma-sp-reduction--2
 (blueprint: lem-sp-etale-chart-comparison-isos).
 
 The inverse images below are the ordinary derived inverse images. Tensor and

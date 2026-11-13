@@ -33,7 +33,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The underlying abelian sheaf of an injective module-valued étale sheaf is acyclic
 for global sections. Its underlying abelian sheaf need not be injective.
 Source: Stacks Project, Tag 03FD, second paragraph, via Tags 03FC and 03F9.
-(blueprint: lem-weil-pbc-etale-module-injective-forget-acyclic).
+(blueprint: lemma-cohomology-modules-underlying-abelian--1).
 
 Proof:
 1. Identify sheaves valued in `ModuleCat Λ` with modules over the constant ring sheaf.

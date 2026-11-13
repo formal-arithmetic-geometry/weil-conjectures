@@ -34,13 +34,13 @@ at a sheaf `F` with the degree-`q` base change maps
 
 ## Main declarations
 
-- `AlgebraicGeometry.Etale.unboundedExchange` (`def-kun-unbounded-exchange`).
+- `AlgebraicGeometry.Etale.unboundedExchange` (`definition-derived-base-change-map`).
 - `AlgebraicGeometry.Etale.unboundedExchange_naturality` (`lem-kun-unbounded-exchange-natural`).
 - `AlgebraicGeometry.Etale.ι_map_baseChange_app` (`lem-kun-unbounded-exchange-agrees`), with the
   arrow isomorphism `AlgebraicGeometry.Etale.baseChangeArrowIsoUnboundedExchange` and the degree
   zero statement `AlgebraicGeometry.Etale.nonempty_arrowIso_homology_zero_unboundedExchange`.
 - `AlgebraicGeometry.Etale.homologyArrowIsoBaseChangeHomologyMap`
-  (`lem-kun-bc-map-on-cohomology`).
+  (`corollary-open-direct-image-over-field--2`).
 -/
 
 @[expose] public section
@@ -61,7 +61,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `def-kun-unbounded-exchange`: the unbounded derived exchange morphism.
+/-- Blueprint `definition-derived-base-change-map`: the unbounded derived exchange morphism.
 
 For a commutative (in practice cartesian) square `g' ≫ f = f' ≫ g` and `K` in `D(X_ét)`, the
 exchange morphism `Ex_K : Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is the mate, under the derived
@@ -149,8 +149,8 @@ variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y
 
 open _root_.DerivedCategory
 
-/-- Blueprint `lem-kun-bc-map-on-cohomology`: the cohomology of the derived base change map.
-For a cartesian square
+/-- Blueprint `corollary-open-direct-image-over-field--2`: the cohomology of the derived base change
+map. For a cartesian square
 
 ```
 Y --e--> T

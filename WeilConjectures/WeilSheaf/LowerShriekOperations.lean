@@ -11,7 +11,7 @@ import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 /-!
 # Composition and base change for the compact-support direct image of Weil complexes
 
-Two of the compatibilities of blueprint `prop-weil-operations` ("composition, base change,
+Two of the compatibilities of blueprint `sec-Weil-complexes` ("composition, base change,
 projection, purity and duality isomorphisms are morphisms of Weil complexes"), for the direct
 image with compact support `Rf₀!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`). They belong to another blueprint
@@ -39,7 +39,7 @@ namespace AlgebraicGeometry.WeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the composition
+/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes (the composition
 isomorphism). For separated quasi-compact morphisms `f : X ⟶ Y`, `g : Y ⟶ Z` locally of finite
 type of `k₀`-schemes of finite type, `R(g ∘ f)₀! ≅ Rg₀! ∘ Rf₀!` as functors of Weil
 complexes. -/
@@ -60,7 +60,7 @@ theorem nonempty_iso_derivedLowerShriek_comp {X Y Z : Scheme.{u}}
       derivedLowerShriek k₀ l f ⋙ derivedLowerShriek k₀ l g) :=
   nonempty_derivedLowerShriek_comp_iso f g
 
-/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the base change
+/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes (the base change
 isomorphism; compactly supported base change for the underlying complexes). For a cartesian
 square of `k₀`-schemes
 

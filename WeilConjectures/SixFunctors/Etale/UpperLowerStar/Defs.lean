@@ -107,7 +107,7 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` is continuous for the small étale
 topologies. This is the `P = Q = @Etale` case of
 `AlgebraicGeometry.Scheme.isContinuous_overPullback`.
-(blueprint: `lem-weil-pbc-etale-base-change-continuous`) -/
+(blueprint: `situation-conventions`) -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
@@ -160,7 +160,7 @@ namespace Etale
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. The continuity of the
 base change functor is `Etale.isContinuous_overPullback`
-(blueprint: `def-weil-pbc-direct-image`, `lem-weil-pbc-etale-base-change-continuous`) -/
+(blueprint: `def-weil-pbc-direct-image`, `situation-conventions`) -/
 noncomputable def lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
   (MorphismProperty.Over.pullback @Etale ⊤ g).sheafPushforwardContinuous A
@@ -250,8 +250,8 @@ scoped notation "(" g ")^*[" A "]" =>
 end Etale
 
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites
-(blueprint: `def-weil-pbc-inverse-image`, `prop-weil-pbc-inverse-image-modules-exact`,
-`lem-weil-pbc-inverse-image-module-adjunction`) -/
+(blueprint: `def-weil-pbc-inverse-image`, `situation-conventions`,
+`situation-conventions`) -/
 noncomputable def Etale.upperStarLowerStarAdjunction : (g)^*[A] ⊣ (g)_*[A] :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) A
@@ -292,7 +292,7 @@ instance Etale.linear_upperStar (Λ : Type*) [Semiring Λ] [Linear Λ A] : (g)^*
 
 /-- The pullback `g^*` on étale sheaves preserves homology, being exact: it preserves
 finite limits by `Etale.preservesFiniteLimits_upperStar` and all colimits of size `0`,
-being a left adjoint. (blueprint: `prop-weil-pbc-inverse-image-modules-exact`) -/
+being a left adjoint. (blueprint: `situation-conventions`) -/
 instance Etale.preservesHomology_upperStar : (g)^*[A].PreservesHomology := by
   have : PreservesColimitsOfSize.{0, 0} (g)^*[A] :=
     (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits

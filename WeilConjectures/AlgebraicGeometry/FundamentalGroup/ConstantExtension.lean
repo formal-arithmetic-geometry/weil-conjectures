@@ -20,7 +20,7 @@ the projection `π : X₀' ⟶ X₀` and a path `τ` induce an injective map
 
 This file shows that `ρ` identifies the Weil group of `X₀'` over `L` with the elements of degree
 divisible by `m` of the Weil group of `X₀` over `K`, the degree being divided by `m`
-(blueprint `lem-wf-weil-group-constant-extension`):
+(blueprint `lemma-geometric-constituents-after-constant-extension`):
 
 * `(g, n) ∈ W(X₀', s')` if and only if `(ρ g, m n) ∈ W(X₀, s)`
   (`AlgebraicGeometry.Scheme.FiniteEtale.mem_weilGroup_constantExtension_iff`);
@@ -376,8 +376,8 @@ lemma fundamentalGroupMap_smul_constantExtensionFiberMap {A : FiniteEtaleAlgebra
     exact ConcreteCategory.congr_hom ((pullbackFiberIso _ s').hom_inv_id_app _) _
   rw [key, key, fundamentalGroupMap_smul, IsNaturalSMul.naturality]
 
-/-- Blueprint `lem-wf-weil-group-constant-extension`: Weil group after a finite constant-field
-extension.
+/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+constant-field extension.
 
 The map `ρ : π₁(X₀', s') → π₁(X₀, s)` induced by the projection `π : X₀ ×_K Spec L ⟶ X₀` carries
 the Weil group of `X₀'` over `L` into that of `X₀` over `K`, multiplying the degree by
@@ -419,8 +419,8 @@ lemma smul_diagonalPoint (g : G') : g • diagonalPoint p s' = diagonalPoint p s
   smul_eq_self_of_section s' G' _ (pullback.lift (𝟙 _) (𝟙 _) rfl) (pullback.lift_snd _ _ _) _ rfl g
 
 omit [Finite L] in
-/-- Blueprint `lem-wf-weil-group-constant-extension`: Weil group after a finite constant-field
-extension.
+/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+constant-field extension.
 
 The image under `ρ` of an element of `π₁(X₀', s')` has degree divisible by `m = [L : K]`: it
 fixes the image of the diagonal point of `π^* (X₀ ×_K Spec L)`, on which the geometric Frobenius
@@ -446,8 +446,8 @@ variable [Finite K] [Finite L] [GeometricallyConnected p] [ConnectedSpace X₀]
   [∀ P, MulAction G' ((fiber s').obj P)] [IsFundamentalGroup (fiber s') G']
 
 omit [Finite L] in
-/-- Blueprint `lem-wf-weil-group-constant-extension`: Weil group after a finite constant-field
-extension.
+/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+constant-field extension.
 
 An element of the Weil group of `X₀` whose degree is divisible by `m = [L : K]` lies in the image
 of `ρ : π₁(X₀', s') → π₁(X₀, s)`. The image of `ρ` is closed, and a point `u` of a geometric fibre
@@ -572,9 +572,9 @@ theorem not_isOfFinOrder_geometricFrobenius : ¬IsOfFinOrder (geometricFrobenius
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [ConnectedSpace X₀] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- Blueprint `rem-ptr-wf-weil-group-1`: Pointer to the properties of `def-wf-weil-group`.
+/-- Blueprint `situation-weil`: Pointer to the properties of `situation-weil`.
 
-The exact sequence of `lem-wf-weil-group-exact-sequence` for the Weil group of a connected,
+The exact sequence of `situation-weil` for the Weil group of a connected,
 geometrically connected scheme over a finite field: the degree map is surjective, the elements of
 degree zero are those of `π₁(X₀, s)` acting trivially on the constant covers, and every lift of
 the geometric Frobenius has degree one. -/

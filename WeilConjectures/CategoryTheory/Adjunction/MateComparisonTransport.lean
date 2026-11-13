@@ -15,8 +15,8 @@ left adjoints, a natural transformation compatible with the comparisons has a ma
 compatible with the comparisons, the right adjoints being compared by the mates of the
 left-adjoint comparisons.
 
-Source: Weil conjectures blueprint, node thm-cbc-complete-proetale, proof step 8
-(blueprint: thm-cbc-complete-proetale).
+Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
+step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public section

@@ -331,7 +331,7 @@ open fibres are pro-etale objects by weakly-etale localization and form a cover.
 coefficient sheaf to G with ring maps from Lambda to G(T). Ring operations and
 restriction are checked on simultaneous fibre covers. (4) The same argument identifies
 the coefficient sheaf uniquely with the constant-presheaf sheafification. These are
-`def-weil-pbc-proetale-site`, `def-weil-pbc-proetale-modules`,
+`definition-small-pro-etale-site--1`,
 `lem-weil-proetale-weakly-etale-localization`, `def-weil-pbc-sheafification` and
 `def-weil-pbc-constant-sheaf`.
 (5) Apply the ring-sheaf adjunction of `def-weil-proetale-inverse-image` and evaluate

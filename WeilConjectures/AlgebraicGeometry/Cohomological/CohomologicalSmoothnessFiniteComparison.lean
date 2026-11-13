@@ -21,7 +21,8 @@ import Mathlib.Algebra.CharP.Algebra
 # Cohomological smoothness in finite-coefficient comparison coordinates
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-def-purity-conv,
-def-pur-co-smoothness, clauses 1--3 (blueprint: def-pur-co-smoothness).
+proposition-exceptional-inverse-image-smooth-morphism, clauses 1--3 (blueprint:
+proposition-exceptional-inverse-image-smooth-morphism).
 
 This is the constructible pro-etale definition in etale-origin coordinates. The dualizing
 object is comparison pullback of the etale dualizing object. Tensor and base-change maps
@@ -43,7 +44,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- Finiteness of the actual coefficient quotient, including its size lift.
-Source: blueprint finite purity conventions (blueprint: def-pur-co-smoothness). -/
+Source: blueprint finite purity conventions (blueprint:
+proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable instance finiteComparedCoefficientFinite (P : PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   letI : Finite P.Ring :=
@@ -51,8 +53,8 @@ noncomputable instance finiteComparedCoefficientFinite (P : PurityFiniteSetting.
   inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
 /-- The existing Nagata compactification in the finite-type field setting.
-Source: blueprint def-pur-co-smoothness, separated finite-type setting
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, separated finite-type
+setting (blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def finiteComparedCompactification (P : PurityFiniteSetting.{u})
     {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f]
@@ -68,7 +70,7 @@ noncomputable def finiteComparedCompactification (P : PurityFiniteSetting.{u})
 scheme over the fixed field; no divisibility of the level by the ramification index is needed.
 Source: main-20261015, sk-def-purity-conv/def-pur-co-smoothness, finite coefficients
 and the clause that ell is invertible on the schemes in sight
-(blueprint: def-pur-co-smoothness).
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism).
 Proof: write ell for the coefficient prime and n for the positive level. In the DVR O_E,
 ell lies in the maximal ideal (varpi_E): its spectral absolute value restricts to the
 ell-adic one, in which ell has norm less than one. Consequently ell^n lies in (varpi_E)^n,

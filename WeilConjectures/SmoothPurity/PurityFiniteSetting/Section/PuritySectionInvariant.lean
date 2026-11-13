@@ -39,7 +39,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomCompari
 /-! # The pro-etale section invariant
 
 Source: blueprint sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md
-(blueprint: def-pur-section-invariant).
+(blueprint: lemma-section-normal-bundle--1).
 
 Its data are the actual derived inverse image of the relative dualizing object.
 No orientation or Tate identification is chosen. The finite coefficient stage is
@@ -63,8 +63,8 @@ The definition makes sense for any map s; its geometric and invertibility
 properties below apply to closed sections of smooth separated finite-type maps.
 It is the general pro-étale section invariant at the coefficient ring `O_E/ϖ^n`; the structure
 morphism `aB` is kept for the finite-type interface of `P.dualizing`.
-Source: blueprint def-pur-section-invariant, displayed definition
-(blueprint: def-pur-section-invariant). -/
+Source: blueprint lemma-section-normal-bundle--1, displayed definition
+(blueprint: lemma-section-normal-bundle--1). -/
 noncomputable def sectionInvariant (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}}
     (g : V ⟶ B) [HasCompactification g] (aB : B ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) :=

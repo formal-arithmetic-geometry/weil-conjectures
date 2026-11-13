@@ -11,7 +11,7 @@ import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 /-! # Transposition under the integral pullback Hom comparison
 
 Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-prop-pod-dual-tate-data-compatibility, Steps 8--11
+theorem-poincare-duality-frobenius--2, Steps 8--11
 (blueprint: stage3-derived-automorphism-continuation-a-integral-transpose).
 
 The transpose field of `podIntegralHomComparison_laws`, proved from parameter

@@ -17,7 +17,7 @@ chosen point `Q_z` over `z`, by an element `σ ∈ Gal(Ω / k(C))` lying in the 
 compatible with the geometric point `x̄`, and hence gives a strictly henselian neighbourhood of
 the boundary point for the conjugated inertia group and residue Frobenius lift
 (`AlgebraicGeometry.WeilGroup.exists_boundaryNeighbourhood_conj`, blueprint
-`lem-wf-boundary-stalk-invariants`).
+`lemma-boundary-stalk--1`).
 
 * The constant field of `k(C)` is `k₀`: for a finite extension `F / k₀`, the ring
   `Γ(C₀, W) ⊗_{k₀} F` is a domain, `C₀ ×_{k₀} F` being connected and regular
@@ -394,7 +394,7 @@ private lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 �
 
 omit [IsCurve (U ↘ Spec (.of K))] in
 /-- **Strictly henselian neighbourhoods of boundary points exist** (blueprint
-`lem-wf-boundary-stalk-invariants`). For a boundary point `z` with closed point `x`, there is
+`lemma-boundary-stalk--1`). For a boundary point `z` with closed point `x`, there is
 `σ ∈ Gal(Ω / k(C))` whose image in `π₁(U₀)` lies in the Weil group (with some degree `n`) such that
 the conjugate `σ • Q_z` of the chosen point `Q_z` over `z` gives a strictly henselian
 neighbourhood of the boundary point, for its inertia group `σ I_z σ⁻¹` and the conjugate

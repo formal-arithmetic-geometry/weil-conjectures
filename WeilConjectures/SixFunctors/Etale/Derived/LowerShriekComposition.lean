@@ -21,7 +21,7 @@ constructs, for torsion coefficients, the composition isomorphism
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
 
 of the compactly supported direct images on the unbounded derived categories of étale sheaves
-(blueprint `sk-thm-sf-comp-composition`, `thm-sf-comp-composition`).
+(blueprint `proposition-composition-base-change-rf-shriek--1`).
 
 Following the blueprint, compactify `g` as `Y ⟶[v] Ȳ ⟶[ḡ] S` and `f ≫ v` as
 `X ⟶[a] X̄ ⟶[p] Ȳ`. Then `V = X̄ ×_Ȳ Y` with its open immersion `b : V ⟶ X̄` and proper
@@ -272,7 +272,8 @@ Rf_!(e.restrict) ⋙ Rg_!(d) = Dc_! ⋙ Rp_Y* ⋙ Dv_! ⋙ Rḡ_*
 built from the exchange isomorphism `v_! Rp_Y* ≅ Rp_* b_!` of the cartesian square
 `AlgebraicGeometry.Compactification.isPullback_restrict` (an isomorphism by proper base
 change), the composition of extensions by zero along `a = c ≫ b`, and the composition of
-derived pushforwards. (blueprint: the construction in `sk-thm-sf-comp-composition`) -/
+derived pushforwards. (blueprint: the construction in
+`proposition-composition-base-change-rf-shriek--1`) -/
 noncomputable def rightDerivedLowerShriekOfCompactificationCompIso (d : Compactification g)
     (e : Compactification (f ≫ d.i)) :
     Rf_!(e.restrict)[ModuleCat.{u + 1} Λ] ⋙ Rf_!(d)[ModuleCat.{u + 1} Λ] ≅
@@ -294,11 +295,11 @@ noncomputable def rightDerivedLowerShriekOfCompactificationCompIso (d : Compacti
         mapDerivedCategoryOpenImmersionLowerShriekCongr _ e.restrict_i_fst)
       R((e.g ≫ d.g)_*[ModuleCat.{u + 1} Λ])
 
-/-- Blueprint `sk-thm-sf-comp-composition` (detailed: `thm-sf-comp-composition`): **the
-composition law for `Rf_!`**. For composable `f : X ⟶ Y` and `g : Y ⟶ T` admitting
-compactifications and torsion coefficients, there is an isomorphism
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the unbounded derived categories of étale
-sheaves, each side computed with the chosen compactifications. No quasi-compactness is needed.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1` (detailed:
+`proposition-composition-base-change-rf-shriek--1`): **the composition law for `Rf_!`**. For
+composable `f : X ⟶ Y` and `g : Y ⟶ T` admitting compactifications and torsion coefficients, there
+is an isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the unbounded derived categories of
+étale sheaves, each side computed with the chosen compactifications. No quasi-compactness is needed.
 
 With `X ⟶[k] V ⟶[r] T` and `Y ⟶[j] W ⟶[q] T` the compactifications of `f ≫ g` and `g`, the
 scheme `P = V ×_T W` is proper over `T` and over `W`, and `X` sits in it as a closed subscheme
@@ -389,17 +390,18 @@ noncomputable abbrev rightDerivedLowerShriekPlusId (X : Scheme.{u}) [HasCompacti
     R(𝟙 X)_![ModuleCat.{u + 1} Λ]+ ≅ 𝟭 _ :=
   (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekId X
 
-/-- Blueprint `sk-thm-sf-comp-composition` (detailed: `thm-sf-comp-composition`): **the canonical
-composition isomorphism** `α_{g,f} : Rg_! Rf_! ≅ R(g ∘ f)_!` of functors `D⁺(X_ét, Λ) ⥤ D⁺(S_ét, Λ)`
-for torsion coefficients, for composable `f`, `g` admitting compactifications with `f ≫ g`
-quasi-compact. It is the composition isomorphism `CompactSupportFormalism.compIso` of the
-triangle of compactifications `Compactification.Triangle.ofHasCompactification f g`: compactify
-`g` as `Y ⟶[v] Ȳ ⟶[ḡ] S` and `f ≫ v` as `X ⟶[a] X̄ ⟶[p] Ȳ`; with `V = X̄ ×_Ȳ Y`, the exchange
-isomorphism `v_! Rp_{Y*} ≅ Rp_* b_!` (proper base change) gives
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1` (detailed:
+`proposition-composition-base-change-rf-shriek--1`): **the canonical composition isomorphism**
+`α_{g,f} : Rg_! Rf_! ≅ R(g ∘ f)_!` of functors `D⁺(X_ét, Λ) ⥤ D⁺(S_ét, Λ)` for torsion coefficients,
+for composable `f`, `g` admitting compactifications with `f ≫ g` quasi-compact. It is the
+composition isomorphism `CompactSupportFormalism.compIso` of the triangle of compactifications
+`Compactification.Triangle.ofHasCompactification f g`: compactify `g` as `Y ⟶[v] Ȳ ⟶[ḡ] S` and
+`f ≫ v` as `X ⟶[a] X̄ ⟶[p] Ȳ`; with `V = X̄ ×_Ȳ Y`, the exchange isomorphism
+`v_! Rp_{Y*} ≅ Rp_* b_!` (proper base change) gives
 `Rf_! ⋙ Rg_! = c_! Rp_{Y*} v_! Rḡ_* ≅ a_! R(p ≫ ḡ)_* = R(f ≫ g)_!`, compared with the chosen
 compactifications of `f` and `f ≫ g`. Together with the coherent comparison isomorphisms
 `CompactSupportFormalism.shriekIso` of `derivedPlusFormalism`, this is blueprint
-`lem-amb-etale-compact-comparisons`. -/
+`proposition-construction-independence-rf-shriek--7`. -/
 noncomputable def rightDerivedLowerShriekPlusCompIso (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] :
@@ -407,10 +409,10 @@ noncomputable def rightDerivedLowerShriekPlusCompIso (f : X ⟶ Y) (g : Y ⟶ S)
       R(f ≫ g)_![ModuleCat.{u + 1} Λ]+ :=
   (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso f g
 
-/-- Blueprint `sk-thm-sf-comp-composition`: **independence of all compactification choices**. The
-composition isomorphism is computed by any triangle of compactifications `T` of `(f, g)`
-(compactifications of `f`, `g`, `f ≫ g` linked by a cartesian square): it is the composition
-isomorphism of `T`, conjugated by the comparison isomorphisms
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: **independence of all
+compactification choices**. The composition isomorphism is computed by any triangle of
+compactifications `T` of `(f, g)` (compactifications of `f`, `g`, `f ≫ g` linked by a cartesian
+square): it is the composition isomorphism of `T`, conjugated by the comparison isomorphisms
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso` between the
 compactifications of `T` and the chosen ones. -/
 theorem rightDerivedLowerShriekPlusCompIso_hom_eq {f : X ⟶ Y} {g : Y ⟶ S}
@@ -429,8 +431,8 @@ theorem rightDerivedLowerShriekPlusCompIso_hom_eq {f : X ⟶ Y} {g : Y ⟶ S}
   simp only [derivedPlusFormalism_shriekIso] at h
   exact h
 
-/-- Blueprint `sk-thm-sf-comp-composition`: **the composition isomorphism is the identity when
-`f` is an identity**. -/
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: **the composition isomorphism is
+the identity when `f` is an identity**. -/
 theorem rightDerivedLowerShriekPlusCompIso_id_left (f : X ⟶ Y) [HasCompactification f]
     [HasCompactification (𝟙 X)] [HasCompactification (𝟙 X ≫ f)] [QuasiCompact f] :
     (rightDerivedLowerShriekPlusCompIso Λ (𝟙 X) f).hom =
@@ -439,8 +441,8 @@ theorem rightDerivedLowerShriekPlusCompIso_id_left (f : X ⟶ Y) [HasCompactific
           (rightDerivedLowerShriekPlusCongr Λ (Category.id_comp f).symm).hom :=
   (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_id_left f
 
-/-- Blueprint `sk-thm-sf-comp-composition`: **the composition isomorphism is the identity when
-`g` is an identity**. -/
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: **the composition isomorphism is
+the identity when `g` is an identity**. -/
 theorem rightDerivedLowerShriekPlusCompIso_id_right (f : X ⟶ Y) [HasCompactification f]
     [HasCompactification (𝟙 Y)] [HasCompactification (f ≫ 𝟙 Y)] [QuasiCompact f] :
     (rightDerivedLowerShriekPlusCompIso Λ f (𝟙 Y)).hom =
@@ -449,8 +451,9 @@ theorem rightDerivedLowerShriekPlusCompIso_id_right (f : X ⟶ Y) [HasCompactifi
           (rightDerivedLowerShriekPlusCongr Λ (Category.comp_id f).symm).hom :=
   (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_id_right f
 
-/-- Blueprint `sk-thm-sf-comp-composition`: **associativity of the composition isomorphism**: for
-a third morphism `h : S ⟶ T`, the two composites `Rh_! Rg_! Rf_! ≅ R(f ≫ g ≫ h)_!` agree. -/
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: **associativity of the composition
+isomorphism**: for a third morphism `h : S ⟶ T`, the two composites
+`Rh_! Rg_! Rf_! ≅ R(f ≫ g ≫ h)_!` agree. -/
 theorem rightDerivedLowerShriekPlusCompIso_assoc (f : X ⟶ Y) (g : Y ⟶ S) (h : S ⟶ T)
     [HasCompactification f] [HasCompactification g] [HasCompactification h]
     [HasCompactification (f ≫ g)] [HasCompactification (g ≫ h)]

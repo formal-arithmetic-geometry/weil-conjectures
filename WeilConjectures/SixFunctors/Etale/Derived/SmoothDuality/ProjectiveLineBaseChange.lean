@@ -12,15 +12,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
 /-!
 # Base change for the affine line from the projective line
 
-The elementary case (a) of the proof of blueprint `prop-asd-smooth-base-change` concerns the
-projection `p : 𝔸¹_S ⟶ S`. It factors as the standard chart `j : 𝔸¹_S ⟶ ℙ¹_S`, an open
-immersion, followed by the proper projection `q : ℙ¹_S ⟶ S`. Base change holds for `Rj^!`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`)
-and base change maps compose
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_comp`), so base change
-for the affine line follows from base change for the projective line: this is the reduction of
-the blueprint to the projective-line adjunction `Rq_* ⊣ q^*(1)[2]` (`thm-amb-p1-adjunction`)
-whose unit and counit commute with base change (`det-sp-p1-adjunction`).
+The elementary case (a) of the proof of blueprint
+`proposition-exceptional-inverse-image-smooth-morphism--6` concerns the projection `p : 𝔸¹_S ⟶ S`.
+It factors as the standard chart `j : 𝔸¹_S ⟶ ℙ¹_S`, an open immersion, followed by the proper
+projection `q : ℙ¹_S ⟶ S`. Base change holds for `Rj^!`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`) and
+base change maps compose
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_comp`), so base change for
+the affine line follows from base change for the projective line: this is the reduction of the
+blueprint to the projective-line adjunction `Rq_* ⊣ q^*(1)[2]`
+(`proposition-adjunction-projective-line--1`) whose unit and counit commute with base change
+(`proposition-adjunction-projective-line`).
 
 ## Main definitions
 
@@ -52,9 +54,9 @@ variable (Λ) in
 exponent of `Λ` is invertible and every cartesian square of the projection
 `q : ℙ¹_S ⟶ S` (here `ℙ¹_S = ℙ(Option (Fin 1); S)`, the target of the standard chart of `𝔸¹_S`)
 with quasi-compact base change admitting a compactification, the canonical base change map
-`Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an isomorphism. By the blueprint (`det-sp-p1-adjunction`),
-`Rq^! = q^*(1)[2]` with counit built from the projective-line trace, and unit and counit commute
-with base change. -/
+`Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an isomorphism. By the blueprint
+(`proposition-adjunction-projective-line`), `Rq^! = q^*(1)[2]` with counit built from the
+projective-line trace, and unit and counit commute with base change. -/
 def ProjectiveLineBaseChange : Prop :=
   ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
@@ -89,8 +91,8 @@ variable [HasTateTwist Λ]
 
 variable (Λ) in
 /-- *The projective-line adjunction commutes with base change* (the form in which blueprint
-`det-sp-p1-adjunction` is used): for every scheme `S` on which the exponent of `Λ` is
-invertible and every `g : S' ⟶ S`, with the cartesian square
+`proposition-adjunction-projective-line` is used): for every scheme `S` on which the exponent of `Λ`
+is invertible and every `g : S' ⟶ S`, with the cartesian square
 
 ```
   ℙ¹_{S'} --g'--> ℙ¹_S
@@ -108,9 +110,10 @@ compact-support base change `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` and the canonical
 `Ex_! ≫ Rq'_!(Lg'^* Lq^* K(1)[2] ≅ Lq'^* Lg^* K(1)[2]) ≫ ε'_{Lg^* K} = Lg^* ε_K`.
 
 In the blueprint, `Rq_! = Rq_*` (`q` is proper), and the counit is
-`ε_K : Rq_* q^* K(1)[2] ≅ K ⊗ Rq_* Λ(1)[2] ⟶ K`, from the trace `Tr_q` of `def-amb-p1-trace`; the
-counit commutes with base change since the trace and the projection formula do. Base change for
-an arbitrary cartesian square of `q` follows, since such a square is isomorphic to this one
+`ε_K : Rq_* q^* K(1)[2] ≅ K ⊗ Rq_* Λ(1)[2] ⟶ K`, from the trace `Tr_q` of
+`lemma-cohomology-projective-line-trace`; the counit commutes with base change since the trace and
+the projection formula do. Base change for an arbitrary cartesian square of `q` follows, since such
+a square is isomorphic to this one
 (`AlgebraicGeometry.Etale.projectiveLineBaseChange_of_adjunction`). -/
 def ProjectiveLineAdjunctionBaseChange : Prop :=
   ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' : Scheme.{u}⦄ (g : S' ⟶ S),

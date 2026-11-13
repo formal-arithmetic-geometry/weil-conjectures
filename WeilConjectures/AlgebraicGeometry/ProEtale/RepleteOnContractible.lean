@@ -13,7 +13,8 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 /-!
 # Sequential limits on weakly contractible pro-étale objects
 
-Source: blueprint `det-pe-replete-on-contractible` (sec-proetale-coefficients, sk-prop-pe-replete).
+Source: blueprint `proposition-repleteness-pro-etale-topos` (chap-The-pro-etale-site,
+proposition-repleteness-pro-etale-topos).
 -/
 
 @[expose] public section
@@ -29,15 +30,16 @@ namespace AlgebraicGeometry.Scheme
 /-- Every transition and every limit projection of an epimorphic inverse sequence is
 surjective on sections over a weakly contractible object.
 
-Source: blueprint `det-pe-replete-on-contractible` (sec-proetale-coefficients, sk-prop-pe-replete).
+Source: blueprint `proposition-repleteness-pro-etale-topos` (chap-The-pro-etale-site,
+proposition-repleteness-pro-etale-topos).
 
 The hypothesis `hW` uses the existing weak-contractibility definition, equivalently
-condition 3 of `det-pe-weak-contractible-equivalences`: epimorphisms of sheaves induce
+condition 3 of `lemma-w-contractible-affines-projective--2`: epimorphisms of sheaves induce
 surjections on sections at `W`. Values lie in `Type (max (u + 1) w)`, allowing arbitrary
 larger sets without equating the object and morphism universes of the site.
 
 Proof:
-1. Apply condition 3 of `det-pe-weak-contractible-equivalences` to every adjacent
+1. Apply condition 3 of `lemma-w-contractible-affines-projective--2` to every adjacent
    transition. In terms of `hW`, epimorphisms are locally surjective, and `hW` gives
    surjectivity on `W`-sections.
 2. Fix `m` and a section `a` of `F_m` at `W`. Choose a preimage under each surjective
@@ -48,7 +50,7 @@ Proof:
    transition maps in descending order. Compatibility below `m` holds by definition,
    compatibility from `m` upwards by step 2, and `x_m = a`. For `m = 0` the earlier
    range is empty. These choices concern sets of sections, not sheaf morphisms.
-4. The sectionwise limit formula of `det-pe-replete-definition` identifies this tuple
+4. The sectionwise limit formula of `definition-repleteness--1` identifies this tuple
    with a section of `limit F` at `W`, and `limit.π F (op m)` evaluates it to `x_m = a`.
    As `a` and `m` were arbitrary, every limit projection is surjective on sections.
 -/

@@ -58,7 +58,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Apply the exact inverse images termwise and localize the specified comparison square.
 Source: blueprint, sk-prop-pe-unbounded-classical-direct-image.md; the inverse-image
-comparison is sk-thm-pe-direct-image-comparison
+comparison is theorem-comparison-direct-images
 (auxiliary; not a blueprint node). -/
 noncomputable def unboundedDirectImagePullbackIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (g : X ⟶ Y) :

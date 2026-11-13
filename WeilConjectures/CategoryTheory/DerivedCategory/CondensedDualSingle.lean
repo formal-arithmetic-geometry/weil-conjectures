@@ -29,8 +29,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
 /-- The dual of a dualizable object placed in degree `n` lies in degree `-n`.
-Source: `lem-fin-lisse-field-dual`, the single-degree base case of Step 2 of
-`thm-a1-curve-perverse-heart`
+Source: `lemma-smooth-morphisms-locally-constant-sheaves`, the single-degree base case of Step 2 of
+`lemma-perverse-sheaves-curve`
 (blueprint: lem-per-condensed-dual-single).
 
 Proof: represent the single object by the single cochain complex `Q`. Every term

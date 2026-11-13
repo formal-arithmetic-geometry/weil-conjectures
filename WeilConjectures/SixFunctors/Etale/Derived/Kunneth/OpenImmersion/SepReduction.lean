@@ -24,14 +24,15 @@ h_L          j_L          h_L      h          j_L      j
 W_L --q_L--> X_L          W_L ---> W          X_L ---> X
 ```
 
-By the base change along field extensions (blueprint `lem-kun-0f1c`,
+By the base change along field extensions (blueprint `corollary-open-direct-image-over-field--2`,
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_fieldExtension`) the base change maps of
 the two side faces are isomorphisms, so by the compatibility of base change maps with further
-base change (blueprint `lem-kun-bc-base-change`,
+base change (blueprint `corollary-open-direct-image-over-field--2`,
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_cube_of_surjective`) and the
 conservativity of the pullback along the surjective morphism `W_L ⟶ W` (blueprint
 `lem-kun-sep-closure-conservative`), the base change map of the original square is an isomorphism
-as soon as the one of the base changed square is (blueprint `lem-kun-0f1h-sep-reduction`,
+as soon as the one of the base changed square is (blueprint
+`corollary-open-direct-image-over-field--2`,
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIso_fieldExtension`).
 -/
 
@@ -49,7 +50,8 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-kun-0f1h-sep-reduction`: **reduction to a separably closed ground field.**
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **reduction to a separably closed ground
+field.**
 
 Let `K` be a field, `j : U ⟶ X` a quasi-compact open immersion over `K`, `q₁ : W ⟶ X` and
 `V = U ×_X W` with projections `e : V ⟶ U`, `h : V ⟶ W` (the square `sq`). Let `L / K` be a

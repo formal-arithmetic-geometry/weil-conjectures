@@ -108,7 +108,7 @@ attribute [-instance] RationalP1.internalTensorCommShift RationalP1.internalMono
 section
 
 /-- The recorded positive tensor power, transported back to internal modules.
-Source: blueprint `sk-def-sp-tate-twist`, signed powers
+Source: blueprint `definition-tate-twists`, signed powers
 (blueprint: lem-sfb-rational-affine-tensor-calculus). -/
 def rationalTatePowerFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

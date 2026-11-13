@@ -66,7 +66,7 @@ lemma toDFinsupp_apply (a : P → K) (ha : {x | a x ∉ O x}.Finite) (x : P) :
 variable (hfin : ∀ f : K, {x | f ∉ O x}.Finite)
 
 /-- The principal parts map `K → ⊕_x K / O_x`, `f ↦ (f mod O_x)_x`
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 noncomputable def principalParts : K →ₗ[k] Π₀ x, K ⧸ Subalgebra.toSubmodule (O x) where
   toFun f := toDFinsupp O (fun _ ↦ f) (hfin f)
   map_add' f g := by
@@ -87,7 +87,7 @@ variable (hfin : ∀ f : K, {x | f ∉ O x}.Finite)
 section RestrictedProduct
 
 /-- The restricted product `{(a_x) ∈ ∏_x K : a_x ∈ O_x for almost all x}`, a `K`-module
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 def restrictedProduct : Submodule K (P → K) where
   carrier := {a | {x | a x ∉ O x}.Finite}
   add_mem' {a b} ha hb := (ha.union hb).subset fun x hx ↦ by
@@ -344,7 +344,7 @@ end RestrictedProduct
 `f O_x ~ O_x` for all `f, x`, such that every `f ∈ K` lies in almost all `O_x`, `⋂_x O_x` is
 finite-dimensional and the cokernel of `K → ⊕_x K / O_x` is finite-dimensional. Then for every
 `η ∈ Ω[K⁄k]`, `res_{O_x} η = 0` for almost all `x` and `∑_x res_{O_x} η = 0`
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 theorem residue_theorem (hadm : ∀ x, Admissible K (Subalgebra.toSubmodule (O x)))
     (hH0 : Module.Finite k (⨅ x, O x : Subalgebra k K))
     (hH1 : Module.Finite k

@@ -33,7 +33,8 @@ whose transpose under `Rf'_! ⊣ Rf'^!` is `Rf'_! Lg'^* Rf^! ≅ Lg^* Rf_! Rf^! 
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`). It is not an isomorphism for
 an arbitrary `g`; it is one when `g` is an open immersion
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`,
-blueprint `prop-exc-base-change-proper` and `cor-exc-base-change-open-immersion-general`).
+blueprint `proposition-composition-open-restriction-compactifications-f--5` and
+`proposition-composition-open-restriction-compactifications-f--5`).
 
 ## The argument
 
@@ -53,8 +54,9 @@ between the left adjoints of `Rf'^! Lg^*` and `Lg'^* Rf^!`, and `β` is invertib
 * over `Z`, both sides vanish: `Li^* g_! = 0`, and `Li^* Rf_! g'_! ≅ Rf_{Z,!} Li'^* g'_! = 0` by
   compact-support base change along `i` and since the ranges of `i'` and `g'` are disjoint.
 
-This is a different route from the blueprint proof of `prop-exc-base-change-proper` (closed
-support triangle and dual base change), and it does not need `f` to be proper.
+This is a different route from the blueprint proof of
+`proposition-composition-open-restriction-compactifications-f--5` (closed support triangle and dual
+base change), and it does not need `f` to be proper.
 
 ## Main definitions and statements
 
@@ -114,11 +116,11 @@ instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_uni
   rw [Adjunction.ofNatIsoRight_unit]
   infer_instance
 
-/-- Blueprint `prop-exc-base-change-proper`: Base change for a proper morphism, against an open
-immersion.
+/-- Blueprint `proposition-composition-open-restriction-compactifications-f--5`: Base change for a
+proper morphism, against an open immersion.
 
-Blueprint `cor-exc-base-change-open-immersion-general`: Base change for an arbitrary morphism,
-against an open immersion.
+Blueprint `proposition-composition-open-restriction-compactifications-f--5`: Base change for an
+arbitrary morphism, against an open immersion.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `g` an open immersion, `f`, `f'` admitting
 compactifications and torsion coefficients `Λ`, the base-change comparison
@@ -126,8 +128,8 @@ compactifications and torsion coefficients `Λ`, the base-change comparison
 is an isomorphism. The ambient right adjoints `Rf^!`, `Rf'^!` of the blueprint's datum are the
 exceptional inverse images, which exist for torsion coefficients
 (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`, blueprint
-`thm-amb-etale-exceptional-adjoint`). In particular this applies to the passage from an affine
-open of the base to the base.
+`theorem-existence-exceptional-inverse-image--1`). In particular this applies to the passage from an
+affine open of the base to the base.
 
 `f` need not be proper: `β` is the conjugate of `γ : g_! Rf'_! ⟶ Rf_! g'_!`, which is checked to
 be invertible on the open `Y'` and on its closed complement; see the module docstring. -/

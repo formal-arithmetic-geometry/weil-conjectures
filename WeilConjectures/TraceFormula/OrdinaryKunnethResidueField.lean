@@ -20,7 +20,7 @@ For a cartesian square `P = X ×_k Y` of `k`-schemes of finite type over a separ
 `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(P, Lp₁^* A ⊗ Lp₂^* B)` (`ProEtale.CondensedRing.lowerStarKunnethMap'`
 of the two squares over `Spec k`) is an isomorphism
 (`ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback_residueField`; blueprint
-`sk-lem-sf-kunneth-star`, torsion case).
+`lemma-kunneth-one-identity-factor--1`, torsion case).
 
 By `ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isIso` it suffices that generic base
 change along `Y ⟶ Spec k`, the relative Künneth formula for `p₂` and the projection formula over
@@ -53,8 +53,8 @@ set_option hygiene false in
 local notation "𝔽" => Profinite.continuousMapRingObj (integersResidueField ℓ E.1)
 
 /-- **The ordinary Künneth formula for global sections with coefficients `𝔽_E`** (blueprint
-`sk-lem-sf-kunneth-star`, torsion case; SGA 4½, [Th. finitude], Cor. 1.11): for a cartesian
-square `P = X ×_k Y` of `k`-schemes of finite type over a separably closed field `k` with
+`lemma-kunneth-one-identity-factor--1`, torsion case; SGA 4½, [Th. finitude], Cor. 1.11): for a
+cartesian square `P = X ×_k Y` of `k`-schemes of finite type over a separably closed field `k` with
 `ℓ ≠ char k`, and complexes `A`, `B` of module objects over `𝔽̲_E` bounded below of étale
 origin, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_k Y, Lp₁^* A ⊗ Lp₂^* B)` is an
 isomorphism. -/

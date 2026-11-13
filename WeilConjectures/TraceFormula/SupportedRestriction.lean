@@ -18,11 +18,11 @@ Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)` with support m
 `c = (c₁, c₂) : C ⟶ X × X`, fixed locus `ι : Fix(c) ⟶ C` and `d = ι ≫ c₁ : Fix(c) ⟶ X`, so
 that the fixed square `ι ≫ c = d ≫ Δ_X` is cartesian, and put `P = K ⊠ D_X K` on `X × X`.
 
-* The *supported class* of `u` (blueprint `det-tf-supported-restriction`, (1)) is the section
+* The *supported class* of `u` (blueprint `lemma-local-term-restriction-map--1`, (1)) is the section
   `[u] : ℚ̄_ℓ,C ⟶ Rc^! P`, the mate of `u` read through the external duality isomorphism
   `𝓗_c(K) ≅ Rc^! P` (`Correspondence.mate`, `Correspondence.verdierDualityIso`); its cohomology
   class lives in `H⁰ RΓ(C, Rc^! P) = H⁰ RΓ_c(X × X, P)`.
-* The *supported restriction* (blueprint `det-tf-supported-restriction`, (2)) is the exchange
+* The *supported restriction* (blueprint `lemma-local-term-restriction-map--1`, (2)) is the exchange
   morphism
   ```
   ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P
@@ -46,24 +46,24 @@ that the fixed square `ι ≫ c = d ≫ Δ_X` is cartesian, and put `P = K ⊠ D
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_eq_integral_supportedRestriction`:
   the local term along an open and closed subscheme `j : B ⟶ Fix(c)` proper over `s` is the
   integral over `B` of the restriction of this composite to `B` (blueprint
-  `det-tf-supported-restriction-local-term`, `sk-lem-tf-curve-supported-pairing`).
+  `lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`).
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_eq_zero_of_supportedRestriction`:
   if the supported restriction vanishes on `B`, so does the local term.
 
 ## Implementation notes
 
-The blueprint states `sk-lem-tf-curve-supported-pairing` on the strict localization `T` of
+The blueprint states `lemma-local-term-restriction-map` on the strict localization `T` of
 `X × X` at a fixed point `(y, y)` of the Frobenius graph of a curve, and with coefficients in a
 finite `ℓ`-primary ring; the trace class of the library is defined over `ℚ̄_ℓ` on schemes of
 finite type over `s`. Here the supported restriction is formed on the whole fixed locus and then
 restricted to an open and closed subscheme `B` of `Fix(c)`. When `B` is the reduced point `y`
-(which is the case for the Frobenius graph, blueprint `sk-lem-tf-fixed-points`), its restriction
-to `B` is the stalk at `y`: the source `(Rc^! P)_y = RΓ_a(T, P)` is the sections with support
-on the graph over the strict localization (`c` is finite), and the target
+(which is the case for the Frobenius graph, blueprint `lemma-frobenius-fixed-scheme`), its
+restriction to `B` is the stalk at `y`: the source `(Rc^! P)_y = RΓ_a(T, P)` is the sections with
+support on the graph over the strict localization (`c` is finite), and the target
 `(Rd^! LΔ^* P)_y = RΓ_y(X, LΔ^* P)` is the local cohomology at `y`, as in the blueprint. The
 identity of the lemma does not use that `X` is a curve nor that `c` is a Frobenius graph; the
 curve enters only through the vanishing of the supported restriction (blueprint
-`sk-lem-tf-curve-restriction-zero`). The product factors are in the order `K ⊠ D_X K` of the
+`lemma-vanishing-local-term-zero-stalk`). The product factors are in the order `K ⊠ D_X K` of the
 library, the blueprint's lemma uses the transposed graph and `D_X K ⊠ K`.
 
 -/
@@ -161,7 +161,7 @@ namespace FixedLocus
 variable (F : c.FixedLocus)
 
 /-- The *supported restriction* `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P` (blueprint
-`det-tf-supported-restriction`, (2)): the `Lι^* ⊣ Rι_*` adjoint of
+`lemma-local-term-restriction-map--1`, (2)): the `Lι^* ⊣ Rι_*` adjoint of
 ```
 Rc^! P ⟶ Rc^! RΔ_* LΔ^* P ≅ Rι_* Rd^! LΔ^* P,
 ```
@@ -180,7 +180,7 @@ noncomputable def supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.pa
       (F.upperShriekLowerStarIso.app _).hom)
 
 /-- The *evaluation* `Rd^! LΔ^* (K ⊠ D_X K) ⟶ ω_Fix(c)` (blueprint
-`det-tf-supported-restriction-local-term`): `Rd^!` of the identification
+`lemma-local-term-restriction-map--1`): `Rd^!` of the identification
 `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K` followed by the evaluation `K ⊗ D_X K ⟶ ω_X`, and the
 composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportedEvaluation :
@@ -204,7 +204,7 @@ lemma homEquiv_supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.padic
 
 
 /-- **The supported restriction as a pullback of the support object** (blueprint
-`det-tf-supported-restriction`, (2), second description): the `Rd_! ⊣ Rd^!` adjoint of the
+`lemma-local-term-restriction-map--1`, (2), second description): the `Rd_! ⊣ Rd^!` adjoint of the
 supported restriction `ρ_P` is the ordinary pullback along the diagonal of the support object
 `Rc_! Rc^! P ⟶ P`, read through compact-support base change `Rd_! Lι^* ≅ LΔ^* Rc_!` in the fixed
 square. -/
@@ -224,7 +224,7 @@ end FixedLocus
 variable (c) (F : c.FixedLocus)
 
 /-- **The trace class through the supported restriction** (blueprint
-`det-tf-supported-restriction-local-term`, `sk-lem-tf-curve-supported-pairing`, before
+`lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`, before
 restriction to a fixed point): the trace class `Tr_c(u)` is the composite
 ```
 ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C --Lι^* [u]--> Lι^* Rc^! P --ρ_P--> Rd^! LΔ^* P --ev--> ω_Fix(c)
@@ -273,7 +273,7 @@ theorem restrict_traceClass_eq_supportedRestriction [LocallyOfFiniteType B.hom] 
 
 
 /-- **The local term through the supported restriction** (blueprint
-`det-tf-supported-restriction-local-term`, `sk-lem-tf-curve-supported-pairing`): for an open and
+`lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`): for an open and
 closed subscheme `j : B ⟶ Fix(c)` proper over `s`, the local term `LT_B(u)` is the integral over
 `B` of the composite of the restrictions to `B` of the supported class `[u]`, the supported
 restriction `ρ_P` and the evaluation `ev : Rd^! LΔ^* P ⟶ ω_Fix(c)`, `P = K ⊠ D_X K`. When `B` is
@@ -296,9 +296,9 @@ theorem localTerm_traceClass_eq_integral_supportedRestriction [IsProper B.hom] (
   congrArg BorelMooreSection.integral (restrict_traceClass_eq_supportedRestriction c F j)
 
 /-- **Vanishing of the local term through the supported restriction** (blueprint
-`sk-i-curve-zero`, proof): if the supported restriction `ρ_P`, `P = K ⊠ D_X K`, vanishes on the
-open and closed subscheme `j : B ⟶ Fix(c)` proper over `s`, then the local term `LT_B(u)` is
-zero. -/
+`lemma-vanishing-local-term-zero-stalk--2`, proof): if the supported restriction `ρ_P`,
+`P = K ⊠ D_X K`, vanishes on the open and closed subscheme `j : B ⟶ Fix(c)` proper over `s`, then
+the local term `LT_B(u)` is zero. -/
 theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (h : (boundedConstructibleUpperStar _ ℓ j).map
@@ -308,7 +308,7 @@ theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j
     Limits.comp_zero, Limits.comp_zero, BorelMooreSection.integral_zero]
 
 /-- **The local term at a fixed point through the supported restriction** (blueprint
-`det-tf-supported-restriction-local-term`, `sk-lem-tf-curve-supported-pairing`): let
+`lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`): let
 `y : s ⟶ Fix(c)` be a fixed point that is open and closed in the fixed locus. Then the local
 term `LT_y(u)` is the composite in `End(ℚ̄_ℓ,s)`
 ```

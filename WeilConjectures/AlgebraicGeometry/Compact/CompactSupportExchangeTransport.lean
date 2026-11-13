@@ -770,12 +770,12 @@ thm-cbc-finite-level-proetale.proof.md, lines 4--22
 
 Proof plan, following the node's four steps:
 1. Put M = j_! L. Exact open extension preserves bounded-below objects. The proper
-parts of c and its base change are qcqs. Apply lem-weil-pbc-transport-identifies-exchange
+parts of c and its base change are qcqs. Apply lemma-naturality-pasting-comparison--3
 at M, using the normalized mate of lem-weil-pbc-comparison-direct-image-canonical-mate.
 This gives the proper exchange square, without assuming its invertibility or any
 separatedness of g.
 2. The degreewise site/open comparisons are those of
-lem-cbc-proetale-extension-zero-comparison. Apply lem-fix-site-open-exchange to the upper
+proposition-comparison-immersions--1. Apply lem-fix-site-open-exchange to the upper
 open square, with rho = a^{-1}, and multiply by the two pullback comparisons. This says
 beta^p A(L) composed with the pulled-back site/open comparison and a_bar equals
 j'_!(a_w) composed with the base-changed site/open comparison and A(beta^e).

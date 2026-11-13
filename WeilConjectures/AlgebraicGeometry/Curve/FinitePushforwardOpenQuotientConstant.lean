@@ -20,8 +20,8 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteStalkModule
 /-!
 # Constructibility of finite pushforward of open quotient constants
 
-Source: normalization exact-sequence blueprint, unit `sk-thm-p1`.
-(blueprint: lem-weil-pbc-finite-pushforward-open-quotient-constant)
+Source: normalization exact-sequence blueprint, unit
+`proposition-proper-base-change-projective-line`. (blueprint: lemma-normalization-constant-sheaf--1)
 -/
 
 @[expose] public section
@@ -92,7 +92,7 @@ private theorem finite_open_constantModule_stalk {X U : Scheme.{u}}
 Source: normalization exact-sequence blueprint,
 `sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md`,
 constructibility of the middle term.
-(blueprint: lem-weil-pbc-finite-pushforward-open-quotient-constant)
+(blueprint: lemma-normalization-constant-sheaf--1)
 
 Proof: Y is Noetherian, since it is finite over X. Write R = Λ/(ℓ). Its constant sheaf
 is finite locally constant, because R is cyclic as a Λ-module. Extend its stratification

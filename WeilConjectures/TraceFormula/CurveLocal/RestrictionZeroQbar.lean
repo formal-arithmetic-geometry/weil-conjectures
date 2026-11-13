@@ -15,7 +15,7 @@ public import WeilConjectures.TraceFormula.SupportedRestrictionRational
 
 # The supported restriction is zero for Frobenius, with `ℚ̄_ℓ`-coefficients
 
-This file proves the `ℚ̄_ℓ`-form of blueprint `sk-lem-tf-curve-restriction-zero`
+This file proves the `ℚ̄_ℓ`-form of blueprint `lemma-vanishing-local-term-zero-stalk`
 (`ProEtale.CondensedRing.Correspondence.upperStar_map_supportedRestriction_frobeniusGraph_eq_zero`)
 from the classical finite-coefficient computation
 (`AlgebraicGeometry.Etale.CurveLocalModel.restrictionZero`):
@@ -219,9 +219,9 @@ restriction `ρ_{a,b} : RΓ_a(T, P) ⟶ RΓ_x(b, b^* P)` on the strict localizat
 at `(x, x)`, from the Frobenius graph `a` to the diagonal `b`. The blueprint shows
 `ρ_{a,b} = 0` in `D(A)` for every finite `ℓ`-primary ring `A` (localization to the punctured
 diagonal, covers of degree prime to `ℓ`, and the blowup argument of
-`sk-lem-tf-blowup-restriction`); the `ℚ̄_ℓ`-form follows by the integral models of
-`sk-lem-tf-rational-model`. The coefficient map `v` plays no role: `ρ_P` only depends on the
-correspondence and on `P`. -/
+`lemma-vanishing-restrictions-after-blowing-up--1`); the `ℚ̄_ℓ`-form follows by the integral models
+of `lemma-integral-models-rational-frobenius-correspondences`. The coefficient map `v` plays no
+role: `ρ_P` only depends on the correspondence and on `P`. -/
 theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : 1 ≤ m)

@@ -17,7 +17,7 @@ filtration by lisse Weil subsheaves with irreducible lisse quotients
 (`AlgebraicGeometry.WeilSheaf.IsLisse.exists_filtration_isIrreducibleLisse`); each quotient is an
 irreducible constituent, hence punctually pure
 (`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`), so the sheaf is
-mixed. This is the curve case of `thm-zl-real-mixed-by-curves`.
+mixed. This is the curve case of `theorem-real-constructible-sheaves-are-mixed--1`.
 -/
 
 @[expose] public section
@@ -50,8 +50,8 @@ variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 /-- **Real lisse sheaves on curves are mixed.** Let `C₀` be a smooth geometrically connected curve
 over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `C₀`. Then `𝒢` is `ι`-mixed: the successive
 quotients of a filtration with irreducible lisse quotients are irreducible constituents of `𝒢`,
-punctually pure by `thm-rp-real-lisse-purity-affine` (blueprint: `thm-zl-real-mixed-by-curves`,
-the curve case). -/
+punctually pure by `theorem-purity-real-sheaves-curves--1` (blueprint:
+`theorem-real-constructible-sheaves-are-mixed--1`, the curve case). -/
 theorem IsReal.isMixed_of_isLisse [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}

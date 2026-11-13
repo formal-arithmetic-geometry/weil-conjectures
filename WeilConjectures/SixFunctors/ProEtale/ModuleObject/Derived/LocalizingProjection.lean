@@ -12,7 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 
 Let `Λ` be a commutative condensed ring and `p : X ⟶ Y` a morphism of schemes. This file proves
 the formal part of the projection formula on the localizing categories (blueprint
-`det-thm-sf-pf-field-localizing`, `det-thm-sf-pf-adic-projection` (2)): if
+`proposition-projection-formula-rational-coefficients--2`,
+`lemma-projection-formula-integral-coefficients--1` (2)): if
 
 * the projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is an isomorphism for `M` in `Dbc(X, Λ)` and
   `L` in `Dbc(Y, Λ)`,
@@ -25,7 +26,7 @@ projection map is compatible with the shifts in each variable
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift`), so this is the
 two-variable determination argument
 `CategoryTheory.NatTrans.isIso_app_app_of_localizingClosure` (blueprint
-`sk-lem-sf-determination`).
+`lemma-checking-isomorphisms-constructible-complexes--1`).
 -/
 
 @[expose] public section
@@ -59,9 +60,9 @@ lemma localizingBoundedConstructible_leftDerivedUpperStar
     (Functor.preservesCoproductsOn_of_preservesColimitsOfShape _ _)
     (fun L' hL' ↦ le_localizingBoundedConstructible Λ X _ (hpull L' hL')) hL
 
-/-- The formal part of blueprint `det-thm-sf-pf-field-localizing` and
-`det-thm-sf-pf-adic-projection` (2), for an arbitrary condensed ring `Λ`: the projection formula
-extends from `Dbc` to `Loc(Dbc)`.
+/-- The formal part of blueprint `proposition-projection-formula-rational-coefficients--2` and
+`lemma-projection-formula-integral-coefficients--1` (2), for an arbitrary condensed ring `Λ`: the
+projection formula extends from `Dbc` to `Loc(Dbc)`.
 
 Assume that the projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is an isomorphism for `M` in
 `Dbc(X, Λ)` and `L` in `Dbc(Y, Λ)`, that `Rp_*` maps `Loc(Dbc(X, Λ))` into `Loc(Dbc(Y, Λ))` and

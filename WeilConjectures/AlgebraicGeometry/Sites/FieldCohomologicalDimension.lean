@@ -21,12 +21,12 @@ public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 The vanishing `Hᵠ(Spec K, F) = 0` for `q > 0` over a separably closed field `K`
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_pos_of_isSepClosed`, blueprint
-`lem-kun-03qu-sep-closed`) says that `cd(Spec K) = 0`
+`lemma-cohomological-dimension-base-field--1`) says that `cd(Spec K) = 0`
 (`AlgebraicGeometry.Scheme.torsionCohomologicalDimension_spec_of_isSepClosed`). If `X` is of
 finite type over a field `K` with `cd_tor(K) ≤ c` and
 `cd_tor(X_K̄) ≤ e` for an algebraic closure `K̄` of `K`, then `cd_tor(X) ≤ c + e`
 (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure`, blueprint
-`lem-sc-cd-ground-field`).
+`lemma-uniform-bounds-pro-etale-affines`).
 -/
 
 @[expose] public section
@@ -51,7 +51,7 @@ lemma HasTorsionCohomologicalDimensionLE.of_isUniversalHomeomorphism {X Y : Sche
   have := h _ (Etale.isTorsion_upperStar f hF) q hq
   (Etale.cohomologyMap_bijective f F q).injective.subsingleton
 
-/-- Blueprint `lem-kun-03qu-sep-closed`: Vanishing on a separably closed point.
+/-- Blueprint `lemma-cohomological-dimension-base-field--1`: Vanishing on a separably closed point.
 
 If `K` is separably closed and `F` is an abelian sheaf on `Spec(K)_ét`, then
 `Hᵠ(Spec(K)_ét, F) = 0` for every `q > 0`. This is
@@ -70,9 +70,9 @@ lemma hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed (K : Type u) [Field
   fun F _ q hq ↦ subsingleton_H_of_pos_of_isSepClosed K F q hq
 
 /-- **Cohomological dimension of a separably closed point.** If `K` is a separably closed field,
-then `cd(Spec K) = 0` in the sense of blueprint `def-kun-cd`. This is blueprint
-`lem-kun-cd-sep-closed-point`, whose content (the vanishing of `Hᵠ(Spec K, F)` for `q > 0`) is
-`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`. -/
+then `cd(Spec K) = 0` in the sense of blueprint `definition-cohomological-dimension`. This is
+blueprint `lemma-cohomological-dimension-base-field--1`, whose content (the vanishing of
+`Hᵠ(Spec K, F)` for `q > 0`) is `AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`. -/
 theorem torsionCohomologicalDimension_spec_of_isSepClosed (K : Type u) [Field K]
     [IsSepClosed K] : (Spec (.of K)).torsionCohomologicalDimension = 0 :=
   le_antisymm (torsionCohomologicalDimension_le_iff.2
@@ -93,7 +93,8 @@ lemma isZero_of_isZero_upperStar_of_surjective {X S : Scheme.{u}} (s : S ⟶ X)
     exact ⟨⟨hz'.to_ _, h.eq_of_src _ _, hz'.eq_of_src _ _⟩⟩
   exact IsZero.of_iso hz (asIso (hz.from_ M))
 
-/-- Blueprint `lem-sc-cd-ground-field`: Descent of a geometric cohomological dimension bound.
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Descent of a geometric cohomological
+dimension bound.
 
 Let `X` be a scheme of finite type over a field `K` (structure morphism `a`), and let `K̄` be an
 algebraic closure of `K`. If `cd_tor(K) ≤ c` and `cd_tor(X_K̄) ≤ e`, then `cd_tor(X) ≤ c + e`.

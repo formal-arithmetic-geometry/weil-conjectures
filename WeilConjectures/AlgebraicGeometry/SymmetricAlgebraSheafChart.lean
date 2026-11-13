@@ -58,7 +58,7 @@ instance {c : ℕ} (U : X.AffineZariskiSite) (b : Module.Basis (Fin c) Γ(X, U.1
   unfold symChartRingHom
   exact (ConcreteCategory.isIso_iff_bijective _).mpr (AlgEquiv.bijective _)
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 The chart `Spec_X (Sym^• ℰ) ×_X U ≅ 𝔸^c_U` over an affine open `U` on which `Γ(ℰ, U)` is free of
 rank `c`, induced by `Sym_{Γ(X, U)} Γ(ℰ, U) ≅ Γ(X, U)[T₁, …, T_c]`. -/

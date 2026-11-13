@@ -10,7 +10,7 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Reduction composition from total-limit composition
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5.
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
 The proof uses injectivity of the adjunction Hom equivalence and the Unit law. -/
 
 @[expose] public noncomputable section
@@ -101,7 +101,7 @@ private theorem composition_mates
 end CompositionMates
 
 /-- Composition for reduction follows from composition for total limit.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 0941 (blueprint: lem-pod-reindexing-composition-reduction-equation).
 
 Proof: invert each reduction isomorphism. Unit compatibility identifies its

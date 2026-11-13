@@ -64,7 +64,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-localization`,
 `sk-lem-formal-closed-support-adjunction.md` and its proof
-(blueprint: det-lem-formal-closed-support-adjunction).
+(blueprint: lemma-sections-support-closed-subscheme).
 
 Inverse image uses the canonical coefficient isomorphism and restriction of scalars along
 its inverse. This works for noncommutative rings as well. The finite constant-coefficient
@@ -94,7 +94,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 
 
 /-- The kernel of the canonical open unit, functorially in the module.
-Source: blueprint formula for Gamma (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint formula for Gamma (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def supportKernel {U X : Scheme.{u}} (j : U ⟶ X) :
     supportModules Λ X ⥤ supportModules Λ X where
   obj M := kernel ((supportPullbackAdjunction Λ j).unit.app M)
@@ -104,20 +104,20 @@ noncomputable def supportKernel {U X : Scheme.{u}} (j : U ⟶ X) :
   map_comp f g := equalizer.hom_ext (by simp)
 
 /-- Kernel inclusion, natural in the module.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def supportKernelι {U X : Scheme.{u}} (j : U ⟶ X) :
     supportKernel Λ j ⟶ 𝟭 _ where
   app M := kernel.ι _
   naturality M N f := by simp [supportKernel]
 
 /-- The support functor is precisely i* ker(id -> j* j*).
-Source: blueprint statement formula (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint statement formula (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def closedSupport {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) :
     supportModules Λ X ⥤ supportModules Λ Z :=
   supportKernel Λ j ⋙ supportPullback Λ i
 
 /-- Additivity of the kernel formula.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme).
 The induced map on kernels is the restriction of the given module map; restriction commutes
 with zero and addition. Inverse image is additive, so the composite is additive. -/
 @[instance] theorem closedSupport_additive {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) :
@@ -127,7 +127,7 @@ with zero and addition. Inverse image is additive, so the composite is additive.
   exact inferInstanceAs ((supportKernel Λ j ⋙ supportPullback Λ i).Additive)
 
 /-- The comparison from the kernel to i* i^* of that kernel, given by the unit.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def closedSupportKernelComparison {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) :
     supportKernel Λ j ⟶ closedSupport Λ i j ⋙ lowerStar Λ i :=
@@ -188,7 +188,7 @@ private theorem supportOpenCounit {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmers
     ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} j).counit_isIso_of_R_fully_faithful)
 
 /-- Clause (1): the kernel comparison is a natural isomorphism.
-Source: blueprint proof Steps 3--5 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Steps 3--5 (blueprint: lemma-sections-support-closed-subscheme).
 Restriction of the open unit is invertible, hence the kernel restricts to zero on U.
 The open--closed exact sequence applied to the kernel then identifies it, by its closed
 unit, with i* i^* of itself. The coefficient actions lift these abelian-sheaf identities. -/
@@ -222,7 +222,7 @@ theorem closedSupportKernelComparison_isIso {Z U X : Scheme.{u}}
   exact NatIso.isIso_of_isIso_app _
 
 /-- The support inclusion, obtained from the inverse kernel comparison.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def closedSupportCounit {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
@@ -268,7 +268,7 @@ private theorem supportCrossZero
   exact hz'.eq_of_src _ _
 
 /-- Clause (1): the adjunction with its canonical support inclusion as counit.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme).
 A map from i*A to M has zero composite to j*j^*M, by the open adjunction and j^*i*=0.
 It factors uniquely through the kernel. Full faithfulness of i* gives a unique A -> H M.
 The construction is natural in both variables and its counit is the displayed inclusion.
@@ -336,7 +336,7 @@ theorem existsUnique_closedSupportAdjunction {Z U X : Scheme.{u}}
   exact ⟨adj, hadj, fun a ha ↦ Adjunction.ext_counit (ha.trans hadj.symm)⟩
 
 /-- The uniquely counit-normalized support adjunction.
-Source: blueprint clause (1) (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint clause (1) (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def closedSupportAdjunction {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
@@ -344,7 +344,7 @@ noncomputable def closedSupportAdjunction {Z U X : Scheme.{u}}
   Classical.choose (ExistsUnique.exists (existsUnique_closedSupportAdjunction Λ i j hij))
 
 /-- Clause (1): left exactness of the additive support functor.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme).
 The natural Hom bijection turns the universal property of any finite limit into the same
 universal property after applying H. Thus the right adjoint preserves finite limits. -/
 theorem closedSupport_leftExact {Z U X : Scheme.{u}}
@@ -356,7 +356,7 @@ theorem closedSupport_leftExact {Z U X : Scheme.{u}}
 
 /-- Closed direct image is exact for a quasi-compact open complement, also for
 noncommutative coefficient rings.
-Source: blueprint proof Steps 3 and 5 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Steps 3 and 5 (blueprint: lemma-sections-support-closed-subscheme).
 The support adjunction exhibits closed direct image as a left adjoint, so it preserves
 colimits, in particular finite colimits. The quasi-compact complement hypothesis is the
 one in Stacks, Tag 09BM. -/
@@ -369,7 +369,7 @@ theorem closedSupport_lowerStarExact {Z U X : Scheme.{u}}
   infer_instance
 
 /-- Clause (2): the total right derived support functor is right adjoint to exact i*.
-Source: blueprint proof Steps 6--7 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Steps 6--7 (blueprint: lemma-sections-support-closed-subscheme).
 The uniquely normalized sheaf adjunction has exact left adjoint. Its right adjoint sends
 K-injectives to K-injectives. The termwise Hom adjunction descends to homotopy categories,
 and the Hom bijection into K-injectives identifies it with the derived adjunction. -/
@@ -382,13 +382,13 @@ noncomputable def closedSupportDerivedAdjunction {Z U X : Scheme.{u}}
   exact (closedSupportAdjunction Λ i j hij).mapDerivedCategoryRightDerivedAdjunction
 
 /-- The open derived adjunction, with its canonical derived unit.
-Source: blueprint proof Steps 6 and 10 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Steps 6 and 10 (blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable def closedSupportOpenDerivedAdjunction {U X : Scheme.{u}} (j : U ⟶ X) :
     (supportPullback Λ j).mapDerivedCategory ⊣ (lowerStar Λ j).rightDerivedFunctor :=
   (supportPullbackAdjunction Λ j).mapDerivedCategoryRightDerivedAdjunction
 
 /-- The open pullback of a K-injective is K-injective.
-Source: blueprint proof Steps 3 and 10 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Steps 3 and 10 (blueprint: lemma-sections-support-closed-subscheme).
 Extension by zero is an exact left adjoint to open restriction, so its right adjoint
 preserves K-injectives. This applies to modules with the transported coefficient action. -/
 theorem closedSupport_open_isKInjective {U X : Scheme.{u}} (j : U ⟶ X)
@@ -407,7 +407,7 @@ theorem closedSupport_open_isKInjective {U X : Scheme.{u}} (j : U ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Clause (2), global RHom form, specified componentwise on K-injective representatives.
-Source: blueprint proof Step 8 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Step 8 (blueprint: lemma-sections-support-closed-subscheme).
 In degree n apply the sheaf Hom adjunction to every component A^p -> H(I)^(p+n).
 Naturality in both differentials intertwines d(f)=d_I f-(-1)^n f d_A. These components
 therefore give a Hom-complex isomorphism. H(I) is K-injective by the exact-left-adjoint
@@ -572,7 +572,7 @@ private theorem supportInjectiveUnitEpi
   infer_instance
 
 /-- Clause (3): the open unit is an epimorphism for every injective module.
-Source: blueprint proof Step 9 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Step 9 (blueprint: lemma-sections-support-closed-subscheme).
 The comparison j!j^*I -> j*j^*I is monic: its kernel has zero open and closed
 restrictions, hence is zero by localization. Extend its map to I using injectivity.
 After restriction the resulting section is the identity. Faithfulness on open direct
@@ -600,7 +600,7 @@ private theorem supportJointZero {Z U X : Scheme.{u}}
     (asIso ((supportPullbackAdjunction Λ i).unit.app M))
 
 /-- Clause (4): the counit/unit localization triangle, natural on the unbounded category.
-Source: blueprint proof Steps 10--11 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Steps 10--11 (blueprint: lemma-sections-support-closed-subscheme).
 Resolve K by a K-injective I with injective terms. Open restriction preserves
 K-injectives, so j*j^*I computes Rj*j^*K. The kernel identification and surjectivity in
 Step 9 give a degreewise short exact sequence i*H(I) -> I -> j*j^*I. Its canonical
@@ -772,7 +772,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Clause (4), explicit fibre comparison on K-injective representatives.
-Source: blueprint proof Step 11 (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint proof Step 11 (blueprint: lemma-sections-support-closed-subscheme).
 First replace I by a homotopy equivalent K-injective J with injective terms. Additive
 functors and the cone construction preserve this equivalence. For g:J -> j*j^*J the
 canonical map i*H(J) -> cone(g)[-1] is n |-> (0,n).

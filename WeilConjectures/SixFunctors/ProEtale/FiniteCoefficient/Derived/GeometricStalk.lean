@@ -17,8 +17,8 @@ comparison `ν : Y_proét ⟶ Y_ét`: it is the derived geometric stalk
 `RΓ(Spec Ω, Lȳ^* Rν_* M)` of the étale complex `Rν_* M`. For `M = ν^* G` of étale origin and
 bounded below, `Rν_* M ≅ G`, so this is the geometric stalk of the étale model `G`.
 
-This file records the pro-étale clause of blueprint `fix-lem-finite-tor-perfect`: for
-`M ∈ D^b_{ctf}(Y_proét, Λ)` the geometric stalk is quasi-isomorphic to a bounded complex of
+This file records the pro-étale clause of blueprint `lemma-perfect-complexes-geometric-point--6`:
+for `M ∈ D^b_{ctf}(Y_proét, Λ)` the geometric stalk is quasi-isomorphic to a bounded complex of
 finite free `Λ`-modules.
 
 ## Main definitions and statements
@@ -61,8 +61,8 @@ noncomputable def geometricStalkComparisonIso (y : Spec (.of Ω) ⟶ Y)
   (Etale.rightDerivedGlobalSections _ _).mapIso ((L(Etale.upperStar (ModuleCat.{u + 1} Λ) y)).mapIso
     (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).unit.app G)).symm)
 
-/-- Blueprint `fix-lem-finite-tor-perfect`: Geometric-stalk perfectness at finite and field
-coefficients (finite coefficients, on the pro-étale site).
+/-- Blueprint `lemma-perfect-complexes-geometric-point--6`: Geometric-stalk perfectness at finite
+and field coefficients (finite coefficients, on the pro-étale site).
 
 Let `Λ` be a finite local ring (for instance `Λ = A_{E,n}`), `M ∈ D^b_{ctf}(Y_proét, Λ)` and
 `ȳ : Spec Ω ⟶ Y` a geometric point. Then the geometric stalk `M_ȳ` is quasi-isomorphic to a

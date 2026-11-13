@@ -15,7 +15,7 @@ import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 # Inverse image and restriction of the stalk representation
 
 Source: Stacks Project, Tags 03QT, 03SF and 04JQ; blueprint
-`lem-sc-affine-generic-second`, proof paragraphs 1--2.
+`theorem-cohomology-curves--2`, proof paragraphs 1--2.
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Source: Stacks Project, Tags 03QT, 03SF and 04JQ; blueprint
-`lem-sc-affine-generic-second`, proof paragraphs 1--2.
+`theorem-cohomology-curves--2`, proof paragraphs 1--2.
 (blueprint: lem-sc-primary-inverse-image-restriction)
 
 Proof: Write L=Ks^H and b:Spec L -> Spec K. The point of Spec L used by C composes

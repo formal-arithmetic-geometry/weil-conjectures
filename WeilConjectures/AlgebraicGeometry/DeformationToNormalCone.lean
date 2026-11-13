@@ -43,9 +43,9 @@ coordinates in which `s` is the origin, and there the deformation space is étal
 `𝔸^d × 𝔸¹` (`AlgebraicGeometry.exists_smoothOfRelativeDimension_extendedReesAlgebra_of_section`).
 
 The structure `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` records the clauses of
-`sk-lem-geometry` about the deformation; the blueprint lemma is the statement that such a datum
+`prose-09-12` about the deformation; the blueprint lemma is the statement that such a datum
 exists with the normal cone of `s` as fibre over `t = 0`. The punctured trivialisation `κ°` of
-`sk-lem-geometry` (3) — the identification of the deformation over `𝔾_{m,B}` with
+`prose-09-12` (3) — the identification of the deformation over `𝔾_{m,B}` with
 `V ×_B 𝔾_{m,B}` — is a field. `𝔾_m` is not a Mathlib scheme, so `𝔾_{m,B}` is carried as an open
 subscheme of `𝔸¹_B` whose underlying set is the complement of the zero section, as in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`.
@@ -426,7 +426,7 @@ lemma normalConeZeroSection_comp_normalConeToDeformationSpace :
 
 end Construction
 
-/-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
+/-- Blueprint `prose-09-12`: Geometry of the deformation of a section
 
 The deformation to the normal cone of a closed section `s` of a morphism `g : V ⟶ B` smooth of
 pure relative dimension `d`, as data. Writing `𝔸¹_B = 𝔸(Fin 1; B)` with its zero and unit
@@ -471,7 +471,7 @@ complexes defined.
 Existence of the datum with `N` the normal cone of `s`
 (`AlgebraicGeometry.Scheme.Hom.normalConeData`) is
 `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
--- TODO(unify): sk-def-purity-conv
+-- TODO(unify): definition-deformation-normal-bundle
 structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
     (N : NormalConeData d s) where
   /-- The deformation space `𝒟_s V`. -/
@@ -747,7 +747,7 @@ open AffineZariskiSite
 
 variable (d : ℕ) (g : V ⟶ B) [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s]
 
-/-- Blueprint `lem-pur-dnc-section-geometry` (2): the coordinates.
+/-- Blueprint `prose-09-12` (2): the coordinates.
 
 **The deformation space is smooth.** If `g` is smooth of relative dimension `d` with closed
 section `s`, then `g̃ : D_s V ⟶ 𝔸¹_B` is smooth of relative dimension `d`: étale-locally there are
@@ -780,7 +780,7 @@ theorem smoothOfRelativeDimension_deformationSpaceProj (hs : s ≫ g = 𝟙 B) :
 
 variable {g s}
 
-/-- Blueprint `def-pur-normal-bundle`: the normal cone `N_s = Spec (⨁_{r ≥ 0} I^r / I^{r+1})` of
+/-- Blueprint `prose-09-11`: the normal cone `N_s = Spec (⨁_{r ≥ 0} I^r / I^{r+1})` of
 the closed section `s` of `g`, with its projection to `B` and its zero section, as a normal cone
 datum: it is smooth of relative dimension `d` over `B`, being the fibre of the smooth `g̃` over
 `t = 0`. -/

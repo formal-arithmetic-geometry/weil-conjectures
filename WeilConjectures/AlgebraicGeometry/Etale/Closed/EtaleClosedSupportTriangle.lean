@@ -17,8 +17,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 # The ordinary derived closed-support triangle
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-existence,
-lem-exc-closed-support-triangle, order 1804; Stacks Project, Tags 0A45 and 0152
-(blueprint: lem-exc-closed-support-triangle).
+lemma-local-cohomology-right-adjoint--2, order 1804; Stacks Project, Tags 0A45 and 0152
+(blueprint: lemma-local-cohomology-right-adjoint--2).
 -/
 
 set_option autoImplicit false
@@ -39,11 +39,11 @@ left modules over the sheafification of the constant ring presheaf: a locally re
 constant scalar acts locally, and the resulting sections glue uniquely. This is the same
 encoding as the recorded closed-ambient adjoint, without constructibility conditions.
 
-Source: blueprint lem-exc-closed-support-triangle, order 1804; Stacks Project,
+Source: blueprint lemma-local-cohomology-right-adjoint--2, order 1804; Stacks Project,
 Tags 0A45 (support triangle), 0152 (boundary), 079P (injective-term replacement),
 070K (total derivation), 08FI (restriction of K-injectives), 04CA (closed direct image),
 09XQ (sections with support) and 093X (restriction of injective sections)
-(blueprint: lem-exc-closed-support-triangle).
+(blueprint: lemma-local-cohomology-right-adjoint--2).
 
 Proof:
 1. Write F = Ri_*, G = Rj_* and J = D(j^*). Both direct images are fully faithful

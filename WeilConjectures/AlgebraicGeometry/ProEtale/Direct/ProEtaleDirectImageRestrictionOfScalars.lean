@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingO
 /-!
 # Derived pro-etale direct image and restriction of scalars
 
-Source: blueprint `def-weil-derived-direct-image`, order 1468, coefficient tower maps;
+Source: blueprint `prose-03-02`, order 1468, coefficient tower maps;
 Stacks Project, Tags 0D6E, 0D6J and 015F
 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
 -/
@@ -359,7 +359,7 @@ private theorem coefficientDerivedComparison_exists
 The displayed equality says that the comparison is the inverse of f_*(j), after the
 canonical termwise-localization and K-injective resolution identifications. In particular
 restriction of scalars is not assumed to preserve K-injectivity.
-Source: blueprint `def-weil-derived-direct-image`, order 1468; Stacks Tags 0D6E, 0D6J,
+Source: blueprint `prose-03-02`, order 1468; Stacks Tags 0D6E, 0D6J,
 015F (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
 Proof:
 1. Naturality of sheafification makes the constant-section coefficient square commute.

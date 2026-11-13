@@ -18,7 +18,7 @@ Indeed `Hᵐ(G M)` only depends on the truncation `τ_{≤ m} M`: the map `Hᵐ(
 is an isomorphism because `G(τ_{> m} M)` lies in degrees `> m`
 (`DerivedCategory.isIso_homologyFunctor_map_map_of_isLE`), and the truncations `τ_{≤ m}` of a
 family uniformly in degrees `≥ a` are uniformly bounded. This is the way-out argument of
-blueprint `det-pe-bounded-continuity-direct-image`.
+blueprint `corollary-continuity-cohomology--2`.
 -/
 
 @[expose] public section

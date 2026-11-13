@@ -777,7 +777,7 @@ exact sequence. No finite-generation hypothesis on any module is used.
 4. For finite discrete rings the canonical constant function map is an isomorphism, by
 lem-sf-finite-discrete-normalized-encoding and
 lem-sf-module-object-ordinary-coefficient-equivalence. Scalar realization is constants.
-5. det-prop-sfb-qlbar-colimit-x-integral-limit identifies the actual integral coefficient
+5. lemma-comparison-completed-coefficients--1 identifies the actual integral coefficient
 ring with the positive tower of constant uniformizer quotients. Every projection carries
 a constant scalar to its residue, so the comparison respects the constant scalar map.
 Any other uniformizer generates the same ideal, so the assertion covers every choice.

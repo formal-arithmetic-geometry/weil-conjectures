@@ -254,7 +254,7 @@ connected set. Then for every sheaf of abelian groups `F` on `T`, the restrictio
 `Γ(T, F) ⟶ Γ(T₀, F|_{T₀})`, the unit of the adjunction `i⁻¹ ⊣ i_*` for the inclusion
 `i : T₀ ⟶ T` evaluated on `T`, is bijective. The blueprint states this for locally constant
 sheaves only; it holds for all abelian sheaves.
-(blueprint: `lemma-weil-pbc-spectral-restriction`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 @[stacks 09ZG]
 theorem bijective_unit_app_top (hT₀ : IsClosed T₀)
     (hC : ∀ C : Set T, IsClosed C → IsIrreducible C → IsConnected (C ∩ T₀))

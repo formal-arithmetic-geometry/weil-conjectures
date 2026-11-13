@@ -31,8 +31,8 @@ Weil category used here.
 - `AlgebraicGeometry.Etale.WeilComplex.liftBifunctor`: a bifunctor
   `Dctf(X, A)ᵒᵖ × Dctf(X, A) ⥤ Dctf(X, A)` with Weil structures on its values, natural in both
   variables, lifts to Weil complexes.
-- `AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius` (`def-wf-internal-hom`).
-- `AlgebraicGeometry.Etale.WeilComplex.internalHom` (`lem-wf-internal-hom-weil`).
+- `AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius` (`prose-10-20`).
+- `AlgebraicGeometry.Etale.WeilComplex.internalHom` (`prose-10-20`).
 
 ## Implementation notes
 
@@ -213,7 +213,7 @@ lemma frobenius_inv_hom_comp_map {K L : WeilComplex (ModuleCat.{u + 1} Λ) g} (f
 variable {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasInvertibleExponent Λ X] [IsAlgClosed k]
 
-/-- Blueprint `def-wf-internal-hom`: the *internal-Hom Frobenius* of two Weil complexes
+/-- Blueprint `prose-10-20`: the *internal-Hom Frobenius* of two Weil complexes
 `(K, φ_K)` and `(L, φ_L)`, the Weil structure
 `Lg^* RHom(K, L) ≅ RHom(Lg^* K, Lg^* L) ≅ RHom(K, L)` on `RHom(K, L)`, whose first arrow is the
 comparison map of the monoidal equivalence `Lg^*` and whose second arrow is
@@ -333,7 +333,7 @@ lemma internalHomMap_comp {K K' K'' : WeilComplex (ModuleCat.{u + 1} Λ) g} (f :
   liftBifunctorMap_comp _ _ _ _ f f'
 
 variable (g) in
-/-- Blueprint `lem-wf-internal-hom-weil`: the derived internal hom of Weil complexes. With the
+/-- Blueprint `prose-10-20`: the derived internal hom of Weil complexes. With the
 internal-Hom Frobenius `RHom(φ_K⁻¹, φ_L)`
 (`AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius`), the derived internal hom of
 `Dctf(X, Λ)` lifts to a bifunctor `WeilDᵒᵖ × WeilD ⥤ WeilD` on Weil complexes, lying over the

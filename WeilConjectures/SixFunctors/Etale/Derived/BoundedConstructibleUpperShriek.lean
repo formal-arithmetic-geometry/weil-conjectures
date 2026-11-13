@@ -18,7 +18,7 @@ stage `Λ = 𝒪_E`, `I = 𝔪_E`. The integral stage `Dᵇc(X, 𝒪_E)` is the 
 rational stage `Dᵇc(X, E)` is its rationalization `Dᵇc(X, 𝒪_E)[M⁻¹]` for a submonoid `M` of `Λ`
 (as in `WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational`).
 
-This file gives blueprint `def-weil-exceptional-inverse-image` at these two stages, for a
+This file gives blueprint `theorem-f-shriek-finite-coefficients` at these two stages, for a
 separated morphism `f : X ⟶ Y` of separated schemes of finite type over `k`.
 
 * `𝒪_E`: the integral `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)`
@@ -115,7 +115,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
 /-! ### The integral stage `𝒪_E` -/
 
 variable (I) in
-/-- Blueprint `def-weil-exceptional-inverse-image` (at the integral stage `𝒪_E`): the
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the integral stage `𝒪_E`): the
 exceptional inverse image `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)`. The blueprint defines it as the
 derived inverse limit `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages; by
 `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint` this is the
@@ -131,7 +131,7 @@ noncomputable abbrev boundedConstructibleIntegralUpperShriek :
     have ⟨_, hϖ, hI⟩ := hϖI.out
     boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aX aY f hf hL
 
-/-- Blueprint `def-weil-exceptional-inverse-image` (at the integral stage `𝒪_E`, the
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the integral stage `𝒪_E`, the
 characterizing adjunction): for `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the
 `Λ`-linear bijection `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`, the adjunction `Rf_! ⊣ Rf^!` on
 constructible complexes. -/
@@ -152,7 +152,7 @@ section Proper
 
 variable [IsProper f]
 
-/-- Blueprint `def-weil-exceptional-inverse-image` (at the integral stage `𝒪_E`, the
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the integral stage `𝒪_E`, the
 characterizing adjunction for proper `f`): for `f` proper, `Rf_! = Rf_*` preserves
 `Dᵇc(-, 𝒪_E)`, and `Rf_* ⊣ Rf^!` is an adjunction of functors on the constructible categories,
 the restriction of `Rf_! ⊣ Rf^!` along `Rf_! ≅ Rf_*`. -/
@@ -176,7 +176,7 @@ local notation "𝐃ᵇc(" X ")" =>
   Rationalization M (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory
 
 variable (I) in
-/-- Blueprint `def-weil-exceptional-inverse-image` (at the rational stage `E`): the exceptional
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the rational stage `E`): the exceptional
 inverse image `Rf^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)`, the rationalization of the integral `Rf^!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`). It is characterized by the
 adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`
@@ -185,7 +185,7 @@ of the integral one. -/
 noncomputable abbrev boundedConstructibleRationalUpperShriek : 𝐃ᵇc(Y) ⥤ 𝐃ᵇc(X) :=
   Rationalization.map M (boundedConstructibleIntegralUpperShriek I aX aY f hf)
 
-/-- Blueprint `def-weil-exceptional-inverse-image` (at the rational stage `E`, the
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the rational stage `E`, the
 characterizing adjunction): for `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the `Λ`-linear
 bijection `Hom(Rf_! K, L)[M⁻¹] ≅ Hom(K, Rf^! L)[M⁻¹]` between the morphisms of the
 rationalizations, induced by the integral adjunction
@@ -209,7 +209,7 @@ section Proper
 
 variable [IsProper f]
 
-/-- Blueprint `def-weil-exceptional-inverse-image` (at the rational stage `E`, the
+/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the rational stage `E`, the
 characterizing adjunction for proper `f`): the adjunction `Rf_* ⊣ Rf^!` on `Dᵇc(-, E)`, the
 rationalization of the integral adjunction
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerStarUpperShriekAdjunction`). -/

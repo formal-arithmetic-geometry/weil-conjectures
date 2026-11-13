@@ -326,7 +326,7 @@ end Monoidal
 
 /-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
 products. This is the monoidality of derived pullback in blueprint
-`def-weil-derived-pullback-tensor-hom` (within `det-def-sf-operations`).
+`prose-03-02` (within `theorem-f-shriek-ell-adic-coefficients--4`).
 
 The monoidal structure is `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, whose
 tensor comparison is `leftDerivedUpperStarTensorIso`. -/

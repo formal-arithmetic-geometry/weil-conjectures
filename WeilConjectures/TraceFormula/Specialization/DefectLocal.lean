@@ -17,7 +17,7 @@ Let `X` be a separated `k`-scheme of finite type, `Z = V(I) ⊆ X` a closed subs
 `C_{X,Z}(L)` of `ProEtale.CondensedRing.specializationDefect` vanishes as soon as every
 `C_{V_a, g_a^* Z}(g_a^* L)` does
 (`ProEtale.CondensedRing.isZero_specializationDefect_of_cover`): this is the reduction "the
-assertion is local" in the proof of blueprint `det-sp-zero-section-vanishing`.
+assertion is local" in the proof of blueprint `theorem-verdier-s-theorem-specialization-zero--1`.
 
 By the smooth exchange for the defect
 (`ProEtale.CondensedRing.nonempty_specializationDefect_upperStar_iso`) the pullbacks of `C_{X,Z}(L)`
@@ -57,8 +57,9 @@ variable {k : Type u} [Field k] {X : Over (Spec (.of k))} (I : X.left.IdealSheaf
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **The vanishing of the defect is local** (the reduction "the assertion is local" in the proof
-of blueprint `det-sp-zero-section-vanishing`): for finitely many open immersions `g_a : V_a ⟶ X`
-covering `X`, if every defect `C_{V_a, g_a^* Z}(g_a^* L)` vanishes, then so does `C_{X,Z}(L)`. -/
+of blueprint `theorem-verdier-s-theorem-specialization-zero--1`): for finitely many open immersions
+`g_a : V_a ⟶ X` covering `X`, if every defect `C_{V_a, g_a^* Z}(g_a^* L)` vanishes, then so does
+`C_{X,Z}(L)`. -/
 theorem isZero_specializationDefect_of_cover {ι : Type*} [Finite ι] {V : ι → Over (Spec (.of k))}
     [∀ a, LocallyOfFiniteType (V a).hom] [∀ a, QuasiCompact (V a).hom]
     [∀ a, IsSeparated (V a).hom] (g : ∀ a, V a ⟶ X) [∀ a, IsOpenImmersion (g a).left]
@@ -81,7 +82,7 @@ theorem isZero_specializationDefect_of_cover {ι : Type*} [Finite ι] {V : ι �
 
 variable (X) in
 /-- **Reduction to complexes vanishing on the centre** (blueprint
-`det-sp-defect-closed-vanishing`, last assertion): if `C_{X,Z}(L₀) = 0` for every bounded
+`lemma-base-change-cone-x-z`, last assertion): if `C_{X,Z}(L₀) = 0` for every bounded
 constructible `L₀` with `Li^* L₀ = 0`, then `C_{X,Z}(L) = 0` for every `L`. Indeed
 `C_{X,Z}(L) ≅ C_{X,Z}(j_! j^* L)` for the complement `j : X ∖ Z ⟶ X`, and `Li^* j_! = 0`. -/
 theorem isZero_specializationDefect_of_forall_isZero_upperStar

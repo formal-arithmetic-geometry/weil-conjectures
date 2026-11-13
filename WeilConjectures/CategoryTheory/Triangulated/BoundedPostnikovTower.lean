@@ -38,7 +38,7 @@ of 1.3.13, pp. 34-35 (auxiliary; not a blueprint node).
 
 Proof:
 1. Set `L_j = tau^{<= a+j-1} K`. The truncation right adjunction from
-   lem-weil-heart-short-exact-triangles identifies maps from any object of degree
+   lemma-perverse-sheaves-curve--1 identifies maps from any object of degree
    at most `r` into `tau^{<=r} K` with maps into `K`.
 2. Applying this bijection twice identifies `tau^{<=q-1} tau^{<=q} K` with
    `tau^{<=q-1} K`, compatibly with their maps to `K`. The two inverse maps and their
@@ -127,10 +127,10 @@ the factors in `exists_bounded_postnikov_tower` with `H^q(K)[0][-q]`.
 Source: BBD, Faisceaux pervers, the example after 1.3.6, p. 31; Stacks Project,
 derived.tex, Tag 08J5 (auxiliary; not a blueprint node).
 
-Proof (step 7 of the node): use the good truncations of def-kun-truncations on a
-cochain representative `E`. The upper truncation has `ker d^q` in degree `q` and
-zero above it. Lower truncation at `q` leaves only the cokernel of the map from
-`E^{q-1}` into this kernel, namely `H^q(E)`, in degree `q`. Shift by `q` to put it
+Proof (step 7 of the node): use the good truncations of
+proposition-open-direct-image-preserves-finite on a cochain representative `E`. The upper truncation
+has `ker d^q` in degree `q` and zero above it. Lower truncation at `q` leaves only the cokernel of
+the map from `E^{q-1}` into this kernel, namely `H^q(E)`, in degree `q`. Shift by `q` to put it
 in degree zero. The localization and descended cohomology functors of
 def-weil-abstract-derived-category identify this with `H^q(K)[0]`. The standard
 t-structure of def-sbc-standard-tstructure-derived-category has exactly these

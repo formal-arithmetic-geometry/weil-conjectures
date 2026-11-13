@@ -51,7 +51,7 @@ import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 /-! # The explicit scalar cone in normalized word coordinates
 
 Source: blueprint main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, first sentence through lem-fix-weil-operations,
+prop-weil-operations.proof.md, first sentence through prose-10-20,
 first paragraph; agent-extracted normalization calculation
 (blueprint: lem-pod-explicit-scalar-cone-word-coordinates).
 
@@ -241,7 +241,7 @@ The primitive realization structures impose the simultaneous quotient and Roos
 normalizations; no finite-level flatness or Tor interval is assumed.
 
 Source: blueprint main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, first sentence through lem-fix-weil-operations,
+prop-weil-operations.proof.md, first sentence through prose-10-20,
 first paragraph; agent-extracted comparison normalization
 (blueprint: lem-pod-explicit-scalar-cone-word-coordinates).
 

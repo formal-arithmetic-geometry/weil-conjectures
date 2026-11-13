@@ -54,7 +54,7 @@ For a geometric point `ȳ : Spec Ω ⟶ Y`, the restriction of the Kummer bounda
 `∂κ(t) ∈ H²_{s(Y)}(𝔸¹_Y, Λ(1))` along the base change `𝔸¹_ȳ : 𝔸¹_Ω ⟶ 𝔸¹_Y` of the zero section
 pair (`AlgebraicGeometry.Etale.restrictSupportedClass`), read in `H²_{s(ȳ)}(𝔸¹_Ω, Λ(1))`, is
 sent to `1` by the normalized isomorphism `H²_{s(ȳ)}(𝔸¹_Ω, Λ(1)) ≅ Λ` of
-`thm-pur-rank-one-local-calculation`
+`example-closed-support`
 (`AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv`): the restricted class is the
 Kummer boundary of the coordinate of `𝔸¹_Ω`
 (`AlgebraicGeometry.Etale.supportedClassMap_restrictSupportedClass_affineLineOrientation`). -/
@@ -83,7 +83,7 @@ orientation `pur_s : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` along the base change `𝔸¹_
 (`AlgebraicGeometry.Etale.restrictAffineLineZeroLocusHom`, the exceptional base change applied
 to the pullback of `pur_s`), read as a class in `H²_{s(ȳ)}(𝔸¹_Ω, Λ(1))`
 (`AlgebraicGeometry.Etale.supportCohomologyAddEquiv`), is the normalized class `1` of
-`thm-pur-rank-one-local-calculation`: the isomorphism
+`example-closed-support`: the isomorphism
 `AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv` sends it to `1`. Indeed the
 restriction of `pur_s` is the orientation over `Spec Ω`
 (`AlgebraicGeometry.Etale.restrictAffineLineZeroLocusHom_affineLineOrientation`: the Kummer

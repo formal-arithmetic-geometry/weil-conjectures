@@ -645,10 +645,11 @@ Proof:
    The unit is invertible after restriction. Base change of an object over U to Z
    is empty, giving the first zero composite.
 2. On affine ind-etale bases use the closed-site lift and its adjunction
-   (lem-weil-pbc-ind-etale-basis, lem-exc-closed-site-adjunction,
-   def-exc-closed-site-lift). The inverse-image colimit has the terminal evaluation
-   object given by the lift. The closed counit is therefore the identity on the basis
-   and globally invertible. Naturality with multiplication makes the maps linear.
+   (proposition-pro-etale-affines-form-basis,
+   proposition-extension-zero-restriction-closed-subscheme,
+   proposition-extension-zero-restriction-closed-subscheme). The inverse-image colimit has the
+   terminal evaluation object given by the lift. The closed counit is therefore the identity on the
+   basis and globally invertible. Naturality with multiplication makes the maps linear.
 3. Refine to the bounded w-contractible affine covering family. Quasi-compactness
    of the open complement selects finitely many basic opens. The closed-localization
    covering consists of these opens and the specialization neighbourhood of the

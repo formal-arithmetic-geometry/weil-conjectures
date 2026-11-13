@@ -155,7 +155,7 @@ import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 sk-lem-sf-flat-model/det-sf-flat-model-generation.md
-(blueprint: det-sf-flat-model-generation).
+(blueprint: lemma-flat-models-generators--2).
 
 The six statements give the three clauses separately on the etale and pro-etale sites.
 `Dctf` is expanded using constructible cohomology, finite cohomological bounds, and the
@@ -177,8 +177,8 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
 /-- Closed tails and relative openness for an ordered finite stratification.
-Source: blueprint det-sf-flat-model-generation, clause (1)
-(blueprint: det-sf-flat-model-generation). -/
+Source: blueprint lemma-flat-models-generators--2, clause (1)
+(blueprint: lemma-flat-models-generators--2). -/
 def FlatModelOrderedStratification {X : Scheme.{u}} (str : Stratification X) :
     Prop :=
   ∀ k : Fin str.n,
@@ -188,8 +188,8 @@ def FlatModelOrderedStratification {X : Scheme.{u}} (str : Stratification X) :
 
 /-- A finite extension filtration has zero first term, final term isomorphic to F,
 and exactly one specified quotient per stratum, in the prescribed order.
-Source: blueprint det-sf-flat-model-generation, clause (2)
-(blueprint: det-sf-flat-model-generation). -/
+Source: blueprint lemma-flat-models-generators--2, clause (2)
+(blueprint: lemma-flat-models-generators--2). -/
 def FlatModelExtensionFiltration {C : Type v} [Category.{w} C] [Abelian C]
     {m : ℕ} (G : Fin m → C) (F : C) : Prop :=
   ∃ M : Fin (m + 1) → C,
@@ -199,8 +199,8 @@ def FlatModelExtensionFiltration {C : Type v} [Category.{w} C] [Abelian C]
         (h : f ≫ g = 0), (ShortComplex.mk f g h).ShortExact
 
 /-- Local constancy and finite projective geometric stalks on the small etale site.
-Source: blueprint det-sf-flat-model-generation, clauses (1) and (3)
-(blueprint: det-sf-flat-model-generation). -/
+Source: blueprint lemma-flat-models-generators--2, clauses (1) and (3)
+(blueprint: lemma-flat-models-generators--2). -/
 def FlatModelEtaleLisseProjective {S : Scheme.{u}} (A : Type (u + 1)) [CommRing A]
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) : Prop :=
   IsLocallyConstantSheaf L ∧
@@ -210,8 +210,8 @@ def FlatModelEtaleLisseProjective {S : Scheme.{u}} (A : Type (u + 1)) [CommRing 
 
 /-- The ordinary locally closed extension a_! = g_* j_!, with j = a.toImage and
 closed g = a.imageι. Its quasi-compactness follows from the embedding into Noetherian X.
-Source: blueprint det-sf-flat-model-generation, conventions and clause (2)
-(blueprint: det-sf-flat-model-generation). -/
+Source: blueprint lemma-flat-models-generators--2, conventions and clause (2)
+(blueprint: lemma-flat-models-generators--2). -/
 def flatModelEtaleExtension {S X : Scheme.{u}} [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] (a : S ⟶ X) (ha : IsImmersion a) :
     Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤
@@ -580,8 +580,8 @@ private theorem flatModel_filtration_mem
   exact P.prop_of_iso ((_root_.DerivedCategory.singleFunctor C 0).mapIso e) (h (Fin.last m))
 
 /-- Clause (1) on the etale site: an ordered finite stratification with projective stalks.
-Source: blueprint det-sf-flat-model-generation
-(blueprint: det-sf-flat-model-generation).
+Source: blueprint lemma-flat-models-generators--2
+(blueprint: lemma-flat-models-generators--2).
 
 Proof:
 By the two constructibility definitions choose a finite locally closed partition adapted to F.
@@ -597,17 +597,17 @@ subset of Z and has the nonempty cell containing x, so its cell is also unproces
 union of the unprocessed cells equals the finite union of their Z, hence is closed; this also
 handles Z whose own cell was empty. Thus every tail is closed and its first cell is open in it.
 Give each cell the open subscheme structure inside the reduced induced closed subscheme on Z,
-supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. It maps to its old stratum T:
+supplied by [lemma-flat-models-generators--2]. It maps to its old stratum T:
 locally where T is closed, its defining ideal is contained in the radical ideal of the reduced
 cell, since every cell point belongs to T. The affine quotient description therefore factors the
 cell immersion through T, and these local factorizations agree because immersions are
 monomorphisms. Pulling the old trivializing covers and constant models back along these actual
 maps gives finite locally constant restrictions. Each cell is constructible because it is a
-difference of closed sets in the Noetherian space, by [def-weil-constructible-subset]. This
+difference of closed sets in the Noetherian space, by [lemma-flat-models-generators--2]. This
 writes out the finite closed-set refinement argument. If X is empty use the empty partition.
 
 For either site the geometric-stalk adjunction is a morphism of topoi by
-[lem-fix-geometric-stalk-topos-point]. Apply the ringed-topos flat-pullback theorem to this
+[lemma-flat-models-generators--2]. Apply the ringed-topos flat-pullback theorem to this
 point with coefficient ring its stalk A: a flat F has flat geometric stalks. No conservativity
 of pro-etale geometric points is used. Every finite local module model on a nonempty
 trivializing object is isomorphic to such a stalk. If M is one of these finite A-modules, choose
@@ -653,8 +653,8 @@ abbrev flatModelStratumExtension {X : Scheme.{u}} [IsNoetherian X] (A : Type (u 
 
 /-- Clause (2) on the etale site: the specified finite sheaf-extension filtration
 and flat constructible degree-zero factors of finite Tor amplitude.
-Source: blueprint det-sf-flat-model-generation
-(blueprint: det-sf-flat-model-generation).
+Source: blueprint lemma-flat-models-generators--2
+(blueprint: lemma-flat-models-generators--2).
 
 Proof:
 The Noetherian hypothesis implies that the underlying space has the descending chain condition
@@ -679,12 +679,12 @@ its pro-etale counterpart, exact i_*, and all four restriction identities are
 [lem-weil-pbc-proetale-ringed-open-closed]. In the etale case the open unit, closed counit, and
 the two vanishing lemmas give the same identities j^*j_!=1, i^*i_*=1, i^*j_!=0, j^*i_*=0; the
 maps are module-linear because their underlying adjunction maps are. Exactness of i_* in this
-case is explicitly part of [lem-cbc-open-closed-recollement]. On either site the open-closed
-sequence shows that a sheaf with both restrictions zero is zero. For any short exact sequence,
-tensor with H and form its homology objects (including the outer kernel and cokernel). If j^*H
-and i^*H are flat, exactness and the tensor comparison imply that each such homology object
-restricts to zero on both sides, hence is zero. Thus tensor with H preserves short exact
-sequences: flatness can be tested on this open/closed pair. In particular j_! and i_* preserve
+case is explicitly part of [proposition-extension-zero-restriction-closed-subscheme--8]. On either
+site the open-closed sequence shows that a sheaf with both restrictions zero is zero. For any short
+exact sequence, tensor with H and form its homology objects (including the outer kernel and
+cokernel). If j^*H and i^*H are flat, exactness and the tensor comparison imply that each such
+homology object restricts to zero on both sides, hence is zero. Thus tensor with H preserves short
+exact sequences: flatness can be tested on this open/closed pair. In particular j_! and i_* preserve
 flat sheaves, using their restriction identities. This argument works for all module sheaves,
 including nonclassical pro-etale test sheaves. We also need to compare scheme structures, rather
 than identify a topologically open immersion with an open immersion of schemes. If h:T→Y is a
@@ -722,13 +722,13 @@ belongs to \Dctf. This proves the assertion about all generators, not only the s
 First verify closed/open interchange on either site. In a cartesian square with closed g:Z→X,
 open u:W→X, open v:Z_W→Z and closed h:Z_W→W, the restriction formula for direct image gives
 u^*g_*v_!L≅h_*L, so open adjunction gives a map u_!h_*L→g_*v_!L. Pulling back by g, the
-open-extension base-change statements [lem-cbc-extension-zero-base-change] and
-[lem-cbc-proetale-extension-zero-base-change] identify the left side with v_!h^*h_*L≅v_!L; the
-right side is v_!L by the closed counit. The induced map is v_! of that counit and is
-invertible. On the open complement of Z, the right side is zero; base change for u_! identifies
-the left side with extension of the restriction of h_*L to W\Z, which is zero by the open/closed
-vanishing identity. The exact open-closed sequence detects isomorphisms, so the map is an
-isomorphism. Every complement here is quasi-compact by step 1. This also identifies the
+open-extension base-change statements [proposition-extension-zero-restriction-closed-subscheme--11]
+and [proposition-extension-zero-restriction-closed-subscheme--11] identify the left side with
+v_!h^*h_*L≅v_!L; the right side is v_!L by the closed counit. The induced map is v_! of that counit
+and is invertible. On the open complement of Z, the right side is zero; base change for u_!
+identifies the left side with extension of the restriction of h_*L to W\Z, which is zero by the
+open/closed vanishing identity. The exact open-closed sequence detects isomorphisms, so the map is
+an isomorphism. Every complement here is quasi-compact by step 1. This also identifies the
 definition g_*j_! using scheme-theoretic closure with u_!h_* in any open W where the immersion
 is closed: the closure restricted to W is that closed subscheme, since its affine defining
 kernel is the same quotient ideal. Induct on the number of ordered strata, allowing the given
@@ -793,8 +793,8 @@ theorem etale_flatConstructible_extensionFiltration
 
 /-- Clause (3) on the etale site: equality with the smallest replete full
 subcategory closed under shifts, cones and direct summands.
-Source: blueprint det-sf-flat-model-generation
-(blueprint: det-sf-flat-model-generation).
+Source: blueprint lemma-flat-models-generators--2
+(blueprint: lemma-flat-models-generators--2).
 
 Proof:
 For a locally constant L with finite projective geometric stalks, each constant model on a
@@ -816,18 +816,18 @@ is the degree-zero ordinary tensor a_!L\otimes_A N. It therefore has Tor amplitu
 belongs to \Dctf. This proves the assertion about all generators, not only the strata of one F.
 
 The category \Dctf is thick. On the etale site, bounded constructible complexes are triangulated
-by [prop-constructible-derived-subcategory]. They are also closed under retracts: if e is the
+by [corollary-ambient-ind-derived--1]. They are also closed under retracts: if e is the
 idempotent on each constructible cohomology sheaf induced by a retract, its image is the kernel
 of 1-e and is constructible by [thm-constructible-serre]; the same finite cohomological bounds
 persist. Tensoring a triangle with any N[0] is triangulated by
-[lem-kun-derived-tensor-triangulated], so its cohomology long exact sequence shows that an
-extension of objects with intervals [a,b] and [c,d] has interval [min(a,c),max(b,d)]. A shift by
+[proposition-open-direct-image-preserves-finite], so its cohomology long exact sequence shows that
+an extension of objects with intervals [a,b] and [c,d] has interval [min(a,c),max(b,d)]. A shift by
 n replaces [a,b] by [a-n,b-n], and a retract retains the interval because its tensor cohomology
 is a retract of the original tensor cohomology. These arguments prove the etale assertion. For
 the pro-etale site use the exact comparison and its triangulated derived functor, the
-equivalence of bounded constructible categories [sk-thm-pe-constructible-comparison], and the
-interval-preserving equivalence [det-pe-finite-tor-comparison-noetherian]. Here X is qcqs by
-step 1 and A is Noetherian since its finite set of ideals has no infinite increasing chain. This
+equivalence of bounded constructible categories [theorem-comparison-constructible-sheaves], and the
+interval-preserving equivalence [corollary-finite-tor-amplitude-under-comparison--1]. Here X is qcqs
+by step 1 and A is Noetherian since its finite set of ideals has no infinite increasing chain. This
 transfer respects ambient cones: lift the connecting morphism between the two bounded
 constructible ends by full faithfulness and take its etale cone. It respects ambient retracts
 too: on each cohomology sheaf lift the associated idempotent by the sheaf equivalence, take its
@@ -838,13 +838,13 @@ categories.
 Let C\in\Dctf(X,A), with Tor interval [a,b], a\le b. On the etale site
 [lem-sf-etale-flat-constructible] gives an isomorphic complex P, zero outside [a,b], whose terms
 are flat constructible. On the pro-etale site first use
-[det-pe-finite-tor-comparison-noetherian] to choose C_0\in D^b_{ctf}(X_{\mathrm{et}},A) with
-\nu_X^*C_0\cong C and the same interval. Apply the same etale model theorem to C_0 and pull its
+[corollary-finite-tor-amplitude-under-comparison--1] to choose C_0\in D^b_{ctf}(X_{\mathrm{et}},A)
+with \nu_X^*C_0\cong C and the same interval. Apply the same etale model theorem to C_0 and pull its
 model back termwise. The comparison functor is exact and commutes with cohomology, so the
 pulled-back complex represents C and remains zero outside [a,b]. Its terms are constructible by
 the sheaf equivalence and flat by the ringed-topos flat-pullback theorem. Hence a bounded flat
 constructible model exists on either site for the general finite ring and general Noetherian X
-of this item. This cites the independent model theorem, not the parent sk-lem-sf-flat-model
+of this item. This cites the independent model theorem, not the parent lemma-flat-models-generators
 which uses this item.
 
 Let \mathcal G be the full replete subcategory generated by the a_!L under the three indicated

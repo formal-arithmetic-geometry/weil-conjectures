@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.ProperKunneth
 
 Two coherences of the six-functor package on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` for a commutative square whose top side
 factors as `q = g ≫ h`, used for the exceptional Künneth part of identity (a) of the trace-class
-source exchange (blueprint `lem-trf-trace-source-exchange`, Step 3):
+source exchange (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3):
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekSquareIso_padicAlgCl_hom_app_comp`: the
   composition isomorphism of the square is pasted from those of its pieces;

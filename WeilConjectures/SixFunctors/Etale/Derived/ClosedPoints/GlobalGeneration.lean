@@ -11,18 +11,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
 # Globally generated étale sheaves
 
 An étale sheaf `F` of `Λ`-modules on a scheme `X` is globally generated
-(`AlgebraicGeometry.Etale.IsGloballyGenerated`, blueprint `def-kun-global-generated`) if its
-evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is an epimorphism. This file collects the
-formal properties of this notion.
+(`AlgebraicGeometry.Etale.IsGloballyGenerated`, blueprint
+`corollary-open-direct-image-over-field--2`) if its evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is
+an epimorphism. This file collects the formal properties of this notion.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isGloballyGenerated_iff_forall_epi_sheafFiber_map`
-  (`lem-kun-global-generated-stalkwise`): global generation is stalkwise surjectivity of the
+  (`corollary-open-direct-image-over-field--2`): global generation is stalkwise surjectivity of the
   evaluation morphism.
 - `AlgebraicGeometry.Etale.isGloballyGenerated_of_epi_sigmaDesc`: a sheaf which is jointly
   covered by globally generated sheaves is globally generated.
-- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isColimit` (`lem-kun-colim-gbl-gen`):
+- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isColimit`
+(`corollary-open-direct-image-over-field--2`):
   colimits of globally generated sheaves are globally generated.
 - `AlgebraicGeometry.Etale.isZero_of_isGloballyGenerated`: a globally generated sheaf without
   nonzero global sections is zero.
@@ -100,10 +101,10 @@ theorem isGloballyGenerated_of_epi_sigmaDesc {X : Scheme.{u}} {ι : Type w}
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i), e]
 
-/-- Blueprint `lem-kun-colim-gbl-gen`: **colimits of globally generated sheaves.** The point
-of a colimit cocone of a diagram of globally generated étale sheaves of `Λ`-modules (for
-instance a filtered colimit) is globally generated: the legs of a colimit cocone are jointly
-epimorphic. -/
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **colimits of globally generated
+sheaves.** The point of a colimit cocone of a diagram of globally generated étale sheaves of
+`Λ`-modules (for instance a filtered colimit) is globally generated: the legs of a colimit cocone
+are jointly epimorphic. -/
 theorem isGloballyGenerated_of_isColimit {X : Scheme.{u}} {J : Type w} [Category J]
     {D : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasCoproduct D.obj]
     {c : Cocone D} (hc : IsColimit c) (hD : ∀ j, IsGloballyGenerated Λ X (D.obj j)) :
@@ -130,7 +131,7 @@ theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
   refine (IsZero.iff_id_eq_zero _).2 ((cancel_epi (globalSectionsEvaluation Λ X F)).1 ?_)
   rw [h0, zero_comp, comp_zero]
 
-/-- Blueprint `lem-kun-global-generated-stalkwise`: **global generation is stalkwise
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **global generation is stalkwise
 surjectivity.** An étale sheaf `F` of `Λ`-modules is globally generated if and only if its
 evaluation morphism is surjective on every geometric stalk. The stalk functors preserve
 epimorphisms, being left adjoints; conversely, the cokernel projection of the evaluation

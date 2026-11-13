@@ -237,7 +237,7 @@ section Datum
 variable [UpperStarPreservesFlat A] {X : Scheme.{u}} (g : X ⟶ X)
   {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
 
-/-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data.
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: Dual and Tate Weil data.
 
 The *contragredient datum* `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` on the coefficient dual
 `K^∨ = RHom(K, Λ_X)` of a complex `K` with a Weil datum `φ_K : Lg^* K ≅ K`, the typed composite
@@ -277,7 +277,7 @@ lemma derivedTensor_map_contragredientWeilDatum_comp_coefficientEvaluation
   rw [← leftDerivedUpperStarMonoidal_μ]
   exact Functor.LaxMonoidal.whiskerLeft_ihomComparison_comp_pre_comp_ev _ φ _
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 1).
 
 The contragredient datum `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` of a Weil datum `φ_K : Lg^* K ≅ K` on a
@@ -290,7 +290,7 @@ theorem isIso_contragredientWeilDatum (φ : L((g)^*[A]).obj K ≅ K) (hK : IsDua
   let := leftDerivedUpperStarMonoidal A g
   exact Functor.LaxMonoidal.isIso_ihomComparison_comp_pre _ (Y := Kᘁ) φ _
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 2).
 
 The coefficient evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` intertwines the tensor product datum
@@ -307,7 +307,7 @@ theorem map_coefficientEvaluation_comp_leftDerivedUpperStarUnitIso_hom
   rw [← leftDerivedUpperStarMonoidal_δ]
   exact Functor.LaxMonoidal.map_ev_comp_eq_δ_comp_ihomComparison_comp_pre _ φ _
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 3).
 
 For a Weil datum `τ : Lg^* T ⟶ T` on an object `T` (for `T = Λ_X(r)`, the Tate datum `τ_r`),
@@ -333,8 +333,8 @@ theorem map_twistedEvaluation_comp (φ : L((g)^*[A]).obj K ≅ K)
       rfl)
     hu
 
-/-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data (the datum on an internal
-hom).
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: Dual and Tate Weil data (the datum on an
+internal hom).
 
 The datum `Lg^* RHom(K, M) ⟶ RHom(K, M)` on the internal hom of a complex `K` with a Weil datum
 `φ_K : Lg^* K ≅ K` into a complex `M` with a datum `χ : Lg^* M ⟶ M`, the typed composite
@@ -357,7 +357,7 @@ lemma contragredientWeilDatum_eq_derivedHomWeilDatum (φ : L((g)^*[A]).obj K ≅
       derivedHomWeilDatum A g φ (leftDerivedUpperStarUnitIso A g).hom :=
   rfl
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: the contragredient datum of a perfect
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: the contragredient datum of a perfect
 complex as an isomorphism `φ_{K^∨} : Lg^* K^∨ ≅ K^∨`
 (`AlgebraicGeometry.Etale.isIso_contragredientWeilDatum`). -/
 noncomputable def contragredientWeilDatumIso (φ : L((g)^*[A]).obj K ≅ K) (hK : IsDualizable K) :
@@ -366,7 +366,7 @@ noncomputable def contragredientWeilDatumIso (φ : L((g)^*[A]).obj K ≅ K) (hK 
   haveI := isIso_contragredientWeilDatum A g φ hK
   asIso (contragredientWeilDatum A g φ)
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 4).
 
 Let `γ : T ≅ ω_X` be an isomorphism from an invertible complex `T` (for an orientation,
@@ -374,8 +374,8 @@ Let `γ : T ≅ ω_X` be an isomorphism from an invertible complex `T` (for an o
 object `ω_X`), which is a morphism of Weil objects for data
 `τ : Lg^* T ⟶ T` and `χ : Lg^* ω_X ⟶ ω_X` (for the purity isomorphism and the
 geometric-Frobenius data this is the Weil equivariance of purity,
-`thm-pur-weil-equivariance-of-purity-and-trace`). Then the identification
-`θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` of `thm-sf-dual-perfect`
+`proposition-purity-trace-commute-frobenius`). Then the identification
+`θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` of `theorem-poincare-duality--2`
 (`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor`) is an isomorphism of Weil
 objects, for the datum on `𝔻_X K = RHom(K, ω_X)` induced by `φ_K` and `χ`
 (`AlgebraicGeometry.Etale.derivedHomWeilDatum`) and the twisted contragredient datum

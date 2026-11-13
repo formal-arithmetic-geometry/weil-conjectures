@@ -56,7 +56,8 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedFiniteExchangeCo
 # Complete pro-etale compact-support base change
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-node thm-cbc-complete-proetale (blueprint: thm-cbc-complete-proetale).
+node proposition-composition-base-change-rf-shriek--4 (blueprint:
+proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public noncomputable section
@@ -79,7 +80,8 @@ attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
   WeilConjectures.SemilinearSections.hasDerived flatConstantModulesAbelian
 
 /-- The proper/open gamma of a refinement, for the identity on the open part.
-Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, C_u (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 @[irreducible]
 def cbcRefinementGamma {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :=
@@ -88,7 +90,8 @@ def cbcRefinementGamma {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
   cbcProperOpenGamma d c₁.i (𝟙 X) u.hom c₂.i (u.i_hom.trans (Category.id_comp _).symm)
 
 /-- The refinement gamma preceded by the inverse proper identity comparison.
-Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, C_u (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 @[irreducible]
 def cbcRefinementGammaComp {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :=
@@ -110,7 +113,8 @@ private theorem cbcIsIso_app_of_isIso {C E : Type*} [Category C] [Category E] {F
     (α : F ⟶ G) [IsIso α] (x : C) : IsIso (α.app x) := inferInstance
 
 /-- Precomposing the refinement gamma with the proper identity comparison keeps it invertible.
-Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, C_u (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcRefinementGammaComp_app_isIso {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X)
     (h : IsIso ((cbcRefinementGamma d u).app K)) :
@@ -150,7 +154,8 @@ end
 
 /-- The canonical refinement map, directed from the coarser to the finer compactification.
 It is proper pushforward of gamma, with the proper identity and composition comparisons.
-Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, C_u (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 def cbcRefinementMap {X Y : Scheme.{t}} {f : X ⟶ Y} [qf : QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X) :
     (cbcSupport d c₂).obj K ⟶ (cbcSupport d c₁).obj K :=
@@ -158,7 +163,8 @@ def cbcRefinementMap {X Y : Scheme.{t}} {f : X ⟶ Y} [qf : QuasiCompact f]
 
 /-- The refinement map is invertible as soon as its proper/open gamma component is.
 The remaining factors are proper pushforward and the identity and composition comparisons.
-Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, C_u (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 theorem cbcRefinementMap_isIso_of_gamma {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X)
     (h : IsIso ((cbcRefinementGamma d u).app K)) :
@@ -170,7 +176,8 @@ theorem cbcRefinementMap_isIso_of_gamma {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiC
 
 /-- The compatible-tower compact-support composition map. Its middle factor is the
 specified proper/open gamma, so this is not an arbitrary isomorphism of the endpoints.
-Source: blueprint proof step 8, D_j (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, D_j (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 def cbcCompositionMap {X Y Z : Scheme.{t}} {f : X ⟶ Y} {h : Y ⟶ Z}
     [qh : QuasiCompact h]
     (cf : Compactification f) (ch : Compactification h) (chf : Compactification (f ≫ h))
@@ -189,7 +196,8 @@ def cbcCompositionMap {X Y Z : Scheme.{t}} {f : X ⟶ Y} {h : Y ⟶ Z}
 
 /-- Composition for a supplied Cartesian compatible tower. The open immersion and
 quasi-compactness of b are derived from that square and the outer compactification.
-Source: blueprint proof step 8, compatible towers (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, compatible towers (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 def cbcTowerCompositionMap {X Y Z : Scheme.{t}} {f : X ⟶ Y} {h : Y ⟶ Z}
     [qh : QuasiCompact h]
     (cf : Compactification f) (ch : Compactification h) (chf : Compactification (f ≫ h))
@@ -239,7 +247,7 @@ private theorem cbcCompletedExchange_naturality
 /-- Every normalized proper/open refinement map is invertible on the stated inputs.
 No Cartesian hypothesis is imposed on the refinement square.
 Source: blueprint statement and proof step 8; Stacks 0F7B, 09C9
-(blueprint: thm-cbc-complete-proetale).
+(blueprint: proposition-composition-base-change-rf-shriek--4).
 Proof: pass to the strict quotient tower after constant-coefficient restriction. The
 section and unit normalizations identify gamma with the strict proper/open gamma.
 Finite evaluation is the normalized finite-coefficient proper/open map on the retained
@@ -260,7 +268,8 @@ theorem cbcRefinementMap_isIso
 
 /-- The canonical compactification comparison through any supplied common refinement.
 Its factors are the specified proper/open refinement maps, not chosen endpoint isos.
-Source: blueprint proof step 8, I_12 (blueprint: thm-cbc-complete-proetale). -/
+Source: blueprint proof step 8, I_12 (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 def cbcCompactificationComparison
     {X Y : Scheme.{t}} {f : X ⟶ Y}
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

@@ -57,8 +57,8 @@ therefore carries the mth image into the (m+k)th image. This holds on arbitrary 
 checking on an affine cover. The resulting lambda maps are additive in a, compose by
 multiplication of coefficients, and in degree zero are scalar multiplication.
 2. The Rees algebra has degree k piece I^k t^k and degree zero A
-(prop-nagata-rees-graded, lemma-nagata-rees-degree-zero). Noetherianity makes I finitely
-generated, hence its Rees algebra finite type over A (prop-nagata-rees-finite-generation).
+(definition-admissible-blow-up--1, lemma-nagata-rees-degree-zero). Noetherianity makes I finitely
+generated, hence its Rees algebra finite type over A (definition-admissible-blow-up--1).
 3. Regard the family I^m F with these maps as a graded module sheaf. Local generators of
 F in degree zero generate all degrees: on affine opens write a section as a sum a_j u_j
 and locally express each u_j in the chosen generators. Thus the graded sheaf is finite

@@ -20,7 +20,7 @@ open immersion and `Λ` a torsion ring. Then `R^q j_* M = 0` for `q > 1` and eve
 blueprint `thm-exc-curve-open-dimension-general`), and for `Λ` finite of exponent invertible in
 `k` every `R^q j_*` preserves constructibility
 (`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage_of_isOpenImmersion`, blueprint
-`thm-exc-curve-open-constructible-general`). So `(U, T)` satisfies the open-complement condition
+`corollary-open-direct-image-over-field--1`). So `(U, T)` satisfies the open-complement condition
 with constant `1` (`AlgebraicGeometry.Etale.openComplementCondition_one`).
 
 The blueprint proves the vanishing on the geometric stalks, which are the cohomology of the
@@ -34,13 +34,13 @@ instead with affine opens, which avoids the local Galois theory:
   affine (`AlgebraicGeometry.Scheme.exists_isAffineOpen_inf_isAffineOpen`), so `V ×_T U_L` is an
   affine `L`-scheme of finite type and of dimension at most one; by the affine Artin vanishing
   theorem (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`, blueprint
-  `thm-sc-affine-torsion-cd`) its torsion cohomological dimension is at most one;
+  `lemma-uniform-bounds-pro-etale-affines`) its torsion cohomological dimension is at most one;
 * the local criterion `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_exists`
   concludes.
 
 The constructibility is the finite-type constructibility theorem
 `AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`
-(`thm-dg-finite-type-constructibility`).
+(`proposition-six-operations-dctf--2`).
 -/
 
 @[expose] public section
@@ -138,7 +138,7 @@ theorem isZero_higherDirectImage_of_isOpenImmersion (hΛ : IsAddTorsion Λ) {k :
 
 variable [Finite Λ]
 
-/-- Blueprint `thm-exc-curve-open-constructible-general`: Open direct-image constructibility on
+/-- Blueprint `corollary-open-direct-image-over-field--1`: Open direct-image constructibility on
 arbitrary curves.
 
 Let `T` be a scheme of finite type and of dimension at most one over a field `k`, let
@@ -148,7 +148,7 @@ constructible. The blueprint takes for `k` a finite field or its algebraic closu
 
 This is the finite-type constructibility theorem
 `AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`
-(`thm-dg-finite-type-constructibility`); the dimension hypothesis is not needed. The blueprint
+(`proposition-six-operations-dctf--2`); the dimension hypothesis is not needed. The blueprint
 argues instead with the degree-zero case `thm-fin-open-degree-zero`, the vanishing
 `thm-exc-curve-open-dimension-general` above degree one and the finiteness of the degree-one
 stalks at the boundary points. -/
@@ -167,12 +167,12 @@ theorem isConstructibleSheaf_higherDirectImage_of_isOpenImmersion {k : Type u} [
 /-- The open-complement condition with constant `1` on curves: for `T` of finite type and of
 dimension at most one over a field `k`, an open immersion `j : U ⟶ T` and a finite ring `Λ`
 whose exponent is invertible in `k`, `(U, T)` satisfies the open-complement condition of
-`def-exc-open-complement-bound` with `c = 1`. This is the case `d = 1` of
-`lem-exc-open-complement-known` with the sharper constant of
+`theorem-f-shriek-finite-coefficients--1` with `c = 1`. This is the case `d = 1` of
+`theorem-f-shriek-finite-coefficients--1` with the sharper constant of
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isOpenImmersion`
 (`thm-exc-curve-open-dimension-general`) and
 `AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage_of_isOpenImmersion`
-(`thm-exc-curve-open-constructible-general`). -/
+(`corollary-open-direct-image-over-field--1`). -/
 theorem openComplementCondition_one {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {T U : Scheme.{u}} (aT : T ⟶ Spec (.of k))
     [LocallyOfFiniteType aT] [QuasiCompact aT] (hT : topologicalKrullDim T ≤ 1) (j : U ⟶ T)

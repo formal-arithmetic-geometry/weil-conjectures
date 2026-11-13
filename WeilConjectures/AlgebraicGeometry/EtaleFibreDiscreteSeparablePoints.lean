@@ -34,9 +34,9 @@ Source: Stacks Project, Morphisms, Lemma 02GL(2)
 
 Proof:
 1. The fibre projection is etale by base change
-   (`lem-weil-pbc-etale-base-change-finite-limits`, Stacks 02GO).
+   (`situation-conventions`, Stacks 02GO).
 2. An affine open around a fibre point is etale over the base field by restriction and
-   composition (`lem-weil-pbc-etale-composition-cancellation`). Its coordinate algebra is
+   composition (`definition-torsion-sheaves--3`). Its coordinate algebra is
    a finite product of finite separable fields
    (`lem-weil-pbc-etale-algebra-over-field-product`, Stacks 00U3).
 3. The spectrum of that product has open singleton components, each isomorphic over the

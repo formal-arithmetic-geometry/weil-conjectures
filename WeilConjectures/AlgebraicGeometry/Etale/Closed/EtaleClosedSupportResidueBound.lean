@@ -36,7 +36,7 @@ set_option linter.privateModule false
 /-!
 # Residue tensor bound for closed support
 
-Source: blueprint prop-exc-closed-tor, tensor-support comparison paragraphs
+Source: blueprint theorem-f-shriek-finite-coefficients--1, tensor-support comparison paragraphs
 (blueprint: lem-exc-closed-residue-bound).
 -/
 set_option autoImplicit false

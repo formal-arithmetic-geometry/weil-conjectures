@@ -20,7 +20,7 @@ import all WeilConjectures.AlgebraicGeometry.Curve.GenericTorsionFiniteStalk
 /-!
 # The all-torsion cohomological dimension of a finite field
 
-Source: main-20261015, det-pe-unbounded-classical-bounds, steps 1--3.
+Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, steps 1--3.
 (blueprint: lem-sfb-finite-field-all-torsion-cd)
 -/
 

@@ -26,7 +26,7 @@ translation `σ̄_c`, `c ∈ k₀`, carries to its image under some `K`-automorp
 (`LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`).
 
 This is the formal local geometry at `∞` behind the ramification of the linear Artin–Schreier
-sheaves at infinity (blueprint `lem-a1-artin-schreier-ramified-infinity`).
+sheaves at infinity (blueprint `lemma-unramified-at-infinity-no-linear-characters--1`).
 -/
 
 @[expose] public section

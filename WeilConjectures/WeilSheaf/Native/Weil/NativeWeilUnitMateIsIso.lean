@@ -70,7 +70,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 transpose of the forgotten unit is invertible. The assertion is about one
 arrow; it supplies no bifunctor, natural transformation or adjoint existence.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/transposition paragraph;
+Source: prose-10-20, internal-Hom/transposition paragraph;
 native tensor lift step 2; Stacks Tags 06YS, 08J9 and 0A97
 (blueprint: lem-sf-native-weil-unit-mate-iso).
 

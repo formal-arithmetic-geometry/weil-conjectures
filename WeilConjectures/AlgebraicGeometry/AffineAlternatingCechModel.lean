@@ -23,7 +23,7 @@ namespace AlgebraicGeometry
 
 /-- Restrict the increasing-tuple section complex to A, sheafify on Spec A, and
 extend by zero to integer degrees. No choice of a representative is made.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--3; Stacks Tag 0A1D.
 (blueprint: def-pc-affine-alternating-cech-model). -/
 noncomputable def affineAlternatingCechModel
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)

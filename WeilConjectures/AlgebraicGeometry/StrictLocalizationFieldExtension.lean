@@ -18,7 +18,7 @@ neighbourhoods of `s` and of `a ≫ s` (`AlgebraicGeometry.Scheme.isIso_pointSma
 hence their limits: the strict localizations `S_(a ≫ s)` and `S_(s)` are isomorphic over `S`
 (Stacks, Tag 03PN). This reduces statements about strict localizations at geometric points with
 separably closed field to the case of an algebraically closed field (blueprint
-`det-tf-transverse-corner-constant`).
+`lemma-punctured-surface-punctured-curve--1`).
 
 ## Main statements
 

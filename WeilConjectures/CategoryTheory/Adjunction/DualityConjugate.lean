@@ -21,7 +21,7 @@ adjoint `R` of `S` is isomorphic to `D_X ∘ F ∘ D_Y`
 
 For Weil complexes, with `F = f^*`, `G = Rf_*` and `S = Rf_!`, this gives `Rf^! ≅ 𝔻_X f^* 𝔻_Y`
 from Verdier biduality and the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (blueprint
-`det-pd-biduality-coefficients`).
+`theorem-verdier-biduality`).
 -/
 
 @[expose] public section

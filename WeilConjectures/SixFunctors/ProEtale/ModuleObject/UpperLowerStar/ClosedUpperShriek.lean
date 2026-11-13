@@ -25,7 +25,7 @@ of the unit of `j^* ⊣ j_*` (`ProEtale.CondensedRing.sectionsWithSupport`), and
 pushforward `i_*` (`ProEtale.CondensedRing.lowerStarClosedUpperShriekAdjunction`). This is the
 module-object counterpart of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion`, used for
-blueprint `sk-lem-formal-closed-support`.
+blueprint `lemma-sections-support-closed-subscheme`.
 
 The adjunction is the composite of two adjunctions: a morphism `i_* P ⟶ N` is killed by the unit
 `N ⟶ j_* j^* N` (since `j^* i_* P = 0`), so factors uniquely through `Γ_Z N`; and `Γ_Z N`,

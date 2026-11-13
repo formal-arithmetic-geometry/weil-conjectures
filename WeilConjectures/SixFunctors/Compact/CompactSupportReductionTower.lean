@@ -488,7 +488,7 @@ lem-coef-semilinear-derived-sections identify its evaluations with Rp_* j_!,
 including on all derived morphisms. They apply to arbitrary semilinear sections.
 4. Restrict every level along B_Y to A_n. The projection compatibility makes the
 transitions B_Y-linear. Exact restriction descends to the derived strict-tower
-category by lem-weil-pbc-exact-functor-derived-factorization.
+category by situation-conventions.
 5. Each factor is triangulated; use lem-pc-right-derived-functor-triangulated and
 lem-weil-pbc-triangulated-functor-composite to obtain the composite shift structure.
 6. Evaluation of the coherent system gives precisely the displayed transition:

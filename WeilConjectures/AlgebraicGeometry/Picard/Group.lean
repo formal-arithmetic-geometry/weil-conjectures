@@ -36,11 +36,11 @@ the kernel of `σ_T^* : Pic (X_T) ⟶ Pic T`, so it is a presheaf of groups; thi
 - `AlgebraicGeometry.IsPicardMul`: a representation of `Pic_{X/S}` by a group scheme respects the
   group laws.
 - `AlgebraicGeometry.picardFunctorNormalizedGrp`: the `σ`-normalized Picard functor as a presheaf
-  of groups (blueprint `rem-pc-group-structure`).
+  of groups (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
 - `AlgebraicGeometry.picardFunctorGrp`, `AlgebraicGeometry.toPicardFunctorHom`: `Pic_{X/S}` as a
   presheaf of groups, and the homomorphism `Pic (X_T) →* Pic_{X/S}(T)`.
 - `AlgebraicGeometry.picMulEquivProdPicardFunctorNormalized`: the splitting
-  `Pic (X_T) ≃* Pic T × Pic_{X/S,σ}(T)` (blueprint `thm-pc-pic-split`).
+  `Pic (X_T) ≃* Pic T × Pic_{X/S,σ}(T)` (blueprint `lemma-rigidification-along-section--3`).
 - `AlgebraicGeometry.picardFunctorNormalizedMulEquiv`: `Pic_{X/S,σ}(T) ≃* Pic_{X/S}(T)` under
   the hypotheses of the split exact sequence.
 
@@ -48,11 +48,11 @@ the kernel of `σ_T^* : Pic (X_T) ⟶ Pic T`, so it is a presheaf of groups; thi
 
 - `AlgebraicGeometry.exists_commGrpObj_isPicardMul`: a scheme representing `Pic_{X/S}` carries a
   commutative group scheme structure respecting the group laws (blueprint
-  `rem-pc-group-structure`).
+  `theorem-picard-scheme-jacobian-over-separably--1`).
 - `AlgebraicGeometry.range_pic_mapHom_snd_eq_ker_toPicardFunctorHom` and
   `AlgebraicGeometry.surjective_toPicardFunctorHom`: exactness of
-  `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` as groups (blueprint `lem-pc-pic-exact`,
-  `thm-pc-pic-split`).
+  `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` as groups (blueprint
+  `lemma-rigidification-along-section--3`, `lemma-rigidification-along-section--3`).
 -/
 
 @[expose] public section
@@ -247,7 +247,7 @@ the group law of `A` is the tensor product of invertible modules. Equivalently, 
 isomorphism of group-valued functors between `Pic_{X/S}`, with the group law induced by that of
 the Picard presheaf, and the functor of points of `A`.
 
-(blueprint: `rem-pc-group-structure`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 def IsPicardMul (f : X ⟶ S) {A : Over S} [GrpObj A]
     (e : (picardFunctor f).obj.RepresentableBy A) : Prop :=
   ∀ {T : Over S} (L M : (pullback f T.hom).Pic),
@@ -261,7 +261,7 @@ for which the representation respects the group laws: its group law is induced b
 product of invertible modules, through the group law that the fppf sheafification `Pic_{X/S}`
 inherits from the Picard presheaf (`CategoryTheory.sheafifyGrp`).
 
-(blueprint: `rem-pc-group-structure`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 theorem exists_commGrpObj_isPicardMul (f : X ⟶ S) {A : Over S}
     (e : (picardFunctor f).obj.RepresentableBy A) : ∃ _ : CommGrpObj A, IsPicardMul f e := by
   let G := picardPresheafGrp f
@@ -280,7 +280,7 @@ The underlying presheaf of sets is `AlgebraicGeometry.picardFunctorNormalized`
 The group law is the tensor product of invertible modules; it is what gives the scheme
 representing the Picard functor its group scheme structure.
 
-(blueprint: `rem-pc-group-structure`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 noncomputable def picardFunctorNormalizedGrp (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :
     (Over S)ᵒᵖ ⥤ GrpCat.{u + 1} where
   obj T := GrpCat.of (Pic.mapHom (sectionBaseChange f σ hσ T.unop)).ker
@@ -312,7 +312,7 @@ section `σ`, the pullback `f_T^* : Pic T ⟶ Pic (X_T)` is split by `σ_T^*`, s
 `ℒ ↦ (σ_T^* ℒ, ℒ ⊗ f_T^* σ_T^* ℒ⁻¹)` is a group isomorphism onto `Pic T × K(T)`, where
 `K(T) = ker σ_T^* = Pic_{X/S,σ}(T)` (`AlgebraicGeometry.picardFunctorNormalizedGrp`).
 
-(blueprint: `thm-pc-pic-split`, `sk-prop-picard-pic-split`) -/
+(blueprint: `lemma-rigidification-along-section--3`, `lemma-rigidification-along-section`) -/
 noncomputable def picMulEquivProdPicardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X)
     (hσ : σ ≫ f = 𝟙 S) (T : Over S) :
     (pullback f T.hom).Pic ≃* T.left.Pic × (Pic.mapHom (sectionBaseChange f σ hσ T)).ker :=
@@ -372,7 +372,7 @@ homomorphism `Pic (X_T) ⟶ Pic_{X/S}(T)` is the image of `f_T^* : Pic T ⟶ Pic
 (`AlgebraicGeometry.toPicardFunctor_app_eq_iff`). Exactness on the left is
 `AlgebraicGeometry.injective_pic_map_snd`.
 
-(blueprint: `lem-pc-pic-exact`, `thm-pc-pic-split`) -/
+(blueprint: `lemma-rigidification-along-section--3`) -/
 theorem range_pic_mapHom_snd_eq_ker_toPicardFunctorHom (f : X ⟶ S)
     (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (pullback.snd f T.hom))) (T : Over S) :
     (Pic.mapHom (pullback.snd f T.hom)).range = (toPicardFunctorHom f T).ker := by
@@ -391,7 +391,7 @@ section and `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `T` over
 homomorphism `Pic (X_T) ⟶ Pic_{X/S}(T)` is surjective
 (`AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized`).
 
-(blueprint: `thm-pc-pic-split`) -/
+(blueprint: `lemma-rigidification-along-section--3`) -/
 theorem surjective_toPicardFunctorHom (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
     (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (pullback.snd f T.hom))) (T : Over S) :
     Function.Surjective (toPicardFunctorHom f T) := fun s ↦
@@ -402,7 +402,7 @@ theorem surjective_toPicardFunctorHom (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫
 `AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized`, the restriction of the
 group homomorphism `Pic (X_T) ⟶ Pic_{X/S}(T)` to `K(T) = ker σ_T^*` is a group isomorphism.
 
-(blueprint: `thm-pc-pic-split`, `cor-pc-sigma-pic-iso`) -/
+(blueprint: `lemma-rigidification-along-section--3`, `lemma-rigidification-along-section--1`) -/
 noncomputable def picardFunctorNormalizedMulEquiv (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
     (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (pullback.snd f T.hom))) (T : Over S) :
     (Pic.mapHom (sectionBaseChange f σ hσ T)).ker ≃* (picardFunctorGrp f).obj (.op T) :=

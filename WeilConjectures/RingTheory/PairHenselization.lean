@@ -41,7 +41,7 @@ vertex carries the canonical structure map from `B`.
 Proof (the eight steps of the node):
 1. Each object has a unique `B`-algebra map to `B/J`, inverse to its quotient isomorphism.
    These maps are compatible with all morphisms. Morphisms are étale by cancellation
-   (lem-weil-pbc-etale-composition-cancellation).
+   (definition-torsion-sheaves--3).
 2. Finite presentation gives essential smallness, using
    lem-weil-pbc-affine-etale-essentially-small-cover. Pass to a small full subcategory
    (lem-weil-pbc-colimit-initial-full-subcategory) and use filtered algebra colimits

@@ -70,12 +70,12 @@ specialization of the omitted verification
 (blueprint: lem-pur-scalar-iterated-mates-adjunct).
 
 Proof:
-1. By def-pur-etale-scalar-mate and lem-weil-pbc-adjunct-counit-identity, the B-pullback
+1. By def-pur-etale-scalar-mate and situation-conventions, the B-pullback
    of each scalar mate followed by the B-counit equals its scalar/pullback comparison
    followed by scalar extension of the A-counit. Use this for (r,M) and (s,Rr_* M).
 2. Expand the iterated mate and scalarIteratedAdjunct. Functoriality and naturality
    of the s-B-counit at the r-mate move that mate to immediately before the r-B-counit.
-   This counit is from the canonical adjunction of def-kun-projection-formula-map.
+   This counit is from the canonical adjunction of definition-projection-formula-map--1.
 3. Substitute the two equations of step 1. Associativity and functoriality give
    the s-scalar/pullback comparison, the pullback of scalar extension of the s-A-counit,
    the r-scalar/pullback comparison at Rr_* M, and scalar extension of the r-A-counit.

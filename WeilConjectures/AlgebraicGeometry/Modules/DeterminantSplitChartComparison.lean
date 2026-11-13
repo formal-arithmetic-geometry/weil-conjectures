@@ -18,8 +18,8 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Section comparisons on a common free chart for a split sequence
 
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph.
-(blueprint: new-y3-determinant-split-chart-comparison).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph. (blueprint: new-y3-determinant-split-chart-comparison).
 -/
 
 @[expose] public section
@@ -215,8 +215,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- A common free chart identifies the sectionwise exterior and tensor constructions
 with their sheaf counterparts, and evaluates a sheaf splitting as a module splitting.
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph,
-first step of `lem-sc-split-determinant-linear-bijective`.
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph, first step of `lem-sc-split-determinant-linear-bijective`.
 (blueprint: new-y3-determinant-split-chart-comparison).
 
 Proof: Choose rank-r and rank-s free covers of the outside terms, using the finite

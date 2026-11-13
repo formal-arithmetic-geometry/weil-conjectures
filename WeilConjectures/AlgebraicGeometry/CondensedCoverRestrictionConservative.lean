@@ -74,16 +74,16 @@ Proof plan:
    Compose the coefficient comparison with alpha_u = condensedPullbackHom.
    Scalar extension along this isomorphism just transports the action: the tensor
    comparison sends m tensor r to alpha_u.inv(r)m, with inverse m to m tensor 1.
-   Thus the exact inverse image of def-weil-pbc-proetale-operations is restriction,
+   Thus the exact inverse image of prose-03-02 is restriction,
    and its derived functor is exact termwise restriction. No constant-ring clause is used.
-2. For each site object V, det-pe-topos-functoriality-site gives the covering by
+2. For each site object V, proposition-topos-functoriality--1 gives the covering by
    V times_X U_i. Every member maps to U_i. The sieve of objects admitting a map
    to some U_i is therefore covering, the CoversTop hypothesis of
    lem-sfb-sheaf-cover-local-isomorphism.
 3. Apply that criterion to the underlying abelian-sheaf map of a module map whose
    restrictions are invertible. Its inverse is linear: applying the original map
    to b(ry) and r b(y) gives ry in both cases, and injectivity cancels the map.
-   This is an inverse in the module category of def-weil-sheaf-of-modules-category.
+   This is an inverse in the module category of situation-conventions.
 4. The natural cohomology comparison of lem-weil-pbc-exact-functor-complex-cohomology
    descends through the localization of def-weil-abstract-derived-category:
    naturality for chain maps also holds for inverses of quasi-isomorphisms, hence

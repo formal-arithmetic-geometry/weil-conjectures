@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Linearization of the image of nilpotent units modulo an ideal
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-nil-ideal-units-image-linearization)
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- For nil ideals `J ≤ I` with `I * I ≤ J`, the image of the units congruent to one
 modulo `I` in the units on the subscheme defined by `J` is the additive sheaf of `I/J`.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-nil-ideal-units-image-linearization)
 
 Proof: Work over an affine etale object V over an affine open U of X. Write A for

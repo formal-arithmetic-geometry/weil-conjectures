@@ -39,7 +39,7 @@ Source: Sites, Lemma 7.17.7, Tag 0738, part (4), and Etale Cohomology, Tag 03Q4
 Proof:
 1. By `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings`, every covering of `U` has a
    cofinal finite affine etale refinement with quasi-compact pairwise fibre products.
-2. Set `P(V) = colim_i G_i(V)`. By `lem-weil-pbc-module-sheaves-colimits-forgetful`, the
+2. Set `P(V) = colim_i G_i(V)`. By `situation-conventions`, the
    underlying sheaf colimit is the sheafification of `P`. Two representatives with equal
    images agree locally by `lem-weil-pbc-site-sheafification-sections-local`. Refine this
    witness to a finite cover. By `lem-weil-pbc-filtered-colimit-sets-elementwise`, equality

@@ -33,14 +33,17 @@ products, `𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, which is not formal.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso`
-  (`cor-sf-duality-pullback`): `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`, for a general
-  coefficient category in which the projection formula holds.
+  (`lemma-internal-adjunction-two-exchange-formulas--3`):
+  `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`, for a general coefficient category in which the
+  projection formula holds.
 - `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`
-  (`cor-sf-duality-pullback`): the same at finite coefficients.
+  (`lemma-internal-adjunction-two-exchange-formulas--3`): the same at finite coefficients.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`
-  (`cor-sf-duality-pullback`): `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` as functors on `D(Y_ét, Λ)ᵒᵖ`.
+  (`lemma-internal-adjunction-two-exchange-formulas--3`): `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` as functors on
+  `D(Y_ét, Λ)ᵒᵖ`.
 - `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar`
-  (`cor-sf-duality-pullback`): `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]` for an oriented smooth `f`.
+  (`lemma-internal-adjunction-two-exchange-formulas--3`): `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]` for an
+  oriented smooth `f`.
 
 ## Implementation notes
 
@@ -87,7 +90,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `cor-sf-duality-pullback`: Duality against pullback, internal-Hom form.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback,
+internal-Hom form.
 
 Let `f : X ⟶ Y` admit a compactification, and assume the projection formula for `f`
 (axiom (A3) of `def-sf-datum`). Then
@@ -134,7 +138,8 @@ section Finite
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
   [HasCompactification f]
 
-/-- Blueprint `cor-sf-duality-pullback`: Duality against pullback, internal-Hom form.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback,
+internal-Hom form.
 
 For a morphism `f : X ⟶ Y` admitting a compactification and a finite coefficient ring `Λ`,
 
@@ -154,7 +159,7 @@ theorem nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite :
 
 variable {S : Scheme.{u}} (aY : Y ⟶ S) [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `cor-sf-duality-pullback`: Duality against pullback.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback.
 
 Let `f : X ⟶ Y` be a morphism over a base `S`, with structure morphisms `a_Y : Y ⟶ S` and
 `a_X = f ≫ a_Y`, all admitting a compactification, and let `Λ` be a finite coefficient ring.
@@ -165,9 +170,9 @@ Then the Verdier duals `𝔻_Y = RHom_Y(-, ω_Y)` and `𝔻_X = RHom_X(-, ω_X)`
 as functors `D(Y_ét, Λ)ᵒᵖ ⥤ D(X_ét, Λ)`.
 
 The blueprint deduces this from the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`
-(`thm-sf-verdier-exchange`) by passing to right adjoints, using biduality to identify the
-adjoint of `𝔻_Y` with `𝔻_Y`, and so states it on `Dᵇctf`. The same mate calculus applied to
-the projection formula gives the internal-Hom form
+(`lemma-internal-adjunction-two-exchange-formulas--2`) by passing to right adjoints, using biduality
+to identify the adjoint of `𝔻_Y` with `𝔻_Y`, and so states it on `Dᵇctf`. The same mate calculus
+applied to the projection formula gives the internal-Hom form
 `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`
 (`AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`) without
 biduality; at `N = ω_Y`, with `Rf^! ω_Y ≅ ω_X`
@@ -190,7 +195,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y S 
   [HasInvertibleExponent Λ X] {d : ℕ} {f : X ⟶ Y} [HasCompactification f] (aY : Y ⟶ S)
   [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `cor-sf-duality-pullback`: Duality against pullback, oriented smooth case.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback,
+oriented smooth case.
 
 Let `Y` be a scheme over a base `S`, let `Λ` be a finite coefficient ring whose exponent is
 invertible on `X`, and let `f : X ⟶ Y` be smooth of pure relative dimension `d`, with an
@@ -201,8 +207,9 @@ perfect field)
 
 As in the blueprint, this substitutes the orientation into
 `𝔻_X Lf^* K ≅ Rf^! 𝔻_Y K` (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`):
-the tensor formula `Rf^! L ≅ Lf^* L ⊗ᴸ ω_f` of `sk-prop-cohsm`, applied to `L = 𝔻_Y K`, and the
-orientation `ω_f ≅ Λ_X(d)[2d]`. -/
+the tensor formula `Rf^! L ≅ Lf^* L ⊗ᴸ ω_f` of
+`proposition-exceptional-inverse-image-smooth-morphism`, applied to `L = 𝔻_Y K`, and the orientation
+`ω_f ≅ Λ_X(d)[2d]`. -/
 theorem Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar (o : Orientation Λ f d)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((verdierDual _ (f ≫ aY)).obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅

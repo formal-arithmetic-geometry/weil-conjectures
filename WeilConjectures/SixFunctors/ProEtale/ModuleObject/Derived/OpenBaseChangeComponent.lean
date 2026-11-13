@@ -55,7 +55,7 @@ the displayed equation fixes the mate rather than allowing arbitrary section iso
 
 Proof (node stage3-sfb-open-base-change-component-mono, to be formalized at stage 3):
 1. Pass to sectionwise module sheaves (def-weil-pbc-internal-abelian-sheaf-module-equivalence).
-   The coefficient maps `α_f` of det-def-sfb-coefficient-morphisms are ring isomorphisms,
+   The coefficient maps `α_f` of lemma-inverse-image-coefficient-sheaves--1 are ring isomorphisms,
    and extension of scalars along each is restriction along its inverse
    (def-sfb-modobj-extension-along-iso); so `upperStar`/`lowerStar` are the ringed-site
    inverse and direct images over the canonically identified coefficient rings.

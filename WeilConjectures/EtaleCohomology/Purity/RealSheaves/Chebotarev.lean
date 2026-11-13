@@ -18,7 +18,8 @@ show that a finite quotient `π : W(C₀) → Q`, with open kernel, in which eve
 element becomes trivial, is trivial
 (`AlgebraicGeometry.WeilGroup.map_eq_one_of_map_frobenius_eq_one`). The proof compares Euler
 products through the Euler-product form of the Grothendieck–Lefschetz trace formula,
-`AlgebraicGeometry.WeilGroup.exists_eulerSeries_mul_eq_coe` (blueprint `cor-rp-euler-product`):
+`AlgebraicGeometry.WeilGroup.exists_eulerSeries_mul_eq_coe` (blueprint
+`theorem-trace-formula-euler-product--4`):
 
 * For the trivial representation, the Euler series is
   `Z(T) = ∏ₓ (1 - T ^ eₓ)⁻¹`, and `Z(T) · (1 - q T) ^ m = P₀(T)` is a polynomial, `m ≤ 1`. Since
@@ -350,7 +351,7 @@ finite field in which all the local Frobenius elements become trivial is trivial
 
 This is the form of the Chebotarev density theorem proved here: the representations of the
 quotient are compared with the trivial representation through the Euler-product form of the
-Grothendieck–Lefschetz trace formula (blueprint `cor-rp-euler-product`). -/
+Grothendieck–Lefschetz trace formula (blueprint `theorem-trace-formula-euler-product--4`). -/
 theorem map_eq_one_of_map_frobenius_eq_one [IsAffine C] (π : W.carrier →* Q)
     (hπ : Function.Surjective π) (hπo : IsOpen (π.ker : Set W.carrier))
     (hF : ∀ x, π (W.frobenius x) = 1) (g : W.carrier) : π g = 1 := by

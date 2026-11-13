@@ -16,7 +16,7 @@ by a proper `p : C̄ ⟶ Y`, and similarly `f' = h' ≫ p'` over `k'`. Given mod
 `M_Y` and morphisms of models `φ_h : M_C ⟶ M_{C̄}` over `(h, h')` with invertible pullback
 exchange `α_h` and `φ_p : M_{C̄} ⟶ M_Y` over `(p, p')` with pushforward exchange `χ_p` invertible
 on bounded constructible complexes, the compact-support exchange of blueprint
-`det-nearby-exchange-maps` (3) is
+`prose-E-15` (3) is
 ```
 ν_f = χ_p⁻¹ ∘ Rp'_*(ν_h) : Rf'_! Ψ_C ⟶ Ψ_Y Rf_!
 ```
@@ -119,7 +119,7 @@ noncomputable abbrev openImmersionAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [I
     j).ofNatIsoRight (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion _ j).symm
 
 /-- **The compact-support exchange of a compactified morphism of models** (blueprint
-`det-nearby-exchange-maps` (3)): `ν_f = χ_p⁻¹ ∘ Rp'_*(ν_h) : Rf'_! Ψ_C ⟶ Ψ_Y Rf_!`, through
+`prose-E-15` (3)): `ν_f = χ_p⁻¹ ∘ Rp'_*(ν_h) : Rf'_! Ψ_C ⟶ Ψ_Y Rf_!`, through
 `Rf'_! ≅ Rp'_! h'_! ≅ Rp'_* h'_!` and `Rf_! ≅ Rp_* h_!`, with `ν_h` the adjoint of `α_h⁻¹`. -/
 noncomputable def compactSupportExchangeOfCompactification :
     NearbyCyclesModel.boundedConstructibleNearbyCycles hMC ⋙
@@ -636,7 +636,7 @@ lemma isIsoOn_supportClosureProperModelHom_pushforwardExchange
     (isPullback_supportClosureSpecialMap k')
     (isPullback_deformationProdLiftModelHom_ε k' _ _ _ _) K.property
 
-/-- **The compact-support exchange `ν_c` of the support** (blueprint `det-nearby-exchange-maps`
+/-- **The compact-support exchange `ν_c` of the support** (blueprint `prose-E-15`
 (3)), for the compactification `C ⊂ C̄ ⟶ X ⨯ X` of the support and `Z' = c̄⁻¹(x, x)`:
 `ν_c = χ_p⁻¹ ∘ Rp'_*(ν_h)` (`compactSupportExchangeOfCompactification`), with `α_h` invertible
 since `C ∩ Z' = y` (`comap_supportClosureIdeal`) and `χ_p` invertible by proper base change for

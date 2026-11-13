@@ -10,7 +10,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Localization of the normalized strict reindexing comparisons
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
 -/
 
@@ -43,7 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
 /-- Descend the prescribed strict comparisons to the selected derived adjunctions.
-Source: blueprint prop-pod-dual-tate-data-compatibility, proof Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
 
 Proof: derive the exact sectionwise equivalences on integral modules, finite

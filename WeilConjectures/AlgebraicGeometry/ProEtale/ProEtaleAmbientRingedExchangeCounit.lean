@@ -85,7 +85,7 @@ theorem proEtaleAmbientRingedExchange_eq_mate (sq : ChosenCartesianSquare g' f' 
 
 omit θ in
 /-- The ambient exchange is the mate of the pullback comparison: its counit form.
-Source: Stacks 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+Source: Stacks 07A7 (blueprint: definition-pro-etale-base-change-map--1). -/
 theorem proEtaleAmbientRingedExchange_counit (sq : ChosenCartesianSquare g' f' f g)
     (hcoeff : HEq
       (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X' c_f c_g')

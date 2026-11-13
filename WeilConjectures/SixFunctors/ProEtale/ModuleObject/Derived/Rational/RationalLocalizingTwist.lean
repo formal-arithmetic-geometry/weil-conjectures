@@ -24,21 +24,23 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The localizing derived category used in the affine-line statement.
-Source: blueprint `sk-def-localizing-closure` (blueprint: det-cor-affine-space-rational-line). -/
+Source: blueprint `definition-localizing-subcategory` (blueprint:
+theorem-f-shriek-ell-adic-coefficients). -/
 abbrev rationalLocalizingCategory
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=
   (CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X)).FullSubcategory
 
 /-- The full inclusion of the localizing category into the ambient derived category.
-Source: blueprint `sk-def-localizing-closure` (blueprint: det-cor-affine-space-rational-line). -/
+Source: blueprint `definition-localizing-subcategory` (blueprint:
+theorem-f-shriek-ell-adic-coefficients). -/
 noncomputable abbrev rationalLocalizingInclusion
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=
   (CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X)).ι
 
 /-- Derived tensor with a specified Tate line, placed in degree zero.
-Source: blueprint `sk-def-sp-tate-twist` (blueprint: det-cor-affine-space-rational-line). -/
+Source: blueprint `definition-tate-twists` (blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 noncomputable def rationalTwistFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})

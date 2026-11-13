@@ -85,7 +85,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 placed in degree `0`: in nonnegative degrees, its cohomology sheaves are the degreewise exchange
 maps `g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F`, which are isomorphisms by
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`, and in negative degrees
-both sides vanish. This is step (iii) of the proof of `sk-thm-p1`. -/
+both sides vanish. This is step (iii) of the proof of
+`proposition-proper-base-change-projective-line`. -/
 lemma Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine {S T X' : Scheme.{u}}
     {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
@@ -103,11 +104,11 @@ lemma Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine {S T X' : Sche
 
 /-- The derived exchange morphism of the projective line is an isomorphism at every bounded
 below complex `K` with torsion cohomology sheaves. This is the truncation dévissage of step (iv)
-of the proof of `sk-thm-p1`: both `g⁻¹ ∘ Rp_*` and `Rp'_* ∘ g'⁻¹` do not lower the
-cohomological degree, so `Hᵐ` of both sides at `K` only depends on `τ_{≤ m} K`, which is
-reached from its shifted cohomology sheaves by the truncation triangles and the five lemma
-(`DerivedCategory.Plus.isIso_app_of_forall_homology`); for the cohomology sheaves, which are
-torsion, this is
+of the proof of `proposition-proper-base-change-projective-line`: both `g⁻¹ ∘ Rp_*` and
+`Rp'_* ∘ g'⁻¹` do not lower the cohomological degree, so `Hᵐ` of both sides at `K` only depends on
+`τ_{≤ m} K`, which is reached from its shifted cohomology sheaves by the truncation triangles and
+the five lemma (`DerivedCategory.Plus.isIso_app_of_forall_homology`); for the cohomology sheaves,
+which are torsion, this is
 `AlgebraicGeometry.Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine`. -/
 lemma Etale.isIso_baseChange_app_projectiveLine {S T X' : Scheme.{u}}
     {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -140,7 +141,7 @@ cartesian square
 the derived base change map is an isomorphism on every bounded below complex with torsion
 cohomology. This is the geometric half of the proof of proper base change; see the module
 docstring, and Stacks Project, Tag 095T, whose proof it is.
-(blueprint: `sk-thm-p1`, `prop-weil-pbc-projective-line`) -/
+(blueprint: `proposition-proper-base-change-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) := fun _ _ _ _ _ sq K hK ↦ by
   have := Etale.isIso_baseChange_app_projectiveLine Λ sq K hK
@@ -164,7 +165,7 @@ which are torsion and hence `f'_*`-acyclic after base change. Over an arbitrary 
 need not embed into a torsion injective sheaf, so that argument does not apply. The conclusion is
 instead the proper base change theorem
 `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, which needs no acyclicity hypothesis.
-(blueprint: `lem-weil-pbc-injective-acyclicity-bounded-below`) -/
+(blueprint: `theorem-pbc-injective-acyclicity`) -/
 @[stacks 0A4B]
 theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (_hf : Etale.HasInjectiveAcyclicity Λ f) :

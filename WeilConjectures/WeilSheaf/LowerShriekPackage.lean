@@ -14,11 +14,11 @@ public import WeilConjectures.WeilSheaf.LowerStarId
 # The compact support package for Weil complexes
 
 Forms of clauses 3 and 4 of the coefficient and functor package (blueprint
-`prop-functor-package`) and of the projection formula (blueprint `prop-weil-operations`) for the
+`prop-functor-package`) and of the projection formula (blueprint `sec-Weil-complexes`) for the
 direct image with compact support `Rf_!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), in the shape used by the Fourier
-transform computations of `sec-deligne-laumon-a1`. They are derived from the statements of those
-nodes in `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` and
+transform computations of `chap-The-Deligne-Laumon-theorem-for-curves`. They are derived from the
+statements of those nodes in `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` and
 `WeilConjectures.WeilSheaf.FourierInversion.OtherSections`.
 
 ## Main statements
@@ -165,7 +165,7 @@ theorem nonempty_upperStarDerivedLowerShriekIso_of_isPullback {X Y X' Y' : Schem
 
 /-- **The projection formula** for the tensor product with a lisse Weil sheaf: for a morphism
 `f : X ⟶ Y` of `k₀`-schemes, a lisse Weil sheaf `L` on `Y` and a Weil complex `K` on `X`,
-`L ⊗ Rf_! K ≅ Rf_!(f^*L ⊗ K)`. (blueprint: `prop-weil-operations`) -/
+`L ⊗ Rf_! K ≅ Rf_!(f^*L ⊗ K)`. (blueprint: `sec-Weil-complexes`) -/
 theorem nonempty_tensorLisseDerivedLowerShriekIso {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

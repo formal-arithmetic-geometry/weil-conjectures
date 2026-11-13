@@ -23,7 +23,8 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.KoszulResolution
 /-!
 # Vanishing of first Tor for second syzygies over two variables
 
-Source: blueprint `lem-sc-p1-graded-resolution`, Koszul resolution and dimension shifting.
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, Koszul resolution and dimension
+shifting.
 -/
 
 @[expose] public section
@@ -34,7 +35,7 @@ open CategoryTheory
 
 namespace MvPolynomial
 
-/-- Source: blueprint `lem-sc-p1-graded-resolution`, the Koszul resolution of the
+/-- Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, the Koszul resolution of the
 constant-coefficient module. Its kernel is the variable ideal, as seen from the support
 criterion for the first power of `idealOfVars`. Restrict the Koszul middle map to this
 kernel. The resulting two short exact sequences have free middle terms and first term
@@ -90,8 +91,8 @@ private theorem third_tor_constantCoeff {k : Type u} [Field k]
     (θ N).symm
 
 /-- The second kernel of two finite free surjections has vanishing first Tor with `k`.
-Source: blueprint `lem-sc-p1-graded-resolution`, proof, Koszul resolution and dimension shifting
-(blueprint: lem-sc-p1-second-syzygy-tor-vanishes).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, Koszul resolution and
+dimension shifting (blueprint: lem-sc-p1-second-syzygy-tor-vanishes).
 
 Proof: the two surjections give short exact sequences
 `0 → ker q₀ → F₀ → M → 0` and `0 → ker q₁ → F₁ → ker q₀ → 0`.

@@ -17,7 +17,7 @@ Let `T = Spec R` be a local scheme with closed point `t`, and `D = V(f)`, `B = V
 `t` with `V(f) ∩ V(g) = {t}` (for instance if their tangent cones meet only at the origin,
 `IsLocalRing.TangentConesMeetAtOrigin.maximalIdeal_le_radical`). The punctured curve
 `B - t = Spec (R/g) - {t}` then maps into `T - D = D(f)`; this is the restriction map of the
-blowup restriction vanishing (blueprint `sk-lem-tf-blowup-restriction`).
+blowup restriction vanishing (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`).
 
 ## Main definitions
 

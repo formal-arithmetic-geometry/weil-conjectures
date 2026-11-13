@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonDerived
 
 Source: blueprint theorem 1325; Stacks Project, Pro-etale Cohomology, Section 09C8,
 and the finite etale-origin step of Theorem 09C9
-(blueprint: thm-weil-pbc-finite-level-proetale).
+(blueprint: proposition-proper-direct-image-constructible-complexes--5).
 This is the recorded finite theorem in the normalized ring-sheaf presentation.
 -/
 

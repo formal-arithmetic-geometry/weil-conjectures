@@ -18,8 +18,8 @@ quasi-separated schemes over `R` with affine transition maps, an étale sheaf `G
 the sections of the inverse image of `G` over `V` are the filtered colimit of the sections over
 the `Y ×_{Dₖ} Dⱼ` (`AlgebraicGeometry.Etale.ModuleSheaf.exists_restrictAlong_eq_of_isLimit`,
 `AlgebraicGeometry.Etale.ModuleSheaf.exists_restrictAlong_eq_zero_of_isLimit`). This is the
-form of blueprint `lem-weil-pbc-etale-section-continuity` used for the continuity of étale
-cohomology.
+form of blueprint `proposition-comparison-morphism-inverse-image--3` used for the continuity of
+étale cohomology.
 -/
 
 @[expose] public section

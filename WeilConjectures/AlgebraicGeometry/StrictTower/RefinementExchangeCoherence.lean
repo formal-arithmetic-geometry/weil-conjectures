@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenCalcul
 # Refinement exchange coherence for strict pro-etale towers
 
 Source: Stacks Project, Tags 0F7B, 0F7C and 0F7F; the final independence and naturality
-argument of the blueprint proof of `thm-cbc-complete-proetale`
+argument of the blueprint proof of `proposition-composition-base-change-rf-shriek--4`
 (blueprint: lem-cbc-complete-proetale-refinement-exchange-coherence).
 
 `compositionF`, `compositionC` and `compositionE` are the already published canonical

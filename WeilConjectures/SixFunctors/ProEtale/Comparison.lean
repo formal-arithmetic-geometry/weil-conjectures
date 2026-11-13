@@ -31,11 +31,12 @@ are exactly those in the essential image of `ν^*`.
 The inclusion `AlgebraicGeometry.toProEt` of small sites, the functors `ν^*` and `ν_*`,
 the adjunction `ν^* ⊣ ν_*` and the exactness of `ν^*` are
 `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`, sorry-free; this file states the
-remaining clauses of `sk-prop-sf-comparison` on top of them.
+remaining clauses of `theorem-bounded-below-cohomology-comparison` on top of them.
 
-The remaining clause of `sk-prop-sf-comparison` — that `ν_T^*` restricts to an equivalence of
-`D^b_c(T_ét, Λ)` onto the constructible subcategory of `D^b_c(T_proét, Λ)` — is not stated:
-the repository has no constructibility notion on the pro-étale site to be an equivalence onto.
+The remaining clause of `theorem-bounded-below-cohomology-comparison` — that `ν_T^*` restricts to an
+equivalence of `D^b_c(T_ét, Λ)` onto the constructible subcategory of `D^b_c(T_proét, Λ)` — is not
+stated: the repository has no constructibility notion on the pro-étale site to be an equivalence
+onto.
 
 ## Main statements
 
@@ -64,7 +65,7 @@ namespace ProEtale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
 
 *Right exactness.* The comparison pullback preserves finite colimits — indeed all colimits,
 being a left adjoint. Together with
@@ -74,7 +75,7 @@ instance preservesFiniteColimits_comparisonUpperStar (X : Scheme.{u}) :
     PreservesFiniteColimits (comparisonUpperStar A X) :=
   inferInstance
 
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
 
 **The comparison direct image.** For `u : U ⟶ V` quasi-compact and quasi-separated the
 comparison commutes with direct images:

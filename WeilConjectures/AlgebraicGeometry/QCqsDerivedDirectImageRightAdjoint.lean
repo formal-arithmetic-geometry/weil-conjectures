@@ -48,10 +48,11 @@ set-indexed direct sums.
 since X is quasi-compact and quasi-separated.
 4. By `lem-pc-derived-direct-image-preserves-direct-sums`, the restricted derived direct
 image commutes with all set-indexed direct sums, since f is qcqs.
-5. The derived category and derived direct image definitions (`def-pc-derived-category`,
-`def-pc-derived-direct-image`), together with `lem-pc-right-derived-functor-triangulated`,
-make this restriction exact as a functor of triangulated categories. Apply
-`lem-pc-brown-representability-right-adjoint` using Steps 2, 3 and 4 to obtain a right adjoint.
+5. The derived category and derived direct image definitions
+(`lemma-coherent-base-change-invertible-sheaves`, `lemma-coherent-base-change-invertible-sheaves`),
+together with `lem-pc-right-derived-functor-triangulated`, make this restriction exact as a functor
+of triangulated categories. Apply `lem-pc-brown-representability-right-adjoint` using Steps 2, 3 and
+4 to obtain a right adjoint.
 -/
 theorem schemeDerivedDirectImage_qcqs_hasRightAdjoint (X Y : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]

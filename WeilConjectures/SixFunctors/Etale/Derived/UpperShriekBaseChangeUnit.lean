@@ -21,8 +21,8 @@ compact-support base change `Ex_!(c)`: then the mate of `Ex_!(c)⁻¹` is the ca
 adjunctions.
 
 This is the formal part of the étale case of the proof of blueprint
-`prop-asd-smooth-base-change`: for an étale `f` the derived pullback is right adjoint to the
-compactly supported direct image.
+`proposition-exceptional-inverse-image-smooth-morphism--6`: for an étale `f` the derived pullback is
+right adjoint to the compactly supported direct image.
 
 ## Main statements
 

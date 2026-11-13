@@ -128,8 +128,8 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison
     ⟨1, Nat.one_pos, Iso.pow_refl 1⟩ K' (n + 1), map_sum, ← finsum_eq_sum_of_fintype]
   exact (finsum_congr heqv).trans (finsum_comp_equiv eqv)
 
-/-- Blueprint `det-thm-tf-uniform-formula-weil`: the Grothendieck–Lefschetz formula over
-`ℚ̄_ℓ`. For a separated `k₀`-scheme `X₀` of finite type, a Weil complex `K` on `X₀` and
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--8`: the Grothendieck–Lefschetz formula
+over `ℚ̄_ℓ`. For a separated `k₀`-scheme `X₀` of finite type, a Weil complex `K` on `X₀` and
 `m ≥ 1`,
 
 `∑ᵢ (-1)ⁱ Tr(Fᵐ | H_cⁱ(X, K)) = ∑_{y ∈ X₀(𝔽_{qᵐ})} t_K(y)`,

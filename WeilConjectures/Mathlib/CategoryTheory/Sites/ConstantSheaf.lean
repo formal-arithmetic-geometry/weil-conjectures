@@ -115,7 +115,7 @@ namespace CategoryTheory
 `E` of the coefficient category and a sheaf `F`, the map sending `φ : E̲ ⟶ F` to
 `c_E ≫ φ_T : E ⟶ F(T)`, where `c_E : E ⟶ E̲(T)` is the unit of `constantSheafAdj`, is a
 bijection: the constant sheaf functor is left adjoint to the global sections functor.
-(blueprint: `lem-weil-pbc-constant-sheaf-maps-global-sections`) -/
+(blueprint: `situation-conventions`) -/
 theorem bijective_constantSheafAdj_unit_comp {C : Type*} [Category* C]
     (J : GrothendieckTopology C) (D : Type*) [Category* D] [HasWeakSheafify J D] {T : C}
     (hT : Limits.IsTerminal T) (E : D) (F : Sheaf J D) :

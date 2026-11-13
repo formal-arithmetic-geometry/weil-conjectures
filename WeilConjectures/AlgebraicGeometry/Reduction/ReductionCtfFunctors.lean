@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The actual compact-support functor restricted to its full Dctf subcategories.
 The witness only certifies membership and changes neither objects nor morphisms.
 Source: blueprint, constructible adjunction convention
-(blueprint: det-sp-reduction-exceptional). -/
+(blueprint: lemma-sp-reduction--2). -/
 def reductionCtfCompactSupport (A : Type u) [CommRing A] [Finite A]
     {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y)
     (hF : ∀ M : spFiniteConstructibleTorCategory X A,
@@ -44,7 +44,7 @@ def reductionCtfCompactSupport (A : Type u) [CommRing A] [Finite A]
 
 /-- Restrict the recorded scalar extension to full Dctf subcategories.
 Source: blueprint, coefficient-extension convention
-(blueprint: det-sp-reduction-exceptional). -/
+(blueprint: lemma-sp-reduction--2). -/
 def reductionCtfScalar {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) (T : Scheme.{u})
     (hT : ∀ K : spFiniteConstructibleTorCategory T A,

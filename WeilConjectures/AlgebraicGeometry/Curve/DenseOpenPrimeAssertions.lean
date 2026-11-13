@@ -40,7 +40,7 @@ private theorem surjective_iff_of_bijective_square
 
 /-- The eight assertions are unchanged by extending the restriction from a dense open by zero.
 Source: Stacks Project, Lemma 0GJA and its proof, specialized to prime-torsion coefficients
-(blueprint: lem-pbc-q1-dense-open-prime-assertions).
+(blueprint: lemma-removing-finitely-many-points--1).
 
 Proof: Give the closed complement Z its reduced scheme structure. It is a finite union of
 k-rational points, since X has dimension at most one and U contains all generic points.

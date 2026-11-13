@@ -18,7 +18,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 # Cohomological smoothness in canonical comparison coordinates
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-def-purity-conv,
-def-pur-co-smoothness, clauses 1--3 (blueprint: def-pur-co-smoothness).
+proposition-exceptional-inverse-image-smooth-morphism, clauses 1--3 (blueprint:
+proposition-exceptional-inverse-image-smooth-morphism).
 
 This is the constructible pro-etale definition in etale-origin coordinates. The dualizing
 object is comparison pullback of the etale dualizing object. Tensor and base-change maps
@@ -40,7 +41,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- Finiteness of the actual coefficient quotient, including its size lift.
-Source: blueprint finite purity conventions (blueprint: def-pur-co-smoothness). -/
+Source: blueprint finite purity conventions (blueprint:
+proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable instance comparedCoefficientFinite (P : PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   letI : Finite P.Ring :=
@@ -48,8 +50,8 @@ noncomputable instance comparedCoefficientFinite (P : PurityFiniteSetting.{u}) :
   inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
 /-- The existing Nagata compactification in the finite-type field setting.
-Source: blueprint def-pur-co-smoothness, separated finite-type setting
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, separated finite-type
+setting (blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def comparedCompactification (P : PurityFiniteSetting.{u})
     {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f]
@@ -68,8 +70,8 @@ namespace AlgebraicGeometry.ProEtale
 /-- The relative dualizing object in its canonical etale-origin model.
 It is nu_X^* of f^! of the coefficient unit. This is the canonical unit normalization
 of the recorded transported exceptional functor nu_X^* f^! Rnu_Y,*.
-Source: blueprint def-pur-co-smoothness, omega_f
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, omega_f
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def comparedDualizing (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)) :=
@@ -77,8 +79,8 @@ noncomputable def comparedDualizing (P : WeilConjectures.PurityFiniteSetting.{u}
     (Etale.dualizingComplex P.Coefficient f)
 
 /-- Tensor invertibility with the inverse in the original pro-etale Dctf category.
-Source: blueprint def-pur-co-smoothness, clause 1
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 1
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def comparedInvertibilityClause
     (P : WeilConjectures.PurityFiniteSetting.{u}) (X : Scheme.{u})
     (ω : _root_.DerivedCategory
@@ -90,8 +92,8 @@ noncomputable def comparedInvertibilityClause
       Nonempty (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) X).obj M).obj ω ≅ 𝟙_ _)
 
 /-- The canonical tensor mate on every etale representative of a pro-etale Dctf object.
-Source: blueprint def-pur-co-smoothness, clause 2
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 2
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def comparedTensorClause
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] : Prop :=
@@ -104,8 +106,8 @@ noncomputable def comparedTensorClause
 
 /-- The canonical dualizing base-change mate after every finite-type change of base.
 The primed compactification is the base change of the specified original one.
-Source: blueprint def-pur-co-smoothness, clause 3
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 3
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def comparedBaseChangeClause
     (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
@@ -134,8 +136,8 @@ with pullback, tensor and compact supports, with the specified units and counits
 therefore the two maps are exactly the node's maps in these coordinates. Symmetry
 changes the tensor mate's source ordering from pullback tensor omega to omega tensor
 pullback. No isomorphism between endpoints is substituted for a canonical map.
-Source: blueprint main-20261015, def-pur-co-smoothness, clauses 1--3
-(blueprint: def-pur-co-smoothness). -/
+Source: blueprint main-20261015, proposition-exceptional-inverse-image-smooth-morphism, clauses 1--3
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def IsCohomologicallySmoothCompared
     (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

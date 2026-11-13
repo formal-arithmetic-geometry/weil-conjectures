@@ -17,11 +17,11 @@ triangulated functors `D⁺(C) ⥤ D⁺(D)`, compatible with the shifts. We show
 - if `τ` is an isomorphism on the objects of `C` satisfying a property `P`, placed in degree `0`,
   then `τ` is an isomorphism on every bounded object all of whose cohomology objects satisfy `P`
   (`DerivedCategory.Plus.isIso_app_of_isGE_of_isLE`). This is the finite-range comparison of
-  blueprint `sbc-lem-finite-range-comparison`, with the comparison of the two hypercohomology
-  spectral sequences replaced by an induction along the truncation triangles;
+  blueprint `theorem-smooth-base-change-classical-torsion-2`, with the comparison of the two
+  hypercohomology spectral sequences replaced by an induction along the truncation triangles;
 - if `F` does not lower the cohomological degree, then `Hⁿ(F(τ_{≤ n} X)) ⟶ Hⁿ(F X)` is an
   isomorphism (`DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app`, blueprint
-  `sbc-lem-bounded-below-truncation-criterion`);
+  `theorem-pbc-injective-acyclicity`);
 - if both `F` and `G` do not lower the cohomological degree, then the bounded statement extends
   to all bounded below objects (`DerivedCategory.Plus.isIso_app_of_forall_homology`).
 -/
@@ -75,9 +75,9 @@ lemma isIso_app_singleFunctor_obj (Y : C) (h : IsIso (τ.app ((singleFunctor C 0
   rw [← NatTrans.isIso_app_iff_of_iso τ (((singleFunctors C).shiftIso (-n) n 0 (by lia)).app Y)]
   exact (isIso_app_shift_iff τ _ _).2 h
 
-/-- Blueprint `sbc-lem-finite-range-comparison`: if `τ` is an isomorphism on the objects of `C`
-satisfying `P`, placed in degree `0`, then it is an isomorphism on every object of `D⁺(C)` with
-cohomology concentrated in `[a, a + n - 1]` and satisfying `P` there. -/
+/-- Blueprint `theorem-smooth-base-change-classical-torsion-2`: if `τ` is an isomorphism on the
+objects of `C` satisfying `P`, placed in degree `0`, then it is an isomorphism on every object of
+`D⁺(C)` with cohomology concentrated in `[a, a + n - 1]` and satisfying `P` there. -/
 lemma isIso_app_of_isGE_of_isLE (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
     (hP : ∀ Y, P Y → IsIso (τ.app ((singleFunctor C 0).obj Y))) (n : ℕ) :
     ∀ (a : ℤ) (X : Plus C), X.IsGE a → X.IsLE (a + n - 1) →
@@ -118,16 +118,16 @@ lemma isIso_app_of_isGE_of_isLE (P : ObjectProperty C) [P.IsClosedUnderIsomorphi
           (hX q hq (by lia))
     exact NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ τ hT h₁ h₃
 
-/-- Blueprint `sbc-lem-finite-range-comparison`: if `τ` is an isomorphism on the objects of `C`
-satisfying `P`, placed in degree `0`, then it is an isomorphism on every bounded object of
-`D⁺(C)` all of whose cohomology objects satisfy `P`. -/
+/-- Blueprint `theorem-smooth-base-change-classical-torsion-2`: if `τ` is an isomorphism on the
+objects of `C` satisfying `P`, placed in degree `0`, then it is an isomorphism on every bounded
+object of `D⁺(C)` all of whose cohomology objects satisfy `P`. -/
 lemma isIso_app_of_bounded (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
     (hP : ∀ Y, P Y → IsIso (τ.app ((singleFunctor C 0).obj Y))) (X : Plus C) (a b : ℤ)
     [X.IsGE a] [X.IsLE b] (hX : ∀ q, P ((homologyFunctor C q).obj X)) : IsIso (τ.app X) :=
   have : X.IsLE (a + ↑(b - a + 1).toNat - 1) := t.isLE_of_le X b _ (by lia)
   isIso_app_of_isGE_of_isLE τ P hP (b - a + 1).toNat a X inferInstance this fun q _ _ ↦ hX q
 
-/-- Blueprint `sbc-lem-bounded-below-truncation-criterion`: if a triangulated functor
+/-- Blueprint `theorem-pbc-injective-acyclicity`: if a triangulated functor
 `F : D⁺(C) ⥤ D⁺(D)` does not lower the cohomological degree, then only the cohomology of `X` in
 degrees `≤ n` contributes to `Hⁿ(F X)`: the map `Hⁿ(F(τ_{≤ n} X)) ⟶ Hⁿ(F X)` is an isomorphism. -/
 lemma isIso_homologyFunctor_map_map_truncLEι_app (F : Plus C ⥤ Plus D) [F.CommShift ℤ]
@@ -141,7 +141,7 @@ lemma isIso_homologyFunctor_map_map_truncLEι_app (F : Plus C ⥤ Plus D) [F.Com
     (hF ((t.truncGE (n + 1)).obj X) (n + 1) (n - 1) (by lia))
     (hF ((t.truncGE (n + 1)).obj X) (n + 1) n (by lia))
 
-/-- Blueprint `sbc-thm-bounded-below-derived-smooth-base-change` (the formal part): if `F` and `G`
+/-- Blueprint `theorem-smooth-base-change-classical-torsion-2--1` (the formal part): if `F` and `G`
 do not lower the cohomological degree and `τ` is an isomorphism on the objects of `C` satisfying
 `P`, placed in degree `0`, then `τ` is an isomorphism at every object of `D⁺(C)` all of whose
 cohomology objects satisfy `P`. -/

@@ -96,8 +96,8 @@ private lemma exists_rid_lTensor_ne_zero {x : L ⊗[K] L} (hx : x ≠ 0) :
 `L ⊗_K (L ⊗_K L)`. Then `u = (1 ⊗ v) (v ⊗ 1)⁻¹` for a unit `v` of `L`.
 
 This is the algebraic core of Hilbert 90 for the spectrum of a field.
-(blueprint: `lem-sc-line-bundle-torsor`, descent step, for `X = Spec K` and the covering
-`Spec L → Spec K`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`, descent step, for `X = Spec K` and the
+covering `Spec L → Spec K`) -/
 theorem exists_eq_of_cocycle (u : (L ⊗[K] L)ˣ)
     (hu : map (AlgHom.id K L) (includeRight : L →ₐ[K] L ⊗[K] L) (u : L ⊗[K] L) =
       map (AlgHom.id K L) (includeLeft : L →ₐ[K] L ⊗[K] L) (u : L ⊗[K] L) *

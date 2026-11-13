@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.CechModuleSheafFunctor
 
 /-! # The terms of the concrete module-sheaf Čech complex
 
-Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
-(blueprint: lem-pc-cech-module-sheaf-terms).
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, displayed complex and proof
+paragraph 1. (blueprint: lem-pc-cech-module-sheaf-terms).
 -/
 
 @[expose] public section
@@ -46,8 +46,8 @@ private noncomputable def cechOpensProductIsoInf
   inv_hom_id := Subsingleton.elim _ _
 
 /-- Each concrete Čech term is the product of extensions from the corresponding
-finite intersections. Source: blueprint `lem-pc-cech-resolution`, displayed complex
-and proof paragraph 1. (blueprint: lem-pc-cech-module-sheaf-terms)
+finite intersections. Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, displayed
+complex and proof paragraph 1. (blueprint: lem-pc-cech-module-sheaf-terms)
 
 Proof: for an open W, the equivalence between the over site X.Opens/W and the opens
 of W.toScheme identifies F.over W with F.restrict W.ι. Under this equivalence, the

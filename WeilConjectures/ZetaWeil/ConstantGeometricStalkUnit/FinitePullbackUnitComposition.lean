@@ -14,8 +14,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 
 /-! # Composition of finite coefficient multiplication
 
-Source: the constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion
-step 3 (blueprint: lem-zl-finite-pullback-unit-composition).
+Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
+expansion step 3 (blueprint: lem-zl-finite-pullback-unit-composition).
 -/
 
 @[expose] public noncomputable section

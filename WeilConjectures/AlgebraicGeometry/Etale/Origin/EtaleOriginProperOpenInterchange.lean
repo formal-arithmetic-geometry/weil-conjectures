@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 # Etale-origin proper/open interchange
 
 Source: retained repaired proof of blueprint main-20261015,
-`prop-exc-base-change-proper`, Step 7; Stacks Tags 099R and 0F7B
+`proposition-composition-open-restriction-compactifications-f--5`, Step 7; Stacks Tags 099R and 0F7B
 (blueprint: lem-exc-etale-origin-proper-open-interchange).
 
 The five arrows use the published fixed-scalar comparisons, transported through the

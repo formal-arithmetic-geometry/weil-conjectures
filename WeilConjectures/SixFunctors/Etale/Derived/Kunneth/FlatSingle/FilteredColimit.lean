@@ -36,7 +36,7 @@ namespace Etale
 
 /-- Higher direct images along a quasi-compact quasi-separated morphism, computed on the
 unbounded derived category, commute with filtered colimits (used in the proof of blueprint
-`lem-kun-0f1j`, see `lemma-weil-pbc-direct-image-filtered-colimit`). -/
+`lemma-kunneth-field-coefficients--1`, see `prose-04-17`). -/
 theorem preservesColimitsOfShape_singleFunctor_rightDerivedLowerStar
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)
     [QuasiCompact h] [QuasiSeparated h] (q : ℤ)

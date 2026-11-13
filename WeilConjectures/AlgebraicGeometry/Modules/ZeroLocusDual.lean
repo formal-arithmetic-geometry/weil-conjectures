@@ -34,7 +34,7 @@ subobjects of `𝒪_X` in the abelian category of `𝒪_X`-modules.
   `lem-pc-zero-scheme-properties`).
 - `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection`: the section `s` of
   `M ⊗ N^{-1}` corresponding to a morphism `φ : N ⟶ M` of invertible modules has `Z(s) = Z(φ)`
-  (blueprint `lem-pc-zero-scheme-recd`).
+  (blueprint `proposition-divisors-degree-g-open-chart--1`).
 - `AlgebraicGeometry.Scheme.Modules.nonempty_dual_pullback_iso_pullback_dual`:
   `(g^* N)^∨ ≅ g^* (N^∨)` for invertible `N`.
 -/
@@ -184,7 +184,7 @@ modules and any identification `e : N^∨ ≅ P` of `N^{-1}`, the section
 `Z(s) = Z(φ)`. Up to isomorphism of arrows `s` is `φ ⊗ N^∨`, and twisting by an invertible
 module does not change the zero scheme (`Hom.zeroLocus_whiskerRight`).
 
-(blueprint: `lem-pc-zero-scheme-recd`, `det-lem-picard-zero-dictionary`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem zeroLocus_adjointSection_comp_whiskerLeft {N M P : X.Modules} [N.IsInvertible]
     [M.IsInvertible] (φ : N ⟶ M) (e : Nᵛ ≅ P) :
     (adjointSection φ ≫ M ◁ e.hom).zeroLocus = φ.zeroLocus := by
@@ -199,7 +199,7 @@ theorem zeroLocus_adjointSection_comp_whiskerLeft {N M P : X.Modules} [N.IsInver
 /-- **The zero scheme of the corresponding section.** For a morphism `φ : N ⟶ M` of invertible
 modules, the section `s : 𝒪_X ⟶ M ⊗ N^∨` corresponding to `φ` satisfies `Z(s) = Z(φ)`.
 
-(blueprint: `lem-pc-zero-scheme-recd`, `det-lem-picard-zero-dictionary`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem zeroLocus_adjointSection {N M : X.Modules} [N.IsInvertible] [M.IsInvertible]
     (φ : N ⟶ M) : (adjointSection φ).zeroLocus = φ.zeroLocus := by
   simpa using zeroLocus_adjointSection_comp_whiskerLeft φ (Iso.refl _)

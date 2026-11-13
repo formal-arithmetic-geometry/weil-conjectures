@@ -19,7 +19,7 @@ ambient derived categories, so the projection morphism is the restriction of the
 of the ambient derived categories
 (`CategoryTheory.Adjunction.ι_map_projectionMorphism_restrictFullyFaithful`), which is an
 isomorphism on bounded constructible complexes by blueprint
-`det-thm-sfb-proper-base-change-rational`
+`proposition-proper-direct-image-constructible-complexes`
 (`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`).
 
 ## Main statements

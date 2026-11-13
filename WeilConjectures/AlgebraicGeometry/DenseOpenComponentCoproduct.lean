@@ -22,7 +22,7 @@ namespace AlgebraicGeometry
  each component lies in any prescribed dense open.
 Source: Stacks Project, Morphisms, Tag 0BAJ, the reduction to disjoint components;
 the explicit component-open argument of
-`lem-weil-pbc-dense-open-component-modifications`, steps 1 and 2.
+`theorem-cohomology-curves`, steps 1 and 2.
 
 Proof: Put Z i = range (ι i). Remove the union of the Z j for j ≠ i to get W i.
 The union is closed because the family is finite. The generic point of Z i is
@@ -39,7 +39,7 @@ the inverse image of O i and lies in V i. The maps from these inverse images to
 O i are isomorphisms; their coproduct is an isomorphism onto U, identified with
 the restriction of Sigma.desc ι by base change of a scheme coproduct.
 For an empty family the covering hypothesis forces X empty, and U is empty.
-(blueprint: lem-weil-pbc-dense-open-component-coproduct) -/
+(blueprint: theorem-cohomology-curves) -/
 theorem exists_dense_open_component_coproduct
     (X : Scheme.{u}) [IsReduced X]
     (n : ℕ) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X)

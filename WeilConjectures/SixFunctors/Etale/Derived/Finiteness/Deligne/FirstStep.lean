@@ -17,11 +17,11 @@ Let `b : Y ⟶ S` be proper, covered by finitely many opens `Yα` with closed im
 `eα : Yα ⟶ 𝔸^{σα}_S` over `S`, and let `j : X ⟶ Y` be an immersion whose generic fibre has
 dimension `≤ n`. Granting the generic constructibility theorem in generic dimension `< n`, apply
 it to each coordinate `t_{αr} : Yα ⟶ 𝔸¹_S` over the base `𝔸¹_S`: the generic fibre of
-`X ∩ Yα` over `𝔸¹_S` has dimension `< n` (`lem-fin-coordinate-generic-dimension`). This gives
+`X ∩ Yα` over `𝔸¹_S` has dimension `< n` (`lemma-coordinate-projections--1`). This gives
 dense opens `V_{αr} ⊆ 𝔸¹_S`, over whose preimages `G_{αr} ⊆ Yα` the direct image is bounded
 constructible and commutes with every base change from `S`. Their union `G` has the same property
 (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_cover`), and its complement is finite
-over a nonempty open of `S` (`lem-fin-projective-coordinate-boundary`). This is
+over a nonempty open of `S` (`lemma-coordinate-projections--2`). This is
 `AlgebraicGeometry.Etale.exists_hasDirectImageBaseChangeOnPlus_of_coordinates`.
 -/
 

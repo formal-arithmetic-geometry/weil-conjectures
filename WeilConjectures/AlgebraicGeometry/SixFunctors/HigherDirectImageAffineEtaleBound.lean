@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Torsion.TorsionAbelianDirectImageVanish
 /-!
 # Higher direct image bounds from affine etale objects
 
-Source: main-20261015, det-pe-unbounded-classical-bounds, step 10; Stacks 072W.
+Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, step 10; Stacks 072W.
 (blueprint: lem-sfb-higher-direct-image-affine-etale-bound)
 -/
 
@@ -66,7 +66,7 @@ private theorem module_vanishing {X Y : Scheme.{u}} (g : X ⟶ Y) (c : ℕ)
 
 /-- A bound on the absolute torsion cohomology of inverse images of affine etale objects
 bounds higher direct images. No finiteness assumption on the morphism is needed.
-Source: main-20261015, det-pe-unbounded-classical-bounds, step 10; Stacks 072W.
+Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, step 10; Stacks 072W.
 (blueprint: lem-sfb-higher-direct-image-affine-etale-bound)
 
 Proof: Compute the higher direct image by the sheafification of the cohomology presheaf

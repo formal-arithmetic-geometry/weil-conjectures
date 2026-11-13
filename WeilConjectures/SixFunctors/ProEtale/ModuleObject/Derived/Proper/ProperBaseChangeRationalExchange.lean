@@ -64,9 +64,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 /-!
 # Proper direct image with rational condensed coefficients: proper base change
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clause 3, proper base
-change (blueprint: det-thm-sfb-proper-base-change-rational).
+change (blueprint: proposition-proper-direct-image-constructible-complexes).
 
 Split off from
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational`
@@ -146,7 +146,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The recorded unit--square--counit base-change map is invertible for every proper
 cartesian square in the standing setting, with no condition on g.
 Source: blueprint rational proper direct image, clause 3, proper base change
-(blueprint: det-thm-sfb-proper-base-change-rational).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 
 Proof: the conditional restriction and the finiteness-coefficient restriction have
 identical functor data; their preservation arguments are proofs of the same proposition.

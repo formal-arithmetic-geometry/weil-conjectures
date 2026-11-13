@@ -21,7 +21,7 @@ universe u
 /-- Forward implication in the G-ring criterion by pairs of primes. This is the forward
 half of Stacks Project, More on Algebra, Lemma 07PN, obtained by identifying each quotient
 formal fibre with the corresponding formal fibre of the localization completion.
-(blueprint: lem-weil-pbc-g-ring-check-pairs-of-primes-forward) -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2) -/
 theorem isGRing_pairsOfPrimes_forward (R : Type u) [CommRing R] [IsNoetherianRing R]
     (hR : IsGRing R) :
     ∀ (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p),

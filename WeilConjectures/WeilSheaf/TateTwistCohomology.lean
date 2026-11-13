@@ -257,7 +257,7 @@ noncomputable def tateTwistSheafObjIso : ∀ m : ℤ, (tateTwistSheaf k₀ l X m
 `ℚ̄_ℓ(m)` is isomorphic, as a Weil sheaf, to the constant Weil twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` of
 `ℚ̄_ℓ`: the Weil structure of `ℚ̄_ℓ(1)`, the pullback of roots of unity, is `χ_ℓ(σ)` times that of
 `ℚ̄_ℓ`, and the tensor products and duals defining `ℚ̄_ℓ(m)` give `χ_ℓ(σ)ᵐ`.
-(blueprint: `lem-wf-tate-twist-compatibility`) -/
+(blueprint: `proposition-weights-under-usual-operations--13`) -/
 noncomputable def tateTwistSheafIso (m : ℤ) :
     tateTwistSheaf k₀ l X m ≅ (adicConstant k₀ l X).constantTwist (cyclotomicUnit k₀ l ^ m) :=
   ObjectProperty.isoMk _
@@ -284,8 +284,8 @@ noncomputable def cohomologyEquivOfIso {F G : WeilSheaf k₀ l Y} (e : F ≅ G) 
     ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).mapIso (toComplex.mapIso e)))
 
 variable (k₀ l Y) in
-/-- **Cohomology of the Tate sheaves** (blueprint `def-weil-frobenius-coefficient-twists`, with
-the twist elimination of `prop-pod-degree-of-the-pairing`): `Hʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is
+/-- **Cohomology of the Tate sheaves** (blueprint `prose-10-21`, with
+the twist elimination of `corollary-degreewise-duality-over-fields--1`): `Hʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is
 `Hʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same space with the geometric Frobenius multiplied by `q^{-m}`, since
 geometric Frobenius acts on `ℚ̄_ℓ(m)` by `q^{-m}`. -/
 theorem nonempty_equiv_cohomology_tateTwistSheaf (m r : ℤ) :
@@ -317,9 +317,9 @@ noncomputable def compactlySupportedCohomologyEquivOfIso {F G : WeilSheaf k₀ l
 
 variable (k₀ l Y) in
 /-- **Compactly supported cohomology of the Tate sheaves** (blueprint
-`def-weil-frobenius-coefficient-twists`, with the twist elimination of
-`prop-pod-degree-of-the-pairing`): `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same
-space with the geometric Frobenius multiplied by `q^{-m}`. -/
+`prose-10-21`, with the twist elimination of
+`corollary-degreewise-duality-over-fields--1`): `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`,
+the same space with the geometric Frobenius multiplied by `q^{-m}`. -/
 theorem nonempty_equiv_compactlySupportedCohomology_tateTwistSheaf (m r : ℤ) :
     Nonempty (((tateTwistSheaf k₀ l Y m).compactlySupportedCohomology r).Equiv
       (((adicConstant k₀ l Y).compactlySupportedCohomology r).tateTwist (Nat.card k₀) m)) := by

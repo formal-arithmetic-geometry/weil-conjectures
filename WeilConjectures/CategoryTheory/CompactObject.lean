@@ -14,9 +14,9 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 /-!
 # Compact objects of an additive category with coproducts
 
-Source: the blueprint of the Weil conjectures, chapter `sec-picard-framework`, unit
-`det-thm-picard-duality` (blueprint: def-pc-compact-object); Stacks Project, Derived Categories,
-Definition 13.37.1 (Tag 09SM).
+Source: the blueprint of the Weil conjectures, chapter `chap-The-Picard-scheme-of-a-curve`, unit
+`theorem-riemann-roch-coherent-serre-duality--2` (blueprint: def-pc-compact-object); Stacks Project,
+Derived Categories, Definition 13.37.1 (Tag 09SM).
 
 ## Main statements
 

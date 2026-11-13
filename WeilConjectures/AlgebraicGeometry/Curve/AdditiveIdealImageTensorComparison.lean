@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # The additive ideal image and tensor sections
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim,
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim,
 as expanded in `lem-sc-nil-ideal-units-image-linearization`, Step 1.
 (blueprint: lem-sc-additive-ideal-image-tensor-comparison)
 -/
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 /-- For J contained in I, the additive image of the ideal of I on the subscheme of J
 is the etale sheaf associated with the specified module cokernel J to I.
 There is no nilpotence or square-zero hypothesis in this additive assertion.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 `lem-sc-nil-ideal-units-image-linearization`, Step 1.
 (blueprint: lem-sc-additive-ideal-image-tensor-comparison)
 

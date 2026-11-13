@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.Scheme
 on the base field; otherwise invertible-order torsion forces the sheaf to be zero.
 Source: Stacks Project, Tag 0GJA, proof, remark (a); elementary Bezout argument
 and geometric stalk conservativity.
-(blueprint: lem-pbc-a3-prime-annihilated-invertible-cases).
+(blueprint: lemma-removing-finitely-many-points--1).
 
 Proof: Stalk functors are additive, so r kills every stalk element. If r is a unit in
 the global sections of Spec k, this same positive integer witnesses invertible-order

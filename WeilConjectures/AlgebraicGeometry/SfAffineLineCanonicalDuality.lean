@@ -187,7 +187,7 @@ Proof plan:
    lemma-nagata-projective-space-base-change-proper). Then F_p = Rq_* Dj_!.
 2. Apply lem-sf-affine-base-p1-trace-adjunction over the arbitrary affine base.
    Its right adjoint H(K) = A_P(1)[2] tensor q^*K has the projection-normalized
-   trace counit. Compare H with the ambient G_q using det-sp-unique-right-adjoint;
+   trace counit. Compare H with the ambient G_q using proposition-sp-unique-adjoint--1;
    the counit-preserving comparison gives gamma_q at the coefficient unit.
 3. Transpose theta_q composed with gamma_q tensor 1. Naturality of projection
    identifies its transpose with the trace counit from step 2. The adjunction

@@ -177,7 +177,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 # Torsion reductions of locally closed integral lattices
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-heart-bound,
-`sk-lem-proper-heart-bound-torsion.md` (blueprint: det-proper-heart-bound-torsion).
+`sk-lem-proper-heart-bound-torsion.md` (blueprint: lemma-uniform-bound-proper-direct-image--1).
 The ordinary relative tensor with the actual quotient module is the canonical quotient
 by the uniformizer power. The scalar equations in the origin predicate retain its module
 structure when comparing with fixed finite-coefficient sheaves.
@@ -203,7 +203,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
 
 /-- Multiplication by an actual integral scalar on the continuous condensed integer sheaf.
 Source: blueprint torsion reduction, coefficient convention
-(blueprint: det-proper-heart-bound-torsion). -/
+(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
 def torsionIntegerMultiply (b : Padic.coefficientExtensionIntegers ℓ E) :
     End (DerivedNakayama.integerRing ℓ E) :=
   letI := (Padic.coefficientExtensionAbsoluteValue ℓ E).toNormedField
@@ -214,7 +214,7 @@ def torsionIntegerMultiply (b : Padic.coefficientExtensionIntegers ℓ E) :
 
 /-- The underlying additive scalar endomorphism, using the pulled-back scalar and the
 specified internal module action. Source: blueprint torsion reduction, coefficient convention
-(blueprint: det-proper-heart-bound-torsion). -/
+(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
 def torsionScalar {X : Scheme.{u}}
     (M : pulledBackModuleObjects (DerivedNakayama.integerRing ℓ E) X)
     (b : Padic.coefficientExtensionIntegers ℓ E) : End M.X :=
@@ -225,7 +225,7 @@ def torsionScalar {X : Scheme.{u}}
 
 /-- Scalar multiplication on a fixed-coefficient module sheaf, with the given scalar action.
 Source: blueprint torsion statement, finite discrete coefficients
-(blueprint: det-proper-heart-bound-torsion). -/
+(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
 def torsionFixedScalar {C : Type (u + 1)} [Category.{u} C]
     {J : GrothendieckTopology C} {B : Type (u + 1)} [CommRing B]
     (G : Sheaf J (ModuleCat.{u + 1} B)) (b : B) : End G :=

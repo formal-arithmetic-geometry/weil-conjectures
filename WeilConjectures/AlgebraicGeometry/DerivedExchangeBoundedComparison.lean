@@ -24,7 +24,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The exchange comparison equation for a bounded below K-injective source complex.
 Source: Stacks Project, sites-cohomology.tex, Lemma 0736 and Remark 07A7;
 derived.tex, Lemmas 070I, 070K, 0DVC. The comparison is the explicit
-argument in step 6 of lem-weil-pbc-derived-exchange-termwise.
+argument in step 6 of prose-04-06.
 
 Proof: let N = g^* f_* I. It is bounded below because the termwise functors
 preserve zero objects. Express the derived exchange as the adjoint of the

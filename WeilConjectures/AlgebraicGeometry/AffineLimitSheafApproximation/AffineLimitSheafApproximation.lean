@@ -13,7 +13,7 @@ For a cone with projections `pᵢ`, construct the diagram `pᵢ⁻¹pᵢ*F` and 
 counit cocone to `F`. The transition maps are defined by adjunction; their
 functoriality follows from coherence of direct-image composition.
 
-Source: the first step of blueprint `lem-sc-cd-affine-limit`.
+Source: the first step of blueprint `lemma-uniform-bounds-pro-etale-affines`.
 (blueprint: def-sc-affine-limit-sheaf-approximation). -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ local notation "R" => lowerStar AddCommGrpCat
 local notation "adj" => upperStarLowerStarAdjunction AddCommGrpCat
 
 /-- Transition morphism between two pull-push approximations.
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
 (blueprint: def-sc-affine-limit-sheaf-approximation). -/
 noncomputable def approximationMap (p : X ⟶ Y) (f : Y ⟶ Z) (r : X ⟶ Z)
     (hr : r = p ≫ f) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -115,7 +115,7 @@ variable {I : Type u} [SmallCategory I] (D : I ⥤ Scheme.{u}) (s : Cone D)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The diagram of pull-push approximations along the projections of a scheme cone.
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
 (blueprint: def-sc-affine-limit-sheaf-approximation). -/
 noncomputable def approximationDiagram :
     Iᵒᵖ ⥤ Sheaf s.pt.smallEtaleTopology AddCommGrpCat.{u + 1} where
@@ -131,7 +131,7 @@ noncomputable def approximationDiagram :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The counits form a cocone from the approximation diagram to the original sheaf.
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
 (blueprint: def-sc-affine-limit-sheaf-approximation). -/
 noncomputable def approximationCocone : Cocone (approximationDiagram D s F) where
   pt := F
@@ -142,7 +142,7 @@ noncomputable def approximationCocone : Cocone (approximationDiagram D s F) wher
         exact (approximationMap_counit _ _ _ _ _).trans (Category.comp_id _).symm }
 
 /-- The canonical map from the colimit of approximations to the original sheaf.
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
 (blueprint: def-sc-affine-limit-sheaf-approximation). -/
 noncomputable def approximationComparison :
     colimit (approximationDiagram D s F) ⟶ F :=

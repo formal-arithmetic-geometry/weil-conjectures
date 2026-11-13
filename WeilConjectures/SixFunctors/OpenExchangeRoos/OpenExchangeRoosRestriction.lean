@@ -136,8 +136,9 @@ import Mathlib.CategoryTheory.Sites.Abelian
 /-! # Restriction of the completed open exchange in strict Roos coordinates
 
 Source: Stacks Project, proetale.tex, Tags 099N (2),(5) and 09BN;
-sites-cohomology.tex, Tag 0D6D; blueprint main-20261015, sk-prop-sf-pf-coherence,
-base-change paragraph (blueprint: lem-sf-open-exchange-roos-restriction).
+sites-cohomology.tex, Tag 0D6D; blueprint main-20261015,
+proposition-composition-base-change-rf-shriek--1, base-change paragraph (blueprint:
+lem-sf-open-exchange-roos-restriction).
 
 The integral datum is the existing uniformizer datum. Its completed-ring presentation
 is transported to integral coefficients by the projection-normalized `transport`.
@@ -292,7 +293,7 @@ def Assertion {U' U X' X : Scheme.{u}}
 open exchanges. Its restriction is the finite-composition comparison, and that
 comparison preserves the actual ordinary-to-completed pullback units.
 Source: Stacks 099N (2),(5), 09BN and 0D6D; blueprint main-20261015,
-sk-prop-sf-pf-coherence, open-factor proof Steps 10--11
+proposition-composition-base-change-rf-shriek--1, open-factor proof Steps 10--11
 (blueprint: lem-sf-open-exchange-roos-restriction).
 
 Proof, following the nine steps of the DAG node:

@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 # Canonical shifts and compositors of derived module functors
 
 Source: Stacks, derived.tex, Tags 014X, 015F and 05SE; blueprint
-`det-thm-sfb-proper-base-change-rational`, proof paragraph (3)
+`proposition-proper-direct-image-constructible-complexes`, proof paragraph (3)
 (blueprint: lem-sfb-module-derived-functor-compositor-shifts).
 
 The pullback shifts are transported from exact termwise pullback by the canonical
@@ -73,8 +73,8 @@ pushforward shifts; compatibility of `c_f` and the termwise comparison with ever
 Source: Stacks Tags 014X, 015F and 05SE
 (blueprint: lem-sfb-module-derived-functor-compositor-shifts).
 
-Proof: (1) `det-prop-sfb-module-pullback-exact-main` makes module pullback exact.
-`lem-weil-pbc-exact-functor-derived-factorization` gives the triangulated termwise functor
+Proof: (1) `prose-03-02` makes module pullback exact.
+`situation-conventions` gives the triangulated termwise functor
 and its shift-compatible localization comparison. Transport its shift along the canonical
 `def-sfb-left-derived-exact` comparison. Images of distinguished triangles are isomorphic
 through this comparison, including the connecting arrow, so remain distinguished by TR1

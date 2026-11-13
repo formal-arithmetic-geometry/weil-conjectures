@@ -19,7 +19,7 @@ import Mathlib.Logic.Equiv.Fin.Basic
 /-!
 # Immersion extensions and finite constant scalar models
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-lem-integral-models-operations.proof.md, paragraph (3)
 (blueprint: lem-sfb-scalar-model-immersion-extension).
 

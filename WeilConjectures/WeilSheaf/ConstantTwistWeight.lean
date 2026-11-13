@@ -32,7 +32,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
 constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
 `m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
-`q^{mc/2} q^{mw/2}`. (blueprint: `lem-wf-constant-twist-weight`) -/
+`q^{mc/2} q^{mw/2}`. (blueprint: `proposition-weights-under-usual-operations--12`) -/
 theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
     (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :

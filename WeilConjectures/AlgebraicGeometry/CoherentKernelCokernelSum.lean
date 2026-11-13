@@ -122,7 +122,7 @@ apply the snake lemma to the sequence with top row zero, finite free, finite fre
 identity, and bottom row the given short exact sequence restricted to its open. Its
 relations are the kernel of a map from the relations in the last term to the first term.
 The former is finite type and the latter coherent, by
-`lem-weil-pbc-coherent-module-local-on-open-cover`; hence the kernel is finite type by
+`lemma-coherent-base-change-invertible-sheaves--1`; hence the kernel is finite type by
 `lem-weil-pbc-coherent-finite-type-sub-kernel` (2). Exactness identifies this kernel with
 the middle relations using `lem-weil-pbc-abelian-exact-iff-epi-kernel-lift`.
 7. Induct on the number of summands, starting with the coherent zero module. The split

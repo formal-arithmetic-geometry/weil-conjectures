@@ -38,17 +38,17 @@ product `- ⊗ᴸ -` and internal hom `RHom(-, -)`. The *coefficient dual* of a 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.isDualizable_coefficientDual`
-  (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable`): `K^∨` is dualizable for a
+  (`theorem-poincare-duality--4`): `K^∨` is dualizable for a
   dualizable `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_coefficientDual`
-  (`sk-prop-sf-dualizable-biduality`): biduality `K ≅ K^∨∨` for a dualizable `K`.
+  (`theorem-poincare-duality--4`): biduality `K ≅ K^∨∨` for a dualizable `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
-  (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable-hom`): the comparison
+  (`theorem-poincare-duality--4`, `theorem-poincare-duality--5`): the comparison
   `K^∨ ⊗ᴸ M ≅ RHom(K, M)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
-  (`sk-lem-sf-twist-interchange`): the internal hom commutes with an invertible twist.
+  (`theorem-poincare-duality--2`): the internal hom commutes with an invertible twist.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`
-  (`sk-thm-sf-internal-hom-pullback`, `thm-trf-internal-hom-pullback`): the internal hom with
+  (`theorem-poincare-duality-frobenius--1`): the internal hom with
   a dualizable first variable commutes with pullback.
 
 ## Implementation notes

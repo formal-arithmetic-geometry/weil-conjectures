@@ -12,8 +12,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCart
 # Regular divisors meeting transversely at one point
 
 The transverse boundary calculation of the trace formula (blueprint
-`sk-lem-tf-transverse-boundary`) works with two regular divisors `X, Y` of a surface `Z`
-"meeting transversely at exactly one point `z`".
+`lemma-cohomology-near-two-transverse-divisors`) works with two regular divisors `X, Y` of a surface
+`Z` "meeting transversely at exactly one point `z`".
 
 ## Main definitions
 

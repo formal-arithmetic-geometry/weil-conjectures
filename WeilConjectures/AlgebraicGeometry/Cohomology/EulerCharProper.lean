@@ -39,7 +39,7 @@ scheme proper over a field `k`, only finitely many cohomology groups `H^q(X, ℱ
 coherent `ℱ` each `H^q(X, ℱ)` is moreover finite-dimensional over `k`
 (`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`).
 
-(blueprint: `lem-pc-euler-characteristic-well-defined`, `rem-ptr-pc-euler-characteristic-13`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem finite_setOf_nontrivial_H_of_isProper (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     {q : ℕ | Nontrivial (ℱ.H q)}.Finite := by
@@ -60,7 +60,7 @@ the `finsum` defining `χ(X, ℱ) = ∑ (-1)^q h^q(X, ℱ)` is a finite sum. For
 `h^q(X, ℱ)` are the dimensions of finite-dimensional vector spaces
 (`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`).
 
-(blueprint: `lem-pc-euler-characteristic-well-defined`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem finite_support_finrankH_of_isProper (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     (Function.support (ℱ.finrankH k)).Finite := by

@@ -16,7 +16,7 @@ constructible `ℚ̄_ℓ`-complexes `A` on `X` and `B` on `Y`, the ordinary Kün
 `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(P, Lp₁^* A ⊗ Lp₂^* B)` (`ProEtale.CondensedRing.lowerStarKunnethMap'`
 of the two squares over `Spec K`) is an isomorphism
 (`ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback`; blueprint
-`sk-lem-sf-kunneth-star`, for `fᵢ : Xᵢ ⟶ Spec K`).
+`lemma-kunneth-one-identity-factor--1`, for `fᵢ : Xᵢ ⟶ Spec K`).
 
 The proof is `ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback_point` of
 `WeilConjectures.TraceFormula.OrdinaryKunnethGlobal`, for the morphisms of `Over (Spec K)`
@@ -46,9 +46,10 @@ variable {K : Type u} [Field K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ 
   [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
 
 /-- **The ordinary Künneth formula for global sections over a field** (blueprint
-`sk-lem-sf-kunneth-star`, for `fᵢ : Xᵢ ⟶ Spec K`; SGA 4½, [Th. finitude], Cor. 1.11): for a
-cartesian square `P = X ×_K Y` of separated `K`-schemes of finite type and bounded constructible
-`A`, `B`, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)` is an isomorphism. -/
+`lemma-kunneth-one-identity-factor--1`, for `fᵢ : Xᵢ ⟶ Spec K`; SGA 4½, [Th. finitude], Cor. 1.11):
+for a cartesian square `P = X ×_K Y` of separated `K`-schemes of finite type and bounded
+constructible `A`, `B`, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)` is an
+isomorphism. -/
 theorem isIso_lowerStarKunnethMap'_of_isPullback (p₁ : P.left ⟶ X.left)
     (p₂ : P.left ⟶ Y.left)
     (w₁ : p₁ ≫ X.hom = P.hom ≫ 𝟙 _) (w₂ : p₂ ≫ Y.hom = P.hom ≫ 𝟙 _)

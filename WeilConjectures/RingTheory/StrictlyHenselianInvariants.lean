@@ -26,7 +26,7 @@ polynomial lifting a given simple residue root, so it fixes the unique one.
 For `A` the localization at a point `Q` over a boundary point `z` of the integral closure of a
 Dedekind ring in a separable closure of its fraction field and `G` the inertia group of `Q`,
 `A^G` is the strict henselization at `z`, the strictly henselian pro-étale neighbourhood used to
-compute boundary stalks (blueprint `lem-wf-boundary-stalk-invariants`).
+compute boundary stalks (blueprint `lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section
