@@ -238,7 +238,6 @@ private noncomputable def tensorPresheafUnit
     (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app _ ≫
       (tensorObjIsoSheafification M N).inv.val
 
-set_option trace.profiler true in
 set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
 /-- Restricted extension of scalars is tensoring with the restricted target ring.
@@ -1004,9 +1003,8 @@ private theorem integralScalarComparison_unique
 attribute [local irreducible] integralScalarExtensionOfUniverses
   integralScalarExtensionComparisonOfUniverses
 
-set_option trace.profiler true in
-set_option maxHeartbeats 250000 in
 -- The comparison combines two derived counits across independent coefficient universes.
+set_option profiler true in
 private theorem completedIntegralComparison_descent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -1069,9 +1067,8 @@ private theorem completedIntegralComparison_descent
 
 attribute [local semireducible] PrincipalQuotientCompletion.quotientRoos
 
-set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
 -- The normalized tower and cone comparisons involve independent site/coefficient sizes.
+set_option profiler true in
 /-- Completing ordinary extension is the actual coefficient-reduction Roos functor,
 with the specified scalar augmentation, on every input.
 
