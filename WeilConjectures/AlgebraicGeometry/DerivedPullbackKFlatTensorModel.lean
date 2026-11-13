@@ -142,6 +142,23 @@ private theorem comparisonSquare_natural {D : Type*} [Category* D]
   simp only [Category.assoc]
   rw [he', hC, hAB, reassoc_of% he]
 
+-- Paste the naturality squares before specializing to the concrete tensor structures.
+private theorem mappedComparisonSquare_natural
+    {D E H : Type*} [Category* D] [Category* E] [Category* H]
+    (L : D ⥤ E) (Q : H ⥤ E)
+    {U U' V V' : D} {W W' Z Z' : H}
+    {u : U ⟶ U'} {v : V ⟶ V'} {w : W ⟶ W'} {z : Z ⟶ Z'}
+    {a : U ⟶ V} {a' : U' ⟶ V'}
+    {b : L.obj V ⟶ Q.obj W} {b' : L.obj V' ⟶ Q.obj W'}
+    {c : W ⟶ Z} {c' : W' ⟶ Z'}
+    (ha : u ≫ a' = a ≫ v) (hb : L.map v ≫ b' = b ≫ Q.map w)
+    (hc : w ≫ c' = c ≫ z) :
+    L.map u ≫ L.map a' ≫ (b' ≫ Q.map c') =
+      L.map a ≫ (b ≫ Q.map c) ≫ Q.map z := by
+  rw [← L.map_comp_assoc, ha, L.map_comp_assoc, reassoc_of% hb]
+  simp only [Category.assoc]
+  rw [← Q.map_comp, hc, Q.map_comp]
+
 private theorem tensorModel_isIso (X : Scheme.{uModel})
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
@@ -240,8 +257,6 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
       (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _)).app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) _
 
-set_option maxHeartbeats 400000 in
--- Elaborating the representative comparison requires several concrete tensor structures.
 /-- The comparison on K-flat cochain representatives, before localization in either
 variable. Source: Stacks Project, Cohomology, Tags 079U, 06YC and 06YH; steps 1 and 2
 and the representative naturality calculation of the parent proof.
@@ -351,8 +366,7 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
       CochainComplex (SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) ℤ :=
     F.mapHomologicalComplex (.up ℤ)
   let A P N := L.map (Functor.LaxMonoidal.μ Q P N)
-  let B P N := ε.app (q.obj (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
-    Qt.map (φ P N).hom
+  let B P N := ε.app (q.obj (P ⊗ N)) ≫ Qt.map (φ P N).hom
   let C P N := (ε.app (q.obj P) ⊗ₘ ε.app (q.obj N)) ≫
     Functor.LaxMonoidal.μ Qt (Fc.obj P) (Fc.obj N)
   have hA P N (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P) : IsIso (A P N) := by
@@ -391,13 +405,10 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
   · intro P P' N N' hP hP' hN hN' a b
     have := hA P' N' hP'
     have := hB P' N' hP' hN'
-    let t := HomologicalComplex.mapBifunctorMap a b (curriedTensor _) (.up ℤ)
-    let tf := HomologicalComplex.mapBifunctorMap (Fc.map a) (Fc.map b)
-      (curriedTensor _) (.up ℤ)
-    have hεt : L.map (Q.map t) ≫ ε.app (q.obj
-        (CochainComplex.mapBifunctor P' N' (curriedTensor _))) =
-        ε.app (q.obj (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
-          Qt.map (Fc.map t) := by
+    let t := a ⊗ₘ b
+    let tf := Fc.map a ⊗ₘ Fc.map b
+    have hεt : L.map (Q.map t) ≫ ε.app (q.obj (P' ⊗ N')) =
+        ε.app (q.obj (P ⊗ N)) ≫ Qt.map (Fc.map t) := by
       exact ε.naturality (q.map t)
     have hεa : L.map (Q.map a) ≫ ε.app (q.obj P') =
         ε.app (q.obj P) ≫ Qt.map (Fc.map a) := by
@@ -407,11 +418,8 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
       exact ε.naturality (q.map b)
     have hAB : L.map (Q.map a ⊗ₘ Q.map b) ≫ A P' N' ≫ B P' N' =
         A P N ≫ B P N ≫ Qt.map tf := by
-      dsimp only [A, B]
-      rw [← L.map_comp_assoc, Functor.LaxMonoidal.μ_natural, L.map_comp_assoc]
-      erw [reassoc_of% hεt]
-      simp only [Category.assoc]
-      rw [← Qt.map_comp, hnatural P P' N N' a b, Qt.map_comp]
+      exact mappedComparisonSquare_natural L Qt
+        (tensorModel_natural X a b) hεt (hnatural P P' N N' a b)
     have hCnat : (L.map (Q.map a) ⊗ₘ L.map (Q.map b)) ≫ C P' N' =
         C P N ≫ Qt.map tf := by
       dsimp only [C]
