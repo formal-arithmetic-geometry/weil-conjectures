@@ -188,10 +188,7 @@ private theorem derivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' 
   rfl
 
 
-set_option maxHeartbeats 400000 in
-set_option trace.profiler true in
--- The cross-presentation comparison of the two derived composites (final `exact`, ~11 s)
--- exceeds the default budget; the HEq bridge replaces the former 40M `rw; rfl` proof.
+set_option profiler true in
 /-- The finite-system composition comparison of integral pullback is the whole-system
 comparison of the integral comparison sequence systems.
 Source: Stacks 03D8, 0D6D (blueprint: lem-pod-integral-pullback-composition-scalar).
@@ -242,7 +239,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       exact HEq.rfl)
     (finiteSystemComposition_heq_integralComparison l E h k)
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  exact eq_of_heq hh
+  apply eq_of_heq
+  exact hh
 
 end Composition
 
