@@ -238,6 +238,7 @@ end Restriction
 
 /-! ### Finite support for a morphism -/
 
+set_option profiler true in
 /-- A morphism of bounded constructible complexes is invertible away from finitely many closed
 points if it is invertible over the generic points of local coordinates detecting closed points. -/
 lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Prime]
@@ -256,6 +257,7 @@ lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Pri
           (L((U.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f))) :
     ∃ (S : Finset Y.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f) := by
+  have := isNoetherian_left Y
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f
   have hC := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
     Y.left)).ext_of_isTriangulatedClosed₃ _ hT hA hB
@@ -281,7 +283,8 @@ lemma isIso_upperStar_map_of_factorization
     {A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y))} (f : A ⟶ B) (hf : IsIso (L((q)^*⟦Λ⟧).map f)) :
     IsIso (L((p)^*⟦Λ⟧).map f) := by
-  exact (NatIso.isIso_map_iff (leftDerivedUpperStarCompOfEq Λ hl) f).2
+  subst p
+  exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp Λ l q) f).2
     (inferInstanceAs (IsIso (L((l)^*⟦Λ⟧).map (L((q)^*⟦Λ⟧).map f))))
 
 /-! ### The finite-support step -/
@@ -313,23 +316,10 @@ lemma isTraitModelOver_restrictOpen_productOpen
 
 set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **The finite-support step of Gabber's Künneth formula** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
-`N` of finite type and bounded constructible `A`, `B` such that the source and the target of the
-Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed into `𝔸ᵐ_S`,
-`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
-(`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an isomorphism away from finitely
-many closed points of the special fibre `X_s × Y_s`.
-
-Around every point, the coordinates of charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` of the total
-spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
-`Π_{A,B}` vanishes over the generic point of each coordinate line
-(`NearbyCyclesModel.SliceKunnethFormula` and its mirror, for the
-restriction of the product to `V ×_S W`); conclude by
-`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
--/
-theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
+/-- Coordinates of product charts detect closed points and make the Künneth map invertible
+on their generic fibres, assuming the slicing formula in smaller chart dimension. -/
+lemma exists_coordinates_isIso_kunnethMap_of_slice
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
     [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
@@ -337,25 +327,21 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
     (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
-    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
+    (hslice : 0 < m + m' → SliceKunnethFormula Λ k' (m + m' - 1))
     {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
+      (condensedRingObj Λ X))}
+    (hA : boundedConstructible (condensedRingObj Λ X) A)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
-    (hsrc : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-      (L((f₁')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((M.nearbyCycles (Profinite.padicAlgClRingObj
-          ℓ)).obj A) ⊗
-        L((f₂')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((N.nearbyCycles (Profinite.padicAlgClRingObj
-            ℓ)).obj B)))
-    (htgt : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-      ((P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj (L((f₁)^*⟦Profinite.padicAlgClRingObj
-          ℓ⟧).obj A ⊗ L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))) :
-    ∃ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x}),
-      IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (kunnethMap
-          (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+      (condensedRingObj Λ Y))}
+    (hB : boundedConstructible (condensedRingObj Λ Y) B)
+    : ∀ z : Z'.left, ∃ (U : Z'.left.Opens) (_ : z ∈ U) (ι : Type u) (_ : Finite ι)
+      (b : ι → (U.toScheme ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))),
+      (∀ i, LocallyOfFiniteType (b i)) ∧ (∀ v : U, (∀ i, IsClosed {b i v}) → IsClosed {v}) ∧
+      ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))
+        (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧
+        IsIso (L((pullback.fst (b i) ξ)^*⟦Λ⟧).map
+          (L((U.ι)^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) := by
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
@@ -373,7 +359,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
   have := hP.isTraitModel.isNoetherian_total
   have := hM.locallyOfFiniteType
   have := hN.locallyOfFiniteType
-  refine exists_finset_isIso_of_forall_exists_coordinates Z' _ hsrc htgt fun z ↦ ?_
+  intro z
   -- local charts around the images of `z` in the total spaces
   obtain ⟨V, hzV, ιV, _, cV, hcardV, hcVi, hcV⟩ := hm (φ₁.total (P.i z))
   obtain ⟨W, hzW, ιW, _, cW, hcardW, hcWi, hcW⟩ := hm' (φ₂.total (P.i z))
@@ -456,9 +442,9 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
     have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
     have hslice : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
-        Profinite.padicAlgClRingObj ℓ⟧).map (kunnethMap (Profinite.padicAlgClRingObj ℓ) ψ₁ ψ₂
-          (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
-          (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))) := by
+        Λ⟧).map (kunnethMap Λ ψ₁ ψ₂
+          (L((𝟙 X)^*⟦Λ⟧).obj A)
+          (L((𝟙 Y)^*⟦Λ⟧).obj B))) := by
       rcases i with a | a
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
           (traitSlice (traitSliceCoord k'))
@@ -479,11 +465,63 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
           (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
     let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι
     have hslice' : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
-        Profinite.padicAlgClRingObj ℓ⟧).map (L((r')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-          (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B))) := by
+        Λ⟧).map (L((r')^*⟦Λ⟧).map
+          (kunnethMap Λ φ₁ φ₂ A B))) := by
       exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR _ A B).2 hslice
     obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)
     exact isIso_upperStar_map_of_factorization _ l hl _ hslice'
+
+set_option profiler true in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- **The finite-support step of Gabber's Künneth formula** (blueprint
+`sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
+locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
+`N` of finite type and bounded constructible `A`, `B` such that the source and the target of the
+Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed into `𝔸ᵐ_S`,
+`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
+(`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an isomorphism away from finitely
+many closed points of the special fibre `X_s × Y_s`.
+
+Around every point, the coordinates of charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` of the total
+spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
+`Π_{A,B}` vanishes over the generic point of each coordinate line
+(`NearbyCyclesModel.SliceKunnethFormula` and its mirror, for the
+restriction of the product to `V ×_S W`); conclude by
+`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
+-/
+theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
+    [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
+    (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
+    (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    (hsrc : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
+      (L((f₁')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((M.nearbyCycles (Profinite.padicAlgClRingObj
+          ℓ)).obj A) ⊗
+        L((f₂')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((N.nearbyCycles (Profinite.padicAlgClRingObj
+            ℓ)).obj B)))
+    (htgt : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
+      ((P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj (L((f₁)^*⟦Profinite.padicAlgClRingObj
+          ℓ⟧).obj A ⊗ L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))) :
+    ∃ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x}),
+      IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (kunnethMap
+          (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
+  exact exists_finset_isIso_of_forall_exists_coordinates Z' _ hsrc htgt
+    (exists_coordinates_isIso_kunnethMap_of_slice (Profinite.padicAlgClRingObj ℓ)
+      hM hN hpb hP hgen hm hm' hslice heM heN hA hB)
 
 end FiniteSupport
 
