@@ -32,9 +32,14 @@ universe u
 open scoped TensorProduct
 namespace RingTheory
 
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
--- The tensor quotient and integral-closure algebra towers need extra elaboration heartbeats.
+private theorem maximalIdeal_eq_span_of_unramified
+    {R T : Type u} [CommRing R] [CommRing T] [IsLocalRing R] [IsLocalRing T]
+    [Algebra R T] [IsLocalHom (algebraMap R T)] [Algebra.FormallyUnramified R T]
+    (t : R) (ht : IsLocalRing.maximalIdeal R = Ideal.span {t}) :
+    IsLocalRing.maximalIdeal T = Ideal.span {algebraMap R T t} := by
+  rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := R), ht,
+    Ideal.map_span, Set.image_singleton]
+
 /-- The root generates the maximal ideal of an integral-closure local factor.
 
 Source: Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
@@ -137,9 +142,7 @@ theorem dvr_galois_root_factor_uniformizer
         (algebraMap S (Localization.AtPrime Q)) = Q :=
       Localization.AtPrime.under_maximalIdeal
     exact (congrArg (Ideal.comap (algebraMap A S)) hloc).trans hc
-  have hm := Algebra.FormallyUnramified.map_maximalIdeal
-    (R := A) (S := Localization.AtPrime Q)
-  rw [hmaxA, Ideal.map_span, Set.image_singleton] at hm
-  exact hm.symm
+  exact maximalIdeal_eq_span_of_unramified (T := Localization.AtPrime Q)
+    (AdjoinRoot.root f) hmaxA
 
 end RingTheory

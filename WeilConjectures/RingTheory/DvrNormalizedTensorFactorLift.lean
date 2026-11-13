@@ -28,11 +28,42 @@ universe u
 open scoped TensorProduct
 namespace RingTheory
 
+private theorem tensor_quotient_lift_surjective
+    {B A A₁ E F G : Type u}
+    [CommRing B] [CommRing A] [CommRing A₁] [CommRing E] [CommRing F] [CommRing G]
+    [Algebra B A] [Algebra B E] [Algebra A A₁] [Algebra B A₁]
+    [Algebra A F] [Algebra E F] [Algebra F G] [Algebra A G] [Algebra A₁ G]
+    [Algebra E G] [IsScalarTower A F G] [IsScalarTower A A₁ G] [IsScalarTower E F G]
+    (q : E ⊗[B] A →+* F) (r : F ⊗[A] A₁ →+* G) (φ : E ⊗[B] A₁ →+* G)
+    (hq : Function.Surjective q) (hr : Function.Surjective r)
+    (hq_tmul : ∀ e a, q (e ⊗ₜ[B] a) = algebraMap E F e * algebraMap A F a)
+    (hr_tmul : ∀ z a, r (z ⊗ₜ[A] a) = algebraMap F G z * algebraMap A₁ G a)
+    (hφ_tmul : ∀ e a, φ (e ⊗ₜ[B] a) = algebraMap E G e * algebraMap A₁ G a) :
+    Function.Surjective φ := by
+  intro x
+  obtain ⟨x, rfl⟩ := hr x
+  induction x using TensorProduct.inductionOn with
+  | tmul f a =>
+    obtain ⟨z, rfl⟩ := hq f
+    induction z using TensorProduct.inductionOn with
+    | tmul e b =>
+      refine ⟨e ⊗ₜ[B] (algebraMap A A₁ b * a), ?_⟩
+      rw [hφ_tmul, hr_tmul, hq_tmul, map_mul, map_mul,
+        ← IsScalarTower.algebraMap_apply A A₁ G,
+        ← IsScalarTower.algebraMap_apply E F G,
+        ← IsScalarTower.algebraMap_apply A F G, mul_assoc]
+    | add z w hz hw =>
+      obtain ⟨z', hz'⟩ := hz
+      obtain ⟨w', hw'⟩ := hw
+      refine ⟨z' + w', ?_⟩
+      rw [map_add, hz', hw', map_add, TensorProduct.add_tmul, map_add]
+  | add x y hx hy =>
+    obtain ⟨x', hx'⟩ := hx
+    obtain ⟨y', hy'⟩ := hy
+    exact ⟨x' + y', by rw [map_add, hx', hy', map_add]⟩
+
 -- Preserve the existing, internally unused `hQ` binder in the public statement.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
--- The two tensor quotients and their scalar towers need more elaboration heartbeats.
 /-- A closed prime of a normalized tensor factor lifts after finite DVR base change.
 
 Source: Stacks Project, Tag 09EM (remark-setup), Tag 032L and lying over.
@@ -146,41 +177,18 @@ theorem dvr_normalized_tensor_factor_lift
     (fun _ _ ↦ Commute.all _ _)
   -- Each double pure tensor comes from e ⊗ (b * a), so this is a field quotient.
   have hphi : Function.Surjective phi := by
-    intro x
-    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
-    induction x using TensorProduct.inductionOn with
-    | tmul f a =>
-      obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective f
-      induction z using TensorProduct.inductionOn with
-      | tmul e b =>
-        refine ⟨e ⊗ₜ[B] (algebraMap A A₁ b * a), ?_⟩
-        simp only [phi, Algebra.TensorProduct.lift_tmul, IsScalarTower.toAlgHom_apply,
-          map_mul, ← IsScalarTower.algebraMap_apply A A₁ G]
-        change algebraMap E G e * (algebraMap A G b * gamma a) =
-          Ideal.Quotient.mk M (Ideal.Quotient.mk P (e ⊗ₜ[B] b) ⊗ₜ[A] a)
-        have hP_tmul : Ideal.Quotient.mk P (e ⊗ₜ[B] b) =
-            algebraMap E F e * alpha b := by
-          change Ideal.Quotient.mk P (e ⊗ₜ[B] b) =
-            Ideal.Quotient.mk P (e ⊗ₜ[B] 1) * Ideal.Quotient.mk P (1 ⊗ₜ[B] b)
-          rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
-        have hM_tmul (z : F) : Ideal.Quotient.mk M (z ⊗ₜ[A] a) =
-            algebraMap F G z * gamma a := by
-          change Ideal.Quotient.mk M (z ⊗ₜ[A] a) =
-            Ideal.Quotient.mk M (z ⊗ₜ[A] 1) * Ideal.Quotient.mk M (1 ⊗ₜ[A] a)
-          rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
-        rw [hM_tmul, hP_tmul, map_mul, ← IsScalarTower.algebraMap_apply E F G]
-        change algebraMap E G e * (algebraMap A G b * gamma a) =
-          (algebraMap E G e * algebraMap A G b) * gamma a
-        exact (mul_assoc _ _ _).symm
-      | add z w hz hw =>
-        obtain ⟨z', hz'⟩ := hz
-        obtain ⟨w', hw'⟩ := hw
-        refine ⟨z' + w', ?_⟩
-        simpa only [map_add, TensorProduct.add_tmul] using congrArg₂ (· + ·) hz' hw'
-    | add x y hx hy =>
-      obtain ⟨x', hx'⟩ := hx
-      obtain ⟨y', hy'⟩ := hy
-      exact ⟨x' + y', by rw [map_add, hx', hy', map_add]⟩
+    apply tensor_quotient_lift_surjective (Ideal.Quotient.mk P) (Ideal.Quotient.mk M)
+      phi.toRingHom Ideal.Quotient.mk_surjective Ideal.Quotient.mk_surjective
+    · intro e a
+      change Ideal.Quotient.mk P (e ⊗ₜ[B] a) =
+        Ideal.Quotient.mk P (e ⊗ₜ[B] 1) * Ideal.Quotient.mk P (1 ⊗ₜ[B] a)
+      rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+    · intro z a
+      change Ideal.Quotient.mk M (z ⊗ₜ[A] a) =
+        Ideal.Quotient.mk M (z ⊗ₜ[A] 1) * Ideal.Quotient.mk M (1 ⊗ₜ[A] a)
+      rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+    · intro e a
+      exact Algebra.TensorProduct.lift_tmul _ _ _ e a
   let P₁ := RingHom.ker phi
   have hP₁ : P₁.IsMaximal := RingHom.ker_isMaximal_of_surjective phi hphi
   refine ⟨P₁, hP₁, ?_⟩
