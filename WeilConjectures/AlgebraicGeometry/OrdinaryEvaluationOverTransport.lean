@@ -135,7 +135,6 @@ private theorem kInjective_over_transport (X : Scheme.{u}) (U : X.Opens)
 
 end TransportProofs
 
-set_option profiler true in
 /-- Transport the ordinary tensor and Hom models, and their component equation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ, ordinary complex constructions.
 (blueprint: lem-pc-ordinary-evaluation-over-transport).
@@ -184,6 +183,7 @@ theorem exists_ordinaryEvaluation_over_transport (X : Scheme.{u}) (U : X.Opens)
         D'.IsKFlatTensor ∧ CochainComplex.IsKInjective F' ∧
         IsSchemeOrdinaryEvaluation U.toScheme P' F' (t.inv ≫ T.map f ≫ b.hom) := by
   dsimp only
+  -- Share the comparison witnesses without elaborating large dependent elimination motives.
   have h := exists_ordinaryEvaluation_over_comparisons X U P
   let b := h.choose
   have hb := h.choose_spec.1
