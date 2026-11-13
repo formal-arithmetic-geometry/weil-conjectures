@@ -74,8 +74,6 @@ private theorem strict_pullback_scalar_section (X : Scheme.{u})
     ((scalar_map_tensor l E L ι X g U 1 x).trans
       (congrArg (integralOrdinaryTensorSection l E L ι X N' U 1) h))).trans (ht N' U 1 y)
 
-set_option profiler true in
--- The strict square contains several nested sheaf scalar-change functors.
 /-- The strict scalar/pullback quotient square on every level and transition.
 Source: Stacks 03D3, 06YY and 07A4, the nested generator calculation.
 (blueprint: lem-pur-scalar-pullback-strict-tower).
