@@ -377,7 +377,6 @@ private theorem qcqsCostalkContinuityOfRecollement
   change IsIso (colimit.desc (D ⋙ V) (V.mapCocone d))
   exact isIso_of_reflects_iso _ ipush
 
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
@@ -432,7 +431,6 @@ private theorem qcqsCostalkContinuity
       (fun s t ht ↦ by have := hR s; exact (R.obj s).isZero_of_isGE a t ht) r)
     D a hD q
 
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsInjectiveCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
@@ -457,7 +455,6 @@ private theorem qcqsInjectiveCostalkContinuity
   exact injectiveContinuity_of_derived H J c a hJ hJi hc hci hq
     (fun q ↦ qcqsCostalkContinuity T Λ i k hik H adj J a hJ q)
 
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsCostalkModel
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
@@ -552,7 +549,6 @@ private theorem qcqsCostalkModel
     exact H.map_isZero ((J.obj s).isZero_of_isStrictlyGE a r hr)
   · exact homCoconeOfInjectiveCocone E H adj P n N J c β βv hβ
 
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsFiniteFreeHomEvaluation
     (X : Scheme.{u})
@@ -593,7 +589,6 @@ private theorem qcqsFiniteFreeHomEvaluation
     Functor.isoWhiskerRight F.mapDerivedCategoryFactors
       (Γ.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ n)⟩
 
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 private theorem qcqsFiniteFreeHomContinuity
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
@@ -666,7 +661,6 @@ private theorem freeComap {X : Scheme.{u}}
       biproduct.mapIso (fun _ ↦ ?_)⟩⟩
   simpa using Mod.regularIsoOfIsIso (inv φ)
 
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 private theorem lisseRawCover
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
