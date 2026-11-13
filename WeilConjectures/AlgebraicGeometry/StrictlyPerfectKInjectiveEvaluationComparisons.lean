@@ -25,9 +25,6 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 300000 in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem eq_of_two_sided_inverse {C : Type*} [Category C]
     {X Y : C} {f : X ⟶ Y} {r s : Y ⟶ X}
     (hr : f ≫ r = 𝟙 X) (hs : s ≫ f = 𝟙 Y) : r = s := by
@@ -60,6 +57,9 @@ Proof:
 The two local inverse identities remain separate named obligations, following the
 ordinary-model calculation of Stacks 08DQ.
 -/
+set_option maxHeartbeats 300000 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}
