@@ -132,8 +132,8 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (canonicalIntegralPullbackTensor_systemReduction l E h)
     (canonicalIntegralPullbackTensor_systemReduction l E (h ≫ f))
     (fun A B ↦ by
-      simpa only [integralSystemTensorComparison_finite, finiteSystemDerivedComposition_eq,
-        finiteSystemDerivedPullback_eq_sequence] using
+      simpa only [integralSystemTensorComparison_finite, Functor.comp_obj, Functor.prod_obj,
+        ← finiteSystemDerivedComposition_eq l E h f] using
         integralSystemTensorComparison_comp l E h f A B) M N
   exact key
 
