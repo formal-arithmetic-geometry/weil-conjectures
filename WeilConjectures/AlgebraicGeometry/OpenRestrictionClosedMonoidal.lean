@@ -68,7 +68,6 @@ private theorem monoidal_restriction_mate_equation
   simpa only [Category.comp_id] using congrArg
     (fun f ↦ (Functor.Monoidal.μIso R A K).hom ≫ R.map f) h.symm
 
-set_option trace.profiler true in
 private theorem closedRestriction_tensorHomEquiv_comp (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (A A' K N : schemeDerivedCategory X) (a : A' ⟶ A)
@@ -84,7 +83,6 @@ private theorem closedRestriction_tensorHomEquiv_comp (X : Scheme.{u})
     (a ⊗ₘ 𝟙 K) ≫ schemeDerivedTensorHomEquiv X A K N f ≫ 𝟙 N at hn
   simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using hn
 
-set_option trace.profiler true in
 set_option linter.style.haveILetI false in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.
 
@@ -137,9 +135,11 @@ theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})
           (Functor.Monoidal.μIso R A K).hom ≫
             R.map (schemeDerivedTensorHomEquiv X A K N ξ) := by
   classical
+  -- Reuse the functors in the statement instead of elaborating their instances again.
   intro E R H HU
   let e := schemeDerivedTensorHomEquiv X
   let eU := schemeDerivedTensorHomEquiv U.toScheme
+  -- Choose the local instance directly, avoiding a dependent elimination over this context.
   let m : R.Monoidal := Classical.choice (exists_openRestriction_derivedMonoidal X U)
   let c := fun K N ↦ (eU (R.obj (H.obj (op K, N))) (R.obj K) (R.obj N)).symm
     ((Functor.Monoidal.μIso R (H.obj (op K, N)) K).hom ≫
