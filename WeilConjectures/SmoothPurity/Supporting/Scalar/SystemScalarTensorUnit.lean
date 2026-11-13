@@ -455,8 +455,6 @@ private theorem scalarAssoc_tensor_normalization (P Q : ScalarExtensionTower.Com
   obtain ⟨_, _, h⟩ := h P Q hP hQ
   exact h
 
-
-set_option profiler true in
 /-- Associativity of the scalar tensorator on three good representatives.
 Source: Stacks 07A4, total tensor construction (blueprint: lem-pur-system-scalar-tensor-braiding).
 Proof: insert the cochain normalizations of the scalar tensorator, of the tensor models and of
