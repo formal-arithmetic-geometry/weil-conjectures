@@ -29,7 +29,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-set_option profiler true in
 /-- Degree-zero sections that are cocycles are exactly chain maps on the slice site.
 Source: Stacks Project, Tag 0A8X (Hom complexes), leading to Equation 0A8Y
 (blueprint: lem-pur-localized-hom-complex-cycles-aux).
