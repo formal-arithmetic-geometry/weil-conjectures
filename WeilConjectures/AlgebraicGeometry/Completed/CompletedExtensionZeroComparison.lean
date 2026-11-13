@@ -1101,21 +1101,19 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
   let a :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
-  trace "PH604: composite constructed"
-  let core : Adjunction.CoreHomEquiv (cbcOpenShriek d j hj) (cbcOpenRestriction d j hj) :=
-    { homEquiv := fun M N ↦ by
-        trace "PH604: homEquiv type"
-        exact a.homEquiv M N
-      homEquiv_naturality_left_symm := by
-        trace "PH604: naturality left"
-        intro X' X Y f g
-        exact a.homEquiv_naturality_left_symm f g
-      homEquiv_naturality_right := by
-        trace "PH604: naturality right"
-        intro X Y Y' f g
-        exact a.homEquiv_naturality_right f g }
-  let adj := Adjunction.mkOfHomEquiv core
-  trace "PH604: adj constructed"
+  let er : (SheafOfModules.overFunctor S W ⋙
+      SheafOfModules.pushforward.{t + 1}
+        (F := ProEt.sliceFrom T W)
+        (J := ProEt.topology U) (K := (ProEt.topology T).over W)
+        ((sheafCompose _ (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map
+          (cbcCompletedRestrictionMap d j hj))) ≅ cbcOpenRestriction d j hj := by
+    refine NatIso.ofComponents (fun M ↦ ?_) ?_
+    · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+      exact PresheafOfModules.isoMk (fun V ↦ Iso.refl _) (by intros; rfl)
+    · intro M N f
+      ext V x
+      rfl
+  let adj : cbcOpenShriek d j hj ⊣ cbcOpenRestriction d j hj := a.ofNatIsoRight er
   have hu (M : pbcModules U (pbcAdicCompletion U d))
       (N : pbcModules T (pbcAdicCompletion T d))
       (α : (cbcOpenShriek d j hj).obj M ⟶ N) (V : U.ProEt)
@@ -1124,20 +1122,17 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
         (PresheafOfModules.sheafificationHomEquiv.{t + 1} (𝟙 S.obj) α).app
           (op ((cbcOpenSiteFunctor j hj).obj V))
             (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
-    rw [Adjunction.mkOfHomEquiv_homEquiv]
+    rw [Adjunction.homEquiv_ofNatIsoRight_apply]
     change ((a.homEquiv M N) α).val.app (op V) x = _
     rw [compAdjunction_homEquiv_apply]
     exact (openSliceAdjunction_homEquiv_apply d j hj M
       ((SheafOfModules.overFunctor S W).obj N)
       ((SheafOfModules.extensionSheafAdjunction S W).homEquiv _ N α) V x).trans
         (extensionSheafAdjunction_homEquiv_apply S W _ N α (cbcOpenSliceObject j hj V) x)
-  trace "PH604: formula proved"
   refine ⟨adj, hu, ?_⟩
-  trace "PH604: witness supplied"
   intro adj' hadj'
   apply Adjunction.ext
   ext M V x
-  trace "PH604: ext complete"
   have h := hadj' M ((cbcOpenShriek d j hj).obj M) (𝟙 _) V.unop x
   have h' := hu M ((cbcOpenShriek d j hj).obj M) (𝟙 _) V.unop x
   rw [Adjunction.homEquiv_id] at h h'
