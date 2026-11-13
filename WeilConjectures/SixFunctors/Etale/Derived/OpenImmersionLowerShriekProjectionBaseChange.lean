@@ -65,17 +65,18 @@ private lemma tensorComparison_square_transport
       ψU (F₁.obj X) (F₁.obj Y) ≫ (σ.inv.app X ⊗ₘ σ.inv.app Y) ≫
         (δ₂ (V.obj X) (V.obj Y)).inv := by
     rw [← cancel_epi (U.map (δ₁ X Y).hom), ← Functor.map_comp_assoc,
-      Iso.hom_inv_id, Functor.map_id, Category.id_comp]
+      Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
     simp only [← Category.assoc]
     rw [Iso.eq_comp_inv, ← cancel_mono (σ.hom.app X ⊗ₘ σ.hom.app Y)]
     simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app]
-    rw [hσ, Iso.inv_hom_id_app_assoc, id_tensorHom_id, Category.comp_id]
+    rw [hσ]
+    erw [Iso.inv_hom_id_app_assoc, id_tensorHom_id, Category.comp_id]
   simp only [Functor.map_comp, comp_whiskerRight, Category.assoc]
   rw [← U.map_comp_assoc (e₁.hom.app (X ⊗ Y)) (e₁.inv.app (X ⊗ Y)),
     e₁.hom_inv_id_app, U.map_id, Category.id_comp]
   rw [← e₂.hom.naturality (ψV X Y), reassoc_of% key, reassoc_of% (hU (e₁.inv.app X) _)]
-  rw [← whisker_exchange_assoc,
-    ← comp_whiskerRight_assoc (e₂.hom.app (V.obj X)) (e₂.inv.app (V.obj X)), e₂.hom_inv_id_app,
+  rw [← whisker_exchange_assoc]
+  erw [← comp_whiskerRight_assoc (e₂.hom.app (V.obj X)) (e₂.inv.app (V.obj X)), e₂.hom_inv_id_app,
     id_whiskerRight, Category.id_comp, tensorHom_def, Category.assoc]
 
 namespace AlgebraicGeometry
@@ -225,7 +226,7 @@ lemma derivedOpenImmersionSquareMap_tensor (sq : CommSq g' j' j g'')
       (fun P Q ↦ ((leftDerivedUpperStarTensorComparison A g').app P).app Q)
       (fun P Q ↦ ((leftDerivedUpperStarTensorComparison A g'').app P).app Q)
       (fun {P Q} f R ↦ by
-        simpa only [Functor.map_id, tensorHom_id] using
+        simpa only [CategoryTheory.Functor.map_id, tensorHom_id] using
           leftDerivedUpperStarTensorComparison_naturality A g' f (𝟙 R))
       X Y (derivedSquareUpperStarIso_hom_tensor A sq X Y)
 
