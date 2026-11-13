@@ -58,7 +58,7 @@ open Scheme PadicAlgCl CondensedRing
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the composites of pullbacks of module objects are large terms
 /-- **Ranks of trivialisations agree on overlaps.** Two trivialisations `E_Vⁿ ≅ f^* L` and
 `E_V'ⁿ' ≅ f'^* L` whose pullbacks to a nonempty scheme `W` are comparable have the same rank: the
@@ -86,7 +86,7 @@ theorem rank_eq_of_comp_eq {S V V' W : Scheme.{u}}
     Matrix.map_one _ (map_zero ρ) (map_one ρ)] at k₁ k₂
   exact Matrix.eq_of_mul_eq_one_of_mul_eq_one _ _ k₁ k₂
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the composites of pullbacks of module objects are large terms
 /-- **Transition values of a trivialisation, and descent from integral values.** For a finite
 pro-étale cover `{f_k : V_k ⟶ S}` trivialising `L`, `e_k : E_{V_k}ⁿ ≅ f_k^* L`, the values
