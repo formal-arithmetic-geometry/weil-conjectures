@@ -199,7 +199,6 @@ noncomputable def upperStarTensorComplexHomX
     Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
       (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)
 
-set_option profiler true in
 /-- The degreewise comparison `upperStarTensorComplexHomX` is a section of the comparison
 `f^* ((A ⊗ B)^n) ⟶ (f^* A ⊗ f^* B)^n` induced by the comonoidal structure of `f^*`. -/
 lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
@@ -219,7 +218,6 @@ lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
   erw [Category.comp_id]
   exact Functor.Monoidal.μ_δ_assoc _ _ _ _
 
-set_option profiler true in
 /-- The degreewise comparisons `upperStarTensorComplexHomX` commute with the differentials. -/
 lemma upperStarTensorComplexHom_comm
     (A B : CochainComplex
@@ -253,7 +251,6 @@ noncomputable def upperStarTensorComplexHom
   f n := upperStarTensorComplexHomX Λ f A B n
   comm' n n' h := upperStarTensorComplexHom_comm Λ f A B n n' h
 
-set_option profiler true in
 /-- The comparison `upperStarTensorComplexHom` is the inverse of the comparison
 `f^* (A ⊗ B) ⟶ f^* A ⊗ f^* B` induced by the comonoidal structure of `f^*`. -/
 lemma upperStarTensorComplexHom_eq_inv
@@ -294,7 +291,6 @@ noncomputable def upperStarTensorTarget :
   curriedTensor _ ⋙ (whiskeringRight _ _ _).obj
     ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
 
-set_option profiler true in
 /-- The naturality square of the components of `upperStarTensorCounit`, on complexes. -/
 lemma upperStarTensorCounit_naturality_aux
     {A A' B B' : CochainComplex
@@ -333,7 +329,6 @@ lemma upperStarTensorCounit_naturality_aux
     ← Functor.map_comp, upperStarTensorComplexHom_naturality, Functor.map_comp,
     DerivedCategory.Qh.map_comp]
 
-set_option profiler true in
 /-- The transformation `Qh (f^* A) ⊗ᴸ Qh (f^* B) ⟶ Qh (f^* (A ⊗ B))` of bifunctors on the
 homotopy category of `Mod_{Λ_Y}`: the lax structure of `Qh` followed by `Qh` of the comparison
 `upperStarTensorComplexHom`. -/
@@ -406,7 +401,6 @@ noncomputable def leftDerivedUpperStarTensorRightCounit :
         (NatTrans.prod (f)^*⟦Λ⟧.leftDerivedFunctorCounit (f)^*⟦Λ⟧.leftDerivedFunctorCounit)
           (uncurry.obj (curriedTensor _)) ≫ whiskeringLeft₂Equiv (upperStarTensorCounit Λ f))
 
-set_option profiler true in
 /-- The comparison `f^* A ⊗ f^* B ⟶ f^*(A ⊗ B)` of complexes is a section of the comparison
 induced by the comonoidal structure of `f^*`. -/
 lemma upperStarTensorComplexHom_δ
@@ -428,7 +422,6 @@ lemma upperStarTensorComplexHom_δ
   erw [Category.comp_id]
   exact Functor.Monoidal.μ_δ_assoc _ _ _ _
 
-set_option profiler true in
 open DerivedCategory in
 /-- The counit of the bifunctor `Lf^* - ⊗ᴸ Lf^* -` on objects of the homotopy category. -/
 lemma leftDerivedUpperStarTensorRightCounit_app_app (A B : HomotopyCategory
@@ -453,7 +446,6 @@ lemma leftDerivedUpperStarTensorRightCounit_app_app (A B : HomotopyCategory
   · exact (Category.id_comp _).trans (Category.assoc _ _ _)
 
 
-set_option profiler true in
 /-- On K-flat complexes, the counit of the bifunctor `Lf^* - ⊗ᴸ Lf^* -` is an isomorphism. -/
 lemma isIso_leftDerivedUpperStarTensorRightCounit_app_app
     (A B : CochainComplex
@@ -494,7 +486,6 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
   obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
   exact isIso_leftDerivedUpperStarTensorRightCounit_app_app Λ f A B hA hB
 
-set_option profiler true in
 /-- The counit of the bifunctor `Lf^* (- ⊗ᴸ -)`: `Lf^*` of the lax structure
 `Qh A ⊗ᴸ Qh B ⟶ Qh (A ⊗ B)` of the localization, followed by the counit
 `Lf^* (Qh (A ⊗ B)) ⟶ Qh (f^* (A ⊗ B))` of the derived pullback. -/
@@ -544,7 +535,6 @@ lemma leftDerivedUpperStarTensor_fac :
       leftDerivedUpperStarTensorLeftCounit Λ f :=
   Functor.leftDerived₂_fac _ _ _ _ _ _
 
-set_option profiler true in
 open DerivedCategory in
 /-- The defining property of the tensor comparison of `Lf^*`, in the form used by
 `DerivedCategory.commShift_of_tensorLeft_fac`. -/
@@ -606,7 +596,6 @@ lemma exists_kFlat_iso_Qh_obj (K : DerivedCategory
   exact ⟨R.X₁.obj, R.X₁.property,
     ⟨asIso (DerivedCategory.Qh.map R.w) ≪≫ DerivedCategory.Qh.objObjPreimageIso K⟩⟩
 
-set_option profiler true in
 /-- On K-flat complexes, the comparison `m` is an isomorphism: both counits are isomorphisms. -/
 lemma isIso_leftDerivedUpperStarTensor_app_app_Qh_obj
     (A B : CochainComplex
@@ -708,7 +697,6 @@ lemma leftDerivedUpperStarTensor_laxSquare (A B : HomotopyCategory
   rw [MonoidalCategory.tensorHom_def, Category.assoc]
   exact leftDerivedUpperStarTensor_app_app_fac Λ f A B
 
-set_option profiler true in
 /-- The oplax monoidal structure on `Lf^*` whose comonoidal structure is the comparison `m`
 (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`): its coherences are checked on K-flat
 complexes, whose pullbacks are K-flat. -/
@@ -728,7 +716,6 @@ noncomputable def leftDerivedUpperStarOplaxMonoidal : L((f)^*⟦Λ⟧).OplaxMono
       exact isIso_μNatTrans_Qh_app_app_of_kFlat x _ (kFlat_upperStar_mapHomotopyCategory_obj Λ f
         ((HomotopyCategory.kFlat_quotient_obj_iff B).1 hb)))
 
-set_option profiler true in
 /-- The counit of the oplax monoidal structure `leftDerivedUpperStarOplaxMonoidal` is the unit
 comparison `leftDerivedUpperStarUnitIso`. -/
 lemma leftDerivedUpperStarOplaxMonoidal_η :
@@ -750,7 +737,6 @@ lemma leftDerivedUpperStarOplaxMonoidal_η :
   erw [Category.comp_id]
   rfl
 
-set_option profiler true in
 /-- The derived pullback `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` on module objects over `Λ` is
 strong monoidal for the derived tensor products, with tensorator the inverse of
 `leftDerivedUpperStarTensorIso` and unit comparison `leftDerivedUpperStarUnitIso`. -/
