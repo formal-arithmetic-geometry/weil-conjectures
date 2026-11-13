@@ -42,7 +42,6 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- The boundary of a square-zero extension is a derivation for the induced action.
 `σ` is the local quotient action on the kernel, commuting with restriction.
 `μ` is its action by global sections on the kernel sheaf. `ρ` is the induced
@@ -118,6 +117,7 @@ theorem boundary_derivation_square_zero (X : Scheme.{u})
   let hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map
       (HomologicalComplex.eval _ (ComplexShape.up ℕ) k)).ShortExact :=
     fun k => (hrows k).1
+  -- Each row splits because its first term is injective, so global sections preserve it.
   have hΓ : ((ShortComplex.mk α β hαβ).map
       ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
         (ComplexShape.up ℕ))).ShortExact := by
