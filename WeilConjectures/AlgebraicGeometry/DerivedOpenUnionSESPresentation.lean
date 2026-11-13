@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.OpenUnionImageComplexExact
 import WeilConjectures.AlgebraicGeometry.LocalizedOpenImageComplexComparisons
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-! # Short exact presentation on an arbitrary open union
@@ -61,8 +61,6 @@ private theorem map_pair_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
--- Comparing the transported module functors requires additional elaboration heartbeats.
 /-- A short exact sequence of complexes representing the three direct-image terms
 on an arbitrary open union, with the first arrow identified by adjunction.
 No connecting morphism, integer shift, or distinguished triangle is asserted.
@@ -130,17 +128,15 @@ theorem derived_open_union_ses_presentation
   classical
   dsimp only
   let M := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  obtain ⟨I, hKI, hI, ⟨e⟩⟩ : ∃ I : CochainComplex
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-      I.IsKInjective ∧ (∀ n : ℤ, Injective (I.X n)) ∧
-        Nonempty (DerivedCategory.Q.obj I ≅ E) := by
-    have : IsGrothendieckAbelian.{u}
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-      (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
-        (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).1
-    exact exists_injective_representative E
+  let : Abelian M := inferInstance
+  have : IsGrothendieckAbelian.{u} M :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have hrep := exists_injective_representative.{u, w} (M := M) E
+  let I := hrep.choose
+  have : I.IsKInjective := hrep.choose_spec.1
+  have hI : ∀ n : ℤ, Injective (I.X n) := hrep.choose_spec.2.1
+  let e := hrep.choose_spec.2.2.some
   let Q : CochainComplex M ℤ ⥤ schemeDerivedCategory X := DerivedCategory.Q
-  have : I.IsKInjective := hKI
   change DerivedCategory.Q.obj I ≅ E at e
   have hc := schemeOpenModuleImageComplex_localized_comparisons.{u, w} X G adj I E e
   dsimp only at hc
