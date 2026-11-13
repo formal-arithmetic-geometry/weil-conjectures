@@ -222,7 +222,7 @@ theorem coefficientFiniteTensorMonoidal
         (coefficientTensorModelPreservation l E W).1 Q hQ n, ?_⟩
       have hh := hF n P Q hP hQ
       unfold CoefficientTensorComparisonSquare at hh
-      simp only [show κ.hom.app (P, Q) = (coefficientScalarTensorIso l E W n P Q).hom from
+      simp only [D, show κ.hom.app (P, Q) = (coefficientScalarTensorIso l E W n P Q).hom from
         congrArg Iso.hom (hc P Q), finiteCochainModel_counit l E W n P hP,
         finiteCochainModel_counit l E W n Q hQ,
         finiteCochainModel_counit l E W n _
