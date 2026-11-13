@@ -185,11 +185,21 @@ private theorem comparisons_from_objectwise
   obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
   exact ⟨α, β, ha, hc⟩
 
-private theorem tensorComparison_counit_naturality
+set_option profiler true in
+private theorem tensorComparisons_from_adjunction
     (L : X.Modules ⥤ U.Modules) (adj : L ⊣ pushforward f)
-    {F F' : U.Modules} (k : F ⟶ F') :
-    L.map ((S).map ((R).map k)) ≫ adj.counit.app F' = adj.counit.app F ≫ k := by
-  exact adj.counit.naturality k
+    (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ L ⟶ H)
+    (hf : ∀ F : U.Modules, (∃ a : H.obj ((R).obj F) ⟶ F,
+      γ.app ((R).obj F) ≫ a = adj.counit.app F) ∧ Epi (γ.app ((R).obj F)))
+    (hβ : ∀ G : SheafOfModules.{u} (𝓡 A), ∃ a : G ⟶ (R).obj (H.obj G),
+      (S).map a = (adj.homEquiv ((S).obj G) (H.obj G)) (γ.app G)) :
+    ∃ (α : R ⋙ H ⟶ 𝟭 U.Modules) (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R),
+      (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = adj.counit.app F) ∧
+      (∀ G : SheafOfModules.{u} (𝓡 A),
+        (S).map (β.app G) = (adj.homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
+  exact comparisons_from_objectwise
+    (C := SheafOfModules.{u} (𝓡 A)) (D := X.Modules) (E := U.Modules)
+    S R L adj H γ (scalarRestriction_injective f) hf hβ
 
 set_option profiler true in
 private theorem tensorComparisons_from_objectwise
@@ -204,24 +214,7 @@ private theorem tensorComparisons_from_objectwise
         (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-    let δ : R ⋙ (S ⋙ tensorPullback f) ⟶ 𝟭 U.Modules :=
-      { app := fun F ↦ (adj₀).counit.app F
-        naturality := by
-          intro F F' k
-          exact tensorComparison_counit_naturality f (tensorPullback f) (adj₀) k }
-    obtain ⟨α, ha⟩ := naturalFactor (R ⋙ (S ⋙ tensorPullback f)) (R ⋙ H)
-      (Functor.whiskerLeft R γ) δ hf
-    let τ : S ⟶ (H ⋙ R) ⋙ S :=
-      { app := fun G ↦ ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)
-        naturality := by
-          intro G G' k
-          rw [← (adj₀).homEquiv_naturality_left]
-          have hn : (tensorPullback f).map ((S).map k) ≫ γ.app G' =
-              γ.app G ≫ H.map k := γ.naturality k
-          rw [hn, (adj₀).homEquiv_naturality_right]
-          rfl }
-    obtain ⟨β, hc⟩ := liftNatural S (H ⋙ R) τ (scalarRestriction_injective f) hβ
-    exact ⟨α, β, ha, hc⟩
+    exact tensorComparisons_from_adjunction f (tensorPullback f) (adj₀) H γ hf hβ
 
 /-- The tensor extension is quasi-coherent and carries the canonical comparison maps.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
