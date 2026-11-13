@@ -145,7 +145,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square M"
   have sqN := sqM hτN
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square N"
-  have sq₂ := @sqN hτP
+  have sq₂ := sqN (by cast_proofs hτP)
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square complexes"
   have sq := sq₂ (𝟭 _)
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper square"
@@ -205,7 +205,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (eA.app A) (eB.app B) h₀
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport result"
-  exact result
+  cast_proofs result
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
