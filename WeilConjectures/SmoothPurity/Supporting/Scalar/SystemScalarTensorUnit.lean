@@ -393,7 +393,7 @@ private theorem scalarAssoc_tensor_naturality_right
     T.map (f, 𝟙 Y) ≫ μ.hom.app (X', Y) =
       μ.hom.app (X, Y) ≫ (F.map f ▷ F.obj Y) := by
   simpa only [Functor.comp_map, Functor.prod_map, tensor_map, F.map_id, tensorHom_id] using
-    μ.hom.naturality (f, 𝟙 Y)
+    μ.hom.naturality (X := (X, Y)) (Y := (X', Y)) (f, 𝟙 Y)
 
 /-- Naturality of a tensor comparison with its left input fixed. -/
 private theorem scalarAssoc_tensor_naturality_left
@@ -403,7 +403,7 @@ private theorem scalarAssoc_tensor_naturality_left
     T.map (𝟙 X, f) ≫ μ.hom.app (X, Y') =
       μ.hom.app (X, Y) ≫ (F.obj X ◁ F.map f) := by
   simpa only [Functor.comp_map, Functor.prod_map, tensor_map, F.map_id, id_tensorHom] using
-    μ.hom.naturality (𝟙 X, f)
+    μ.hom.naturality (X := (X, Y)) (Y := (X, Y')) (𝟙 X, f)
 
 section Representatives
 attribute [local implicit_reducible] coefficientSequenceInternalHom coefficientSequenceHasDerived
@@ -532,6 +532,10 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
   obtain ⟨aB, haB, heB⟩ := cB.associator_model P Q N hP hQ hN
   obtain ⟨aA, haA, heA⟩ := cA.associator_model (V.obj P) (V.obj Q) (V.obj N) hUP hUQ hUN
   have hc := scalarSigma_cochain_associativity l E L ι W P Q N aB aA haB haA
+  rw [congrArg Iso.hom (cB.tensorIso_both PQ N hPQ hN),
+    congrArg Iso.hom (cB.tensorIso_both P QN hP hQN)] at heB
+  rw [congrArg Iso.hom (cA.tensorIso_both (A.obj (V.obj P, V.obj Q)) (V.obj N) hAPQ hUN),
+    congrArg Iso.hom (cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN)] at heA
   let bPQ := TB.iso J R SB P Q hP hQ
   let bQN := TB.iso J R SB Q N hQ hN
   let bL := TB.iso J R SB PQ N hPQ hN
@@ -573,9 +577,7 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
         (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
           (DerivedCategory.Q.obj N)).hom =
       DerivedCategory.Q.map aB.hom ≫ (bR.hom ≫ (DerivedCategory.Q.obj P ◁ bQN.hom))
-    simpa only [show cB.tensorIso PQ N (Or.inr hN) = TB.iso J R SB PQ N hPQ hN from
-        cB.tensorIso_both PQ N hPQ hN, cB.tensorIso_both P QN hP hQN,
-      bL, bR, bPQ, bQN, CoefficientClosedStructure.tensor, tensor_map,
+    simpa only [bL, bR, bPQ, bQN, CoefficientClosedStructure.tensor, tensor_map,
       tensorHom_id, id_tensorHom, Category.assoc] using heB
   have hA : lA.hom ≫ (α_ (DerivedCategory.Q.obj (V.obj P))
         (DerivedCategory.Q.obj (V.obj Q)) (DerivedCategory.Q.obj (V.obj N))).hom =
@@ -584,10 +586,7 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
         (α_ (DerivedCategory.Q.obj (V.obj P)) (DerivedCategory.Q.obj (V.obj Q))
           (DerivedCategory.Q.obj (V.obj N))).hom =
       DerivedCategory.Q.map aA.hom ≫ (aR.hom ≫ (DerivedCategory.Q.obj (V.obj P) ◁ aQN.hom))
-    simpa only [show cA.tensorIso (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inr hUN) =
-        TA.iso J' R' SA _ _ hAPQ hUN from cA.tensorIso_both _ _ hAPQ hUN,
-      cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN,
-      aL, aR, aPQ, aQN, CoefficientClosedStructure.tensor, tensor_map,
+    simpa only [aL, aR, aPQ, aQN, CoefficientClosedStructure.tensor, tensor_map,
       tensorHom_id, id_tensorHom, Category.assoc] using heA
   have hmPQ := scalarAssoc_tensor_normalization l E L ι W P Q hPg hQg
   have hmQN := scalarAssoc_tensor_normalization l E L ι W Q N hQg hNg
