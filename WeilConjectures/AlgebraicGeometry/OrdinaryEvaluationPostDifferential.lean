@@ -33,6 +33,16 @@ local instance ordinaryPostMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
     MonoidalPreadditive (localEvaluationModules X U) :=
   Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
 
+-- Prove tensor naturality before specializing to the sheaf tensor instances.
+private theorem ordinaryPost_contraction_naturality {C : Type*} [Category C]
+    [MonoidalCategory C] [BraidedCategory C] {E D B B' T : C}
+    (e : D ⊗ E ⟶ 𝟙_ C) (f : B ⟶ B') (g : B' ⟶ T) :
+    E ◁ (f ▷ D) ≫ (β_ E (B' ⊗ D)).hom ≫ (α_ B' D E).hom ≫
+        B' ◁ e ≫ (ρ_ B').hom ≫ g =
+      (β_ E (B ⊗ D)).hom ≫ (α_ B D E).hom ≫ B ◁ e ≫ (ρ_ B).hom ≫ f ≫ g := by
+  rw [BraidedCategory.braiding_naturality_right_assoc,
+    associator_naturality_left_assoc, ← whisker_exchange_assoc, rightUnitor_naturality_assoc]
+
 set_option backward.isDefEq.respectTransparency true in
 set_option profiler true in
 -- Naturality rewrites involve the expanded sheaf tensor and internal Hom instances.
@@ -60,9 +70,7 @@ theorem ordinaryEvaluation_post_differential (X : Scheme.{u}) (U : X.Opens)
       ← SheafOfModules.tensorHomEquiv_whiskerLeft_comp (R := X.sheaf.over U)]
     apply (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _ _).congr_arg
     simp only [Category.assoc, HomologicalComplex.XIsoOfEq_hom_comp_d F]
-    rw [BraidedCategory.braiding_naturality_right_assoc,
-      associator_naturality_left_assoc]
-    rw [← whisker_exchange_assoc, rightUnitor_naturality_assoc]
+    rw [ordinaryPost_contraction_naturality]
     simp only [HomologicalComplex.d_comp_XIsoOfEq_hom F]
   · simp only [localEvaluationComponent, dite_eq_right h, zero_comp, comp_zero]
 
