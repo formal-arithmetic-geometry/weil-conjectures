@@ -25,7 +25,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
 set_option profiler true in
--- `erw` unfolds the tensor product of complexes of module objects to its components.
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
 composition isomorphism of the pullbacks of module objects. -/
 @[reassoc]
@@ -44,15 +43,20 @@ lemma upperStarTensorComplexHom_comp
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     upperStarTensorComplexHom, upperStarTensorComplexHomX]
-  rewrite (transparency := .default) [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorDesc_assoc,
+  change _ ≫ (HomologicalComplex.mapBifunctorMap
+      ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A)
+      ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app B)
+      (curriedTensor _) (.up ℤ)).f n ≫ _ = _
+  rw [HomologicalComplex.ι_mapBifunctorMap_assoc]
+  rw [HomologicalComplex.ι_mapBifunctorDesc_assoc,
     HomologicalComplex.ι_mapBifunctorDesc_assoc]
-  rewrite [Category.assoc, ← Functor.map_comp]
-  rewrite (transparency := .default) [HomologicalComplex.ι_mapBifunctorDesc]
+  rw [Category.assoc, ← Functor.map_comp]
+  rw [HomologicalComplex.ι_mapBifunctorDesc]
   simp only [NatTrans.mapHomologicalComplex_app_f, Category.assoc]
-  rewrite [(upperStarComp Λ f g).hom.naturality, Functor.map_comp]
+  rw [(upperStarComp Λ f g).hom.naturality, Functor.map_comp]
   have hμ := upperStarComp_hom_app_tensor_μ_assoc Λ f g (A.X p) (B.X q)
     ((f)^*⟦Λ⟧.map ((g)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)))
-  rewrite [MonoidalCategory.tensorHom_def_assoc] at hμ
+  rw [MonoidalCategory.tensorHom_def_assoc] at hμ
   exact hμ
 
 open DerivedCategory Functor.LaxMonoidal
