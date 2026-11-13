@@ -59,7 +59,7 @@ private theorem koszulOpen_structure_evaluation_fast
                 (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj
                   (koszulOpenSheafComplex A r f e))) e))
               (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _))) := by
-  exact koszulOpen_structure_evaluation.{u, w, v} A r f
+  simpa only using koszulOpen_structure_evaluation.{u, w, v} A r f
 
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
