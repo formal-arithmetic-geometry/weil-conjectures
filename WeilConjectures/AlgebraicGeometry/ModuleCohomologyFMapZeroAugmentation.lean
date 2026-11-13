@@ -73,6 +73,7 @@ private theorem forget_augmentation {C : Type*} [Category* C] [Abelian C]
   rfl
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the module and abelian-group homology models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero resolution formula commutes with the canonical augmentations.

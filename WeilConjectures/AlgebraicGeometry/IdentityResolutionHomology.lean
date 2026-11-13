@@ -25,6 +25,7 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Identity pushforward and the sections functor require substantial definitional reduction.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The horizontal map in the identity-scheme construction factors on sections homology

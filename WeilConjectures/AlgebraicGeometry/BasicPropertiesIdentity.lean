@@ -36,6 +36,7 @@ noncomputable section
 open Opposite
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Resolution transports compare both module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Identity property of the cohomology map induced by an h-map.
