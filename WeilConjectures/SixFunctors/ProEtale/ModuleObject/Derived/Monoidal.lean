@@ -104,23 +104,18 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 Direct instances for complexes of module objects over `Λ_Z`. -/
 
-set_option synthInstance.maxHeartbeats 200000 in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 instance hasTensor_cochainComplex (Z : Scheme.{u})
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
     HomologicalComplex.HasTensor A B :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategoryStruct_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategoryStruct
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
         ℤ) :=
   inferInstance
 
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategory
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
@@ -129,7 +124,6 @@ noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
 
 /-! ### K-flatness of pullbacks -/
 
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 /-- The K-flat complexes of module objects over `Λ_Z` form a left derivability structure for the
 quasi-isomorphisms of the homotopy category. It is not an instance: it would change the instance
 found for the existence of the derived pullbacks of module objects. -/
