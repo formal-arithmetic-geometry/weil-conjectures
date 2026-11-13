@@ -147,6 +147,7 @@ theorem derivedPullback_tensorProduct
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction g
   let : (Scheme.Modules.tensorPullback g).IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
   let G := Scheme.Modules.tensorPullback g
+  have : CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0} G := inferInstance
   let e := Classical.choose (Scheme.Modules.module_pullback_tensor g)
   have hn := (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1
   -- Package the two-variable module comparison for the existing totalization API.
@@ -182,7 +183,8 @@ theorem derivedPullback_tensorProduct
     asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) P N)
   refine ⟨G, hF, hmap, hadd, ε, hder, φ, ?_, ?_, ?_⟩
   · intro P N p q n h
-    simpa only [eqToHom_refl,
+    simpa only [φ, asIso_hom, HomologicalComplex.mapBifunctorComparison_f,
+      HomologicalComplex.mapBifunctorComparisonApp, τ, eqToHom_refl,
       tensorHom_id, MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id] using
       HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) P N p q n h
   · intro P P' N N' a b
