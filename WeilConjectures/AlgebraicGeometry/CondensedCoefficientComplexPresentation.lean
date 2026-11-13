@@ -21,7 +21,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
-set_option profiler true in
 /-- Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, the Hom paragraph
 of the module docstring; the coefficient complex construction in step 3 of
 `prop-weil-pbc-qbar-condensed-two-colimit`.
@@ -85,6 +84,7 @@ theorem exists_condensed_coefficient_complex_presentation
                         (g ≫ (ei i).hom)) ≫
                   (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app L) =
               g ≫ DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
+  -- Keep the existential eliminators explicit: nested `obtain` unfolds the large target.
   refine hL.elim fun a ha ↦ ?_
   have : L.IsGE a := ha
   refine (DerivedCategory.exists_iso_Q_obj_of_isGE L a).elim fun C hC ↦ ?_
