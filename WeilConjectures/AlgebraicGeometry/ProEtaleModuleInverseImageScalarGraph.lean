@@ -317,19 +317,14 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
   let q := modelSetPullbackIso f
   let d := (modelSetEquivalence X).inverse
   let v := (modelSetEquivalence Y).functor
-  let L := SheafOfModules.pullback φ
-  let Ls := sheafPullback (proEtaleModelBaseChange f) (Type (u + 1))
-    (proEtaleModelTopology X) (proEtaleModelTopology Y)
-  let p := Functor.isoWhiskerLeft (proEtaleModuleToModel A ⋙ L) (fromModelForgetSetIso Y B)
   let e₀ := Functor.isoWhiskerLeft (proEtaleModuleToModel A)
     (Functor.isoWhiskerRight em v)
-  let t₀ := Functor.isoWhiskerRight (toModelForgetSetIso X A) (Ls ⋙ v)
   let eM : proEtaleModuleInverseImage f R ⋙ SheafOfModules.toSheaf B ⋙
       sheafCompose (ProEt.topology Y) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ≅
         (SheafOfModules.toSheaf A ⋙
           sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) ⋙
             proEtaleSheafInverseImage f (Type (u + 1)) :=
-    p ≪≫ e₀ ≪≫ t₀ ≪≫ Functor.isoWhiskerLeft
+    e₀ ≪≫ Functor.isoWhiskerLeft
     (SheafOfModules.toSheaf A ⋙
       sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) q
   let r₀ := v.mapIso pr.iso
@@ -395,14 +390,6 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
   have h₂ := congrArg (fun z ↦ pr.iso.inv.hom.app (AsSmall.up.op.obj V) z) hqa
   have h₃ := congrArg (fun z ↦
     (em.inv.app ((proEtaleModuleToModel A).obj M)).hom.app (AsSmall.up.op.obj V) z) hqb
-  have hE : eM.inv.app M =
-      q.inv.app ((SheafOfModules.toSheaf A ⋙
-        sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M) ≫
-      v.map (em.inv.app ((proEtaleModuleToModel A).obj M)) := by
-    change ((q.inv.app _ ≫ (Ls ⋙ v).map (𝟙 _)) ≫
-      v.map (em.inv.app ((proEtaleModuleToModel A).obj M))) ≫ 𝟙 _ = _
-    rw [Functor.map_id, Category.comp_id, Category.comp_id]
-  rw [hE]
   exact h₁.trans (hg.trans (congrArg₂ (fun (r : Bm.obj.obj (AsSmall.up.op.obj V))
       (m : Nm.val.obj (AsSmall.up.op.obj V)) ↦ r • m) h₂.symm h₃.symm))
 
