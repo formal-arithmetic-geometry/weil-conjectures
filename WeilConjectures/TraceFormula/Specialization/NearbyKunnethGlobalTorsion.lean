@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.OrdinaryKunnethResidueField
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidalTorsion
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
+import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.Tactic.TransportExact
 
 /-!
@@ -42,6 +43,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -100,7 +102,6 @@ set_option hygiene false in
 /-- The condensed ring `T̲ = C(-, T)`. -/
 local notation "𝐓" => Profinite.continuousMapRingObj T
 
-set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula, with finite coefficients**: let `P`
 be the product over the henselian trait `Spec k'⟦t⟧` of models `M`, `N` of finite type along
@@ -146,9 +147,9 @@ theorem isIso_lowerStar_kunnethMap_finiteCoefficient (hM : M.IsTraitModelOver qM
   have hχN := hN.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient T _ hB
   have hχP := hP.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient T _ hAB
   refine isIso_lowerStar_kunnethMap_of_isIso 𝐓 hM hN hpb hP hgen A B ?_ ?_ ?_ hκs hκΩ hT
-  · exact_mod_proofs hχM
-  · exact_mod_proofs hχN
-  · exact_mod_proofs hχP
+  · cast_proofs hχM
+  · cast_proofs hχN
+  · cast_proofs hχP
 
 end Global
 
@@ -217,7 +218,6 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
-set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4)): let `P` be the product over the henselian

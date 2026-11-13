@@ -51,6 +51,18 @@ lemma mateEquiv_eq_of_unit_comp_map (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ 
   rw [mateEquiv_symm_natTrans_app, ← Functor.map_comp_assoc, h]
   simp
 
+/-- Unit compatibility with the forward comparison determines the mate of its inverse. -/
+private lemma mateEquiv_inv_eq_of_unit_comp_map_hom (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : TwoSquare R₁ H G R₂)
+    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.app (L₁.obj a) ≫ R₂.map (α.hom.app a) =
+      adj₂.unit.app (G.obj a)) :
+    mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.inv) = β := by
+  apply mateEquiv_eq_of_unit_comp_map
+  intro a
+  rw [← h, Category.assoc, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+
 /-- **An abstract coherence square for comparisons of structure isomorphisms.** Let
 `c : P ⋙ E' ≅ E ⋙ P'` be a comparison of two functors `P` and `P'` along `E` and `E'`. Suppose
 that the isomorphisms `P ⋙ L ≅ P ⋙ A ≅ Q ≅ P` and `P' ⋙ L' ≅ P' ⋙ A' ≅ Q' ≅ P'` (built from
@@ -261,8 +273,6 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
   rfl
 
-set_option maxHeartbeats 1000000 in
--- the kernel unfolds the equivalences of the pushforwards along `e`
 /-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
 adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
 lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
@@ -270,11 +280,8 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
         (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
         (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
-  refine CategoryTheory.mateEquiv_eq_of_unit_comp_map _ _ _ _ fun x ↦ ?_
-  rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
-    ← Functor.map_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  rfl
+  exact mateEquiv_inv_eq_of_unit_comp_map_hom _ _
+    (adicLowerStarCompCondensedModIso l e.inv) _ (adicSheafEquivCondensedMod_map_unit_comp l e)
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/

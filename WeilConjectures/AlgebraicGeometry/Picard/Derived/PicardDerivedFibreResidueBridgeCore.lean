@@ -35,7 +35,25 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 1500000 in
+/-- Compose the two naturality squares before specializing their cohomology groups. -/
+private theorem residue_bridge_of_naturality
+    {I : Type*} {Φ : I → Type*} (P : ∀ i, Φ i → Prop)
+    {M A B : Type*} {N C D : I → Type*}
+    [Add M] [Add A] [Add B] [∀ i, Add (N i)] [∀ i, Add (C i)] [∀ i, Add (D i)]
+    (eM : M ≃+ A) (eN : ∀ i, N i ≃+ C i)
+    (u : ∀ i, A → C i) (v : ∀ i, Φ i → M → N i) (g : ∀ i, B → D i)
+    (ha : ∃ φ : ∀ i, Φ i, ∀ i, P i (φ i) ∧
+      ∀ z, eN i (v i (φ i) z) = u i (eM z))
+    (hg : ∃ (e : A ≃+ B) (ei : ∀ i, C i ≃+ D i),
+      ∀ i z, ei i (u i z) = g i (e z)) :
+    ∃ (φ : ∀ i, Φ i) (e : A ≃+ B) (ei : ∀ i, C i ≃+ D i), ∀ i,
+      P i (φ i) ∧ (∀ z, ei i (u i z) = g i (e z)) ∧
+        ∀ z, ((eN i).trans (ei i)) (v i (φ i) z) = g i (eM.trans e z) := by
+  obtain ⟨φ, hφ⟩ := ha
+  obtain ⟨e, ei, he⟩ := hg
+  refine ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, he i, fun z ↦ ?_⟩⟩
+  exact (congrArg (ei i) ((hφ i).2 z)).trans (he i _)
+
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives, and the canonical affine residue comparisons followed by geometric fibre
@@ -110,13 +128,21 @@ theorem picard_derived_fibre_residue_bridge_core
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                 (ui i) (hui i))).left) 1
             ((affineResidueModelEquiv W w U hwU hU p hp _ K hK m).trans e z) := by
-  classical
-  obtain ⟨φ, hφ⟩ := picard_derived_fibre_residue_affine_data
-    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC m m'
-  obtain ⟨e, ei, he⟩ := picard_derived_fibre_residue_geometric_compatibility
-    f Xi fi ui hui L W k w s hw τ
-  refine ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, he i, fun z ↦ ?_⟩⟩
-  simp only [AddEquiv.trans_apply]
-  rw [(hφ i).2 z, he i]
+  refine residue_bridge_of_naturality (Φ := fun i ↦ K ⟶ C i)
+    (fun i φ ↦ DerivedCategory.Q.map φ = m.inv ≫
+      (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.map
+        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ (m' i).hom)
+    (affineResidueModelEquiv W w U hwU hU p hp _ K hK m)
+    (fun i ↦ affineResidueModelEquiv W w U hwU hU p hp _ (C i) (hC i) (m' i))
+    (fun i ↦ (derivedFiberCohomologyFunctor W w 1).map
+      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k))
+    (fun _ φ z ↦ affineResidueCycleHomologyMap φ z)
+    (fun i ↦ structureSheafCohomologyPullback
+      (((Over.pullback (S.fromSpecResidueField s)).map
+        (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1) ?_ ?_
+  · exact picard_derived_fibre_residue_affine_data
+      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC m m'
+  · exact picard_derived_fibre_residue_geometric_compatibility
+      f Xi fi ui hui L W k w s hw τ
 
 end AlgebraicGeometry.Scheme

@@ -177,6 +177,18 @@ private theorem binaryMate_iso (P P' Q Q' I I' : RingedTensorModules.{u, u, u} J
 
 end SiteMates
 
+-- Perform the final cancellation before specializing to concrete sheaf functors.
+private theorem binary_square_of_inverse {C : Type*} [Category C]
+    {A B E F G H : C} (a : A ≅ B) (b : E ≅ F) (c : G ≅ E)
+    (s : A ⟶ G) (t : B ⟶ H) (r : H ⟶ F)
+    (h : t ≫ r ≫ b.inv ≫ c.inv = a.inv ≫ s) :
+    a.hom ≫ t ≫ r = s ≫ c.hom ≫ b.hom := by
+  apply (cancel_epi a.inv).1
+  apply (cancel_mono b.inv).1
+  apply (cancel_mono c.inv).1
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
+    Iso.hom_inv_id, Category.comp_id] using h
+
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
@@ -187,7 +199,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
   (D : NativeWeilTensorRingedAssociatorChainData k₀ l X T)
 
-set_option maxHeartbeats 1200000 in
 -- Compare the two concrete sheaf tensor constructions in the evaluation square.
 private theorem binaryMate_forget
     (P Q I : RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R)
@@ -232,9 +243,7 @@ private theorem binaryMate_forget
   rw [hc, Category.assoc, ← reassoc_of% hn]
   exact congrArg (D.b.forget.map (f ⊗ₘ 𝟙 P) ≫ ·) he
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Compare the two site tensor instances through the bridge.
-set_option maxHeartbeats 1200000 in
 -- The normalized mates involve both concrete tensor constructions.
 /-- The two evaluation-normalized underived tensor comparisons form a binary square.
 Source: Stacks 06YS and 06YU
@@ -318,17 +327,8 @@ theorem native_weil_tensor_ringed_underived_binary_square
   have hv := congrArg (D.b.underived.tensor.hom.app
     (D.b.native.functor.obj Q, D.b.native.functor.obj P) ≫ ·) hb
   erw [← Category.assoc, ht] at hv
-  apply (cancel_epi (D.b.forget.map (D.A.underived P Q).inv)).1
-  apply (cancel_mono (d.underived P.carrier Q.carrier).inv).1
-  apply (Iso.cancel_iso_hom_right _ _
-    (D.b.ordinary.functor.mapIso (D.e.app (P, Q)).symm)).mp
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← D.b.forget.map_comp_assoc, Iso.inv_hom_id, D.b.forget.map_id,
-    Category.id_comp]
-  erw [← D.b.ordinary.functor.map_comp, Iso.hom_inv_id_app,
-    D.b.ordinary.functor.map_id, Category.comp_id]
-  have hv' := hv.symm
-  simp only [Functor.comp_obj, Functor.uncurry_obj_obj, I] at hv'
-  exact hv'
+  exact binary_square_of_inverse (D.b.forget.mapIso (D.A.underived P Q))
+    (d.underived P.carrier Q.carrier) (D.b.ordinary.functor.mapIso (D.e.app (P, Q)))
+    (D.b.square.hom.app I) _ _ hv.symm
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

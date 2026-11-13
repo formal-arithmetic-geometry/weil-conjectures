@@ -174,8 +174,6 @@ lemma adicLowerStarCongr_inv_app_hom_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
       M.X.obj.map ((MorphismProperty.Over.pullbackCongr h.symm).inv.app V.unop).op :=
   lowerStarCongr_hom_app_hom_app _ h.symm M.X V
 
-set_option maxHeartbeats 1600000 in
--- Rewriting both sides down to sections takes many elaboration steps.
 /-- `AlgebraicGeometry.ProEtale.lowerStarComp_exchange'` for sheaves of `ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
     (r : T₁ ⟶ T₃) (hr : p ≫ q = r)
@@ -198,27 +196,27 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
   have key := congrArg (fun φ ↦ φ.hom.app V)
     (lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X)
-  repeat' first
-    | rw [Functor.map_comp]
-    | rw [Mod.comp_hom']
-    | rw [ObjectProperty.FullSubcategory.comp_hom]
-    | rw [NatTrans.comp_app]
-    | rw [adicLowerStar_map_hom_hom_app]
-    | rw [adicLowerStarComp_hom_app_hom_hom_app]
-    | rw [adicLowerStarComp_inv_app_hom_hom_app]
-    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
-    | rw [adicLowerStar_obj_X_obj_map]
-  repeat' first
-    | rw [Functor.map_comp] at key
-    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
-    | rw [NatTrans.comp_app] at key
-    | rw [lowerStar_map_hom_app'] at key
-    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_hom_app_hom_app] at key
-    | rw [lowerStarComp_inv_app_hom_app] at key
-    | rw [lowerStarCongr_hom_app_hom_app] at key
+  -- Normalize each layer in order, retaining explicit rewrite proofs for the kernel.
+  -- `rewrite` avoids attempting reflexivity after every step through the large composites.
+  repeat' rewrite [Functor.map_comp]
+  repeat' rewrite [Mod.comp_hom']
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [adicLowerStar_map_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_inv_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarCongr_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStar_obj_X_obj_map]
+  repeat' rewrite [Functor.map_comp] at key
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom] at key
+  repeat' rewrite [NatTrans.comp_app] at key
+  repeat' rewrite [lowerStar_map_hom_app'] at key
+  repeat' rewrite [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_hom_app_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_hom_app] at key
   simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
   exact key
 

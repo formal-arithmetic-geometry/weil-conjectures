@@ -35,6 +35,30 @@ open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Transposing through a conjugate base change isomorphism commutes with evaluation and
+postcomposition. -/
+private lemma Adjunction.homEquiv_symm_comp_conjugateIsoEquiv {C₁ C₂ C₃ C₄ : Type*}
+    [Category* C₁] [Category* C₂] [Category* C₃] [Category* C₄]
+    {A : C₁ ⥤ C₂} {A' : C₂ ⥤ C₁} {B : C₂ ⥤ C₃} {B' : C₃ ⥤ C₂}
+    {E : C₁ ⥤ C₄} {E' : C₄ ⥤ C₁} {G : C₄ ⥤ C₃} {G' : C₃ ⥤ C₄}
+    (a : A ⊣ A') (b : B ⊣ B') (e : E ⊣ E') (g : G ⊣ G') (σ : A ⋙ B ≅ E ⋙ G)
+    {M Q : C₁} {P : C₂} {N : C₃} {N' : C₄}
+    (m : M ⟶ Q) (v : Q ⟶ A'.obj P) (ev : B.obj P ⟶ N) (t : G'.obj N ⟶ N') :
+    (e.homEquiv _ _).symm
+        (m ≫ v ≫ A'.map (b.homEquiv _ _ ev) ≫
+          ((conjugateIsoEquiv (a.comp b) (e.comp g) σ.symm).app N).hom ≫ E'.map t) =
+      g.homEquiv _ _
+        (σ.inv.app M ≫ B.map ((a.homEquiv _ _).symm (m ≫ v)) ≫ ev) ≫ t := by
+  rw [Equiv.symm_apply_eq, e.homEquiv_naturality_right]
+  have hm := (a.homEquiv M P).apply_symm_apply (m ≫ v)
+  rw [← Category.assoc, ← Category.assoc, ← hm, ← a.homEquiv_naturality_right,
+    ← b.homEquiv_naturality_left, ← Category.assoc,
+    homEquiv_homEquiv_comp_conjugateIsoEquiv_app, Equiv.symm_apply_apply]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -96,9 +120,6 @@ noncomputable def diagonalSpecialization :
     (boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
     (diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)
 
-set_option maxHeartbeats 800000 in
--- `erw` matches the composition up to the instance arguments of the bounded constructible
--- categories, which takes more than the default budget.
 /-- **The trace class is an exceptional adjoint along the fixed locus** (blueprint
 `lem-trf-trace-class-diagonal-pairing`, Step 2): `Tr_c(u)` is the exceptional adjoint along
 `d : Fix(c) ⟶ X` of `diagonalSpecialization`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C` and the
@@ -109,30 +130,16 @@ theorem traceClass_eq_homEquiv :
         (boundedConstructibleUpperShriekAdjunction ℓ F.d).homEquiv _ _
           (diagonalSpecialization F) ≫
         (dualizingComplexComp ℓ F.d).hom := by
-  rw [traceClass]
-  refine congrArg (_ ≫ ·) ?_
-  rw [Equiv.symm_apply_eq, traceMap, ← Category.assoc, ← Category.assoc,
-    mate_comp_verdierDualityIso_hom, ← Adjunction.homEquiv_naturality_right]
-  conv_rhs => rw [Adjunction.homEquiv_naturality_right]
-  unfold evaluationKernel
-  have e1 : c.supportedClass ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _
-        ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) =
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _
-        ((boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
-          (diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) :=
-    (Adjunction.homEquiv_naturality_left _ _ _).symm
-  erw [e1]
-  unfold FixedLocus.upperShriekLowerStarIso
-  erw [reassoc_of% (Adjunction.homEquiv_homEquiv_comp_conjugateIsoEquiv_app
+  exact congrArg
+    ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫ ·)
+    (Adjunction.homEquiv_symm_comp_conjugateIsoEquiv
       (boundedConstructibleUpperShriekAdjunction ℓ c.support)
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
       (boundedConstructibleUpperShriekAdjunction ℓ F.d) F.lowerShriekBaseChangeIso
-      ((boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
-        (diagUpperStarExternalProductIso ℓ K _).hom ≫
-        (ihom.ev K).app (dualizingComplex' ℓ X)))]
-  rfl
+      c.mate c.verdierDualityIso.hom
+      ((diagUpperStarExternalProductIso ℓ K _).hom ≫
+        (ihom.ev K).app (dualizingComplex' ℓ X)) (dualizingComplexComp ℓ F.d).hom)
 
 end Correspondence
 

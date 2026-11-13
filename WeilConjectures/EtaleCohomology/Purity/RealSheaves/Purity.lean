@@ -658,7 +658,6 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
-set_option maxHeartbeats 1000000 in
 -- The constituent bound elaborates exterior powers of direct sums of subquotients.
 /-- Steps 1–3 of `thm-rp-real-lisse-purity-affine`, for the composition factors.
 
@@ -767,15 +766,27 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
         (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
     have hγ'eq : γ' = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
         W.frobeniusLift := by
-      rw [detWeight_weightCharacter, eτ.det_apply, eτ.finrank_eq]
       have hτlisse : W.IsLisse l τ := hRlisse.of_equiv eτ.symm
-      exact HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
+      have heq := HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
+      have heq' : γ' = frobeniusWeight ι (Nat.card K)
+          (LinearMap.det ((M₁.subquotient N₁) W.frobeniusLift)) /
+          Module.finrank (PadicAlgCl l)
+            (M₁.toSubmodule ⧸ N₁.toSubmodule.comap M₁.toSubmodule.subtype) := by
+        simpa only [eτ.det_apply, eτ.finrank_eq] using heq
+      exact heq'.trans (detWeight_weightCharacter ι _ _ _).symm
     have hWM : Representation.weightMultiset (weightCharacter ι (Nat.card K)) W.frobeniusLift
         (Representation.directSumSummand Q) = ∑ i, Multiset.replicate (d i) (w i) := by
       simp only [Representation.weightMultiset]
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       have e := Representation.directSumSummandEquiv Q i
-      rw [detWeight_weightCharacter, e.det_apply, e.finrank_eq]
+      have hdet : (Representation.directSumSummand Q i).toRepresentation.detWeight
+          (weightCharacter ι (Nat.card K)) W.frobeniusLift = w i := by
+        calc
+          _ = (Q i).detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
+            e.detWeight_eq _ _
+          _ = w i := by
+            rw [detWeight_weightCharacter]
+      rw [e.finrank_eq, hdet]
     have hfilter : (∑ i, Multiset.replicate (d i) (w i)).filter (γ < ·) =
         ∑ i ∈ A, Multiset.replicate (d i) (w i) := by
       have key (s : Finset (Fin n)) : (∑ i ∈ s, Multiset.replicate (d i) (w i)).filter (γ < ·) =

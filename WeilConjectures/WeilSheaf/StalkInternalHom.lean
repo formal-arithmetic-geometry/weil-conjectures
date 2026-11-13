@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.WeilSheaf.StalkTensor
+import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Hom
 
 /-!
 # Stalks of the internal hom out of a lisse Weil sheaf
@@ -141,8 +142,34 @@ theorem stalkAtIhomPairing_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     LinearEquiv.coe_coe, stalkAtIhomPairing_apply, stalkAtIhomPairing_apply]
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
 
-set_option maxHeartbeats 400000 in
--- The kernel needs more time to check the instantiation of the Frobenius compatibility.
+/-- The perfect stalk pairing identifies the stalk of the internal hom with linear maps. -/
+private noncomputable def stalkAtIhomLinearEquiv (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+    (F : WeilSheaf k₀ l X) :
+    ((D.ihom hD F).stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l]
+      ((D.stalkAt s m hs).carrier →ₗ[PadicAlgCl l] (F.stalkAt s m hs).carrier) :=
+  LinearEquiv.ofBijective (stalkAtIhomPairing s m hs D hD F)
+    (bijective_stalkAtIhomPairing s m hs D hD F)
+
+private lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+    (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier)
+    (x : (D.stalkAt s m hs).carrier) :
+    stalkAtIhomLinearEquiv s m hs D hD F v x =
+      Mod.evaluationPairing (stalkFunctor l s) D.obj.carrier F.obj.carrier v x :=
+  rfl
+
+/-- Under the stalk equivalence, Frobenius acts by pre- and post-composition. -/
+private lemma stalkAtIhomLinearEquiv_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+    (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier) :
+    stalkAtIhomLinearEquiv s m hs D hD F (((D.ihom hD F).stalkAt s m hs).frobenius v) =
+      (F.stalkAt s m hs).frobeniusEnd ∘ₗ stalkAtIhomLinearEquiv s m hs D hD F v ∘ₗ
+        (D.stalkAt s m hs).frobenius.symm.toLinearMap := by
+  refine LinearMap.ext fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := (D.stalkAt s m hs).frobenius.surjective x
+  rw [FrobeniusModule.frobeniusEnd, LinearMap.comp_apply, LinearMap.comp_apply,
+    LinearEquiv.coe_coe, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply,
+    stalkAtIhomLinearEquiv_apply, stalkAtIhomLinearEquiv_apply]
+  exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v y
+
 /-- The trace of the Frobenius on the stalk of the internal hom `[D, F]` out of a lisse Weil
 sheaf: `tr(F | [D, F]_s) = tr(F | F_s) tr(F⁻¹ | D_s)`, the stalk being `Hom(D_s, F_s)` with the
 Frobenius `f ↦ F ∘ f ∘ F⁻¹`. -/
@@ -150,9 +177,11 @@ theorem trace_frobeniusEnd_stalkAt_ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse
     (F : WeilSheaf k₀ l X) :
     LinearMap.trace (PadicAlgCl l) _ ((D.ihom hD F).stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd *
-        LinearMap.trace (PadicAlgCl l) _ (D.stalkAt s m hs).frobenius.symm.toLinearMap :=
-  FrobeniusModule.trace_frobeniusEnd_eq_mul_of_bijective _
-    (bijective_stalkAtIhomPairing s m hs D hD F) (stalkAtIhomPairing_frobenius s m hs D hD F)
+        LinearMap.trace (PadicAlgCl l) _ (D.stalkAt s m hs).frobenius.symm.toLinearMap := by
+  simpa only [pow_one] using
+    FrobeniusModule.trace_frobeniusEnd_pow_eq_mul_of_linearEquiv
+      ((D.ihom hD F).stalkAt s m hs) (D.stalkAt s m hs) (F.stalkAt s m hs)
+      (stalkAtIhomLinearEquiv s m hs D hD F) (stalkAtIhomLinearEquiv_frobenius s m hs D hD F) 1
 
 /-- The trace of the Frobenius on the stalk of `[G^∨, F] = G ⊗ F`, for a lisse Weil sheaf `G`,
 is the product of the traces on the stalks of `G` and `F`. -/

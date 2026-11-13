@@ -45,7 +45,6 @@ Source: Stacks 07A4 and 0941
   let q := podReindexingTensorFrame l E g A hA M N
   q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map q.w₁ ≫ q.RX.map q.w₂ ≫ q.dX.inv
 
-set_option maxHeartbeats 400000 in
 -- The proof assembles several large strict and derived equations.
 /-- On good complexes, the coherent tensor comparison is the prescribed strict Roos map.
 This is a calculation before descent: there is no constructibility assumption and
@@ -99,8 +98,16 @@ theorem podReindexing_tensor_roos_normalization
         ((A.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
           integralOperationsRoosFunctor.map (T.tower P Q).hom)) := by
   have h := podReindexingDerivedFunctor_none_eq l E g
-  obtain ⟨hFP, βP, hβP, hUP⟩ := PodReductionRepresentatives.unary_model l E g A hA h P
-  obtain ⟨hFQ, βQ, hβQ, hUQ⟩ := PodReductionRepresentatives.unary_model l E g A hA h Q
+  have hP := PodReductionRepresentatives.unary_model l E g A hA h P
+  have hQ := PodReductionRepresentatives.unary_model l E g A hA h Q
+  let hFP := hP.choose
+  let hFQ := hQ.choose
+  let βP := hP.choose_spec.choose
+  let βQ := hQ.choose_spec.choose
+  have hβP := hP.choose_spec.choose_spec.1
+  have hβQ := hQ.choose_spec.choose_spec.1
+  have hUP := hP.choose_spec.choose_spec.2
+  have hUQ := hQ.choose_spec.choose_spec.2
   have hσ := podReindexing_systemTensor_chainModel l E g A P Q _ _
     (podReductionUnary_transport l E g A h P hFP βP hUP)
     (podReductionUnary_transport l E g A h Q hFQ βQ hUQ)

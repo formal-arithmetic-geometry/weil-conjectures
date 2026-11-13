@@ -33,8 +33,18 @@ private theorem flat_restrict_iso {R T : CommRingCat.{u}} (e : R ≅ T)
     ⟨fun r s m ↦ by change (e.inv.hom r * s) • m = _; simp [mul_smul]⟩
   exact Module.Flat.trans T R _
 
-set_option maxHeartbeats 800000 in
--- The ring and derived-category transports require additional elaboration heartbeats.
+private theorem mapped_counit_factorization
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y Z W : C} {A B L R : D}
+    (e : X ≅ Y) (t : Z ≅ W) (s : A ≅ F.obj X) (v : F.obj W ≅ B)
+    (l : F.obj Y ≅ L) (r : R ≅ F.obj Z) (ε : L ⟶ R)
+    {f : X ⟶ W} {c : Y ⟶ Z} (hf : f = e.hom ≫ c ≫ t.hom)
+    (hc : F.map c = l.hom ≫ ε ≫ r.hom) :
+    s.hom ≫ F.map f ≫ v.hom =
+      (s ≪≫ F.mapIso e ≪≫ l).hom ≫ ε ≫ (r ≪≫ F.mapIso t ≪≫ v).hom := by
+  rw [hf]
+  simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc, hc]
+
 set_option linter.unusedVariables false in
 /-- Homology identifications and counit compatibility for fixed stalk data.
 Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
@@ -148,20 +158,6 @@ theorem standardSingleFlatCounit_localization_homology
   let e' := F.mapIso (H.mapIso ((derivedPullback j).mapIso e))
   let t' := F.mapIso (H.mapIso t)
   refine ⟨s ≪≫ e' ≪≫ l, r ≪≫ t' ≪≫ v, ?_⟩
-  have heq' := congrArg (fun f ↦ F.map (H.map f)) heq
-  have hc' : F.map (H.map ((SingleComplexBaseChange.counit j).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) =
-      l.hom ≫ (DerivedCategory.homologyFunctor _ n).map
-        (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ r.hom := hc
-  calc
-    _ = s.hom ≫ F.map (H.map
-          (standardSingleBaseChangeMap (p ∣_ S) (M.restrict (p ⁻¹ᵁ S).ι) j)) ≫
-        v.hom := hv
-    _ = _ := by
-      rw [heq']
-      simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom,
-        Category.assoc, e', t']
-      rw [hc']
-      simp only [Category.assoc]
-      rfl
+  exact hv.trans (mapped_counit_factorization (H ⋙ F)
+    ((derivedPullback j).mapIso e) t s v l r _ heq hc)
 end AlgebraicGeometry

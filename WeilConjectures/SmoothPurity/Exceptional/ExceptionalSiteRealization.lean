@@ -77,27 +77,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (integralExceptionalUniformizer l E))
   (B : IntegralExceptionalComparison l E W P)
 
-set_option maxHeartbeats 2000000 in
--- The sectionwise algebraic graph argument elaborates several large sheaf functors.
-/-- Ordinary site direct-image realization, fixed on every section by the actual
-underlying set-sheaf comparison.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization).
-Proof: both direct images restrict a sheaf along the actual etale-to-pro-etale functor. The
-recorded rightUnderlying map identifies their values on each etale test object. The
-quotient coordinate equivalence fixes constants, so these maps are linear, natural,
-and invertible. Faithful forgetting to set sheaves proves uniqueness. -/
-theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
-    ∃! e : B.ordinary.right n ⋙ integralExceptionalEtaleRealization l E W n ≅
-      integralExceptionalProRealization l E W n ⋙
-        ProEtale.comparisonLowerStar (ModuleCat.{u + 1}
-          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W,
-      ∀ (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
-        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
-        (U : W.Etaleᵒᵖ) (x : ((B.ordinary.right n).obj M).val.obj U),
-        (e.hom.app M).hom.app U x =
-          ((B.ordinary.rightUnderlying n).hom.app M).hom.app U x := by
-  let := integralExceptionalEtaleForget W
-  let := Scheme.purTwistForgetPreservesSheafification W
+private theorem integralExceptionalSiteRight_underlying_apply (n : ℕ)
+    (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
+    (T : Sheaf W.smallEtaleTopology (Type (u + 1)))
+    (a : T ⟶ (coefficientUnderlying (J := W.smallEtaleTopology)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj
+        ((B.ordinary.right n).obj M)) (U : W.Etaleᵒᵖ) (z : T.obj.obj U) :
+    ((B.ordinary.rightUnderlying n).hom.app M).hom.app U (a.hom.app U z) =
+    ((B.ordinary.levelAdj n).counit.app M).val.app ((Scheme.toProEt W).op.obj U)
+      (((B.ordinary.lift n).moduleUnderlying.inv.app
+        ((B.ordinary.right n).obj M)).hom.app ((Scheme.toProEt W).op.obj U)
+        (((integralExceptionalSetInverse W).map a).hom.app ((Scheme.toProEt W).op.obj U)
+          (((Scheme.proEtaleSiteComparison W).unit.app T).hom.app U z))) := by
   let L := integralExceptionalSetInverse W
   let adj := Scheme.proEtaleSiteComparison W
   let Q := coefficientUnderlying (J := W.smallEtaleTopology)
@@ -122,136 +114,178 @@ theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
       ((B.ordinary.levelAdj n).counit.app M)) ≫ β.hom.app M = _ at h
     rw [hc, Q.map_id, Category.id_comp] at h
     exact h
-  have hunit (M) (T : Sheaf W.smallEtaleTopology (Type (u + 1)))
-      (a : T ⟶ Q.obj (R.obj M)) (U : W.Etaleᵒᵖ) (z : T.obj.obj U) :
-      (β.hom.app M).hom.app U (a.hom.app U z) =
-      ((B.ordinary.levelAdj n).counit.app M).val.app ((Scheme.toProEt W).op.obj U)
-        ((I.moduleUnderlying.inv.app (R.obj M)).hom.app ((Scheme.toProEt W).op.obj U)
-          ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
-            ((adj.unit.app T).hom.app U z))) := by
-    rw [hβ, Adjunction.homEquiv_unit]
-    have h := congrArg (fun f ↦ f.hom.app U z) (adj.unit.naturality a)
-    change (adj.unit.app (Q.obj (R.obj M))).hom.app U (a.hom.app U z) =
-      (L.map a).hom.app ((Scheme.toProEt W).op.obj U)
-        ((adj.unit.app T).hom.app U z) at h
-    exact congrArg (fun x ↦
-      ((B.ordinary.levelAdj n).counit.app M).val.app ((Scheme.toProEt W).op.obj U)
-        ((I.moduleUnderlying.inv.app (R.obj M)).hom.app
-          ((Scheme.toProEt W).op.obj U) x)) h
-  have hadd (M) (U : W.Etaleᵒᵖ) (x y : (R.obj M).val.obj U) :
-      (β.hom.app M).hom.app U (x + y) =
-        (show M.val.obj ((Scheme.toProEt W).op.obj U) from
-          (β.hom.app M).hom.app U x) +
-        (show M.val.obj ((Scheme.toProEt W).op.obj U) from
-          (β.hom.app M).hom.app U y) := by
-    let X := Q.obj (R.obj M)
-    let T := (CategoryTheory.MonoidalCategory.tensorObj X X)
-    let a : T ⟶ X := CartesianMonoidalCategory.fst X X
-    let b : T ⟶ X := CartesianMonoidalCategory.snd X X
-    let t : T ⟶ X := ⟨{
-      app := fun Y ↦ ↾fun z ↦
-        (show (R.obj M).val.obj Y from z.1) +
-          (show (R.obj M).val.obj Y from z.2)
-      naturality := by
-        intro Y Z f
-        ext z
-        exact ((R.obj M).val.map f).hom.map_add z.1 z.2 |>.symm }⟩
-    have h := I.moduleAdd (R.obj M) T a b t (fun _ _ ↦ rfl)
-      ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U (x, y))
-    have ha := hunit M T a U (x, y)
-    have hb := hunit M T b U (x, y)
-    have ht := hunit M T t U (x, y)
-    change (β.hom.app M).hom.app U (x + y) = _ at ht
-    change (β.hom.app M).hom.app U x = _ at ha
-    change (β.hom.app M).hom.app U y = _ at hb
-    rw [ht, ha, hb]
-    dsimp only [id] at h
-    rw [h]
-    exact (((B.ordinary.levelAdj n).counit.app M).val.app
-      ((Scheme.toProEt W).op.obj U)).hom.map_add _ _
-  have hsmul (M) (U : W.Etaleᵒᵖ) (q : integralExceptionalQuotientRing l E n)
-      (x : (R.obj M).val.obj U) :
-      (β.hom.app M).hom.app U
-        ((toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
-          (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app U q • x) =
-      (toSheafify (Scheme.ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj
-        (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app
-          ((Scheme.toProEt W).op.obj U) q •
-        (show M.val.obj ((Scheme.toProEt W).op.obj U) from
-          (β.hom.app M).hom.app U x) := by
-    let X := Q.obj (R.obj M)
-    let S := (constantSheaf W.smallEtaleTopology (Type (u + 1))).obj PUnit
-    let T := CategoryTheory.MonoidalCategory.tensorObj S X
-    let a : T ⟶ _ := CartesianMonoidalCategory.fst S X ≫
-      coefficientConstantSection (J := W.smallEtaleTopology)
-        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n q
-    let b : T ⟶ X := CartesianMonoidalCategory.snd S X
-    let t : T ⟶ X := ⟨{
-      app := fun Y ↦ ↾fun z ↦
-        (show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
-          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Y
-            from a.hom.app Y z) • (show (R.obj M).val.obj Y from z.2)
-      naturality := by
-        intro Y Z f
-        ext z
-        have hn := congrArg (fun k ↦ k z) (a.hom.naturality f).symm
-        change (coefficientQuotientSheaf (J := W.smallEtaleTopology)
-          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.map f
-            (a.hom.app Y z) = a.hom.app Z (T.obj.map f z) at hn
-        symm
-        change (R.obj M).val.map f
-          ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
-            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Y
-              from a.hom.app Y z) • (show (R.obj M).val.obj Y from z.2)) =
-          (show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
-            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Z
-              from a.hom.app Z (T.obj.map f z)) •
-            (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)
-        rw [(R.obj M).val.map_smul]
-        exact congrArg (fun c : (coefficientQuotientSheaf
-          (J := W.smallEtaleTopology) (integralExceptionalIntegers l E)
-          (integralExceptionalUniformizer l E) n).obj.obj Z ↦
-            c • (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)) hn }⟩
-    let z : T.obj.obj U :=
+  have hβ' := (hβ M).trans (adj.homEquiv_unit _ _ _)
+  refine (congrArg (fun f ↦ f.hom.app U (a.hom.app U z)) hβ').trans ?_
+  have h := congrArg (fun f ↦ f.hom.app U z) (adj.unit.naturality a)
+  change (adj.unit.app (Q.obj (R.obj M))).hom.app U (a.hom.app U z) =
+    (L.map a).hom.app ((Scheme.toProEt W).op.obj U)
+      ((adj.unit.app T).hom.app U z) at h
+  exact congrArg (fun x ↦
+    ((B.ordinary.levelAdj n).counit.app M).val.app ((Scheme.toProEt W).op.obj U)
+      ((I.moduleUnderlying.inv.app (R.obj M)).hom.app
+        ((Scheme.toProEt W).op.obj U) x)) h
+
+private theorem integralExceptionalSiteRight_map_add (n : ℕ)
+    (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
+    (U : W.Etaleᵒᵖ) (x y : ((B.ordinary.right n).obj M).val.obj U) :
+    ((B.ordinary.rightUnderlying n).hom.app M).hom.app U (x + y) =
+      (show M.val.obj ((Scheme.toProEt W).op.obj U) from
+        ((B.ordinary.rightUnderlying n).hom.app M).hom.app U x) +
+      (show M.val.obj ((Scheme.toProEt W).op.obj U) from
+        ((B.ordinary.rightUnderlying n).hom.app M).hom.app U y) := by
+  let adj := Scheme.proEtaleSiteComparison W
+  let Q := coefficientUnderlying (J := W.smallEtaleTopology)
+    (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n
+  let I := B.ordinary.lift n
+  let R := B.ordinary.right n
+  let β := B.ordinary.rightUnderlying n
+  have hunit := integralExceptionalSiteRight_underlying_apply l E W P B n
+  let X := Q.obj (R.obj M)
+  let T := (CategoryTheory.MonoidalCategory.tensorObj X X)
+  let a : T ⟶ X := CartesianMonoidalCategory.fst X X
+  let b : T ⟶ X := CartesianMonoidalCategory.snd X X
+  let t : T ⟶ X := ⟨{
+    app := fun Y ↦ ↾fun z ↦
+      (show (R.obj M).val.obj Y from z.1) +
+        (show (R.obj M).val.obj Y from z.2)
+    naturality := by
+      intro Y Z f
+      ext z
+      exact ((R.obj M).val.map f).hom.map_add z.1 z.2 |>.symm }⟩
+  have h := I.moduleAdd (R.obj M) T a b t (fun _ _ ↦ rfl)
+    ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U (x, y))
+  have ha := hunit M T a U (x, y)
+  have hb := hunit M T b U (x, y)
+  have ht := hunit M T t U (x, y)
+  change (β.hom.app M).hom.app U (x + y) = _ at ht
+  change (β.hom.app M).hom.app U x = _ at ha
+  change (β.hom.app M).hom.app U y = _ at hb
+  dsimp only [id] at h
+  let ε := (((B.ordinary.levelAdj n).counit.app M).val.app
+    ((Scheme.toProEt W).op.obj U)).hom
+  exact ht.trans ((congrArg ε h).trans
+    ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
+
+private theorem integralExceptionalSiteRight_map_smul (n : ℕ)
+    (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
+    (U : W.Etaleᵒᵖ) (q : integralExceptionalQuotientRing l E n)
+    (x : ((B.ordinary.right n).obj M).val.obj U) :
+    ((B.ordinary.rightUnderlying n).hom.app M).hom.app U
       ((toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
-        (PUnit.{u + 2} : Type (u + 1)))).app U PUnit.unit, x)
-    have ha : a.hom.app U z =
-        (toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
-          (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app U q :=
-      constantSection_apply W.smallEtaleTopology _ q U z.1
-    have h := I.moduleSMul (R.obj M) T a b t (fun _ _ ↦ rfl)
-      ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U z)
-    have hc : L.map a ≫ I.ringUnderlying.hom =
-        L.map (CartesianMonoidalCategory.fst S X) ≫ B.ordinary.singleton.hom ≫
-          coefficientConstantSection (J := Scheme.ProEt.topology W)
-            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n q := by
-      dsimp only [a]
-      rw [L.map_comp, Category.assoc, B.ordinary.constants]
-    have hc' := congrArg (fun f ↦ f.hom.app ((Scheme.toProEt W).op.obj U)
-      ((adj.unit.app T).hom.app U z)) hc
-    have ht := hunit M T t U z
-    have hb := hunit M T b U z
-    change (β.hom.app M).hom.app U
-      ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
-        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U
-          from a.hom.app U z) • x) = _ at ht
-    change (β.hom.app M).hom.app U x = _ at hb
-    rw [ha] at ht
-    rw [ht, hb]
-    dsimp only [id] at h
-    rw [h]
-    have hconst := constantSection_apply (Scheme.ProEt.topology W)
-      (integralExceptionalQuotientRing l E n) q ((Scheme.toProEt W).op.obj U)
-      ((B.ordinary.singleton.hom).hom.app ((Scheme.toProEt W).op.obj U)
-        ((L.map (CartesianMonoidalCategory.fst S X)).hom.app
-          ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U z)))
-    change (I.ringUnderlying.hom).hom.app ((Scheme.toProEt W).op.obj U)
-      ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
-        ((adj.unit.app T).hom.app U z)) = _ at hc'
-    have hs := hc'.trans hconst
-    rw [hs]
-    exact (((B.ordinary.levelAdj n).counit.app M).val.app
-      ((Scheme.toProEt W).op.obj U)).hom.map_smul _ _
+        (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app U q • x) =
+    (toSheafify (Scheme.ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj
+      (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app
+        ((Scheme.toProEt W).op.obj U) q •
+      (show M.val.obj ((Scheme.toProEt W).op.obj U) from
+        ((B.ordinary.rightUnderlying n).hom.app M).hom.app U x) := by
+  let L := integralExceptionalSetInverse W
+  let adj := Scheme.proEtaleSiteComparison W
+  let Q := coefficientUnderlying (J := W.smallEtaleTopology)
+    (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n
+  let I := B.ordinary.lift n
+  let R := B.ordinary.right n
+  let β := B.ordinary.rightUnderlying n
+  have hunit := integralExceptionalSiteRight_underlying_apply l E W P B n
+  let X := Q.obj (R.obj M)
+  let S := (constantSheaf W.smallEtaleTopology (Type (u + 1))).obj PUnit
+  let T := CategoryTheory.MonoidalCategory.tensorObj S X
+  let a : T ⟶ _ := CartesianMonoidalCategory.fst S X ≫
+    coefficientConstantSection (J := W.smallEtaleTopology)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n q
+  let b : T ⟶ X := CartesianMonoidalCategory.snd S X
+  let t : T ⟶ X := ⟨{
+    app := fun Y ↦ ↾fun z ↦
+      (show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Y
+          from a.hom.app Y z) • (show (R.obj M).val.obj Y from z.2)
+    naturality := by
+      intro Y Z f
+      ext z
+      have hn := congrArg (fun k ↦ k z) (a.hom.naturality f).symm
+      change (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.map f
+          (a.hom.app Y z) = a.hom.app Z (T.obj.map f z) at hn
+      symm
+      change (R.obj M).val.map f
+        ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Y
+            from a.hom.app Y z) • (show (R.obj M).val.obj Y from z.2)) =
+        (show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Z
+            from a.hom.app Z (T.obj.map f z)) •
+          (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)
+      exact ((R.obj M).val.map_smul f _ _).trans (congrArg (fun c : (coefficientQuotientSheaf
+        (J := W.smallEtaleTopology) (integralExceptionalIntegers l E)
+        (integralExceptionalUniformizer l E) n).obj.obj Z ↦
+          c • (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)) hn) }⟩
+  let z : T.obj.obj U :=
+    ((toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
+      (PUnit.{u + 2} : Type (u + 1)))).app U PUnit.unit, x)
+  have ha : a.hom.app U z =
+      (toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
+        (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app U q :=
+    constantSection_apply W.smallEtaleTopology _ q U z.1
+  have h := I.moduleSMul (R.obj M) T a b t (fun _ _ ↦ rfl)
+    ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U z)
+  have hc : L.map a ≫ I.ringUnderlying.hom =
+      L.map (CartesianMonoidalCategory.fst S X) ≫ B.ordinary.singleton.hom ≫
+        coefficientConstantSection (J := Scheme.ProEt.topology W)
+          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n q := by
+    dsimp only [a]
+    rw [L.map_comp, Category.assoc, B.ordinary.constants]
+  have hc' := congrArg (fun f ↦ f.hom.app ((Scheme.toProEt W).op.obj U)
+    ((adj.unit.app T).hom.app U z)) hc
+  have ht := hunit M T t U z
+  have hb := hunit M T b U z
+  change (β.hom.app M).hom.app U
+    ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U
+        from a.hom.app U z) • x) = _ at ht
+  change (β.hom.app M).hom.app U x = _ at hb
+  have ht' := (congrArg (fun c : (coefficientQuotientSheaf
+    (J := W.smallEtaleTopology) (integralExceptionalIntegers l E)
+      (integralExceptionalUniformizer l E) n).obj.obj U ↦
+        (β.hom.app M).hom.app U (c • x)) ha).symm.trans ht
+  dsimp only [id] at h
+  have hconst := constantSection_apply (Scheme.ProEt.topology W)
+    (integralExceptionalQuotientRing l E n) q ((Scheme.toProEt W).op.obj U)
+    ((B.ordinary.singleton.hom).hom.app ((Scheme.toProEt W).op.obj U)
+      ((L.map (CartesianMonoidalCategory.fst S X)).hom.app
+        ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U z)))
+  change (I.ringUnderlying.hom).hom.app ((Scheme.toProEt W).op.obj U)
+    ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
+      ((adj.unit.app T).hom.app U z)) = _ at hc'
+  have hs := hc'.trans hconst
+  let ε := (((B.ordinary.levelAdj n).counit.app M).val.app
+    ((Scheme.toProEt W).op.obj U)).hom
+  exact ht'.trans ((congrArg ε h).trans
+    ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
+
+/-- Ordinary site direct-image realization, fixed on every section by the actual
+underlying set-sheaf comparison.
+Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization).
+Proof: both direct images restrict a sheaf along the actual etale-to-pro-etale functor. The
+recorded rightUnderlying map identifies their values on each etale test object. The
+quotient coordinate equivalence fixes constants, so these maps are linear, natural,
+and invertible. Faithful forgetting to set sheaves proves uniqueness. -/
+theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
+    ∃! e : B.ordinary.right n ⋙ integralExceptionalEtaleRealization l E W n ≅
+      integralExceptionalProRealization l E W n ⋙
+        ProEtale.comparisonLowerStar (ModuleCat.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W,
+      ∀ (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
+        (U : W.Etaleᵒᵖ) (x : ((B.ordinary.right n).obj M).val.obj U),
+        (e.hom.app M).hom.app U x =
+          ((B.ordinary.rightUnderlying n).hom.app M).hom.app U x := by
+  let := integralExceptionalEtaleForget W
+  let := Scheme.purTwistForgetPreservesSheafification W
+  let R := B.ordinary.right n
+  let β := B.ordinary.rightUnderlying n
+  have hadd := integralExceptionalSiteRight_map_add l E W P B n
+  have hsmul := integralExceptionalSiteRight_map_smul l E W P B n
   let F := R ⋙ integralExceptionalEtaleRealization l E W n
   let G := integralExceptionalProRealization l E W n ⋙
     ProEtale.comparisonLowerStar (ModuleCat.{u + 1}

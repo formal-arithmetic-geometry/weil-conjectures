@@ -35,8 +35,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 500000 in
--- Unfolding the two derived coefficient objects requires additional elaboration fuel.
 /-- The top scalar Ext on a constant conormal-rank open is its dual determinant.
 
 Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.
@@ -88,14 +86,14 @@ theorem koszulRegularImmersion_ext_constantRank_top
     apply Scheme.Modules.isIso_of_bijective_stalkLinearMap
     intro z
     obtain ⟨U, hzU, m, f, hf, hreg⟩ := hregular z.1 z.2
-    obtain ⟨b, _⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
-      Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
+    let b := (ExteriorAlgebra.exists_koszul_conormal_basis
+      Γ(Y, U.1) (i.ker.ideal U) m f hreg hf).choose
     have hdim := (affine_conormal_frame i U m b).2 z.1 hzU
     have hmn : m = n := hdim.symm.trans (hVrank z.1 z.2)
     cases hmn
     exact koszulRegularImmersion_ext_coefficient_stalk_iso i V n z U hzU f hf hreg
-  obtain ⟨e⟩ := koszulRegularImmersion_self_ext_exterior i V n hregular
-  exact ⟨asIso φ ≪≫ e⟩
+  exact (koszulRegularImmersion_self_ext_exterior i V n hregular).map
+    (fun e ↦ asIso φ ≪≫ e)
 
 
 end AlgebraicGeometry

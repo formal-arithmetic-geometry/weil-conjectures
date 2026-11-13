@@ -99,7 +99,6 @@ noncomputable def classTransportMap :
     ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K
         (𝟙 _))))
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- **The test maps of the transport map** (blueprint `lem-trf-trace-source-exchange`, Step 1):
 `test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read through the transport. -/
@@ -116,7 +115,9 @@ lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinit
       (classTransport ℓ f K).app _ ≫
         (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K (𝟙 _)) :=
     by simp only [classTest, classTransportMap, uncurry_curry, Equiv.symm_apply_apply]
-  rw [classTest_comp, hΦ, hψ, Functor.map_comp]
+  rw [classTest_comp]
+  rw [hΦ]
+  conv_rhs => rw [hψ, Functor.map_comp]
   exact (classTransport ℓ f K).naturality_assoc ψ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -80,6 +80,15 @@ section Abstract
 
 variable {S D : Type*} [Category S] [MonoidalCategory S] [Category D]
 
+-- Perform the tensor-composition calculation before specializing to derived categories.
+private lemma δ_comp_tensorHom_of_comp {T U₁ U₂ V₁ V₂ W₁ W₂ : S}
+    (δ : T ⟶ U₁ ⊗ U₂) (p₁ : U₁ ⟶ V₁) (p₂ : U₂ ⟶ V₂)
+    (q₁ : V₁ ⟶ W₁) (q₂ : V₂ ⟶ W₂) (r₁ : U₁ ⟶ W₁) (r₂ : U₂ ⟶ W₂)
+    (t : T ⟶ W₁ ⊗ W₂) (h₁ : p₁ ≫ q₁ = r₁) (h₂ : p₂ ≫ q₂ = r₂)
+    (hδ : δ ≫ (r₁ ⊗ₘ r₂) = t) :
+    (δ ≫ (p₁ ⊗ₘ p₂)) ≫ (q₁ ⊗ₘ q₂) = t := by
+  rw [Category.assoc, tensorHom_comp_tensorHom, h₁, h₂, hδ]
+
 /-- The equivariance of the Künneth maps, in an abstract monoidal category: the transport of the
 compatibility of the Künneth maps with pullbacks along an isomorphism `I ≅ 𝟭`. -/
 private lemma kunnethMap_autAction_aux {I : S ⥤ S} (ι : I ≅ 𝟭 S) (Ψ : D ⥤ S)
@@ -139,7 +148,6 @@ lemma kunnethMap_comp_map_tensorHom (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom 
   exact kunnethMap_comp_map_tensorHom_aux (φ₁.pullbackExchange Λ) (φ₂.pullbackExchange Λ)
     (P.tensorMap Λ) (fun x y ↦ P.tensorMap_natural Λ x y) a b
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The comultiplication of `L(𝟙)^*` followed by the pullback comparisons of the squares with
 identity sides and the identity isomorphisms `L(𝟙)^* ≅ 𝟭` is the identity isomorphism. -/
@@ -155,11 +163,11 @@ lemma δ_comp_pullbackSquareComparison_id (h₁ : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f
         (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
           L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B)) =
       (leftDerivedUpperStarId Λ Z).hom.app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) := by
-  rw [Category.assoc, tensorHom_comp_tensorHom,
-    pullbackSquareComparison_id_hom_app_comp_map Λ f₁ h₁,
-    pullbackSquareComparison_id_hom_app_comp_map Λ f₂ h₂, δ_leftDerivedUpperStarId]
+  exact δ_comp_tensorHom_of_comp _ _ _ _ _ _ _ _
+    (pullbackSquareComparison_id_hom_app_comp_map Λ f₁ h₁ A)
+    (pullbackSquareComparison_id_hom_app_comp_map Λ f₂ h₂ B)
+    (δ_leftDerivedUpperStarId Λ Z _ _)
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Equivariance of the Künneth map of nearby cycles**: for morphisms of models `σ_M`, `σ_N`,
 `σ_P` over the identities compatible with `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N`, the Künneth map
@@ -184,25 +192,18 @@ lemma kunnethMap_autAction (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f�
   have hs₂ : f₂' ≫ 𝟙 Y' = 𝟙 Z' ≫ f₂' := by simp
   have h := map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁ φ₂ σM σN σP htot₁.symm hgen₁.symm
     htot₂.symm hgen₂.symm hb₁ hs₁ hb₂ hs₂ A B
+  -- Infer the intermediate morphisms from the compatibilities below, reusing their derived
+  -- pullbacks instead of synthesizing the graded tensor instances for each occurrence.
   have key := kunnethMap_autAction_aux (leftDerivedUpperStarId Λ Z') (P.nearbyCycles Λ)
-    (kunnethMap Λ φ₁ φ₂ A B)
-    (kunnethMap Λ φ₁ φ₂ (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B))
-    (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
-      L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B))
-    (L((f₁')^*⟦Λ⟧).map ((M.nearbyCycles Λ).map ((leftDerivedUpperStarId Λ X).hom.app A)))
-    (L((f₂')^*⟦Λ⟧).map ((N.nearbyCycles Λ).map ((leftDerivedUpperStarId Λ Y).hom.app B)))
-    (kunnethMap_comp_map_tensorHom Λ φ₁ φ₂ _ _)
-    ((σP.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) _ _
-    (δ_comp_pullbackSquareComparison_id Λ hb₁ hb₂ A B)
-    (Functor.OplaxMonoidal.δ L((𝟙 Z')^*⟦Λ⟧) _ _) (δ_leftDerivedUpperStarId Λ Z' _ _)
-    _ _ (L((f₁')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X').inv.app ((M.nearbyCycles Λ).obj A)))
-    (pullbackSquareComparison_id_hom_app_comp_map Λ f₁' hs₁ _)
-    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₁' _)
-    (L((f₁')^*⟦Λ⟧).map ((σM.pullbackExchange Λ).app A))
-    _ _ (L((f₂')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y').inv.app ((N.nearbyCycles Λ).obj B)))
-    (pullbackSquareComparison_id_hom_app_comp_map Λ f₂' hs₂ _)
-    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₂' _)
-    (L((f₂')^*⟦Λ⟧).map ((σN.pullbackExchange Λ).app B)) h
+    _ _ _ _ _
+    (kunnethMap_comp_map_tensorHom Λ φ₁ φ₂
+      ((leftDerivedUpperStarId Λ X).hom.app A) ((leftDerivedUpperStarId Λ Y).hom.app B))
+    _ _ _ (δ_comp_pullbackSquareComparison_id Λ hb₁ hb₂ A B)
+    _ (δ_leftDerivedUpperStarId Λ Z' _ _)
+    _ _ _ (pullbackSquareComparison_id_hom_app_comp_map Λ f₁' hs₁ _)
+    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₁' _) _
+    _ _ _ (pullbackSquareComparison_id_hom_app_comp_map Λ f₂' hs₂ _)
+    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₂' _) _ h
   simp only [Hom.autAction, CategoryTheory.Functor.map_comp]
   exact key
 

@@ -157,8 +157,6 @@ private theorem push_congr_forget {S X : RingedVertex.{u}}
 attribute [local irreducible] RingedMap.pullComp
   exchangeModuleComposition
 
-set_option maxHeartbeats 800000 in
--- Comparing underlying direct images requires reducing several module structures.
 private theorem push_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)
     (d : RingedMap W T)
@@ -182,16 +180,14 @@ private theorem push_assoc {S X T W : RingedVertex.{u}}
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Category.id_comp, Functor.map_comp] at H ⊢
-  rw [hab, ha, hb]
   have hh : (eqToIso (congrArg RingedMap.push h)).inv =
       (eqToIso (congrArg RingedMap.push h.symm)).hom := by
     rfl
-  simp only [Iso.symm_hom, hh]
-  erw [hc]
   have hm : (SheafOfModules.toSheaf _).map (a.push.map ((pushComp b d).hom.app N)) =
       (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map
         ((SheafOfModules.toSheaf _).map ((pushComp b d).hom.app N)) := rfl
-  erw [hm, hbd]
+  -- Apply the sectionwise identifications together to avoid repeated dependent rewrites.
+  simp only [hab, ha, hb, Iso.symm_hom, hh, hc, hm, hbd]
   exact H
 
 attribute [local irreducible] proEtaleRingModuleDirectImage

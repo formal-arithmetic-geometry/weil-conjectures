@@ -683,14 +683,64 @@ private theorem brown_generic_right_cube
 
 end GenericOrdinaryCube
 
-set_option maxHeartbeats 800000 in
+-- Form the section predicate before specializing to the quotient coefficient rings.
+private def brown_generic_restriction_section_law
+    (W : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
+    (r : brownGenericRestriction W φ ⋙ Etale.SystemProjection.constantModule W (.of R) ≅
+      Etale.SystemProjection.constantModule W (.of S) ⋙
+        Sheaf.restrictScalars W.smallEtaleTopology φ) : Prop :=
+  ∀ (M : brownGenericLevel W S) (U : W.Etaleᵒᵖ) (x : M.val.obj U),
+    HEq ((r.hom.app M).hom.app U x) x
+
+-- The section law is independent of the derived coherence fields.
+private def brown_restriction_section_law
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  ∀ {m n : ℕ} (h : m ≤ n),
+    brown_generic_restriction_section_law W (strictEtaleBrownRingMap O t h)
+      (R.ordinaryRestriction h)
+
+-- Keep the localization and mate laws shared when projecting the ordinary section law.
+private def brown_restriction_derived_laws
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  letI := R.ordinaryAdditive
+  (∀ {m n : ℕ} (h : m ≤ n)
+    (K : CochainComplex (strictEtaleLevel W O t m) ℤ),
+    (R.restriction h).hom.app (DerivedCategory.Q.obj K) ≫
+      (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)).map ((R.factors m).hom.app K) ≫
+      (Sheaf.restrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
+          (((strictEtaleBrownConstant O t W m).mapHomologicalComplex (.up ℤ)).obj K) =
+    (R.derived n).map ((P.scalar h).restrictionFactors.hom.app K) ≫
+      (R.factors n).hom.app
+        (((coefficientRestriction (J := W.smallEtaleTopology) O t h).mapHomologicalComplex
+          (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (R.ordinaryRestriction h) (.up ℤ)).hom.app K)) ∧
+  (∀ {m n : ℕ} (h : m ≤ n),
+    (mateEquiv (P.scalar h).derivedAdj
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)))
+      (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom)
+
+private theorem brown_restriction_coherence_iff
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P) :
+    StrictEtaleBrownRealizationCoherence O t W P R ↔
+      brown_restriction_section_law O t W P R ∧
+        brown_restriction_derived_laws O t W P R := Iff.rfl
+
 -- Project the section law without retaining the derived coherence conjunction.
 private theorem brown_restriction_section_normalized
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealization O t W P)
     : ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m) (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x :=
-  R.property.1
+      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x := by
+  exact @And.left (brown_restriction_section_law O t W P R.val)
+    (brown_restriction_derived_laws O t W P R.val)
+    ((brown_restriction_coherence_iff O t W P R.val).mp R.property)
 
 private theorem brown_right_section_normalized
     (O : Type (u + 1)) [CommRing O] (t : O) {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
@@ -758,7 +808,6 @@ private theorem ordinary_inverse_iso_hom (k : ℕ) :
       strictEtaleBrownOrdinaryInverse O t g k A (B.level k) (rg k) := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Keep the abstract sheaf equation opaque before evaluation on sections.
 private theorem ordinary_underlying_raw (N : strictEtaleLevel V O t m) :
     (coefficientUnderlying (J := W.smallEtaleTopology) O t n).map
@@ -787,7 +836,6 @@ private theorem ordinary_underlying_raw (N : strictEtaleLevel V O t m) :
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) N
 
-set_option maxHeartbeats 1600000 in
 -- Compare the ordinary right-adjoint restriction cube on underlying sections.
 private theorem ordinary_right_cube (N : strictEtaleLevel V O t m) :
     (strictEtaleBrownConstant O t W n).map

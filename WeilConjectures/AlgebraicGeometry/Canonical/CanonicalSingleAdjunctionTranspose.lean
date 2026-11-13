@@ -75,8 +75,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
--- The pinned choices and sheaf functor instances need a larger elaboration budget.
 /-- The pinned derived adjunction transposes the ordinary single-module comparison.
 Source: Stacks Project, Tags 079W and 0FP1; the factorization defining
 `exists_schemeDerivedAdjunction`.
@@ -130,10 +128,17 @@ theorem canonicalSingleAdjunctionTranspose {X S : Scheme.{u}} (f : X ⟶ S)
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) k =
       (HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (ComplexShape.up ℤ)).map
-          ((CochainComplex.singleFunctor _ 0).map (adj.homEquiv _ _ b) ≫
+          ((CochainComplex.singleFunctor _ 0).map
+              ((pullbackPushforwardAdjunction f).homEquiv _ _ a) ≫
             (HomologicalComplex.singleMapHomologicalComplex
               (pushforward f) (ComplexShape.up ℤ) 0).inv.app M) :=
-    single_homotopy_transpose adj N M b
+    (single_homotopy_transpose adj N M b).trans
+      (congrArg (fun c : N ⟶ (pushforward f).obj M ↦
+        (HomotopyCategory.quotient
+          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (ComplexShape.up ℤ)).map
+            ((CochainComplex.singleFunctor _ 0).map c ≫
+              (HomologicalComplex.singleMapHomologicalComplex
+                (pushforward f) (ComplexShape.up ℤ) 0).inv.app M)) hb)
   have h := Classical.choose_spec (exists_schemeDerivedAdjunction f ε hε)
     ((HomotopyCategory.singleFunctor _ 0).obj N)
     ((HomotopyCategory.singleFunctor _ 0).obj M) k
@@ -141,7 +146,6 @@ theorem canonicalSingleAdjunctionTranspose {X S : Scheme.{u}} (f : X ⟶ S)
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
       ((HomotopyCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) hk)
-  rw [hb] at h'
   simp only [canonicalSinglePullbackMap, canonicalSingleDirectImageMap, cast_eq, k, b, ε, t, adj,
     DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
     HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,

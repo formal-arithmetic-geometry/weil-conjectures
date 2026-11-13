@@ -56,7 +56,6 @@ variable {A B : Type*} [Category.{u} A] [Category.{u} B]
     (F : A ⥤ B) [F.Additive] [F.LaxMonoidal]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
--- K-flat localization and its three monoidal structures require substantial instance synthesis.
 /-- Exact-derived lax monoidality with the specified chain-level normalization.
 
 Proof: the inclusion of K-flat complexes followed by localization is strong monoidal.
@@ -82,6 +81,10 @@ theorem exists_normalized :
           DerivedCategory.Q.map (Functor.LaxComplex.chainTensor F P Q)) := by
   let : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
   let : HasColimitsOfSize.{0, 0} B := hasColimitsOfSizeShrink B
+  let : MonoidalCategory (CochainComplex A ℤ) := inferInstance
+  let : MonoidalCategory (CochainComplex B ℤ) := inferInstance
+  let : MonoidalCategory (DerivedCategory A) := inferInstance
+  let : MonoidalCategory (DerivedCategory B) := inferInstance
   let := Functor.LaxComplex.mapCochainComplexLax F
   let W := HomologicalComplex.quasiIso A (.up ℤ)
   let I := W.ιKFlat

@@ -47,6 +47,22 @@ private theorem supportComparison_app
   dsimp [sfIntrinsicCompactSupport, sfAmbientCompactSupportCandidate]
   simp only [Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
 
+private theorem transportRightRealization_hom
+    {C D B : Type*} [Category* C] [Category* D] [Category* B]
+    (e : D ≌ B) {F : C ⥤ B} {H : C ⥤ D} (r : F ⋙ e.inverse ≅ H)
+    {K : B} (N : C) (v : K ⟶ F.obj N) :
+    v ≫ (Iso.isoCompInverse (H := e.symm) r).hom.app N =
+      (e.counitIso.app K).inv ≫ e.functor.map (e.inverse.map v ≫ r.hom.app N) := by
+  dsimp only [Iso.isoCompInverse, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
+    Functor.associator_inv_app, Functor.rightUnitor_inv_app]
+  simp only [Category.id_comp, Functor.map_comp]
+  change v ≫ (e.counitIso.app (F.obj N)).inv ≫ e.functor.map (r.hom.app N) = _
+  have hc := e.counitIso.inv.naturality v
+  change v ≫ (e.counitIso.app (F.obj N)).inv =
+    (e.counitIso.app K).inv ≫ e.functor.map (e.inverse.map v) at hc
+  rw [← Category.assoc, hc, Category.assoc]
+
 /-- The normalized finite operation package. The former core omitted the relation
 between its right realization and its adjunction, so could not support normalization.
 Source: Zheng, Proposition 2.23; Stacks 09AL
@@ -58,8 +74,6 @@ abbrev OperationCore
     (c : Compactification f) := Operation l E n c
 
 set_option maxRecDepth 4096 in
-set_option maxHeartbeats 800000 in
--- Elaborating the normalized Hom transport unfolds several derived coefficient equivalences.
 /-- Construction of the core from the existing finite exceptional operations theorem.
 Retain its normalized Hom formula while transporting the right realization back
 through the canonical coefficient equivalence and its counit.
@@ -97,13 +111,8 @@ theorem operationCore_exists
   let EX := sfIntrinsicDerivedEquivalence X A
   let IX := (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X).ι
   let IY := (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Y).ι
-  let right : G ⋙ IX ≅ IY ⋙ exceptional A c :=
-    (G ⋙ IX).rightUnitor.symm ≪≫
-      isoWhiskerLeft (G ⋙ IX) EX.counitIso.symm ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      isoWhiskerRight (Functor.associator G IX EX.inverse) EX.functor ≪≫
-      isoWhiskerRight rG EX.functor ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.associator _ _ _
+  let right' := Iso.isoCompInverse (G := G ⋙ IX) (H := EX.symm) rG
+  let right : G ⋙ IX ≅ IY ⋙ exceptional A c := right'
   refine ⟨{
     F := F
     G := G
@@ -126,33 +135,18 @@ theorem operationCore_exists
       NatTrans.comp_app, isoWhiskerLeft_inv, isoWhiskerRight_inv, whiskerLeft_app,
       whiskerRight_app, Functor.associator_inv_app, Functor.associator_hom_app]
     simp only [Category.id_comp, Category.comp_id]
-    change (sfFiniteOperationsSupportComparison l ⟨E⟩ ⟨n + 1, Nat.succ_pos n⟩ c).inv.app K.obj ≫
-      (sfIntrinsicDerivedEquivalence Y A).inverse.map (left.inv.app K) = _
     exact congrArg (fun t ↦ t ≫
       (sfIntrinsicDerivedEquivalence Y A).inverse.map (left.inv.app K))
       (congrArg Iso.inv (supportComparison_app l ⟨E⟩ ⟨n + 1, Nat.succ_pos n⟩ c K.obj))
   rw [hleft] at hn
   have hh := congrArg (fun t ↦ (EX.counitIso.app K.obj).inv ≫ EX.functor.map t) hn
-  simp only [Functor.map_comp, Category.assoc] at hh
-  dsimp only [right, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.rightUnitor_inv_app]
-  change IX.map (adj.homEquiv K N v) ≫ 𝟙 _ ≫
-    (EX.counitIso.app (IX.obj (G.obj N))).inv ≫ 𝟙 _ ≫
-      EX.functor.map (𝟙 _) ≫ EX.functor.map (rG.hom.app N) ≫ 𝟙 _ ≫ 𝟙 _ = _
-  rw [EX.functor.map_id]
-  simp only [Category.id_comp, Category.comp_id]
-  have hc := EX.counitIso.inv.naturality (IX.map (adj.homEquiv K N v))
   change IX.map (adj.homEquiv K N v) ≫
-    (EX.counitIso.app (IX.obj (G.obj N))).inv =
-      (EX.counitIso.app K.obj).inv ≫
-        EX.functor.map (EX.inverse.map (IX.map (adj.homEquiv K N v))) at hc
-  rw [← Category.assoc, hc, Category.assoc]
+    (Iso.isoCompInverse (G := G ⋙ IX) (H := EX.symm) rG).hom.app N = _
+  refine (transportRightRealization_hom EX (F := G ⋙ IX) rG N
+    (IX.map (adj.homEquiv K N v))).trans ?_
   dsimp only [sfFiniteOperationsHomEquiv, sfFiniteOperationsRealization,
     Functor.comp_map, Functor.comp_obj] at hh
-  erw [Category.id_comp]
-  simp only [Functor.map_comp] at hh ⊢
+  simp only [Functor.map_comp, Category.assoc] at hh ⊢
   exact hh
 
 /-- The normalized Hom formula for the core operation.

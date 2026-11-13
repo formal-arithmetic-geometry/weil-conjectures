@@ -23,8 +23,14 @@ attribute [local implicit_reducible] spCoefficientCommRings
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
   cartierProRootMap
 
-set_option maxHeartbeats 1000000 in
--- Converting the concrete sheaf module presentations requires extra reduction.
+private theorem finiteBoundaryTargetRestriction_inv_app
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
+    ((finiteBoundaryRestrictionUnderlying l T r n).inv.app M).hom.app U =
+      eqToHom (r.underlying M n U).symm := by
+  rfl
+
 /-- Target endpoint transport.  The finite root map, the inverse line
 comparison, the inverse restriction comparison and the coefficient lineForget
 map, followed by the Cartier root map, equal the Cartier root map.  The proof
@@ -51,11 +57,17 @@ theorem finiteBoundary_target_endpoint
         (pow_pos (Fact.out : l.Prime).pos _) hN) := by
   intro S e
   simp only [Functor.mapIso_inv, ← Functor.map_comp]
-  congr 1
+  apply congrArg S.map
   rw [← finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
+  dsimp only [abEvaluation, Functor.comp_map, evaluation_obj_map]
   apply Sheaf.hom_ext
   ext U z
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
+  dsimp only [e]
+  rw [finiteBoundaryTargetRestriction_inv_app l T r n
+    (lineModule l (ULift.{u} (Padic l)) c) U]
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
@@ -70,19 +82,21 @@ theorem finiteBoundary_target_endpoint
         (coefficientSystemMap l (ULift.{u} (Padic l)) T)
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
-      (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
-  let w := (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
+  let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
+      (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
+    ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
+        (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  let w := (eqToHom (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm) v
   have hw : HEq w v := finiteBoundary_cast_heq
     (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm v
+  dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
-  change ((cartierProRootMap _ _ _ _ _ _).hom.app U)
-    ((k.lineForget.hom.app (op n)).hom.app U w) = _
-  rw [ht, hi]
-  rfl
+  dsimp only [w, v, η, x'] at ht hi
+  exact congrArg ((cartierProRootMap A (l ^ (n + 1)) hA T
+    (pow_pos (Fact.out : l.Prime).pos _) hN).hom.app U) (ht.trans hi)
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
