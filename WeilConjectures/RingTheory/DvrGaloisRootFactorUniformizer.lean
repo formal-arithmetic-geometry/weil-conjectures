@@ -33,6 +33,7 @@ open scoped TensorProduct
 namespace RingTheory
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The tensor quotient and integral-closure algebra towers need extra elaboration heartbeats.
 /-- The root generates the maximal ideal of an integral-closure local factor.
 

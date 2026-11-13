@@ -31,6 +31,7 @@ namespace RingTheory
 -- Preserve the existing, internally unused `hQ` binder in the public statement.
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The two tensor quotients and their scalar towers need more elaboration heartbeats.
 /-- A closed prime of a normalized tensor factor lifts after finite DVR base change.
 
