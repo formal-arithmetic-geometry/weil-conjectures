@@ -108,10 +108,7 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
           (κ.inv.app G).val.app (fV (op V))
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by
   classical
-  let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
-  let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
-  let : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=
-    Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)
+  intro instA instG instP
   let Aalg : X.CommAlgebraSheaf := Under.mk ρ
   have hA : Aalg.toModule.IsQuasicoherent := by
     have : (SheafOfModules.unit U.ringCatSheaf).IsQuasicoherent :=
@@ -145,7 +142,7 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n)) := by
     change (κ.inv.app G).val.app (fV (op V))
       (c ((S).obj G) hS (n ⊗ₜ[Γ(X, V)] d)) = _
-    rw [htmul]
+    rw [htmul ((S).obj G) hS n d]
     have hid : ((tensorPullback f).obj ((S).obj G)).presheaf.map
         (homOfLE (show f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V from le_rfl)).op = 𝟙 _ := by
       exact ((tensorPullback f).obj ((S).obj G)).presheaf.map_id _
@@ -154,7 +151,11 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
       (((adj₀).unit.app ((S).obj G)).val.app (op V) n)
   refine ⟨p, ?_, ?_⟩
   · intro a d n
-    rw [hp, hp, ← mul_smul, ← map_mul]
+    rw [hp d n, hp (a * d) n]
+    exact (mul_smul _ _ _).symm.trans
+      (congrArg (fun r ↦ r • (κ.inv.app G).val.app (fV (op V))
+        (((adj₀).unit.app ((S).obj G)).val.app (op V) n))
+        ((b.hom.app (op (f ⁻¹ᵁ V))).hom.map_mul a d).symm)
   · intro n
     simpa only [map_one, one_smul] using hp 1 n
 
@@ -226,10 +227,7 @@ theorem affine_pushout_module_section_presentation [IsAffineHom f]
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by
   classical
   have _ := hring
-  let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
-  let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
-  let : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=
-    Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)
+  intro instA instG instP
   obtain ⟨p, hb, hu⟩ := affine_pushout_module_section_presentation_equiv
     f B b P κ G hG V hV
   let v (n : G.val.obj (op V)) : (P.obj G).val.obj (op (f ⁻¹ᵁ V)) :=
@@ -254,6 +252,8 @@ theorem affine_pushout_module_section_presentation [IsAffineHom f]
   have hp (d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)) :
       p (d ⊗ₜ[Γ(X, V)] n) = (b.hom.app (op (f ⁻¹ᵁ V))).hom d • v n := by
     simpa only [mul_one, hu] using (hb d 1 n).symm
-  rw [hp, hp, smul_comm, hv]
+  rw [hp d n, hp d (c • n)]
+  exact (smul_comm (δ c) ((b.hom.app (op (f ⁻¹ᵁ V))).hom d) (v n)).trans
+    (congrArg (fun x ↦ (b.hom.app (op (f ⁻¹ᵁ V))).hom d • x) (hv c n))
 end
 end AlgebraicGeometry.Scheme.Modules
