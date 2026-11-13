@@ -513,7 +513,6 @@ variable {C : Type c} [Category.{v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
 
-set_option profiler true in
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product,
