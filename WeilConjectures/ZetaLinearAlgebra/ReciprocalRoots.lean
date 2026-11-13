@@ -31,14 +31,20 @@ theorem in these terms (blueprint `prop-weil-integral-rational-series`).
 
 - `Polynomial.reverse_multiset_prod_one_sub_C_mul_X`: the reverse of `∏ (1 - a X)` is
   `∏ (X - a)` when no `a` vanishes.
-- `Polynomial.IsReciprocalRoot`: blueprint `definition-reciprocal-root`; for `α ≠ 0` it is
-  compared with the roots of the reverse by `Polynomial.isReciprocalRoot_iff_mem_roots_reverse`.
+- `Polynomial.IsReciprocalRoot`: `α` is a reciprocal root of `P` if `1 - α X` divides `P`; for
+  `α ≠ 0` this means that `α` is a root of the reverse of `P`
+  (`Polynomial.isReciprocalRoot_iff_mem_roots_reverse`).
 - `Polynomial.ordinary_reciprocal_roots`: blueprint `def-weil-ordinary-reciprocal-roots`.
 - `LinearMap.roots_reverse_charpolyRev`, `LinearMap.reciprocal_roots_eigenvalues`: blueprint
   `prop-weil-reciprocal-roots-eigenvalues`.
 - `PowerSeries.IsNormalizedIntegralFraction`: blueprint `def-weil-normalized-integral-fraction`.
 - `PowerSeries.existsUnique_isNormalizedIntegralFraction`: blueprint
   `prop-weil-integral-rational-series`.
+
+## Implementation details
+
+`Polynomial.IsReciprocalRoot` is stated for an arbitrary `R`-algebra `L`, typically an algebraic
+closure of the base field.
 -/
 
 @[expose] public section
@@ -90,13 +96,12 @@ section IsReciprocalRoot
 
 variable {R L : Type*} [CommRing R] [CommRing L] [Algebra R L]
 
-/-- Blueprint `definition-reciprocal-root` (and its clause `definition-reciprocal-root--1`):
-an element `α` of an `R`-algebra `L` (in the blueprint, an algebraic closure of the base field)
-is a *reciprocal root* of a polynomial `P ∈ R[X]` if `1 - α X` divides `P` in `L[X]`. -/
+/-- An element `α` of an `R`-algebra `L` is a *reciprocal root* of `P ∈ R[X]` if `1 - α X`
+divides `P` in `L[X]`. -/
 def IsReciprocalRoot (P : R[X]) (α : L) : Prop :=
   1 - C α * X ∣ P.map (algebraMap R L)
 
-/-- `0` is a reciprocal root of every polynomial, since `1 - 0 X = 1`. -/
+/-- `0` is a reciprocal root of every polynomial. -/
 @[simp]
 theorem isReciprocalRoot_zero (P : R[X]) : P.IsReciprocalRoot (0 : L) := by
   simp [IsReciprocalRoot]
@@ -114,7 +119,7 @@ theorem isReciprocalRoot_iff_isRoot_inv {P : K[X]} {α : L} (hα : α ≠ 0) :
   rw [IsReciprocalRoot, h, (isUnit_C.2 (neg_ne_zero.2 hα).isUnit).mul_left_dvd, dvd_iff_isRoot]
 
 /-- For `P ≠ 0`, the nonzero reciprocal roots of `P` in `L` are the roots of the reverse of `P`
-over `L`, the convention of `Polynomial.ordinary_reciprocal_roots`. -/
+over `L`. -/
 theorem isReciprocalRoot_iff_mem_roots_reverse {P : K[X]} (hP : P ≠ 0) {α : L} (hα : α ≠ 0) :
     P.IsReciprocalRoot α ↔ α ∈ (P.map (algebraMap K L)).reverse.roots := by
   rw [isReciprocalRoot_iff_isRoot_inv hα,
