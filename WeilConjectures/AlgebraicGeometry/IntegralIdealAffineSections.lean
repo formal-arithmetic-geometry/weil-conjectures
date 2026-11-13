@@ -19,17 +19,8 @@ noncomputable section
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The affine-section criterion for a nonzero ideal sheaf on an integral scheme.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL.
-Proof: The closed support contains the generic point exactly when it is the whole scheme,
-by density of that point. On a reduced scheme full support is equivalent to the zero ideal.
-On any nonempty affine open the generic point corresponds to the zero prime, so the
-zero-locus description of support says membership there is equivalent to the section ideal
-being zero. Negating gives the forward direction on every nonempty affine open. For the
-reverse direction choose an affine neighborhood of the generic point; its nonzero section
-ideal excludes the generic point from the support and hence excludes the zero ideal.
-(blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine)
--/
+/-- The affine-section criterion for a nonzero ideal sheaf on an integral scheme: `J ≠ ⊥`
+if and only if `J` is nonzero on every nonempty affine open. (Stacks, Tag 01YL) -/
 theorem integral_ideal_nonzero_iff_affine_sections (X : Scheme.{u}) [IsIntegral X]
     (J : X.IdealSheafData) :
     J ≠ ⊥ ↔ ∀ U : X.affineOpens, Nonempty U.1 → J.ideal U ≠ ⊥ := by

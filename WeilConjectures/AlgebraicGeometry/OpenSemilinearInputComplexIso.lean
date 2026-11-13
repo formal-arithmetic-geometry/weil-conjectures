@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Semilinear input stalk coordinates for an open subscheme
 
-Source: Stacks Project, Tag 0098; Mathlib restrictStalkNatIso and its germ formulas.
+## References
+
+* [Stacks, Tag 0098]
 -/
 
 @[expose] public section
@@ -69,24 +71,7 @@ private theorem restriction_stalk_smul
 set_option maxHeartbeats 400000 in
 -- The explicit comparison of mapped stalk complexes requires more definitional checks.
 /-- The canonical additive open restriction comparison is a semilinear chain iso,
-with the same-germ component formula, including transport of the ambient point.
-
-Proof: transport the point equality by equality induction, reducing to y=x.val.
-Whisker overFunctorEquiv by the restricted additive stalk functor and compose
-with restrictStalkNatIso. Map this natural isomorphism to complexes to get alpha;
-naturality with respect to the differentials is built into this construction.
-The overFunctorEquiv component is linear on stalks. For restrictStalkNatIso,
-represent the scalar and the module element by section germs on a common open.
-The inverse inclusion stalk map sends the ring germ to the inverse section-ring
-map's germ. germ_smul and germ_restrictStalkNatIso_hom_app therefore prove
-semilinearity. Finally stalkIso_inv identifies this inverse ring map with the
-specified ring equivalence. The component formula follows by unfolding the
-mapped natural isomorphism, and equality induction gives the stated transport.
-No resolution, flatness, boundedness or nonzero-ring hypothesis is used.
-Source: Stacks Project, Tag 0098, and Mathlib restrictStalkNatIso;
-the proved inverse_stalkMap_germ and restriction_stalk_smul argument in
-Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso.
-(blueprint: lem-pc-open-semilinear-input-complex-iso). -/
+with the same-germ component formula, including transport of the ambient point. -/
 theorem exists_openSemilinearInputComplexIso (X : Scheme.{u}) (U : X.Opens) (x : U.toScheme) (y : X)
     (hxy : x.val = y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

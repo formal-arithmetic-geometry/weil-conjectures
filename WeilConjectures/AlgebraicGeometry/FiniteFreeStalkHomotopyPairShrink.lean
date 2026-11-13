@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopyPShrink
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink
 
 /-! # Shrinking to spread two specified stalk homotopies
-
-Source: lem-pc-finite-free-stalk-homotopy-spread, proof steps 2 and 3.
-(blueprint: lem-pc-finite-free-stalk-homotopy-pair-shrink)
 -/
 
 @[expose] public section
@@ -52,25 +49,8 @@ private theorem restrict_homotopy_P_to_subopen
       restrictFunctorComp (Y.homOfLE hWU) (Y.homOfLE hUV)) (ComplexShape.up ℤ)
   exact homotopy_of_natIso c a b ((restrictFunctor (Y.homOfLE hWU)).mapHomotopy h)
 
-/-- Two specified pairs of endomorphisms become homotopic after shrinking.
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension
-argument, as expanded in lem-pc-finite-free-stalk-homotopy-spread, steps 2 and 3.
-(blueprint: lem-pc-finite-free-stalk-homotopy-pair-shrink).
-
-Proof: Work on an affine neighbourhood of y inside V, with finite bases in the
-terms. Choose the two given stalk homotopies. Each has finitely many nonzero
-components because P and the single complex are bounded. Represent the finitely
-many homotopy matrix entries by sections near y. The homotopy equations for the
-fixed endomorphisms a,b,c,e hold in the stalk, so their finitely many entrywise
-identities hold on some smaller neighbourhood by the germ equality criterion.
-Intersect all these neighbourhoods to obtain W contained in V. The represented
-components, zero off the reverse differential relation, are actual homotopies
-between the restrictions of the given maps. Outside the bounded supports the
-identities are automatic by uniqueness of maps involving zero objects. The
-stalk pullback along V.fromSpecStalkOfMem identifies the matrices with matrices
-over O_{Y,y}, so it tests exactly these germs. Neither map pair is assumed to be
-an inverse pair. The zero-rank and disjoint-support cases obey the same argument. -/
+/-- Two specified pairs of endomorphisms become homotopic after shrinking to a neighbourhood
+of the point. -/
 theorem exists_shrink_homotopy_pair_of_stalk
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

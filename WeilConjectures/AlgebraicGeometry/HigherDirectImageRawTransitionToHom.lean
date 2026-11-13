@@ -19,8 +19,9 @@ public import
 
 /-! # Raw pullback and the derived-Hom comparison
 
-Source: Stacks Project, Tags 03Q8 and 09Z1, canonical comparison maps.
-(blueprint: sbc-lem-higher-image-raw-transition-to-hom).
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -32,24 +33,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Pullback of raw classes commutes with the comparison to morphisms from the free sheaf,
 before evaluating those morphisms on sections, with a specified coefficient morphism.
-Source: Stacks Project, Tags 03Q8 and 09Z1, canonical cohomology comparison maps.
-(blueprint: sbc-lem-higher-image-raw-transition-to-hom).
-
-Proof: Write the comparison as the derived adjunction on the class, preceded by the
-single-complex comparison, followed by degree-zero homology and the homology shift
-comparison. Write the derived transition as the unit for h', pullback composition,
-and pullback of the counit for h. Naturality of the unit and the adjunction triangle
-identity show that composing the adjunct of z with this transition is the adjunct
-of the pulled-back class. Compatibility of pullback composition with the single
-complexes identifies its source map with the first two displayed factors. The shift
-compatibility of the unit, counit, and pullback composition transports the shift
-comparison past this identity, giving the fourth factor. Apply degree-zero homology,
-use naturality of the identification H^0(L[q]) = H^q(L), and precompose with the inverse
-single-complex homology comparison. This gives the stated equality of morphisms from
-the free sheaf, without evaluation. Finally use naturality in the coefficient morphism v to
-postcompose on raw classes by v[q] and on higher images by H^q(Rh'_*v).
-The argument works for every integer q, every bounded-below K, and every commutative
-triangle, including identity arrows and zero objects; it uses no qcqs hypotheses. -/
+(Stacks, Tags 03Q8 and 09Z1) -/
 theorem higherDirectImageRawTransition_toHom
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℤ)

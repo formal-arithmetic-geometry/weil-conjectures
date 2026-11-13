@@ -18,8 +18,10 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapPairEventuall
 
 /-! # Eventual compatibility for one pair of local maps
 
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-fp-local-map-pair-eventually). -/
+## References
+
+* Stacks Project, Tag 01ZR
+-/
 
 @[expose] public section
 
@@ -40,11 +42,7 @@ private theorem pairDefectZero_of_pairCompatibility
   exact ⟨_, rfl, (h.comm t g₁ g₂ h₁ h₂).symm⟩
 
 /-- At a sufficiently late stage, the two composites in the pairwise square
-have a common value on every universal test. This is the overlap-defect
-construction; its proof uses quasi-compactness and finite-presentation
-vanishing on the overlap.
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-fp-local-map-pair-defect-zero). -/
+have a common value on every universal test. (Stacks, Tag 01ZR) -/
 theorem finitePresentation_local_map_pair_eventually_defect_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})
@@ -90,8 +88,7 @@ theorem finitePresentation_local_map_pair_eventually_defect_zero
 set_option linter.unusedVariables false in
 /-- One pair of recovered local maps satisfies the overlap equation at every
 sufficiently late stage.
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-fp-local-map-pair-eventually). -/
+(Stacks, Tag 01ZR) -/
 theorem finitePresentation_local_map_pair_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionStalkSquare
 
 /-! # Open restriction of the tensor-pullback adjunction unit
 
-Source: Stacks Project, Tags 0096 and 0098.
-(blueprint: lem-pc-open-tensor-restriction-square-stalk-unit).
+## References
+
+* [Stacks, Tags 0096 and 0098]
 -/
 
 @[expose] public section
@@ -156,34 +157,7 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
 
 end
 
-/-- The underived open tensor square preserves the adjunction unit on stalks.
-
-Proof: expand openTensorRestrictionSquareIso into its four factors. The first
-factor converts restriction to tensor pullback along the open projection. The
-identity unit_leftAdjointUniq_hom_app identifies the unit of this comparison
-with the ordinary restriction unit, whose section formula is restriction.
-The next two factors compare successive tensor pullbacks with pullback along
-the composite morphism. Apply unit_conjugateEquiv_symm to each composition
-mate. The composite units agree after the pushforward composition comparisons,
-because pullback.condition identifies the two morphisms to X. The last factor
-converts tensor pullback along U.ι back to restriction. Its leftAdjointUniq
-unit identity turns the input section into its restriction to U. Naturality
-of the unit for pullback.snd moves this last comparison through that unit.
-Thus the four factors carry the restricted unit section for k to the unit
-section for pullback.snd applied to the restricted input section.
-Apply the additive stalk functor and stalkPushforward to this section equation.
-The formulas stalkFunctor_map_germ_apply and stalkPushforward_germ_apply turn
-these maps into germs of the respective unit sections. The inverse restriction
-stalk germ formula identifies each inverse restriction with the germ of the
-restricted section, and stalkCongr transports the original input point using
-pullback.condition. Every input stalk element is a section germ, so equality
-on these representatives gives equality of the additive maps below.
-This statement uses no base-change square, tensor coordinates, complexes or
-homology. Empty opens have no z0; identity opens and zero modules satisfy the
-same unit and germ equations.
-Source: Stacks Project, Tag 0096 (lemma-adjoint-pullback-pushforward-modules),
-Tag 0098 (lemma-stalk-pullback-modules); Mathlib adjunction mate unit identities.
-(blueprint: lem-pc-open-tensor-restriction-square-stalk-unit). -/
+/-- The underived open tensor square preserves the adjunction unit on stalks. -/
 theorem openTensorRestrictionSquare_stalk_unit
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) (z0 : (pullback k U.ι : Scheme.{u})) :

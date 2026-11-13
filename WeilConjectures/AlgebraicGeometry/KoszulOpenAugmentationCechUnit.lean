@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.KoszulOpenSectionsUnit
 
 /-! # The ordinary augmented Koszul cycle is the Cech unit
 
-Source: Stacks Project, Tag 08D1, the signed fraction formula.
-(blueprint: lem-sc-koszul-open-augmentation-cech-unit).
+## References
+
+* Stacks Project, Tags 08D0 and 08D1.
 -/
 
 @[expose] public section
@@ -62,24 +63,7 @@ private theorem contraction (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The singleton comparison value of the augmentation cochain is restriction of one.
-Source: Stacks Project, Tag 08D1, signed fraction formula; Tag 08D0, singleton formula.
-(blueprint: lem-sc-koszul-open-augmentation-cech-unit).
-
-Proof: Transpose the tilde augmentation using the tilde/sections adjunction unit.
-Its value on the singleton wedge e_j is f_j times the top-open image of one:
-the Koszul contraction evaluates the defining linear form on e_j and the
-exterior-degree-zero equivalence identifies its value with f_j. Rewrite the
-stage-zero colimit injection followed by the comparison using colimit.ι_desc.
-Apply the defining fraction equation of koszulCechCocone_exists. On a singleton
-its denominator is f_j and its sign is positive. Restriction commutes with the
-tilde unit, so the numerator is f_j times the restricted unit. Cancel f_j, which
-acts invertibly on sections over D(f_j). The representative of one is
-obtained by the inverse single-term X iso and the inverse extension X iso,
-followed by the termwise tilde unit. There is no j when r=0. If f_j=0 its
-principal open has zero sections; cancellation still holds, also for the
-zero ring.
-This calculation concerns only degree-zero cochains, before applying cycles or homology. -/
+/-- The singleton comparison value of the augmentation cochain is restriction of one. -/
 private theorem koszulOpen_augmentation_cech_value
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (j : Fin r) :
     let C := openStructureSheafComplex A
@@ -194,29 +178,7 @@ private theorem koszulOpen_augmentation_cech_value
   exact hinj hf
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The augmentation cycle and restriction of one have the same ordinary Cech class.
-Source: Stacks Project, Tag 08D1, proof, the isomorphisms psi^{p,q} and the sign
-(-1)^(pq+p(p-1)/2); Tag 08D0, singleton fraction formula.
-(blueprint: lem-sc-koszul-open-augmentation-cech-unit).
-
-Proof: Transpose the exponent-one augmentation through the tilde/sections
-adjunction. On each singleton wedge e_j it gives f_j times the global unit.
-The structure complex is zero outside degree zero. Consequently its degree-zero
-Cech component can be nonzero only on singletons, where p=q=0 and the totalization
-sign is +1. By the defining koszulCechCocone fraction equation, its value there
-multiplied by f_j equals restriction of f_j. Multiplication by f_j is invertible
-on D(f_j), so its value is restriction of one. For larger subsets the target
-coefficient degree 1-card(J) is nonzero, and its sections module is zero. Thus
-this cycle equals the Cech augmentation of the ordinary sections cycle of one.
-The ordinary class openStructureUnitClass is represented by that same cycle:
-extendHomologyIso and singleObjHomologySelfIso send 1 to its degree-zero unit,
-and the termwise tilde.toOpen map restricts it to the chosen open. The naturality
-of the short-complex cycles iso and homology projection sends these equal cycles
-to the equality below. For r=0 the target Cech complex is zero; zero f_j and the
-zero ring cause zero localization modules, so cancellation remains valid.
-This is entirely a calculation of ordinary complex homology: no localization
-of categories, derived functor, evaluation equivalence or inverse augmentation
-is asserted. -/
+/-- The augmentation cycle and restriction of one have the same ordinary Cech class. -/
 theorem koszulOpen_augmentation_cech_unit
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     let C := openStructureSheafComplex A

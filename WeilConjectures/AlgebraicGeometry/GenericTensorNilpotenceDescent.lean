@@ -23,22 +23,7 @@ universe u v w z
 
 open scoped TensorProduct
 
-/-- Inverting an annihilator descends generic nilpotence.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, proof steps 4--9;
-localization descent in `lem-weil-pbc-generic-product-kernel-bound`.
-(blueprint: lem-weil-pbc-generic-tensor-nilpotence-descent)
-
-Proof: B tensor_A R is the localization of B tensor_A R0 at the powers of
-1 tensor s. Hence each x has the form y/(1 tensor s)^n. If its generic image
-is nilpotent, the generic image of y is nilpotent, since the denominator is
-invertible in F. The hypothesis gives that (1 tensor t) times y is nilpotent.
-Since t divides s, the image of t is a unit in R, and so is 1 tensor its image
-in the tensor algebra. It follows that the image of y, and then x, is nilpotent.
-If s is zero, a localization is the zero ring and the conclusion is immediate;
-with the asserted fraction-field structure this case has no instances. No
-nontriviality of B, nor any generic splitting, is used in this argument. -/
+/-- Inverting an annihilator descends generic nilpotence. -/
 theorem generic_tensor_nilpotence_of_annihilator
     (A : Type u) [CommRing A]
     (B : Type v) [CommRing B] [Algebra A B]

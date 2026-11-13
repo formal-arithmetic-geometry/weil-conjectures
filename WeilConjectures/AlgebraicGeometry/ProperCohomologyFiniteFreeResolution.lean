@@ -28,18 +28,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An affine quasi-coherent complex with pseudo-coherent global sections admits an
-actual finite-free resolution at its termwise upper bound.
-Source: Stacks Project, Tag 064U, final assertion; Tags 01IB and 01HV.
-Proof: Evaluation sends the zero terms above d to zero modules. Its resulting complex
-therefore has zero cohomology above d. Apply the pseudo-coherent finite-free model theorem
-at that bound. Every free term is projective, so the bounded-above model is K-projective.
-Surjectivity of Qh on morphisms out of it lifts the derived isomorphism to a homotopy
-class. Fullness of the homotopy quotient gives a chain map f. Naturality of the comparison
-between Q and quotient followed by Qh shows Q(f) is the original derived isomorphism;
-hence f is a quasi-isomorphism. Apply affine sheafification to P and f. This last step
-uses exact tilde, the quasi-coherent counit and preservation of finite free modules.
-No exactness of global sections is needed to establish the termwise upper bound.
-(blueprint: lem-pc-proper-cohomology-finite-free-resolution). -/
+actual finite-free resolution at its termwise upper bound
+(Stacks, Tags 064U, 01IB and 01HV). -/
 theorem exists_proper_cohomology_finite_free_resolution {T : Scheme.{u}}
     (U : T.Opens) [IsAffine U.toScheme]
     (C : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)

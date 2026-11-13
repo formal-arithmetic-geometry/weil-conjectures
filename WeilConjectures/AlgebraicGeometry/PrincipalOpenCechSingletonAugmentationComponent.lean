@@ -8,10 +8,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 
-/-! # The singleton component of subset insertion
+/-!
+# The singleton component of subset insertion
 
-Source: Stacks Project, Tags 08C1 and 01FM.
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation-component).
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 01FM, <https://stacks.math.columbia.edu/tag/01FM>
 -/
 
 @[expose] public section
@@ -95,19 +98,8 @@ private theorem insertOne_reindex
   rfl
 
 open Classical in
-/-- A singleton restriction inserts exactly its degree-zero tuple coordinate.
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation-component).
-
-Proof: Write S={i} using card S=1. Its increasing enumeration is the one-tuple
-with value i. Its principal open is D(f_i), and its intersection in V is the
-inverse image of D(f_i). Expand principalSubsetSectionTransport and
-principalOpenSectionTransport. Naturality of the inverse overFunctorEquiv and
-of restrictAppIso with respect to this open inclusion identifies the transported
-restriction with the i-th coordinate of alternatingCechZero. The degree equality
-identifies J^n with the coefficient in insertOne; proof irrelevance identifies
-all equality transports. Since card S-1=0, the extendXIso and total inclusion
-in insertOne are precisely those displayed on the right. -/
+/-- A singleton restriction inserts exactly its degree-zero tuple coordinate
+(Stacks, Tags 08C1 and 01FM). -/
 theorem principalSubsetInsertOne_singleton_augmentation
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ)

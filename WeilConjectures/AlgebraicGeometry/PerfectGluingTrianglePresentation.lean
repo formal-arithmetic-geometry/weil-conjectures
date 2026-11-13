@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # Localized Mayer--Vietoris presentation of perfect objects
 
-Source: Stacks Project, Tag 08BV
-(blueprint: lem-perfect-gluing-triangle-presentation).
+## References
+
+* Stacks Project, Tag 08BV.
 -/
 
 @[expose] public section
@@ -74,30 +75,8 @@ private theorem compare (W : Y.Opens)
     Functor.isoWhiskerRight comp.symm (schemeDerivedDirectImage W.ι)⟩
 
 
-/-- Every perfect object has a triangle with the stated middle and overlap terms.
-The endpoint families live in the ambient derived category; direct image need not
-preserve quasi-coherence for this statement.
-Source: Stacks Project, Tag 08BV (blueprint: lem-perfect-gluing-triangle-presentation).
-
-Proof: Represent E by its functorial K-injective resolution with injective terms.
-Restriction to the localized site of each open is restriction of sheaves to that
-open, under Modules.overEquiv. These restrictions remain K-injective, since
-extension by zero is an exact left adjoint to restriction. The chosen right
-adjoint of overFunctor is isomorphic to direct image from the open subscheme,
-by uniqueness of right adjoints, so perfectGluingLocalTerm computes the derived
-direct images of these restricted resolutions. For each injective term I and
-open W, the sheaf gluing axiom and surjectivity of restriction of an injective
-sheaf give the exact sequence
-0 → I(W) → I(W ∩ A) ⊕ I(W ∩ B) → I(W ∩ A ∩ B) → 0,
-whose maps are the pair of restrictions and their difference. Hence there is
-a short exact sequence of complexes from the global resolution to the two
-localized direct images and then the overlap direct image. Apply the derived
-short-exact-sequence triangle and transport its terms along the K-injective
-computation isomorphisms and the resolution isomorphism to E. Its middle and
-third terms belong to the endpoint properties with witness E and hE; its first
-term is isomorphic to E. All constructions work for empty or repeated opens.
-This is precisely the direct-image triangle of Tag 08BV, on localized sites;
-no quasi-coherence of its direct-image terms and no compactness is used. -/
+/-- Every perfect object has a triangle with the stated middle and overlap terms
+(Stacks, Tag 08BV). The endpoint families live in the ambient derived category. -/
 theorem perfectGluing_triangle_presentation (Y : Scheme.{u}) (A B : Y.Opens)
     (hcover : A ⊔ B = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -61,18 +61,9 @@ private theorem tensorResolution_restriction_tensor_square_id_right
   simpa only [tensorResolutionRestrictionTensorMap, Category.assoc] using
     tensorResolution_restrictedTensor_square j r (𝟙 F) r' (𝟙 F') e m f f hrr (by simp)
 
-/-- The common K-flat zigzag respects three compatible restriction squares.
-
-Source: Stacks Tags 06YT and 08DX(2), functoriality of comparison through a common
-K-flat resolution. Tensor each of the three squares with the appropriate identity
-map to obtain the four squares of the comparison zigzag. K-flatness makes the
-first and third legs quasi-isomorphisms on both charts. The exact-restriction
-homology comparison carries the four squares to homology; cancel the two pairs
-of backward isomorphisms using tensorResolution_homology_zigzag. Finally use the
-explicit defining equation of tensorResolutionComparison to identify the result.
-No boundedness or invertibility of the five vertical chain maps is required.
-
-(blueprint: new-h4-qcoh-tensor-comparison-restriction-naturality) -/
+/-- The common K-flat zigzag respects three compatible restriction squares
+(Stacks, Tags 06YT and 08DX). No boundedness or invertibility of the five vertical chain maps
+is required. -/
 theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j]
     (E K M F N : CochainComplex Y.Modules ℤ)

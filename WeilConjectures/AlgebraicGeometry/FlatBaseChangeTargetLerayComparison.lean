@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison
 
 /-! # Target Leray comparison normalized against a natural source comparison
 
-Source: Stacks Project, Tags 01XK, 01E4, 03FD and the affine dictionary in 02KH.
-(blueprint: new-flat-base-change-target-leray-comparison)
+## References
+
+* Stacks Project, Tags 01XK, 01E4, 03FD and 02KH
 -/
 
 @[expose] public section
@@ -35,39 +36,8 @@ set_option maxHeartbeats 800000 in
 -- The section and Ext models require explicit derived-cohomology conversions.
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
-or assume a source tensor comparison, nor assert invertibility of base change.
-
-Source: Stacks Project, Tags 03FD, 01XK, 01E4 and 02KH, first paragraph of the proof.
-(blueprint: new-flat-base-change-target-leray-comparison)
-
-Proof: For every module on U = f inverse V, compare module derived sections and abelian
-Ext cohomology using the section complex of a module injective resolution. Forgotten
-injectives are section-acyclic by 03FD. The free abelian Yoneda object at the top open
-and the constant integer sheaf are identified by evaluation at 1. Choose these same
-comparisons for all modules. An augmented resolution lift of any module morphism
-computes both induced maps, so the resulting family E is natural in the module.
-Compose its component at F restricted to U with restrictFunctorIsoPullback to obtain e0.
-
-The affine chart square identifies U times Spec B over Spec A with f prime inverse W.
-The pullback composition isomorphisms identify its coefficient module with g prime
-pullback F restricted there, and intertwine the adjunction units. The base change f prime
-is qcqs and its coefficient module is quasi-coherent. Its higher images are therefore
-quasi-coherent by 01XJ. Positive cohomology of these on affine W vanishes, so the
-cocycle-normalized Leray edge of 01XK is an isomorphism. Compose the chart identification,
-the same module/Ext comparison on this chart, and this Leray edge to obtain b.
-Naturality for multiplication by sections makes b B-linear.
-
-For compatibility, lift D.psi to an augmented map of module resolutions. The exact
-inverse-image Ext pullback and this lift induce the same map on the common section
-complex: D.unit_square and the composite-adjunction unit equations identify their
-coefficient maps. Any two augmented lifts are homotopic, so their maps on cohomology
-agree. D.source.augmentation and D.target.augmentation fix the identifications with I
-and J; their components equations fix the section restrictions term by term. By 01E4
-the target Leray edge sends a cocycle to its class in the higher-image sheaf. Restricting
-this class from g inverse V to W gives the displayed equality for every source class x.
-This is a comparison of maps, with no flatness or bijectivity of the pullback map used.
-The same section complexes and augmentations handle p = 0, zero coefficients and empty
-opens; no nonempty choice or division by a scalar occurs. -/
+or assume a source tensor comparison, nor assert invertibility of base change
+(Stacks, Tags 03FD, 01XK, 01E4 and 02KH). -/
 theorem exists_flatBaseChange_target_leray_comparison
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f]

@@ -13,8 +13,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # The representative of ordinary open tensor restriction
 
-Source: Stacks Project, Tags 08HY and 08DW.
-(blueprint: lem-pc-open-tensor-restriction-representative).
+## References
+
+* [Stacks, Tags 08HY and 08DW]
 -/
 
 @[expose] public section
@@ -81,21 +82,7 @@ attribute [local irreducible] openPinnedTensorRestrictionIso
 
 -- Compare the homotopy and complex localization factors without unfolding the pinned iso.
 /-- The ordinary tensor restriction map is the localization of the termwise map
-followed by the inverse exact restriction factor.
-
-Proof: expand singleComplexOpenTensorRestrictionMap. At the homotopy quotient
-of P, mapHomotopyCategoryCompIso is the quotient of mapHomologicalComplexCompIso.
-The identity composition comparison has identity components, so the inverse
-pinned homotopy comparison is the quotient of the displayed chain map. Use
-quotientCompQhIso naturality for this chain map. Expand
-mapDerivedCategoryFactorsh_hom_app for the target restriction, then invert that
-identity. Its quotient-comparison factors cancel those of naturality, giving
-Q.map of the termwise map followed by mapDerivedCategoryFactors.inv. No exactness
-of tensor pullback is asserted or used: only open restriction is exact. This
-works for every complex, including the zero complex and top or empty opens.
-Source: Stacks Project, Tags 08HY, 08DW and 015F; homotopy and exact localization
-factorization identities.
-(blueprint: lem-pc-open-tensor-restriction-representative). -/
+followed by the inverse exact restriction factor. -/
 theorem openTensorRestriction_representative
     [d : ∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

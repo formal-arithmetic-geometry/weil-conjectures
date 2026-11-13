@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Homology.TensorKunnethNat
 
 /-! # Uniqueness of normalized external cup on total homology
 
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-homology-unique).
+## References
+
+* Stacks Project, Varieties, Tag 0BED
 -/
 
 @[expose] public section
@@ -22,9 +23,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- Normalize a family of homology maps on the external tensor cycles.
-Source: Stacks, Tag 0BED
-(blueprint: lem-sc-picard-external-cup-homology-unique). -/
+/-- Normalize a family of homology maps on the external tensor cycles. -/
 def IsPicardExternalCupHomology
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules)
@@ -54,17 +53,7 @@ def IsPicardExternalCupHomology
           (picardScalarModelEquiv g G i.val.2
             ((picardScalarModel g G).homologyπ (i.val.2 : ℤ) b)))
 
-/-- Normalization determines the map on all total homology classes.
-Source: Stacks, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-homology-unique).
-
-Proof: Tensor Kunneth expresses natural-degree total homology as the direct sum
-of the tensors of factor homologies. Lift each factor class through its surjective
-homology projection. The Kunneth cycle formula realizes its pure tensor as a total
-cycle. Both normalized maps take that cycle to the same external cup class. The
-scalar-model comparison is injective, so the images agree. Pure tensors span each
-summand and direct-sum inclusions span the direct sum, proving equality. Degree
-zero and zero factors are covered by the same argument. -/
+/-- Normalization determines the map on all total homology classes. -/
 theorem picardExternalCupHomology_unique
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules)

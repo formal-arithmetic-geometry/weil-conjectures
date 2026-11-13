@@ -21,8 +21,6 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 /--
 The inverse component of the canonical specified proper compositor is the inverse
 component of the ordinary compact-support compositor.
-Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node)
 -/
 theorem properRouteCompIso_inv_app_eq_canonical {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f]
@@ -78,8 +76,6 @@ private meta def compositorCongr :
 The raw proper forget-supports compositor remains valid when the properness
 instance for the composite is made explicit. This is the raw calculation used
 by the canonical-composite transport.
-Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node)
 -/
 theorem properShriekComp_comp_forgetSupports_raw_with_comp {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f]

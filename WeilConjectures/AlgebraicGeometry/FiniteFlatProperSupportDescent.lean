@@ -19,9 +19,10 @@ import WeilConjectures.AlgebraicGeometry.ChosenComplexFlatProperRefinement
 /-!
 # Descent of bounded flat complexes with proper support
 
-Source: Stacks Project, Limits of Schemes, Tags 01ZR, 05LY and 081G;
-Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS)
-(blueprint: lem-pc-finite-flat-proper-support-descent).
+## References
+
+Stacks Project, Limits of Schemes, Tags 01ZR, 05LY and 081G;
+Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS).
 -/
 
 @[expose] public section
@@ -56,28 +57,7 @@ private theorem supportProper_of_iso {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- A bounded complex of finitely presented modules flat over the limit base and with
 termwise proper support descends with all these properties to a later stage.
-Source: Stacks Project, Tags 01ZR, 05LY, 081G and 0CYS
-(blueprint: lem-pc-finite-flat-proper-support-descent).
-
-The ring diagram gives the affine inverse system contravariantly. Its limit is the cone
-point `c.pt`, with `IsAffine c.pt` expressing `S = Spec R` without fixing coordinates.
-Affine stages are quasi-compact and quasi-separated; their transition maps are affine.
-Finite presentation of `f` comprises local finite presentation, quasi-compactness and
-quasi-separatedness. Finite presentation of each module implies quasi-coherence.
-The family of isomorphisms in the conclusion commutes with every differential, hence
-is an isomorphism of complexes after tensor base change (`def-pc-base-change`).
-
-Proof:
-1. Apply `lem-pc-fp-complex-descent` (Tag 01ZR) to descend the bounded finitely
-   presented complex, keeping its differentials and a termwise base-change isomorphism.
-2. Transport limit flatness and proper support across these isomorphisms. Flatness
-   follows by restriction of scalars of the sectionwise linear equivalences; support
-   follows because the stalkwise additive equivalences preserve being zero.
-3. Apply `lem-pc-chosen-complex-flat-proper-refinement` to this chosen finite-stage
-   complex. It enlarges the stage until every term is flat and has proper support,
-   preserving the limit pullback of the chosen complex and all its differentials.
-4. Compose the refinement isomorphisms with the descent isomorphisms. Associativity
-   and the two differential compatibility equations prove the final compatibility. -/
+(Stacks, Tags 01ZR, 05LY, 081G and 0CYS.) -/
 theorem finite_flat_proper_support_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

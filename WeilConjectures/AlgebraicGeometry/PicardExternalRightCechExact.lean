@@ -13,8 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Exactness of the fixed right-coefficient Cech sequences
 
-Source: Stacks Project, Varieties, Tag 0BED, short exact sequence paragraph.
-(blueprint: lem-sc-picard-external-right-cech-exact).
+## References
+
+* Stacks Project, Varieties, Tag 0BED
 -/
 
 @[expose] public section
@@ -24,26 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The two explicitly constructed Cech sequences are short exact.
-No cover condition or cohomology comparison is needed.
-Source: Stacks Project, Varieties, Tag 0BED, short exact sequence paragraph;
-Modules, Tags 01CD and 01CE; Cohomology, Tag 01XD.
-(blueprint: lem-sc-picard-external-right-cech-exact).
-
-Proof: Affine diagonal makes every nonempty finite intersection of U and V affine.
-On an affine the sections of the quasi-coherent sequence S are short exact,
-by affine acyclicity of its first term and left exactness of sections. Restriction
-of scalars to k preserves exactness. The finitely many tuple sections in each
-Cech degree therefore form a short exact sequence of vector spaces. Tensor with
-any term of the Cech complex of F is exact over the field k. The finitely many
-summands in each total degree give short exactness of the tensor total.
-The product intersection is the fibre product of the corresponding affine factor
-intersections. Affine pullback and tensor sections identify its external
-coefficient sections with the tensor over k of the factor sections, naturally in
-S. Hence the product-cover Cech sequence is also termwise short exact, without
-requiring F to be flat as an O-module. Extension by zero preserves termwise short
-exactness: negative terms are all zero. Degreewise short exactness is short
-exactness in the category of complexes. Empty families and zero coefficients
-produce zero terms and satisfy the same argument. -/
+No cover condition or cohomology comparison is needed (Stacks, Tag 0BED). -/
 theorem picardExternal_right_cech_exact
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

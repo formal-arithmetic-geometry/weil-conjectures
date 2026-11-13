@@ -14,10 +14,12 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQu
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
-/-! # surjective on cohomology for the principal-open Čech augmentation
+/-!
+# Surjectivity on cohomology for the principal-open Čech augmentation
 
-Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
-(blueprint: lem-sc-principal-open-cech-homology-surjective).
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -30,24 +32,7 @@ namespace AlgebraicGeometry
 
 /-- The principal-open section-to-total augmentation is surjective on cohomology.
 The source and target are specified by degree isomorphisms and the actual differential
-and augmentation formulas; no choice of unspecified Čech data occurs.
-
-Source: Stacks Project, Cohomology, Tag 08C1 (lemma-alternating-cech-complex-complex).
-(blueprint: lem-sc-principal-open-cech-homology-surjective).
-
-Proof: Restrict J to the open union V. Open restriction preserves K-injectivity,
-and the equivalence from modules on the over-site to modules on the open scheme
-preserves it as well. The pulled-back principal opens cover V. The existing
-K-injective alternating Čech augmentation theorem therefore applies on V.
-The subset comparison identifies the displayed alpha, after forgetting its A-action,
-with that augmentation after forgetting its O(V)-action. The comparison is an arrow
-isomorphism: its source identifies sections over V, and its target groups subset
-coordinates by cardinality and uses their unique increasing enumerations.
-Forgetting module scalar actions preserves and reflects quasi-isomorphisms.
-Transport the quasi-isomorphism through the arrow isomorphism and reflect it back
-to A-modules. Its homology maps are isomorphisms, hence epimorphisms.
-No boundedness, quasi-coherence, or termwise injectivity is imposed on J.
-For the empty family, V is empty; the same open-cover theorem and comparison apply. -/
+and augmentation formulas; no choice of unspecified Čech data occurs (Stacks, Tag 08C1). -/
 theorem principalOpenCech_homology_surjective
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

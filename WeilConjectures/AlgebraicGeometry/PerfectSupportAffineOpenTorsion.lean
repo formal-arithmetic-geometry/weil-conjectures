@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerT
 
 /-! # Power torsion on an affine open
 
-Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-perfect-support-affine-open-torsion).
+## References
+
+* Stacks Project, Tag 08EJ.
 -/
 
 @[expose] public section
@@ -28,23 +29,7 @@ set_option maxHeartbeats 400000 in
 -- Comparing the sheaf-ring coercions in the derived module models needs extra heartbeats.
 /-- Every local morphism from a restricted perfect source into a shift of a restricted
 supported target is killed by a power of the global function on an affine open.
-Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-perfect-support-affine-open-torsion).
-
-Proof: Compare localized-site restriction with restriction to the open subscheme U.
-Perfectness and quasi-coherence restrict, and the stalk comparison restricts the support
-condition. Identify the affine U with Spec of its section ring and use the affine derived
-equivalence and bounded finite-projective model. Induct on the number of nonzero terms
-of the model, simultaneously for all shifts of the target. The stupid-truncation triangle
-at the highest term gives an exact Hom sequence. Kill the image in its single-term Hom
-by a power f^a; exactness lifts the resulting map from the shorter model. Induction kills
-that lift by f^b, so f^(a+b) kills the original map. For a single projective term in degree
-zero, Hom in the derived category is Hom into H^0 of the shifted target. This module
-localizes to zero at f by the support hypothesis, so each element is killed by a power
-of f. Finitely many generators of the source give one exponent for their images.
-Transport back along the exact equivalences. Their compatibility with multiplication
-identifies this action with precomposition by the restriction of f^n times identity.
-The zero complex and the empty affine open give zero Hom groups. -/
+(Stacks, Tag 08EJ) -/
 theorem perfect_support_affine_open_torsion
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

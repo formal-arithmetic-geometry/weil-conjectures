@@ -15,8 +15,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Finite Tor dimension over the inverse-image structure sheaf
 
-Source: Stacks Project, Tags 08CG and 08EV, hypothesis (3)
-(blueprint: def-pc-finite-tor-dimension-over).
+## References
+
+* [Stacks Project, Tag 08CG](https://stacks.math.columbia.edu/tag/08CG)
+* [Stacks Project, Tag 08EV](https://stacks.math.columbia.edu/tag/08EV)
 -/
 
 @[expose] public section
@@ -27,15 +29,10 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Finite Tor dimension of `E` after forgetting scalars from `𝒪_X` to `f⁻¹𝒪_S`.
-Choose a complex `K` representing `E`, restrict its scalars along the structure map
-`f⁻¹𝒪_S → 𝒪_X` (`Modules.tensorPullbackRingMap f`), and choose a K-flat resolution
-`q : P ⟶ K|_{f⁻¹𝒪_S}` (a quasi-isomorphism from a K-flat complex of `f⁻¹𝒪_S`-modules).
-One finite interval `[a, b]` bounds the cohomology of the total tensor `P ⊗ F[0]` over
-`f⁻¹𝒪_S` for every `f⁻¹𝒪_S`-module sheaf `F`; this complex computes
-`E ⊗^L_{f⁻¹𝒪_S} F` (Tags 06YS, 06YU), so the choices of `K` and `P` do not matter.
-Source: Stacks Project, Definition 20.48.1 (08CG), applied to `(X,f⁻¹𝒪_S)` as in
-Lemma 36.27.1 (08EV), hypothesis (3) (blueprint: def-pc-finite-tor-dimension-over). -/
+/-- Finite Tor dimension of `E` after forgetting scalars from `𝒪_X` to `f⁻¹𝒪_S`:
+one finite interval bounds the cohomology of `E ⊗^L_{f⁻¹𝒪_S} F` for every
+`f⁻¹𝒪_S`-module sheaf `F`, computed via a K-flat resolution of the restriction of scalars of
+a representative of `E`. (Stacks, Tags 08CG, 08EV.) -/
 def HasFiniteTorDimensionOver {X S : Scheme.{u₀}} (f : X ⟶ S)
     [HasDerivedCategory.{w₀} (SheafOfModules.{u₀} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) : Prop :=

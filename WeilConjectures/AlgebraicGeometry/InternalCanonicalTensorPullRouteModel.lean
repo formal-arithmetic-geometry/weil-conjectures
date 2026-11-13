@@ -11,8 +11,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 
 /-! # The canonical tensor route in the common tensor model
 
-Source: Stacks 06YY, 0G7E; integral proper-base-change proof (1), (3).
-(auxiliary; not a blueprint node). -/
+## References
+
+* Stacks, Tags 06YY and 0G7E.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,25 +33,8 @@ set_option allowUnsafeReducibility true
 attribute [local reducible] L CondensedRing.moduleObjectDerivedPullback
 attribute [local irreducible] scalarTensorRegularPullIso
 
-/-- The fixed canonical tensor presentation computes the ordinary tensorator model.
-
-Source: Stacks 06YY, 0G7E; integral proper-base-change proof (1), (3),
-step 2 of the original tensor-pull normalization argument.
-(auxiliary; not a blueprint node).
-
-Proof. Expand the model target and cancel tensoring the coefficient pullback
-isomorphism against its inverse. Unfold the canonical normalization to identify
-its derived presentation with `derivedTensorPresentationIso` for the restricted
-scalar computation counit. Use the native ordinary pullback monoidal structure;
-`nativeUpperStar_braiding` verifies its braiding equation directly on balanced
-tensor coequalizers. Give its derived pullback the canonical derived monoidal
-structure. The native geometric tensor comparison is its oplax tensorator by
-`leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison`, and
-`residueDerivedMonoidal_counit` supplies the tensor/counit equation. Apply
-`Functor.tensorModelRoute_fac` to these equations and the scalar presentation.
-After unfolding the model maps its conclusion is the required identity. No
-localization tensor comparison is cancelled and no flatness of the coefficient
-or complex is assumed. -/
+/-- The fixed canonical tensor presentation computes the ordinary tensorator model
+(Stacks, Tags 06YY and 0G7E). -/
 theorem canonical_tensor_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :

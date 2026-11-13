@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
 /-! # Ordered coordinates of a usual module Čech presentation
 
-Source: Stacks Project, Tags 01FJ and 01FK.
+## References
+
+* [Stacks, Tags 01FJ and 01FK]
 -/
 
 @[expose] public section
@@ -21,9 +23,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical map from an ordered intersection to the chosen categorical product.
-Source: Stacks 01FJ, identification of products of opens with intersections.
-(blueprint: def-pc-ordered-cech-module-coordinates). -/
+/-- The canonical map from an ordered intersection to the chosen categorical product
+(Stacks, Tag 01FJ). -/
 noncomputable def orderedCechTupleOpenMap {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens)
     (t : Fin (p + 1) ↪o Fin r) :
@@ -32,10 +33,7 @@ noncomputable def orderedCechTupleOpenMap {X : Scheme.{u}} {r p : ℕ}
   prod.lift (Pi.lift fun l ↦ homOfLE (inf_le_left.trans
     (iInf_le (fun k ↦ W ⟨t k⟩) l))) (homOfLE inf_le_right)
 
-/-- The coordinate transport is an isomorphism, including for empty intersections.
-Source: Stacks 01FJ, products in the poset of opens are intersections.
-(blueprint: def-pc-ordered-cech-module-coordinates).
-Proof: The projections of the product give the reverse containment. -/
+/-- The coordinate transport is an isomorphism, including for empty intersections. -/
 theorem orderedCechTupleOpenMap_isIso {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens)
     (t : Fin (p + 1) ↪o Fin r) : IsIso (orderedCechTupleOpenMap W B t) := by
@@ -46,10 +44,8 @@ theorem orderedCechTupleOpenMap_isIso {X : Scheme.{u}} {r p : ℕ}
   · exact (prod.snd : (∏ᶜ fun l ↦ W ⟨t l⟩) ⨯ B ⟶ B).le
 
 
-/-- Evaluate a usual Čech presentation on an increasing tuple after pushforward.
-All transports are actual maps, including the extension isomorphism in degree p.
-Source: Stacks 01FJ and 01FK, restriction to ordered tuples.
-(blueprint: def-pc-ordered-cech-module-coordinates). -/
+/-- Evaluate a usual Čech presentation on an increasing tuple after pushforward
+(Stacks, Tags 01FJ and 01FK). -/
 noncomputable def orderedCechModuleCoordinate {X T : Scheme.{u}} (f : X ⟶ T)
     (M : X.Modules) {r : ℕ} (W : ULift.{u} (Fin r) → X.Opens)
     (D : CochainComplex X.Modules ℕ)
@@ -82,10 +78,7 @@ variable {X T : Scheme.{u}} (f : X ⟶ T)
           (Functor.whiskeringRight _ _ _).obj M.presheafModuleCat)).X p)
 
 
-/-- Ordered coordinates are additive.
-Source: Stacks 01FK, restriction to ordered tuples.
-(blueprint: def-pc-ordered-cech-module-coordinates).
-Proof: Every factor in the defining composite is additive. -/
+/-- Ordered coordinates are additive. -/
 theorem orderedCechModuleCoordinate_add (p : ℕ) (B : T.Opens)
     (t : Fin (p + 1) ↪o Fin r)
     (s s' : Γ(((((Modules.pushforward f).mapHomologicalComplex _).obj D).extend
@@ -95,20 +88,13 @@ theorem orderedCechModuleCoordinate_add (p : ℕ) (B : T.Opens)
         orderedCechModuleCoordinate f M W D e p B t s' := by
   simp only [orderedCechModuleCoordinate, map_add]
 
-/-- Ordered coordinates send zero to zero.
-Source: Stacks 01FK, restriction to ordered tuples.
-(blueprint: def-pc-ordered-cech-module-coordinates).
-Proof: Every factor in the defining composite preserves zero. -/
+/-- Ordered coordinates send zero to zero. -/
 theorem orderedCechModuleCoordinate_zero (p : ℕ) (B : T.Opens)
     (t : Fin (p + 1) ↪o Fin r) :
     orderedCechModuleCoordinate f M W D e p B t 0 = 0 := by
   simp only [orderedCechModuleCoordinate, map_zero]
 
-/-- Ordered coordinates preserve the local module action pulled back along f.
-Source: Stacks 01FK, restriction of local scalars.
-(blueprint: def-pc-ordered-cech-module-coordinates).
-Proof: The extension isomorphism is locally linear, hlinear applies to its image,
-and semilinearity of coefficient restriction gives the pulled-back scalar. -/
+/-- Ordered coordinates preserve the local module action pulled back along `f`. -/
 theorem orderedCechModuleCoordinate_smul
     (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X.Opens),
         let c : Γ(D.X p, B) → Γ(M, (∏ᶜ fun l ↦ W (y l)) ⨯ B) :=
@@ -150,11 +136,7 @@ theorem orderedCechModuleCoordinate_smul
   rw [← X.presheaf.map_comp]
   congr 2
 
-/-- Ordered coordinates commute with restriction of the base open.
-Source: Stacks 01FK, naturality of ordered restriction.
-(blueprint: def-pc-ordered-cech-module-coordinates).
-Proof: Apply naturality of the extension isomorphism and of e followed by its
-product projection; the two coefficient restriction arrows agree in the poset. -/
+/-- Ordered coordinates commute with restriction of the base open. -/
 theorem orderedCechModuleCoordinate_naturality (p : ℕ) {B C : T.Opens} (i : B ⟶ C)
     (s : Γ(((((Modules.pushforward f).mapHomologicalComplex _).obj D).extend
       ComplexShape.embeddingUpNat).X (p : ℤ), C))

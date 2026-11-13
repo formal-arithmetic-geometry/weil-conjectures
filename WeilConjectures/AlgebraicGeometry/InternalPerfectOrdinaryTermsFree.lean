@@ -25,15 +25,8 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Every term of the ordinary quotient complex is a finite sum of the regular module.
-No boundedness or weak contractibility is needed for this termwise assertion.
-Source: Stacks Tag 09C6, finite-free scalar reduction.
-(blueprint: lem-pe-internal-perfect-ordinary-terms-free).
-
-Proof: choose a finite basis in the scalar module and lift it to the coefficient universe.
-The constant scalar realization identifies the corresponding finite power with the same
-finite sum of the regular integral module. Ordinary quotient extension preserves this sum
-and takes the regular integral module to the regular finite quotient module. -/
+/-- Every term of the ordinary quotient complex is a finite sum of the regular module
+(Stacks, Tag 09C6). -/
 theorem internalPerfectOrdinaryReduction_terms_free (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (hfree : ∀ i : ℤ, Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X i) ∧

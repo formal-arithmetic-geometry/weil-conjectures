@@ -14,7 +14,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Lifting images of a finite free local source
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`).
+## References
+
+* Stacks Project, Tag 01CP
 -/
 
 @[expose] public section
@@ -29,22 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A stalk-linear map composed with a finite free local-source morphism lifts
 on a smaller neighborhood. No relations or descent to the quotient are asserted.
-
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`),
-third paragraph, finite-coordinate lifting.
-(blueprint: lem-weil-pbc-finite-free-local-stalk-map-lift)
-
-Proof: Evaluate f on the finitely many basis sections at U, take their germs at
-x, and apply χ. Choose actual section representatives of these germs in G.
-Intersect their finitely many neighborhoods with U to obtain V. Restrict each
-representative to a compatible section over V; unitHomEquiv and overMapUnitIso
-turn it into a morphism from the restricted unit sheaf. Define ψ as the sum of
-the restricted coordinate projections followed by these morphisms.
-The proved freeSectionsLinearEquiv decomposes every section into its basis
-coordinates. Naturality computes f on each basis coordinate, and unitHomEquiv
-computes ψ. Additivity, germ_smul, linearity of χ, and germ_res_apply reduce the
-required equality to the chosen representative equations. If I is empty,
-V = U and both sides are empty sums. -/
+(Stacks, Tag 01CP.) -/
 theorem exists_finiteFree_local_stalkMap_lift
     (X : RingedSpace.{u}) (F G : Modules X) (x : X)
     (U : Opens X) (hxU : x ∈ U) (I : Type u) [Finite I]

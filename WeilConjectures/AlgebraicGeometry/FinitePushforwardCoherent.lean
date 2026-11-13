@@ -16,8 +16,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherence of finite direct images
 
-Source: Stacks Project, Cohomology of Schemes, Tags 01Y6 and 01XZ
-(blueprint: lem-weil-pbc-finite-pushforward-coherent).
+## References
+
+* Stacks Project, Cohomology of Schemes, Tags 01Y6 and 01XZ.
 -/
 
 @[expose] public section
@@ -32,9 +33,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Restriction preserves finite type: pull the local generating cover back along
 `Over.forget U`; its local maps preserve colimits and the unit, hence carry each finite
-family of generators to a finite family. Source: Stacks Project, Modules, Tag 01B5,
-the locality of finite type used in the finite-pushforward argument
-(blueprint: lem-weil-pbc-finite-pushforward-coherent). -/
+family of generators to a finite family.
+(Stacks, Tag 01B5) -/
 private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
     [F.IsFiniteType] (U : X.Opens) : (F.over U).IsFiniteType := by
   classical
@@ -72,24 +72,8 @@ private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
   infer_instance
 
 /-- A finite direct image of a coherent module is coherent, with finite sections on every
- affine open. Source: Stacks Project, Tags 01Y6 and 01XZ
-(blueprint: lem-weil-pbc-finite-pushforward-coherent).
-
-Proof:
-1. A finite morphism is locally of finite type. Mathlib's
-   `LocallyOfFiniteType.isLocallyNoetherian` makes Y locally Noetherian.
-2. Apply `isCoherent_iff_isQuasicoherent_and_isFiniteType` on Y to get
-   quasi-coherence and finite type of F. Restrict its finite local generators to
-   each inverse-image affine open using the proved helper `isFiniteType_over`.
-3. The affine finite-type criterion gives finite sections over the coordinate ring
-   of each inverse image. `f.finite_app` makes that ring finite over the base ring.
-   The direct-image sections are definitionally the same abelian group; their scalar
-   action is restriction of scalars. `Module.Finite.trans` gives finite base modules.
-4. The proved source-library theorem `isQuasicoherent_pushforward_of_isAffineHom`
-   gives quasi-coherence of the direct image, without using a base-change theorem.
-5. Apply the affine finite-type criterion on the covering of all affine opens of X,
-   then the coherence criterion on X. Pair this with the definitional sections equality
-   and the finite-section calculation. -/
+ affine open.
+(Stacks, Tag 01Y6, Tag 01XZ) -/
 theorem isCoherent_pushforward_of_isFinite {X Y : Scheme.{u}} (f : Y ⟶ X)
     [IsFinite f] [IsLocallyNoetherian X] (F : Y.Modules)
     (hF : RingedSpace.IsCoherent Y.toRingedSpace F) :
@@ -125,14 +109,8 @@ theorem isCoherent_pushforward_of_isFinite {X Y : Scheme.{u}} (f : Y ⟶ X)
     fun U hU ↦ ⟨rfl, hs U hU⟩⟩
 
 /-- The structure sheaf in the finite-direct-image statement satisfies its coherence
-hypothesis. Source: Stacks Project, Tags 01Y6, 01XZ and 01T6
-(blueprint: lem-weil-pbc-finite-pushforward-coherent).
-
-Proof (the structure-sheaf step of the node): Mathlib's
-`LocallyOfFiniteType.isLocallyNoetherian` makes Y locally Noetherian. The structure
-sheaf is invertible and hence finite locally free; the proved source-library instances
-make it finitely presented, quasi-coherent and finite type. Apply the coherence
-criterion on Y. -/
+hypothesis.
+(Stacks, Tag 01Y6) -/
 theorem isCoherent_unit_of_finite_to_locallyNoetherian {X Y : Scheme.{u}} (f : Y ⟶ X)
     [IsFinite f] [IsLocallyNoetherian X] :
     RingedSpace.IsCoherent Y.toRingedSpace (SheafOfModules.unit Y.ringCatSheaf) := by

@@ -15,8 +15,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 
 /-! # Ordinary scalar extension on a pro-etale slice
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03EL and 03EK;
-Cohomology on Sites, lemma-pullback-tensor-product.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D2, 03EL and 03EK.
+* Stacks Project, Cohomology on Sites, pullback of tensor products.
 -/
 
 @[expose] public noncomputable section
@@ -612,26 +614,9 @@ attribute [local irreducible] globalComparison fixedSliceIso sliceTensorIso loca
   tensorFunctor completedAdicChange change
 
 /-- Ordinary scalar extension commutes with geometric inverse image and slice restriction,
-including the specified constant B-action.
-
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03EL and 03EK;
-Cohomology on Sites, lemma-pullback-tensor-product, the ordinary comparison used in
-Tag 06YY. (auxiliary; not a blueprint node).
-
-Proof: apply inverse image to the tensor presentation of scalar extension. Inverse
-image preserves colimits and finite products, so it preserves the coequalizer imposing
-additivity and R-balancing. Its canonical comparison therefore identifies the result
-with extension of inverse-image modules along inverse image of φ. Transport the target
-ring through the canonical constant-ring comparison. This map sends every original
-constant b to the same constant b, so the identification is B-linear for the fixed
-scalar actions. Slice restriction commutes with this tensor presentation: tensor
-presheaves restrict termwise, and restriction commutes with sheafification. The map
-on pure tensors is b tensor m sent to b tensor the inverse image of m, then restricted
-to the slice. Its inverse is induced by the inverse tensor comparison. The balancing
-relations give well-defined maps, the tensor universal property makes their composites
-identities and proves naturality in the module. This works for B=0 and empty slices.
-Only ordinary modules occur; no resolution, derived object or local isomorphism is
-assumed or concluded. -/
+including the specified constant B-action. Only ordinary modules occur; no resolution,
+derived object or local isomorphism is involved.
+(Stacks, Modules on Sites, Tags 03D2, 03EL and 03EK; Tag 06YY.) -/
 theorem ordinaryComparison :
     Nonempty (completedAdicChange X φ ⋙ sfbFixedScalarRestriction X B ⋙
         (ProEtale.upperStar (ModuleCat.{u + 1} B) i ⋙

@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Restriction of morphisms on a common proper closed support
 
-Source: Stacks Project, Tags 088E and 088F
-(blueprint: lem-weil-pbc-grothendieck-existence-supported-hom).
+## References
+
+* [Stacks Project, Tags 088E, 088F]
 -/
 
 @[expose] public section
@@ -136,21 +137,7 @@ private theorem supported_formalCompletionMap_bijective
 
 /-- Restriction gives a bijection on morphisms for modules annihilated by one proper closed
 subscheme. This is the proper-case reduction, before using the support characterization.
-Source: Stacks, Theorem 088E, first paragraph; Lemmas 087T and 0883,
-with the thickening formulation of Remark 088F.
-(blueprint: lem-weil-pbc-grothendieck-existence-supported-hom).
-
-Proof:
-1. The given closed subscheme Z is proper over A and its ideal kills both modules.
-2. Closed-immersion coherent equivalence lifts F and G to coherent modules on Z and
-identifies their Hom sets. Its formal version identifies the Hom sets of their
-completions, naturally in both modules and compatibly with completion of a morphism.
-3. Completion on Z is fully faithful by the proper completion theorem. Transport this
-bijection through the two Hom identifications to obtain the completion bijection on X.
-4. The thickening-systems dictionary identifies formal morphisms with precisely the
-compatible families below, and sends completed w to its restrictions. Therefore the
-restriction map is bijective. Naturality of c verifies that every restricted w is a
-compatible family; its canonical comparison is the one specified by hc. -/
+(Stacks, Theorem 088E; Lemmas 087T and 0883; Remark 088F) -/
 theorem grothendieckExistence_supported_hom
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

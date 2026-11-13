@@ -7,10 +7,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.PrincipalKoszulDualTerms
 import all WeilConjectures.AlgebraicGeometry.PrincipalKoszulDualDifferential
 
-/-! # Singleton dual transitions and the degree-zero unit
+/-!
+# Singleton dual transitions and the degree-zero unit
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0A0E, <https://stacks.math.columbia.edu/tag/0A0E>
 -/
 
 @[expose] public noncomputable section
@@ -533,26 +535,7 @@ private theorem finiteDualTerm_unit (m : ℕ) :
   exact HomologicalComplex.homotopyCofiber.inrX_sndX_assoc (scalarComplex R a m) 0 _
 
 /-- The explicit rank-one identifications preserve the two supported transition
-components and the degree-zero unit component.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node).
-
-Proof: naturality of the total-tensor right unitor removes the constant unit from
-the positive singleton diagram, including its forward map. The positive map is
-identity in degree zero and multiplication by a in degree one. The Hom product
-projection formula for precomposition reverses these: evaluation at one makes the
-negative degree-minus-one transition multiplication by a and the degree-zero
-transition identity. The principal cone transition has these same two entries by
-the mapping-cone map formula. Conjugate with the term isomorphisms to get the first
-identity in each of its two degrees. For the second identity, the positive projection
-is identity on the degree-zero unit. Its dual sends a scalar r to the functional
-with value r at one. The inverse evaluation map in ringedKoszulDualUnit is precisely
-this map. The cone inclusion is the inclusion of the same degree-zero summand;
-the right-unitor naturality equation and equality of the two unit constraints on
-the unit identify the singleton tensor projection with this map. Thus both composites
-are the inverse of the same projection-and-evaluation isomorphism. These calculations
-hold over the zero ring and empty sites as well as for zero or invertible a. -/
+components and the degree-zero unit component (Stacks, Tag 0A0E). -/
 theorem finiteDualTerm_transition_unit :
     (∀ (m : ℕ) (q : ℤ), q = 0 ∨ q = -1 →
       (principalKoszulTransition R a m).f q ≫ (finiteDualTerm R a m q).hom =

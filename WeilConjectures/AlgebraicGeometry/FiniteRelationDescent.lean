@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapDescent
 /-!
 # Descent of finite relations among module maps
 
-Source: Stacks Project, Limits, Lemma 32.10.2 (Tag 01ZR)
-(blueprint: lem-pc-fp-relation-descent).
+## References
+
+* Stacks Project, Limits, Tag 01ZR.
 -/
 
 @[expose] public section
@@ -52,39 +53,10 @@ private theorem moduleBaseChange_map_eq_comp {X S : Scheme.{u}} (f : X ⟶ S)
   exact congrArg (fun t ↦ e'.hom.app F ≫ (Scheme.Modules.moduleBaseChange f h).map t) hab
 
 /-- Finite relations between descended module maps hold at a later stage.
-Source: Stacks Project, Limits, Tag 01ZR (blueprint: lem-pc-fp-relation-descent).
+(Stacks, Tag 01ZR)
 
 The modules are the given models on `X_j`; the modules on `X` are their canonical
-base changes. Transport through the specified model isomorphisms preserves equality.
-For each relation, `lhs k` and `rhs k` are its two composites on the chosen models.
-Functoriality of tensor pullback identifies their images with the pulled-back composites.
-The finite type `M` indexes the finite collection of modules (`[Finite M]`).
-
-Proof, following the four steps of the node:
-1. Keep the finitely many modules and maps occurring in the composites. The given
-   models already descend them. If identifications must first be aligned, apply
-   part (2) of `lem-pc-fp-module-map-descent` to maps between the fixed models and
-   increase the stage to make all composites maps between those models.
-2. For one equality, subtract the two composites to obtain a map whose pullback
-   to `X` is zero. Tensor pullback is additive and preserves composition.
-   Since `Xi` is quasi-compact, choose a finite affine cover. At any later stage
-   its inverse images are affine and cover; a sheaf map vanishes if it vanishes
-   on these opens.
-3. By `lem-weil-pbc-spec-colimit-limit`, the limit ring is the directed colimit
-   of the stage rings. On each affine of `Xi`, tensoring its coordinate ring
-   with these rings gives the affine coordinate rings of the base changes,
-   and tensor product commutes with colimits. Choose finite generators of the
-   source module and a finite free presentation `P` of the target. Lift the
-   images of the generators to vectors in the target's finite free module.
-   Their vanishing in the limit cokernel means they equal `P` times vectors
-   over the limit ring. Lift all entries of these vectors to a common stage
-   using clause (1) of `lem-pc-filtered-colimit-commrings-elementwise`. The
-   finitely many entries of the resulting differences vanish at a later common
-   stage by clause (2), compared with zero. Hence all generators map to zero,
-   and the difference map vanishes on this affine at that stage.
-4. Directedness gives one stage above the finitely many stages needed for the
-   affines and relations. Vanishing persists under further pullback, and the
-   affine cover then shows that every specified equality holds on `X_j'`. -/
+base changes. The finite type `M` indexes the finite collection of modules (`[Finite M]`). -/
 theorem finiteRelation_module_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

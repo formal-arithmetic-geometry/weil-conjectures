@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 /-! # Coherent descent through open restriction
 
-Source: Stacks Project, Tags 08EU and 08FE.
-(blueprint: lem-pc-open-restriction-adjunction-hom-descent).
+## References
+
+* Stacks Project, Tags 08EU and 08FE.
 -/
 
 @[expose] public section
@@ -63,19 +64,7 @@ private theorem localization_hom
 set_option maxHeartbeats 500000 in
 -- The independent derived-category instances require extra elaboration heartbeats.
 /-- The adjunction descends coherently to the inverse-image open.
-Source: Stacks Project, Tags 08EU (locality) and 08FE (direct-image restriction).
-Proof: both exact derived restriction functors are localizations at the maps they make
-invertible. Choose the pullback and direct-image restriction isomorphisms, allowing
-independent localization universes. At the full inverse-image open, resLE agrees with
-the canonical restricted morphism. The two isomorphisms give CatCommSq instances.
-Mathlib's Adjunction.localization descends the supplied p to an adjunction q between
-the chosen local pullback and direct image. Expand both Hom equivalences as unit
-followed by direct image of the argument. The localization_unit_app formula expresses
-q's unit on a restricted object. Cancel alpha with its inverse under the local direct
-image functor; naturality of beta then gives the displayed identity for every v.
-This argument is independent of tensor products, quasi-coherence, and projection mates.
-Empty opens are covered by the same localization construction.
-(blueprint: lem-pc-open-restriction-adjunction-hom-descent). -/
+(Stacks, Tags 08EU and 08FE) -/
 theorem exists_openRestriction_adjunction_hom_descent
     (p : derivedPullback f ⊣ schemeDerivedDirectImage f) :
     let rX := (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory

@@ -203,17 +203,7 @@ private theorem finite_bounded_triangle
     ((he.boundedConstructible Δ.obj₁).mp h₁) ((he.boundedConstructible Δ.obj₃).mp h₃)
 
 /-- The middle vertex of the native quotient-linear distinguished triangle is bounded
-constructible when both original outer complexes are.
-Source: blueprint latest, integral-finite-levels, first paragraph.
-(blueprint: lem-pe-finite-constructibility-outer-transfer).
-
-Proof: positive native quotients are finite and discrete. Their consecutive transition
-maps commute with pointwise constant sections, so normalized finite scalar restriction
-preserves bounded constructibility. Iterate this assertion for the residue composite,
-using the exact derived restriction-composition isomorphism. Transport across the two
-given outer isomorphisms. Encode the resulting distinguished triangle as ordinary
-constant-ring modules; bounded constructible cohomology is a triangulated property there.
-Its middle-term closure and the inverse coefficient comparison give the conclusion. -/
+constructible when both original outer complexes are. -/
 theorem finite_constructibility_outer_transfer
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

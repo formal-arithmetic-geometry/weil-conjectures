@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.OpenSectionsOrdinaryStructureClass
 
 /-! # The ordinary restricted structure class
 
-Source: Stacks Project, Tags 06Z0 and 079V.
+## References
+
+* [Stacks, Tags 06Z0 and 079V]
 -/
 
 @[expose] public section
@@ -101,27 +103,8 @@ private theorem exact_single_iso
 set_option maxHeartbeats 700000 in
 -- The explicit restriction and homology comparison types exceed the default elaboration budget.
 /-- Before comparing the two derived functors, the restricted structure class is the
-image of the ordinary tilde class of one under the restricted ordinary-to-derived unit.
-Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and Tag 079V, the definition
-of derived global sections on an ordinary complex.
-(blueprint: lem-sc-open-sections-structure-class).
-
-Proof: The extended single complex is identified with the integer single complex by
-extendSingleIso. Its homology identification is extendHomologyIso followed by
-singleObjHomologySelfIso. Apply tilde and then restriction. The derived single-functor
-comparison and sheafOfModulesEquivOverUnit identify this with O_U[0], giving i.
-On ordinary degree-zero sections the latter unit isomorphism takes the restricted
-structure section one to the section one. Under openComparisonSectionsIso this is
-exactly tilde.toOpen of one: the tildeSelf identification, the single-map comparison,
-and extendHomologyIso all take the degree-zero class of one to one, and restriction
-of the structure sheaf takes one to one. Exact scalar forgetting identifies the same
-cycle class through openComparisonOrdinaryIso. Naturality of the ordinary-to-derived
-global-sections unit with the complex isomorphism, and naturality of homologyFunctorFactors,
-transport this ordinary equality to the displayed derived equality. This calculation
-uses neither a comparison equivalence between the two derived section computations nor
-an assertion about Hom sets. If U is empty or A is the zero ring, all classes are zero
-and the same cycle calculation applies.
--/
+image of the ordinary tilde class of one under the restricted ordinary-to-derived unit
+(Stacks, Tags 06Z0 and 079V). -/
 theorem openComparison_structure_class (A : Type u) [CommRing A]
     (U : (Spec (.of A)).Opens)
     [HasDerivedCategory.{w}

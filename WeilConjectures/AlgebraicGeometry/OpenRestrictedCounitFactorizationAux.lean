@@ -168,13 +168,7 @@ attribute [local irreducible] openRestrictionRepresentativeIso openRestrictedCom
   openRestrictedTensorDerivedIso openTensorRestrictionComplexIso openTensorRestrictionSquareIso
   openTensorRestrictionIso counit
 
-/-- Auxiliary counit compatibility equation used to derive the strict factorization.
-Source: Stacks Project, Tags 0D5S and 0D5U.
-(blueprint: new-open-restricted-counit-compatibility-aux).
-The equation follows by evaluating the defining left-derived composition
-factorization and the exact restriction adjunction, then identifying the
-remaining tensor comparisons with `openRestrictedTensorDerivedIso`.
--/
+/-- Auxiliary counit compatibility equation used to derive the strict factorization. -/
 private theorem openRestricted_counit_compatibility_aux_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)

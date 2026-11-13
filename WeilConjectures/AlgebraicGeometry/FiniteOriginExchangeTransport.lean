@@ -11,11 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Finite-origin transport of proper exchange
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proper-base-change/
-`sec-pbc-reduction/sk-lem-pbc-finite/sk-cor-pbc-proet-finite/`
-`thm-weil-pbc-finite-level-proetale.proof.md`,
-the single proof paragraph (blueprint: lem-weil-pbc-finite-origin-exchange-transport).
 -/
 
 @[expose] public section
@@ -30,28 +25,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 
-/--
-Finite discrete coefficients transport an isomorphic étale exchange to the corresponding
+/-- Finite discrete coefficients transport an isomorphic étale exchange to the corresponding
 pro-étale exchange.  The comparison identity is recorded together with invertibility of the
 exchange at `ν_X^* L`, and every retained étale-origin witness of `K` whose antecedent is
-(isomorphic to) the same `L` gives invertibility of the exchange at `K`.
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proper-base-change/
-`sec-pbc-reduction/sk-lem-pbc-finite/sk-cor-pbc-proet-finite/`
-`thm-weil-pbc-finite-level-proetale.proof.md`,
-the single proof paragraph (blueprint: lem-weil-pbc-finite-origin-exchange-transport).
-Proof:
-1. Since `f` is proper it is quasi-compact and quasi-separated (blueprint pqf-lem-proper-basic);
-   `f'` is quasi-compact and quasi-separated by hypothesis.  So the transport lemma
-   `comparison_derivedBaseChangeMap` (blueprint lemma-naturality-pasting-comparison--3)
-   applies to `L` and gives `T_L ∘ ν_{Y'}^*(Ex_L) = Ex^R_{ν_X^* L} ∘ S_L` with the comparison
-   isomorphisms `S_L`, `T_L`; this is the second conjunct.  As `Ex_L` is an isomorphism, so is
-   `ν_{Y'}^*(Ex_L)`, hence `Ex^R_{ν_X^* L} = T_L ∘ ν_{Y'}^*(Ex_L) ∘ S_L⁻¹` is an isomorphism.
-2. For a witness `w` of `K` with `w.complex ≅ L`, the composite `ν_X^* L ≅ ν_X^* w.complex ≅ K`
-   identifies source and target of the exchange at `ν_X^* L` with those at `K`; naturality of
-   the exchange transformation shows that the exchange at `K` is the conjugate, hence an
-   isomorphism.  The conclusion does not mention the witness, so it is unchanged when the
-   witness is replaced by an isomorphic one.
--/
+(isomorphic to) the same `L` gives invertibility of the exchange at `K`. -/
 theorem finiteOriginExchangeTransport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

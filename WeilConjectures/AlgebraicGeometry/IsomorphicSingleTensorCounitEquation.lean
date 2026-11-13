@@ -11,8 +11,11 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitTransport
 import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 /-! # Counit equation for canonical transport
-Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-(blueprint: lem-pc-isomorphic-single-tensor-counit-equation). -/
+
+## References
+
+* Stacks Project, Tags 08HY, 0096 and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -264,20 +267,7 @@ private theorem single_tensor_transport_equation
           ((tensorCompositionComparison e.hom p).hom.app M)) (t.app M) (ht M)
 
 
-/-- The canonical transported isomorphism satisfies the counit equation.
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-isomorphic-single-tensor-counit-equation).
-Proof: transpose the composition-pinned counit through the adjunction of the
-isomorphism. Use the inverse-component formula in the transport theorem:
-it is the unit at (p^*M)[0] followed by direct image of the single tensor
-counit for e and the underived tensor composition comparison. Naturality
-of this unit moves the counit for p across it. The defining left-derived
-composition factorization then identifies the direct-image term with
-c(e,p) followed by the counit for e p. Thus the first two factors in the
-displayed equation equal the counit for p followed by t.inv.app M.
-Compose with t.hom.app M and cancel by the inverse identity. This argument
-uses the pinned comparisons and includes zero modules and empty schemes;
-it would not apply to an arbitrary natural isomorphism. -/
+/-- The canonical transported isomorphism satisfies the counit equation. -/
 theorem isomorphic_single_tensor_counit_transport_equation
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]

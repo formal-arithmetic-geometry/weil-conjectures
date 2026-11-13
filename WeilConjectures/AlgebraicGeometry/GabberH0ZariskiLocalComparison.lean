@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Local transport through the composition comparison
 
-Source: Stacks Project, Tag 09ZF, third and fourth proof paragraphs.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-local-comparison).
+## References
+
+* [Stacks, Tag 09ZF]
 -/
 
 @[expose] public section
@@ -55,27 +56,8 @@ private lemma identityPullback_hom_ext {S T : Scheme.{u}} (f : T ⟶ S)
   apply (cancel_mono (pullback.snd (𝟙 S) f)).1
   exact (MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm
 
-/-- The local representative calculation before identifying the global target section.
-Source: Stacks Project, Tag 09ZF, third and fourth proof paragraphs;
-Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-local-comparison).
-
-Proof: Let j be the second projection and k = j followed by h. Naturality of the
-unit for j moves the representative's restriction through that unit. Naturality
-of the composition isomorphism then moves the preimage-open restriction through
-its component. The composition-unit equation identifies the result with the
-unit for k restricted along d, where d is the preimage-open map followed by the
-base change of pullback.lift phi W.ι hphi and the inverse pasting isomorphism.
-The composition-unit equation along the first projection identifies that unit
-with the section comparison applied to the unit for i. Substitute hs. Naturality
-of section comparison with respect to the map U to the identity object gives
-the restriction of the compared global section along d followed by the base
-change of U to X. This map equals the top-open inclusion followed by the canonical
-identity-pullback isomorphism: both are over the same scheme and the second
-projection of the identity pullback is an isomorphism, so cancellation proves
-equality. Presheaf functoriality gives the two restrictions on the right. This
-calculation needs neither a closed immersion nor a covering, and remains valid
-for empty opens. -/
+/-- The local representative calculation before identifying the global target section
+(Stacks, Tags 09ZF, 03CB, 03CC). -/
 theorem gabberZariskiLocalComparison
     {X Z U X' : Scheme.{u}} (i : Z ⟶ X)
     (q : U ⟶ X) [Etale q] (h : X' ⟶ X)

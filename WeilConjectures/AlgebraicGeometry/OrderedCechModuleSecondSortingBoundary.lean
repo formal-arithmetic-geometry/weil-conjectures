@@ -16,7 +16,9 @@ import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # The second sorting boundary for module Čech cochains
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM.
+## References
+
+* [Stacks, Cohomology of Sheaves, Tag 01FM]
 -/
 
 @[expose] public section
@@ -186,34 +188,7 @@ private theorem sortingSectionCochain_boundary {X : Scheme.{u}} (M : X.Modules) 
     rfl
 
 open Classical in
-/-- The second sorting operator assembles into module-sheaf maps.
-Source: Stacks Project, Tag 01FM, equation 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-module-second-sorting-boundary).
-
-Proof: On an open B of X', identify the full cochains of D with sections on the
-products of the W₀ using e. Apply the explicit first-repeat sum cechSecondSortingHom:
-sum over the stable permutation and its first adjacent equality, inserting a copy with coefficient
-sign(sigma) (-1)^a.
-The intersection arrows are the unique arrows of opens with the prescribed tuple
-projections. Transport the output back through e inverse. Every summand is additive.
-Naturality of e and functoriality of restriction show naturality in B. For local
-linearity, apply hlinear to each input coordinate; the two paths restricting a
-scalar to the output intersection agree in the poset of opens. Since e is bijective,
-the output coordinates determine a locally linear section map. These maps define
-morphisms of module sheaves in adjacent natural degrees. Push them forward along f'
-and conjugate by extendXIso in nonnegative degrees; put zero in all other degrees.
-Apply cechSecondSortingIdentity on each open, using hd for the transported
-differential. The categorical products of opens identify with the intersections in
-SiteCechComplex, by their universal properties. The stable-sorting term is exactly
-the displayed permutation sum, with prod.map giving the same unique restriction.
-For the alternating term, the strict filter gives exactly hP: its ordered-coordinate transport
-followed by orderedCechProjectionOpenMap is the same unique open map as the permutation transport.
-Thus the boundary is stable sorting minus P.
-In degree zero the incoming term vanishes in both natural and extended complexes.
-For r=0 the products of section groups indexed by tuples are empty, hence zero;
-no nonempty or covering assumption is used. Repeated tuples are retained by stable sorting,
-including in degrees above r;
-the alternating projection is zero there and the first-repeat formula still applies. -/
+/-- The second sorting operator assembles into module-sheaf maps (Stacks, Tag 01FM). -/
 theorem orderedCech_module_secondSorting_boundary {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)

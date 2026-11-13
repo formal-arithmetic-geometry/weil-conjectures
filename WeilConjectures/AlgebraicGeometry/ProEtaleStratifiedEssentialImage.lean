@@ -134,26 +134,7 @@ private theorem comparison_essImage_strata_pullback
     (etaleOrigin_upperStar_obj (pullback.fst (S.immersion k) g) (hS k))
 
 /-- A sheaf is classical if its restrictions to a finite constructible stratification
-are classical. Source: Stacks Project, Tag 09AK, proof of lemma-compare-constructible,
-after local constancy has supplied classicality on each stratum.
-(auxiliary; not a blueprint node).
-
-Proof: classicality is Zariski local by placing the sheaf in degree zero, applying
-the derived open-cover comparison theorem, and taking zeroth homology. Induct on the
-number of strata, simultaneously for all schemes. At a point
-choose an affine open where its selected stratum is closed and has quasi-compact open
-complement. Pull the strata back as schemes. The complement has fewer nonempty strata;
-the selected closed restriction is classical by hypothesis and pullback compatibility.
-The open-closed short exact sequence has classical end terms: comparison commutes with
-extension by zero on the open and with direct image on the closed immersion. Classicality
-is closed under extensions because exact comparison is fully faithful on bounded below
-derived categories, so the extension boundary lifts. Thus the middle sheaf is classical
-on the affine neighborhood, and Zariski locality finishes. For zero strata the base is
-empty and its sheaf category is zero. A full-image stratum need not be an isomorphism:
-use the same closed-immersion argument in that case. The open-closed sequence and
-all the comparison and extension arguments work over an arbitrary commutative ring;
-no finite coefficient or finite stalk condition is used.
--/
+are classical (Stacks, Tag 09AK). -/
 theorem comparison_essImage_of_stratification
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (S : Scheme.Stratification X)

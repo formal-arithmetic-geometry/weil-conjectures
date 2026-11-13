@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # The canonical constant pullback unit square
 -/
@@ -24,10 +22,9 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor upperStar
 
 /-- The canonical constant pullback preserves the module coefficient unit.
-Source: blueprint thm-amb-p1-adjunction.proof.md, constant coefficient normalization.
+
 Specialize the proved canonical constant-complex unit square to module coefficients;
-the coefficient monoidal unit is the module A itself.
-(auxiliary; not a blueprint node). -/
+the coefficient monoidal unit is the module A itself. -/
 theorem ordinaryFiniteConstantUnit_square (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (constantSinglePullbackIso (ModuleCat.{u + 1} A) f (ModuleCat.of A A)).hom ≫

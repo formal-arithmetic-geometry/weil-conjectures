@@ -52,30 +52,7 @@ private theorem openShiftEquiv_natural (Y : Scheme.{u}) (B : Y.Opens)
   exact (Category.assoc _ _ _).symm
 
 /-- The Hom equivalences and their stage/apex compatibility after a chosen open
-localization. Source: Stacks Project, perfect.tex Tags 09RE and 079W.
-(blueprint: lem-pc-perfect-hom-open-stage-maps).
-Proof: Put B = t inverse-image W and L = exact derived restriction to B.
-Yoneda and derived adjunction identify F_j with Rpi_j* Lpi_j*Q;
-evaluate stageNatural at identities to recover the representing isomorphism.
-Apply the canonical open-restriction/direct-image comparison to this isomorphism.
-The restricted projection is canonically the pullback projection for B.ι ≫ s.
-Open adjunction and shift adjunction identify Hom(P,RB.ι* LF_j[n]) with
-Hom(LP[-n],LF_j). Derived adjunction for the restricted projection and the
-pullback-composition comparison give the displayed stage equivalences for
-P' = LP[-n] and Q' = LQ. Repeat at the apex. Naturality of these comparisons,
-with h.stageMap and h.limitMap, proves both displayed equations; the comparisons
-are pinned by their derived units and counits, hence give exactly the specified
-perfectStageMap and perfectLimitMap. The same constructions work on empty opens,
-where all Hom sets are singletons, and for zero objects.
-
-The implemented reduction first restricts the unshifted representing cocone using
-perfect_hom_open_restricted_data. The completely proved openShiftEquiv is the
-composite of (shiftEquiv' _ (-n) n (neg_add_cancel n)).toAdjunction.homEquiv.symm,
-(schemeMVAdjunction Y B).homEquiv.symm, and precomposition with the inverse of
-(L.commShiftIso (-n)).app P. Its target postcomposition identity is
-openShiftEquiv_natural. Compose it with hB.stageEquiv j (LP[-n]) and hB.limitEquiv
-(LP[-n]), respectively. Rewriting by this identity leaves precisely hB.stageMap
-and hB.limitMap. Only the unshifted localization is left open in a separate module. -/
+localization (Stacks, Tags 09RE and 079W). -/
 theorem perfect_hom_open_stage_maps
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

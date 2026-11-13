@@ -175,33 +175,7 @@ private theorem c3_composition_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Unit compatibility for an étale object in a cartesian square.
-Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
-
-Proof (the localization and composition unit equations):
-1. Put h = g' ≫ p = p' ≫ g. Form P₀ = W ×ₓ W, P₁ = W ×ₓ Y, Q = W ×ₓ W'.
-   The diagonal δ and the maps θ = (g',id), τ = (δg',id), σ = (ι,id) give
-   φτ = φ'σ = γ = (g',id), for the two pullback-pasting isomorphisms φ, φ'.
-   Use def-pc-fibre-product and lem-weil-pbc-inverse-image-composition (1).
-2. The unit description and naturality of the restriction comparison in
-   lem-weil-pbc-etale-inverse-image-restriction (2), restricted along δ, give
-   (p⁻¹F)(δ)ηₚ(W) = ρF(W)⁻¹. Restricting the analogous formula along σ gives
-   (p'⁻¹g⁻¹F)(σ)ηₚ'(P₁) = ρg⁻¹F(W')⁻¹(g⁻¹F)(ι).
-3. Evaluate the unit equation of lem-weil-pbc-inverse-image-composition (2)
-   for (p,g') at W and restrict along τ. Naturality of c and ηg', and step 2,
-   identify the result with cₚ,g'(W')ηg'(W)ρF(W)⁻¹ = (h⁻¹F)(γ)ηh(W).
-   The value of ηg'(W) here includes restriction along θ.
-4. Apply the same composition unit equation for (g,p') and restrict along σ.
-   The result is c_g,p'(W')ρg⁻¹F(W')⁻¹(g⁻¹F)(ι)ηg(W) = (h⁻¹F)(γ)ηh(W).
-5. Equate steps 3 and 4, cancel c_g,p', and compose with the two restriction
-   comparisons. Evaluating at any section gives the assertion. Étaleness of p'
-   follows from base-change stability and the isomorphism ι, as in
-   situation-conventions (1).
-
-The existential proof hp' records the conclusion that p' is étale before using
-it to type the restriction comparison. The conclusion is an equality of morphisms
-in A, with no use of elements or concrete coefficients. The maps eW and eW' only remove
-identity composites in the structure maps of the terminal étale objects.
--/
+(Stacks, Sites, Tags 03CF and 03EF) -/
 private theorem c3_etale_restriction_pullback_unit_eq
     {X Y W W' : Scheme.{u}}
     (g : Y ⟶ X) (p : W ⟶ X) (g' : W' ⟶ W) (p' : W' ⟶ Y)
@@ -430,7 +404,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The natural evaluation/global-sections comparison for an étale object.
-Source: Stacks Project, Tag 03S2. -/
+(Stacks, Tag 03S2) -/
 private noncomputable def c3_etaleObjectSectionsIso {X : Scheme.{u}} (V : X.Etale) :
     (sheafSections X.smallEtaleTopology A).obj (op V) ≅
       upperStar A V.hom ⋙
@@ -451,26 +425,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Étale evaluation is compatible with the unit for an arbitrary base change.
-Source: Stacks Project, Tags 03CF, 03EF and 03S2.
-
-Proof: Write p = Vf.hom and q = Vg.hom. The lift i = pullback.lift m q hm'
-identifies Vg with Vf ×_Y X: its inverse is obtained by composing the projection to Vf
-with Vf's projection to W and pairing that with the projection to X; the two identities
-follow by pullback extensionality, hm, hm' and g = h ≫ f. Thus i is an isomorphism.
-Apply etale_restriction_pullback_unit to (h,p,m,q) and i. In that equality the
-restriction comparisons rhoH and rho(h^*H) are invertible. Move them to the other
-sides and compose with global-sections/terminal-evaluation comparisons. Their inverses,
-together with the identity-object isomorphisms eW and eW', are precisely the two
-c3_etaleObjectSectionsIso A components in this statement. The map theta is the inverse of
-the terminal-object pullback isomorphism used in globalSectionsUpperStarMap: both maps
-have projections m and the identity, so pullback extensionality identifies them.
-The composite of the h-unit on Vf with restriction along i is the W-component of the
-f-pushforward of that unit followed by lowerStarComp; this follows from its definition
-by the canonical pullback-pasting isomorphism and uniqueness of the two projections.
-Finally, naturality of terminal evaluation moves the comparison
-(upperStarComp m p)^{-1} followed by upperStarComp q h past evaluation, giving exactly
-the final Γ-map displayed here. No property of H or of h is used.
--/
+(Stacks, Tags 03CF, 03EF and 03S2) -/
 private theorem c3_etaleObjectSections_baseChange {R X Y : Scheme.{u}} (W : R.Etale)
     (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R) (w : g = h ≫ f)
     (m : pullback W.hom g ⟶ pullback W.hom f)
@@ -667,19 +622,7 @@ set_option maxRecDepth 4000 in
 /-- Evaluation of f_* f^* G at an étale object W identifies naturally with the global
 sections of the pullback of G to W ×_R X. This is a comparison for a single cartesian
 square, independent of any limit or compactness hypotheses.
-Source: Stacks Project, Tags 03S2, 03CF and 03EF.
-
-Proof: By the definition of direct image, the source is (f^* G)(W ×_R X). Restriction
-along the étale second projection identifies this with Γ(W ×_R X, p^* f^* G), using the
-étale inverse-image/restriction isomorphism and evaluation at the terminal object.
-Compose with the inverse-image composition isomorphism and the equality
-p ≫ f = fst ≫ W.hom to obtain the displayed isomorphism in A. For a cartesian map m,
-apply the restriction/pullback-unit identity to the square over h. Naturality of the
-restriction isomorphism moves the composition isomorphism past restriction. Naturality
-of the unit moves the source composition isomorphism past pullback. Associativity of
-inverse-image composition identifies the resulting composites. The two projection
-equations specify the canonical cartesian map, so this proves the stated equality for
-any m satisfying them. The argument uses only adjunctions and composition coherence. -/
+(Stacks, Tags 03S2, 03CF and 03EF) -/
 private theorem c3_pullbackSections_comparison (R : Scheme.{u})
     (G : Sheaf R.smallEtaleTopology A) (W : R.Etale) :
     let v := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ pullback.fst W.hom f ≫ W.hom
@@ -882,22 +825,7 @@ private theorem c3_rebasedPullbackSections_comparison {R X Y : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical relative section cocones are colimiting on affine étale objects.
-Source: Stacks Project, Étale Cohomology, Tag 09YQ in degree zero, and
-Sites, Tag 0738(4); blueprint étale cohomology continuity, detailed proof paragraph 2.
-
-Proof: restrict to the cofiltered over category of i; its forgetful functor is initial.
-Pull back the whole limiting cone along the affine etale object U. Connected pullback
-pasting gives a limit cone with stages U times D_j, and the affine transition maps
-make every one of these stages affine. Etale localization identifies evaluation of
-the relative section presheaf at U with global sections of the pullback to U times D_j.
-The same identification at the cone point intertwines the maps: prove the localization
-unit equation from uniqueness of adjoints, then combine it with inverse-image composition
-coherence. Rebase the coefficient sheaf along U.hom by the composition associativity
-equation, so the fixed base is the affine scheme U itself. Reindex this affine system
-by a coinitial directed preorder, apply
-`affine_globalSections_limit_isColimit_of_directed`, and reflect the resulting colimit
-through final reindexing. All objects and isomorphisms in this reduction are constructed
-explicitly. -/
+(Stacks, Étale Cohomology, Tag 09YQ in degree zero; Sites, Tag 0738(4)) -/
 private theorem affineRelativeSectionColimit
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
@@ -1056,26 +984,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
 
 /-- Canonical relative section cocones are colimiting on qcqs étale objects.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2;
-Stacks Project, Étale Cohomology, Tag 09YQ, degree zero, and Sites, Tag 0738(4).
-The categorical coefficient generalization is the finite-equalizer argument below.
-
-Proof: choose a finite cover of U by affine opens and finite affine open covers of
-its pairwise intersections. These form a finite one-hypercover, including when U is
-empty. Apply the affine case to each degree-zero and degree-one component. The
-multifork of a sheaf on this hypercover is a limit. AB5 commutes this finite matching
-limit with the filtered colimit, and the colimit universal property identifies the
-resulting cocone with evaluation at U. For the affine case, restrict the scheme
-system to stages over i, pull the limiting cone back along U, and use connected
-pullback pasting. All resulting stages are affine. Etale localization identifies
-relative sections at U with global sections on these pullbacks. A proved unit and
-composition calculation intertwines their transitions and cocone maps, including
-the change of coefficient base to the affine object U itself. Finally reindex by a
-coinitial directed preorder and use the affine global-section continuity
-statement. Thus the qcqs gluing, arbitrary-index reindexing, and all normalization
-calculations are proved here; the directed affine continuity core is the remaining
-named obligation. No cohomology or resolution is used.
-(auxiliary; not a blueprint node) -/
+(Stacks, Étale Cohomology, Tag 09YQ, degree zero; Sites, Tag 0738(4)) -/
 theorem relativeSectionCocone_isColimit
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]

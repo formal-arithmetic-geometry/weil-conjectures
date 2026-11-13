@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSubmoduleBinaryGluingSecondRestri
 
 /-! # The restrictions of the binary submodule pullback
 
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
+## References
+
+* Stacks Project, Properties, Lemma 01PF.
 -/
 
 @[expose] public section
@@ -83,20 +85,7 @@ private theorem binarySubmodule_on_W
     exact hp.isIso_fst_of_isIso hm
   exact isIso_of_components ((overMap R jW).map f)
 
-/-- The explicit pullback is the prescribed submodule on V and the ambient module on W.
-Source: Stacks Project, Properties, Lemma 01PF (lemma-extend), binary gluing step.
-(blueprint: lem-weil-pbc-module-submodule-binary-gluing-restrictions).
-
-Proof: On an open T contained in V the unit from H(T) to H(T intersect V) is the
-identity after the canonical restriction identifications. The pullback of this
-identity along Q(T) -> H(T) is Q(T). The second pullback projection therefore gives
-an isomorphism on V, natural in T. On an open T contained in W, T intersect V is
-contained in W intersect V. The component of the given inclusion on this open is
-an isomorphism, by the hypothesis and further restriction. Consequently the first
-pullback projection is an isomorphism on T. Evaluation preserves pullbacks of module
-sheaves, so these sectionwise identifications are isomorphisms of module sheaves.
-They remain valid for empty opens and disjoint or repeated cover members. No local
-presentation or finite-generation hypothesis is used. -/
+/-- The explicit pullback is the prescribed submodule on `V` and the ambient module on `W`. -/
 theorem binarySubmodule_restrictions
     (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))

@@ -17,10 +17,9 @@ namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
 /-- The restriction-induced morphism of Mayer--Vietoris complexes associated to a
-normalized chain map.  Its three components are the chain map itself and the
+normalized chain map. Its three components are the chain map itself and the
 sectionwise restriction-image maps on the two open terms and their intersection.
-Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-image-chain-map) -/
+(Stacks, Tags 08FE, 08BV) -/
 def schemeMVImageChainMap {X Y : Scheme.{u}} (h : X ⟶ Y) (U V : Y.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
@@ -37,10 +36,7 @@ def schemeMVImageChainMap {X Y : Scheme.{u}} (h : X ⟶ Y) (U V : Y.Opens)
   exact ShortComplex.homMk f b (schemeMVImageComponent h (U ⊓ V) I J f) hs.1.symm hs.2.symm
 
 /-- A normalized chain representative for the direct-image morphism between the
-fixed resolutions.  The target is K-injective, so fullness of the localization
-produces this representative.
-Source: Stacks Project, Tag 0D5T.
-(blueprint: lem-pc-mayer-vietoris-normalized-chain-map) -/
+fixed resolutions. (Stacks, Tag 0D5T) -/
 theorem schemeMV_normalized_chain_map_exists
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

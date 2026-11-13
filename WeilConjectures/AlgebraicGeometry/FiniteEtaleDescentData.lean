@@ -11,9 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.AlgebraicGeometry.SchemeDescentDataCategory
 
 /-!
-# Blueprint statements
-
-lem-galois-descent.
+# Finite étale descent data
 -/
 
 @[expose] public section
@@ -24,7 +22,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Required definitions for lem-galois-descent. -/
+/-- Descent data along `g` whose underlying scheme is finite and étale. -/
 protected abbrev FiniteEtaleDescentData {Y Y' : Scheme.{u}} (g : Y' ⟶ Y) :
     Type (u + 1) :=
   ObjectProperty.FullSubcategory fun A : Over.DescentDataCategory g ↦

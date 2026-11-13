@@ -14,8 +14,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Injective sheaves have surjective restriction maps
 
-Source: Stacks Project, Cohomology, Lemma 01EA
-(blueprint: lem-sc-ringed-space-injective-restriction-surjective).
+## References
+
+* Stacks Project, Cohomology of Sheaves, Lemma 01EA.
 -/
 
 @[expose] public section
@@ -28,17 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- Injective sheaves of modules have surjective restriction maps on sections.
-Source: Stacks Project, Cohomology, Lemma 01EA
-(blueprint: lem-sc-ringed-space-injective-restriction-surjective).
-Proof: let `j_!O_U` be the module sheafification of the presheaf equal to `O_X` on opens
-inside `U` and `0` elsewhere (def-weil-presheaf-modules-sheafification); its universal
-property gives `Hom(j_!O_U, F) ≅ F(U)`, `ψ ↦ ψ(1)`, and likewise for `U'`. The map
-`α : j'_!O_{U'} ⟶ j_!O_U` induced by the identity on opens inside `U'` is injective on every
-stalk, hence a monomorphism. As `I` is injective, precomposition with `α` is surjective, and
-under the bijections it is the restriction `I(U) → I(U')`. For the second clause, given
-`c ∈ I(V ⊓ W)` lift it to `a ∈ I(V)` along `V ⊓ W ≤ V` and take `b = 0`; then
-`(a, b) ↦ c`.
--/
+(Stacks, Tag 01EA.) -/
 theorem injective_restriction_surjective (X : RingedSpace.{u})
     {U' U : Opens X} (hU : U' ≤ U)
     (I : SheafOfModules.{u} (moduleRings X))

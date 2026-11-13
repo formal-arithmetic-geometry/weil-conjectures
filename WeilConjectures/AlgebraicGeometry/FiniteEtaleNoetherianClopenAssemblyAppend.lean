@@ -17,11 +17,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite reduced stratification whose support is a specified closed subset
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-append).
-
-Proof data records the finite partition, its actual scheme immersions, reduced domains,
-the property P, and the support and subset equations needed for appending a stratum. -/
+/-- A finite reduced stratification whose support is a specified closed subset, consisting of
+a finite partition into locally closed immersed reduced pieces satisfying the property `P`. -/
 structure ReducedFiniteLocallyClosedStratificationOn
     (Y : Scheme.{u})
     (P : (B : Scheme.{u}) → (B ⟶ Y) → Prop)
@@ -40,15 +37,7 @@ structure ReducedFiniteLocallyClosedStratificationOn
   subset : ∀ a, stratum a ⊆ (T : Set Y)
 
 /-- Append an immersed reduced piece to a finite reduced stratification of its closed
-complement. This is the finite-index and range bookkeeping step of the induction
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-append).
-
-Proof: index by `Fin (n + 1)` via `Fin.cons`: stratum `0` is the range of `j` with domain
-`U`, stratum `i + 1` is the old stratum `i` with its domain and arrow unchanged. The range of
-the immersion `j` is locally closed; it is disjoint from the old strata, which lie in `T'`;
-the union is `range j ∪ T' = T`; reducedness and `P` hold for `U` by hypothesis and for the
-old strata by `S`. The support-indexed structure is
-needed because an ordinary finite stratification always covers its whole ambient space. -/
+complement. -/
 theorem append_reduced_stratum_to_complement
     (Y : Scheme.{u})
     (P : (B : Scheme.{u}) → (B ⟶ Y) → Prop)

@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonIso
 
 /-! # Unit compatibility for the explicit open comparison
 
-Source: Stacks Project, Cohomology, Tags 08BS and 08BV.
-(blueprint: lem-pc-open-image-complex-comparison-unit).
+## References
+
+* Stacks Project, Cohomology, Tags 08BS and 08BV.
 -/
 
 @[expose] public section
@@ -70,12 +71,7 @@ private theorem unit_compute
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit comparison identifies the localized restriction unit with the
-unit of the supplied derived adjunction.
-Source: Stacks, Tag 08BV (lemma-exact-sequence-j-star), first proof paragraph.
-Proof: apply the derived-unit factorization to the underived adjunction on the
-homotopy categories. Transport along quotientCompQhIso and exact restriction's
-localization comparison. Finally use unit_rightAdjointUniq_hom_app.
-(blueprint: lem-pc-open-image-complex-comparison-unit). -/
+unit of the supplied derived adjunction. (Stacks, Tag 08BV) -/
 theorem schemeOpenModuleImageComplexComparison_unit (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]

@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Finiteness descends along fpqc covering families
 
-Source: Stacks Project, Descent, Lemma Tag 02LA, descent direction of Definition Tag 02KO
-(blueprint: lem-weil-pbc-fpqc-descend-finite).
+## References
+
+* Stacks Project, Descent, Tags 02LA and 02KO.
 -/
 
 @[expose] public section
@@ -26,16 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Finiteness descends along an fpqc covering family.
-Source: Stacks Project, Descent, Lemma Tag 02LA and Definition Tag 02KO
-(blueprint: lem-weil-pbc-fpqc-descend-finite).
-
-Proof:
-1. Use the source library's proved descent of finiteness along surjective flat
-   quasi-compact morphisms (Tag 02LA).
-2. The given fpqc precover generates a covering sieve of the fpqc topology.
-3. Apply the source library's covering-family descent theorem to `IsFinite`, using
-   the canonical pullback squares and the hypotheses on their second projections. -/
+/-- Finiteness descends along an fpqc covering family. (Stacks, Tags 02LA, 02KO) -/
 theorem isFinite_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)

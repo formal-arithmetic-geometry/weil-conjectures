@@ -8,10 +8,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PrincipalCechTotalRegrouping
 
-/-! # Naturality of the explicit principal Čech regrouping
+/-!
+# Naturality of the explicit principal Čech regrouping
 
-Source: Stacks, Tag 08D1, coefficient maps of total cochains
-(blueprint: lem-sc-principal-cech-regroup-naturality).
+## References
+
+* Stacks Project, Tag 08D1, <https://stacks.math.columbia.edu/tag/08D1>
 -/
 
 @[expose] public section
@@ -74,20 +76,7 @@ private theorem principalCechRowToTerms_naturality
     · simp only [principalCechRowToTerms_apply, dite_eq_right h]
       exact map_zero _
 
-/-- Graded regrouping commutes with maps acting columnwise on sections.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-regroup-naturality).
-
-Proof: precompose with a diagonal coproduct inclusion. The total-map inclusion
-formula changes this to the corresponding column map, and the hypothesis he
-moves that map past e. Project to a nonempty subset J. If card(J)≠p+1, both
-row-to-terms maps are zero in this coordinate. Otherwise, the product-map
-projection formula changes the map to the section map of g.f q. Naturality of
-g with respect to the degree equality q=n+1-card(J) commutes this map with
-the transport used in principalCechRowToTerms. The componentwise specification
-of principalCechFunctor_exists identifies the transported chosen functor map
-with this same section map. The coproduct universal property and equality of
-all subset coordinates give the result. Empty covers have no coordinates.
-Neither horizontal differentials nor bounds on F and G are needed. -/
+/-- Graded regrouping commutes with maps acting columnwise on sections. -/
 theorem principalCechTotalRegroup_naturality
     (F G : CochainComplex (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (g : F ⟶ G)

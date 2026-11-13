@@ -9,10 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-/-! # Sheaf gluing for singleton-supported subset Čech cochains
+/-!
+# Sheaf gluing for singleton-supported subset Čech cochains
 
-Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-singleton-gluing).
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -43,25 +45,8 @@ private theorem transport_restriction
 
 set_option maxHeartbeats 500000 in
 -- The pair calculation compares dependent section modules across degree and open transports.
-/-- Singleton-supported cochains with no higher differential glue to sections.
-
-Source: Stacks Project, Cohomology, Tag 08C1, initial exactness of the
-augmented Čech row, and the sheaf gluing axiom.
-(blueprint: lem-sc-principal-open-cech-singleton-gluing).
-
-Proof: Transport each singleton coordinate of t to J.X n using hes, and
-identify D({i}) with D(f i). On a two-element subset, the vertical term
-is zero because t has no such component. The only horizontal terms are
-the two singleton restrictions, with opposite signs. Since this component
-of d(t) is zero, the singleton sections agree on D(f i) intersect D(f j).
-For equal indices compatibility is reflexive; for indices in reverse order
-reverse the equality. The sheaf gluing axiom on the union V supplies a
-section s0. Set s to sigma_n inverse applied to s0. The stated augmentation
-formula agrees with t at singleton coordinates by gluing, and both sides
-vanish at larger coordinates. Injectivity of tau_n gives alpha_n(s)=t.
-For r=0 the union is empty; the empty-family sheaf axiom supplies its unique
-section, and the product of nonempty-subset coordinates is the zero module.
-No injectivity hypothesis on the coefficient sheaves is used. -/
+/-- Singleton-supported cochains with no higher differential glue to sections
+(Stacks, Tag 08C1). -/
 theorem principalOpenCech_singleton_gluing
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

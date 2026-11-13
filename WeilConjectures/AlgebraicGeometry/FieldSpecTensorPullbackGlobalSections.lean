@@ -13,8 +13,9 @@ import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 
 /-! # Global sections of tensor pullback between field spectra
 
-Source: Stacks Project, Tags 01I9 and 009A.
-(blueprint: lem-sc-field-spec-tensor-pullback-global-sections).
+## References
+
+* Stacks Project, Tags 01I9 and 009A
 -/
 
 @[expose] public section
@@ -26,18 +27,8 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
-/-- On field spectra tensor pullback becomes extension of scalars on global sections.
-Source: Stacks Project, Tags 01I9 and 009A.
-(blueprint: lem-sc-field-spec-tensor-pullback-global-sections).
-
-Proof: evaluation is an equivalence on the one-point spectrum of a field. Transporting
-scalars along GammaSpecIso is also an equivalence, so the tilde-global-sections
-adjunction is an equivalence. Precompose with tilde. The tensor-pullback comparison
-for tilde identifies this composite with extension of scalars followed by tilde.
-The tilde-global-sections unit cancels tilde on both sides. Full faithfulness of
-precomposition by the tilde equivalence lifts this natural isomorphism back to all
-module sheaves. No quasi-coherence hypothesis is needed on a one-point field spectrum;
-the zero module and arbitrary field extensions are included. -/
+/-- On field spectra tensor pullback becomes extension of scalars on global sections
+(Stacks, Tags 01I9, 009A). -/
 theorem nonempty_fieldSpec_tensorPullback_globalSections_iso
     (K L : Type u) [Field K] [Field L] (f : CommRingCat.of K ⟶ CommRingCat.of L) :
     Nonempty

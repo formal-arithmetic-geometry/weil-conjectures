@@ -9,9 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
-/-! # The generator of a principal Cartier ideal
-Source: Stacks Project, Tags 01WQ and 0A45; principal-chart step of
-lem-pur-finite-cartier-pullback.
+/-!
+# The generator of a principal Cartier ideal
+
+## References
+
+* Stacks Project, Tag 01WQ, <https://stacks.math.columbia.edu/tag/01WQ>
+* Stacks Project, Tag 0A45, <https://stacks.math.columbia.edu/tag/0A45>
 -/
 
 @[expose] public noncomputable section
@@ -21,14 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Multiplication by the equation identifies the structure sheaf with the principal
-Cartier ideal, compatibly with its inclusion into the structure sheaf.
-Source: Stacks Tags 01WQ and 0A45, principal ideal trivialization.
-(blueprint: lem-pur-principal-cartier-ideal-frame).
-Proof: the equation vanishes on its zero subscheme, so it lifts to a global section
-of the ideal, which is the kernel of restriction. On every affine open its image
-generates the ideal. Invertibility therefore makes this section a free generator.
-The morphism from the unit associated to this generator is an isomorphism; composing
-it with the ideal inclusion is multiplication by the equation on every open. -/
+Cartier ideal, compatibly with its inclusion into the structure sheaf
+(Stacks, Tags 01WQ and 0A45). -/
 theorem principalCartierIdealFrame (T : Scheme.{u}) (f : Γ(T, ⊤))
     (hI : (T.zeroLocusSubschemeι {f}).ker.IsInvertible) :
     ∃ φ : Modules.unit T ≅ (T.zeroLocusSubschemeι {f}).ker.toModules,

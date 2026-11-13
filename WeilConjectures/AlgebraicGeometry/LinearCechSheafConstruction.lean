@@ -12,9 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CechModuleSheafTerms
 
 /-! # Scalar-compatible construction of the augmented Čech sheaf complex
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, displayed complex and proof
-paragraph 1; Stacks Project, Tag 02FU, construction before the exactness argument.
-(blueprint: lem-pc-linear-cech-sheaf-construction).
+## References
+
+* Stacks Project, Tag 02FU, construction before the exactness argument.
 -/
 
 @[expose] public section
@@ -161,28 +161,7 @@ private theorem cechModuleSheafDegreeIso_naturality {X : Scheme.{u}} {ι : Type 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The concrete module-sheaf Čech complex agrees with the Čech complex of its
-section presheaves, including the coordinates of the degree-zero restriction map.
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, displayed complex and proof
-paragraph 1. (blueprint: lem-pc-cech-module-sheaf-comparison)
-
-Proof: write G for the forgetful functor from module sheaves to presheaves of global
-modules. For every W and V, the over-site definition of cechIntersectionSheaf has
-sections F(W × V). Its O_X(V)-action is restriction along prod.snd. Applying G restricts
-scalars once more along O_X(X) -> O_X(V). The composite is the unique restriction
-O_X(X) -> O_X(W × V), so restrictionScalarsComp gives a natural isomorphism
-G(P(W)) ≅ (V ↦ F(W × V)) of presheaves of global modules. Restriction in both variables
-is induced by F, so these isomorphisms commute with every morphism of opposite opens.
-G preserves products: module-sheaf products are computed on sections, and restriction
-of scalars preserves products. In degree p compose the product comparison for G with
-the product of the preceding isomorphisms at W = product_l U(y(l)). Projection to y
-identifies every coface with the restriction along the corresponding product map.
-Consequently the isomorphisms commute with the alternating sums, giving the differential
-identity. In degree zero the augmentation₀ is Pi.lift of the over-adjunction units.
-Its projection on V is precisely F.map prod.snd.op. The product comparison and scalar
-restriction isomorphisms preserve that underlying map, yielding the coordinate identity.
-No covering hypothesis is used. When ι is empty, products are terminal objects and the
-same product comparison and projection arguments apply; the coordinate assertion is
-vacuous. -/
+section presheaves, including the coordinates of the degree-zero restriction map. -/
 private theorem linearCechComparison
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) :
       (∀ p : ℕ,
@@ -266,32 +245,7 @@ private theorem linearCechComparison
 
 
 /-- A scalar-compatible augmented Čech complex exists for any family of opens.
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, displayed complex and proof
-paragraph 1; Stacks Project, Tag 02FU, construction before the exactness argument.
-(blueprint: lem-pc-linear-cech-sheaf-construction)
-
-Proof: For each open W use the module sheaf obtained by pushing F.over W along
-Over.star W, with ring morphism given by restriction along prod.snd. Its sections
-on B are F(W product B), and its O_X(B)-action is restriction along prod.snd.
-For W contained in Z, restriction along W product B -> Z product B is O_X(B)-linear
-by functoriality of the structure-sheaf restrictions. These restrictions are natural
-in B and give a functor P on opposite opens. Apply cechComplexFunctor U to P.
-The forgetful functor to presheaves of global modules preserves products, since
-products of module sheaves are computed on sections and restriction of scalars
-preserves products. The resulting product comparisons give e. The comparison
-commutes with each face restriction, hence its signed sum and the differentials.
-In degree zero, the product of restrictions F -> P(U_i) has zero composite with
-the differential: both restrictions to every double intersection agree. It gives
-the augmentation from single_0. Its projections give the augmentation equation.
-Identify each categorical product of opens with the infimum of the opens and use
-the equivalence between sheaves on Over W and on the open subscheme W to obtain
-the term isomorphisms with open direct images. Finally every coordinate of e is
-precisely a module-sheaf product projection followed by the section identification
-of P(W); the former is O_X(B)-linear and the latter restricts scalars along prod.snd.
-This gives the displayed scalar formula. No covering, affine, nonempty, or finite
-hypothesis is used. Empty families use empty products, and the restriction maps
-and all displayed equations are still defined. The assertion only constructs the
-augmented complex; it asserts no local or global exactness. -/
+(Stacks, Tag 02FU) -/
 theorem exists_augmented_linear_cech_sheaf_complex
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (F : X.Modules) :

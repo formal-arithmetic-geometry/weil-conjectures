@@ -16,18 +16,16 @@ public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 
 Four elementary facts used by the Noetherian theory of constructible étale sheaves:
 
-- `AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian` (blueprint
-  `lem-weil-pbc-noetherian-finite-components`): a Noetherian scheme has finitely many
-  irreducible components.
-- `AlgebraicGeometry.UniversallyOpen.of_flat` (blueprint
-  `lem-weil-pbc-flat-lfp-open`): a flat morphism locally of finite presentation is universally
-  open, in particular open (`AlgebraicGeometry.Scheme.Hom.isOpenMap`).
-- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk` (Stacks 033M):
-  a Noetherian scheme whose local rings are integrally closed domains is a finite disjoint union
-  of open and closed normal integral subschemes.
-- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_etale` (blueprint
-  `proposition-proper-direct-image-finite-coefficients`): a Noetherian scheme étale over a normal
-  integral scheme is a finite disjoint union of open and closed normal integral subschemes.
+- `AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian`: a Noetherian scheme has
+  finitely many irreducible components.
+- `AlgebraicGeometry.UniversallyOpen.of_flat`: a flat morphism locally of finite presentation
+  is universally open, in particular open (`AlgebraicGeometry.Scheme.Hom.isOpenMap`).
+- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk`
+  (Stacks 033M): a Noetherian scheme whose local rings are integrally closed domains is a
+  finite disjoint union of open and closed normal integral subschemes.
+- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_etale`: a Noetherian scheme étale over
+  a normal integral scheme is a finite disjoint union of open and closed normal integral
+  subschemes.
 -/
 
 @[expose] public section
@@ -72,10 +70,7 @@ theorem Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale {W Y : Scheme.{u}}
 
 /-- **Noetherian normal schemes decompose** (Stacks 033M). A Noetherian scheme whose local rings
 are integrally closed domains is a finite disjoint union of open and closed subschemes `X_a`
-which are integral with integrally closed local rings.
-
-The `X_a` are the connected components of `X`: there are finitely many of them, and each is
-irreducible because its local rings are domains. -/
+which are integral with integrally closed local rings. -/
 @[stacks 033M]
 theorem Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk (W : Scheme.{u})
     [IsNoetherian W]
@@ -114,8 +109,7 @@ theorem Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk (W : Schem
   have := (hW ((U a).ι w)).2
   exact .of_equiv (hst w)
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Normal components after étale
-pullback.
+/-- Normal components after étale pullback.
 
 Let `f : W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
 of whose local rings are integrally closed). Then `W` is a finite disjoint union of open and

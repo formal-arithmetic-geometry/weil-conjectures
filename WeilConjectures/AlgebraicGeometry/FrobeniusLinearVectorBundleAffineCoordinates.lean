@@ -15,10 +15,11 @@ import WeilConjectures.AlgebraicGeometry.FrobeniusLinearFreeFrameCoordinates
 /-!
 # Natural affine coordinates for Frobenius-linear vector bundles
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lines 4213--4270
-(blueprint: lem-fd-frobenius-linear-vector-bundle-affine-coordinates).
-
 This is the affine coordinate comparison used in the polynomial solution construction.
+
+## References
+
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section
@@ -70,24 +71,7 @@ private theorem exists_affine_tensor_frame (S : Scheme.{u}) (E : S.Modules) [E.I
 
 /-- Around every point, the Frobenius-linear sheaf map has a matrix expression
 in coordinates compatible with pullback to every étale object over the chart.
-
-Source: Stacks Project, Tag 0GKU, lemma-frobenius-linear-on-vb, first paragraph.
-(blueprint: lem-fd-frobenius-linear-vector-bundle-affine-coordinates).
-
-Proof: pull the finite locally free module back to U and trivialize it near x.
-Refine the trivializing open to an affine open V containing x. A finite frame on
-V pulls back to a frame on every étale W over V. Sending a section to its frame
-coordinates gives the additive equivalences e. Pullback of the frame and its dual
-frame commutes with composition: the tensor-pullback comparison is normalized by
-its adjunction unit, and therefore carries restricted basis sections to the same
-basis sections. Hence e commutes with restriction on every section over V. Define
-a(i,j) to be the i-th coordinate of F applied to the j-th frame section on V.
-Naturality of F makes their restrictions the coefficients on W. Expanding a section
-in the pulled-back frame, additivity and the given Frobenius scalar law give the
-displayed matrix formula. The structural map from F_p makes the section ring of V
-have characteristic p. Rank zero uses the unique empty coordinate vector. Empty U
-has no point x to consider. No quasi-compactness or separation of S is used.
--/
+(Stacks, Tag 0GKU) -/
 theorem exists_frobenius_linear_vector_bundle_affine_coordinates
     (p : ℕ) [Fact p.Prime]
     (S : Scheme.{u}) [S.Over (Spec (.of (ULift.{u} (ZMod p))))]

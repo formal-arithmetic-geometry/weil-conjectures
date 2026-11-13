@@ -11,8 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 import WeilConjectures.AlgebraicGeometry.OpenPinnedTensorCounitTransport
 
 /-! # Pinned counit restriction on homotopy complexes
-Source: Stacks Project, Tags 08DW, 08HY and 0D5S.
-(blueprint: lem-pc-open-pinned-counit-homotopy-restriction). -/
+
+## References
+
+* Stacks Project, Tags 08DW, 08HY and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -38,19 +41,7 @@ private theorem counit_path_glue {C : Type*} [Category C]
   exact hs
 
 /-- The pinned counit restriction equation for an arbitrary homotopy complex.
-Source: Stacks Project, Tags 08DW, 08HY and 0D5S.
-(blueprint: lem-pc-open-pinned-counit-homotopy-restriction).
-Proof: expand the two composition comparisons in the restricted coefficient.
-Their left-derived factorization equations identify their composites with the
-pinned counits with the localized underived tensor composition comparisons.
-The open-pullback comparison is leftDerivedUnique, so its factorization equation
-identifies the open counit with the exact restriction factorization followed by
-the underived open tensor comparison. Substituting these identities cancels the
-inverse open and composition comparisons. What remains is the image in the
-homotopy category of the four factors of openPinnedTensorRestrictionIso.
-One can check these equalities on K-flat resolutions, where the counits are
-invertible, and descend by their left-derived universal property. No flatness
-of P is needed, and empty opens and zero complexes use the same identities. -/
+No flatness of `P` is needed. -/
 theorem open_pinned_counit_homotopy_restriction
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

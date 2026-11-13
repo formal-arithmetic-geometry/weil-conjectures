@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsChartModelFactorizat
 
 /-! # Invertibility of the mixed affine comparison on K-flat models
 
-Source: Stacks Project, Tags 08DW(2), 06Z0, 08HY and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-kflat-comparison-isIso).
+## References
+
+* Stacks Project, Tags 08DW, 06Z0, 08HY, 0D5T and 0AA8.
 -/
 
 @[expose] public section
@@ -29,23 +30,8 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The canonical affine comparison is invertible on K-flat module models.
-Source: Stacks Project, perfect.tex, Tags 06Z0 and 08DW(2);
-cohomology.tex, Tags 08HY and 0D5T; duality.tex, Tag 0AA8.
-(blueprint: lem-sc-mixed-affine-sections-kflat-comparison-isIso).
-
-Proof: Identify the affine schemes with spectra of their global rings. Use the given
-K-flat module complex P and its termwise tilde, restricted through the spectrum chart of S.
-The tilde/pullback comparison identifies its pullback with extension of scalars.
-Taking derived sections of this comparison gives an isomorphism. On complexes its
-adjunct is sections of the pullback unit, followed by the identity-on-sections
-comparison for direct image. Deriving that equality identifies the latter comparison
-with the normalized Leray isomorphism, using its right-derived-unit equation.
-Uniqueness of the left adjoint to scalar restriction identifies the source functor
-with mixedGlobalExtension, preserving the unit. Hence the canonical adjunct displayed
-below is precisely this isomorphism's hom and is invertible. The two derived
-localizations can be taken in independent universes. For P=0 or an empty affine
-scheme this is the unique morphism between zero objects and remains invertible. -/
+/-- The canonical affine comparison is invertible on K-flat module models
+(Stacks, Tags 06Z0, 08DW, 08HY, 0D5T and 0AA8). -/
 theorem mixedAffineSections_kFlat_comparison_isIso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

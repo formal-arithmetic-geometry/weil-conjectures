@@ -16,10 +16,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
 /-! # Isomorphism invariance of the Stacks adic constructibility predicate
 
-The Stacks adic constructibility predicate `stacksConstructible` of
-`lemma-integral-models--2` is invariant under isomorphism.
+The Stacks adic constructibility predicate `stacksConstructible` is invariant under
+isomorphism.
 
-Source: Stacks Tags 0999, 09C1 and 09C2 (auxiliary; not a blueprint node).
+## References
+
+* Stacks, Tags 0999, 09C1 and 09C2.
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +35,7 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory.ConstantCompletion
 
-/-- Local derived completeness along `q` is invariant under isomorphism. Proof: derived
-restriction and derived internal Hom carry the isomorphism to an isomorphism on every slice.
-Source: Stacks Tag 0999 (auxiliary; not a blueprint node). -/
+/-- Local derived completeness along `q` is invariant under isomorphism (Stacks, Tag 0999). -/
 theorem IsComplete.of_iso
     {C : Type (u + 1)} [SmallCategory C] {J : GrothendieckTopology C}
     {O S : Sheaf J CommRingCat.{u + 1}} {q : O ⟶ S}
@@ -53,9 +53,7 @@ end CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- An isomorphism of derived objects induces an isomorphism of their transports to the
-small site. Proof: compare both transports with the derived functor of the section-module
-equivalence `smallModules` on localization representatives. Source: Stacks Tag 05RU
-(auxiliary; not a blueprint node). -/
+small site. -/
 def smallDerivedIso (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}
@@ -73,10 +71,7 @@ def smallDerivedIso (X : Scheme.{u})
       (DerivedCategory.Q.objObjPreimageIso L).symm) ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage L)
 
-/-- Stacks adic constructibility is invariant under isomorphism. Proof: completeness by
-`ConstantCompletion.IsComplete.of_iso` after `smallDerivedIso`, the residue clause by
-`residueCondition_iso`.
-Source: Stacks Tags 09C1 and 09C2 (auxiliary; not a blueprint node). -/
+/-- Stacks adic constructibility is invariant under isomorphism (Stacks, Tags 09C1 and 09C2). -/
 theorem stacksConstructible_iso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]

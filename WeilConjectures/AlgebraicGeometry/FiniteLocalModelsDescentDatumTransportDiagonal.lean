@@ -10,14 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCom
 universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
-/-- The identity law for compatible transport.
-
-Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: lem-weil-pbc-finite-local-model-compatible-transport-diagonal)
-Proof: The universal Q-point on Q,
-compatibility, and naturality identify transport along equal lifts with the
-identity; pulling back the universal equality along an arbitrary scheme point
-proves the displayed statement. -/
+/-- The identity law for compatible transport (Stacks, Tags 03RV, 02W5). -/
 theorem finiteLocalModels_descentDatum_compatibility_transport_diagonal
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)

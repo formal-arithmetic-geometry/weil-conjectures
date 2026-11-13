@@ -69,8 +69,8 @@ trace formula, whose intersection-theoretic side requires the `k̄`-linear endom
 `Fr_{X₀} × 𝟙` — is left as a TODO.
 
 The automorphism `σ` is `Spec` of the ring automorphism `x ↦ x ^ (1 / #k)` of `k̄`, so pulling
-back a function along `g_X = 𝟙 X₀ × σ` applies the geometric Frobenius to its coefficients; this
-is the automorphism `γ_X` of the blueprint, induced by `σ_geom`, and not its inverse.
+back a function along `g_X = 𝟙 X₀ × σ` applies the geometric Frobenius to its coefficients,
+and not its inverse.
 
 ## Main definitions
 
@@ -441,20 +441,10 @@ namespace Scheme.Hom
 
 variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- Blueprint `prose-10-19`: Arithmetic and geometric Frobenius.
-
-The arithmetic Frobenius `φ_q : k̄ → k̄, z ↦ z ^ q` is `FiniteField.frobeniusAlgEquivOfAlgebraic`,
-its inverse `γ = Frob_q = φ_q⁻¹` is `FiniteField.geometricFrobeniusAlgEquivOfAlgebraic` and
-`σ = Spec γ` is `AlgebraicGeometry.specGeometricFrobenius`.
-
-The geometric Galois Frobenius `g_X := 𝟙 X₀ × σ` of the geometric fiber
+/-- The geometric Galois Frobenius `g_X := 𝟙 X₀ × σ` of the geometric fiber
 `X = X₀ ×_{Spec k} Spec k̄` of a scheme over a finite field, acting through the geometric
-Frobenius on the coefficients only. It is an automorphism of `X` semilinear over `k̄`: it
-commutes with the projection to the model `X₀`
-(`geometricGaloisFrobenius_hom_comp_geometricFiberProj`) but commutes with the structure
-morphism `a_X` only up to `σ`
-(`geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
-relative `#k`-power Frobenius of `X` over `k̄`, see the module implementation notes. -/
+Frobenius on the coefficients only. It is an automorphism of `X` semilinear over `k̄`, and
+is not the relative `#k`-power Frobenius of `X` over `k̄`. -/
 def geometricGaloisFrobenius : Aut f.geometricFiber :=
   .of <| asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
     (Scheme.specAlgebraicClosure k).hom (𝟙 X₀) (specGeometricFrobenius k).asIso.hom
@@ -698,12 +688,8 @@ variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
 /-- The geometric Galois Frobenius `g_X := 𝟙 X₀ × σ` of the geometric fiber
 `X = X₀ ×_{Spec k} Spec k̄` of a scheme over a finite field, acting through the geometric
-Frobenius on the coefficients only. It is an automorphism of `X` semilinear over `k̄`: it
-commutes with the projection to the model `X₀`
-(`geometricFrobenius_hom_comp_geometricFiberProj`) but commutes with the structure
-morphism `a_X` only up to `σ`
-(`geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
-relative `#k`-power Frobenius of `X` over `k̄`, see the module implementation notes. -/
+Frobenius on the coefficients only. It is an automorphism of `X` semilinear over `k̄`, and
+is not the relative `#k`-power Frobenius of `X` over `k̄`. -/
 def geometricFrobenius : f.geometricFiber ≅ f.geometricFiber :=
   asIso (pullback.map f (AlgebraicGeometry.specAlgebraicClosure k) f
     (AlgebraicGeometry.specAlgebraicClosure k)

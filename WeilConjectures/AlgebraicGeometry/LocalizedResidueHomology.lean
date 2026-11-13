@@ -14,8 +14,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Derived residue homology on the localized module site
 
-Source: Stacks Project, Tags 06YJ and 0098.
-(blueprint: def-sc-localized-residue-homology).
+## References
+
+* [Stacks, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -27,10 +29,7 @@ namespace AlgebraicGeometry
 
 /-- Restrict the localized module site to the open subscheme, derive pullback to its
 residue point, take degree-zero homology and global sections, and transport scalars
-along `ΓSpecIso`. The two auxiliary derived categories use their standard localizations;
-no choice of an arbitrary object from an existence theorem is made here.
-Source: Stacks Project, Tags 06YJ and 0098.
-(blueprint: def-sc-localized-residue-homology). -/
+along `ΓSpecIso`. (Stacks, Tags 06YJ, 0098) -/
 noncomputable def localizedResidueHomology (S : Scheme.{u}) (U : S.Opens)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]

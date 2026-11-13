@@ -17,8 +17,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Comparison of open derived sections and the canonical truncation tower
-Source: Stacks Project, Tags 08BS and 08U1.
-(blueprint: lem-sc-open-derived-sections-truncation-tower-comparison). -/
+
+## References
+
+* Stacks Project, Tags 08BS and 08U1.
+-/
 
 @[expose] public section
 universe u wC wV wA
@@ -41,23 +44,7 @@ private lemma transport_comparison_naturality
 set_option maxHeartbeats 400000 in
 -- The comparison elaborates functors on both module sheaf categories and their derived categories.
 /-- Derived evaluation on an open agrees with sections after exact restriction,
-including the canonical lower-truncation projection and transition maps.
-Source: Stacks Project, Tag 08BS, and the uniqueness of standard truncations.
-(blueprint: lem-sc-open-derived-sections-truncation-tower-comparison).
-
-Proof: Restriction to V is exact and preserves K-injective complexes by its exact
-extension-by-zero left adjoint; transport this through Modules.overEquiv V. On a
-K-injective representative, both functors are termwise abelian sections on V,
-so the defining derived units give a natural isomorphism on every object E.
-Exact restriction is t-exact: it commutes with homology and preserves both
-standard cohomological support conditions. Apply restriction to the truncation
-triangle. Its vertices have the required support, hence uniqueness of truncations
-gives restriction(truncGE b E) ≅ truncGE b(restriction E), respecting truncGEπ.
-For b ≤ c the two resulting transition maps coincide by the universal property
-of truncGE b, since their composites with its projection agree. Apply derived
-sections to these isomorphisms and compose with the preceding natural comparison.
-Naturality gives the two displayed squares. This works on empty opens and for
-unbounded E, independently of any homology acyclicity assumption. -/
+including the canonical lower-truncation projection and transition maps. (Stacks, Tag 08BS) -/
 theorem openDerivedSections_truncationTower_comparison
     (X : Scheme.{u}) (V : X.Opens)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

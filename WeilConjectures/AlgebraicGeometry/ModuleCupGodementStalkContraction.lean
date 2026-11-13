@@ -23,8 +23,7 @@ open AlgebraicGeometry TopologicalSpace AlgebraicTopology Simplicial
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- Evaluation of the product's coordinate at `x`, on stalks.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- Evaluation of the product's coordinate at `x`, on stalks. -/
 private def moduleCup_godementStalkEval (X : Scheme.{u}) (F : X.Modules) (x : X) :
     (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
       (moduleCup_godementObject X F) ⟶
@@ -112,8 +111,7 @@ private theorem insert_sum_eval (X : Scheme.{u}) (F : X.Modules) (x : X) (n : �
     Preadditive.comp_zsmul, sub_eq_add_neg, Finset.sum_neg_distrib]
   rfl
 
-/-- The stalk complex of the extended alternating coface complex.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- The stalk complex of the extended alternating coface complex. -/
 private abbrev moduleCup_godementStalkComplex (X : Scheme.{u})
     (A : CosimplicialObject X.Modules) (x : X) :=
   ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
@@ -121,14 +119,12 @@ private abbrev moduleCup_godementStalkComplex (X : Scheme.{u})
     (((alternatingCofaceMapComplex X.Modules).obj A).extend
       ComplexShape.embeddingUpNat)
 
-/-- The source complex of the stalk augmentation.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- The source complex of the stalk augmentation. -/
 private abbrev moduleCup_godementStalkSingle (X : Scheme.{u}) (F : X.Modules) (x : X) :=
   ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
     (.up ℤ)).obj ((CochainComplex.singleFunctor X.Modules 0).obj F)
 
-/-- Transport from a nonnegative term to its specified Godement iterate.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- Transport from a nonnegative term to its specified Godement iterate. -/
 private def moduleCup_godementStalkTermIso (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (ht : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1))
@@ -179,8 +175,7 @@ private theorem term_d (X : Scheme.{u}) (F : X.Modules)
     Functor.map_zsmul, Category.assoc]
   rfl
 
-/-- The degree-zero retraction, given by coordinate evaluation.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- The degree-zero retraction, given by coordinate evaluation. -/
 private def moduleCup_godementStalkRetractionZero (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (ht : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1)) (x : X) :
@@ -191,8 +186,7 @@ private def moduleCup_godementStalkRetractionZero (X : Scheme.{u}) (F : X.Module
     (RingedSpace.moduleStalkFunctor X.toRingedSpace x).map
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 F).inv
 
-/-- The evaluation retraction as a chain map, zero away from degree zero.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- The evaluation retraction as a chain map, zero away from degree zero. -/
 private def moduleCup_godementStalkRetraction (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (ht : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1)) (x : X) :
@@ -213,8 +207,7 @@ private def moduleCup_godementStalkRetraction (X : Scheme.{u}) (F : X.Modules)
     · apply (Functor.map_isZero (RingedSpace.moduleStalkFunctor X.toRingedSpace x)
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 F j hj)).eq_of_tgt
 
-/-- The degree-lowering evaluation maps, extended by zero to negative degrees.
-Source: Stacks, Tag 0FKR (blueprint: lem-sc-module-cup-godement-stalk-contraction). -/
+/-- The degree-lowering evaluation maps, extended by zero to negative degrees. -/
 private def moduleCup_godementStalkHom (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (ht : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1)) (x : X)
@@ -243,23 +236,8 @@ private theorem hom_succ (X : Scheme.{u}) (F : X.Modules)
       (moduleCup_godementStalkTermIso X F A ht x n).inv := by
   simp [moduleCup_godementStalkHom]
 
-/-- Alternating-coface cancellation for the explicitly constructed stalk evaluation maps.
-Source: Stacks Project, Tag 0FKR, proof of Lemma 20.30.1 (0FKS), using the
-adjunction contraction in Simplicial, Lemma 14.34.3.
-(blueprint: lem-sc-module-cup-godement-stalk-contraction)
-Proof: evaluation of the x-coordinate after the outer germ insertion is the
-identity. Evaluation is natural in the module sheaf: composing the map of
-products with evaluation equals evaluation followed by the original stalk map.
-Hence evaluation after insertion at position i+1 equals insertion at i after
-evaluation. Apply these identities to the cofaces specified by ht and hc.
-In positive degrees the alternating sums cancel in pairs, leaving the identity.
-In degree zero the missing last summand is evaluation followed by the germ
-augmentation, which is exactly the degree-zero component of r followed by a
-by ha. In negative degrees every term is zero. Transport via extendXIso and
-ht, and use additivity of the stalk functor, to obtain the displayed identity.
-This statement asserts only the differential calculation for fixed explicit
-maps; it does not assert that the augmentation followed by r is the identity
-or package either chain homotopy or a homotopy equivalence. -/
+/-- Alternating-coface cancellation for the explicitly constructed stalk evaluation maps
+(Stacks, Tag 0FKR). -/
 private theorem moduleCup_godement_stalk_identity (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶
@@ -370,23 +348,8 @@ private theorem moduleCup_godement_stalk_identity (X : Scheme.{u}) (F : X.Module
 
 
 
-/-- Each stalk of the actual Godement model has a contracting augmented complex.
-Source: Stacks Project, Tag 0FKR, Lemma 20.30.1 (0FKS).
-(blueprint: lem-sc-module-cup-godement-stalk-contraction)
-Proof: fix x. Project T(H) to the skyscraper of H_x, apply the module stalk
-functor at x, and then apply skyscraperStalkEval. This defines e_H:(T(H))_x to H_x.
-The product germ unit followed by e_H is the identity, by the stalk-skyscraper
-adjunction. Evaluation is natural in H, so for every inner unit-insertion face
-e_H commutes with it with its index shifted down by one. For the outer face,
-evaluation following insertion is the identity. Transport these equations
-through the term equalities of ModuleCupGodementModel. Alternating the cofaces
-then gives d h+h d=id in positive degrees. In degree zero it gives
-h d=id-a r, where r is e_F after the degree-zero identifications. Also r a=id
-and r is a chain map to F_x[0]. Set all maps in negative degrees to zero.
-These equations supply a homotopy between a r and the identity, and the
-identity r a supplies the other homotopy, thus a homotopy equivalence whose
-forward map is the stalk augmentation. No global exactness or flasqueness
-is assumed, and the assertion at a point is unused for the empty scheme. -/
+/-- Each stalk of the actual Godement model has a contracting augmented complex
+(Stacks, Tag 0FKR). -/
 theorem moduleCup_godement_stalk_contraction (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶

@@ -12,8 +12,9 @@ import WeilConjectures.EtaleCohomology.EtaleSectionZeroOpen
 
 /-! # Support of a section of the proper-support direct image
 
-Source: Stacks Project, Tag 0F50.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 0F50]
 -/
 
 @[expose] public section
@@ -27,14 +28,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false
 
 /-- A module-sheaf section with zero germs at every separably closed geometric point is zero.
-
-Source: Stacks Project, Tags 04FR and 04FT; the zero-open criterion.
-(auxiliary; not a blueprint node)
-
-Proof: Apply the additive zero-open criterion after forgetting scalars. At each point
-of the etale object choose an algebraic closure of its residue field. The zero germ
-lifts this geometric point to the zero open, so that open contains every point.
-The zero-open criterion applied to the identity then makes the original section zero. -/
+(Stacks, Tags 04FR, 04FT) -/
 theorem module_section_zero_of_germs
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)
@@ -126,22 +120,7 @@ private theorem germ_zero_off_support_image
   exact eg.symm
 
 /-- The support of a section of the proper-support direct image is the closed image
-of the support of its underlying section.
-
-Source: Stacks Project, Tag 0F50, support-image argument.
-(auxiliary; not a blueprint node)
-
-Proof:
-Choose the closed support T of the underlying section. It is proper over V by the
-section's subtype property, so its image I is closed. Off I restrict to its open
-complement. The germ restriction formula shows that every restricted germ vanishes;
-the zero-open theorem makes the section zero, and hence its direct-image germ is zero.
-Conversely, a zero direct-image germ gives a Zariski zero neighbourhood W of the
-marked point. If that point lies in I, choose x in T over it and an algebraically
-closed geometric point k over x. Lift k's projection to W (an open neighbourhood),
-then use the Cartesian restriction square to lift k itself to X_W. Restriction of the
-section to W is zero, so its germ at this lift is zero. Germ compatibility contradicts
-k's membership in T. Thus the direct-image germ is nonzero exactly on I. -/
+of the support of its underlying section. (Stacks, Tag 0F50) -/
 theorem properSupportSectionImage (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale)

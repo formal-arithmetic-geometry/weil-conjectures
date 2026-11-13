@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 
 /-! # Composition square for restriction and tensor pullback
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
-(blueprint: lem-pc-open-cover-tensor-pullback-composition). -/
+
+## References
+
+* Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
+-/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -91,22 +94,7 @@ private lemma mate_openCoverComparison {A B : Scheme.{u}}
     conjugateEquiv_pullbackComp_inv, mate_pullbackCongr, mate_pullbackComp_hom,
     Category.assoc]
 
-/-- Restriction comparisons commute with two successive tensor pullbacks.
-Source: Stacks Project, Tags 0095 and 0096, pullback and its adjunction.
-(blueprint: lem-pc-open-cover-tensor-pullback-composition).
-Proof: The hypotheses identify the two projections of the supplied chart
-isomorphism with those of the iterated pullback chart. Expand the three
-restriction comparisons into ordinary pullback composition and the unique
-comparison of left adjoints to pushforward. Transpose the resulting square
-through the tensor and ordinary pullback adjunctions. Mates preserve horizontal
-and vertical composition, and the unique comparison of left adjoints is the
-mate of the identity on pushforward. Hence every intermediate comparison
-cancels. On right adjoints the remaining square is pushforward associativity
-and the two projection equations hs and hk. On sections over each open it is
-just the same restriction map on both sides. Injectivity of the mate
-correspondence proves the square of left adjoints; evaluate at M. The assertion
-holds for every module, including zero, and for empty charts and identity maps.
-There is no local map, global morphism or recovery hypothesis in this square. -/
+/-- Restriction comparisons commute with two successive tensor pullbacks. -/
 theorem openCoverTensorPullbackComparison_composition
     {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (b : Z ⟶ X)
     (wpq : p ≫ q = b) (U₀ : X.OpenCover.{u}) (α : U₀.I₀)

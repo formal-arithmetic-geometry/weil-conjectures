@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Uniform annihilator bounds for a principal section
 
-Source: Stacks Project, Tag 01YB, second paragraph, with Tags 01PO and 01Y8.
+## References
+
+* Stacks Project, Tag 01YB, with Tags 01PO and 01Y8.
 -/
 
 @[expose] public section
@@ -63,22 +65,8 @@ private theorem stable_annihilator_localization
   apply (IsLocalization.map_units B d).mul_right_cancel
   simpa only [zero_mul] using hcancel
 
-/-- A fixed power of a section kills all local power torsion on a Noetherian scheme.
-
-Source: Stacks Project, Tag 01YB, second paragraph (stabilization of ideal-power
-annihilators), using Tags 01PO and 01Y8.
-(blueprint: lem-sbc-principal-section-stable-annihilator)
-
-Proof: On each affine open the ascending annihilator ideals of powers of g
-stabilize, since its ring is Noetherian. A finite affine cover supplies a
-common exponent c. Localization is exact and commutes with kernels of
-multiplication, so every g-power torsion section on a basic subopen of one
-of these affine opens is killed by g^c. For an arbitrary open V, restrict
-a section killed by g^k to this basic-open cover of V. Each restriction
-is killed by g^c. Sheaf separatedness makes g^c times the original section
-zero. This also covers k<c, since Ann(g^k) is contained in Ann(g^c).
-For g=0 one may take c=1; for a unit take c=0. The empty scheme is covered
-by the empty family, on which separatedness supplies the assertion. -/
+/-- A fixed power of a section kills all local power torsion on a Noetherian scheme
+(Stacks, Tags 01YB, 01PO and 01Y8). -/
 theorem exists_principal_section_stable_annihilator
     (X : Scheme.{u}) [IsNoetherian X] (g : Γ(X, ⊤)) :
     ∃ c : ℕ, ∀ (V : X.Opens) (k : ℕ) (s : Γ(X, V)),

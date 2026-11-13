@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 lifts of a geometric point to an étale `S`-scheme, so `pointSmallEtalePrecomp s a` is an
 isomorphism of points: an étale neighbourhood base changed to `Spec k` is a disjoint union
 of copies of `Spec k`, and a lift from `Spec l` lands in, and factors uniquely through, one of
-them. (blueprint: lem-weil-pbc-geometric-point-field-extension) -/
+them. -/
 instance isIso_pointSmallEtalePrecomp_hom
     {S : Scheme.{u}} {k l : Type u} [Field k] [IsSepClosed k]
     [Field l] [IsSepClosed l] (s : Spec (.of k) ⟶ S)

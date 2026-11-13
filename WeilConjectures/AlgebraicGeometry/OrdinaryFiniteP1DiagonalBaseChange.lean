@@ -9,12 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Base change of the specified projective-line trace counit
-
-Source: blueprint thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public section

@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.MixedSectionsCompositionKInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Composition of normalized mixed Leray comparisons
-Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-composition-coherence).
+
+## References
+
+* Stacks Project, Tags 08HY, 0D5T and 0D5W.
 -/
 
 @[expose] public section
@@ -31,24 +33,7 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 -- Checking canonical comparison choices expands derived-functor and sheaf instances.
 /-- Normalized mixed Leray comparisons compose with the normalized direct-image
-comparison and restriction along a composite.
-Source: Stacks Project, Tags 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-composition-coherence).
-
-Proof: Let J be a K-injective representative on X. Precompose both sides with the
-pasted right-derived unit for f_* followed by g_* followed by global sections on Z.
-Use the unit equation of exists_derivedModuleDirectImageComposition and those of
-exists_mixedGlobalSectionsDirectImageIso for f, g and f followed by g. Naturality
-moves the units past the composition comparisons. Exact scalar restriction allows
-its unit to move through localization. Both sides become the localization of the
-identity map on sections over X: the underived Leray comparisons are identity on
-elements, and restriction along the composite has the same scalar action as the
-two successive restrictions. The mapDerivedCategoryCompIso in the scalar comparison
-records precisely this equality after localization. Direct image and global sections
-are acyclic on the required K-injective representatives, so the pasted unit is
-invertible; cancel it. Transport the equality along a K-injective resolution to F.
-Sheaf and module localization universes remain independent. For identities this is
-the unit law, and zero objects and empty schemes require no additional assumption. -/
+comparison and restriction along a composite (Stacks, Tags 0D5T and 0D5W). -/
 theorem mixedSections_composition_coherence
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (F : schemeDerivedCategory X) :

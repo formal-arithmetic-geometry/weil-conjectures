@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Locality of quasi-coherence and finite type on a binary union
 
-Source: Stacks Project, Modules, Tags 01BE and 01B5; Properties, Lemma 01PF.
+## References
+
+* [Stacks, Modules, Tags 01BE and 01B5]
+* [Stacks, Properties, Lemma 01PF]
 -/
 
 @[expose] public section
@@ -152,22 +155,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 400000 in
 -- Transport across iterated slice sites requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- Quasi-coherence and finite type descend from the two members of a binary open cover.
-Source: Stacks Project, Modules, Definitions 01BE and 01B5, and Properties, Lemma 01PF.
-(blueprint: lem-weil-pbc-module-binary-local-properties).
-
-Proof: Choose local presentations and finite generating families for the two restricted
-modules. An object of the slice site Over W or Over V is an open T contained in that
-member. The iterated-slice equivalence identifies its further restriction with the
-restriction of G directly to T in Over (W union V), and identifies the structure
-modules and their free modules. Transport each presentation and generating family
-through this equivalence. Index these data by the disjoint union of the two local
-index types, and use their underlying opens as objects of Over (W union V).
-Every point of an open T in W union V belongs to W or V; the local cover for that
-member supplies a smaller neighbourhood on which the transported data apply.
-Thus these neighbourhoods cover the terminal object of the union site. The combined
-presentations witness quasi-coherence, and the combined finite generating families
-witness finite type. Empty members contribute vacuous data and cause no exception. -/
+/-- Quasi-coherence and finite type descend from the two members of a binary open cover
+(Stacks, Tags 01BE, 01B5 and 01PF). -/
 theorem module_binary_local_properties
     (X : Scheme.{u}) (W V : X.Opens)
     (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (W ⊔ V)))

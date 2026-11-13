@@ -22,15 +22,7 @@ namespace AlgebraicGeometry
 
 /-- A finite étale cover lifts across a finite order thickening which is a universal
 homeomorphism, with a cartesian comparison map.
-Source: Stacks Project, Tags 039R and 09ZW(8), as used in Tag 0GS2.
-(blueprint: lem-weil-pbc-finite-etale-thickening-lift).
-
-Proof: essential surjectivity of étale base change gives an étale cover upstairs and
-an isomorphism of its pullback with the given cover. Use the inverse isomorphism followed
-by the first projection for the comparison map. The square is a pullback because it is
-isomorphic to the chosen pullback square. The second projection is finite, since its
-composite with the isomorphism is the given finite morphism. Finiteness then lifts across
-the finite order thickening by Tag 09ZW(8). -/
+(Stacks, Tags 039R and 09ZW, as used in Tag 0GS2.) -/
 theorem exists_finiteEtale_thickening_lift {S T : Scheme.{u}} (i : S ⟶ T)
     (hi : IsFiniteOrderThickening i) [IsUniversalHomeomorphism i]
     (V : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ S) :

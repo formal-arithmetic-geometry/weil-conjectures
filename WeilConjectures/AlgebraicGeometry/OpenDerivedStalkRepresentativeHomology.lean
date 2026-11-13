@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenDerivedStalkIso
 
 /-! # The open derived stalk comparison on a literal representative
 
-Source: Stacks Project, Tags 0098 and 0D5U, exact restriction and stalks.
-(blueprint: lem-pc-open-derived-stalk-representative-homology).
+## References
+
+* Stacks Project, Tags 0098 and 0D5U.
 -/
 
 @[expose] public section
@@ -148,24 +149,7 @@ private theorem exact_representative_homology_hom
 set_option maxHeartbeats 1000000 in
 -- Localization comparison evaluation needs additional elaboration heartbeats.
 /-- On a complex, the constructed derived comparison is homology of the inverse
-additive restriction-stalk map, conjugated by the exact forgetful comparisons.
-
-Proof: expand openDerivedStalkIso and openRestrictionRepresentativeIso. Naturality
-of additiveStalkCohomologyIso moves the exact-restriction localization factor to
-its homology image, and the derived-restriction factors cancel. Evaluate each
-mapDerivedCategoryHomologyFunctorIso on Q(N), using its hom_app_Q formula.
-The localization and derived homology factors then cancel against
-comparisonStalkHomologyIso at both ends. The remaining expression is the inverse
-restriction-stalk natural transformation on sheaf homology, conjugated by the
-exact-stalk homology comparisons. Apply ShortComplex.homologyMap_mapNatTrans to
-N.sc i. The comparison for the composite stalk/forget functor equals the stalk
-comparison followed by the forget comparison: compute both with the same mapped
-left homology data (its kernel and cokernel). Cancel these comparisons to obtain
-the formula below. This computation is valid also for zero complexes, arbitrary
-homology, and identity open immersions; it uses no choice of a representative.
-Source: Stacks Project, Tag 0D5U, opening paragraph; Tag 0098, stalk identification;
-exact-functor homology and localization naturality.
-(blueprint: lem-pc-open-derived-stalk-representative-homology). -/
+additive restriction-stalk map, conjugated by the exact forgetful comparisons. -/
 theorem openDerivedStalk_representative_homology
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

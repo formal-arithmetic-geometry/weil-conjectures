@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationOneChartMapLiftAtStag
 import WeilConjectures.AlgebraicGeometry.OpenCoverMapLiftTransport
 
 /-! # Eventual lifting of a map on one affine chart
-Source: Stacks Project, Limits Tag 01ZR and Algebra Tag 05N7 (2).
-(blueprint: lem-pc-fp-one-chart-map-lift).
+
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Lifting on a single supplied affine chart persists at every later stage.
 No finiteness of the supplied cover is assumed; only the selected chart is affine.
-Source: Stacks Project, Limits Tag 01ZR, first proof; Algebra Tag 05N7 (2).
-(blueprint: lem-pc-fp-one-chart-map-lift).
-
-Proof: The inverse images of the selected affine chart are affine because the
-transition maps are base changes of maps between affine schemes. Their rings form
-the filtered colimit obtained by tensoring the chart ring with the base-ring system
-on the upper tail of j. Pass through the partial-order quotient of the preorder.
-Quasi-coherence identifies restrictions with modules and pullback with extension
-of scalars; finite presentation gives finitely presented chart modules. Apply the
-map clause of ModuleCat.finitePresentation_descent_directedColimit to lift the
-restricted limit map at a stage k. Extend that map by scalars at every l above k.
-Transport back through the affine module equivalence. Naturality of the restriction
-comparison and associativity of scalar extension give the recovery equation with
-the canonical tensor composition comparison. No finite-cover choice or assembly
-occurs. Empty charts and zero modules give unique maps; a singleton index set
-recovers the restricted original map. No Noetherianity is needed. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem finitePresentation_one_chart_map_lift_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

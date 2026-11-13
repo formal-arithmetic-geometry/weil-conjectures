@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
 
 /-! # Affine tensor-homology naturality
 
-Source: Stacks Project, Tags 08DX(2), 06YT and 01I9.
-(blueprint: new-t3-qcoh-tensor-resolution-chart-homology-naturality).
+## References
+
+* [Stacks, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks, Tag 06YT](https://stacks.math.columbia.edu/tag/06YT)
+* [Stacks, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
 -/
 
 @[expose] public section
@@ -36,29 +39,9 @@ local instance QCohTensorResolutionChartHomologyNaturality_objZero
     ((curriedTensor X.Modules).obj L).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
 
-/-- Naturality of the affine tensor homology identification.
-
-Source: Stacks Tags 08DX(2), 08DV and 01I9, the affine derived tensor calculation
-and its functorial associated-sheaf identification.
-
-Proof in words: extend the chain maps to cochain complexes, placing chain degree j
-in degree -j. In these degrees the formula hk identifies the tensor comparison
-with the tensor of the sheafified map a and the coefficient map b. To check this,
-apply the associated-sheaf tensor isomorphism on pure tensors. The equation hb
-identifies the sheafified coefficient map, conjugated by the two normalized
-coefficient isomorphisms, with restriction of N. The pure tensors generate the
-tensor product, so the two maps agree. In strictly positive cochain degrees both
-extended complexes vanish, and the square follows from the zero-object property.
-Taking homology gives the square for the chart tensor isomorphism. Use naturality
-of exact associated-sheaf homology to move the tilde functor past homology; its
-semilinear version is tensorResolutionSemilinearMap_homologyData. Finally use
-extension homology in degree -n, with tensorResolutionExtendHomologyMapData, to
-identify the induced map with H_n(k) followed by the restriction-of-scalars
-homology isomorphism. Compose these three squares and cancel inverse isomorphisms.
-This argument includes n = 0, zero modules, and the zero ring, and does not require
-the ring restriction map to be flat.
-
-(blueprint: new-t3-qcoh-tensor-resolution-chart-homology-naturality) -/
+/-- Naturality of the affine tensor homology identification (Stacks, Tags 08DX, 08DV, 01I9).
+This holds for `n = 0`, zero modules and the zero ring, and does not require the ring
+restriction map to be flat. -/
 theorem tensorResolutionChartHomologyIso_naturality
     (Y : Scheme.{u}) (N : Y.Modules) [N.IsQuasicoherent]
     (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))

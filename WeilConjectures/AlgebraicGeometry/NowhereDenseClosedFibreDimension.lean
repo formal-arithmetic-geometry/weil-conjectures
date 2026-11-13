@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # NowhereDenseClosedFibreDimension
 
-Source: Stacks Project, Tag 054X, final dimension contradiction; Tags 00OT and 00OS.
-(blueprint: lem-sbc-nowhere-dense-closed-fibre-dimension)
+## References
+
+* [Stacks, Tag 054X], [Stacks, Tag 00OT], [Stacks, Tag 00OS]
 -/
 
 @[expose] public section
@@ -106,21 +107,9 @@ private theorem local_dimension_lt_of_closed_embedding {A B : Type*}
   rw [hjU.topologicalKrullDim_eq_range] at hlocal
   exact hlocal.trans_lt (hdrop.trans_eq hd)
 
-/-- A nowhere dense closed fibre has strictly smaller local dimension at each point.
-Source: Stacks Project, Tag 054X, final dimension contradiction; Tags 00OT and 00OS.
-Proof: the fibre of a quasi-compact locally finite type morphism is a noetherian,
-finite-dimensional scheme over the residue field. In any noetherian sober space,
-each point specializes from the generic point of an irreducible component. Such a
-generic point cannot lie in a nowhere dense closed subset: otherwise that subset
-contains its component and hence a nonempty ambient open. Thus every chain in the
-closed subset extends by a point outside it. The local dimension at the image point
-is a natural number n. The infimum defining it supplies an open neighbourhood of
-dimension less than n + 1. Restrict the closed embedding to this neighbourhood;
-its range is still nowhere dense, so the chain-extension inequality bounds its
-dimension strictly by n. The source's local dimension is at most the dimension of
-this restricted source. Apply this topological argument to the base change of i
-on the fibre and identify its distinguished point with f.asFiber (i z).
-(blueprint: lem-sbc-nowhere-dense-closed-fibre-dimension) -/
+/-- If a closed immersion `i : Z ⟶ X` has nowhere dense image in the fibre of `f` over `t`, then
+the fibre of `i ≫ f` has strictly smaller local dimension at each point `z` than the fibre of `f`
+at `i z` (Stacks, Tag 054X). -/
 theorem fibre_dimension_lt_of_closed_interior_eq_empty
     {Z X T : Scheme.{u}} (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]
     (i : Z ⟶ X) [IsClosedImmersion i] (t : T)

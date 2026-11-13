@@ -10,8 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import WeilConjectures.AlgebraicGeometry.NormalizedDirectImageSquarePaste
 /-! # Right-derived unit normalization of direct-image squares
 
-Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: lem-pc-normalized-direct-image-square-unit).
+## References
+
+* [Stacks, Tag 0D5T]
 -/
 
 @[expose] public section
@@ -46,25 +47,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 
 -- The explicit categorical carrier conversions require the larger elaboration budget.
 /-- The normalized right-adjoint square is determined by the pasted right-derived
-units of its two ordinary direct-image paths.
-Source: Stacks Project, Cohomology, Tag 0D5T; the determining equation in
-`RingedSpace.exists_derivedModuleDirectImageComposition`.
-(blueprint: lem-pc-normalized-direct-image-square-unit).
-
-Proof: The inverse composition comparison for each path is specified by its
-right-derived unit equation. Postcompose that equation with the forward comparison
-and cancel the inverse to obtain the forward equation. The ordinary pushforward
-composition comparison is the identity on sections; its termwise and
-homotopy-category maps are identities, so the pasted unit in rightDerivedFunctorCompUnit
-is exactly the two successive units appearing in the chosen normalization. Between
-the paths, substitution of equal scheme morphisms proves compatibility of the unit
-with pushforwardCongr and the corresponding derived equality transport. Paste
-these three equations: the first forward composition, the equality transport,
-and the inverse second composition. Naturality moves the homotopy-category
-comparison through the units, and associativity yields the displayed equation.
-Natural-transformation extensionality gives the assertion. All comparisons use
-the fixed common derived-category instances. The same equations hold for
-identity arrows, empty schemes, zero complexes and degenerate commuting squares. -/
+units of its two ordinary direct-image paths (Stacks, Tag 0D5T). -/
 theorem normalizedDirectImageSquare_unit
     {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)

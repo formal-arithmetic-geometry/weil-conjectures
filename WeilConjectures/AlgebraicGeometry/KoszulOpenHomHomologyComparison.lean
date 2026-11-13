@@ -14,8 +14,9 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # The stagewise derived Hom identification for the Koszul comparison
 
-Source: Stacks Project, Tags 06Z0, 08DC and 08DD.
-(blueprint: lem-sc-koszul-open-hom-homology-comparison).
+## References
+
+* Stacks Project, Tags 06Z0, 08DC and 08DD.
 -/
 
 @[expose] public section
@@ -30,34 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived Hom from each Koszul tail is its Hom-complex cohomology, naturally in
 power transitions. The canonical comparison sends a restriction-zero arrow to zero.
-This statement does not assert exactness of a filtered colimit, injectivity of the
-comparison on cohomology, or eventual vanishing.
-Source: Stacks Project, Tag 06Z0 and Equation 36.9.4.1, Tag 08DC; Tag 08DD.
-(blueprint: lem-sc-koszul-open-hom-homology-comparison)
-
-Proof: On the affine scheme, termwise quasi-coherence identifies F with the tilde
-of its global-sections complex M, naturally in the differentials. The affine
-quasi-coherent derived equivalence identifies derived sheaf arrows from I_e into
-Q(F) with derived module arrows from the extended module tail into M. The tail
-has finite free terms and is bounded, so it is K-projective. Localization thus
-identifies these arrows with homotopy classes of chain maps. The degree-zero
-cycles of the linear Hom complex are exactly chain maps, and its boundaries are
-null-homotopic maps. Take the inverse of this additive identification, and compose
-with postcomposition by the inverse of the specified isomorphism to E. The object
-identification koszulCechHomObjIso gives the displayed additive equivalences.
-Precomposition of Hom cochains agrees with composition of chain maps; the power
-transition formula for koszulCechHomDiagram therefore proves their naturality.
-For the last clause, represent an arrow by such a module chain map. On the
-principal intersection indexed by J, the Koszul-to-Cech comparison evaluates
-that map on the ordered exterior generator and divides by the product of the
-f_j to the stage exponent, with its specified totalization sign. This is exactly
-the chain-level restriction followed by the inverse of the restricted augmentation:
-the restricted Koszul complex contracts when one f_j is invertible. The Cech to
-RΓ map and evaluation-at-one identification of Hom(O_U,E|_U) with H^0(RΓ(U,E))
-identify its class with the given composite on derived homology. Restriction-zero
-arrows therefore give the zero class. The argument uses no exactness of colimits
-or invertibility of the comparison. For the empty cover, all tails and comparison
-sources vanish; the zero ring and F=0 give zero groups by the same constructions. -/
+This does not assert exactness of a filtered colimit or injectivity of the comparison. -/
 theorem koszulOpenHom_homology_comparison
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

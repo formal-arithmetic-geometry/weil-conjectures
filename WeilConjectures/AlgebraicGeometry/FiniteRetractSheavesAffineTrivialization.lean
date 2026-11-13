@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SingleFiniteRetractSheafAffineTrivializ
 
 /-! # Simultaneous affine trivialization of finitely many finite free retracts
 
-Source: Stacks Project, Tags 00NX, 01IA and 01IB.
-(blueprint: lem-pc-finite-retract-sheaves-affine-trivialization).
+## References
+
+* Stacks Project, Tags 00NX, 01IA and 01IB.
 -/
 
 @[expose] public section
@@ -48,27 +49,7 @@ private noncomputable def restrictCompIso (X : Scheme.{u}) (U V W : X.Opens)
   Iso.refl _
 
 /-- A finite family of retracts of finite free sheaves becomes finite free on one affine
-neighbourhood of a specified point.
-
-Source: Stacks Project, Algebra, Tag 00NX (3) implies (7), and Schemes, Tags 01IA
-and 01IB; https://stacks.math.columbia.edu/tag/00NX.
-Proof: Choose an affine neighbourhood W of x inside U. Restriction preserves finite
-free sheaves and the splitting equations. For each index in s, the composite of its
-retraction and section is an idempotent endomorphism of a finite free sheaf on W.
-Use the equivalence between the localized-site sheaves on W and W.Modules. The affine
-tilde-Gamma adjunction identifies this endomorphism with an idempotent matrix over
-Gamma(W,O_W). Its image is a finite projective module, being a summand of a finite
-free module. Applying tilde to its splitting yields the original restricted sheaf:
-both are splittings of the same idempotent, hence canonically isomorphic.
-The finite projective standard free cover supplies, for each of the finitely many
-indices, a principal open containing x on which that module is finite free.
-Their intersection is again a principal open in W (the product of the elements),
-so is affine and contains x. Sections/localization and tilde identify the sheaf
-restrictions there with free sheaves of the respective finite ranks. Compose the
-nested-restriction comparisons to obtain the stated trivializations. For s empty
-use W itself. A zero summand has rank zero; no positive rank is required. If U
-is empty there is no x satisfying hx, so no existence claim is imposed.
-(blueprint: lem-pc-finite-retract-sheaves-affine-trivialization). -/
+neighbourhood of a specified point (Stacks, Tags 00NX, 01IA, 01IB). -/
 theorem exists_affine_trivialization_of_finite_retracts
     (X : Scheme.{u}) (U : X.Opens) (s : Finset ℤ)
     (M : ℤ → SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

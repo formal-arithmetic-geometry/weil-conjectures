@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Norm.Basic
 /-!
 # Local determinant charts for a finite locally free norm
 
-Source: Stacks Project, Tag 03JE, final norm argument.
+## References
+
+* Stacks Project, Tag 03JE
 -/
 
 @[expose] public section
@@ -169,24 +171,7 @@ private theorem exists_free_affine_chart
   exact ⟨inferInstanceAs (Module.Free Γ(X, B) Γ(M, B)), s.finite_app B hB⟩
 
 /-- A section on the inverse image of an open has a norm, locally computed on finite
-free affine charts.
-
-Source: Stacks Project, Tag 03JE, final norm argument.
-
-Proof: Restrict the finite flat locally finitely presented morphism to W. On an affine
-neighbourhood of any point of W its source is affine, and its algebra is a finitely
-presented flat module. Shrinking to affine principal neighbourhoods makes that module
-finite free. On each such chart B take the determinant of multiplication by the
-restriction of a. This is the finite free algebra norm Algebra.norm Γ(X, B). On overlaps these
-sections agree: cover each overlap by affine principal neighbourhoods in both charts,
-use compatibility of determinants with localization, and use invariance under change
-of basis. The structure sheaf glues these sections to g on W. Its restriction to each
-chart is the prescribed norm. The chart algebra is finite because s is finite.
-There is no fixed rank assumption: the construction is local and determinants agree
-on overlaps of every rank. If W is empty its section ring has a unique element and the
-chart condition is vacuous. A chart with empty inverse image has the rank-zero algebra
-and determinant 1, so it satisfies the same gluing condition.
-(blueprint: lem-pd-finite-locally-free-norm-charts). -/
+free affine charts. (Stacks, Tag 03JE) -/
 theorem exists_finiteLocallyFree_norm_charts
     {X Y : Scheme.{u}} (s : Y ⟶ X)
     [IsFinite s] [Flat s] [LocallyOfFinitePresentation s]

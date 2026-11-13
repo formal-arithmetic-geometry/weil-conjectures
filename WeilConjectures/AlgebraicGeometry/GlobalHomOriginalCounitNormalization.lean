@@ -12,12 +12,12 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Global Hom tensor comparison normalized to the original derived counit
 
-Source: Stacks Project, Cohomology, Tags 06YJ and 079U.
-(blueprint: lem-pc-global-hom-original-counit-normalization).
-
 This API constructs the original universal counit and transports the adjunction
-and tensor comparison to it. The legacy global Hom entry points remain unchanged
-pending coordinated base-change normalization.
+and tensor comparison to it.
+
+## References
+
+* Stacks Project, Tags 06YJ and 079U.
 -/
 
 @[expose] public section
@@ -32,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- A universal derived counit with a fixed target functor.
-Source: Stacks, Tag 06YJ (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- A universal derived counit with a fixed target functor (Stacks, Tag 06YJ). -/
 structure SchemeHomUniversalCounit
     {C D H : Type*} [Category* C] [Category* D] [Category* H]
     (Q : C ⥤ D) (L : D ⥤ H) (F : C ⥤ H) (W : MorphismProperty C)
@@ -41,8 +40,7 @@ structure SchemeHomUniversalCounit
   counit : Q ⋙ L ⟶ F
   isLeftDerived : L.IsLeftDerivedFunctor counit W
 
-/-- Map an isomorphism between additive functors to homotopy categories.
-Source: Stacks, Tag 06YJ (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- Map an isomorphism between additive functors to homotopy categories (Stacks, Tag 06YJ). -/
 def schemeHomUnderivedHomotopyIso {A B : Type*} [Category* A] [Category* B]
     [Preadditive A] [Preadditive B] {E E' : A ⥤ B} [E.Additive] [E'.Additive]
     (e : E ≅ E') : E.mapHomotopyCategory (.up ℤ) ≅ E'.mapHomotopyCategory (.up ℤ) where
@@ -55,8 +53,8 @@ def schemeHomUnderivedHomotopyIso {A B : Type*} [Category* A] [Category* B]
     rw [← NatTrans.mapHomotopyCategory_comp, e.inv_hom_id,
       NatTrans.mapHomotopyCategory_id]
 
-/-- Changing the target functor by its pinned iso preserves the derived property.
-Source: Stacks, Tag 06YJ (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- Changing the target functor by an iso preserves the left-derived property
+(Stacks, Tag 06YJ). -/
 theorem schemeHomCounit_comp_iso_leftDerived
     {C D H : Type*} [Category* C] [Category* D] [Category* H]
     (Q : C ⥤ D) (L : D ⥤ H) {F F' : C ⥤ H} (W : MorphismProperty C)
@@ -67,8 +65,7 @@ theorem schemeHomCounit_comp_iso_leftDerived
     (by simp)).mp h
 
 
-/-- Change of counit in a tensor representative equation.
-Source: Stacks, Tag 079U (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- Change of counit in a tensor representative equation (Stacks, Tag 079U). -/
 private theorem originalCounitTensorEquation
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
     {D : Type uD} [Category.{vD} D] [MonoidalCategory D]
@@ -95,10 +92,8 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
 
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The trailing presentation in the original derived-pullback existence theorem.
-Its statement retains every field of that original trailing existential. Proof
-irrelevance therefore identifies its chosen witnesses with the original choices.
-Source: Stacks, Tag 06YJ (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The trailing presentation in the original derived-pullback existence theorem
+(Stacks, Tag 06YJ). -/
 theorem schemeHomOriginalTensorSpec {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ (E : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
         SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -124,11 +119,8 @@ theorem schemeHomOriginalTensorSpec {X Y : Scheme.{u}} (f : X ⟶ Y) :
   exact (Classical.choose_spec s₃).2.2.2
 
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The original underived presentation is the recorded module tensor pullback.
-Proof: its original specification records object and map equalities, so functor
-extensionality applies. Naming this equality keeps its proof out of counit data.
-Source: Stacks, Tag 06YJ
-(blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The original underived presentation is the recorded module tensor pullback
+(Stacks, Tag 06YJ). -/
 theorem schemeHomOriginalUnderived_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Classical.choose (schemeHomOriginalTensorSpec.{u, w} f) =
       Scheme.Modules.tensorPullback f := by
@@ -140,9 +132,8 @@ theorem schemeHomOriginalUnderived_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The original counit, transported along the recorded equality of module functors.
-Only the original presentation is extracted; no second counit is chosen.
-Source: Stacks, Tag 06YJ (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The original counit, transported along the recorded equality of module functors
+(Stacks, Tag 06YJ). -/
 def schemeHomPullbackCounitData {X Y : Scheme.{u}} (f : X ⟶ Y) :
     letI := SingleComplexBaseChange.tensorPullbackAdditive f
     SchemeHomUniversalCounit
@@ -189,8 +180,8 @@ attribute [local irreducible] schemeHomPullbackCounitData
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The derived adjunction normalized to the original derived-pullback counit.
-Source: Stacks, Tags 079W and 0B6I (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The derived adjunction normalized to the original derived-pullback counit
+(Stacks, Tags 079W and 0B6I). -/
 def schemeHomOriginalPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     derivedPullback f ⊣ schemeDerivedDirectImage f :=
   let d := schemeHomPullbackCounitData f
@@ -198,9 +189,7 @@ def schemeHomOriginalPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (hAdd := SingleComplexBaseChange.tensorPullbackAdditive f) d.counit d.isLeftDerived)
 
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The composition counit has its recorded universal property.
-Source: Stacks, Tag 0D5S
-(blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The composition counit has its recorded universal property (Stacks, Tag 0D5S). -/
 theorem schemeHomCompositionCounit_isLeftDerived {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedPullback f).IsLeftDerivedFunctor (SingleComplexBaseChange.counit f)
       (HomotopyCategory.quasiIso
@@ -210,8 +199,8 @@ theorem schemeHomCompositionCounit_isLeftDerived {X Y : Scheme.{u}} (f : X ⟶ Y
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The unique change of presentation from the composition counit to the original one.
-Source: Stacks, Tags 06YJ and 079U (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The unique change of presentation from the composition counit to the original one
+(Stacks, Tags 06YJ and 079U). -/
 def schemeHomPullbackCounitIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     derivedPullback f ≅ derivedPullback f :=
   let d := schemeHomPullbackCounitData f
@@ -230,10 +219,8 @@ attribute [local irreducible] schemeHomPullbackCounitIso
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The derived tensor iso transported to the original derived-pullback counit.
-The inverse change of presentation acts on the tensor input, and its tensor square
-acts on the outputs. Thus arbitrary changes of the composition counit cancel.
-Source: Stacks, Tags 079U and 0B6I (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The derived tensor iso transported to the original derived-pullback counit
+(Stacks, Tags 079U and 0B6I). -/
 def schemeHomOriginalTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅
       (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X) :=
@@ -245,8 +232,8 @@ def schemeHomOriginalTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The change of presentation intertwines the original and composition counits.
-Source: Stacks, Tag 06YJ (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The change of presentation intertwines the original and composition counits
+(Stacks, Tag 06YJ). -/
 theorem schemeHomPullbackCounitIso_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)) :
     (schemeHomPullbackCounitIso f).hom.app (DerivedCategory.Qh.obj P) ≫
@@ -264,9 +251,8 @@ theorem schemeHomPullbackCounitIso_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The inverse comparison transports the composition counit back to the original one.
-Source: Stacks, Tag 06YJ
-(blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The inverse comparison transports the composition counit back to the original one
+(Stacks, Tag 06YJ). -/
 theorem schemeHomPullbackCounitIso_inv_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)) :
     (schemeHomPullbackCounitIso f).inv.app (DerivedCategory.Qh.obj P) ≫
@@ -277,10 +263,7 @@ theorem schemeHomPullbackCounitIso_inv_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The canonical tensor comparison is characterized on every pair of K-flat
 representatives by the left-derived counits, the localization tensor maps and
-termwise module pullback. The degreewise equation pins the chain isomorphism to
-the canonical module tensor map on each summand, including its signs.
-Source: Stacks, 079U; perfect.tex, 0DJA(1)
-(blueprint: lem-pc-global-hom-original-counit-normalization). -/
+termwise module pullback (Stacks, Tag 079U). -/
 def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
     (τ : ∀ E K : schemeDerivedCategory X,
       (derivedPullback g).obj (E ⊗ K) ⟶
@@ -330,14 +313,8 @@ def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The repaired tensor iso satisfies the representative equation with the ORIGINAL counit.
-Proof: take the chain comparison in the old canonical predicate. Its summand
-formula is unchanged. Precompose its coordinate equation with the change of
-presentation, and use naturality to move that change through the localization
-map. The counit identities replace all three old counits by the original ones;
-the inverse change on the input cancels, giving precisely the transported iso.
-Naturality follows from the naturality of the composite natural isomorphism.
-Source: Stacks, Tags 06YJ and 079U (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+/-- The transported tensor iso satisfies the representative equation with the original counit
+(Stacks, Tags 06YJ and 079U). -/
 theorem schemeHomOriginalTensorPullbackIso_originalCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsSchemeHomOriginalCounitTensorComparison f
       (fun A B ↦ (schemeHomOriginalTensorPullbackIso f).hom.app (A, B)) := by

@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Augmentation square for degree zero resolution maps
 
-Source: Stacks Project, Tags 01F8, 01F9 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-zero-augmentation).
+## References
+
+* [Stacks, Tags 01F8, 01F9 and 01FB]
 -/
 
 @[expose] public section
@@ -75,22 +76,8 @@ private theorem forget_augmentation {C : Type*} [Category* C] [Abelian C]
 set_option maxHeartbeats 800000 in
 -- Comparing the module and abelian-group homology models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
-/-- The degree-zero resolution formula commutes with the canonical augmentations.
-Source: Stacks Project, Cohomology of Sheaves, Remark 01FB, equation-choice;
-Mathlib CategoryTheory.Abelian.RightDerived, toRightDerivedZero_eq
-(blueprint: lem-weil-pbc-module-cohomology-fmap-zero-augmentation).
-
-Proof: express each toRightDerivedZero using its resolution by
-InjectiveResolution.toRightDerivedZero_eq. Before the inverse vertical map is
-applied, both routes send a section s of G to the zero-cycle represented by
-β⁰(s_J(s)): D.compatible identifies this with lambda⁰(h_*s_I(φ(s))).
-The comparison D.a.inv is the canonical restriction along h⁻¹(Y) = X by
-D.sections, so it identifies the latter section with s_I(φ_Y(s)) on X.
-Naturality of cyclesMap and homologyπ transfers the augmentation equation to
-H⁰. The vertical homology map is invertible by D.invertible; compose with its
-inverse and cancel. Finally cancel the two resolution comparison isomorphisms.
-The result is the stated augmentation square; left exactness is only needed
-later to invert its two augmentation maps. -/
+/-- The degree-zero resolution formula commutes with the canonical augmentations
+(Stacks, Remark 01FB). -/
 theorem ModuleCohomologyFMapData.map_zero_augmentation {X Y : Scheme.{u}} {h : X ⟶ Y}
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     {φ : G ⟶ (pushforward h).obj F} (D : ModuleCohomologyFMapData h G F φ) :

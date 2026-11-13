@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Realization of affine formal morphisms over the completed base
 
-Source: Stacks Project, Tag 087W (affine equivalence), Tag 01XZ (finite modules).
-(blueprint: lem-weil-pbc-formal-affine-morphism-realization)
+## References
+
+* Stacks Project, Tags 087W and 01XZ
 -/
 
 @[expose] public section
@@ -33,24 +34,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Every formal morphism has a coherent realization over the completed affine base.
-Source: Stacks Project, Tags 087W and 01XZ.
-(blueprint: lem-weil-pbc-formal-affine-morphism-realization)
-
-Proof: Restrict both formal systems to the affine open U, identifying U with Spec B
-by its canonical affine isomorphism. Restriction commutes with ideal quotients, so
-these remain coherent formal systems for J(U). Apply the affine formal-module
-equivalence (087W) to obtain finite R-modules N and M and an R-linear map v. Its
-natural affine-limit model identifies the two original evaluated limits, as B-modules, with
-N and M restricted along B to R. The ring R is Noetherian. Associate to N,M their
-tilde modules on Spec R. Finite presentations of N,M give finite presentations of
-these sheaves via presentationTilde, hence quasi-coherence and finite type. They are
-coherent by 01XZ and their sections recover N,M.
-Compose the limit isomorphisms with these section isomorphisms. Naturality of both
-the limit-cone comparison and tilde's unit identifies the limit map of α with
-sections of tilde(v), giving the square. Empty affine opens and J(U)=B give the zero
-ring R and zero modules, so the same construction covers these cases.
--/
+/-- Every formal morphism has a coherent realization over the completed affine base
+(Stacks, Tags 087W and 01XZ). -/
 theorem formal_affine_morphism_realization
     {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData)
     (G H : CoherentFormalModule Y J) (α : G ⟶ H) :

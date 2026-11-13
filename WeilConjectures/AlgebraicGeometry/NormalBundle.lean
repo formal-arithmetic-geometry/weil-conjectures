@@ -91,12 +91,9 @@ namespace Scheme.Hom
 
 variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- Blueprint `prose-09-11`: Normal bundle and zero section
-
-The projection `π : N_{Z/X} ⟶ Z` of the normal cone `N_{Z/X} = Spec_Z (⨁_{r ≥ 0} I^r / I^{r+1})`
-(`AlgebraicGeometry.Scheme.IdealSheafData.normalCone` of the ideal sheaf `I` of `i`) of a closed
-immersion `i : Z ⟶ X`: the projection to `V(I) ≅ Z`, given by the inclusion of the degree zero part
-`𝒪_X / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}`. -/
+/-- The projection `π : N_{Z/X} ⟶ Z` of the normal cone `N_{Z/X} = Spec_Z (⨁_{r ≥ 0} I^r / I^{r+1})`
+(`AlgebraicGeometry.Scheme.IdealSheafData.normalCone`) of a closed immersion `i : Z ⟶ X`, given by
+the inclusion of the degree zero part `𝒪_X / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}`. -/
 noncomputable def normalBundleProj : i.ker.normalCone ⟶ Z :=
   i.ker.normalConeToQuotientSpec ≫ inv i.toQuotientSpec
 
@@ -110,7 +107,7 @@ lemma normalBundleProj_comp :
     rw [IsIso.inv_comp_eq, toQuotientSpec_toBase]
   rw [normalBundleProj, Category.assoc, this, IdealSheafData.normalConeToQuotientSpec_toBase]
 
-/-- Blueprint `prose-09-11`: Normal bundle and zero section
+/-- Normal bundle and zero section
 
 The zero section `z : Z ⟶ N_{Z/X}` (`AlgebraicGeometry.Scheme.Hom.normalConeZeroSection`, given by
 the augmentation `⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_X / I`) is a section of the projection of the normal

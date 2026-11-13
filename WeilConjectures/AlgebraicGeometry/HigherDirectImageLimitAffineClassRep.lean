@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineClassRep
 
 /-! # Affine representatives of raw limit cohomology classes
 
-Source: Stacks Project, Tag 09Z1
-(blueprint: lem-sbc-higher-direct-image-limit-affine-class-rep).
+## References
+
+* Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -26,34 +27,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- On an affine etale object, a raw limit cohomology class is represented at a stage.
-Source: Stacks Project, Tag 09Z1, proof, and Tag 03Q8
-(blueprint: lem-sbc-higher-direct-image-limit-affine-class-rep).
-
-Proof:
-1. Use the natural sheafification comparison of Tag 03Q8, obtained from derived
-   adjunction and evaluation at the generator of the free abelian representable.
-   This identifies the displayed derived-Hom presheaf with restricted cohomology.
-   Choose the comparison supplied by this construction, not an arbitrary isomorphism.
-2. For affine U, base change D and c along U.hom. The stage schemes are qcqs:
-   their maps to U are qcqs by base change and U is affine. The transition maps
-   are affine, and the base-changed cone is a limit. Restrict F and its transition
-   maps to this system. Pullback preserves colimits, so the limit coefficient sheaf
-   is the colimit of the pulled-back stage sheaves.
-3. Put these sheaves in degree zero and apply complex cohomology continuity
-   (Tag 0EZM, specializing the uniform lower bound to zero). The representative
-   property of filtered colimits of abelian groups supplies an index and a stage
-   cohomology class mapping to z. Map it into the stage higher direct image using
-   the natural comparison from step 1 to get y.
-4. Derived adjunction is natural in pullback and coefficient maps. Its unit,
-   pullback composition comparison, counit, and coefficient map are exactly the
-   four factors defining abelianHigherDirectImageMap before homology. Applying
-   degree-p homology and evaluating at U identifies the image of y with the
-   image of z under toSheafify followed by the chosen comparison. This proves
-   the equality with the canonical stage-to-limit map stated here.
-
-There is no diagram of stage higher direct images or covering sieve in this lemma.
-The affine hypothesis is essential for the qcqs continuity argument. -/
+/-- On an affine etale object, a raw limit cohomology class is represented at a stage
+(Stacks, Tags 09Z1 and 03Q8). -/
 theorem exists_higherDirectImage_limit_affine_class_rep {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

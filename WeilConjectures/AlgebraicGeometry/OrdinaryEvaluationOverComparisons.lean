@@ -12,9 +12,12 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverTensorFormula
 
 /-! # Compatible ordinary evaluation comparisons on the open scheme
 
-Source: Stacks Project, Tags 08DL, 08DJ and 08DQ, ordinary complex constructions.
-(blueprint: lem-pc-ordinary-evaluation-over-comparisons).
-No acyclicity, quasi-isomorphism or K-injectivity assertion is included here. -/
+No acyclicity, quasi-isomorphism or K-injectivity assertion is included here.
+
+## References
+
+* Stacks Project, Tags 08DL, 08DJ and 08DQ.
+-/
 
 @[expose] public section
 
@@ -35,31 +38,8 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 -- Compare the chosen Hom bifunctors without unfolding their existence proofs.
-/-- Compatible comparisons for ordinary Hom, its dual and ordinary evaluation.
-Source: Stacks Project, Tags 08DL, 08DJ and 08DQ; Mathlib `Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-over-comparisons).
-
-Proof: choose the natural termwise internal-Hom comparison together with its
-evaluation compatibility. Take the
-product comparison in each Hom degree, using the specified projections of
-`homComplex_projections_exists`. The naturality equation for internal Hom and
-additivity identify the differential d_M phi - (-1)^n phi d_P on both sides.
-This yields b M, natural in M by checking after each Hom projection. At M equal
-to the single unit, compose b M with Hom(P',-) applied to the chain isomorphism
-from the transported single unit to the scheme single unit; call this composite d.
-For each F, apply the total tensor comparison and then tensor with d to obtain t.
-Use these same comparisons, rather than unrelated isomorphisms, for all three maps.
-To check evaluation, precompose with each tensor summand and postcompose with each
-Hom projection. When r+q=0, both composites curry the same sectionwise map
-(y,phi,x) -> y*phi(x): reindexing commutes with composition and with the unit
-action. The associator, symmetry and unit comparison used in d are the comparisons
-of these same sectionwise maps.
-When r+q is nonzero, the projection to the single unit in that degree vanishes,
-so both evaluation components are zero. Naturality of degree-equality
-isomorphisms identifies the final output degrees. The product and coproduct
-universal properties give the claimed component equation for every f satisfying
-the local formula. These constructions require no homological assumptions on P
-or F, and apply equally to zero complexes and the empty open. -/
+/-- Compatible comparisons for ordinary Hom, its dual and ordinary evaluation
+(Stacks, Tags 08DL, 08DJ and 08DQ). -/
 theorem exists_ordinaryEvaluation_over_comparisons (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :
     let L := Equivalence.functor

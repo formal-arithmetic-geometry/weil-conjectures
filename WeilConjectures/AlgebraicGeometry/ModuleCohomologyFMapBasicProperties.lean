@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.BasicPropertiesRestriction
 
 /-! # Basic properties of maps on module cohomology
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Tags 01F8--01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-properties).
+## References
+
+* [Stacks, Cohomology of Sheaves, Tags 01F7, 01F8, 01FA, 01FB]
 -/
 
 @[expose] public section
@@ -31,30 +32,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Linearity, degree zero, identity, and restriction properties of the map induced by an
-`h`-map.  The degree-zero clause is expressed using the canonical derived-functor
-identifications with global sections.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7;
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-properties).
-
-Proof plan (all parts are left as the stage-3 proof): choose injective resolutions and
-use the derived-functor comparison isomorphisms. The global-sections complexes are
-modules over global sections, and the comparison maps are linear, proving (1).
-Left exactness identifies degree-zero cohomology with global sections; the defining
-augmentation square proves (2). For (3), lift the morphism across the injective
-resolution and use uniqueness up to homotopy, then apply the derived-functor
-map-via-lift lemma. For (4), compare the restriction and pullback units using the
-open-immersion restriction isomorphism, lift between the two injective resolutions,
-and use the K-injective comparison and homotopy lemmas; cancellation of the
-quasi-isomorphism gives the displayed equality. The setup uses
-`lem-weil-pbc-scheme-modules-enough-injectives`,
-`lem-weil-pbc-derived-functor-map-via-lift`,
-`lem-weil-pbc-lift-along-injective-quasi-iso`,
-`lem-weil-pbc-lift-to-injective-unique-up-to-homotopy`,
-`lem-weil-pbc-kinjective-hom-derived`,
-`lem-weil-pbc-acyclic-map-to-injective-nullhomotopy`,
-`lem-weil-pbc-left-exact-injective-resolution-degree-zero`, and
-`lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso`.
--/
+`h`-map. The degree-zero clause is expressed using the canonical derived-functor
+identifications with global sections (Stacks, Tag 01F7). -/
 theorem moduleCohomologyFMap_basic_properties {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :

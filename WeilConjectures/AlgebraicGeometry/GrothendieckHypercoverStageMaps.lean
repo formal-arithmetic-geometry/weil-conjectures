@@ -27,16 +27,8 @@ noncomputable def coneCoefficientMap (F : Sheaf S.smallEtaleTopology A) (i : I) 
   (Etale.upperStarComp A (coneProjection D c i) (D.obj i).hom c.pt.hom
     (Over.w (c.π.app i)).symm).inv.app F
 
-/-- The stage-to-limit map on full hypercover cohomology.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2.
-Use the inverse of inverse-image composition to identify pullback of each stage coefficient sheaf
-with the cone coefficient sheaf. Apply hypercover pullback with this coefficient map. Mapping the
-unit and the coefficient map to short complexes gives the single-hypercover comparison;
-functoriality of homology proves its injection formula. For a tail object j→i, base change the
-initial hypercover along D_j→D_i. The canonical pullback-pasting morphism refines its limit
-pullback from the initial limit pullback. Compose the cone comparison with this refinement. The
-finite-refinement colimit relation gives the tail injection formula.
-(auxiliary; not a blueprint node) -/
+/-- The stage-to-limit map on full hypercover cohomology, identifying the pullback of each stage
+coefficient sheaf with the cone coefficient sheaf. -/
 noncomputable def coneHypercoverMap (F : Sheaf S.smallEtaleTopology A) (q : ℕ) (i : I) :
     hypercoverCohomology A ((Etale.upperStar A (D.obj i).hom).obj F) q ⟶
       hypercoverCohomology A ((Etale.upperStar A c.pt.hom).obj F) q :=

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GenericPointedClopenFibresCore
 /-!
 # Persistence of connected fibres of a pointed clopen piece
 
-Source: Stacks Project, Tag 055N, proof, applying Tags 04KV and 055G.
+## References
+
+* Stacks, Tags 055N, 04KV and 055G
 -/
 
 @[expose] public section
@@ -27,24 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A clopen piece with connected generic fibre containing the rational section point
 has preconnected fibres after shrinking. No equality with a section component is asserted.
-
-Source: Stacks Project, Tag 055N, the passage from a clopen generic component to
-geometrically connected fibres, using Tags 04KV and 055G.
-Proof: base change to the reduced closed subscheme on the closure of y, and restrict
-the base to V. The displayed clopen subset determines an open and closed subscheme.
-Its inclusion is quasi-compact because its trace in every quasi-compact open is closed
-and hence quasi-compact. Thus its morphism to the restricted integral base is finite
-type. Its generic fibre is preconnected and contains the rational point supplied by
-sigma, so it is nonempty and connected. The section at the generic point factors
-through this open subscheme. Tag 04KV makes this generic fibre geometrically connected.
-Tag 055G gives a nonempty open of the integral base on which all its fibres are
-geometrically connected. Such an open contains y. Represent it by an ambient open W
-and intersect W with V to ensure W is a subset of V. The closed-base-change and fibre
-homeomorphisms identify each fibre with the set g inverse image {t} intersect A.
-Geometric connectedness implies its topological preconnectedness. Empty fibres are
-allowed by the conclusion, and no assertion is made outside the closure of y.
-
-(blueprint: lem-sbc-generic-pointed-clopen-fibres) -/
+(Stacks, Tag 055N.) -/
 theorem exists_open_preconnected_fibres_of_pointed_clopen {P T : Scheme.{u}}
     (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) (V : Set T) (A : Set P)

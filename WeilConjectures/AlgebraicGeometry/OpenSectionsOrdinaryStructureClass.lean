@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # The ordinary degree-zero structure class
 
-Source: Stacks Project, Tag 06Z0.
-(blueprint: lem-sc-open-sections-ordinary-structure-class).
+## References
+
+* [Stacks, Tag 06Z0]
 -/
 
 @[expose] public section
@@ -310,25 +311,8 @@ private theorem section_iso_one (A : Type u) [CommRing A]
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 900000 in
 -- The nested single-complex and scalar-forgetting comparisons need extra heartbeats.
-/-- The restricted ordinary class of one agrees with the tilde/sections unit class.
-Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and its restriction to U.
-(blueprint: lem-sc-open-sections-ordinary-structure-class).
-
-Proof: Use the extension comparison to identify L with A[0]. The extension homology
-isomorphism followed by the single homology isomorphism sends its degree-zero cycle
-one to one. The tilde single comparison is identity in degree zero. Under tildeSelf,
-tilde.toOpen sends one to the constant structure section one, by toOpen_eq_const and
-StructureSheaf.const_one. Restricting the unit sheaf and the over-site equivalence
-preserve this section: their degree-zero maps are restriction of the structure ring,
-hence preserve one. The restriction/sections isomorphism is restrictAppIso at the top
-followed by transport along U = image(top); these are the same section on U. Apply
-homology to these degree-zero maps. Naturality of homologyπ gives equality of the
-cycle classes. Finally conjugate by the two exact scalar-forgetting homology
-isomorphisms in openComparisonOrdinaryIso; their naturality identifies the same
-cycles in the additive-group category. All complexes are concentrated in degree zero,
-so there are no boundaries. For empty U and the zero ring every section is zero and
-the identical calculation holds. No derived unit or comparison equivalence is used.
--/
+/-- The restricted ordinary class of one agrees with the tilde/sections unit class
+(Stacks, Tag 06Z0). -/
 theorem openComparison_ordinary_structure_class (A : Type u) [CommRing A]
     (U : (Spec (.of A)).Opens) :
     let T := openComparisonRestriction A U

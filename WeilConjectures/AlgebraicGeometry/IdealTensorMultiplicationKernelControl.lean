@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 
 /-! # Coherence and annihilation of the ideal tensor multiplication kernel
 
-Source: Stacks Project, Tag 01YB, second Artin-Rees argument.
-(blueprint: lem-pc-ideal-tensor-multiplication-kernel-control)
+## References
+
+* Stacks Project, Tag 01YB
 -/
 
 @[expose] public section
@@ -196,23 +197,7 @@ set_option maxHeartbeats 400000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor multiplication source is coherent and its quasi-coherent kernel is
 annihilated by the same ideal power.
-Source: Stacks Project, Tag 01YB, the short exact sequence preceding the second
-Artin-Rees application; Tags 01XZ and 01Y0 for coherence.
-(blueprint: lem-pc-ideal-tensor-multiplication-kernel-control)
-
-Proof: On an affine open, the ideal power is a finite module over a Noetherian ring,
-and the sections of H are finite. Their tensor product is finite. The affine tensor
-comparison gives quasi-coherence and finite type, hence coherence of T = I^n tensor H.
-The coherent kernel theorem gives coherence, and hence quasi-coherence, of K = ker(mu).
-For a section z of K, write its image as a sum b_j tensor h_j, with sum b_j h_j = 0.
-For a in I^n, balancing and commutativity give
- a (sum b_j tensor h_j) = sum a tensor (b_j h_j) = 0.
-The kernel inclusion is injective, so a z = 0. The affine product formula identifies
-I^n K with zero. The recursive sheaf power has affine range I(U)^n, including n=0,
-when it is the structure sheaf; thus this is the stated product vanishing.
-Vanishing on the affine basis implies vanishing of the product sheaf.
-For n=0 multiplication is the left unitor up to the canonical unit-ideal isomorphism,
-so K=0. Zero and unit ideals and the zero module satisfy the same calculation. -/
+(Stacks, Tags 01YB, 01XZ and 01Y0) -/
 theorem ideal_tensor_multiplication_kernel_control
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (H : X.Modules)

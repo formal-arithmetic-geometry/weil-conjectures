@@ -10,9 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.MixedPullbackSquareTensorCoherence
 
 /-! # Base change preserves the direct-image tensor pairing
-Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
-duality.tex Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change-identity).
+
+## References
+
+* Stacks Project, Tags 08I3, 08HY and 0AA8.
 -/
 
 @[expose] public section
@@ -28,19 +29,8 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Identity-pairing coherence for the canonical base-change mate.
-Source: Stacks Project, cohomology.tex, Remark 08HY and Lemma 079U;
-duality.tex, Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change-identity).
-
-Proof: transpose under the upper pullback/direct-image adjunction and expand the
-base-change mates. Counit naturality and triangle identities reduce the equality
-to compatibility of the pullback-composition comparisons with normalized tensorators.
-On K-flat representatives, termwise composition comparisons and tensorators carry
-pure tensors to the same pulled-back sections. The normalization equations and
-invertible K-flat derived counits transport the equality to the derived category.
-K-flat resolutions and naturality extend it to arbitrary A and B. No base-change
-map is cancelled or assumed invertible. -/
+/-- Identity-pairing coherence for the canonical base-change mate
+(Stacks, Tags 08HY, 079U and 0AA8). -/
 theorem mixedTensorPairing_baseChange_identity
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (A B : schemeDerivedCategory X) :

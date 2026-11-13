@@ -22,8 +22,10 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Direct image of a formal system with closed ambient support
 
-Source: Stacks Project, Theorem 088E and Lemma 0CYJ.
-(blueprint: lem-weil-pbc-formal-system-closed-support-pushforward)
+## References
+
+* [Stacks Project, Tag 088E](https://stacks.math.columbia.edu/tag/088E)
+* [Stacks Project, Tag 0CYJ](https://stacks.math.columbia.edu/tag/0CYJ)
 -/
 
 @[expose] public section
@@ -251,23 +253,7 @@ private theorem powerQuotient_pushforward_iso {Y X : Scheme.{u}}
 
 /-- Direct image along an open immersion preserves the coherent adic conditions when
 all levels have support in a fixed closed subset of the ambient scheme contained in
-that open immersion's image.
-
-Source: Stacks Project, coherent.tex, Theorem 088E (theorem-grothendieck-existence),
-the extension paragraph, and Lemma 0CYJ (lemma-pushforward-coherent-on-open).
-(blueprint: lem-weil-pbc-formal-system-closed-support-pushforward)
-
-Proof: Identify Y with the open image U of j. Lemma 0CYJ makes every j_*F_n coherent
-and zero on X minus T. On U the restriction/direct-image counit identifies the entire
-system, including its transitions, with F. Restriction of K identifies its products
-and positive powers with those of K.comap j; restriction preserves cokernels.
-Thus on U the power-product annihilation and quotient-transition conditions are those
-of F. On X minus T all modules and their products and quotients are zero. These two
-opens cover X since T lies in U. Vanishing of the power products is local. Each
-transition therefore kills its indicated ideal-power product globally and factors
-through its cokernel. This factor restricts to an isomorphism on each of the two
-opens, so it is globally an isomorphism. These factors have the required equations
-with quotient projections by construction. -/
+that open immersion's image (Stacks, Theorem 088E and Lemma 0CYJ). -/
 theorem coherentFormal_pushforward_of_closed_support
     {Y X : Scheme.{u}} [IsNoetherian Y] [IsNoetherian X]
     (j : Y ⟶ X) [IsOpenImmersion j] (K : X.IdealSheafData)

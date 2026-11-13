@@ -15,8 +15,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # A direct-image test for tensor vanishing under an open immersion
 
-Source: Stacks Project, Tags 08CG and 08DX.
-(blueprint: lem-pc-open-immersion-tensor-vanishing-test).
+## References
+
+* Stacks Project, Tags 08CG and 08DX.
 -/
 
 @[expose] public section
@@ -39,24 +40,7 @@ private noncomputable local instance (X : Scheme.{u}) :
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- A single tensor-cohomology vanishing test descends along an open immersion.
-Source: Stacks Project, Tags 08CG and 08DX, exact restriction and the open-immersion
-counit. (blueprint: lem-pc-open-immersion-tensor-vanishing-test).
-
-Proof: Choose the K-flat representative C and representing isomorphism in h.
-The tensor pullback preserves K-flatness (Tag 06YC); the uniqueness of left
-adjoints identifies that functor with open restriction R. Transport K-flatness
-through the termwise complex isomorphism. The exact-functor localization
-comparison identifies Q(R(C)) with R(E), with independent localization universes.
-Transport the monoidal structure of module pullback to R. Its inverse tensorator,
-followed by the open-immersion counit R(j_*G) ≅ G, gives a natural isomorphism
-(tensorRight (j_*G)) followed by R ≅ R followed by (tensorRight G).
-Tensor with a sheaf in degree zero is termwise tensor (the bifunctor-single
-comparison), so mapping this natural isomorphism to complexes identifies the
-restriction of C tensor j_*G[0] with R(C) tensor G[0]. Exact restriction commutes
-with homology and preserves zero objects. Apply it to the vanishing in h and
-transport along this complex comparison. These data witness the conclusion.
-For empty schemes or zero sheaves the same comparisons exist and the homology
-is zero; no boundedness or quasi-coherence is used. -/
+(Stacks, Tags 08CG and 08DX) -/
 theorem openImmersion_tensor_vanishing_test {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

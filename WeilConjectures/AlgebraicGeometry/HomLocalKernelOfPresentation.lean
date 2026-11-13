@@ -29,26 +29,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 -- Keep the slice-site structures folded during instance synthesis and transport.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- A specified presentation on V gives a finite-sum Hom kernel on that same open.
-Source: Stacks Project, Modules, Lemmas 01CO (1), 01CQ, and the proof of 01CP;
-Sites, Modules, Lemma 0E8H for restriction of internal Hom.
-(blueprint: lem-weil-pbc-coherent-hom-local-kernel-from-presentation).
-
-Proof:
-On the slice site, let H be internal Hom into F.over V, contravariant in its source.
-The symmetric monoidal closed structure identifies H with the contravariant internal
-Hom functor, so H preserves equalizers. The opposite of the cokernel cofork of a is
-therefore carried to a limiting kernel fork. Its cone point is H(cokernel a), and the
-specified isomorphism e identifies this point with Hom(G.over V, F.over V).
-Additivity gives H(sum of units) as the sum of the H(unit), and homObjUnitIso
-identifies each H(unit) with F.over V. Conjugate H(a.op) by these isomorphisms to
-obtain alpha, and use kernel.mapIso to transport its kernel. The isomorphism
-overHomObjIso identifies its source with (homObj G F).over V. Finally overEquiv V
-preserves kernels and finite biproducts, while overFunctorEquiv identifies the images
-of restrictions with scheme restriction. Conjugating the image of alpha gives the
-required map between the stated sums of F.restrict V.ι. Compose the kernel and
-restriction isomorphisms to obtain the conclusion. These universal properties also
-apply to empty sums and the empty open; no coherence hypothesis is used. -/
+/-- A specified presentation on `V` gives a finite-sum Hom kernel on that same open.
+(Stacks, Tags 01CO, 01CQ, 01CP and 0E8H) -/
 theorem homObj_locally_kernel_of_local_presentation
     (X : Scheme.{u}) (G F : X.Modules) (V : X.Opens) (m n : ℕ)
     (a : (⨁ fun _ : Fin m ↦ (SheafOfModules.unit X.ringCatSheaf).over V) ⟶

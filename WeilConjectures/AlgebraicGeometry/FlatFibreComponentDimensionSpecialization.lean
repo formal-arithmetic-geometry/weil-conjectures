@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionStrata
 
 /-! # FlatFibreComponentDimensionSpecialization
 
-Source: Stacks Project, Tag 054U (lemma-dimension-fibre-specialization).
-(blueprint: lem-sbc-flat-fibre-component-dimension-specialization)
+## References
+
+* [Stacks Project, Tag 054U](https://stacks.math.columbia.edu/tag/054U)
 -/
 
 @[expose] public section
@@ -25,12 +26,8 @@ universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
 
-/-- A component point admits a neighbourhood on which the fibre dimension is constant.
-Source: Stacks Project, Tag 054T, the fibrewise dimension theorem used in Tag 054U.
-The proof restricts to the open base and applies the constructible constancy theorem
-for flat morphisms locally of finite presentation at a generic point of a fibre
-component, then transports the resulting open through the fibre identification.
-(blueprint: lem-sbc-flat-fibre-component-dimension-specialization-open) -/
+/-- A component point admits a neighbourhood on which the fibre dimension is constant
+(Stacks, Tag 054T). -/
 theorem exists_fibre_dimension_open_of_flat_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]
@@ -45,17 +42,8 @@ theorem exists_fibre_dimension_open_of_flat_restrict
   intro y hy
   exact (hdim n y hy).trans (hdim n x hxn).symm
 
-/-- Local fibre dimension is constant along a generalization of a fibre component point.
-Source: Stacks Project, Tag 054U (lemma-dimension-fibre-specialization).
-Proof: restrict the base to U and the source to its inverse image. The original fibres
-at images of x and x' are canonically isomorphic to the restricted fibres; these
-isomorphisms preserve component generic points and local dimension. Specialization
-is unchanged by passing to an open subspace. For the flat locally finitely presented
-restricted morphism, Tag 054T gives an open neighbourhood of a component generic
-point on which local fibre dimension is constant. Every generalization belongs to
-this open neighbourhood, so the two dimensions agree. Transport back along the fibre
-isomorphisms. No irreducibility assumption on the base is necessary.
-(blueprint: lem-sbc-flat-fibre-component-dimension-specialization) -/
+/-- Local fibre dimension is constant along a generalization of a fibre component point
+(Stacks, Tag 054U). -/
 theorem fibre_dimension_eq_of_specializes_component_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

@@ -25,10 +25,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The nested-square comparison, local composition and stage-object comparison,
-without the site counit. Source: Stacks Project, Tags 08DW and 0D5S.
-This is the explicit last three factors of the constructed stage map; the
-intersection of inverse-image opens is used in its source interface.
-(blueprint: def-pc-perfect-overlap-composite-stage-tail). -/
+without the site counit (Stacks, Tags 08DW and 0D5S). -/
 @[irreducible] noncomputable def perfectOverlapCompositeStageTailAt
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)

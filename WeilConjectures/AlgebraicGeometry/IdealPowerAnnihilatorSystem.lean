@@ -12,9 +12,12 @@ import WeilConjectures.AlgebraicGeometry.IdealPowerAnnihilatorQuasicoherent
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
-/-! # IdealPowerAnnihilatorSystem
+/-!
+# The system of annihilators of ideal powers
 
-Source: Stacks Project, Properties, Lemma 01PQ.
+## References
+
+* Stacks Project, Tag 01PQ
 -/
 
 @[expose] public section
@@ -27,23 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The annihilator subsheaves of the powers form an increasing quasi-coherent system,
 vanish on the specified open, and their cokernel projections are isomorphisms there.
-
-Proof: For each n, form the subsheaf of F consisting of sections killed by every local
-section of I^n on every smaller open. Closure under addition, scalars and restriction
-is immediate; gluing holds by gluing in F and testing the products locally. This is
-an actual subsheaf with its injective inclusion. On affine opens I^n is a finitely
-generated ideal J^n and F is the sheaf of a module M. Finite generation permits
-clearing one common denominator for all ideal generators, so localization of the
-annihilator equals the annihilator of the localized ideal. Thus the subsheaf is
-quasi-coherent. The inclusion I^m -> I^n for n <= m makes the annihilators increasing.
-On W contained in U, the power inclusion is bijective, so lift 1 and test annihilation
-on W itself: every section of the annihilator is zero. Restriction to U preserves
-cokernels, and the annihilator restricts to the zero module. Therefore its cokernel
-projection restricts to an isomorphism; evaluating on any W contained in U gives the
-asserted bijection.
-
-Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-annihilator-system). -/
+(Stacks, Tag 01PQ) -/
 theorem ideal_power_annihilator_system
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

@@ -13,9 +13,6 @@ import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
 /-!
 # The graded section ring of an invertible module
 
-Source: Stacks Project, Tags 01PZ and 01N8
-(blueprint: def-sc-invertible-section-ring).
-
 The homogeneous component is literally the global sections of the indicated tensor power.
 All operations are specified, and their algebraic laws are proved from tensor-section coherence
 and local free generators.
@@ -25,6 +22,10 @@ and local free generators.
 - `InvertibleSectionRing`: the direct sum of tensor-power sections.
 - `sectionRingGCommRing`: tensor multiplication and the degree-zero unit.
 - `sectionRingGrade`, `sectionRingGradedRing`: homogeneous components and their grading.
+
+## References
+
+* Stacks Project, Tags 01PZ and 01N8.
 -/
 
 @[expose] public section
@@ -37,40 +38,35 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-/-- Global sections in degree `n` (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). -/
+/-- Global sections in degree `n`. -/
 noncomputable abbrev SectionRingComponent (L : X.Modules) (n : ℕ) : Type u := Γ(L.tensorPow n, ⊤)
 
-/-- The homogeneous unit is the section `1` of the zeroth tensor power (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). -/
+/-- The homogeneous unit is the section `1` of the zeroth tensor power. -/
 noncomputable instance sectionRingGOne (L : X.Modules) :
     GradedMonoid.GOne (SectionRingComponent L) where
   one := unitSectionsEquiv ⊤ 1
 
-/-- Homogeneous multiplication tensors sections, then adds tensor exponents (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). -/
+/-- Homogeneous multiplication tensors sections, then adds tensor exponents. -/
 noncomputable instance sectionRingGMul (L : X.Modules) :
     GradedMonoid.GMul (SectionRingComponent L) where
   mul {i j} a b := (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a b)
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The tensor product with zero is
-zero; applying the additive tensor-power isomorphism preserves zero. -/
+/-- The tensor product with zero is zero, after applying the additive tensor-power
+isomorphism. -/
 theorem sectionRing_mul_zero (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (a : SectionRingComponent L i) :
     GradedMonoid.GMul.mul a (0 : SectionRingComponent L j) = 0 := by
   change (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a 0) = 0
   rw [tmulSection_zero, map_zero]
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The tensor product with zero is
-zero, and the tensor-power isomorphism is additive. -/
+/-- The tensor product with zero is zero, and the tensor-power isomorphism is additive. -/
 theorem sectionRing_zero_mul (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (b : SectionRingComponent L j) :
     GradedMonoid.GMul.mul (0 : SectionRingComponent L i) b = 0 := by
   change (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection 0 b) = 0
   rw [zero_tmulSection, map_zero]
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). Distribute the tensor of
-sections in its second argument and use additivity of the exponent isomorphism. -/
+/-- Homogeneous multiplication distributes over addition in its second argument. -/
 theorem sectionRing_mul_add (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (a : SectionRingComponent L i) (b c : SectionRingComponent L j) :
     GradedMonoid.GMul.mul a (b + c) =
@@ -80,8 +76,7 @@ theorem sectionRing_mul_add (L : X.Modules) [L.IsInvertible]
       (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a c)
   rw [tmulSection_add, map_add]
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). Distribute the tensor of
-sections in its first argument and use additivity of the exponent isomorphism. -/
+/-- Homogeneous multiplication distributes over addition in its first argument. -/
 theorem sectionRing_add_mul (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (a b : SectionRingComponent L i) (c : SectionRingComponent L j) :
     GradedMonoid.GMul.mul (a + b) c =
@@ -96,8 +91,7 @@ private theorem eqToHom_app_heq {M N : X.Modules} {U : X.Opens} (h : M = N)
   subst N
   rfl
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The degree-zero section is the
-monoidal unit; the left unitor and the exponent isomorphism cancel. -/
+/-- The degree-zero section is a left unit for homogeneous multiplication. -/
 theorem sectionRing_one_mul (L : X.Modules) [L.IsInvertible]
     (a : GradedMonoid (SectionRingComponent L)) :
     1 * a = a := by
@@ -122,8 +116,7 @@ private theorem tensorPowAddIso_zero_inv (L : X.Modules) (n : ℕ) :
     simp only [id_tensorHom, rightUnitor_tensor_hom, tensorPow_succ]
     rfl
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The right unitor identifies
-tensoring with the section one with the identity; coherence cancels the exponent isomorphism. -/
+/-- The degree-zero section is a right unit for homogeneous multiplication. -/
 theorem sectionRing_mul_one (L : X.Modules) [L.IsInvertible]
     (a : GradedMonoid (SectionRingComponent L)) :
     a * 1 = a := by
@@ -167,9 +160,8 @@ private theorem tensorPowAddIso_assoc_inv (L : X.Modules) (i j k : ℕ) :
     congr 1
     monoidal
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The associator sends (a tensor
-b) tensor c to a tensor (b tensor c). The exponent isomorphisms agree by monoidal coherence,
-including the equality of the two degree sums. -/
+/-- Homogeneous multiplication is associative, including the equality of the two degree
+sums. -/
 theorem sectionRing_mul_assoc (L : X.Modules) [L.IsInvertible]
     (a b c : GradedMonoid (SectionRingComponent L)) :
     a * b * c = a * (b * c) := by
@@ -256,10 +248,8 @@ private theorem exists_localGenerator (L : X.Modules) [L.IsInvertible] (x : X) :
   obtain ⟨s, hs⟩ := exists_isFreeGenerator_of_iso e'
   exact ⟨U, hx, s, hs⟩
 
-/-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). Locally trivialize the
-invertible module. Both products then multiply the same two functions in the commutative structure
-sheaf, times the same tensor power of the chosen generator. These equalities glue; commutation of
-the degree sum supplies the dependent equality. -/
+/-- Homogeneous multiplication is commutative, including the dependent equality of the
+degree sums. -/
 theorem sectionRing_mul_comm (L : X.Modules) [L.IsInvertible]
     (a b : GradedMonoid (SectionRingComponent L)) :
     a * b = b * a := by
@@ -289,9 +279,8 @@ theorem sectionRing_mul_comm (L : X.Modules) [L.IsInvertible]
     exact tensorPowLocalSection_comm he i j _ _
   exact (heq_of_eq h).trans (eqToHom_app_heq _ _)
 
-/-- The graded commutative ring laws on tensor-power sections (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). All operations are explicit; the law fields
-refer to the preceding named theorems and the additive-group cast identities. -/
+/-- The graded commutative ring on tensor-power sections. All operations are explicit; the
+law fields refer to the preceding named theorems and the additive-group cast identities. -/
 noncomputable instance sectionRingGCommRing (L : X.Modules) [L.IsInvertible] :
     DirectSum.GCommRing (SectionRingComponent L) where
   mul_zero := sectionRing_mul_zero L
@@ -309,21 +298,16 @@ noncomputable instance sectionRingGCommRing (L : X.Modules) [L.IsInvertible] :
   intCast_ofNat n := natCast_zsmul _ n
   intCast_negSucc_ofNat n := negSucc_zsmul _ n
 
-/-- The section ring `⨁ n, Γ(X, L^{⊗ n})` (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). -/
+/-- The section ring `⨁ n, Γ(X, L^{⊗ n})`. -/
 noncomputable abbrev InvertibleSectionRing (L : X.Modules) :=
   ⨁ n : ℕ, SectionRingComponent L n
 
-/-- The homogeneous component inside the section ring (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). -/
+/-- The homogeneous component inside the section ring. -/
 noncomputable def sectionRingGrade (L : X.Modules) (n : ℕ) :
     AddSubgroup (InvertibleSectionRing L) :=
   (DirectSum.of (SectionRingComponent L) n).range
 
-/-- The homogeneous components form a multiplicative grading (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). The unit is in degree zero by construction.
-The product of two single-component sums is the single-component sum of their tensor product,
-so its degree is the sum of the two degrees. -/
+/-- The homogeneous components form a multiplicative grading of the section ring. -/
 theorem sectionRing_gradedMonoid (L : X.Modules) [L.IsInvertible] :
     SetLike.GradedMonoid (sectionRingGrade L) := by
   refine { one_mem := ?_, mul_mem := ?_ }
@@ -333,10 +317,8 @@ theorem sectionRing_gradedMonoid (L : X.Modules) [L.IsInvertible] :
     obtain ⟨b, rfl⟩ := hb
     exact ⟨GradedMonoid.GMul.mul a b, (DirectSum.of_mul_of a b).symm⟩
 
-/-- The section ring is the internal direct sum of its homogeneous components (Stacks, Tag 01PZ;
-(blueprint: def-sc-invertible-section-ring)). Every finitely supported section family is the
-sum of its single-component families. Evaluation in each degree shows this expression is
-unique. Thus the canonical recomposition map is bijective. -/
+/-- The section ring is the internal direct sum of its homogeneous components: the canonical
+recomposition map is bijective. -/
 theorem sectionRing_isInternal (L : X.Modules) :
     DirectSum.IsInternal (sectionRingGrade L) := by
   let f := DirectSum.map (fun n ↦ (DirectSum.of (SectionRingComponent L) n).rangeRestrict)
@@ -361,8 +343,7 @@ theorem sectionRing_isInternal (L : X.Modules) :
   · intro a
     exact ⟨f a, h a⟩
 
-/-- The grading on the section ring, using the inverse of the bijective recomposition map
-(Stacks, Tag 01PZ; (blueprint: def-sc-invertible-section-ring)). -/
+/-- The grading on the section ring, using the inverse of the bijective recomposition map. -/
 noncomputable instance sectionRingGradedRing (L : X.Modules) [L.IsInvertible] :
     GradedRing (sectionRingGrade L) :=
   { sectionRing_gradedMonoid L,

@@ -11,8 +11,10 @@ public import WeilConjectures.Algebra.Homology.KFlat
 import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Natural tensor comparison with a fixed K-flat model
-Source: Stacks Project, Tag 06YH.
-(blueprint: lem-sc-kflat-tensor-model-natural-comparison).
+
+## References
+
+* Stacks Project, Tag 06YH.
 -/
 
 @[expose] public section
@@ -28,17 +30,7 @@ set_option synthInstance.maxSize 2048
 
 -- The natural comparison specializes the unbounded total-tensor bifunctor.
 /-- The localization comparison is a natural isomorphism for a fixed K-flat
-first complex and arbitrary second complexes.
-Source: Stacks Project, Tag 06YH.
-(blueprint: lem-sc-kflat-tensor-model-natural-comparison).
-
-Proof: apply the K-flat bifunctor comparison to the constant singleton family
-with value P and the identity family of all cochain complexes. The K-flatness
-hypothesis on the first family is precisely hP. Evaluation at the singleton
-object gives the displayed natural isomorphism. Its components are the
-localization tensor maps, and their naturality is inherited from the bifunctor
-comparison. No K-flatness or boundedness of the second complex is used;
-the zero complexes and the empty scheme cause no exceptions. -/
+first complex and arbitrary second complexes. -/
 theorem kFlat_tensorModel_naturalComparison (X : Scheme.{uX})
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)

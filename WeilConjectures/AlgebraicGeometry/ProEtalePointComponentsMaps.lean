@@ -14,9 +14,9 @@ import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 /-!
 # Maps to relative profinite test schemes
 
-Source: Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1), finite-quotient argument;
-RefactorInstruction, Section 4, proof of Lemma point-eval
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1).
 -/
 
 @[expose] public section
@@ -191,36 +191,8 @@ private lemma relativeMapEquiv_target (X : Scheme.{u}) (U : X.ProEt)
 
 /-- The component quotient of an affine weakly contractible pro-etale object is profinite.
 Maps to `X[S]` are naturally continuous maps from this quotient to `S`.
-Weak contractibility means surjectivity on sections of every epimorphism of set sheaves;
-the sheaf values live in the larger universe of the small-site convention.
-The single family `e` is covariant in profinite targets and contravariant in these objects.
-
-Source: Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1), with the finite-quotient argument;
-RefactorInstruction, Section 4, proof of Lemma point-eval
-(auxiliary; not a blueprint node).
-
-Proof:
-1. An affine scheme is compact and quasi-separated, hence spectral by
-   lem-weil-pbc-qcqs-scheme-spectral and def-weil-spectral-space. By
-   lem-weil-pbc-quasicompact-components-clopen-intersection, distinct components are
-   separated by clopens. Clopens are saturated for the component quotient, giving
-   Hausdorffness and total disconnectedness. Compactness descends along the quotient.
-2. For a finite discrete target, lem-weil-pbc-profinite-test-object-functor identifies
-   the test scheme with a coproduct of copies of X. Use
-   lem-galois-coproduct-copies-morphisms-clopen to identify its maps with continuous
-   finite-valued functions. Such functions factor uniquely through the component
-   quotient, and the quotient topology gives continuity of that factor.
-3. Present S by its finite quotients. The limit clause of
-   lem-weil-pbc-profinite-test-object-functor identifies scheme maps with compatible
-   families of finite-stage maps, hence with compatible continuous finite-stage functions.
-4. The topological inverse-limit property identifies these families with continuous
-   maps to S. Basic opens give continuity. Empty targets give no maps from a nonempty
-   source and a unique map from an empty source; singleton targets give a unique map.
-5. Precomposition pulls back finite-stage clopen fibres and induces the usual map on
-   component quotients. For a target map, compose with any finite quotient of its target
-   and factor this finite-valued function through a finite quotient of its source.
-   The test-object functor respects these maps. Equality at every finite quotient proves
-   both naturality identities. -/
+Weak contractibility means surjectivity on sections of every epimorphism of set sheaves
+(Bhatt–Scholze, Lemma 4.2.13(1)). -/
 theorem proEtale_point_components_maps (X : Scheme.{u}) :
     (∀ (U : X.ProEt), IsAffine U.left →
       (∀ (F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (f : F ⟶ G),

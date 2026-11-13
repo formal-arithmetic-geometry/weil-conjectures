@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumns
 
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
-Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -26,48 +27,10 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Pretriangulated TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Outer-column recognition for the actual geometric Mayer--Vietoris construction.
-The input consists of a representing cocone natural in every testing object and a
-family whose outer objects and maps are explicitly open direct images and restrictions.
-In particular this statement does not apply to arbitrary distinguished triangle cocones.
-It asserts nothing about distinguishedness or the central Hom comparison.
-
-Source: Stacks Project, perfect.tex Tag 09RE, Mayer--Vietoris induction;
-cohomology.tex Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
-
-Proof:
-1. Let U' and V' be the preimages under t, and W' their intersection. Since t is
-   an open immersion with image U union V, the composites U'.toScheme -> X and
-   V'.toScheme -> X have images U and V; the intersection has image U intersection V.
-   These opens are compact: Y is qcqs over Spec(R_i), X is quasi-separated, and
-   a morphism from a compact scheme to a quasi-separated scheme is quasi-compact.
-   Their structural maps are locally finitely presented and qcqs. Pullback and
-   restriction of P,Q are perfect, and so are their shifts by -1.
-2. The stageEquiv maps and stageNatural identify F_j with Rpi_j* Lpi_j*Q by
-   Yoneda and derived adjunction. The transition and cocone equations, for every
-   testing object, identify the representing maps uniquely with the adjoints of
-   perfectStageMap and perfectLimitMap. This identifies the whole cocone, not merely
-   Hom from one fixed P. Restrict to each of the three opens using the canonical
-   restriction/direct-image comparison; it is pinned by its right-derived unit.
-   The underived comparison is restriction of sections, so the same Yoneda equations
-   identify the restricted transition and cocone maps with canonical local transport.
-3. The definition of A.triangle and the component formulas for A.map show that
-   columns 1 and 4 are Hom into the intersection direct image, with shifts -1 and 0.
-   Columns 0 and 3 are Hom into the two-open biproduct, with those same shifts.
-   Open adjunction and the direct-image shift comparison give natural stage and
-   apex equivalences to the restricted perfect Hom sets (or their binary products).
-   This step uses only the outer components, so the choice of natural boundary and
-   the choice of restriction adjunction do not affect the result.
-4. Apply perfect_hom_stage_colimit to each restricted pair. The forgetful functor
-   from abelian groups preserves filtered colimits. The stage equivalences therefore
-   extend to equivalences of the source colimits, pinned on all stage inclusions.
-   For the two-open terms filtered colimits of sets commute with binary products,
-   giving the product of the two local colimits. The apex equivalences and the
-   cocone equations identify each single comparison with PerfectHomLocalComparison.
-   Use PerfectHomLocalMap.basic on U,V and U intersection V, prod on the two-open
-   columns, and equiv for the adjunction, shift and colimit equivalences.
-   Empty opens yield zero Hom groups and require no extra case or continuity claim. -/
+/-- Outer-column recognition (even case) for the geometric Mayer--Vietoris construction:
+given a representing cocone natural in every testing object and a family whose outer objects
+and maps are open direct images and restrictions, the outer columns are local filtered Hom
+comparisons (Stacks, Tags 09RE and 08BW). -/
 theorem perfect_hom_mayerVietoris_geometric_columns_even
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

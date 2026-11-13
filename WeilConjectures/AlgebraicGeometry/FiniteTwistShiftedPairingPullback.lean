@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPullback
 
 /-! # The shifted finite-twist pairing square
 
-Source: Stacks Tags 03PK and 06YQ; the comparison of the two evaluation factors in
-thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03PK and 06YQ.
 -/
 
 @[expose] public noncomputable section
@@ -62,15 +62,7 @@ private theorem module_pairing_shifts
     K M U K' M' U' k m u q q' hq
 
 /-- Opposite shifts lift the prescribed degree-zero finite-line evaluation square.
-
-Source: Stacks Tags 06YQ and 06YU; the shift step of finite-line evaluation
-(auxiliary; not a blueprint node).
-
-Proof: apply derivedPairingOppositeShifts_pullback to the degree-zero evaluation
-square, its canonical positive and negative single-object pullback maps, and the
-constant-object comparison. Its coherence calculation cancels shifts -2 and 2.
-This step does not identify the factor arrows with the prescribed shifted twist
-arrows and does not choose a normalized positive transport. -/
+(Stacks, Tags 06YQ and 06YU.) -/
 theorem finiteTwistShiftedPairing_pullback
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) :

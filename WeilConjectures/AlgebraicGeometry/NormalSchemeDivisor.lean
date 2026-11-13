@@ -18,7 +18,6 @@ public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 On a locally noetherian normal scheme `X`, the local ring at a generic point of an irreducible
 component of the zero locus of a nonzero global function is a discrete valuation ring.
-This is the first step of the proof of blueprint `lemma-vanishing-generic-points-principal-divisor`.
 -/
 
 @[expose] public section
@@ -80,9 +79,7 @@ lemma _root_.IsDiscreteValuationRing.of_maximalIdeal_mem_minimalPrimes_span_sing
   exact ((IsDiscreteValuationRing.TFAE R hnf).out 1 3).2 this
 
 /-- At a generic point `ζ` of the zero locus of a nonzero global function `h` on a locally
-noetherian normal scheme, the local ring is a discrete valuation ring (Krull's principal ideal
-theorem and Serre's criterion R₁). First step of the proof of blueprint
-`lemma-vanishing-generic-points-principal-divisor`. -/
+noetherian normal scheme, the local ring is a discrete valuation ring. -/
 theorem isDiscreteValuationRing_stalk_of_mem_irreducibleComponents
     {X : Scheme.{u}} (hX : IsNormalScheme X) [IsLocallyNoetherian X] {h : Γ(X, ⊤)} (hh : h ≠ 0)
     (ζ : X.zeroLocus (U := ⊤) {h})

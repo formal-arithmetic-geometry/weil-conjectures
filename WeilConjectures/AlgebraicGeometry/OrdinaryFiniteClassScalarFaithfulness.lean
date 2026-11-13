@@ -7,9 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 
 /-! # Scalar faithfulness of a specified ordinary cohomology class
-
-Source: the normalized Kummer-class comparison in lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -95,17 +92,7 @@ private theorem kummer_core_class_scalar_faithful
         CategoryTheory.Abelian.Ext.comp_zero]
 
 /-- An injective scalar orbit of a normalized cohomology class detects scalar
-annihilators of its specified derived representative.
-Source: the Ext construction of ordinaryFiniteClass and blueprint
-lemma-cohomology-projective-line-trace, geometric-fibre Kummer-class calculation.
-(auxiliary; not a blueprint node).
-
-Proof: precomposing the derived representative by a scalar equals postcomposing
-its Ext class by that scalar. The exact forgetful functor preserves this identity,
-and composition with the integral generator gives the cohomology action in the
-statement. A vanishing composite therefore makes the scalar orbit equal its value
-at zero. Injectivity of the orbit forces the scalar to be zero. The argument needs
-neither finiteness nor a nonzero coefficient ring. -/
+annihilators of its specified derived representative. -/
 theorem ordinaryFiniteClass_scalar_faithful
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))

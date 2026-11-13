@@ -10,15 +10,15 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalars
 
 /-! # Canonical scalar-extension comparison for the finite root line
 
-Source: the finite-coefficient Tate identification in Steps 1 and 4(iii) of
-literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-poincare-duality/sec-the-trace-map-in-top-degree/sk-cor-trace/sk-thm-regular/
-sk-thm-regular.proof.md; finite twists of Stacks, Section 03PK.
-(blueprint: def-pur-finite-root-scalar-extension-comparison).
+## Implementation details
 
-These are the existing adjunction and sheafification constructions extracted from
-NormalizedTateLineOverField. Their data and proofs are unchanged. This module owns
-both definitions so statements can use them without citing a normalization theorem.
+These are the adjunction and sheafification constructions extracted from
+`NormalizedTateLineOverField`, so that statements can use them without citing a normalization
+theorem.
+
+## References
+
+* Stacks Project, Section 03PK (finite twists).
 -/
 
 @[expose] public section
@@ -34,9 +34,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Compare the two left adjoints to restriction along `ZMod N → A`, using the
-unique `ZMod N`-linearity of additive homomorphisms. No basis or root is chosen.
-Source: finite-coefficient identification for lemma-class-of-point--1, Steps 1 and 4(iii)
-(blueprint: def-pur-finite-root-scalar-extension-comparison). -/
+unique `ZMod N`-linearity of additive homomorphisms. No basis or root is chosen. -/
 noncomputable def zmodScalarExtensionIso
     (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     ModuleCat.extendScalars (Scheme.finiteEtaleTwistScalar N A hA) ≅
@@ -73,9 +71,7 @@ noncomputable def zmodScalarExtensionIso
 
 /-- Sheafify the scalar-extension comparison on the finite roots-of-unity presheaf.
 This is the canonical identification of the finite Tate line with extension of its
-underlying abelian sheaf, natural in every object of the small étale site.
-Source: finite-coefficient identification for lemma-class-of-point--1, Steps 1 and 4(iii)
-(blueprint: def-pur-finite-root-scalar-extension-comparison). -/
+underlying abelian sheaf, natural in every object of the small étale site. -/
 noncomputable def finiteEtaleLineAbIso
     (T : Scheme.{u}) (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     Scheme.finiteEtaleTateLine T N A hA ≅

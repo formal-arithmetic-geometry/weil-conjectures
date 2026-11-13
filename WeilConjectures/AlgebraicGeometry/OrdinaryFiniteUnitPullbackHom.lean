@@ -7,9 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
 /-! # Constant-object pullback comparisons
-
-Source: blueprint vector integration, compatibility with restriction.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +20,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] _root_.DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor upperStar
 
-/-- The concrete constant-object pullback has its specified two factors.
-Source: the definition of ordinaryFiniteUnitPullback, blueprint vector integration.
-(auxiliary; not a blueprint node). -/
+/-- The concrete constant-object pullback has its specified two factors. -/
 theorem ordinaryFiniteUnitPullback_hom (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFiniteUnitPullback A f).hom =

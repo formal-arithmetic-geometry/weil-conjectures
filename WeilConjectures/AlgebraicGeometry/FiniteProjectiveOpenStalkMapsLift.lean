@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift
 /-! # Finite-interval lifting for finite-projective open-site terms
 
-Source: Stacks Project, Tags 09RE and 01CP.
-(blueprint: lem-sc-finite-projective-open-stalk-maps-lift).
+## References
+
+* Stacks Project, Tags 09RE and 01CP.
 -/
 
 @[expose] public section
@@ -21,23 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 /-- Simultaneously lift a finite family of stalk maps with finite-projective sources.
-Source: Stacks Project, Tag 01CP (lemma-stalk-internal-hom), and the finite
-matrix calculation of Tags 09RE and 0BC7 (2).
-(blueprint: lem-sc-finite-projective-open-stalk-maps-lift).
-
-Proof: Choose the given finite-free retractions. The uniform open-site finite-free
-lifting theorem supplies a family of natural restriction-stalk comparisons,
-chosen independently of the source and target. Apply its lifting clause to each
-stalk projection followed by the prescribed map. For each q this gives a
-neighbourhood D q of x and a lift on every smaller neighbourhood. Intersect the
-finitely many D q with T to obtain Z; it contains x and lies inside every D q.
-Take the free-source lifts at Z and precompose them with the restricted source
-inclusions. Naturality of the common comparison moves the inclusion past its
-component. Functoriality and the splitting identity cancel inclusion followed
-by projection, giving the displayed conjugation formula. The empty family
-has intersection top, so Z is T and the final condition is vacuous. Rank zero
-is already included in the finite-free lifting theorem. No boundedness or
-complex structure is involved. -/
+(Stacks, Tag 01CP, Tag 09RE, Tag 0BC7) -/
 theorem exists_finite_projective_open_stalk_maps_lift
     (X : Scheme.{u}) (V : X.Opens) (x : X) (hxV : x ∈ V)
     (T : X.Opens) (hTV : T ≤ V) (hxT : x ∈ T)

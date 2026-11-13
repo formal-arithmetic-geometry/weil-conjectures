@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep
 
 /-! # Descent of higher direct image cohomology-presheaf classes
 
-Source: Stacks Project, Tag 09Z1
-(blueprint: lem-sbc-higher-direct-image-limit-presheaf-class-cover).
+## References
+
+* Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -26,35 +27,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Raw cohomology-presheaf classes locally descend to stage higher direct images.
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, cohomology comparison in its proof,
-and Lemma 59.51.6, Tag 03Q8
-(blueprint: lem-sbc-higher-direct-image-limit-presheaf-class-cover).
-
-Proof:
-1. Take the natural sheafification isomorphism e of Tag 03Q8. The presheaf P is
-   the derived-Hom presentation of U ↦ H^p(U ×_S X, F); free abelian sheaves on
-   representables corepresent sections, and derived adjunction identifies these
-   Hom groups with the cohomology of the restriction to the pullback. Use this
-   natural comparison, rather than an arbitrary abstract isomorphism.
-2. Cover U by affine etale objects V. The schemes V ×_S X_i are qcqs because the
-   maps X_i → S are qcqs and V is affine. Their transitions are affine by base
-   change; their limit is V ×_S X. Restrict F_i and its transition maps to these
-   pullbacks. Inverse image preserves colimits, so the restricted limit sheaf is
-   the colimit of the restricted stage sheaves.
-3. Regard the restricted sheaves as complexes concentrated in degree zero.
-   Cohomology continuity on V makes each restriction of z the image of a class
-   at some stage i. Send that class through the stage cohomology-presheaf map
-   to a section of R^p g_i,* F_i, then through (eK i).inv to a section y of K_i.
-4. The cohomology-presheaf comparison is natural for the derived adjunction unit
-   and maps of coefficients: the stage-to-limit map takes the representing
-   derived morphism to its pulled-back morphism followed by F_i → F. After
-   applying degree-p homology this is abelianHigherDirectImageMap. Thus hη says
-   that η_i(y) is exactly the image of z under toSheafify followed by e.hom,
-   restricted to V. Generate a sieve from the affine cover. Restriction of y
-   along further arrows preserves this equality by naturality of η, so every
-   arrow of this covering sieve has the required lift.
--/
+/-- Raw cohomology-presheaf classes locally descend to stage higher direct images
+(Stacks, Tags 09Z1 and 03Q8). -/
 theorem exists_higherDirectImage_limit_presheaf_class_cover {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

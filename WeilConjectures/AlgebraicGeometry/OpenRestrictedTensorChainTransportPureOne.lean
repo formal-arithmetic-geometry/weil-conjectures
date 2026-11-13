@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 import WeilConjectures.AlgebraicGeometry.OpenTensorRestrictionSquareStalkUnit
 /-! # Homology transport for normalized open tensor coordinates
 
-Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
+## References
+
+* Stacks Project, Tags 0098 and 0D5U.
 -/
 
 
@@ -90,30 +92,7 @@ private theorem tensor_unit_stalk_cast {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
   simpa using tensor_unit_stalk k x M m
 
 
-/-- Coefficient-one case of open tensor restriction on pure stalk tensors.
-
-Proof: represent x as a section germ s on an open neighborhood W of g' z.
-By the defining component equation of tensorStalkIso and the unit-germ formula
-of exists_tensorPullback_stalk_iso, the coefficient-one tensor is the germ of
-the chosen tensor-pullback adjunction unit applied to s. The eqToHom in the
-component equation changes only the scalar-extension map, using tensorMap's
-restriction equation; it leaves this tensor unchanged.
-Restrict that output germ along pullback.fst g' U.ι. The inverse restriction
-stalk formula identifies it with the germ of the restricted unit section.
-Evaluate the two tensorPullbackCompositionIso unit identities and the two
-openTensorRestrictionIso leftAdjointUniq unit identities on that section.
-Their composite, which defines openTensorRestrictionSquareIso, sends it to
-the tensor-pullback unit of the same section restricted along U.ι. The equality
-pullback.condition identifies the inverse-image neighborhoods in the two routes.
-Apply the restricted tensorStalkIso unit-germ formula. Its input is precisely
-stalkCongr along hp followed by inverse restriction along U.ι: stalkCongr only
-renames the point of the original germ, and inverse restriction sends it to
-the germ of the restricted section. Thus the two routes agree. Every x admits
-a section representative, so the result follows for all k and x. Empty opens
-have no z0; zero modules, zero rings, and negative degrees cause no exception.
-Source: Stacks Project, Tags 0098 and 0D5U; the specified unit identities for
-composition mates and uniqueness of left adjoints.
-(blueprint: lem-pc-open-restricted-tensor-chain-transport-pure-one). -/
+/-- Coefficient-one case of open tensor restriction on pure stalk tensors. -/
 theorem openRestricted_tensor_chain_transport_pure_one
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

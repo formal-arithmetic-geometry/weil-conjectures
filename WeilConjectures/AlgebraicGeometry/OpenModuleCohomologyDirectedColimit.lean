@@ -24,8 +24,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Directed colimits and module cohomology on quasi-compact opens
 
-Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF
-(blueprint: lem-weil-pbc-qs-scheme-cohomology-directed-colimit).
+## References
+
+* Stacks Project, Cohomology, Tag 01FF.
 -/
 
 @[expose] public section
@@ -39,29 +40,7 @@ namespace AlgebraicGeometry
 /-- On a scheme with a basis of quasi-compact opens stable under binary intersection,
 every cohomology class on a quasi-compact open comes from a stage of a directed system,
 and a stage class with zero image vanishes at a later stage. Equivalently, the canonical
-map from the directed colimit of cohomology groups is bijective.
-
-Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF
-(blueprint: lem-weil-pbc-qs-scheme-cohomology-directed-colimit).
-
-Proof:
-1. Translate the compact-open basis and quasi-separatedness into the hypotheses of
-   abelianSections_preservesDirectedColimits. The forgetful functor from module
-   sheaves to abelian sheaves preserves colimits, so open module sections do too.
-2. Induct on the right-derived degree. At zero use rightDerivedZeroIsoSelf. The
-   existing preservesColimitsOfShape_rightDerived_succ packages the injective
-   embedding, exact colimit sequence, and natural connecting-map ladder.
-3. For its acyclicity premise, apply topological_filtered_cohomology to the underlying
-   abelian sheaves of an injective module diagram. Each stage has zero positive
-   object cohomology by injective_module_abelian_acyclic, so its cohomology colimit is
-   zero. The forgetful functor preserves the original module colimit cocone.
-4. Identify object cohomology with derived abelian sections. The exact-composite
-   comparison exists_rightDerived_exact_comp_iso identifies these with module-derived
-   sections: the same injective-module vanishing verifies its acyclicity premise.
-5. Preservation now makes the image of the given cocone a colimit in abelian groups.
-   The concrete filtered-colimit API gives stage representatives and eventual equality
-   with zero. A transition arrow in the preorder is homOfLE of its underlying inequality.
-The empty open, degree zero, and non-antisymmetric directed preorders are included. -/
+map from the directed colimit of cohomology groups is bijective. (Stacks, Tag 01FF) -/
 theorem openModuleCohomology_directedColimit (X : Scheme.{u})
     (hBasis : IsTopologicalBasis {V : Set X | IsOpen V ∧ IsCompact V})
     [QuasiSeparatedSpace X]

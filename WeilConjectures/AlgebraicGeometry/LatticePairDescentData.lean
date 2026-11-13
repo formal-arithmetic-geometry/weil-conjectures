@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Sites.CoversTop.Over
 /-!
 # Compatible tuples for integral lattice descent
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -318,13 +319,7 @@ theorem finiteLocallyFree_of_latticeCover
     (latticeCover_coversTop U r hr) hm
 
 include hx in
-/-- The compatible-tuple integral module is finite locally free.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-(auxiliary; not a blueprint node).
-Proof: each tuple projection identifies the restricted module with the chosen
-local lattice. Transport its finite free basis covers along the iterated-slice
-equivalence. Compose those basis covers with the original covering sieve to
-obtain a finite free basis cover of the glued module; ranks may vary. -/
+/-- The compatible-tuple integral module is finite locally free. -/
 theorem gluedLatticeModule_finiteLocallyFree
     (hr : r ∈ (Scheme.ProEt.topology X) U) :
     (gluedLatticeModule a L ha U r x hx).IsFiniteLocallyFree := by

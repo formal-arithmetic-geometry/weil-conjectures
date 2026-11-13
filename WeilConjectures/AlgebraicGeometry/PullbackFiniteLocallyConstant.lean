@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Pullback of finite locally constant abelian etale sheaves
 
-Source: Stacks Project, Tags 095A, 03Q1 (3), and 03CB
-(blueprint: lem-weil-pbc-pullback-finite-locally-constant).
+## References
+
+* [Stacks, Tag 095A], [Stacks, Tag 03Q1], [Stacks, Tag 03CB]
 -/
 
 @[expose] public section
@@ -119,29 +120,7 @@ private theorem finiteLocallyConstant_of_iso {X : Scheme.{u}}
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
 
 /-- Pullback along a composite agrees with iterated pullback, and preserves finite local
-constancy of the underlying sheaf of sets. Source: Stacks Project, Tags 095A, 03Q1 (3),
-and 03CB (blueprint: lem-weil-pbc-pullback-finite-locally-constant).
-
-Proof:
-1. `Etale.upperStarComp` identifies composite and iterated inverse images.
-2. The equivalence from the localized etale site at U to the etale site of U,
-   followed by forgetting abelian groups, identifies the restriction of the underlying
-   set sheaf with the underlying set sheaf of pullback along U.hom.
-3. Forgetting abelian groups commutes with inverse image by
-   `etaleInverseImageAbelianLift`, using left exactness of set pullback.
-   The generic constant-sheaf pullback comparison
-   applies to base change, which preserves terminal objects. Thus pullback preserves
-   constancy of the underlying set sheaf, without any small-universe assumption on its
-   constant value.
-4. Pull back the trivializing etale cover. For each member, the two composition
-   isomorphisms and the pullback-square equation identify its restriction with the
-   pullback of the original constant restriction. This proves local constancy.
-5. `Etale.upperStarCompSheafFiberIso` identifies the abelian stalks. On both sides,
-   `Point.sheafFiberCompIso` for the forgetful functor identifies their underlying sets
-   with the set-valued stalks. Transport finiteness across this composite isomorphism.
-6. Both local constancy and finite stalks are invariant under isomorphism: restrict the
-   isomorphism to each cover member and apply each geometric fiber functor. Transport
-   along the inverse of the composition isomorphism from step 1 -/
+constancy of the underlying sheaf of sets. (Stacks, Tags 095A, 03Q1, 03CB) -/
 theorem pullback_finite_locally_constant {T Y Y' : Scheme.{u}}
     (g : Y' ⟶ Y) (f : Y ⟶ T) (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : IsFiniteLocallyConstantSheafOfTypes

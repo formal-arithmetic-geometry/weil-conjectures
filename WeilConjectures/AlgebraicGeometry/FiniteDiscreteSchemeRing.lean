@@ -10,9 +10,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Pulling the constant coefficient ring to a scheme
 
-Source: the monoidal adjunctions defining inverse image and Section 5.3 of
-Bhatt--Scholze. The constant-sheaf adjunction and terminal sections identify
-constant sheaves before and after inverse image, including multiplication. -/
+The constant-sheaf adjunction and terminal sections identify
+constant sheaves before and after inverse image, including multiplication.
+
+## References
+
+* Bhatt--Scholze, Section 5.3
+-/
 
 @[expose] public section
 

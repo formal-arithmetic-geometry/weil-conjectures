@@ -20,12 +20,14 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # The module sheaf associated to a graded module on Proj
 
-Source: Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
-Lemma 01M7 and Lemma 01MB (blueprint: lem-weil-pbc-proj-graded-module-sheaf-exists).
-
 The degree-zero modules are submodules with the already defined `degreeZeroFractions`
 as carriers. All choices of fraction representatives occur in the restriction formula.
 The section identifications are additive equivalences with explicit scalar compatibility.
+
+## References
+
+* Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
+  Lemmas 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -41,9 +43,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-sheaf-exists) -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalars (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -61,49 +62,8 @@ local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
 
 /-- The associated sheaf exists, with the canonical restrictions, chart and stalk
-identifications, uniqueness, quasi-coherence, and the degree-zero global-section map.
-Source: Stacks, Constructions, Section 01M3 before Definition 01M6; Lemmas 01M4,
-01M7 and 01MB. (blueprint: lem-weil-pbc-proj-graded-module-sheaf-exists)
-
-Proof (implemented reduction below):
-The chart restriction laws are obtained directly from gradedModuleAwayRestriction and
-standardOpenProperties. Basis extension and quasi-coherence, and the stalk identification,
-are split into their own named theorems. The global-section gluing theorem is proved;
-compatibility and global uniqueness are proved here by composition and separatedness.
-
-The source argument for the remaining geometric steps is:
-1. By `lem-weil-pbc-proj-standard-open-inclusion`, positive homogeneous standard opens
-   form an intersection-stable basis covering Proj. An inclusion is equivalent to
-   a homogeneous relation `g^e = a*f`, and standard covers refine to finite ones.
-2. `lem-weil-pbc-graded-module-away-restriction` gives the restriction formula by
-   localization, independence of the witnesses, scalar compatibility, identities,
-   composition and inverse maps when the standard opens coincide.
-3. Choose one denominator for each basis open. The maps of step 2 give a presheaf
-   on this basis. `lem-weil-pbc-proj-structure-sheaf-standard-sections` identifies
-   its coefficient rings with the structure sheaf, compatibly with restrictions:
-   the two restricted fractions have the same germ in every homogeneous prime.
-4. For a finite standard cover, the elements `g_i^deg(f)/f^deg(g_i)` generate the
-   unit ideal. The principal localization comparisons of step 2 turn the sheaf
-   sequence into the module localization sequence, exact by
-   `lem-weil-pbc-cover-module-exact`. Thus the basis presheaf is a sheaf on the basis.
-5. Apply `lem-weil-pbc-sheaf-of-modules-from-basis` to extend it to all opens.
-   Compatible basis identifications induce a unique morphism, which is an
-   isomorphism when the identifications are; this gives the asserted uniqueness.
-6. On Spec of a chart ring, a principal open is another positive homogeneous
-   standard open by `lem-weil-pbc-proj-basic-open-intersection`. Step 2 identifies
-   its sections with the corresponding localized chart module. By
-   `lem-weil-pbc-spec-module-tilde-sections` and uniqueness of basis extension this
-   is the tilde of the chart module. Hence the sheaf is quasi-coherent.
-7. Its stalk is the filtered colimit of these chart modules. Fractions map to
-   equal-degree fractions with denominators outside the prime. For surjectivity,
-   multiply numerator and denominator by a positive homogeneous element outside
-   the prime; for injectivity a homogeneous denominator outside the prime killing
-   the numerator also kills the germ on a smaller standard open. Germs respect
-   scalar multiplication, so the stalk identification respects `stalkIso`.
-8. The fractions `m/1` for `m` of degree zero are compatible on the covering basis.
-   Sheaf gluing gives a unique global section. Uniqueness makes this assignment
-   additive and compatible with the coefficient map from degree-zero scalars.
--/
+identifications, uniqueness, quasi-coherence, and the degree-zero global-section map
+(Stacks, Constructions, Lemmas 01M4, 01M7 and 01MB). -/
 theorem gradedModuleSheaf_exists
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)
     (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),

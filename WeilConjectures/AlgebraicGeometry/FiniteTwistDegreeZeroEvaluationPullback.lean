@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPairing
 import WeilConjectures.AlgebraicGeometry.FiniteTwistFlatEvaluationPullback
 
 /-! # Pullback of the finite-twist evaluation before shifting
-
-Source: the degree-zero evaluation step of thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -54,18 +51,7 @@ private theorem positive_flat
   ObjectProperty.flat_of_tensorIso (p1DecompositionSheafProduct A N hN hA T hT)
 
 /-- The normalized finite-line evaluation commutes with derived inverse image in degree zero.
-
-Source: Stacks Tags 03PK and 06YQ; the degree-zero step of the evaluation identification
-in thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
-
-Proof: apply the negative normalization of the canonical twist transport at n=0.
-Its zero normalization identifies the output with constant-sheaf pullback. The
-positive line is flat by its normalized inverse product. Apply the flat single-object tensor
-compatibility theorem to that ordinary evaluation square. Derived pullback preserves
-symmetry; naturality moves the two factor comparisons through the symmetry, yielding
-the displayed reversed-factor evaluation square. This argument also covers zero
-coefficients and empty schemes. -/
+(Stacks, Tags 03PK and 06YQ.) -/
 theorem finiteTwistDegreeZeroEvaluation_pullback
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) :

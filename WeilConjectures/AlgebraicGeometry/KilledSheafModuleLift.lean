@@ -23,18 +23,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- An abelian sheaf killed by `n` has a lift to sheaves of `ULift (ZMod n)`-modules.
-
-Source: Stacks Project, Tag 095T, passage to Z/ell-module sheaves, and the sectionwise
-construction implicit in Tag 03RW; Mathlib `AddCommGroup.zmodModule`.
-(blueprint: lem-weil-pbc-killed-sheaf-module-lift)
-
-Proof: evaluate `n • id = 0` at each object and section. The section groups therefore
-carry the canonical Z/n-action, with a lifted scalar acting by its underlying residue.
-Every restriction is additive, hence Z/n-linear. This gives a module presheaf. Its
-underlying presheaf of abelian groups is the original one, so it is a sheaf because the
-forgetful functor reflects limits. The identity maps give the underlying sheaf
-isomorphism. This also works for n = 0 (the integer action), n = 1 (the zero sheaf),
-and the zero sheaf for any n. -/
+(Stacks, Tag 095T.) -/
 theorem exists_module_sheaf_of_nsmul_id_eq_zero (X : Scheme.{u}) (n : ℕ)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : n • 𝟙 G = 0) :
     ∃ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))),

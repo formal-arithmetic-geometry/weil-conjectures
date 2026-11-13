@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Termwise section comparison for a completed affine chart
 
-Source: Stacks Project, Tags 088B and 05GG.
+## References
+
+* [Stacks Project, Tag 088B](https://stacks.math.columbia.edu/tag/088B)
+* [Stacks Project, Tag 05GG](https://stacks.math.columbia.edu/tag/05GG)
 -/
 
 @[expose] public section
@@ -26,27 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A coherent formal system has the same section diagram after completed affine
-pullback and scalar restriction. The comparisons are natural in every formal map.
-No proper morphism, coherent algebraization, or inverse limit occurs here.
-
-Source: Stacks Project, Tag 088B, completed-base change and power-torsion paragraphs;
-Tag 05GG, positive-power quotient formula; Tag 01I9, affine pullback sections.
-(blueprint: lem-weil-pbc-formal-system-completed-affine-sections)
-
-Proof: Put B = O_Y(U), K = J(U), and R = the K-adic completion of B. Coherence
-makes every G_n quasi-coherent, so affine pullback sections identify sections over
-Spec R with R tensor_B sections over U, naturally in sheaf maps. The original
-section module at level n is annihilated by K^(n+1), by the formal support axiom
-and the affine ideal-product section formula. Since K is finitely generated,
-R/K^(n+1)R is B/K^(n+1), compatibly with the completion map. Therefore the tensor
-unit on this module is an isomorphism: tensor first over B/K^(n+1) and use that
-quotient-ring isomorphism. Compose this unit with the affine pullback section
-comparison and restrict scalars from R to B. Naturality of both comparisons
-makes these level isomorphisms commute with all transitions, hence gives e G as
-an isomorphism of diagrams. The same naturality for a proves the displayed square.
-For K=B all levels vanish and the comparison is between zero modules. For K=0
-it is the identity base change. Zero rings and empty affine charts are included.
--/
+pullback and scalar restriction. The comparisons are natural in every formal map
+(Stacks, Tags 088B and 05GG). -/
 theorem formalSystem_completed_affine_sections
     {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData) (U : Y.affineOpens) :
     let B := Γ(Y, U.1)

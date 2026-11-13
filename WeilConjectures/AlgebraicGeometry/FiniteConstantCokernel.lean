@@ -44,15 +44,7 @@ private lemma constant_finite_etale (X : Scheme.{u})
 
 omit [Finite Λ] in
 /-- A cokernel between constant finite module sheaves is finite locally constant.
-Source: Bhatt--Scholze, Lemma 5.4.1; the constant-sheaf morphism and cokernel
-argument in blueprint lemma-constructible-hom-constant-locally.
-(auxiliary; not a blueprint node)
-
-Proof. Lift the morphism to etale constant sheaves using full faithfulness of
-comparison pullback. Their cokernel is finite locally constant by the etale
-constant-morphism lemma. Exact comparison pullback identifies its image with
-the given cokernel and sends its finite constant trivializations to pro-etale
-trivializations. This includes the zero ring and the empty scheme. -/
+(Bhatt--Scholze, Lemma 5.4.1.) -/
 theorem isFiniteLocallyConstant_cokernel_constant (X : Scheme.{u})
     (M N : ModuleCat.{u + 1} Λ) [Finite M] [Finite N]
     (f : (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj M ⟶

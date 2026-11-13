@@ -12,15 +12,16 @@ import WeilConjectures.AlgebraicGeometry.IntegralModelsResidueTransport
 
 /-! # The integral criterion for constant-model constructibility
 
-For the finite-constant-model formulation `constantModelBoundedConstructible` of
-`definition-constructible-sheaves`, a complex over the continuous integers is bounded constructible
-iff its restriction to the constant integers is Stacks adic constructible. The proof goes
-through the adic stratified perfect models (Bhatt–Scholze, Proposition 6.8.11(3)), which supply
-the local structure theorem `proposition-local-structure-integral-constructible-complexes` for
-finite constant models.
+For the finite-constant-model formulation `constantModelBoundedConstructible`, a complex
+over the continuous integers is bounded constructible iff its restriction to the constant
+integers is Stacks adic constructible. The proof goes through the adic stratified perfect
+models (Bhatt–Scholze, Proposition 6.8.11(3)), which supply the local structure theorem
+for finite constant models.
 
-Source: Bhatt–Scholze, Proposition 6.8.11; Stacks Tags 09C1 and 09C7
-(blueprint: lemma-integral-models--2).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11.
+* Stacks Project, Tags 09C1 and 09C7.
 -/
 
 @[expose] public noncomputable section
@@ -33,21 +34,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- The criterion part of `lemma-integral-models--2`: a complex over the continuous
-integers is bounded constructible (bounded cohomology with finite constant stratified models)
-iff its restriction to the constant integers is Stacks adic constructible.
-Source: Bhatt–Scholze, Proposition 6.8.11(3); Stacks Tags 09C1 and 09C7
-(blueprint: lemma-integral-models--2).
-
-Proof:
-1. `IntegralConstantModel.constructible_iff` identifies finite constant models of the
-   cohomology sheaves with completed constant stratified models after the exact module
-   transport `IntegralConstantModel.derived`.
-2. `Scheme.integral_cohomological_adic_criterion` (adic stratified perfect models) identifies
-   these with completeness plus a constructible étale residue complex of finite Tor
-   amplitude.
-3. `completion_transport` and `residue_transport` identify completeness and the residue
-   condition with the two clauses of `stacksConstructible` of the restriction. -/
+/-- A complex over the continuous integers is bounded constructible (bounded cohomology
+with finite constant stratified models) iff its restriction to the constant integers is
+Stacks adic constructible. (Bhatt–Scholze, Proposition 6.8.11; Stacks, Tags 09C1, 09C7.) -/
 theorem integral_models_stacks_criterion (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]

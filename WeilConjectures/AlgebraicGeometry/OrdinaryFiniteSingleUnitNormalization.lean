@@ -6,8 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Normalized single-unit composition equations
 -/

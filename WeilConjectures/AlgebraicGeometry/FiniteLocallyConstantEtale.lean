@@ -23,31 +23,11 @@ Let `T` be a scheme. We show:
   the members of an étale cover of `T` is isomorphic to the sheaf of sections of a finite étale
   `T`-scheme (`AlgebraicGeometry.Scheme.exists_iso_uliftYoneda_of_isFiniteLocallyConstant`).
 
-These are the two object-level halves of blueprint node
-`lemma-weil-pbc-finite-locally-constant-etale-equivalence`, combined in
+These are the two object-level halves, combined in
 `AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso'`; the finiteness and
 local constancy conditions are those of
 `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheafOfTypes`
 (which is defined in `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale`, a downstream file).
-
-## Proof
-
-For the first statement, `P` becomes a trivial cover `∐_{S} U ⟶ U` over the members of an
-étale cover (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`), and the
-sheaf of sections of a trivial cover is constant
-(`AlgebraicGeometry.Scheme.Etale.isConstant_over_of_isUniversalSection`). Its stalk at a
-geometric point is a quotient of the finite geometric fibre of `P`.
-
-For the second statement, a constant sheaf with finite stalks over `U` is represented by a
-trivial finite cover of `U`
-(`AlgebraicGeometry.Scheme.Etale.exists_isUniversalSection_of_isConstant`).
-Over an affine open `W` of `T`, finitely many affine opens of the members of the cover give a
-surjective étale `p : X ⟶ W` from an affine scheme; the trivial covers glue to a finite étale
-`X`-scheme representing the restriction of `E` to `X`
-(`AlgebraicGeometry.Scheme.exists_isUniversalSection_of_forall_exists_opens`), which descends to
-`W` (`AlgebraicGeometry.Scheme.IsUniversalSection.exists_isUniversalSection_of_isAffine`). The
-representing schemes over the affine opens of `T` glue to a finite étale `T`-scheme representing
-`E`, again by `AlgebraicGeometry.Scheme.exists_isUniversalSection_of_forall_exists_opens`.
 
 ## References
 
@@ -121,8 +101,7 @@ lemma exists_cover_isConstant_over_uliftYoneda (P : T.Etale) [IsFinite P.hom] :
     (IsPullback.isoPullback_hom_snd _)
   exact Etale.isConstant_over_of_isUniversalSection E Ut (S t) h₂
 
-/-- **The sheaf of sections of a finite étale scheme is finite locally constant.**
-(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+/-- **The sheaf of sections of a finite étale scheme is finite locally constant.** -/
 theorem isFiniteLocallyConstant_uliftYoneda (P : Scheme.{u}) (π : P ⟶ T) [IsFinite π]
     [AlgebraicGeometry.Etale π] :
     ∃ h : Presheaf.IsSheaf T.smallEtaleTopology (uliftYoneda.{u + 1}.obj (Etale.mk π)),
@@ -146,11 +125,7 @@ variable (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (𝒰 : Cover.{u} etale
 include h𝒰 hfin in
 /-- **Representability over an affine open.** Let `E` be a sheaf of sets on the small étale site
 of `T` with finite stalks which is constant over the members of an étale cover `𝒰` of `T`. Then
-over every affine open `W` of `T` the sheaf `E` is represented by a finite étale `W`-scheme:
-finitely many affine opens `O_k` of members of `𝒰` cover `W`, over each of them `E` is
-represented by a trivial finite cover, these glue to a finite étale scheme over `X = ∐ O_k`,
-which descends along the surjective étale `X ⟶ W`.
-(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+over every affine open `W` of `T` the sheaf `E` is represented by a finite étale `W`-scheme. -/
 theorem isRepresentableOver_of_isAffineOpen {W : T.Opens} (hW : IsAffineOpen W) :
     IsRepresentableOver E.obj (𝟙 T) W := by
   classical
@@ -223,7 +198,7 @@ end Representable
 /-- **Finite locally constant sheaves of sets are represented by finite étale schemes.** Every
 sheaf of sets on the small étale site of `T` with finite stalks which is constant over the
 members of an étale cover of `T` is isomorphic to the sheaf of sections of a finite étale
-`T`-scheme. (blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+`T`-scheme. -/
 theorem exists_iso_uliftYoneda_of_isFiniteLocallyConstant
     (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (hE : (∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,
@@ -251,8 +226,7 @@ theorem exists_iso_uliftYoneda_of_isFiniteLocallyConstant
   of `T` is isomorphic to the sheaf of sections of a finite étale `T`-scheme.
 
 This is `AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso` with
-`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheafOfTypes` unfolded.
-(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheafOfTypes` unfolded. -/
 theorem isFiniteLocallyConstant_yoneda_and_exists_iso' (T : Scheme.{u}) :
     (∀ (P : Scheme.{u}) (π : P ⟶ T) [IsFinite π] [AlgebraicGeometry.Etale π],
       ∃ h : Presheaf.IsSheaf T.smallEtaleTopology (uliftYoneda.{u + 1}.obj (Etale.mk π)),

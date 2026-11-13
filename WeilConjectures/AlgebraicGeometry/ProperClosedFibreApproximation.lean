@@ -17,8 +17,10 @@ import WeilConjectures.AlgebraicGeometry.QuotientFibreLimitTransfer
 /-!
 # Closed fibres of proper Noetherian approximations
 
-Source: Stacks Project, Tag 0GS2, proof, General case, and Tag 0A0P.
-(blueprint: lem-weil-pbc-proper-closed-fibre-approximation).
+## References
+
+* [Stacks Project, Tag 0GS2](https://stacks.math.columbia.edu/tag/0GS2)
+* [Stacks Project, Tag 0A0P](https://stacks.math.columbia.edu/tag/0A0P)
 -/
 
 @[expose] public section
@@ -30,35 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The closed fibre of a proper scheme is a directed limit of the closed fibres
-of proper models over finite-type integer rings, with affine transitions.
-This construction depends only on the proper morphism and its base ideal; no cover
-or descent of a cover is part of its conclusion.
-
-Source: Stacks Project, Tag 0GS2, proof, General case, first approximation paragraph;
-Tag 0A0P, proper Noetherian approximation.
-(blueprint: lem-weil-pbc-proper-closed-fibre-approximation).
-
-Proof:
-1. Apply proper Noetherian approximation with its affine clause to f. Choose the
-   proper stages X_i over Spec R_i, where R_i is finite type over the integers,
-   and the compatible projections p_i and ring maps alpha_i : R_i -> A. Their
-   rings have colimit A, and the schemes X_i have limit Y.
-2. Put K_i = alpha_i^{-1}(I). The transition maps preserve these ideals. The
-   quotient cocone has colimit A/I: represent any element by an element of a
-   stage ring; if its image is zero modulo I, that representative already lies
-   in K_i. Equivalently, compatible maps from all R_i/K_i induce a map from A
-   that kills I, and therefore a unique map from A/I.
-3. Apply Spec to this quotient colimit. Pullbacks commute with limits, so the
-   closed fibres X_i,0 have limit Y_0. The projections are induced by p_i and
-   the quotient ring maps; the pullback projection equations give exactly the
-   two compatibilities below. Isomorphisms e allow arbitrary choices of objects
-   for the resulting diagram without imposing definitional equalities.
-4. A transition X_j,0 -> X_i,0 factors through the base change of X_i,0 to X_j:
-   the first map is a closed immersion, because the extended K_i is contained
-   in K_j, and the second is a base change of the affine transition X_j -> X_i.
-   Thus transitions are affine. Each closed fibre is proper over an affine
-   scheme, hence quasi-compact and quasi-separated. This also covers I = top,
-   when every closed fibre is empty, and the zero base ring. -/
+of proper models over finite-type integer rings, with affine transitions
+(Stacks, Tags 0GS2 and 0A0P). -/
 theorem exists_proper_closedFibre_approximation
     {A : Type u} [CommRing A] (I : Ideal A)
     {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] :

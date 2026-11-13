@@ -11,8 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Natural overlap maps before imposing the cocycle
 
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing.
-(blueprint: def-pc-local-overlap-transitions). -/
+## References
+
+* Stacks Project, Tag 01ZR
+-/
 
 @[expose] public section
 
@@ -29,8 +31,7 @@ variable {C : Type u} [Category.{v} C]
   {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S)
 
 /-- Natural overlap maps, with neither identity nor cocycle equations imposed.
-These are the maps obtained by gluing lifts on affine overlap charts.
-(blueprint: def-pc-local-overlap-transitions). -/
+These are the maps obtained by gluing lifts on affine overlap charts. -/
 structure OverlapTransitions where
   obj (i : ι) : F.obj (.mk (op (X i)))
   hom ⦃Y : C⦄ (q : Y ⟶ S) ⦃i₁ i₂ : ι⦄ (f₁ : Y ⟶ X i₁) (f₂ : Y ⟶ X i₂)
@@ -51,7 +52,6 @@ namespace OverlapTransitions
 variable {F f}
 
 /-- The two remaining equations for natural overlap maps.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 structure Coherent (T : F.OverlapTransitions f) : Prop where
   hom_self ⦃Y : C⦄ (q : Y ⟶ S) ⦃i : ι⦄ (g : Y ⟶ X i) (hg : g ≫ f i = q) :
@@ -62,7 +62,6 @@ structure Coherent (T : F.OverlapTransitions f) : Prop where
     T.hom q f₁ f₂ hf₁ hf₂ ≫ T.hom q f₂ f₃ hf₂ hf₃ = T.hom q f₁ f₃ hf₁ hf₃
 
 /-- Assemble the descent datum from the natural maps and their two equations.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 def toDescentData (T : F.OverlapTransitions f) (h : T.Coherent) : F.DescentData f where
   obj := T.obj
@@ -72,7 +71,6 @@ def toDescentData (T : F.OverlapTransitions f) (h : T.Coherent) : F.DescentData 
   hom_comp := h.hom_comp
 
 /-- A component comparison commuting with natural overlap maps.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 structure Comparison (T : F.OverlapTransitions f) (D : F.DescentData f) where
   e (i : ι) : T.obj i ≅ D.obj i
@@ -83,7 +81,6 @@ structure Comparison (T : F.OverlapTransitions f) (D : F.DescentData f) where
 
 /-- An invertible component comparison with genuine descent data implies coherence.
 This supplies the limit equations used by eventual equality.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 lemma Comparison.coherent {T : F.OverlapTransitions f} {D : F.DescentData f}
     (ε : T.Comparison D) : T.Coherent where
@@ -101,7 +98,6 @@ variable {S' : C} {p : S' ⟶ S} {ι' : Type t} {X' : ι' → C}
   (w : ∀ j, p' j ≫ f (α j) = f' j ≫ p)
 
 /-- Pullback of the overlap maps using the pseudofunctor composition comparison.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 def pulledHom (T : F.OverlapTransitions f)
     ⦃Y : C⦄ (q : Y ⟶ S') ⦃j₁ j₂ : ι'⦄ (f₁ : Y ⟶ X' j₁) (f₂ : Y ⟶ X' j₂)
@@ -117,7 +113,6 @@ def pulledHom (T : F.OverlapTransitions f)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Express the pulled overlap map using specified composite arrows.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 lemma pulledHom_eq (T : F.OverlapTransitions f)
     ⦃Y : C⦄ (q : Y ⟶ S') ⦃j₁ j₂ : ι'⦄ (f₁ : Y ⟶ X' j₁) (f₂ : Y ⟶ X' j₂)
@@ -134,7 +129,6 @@ lemma pulledHom_eq (T : F.OverlapTransitions f)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Base change of natural overlap maps. No coherence assumption is required.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 def pull (T : F.OverlapTransitions f) : F.OverlapTransitions f' where
   obj j := (F.map (p' j).op.toLoc).toFunctor.obj (T.obj (α j))
@@ -156,7 +150,6 @@ def pull (T : F.OverlapTransitions f) : F.OverlapTransitions f' where
 
 /-- Assemble a morphism from a pulled coherent datum using a raw component comparison.
 Keeping this construction generic avoids unfolding the concrete cover maps.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 def pullComparisonHom (T : F.OverlapTransitions f) (h : T.Coherent)
     {D : F.DescentData f'} (ε : (T.pull w).Comparison D) :
@@ -167,7 +160,6 @@ def pullComparisonHom (T : F.OverlapTransitions f) (h : T.Coherent)
       DescentData.pullFunctorObjHom, toDescentData, hf₁] using ε.comm q f₁ f₂ hf₁ hf₂
 
 /-- Every component of the assembled morphism is the hom of a component iso.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 lemma pullComparisonHom_isIso_hom (T : F.OverlapTransitions f) (h : T.Coherent)
     {D : F.DescentData f'} (ε : (T.pull w).Comparison D) (a : ι') :
@@ -179,7 +171,6 @@ end CategoryTheory.Pseudofunctor
 namespace AlgebraicGeometry
 
 /-- The canonical map between two base changes of a cover chart.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 noncomputable def overlapRefinementHom {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (q' : Z ⟶ X) (r : Z ⟶ Y) (h : r ≫ q = q') (a : U.I₀) :
@@ -188,7 +179,6 @@ noncomputable def overlapRefinementHom {X Y Z : Scheme.{u}} (U : X.OpenCover.{u}
     rw [Category.assoc, h, U.pullbackHom_map])
 
 /-- The canonical chart map lies over the later base-change map.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 lemma overlapRefinementHom_map {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (q' : Z ⟶ X) (r : Z ⟶ Y) (h : r ≫ q = q') (a : U.I₀) :
@@ -197,7 +187,6 @@ lemma overlapRefinementHom_map {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
   apply pullback.lift_fst
 
 /-- Composition of the refinement chart map with the original chart projection.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 lemma overlapRefinementHom_comp {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (q' : Z ⟶ X) (r : Z ⟶ Y) (h : r ≫ q = q') (a : U.I₀) :
@@ -205,7 +194,6 @@ lemma overlapRefinementHom_comp {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
   apply pullback.lift_snd
 
 /-- A stage transition for the fixed base-changed scheme.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 noncomputable def overlapStageMap {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i j k : I} {Xi : Scheme.{u}}
@@ -217,7 +205,6 @@ noncomputable def overlapStageMap {I : Type u} [Preorder I]
       (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
 
 /-- The limit projection for the fixed base-changed scheme.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 noncomputable def overlapLimitMap {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec))
@@ -228,7 +215,6 @@ noncomputable def overlapLimitMap {I : Type u} [Preorder I]
     (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))
 
 /-- Stage transitions compose.
-(blueprint: def-pc-local-overlap-transitions)
 -/
 lemma overlapStageMap_comp {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i j k l : I} {Xi : Scheme.{u}}

@@ -11,10 +11,12 @@ import WeilConjectures.AlgebraicGeometry.PrincipalCechColumns
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechTotal
 import WeilConjectures.CategoryTheory.DoubleComplexTotal
 
-/-! # Differential compatibility of the explicit regrouping
+/-!
+# Differential compatibility of the explicit regrouping
 
-Source: Stacks, Tag 08D1, signs of alternating total cochains
-(blueprint: lem-sc-principal-cech-regroup-differential).
+## References
+
+* Stacks Project, Tag 08D1, <https://stacks.math.columbia.edu/tag/08D1>
 -/
 
 @[expose] public section
@@ -61,20 +63,7 @@ private theorem module_zsmul_apply {X Y : ModuleCat.{u} A}
   change (k • g).hom x = _
   simp only [ModuleCat.hom_zsmul, LinearMap.smul_apply]
 
-/-- The total differential of one row has its horizontal and signed vertical parts.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-regroup-differential).
-
-Proof: evaluate at a nonempty subset J. The vertical term is zero unless
-card(J)=p+1. In that row, the product projection is a chain map and degree
-transports commute with the coefficient differential; p=card(J)-1 is
-nonnegative, so p.negOnePow gives exactly the scalar (-1)^(card(J)-1).
-The horizontal term is zero unless card(J)=p+2: erasing a member lowers
-cardinality by one. In that row, the product projection of the horizontal
-map is its defining sum of signed restrictions. The two successive degree
-transports compose to the unique equality transport from q to
-n+2-card(J), so each summand equals the corresponding explicit differential
-summand. Empty deletions give zero. Equality of all subset coordinates
-proves equality of module maps, including empty covers and unsupported rows. -/
+/-- The total differential of one row has its horizontal and signed vertical parts. -/
 private theorem principalCechRowToTerms_differential
     (F : CochainComplex (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
@@ -206,25 +195,7 @@ private theorem principalCechRowToTerms_differential
         next hn => rfl
 
 
-/-- The explicit graded regrouping commutes with the total differential.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-regroup-differential).
-
-Proof: precompose the equation with every diagonal coproduct inclusion and read
-its subset coordinates. The vertical part of Mathlib's total differential has
-sign p.negOnePow. A nonzero coordinate has card(J)=p+1 and therefore p≥0;
-this sign acts as (-1 : A)^(card(J)-1). The chain-map equation of e p identifies
-the vertical differential with the section differential in this coordinate.
-For the horizontal part, the displayed hypothesis identifies the column map
-with principalCechHorizontal. Its subset projection is the sum over j in J of
-(-1) raised to the number of earlier indices times restriction from J.erase j.
-The source row has card(J.erase j)=p+1, and its vertical degree equals the
-coefficient degree of the target; principalCech_erase_degree gives precisely
-the transport in principalCechDifferentialValue. Empty erased sets contribute
-zero on both sides. These are exactly the two terms of that formula, which
-principalCechDifferential_exists identifies with the chosen differential.
-Coproduct inclusions and product projections detect equality. For an empty
-cover there are no subset coordinates; outside the supported rows the sources
-are zero. This argument imposes no bound on the vertical degrees. -/
+/-- The explicit graded regrouping commutes with the total differential. -/
 theorem principalCechTotalRegroup_comm
     (F : CochainComplex (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)

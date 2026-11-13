@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.HorizontalRectangleInverseMateFixedTran
 
 /-! # Equality of horizontal duality mates with fixed endpoint comparisons
 
-Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-(blueprint: lem-sc-horizontal-duality-mate-commutativity).
+## References
+
+* Stacks Project, Tags 0ATR and 0ATM
 -/
 
 @[expose] public section
@@ -27,26 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The unit/counit equality for the two horizontal duality mates, with the source
 and target comparison maps explicitly constructed, rather than existentially chosen.
-Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-(blueprint: lem-sc-horizontal-duality-mate-commutativity).
-
-Proof: Expand the three dualityEquationBaseChangeMap terms. Use the pinned
-pullback composition isomorphisms for both horizontal edges and their conjugates
-for direct-image composition. The target comparison uses right-adjoint uniqueness
-for the transported adjunction, so its hom is uniquely characterized by the
-counit compatibility. Move units past natural transformations by naturality, and
-use the formulas for the unit and counit of a composite adjunction to cancel the
-middle unit/counit pair by the triangle identity. The remaining equality is the
-horizontal pasting equality of ordinary derived base-change transformations
-(Tag 0ATM): transpose both sides under the outer pullback/direct-image adjunction;
-pullback composition associativity identifies their transposes with the same
-pullback of the counit of f. Conjugation reverses composition of these ordinary
-transformations; inversion reverses it back. Only the ordinary base-change maps
-are inverted. This gives exactly O.hom followed by the displayed fixed target
-comparison equal to the displayed fixed source comparison followed by G.hom.
-No mate is inverted; identity base maps use the pullback unit laws, and zero
-complexes and empty schemes follow from the same natural-transformation equality.
--/
+(Stacks, Tags 0ATR and 0ATM) -/
 theorem horizontal_duality_mate_commutativity
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}

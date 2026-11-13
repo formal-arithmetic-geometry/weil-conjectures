@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SplitTensorAlgebraSchemeComponents
 
 /-!
 # Scheme-level generic splitting of a finite morphism
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-generic-finite-scheme-splitting).
 -/
 
 @[expose] public section
@@ -41,8 +37,7 @@ private theorem isUniversalHomeomorphism_of_finite_universally_isHomeomorph
     exact (hf i₁ i₂ f' H).injective
   exact {}
 
-/-- Restriction of a finite étale splitting along a smaller open.
-(blueprint: lem-weil-pbc-generic-finite-scheme-splitting) -/
+/-- Restriction of a finite étale splitting along a smaller open. -/
 private theorem finite_scheme_splitting_restrict
     (S : Scheme.{u}) {Z : Scheme.{u}} (g : Z ⟶ S)
     (U : S.Opens) (T : Scheme.{u}) (p : T ⟶ U.toScheme)
@@ -100,28 +95,7 @@ private theorem finite_scheme_splitting_restrict
 
 /-- A finite map over an integral Noetherian affine base has a dense open on every
 subopen of which an etale surjective base change splits its source into finitely
-many open components universally homeomorphic to the cover.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation;
-steps 1 and 2 of `lem-weil-pbc-finite-map-generic-lisse-preservation`.
-(blueprint: lem-weil-pbc-generic-finite-scheme-splitting).
-
-Proof: Write S = Spec A and Z = Spec B, using affineness of finite morphisms.
-Apply `lem-weil-pbc-generic-finite-algebra-splitting` to B over A. Its nonzero
-c defines a dense principal open U, and its finite etale surjective algebra A'
-provides the cover of U. The product decomposition of the reduced tensor algebra
-identifies its spectrum with a finite disjoint union of spectra of the factors.
-The reduction map is a universal homeomorphism, hence these open-and-closed
-components lift uniquely to open-and-closed components of the unreduced source.
-Their maps to Spec A' are finite universal homeomorphisms: reduction does not
-change integrality, surjectivity, or universal injectivity. For V contained in U,
-base change the cover and each component to V. Etaleness, finiteness, surjectivity,
-and universal homeomorphisms survive this base change. The pulled-back components
-are disjoint opens and cover the source. Their composite maps to the restricted
-cover have the required property. If the finite algebra is zero, the source is
-empty and the family has no components; the supremum of the empty family is top
-in the lattice of opens of the empty source. The choice of U uses no sheaf. -/
+many open components universally homeomorphic to the cover. -/
 theorem exists_dense_open_finite_scheme_splitting
     (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S]
     {Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g] :

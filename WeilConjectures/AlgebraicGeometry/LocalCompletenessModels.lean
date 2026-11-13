@@ -195,13 +195,8 @@ private noncomputable def restriction_models_iso
     (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U).mapDerivedCategoryFactors.app
       (DerivedCategory.Q.objPreimage K)
 
-/-- The fraction and sequential-colimit models of local completeness agree.
-Source: Stacks Project, algebraization.tex, Tag 0997.
-Proof: the maps sending the element a at stage n to a/f^n identify the sequential
-colimit of the ring modules with the sheafification of sectionwise localization.
-Exact slice restriction identifies its chosen-representative model with its descended
-functor. Apply the derived internal-Hom functor to these two isomorphisms.
-(auxiliary; not a blueprint node). -/
+/-- The fraction and sequential-colimit models of local completeness agree
+(Stacks, Tag 0997). -/
 theorem localCompleteness_models_iff
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

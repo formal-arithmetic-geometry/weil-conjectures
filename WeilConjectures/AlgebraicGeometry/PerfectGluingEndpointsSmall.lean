@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Small endpoint families for perfect gluing
 
-Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tags 08BV and 08DR
-(blueprint: lem-perfect-gluing-endpoints-small).
+## References
+
+* Stacks Project, Tags 08BV and 08DR.
 -/
 
 @[expose] public section
@@ -38,30 +39,8 @@ private theorem small_skeleton_of_family {C : Type v} [Category.{z} C]
   exact P.ι.mapSkeleton_injective (congrArg Subtype.val hst)
 
 namespace AlgebraicGeometry.Scheme
-/-- The middle and overlap terms form small families of isomorphism classes.
-Source: Step 2 of lem-pc-perfect-complexes-compact-set, Stacks Project, Tags 08BV and 08DR
-(blueprint: lem-perfect-gluing-endpoints-small).
-
-Proof: Put A = f⁻¹U and B = f⁻¹V. The open immersions A.toScheme → Y → X,
-B.toScheme → Y → X and (A ∩ B).toScheme → Y → X have images U, V and U ∩ V,
-since f has image U ∪ V. Transport the given local derived-category structures
-along Modules.overEquiv, and use iterated localization to supply the structures
-on all further opens, in the same universe w. Apply pU, pV and pUV to obtain
-small perfect quasi-coherent skeletons on the three open subschemes. Restriction
-preserves quasi-coherent cohomology and perfectness: restrict each strictly perfect
-local model and compose the restriction comparisons. Transport these categories
-back to the localized sites. The right adjoint to restriction is direct image
-along the open immersion, expressed on the localized site; uniqueness of right
-adjoints identifies it with the usual direct image. Its derived functor takes
-isomorphic restrictions to isomorphic objects of D(Y). Thus the overlap family
-is covered by the small skeleton on A ∩ B. The middle family is covered by the
-product of the small skeletons on A and B, followed by direct image and biproduct.
-For each endpoint occurring in the stated properties, choose representatives of
-its restrictions, not an arbitrary new endpoint, and use the functors' image
-isomorphisms to identify its skeleton class with that of the constructed endpoint.
-The maps from these small indexing types onto the endpoint skeletons are surjective;
-small_of_surjective proves both assertions. The argument also covers empty opens
-and repeated opens, and needs neither compactness nor quasi-separatedness. -/
+/-- The middle and overlap terms form small families of isomorphism classes
+(Stacks, Tags 08BV and 08DR). -/
 theorem perfectGluing_endpoints_small (X : Scheme.{u}) (U V : X.Opens)
     (pU : PerfectComplexClassesSmallOnOpen.{u, w} X U)
     (pV : PerfectComplexClassesSmallOnOpen.{u, w} X V)

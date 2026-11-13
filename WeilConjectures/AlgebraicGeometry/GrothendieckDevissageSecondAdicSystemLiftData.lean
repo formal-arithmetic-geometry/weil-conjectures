@@ -22,15 +22,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the algebraized K-adic system, its comparison isomorphism and the map to the
-`K`-adic completion of `H` induced by `α` through `θ`.
-Source: Stacks Project, Tag 088A, construction of the systems G_e.
-(blueprint: lem-weil-pbc-devissage-second-adic-system-lift-data)
-The proof descends each quotient system to the closed subscheme V(K^(e+1)),
-uses the assumed completion equivalence and pushes forward. This gives the terms `N_e` and the
-comparisons `σ_e`. The `I`-adic system map `σ_e ≫ (α mod K^(e+1)) ≫ θ_e⁻¹` goes between
-completions of coherent modules supported on V(K^(e+1)); full faithfulness of completion there
-lifts it to `δ_e : N_e ⟶ H / K^(e+1) H`. Faithfulness on V(K^(e+2)), together with naturality
-of `α mod K` and of `θ`, shows that the `δ_e` commute with the transitions. -/
+`K`-adic completion of `H` induced by `α` through `θ`. (Stacks, Tag 088A) -/
 theorem grothendieckDevissage_secondAdicSystem_lift_data
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

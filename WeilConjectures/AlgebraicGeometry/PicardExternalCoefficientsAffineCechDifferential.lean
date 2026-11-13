@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsAffine
 
 /-! # Differential compatibility of normalized external Cech term maps
 
-Source: Stacks Project, Tag 0BED, lemma-kunneth, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-differential).
+## References
+
+* Stacks Project, Varieties, Tag 0BED.
 -/
 
 @[expose] public section
@@ -67,27 +68,7 @@ private lemma coordinate_d {S : TopCat.{w}} {ι : Type w} {R : Type w} [Ring R]
 -- The section identity carries several scalar-restriction instances.
 /-- Any degreewise maps with the external pure-tensor section normalization commute
 with the Cech differentials. This uses no affine or quasi-coherent hypotheses and
-asserts no existence or invertibility of a degreewise comparison.
-Source: Stacks Project, Tag 0BED, lemma-kunneth, affine-open Cech calculation;
-Tag 01CD, lemma-tensor-product-pullback, and pullback-unit naturality.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-differential).
-
-Proof: Project the proposed differential square to a tuple of length n+2.
-The native Cech differential is the finite alternating sum of face restrictions.
-On an input a tensor t, normalization expresses each coordinate of the comparison
-as the tensor section of the pullback unit applied to a's coordinate and the unit
-applied to t. Restriction of tmulSection is tmulSection of the two restrictions.
-Naturality of each pullback unit moves the face restriction through that unit.
-For the first factor this is the corresponding face restriction of a; for the
-second it is the restriction of the same section t on V in either order. Thus
-all individual face squares commute, including faces with repeated indices.
-Additivity and integer linearity of tensor and section maps identify the finite
-alternating sums. Tensor induction extends the identity from a tensor t to every
-element of the degree term. Coordinate extensionality gives the square itself.
-For a non-adjacent pair both differentials are zero by the complex shape.
-The empty index type has zero cochain terms, and all identities hold there too.
-No affine hypothesis, finite index hypothesis, or covering condition is used:
-the face set is finite independently of the index set. -/
+asserts no existence or invertibility of a degreewise comparison. (Stacks, Tags 0BED, 01CD) -/
 theorem picardAffineCech_normalized_differential
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

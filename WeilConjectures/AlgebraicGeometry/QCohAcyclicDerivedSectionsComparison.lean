@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparisonShe
 
 /-! # Derived sections for acyclic quasi-coherent pushforward
 
-Source: Stacks Project, Perfect Complexes, Tags 08D4, 08D5 and 0AVW, and
-Cohomology, Tag 0D5X (blueprint: lem-sc-qcoh-acyclic-derived-sections-comparison).
+## References
+
+* Stacks Project, Tags 08D4, 08D5, 0AVW and 0D5X.
 -/
 
 @[expose] public section
@@ -29,27 +30,8 @@ namespace AlgebraicGeometry
 
 /-- Derived sections over the inverse images of affine opens compute sections of
 cohomology, naturally in the derived object and compatibly with restriction. The
-full section cohomology presheaf sheafifies to the cohomology of derived direct image.
-
-Source: Stacks Project, Tags 08D4, 08D5, 0AVW and 0D5X
-(blueprint: lem-sc-qcoh-acyclic-derived-sections-comparison).
-
-Proof: (1) For an affine open V, restrict the injective resolution and derived direct
-image to f⁻¹V and V, using lem-sc-ringed-space-restrict-injective-resolution and
-lem-pc-restrict-derived-direct-image-open. Higher direct images are quasi-coherent
-(lem-pc-finite-support-hi); affine vanishing (pqf-lem-affine-vanishing) and Leray
-(lem-pc-leray-degenerate-sections) imply that sections on f⁻¹V are acyclic on every
-quasi-coherent module. Sections preserve countable products.
-(2) Shift to degree zero. Apply lem-pc-unbounded-derived-functor-cohomological-bound
-with N = 1 to the negative truncation: its derived sections vanish in degrees ≥ 0.
-The truncation triangle therefore removes the unbounded negative tail.
-(3) Apply lemma-uniform-bound-proper-direct-image--1 to the bounded-below positive truncation. Its
-positive columns vanish by (1), leaving only sections of the cohomology sheaf. All maps are
-functorial, both in the derived object and in affine-open restriction; they produce
-the first natural isomorphism of module presheaves on the full affine-open category.
-(4) Compute using a K-injective representative I. The presheaf is the sectionwise
-cohomology of f_*I. Cohomology in module sheaves is the sheafification of this
-presheaf cohomology (Tag 0D5X), yielding the second natural isomorphism. -/
+full section cohomology presheaf sheafifies to the cohomology of derived direct image
+(Stacks, Tags 08D4, 08D5, 0AVW and 0D5X). -/
 theorem qcoh_acyclic_derived_sections_comparison {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

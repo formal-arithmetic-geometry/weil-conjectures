@@ -19,8 +19,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine annihilation of the canonical formal push-pull comparison
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 088B, second half of the proof.
-(blueprint: lem-weil-pbc-formal-systems-push-pull-affine-annihilation)
+## References
+
+* [Stacks Project, Tag 088B](https://stacks.math.columbia.edu/tag/088B)
 -/
 
 @[expose] public section
@@ -78,33 +79,8 @@ private theorem annihilator_coker_of_square
 set_option maxHeartbeats 500000 in
 -- Identifying kernels and quotient carriers after restricting scalars needs extra heartbeats.
 /-- The canonical comparison, specified by its quotient and adjunction equations,
-has affine limit kernel and cokernel killed by a positive power of K.
-
-Source: Stacks Project, Lemma 088B, proof from the base change to Spec(B-completion)
-to its last paragraph; Remark 0888, condition (2).
-(blueprint: lem-weil-pbc-formal-systems-push-pull-affine-annihilation)
-
-Proof: Restrict to an affine open U = Spec B. The quotient equation determines
-κ uniquely because the quotient projections are epimorphisms. Formal functions
-and the affine formal-module equivalence then show that the adjunction equation
-determines α uniquely. Replace B by its J-adic completion B'; it is Noetherian
-and flat over B, and B/J^n = B'/(JB')^n. Flat base change identifies the
-pushforward sections, the quotient maps, and the adjunction units; uniqueness
-therefore identifies the pulled-back comparison with the comparison over B'.
-The affine formal-module equivalence algebraizes G over B'. Full faithfulness
-of completion on coherent modules proper over a complete base algebraizes β
-to an isomorphism b: f*G -> F. The comparison is now the completion of the
-adjunction map G -> f_*f*G followed by f_*b, by its defining equations.
-Over the complement of V(K) this is an isomorphism, since f is an isomorphism
-there. Its coherent kernel and cokernel are supported on V(K); Tag 01Y9
-annihilates both by a common positive power K^s. Exactness of completion on
-finite modules carries this annihilation to the affine limit kernel and
-cokernel. Since the two affine limit modules are already complete modules,
-the original and completed limit maps coincide under the canonical equivalences;
-restricting scalars carries annihilation by (KB')^s back to K^s. This yields
-one exponent for each U. For K = 0 choose exponent 1; on an empty affine
-all modules vanish, so exponent 1 also works.
--/
+has affine limit kernel and cokernel killed by a positive power of K
+(Stacks, Lemma 088B; Remark 0888; Tag 01Y9). -/
 theorem formalSystemsPushPull_affine_annihilation
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

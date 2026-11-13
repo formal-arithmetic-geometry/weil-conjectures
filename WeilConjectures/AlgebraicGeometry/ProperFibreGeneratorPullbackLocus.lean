@@ -14,9 +14,10 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Proper shrinking around a fibrewise nonvanishing section
 
-Source: Stacks Project, More on Morphisms, Tag 0BF2, final paragraph;
-Tag 0BF1, final topological argument, and Modules, Tag 01CY.
-(blueprint: lem-sc-proper-fibre-generator-pullback-locus)
+## References
+
+* [Stacks Project, Tags 0BF1 and 0BF2](https://stacks.math.columbia.edu/tag/0BF2)
+* [Stacks Project, Tag 01CY](https://stacks.math.columbia.edu/tag/01CY)
 -/
 
 @[expose] public section
@@ -26,28 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A section nonvanishing on a proper fibre makes the line bundle come from the base
-on an open neighbourhood, universally for all schemes mapping into that neighbourhood.
-This assertion does not involve H1, a collection of comparison families, or Picard loci.
-
-Source: Stacks Project, More on Morphisms, Tags 0BF1 and 0BF2, final proof paragraphs;
-Modules, Tag 01CY. (blueprint: lem-sc-proper-fibre-generator-pullback-locus)
-
-Proof: Let p : X_W -> W be the base change of f and M the pullback of L. Uniqueness
-of left adjoints compares tensor pullback with the usual pullback, so M is invertible.
-The nonvanishing locus D of sigma is open by Tag 01CY. Its complement C is closed.
-Properness of p makes p(C) closed, and the fibre hypothesis says w is not in p(C).
-Set V = W minus p(C). For h : T -> W with image in V, construct q : X_T -> X_W by
-the pullback universal property. Its second projection is the composite of the map
-X_T -> T with h. Consequently q has image in D, so q inverse(D) is the whole X_T.
-The unique division assertion of Tag 01CY makes sigma a free generator on D.
-The usual pullback adjunction unit carries this generator to a free generator on
-q inverse(D), hence on X_T, by IsFreeGenerator.pullback_unit_app. Its associated
-morphism O_X_T -> q^*M is therefore an isomorphism. Compare tensor pullback with
-usual pullback again, and use tensor pullback composition and equality of the first
-projections to identify q^*M with the pullback of L to X_T. Take N = O_T, which is
-finite locally free of rank one, and use the structure-sheaf pullback isomorphism
-for X_T -> T to obtain the conclusion. The construction applies to nonreduced T,
-empty fibres and empty test schemes as well. -/
+on an open neighbourhood, universally for all schemes mapping into that neighbourhood
+(Stacks, Tags 0BF1, 0BF2 and 01CY). -/
 theorem proper_fibre_generator_pullback_locus {X S : Scheme.{v}} (f : X ⟶ S)
     [IsProper f] (L : X.Modules) [L.IsInvertible]
     {W : Scheme.{v}} (k : W ⟶ S) (w : W)

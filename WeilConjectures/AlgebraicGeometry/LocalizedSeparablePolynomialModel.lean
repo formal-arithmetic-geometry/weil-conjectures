@@ -14,8 +14,9 @@ import Mathlib.RingTheory.Localization.Integral
 /-!
 # A monic separable polynomial model after principal localization
 
-Source: Stacks Project, Algebra, Tag 00UB, denominator-clearing calculation in
-`lem-weil-pbc-spread-finite-separable-extension`.
+## References
+
+* [Stacks, Algebra, Tag 00UB](https://stacks.math.columbia.edu/tag/00UB)
 -/
 
 @[expose] public section
@@ -43,20 +44,7 @@ private theorem polynomial_lift_of_integer_normalization
 
 /-- An integral element with separable minimal polynomial has a monogenic polynomial model
 with invertible derivative after localizing the base domain. No assertion is made that the
-ambient field is the fraction field of this monogenic algebra.
-
-Source: Stacks Project, Algebra, Tag 00UB, denominator-clearing calculation in the proof of
-`lem-weil-pbc-spread-finite-separable-extension`.
-(blueprint: lem-weil-pbc-localized-separable-polynomial-model)
-
-Proof: Write the coefficients of the monic minimal polynomial p as fractions over A.
-Since p is separable, choose a Bezout identity u*p + v*p' = 1 over K. Include the
-coefficients of u and v in the finite list of fractions. Let c be the product of their
-nonzero denominators, and let S be the image of A[1/c] in L under the canonical injective
-map. The localization identifies S with A[1/c]. All the listed coefficients lie in S;
-thus p descends to a monic polynomial f over S, and its Bezout identity proves that f and
-f' are coprime. The canonical localization map into K identifies S with a subring of K;
-its composition into L is the given inclusion, and coefficientwise mapping sends f to p. -/
+ambient field is the fraction field of this monogenic algebra. (Stacks, Tag 00UB) -/
 theorem exists_localized_separable_polynomial_model
     (A : Type u) [CommRing A] [IsDomain A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K]

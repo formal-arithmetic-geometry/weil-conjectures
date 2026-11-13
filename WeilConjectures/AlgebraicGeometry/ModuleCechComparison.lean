@@ -17,10 +17,7 @@ import Mathlib.Algebra.Homology.TotalComplexSymmetry
 
 /-! # The canonical module-valued Čech comparison
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ and its proof
-(blueprint: def-sc-module-cech-comparison).
-
-The Čech complex of an `O_X`-module `F` for a family `U` of opens is the source's
+The Čech complex of an `O_X`-module `F` for a family `U` of opens is
 `(cechComplexFunctor U).obj F.presheafModuleCat` (Mathlib's Čech complex of the presheaf of
 `Γ(X, ⊤)`-modules `F.presheafModuleCat`), as in `nonempty_cechComplex_linearEquiv_H`.
 
@@ -34,11 +31,15 @@ The Čech complex of an `O_X`-module `F` for a family `U` of opens is the source
   `H^p(β) ∘ H^p(α)⁻¹` (composed with the resolution identification), for every injective
   resolution.
 
-## Implementation notes
+## Implementation details
 
 The comparison is characterized by `c ≫ (resolution identification) ≫ H^p(α) = H^p(β)` rather
 than defined as `H^p(β) ≫ inv H^p(α) ≫ …`: `inv` of a morphism whose invertibility is not yet
 proved would be data chosen from an unproved statement.
+
+## References
+
+* [Stacks, Cohomology of Sheaves, Tag 01EQ]
 -/
 
 @[expose] public section
@@ -55,9 +56,7 @@ local instance instHasLimitsOfShape_moduleCechComparison
   ModuleCat.hasLimitsOfShape
 
 /-- The Čech complex of the presheaf of `Γ(X, ⊤)`-modules underlying an `O_X`-module is
-additive in the module. Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).
-Proof: the cochain maps apply the module morphism on each component; therefore they
-preserve zero and addition, and equality of maps follows from the product projections. -/
+additive in the module (Stacks, Tag 01EQ). -/
 theorem cechComplexFunctor_presheafModuleCat_additive (X : Scheme.{u}) {ι : Type u}
     (U : ι → X.Opens) :
     (SheafOfModules.forget X.ringCatSheaf ⋙
@@ -74,8 +73,8 @@ theorem cechComplexFunctor_presheafModuleCat_additive (X : Scheme.{u}) {ι : Typ
 
 attribute [instance] cechComplexFunctor_presheafModuleCat_additive
 
-/-- The double complex `C^q(U, I^p)` with resolution degree first and Čech degree second.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- The double complex `C^q(U, I^p)` with resolution degree first and Čech degree second
+(Stacks, Tag 01EQ). -/
 noncomputable def moduleCechDouble {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : X.Modules} (I : InjectiveResolution F) :
     HomologicalComplex₂ (ModuleCat.{u} Γ(X, ⊤)) (ComplexShape.up ℕ) (ComplexShape.up ℕ) :=
@@ -84,10 +83,7 @@ noncomputable def moduleCechDouble {X : Scheme.{u}} {ι : Type u} (U : ι → X.
         CategoryTheory.cechComplexFunctor U).mapHomologicalComplex (ComplexShape.up ℕ)).obj
     I.cocomplex
 
-/-- Restriction of the structure sheaf from the whole space to itself is the identity.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).
-Proof: the unique initial morphism from the whole open set to itself is the identity;
-functoriality of the structure sheaf sends it to the identity ring morphism. -/
+/-- Restriction of the structure sheaf from the whole space to itself is the identity. -/
 theorem moduleCech_top_restriction (X : Scheme.{u}) :
     (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op ⊤))).hom =
       RingHom.id Γ(X, ⊤) := by
@@ -98,8 +94,7 @@ theorem moduleCech_top_restriction (X : Scheme.{u}) :
   rfl
 
 
-/-- Restrictions of a global section, as a zero cochain.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- Restrictions of a global section, as a zero cochain (Stacks, Tag 01EQ). -/
 noncomputable def moduleCechZero {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (F : X.Modules) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj F ⟶
@@ -110,8 +105,7 @@ noncomputable def moduleCechZero {X : Scheme.{u}} {ι : Type u} (U : ι → X.Op
     Pi.lift fun y : Fin 1 → ι =>
       F.presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op
 
-/-- Restrictions of global sections commute with coefficient morphisms.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- Restrictions of global sections commute with coefficient morphisms. -/
 private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) {F G : X.Modules} (f : F ⟶ G) :
     moduleCechZero U F ≫
@@ -131,8 +125,7 @@ private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
   simp only [ModuleCat.comp_apply]
   exact PresheafOfModules.naturality_apply f.val _ x
 
-/-- The two restrictions of a global section to each pairwise intersection agree.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- The two restrictions of a global section to each pairwise intersection agree. -/
 private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (F : X.Modules) :
     moduleCechZero U F ≫
@@ -159,8 +152,8 @@ private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
   erw [← F.presheafModuleCat.map_comp, ← F.presheafModuleCat.map_comp]
   congr 1
 
-/-- Components of the map from global sections of the resolution to its Čech total complex.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- Components of the map from global sections of the resolution to its Čech total complex
+(Stacks, Tag 01EQ). -/
 noncomputable def moduleCechAlphaComponent {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) {F : X.Modules} (I : InjectiveResolution F) (n : ℕ) :
     (RingedSpace.globalSectionsComplex I).X n ⟶
@@ -168,11 +161,7 @@ noncomputable def moduleCechAlphaComponent {X : Scheme.{u}} {ι : Type u}
   moduleCechZero U (I.cocomplex.X n) ≫
     (moduleCechDouble U I).ιTotal (ComplexShape.up ℕ) n 0 n (by simp)
 
-/-- The alpha components commute with the differential. Source: Stacks 01EQ
-(blueprint: def-sc-module-cech-comparison).
-Proof: restrictions commute with the resolution differential. The Čech differential
-of the restrictions of a global section is zero. The total differential on the (n,0)
-summand is the resolution differential plus (-1)^n times that zero differential. -/
+/-- The alpha components commute with the differential. -/
 theorem moduleCechAlpha_comm {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : X.Modules} (I : InjectiveResolution F) (n m : ℕ) :
     moduleCechAlphaComponent U I n ≫
@@ -210,7 +199,7 @@ theorem moduleCechAlpha_comm {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
   · rw [HomologicalComplex.shape _ _ _ hnm, HomologicalComplex.shape _ _ _ hnm]
     simp
 
-/-- The map alpha of Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- The map alpha of Stacks 01EQ. -/
 noncomputable def moduleCechAlpha {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : X.Modules} (I : InjectiveResolution F) :
     RingedSpace.globalSectionsComplex I ⟶
@@ -218,8 +207,7 @@ noncomputable def moduleCechAlpha {X : Scheme.{u}} {ι : Type u} (U : ι → X.O
   f := moduleCechAlphaComponent U I
   comm' := fun n m _ => moduleCechAlpha_comm U I n m
 
-/-- Components of the augmentation beta into the Čech total complex.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- Components of the augmentation beta into the Čech total complex (Stacks, Tag 01EQ). -/
 noncomputable def moduleCechBetaComponent {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) {F : X.Modules} (I : InjectiveResolution F) (n : ℕ) :
     ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).X n ⟶
@@ -229,10 +217,7 @@ noncomputable def moduleCechBetaComponent {X : Scheme.{u}} {ι : Type u}
         (I.ι.f 0).val)).f n ≫
     (moduleCechDouble U I).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)
 
-/-- The beta components commute with the differential. Source: Stacks 01EQ
-(blueprint: def-sc-module-cech-comparison).
-Proof: Čech differentials commute with the augmentation. The augmentation followed by
-the resolution differential is zero. On the (0,n) summand the Čech differential has sign +1. -/
+/-- The beta components commute with the differential. -/
 theorem moduleCechBeta_comm {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : X.Modules} (I : InjectiveResolution F) (n m : ℕ) :
     moduleCechBetaComponent U I n ≫
@@ -266,7 +251,7 @@ theorem moduleCechBeta_comm {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
   · rw [HomologicalComplex.shape _ _ _ h, HomologicalComplex.shape _ _ _ h]
     simp
 
-/-- The map beta of Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- The map beta of Stacks 01EQ. -/
 noncomputable def moduleCechBeta {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : X.Modules} (I : InjectiveResolution F) :
     (CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat ⟶
@@ -274,12 +259,8 @@ noncomputable def moduleCechBeta {X : Scheme.{u}} {ι : Type u} (U : ι → X.Op
   f := moduleCechBetaComponent U I
   comm' := fun n m _ => moduleCechBeta_comm U I n m
 
-/-- Alpha induces isomorphisms on cohomology for every open cover. Source: Stacks 01EQ,
-using injective Čech acyclicity 01EP (blueprint: def-sc-module-cech-comparison).
-Proof: each injective resolution term is Čech-acyclic and its zeroth Čech cohomology is
-its global sections by gluing. The map alpha thus induces an isomorphism on every row
-cohomology. The first-quadrant spectral sequence comparison gives an isomorphism on
-all finite filtration quotients, and induction on the filtration gives the result. -/
+/-- Alpha induces isomorphisms on cohomology for every open cover
+(Stacks, Tags 01EQ and 01EP). -/
 theorem moduleCechAlpha_isIso {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (hU : iSup U = ⊤) {F : X.Modules} (I : InjectiveResolution F) (p : ℕ) :
     IsIso (HomologicalComplex.homologyMap (moduleCechAlpha U I) p) := by
@@ -343,8 +324,7 @@ theorem moduleCechAlpha_isIso {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
 /-- A map `c : Ȟ^p(U, F) ⟶ H^p(X, F)` is the canonical comparison of Stacks 01EQ: for every
 injective resolution `F → I^•`, `c` followed by the identification `H^p(X, F) ≅ H^p(Γ(X, I^•))`
 and by `H^p(α)` is `H^p(β)`; that is, `c = H^p(β) ≫ H^p(α)⁻¹ ≫ (identification)⁻¹`, as
-`H^p(α)` is invertible for an open cover (`moduleCechAlpha_isIso`).
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+`H^p(α)` is invertible for an open cover (`moduleCechAlpha_isIso`). -/
 def IsModuleCechComparison {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (F : X.Modules) (p : ℕ)
     (c : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶

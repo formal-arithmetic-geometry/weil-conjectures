@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
 
 /-! # Restricting a stage morphism through a commutative model diagram
 
-Source: Stacks Project, Tags 0095 and 0096; Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-stage-model-restriction). -/
+## References
+
+* Stacks Project, Tags 0095, 0096 and 01ZR (2) (first proof). -/
 
 @[expose] public section
 universe u
@@ -28,27 +29,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Transport of any stage morphism through the model square.
 This is transport of an arbitrary tensor compatibility equation, independent of
-a limit module, its component isomorphisms, or a prescribed descent transition.
-Source: Stacks Project, Tags 0095 and 0096; Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-stage-model-restriction).
-
-Proof: Substitute the four comparison equalities. Expand the stage comparison
-and the two direct restriction comparisons.
-Use functoriality to separate the three factors defining the stage morphism.
-Naturality of the composition comparisons moves the central morphism alpha
-past them. The equality z ≫ p₀ = l ≫ d identifies the two inverse-image
-routes from the iterated overlap to Hₖ. For each chart, the associativity
-pentagon and the stated projection equations identify the exterior
-composition comparisons. Convert tensor pullbacks to abstract pullbacks
-using the unique adjunction comparison. The comparison for the composite
-is compatible with the two individual comparisons: apply conjugateIsoEquiv
-to both sides, where both become the same pushforward composition map.
-The resulting middle factors are σ_F, the tensor pullback of alpha, and
-σ_G inverse. Postcompose the supplied compatibility equation by σ_G inverse
-and cancel σ_G to identify this middle morphism with theta. Substitute the
-equation naming phi. Cancel the remaining source and target comparisons. No
-faithfulness or finiteness is used; all arrows may be identities and any
-overlap or module may be empty or zero. -/
+a limit module, its component isomorphisms, or a prescribed descent transition
+(Stacks, Tags 0095, 0096 and 01ZR (2)). -/
 theorem overlap_stage_model_restriction
     {X Y Z H₀ Hₖ Hlim : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)

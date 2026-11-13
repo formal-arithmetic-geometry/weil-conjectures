@@ -15,8 +15,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Global sections of pullbacks at cofiltered limits
 
-Source: Stacks Project, Tag 09YQ, degree zero.
-(blueprint: lem-weil-pbc-global-sections-limit-comparison)
+## References
+
+* Stacks Project, Tag 09YQ, degree zero.
 -/
 
 @[expose] public section
@@ -107,23 +108,8 @@ private theorem sectionTransition_comp {R X Y Z : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Global sections of pullbacks of a fixed abelian sheaf commute with a qcqs inverse
-limit with affine transition maps. No assumption on the base scheme is needed.
-Source: Stacks Project, Tag 09YQ, degree zero.
-(blueprint: lem-weil-pbc-global-sections-limit-comparison)
-
-Proof: Replace the cofiltered category by a coinitial directed preorder and restrict
-both the limit cone and the system along that functor. Set F_j = π_j^* G. The inverse-image
-composition isomorphisms give transition isomorphisms h^* F_j ≅ F_k; their cocycle and unit
-laws follow from coherence of inverse image. On the limit, composition identifies the
-pullbacks of every F_j with P^* G, and identifies all transitions with the identity. A
-filtered category is connected, so this constant cocone is a colimit. Apply Theorem 09YQ
-in degree zero to this system and this cocone. The degree-zero identification with global
-sections is natural in sheaf maps and carries cohomology pullback to the adjunction-unit
-map globalSectionsUpperStarMap. Thus the resulting colimit legs and transitions are the
-maps displayed below. The elementwise criterion for filtered colimits of abelian groups
-then gives representatives and eventual vanishing. Coinitiality returns these witnesses
-to the original category (for vanishing use a common refinement mapping to the given
-object); all transition formulas are preserved by inverse-image coherence. -/
+limit with affine transition maps. No assumption on the base scheme is needed
+(Stacks, Tag 09YQ). -/
 theorem globalSections_limit_comparison {R : Scheme.{u}} {J : Type u}
     [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})
     (π : D ⟶ (Functor.const J).obj R) (c : Cone D) (P : c.pt ⟶ R)

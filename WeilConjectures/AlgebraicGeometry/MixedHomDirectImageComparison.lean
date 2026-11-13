@@ -13,8 +13,10 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import all WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # Evaluation-mate direct-image Hom comparison
-Source: Stacks Project, Tags 08I3 and 0B6I.
-(blueprint: lem-sc-mixed-hom-direct-image-comparison).
+
+## References
+
+* Stacks Project, Tags 08I3 and 0B6I.
 -/
 
 @[expose] public section

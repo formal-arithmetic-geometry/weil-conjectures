@@ -9,9 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
-# Blueprint statements
+# Cohomology of a sheaf as a colimit over hypercovers
 
-corollary-cohomology-pro-etale-affine.
+The étale cohomology of a sheaf on a qcqs scheme is the colimit of the cohomology of its
+sections over finite split étale hypercovers.
 -/
 
 @[expose] public section
@@ -22,7 +23,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
+/-- For a qcqs scheme `X`, étale cohomology of abelian sheaves and of sheaves of modules over any
+ring `R` is the colimit over finite split étale hypercovers of the hypercover cohomology. -/
 theorem hypercover_cohomology (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X]
     (q : ℕ) :
     FiniteSplitEtaleHypercover.IsCohomologyColimit AddCommGrpCat.{u₁ + 1} q

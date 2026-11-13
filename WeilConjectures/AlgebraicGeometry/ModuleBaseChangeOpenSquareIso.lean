@@ -11,8 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # Components of module base change under restriction
 
-Source: Stacks Project, Sheaves, Tag 00A0 and Cohomology, Tags 0ATL and 0ATM.
-(blueprint: lem-weil-pbc-module-open-square-isiso).
+## References
+
+* [Stacks, Sheaves, Tag 00A0]
+* [Stacks, Cohomology, Tags 0ATL and 0ATM]
 -/
 
 @[expose] public section
@@ -28,24 +30,8 @@ noncomputable section
 set_option autoImplicit false
 
 /-- The adjoint-defined base change map of a full inverse-image open square is an
-isomorphism, for every module; no quasi-coherence assumption is required.
-Source: Stacks Project, Sheaves, Lemma 00A0, parts (2) and (5) and its module variant;
-Cohomology on Sites, Remark 08HY for the adjoint-defined map.
-(blueprint: lem-weil-pbc-module-open-square-isiso)
-
-Proof: identify tensor pullback along jU and jX with restriction using uniqueness of
-left adjoints to their pushforwards. These identifications preserve the units.
-On an open W of U, the source has sections F(f⁻¹(jU(W))), while the target has
-sections F(jX(fU⁻¹(W))). The commutative square gives one inclusion of these opens.
-For the other, a point whose image lies in jU(W) lies in the image of jX by the
-full inverse-image hypothesis; injectivity of jU then places its preimage in fU⁻¹(W).
-Thus the opens are equal. Under this equality the adjoint of the identity section map
-is precisely the pushforward of the jX restriction unit, followed by the pushforward
-composition comparisons. Injectivity of the jU Hom equivalence identifies its mate
-with bc. The identity section maps are invertible and commute with all restrictions
-and scalar actions; they therefore give an isomorphism of modules. Transport through
-the two restriction/pullback identifications proves the claim. This argument also
-covers empty opens and isomorphisms of schemes. -/
+isomorphism, for every module; no quasi-coherence assumption is required
+(Stacks, Lemma 00A0 and Remark 08HY). -/
 theorem moduleBaseChangeMap_open_square_isIso
     {X S U XU : Scheme.{u}} (f : X ⟶ S) (fU : XU ⟶ U)
     (jU : U ⟶ S) (jX : XU ⟶ X) [IsOpenImmersion jU] [IsOpenImmersion jX]

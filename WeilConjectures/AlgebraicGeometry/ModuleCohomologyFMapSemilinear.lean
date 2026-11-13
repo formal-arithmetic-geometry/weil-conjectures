@@ -42,12 +42,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option maxHeartbeats 600000 in
 -- The comparisons involve several nested evaluation and homology functors.
 set_option backward.isDefEq.respectTransparency false in
-/-- The resolution map admits a semilinear lift over the map on global functions.
-Source: Stacks Project, Cohomology of Sheaves, Equation 01F9 and Remark 01FB.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-semilinear-lift)
-
-The lift is obtained by checking scalar compatibility on the section, cycle and
-homology maps in the defining resolution comparison. -/
+/-- The resolution map admits a semilinear lift over the map on global functions
+(Stacks, Equation 01F9 and Remark 01FB). -/
 theorem ModuleCohomologyFMapData.map_semilinear
     {X Y : Scheme.{u}} {h : X ⟶ Y}
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}

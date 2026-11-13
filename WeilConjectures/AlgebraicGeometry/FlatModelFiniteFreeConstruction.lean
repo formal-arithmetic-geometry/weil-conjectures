@@ -16,17 +16,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The structural local finite-free replacement part of the shortening argument.
-Source: Stacks Project, Tags 064U, 0653 and 00NX; this is the construction portion
-of `lem-pc-flat-model-finite-free-shortening`.
-Proof: restrict to an affine neighbourhood, form the degree-zero opcycle, use the
-flat opcycles Tor criterion and finite-projective standard-free cover, then truncate
-the bounded-above free resolution.
-(blueprint: lem-pc-flat-model-finite-free-shortening-construction).
-Proof: The construction argument supplies the stated local data and its induced
-quasi-isomorphism. Pulling it back along any scheme map preserves it for these
-finite-free and flat complexes; taking homology gives the displayed isomorphism.
--/
+/-- The structural local finite-free replacement part of the shortening argument
+(Stacks, Tags 064U, 0653 and 00NX). -/
 theorem exists_local_finiteFree_construction {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

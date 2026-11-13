@@ -43,23 +43,7 @@ def LerayEdgeCocycle {X Y : Scheme.{u}} (f : X ⟶ Y) (ε : LerayEdge X Y f) : P
 set_option maxHeartbeats 800000 in
 -- Resolution comparison unfolds both module-valued derived functors and forgetful maps.
 set_option backward.isDefEq.respectTransparency false in
-/-- Construction of the cocycle Leray edge.
-(blueprint: lem-pc-leray-edge-cocycle-data)
-
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
-
-Proof: apply the Grothendieck spectral-sequence edge construction to direct image
-followed by global sections. The resulting edge is represented on an injective
-resolution by the displayed cycle and homology maps, which gives the stated
-cocycle equation. More explicitly, direct images of injectives are acyclic
-for sections by module_pushforward_injective_acyclic. Apply
-grothendieck_left_edge_cocycle to these two additive left exact functors and
-identify their composite with sections on X via restriction along Opens.map_top.
-Left exactness identifies sections of the cycle sheaf with cycles of the
-sections complex, so the global cocycle lifts uniquely to z. The generic edge
-equation, transported by the resolution comparison isomorphisms, is the second
-equality. Resolution comparison and functoriality give a single natural edge
-for every coefficient module, independent of the chosen resolution. -/
+/-- Construction of the cocycle Leray edge. (Stacks, Tags 01F4 (2), 01F2 and 01EX) -/
 theorem leray_edge_cocycle_data {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ ε : LerayEdge X Y f, LerayEdgeCocycle f ε := by
   classical

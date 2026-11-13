@@ -22,7 +22,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Flat transport of the comparison to the completed affine base
 
-Source: Stacks Project, Tag 088B, restriction, flat base-change and uniqueness paragraphs.
+## References
+
+* Stacks Project, Tag 088B
 -/
 
 @[expose] public section
@@ -58,32 +60,8 @@ private theorem limit_square_restrict
 -- The comparison composes four diagram functors and dependent pullback equalities.
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction and flat completion base change transport the formal comparison and
-its section inverse limit. This step neither algebraizes the source nor lifts beta.
-
-Source: Stacks Project, Tag 088B, paragraphs introducing the completed base Y' and X';
-Tags 02KH, 087W, 02OC and 05GG.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-transport)
-
-Proof: Let g be Spec of the completion map followed by the inverse affine chart and
-its open inclusion. Set Z = X times_Y Spec R, q its projection to X, and p its
-projection to Spec R. Pull G termwise along g and pull F along q. Formal-system
-pullback gives coherence and the quotient transition laws and identifies completion
-with pulled-back completion. Its composition comparison transports beta to beta0.
-Completion is flat, so degree-zero flat base change identifies p_* F0 with g* f_* F
-and identifies the pushforward of every quotient with its pulled-back pushforward.
-Transport kappa and alpha through these identifications. The quotient projection
-identity gives hKappa0 by naturality of base change. The adjunction square gives
-hAlpha0. If the supplied adjunction differs from the chosen adjunction after base
-change, compose beta0 with the natural pullback automorphism relating their units;
-this preserves invertibility and makes this square exact.
-On U, coherent formal terms are annihilated by J(U)^(n+1). Completion has the same
-positive-power quotients as B, so their section modules identify with the restrictions
-of the R-section modules of the transported terms, naturally in transitions and maps.
-These level identifications give eG and eD on limits. Naturality for alpha at each
-level, followed by the universal property of the two limits, gives the last square.
-The object equalities record the actual pullbacks, rather than arbitrary formal or
-coherent objects. The argument also works when the completion is zero or J is zero.
--/
+its section inverse limit. This step neither algebraizes the source nor lifts `β`
+(Stacks, Tag 088B). -/
 theorem formalComparison_completed_affine_transport
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

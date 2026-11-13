@@ -14,8 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFibreCokernel
 /-!
 # Residue-field tensor of the section-map cokernel
 
-Source: Stacks Project, Tag 04DG, proof, affine fibre and Nakayama steps.
-(blueprint: lem-weil-pbc-finite-fibre-cokernel-tensor).
+## References
+
+* Stacks Project, Tag 04DG
 -/
 
 @[expose] public section

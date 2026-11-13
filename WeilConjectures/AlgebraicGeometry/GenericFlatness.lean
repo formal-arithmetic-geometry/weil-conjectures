@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineGenericFlatness
 
 /-! # Generic flatness for finite type morphisms
 
-Source: Stacks Project, Tag 052A.
-(blueprint: lem-sbc-generic-flatness)
+## References
+
+* Stacks, Tag 052A
 -/
 
 @[expose] public section
@@ -81,24 +82,8 @@ private theorem exists_nonempty_open_flat_restrict_affine_base {X S : Scheme.{u}
   rw [heq]
   infer_instance
 
-/-- A finite type morphism to an integral scheme is flat over a nonempty open.
-
-Source: Stacks Project, Tag 052A, with the structure sheaf as the finite type module.
-Proof: choose a nonempty affine open of the integral base, with coordinate domain A.
-Quasi-compactness gives a finite affine cover of its inverse image, with coordinate
-rings B_i finite type over A. Generic freeness, in the version for a finite type
-algebra over an arbitrary domain (Tag 051T), gives nonzero elements a_i of A such
-that each localized algebra (B_i)_{a_i} is free, hence flat, over A_{a_i}.
-Intersect the finitely many basic opens D(a_i). Each is nonempty and contains
-the generic point of the integral base, so their intersection is nonempty.
-Restrict the flat chart maps further to this intersection. Their source opens
-cover the inverse image, and flatness is local on the source, so the restricted
-morphism is flat. Finally use the canonical isomorphism between a restriction
-of a restriction and the restriction to its image in the original base.
-For an empty inverse image the intersection is the whole affine base and source
-locality is vacuous. No Noetherian or finite-presentation hypothesis is used.
-
-(blueprint: lem-sbc-generic-flatness) -/
+/-- A finite type morphism to an integral scheme is flat over a nonempty open
+(Stacks, Tag 052A). -/
 theorem exists_nonempty_open_flat_restrict {X S : Scheme.{u}} [IsIntegral S]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧ Flat (f ∣_ U) := by

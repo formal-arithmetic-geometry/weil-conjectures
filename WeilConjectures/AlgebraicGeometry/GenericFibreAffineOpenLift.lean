@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Lifting an affine open from a generic fibre
 
-Source: Stacks Project, Tags 01Z4 and 01Z6, descending quasi-compact opens and affineness.
-(blueprint: lem-sbc-generic-fibre-affine-open-lift)
+## References
+
+* [Stacks, Tag 01Z4], [Stacks, Tag 01Z6]
 -/
 
 @[expose] public section
@@ -84,27 +85,8 @@ private theorem nhdsCone_limit (S : Scheme.{u}) [IsIntegral S] (η : S)
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 
-/-- An affine open of the generic fibre lifts to an affine open of the total space.
-
-Source: Stacks Project, Tag 01Z4, lemma-descend-quasi-compact-open, and Tag 01Z6,
-lemma-limit-affine.
-Proof: The affine neighbourhoods of eta form a cofiltered diagram by the
-basis of affine opens. The spectrum of the stalk is its limit, by the existing
-stalk-neighbourhood theorem. Since S is integral, the stalk at eta is a field,
-so the residue quotient is an isomorphism. Transport the limit along its
-spectrum to get a cone with point Spec kappa(eta) and its canonical projections.
-Take the top neighbourhood as base stage, identifying it with S by topIso.
-Base change this limit by f, and identify its limit with f.fiber eta using the
-pullback square. Apply exists_isAffineOpen_preimage_eq (01Z4 and 01Z6) to U.
-This gives an affine open O in a base restriction of X with inverse image U.
-The projection q from that restriction to X is an open immersion. Its image
-V = q(O) is affine. Since q is injective and the limit projection followed by
-q is the fibre inclusion, the inverse image of V in the generic fibre is U.
-Paste the open-restriction pullback square with the fibre square. The resulting
-pullback is the generic fibre of V, and its canonical comparison isomorphism
-gives e and the two required projection equations. Empty U causes no problem.
-
-(blueprint: lem-sbc-generic-fibre-affine-open-lift) -/
+/-- An affine open of the generic fibre lifts to an affine open of the total space
+(Stacks, Tags 01Z4, 01Z6). -/
 theorem exists_affine_open_lift_of_generic_fibre
     {X S : Scheme.{u}} [IsAffine X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) (η : S) (hη : IsGenericPoint η Set.univ)

@@ -15,10 +15,12 @@ import WeilConjectures.AlgebraicGeometry.KoszulCechLocalizedDifferential
 
 /-! # The canonical Koszul-to-Čech comparison
 
-Source: Stacks Project, Tags 08CX, 08D0 and 08D1
-(blueprint: def-sc-koszul-cech-comparison-construction).
 The power system, its colimit, and its comparison map retain the explicit basis formula
 and the totalization sign of Tag 08D1. Existence proofs supply only verification data.
+
+## References
+
+* Stacks Project, Tags 08CX, 08D0 and 08D1.
 -/
 
 @[expose] public section
@@ -49,11 +51,7 @@ private def koszulCechPrecomp
     exact CochainComplex.HomComplex.δ_ofHom_comp g z m
 
 /-- The directed Hom-complex diagram with transitions given by precomposition.
-The exponent at index e is e+1. Source: Stacks, Tags 08CX and 08D1
-(blueprint: def-sc-koszul-cech-comparison-construction).
-Proof: extend koszulOpenTransition by zero and precompose Mathlib's linear cochains.
-The chain-map identity and the signed Hom differential give commutation with d.
-Identity and composition follow from the diagonal exterior-power comparison laws. -/
+The exponent at index e is e+1. -/
 theorem koszulCechHomDiagram_exists :
     ∃ D : ℕ ⥤ CochainComplex (ModuleCat.{uK} A) ℤ,
       (∀ e, D.obj e = CochainComplex.moduleHomComplex
@@ -113,43 +111,34 @@ theorem koszulCechHomDiagram_exists :
   rw [hha, hhb]
   rfl
 
-/-- The specified filtered system of A-linear total Hom complexes.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The specified filtered system of A-linear total Hom complexes. -/
 def koszulCechHomDiagram : ℕ ⥤ CochainComplex (ModuleCat.{uK} A) ℤ :=
   (koszulCechHomDiagram_exists A r f M).choose
 
-/-- The object identification at every positive exponent.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The object identification at every positive exponent. -/
 def koszulCechHomObjIso (e : ℕ) : (koszulCechHomDiagram A r f M).obj e ≅
     CochainComplex.moduleHomComplex
       ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M :=
   eqToIso ((koszulCechHomDiagram_exists A r f M).choose_spec.1 e)
 
-/-- The direct limit in the category of complexes, hence computed degreewise.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The direct limit in the category of complexes, hence computed degreewise. -/
 def koszulCechHomColimit : CochainComplex (ModuleCat.{uK} A) ℤ :=
   colimit (koszulCechHomDiagram A r f M)
 
-/-- Cardinality identifies the Koszul term for a nonempty subset.
-Source: Stacks, Tag 08D0 (blueprint: def-sc-koszul-cech-comparison-construction).
-Proof: a nonempty finite set has positive cardinality, so truncated subtraction gives
-card(J)-1+1 = card(J). -/
+/-- Cardinality identifies the Koszul term for a nonempty subset. -/
 theorem koszulCech_basis_card (J : Finset (Fin r)) (hJ : J.Nonempty) :
     J.card = J.card - 1 + 1 := by
   have h : 0 < J.card := Finset.card_pos.mpr hJ
   omega
 
-/-- The extended tail degree attached to the subset J.
-Source: Stacks, Tag 08D0 (blueprint: def-sc-koszul-cech-comparison-construction).
-Proof: card(J)>0, so negating card(J)-1 gives 1-card(J) in integer degrees. -/
+/-- The extended tail degree attached to the subset J. -/
 theorem koszulCech_basis_degree (J : Finset (Fin r)) (hJ : J.Nonempty) :
     ComplexShape.embeddingDownNat.f (J.card - 1) = 1 - (J.card : ℤ) := by
   simp only [ComplexShape.embeddingDownNat_f]
   have h : 0 < J.card := Finset.card_pos.mpr hJ
   omega
 
-/-- The ordered exterior basis vector in the Koszul tail, transported by extension.
-Source: Stacks, Tag 08D0 (blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The ordered exterior basis vector in the Koszul tail, transported by extension. -/
 def koszulCechBasis (e : ℕ) (J : Finset (Fin r)) (hJ : J.Nonempty) :
     ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).X (1 - (J.card : ℤ)) :=
   ((koszulOpenTail A r f e).extendXIso ComplexShape.embeddingDownNat
@@ -193,9 +182,7 @@ private theorem koszulCechBasis_transition (a b : ℕ) (hab : a ≤ b)
   exact ((koszulOpenTail A r f a).extendXIso ComplexShape.embeddingDownNat
     (koszulCech_basis_degree r J hJ)).inv.hom.map_smul _ _
 
-/-- The degree equality for evaluating a homogeneous Hom cochain on a basis vector.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction).
-Proof: rearrange addition in ℤ. -/
+/-- The degree equality for evaluating a homogeneous Hom cochain on a basis vector. -/
 theorem koszulCech_evaluation_degree (J : Finset (Fin r)) (n : ℤ) :
     1 - (J.card : ℤ) + n = n + 1 - (J.card : ℤ) := by
   ring
@@ -206,14 +193,7 @@ variable (F : CochainComplex
 set_option backward.isDefEq.respectTransparency false in
 /-- Existence of the compatible Koszul-to-Čech cocone, with the denominator and sign formula.
 The equation determines the localized value, since the product of the f_j is invertible
-on its principal open. Source: Stacks, Tags 08D0 and 08D1
-(blueprint: def-sc-koszul-cech-comparison-construction).
-Proof: restrict evaluation on the ordered wedge e_J to D(product f_j), divide by
-(product f_j)^(e+1), and multiply by (-1)^(pq+p(p-1)/2), where p=card(J)-1 and q=n-p.
-The negative tail differential and the signed Hom differential turn into the alternating
-Čech total differential with this sign. A power transition multiplies e_J by product f_j,
-so the fractions are compatible. This constructs a cocone without any quasi-coherence
-hypothesis; quasi-coherence is only needed for it to be an isomorphism. -/
+on its principal open. -/
 theorem koszulCechCocone_exists :
     ∃ c : Cocone (koszulCechHomDiagram A r f
       (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)),
@@ -338,12 +318,10 @@ theorem koszulCechCocone_exists :
   simpa only [Category.assoc, Category.id_comp, Iso.inv_hom_id_assoc,
     Iso.inv_hom_id, Category.comp_id] using hg e n z J
 
-/-- The canonical cocone supplied by the explicit localization formula.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The canonical cocone supplied by the explicit localization formula. -/
 def koszulCechCocone := (koszulCechCocone_exists A r f F).choose
 
-/-- The canonical colimit comparison to alternating Čech totalization.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The canonical colimit comparison to alternating Čech totalization. -/
 def koszulCechComparison :
     koszulCechHomColimit A r f
       (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F) ⟶
@@ -355,9 +333,7 @@ variable [HasDerivedCategory.{wK}
   (SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace))]
   [HasDerivedCategory.{vK} (ModuleCat.{uK} A)]
 
-/-- The canonical map from the Koszul Hom colimit to RΓ(U,F), through alternating Čech.
-Source: Stacks, Tags 08D1 and 08D2
-(blueprint: def-sc-koszul-cech-comparison-construction). -/
+/-- The canonical map from the Koszul Hom colimit to RΓ(U,F), through alternating Čech. -/
 def koszulCechDerivedComparison :
     DerivedCategory.Q.obj (koszulCechHomColimit A r f
       (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)) ⟶

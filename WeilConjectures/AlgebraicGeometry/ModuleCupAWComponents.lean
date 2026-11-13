@@ -11,8 +11,9 @@ public import Mathlib.Algebra.Homology.Monoidal
 
 /-! # Explicit Alexander--Whitney components
 
-Source: Banerjee, Tensor Structure on Smooth Motives, §1.1.4, p. 16.
-(blueprint: def-sc-module-cup-aw-components).
+## References
+
+* Banerjee, Tensor Structure on Smooth Motives, §1.1.4.
 -/
 
 @[expose] public section
@@ -27,8 +28,7 @@ open AlgebraicGeometry AlgebraicTopology Simplicial
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- The front/back formula on one summand, zero if either degree is negative.
-Source: Banerjee, §1.1.4, p. 16 (blueprint: def-sc-module-cup-aw-components). -/
+/-- The front/back formula on one summand, zero if either degree is negative. -/
 def moduleCup_awSummand (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
     (r s n : ℤ) (h : r + s = n) :
@@ -50,8 +50,7 @@ def moduleCup_awSummand (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     else 0
   else 0
 
-/-- Assemble the summands by the coproduct universal property in each total degree.
-Source: Banerjee, §1.1.4, p. 16 (blueprint: def-sc-module-cup-aw-components). -/
+/-- Assemble the summands by the coproduct universal property in each total degree. -/
 def moduleCup_awComponent (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
     (n : ℤ) :
@@ -59,8 +58,7 @@ def moduleCup_awComponent (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
       (moduleCup_cosimplicialComplex X B)).X n ⟶ (moduleCup_cosimplicialComplex X C).X n :=
   HomologicalComplex.mapBifunctorDesc (fun r s h ↦ moduleCup_awSummand X A B C μ r s n h)
 
-/-- Descent recovers the specified summand.
-Source: coproduct universal property (blueprint: def-sc-module-cup-aw-components). -/
+/-- Descent recovers the specified summand. -/
 @[reassoc]
 theorem moduleCup_ι_awComponent (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
@@ -75,8 +73,7 @@ private theorem subinterval_zero_zero :
   apply SimplexCategory.Hom.ext_zero_left
   rfl
 
-/-- Both front/back maps in bidegree zero are identities.
-Source: Banerjee, §1.1.4, p. 16 (blueprint: def-sc-module-cup-aw-components). -/
+/-- Both front/back maps in bidegree zero are identities. -/
 theorem moduleCup_awSummand_zero (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :
     moduleCup_awSummand X A B C μ 0 0 0 (by simp) =

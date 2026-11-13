@@ -10,11 +10,12 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 /-!
 # Signed finite Tate sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 03PK, and signed tensor powers and duals
-(auxiliary; not a blueprint node).
+The nonnegative twists are `finiteEtaleTateTwist`. Negative integers are handled by the
+internal sheaf Hom.
 
-The nonnegative twists are the published `finiteEtaleTateTwist`. Only the extension to
-negative integers by internal sheaf Hom is new here.
+## References
+
+* Stacks Project, Tag 03PK; Modules on Sites, Tag 04TT.
 -/
 
 @[expose] public section
@@ -26,9 +27,8 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Extend the existing nonnegative finite Tate twists by sheaf duality. Source: Stacks
-Project, Tag 03PK, finite Tate powers, and Modules on Sites, Tag 04TT, internal Hom
-(auxiliary; not a blueprint node). -/
+/-- Extend the nonnegative finite Tate twists to all integers by sheaf duality.
+(Stacks, Tags 03PK and 04TT.) -/
 noncomputable def finiteEtaleTateSheaf (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (T : Scheme.{u}) (hA : (m : A) = 0) :
     ℤ → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)
@@ -37,10 +37,9 @@ noncomputable def finiteEtaleTateSheaf (A : Type (u + 1)) [CommRing A] (m : ℕ)
       (ihom (finiteEtaleTateTwist T m A hA (n + 1))).obj
         (finiteEtaleTateTwist T m A hA 0)
 
-/-- The local pure tensor in the published coefficient root line. The module enhancement
-of roots of unity has the same underlying group, so its section `z` requires no choice.
-Source: Stacks Project, Tags 03PK and 03EK, scalar extension generators
-(auxiliary; not a blueprint node). -/
+/-- The local pure tensor in the coefficient root line. The module structure on roots of
+unity has the same underlying group, so its section `z` requires no choice.
+(Stacks, Tags 03PK and 03EK.) -/
 noncomputable def finiteEtaleTateOneGenerator (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (T : Scheme.{u}) (hA : (m : A) = 0) (W : T.Etaleᵒᵖ) (a : A)
     (z : (T.rootsOfUnitySheaf m).obj.obj W) :

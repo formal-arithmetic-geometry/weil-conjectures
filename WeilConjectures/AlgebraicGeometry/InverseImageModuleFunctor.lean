@@ -12,8 +12,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The canonical inverse-image functor on modules
 
-Source: Stacks Project, Sheaves, Tags 008X and 008Y.
-(blueprint: lem-pc-inverse-image-module-functor-exact).
+## References
+
+* Stacks Project, Sheaves, Tags 008X and 008Y.
 -/
 
 @[expose] public section
@@ -46,9 +47,7 @@ noncomputable section
 variable {X Y : TopCat.{u}} (f : X ⟶ Y)
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
 
-/-- The canonical inverse image on modules, with the specified maps.
-Source: Stacks Project, Sheaves, Tags 008X and 008Y.
-(blueprint: lem-pc-inverse-image-module-functor-exact). -/
+/-- The canonical inverse image on modules, with the specified maps. -/
 def inverseImageModuleFunctor :
     SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤
@@ -71,7 +70,7 @@ def inverseImageModuleFunctor :
           ((SheafOfModules.toSheaf _).map b)
     simp
 
-/-- (blueprint: lem-pc-inverse-image-module-functor-exact) -/
+/-- The canonical module inverse image functor is additive. -/
 instance inverseImageModuleFunctor_additive : (inverseImageModuleFunctor f R).Additive := by
   let G := (Opens.map f).sheafPushforwardContinuous AddCommGrpCat.{u}
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
@@ -90,7 +89,7 @@ instance inverseImageModuleFunctor_additive : (inverseImageModuleFunctor f R).Ad
         ((SheafOfModules.toSheaf _).map b)
   simp
 
-/-- (blueprint: lem-pc-inverse-image-module-functor-exact) -/
+/-- The canonical module inverse image functor preserves finite limits. -/
 instance inverseImageModuleFunctor_preservesFiniteLimits :
     PreservesFiniteLimits (inverseImageModuleFunctor f R) := by
   let A := SheafOfModules.toSheaf ((sheafCompose (Opens.grothendieckTopology X)
@@ -118,7 +117,7 @@ private theorem toSheaf_preservesFiniteColimits
     (PresheafOfModules.sheafificationAdjunction (𝟙 S.obj))
     (SheafOfModules.toSheaf.{u} S) J
 
-/-- (blueprint: lem-pc-inverse-image-module-functor-exact) -/
+/-- The canonical module inverse image functor preserves finite colimits. -/
 instance inverseImageModuleFunctor_preservesFiniteColimits :
     PreservesFiniteColimits (inverseImageModuleFunctor f R) := by
   let A := SheafOfModules.toSheaf ((sheafCompose (Opens.grothendieckTopology X)
@@ -139,25 +138,7 @@ instance inverseImageModuleFunctor_preservesFiniteColimits :
     exact comp_preservesFiniteColimits _ _
   exact preservesFiniteColimits_of_reflects_of_preserves (inverseImageModuleFunctor f R) A
 
-/-- The canonical module inverse image is exact.
-Source: Stacks Project, Sheaves, Tags 008X and 008Y.
-
-Proof: its underlying abelian-sheaf functor is the explicit left Kan extension
-followed by sheafification. The functor laws follow from the laws for that functor,
-using faithfulness of the forgetful functor on modules. Additivity follows from
-the abelian inverse-image adjunction, whose right adjoint is additive. The
-underlying inverse image preserves finite limits by Mathlib's site pullback
-construction; the module forgetful functor preserves and reflects finite limits.
-For colimits, first observe that forgetting the module action commutes with module
-sheafification. Sectionwise forgetting to abelian presheaves and abelian
-sheafification both preserve colimits. Every diagram of sheaves of modules is
-isomorphic, via the sheafification counit, to the sheafification of its underlying
-presheaf diagram. Applying the preceding colimit preservation to this diagram
-proves that forgetting to abelian sheaves preserves finite colimits. It reflects
-them since it is conservative and preserves them. Abelian inverse image is a left
-adjoint, so preserves colimits; the same argument now gives finite colimit
-preservation for module inverse image. No stalk statement is used.
-(blueprint: lem-pc-inverse-image-module-functor-exact). -/
+/-- The canonical module inverse image is exact. -/
 theorem inverseImageModuleFunctor_exact :
     (inverseImageModuleFunctor f R).Additive ∧
       PreservesFiniteLimits (inverseImageModuleFunctor f R) ∧

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover
 
 /-! # A polynomial algebra acting on the successive formal kernels
 
-Source: Stacks Project, Cohomology of Schemes, proofs of Lemmas 0884 and 087Z.
-(blueprint: lem-weil-pbc-formal-kernel-polynomial-action).
+## References
+
+* Stacks Project, Tags 0884 and 087Z
 -/
 
 @[expose] public section
@@ -76,25 +77,7 @@ private theorem act_heq {X : Scheme.{u}} {B K : ℕ → X.Modules}
 /-- The successive kernels are locally generated in degree zero over a polynomial algebra
 in finitely many degree-one variables over the base ring. This is the algebraic input to
 graded Serre vanishing; it asserts no cohomological vanishing and needs no ample module.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0884, first paragraph,
-and Lemma 087Z (blueprint: lem-weil-pbc-formal-kernel-polynomial-action).
-
-Proof:
-1. Apply formalSystems_kernel_rees_finite to obtain the associated graded algebra and
-its graded action on the kernels, with finite local degree-zero generators.
-2. Choose finitely many generators of I by Noetherianity and apply
-formalAssociatedGraded_polynomial_cover to this algebra and these generators. It evaluates
-homogeneous polynomials compatibly with restriction, addition, multiplication and scalars;
-it locally spans any finite family of sections in one graded algebra piece.
-3. Act by these evaluated sections. Restriction compatibility constructs a sheaf
-morphism, followed by the identification k+m=m+k. Bilinearity proves additivity,
-module associativity proves the composition identity, and linearity of the unit together
-with the module unit law proves the scalar formula.
-4. Write a kernel section locally as the finite sum supplied by the Rees theorem.
-Shrink again so all its coefficients lie in the span of polynomial evaluations.
-Restrict the finite sum using naturality. For each summand, span induction and the
-linearity of the action put it in the span of polynomial actions on the original
-degree-zero generators; closure under finite sums finishes the proof. -/
+(Stacks, Tags 0884 and 087Z.) -/
 theorem formalKernel_polynomial_action
     {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {X : Scheme.{u}} [IsNoetherian X] (f : X ⟶ Spec (CommRingCat.of A))

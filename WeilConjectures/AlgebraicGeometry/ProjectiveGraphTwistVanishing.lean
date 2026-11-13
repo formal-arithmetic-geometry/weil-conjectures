@@ -18,8 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
 
 /-! # Relative vanishing for the specified graph twist
 
-Source: Stacks Project, Tags 02O5 and 02O1.
-(blueprint: lem-pc-m1-projective-graph-twist-vanishing)
+## References
+
+* Stacks Project, Tags 02O5 and 02O1.
 -/
 
 @[expose] public section
@@ -116,13 +117,8 @@ private theorem projective_ample_affine_pullback (N : Type u) [Finite N]
   have hL := IsInvertible.of_iso e
   exact ⟨hL, (isAmple_iff_of_iso e).mp ha⟩
 
-/-- The graph twist is invertible and ample over affine opens of the base.
-Source: Stacks Project, Tags 02O5 and 01PS; the graph construction and pullback
-of the projective twisting sheaf. 
-Proof: lift the graph along the separated morphism, use the closed immersion into
-projective space, and pull back the standard relatively ample twisting sheaf.
-The finite coordinate chart cover proves ampleness directly for any finite
-coordinate type; the empty chart cover forces the source empty. -/
+/-- The graph twist is invertible and ample over affine opens of the base
+(Stacks, Tags 02O5, 01PS). -/
 private theorem graph_twist_isInvertible_and_affine_ample
     {Y S T : Scheme.{u}} [IsNoetherian S]
     (g : S ⟶ T) [IsSeparated g] (p : Y ⟶ S) [IsProper p]
@@ -171,22 +167,8 @@ private theorem graph_twist_isInvertible_and_affine_ample
   have hR := IsInvertible.of_iso e
   exact ⟨hR, (isAmple_iff_of_iso e).mp ha⟩
 
-/-- Relative Serre vanishing for the integral twist pulled back along a projective graph.
-
-Source: Stacks Project, Tag 02O5, the graph construction of L, and Tag 02O1.
-(blueprint: lem-pc-m1-projective-graph-twist-vanishing)
-
-Proof: because g is separated, the lift of j to projective space over S is a closed
-immersion. Compatibility with the integral projection identifies its pulled-back O(1)
-with L. For nonempty finite N, reindex coordinates by ULift (Fin (m+1)); the standard
-projective twisting sheaf is relatively ample. Hence L is ample on the inverse image
-of each affine open of S. The structure module on Y is coherent, since p is finite
-type over Noetherian S, and is quasi-coherent. Apply relative Serre vanishing (Tag 02O1)
-to this structure module: affine-base vanishing gives a threshold on each member of a
-finite affine cover of S; the maximum gives a common threshold for all positive
-higher images. The unit tensor isomorphism identifies the resulting twists with
-L.tensorPow. If N is empty, j forces Y empty; its module category is zero and one
-may take threshold zero. -/
+/-- Relative Serre vanishing for the integral twist pulled back along a projective graph
+(Stacks, Tags 02O5, 02O1). -/
 theorem exists_isZero_higherDirectImage_graph_twist
     {Y S T : Scheme.{u}} [IsNoetherian S]
     (g : S ⟶ T) [IsSeparated g] (p : Y ⟶ S) [IsProper p]

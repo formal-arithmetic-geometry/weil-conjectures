@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.LargeSetSheafification
 /-!
 # The constant matrix map to lattice classes
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -39,17 +40,12 @@ variable (L : SheafOfModules.{u + 1} (latticeModuleRing X K))
     (latticeCoefficientSheafMap X A.subtype continuous_subtype_val) L F c)
   (U : X.ProEt) (n : ℕ) (e : L.over U ≅ latticeFreeSheaf X K U n)
 
-/-- A representative of the constant matrix lattice, chosen from the proved explicit construction.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), construction of g A^n
-(auxiliary; not a blueprint node). -/
+/-- A representative of the constant matrix lattice. -/
 noncomputable def matrixLatticePair (g : Matrix.GeneralLinearGroup (Fin n) K) :
     IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val) L U :=
   (exists_matrixIntegralLatticePair X K A U n L e g).choose
 
-/-- The chosen pair has exactly the prescribed matrix lattice image.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), construction of g A^n
-(auxiliary; not a blueprint node).
-Proof: this is the specification of the proved construction used to choose the pair. -/
+/-- The chosen pair has exactly the prescribed matrix lattice image. -/
 theorem matrixLatticePair_image (g : Matrix.GeneralLinearGroup (Fin n) K)
     (T : (Over U)ᵒᵖ) :
     Set.image (e.hom.val.app T) ((matrixLatticePair X K A L U n e g).image T) =
@@ -58,11 +54,7 @@ theorem matrixLatticePair_image (g : Matrix.GeneralLinearGroup (Fin n) K)
 
 include hc
 
-/-- The class of a constant matrix lattice is characterized by its embedded images.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), comparison of embedded lattices
-(auxiliary; not a blueprint node).
-Proof: equality of classes is equivalence of pairs, which is equality of all images.
-Apply the injective rational trivialization and the formula for the constant matrix pair. -/
+/-- The class of a constant matrix lattice is characterized by its embedded images. -/
 theorem matrixLatticePair_class_eq_iff (g : Matrix.GeneralLinearGroup (Fin n) K)
     (P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val) L U) :
     c U (matrixLatticePair X K A L U n e g) = c U P ↔
@@ -86,10 +78,7 @@ theorem matrixLatticePair_class_eq_iff (g : Matrix.GeneralLinearGroup (Fin n) K)
       (((SheafOfModules.evaluation _ T).mapIso e).toLinearEquiv.injective)
     exact (matrixLatticePair_image X K A L U n e g T).trans (h T).symm
 
-/-- The constant lattice class depends only on the integral matrix coset.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), integral change of basis
-(auxiliary; not a blueprint node).
-Proof: equal cosets have equal matrix images, so the image criterion identifies their classes. -/
+/-- The constant lattice class depends only on the integral matrix coset. -/
 theorem matrixLatticePair_class_eq (g h : Matrix.GeneralLinearGroup (Fin n) K)
     (hgh : (Quotient.mk _ g : integralMatrixCosets A n) = Quotient.mk _ h) :
     c U (matrixLatticePair X K A L U n e g) =
@@ -99,17 +88,13 @@ theorem matrixLatticePair_class_eq (g h : Matrix.GeneralLinearGroup (Fin n) K)
   exact (matrixLatticePair_image X K A L U n e h T).trans
     (matrixLatticeImage_eq_of_coset_eq X K A U n g h hgh T).symm
 
-/-- The quotient map from integral matrix cosets to lattice classes over a trivializing object.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), the constant-coset map
-(auxiliary; not a blueprint node). -/
+/-- The quotient map from integral matrix cosets to lattice classes over a trivializing object. -/
 noncomputable def latticeCosetSection : integralMatrixCosets A n → F.obj.obj (op U) :=
   Quotient.lift (fun g ↦ c U (matrixLatticePair X K A L U n e g))
     (fun g h hgh ↦ matrixLatticePair_class_eq X K A L F c hc U n e g h
       (Quotient.sound hgh))
 
-/-- Restrict the constant matrix classes to obtain a map on the entire slice site.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), the constant-presheaf map
-(auxiliary; not a blueprint node). -/
+/-- Restrict the constant matrix classes to obtain a map on the entire slice site. -/
 noncomputable def latticeCosetMap :
     (Functor.const (Over U)ᵒᵖ).obj (ULift.{u + 2} (integralMatrixCosets A n)) ⟶
       (F.over U).obj where
@@ -122,10 +107,7 @@ noncomputable def latticeCosetMap :
     rw [← F.obj.map_comp_apply, ← op_comp, Over.w]
     rfl
 
-/-- On the identity object, the constant-presheaf map has the required normalization.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), identification of constant cosets
-(auxiliary; not a blueprint node).
-Proof: restriction along the identity is the identity. Apply the image criterion for classes. -/
+/-- On the identity object, the constant-presheaf map has the required normalization. -/
 theorem latticeCosetMap_normalization (g : Matrix.GeneralLinearGroup (Fin n) K)
     (P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val) L U) :
     (latticeCosetMap X K A L F c hc U n e).app (op (Over.mk (𝟙 U)))
@@ -136,13 +118,7 @@ theorem latticeCosetMap_normalization (g : Matrix.GeneralLinearGroup (Fin n) K)
   rw [op_id, F.obj.map_id]
   exact matrixLatticePair_class_eq_iff X K A L F c hc U n e g P
 
-/-- Restricted constant classes are detected by the rationally transported lattice images.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), restriction of embedded lattices
-(auxiliary; not a blueprint node).
-Proof: represent the restriction of the pair by a pair Q. The class presentation
-identifies its images with those of P on every further restriction. Apply the same
-restriction criterion to the constant matrix pair and use injectivity of the rational
-trivialization to cancel its application to the two image sets. -/
+/-- Restricted constant classes are detected by the rationally transported lattice images. -/
 theorem latticeCosetMap_eq_restrict_iff (V W : X.ProEt) (f : V ⟶ U) (a : W ⟶ V)
     (P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val)
       L V) (g : Matrix.GeneralLinearGroup (Fin n) K) :
@@ -173,12 +149,7 @@ theorem latticeCosetMap_eq_restrict_iff (V W : X.ProEt) (f : V ⟶ U) (a : W ⟶
     have hh := Set.image_injective.mpr (ev.mapIso e).toLinearEquiv.injective hi
     exact hh.symm.trans (hP T)
 
-/-- Equality of two restricted constant matrix classes over a nonempty object detects the coset.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), evaluation of constant lattices
-(auxiliary; not a blueprint node).
-Proof: represent the common restricted class by a lattice pair. The restriction clause
-of the class presentation identifies both original images with that pair's image on
-all further slice objects. Apply the rational trivialization and evaluate at a point. -/
+/-- Equality of two restricted constant matrix classes over a nonempty object detects the coset. -/
 theorem latticeCosetMap_injective_at (T : (Over U)ᵒᵖ)
     (hT : Nonempty T.unop.left.left) :
     Function.Injective ((latticeCosetMap X K A L F c hc U n e).app T) := by
@@ -214,12 +185,7 @@ theorem latticeCosetMap_injective_at (T : (Over U)ᵒᵖ)
     rw [ht] at hi
     exact hi
 
-/-- The constant-coset presheaf map is locally injective, including on empty objects.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), injectivity of the coset map
-(auxiliary; not a blueprint node).
-Proof: at a nonempty test object the preceding evaluation argument gives injectivity,
-so the equalizer sieve is maximal. At an empty object the empty sieve covers, hence
-its containing equalizer sieve covers as well. -/
+/-- The constant-coset presheaf map is locally injective, including on empty objects. -/
 theorem latticeCosetMap_locallyInjective :
     Presheaf.IsLocallyInjective ((Scheme.ProEt.topology X).over U)
       (latticeCosetMap X K A L F c hc U n e) := by
@@ -235,19 +201,14 @@ theorem latticeCosetMap_locallyInjective :
     rw [GrothendieckTopology.mem_over_iff]
     simpa using Scheme.ProEt.bot_mem_topology T.unop.left
 
-/-- The extension of the constant matrix map to the constant sheaf.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), sheafification of the coset map
-(auxiliary; not a blueprint node). -/
+/-- The extension of the constant matrix map to the constant sheaf. -/
 noncomputable def latticeCosetSheafMap :
     (constantSheaf ((Scheme.ProEt.topology X).over U) (Type (u + 2))).obj
       (ULift.{u + 2} (integralMatrixCosets A n)) ⟶ F.over U :=
   ⟨sheafifyLift ((Scheme.ProEt.topology X).over U)
     (latticeCosetMap X K A L F c hc U n e) (F.over U).property⟩
 
-/-- The extension agrees with the constant-presheaf map on the sheafification unit.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), sheafification of the coset map
-(auxiliary; not a blueprint node).
-Proof: apply the universal property of sheafification to the constructed map. -/
+/-- The extension agrees with the constant-presheaf map on the sheafification unit. -/
 theorem latticeCosetSheafMap_unit (T : (Over U)ᵒᵖ)
     (q : ULift.{u + 2} (integralMatrixCosets A n)) :
     (latticeCosetSheafMap X K A L F c hc U n e).hom.app T
@@ -259,10 +220,7 @@ theorem latticeCosetSheafMap_unit (T : (Over U)ᵒᵖ)
     (toSheafify_sheafifyLift ((Scheme.ProEt.topology X).over U)
       (latticeCosetMap X K A L F c hc U n e) (F.over U).property)
 
-/-- The sheafified constant matrix map retains the full embedded-image normalization.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), normalization of the coset comparison
-(auxiliary; not a blueprint node).
-Proof: the sheafification-unit identity reduces to the normalization of the presheaf map. -/
+/-- The sheafified constant matrix map retains the full embedded-image normalization. -/
 theorem latticeCosetSheafMap_normalization (g : Matrix.GeneralLinearGroup (Fin n) K)
     (P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val)
       L U) :
@@ -275,12 +233,7 @@ theorem latticeCosetSheafMap_normalization (g : Matrix.GeneralLinearGroup (Fin n
   rw [latticeCosetSheafMap_unit]
   exact latticeCosetMap_normalization X K A L F c hc U n e g P
 
-/-- Local surjectivity is the only remaining condition for the normalized coset comparison.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), locally bijective comparison
-(auxiliary; not a blueprint node).
-Proof: the constant-presheaf map is already locally injective. Its sheafification
-unit is locally bijective. The factorization through that unit therefore makes
-its extension locally bijective, hence an isomorphism of sheaves. -/
+/-- Local surjectivity is the only remaining condition for the normalized coset comparison. -/
 theorem latticeCosetSheafMap_isIso
     (hsurj : Presheaf.IsLocallySurjective ((Scheme.ProEt.topology X).over U)
       (latticeCosetMap X K A L F c hc U n e)) :

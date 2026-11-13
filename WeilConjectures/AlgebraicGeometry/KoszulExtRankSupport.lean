@@ -22,7 +22,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Rank support of scalar Koszul Ext
 
-Source: Stacks Project, Tag 0BQZ. -/
+## References
+
+* Stacks Project, Tag 0BQZ.
+-/
 
 @[expose] public section
 
@@ -60,22 +63,7 @@ private theorem isIso_rankSupport_unit {X : Scheme.{u}} (U : X.Opens)
       fun b ↦ ⟨0, htarget.elim _ b⟩⟩
 
 
-/-- Scalar Ext pulled back to the closed subscheme is supported on its matching rank stratum.
-
-Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.
-(blueprint: lem-sc-koszul-ext-rank-support).
-
-Proof: The off-rank stalk vanishing theorem makes the pulled-back degree-q
-cohomology stalk zero outside the rank-q stratum. Nonnegativity of q identifies
-q with the integer coercion of q.toNat. The stratum is closed as well as open
-because r is locally constant. For its open inclusion j, the triangle identity
-and invertible counit show that restriction of the unit M -> j_*j^*M is an
-isomorphism on the stratum. Consequently its stalk maps there are bijective.
-Off the stratum, M has zero stalk by off-rank vanishing and j_*j^*M has zero
-stalk by the closed-embedding pushforward stalk theorem. The unique map between
-these two zero stalks is bijective. Detection of module isomorphisms on stalks
-proves that the unit is an isomorphism. Empty source and empty strata are
-included: all the stalk assertions are vacuous or compare zero objects. -/
+/-- Scalar Ext pulled back to the closed subscheme is supported on its matching rank stratum. -/
 theorem koszulRegularImmersion_ext_rankSupport
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

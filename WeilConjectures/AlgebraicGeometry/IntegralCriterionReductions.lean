@@ -51,8 +51,8 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralSectionProjectionNormalizati
 /-!
 # Constructibility of all integral reductions from the first
 
-md
-(blueprint: lemma-bounds-finite-reductions).
+Comparison of the integral coefficient presentations and the section-action functors used in
+the integral constructibility criterion.
 -/
 
 @[expose] public noncomputable section
@@ -78,10 +78,7 @@ attribute [local instance] Sheaf.monoidalCategory
 /-- Derived completeness, constructibility of every positive reduction and a common
 finite cohomological interval. The reduction index n denotes the exponent n+1.
 There is no Tor-amplitude condition and no boundedness requirement on K itself.
-The predicate is intrinsic to X and E; the global convention l != p has no role in it.
-Source: Weil blueprint, order 1459, and the final paragraph of
-sk-prop-integral-criterion-reductions
-(blueprint: lemma-bounds-finite-reductions). -/
+The predicate is intrinsic to X and E; the global convention l != p has no role in it. -/
 def continuousIntegralConstructible (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : ObjectProperty (DerivedCategory (AdicCompletion.Modules l E X)) :=
@@ -133,19 +130,8 @@ private theorem finiteRepresentation_unique (X : Scheme.{u})
   simpa using h'
 
 /-- The projection-normalized comparison is independent of all auxiliary finite-set
-representations and limit-cone witnesses. SfbIntegralComparison retains the unit
-and all reduction equations, not just existence of an isomorphism.
-Source: blueprint integral-limit clause 3; integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions).
-Proof: existence is sfb_integral_coefficient_limit. For uniqueness, the finite-label
-representation is unique: on a singleton both sheaves are terminal, and naturality
-with every singleton-to-finite-set inclusion fixes each constant label; sheafification
-then fixes the whole natural transformation. For each cone witness the composite
-j followed by its nth projection is the specified quotient on every integer, so
-changing the cone changes none of these maps. The adjunction-mate normalization
-therefore gives the same nth projection for both comparisons on every profinite
-test object and continuous integer-valued function. The adjunction and Yoneda
-identify the maps; finally the limit projections jointly distinguish them. -/
+representations and limit-cone witnesses. `SfbIntegralComparison` retains the unit
+and all reduction equations, not just existence of an isomorphism. -/
 theorem integralLimitAbComparison_existsUnique (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -169,9 +155,7 @@ theorem integralLimitAbComparison_existsUnique (l : ℕ) [Fact l.Prime]
 
 /-- The unique integral-limit comparison with the published adjunction-mate and
 finite-projection normalization. No finite representation or equivalence is selected
-from a bare existence statement.
-Source: blueprint integral-limit clause 3; integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions). -/
+from a bare existence statement. -/
 def integralLimitAbComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :=
@@ -208,17 +192,7 @@ private theorem integralPointMon_eq (l : ℕ) [Fact l.Prime]
     Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R)
   exact congrArg F hs
 
-/-- The coefficient presentations have the same underlying abelian sheaves.
-Source: blueprint integral-limit clause 3 and integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions).
-Proof: the section-ring construction keeps the additive group and restriction maps
-of the internal ring. On the point the two continuous-function constructions have
-identical sections and restrictions: the extending absolute value is the spectral
-norm, hence defines the same topology. Presheaf extensionality and proof irrelevance
-identify these sheaves, and applying the same point inverse image preserves equality.
-The completed commutative ring sheaf retains the ring data of the completed ring
-sheaf; forgetting its commutativity and multiplication keeps exactly its additive
-groups and restrictions. Sheaf extensionality gives the second equality. -/
+/-- The coefficient presentations have the same underlying abelian sheaves. -/
 theorem integralSectionAbIdentifications (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -328,16 +302,7 @@ private theorem liftSectionRingIso
 
 /-- Reconstructing section rings retains the unique projection-normalized coefficient
 comparison. After the endpoint identifications, forgetting to abelian sheaves fixes
-the entire underlying additive map.
-Source: blueprint integral-limit clause 3 and integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions).
-Proof: the spectral absolute value defining DerivedNakayama.integerRing is the
-spectral norm defining sfbCondensedIntegers, so the continuous-function sheaves and
-their point pullbacks agree. The chosen abelian comparison is a monoid homomorphism
-in both directions by sfb_integral_coefficient_limit. Evaluating its multiplication
-and unit identities reconstructs a commutative-ring isomorphism on sections.
-Naturality is unchanged. Forgetting to abelian sheaves is faithful, so the fixed
-underlying comparison determines this ring isomorphism uniquely. -/
+the entire underlying additive map. -/
 theorem integralSectionRingIso_existsUnique (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -384,18 +349,14 @@ theorem integralSectionRingIso_existsUnique (l : ℕ) [Fact l.Prime]
         forget₂ RingCat.{u + 1} Ab.{u + 1})).map_injective
   exact he.trans hn.symm
 
-/-- The ring comparison fixed by the published finite-projection normalization.
-Source: blueprint integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions). -/
+/-- The ring comparison fixed by the published finite-projection normalization. -/
 def integralSectionRingIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :=
   (integralSectionRingIso_existsUnique l E X).exists.choose
 
 /-- The actual section-action functor, followed by scalar transport along the inverse
-of the specified coefficient isomorphism. Neither functor is chosen by existence.
-Source: Stacks 00YV; blueprint integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions). -/
+of the specified coefficient isomorphism. (Stacks, Tag 00YV) -/
 def integralSectionFunctor (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -448,13 +409,7 @@ private theorem restriction_isEquivalence
   (restrictionEquivalence c).isEquivalence_functor
 
 /-- The prescribed section-action comparison is an additive equivalence.
-Source: Stacks 00YV, 03DA; blueprint integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions).
-Proof: sectionModuleEquivalence is the existing exact equivalence with the same
-underlying abelian sheaves. Restriction along the inverse coefficient isomorphism
-has inverse restriction along its forward map. The unit and counit are the identity
-on sections, with the two scalar actions identified by the inverse equations.
-Both functors preserve addition on every section, so their composite is additive. -/
+(Stacks, Tags 00YV, 03DA) -/
 theorem integralSectionFunctor_properties (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -472,17 +427,13 @@ theorem integralSectionFunctor_properties (l : ℕ) [Fact l.Prime]
     infer_instance
   · exact inferInstanceAs (F.functor ⋙ SheafOfModules.restrictScalars c.hom).IsEquivalence
 
-/-- Additivity of the actual section-action functor.
-Source: blueprint integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions). -/
+/-- Additivity of the actual section-action functor. -/
 instance integralSectionFunctor_additive (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : (integralSectionFunctor l E X).Additive :=
   (integralSectionFunctor_properties l E X).1
 
-/-- Equivalence of the actual section-action functor.
-Source: blueprint integral-criterion proof step 8
-(blueprint: lemma-bounds-finite-reductions). -/
+/-- Equivalence of the actual section-action functor. -/
 instance integralSectionFunctor_isEquivalence (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : (integralSectionFunctor l E X).IsEquivalence :=

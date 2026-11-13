@@ -11,7 +11,9 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Properties of explicit subset insertion
 
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
+## References
+
+* Stacks Project, Tag 08C1 (equation (20.40.0.1)) and Tag 01FM.
 -/
 
 @[expose] public section
@@ -287,22 +289,8 @@ private theorem subsetInsertion_read
     rw [Category.assoc, subsetInsertRead_zero A r f J n S T hTS, comp_zero]
   · simp
 
-/-- The explicit finite sum of subset insertions is bijective.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-bijective).
-
-Proof: In column p, the extension by zero identifies the nonnegative component with
-sections on increasing (p+1)-tuples. Increasing enumeration bijects these tuples with
-subsets of cardinality p+1. Section transport is an additive isomorphism on each
-coordinate. Negative columns are zero, and columns p >= r have no tuples and are zero.
-On each total diagonal the only nonzero summands are therefore the finitely many
-columns 0 <= p < r. The universal coproduct is the finite direct sum of these groups,
-which is their finite product. The map defined by summing the summand insertions is
-this product-to-coproduct isomorphism. Its inverse reads each tuple coordinate after
-projecting to its column and applies inverse section transport. These maps are inverse
-on every summand and coordinate. For r=0 all families are empty and both groups are zero.
-Repeated opens retain different indices, and all arguments apply to zero section groups. -/
+/-- The explicit finite sum of subset insertions is bijective
+(Stacks, Tags 08C1 and 01FM). -/
 theorem principalSubsetInsertion_bijective
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ) :

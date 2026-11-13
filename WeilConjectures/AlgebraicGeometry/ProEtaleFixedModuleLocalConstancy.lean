@@ -17,10 +17,13 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Local constancy with fixed module coefficients on the pro-etale site
 
-Source: Bhatt--Scholze, Definition 7.3.1(1), with module coefficients;
-Stacks Project, Tag 099Y (auxiliary; not a blueprint node).
-
 This is the fixed-coefficient encoding used by the canonical comparison adjunction.
+
+## References
+
+* Bhatt--Scholze, *The pro-etale topology for schemes*, Definition 7.3.1(1), with module
+  coefficients.
+* Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -34,10 +37,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Local constancy of a fixed-coefficient module sheaf means a pro-etale covering of
 `Y` on whose members its localized restriction is isomorphic to a constant module sheaf.
 The constants are sheafifications of constant module presheaves, including their scalar
-multiplication. The modules may vary and need not be finite. This is the encoding needed by the
-module-valued comparison adjunction.
-Source: Bhatt--Scholze, Definition 7.3.1(1), module version; Stacks Project, Tag 099Y
-(auxiliary; not a blueprint node). -/
+multiplication; the modules may vary and need not be finite. -/
 noncomputable def IsLocallyConstantProEtaleFixedModuleSheaf (Y : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop :=

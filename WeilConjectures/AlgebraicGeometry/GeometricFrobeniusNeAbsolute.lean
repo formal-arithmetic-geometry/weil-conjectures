@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 /-!
 # The geometric Frobenius is not the absolute `q`-power Frobenius
 
-Blueprint `prose-10-19` defines the semilinear automorphism
-`g_Y = id_{Y₀} × Spec(γ)` of `Y = Y₀ ×_{k₀} k̄`, `γ = φ_q⁻¹` the geometric Frobenius of `k̄`, and
-observes that it is distinct from the absolute `q`-power morphism of `Y`. For `Y₀ = Spec k₀`,
+The semilinear automorphism `g_Y = id_{Y₀} × Spec(γ)` of `Y = Y₀ ×_{k₀} k̄`, with `γ = φ_q⁻¹`
+the geometric Frobenius of `k̄`, is distinct from the absolute `q`-power morphism of `Y`.
+For `Y₀ = Spec k₀`,
 `Y = Spec k̄`, this is the statement that `Spec γ` is not the absolute `q`-power Frobenius
 `Spec (z ↦ z ^ q)` of `Spec k̄`: otherwise `γ = φ_q`, so `φ_q² = id`, i.e. every `z ∈ k̄`
 satisfies `z ^ (q²) = z`, which is impossible as `k̄` is infinite.
@@ -31,7 +31,7 @@ open FiniteField
 
 variable (k : Type u) [Field k] [Finite k]
 
-/-- Blueprint `prose-10-19`: Arithmetic and geometric Frobenius.
+/-- Arithmetic and geometric Frobenius.
 
 The geometric Frobenius `σ = Spec γ` of `Spec k̄` (`AlgebraicGeometry.specGeometricFrobenius`),
 that is the geometric Galois Frobenius `g_Y` for `Y₀ = Spec k₀`, is distinct from the absolute

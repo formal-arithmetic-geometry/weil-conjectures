@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 /-!
 # ProjGradedModuleStalkMap
 
-Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6 (blueprint: lem-weil-pbc-proj-graded-module-stalk-map).
+## References
+
+* Stacks Project, Constructions, Section 01M3 (stalk computation before Definition 01M6).
 -/
 
 @[expose] public section
@@ -73,9 +74,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-sheaf-stalks) -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedScalarsProjGradedModuleStalkMap (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -165,29 +165,7 @@ private theorem primeScalarGerm (x : Proj 𝒜) (f : Fidx) (hx : x ∈ D[f])
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical additive map from chart germs to equal-degree prime-localized fractions.
-No injectivity or surjectivity is asserted here.
-Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6 (definition-structure-sheaf-proj).
-(blueprint: lem-weil-pbc-proj-graded-module-stalk-map)
-
-Proof:
-1. On a positive homogeneous chart containing x, include powers of its denominator into
-   the prime complement and apply the ordinary localized-module map. Equal-degree
-   representatives show that its restriction lands in Zp, using hZ and hZp.
-2. Each rho agrees with this map: write a fraction as y/f^m and use the given relation
-   g^e=a*f. The image of a^m*y/g^(e*m) equals y/f^m by clearing denominators in the
-   prime localization. This holds for every representative by localization equality.
-3. Positive standard opens form a basis. Every stalk element has a chart representative;
-   two representatives of the same germ agree on a smaller positive standard open.
-   The compatibility in step 2 makes the value independent of both choices. Addition
-   is checked after restricting two sections to their common product chart. This
-   constructs an additive map, not a choice of an arbitrary existence witness.
-4. Represent the scalar and section germ on a common positive standard open. A scalar
-   section there is awayToSection of a homogeneous localized scalar. The chart scalar
-   law and awayToSection_germ identify its image under stalkIso with that scalar's
-   prime localization, proving semilinearity. Step 1 gives the formula for every chart
-   fraction, without requiring its numerator itself to be homogeneous.
--/
+No injectivity or surjectivity is asserted here (Stacks, Constructions, Section 01M3). -/
 theorem gradedModuleStalkMap
     (𝓜 : ℤ → AddSubgroup M)
     (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),

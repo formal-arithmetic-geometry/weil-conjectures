@@ -32,27 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 2048 in
 /-- The transported trace section satisfies the local sum formula on every split
 object over `W`. This lemma concerns only the trace on `X`; no trace on `X'` is used.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-localization-section-formula)
-
-Proof. Write `rho` for the restriction isomorphism for `g`. Naturality of `rho`
-and the trace on `X` identifies the restriction of the displayed section to `T`
-with the trace applied to the input restricted to `T`, transported through the
-pasting isomorphism for `T`. Construct that isomorphism by the pullback universal
-property. Its projections, and the two specified projections of the isomorphism
-at `W`, imply compatibility with the pullback maps induced by `h`.
-
-Transport the given splitting of `T ×_X' Y'` along the pasting isomorphism.
-Compose each inclusion with its hom and retain the same inverse map from `T`.
-Isomorphisms preserve the colimit cofan, open and closed immersions. The first
-projection identity preserves both inverse equations, so this is a splitting of
-`T ×_X Y`. Apply the local sum predicate for the trace on `X` to this splitting.
-Naturality of `rho` along each section identifies its summands, after transport
-back by `rho.inv`, with the summands displayed here. Additive homomorphisms
-preserve finite sums. The second projection identity ensures that the sections
-are morphisms over `X`. This proves the formula, with an empty index type giving
-zero on both sides; no existence of a splitting cover or separatedness is needed. -/
+(Stacks, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.) -/
 theorem finiteEtaleTrace_localization_section_formula
     {X Y X' : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f)
     (g : X' ⟶ X) (hg : Etale g)

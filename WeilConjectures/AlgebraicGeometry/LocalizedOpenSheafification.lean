@@ -11,8 +11,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoida
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Sheafification and the localized open-site equivalence
-Source: Stacks Project, Tag 01CD, localized-site construction.
-(blueprint: lem-sc-localized-open-sheafification).
+
+## References
+
+* [Stacks, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
 -/
 
 @[expose] public section
@@ -87,20 +89,7 @@ private noncomputable def sheafificationTransportIso
       (PresheafOfModules.sheafificationAdjunction.{u} (𝟙 S.obj)))
 
 /-- Sheafification commutes with transport along the localized open-site equivalence.
-Source: Stacks Project, Tag 01CD, sheafification step in the localized-site construction.
-(blueprint: lem-sc-localized-open-sheafification).
-
-Proof: the inverse open-site equivalence identifies presheaves of modules, using
-restriction of the structure sheaf for the coefficient rings. Its inverse is
-precomposition with the forward site equivalence, with unit and counit supplied
-by those of the site equivalence. Covering sieves correspond, so transport
-preserves and reflects the sheaf condition. Consequently both displayed
-composites are left adjoint to inverse transport followed by forgetting the
-sheaf condition: compose the presheaf transport adjunction and the sheafification
-adjunction on one side, and the sheafification adjunction and overEquiv adjunction
-on the other. Their right adjoints identify by the sectionwise definition of
-pushforward. Uniqueness of left adjoints gives the displayed natural isomorphism.
-This does not use tensor products, and applies to empty opens and zero rings. -/
+(Stacks, Tag 01CD) -/
 theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
     Nonempty (
       PresheafOfModules.sheafification.{u}

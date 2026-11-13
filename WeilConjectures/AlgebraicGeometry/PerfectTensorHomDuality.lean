@@ -20,8 +20,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Tensor-Hom duality for perfect complexes
 
-Source: Stacks Project, duality.tex, Tag 0A9T; cohomology.tex, Tags 08DQ,
-0FPC and 0GM7 (blueprint: lem-pc-perfect-tensor-hom-duality).
+## References
+
+* Stacks Project, Duality for Schemes, Tag 0A9T; Cohomology, Tags 08DQ, 0FPC and 0GM7.
 -/
 
 @[expose] public section
@@ -38,25 +39,7 @@ D_QCoh has exactly the ambient Hom sets. Both left tensor adjunctions express th
 specified Hom equivalences, naturally in both arguments. Their canonical forms are
 Mathlib's `tensorLeftHomEquiv` for the respective exact pairings. The monoidal structure
 on `schemeDerivedCategory X`, and on that of every `T`, is the global instance
-`schemeDerivedTensorMonoidal` (def-pc-scheme-derived-tensor-structure).
-Source: Stacks, Tags 0A9T, 08DQ, 0FPC, 0GM7 and 09UA
-(blueprint: lem-pc-perfect-tensor-hom-duality).
-Proof:
-1. Define the dual globally as RHom(K,O_X). The perfect-RHom comparison
-   (lem-pc-perfect-rhom-tensor-comparison) puts it in D_QCoh and supplies global
-   evaluation and coevaluation satisfying the zig-zag identities (08DQ, 0FPC).
-2. Apply lem-pc-dualizable-tensor-hom-equivalences to this exact pairing and its
-   symmetric opposite. The two tensor adjunctions give the displayed natural Hom
-   equivalences for every pair of quasi-coherent complexes.
-3. On an open cover, represent K by strictly perfect complexes. The termwise
-   pullback computes derived pullback (lemma-coherent-base-change-invertible-sheaves--2), and
-   preserves finite free modules and their direct summands. Thus Lg*K is perfect.
-   Both pulled objects have quasi-coherent cohomology
-   (lem-pc-derived-pullback-tensor-qcoh). The global perfect-RHom comparison on the
-   source identifies Lg*(Kdual) with RHom(Lg*K,O), transporting its exact pairing.
-   Only isomorphism classes, not morphisms, are checked locally.
-4. Apply the same exact-pairing Hom equivalences on the source of g, for arbitrary
-   quasi-coherent A and B there. -/
+`schemeDerivedTensorMonoidal`. (Stacks, Tags 0A9T, 08DQ, 0FPC, 0GM7, 09UA) -/
 theorem perfect_tensor_hom_duality
     (X : Scheme.{u₁})
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

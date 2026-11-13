@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # The prescribed trace counit as coordinate evaluation
 -/
@@ -28,14 +26,7 @@ attribute [local instance 21000] sheafBraidedCategory
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor upperStar
   singleFunctorObjUnitIso derivedTensorRightUnitor
 
-/-- The scalar trace to the single constant complex gives the coordinate evaluation.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the displayed counit.
-(auxiliary; not a blueprint node).
-Proof: precompose with the invertible ordered projection. The defining trace-counit
-projection equation leaves tensor with the scalar trace followed by the single-unit
-comparison and right unitor. Cancel the inverse ordered projection in coordinate
-evaluation, identify the cached unit comparison with the canonical one, and use
-preservation of composition by tensor. -/
+/-- The scalar trace to the single constant complex gives the coordinate evaluation. -/
 theorem ordinaryFiniteTraceCounit_coordinate_evaluation
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]

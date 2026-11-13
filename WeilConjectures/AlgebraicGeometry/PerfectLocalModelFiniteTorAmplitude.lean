@@ -15,9 +15,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 
 /-! # Descent of finite Tor amplitude along a pro-etale cover
-
-Source: blueprint latest, scalar-six-ctf proof (2), local models.
-(blueprint: lem-sfb-perfect-local-model-finite-tor-amplitude).
 -/
 
 @[expose] public section
@@ -32,31 +29,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finite Tor amplitude descends from a pro-etale cover of a Noetherian scheme.
-No scalar model or admissibility assumption is needed for this descent step.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-scalar-six,
-det-prop-scalar-six-ctf.proof.md (2), local models.
-(blueprint: lem-sfb-perfect-local-model-finite-tor-amplitude).
-
-Proof in words:
-1. Choose a Tor interval on each cover member. Cover S by finitely many affine
-   opens. The finite-refinement condition of the pro-etale precoverage refines the
-   given cover over each affine open by finitely many affine opens. Since the base
-   affine opens are open in S, each refined member is also open in an original
-   cover member. Exact coefficient pullback preserves flat modules, so
-   the existing derived Tor-amplitude preservation theorem transports the original
-   interval to every refined member. Composition identifies this with restriction
-   from S. Taking the minimum lower endpoint and maximum upper endpoint
-   gives one interval for the finite covering. For empty S choose [0,0].
-2. For every module N on S, exact monoidal pullback identifies the restriction of
-   Q tensor-derived N[0] with the tensor of the restrictions. Exact pullback also
-   preserves the single-functor embedding. Thus all restricted tensors have the
-   common interval independently of N.
-3. Exact restriction commutes with homology. A sheaf that is zero on the covering
-   is zero: pull the covering back over every test object and apply the uniqueness
-   clause of the sheaf condition to its sections. The same holds for internal
-   modules because the forgetful functor detects zero objects. Consequently every
-   global tensor has homology in the common interval, which is finite Tor amplitude. -/
+No scalar model or admissibility assumption is needed for this descent step. -/
 theorem finiteTorAmplitude_of_proetale_cover
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

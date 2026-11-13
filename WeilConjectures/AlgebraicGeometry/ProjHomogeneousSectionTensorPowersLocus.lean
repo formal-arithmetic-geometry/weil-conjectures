@@ -14,16 +14,8 @@ universe u
 open CategoryTheory MonoidalCategory AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry
 attribute [local instance] MvPolynomial.gradedAlgebra
-/-- The nonvanishing locus of a homogeneous section is the corresponding standard open.
-Source: Stacks Project, Constructions, Tags 01MS, 01MV and 01NG.
-Proof: The coordinate opens D_+(x_i) cover polynomial Proj. On this chart O(d) has
-basis x_i^d, and the section induced by f has coefficient f/x_i^d. Its value in the
-one-dimensional residue-field fibre is nonzero if and only if that coefficient
-is outside the corresponding prime of the degree-zero localization. By the
-standard-open dictionary this means the homogeneous prime does not contain f,
-exactly membership in D_+(f). The equality on all charts gives equality of sets.
-For f=0 both sets are empty, including for positive d.
-(blueprint: lem-sc-p1-homogeneous-section-tensor-powers-locus) -/
+/-- The nonvanishing locus of a homogeneous section is the corresponding standard open
+(Stacks, Constructions, Tags 01MS, 01MV and 01NG). -/
 theorem proj_homogeneous_section_tensor_powers_locus (k : Type u) [Field k]
     {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}
     (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :

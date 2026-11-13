@@ -14,8 +14,8 @@ A morphism `q : T ⟶ S` *locally embeds into `𝔸ᵐ_S`*
 (`AlgebraicGeometry.Scheme.Hom.LocallyEmbedsInAffineSpace q m`) if every point of `T` has an open
 neighbourhood `V` with an immersion `V ⟶ 𝔸ⁿ_S` over `S` into an affine space of dimension
 `n ≤ m`. This is the dimension measure of the induction in Gabber's Künneth formula for nearby
-cycles (blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): slicing
-along one coordinate of such a chart lowers the dimension of the chart by one.
+cycles: slicing along one
+coordinate of such a chart lowers the dimension of the chart by one.
 
 ## Main statements
 

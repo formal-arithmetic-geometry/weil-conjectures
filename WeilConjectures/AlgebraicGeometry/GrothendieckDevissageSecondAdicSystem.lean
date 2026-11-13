@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 
 /-! # The second adic system in Grothendieck devissage
 
-Source: Stacks Project, Tag 088A, construction of G_e and the uniform torsion bound
-(blueprint: lem-weil-pbc-devissage-second-adic-system).
+## References
+
+* [Stacks Project, Tag 088A]
 -/
 
 @[expose] public section
@@ -30,30 +31,7 @@ namespace AlgebraicGeometry
 /-- Construct the K-adic system by algebraizing the K-power quotients of an I-adic system.
 The isomorphism sigma records compatibility in both indices, not just on individual terms.
 The isomorphism theta is the canonical interchange of the two quotient operations:
-its equation with the two quotient projections specifies it uniquely.
-
-Source: Stacks Project, Tag 088A, proof from the closed-immersion identification through
- the K^(4t) bound (blueprint: lem-weil-pbc-devissage-second-adic-system).
-
-Proof:
-1. For each positive e, use the closed-immersion coherent and formal equivalences of
-Tag 087T together with the assumed completion equivalence on V(K^e). Apply essential
-surjectivity to the formal quotient system M_n/K^e M_n. The result is a coherent module
-G_e killed by K^e, uniquely determined up to its compatible isomorphism.
-2. Full faithfulness lifts the quotient transitions uniquely. Reducing G_(e+1) modulo
-K^e gives G_e since their I-completions have that identification. Thus the G_e and these
-transitions define N in Coh(X,K). The quotient comparisons assemble into sigma;
-full faithfulness gives naturality in e and their formal-system maps give naturality in n.
-3. Two successive ideal quotients are the quotient by the sum of the ideal products.
-Their cokernel universal properties give theta, characterized by the projection equation.
-The quotient of alpha lifts to delta by full faithfulness. Faithfulness proves its
-transition compatibility and the displayed comparison square.
-4. The component torsion hypothesis gives a uniform exponent t. Reduction modulo K^e
-bounds the kernels and cokernels by K^(2t), by the reduction assertion of Remark 0888.
-The same remark transfers this bound through I-completion to the lifted maps G_e to
-H/K^e H, with exponent 4t. This is the asserted component bound for delta.
-All levels are positive (op e means e+1); no assertion is made at exponent zero.
--/
+its equation with the two quotient projections specifies it uniquely. (Stacks, Tag 088A) -/
 theorem grothendieckDevissage_secondAdicSystem
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

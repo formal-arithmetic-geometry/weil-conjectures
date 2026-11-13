@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 /-!
 # Residue fields at points of inverse limits
 
-Source: Stacks Project, Limits, Lemma 0CUG (1)
-(blueprint: lem-weil-pbc-limit-residue-field).
+## References
+
+* Stacks Project, Limits, Lemma 0CUG (1).
 -/
 
 @[expose] public section
@@ -167,32 +168,7 @@ private noncomputable def isColimit_of_injective_of_covered
 /-- The residue field at a point of an inverse limit with affine transitions is the
 colimit of the residue fields of its images. The spectra form a limiting cone, compatible
 with the canonical maps into the original schemes. `HEq` identifies the actual canonical
-maps despite the equal, but not definitionally equal, image points in their source types.
-No arbitrary transition or projection maps are allowed by these identifications.
-
-Source: Stacks Project, Limits, Lemma 0CUG (1)
-(blueprint: lem-weil-pbc-limit-residue-field).
-
-Proof:
-1. Transport each canonical residue map along the cone identity. Residue-map
-   functoriality proves the functor and cocone laws; the transports give the required HEq.
-2. Lift a residue element to a stalk element. The inverse images of affine opens of
-   stages form a basis (Mathlib `isBasis_preimage_isAffineOpen`), so represent the stalk
-   element by a section on such an inverse image.
-3. The restricted inverse system consists of affine schemes and is limiting
-   (`isLimitOpensCone`). Its global sections form a filtered colimit. Hence the section
-   comes from a later stage (`exists_appTop_π_eq_of_isAffine_of_isLimit`), after the
-   canonical identifications between sections on an open and global sections of its
-   open subscheme. Evaluation naturality sends the residue of this section to the
-   original residue element.
-4. All cocone maps are injective because their domains are fields. Joint coverage
-   and injectivity give a colimit of underlying types (`Types.FilteredColimit.isColimitOf'`).
-   The forgetful functor preserves filtered colimits and reflects isomorphisms, so
-   it reflects this colimit of rings.
-5. Apply the limit-preserving spectrum functor to the opposite colimit cocone.
-   Its transition maps are affine because their targets are affine. The canonical
-   residue-point compatibility equations are Mathlib's
-   `Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField`. -/
+maps despite the equal, but not definitionally equal, image points in their source types. -/
 theorem exists_isColimit_residueField_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

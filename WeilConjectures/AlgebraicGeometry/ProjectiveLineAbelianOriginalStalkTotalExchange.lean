@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalAbelianTotalExchange
 
 /-! # Original abelian stalk exchange on total strict-local projective lines
 
-Source: Stacks Project, Tag 03Q9 and the stalk calculation in Tag 095T.
+## References
+
+* Stacks Project, Tags 03Q9 and 095T.
 -/
 
 @[expose] public section
@@ -35,26 +37,8 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The geometric part of the original-stalk calculation, with abelian coefficients.
-No module resolution, comparison of coefficient categories, or closed fibre is involved.
-
-Source: Stacks Project, Tag 03Q9 and the final stalk calculation of Tag 095T.
-(blueprint: lem-weil-pbc-p1-abelian-original-stalk-total-exchange).
-
-Proof:
-1. The projective-line projection is qcqs by properness. Its base change to Spec A
-is the projective line over A, by ProjectiveSpace.isPullback_map; the same theorem
-gives the local square over the local homomorphism φ.
-2. Apply exists_addEquiv_strictHenselization_abelian_stalkExchange to these squares.
-It identifies the two original stalks with the two closed-B-point stalks of the local
-exchange, and carries the original exchange map to that local exchange map.
-This is the restriction-complex portion of Tags 03Q9 and 095T.
-3. Apply exists_addEquiv_strictLocal_abelian_total_exchange to the local square and G₀.
-It identifies these local stalks with the two Ext cohomology groups and the local
-exchange with cohomologyMap. Compose the source and target additive equivalences.
-For each x, rewrite using the localization equation, then apply the strict-local
-cohomology equation at the localized source element. No torsion or closed-fibre
-comparison enters this proof, and all original hypotheses remain unchanged.
--/
+No module resolution, comparison of coefficient categories, or closed fibre is involved
+(Stacks, Tags 03Q9, 095T). -/
 theorem Etale.projectiveLine_abelian_originalStalk_totalExchange
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)

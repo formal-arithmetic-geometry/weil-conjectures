@@ -15,8 +15,14 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Affine pullback sections from local quasi-coherence
 
-Source: Stacks Project, Tags 01I7, 01HV, 01I9, 0096 and 0097.
-(blueprint: new-p4-locally-quasicoherent-affine-pullback-sections). -/
+## References
+
+* [Stacks, Tag 01I7](https://stacks.math.columbia.edu/tag/01I7)
+* [Stacks, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
+* [Stacks, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -125,28 +131,7 @@ private theorem tensorPullback_affine_sections_bijective_of_chart
 end Scheme.Modules
 
 /-- Tensor pullback sections need quasi-coherence only on the affine target open.
-Source: Stacks Project, Tag 01I9(1), lemma-widetilde-pullback; Tag 0096,
-lemma-adjoint-pullback-pushforward-modules; Tag 0097, lemma-push-pull-composition-modules.
-(blueprint: new-p4-locally-quasicoherent-affine-pullback-sections).
-Proof: Put V=i inverse-image U, which is affine because i is affine. Restrict
-G to Spec A through the canonical chart of U. Quasi-coherence of G on U and
-restriction along the chart isomorphism make this restricted module N
-quasi-coherent, with global sections identified with G(U). The affine chart
-square identifies the right adjoints of chart restriction followed by the
-standard Spec pullback and standard i-pullback followed by chart restriction.
-Uniqueness of left adjoints gives the comparison k. The proved standard
-pullbackSpecGamma equivalence gives B tensor_A Gamma(N) as sections on Spec B.
-Compose with k and the chart section isomorphism. Compare tensorPullback i
-with standard pullback by uniqueness of left adjoints as well. The existing
-affineChart_pullback_unit theorem and the uniqueness unit equation show that
-this composite sends b tensor s to b times the specified tensor pullback unit.
-Construct that canonical map directly by TensorProduct.lift. Tensor induction
-identifies it with the composite of bijections, proving bijectivity. Swapping
-the tensor factors makes it B-linear; its pure-tensor formula proves the
-B-linearity by tensor induction. Finally package it as a linear equivalence.
-All section transports are equalities of opens and all maps are isomorphisms;
-empty U, empty V and zero modules obey the same formulas. There is no global
-quasi-coherence or quasi-separatedness hypothesis. -/
+(Stacks, Tags 01I9, 0096, 0097) -/
 theorem exists_locallyQuasicoherent_affine_pullback_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsAffineHom i]
     (U : Y.affineOpens) (G : Y.Modules) (hG : (G.restrict U.1.ι).IsQuasicoherent) :

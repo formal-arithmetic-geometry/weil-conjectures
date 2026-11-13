@@ -25,8 +25,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits
 
 /-- The presheaf of homotopy classes from free representables to the integer extension
-of a nonnegative complex of abelian sheaves. It is constructed by preadditive Yoneda. 
-(blueprint: lem-weil-pbc-free-representable-homotopy-homology)
+of a nonnegative complex of abelian sheaves. It is constructed by preadditive Yoneda.
 -/
 def freeRepresentableHomotopyPresheaf
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
@@ -108,21 +107,7 @@ private def freeSectionsFunctorIso
 
 /-- Homotopy classes from free representables compute objectwise homology of any
 nonnegative complex of abelian sheaves; injectivity and Ext are not involved.
-Source: Stacks Project, Section 01FT and Tag 03F3 (Hom-sections identification);
-Derived Categories, Tag 06XR (homotopy classes from a single object).
-(blueprint: lem-weil-pbc-free-representable-homotopy-homology)
-
-Proof: Sheafification adjunction, the free abelian adjunction, and Yoneda identify
-maps from the free abelian sheaf on U to G with G(U), additively and naturally in
-both U and G. Apply this in every degree of the extension of K by zero. The Hom
-complex from the degree-zero free sheaf becomes the lifted section complex.
-Homotopy classes of maps to the q-shift are cocycles modulo coboundaries, hence
-homology of that Hom complex. Evaluation of presheaves and additive universe lift
-are exact and preserve homology. Extension by zero preserves homology at every
-nonnegative degree; at q = 0 the incoming differential is zero on both sides.
-Naturality in U of the adjunctions, extension comparison, and homology comparison
-makes these isomorphisms commute with every restriction. Assemble them into a
-natural isomorphism. This also applies to the empty site and the zero complex. -/
+(Stacks, Tag 03F3 and Tag 06XR) -/
 theorem freeRepresentableHomotopyPresheaf_homology
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v}]

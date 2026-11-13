@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleSliceOrdinaryComparison
 import all WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.AlgebraicGeometry.StrictTowerOperations
 
-/-! # Local isomorphisms under the integral section comparison -/
+/-! # Local isomorphisms under the integral section comparison
+
+## References
+
+* Bhatt–Scholze, Proposition 6.8.11(3).
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -206,24 +211,7 @@ private theorem globalSectionIsomorphisms (l : ℕ) [Fact l.Prime]
   exact comparisonNonemptyIso _ _ Q e M N
 
 /-- The fixed section equivalence and the coefficient comparisons preserve and reflect
-isomorphisms after inverse image and localization at a pro-etale member.
-
-Source: Bhatt--Scholze, Proposition 6.8.11(3), the inverse-image and slice-site
-comparison in the integral constructibility bridge.
-(auxiliary; not a blueprint node).
-
-Proof: the section equivalence identifies internal direct image with ringed direct
-image. The coefficient naturality square transports this identification through
-the fixed detailed source comparison and a compatible coefficient isomorphism on
-the target. Uniqueness of left adjoints then compares internal and algebraic
-inverse image. Apply this along U.hom followed by g. For algebraic inverse images,
-the composite pullback comparison and the equivalence between the pro-etale site
-of U.left and the slice site at U identify inverse image along U.hom with
-restriction to U. Thus the two functors in the assertion become naturally
-isomorphic after equivalences of their target module categories. Map an
-isomorphism through these equivalences for one direction and lift it by full
-faithfulness for the other. All constructions apply to arbitrary modules,
-including zero objects and empty schemes. -/
+isomorphisms after inverse image and localization at a pro-etale member. -/
 theorem integralSectionLocalIsomorphisms (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (g : S ⟶ X) (U : S.ProEt)

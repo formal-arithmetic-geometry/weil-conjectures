@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # A finite unramified morphism with one purely inseparable fibre point is locally a closed immersion
 
-Source: Stacks Project, Etale Morphisms, Lemma 04DG
-(blueprint: lem-weil-pbc-finite-unramified-one-point-closed).
+## References
+
+* [Stacks Project, Tag 04DG](https://stacks.math.columbia.edu/tag/04DG)
 -/
 
 @[expose] public section
@@ -74,24 +75,7 @@ private theorem isIso_asFiberHom_of_unique_unramified
 /-- Let `π : X ⟶ S` be finite and unramified. If `x` is the unique point of the fibre over
 `s` and the residue-field extension at `x` over `s` is purely inseparable, then `π` is a
 closed immersion after restriction to some open neighbourhood of `s`.
-Source: Stacks Project, Etale Morphisms, Lemma 04DG
-(blueprint: lem-weil-pbc-finite-unramified-one-point-closed).
-
-Proof:
-1. Unramifiedness passes to the fibre by Mathlib base-change stability. Its local rings
-   are fields, since the unramified stalk maps map the maximal ideal of the base stalk
-   onto the maximal ideal of the fibre stalk and the base stalk is a field.
-2. The unique-point hypothesis makes `π.asFiberHom x` surjective on points. It is a
-   preimmersion with surjective stalk maps out of fields, hence has isomorphic stalk
-   maps. It is therefore an open immersion, and surjectivity makes it an isomorphism.
-3. The residue-field extension of an unramified morphism is separable. Mathlib's
-   `IsPurelyInseparable.surjective_algebraMap_of_isSeparable` then gives surjectivity of
-   `π.residueFieldMap x`, so its spectrum map is a closed immersion. The factorization
-   through `π.asFiberHom x` shows that the fibre morphism is a closed immersion.
-4. Apply `exists_isClosedImmersion_restrict_of_fiber`: for a finite morphism, Nakayama
-   and spreading out the cokernel yield a closed immersion on a neighbourhood of the
-   base point. This is the last part of the Stacks 04DG proof.
--/
+(Stacks, Tag 04DG.) -/
 theorem finite_unramified_one_point_closed
     {X S : Scheme.{u}} (π : X ⟶ S) (s : S) (x : X)
     (hx : π x = s)

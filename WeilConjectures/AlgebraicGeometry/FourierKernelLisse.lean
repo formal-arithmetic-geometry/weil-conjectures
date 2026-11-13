@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierProjectorFacts
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierProjectorDescent
 
 /-! # The Fourier kernel is lisse of rank one
-
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/sk-thm-inversion/
-prop-kernel-lisse.md (blueprint: lemma-artin-schreier-character-sheaf).
 -/
 
 @[expose] public noncomputable section
@@ -61,29 +58,7 @@ set_option linter.unusedVariables false in
 /-- The Fourier kernel is lisse of rank one, of Tor amplitude `[0, 0]`, multiplicative in
 the character, with tensor inverse the kernel of the inverse character. The four branches
 are the finite small-etale kernel, the degree-`q` small-etale Artin--Schreier model, the
-admissible condensed prime-field kernel and the degree-`q` condensed model.
-
-Source: current blueprint, sec-fourier-transform/sk-thm-inversion/prop-kernel-lisse.md,
-all clauses (blueprint: lemma-artin-schreier-character-sheaf).
-
-Proof.
-1. For finite coefficients use the proved character multiplication, inverse and Tor
-   theorems of the source library. Pull back its counit trivialization of the degree-q
-   Artin–Schreier sheaf along the function to obtain an explicit rank-one etale cover.
-2. For condensed coefficients, split the self pullback of the Artin–Schreier cover into
-   the translates of its diagonal. The canonical split-cover product map identifies
-   pullback of the regular-module pushforward with a product indexed by the finite field.
-   The deck-evaluation formula identifies translations with shifts of the coordinates.
-3. Pullback is linear and preserves images. The finite character-projector calculation
-   identifies the pulled-back image with the regular module by evaluation at zero,
-   which is exactly the adjunction counit. Deck maps preserve multiplication and constants;
-   therefore products of character images are fixed by the product-character projector.
-4. Apply the monoidal-adjunction counit identity and conservativity of restriction to
-   the Artin–Schreier cover to obtain the tensor-product and trivial-character unit
-   isomorphisms. Pull them and the explicit trivializing cover back along the function.
-   Taking the inverse character gives a tensor inverse, hence flatness and Tor amplitude
-   [0,0]. Finally specialize the finite field to ULift (ZMod p), transporting the product
-   and inverse characters by their defining equalities. No character is assumed nontrivial. -/
+admissible condensed prime-field kernel and the degree-`q` condensed model. -/
 theorem prop_kernel_lisse :
     (∀ (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
       (p : ℕ) [Fact p.Prime] [Invertible (p : Λ)]

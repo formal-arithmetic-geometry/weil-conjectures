@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.TorsionControlledCompletionHomLift
 
 /-! # Torsion-controlled triples for easy algebraization
 
-Source: Stacks Project, Tag 0889, part (1)
-(blueprint: lem-weil-pbc-easy-algebraization-torsion-triple).
+## References
+
+* [Stacks Project, Tag 0889]
 -/
 
 @[expose] public section
@@ -28,24 +29,7 @@ namespace AlgebraicGeometry
 /-- Easy algebraization with the torsion condition on the actual coherent map retained.
 Uniqueness is among torsion-controlled triples. This restriction matters when the ideal
 is the unit ideal: completion then forgets everything, and an unrestricted triple need
-not be isomorphic to the chosen one.
-
-Source: Stacks Project, Tag 0889, part (1), including condition (1)(b)
-(blueprint: lem-weil-pbc-easy-algebraization-torsion-triple).
-
-Proof:
-Restrict to a finite affine cover. The coherent-formal-module affine equivalence turns
-alpha into a map from a finite completed module to the completion of a finite module.
-Remark 0888 converts the uniform component annihilation into annihilation of the limit
-kernel and cokernel. The formal-gluing isogeny theorem constructs a module map with
-ideal-power-torsion kernel and cokernel whose completion is this map. The finiteness
-criterion for formal gluing makes its source finite. Formal gluing also gives unique
-isomorphisms of any two such torsion-controlled triples, respecting both the map and
-completion comparison. On overlaps those isomorphisms satisfy the cocycle identity by
-uniqueness; glue the modules and their maps and completion comparisons. Finitely many
-affines give a uniform positive exponent for the glued kernel and cokernel. The same
-uniqueness glues isomorphisms of triples and proves the asserted global uniqueness.
--/
+not be isomorphic to the chosen one. (Stacks, Tag 0889, part (1)) -/
 theorem grothendieckExistenceEasy_torsionTriple
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

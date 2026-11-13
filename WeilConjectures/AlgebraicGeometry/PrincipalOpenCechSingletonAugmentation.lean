@@ -9,10 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-/-! # PrincipalOpenCechSingletonAugmentation
+/-!
+# The singleton augmentation on subset Čech coordinates
 
-Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation).
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -59,19 +61,9 @@ private theorem augmentation_transport_restrict
     (homOfLE hWU).op (homOfLE hZW).op).symm
 
 -- The pair calculation contains dependent transports of the section modules.
-/-- A separate construction step for the finite subset Čech argument.
-Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1).
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation).
-
-Proof: Define the degree-n linear map by σ₁ followed by restriction and degree transport
-on singleton coordinates, and zero on larger coordinates. On singleton coordinates
-the chain equation is the supplied section differential equation, naturality of
-restriction, and equality induction for the transports. On two-element subsets the
-two restrictions from singleton rows are the same composite restriction with
-opposite signs, hence cancel. On larger subsets all incoming singleton coordinates
-are zero. These coordinate equations give the consecutive chain equations;
-CochainComplex.ofHom, or the analogous general-complex hom constructor, gives α₁.
-The argument includes empty covers, empty intersections and repeated opens. -/
+/-- A separate construction step for the finite subset Čech argument: the augmentation
+from sections on the union into the subset Čech coordinates, supported on singletons
+(Stacks, Tag 08C1). -/
 theorem principalOpenCech_singleton_augmentation_exists
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (I : CochainComplex

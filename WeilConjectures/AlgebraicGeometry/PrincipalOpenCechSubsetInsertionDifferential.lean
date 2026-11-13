@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionHorizon
 
 /-! # Properties of explicit subset insertion
 
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
+## References
+
+* Stacks Project, Tag 08C1 (equation (20.40.0.1)) and Tag 01FM.
 -/
 
 @[expose] public section
@@ -25,23 +27,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
-/-- Totalization has the displayed differential on the explicit subset insertion.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-differential).
-
-Proof: Expand the insertion as a finite sum and distribute the total differential.
-On the column p=card S-1 its vertical part is (-1)^p times the coefficient differential.
-Naturality of restriction and section transport identifies this with the vertical
-term displayed below. Its horizontal part is the signed face restriction. A face
-of the increasing enumeration deletes j, and its position is the number of elements
-of the target subset smaller than j. Regroup the finite sum by target subsets.
-Transport coefficient degrees with he; proof irrelevance identifies all equality
-transports. Empty deletions contribute zero because there is no negative column.
-For each source subset, the two contributions agree in every target tuple coordinate.
-Reassemble those coordinates using their total summand inclusions. Every source element
-is the finite sum of its single-coordinate elements, so additivity proves the equality
-for arbitrary s. Zero summands and the empty cover cause no exception. -/
+/-- Totalization has the displayed differential on the explicit subset insertion
+(Stacks, Tags 08C1 and 01FM). -/
 theorem principalSubsetInsertion_differential
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :

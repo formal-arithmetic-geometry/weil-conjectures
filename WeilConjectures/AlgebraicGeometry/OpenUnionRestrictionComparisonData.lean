@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # Comparison data for inverse image opens of a union
 
-Source: Stacks Project, Tag 08BW; canonical restriction diagram.
-(blueprint: lem-sc-open-union-restriction-comparison-data).
+## References
+
+* [Stacks, Tag 08BW]
 -/
 
 @[expose] public section
@@ -83,25 +84,8 @@ attribute [local irreducible] Functor.mapDerivedCategory transportDerived
 
 set_option maxHeartbeats 400000 in
 -- Transporting three localizations and their dependent comparison witnesses needs this limit.
-/-- Comparison equivalences and restriction isomorphisms on the three inverse image opens.
-Source: Stacks Project Tag 08BW, canonical restriction diagram.
-(blueprint: lem-sc-open-union-restriction-comparison-data).
-
-Proof: The image of U under the union inclusion is W, since W is contained in the union;
-likewise the image of T is V and the image of their intersection is W intersect V.
-The open immersion therefore induces scheme isomorphisms from these three inverse image
-opens to W, V, and their intersection. Their exact equivalences of module sheaves induce
-derived equivalences. To obtain the derived localizations in Hom universe w, first use
-nonempty_derivedOpenLocalization on the union scheme and transport along overEquiv.
-The induced equivalence with the standard derived category transfers local w-smallness
-by locallySmall_congr; hasLocalizationOfLocallySmall constructs the localization.
-For each scheme isomorphism compare the
-restriction from the union with the corresponding overlap restriction in X by
-Modules.overMapCompOverEquiv, overFunctorEquiv, restrictFunctorComp, and
-restrictFunctorCongr. Apply mapDerivedCategoryNatIso and mapDerivedCategoryCompIso
-to these underived isomorphisms. This yields qW, qV, and the direct intersection
-comparison; no compatibility of the overlap arrows is claimed here. For an empty
-open the same scheme isomorphism and restriction construction apply. -/
+/-- Comparison equivalences and restriction isomorphisms on the three inverse image opens
+(Stacks, Tag 08BW). -/
 theorem open_union_restriction_comparison_data
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

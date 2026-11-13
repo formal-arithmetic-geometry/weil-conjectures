@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
 
 /-!
 # The diagonal unit for the Kummer-normalized projective-line trace
-
-Source: blueprint proposition-adjunction-projective-line--1 and
-lemma-class-diagonal-projective-line. (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -32,33 +29,7 @@ attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 -- Preserve the existing binder names in the public statement.
 set_option linter.unusedVariables false in
 /-- The supported diagonal gives a unit for the already specified trace counit.
-The decomposition and Chern arrows are inputs; no decomposition is asserted here.
-Source: blueprint thm-amb-p1-adjunction.md and its proof;
-lem-amb-p1-diagonal-integrals.md and its proof.
-(auxiliary; not a blueprint node).
-
-Proof: Apply the supported Cartier Kummer construction to the diagonal of P times_S P.
-Its existing component formula, in either projective-line chart, expresses the pushed
-class as a base Chern component followed by the twisted unit plus the relative Chern
-pushforward. The second projection of the Kummer-normalized splitting kills the
-first component and evaluates the second to one. This gives both scalar diagonal
-integrals with the specified source units and coefficient comparisons.
-For every complex M, invert the diagonal projection formula, tensor with the supported
-class, push along the second projection, and apply inverse proper exchange and the
-ordered projection comparison. These natural maps define the common-base unit.
-The two coordinate trace contractions identify its triangular composites with the
-tensor section integrals. Naturality interchanges the coordinates in the first
-triangle; restriction of the coordinate comparison to the diagonal handles the
-second. The scalar integrals and the section projection identities make both
-composites identity. The normalized shifted-line pullback identifies the common-base
-coefficient with the prescribed projective-line right adjoint. Projection naturality
-identifies the transported counit with the specified Kummer trace counit.
-For base change, invert the decomposition square and apply its second projection to
-obtain the scalar trace square. The canonical projection/exchange mate square tensors
-this scalar equation with an arbitrary complex. Insert the inverse ordered projections
-and the normalized constant-unit square; their composite is exactly the stated counit
-base-change equation. All arguments apply to unbounded complexes without an added
-flatness or boundedness hypothesis. -/
+The decomposition and Chern arrows are inputs; no decomposition is asserted here. -/
 theorem ordinaryFiniteP1_diagonal_unit (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)

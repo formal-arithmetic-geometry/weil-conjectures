@@ -16,8 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # The canonical restricted residue tensor presentation
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and derived scalar extension.
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt–Scholze, Lemma 6.5.9(3).
 -/
 
 @[expose] public section
@@ -56,9 +57,7 @@ instance genericTensorLeft_preservesKFlatQuasiIso (B : C) :
     ((Functor.whiskeringLeft _ _ _).obj q)).preimageIso pre
 
 /-- The canonical comparison from a degree-zero derived object to its homotopy
-representative. This is the standard single/quotient comparison, kept as one map.
-Source: the single-object and quotient localization comparisons.
-(auxiliary; not a blueprint node) -/
+representative. This is the standard single/quotient comparison, kept as one map. -/
 @[irreducible] noncomputable def homotopySingleComparisonIso (B : C) :
     (DerivedCategory.singleFunctor C 0).obj B ≅
       DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj
@@ -81,9 +80,7 @@ Source: the single-object and quotient localization comparisons.
 
 /-- The fixed braiding used by the derived tensor comparisons.
 Its data are the existing derived monoidal braiding; the name lets the
-presentation and model use exactly the same instance.
-Source: the canonical braided structure on the derived tensor product.
-(auxiliary; not a blueprint node) -/
+presentation and model use exactly the same instance. -/
 @[instance_reducible] noncomputable def derivedTensorPresentationBraiding :
     BraidedCategory (DerivedCategory C) :=
   DerivedMonoidal.braidedCategory' (DerivedCategory.Qh (C := C))
@@ -104,13 +101,7 @@ noncomputable section NormalizationAPI
 
 attribute [local instance] derivedTensorPresentationBraiding
 
-/-- The tensor presentation is normalized by its balanced tensor counit.
-
-Cancel the braiding and the two standard single comparisons. The defining
-left-derived natural-transformation equation then gives the stated counit.
-
-Source: Bhatt--Scholze, Remark 6.8.15; canonical derived tensor comparison.
-(auxiliary; not a blueprint node) -/
+/-- The tensor presentation is normalized by its balanced tensor counit. -/
 theorem derivedTensorPresentationIso_fac (B : C)
     (H : DerivedCategory C ⥤ DerivedCategory C)
     (ε : DerivedCategory.Qh ⋙ H ⟶

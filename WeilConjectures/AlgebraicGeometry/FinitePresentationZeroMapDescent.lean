@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapAffineOpen
 /-!
 # Eventual vanishing of one finitely generated module map
 
-Source: Stacks Project, Limits, Tag 01ZR (3), affine vanishing argument.
-(blueprint: lem-pc-fp-zero-map-descent).
+## References
+
+* Stacks Project, Limits, Tag 01ZR.
 -/
 
 @[expose] public section
@@ -29,26 +30,7 @@ namespace AlgebraicGeometry
 
 /-- A map from a finite type quasi-coherent model to a finitely presented model
 which vanishes on the inverse limit vanishes at some finite stage.
-Source: Stacks Project, Limits, Tag 01ZR (3), affine vanishing argument
-(blueprint: lem-pc-fp-zero-map-descent).
-
-Proof: the quasi-compactness of `f` over an affine base makes `Xi` quasi-compact.
-Choose finitely many affine opens covering `Xi`. Their inverse images in every stage
-and in the limit are affine and cover. On each such open write the source module
-with finitely many generators and the target as the cokernel of a finite matrix `P`.
-The coordinate rings of these opens form a filtered colimit: Spec turns the ring
-colimit into the given affine limit, and tensoring with the coordinate ring of the
-open commutes with colimits. Lift the images of the source generators to vectors
-in the target's finite free presentation. Their images at the limit lie in the
-image of `P`; lift the finitely many coefficients witnessing this to one stage.
-Each entry of the difference between the lifted vector and `P` times its witness
-is zero in the colimit. The elementwise filtered-colimit criterion makes all these
-finitely many entries zero at a later stage. Thus the map kills every generator
-on this affine. Choose a common upper bound for the finitely many affines;
-vanishing persists under tensor pullback, so the sheaf map vanishes there globally.
-Only finite type of the source is needed. Neither Noetherianity of the rings nor
-finite presentation or quasi-separatedness of `f` is used. The zero source, zero
-target, empty scheme and a singleton directed index set satisfy the same argument. -/
+(Stacks, Tag 01ZR) -/
 theorem finitePresentation_zero_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

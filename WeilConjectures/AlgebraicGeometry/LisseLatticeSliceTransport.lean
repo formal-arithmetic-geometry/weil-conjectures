@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 /-!
 # Transport of integral lattices from a slice site
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), restriction to an etale member.
-(auxiliary; not a blueprint node)
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.4(6)]
 -/
 
 @[expose] public section
@@ -153,22 +154,7 @@ private noncomputable def pushforwardSheafificationIso
 
 /-- A lattice on the localized site transports to a lattice on the cover member's
 small site, with the identity coefficient identification on continuous functions.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), restriction to a covering member;
-Stacks Project, Tags 098K, 094T and 0951, localization of the pro-etale site.
-(auxiliary; not a blueprint node)
-
-Proof: an object over the etale member U is a weakly etale arrow V → U;
-composition with U → X identifies its small pro-etale site with the slice of
-X_proet over U. The inverse sends an object of the slice to its arrow to U;
-weak etaleness follows by cancellation. Both functors preserve and reflect covers,
-since the fpqc covering criterion uses only the underlying scheme arrows. Restrict
-the integral module along this equivalence. Continuous coefficients are unchanged on
-each object and morphism, so this is a module over the member's integral coefficient
-sheaf. Transport its finite free trivializations to obtain finite local freeness.
-The equivalence preserves sheafification and sectionwise tensor products; therefore
-change of rings commutes with it. Transport the pair's rationalization isomorphism
-and forget to module presheaves. The rational coefficient comparison is identity
-on continuous functions, exactly the displayed coefficient identification. -/
+(Stacks, Tags 098K, 094T and 0951) -/
 theorem lisse_lattice_of_slice (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)

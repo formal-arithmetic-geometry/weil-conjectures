@@ -24,20 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The generic stalk criterion for a nonzero ideal sheaf on an integral scheme.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL.
-Proof: Choose an affine neighborhood U of the generic point. The affine zero-set theorem
-and the fact that the corresponding prime is zero identify stalk surjectivity with a
-nonzero section ideal on U. The affine-section criterion gives surjectivity for a nonzero
-ideal, while the zero ideal has zero section ideal and cannot give surjectivity.
-For nontriviality, lift a nonzero element of J(U) to a section of J.toModules and take its
-germ. If this germ vanished, its image germ in the structure sheaf would vanish. Equality
-of germs gives zero after restriction to a smaller nonempty open, contradicting the
-injectivity of restriction maps on an integral scheme. Conversely, for the zero ideal,
-represent any stalk element by a section and shrink to an affine neighborhood. Its image
-belongs to the zero section ideal; sectionwise injectivity makes the restricted section
-zero, so the original germ is zero. Thus a nontrivial stalk excludes the zero ideal.
-(blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk-stalk)
--/
+(Stacks, Tag 01YL) -/
 theorem integral_ideal_nonzero_iff_generic_stalk (X : Scheme.{u}) [IsIntegral X]
     (J : X.IdealSheafData) :
     (J ≠ ⊥ ↔

@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 
 /-! # The counit calculation for tensor-Hom duality and a right adjoint
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9T.
-(blueprint: lem-sc-perfect-right-adjoint-tensor-hom-comparison).
+## References
+
+* Stacks Project, Duality for Schemes, Tag 0A9T.
 -/
 
 @[expose] public section
@@ -93,23 +94,7 @@ private theorem projection_duality
   apply (cancel_mono pfK.inv).1
   simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using h
 
-/-- The tensor-Hom chain of Tag 0A9T is postcomposition with the canonical mate.
-Source: Stacks Project, Duality for Schemes, Tag 0A9T.
-(blueprint: lem-sc-perfect-right-adjoint-tensor-hom-comparison).
-Proof: transpose both sides under `adj`. Naturality of its Hom equivalence turns
-postcomposition with the mate into application of the restricted direct image to q,
-followed by the counit defining that mate. Expand the two tensor-Hom equivalences:
-the first inserts evaluation of the pulled-back dual and the second inserts
-coevaluation of the original dual. Replace the inverses of pfK and pfD by their
-specified pullback-adjoint formulas. Naturality of the pullback and right-adjoint
-counits moves q and evaluation through those formulas. The tensorator's naturality
-identifies evaluation of the mapped pairing with pullback of evaluation. Its
-associativity and unit laws rearrange the resulting evaluation-coevaluation pair;
-the triangle identity cancels it. The remaining composite is the restricted direct
-image of q followed by pfK, the tensor of the right-adjoint counit at the unit, and
-the right unitor. This is precisely the transpose of the right-hand side.
-Full-subcategory morphisms have the same composition as the ambient morphisms,
-so the same calculation applies to the displayed `homMk` morphisms. -/
+/-- The tensor-Hom chain of Tag 0A9T is postcomposition with the canonical mate. -/
 theorem perfect_rightAdjoint_tensor_hom_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

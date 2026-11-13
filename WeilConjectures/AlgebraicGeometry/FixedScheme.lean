@@ -50,7 +50,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {C X s : Scheme.{u}} (aX : X ⟶ s) (c₁ c₂ : C ⟶ X) (h : c₁ ≫ aX = c₂ ≫ aX)
 
-/-- Blueprint `definition-correspondence--3`: Fixed scheme of a correspondence.
+/-- Fixed scheme of a correspondence.
 
 For `c = (c₁, c₂) : C ⟶ X ×_s X`, the fixed scheme is `Fix(c) = C ×_{X ×_s X, c, Δ_X} X`, the
 scheme-theoretic intersection of the image of `c` with the diagonal `Δ_X : X ⟶ X ×_s X`. Its
@@ -143,15 +143,14 @@ instance [IsSeparated aX] : IsClosedImmersion (fixedSchemeι aX c₁ c₂ h) :=
 instance [QuasiSeparated aX] : QuasiCompact (fixedSchemeι aX c₁ c₂ h) :=
   MorphismProperty.of_isPullback (isPullback_fixedScheme aX c₁ c₂ h).flip inferInstance
 
-/-- The fixed scheme `Fix(h) = Fix(𝟙, h)` of an endomorphism `h : X ⟶ X` over `s`
-(blueprint `definition-correspondence--3`): the scheme-theoretic equalizer of `h` and `𝟙 X`
-(`Scheme.fixedSchemeIsLimit`). -/
+/-- The fixed scheme `Fix(h) = Fix(𝟙, h)` of an endomorphism `h : X ⟶ X` over `s`:
+the scheme-theoretic equalizer of `h` and `𝟙 X` (`Scheme.fixedSchemeIsLimit`). -/
 abbrev Hom.fixedScheme (g : X ⟶ X) (hg : g ≫ aX = aX) : Scheme.{u} :=
   Scheme.fixedScheme aX (𝟙 X) g (by rw [hg, Category.id_comp])
 
 /-- A scheme `F` *has finitely many open-and-closed components* if its set `π₀(F)` of connected
-components is finite (blueprint `definition-correspondence--3`). The components are then open and
-closed (`isClopen_connectedComponent_of_hasFiniteClopenComponents`), and `F` is their disjoint union
+components is finite. The components are then open and closed
+(`isClopen_connectedComponent_of_hasFiniteClopenComponents`), and `F` is their disjoint union
 (`isIso_sigmaDesc_connectedComponents`). -/
 def HasFiniteClopenComponents (F : Scheme.{u}) : Prop :=
   Finite (ConnectedComponents F)

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.FieldScalarPresheafPullbackMono
 
 /-! # Scalar extension preserves monomorphisms
 
-Source: Stacks Project, Modules, Tag 02N4.
+## References
+
+* [Stacks Project, Tag 02N4](https://stacks.math.columbia.edu/tag/02N4)
 -/
 
 @[expose] public section
@@ -30,16 +32,7 @@ private theorem constantModules_preservesMonomorphisms
     intro U
     exact (ModuleCat.mono_iff_injective (f.app U)).mp inferInstance
 
-/-- Scalar extension preserves monomorphisms over a field.
-
-Source: Stacks Project, Modules, Tag 02N4.
-(blueprint: lem-sc-field-scalar-extension-mono).
-
-Proof: the inclusion of sheaves into presheaves preserves monomorphisms, the
-conversion to modules over the constant ring presheaf preserves pointwise
-injections, and extension of scalars from a field preserves monomorphisms
-before sheafification. Module sheafification preserves finite limits and hence
-monomorphisms. Compose these four preservation statements. -/
+/-- Scalar extension preserves monomorphisms over a field (Stacks, Tag 02N4). -/
 theorem fieldScalarExtension_preservesMonomorphisms
     {k : Type u} [Field k] (X : TopCat.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})

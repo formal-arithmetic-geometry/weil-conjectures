@@ -17,16 +17,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The localization colimit construction required for the filtered-colimit theorem.
-
-The proof follows the fraction construction for Tag 037D: induced maps between the
-localizations at contracted primes form a functor, and the canonical localization of
-the colimit is its colimit.  The detailed fraction and filteredness argument is split
-into this intermediate statement for independent formalization.
-(blueprint: lemma-quasi-finite-coordinates--1)
-The proof is the standard fraction construction: represent numerators and denominators
-at a common filtered stage, lift equality witnesses to a later stage, and apply the
-universal property of the filtered colimit. -/
+/-- The localization colimit construction required for the filtered-colimit theorem:
+induced maps between the localizations at contracted primes form a functor, and the
+canonical localization of the colimit is its colimit (Stacks, Tag 037D). -/
 theorem filteredColimitLocalizationAtPrime_data
     {I : Type v} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

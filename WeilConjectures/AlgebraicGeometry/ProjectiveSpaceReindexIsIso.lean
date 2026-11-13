@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 
 /-! # Invertibility of the coordinate reindexing morphism
 
-Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
-(blueprint: lem-weil-pbc-projective-space-reindex-is-iso).
+## References
+
+* [Stacks Project, Tags 01NF and 01NE](https://stacks.math.columbia.edu/tag/01NF)
 -/
 
 @[expose] public section
@@ -24,26 +25,8 @@ namespace AlgebraicGeometry.ProjectiveSpace
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The morphism defined by the coordinate sections in a bijectively renamed order
-is an isomorphism. No finiteness or nonemptiness assumption is needed.
-
-Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
-(blueprint: lem-weil-pbc-projective-space-reindex-is-iso).
-
-Proof: On the open indexed by i, the free generator is the pullback of T_(b i)
-under the identity. The coefficients of the other sections are T_(b j)/T_(b i).
-The standardOpenIso identifies these opens with relative affine spaces over S.
-After restriction over an affine open Spec R of S, the construction
-homOfIsFreeGenerator therefore has the map of polynomial coordinate rings
-over R sending T_j/T_i to T_(b j)/T_(b i), and fixing R by
-homOfIsFreeGenerator_over. These affine opens cover the relative charts. Bijectivity of b
-identifies the variables other than i with the variables other than b i, so this
-ring map is an isomorphism, with inverse given by b.symm. These affine maps have
-the same coordinate-ratio formulas on intersections. The maps formed by b and
-b.symm compose to the identity on every standard chart, since their maps on the
-base and on all coordinate ratios are identities. The standard charts cover,
-so equality of these composites holds globally. Thus the displayed morphism
-has a two-sided inverse. For empty coordinate types the schemes are empty and
-the same chartwise equality argument applies to the empty cover. -/
+is an isomorphism. No finiteness or nonemptiness assumption is needed
+(Stacks, Tags 01NF and 01NE). -/
 theorem isIso_homOfIsFreeGenerator_reindex (β γ : Type u) (b : γ ≃ β)
     (S : Scheme.{u}) :
     let s := fun j : γ ↦ Scheme.Modules.pullbackSection (𝟙 ℙ(β; S))

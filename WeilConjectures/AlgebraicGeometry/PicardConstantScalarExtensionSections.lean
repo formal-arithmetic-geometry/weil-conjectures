@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
 
 /-! # Pointwise scalar extension of a constant module presheaf
 
-Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation;
-the representing-object argument in lem-sc-picard-constant-tensor-balanced-sections.
+## References
+
+* Stacks Project, Varieties, Tag 0BED.
 -/
 
 public section
@@ -160,22 +161,7 @@ private def extensionCorepresentableBy :
   homEquiv_comp := by intros; rfl
 
 /-- Extension of a constant module to the structure presheaf is pointwise base change.
-Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation;
-representing-object argument of lem-sc-picard-constant-tensor-balanced-sections.
-(blueprint: lem-sc-picard-constant-scalar-extension-sections).
-
-Proof: Construct E(V) = O_Y(V) tensor_k M, with restriction sending a tensor s
- to res(a) tensor s. Identity, composition, and semilinearity follow on pure tensors.
-For any structure-module presheaf H, a morphism E to H gives a morphism from the
-constant M presheaf to restriction of scalars of H by evaluating at 1 tensor s.
-Conversely extend such a morphism by a tensor s mapping to a times its value at s.
-The scalar-extension Hom equivalence makes these assignments well-defined and inverse.
-Restriction compatibility follows from the same formulas and res(1)=1. They are
-natural in H. Thus E and the chosen pullback represent the same Hom functor;
-uniqueness of representing objects gives a presheaf isomorphism, whose components
-are these linear equivalences.
-This includes the empty open and zero M; no nonzero ring or geometric assumption
-is used in the scalar-extension adjunction. -/
+(Stacks, Varieties, Tag 0BED) -/
 def picardConstantScalarExtensionSections
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (V : Y.Opens) :
@@ -189,8 +175,7 @@ def picardConstantScalarExtensionSections
           (picardConstantVector k Y M)))).toLinearEquiv
 
 /-- The identifications `picardConstantScalarExtensionSections` commute with restriction:
-restriction of the pullback corresponds to restricting the ring coefficient.
-(blueprint: lem-sc-picard-constant-scalar-extension-sections). -/
+restriction of the pullback corresponds to restricting the ring coefficient. -/
 theorem picardConstantScalarExtensionSections_map
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k)

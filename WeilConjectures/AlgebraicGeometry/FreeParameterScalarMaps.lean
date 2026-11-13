@@ -22,7 +22,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Canonical free-parameter evaluation data and coherence.
-Source: Stacks 08J7, 07A6, 07A7 (auxiliary; not a blueprint node). -/
+
+## References
+
+* Stacks Project, Tags 08J7, 07A6, 07A7, 08FI, 03D2, 03EK, 07A4 and 0D6D.
+* HRS, Section 3.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,9 +42,7 @@ namespace Profinite.CondensedAction.InternalBar
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The actual free-forgetful adjunction, determining the generator inclusion.
-Source: step 1, the universal property of the free internal module
-(auxiliary; not a blueprint node). -/
+/-- The free-forgetful adjunction, determining the generator inclusion. -/
 def freeAdjunction : free R ⊣
     Mod.forget R.X ⋙ sheafCompose (coherentTopology Profinite.{u})
       (forget AddCommGrpCat.{u + 1}) :=
@@ -50,8 +53,7 @@ end Profinite.CondensedAction.InternalBar
 
 namespace AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
 
-/-- The representable condensed set of a profinite parameter.
-Source: Stacks 08FI, 08J7; HRS Section 3 (auxiliary; not a blueprint node). -/
+/-- The representable condensed set of a profinite parameter. -/
 abbrev parameter (P : Profinite.{u}) :=
   ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj P
 
@@ -98,8 +100,7 @@ attribute [local instance] pointFour pointGood12 pointGood23 pointLeft pointRigh
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The recorded free module on h_P.
-Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
+/-- The free module on h_P. -/
 abbrev freeParameter (P : Profinite.{u}) :=
   (Profinite.CondensedAction.InternalBar.free (Mon.mk R.X)).obj (ProfiniteFreeSlice.parameter P)
 
@@ -115,19 +116,16 @@ section Scalars
 variable (S : Profinite.CondensedRing.{u}) [IsCommMonObj S.X]
   (φ : R.X ⟶ S.X) [IsMonHom φ]
 
-/-- Exact coefficient restriction at the condensed point.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+/-- Exact coefficient restriction at the condensed point. -/
 abbrev restrictPoint : PointModules S ⥤ PointModules R := Mod.comap φ
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Exact coefficient restriction on the small pro-etale site.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+/-- Exact coefficient restriction on the small pro-etale site. -/
 abbrev restrictScheme (X : Scheme.{u}) : Modules S X ⥤ Modules R X :=
   Mod.comap (coefficientMap φ X)
 
-/-- The action identification for point pullback and restriction of scalars.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+/-- The action identification for point pullback and restriction of scalars. -/
 def restrictPointPullD (X : Scheme.{u}) :
     (restrictPoint R S φ).mapDerivedCategory ⋙ pointPullD R X ≅
       pointPullD S X ⋙ (restrictScheme R S φ X).mapDerivedCategory :=
@@ -135,8 +133,7 @@ def restrictPointPullD (X : Scheme.{u}) :
     Functor.mapDerivedCategoryNatIso ((upperStarFromPoint X).mapModComapIso φ) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The ordinary free-generator coefficient arrow, literally [t] ↦ [t].
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The ordinary free-generator coefficient arrow, literally [t] ↦ [t]. -/
 def freeGeneratorScalar (P : Profinite.{u}) :
     freeParameter R P ⟶ (restrictPoint R S φ).obj (freeParameter S P) :=
   ((Profinite.CondensedAction.InternalBar.freeAdjunction (Mon.mk R.X)).homEquiv _ _).symm
@@ -155,8 +152,7 @@ attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
 attribute [local irreducible] restrictPointPullD
 
 /-- Canonical scalar/pullback comparison: transpose pullback of the scalar unit
-through the action identification. This definition precedes its isomorphism claim.
-Source: Stacks 07A6 and 0D6D (auxiliary; not a blueprint node). -/
+through the action identification. -/
 def scalarPullComparison {Y X : Scheme.{u}} (f : Y ⟶ X)
     (M : DerivedCategory (Modules R X)) :
     (Mod.extendScalars (coefficientMap φ Y)).leftDerivedFunctor.obj
@@ -170,16 +166,7 @@ def scalarPullComparison {Y X : Scheme.{u}} (f : Y ⟶ X)
 
 attribute [local irreducible] scalarPullComparison
 
-/-- Scalar extension commutes with exact geometric inverse image in this normalized form.
-Source: Stacks 07A4 and 0D6D, node proof step 9
-(auxiliary; not a blueprint node).
-Proof: choose a K-flat resolution of M. Geometric inverse image is exact, strong
-monoidal and preserves flat objects, so its termwise image computes the pulled
-K-flat tensor. The balanced scalar tensor comparison is an isomorphism on each
-term, normalized by x ↦ 1 tensor x. It commutes with differentials and descends to
-the derived isomorphism. Scalar transposition identifies it with the displayed
-scalar-unit formula, so the specified map itself is invertible without flatness
-of the coefficient map. -/
+/-- Scalar extension commutes with exact geometric inverse image in this normalized form. -/
 @[instance] theorem scalarPullComparison_isIso {Y X : Scheme.{u}} (f : Y ⟶ X)
     (M : DerivedCategory (Modules R X)) : IsIso (scalarPullComparison R S φ f M) := by
   -- Keep the auxiliary ringed-site localization instance local to this call.

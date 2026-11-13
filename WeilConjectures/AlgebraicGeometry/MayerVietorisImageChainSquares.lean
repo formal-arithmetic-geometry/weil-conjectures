@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.OpenImageDirectImageComparisonRestricti
 
 /-! # Explicit restriction-induced comparison maps
 
-Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-image-chain-data).
+## References
+
+* [Stacks, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
 -/
 
 @[expose] public section
@@ -135,18 +137,7 @@ private theorem map_biprod_desc_square
   rw [hr, hs]
 
 /-- The explicit image components commute with the pair of units and the
-restriction difference. Source: Stacks Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-image-chain-squares).
-
-Proof: On a test open A, the comparison is the identity identifying
-I(h⁻¹(A ∩ W)) with I(h⁻¹(A) ∩ h⁻¹(W)); scalar actions agree by the
-restriction formula for h-sharp. It commutes with restrictions to smaller
-opens. Thus h_* of each restriction unit, followed by the comparison and
-restriction of f, is f followed by the corresponding restriction unit of J.
-The two components give the first square by the biproduct universal property.
-The same naturality for U ∩ V ⊆ U and U ∩ V ⊆ V gives the second square;
-additivity preserves its minus sign. The sectionwise calculation uses only
-functorial restriction, so also applies to empty and repeated opens. -/
+restriction difference. (Stacks, Tags 08FE, 08BV) -/
 theorem schemeMV_image_chain_squares
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

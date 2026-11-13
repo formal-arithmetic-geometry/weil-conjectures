@@ -12,8 +12,9 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 
 /-! # Scalar endomorphisms on module cohomology
 
-Source: Stacks Project, Cohomology, Section 20.11, Tag 01DZ
-(blueprint: lem-weil-pbc-module-cohomology-scalar-endomorphism).
+## References
+
+* [Stacks, Cohomology, Tag 01DZ]
 -/
 
 @[expose] public section
@@ -61,20 +62,7 @@ private theorem scalarEnd_naturality {X : Scheme.{v}} {G H : X.Modules}
   exact ((g.val.app U).hom.map_smul _ t).symm
 
 /-- An endomorphism given by a global scalar on sections induces the same scalar on
-module cohomology.
-
-Source: Stacks Project, Cohomology, Section 20.11, Tag 01DZ, construction by injective
-resolutions; also coherent.tex, paragraph preceding Lemma 02O8.
-(blueprint: lem-weil-pbc-module-cohomology-scalar-endomorphism).
-
-Proof: Multiplication by the global section r acts on every term of an injective
-resolution of G, using its restriction to each open. This commutes with differentials
-and extends tau, since the section formula determines tau. The comparison theorem for
-injective resolutions says this lift computes H^q(tau). Global sections turns the lift
-into multiplication by r on the resolution complex. Its induced map on kernels modulo
-images is multiplication by r in the module cohomology object. The argument works for
-q = 0, the zero scalar, the zero module and the empty scheme without any extra hypothesis.
--/
+module cohomology (Stacks, Tag 01DZ). -/
 theorem moduleCohomology_scalar_endomorphism {X : Scheme.{v}} (G : X.Modules)
     (tau : G ⟶ G) (r : (moduleRings X.toRingedSpace).obj.obj (op ⊤))
     (htau : ∀ (U : X.Opens) (t : G.val.obj (op U)),

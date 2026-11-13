@@ -15,8 +15,9 @@ import WeilConjectures.RingTheory.ModuleLocalizationTowerVanishing
 /-!
 # Localization internal Hom and the multiplication tower
 
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af,
-equivalence of (1) and (3) (auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 0997]
 -/
 
 @[expose] public section
@@ -28,26 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Internal RHom from the coefficient localization vanishes exactly when a derived limit
-of the multiplication tower vanishes, on the slice site.
-
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af,
-equivalence of (1) and (3) (auxiliary; not a blueprint node).
-
-Proof:
-1. The coefficient localization is the sequential colimit of repeated multiplication
-   on the unit sheaf. The countable free telescope map is monic by the sequential
-   telescope theorem in a Grothendieck abelian category. The colimit universal
-   property identifies its cokernel with the coefficient localization.
-2. Embed this short exact sequence in degree zero and apply the distinguished-triangle
-   construction. Contravariant derived internal Hom gives a distinguished triangle
-   whose first object is the internal Hom in the statement.
-3. The free coefficient telescope duality calculation identifies the middle map with
-   the Roos endomorphism on the product of restricted copies of K, including the
-   specified derived local-section multiplication.
-4. In a distinguished triangle the first object vanishes exactly when the middle
-   map is invertible. Apply this both to the Hom triangle and to the triangle in the
-   supplied derived-limit witness. Conjugation by the product isomorphism preserves
-   invertibility. No choice or uniqueness theorem for derived limits is needed. -/
+of the multiplication tower vanishes, on the slice site (Stacks, Tag 0997). -/
 theorem localHom_zero_iff_multiplicationTower_zero
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))

@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineOverLimitInclusion
 /-!
 # Existence of inverse limits with affine transition morphisms
 
-Source: Stacks Project, Limits, Lemmas 01YX and 01YW
-(blueprint: lem-weil-pbc-limit-affine-transition).
+## References
+
+* Stacks Project, Limits, Lemmas 01YX and 01YW.
 -/
 
 @[expose] public section
@@ -48,12 +49,7 @@ private theorem hasLimit_affineOver
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Core existence of the limit cone for a cofiltered diagram with affine transitions.
-
-The proof constructs the relative spectrum of the filtered colimit of the pushforward
-structure algebras along one stage.  On every affine open of that stage, the resulting
-cone is the spectrum of a filtered colimit of rings, hence is limiting; compatible local
-factorizations glue uniquely.  This is the construction in Stacks, Limits, Lemma 01YX.
-(blueprint: lem-weil-pbc-limit-affine-transition-core). -/
+(Stacks, Tag 01YX) -/
 theorem exists_limit_affine_transition_core
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -106,13 +102,8 @@ theorem exists_limit_affine_transition_core
   let : HasLimit D := Functor.Initial.hasLimit_of_comp t.op
   exact ⟨limit.cone D, ⟨limit.isLimit D⟩⟩
 
-/-- The affine-stage comparison for a limiting cone.
-
-When every stage is affine, the cone with vertex the spectrum of the filtered colimit of
-global sections is limiting by the affine-scheme limit theorem.  Uniqueness of limits then
-gives the displayed isomorphism and its compatibility with every projection.  This is
-Stacks, Limits, Lemma 01YW (blueprint: lem-weil-pbc-limit-affine-transition-affine-comparison).
--/
+/-- The affine-stage comparison for a limiting cone: when every stage is affine, the cone with
+vertex the spectrum of the filtered colimit of global sections is limiting. (Stacks, Tag 01YW) -/
 theorem limit_affine_transition_affine_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -141,10 +132,7 @@ theorem limit_affine_transition_affine_comparison
 /-- An inverse system over a directed set with affine transition morphisms has a limit,
 its projections are affine, and inverse images of arbitrary opens of any stage are limits
 of the corresponding inverse images. For affine stages the limit is the spectrum of the
-colimit of their global sections.
-
-Source: Stacks Project, Limits, Lemmas 01YX and 01YW
-(blueprint: lem-weil-pbc-limit-affine-transition). -/
+colimit of their global sections. (Stacks, Tags 01YX and 01YW) -/
 theorem exists_limit_affine_transition
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

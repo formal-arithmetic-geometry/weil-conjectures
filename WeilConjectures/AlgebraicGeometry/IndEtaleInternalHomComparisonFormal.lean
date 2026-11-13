@@ -21,9 +21,6 @@ The composition, identity, shift and lower-bound clauses for the internal-Hom co
 They are specialised to `ModuleCat A` in
 `AlgebraicGeometry.Etale.indEtaleInternalHomComparison_coherence_and_bounds`.
 
-Source: Bhatt--Scholze, Lemma 6.3.16, with the closed monoidal mate calculus.
-(blueprint: lem-weil-pbc-ind-etale-internal-hom-coherence).
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.derivedHomUpperStarComparison_comp`: compatibility with composition.
@@ -31,6 +28,10 @@ Source: Bhatt--Scholze, Lemma 6.3.16, with the closed monoidal mate calculus.
 - `AlgebraicGeometry.Etale.derivedHomUpperStarComparison_shift_left`,
   `AlgebraicGeometry.Etale.derivedHomUpperStarComparison_shift_right`: compatibility with shifts.
 - `AlgebraicGeometry.Etale.isGE_derivedHom_obj`: the lower bound of the derived internal Hom.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.3.16
 -/
 
 @[expose] public section

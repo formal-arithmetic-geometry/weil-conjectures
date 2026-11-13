@@ -20,8 +20,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Right adjoints of proper perfect pushforward preserve coproducts
 
-Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R
-(blueprint: lem-sc-smooth-proper-tensor-direct-sums).
+## References
+
+* [Stacks, Tag 0A9R] (Duality for Schemes, Lemma 48.13.1)
 -/
 
 @[expose] public section
@@ -37,25 +38,7 @@ of Noetherian schemes preserves every set-indexed direct sum. Finite Tor dimensi
 written stalkwise: the source stalk, restricted along `f.stalkMap x`, has vanishing Tor
 above some bound against every module over the target stalk. The functor `R` and `eR`
 represent the restriction of the shared `schemeDerivedDirectImage f` to the full
-quasi-coherent subcategories; they do not supply an unrelated direct-image functor.
-Preservation of colimits of discrete shape says exactly that the canonical coproduct
-comparison is an isomorphism for every family, including the empty family.
-
-Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R
-(blueprint: lem-sc-smooth-proper-tensor-direct-sums).
-
-Proof. For a perfect object P on X, proper perfect direct image makes Rf_*P perfect
-(lem-pc-proper-perfect-direct-image-perfect). Perfect objects on Noetherian schemes are
-compact (lem-pc-perfect-object-compact), so Hom(Rf_*P,-) commutes with direct sums.
-Adjunction identifies this calculation with Hom(P,c(-)); compactness of P identifies
-Hom(P, the direct sum of c(K_j)) with the direct sum of Hom(P,c(K_j)). Thus Hom(P,-)
-of the canonical comparison is an isomorphism for every perfect P, and also every
-shift of P. The long exact Hom sequence makes its cone orthogonal to all these shifts.
-The class of objects whose shifts are orthogonal to that cone is closed under shifts,
-cones, retracts, and arbitrary sums. Perfect generation
-(lem-pc-derived-qcoh-perfect-generation) makes this class the entire category.
-Taking the cone itself gives its identity zero, so the cone vanishes and the comparison
-is an isomorphism. -/
+quasi-coherent subcategories. (Stacks, Tag 0A9R) -/
 theorem properPerfect_rightAdjoint_preservesCoproducts
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

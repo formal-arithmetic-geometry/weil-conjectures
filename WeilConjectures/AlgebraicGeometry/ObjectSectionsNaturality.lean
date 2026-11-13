@@ -101,12 +101,7 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Naturality of object sections under an étale arrow.
-Source: Stacks Project, Tags 03Q9 and 03S2; this is the pointwise
-comparison after evaluation at the identity étale object.
-Proof: expand the two comparison maps, use adjunction-unit naturality and
-pullback hom_ext for the defining square.
-(blueprint: lem-weil-pbc-object-sections-naturality) -/
+/-- Naturality of object sections under an étale arrow (Stacks, Tags 03Q9, 03S2). -/
 theorem objectSections_naturality {X : Scheme.{v}} {U V : X.Etale}
     (b : U ⟶ V) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     F.obj.map b.op ≫ (etaleObjectSectionsIso U).hom.app F ≫

@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsKernelReesFiniteExistence
 
 /-! # Finite graded kernel module of a coherent formal system
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Z, statement and affine proof;
-Section 0EHN (blueprint: lem-weil-pbc-formal-systems-kernel-rees-finite).
+## References
+
+* [Stacks Project, Tag 087Z](https://stacks.math.columbia.edu/tag/087Z)
+* [Stacks Project, Tag 0EHN](https://stacks.math.columbia.edu/tag/0EHN)
 -/
 
 @[expose] public section
@@ -27,31 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The sum of successive kernels is quasi-coherent and finite over the associated graded
-ideal algebra, with generators in degree zero and the action specified by local lifts.
-Source: Stacks, Lemma 087Z and Section 0EHN
-(blueprint: lem-weil-pbc-formal-systems-kernel-rees-finite).
-
-Proof:
-1. Repeated reduction identifies F_l / I^r F_l with F_r. All transitions are sheaf
-surjections. Lift a kernel section locally to F_(n+m+1); it belongs to I^n F_(n+m+1).
-Multiplying by I^m lands in K_(n+m). Differences of lifts belong to I^(n+1), hence are
-killed by I^m. Differences of representatives in I^(m+1) likewise act by zero. Glue the
-resulting bilinear maps. A common lift checks associativity, the unit, and the associated
-graded algebra multiplication (def-weil-pbc-coherent-formal-module).
-2. On an affine open, the formal system corresponds to a finite completion module M,
-with F_r = M/I^r M (lem-weil-pbc-coherent-formal-modules-affine). Its kernels are
-I^n M/I^(n+1) M. Kernels are quasi-coherent (pqf-lem-coherent-ft-locnoeth and
-lem-weil-pbc-quasi-coherent-module-kernel). Ideal products and quotients have the expected
-affine sections (lem-weil-pbc-ideal-times-quasi-coherent-affine-sections). Tilde preserves
-colimits, so identifies both sheaf sums with the associated sheaves of the corresponding
-algebraic direct sums, respecting the displayed operations
-(lem-weil-pbc-affine-tilde-gamma-adjunction; lem-weil-pbc-spec-module-tilde-sections).
-3. Finite generators of M/IM generate the associated graded module in degree zero
-(lem-weil-pbc-completed-module-associated-graded-generators). Tilde preserves the resulting
-surjection (lem-weil-pbc-affine-tilde-gamma-adjunction), giving finite degree-zero generators
-of the sheaf module over the sheaf algebra, without asserting O_X-finite type.
-4. Every point has such an affine neighbourhood. Quasi-coherence and finite generation
-are local (pqf-def-coherent), so the affine conclusions prove the statement globally. -/
+ideal algebra, with generators in degree zero and the action specified by local lifts
+(Stacks, Lemma 087Z and Section 0EHN). -/
 theorem formalSystems_kernel_rees_finite {X : Scheme.{ut}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I) :
     (∐ (formalKernelPiece F)).IsQuasicoherent ∧

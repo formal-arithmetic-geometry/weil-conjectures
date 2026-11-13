@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalizati
 
 /-! # The open direct-image mate of the fixed pullback comparison
 
-Source: Stacks Project, Cohomology, Tags 08FE, 079W and 0D5S.
-(blueprint: lem-pc-perfect-hom-open-comparison-mate-is-iso).
+## References
+
+* Stacks Project, Cohomology, Tags 08FE, 079W and 0D5S.
 -/
 
 @[expose] public section
@@ -121,37 +122,7 @@ private theorem openMateSuppliedCounit
 
 
 /-- The right mate of the fixed open pullback square is invertible, independently
-of the testing and coefficient objects.
-
-Source: Stacks Project, Cohomology, Lemma 20.32.4 (Tag 08FE),
-Lemma 20.28.1 (Tag 079W), and Lemma 20.27.2 (Tag 0D5S).
-(blueprint: lem-pc-perfect-hom-open-comparison-mate-is-iso).
-
-Proof: Put pi = pullback.fst s r and pi' = pullback.fst (B.ι ≫ s) r.
-The maps b and pi' identify B x_S T with the inverse-image open pi inverse B:
-b is an open immersion, and the cartesian universal property supplies inverse
-lifts between the two presentations over both Y x_S T and B. The mate is thus
-a map Rpi_* followed by restriction to B -> restriction to pi inverse B followed
-by Rpi'_* (with the latter restriction presented as Lb*).
-For the derived adjunctions induced by the tensor-pullback adjunctions and their
-specified derived comparison maps, this mate is the derived sectionwise identity
-of Tag 08FE. To check its normalization, evaluate the composition comparison on
-a K-flat complex: its defining left-derived counit equation is the ordinary
-pullback composition comparison. Transpose by the derived adjunctions, whose
-Hom equivalences on localized underived maps are pinned by the ordinary tensor
-adjunction. This gives the ordinary direct-image/restriction map on complexes.
-Choose a K-injective representative I of a target object. Restriction of I to
-the inverse-image open is K-injective by Tag 08BS, and both complexes at an open
-W of B have sections I(pi inverse W), with identical differentials. Hence the
-mate component is the identity under these comparisons and is invertible.
-The derived universal properties extend this identity to all derived objects.
-Changing either projection adjunction conjugates its mate by the invertible
-right-adjoint uniqueness comparisons. The supplied open adjunction changes
-sigma by left-adjoint uniqueness; its whiskered comparison and its mate are
-invertible. Thus the assertion holds for every supplied adjunction as stated.
-For B empty both functors take values in the zero category; for B top the square
-is the identity open square. The same calculation covers these cases and the
-zero complex. No flatness, finiteness or quasi-coherence is required. -/
+of the testing and coefficient objects (Stacks, Tags 08FE, 079W and 0D5S). -/
 theorem perfect_hom_open_comparison_mate_isIso
     {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}

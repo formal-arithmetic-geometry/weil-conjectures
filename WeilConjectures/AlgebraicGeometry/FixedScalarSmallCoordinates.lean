@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.FixedScalarEtaleModel
 
 /-! # Constant scalar coordinates commute with the small site presentation
 
-Source: Stacks Tags 03CY and 09A5.
+## References
+
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks Project, Tag 09A5](https://stacks.math.columbia.edu/tag/09A5)
 -/
 
 @[expose] public noncomputable section
@@ -22,21 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Reading a constant-ring module as a fixed-scalar sheaf and then in the small
 constant-ring model is ordinary small-site precomposition and the normalized scalar
 restriction. No complex, derived functor or integral completion occurs.
-
-Source: Stacks Tags 03CY and 09A5, integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
-
-Proof: compose both functors with the fully faithful constant-scalar restriction on
-the small site. On the left its counit cancels the inverse restriction used by
-fixedScalarProEtaleSheafEquivalence. On the right restriction along a.inv followed by
-constant-scalar restriction gives the action of a.inv applied to each constant section.
-The normalization of a and its inverse identity identify this with the constant section
-on the original site. Thus both resulting functors have identical underlying abelian
-sheaves, restriction maps, scalar actions and maps of modules. The identity functions
-on sections define mutually inverse natural module morphisms. Lift this natural
-isomorphism through the fully faithful restriction functor. The construction also works
-for zero rings and empty sites, since it uses no points or nonzero sections.
--/
+(Stacks, Tags 03CY and 09A5.) -/
 theorem fixed_scalar_small_coordinates (X : Scheme.{u})
     (k : Type (u + 1)) [CommRing k]
     (a : (sfbModelRings X).obj (adicLisseConstantRing X k) ≅

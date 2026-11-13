@@ -14,8 +14,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Exactness and K-injective preservation for open-immersion restriction
-Source: Stacks Project, Tag 08BS and sectionwise module limits (Tag 01AH).
-(blueprint: lem-pc-open-immersion-restriction-derived-properties).
+
+## References
+
+* Stacks Project, Tags 08BS and 01AH.
 -/
 
 @[expose] public section
@@ -26,17 +28,7 @@ namespace AlgebraicGeometry
 
 
 /-- Restriction along any open immersion is exact and preserves K-injective complexes.
-Source: Stacks Project, Tag 08BS and sectionwise module limits (Tag 01AH).
-Proof: identify the source with the image open subscheme. Under this isomorphism,
-restriction is the composite of the localized-site restriction, the exact equivalence
-from the localized site to the open subscheme, and the equivalence induced by the
-source isomorphism. The first functor preserves finite limits and colimits, since
-sections over opens in the source are the same sections in the target. It preserves
-K-injectives by Tag 08BS: extension by zero is an exact left adjoint, and the adjunction
-identifies Hom complexes against acyclic complexes. The two equivalences are exact and
-preserve K-injectives. Transport these properties across the natural restriction
-isomorphism and compose them. This also covers an empty image open.
-(blueprint: lem-pc-open-immersion-restriction-derived-properties). -/
+(Stacks, Tags 08BS and 01AH) -/
 theorem openImmersion_restriction_derived_properties
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     PreservesFiniteLimits (Scheme.Modules.restrictFunctor j) ∧

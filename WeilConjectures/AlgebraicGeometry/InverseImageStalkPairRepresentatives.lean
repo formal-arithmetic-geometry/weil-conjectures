@@ -19,23 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace TopCat
 
 /-- Two inverse-image stalk elements are unit germs on a common neighbourhood.
-Source: Stacks Project, Sheaves, Tags 008H, 008G and 007Z.
-(blueprint: lem-weil-pbc-inverse-image-stalk-pair-representatives).
-
-Proof: every stalk element is a colimit coprojection of a section of the
-inverse-image sheaf on a neighbourhood N. The sheafification unit is locally
-surjective: its locally generated image is a subsheaf R, and the universal
-property of sheafification gives a map back to R whose composite with inclusion
-is the identity. Therefore the section on N lifts through the unit on a smaller
-neighbourhood V of z. The pointwise left Kan extension is a colimit, so the lift
-comes from a section a on an open W of X, with V contained in f^{-1}W. Thus W
-contains f(z). The constructed adjunction unit is the presheaf Kan-extension
-unit followed by sheafification. Naturality and the neighbourhood-colimit
-relations show that the germ of its value on a equals the original element.
-Do this for both elements; restrict their representatives to W1 intersect W2.
-Naturality of the unit and the colimit relations preserve their germs.
-This argument allows the value universe to be larger than the space universe.
-For empty Z there is no z and hence no instance. -/
+(Stacks, Tags 008H, 008G, 007Z) -/
 theorem inverse_image_stalk_pair_representatives
     {X Z : TopCat.{u}} (f : Z ⟶ X) (A : X.Sheaf (Type (max u w))) (z : Z)
     (s t : colimit ((OpenNhds.inclusion z).op ⋙

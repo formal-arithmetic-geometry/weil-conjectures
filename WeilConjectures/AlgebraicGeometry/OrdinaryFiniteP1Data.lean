@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 /-!
 # Normalized ordinary finite projective-line duality data
 
-Source: blueprint proposition-adjunction-projective-line--1, lemma-cohomology-projective-line-trace
-and lemma-cohomology-projective-line-trace (auxiliary; not a blueprint node).
-
 ## Main definitions
 
 * `OrdinaryFiniteP1CounitNormalization`: the prescribed actual counit equation.
@@ -32,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The actual counit equation with the specified ordered projection map and trace.
-Naming this predicate keeps the normalized datum's dependent projections compact.
-Source: blueprint lemma-cohomology-projective-line-trace and
-proposition-adjunction-projective-line--1 (auxiliary; not a blueprint node). -/
+Naming this predicate keeps the normalized datum's dependent projections compact. -/
 def OrdinaryFiniteP1CounitNormalization (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (b : ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅
@@ -52,9 +47,7 @@ def OrdinaryFiniteP1CounitNormalization (A : Type (u + 1)) [CommRing A] (N : ℕ
 /-- The normalized projective-line decomposition and adjunction data. Every map in
 this record is constrained: the Chern class by the actual scalar Kummer boundary,
 the decomposition by its two components, and the adjunction by its actual counit.
-Trace is always `decomposition.inv ≫ biprod.snd`, not an independent chosen map.
-Source: blueprint lemma-cohomology-projective-line-trace, lemma-cohomology-projective-line-trace,
-proposition-adjunction-projective-line--1 (auxiliary; not a blueprint node). -/
+Trace is always `decomposition.inv ≫ biprod.snd`, not an independent chosen map. -/
 structure OrdinaryFiniteP1Datum (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) where
@@ -76,8 +69,7 @@ structure OrdinaryFiniteP1Datum (A : Type (u + 1)) [CommRing A] (N : ℕ)
   counit_normalization : OrdinaryFiniteP1CounitNormalization A N hA S
     decomposition adjunction
 
-/-- The trace is projection onto the second summand of the specified decomposition.
-Source: blueprint lemma-cohomology-projective-line-trace (auxiliary; not a blueprint node). -/
+/-- The trace is projection onto the second summand of the specified decomposition. -/
 def OrdinaryFiniteP1Datum.trace {A : Type (u + 1)} [CommRing A] {N : ℕ}
     {hA : (N : A) = 0} {t : OrdinaryFiniteTwistTransport A N hA}
     {S : Scheme.{u}} {hS : IsUnit (N : Γ(S, ⊤))}
@@ -88,9 +80,7 @@ def OrdinaryFiniteP1Datum.trace {A : Type (u + 1)} [CommRing A] {N : ℕ}
 
 /-- The canonical comparison on the two summands of the decomposition under inverse image.
 It is the biproduct map assembled from the images of its projections and the normalized
-shifted-line and constant-object comparisons.
-Source: blueprint lemma-cohomology-projective-line-trace, base-change assertion
-(auxiliary; not a blueprint node). -/
+shifted-line and constant-object comparisons. -/
 def ordinaryFiniteP1DecompositionSourceMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -104,9 +94,7 @@ def ordinaryFiniteP1DecompositionSourceMap (A : Type (u + 1)) [CommRing A] (N : 
       (ordinaryFiniteUnitPullback A f).hom)
 
 /-- Base-change compatibility of the normalized decomposition, its trace, and the
-actual adjunction counit, using the specified exchange and tensor comparisons.
-Source: blueprint proposition-adjunction-projective-line--1, final paragraph
-(auxiliary; not a blueprint node). -/
+actual adjunction counit, using the specified exchange and tensor comparisons. -/
 def OrdinaryFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (d : ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),

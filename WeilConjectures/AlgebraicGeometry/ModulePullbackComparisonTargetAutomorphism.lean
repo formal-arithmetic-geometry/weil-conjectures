@@ -16,8 +16,10 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 
 /-! # Changing the derived-to-ordinary comparison on a single module
 
-Source: Stacks Project, Tags 06YJ and 08HY; the degree-zero truncation argument
-in Step 4 of `lem-pc-affine-alternating-cech-base-change-factorization`.
+## References
+
+* [Stacks, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -58,20 +60,8 @@ private theorem rightExact_homology_zero_isIso
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((L.sc 0).mapHomologyIso F).hom
 
-/-- Every witnessing left-derived pullback comparison is invertible on zeroth homology.
-Source: Stacks Project, Tag 06YJ, and the degree-zero tensor calculation in Step 1 of
-lem-pc-module-pullback-comparison-target-automorphism.
-
-Proof: Choose a flat resolution of G supported in degrees at most zero, augmented to
-G[0]. Tensor pullback preserves its support. Its zeroth homology is the cokernel of
-the pulled-back differential in degrees -1 and 0. Right exactness of tensor pullback
-identifies this cokernel with a*G. The standard left-derived counit induces precisely
-this identification. For any other witnessing counit, uniqueness of the right Kan
-extension supplies an invertible natural transformation of the derived pullback whose
-composition with the standard counit is the given counit. Evaluating at G[0] and
-applying H0 expresses the given map as a composite of isomorphisms. The final
-single-complex identification is also an isomorphism. No flatness of G is required;
-for the zero module or empty scheme the same cokernel argument applies. -/
+/-- Every witnessing left-derived pullback comparison is invertible on zeroth homology
+(Stacks, Tag 06YJ). -/
 private theorem modulePullbackComparison_homology_zero_isIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -159,24 +149,7 @@ private theorem modulePullbackComparison_homology_zero_isIso
 
 
 /-- Two left-derived counits on a single module differ by an automorphism of its
-ordinary pullback. There is no cover, direct image or base-change square in this lemma.
-Source: Stacks Project, Tags 06YJ and 08HY; Step 4 of the affine alternating model
-factorization proof (the truncation argument is written out here).
-(blueprint: lem-pc-module-pullback-comparison-target-automorphism).
-
-Proof: Right Kan extension uniqueness gives an automorphism of the derived pullback
-functor relating the two witnessing counits. Derived tensor of a degree-zero module
-is nonpositive: resolve it by a bounded-above complex of flat modules in degrees at
-most zero. Right exactness identifies degree-zero homology of that tensor complex
-with ordinary tensor pullback, and the counit induces this identification. Thus both
-counits induce isomorphisms on H0. A map from this nonpositive object to a module in
-degree zero factors uniquely through its H0 truncation: in the truncation triangle,
-both Hom from the negative truncation and Hom from its shift by one vanish by the
-standard t-structure orthogonality. Apply this to both comparisons. Compose the
-inverse of H0(c0) with H0(c), and transport through the single-module H0 isomorphism,
-to obtain a module automorphism alpha. Full faithfulness of the single functor and
-uniqueness of the truncation factorization give c = c0 followed by alpha[0].
-This includes the zero module and the empty scheme; no flatness of G is used. -/
+ordinary pullback (Stacks, Tags 06YJ and 08HY). -/
 theorem modulePullbackComparison_target_automorphism
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

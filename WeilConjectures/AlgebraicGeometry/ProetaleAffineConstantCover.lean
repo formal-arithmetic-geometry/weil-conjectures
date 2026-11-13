@@ -15,9 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # An affine cover with a fixed constant sheaf description
-
-Source: blueprint `lemma-lattices-lisse-e-sheaves`, proof (2)
-(blueprint: lem-sfb-proetale-affine-constant-cover).
 -/
 
 @[expose] public section
@@ -31,22 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- A fixed constant description on a covering family can be realized on a single
-surjective quasi-compact weakly etale affine cover.
-
-Source: blueprint `lemma-lattices-lisse-e-sheaves`, proof (2), its finite affine
-refinement of the trivializing covering
-(blueprint: lem-sfb-proetale-affine-constant-cover).
-
-Proof: apply the definition of the pro-etale topology to the covering sieve of
-factorizations through the given family, at the terminal object. Refine the resulting
-quasi-compact covering by finitely many affine opens. Each member factors through
-one of the original covering objects, so restriction supplies its constant description.
-Their finite disjoint union is affine; its structure map is weakly etale and surjective,
-and is quasi-compact because the base is quasi-separated. The component inclusions
-form a disjoint covering family: an object mapping compatibly to two distinct
-components is empty. Glue the local isomorphisms to the restriction of the global
-constant sheaf using the sheaf of morphisms, then use the constant-sheaf restriction
-isomorphism. The same argument includes the empty base and empty refinement. -/
+surjective quasi-compact weakly etale affine cover. -/
 theorem exists_affine_constant_cover (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 2))) (S : Type (u + 2))

@@ -15,8 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.PinnedStalkTensor
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-pinned-tensor-square-right-summand).
+## References
+
+* Stacks Project, Tags 0DJA and 0BYJ.
 -/
 
 @[expose] public section
@@ -73,19 +74,7 @@ private theorem extendScalars_tensor_summand
   simp only [whiskerLeft_id, Category.id_comp]
   rfl
 
-/-- Scalar-tensor route on one summand, in explicit stalk coordinates.
-
-Proof: expand the complex tensorator as the total-complex oplax comparison and use
-its summand equation, which is the module tensorator followed by the target injection.
-The whiskerLeft summand equation moves t to its degree-q component. The bifunctor-map
-summand equation moves the tensor of κ_P with the identity to its degree-p component.
-Expand t, distribute whiskerLeft over composition, and apply whisker_exchange twice.
-Identity whiskerings cancel. This gives the stated module tensorator, followed by
-κ_P,p tensor κ_Q,q, identity tensor S(a)_q, the stalk-complex tensor injection, and the
-inverse pinned target comparison. No hypothesis on χ is used. Empty and infinite
-coproducts and zero modules require no special case: the equation is on one summand.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), local tensor comparison calculation.
-(blueprint: lem-pc-pinned-tensor-square-right-summand). -/
+/-- Scalar-tensor route on one summand, in explicit stalk coordinates (Stacks, Tag 0DJA). -/
 theorem pinned_tensor_square_right_summand
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

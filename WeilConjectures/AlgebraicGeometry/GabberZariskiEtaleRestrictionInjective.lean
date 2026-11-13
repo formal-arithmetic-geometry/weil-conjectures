@@ -16,8 +16,9 @@ import Mathlib.Topology.Sheaves.Stalks
 
 /-! # Gabber's Zariski--étale restriction injectivity
 
-Source: Stacks Project, Étale Cohomology, Tag 09ZF, first two proof paragraphs
-(blueprint: lem-weil-pbc-gabber-zariski-etale-restriction-injective).
+## References
+
+* [Stacks, Tag 09ZF]
 -/
 
 @[expose] public section
@@ -29,50 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The canonical Zariski comparison is the unique sheaf morphism compatible with
-both inverse-image units, and is injective on every open.
-
-Source: Stacks Project, Étale Cohomology, Tag 09ZF, first two proof paragraphs
-(blueprint: lem-weil-pbc-gabber-zariski-etale-restriction-injective).
-The isomorphisms `eX` and `eZ` identify the underlying presheaves with restriction
-along the open-subscheme inclusion. The isomorphisms `a` identify the preimage
-open with its scheme-theoretic fibre product; `ha` fixes their first projections.
-Thus these are choices of the identifications in the node, not additional assumptions.
-The global-sections factorization is the unit equation at `W = ⊤`: its middle
-map is the component of `beta` on the preimage of the top open, which is all of `Z`.
-
-Proof (the six steps of the node):
-1. Restrict the étale unit to opens (lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites).
-   Identify base changes of opens using lem-weil-pbc-open-immersion-base-change and
-   lem-weil-pbc-morphism-factors-through-open-subscheme. Its naturality gives a
-   sheaf map to the topological direct image. Adjunction
-   (def-weil-pbc-topological-inverse-image and
-   lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction) gives the unique `beta`
-   satisfying the unit equation; its naturality induces maps on stalks
-   (lem-weil-pbc-sets-inverse-image-stalk).
-2. The étale unit is the identity-indexed colimit coprojection followed by
-   sheafification (situation-conventions). Restrictions
-   compose the indexing morphism, and base change preserves finite limits, so the
-   index categories are filtered (situation-conventions).
-3. Equality of two pulled-back sections near a point becomes local equality in
-   the presheaf inverse image (lem-weil-pbc-site-sheafification-sections-local).
-   Pick a covering point above it. Filtered-colimit equality gives an étale
-   neighbourhood where the original sections agree
-   (lem-weil-pbc-filtered-colimit-sets-elementwise). Its image is an open
-   neighbourhood (lem-weil-pbc-etale-morphism-open-map); factor through this image
-   (lem-weil-pbc-morphism-factors-through-open-subscheme). The surjective étale
-   map to the image is a cover (definition-torsion-sheaves--3,
-   lem-weil-pbc-open-immersion-etale, def-weil-pbc-etale-site). The sheaf axiom
-   makes the sections equal there (situation-conventions and
-   lem-weil-pbc-open-immersion-monomorphism).
-4. Represent two inverse-image germs by sections on one common neighbourhood,
-   using lem-weil-pbc-sets-inverse-image-stalk. Equality of their images gives
-   equality on a smaller preimage neighbourhood by filtered-colimit equality.
-   Step 3 then gives equality of the original germs, hence stalk injectivity.
-5. Equal image sections have equal germs by step 4 and are equal by
-   lem-weil-pbc-sheaf-sections-determined-by-germs, giving sectionwise injectivity.
-6. At the top open the unit equation says restriction on global sections factors
-   through the topological unit and the injective component `beta_Z`.
--/
+both inverse-image units, and is injective on every open (Stacks, Tag 09ZF). -/
 theorem gabber_zariski_etale_restriction_injective
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))

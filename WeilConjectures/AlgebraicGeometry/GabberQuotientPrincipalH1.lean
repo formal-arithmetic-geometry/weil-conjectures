@@ -21,7 +21,9 @@ import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Degree-one vanishing on principal opens of a quotient
 
-Source: Stacks Project, Lemma 09ZC, principal-open step.
+## References
+
+* [Stacks Project, Tag 09ZC](https://stacks.math.columbia.edu/tag/09ZC)
 -/
 
 @[expose] public section
@@ -33,21 +35,7 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- First cohomology of the restriction of a finite constant sheaf to each principal
-open of `Spec (R/I)` is zero.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09ZC, third and fourth sentences.
-
-Proof: Lift `h` to `f` in `R`. If `f = 0`, the principal open is empty, so all abelian
-sheaves and all their cohomology groups there are zero. Otherwise `R_f` is a normal
-domain with fraction field `FractionRing R`, still separably closed. Localization
-commutes with quotient, giving `(R/I)_h` as a quotient of `R_f`. Its spectrum is a
-closed subscheme of `Spec R_f`, so Lemma 09ZB gives first constant cohomology zero.
-Identify `Spec ((R/I)_h)` with the principal open `D(h)`. Pullback of a constant sheaf
-is constant; cohomology is preserved under this scheme isomorphism. Finally identify
-the derived cohomology of the sheaf in degree zero with its Ext-defined `Sheaf.H`.
-The case `I = R` also gives the empty spectrum and causes no exception.
-(blueprint: lem-weil-pbc-gabber-quotient-principal-h1)
--/
+open of `Spec (R/I)` is zero (Stacks, Tag 09ZC). -/
 theorem gabber_quotient_principal_h1
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     (hsep : IsSepClosed (FractionRing R)) (I : Ideal R)

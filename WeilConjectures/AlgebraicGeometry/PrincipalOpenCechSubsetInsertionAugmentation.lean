@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSingletonAugmentationC
 
 /-! # Properties of explicit subset insertion
 
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
+## References
+
+* Stacks Project, Tag 08C1 (equation (20.40.0.1)) and Tag 01FM.
 -/
 
 @[expose] public section
@@ -65,20 +67,8 @@ private theorem sum_singleton_subsets (r : ℕ)
 
 set_option maxHeartbeats 800000 in
 -- The dependent coefficient and tuple transports require extra elaboration heartbeats.
-/-- Explicit subset insertion agrees with the singleton augmentation.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-augmentation).
-
-Proof: Expand the augmentation as restriction into the degree-zero tuple column
-followed by its total summand inclusion. In the finite subset insertion, all coordinates
-except singleton subsets are zero, and their insertions vanish by additivity.
-For a singleton, increasing enumeration is its unique one-tuple. Naturality of the
-restriction equivalence identifies restriction after transporting a global section
-with transporting its restriction to the corresponding principal open. The equality
-hes identifies the coefficient degrees, and proof irrelevance equates the transports.
-Summing these singleton insertions gives the degree-zero column inclusion, hence the
-augmentation. For the empty cover the sum and the degree-zero column are both zero. -/
+/-- Explicit subset insertion agrees with the singleton augmentation
+(Stacks, Tags 08C1 and 01FM). -/
 theorem principalSubsetInsertion_augmentation
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :

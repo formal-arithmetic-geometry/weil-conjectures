@@ -16,8 +16,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-- Each retained term has a finite coproduct presentation whose constituent maps
-belong to the prescribed sieve. Source: Stacks, Hypercoverings, 01GJ and 01GK.
-(auxiliary; not a blueprint node) -/
+belong to the prescribed sieve (Stacks, Tags 01GJ, 01GK). -/
 def StageSolves {X : Scheme.{u}} (K : SimplicialObject X.Etale)
     (S : ∀ n : ℕ, Sieve (K.obj (op (SimplexCategory.mk n))))
     {n : ℕ} (A : FiniteSplitReplacementStage K n) : Prop :=

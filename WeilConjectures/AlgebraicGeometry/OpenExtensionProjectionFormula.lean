@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedAdjunction
 import WeilConjectures.AlgebraicGeometry.OpenExtensionProjectionFormulaAux
 
 /-! # Projection formula for open extension by zero
-Source: Stacks Project, Tags 08BS, 01AK and 06YB.
-(blueprint: lem-pc-open-extension-projection-formula).
+
+## References
+
+* Stacks Project, Tags 08BS, 01AK and 06YB.
 -/
 
 @[expose] public section
@@ -31,9 +33,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Use the standard localization on the open scheme.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-open-extension-projection-formula). -/
+/-- Use the standard localization on the open scheme. (Stacks, Tag 05RU) -/
 local instance openExtensionProjectionStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -44,34 +44,7 @@ set_option maxHeartbeats 500000 in
 set_option linter.style.haveILetI false in
 /-- Exact extension by zero satisfies the tensor projection formula for any
 strong monoidal structure on the specified derived restriction functor.
-
-Source: Stacks Project, cohomology.tex, Tag 08BS (exact extension by zero),
-modules.tex, Tag 01AK; Tags 06YB and 06YH for the stalkwise tensor computation.
-(blueprint: lem-pc-open-extension-projection-formula).
-
-Proof: compose the inverse over-site equivalence with ordinary extension by zero
-(the extension presheaf followed by sheafification) to construct J. Both factors
-are exact. Derive the ordinary extension/restriction adjunction through the
-specified localizations, using their factorization isomorphisms separately.
-This gives J left adjoint to R. Its unit is invertible, as may be checked first
-on ordinary modules on U and then on complexes. The counit on any complex whose
-cohomology stalks outside U vanish is invertible: on U it is identified with the
-identity by the adjunction identities, and outside U both stalk cohomologies
-are zero. Thus these supported complexes are precisely J's essential image.
-They form a subcategory where R reflects isomorphisms, since the cone of such
-a map with acyclic restriction has acyclic stalks at every point of X.
-For A on U, J(A) tensor K is supported on U. Compute using K-flat representatives:
-stalks commute with the total tensor, K-flatness is stalkwise, and the acyclic
-stalk of J(A) outside U tensored with a K-flat stalk remains acyclic.
-Let p be the displayed adjunction transpose. Its source and target are both
-supported. Applying R to p gives, by the defining homEquiv equation,
-unit_(A tensor R(K)) inverse followed by (unit_A tensor identity) and μ_R.
-Each factor is invertible. Reflection on the supported subcategory therefore
-makes p invertible. No special choice of m is needed. Zero inputs and the
-empty open give the same calculation between zero objects. Independent
-localization universes do not affect the unit, counit or cone identities.
-The left adjoint is constructed as above and is uniquely determined up to the
-adjunction isomorphism; no arbitrary module or complex witness is chosen. -/
+(Stacks, Tags 08BS, 01AK, 06YB and 06YH) -/
 theorem exists_openExtension_projectionFormula (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

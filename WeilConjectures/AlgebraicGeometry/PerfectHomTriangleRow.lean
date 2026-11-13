@@ -13,8 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 /-! # Five-term additive Hom rows and their triangle presentations
 
-Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations).
+## References
+
+* Stacks Project, Tags 0149 and 08BW.
 -/
 
 @[expose] public section
@@ -23,10 +24,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Pretriangulated
 namespace AlgebraicGeometry
 
-/-- The five terms from Hom(M,T₂[-1]) through Hom(M,T₃), with the canonical
-connecting map. This is a construction from the supplied triangle, without choices.
-Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations). -/
+/-- The five terms from `Hom(M,T₂[-1])` through `Hom(M,T₃)`, with the canonical
+connecting map. -/
 noncomputable def perfectHomTriangleRow (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) (T : Triangle (schemeDerivedCategory Z)) :
@@ -38,10 +37,7 @@ noncomputable def perfectHomTriangleRow (Z : Scheme.{u})
     (AddCommGrpCat.uliftFunctor.{u}.map ((F.shift (0 : ℤ)).map T.mor₁))
     (AddCommGrpCat.uliftFunctor.{u}.map ((F.shift (0 : ℤ)).map T.mor₂))
 
-/-- Additive Hom rows are functorial in the supplied triangle. The boundary square
-is the naturality square of the canonical homology-sequence boundary.
-Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations). -/
+/-- Additive Hom rows are functorial in the supplied triangle. -/
 noncomputable def perfectHomTriangleRowFunctor (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) :
@@ -103,9 +99,7 @@ noncomputable def perfectHomTriangleRowFunctor (Z : Scheme.{u})
       simp only [Functor.map_comp]
 
 /-- A cocone of triangles gives a morphism from the diagram of Hom rows to its
-constant limit row. This uses only whiskering and exchange of the two indices.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations). -/
+constant limit row. -/
 noncomputable def perfectHomTriangleRowCoconeMap (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) {J : Type*} [Category J]
@@ -164,22 +158,7 @@ private noncomputable def inverseBoundaryWindowIso :
 end
 
 /-- Every consecutive short complex of the canonical five-term Hom row is itself
-presented by additive Hom of a distinguished triangle.
-
-Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations).
-
-Proof: The three zero composites are respectively the second map followed by the
-boundary, the boundary followed by the first map, and the first map followed by
-the second map. The distinguished-triangle identities and additivity prove them.
-For the first window rotate T and shift by -1. The shift-composition comparison
-identifies its third Hom term with Hom(M,T₁[0]); the sign on the middle component
-removes the sign in the shifted triangle. For the second window inverse-rotate T
-and shift by zero; negate the first comparison to match the inverse-rotation sign.
-For the third window shift T by zero. These give short-complex isomorphisms before
-ULift, which are then mapped by the additive ULift functor. Rotation, inverse
-rotation, and shift preserve distinguishedness. This argument also applies to zero
-objects and split triangles and uses no exactness or geometric hypotheses. -/
+presented by additive Hom of a distinguished triangle (Stacks, Tags 0149 and 08BW). -/
 theorem perfectHomTriangleRow_presentations (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) (T : Triangle (schemeDerivedCategory Z))

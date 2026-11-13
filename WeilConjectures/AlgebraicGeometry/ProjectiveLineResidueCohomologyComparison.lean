@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Cohomology of compatible projective-line residue fibres
 
-Source: Stacks Project, Tags 04DY, 03SI and 01F8.
+## References
+
+* Stacks Project, Tags 04DY, 03SI and 01F8.
 -/
 
 @[expose] public section
@@ -77,26 +79,8 @@ private theorem cohomology_square_equivalences
 
 /-- A commuting residue square of universal homeomorphisms conjugates cohomology
 pullback, with the sheaf obtained by restriction from the original projective line.
-This statement does not involve stalks or the derived exchange morphism.
-
-Source: Stacks Project, topological invariance Tags 04DY and 03SI, functoriality
-Tag 01F8, applied to the residue square in the proof of Tag 095T.
-(blueprint: lem-weil-pbc-p1-residue-cohomology-comparison).
-
-Proof: base change ρA and ρB to the projective lines. They remain universal
-homeomorphisms, so their cohomology pullbacks are additive equivalences by
-topological invariance. The equality hρA identifies the pullback of F₀ to the
-k-fibre with the original restriction of F to that fibre: compose the canonical
-inverse-image composition isomorphisms and commute inverse image with forgetting
-module coefficients. Compose the first cohomology equivalence with the induced
-coefficient isomorphism to obtain b₁. The square hρ similarly identifies pullback
-along ρB of the residue-target sheaf with pullback along ι of the k-fibre sheaf;
-compose the second cohomology equivalence with this coefficient isomorphism for
-b₂. Functoriality of cohomology pullback for composition, its naturality in
-coefficients, and associativity coherence of inverse image give the displayed
-equation. In degree zero this is ordinary restriction of sections; the same
-functoriality proves every higher degree. No torsion assumption, strict-local
-exchange, or proper-base-change theorem is needed. -/
+This statement does not involve stalks or the derived exchange morphism
+(Stacks, Tags 04DY, 03SI, 01F8). -/
 theorem Etale.projectiveLine_residueCohomologyComparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {S : Scheme.{u}} {A B : Type u} [CommRing A] [IsLocalRing A]

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Incoming kernel and image acyclicity for integer complexes
 
-Source: Stacks Project, Tags 015B and 08C2, conditions (3)(b) and (3)(c).
-(blueprint: lem-sc-integer-section-acyclic-incoming-kernel-image).
+## References
+
+* Stacks Project, Tags 015B and 08C2.
 -/
 
 @[expose] public section
@@ -139,21 +140,7 @@ private theorem cohomology_isZero_of_H {Y : Scheme.{u}} (M : Y.Modules) (q : ℕ
 
 /-- The incoming kernel and image have vanishing first module cohomology if the
 positive ordinary cohomology of differential cokernels and homology sheaves vanishes.
-Source: Stacks Project, Tag 015B, applied to the cycle and opcycle sequences;
-Tag 08C2, hypotheses (3)(b) and (3)(c).
-(blueprint: lem-sc-integer-section-acyclic-incoming-kernel-image).
-
-Proof: Write Q^j = coker(d^(j-1)), B^j = im(d^(j-1)), Z^j = ker(d^j).
-The sequence 0 -> H^j(F) -> Q^j -> B^(j+1) -> 0 gives H^1(B^(j+1)) = 0,
-because H^1(Q^j) and H^2(H^j(F)) vanish. Next,
-0 -> B^j -> Z^j -> H^j(F) -> 0 gives H^1(Z^j) = 0 from the vanishing
-of H^1(B^j) and H^1(H^j(F)). Open restriction preserves these short exact
-sequences. The natural module/ordinary cohomology comparison converts the
-hypotheses into zero objects in module right-derived sections. For the incoming
-map in degree p, its kernel is Z^(p-1) and its image is B^p. Both identifications
-come from the universal properties of kernels and images. This argument uses
-only two adjacent degrees, so no boundedness or limiting argument is needed.
-Zero complexes and empty opens satisfy the same sequences and identifications. -/
+(Stacks, Tags 015B, 08C2.) -/
 theorem integer_section_acyclic_incoming_kernel_image
     {Y : Scheme.{u}} (F : CochainComplex Y.Modules ℤ) (V : Y.Opens)
     (hcokernels : ∀ (n : ℤ) (q : ℕ),

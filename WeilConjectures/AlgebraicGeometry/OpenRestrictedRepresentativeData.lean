@@ -17,16 +17,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 /-- Literal open restriction represents derived open pullback and has invertible
-pullback counit along any morphism. Source: Stacks Project, Tags 06YB and 0D5U.
-(blueprint: lem-pc-open-restricted-representative-data).
-
-Proof: open restriction preserves K-flatness by the stalk criterion. Transport
-the K-flat counit isomorphism from derivedPullback_spec to the specified counit
-by uniqueness of left derived functors. Uniqueness of left adjoints identifies
-tensor pullback along U.ι with literal restriction. Apply this isomorphism to
-complexes and localization. Compose with the inverse specified counit along U.ι,
-the quotientCompQhIso factors, and derived pullback of eP.
-The construction applies to zero complexes and empty opens without extra choices. -/
+pullback counit along any morphism. (Stacks, Tags 06YB and 0D5U) -/
 theorem exists_open_restricted_representative_data
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

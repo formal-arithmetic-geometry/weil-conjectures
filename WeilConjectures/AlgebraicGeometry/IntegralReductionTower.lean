@@ -16,11 +16,9 @@ public import Mathlib.Topology.Algebra.Ring.Ideal
 /-!
 # Derived reduction towers over integral condensed coefficients
 
-This module constructs the derived reduction tower in the first paragraph of
-`definition-derived-adic-completeness--1` (blueprint: def-weil-integral-reduction-tower).
-Source: `literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
-sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md`,
-first paragraph.
+This module constructs the derived reduction tower of a derived complete complex over the
+integral condensed coefficients.
+
 The quotient coefficient maps are the canonical quotient maps on continuous
 integer-valued functions, pulled back along the pro-etale point map.  The
 compatibility theorem follows from the quotient identity by functoriality.
@@ -44,9 +42,6 @@ open Scheme
 
 /-- The quotient of the integral coefficient ring by the `n`th power of a
 chosen uniformizer ideal.
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
-sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md,
-first paragraph (blueprint: def-weil-integral-reduction-tower).
 -/
 noncomputable abbrev integralQuotient (ell : ℕ) [Fact ell.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ell)]
@@ -54,9 +49,6 @@ noncomputable abbrev integralQuotient (ell : ℕ) [Fact ell.Prime]
   PadicAlgCl.integers ell E ⧸ (Ideal.span ({π} : Set (PadicAlgCl.integers ell E))) ^ n
 
 /-- The condensed ring of continuous functions into the finite quotient.
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
-sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md,
-first paragraph (blueprint: def-weil-integral-reduction-tower).
 -/
 noncomputable abbrev integralQuotientRingObj (ell : ℕ) [Fact ell.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ell)]
@@ -66,9 +58,6 @@ noncomputable abbrev integralQuotientRingObj (ell : ℕ) [Fact ell.Prime]
   Profinite.continuousMapRingObj (integralQuotient ell E π n)
 
 /-- The quotient map on condensed rings.
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
-sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md,
-first paragraph (blueprint: def-weil-integral-reduction-tower).
 -/
 noncomputable def integralReductionRingMap (ell : ℕ) [Fact ell.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ell)]
@@ -80,9 +69,6 @@ noncomputable def integralReductionRingMap (ell : ℕ) [Fact ell.Prime]
     (Profinite.continuousMapRingSheafMap (Ideal.Quotient.mk _) continuous_quot_mk)
 
 /-- The pulled-back integral coefficient map.
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
-sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md,
-first paragraph (blueprint: def-weil-integral-reduction-tower).
 -/
 noncomputable abbrev integralReductionCoefficientMap (X : Scheme.{u})
     (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ell)]

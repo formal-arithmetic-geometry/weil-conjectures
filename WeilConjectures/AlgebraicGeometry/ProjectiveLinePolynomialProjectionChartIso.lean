@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 /-!
 # Polynomial projective-line projection on standard charts
 
-Source: Stacks Project, Constructions, Tag 01NG and its base change to Spec k.
-(blueprint: lem-sc-p1-polynomial-projection-chart-iso)
+## References
+
+* Stacks Project, Constructions, Tag 01NG.
 -/
 
 @[expose] public section
@@ -27,20 +28,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical linear projection of polynomial Proj is an isomorphism when
-restricted to either standard affine chart of the projective line.
-Source: Stacks Project, Constructions, Tag 01NG, base changed to Spec k.
-(blueprint: lem-sc-p1-polynomial-projection-chart-iso)
-
-Proof: by linearProjection_preimage_standardOpen, the source of the restriction
-is D₊(xᵢ). Identify it with Spec of the homogeneous localization at xᵢ, and
-identify the target standard open with affine space over Spec k. The chart
-formula awayι_linearProjection and homOfSections_resLE_standardOpenIso_hom
-identify the restricted map with the affine-coordinate map sending the other
-coordinate to xⱼ/xᵢ. The homogeneousLocalizationAwayXEquiv identifies the source
-ring with the polynomial ring in that ratio, so this map is an isomorphism.
-Reindex the complementary variables from Fin 2 to ULift (Fin 2); the down map
-is a bijection and induces the corresponding polynomial-ring isomorphism.
-Conjugating by these source and target chart isomorphisms proves the claim. -/
+restricted to either standard affine chart of the projective line (Stacks, Tag 01NG). -/
 theorem isIso_polynomial_linearProjection_restrict (k : Type v) [Field k]
     (hcov : (⨆ i : ULift.{v} (Fin 2),
       basicOpen (homogeneousSubmodule (Fin 2) k) (X i.down)) = ⊤)

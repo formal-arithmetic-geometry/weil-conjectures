@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 /-!
 # The cycle comparison for direct image before deriving
 
-Source: Stacks Project, Cohomology, Tag 01F4 (2), construction on complexes
-(blueprint: lem-pc-leray-complex-cocycle-comparison).
+## References
+
+* Stacks Project, Cohomology, Tag 01F4 (2).
 -/
 
 @[expose] public section
@@ -25,26 +26,7 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison from cohomology of global sections to global sections of the
 cohomology sheaf is natural in arbitrary nonnegative complexes, before any resolution
-or derived-functor identification is chosen.
-
-Source: Stacks Project, Cohomology, Tag 01F4 (2), cycle construction of the edge;
-the direct-proof exercise in its proof (expanded by K1)
-(blueprint: lem-pc-leray-complex-cocycle-comparison).
-
-Proof: Sections of the direct image on the whole target are sections on the inverse
-image of that open, identified with the whole source by `Opens.map_top`. This gives a
-natural isomorphism of the underlying abelian-group complexes. Global sections
-preserve kernels, so cycles of the sections complex identify with sections of the
-cycle sheaf. Apply sections to the cycle-to-homology quotient. The resulting map
-annihilates boundaries: the incoming differential factors through the boundary sheaf,
-whose composite with the cycle-to-homology quotient is zero. It therefore factors
-uniquely through the homology quotient of the sections complex. This factorization
-is a group homomorphism. For a cochain map, both composites with this quotient agree
-by naturality of the cycle inclusion and quotient; the quotient is epic, so the
-factorizations agree. These maps form the displayed natural transformation. The
-kernel identification supplies z and its inclusion equation, and the defining
-factorization supplies the homology equation. This argument includes degree zero
-(where the incoming differential is zero), zero complexes, and the empty scheme. -/
+or derived-functor identification is chosen. (Stacks, Tag 01F4 (2)) -/
 theorem leray_complex_cocycle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :
     ∃ τ :
       ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex

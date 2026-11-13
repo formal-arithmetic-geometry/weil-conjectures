@@ -12,8 +12,9 @@ public import Mathlib.Data.Fintype.Order
 
 /-! # Eventual vanishing in the kernel of the Koszul-to-Čech cocone
 
-Source: Stacks, Tags 08D0 and 08D1.
-(blueprint: lem-sc-koszul-cech-stage-kernel)
+## References
+
+* Stacks Project, Tags 08D0 and 08D1.
 -/
 
 @[expose] public section
@@ -140,24 +141,7 @@ private theorem koszul_transition_zero
       (koszulCech_evaluation_degree r J n)).mpr hh
   · rw [HomologicalComplex.extendMap_f_eq_zero _ _ p (by simpa using hp), zero_comp]
 
-/-- A finite-stage cochain with zero Čech image becomes zero at a later stage.
-Source: Stacks, Tag 08D0, proof's localization equality criterion, and Tag 08D1,
-finite total-degree diagonals (blueprint: lem-sc-koszul-cech-stage-kernel).
-
-Proof: Transport z through koszulCechHomObjIso and evaluate on the ordered exterior
-basis indexed by nonempty subsets J. Put g_J = product of f_j over J. Transport
-the zero-image hypothesis through principalCechObjIso. The cocone's formula and
-invertibility of its sign imply that every global-section coordinate m_J restricts
-to zero on D(g_J). By affine quasi-coherence this restriction is localization at
-g_J; the localization zero criterion gives a power g_J^k_J annihilating m_J.
-Choose k at least every k_J, possible since there are finitely many nonempty J.
-The specified transition from e to b = e+k multiplies the J-coordinate by g_J^k,
-so every coordinate at b is zero. The ordered exterior bases detect equality of
-the linear cochain components; the other tail terms are zero. Hence the cochain
-at b is zero. The diagram's object identifications transport this equality to
-its actual map. For r=0 there are no coordinates and z is already zero (b=e);
-for r=1 this is the usual localization zero criterion; nilpotent generators and
-F=0 require no exception. No assumption that z is a cycle is used. -/
+/-- A finite-stage cochain with zero Čech image becomes zero at a later stage. -/
 theorem koszulCechCocone_stage_kernel
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (F : CochainComplex

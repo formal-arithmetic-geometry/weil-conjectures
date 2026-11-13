@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Affine intersection morphisms after base change
 
-Source: Stacks Project, Tags 01S5, 01KP and 02KE.
+## References
+
+* Stacks Project, Tags 01S5, 01KP and 02KE
 -/
 
 @[expose] public section
@@ -22,19 +24,7 @@ namespace AlgebraicGeometry
 
 /-- An affine open in the source over an affine base remains affine over the new base.
 Both its inclusion in the new source and its map to the new base are affine morphisms.
-No affineness of the new base is asserted or needed.
-Source: Stacks Project, Tags 01S5 (affine morphisms and base change), 01KP
-(separated intersections), and the intersection calculation in Tag 02KE.
-(blueprint: lem-pc-finite-affine-cech-intersection-base-change).
-
-Proof: Write Y = f inverse image U. The restricted map Y -> U is separated and U
-is affine, so Y is separated. An affine open Z in Y has affine inclusion into Y:
-intersect Z with any affine chart of Y, and use separatedness to see the intersection
-is affine. Also Z -> U is affine, since both schemes are affine. The supplied square
-identifies X' with Y times_U T'. For W = g' inverse image of the image of Z in X,
-the square W -> Z over X' -> Y is cartesian, and W -> T' is the base change of Z -> U.
-Stability of affine morphisms under base change proves both assertions. This includes
-Z empty and an arbitrary, possibly nonaffine, T'. -/
+No affineness of the new base is needed. (Stacks, Tags 01S5, 01KP and 02KE.) -/
 theorem finiteAffineCech_intersection_baseChange {X T : Scheme.{u}} (f : X ⟶ T)
     [IsSeparated f] (U : T.Opens) (hU : IsAffineOpen U)
     (Z : (f ⁻¹ᵁ U).toScheme.Opens) (hZ : IsAffineOpen Z)

@@ -880,37 +880,7 @@ private theorem mono_desc_of_kernel_refinements
   infer_instance
 
 /-- Finite refinement makes the positive-degree bottom comparison a colimit isomorphism.
-Source: Stacks Project, Hypercoverings, Tag 01H0, first proof; the finite staircase
-argument of blueprint lem-sc-hypercover-bottom-refinement-descent.
-(auxiliary; not a blueprint node).
-
-Proof: use the explicit section bicomplex of an injective resolution and flip
-its indices so that resolution degree is first. The signed total flip is
-compatible with refinement and with the bottom inclusion. Injective-row
-acyclicity identifies its total cohomology with derived terminal sections.
-
-A finite descending staircase removes the leading positive resolution-degree
-component by subtracting the differential of a local primitive. The primitive
-detector permits both refinement of the hypercover and precomposition by a
-map of source objects; it detects zero maps without requiring one refinement
-that works for an arbitrary whole source object. Induction combines these
-zero-detection statements. In resolution degree zero, the evaluated initial
-kernel of the injective resolution gives the unique lift to F.
-
-Apply the staircase first to cycles. Any map out of derived terminal sections
-that kills all bottom comparison images vanishes; thus their supremum is top.
-Apply it to a bounding cochain to show, in degrees at least two, that each
-comparison kernel lies below the supremum of refinement-map kernels. In degree
-one the bottom map on homology is already monic, by the evaluated initial
-kernel and the fact that a bounding cochain has only one component.
-
-The homotopy cohomology diagram is filtered. Every refinement kernel dies in
-its colimit, and AB5 sends its comparison-kernel natural transformation to
-zero. Connectedness identifies the colimit of the constant target with that
-target, proving the displayed mediator monic. Its image contains all comparison
-images, so it is epic and hence invertible. Degree zero is treated separately
-in GrothendieckHypercoverZero. Empty covers and zero coefficient objects are
-included by the local primitive argument. -/
+(Stacks, Hypercoverings, Tag 01H0) -/
 theorem isIso_colimit_comparison_positive (F : Sheaf X.smallEtaleTopology A) (q : ℕ) :
     IsIso (colimit.desc (homotopyCohomologyDiagram A F (q + 1))
       (comparisonCocone A F (q + 1))) := by

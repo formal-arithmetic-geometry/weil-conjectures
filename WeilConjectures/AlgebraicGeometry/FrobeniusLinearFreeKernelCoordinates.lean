@@ -19,8 +19,9 @@ endomorphism `F` of its étale sheaf of sections, the sections over an étale `U
 abelian kernel of `F - 1` are the solutions `x : Fin n → Γ(U, ⊤)` of
 `x_i = ∑_j a_ij x_j ^ p`, naturally in `U`.
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-linear-free-kernel-stratification).
+## References
+
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section

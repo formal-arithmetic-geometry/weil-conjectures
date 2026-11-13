@@ -24,17 +24,8 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite constant models expressed by scheme pullbacks give local constancy in slices.
-Source: Stacks Project, Tags 098K and 099Y.
-(auxiliary; not a blueprint node).
-
-Proof: view each weakly etale covering morphism as an object of the small site.
-Its slice site is equivalent to the small pro-etale site of its source. Under this
-equivalence localized restriction is the scheme inverse image, and constant sheaves
-correspond by uniqueness of the left adjoint to sections. Transport each given
-constant model back across the equivalence. Finiteness is not needed for this transport.
-The empty covering and zero model require no separate choices.
--/
+/-- Finite constant models expressed by scheme pullbacks give local constancy in slices
+(Stacks, Tags 098K and 099Y). -/
 theorem finiteModels_over
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

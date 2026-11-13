@@ -11,8 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 import WeilConjectures.CategoryTheory.ShiftedCompositeComparison
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Composition of the normalized finite-line comparisons -/
 @[expose] public noncomputable section

@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 /-! # Core object comparison data (without the final Hom pin).
 
-Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data).
+## References
+
+* Stacks Project, Tags 09RE, 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -96,11 +97,8 @@ noncomputable def comparisonFromRestrictions
     rw [hγV]
     simp [δV]
 
-/-- The first localization-lifted comparison evaluated on a restricted object.
-Source: Stacks Project, Tag 08DW. The lifted isomorphism is the preimage of
-the composite of the first-open comparison, the site restriction comparison,
-the intersection comparison, and the inverse open restriction comparison.
-Whiskering the preimage back along `TU` recovers that composite exactly. -/
+/-- The first localization-lifted comparison evaluated on a restricted object
+(Stacks, Tag 08DW). -/
 theorem comparisonFromRestrictions_gammaU_on_image
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -137,11 +135,8 @@ theorem comparisonFromRestrictions_gammaU_on_image
   exact congrArg (fun a ↦ a.app F)
     (((Functor.whiskeringLeft C A T).obj TU).map_preimage δU.hom)
 
-/-- The second localization-lifted comparison evaluated on a restricted object.
-Source: Stacks Project, Tag 08DW. Whiskering the lifted second-open
-isomorphism along `TV` recovers the composite of the second-open comparison,
-the site restriction comparison, the intersection comparison, and the inverse
-open restriction comparison. -/
+/-- The second localization-lifted comparison evaluated on a restricted object
+(Stacks, Tag 08DW). -/
 theorem comparisonFromRestrictions_gammaV_on_image
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -178,11 +173,8 @@ theorem comparisonFromRestrictions_gammaV_on_image
   exact congrArg (fun a ↦ a.app F)
     (((Functor.whiskeringLeft C B T).obj TV).map_preimage δV.hom)
 
-/-- Evaluate a natural isomorphism at an object transported from a known component.
-Source: Stacks Project, Tag 08DW, functoriality of open restriction. Naturality
-along the isomorphism identifies the two components after mapping its forward
-arrow. Precompose with the mapped inverse and cancel the mapped inverse-forward
-composite to obtain the displayed conjugation. -/
+/-- Evaluate a natural isomorphism at an object transported from a known component
+(Stacks, Tag 08DW). -/
 theorem overlapNatIso_hom_app_of_iso
     {A T : Type*} [Category* A] [Category* T]
     (H K : A ⥤ T) (γ : H ≅ K) {x y : A} (e : x ≅ y) :
@@ -197,9 +189,7 @@ theorem overlapNatIso_hom_app_of_iso
     _ = H.map e.inv ≫ γ.hom.app x ≫ K.map e.hom := by
       simp only
 
-/-- The inverse component satisfies the same naturality transport equation.
-Source: Stacks Project, Tag 08DW. Apply the forward equation to the inverse
-natural isomorphism, whose source and target functors are interchanged. -/
+/-- The inverse component satisfies the same naturality transport equation (Stacks, Tag 08DW). -/
 theorem overlapNatIso_inv_app_of_iso
     {A T : Type*} [Category* A] [Category* T]
     (H K : A ⥤ T) (γ : H ≅ K) {x y : A} (e : x ≅ y) :
@@ -207,11 +197,7 @@ theorem overlapNatIso_inv_app_of_iso
   exact overlapNatIso_hom_app_of_iso K H γ.symm e
 
 /-- The first open-site comparison at any object is determined by its
-localization-lifted component on a restricted object.
-Source: Stacks Project, Tag 08DW. Transport the inverse comparison along an
-isomorphism from a restricted object by naturality. On that restricted object,
-the defining preimage equation identifies it with the inverse of the explicit
-comparison through `βU`, `τU`, `βW`, and `αU`. -/
+localization-lifted component on a restricted object (Stacks, Tag 08DW). -/
 theorem comparisonFromRestrictions_gammaU_inv_at_iso
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -367,11 +353,7 @@ noncomputable def openSiteReturnIso (X : Scheme.{u}) (U : X.Opens) :
     Functor.rightUnitor _
 
 /-- The open-site overlap comparison can be pinned to the ambient restriction
-triangle. Source: Stacks Project, Tags 08BT and 08BV. Restriction to an open is
-a localization, so its precomposition is fully faithful on functor categories.
-Descend the pasting of the two site-return maps, the over-site comparison and
-the nested scheme restriction comparison. The descent equation is the asserted
-triangle and holds also for the empty open. -/
+triangle (Stacks, Tags 08BT and 08BV). -/
 theorem openSiteOverlapIso_exists (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     let PU := (schemeOpenRestriction X U).mapDerivedCategory
     let LU := (overlapSiteInverse U).mapDerivedCategory
@@ -424,11 +406,8 @@ noncomputable def openSiteOverlapIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶
       (overlapSiteInverse W).mapDerivedCategory :=
   Classical.choose (openSiteOverlapIso_exists X i)
 
-/-- The site-return comparison is coherent with nested open restriction.
-Source: Stacks Project, Tags 08BV and 05RU. Both composites insert the same
-equivalence unit on the larger open, apply the over-site restriction comparison,
-and cancel the smaller-open equivalence by its unit. Exact derivation preserves
-these associators and natural isomorphisms. -/
+/-- The site-return comparison is coherent with nested open restriction
+(Stacks, Tags 08BV and 05RU). -/
 theorem openSiteReturn_overlap_triangle (X : Scheme.{u}) {W U : X.Opens}
     (i : W ⟶ U) :
     let PU := (schemeOpenRestriction X U).mapDerivedCategory
@@ -454,9 +433,7 @@ theorem openSiteReturn_overlap_triangle (X : Scheme.{u}) {W U : X.Opens}
   intro PU PW LU LW SP SU RU RW siteU siteW τ σ ω
   exact Classical.choose_spec (openSiteOverlapIso_exists X i)
 
-/-- Component form of the open-site restriction triangle.
-Source: Stacks Project, Tags 08BT and 08BV. Evaluate the natural triangle at
-the given derived object; its associator components are identities. -/
+/-- Component form of the open-site restriction triangle (Stacks, Tags 08BT and 08BV). -/
 theorem openSiteReturn_overlap_triangle_app (X : Scheme.{u}) {W U : X.Opens}
     (i : W ⟶ U) (E : schemeDerivedCategory X) :
     let PU := (schemeOpenRestriction X U).mapDerivedCategory
@@ -553,11 +530,7 @@ noncomputable def perfectOverlapOpenLiftObject
   letI : rY.EssSurj := Localization.essSurj rY W
   exact (derivedPullback f).obj (rY.objPreimage A)
 
-/-- The chosen global lift restricts to the pulled-back open object.
-Source: Stacks Project, Tag 08DW. Choose the localization preimage of the
-original open object. The open-pullback square identifies restriction after
-pullback with pullback after restriction; map the preimage isomorphism through
-the restricted pullback functor. Their composite gives the displayed iso. -/
+/-- The chosen global lift restricts to the pulled-back open object (Stacks, Tag 08DW). -/
 noncomputable def perfectOverlapOpenLiftIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
     (A : schemeDerivedCategory U.toScheme) :
@@ -580,10 +553,7 @@ noncomputable def perfectOverlapOpenLiftIso
       (morphismRestrict_ι f U)).symm.app M
   exact β' ≪≫ (derivedPullback (f ∣_ U)).mapIso e
 
-/-- The fixed restriction/pullback comparison on one open. Its implementation
-contains the derived open-site return, associator, and cartesian pullback
-comparison; keeping this composition named avoids unfolding it while
-constructing and comparing the three overlap diagram components. -/
+/-- The fixed restriction/pullback comparison on one open. -/
 @[irreducible] noncomputable def perfectOverlapRestrictionBeta
     {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.Opens) (T : X.Opens)
     (hT : T ≤ g ⁻¹ᵁ W) :
@@ -596,10 +566,8 @@ constructing and comparing the three overlap diagram components. -/
       Functor.isoWhiskerRight (openPullbackRestrictionIso g T W hT) _ ≪≫
       Functor.associator _ _ _
 
-/-- Component equation for the named restriction/pullback comparison.
-Source: Stacks Project, Tags 08DW and 08BV. The two associators have identity
-components, so the comparison first returns from the over-site and then
-applies the cartesian open-pullback comparison under the inverse site functor. -/
+/-- Component equation for the named restriction/pullback comparison
+(Stacks, Tags 08DW and 08BV). -/
 theorem perfectOverlapRestrictionBeta_hom_app
     {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.Opens) (T : X.Opens)
     (hT : T ≤ g ⁻¹ᵁ W) (E : schemeDerivedCategory Y) :

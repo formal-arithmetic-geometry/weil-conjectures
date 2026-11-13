@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GenericFlatness
 
 /-! # Shrinking near a generic fibre
 
-Source: Stacks Project, Tags 054Y and 054W.
+## References
+
+* [Stacks, Tag 054Y], [Stacks, Tag 054W]
 -/
 
 @[expose] public section
@@ -26,27 +28,7 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- Two closed subsets covering a fibre cover the family over a neighbourhood in
-its base point's closure.
-
-Source: Stacks Project, Tag 054Y (Lemma 37.24.5), applied after the reduction to the
-integral base in Tag 055N, proof, first two paragraphs.
-
-Proof: give the closure of `y` its reduced induced closed subscheme structure Z,
-using the vanishing ideal construction. Its inclusion j is a closed embedding,
-and its range is the closure of y. This space is irreducible and the scheme is
-reduced, so it is integral. The point η of Z over y specializes to every point of Z.
-Base change g along j to a finite type morphism f. Generic flatness (Tag 052A)
-gives a nonempty open U of Z on which f is flat. Since η specializes to every
-point, U contains η. Express U as the inverse image of an ambient open V in T;
-then V contains y. For x mapping into V intersected with the closure of y, lift
-x to a point w of the pullback, whose image lies in U. Flatness lifts the
-generalization from η to f(w), giving a point a over η specializing to w.
-Projecting a to P gives a point of the original fibre over y, hence of C union D.
-The projection of a specializes to x. Since C union D is closed, it contains x.
-An empty generic fibre causes no exception: the same lifting argument shows
-there can be no such x.
-
-(blueprint: lem-sbc-generic-fibre-closed-cover-spread) -/
+its base point's closure (Stacks, Tags 054Y, 055N). -/
 theorem exists_open_generic_fibre_closed_cover {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (C D : Set P)
     (hC : IsClosed C) (hD : IsClosed D) (hcover : g ⁻¹' {y} ⊆ C ∪ D) :

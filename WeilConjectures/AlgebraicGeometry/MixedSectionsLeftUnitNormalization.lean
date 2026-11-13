@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 
 /-! # Left path of the normalized mixed Leray unit diagram
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-left-unit-normalization).
+
+## References
+
+* Stacks Project, Tags 0D5T and 0D5W.
 -/
 
 @[expose] public section
@@ -155,22 +157,8 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option maxHeartbeats 700000 in
 -- The statement expands sheaf, scalar, and localization instances.
-/-- The left path becomes the iterated scalar-factor path before any unit cancellation.
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
-in lem-sc-mixed-sections-composition-kinjective.
-(blueprint: lem-sc-mixed-sections-left-unit-normalization).
-
-Proof: Expand p using the normalized direct-image composition equation:
-unit_Dfg followed by e.inv equals unit_Dg at Df(K), followed by RDg(unit_Df).
-Naturality of c_g at unit_Df moves RDg(unit_Df) across c_g. Apply the mixed Leray
-unit equation for g at Df(K). The two remaining maps inside Sg combine, by
-functoriality, with the global-sections unit on Y. Apply the mixed Leray unit
-equation for f at K. Distribute Sg over this composite to obtain b. The underived
-Leray comparisons are identity on sections; their homotopy composition maps
-cancel with their inverses. No unit is canceled, and I need not be K-injective.
-For identity maps, zero complexes, and empty schemes the same equations hold;
-no nonemptiness, boundedness, flatness, or preservation of K-injectivity is used.
-The sheaf and module localization universes remain independent. -/
+/-- The left path becomes the iterated scalar-factor path before any unit cancellation
+(Stacks, Tags 0D5T and 0D5W). -/
 theorem mixedSections_left_unit_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

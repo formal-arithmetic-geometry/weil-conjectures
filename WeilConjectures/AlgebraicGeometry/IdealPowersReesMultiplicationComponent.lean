@@ -44,15 +44,8 @@ private theorem power_quasicoherent {X : Scheme.{v}} (J : X.IdealSheafData)
     exact (Modules.ideal_times_quasiCoherent_affine_sections J F).2.2.1 _ (Nat.succ_pos n)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Componentwise multiplication map; this is the affine gluing step in Tag 02O8.
-Source: Stacks Project, coherent.tex, Tag 02O8, lines 5330--5400.
-(blueprint: lem-weil-pbc-ideal-powers-rees-multiplication-component)
-
-Proof: on each affine open, multiplication by the coefficient preserves the ideal-power
-product by the ideal-power and extended-ideal section formulas. These local maps agree on
-overlaps and glue to a module-sheaf morphism; the displayed formula is the resulting
-coefficient identity.
--/
+/-- Componentwise multiplication map by a Rees coefficient on the ideal-power products.
+(Stacks, Tag 02O8) -/
 theorem idealPowersReesMultiplication_component {A : Type v} [CommRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     (I : Ideal A) (J : X.IdealSheafData)

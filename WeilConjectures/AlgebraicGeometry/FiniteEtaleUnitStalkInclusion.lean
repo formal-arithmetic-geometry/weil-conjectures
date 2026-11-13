@@ -11,8 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 /-!
 # The finite étale reverse-adjunction unit on geometric stalks
 
-Source: Stacks Project, Section 03SH and Lemma 03S7, via the extension by zero
-construction of the reverse adjunction in `UpperLowerStar.FiniteEtale`.
+## References
+
+* Stacks Project, Tags 03SH and 03S7
 -/
 
 @[expose] public section
@@ -82,26 +83,7 @@ private theorem localizationIso_inv_sections
 
 /-- The unit of `f_* ⊣ f^*`, under the pullback stalk comparison, includes the stalk
 at a lift into the corresponding summand of the pushforward stalk.
-
-Source: Stacks Project, Section 03SH (trace as adjunction counit), Lemma 03S7
-(`f_! = f_*` for finite étale maps), and the explicit extension by zero construction
-in `WeilConjectures/SixFunctors/Etale/UpperLowerStar/FiniteEtale.lean`.
-(blueprint: lem-weil-pbc-finite-etale-unit-stalk-inclusion)
-
-Proof: The reverse adjunction is constructed from `lowerStarUnit`, whose section
-on an étale `Y`-object `U` extends a section of `H(U)` by zero from the graph into
-`U ×_X Y`. Its transport to `upperStar` uses the inverse of
-`upperStarIsoLocalizationRestriction`. Fix a pointed neighbourhood `(U, x)` of
-`t`. Under `upperStarCompSheafFiberIso`, the germ of this extension is the germ
-at `s` over the localized object `U → Y → X`, at the point `x → U → X`.
-To check this normalization, expand the stalk comparison into the constructed/
-abstract pullback comparison, `sheafFiberComapIso`, and `pointSmallEtaleComapIso`;
-apply `toPresheafFiber_sheafFiberComapIso_hom_app` and the unit compatibility of
-`Adjunction.leftAdjointUniq`. The pullback point has components `(x, t)` and lies
-on the graph. This gives exactly the maps used by `sheafFiberToLowerStar` to
-construct its colimit descender. Equality on all such germs gives equality on
-the stalk by `presheafFiber_hom_ext`. Finally transport along `t.2`. This argument
-is coefficient-linear throughout, and uses no degree or nonempty-fibre assumption. -/
+(Stacks, Section 03SH and Lemma 03S7.) -/
 theorem finiteEtaleUnit_stalk_inclusion
     {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R]
     (f : Y ⟶ X) [IsFinite f] [Etale f]

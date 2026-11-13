@@ -18,7 +18,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Separation by proper infinitesimal quotient sections
 
-Source: Stacks Project, Tag 087U, degree zero.
+## References
+
+* [Stacks Project, Tag 087U](https://stacks.math.columbia.edu/tag/087U)
 -/
 
 @[expose] public section
@@ -31,17 +33,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Over a complete Noetherian base, sections of a coherent module on a proper
-scheme are separated by all positive infinitesimal quotient projections.
-Source: Stacks Project, Tag 087U, degree zero.
-(blueprint: lem-weil-pbc-proper-complete-quotient-sections-jointly-monic)
-
-Proof: Degree-zero formal functions over a complete base identifies the A-module
-of sections of F with the inverse limit of the sections of F/I^(n+1) F, via the
-actual quotient projections. Sections of p_* F are the same sections, including
-the A-action. If a and b have equal composites with every quotient projection,
-their composites with this isomorphism have equal limit projections. Limit
-extensionality makes those composites equal, and cancellation of the isomorphism
-gives a = b. The argument works for the empty scheme and zero modules as well. -/
+scheme are separated by all positive infinitesimal quotient projections
+(Stacks, Tag 087U). -/
 theorem proper_complete_quotient_sections_jointly_monic
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

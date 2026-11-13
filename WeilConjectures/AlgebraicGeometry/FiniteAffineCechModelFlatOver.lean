@@ -15,7 +15,9 @@ import Mathlib.RingTheory.RingHom.Flat
 
 /-! # Relative flatness of the explicit finite Čech model
 
-Source: Stacks Project, Tags 02KE and 01U4, finite affine section calculation.
+## References
+
+* Stacks Project, Tags 02KE and 01U4
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The section complex associated to an affine base is flat over that base termwise.
 No cohomology comparison, cover condition, or existence of a complex is asserted.
-Source: Stacks Project, Tag 02KE, proof of flat base change, and Tag 01U4.
-(blueprint: lem-pc-finite-affine-cech-model-flat-over).
-
-Proof: Since T is affine and f is separated, X is separated and each nonempty finite
-intersection of the affine V_i is affine. Apply hF to that intersection and the top
-affine open of T. Transport scalars through GammaSpecIso to obtain precisely the
-flat global-section module in affineAlternatingCechModel. There are only finitely many
-increasing tuples in each degree; finite products of flat modules are flat, including
-the empty product. For a flat A-module M, its associated sheaf has sections on every
-affine open W of Spec A equal to Gamma(W,O) tensor_A M. These are flat over Gamma(W,O).
-If W lies in an affine open Z, Gamma(W,O) is flat over Gamma(Z,O), since Z contains W
-by an open immersion. Transitivity therefore gives the IsFlatOver identity condition.
-Finally pull back along the isomorphism T -> Spec Gamma(T,O). Its affine section ring
-isomorphisms preserve the condition just proved. Extension in negative degrees has
-zero terms, whose sections are zero and flat. This proves every integer degree.
-The argument includes zero rings, empty intersections and r=0. -/
+(Stacks, Tags 02KE and 01U4.) -/
 theorem finiteAffineCechModel_flatOver {X T : Scheme.{u}} (f : X ⟶ T)
     [IsAffine T] [IsSeparated f] (F : X.Modules) (hF : F.IsFlatOver f)
     {r : ℕ} (V : Fin r → X.Opens) (hV : ∀ i, IsAffineOpen (V i)) :

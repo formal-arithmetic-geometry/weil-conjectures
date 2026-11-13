@@ -336,28 +336,7 @@ private theorem locFree_unitCokernel_of_comparison
     (fun _ ↦ hP.upperStar Λ g))
 
 /-- Finite etale pushforward and the quotient by its unit preserve local finite freeness.
-
-Source: Stacks Project, Tag 095B, its split finite-cover computation, and
-Bhatt--Scholze, Section 6.8, finite etale descent of lisse coefficients.
-(auxiliary; not a blueprint node)
-
-Proof in words. Around every point split the finite etale map over an etale
-neighbourhood. Surjectivity makes the finite sheet set nonempty. Reindex it by
-Fin n and assemble these neighbourhoods into an etale, hence pro-etale, cover.
-The canonical sheet product map identifies the restriction of a pushforward
-with the product of the sheet restrictions. Pull back the supplied free covers
-to the sheets and take their finite common refinement. Finite products of finite
-free modules are finite free, by flattening their biproduct index sets. Bind the
-resulting covers to the splitting cover to prove the pushforward assertion.
-For the unit, the triangle identity and naturality of inverse-image comparison
-identify its components with identities of the pulled-back source. Choose one
-sheet. The automorphism which subtracts that coordinate from all other
-coordinates takes the diagonal to the chosen biproduct injection. Its cokernel
-is the sum over the remaining sheets, hence is locally finite free. Exactness of
-inverse image commutes with this cokernel. Finally transport freeness between
-the raw pulled coefficient ring and the standard coefficient ring along the
-canonical coefficient isomorphism. Empty bases and one-sheet covers are included.
--/
+(Stacks, Tag 095B; Bhatt--Scholze, Section 6.8.) -/
 theorem finiteEtale_locallyFree_models
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)

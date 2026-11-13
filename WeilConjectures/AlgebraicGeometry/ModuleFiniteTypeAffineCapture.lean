@@ -13,8 +13,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite-type capture on a compact open inside an affine open
 
-Source: Stacks Project, Properties, Lemma 01PF, affine finite-numerator step.
-(blueprint: lem-weil-pbc-module-finite-type-affine-capture).
+## References
+
+* [Stacks, Tag 01PF](https://stacks.math.columbia.edu/tag/01PF)
 -/
 
 @[expose] public section
@@ -101,27 +102,7 @@ private theorem finiteType_image_free_slice (X : Scheme.{u}) (U : X.Opens) (n : 
   infer_instance
 
 /-- A quasi-coherent module on an affine open has a finite-type submodule agreeing
-with it on a compact open where it is already of finite type.
-
-Source: Stacks Project, Properties, Lemma 01PF (label lemma-extend), the affine
-finite-numerator argument, and Lemma 01PB (label lemma-finite-type-module).
-https://stacks.math.columbia.edu/tag/01PF
-(blueprint: lem-weil-pbc-module-finite-type-affine-capture).
-
-Proof: Choose a finite free-module map on V which becomes epimorphic on K by
-exists_finiteType_affine_generators, the finite-numerator step of Lemma 01PF.
-Take Q to be its abelian image, constructed as the kernel of its cokernel map.
-The equivalence between the slice site Over V and modules on V.toScheme preserves
-kernels and cokernels and quasi-coherence in both directions. The source-library
-kernel and cokernel closure theorems therefore make Q quasi-coherent. The finite
-standard basis maps to global generators of Q through the epimorphic image
-factorization; their local-generators data makes Q of finite type. The image
-inclusion is a monomorphism. Restriction to K preserves finite limits, hence
-monomorphisms. The restricted finite free map factors through this restricted
-inclusion, so its epimorphicity makes the inclusion epimorphic too. A morphism
-which is both mono and epi in the abelian category of module sheaves is an
-isomorphism. This argument allows K empty, n = 0, and K = V. No arbitrary witness
-is used to define Q: its abelian image is an existing categorical construction. -/
+with it on a compact open where it is already of finite type (Stacks, Tag 01PF). -/
 theorem exists_finiteType_affine_capture
     (X : Scheme.{u}) (V : X.affineOpens) (K : X.Opens)
     (hK : IsCompact (K : Set X)) (hKV : K ≤ V.1)

@@ -12,8 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsPullbackMate
 
 /-! # Affine extension and sections with independent localization universes
-Source: Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: lem-sc-mixed-extension-sections-unit).
+
+## References
+
+* Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7.
 -/
 
 @[expose] public section
@@ -29,31 +31,9 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 /-- On affine bases, extension of derived sections is sections of derived pullback,
-with the comparison pinned by its adjunction unit. This statement involves only g
-and a quasi-coherent object Q, with no f or base-change square.
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW; Tag 0AA7,
-construction of the canonical scalar-extension adjunct.
-(blueprint: lem-sc-mixed-extension-sections-unit).
-
-Proof:
-1. Identify Y and Y' with spectra of their global rings using isoSpec. Transport Q
-through the affine quasi-coherent derived equivalence. Its inverse is derived
-sections with the global ring action. Take a K-flat resolution P of this module
-complex; exact tilde identifies its localization with Q.
-2. Tilde of P is K-flat. The natural tilde/pullback comparison identifies Lg*Q
-with tilde of extension of P. The counit of the affine equivalence over Y' then
-identifies its derived sections with extension of the derived sections of Q.
-3. On these complexes, the tensor/sections adjunction has the same unit as the
-sheaf pullback/direct-image adjunction. Localization preserves this equation.
-Compare the resulting extension adjunction with mixedGlobalExtensionAdjunction
-by uniqueness of left adjoints to the fixed derived scalar restriction, preserving
-its unit. This gives a and the asserted unit equation.
-4. On sheaves the sections/direct-image comparison is identity. Its right-derived
-unit equation identifies the localized right comparison with
-mixedGlobalSectionsDirectImageIso g, by right-derived uniqueness. All localizations
-are carried out in their own universes, so w and wA need not be equal.
-For Q=0, identity g, or the empty affine scheme the same comparison and unit equation
-apply; no flatness, boundedness, or Tor-independence assertion is used. -/
+with the comparison pinned by its adjunction unit. This involves only `g` and a
+quasi-coherent object `Q`, with no `f` or base-change square
+(Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem exists_mixedExtensionSectionsUnit
     {Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y'] (g : Y' ⟶ Y)
     (Q : schemeDerivedCategory Y) (hQ : schemeDerivedQCohProperty Y Q) :

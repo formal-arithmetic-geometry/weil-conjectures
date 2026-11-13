@@ -14,10 +14,12 @@ public import WeilConjectures.RingTheory.NagataCoordinateChange
 Let `Y` be a closed subset of `𝔸^{N+2}_k = Spec k[X₀, …, X_{N+1}]` contained in, but not equal to,
 the coordinate hyperplane `V(X_{N+1})`. After an automorphism `ψ` of `𝔸^{N+2}_k` preserving the
 hyperplane, the projection `𝔸^{N+2}_k ⟶ 𝔸^{N+1}_k` forgetting `X₀` is finite on `Y`
-(`AlgebraicGeometry.exists_isFinite_polyAffineProj`). This is the Noether normalisation step in the
-proof of blueprint `theorem-verdier-s-theorem-specialization-zero`. The blueprint uses a linear
-change of coordinates, which needs an infinite field; Nagata's change of coordinates
-`Xᵢ ↦ Xᵢ + X₀^{rᵢ}` works over every field.
+(`AlgebraicGeometry.exists_isFinite_polyAffineProj`). This is the Noether normalisation step.
+
+## Implementation details
+
+A linear change of coordinates would need an infinite field; Nagata's change of coordinates
+`Xᵢ ↦ Xᵢ + X₀^{rᵢ}` works over every field and is used instead.
 -/
 
 @[expose] public section

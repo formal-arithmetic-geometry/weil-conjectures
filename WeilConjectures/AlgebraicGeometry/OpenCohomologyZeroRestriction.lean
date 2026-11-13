@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenCohomologyZeroSections
 
 /-! # Degree-zero comparison and restriction of opens
 
-Source: Stacks Project, Tags 01DZ and 01E1, restriction on sheaf cohomology.
-(blueprint: lem-sc-open-cohomology-zero-restriction).
+## References
+
+* [Stacks, Tag 01DZ], [Stacks, Tag 01E1]
 -/
 
 @[expose] public section
@@ -21,19 +22,8 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry.RingedSpace
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical degree-zero comparison intertwines derived restriction and sections.
-Source: Stacks Project, Tags 01DZ and 01E1.
-(blueprint: lem-sc-open-cohomology-zero-restriction).
-
-Proof: The sectionwise restriction is a natural transformation between the left exact
-open-sections functors. Its right-derived transformation in degree zero commutes with
-the canonical maps toRightDerivedZero: use the same injective resolution of M on both
-sides, and naturality of the map from the zeroth cycles to zeroth homology for the
-restriction cochain map. Both toRightDerivedZero maps are isomorphisms. Cancel them
-to obtain the naturality square for their inverses rightDerivedZeroIsoSelf. Evaluating
-that square at M and then at x is the displayed equation. Since no injectivity,
-quasi-coherence or affine assumption on M is used, this includes all opens, including
-the empty open. -/
+/-- The canonical degree-zero comparison intertwines derived restriction and sections
+(Stacks, Tags 01DZ, 01E1). -/
 theorem openCohomologyZeroSectionsIso_restriction (X : RingedSpace.{u})
     {U V : Opens X} (i : V ⟶ U) (M : SheafOfModules.{u} (moduleRings X))
     (x : (openModuleCohomology X 0 U).obj M) :

@@ -10,8 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
 
 /-! # Normalized geometric restriction mate agrees with the composite right-adjoint comparison
 
-Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.
-(auxiliary; not a blueprint node). -/
+## References
+
+* Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -276,25 +278,8 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
   convert hi using 1
   rfl
 
-/-- Normalized geometric restriction mate agrees with the composite right-adjoint comparison.
-
-Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP;
-blueprint integral proper-base-change proof, paragraphs (1) and (3).
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Apply CondensedRing.comapUpperStarIso_mate, which identifies the ordinary geometric restriction
-mate with comapLowerStarIso for arbitrary coefficient maps. The iterated-mates identity identifies
-the inverse scalar/pullback comparison with the scalar transpose of the inverse restriction/pullback
-square; the scalar unit inserts 1.
-
-2. Use PullNormalized and the exact localization factors on flat-term K-flat representatives. Cancel
-the invertible scalar computation counits to identify the derived scalar transpose with b inverse.
-Naturality along a K-flat resolution extends the identity to every derived object.
-
-3. Transpose this equality in the geometric direction. Uniqueness of the right adjoint to the
-identified composite left adjoints gives exactly restrictPush, whose construction is
-rightAdjointUniq applied to lam. -/
+/-- Normalized geometric restriction mate agrees with the composite right-adjoint comparison
+(Stacks, Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP). -/
 theorem scalar_restriction_mate_normalization (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)

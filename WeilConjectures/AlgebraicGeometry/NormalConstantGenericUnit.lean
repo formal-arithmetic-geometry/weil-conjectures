@@ -244,18 +244,8 @@ private theorem isIso_constant_unit_stalk_of_connected_strict_fibre
   exact (NatIso.isIso_map_iff
     (Φ.uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} Λ)) η).2 hi
 
-/-- The unit from a constant sheaf to its generic-point pushforward is an isomorphism.
-Source: Stacks Project, Tag 09Z5, generic-point part.
-(blueprint: lem-weil-pbc-normal-constant-generic-unit)
-
-Proof: evaluate the unit at an arbitrary geometric point and use the strict-henselization
-stalk formula for the direct image. The strict henselization of the normal local domain at that
-point is again a normal domain, and the fibre over the generic point is a nonempty localization
-of it, hence is connected. Sections of a constant sheaf on this connected fibre are therefore
-one copy of the coefficient module. Under the canonical pullback comparison, the stalk map of
-the unit sends a coefficient to the same constant section, so it is an isomorphism. Geometric
-stalks are conservative, which proves that the unit itself is an isomorphism.
--/
+/-- The unit from a constant sheaf to its generic-point pushforward is an isomorphism
+(Stacks, Tag 09Z5, generic-point part). -/
 theorem isIso_unit_constantSheaf_generic_unit
     (Λ : Type (u + 1)) [CommRing Λ] {Y : Scheme.{u}} [IsIntegral Y]
     (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))

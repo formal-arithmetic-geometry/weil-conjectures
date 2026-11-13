@@ -21,8 +21,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Detecting open support by global perfect tests
 
-Source: Stacks Project, Tags 09IS and 09IM; Tag 0E4G, first paragraph of the proof.
-(blueprint: lem-sc-perfect-open-support-detection).
+## References
+
+* Stacks Project, Tags 09IS, 09IM and 0E4G.
 -/
 
 @[expose] public section
@@ -86,25 +87,8 @@ private theorem map_eq_zero_of_comp_iso
   rw [hf, Functor.map_zero, comp_zero]
 
 /-- If every map from a global perfect complex into K vanishes after restriction to a
-quasi-compact open U, every cohomology stalk of K on U is zero.
-Source: Stacks Project, Tags 09IS, 09IM, and the proof of Tag 0E4G.
-(blueprint: lem-sc-perfect-open-support-detection).
-
-Proof: U is qcqs. Exact restriction preserves quasi-coherent cohomology. If K restricts
-nontrivially, perfect generation on U detects it by a nonzero map from a perfect object
-on U (absorb a shift into that perfect object). Apply the perfect supported map lifting
-lemma with closed subset X: it supplies a global perfect P and beta : P -> K, and a
-split inclusion of the original test into P restricted to U compatible with the maps.
-Perfection implies quasi-coherent cohomology, so P is an object of D_QCoh(X). The assumed
-vanishing of beta restricted to U forces the original map to vanish, a contradiction.
-Thus the restriction of K is zero. Restriction commutes with homology and its stalks at
-points of U equal the ambient stalks, giving the conclusion. For the open subscheme,
-start with its standard derived model. The inverse over-site equivalence induces a
-faithful derived functor into the supplied slice-site model, so Mathlib's locally-small
-localization construction supplies a model in the same Hom universe. The existing
-open-localization theorem supplies its open models. For empty U the conclusion is
-vacuous; for U = X this
-is the perfect generation criterion itself. -/
+quasi-compact open U, every cohomology stalk of K on U is zero
+(Stacks, Tags 09IS, 09IM and 0E4G). -/
 theorem perfect_open_support_detection
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

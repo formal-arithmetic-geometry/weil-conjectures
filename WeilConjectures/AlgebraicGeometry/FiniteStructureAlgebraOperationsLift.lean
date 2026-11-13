@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraAdjointsConstruct
 
 /-! # Algebra structures on algebraized finite direct images
 
-Source: Stacks Project, Tags 09ZT, 088E and 088F.
+## References
+
+* Stacks Project, Tags 09ZT, 088E and 088F.
 -/
 
 @[expose] public section
@@ -41,36 +43,9 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
-/-- Lift multiplication and unit and produce the compatible adjoint algebra maps.
-Source: Stacks Project, Tag 09ZT, multiplication paragraph, expanded using 088E,
-088F and 0CYS. This is the algebra-operations part only; it makes no assertion
-about rings of sections or quotient rings.
-
-Proof: Place G on a closed subscheme proper over Spec A whose ideal annihilates G
-(0CYS). The ideal annihilates its tensor square and cube as well. These tensor powers
-are quasi-coherent and finite type on the Noetherian scheme X, hence coherent.
-Transport the finite direct-image multiplications through psi and the tensor-pullback
-comparison. The algebra base-change formula and hpsi show their compatibility.
-Full faithfulness in 088E lifts this family uniquely to G tensor G -> G. For the
-unit, use the quotient structure sheaf on the proper supporting closed subscheme:
-its ideal acts trivially on G and on each reduction, so the units factor through
-this quotient. This coherent proper-support source permits the same unique lifting.
-Faithfulness on the tensor cube, square and G proves associativity, commutativity
-and both unit identities. On each open equip G's additive group with this product
-and unit. Bilinearity gives distributivity; the identities just proved give a
-commutative ring. The restriction maps preserve the operations, and the additive
-sheaf condition implies the ring sheaf condition. The lifted unit supplies the
-structure map, yielding B and the canonical underlying-module isomorphism e.
-The adjoints of the transported psi preserve multiplication and the unit and thus
-supply b. Their underlying section maps are exactly the displayed composites of
-the tensor-pullback adjunction unit, pullback of e, psi and pushforward composition.
-Apply adjunction to hpsi; naturality of its units and the canonical composition
-comparison hc identify the two composites with the displayed transition equality.
-This equality holds on every open, without an affineness assumption. Empty schemes,
-zero modules and empty opens give the zero ring and the same construction. No data
-is defined by choosing a witness of mere existence: operations are determined
-uniquely by full faithfulness, and B is built explicitly from these operations.
-(blueprint: lem-weil-pbc-finite-structure-algebra-operations-lift). -/
+/-- Lift multiplication and unit and produce the compatible adjoint algebra maps. This is the
+algebra-operations part only; it makes no assertion about rings of sections or quotient rings
+(Stacks, Tags 09ZT, 088E, 088F, 0CYS). -/
 theorem finite_structure_algebra_operations_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

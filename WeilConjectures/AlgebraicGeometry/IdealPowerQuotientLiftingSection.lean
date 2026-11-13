@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
 
 /-! # Lifting sections into ideal-power annihilator quotients
 
-Source: Stacks Project, Properties, Lemmas 01PQ and 01PM.
-(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting-section).
+## References
+
+* Stacks Project, Tags 01PQ and 01PM
 -/
 
 @[expose] public section
@@ -36,37 +37,7 @@ set_option maxHeartbeats 700000 in
 -- Elaborating restricted module maps and their components needs a larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
-
-Proof: On an affine open write I = (f_1,...,f_t) and F = M~. The condition hann
-identifies A_n with Ann_M(I^n)~: localization commutes with this annihilator because
-I^n is finitely generated. Hence the cokernel is (M/Ann_M(I^n))~.
-Represent the section on D(f_i) as x_i/f_i^k with k positive. Equality on overlaps
-means (f_i f_j)^e (f_j^k x_i - f_i^k x_j) = 0. A common e works for all pairs;
-replace x_i by f_i^e x_i and k by k+e. Now f_j^k x_i = f_i^k x_j.
-Put d = t*(k-1)+1 and K = {x : f_i^k x = 0 for every i}. A degree-d monomial
-has an exponent at least k; lower that exponent by k and multiply by x_i.
-Multiplication of any resulting relation by f_j^k gives the original relation
-multiplied by x_j, so it lies in K. This defines I^d -> M/K, and K is contained
-in Ann_M(I^d). The induced map into M/Ann_M(I^d) evaluates to the section.
-
-Choose a finite affine cover of X and use these maps locally. Pass to one degree
-using r and q; their equations over the inclusions and projections ensure that
-evaluation still represents the same section. On each affine member of a finite
-cover of a pairwise overlap, the difference has zero evaluation. Its target is
-quasi-coherent by cokernel closure. Apply ideal_power_evaluation_eventually_zero
-to this target, then compose with q to kill the difference at a later degree.
-Take a common upper bound for the finitely many degrees. Naturality of r and q,
-whose composition laws follow by cancellation of monic power inclusions and epic
-cokernel projections, preserves the equalities. Glue the maps by sheaf descent;
-sectionwise uniqueness proves the required evaluation identity. Quasi-separatedness
-is used only for finite affine covers of overlaps. An empty cover uses the unique
-zero map; if the ideal is zero use a positive power and the empty complement;
-for the unit ideal take degree zero and the map corresponding to the section.
-
-Source: Stacks Project, Properties, Lemma 01PM (affine denominator construction)
-and Lemma 01PQ (finite affine gluing), https://stacks.math.columbia.edu/tag/01PM
-and https://stacks.math.columbia.edu/tag/01PQ.
-(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting-section). -/
+(Stacks, Tags 01PM and 01PQ) -/
 theorem ideal_power_quotient_local_lifting_section
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

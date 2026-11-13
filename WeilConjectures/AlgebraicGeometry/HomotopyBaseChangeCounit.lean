@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Localization of the canonical homotopy pullback square
 
-Source: Stacks Project, Tags 0D5S and 0DVC.
+## References
+
+* Stacks Project, Tags 0D5S and 0DVC
 -/
 
 @[expose] public section
@@ -165,28 +167,7 @@ private theorem homotopySquare_eq {X S X' S' : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The ordinary exchange is the mate of the canonical pullback square on homotopy
-categories, expressed by its counit transpose.
-Source: Stacks Project, Tag 08HY, the two descriptions of the base-change map.
-(blueprint: lem-pc-homotopy-base-change-counit).
-
-Proof: On modules, let k be the f' adjoint of the pullback square at f_*D
-followed by p* of the f counit. Apply the g Hom equivalence to k: its expression
-starts with the unit of the composite adjunction (g,f'), followed by the image
-of the pullback square and the image of p* of the f counit. The conjugate unit
-identity for the square replaces the first two factors by the unit of the
-composite adjunction (f,p), followed by the right-adjoint square comparison.
-Naturality of that comparison moves p* of the f counit to its left. Naturality
-of the p unit then moves the f counit across that unit. The right triangle
-identity for f cancels its unit followed by f_* of its counit. The remaining
-map is f_* of the p unit followed by pushforwardComp(p,f), the equality transport
-of the square and the inverse pushforwardComp(f',g): precisely the g adjoint
-used to define moduleBaseChangeMap. Injectivity of the g Hom equivalence identifies
-k with that map; transposing under f' gives the desired ordinary counit formula.
-Apply this equality degreewise to complexes. The mapped composition
-identifications and adjunction counits descend through the homotopy quotient;
-every homotopy object is the quotient of a complex. This gives the displayed
-identity. The proof uses only adjunction identities, so no cartesian, flatness,
-acyclicity, or nonempty-scheme hypothesis is necessary. -/
+categories, expressed by its counit transpose. (Stacks, Tag 08HY) -/
 theorem moduleHomotopyBaseChange_counit
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)

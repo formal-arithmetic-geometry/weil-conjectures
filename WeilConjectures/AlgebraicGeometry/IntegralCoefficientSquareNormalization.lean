@@ -29,8 +29,7 @@ set_option linter.privateModule false
 
 /-! # Normalized constant-to-integral coefficient pullback
 
-Stacks Tags 093M and 0G7E
-(auxiliary; not a blueprint node).
+Stacks Tags 093M and 0G7E.
 
 Constant coefficients are represented by their canonical pullback from the point;
 constantSchemeIso identifies them with ordinary constant sheaves. All complexes are

@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 
 /-! # Adjacent maps between second-ideal algebraizations
 
-Source: Stacks Project, Tag 088A, the maps G_(e+1) to G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-algebraization-transitions).
+## References
+
+* [Stacks Project, Tag 088A](https://stacks.math.columbia.edu/tag/088A)
 -/
 
 @[expose] public section
@@ -38,8 +39,7 @@ noncomputable abbrev supportedCompletion {X Z : Scheme.{u}} (i : Z ⟶ X)
     ObjectProperty.ι (RingedSpace.IsCoherent X.toRingedSpace) ⋙ formalCompletionFunctor I
 
 /-- If completion on the closed subscheme `Z` is an equivalence, then completion of coherent
-modules supported on `Z` is fully faithful. Proof: transport full faithfulness across the closed
-coherent equivalence and its natural completion comparison. -/
+modules supported on `Z` is fully faithful. -/
 theorem supportedCompletion_fullyFaithful {X Z : Scheme.{u}}
     [IsNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i] (I : X.IdealSheafData)
     (he : (@completion Z (isNoetherian_of_locallyOfFiniteType i)
@@ -115,23 +115,8 @@ private theorem pushforward_power_zero {X : Scheme.{u}} [IsNoetherian X]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Adjacent quotient transitions lift to maps inducing the smaller K-quotient.
-Source: Stacks Project, Tag 088A, construction of the transitions of G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-algebraization-transitions).
-
-Proof: Write F_e for the pushforward of G_e from V(K^(e+1)). It is annihilated
-by K^(e+1): on each affine open the action factors through the quotient ring, and
-the section image of the recursively defined power is the corresponding ideal
-power. Both F_(e+1) and F_e are annihilated by K^(e+2). Closed pushforward and
-completion on V(K^(e+2)) therefore identify maps between them with maps between
-their I-completions. Lift the adjacent transition of the double quotient system,
-conjugated by the supplied comparison isomorphisms, to obtain t. Its completion
-square is the displayed equation by construction. The map factors through the
-K^(e+1)-quotient since the target is annihilated by that power. Completion of this
-factor is an isomorphism: the iterated K-quotient equals the smaller K-quotient,
-naturally in the I-level. Both modules in the factor lie on V(K^(e+1)), where
-completion is an equivalence and reflects isomorphisms. Thus the factor is the
-required q, and its composite with the quotient projection is t. -/
+/-- Adjacent quotient transitions lift to maps inducing the smaller K-quotient
+(Stacks, Tag 088A). -/
 theorem formalSecondIdealAlgebraization_transitions
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

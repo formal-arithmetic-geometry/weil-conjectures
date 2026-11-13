@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.FlatRingedCechBaseChangeQuasiIso
 
 /-! # Flat base change of the global augmented Cech model
 
-Source: Stacks Project, Algebraization, Tag 099I, second paragraph, using Tag 099H.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099I and 099H
 -/
 
 @[expose] public section
@@ -40,17 +41,8 @@ private theorem augmented_model_of_adjunction
   exact (adj.homEquiv_apply _ _ _).symm.trans ((adj.homEquiv K T).apply_symm_apply f)
 
 /-- Termwise scalar extension of the global augmented model has a quasi-isomorphic
-underlying R-complex, compatibly with its augmentation.
-Source: Stacks Project, Algebraization, Tags 099I and 099H.
-(auxiliary; not a blueprint node).
-
-Proof: take termwise scalar extension of K for L and its adjunction unit for u.
-The canonical-unit comparison makes u a quasi-isomorphism. Define delta as the
-adjoint of epsilon followed by the coefficient map R[0] to the restricted B[0].
-The adjunction equation gives the required augmentation compatibility. The local
-comparison is supplied by the quotient criterion, finite ordered Koszul homology,
-and exact filtered colimits; no local description over B is needed in the conclusion.
--/
+underlying R-complex, compatibly with its augmentation
+(Stacks, Algebraization, Tags 099I and 099H). -/
 theorem exists_flat_ringedCech_baseChange
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)

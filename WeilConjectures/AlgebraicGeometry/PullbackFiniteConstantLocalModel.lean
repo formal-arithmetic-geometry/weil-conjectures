@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibilit
 
 /-! # Pullback of a finite constant local model
 
-the base-changed covering argument.
-(auxiliary; not a blueprint node)
+This file contains the base-changed covering argument.
 -/
 
 @[expose] public section
@@ -42,19 +41,7 @@ private noncomputable def pullback_point_iso
     Functor.rightUnitor _
 
 /-- Pulling back the given pro-etale cover preserves its finite constant models.
-proof.md,
-"Constructible complexes".
-(auxiliary; not a blueprint node)
-
-Proof. Choose a witnessing cover U of Y. Its base change U.pullback₂ g covers X.
-On its i-th member W = U_i ×_Y X, the two inverse images of M are isomorphic by
-upperStarComp and pullback.condition. Pull back the given model on U_i along
-W → U_i. The original finitely presented condensed module P_i is unchanged.
-The point-pullback composition isomorphism upperStarFromPointComp identifies
-pullback of its constant model with the same constant model on W; on modules
-this follows from mapModCompIso and extendScalarsIsoComapInv, since the coefficient
-comparison is invertible. Compose these isomorphisms to witness the definition.
-No nonemptiness of X, Y, a cover member, or a coefficient ring is required. -/
+No nonemptiness of `X`, `Y`, a cover member, or a coefficient ring is required. -/
 theorem pullback_finiteConstantLocalModel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y)

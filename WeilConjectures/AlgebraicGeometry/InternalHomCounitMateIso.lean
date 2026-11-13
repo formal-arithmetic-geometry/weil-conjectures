@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.HomCongr
 
 /-! # Invertibility of the counit composite of an internal-Hom mate
 
-Source: Stacks Project, Tags 079W and 08DJ, with the Yoneda argument made explicit.
-(blueprint: lem-pc-internal-hom-counit-mate-iso).
+## References
+
+* Stacks Project, Tags 079W and 08DJ.
 -/
 
 @[expose] public section
@@ -30,16 +31,8 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite
 namespace CategoryTheory
 
 /-- The evaluation mate of a tensor-preserving left adjoint becomes invertible
-when its second argument is a right-adjoint image and one applies the counit.
-Source: Stacks Project, Tags 079W and 08DJ, the internal adjunction argument
-(blueprint: lem-pc-internal-hom-counit-mate-iso).
-
-Proof: For a test object A, transpose maps into the source by tensor-Hom on C,
-then by F adjoint to R, and precompose by t.inv. Transpose maps into the target
-by F adjoint to R and tensor-Hom on D. Both chains are bijections to maps
-F(A) tensor F(M) to E. Naturality of the adjunction bijections and t, followed
-by the defining mate equation, identifies postcomposition with the counit
-composite with the identity under these chains. Yoneda detects invertibility. -/
+when its second argument is a right-adjoint image and one applies the counit
+(Stacks, Tags 079W and 08DJ). -/
 theorem internalHomCounitMate_isIso
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [MonoidalCategory C] [MonoidalCategory D]

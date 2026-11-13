@@ -25,9 +25,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-!
 # The two Kummer-normalized projective-line components
-
-Source: blueprint lemma-cohomology-projective-line-trace and its proof.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -91,27 +88,21 @@ local instance (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) 
 
 attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 
-/-- A family of projective-line Chern arrows on Noetherian bases.
-Source: blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node). -/
+/-- A family of projective-line Chern arrows on Noetherian bases. -/
 abbrev OrdinaryFiniteP1ChernFamily (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) :=
   ∀ (S : Scheme.{u}) [IsNoetherian S], IsUnit (N : Γ(S, ⊤)) →
     (ordinaryFiniteUnit A (ProjectiveLine S) ⟶
       (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
 
-/-- The Chern family represents the actual scalar-extended Kummer boundary of O(1).
-Source: blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node). -/
+/-- The Chern family represents the actual scalar-extended Kummer boundary of O(1). -/
 def OrdinaryFiniteP1ChernFamilySpec (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (c : OrdinaryFiniteP1ChernFamily A N hA) : Prop :=
   ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),
     ordinaryFiniteP1ChernSpec A N hA S
       (affineTraceProjectiveInvertible N S hS) (c S hS)
 
-/-- The specified twisted-unit and Chern components, before proving invertibility.
-Source: blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node). -/
+/-- The specified twisted-unit and Chern components, before proving invertibility. -/
 def ordinaryFiniteP1KummerMap (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (c : OrdinaryFiniteP1ChernFamily A N hA)
@@ -122,9 +113,7 @@ def ordinaryFiniteP1KummerMap (A : Type (u + 1)) [CommRing A]
   biprod.desc (ordinaryFiniteP1Unit A N hA t S hS)
     (ordinaryFiniteP1ChernPushforward A N hA S (c S hS))
 
-/-- The decomposition square uses the exact ordinary-etale exchange of the item.
-Source: blueprint lemma-cohomology-projective-line-trace, base-change assertion.
-(auxiliary; not a blueprint node). -/
+/-- The decomposition square uses the exact ordinary-etale exchange of the item. -/
 def OrdinaryFiniteP1KummerMapBaseChange (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (c : OrdinaryFiniteP1ChernFamily A N hA) : Prop :=
@@ -169,12 +158,7 @@ private theorem p1_twist_degree_one (k : Type u) [Field k] :
   rw [h1, h0]
   norm_num
 
-/-- The degree-normalized Kummer isomorphism sends the actual class of O(1) to one.
-Source: Curve.RootsOfUnityTop.sheafHTwoTrace and the two-chart computation of O(d).
-(auxiliary; not a blueprint node).
-Proof: the Kummer trace is bijective and takes a line bundle's boundary to its degree
-modulo N. The two-chart cohomology of O(d) gives Euler characteristic d+1 for d>=0.
-Since the unit is O(0), O(1) has degree 2-1=1. Substitute this in the trace equation. -/
+/-- The degree-normalized Kummer isomorphism sends the actual class of `O(1)` to one. -/
 theorem ordinaryFiniteP1_geometric_kummer_normalization
     (k : Type u) [Field k] [IsAlgClosed k] (N : ℕ) (hN : (N : k) ≠ 0)
     (hP : IsUnit (N : Γ(ProjectiveLine (Spec (.of k)), ⊤))) :
@@ -208,14 +192,7 @@ theorem ordinaryFiniteP1_geometric_kummer_normalization
 
 /-- On an algebraically closed geometric fibre the root sheaf has cohomology only
 in degrees zero and two, both cyclic of order N. The isomorphisms here do not yet
-normalize the actual Chern arrow.
-Source: ProjectiveLineGenusZero and Curve.Estimate, the geometric-fibre part of
-blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node).
-Proof: apply the proper-curve calculation to the genus-zero projective line. Its
-first cohomology is a function group on Fin 0, hence zero. A primitive root
-identifies the constant Z/N sheaf with the root sheaf in every degree; transport
-these computations along the induced cohomology isomorphisms. -/
+normalize the actual Chern arrow. -/
 theorem ordinaryFiniteP1_geometric_cohomology (k : Type u) [Field k] [IsAlgClosed k]
     (N : ℕ) (hN : (N : k) ≠ 0) :
     Nonempty (Sheaf.H ((ProjectiveLine (Spec (.of k))).rootsOfUnitySheaf N) 0 ≃+
@@ -754,31 +731,7 @@ private theorem kummer_relative_iso
   exact kummer_isIso_of_square_core _ _ _ _ _ he
 
 /-- The Kummer-normalized two-component map is invertible and commutes with base change.
-This concerns only cohomology and its two specified arrows; it asserts no duality adjunction.
-Source: blueprint thm-amb-p1-decomposition.md and its proof, and the decomposition/trace
-part of lem-asd-ordinary-finite-p1-adjunction, steps 2--4.
-(auxiliary; not a blueprint node).
-
-Proof: First use Z/N coefficients. At an algebraically closed geometric fibre the projective
-line is a smooth proper connected genus-zero curve. Proper-curve cohomology gives Z/N in
-degrees zero and two and zero otherwise. A primitive root identifies the root sheaf with
-Z/N. The actual second Kummer boundary identifies H²(mu_N) with Pic/N. The split degree
-sequence and divisibility of Pic⁰ identify Pic/N with Z/N, and O(1), the dual of the ideal
-of one rational point, has degree one. Hence the Chern component is an isomorphism in
-degree two, and the twisted unit is an isomorphism in degree zero. Proper exchange,
-exact conservative geometric stalks and the unbounded cohomology criterion prove that
-the two-component map is invertible over Z/N. Apply derived coefficient extension to A.
-The proper finite-coefficient extension comparison is an isomorphism; flatness of mu_N
-identifies the extended twist even when A is not flat over Z/N. Its mate normalization
-identifies the unit component, and its scalar normalization identifies the Chern component.
-This proves invertibility over A. For base change, pull back the infinity divisor. On its
-chart its equation is a polynomial variable, hence remains a nonzerodivisor after arbitrary
-base change, and its dual ideal is O(1). Naturality of the supported Kummer class gives
-the pulled-back Chern arrow. The unit/exchange equation follows from the mate formula and
-an adjunction triangle identity. Tensor/exchange coherence and the normalized line
-comparison identify the two components. Additivity and the biproduct universal property
-give exactly the displayed square. The zero ring (N=1) and empty base have zero objects
-and satisfy the same assertions. -/
+This concerns only cohomology and its two specified arrows; it asserts no duality adjunction. -/
 theorem ordinaryFiniteP1_kummer_maps (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)

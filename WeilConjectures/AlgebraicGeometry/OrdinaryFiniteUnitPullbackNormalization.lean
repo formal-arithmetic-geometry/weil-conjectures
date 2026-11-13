@@ -9,8 +9,6 @@ import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitSquare
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComparison
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Unit normalization for the ordinary constant pullback comparison
 -/

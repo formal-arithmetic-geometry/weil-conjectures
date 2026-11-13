@@ -16,8 +16,11 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # The geometric restriction square for the pinned single-complex counits
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-open-pinned-single-degree-square). -/
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -26,12 +29,7 @@ open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- The component of the composition-pinned tensor counit in degree n.
-This is constructed from the counit fixed by the composition structure; its
-universal property determines that counit up to the natural isomorphism used
-in downstream comparisons. No arbitrary module or complex is chosen.
-Source: Stacks Project, Tag 08HY
-(blueprint: lem-pc-open-pinned-single-degree-square). -/
+/-- The component of the composition-pinned tensor counit in degree `n`. -/
 def pinnedSingleDegreeTensorComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -72,36 +70,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural restriction isomorphisms commute with the base-change mate for the
 single components of the pinned counits. This contains only the geometric part
 of open compatibility: neither arbitrary witnessing counits nor truncation or
-comparison automorphisms occur in this statement.
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U; Steps 1, 2 and the
-reference-counit part of Step 3 of stage3-open-fixed-counits-compatibility.
-(blueprint: lem-pc-open-pinned-single-degree-square).
-
-Proof: Write Z = f' inverse-image W. A cone over U and W composes to a cone
-over X and S'. The original pullback property gives its unique lift to X',
-which factors through Z. Hence Z is the pullback P of fA and gA, with the
-same projections. Use this identification throughout. Restriction has exact
-extension by zero as a left adjoint, so preserves K-injectives. Computing
-Rf and Rf' on K-injective resolutions gives their natural restriction
-isomorphisms (08FE). Restriction preserves K-flat complexes as well: extend
-an acyclic test complex by zero, apply the extension-by-zero tensor projection
-formula, and use exactness. Thus the pullback computations on K-flat
-resolutions give the natural restriction isomorphisms for Lg and Lg'.
-Combine the Lg and Rf comparisons with exact single-complex restriction to
-obtain a. Combine the Rf' comparison with ordinary tensor restriction along
-Z = P and the exact single-complex identification to obtain b.
-
-Transpose both sides of the displayed square under the derived adjunctions
-pinned to the composition counits. On the K-flat and K-injective representatives,
-both transposes are tensor reassociation followed by the pullback of the
-same direct-image counit. The underived restriction square commutes, including
-units, counits and reassociations. Apply it termwise to the resolutions, then
-localize. This proves equality of the transposes and hence of their mates
-(08HY). The termwise single-complex identification identifies the last maps
-with pinnedSingleDegreeTensorComparison. All comparisons are natural in G,
-so the same functor isomorphisms a and b work for every G. This works in any
-integer degree, with empty opens, and with zero modules. It uses no flatness,
-properness, or affineness hypothesis on G or the schemes. -/
+comparison automorphisms occur in this statement. -/
 theorem open_pinned_single_degree_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

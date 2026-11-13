@@ -12,10 +12,12 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.AffineFreeComplexUnitCancellation
 
-/-! # Unit cancellation at a specified degree
+/-!
+# Unit cancellation at a specified degree
 
-Source: Stacks Project, Tag 00MT, and blueprint lemma-coherent-base-change-invertible-sheaves--3,
-proof step 4. (blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
+## References
+
+* Stacks Project, Tag 00MT
 -/
 
 @[expose] public section
@@ -65,30 +67,8 @@ private lemma freeMatrix_ne_zero {X : Scheme.{u}} {I J : Type u}
   simp [hz]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Cancel the specified nonzero residue differential, retaining every rank equation.
-
-Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`), applied once;
-blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
-
-Proof: Choose the given free-sheaf identifications. On the affine scheme Spec of
-O_{Y,y}, free sheaves are the associated sheaves of their finite free modules.
-Read the differential in degree i as a matrix over O_{Y,y}. The pullback free
-identifications reduce its coefficients modulo the maximal ideal. The given
-nonzero residue differential therefore has a nonzero matrix coefficient, whose
-lift is a unit in the local ring. Reverse grading and apply
-ChainComplex.exists_splitting_of_isUnit_entry to that entry. The complement
-has one fewer basis vector in degrees i and i+1 and the original bases in all
-other degrees. The other summand is the identity two-term complex, contracted
-by the inverse of its differential in the reverse direction, with zero
-components elsewhere. Projection and inclusion are inverse up to this
-contraction. Apply the additive associated-sheaf functor and reverse grading
-back to obtain the homotopy equivalence and free-sheaf identifications. Because
-i and i+1 are both in [0,d], outside this interval the complementary terms
-agree with the original zero terms, so both support bounds persist. Record the
-cardinalities of the complementary bases: both affected sizes drop by exactly
-one, and all other sizes stay equal. No choice of cancellation degree is part
-of this statement; that is established separately from the support bounds. -/
+/-- Cancel the specified nonzero residue differential, retaining every rank equation
+(Stacks, Tag 00MT). -/
 theorem exists_stalk_unit_cancellation_at {Y : Scheme.{u}} (y : Y)
     (P : CochainComplex (Spec (Y.presheaf.stalk y)).Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d) (n : ℤ → ℕ)

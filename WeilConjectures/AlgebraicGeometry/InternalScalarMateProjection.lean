@@ -16,9 +16,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 
 /-! # Restricting the internal scalar mate gives the specified projection map
 
-(1), (3);
-Stacks Project, Tags 07A4, 0D6E, 0B56 and 0944
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 07A4, 0D6E, 0B56 and 0944.
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +48,8 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
 /-- The canonical restriction/pullback comparison, obtained from the ordinary identified
-coefficient comparison by exact localization and the specified derived counits.
-Source: Stacks 0D6D, 07A6 (auxiliary; not a blueprint node). -/
+coefficient comparison by exact localization and the specified derived counits
+(Stacks, Tags 0D6D and 07A6). -/
 def scalarRestrictionPull (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     L Λ' f ⋙ V a X ≅ V a Y ⋙ L Λ f := by
@@ -61,9 +61,7 @@ def scalarRestrictionPull (a : Λ ⟶ Λ') [IsMonHom a]
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm
 
 /-- The canonical restriction/direct-image arrow is the geometric right mate of the
-inverse restriction/pullback comparison. The node asserts its invertibility, as supplied
-by the adjunction-compatible ringed-topos restriction comparison.
-Source: Stacks 0D6E, 07A6 (auxiliary; not a blueprint node). -/
+inverse restriction/pullback comparison (Stacks, Tags 0D6E and 07A6). -/
 def scalarRestrictionPush (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     F Λ' f ⋙ V a Y ⟶ V a X ⋙ F Λ f :=
@@ -71,8 +69,7 @@ def scalarRestrictionPush (a : Λ ⟶ Λ') [IsMonHom a]
     (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv))
 
 /-- Restriction of the regular coefficient in degree zero, with the exact localization
-and single-complex comparisons retained.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+and single-complex comparisons retained (Stacks, Tag 06YY). -/
 def scalarCoefficientUnit (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     (V a T).obj (𝟙_ (DerivedCategory (Modules Λ' T))) ≅ B a T :=
   cast (by rfl) <| (V₀ a T).mapDerivedCategoryFactors.app
@@ -83,9 +80,8 @@ def scalarCoefficientUnit (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
         (Mod.regular (condensedRingObj Λ' T)))
 
 /-- The cartesian coefficient pullback: restrict the canonical regular-module unit
-comparison, after the identified-coefficient restriction/pullback comparison.
-Source: Stacks 07A4; blueprint coefficient morphisms alpha_f
-(auxiliary; not a blueprint node). -/
+comparison, after the identified-coefficient restriction/pullback comparison
+(Stacks, Tag 07A4). -/
 def scalarCoefficientPull (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (L Λ f).obj (B a Y) ≅ B a X :=
@@ -96,18 +92,15 @@ def scalarCoefficientPull (a : Λ ⟶ Λ') [IsMonHom a]
       exact CondensedRing.leftDerivedUpperStarUnitIso Λ' f) ≪≫
     scalarCoefficientUnit a X
 
-/-- The specified internal tensor comparison with the scalar interface's functor name.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The specified internal tensor comparison with the scalar interface's functor name
+(Stacks, Tag 07A4). -/
 @[irreducible] def scalarTensorPull {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : DerivedCategory (Modules Λ Y)) :
     (L Λ f).obj (M ⊗ N) ⟶ (L Λ f).obj M ⊗ (L Λ f).obj N :=
   ((CondensedRing.leftDerivedUpperStarTensor Λ f).app M).app N
 
 /-- The specified module-object projection arrow, followed by the cartesian coefficient
-identification. The first factor is literally the published moduleObjectProjectionMap,
-and the second factor is its specified postcomposition under the derived direct image;
-no new tensor comparison or adjunction is chosen.
-Source: Stacks 0B56 (auxiliary; not a blueprint node). -/
+identification (Stacks, Tag 0B56). -/
 @[irreducible] def scalarProjection (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (K : DerivedCategory (Modules Λ X)) :
     ((CondensedRing.derivedTensor Λ Y).obj ((F Λ f).obj K)).obj (B a Y) ⟶
@@ -119,8 +112,8 @@ Source: Stacks 0B56 (auxiliary; not a blueprint node). -/
 variable
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
 
-/-- The cartesian coefficient identification in the fixed section derived category.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The cartesian coefficient identification in the fixed section derived category
+(Stacks, Tag 07A4). -/
 def scalarSectionCoefficientPull (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ModuleRingedComparison.derivedPullback Λ f).obj
@@ -129,9 +122,9 @@ def scalarSectionCoefficientPull (a : Λ ⟶ Λ') [IsMonHom a]
   (scalarSectionPullComparison Λ f).symm.app (B a Y) ≪≫
     (ModuleRingedComparison.derivedEquivalence Λ X).functor.mapIso (scalarCoefficientPull a f)
 
-/-- The specified ringed projection: the actual ringed adjunction transpose of the
-canonical ringed tensor comparison followed by counit tensor the coefficient map.
-Source: Stacks 0B56, 07A4 (auxiliary; not a blueprint node). -/
+/-- The specified ringed projection: the ringed adjunction transpose of the canonical
+ringed tensor comparison followed by counit tensor the coefficient map
+(Stacks, Tags 0B56 and 07A4). -/
 def scalarSectionProjection (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (K : DerivedCategory (Modules Λ X)) :
     (ModuleRingedComparison.tensor Λ Y).obj
@@ -152,8 +145,8 @@ def scalarSectionProjection (a : Λ ⟶ Λ') [IsMonHom a]
           ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj K))
         (scalarSectionCoefficientPull a f).hom))
 
-/-- Tensor comparison with explicit scalar-interface endpoints, from the fixed equivalence.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+/-- Tensor comparison with explicit scalar-interface endpoints, from the fixed equivalence
+(Stacks, Tag 06YU). -/
 @[irreducible] def scalarSectionTensor (T : Scheme.{u}) (K N : DerivedCategory (Modules Λ T)) :
     (ModuleRingedComparison.derivedEquivalence Λ T).functor.obj
       (((CondensedRing.derivedTensor Λ T).obj K).obj N) ≅
@@ -162,8 +155,8 @@ Source: Stacks 06YU (auxiliary; not a blueprint node). -/
           (ModuleRingedComparison.derivedEquivalence Λ T).functor.obj N) :=
   (ModuleRingedComparison.tensorComparison Λ T).app (K, N)
 
-/-- The equation after the fixed section equivalence, with its tensor comparison explicit.
-Source: Stacks 0B56 and 07A4 (auxiliary; not a blueprint node). -/
+/-- The equation after the fixed section equivalence, with its tensor comparison explicit
+(Stacks, Tags 0B56 and 07A4). -/
 @[irreducible] def scalarSectionLeft (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tX : TensorNormalization a X) (_tY : TensorNormalization a Y)
@@ -184,8 +177,7 @@ Source: Stacks 0B56 and 07A4 (auxiliary; not a blueprint node). -/
         (ModuleRingedComparison.derivedPushforward Λ f).map
           (scalarSectionTensor X K (B a X)).hom
 
-/-- The right side of the section equation.
-Source: Stacks 0B56 (auxiliary; not a blueprint node). -/
+/-- The right side of the section equation (Stacks, Tag 0B56). -/
 @[irreducible] def scalarSectionRight (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_tX : TensorNormalization a X) (tY : TensorNormalization a Y)
@@ -204,8 +196,7 @@ Source: Stacks 0B56 (auxiliary; not a blueprint node). -/
           ((scalarSectionPushComparison Λ f).hom.app K) (𝟙 _)) ≫
         scalarSectionProjection a f K
 
-/-- The normalized section equation.
-Source: Stacks 0B56 (auxiliary; not a blueprint node). -/
+/-- The normalized section equation (Stacks, Tag 0B56). -/
 def ScalarMateSectionEquation (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tX : TensorNormalization a X) (tY : TensorNormalization a Y)
@@ -213,8 +204,8 @@ def ScalarMateSectionEquation (a : Λ ⟶ Λ') [IsMonHom a]
   ∀ K : DerivedCategory (Modules Λ X),
     scalarSectionLeft a f tX tY lam K = scalarSectionRight a f tX tY lam K
 
-/-- The pullback normalization equation, with the canonical coefficient identification.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The pullback normalization equation, with the canonical coefficient identification
+(Stacks, Tag 07A4). -/
 @[irreducible] def scalarPullLeft (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tX : TensorNormalization a X) (_tY : TensorNormalization a Y)
@@ -225,8 +216,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (scalarRestrictionPull a f).inv.app ((D a Y).obj M) ≫
           (V a X).map (lam.hom.app M) ≫ tX.derived.hom.app ((L Λ f).obj M)
 
-/-- The tensor-pullback side of the first equation.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The tensor-pullback side of the first equation (Stacks, Tag 07A4). -/
 @[irreducible] def scalarPullRight (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_tX : TensorNormalization a X) (tY : TensorNormalization a Y)
@@ -237,8 +227,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (L Λ f).map (tY.derived.hom.app M) ≫ scalarTensorPull f M (B a Y) ≫
           ((L Λ f).obj M ◁ (scalarCoefficientPull a f).hom)
 
-/-- The normalized pullback equation.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The normalized pullback equation (Stacks, Tag 07A4). -/
 def ScalarMatePullEquation (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tX : TensorNormalization a X) (tY : TensorNormalization a Y)
@@ -480,41 +469,8 @@ private theorem projection_section_transport (a : Λ ⟶ Λ') [IsMonHom a]
         (scalarSectionTensor X K ((L Λ f).obj (B a Y))).hom ≫ z) hcm
 
 /-- Restricting the normalized scalar mate gives exactly the canonical projection map,
-and the fixed section equivalence gives the same equation for the ringed operations.
-
-(1), (3);
-Stacks Project, Tags 07A4, 0D6E, 0B56 and 0944
-(auxiliary; not a blueprint node).
-
-Proof, following the seven steps of the node:
-1. Pass through the fixed internal/section equivalences. The normalization theorem
-identifies the geometric adjunctions and scalar maps, including counits. Choose flat-term
-K-flat resolutions P of M and Q of the coefficient in degree zero. Exact geometric
-pullback preserves these resolutions by lem-weil-pbc-ringed-pullback-preserves-kflat.
-2. The canonical tensor comparison is the signed total of the ordinary balancing map.
-Augment Q to the coefficient. Tensoring with P preserves that quasi-isomorphism by
-lem-pur-kflat-tensor-quasiiso-independent, before and after pullback. Thus the comparison
-can be computed using the degree-zero coefficient, without asserting its K-flatness.
-3. The two maps in the first equation send f inverse (p tensor s) to
-f inverse p tensor c(f inverse s). The balanced universal property, followed by
-sheafification, identifies them degreewise. The scalar has degree zero, so there is no
-sign. Localize and cancel the resolution isomorphisms to obtain the equation for all M.
-4. The ring-sheaf-change-adjunction theorem identifies the canonical restriction/push
-comparison with the geometric mate of the inverse restriction/pullback comparison.
-The adjunct of the restricted rho, after e_X, is therefore counit tensor identity
-composed with the first equation, by naturality of e_X at the counit.
-5. Substitute the first equation, interchange counit and the coefficient map using
-tensor bifunctoriality, and recognize the specified projection adjunct. Injectivity of
-the adjunction hom equivalence gives the second equation.
-6. The section equivalences preserve ordinary tensor, signed totals and K-flat
-representatives. Their fixed tensor and geometric comparisons therefore identify delta
-with the representative-characterized ringed delta and identify the actual counits.
-Taking the ringed adjunction transpose gives scalarSectionProjection and the third equation.
-7. Counit naturality and naturality of all comparisons give the displayed naturality
-and naturality of rho. Restriction reflects derived isomorphisms by the ring-sheaf-change
-adjunction theorem; all other conjugating maps are isomorphisms. Thus rho is invertible
-exactly when the specified projection is. No projection formula is assumed in this proof.
--/
+and the fixed section equivalence gives the same equation for the ringed operations
+(Stacks, Tags 07A4, 0D6E, 0B56 and 0944). -/
 theorem internal_scalar_mate_projection (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tX : TensorNormalization a X) (tY : TensorNormalization a Y)

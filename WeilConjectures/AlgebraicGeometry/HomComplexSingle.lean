@@ -13,8 +13,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 /-!
 # Internal Hom complexes from a sheaf in degree zero
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the Hom-complex formula.
-(blueprint: lem-sc-hom-complex-single).
+## References
+
+* Stacks Project, Tag 0A8X.
 -/
 
 @[expose] public section
@@ -25,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Postcomposition of localized linear maps is additive.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-single). -/
+/-- Postcomposition of localized linear maps is additive. (Stacks, Tag 0A8X) -/
 instance sheafHomFunctor_additive (Y : Scheme.{u})
     (P : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :
     ((SheafOfModules.homFunctor Y.toRingedSpace.sheaf).obj (op P)).Additive where
@@ -61,30 +60,7 @@ private noncomputable def soleFactorIso {B : Type u} [Category B] [HasZeroMorphi
 set_option backward.isDefEq.respectTransparency false in
 /-- Hom from a sheaf placed in degree zero is isomorphic to the complex obtained by
 applying ordinary internal sheaf Hom degreewise. No exactness or local freeness
-assumption is needed, and the coefficient complex can be unbounded.
-
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the product and
-map formulas defining the Hom complex.
-(blueprint: lem-sc-hom-complex-single).
-
-Proof:
-1. In degree `n`, the product defining the Hom complex from `P[0]` has factors
-   `Hom(P[0]^p,K^(p+n))`. For `p ≠ 0` its source is zero, so the factor is
-   zero: on each localized site there is exactly one linear map from zero.
-   The factor `p = 0` is `Hom(P,K^n)`, using the single-complex identification
-   `P[0]^0 ≅ P` and `0+n=n`.
-2. Project to this sole surviving factor. The inverse is the product lift with
-   that component the inverse identification and every other component zero.
-   The product uniqueness principle proves both inverse identities, including
-   when `P` or `K^n` is zero and on the empty scheme.
-3. The Hom-complex differential is `d_K f - (-1)^n f d_P`. Since the single
-   complex has zero differential, the second term is zero and projection
-   intertwines the first term with postcomposition by `d_K`. These degreewise
-   isomorphisms and their inverses therefore form chain maps.
-4. Postcomposition is additive on localized linear maps, as established by the
-   instance above. This supplies the additive structure used to apply sheaf
-   Hom degreewise. No exactness of infinite products is used: only one factor
-   survives in each degree. -/
+assumption is needed, and the coefficient complex can be unbounded. (Stacks, Tag 0A8X) -/
 theorem homComplex_single_iso
     (Y : Scheme.{u})
     (P : SheafOfModules.{u} (moduleRings Y.toRingedSpace))

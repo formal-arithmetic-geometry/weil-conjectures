@@ -52,15 +52,8 @@ private theorem terminal_map_exists (T : Scheme.{u}) (V : T.ProEt) :
   ⟨(proEtIsTerminal _).from V⟩
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The constant coefficients give the same map before and after direct image.
-Source: Bhatt--Scholze, Proposition 5.3.2; the canonical constant-ring comparison.
-(auxiliary; not a blueprint node)
-
-Proof in words. Use the coefficient comparison at the pullback of the terminal
-object over Spec Z. For an arbitrary V, the unique map from V to this terminal
-object gives an arrow in the opposite site. Naturality of the two coefficient
-maps from constant presheaves and of condensedPushforwardHom propagates the
-terminal comparison along that arrow. -/
+/-- The constant coefficients give the same map before and after direct image
+(Bhatt--Scholze, Proposition 5.3.2). -/
 theorem finiteDiscreteCoefficient_coefficientUnit_pushforward
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
       (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj

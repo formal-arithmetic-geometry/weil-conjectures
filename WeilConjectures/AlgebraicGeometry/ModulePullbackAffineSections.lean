@@ -17,8 +17,13 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Sections of module pullback on affine opens
 
-Source: Stacks Project, Schemes, Tags 01I9, 01IA, 01HV; Sheaves, Tags 00A0, 0097
-(blueprint: lem-weil-pbc-module-pullback-affine-sections).
+## References
+
+* [Stacks, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks, Tag 01IA](https://stacks.math.columbia.edu/tag/01IA)
+* [Stacks, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
+* [Stacks, Tag 00A0](https://stacks.math.columbia.edu/tag/00A0)
+* [Stacks, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
 -/
 
 @[expose] public section
@@ -38,28 +43,7 @@ set_option linter.unusedVariables.funArgs false in
 /-- The affine sections comparison is a bijective linear map, linear also for the action
 of `B` on the second tensor factor, with its canonical pure-tensor formula and naturality.
 The `B`-action on `G(V) ⊗[A] B` is written by swapping to `B ⊗[A] G(V)`, applying the usual
-left-factor action, and swapping back; this avoids choosing a second tensor-module instance.
-Source: Stacks Project, Schemes, Tags 01I9 (1), 01IA, 01HV (2); Sheaves, Tags 00A0, 0097
-(blueprint: lem-weil-pbc-module-pullback-affine-sections).
-
-Proof: (1) Use the canonical affine charts Spec A → Y and Spec B → X and their ring-map
-square (lem-weil-pbc-affine-open-spec-points and
-lem-weil-pbc-affine-opens-induced-ring-map-spec-square).
-(2) Restrict G to Spec A and identify it with the tilde of G(V) by the affine tilde-Gamma
-adjunction; its counit sends the section associated to s to s
-(lem-weil-pbc-module-restriction-open-immersion-colimits,
-lem-weil-pbc-spec-module-tilde-sections, lem-weil-pbc-affine-tilde-gamma-adjunction).
-(3) Identify open-immersion pullback with restriction, compatibly with units
-(lem-weil-pbc-open-immersion-module-pullback-restriction).
-(4) Compare the two composite pullbacks through the chart square by uniqueness of adjoints;
-the conjugate-isomorphism unit equation identifies their pulled-back sections
-(def-weil-pbc-composite-adjunction, situation-conventions).
-(5) Apply the functorial tilde base-change isomorphism for A → B, taking the pullback of s
-to the section associated to 1 ⊗ s (lem-weil-pbc-tilde-pullback-base-change).
-(6) Take global sections and invert the resulting B-linear isomorphism, then swap tensor
-factors. This gives c(s ⊗ b) = b • (f*s)|U and bijectivity.
-(7) Naturality of the adjunction unit and compatibility of module morphisms with restriction
-give the naturality equation on pure tensors. Additivity extends it to every tensor. -/
+left-factor action, and swapping back. -/
 theorem exists_tensorPullback_affine_sections
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens)
     (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :

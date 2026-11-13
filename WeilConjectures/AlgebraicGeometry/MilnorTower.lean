@@ -27,14 +27,12 @@ section Cokernel
 
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The sheaf cokernel of 1-T on a tower product, using the existing transition map.
-(blueprint: proposition-milnor-sequence--2). -/
+/-- The sheaf cokernel of 1-T on a tower product, using the existing transition map. -/
 abbrev milnorTowerCokernel (M : ℕᵒᵖ ⥤ A) : A :=
   cokernel (towerTransitionEndomorphism (K := fun n : ℕ ↦ M.obj (op n))
     (fun n : ℕ ↦ M.map (homOfLE (Nat.le_succ n)).op))
 
-/-- The canonical map of these cokernels induced by a tower morphism.
-(blueprint: proposition-milnor-sequence--2). -/
+/-- The canonical map of these cokernels induced by a tower morphism. -/
 def milnorTowerCokernelMap {M N : ℕᵒᵖ ⥤ A} (f : M ⟶ N) :
     milnorTowerCokernel M ⟶ milnorTowerCokernel N :=
   cokernel.map
@@ -47,13 +45,11 @@ def milnorTowerCokernelMap {M N : ℕᵒᵖ ⥤ A} (f : M ⟶ N) :
     (towerTransitionEndomorphism_natural_backward _ _ _
       (fun n ↦ (f.naturality (homOfLE (Nat.le_succ n)).op).symm)).symm
 
-/-- The tower of q-th cohomology sheaves, with induced transition maps.
-(blueprint: proposition-milnor-sequence--2). -/
+/-- The tower of q-th cohomology sheaves, with induced transition maps. -/
 abbrev milnorCohomologyTower (K : ℕᵒᵖ ⥤ CochainComplex A ℤ) (q : ℤ) : ℕᵒᵖ ⥤ A :=
   K ⋙ HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q
 
-/-- Regard a module tower as complexes concentrated in degree zero.
-(blueprint: proposition-milnor-sequence--2). -/
+/-- Regard a module tower as complexes concentrated in degree zero. -/
 abbrev milnorSingleTower (M : ℕᵒᵖ ⥤ A) : ℕᵒᵖ ⥤ CochainComplex A ℤ :=
   M ⋙ HomologicalComplex.single A (ComplexShape.up ℤ) 0
 

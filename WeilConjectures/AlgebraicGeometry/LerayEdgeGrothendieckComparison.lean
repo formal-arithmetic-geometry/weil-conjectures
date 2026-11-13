@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison
 
 /-! # Comparison of the cocycle Leray edge with the Grothendieck edge
 
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX
-(blueprint: lem-pc-leray-edge-grothendieck-comparison).
+## References
+
+* Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
 -/
 
 @[expose] public section
@@ -31,24 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Comparison of the edge on module cohomology with the abstract Grothendieck edge.
 There is no vanishing assumption: this is only the resolution comparison and
-identification of the edge, not the degeneration assertion.
-
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
-(blueprint: lem-pc-leray-edge-grothendieck-comparison)
-
-Proof: For the supplied acyclicity witness `hFG`, use the canonical Grothendieck
-edge of direct image followed by global sections. Sections of the direct image
-at the whole space
-are sections on X, restricted along the equality of the inverse image of the
-whole space with the whole space. This gives a natural isomorphism of the
-underlying additive sections functors. Apply it termwise to an injective
-resolution, take homology, and compare with the right derived functors to obtain
-`e`. The generic Grothendieck edge is described by its map from cycles to
-cohomology (Tag 01F2). Every class is represented by a global cycle, since the
-cycles-to-homology map is an epimorphism in modules. Its lift to the cycle sheaf
-is unique: the cycle inclusion is monic and sections preserve monomorphisms.
-Applying the cocycle characterization to this same lift shows equality of the
-two edge values on every class. This proves the displayed equality. -/
+identification of the edge, not the degeneration assertion. -/
 theorem leray_edge_grothendieck_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ε : LerayEdge X Y f) (hε : LerayEdgeCocycle f ε) :
     letI := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)

@@ -7,9 +7,6 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # A universal Noetherian base for N-invertible schemes
-
-Source: the universal-base argument in the finite projective-line levelwise check,
-blueprint main-20261015, smooth-purity tower construction.
 -/
 
 @[expose] public noncomputable section
@@ -22,17 +19,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Every N-invertible scheme maps to an N-invertible Noetherian scheme.
-Source: the universal-base argument in the finite projective-line levelwise check,
-blueprint main-20261015, smooth-purity tower construction.
-(auxiliary; not a blueprint node)
-
-Proof: take the spectrum of the localization of the universe-lifted integers at N.
-Localization preserves Noetherianity. The localization map makes N a unit, and the
-spectrum/global-sections isomorphism makes it a unit on the spectrum. The universal
-property of localization extends the integer map to the global functions of any
-N-invertible scheme; the global-sections/spectrum adjunction gives its map to this base.
-This works for N = 1 and the empty scheme as well. -/
+/-- Every N-invertible scheme maps to an N-invertible Noetherian scheme. -/
 theorem finiteP1_exists_noetherianBase (N : ℕ) :
     ∃ (U : Scheme.{u}) (_ : IsNoetherian U),
       IsUnit (N : Γ(U, ⊤)) ∧

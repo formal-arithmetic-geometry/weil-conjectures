@@ -355,9 +355,7 @@ private theorem insert_collapse_gt (X : Scheme.{u}) (F : X.Modules) (n : ℕ)
         simpa only [Fin.castSucc_succ, insert_succ, collapse_succ, ← map_comp] using
           congrArg (moduleCup_godementMap X) (ih i j hij)
 
-/-- The concrete Godement operators define a prefunctor from the simplex quiver.
-Source: Stacks Project, Tags 0FKR and 08N8.
-(blueprint: lem-sc-module-cup-godement-relations) -/
+/-- The concrete Godement operators define a prefunctor from the simplex quiver. -/
 def moduleCup_godementQuiver (X : Scheme.{u}) (F : X.Modules) :
     FreeSimplexQuiver ⥤q X.Modules where
   obj n := moduleCup_godementIterate X F (n.len + 1)
@@ -365,22 +363,8 @@ def moduleCup_godementQuiver (X : Scheme.{u}) (F : X.Modules) :
     | .δ i => moduleCup_godementInsert X F _ i
     | .σ i => moduleCup_godementCollapse X F _ i
 
-/-- The Godement operators respect the relations in the simplex presentation.
-Source: Stacks Project, Tags 0FKR and 08N8, Lemma 14.34.2 (dual).
-(blueprint: lem-sc-module-cup-godement-relations)
-Proof: project each equation to every skyscraper factor. The stalk-skyscraper
-adjunction identifies the projection with its linear stalk map followed by
-stalk evaluation. Evaluation after the unit is the identity; evaluation after
-T(f) is f on stalks after evaluation; evaluation after multiplication is two
-successive evaluations. These formulas give functoriality of T, naturality of
-unit and multiplication, both unit laws and associativity. Induct on the outer
-iterate and split each index into zero or successor. If all indices are
-successors, apply T to the identity one degree lower. If the left index is zero,
-use unit or multiplication naturality; the adjacent mixed pairs use the two
-unit laws, and the adjacent collapse pair uses associativity. The order bounds
-exclude the impossible cases. These are exactly the six constructors of homRel,
-so the lifted path functor sends each related pair to equal morphisms. Empty
-products satisfy the same projection argument, with no point to check. -/
+/-- The Godement operators respect the relations in the simplex presentation
+(Stacks, Tag 08N8). -/
 theorem moduleCup_godement_relations (X : Scheme.{u}) (F : X.Modules) :
     ∀ (a b : Paths FreeSimplexQuiver) (f g : a ⟶ b),
       FreeSimplexQuiver.homRel f g →

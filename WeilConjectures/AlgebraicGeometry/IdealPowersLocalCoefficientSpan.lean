@@ -19,7 +19,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Local coefficient expressions for ideal powers
 
-Source: Stacks Project, Tag 02O8, the finite-type assertion in its proof.
+## References
+
+* Stacks Project, Tag 02O8
 -/
 
 @[expose] public section
@@ -35,13 +37,9 @@ noncomputable local instance {X : Scheme.{v}} (F : X.Modules) {U V : X.Opens}
         (F.val.obj (op U))) :=
   inferInstanceAs (Module Γ(X, U) Γ(F, U))
 
-/-- Affine core of the local coefficient span argument.  On an affine open `W`,
-the ideal-power product section is in the coefficient span of the given affine
-generators.  This is the algebraic expansion step in Stacks Tag 02O8.
-(blueprint: lem-weil-pbc-ideal-powers-local-coefficient-span-affine-core)
-The proof expands the ideal-module product using the extended-ideal formula,
-inducts on the recursive ideal power, and rewrites each module factor using
-the spanning hypothesis. -/
+/-- Affine core of the local coefficient span statement. On an affine open `W`, the
+ideal-power product section is in the coefficient span of the given affine generators.
+(Stacks, Tag 02O8) -/
 theorem idealPowersLocalCoefficientSpan_affine {A : Type v} [CommRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     (I : Ideal A) (J : X.IdealSheafData)
@@ -175,7 +173,9 @@ theorem idealPowersLocalCoefficientSpan_affine {A : Type v} [CommRing A]
       rintro z ⟨b, ⟨a, ha, rfl⟩, v, ⟨i, rfl⟩, rfl⟩
       exact ⟨i, a, ha, rfl⟩
 
-/-- (blueprint: lem-weil-pbc-ideal-powers-local-coefficient-span) -/
+/-- Locally around each point `y ∈ V`, a section of the product of the `m`-th ideal power with
+`F` lies in the span of the `a • u i` with `a ∈ I ^ m`, where `u` generates `F` over the affine
+open `U`. (Stacks, Tag 02O8) -/
 theorem idealPowersLocalCoefficientSpan {A : Type v} [CommRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     (I : Ideal A) (J : X.IdealSheafData)

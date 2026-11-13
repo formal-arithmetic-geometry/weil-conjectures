@@ -102,23 +102,8 @@ private noncomputable def sheafFiberOverIso
       Over.forget (Φ.fiber.elementsMk U x)).op
     ((Functor.Elements.π Φ.fiber).op ⋙ F.obj)
 
-/-- Finite constant models on a pro-etale covering give finite geometric stalks.
-Source: Stacks Project, Tags 099Y and 098K.
-(auxiliary; not a blueprint node).
-
-Proof: the geometric-point fiber functor sends an object U to the lifts of x to U.
-It is a point of the pro-etale site: a weakly etale covering member above the image
-of x has a lift over the same algebraically closed field, by splitting its base change
-to that field. Its category of elements is equivalent to the category of pointed
-geometric neighborhoods, so its sheaf fiber is the specified geometric stalk.
-Transport the finite models to slice sites. Lift the terminal fiber element through
-the resulting cover to a pointed covering member. The fiber at the corresponding
-point of the slice site equals the original fiber, by finality of the over-category
-forgetful functor. Apply it to the local constant-model isomorphism. The fiber of the
-constant sheaf with value M is M, so the original stalk is finite. Empty covering
-members supply no points; for an empty base there is no geometric point. This uses
-no conservativity assertion for geometric stalks of arbitrary pro-etale sheaves.
--/
+/-- Finite constant models on a pro-etale covering give finite geometric stalks
+(Stacks, Tags 099Y and 098K). -/
 theorem finite_geometricStalk_of_finite_models
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

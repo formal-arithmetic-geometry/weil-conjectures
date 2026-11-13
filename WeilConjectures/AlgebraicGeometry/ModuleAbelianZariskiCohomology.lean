@@ -18,8 +18,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Cohomology of a module sheaf agrees with that of its underlying abelian sheaf
 
-Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD
-(blueprint: lem-sc-module-abelian-zariski-cohomology).
+## References
+
+* [Stacks, Tag 03FD]
 -/
 
 @[expose] public section
@@ -79,11 +80,8 @@ private theorem topCohomologyIsoDerived (X : TopCat.{u})
   exact ⟨((topCohomologyEquiv X F q).trans e).toAddCommGrpIso⟩
 
 /-- The right-derived cohomology of an `O_X`-module sheaf agrees with the
-cohomology of its underlying abelian sheaf, naturally in the module sheaf.
-Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
-Proof: forgetful exactness and an injective module resolution give an injective
-resolution after forgetting; the acyclic-resolution comparison identifies both
-cohomologies, naturally in the sheaf (blueprint: lem-sc-module-abelian-zariski-cohomology). -/
+cohomology of its underlying abelian sheaf, naturally in the module sheaf
+(Stacks, Tag 03FD). -/
 theorem module_cohomology_iso_underlying_abelian
     (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))

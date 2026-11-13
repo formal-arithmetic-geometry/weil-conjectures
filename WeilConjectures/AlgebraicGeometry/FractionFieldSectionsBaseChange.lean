@@ -16,8 +16,9 @@ import Mathlib.RingTheory.Flat.Localization
 
 /-! # Degree-zero base change to the fraction field
 
-Source: Stacks Project, Cohomology of Schemes, Tag 02KH, degree zero.
-(blueprint: lem-sc-fraction-field-sections-base-change)
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
 -/
 
 @[expose] public section
@@ -91,22 +92,8 @@ private theorem zero_inverseImage {X Y : Scheme.{u}} (g : Y ⟶ X)
   rw [hn, Adjunction.homEquiv_naturality_right]
   rfl
 
-/-- Flat base change on global sections, including its normalization on pure tensors.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 02KH, degree zero; More on
-Morphisms, Tag 0EX8, general-case proof, displayed base-change equality.
-(blueprint: lem-sc-fraction-field-sections-base-change)
-
-Proof: The fraction field is a flat A-algebra. For a finite affine open cover of X,
-separatedness over the affine base makes finite intersections affine. Quasi-coherence
-identifies sections on each base-changed affine with K tensor_A the original sections.
-These identifications send 1 tensor s to the adjunction-unit image of s and commute
-with restriction. Global sections are the kernel of the first Cech differential.
-Flatness preserves that kernel, and tensoring commutes with the finite products
-in the first two Cech terms. This gives the asserted K-linear isomorphism and its
-formula. Equivalently, apply the separated flat-cohomology comparison in degree zero
-and identify H^0 with sections, tracking the augmentation. On the empty scheme both
-sides are zero. No properness, valuation hypothesis, or triviality is used. -/
+/-- Flat base change on global sections, including its normalization on pure tensors
+(Stacks, Cohomology of Schemes, Tag 02KH; More on Morphisms, Tag 0EX8). -/
 theorem exists_fractionField_sections_baseChange
     (A : Type u) [CommRing A] [IsDomain A]
     (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]

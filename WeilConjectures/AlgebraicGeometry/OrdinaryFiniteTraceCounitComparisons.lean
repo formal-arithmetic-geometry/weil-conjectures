@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteTwistDerivedEvaluationPullback
 /-!
 # Unit square and inverse-projection presentation of the finite trace
 
-Source: blueprint thm-amb-p1-adjunction.proof.md, counit base change.
-(auxiliary; not a blueprint node).
 These are the two component calculations used in the trace base-change square.
 -/
 @[expose] public noncomputable section

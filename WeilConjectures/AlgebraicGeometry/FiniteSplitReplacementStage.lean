@@ -19,8 +19,7 @@ namespace AlgebraicGeometry
 
 namespace TruncatedFiniteSplitEtaleHypercover
 
-/-- Restriction retains precisely the data in degrees at most `m`.
-Source: Stacks 0DAV (auxiliary; not a blueprint node). -/
+/-- Restriction retains precisely the data in degrees at most `m` (Stacks, Tag 0DAV). -/
 def restrict {X : Scheme.{u}} {n : ℕ}
     (U : TruncatedFiniteSplitEtaleHypercover X n) (m : ℕ) (hm : m ≤ n) :
     TruncatedFiniteSplitEtaleHypercover X m where
@@ -105,8 +104,8 @@ theorem restrict_restrict {X : Scheme.{u}} {n m l : ℕ}
 
 end TruncatedFiniteSplitEtaleHypercover
 
-/-- A split finite hypercover through degree `n`, together with its map to `K`.
-Source: Stacks 0DAV (auxiliary; not a blueprint node). -/
+/-- A split finite hypercover through degree `n`, together with its map to `K`
+(Stacks, Tag 0DAV). -/
 structure FiniteSplitReplacementStage {X : Scheme.{u}} (K : SimplicialObject X.Etale)
     (n : ℕ) where
   U : TruncatedFiniteSplitEtaleHypercover X n
@@ -114,8 +113,7 @@ structure FiniteSplitReplacementStage {X : Scheme.{u}} (K : SimplicialObject X.E
 
 namespace FiniteSplitReplacementStage
 
-/-- Restrict both the split data and the refinement morphism.
-Source: Stacks 0DAV (auxiliary; not a blueprint node). -/
+/-- Restrict both the split data and the refinement morphism. -/
 def restrict {X : Scheme.{u}} {K : SimplicialObject X.Etale} {n : ℕ}
     (A : FiniteSplitReplacementStage K n) (m : ℕ) (hm : m ≤ n) :
     FiniteSplitReplacementStage K m where
@@ -140,8 +138,8 @@ theorem restrict_restrict {X : Scheme.{u}} {K : SimplicialObject X.Etale}
     congr 1
 
 end FiniteSplitReplacementStage
-/-- Matching data for the next degree of a finite stage, universal among all schemes over X.
-Source: Stacks 0DAV (auxiliary; not a blueprint node). -/
+/-- Matching data for the next degree of a finite stage, universal among all schemes over `X`
+(Stacks, Tag 0DAV). -/
 structure ReplacementBoundary {X : Scheme.{u}} {n : ℕ}
     (U : TruncatedFiniteSplitEtaleHypercover X n) where
   M : X.Etale

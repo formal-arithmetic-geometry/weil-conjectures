@@ -9,10 +9,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Coherence of the shifted finite Tate line
-
-Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph. The
-positive-case degree-zero and shift calculations reuse proved private helpers
-from FiniteP1TwistedUnitBaseChange; the final square also covers N = 0.
 -/
 
 @[expose] public noncomputable section
@@ -459,21 +455,8 @@ private theorem shifted_line_square_pos
     (derived_square_comparison A sq _)
     (exactLine_square A N hN hA t sq hY hY' hX)
 
-/-- The normalized shifted finite Tate line respects every commuting square.
-Source: Stacks, Tags 03PK and 03Q1, and the normalized comparisons in blueprint
-thm-amb-p1-decomposition.proof.md, base-change paragraph.
-(auxiliary; not a blueprint node)
-
-Proof: the roots inclusion determines its comparison uniquely, and pure scalar
-root generators determine the coefficient-line comparison. Identify the given
-transport with the canonical finite-twist transport, whose comparisons compose.
-Apply the single-degree functors and the canonical shift comparisons to the two
-compositions around the square. Their common composite identifies the two paths.
-The canonical exact/left-derived inverse-image comparison transports this equality
-with its naturality constraints. If N is zero, invertibility on Y forces Y, hence
-Xprime, to be empty: a point would give a nontrivial stalk and a homomorphism from
-its global functions. All derived objects on Xprime are then zero, so its two
-arrows agree. No trace, projective-line splitting or properness enters. -/
+/-- The normalized shifted finite Tate line respects every commuting square
+(Stacks, Tags 03PK, 03Q1). -/
 theorem ordinaryFiniteShiftedLinePullback_square
     (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

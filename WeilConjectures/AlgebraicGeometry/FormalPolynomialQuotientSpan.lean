@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 
 /-! # Local spanning of associated graded quotients
 
-Source: Stacks Project, proof of Lemma 0884, affine power refinement.
-(blueprint: lem-weil-pbc-formal-polynomial-quotient-span).
+## References
+
+* [Stacks Project, Tag 0884](https://stacks.math.columbia.edu/tag/0884)
 -/
 
 @[expose] public section
@@ -61,28 +62,8 @@ private theorem evaluation_mem_span
   exact Submodule.smul_mem _ _ hb
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Projections of homogeneous evaluation lifts locally span each graded quotient.
-Source: Stacks Project, proof of Lemma 0884, associated graded algebra refinement;
-Schemes, Tags 01I8 and 01IC, for affine quotients and ideal powers.
-(blueprint: lem-weil-pbc-formal-polynomial-quotient-span).
-
-Proof: fix k, U and a point y of U. Choose an affine neighbourhood W contained in U.
-Every power module is quasi-coherent: in degree zero it is the structure module,
-and in positive degrees use ideal_times_quasiCoherent_affine_sections. Its affine
-quotient-surjectivity clause lifts each restricted section to J^k(W). The images
-of these lifts lie in J(W)^k (the inclusion is the identity for k=0). The affine
-ideal extension formula identifies J(W) with the span of the images of the given
-generators. By Ideal.span_pow_eq_map_homogeneousSubmodule, each image is the
-evaluation of a degree-k polynomial over the section ring. Expand that polynomial
-as a finite sum of coefficient multiples of monomials of degree k. Each monomial
-with coefficient one is defined over A; the stipulated image formula for l says
-its evaluation is the image of the corresponding l(k,W,b). Injectivity of the
-power inclusion therefore writes the lifted section as a linear combination of
-those lifts. Apply the linear quotient projection to get the required span.
-The same W works for the whole finite family, since the affine projection is
-surjective on every section. In degree zero the constant monomial generates;
-with no generators every positive power is zero. An empty family imposes no
-condition beyond the affine neighbourhood. -/
+/-- Projections of homogeneous evaluation lifts locally span each graded quotient
+(Stacks, Tag 0884; Schemes, Tags 01I8 and 01IC). -/
 theorem formalPolynomial_quotient_span
     {A : Type u} [CommRing A] (I : Ideal A)
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))

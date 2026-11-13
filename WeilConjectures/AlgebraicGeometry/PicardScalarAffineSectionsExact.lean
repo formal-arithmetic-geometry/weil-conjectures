@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Scalar sections on an affine open
 
-Source: Stacks Project, Tag 0BED, the short exact coefficient diagram.
-(blueprint: lem-sc-picard-scalar-affine-sections-exact).
+## References
+
+* Stacks Project, Varieties, Tag 0BED
 -/
 
 @[expose] public section
@@ -27,15 +28,13 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {k : Type w} [Field k] {X : Scheme.{w}}
 
-/-- Sections with scalars restricted along the structure map.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-scalar-affine-sections-exact). -/
+/-- Sections with scalars restricted along the structure map. -/
 def picardScalarSectionsFunctor (f : X ⟶ Spec (CommRingCat.of k)) (W : X.Opens) :
     X.Modules ⥤ ModuleCat.{w} k :=
   scalarFunctor f ⋙ sheafToPresheaf _ _ ⋙
     (CategoryTheory.evaluation X.Opensᵒᵖ (ModuleCat.{w} k)).obj (op W)
 
-/-- Restriction of scalars and evaluation send zero maps to zero.
-Source: sectionwise module maps (blueprint: lem-sc-picard-scalar-affine-sections-exact). -/
+/-- Restriction of scalars and evaluation send zero maps to zero. -/
 instance picardScalarSectionsFunctor_zero (f : X ⟶ Spec (CommRingCat.of k)) (W : X.Opens) :
     (picardScalarSectionsFunctor f W).PreservesZeroMorphisms where
   map_zero := by
@@ -44,15 +43,7 @@ instance picardScalarSectionsFunctor_zero (f : X ⟶ Spec (CommRingCat.of k)) (W
     rfl
 
 /-- A quasi-coherent short exact sequence gives a short exact scalar section sequence
-on an affine open.
-Source: Stacks, Tags 01IC, 01IB and 0BED
-(blueprint: lem-sc-picard-scalar-affine-sections-exact).
-
-Proof: Evaluation preserves kernels and monomorphisms of module sheaves. Affine
-Cech acyclicity of the quasi-coherent kernel makes the map on sections surjective.
-Thus evaluation gives a short exact sequence over the ring of sections. Restriction
-of scalars is exact and gives the asserted sequence over k. The empty affine open
-has zero section modules and satisfies the same argument. -/
+on an affine open (Stacks, Tags 01IC, 01IB and 0BED). -/
 theorem picardScalar_affine_sections_exact
     (f : X ⟶ Spec (CommRingCat.of k)) (W : X.Opens) (hW : IsAffineOpen W)
     (S : ShortComplex X.Modules) (hS : S.ShortExact)

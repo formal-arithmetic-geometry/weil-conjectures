@@ -22,21 +22,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A fibrewise descended invertible coefficient is trivial when the structure unit
-is universally invertible.
-Source: Stacks Project, Tag 0BF2, reduction to the structure coefficient; Tag 0BDP.
-(blueprint: lem-sc-picard-descended-fibre-coefficient-trivial)
-
-Proof: Apply the structure unit at Spec kappa(s). If the source fibre were empty,
-its structure module and its pushforward would be zero. The invertible unit would
-then identify the nonzero structure module on Spec kappa(s) with zero, a
-contradiction. Thus the fibre is nonempty. Write the supplied descent as an
-isomorphism between L_s and the pullback of the finite locally free N. Tensor
-pullback preserves invertibility, so this pullback of N is invertible. Apply
-nonempty_iso_unit_of_invertible_field_pullback to obtain N isomorphic to the
-structure module of the field spectrum. Pull back this isomorphism and compose
-with the descent isomorphism and the pullback-unit isomorphism. This constructs
-a trivialization of L_s, with no choice of a witness from mere existence used
-as data of a definition. -/
+is universally invertible. (Stacks, Tags 0BF2, 0BDP) -/
 theorem picard_descended_fibre_coefficient_trivial
     {X S : Scheme.{v}} (f : X ⟶ S)
     (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),

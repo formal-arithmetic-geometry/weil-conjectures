@@ -12,8 +12,10 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Components of module base change under restriction
 
-Source: Stacks Project, Sheaves, Tag 00A0 and Cohomology, Tags 0ATL and 0ATM.
-(blueprint: lem-weil-pbc-module-square-restriction-commutes).
+## References
+
+* [Stacks, Sheaves, Tag 00A0]
+* [Stacks, Cohomology, Tags 0ATL and 0ATM]
 -/
 
 @[expose] public section
@@ -144,21 +146,8 @@ private theorem baseChangeMapCore_congr {X S T Y : Scheme.{u}}
   simp
 
 /-- Base change commutes with restriction of a commutative square. This is purely
-pasting coherence: the four vertical maps need not be open immersions.
-Source: Stacks Project, Cohomology, Remarks 0ATL and 0ATM, with Remark 08HY.
-(blueprint: lem-weil-pbc-module-square-restriction-commutes)
-
-Proof: paste the original square with the primed restriction square. Taking mates
-of the sectionwise pushforward composition identity gives the outer base change map
-as c(jV,g).hom followed by jV* beta, rho' and the inverse top composition comparison.
-Paste instead the unprimed restriction square with the smaller square. The same mate
-identity gives c(gV,jU).hom followed by gV* rho, betaV and the other inverse top
-comparison. The outer bottom and top maps are equal by hg and hg'; transport the
-second equality along these equalities. Naturality of equality transport and
-cancellation of the composition isomorphisms give precisely the displayed equality.
-The mate identity follows from mateEquiv_hcomp and the compatibility of mateEquiv
-with conjugateEquiv; the pushforward identity holds sectionwise by functoriality of
-presheaf restriction. No inverse-image or openness assumptions enter this argument. -/
+pasting coherence: the four vertical maps need not be open immersions
+(Stacks, Remarks 0ATL, 0ATM and 08HY). -/
 theorem moduleBaseChangeMap_square_restriction_commutes
     {X S X' S' U V XU X'V : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

@@ -23,9 +23,6 @@ import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 /-!
 # Finite constant local models for condensed coefficients
 
-md`
-(blueprint: definition-constructible-sheaves--1).
-
 Scalars are encoded as a ring object of abelian groups, and scalar modules as internal
 modules in abelian groups. These are precisely ordinary modules over the scalar ring.
 The constant sheaf on the profinite point is formed before inverse image to a scheme;
@@ -43,16 +40,14 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Sections at the one-point profinite set. Source: blueprint local-model definition,
-first paragraph (blueprint: definition-constructible-sheaves--1). -/
+/-- Sections at the one-point profinite set. -/
 noncomputable def scalarSections :
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⥤ Ab.{u + 1} :=
   (sheafSections (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
     (op (Profinite.of PUnit.{u + 1}))
 
 /-- The sections functor has the lax monoidal structure right adjoint to the monoidal
-constant sheaf functor. Source: blueprint local-model proof, Step 1
-(blueprint: definition-constructible-sheaves--1). -/
+constant sheaf functor. -/
 noncomputable instance scalarSections_laxMonoidal : scalarSections.{u}.LaxMonoidal :=
   (constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
     Profinite.isTerminalPUnit).rightAdjointLaxMonoidal
@@ -88,14 +83,10 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
   [IsCommMonObj Λ]
 
 /-- The scalar ring Λ(*), encoded as a ring object of abelian groups. Its underlying
-abelian group is literally evaluation at *. Source: blueprint local-model definition,
-first paragraph (blueprint: definition-constructible-sheaves--1). -/
+abelian group is literally evaluation at *. -/
 noncomputable abbrev scalarRingObj : Ab.{u + 1} := scalarSections.obj Λ
 
-/-- The scalar ring is commutative. Source: blueprint local-model proof, Step 1.
-Proof: evaluation's multiplication is induced from the sheaf tensor comparison; the
-symmetry and the commutativity of Λ give commutativity on sections.
-(blueprint: definition-constructible-sheaves--1). -/
+/-- The scalar ring is commutative. -/
 theorem scalarRingObj_comm : IsCommMonObj (scalarRingObj Λ) := by
   let := scalarSections_laxBraided.{u}
   exact Functor.isCommMonObj_obj (F := scalarSections.{u}) (M := Λ)
@@ -104,35 +95,26 @@ attribute [instance] scalarRingObj_comm
 
 /-- Sheafified constant abelian groups pulled to X. This is the constant-sheaf functor
 on X: inverse image preserves colimits and the integer tensor unit, hence preserves
-constant abelian sheaves, which are presentations by coproducts of that unit.
-Source: blueprint local-model proof, Step 1
-(blueprint: definition-constructible-sheaves--1). -/
+constant abelian sheaves, which are presentations by coproducts of that unit. -/
 noncomputable def scalarConstant (X : Scheme.{u}) :
     Ab.{u + 1} ⥤ Sheaf (Scheme.ProEt.topology X) Ab.{u + 1} :=
   constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙ upperStarFromPoint X
 
-/-- The constant-sheaf construction followed by inverse image is monoidal.
-Source: blueprint local-model proof, Step 1
-(blueprint: definition-constructible-sheaves--1). -/
+/-- The constant-sheaf construction followed by inverse image is monoidal. -/
 noncomputable instance scalarConstant_monoidal (X : Scheme.{u}) :
     (scalarConstant X).Monoidal :=
   inferInstanceAs (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙
     upperStarFromPoint X).Monoidal
 
 /-- The scalar map R_X → Λ_X is the inverse image of the constant-sheaf counit at Λ.
-Thus a scalar is pulled back from Λ(*) rather than chosen in Γ(X,Λ_X).
-Source: blueprint local-model proof, Step 1
-(blueprint: definition-constructible-sheaves--1). -/
+Thus a scalar is pulled back from Λ(*) rather than chosen in Γ(X,Λ_X). -/
 noncomputable def scalarCoefficientHom (X : Scheme.{u}) :
     (scalarConstant X).obj (scalarRingObj Λ) ⟶ condensedRingObj Λ X :=
   (upperStarFromPoint X).map
     ((constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
       Profinite.isTerminalPUnit).counit.app Λ)
 
-/-- The scalar map preserves multiplication and unit. Source: blueprint local-model
-proof, Step 1. Proof: the constant-sheaf adjunction is monoidal, so its counit is a
-ring morphism, and the monoidal inverse image preserves ring morphisms.
-(blueprint: definition-constructible-sheaves--1). -/
+/-- The scalar map preserves multiplication and unit. -/
 theorem scalarCoefficientHom_isMonHom (X : Scheme.{u}) :
     IsMonHom (scalarCoefficientHom Λ X) := by
   let _ := ‹IsCommMonObj Λ›
@@ -160,10 +142,7 @@ theorem scalarCoefficientHom_isMonHom (X : Scheme.{u}) :
 
 attribute [instance] scalarCoefficientHom_isMonHom
 
-/-- The constant scalar ring on X is commutative. Source: blueprint local-model proof,
-Step 1. Proof: the constant presheaf functor, sheafification and inverse image are
-symmetric monoidal and transport commutative ring objects to commutative ring objects.
-(blueprint: definition-constructible-sheaves--1). -/
+/-- The constant scalar ring on `X` is commutative. -/
 theorem scalarConstant_comm (X : Scheme.{u}) :
     IsCommMonObj ((scalarConstant X).obj (scalarRingObj Λ)) := by
   dsimp only [scalarConstant_monoidal, scalarConstant]
@@ -175,17 +154,13 @@ theorem scalarConstant_comm (X : Scheme.{u}) :
 attribute [instance] scalarConstant_comm
 
 /-- E_X(P) = Λ_X ⊗_{R_X} P_X, using actual scalar extension along the canonical map.
-This functor starts with ordinary scalar modules and takes values in module sheaves.
-Source: blueprint local-model definition and proof, Steps 1–2
-(blueprint: definition-constructible-sheaves--1). -/
+This functor starts with ordinary scalar modules and takes values in module sheaves. -/
 noncomputable def finiteConstantScalarExtension (X : Scheme.{u}) :
     Mod Ab.{u + 1} (scalarRingObj Λ) ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
   (scalarConstant X).mapMod (scalarRingObj Λ) ⋙ Mod.extendScalars (scalarCoefficientHom Λ X)
 
-/-- A scalar section on X, with the unit comparison included explicitly.
-Source: blueprint local-model proof, Steps 1–2
-(blueprint: definition-constructible-sheaves--1). -/
+/-- A scalar section on X, with the unit comparison included explicitly. -/
 noncomputable def scalarSection (X : Scheme.{u}) (a : 𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ) :
     𝟙_ (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ⟶ condensedRingObj Λ X :=
   Functor.LaxMonoidal.ε (scalarConstant X) ≫
@@ -193,9 +168,7 @@ noncomputable def scalarSection (X : Scheme.{u}) (a : 𝟙_ Ab.{u + 1} ⟶ scala
 
 /-- The finite matrix with scalar entries, acting on finite free Λ_X-modules.
 The first index is the source column and the second is the target row.
-A map ℤ → Λ(*) encodes its value at 1, so these entries are exactly elements of Λ(*).
-Source: blueprint local-model definition, Lemma (2), and proof, Step 2
-(blueprint: definition-constructible-sheaves--1). -/
+A map ℤ → Λ(*) encodes its value at 1, so these entries are exactly elements of Λ(*). -/
 noncomputable def scalarMatrix (X : Scheme.{u}) {m n : ℕ}
     (A : Fin m → Fin n → (𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ)) :
     Mod.finiteFree (condensedRingObj Λ X) m ⟶
@@ -317,9 +290,7 @@ private theorem scalarMatrix_reconstruct {m n : ℕ}
   simpa only [Category.assoc] using Mod.one_comp_regularLift (A := scalarRingObj Λ) _ _
 
 /-- Finite constant local models on a specified pro-étale cover: the model on each
-member is extension of a finitely presented scalar module, with no uniform rank bound.
-Source: blueprint local-model definition, second paragraph and Lemma (1)
-(blueprint: definition-constructible-sheaves--1). -/
+member is extension of a finitely presented scalar module, with no uniform rank bound. -/
 def HasFiniteConstantLocalModelOnCover {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X) : Prop :=
@@ -328,9 +299,7 @@ def HasFiniteConstantLocalModelOnCover {X : Scheme.{u}}
       Nonempty ((CondensedRing.upperStar Λ (𝒰.f i)).obj M ≅
         (finiteConstantScalarExtension Λ (𝒰.X i)).obj P)
 
-/-- Scalar finite-presentation matrices on a specified pro-étale cover.
-Source: blueprint local-model definition, Lemma (2)
-(blueprint: definition-constructible-sheaves--1). -/
+/-- Scalar finite-presentation matrices on a specified pro-étale cover. -/
 def HasScalarMatrixPresentationOnCover {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X) : Prop :=
@@ -453,14 +422,7 @@ private theorem pointMatrix_reconstruct {m n : ℕ}
   simpa only [Category.assoc] using Mod.one_comp_regularLift (A := Λ) _ _
 
 /-- Constant finite scalar models and finite scalar matrices are equivalent on the
-same given cover. Source: blueprint local-model lemma, and proof, Steps 1–3.
-Proof: the constant-sheaf adjunction and extension/restriction adjunction identify maps
-from E_U(P) to N with scalar-linear maps P → N(U). For P = R^k this identifies E_U(P)
-with Λ_U^k, preserving each scalar matrix entry. For a scalar matrix A, maps from
-E_U(coker A) to N are exactly maps from Λ_U^n killing A, so E_U(coker A) is its cokernel;
-no flatness is used. Apply a finite presentation of each P_i for the forward direction.
-Conversely take P_i to be the cokernel of the given scalar matrix over R.
-(blueprint: definition-constructible-sheaves--1). -/
+same given cover. -/
 theorem finiteConstantLocalModelOnCover_iff_scalarMatrix {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X) :
@@ -492,17 +454,8 @@ theorem finiteConstantLocalModelOnCover_iff_scalarMatrix {X : Scheme.{u}}
     rw [← scalarMatrix_map]
     simp only [f, E, Iso.hom_inv_id_assoc]
 
-/-- The existing finite constant local model predicate is exactly the scalar-extension
-formulation. Source: blueprint local-model definition and proof, Steps 1–3.
-Proof: a finite presentation by regular condensed modules is a finite scalar matrix,
-since maps from the regular module are maps from the integer unit, hence sections
-at the terminal profinite set. Its cokernel is extension of the corresponding
-finitely presented scalar module by the adjunction and cokernel calculation of
-Steps 1–3. Conversely present a scalar module by a finite matrix and take the
-same matrix of regular condensed modules before inverse image. Inverse image and
-extension of scalars preserve these cokernels. The same cover and its members
-are used in both directions.
-(blueprint: definition-constructible-sheaves--1). -/
+/-- The finite constant local model predicate is exactly the scalar-extension
+formulation. -/
 theorem finiteConstantLocalModel_iff_exists_cover {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     HasFiniteConstantLocalModel Λ X M ↔

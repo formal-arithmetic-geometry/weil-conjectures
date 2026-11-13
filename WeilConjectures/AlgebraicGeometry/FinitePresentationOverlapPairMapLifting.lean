@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.OverlapPairRefinementPersistence
 
 /-! # Descent of a map on one pairwise overlap
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-pair-map-lifting). -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -27,8 +29,7 @@ open CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 
 namespace AlgebraicGeometry
 
-/-- The limit map factors through every later stage.
-(blueprint: lem-pc-fp-overlap-pair-map-lifting). -/
+/-- The limit map factors through every later stage. -/
 lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec))
     {i j k : I} {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
@@ -45,23 +46,7 @@ lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
 -- Preserve the original unused existential binder in the public signature.
 set_option linter.unusedVariables false in
 /-- Descend the conjugated transition on one pairwise overlap, with persistence at later stages.
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing), and Tag 05N7 (2), (3).
-(blueprint: lem-pc-fp-overlap-pair-map-lifting).
-
-Proof: The overlap of the two fixed affine charts is quasi-compact because the ambient
-scheme is quasi-separated. Cover it by finitely many affine opens, and cover their
-pairwise intersections by finitely many affine opens. The restrictions of N a and N b
-are finitely presented and quasi-coherent. Conjugate the restriction map of M by e a
-and e b. On each affine chart, the limit ring is the directed colimit of the stage
-rings and module pullback is extension of scalars. Apply Tag 05N7 (2) to lift the map
-on each chart. Apply (3) on the finite refinement intersections to make the local
-maps agree at a common later stage. Glue to a map on the entire pairwise overlap.
-Its limit pullback is the prescribed map by construction and the sheaf condition.
-Pull this map back to every subsequent stage. Pullback composition and the canonical
-iterated comparisons give the displayed square there. This argument concerns just
-one pair: it asserts neither a common stage for all pairs nor natural overlap
-transitions on arbitrary test schemes. If the overlap is empty its unique map works.
-For a preorder use the partial-order quotient of the nonempty tail above j. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_overlap_pair_map_lifting
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

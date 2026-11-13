@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Joint kernel of restrictions in a principal two-open cover
 
-Source: Stacks Project, Tags 0GY0 and 0A50.
-(blueprint: lem-weil-pbc-principal-open-cohomology-joint-kernel) -/
+## References
+
+* Stacks Project, Tags 0GY0 and 0A50.
+-/
 
 @[expose] public section
 
@@ -39,22 +41,8 @@ private theorem cohomologyMap_joint_zero {X : Scheme.{u}} (U V : X.Opens)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the two principal members of the cover has zero joint kernel
-when the preceding cohomology group of their intersection vanishes.
-
-Source: Stacks Project, Tag 0GY0, the displayed Mayer--Vietoris exact segment;
-Tag 0A50, Mayer--Vietoris for etale cohomology.
-(blueprint: lem-weil-pbc-principal-open-cohomology-joint-kernel)
-
-Proof: Put W = D(a+b), U = W ∩ D(a), and V = W ∩ D(b). A prime avoiding
- a+b cannot contain both a and b, so U and V cover W. Their intersection is
- D(ab(a+b)). Apply the etale Mayer--Vietoris exact segment in degrees n and
- n+1 on W with coefficients F restricted to W. The inverse-image composition
- isomorphisms identify the intersection coefficients with F restricted to
- D(ab(a+b)), and the two outgoing maps with the displayed cohomologyMap maps.
- Every class killed by both maps is the image of an intersection class by
- exactness. The intersection group is subsingleton, so that class is zero;
- the additive connecting map sends it to zero. Thus x = 0. The argument also
- applies for n = 0, an empty W, a zero element, and repeated cover members. -/
+when the preceding cohomology group of their intersection vanishes
+(Stacks, Tags 0GY0 and 0A50). -/
 theorem principalOpenCohomology_joint_kernel
     (R : Type u) [CommRing R]
     (F : Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u + 1})

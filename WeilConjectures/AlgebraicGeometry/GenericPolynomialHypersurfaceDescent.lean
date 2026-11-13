@@ -18,8 +18,9 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! # Descending a polynomial hypersurface from the generic residue field
 
-Source: Stacks Project, Tag 0559, first proof, clearing coefficient denominators.
-(blueprint: lem-sbc-generic-polynomial-hypersurface-descent)
+## References
+
+* Stacks, Tag 0559
 -/
 
 @[expose] public section
@@ -141,20 +142,8 @@ private theorem generic_spec_iso {S : Scheme.{u}} [IsAffine S] (η : S) {B : Typ
 
 
 /-- Every polynomial hypersurface over the generic residue field of an integral affine
-scheme is the generic fibre of a polynomial hypersurface over its base sections.
-
-Source: Stacks Project, Tag 0559, first proof, clearing coefficient denominators.
-Proof: Identify K=kappa(eta) with the fraction field of A=Gamma(S,O_S), using that eta
-is generic and S is integral affine. The finite support of Q has finitely many
-coefficients in K. Multiply by the product d of their nonzero denominators; the resulting
-polynomial P has coefficients in A. Since d is nonzero in K, (P_K)=(Q) in the polynomial
-ring over K, including Q=0 (choose d=1 when its support is empty). Base change of the
-coefficient-induced spectrum map identifies the generic fibre with Spec(K[t]/(P_K)).
-The equality of principal ideals gives the displayed isomorphism with Spec(K[t]/(Q)).
-All the maps are induced by coefficient maps, so the isomorphism commutes with the two
-structure maps to Spec K. No integrality or irreducibility of Q is needed.
-
-(blueprint: lem-sbc-generic-polynomial-hypersurface-descent) -/
+scheme is the generic fibre of a polynomial hypersurface over its base sections
+(Stacks, Tag 0559). -/
 theorem exists_base_hypersurface_of_generic_polynomial
     {S : Scheme.{u}} [IsAffine S] [IsIntegral S]
     (η : S) (hη : IsGenericPoint η Set.univ)

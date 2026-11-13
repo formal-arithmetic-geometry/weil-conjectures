@@ -16,7 +16,11 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Cohomology reductions: ImageStabilization
-Source: Stacks Project, Lemma 02OB. -/
+
+## References
+
+* [Stacks, Tag 02OB](https://stacks.math.columbia.edu/tag/02OB)
+-/
 
 @[expose] public section
 
@@ -38,19 +42,9 @@ private theorem power_zero_isIso {X : Scheme.{u}} (J : X.IdealSheafData)
         (MonoidalCategory.leftUnitor (C := X.Modules) F).hom)) := epi_image_of_epi _
   exact isIso_of_mono_of_epi _
 
-/-- Proof: put J = I O_X and apply cohomology_powers_ideal_application in degree
-p+1, obtaining c. The exact sequences of 0 -> J^k F -> F -> F/J^k F -> 0
-and 0 -> J^n F -> F -> F/J^n F -> 0 form a natural ladder. Write delta_k for
-the connecting map and alpha_(k,n) for H^(p+1)(J^k F) -> H^(p+1)(J^n F).
-For x in H^p(F/J^k F), delta_k(x) lies in the kernel of the map to H^(p+1)(F).
-The kernel equality of the cited lemma says it maps to zero at exponent k-c.
-For k >= n+c, the transition to exponent n factors through exponent k-c, so
-alpha_(k,n)(delta_k(x)) = 0. Naturality gives delta_n(tau_(k,n)(x)) = 0,
-and exactness places tau_(k,n)(x) in the image of H^p(F). Conversely the quotient
-maps satisfy tau_(k,n) rho_k = rho_n, giving the reverse inclusion of images.
-This argument uses only positive quotient levels, including n = 1 and c = 0.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OB,
-part (3) (blueprint: ml-cohomology-powers-ideal-image-stabilization). -/
+/-- For a proper scheme over a Noetherian ring, the images of cohomology of the quotients
+by ideal powers `I^k F` in degree `p` stabilize: for `k ≥ n + c` they equal the image of the
+cohomology of `F`. (Stacks, Tag 02OB) -/
 theorem ml_cohomology_powers_ideal_image_stabilization
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f]

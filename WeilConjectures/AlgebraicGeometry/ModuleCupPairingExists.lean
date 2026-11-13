@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # Existence of a computing tensor-paired resolution
 
-Source: Stacks Project, Cohomology of Sheaves, Section 20.31, Tags 0FKU and 0FKV.
-(blueprint: lem-sc-module-cup-pairing-exists)
+## References
+
+* Stacks Project, Cohomology of Sheaves, Section 20.31, Tags 0FKU and 0FKV.
 -/
 
 @[expose] public section
@@ -225,22 +226,8 @@ private theorem tensorChain_leibniz {X : Scheme.{uM}} [MonoidalPreadditive X.Mod
     AddCommGrpCat.hom_add_apply, app_zsmul_apply, whiskerRight_app_tmulSection,
     whiskerLeft_app_tmulSection, Units.smul_def] using hs
 
-/-- Module sheaves admit computing resolutions with a sectionwise tensor pairing.
-Source: Stacks Project, Section 20.31 (0FKU), naive cup product and the
-flasque/Godement proof of Lemma 20.31.4 (0FKV).
-(blueprint: lem-sc-module-cup-pairing-exists)
-Proof: take the existential strictly nonnegative flasque integer complexes,
-quasi-isomorphic augmentations and tensor cochain map supplied by
-moduleCup_godement_pairing. Restrict to natural degrees. On each tensor summand,
-tensor sections and apply the supplied chain map; its cochain identity gives
-signed Leibniz, and its degree-zero formula gives augmentation_pair. Restrictions
-commute because its components are sheaf morphisms. Choose injective resolutions
-and extend each augmentation to a comparison degree by degree by injectivity.
-moduleCup_flasque_acyclicity makes the supplied terms acyclic, and the separately
-cited Leray acyclic-resolution comparison criterion makes every global comparison
-homology map invertible. Assemble the fields of CupResolutionPairing.
-No specific Godement model or natural choice of the existential complexes is
-assumed, and no coefficient flatness is required. -/
+/-- Module sheaves admit computing resolutions with a sectionwise tensor pairing
+(Stacks, Tags 0FKU and 0FKV). -/
 theorem exists_moduleCupResolutionPairing {X : Scheme.{uM}} (F G : X.Modules) :
     Nonempty (CupResolutionPairing F G) := by
   let : MonoidalPreadditive X.Modules :=

@@ -23,7 +23,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraizing a formal pullback isomorphism with quotient compatibility
 
-Source: Stacks Project, Tag 088B, final complete-base paragraph; Tags 087W and 0883.
+## References
+
+* Stacks Project, Tags 088B, 087W and 0883
 -/
 
 @[expose] public section
@@ -38,22 +40,8 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A formal pullback isomorphism over a complete affine base lifts to an algebraic
-isomorphism, compatibly with the actual quotient projections.
-Source: Stacks Project, Tag 088B, final complete-base paragraph; Tags 087W and 0883.
-(blueprint: lem-weil-pbc-formal-comparison-algebraization-quotient-lift)
-
-Proof: Tag 087W associates to G its finite module over the completion of A.
-Since A is I-adically complete, restrict this module along the isomorphism
-A -> its completion and take its tilde, a coherent module A0. The unit and inverse
-comparison of the affine equivalence give e from G to the quotient system of A0. Pullback preserves
-coherence on the Noetherian proper scheme and commutes with the quotient system;
-the comparison is specified by the images of the quotient projections. Compose
-it with the pullback of e.inv and beta. Tag 0883 lifts this isomorphism
-and its inverse uniquely to maps between p* A0 and F. Injectivity on Hom makes
-the lifted composites identities. The resulting isomorphism b has exactly the
-displayed projection equation, since the quotient comparison sends the projection
-to the pullback of the projection. The zero ring causes no exception: all these
-categories and maps are zero. -/
+isomorphism, compatibly with the actual quotient projections
+(Stacks, Tag 088B; Tags 087W and 0883). -/
 theorem formalComparison_algebraization_quotient_lift
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

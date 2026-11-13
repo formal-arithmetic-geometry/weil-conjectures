@@ -14,9 +14,10 @@ import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 
 /-! # Normalized tensor summands under the open-site equivalence
 
-Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-tensor-summands). -/
+## References
+
+* Stacks Project, Tag 0A8X, ordinary tensor totalization.
+-/
 
 @[expose] public section
 
@@ -126,15 +127,8 @@ end Descent
 
 set_option maxHeartbeats 500000 in
 -- Monoidal localization and its coefficient instances require extra elaboration heartbeats.
-/-- The open-site equivalence has a symmetric core monoidal structure with its prescribed unit.
-Source: Stacks Project, Tag 01CD, tensor transport along an equivalence of ringed sites.
-
-Proof: lift the braided monoidal presheaf reindexing functor through sheafification.
-The lifting isomorphism is monoidal, and its tensor equation descends the braided equation.
-Normalize the unit by transporting along the explicit scalar natural automorphism from
-`scalarIso`; `normalize` proves that this preserves braiding and gives the prescribed unit.
-The construction applies to empty opens and zero rings and does not involve complexes.
-(blueprint: lem-pc-ordinary-evaluation-tensor-summands). -/
+/-- The open-site equivalence has a symmetric core monoidal structure with its
+prescribed unit (Stacks, Tag 01CD). -/
 private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens) :
     let L := Equivalence.functor
       (C := localEvaluationModules X U)
@@ -209,24 +203,8 @@ private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens
 
 set_option maxHeartbeats 700000 in
 -- Elaborating two nested bicomplex comparisons requires additional heartbeats.
-/-- The open-site tensor comparison has the prescribed unit, symmetry and total summands.
-Source: Stacks Project, Tag 0A8X, tensor totalization; Mathlib `overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-tensor-summands).
-
-Proof: on presheaves reindex each pure tensor along the open-site equivalence.
-The coefficient identifications preserve balancing, restriction, associativity
-and exchange of factors. Descend these maps and their inverses through
-sheafification. The unit map sends a local coefficient to the same coefficient;
-this is `overEquivFunctorObjUnitIso`. This constructs a symmetric monoidal
-structure m with that unit, rather than an arbitrary natural tensor comparison.
-In bidegree (p,q) use the inverse of m's tensorator. Its naturality commutes
-with both differentials. Assemble the bicomplex isomorphism and compose its
-totalization with the inverse of `HomologicalComplex₂.mapTotalIso`.
-The equivalence preserves all coproducts, so the image of every total summand
-is exactly the displayed tensorator followed by its target summand inclusion.
-This gives c and its equation. Signed differentials introduce no additional
-sign in these degreewise inclusions. This construction applies to unbounded
-complexes, zero modules, the empty open and the zero coefficient ring. -/
+/-- The open-site tensor comparison has the prescribed unit, symmetry and total summands
+(Stacks, Tag 0A8X). -/
 theorem exists_ordinaryEvaluation_tensor_summands (X : Scheme.{u}) (U : X.Opens) :
     let L := Equivalence.functor
       (C := localEvaluationModules X U)

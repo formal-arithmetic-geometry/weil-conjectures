@@ -86,20 +86,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
 -- Comparing the canonical derived tensor instances requires extra elaboration work.
-/-- Tensor evaluation is invertible for a perfect first argument.
-Source: Stacks Project, Cohomology, Tags 08DQ and 08DM.
-Proof: refine the perfect neighbourhoods to affine opens and represent K by a
-bounded complex E of direct summands of finite free sheaves. Restriction of RHom
-commutes with these opens, and the strictly-perfect Hom lemma computes RHom by
-ordinary Hom complexes. The dual of E is again bounded and termwise finite projective,
-hence K-flat. For an arbitrary complex F, the evaluation comparison is the total
-of F^p tensor Hom(E^q,O) to Hom(E^q,F^p). It is an isomorphism for finite free
-E^q and for its direct summands. These identifications respect differentials and the canonical
-adjunction. For any natural adjunction bijection in the statement, Yoneda changes
-its adjuncts by invertible natural transformations, so invertibility is unchanged.
-Finally test the globally defined maps on cohomology sheaves on the open cover;
-no morphisms are glued. This works for unbounded F and does not assume F is quasi-coherent.
-(blueprint: lem-pc-perfect-rhom-evaluation-isomorphisms) -/
+/-- Tensor evaluation is invertible for a perfect first argument (Stacks, Tags 08DQ and 08DM). -/
 theorem perfect_rhom_evaluation_isomorphisms
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

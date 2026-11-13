@@ -26,8 +26,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 
 /-! # The affine derived sheaf-Hom adjunction
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3
-(blueprint: lem-sc-finite-sheafhom-affine-adjoint).
+## References
+
+* Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3.
 -/
 
 @[expose] public section
@@ -52,29 +53,9 @@ private theorem rightDerivedFunctor_of_source_iso
 
 set_option backward.isDefEq.respectTransparency false in
 -- The localization comparisons require unfolding several sheaf carrier encodings.
-/-- Restriction along `O_X → A = f_* O_Y` (the ring sheaf of the landed
-`directImageAlgebraSpace f`) has right adjoint the derived sheaf-Hom out of `A`:
-there are an underived right adjoint `H` of restriction, valued in `A`-modules, whose
-underlying `O_X`-module functor is `homObj A (-)` and whose counit is evaluation at
-`1 ∈ A`; a right derived functor `R : D(O_X) ⥤ D(A)` of `H` (with its comparison `β`);
-the derived restriction `L` (with its comparison `t`); and an adjunction `L ⊣ R` whose
-`O_X`-module right adjoint `R ⋙ L` is `RHom_{O_X}(A, -)` and whose counit is the
-morphism induced by the underived evaluation counit (`Adjunction.derivedε_fac_app`).
-
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3
-(blueprint: lem-sc-finite-sheafhom-affine-adjoint).
-
-Proof:
-1. Use the underived affine sheaf-Hom adjunction of lem-sc-finite-sheafhom-affine.
-   Its underlying O_X-module is homObj(A,F), with A acting by precomposition with
-   multiplication. The underived counit evaluates a local homomorphism at one.
-2. Restriction of scalars is exact, hence its termwise functor descends through Q to an
-   absolute left derived functor `L`. The right derived functor `R` of `H` is computed on
-   K-injective resolutions; it is absolute, and `R ⋙ L` computes `RHom_{O_X}(A, -)`
-   (def-pur-derived-internal-hom). Apply lem-sc-derived-adjunction-from-underived.
-3. The counit clause of lem-sc-derived-adjunction-from-underived (Mathlib
-   `Adjunction.derivedε_fac_app`) identifies the derived counit with the morphism induced
-   by the underived counit, i.e. by evaluation at one. -/
+/-- Restriction along `O_X → A = f_* O_Y` has a right adjoint given by the derived
+sheaf-Hom out of `A`: the `O_X`-module right adjoint is `RHom_{O_X}(A, -)`, with counit
+induced by evaluation at `1 ∈ A`. (Stacks, Tags 0BV0, 0BUZ and 0AX3) -/
 theorem exists_affine_derivedSheafHom_adjunction
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -13,8 +13,9 @@ import Mathlib.Tactic.Abel
 
 /-! # Signed Leibniz identity for the front/back components
 
-Source: Banerjee, Tensor Structure on Smooth Motives, §1.1.4, p. 16.
-(blueprint: lem-sc-module-cup-aw-leibniz).
+## References
+
+* Banerjee, Tensor Structure on Smooth Motives, §1.1.4.
 -/
 
 @[expose] public section
@@ -311,29 +312,9 @@ private theorem transport_pairing
         ← Category.assoc (eA₀.hom ⊗ₘ eB₀.hom) (a₀ ◁ db), hr]
       simp only [Category.assoc]
 
-/-- The signed differential calculation on a single nonnegative bidegree.
-Source: Banerjee, Tensor Structure on Smooth Motives, arXiv:1004.1491,
-§1.1.4, p. 16, the front/back formula immediately before (1.1.2).
-(blueprint: lem-sc-module-cup-aw-leibniz)
-
-Proof: Write f_{r,s}(i)=i and b_{r,s}(j)=r+j for the front and back inclusions.
-Transport the differentials along the three extension isomorphisms, so they
-are the alternating sums of cofaces. Naturality of μ rewrites a target coface
-as the simultaneous coface on the two factors before μ. For a coface indexed
-by i ≤ r, its composites with f_{r,s} and b_{r,s} are respectively
-f_{r+1,s} after the i-th coface and b_{r+1,s}. These give the first r+1
-terms of the differential of A. For i > r, the composites are f_{r,s+1}
-and b_{r,s+1} after the (i-r)-th coface; these are the last s+1 terms
-of (-1)^r times the differential of B. The missing term of the first sum
-(index r+1) and the missing term of the second sum (index 0) have the same
-pair of simplex maps and opposite signs, hence cancel. Additivity of tensor
-and composition transports these finite-sum identities to sheaf morphisms.
-Conjugating back gives the displayed equality, with the standard total sign.
-At r=s=0 the four terms before μ in degree one are Aδ⁰ tensor Bδ⁰,
-minus Aδ¹ tensor Bδ⁰, plus Aδ¹ tensor Bδ⁰, minus Aδ¹ tensor Bδ¹.
-The middle terms cancel, and naturality identifies the others with the two
-target cofaces after μ in degree zero. No degeneration, exactness or nonzero
-object assumption is used, so zero sheaves and the empty scheme also satisfy it. -/
+/-- The signed differential calculation on a single nonnegative bidegree: the front/back
+components satisfy the Leibniz identity with the standard total sign. No exactness or nonzero
+object assumption is used. -/
 theorem moduleCup_awSummand_leibniz (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
     (r s n : ℤ) (h : r + s = n) (hr : 0 ≤ r) (hs : 0 ≤ s) :

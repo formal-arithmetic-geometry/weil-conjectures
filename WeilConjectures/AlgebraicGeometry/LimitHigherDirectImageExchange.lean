@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianHigherImageGermVanishing
 
 /-! # Degreewise continuity of relative exchange under affine inverse limits
 
-Source: Stacks Project, Tag 0EZT, second assertion, and Tag 0EYM.
+## References
+
+* Stacks Project, Tag 0EZT, second assertion, and Tag 0EYM.
 -/
 
 @[expose] public section
@@ -82,24 +84,7 @@ private theorem isIso_homology_cartesianDerivedImageMap
 /-- In nonnegative degree, canonical exchange passes from the stages to an affine
 inverse limit. This assertion concerns a single cohomology sheaf, with arbitrary
 abelian coefficients; it has no smoothness, torsion, or injectivity assumption.
-Source: Stacks Project, Lemma 59.86.3, Tag 0EZT, second assertion, and
-Lemma 59.51.8, Tag 0EYM.
-(blueprint: lem-sc-limit-higher-direct-image-exchange)
-
-Proof: Replace I by a cofinal directed inverse system. Pull f back to every D_i;
-the resulting sources have affine transition morphisms and limit the pullback of f
-to c.pt. The original source and base are constant systems. The coefficient system
-is constant F; its colimit is F because I is nonempty and connected. Apply Tag 0EYM
-to these systems, including after base change to each descended affine etale object.
-Every affine etale object of c.pt descends to a stage. Tag 0EZT identifies the limit
-higher-direct-image exchange on that object with the filtered colimit of the
-stage exchanges. The given stage maps are isomorphisms, and hence so is their
-filtered colimit. These affine etale objects form a basis, so the resulting map
-of sheaves is an isomorphism. The exact-inverse-image homology comparison and the
-single-complex/right-derived comparison identify this map with the displayed
-homology of derivedBaseChangeMapPlus. Compatibility of these comparisons with
-transition maps follows from their naturality and the resolution formula for
-canonical exchange. The proof works for q = 0, the zero sheaf, and empty X. -/
+(Stacks, Tags 0EZT and 0EYM) -/
 theorem isIso_limit_homology_derivedBaseChangeMapPlus
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

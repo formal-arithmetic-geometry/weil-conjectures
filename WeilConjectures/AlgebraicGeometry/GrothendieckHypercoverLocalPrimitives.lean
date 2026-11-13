@@ -15,9 +15,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 
 /-! # Detection by local primitives on finite hypercover refinements
 
-Source: Stacks Project, Hypercoverings, Tag 01H0, the finite local lifting step.
 The image-family formulation for arbitrary Grothendieck coefficients is an
-explicit generalization of that argument for abelian sheaves.
+explicit generalization of the finite local lifting step for abelian sheaves.
+
+## References
+
+* Stacks Project, Hypercoverings, Tag 01H0.
 -/
 
 @[expose] public section
@@ -234,34 +237,8 @@ private theorem local_primitives_of_local_epi
 
 end Geometry
 
-/-- Local primitives after refinement jointly detect a morphism from the source.
-Source: Stacks Project, Hypercoverings, Tag 01H0, first proof, local killing of
-vertical cohomology classes; finite split refinement construction.
-(auxiliary; not a blueprint node).
-
-Proof: evaluation preserves kernels, so x factors through the sections of
-K = ker(S.g). Exactness makes the canonical map p : S.X₁ → K epic. The terms of
-U are qcqs: each nondegenerate summand is a finite coproduct of the qcqs pieces
-in finite_each_degree, and the split decomposition is a finite coproduct of
-these summands. Apply eq_zero_of_locally_liftable_maps to p at the degree-n term.
-For any source map π and covering sieve R on which πx lifts, use
-exists_refinement_solving_local_requirements with the single requirement R
-in degree n. It supplies V → U and a finite colimiting cofan in V_n such that
-each composite to U_n belongs to R. Choose a primitive on each cofan piece.
-
-An A-valued sheaf glues morphisms from an arbitrary fixed source over this
-cofan. To verify this directly, identify the cofan with the scheme coproduct.
-Its inclusions form an etale cover. Maps to two distinct summands have empty
-source, where the sheaf has terminal sections; maps to the same summand agree
-by monicity. Thus arbitrary morphisms to the section objects on the pieces
-are compatible and glue uniquely. This includes the empty cofan.
-
-Glue the chosen primitives to l on V_n. Naturality of p and uniqueness of the
-gluing imply that p(l) is the restriction of πx, now regarded in K. Composing
-with K → S.X₂ and using its naturality gives exactly the displayed primitive
-equation. The assumed hkill gives πg = 0 for each such source. The local
-epimorphism detector concludes g = 0. No global projectivity or element
-presentation of the coefficient category is used. -/
+/-- Local primitives after refinement jointly detect a morphism from the source
+(Stacks, Tag 01H0). -/
 theorem eq_zero_of_refinement_primitives
     (S : ShortComplex (Sheaf X.smallEtaleTopology A)) (hS : S.Exact)
     (U : FiniteSplitEtaleHypercover X) (n : ℕ) (B T : A)

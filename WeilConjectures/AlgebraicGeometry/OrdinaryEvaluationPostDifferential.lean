@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembl
 
 /-! # Ordinary evaluation and one part of the differential
 
-Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-post-differential).
+## References
+
+* Stacks Project, Tag 08DQ, and Section 20.41.
 -/
 
 @[expose] public section
@@ -36,16 +37,7 @@ local instance ordinaryPostMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 800000 in
 -- Naturality rewrites involve the expanded sheaf tensor and internal Hom instances.
-/-- Evaluation commutes with the differential in the output complex.
-Source: Stacks Project, Tag 08DQ, ordinary evaluation calculation, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-post-differential).
-
-Proof: If r+q is nonzero, both evaluation components vanish. Otherwise p=r+n
-and p+1=r+m. Expand the component definition, and move d_F across the
-right unitor, the associator and the braidings by naturality. Naturality of
-the tensor-Hom equivalence in its output identifies postcomposition by d_F
-with the whiskered differential on F. Degree transports agree by proof
-irrelevance. This uses no boundedness and also holds for zero modules. -/
+/-- Evaluation commutes with the differential in the output complex (Stacks, Tag 08DQ). -/
 theorem ordinaryEvaluation_post_differential (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (n m p q r : ℤ) (hnm : n + 1 = m) (hpq : p + q = n) :

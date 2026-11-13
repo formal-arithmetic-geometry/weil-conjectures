@@ -15,9 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DescendQCOpenFGSubalgebra
 /-!
 # Quasi-compact opens under Galois base change
 
-Source: Stacks Project, Varieties, Tag 04KU, using Tag 0388 and the preceding equation
-`equation-galois-action-base-change-kbar`
-(blueprint: lem-weil-pbc-galois-base-change-qc-open-descends).
+## References
+
+* [Stacks, Tag 04KU], [Stacks, Tag 0388]
 -/
 
 @[expose] public section
@@ -43,26 +43,7 @@ private theorem specAlgEquivOver_one {k L : Type u} [Field k] [Field L]
   exact Spec.map_id _
 
 /-- A quasi-compact open descends to a finite intermediate field and is invariant under
-all automorphisms fixing that field. Source: Stacks Project, Varieties, Tag 04KU and the
-preceding Galois-action equation.
-(blueprint: lem-weil-pbc-galois-base-change-qc-open-descends).
-
-Proof:
-1. Functoriality of `Spec` (def-weil-affine-spectrum) and `baseChangeMap`
-   (def-pc-base-change) gives the contravariant composition law. The map for the inverse
-   algebra automorphism is an inverse, so every induced scheme map is an automorphism.
-2. Apply lem-weil-pbc-descend-qc-open-fg-subalgebra (Stacks Tag 0388) with algebra `L`.
-   It gives a finitely generated subalgebra and a quasi-compact open pulling back to `V`.
-3. Every generator is algebraic, hence integral, since `L/k` is Galois
-   (def-weil-pbc-separable-algebraic-extension, def-weil-algebraic-element).
-   By lem-weil-pbc-finite-of-integral-generators the subalgebra is finite-dimensional.
-   It is a domain inside `L`, so lem-weil-pbc-finite-dimensional-domain-is-field makes
-   it a field. Take this finite intermediate field as `K` and the descended open as `V'`.
-4. If `σ` fixes `K` pointwise, its composite with the inclusion `K → L` is that inclusion.
-   Functoriality of `Spec` and base change yields `σX σ ≫ p = p`.
-5. Thus `(σX σ) ⁻¹ᵁ V = V`. Since `σX σ` is bijective, its image of `V` is also `V`.
-   The fixing subgroup of a finite intermediate field is open in the Krull topology;
-   this is the open subgroup in Stacks' formulation of part (2). -/
+all automorphisms fixing that field (Stacks, Tag 04KU). -/
 theorem galois_baseChange_qc_open_descends (k L : Type u) [Field k] [Field L]
     [Algebra k L] [IsGalois k L] (X : Scheme.{u}) (f : X ⟶ Spec (.of k))
     (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L)))).Opens)

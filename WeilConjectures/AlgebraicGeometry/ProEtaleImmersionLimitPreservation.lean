@@ -20,9 +20,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Limits under inverse image along a pro-etale immersion
 
-Source: Stacks Project, Tag 09AA (1), with open slice restriction, and Modules on Sites,
-Tags 03D2, 03DB and 04JC
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 09AA (1), with open slice restriction.
+* Stacks Project, Modules on Sites, Tags 03D2, 03DB and 04JC.
 -/
 
 @[expose] public section
@@ -219,40 +220,7 @@ end ScalarExtension
 abelian and module sheaves. The module underlying-sheaf comparison is natural; the graph
 condition on arbitrary test sheaves expresses transport of the scalar action under the
 finite-product comparison. The final functor is characterized on both objects and maps
-by the specified sheaf tensor extension, so it is not an arbitrary exact functor.
-
-Source: Stacks Project, Tag 09AA (1), and Modules on Sites, Tags 03D2, 03DB and 04JC
-(auxiliary; not a blueprint node).
-
-Proof:
-1. For a weakly etale map, composition on pro-etale site objects is left adjoint
-   to base change. Its sheaf restriction preserves limits sectionwise. Uniqueness
-   of left adjoints identifies restriction with the specified inverse image.
-   Compose adjunctions to obtain the inverse-image composition comparison.
-2. For an affine closed immersion, the extra left adjoint supplied by
-   lem-weil-pbc-affine-closed-inverse-image-left-adjoint makes inverse image a right
-   adjoint, hence limit preserving. Apply the Zariski-local preservation theorem
-   to affine opens to handle any closed immersion. Factor a locally closed immersion
-   into its closed lift to the coborder followed by the open inclusion, and compose.
-3. Identify abelian sheaves with commutative-group objects in set sheaves. Direct image
-   commutes with this identification: the product and terminal comparisons of restriction
-   are identities, and the operation equations verify preservation of zero and addition.
-   Lift the set adjunction to groups and use uniqueness of left adjoints. This gives the
-   underlying-set comparison, so the limit-preserving, conservative forgetful functor
-   transfers all-limit preservation from sets to abelian sheaves.
-4. Use proEtale_moduleInverseImage_comparison for the natural abelian comparison and
-   the scalar graph assertion. Forgetting modules to abelian sheaves preserves limits
-   and finite colimits and reflects them. Transfer preservation through the comparison;
-   abelian inverse image preserves colimits by its adjunction. Its additivity transfers
-   through the comparison and the faithful additive forgetful functor.
-5. Take the specified proEtaleRingModulePullback, whose objects and maps are the given
-   sheafified tensor extension. Its additive and finite exactness instances are available.
-   The existing operations module proves the tensor/restriction adjunction, which
-   identifies extension of scalars as left adjoint to restriction. Restriction along a ring
-   isomorphism is an
-   equivalence, with inverse restriction along its inverse. Uniqueness of left adjoints
-   identifies extension with the inverse equivalence, so it preserves all limits.
-   Compose with pure module inverse image. -/
+by the specified sheaf tensor extension. (Stacks, Tag 09AA, and Tags 03D2, 03DB, 04JC.) -/
 theorem proEtale_immersion_inverseImage_preservesLimits
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsImmersion f] :
     PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1))) ∧

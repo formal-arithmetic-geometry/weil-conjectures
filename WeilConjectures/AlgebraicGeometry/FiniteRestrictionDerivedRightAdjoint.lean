@@ -16,8 +16,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Right adjoint to derived restriction along the direct-image algebra
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3
-(blueprint: lem-sc-finite-restriction-derived-right-adjoint). -/
+## References
+
+* Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3.
+-/
 
 @[expose] public section
 
@@ -27,29 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Supply the auxiliary adjunction required by finite derived duality. This asserts
-only an adjoint to derived restriction of algebra scalars; it makes no assertion about
-f's right adjoint, its degree-zero representative, or its counit.
-
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3
-(blueprint: lem-sc-finite-restriction-derived-right-adjoint).
-
-Proof:
-1. Apply `exists_affine_derivedSheafHom_adjunction` to f. This supplies the derived
-   sheaf-Hom functor H, the left functor T, the adjunction T |- H, and a natural
-   isomorphism Q ⋙ T ≅ restrictScalars.mapHomologicalComplex ⋙ Q.
-2. Restriction of scalars is exact: kernels and cokernels retain their underlying
-   abelian sheaves, with the restricted action. The finite-limit and finite-colimit
-   clauses of `derivedRHomAlgebraModule` apply to the algebra sheaf f_* O_X.
-   Consequently its termwise functor descends to mapDerivedCategory.
-3. Compose the factorization isomorphism of mapDerivedCategory with the inverse
-   of T's factorization. Full faithfulness of precomposition by the localization Q
-   descends this to T ≅ restrictScalars.mapDerivedCategory. The exact-functor
-   comparison `rightDerivedFunctorIsoMapDerivedCategory` identifies the latter
-   with restrictScalars.rightDerivedFunctor.
-4. Transport T |- H along this natural isomorphism (`Adjunction.ofNatIsoLeft`).
-   Its right adjoint H is the required witness. This does not require a nonempty
-   scheme, nonzero algebra, finite rank, or Noetherianity. -/
+/-- The auxiliary adjunction required by finite derived duality: an adjoint to derived
+restriction of algebra scalars. (Stacks, Tag 0BV0) -/
 theorem finiteRestriction_derived_rightAdjoint
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -85,16 +85,7 @@ lemma fp_extend
   fp_map R S (Mod.extendScalars φ) (extendScalarsRegularIso R S φ) h
 
 omit [IsCommMonObj S] in
-/-- Extension of scalars preserves locally finitely presented internal modules.
-Source: the finite-presentation argument in the proof of scalar-extension preservation
-in Bhatt--Scholze, Sections 6.5 and 6.8, and the existing bounded scalar-extension proof
-(auxiliary; not a blueprint node).
-
-Proof: extension of scalars preserves finite colimits and sends the regular module to
-the regular module, so it sends a finite free cokernel presentation to one over the
-new ring. Pullback commutes with scalar extension by uniqueness of left adjoints.
-Applying these facts on the original pro-étale presentation cover proves the claim.
-The argument includes rank-zero presentations and the empty scheme. -/
+/-- Extension of scalars preserves locally finitely presented internal modules. -/
 lemma lfp_extend
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
     (h : IsLocallyFinitelyPresented R M) :

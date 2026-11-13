@@ -30,17 +30,8 @@ noncomputable local instance tensorNaturality (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- The tensor comparison for canonical open restriction is natural in both modules.
-Source: Stacks Project, Tag 01CD, functoriality of pullback and tensor product;
-Tag 08DX, proof of (1), applies the resulting comparison locally.
-Proof: Scheme.Modules.overFunctorEquiv identifies the canonical over-site composite
-with restriction along U.ι. Compose with restrictFunctorIsoPullback to identify it
-naturally with Scheme.Modules.pullback U.ι. The source library gives this pullback
-its monoidal structure. Transport that structure along the inverse natural
-isomorphism using Functor.Monoidal.transport. Choose the inverse tensorators of
-the transported structure; Functor.OplaxMonoidal.δ_natural gives the displayed
-square. This construction applies to every open, including the empty open.
-(blueprint: lem-pc-open-restriction-tensor-natural). -/
+/-- The tensor comparison for canonical open restriction is natural in both modules
+(Stacks, Tag 01CD). -/
 theorem exists_openRestriction_tensor_natural (X : Scheme.{u}) (U : X.Opens) :
     let R :=
       SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙

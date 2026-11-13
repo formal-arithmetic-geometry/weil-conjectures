@@ -25,9 +25,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # Intrinsic completion over the completed coefficient sheaf
 
-Source: blueprint, proper base change, order 1247; Stacks Tags 099M and 091Z
-(blueprint: def-weil-pbc-intrinsic-completion).
-
 The ring and tensor product are those of Mod(A_T), with site object universe t+1
 and morphism universe t. The mapping cocone of minus (1-shift) has differential
 (dx, (1-shift)x-dy) after listing its degree-i terms as (x,y).
@@ -38,6 +35,10 @@ and morphism universe t. The mapping cocone of minus (1-shift) has differential
 * `completedKoszulFiber`: the explicit completion complex.
 * `completedIntrinsicCompletionMap`: its specified unit.
 * `IsCompletedIntrinsicallyDerivedComplete`: invertibility of that unit.
+
+## References
+
+* Stacks Project, Tags 099M and 091Z.
 -/
 
 @[expose] public noncomputable section
@@ -60,15 +61,11 @@ variable {M : Type*} [Category* M] [Preadditive M] [MonoidalCategory M]
 
 end TensorUnits
 
-/-- Constant A-modules extended to the actual completed coefficient sheaf.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Constant A-modules extended to the actual completed coefficient sheaf. -/
 def completedKoszulConstant : ModuleCat.{t + 1} A ⥤ adicDatumModules X d :=
   adicLisseConstantModules X A ⋙ completedConstantExtension X (adicDatumScalar X d)
 
-/-- Constant module sheafification and scalar extension are additive.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: addition and zero hold on the constant presheaves, then on their sheafification;
-scalar extension is additive by its specified tensor/restriction adjunction. -/
+/-- Constant module sheafification and scalar extension are additive. -/
 theorem completedKoszulConstant_additive : (completedKoszulConstant X d).Additive := by
   let := CompletedConstantReduction.constant_additive X A
   exact Functor.Additive.mk (by
@@ -79,10 +76,7 @@ theorem completedKoszulConstant_additive : (completedKoszulConstant X d).Additiv
 attribute [instance] completedKoszulConstant_additive
 
 /-- The completed unit is the image of 1 tensor 1 in the extended constant module.
-The section formula uniquely determines it, including over the empty scheme.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: maps from the regular module correspond to global sections. The compatible
-section 1 tensor 1 gives the map and determines it uniquely by linearity. -/
+The section formula uniquely determines it, including over the empty scheme. -/
 theorem completedKoszulOne_exists :
     ∃! u : SheafOfModules.unit ((adicLisseForget X).obj (adicDatumRing X d)) ⟶
         (completedKoszulConstant X d).obj (ModuleCat.of A A),
@@ -120,8 +114,7 @@ theorem completedKoszulOne_exists :
       (congrArg (fun z : M.sections ↦ z.val U)
         (M.unitHomEquiv.apply_symm_apply s)).symm
 
-/-- The canonical degree-zero unit of the extended Koszul complex.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The canonical degree-zero unit of the extended Koszul complex. -/
 def completedKoszulOne := (completedKoszulOne_exists X d).exists.choose
 
 section Descent

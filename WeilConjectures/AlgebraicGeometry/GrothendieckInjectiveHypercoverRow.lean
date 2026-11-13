@@ -67,19 +67,8 @@ private theorem section_a0_map (U : FiniteSplitEtaleHypercover X)
     CochainComplex.fromSingle₀Equiv_symm_apply_f_zero]
   rfl
 
-/-- Injective hypercover rows are acyclic with arbitrary Grothendieck abelian coefficients.
-Source: Stacks Project, Hypercoverings, Tag 01GW, and Gabriel--Popescu.
-(auxiliary; not a blueprint node).
-
-Proof: embed the coefficient category by Hom from a separator into modules over
-its opposite endomorphism ring. The exact tensor left adjoint induces a
-monomorphism-preserving left adjoint on sheaves. Thus the induced module sheaf
-of an injective sheaf is injective. Apply the module hypercover-row theorem.
-The embedding is additive and faithful, and therefore reflects exact short
-complexes and monomorphisms. Its action commutes with the finite alternating
-sums defining every differential and with the augmentation. Reflect the exact
-augmented row degree by degree. The degree-zero and positive-degree criteria
-for quasi-isomorphisms conclude. -/
+/-- Injective hypercover rows are acyclic with arbitrary Grothendieck abelian coefficients
+(Stacks, Tag 01GW, and Gabriel--Popescu). -/
 theorem injective_row_quasiIso (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology A) [Injective F] :
     QuasiIso (sectionAugmentation A U F) := by

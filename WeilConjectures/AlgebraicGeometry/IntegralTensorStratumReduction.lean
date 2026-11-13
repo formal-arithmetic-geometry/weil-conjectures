@@ -24,11 +24,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # The shriek-stratum reduction for integral tensor constructibility
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md,
-paragraphs “Reduction to a stratum” and the first sentence of “The stratum”
-(blueprint: lem-sfb-integral-tensor-stratum-reduction).
 -/
 
 @[expose] public section
@@ -44,25 +39,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- To prove integral tensor closure it suffices to tensor bounded constructible
-objects with the bounded finite free scalar local models on the strata.
-
-Source: det-lem-int-tensor-product.proof.md, “Reduction to a stratum” and the
-pullback assertion at the start of “The stratum”.
-(blueprint: lem-sfb-integral-tensor-stratum-reduction).
-
-Proof: fix L and let P be the class of K for which K tensor L is bounded constructible.
-Native K-flat tensor is exact, and the integral bounded constructible subcategory is
-triangulated by lemma-structure-integral-constructible-complexes. Thus P is isomorphism invariant,
-shift invariant and extension closed. Apply lemma-inverse-image-tensor-product (2) to reduce to K =
-a_! M, where M is bounded constructible on the locally closed stratum S with the displayed scalar
-chart complexes. The separated finite type hypotheses pass to S. The projection
-formula lemma-inverse-image-tensor-product--2 gives (a_! M) tensor L = a_!(M tensor a^*L).
-By lemma-inverse-image-tensor-product, a^*L is bounded constructible. The supplied stratum
-assertion applies to M and a^*L. Finally lemma-inverse-image-tensor-product (1) carries this
-bounded constructible tensor back to X. Transport the coefficient presentation by the
-canonical equality of continuous integer-ring objects; no arbitrary tensor comparison
-or independent closure theorem is used. Empty strata and zero local complexes are
-included in the finite shriek generation assertion. -/
+objects with the bounded finite free scalar local models on the strata. -/
 theorem integralTensorStratumReduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

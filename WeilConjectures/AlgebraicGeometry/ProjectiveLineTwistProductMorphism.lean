@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 /-! # The pointwise multiplication morphism of twists
 
-Source: Stacks Project, Constructions, Equation 27.10.1.1 and Tag 01MS.
-(blueprint: lem-sc-p1-twist-product-morphism).
+## References
+
+* [Stacks Project, Equation 27.10.1.1 and Tag 01MS](https://stacks.math.columbia.edu/tag/01MS)
 -/
 
 @[expose] public section
@@ -37,24 +38,8 @@ private theorem exists_tensorHom (X : Scheme.{u}) (F G H : X.Modules)
   obtain ⟨φ, hφ, _⟩ := SheafOfModules.tensor_bilinear_universal X.sheaf F G H β hβ
   exact ⟨φ, fun U s t ↦ hφ (Opposite.op U) s t⟩
 
-/-- Twisting sections multiply pointwise through the sheaf tensor product.
-
-Source: Stacks Project, Constructions, Equation 27.10.1.1 and Tag 01MS;
-Step 2 of lem-sc-p1-twist-multiplication.
-(blueprint: lem-sc-p1-twist-product-morphism).
-
-Proof: For each open U multiply two twisting sections pointwise in each prime
-localization. Their product has degree n+m, by the graded multiplication rule.
-Local homogeneous fraction representatives multiply to a homogeneous fraction
-representative, so this is a section. This operation is bilinear over the
-structure sheaf and commutes with restriction, by the ring laws in each
-localization. The tensor universal property gives a morphism from the tensor
-product of the two underlying presheaves into the degree n+m twisting presheaf.
-Apply the sheafification adjunction and the canonical identification of the
-sheaf tensor product with the sheafification of the presheaf tensor product.
-The adjunction unit equation says the resulting morphism on tmulSection is
-exactly the pointwise product with which we started. This works in every degree,
-including zero and negative degrees, without choosing any isomorphism or basis. -/
+/-- Twisting sections multiply pointwise through the sheaf tensor product
+(Stacks, Equation 27.10.1.1 and Tag 01MS). -/
 theorem projectiveLine_twist_product_morphism (k : Type u) [Field k] :
     ∃ μ : ∀ n m : ℤ,
         Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗

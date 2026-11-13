@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Base change for individual affine Čech coefficients
 
-Source: Stacks Project, Tag 02KE, the affine coefficient calculation. -/
+## References
+
+* [Stacks Project, Tag 02KE](https://stacks.math.columbia.edu/tag/02KE)
+-/
 
 @[expose] public section
 
@@ -23,25 +26,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Individual affine intersection coefficients have natural base-change section
-coordinates. No products of coefficients, extended complexes, or differentials occur.
-Source: Stacks Project, Tag 02KE, Lemma 30.5.1 and the termwise calculation in
-Lemma 30.5.2; Tags 01I9 and 01IA for affine quasi-coherent sections.
-(blueprint: lem-pc-finite-affine-cech-coefficient-base-change).
-
-Proof: Separatedness over the affine U makes each nonempty finite intersection Z of
-the V_i affine. The cartesian square identifies the intersection of the W_i with the
-base change of Z. Its map to T' is affine by the intersection base-change theorem.
-Over an affine B, its sections are Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F).
-The tilde, scalar restriction, and the two pullbacks in H give this same module by
-associativity of tensor products and the affine pullback section formula. Identify
-these modules by the map sending b tensor s to b times the pullback of s. This map
-is invertible by the affine section formula. Naturality of the pullback unit gives
-commutation with face restrictions and with restrictions of B; multiplication on the
-first tensor factor gives the scalar equation. These equations hold on pure tensors,
-hence on all sections by additivity. Restrict to affine subopens of overlaps to check
-agreement and glue the maps and their inverses using the sheaf axiom. The three
-identities are local and so hold on every B. Empty intersections give zero modules;
-when there is no increasing tuple, there is no coefficient assertion to check. -/
+coordinates. No products of coefficients, extended complexes, or differentials occur
+(Stacks, Tags 02KE, 01I9, 01IA). -/
 theorem finiteAffineCech_coefficient_baseChange {X T : Scheme.{u}} (f : X ⟶ T)
     [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]
     (U : T.Opens) (hU : IsAffineOpen U) {r : ℕ}

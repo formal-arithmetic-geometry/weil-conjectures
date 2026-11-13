@@ -16,9 +16,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Zariski gluing after a local refinement of an étale representative
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, construction of the
-section of the Zariski inverse image and compatibility with its unit.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-gluing).
+## References
+
+* Stacks Project, Tag 09ZF.
 -/
 
 @[expose] public section
@@ -61,29 +61,7 @@ private theorem lift_of_local_lifts
 /-- Locally factoring a morphism through an étale representative puts the restricted
 section in the Zariski inverse image. The map lift identifies global Zariski
 sections with étale sections, and compare is compatible with the Zariski unit.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, construction of t'
-and its membership in the Zariski inverse-image subsheaf.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-gluing).
-
-Proof:
-1. Put F' = h^*F and i' = pullback.snd i h. Restrict F' to the open-subscheme
-   site of X' to obtain G. The canonical identification of the top open scheme
-   with X', and of X' with the pullback of the identity of X, gives the map lift.
-2. On W_a, use phi_a and its commuting equation to pull s back to a section of
-   F'. Naturality and the unit-compatible composition isomorphism show that its
-   restriction to W_a times_X Z is the transported pullback t' of t.
-3. Apply the injective Zariski-to-étale comparison for the closed immersion i'.
-   Send these local F' sections by the Zariski inverse-image unit. On overlaps
-   their comparison images are both restrictions of t'. Injectivity therefore
-   makes their Zariski images agree. Glue them by the topological sheaf axiom
-   to sigma. The preimages of the W_a cover Z', including when the cover is empty.
-4. Compose the global component of this comparison with the étale composition
-   isomorphism and the canonical fibre-product identifications to define compare.
-   Its value at sigma equals the pullback of t by the sheaf axiom. Its value on
-   a Zariski unit equals the pullback of lift a, by the comparison-unit equation.
-   Transport the latter along pullback.condition to get exactly the displayed
-   equation. No finite-morphism, compactness, or global-section-bijectivity
-   hypothesis is used in this gluing argument. -/
+(Stacks, Tag 09ZF) -/
 theorem gabber_h0_zariski_gluing
     {X Z U X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (q : U ⟶ X) [Etale q] (h : X' ⟶ X)

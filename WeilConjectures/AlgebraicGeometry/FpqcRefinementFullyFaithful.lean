@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FpqcSingletonFullyFaithful
 /-!
 # Full faithfulness of refinement for fpqc descent data
 
-Source: Stacks Project, Descent, Lemma 35.35.11 (Tag 02W0), specialized to singleton
-fpqc coverings (blueprint: lem-galois-fpqc-refinement-fully-faithful).
+## References
+
+* [Stacks Project, Tag 02W0](https://stacks.math.columbia.edu/tag/02W0)
 -/
 
 @[expose] public section
@@ -139,19 +140,7 @@ private theorem singleton_cover_baseChange {S X Y Z : Scheme.{u}}
 /-- For singleton fpqc coverings `f` and `g` of `S`, with `g = h ≫ f`, descent data
 pull back along `h`. Every morphism of the pulled-back data uniquely descends to a
 morphism of the original data. The pullback objects and their data are described by
-`IsPullback` and `Over.DescentDatum.IsBaseChange` respectively.
-
-The proof of Stacks, Tag 02W0, forms `X' ×_S X`. Its projections to `X` and `X'` are
-singleton fpqc coverings by base change (Tag 022D). The singleton full-faithfulness
-theorem (Tag 0241) applies to both projections. The canonical comparison of pullbacks
-(Tags 02VS and 023Y) identifies pullback along the projection to `X` with pullback
-along `h` followed by the projection to `X'`. Given a morphism between the data pulled
-back along `h`, fullness for the projection to `X` lifts its further pullback to a
-morphism of the original data. Faithfulness for the projection to `X'` shows that this
-lift pulls back to the given morphism. Faithfulness for the projection to `X` makes the
-lift unique.
-
-(blueprint: lem-galois-fpqc-refinement-fully-faithful) -/
+`IsPullback` and `Over.DescentDatum.IsBaseChange` respectively (Stacks, Tag 02W0). -/
 theorem fpqcRefinementFullyFaithful {S X X' : Scheme.{u}}
     (f : X ⟶ S) (g : X' ⟶ S) (h : X' ⟶ X)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

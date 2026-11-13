@@ -17,8 +17,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived internal Hom from a pseudo-coherent algebra
 
-Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2
-(blueprint: lem-sc-pseudo-coherent-rhom-qcoherent).
+## References
+
+* [Stacks, Tag 0A6H], [Stacks, Tag 0BV0], [Stacks, Tag 0BV1], [Stacks, Tag 0AX2]
 -/
 
 @[expose] public section
@@ -33,24 +34,7 @@ namespace AlgebraicGeometry
 pseudo-coherent as an underlying module takes bounded-below quasi-coherent objects to
 bounded-below quasi-coherent algebra-module objects. Forgetting the algebra action gives
 an object of the bounded-below quasi-coherent derived category of the scheme.
-
-Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2
-(blueprint: lem-sc-pseudo-coherent-rhom-qcoherent).
-
-Proof:
-1. By def-pur-pseudo-coherent-complex, choose affine neighbourhoods with bounded-above
-   finite-free models for A. Noetherian schemes are quasi-compact, so finitely many suffice.
-   By lem-sc-derived-internal-hom-restrict-open, internal Hom restricts to these models.
-   By lem-sc-derived-open-restriction-adjunction-exact, K retains its lower bound.
-2. Matrices of maps of finite-free sheaves come from the affine coordinate ring by
-   lem-weil-pbc-spec-module-tilde-sections. By lem-pc-affine-qcoh-derived-equivalence,
-   represent K on each affine by a bounded-below module-derived object. Apply
-   lem-sc-affine-pseudo-coherent-rhom-qcoherent to obtain quasi-coherent cohomology and a
-   lower bound there. Quasi-coherence is local; take the minimum of the finitely many
-   lower bounds to get a global bound.
-3. The first argument's algebra action gives def-pc-derived-rhom-algebra-module. By
-   def-pc-derived-category-qcoh-algebra, quasi-coherence means quasi-coherence after
-   restriction of scalars, which is exact. Thus both asserted memberships follow. -/
+(Stacks, Tags 0A6H, 0BV0, 0BV1, 0AX2) -/
 theorem pseudoCoherentRHomQuasiCoherent
     (Y : Scheme.{u}) [IsNoetherian Y]
     (A : Y.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent)

@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineRestrictionVa
 
 /-! # Raw affine cohomology classes eventually vanish
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-local-class-vanishing).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -42,29 +44,8 @@ private lemma covering_of_affine_arrows {S : Scheme.{v}} (W : S.Etale)
   exact R.downward_closed (hR (V x) (f x) (by dsimp [V, 𝒰]; infer_instance)) a
 
 /-- A raw class whose limit sheafification is zero is locally killed at later stages.
-Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit; Tags 03Q8 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-local-class-vanishing).
-
-Proof: Local injectivity of the sheafification unit first gives a covering sieve
-on which the raw limit class itself is zero. Refine each member by its affine
-open cover. Raw pullback commutes with restriction, by functoriality of pullback
-on derived Hom, so the restricted stage class has zero raw limit image.
-On each affine member W, base change the scheme cone along W.hom. The stages
-are qcqs because W is affine and the structure maps are qcqs; transitions remain
-affine and the cone remains limiting. Restrict coefficients and their maps;
-inverse image preserves their colimit. Put these sheaves in degree zero with
-uniform lower bound zero, and apply complex cohomology continuity (0EZM).
-The free abelian sheaf on W corepresents sections. Etale restriction has an exact
-left adjoint and preserves injectives, so derived adjunction identifies these
-raw Hom groups with cohomology on W times_S X_i, naturally in pullback and
-coefficients. Single and shift comparisons identify the cocone maps with
-abelianHigherDirectImageRawPullback. Injectivity of the colimit comparison and
-the filtered group colimit equality criterion give a later zero representative.
-Generate a sieve from these affine covering arrows. A further restriction
-preserves zero and commutes with raw pullback, giving the asserted witness on
-every arrow of the sieve. Cover transitivity makes this sieve covering.
-For p = 0 use section continuity; empty objects have zero raw group. No common
-later stage, higher-image sheaf comparison, or finite-cover gluing is asserted. -/
+No common later stage, higher-image sheaf comparison, or finite-cover gluing is asserted.
+(Stacks, Tags 09Z1, 03Q8 and 0EZM) -/
 theorem exists_higherDirectImage_raw_local_class_eq_zero {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

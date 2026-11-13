@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
 /-! # Invertibility of the specified ordinary projective-line exchange
 
-Source: Stacks Tag 0DDE; comparison of exact and left-derived mates
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 0DDE]
 -/
 
 @[expose] public noncomputable section
@@ -109,17 +110,8 @@ private theorem isIso_derived_exchange_iff_exact
 
 namespace Etale
 
-/-- Proper exchange for the exact-mate presentation used by the ordinary finite P1 arrows.
-Source: Stacks Tag 0DDE and the canonical mate transport along exact inverse image
-(auxiliary; not a blueprint node).
-
-Proof: projective space is proper over every scheme. A finite ring is additively
-torsion, so the unbounded torsion-ring proper-base-change theorem makes its derived
-exchange invertible. Transport the mate along the canonical isomorphisms from
-left-derived inverse image to exact termwise inverse image. Conjugation changes its
-right adjoints only by isomorphisms, hence preserves invertibility. The specified
-ordinaryFiniteP1Exchange is this exact mate composed with the invertible endpoint
-comparisons. No condition on the change of base, or on the coefficient complex, is used. -/
+/-- Proper exchange for the exact-mate presentation used by the ordinary finite P1 arrows
+(Stacks, Tag 0DDE). -/
 theorem isIso_ordinaryFiniteP1Exchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (g : S' ⟶ S)

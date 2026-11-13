@@ -44,25 +44,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
 
 /-- Shifted Hom from a constructible integral sheaf commutes with uniformly bounded-below
 sequential colimits. The lifted indexing category is equivalent to the ordinary natural numbers.
-Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3),
-Lemma 6.8.12 and the proof of Lemma 6.3.14.
-(auxiliary; not a blueprint node)
-
-Proof. Apply the good-truncation comparison theorem at the common cohomological
-lower bound. Exact filtered colimits preserve the truncation quasi-isomorphisms,
-so it suffices to use canonical cocones of termwise bounded-below diagrams.
-Resolve a locally finitely presented integral module by two locally finite free
-modules. Their Hom continuity and the rotated short exact single-sheaf triangle
-prove continuity for the resolved module in every integer shift. Integral torsion
-is retained in this resolution. For a locally closed piece, use the coefficient-
-generic costalk-model theorem: it identifies the Hom diagram and cocone with a
-strictly bounded-below model on the stratum, compatibly with every leg. Invertible
-stage and vertex comparisons then identify the canonical colimit.desc maps.
-Finally, finite stratification and noetherian open/closed induction express a
-constructible sheaf as a finite distinguished extension of these pieces. Induct
-on that tower using distinguished extension closure of homColimitProperty. The
-good-truncation comparison returns the result for the supplied cocone c. Empty
-schemes and zero ranks are covered by the same categorical argument. -/
+(Bhatt--Scholze, Proposition 6.8.11(3), Lemma 6.8.12) -/
 theorem integralConstructible_sheaf_hom_colimit (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

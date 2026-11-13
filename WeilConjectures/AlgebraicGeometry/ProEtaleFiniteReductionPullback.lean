@@ -13,8 +13,6 @@ public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 The finite constant-sheaf identifications and the adjunction-mate calculation for a
 single continuous finite quotient. This calculation is independent of the integral
 limit and of its ring-compatible comparison.
-
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +27,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical comparison between a constant commutative ring sheaf, regarded as
-an abelian sheaf, and the constant abelian sheaf of its additive group.
-Source: blueprint pullback clause 1, canonical finite constant-sheaf identifications
-(blueprint: lemma-comparison-completed-coefficients--4). -/
+an abelian sheaf, and the constant abelian sheaf of its additive group. -/
 def sfbConstantRingAbIso (X : Scheme.{u}) (A : CommRingCat.{u + 1}) :
     (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
         ((sheafCompose (Scheme.ProEt.topology X)

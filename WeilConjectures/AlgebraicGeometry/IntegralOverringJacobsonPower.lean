@@ -15,9 +15,9 @@ import Mathlib.RingTheory.Ideal.GoingUp
 /-!
 # Jacobson radical descends through an integral overring
 
-Source: Stacks Project, Varieties Lemma 09N2 proof, paragraph beginning
-“Moreover, `Spec(B') -> Spec(A)` is surjective” (blueprint:
-lem-sc-integral-overring-jacobson-power).
+## References
+
+* Stacks, Varieties, Lemma 09N2 (proof).
 -/
 
 @[expose] public section
@@ -25,34 +25,11 @@ lem-sc-integral-overring-jacobson-power).
 universe u v w
 
 /--
-(blueprint: lem-sc-integral-overring-jacobson-power)
 Let `B` be a semilocal commutative ring, let `B'` be a semilocal commutative
 ring integral over `B`, and let `A` be an intermediate commutative ring.
 If `Spec(B') → Spec(A)` is surjective, then `A` is semilocal and
 `J(A) = √(m_B A)`.  Every element of `A` lying in `J(B')` therefore has a
-positive power in `m_B A`.  This is the Jacobson-radical argument in
-Stacks, Varieties Lemma 09N2, proof of `lemma-semi-local-dimension-one-conductor`.
-
-Proof (following the blueprint node):
-1. Injectivity and the scalar tower identify `B ⊆ A ⊆ B'`. Integrality of `B'`
-   over `B` implies integrality of `A` over `B` and of `B'` over `A`
-   (def-weil-pbc-integral-closure).
-2. Spec-surjectivity lifts each maximal ideal of `A` to a prime of `B'`.
-   Integrality makes that prime maximal
-   (lem-weil-pbc-integral-prime-over-maximal-maximal), and contraction of a maximal
-   ideal is maximal (lem-weil-pbc-integral-algebra-ideal-in-radical). Thus the
-   maximal ideals of `A` are contractions of the finitely many maximal ideals of `B'`.
-3. Integrality gives `m_B A ≤ J(A)`
-   (lem-weil-pbc-integral-algebra-ideal-in-radical), hence `√(m_B A) ≤ J(A)`.
-   A prime of `A` containing `m_B A` contracts to a prime containing the finite
-   intersection of the maximal ideals of `B`. Their product lies in this
-   intersection, so primality forces the contraction to contain one maximal ideal,
-   hence to equal it. The original prime is then maximal
-   (lem-weil-pbc-integral-prime-over-maximal-maximal). The intersection of these
-   primes therefore contains `J(A)`, proving the reverse inclusion. If `B` has no
-   maximal ideals, `m_B` and its extension are the unit ideals, and equality holds.
-4. An element of `A` mapping into `J(B')` lies in every maximal ideal of `A`
-   by step 2. Step 3 puts it in `√(m_B A)`, so a positive power lies in `m_B A`.
+positive power in `m_B A`.
 -/
 theorem integral_overring_jacobson_power
     (B : Type u) (A : Type v) (B' : Type w)

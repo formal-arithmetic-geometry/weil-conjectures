@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionEdge
 
 /-! # Module/Ext comparisons compatible with the direct-image edge map
 
-Source: Stacks Project, Tags 03FD, 01FB and 01F7.
-(blueprint: new-module-cohomology-ext-edge-comparison)
+## References
+
+* [Stacks, Tags 03FD, 01FB and 01F7]
 -/
 
 @[expose] public section
@@ -24,33 +25,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For the base-change projection f, comparisons can be chosen coherently
-for the direct-image edge map.
-
-Source: Stacks Project, Tag 03FD, Lemma 21.12.4; Tag 01FB, Remark 20.14.2;
-Tag 01F7, Section 20.14.
-(blueprint: new-module-cohomology-ext-edge-comparison)
-
-Proof: Construct the comparisons on X and Y from forgotten injective module
-resolutions. Their terms are acyclic for abelian sections (03FD), so taking
-abelian sections computes the same cohomology as module sections. Identify Ext
-from the free abelian sheaf on the terminal open with Ext from the constant
-integer sheaf by evaluation at 1. Use this same identification on both schemes.
-For a module map, an augmentation-preserving lift between resolutions computes
-both maps, and homotopy independence gives naturality of each comparison.
-For F on X, resolve F by I and resolve f_*I by an injective complex K on Y.
-Resolve f_*F by J and lift its canonical augmentation into K. These choices
-are exactly the 01FB diagram for the identity of f_*F. The section complexes
-of I and f_*I agree by restriction along f inverse(Y)=X. The map into K is a
-quasi-isomorphism on sections, hence its cohomology map is invertible.
-Forgetting modules leaves the same diagram in abelian sheaves. Under the
-constant-sheaf identification its map is inverse image on Ext followed by the
-counit coefficient map coeff f (identity). Cancel the invertible vertical map
-in the common diagram and transport through the two resolution comparisons.
-This proves the edge equality; choices disappear by homotopy independence.
-This statement uses only the identity coefficient map: a general coefficient
-map must subsequently be handled by naturality on both cohomology models.
-Degree zero, empty schemes and zero coefficients use the same section diagram.
-No flatness or acyclicity of f_*F itself is assumed. -/
+for the direct-image edge map (Stacks, Tags 03FD, 01FB and 01F7). -/
 theorem exists_moduleCohomology_ext_edge_comparison
     {R B : Type u} [CommRing R] [CommRing B] [Algebra R B]
     {Y : Scheme.{u}} (h : Y ⟶ Spec (.of R)) (p : ℕ) :

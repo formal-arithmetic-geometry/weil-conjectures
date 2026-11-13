@@ -23,8 +23,13 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemsDictionary
 /-!
 # Grothendieck existence with proper support
 
-Source: Stacks Project, Cohomology of Schemes, Theorem 088E and Remark 088F,
-with indices shifted by one (blueprint: prop-weil-pbc-grothendieck-existence).
+## Implementation details
+
+Indices are shifted by one relative to the Stacks Project.
+
+## References
+
+* [Stacks Project, Cohomology of Schemes, Tags 088E, 088F]
 -/
 
 @[expose] public section
@@ -53,8 +58,7 @@ private theorem eq_of_comp_unit_eq {C D E : Type*} [Category C] [Category D] [Ca
 /-- Full faithfulness in Grothendieck existence: for any comparison `c` of the iterated and the
 direct pullbacks to the thickenings, a family of maps on the thickenings compatible with `c`
 between coherent modules with proper support comes from a unique map of modules.
-Source: Stacks Project, Tags 088E and 088F.
-(blueprint: prop-weil-pbc-grothendieck-existence). -/
+(Stacks, Tags 088E and 088F) -/
 theorem grothendieck_existence_fullyFaithful
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]
@@ -171,45 +175,11 @@ theorem grothendieck_existence_fullyFaithful
     exact (hw' n).trans (congrArg (fun t ↦ t.val n) hw).symm
 
 /-- Full faithfulness and algebraization for coherent modules with proper support.
-Source: Stacks Project, Tags 088E and 088F.
 The two projection equations specify the canonical transition immersion `i n` uniquely.
 The adjunctions `ai n`, `aj n` are choices of the tensor-pullback adjunctions; the comparison
 `c n` is the one they determine by its unit equation (part of the conclusion), and both
 halves of the theorem are stated for it. No independent comparison data is assumed.
-
-Proof plan (Stacks 088E, in the form 088F):
-1. X is Noetherian by pqf-lem-locnoeth-lft since it is finite type over Noetherian A.
-   Use lem-weil-pbc-thickening-systems-dictionary to translate systems, morphisms and
-   algebraizations into formal coherent modules and completion.
-2. Full faithfulness: place both modules on a common closed subscheme proper over A by
-   lem-weil-pbc-module-support-proper-over-base and the closed-immersion equivalence.
-   Apply lem-weil-pbc-formal-completion-fully-faithful-proper on that subscheme.
-3. Existence reduces to supporting the system on a closed subscheme proper over A;
-   then prop-weil-pbc-grothendieck-existence-proper and the same equivalence algebraize it.
-4. The empty scheme has only the zero system, which is algebraized by the zero module.
-   Otherwise, by lem-weil-pbc-noetherian-acc-quasi-coherent choose a maximal failing
-   annihilator and replace X by its closed subscheme. Every nonzero ideal then satisfies
-   the claim.
-5. Use theorem-chow-s-lemma-projective-form and theorem-chow-s-lemma-projective-form for a proper
-modification Y,
-   an isomorphism over a dense open U, and a projective compactification Y'.
-6. Pull back and extend the system using lem-weil-pbc-formal-systems-pullback,
-   lem-weil-pbc-support-pullback-finite-type and lem-weil-pbc-pushforward-coherent-on-open.
-   Supports equal that of the first term, so the extension remains coherent on Y'.
-7. Apply lem-weil-pbc-grothendieck-existence-projective. Its algebraization is supported
-   inside Y: otherwise its proper image has a nonempty closed subset avoiding V(I),
-   contradicting lem-weil-pbc-adic-complete-jacobson-radical. Restrict to Y.
-8. Use lem-weil-pbc-reduced-induced-closed-subscheme on X minus U and
-   lem-weil-pbc-formal-systems-push-pull to compare with the coherent proper pushforward.
-   Kernel and cokernel are annihilated by a power of the complement ideal; they exist by
-   lem-weil-pbc-coherent-formal-modules-abelian.
-9. The pushforward has support in the proper image of the support on Y by
-   lem-weil-pbc-closed-subset-proper-over-base-properties and
-   lem-weil-pbc-closed-subset-proper-over-base-union-preimage.
-10. The complement ideal has nonzero powers since its vanishing locus misses the dense U.
-    Induction supports the kernel and cokernel on proper closed subschemes. Conclude for
-    the system by lem-weil-pbc-formal-systems-proper-support-serre.
-(blueprint: prop-weil-pbc-grothendieck-existence). -/
+(Stacks, Tags 088E and 088F) -/
 theorem grothendieck_existence
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

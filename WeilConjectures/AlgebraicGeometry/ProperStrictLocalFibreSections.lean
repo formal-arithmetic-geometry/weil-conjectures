@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 
 /-! # Proper sections over a strictly local base and its geometric closed fibre
 
-Source: Stacks Project, Tags 0A0C, 0A3I and 0A3T.
+## References
+
+* [Stacks, Tag 0A0C], [Stacks, Tag 0A3I], [Stacks, Tag 0A3T]
 -/
 
 @[expose] public section
@@ -87,18 +89,8 @@ private theorem isIso_sections_fieldExtension
   infer_instance
 
 /-- Restriction to a geometric closed fibre preserves sections over a strictly local base.
-Source: Stacks Project, Tags 0A0C, 0A3I and 0A3T
-(auxiliary; not a blueprint node).
-
-Proof: factor `t` through the residue field of R; its image is the closed point, so its
-ring map kills exactly the maximal ideal. Restrict first to the residue-field fibre.
-The henselian-pair comparison for the maximal ideal (Tag 0A0C) makes this restriction
-invertible. The residue field is separably closed. Tag 0A3I makes restriction from that
-fibre to its extension to Ω bijective on underlying sets, hence invertible on modules.
-The pullback pasting isomorphism identifies this iterated fibre with the specified
-cartesian model Z₀. Functoriality of globalSectionsUpperStarMap identifies the composite
-with the map in the statement. A different cartesian model changes it only by an
-isomorphism. This includes the empty fibre and arbitrary, possibly transcendental Ω. -/
+This includes the empty fibre and arbitrary, possibly transcendental, `Ω`.
+(Stacks, Tags 0A0C, 0A3I, 0A3T) -/
 theorem isIso_globalSectionsUpperStarMap_of_strictLocal_geometricClosedPoint
     (Λ : Type (u + 1)) [CommRing Λ]
     (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R]

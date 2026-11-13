@@ -36,12 +36,7 @@ private theorem ordinary_gluing_pullback
   let F : TopCat.Sheaf AddCommGrpCat X := ⟨M.val.presheaf, M.isSheaf⟩
   exact (IsPullback.of_isLimit (F.isLimitPullbackCone A B)).map (forget AddCommGrpCat)
 
-/-- Sectionwise amalgamation of direct-image restrictions.
-
-Source: Stacks Project, Tags 01EB and 08BV.
-(blueprint: lem-pc-open-union-module-image-pullback-core-sectionwise)
-The two-open sheaf axiom, after the section-restriction comparison, gives the
-existence and uniqueness of the amalgamated section at each test open. -/
+/-- Sectionwise amalgamation of direct-image restrictions (Stacks, Tags 01EB and 08BV). -/
 theorem schemeOpenUnionModuleImage_sectionwise_gluing
     (X : Scheme.{u}) (U V : X.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
@@ -126,14 +121,8 @@ private theorem imageRestriction_comp
     ← M.val.map_comp_apply]
   congr 1
 
-/-- Sectionwise amalgamations assemble into the categorical pullback.
-
-Source: Stacks Project, Tags 01EB and 08BV.
-(blueprint: lem-pc-open-union-module-image-pullback-core-assembly)
-The sectionwise existence and uniqueness data is natural in the test open and
-therefore assembles to a morphism of module sheaves.  Its two composites are
-the prescribed restrictions, and sectionwise uniqueness gives the pullback
-universal property. -/
+/-- Sectionwise amalgamations assemble into the categorical pullback
+(Stacks, Tags 01EB and 08BV). -/
 theorem schemeOpenUnionModuleImage_isPullback_of_sectionwise
     (X : Scheme.{u}) (U V : X.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace))

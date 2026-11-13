@@ -16,7 +16,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 import WeilConjectures.AlgebraicGeometry.FieldPullbackRankOneTrivial
 
 /-! # A free generator on the descended marked fibre
-Source: Stacks Project, Tag 0BF2, fibre triviality before the perfect-complex argument.
+
+## References
+
+* Stacks Project, Tag 0BF2
 -/
 
 @[expose] public section
@@ -26,19 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
-/-- Fibre descent and universal structure pushforward give a generator on the marked fibre.
-Source: Stacks Project, Tag 0BF2, the reduction to a trivial bundle on the marked fibre.
-(blueprint: lem-sc-picard-h1-base-descent-fibre-generator)
-
-Proof: The immersion k identifies κ(w) with κ(s). Transport hLs across this identification.
-The descended module N over Spec κ(s) is finite free. Its rank is one: the fibre
-pullback of L is invertible, and the universal structure-pushforward unit implies that
-the fibre structure morphism is surjective. A nonzero fibre point therefore detects
-the rank of N. Choose a basis of this one-dimensional vector space, pull it back, and
-transport it through the descent isomorphism to obtain a global free generator.
-This generates locally at every fibre point. If the fibre were empty, its pushforward
-could not be the nonzero structure module of Spec κ(s), so this case is excluded by hO.
-No H1 injectivity or target-family descent is used. -/
+/-- Fibre descent and universal structure pushforward give a generator on the marked fibre
+(Stacks, Tag 0BF2). -/
 theorem picard_h1_base_descent_fibre_generator {X S : Scheme.{v}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),

@@ -13,8 +13,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Shrinking stalk equality of complex maps
 
-Source: Stacks Project, Tags 09RE, 0BC7 and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-chain-map-equality).
+## References
+
+* Stacks Project, Tags 09RE, 0BC7 and 01CP.
 -/
 
 @[expose] public section
@@ -52,21 +53,7 @@ private theorem restrict_eq_of_le (X : Scheme.{u}) {Z W T : X.Opens}
 set_option backward.isDefEq.respectTransparency false in
 -- Compare component maps of iterated restrictions before assembling chain-map equality.
 /-- Stalk equality of two endomorphisms of a restricted strictly perfect complex
-holds on a smaller neighbourhood.
-Source: Stacks Project, Tag 01CP, finite-type injectivity proof;
-Tag 09RE, affine case (1), finite-component argument.
-(blueprint: lem-sc-perfect-open-stalk-chain-map-equality).
-
-Proof: Fix the bounded support interval of P and finite-free retractions of its
-terms. For every degree in that interval sandwich a.f n - b.f n between the
-restricted retractions. The stalk equality says each entry of this finite matrix
-has zero germ. The germ equality criterion supplies a neighbourhood on which
-that entry vanishes. Intersect these finitely many neighbourhoods over all degrees
-and all entries. Sandwiching back with the splitting identities shows a.f n and
-b.f n agree after restriction. Outside the support interval their source is zero,
-so they agree automatically. Extensionality of complex maps gives the conclusion.
-There are no homotopy components to lift and no differential equations to solve.
-Empty support and zero ranks require no shrinking; no Noetherian assumption enters. -/
+holds on a smaller neighbourhood (Stacks, Tags 01CP and 09RE). -/
 theorem exists_perfect_open_stalk_chain_map_eq
     (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex

@@ -9,9 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
-# Blueprint statements
-
-def-weil-pbc-constructible-complexes.
+# Constructible étale sheaves of modules
 -/
 
 @[expose] public section
@@ -28,8 +26,7 @@ constructible if there is a stratification of `T` such that on each stratum the 
 
 This is `Scheme.IsConstructibleSheaf` for `A = ModuleCat Λ`, phrased with explicit finite
 constant values instead of finitely generated stalks; the two agree by
-`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`. Used for
-def-weil-pbc-constructible-complexes. -/
+`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`. -/
 def IsConstructibleEtaleModuleSheaf {T : Scheme.{u}} {Λ : Type (u + 1)}
     [CommRing Λ] [Finite Λ] (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop :=
   ∃ S : Stratification T, ∀ k : Fin S.n,

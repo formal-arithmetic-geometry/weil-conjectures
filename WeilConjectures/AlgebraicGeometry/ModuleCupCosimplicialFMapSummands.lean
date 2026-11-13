@@ -11,9 +11,12 @@ set_option linter.privateModule false
 /-! # Cross-scheme naturality of front/back summands
 
 This construction uses only paired cosimplicial objects and natural transformations to pushforward.
-Source: Banerjee, arXiv:1004.1491, §1.1.4, front/back formula; Stacks, Tag 0FKU.
-(auxiliary; not a blueprint node).
 No Godement construction or resolution property enters the argument.
+
+## References
+
+* Banerjee, Tensor Structure on Smooth Motives, §1.1.4 (front/back formula).
+* Stacks Project, Tag 0FKU.
 -/
 
 @[expose] public section

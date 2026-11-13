@@ -22,13 +22,13 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The theorem on formal functions at a point of the base
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OD, with the canonical-map
-identification in the proof of Tag 0G7X
-(blueprint: lem-weil-pbc-formal-functions-stalk).
-
 The index n represents the positive level n+1. The maps theta_n are the canonical stalk
 maps, tied by `IsFormalFunctionsTheta`; the isomorphism is specified on every limit
 projection, so it is the canonical one.
+
+## References
+
+* Stacks Project, Tags 02OD and 0G7X
 -/
 
 @[expose] public section
@@ -99,36 +99,10 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 700000 in
 -- Transport through limits and restriction of scalars needs extra elaboration.
-/-- The canonical maps theta_n : M → H^p(X_n, F_n) are compatible with the transitions,
+/-- The canonical maps theta_n: M → H^p(X_n, F_n) are compatible with the transitions,
 kill m^(n+1) M, and induce an isomorphism over the completed local ring from the
 completion of M to the inverse limit, whose composite with M → M^ is (theta_n)_n.
-Source: Stacks, Tag 02OD (blueprint: lem-weil-pbc-formal-functions-stalk).
-
-Proof (the node's nine steps):
-1. A=O_(Y,y) is Noetherian. The canonical map c: Spec A → Y is flat and its image is
-contained in every neighbourhood of y (spec-local-ring-canonical-morphism).
-2. Base change gives a proper map X' → Spec A with coherent pullback F'
-(proper-fp-permanence, locnoeth-lft, coherent-ft-locnoeth, module-pullback-quasi-coherent).
-3. Flat base change identifies the stalk M with H^p(X',F'). The identification on germs
-is pullback on each f⁻¹V (flat-base-change-cohom, flat-base-change-map-sections,
-higher-direct-image-presheaf, module-stalk). The local spectrum has no proper open
-containing its closed point, which computes the final stalk as global cohomology.
-4. Pasting fibre products identifies X_n over Y with the quotient base change over A.
-Its ideal on X' is m^n O_X', and its module is the pullback of F'
-(quotient-base-change-closed-immersion-ideal, module-pullback).
-5. Cohomology-fmap functoriality identifies theta_n with restriction from X' and gives
-transition compatibility. Quotient scalar action makes theta_n kill m^n M
-(module-cohomology-fmap-functorial, module-cohomology-fmap-basic-properties).
-6. The closed immersion unit identifies its pushed-forward module with F'/m^n F'.
-The affine cohomology edge is an isomorphism, preserving the quotient restriction maps
-(closed-immersion-unit-quotient, affine-morphism-cohomology-edge).
-7. These identifications commute with every transition: the two h-maps agree after
-the epimorphic quotient map, so their cohomology maps agree (fmap-functoriality).
-8. Apply theorem-formal-functions over A and m to the coherent F' and compose with
-the inverse-system identifications.
-9. Complete the isomorphism from step 3. The component formula follows from steps 5--8.
-The completed ring acts through A/m^n on each component, so the comparison is linear
-over A-completion. Its composite with M → M-completion has components theta_n. -/
+(Stacks, Tag 02OD.) -/
 theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
     [IsLocallyNoetherian Y] (F : SheafOfModules.{uS} (moduleRings X.toRingedSpace))
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :
@@ -229,13 +203,7 @@ theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
 
 /-- In degree zero for O_X, the comparison is the inverse limit of actual global
 sections. It sends every germ of a section to the pullbacks of that section.
-Source: Stacks, Tags 02OD and 0G7X (blueprint: lem-weil-pbc-formal-functions-stalk).
-
-Proof: apply the preceding nine-step argument in degree zero to O_X. Tensor pullback
-of the unit module is the unit module, H^0 is global sections, and R^0 f_* is f_*.
-The cohomology-fmap-basic-properties degree-zero formula is the section pullback.
-These identifications commute with quotient transitions and preserve the base scalar
-actions, so the resulting completed-ring isomorphism has the displayed germ formula. -/
+(Stacks, Tags 02OD and 0G7X.) -/
 theorem formal_functions_stalk_structureSheaf {X Y : Scheme.{uS}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (y : Y) :
     ∃ e : ModuleCat.of

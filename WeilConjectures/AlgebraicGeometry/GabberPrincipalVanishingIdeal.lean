@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # GabberPrincipalVanishingIdeal
 
-Source: Stacks Project, Tag 0GY0.
-(blueprint: lem-weil-pbc-gabber-principal-vanishing-ideal) -/
+## References
+
+* [Stacks Project, Tag 0GY0](https://stacks.math.columbia.edu/tag/0GY0)
+-/
 
 @[expose] public section
 
@@ -64,25 +66,8 @@ private theorem cohomologyMap_eq_zero_of_transport {X Y : Scheme.{u}}
   simpa only [← Sheaf.H.map_comp_apply, Iso.hom_inv_id,
     Sheaf.H.map_id_apply, map_zero] using h
 
-/-- The principal restrictions killing a class form an ideal in the inductive step.
-
-Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label lemma-gabber-criterion,
-proof's ideal and addition-closure paragraphs.
-(blueprint: lem-weil-pbc-gabber-principal-vanishing-ideal)
-
-Proof: let I consist of f such that the class restricts to zero on D(fh).
-The empty open D(0) gives zero membership, and restriction functoriality gives
-closure under multiplication by any r. For addition, restrict the class to
-D(h(f+g)). If q = 1, apply hfg to hf and hg; its two target opens are
-D(h^2 f(f+g)) and D(h^2 g(f+g)), equal to D(hf(f+g)) and D(hg(f+g)).
-Functoriality and the inverse-image composition isomorphisms make both images
-zero. If q > 1, these two opens cover D(h(f+g)), and their intersection is
-D(hfg(f+g)). Its degree q-1 group is subsingleton by hprev. Exactness of
-Mayer--Vietoris therefore makes the two restriction maps jointly injective.
-The restricted class is zero, proving addition closure. Negatives follow from
-multiplication by -1, so the set with these operations is an ideal. All
-composition identifications are additive and preserve zero. The empty open,
-f = 0, g = -f, and h = 0 require no exclusions. -/
+/-- The principal restrictions killing a class form an ideal in the inductive step
+(Stacks, Tag 0GY0). -/
 theorem gabber_principal_vanishing_ideal
     (R : Type u) [CommRing R]
     (F : Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u + 1})

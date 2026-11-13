@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionCoordinateSh
 
 /-! # Factorization of canonical affine tensor coordinates
 
-Source: the definition of tensorResolutionCoordinateSheafIso, following Stacks Tag 08DX(2).
-(blueprint: new-t3-qcoh-tensor-resolution-coordinate-factorization).
+## References
+
+* [Stacks, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
 -/
 
 @[expose] public section
@@ -29,13 +30,7 @@ local instance QCohTensorResolutionCoordinateFactorization_objZero
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-/-- The canonical sheaf coordinates factor through the affine model and K-flat comparison.
-
-Source: the definition of tensorResolutionCoordinateSheafIso. The proof unfolds
-that definition once; exposing its formula avoids repeated expensive unfolding
-in proofs about the comparison.
-
-(blueprint: new-t3-qcoh-tensor-resolution-coordinate-factorization) -/
+/-- The canonical sheaf coordinates factor through the affine model and K-flat comparison. -/
 theorem tensorResolutionCoordinateSheafIso_factors
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]
     (U : Y.affineOpens) (MA NA : ModuleCat.{u} (Γ(Y, U.1) : Type u))

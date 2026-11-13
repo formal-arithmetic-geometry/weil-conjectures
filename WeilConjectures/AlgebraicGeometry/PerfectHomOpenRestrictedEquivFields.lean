@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVInverseOpenIso
 
 /-! # Restricted representing Hom equivalences
 
-Source: Stacks Project, Tags 079W and 08FE.
-(blueprint: new-perfect-hom-open-restricted-equiv-fields).
+## References
+
+* Stacks Project, Tags 079W and 08FE.
 -/
 
 @[expose] public section
@@ -21,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 noncomputable section
 /-- The Hom equivalence and testing-object naturality fields needed before the
-transition and cocone maps are assembled. Source: Stacks Project, Tags 079W and
-08FE; perfect.tex, Tag 09RE. (blueprint: new-perfect-hom-open-restricted-equiv-fields). -/
+transition and cocone maps are assembled. -/
 structure PerfectHomOpenRestrictedEquivFields
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
@@ -119,22 +119,7 @@ private theorem restrictedHomEquiv {S T Y : Scheme.{u}} (s : Y ⟶ S) (t : T ⟶
   rw [Category.assoc]
   exact ab.homEquiv_naturality_left_symm g (f ≫ k.hom)
 
-/-- Existence of the restricted Hom equivalence fields.
-
-Proof: Compose each supplied Hom equivalence with the global pullback adjunction.
-Its naturality gives an isomorphism of Yoneda functors, hence an isomorphism from
-its representing object to the derived push-pull object. Restrict this isomorphism
-to B. The direct-image open comparison and the pullback open comparison identify
-its target with push-pull for the restricted projection. Paste the open pullback
-square with the original base-change square and use its projection-preserving
-isomorphism to transport to the chosen pullback of B.ι followed by s. Postcompose
-Hom with this object isomorphism, then apply the restricted projection adjunction
-in reverse. Associativity and left naturality of that adjunction prove naturality
-in the testing object. Apply this construction to every stage and to the apex and
-assemble the four fields. No perfectness or quasi-coherence argument is required;
-the same comparisons apply to empty opens and zero objects.
-Source: Stacks Project, Tags 079W and 08FE.
-(blueprint: new-perfect-hom-open-restricted-equiv-fields). -/
+/-- Existence of the restricted Hom equivalence fields. -/
 theorem perfect_hom_open_restricted_equiv_fields_exists
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

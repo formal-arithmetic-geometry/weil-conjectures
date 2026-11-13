@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # Derived tensor preserves locally constant finite type cohomology
 
-Source: Stacks Project, Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Cohomology on Sites, Tag 094H](https://stacks.math.columbia.edu/tag/094H)
 -/
 
 @[expose] public section
@@ -133,25 +134,8 @@ private theorem locallyConstantFiniteType_of_iso
 set_option synthInstance.maxSize 2048 in
 /-- Over a Noetherian coefficient ring, tensoring bounded-above derived objects with
 locally constant finite type cohomology again has locally constant finite type cohomology.
-`P` and `Q` are arbitrary K-flat representatives of the derived objects; the conclusion
-computes derived tensor by their total tensor, exactly as in the node's convention.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Transport homology bounds and local constancy along the representative isomorphisms.
-2. For the cutoffs i-bL and i-bK, use local finite-free truncation models and intersect
-   their covering sieves. Apply the local tensor-model comparison on each covering arrow.
-3. In total degree j, only indices j-bF <= p <= bE contribute. The coproduct over this
-   finite interval surjects onto the total term, so every total term is a finite module.
-4. Cycles are submodules of finite modules over a Noetherian ring, hence finite; their
-   homology quotient is finite as well.
-5. Constant module presheaves preserve finite limits and colimits by evaluation. Compose
-   with exact module sheafification and apply the short-complex homology comparison.
-6. The comparison and the finite module H^i(T) give the required trivialization on each
-   arrow of the intersection cover, exactly as in the definition of local constancy.
--/
+`P` and `Q` are arbitrary K-flat representatives of the derived objects, and the derived
+tensor is computed by their total tensor. (Stacks, Tag 094H) -/
 theorem locallyConstantFiniteType_derivedTensor
     {C : Type u} [Category.{u} C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

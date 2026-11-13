@@ -10,14 +10,14 @@ public import WeilConjectures.CategoryTheory.ExactDegreeZero
 /-!
 # Derived coefficient change of supported Kummer classes
 
-Source: Stacks Project, Tag 07A6; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md, final paragraph
-(auxiliary; not a blueprint node).
-
 ## Main definitions
 
 * `SupportedDerivedScalarUnit`: the derived scalar-unit universal property.
 * `SupportedKummerScalar`: the normalized scalar-extension square for the classes.
+
+## References
+
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +36,7 @@ attribute [local instance 10000] SheafExactDegreeZero.scalarWeakSheafify
 /-- The universal-property formulation of a derived scalar-extension unit at F.
 The target is G in degree zero, while test objects K range over the entire unbounded
 derived category. This is derived tensor extension, with no flatness assumption on S.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+(Stacks, Tag 07A6) -/
 @[irreducible]
 def SupportedDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})

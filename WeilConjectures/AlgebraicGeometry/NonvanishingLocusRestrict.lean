@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 
 /-! # Nonvanishing loci under restriction along an open immersion
 
-Source: Stacks Project, Properties, Lemma 01PV, the translation to the affine algebra
-problem; Modules, Lemma 01CY, the stalk criterion for nonvanishing
-(blueprint: lem-sc-nonvanishing-locus-restrict).
+## References
+
+* Stacks Project, Properties, Lemma 01PV, and Modules, Lemma 01CY.
 -/
 
 @[expose] public section
@@ -111,25 +111,8 @@ private theorem restrict_stalk_membership (x : X) (M : Y.Modules)
     simpa only [e.symm_apply_apply] using h
 
 /-- Restriction along an open immersion preserves the nonvanishing locus of a section.
-No invertibility or affineness hypothesis is needed for this compatibility.
-
-Source: Stacks Project, Properties, Lemma 01PV, proof, first sentence, and Modules,
-Lemma 01CY, the definition of the nonvanishing locus
-(blueprint: lem-sc-nonvanishing-locus-restrict).
-
-Proof: Fix a point x of the source. The open immersion induces an isomorphism from the
-structure-sheaf stalk at f(x) to the stalk at x. Restriction of the module induces an
-additive stalk isomorphism in the reverse direction, `restrictStalkNatIso f x`, compatible
-with the ring stalk isomorphism and scalar multiplication. Compatibility follows on germs
-from `smul_restrictAppIso_hom` and then on all stalk elements by the filtered-colimit
-universal property. A ring isomorphism of local rings carries the maximal ideal onto the
-maximal ideal, and the compatible module isomorphism therefore carries maximal-ideal
-times the whole module onto the corresponding submodule. By
-`germ_restrictStalkNatIso_hom_app` and the naturality of germs under restriction of
-sections, it carries the germ of the displayed restricted section to the germ of s.
-Consequently one germ belongs to this submodule exactly when the other does. Negating
-this equivalence at every x proves the equality of sets. This also covers the zero
-module, the zero section, and an empty source, without extra hypotheses. -/
+No invertibility or affineness hypothesis is needed for this compatibility
+(Stacks, Tags 01PV and 01CY). -/
 theorem nonvanishingLocus_restrict {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
     (M : Y.Modules) (s : M.val.presheaf.obj (op ⊤)) :
     nonvanishingLocus (M.restrict f)

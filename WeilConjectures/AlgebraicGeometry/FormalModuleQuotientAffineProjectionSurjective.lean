@@ -33,17 +33,7 @@ private theorem product_quasicoherent {X : Scheme.{u}} {K : X.Modules}
     (Abelian.imageIsoImage a) inferInstance
 
 /-- The affine formal quotient projection is surjective.
-Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection-surj).
-
-Proof: The associated sheaf of M is quasi-coherent, as is the positive ideal power
-by the ideal-times affine-sections theorem. Its product with the associated sheaf
-is the image of the multiplication from their tensor product. Tensor products,
-cokernels and kernels preserve quasi-coherence, so this image is quasi-coherent.
-Apply the affine cokernel-image theorem to the product inclusion on the whole
-spectrum. Its cokernel projection is surjective on sections. The functor
-moduleSpecΓFunctor only restricts scalars on those sections; therefore its map is
-surjective as well. Compose with the bijective tilde unit to obtain p. -/
+(Stacks, Tags 01I8, 01IC and 087W.) -/
 theorem formalModuleQuotient_affine_projection_surjective
     (A : Type u) [CommRing A] (I : Ideal A)
     (J : (Spec (CommRingCat.of A)).IdealSheafData)

@@ -103,18 +103,8 @@ private theorem zero_stage_of_solving_cover
   change S 0 (ι i ≫ (t ≫ K.map (𝟙 _)))
   simpa only [K.map_id, Category.comp_id] using hι i
 
-/-- Source: Stacks, Hypercoverings, 01GJ and 094K, the initial covering step.
-
-Proof: Pull the covering sieve S_0 back to the degree-zero covering object K_0.
-Choose an etale covering family contained in S_0. Its images cover K_0 and then X.
-Refine its members by affine opens. Since these etale images are open and X is
-quasi-compact, finitely many suffice to cover X. Let T be their disjoint union.
-The map T to K_0 defines the degree-zero refinement. The only degree-zero simplex
-operator is the identity, so the constant truncated functor with nondegenerate
-object T, identity inclusion, and terminal matching object is a split hypercover
-stage. The chosen affine coproduct presentation proves StageSolves, by the sieve's
-closure under precomposition. This also handles empty X and the empty covering.
-(auxiliary; not a blueprint node) -/
+/-- The degree-zero finite split replacement stage exists and solves the sieve `S 0`
+(Stacks, Tags 01GJ, 094K). -/
 theorem exists_local_replacement_stage_zero
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

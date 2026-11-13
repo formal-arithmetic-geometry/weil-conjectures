@@ -15,12 +15,12 @@ import WeilConjectures.RingTheory.FrobeniusPolynomialSurjective
 /-!
 # Local surjectivity of a Frobenius-linear difference
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lines 4213--4270
-(blueprint: lem-fd-frobenius-linear-vector-bundle-locally-surjective).
+This is the local lifting step of the Frobenius-linear vector-bundle theorem, expressed by the
+covering image sieves on the small étale site.
 
-This is the local lifting step of the Frobenius-linear vector-bundle theorem. Its
-proof is the local Artin--Schreier lifting argument on finite locally free charts,
-expressed by the covering image sieves on the small étale site.
+## References
+
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section
@@ -178,20 +178,7 @@ private theorem locally_surjective_of_pointwise_lifts
   rintro _ _ ⟨x⟩
   exact ⟨t x, ht x⟩
 
-/-- The map `F - 1` admits local lifts on the small étale site.
-
-Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lemma-frobenius-linear-on-vb,
-proof steps 1--4 and the local-lifting assertion of step 5
-(blueprint: lem-fd-frobenius-linear-vector-bundle-locally-surjective).
-
-Proof: trivialize the finite locally free module on affine opens.  The equations
-`F(x)-x=b` are represented by the polynomial schemes whose Jacobian is the identity.
-Lang--Steinberg gives a geometric point above every point of the base, so these
-étale covers are surjective.  They therefore provide local lifts of every section,
-so the image sieve of every section is covering. This is local surjectivity of
-`F - 1`. The argument includes rank zero and empty
-objects, since the empty Jacobian and the zero sheaf satisfy the same statements.
--/
+/-- The map `F - 1` admits local lifts on the small étale site. (Stacks, Tag 0GKU) -/
 theorem frobenius_linear_vector_bundle_locally_surjective
     (p : ℕ) [Fact p.Prime]
     (S : Scheme.{u}) [S.Over (Spec (.of (ULift.{u} (ZMod p))))]

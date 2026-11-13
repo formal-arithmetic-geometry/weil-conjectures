@@ -17,8 +17,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Computing derived pullback on a local strictly perfect model
 
-Source: Stacks Project, Tags 09UA, 08DW and 06YJ.
-(blueprint: lem-pc-localized-pullback-perfect-model).
+## References
+
+* [Stacks, Tag 09UA](https://stacks.math.columbia.edu/tag/09UA)
+* [Stacks, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
+* [Stacks, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
 -/
 
 @[expose] public section
@@ -33,9 +36,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Ordinary pullback between the localized module sites, constructed by transporting
-scheme-module pullback across the open-site equivalences.
-Source: Stacks Project, Tags 0095 and 08DW
-(blueprint: lem-pc-localized-pullback-perfect-model). -/
+scheme-module pullback across the open-site equivalences. (Stacks, Tags 0095, 08DW) -/
 noncomputable def Scheme.Modules.localizedPullback {T X : Scheme.{u}} (g : T ⟶ X)
     (U : X.Opens) :
     SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
@@ -98,28 +99,7 @@ set_option maxHeartbeats 400000 in
 -- The comparison elaborates several equivalences of module and derived categories,
 -- with independent localization universes and nondefinitionally equal composite functors.
 /-- A specified local strictly perfect model computes derived pullback on its inverse-image
-open. This only identifies the derived object; preservation of strict perfectness of the
-ordinary pulled complex is a separate, elementary argument.
-Source: Stacks Project, Tag 09UA, the alternative proof via Tag 09U7;
-Tag 08DW (restriction comparison), and Tags 06YD and 06YJ (flat computation).
-(blueprint: lem-pc-localized-pullback-perfect-model).
-
-Proof: put V = g inverse-image U and transport K through Modules.overEquiv U to a
-complex on U.toScheme. This equivalence identifies the unit sheaves and preserves
-coproducts, zero objects and retract equations, so the transported terms are finite
-projective, hence flat, and the complex is bounded above. Apply
-flatComplexDerivedPullback to the restricted morphism V.toScheme -> U.toScheme:
-the derived pullback is represented by its ordinary termwise tensor pullback.
-The tensor formula and Mathlib's module pullback are both left adjoint to the same
-pushforward, so uniqueness of left adjoints identifies these ordinary pullbacks.
-The restriction comparison of derivedPullback_openRestriction_iso_universes identifies
-the restriction of Lg* E with the derived pullback of E restricted to U. Map the given
-isomorphism e through this latter functor, then compose with the flat computation.
-Finally transport back along Modules.overEquiv V and the canonical localization
-factorization isomorphisms. Full faithfulness of the induced equivalence of derived
-categories reflects the resulting isomorphism to the localized site. The localization
-on open subschemes can be chosen standard independently of w, as in the universe-aware
-restriction comparison. The zero complex and empty opens require no exceptions. -/
+open. (Stacks, Tags 09UA, 08DW, 06YD, 06YJ) -/
 theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}

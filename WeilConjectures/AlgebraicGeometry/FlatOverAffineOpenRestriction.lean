@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Relative flatness after restriction to an affine base chart
 
-Source: Stacks Project, Tag 01U4, final assertion.
+## References
+
+* [Stacks Project, Tag 01U4](https://stacks.math.columbia.edu/tag/01U4)
 -/
 
 @[expose] public section
@@ -64,21 +66,8 @@ private theorem flatOver_postcomp_iso
   have hh := Module.Flat.trans Γ(T, V.1) Γ(S, V1.1) Γ(G, U.1)
   simpa only [Scheme.Hom.comp_appLE] using hh
 
-/-- The explicitly restricted module remains flat over the spectrum chart of the base.
-Source: Stacks Project, Lemma 29.26.2, Tag 01U4, final assertion.
-(blueprint: lem-pc-flat-over-affine-open-restriction).
-
-Proof: take an affine open V0 of Spec Gamma(S,V) and an affine open U0 of f^{-1}(V)
-whose image lies in V0. The inverse chart V.isoSpec.inv maps V0 isomorphically onto
-an affine open V1 of S contained in V. The open immersion f^{-1}(V) -> X maps U0
-isomorphically onto an affine open U1 of X, and U1 lies in f^{-1}(V1).
-Apply hflat to V1 and U1. The appIso of the two open immersions identifies the
-base rings and the sections of the restricted module. Naturality of appLE identifies
-the scalar actions under these isomorphisms. Transport flatness along the resulting
-semilinear equivalence and base-ring isomorphism; this proves the required affine
-local condition for every V0 and U0. schemeOpenRestriction agrees with ordinary
-restriction by overFunctorEquiv. Empty source opens have zero sections, which are
-flat; no nonemptiness or flatness over O_X is assumed. -/
+/-- The explicitly restricted module remains flat over the spectrum chart of the base
+(Stacks, Tag 01U4). -/
 theorem isFlatOver_affineOpenRestriction
     {X S : Scheme.{u}} (f : X ⟶ S) (G : X.Modules)
     [SheafOfModules.IsQuasicoherent.{u} G]

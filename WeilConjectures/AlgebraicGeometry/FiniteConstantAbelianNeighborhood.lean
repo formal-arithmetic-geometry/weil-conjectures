@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteConstantLabelSubgroupNeighborhood
 
 /-! # Finite-operation abelian charts near a point
 
-Source: Stacks Project, Tag 03RU (definitions); explicit finite-operation
-refinement of steps 1--3 of `lem-weil-pbc-finite-constant-abelian-refinement`.
-(blueprint: lem-weil-pbc-finite-constant-abelian-neighborhood).
+## References
+
+* Stacks Project, Tag 03RU.
 -/
 
 @[expose] public section
@@ -24,25 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite constant set chart admits, near each underlying point, a locally bijective
 map from an actual constant abelian presheaf into the restricted abelian sheaf.
-Source: Stacks Project, Tag 03RU (definitions only); explicit argument,
-steps 1--3 of the finite-operation refinement
-(blueprint: lem-weil-pbc-finite-constant-abelian-neighborhood).
-
-Proof: choose an algebraic closure of the residue field at the given point. Identify the
-localized site at U with the small etale site of its domain. The constant set chart
-identifies its labels with the underlying abelian stalk at this geometric point; transport
-addition, zero and negation from that stalk to the labels. Constant labels give sections
-of G. Equality of germs is equality on some pointed etale neighborhood. Apply this to
-zero, every negative and every pairwise sum. There are finitely many comparisons, so
-cofilteredness gives one pointed neighborhood where all hold. On every object above that
-neighborhood, restriction of these sections is an additive map from the transported
-abelian group; restriction compatibility makes these maps a natural transformation from
-the constant abelian presheaf. Its underlying map is the set chart composed with the
-constant-presheaf sheafification unit, after restriction. This is locally bijective:
-restriction preserves local bijectivity and the chart is an isomorphism. The neighborhood
-contains a point above the specified underlying point. The abelian group is finite since
-its underlying labels are S. If S is empty, the geometric stalk, which contains zero,
-cannot be identified with S, so this case is impossible. -/
+(Stacks, Tag 03RU.) -/
 theorem finite_constant_abelian_neighborhood {Y : Scheme.{u}}
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : Y.Etale)
     (S : Type (u + 1)) [Finite S]

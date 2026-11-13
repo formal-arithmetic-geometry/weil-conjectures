@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Recovering local perfect models from an open restriction
 
-Source: Stacks Project, Definition 08CM and the locality argument in Tag 08DP.
-(blueprint: lem-pc-open-restriction-perfect-local-models).
+## References
+
+* [Stacks, Definition 08CM and Tag 08DP]
 -/
 
 @[expose] public section
@@ -35,21 +36,8 @@ private noncomputable def restrictIsoEquivalence {Y Z : Scheme.{u}} (s : Y ≅ Z
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A perfect restriction to U supplies ambient strictly perfect models at points of U.
-Source: Stacks Project, Definition 08CM, used in the proof of Tag 08DP.
-(blueprint: lem-pc-open-restriction-perfect-local-models).
-
-Proof: At x in U, choose the strictly perfect model on an open W of U given by
-perfectness of the restriction. The image of W under the open inclusion is an open
-A of X containing x. The localized site of U at W is canonically equivalent to the
-localized site of X at A, with the same restricted structure sheaf. Transport the
-complex termwise across this exact equivalence. It preserves zero objects, finite
-free modules and the retraction equations, so the transported complex is strictly
-perfect with the same bounds. The composition comparison for exact restriction,
-localized at quasi-isomorphisms, identifies its derived image with E restricted to A.
-Compose this comparison with the given local-model isomorphism. No support or direct
-image is involved. For U empty there are no points to test; U total gives the original
-local models. -/
+/-- A perfect restriction to `U` supplies ambient strictly perfect models at points of `U`
+(Stacks, Definition 08CM). -/
 theorem open_restriction_perfect_local_models (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,

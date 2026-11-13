@@ -15,8 +15,9 @@ import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # The isomorphism locus in an affine finite free frame
 
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0BDP, final sentence.
-(blueprint: lem-sc-finite-free-map-iso-locus-basic-open)
+## References
+
+* Stacks Project, Tags 05GD and 0BDP
 -/
 
 @[expose] public section
@@ -180,35 +181,7 @@ private theorem card_eq_of_mem_locus {W : Scheme.{u}} {M N : W.Modules}
   simpa using E.finrank_eq
 
 /-- In simultaneous finite free frames on an open, the locally invertible locus
-is a basic open.
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), local matrix argument, and
-Tag 0BDP, final determinant sentence.
-(blueprint: lem-sc-finite-free-map-iso-locus-basic-open)
-
-Proof: Give the finite index types Fintype structures. If their cardinalities agree,
-reindex the target frame to the source index type and form the square matrix of the
-restricted map. Transfer its determinant from the global sections of the open subscheme
-to the sections of W on U using U.topIso. On its basic open, restriction makes the
-determinant a unit. The proved local_invertible_minor_block_isIso constructs the inverse
-free-sheaf map. Transport through the frames and restriction composition, then identify
-tensor pullback with ordinary pullback by uniqueness of left adjoints to pushforward.
-An open immersion is isomorphic to its image open, so every point of this basic open
-belongs to moduleMapIsoLocus.
-
-Conversely, pull the map back along the residue-field point of any point of U in the
-locus. Its image is contained in the locus, so the proved pullback preservation theorem
-makes this map invertible. Pullback composition and the free frames identify its matrix
-with the original matrix under the map on global sections. An invertible square
-free-sheaf map is surjective on global sections; in free coordinates this means its
-matrix is surjective, hence its determinant is a unit. Global sections of the spectrum
-of the residue field form a field. Thus the evaluated determinant is nonzero, which is
-precisely membership in the original determinant basic open.
-
-If the cardinalities differ, take f = 0. A point of U in the locus would again give an
-invertible residue-field pullback. The global section coordinates of its two free
-sheaves are finite vector spaces indexed by I and J. The induced linear equivalence
-forces equal cardinalities, a contradiction. Thus both sides are empty. Empty U and
-rank zero are included. The argument does not use affineness of U. -/
+is a basic open. (Stacks, Tags 05GD and 0BDP.) -/
 theorem moduleMapIsoLocus_inter_eq_basicOpen_of_free {W : Scheme.{u}}
     {M N : W.Modules} (φ : M ⟶ N) (U : W.Opens)
     {I J : Type u} [Finite I] [Finite J]

@@ -6,8 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Basic
-/-! Categorical pasting for coefficient orientations.
-(blueprint: lem-sp-general-ring-orientation-assembly). -/
+/-! Categorical pasting for coefficient orientations. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -17,9 +16,7 @@ open CategoryTheory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- Naturality of an adjunction unit under the right mate of an isomorphism.
-Source: coefficient comparison of site adjunctions
-(blueprint: lem-sp-general-ring-orientation-assembly). -/
+/-- Naturality of an adjunction unit under the right mate of an isomorphism. -/
 private theorem scalarOriginUnit
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {F : C ⥤ D} {G : D ⥤ C} {F' : C' ⥤ D'} {G' : D' ⥤ C'}
@@ -58,9 +55,7 @@ private theorem scalarOriginUnit_comp
   dsimp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] at h
   exact h.symm
 
-/-- Paste the scalar square with the two orientation isomorphisms.
-Source: general-ring purity, pasting of the three squares
-(blueprint: lem-sp-general-ring-orientation-assembly). -/
+/-- Paste the scalar square with the two orientation isomorphisms. -/
 theorem assembleOrientation
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     (F : C ⥤ D) (F' : C' ⥤ D') (S : D ⥤ D') (T : C ⥤ C')

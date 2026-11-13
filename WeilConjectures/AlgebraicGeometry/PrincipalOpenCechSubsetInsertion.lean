@@ -10,9 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenSectionTransport
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Data.Finset.Sort
 
-/-! # Explicit insertion of subset coordinates into the tuple total
+/-!
+# Explicit insertion of subset coordinates into the tuple total
 
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 01FM, <https://stacks.math.columbia.edu/tag/01FM>
 -/
 
 @[expose] public section
@@ -184,9 +188,7 @@ def principalSubsetInsertOne
   exact (principalSubsetSectionTransport A r f (J.X q) S).hom ≫ v ≫
     H.map e.inv ≫ H.map (K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q n hpq)
 
-/-- Insert all subset coordinates by the finite sum of total summand inclusions.
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: def-sc-principal-open-cech-subset-insertion). -/
+/-- Insert all subset coordinates by the finite sum of total summand inclusions. -/
 def principalSubsetInsertion
     (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ) :
     principalSubsetCoordinates A r f J n ⟶ (principalSubsetTotal A r f J).X n := by

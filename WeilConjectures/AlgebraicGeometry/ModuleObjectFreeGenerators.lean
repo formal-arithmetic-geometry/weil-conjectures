@@ -30,35 +30,29 @@ namespace AlgebraicGeometry.ProEtale
 variable {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
 
-/-- Free module objects on sheaves of sets, using the two existing free adjunctions.
-Source: the free abelian group and free module adjunctions, sheafified. -/
+/-- Free module objects on sheaves of sets, obtained by composing the free abelian sheaf and
+free module-object adjunctions. -/
 noncomputable def moduleObjectGeneratorAdjunction :
     Sheaf.composeAndSheafify (Scheme.ProEt.topology X) AddCommGrpCat.free.{u + 1} ⋙ Mod.free R ⊣
       Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1}) :=
   (Sheaf.adjunction (Scheme.ProEt.topology X) AddCommGrpCat.adj.{u + 1}).comp
     (Mod.freeForgetAdjunction R)
 
-/-- The actual free module object on the underlying sheaf of sets of a module.
-Source: free abelian sheaf followed by free module object. -/
+/-- The free module object on the underlying sheaf of sets of a module. -/
 noncomputable def moduleObjectFreeGenerators
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R :=
   (Sheaf.composeAndSheafify (Scheme.ProEt.topology X) AddCommGrpCat.free.{u + 1} ⋙ Mod.free R).obj
     ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj M)
 
-/-- Send a free generator to the corresponding section of the module.
-Source: the counit of the composite free-forgetful adjunction. -/
+/-- Send a free generator to the corresponding section of the module (the counit of the
+composite free-forgetful adjunction). -/
 noncomputable def moduleObjectFreeGeneratorsπ
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
     moduleObjectFreeGenerators R M ⟶ M :=
   (moduleObjectGeneratorAdjunction R).counit.app M
 
-/-- The canonical map from the free module on all local sections is epimorphic.
-Source: Mathlib's counit-epimorphism theorem for a faithful right adjoint.
-
-Proof: the underlying-set sheaf functor is faithful, as are the module-object and
-abelian-group forgetful functors. Therefore the right adjoint of the composed free
-functor is faithful. Every counit of such an adjunction is an epimorphism. -/
+/-- The canonical map from the free module on all local sections is epimorphic. -/
 instance moduleObjectFreeGeneratorsπ_epi
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
     Epi (moduleObjectFreeGeneratorsπ R M) :=
@@ -133,17 +127,7 @@ private noncomputable def generatorPullbackIso {Y : Scheme.{u}} (f : Y ⟶ X)
     (moduleObjectGeneratorAdjunction ((upperStar Ab.{u + 1} f).obj R))
   exact a.leftAdjointUniq b
 
-/-- Finite locally constant generators give a locally finite free module object.
-Source: free-forgetful adjunctions and finite coproduct preservation.
-
-Proof: uniqueness of left adjoints compares pullback followed by the free functor
-with the free functor followed by pullback. The corresponding right adjoints are
-identical on sections. For a finite constant sheaf, commute the free abelian sheaf
-functor with constant sheaves, again by uniqueness of left adjoints. The free
-abelian group on one point is the tensor unit. The free module on that unit is the
-regular module by the right unitor. Both left adjoints preserve finite coproducts,
-so a set of n generators gives the biproduct of n regular modules. This includes
-n = 0 and the empty cover. -/
+/-- Finite locally constant generators give a locally finite free module object. -/
 theorem moduleObjectFreeGenerators_locallyFree
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)

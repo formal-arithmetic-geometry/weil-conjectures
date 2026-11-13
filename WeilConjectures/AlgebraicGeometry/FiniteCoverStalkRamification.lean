@@ -17,7 +17,7 @@ Let `p : C ⟶ Y` be an affine morphism and `Y₀ ⊆ Y` an affine open, with `A
 (`AlgebraicGeometry.Scheme.Hom.ramificationIdx_primeIdealOf_eq_length`). In particular it is `1`
 at points where `p` is unramified.
 
-This is used in the covering step of blueprint `lemma-tangent-cones-on-cover`.
+This is used in the covering step of
 -/
 
 @[expose] public section
@@ -43,7 +43,7 @@ attribute [local instance] affineAlgebra
 variable {C Y : Scheme.{u}} (p : C ⟶ Y) [IsAffineHom p] {Y₀ : Y.Opens} (hY₀ : IsAffineOpen Y₀)
 
 /-- The ramification index of the prime of `c ∈ p⁻¹ Y₀` over `Γ(Y, Y₀)` is the length of
-`𝒪_{C,c} / 𝔪_{Y,p c} 𝒪_{C,c}` (blueprint `lemma-tangent-cones-on-cover`). -/
+`𝒪_{C,c} / 𝔪_{Y,p c} 𝒪_{C,c}`. -/
 theorem ramificationIdx_primeIdealOf_eq_length (c : C) (hc : c ∈ p ⁻¹ᵁ Y₀) :
     ((hY₀.preimage p).primeIdealOf ⟨c, hc⟩).asIdeal.ramificationIdx Γ(Y, Y₀) =
       (Module.length (C.presheaf.stalk c) (C.presheaf.stalk c ⧸
@@ -85,7 +85,7 @@ theorem ramificationIdx_primeIdealOf_eq_one (c : C) (hc : c ∈ p ⁻¹ᵁ Y₀)
 with `Γ(C, p⁻¹ Y₀)` finite over `Γ(Y, Y₀)`, and `c ∈ p⁻¹ Y₀` a point at which `𝒪_{C,c}` is a
 discrete valuation ring. If `u` generates the maximal ideal of `𝒪_{Y,p c}`, then its image in
 `𝒪_{C,c}` is `w * ξ ^ e` with `w` a unit, `ξ` a uniformizer and `e` the ramification index of the
-prime of `c` (blueprint `lemma-tangent-cones-on-cover`). -/
+prime of `c`. -/
 theorem exists_stalkMap_eq_unit_mul_pow_ramificationIdx
     [Module.Finite Γ(Y, Y₀) Γ(C, p ⁻¹ᵁ Y₀)] (c : C) (hc : c ∈ p ⁻¹ᵁ Y₀)
     [IsDomain (C.presheaf.stalk c)] [IsDiscreteValuationRing (C.presheaf.stalk c)]

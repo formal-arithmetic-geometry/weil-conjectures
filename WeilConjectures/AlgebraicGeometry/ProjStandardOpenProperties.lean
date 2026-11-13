@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 /-!
 # Basis, inclusions and finite coverings of standard opens of Proj
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemma 01M4;
-Algebra, Lemma 00JP (blueprint: lem-weil-pbc-proj-standard-open-inclusion).
+## References
+
+* Stacks Project, Constructions: Section 01M3 and Lemma 01M4; Algebra: Lemma 00JP.
 -/
 
 @[expose] public section
@@ -162,37 +163,8 @@ private theorem finiteRefinement
     exact (le_iSup U (j (e i).1)).trans_eq hU
 
 /-- Standard opens of positive homogeneous degree form a basis, intersect by multiplication,
-and satisfy the power-divisibility inclusion and degree-zero unit-ideal covering criteria.
-Source: Stacks Project, Constructions, Section 01M3 and Lemma 01M4 (1)(a),(b), (2), (3);
-Algebra, Lemma 00JP (blueprint: lem-weil-pbc-proj-standard-open-inclusion).
-
-Proof:
-1. By `lem-weil-pbc-projective-spectrum-basic-opens-basis`, basic opens are open and
-   `D(fg) = D(f) ∩ D(g)` because each point represents a prime ideal.
-2. Decompose an element defining a basic neighbourhood into homogeneous components.
-   A component outside the point's prime gives a smaller neighbourhood; if its degree
-   is zero, multiply it by a positive-degree homogeneous element outside that prime.
-   Such an element exists because the prime does not contain the irrelevant ideal.
-3. For `D₊(g) ⊆ D₊(f)`, the chart identification from
-   `lem-weil-pbc-proj-basic-open-intersection` identifies the inverse image of `D₊(f)`
-   with the principal open of `f ^ deg g / g ^ deg f`. It is the whole spectrum, so
-   `lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact` makes this fraction a unit.
-4. It follows that `f` is invertible in `S_g`. Write its inverse as `b / g ^ n`, enlarge
-   `n` to be positive with `n * deg g ≥ deg f`, and clear a power of `g` from the
-   localization equality. Taking the appropriate homogeneous component of `b` gives
-   `g ^ e = a * f`, with `a` homogeneous and `e ≥ 1`. If the product is nonzero,
-   comparison of homogeneous degrees gives `deg a = e * deg g - deg f`.
-5. Conversely, such a relation shows that any prime avoiding `g` avoids `f`.
-   The inverse of `f` is `a / g ^ e`; the inverse of the degree-zero fraction is
-   `a ^ deg g / g ^ (e * deg g - deg f)`. If `a * f = 0`, `g` is nilpotent,
-   both localizations are zero rings, and the unit assertions still hold.
-6. The chart is homeomorphic to the spectrum of the degree-zero localization, hence
-   quasi-compact by `lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact`.
-   Refine an arbitrary open cover using step 2, then take a finite subcover.
-7. The chart pulls back the opens `D₊(gᵢ)` to principal opens of
-   `gᵢ ^ deg f / f ^ deg gᵢ`. By the same spectrum lemma, these cover the chart
-   exactly when their generators span the unit ideal.
--/
+and satisfy the power-divisibility inclusion and degree-zero unit-ideal covering criteria
+(Stacks, Tags 01M3, 01M4, 00JP). -/
 theorem standardOpenProperties
     {S : Type u} [CommRing S] {σ : Type v} [SetLike σ S] [AddSubgroupClass σ S]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] :

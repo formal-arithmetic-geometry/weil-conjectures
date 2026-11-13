@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 
 /-! # Perfect complexes form a thick subcategory
 
-Source: literature/stacks-project/cohomology.tex, Tags 08CR (lemma-two-out-of-three-perfect)
-and 08CS (lemma-summands-perfect), and Definition 08CM (blueprint: lem-pc-perfect-thick-closure).
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tags 08CR and 08CS, and Definition 08CM.
 -/
 
 @[expose] public section
@@ -27,18 +28,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Scheme
 
 /-- Perfect complexes are closed under distinguished triangles, direct summands, shifts, and
-finite direct sums.
-Source: Stacks Project, Cohomology of Sheaves, Tags 08CR and 08CS and Definition 08CM
-(blueprint: lem-pc-perfect-thick-closure).
-
-Proof: Apply `lem-pc-perfect-two-out-of-three` (Tag 08CR) to each pair of perfect terms
-of a distinguished triangle. Apply `lem-pc-perfect-summand` (Tag 08CS) to the decomposition
-of a perfect binary direct sum to obtain perfectness of both summands. Reuse `perfect_shift`,
-which shifts local strictly perfect representatives by reindexing their terms. The explicit
-zero complex represents zero. Perfectness is invariant under isomorphisms by `perfect_of_iso`.
-Split distinguished triangles give perfectness of binary sums. Mathlib's finite-product
-closure theorem then gives perfectness of finite biproducts, including the empty biproduct.
--/
+finite direct sums. (Stacks, Tags 08CR, 08CS) -/
 theorem perfect_thick_closure (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

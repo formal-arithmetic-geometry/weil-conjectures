@@ -12,8 +12,9 @@ import Mathlib.Algebra.Homology.ConcreteCategory
 
 /-! # Resolution comparison for sections of a direct image
 
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX
-(blueprint: lem-pc-leray-sections-resolution-comparison).
+## References
+
+* Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
 -/
 
 @[expose] public section
@@ -23,10 +24,8 @@ namespace AlgebraicGeometry
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction along Opens.map_top identifies the underlying abelian groups of sections,
-  naturally in the module sheaf.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- Restriction along `Opens.map_top` identifies the underlying abelian groups of sections,
+naturally in the module sheaf. -/
 private def sectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ forget₂ _ AddCommGrpCat) ≅
       ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
@@ -36,9 +35,7 @@ private def sectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (fun g ↦ (((PresheafOfModules.toPresheaf _).map g.val).naturality
       (eqToHom (congrArg op (Opens.map_top f.base).symm))).symm)
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact forgetting of scalars commutes with cochain homology.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- Exact forgetting of scalars commutes with cochain homology. -/
 private def homologyForgetIso {R : Type u} [Ring R] (q : ℕ) :
     (forget₂ (ModuleCat.{u} R) AddCommGrpCat).mapHomologicalComplex (.up ℕ) ⋙
         HomologicalComplex.homologyFunctor AddCommGrpCat (.up ℕ) q ≅
@@ -51,9 +48,7 @@ private def homologyForgetIso {R : Type u} [Ring R] (q : ℕ) :
         (forget₂ (ModuleCat R) AddCommGrpCat))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The natural homology comparison on all cochain complexes, before choosing resolutions.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- The natural homology comparison on all cochain complexes, before choosing resolutions. -/
 private def sectionsHomologyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex (.up ℕ) ⋙
       HomologicalComplex.homologyFunctor _ (.up ℕ) q ⋙ forget₂ _ AddCommGrpCat ≅
@@ -71,9 +66,7 @@ private def sectionsHomologyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :
       (homologyForgetIso q)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Conjugate the comparison of section homologies by the canonical resolution identifications.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- Conjugate the comparison of section homologies by the canonical resolution identifications. -/
 private def resolutionIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
     {F : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (I : InjectiveResolution F) :
     (forget₂ _ AddCommGrpCat).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≅
@@ -89,9 +82,7 @@ private def resolutionIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
 
 -- Conjugation by resolution isomorphisms has several dependent functor compositions.
 set_option backward.isDefEq.respectTransparency false in
-/-- A cochain map extending a coefficient morphism intertwines the resolution comparisons.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- A cochain map extending a coefficient morphism intertwines the resolution comparisons. -/
 private theorem resolutionIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
     {F F' : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (φ : F ⟶ F')
     (I : InjectiveResolution F) (J : InjectiveResolution F')
@@ -126,9 +117,7 @@ private theorem resolutionIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (q : �
   rw [← hB]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Construct the natural derived comparison using Mathlib's chosen injective resolutions.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- Construct the natural derived comparison using Mathlib's chosen injective resolutions. -/
 private def derivedSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :
     (RingedSpace.moduleCohomology X.toRingedSpace q ⋙ forget₂ _ AddCommGrpCat) ≅
       ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
@@ -139,9 +128,7 @@ private def derivedSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :
       (InjectiveResolution.desc φ _ _) (InjectiveResolution.desc_commutes_zero φ _ _))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The comparison for exact forgetting of scalars respects the cycle class map.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- The comparison for exact forgetting of scalars respects the cycle class map. -/
 private theorem forget_homologyπ {R : Type u} [Ring R]
     (S : ShortComplex (ModuleCat.{u} R)) :
     (S.mapCyclesIso (forget₂ _ AddCommGrpCat)).hom ≫
@@ -159,9 +146,7 @@ private theorem forget_homologyπ {R : Type u} [Ring R]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Comparison extending the identity gives the same isomorphism on any supplied resolution.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- Comparison extending the identity gives the same isomorphism on any supplied resolution. -/
 private theorem derivedSectionsIso_app {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
     {F : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (I : InjectiveResolution F) :
     (derivedSectionsIso f q).hom.app F = (resolutionIso f q I).hom := by
@@ -180,9 +165,7 @@ private theorem derivedSectionsIso_app {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ
   exact h.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The inverse homology comparison represents a class by the corresponding forgotten cycle.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- The inverse homology comparison represents a class by the corresponding forgotten cycle. -/
 private theorem forget_homologyπ_inv {R : Type u} [Ring R]
     (S : ShortComplex (ModuleCat.{u} R)) :
     (forget₂ _ AddCommGrpCat).map S.homologyπ ≫
@@ -194,9 +177,7 @@ private theorem forget_homologyπ_inv {R : Type u} [Ring R]
   rw [← Category.assoc, forget_homologyπ, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The inverse cycle comparison respects the inclusion into the degree term.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- The inverse cycle comparison respects the inclusion into the degree term. -/
 private theorem forget_iCycles_inv {R : Type u} [Ring R]
     (S : ShortComplex (ModuleCat.{u} R)) :
     (S.mapCyclesIso (forget₂ _ AddCommGrpCat)).inv ≫
@@ -206,9 +187,7 @@ private theorem forget_iCycles_inv {R : Type u} [Ring R]
 
 -- The comparison combines homology and cycles in two module categories and abelian groups.
 set_option backward.isDefEq.respectTransparency false in
-/-- A termwise restriction carries the class of a cycle to the class of the restricted cycle.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- A termwise restriction carries the class of a cycle to the class of the restricted cycle. -/
 private theorem sectionsHomologyIso_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℕ) :
     let S := ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
@@ -258,9 +237,7 @@ private theorem sectionsHomologyIso_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) (q : 
 
 -- Conjugating the cycle formula unfolds the resolution and section comparisons.
 set_option backward.isDefEq.respectTransparency false in
-/-- Transport the cycle formula through the canonical resolution isomorphisms.
-Source: Stacks Project, Cohomology, Tag 01F2 (lemma-before-Leray and
-remark-elucidate-lemma). -/
+/-- Transport the cycle formula through the canonical resolution isomorphisms. -/
 private theorem derivedSectionsIso_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
     {F : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (I : InjectiveResolution F) :
     let S := RingedSpace.globalSectionsComplex I
@@ -341,28 +318,7 @@ private theorem leray_sections_cycle_lift {X Y : Scheme.{u}} (f : X ⟶ Y)
 -- The dependent cycle objects require unfolding termwise functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Compare the derived composite with sections upstairs, retaining its cycle formula.
-No edge map or acyclicity witness occurs in this statement.
-
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
-(blueprint: lem-pc-leray-sections-resolution-comparison)
-
-Proof: Restriction along Opens.map_top identifies sections of the direct image on Y
-with sections on X, naturally in the module sheaf. After forgetting scalars this is
-an isomorphism, with inverse restriction along the inverse equality. Apply it in each
-degree of a complex. Restriction commutes with differentials and comparison cochain
-maps. Taking homology gives natural isomorphisms on the chosen injective resolutions;
-conjugate by isoRightDerivedObj to obtain e. Naturality follows from the comparison
-maps extending coefficient morphisms and isoRightDerivedObj naturality. For any other
-injective resolution the comparison extending the identity shows the same formula.
-Sections preserves the kernel defining the cycle sheaf, so each transported global
-cycle has a unique lift z. Any c with the displayed inclusion equation sends z to the
-transported global cycle: the inclusion into the term is monic. The homology map of
-the termwise restriction sends the original cycle class to the class of c(z).
-Conjugating by the resolution isomorphisms proves the last equation. In degree zero
-and for zero complexes the same kernel argument applies; empty schemes introduce no
-exception. The isomorphism e is determined by this formula since the cycle quotient
-is epic, so the statement determines the comparison rather than an arbitrary witness.
--/
+No edge map or acyclicity witness occurs in this statement. -/
 theorem leray_sections_resolution_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
     let G := RingedSpace.globalSectionsFunctor Y.toRingedSpace

@@ -9,8 +9,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-! # The structure sheaf on the small pro-etale site
 
-Source: Stacks Project, Tags 03O3 and 098K
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03O3 and 098K.
 -/
 
 @[expose] public section
@@ -21,26 +22,19 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Global sections, restricted to weakly etale schemes over `S`, with pullback of functions.
-Source: Stacks Project, Tags 03O3 and 098K
-(auxiliary; not a blueprint node). -/
+/-- Global sections, restricted to weakly etale schemes over `S`, with pullback of functions
+(Stacks, Tags 03O3 and 098K). -/
 def proEtaleStructurePresheaf (S : Scheme.{u}) : S.ProEtᵒᵖ ⥤ CommRingCat.{u} :=
   (ProEt.forget S ⋙ Over.forget S).op ⋙ Scheme.Γ
 
-/-- Global sections form a sheaf for pro-etale coverings.
-Source: Stacks Project, Tag 03O3 (auxiliary; not a blueprint node).
-Proof: the underlying set presheaf is represented on schemes by the affine line over `Z`.
-Representable functors satisfy fpqc descent. Restrict this descent to the small pro-etale
-site, whose coverings are fpqc coverings. The forgetful functor from commutative rings
-creates limits and reflects isomorphisms, so set-valued descent gives ring-valued descent. -/
+/-- Global sections form a sheaf for pro-etale coverings (Stacks, Tag 03O3). -/
 theorem proEtaleStructurePresheaf_isSheaf (S : Scheme.{u}) :
     Presheaf.IsSheaf (ProEt.topology S) (proEtaleStructurePresheaf S) := by
   exact Functor.op_comp_isSheaf_of_isSheaf _ _ proetaleTopology _
     (isSheaf_Γ proetaleTopology)
 
-/-- The pro-etale structure sheaf, with sections `Γ(U, O_U)` and the usual restriction maps.
-Source: Stacks Project, Tags 03O3 and 098K
-(auxiliary; not a blueprint node). -/
+/-- The pro-etale structure sheaf, with sections `Γ(U, O_U)` and the usual restriction maps
+(Stacks, Tags 03O3 and 098K). -/
 def proEtaleStructureSheaf (S : Scheme.{u}) : Sheaf (ProEt.topology S) CommRingCat.{u} :=
   ⟨proEtaleStructurePresheaf S, proEtaleStructurePresheaf_isSheaf S⟩
 

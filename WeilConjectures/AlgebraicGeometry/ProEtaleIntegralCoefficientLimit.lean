@@ -14,8 +14,6 @@ import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 /-!
 # Integral pulled-back coefficients as the limit of finite constant coefficients
 
-(blueprint: lemma-comparison-completed-coefficients--1).
-
 Finite representability is natural in the finite label set. The integral comparison is
 normalized by its adjunction mate on every profinite test object and every continuous
 function into the integer ring. Thus its finite projections specify the canonical map.
@@ -546,30 +544,7 @@ private theorem completedIntegralRepresentation_inv_projection
   exact hx
 
 /-- Finite constants and integral pulled-back coefficients have the stated representations;
-the ring comparison is the unique one with the prescribed reduction projections.
-
-(blueprint: lemma-comparison-completed-coefficients--1).
-
-Proof: (1) A map into the finite coproduct of copies of X is a clopen labelled partition.
-The summands cover it in the pro-etale topology. Glue constant sections on these pieces;
-uniqueness on overlaps proves the sheafification universal property, naturally in labels.
-For the empty label set use the empty covering of the empty object.
-(2) The integers-profinite-tower theorem identifies the integer ring with its positive
-finite quotients and makes those quotients cofinal among its finite quotients. Apply the
-relative profinite test functor to this limit cone. Yoneda and sectionwise sheaf limits
-identify its represented presheaf with the limit of finite constants.
-(3) The left-exact site inverse image sends the sheaf represented by a profinite set S
-to the sheaf represented by X[S]: use its adjunction, restriction on test objects, and
-Yoneda, naturally in S. The adjunction lifts to abelian and ring objects, identifying
-this underlying-set inverse image with the prescribed monoidal coefficient pullback.
-This gives the representation in clause 2 and the displayed normalization by the unit.
-(4) Addition, multiplication, negation, zero and one are computed on finite clopen labels.
-The reductions preserve them. Their compatible coordinatewise values give the ring
-structure on the limit; the limit projections jointly distinguish sections. The
-represented comparison is therefore a ring isomorphism. Its adjunction mate on each
-continuous function is exactly its reduction followed by finite-label representation.
-This determines every projection, hence determines the comparison uniquely.
--/
+the ring comparison is the unique one with the prescribed reduction projections. -/
 theorem sfb_integral_coefficient_limit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :

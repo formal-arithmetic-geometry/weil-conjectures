@@ -275,35 +275,7 @@ private theorem coefficient_of_abstract_transport
   exact integral_regular_pullback_coefficient_square ℓ E g p q hq e hs y
 
 /-- Coefficient transport for an integral presentation, before geometric evaluation.
-
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization and scalar
-extension of integral coefficients. The construction is the standard inverse-image
-and scalar-extension construction for internal module objects.
-(auxiliary; not a blueprint node)
-
-Proof: put R = O_E,X, S = E_X, U = g* and let A be the abelian sheaf underlying
-continuous E-valued functions on Y. The canonical comparison e : U(S) → A is an
-isomorphism of monoids: E is ultrametric as a normed Q_l-algebra and hence totally
-disconnected. Use the functor L = extendScalars(R → S) followed by U.mapMod(S),
-then restriction along e inverse. Each factor is additive and preserves finite
-colimits. The scalar-extension adjunction identifies the extension of the regular
-R-module with the regular S-module: the forward map is adjoint to R → S, and the
-inverse is the regular lift of the unit of the adjunction evaluated at 1. The two
-inverse laws follow by the regular-module universal property and preservation of 1.
-The underlying scalar-extension unit is natural in each regular endomorphism p;
-thus its conjugate q satisfies p composed with R → S equals R → S composed with q.
-Combine this regular isomorphism with the identity underlying U's regular-module
-comparison and the regular-module isomorphism for restriction along e inverse.
-This supplies regularIso. To check coefficient, conjugate the preceding square
-by the canonical charts, whose naturality in the scalar inclusion identifies the
-coefficient of q with the E-valued integral coefficient of p. Scheme naturality
-of the charts identifies the coefficient of U(q), conjugated by e, at y with the
-coefficient of q at g(y). This is exactly the stated formula after the regular
-comparisons cancel. For freeCokernel, apply restriction along e inverse to the
-provided free-cokernel isomorphism. Its canonical biproduct comparison and its
-regular-module isomorphism identify the result with A^q. These arguments work for
-zero ranks and the empty scheme; the coefficient formula only quantifies over
-actual points. No rank or geometric-evaluation assertion is used. -/
+(Bhatt--Scholze, Section 6.8) -/
 theorem nonempty_integralMatrixCoefficientTransport (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (g : Y ⟶ X) : Nonempty (IntegralMatrixCoefficientTransport ℓ E g) := by

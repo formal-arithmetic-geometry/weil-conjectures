@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCompari
 
 /-! # Ext coefficient factorization
 
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-module-cohomology-ext-coefficient-factor)
+## References
+
+* [Stacks, Tag 01F7]
 -/
 
 @[expose] public section
@@ -24,14 +25,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- Ext coefficient factorization.
-
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-module-cohomology-ext-coefficient-factor)
-
-Proof: Apply sheafComparison_naturality to the coefficient square from coeff_naturality, with
-the target module map equal to its identity. Functoriality sends that identity to an identity,
-and H.map_id_apply removes it. -/
+/-- Ext coefficient factorization (Stacks, Tag 01F7). -/
 theorem moduleCohomology_ext_coefficient_factor
     {X Y : Scheme.{u}} (f : X ⟶ Y) {N : Y.Modules} {F : X.Modules}
     (φ : N ⟶ (pushforward f).obj F) (p : ℕ)

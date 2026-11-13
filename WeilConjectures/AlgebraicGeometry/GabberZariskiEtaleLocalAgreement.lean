@@ -14,7 +14,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import WeilConjectures.AlgebraicGeometry.EtalePullbackUnitPointedWitness
 
 /-! # Local reflection of equality for the Zariski–étale unit
-Source: Stacks Project, Tag 09ZF, first proof paragraph.
+
+## References
+
+* [Stacks, Tag 09ZF]
 -/
 
 @[expose] public section
@@ -96,25 +99,8 @@ private theorem etale_agreement_on_open_image
     _ = F.obj.map (j.op ≫ q'.op) t := (congrArg (fun k ↦ F.obj.map k t) hfop).symm
     _ = _ := ht
 
-/-- Equality of pulled-back sections on a neighbourhood of z reflects to equality
-on an open neighbourhood of i(z) in X.
-Source: Stacks Project, Tag 09ZF (lemma-gabber-h0), first proof paragraph.
-(blueprint: lem-weil-pbc-gabber-zariski-etale-local-agreement).
-
-Proof: express the étale unit as the identity-indexed coprojection into the
-presheaf left Kan extension followed by sheafification. Equality in the
-sheafification is locally equality in that presheaf. Choose a point over z
-in the resulting étale cover. Base change preserves finite limits, so the
-index category is filtered; equality of the two classes is witnessed on an
-étale X-scheme U with a point above i(z). Its image W0 is open, contains i(z),
-and lies in W. Factor U through W0. This is a surjective étale morphism, hence
-an étale covering. The two sections agree after restriction to U; separatedness
-of F on that cover makes them agree on W0. Naturality and injectivity of the
-presheaf isomorphism eX give the asserted equality in Fzar. The maps a and ha
-identify the open preimage with the fibre product and its projection.
-The assumed z in V rules out empty neighbourhoods; for empty Z the statement
-has no instances. No finiteness hypothesis or closedness beyond that supplied
-by the parent is used. -/
+/-- Equality of pulled-back sections on a neighbourhood of `z` reflects to equality
+on an open neighbourhood of `i z` in `X` (Stacks, Tag 09ZF). -/
 theorem gabber_zariski_etale_local_agreement
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))

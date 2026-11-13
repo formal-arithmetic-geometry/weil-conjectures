@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 /-!
 # Comparison of the two encodings of injective module sheaves
 
-Source: Stacks Project, Cohomology on Sites, Tag 03FD.
-(blueprint: new-module-valued-injective-cohomology-comparison)
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 03FD.
 -/
 
 @[expose] public section
@@ -29,25 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- An injective module-valued sheaf `J` has an injective constant-ring module representative `I`,
 with the same underlying abelian sheaf, whose right-derived abelian evaluation computes the same
-cohomology.
-Source: Stacks Project, Tag 03FD, proof, second paragraph.
-(blueprint: new-module-valued-injective-cohomology-comparison)
-
-Proof: Regard a module-valued sheaf as a module over the constant ring sheaf.
-On each object, its scalar action is initially an action of the constant ring
-presheaf. Sheafifying the action extends it uniquely to the constant ring sheaf:
-locally constant scalars act locally, and sheaf uniqueness glues these actions.
-Conversely, restriction along the constant presheaf gives the original module
-structure. These constructions are inverse on objects and morphisms and preserve
-underlying abelian sheaves. The resulting equivalence preserves injective objects.
-Use the ring equivalence between the single and double universe lifts of ZMod r
-to obtain a representative over the displayed constant ring sheaf. The constant
-integer sheaf represents evaluation at the terminal etale object X
-by the constant-sheaf adjunction. Applying this representation to an injective
-resolution identifies the cohomology of its evaluation complex with the Ext groups
-`Sheaf.H`, in every degree, including degree zero. Compose this identification
-with the isomorphism of underlying abelian sheaves supplied by the equivalence.
-The equivalence also covers r = 0, the zero module, and the empty scheme. -/
+cohomology (Stacks, Tag 03FD). -/
 theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)
     (J : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective J] :

@@ -12,9 +12,10 @@ public import Mathlib.Algebra.Category.Grp.AB
 /-!
 # Local sum characterization of finite étale traces
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
-(blueprint: def-weil-pbc-finite-etale-trace-local-sums)
+## References
+
+* Stacks Project, Tag 03SH
+* SGA 4, Exposé IX, 5.1
 -/
 
 @[expose] public section
@@ -28,11 +29,7 @@ namespace AlgebraicGeometry.Etale
 /-- A trace has the local sum characterization if, on every object `W` whose pullback
 of `Y` is a finite clopen coproduct of copies of `W`, its transported component is the
 sum of restrictions along the sections. The index type may be empty.
-Source: Stacks Project, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.
-(blueprint: def-weil-pbc-finite-etale-trace-local-sums)
-
-This is the local characterization used in the descent construction, not a choice of
-trace: it is a predicate on an already given sheaf morphism. -/
+(Stacks, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.) -/
 def FiniteEtaleTraceLocalSums {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (τ : (lowerStar AddCommGrpCat.{u + 1} f).obj

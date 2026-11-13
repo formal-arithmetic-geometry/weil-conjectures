@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
 
 /-! # The geometric diagram before taking the exact filtered colimit
 
-Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-stage-rows).
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -27,26 +28,8 @@ open CategoryTheory CategoryTheory.Limits Pretriangulated TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Functorial geometric rows with distinguished-triangle presentations of every
-consecutive short complex, before the categorical exactness argument.
-
-Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-stage-rows-core).
-
-Proof: Pull U,V to Y and each stage. Restrict P,Q and the preceding shift;
-localized pullback comparisons and thick closure preserve perfectness, and
-perfect complexes have quasi-coherent cohomology. Apply the functorial
-K-injective Mayer--Vietoris construction to Q. Apply Hom from P and derived
-open adjunction. The rotated preceding shifted triangle, inverse rotation, and original triangle
-respectively present the three consecutive short complexes as covariant Hom of distinguished
-triangles. The triangle maps give zero composites. Direct-image naturality
-followed by the unit gives transition and cocone maps; the adjunction triangle
-identity identifies their central terms with perfectStageMap and perfectLimitMap.
-The local terms retain their restricted perfect pairs and canonical stage Hom
-systems. Underlying-set colimit preservation and finite-product preservation
-identify the intersection comparisons with basic local comparisons and the
-two-open comparisons with their products, transported by the adjunction
-identifications. Empty opens give zero groups and satisfy the same argument.
-No exactness of a filtered colimit is asserted. -/
+consecutive short complex, before the categorical exactness argument
+(Stacks, Tags 09RE and 08BW). -/
 theorem perfect_hom_mayerVietoris_stage_rows_core
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 
 /-! # Exact model for integral scalar extension
 
-Source: `proposition-six-operations-change-coefficients`, first proof paragraph. Finite freeness
+ Finite freeness
 identifies total derived tensor with the exact functor applied to complexes.
 -/
 
@@ -28,24 +28,18 @@ namespace AlgebraicGeometry.ProEtale
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (Y : Scheme.{u})
 
-/-- The finite integral coefficient inclusion on the pro-etale site.
-Source: `proposition-six-operations-change-coefficients`, first paragraph. -/
+/-- The finite integral coefficient inclusion on the pro-etale site. -/
 noncomputable abbrev integralConstructibleCoefficientMap :=
   coefficientMap (finiteCoefficientIntegersPointMap ℓ h) Y
 
-/-- The exact tensor functor induces a functor on the unbounded derived categories.
-Source: `proposition-six-operations-change-coefficients`, first proof paragraph.
-(blueprint: def-coef-integral-exact-scalar-model) -/
+/-- The exact tensor functor induces a functor on the unbounded derived categories. -/
 noncomputable def integralOrdinaryDerivedScalar :=
   letI : PreservesFiniteLimits
       (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)) :=
     ((cartesianCoefficients_finiteFree ℓ h).2.2 Y).1
   (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)).mapDerivedCategory
 
-/-- Exact tensor and total derived tensor are canonically isomorphic.
-Source: `proposition-six-operations-change-coefficients`, first proof paragraph.
-Proof: finite freeness gives exactness; apply uniqueness of total left derived functors.
-(blueprint: def-coef-integral-exact-scalar-model) -/
+/-- Exact tensor and total derived tensor are canonically isomorphic. -/
 noncomputable def integralScalarExactDerivedComparison :
     (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)).leftDerivedFunctor ≅
       integralOrdinaryDerivedScalar ℓ h Y := by

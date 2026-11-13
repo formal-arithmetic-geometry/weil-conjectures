@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 
 /-! # Higher direct image transition compatibility
 
-Source: Stacks Project, Tags 09Z1 and 03Q8, canonical comparison maps.
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8
 -/
 
 @[expose] public section
@@ -60,18 +62,7 @@ private lemma coefficient_transition_naturality
   rw [← Category.assoc, ht, Category.assoc, ← R'.map_comp, hc, R'.map_comp,
     Category.assoc]
 
-/-- The transition is natural in its coefficient sheaf.
-Source: Stacks Tag 09Z1, canonical comparison maps; Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-naturality).
-
-Proof: write the derived transition as the composite natural transformation formed by
-the h' adjunction unit, the pullback composition comparison, and pullback of the h
-adjunction counit. Each is natural, so its naturality square commutes for F[0]→G[0].
-The single-complex comparison is itself natural, and applying Rh'_* and homology
-preserves the commuting square. This gives the displayed equality. For identity maps
-it is reflexivity, for zero maps it is the zero equality by additivity, and the argument
-uses no geometric or cohomological bound assumptions.
--/
+/-- The transition is natural in its coefficient sheaf. (Stacks, Tags 09Z1 and 03Q8) -/
 theorem higher_direct_image_transition_naturality
     (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S)

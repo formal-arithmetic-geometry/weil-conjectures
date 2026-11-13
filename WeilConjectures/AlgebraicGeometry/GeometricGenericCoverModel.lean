@@ -15,9 +15,12 @@ import WeilConjectures.AlgebraicGeometry.GenericFibreClosedCoverSpread
 import WeilConjectures.AlgebraicGeometry.CompatibleEtaleGenericFibreModel
 import WeilConjectures.AlgebraicGeometry.ClosedFamilyGeometricFibreShrink
 
-/-! # A closed geometric cover on an étale model
+/-!
+# A closed geometric cover on an étale model
 
-Source: Stacks Project, Tags 0551, 054Y, 0559 and 054W.
+## References
+
+* Stacks, Tags 0551, 054Y, 0559 and 054W
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry
 
 /-- The empty-index case of the geometric generic cover construction: if the empty family
 covers the generic fibre after the finite étale extension, then an open neighbourhood of the
-generic point of `S` has empty preimage in `X`.
-
-Source: Stacks Project, Tag 054W. -/
+generic point of `S` has empty preimage in `X` (Stacks, Tag 054W). -/
 private theorem exists_generic_cover_model_of_isEmpty {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
     {L : Type u} [Field L]
@@ -119,34 +120,9 @@ private theorem geometric_fibre_subset_isIrreducible_of_isPullback
   rw [e.hom.surjective.range_eq, Set.inter_univ]
   exact (hgeom E hE (z ≫ c)).nonempty
 
-/-- Spread the closed cover and geometric irreducibility, before spreading intersections.
-
-Source: Stacks Project, Tag 055G, the model and closure construction preceding the
-intersection-image argument; Tags 0551, 054Y, 0559 and 054W.
-Proof: on an affine neighbourhood of the generic point, realize the supplied finite
-separable extension by the monic-polynomial construction of Tag 0551. Localize away
-from the image of the non-étale locus. The resulting model has one generic point
-with residue field L. Form the pullback of X and take closures of the supplied A_i.
-On the reduction of the model their reduced closed subschemes have the given generic
-fibres. Tag 054Y shrinks the base so their union covers, and Tag 0559, once for each
-index, shrinks it so their fibres are geometrically irreducible and nonempty.
-Represent this open in the original model using the reduction homeomorphism, and
-restrict the model to it. The resulting map to S is étale; its generic point still
-maps to the original generic point. The pulled-back closed subsets cover the total
-space and have the asserted geometrically irreducible traces on all field fibres.
-Their generic traces identify with A_i, giving the generic intersection implication.
-For an empty index type use Tag 054W to make the whole pulled-back total space empty;
-the geometric irreducibility and intersection assertions are then vacuous.
-In Lean the empty-index case is the private lemma above. In the nonempty-index case,
-the compatible étale model theorem supplies the embedding a and its field-base-change
-identifications. Set C_i = closure (a '' A_i). The
-embedding and closedness of A_i prove a⁻¹(C_i) = A_i. Use the closed-family shrinking
-theorem and the existing closed-cover shrinking theorem; intersect their opens.
-Pullback pasting proves the field-fibre assertion on this restricted model, and the
-range formula for pullback.map lifts every given generic intersection.
-No persistence of intersections at nongeneric points is asserted here.
-
-(blueprint: lem-sbc-geometric-generic-cover-model) -/
+/-- Spread the closed cover and geometric irreducibility, before spreading intersections
+(Stacks, Tags 055G, 0551, 054Y, 0559, 054W). No persistence of intersections at nongeneric
+points is asserted. -/
 theorem exists_geometric_generic_cover_model {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
     {L : Type u} [Field L]

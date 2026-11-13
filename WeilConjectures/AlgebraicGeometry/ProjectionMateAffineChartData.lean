@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # The geometric affine chart square
 
-Source: Stacks Project, Tag 08EU.
-(blueprint: lem-pc-projection-mate-affine-chart-data).
+## References
+
+* Stacks Project, Tag 08EU.
 -/
 
 @[expose] public section
@@ -23,17 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The geometric square of an affine chart, independently of derived categories.
-Source: Stacks Project, Tag 08EU, first sentence of the proof.
-(blueprint: lem-pc-projection-mate-affine-chart-data).
-
-Proof: take the section ring A on V and the inverse-image open Z. Affineness makes
-V compact and quasi-separated. Quasi-compactness of f makes Z compact, and the
-restricted quasi-separated morphism over the quasi-separated target makes Z
-quasi-separated. Compose the restricted morphism with the canonical affine
-isomorphism to obtain g. Restriction and composition with an isomorphism preserve
-the morphism properties. Take eV to be the inverse chart isomorphism and eZ the
-identity; cancellation proves the square. The empty open uses the zero ring. -/
+/-- The geometric square of an affine chart, independently of derived categories
+(Stacks, Tag 08EU). -/
 theorem exists_projectionMate_affineChart_data
     (X Y : Scheme.{u}) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (V : Y.Opens) (hV : IsAffineOpen V) :

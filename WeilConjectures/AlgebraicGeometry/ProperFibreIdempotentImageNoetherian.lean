@@ -15,7 +15,9 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # The locally Noetherian part of proper-fibre idempotent lifting
 
-Source: Stacks Project, Tag 0G7X, Noetherian case.
+## References
+
+* [Stacks Project, Tag 0G7X](https://stacks.math.columbia.edu/tag/0G7X)
 -/
 
 @[expose] public section
@@ -59,21 +61,7 @@ private theorem completion_image_mod_one {R : Type u} [CommRing R]
   exact ⟨x, sub_eq_zero.mp (by simpa only [LinearMap.mem_ker, map_sub] using hz)⟩
 
 /-- Idempotents on a proper fibre over a locally Noetherian base lift to sections
-near the base point. Source: Stacks Project, Tag 0G7X, Noetherian part of the proof.
-
-Proof: Let A be the local ring at s, m its maximal ideal, and M the stalk of f_* O_X.
-The ring A is Noetherian, hence m is finitely generated. On the infinitesimal fibres
-X_n over A/m^(n+1), nilpotent base change lifts e uniquely to idempotents e_n.
-Uniqueness implies that the e_n restrict compatibly, and e_0 corresponds to e.
-Formal functions for O_X identifies the completion of M with the inverse limit of
-these section modules. Let z in the completion correspond to (e_n). The quotient of
-the completion by m is M/mM, so choose x in M with the same quotient class as z.
-The component on the ordinary fibre is A-linear and m kills its target; consequently
-x and z have the same fibre image, namely e. Represent x by a section t over f⁻¹(U)
-for a neighbourhood U of s. The formal-functions germ formula identifies its fibre
-restriction with e. The first infinitesimal fibre and the usual fibre are identified
-by A/m = κ(s) and symmetry of the pullback, preserving their projections to X.
-(blueprint: lem-weil-pbc-stein-fibre-idempotent-image-noetherian) -/
+near the base point (Stacks, Tag 0G7X). -/
 theorem proper_fibre_idempotent_image_noetherian
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [IsLocallyNoetherian S] (s : S)
     (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) :

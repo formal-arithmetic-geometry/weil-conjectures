@@ -142,19 +142,7 @@ private theorem tensorTerm_free_finite {R : Type u} [CommRing R] [IsNoetherianRi
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The signed dual tensor of a bounded finite-free complex is bounded finite free.
-
-Source: current blueprint, `proposition-local-structure-integral-constructible-complexes`,
-Compatible isomorphisms, paragraph beginning These Hom groups can be infinite.
-(blueprint: lem-pe-internal-perfect-dual-tensor-finite).
-
-Proof: evaluation on the unique potentially nonzero target degree identifies the degree-r
-term of Hom(P,A[0]) with the dual of P^(-r).  All other factors of the product are zero.
-A basis of P^(-r) gives its finite dual basis. The dual vanishes outside [-b,-a].
-The tensor's degree-k term is the direct sum over r+s=k; only -b<=r<=-a and a<=s<=b
-can contribute. Delete the zero summands, leaving a finite sum of tensor products of
-finite free modules, with the tensor-product bases. This is finite free and vanishes
-outside [a-b,b-a]. These arguments apply to zero terms and to an empty interval as well. -/
+/-- The signed dual tensor of a bounded finite-free complex is bounded finite free. -/
 theorem internalPerfectScalarDualTensor_finite
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (a b : ℤ) (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b)

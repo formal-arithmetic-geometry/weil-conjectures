@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.PerfectOverlapSiteCancellationAb
 
 /-! # Canonical local-object site triangle
 
-Source: Stacks Project, Tags 08BT, 08BV and 08DW.
+## References
+
+* Stacks Project, Tags 08BT, 08BV and 08DW.
 -/
 
 @[expose] public section
@@ -48,13 +50,7 @@ variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
 
 -- The statement elaborates two derived site categories and their equivalence.
 /-- A local comparison transported to the overlap agrees with the fixed
-scheme comparison after returning from the open site. Expand the prescribed
-theta map into kappa, the local object isomorphism and the return unit. The
-overlap-return triangle replaces the return unit and site restriction by the
-open-site comparison. The nested counit and local-isomorphism triangles then
-cancel the two transported inverses, leaving the fixed stage object map. 
-(blueprint: lem-pc-perfect-overlap-canonical-site-triangle)
--/
+scheme comparison after returning from the open site. -/
 theorem perfectOverlapCanonicalSiteTriangleU
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
@@ -106,8 +102,7 @@ theorem perfectOverlapCanonicalSiteTriangleU
 
 -- The second statement also elaborates two derived site categories.
 /-- The second-open site triangle follows by the same return, nested-counit,
-and local-isomorphism pasting, using the inclusion `U ⊓ V ≤ V`. 
-(blueprint: lem-pc-perfect-overlap-canonical-site-triangle)
+and local-isomorphism pasting, using the inclusion `U ⊓ V ≤ V`.
 -/
 theorem perfectOverlapCanonicalSiteTriangleV
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)

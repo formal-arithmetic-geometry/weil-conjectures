@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorizatio
 
 /-! # The fixed comparison on the chosen standard resolution
 
-Source: Stacks Project, Tags 015E and 03FD.
-(blueprint: new-module-cohomology-ext-standard-resolution-formula)
+## References
+
+* [Stacks, Tags 015E and 03FD]
 -/
 
 @[expose] public section
@@ -31,20 +32,8 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option Elab.async false
 
 -- Elaborating the fixed-resolution interfaces requires several derived-functor instances.
-/-- Computation only on Mathlib's fixed standard injective resolution, with no
-change-of-resolution assertion.
-Source: Stacks Project, Tag 015E (acyclic resolution computation) and Tag 03FD.
-(blueprint: new-module-cohomology-ext-standard-resolution-formula)
-
-Proof: Write s for the common-resolution sections comparison, c for the
-acyclic-resolution comparison, and t for terminal-source precomposition followed
-by siteSectionsObjIso. Standard sections factorization gives
-s.hom x = c.inv (a.hom x), using hI and ha. Ext sections factorization evaluates
-the constructed equivalence as t.inv (s.hom x). Apply t.inv to the first equality.
-The defining equation hb identifies b with t followed by c, whose inverse is
-c.inv followed by t.inv. Thus the resulting value is b.inv (a.hom x).
-No change of resolution is used. The factorization lemmas include degree zero,
-zero coefficients and empty schemes. -/
+/-- Computation of the fixed comparison on Mathlib's standard injective resolution, with no
+change-of-resolution assertion (Stacks, Tags 015E and 03FD). -/
 theorem standard_resolution_formula
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     [EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

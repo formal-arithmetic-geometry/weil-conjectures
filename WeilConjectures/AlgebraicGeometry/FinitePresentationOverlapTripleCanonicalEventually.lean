@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
 
 /-! # Finite-stage canonical triple-overlap equation
 
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-fp-overlap-triple-canonical-eventually). -/
+## References
+
+* Stacks Project, Tag 01ZR.
+-/
 
 @[expose] public section
 
@@ -191,13 +193,10 @@ private lemma limit_triple_defect_zero
 set_option backward.isDefEq.respectTransparency false in
 -- Keep the original, unused existential proof binder in the theorem signature.
 set_option linter.unusedVariables false in
-/--
-Finite-stage vanishing of the canonical triple-overlap defect.  This is the
+/-- Finite-stage vanishing of the canonical triple-overlap defect.  This is the
 finite-presentation zero-map descent part of the persistent overlap argument;
 the remaining transport to arbitrary chosen pullbacks is a separate theorem.
-Source: Stacks Project, Tag 01ZR, clause (3).
-(blueprint: lem-pc-fp-overlap-triple-canonical-eventually).
--/
+(Stacks, Tag 01ZR) -/
 theorem finitePresentation_overlap_triple_canonical_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

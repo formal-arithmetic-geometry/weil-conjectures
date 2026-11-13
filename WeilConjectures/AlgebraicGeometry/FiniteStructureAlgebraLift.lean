@@ -25,7 +25,9 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Algebra structures on algebraized finite direct images
 
-Source: Stacks Project, Tags 09ZT, 088E and 088F.
+## References
+
+* Stacks Project, Tags 09ZT, 088E and 088F.
 -/
 
 @[expose] public section
@@ -46,30 +48,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 600000 in
 -- Transport through the module isomorphism and identify the section quotient ideals.
-/-- Lift the algebra structure on an already algebraized coherent module system.
-Source: Stacks Project, Lemma 09ZT, the multiplication and unit paragraphs;
-Theorem 088E and Remark 088F, and Schemes Lemma 01I9.
-
-Proof: Choose a proper closed subscheme annihilating G by 0CYS. Its ideal also
-annihilates the tensor square and cube of G and the quotient of the structure sheaf.
-These modules are quasi-coherent and finite type, hence coherent. Tensor pullback
-commutes with tensor products and their associativity, symmetry and unit constraints.
-Conjugate the canonical multiplications by ψ. The base-change formula and hψ make
-these maps a compatible family. Full faithfulness in 088E lifts multiplication
-uniquely from the tensor square to G. Lift the units from the structure-sheaf quotient
-on the proper supporting subscheme; its reductions map to the finite structure algebras
-because their annihilators contain this ideal. Faithfulness on the tensor cube, square
-and G checks associativity, commutativity and the unit identities. Define the ring sheaf
-on the additive sheaf of G using these operations, and its structure map using the unit.
-Its underlying module is canonically isomorphic to G. The adjoints of ψ are ring maps
-by the multiplication and unit identities. Their compatibility is hψ after adjunction.
-On an affine U, the thickening has coordinate ring R/J with J the kernel of j_n.app U.
-Tensor pullback is extension of scalars, so ψ identifies its section ring with
-B(U)/JB(U); this is the displayed ring equivalence and its formula on quotient classes.
-The empty affine chart and zero module obey the same formulas. No witness is selected
-from a mere existence statement to define data: the ring operations on G are uniquely
-determined by full faithfulness, and the ring sheaf is explicitly constructed from them.
-(blueprint: lem-weil-pbc-finite-structure-algebra-lift). -/
+/-- Lift the algebra structure on an already algebraized coherent module system
+(Stacks, Tags 09ZT, 088E, 088F). -/
 theorem finite_structure_algebra_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

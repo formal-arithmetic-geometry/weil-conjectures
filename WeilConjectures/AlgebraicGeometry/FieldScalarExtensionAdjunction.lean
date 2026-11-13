@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FieldScalarExtension
 
 /-! # The scalar-extension adjunction
 
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section
@@ -58,17 +60,8 @@ private noncomputable def scalarRestrictionHomEquiv
   right_inv f := by ext U a; rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Tensor extension followed by sheafification is left adjoint to scalar restriction.
-
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
-(blueprint: lem-sc-field-scalar-extension-adjunction).
-
-Proof: regard a k-module-valued presheaf as modules over the constant presheaf k.
-Apply the presheaf pullback/pushforward adjunction for the map k -> R and then
-sheafification's adjunction. Morphisms into the pushforward are exactly natural
-k-linear maps to the scalar restriction. The two bijections are natural in both
-arguments, so their composite is the required adjunction. This uses only rings,
-not the field hypothesis. -/
+/-- Tensor extension followed by sheafification is left adjoint to scalar restriction
+(Stacks, Tags 0095, 0096). -/
 theorem nonempty_fieldScalarExtensionAdjunction :
     Nonempty (fieldScalarExtension.{u, v} X R α ⊣
       forgetToSheafModuleCat R (op ⊤) isTerminalTop.op ⋙

@@ -23,8 +23,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Affine-open invertibility of the derived sections truncation projection
 
-Source: Stacks Project, Tags 08D4 (3), 08D5 and 01F4 (2).
-(blueprint: new-qcoh-sections-truncation-projection).
+## References
+
+* Stacks Project, Tags 08D4, 08D5 and 01F4.
 -/
 
 @[expose] public section
@@ -35,32 +36,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- On affine opens, the canonical projection to the lower truncation at i
-induces an isomorphism on degree-i derived sections for quasi-coherent objects.
-This only compares E with its lower truncation, not with its cohomology sheaf.
-Source: Stacks Project, Tags 08D4 (3), 08D5 and 01F4 (2).
-(blueprint: new-qcoh-sections-truncation-projection).
-
-Proof:
-1. For an affine V in Y, put U = f inverse-image V. Restriction of injective
-resolutions computes cohomology on U. Open restriction commutes with derived
-pushforward, so hacyc kills positive direct images for the restricted morphism.
-Its higher direct images of quasi-coherent sheaves are quasi-coherent, by the
-quasi-coherence clause of finite-support-hi. Affine vanishing on V and the
-Leray edge identify H^p(U,F|U) with sections of R^p(f|V)_*(F|U), hence zero
-for p > 0. Sections preserve countable products by their universal property.
-2. The strictly lower truncation T = truncLT i E has quasi-coherent cohomology
-and is supported in degrees at most i-1. Apply the unbounded cohomological
-bound with N = 1 to the sections functor on U, followed by forgetting modules.
-Its derived cohomology vanishes in degrees i and i+1.
-3. Apply derived sections to the distinguished truncation triangle
-T -> E -> truncGE i E -> T[1]. The homology exact sequence and the two zero
-endpoints make the stated canonical projection invertible after evaluation
-at V. Exact evaluation identifies this homology with evaluated derived-section
-presheaf homology; forgetting modules reflects isomorphisms. Evaluation at all
-affine opens jointly reflects isomorphisms of module presheaves, giving the claim.
-The argument applies to every integer and includes the zero object and empty
-open; it never assumes that U is affine or that E is bounded below. -/
+/-- On affine opens, the canonical projection to the lower truncation at `i`
+induces an isomorphism on degree-`i` derived sections for quasi-coherent objects
+(Stacks, Tags 08D4, 08D5 and 01F4). -/
 theorem qcoh_acyclic_derived_sections_truncation_isIso {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisImageComponentCompositionF
 
 /-! # Right-hand image normalization
 
-Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-composition-right-normalization).
+## References
+
+* [Stacks, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks, Tag 0D5T](https://stacks.math.columbia.edu/tag/0D5T)
 -/
 
 @[expose] public section
@@ -52,19 +54,7 @@ private theorem normalize_right
 
 -- Explicit complex and derived-category conversions need a larger elaboration budget.
 /-- Right-hand image normalization to the complex-composition composite.
-Source: Stacks Project, Tags 08FE, 0D5T and 079V.
-
-Proof: Apply schemeMVImageIso_composition_factor in every degree. Extensionality of chain
-maps identifies the image component followed by open direct image of the underived
-restriction comparison with the complex composition comparison b₀. Apply Q. Naturality
-of schemeMVDirectImageLocalization for that underived comparison moves it past the open
-direct-image unit. Expand the restriction-localization chain and open-image localization
-on Y; cancel the inverse and hom of the exact Y-restriction factor inside R. Associativity
-and functoriality give the displayed three-map composite. This calculation uses no
-h-localization unit and no derived composition isomorphism.
-The argument applies to arbitrary complexes, empty and full opens, and identity morphisms:
-only functoriality, naturality and inverse-isomorphism equations are used.
-(blueprint: lem-pc-mayer-vietoris-composition-right-normalization). -/
+(Stacks, Tags 08FE, 0D5T, 079V) -/
 theorem schemeMV_composition_right_normalization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

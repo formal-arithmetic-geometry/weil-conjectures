@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 
 /-! # Lifting homogeneous evaluations into ideal powers
 
-Source: Stacks Project, proof of Lemma 0884, affine power refinement.
-(blueprint: lem-weil-pbc-formal-polynomial-power-lifts).
+## References
+
+* [Stacks Project, Tag 0884](https://stacks.math.columbia.edu/tag/0884)
 -/
 
 @[expose] public section
@@ -77,25 +78,7 @@ theorem formalPolynomial_extendedIdeal_affine
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Homogeneous evaluations lift to the actual ideal-power sheaves on every open.
-Source: Stacks Project, proof of Lemma 0884, associated graded algebra refinement;
-Schemes, Tags 01I8 and 01IC, for the affine power calculation.
-(blueprint: lem-weil-pbc-formal-polynomial-power-lifts).
-
-Proof: on an affine open V, ideal_comap_appLE and ideal_top_ofIdealTop identify
-J(V) with the ideal spanned by the images of the generators. A degree-k polynomial
-has evaluation in J(V)^k: expand into monomials, each a product of k generators.
-For positive k, the affine power-range clause of
-ideal_times_quasiCoherent_affine_sections gives a preimage in J^k(V). For k=0,
-the power inclusion is the identity. All inclusions are monic: the degree-one
-inclusion is the ideal inclusion, and every higher inclusion is a composite of
-an image inclusion and the preceding inclusion. Thus the local preimage is unique.
-On nested affine opens, naturality identifies its restriction with the unique
-preimage there. On overlaps compare after restriction to affine subopens, and use
-sheaf separation. The sheaf gluing axiom now gives a preimage on any open U,
-uniquely, with the prescribed structure-sheaf image. Choose these unique preimages
-for all k, U, b. No arbitrary data are chosen: the image determines each lift.
-Empty generators, degree zero, the zero ring and the empty open follow from the
-same construction. -/
+(Stacks, Tag 0884; Tags 01I8 and 01IC.) -/
 theorem formalPolynomial_power_lifts
     {A : Type u} [CommRing A] (I : Ideal A)
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))

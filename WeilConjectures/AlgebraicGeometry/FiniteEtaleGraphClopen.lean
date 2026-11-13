@@ -12,10 +12,6 @@ public import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 
 /-! # Morphisms as clopen graphs of degree one
-
-Source: Mathlib AlgebraicGeometry Restrict.isoOpensRange and OpenImmersion.isoOfRangeEq;
-corrected finite-étale lifting blueprint steps 2–3.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 
 @[expose] public section
@@ -23,19 +19,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Morphisms to a finite étale scheme correspond to clopen graphs of degree one.
-Source: corrected blueprint finite-étale lifting, steps 2–3; Stacks Tags 024T and 01KT.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
-
-Proof: Associate to a morphism its graph, a section of the second projection.
-The projection is finite étale. Its section is étale by cancellation, a monomorphism
-by its retraction, and a closed immersion by separatedness. Thus it is an open and
-closed immersion. Its image W is clopen, and its factorization through W is an
-isomorphism whose inverse is the restricted projection. Conversely, for such W,
-compose the inverse of its projection with its inclusion and then the first projection.
-The pullback identities give a morphism over the base. The two constructions are
-inverse: a section is recovered from its image because the restricted projection
-has a unique inverse. This also treats an empty source or target. -/
+/-- Morphisms to a finite étale scheme correspond to clopen graphs of degree one
+(Stacks, Tags 024T and 01KT). -/
 theorem Scheme.finiteEtale_graph_clopen
     {Y U V : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y) [IsFinite q] [Etale q] :
     ∃ e : {a : U ⟶ V // a ≫ q = p} ≃

@@ -12,8 +12,9 @@ import Mathlib.AlgebraicGeometry.Gluing
 
 /-! # Gluing closed loci representing a local predicate
 
-Source: Stacks Project, Tag 0BDL, gluing of local closed subschemes.
-(blueprint: lem-sc-local-closed-locus-gluing).
+## References
+
+* [Stacks, Tag 0BDL]
 -/
 
 @[expose] public section
@@ -26,26 +27,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Closed representatives of a predicate stable under open restriction and local
-on the source glue over an open cover of the target.
-Source: Stacks Project, Tag 0BDL, final gluing paragraph; Schemes, Tags 01JB and 01JC.
-(blueprint: lem-sc-local-closed-locus-gluing).
-
-Proof: Choose the given neighbourhood at each target point. On an overlap,
-pull back the two closed representatives. Their maps into every scheme over
-the overlap satisfy the same predicate, so they represent the same subfunctor
-of the functor of points of the overlap. Closed immersions are monomorphisms,
-so Yoneda gives unique comparison isomorphisms over the overlap. Uniqueness
-gives the cocycle condition. Glue the schemes along these open overlaps and
-glue their structure maps to X. Closed immersion and local finite presentation
-are local on the target, so the glued map has both properties. A map through
-the glued scheme locally factors through the chart representatives, hence
-satisfies P by source locality. Conversely restrict a map satisfying P to the
-inverse images of the chosen target opens. Restriction stability gives P on
-each such source open; the chart criteria supply local lifts, unique because
-the chart maps are monomorphisms. The lifts agree on overlaps and glue.
-For an empty target use the empty closed subscheme. Source locality forces P
-on the empty source, as required. Neither quasi-compactness of X nor a finite
-cover is assumed. -/
+on the source glue over an open cover of the target (Stacks, Tag 0BDL). -/
 theorem exists_closedLocus_of_local_charts
     (X : Scheme.{u}) (P : ∀ T : Scheme.{u}, (T ⟶ X) → Prop)
     (hrestrict : ∀ (T : Scheme.{u}) (h : T ⟶ X) (V : T.Opens),

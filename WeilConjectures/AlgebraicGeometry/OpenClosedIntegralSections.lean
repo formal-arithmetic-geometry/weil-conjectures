@@ -9,8 +9,10 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
 
 /-! # Integral open–closed sequence with its sections normalization
 
-Source: Stacks Project, Tags 095L and 03F3, and the Cartier proof (G1).
-(auxiliary; not a blueprint node). -/
+## References
+
+* [Stacks, Tag 095L], [Stacks, Tag 03F3]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -98,18 +100,7 @@ private theorem restrictedSectionsEquiv_apply {X : Scheme.{u}} (W : X.Opens)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The integral open–closed sequence has an open source representing sections,
-with its inclusion corresponding to the constant section one.
-Source: Stacks Project, Tags 095L and 03F3.
-(auxiliary; not a blueprint node)
-Proof: apply the open–closed short exact sequence to the integer constant sheaf.
-Identify its closed restriction with the integer constant on D. Replace open
-pullback by literal restriction. Its constant comparison is an isomorphism:
-whiskering the sheafification unit is locally bijective, and the unit on the open
-is locally bijective as well. The lower-shriek adjunction and the constant-sheaf
-sections adjunction give the additive sections equivalence. Adjunction naturality
-proves naturality in the target. The counit transposes to identity; evaluating the
-constant comparison on one and using sheafification-unit naturality gives the
-specified normalization. These arguments cover empty opens and empty schemes. -/
+with its inclusion corresponding to the constant section one (Stacks, Tags 095L, 03F3). -/
 theorem exists_integral_openClosed_sections {D X : Scheme.{u}} (i : D ⟶ X)
     [IsClosedImmersion i] (W : X.Opens) (hW : (W : Set X) = (Set.range i.base)ᶜ) :
     let P := EtaleOpenComparison.integerSheaf X

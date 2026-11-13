@@ -14,9 +14,10 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Pullbacks
 /-!
 # Fibre products commute with limits along affine transition morphisms
 
-Source: Stacks Project, Derived Categories, proof of Lemma 0G7X (line 8166),
-with Categories Lemma 002M and Morphisms Lemmas 01SD, 01SC, 01SG
-(blueprint: lem-weil-pbc-limit-fibre-products).
+## References
+
+* Stacks Project, Derived Categories, proof of Lemma 0G7X, with Categories Lemma 002M and
+  Morphisms Lemmas 01SD, 01SC, 01SG.
 -/
 
 @[expose] public section
@@ -29,32 +30,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Fibre products and scheme-theoretic fibres commute with the given affine-transition
-limits, including their canonical projections. Equalities of objects and `HEq` of maps
-identify the chosen representatives without introducing extra isomorphism choices.
-
-Source: Stacks Project, proof of Lemma 0G7X, the limit argument, and Tags 002M,
-01SD, 01SC, 01SG (blueprint: lem-weil-pbc-limit-fibre-products).
-
-Proof:
-1. Form the pointwise pullback diagram with Mathlib's `PullbackCone.combine`.
-   The projections from `pullback F G` to the stage pullbacks are `pullback.lift`
-   applied to the given limit projections. For any cone over this diagram, its
-   composites with the two pullback projections give cones over X and T. Their
-   universal maps have equal composites to S by `hcS.hom_ext`, so `pullback.lift`
-   defines the required map. The projection identities prove factorization;
-   `pullback.hom_ext`, `hcX.hom_ext` and `hcT.hom_ext` prove uniqueness.
-2. Each transition between stage pullbacks is affine by
-   lem-weil-pbc-fibre-product-affine-transition: factor via the affine diagonal of
-   the base transition and the base changes of the affine transitions on X and T.
-   Use stability under base change and composition (01SD, 01SC, 01SG).
-3. `exists_isColimit_residueField_of_isLimit` (lem-weil-pbc-limit-residue-field)
-   identifies the residue-field point of s with the limit of its stage points.
-   Apply steps 1 and 2 to X, S and these residue-field spectra. This gives the
-   limiting fibre cone with affine transitions and the stated projections to X.
-   `Functor.copyObj` transports the residue-field spectra to the exact stage
-   objects. The theorem's canonical-map identities give a natural transformation
-   to S and the specified limiting cone. Apply step 1 with these spectra as T;
-   the resulting pullbacks are definitionally the required fibres. -/
+limits, including their canonical projections. -/
 theorem limit_fibre_products_of_affine_transition
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (X S T : Iᵒᵖ ⥤ Scheme.{u})

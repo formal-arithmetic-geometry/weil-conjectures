@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Equality of maps with finite free source near a stalk
-
-Source: lemma-coherent-base-change-invertible-sheaves--3, finite germ calculation.
-(blueprint: lem-pc-finite-free-stalk-map-eq-shrink)
 -/
 
 @[expose] public section
@@ -152,19 +149,7 @@ private theorem restrict_map_injective_of_isIso {X Y : Scheme.{u}}
       Scheme.Hom.opensRange_of_isIso, top_inf_eq]
   exact (congrArg (fun T ↦ Hom.app f T = Hom.app g T) hQ).mp hh
 
-/-- Equality after pullback to the local scheme spreads for maps with finite free source.
-
-Source: blueprint sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus,
-finite germ calculation. (blueprint: lem-pc-finite-free-stalk-map-eq-shrink)
-
-Proof: Use the given source isomorphism to obtain r generating sections over V.
-The pullback equality implies equality of the germs of their images in N at y:
-the stalk at the closed point of Spec O_{Y,y} of the pullback is canonically N_y.
-For each generator the presheaf germ equality criterion gives an open neighbourhood
-of y inside V on which its two images agree. Intersect these finitely many opens
-with U. On that intersection the two maps agree on every generator, hence on the
-whole restricted free source, and therefore on M. For r=0 there are no generators,
-the source is zero, and W=U works. No finite generation of N is needed. -/
+/-- Equality after pullback to the local scheme spreads for maps with finite free source. -/
 theorem exists_restrict_eq_of_pullback_eq
     {Y : Scheme.{u}} (r : ℕ) (y : Y) (V : Y.Opens) (hyV : y ∈ V)
     (M N : V.toScheme.Modules)

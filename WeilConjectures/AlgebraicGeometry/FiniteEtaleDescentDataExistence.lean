@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 /-!
 # Canonical finite etale descent functor
 
-Source: Stacks Project, Descent, Definition Tag 023V; Step 2 of
-`lem-galois-descent` (blueprint: lem-galois-descent-data-existence).
+## References
+
+* Stacks Project, Tag 023V
 -/
 
 @[expose] public section
@@ -25,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The pullback, transport, and morphism equations characterizing the canonical
-base-change functor. Source: Stacks Project, Descent, Tag 023V
-(blueprint: lem-galois-descent-data-existence). -/
+base-change functor (Stacks, Tag 023V). -/
 def FiniteEtaleDescentCompatible {Y Y' : Scheme.{v}} {g : Y' ⟶ Y}
     (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)
     (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left) : Prop :=
@@ -83,15 +83,7 @@ private noncomputable def pullbackDataMap {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
         apply pullback.hom_ext <;> simp [pullbackDataObj, pullbackDatum, Category.assoc] }
 
 /-- The canonical finite etale base-change functor exists, without any covering
-hypothesis. Source: Stacks Project, Descent, Tag 023V, canonical datum; Step 2
-of `lem-galois-descent` (blueprint: lem-galois-descent-data-existence).
-
-Proof: use the pullback of each finite etale scheme, which is finite etale by
-base-change stability. Transport keeps the first projection and replaces the
-second projection by the new point of the base. The pullback universal property
-proves naturality, identity, and the cocycle. Map a morphism by its pullback;
-the same universal property proves compatibility and the functor laws. The
-first projections satisfy all the required equations. -/
+hypothesis (Stacks, Tag 023V). -/
 theorem finiteEtaleDescent_data {Y Y' : Scheme.{v}} (g : Y' ⟶ Y) :
     ∃ (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)
       (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left),

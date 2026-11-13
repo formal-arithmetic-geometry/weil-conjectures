@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
 
 /-! # Lisse coefficient modules are constructible
 
-Source: Stacks Project, etale-cohomology.tex, Tag 03RW(3).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Étale Cohomology, Tag 03RW(3).
 -/
 
 @[expose] public noncomputable section
@@ -97,17 +98,7 @@ private theorem fixed_lisse {D : Type w} [SmallCategory D]
       (T.overPullbackConstantSheafIso (ModuleCat.{w} R) U).app M
 
 /-- A finite locally constant module is constructible on the coefficient-sized etale site.
-Source: Stacks Project, etale-cohomology.tex, Tag 03RW(3).
-(auxiliary; not a blueprint node).
-
-Proof: Restrict the scalar action along constant sections. This exact equivalence sends
-constant module sheaves to constant module-valued sheaves and commutes with restriction
-to slices. Thus the given covering sieves give finite locally constant fixed-scalar
-models. On each affine open choose the one-stratum stratification with stratum the whole
-open, domain the open itself and immersion the identity. Its stratum is constructible.
-Etale inverse image preserves the local models and their finite generating modules, so
-the restriction to this stratum satisfies the required fixed-scalar condition. The
-whole-space stratum also works for an empty affine open, since it imposes no nonemptiness. -/
+(Stacks, Tag 03RW(3)) -/
 theorem lisseCoefficient_constructible
     (X : Scheme.{u}) (R : Type (max v (u + 1))) [CommRing R] [IsNoetherianRing R]
     (F : CategoryTheory.ConstantCompletion.Mod

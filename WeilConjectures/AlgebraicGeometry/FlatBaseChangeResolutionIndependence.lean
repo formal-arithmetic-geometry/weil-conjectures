@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 
 /-! # FlatBaseChangeResolutionIndependence
 
-Source: Stacks Project, Cohomology, Tags 02N7, 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -58,17 +62,7 @@ private lemma augmentedHomotopy {C : Type*} [Category C] [Abelian C]
 set_option maxHeartbeats 600000 in
 -- Comparing the nested module-sheaf functors and four homology transports needs this budget.
 /-- Resolution comparison and homotopy invariance of the flat base-change morphism.
-Source: Stacks, Cohomology, Tag 02N7 and Derived Categories, Tags 013P, 013S.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-independence).
-
-Proof: Compare I and I₁ by lifts of the identity of F, and J and J₁ by lifts of
- the identity of g'^*F. Their composites are homotopic to identities. Pushforward
- preserves injectives because g' is flat. The two augmented maps into the pushed
- target resolution are homotopic by uniqueness of lifts. Apply f_*, the square
- isomorphism, and the termwise adjunction; these preserve homotopies. Homology
- identifies the two resulting maps. Naturality of the exact pullback homology
- comparison and of isoRightDerivedObj cancels the resolution comparisons, giving
- the asserted equality on the fixed derived objects. -/
+(Stacks, Tag 02N7; Derived Categories, Tags 013P, 013S.) -/
 theorem flatBaseChangeResolutionBeta_independent {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)
     [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}
     (I : InjectiveResolution F)

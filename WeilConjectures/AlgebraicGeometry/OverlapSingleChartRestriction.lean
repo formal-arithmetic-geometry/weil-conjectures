@@ -9,8 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 
 /-! # A canonical restriction equation for a single chart
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-single-chart-restriction). -/
+
+## References
+
+* Stacks Project, Tag 01ZR (2) (first proof), and Tag 0095. -/
 
 @[expose] public section
 universe u
@@ -88,9 +90,8 @@ private theorem restriction_calc {B W H K Z : Scheme.{u}}
   rw [Category.assoc]
   rw [compOfEq_assoc z hd f (r ≫ δ) ν k hz hν hk hzk M]
 
-/-- The part of the iterated comparison preceding the component isomorphism.
-Source: Stacks Project, Tag 0095.
-(blueprint: lem-pc-overlap-single-chart-restriction). -/
+/-- The part of the iterated comparison preceding the component isomorphism
+(Stacks, Tag 0095). -/
 def overlapCanonicalChartComparison {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀) :
@@ -108,9 +109,7 @@ by
     (Scheme.Modules.pullbackCongr hdq.symm).app (N d) ≪≫
     ((Scheme.Modules.pullbackComp d' (U.pullbackHom t d)).app (N d)).symm
 
-/-- Canonical restriction comparison with abstract chart schemes.
-Source: Stacks Project, Tag 0095, composition of inverse images.
-(blueprint: lem-pc-overlap-single-chart-restriction). -/
+/-- Canonical restriction comparison with abstract chart schemes (Stacks, Tag 0095). -/
 def overlapRestrictionIso {B W K H : Scheme.{u}}
     (d : W ⟶ B) (z : K ⟶ H) (ha : H ⟶ B) (r : K ⟶ W)
     (hz : z ≫ ha = r ≫ d) (A : B.Modules) (L : W.Modules) (S : H.Modules)
@@ -167,23 +166,8 @@ private theorem restriction_six_factors {B W H K Z : Scheme.{u}}
   exact restriction_with_comparison δ f w hδ hd ν hν r z k hr hz hzk A L S M
     (a ≪≫ b ≪≫ c) τ e
 
-/-- A single chart comparison commutes with restriction to an arbitrary scheme.
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-single-chart-restriction).
-
-Proof: Factor the iterated comparison into C, the pullback of e, and the
-composition comparison along the direct chart structure map. Expand xi and
-cancel the pullback of C inverse against the pullback of C. Naturality of the
-composition comparison moves the pullback of e through the inverse comparison
-along r and the chart map. The inverse-image associativity pentagon identifies
-this composite with the comparison along r followed by the iterated structure
-map. On the other side use naturality to move e through the comparison along
-z and hd, then use the same pentagon along z, hd and the direct structure map.
-The relations hz, hnu and hzk identify the composite maps in this pentagon.
-Cancel the remaining inverse composition comparison. Functoriality expands
-the pullback of the three-factor alpha hom, yielding exactly the displayed
-identity. This argument uses only naturality and invertibility and applies to
-empty charts, repeated charts, zero modules and identity maps. -/
+/-- A single chart comparison commutes with restriction to an arbitrary scheme
+(Stacks, Tags 01ZR (2) and 0095). -/
 theorem overlap_single_chart_restriction {X Y Z H K : Scheme.{u}}
     (U : X.OpenCover.{u}) (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)

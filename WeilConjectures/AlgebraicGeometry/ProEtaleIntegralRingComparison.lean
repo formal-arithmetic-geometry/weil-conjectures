@@ -9,8 +9,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralPointRingMap
 
 /-!
 # Lifting the integral representation comparison to rings
-
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -23,21 +21,7 @@ namespace AlgebraicGeometry.ProEtale
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Lift the normalized comparison on the point through the monoidal adjunction.
-
-proof.md`, Steps 3--4
-(auxiliary; not a blueprint node).
-
-Proof: the point ring-map lemma supplies the sectionwise ring map into the continuous
-direct image of the completion. Transpose it through the monoidal point adjunction.
-Its transpose is an additive, multiplicative, unital map. To identify its underlying
-natural transformation, precompose with p.inv and apply Yoneda at the identity of
-X[O_E]. The unit equation for p identifies the universal section with the adjunction
-unit applied to the identity continuous function. The lifted adjunction's unit equation
-and the point map's defining value identify its image with d.inv at that identity.
-Yoneda gives equality on every section. The assembly proves invertibility and all
-normalized projections from this specified underlying-map equation.
--/
+/-- Lift the normalized comparison on the point through the monoidal adjunction. -/
 theorem sfb_integral_ring_comparison_exists (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) (a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X)

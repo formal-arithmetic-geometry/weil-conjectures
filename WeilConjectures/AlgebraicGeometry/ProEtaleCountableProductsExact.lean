@@ -11,9 +11,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationCol
 /-!
 # Exact countable products of pro-etale module sheaves
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Propositions 3.1.9,
-3.2.3 (1), and 4.2.8; Stacks Project, Tags 03DB and 0947 (4)
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Propositions 3.1.9,
+  3.2.3 (1), and 4.2.8.
+* Stacks Project, Tags 03DB and 0947 (4).
 -/
 
 @[expose] public section
@@ -22,12 +24,7 @@ universe t u w v v'
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
-/-- Weak contractibility is unchanged by enlarging the universe of sections.
-Choose one local lift for each arrow of the image sieve of a fixed section.
-The coproduct of the corresponding representables is a small presheaf mapping
-locally surjectively to the representable of W. Sheafify, apply weak contractibility,
-and map the resulting section to the original sheaf, using compatibility of
-sheafification with universe lifting. -/
+/-- Weak contractibility is unchanged by enlarging the universe of sections. -/
 private theorem large_section_surjective
     {C : Type v} [Category.{v'} C] (J : GrothendieckTopology C) (W : C)
     (hW : ∀ (F G : Sheaf J (Type (max v v'))) (f : F ⟶ G),
@@ -148,30 +145,8 @@ namespace AlgebraicGeometry.Scheme.ProEt
 of epimorphisms is an epimorphism. Preservation by evaluation identifies the
 canonical product cone with the product of section modules; thus both scalar actions
 and restriction maps are coordinatewise. Surjectivity here is sheaf surjectivity,
-expressed categorically by `Epi`, not surjectivity on every object's sections.
-
-Source: Bhatt--Scholze, Propositions 3.1.9, 3.2.3 (1), 4.2.8;
-Stacks Project, Tags 03DB and 0947 (4)
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Apply situation-conventions to discrete countable
-   diagrams. Mathlib's module-sheaf limits give the product universal property,
-   coordinatewise scalar actions, restrictions, and the evaluation identification.
-2. Kernels are sectionwise by situation-conventions. The product
-   functor is additive and preserves kernels and zero objects, hence is left exact.
-3. For each site object use lem-weil-pbc-proetale-affine-wcontractible-covering-family
-   to choose a cover by affine weakly contractible objects. By
-   lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits, each given
-   epimorphism is surjective on sections over each member of this cover.
-4. Choose lifts of all coordinates over each fixed covering object, using ordinary
-   set-theoretic choice. The sectionwise product formula assembles these lifts
-   into a section of the product source mapping to the restricted target section.
-5. If two maps out of the product target agree after composition with the product
-   map, these local lifts make their values agree over the cover. Separatedness
-   from def-weil-pbc-sites-and-cohomology gives equality of their values downstairs.
-   They therefore agree, proving `Epi`. With step 2 this proves exactness.
-The same argument works in every coefficient universe containing the site. -/
+expressed categorically by `Epi`, not surjectivity on every object's sections
+(Bhatt--Scholze, Propositions 3.1.9, 3.2.3 (1), 4.2.8; Stacks, Tags 03DB and 0947). -/
 theorem countableProducts_exact (Y : Scheme.{t})
     (R : Sheaf (topology Y) CommRingCat.{max u (t + 1)}) :
     HasCountableProducts

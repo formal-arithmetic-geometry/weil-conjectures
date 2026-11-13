@@ -13,7 +13,13 @@ import Mathlib.CategoryTheory.Functor.Flat
 import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
-/-! # The coefficient equation for the integral section comparison -/
+/-! # The coefficient equation for the integral section comparison
+
+## References
+
+* Bhatt–Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
+* Stacks, Tags 00YV and 03D2.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -247,9 +253,7 @@ private theorem reconstructedCoefficientPullback
   exact FY.map_preimage _
 
 /-- Compare the detailed completed ring directly with the reconstructed internal ring.
-Both factors are the prescribed, projection-normalized comparisons.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-(auxiliary; not a blueprint node). -/
+Both factors are the prescribed, projection-normalized comparisons. -/
 def integralDetailedSectionRingComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -263,24 +267,7 @@ def integralDetailedSectionRingComparison (l : ℕ) [Fact l.Prime]
 
 /-- The completed coefficient comparison is compatible with the actual inverse-image
 unit. This assertion concerns rings only; it makes no assertion about module functors
-or local isomorphism classes.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the coefficient
-square in the integral constructibility comparison; Stacks, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node).
-
-Proof: forget commutative ring sheaves to ring sheaves and lift the fixed source
-comparison through this fully faithful functor. For the reconstructed coefficient
-rings, lift the internal direct-image coefficient map in the same way, then take
-its adjunct in commutative ring sheaves. Forgetting this adjunct to abelian sheaves
-identifies it with the point-pullback comparison: forgetting commutative rings to
-abelian groups commutes with the filtered Kan extension and sheafification used
-in inverse image, compatibly with the adjunction units. The point-pullback
-comparison is an isomorphism, so reflection of isomorphisms makes the ring adjunct
-an isomorphism. Compose it with inverse image of the fixed source comparison.
-Naturality of the unit proves the displayed square. The adjunction and faithful
-forgetful functor give uniqueness. No normalization on the target scheme is
-required; the target ring is the reconstructed internal coefficient ring. -/
+or local isomorphism classes. -/
 theorem integralSectionCoefficientNaturality (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (g : S ⟶ X) :

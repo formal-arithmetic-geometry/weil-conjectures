@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Changing coefficients on the intermediate scheme in pullback sections
 
-Source: Stacks Project, Tags 03S2 and 00XZ, inverse-image composition and its unit.
+## References
+
+* Stacks Project, Tags 03S2 and 00XZ.
 -/
 
 @[expose] public section
@@ -21,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Global sections transport along inverse-image composition and a specified sheaf
-isomorphism on the intermediate scheme. 
-(blueprint: lem-weil-pbc-pullback-section-transport)
+isomorphism on the intermediate scheme.
 -/
 noncomputable def pullbackSectionTransportEquiv
     {X Y L : Scheme.{u}} (a : L ⟶ Y) (b : Y ⟶ X)
@@ -81,20 +82,7 @@ private theorem globalSectionsUpperStarMap_natural
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Changing the sheaf on the intermediate scheme commutes with pullback of global
-sections along a morphism over that scheme.
-
-Source: Stacks Project, Tags 03S2 and 00XZ, functorial inverse image and its unit.
-(blueprint: lem-weil-pbc-pullback-section-transport).
-
-Proof: Expand transport as the global-sections functor applied to upperStarComp,
-followed by upperStar applied to i. Naturality of the inverse-image adjunction unit,
-evaluation at the terminal object and the terminal base-change isomorphism shows that
-globalSectionsUpperStarMap is natural in its sheaf argument. Apply this to i and to
-the composition comparison. Associativity coherence of upperStarComp for m, a, b
-identifies the two resulting composition comparisons. The equality m ≫ a = c replaces
-the intermediate composite by c. After applying the global-sections functor the two
-composites are equal as additive homomorphisms, hence on every s. Only the indicated
-triangle is needed; no other projection, coefficient finiteness, or nonemptiness is used. -/
+sections along a morphism over that scheme (Stacks, Tags 03S2 and 00XZ). -/
 theorem pullbackSectionTransportEquiv_naturality
     {X Y L K : Scheme.{u}} (a : L ⟶ Y) (c : K ⟶ Y) (b : Y ⟶ X)
     (m : K ⟶ L) (hm : m ≫ a = c)

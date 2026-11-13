@@ -70,23 +70,8 @@ private theorem quasiIsoOfStalk {X : Scheme.{u}}
     (T.map (HomologicalComplex.homologyMap f n)))
   exact ConcreteCategory.bijective_of_isIso _
 
-/-- The actual Godement cofaces and germ augmentation give a quasi-isomorphism.
-Source: Stacks Project, Tag 0FKR, Lemma 20.30.1 (Tag 0FKS).
-(blueprint: lem-sc-module-cup-godement-model-quasi-iso)
-Proof: fix a point x and apply the module stalk functor. Evaluation on the
-x-coordinate of T(H), followed by evaluation of the skyscraper stalk, defines
-an extra codegeneracy from (T(H))_x to H_x. Its composite with the germ unit
-is the identity. Evaluation is natural in H; hence it commutes with all the
-inner unit-insertion cofaces. The outer coface followed by evaluation is the
-identity, and the remaining cofaces commute with evaluation with their indices
-shifted by one. The alternating sums therefore give a contracting homotopy
-of the augmented stalk complex. The degree-zero augmentation identifies F_x
-with its degree-zero cohomology, and positive cohomology vanishes. Both source
-and target vanish in negative degrees. The term and coface equalities in
-ModuleCupGodementModel transport these identities to A. Stalk functors are
-exact and jointly detect zero objects, so the augmentation induces an
-isomorphism on every sheaf homology object. This is QuasiIso a. On an empty
-scheme the stalk criterion is vacuous and every sheaf is zero. -/
+/-- The actual Godement cofaces and germ augmentation give a quasi-isomorphism
+(Stacks, Tag 0FKR). -/
 theorem moduleCup_godement_model_quasiIso (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶

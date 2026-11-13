@@ -16,8 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTo
 
 /-! # Pseudo-coherent complexes of locally finite Tor dimension are perfect
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CQ, implication (2) to (1).
-(blueprint: lem-pc-pseudo-coherent-locally-finite-tor-perfect).
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tag 08CQ.
 -/
 
 @[expose] public section

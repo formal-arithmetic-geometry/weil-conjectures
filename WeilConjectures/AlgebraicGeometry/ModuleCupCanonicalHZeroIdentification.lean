@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-! # Canonical H-zero comparison and its flat-model transport
 
-Source: Stacks Project, Tag 06YH, derived tensor and its comparison to ordinary tensor.
+## References
+
+* Stacks Project, Tag 06YH (derived tensor and its comparison to ordinary tensor).
 -/
 
 @[expose] public section
@@ -85,24 +87,9 @@ private lemma total_hzero (F G : C) (P : CochainComplex C ℤ)
     (Functor.isoWhiskerRight e (HomologicalComplex.homologyFunctor C (.up ℤ) 0)) p).2 h
   exact ht
 
-/-- H-zero of the canonical derived-to-ordinary tensor comparison is invertible.
-Source: Stacks Project, Tag 06YH, flat construction of derived tensor.
-(blueprint: lem-sc-module-cup-canonical-hzero-identification)
-Here F₀ and G₀ are the actual single complexes. Their total tensor is canonically
-(F tensor G)[0], so the first assertion identifies H-zero of the derived tensor
-with F tensor G. The second assertion specifies the transport for every strictly
-nonpositive termwise-flat K-flat resolution p:P→F₀: tensor the localized p with
-the identity of QG₀, invert this isomorphism, then use the recorded K-flat-model
-isomorphism and Q of p tensor identity. This composite is the canonical Q tensor
-comparison itself, not merely some isomorphism with the same endpoints.
-Proof: a bounded-above flat resolution is K-flat. Right exactness of tensor and
-the cokernel calculation in moduleCup_hzero_identification give invertibility
-on H-zero in this model. Naturality of the lax tensor comparison of Q, and the
-fact that its component at a K-flat left factor is the displayed flat-model
-isomorphism, give the transport equation. The localized resolution and its tensor
-with the identity are invertible. Transporting the model H-zero isomorphism
-therefore proves the first assertion. The canonical single-complex isomorphisms
-identify its target with the ordinary tensor, without flatness of F or G. -/
+/-- H-zero of the canonical derived-to-ordinary tensor comparison is invertible, and for every
+strictly nonpositive termwise-flat K-flat resolution `p : P → F₀` the canonical comparison
+agrees with the transport through the flat-model isomorphism (Stacks, Tag 06YH). -/
 theorem moduleCup_canonical_hzero_identification (F G : C) :
     let F₀ := (CochainComplex.singleFunctor C 0).obj F
     let G₀ := (CochainComplex.singleFunctor C 0).obj G

@@ -13,14 +13,15 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Canonical maps for formal glueing
 
-Source: Stacks Project, More on Algebra, Remark 05EL; Algebra, Lemmas 07K0 and 00DK
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-
 ## Main statements
 * `LocalizedModule.away_map_functorial`: localization preserves composition, addition and identity.
 * `FormalGlueing.localizedSModule_properties`: properties of the induced scalar action.
 * `FormalGlueing.swap_properties`: interchange of iterated localizations.
 * `FormalGlueing.compare_properties`: localization commutes with extension of scalars.
+
+## References
+
+* Stacks Project, Tags 05EL, 07K0 and 00DK
 -/
 
 @[expose] public section
@@ -31,11 +32,8 @@ open scoped TensorProduct
 
 namespace LocalizedModule
 
-/-- Localization preserves composition, addition and identity (clause (1)).
-Source: Stacks Project, Algebra, Definition 07JZ and Lemma 07K0
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-Proof, step 1: both composites take q/e^n to h(k(q))/e^n; both sums take it to
-(h(q)+h'(q))/e^n; the localized identity fixes every fraction. Fractions exhaust the module. -/
+/-- Localization preserves composition, addition and identity.
+(Stacks, Definition 07JZ and Tag 07K0.) -/
 theorem away_map_functorial {R : Type u} [CommRing R]
     {Q : Type v₁} {Q' : Type v₂} {Q'' : Type v₃}
     [AddCommGroup Q] [Module R Q] [AddCommGroup Q'] [Module R Q']
@@ -61,14 +59,8 @@ namespace FormalGlueing
 open CategoryTheory
 
 /-- The induced S-action has the given restricted R-action, the localization map is
-S-linear, and localizing an S-linear map gives an S-linear map (clause (1)).
-Source: Stacks Project, More on Algebra, Remark 05EL and Algebra, Definition 07JZ
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-Proof, step 2: localize the R-linear endomorphisms q ↦ s • q. Step 1 preserves
-m₁ = id, mₛ₊ₜ = mₛ + mₜ and mₛₜ = mₛ ∘ mₜ, giving the module laws.
-The formula on fractions identifies the restricted R-action and makes the localization
-map S-linear. For an S-linear h, h(sq)/e^n = s h(q)/e^n, proving its S-linearity.
-The action is the existing `localizedSModule`, defined by exactly this fraction formula. -/
+S-linear, and localizing an S-linear map gives an S-linear map.
+(Stacks, Tag 05EL and Definition 07JZ.) -/
 theorem localizedSModule_properties {R : Type u} {S : Type w}
     [CommRing R] [CommRing S] (φ : R →+* S) (e : R)
     (Q : ModuleCat.{v₁} S) (Q' : ModuleCat.{v₂} S) (h : Q →ₗ[S] Q') :
@@ -151,16 +143,9 @@ private theorem twice_ext {R : Type u} [CommRing R]
     (LocalizedModule.mkLinearMap _ P) (powers_units f hf)
   exact LinearMap.ext heq
 
-/-- Both f and g act bijectively on (P_g)_f. The existing canonical swap is the unique
-map specified on P; it has the fraction formula and inverse the reverse swap (clause (2)).
-Source: Stacks Project, More on Algebra, Remark 05EL and Algebra, Lemma 07K0
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-Proof, steps 3–5: f is invertible by the outer localization; localizing the inverse of
-multiplication by g on P_g proves g is invertible too, by step 1. Apply the universal
-property first at f and then at g to the composite P → P_g → (P_g)_f. Its values on
-fractions are (p/f^a)/g^b ↦ (p/g^b)/f^a. Two applications of uniqueness show that the
-values on ((p/1)/1) determine the map. Reversing f and g gives the inverse: both composites
-fix every fraction. This also applies to zero denominators and zero localizations. -/
+/-- Both f and g act bijectively on (P_g)_f. The canonical swap is the unique
+map specified on P; it has the fraction formula and inverse the reverse swap.
+(Stacks, Tags 05EL and 07K0.) -/
 theorem swap_properties {R : Type u} [CommRing R]
     (P : ModuleCat.{v} R) (f g : R) :
     Function.Bijective (fun x : localize f (localize g P) ↦ f • x) ∧
@@ -240,17 +225,8 @@ set_option maxHeartbeats 600000 in
 -- Tensor and restricted-scalar instances require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical comparison has the pure-tensor fraction formula, is the unique R-linear
-map with its specified values, and is an S-linear isomorphism (clause (3)).
-Source: Stacks Project, More on Algebra, Remark 05EL and Algebra, Lemmas 07K0, 00DK, 00D2
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-Proof, steps 6–7: tensor P → P_f with S. The inverse of multiplication by f on P_f,
-tensored with S, proves invertibility on S ⊗ P_f. The universal property extends the
-tensored map uniquely, with (s ⊗ p)/f^n ↦ s ⊗ (p/f^n). Pure tensors generate the
-source, and fractions generate its localization, giving uniqueness. The induced S-action
-from step 2 makes this formula S-linear. The localization-after-tensor theorem
-[lem-weil-pbc-localization-tensor-over-base] identifies it with an R-linear isomorphism;
-its inverse is S-linear by applying the forward map to s times an inverse image.
-The tensor factors are in Mathlib's extension-of-scalars order S ⊗ P. -/
+map with its specified values, and is an S-linear isomorphism.
+(Stacks, Tags 05EL, 07K0, 00DK and 00D2.) -/
 theorem compare_properties {R : Type u} {S : Type w}
     [CommRing R] [CommRing S] (φ : R →+* S) (P : ModuleCat.{v} R) (f : R) :
     letI : Algebra R S := φ.toAlgebra

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
 
 /-! # Normalized Leray edge on a smaller target open
 
-Source: Stacks Project, Tags 01XK, 01E4 and 01FB.
+## References
+
+* Stacks Project, Tags 01XK, 01E4 and 01FB
 -/
 
 @[expose] public section
@@ -34,27 +36,8 @@ attribute [local irreducible] resolutionSectionClass moduleCohomologyFMap
   cohomologyOpenRestriction
 
 -- Keep section-class maps named while identifying the two module cohomology objects.
-/-- The normalized target edge is bijective and respects scalars and smaller opens.
-Source: Stacks Project, Tag 01XK, Lemma 30.4.6; Tag 01E4, Lemma 20.7.3;
-Tag 01FB, Remark 20.14.2.
-(blueprint: new-flat-base-change-target-open-edge)
-
-Proof: Put f' = pullback.fst g f and G = tensorPullback(g') F. Restrict J to
-L = f' inverse W termwise. Restriction is exact and preserves injectives, so its
-augmentation is an injective resolution of G restricted to L. Identify its global
-sections with J(L) by restrictAppIso at the top open. The normalized class map is
-resolutionSectionClass followed by J.isoRightDerivedObj inverse evaluated on W.
-The morphism f' is qcqs and G is quasi-coherent. Its higher images are quasi-coherent
-and acyclic in positive degrees on affine W; affine_resolutionSectionClass_bijective
-therefore makes this class map bijective. Regard it as an additive equivalence d.
-resolutionSectionClass_map_smulHom gives its scalar equation. For the restriction
-formula, D.target.components identifies the old section complex with J(U), and its
-augmentation identifies the resolved coefficient. The composite restriction sends
-J(U) to J(L) termwise. Naturality of evaluation's homology comparison, theta and
-J.isoRightDerivedObj gives the claimed equality. Composition of restrictions gives
-exactly cohomologyOpenRestriction, by moduleCohomologyFMap functoriality. The equality
-flatBaseChangeOpenEquality supplies L ≤ U. These constructions also apply to degree
-zero, empty opens and the zero module; no cohomology restriction is inverted. -/
+/-- The normalized target edge is bijective and respects scalars and smaller opens
+(Stacks, Tags 01XK, 01E4 and 01FB). -/
 theorem exists_flatBaseChange_target_open_edge
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f]

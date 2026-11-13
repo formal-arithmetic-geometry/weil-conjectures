@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionEvaluationMateIsIso
 
 /-! # Closed monoidal comparisons for open restriction
 
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-pc-open-restriction-closed-monoidal).
+## References
+
+* Stacks Project, Tags 08DJ and 08DL.
 -/
 
 @[expose] public section
@@ -34,9 +35,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The standard localization is available on the open scheme independently of the
-specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-open-restriction-closed-monoidal). -/
+specified localization universe of the over-site. (Stacks, Tag 05RU) -/
 local instance closedRestrictionStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -72,33 +71,7 @@ set_option maxHeartbeats 900000 in
 -- The canonical-family predicate unfolds the recorded sheaf tensor instances.
 set_option linter.style.haveILetI false in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.
-
-Source: Stacks Project, cohomology.tex, Tags 06YH, 08DJ and 08DL.
-(blueprint: lem-pc-open-restriction-closed-monoidal).
-
-Proof: choose K-flat representatives for both tensor inputs. Exact restriction
-preserves their K-flatness, and its termwise sheaf-tensor comparison, summed over
-all bidegrees of each total degree, identifies their total tensors. Descend this
-natural comparison through localization and the over-site equivalence. Use
-`Scheme.Modules.pullbackMonoidal` transported along the ordinary restriction
-isomorphism for the termwise coherence, rather than choosing unrelated tensor
-comparisons. Restrict
-the structure sheaf in degree zero to obtain the unit comparison. Associativity
-and both unit laws hold on pure tensors of the sheaf representatives, hence on
-complexes and after localization; the inverse tensor comparisons define m.
-Resolve each Hom target by the fixed functorial K-injective resolution. Its open
-restriction is K-injective. The product Hom-complex comparison restricts each
-local map and respects the signed differential. Localize and transport through
-the over equivalence to obtain h. Choose h using these same restriction maps.
-On each total-tensor summand, restricting an uncurried local map is the same as
-uncurrying its restriction. This proves the displayed equation on chain maps.
-By `CochainComplex.isKInjective_homComplex_of_isKFlat` (Stacks Tag 0A96),
-Hom from a K-flat second argument into a K-injective is K-injective, so every
-morphism into this Hom is represented modulo homotopy; uncurrying respects that
-homotopy. Common K-flat resolutions and naturality give the equation for all
-objects. The universal localization factorizations compare the independently
-specified universes. All comparisons and laws apply also to zero complexes and
-the empty open. No evaluation map is asserted to be invertible. -/
+(Stacks, Tags 06YH, 08DJ and 08DL) No evaluation map is asserted to be invertible. -/
 theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

@@ -26,17 +26,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- The unit to the pushforward from every nonempty open subscheme is an isomorphism.
-Source: Stacks Project, Tag 09Z5, nonempty-open part.
-(blueprint: lem-weil-pbc-normal-constant-generic-open-unit)
-
-Proof: a nonempty open subscheme of an integral scheme contains its generic point. The map
-from the spectrum of the generic local ring therefore factors through the open immersion as
-h = g ≫ j. The generic-point unit identifies the constant sheaf F with h_*h^*F, and the
-direct-image composition isomorphism identifies this with j_*g_*h^*F. Thus F belongs to the
-essential image of j_*. Direct image along an open immersion is fully faithful, so the unit of
-j^* ⊣ j_* is an isomorphism at every object in this essential image, in particular at F.
--/
+/-- The unit to the pushforward from every nonempty open subscheme is an isomorphism
+(Stacks, Tag 09Z5, nonempty-open part). -/
 theorem isIso_unit_constantSheaf_open_unit
     (Λ : Type (u + 1)) [CommRing Λ] {Y : Scheme.{u}} [IsIntegral Y]
     (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))

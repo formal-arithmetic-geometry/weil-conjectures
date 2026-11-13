@@ -18,13 +18,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 /-!
 # Noetherian finite-Tor comparison
 
-md
-(blueprint: corollary-finite-tor-amplitude-under-comparison--1).
-
 We use the same coefficient-sized small site models, constant ring sheaves and standard
 localizations as `constructibleComparison`. The Tor predicates test all module sheaves in
 degree zero using K-flat representatives. The equivalence retains all ambient derived
 morphisms and is identified with the specified comparison inverse image.
+
+## References
+
+* Stacks Project, Tags 05VD, 07A4, 06YQ, 08G0 and 08G1.
 -/
 
 @[expose] public noncomputable section
@@ -91,36 +92,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- Comparison preserves and reflects the exact Tor interval for bounded constructible
 complexes over a discrete Noetherian ring and restricts to the finite-Tor equivalence.
 The first natural isomorphism characterizes the derived comparison by its action on all
-complexes; the final one identifies the forward restricted equivalence with that functor.
-
-md;
-Stacks Tags 05VD, 07A4, 06YQ, 08G0 and 08G1
-(blueprint: corollary-finite-tor-amplitude-under-comparison--1).
-
-Proof:
-1. Obtain the canonical derived comparison D, its factorization on every cochain
-   complex, and its bounded constructible equivalence from constructibleComparison.
-2. The proved coefficientModelTorAmplitude_iff_flatModel identifies each Tor interval
-   with a representative supported in exactly that interval and flat in every degree.
-   This uses the source library's native bounded flat-model theorem, with explicit
-   bridges for the coefficient-model tensor test and K-flat predicate.
-3. The canonical comparison pulls flat sheaves to flat sheaves by
-   constructibleComparisonPullback_flat. Termwise application preserves zero terms,
-   so the pulled-back bounded flat model has the same interval. The localization
-   factorization identifies it with D(K), proving preservation of every Tor bound.
-4. For reflection choose a flat-term K-flat representative P' of K. The supplied
-   ringed-topos theorem, transported by uniqueness of left adjoints, shows its
-   termwise comparison pullback is K-flat. Test the Tor bound on D(K) against the
-   pullback of an arbitrary etale module M.
-5. constructibleComparisonTensorTest_reflects_zero identifies the ordinary tensor
-   test after inverse image and reflects vanishing of its homology. For an arbitrary
-   K-flat representative P of K, coefficientModelTensorTest_iso transfers vanishing
-   from P' to P. This proves the reverse implication with the same interval.
-6. Isomorphism invariance of the coefficient-model Tor predicate follows by composing
-   representative isomorphisms. Restrict the bounded constructible equivalence to
-   objects with some finite Tor interval. The full subcategories retain all morphisms;
-   the reflected interval supplies essential surjectivity and the forward functor
-   retains the prescribed natural comparison with D. -/
+complexes; the final one identifies the forward restricted equivalence with that functor. -/
 theorem finiteTorComparisonNoetherian (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :

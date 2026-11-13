@@ -19,8 +19,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Quasi-coherence of derived Hom from a finite pushforward algebra
 
-Source: Stacks Project, Duality for Schemes, Tag 0AX2, with Tags 0AUC, 0AUP and 0A6H
-(blueprint: lem-sc-finite-pushforward-derived-hom-qcoherent).
+## References
+
+* Stacks Project, Duality for Schemes, Tags 0AX2, 0AUC, 0AUP and 0A6H.
 -/
 
 @[expose] public section
@@ -31,28 +32,10 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- For a finite morphism of Noetherian schemes, `B = f_* 𝒪_X` is pseudo-coherent.
-Derived internal Hom from `B` sends bounded-below quasi-coherent complexes to
-bounded-below quasi-coherent complexes of `B`-modules. Forgetting the algebra action
-still gives a bounded-below quasi-coherent complex on `Y`. The equality identifying `B`
-includes its algebra structure, namely the structure map `f.c`, not just its module.
-
-Source: Stacks Project, Duality for Schemes, Tag 0AX2, with Tags 0AUC, 0AUP and 0A6H
-(blueprint: lem-sc-finite-pushforward-derived-hom-qcoherent).
-
-Proof:
-1. The equality identifying B includes its algebra structure. After substitution, its
-   underlying module is definitionally the pushforward of the unit module. Apply
-   `isCoherent_unit_of_finite_to_locallyNoetherian` and
-   `isCoherent_pushforward_of_isFinite` (lem-weil-pbc-finite-pushforward-coherent).
-2. On the Noetherian target, the coherence criterion
-   `isCoherent_iff_isQuasicoherent_and_isFiniteType` (pqf-lem-coherent-ft-locnoeth)
-   gives quasi-coherence. Apply `isPseudoCoherent_singleFunctor_obj_of_isCoherent`
-   (lem-sc-coherent-pseudo-coherent) to obtain pseudo-coherence of B[0].
-3. Apply `pseudoCoherentRHomQuasiCoherent` (lem-sc-pseudo-coherent-rhom-qcoherent)
-   with K's quasi-coherence property and lower bound. Mathlib's `Q_obj_single_obj`
-   identifies the two presentations of B[0]. The lemma gives all three remaining
-   conclusions, including the underlying object's quasi-coherence and lower bound. -/
+/-- For a finite morphism of Noetherian schemes, `B = f_* 𝒪_X` is pseudo-coherent, and the
+derived internal Hom from `B` sends bounded-below quasi-coherent complexes to bounded-below
+quasi-coherent complexes of `B`-modules. Forgetting the algebra action still gives a
+bounded-below quasi-coherent complex on `Y`. (Stacks, Tag 0AX2, Tag 0AUC) -/
 theorem finite_pushforward_derivedHom_qcoherent {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y]
     (B : Y.CommAlgebraSheaf)

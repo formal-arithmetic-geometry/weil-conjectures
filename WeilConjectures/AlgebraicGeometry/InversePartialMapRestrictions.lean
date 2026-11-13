@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Birational.Composition
 /-!
 # Inverse restrictions of partial maps
 
-Source: Stacks Project, Tag 0BAA (Lemma 29.50.12).
-(blueprint: lem-sbc-inverse-partial-map-restrictions)
+## References
+
+* Stacks Project, Tag 0BAA (Lemma 29.50.12).
 -/
 
 @[expose] public section
@@ -43,22 +44,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Dominant partial maps whose composites are equivalent to the identities restrict
 to mutually inverse morphisms on dense opens, preserving the supplied forward map.
-
-Source: Stacks Project, Tag 0BAA (Lemma 29.50.12).
-Proof: Equivalence to the identities supplies dense opens W_X and W_Y on which g f
-and f g are identity morphisms into X and Y. Shrink W_X to lie in the forward domain
-and in the inverse image of W_Y, and call the resulting open U. Define V to be the
-points of W_Y whose image under g lies in U. Both contain generic points: dominance
-sends generic points to generic points, and every dense open contains the generic
-point. The identities on W_X and W_Y imply that f(U) is contained in V and g(V) is
-contained in U. Lift the restricted maps through these open inclusions. Their two
-composites become the identity after composing with the open inclusions, so they
-are identity morphisms because open inclusions are monomorphisms. The lift of f
-has the required compatibility with its original restriction by construction.
-The hypothesis that both composites agree with the identities is essential;
-one-sided inverse maps do not suffice.
-
-(blueprint: lem-sbc-inverse-partial-map-restrictions) -/
+(Stacks, Tag 0BAA) -/
 theorem exists_inverse_restrictions_of_comp_equiv_id
     {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y]
     (f : X.PartialMap Y) [IsDominant f.hom]

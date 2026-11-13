@@ -14,7 +14,10 @@ import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkComponents
 
 /-! # Open restriction does not change a module stalk
 
-Source: Stacks Project, Sheaves, Lemma 00A0, part (3), and Modules, Tag 01CP.
+## References
+
+* [Stacks, Tag 00A0](https://stacks.math.columbia.edu/tag/00A0)
+* [Stacks, Tag 01CP](https://stacks.math.columbia.edu/tag/01CP)
 -/
 
 @[expose] public section
@@ -29,26 +32,8 @@ set_option maxHeartbeats 400000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction to an open neighborhood preserves a module stalk after scalar transport.
-
-Source: Stacks Project, Sheaves, Lemma 00A0, part (3); Modules, Tag 01CP,
-third paragraph, localization before taking the source-stalk exact sequence.
-(blueprint: lem-weil-pbc-module-restriction-stalk-iso)
-
-Proof: Let Y be the restriction of X to U and y the point (x,hxU). The
-neighborhood functor from Y to X is final after taking opposites: intersecting
-any neighborhood of x with U provides a refinement. Apply the final-functor
-colimit comparison to the underlying abelian presheaf of F. This gives an
-additive isomorphism from the restricted stalk to F_x, sending the germ of a
-section on V in U to the germ of that section on the image of V in X.
-The component maps of exists_moduleRestrictionStalk_components satisfy this
-same germ formula and are linear over O_{X,x} after restricting scalars along
-the inverse restriction-stalk ring map. Since germs jointly generate the
-colimit, their underlying additive maps equal the additive comparison above.
-They are therefore bijective. Mathlib's isIso_iff_bijective for modules
-makes the linear component an isomorphism.
-This argument applies to every F, requires no finiteness, and includes the
-zero module and zero stalk ring. If U is empty there is no hxU. -/
+/-- Restriction to an open neighborhood preserves a module stalk after scalar transport
+(Stacks, Tags 00A0 and 01CP). -/
 theorem nonempty_moduleRestrictionStalk_iso
     (X : RingedSpace.{u}) (F : Modules X) (U : Opens X) (x : X) (hxU : x ∈ U) :
     Nonempty

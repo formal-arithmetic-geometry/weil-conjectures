@@ -13,9 +13,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Sheafification of module presheaves identified on affine opens
 
-Source: Stacks Project, Tags 009U and 0089, the module basis equivalence and the
-universal property of module sheafification
-(blueprint: lem-sc-module-sheafification-affine-restriction).
+## References
+
+* Stacks Project, Tags 009U and 0089.
 -/
 
 @[expose] public section
@@ -96,25 +96,7 @@ private theorem affine_module_restriction_bijective (Y : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A natural identification with a module sheaf on all affine opens extends after
-sheafification, naturally in an arbitrary parameter category.
-Source: Stacks Project, Tags 009U and 0089
-(blueprint: lem-sc-module-sheafification-affine-restriction).
-
-Proof: Affine opens form a basis. For each parameter, extend the given affine-open
-maps into the target sheaf to all opens: cover each open by affine opens, apply the
-maps to the restrictions of a section, and glue in the target. On overlaps, use
-an affine refinement and restriction compatibility; uniqueness proves independence
-of the cover. Addition and scalar multiplication hold locally, hence globally.
-The resulting module-presheaf map factors uniquely through sheafification. To prove
-invertibility, test maps into any module sheaf N: restriction to the affine basis
-is bijective for maps from either P or Q into N. Precomposition with the given
-basis isomorphism is bijective, so precomposition with the extended map is also
-bijective. The sheafification adjunction transfers this bijection to the factored
-sheaf morphism. The categorical co-Yoneda criterion makes that morphism an
-isomorphism. For a parameter morphism, the two composites agree on every affine
-open before factoring; uniqueness of extension and the adjunction prove naturality.
-No intersection of affine opens needs to be affine: it is covered by affine opens.
-Empty opens use the empty sheaf cover. -/
+sheafification, naturally in an arbitrary parameter category (Stacks, Tags 009U and 0089). -/
 theorem module_sheafification_iso_of_affine_restriction
     (Y : Scheme.{u}) {C : Type v} [Category.{w} C]
     (P : C ⥤ PresheafOfModules.{u} (moduleRings Y.toRingedSpace).obj)

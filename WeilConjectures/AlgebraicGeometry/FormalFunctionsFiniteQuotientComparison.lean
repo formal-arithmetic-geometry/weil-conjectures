@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsFiniteQuotientMaps
 
 /-! # Finite quotient cohomology on the local base change
 
-Source: Stacks Project, Tag 02OD, finite-level identifications; Tags 089W and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-comparison)
+## References
+
+* Stacks Project, Tags 02OD, 089W and 01FB
 -/
 
 @[expose] public section
@@ -26,31 +27,7 @@ namespace AlgebraicGeometry
 /-- The finite quotient system on the local base change is identified with the
 infinitesimal fibre cohomology system. The theorem records only the finite-level
 part of the geometric dictionary and leaves the stalk comparison separate.
-Source: Stacks Project, Tag 02OD, finite-level identifications; Tags 089W and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-comparison)
-
-Proof: Write A = O_y and let i'_n : X_n → X' be induced by the factorization
-Spec(A/m^(n+1)) → Spec A → Y. Pasting pullback squares identifies X_n with the
-quotient base change of X'. Its immersion ideal is J^(n+1), by compatibility of
-extended ideals with powers. Composition of tensor pullbacks identifies F_n with
-i'_n^*F'. The closed-immersion unit is epi with kernel J^(n+1)F', so it induces an
-isomorphism from formalModuleQuotient J (n+1) F' to i'_{n*}F_n. Apply H^p and the
-affine cohomology edge isomorphism 089W to get b_n. The action of the completed local
-ring, when restricted along algebraMap A, agrees with the quotient action of A
-because evaluation of algebraMap is Ideal.Quotient.mk. Thus b_n has exactly the
-specified scalar action. For adjacent levels the two sheaf maps to i'_{n*}F_n agree
-after precomposition with the epimorphic larger quotient projection: both are the
-unit for the composite immersion. Cancel this epi and apply h-map functoriality.
-This proves naturality on adjacent transitions and hence all arrows of the inverse
-sequence, yielding b. Define r_n by the cohomology pullback along i'_n. Its A-linearity
-follows from the same scalar identity, and factorization of the unit through the
-quotient gives r_n = b_n H^p(q_n). For any linear a with the local germ formula,
-apply r_n to that formula for a representative xi on V. Composition of pullbacks
-identifies the resulting class with pullback along X_n → f^{-1}V. Restriction to its
-inverse-image open yields precisely IsFormalFunctionsTheta for (r_n).comp a.
-Resolution independence ensures that this holds for every I, K and comparison choice
-in that predicate. This argument never requires r_n to be surjective, so it includes
-p=0, F=0 and an empty fibre. It uses no comparison with a completed module or limit. -/
+(Stacks, Tags 02OD, 089W and 01FB.) -/
 theorem formalFunctions_finite_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :

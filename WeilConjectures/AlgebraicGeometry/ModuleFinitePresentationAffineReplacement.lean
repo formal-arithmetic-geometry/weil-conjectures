@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # A finitely presented replacement on one affine open
 
-Source: Stacks Project, Properties, Lemma 01PI, affine construction.
-(blueprint: lem-weil-pbc-module-finite-presentation-affine-replacement).
+## References
+
+* Stacks Project, Properties, Tag 01PI (affine construction).
 -/
 
 @[expose] public section
@@ -172,28 +173,8 @@ set_option maxHeartbeats 600000 in
 -- Slice equivalences and iterated restriction comparisons require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Replace a quasi-coherent module on an affine open by a finitely presented module,
-with a map which is an isomorphism on the overlap with the previous open.
-
-Source: Stacks Project, Properties, Lemma 01PI, affine construction
-(https://stacks.math.columbia.edu/tag/01PI).
-(blueprint: lem-weil-pbc-module-finite-presentation-affine-replacement).
-
-Proof: The intersection K = W intersect V is compact by quasi-separatedness.
-Restrict the finite presentation on W to K. The finite affine generators lemma
-supplies a map phi from a finite free module on V to H restricted to V, whose
-restriction to K is epimorphic. Its kernel is quasi-coherent; restriction preserves
-kernels. On K the target is finitely presented, so Modules 01BP makes the
-restricted kernel finite type. Extend this quasi-coherent kernel from V to X
-using 01PE(3) and its zero map into H. Apply affine finite-type capture to the
-extension on K. This gives a finite-type module Q on V and a map kappa into the
-kernel of phi, whose restriction to K is an isomorphism. Let a be kappa followed
-by the kernel inclusion, and E its cokernel. E is finitely presented by Modules
-0H96, because the target of a is finite free. The equation a followed by phi = 0
-induces a map j from E to H restricted to V. On K, phi is the cokernel of its
-kernel inclusion. Since restricted kappa is an isomorphism, phi is also the
-cokernel of restricted a. Restriction preserves the cokernel defining E;
-uniqueness of cokernels identifies restricted j with an isomorphism. All steps
-allow K empty and rank zero, and no compactness of X is assumed. -/
+with a map which is an isomorphism on the overlap with the previous open
+(Stacks, Tag 01PI). -/
 theorem exists_finitePresentation_affine_replacement
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W : X.Opens) (hW : IsCompact (W : Set X)) (V : X.affineOpens)

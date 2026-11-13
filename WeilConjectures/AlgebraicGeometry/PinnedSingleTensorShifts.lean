@@ -12,8 +12,11 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-! # Shift compatibility of the pinned tensor counit on singles
-Source: Stacks Project, Tags 08HY and 0D5S; Mathlib single-functor shifts.
-(blueprint: lem-pc-pinned-single-tensor-shifts). -/
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,7 +31,6 @@ noncomputable section
 namespace CategoryTheory.SingleFunctors
 
 /-- Precomposition preserves the single-functor shift comparisons.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 def precomp {A B C : Type*} [Category A] [Category B] [Category C] [HasShift C ℤ]
     (F : SingleFunctors B C ℤ) (T : A ⥤ B) : SingleFunctors A C ℤ where
@@ -42,7 +44,6 @@ def precomp {A B C : Type*} [Category A] [Category B] [Category C] [HasShift C �
     simpa using F.shiftIso_add_hom_app k l i j m h h' (T.obj X)
 
 /-- Postcomposition of a family morphism by a shift-compatible functor.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 def postcompHom {A B C : Type*} [Category A] [Category B] [Category C]
     [HasShift B ℤ] [HasShift C ℤ] {F G : SingleFunctors A B ℤ}
@@ -63,7 +64,6 @@ def postcompHom {A B C : Type*} [Category A] [Category B] [Category C]
     rw [← T.commShiftIso_inv_naturality_assoc]
 
 /-- A shift-compatible transformation induces a morphism of postcomposed families.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 def postcompNatTrans {A B C : Type*} [Category A] [Category B] [Category C]
     [HasShift B ℤ] [HasShift C ℤ] (F : SingleFunctors A B ℤ)
@@ -83,7 +83,6 @@ def postcompNatTrans {A B C : Type*} [Category A] [Category B] [Category C]
     simp only [NatTrans.shift_app τ k, Category.assoc, Iso.hom_inv_id_app_assoc]
 
 /-- Precomposition and shift-compatible postcomposition commute.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 def precompPostcompIso {A B C D : Type*}
     [Category A] [Category B] [Category C] [Category D]
@@ -95,7 +94,6 @@ def precompPostcompIso {A B C D : Type*}
     simp [precomp, SingleFunctors.postcomp_shiftIso_hom_app])
 
 /-- The termwise mapped-single comparison as an isomorphism of families.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 def mappedCochainSingleIso {A B : Type*} [Category A] [Category B]
     [Preadditive A] [Preadditive B] [Limits.HasZeroObject A] [Limits.HasZeroObject B]
@@ -119,7 +117,6 @@ def mappedCochainSingleIso {A B : Type*} [Category A] [Category B]
         CochainComplex.shiftFunctor_map_f', Category.id_comp])
 
 /-- Passing the mapped-single comparison to the homotopy category.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 def mappedHomotopySingleIso {A B : Type*} [Category A] [Category B]
     [Preadditive A] [Preadditive B] [Limits.HasZeroObject A] [Limits.HasZeroObject B]
@@ -152,7 +149,6 @@ by
 
 
 /-- The homotopy family comparison uses the actual termwise single map.
-(blueprint: lem-pc-pinned-single-tensor-shifts)
 -/
 lemma mappedHomotopySingleIso_hom_app {A B : Type*} [Category A] [Category B]
     [Preadditive A] [Preadditive B] [Limits.HasZeroObject A] [Limits.HasZeroObject B]
@@ -177,9 +173,7 @@ end CategoryTheory.SingleFunctors
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The selected counit followed by the actual termwise mapped-single comparison.
-Source: Stacks Project, Tag 08HY; Mathlib mapped-single comparison.
-(blueprint: lem-pc-pinned-single-tensor-shifts). -/
+/-- The selected counit followed by the actual termwise mapped-single comparison. -/
 def pinnedSingleTensorCounit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -198,20 +192,7 @@ def pinnedSingleTensorCounit
 
 set_option maxHeartbeats 400000 in
 -- The nested family comparison must identify the shared sheaf-module category instances.
-/-- The tensor comparison is a morphism of single-functor families.
-Source: Stacks Project, Tag 08HY; the derived counit universal property and
-Mathlib's termwise mapped-single shift identity.
-(blueprint: lem-pc-pinned-single-tensor-shifts).
-Proof: whisker the pinned left-derived counit by each homotopy single functor,
-then compose with Qh applied to the termwise mapped-single comparison. Naturality
-follows from the naturality of these two factors. For the shift equation, expand
-the single shift using SingleFunctors.postcomp. Apply the counit's
-NatTrans.CommShift equation, then the termwise identity
-Functor.mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app. Naturality of
-the quotient shift comparisons moves them through the mapped-single map.
-Functor.map_comp and associativity cancel inverse quotient comparisons. This
-proves the Hom.comm equation for every triple k+i=j, including zero and negative
-integers, without exactness or flatness of tensor pullback. -/
+/-- The tensor comparison is a morphism of single-functor families (Stacks, Tag 08HY). -/
 theorem exists_pinned_single_tensor_shifts
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

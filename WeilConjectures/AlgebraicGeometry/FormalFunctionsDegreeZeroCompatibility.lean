@@ -15,12 +15,7 @@ namespace AlgebraicGeometry
 /-- There are degree-zero identifications for which every canonical theta carries
 augmentation classes to pullback of sections. The stalk equivalence has precisely
 the canonical degree-zero augmentation as its underlying linear map.
-Source: Stacks Project, Tags 01E4 and 01FB, degree-zero augmentation constructions.
-Proof: Take the stalk of the direct-image augmentation. Left exactness makes it
-an isomorphism, so its underlying linear map gives a linear equivalence a.
-The augmentation compatibility lemma supplies b and the germ equation for this
-fixed map; the linear equivalence has that map as its underlying function.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-compatibility) -/
+(Stacks, Tags 01E4 and 01FB.) -/
 theorem formalFunctions_degreeZero_compatibility {X Y : Scheme.{u}}
     (f : X ⟶ Y) (y : Y) :
     ∃ a : ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj

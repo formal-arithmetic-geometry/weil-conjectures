@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackModuleModel
 
 /-! # Affine sections transport the pullback adjunction mate
 
-Source: Stacks Project, Tags 08DW(2), 06Z0, 08HY and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-pullback-mate).
+## References
+
+* Stacks Project, Tags 08DW, 06Z0, 08HY, 0D5T and 0AA8.
 -/
 
 @[expose] public section
@@ -29,27 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Affine scalar extension of sections agrees with sheaf pullback, including mates.
-No perfectness, flatness, or invertibility of the input morphism is assumed.
-Source: Stacks Project, perfect.tex, Tags 06Z0 and 08DW(2); cohomology.tex,
-Tags 08HY and 0D5T; duality.tex, Tag 0AA8, identification of the map beta.
-(blueprint: lem-sc-mixed-affine-sections-pullback-mate).
-
-Proof: Identify S and T with spectra of their global rings via isoSpec. The affine
-quasi-coherent derived equivalence identifies E with a module complex. Resolve it
-by a K-flat complex. Termwise tilde and the derived pullback counit identify its
-pullback with derived extension of scalars. Derive the underived sections adjunction
-using K-injective resolutions. The same tilde/scalar-extension identification
-intertwines the adjunction units: both are induced on K-flat representatives by
-x mapping to 1 tensor x. Uniqueness of the left adjoint to derived scalar restriction
-therefore gives a unique unit-compatible comparison a for mixedGlobalExtension.
-For theta, transpose a.hom followed by RGlobalSections(theta) under the fixed scalar
-adjunction. Unit compatibility and naturality identify this transpose with derived
-sections of the sheaf pullback adjunct of theta, followed by Leray. The right-derived
-unit equation for mixedGlobalSectionsDirectImageIso fixes this last identification.
-Injectivity of the scalar adjunction equivalence gives the displayed equation for
-all L and theta at once. Work separately in the sheaf and module localizations;
-localization uniqueness preserves the equations for independent morphism universes.
-On an empty affine scheme or for E=0, these constructions give the unique zero map. -/
+No perfectness, flatness, or invertibility of the input morphism is assumed
+(Stacks, Tags 06Z0, 08DW, 08HY, 0D5T and 0AA8). -/
 theorem exists_mixedAffineSectionsPullbackMate
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

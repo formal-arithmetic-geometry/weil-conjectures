@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 /-! # Evaluation of the transported nested-open restriction
 
-Source: Stacks Project, Cohomology, Tag 08BV.
-(blueprint: lem-pc-open-module-image-section-restriction).
+## References
+
+* Stacks Project, Cohomology, Tag 08BV.
 -/
 @[expose] public section
 universe u
@@ -18,26 +19,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 set_option autoImplicit false
 namespace AlgebraicGeometry
 
-/-- The overlap mate is ordinary restriction after the open-site comparisons.
-Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
-sectionwise sequence, with the concrete maps of
-`schemeOpenModuleImageRestriction`.
-(blueprint: lem-pc-open-module-image-section-restriction)
-Proof: Conjugate the nested-open restriction by the direct images of
-`overFunctorEquiv`. The proved `schemeOpenModuleImage_unit_restriction`
-identity, together with `ofNatIsoLeft_unit`, says that this ordinary map
-composes with the U-restriction unit to give the W-restriction unit.
-Put P = U ∩ T and Q = W ∩ T. Evaluate that identity at P and apply
-naturality of the ordinary map along P ⊆ T. Both source restrictions are
-the same map from M(P) to M(U ∩ P); the resulting equation identifies
-restriction of the desired value to W ∩ P with restriction of the input.
-Since W ⊆ U, W ∩ P = Q, so that restriction is an isomorphism. Cancel it
-and combine the presheaf restriction maps. Finally cancel the inverse and
-forward U-comparisons to recover the original transported expression.
-The image-preimage opens equal these intersections by
-`image_preimage_eq_opensRange_inf` and `opensRange_ι`. This works for
-empty and equal opens and needs no cover or amalgamation.
--/
+/-- The overlap mate is ordinary restriction after the open-site comparisons, with the concrete
+maps of `schemeOpenModuleImageRestriction`. (Stacks, Tag 08BV) -/
 theorem schemeOpenModuleImage_section_restriction
     (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (T : X.Opens)

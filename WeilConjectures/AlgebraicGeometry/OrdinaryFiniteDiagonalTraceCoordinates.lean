@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # The chart traces satisfy the two self-exchange equations -/
 @[expose] public noncomputable section

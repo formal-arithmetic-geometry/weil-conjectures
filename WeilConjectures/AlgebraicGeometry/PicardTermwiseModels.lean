@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Termwise Picard models and canonical restriction comparisons
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: def-sc-picard-termwise-models)
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S.
 -/
 
 @[expose] public section
@@ -25,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Termwise tensor pullback of the model transported from the open site.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: def-sc-picard-termwise-models) -/
+/-- Termwise tensor pullback of the model transported from the open site. -/
 abbrev picardTermwiseModel (W : Scheme.{v}) (U : W.Opens)
     (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
@@ -40,17 +39,13 @@ abbrev picardTermwiseModel (W : Scheme.{v}) (U : W.Opens)
   exact ((Modules.tensorPullback s).mapHomologicalComplex (.up ℤ)).obj
     (((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K)
 
-/-- The degree-zero single of the underived pullback of the source structure sheaf.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: def-sc-picard-termwise-models) -/
+/-- The degree-zero single of the underived pullback of the source structure sheaf. -/
 abbrev picardTermwiseSource {W T : Scheme.{v}} (t : T ⟶ W) :=
   (CochainComplex.singleFunctor
     (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 0).obj
       ((Modules.tensorPullback t).obj (SheafOfModules.unit (moduleRings W.toRingedSpace)))
 
-/-- Comparison from the new source single to the termwise pullback of the old one.
-Source: Stacks Project, Tags 0096 and 0D5S; Mathlib single-complex comparison.
-(blueprint: def-sc-picard-termwise-models) -/
+/-- Comparison from the new source single to the termwise pullback of the old one. -/
 def picardTermwiseSourceRestrictionIso
     {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)
     (ht : i ≫ t = t') :
@@ -70,9 +65,7 @@ def picardTermwiseSourceRestrictionIso
         ((Modules.tensorPullback t).obj
           (SheafOfModules.unit (moduleRings W.toRingedSpace)))).symm
 
-/-- Comparison from the new model to the termwise pullback of the old model.
-Source: Stacks Project, Tags 0096 and 0D5S; termwise functor composition.
-(blueprint: def-sc-picard-termwise-models) -/
+/-- Comparison from the new model to the termwise pullback of the old model. -/
 def picardTermwiseModelRestrictionIso (W : Scheme.{v}) (U : W.Opens)
     (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
@@ -96,10 +89,7 @@ def picardTermwiseModelRestrictionIso (W : Scheme.{v}) (U : W.Opens)
       (((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K)).symm
 
 /-- The natural complex counit of tensor pullback, using the counits pinned by the
-canonical derived composition theorem. Its data is determined by the left-derived
-universal property, rather than by choosing an arbitrary object comparison.
-Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: def-sc-picard-termwise-models) -/
+canonical derived composition theorem. -/
 def picardTermwiseCounit
     [d : ∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

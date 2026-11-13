@@ -20,12 +20,18 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # Ordinary common-quotient scalar extensions
 
-Source: Stacks Project, Modules on Sites, Tag 03EK (section-tensor-product).
 The result concerns module sheaves before passing to complexes or derived categories.
 Quotient units are proved epic, their local ideal-product kernels are computed, and their
 transition compatibility follows from the pure-section formulas. The existence theorem
 constructs the normalized ordinary comparison and coefficient transitions.
+
+## Implementation details
+
 The quotient units themselves are constructed by the sheafification adjunction.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK.
 -/
 
 @[expose] public noncomputable section
@@ -60,8 +66,7 @@ private def K (U : Cᵒᵖ) : Ideal (R.obj.obj U) := RingHom.ker (q.hom.app U).h
 
 end QuotientKernel
 
-/-- The sectionwise quotient unit, sending x to 1 tensor x.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The sectionwise quotient unit, sending `x` to `1 ⊗ x`. -/
 noncomputable def commonQuotientPresheafUnit
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
     M.val ⟶ (PresheafOfModules.restrictScalars
@@ -78,8 +83,7 @@ noncomputable def commonQuotientPresheafUnit
         S.obj.map f 1 ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.restrictₛₗ f x from
       Classical.choose_spec (exists_changeOfRingsMap q M f) 1 x, map_one]
 
-/-- The actual sheaf quotient unit constructed from the sheafification adjunction.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The sheaf quotient unit, constructed from the sheafification adjunction. -/
 noncomputable def commonQuotientUnit
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
     M ⟶ (Res q).obj (changeOfRings q M) where
@@ -90,8 +94,7 @@ noncomputable def commonQuotientUnit
           (𝟙 (derivedChangeRingIndependentCoefficients J S).obj)
           (𝟙 (changeOfRings q M)))
 
-/-- The actual quotient units are natural in the module.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The quotient units are natural in the module. -/
 theorem commonQuotientUnit_naturality
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
     {M N : Mod R} (f : M ⟶ N) :
@@ -108,8 +111,7 @@ theorem commonQuotientUnit_naturality
       (toSheafify_naturality J ((PresheafOfModules.toPresheaf _).map g))
   exact h
 
-/-- The quotient unit transported to a prescribed ordinary scalar-extension model.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The quotient unit transported to a prescribed ordinary scalar-extension model. -/
 noncomputable def commonQuotientModelUnit
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
     [HasDerivedCategory.{wR} (Mod R)] [HasDerivedCategory.{wS} (Mod S)]
@@ -540,9 +542,7 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
     DerivedChangeOfRingsCochainModel.{u, v, r, wB, wS} (D.extensionProjection n))
 
 /-- Ordinary common-quotient maps, characterized on the sheafification-unit images
-of pure tensors. There are no complexes, K-flatness, or derived comparisons here.
-Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+of pure tensors. -/
 structure OrdinaryCommonQuotientTower where
   ordinary : ∀ n : ℕ, Res φ ⋙ (a n).E ≅ (b n).E
   ordinary_sections : ∀ (n : ℕ) (M : Mod B) (U : Cᵒᵖ)
@@ -570,8 +570,7 @@ structure OrdinaryCommonQuotientTower where
 
 variable {D a b}
 
-/-- The quotient units are constructed, rather than chosen as part of the comparison.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The quotient units of an ordinary common-quotient tower. -/
 def OrdinaryCommonQuotientTower.unit (_O : OrdinaryCommonQuotientTower D a b) (n : ℕ) :
     𝟭 (Mod R) ⟶ (a n).E ⋙ Res (D.projection n) :=
   commonQuotientModelUnit (D.projection n) (a n)

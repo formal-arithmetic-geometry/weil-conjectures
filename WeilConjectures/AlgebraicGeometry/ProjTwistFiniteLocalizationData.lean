@@ -17,7 +17,9 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 /-!
 # Finite localization data of twist sections
 
-Source: Stacks Project, Tags 01MN and 01M7.
+## References
+
+* Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -43,28 +45,7 @@ private theorem exists_unit_of_span_top
   exact h1 (by simp)
 
 /-- A twist section has compatible ordinary fractions on a finite principal cover of
-Spec(A_(f)), with evaluations agreeing with the original section.
-Source: Stacks Project, Section 27.8, preceding Definition 27.8.3 (Tag 01M6),
-and Lemma 27.8.4 (Tag 01M7).
-(blueprint: lem-sc-proj-twist-finite-localization-data)
-
-Proof: at each point use the local homogeneous-fraction witness of s. Choose a
-homogeneous basic neighborhood inside its witness neighborhood and D₊(f). Multiply the
-witness denominator by this neighborhood's defining element and by f, and multiply the
-numerator by the same factors. The resulting homogeneous denominator h has positive
-degree c and D₊(h) lies in the witness neighborhood. For u = h^b/f^c in A_(f), the affine
-chart identifies D₊(h) inside D₊(f) with D(u). Quasi-compactness gives finitely many such
-neighborhoods. Their chart elements u_i generate the unit ideal. In A_f localized at u_i,
-h_i is invertible since h_i^b = u_i*f^c_i and f is invertible, so the witness fraction
-defines t_i. On an overlap use the homogeneous element f*h_i*h_j of A. Both fractions
-have the same evaluations s(p) at every point of its basic open, so homogeneous-prime
-equality detection makes them equal in A localized at f*h_i*h_j. The universal properties
-identify this ring localization with the iterated module localization at u_i*u_j, giving
-the displayed compatibility. At a point of D(u_i), u_i maps to a unit in A_p; the ordinary
-evaluation A_f → A_p therefore extends to the further localization. Its underlying
-additive map sends z/1 to the ordinary evaluation of z and t_i to s(p). Every point lies
-in some neighborhood. If the open is empty, f is nilpotent and both A_f and A_(f) are
-zero; the empty cover has span top in this zero ring and evaluation is vacuous. -/
+Spec(A_(f)), with evaluations agreeing with the original section (Stacks, Tag 01M7). -/
 theorem twist_finiteLocalization_data
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

@@ -17,14 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- The normalized comparison for finite constant sections commutes with a ring map.
-Source: blueprint Compatible isomorphisms, reduction of finite coefficient entries.
-(blueprint: lem-pe-finite-constant-section-coefficient-naturality).
-Proof: assemble the normalized section comparisons into morphisms of ring presheaves,
-using their restriction naturality. The two composites to continuous B-valued functions
-agree on the constant presheaf, by normalization and the sheafification unit's naturality.
-The continuous-function presheaf is a sheaf, so sheafification uniqueness identifies the
-composites. Evaluate the equality at V, the section s and the point x. -/
+/-- The normalized comparison for finite constant sections commutes with a ring map. -/
 theorem proEtale_finite_constant_sections_coefficient
     (X : Scheme.{u}) (A B : Type (u + 1)) [CommRing A] [CommRing B]
     [Finite A] [Finite B] [TopologicalSpace A] [TopologicalSpace B]
@@ -86,12 +79,7 @@ theorem proEtale_finite_constant_sections_coefficient
 namespace ProEtale.FiniteDiscreteOrdinary
 
 /-- The canonical constant-to-continuous coefficient map respects a morphism whose
-constant functions have the specified images.
-Source: blueprint Compatible isomorphisms, coefficient reduction of scalar sections.
-(blueprint: lem-pe-finite-constant-section-coefficient-naturality).
-Proof: the point comparison is the adjoint transpose of pointConstants, so its
-naturality follows from the two Hom-equivalence naturality identities. Apply inverse
-image and move the constant map across constantSchemeIso by naturality. -/
+constant functions have the specified images. -/
 theorem canonicalAbelianMap_coefficient
     (A B : Type u) [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]

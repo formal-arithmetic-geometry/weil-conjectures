@@ -27,8 +27,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Proper pushforward preserves coproducts for arbitrary finite rings
 
-Source: Stacks Project, Tags 0F0D, 0F11 and 095U.
-(blueprint: lem-sfb-finite-proper-derived-coproducts)
+## References
+
+* Stacks Project, Tags 0F0D, 0F11 and 095U.
 -/
 
 @[expose] public section
@@ -223,21 +224,8 @@ private theorem ring_geometric_detects_zero
     exact ⟨⟨hz'.to_ _, (hM t).eq_of_src _ _, hz'.eq_of_src _ _⟩⟩
   exact IsZero.of_iso hz (asIso (hz.from_ N))
 
-/-- Proper derived direct image preserves arbitrary coproducts over a finite ring.
-Source: Stacks Project, Tags 0F0D, 0F11, 095U.
-(blueprint: lem-sfb-finite-proper-derived-coproducts)
-
-Proof: forgetting coefficients is exact, conservative and preserves coproducts.
-Its bounded derived comparison identifies every higher direct image with the
-abelian one after forgetting. Abelian higher direct images commute with coproducts
-by the integer-module case. At each geometric point proper base change and the
-finite-dimensional geometric fibre give a bound on higher direct images of torsion
-sheaves. Finite rings make all underlying sheaves torsion, including the zero ring.
-Dimension shifting with these jointly conservative geometric point functors shows
-that direct image takes exact complexes of acyclic objects to exact complexes.
-Coproducts of acyclic objects remain acyclic since every higher direct image
-preserves coproducts. The abstract unbounded coproduct criterion applies. No uniform
-bound on the dimensions of the fibres, or quasi-compactness of Y, is used. -/
+/-- Proper derived direct image preserves arbitrary coproducts over a finite ring
+(Stacks, Tags 0F0D, 0F11, 095U). -/
 theorem finiteRing_preservesCoproducts_rightDerivedLowerStar
     (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (I : Type (u + 1)) :

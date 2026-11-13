@@ -17,9 +17,7 @@ set_option autoImplicit false
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- Sectionwise form of the ordinary open counit compatibility.
-Source: the sectionwise calculation in Stacks Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-ordinary-open-counit-square-section) -/
+/-- Sectionwise form of the ordinary open counit compatibility. (Stacks, Tags 08FE and 08BV) -/
 theorem schemeMVOrdinaryOpenCounit_square_app
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace))

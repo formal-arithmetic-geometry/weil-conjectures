@@ -12,9 +12,12 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import WeilConjectures.AlgebraicGeometry.FiniteFreeMapIsoLocusBasicOpen
 
-/-! # Affine compactness of the isomorphism locus
+/-!
+# Affine compactness of the isomorphism locus
 
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0BDP, final sentence.
+## References
+
+* Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0BDP
 -/
 
 @[expose] public section
@@ -47,22 +50,8 @@ private theorem exists_affine_compact_isoLocus_neighbourhood {W : Scheme.{u}}
   rw [hf]
   exact (hU.basicOpen f).isCompact
 
-/-- On an affine open, the locally invertible locus of a vector bundle map is compact.
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0BDP, final sentence.
-(blueprint: lem-sc-finite-locally-free-map-iso-locus-compact)
-
-Proof: Cover the affine open V by simultaneous finite free frames for M and N, refining
-these frames to affine opens contained in V. Compactness of V gives a finite subcover.
-On each frame with equal ranks, the locally invertible locus is the principal open of
-its matrix determinant: the adjugate divided by the determinant is an inverse, and any
-inverse forces the determinant to be a unit. On a frame with unequal ranks the locus
-is empty, since an inverse at any point would give an isomorphism of residue vector
-spaces of unequal dimensions. Thus the intersection with V is a finite union of
-basic opens of these affine frames and is compact. The identification with moduleMapIsoLocus uses
-its neighbourhood definition: every determinant open has an inverse; conversely,
-invertibility on any neighbourhood implies invertibility on its stalks and hence the
-same determinant condition. In rank zero the determinant is 1. Empty frames contribute
-nothing, and no reducedness or global bound on the varying ranks is required. -/
+/-- On an affine open, the locally invertible locus of a vector bundle map is compact
+(Stacks, Tags 05GD, 0BDP). -/
 theorem isCompact_moduleMapIsoLocus_inter {W : Scheme.{u}} (M N : W.Modules)
     [M.IsFiniteLocallyFree] [N.IsFiniteLocallyFree] (φ : M ⟶ N)
     (V : W.Opens) (hV : IsAffineOpen V) :

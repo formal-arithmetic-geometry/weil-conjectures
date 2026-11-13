@@ -16,8 +16,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-! # Quasi-coherent cohomology is closed under extensions of complexes
 
-Source: Stacks Project, Tags 0117 and 01IE.
-(blueprint: lem-sc-localized-complex-qc-homology-extension)
+## References
+
+* [Stacks, Tag 0117](https://stacks.math.columbia.edu/tag/0117)
+* [Stacks, Tag 01IE](https://stacks.math.columbia.edu/tag/01IE)
 -/
 
 @[expose] public section
@@ -70,19 +72,7 @@ private theorem mapped_homology_mem_of_shortExact
     (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
-
-Source: Stacks Project, Tag 0117, long exact sequence, and Tag 01IE, extension closure.
-Proof: in degree n the long exact sequence has the five exact terms
-H^(n-1)(C), H^n(A), H^n(B), H^n(C), H^(n+1)(A).
-Consequently H^n(B) is an extension of ker(H^n(C) -> H^(n+1)(A)) by
-coker(H^(n-1)(C) -> H^n(A)). The hypotheses make the four outer terms
-quasi-coherent. Transport to U.toScheme by the exact equivalence of module sheaves
-on its open site with those on the localized site over U. Quasi-coherence is
-preserved in both directions because local free presentations correspond.
-Kernel and cokernel closure make the two end terms quasi-coherent, and extension
-closure makes the middle term quasi-coherent. Transport back. This argument works
-for every integer n and imposes no boundedness on any of the complexes.
-(blueprint: lem-sc-localized-complex-qc-homology-extension). -/
+(Stacks, Tags 0117, 01IE) -/
 theorem localized_complex_qc_homology_extension
     (X : Scheme.{u}) (U : X.Opens)
     (S : ShortComplex (CochainComplex

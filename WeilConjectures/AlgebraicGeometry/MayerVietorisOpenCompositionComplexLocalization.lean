@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionNorm
 
 /-! # The complex form of the open composition unit equation
 
-Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-open-composition-complex-localization).
+## References
+
+* Stacks Project, Tags 08FE and 0D5T.
 -/
 
 @[expose] public section
@@ -27,17 +28,8 @@ namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 set_option maxHeartbeats 700000 in
 -- Transport through the complex and homotopy localization interfaces.
-/-- The open composition unit equation on any complex on the inverse-image open.
-Source: Stacks Project, Tags 08FE and 0D5T.
-Proof: apply schemeMVOpenComposition_unit_normalization to the homotopy quotient of J.
-The components of mapHomotopyCategoryFactors and quotientCompQhIso are identities.
-Expand schemeMVDirectImageLocalization and use those component identities to identify
-its units with the homotopy units. The homotopy composition comparison is the quotient
-of the displayed complex comparison, by mapHomotopyCategoryCompIso. Functoriality of Q
-and the naturality of the quotient comparison give the displayed equation. There is
-no restriction factor, counit, or K-injectivity hypothesis. This applies also to the
-empty open, full open, and identity h because the same quotient identities apply.
-(blueprint: lem-pc-mayer-vietoris-open-composition-complex-localization). -/
+/-- The open composition unit equation on any complex on the inverse-image open
+(Stacks, Tags 08FE and 0D5T). -/
 theorem schemeMVOpenComposition_complex_localization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

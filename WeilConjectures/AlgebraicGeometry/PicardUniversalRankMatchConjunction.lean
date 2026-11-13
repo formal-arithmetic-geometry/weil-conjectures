@@ -18,7 +18,9 @@ Tensor pullback preserves finite local freeness of a fixed rank, also along
 composites. The common-neighbourhood rank condition itself is
 `picardUniversalRankMatch_of_singleRankMatch_without_unit`.
 
-Source: Stacks Project, Tag 0BDP, rank decomposition and the two rank-r loci.
+## References
+
+* Stacks Project, Tag 0BDP
 -/
 
 @[expose] public section

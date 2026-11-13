@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineComplexPresen
 
 /-! # Raw affine cohomology classes descend to a stage
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-class-rep).
+## References
+
+* Stacks Project, Tags 09Z1 and 0EZM.
 -/
 
 @[expose] public section
@@ -27,36 +28,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- Every raw restricted-cohomology class over an affine etale object is a
 pullback of a raw class at one stage. This assertion concerns derived Hom only;
-no higher-direct-image sheaf or choice of sheafification comparison occurs.
-Source: Stacks Project, Tag 09Z1, the displayed cohomology colimit in the proof;
-Tag 0EZM, specialized to degree-zero complexes with common lower bound zero.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-class-rep).
-
-Proof: Fix the affine etale U over S. Base change the underlying scheme diagram
-and its limiting cone along U.hom. Each stage U times_S X_i is qcqs because its
-map to the affine scheme U is the base change of the qcqs structure map X_i → S.
-The transition maps are affine by base change. The base-changed cone is limiting
-by the universal property of pullbacks. Pull back F_i and the transition maps to
-these schemes. The identity and composition conditions transport along the
-pullback composition isomorphisms. At the limit, composition of inverse images
-identifies the pulled-back H diagram with the pullbacks of these stage sheaves;
-hH gives its transition equations. Since inverse image is a left adjoint it
-preserves the colimit, so its colimit is the restriction of colimit H.
-Put this system of sheaves into single complexes in degree zero. Exact inverse
-image commutes with single complexes, and their common lower bound is zero.
-Apply nonempty_isColimit_etale_complex_cohomology to this system. Its
-cohomology cocone is a filtered colimit; the forgetful functor from abelian groups
-preserves it, so every class has a representative at one stage. Identify the
-cohomology of U times_S X_i with derived Hom from the inverse image of the free
-abelian sheaf of U, and likewise at the limit. This identification follows from
-the free-sheaf sections adjunction and etale restriction (restriction has an
-exact left adjoint, so preserves injectives). In D⁺ the Hom groups of the single
-complexes compute the same cohomology as in the unbounded derived category.
-Naturality identifies the cocone leg with pullback of the class followed by
-its shifted coefficient map. The factors are precisely the composition,
-single-functor, and shift comparisons in abelianHigherDirectImageRawPullback.
-Transport the stage representative through these identifications to obtain t.
-This proves the asserted equality without any sheafification or gluing. -/
+no higher-direct-image sheaf or choice of sheafification comparison occurs
+(Stacks, Tags 09Z1 and 0EZM). -/
 theorem exists_higherDirectImage_raw_affine_class_rep {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

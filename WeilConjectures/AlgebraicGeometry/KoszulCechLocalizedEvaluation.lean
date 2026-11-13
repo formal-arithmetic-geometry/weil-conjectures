@@ -12,10 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Signed localized Koszul evaluation
 
-Source: Stacks Project, Tags 08D0 and 08D1
-(blueprint: lem-sc-koszul-cech-localized-vertical).
 The degree maps are constructed using the inverse of scalar multiplication on principal
 opens. Coefficient maps commute with the scalar division used in these degree maps.
+
+## References
+
+* Stacks Project, Tags 08D0 and 08D1.
 -/
 
 @[expose] public section
@@ -29,11 +31,7 @@ namespace AlgebraicGeometry
 variable (A : Type uK) [CommRing A]
 variable (S : SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace)) (s : A)
 
-/-- Inverse to multiplication by s^e on sections over D(s).
-Source: Stacks, Tag 08D0 (blueprint: lem-sc-koszul-cech-localized-differential).
-The inverse is constructed from Mathlib's proved invertibility of s on D(s).
-(blueprint: lem-sc-koszul-cech-localized-vertical)
--/
+/-- Inverse to multiplication by s^e on sections over D(s). -/
 noncomputable def koszulCechScalarDivision (e : ℕ) :
     ((affineOpenSections A (PrimeSpectrum.basicOpen s)).obj S) ≃ₗ[A]
       ((affineOpenSections A (PrimeSpectrum.basicOpen s)).obj S) := by
@@ -67,12 +65,7 @@ variable (F : CochainComplex
   (SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
 
 /-- Signed restriction of evaluation followed by division by the principal product.
-Source: Stacks, Tags 08D0 and 08D1
-(blueprint: lem-sc-koszul-cech-localized-differential).
-The parameter B supplies the vectors to evaluate on, independently of total degree.
-Linearity follows from linearity of cochains, restrictions and scalar division.
-(blueprint: lem-sc-koszul-cech-localized-vertical)
--/
+The parameter B supplies the vectors to evaluate on, independently of total degree. -/
 noncomputable def koszulCechLocalizedDegreeMap (e : ℕ) (n : ℤ)
     (B : ∀ J : {J : Finset (Fin r) // J.Nonempty},
       ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).X
@@ -105,13 +98,7 @@ noncomputable def koszulCechLocalizedDegreeMap (e : ℕ) (n : ℤ)
         exact smul_comm _ _ _ }
 
 
-/-- The localized evaluation's coefficient term has the vertical totalization sign.
-Source: Stacks Project, Tag 08D1, compatibility with the second differential.
-(blueprint: lem-sc-koszul-cech-localized-vertical)
-Proof: restriction is natural for the coefficient differential. Its A-linearity makes
-it commute with multiplication by the principal product, and hence with the inverse.
-The exponent at n+1 is the exponent at n plus card(J)-1. The resulting extra sign
-is precisely the vertical sign of the Cech total differential. -/
+/-- The localized evaluation's coefficient term has the vertical totalization sign. -/
 theorem koszulCechLocalized_vertical (e : ℕ) (n : ℤ)
     (J : {J : Finset (Fin r) // J.Nonempty})
     (x : (affineOpenSections A ⊤).obj (F.X (n + 1 - (J.val.card : ℤ)))) :

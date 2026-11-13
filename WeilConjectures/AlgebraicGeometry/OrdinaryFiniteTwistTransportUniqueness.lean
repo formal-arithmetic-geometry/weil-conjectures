@@ -8,9 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
 /-! # Uniqueness of normalized finite Tate transport
 
-Source: blueprint vector integration, normalized Tate comparisons; Stacks Project,
-Tags 03PK and 03Q1.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tags 03PK and 03Q1]
 -/
 
 @[expose] public noncomputable section
@@ -77,19 +77,8 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Etale
 
 /-- The normalized roots inclusion and pure coefficient generators determine Tate
-transport uniquely, even without a chosen system of identity and composition laws.
-Source: Stacks Project, Tags 03PK and 03Q1; blueprint vector integration, canonical
-coefficient identifications.
-(auxiliary; not a blueprint node).
-
-Proof: cancel the monomorphism from roots of unity to units to identify the roots
-comparisons. For a coefficient comparison, transpose under inverse image/direct image.
-Sheafification and scalar extension identify maps out of the Tate line with maps out
-of the roots sheaf; this correspondence evaluates at the pure generator 1 tensor z.
-The two normalization equations and the already identified roots comparison give
-equality on these generators, hence equality of the transposes and the line maps.
-Function extensionality and proof irrelevance identify the records. The proof also
-covers the empty scheme, zero coefficient ring, and N=1. -/
+transport uniquely, even without a chosen system of identity and composition laws
+(Stacks, Tags 03PK and 03Q1). -/
 theorem ordinaryFiniteTwistTransport_unique (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t t' : OrdinaryFiniteTwistTransport A N hA) :
     t = t' := by

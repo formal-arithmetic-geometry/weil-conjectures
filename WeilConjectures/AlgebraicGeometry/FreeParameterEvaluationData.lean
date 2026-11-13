@@ -74,12 +74,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 
 /-! # Evaluation coherence for free profinite parameters
 
-Source: Stacks Project, Tags 08J7, 08J9 and 07A7; the generator and scalar
-adjunction calculations in the node
-(auxiliary; not a blueprint node).
+All Hom objects are the closed derived Hom. Gamma is
+`ProfiniteFreeSlice.Comparison.gamma`. The maps below precede all coherence claims.
 
-All Hom objects are the recorded closed derived Hom. Gamma is the recorded
-ProfiniteFreeSlice.Comparison.gamma. The maps below precede all coherence claims.
+## References
+
+* Stacks Project, Tags 08J7, 08J9 and 07A7.
+* HRS, Section 3.
 -/
 
 @[expose] public noncomputable section
@@ -94,21 +95,17 @@ namespace AlgebraicGeometry.ProEtale.FreeParameterEvaluation
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The recorded internal condensed module category.
-Source: HRS Section 3 (auxiliary; not a blueprint node). -/
+/-- The internal condensed module category. -/
 abbrev PointModules := Profinite.CondensedAction.Modules R
 
-/-- The recorded internal modules on the small pro-etale site.
-Source: HRS Section 3 (auxiliary; not a blueprint node). -/
+/-- The internal modules on the small pro-etale site. -/
 abbrev Modules (X : Scheme.{u}) := ModuleObjectRingedComparison.Internal R.X X
 
-/-- The existing exact point inverse image on modules.
-Source: HRS Section 3 (auxiliary; not a blueprint node). -/
+/-- The exact point inverse image on modules. -/
 abbrev pointPull (X : Scheme.{u}) := ProfiniteFreeSlice.pointModulePullback R.X X
 
 omit [IsCommMonObj R.X] in
-/-- The point inverse image on modules is additive and exact.
-Source: Stacks 03D2; HRS Section 3 (auxiliary; not a blueprint node). -/
+/-- The point inverse image on modules is additive and exact. (Stacks, Tag 03D2) -/
 theorem pointPull_exact (X : Scheme.{u}) : (pointPull R X).Additive ∧
     PreservesFiniteLimits (pointPull R X) ∧ PreservesFiniteColimits (pointPull R X) := by
   have : PreservesFiniteLimits (upperStarFromPoint X) := by
@@ -135,8 +132,7 @@ instance pointPull_colimits (X : Scheme.{u}) :
     PreservesFiniteColimits (pointPull R X) :=
   (pointPull_exact R X).2.2
 
-/-- The ordinary unbounded point inverse image.
-Source: HRS Section 3 (auxiliary; not a blueprint node). -/
+/-- The ordinary unbounded point inverse image. -/
 abbrev pointPullD (X : Scheme.{u}) := (pointPull R X).mapDerivedCategory
 
 end AlgebraicGeometry.ProEtale.FreeParameterEvaluation

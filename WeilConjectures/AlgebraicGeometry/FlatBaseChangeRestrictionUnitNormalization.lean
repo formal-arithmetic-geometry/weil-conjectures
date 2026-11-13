@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Normalizing the restricted tensor unit through a chart
 
-Source: Stacks Project, Sheaves, Tags 0096 and 0097.
-(blueprint: lem-pc-restriction-chart-unit-normalization)
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
 -/
 
 @[expose] public section
@@ -26,28 +28,8 @@ attribute [local irreducible] tensorPullback tensorPullbackObj
 
 set_option maxHeartbeats 800000 in
 -- The statement elaborates nested pullback and pushforward comparisons.
-/-- The unit square pins the double transpose to the canonical pullback comparison.
-Source: Stacks Project, Sheaves, Tags 0096 and 0097, adjunction and composition.
-(blueprint: lem-pc-restriction-chart-unit-normalization)
-
-Proof: Let adj1 be the composite of restriction along a, pullback along t and
-pullback along sigma; let adj2 be tensor pullback along p followed by restriction
-along l. The commutative scheme equations identify their right adjoints by
-rightIso. Uniqueness of left adjoints constructs the coefficient comparison k,
-preceded by pullback of the inverse restriction/pullback comparison along a.
-Transpose the desired equality through t and then restriction along a, after
-precomposing with the restriction/pullback comparison along a. Naturality of the
-hom-equivalences cancels that comparison. The unit equation for leftAdjointUniq
-identifies the left side with the composite unit for adj2 followed by rightIso.inv.
-Cancel rightIso.hom and evaluate at an open B of X. Expand the pushforward
-composition and congruence comparisons and the restriction units. Apply the
-given square at B, followed by restriction from u(u inverse(p inverse B)) to
-l(l inverse(p inverse B)); this inclusion follows from l=j followed by u.
-Functoriality combines the presheaf maps. All transports and restrictions on
-each side are maps between the same opens and agree since opens form a thin
-category. The resulting equation is exactly the evaluated desired equality.
-Empty schemes, empty opens and zero modules obey these same identities.
-No invertibility of the double transpose is asserted here. -/
+/-- The unit square pins the double transpose to the canonical pullback comparison
+(Stacks, Tags 0096 and 0097). -/
 theorem restriction_chart_unit_normalization
     {X X' Y Z L T : Scheme.{u}}
     (p : X' ⟶ X) (a : Y ⟶ X) (u : Z ⟶ X') (l : L ⟶ X')

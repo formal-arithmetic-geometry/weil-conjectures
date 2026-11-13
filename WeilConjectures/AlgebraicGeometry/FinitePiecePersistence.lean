@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 /-!
 # Persistence of a finite open piece under residue-field-preserving base change
 
-Source: Stacks Project, More on Morphisms, Tag 02LK, final assertion
-(blueprint: lem-weil-pbc-elementary-etale-finite-piece-persistence).
+## References
+
+* Stacks Project, Tag 02LK
 -/
 
 @[expose] public section
@@ -71,23 +72,7 @@ private theorem pullback_point_unique {A B C : Scheme.{u}}
 
 /-- A finite open piece with a unique point above `u` and unchanged residue field at `x`
 persists under any base change preserving the residue field at `u`.
-Source: Stacks Project, Tag 02LK, final assertion; the generalization to arbitrary `ψ`
-uses no étaleness (blueprint: lem-weil-pbc-elementary-etale-finite-piece-persistence).
-
-Proof:
-1. The square with projections `π` and `pullback.snd f (ψ ≫ φ)` is cartesian by
-`lem-weil-pbc-cartesian-square-pasting`, using the two specified fibre products
-(`def-pc-fibre-product`).
-2. By `lem-weil-pbc-open-fibre-product`, the inverse-image open is the base change
-of `V` over `U`. Finiteness follows from `lem-weil-pbc-finite-morphism-permanence`.
-3. Every point of this open above `u'` maps to `v`, by uniqueness above `u`.
-By `lem-weil-pbc-fibre-product-points`, these points correspond to the spectrum of
-κ(v) ⊗[κ(u)] κ(u'). The residue-field isomorphism for `ψ` identifies this tensor
-product with κ(v), a field, so there is exactly one such point.
-4. By `lem-weil-pbc-fibre-product-point-residue-field`, its residue field is the same
-field κ(v), compatibly with `π`. Compose its residue-field isomorphism with the
-one for `V.ι ≫ pullback.fst f φ` to obtain the asserted isomorphism at `x`.
-Residue-field maps here are those of `def-weil-residue-field`. -/
+(Stacks, Tag 02LK) -/
 theorem finitePiece_persistence_of_isIso_residueFieldMap
     {X S U U' : Scheme.{u}} (f : X ⟶ S) (φ : U ⟶ S)
     (u₀ : U) (x : X) (hx : f x = φ u₀)

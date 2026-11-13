@@ -9,8 +9,6 @@ import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # The ordinary constant pullback component
 -/
@@ -25,10 +23,9 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor upperStar
 
 /-- The ordinary single-iso factorization is the canonical constant comparison.
-Source: blueprint thm-amb-p1-adjunction.proof.md, canonical constant coefficient pullback.
+
 Expand the two component formulas, which are the same single-degree comparison
-followed by the single functor applied to the constant-sheaf comparison.
-(auxiliary; not a blueprint node). -/
+followed by the single functor applied to the constant-sheaf comparison. -/
 theorem ordinaryFiniteUnitPullback_hom_eq_constant (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFiniteUnitPullback A f).hom =

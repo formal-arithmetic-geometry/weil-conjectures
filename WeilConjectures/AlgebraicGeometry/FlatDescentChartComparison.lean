@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineTripleTensorBaseChange
 /-!
 # Tensor-spectrum comparisons for one affine triple
 
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
-(blueprint: lem-weil-pbc-flat-descent-chart-comparison).
+## References
+
+* Stacks Project, Tag 04AI
 -/
 
 @[expose] public section
@@ -31,35 +32,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- One affine triple admits a ring diagram whose tensor spectra identify the restricted
 base changes at every stage and at the limit. The stage source open is exactly the inverse
-image of the given source open. No flatness hypothesis or conclusion occurs here.
-
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph, and Situation 081D;
-the affine limit comparison is Tag 01YW.
-(blueprint: lem-weil-pbc-flat-descent-chart-comparison).
-
-Proof: For j in the upper tail, take W_j to be the inverse image of W₀ in D(j).
-Affine transition morphisms make each W_j affine. Their section rings and the section
-maps of the restricted transitions form the covariant ring diagram. Identify W at the
-limit with Spec of its colimit by the affine-open limit theorem and uniqueness of limits.
-At the initial stage identify the section ring of the inverse image along the identity
-transition with Γ(W₀), using D.map_id. Take B = Γ(V₀.toScheme, ⊤) and C = Γ(U₀.toScheme, ⊤), and put
-f = f₀.resLE V₀ U₀ hUV. The base map to B is induced by the composite
-V₀ → W₀ → Spec(F(j₀)); the base map to C is its composite with f.appTop.
-The algebra map is f.appTop, so compatibility holds by construction. Local finite
-presentation is preserved by restriction and its affine criterion gives finite
-presentation of f.appTop. Naturality of isoSpec and the Γ-Spec triangle identity
-give the two required compatibility equations.
-For q a transition or the limit projection, choose U and V to be the inverse images
-of U₀ and V₀ under the pullback first projections. The pullback square and the two
-containments show that these opens are U₀ ×_{W₀} q⁻¹(W₀) and
-V₀ ×_{W₀} q⁻¹(W₀). Open pullback comparison and pullbackSpecIso identify them
-with Spec(R ⊗ Γ(U₀)) and Spec(R ⊗ Γ(V₀)), respectively, swapping the tensor factors
-if needed. The restricted morphism becomes Spec(id ⊗ f₀.appLE): both maps into
-the target pullback have the same components, so pullback.hom_ext proves equality.
-These source and target isomorphisms together give the asserted arrow isomorphism.
-This construction also works for an empty source open (its section ring is the zero
-ring), a zero base ring, and a preorder with a single stage. It uses neither flatness
-nor the eventual flatness theorem. -/
+image of the given source open. No flatness hypothesis or conclusion occurs here
+(Stacks, Tags 04AI and 01YW). -/
 theorem exists_flat_descent_chart_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

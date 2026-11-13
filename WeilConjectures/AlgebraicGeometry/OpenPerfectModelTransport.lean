@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 
 /-! # Transport of perfect models from an open subscheme
 
-Source: Stacks Project, Definition 08CM, Definition 08C4 and restriction in Tag 08DW.
-(blueprint: lem-sc-open-perfect-model-transport).
+## References
+
+* Stacks Project, Definition 08CM, Definition 08C4 and restriction in Tag 08DW.
 -/
 
 @[expose] public section
@@ -25,26 +26,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A perfect model on an open subscheme is an ambient local perfect model.
-Source: Stacks Project, Definition 08CM, Definition 08C4 and Tag 08DW.
-(blueprint: lem-sc-open-perfect-model-transport).
-
-Proof: Fix x in U and choose an open V of U and a strictly perfect complex K
-representing F near x, using IsPerfect. Set O = U.ι image V. This is open in X
-and contains x. The isomorphism U.ι.isoImage V identifies V.toScheme with
-O.toScheme. Compose Modules.overEquiv V, restriction along the inverse of that isomorphism,
-and the inverse of Modules.overEquiv O to obtain an exact additive equivalence
-A of their localized module categories. Its unit-module comparison, together
-with preservation of coproducts, identifies A of each finite free module with
-the corresponding finite free module. Apply A degreewise to K. The same degree
-bounds hold because A preserves zero objects. If i and p split a term off a
-finite free module, their images, composed with the finite free comparison,
-still satisfy i followed by p = identity. Thus the transported complex is
-strictly perfect. The restriction-composition comparison for V.ι followed by
-U.ι, and U.ι.isoImage V, identifies its representing derived object with
-R restricted to O: apply restriction to e and compose with the given model
-isomorphism, the derived equivalence comparisons and A.mapDerivedCategoryFactors.
-This gives the required K and model isomorphism. Empty U has no points; zero F
-and the total open use the same construction. No condition is imposed outside U. -/
+(Stacks, Definition 08CM, Definition 08C4 and Tag 08DW) -/
 theorem local_perfect_of_openRestriction_iso
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

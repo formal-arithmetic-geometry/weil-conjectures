@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalTraceCoord
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
 /-!
 # The first normalized coordinate exchange
-
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,12 +33,7 @@ attribute [local irreducible] derivedBaseChangeMap CoordinateTrace.exchange1
   ordinaryFiniteShiftedLinePullback projectiveLineDiagonalAlpha
   singleFunctorObjUnitIso derivedTensorRightUnitor
 
-/-- Normalize scalar chart exchange to the first common-base coordinate.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the coordinate trace calculations.
-(auxiliary; not a blueprint node).
-Proof: Specialize scalar chart exchange to the first projection and rewrite the canonical
-single-object unit comparison through its typed cache. Associativity gives the first
-coordinate exchange equation. -/
+/-- Normalize scalar chart exchange to the first common-base coordinate. -/
 theorem ordinaryFiniteDiagonalTrace_first_coordinate_exchange (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)

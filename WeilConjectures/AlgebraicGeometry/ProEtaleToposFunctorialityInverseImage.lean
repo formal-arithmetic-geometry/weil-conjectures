@@ -12,9 +12,6 @@ import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 /-!
 # Functoriality of the inverse image on small pro-étale topoi
 
-Source: Weil conjectures blueprint, `det-pe-topos-functoriality-inverse-image`, clauses 1–5
-(blueprint: det-pe-topos-functoriality-inverse-image).
-
 ## Main definitions
 
 * `setPullback`: the sheafified left Kan extension on set-valued sheaves.
@@ -38,8 +35,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The inverse image on set-valued sheaves, as sheafified left Kan extension.
 
-Source: Weil conjectures blueprint, clause 2
-(blueprint: proposition-topos-functoriality--2). The direct image is the existing
+ The direct image is the existing
 `lowerStar (Type (u + 1)) f`, whose definition is restriction along base change. -/
 noncomputable def setPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Sheaf (Scheme.ProEt.topology Y) (Type (u + 1)) ⥤
@@ -48,64 +44,21 @@ noncomputable def setPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) (Type (u + 1))
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
-/-- The constructed Kan-extension/sheafification adjunction on set-valued sheaves.
-
-Source: Weil conjectures blueprint, clause 2
-(blueprint: proposition-topos-functoriality--2). -/
+/-- The constructed Kan-extension/sheafification adjunction on set-valued sheaves. -/
 noncomputable def setPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     setPullback f ⊣ lowerStar (Type (u + 1)) f :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) (Type (u + 1))
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
-/-- The canonical composition comparison for set-valued inverse images.
-
-Source: Weil conjectures blueprint, clause 5
-(blueprint: proposition-topos-functoriality--3). It is the conjugate of the existing
-pushforward comparison, hence is compatible with the constructed adjunctions. The direct
-image comparison in the direction of clause 5 is `(lowerStarComp (Type (u + 1)) f g).symm`.
-The underlying site comparison is the canonical pullback associativity isomorphism. -/
+/-- The canonical composition comparison for set-valued inverse images, the conjugate of the
+existing pushforward comparison. -/
 noncomputable def setPullbackComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     setPullback (f ≫ g) ≅ setPullback g ⋙ setPullback f :=
   (conjugateIsoEquiv ((setPullbackAdjunction g).comp (setPullbackAdjunction f))
     (setPullbackAdjunction (f ≫ g))).symm (lowerStarComp (Type (u + 1)) f g)
 
-/-- The geometric morphism attached to an arbitrary morphism of schemes.
-
-Source: Weil conjectures blueprint, clauses 1–5
-(blueprint: proposition-topos-functoriality).
-
-Proof:
-1. Base change preserves weakly étale objects and coverings by stability under base change
-   (proposition-topos-functoriality--2, proposition-topos-functoriality).
-   The small sites have terminal objects and fibre products
-   (proposition-topos-functoriality, proposition-topos-functoriality). Their universal properties
-   show that base change preserves both, hence finite limits.
-2. Restriction along base change preserves the sheaf equalizer, since it preserves covers
-   and fibre products. Compose the left Kan extension adjunction with sheafification
-   (proposition-topos-functoriality). This is precisely
-   `setPullbackAdjunction`; the same construction in abelian groups is the recorded
-   `upperStarLowerStarAdjunction` (proposition-topos-functoriality--2).
-3. The adjunction gives all colimits (situation-conventions).
-   The opposite comma category at a site object is filtered, using finite limits of the
-   source site and their preservation in step 1. Thus the Kan extension preserves finite
-   limits of sets (situation-conventions). Inclusion of sheaves
-   preserves limits (proposition-topos-functoriality), and sheafification
-   preserves finite limits (situation-conventions). Their composite is
-   left exact, giving the geometric morphism.
-4. Apply proposition-topos-functoriality, transporting the site presentation
-   to its larger universe when necessary. Lifting the set adjunction to abelian group
-   objects identifies the underlying sets of `upperStar AddCommGrpCat f` with set inverse
-   image, including the group operations. This is the pullback of
-   proposition-topos-functoriality--2. Finite limits give kernels and the abelian adjunction gives
-   cokernels, so it is exact (proposition-topos-functoriality--2).
-5. The canonical associativity isomorphism for fibre products gives `lowerStarComp` on
-   sections, naturally in the site object and sheaf (proposition-topos-functoriality--3).
-   Compose adjunctions (proposition-topos-functoriality). Taking the conjugate of the
-   direct image comparison gives `setPullbackComp`, exactly as for abelian pullback
-   (proposition-topos-functoriality--3). The conjugation unit equation
-   (situation-conventions) gives the last displayed equality, proving
-   compatibility with the adjunctions and thus composition of geometric morphisms. -/
+/-- The geometric morphism attached to an arbitrary morphism of schemes. -/
 theorem toposFunctorialityInverseImage {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (PreservesFiniteLimits (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) ∧
       ∀ (V : Y.ProEt) (R : Presieve V), R ∈ Scheme.ProEt.precoverage Y V →

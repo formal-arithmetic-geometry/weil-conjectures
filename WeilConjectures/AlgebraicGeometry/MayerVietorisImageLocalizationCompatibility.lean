@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisImageRestrictionLocalizati
 
 /-! # Explicit restriction-induced comparison maps
 
-Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-image-chain-data).
+## References
+
+* Stacks Project, Tags 08FE, 08BV, 079V and 0D5T.
 -/
 
 @[expose] public section
@@ -89,25 +90,8 @@ private theorem image_unit_square
   simpa only [schemeMV_image_restriction_localization X Y h W I, Functor.comp_map] using hc
 
 /-- Compatibility of the sectionwise open-image comparison with localization.
-This concerns only the sectionwise isomorphism on a source K-injective complex;
-it contains no chosen map to a target resolution and no Mayer--Vietoris morphism.
-Source: Stacks Tags 08FE, 079V and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-image-localization-compatibility).
-
-Proof: The direct-image computation map is the inverse right-derived unit.
-The comparison for the open image is the inverse right-derived unit on the
-restricted complex, followed by the exact-restriction localization comparison.
-The underived sectionwise isomorphism is the composite of pushforwardComp along
-the open square and the restriction/direct-image isomorphism of Tag 08FE.
-Apply the unit equations for rightDerivedFunctorCompMapDerivedCategoryIso,
-rightDerivedFunctorNatIso and rightDerivedFunctorCompIso to these factors.
-The resulting composite is the defining right-derived unit equation for
-schemeMVDirectImageComposition and schemeMVOpenRestrictionComparison.
-These equations determine the comparisons by the right-derived universal
-property. Their composite therefore gives the stated square on I. Transport
-along e by naturality of those comparisons gives the displayed equation.
-No K-injectivity of h_*I is used: the comparison on that complex is the general
-localization map, not an inverse computation isomorphism. -/
+This concerns only the sectionwise isomorphism on a source K-injective complex; it involves no
+chosen map to a target resolution and no Mayer--Vietoris morphism. -/
 theorem schemeMV_image_localization_compatibility
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -54,7 +54,9 @@ set_option linter.privateModule false
 
 /-! # Completion for embedded integral coefficients
 
-Source: Stacks Project, Tags 099I, 099L, 099M and 0A07 (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099I, 099L, 099M and 0A07
 -/
 
 @[expose] public noncomputable section

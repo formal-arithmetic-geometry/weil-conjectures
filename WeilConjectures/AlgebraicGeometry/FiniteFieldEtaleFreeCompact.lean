@@ -32,14 +32,16 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 /-!
 # Compact affine étale free sheaves over a finite field
 
-Source: Bhatt--Scholze, The pro-étale topology for schemes, Lemma 6.3.11,
-Section 6.4, Lemma 6.4.5(1), Proposition 6.4.8; the finite-field bound is
-`lemma-cohomological-dimension-base-field` (blueprint: lem-sfb-finite-field-etale-free-compact).
+## Implementation details
 
 The indexing and Hom universe is `u + 1`; the ordinary derived category has
 object universe `u + 2`. A chosen small skeleton of the affine étale basis is
-supplied by `B`, `e` and `hB`. The sheaves and their single complexes are the
-existing free Yoneda and the degree-zero `singleFunctor` construction.
+supplied by `B`, `e` and `hB`.
+
+## References
+
+Bhatt--Scholze, The pro-étale topology for schemes, Lemma 6.3.11,
+Section 6.4, Lemma 6.4.5(1), Proposition 6.4.8.
 -/
 
 @[expose] public section
@@ -85,34 +87,7 @@ by zero of the constant rank-one sheaf, constructible and flat; their degree-zer
 complexes are bounded constructible of Tor amplitude `[0,0]` and compact in the
 whole unbounded derived category. The extension-by-zero isomorphism is normalized
 by the two evaluation bijections, so it is the representing-object comparison.
-
-Source: Bhatt--Scholze, Lemma 6.3.11, Section 6.4, Lemma 6.4.5(1),
-Proposition 6.4.8; Stacks Tags 03DI, 03S8, 03EV and 0F11
-(blueprint: lem-sfb-finite-field-etale-free-compact).
-
-Proof in words:
-1. The affine étale basis is essentially small.  The given equivalence and
-   skeletal hypothesis provide the indexing category; the Grothendieck sheaf
-   instance and the derived-coproduct theorem provide coproducts and local
-   smallness.
-2. The hypotheses on `f` give the required noetherian, compact and
-   quasi-separated instances on `X`; the affine chart `W` has the corresponding
-   instances.  Existing free-Yoneda lemmas give constructibility and flatness.
-3. The single complex is bounded constructible by the degree-zero
-   characterization.  Its one-term flat model, with all other terms zero,
-   gives Tor amplitude `[0,0]`.
-4. Choose `r` with `ell^r = 0` in `A`.  The finite-field torsion bound and the
-   module/abelian cohomology comparison give finite cohomological dimension for
-   `A` on `Spec k`.  This supplies the invertible-exponent instances.  The
-   existing constructible-finite-Tor compactness theorem then makes the single
-   complex compact in the full unbounded derived category.
-5. Let `S` be the étale lower-shriek of the constant rank-one `A`-module.
-   The free-Yoneda evaluation equivalence and the shriek evaluation equivalence
-   both represent evaluation at `W`.  Compose them to obtain mutually inverse
-   hom-set equivalences, use Coyoneda extensionality to define the comparison
-   isomorphism, and use naturality of both evaluation equivalences to prove the
-   required normalization.  This also covers zero coefficients and empty charts.
--/
+(Bhatt--Scholze, Lemma 6.3.11, Lemma 6.4.5(1), Proposition 6.4.8.) -/
 theorem finiteField_affineEtaleFree_compact
     {k : Type u} [Field k] [Finite k]
     (ℓ : ℕ) (hℓprime : Nat.Prime ℓ) (hℓchar : ℓ ≠ ringChar k)

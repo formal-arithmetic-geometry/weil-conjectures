@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.OrderedCechModuleKernelNullHomotopic
 
 /-! # Ordered versus usual Čech complexes of module sheaves
 
-Source: Stacks Project, Tags 01FJ, 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FJ, 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -26,39 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A complex with the ordered section formulas is homotopy equivalent to the direct
 image of any locally linear usual Čech presentation. No cover, affine, flatness or
-quasi-coherence hypothesis is needed.
-Source: Stacks Project, Tags 01FJ, 01FK and 01FM, the two sorting homotopies.
-(blueprint: lem-pc-ordered-cech-module-comparison).
-
-Proof: On an open B of T', evaluate the usual presentation on f' inverse image B.
-Use e to identify the cochains with all tuples and a to identify the other complex
-with strictly increasing tuples. Categorical products of opens identify with finite
-intersections; replace ULift indices by their underlying Fin indices. Restriction
-from all tuples to increasing tuples commutes with the differential by hd and ha.
-Signed sorting, zero on repeated indices, gives the reverse cochain map. Their
-ordered composite is the identity. For the other composite, stably sort the entries of
-an output p-tuple by a
-permutation sigma. Let sigma_a list its first a sorted positions and then the remaining
-positions in their original order. The first homotopy evaluates a (p+1)-cochain on
-sigma(0), ..., sigma(a), sigma_a(a), ..., sigma_a(p), summed over a with coefficient
-(-1)^a sign(sigma_a), using the unique isomorphisms between equal intersections.
-In dh + hd, deleting an entry away from the junction pairs with the same deletion
-in the adjacent summand, with opposite sign. The endpoint terms give identity minus
-signed stable sorting. Thus this retracts onto semi-alternating cochains, identified
-with cochains on nondecreasing tuples. On such a tuple the second homotopy is zero
-if it is strictly increasing; otherwise, at the first equality in position a, repeat
-that entry with coefficient (-1)^a. Deletions before and after this repeated entry
-cancel with the corresponding terms in hd, leaving identity minus extension by zero
-from strictly increasing tuples. Composing these retractions gives a homotopy from
-the full-complex composite to identity. The zero homotopy gives the ordered-complex
-identity. These formulas use only restrictions, finite sums and integer signs. Consequently
-they commute with restriction of B by hn and the naturality of e.
-The local scalar identities hl and hlinear make all these maps and homotopies
-O_T'(B)-linear, so they assemble into morphisms and homotopies of module sheaves.
-Extend the usual complex by zero to integer degrees. K has zero negative terms by hK,
-so the degree identifications and homotopies extend over those terms uniquely. For
-r = 0 every product has empty index set, and these are the unique maps between zero
-objects. The argument is independent of any covering or augmentation. -/
+quasi-coherence hypothesis is needed (Stacks, Tags 01FJ, 01FK and 01FM). -/
 theorem orderedCech_module_comparison {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ) (hK : K.IsStrictlyGE 0)

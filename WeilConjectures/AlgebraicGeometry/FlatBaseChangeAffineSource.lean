@@ -27,30 +27,7 @@ set_option maxHeartbeats 500000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
-Source: Stacks Project, Tags 02KH (first paragraph), 01XJ, 01E4 and 03FD.
-(blueprint: new-flat-base-change-affine-source)
-
-Proof: Put A = Gamma(V), B = Gamma(W), U = f inverse V, and N = F restricted to U.
-Identify pullback along U's open immersion with restriction by the unique
-adjunction comparison, preserving the restriction unit. Compute module cohomology
-and Ext-based abelian-sheaf cohomology on the same section complex of a module
-injective resolution: forgotten injectives are section-acyclic (03FD). This gives
-a canonical additive eH. Naturality for multiplication by sections shows that eH
-commutes with the A-action through h. The augmentation and components equations
-of D.source identify its section complex with the restriction of I, so changing
-this resolution does not change eH or the class represented by a cocycle.
-
-By ordinaryHigherImage_isQuasicoherent, all R^q f_* F are quasi-coherent. Their
-positive cohomology over the affine V vanishes. The cocycle-normalized Leray edge
-is therefore an A-linear isomorphism from cohomology on U to Gamma(P,V).
-The presheaf description of higher images (01E4) identifies this edge, on the
-section complex recorded in D, with D.sourceClass. Compose it with eH inverse.
-Apply exists_tensorPullback_affine_sections to g, V, W and P, swap the two tensor
-factors, and extend the preceding A-linear isomorphism by B. This gives a
-bijective B-linear map. The affine section theorem sends s tensor z to s times
-the restricted adjunction unit of z; substituting z = D.sourceClass(eH inverse xi)
-is exactly the displayed formula. For empty opens or zero F these are zero
-modules; in degree zero the same edges are the augmentation comparisons. -/
+(Stacks, Tags 02KH, 01XJ, 01E4 and 03FD.) -/
 theorem Scheme.Modules.exists_flatBaseChange_affine_source
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f] [Flat g] [Flat (pullback.snd g f)]

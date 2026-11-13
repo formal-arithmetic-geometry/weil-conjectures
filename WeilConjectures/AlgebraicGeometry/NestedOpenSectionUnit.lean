@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Nested open restriction and inverse-image units
 
-Source: Stacks Project, Tag 03F3; open restriction unit compatibility.
+## References
+
+* Stacks Project, Tag 03F3.
 -/
 
 @[expose] public section
@@ -88,25 +90,7 @@ private theorem composition_unit_coefficients
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The section pullback unit between nested opens is restriction, after the specified
-composition and localization comparisons.
-Source: Stacks Project, Tag 03F3; steps 2 and 3 of
-`lem-weil-pbc-etale-open-section-pullback` and `open_restriction_pullback_unit`.
-(blueprint: lem-weil-pbc-nested-open-section-unit)
-
-Proof: Evaluate the localization adjunction unit at vU and restrict along the
-identity diagonal δ : bU → U ×_X U. The site adjunct of δ is the identity of vU,
-so the unit followed by δ is the inverse U localization comparison. Next use the
-map ψ = (i,id) : bV → U ×_X V. Its site adjunct is the inclusion f : vV → vU,
-so the V unit followed by ψ and the V localization comparison is F(f).
-The pullback composition comparison sends ψ to t followed by the pullback of δ:
-check the two outer projections and the two inner projections by the pullback
-universal property. Evaluate the inverse-image composition unit law at vU and
-restrict along ψ. Naturality moves δ across the i unit, and the first identity
-replaces the U unit followed by δ by the inverse U localization comparison.
-Cancel the composition isomorphism, precompose with the U localization comparison,
-and postcompose with the V localization comparison. The second identity gives the
-claimed restriction map. No step uses nonemptiness or strict inclusion, so the
-argument includes empty and equal opens. -/
+composition and localization comparisons (Stacks, Tag 03F3). -/
 theorem nestedOpenSection_unit {X : Scheme.{u}} (U V : X.Opens) (h : V ≤ U)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     let bU := Scheme.Etale.mk (𝟙 U.toScheme)

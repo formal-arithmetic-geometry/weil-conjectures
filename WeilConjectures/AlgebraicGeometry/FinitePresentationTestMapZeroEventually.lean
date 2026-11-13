@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual vanishing on a quasi-compact test scheme
 
-Source: Stacks Project, Tag 01ZR (3), affine vanishing and Zariski gluing.
-(blueprint: lem-pc-fp-test-map-zero-eventually). -/
+## References
+
+* Stacks Project, Tag 01ZR.
+-/
 
 @[expose] public section
 
@@ -67,26 +69,7 @@ private lemma pullback_zero_of_comp {X Y Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- A module map on a quasi-compact test scheme over a stage vanishes at a later stage
 if its pullback to the limit is zero. Both modules are finitely presented and quasi-coherent.
-Source: Stacks Project, Tag 01ZR (3), affine vanishing and Zariski gluing.
-(blueprint: lem-pc-fp-test-map-zero-eventually).
-
-Proof: Put b = t followed by the structural map to Spec(R_k). Apply
-finitePresentation_zero_map_descent to b, with both initial indices equal to k.
-Transport F, G and δ along the canonical isomorphism from the pullback of b along
-identity to W. Its limit base change is canonically isomorphic to the pullback
-of t along overlapLimitMap: both objects represent pairs of a point of W and a
-point of the limit lying over the same point of Spec(R_k). At a later index l,
-the same pullback-pasting argument identifies the base change with the pullback
-of t along overlapStageMap. These isomorphisms commute with the projections to W
-by uniqueness in the pullback universal property. The module pullback comparison
-is obtained from pullbackComp and the natural isomorphism between moduleBaseChange
-and the native pullback: both are left adjoint to the same pushforward. Naturality
-of these isomorphisms and cancellation of their invertible components transport
-zero in both directions. The zero-map descent theorem now gives l. Its hypotheses
-hold because b is quasi-compact, F is finitely presented (hence finite type) and
-quasi-coherent, and G is
-finitely presented and quasi-coherent. Empty W, zero modules, identity transition
-maps and a singleton index set require no exceptions. -/
+(Stacks, Tag 01ZR) -/
 theorem finitePresentation_test_map_zero_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

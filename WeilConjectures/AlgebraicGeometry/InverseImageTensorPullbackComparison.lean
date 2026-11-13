@@ -12,8 +12,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Inverse image as tensor pullback along the identity adjoint ring map
 
-Source: Stacks Project, Sheaves, Tags 008A and 0094; Cohomology, Tag 06YC.
-(blueprint: lem-pc-inverse-image-tensor-pullback-comparison).
+## References
+
+* Stacks Project, Sheaves, Tags 008A and 0094; Cohomology, Tag 06YC.
 -/
 
 @[expose] public section
@@ -112,22 +113,7 @@ private theorem changeOfRingsEqIdIso_naturality {X : TopCat.{u}}
   exact changeOfRingsIdIso_naturality R a
 
 /-- Tensor pullback to the inverse-image ring agrees with termwise module inverse image.
-Source: Stacks Project, Sheaves, Tags 008A and 0094; Cohomology, Tag 06YC.
-
-Proof: the adjoint of the inverse-image ring adjunction unit is the identity on
-`inverseImageRing f R`, by the adjunction triangle identity. In degree `n`, the tensor
-pullback therefore extends scalars along the identity on that ring sheaf. On sections,
-identify `A ⊗[A] M` with `M` by `a ⊗ m ↦ a • m`, with inverse `m ↦ 1 ⊗ m`.
-The balancing relation proves both inverse identities. The characterized restrictions
-of `changeOfRingsPresheaf` commute with these maps, since module restrictions are
-semilinear. Thus they form an isomorphism of presheaves of modules. Sheafify it and
-compose with the sheafification counit isomorphism for the already sheaf-valued
-inverse-image module. Naturality in module maps follows on pure tensors from
-`id ⊗ a` and `a (r • m) = r • a m`, and survives sheafification. Apply this naturality
-to each differential of `K` to get inverse morphisms of complexes degreewise.
-This uses neither K-flatness nor exactness; it also applies to empty spaces and to
-zero rings and modules.
-(blueprint: lem-pc-inverse-image-tensor-pullback-comparison). -/
+(Stacks, Tags 008A, 0094, 06YC) -/
 theorem exists_inverseImage_tensorPullback_iso {X Y : TopCat.{u}} (f : X ⟶ Y)
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
     (K : CochainComplex (SheafOfModules.{u}

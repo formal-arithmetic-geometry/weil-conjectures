@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.LocalFiniteFreeHomologyNatural
 import WeilConjectures.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates
 /-! # Affine sheaf model of the Koszul Ext coefficient morphism
 
-Source: Stacks Project, Tag 0BQZ, affine computation of regular immersion Ext. -/
+## References
+
+* Stacks Project, Tag 0BQZ.
+-/
 
 @[expose] public section
 
@@ -35,31 +38,7 @@ namespace AlgebraicGeometry
 
 -- Matching the natural coefficient functors unfolds both derived Hom coefficient objects.
 /-- On the affine chart, the two Ext sheaves and their coefficient map are the
-sheafifications of the dual Koszul cohomology modules and their reduction map.
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext.
-(blueprint: new-k1-koszul-ext-coefficient-affine-model).
-
-Proof: The closed immersion on the chart is the quotient spectrum for the kernel
-ideal. Augment the Koszul complex by its degree-zero quotient map. Koszul
-regularity makes this a resolution, and its exterior terms are finite free and
-zero above n. Sheafification on the affine chart is exact, so it resolves the
-restricted pushforward of the structure sheaf. Extend the chain complex to
-nonpositive integer cochain degrees. Apply the bounded finite free internal Hom
-comparison with coefficients O and the quotient sheaf. Use a common K-injective
-comparison to make both identifications natural in the coefficient variable.
-The supplied equality ha identifies the coefficient map with the quotient map,
-which acts on Hom cochains by reduction of values. In degree k the differential
-is (-1)^(k+1) times precomposition with the Koszul boundary for both coefficients,
-so these are precisely the two recorded natural-number dual complexes after
-extension to integer degrees. The degree-m homology comparisons for this
-extension commute with the reduction map. Tilde preserves finite limits by
-tilde_preserves_finite_limits and colimits by its adjunction, hence is exact.
-Restriction along the chart is an exact equivalence. They commute with homology
-and its maps, producing the two sheaf isomorphisms and their square.
-Work through representatives in the supplied derived universe, so no derived
-category on the chart in a different universe is compared. For n=0 the quotient
-ideal is zero and the resolution is the degree-zero ring; for m>n both Hom
-cohomology modules vanish. These cases require no additional hypotheses. -/
+sheafifications of the dual Koszul cohomology modules and their reduction map. -/
 theorem koszulExtCoefficient_affine_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

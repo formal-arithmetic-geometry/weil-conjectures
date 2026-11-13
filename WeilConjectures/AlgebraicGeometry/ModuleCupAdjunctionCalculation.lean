@@ -10,9 +10,8 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 open CategoryTheory MonoidalCategory
 set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme.Modules
-/-- Adjunction transposition combines the tensor, evaluation and comparison squares.
-Source: Stacks, Tag 0FP3, the adjunction calculation in the proof of Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-polygon-calculation) -/
+/-- Adjunction transposition combines the tensor, evaluation and comparison squares
+(Stacks, Tag 0FP3). -/
 theorem moduleCup_polygon_calculation
     {C C₀ E E₀ : Type*} [Category* C] [Category* C₀] [Category* E] [Category* E₀]
     [MonoidalCategory C] [MonoidalCategory C₀]

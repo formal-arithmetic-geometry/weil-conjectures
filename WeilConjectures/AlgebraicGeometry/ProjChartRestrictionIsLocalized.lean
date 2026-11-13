@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-!
 # Universal property of principal-chart restriction
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-chart-restriction-is-localized)
+## References
+
+* Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-chart-restriction-is-localized) -/
+localization. This changes only scalars, not the localization or its operations. -/
 local instance localizedModuleHomogeneousScalarsRestrictionLocalization (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -84,24 +83,8 @@ private theorem canonical_chart_constants
   exact congrArg (fun h : Localization.Away f.val.1 →+*
     Localization p.val.asHomogeneousIdeal.toIdeal.primeCompl ↦ h x.val) hm
 
-/-- Pulled-back affine constants agree with the canonical homogeneous-chart restriction.
-
-Source: Stacks Project, Constructions, Tag 01M4 (1)(h) and Tag 01MB.
-(blueprint: lem-weil-pbc-proj-chart-restriction-is-localized)
-
-Proof: The canonical affine chart isomorphism is induced by awayToSection,
-so a constant x pulled back from Spec R[f] is awayToSection f x, restricted
-to the image of V. Write x=a/f^n using homogeneous fraction surjectivity.
-The S-algebra map supplied by hcanonical fixes the image of a and of f.
-Since f is invertible in S_f, its image is invertible in S_g and the map
-sends a/f^n to a times the inverse of f^n in S_g. This is exactly the
-restriction of the fraction section awayToSection f x to D[g]: both have
-at every point the same homogeneous-localization germ. Equality of germs
-implies equality of sections. Injectivity of the homogeneous localization
-in S_g identifies this expression with rhoS f g i x. Finally appIso for
-the open immersion and transport along hg identify the image-open section
-with its pulled-back section on V. This argument uses no nonzero or domain
-hypothesis; the zero ring and empty chart satisfy the same identities. -/
+/-- Pulled-back affine constants agree with the canonical homogeneous-chart restriction
+(Stacks, Constructions, Tags 01M4 and 01MB). -/
 private theorem gradedModuleChart_restriction_constants
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])
     (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),
@@ -269,34 +252,8 @@ private theorem gradedModuleChart_restriction_transport
 
 /-- The canonical restriction from a homogeneous chart is a localization map,
 with scalars restricted along the pulled-back chart constants.
-
-Source: Stacks Project, Constructions, Tags 01M4 (1)(e),(h), 01M7 and 01MB,
-last paragraph. (blueprint: lem-weil-pbc-proj-chart-restriction-is-localized)
-
-Proof:
-Write r=a/f^n with a homogeneous of degree n*deg(f), and take the positive-degree
-homogeneous element g=f*a. Its chart lies inside the f-chart, and the inverse image
-of D(r) has image D_+(g). The intersection formula gives U(f,g)=r^deg(f).
-The canonicality assumption identifies rhoS(f,g) with restriction of chart
-constants: an S-algebra map out of S_f is determined on each a/f^n by its values
-on S and the inverse of f. Transport sections along the open immersion and alpha g.
-More precisely, let beta:E(V) ≃+ Z g be this transported alpha g. Naturality of
-restrictAppIso and hrestriction give beta(l(q))=rho(f,g)(q). The canonical ring
-comparison and hscalar give beta(k(x) • s)=rhoS(f,g)(x) • beta(s). Hence
-psi=theta(f,g) inverse composed with beta is an R[f]-linear equivalence from E(V)
-to the localization of Z f at U(f,g): htheta identifies the R[f] action through
-thetaS with rhoS, and gives psi(l(q))=q/1. Multiplication by U is invertible on
-this localization. Each psi(s) has the form q/U^j, so U^j • s=l(q). If
-l(q1)=l(q2), equality of q1/1 and q2/1 supplies j with U^j • q1=U^j • q2.
-Transport these three facts along psi. Put d=deg(f)>0. Since U=r^d, the last two
-facts already use powers r^(d*j). For invertibility, if A is multiplication by r
-and B is the inverse of A^d, then A commutes with B and A^(d-1)*B is an inverse
-of A. Thus every power of r acts invertibly and all three localization conditions
-hold for powers of r; equivalently one can use IsLocalizedModule.of_exists_mul_mem.
-For r=0 the open is empty, both the transported module and its localization
-are zero and the three conditions still hold. For r a unit restriction is the
-whole-chart identification. This result asserts only the universal property of
-restriction; it constructs neither the final comparison nor its scalar action. -/
+This asserts only the universal property of restriction
+(Stacks, Constructions, Tags 01M4, 01M7 and 01MB). -/
 theorem gradedModuleChart_restriction_isLocalized
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])

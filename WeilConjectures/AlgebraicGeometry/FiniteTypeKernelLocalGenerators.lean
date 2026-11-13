@@ -14,9 +14,11 @@ import Mathlib.CategoryTheory.Sites.CoversTop.Over
 
 /-! # Kernel finiteness from a chosen local generating family
 
-Source: Stacks Project, Modules, Lemma 01BY (2), proof, second paragraph;
-Lemma 01B7 (1) and Definition 01B5.
-(blueprint: lem-weil-pbc-finite-type-kernel-local-generators).
+## References
+
+* [Stacks Project, Tag 01BY](https://stacks.math.columbia.edu/tag/01BY)
+* [Stacks Project, Tag 01B7](https://stacks.math.columbia.edu/tag/01B7)
+* [Stacks Project, Tag 01B5](https://stacks.math.columbia.edu/tag/01B5)
 -/
 
 @[expose] public section
@@ -150,21 +152,7 @@ private theorem finiteType_kernel_of_local_generators
 /-- If the kernels of the composites with a chosen local free epimorphism are
 finite type, then the original kernel is finite type. No coherence assumption
 or finiteness assumption on the chosen generating families is needed.
-Source: Stacks Project, Modules, Lemma 01BY (2), proof, second paragraph;
-Lemma 01B7 (1) and Definition 01B5.
-(blueprint: lem-weil-pbc-finite-type-kernel-local-generators).
-
-Proof: On the cover q.X, put p = (q.generators i).π and L = kernel (p ≫ φ.over _).
-The morphism kernel.ι (p ≫ φ.over _) ≫ p factors through kernel (φ.over _).
-This factor is epi: a section killed by φ locally lifts through the epi p;
-each lift is killed by the composite and therefore lies in L. As L is finite
-type, its quotient kernel (φ.over _) is finite type by pushing forward local
-finite generators. Restriction computes kernels sectionwise, so this is the
-restriction of kernel φ. Refine the cover q.X by the finite generating covers
-of these local kernels. Cover transitivity makes this a cover of U, and
-forgetting the intermediate slice identifies its finite families with local
-finite generators of kernel φ. Thus kernel φ is finite type. Empty covers of
-an empty open and zero generating families satisfy the same argument. -/
+(Stacks, Tag 01BY (2).) -/
 theorem finiteType_kernel_local_generators (X : RingedSpace.{u})
     (U : Opens X) {F H : SheafOfModules.{u} ((moduleRings X).over U)}
     (φ : F ⟶ H) (q : SheafOfModules.LocalGeneratorsData.{u, u, u, u} F)

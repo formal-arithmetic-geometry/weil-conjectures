@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
 /-! # Transition compatibility for adjoints of a module system
 
-Source: Stacks Project, Tags 0093, 0096 and 09ZT.
+## References
+
+* Stacks Project, Tags 0093, 0096 and 09ZT.
 -/
 
 @[expose] public section
@@ -29,9 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-/-- The explicit adjoint followed by pushforward composition.
-Source: Stacks Project, Tags 0093 and 0096
-(blueprint: lem-weil-pbc-finite-structure-adjoint-transitions). -/
+/-- The explicit adjoint followed by pushforward composition (Stacks, Tags 0093, 0096). -/
 noncomputable def finiteStructureAdjoint
     {X S Y : Scheme.{u}} (j : S ⟶ X) (p : Y ⟶ S) (G : X.Modules)
     (a : (tensorPullback j).obj G ⟶ (pushforward p).obj
@@ -42,21 +42,7 @@ noncomputable def finiteStructureAdjoint
       (pushforwardComp p j).hom.app (SheafOfModules.unit Y.ringCatSheaf)
 
 /-- Compatible module maps have compatible adjoints on every open, when the composition
-comparison is the mate of the canonical pushforward comparison.
-Source: Stacks Project, Tags 0093, 0096 and 09ZT, adjunction step of algebraization.
-
-Proof: Apply the tensor-pullback adjunction for i to the compatibility equation. The
-base-change map was defined as the mate of the pushforward of the unit along g. Following
-it by the structure-sheaf pullback map gives the pushforward of g's ring map, by the
-structure-sheaf adjunction formula. Naturality of the unit for j moves a through that
-unit. The specified mate composition comparison identifies the composite unit for j and i
-with the unit for their composite, transported along wj. Naturality of the pushforward
-composition isomorphisms and the two square equations then identify both composites in
-the module category. Evaluate on U and x. Pushforward composition is restriction along
-the equality of inverse-image opens, so this is exactly the displayed appLE equation.
-The argument uses no affineness, coherence, properness or invertibility of a. On an empty
-open both sides are maps to the zero ring, and the same computation applies.
-(blueprint: lem-weil-pbc-finite-structure-adjoint-transitions). -/
+comparison is the mate of the canonical pushforward comparison (Stacks, Tags 0093, 0096, 09ZT). -/
 theorem finiteStructureAdjoint_transitions
     (X : Scheme.{u}) (S Y : ℕ → Scheme.{u})
     (j : ∀ n, S n ⟶ X) (p : ∀ n, Y n ⟶ S n)

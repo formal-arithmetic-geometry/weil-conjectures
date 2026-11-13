@@ -13,7 +13,9 @@ import WeilConjectures.Topology.InverseImageRegularModule
 
 /-! # The regular module of a ring-sheaf pushout
 
-Source: Stacks Project, Morphisms, Tag 01SB, scalar-extension construction.
+## References
+
+* Stacks Project, Tags 01SB and 008A.
 -/
 
 @[expose] public section
@@ -170,24 +172,8 @@ local instance instHasLeftKanExtension_pushoutRegularModuleComparison
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The regular module of the pushout algebra is the tensor pullback of the direct
-image of the regular structure module, compatibly with the pullback unit.
-Source: Stacks Project, Morphisms, Tag 01SB, construction of h; Modules, Tag 008A.
-(blueprint: stage3-pushout-regular-module-comparison).
-
-Proof: Write A = f_*O_U and restrict its regular module along O_X → A. This is
-literally the module pushforward of O_U. Apply affine_module_tensor_baseChange
-(which does not assume affineness) to the regular A-module. Inverse image of the
-regular A-module is the regular inverse-image algebra module: the inverse-image
-unit commutes with addition and multiplication; uniqueness of extensions of
-these operations identifies the scalar action. Extension of this module along
-IA → B is the regular B-module. On the tensor presheaf the two maps are
-z tensor a ↦ z*t(a) and z ↦ z tensor 1. Balancing and the unit laws show they
-are inverse and B-linear, and naturality gives inverse maps after sheafification.
-Restrict scalars along b and compose this isomorphism with the cancellation
-isomorphism. Its unit formula sends the module pullback unit of d to
-1*t(η(d)) = δ(d). No affine hypothesis is needed for this sheaf-level comparison.
-The zero algebra and empty open cause no exception: the same formulas and
-balanced tensor identities apply. -/
+image of the regular structure module, compatibly with the pullback unit
+(Stacks, Tags 01SB and 008A). -/
 theorem exists_pushout_regularModule_comparison
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)
     (t : TopCat.Sheaf.inverseImageRing f.base

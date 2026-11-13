@@ -20,7 +20,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
-/-! # Abelian total sections of a pro-etale hypercover -/
+/-! # Abelian total sections of a pro-etale hypercover
+
+## References
+
+* Stacks Project, Tag 09A2.
+-/
 
 @[expose] public section
 
@@ -34,9 +39,7 @@ noncomputable section
 instance : Preadditive (CosimplicialObject AddCommGrpCat.{u + 1}) :=
   inferInstanceAs (Preadditive (SimplexCategory ⥤ AddCommGrpCat.{u + 1}))
 
-/-- Underlying abelian sections on a simplicial object over W.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+/-- Underlying abelian sections on a simplicial object over W (Stacks, Tag 09A2). -/
 def abelianHypercoverSections (X : Scheme.{u}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) :
     Sheaf (topology X) AddCommGrpCat.{u + 1} ⥤
@@ -52,9 +55,8 @@ private instance alternating_additive :
     (AlgebraicTopology.alternatingCofaceMapComplex AddCommGrpCat.{u + 1}).Additive where
   map_add := by intros; rfl
 
-/-- Alternating section rows, extended by zero in negative simplicial degrees.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+/-- Alternating section rows, extended by zero in negative simplicial degrees
+(Stacks, Tag 09A2). -/
 def abelianHypercoverRows (X : Scheme.{u}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) :
     Sheaf (topology X) AddCommGrpCat.{u + 1} ⥤ CochainComplex AddCommGrpCat.{u + 1} ℤ :=
@@ -68,9 +70,8 @@ instance (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W)) :
   infer_instance
 
 /-- Coproduct total sections with differential δ + (-1)^p d.
-For bounded-below inputs this agrees with the finite effective diagonal total.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+For bounded-below inputs this agrees with the finite effective diagonal total
+(Stacks, Tag 09A2). -/
 def abelianHypercoverTotal (X : Scheme.{u}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) :
     CochainComplex (Sheaf (topology X) AddCommGrpCat.{u + 1}) ℤ ⥤
@@ -160,14 +161,7 @@ private theorem total_preservesColimits {C : Type*} [Category* C] [Preadditive C
     simpa only [ιTotal_map_assoc] using hi
 
 /-- Total abelian hypercover sections preserve small colimits when all terms are
- affine weakly contractible.
-Source: Stacks Project, Tags 0935(2), 0946(1), and 09A2.
-(auxiliary; not a blueprint node).
-Proof: evaluate the cosimplicial object in each degree and apply affine exact
-colimit-preserving evaluation. Alternating cofaces and extension by zero preserve
-colimits degreewise. Flipping preserves them degreewise. In a total degree, the
-coproduct of the individual colimits is the colimit of the coproducts; the descent
-map is defined on each total summand and its equations follow on each summand. -/
+affine weakly contractible (Stacks, Tags 0935, 0946 and 09A2). -/
 theorem abelianHypercoverTotal_preservesColimits
     (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W))
     (haff : ∀ n : ℕ, IsAffine (U _⦋n⦌).left.left)

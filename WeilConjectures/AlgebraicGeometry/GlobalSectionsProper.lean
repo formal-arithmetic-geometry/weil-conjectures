@@ -32,14 +32,8 @@ namespace AlgebraicGeometry.Scheme
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- **Global functions on a proper integral scheme.** If `X` is integral and universally closed
-(for instance proper) over a field `k`, then `Γ(X, 𝒪_X)` is a field: it is a domain which is
-integral over `k` (`AlgebraicGeometry.Scheme.isIntegral_globalSectionsRingHom`). For proper `X`
-it is moreover finite over `k` by finiteness of coherent cohomology
-(`AlgebraicGeometry.Scheme.finite_globalSectionsRingHom_of_isProper`), so it is a finite field
-extension of `k`. Part (2) of the blueprint node is
-`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral`.
-
-(blueprint: `prose-C-04`) -/
+(for instance proper) over a field `k`, then `Γ(X, 𝒪_X)` is a field. For proper `X`
+it is moreover a finite field extension of `k`. -/
 theorem isField_globalSections_of_universallyClosed [UniversallyClosed (X ↘ Spec (.of k))]
     [IsIntegral X] : IsField Γ(X, ⊤) := by
   let : Algebra k Γ(X, ⊤) := (globalSectionsRingHom k (X := X)).toAlgebra
@@ -48,12 +42,7 @@ theorem isField_globalSections_of_universallyClosed [UniversallyClosed (X ↘ Sp
 
 /-- **`H⁰(X, 𝒪_X) = k` is equivalent to geometric connectedness.** A proper geometrically
 reduced scheme `X` over a field `k` has `Γ(X, 𝒪_X) = k` if and only if it is geometrically
-connected. If `Γ(X, 𝒪_X) = k`, then by flat base change `Γ(X_K, 𝒪_{X_K}) = K` for every field
-`K` over `k` (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`), so `X_K` is connected;
-the converse is Stacks 0BUG
-(`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyConnected`).
-
-(blueprint: `lem-pc-h0-geom-connected`) -/
+connected (Stacks 0BUG). -/
 theorem globalSectionsBijective_iff_geometricallyConnected [IsProper (X ↘ Spec (.of k))]
     [GeometricallyReduced (X ↘ Spec (.of k))] :
     GlobalSectionsBijective k X ↔ GeometricallyConnected (X ↘ Spec (.of k)) := by

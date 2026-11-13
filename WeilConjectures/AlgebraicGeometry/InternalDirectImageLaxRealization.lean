@@ -11,12 +11,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 
 /-! # Section realization of the actual internal direct-image pairing
 
-Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK
-(auxiliary; not a blueprint node).
-
 All functors, adjunctions, balancing projections and pure-tensor comparisons below
 are the existing specified constructions. Evaluation is used only after the canonical
 pure-tensor map into a sheaf tensor, never as a tensor-preserving functor.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK.
 -/
 
 @[expose] public noncomputable section
@@ -256,32 +257,8 @@ private theorem projection_pairing {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 -- The two specified adjunctions involve large coefficient types.
 -- Comparisons of reconstructed module structures involve large coefficient types.
-/-- The fixed section comparisons identify the actual adjunction and lax direct image.
-Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK
-(auxiliary; not a blueprint node).
-
-Proof:
-1. The existing internal-module operations transport theorem gives the mate equation
-   and the unit and counit equations for the specified comparisons.
-2. The internal pairing normalization gives its value on local pure tensors. The
-   monoidality of the sheaf-to-presheaf pushforward comparison identifies the abelian
-   pairing on the same generators. Cancel the relative-tensor projection and use
-   tensor induction to obtain the balancing-projection equation.
-3. The ordinary tensor comparisons fix pure tensors, and the direct-image comparison
-   fixes sections. Naturality of section pure tensors follows from the tensorator of
-   the module-sheafification right adjoint. These facts and the two pushforward
-   normalizations identify both composites of the tensor comparison square.
-4. Ringed direct-image lax uniqueness gives the section unit formula. Internal lax
-   left-unitality at the regular module, evaluated on 1 tensor 1, gives that the
-   internal unit sends 1 to 1. The reconstructed composite is linear over R_Y,
-   so it sends r to c(r). The ordinary unit comparisons fix sections, proving
-   the unit comparison square. The section pairing formula is its normalization.
-5. Naturality transports the adjunction unit along the equivalence counit from
-   the internal inverse image of any section module. The internal adjunction Hom
-   formula at the identity is geometric insertion followed by extendUnitHom.
-   Evaluating the transported equation and using the direct-image comparison's
-   section formula yields the required arbitrary-module unit formula.
--/
+/-- The fixed section comparisons identify the actual adjunction and lax direct image
+(Stacks, Tags 03D6, 03D7 and 03EK). -/
 theorem internal_direct_image_lax_realization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
       (.mk _ _ _ _ (pullComparison Λ f).inv)) = (pushComparison Λ f).hom ∧

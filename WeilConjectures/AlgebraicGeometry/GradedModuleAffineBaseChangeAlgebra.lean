@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GradedModuleQuasicoherentRealization
 import WeilConjectures.AlgebraicGeometry.GradedModuleRealizationFiniteType
 /-! # The algebra-module part of graded affine realization
 
-Source: Stacks Project, Tag 0897, proof; Tags 01SB and 01PB.
+## References
+
+* [Stacks Project, Tags 0897, 01SB, 01PB]
 -/
 
 @[expose] public section
@@ -27,31 +29,7 @@ namespace AlgebraicGeometry
 
 /-- The homogeneous action and local generators give a finite-type quasi-coherent
 module over the direct image algebra, before applying the affine correspondence.
-
-Source: Stacks Project, Tag 0897, realization and finite-type paragraphs;
-Morphisms, Tag 01SB; Properties, Tag 01PB.
-(blueprint: lem-weil-pbc-graded-module-affine-base-change-algebra)
-
-Proof in words:
-Let pi be the affine base change of Spec(A -> B). On an affine open Spec(R) of X,
-its direct image algebra has sections R tensor_A B. Form the sheaf coproduct of G_m.
-For b in graded_k, use mu m k b followed by the coproduct inclusion in degree m+k.
-The internal direct sum decomposition of B extends this action additively to B.
-The additive and multiplication laws give an associative action; the scalar law
-at a=1 gives the unit law. Each mu is O_X-linear, so the action commutes with R,
-and the scalar law makes it balanced over A. It therefore extends to R tensor_A B.
-These actions commute with localization and restriction, and glue on affine opens
-to an action of pi_*O_Y on the coproduct. This defines N and the scalar-restriction
-isomorphism. The coproduct is quasi-coherent because all G_m are; the first clause
-of the affine module correspondence makes N quasi-coherent over pi_*O_Y.
-For finite type, near x choose the finitely many sections s_i in hfinite and include
-them in the coproduct. A section of a sheaf coproduct is locally a finite sum of
-homogeneous sections. Apply hfinite to those finitely many sections and intersect
-the resulting neighbourhoods. Each summand is an O_X-linear combination of
-mu_b(s_i), which is a pi_*O_Y-linear combination of the same s_i under the action
-just constructed. Thus these sections locally generate N over pi_*O_Y, giving
-a locally surjective map from a finite free module and proving N.IsFiniteType.
-No module on Y or inverse correspondence is constructed in this step. -/
+(Stacks, Tag 0897) -/
 theorem exists_finiteType_graded_algebra_module
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     (graded : ℕ → Submodule A B)

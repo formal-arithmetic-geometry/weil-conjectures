@@ -20,7 +20,7 @@ public import Mathlib.RingTheory.Etale.Descent
 
 We show that properness, smoothness of relative dimension `n` and geometric integrality of a
 scheme over a field `k` can be checked after base change to an arbitrary field extension `K` of
-`k` (blueprint `proposition-jacobian-over-ground-field--1`).
+`k`.
 
 ## Main statements
 
@@ -243,8 +243,7 @@ theorem GeometricallyIntegral.of_isPullback {k K : Type u} [Field k] [Field K] [
 
 /-- A property of morphisms satisfying fpqc descent descends along a field extension: if the base
 change `Z'` of a `k`-scheme `Z` to a field extension `K` of `k` has it over `K`, then `Z` has it
-over `k`. This applies to being locally of finite type, smooth or proper, among others (blueprint
-`proposition-jacobian-over-ground-field--1`). -/
+over `k`. This applies to being locally of finite type, smooth or proper, among others. -/
 theorem of_isPullback_Spec_map_algebraMap (P : MorphismProperty Scheme.{u})
     [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] {k K : Type u} [Field k] [Field K]
     [Algebra k K] {Z Z' : Scheme.{u}} {z : Z ⟶ Spec (.of k)} {z' : Z' ⟶ Spec (.of K)}
@@ -255,7 +254,7 @@ theorem of_isPullback_Spec_map_algebraMap (P : MorphismProperty Scheme.{u})
 
 /-- Connectedness descends along a field extension: if the base change `Z'` of a `k`-scheme `Z`
 to a field extension `K` of `k` is connected, then so is `Z`, the projection `Z' ⟶ Z` being
-surjective (blueprint `proposition-jacobian-over-ground-field--1`). -/
+surjective. -/
 theorem connectedSpace_of_isPullback_Spec_map_algebraMap {k K : Type u} [Field k] [Field K]
     [Algebra k K] {Z Z' : Scheme.{u}} {z : Z ⟶ Spec (.of k)} {z' : Z' ⟶ Spec (.of K)}
     {q : Z' ⟶ Z} (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K))))
@@ -267,9 +266,7 @@ theorem connectedSpace_of_isPullback_Spec_map_algebraMap {k K : Type u} [Field k
 
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z'` to `K` is proper, smooth
-of relative dimension `n` and geometrically integral over `K`. Then so is `Z` over `k`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+of relative dimension `n` and geometrically integral over `K`. Then so is `Z` over `k`. -/
 theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux {k K : Type u}
     [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
     (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)

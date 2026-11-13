@@ -21,7 +21,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraization of the comparison over a complete affine base
 
-Source: Stacks Project, Tag 088B, final complete-base paragraph; Tags 087W and 0883.
+## References
+
+* Stacks Project, Tags 088B, 087W and 0883
 -/
 
 @[expose] public section
@@ -34,30 +36,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Over a complete Noetherian affine base the formal comparison is the completion
-of an algebraic adjunction map, followed by the pushforward of an isomorphism.
-
-Source: Stacks Project, Tag 088B, paragraph beginning with the complete affine base,
-and Tags 087W and 0883.
-(blueprint: lem-weil-pbc-formal-comparison-complete-base-algebraization)
-
-Proof: The affine formal-module equivalence identifies G with the completion of the
-coherent sheaf associated to its finite module of inverse-limit sections. Completeness
-identifies that module over the completion with a module over A itself. Denote its
-coherent sheaf by A0. Pullback commutes with quotient systems, so beta identifies the
-completion of p* A0 with that of F. Full faithfulness on the proper scheme lifts beta
-and its inverse to maps which are mutually inverse: their composites complete to the
-identity, and injectivity of completion forces the composites to be identities.
-Naturality of the supplied adjunction unit with respect to quotient projections
-identifies its completed map with the degreewise units appearing in hAlpha.
-Coherence of p* A0 follows from tensor pullback over a Noetherian scheme. The affine
-limit cones for A0 and p_* F give the displayed section isomorphisms. Degree-zero
-formal functions on the proper scheme makes all pushed-forward
-quotient section projections jointly monic. Precompose the claimed square with
-the inverse of eA and test it on those projections. The equations hKappa and
-hAlpha, the limit projection equations, and naturality of the supplied adjunction
-unit reduce it to the quotient compatibility of b. Cancel the inverse of eA.
-No isomorphism of p over any open is needed. For a zero ring the schemes and modules
-are empty/zero, and the same equivalence and cancellation argument apply. -/
+of an algebraic adjunction map, followed by the pushforward of an isomorphism
+(Stacks, Tag 088B; Tags 087W and 0883). -/
 theorem formalComparison_complete_base_algebraization
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

@@ -11,8 +11,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # OpenModuleImageSeparated
 
-Source: Stacks Project, Cohomology, Tags 08BV and 01EB.
-(blueprint: lem-pc-open-module-image-gluing-uniqueness).
+## References
+
+* Stacks Project, Cohomology, Tags 08BV and 01EB.
 -/
 
 @[expose] public section
@@ -22,18 +23,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 set_option autoImplicit false
 namespace AlgebraicGeometry
 
-/-- Uniqueness half of the sheaf gluing universal property.
-Source: Stacks Project, Cohomology, Tags 08BV and 01EB.
-(blueprint: lem-pc-open-module-image-gluing-uniqueness)
-Proof: For every test open T and section z of Z(T), the two hypotheses say
-l(z) and l'(z) have equal restrictions to T ∩ U and T ∩ V. To see this, write
-the transported unit as the ordinary restriction unit followed by pushforward
-of the inverse overFunctorEquiv comparison, cancel that isomorphism, and use
-restrictAdjunction_unit_app_app. The two opens cover T, so separatedness of the
-underlying sheaf gives l(z) = l'(z). Extensionality of linear maps at each T,
-then extensionality of module presheaf morphisms, proves l = l'. This proof
-also works when X or a cover member is empty or the two members coincide.
--/
+/-- Uniqueness half of the sheaf gluing universal property. (Stacks, Tags 08BV and 01EB) -/
 theorem schemeOpenModuleImage_pullback_unique
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace))

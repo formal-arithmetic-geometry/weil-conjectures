@@ -10,10 +10,12 @@ import WeilConjectures.AlgebraicGeometry.PrincipalKoszulDualDifferential
 import WeilConjectures.AlgebraicGeometry.PrincipalKoszulDualEndpoints
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
-/-! # The strict singleton Koszul dual and principal cone towers
+/-!
+# The strict singleton Koszul dual and principal cone towers
 
-Source: Stacks Project, algebraization.tex, proof of Tag 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0A0E, <https://stacks.math.columbia.edu/tag/0A0E>
 -/
 
 @[expose] public noncomputable section
@@ -164,29 +166,8 @@ private theorem tensorDualTower_unit (P : ringedSiteComplex R) (m : ℕ) :
 end Assembly
 
 /-- The singleton dual Koszul tensor tower is the principal negative cone tensor tower,
-including its degree-zero augmentation, before applying inverse limit or localization.
-
-Source: Stacks Project, algebraization.tex, proof of Tag 0A0E, the identification
-of the dual positive Koszul complex with the negative Koszul complex.
-(auxiliary; not a blueprint node).
-
-Proof: remove the right tensor unit in the singleton positive Koszul diagram.
-In degree q the internal Hom into R[0] has only the component with source degree -q;
-all other product factors are zero. Project to that component and evaluate at one.
-This identifies its two nonzero terms with R in degrees -1 and 0. In degree -1
-its Hom differential is -(-1)^(-1) times precomposition, hence multiplication by
-a^(n+1), exactly the principal cone differential. Off these degrees both complexes
-are zero. The inverse maps insert the unique surviving Hom component. Dualizing
-the positive transition (1,a) gives (a,1), the principal cone transition. The dual
-of the projection to degree zero gives the cone inclusion. Tensor these maps with P,
-using symmetry to exchange P and the finite factor. The total tensor signs give
-a chain isomorphism: on the summand in bidegree (i,j) the interchange map
-is (-1)^(i*j) times the module symmetry. The augmentation has finite-factor
-degree zero and thus acquires no sign. The
-transition equations give an isomorphism of strict towers; transpose it degreewise.
-The component equation is precisely the degree-zero inclusion calculation. All
-formulas work for zero and invertible sections, P=0, the zero ring and empty sites;
-no regularity or K-flatness of P is used. -/
+including its degree-zero augmentation, before applying inverse limit or localization
+(Stacks, Tag 0A0E). -/
 theorem principalKoszul_dual_tower_comparison
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u})

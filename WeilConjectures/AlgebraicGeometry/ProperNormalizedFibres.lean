@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SteinUniversallyClosedFactor
 /-!
 # Connected fibres of a normalized proper morphism to an affine scheme
 
-Source: Stacks Project, More on Morphisms, Theorem 37.53.5 (Tag 03H2), normalized
- affine reduction (blueprint: lem-weil-pbc-stein-normalized-fibre-idempotent).
+## References
+
+* [Stacks Project, Tag 03H2](https://stacks.math.columbia.edu/tag/03H2) (Theorem 37.53.5)
 -/
 
 @[expose] public section
@@ -27,22 +28,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Theorem 37.53.5 (Tag 03H2), normalized affine reduction.
-(blueprint: lem-weil-pbc-stein-normalized-fibre-idempotent)
-If the canonical map from the base ring to global sections is an isomorphism, every fibre
-of a proper morphism is nonempty and connected; `ConnectedSpace` includes nonemptiness.
-
-Proof: The Stein factorization theorem
-`lem-weil-pbc-stein-universally-closed-factor` makes `X.toSpecΓ` surjective and its sharp
-map an isomorphism. The hypothesis makes `f.steinFactorizationBase` an isomorphism, so
-`f` is surjective and every section map `f.app U` is an isomorphism. Surjectivity gives
-nonempty fibres. For a clopen subset of a fibre, take its characteristic idempotent using
-`lem-weil-pbc-scheme-clopen-idempotent`. Lift this idempotent to a section over the inverse
-image of a neighbourhood using `lem-weil-pbc-stein-fibre-idempotent-image`, then use the
-inverse of `f.app U` to obtain a section on the base. The fibre square shows its restriction
-to the fibre is pulled back from a global section of the spectrum of the residue field.
-Such a section is zero or a unit; its idempotent image is therefore zero or one. The
-characteristic locus is consequently empty or the whole fibre, proving connectedness. -/
+/-- If the canonical map from the base ring to global sections is an isomorphism, every fibre
+of a proper morphism is nonempty and connected; `ConnectedSpace` includes nonemptiness
+(Stacks, Tag 03H2). -/
 theorem Scheme.Hom.connectedSpace_fiber_of_isProper_of_globalSections_iso
     {R : Type u} [CommRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [IsProper f]
     [IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop)] (s : Spec (.of R)) :

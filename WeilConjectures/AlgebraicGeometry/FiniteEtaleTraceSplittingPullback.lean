@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitting
 /-!
 # Pulling back an explicit finite splitting
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-splitting-pullback)
+## References
+
+* Stacks Project, Tag 03SH
 -/
 
 @[expose] public section
@@ -25,16 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pullback preserves an explicit splitting and its sheet sections.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-splitting-pullback)
-
-Proof. Pull each inclusion back along the induced map of ambient pullbacks.
-Finite coproducts of schemes are universal, so the pulled-back inclusions still
-form a coproduct. Open and closed immersions are preserved by pullback. Lift the
-old inverse projection together with the identity of the new base to obtain the
-new inverse projection. The two inverse identities follow by pullback uniqueness
-and the old inverse identities. The same uniqueness proves the displayed section
-compatibility. The construction keeps the index type, including an empty one. -/
+(Stacks, Section 03SH, after Definition 03SE.) -/
 theorem finiteEtaleTrace_splitting_pullback {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hf : Etale f) (T Z : X.Etale) (g : Z ⟶ T)
     (D : FiniteEtaleTraceSplitting f T) :

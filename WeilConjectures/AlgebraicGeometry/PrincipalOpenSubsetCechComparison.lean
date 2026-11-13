@@ -16,7 +16,9 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # Reindexing ordered Čech cochains by subsets
 
-Source: Stacks Project, Cohomology, Tags 01FJ, 01FK and 01FM.
+## References
+
+* Stacks Project, Cohomology, Tags 01FJ, 01FK and 01FM.
 -/
 
 @[expose] public section
@@ -321,30 +323,8 @@ private theorem orderedD_subset_formula (A : Type u) [CommRing A]
     Int.cast_smul_eq_zsmul A]
   exact congrArg (fun x ↦ (-1 : ℤ) ^ j.val • x) hnat
 
-/-- Subset-coordinate comparison for any module presheaf, without acyclicity assumptions.
-
-Source: Stacks Project, Cohomology, Tags 01FJ, 01FK and 01FM.
-(blueprint: lem-sc-principal-open-subset-cech-comparison).
-
-Proof: Construct the ordered complex for the family D(f_i), with cochains the
-products over strictly increasing tuples and the usual signed deletion maps.
-Restrict full cochains to increasing tuples. This is surjective in each degree
-by extension by zero, commutes with the differential by its formula, and hence
-the ordered differential squares to zero. The existing restriction homotopy
-lemma applies to this concrete complex for any family of opens: it has no cover
-hypothesis. Its induced homology maps are isomorphisms.
-Reindex each increasing tuple by its range; conversely enumerate a subset of
-size p+1 using its order embedding from Fin (p+1). These operations are inverse
-because an increasing enumeration of a finite linear order is unique. The
-universal properties of the chosen intersections identify the tuple's open
-with the intersection over its range, hence with D of the finite product.
-Transport sections along this equality. Omitting position j erases the element
-in that position, and exactly j entries are smaller. Thus reindexing carries
-the tuple differential to the displayed subset formula. Use these additive group
-isomorphisms as subset coordinates on the ordered complex. Integer signs agree
-with scalar signs in A. The restriction map induces isomorphisms on homology.
-Degrees above r-1 are empty products, so the construction includes
-the empty index set, repeated or empty opens, and vanishing high degrees. -/
+/-- Subset-coordinate comparison for any module presheaf, without acyclicity assumptions
+(Stacks, Tags 01FJ, 01FK and 01FM). -/
 theorem principalOpen_subset_cech_comparison
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (F : (Spec (.of A)).Opensᵒᵖ ⥤ ModuleCat.{u} A)

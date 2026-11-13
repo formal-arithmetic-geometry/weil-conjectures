@@ -29,16 +29,8 @@ private lemma eval_eq_res {C : Type u} [Category C]
   erw [Adjunction.homEquiv_unit]
   simp [constantSheafAdj, Adjunction.comp_unit_app]
 
-/-- Pullback of a global section commutes with the inverse-image stalk comparison.
-Source: Stacks Project, Tag 03Q1 (3), and the definition of globalSectionsUpperStarMap.
-(blueprint: lemma-sheaves-finite-support-finite-morphisms--2).
-
-Proof: Use inverseImage_stalk_germ with the identity étale neighbourhood of X.
-The definition of globalSectionsUpperStarMap evaluates the adjunction unit there,
-then restricts along the isomorphism from Y to the base change of X. The colimit
-relation for toPresheafFiber identifies the germ after that restriction with the
-induced germ in the base-change neighbourhood. Cancel the global-sections
-identification and apply the germ compatibility from inverseImage_stalk_germ. -/
+/-- Pullback of a global section commutes with the inverse-image stalk comparison
+(Stacks, Tag 03Q1). -/
 theorem exists_globalSections_stalk_comparison {X Y : Scheme.{u}} (g : Y ⟶ X)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :

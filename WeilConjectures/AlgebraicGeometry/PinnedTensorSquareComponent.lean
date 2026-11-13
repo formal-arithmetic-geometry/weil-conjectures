@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareRightSummand
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-pinned-tensor-square-component).
+## References
+
+* Stacks Project, Tags 0DJA and 0BYJ.
 -/
 
 @[expose] public section
@@ -43,18 +44,8 @@ local instance pinnedTensorSquareComponentInstance2 (Y : Scheme.{u}) :
 attribute [local instance] pinnedTensorSquareLeftSummandInstance3
   pinnedTensorSquareLeftSummandInstance4
 
-/-- Degreewise component equation for the explicitly constructed pinned stalk tensor coordinates.
-
-Proof: the degree-n source is scalar extension of the coproduct of tensor summands
-U.X p tensor V.X q for p+q=n. Scalar extension preserves this coproduct. Apply
-mapBifunctor.hom_ext_of_map to its summand injections. On each summand, the left-route
-and right-route calculation identify the two composites with the same explicit map:
-the module tensorator followed by κ_P,p tensor κ_Q,q, identity tensor S(a)_q, the
-injection into the target stalk tensor complex, and the inverse pinned comparison.
-Transitivity proves the summand equality; coproduct extensionality proves the component
-equality. The module generator calculation is used only by the left-route formula.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), degreewise generator calculation.
-(blueprint: lem-pc-pinned-tensor-square-component). -/
+/-- Degreewise component equation for the explicitly constructed pinned stalk tensor
+coordinates (Stacks, Tag 0DJA). -/
 theorem pinned_tensor_pullback_stalk_component
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

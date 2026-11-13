@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentSubmoduleIdeal
 /-!
 # Removing one coordinate from a finite free kernel
 
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph
-(blueprint: lem-pqf-finite-free-kernel-coordinate-step).
+## References
+
+* Stacks Project, Tag 01XF
 -/
 
 @[expose] public section
@@ -32,29 +33,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 700000 in
 -- Elaborating the nested kernel universal property and image transports needs a larger budget.
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
-with a quasi-coherent ideal quotient.
-
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph
-(blueprint: lem-pqf-finite-free-kernel-coordinate-step).
-
-Proof: Let q be the restriction of p to the coordinates indexed by I. The inclusion
-of these coordinates induces a monomorphism kernel q → kernel p. Project kernel p
-onto the coordinate indexed by none. Its kernel is exactly kernel q: a vector whose
-none coordinate vanishes comes uniquely from the coordinates indexed by I, and the
-condition that p kills it is the condition that q kills that vector. Both kernels
-are quasi-coherent by quasi-coherent kernel closure, since the finite free source
-and the structure sheaf are quasi-coherent. The image of the projection is therefore
-quasi-coherent by quasi-coherent image closure. On every affine open its sections,
-viewed inside the section ring, form an ideal. Quasi-coherence says these ideals
-localize on principal opens, so they define ideal sheaf data J. The image and
-J.toModules have identical section ranges inside the structure sheaf on the affine
-basis, by range_toModulesι_app. Injectivity gives inverse linear maps on that basis;
-uniqueness makes them compatible with restriction and sheaf gluing extends them.
-Transport the epimorphism onto the image along this isomorphism. Its kernel is the
-coordinate inclusion of kernel q, giving the short exact sequence. No surjectivity
-of p is needed. For I empty, q has zero source and the sequence identifies kernel p
-with its ideal image; for p zero the quotient is the unit ideal.
--/
+with a quasi-coherent ideal quotient. (Stacks, Tag 01XF.) -/
 theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
     {I : Type u} [Finite I]
     (p : SheafOfModules.free (R := X.ringCatSheaf) (Option I) ⟶

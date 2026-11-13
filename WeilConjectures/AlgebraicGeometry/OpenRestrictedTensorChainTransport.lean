@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorChainTransportPure
 /-! # Homology transport for normalized open tensor coordinates
 
-Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
+## References
+
+* Stacks Project, Tags 0098 and 0D5U.
 -/
 
 
@@ -27,21 +29,7 @@ variable [∀ Y : Scheme.{u},
 
 
 /-- The normalized tensor coordinates commute with the ordinary open restriction square.
-
-Proof: evaluate the specified tensorStalkIso components on a pure tensor d tensor x.
-Represent x by a section germ. The units of tensor pullback take this section to
-1 tensor its germ. The unit identities for the composition adjunction mates in
-openTensorRestrictionSquareIso identify the two composites with restriction of
-that section and multiplication by the image of d under the output stalk map.
-The hypotheses identify that image with eD d and the input germ with q x; the
-pure-tensor formula for t therefore gives the same result. Stalk elements are
-section germs. Tensor induction and additivity extend the equality from pure
-tensors to every element, and extensionality gives equality of additive maps.
-This is only a degreewise statement: it uses neither homology nor localization.
-Empty opens have no z0; zero complexes and zero rings require no extra condition.
-Source: Stacks Project, Tag 0098 (stalks of pullback modules), and Tag 0D5U
-(exact restriction); the units of the specified pullback adjunctions.
-(blueprint: lem-pc-open-restricted-tensor-chain-transport). -/
+This is only a degreewise statement: it uses neither homology nor localization. -/
 theorem openRestricted_tensor_chain_transport
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

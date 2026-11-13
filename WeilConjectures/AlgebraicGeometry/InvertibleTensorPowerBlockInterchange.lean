@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Interchanging blocks of powers of a line bundle
 
-Source: Stacks Project, Tag 01CA (tensor symmetry), and Tag 09MS (tensor powers).
-(blueprint: lem-sc-invertible-tensor-power-block-interchange).
+## References
+
+* Stacks Project, Tags 01CA and 09MS.
 -/
 
 @[expose] public section
@@ -67,19 +68,7 @@ private theorem localPowerSection_add {X : Scheme.{u}} {L : X.Modules}
     exact localPowerSection_cast ell (Nat.succ_add a b).symm
 
 /-- Concatenating two powers of an invertible module is unaffected by interchanging
-its two blocks and casting the total degree.
-
-Source: Stacks Project, Tag 01CA (tensor symmetry), Tag 09MS, coherent-equation-ses.
-(blueprint: lem-sc-invertible-tensor-power-block-interchange).
-Proof: restrict to a trivializing open for L. The recursive tensorPowAddIso sends
-ell^(a+b) to ell^a tensor ell^b, as follows by induction on a; its inverse
-concatenates these generators. The braiding interchanges the two generators,
-and the arithmetic cast identifies their total degrees. Both morphisms therefore
-send ell^a tensor ell^b to the same generator of L^(a+b). Since this tensor
-module is free of rank one on the open, the morphisms agree there. Equality
-of sheaf morphisms is local, so they agree on X. At a=0 or b=0 the generator
-is 1 and the same argument is the unitor identity; empty opens cause no exception.
-This statement would fail for a general module, which is why invertibility is required. -/
+its two blocks and casting the total degree. -/
 theorem tensorPowAddIso_inv_block_interchange {X : Scheme.{u}}
     (L : X.Modules) [L.IsInvertible] (a b : ℕ) :
     (L.tensorPowAddIso a b).inv =

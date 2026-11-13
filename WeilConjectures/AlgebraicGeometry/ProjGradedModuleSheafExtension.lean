@@ -17,12 +17,14 @@ import WeilConjectures.Topology.SheafOfModulesFromIndexedBasis
 /-!
 # ProjGradedModuleSheafExtension
 
-Source: Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
-Lemma 01M7 and Lemma 01MB (blueprint: lem-weil-pbc-proj-graded-module-sheaf-extension).
-
 The degree-zero modules are submodules with the already defined `degreeZeroFractions`
 as carriers. All choices of fraction representatives occur in the restriction formula.
 The section identifications are additive equivalences with explicit scalar compatibility.
+
+## References
+
+* Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
+  Lemmas 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -38,9 +40,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-sheaf-extension) -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsExtension (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -93,55 +94,8 @@ private theorem ringRestriction
   exact RingHom.congr_fun he r.val
 
 
-/-- Extension for a graded-module chart system.
-Source: Stacks Project, Constructions, Section 01M3 before Definition 01M6;
-Lemma 01M7 and Lemma 01MB. (blueprint: lem-weil-pbc-proj-graded-module-sheaf-extension)
-
-Proof:
-1. For each distinct positive homogeneous standard open choose one denominator. Identity
-   and composition give a presheaf of abelian groups on these opens. For any homogeneous
-   fraction y/f^m its given restriction has the canonical ordinary localization formula,
-   so it agrees with the restriction supplied by gradedModuleAwayRestriction. The same
-   is true of rhoS: an ambient map commuting with S is the unique map out of S_f into
-   S_g, and injectivity of the homogeneous localization's inclusion determines rhoS.
-2. Identify R[f] with the structure-sheaf sections using basicOpenIsoAway. To check ring
-   restriction compatibility, take a germ at x in D[g]. awayToSection_germ identifies
-   both ring restrictions with the image of the same fraction in S_(x); the ambient
-   localization map preserves that fraction. Sheaf separatedness proves their equality.
-   Transport scalar actions along the ring equivalences; semilinearity now gives a
-   presheaf of modules over the restriction of the structure sheaf to the basis.
-3. For a finite cover D[f] = union D[g_i], standardOpenProperties gives generators
-   u_i = g_i^deg(f)/f^deg(g_i) of the unit ideal in R[f]. The principal localization
-   comparisons in gradedModuleAwayRestriction identify Z[g_i] with Z[f] localized at
-   u_i, and Z[g_i*g_j] with Z[f] localized at u_i*u_j. Indeed its generator for the
-   product chart equals u_i*u_j, and the given rho agrees with its maps by step 1.
-   The comparison's composition law identifies both overlap maps with canonical
-   localization maps. coverModuleExact therefore gives existence and uniqueness of
-   gluing, including the empty cover. Intersections and finite refinements are given by
-   standardOpenProperties. Apply exists_sheafOfModules_from_basis to obtain F.
-4. For a denominator f not chosen for its open, transport the basis identification by
-   rho from the chosen denominator to f. Its inverse is the reverse rho: composition
-   and identity prove both inverse laws. Semilinearity and the ring compatibility of
-   step 2 give the scalar law; composition gives the restriction law for all f,g.
-   For another chart system on G, the maps beta_f.symm composed with alpha_f are linear
-   and compatible. The basis-extension universal property gives a unique morphism to G;
-   the inverse chart maps extend likewise, and uniqueness makes the composites identities.
-   Any compatible morphism is this one, so the conclusion is uniqueness of the morphism
-   together with its being an isomorphism.
-5. On the affine chart D[f] identified with Spec R[f], represent an arbitrary principal
-   generator r in R[f] by a homogeneous fraction a/f^n with deg(a)=n*deg(f). Put h=f*a,
-   a homogeneous element of positive degree (also if a=0). Its standard open is contained
-   in D[f] and corresponds to D(r): its principal generator h^deg(f)/f^deg(h) equals
-   r^deg(f), which has the same powers localization as r since deg(f)>0. The principal
-   localization comparisons of gradedModuleAwayRestriction thus identify F(D[h]) with
-   Z[f] localized at r. For two such opens their comparison maps are the canonical ones
-   by the fraction formulas and composition. Mathlib's tilde of the R[f]-module Z[f]
-   has these same sections and restrictions on principal opens. Basis uniqueness yields
-   a module-sheaf isomorphism on D[f]. The tilde sheaf is quasi-coherent, and these affine
-   charts cover X, hence F is quasi-coherent. If a chart is empty, its positive homogeneous
-   denominator is nilpotent, so its localized ring and module are zero and empty gluing
-   is valid. If X is empty the construction is the unique module sheaf on the empty space.
--/
+/-- Extension for a graded-module chart system
+(Stacks, Constructions, Lemmas 01M7 and 01MB). -/
 theorem gradedModuleSheaf_extension
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)
     (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),

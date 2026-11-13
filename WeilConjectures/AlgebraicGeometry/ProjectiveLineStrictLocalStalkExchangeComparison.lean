@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
 
 /-! # Stalk exchange under compatible strict localization
 
-Source: Stacks Project, Tags 03Q9 and 095T.
+## References
+
+* Stacks Project, Tags 03Q9 and 095T.
 -/
 
 @[expose] public section
@@ -33,30 +35,8 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- Restriction to compatible strict henselizations conjugates the stalk exchange.
-Only stalks of higher direct images are compared, not closed-fibre cohomology.
-
-Source: Stacks Project, Tag 03Q9 and the last two paragraphs of the proof of Tag 095T.
-(blueprint: lem-weil-pbc-p1-strict-local-stalk-exchange-comparison).
-
-Proof: the pullback square and the projective-line projection are qcqs by
-properness. Use the inverse-image stalk formula to identify the source stalk with
-the higher-direct-image stalk at σ. Extending σ and τ to Ω leaves their pointed
-étale-neighbourhood categories equivalent: finite separable residue extensions
-already split over k and k'. Apply the strict-henselization stalk formula at the
-extended points and identify the projective-line base changes by their pullback
-universal properties. Applying that formula also over the strictly henselian
-bases identifies the two local closed-point stalks with the same cohomology of
-the total strict-local projective lines. Compose these identifications to get a₁
-and a₂. For module coefficients use an injective module-sheaf resolution and
-acyclicity of its underlying abelian sheaves; do not assume that forgetting
-coefficients preserves injectives. The termwise exchange is restriction of
-sections along the pulled-back neighbourhood. The structural square and the
-pointed residue square imply that φ commutes with every pointed-neighbourhood
-projection, by the uniqueness of pointed étale lifts to a strictly henselian
-local scheme. Thus the same section map occurs in both stalk formulas.
-Filtered colimits are exact, so passage to homology gives the displayed equation.
-For arbitrary X', transport along the unique isomorphism of pullback squares.
-This argument works in degree zero and never uses a closed-fibre theorem. -/
+Only stalks of higher direct images are compared, not closed-fibre cohomology
+(Stacks, Tags 03Q9, 095T). -/
 theorem Etale.projectiveLine_strictLocal_stalkExchangeComparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}

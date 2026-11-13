@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDesc
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
-Source: Stacks Project, Tag 09Z1.
+## References
+
+* Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -26,24 +28,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Every class in the limit higher direct image fiber comes from a stage.
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, proof
-(blueprint: sbc-lem-higher-direct-image-limit-class-descent).
-
-Proof:
-1. Represent the fiber class on an affine etale neighborhood of the chosen point.
-   The higher direct image presheaf theorem identifies its germ with a degree-p
-   cohomology class on the pullback of the limit scheme to that neighborhood.
-2. The pullbacks of the stages are qcqs since the neighborhood is affine and the
-   structure maps are qcqs. Their transitions are affine and their limit is the
-   pullback of the given limit. Pull back the sheaf system as well. Inverse image
-   preserves colimits, so its colimit is the restriction of `colimit H`.
-3. Place these sheaves in degree zero and apply complex cohomology continuity.
-   Surjectivity of the cohomology colimit comparison represents the class at a
-   stage. The higher direct image presheaf theorem turns this representative into
-   a germ in the stage higher direct image, hence, using `eK`, a fiber element of
-   `K.obj i`. Naturality of the presheaf identification and `hη` identify its image
-   with the initial germ. This gives the required equality. -/
+/-- Every class in the limit higher direct image fiber comes from a stage
+(Stacks, Lemma 59.51.7, Tag 09Z1). -/
 theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

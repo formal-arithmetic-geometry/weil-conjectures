@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Image of multiplication restricted to an ideal multiple of a tensor product
 
-Source: Stacks Project, Tag 01YB, last displayed map in the proof.
-(blueprint: lem-pc-ideal-tensor-restricted-multiplication-image)
+## References
+
+* Stacks Project, Tag 01YB
 -/
 
 @[expose] public section
@@ -152,9 +153,7 @@ private theorem restricted_powers_affine {X : Scheme.{u}} {K : X.Modules}
         (LinearMap.range (i.val.app (op U.1)).hom : Ideal Γ(X, U.1)) (n + 1)).symm
 
 open Opposite in
-/-- Transfer the affine range formula to any isomorphic image presentation.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+/-- Transfer the affine range formula to any isomorphic image presentation. -/
 private theorem restricted_image_range_affine {X : Scheme.{u}} {M N P : X.Modules}
     (φ : M ⟶ N) [M.IsQuasicoherent] [N.IsQuasicoherent]
     (j : P ⟶ N) (e₀ : P ≅ image φ) (hj : e₀.hom ≫ image.ι φ = j)
@@ -182,9 +181,7 @@ private theorem restricted_image_range_affine {X : Scheme.{u}} {M N P : X.Module
   exact hr.trans ((Modules.quasiCoherent_cokernel_image φ).2.2.2.2.2.2.2.2 U).1
 
 open Opposite in
-/-- Sheaf separatedness detects a zero morphism on any topological basis.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+/-- Sheaf separatedness detects a zero morphism on any topological basis. -/
 private theorem restricted_hom_zero_of_basis {X : Scheme.{u}} {M N : X.Modules}
     (B : Set X.Opens) (hB : TopologicalSpace.IsTopologicalBasis
       ((fun V : X.Opens ↦ (V : Set X)) '' B))
@@ -206,9 +203,7 @@ private theorem restricted_hom_zero_of_basis {X : Scheme.{u}} {M N : X.Modules}
     exact h i.1 _
 
 open Opposite in
-/-- Factor an inclusion through a monomorphism by vanishing of its cokernel projection.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+/-- Factor an inclusion through a monomorphism by vanishing of its cokernel projection. -/
 private theorem restricted_subobject_le_of_basis_range {X : Scheme.{u}} {M N P : X.Modules}
     (B : Set X.Opens) (hB : TopologicalSpace.IsTopologicalBasis
       ((fun V : X.Opens ↦ (V : Set X)) '' B))
@@ -236,24 +231,8 @@ private theorem restricted_subobject_le_of_basis_range {X : Scheme.{u}} {M N P :
     _ = i := kernel.lift_ι _ _ hz
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The image of I^m times tensor multiplication is the higher ideal product.
-Source: Stacks Project, Tag 01YB, last displayed map; affine product and tensor
-comparisons in Tags 01I8 and 01AH.
-(blueprint: lem-pc-ideal-tensor-restricted-multiplication-image)
-
-Proof: Put T = I^n tensor H and let μ be multiplication. On each affine open U,
-the tensor comparison identifies its sections with I(U)^n tensor H(U).
-The recursive ideal power at m has inclusion range I(U)^m, also for m=0.
-The affine product theorem gives the inclusion range I(U)^m T(U). Multiplication
-maps this onto I(U)^m I(U)^n H(U) = I(U)^(n+m) H(U): one inclusion follows from
-linearity, the reverse from writing ideal products as sums of products and lifting
-each pure product to a tensor. The affine image theorem identifies the image of
-the composite with this range. The ideal-sheaf-data product at n+m has the same
-range. Both inclusions are monomorphisms. Equality of ranges on the affine basis
-gives inverse factorizations between the subsheaves, since the unique local
-preimages agree on overlaps and glue. These give e, with the required inclusion
-identity. No Noetherianity or finiteness is needed. At either exponent zero the
-same affine formula uses the unit ideal; zero ideals and zero H give zero images. -/
+/-- The image of `I^m` times tensor multiplication is the higher ideal product.
+(Stacks, Tags 01YB, 01I8 and 01AH) -/
 theorem ideal_tensor_restricted_multiplication_image
     {X : Scheme.{u}} (I : X.IdealSheafData) (H : X.Modules)
     [H.IsQuasicoherent] (n m : ℕ) :

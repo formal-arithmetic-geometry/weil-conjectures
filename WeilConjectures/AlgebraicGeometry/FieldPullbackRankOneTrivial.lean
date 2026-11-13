@@ -31,20 +31,7 @@ private noncomputable def tensorIsoPullback {A B : Scheme.{u}} (g : A ⟶ B) :
     (pullbackPushforwardAdjunction g)
 
 /-- A finite locally free module on the spectrum of a field is trivial if its pullback
-along a morphism from a nonempty scheme is invertible.
-
-Source: Stacks Project, Tag 0BF0, the generic-field step of its use of Tag 0BDP.
-(blueprint: lem-sc-field-pullback-rank-one-trivial).
-
-Proof: On the one-point affine scheme Spec K, finite local freeness gives a global
-finite free presentation N ≅ O_K^I for a finite type I. Pullback preserves this free
-presentation. Choose a point y of Y and a neighbourhood V of y on which the invertible
-pullback is trivial. On V it is both O_V^I and O_V. Taking global sections yields
-linear isomorphisms with R^I and R, where R = Γ(V, O_V) is a nonzero commutative ring
-because V contains y. The strong rank condition gives card I = 1. A coproduct indexed
-by the resulting unique type I is the structure module, so N ≅ O_K. Nonemptiness is
-essential: on the empty scheme all ranks have isomorphic pullbacks. No flatness,
-properness or section of p is needed. -/
+along a morphism from a nonempty scheme is invertible (Stacks, Tag 0BF0). -/
 theorem nonempty_iso_unit_of_invertible_field_pullback
     (K : Type u) [Field K] {Y : Scheme.{u}} [Nonempty Y]
     (p : Y ⟶ Spec (CommRingCat.of K))

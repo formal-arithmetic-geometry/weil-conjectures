@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 
 /-! # Equal finite ranks of the stalks in Picard base change
 
-Source: Stacks Project, Tags 0BDP and 01C6.
-(blueprint: lem-sc-picard-base-change-stalk-ranks).
+## References
+
+* Stacks Project, Tags 0BDP and 01C6.
 -/
 
 @[expose] public section
@@ -29,31 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The two modules in a Picard base-change map have finite, isomorphic stalks.
 This compares the objects only; it makes no assertion about the canonical map.
-Source: Stacks Project, Tag 0BDP, common-rank reduction in the first three proof
-paragraphs; Tag 01C6, finite locally free modules and their ranks.
-(blueprint: lem-sc-picard-base-change-stalk-ranks)
-
-Proof:
-1. Apply hR to the identity of T at h(t). On the resulting neighbourhood V, both
-   ordinary direct images are free locally of a common finite rank r, and E has rank r
-   on X_V. The dual of a local rank-r frame is another rank-r frame.
-   Pulling either direct image back to T' preserves these local frames. Thus
-   the source stalk is a finite free O_{T',t}-module of rank r.
-2. Apply hR to h at t to get a neighbourhood W and a rank s for the direct images
-   over T'. The canonical associativity isomorphism of the two pullback squares and
-   the tensor-pullback composition isomorphism identify the target with the appropriate
-   direct image for h composed with g. Its stalk is free of rank s.
-3. If the fibre of X_T over h(t) is nonempty, lift a point of that fibre after extending
-   its residue field to a common extension with kappa(t). At this point of X_{T'},
-   the pulled-back E has rank both r and s, by steps 1 and 2. Invariant basis number
-   over its nonzero local ring gives r = s. This does not require connected fibres.
-   If that fibre is empty, properness makes its complement in the image an open
-   neighbourhood of h(t). Both direct images vanish there, before and after h, so
-   both stalks are zero. This also handles rank zero.
-4. Choose local frames and identify each stalk with O_{T',t}^r. Compose one frame with
-   the inverse of the other to obtain the linear equivalence. The target is finitely
-   generated because it is finite free. These choices are only witnesses in a theorem,
-   not data of a definition. There is no point to check when T' is empty. -/
+(Stacks, Tags 0BDP, 01C6) -/
 theorem picardRankMatch_baseChange_stalk_ranks {X S T : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)

@@ -11,9 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-! # Composition of ordinary direct-image site boundaries
-
-Source: the ordered exterior-product and comparison paragraphs of
-sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -97,16 +94,7 @@ private theorem comparison_inverse_comp (A : Type (u + 1)) [CommRing A] [Finite 
   erw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
-/-- Composition of ordinary direct-image site boundaries.
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, ordered composition and comparison;
-parent proof Step 3 (blueprint: lem-pur-ordinary-boundary-composition).
-
-Proof: Expand each boundary as the inverse pro-etale inclusion map followed by inclusion of the
-inverse bounded direct-image mate. Naturality moves that mate through the next inclusion map.
-The inverse of comparisonDirectImagePlus_comp then composes the two bounded mates. Finally
-generic right-derived composition compatibility with D+ cancels the intermediate inclusion
-maps. Cancelling the final mate and inclusion isomorphisms gives exactly this equation. -/
+/-- Composition of ordinary direct-image site boundaries. -/
 theorem ordinaryBoundary_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g] [QuasiSeparated g]

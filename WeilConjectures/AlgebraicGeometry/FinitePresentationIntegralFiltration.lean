@@ -16,9 +16,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Integral-ideal filtrations in the finite-presentation interface
 
-Source: Stacks Project, Tag 01YF.
-(blueprint: lem-pc-e2-finite-presentation-integral-filtration)
- -/
+## References
+
+* Stacks Project, Tag 01YF
+-/
 
 @[expose] public section
 
@@ -30,24 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A finitely presented module on a Noetherian scheme has a finite filtration whose
 quotients are pushforwards of ideals on integral closed subschemes.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.3, Tag 01YF.
-(blueprint: lem-pc-e2-finite-presentation-integral-filtration)
-
-Proof: Use Noetherian induction on closed subsets of X, with induction assertion that
-all finitely presented modules whose support closure is contained in the given closed
-set have the asserted filtration. The support-reduction filtration gives a finite chain
-with quotients either already integral-ideal pushforwards or finitely presented modules
-with strictly smaller support closure. For a smaller-support quotient, its closure is
-strictly below the closed induction bound by transitivity, so apply the induction
-hypothesis. Integral-ideal quotients need no induction. The predicate of being an
-integral-ideal pushforward is invariant under isomorphism, by composing the witnessing
-isomorphisms. Apply finite_filtration_refinement to refine all smaller-support factors
-at once and obtain a chain with only integral-ideal quotients. Apply the induction
-assertion to F and its own support closure. The geometric support-reduction theorem
-contains the reducible-support, J-adic and generic-inclusion parts of Tag 01YF, but does
-not filter smaller-support factors. The refinement theorem is fully proved using the
-source library's extension-closed filtrationClosure and conversion to subobjects. -/
+(Stacks, Tag 01YF) -/
 theorem exists_finitePresentation_integral_filtration
     (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) [F.IsFinitePresentation] :
     ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c),

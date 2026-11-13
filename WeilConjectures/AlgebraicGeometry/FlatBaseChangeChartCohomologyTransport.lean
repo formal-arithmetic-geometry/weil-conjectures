@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 
 /-! # Cohomology transport from the affine scalar-extension chart
 
-Source: Stacks Project, Tags 02KH and 01FB.
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
 -/
 
 @[expose] public section
@@ -69,30 +72,7 @@ set_option maxHeartbeats 800000 in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- Transport along the affine chart identifies its unit map with open restriction
 of the specified coefficient h-map. No Leray edge or higher image is involved.
-Source: Stacks Project, Tag 02KH, first paragraph of the proof; Tag 01FB,
-Remark 20.14.2; Tags 0096 (Lemma 6.26.2) and 0097 (Lemma 6.26.3).
-(blueprint: new-flat-base-change-chart-cohomology-transport)
-
-Proof: Write U0 = f inverse V and L = f' inverse W. The affine identifications
-V = Spec Gamma(V) and W = Spec Gamma(W), together with the equality hAlgebra,
-identify U0 times Spec Gamma(W) over Spec Gamma(V) with L. Construct the two inverse
-maps by the fibre-product universal property, and check the inverse identities by
-the two projections. Under this scheme isomorphism pullback composition identifies
-the chart coefficient N_B with G restricted to L, where G = tensorPullback(g') F.
-The tensor pullback adjunction and ordinary pullback adjunction determine the same
-pullback functor up to their unique adjunction-compatible isomorphism. Composing
-this with restrictFunctorIsoPullback gives the coefficient identification.
-Apply module cohomology along the scheme isomorphism and this coefficient iso;
-functoriality and the two inverse identities give an additive equivalence t.
-The projection to Spec Gamma(W) equals the restricted f' followed by W.toSpecGamma,
-so naturality for multiplication by a global section gives t's scalar equation.
-To prove the last equation, transpose both coefficient maps across the pullback
-adjunction. The composite-unit identities reduce their equality to D.unit_square
-restricted to L. The restriction composition iso used in cohomologyOpenRestriction
-is exactly the coefficient comparison in this calculation. Apply source and target
-naturality and composition of moduleCohomologyFMap to this equality. This gives the
-unit formula without inverting the unit h-map. The fibre-product and adjunction
-arguments cover empty opens, degree zero and zero coefficients as well. -/
+(Stacks, Tags 02KH, 01FB, 0096 and 0097.) -/
 theorem exists_flatBaseChange_chart_cohomology_transport
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     (F : X.Modules) (I : InjectiveResolution F)

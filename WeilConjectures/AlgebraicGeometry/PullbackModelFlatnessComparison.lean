@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Relative flatness is independent of a chosen pullback
 
-Source: Stacks Project, Tags 01JX, 01U4 and 0097.
+## References
+
+* Stacks Project, Tags 01JX, 01U4 and 0097.
 -/
 
 @[expose] public section
@@ -74,21 +76,8 @@ private theorem flatOver_of_cartesian_model
   refine Scheme.Modules.IsFlatOver.of_iso (δ'.app M).symm ?_
   simpa only [Functor.comp_obj, hb] using hP
 
-/-- Two cartesian models of the same base change give equivalent relative-flatness tests.
-Source: Stacks Project, schemes.tex, Tag 01JX; morphisms.tex, Tag 01U4;
-sheaves.tex, Tag 0097.
-(blueprint: lem-pc-pullback-model-flatness-comparison).
-
-Proof: the two cartesian squares give a unique isomorphism e:P -> Q preserving both
-projections. Tensor-pullback composition identifies a^*M with e^*((a')^*M).
-For an affine source open U in P, its image under e is affine in Q; the inverse image
-and direct image along e identify sections of these two modules. Naturality of the
-structure-sheaf maps, and e followed by b' = b, identify their actions by the base
-ring on every affine open V in T. Thus the section modules used in IsFlatOver are
-linearly isomorphic over Gamma(T,V), and Module.Flat is invariant under this linear
-isomorphism. This proves the forward implication; repeat using e inverse for the
-reverse implication. Empty affine opens have zero section modules and cause no
-exception. No flatness of f or g and no finite presentation of M is assumed. -/
+/-- Two cartesian models of the same base change give equivalent relative-flatness tests
+(Stacks, Tags 01JX, 01U4, 0097). -/
 theorem isFlatOver_tensorPullback_iff_of_isPullback
     {P Q X S T : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S}
     {a : P ⟶ X} {b : P ⟶ T} {a' : Q ⟶ X} {b' : Q ⟶ T}

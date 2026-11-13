@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectRHomEvaluationIsomorphisms
 
 /-! # Perfect RHom tensor comparison
 
-Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
-(blueprint: lem-pc-perfect-rhom-tensor-comparison).
+## References
+
+* Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7.
 -/
 
 @[expose] public section
@@ -89,32 +90,7 @@ set_option maxHeartbeats 1600000 in
 -- The shared derived tensor instances make the witness and pairing elaboration expensive.
 /-- The dual of a perfect complex is perfect, with evaluation, coevaluation, biduality,
 base change, and the tensor--internal-Hom comparison.
-Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
-(blueprint: lem-pc-perfect-rhom-tensor-comparison).
-
-Proof: choose a strictly perfect local representative of `K`. By
-lem-sc-derived-internal-hom-restrict-open and lem-pc-rhom-strict-perfect-hom,
-the dual and RHom are represented locally by ordinary Hom complexes. Their dual terms
-are finite projective and quasi-coherent. By lem-pc-bounded-above-flat-kflat they compute
-the derived tensor. The tensor--Hom comparison is a termwise isomorphism for finite
-free modules and their direct summands. Check invertibility locally on cohomology
-sheaves; no morphisms need gluing. Apply lem-pc-dualizable-evaluation-criterion to the
-comparison (valid for all
-objects of D(O_X) by the same local calculation). Its coevaluation is the inverse
-image of the identity, and its triangle identities give the exact pairing. The bidual and
-base-change maps are the maps corresponding under the tensor--internal-Hom bijections
-`adj`, `adj'` (on `X`) and `adjT` (on `T`) of lem-sc-derived-internal-hom-adjunction,
-tied by their naturality equations as in `scheme_derivedInternalHom_adjunction`
-(`adj'` is its symmetric form, the symmetry followed by `adj`); the base-change map uses
-the tensor and unit isomorphisms of a canonical monoidal model of `Lg^*`
-(`IsDerivedPullbackMonoidalModel`, the descent of `derivedPullback_tensorProduct`).
-Any two such bijections, or two such models, change these maps only by isomorphisms,
-so the invertibility assertions do not depend on the choices.
-For base change restrict to affine opens in inverse images of
-the cover;
-lemma-coherent-base-change-invertible-sheaves--2 computes both duals by termwise pullback. The
-comparison is pullback of finite-projective duals, an isomorphism on finite free
-modules and direct summands. Check invertibility locally on cohomology sheaves. -/
+(Stacks, Tags 08DQ, 0FPC, 0GM7) -/
 theorem perfect_rhom_tensor_comparison
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.HorizontalTransferInverseFormula
 
 /-! # Forward ordinary geometric pasting with fixed comparisons
 
-Source: Stacks Project, Tags 0ATM and 0ATR.
-(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting).
+## References
+
+* Stacks Project, Tags 0ATM and 0ATR
 -/
 
 @[expose] public section
@@ -28,11 +29,7 @@ open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
 /-- The canonical ordinary transfer square for a scheme isomorphism over a base.
-Source: Stacks Project, Tags 0D5S, 0D5T and 0ATR.
-(blueprint: def-sc-horizontal-ordinary-transfer).
-
-Its data are constructed from the pinned direct-image composition, right-adjoint
-uniqueness for pullback, and the inverse unit of the explicit equivalence. -/
+(Stacks, Tags 0D5S, 0D5T and 0ATR) -/
 noncomputable def horizontalOrdinaryTransfer
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {P Q Z : Scheme.{u}}
@@ -56,8 +53,7 @@ noncomputable def horizontalOrdinaryTransfer
       (Functor.rightUnitor (horizontalMatePushforward q)).inv
 
 /-- The fixed upper comparison, with the same three factors as the pinned family.
-Source: Stacks Project, Tags 0D5S and 0ATR.
-(blueprint: def-sc-horizontal-ordinary-upper-comparison). -/
+(Stacks, Tags 0D5S and 0ATR) -/
 noncomputable def horizontalOrdinaryUpperComparison
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}} (f : X ⟶ Y) (g : S ⟶ Y) (h : T ⟶ S) :
@@ -71,8 +67,7 @@ noncomputable def horizontalOrdinaryUpperComparison
       (pullback.fst f (h ≫ g))).symm
 
 /-- The fixed base comparison, with the QCoh functors displayed in its signature.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: def-sc-horizontal-ordinary-base-comparison). -/
+(Stacks, Tag 0D5S) -/
 noncomputable def horizontalOrdinaryBaseComparison
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {Y S T : Scheme.{u}} (g : S ⟶ Y) (h : T ⟶ S) :
@@ -109,10 +104,7 @@ private theorem cancel_ordinary_comparisons
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- A single component of the fixed-comparison mate calculation.
-Source: Stacks Project, Tags 0ATM and 0D5S.
-Proof: transpose the component under the pinned adjunction, apply the two
-derived base-change pasting laws, and cancel units and counits.
-(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting-core-aux) -/
+(Stacks, Tags 0ATM and 0D5S) -/
 theorem horizontal_ordinary_forward_fixed_pasting_core_aux
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}
@@ -196,11 +188,7 @@ theorem horizontal_ordinary_forward_fixed_pasting_core_aux
       hkE.symm))
 
 
-/- Fixed-comparison mate calculation for ordinary forward pasting.
-Source: Stacks Project, Tags 0ATM and 0D5S.
-Proof: transpose under the pinned adjunction and apply the two derived
-base-change pasting laws, then cancel units and counits.
-(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting-core) -/
+/- Fixed-comparison mate calculation for ordinary forward pasting (Stacks, Tags 0ATM, 0D5S). -/
 theorem horizontal_ordinary_forward_fixed_pasting_core
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}
@@ -235,9 +223,7 @@ theorem horizontal_ordinary_forward_fixed_pasting_core
 
 
 /-- Forward ordinary base-change pasting with supplied comparisons equal to the canonical ones.
-Source: Stacks Project, Tags 0ATM, 08HY and 0D5S.
-Proof: substitute the supplied equalities and apply the fixed-comparison core theorem.
-(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting) -/
+(Stacks, Tags 0ATM, 08HY and 0D5S) -/
 theorem horizontal_ordinary_forward_fixed_pasting
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}

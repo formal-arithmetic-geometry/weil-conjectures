@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSupportRestrictionEnlargement
 
 /-! # Finite support of finite free maps
 
-Source: Stacks Project, Modules, Tags 01BB and 01AH.
-(blueprint: lem-weil-pbc-module-finite-free-local-support).
+## References
+
+* Stacks Project, Modules, Tags 01BB and 01AH.
 -/
 
 @[expose] public section
@@ -119,24 +120,7 @@ private theorem exists_finite_support_of_unit_support
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A map from a finite free sheaf into a restricted free sheaf has finite basis
-support on a neighbourhood of any given point.
-
-Source: Stacks Project, Modules, proof of Lemma 01BB and Lemma 01AH.
-(blueprint: lem-weil-pbc-module-finite-free-local-support).
-
-Proof: Evaluate the images of the finitely many basis sections at the point.
-The free sheaf is the filtered colimit of its finite sub-coproducts, and taking
-stalks preserves this colimit. Thus each image germ lies in a finite sub-coproduct.
-Take the union S of these finitely many supports. Each resulting lift germ is
-represented by a section of the finite sub-coproduct near the point; equality of
-its image and the original basis section holds after shrinking. Intersect the
-finitely many neighbourhoods to get W. The lifted basis sections define a map a.
-Both composites agree on every basis section, so the universal property of the
-finite free sheaf gives the displayed morphism equality. Restriction preserves
-free sheaves, coprojections and their basis maps. For n = 0 choose W = U and
-S empty; the map out of the zero object is unique. For an empty index type I
-the target free sheaf is zero and the same choice of S works. No finite type
-or surjectivity assumption is used. -/
+support on a neighbourhood of any given point (Stacks, Tags 01BB and 01AH). -/
 theorem exists_finite_free_local_support
     (X : Scheme.{u}) (V U : X.Opens) (hUV : U ≤ V)
     (I : Type u) (n : ℕ)

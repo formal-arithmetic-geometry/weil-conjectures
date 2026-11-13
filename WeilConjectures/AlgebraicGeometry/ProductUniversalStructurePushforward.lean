@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-!
 # Universal structure pushforward for a product family
 
-Source: Stacks Project, Tag 0BF3, the hypotheses for applying Tag 0BF2 to the product.
-(blueprint: lem-sc-product-universal-structure-pushforward).
+## References
+
+* Stacks Project, Tags 0BF2 and 0BF3.
 -/
 
 @[expose] public section
@@ -69,23 +70,8 @@ private theorem isIso_tensorUnit_iff_app {A B : Scheme.{u}} (a : A ⟶ B) :
       ‹IsIso c.val›
     exact isIso_of_reflects_iso c (SheafOfModules.forget.{u} B.ringCatSheaf)
 
-/-- Universal structure pushforward is preserved by fibre products of families.
-Source: Stacks Project, Tags 0BDP and 0BF3, product-family application of Tag 0BF2.
-(blueprint: lem-sc-product-universal-structure-pushforward).
-
-Proof: first compare the tensor-pullback unit with the ordinary pullback unit by
-uniqueness of left adjoints. Compose it with the direct image of the canonical
-pullback-of-unit isomorphism. The resulting map is the structure map on modules,
-whose component on every open U is a.app U on the underlying ring elements. Since
-isomorphisms of module sheaves are detected componentwise, the original unit is an
-isomorphism exactly when every a.app U is an isomorphism of rings.
-For T → S, factor the product over T through T ×_S X. Its first map is the base
-change of Y → S along T ×_S X → S, and its second map is the base change of X → S,
-up to pullback symmetry. The hypotheses make all open-section ring maps of these
-two morphisms isomorphisms. Pullback pasting identifies their composite with the
-chosen product-family map, up to a scheme isomorphism. Composition of the ring maps
-therefore proves the desired criterion, and hence the tensor-pullback unit assertion.
-No flatness or finiteness is used. -/
+/-- Universal structure pushforward is preserved by fibre products of families
+(Stacks, Tags 0BDP and 0BF3). -/
 theorem product_universal_structure_pushforward
     {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (hX : ∀ {T : Scheme.{u}} (t : T ⟶ S),

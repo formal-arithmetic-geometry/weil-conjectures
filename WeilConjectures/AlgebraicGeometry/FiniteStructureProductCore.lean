@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorComparisonComposit
 
 /-! # Core existence statement for a lifted finite-structure product
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-product-exists).
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -271,34 +272,8 @@ private theorem exists_reduced_products
     intro x y
     exact product_adjoint_formula (j n) (p n) G (psi n) (m n) (hm n) mu (hmu n) U x y
 
-/-- A product lifting the reduced products, before proving any ring laws.
-Source: Stacks Project, Tag 09ZT, multiplication paragraph; Tags 088E and 088F.
-
-Proof: Choose a proper closed supporting subscheme annihilating G (0CYS). Its ideal
-annihilates the tensor square. On affine opens the square is the tensor product of two
-finite modules, so it is quasi-coherent of finite type and hence coherent on the
-Noetherian scheme X. Write P_n = j_n^*, Q_n = i_n^*, and delta_n for the tensor comparison of P_n.
-Let m_n be the direct-image product characterized by m_n(x tensor y) = xy on all opens.
-Define v_n = delta_n followed by (psi_n tensor psi_n), m_n, and psi_n inverse.
-This is a morphism P_n(G tensor G) to P_n(G). The base-change algebra formula says
-Q_n(m_(n+1)) followed by beta equals delta_i followed by (beta tensor beta) and m_n.
-The composition comparison kappa = c_n satisfies the tensor equation
-kappa_(G tensor G) followed by delta_n = Q_n(delta_(n+1)) followed by delta_i and
-(kappa_G tensor kappa_G). Prove this equation by taking adjoints, evaluating on
-x tensor y, and using the adjunction mate unit identity for the pinned comparison;
-the tensor comparisons take these unit images to the tensor of the individual images.
-The sheaf tensor universal property then makes the equality a morphism identity.
-Substitute hpsi, the displayed tensor equation, and the base-change product equation;
-use naturality of delta_i with psi in both factors and cancel psi_n. The resulting
-identity is c_n.app (G tensor G) followed by v_n = Q_n(v_(n+1)) followed by c_n.app G.
-Fullness of completion (088E,
-in the formulation 088F) lifts the compatible family to a map mu. Evaluate its
-reduction equation after the tensor-adjunction unit: the tensor comparison takes
-x tensor y to the tensor of the unit images. Applying psi and pushforward
-composition gives precisely the adjoint multiplicativity formula below. This
-construction imposes no unit, associativity or symmetry. The argument also applies
-to zero modules, empty schemes, and I equal to the zero or unit ideal.
-(blueprint: lem-weil-pbc-finite-structure-product-core). -/
+/-- A product lifting the reduced products, before proving any ring laws
+(Stacks, Tags 09ZT, 088E, 088F). -/
 theorem finite_structure_product_exists_core
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]
@@ -387,8 +362,7 @@ theorem finite_structure_product_exists_core
 -- The preserved legacy endomorphism family is irrelevant to multiplication existence.
 set_option linter.unusedVariables false in
 /- A compatible finite-level family algebraizes to a product map whose sections multiply.
-This is the algebraization and evaluation part of Tags 09ZT and 088F.
-(blueprint: lem-weil-pbc-finite-structure-section-identity). -/
+This is the algebraization and evaluation part of Tags 09ZT and 088F. -/
 theorem finite_structure_product_section_identity
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

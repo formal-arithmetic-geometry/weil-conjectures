@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenRestriction
 /-!
 # Conormal vanishing on an open subscheme mapping isomorphically to the base
 
-Source: Stacks Project, Tags 04FA and 04FF.
-(blueprint: lem-weil-pbc-open-iso-conormal-zero).
+## References
+
+* Stacks Project, Tags 04FA and 04FF.
 -/
 
 @[expose] public section
@@ -70,23 +71,7 @@ private theorem iso_conormal_isZero {Z S Z' : Scheme.{u}} (h : Z ⟶ S)
 
 /-- Restricting the universal conormal to an open subscheme on which the structure
 morphism is an isomorphism gives a zero module. No flatness is needed.
-Source: Stacks Project, Tag 04FA and the calculation C_{X/X} = 0 in Tag 04FF.
-(blueprint: lem-weil-pbc-open-iso-conormal-zero).
-Proof: let V be the open image of j and identify T with V by the open immersion
-isomorphism. Apply universalFirstOrderThickening_open_restriction with V and the
-whole base S. It identifies the restriction of C_h with the universal conormal of
-the restricted morphism V -> S, which is an isomorphism since j followed by h is.
-For an isomorphism e:V -> S, the map from the ambient thickening back to V is
-its structure map followed by the inverse of e. One composite is the identity by
-the compatibility equation; the other is the identity by universal uniqueness,
-applied to the thickening itself. Thus the thickening immersion is an isomorphism
-and its kernel ideal is zero. The ideal module is zero: its inclusion is injective
-on every open, and every section in its image is killed by the isomorphism from
-the ambient scheme to the closed subscheme. Tensor pullback preserves zero objects
-as a left adjoint, so the restricted conormal is zero.
-Finally open-immersion tensor pullback agrees with restriction, and pullback along
-the isomorphism T -> V preserves zero objects, as a left adjoint. This includes the
-empty open subscheme and imposes no finite type assumption. -/
+(Stacks, Tags 04FA and 04FF) -/
 theorem open_iso_conormal_isZero {Z S Z' T : Scheme.{u}} (h : Z ⟶ S)
     [FormallyUnramified h] (i : Z ⟶ Z') (s : Z' ⟶ S)
     (H : IsUniversalFirstOrderThickening h i s)

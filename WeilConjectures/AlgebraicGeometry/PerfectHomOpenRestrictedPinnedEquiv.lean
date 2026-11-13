@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
 import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 
 /-! # Pinned restriction comparisons
-Source: Stacks Tags 079W, 08FE and 09RE.
+
+## References
+
+* Stacks Project, Tags 079W, 08FE and 09RE.
 -/
 
 @[expose] public section
@@ -141,33 +144,7 @@ private theorem restricted_equiv
       ← Category.assoc, ← Functor.map_comp]
     rw [Iso.hom_inv_id, A.map_id, Category.id_comp]
 
-/-- Construct restricted Hom equivalences with prescribed values on identities.
-
-Source: Stacks Project, Cohomology Tags 079W and 08FE; perfect.tex Tag 09RE.
-Proof: for every testing object N on B use its supported extension X(N) from
-Scheme.exists_derivedOpen_testObject, with t:N ≅ L(X(N)). Restriction on Hom out
-of X(N) is bijective. Its inverse after precomposition with t.inv lifts N → LP
-to X(N) → P. Compose this lifting equivalence with the supplied original Hom
-equivalence and the cartesian restriction equivalence furnished by
-perfect_hom_open_test_bijective, then precompose by pullback(t.hom).
-Lift testing morphisms using the same Hom bijection. Injectivity of restriction
-proves lift_natural and compatibility with postcomposition. Naturality of the
-conjugated pullback map proves transport_natural, hence testing-object naturality
-of the composed equivalence.
-For an original M, lift id of LM to x:X(LM) → M. The lift equation says Lx=t.inv.
-Postcomposition compatibility identifies the lift of Lf with x followed by f.
-Original Hom naturality and cartesian restriction naturality therefore turn the
-new value at Lf into pullback(t.hom) followed by pullback(Lx) followed by the
-restriction of the old value at f. The first two factors cancel because Lx=t.inv.
-This proves pinning for all M,f, in particular identities. Apply this construction
-to each F_j and d.pt and assemble the four equivalence/naturality fields and the
-two identity equations. It does not claim transition coherence or quasi-coherence.
-The Hom equivalence is determined by these equations and naturality: its value
-on any f:N → LP is determined after the supported testing isomorphism and unique
-Hom lift. No data is defined by an arbitrary mere-existence witness. Empty opens
-and zero objects yield singleton Hom sets, and the full open has the same inverse
-cancellation; independent sign twists are excluded by identity normalization.
-(blueprint: new-perfect-hom-open-restricted-pinned-equiv). -/
+/-- Restricted Hom equivalences with prescribed values on identities. -/
 theorem perfect_hom_open_restricted_pinned_equiv
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

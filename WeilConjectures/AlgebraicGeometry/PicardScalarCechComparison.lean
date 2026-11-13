@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.CechComparisonMapNaturality
 
 /-! # Canonical scalar Cech comparison
 
-Source: Stacks Project, Tags 01EQ and 01XD.
+## References
+
+* Stacks Project, Tags 01EQ and 01XD
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A scalar comparison is the canonical module comparison after forgetting scalars.
-The two explicit Cech comparisons use the same underlying additive presheaf.
-Source: Stacks, Tag 01EQ (blueprint: lem-sc-picard-scalar-cech-comparison). -/
+The two explicit Cech comparisons use the same underlying additive presheaf. -/
 def IsPicardScalarCechComparison
     {k : Type w} [Field k] {X : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) {ι : Type w} (U : ι → X.Opens)
@@ -42,22 +43,8 @@ def IsPicardScalarCechComparison
         ((TopCat.Presheaf.cechComplexFunctorHomologyIso U (scalarPresheaf f F) p).hom a)) =
           e a
 
-/-- Affine-intersection covers have canonical scalar Cech comparisons.
-Source: Stacks, Tags 01EQ, 01XD
-(blueprint: lem-sc-picard-scalar-cech-comparison).
-
-Proof: Fix an injective resolution. The beta augmentation is a quasi-isomorphism
-by affine acyclicity, and alpha is a quasi-isomorphism by the sheaf gluing theorem.
-Compose H(beta), inverse H(alpha), and the inverse resolution identification.
-This is the canonical module comparison, independent of the chosen resolution.
-Use the explicit additive Cech identifications to compare the scalar Cech complex
-with the ordinary module Cech complex. Multiplication by r in k is multiplication
-by scalarMap(f,top)(r) on the latter: sectionwise this is functoriality of the
-structure sheaf and restriction of scalars. Naturality of the explicit Cech
-homology identification for scalar multiplication therefore makes the resulting
-additive isomorphism k-linear. Its inverse is linear as well, giving e and the
-stated canonical-comparison equation. No finiteness is required; empty covers
-of the empty scheme and zero coefficients give zero complexes. -/
+/-- Affine-intersection covers have canonical scalar Cech comparisons
+(Stacks, Tags 01EQ and 01XD). -/
 theorem picardScalarCechComparison_exists
     {k : Type w} [Field k] {X : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) {ι : Type w} (U : ι → X.Opens)

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.HorizontalDualityMateCommutativity
 
 /-! # Horizontal pasting of canonical duality mates
 
-Source: Stacks Project, duality.tex, Remark 48.6.1 (Tag 0E9S).
-(blueprint: lem-sc-horizontal-duality-mate-pasting).
+## References
+
+* Stacks Project, Tag 0E9S
 -/
 
 @[expose] public section
@@ -25,24 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The horizontal mate-pasting law for two consecutive base morphisms, before
 transport to an open subscheme. No mate is assumed invertible.
-Source: Stacks Project, duality.tex, Tags 0ATR and 0E9S; cohomology.tex, Tag 0ATM.
-(blueprint: lem-sc-horizontal-duality-mate-pasting)
-
-Proof: Use derived pullback composition to identify the two source functors.
-The canonical pullback associativity isomorphism identifies the two total spaces;
-direct-image composition and uniqueness of right adjoints identify the target functors,
-also using pullback composition for the input on Z. Expand the three canonical
-mates as unit, pullback of inverse conjugate of ordinary base change, and counit.
-Naturality moves the first inverse conjugate past the second unit. The composite
-adjunction formulas and triangle identities cancel the middle counit-unit pair.
-Ordinary base change pastes under the coherent pullback comparisons (0ATM).
-Tor-independence in 0ATR is only used to obtain invertibility of ordinary
-base change, which is assumed explicitly here.
-Conjugation reverses composition, and inversion restores the order. This gives
-the commuting square between the two endpoint isomorphisms, hence the arrow
-isomorphism by Arrow.isoMk. The argument is natural in K and valid for zero
-objects and empty schemes; it uses no geometric property beyond the hypotheses.
--/
+(Stacks, Tags 0ATR, 0E9S and 0ATM) -/
 theorem horizontal_duality_mate_pasting
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}

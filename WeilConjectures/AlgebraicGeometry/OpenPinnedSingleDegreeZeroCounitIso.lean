@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Constructed tensor restriction comparisons
-Source: Stacks Project, Tags 08DW and 08HY.
-(blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
+
+## References
+
+* Stacks Project, Tags 08DW and 08HY.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,9 +25,7 @@ open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- The underived open tensor pullback comparison, using the pinned adjunction.
-Source: Stacks Project, Tag 08DW.
-(blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
+/-- The underived open tensor pullback comparison, using the pinned adjunction. -/
 def openPinnedTensorOpenIso (X : Scheme.{u}) (U : X.Opens) :
     Scheme.Modules.tensorPullback U.ι ≅ schemeOpenRestriction X U :=
   (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U.ι)).leftAdjointUniq
@@ -32,9 +33,7 @@ def openPinnedTensorOpenIso (X : Scheme.{u}) (U : X.Opens) :
     (Scheme.Modules.restrictFunctorIsoPullback U.ι).symm ≪≫
     (Scheme.Modules.overFunctorEquiv U).symm
 
-/-- Tensor restriction comparison constructed from composition comparisons.
-Source: Stacks Project, Tags 08DW and 08HY.
-(blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
+/-- Tensor restriction comparison constructed from composition comparisons. -/
 def openPinnedTensorRestrictionIso
     {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)
@@ -46,9 +45,7 @@ def openPinnedTensorRestrictionIso
     Scheme.Modules.tensorPullbackCompositionIso j U.ι (U'.ι ≫ k) hj ≪≫
     Functor.isoWhiskerRight (openPinnedTensorOpenIso X U) _
 
-/-- The target comparison on single complexes, constructed without choosing data.
-Source: Stacks Project, Tags 08DW and 08HY.
-(blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
+/-- The target comparison on single complexes. -/
 def openPinnedSingleTargetRestrictionIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -67,9 +64,7 @@ def openPinnedSingleTargetRestrictionIso
     Functor.isoWhiskerRight (openPinnedTensorRestrictionIso k U U' j hj) _ ≪≫
     Functor.associator _ _ _
 
-/-- Termwise tensor restriction comparison on the homotopy categories.
-Source: Stacks Project, Tags 08DW and 08HY.
-(blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
+/-- Termwise tensor restriction comparison on the homotopy categories. -/
 def openPinnedHomotopyTensorRestrictionIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

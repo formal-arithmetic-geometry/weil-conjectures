@@ -16,8 +16,10 @@ import WeilConjectures.CategoryTheory.SiteModuleSliceSheafification
 
 /-! # Local invariance of cohomology after derived scalar extension
 
-Source: Stacks Project, Cohomology on Sites, derived pullback and
-lemma-pullback-tensor-product; restriction-K-flat, Tag 0E8K.
+## References
+
+* Stacks Project, Cohomology on Sites, derived pullback, pullback of tensor products,
+  and Tag 0E8K.
 -/
 
 @[expose] public noncomputable section
@@ -577,29 +579,7 @@ attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standar
 /-- Derived scalar-extension cohomology on a slice depends only on the local derived
 object over the original coefficients. The coefficient map is arbitrary, and neither
 object is assumed bounded, perfect, or complete.
-
-Source: Stacks Project, Cohomology on Sites, lemma-pullback-K-flat,
-lemma-pullback-tensor-product and lemma-restriction-K-flat (Tag 0E8K);
-Bhatt--Scholze, Proposition 6.6.11, local residue calculation.
-(auxiliary; not a blueprint node).
-
-Proof: write R'=i^{-1}R and S'=i^{-1}S. Module inverse image over the actual
-inverse-image ring and restriction to U are exact. Resolve an arbitrary R-complex
-by a K-flat complex with flat terms. Its inverse image is K-flat with flat terms,
-and slice restriction retains K-flatness. The ordinary scalar-extension comparison
-identifies i^{-1}(S tensor_R C)|_U with S'|_U tensor_(R'|_U) (i^{-1}C)|_U:
-it sends the inverse image of a local pure tensor to the tensor of its inverse
-images. Balancing gives the inverse map; both commute with the differentials.
-The K-flat computation counits identify this comparison with the two derived
-composites, independently of the resolution. Their naturality descends through
-localization. The identity-coefficient pullback in sfbLocalRestriction is the exact
-module inverse image: extension along the identity is its tensor unitor.
-Its localization-representative isomorphism and the exact slice factor identify
-sfbLocalRestriction with this composite. Apply local derived scalar extension to e
-and conjugate by these comparisons at K and K'. Finally commute homology with exact
-inverse image, slice restriction, and the underlying additive-sheaf functor. The
-result is the displayed isomorphism. The construction also applies to zero rings,
-empty slices and unbounded objects, and uses no infinite-limit preservation. -/
+(Stacks, Cohomology on Sites, Tag 0E8K; Bhatt--Scholze, Proposition 6.6.11.) -/
 theorem proEtaleLocalScalarHomologyIso {X Y : Scheme.{u}} (i : Y ⟶ X)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
     (U : Y.ProEt) (K K' : DerivedCategory (proEtaleRingModules X R))

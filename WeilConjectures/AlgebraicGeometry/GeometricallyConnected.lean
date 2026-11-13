@@ -39,16 +39,7 @@ namespace AlgebraicGeometry
 
 /-- A connected universally closed quasi-separated scheme `X` (e.g. a connected proper scheme)
 over a field `k` with a `k`-rational point, that is, a section `s` of its structure morphism
-`f`, is geometrically connected over `k` (the proper case of Stacks 04KV).
-
-For a field `L` over `k`, the global sections of `X_L` are `Γ(X) ⊗_k L` (flat base change).
-Since `Γ(X)` is integral over `k` (`isIntegral_appTop_of_universallyClosed`) and has no
-nontrivial idempotents, the kernel of the evaluation `Γ(X) → k` at the rational point is nil
-(`RingHom.IsIntegral.isNilpotent_of_eq_zero`), hence `Γ(X) ⊗_k L` has no nontrivial idempotents
-(`Algebra.TensorProduct.eq_zero_or_eq_one_of_isIdempotentElem`), and `X_L` is connected.
-
-This is the step "a connected group scheme is geometrically connected" in the proof of blueprint
-`lemma-abelian-variety-commutative--1`. -/
+`f`, is geometrically connected over `k` (the proper case of Stacks 04KV). -/
 @[stacks 04KV "The universally closed case."]
 theorem GeometricallyConnected.of_universallyClosed_of_section {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [UniversallyClosed f] [QuasiSeparated f]

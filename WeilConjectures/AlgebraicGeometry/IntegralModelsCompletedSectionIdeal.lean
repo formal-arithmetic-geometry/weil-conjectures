@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.IntegralModelsResidueIdealComparison
 
 /-! # The first completed residue ideal in section coordinates
 
-Source: Stacks Tags 093M, 099C and 099L.
+## References
+
+* Stacks, Tags 093M, 099C and 099L.
 -/
 
 @[expose] public noncomputable section
@@ -264,23 +266,7 @@ private theorem extension_radical_iso {C : Type u} [SmallCategory C]
 
 /-- The normalized coefficient isomorphism carries the first completed residue ideal
 onto the extension of the discrete residue kernel. This assertion concerns only ideals
-of ordinary ring sheaves, independently of complexes and completeness predicates.
-
-Source: blueprint integral-models proof (1), coefficient identification; Stacks Tags
-093M, 099C and 099L.
-(auxiliary; not a blueprint node).
-
-Proof: the maximal ideal of O_E is the radical of (l): it contains the nonzero
-rational prime, and it is the unique nonzero prime ideal of this DVR. Constant
-sheafification of a reduced ring has reduced section rings, by local lifting to the
-constant presheaf and local injectivity of the sheafification unit. Thus the first
-completed residue kernel, whose generators are given by flat_and_quotients, is
-sectionwise the radical of (l). A scalar-compatible completion comparison similarly
-identifies the extension of the discrete residue kernel with this radical in the
-continuous ring. Every ring isomorphism preserves (l) and its radical. Apply this
-to completedSectionIso and use the local characterization of ideal extension.
-No compatibility of completedSectionIso with a finite projection is needed. The
-argument includes empty schemes and empty site objects. -/
+of ordinary ring sheaves, independently of complexes and completeness predicates. -/
 theorem completedSectionIdeal (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X] :

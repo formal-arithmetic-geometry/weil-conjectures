@@ -10,8 +10,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 /-! # Module inverse image and underlying abelian sheaves
 
-Source: Stacks Project, Modules on Sites, Lemmas 03D2 and 03D3.
-(blueprint: lem-weil-pbc-module-abelian-inverse-image-comparison) -/
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
+-/
 
 @[expose] public section
 
@@ -22,25 +24,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The mate of the underlying module adjunction unit is an isomorphism.
-
-Source: Stacks Project, Modules on Sites, Lemmas 03D2 and 03D3.
-(blueprint: lem-weil-pbc-module-abelian-inverse-image-comparison)
-
-Proof:
-1. The forgetful functor from modules to abelian groups preserves colimits and
-limits, hence it commutes with left Kan extension and sheafification. Compose
-Mathlib's inverse Kan-extension comparison with its sheafification comparison
-`sheafComposeNatIso` to obtain an isomorphism from abelian inverse image of the
-underlying sheaf to the underlying module inverse image.
-2. Its composite with the abelian sheafification unit is the inverse
-Kan-extension comparison followed by the underlying module sheafification unit.
-This follows from naturality of the sheafification unit and
-`sheafComposeNatTrans_fac`.
-3. The unit factorization of `leftKanExtensionCompIsoOfPreserves` now identifies
-the adjoint of this isomorphism with the underlying module adjunction unit.
-Injectivity of the abelian adjunction bijection identifies its forward map with
-the displayed canonical map, which is therefore an isomorphism. -/
+/-- The mate of the underlying module adjunction unit is an isomorphism
+(Stacks, Modules on Sites, Tags 03D2 and 03D3). -/
 theorem isIso_moduleAbelianInverseImageComparison
     {X Y : Scheme.{u}} (i : X ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ]
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
