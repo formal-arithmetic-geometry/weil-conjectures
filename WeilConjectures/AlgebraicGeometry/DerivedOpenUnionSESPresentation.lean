@@ -132,9 +132,12 @@ theorem derived_open_union_ses_presentation
   let : Abelian M := inferInstance
   have : IsGrothendieckAbelian.{u} M :=
     SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-  obtain ⟨I, hKI, hI, ⟨e⟩⟩ := exists_injective_representative.{u, w} (M := M) E
+  have hrep := exists_injective_representative.{u, w} (M := M) E
+  let I := hrep.choose
+  have : I.IsKInjective := hrep.choose_spec.1
+  have hI : ∀ n : ℤ, Injective (I.X n) := hrep.choose_spec.2.1
+  let e := hrep.choose_spec.2.2.some
   let Q : CochainComplex M ℤ ⥤ schemeDerivedCategory X := DerivedCategory.Q
-  have : I.IsKInjective := hKI
   change DerivedCategory.Q.obj I ≅ E at e
   have hc := schemeOpenModuleImageComplex_localized_comparisons.{u, w} X G adj I E e
   dsimp only at hc
