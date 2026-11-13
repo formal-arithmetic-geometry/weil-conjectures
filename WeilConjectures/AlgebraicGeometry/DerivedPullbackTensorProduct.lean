@@ -182,8 +182,7 @@ theorem derivedPullback_tensorProduct
     asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) P N)
   refine ⟨G, hF, hmap, hadd, ε, hder, φ, ?_, ?_, ?_⟩
   · intro P N p q n h
-    simpa only [φ, asIso_hom, HomologicalComplex.mapBifunctorComparison_f,
-      HomologicalComplex.mapBifunctorComparisonApp, τ, e, G, eqToHom_refl,
+    simpa only [eqToHom_refl,
       tensorHom_id, MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id] using
       HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) P N p q n h
   · intro P P' N N' a b
