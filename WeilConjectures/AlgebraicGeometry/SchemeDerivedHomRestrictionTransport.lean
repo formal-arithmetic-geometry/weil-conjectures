@@ -261,7 +261,7 @@ open CategoryTheory.Functor in
 Keeping the equivalences abstract lets their exactness instances be assembled once. -/
 private lemma transportEquivalence
     {C D E H I : Type*} [Category C] [Category D] [Category E] [Category H] [Category I]
-    [Abelian C] [Abelian D] [Abelian E] [Abelian H] [Abelian I]
+    [aC : Abelian C] [aD : Abelian D] [aE : Abelian E] [aH : Abelian H] [aI : Abelian I]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
     [HasDerivedCategory H] [HasDerivedCategory I]
     (A : C ⥤ D) (e : D ≌ E) (T : D ⥤ H) (v : H ≌ I) (B : C ⥤ H)
@@ -381,6 +381,11 @@ theorem scheme_derived_hom_restriction_transport
             (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app E))) ≫
           qW.inv.app E := by
   exact RestrictionTransport.transportEquivalence
+    (aC := SheafOfModules.instAbelian (moduleRings X.toRingedSpace))
+    (aD := SheafOfModules.instAbelian ((moduleRings X.toRingedSpace).over U))
+    (aE := SheafOfModules.instAbelian (moduleRings U.toScheme.toRingedSpace))
+    (aH := SheafOfModules.instAbelian ((moduleRings X.toRingedSpace).over W))
+    (aI := SheafOfModules.instAbelian (moduleRings W.toScheme.toRingedSpace))
     (hA := moduleOverFunctor_additive X.toRingedSpace U)
     (hT := moduleOverMap_additive X.toRingedSpace i)
     (hB := moduleOverFunctor_additive X.toRingedSpace W)
