@@ -115,6 +115,9 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
+  obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
+    exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
+  trace "PH413: transport ready"
   let L : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -127,14 +130,11 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
     L.mapHomologicalComplex (.up ℤ)
   let E := L.mapDerivedCategory
-  let v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
+  have v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
   trace "PH413: functors ready"
-  obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
-    exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
-  trace "PH413: transport ready"
   have : CochainComplex.IsKInjective (T.obj F) := hF
-  let eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
-  let eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
+  have eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
+  have eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
   trace "PH413: comparisons ready"
   obtain ⟨a', b', h⟩ := exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
