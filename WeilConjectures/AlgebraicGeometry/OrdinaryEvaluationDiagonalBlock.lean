@@ -82,7 +82,6 @@ private theorem dualProjection_isIso (X : Scheme.{u}) (U : X.Opens)
   exact hh 0 hr
 
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
 /-- The diagonal component is invertible whenever its module evaluation is.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`,
 termwise evaluation; Tag 08DM, degree of the dual complex.
