@@ -145,6 +145,24 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square M"
   have sqN := sqM hτN
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square N"
+  run_tac do
+    let ctx ← Lean.getLCtx
+    let some decl := ctx.findFromUserName? `hτP | Lean.throwError "no hτP"
+    let some sqDecl := ctx.findFromUserName? `sqN | Lean.throwError "no sqN"
+    let ty ← Lean.Meta.whnf sqDecl.type
+    let .forallE _ expected _ _ := ty | Lean.throwError "no forall"
+    let rec walk (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
+      if a == b then return
+      if fuel == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
+        IO.FS.withFile "/tmp/PH468-diff" .append fun out ↦
+          out.putStrLn s!"{path}: {a.getAppFn} / {b.getAppFn}"
+      else
+        let aa := a.getAppArgs
+        let bb := b.getAppArgs
+        for i in [:aa.size] do
+          walk (fuel - 1) s!"{path}.{i}" aa[i]! bb[i]!
+    IO.FS.writeFile "/tmp/PH468-diff" "exchange diff\n"
+    walk 15 "root" decl.type expected
   have sq₂ := sqN (by cast_proofs hτP)
   run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square complexes"
   have sq := sq₂ (𝟭 _)
