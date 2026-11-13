@@ -70,9 +70,32 @@ private theorem comparisonCompatible_symm_of_tensorComparison
   intro X Y
   simp only [Iso.symm_inv, Iso.symm_hom, curriedTensor_obj_obj,
     curriedTensor_map_app, curriedTensor_obj_map, Functor.comp_obj]
-  rw [reassoc_of% (h X Y), Iso.hom_inv_id_app_assoc, ← tensorHom_def,
-    tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
-  simp only [id_tensorHom_id, Category.comp_id]
+  rw [reassoc_of% (h X Y), Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
+    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
+  simp only [MonoidalCategory.id_tensorHom_id, Category.comp_id]
+
+private theorem isIso_projectionMap_of_mate_eq
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
+    {F' : D' ⥤ C'} {G' : C' ⥤ D'} (adj' : F' ⊣ G')
+    {N_D : D ⥤ D'} {N_C : C ⥤ C'} {α : N_D ⋙ F' ≅ F ⋙ N_C}
+    {T_C : C ⥤ C ⥤ C} {T_D : D ⥤ D ⥤ D}
+    {T_C' : C' ⥤ C' ⥤ C'} {T_D' : D' ⥤ D' ⥤ D'}
+    {φ : (Functor.postcompose₂.obj F).obj T_D ⟶
+      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj T_C}
+    {φ' : (Functor.postcompose₂.obj F').obj T_D' ⟶
+      (((Functor.whiskeringLeft₂ C').obj F').obj F').obj T_C'}
+    {m_C : (Functor.postcompose₂.obj N_C).obj T_C ≅
+      (((Functor.whiskeringLeft₂ C').obj N_C).obj N_C).obj T_C'}
+    {m_D : (Functor.postcompose₂.obj N_D).obj T_D ≅
+      (((Functor.whiskeringLeft₂ D').obj N_D).obj N_D).obj T_D'}
+    (H : Adjunction.ComparisonCompatible α φ φ' m_C m_D)
+    {β : G ⋙ N_D ⟶ N_C ⋙ G'} (hβ : mateEquiv adj adj' α.hom = β) (K : C) (M : D)
+    [hπ : IsIso (((adj.rightAdjointProjectionMap φ).app K).app M)]
+    [IsIso (β.app K)] [IsIso (β.app ((T_C.obj K).obj (F.obj M)))] :
+    IsIso (((adj'.rightAdjointProjectionMap φ').app (N_C.obj K)).app (N_D.obj M)) := by
+  subst β
+  exact Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv adj adj' H K M
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -140,27 +163,9 @@ theorem isIso_projectionMap_app_app_extendScalars
     IsIso (((projectionMap Λ' f).app
       ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K)).app
         ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.obj M)) := by
-  have hβ : mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-      (derivedUpperStarLowerStarAdjunction Λ' f) (derivedPullIso a f).symm.hom =
-        derivedPushHom a f :=
-    (derivedPushHom_eq_mateEquiv a f).symm
-  have : IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-      (derivedUpperStarLowerStarAdjunction Λ' f) (derivedPullIso a f).symm.hom).app K) := by
-    rw [hβ]
-    infer_instance
-  have : IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-      (derivedUpperStarLowerStarAdjunction Λ' f) (derivedPullIso a f).symm.hom).app
-        (((curriedTensor _).obj K).obj (((f)^*⟦Λ⟧).leftDerivedFunctor.obj M))) := by
-    rw [hβ]
-    infer_instance
-  have h₀ : IsIso ((((derivedUpperStarLowerStarAdjunction Λ f).rightAdjointProjectionMap
-      (leftDerivedUpperStarTensor Λ f)).app K).app M) :=
-    (inferInstance : IsIso (((projectionMap Λ f).app K).app M))
-  exact Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv
+  exact isIso_projectionMap_of_mate_eq
     (derivedUpperStarLowerStarAdjunction Λ f) (derivedUpperStarLowerStarAdjunction Λ' f)
-    (φ := leftDerivedUpperStarTensor Λ f) (φ' := leftDerivedUpperStarTensor Λ' f)
-    (α := (derivedPullIso a f).symm)
-    (m_C := derivedExtendScalarsTensorIso a X) (m_D := derivedExtendScalarsTensorIso a Y)
-    (comparisonCompatible_derivedPullIso a f) K M
+    (comparisonCompatible_derivedPullIso a f) (derivedPushHom_eq_mateEquiv a f).symm K M
+    (hπ := (inferInstance : IsIso (((projectionMap Λ f).app K).app M)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
