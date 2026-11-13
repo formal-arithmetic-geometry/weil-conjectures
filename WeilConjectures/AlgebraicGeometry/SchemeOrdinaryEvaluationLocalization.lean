@@ -67,6 +67,7 @@ theorem schemeDerivedTensorHomEquiv_naturality (Y : Scheme.{u})
       K K' L L' M M' a b c g
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The representative predicate needs extra heartbeats for the sheaf tensor instances.
 private theorem uncurry_representative (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -137,6 +138,7 @@ private theorem evaluation_transport {C : Type*} [Category* C] [MonoidalCategory
   simp only [Iso.inv_hom_id, Category.comp_id]
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Elaborating the fixed Hom and tensor comparison maps needs extra heartbeats.
 /-- Localizing the componentwise ordinary evaluation gives its uncurried derived map.
 No Hom-exactness, K-flatness, or invertibility of the comparison maps is asserted.
