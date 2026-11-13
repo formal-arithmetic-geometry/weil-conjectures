@@ -65,6 +65,41 @@ private theorem tensor_quasiIso_of_isKFlat
   intro i
   exact (hd i).of_iso (CochainComplex.mapBifunctorMappingCone₁Iso t D (curriedTensor _))
 
+set_option profiler true in
+private theorem exists_localEvaluation_resolution_square (X : Scheme.{u}) (U : X.Opens)
+    (P F : CochainComplex (localEvaluationModules X U) ℤ)
+    (hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
+      QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))
+    (hdual : (localEvaluationDual X U P).IsKFlatTensor)
+    (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)
+    (hf : IsLocalOrdinaryEvaluation X U P F f) :
+    ∃ I : CochainComplex (localEvaluationModules X U) ℤ, I.IsKInjective ∧
+      ∃ η : F ⟶ I, QuasiIso η ∧
+      ∃ fI : localEvaluationTensor X U P I ⟶ homComplex (R := X.sheaf.over U) P I,
+        IsLocalOrdinaryEvaluation X U P I fI ∧
+      ∃ t : localEvaluationTensor X U P F ⟶ localEvaluationTensor X U P I,
+      ∃ h : homComplex (R := X.sheaf.over U) P F ⟶ homComplex (R := X.sheaf.over U) P I,
+        QuasiIso t ∧ QuasiIso h ∧ t ≫ fI = f ≫ h := by
+  let A := localEvaluationModules X U
+  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let I := (CochainComplex.kInjectiveResolutionFunctor.{u} A).obj F
+  let η : F ⟶ I := (CochainComplex.toKInjectiveResolution.{u} A).app F
+  have hη : QuasiIso η :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A F).2
+  let fI : localEvaluationTensor X U P I ⟶ homComplex (R := X.sheaf.over U) P I :=
+    { f := localEvaluationDegreeMap X U P I
+      comm' := fun n m h ↦ localEvaluationDegreeMap_comm X U P I n m h }
+  have hfI : IsLocalOrdinaryEvaluation X U P I fI := by
+    intro p q n r h
+    exact localEvaluationDegreeMap_formula X U P I p q n r h
+  exact ⟨I, CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A F, η, hη,
+    fI, hfI,
+    HomologicalComplex.mapBifunctorMap η (𝟙 (localEvaluationDual X U P))
+      (curriedTensor _) (.up ℤ),
+    ((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map η,
+    tensor_quasiIso_of_isKFlat (R := X.sheaf.over U) η hη hdual,
+    hhom F I η hη, ordinaryEvaluation_postcomposition X U P F I η f fI hf hfI⟩
+
 private theorem comparison_of_resolution_square
     {C : Type*} [Category* C] {S H T T' V V' : C}
     (g : S ⟶ H) (f : T ⟶ V) (f' : T' ⟶ V') (t : T ≅ T') (h : V ≅ V')
@@ -153,33 +188,13 @@ theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
   let : HasDerivedCategory.{w} A := (inferInstance : HasDerivedCategory.{w}
     (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)))
   let Q := DerivedCategory.Q.{w} (C := A)
-  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
-  let I := (CochainComplex.kInjectiveResolutionFunctor.{u} A).obj F
-  let η : F ⟶ I := (CochainComplex.toKInjectiveResolution.{u} A).app F
-  have hη : QuasiIso η :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A F).2
-  have : QuasiIso η := hη
-  have : I.IsKInjective :=
-    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A F
-  let fI : localEvaluationTensor X U P I ⟶ homComplex (R := X.sheaf.over U) P I :=
-    { f := localEvaluationDegreeMap X U P I
-      comm' := fun n m h ↦ localEvaluationDegreeMap_comm X U P I n m h }
-  have hfI : IsLocalOrdinaryEvaluation X U P I fI := by
-    intro p q n r h
-    exact localEvaluationDegreeMap_formula X U P I p q n r h
-  let t : localEvaluationTensor X U P F ⟶ localEvaluationTensor X U P I :=
-    HomologicalComplex.mapBifunctorMap η (𝟙 (localEvaluationDual X U P))
-      (curriedTensor _) (.up ℤ)
-  let h := ((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map η
-  have : QuasiIso h := hhom F I η hη
-  have : QuasiIso t :=
-    tensor_quasiIso_of_isKFlat (R := X.sheaf.over U) η hη hdual
+  obtain ⟨I, hI, η, hη, fI, hfI, t, h, ht, hh, hs⟩ :=
+    exists_localEvaluation_resolution_square X U P F hhom hdual f _hf
   have : IsIso (E.map (Q.map t)) := inferInstance
   have : IsIso (E.map (Q.map h)) := inferInstance
   let eI : E.obj (Q.obj I) ≅ N := (E.mapIso (asIso (Q.map η))).symm ≪≫ _eN
   obtain ⟨aI, bI, habI⟩ := exists_exactSource_kInjective_evaluation_open_models
     X U K N P I hhom hdual _eK eI fI hfI
-  have hs := ordinaryEvaluation_postcomposition X U P F I η f fI _hf hfI
   have hs' : E.map (Q.map t) ≫ E.map (Q.map fI) =
       E.map (Q.map f) ≫ E.map (Q.map h) := by
     simpa only [Functor.map_comp] using congrArg (fun z ↦ E.map (Q.map z)) hs
