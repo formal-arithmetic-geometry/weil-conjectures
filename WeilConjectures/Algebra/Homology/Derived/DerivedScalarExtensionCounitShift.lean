@@ -112,7 +112,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace SheafOfModules
 
-set_option profiler true in
 /-- The derived scalar-extension counit determines a unique natural shift comparison,
 and this comparison makes derived scalar extension triangulated.
 Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (LF part), and
