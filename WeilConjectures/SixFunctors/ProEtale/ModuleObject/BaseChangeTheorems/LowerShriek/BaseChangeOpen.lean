@@ -179,8 +179,6 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
   exact boundedConstructibleBaseChange_id ℓ
 
-set_option maxHeartbeats 1000000 in
--- the identification of the trivial compactification of `f` with `f` unfolds the functors
 /-- **`Ex_!` for open immersions**, on the trivial compactifications: the compact-support exchange
 map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R(𝟙)_* ≅ 𝟭` and the
 extension-by-zero exchange morphism, is `R(𝟙)_* ≅ 𝟭`. -/
@@ -217,7 +215,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
     (P' := boundedConstructibleLowerStar ℓ
       (Compactification.ofIsOpenImmersion f'.left).overG)
     (boundedConstructibleLowerStarId ℓ Y) (boundedConstructibleLowerStarId ℓ Y') _
-    (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ) _ _ hb
+    (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ (f := f) (f' := f') (g := g)) _ _ hb
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and
 `Rf'_! ≅ f'_!`, the compact-support base change of a cartesian square with `f` and `f'` open
