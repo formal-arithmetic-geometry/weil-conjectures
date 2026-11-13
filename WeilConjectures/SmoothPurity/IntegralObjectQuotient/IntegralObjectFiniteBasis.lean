@@ -425,7 +425,7 @@ private theorem complexBasis_zero (n : ℕ) :
 
 attribute [local irreducible] finitePullback degreePullbackBasis complexBasis
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The categorical comparison exceeds the default heartbeat budget; the
 -- finite pullback carrier is irreducible locally to keep elaboration bounded.
 /-- A slice basis induces a normalized basis at one finite coefficient level.
