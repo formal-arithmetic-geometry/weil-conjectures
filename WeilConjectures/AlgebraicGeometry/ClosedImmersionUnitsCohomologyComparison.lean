@@ -21,7 +21,7 @@ Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY
 
 @[expose] public section
 
-universe u
+universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 private theorem epi_pushforward_closedEmbedding
@@ -68,13 +68,41 @@ private theorem epi_pushforward_closedEmbedding
     rw [map_zero]
     exact hzero.symm
 
+set_option profiler true in
+private theorem bijective_cohomologyMap_counit
+    {C D : Type*} [Category C] [Category D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    [HasSheafify J AddCommGrpCat.{u}] [HasSheafify K AddCommGrpCat.{u}]
+    [HasExt.{w} (Sheaf J AddCommGrpCat.{u})] [HasExt.{w} (Sheaf K AddCommGrpCat.{u})]
+    [EnoughInjectives (Sheaf K AddCommGrpCat.{u})]
+    {L : Sheaf J AddCommGrpCat.{u} ⥤ Sheaf K AddCommGrpCat.{u}}
+    {R : Sheaf K AddCommGrpCat.{u} ⥤ Sheaf J AddCommGrpCat.{u}}
+    [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (adj : L ⊣ R)
+    (e : (constantSheaf K AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ≅
+      L.obj ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ))))
+    (F : Sheaf K AddCommGrpCat.{u}) (p : ℕ) :
+    Function.Bijective ((Sheaf.H.map (adj.counit.app F) p).comp
+      (Sheaf.H.mapFunctor L e (R.obj F) p)) := by
+  have hb := adj.mapExtCounit_bijective
+    ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ))) F p
+  have hc := (CategoryTheory.Abelian.Ext.precompAddEquiv e F p).bijective.comp hb
+  convert hc using 1
+  funext x
+  change (Sheaf.H.map (adj.counit.app F) p)
+    ((Sheaf.H.mapFunctor L e (R.obj F) p) x) =
+      (CategoryTheory.Abelian.Ext.precompAddEquiv e F p) (adj.mapExtCounit _ F p x)
+  rw [Sheaf.H.map_apply, Sheaf.H.mapFunctor_apply,
+    Adjunction.mapExtCounit_apply, CategoryTheory.Abelian.Ext.precompAddEquiv_apply]
+  exact CategoryTheory.Abelian.Ext.comp_assoc _ _ _
+    (zero_add p) (add_zero p) (by omega)
 
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option profiler true in
--- Comparing the two concrete Ext maps unfolds the sheaf-adjunction construction.
 /-- The canonical comparison from cohomology of the direct image of units to cohomology
 of units is bijective in every degree.
 Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY, the sentence
@@ -127,19 +155,6 @@ theorem bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion
   let e := (g.constantSheafsheafPullbackIso AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
     isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))
-  have hb := adj.mapExtCounit_bijective
-    ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift ℤ))) Z.unitsSheaf p
-  have hc := (CategoryTheory.Abelian.Ext.precompAddEquiv e Z.unitsSheaf p).bijective.comp hb
-  convert hc using 1
-  ext x
-  change (Sheaf.H.map (adj.counit.app Z.unitsSheaf) p)
-    ((Sheaf.H.mapFunctor L e (R.obj Z.unitsSheaf) p) x) =
-      (CategoryTheory.Abelian.Ext.precompAddEquiv e Z.unitsSheaf p)
-        (adj.mapExtCounit _ Z.unitsSheaf p x)
-  rw [Sheaf.H.map_apply, Sheaf.H.mapFunctor_apply,
-    Adjunction.mapExtCounit_apply, CategoryTheory.Abelian.Ext.precompAddEquiv_apply]
-  exact CategoryTheory.Abelian.Ext.comp_assoc _ _ _
-    (zero_add p) (add_zero p) (by omega)
+  exact bijective_cohomologyMap_counit adj e Z.unitsSheaf p
 
 end AlgebraicGeometry.Scheme
