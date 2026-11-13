@@ -50,27 +50,31 @@ private lemma transport_hom_equiv
           (derivedExtendScalarsCompIso X ℓ hf).hom.app L₀) ≫
         (finiteCoefficientDerivedFromAlgCl X ℓ E).map
           ((derivedExtendScalarsToPadicAlgCl X ℓ F).map f) := by
-  let ap := finiteCoefficientDerivedAdjunction X ℓ he
-  let aq := finiteCoefficientDerivedAlgClAdjunction X ℓ E
-  let α := derivedExtendScalarsCompIso X ℓ he
-  let β := derivedExtendScalarsCompIso X ℓ hf
-  rw [ap.homEquiv_naturality_right_symm, ap.homEquiv_naturality_left_symm]
+  rw [(finiteCoefficientDerivedAdjunction X ℓ he).homEquiv_naturality_right_symm,
+    (finiteCoefficientDerivedAdjunction X ℓ he).homEquiv_naturality_left_symm]
   simp only [Functor.map_comp, Category.assoc]
-  have hb := β.hom.naturality f
+  have hb := (derivedExtendScalarsCompIso X ℓ hf).hom.naturality f
   change (derivedExtendScalarsToPadicAlgCl X ℓ G).map
-      ((derivedExtendScalarsSubfield X ℓ hf).map f) ≫ β.hom.app L₁ =
-    β.hom.app L₀ ≫ (derivedExtendScalarsToPadicAlgCl X ℓ F).map f at hb
+      ((derivedExtendScalarsSubfield X ℓ hf).map f) ≫
+        (derivedExtendScalarsCompIso X ℓ hf).hom.app L₁ =
+    (derivedExtendScalarsCompIso X ℓ hf).hom.app L₀ ≫
+      (derivedExtendScalarsToPadicAlgCl X ℓ F).map f at hb
   rw [hb]
-  have ha := α.inv.naturality k
-  change (derivedExtendScalarsToPadicAlgCl X ℓ E).map k ≫ α.inv.app K₀ =
-    α.inv.app K₁ ≫ (derivedExtendScalarsToPadicAlgCl X ℓ G).map
+  have ha := (derivedExtendScalarsCompIso X ℓ he).inv.naturality k
+  change (derivedExtendScalarsToPadicAlgCl X ℓ E).map k ≫
+      (derivedExtendScalarsCompIso X ℓ he).inv.app K₀ =
+    (derivedExtendScalarsCompIso X ℓ he).inv.app K₁ ≫
+      (derivedExtendScalarsToPadicAlgCl X ℓ G).map
       ((derivedExtendScalarsSubfield X ℓ he).map k) at ha
-  rw [← reassoc_of% ha, aq.homEquiv_naturality_left]
+  rw [← reassoc_of% ha,
+    (finiteCoefficientDerivedAlgClAdjunction X ℓ E).homEquiv_naturality_left]
   simpa only [Category.assoc] using congrArg (fun q ↦ k ≫ q)
-    (aq.homEquiv_naturality_right
-      (α.inv.app K₀ ≫ (derivedExtendScalarsToPadicAlgCl X ℓ G).map
+    ((finiteCoefficientDerivedAlgClAdjunction X ℓ E).homEquiv_naturality_right
+      ((derivedExtendScalarsCompIso X ℓ he).inv.app K₀ ≫
+        (derivedExtendScalarsToPadicAlgCl X ℓ G).map
         (((finiteCoefficientDerivedAdjunction X ℓ he).homEquiv K₀
-          ((derivedExtendScalarsSubfield X ℓ hf).obj L₀)).symm g) ≫ β.hom.app L₀)
+          ((derivedExtendScalarsSubfield X ℓ hf).obj L₀)).symm g) ≫
+        (derivedExtendScalarsCompIso X ℓ hf).hom.app L₀)
       ((derivedExtendScalarsToPadicAlgCl X ℓ F).map f))
 
 /-- Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, the Hom paragraph
