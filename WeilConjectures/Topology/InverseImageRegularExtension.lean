@@ -102,7 +102,6 @@ private theorem exists_unitIso_of_adjunction_sections
     rw [adj.homEquiv_naturality_right, hnφ]
   exact exists_unitIso_of_sections (L ⋙ Q) (E.obj I) q hnq se hse
 
-set_option profiler true in
 /-- Extending the inverse image of the regular module gives the regular target module,
 with the canonical unit normalization.
 Source: Stacks Project, Sheaves on Spaces, Tags 008X, 008Y and 008A.
@@ -184,7 +183,7 @@ theorem inverseImageRegularExtension
       (hadj' _)).symm
   have ha := (p.val.app V).hom.map_smul a (1 : A.obj.obj V)
   rw [show a • (1 : A.obj.obj V) = a from mul_one a, hv] at ha
-  exact ha.trans (mul_one _)
+  exact ha.trans (@mul_one (B.obj.obj ((Opens.map g).op.obj V)) _ _)
 
 
 end
