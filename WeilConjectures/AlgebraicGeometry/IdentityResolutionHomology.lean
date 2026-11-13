@@ -83,6 +83,19 @@ private theorem resolution_homology_factorization {C A : Type*}
     (HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p).map _ at hhom
   simpa only [Functor.map_comp, hc', Category.assoc] using hhom
 
+private theorem identity_pushforward_comp {Z : Scheme.{u}} {M N L : Z.Modules}
+    (f : M ⟶ N) (g : (pushforward (𝟙 Z)).obj N ⟶ L) :
+    (pushforward (𝟙 Z)).map f ≫ g = f ≫ (pushforwardId Z).inv.app N ≫ g := by
+  rfl
+
+private theorem identity_sections_inv {Z : Scheme.{u}} (M : Z.Modules) :
+    (presheaf M).map
+        (eqToHom (by simp) : (⊤ : Z.Opens) ⟶ (𝟙 Z) ⁻¹ᵁ (⊤ : Z.Opens)).op ≫
+      (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}).map
+        ((pushforwardId Z).inv.app M) = 𝟙 _ := by
+  change (presheaf M).map _ ≫ ((pushforwardId Z).inv.app M).app ⊤ = 𝟙 _
+  simp
+
 set_option profiler true in
 -- Identity pushforward and the sections functor require substantial definitional reduction.
 set_option backward.isDefEq.respectTransparency.types false in
@@ -122,11 +135,10 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
   refine resolution_homology_factorization Γ ψ D.I D.J D.injective
     (((pushforwardId Z).inv.mapHomologicalComplex (ComplexShape.up ℕ)).app D.I.cocomplex)
     D.lambda D.β D.a p ?_ ?_
-  · exact D.compatible
+  · exact D.compatible.trans (congrArg (fun f ↦ ψ ≫ f)
+      (identity_pushforward_comp (D.I.ι.f 0) (D.lambda.f 0)))
   · intro n
     rw [D.sections]
-    change (presheaf (D.I.cocomplex.X n)).map _ ≫
-      ((pushforwardId Z).inv.app (D.I.cocomplex.X n)).app ⊤ = 𝟙 _
-    simp
+    exact identity_sections_inv (D.I.cocomplex.X n)
 
 end AlgebraicGeometry.Scheme.Modules
