@@ -75,7 +75,7 @@ private theorem affine_pullback_limit
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
+set_option trace.profiler true in
 /-- Punctured root charts commute with cofiltered affine ring colimits over R.
 
 Source: Stacks Project, Tags 05N9 and 01YW; universal properties of polynomial
@@ -121,6 +121,7 @@ theorem punctured_root_colimit_continuity
           let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)
           ∃ d : V.toScheme ≅ D.obj j,
             d.hom ≫ t.app j = V.ι ≫ q ≫ Spec.map (a.app (Opposite.op j)) := by
+  run_tac Lean.logInfo "PH701: proof started"
   classical
   dsimp only
   have : IsConnected I := IsCofiltered.isConnected I
@@ -130,6 +131,7 @@ theorem punctured_root_colimit_continuity
   let V₀ : N₀.Opens := PrimeSpectrum.basicOpen (algebraMap R A₀ f)
   let k := V₀.ι ≫ q₀
   let E := F.rightOp ⋙ Scheme.Spec
+  run_tac Lean.logInfo "PH701: diagram defined"
   let s : E ⟶ (Functor.const I).obj (Spec R) :=
     { app := fun j => Spec.map (a.app (Opposite.op j))
       naturality := by
@@ -138,11 +140,13 @@ theorem punctured_root_colimit_continuity
         rw [← Spec.map_comp]
         congr 1
         simpa using (a.naturality h.op).symm }
+  run_tac Lean.logInfo "PH701: natural transformation defined"
   let cE : Cone E := Scheme.Spec.mapCone (coneRightOpOfCocone c₀)
   have hcE : IsLimit cE := isLimitOfPreserves Scheme.Spec
     (isLimitConeRightOpOfCocone F hc₀)
   let cH : Cone E := cE.extend (Spec.map e₀.hom)
   have hcH : IsLimit cH := hcE.extendIso (Spec.map e₀.hom)
+  run_tac Lean.logInfo "PH701: limit transported"
   have hlegs : ∀ j, cH.π.app j ≫ s.app j = Spec.map b := by
     intro j
     change Spec.map e₀.hom ≫ Spec.map (c₀.ι.app (Opposite.op j)) ≫
