@@ -15,8 +15,16 @@ A compatible family of maps `T_n ⟶ K_n` between the derived reductions of two 
 complexes lifts to a map `T ⟶ K` whenever `K` is derived complete. This is the surjective
 half of the Milnor sequence for `Hom(T, R lim K_n)`.
 
-Source: blueprint `lemma-integral-model-weakly-contractible`, proof, paragraph beginning
-"To lift"; Stacks Project, Tag 09C6.
+## Implementation details
+
+By adjunction the family is a compatible family of maps from `T` to the restricted
+reductions of `K`, i.e. a map to their product killed by `1 - shift`. The Roos triangle
+exhibits `K` as the derived limit of these reductions, so this map factors through `K`,
+and the reductions of the factorization are the given maps.
+
+## References
+
+* [Stacks Project, Tag 09C6](https://stacks.math.columbia.edu/tag/09C6)
 -/
 
 @[expose] public noncomputable section
@@ -88,15 +96,7 @@ private theorem reductionAdjoint_step (W : Scheme.{u})
   erw [hmid, reassoc_of% hunit]
 
 /-- A compatible family of maps between the derived reductions of `T` and of a derived
-complete `K` is the family of reductions of a single map `T ⟶ K`.
-
-Source: blueprint `lemma-integral-model-weakly-contractible`, proof, Milnor sequence
-paragraph; Stacks Project, Tag 09C6 (auxiliary; not a blueprint node).
-
-Proof: by adjunction the family is a compatible family of maps from `T` to the restricted
-reductions of `K`, i.e. a map to their product killed by `1 - shift`. The Roos triangle
-exhibits `K` as the derived limit of these reductions, so this map factors through `K`,
-and the reductions of the factorization are the given maps. -/
+complete `K` is the family of reductions of a single map `T ⟶ K`. -/
 theorem exists_hom_of_internalReductionHomTower_sections (W : Scheme.{u})
     (T K : DerivedCategory (AdicCompletion.Modules l E W)) (hK : IsDerivedComplete l E W K)
     (s : (internalReductionHomTower l E W T K).sections) :

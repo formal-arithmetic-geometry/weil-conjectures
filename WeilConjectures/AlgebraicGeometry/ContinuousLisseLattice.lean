@@ -13,8 +13,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
 Let `E / ℚ_ℓ` be finite and let `L` be a lisse `E_X`-module on `X_proét`. A lattice in `L`
 is a lisse `𝒪_{E,X}`-submodule `M ⊆ L` with `M[1/ℓ] = L`.
-
-Source: blueprint `definition-lattice`.
 -/
 
 @[expose] public noncomputable section
@@ -27,11 +25,10 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- A *lattice* in an `E_X`-module `L` (blueprint `definition-lattice`, clause
-`definition-lattice--1`): a lisse `𝒪_{E,X}`-module `M` together with an `𝒪_{E,X}`-linear
-monomorphism `ι : M ⟶ L`, where `L` is regarded as an `𝒪_{E,X}`-module by restriction of
-scalars, such that `M[1/ℓ] = L`, i.e. the `E_X`-linear map `E_X ⊗_{𝒪_{E,X}} M ⟶ L` adjoint
-to `ι` is an isomorphism. The blueprint applies this to lisse `L`. -/
+/-- A *lattice* in an `E_X`-module `L`: a lisse `𝒪_{E,X}`-module `M` together with an
+`𝒪_{E,X}`-linear monomorphism `ι : M ⟶ L`, where `L` is regarded as an `𝒪_{E,X}`-module by
+restriction of scalars, such that `M[1/ℓ] = L`, i.e. the `E_X`-linear map
+`E_X ⊗_{𝒪_{E,X}} M ⟶ L` adjoint to `ι` is an isomorphism. -/
 structure IsLattice {X : Scheme.{u}}
     (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))

@@ -18,12 +18,25 @@ Let `W` be an affine weakly contractible scheme, `K` a derived complete complex 
 `𝒪_{E,W}`-modules and `P` a bounded complex of finite free `𝒪_E`-modules. If every reduction
 `K_n` is isomorphic to `(P/π^n)_W`, then `K ≅ 𝒪_{E,W} ⊗_{𝒪_E} P`.
 
-The isomorphisms at the finite levels need not be compatible. The Hom groups between the
-reductions satisfy the Mittag-Leffler condition with a uniform rate, so some compatible family
-of maps starts with an isomorphism; it lifts to a map into the complete `K`, which is an
-isomorphism by derived Nakayama.
+The isomorphisms at the finite levels need not be compatible.
 
-Source: blueprint `lemma-integral-model-weakly-contractible`; Stacks Project, Tag 09C5.
+## Implementation details
+
+The proof of `nonempty_iso_internalPerfectScalarModel_of_isWeaklyContractible` runs as follows.
+1. Choose `e` with `π_E^e` killing the torsion of `H^1` of `Q = P^∨ ⊗ P`, a bounded complex of
+   finite free modules over the discrete valuation ring `𝒪_E`.
+2. By weak contractibility the tower of groups `Hom(T_n, K_n)` is Mittag-Leffler, with
+   stable images from level `n + e` on (`internalPerfectReductionHom_mittagLeffler`).
+3. Each group contains an isomorphism, whose reductions are isomorphisms, so the stable image at
+   the first level contains an isomorphism; it lifts to a compatible family.
+4. As `K` is complete, the family lifts to a map `T ⟶ K`
+   (`exists_hom_of_internalReductionHomTower_sections`), whose first reduction is invertible.
+5. `T` is complete (`isDerivedComplete_internalPerfectScalarModel`), so derived Nakayama
+   (`derived_nakayama_first_reduction`) shows that this map is an isomorphism.
+
+## References
+
+* [Stacks Project, Tag 09C5](https://stacks.math.columbia.edu/tag/09C5)
 -/
 
 @[expose] public noncomputable section
@@ -97,22 +110,7 @@ contractible object of the pro-étale site, `K` a derived complete complex of
 `𝒪_{E,W}`-modules and `P` a bounded complex of finite free `𝒪_E`-modules. If for every `n`
 the reduction `K_n` is isomorphic to the reduction `(P/π_E^n)_W` of the scalar model
 `𝒪_{E,W} ⊗_{𝒪_E} P`, then `K ≅ 𝒪_{E,W} ⊗_{𝒪_E} P`. The levelwise isomorphisms are not assumed
-to be compatible. The index `n : ℕ` denotes the exponent `n + 1`.
-
-Source: blueprint `lemma-integral-model-weakly-contractible` and its clause
-`lemma-integral-model-weakly-contractible--1`, statement and proof.
-
-Proof, following the blueprint:
-1. Choose `e` with `π_E^e` killing the torsion of `H^1` of `Q = P^∨ ⊗ P`, a bounded complex of
-   finite free modules over the discrete valuation ring `𝒪_E`.
-2. By weak contractibility the tower of groups `Hom(T_n, K_n)` is Mittag-Leffler, with
-   stable images from level `n + e` on (`internalPerfectReductionHom_mittagLeffler`).
-3. Each group contains an isomorphism, whose reductions are isomorphisms, so the stable image at
-   the first level contains an isomorphism; it lifts to a compatible family.
-4. As `K` is complete, the family lifts to a map `T ⟶ K`
-   (`exists_hom_of_internalReductionHomTower_sections`), whose first reduction is invertible.
-5. `T` is complete (`isDerivedComplete_internalPerfectScalarModel`), so derived Nakayama
-   (`derived_nakayama_first_reduction`) shows that this map is an isomorphism. -/
+to be compatible. The index `n : ℕ` denotes the exponent `n + 1`. -/
 theorem nonempty_iso_internalPerfectScalarModel_of_isWeaklyContractible
     (X : Scheme.{u}) (W : X.ProEt) (hAffine : IsAffine W.left)
     (hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)

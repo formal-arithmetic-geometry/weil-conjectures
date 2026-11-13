@@ -16,10 +16,14 @@ import Mathlib.LinearAlgebra.Dimension.Free
 /-! # Completeness of the scalar model of a bounded finite free complex
 
 For a bounded complex `P` of finite free `𝒪_E`-modules, the complex `𝒪_{E,W} ⊗_{𝒪_E} P`
-is derived complete. Its terms are finite free, hence complete, and complete objects are
-closed under shifts and cones, so the finite stupid filtration of `P` gives the claim.
+is derived complete.
 
-Source: blueprint `lemma-integral-model-weakly-contractible`, proof, last paragraph.
+## Implementation details
+
+Every term is isomorphic to a finite free module, whose completeness is
+`finite_scalar_local_model_complete`. Complete objects are closed under isomorphisms,
+shifts and cones (`derived_nakayama_first_reduction`), so the stupid filtration
+(`CochainComplex.bounded_mem_of_single_terms`) shows the whole complex is complete.
 -/
 
 @[expose] public noncomputable section
@@ -43,15 +47,7 @@ theorem IsDerivedComplete.of_iso {W : Scheme.{u}}
   exact ⟨P, hP, ⟨eP ≪≫ e⟩, h⟩
 
 /-- The scalar model `𝒪_{E,W} ⊗_{𝒪_E} P` of a bounded complex `P` of finite free
-`𝒪_E`-modules is derived complete.
-
-Source: blueprint `lemma-integral-model-weakly-contractible`, proof, last paragraph
-(auxiliary; not a blueprint node).
-
-Proof: every term is isomorphic to a finite free module, whose completeness is
-`finite_scalar_local_model_complete`. Complete objects are closed under isomorphisms,
-shifts and cones (`derived_nakayama_first_reduction`), so the stupid filtration
-(`CochainComplex.bounded_mem_of_single_terms`) shows the whole complex is complete. -/
+`𝒪_E`-modules is derived complete. -/
 theorem isDerivedComplete_internalPerfectScalarModel (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
