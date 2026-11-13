@@ -82,12 +82,16 @@ set_option profiler true in
 private theorem brownCoherenceRestrictionSections {m n : ℕ} (h : m ≤ n)
     (M : strictEtaleLevel W O t m) (U : W.Etaleᵒᵖ) (x : M.val.obj U) :
     HEq (((ordinaryRestrictionIso O t W h).hom.app M).hom.app U x) x := by
-  exact HEq.rfl
+  rw [ordinaryRestrictionIso]
+  simp only [NatIso.ofComponents_hom_app, ObjectProperty.isoMk_hom,
+    ObjectProperty.homMk_hom, ModuleCat.isoMk_hom]
+  rfl
 
 set_option profiler true in
 private theorem brownCoherenceDerivedRestriction
     (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P)
     {m n : ℕ} (h : m ≤ n) :
+    letI := R.ordinaryAdditive
     ∃ δ : (P.scalar h).restriction ⋙ R.derived n ≅ R.derived m ⋙
         Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h),
       ∀ K : CochainComplex (strictEtaleLevel W O t m) ℤ,
