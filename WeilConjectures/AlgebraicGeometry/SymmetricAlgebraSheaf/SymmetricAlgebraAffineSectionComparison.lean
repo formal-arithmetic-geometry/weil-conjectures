@@ -143,7 +143,7 @@ private theorem exists_tildeTensorEquiv {R : CommRingCat.{u}} (M : ModuleCat R)
   rw [ht]
   congr 1
 
--- Elaborating the chart transports compares several section-module scalar structures.
+set_option profiler true in
 private theorem exists_sectionEquiv {X : Scheme.{u}} (F : X.Modules)
     [F.IsQuasicoherent] {W : X.Opens} (hW : IsAffineOpen W)
     (V : (Spec Γ(X, W)).affineOpens) :
@@ -178,8 +178,9 @@ private theorem exists_sectionEquiv {X : Scheme.{u}} (F : X.Modules)
   refine ⟨ell.toAddEquiv.symm.trans (t.toAddEquiv.trans β.toAddEquiv), ?_⟩
   intro r a
   change β (t (ell.symm (r • restriction F _ a))) = _
-  rw [← hell, LinearEquiv.symm_apply_apply, TensorProduct.congr_tmul]
-  exact hβ _ _
+  have he : ell.symm (r • restriction F _ a) = r ⊗ₜ[R] a :=
+    (congrArg ell.symm (hell r a)).symm.trans (ell.symm_apply_apply _)
+  exact (congrArg (fun z ↦ β (t z)) he).trans (hβ (f r) a)
 
 private theorem section_induction {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent]
     {U W : X.Opens} (hU : IsAffineOpen U) (hW : IsAffineOpen W) (hUW : U ≤ W)
