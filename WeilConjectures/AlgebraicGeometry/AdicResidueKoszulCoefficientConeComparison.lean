@@ -71,7 +71,42 @@ private theorem mapExtendSingleIso_hom_f_zero
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
     HomologicalComplex.single_map_f_self, Category.assoc,
     Iso.inv_hom_id_assoc, ← E.map_comp_assoc]
-  rfl
+  simp only [Iso.inv_hom_id, Category.comp_id, ChainComplex.single₀ObjXSelf,
+    Iso.refl_hom]
+
+/-- Normalized units determine an augmentation into a single complex. -/
+private theorem augmentationComparisonToSingle
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (E : C ⥤ D) [E.Additive]
+    {K L : CochainComplex C ℤ} {T : CochainComplex D ℤ} {N W : D}
+    (f : K ⟶ L) (ε : T ⟶ (HomologicalComplex.single D (.up ℤ) 0).obj N)
+    (eK : (E.mapHomologicalComplex (.up ℤ)).obj K ≅ T)
+    (eQ : (E.mapHomologicalComplex (.up ℤ)).obj L ≅
+      (HomologicalComplex.single D (.up ℤ) 0).obj N)
+    {V Z : C} (vK : V ≅ K.X 0) (vL : L.X 0 ≅ Z) (π : V ⟶ Z)
+    (c : W ≅ E.obj V) (q : E.obj Z ≅ N)
+    (u : (HomologicalComplex.single D (.up ℤ) 0).obj W ⟶ T)
+    (p : (HomologicalComplex.single D (.up ℤ) 0).obj W ⟶
+      (HomologicalComplex.single D (.up ℤ) 0).obj N)
+    (hf : vK.hom ≫ f.f 0 ≫ vL.hom = π)
+    (heQ : eQ.hom.f 0 =
+      E.map vL.hom ≫ q.hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv)
+    (hu : c.hom ≫ E.map vK.hom ≫ eK.hom.f 0 =
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ u.f 0)
+    (hp : c.hom ≫ E.map π ≫ q.hom =
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ p.f 0 ≫
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).hom)
+    (hε : u ≫ ε = p) :
+    (E.mapHomologicalComplex (.up ℤ)).map f ≫ eQ.hom = eK.hom ≫ ε := by
+  have hp' := congrArg
+    (fun z ↦ z ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv) hp
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hp'
+  have hn := congrArg (fun z ↦
+    (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ z.f 0) hε
+  simp only [HomologicalComplex.comp_f] at hn
+  exact augmentationComparisonOfZero E f ε eK eQ vK vL π c
+    (q.hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv)
+    _ _ hf heQ hu hp' hn (fun _ _ h ↦ HomologicalComplex.to_single_hom_ext h)
 
 /-- Extension preserves an augmentation which is epimorphic in degree zero. -/
 private theorem epi_extendMap_single_of_epi_zero
@@ -245,24 +280,12 @@ theorem adicResidue_koszul_coefficient_cone_comparison
       apply LinearMap.ext
       intro x
       simp
-    have hp := congrArg (fun z ↦ z ≫
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0
-        (adicResidueQuotientModule X (Ideal.span (Set.range a)) U n)).inv) (hq n)
-    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hp
-    have hn := congrArg (fun z ↦
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0
-        (SheafOfModules.unit (siteModuleRings O))).inv ≫ z.f 0) (hε n)
-    simp only [HomologicalComplex.comp_f] at hn
-    refine augmentationComparisonOfZero E (f n) (ε.app (op n)) (eK n) (eQ n)
+    exact augmentationComparisonToSingle E (f n) (ε.app (op n)) (eK n) (eQ n)
       (asIso (vK n))
       (((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extendXIso
         ComplexShape.embeddingDownNat (i := 0) rfl)
       (ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
-      c ((q n).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv)
-      _ _ hf0 (heQ n) (hu n) hp hn ?_
-    intro g h hzero
-    apply HomologicalComplex.to_single_hom_ext
-    exact hzero
+      c (q n) _ _ hf0 (heQ n) (hu n) (hq n) (hε n)
   have hfepi (n : ℕ) : Epi (H.map (f n)) := by
     have : Epi ((εA n).f 0) := by
       rw [hεA n]
