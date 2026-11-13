@@ -687,6 +687,9 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true
 
+-- Reuse the compact proof instead of rebuilding the sheaf-composition instance.
+attribute [local instance 20000] ringedCompletionHasSheafCompose
+
 attribute [local irreducible] homComplexFunctor homComplexIsLimit
 attribute [local irreducible] sheafCompose SheafOfModules.restrictScalars
   SheafOfModules.coefficientHomObjComparisonHom SheafOfModules.genericUnitComponent
@@ -711,8 +714,7 @@ private theorem unitProducts
   intro K
   apply SheafOfModules.hasLimitsOfShape
 
-set_option profiler true in
-set_option maxHeartbeats 700000 in
+set_option trace.profiler true in
 -- The statement and its normalization compare several chosen Hom-complex constructions.
 /-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
 restriction and evaluation at one.

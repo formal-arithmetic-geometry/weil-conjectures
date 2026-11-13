@@ -594,8 +594,7 @@ private theorem derivedCoefficientHomFunctor
   let fF := Localization.fac (I ⋙ G ⋙ QB) hinv QR
   exact ⟨F, ⟨fF⟩⟩
 
-set_option profiler true in
-set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- The localization comparison involves three resolutions and several whiskered isomorphisms.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -762,6 +761,8 @@ theorem flat_ringed_ideal_complete_equivalence
         ((homComplexFunctor (R := R)).map ε.op).app (T.obj M)) ≫
           (dK M).inv at h
     exact (Iso.eq_comp_inv (dK M)).mp h
+  -- The representative formulas now contain all the data needed from the chosen lifts.
+  clear_value β Θ
   have hrep (M : ringedSiteComplex B) :
       rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M)) =
         ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) := by
@@ -790,7 +791,7 @@ theorem flat_ringed_ideal_complete_equivalence
             rw [reassoc_of% hnΘ]
       _ = rD.map (QB.map (b.app M) ≫ a.inv.app (rc.obj M)) ≫
           (Θ.hom.app (QR.obj (rc.obj M)) ≫ (dK (rc.obj M)).hom) := by
-            rw [hβQ]
+            rw [hβQ M]
             have hcanc := (F.mapIso (eR.app M)).inv_hom_id
             change F.map (eR.inv.app M) ≫ F.map (eR.hom.app M) = 𝟙 _ at hcanc
             simp only [Category.assoc, hcanc]
@@ -800,7 +801,7 @@ theorem flat_ringed_ideal_complete_equivalence
       _ = rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
           QR.map (c.hom.app (T.obj (rc.obj M)) ≫
             ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))) := by
-            rw [hΘ]
+            rw [hΘ (rc.obj M)]
             simpa only [← Category.assoc] using congrArg
               (fun z ↦ z ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
                 QR.map (c.hom.app (T.obj (rc.obj M)) ≫
