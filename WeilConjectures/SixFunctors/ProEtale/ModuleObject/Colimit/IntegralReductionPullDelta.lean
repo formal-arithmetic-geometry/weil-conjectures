@@ -62,7 +62,7 @@ private lemma inv_comp_of_comparison {C D : Type*} [Category* C] [Category* D]
   calc
     u ≫ v = (u ≫ v ≫ F.map p.hom ≫ F.map q) ≫
         F.map (q' ≫ p.inv) := by
-          simp only [Category.assoc, ← F.map_comp, reassoc_of% hq, Category.id_comp,
+          simp only [Category.assoc, ← F.map_comp, reassoc_of% hq,
             p.hom_inv_id, F.map_id, Category.comp_id]
     _ = (e.hom ≫ s ≫ t ≫ F.map r.hom) ≫ F.map (q' ≫ p.inv) := by rw [h]
     _ = e.hom ≫ (s ≫ t) ≫ F.map (r.hom ≫ q' ≫ p.inv) := by
@@ -73,7 +73,6 @@ section Comap
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option profiler true in
 /-- The inverse of (Pull) on the image of an object of the homotopy category, modulo the
 counits. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
@@ -110,7 +109,6 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
         (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧)) (.up ℤ)).app K)
       _ _ _ _ (derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K)
 
-set_option profiler true in
 /-- The composite `Lf^* (Res (Ext M)) ⟶ Res (Lf^* (Ext M)) ⟶ Res (Ext (Lf^* M))` of `ι` and of `Res`
 of the inverse of (Pull), on the image of an object of the homotopy category, modulo the
 counits: it is the underived composite of `comapUpperStarIso` and of the inverse of `pullIso`. -/
@@ -274,7 +272,6 @@ lemma upperStarExtendComapComplexIso_quotient_map
 
 variable (hY : (ShortComplex.mk _ _ wY).ShortExact) (hX : (ShortComplex.mk _ _ wX).ShortExact)
 
-set_option profiler true in
 /-- **(Pull) is compatible with the connecting morphisms of the reduction triangles**, on the
 image of a complex of flat modules. -/
 lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
@@ -344,7 +341,6 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   simp only [reassoc_of% hV, reassoc_of% hq, ← reassoc_of% hσ]
   rfl
 
-set_option profiler true in
 /-- **(Pull) is compatible with the connecting morphisms of the reduction triangles**: for
 `M ∈ D(Y_proét, Λ)`, `Lf^*` of the connecting morphism `δ_M`, followed by the commutation of `Lf^*`
 with the shift, is the commutation `ι` of `Res` with `Lf^*`, followed by `Res` of the inverse of
