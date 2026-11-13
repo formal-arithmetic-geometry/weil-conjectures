@@ -248,19 +248,11 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  dsimp only [SemilinearSections.hasDerived, coefficientSequenceHasDerived,
-    finiteSystemDerivedPullback, finiteSystemDerived, ProEtale.VaryingRing.Derived,
-    SemilinearSections.DS, SemilinearSections.D, finiteSystemPullback,
-    ProEtale.VaryingRing.pull, integralComparisonSequencePullback,
-    finiteSystems, ProEtale.VaryingRing.Modules, SemilinearSections.Systems,
-    SemilinearSections.Mod, coefficientSequenceModules, SemilinearSections.ring,
-    SemilinearSections.systemRing, SemilinearSections.ringPresheaf,
-    SemilinearSections.rings, coefficientSequenceCommRingSheaf,
-    coefficientSequenceCommRingPresheaf, coefficientSequenceCommRingSystem,
-    ProEtale.VaryingRing.coefficients, ProEtale.VaryingRing.coefficientTransition,
-    integralCoefficientCommRingSheaf, coefficientSequenceCommRingTransition,
-    integralCoefficientSheafTransition, integralSystemRings, integralSystemTransition] at hh ⊢
-  exact eq_of_heq hh
+  apply eq_of_heq
+  convert hh using 0
+  apply propext
+  constructor <;> intro hcomp <;> convert hcomp using 1 <;> rfl
+
 
 end Composition
 
