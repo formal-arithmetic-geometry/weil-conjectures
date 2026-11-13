@@ -518,6 +518,43 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
+-- Reconcile the generic-ring instance expressions once at the finite coefficient level.
+private theorem finite_native_open_unit_mate
+    {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
+    {j : U ⟶ Z} {g : Z' ⟶ Z} [IsOpenImmersion j] [IsOpenImmersion j']
+    (sq : IsPullback h j' j g) (n : ℕ)
+    (N : DerivedCategory (Sheaf (ProEt.topology U)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))))) :
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').unit.app
+        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.obj N) ≫
+      (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').leftDerivedFunctor.map
+        ((leftDerivedOpenImmersionLowerShriekBaseChangeIso
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).hom.app N) =
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.map
+        ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).unit.app N) ≫
+      (leftDerivedUpperStarSquareIso
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).inv.app
+        ((openImmersionLowerShriek
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
+  have he := unit_mateEquiv
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j')
+    (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).inv) N
+  rw [mateEquiv_leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_inv] at he
+  simpa only [leftDerivedOpenImmersionLowerShriekBaseChangeIso,
+    leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    TwoSquare.mk, Functor.comp_obj, Functor.id_obj,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    NatTrans.comp_app, Category.assoc] using he.symm
+
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
@@ -622,10 +659,18 @@ private theorem open_exchange_inverse (b : Base l E)
         ((openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
   have H := open_scalar_from_comparisons
+    (H := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor)
+    (G := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) g).leftDerivedFunctor)
+    (J := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).leftDerivedFunctor)
+    (J' := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').leftDerivedFunctor)
+    (L := (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory)
+    (L' := (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').mapDerivedCategory)
     (comparisonFinitePull l E b g n).symm (comparisonFinitePull l E b h n).symm
     (comparisonFinitePull l E b j n).symm (comparisonFinitePull l E b j' n).symm
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j)
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j')
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j')
     (comparisonLevelOpenAdjunction l E b j n)
     (comparisonLevelOpenAdjunction l E b j' n)
     (leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).symm
@@ -647,7 +692,7 @@ private theorem open_exchange_inverse (b : Base l E)
       exact HU)
     (by
       intro M
-      have HU := native_open_unit_mate (R l E n) sq M
+      have HU := finite_native_open_unit_mate l E sq n M
       simp only [Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU)
     (fun K ↦ by
