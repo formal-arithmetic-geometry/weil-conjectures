@@ -177,6 +177,7 @@ private theorem exists_sectionEquiv {X : Scheme.{u}} (F : X.Modules)
   refine ⟨ell.toAddEquiv.symm.trans (t.toAddEquiv.trans β.toAddEquiv), ?_⟩
   intro r a
   change β (t (ell.symm (r • restriction F _ a))) = _
+  -- Transport the pure-tensor equality directly, avoiding rewrite search through the equivalences.
   have he : ell.symm (r • restriction F _ a) = r ⊗ₜ[R] a :=
     (congrArg ell.symm (hell r a)).symm.trans (ell.symm_apply_apply _)
   exact (congrArg (fun z ↦ β (t z)) he).trans (hβ (f r) a)
@@ -211,7 +212,6 @@ private theorem restriction_comp {X : Scheme.{u}} (F : X.Modules)
     restriction F j (restriction F i a) = restriction F (i ≫ j) a := by
   exact (CategoryTheory.congr_fun ((presheaf F).map_comp i j) a).symm
 
-set_option profiler true in
 /-- The restricted sectionwise symmetric algebra maps to the tilde of its affine sections,
 on the affine basis, bijectively on each affine open, with composite the unit.
 Source: Stacks Project, Constructions, Lemma 01LN; Algebra, Lemma 0C6F;
@@ -271,6 +271,7 @@ theorem exists_affineSectionComparison {X : Scheme.{u}}
         · intro x y hx hy
           simp only [_root_.map_add, hx, hy]
         · intro r a
+          -- Keep each transport explicit so rewriting need not unfold the section-module structures.
           let i := (inducedFunctor B).op.map j
           let k := hW.fromSpec.opensFunctor.op.map i
           have hi :
