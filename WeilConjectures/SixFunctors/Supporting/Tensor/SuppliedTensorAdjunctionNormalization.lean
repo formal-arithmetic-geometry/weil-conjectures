@@ -259,10 +259,8 @@ private theorem privateSuppliedTensorAdjunction_normalized
       (suppliedTensor_mate_linear_iff f RI I c hc M H)
   have hB M H a : (mset B).map (B' M H a) ≫ eP.hom.app H =
       f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
-    exact (congrArg (fun b ↦ b ≫ eP.hom.app H)
-      (restrictHomEquiv_map (mset RI) (mset B) (E M H)
-        (suppliedTensor_mate_linear_iff f RI I c hc M H) a)).trans
-      (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
+    rw [restrictHomEquiv_map]
+    exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
   have hBL {M N} (a : M ⟶ N) H b :
       B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
     apply (mset B).map_injective
