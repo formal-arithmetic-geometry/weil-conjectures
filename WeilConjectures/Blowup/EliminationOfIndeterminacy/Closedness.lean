@@ -120,7 +120,7 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       intro i
       exact (le_iSup (fun i ↦ PrimeSpectrum.basicOpen
         (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))) i).trans_eq hO.symm
-    -- `O` and `B` are passed explicitly: inferring them by unification is slow.
+    -- Pin the chart ring and opens before checking the coordinate identities.
     refine AffineSpace.isClosed_range_of_basicOpen_fractions
       (S := .of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
         (reesX (K.ideal V) (gen k) (hgen k)))) (O := K.blowupChart V (hgen k) ⁻¹ᵁ W)
@@ -141,8 +141,9 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       rw [mul_comm (a i), hrel i' i j, mul_comm]
     · -- the coordinate identity on each piece
       intro i j
-      exact K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
-        (hgi i) rfl (hBle i) j
+      -- Compare the arguments individually instead of unfolding the chart rings all at once.
+      convert K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
+        (hgi i) rfl (hBle i) j using 2
 
 end Closedness
 
