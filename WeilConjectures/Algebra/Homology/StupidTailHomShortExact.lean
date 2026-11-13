@@ -85,6 +85,7 @@ private lemma homMap_add {C : Type u} [SmallCategory C]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborating the dependent product lifts and their three splitting identities needs extra steps.
 private lemma homComplex_degreewise_split {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}}
