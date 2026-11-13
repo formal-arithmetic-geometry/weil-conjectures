@@ -337,8 +337,6 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
     change (F.map (α.f 0)).f 1 _ =
       (F.map (α.f 0)).f 1 _
     have hcomm := ConcreteCategory.congr_hom ((F.map (α.f 0)).comm 0 1) t
-    change B₀.d 0 1 ((F.map (α.f 0)).f 0 t) =
-      (F.map (α.f 0)).f 1 (A₀.d 0 1 t) at hcomm
     rw [← hcomm, hαt]
     dsimp only [v]
     rw [map_sub]
