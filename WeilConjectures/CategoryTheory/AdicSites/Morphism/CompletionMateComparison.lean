@@ -1139,7 +1139,6 @@ private theorem scalarInsertion_isIso (U : Site.{u})
   rw [ConstantCompletion.insertion_eq_unit]
   infer_instance
 
-set_option profiler true in
 private theorem restrictionPullAdjunct_exists {V U : Site.{u}} (f : Morphism V U)
     {R S : Sheaf V.topology CommRingCat.{u}} {R' S' : Sheaf U.topology CommRingCat.{u}}
     (a : R ⟶ S) (b : R' ⟶ S')
@@ -1173,7 +1172,6 @@ private theorem restrictionPullAdjunct_exists {V U : Site.{u}} (f : Morphism V U
 
 -- Prove the scalar-restriction comparison over an abstract coefficient square.
 -- This keeps quotient-ring constructions out of the normalization argument.
-set_option profiler true in
 private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
     {R S : Sheaf V.topology CommRingCat.{u}} {R' S' : Sheaf U.topology CommRingCat.{u}}
     (a : R ⟶ S) (b : R' ⟶ S')
@@ -1209,7 +1207,7 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
           (((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M))) = _
     rw [Equiv.apply_symm_apply]
     rw [hq₀]
-    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+    simp only [F, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
   have hp {R : Sheaf V.topology CommRingCat.{u}}
       {S : Sheaf U.topology CommRingCat.{u}} (t : F.rings.obj R ⟶ S) [IsIso t]
       (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.pullInsertion F t M) := by
@@ -1238,7 +1236,6 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
   exact (he M).trans (hn M).symm
 
 
-set_option profiler true in
 /-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
 on every inverse-image generator, not merely its objects.
 Source: Stacks 03D2, 0E48 (blueprint: lem-sp-completion-mate-comparison).
@@ -1372,6 +1369,7 @@ private theorem reductionPull_hom_ext {V U : Site.{u}} (f : Morphism V U)
   simpa only [η, ConstantCompletion.insertion_eq_unit, Category.assoc,
     ConstantCompletion.reduction, ConstantCompletion.finiteMap] using h
 
+set_option profiler true in
 /-- The ordinary strict reduction/pullback comparison is fixed on quotient-unit
 insertions at every level. Its source and target are actual strict diagrams.
 Source: Stacks 07A4, 099N(5) (blueprint: lem-sp-completion-mate-comparison).
