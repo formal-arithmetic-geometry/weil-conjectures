@@ -40,32 +40,32 @@ namespace CategoryTheory.Mod
 
 open MonoidalCategory MonObj
 
+set_option profiler true in
 /-- The comparison of adjoint transfers for module objects, with a chosen representative
 of the transfer on the homotopy category. -/
-set_option profiler true in
 private lemma compIsoTransfer_derivedExtendScalars_comparison
     {C : Type u'} [Category.{v} C] [Abelian C] [MonoidalCategory C] [MonoidalPreadditive C]
     [SymmetricCategory C] [MonoidalClosed C] [IsGrothendieckAbelian.{v} C]
     [Abelian.HasFunctorialFlatResolution C]
     {R R' S T : C} [MonObj R] [MonObj R'] [MonObj S] [MonObj T]
     [IsCommMonObj R] [IsCommMonObj R'] [IsCommMonObj S] [IsCommMonObj T]
-    (a : R ⟶ S) (a' : R' ⟶ S) (b : S ⟶ T) (ι : R ⟶ T) (ι' : R' ⟶ T)
-    [IsMonHom a] [IsMonHom a'] [IsMonHom b] [IsMonHom ι] [IsMonHom ι']
+    (a : R ⟶ S) (a' : R' ⟶ S) (b : S ⟶ T) (j : R ⟶ T) (j' : R' ⟶ T)
+    [IsMonHom a] [IsMonHom a'] [IsMonHom b] [IsMonHom j] [IsMonHom j']
     [PreservesFiniteLimits (extendScalars a')]
-    (e : extendScalars a ⋙ extendScalars b ≅ extendScalars ι)
-    (e' : extendScalars a' ⋙ extendScalars b ≅ extendScalars ι')
+    (e : extendScalars a ⋙ extendScalars b ≅ extendScalars j)
+    (e' : extendScalars a' ⋙ extendScalars b ≅ extendScalars j')
     (τ : (extendScalars a).leftDerivedFunctor ⋙ (extendScalars b).leftDerivedFunctor ≅
-      (extendScalars ι).leftDerivedFunctor)
+      (extendScalars j).leftDerivedFunctor)
     (τ' : (extendScalars a').leftDerivedFunctor ⋙ (extendScalars b).leftDerivedFunctor ≅
-      (extendScalars ι').leftDerivedFunctor)
+      (extendScalars j').leftDerivedFunctor)
     (hτ : ∀ M : HomotopyCategory (Mod C R) (ComplexShape.up ℤ),
-      τ.hom.app (DerivedCategory.Qh.obj M) ≫ (extendScalars ι).leftDerivedFunctorCounit.app M =
+      τ.hom.app (DerivedCategory.Qh.obj M) ≫ (extendScalars j).leftDerivedFunctorCounit.app M =
         (extendScalars b).leftDerivedFunctor.map ((extendScalars a).leftDerivedFunctorCounit.app M) ≫
           (extendScalars b).leftDerivedFunctorCounit.app
             (((extendScalars a).mapHomotopyCategory _).obj M) ≫
           DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso e _).hom.app M))
     (hτ' : ∀ M : HomotopyCategory (Mod C R') (ComplexShape.up ℤ),
-      τ'.hom.app (DerivedCategory.Qh.obj M) ≫ (extendScalars ι').leftDerivedFunctorCounit.app M =
+      τ'.hom.app (DerivedCategory.Qh.obj M) ≫ (extendScalars j').leftDerivedFunctorCounit.app M =
         (extendScalars b).leftDerivedFunctor.map
             ((extendScalars a').leftDerivedFunctorCounit.app M) ≫
           (extendScalars b).leftDerivedFunctorCounit.app
@@ -74,29 +74,29 @@ private lemma compIsoTransfer_derivedExtendScalars_comparison
     (M : HomotopyCategory (Mod C R') (ComplexShape.up ℤ))
     {q : ((comap a).mapHomotopyCategory _).obj
         (((extendScalars a').mapHomotopyCategory _).obj M) ⟶
-      ((comap ι).mapHomotopyCategory _).obj
-        (((extendScalars ι').mapHomotopyCategory _).obj M)}
+      ((comap j).mapHomotopyCategory _).obj
+        (((extendScalars j').mapHomotopyCategory _).obj M)}
     (hq : Adjunction.compIsoTransfer
       ((extendRestrictAdjunction a).mapHomotopyCategory (ComplexShape.up ℤ))
-      ((extendRestrictAdjunction ι).mapHomotopyCategory (ComplexShape.up ℤ))
+      ((extendRestrictAdjunction j).mapHomotopyCategory (ComplexShape.up ℤ))
       (Functor.mapHomotopyCategoryCompIso e _) (Functor.mapHomotopyCategoryCompIso e' _) M = q) :
     (comap a).mapDerivedCategory.map ((extendScalars a').leftDerivedFunctorCounit.app M) ≫
         (comap a).mapDerivedCategoryFactorsh.hom.app _ ≫ DerivedCategory.Qh.map q =
       Adjunction.compIsoTransfer (derivedExtendMapDerivedCategoryAdjunction a)
-          (derivedExtendMapDerivedCategoryAdjunction ι) τ τ' (DerivedCategory.Qh.obj M) ≫
-        (comap ι).mapDerivedCategory.map ((extendScalars ι').leftDerivedFunctorCounit.app M) ≫
-        (comap ι).mapDerivedCategoryFactorsh.hom.app _ := by
+          (derivedExtendMapDerivedCategoryAdjunction j) τ τ' (DerivedCategory.Qh.obj M) ≫
+        (comap j).mapDerivedCategory.map ((extendScalars j').leftDerivedFunctorCounit.app M) ≫
+        (comap j).mapDerivedCategoryFactorsh.hom.app _ := by
   have hc := Adjunction.compIsoTransfer_comparison
     ((extendRestrictAdjunction a).mapHomotopyCategory (ComplexShape.up ℤ))
-    ((extendRestrictAdjunction ι).mapHomotopyCategory (ComplexShape.up ℤ))
+    ((extendRestrictAdjunction j).mapHomotopyCategory (ComplexShape.up ℤ))
     (Functor.mapHomotopyCategoryCompIso e _) (Functor.mapHomotopyCategoryCompIso e' _)
-    (derivedExtendMapDerivedCategoryAdjunction a) (derivedExtendMapDerivedCategoryAdjunction ι)
+    (derivedExtendMapDerivedCategoryAdjunction a) (derivedExtendMapDerivedCategoryAdjunction j)
     τ τ' (extendScalars a).leftDerivedFunctorCounit
     (asIso (extendScalars a').leftDerivedFunctorCounit)
-    (extendScalars b).leftDerivedFunctorCounit (extendScalars ι).leftDerivedFunctorCounit
-    (extendScalars ι').leftDerivedFunctorCounit
-    (comap a).mapDerivedCategoryFactorsh (comap ι).mapDerivedCategoryFactorsh
-    (derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh ι)
+    (extendScalars b).leftDerivedFunctorCounit (extendScalars j).leftDerivedFunctorCounit
+    (extendScalars j').leftDerivedFunctorCounit
+    (comap a).mapDerivedCategoryFactorsh (comap j).mapDerivedCategoryFactorsh
+    (derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh j)
     (derivedExtendMapDerivedCategoryAdjunction_counit_app_Qh a) hτ hτ' M
   rw [hq] at hc
   exact hc
