@@ -46,12 +46,13 @@ private theorem homologyComparisonOfNatTrans
   let k := fun C ↦ U.map ((A.obj C).iCycles q) ≫ t.app (C.X q)
   have hk (C) : k C ≫ T.map ((B.obj C).d q (q + 1)) = 0 := by
     dsimp only [k]
+    rw [Category.assoc]
     change U.map ((A.obj C).iCycles q) ≫ t.app (C.X q) ≫
       (D ⋙ T).map (C.d q (q + 1)) = 0
     rw [← t.naturality (C.d q (q + 1)), ← Category.assoc]
-    change U.map ((A.obj C).iCycles q) ≫ U.map ((A.obj C).d q (q + 1)) ≫
+    change (U.map ((A.obj C).iCycles q) ≫ U.map ((A.obj C).d q (q + 1))) ≫
       t.app (C.X (q + 1)) = 0
-    rw [← Category.assoc, ← U.map_comp, HomologicalComplex.iCycles_d, U.map_zero, zero_comp]
+    rw [← U.map_comp, HomologicalComplex.iCycles_d, U.map_zero, zero_comp]
   let ki := fun C ↦ KernelFork.mapIsLimit _
     ((B.obj C).cyclesIsKernel q (q + 1) (by simp)) T
   let c := fun C ↦ (ki C).lift (KernelFork.ofι (k C) (hk C))
@@ -132,7 +133,7 @@ private theorem homologyComparisonOfNatTrans
             rw [← T.map_comp, ← HomologicalComplex.homologyπ_naturality, T.map_comp]
           _ = _ := by
             rw [← Category.assoc (U.map ((A.obj C).homologyπ q)), hδ]
-            rfl }
+            exact (Category.assoc _ _ _).symm }
   exact ⟨τ, c, fun C ↦ ⟨hc C, hδ C⟩⟩
 
 set_option trace.profiler true in

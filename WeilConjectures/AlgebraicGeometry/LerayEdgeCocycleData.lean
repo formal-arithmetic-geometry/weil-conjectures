@@ -40,6 +40,97 @@ def LerayEdgeCocycle {X Y : Scheme.{u}} (f : X ⟶ Y) (ε : LerayEdge X Y f) : P
             (I.isoRightDerivedObj
               (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) q).inv) z
 
+/-- Transport a comparison on complex homology to right derived functors, with
+its compatibility for every injective resolution. -/
+private theorem rightDerivedComparisonOfHomology
+    {C₀ C₁ C₂ C₃ : Type*} [Category* C₀] [Category* C₁]
+    [Category* C₂] [Category* C₃]
+    [Abelian C₀] [HasInjectiveResolutions C₀] [Abelian C₁] [Abelian C₂]
+    (G : C₀ ⥤ C₁) (D : C₀ ⥤ C₂) (U : C₁ ⥤ C₃) (T : C₂ ⥤ C₃)
+    [G.Additive] [D.Additive] (q : ℕ)
+    (τ : (G.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+        HomologicalComplex.homologyFunctor _ _ q ⋙ U) ⟶
+      (D.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+        HomologicalComplex.homologyFunctor _ _ q ⋙ T)) :
+    ∃ ε : G.rightDerived q ⋙ U ⟶ D.rightDerived q ⋙ T,
+      ∀ (F : C₀) (I : InjectiveResolution F),
+        U.map (I.isoRightDerivedObj G q).inv ≫ ε.app F =
+          τ.app I.cocomplex ≫ T.map (I.isoRightDerivedObj D q).inv := by
+  classical
+  let ε : G.rightDerived q ⋙ U ⟶ D.rightDerived q ⋙ T :=
+    { app := fun F ↦
+        U.map
+            ((injectiveResolution F).isoRightDerivedObj G q).hom ≫
+          τ.app (injectiveResolution F).cocomplex ≫
+          T.map
+            ((injectiveResolution F).isoRightDerivedObj D q).inv
+      naturality := by
+        intro F F' a
+        let I := injectiveResolution F
+        let J := injectiveResolution F'
+        let φ := InjectiveResolution.desc a J I
+        have comm : I.ι.f 0 ≫ φ.f 0 = a ≫ J.ι.f 0 := by
+          simp [φ]
+        have hG := InjectiveResolution.isoRightDerivedObj_hom_naturality a I J φ comm G q
+        have hD := InjectiveResolution.isoRightDerivedObj_inv_naturality a I J φ comm D q
+        have hG' := congrArg (U.map) hG
+        have hD' := congrArg (T.map) hD
+        simp only [Functor.map_comp] at hG' hD'
+        change U.map ((G.rightDerived q).map a) ≫
+            U.map (J.isoRightDerivedObj G q).hom ≫
+            τ.app J.cocomplex ≫
+            T.map (J.isoRightDerivedObj D q).inv =
+          (U.map (I.isoRightDerivedObj G q).hom ≫
+            τ.app I.cocomplex ≫
+            T.map (I.isoRightDerivedObj D q).inv) ≫
+            T.map ((D.rightDerived q).map a)
+        rw [← Category.assoc, hG', Category.assoc]
+        have hnat := τ.naturality φ
+        change U.map
+            ((G.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ) ≫
+            τ.app J.cocomplex =
+          τ.app I.cocomplex ≫ T.map
+            ((D.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ)
+          at hnat
+        rw [← Category.assoc _ (τ.app J.cocomplex), hnat]
+        simp only [Category.assoc]
+        rw [← hD'] }
+  refine ⟨ε, ?_⟩
+  intro F I
+  let J := injectiveResolution F
+  let φ := InjectiveResolution.desc (𝟙 F) J I
+  have comm : I.ι.f 0 ≫ φ.f 0 = (𝟙 F) ≫ J.ι.f 0 := by simp [φ]
+  have hG := InjectiveResolution.isoRightDerivedObj_inv_naturality
+    (𝟙 F) I J φ comm G q
+  have hD := InjectiveResolution.isoRightDerivedObj_inv_naturality
+    (𝟙 F) I J φ comm D q
+  rw [(G.rightDerived q).map_id, Category.comp_id] at hG
+  rw [(D.rightDerived q).map_id, Category.comp_id] at hD
+  have hG' := congrArg (U.map) hG
+  have hD' := congrArg (T.map) hD
+  simp only [Functor.map_comp] at hG' hD'
+  change U.map (I.isoRightDerivedObj G q).inv ≫
+      (U.map (J.isoRightDerivedObj G q).hom ≫
+        τ.app J.cocomplex ≫
+        T.map (J.isoRightDerivedObj D q).inv) = _
+  rw [hG']
+  rw [Category.assoc]
+  have hc : U.map (J.isoRightDerivedObj G q).inv ≫
+      U.map (J.isoRightDerivedObj G q).hom = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id]
+    exact U.map_id _
+  rw [← Category.assoc _ (U.map
+    (J.isoRightDerivedObj G q).hom), hc]
+  erw [Category.id_comp]
+  have hnat := τ.naturality φ
+  change U.map
+      ((G.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ) ≫
+      τ.app J.cocomplex =
+    τ.app I.cocomplex ≫ T.map
+      ((D.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ)
+    at hnat
+  rw [← Category.assoc, hnat, Category.assoc, ← hD']
+
 set_option trace.profiler true in
 -- Resolution comparison unfolds both module-valued derived functors and forgetful maps.
 set_option backward.isDefEq.respectTransparency false in
@@ -63,12 +154,6 @@ for every coefficient module, independent of the chosen resolution. -/
 theorem leray_edge_cocycle_data {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ ε : LerayEdge X Y f, LerayEdgeCocycle f ε := by
   classical
-  let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
-  let _ : Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
-  let _ : Abelian (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) :=
-    inferInstance
-  let _ : Abelian (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) :=
-    inferInstance
   let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
   let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
   let H := RingedSpace.globalSectionsFunctor Y.toRingedSpace
@@ -78,45 +163,7 @@ theorem leray_edge_cocycle_data {X Y : Scheme.{u}} (f : X ⟶ Y) :
     AddCommGrpCat
   let T := H ⋙ V
   choose τ hτ using leray_complex_cocycle_comparison f
-  let ε : LerayEdge X Y f := fun q ↦
-    { app := fun F ↦
-        U.map
-            ((injectiveResolution F).isoRightDerivedObj G q).hom ≫
-          (τ q).app (injectiveResolution F).cocomplex ≫
-          T.map
-            ((injectiveResolution F).isoRightDerivedObj D q).inv
-      naturality := by
-        intro F F' a
-        let I := injectiveResolution F
-        let J := injectiveResolution F'
-        let φ := InjectiveResolution.desc a J I
-        have comm : I.ι.f 0 ≫ φ.f 0 = a ≫ J.ι.f 0 := by
-          simp [φ]
-        have hG := InjectiveResolution.isoRightDerivedObj_hom_naturality a I J φ comm G q
-        have hD := InjectiveResolution.isoRightDerivedObj_inv_naturality a I J φ comm D q
-        have hG' := congrArg (U.map) hG
-        have hD' := congrArg (T.map) hD
-        simp only [Functor.map_comp] at hG' hD'
-        change U.map ((G.rightDerived q).map a) ≫
-            U.map (J.isoRightDerivedObj G q).hom ≫
-            (τ q).app J.cocomplex ≫
-            T.map (J.isoRightDerivedObj D q).inv =
-          (U.map (I.isoRightDerivedObj G q).hom ≫
-            (τ q).app I.cocomplex ≫
-            T.map (I.isoRightDerivedObj D q).inv) ≫
-            T.map ((D.rightDerived q).map a)
-        rw [← Category.assoc, hG', Category.assoc]
-        have hnat := (τ q).naturality φ
-        change U.map
-            ((G.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ) ≫
-            (τ q).app J.cocomplex =
-          (τ q).app I.cocomplex ≫ T.map
-            ((D.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ)
-          at hnat
-        rw [← Category.assoc _ ((τ q).app J.cocomplex), hnat]
-        simp only [Category.assoc]
-        rw [← hD'] }
-  dsimp only [LerayEdge, RingedSpace.moduleCohomology] at ε
+  choose ε hε using fun q ↦ rightDerivedComparisonOfHomology G D U T q (τ q)
   refine ⟨ε, ?_⟩
   intro q F I K hK s
   subst K
@@ -124,47 +171,11 @@ theorem leray_edge_cocycle_data {X Y : Scheme.{u}} (f : X ⟶ Y) :
   refine ⟨z, ?_, ?_⟩
   · simpa only [eqToHom_refl, Category.comp_id, Functor.map_id, HomologicalComplex.id_f,
       RingedSpace.globalSectionsComplex] using hz
-  · have hε : U.map (I.isoRightDerivedObj G q).inv ≫
-        (ε q).app F = (τ q).app I.cocomplex ≫
-          T.map (I.isoRightDerivedObj D q).inv := by
-      let J := injectiveResolution F
-      let φ := InjectiveResolution.desc (𝟙 F) J I
-      have comm : I.ι.f 0 ≫ φ.f 0 = (𝟙 F) ≫ J.ι.f 0 := by simp [φ]
-      have hG := InjectiveResolution.isoRightDerivedObj_inv_naturality
-        (𝟙 F) I J φ comm G q
-      have hD := InjectiveResolution.isoRightDerivedObj_inv_naturality
-        (𝟙 F) I J φ comm D q
-      rw [(G.rightDerived q).map_id, Category.comp_id] at hG
-      rw [(D.rightDerived q).map_id, Category.comp_id] at hD
-      have hG' := congrArg (U.map) hG
-      have hD' := congrArg (T.map) hD
-      simp only [Functor.map_comp] at hG' hD'
-      change U.map (I.isoRightDerivedObj G q).inv ≫
-          (U.map (J.isoRightDerivedObj G q).hom ≫
-            (τ q).app J.cocomplex ≫
-            T.map (J.isoRightDerivedObj D q).inv) = _
-      rw [hG']
-      rw [Category.assoc]
-      have hc : U.map (J.isoRightDerivedObj G q).inv ≫
-          U.map (J.isoRightDerivedObj G q).hom = 𝟙 _ := by
-        rw [← Functor.map_comp, Iso.inv_hom_id]
-        exact U.map_id _
-      rw [← Category.assoc _ (U.map
-        (J.isoRightDerivedObj G q).hom), hc]
-      erw [Category.id_comp]
-      have hnat := (τ q).naturality φ
-      change U.map
-          ((G.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ) ≫
-          (τ q).app J.cocomplex =
-        (τ q).app I.cocomplex ≫ T.map
-          ((D.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map φ)
-        at hnat
-      rw [← Category.assoc, hnat, Category.assoc, ← hD']
-    have heval := congrArg
+  · have heval := congrArg
       (fun a : U.obj
           ((RingedSpace.globalSectionsComplex I).homology q) ⟶
         T.obj ((D.rightDerived q).obj F) ↦
-        a ((RingedSpace.globalSectionsComplex I).homologyπ q s)) hε
+        a ((RingedSpace.globalSectionsComplex I).homologyπ q s)) (hε q F I)
     simp only [eqToHom_refl, HomologicalComplex.homologyMap_id]
     rw [Category.id_comp, H.map_comp]
     change (ε q).app F
