@@ -91,7 +91,10 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
   let V := homComplex (R := Y.sheaf) P O
   let eta := CochainComplex.toKInjectiveResolution.{u}
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
-  obtain ⟨e, hO, hF⟩ := schemeOrdinaryEvaluation_chain_calculation Y P F f hf
+  have hchain := schemeOrdinaryEvaluation_chain_calculation Y P F f hf
+  let e := hchain.choose
+  have hO := hchain.choose_spec.1
+  have hF := hchain.choose_spec.2
   have hc := schemeTensorEvaluation_localization_coherence Y F V P e
   have hres (M : CochainComplex
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
