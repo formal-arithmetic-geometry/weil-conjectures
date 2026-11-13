@@ -69,6 +69,25 @@ private theorem bridge_naturality (F : Type u) [Field F] [Algebra ℚ_[l] F]
     Functor.isoWhiskerLeft U ρF.comparison
   with_unfolding_all exact b.hom.naturality g
 
+private theorem scalarRoos_composite_naturality
+    {𝒜 ℬ : Type*} [Category* 𝒜] [Abelian 𝒜] [HasCountableProducts 𝒜]
+    [Category* ℬ] [Abelian ℬ] [HasCountableProducts ℬ]
+    (F G : 𝒜 ⥤ ℬ) [F.Additive] [G.Additive] (α : F ⟶ G)
+    {C₀ C₁ : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ}
+    {D₀ D₁ D₂ : ℕᵒᵖ ⥤ CochainComplex ℬ ℤ}
+    (a : C₀ ⟶ C₁) (b : C₁ ⋙ G.mapHomologicalComplex (.up ℤ) ⟶ D₀)
+    (c : D₀ ⟶ D₁) (d : D₁ ⟶ D₂) :
+    (F.mapHomologicalComplex (.up ℤ)).map (integralOperationsRoosMap a) ≫
+        (NatTrans.mapHomologicalComplex α (.up ℤ)).app (integralOperationsRoos C₁) ≫
+        scalarRoosMap G C₁ ≫ integralOperationsRoosMap b ≫
+        integralOperationsRoosMap c ≫ integralOperationsRoosMap d =
+      scalarRoosMap F C₀ ≫ integralOperationsRoosMap
+        (Functor.whiskerRight a (F.mapHomologicalComplex (.up ℤ)) ≫
+          Functor.whiskerLeft C₁ (NatTrans.mapHomologicalComplex α (.up ℤ)) ≫ b ≫ c ≫ d) := by
+  rw [reassoc_of% (scalarRoos_functor_naturality F G α C₁),
+    reassoc_of% (scalarRoosNaturality F a)]
+  simp only [integralOperationsRoosMap_comp, Category.assoc]
+
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
 Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
@@ -267,27 +286,11 @@ theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
       scalarPullbackStrictTower l E L ι f P C κ qE hqE q hq t ht a
         (fun n i U s x ↦
           ScalarRoosLiftProof.scalarComponent_tensor l E L ι X (H.X i) n U s x)
-    have htNat := scalarRoos_functor_naturality G
-      (completedOrdinaryScalarExtension l E L ι X) t.hom CE.asFunctor
-    have hqNat := scalarRoosNaturality G qE.inv
     calc
-      _ = (G.mapHomologicalComplex (.up ℤ)).map (integralOperationsRoosMap qE.inv) ≫
-          scalarRoosMap G CE.asFunctor ≫ integralOperationsRoosMap b ≫
-          integralOperationsRoosMap a ≫ integralOperationsRoosMap τ ≫
-          integralOperationsRoosMap q.hom := by
-        change _ ≫ (NatTrans.mapHomologicalComplex t.hom (.up ℤ)).app _ ≫ _ = _
-        rw [reassoc_of% htNat]
-        rfl
       _ = scalarRoosMap G ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) ≫
-          integralOperationsRoosMap c ≫ integralOperationsRoosMap b ≫
-          integralOperationsRoosMap a ≫ integralOperationsRoosMap τ ≫
-          integralOperationsRoosMap q.hom := by
-        rw [← Category.assoc, hqNat]
-        simp only [Category.assoc]
-        rfl
-      _ = scalarRoosMap G ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) ≫
-          integralOperationsRoosMap (c ≫ b ≫ a ≫ τ ≫ q.hom) := by
-        simp only [integralOperationsRoosMap_comp]
+          integralOperationsRoosMap (c ≫ b ≫ a ≫ τ ≫ q.hom) :=
+        scalarRoos_composite_naturality G (completedOrdinaryScalarExtension l E L ι X)
+          t.hom qE.inv a τ q.hom
       _ = _ := by rw [hb]; rfl
   change _ ≫ _ ≫ rD.inv ≫ _ ≫ _ = _
   rw [reassoc_of% hs]
