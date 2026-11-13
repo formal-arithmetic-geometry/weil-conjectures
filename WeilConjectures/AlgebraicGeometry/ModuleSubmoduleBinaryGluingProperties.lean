@@ -35,8 +35,27 @@ private theorem isIso_of_components
   have : IsIso ((SheafOfModules.forget R).map f) := ‹IsIso f.val›
   exact isIso_of_reflects_iso f (SheafOfModules.forget _)
 
+-- Check restriction components with abstract sheaves, before unfolding a pullback object.
+private theorem isIso_overMap_of_components
+    {C : Type*} [Category* C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}} {U V : C} (j : U ⟶ V)
+    {M N : SheafOfModules.{u} (R.over V)} (f : M ⟶ N)
+    (h : ∀ A : Over U, IsIso (f.val.app (op ((Over.map j).obj A)))) :
+    IsIso ((overMap R j).map f) := by
+  apply isIso_of_components
+  intro T
+  exact h T.unop
+
+private theorem isIso_of_overMap_app
+    {C : Type*} [Category* C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}} {U V : C} (j : U ⟶ V)
+    {M N : SheafOfModules.{u} (R.over V)} (f : M ⟶ N)
+    [IsIso ((overMap R j).map f)] (A : Over U) :
+    IsIso (f.val.app (op ((Over.map j).obj A))) := by
+  exact (SheafOfModules.evaluation.{u} (R.over U) (op A)).map_isIso
+    ((overMap R j).map f)
+
 set_option profiler true in
-set_option maxHeartbeats 500000 in
 -- Sectionwise pullbacks require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 private theorem binarySubmodule_on_W
@@ -53,36 +72,34 @@ private theorem binarySubmodule_on_W
   let jV : V ⟶ W ⊔ V := homOfLE le_sup_right
   let jW : W ⟶ W ⊔ V := homOfLE le_sup_left
   let f := binarySubmoduleInclusion X W V H Q ι
-  have hc (T : (Over W)ᵒᵖ) : IsIso (((overMap R jW).map f).val.app T) := by
-    let A : Over (W ⊔ V) := (Over.map jW).obj T.unop
-    let B : Over V := (Over.pullback jV).obj A
-    have hB : B.left ≤ W ⊓ V :=
-      le_inf ((leOfHom (pullback.fst A.hom jV)).trans T.unop.hom.le)
-        B.hom.le
-    have hι : IsIso (ι.val.app (op B)) := by
-      have hi := (SheafOfModules.evaluation.{u} (R.over (W ⊓ V))
-        (op (Over.mk (homOfLE hB)))).map_isIso
-          ((overMap R (homOfLE (inf_le_right : W ⊓ V ≤ V))).map ι)
-      exact hi
-    have hm : IsIso ((binarySubmoduleMap X W V H Q ι).val.app (op A)) := by
-      dsimp [binarySubmoduleMap, SheafOfModules.overPullback, SheafOfModules.pushforward,
-        PresheafOfModules.pushforward, PresheafOfModules.restrictScalars,
-        PresheafOfModules.pushforward₀]
-      have : IsIso ((ι ≫ (binarySubmoduleRestrictionIso X W V H).inv).val.app (op B)) := by
-        change IsIso (ι.val.app (op B) ≫
-          (binarySubmoduleRestrictionIso X W V H).inv.val.app (op B))
-        have : IsIso ((binarySubmoduleRestrictionIso X W V H).inv.val.app (op B)) :=
-          (SheafOfModules.evaluation.{u} _ (op B)).map_isIso
-            (binarySubmoduleRestrictionIso X W V H).inv
-        infer_instance
-      exact (ModuleCat.restrictScalars _).map_isIso
-        ((ι ≫ (binarySubmoduleRestrictionIso X W V H).inv).val.app (op B))
-    have hp := (SheafOfModules.evaluation.{u} (R.over (W ⊔ V)) (op A)).map_isPullback
-      (IsPullback.of_hasPullback
-        ((binarySubmoduleAdjunction X W V).unit.app (H.over (W ⊔ V)))
-        (binarySubmoduleMap X W V H Q ι))
-    exact hp.isIso_fst_of_isIso hm
-  exact isIso_of_components ((overMap R jW).map f)
+  apply isIso_overMap_of_components jW f
+  intro T
+  let A : Over (W ⊔ V) := (Over.map jW).obj T
+  let B : Over V := (Over.pullback jV).obj A
+  have hB : B.left ≤ W ⊓ V :=
+    le_inf ((leOfHom (pullback.fst A.hom jV)).trans T.hom.le)
+      B.hom.le
+  have hι : IsIso (ι.val.app (op B)) := by
+    exact isIso_of_overMap_app (homOfLE (inf_le_right : W ⊓ V ≤ V)) ι
+      (Over.mk (homOfLE hB))
+  have hm : IsIso ((binarySubmoduleMap X W V H Q ι).val.app (op A)) := by
+    dsimp [binarySubmoduleMap, SheafOfModules.overPullback, SheafOfModules.pushforward,
+      PresheafOfModules.pushforward, PresheafOfModules.restrictScalars,
+      PresheafOfModules.pushforward₀]
+    have : IsIso ((ι ≫ (binarySubmoduleRestrictionIso X W V H).inv).val.app (op B)) := by
+      change IsIso (ι.val.app (op B) ≫
+        (binarySubmoduleRestrictionIso X W V H).inv.val.app (op B))
+      have : IsIso ((binarySubmoduleRestrictionIso X W V H).inv.val.app (op B)) :=
+        (SheafOfModules.evaluation.{u} _ (op B)).map_isIso
+          (binarySubmoduleRestrictionIso X W V H).inv
+      infer_instance
+    exact (ModuleCat.restrictScalars _).map_isIso
+      ((ι ≫ (binarySubmoduleRestrictionIso X W V H).inv).val.app (op B))
+  have hp := (SheafOfModules.evaluation.{u} (R.over (W ⊔ V)) (op A)).map_isPullback
+    (IsPullback.of_hasPullback
+      ((binarySubmoduleAdjunction X W V).unit.app (H.over (W ⊔ V)))
+      (binarySubmoduleMap X W V H Q ι))
+  exact hp.isIso_fst_of_isIso hm
 
 /-- The explicit pullback is the prescribed submodule on V and the ambient module on W.
 Source: Stacks Project, Properties, Lemma 01PF (lemma-extend), binary gluing step.
