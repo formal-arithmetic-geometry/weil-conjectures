@@ -383,6 +383,66 @@ end NativePasting
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+-- The ambient faces share their categorical parameters. Keep these parameters
+-- fixed in congruence rules, and share the resulting proof expressions. Only
+-- definitional reductions and reusable congruence rules need certificates.
+private meta partial def finiteAmbientCongruence
+    (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
+    (congrCache : IO.Ref (Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem))
+    (a b : Lean.Expr) : Lean.MetaM Lean.Expr := do
+  let a := a.consumeMData
+  let b := b.consumeMData
+  if a == b then return ← Lean.Meta.mkHEqRefl a
+  if let some h := (← cache.get).get? (a, b) then return h
+  let h ← do
+    if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then
+      Lean.Meta.mkAppM ``proof_irrel_heq #[a, b]
+    else if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
+      conversionReduction a b
+    else if a.getAppFn == b.getAppFn && a.isApp &&
+        a.getAppNumArgs == b.getAppNumArgs then do
+      let allA := a.getAppArgs
+      let allB := b.getAppArgs
+      let mut common := 0
+      while common < allA.size && allA[common]! == allB[common]! do
+        common := common + 1
+      let head := Lean.mkAppN a.getAppFn (allA.extract 0 common)
+      let aa := allA.extract common allA.size
+      let bb := allB.extract common allB.size
+      let key := (head, aa.size)
+      let ct ← match (← congrCache.get).get? key with
+        | some ct => pure ct
+        | none => do
+          let ct ← Lean.Meta.mkHCongrWithArity head aa.size
+          let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
+            (kind? := `_finiteAmbientCongruence)
+          let ct := { ct with proof := proof }
+          congrCache.modify fun m => m.insert key ct
+          pure ct
+      let mut args := #[]
+      for i in [:aa.size] do
+        let h ← finiteAmbientCongruence cache congrCache aa[i]! bb[i]!
+        let h ← if ct.argKinds[i]! == .eq then conversionToEq h else pure h
+        args := args ++ #[aa[i]!, bb[i]!, h]
+      let h := Lean.mkAppN ct.proof args
+      if (← Lean.Meta.inferType h).isHEq then pure h else conversionOfEq h
+    else
+      conversionCongruence cache congrCache a b
+  cache.modify fun m => m.insert (a, b) h
+  return h
+
+private meta def exactFiniteAmbient (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit := do
+  let strip (e : Lean.Expr) : Lean.Expr := e.replace fun v =>
+    if v.isMData then some v.consumeMData else none
+  let x := strip (← Lean.instantiateMVars (← Lean.Meta.inferType h))
+  let y := strip (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
+  let cache ← IO.mkRef ({} : Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr)
+  let congrCache ← IO.mkRef
+    ({} : Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem)
+  let e ← conversionToEq (← finiteAmbientCongruence cache congrCache x y)
+  let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
+  Lean.Elab.Tactic.closeMainGoal `exact result
+
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
@@ -449,7 +509,14 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     (comparisonFinitePull l E b g n) (comparisonFinitePull l E b (pullback.fst c.g g) n)
     (comparisonFinitePull l E b h n) (comparisonFiniteOpen l E b (c.ofIsPullback sq).i n)
     (coordinates.val (c.ofIsPullback sq).g n).right N
-    hp ho
+    (by
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hp) none
+        exactFiniteAmbient h)
+    (by
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `ho) none
+        exactFiniteAmbient h)
   simp only [comparisonFiniteF, comparisonLevelExchange, finiteF,
     nativeOpen, nativePush, nativePull,
     rightDerivedLowerShriekOfCompactification, Iso.trans_hom, Iso.trans_inv,
@@ -461,7 +528,7 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc] at H ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+    exactFiniteAmbient h
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
