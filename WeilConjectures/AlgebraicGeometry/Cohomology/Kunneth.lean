@@ -311,8 +311,7 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
   have h1 := congrArg (fun x ↦ P.map (homOfLE h).op x) h0
   simp only [map_add, map_zsmul, map_zero] at h1
   have e0 : ![p, r, q] ∘ Fin.succAbove 0 = ![r, q] := by
-    funext l
-    fin_cases l <;> simp [Fin.succAbove]
+    funext l; fin_cases l <;> simp
   have e1 : ![p, r, q] ∘ (Fin.succ 0).succAbove = ![p, q] := by
     funext l
     fin_cases l <;> simp [Fin.succAbove]
@@ -331,6 +330,25 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
     (P.map (homOfLE h₂).op (c ![p, r])), ← add_assoc, ← sub_eq_add_neg] at h1
   exact (sub_eq_zero.mp h1).symm.trans (add_comm _ _)
 
+/-- A family whose pairwise differences equal a cocycle gives a Čech coboundary. -/
+private lemma cechCoboundary_of_sections {Z : TopCat.{u}} {ι : Type u}
+    (W : ι → TopologicalSpace.Opens Z) (P : (TopologicalSpace.Opens Z)ᵒᵖ ⥤ AddCommGrpCat.{u})
+    (c : TopCat.Presheaf.CechCochain W P 1) (σ : ∀ p, P.obj (op (W p)))
+    (hσ : ∀ y : Fin 2 → ι,
+      P.map (homOfLE (iInf_le (fun l ↦ W (y l)) 1)).op (σ (y 1)) -
+        P.map (homOfLE (iInf_le (fun l ↦ W (y l)) 0)).op (σ (y 0)) = c y) :
+    ∃ b : TopCat.Presheaf.CechCochain W P 0,
+      ((TopCat.Presheaf.cechComplex W).obj P).d 0 1 b = c := by
+  refine ⟨fun z ↦ P.map (homOfLE (iInf_le (fun l ↦ W (z l)) 0)).op (σ (z 0)), ?_⟩
+  funext y
+  rw [TopCat.Presheaf.cechComplex_d_apply]
+  simp only [Fin.sum_univ_succ, Fin.sum_univ_zero, add_zero,
+    TopCat.Presheaf.map_homOfLE_map_homOfLE_apply]
+  change (-1 : ℤ) ^ 0 • P.map (homOfLE _).op (σ (y 1)) +
+    (-1 : ℤ) ^ 1 • P.map (homOfLE _).op (σ (y 0)) = c y
+  simpa only [pow_zero, pow_one, one_smul, neg_smul, ← sub_eq_add_neg] using hσ y
+
+set_option profiler true in
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers
 of `X` and `Y`, with affine pairwise intersections. If `I` and `I'` have no nonzero global
 sections, the Čech complex of `pr_X⁻¹ I ⊓ pr_Y⁻¹ I'` for the cover `U × V` of `X ×_K Y` is
@@ -382,10 +400,10 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       (hb : b₀ = b ∨ b₀ = b') :
       prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b') ≤ Wc (a₀, b₀) := by
     refine inf_le_inf ((prodFst K X Y).preimage_mono ?_) ((prodSnd K X Y).preimage_mono ?_)
-    · rcases ha with rfl | rfl
-      exacts [inf_le_left, inf_le_right]
-    · rcases hb with rfl | rfl
-      exacts [inf_le_left, inf_le_right]
+    · exact ha.elim (fun h ↦ inf_le_left.trans (congrArg Ux h).ge)
+        (fun h ↦ inf_le_right.trans (congrArg Ux h).ge)
+    · exact hb.elim (fun h ↦ inf_le_left.trans (congrArg Vy h).ge)
+        (fun h ↦ inf_le_right.trans (congrArg Vy h).ge)
   have hpair {O : (prod K X Y).Opens} {p q : α × β}
       (hp : O ≤ Wc p) (hq : O ≤ Wc q) : O ≤ ⨅ l, Wc (![p, q] l) :=
     le_iInf (Fin.forall_fin_two.2 ⟨hp, hq⟩)
@@ -451,12 +469,10 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
     rw [← SetLike.mem_coe, ← range_toModulesι_app_eq_idealOfOpens] at hmem
     exact hmem
   choose σ hσ using hσ
-  refine ⟨fun z ↦ P.map (homOfLE (iInf_le (fun l ↦ Wc (z l)) 0)).op (σ (z 0)), ?_⟩
-  funext y
+  refine cechCoboundary_of_sections Wc P c σ ?_
+  intro y
   refine J.injective_toModulesι_app _ ?_
-  rw [TopCat.Presheaf.cechComplex_d_apply]
-  simp only [Fin.sum_univ_succ, Fin.sum_univ_zero, add_zero, map_add, map_zsmul,
-    TopCat.Presheaf.map_homOfLE_map_homOfLE_apply]
+  rw [map_sub]
   have key (a a' : α) (b b' : β)
       (hpq : prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b') ≤ ⨅ l, Wc (![(a, b), (a', b')] l)) :
       (prod K X Y).presheaf.map (homOfLE (hle (a₀ := a') (b₀ := b') (.inr rfl) (.inr rfl))).op
@@ -475,22 +491,18 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       ← hcres_map (a', b) (a', b') (hOV a' b b')
         (inf_le_inf ((prodFst K X Y).preimage_mono inf_le_right) le_rfl),
       ← hh, ← hvv, he₁, he₂]
-    simp only [map_sub, mulIdeal_rTensor_res I I', mulIdeal_lTensor_res I I', Scheme.presheaf_map_homOfLE_map_homOfLE_apply]
+    simp only [map_sub, mulIdeal_rTensor_res I I', mulIdeal_lTensor_res I I',
+      Scheme.presheaf_map_homOfLE_map_homOfLE_apply]
     abel
   have hιmap {O O' : (prod K X Y).Opens} (hO : O' ≤ O) (s : Γ(J.toModules, O)) :
       J.toModulesι.app O' (P.map (homOfLE hO).op s) =
         (prod K X Y).presheaf.map (homOfLE hO).op (J.toModulesι.app O s) :=
     Scheme.Modules.Hom.app_presheaf_map _ _ _
-  change (-1 : ℤ) ^ 0 • J.toModulesι.app _ (P.map (homOfLE _).op (σ (y 1))) +
-    (-1 : ℤ) ^ 1 • J.toModulesι.app _ (P.map (homOfLE _).op (σ (y 0))) =
-      J.toModulesι.app _ (c y)
-  simp only [pow_zero, pow_one, one_smul, neg_smul, ← sub_eq_add_neg]
   rw [hιmap, hιmap, hσ, hσ]
   set p := y 0
   set q := y 1
   have hy : y = ![p, q] := by
-    funext l
-    fin_cases l <;> simp [Fin.succAbove]
+    funext l; fin_cases l <;> rfl
   have hyle : ⨅ l, Wc (y l) ≤ ⨅ l, Wc (![p, q] l) := hy ▸ le_rfl
   rw [show c y = P.map (homOfLE hyle).op (c ![p, q]) from
     ((TopCat.Presheaf.map_homOfLE_self_apply P le_rfl (c y)).symm.trans
