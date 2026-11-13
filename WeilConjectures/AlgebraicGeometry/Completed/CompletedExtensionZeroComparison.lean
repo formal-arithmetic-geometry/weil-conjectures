@@ -1098,7 +1098,7 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
               (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
   let S := reductionModuleRing T (completedReductionCoefficient T d)
   let W := cbcOpenObject j hj
-  let adj : cbcOpenShriek d j hj ⊣ cbcOpenRestriction d j hj :=
+  let adj :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
   trace "PH604: adj constructed"
