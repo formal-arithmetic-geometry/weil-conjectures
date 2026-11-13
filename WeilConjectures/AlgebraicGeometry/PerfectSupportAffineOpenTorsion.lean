@@ -24,6 +24,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+-- Keep the transport argument independent of the concrete derived sheaf models.
 private theorem comp_eq_zero_of_scalar_preimage
     {A : Type*} [CommRing A] {C D : Type*}
     [Category C] [Preadditive C] [Linear A C] [Category D] [Preadditive D]
@@ -39,7 +40,6 @@ private theorem comp_eq_zero_of_scalar_preimage
   apply (cancel_mono eM.inv).mp
   simpa only [Category.assoc, zero_comp, comp_zero] using h
 
-set_option trace.profiler true in
 /-- Every local morphism from a restricted perfect source into a shift of a restricted
 supported target is killed by a power of the global function on an affine open.
 Source: Stacks Project, Tag 08EJ, affine paragraph.
