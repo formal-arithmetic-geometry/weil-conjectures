@@ -160,11 +160,11 @@ theorem localDirectImage_stalk_cohomology_normalization
         ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))).presheaf
     V y hy
   have hr : Function.Surjective r := (ConcreteCategory.bijective_of_isIso r).2
-  have hclass (eta) : e eta = g (D.targetClass p (r eta)) :=
-    (he eta).trans (localDirectImage_stalk_class_restriction f y F p I K V hy D eta)
   obtain ⟨eta, heta⟩ := hr xi
+  have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
+  have heclass := (he eta).trans hclass
   have h : g (D.targetClass p xi) = e eta :=
-    (congrArg (fun z ↦ g (D.targetClass p z)) heta).symm.trans (hclass eta).symm
+    (congrArg (fun z ↦ g (D.targetClass p z)) heta).symm.trans heclass.symm
   exact (congrArg r ((congrArg e.symm h).trans (e.symm_apply_apply eta))).trans heta
 
 end AlgebraicGeometry
