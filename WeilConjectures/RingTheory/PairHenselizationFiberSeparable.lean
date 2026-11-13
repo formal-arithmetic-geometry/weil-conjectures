@@ -28,6 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
+set_option profiler true in
 /-- Separability of ring elements implies separability of every residue-field fraction. -/
 private theorem isSeparable_residueField_of_images
     {B k : Type*} [CommRing B] [Field k] (q : Ideal B) [q.IsPrime]
@@ -44,7 +45,6 @@ private theorem isSeparable_residueField_of_images
   exact div_mem (mem_separableClosure_iff.mpr (h x))
     (mem_separableClosure_iff.mpr (h m))
 
-set_option profiler true in
 /-- The canonical residue extension of a Noetherian pair henselization is separable algebraic.
 
 Source: Stacks Project, More on Algebra, Tag 0AH1; Tag 0A02 for filteredness.

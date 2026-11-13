@@ -162,7 +162,6 @@ private theorem fiber_projection_of_product_equiv
       simp [ε, hxj]
     · simp [ε, Pi.single_eq_of_ne h]
 
-set_option profiler true in
 /-- The canonical map of fibres is a surjective projection with idempotent kernel annihilator.
 
 Source: Stacks Project, More on Algebra, Tag 0AH1 and the product calculation in Tag 0AH3.
