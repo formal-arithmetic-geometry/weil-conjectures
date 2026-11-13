@@ -251,7 +251,6 @@ noncomputable local instance hasZeroMorphisms_condensedRingObj_condensedClosedCo
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) := inferInstance
 
-set_option trace.profiler true in
 set_option synthInstance.maxSize 4096 in
 /-- Derived closed costalks commute with uniformly bounded-below filtered colimits.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), final paragraph, using (3.4)
