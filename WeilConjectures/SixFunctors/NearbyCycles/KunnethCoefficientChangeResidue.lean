@@ -76,19 +76,31 @@ theorem nonempty_arrowIso_map_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ 
   have := isGE_leftDerivedUpperStar_obj _ P.ε
     (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
       L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) m
-  have hA := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
-    (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
-  have hB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
-    (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
-  have hAB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
-    (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-      (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
-        L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
-  have k := nonempty_arrowIso_map_map_kunnethMap
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-    φ₁ φ₂ h A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
-    (by exact_mod_proofs hAB)
-  exact_mod_proofs k
+  have hA : IsIso ((derivedUpperStarExtendScalarsPushHom
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.j).app
+      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀)) :=
+    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
+      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
+  have hB : IsIso ((derivedUpperStarExtendScalarsPushHom
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) N.j).app
+      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) :=
+    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
+      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
+  have hAB : IsIso ((derivedUpperStarExtendScalarsPushHom
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) P.j).app
+      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀))) :=
+    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
+      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
+  with_reducible
+    have k := nonempty_arrowIso_map_map_kunnethMap
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+      φ₁ φ₂ h A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
+      (by exact_mod_proofs hAB)
+    exact_mod_proofs k
 set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
@@ -118,17 +130,30 @@ theorem nonempty_arrowIso_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ f₁
   have := isGE_leftDerivedUpperStar_obj _ P.ε
     (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
       L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) m
-  have hA := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
-    (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
-  have hB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
-    (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
-  have hAB := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
-    (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-      (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
-        L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
-  have k := nonempty_arrowIso_map_kunnethMap
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-    φ₁ φ₂ A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB) (by exact_mod_proofs hAB)
-  exact_mod_proofs k
+  have hA : IsIso ((derivedUpperStarExtendScalarsPushHom
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.j).app
+      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀)) :=
+    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E M.j
+      (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀) n
+  have hB : IsIso ((derivedUpperStarExtendScalarsPushHom
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) N.j).app
+      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) :=
+    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E N.j
+      (L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) n
+  have hAB : IsIso ((derivedUpperStarExtendScalarsPushHom
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) P.j).app
+      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀))) :=
+    isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E P.j
+      (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+        (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+          L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
+  with_reducible
+    have k := nonempty_arrowIso_map_kunnethMap
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+      φ₁ φ₂ A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
+      (by exact_mod_proofs hAB)
+    exact_mod_proofs k
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
