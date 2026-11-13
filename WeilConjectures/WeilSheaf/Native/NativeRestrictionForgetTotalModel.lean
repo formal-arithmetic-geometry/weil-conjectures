@@ -758,11 +758,7 @@ private theorem native_restriction_chain
   apply Mod.tensorLeft_obj_hom_ext
   simp only [Mod.comp_hom']
   simp only [R, ProEtale.adicUpperStar_map_hom]
-  have hι := congrArg
-    (fun f :
-      (((R.mapHomologicalComplex (.up ℤ)).obj P₀).X p ⊗
-        ((R.mapHomologicalComplex (.up ℤ)).obj T₀).X q) ⟶
-        ((R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀)).X n ↦ f.hom)
+  have hι := congrArg Mod.Hom.hom
     (R.ιTensorObj_mapCochainComplexμIso_hom_f P₀ T₀ p q n hpq)
   simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
   exact balanced_restriction_summand G (hcU p q n hpq) hι
