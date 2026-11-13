@@ -64,6 +64,29 @@ noncomputable def adicSquareLowerStarIso (sq : CommSq g' j' j g'') :
   adicLowerStarComp l j' g'' ≪≫ adicLowerStarCongr l sq.w.symm ≪≫
     (adicLowerStarComp l g' j).symm
 
+set_option profiler true in
+private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
+    (M : AdicSheaf l U') :
+    ((adicSquareLowerStarIso l sq).hom.app M).hom =
+      (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
+  simp only [adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Mod.comp_hom', adicLowerStarComp_hom_app_hom,
+    adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+
+set_option profiler true in
+private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : AdicSheaf l Y) :
+    ((adicUpperStarLowerStarAdjunction l f).unit.app M).hom =
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f).unit.app M.X := by
+  exact Adjunction.modAdjunction_unit_app_hom _ _ _
+
+set_option profiler true in
+private lemma adicBaseChange_counit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : AdicSheaf l X) :
+    ((adicUpperStarLowerStarAdjunction l f).counit.app M).hom =
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f).counit.app M.X := by
+  exact Adjunction.modAdjunction_counit_app_hom _ _ _
+
 variable [WeaklyEtale j] [WeaklyEtale j']
 
 /-- **The base change map** `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` of `ℓ`-adic sheaves, for a commutative
@@ -82,13 +105,11 @@ the base change map of the underlying sheaves. -/
 lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
     ((adicBaseChangeMap l sq).app M).hom =
       (ProEtale.baseChangeMap (WeilCoefficients.{u} l) sq).app M.X := by
-  simp only [adicBaseChangeMap, ProEtale.baseChangeMap, adicBaseChange_mate_symm_app,
-    Mod.comp_hom',
-    adicUpperStar_map_hom, adicLowerStar_map_hom, adicUpperStarLowerStarAdjunction,
-    Adjunction.modAdjunction_unit_app_hom, Adjunction.modAdjunction_counit_app_hom,
-    adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app,
-    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+  dsimp only [adicBaseChangeMap, ProEtale.baseChangeMap]
+  rw [adicBaseChange_mate_symm_app, adicBaseChange_mate_symm_app]
+  simp only [Mod.comp_hom', adicUpperStar_map_hom, adicLowerStar_map_hom,
+    adicBaseChange_unit_app_hom, adicBaseChange_counit_app_hom,
+    adicSquareLowerStarIso_hom_app_hom]
   rfl
 
 /-- **Weakly étale base change for `ℓ`-adic sheaves**: for a cartesian square the base change
