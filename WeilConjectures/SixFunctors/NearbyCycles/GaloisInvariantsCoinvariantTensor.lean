@@ -177,7 +177,7 @@ private lemma tensor_coinvariant_pullbackExchange_of_unit
         G.map (r ≫ α) ≫ φ = φ := by
   exact CategoryTheory.tensor_coinvariant_retraction_of_conjugate
     (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)) G _ R
-    ((leftDerivedUpperStarId Λ X').app _)
+    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
     (N.galoisLayerExchangeIso h Ω Λ C) _
     (tensor_coinvariant_exchange_factorization N h Ω Λ C) hR
     (fun k ↦ derivedUnitTransport Λ
@@ -188,8 +188,6 @@ private lemma tensor_coinvariant_pullbackExchange_of_unit
     (fun k ↦ N.galoisLayerAction Λ h Ω (act k) (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
 
-set_option profiler true in
--- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
@@ -373,8 +371,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ :=
   (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
-    T₀ N h Ω hp C hC act hact).imp fun r hr ↦
-      ⟨hr.1, fun q V b hV W φ hφ ↦ hr.2
+    T₀ N h Ω hp C hC act hact).imp fun _ hr ↦
+      ⟨hr.1, fun q V b hV W φ hφ ↦ hr.2 (Z := Z) (W := W)
         (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
           DerivedCategory.homologyFunctor _ q)
         (fun K a _ hcab ↦
