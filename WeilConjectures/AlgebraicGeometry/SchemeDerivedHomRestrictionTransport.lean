@@ -351,6 +351,11 @@ theorem scheme_derived_hom_restriction_transport
   let A := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let B := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W
   let T := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i
+  haveI : A.Additive := moduleOverFunctor_additive X.toRingedSpace U
+  haveI : B.Additive := moduleOverFunctor_additive X.toRingedSpace W
+  haveI : T.Additive := moduleOverMap_additive X.toRingedSpace i
+  haveI : e.Additive := Functor.additive_of_preserves_binary_products _
+  haveI : eW.Additive := Functor.additive_of_preserves_binary_products _
   let S := Equivalence.inverse
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
     (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
