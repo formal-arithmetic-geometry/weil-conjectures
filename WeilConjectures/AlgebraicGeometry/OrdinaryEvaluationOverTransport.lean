@@ -136,6 +136,7 @@ private theorem kInjective_over_transport (X : Scheme.{u}) (U : X.Opens)
 end TransportProofs
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Comparing the site carriers and the chosen Hom functors needs extra elaboration steps.
 /-- Transport the ordinary tensor and Hom models, and their component equation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ, ordinary complex constructions.
