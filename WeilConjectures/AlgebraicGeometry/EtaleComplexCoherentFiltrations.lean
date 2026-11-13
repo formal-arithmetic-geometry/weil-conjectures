@@ -141,7 +141,6 @@ private theorem coherentFiltration_step_bot (X : Scheme.{u})
 
 
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
 set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.

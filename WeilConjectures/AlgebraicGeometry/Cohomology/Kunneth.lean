@@ -281,10 +281,10 @@ lemma eq_of_presheaf_map_eq {Z : Scheme.{u}} {O₁ O₂ : Z.Opens} (h : O₂ = O
 
 /-- The degree-one cocycle identity after restriction to any common open. -/
 private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
-    (W : ι → Opens Z) (P : (Opens Z)ᵒᵖ ⥤ AddCommGrpCat.{u})
+    (W : ι → TopologicalSpace.Opens Z) (P : (TopologicalSpace.Opens Z)ᵒᵖ ⥤ AddCommGrpCat.{u})
     (c : TopCat.Presheaf.CechCochain W P 1)
     (hc : ((TopCat.Presheaf.cechComplex W).obj P).d 1 2 c = 0)
-    (p r q : ι) (O : Opens Z) (h : O ≤ ⨅ l, W (![p, r, q] l))
+    (p r q : ι) (O : TopologicalSpace.Opens Z) (h : O ≤ ⨅ l, W (![p, r, q] l))
     (h₁ : O ≤ ⨅ l, W (![p, q] l)) (h₂ : O ≤ ⨅ l, W (![p, r] l))
     (h₃ : O ≤ ⨅ l, W (![r, q] l)) :
     P.map (homOfLE h₁).op (c ![p, q]) =
@@ -295,11 +295,11 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
   have h1 := congrArg (fun x ↦ P.map (homOfLE h).op x) h0
   simp only [map_add, map_zsmul, map_zero] at h1
   have e0 : ![p, r, q] ∘ Fin.succAbove 0 = ![r, q] := by
-    funext l; exact Fin.cases rfl (Fin.cases rfl (fun i ↦ Fin.elim0 i)) l
+    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
   have e1 : ![p, r, q] ∘ (Fin.succ 0).succAbove = ![p, q] := by
-    funext l; exact Fin.cases rfl (Fin.cases rfl (fun i ↦ Fin.elim0 i)) l
+    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
   have e2 : ![p, r, q] ∘ (Fin.succ 0).succ.succAbove = ![p, r] := by
-    funext l; exact Fin.cases rfl (Fin.cases rfl (fun i ↦ Fin.elim0 i)) l
+    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
   simp only [TopCat.Presheaf.map_homOfLE_map_homOfLE_apply] at h1
   rw [TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e0 _ h₃,
     TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e1 _ h₁,
@@ -312,7 +312,6 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
     simpa only [sub_eq_add_neg, add_comm, add_left_comm, add_assoc] using h1
   exact (sub_eq_zero.mp hsum).symm
 
-set_option profiler true in
 -- the proof checks many index cases of the Čech cocycle condition
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers
 of `X` and `Y`, with affine pairwise intersections. If `I` and `I'` have no nonzero global
@@ -389,14 +388,14 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   -- the horizontal and vertical components of `c`
   have hOH (a a' : α) (b : β) :
       prodOpen K X Y (Ux a ⊓ Ux a') (Vy b) ≤ ⨅ l, Wc (![(a, b), (a', b)] l) := by
-    refine le_iInf (Fin.cases ?_ (Fin.cases ?_ (fun i ↦ Fin.elim0 i)))
+    refine le_iInf (Fin.forall_fin_two.2 ⟨?_, ?_⟩)
     · exact (inf_le_inf ((prodFst K X Y).preimage_mono inf_le_left) le_rfl :
         prodOpen K X Y (Ux a ⊓ Ux a') (Vy b) ≤ prodOpen K X Y (Ux a) (Vy b))
     · exact (inf_le_inf ((prodFst K X Y).preimage_mono inf_le_right) le_rfl :
         prodOpen K X Y (Ux a ⊓ Ux a') (Vy b) ≤ prodOpen K X Y (Ux a') (Vy b))
   have hOV (a : α) (b b' : β) :
       prodOpen K X Y (Ux a) (Vy b ⊓ Vy b') ≤ ⨅ l, Wc (![(a, b), (a, b')] l) := by
-    refine le_iInf (Fin.cases ?_ (Fin.cases ?_ (fun i ↦ Fin.elim0 i)))
+    refine le_iInf (Fin.forall_fin_two.2 ⟨?_, ?_⟩)
     · exact (inf_le_inf le_rfl ((prodSnd K X Y).preimage_mono inf_le_left) :
         prodOpen K X Y (Ux a) (Vy b ⊓ Vy b') ≤ prodOpen K X Y (Ux a) (Vy b))
     · exact (inf_le_inf le_rfl ((prodSnd K X Y).preimage_mono inf_le_right) :
@@ -416,8 +415,7 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       (resIdeal (K := K) I' (inf_le_right : Vy b ⊓ Vy b' ≤ Vy b')).lTensor _ (h a a' b') -
         (resIdeal (K := K) I' (inf_le_left : Vy b ⊓ Vy b' ≤ Vy b)).lTensor _ (h a a' b) := by
     apply injective_mulIdeal I I' (hUx₂ a a') (hVy₂ b b')
-    rw [map_sub, map_sub, hresL, hresL, hresR, hresR, hh, hh, hvv, hvv, hcres_map, hcres_map,
-      hcres_map, hcres_map]
+    simp only [map_sub, hresL, hresR, hh, hvv, hcres_map]
     have hDD {n : ℕ} (y : Fin n → α × β) (hy : ∀ l, y l = (a, b) ∨ y l = (a', b) ∨
         y l = (a, b') ∨ y l = (a', b')) :
         prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b') ≤ ⨅ l, Wc (y l) := by
@@ -436,15 +434,15 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
     have h4 : (a', b') = (a, b) ∨ (a', b') = (a', b) ∨ (a', b') = (a, b') ∨
         (a', b') = (a', b') := .inr (.inr (.inr rfl))
     have c1 := hcocycle (a, b) (a', b) (a', b') (prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b'))
-      (hDD _ (Fin.cases h1 (Fin.cases h2 (Fin.cases h4 (fun i ↦ Fin.elim0 i)))))
-      (hDD _ (Fin.cases h1 (Fin.cases h4 (fun i ↦ Fin.elim0 i))))
-      (hDD _ (Fin.cases h1 (Fin.cases h2 (fun i ↦ Fin.elim0 i))))
-      (hDD _ (Fin.cases h2 (Fin.cases h4 (fun i ↦ Fin.elim0 i))))
+      (hDD _ (Fin.cases h1 (Fin.forall_fin_two.2 ⟨h2, h4⟩)))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h4⟩))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h2⟩))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h2, h4⟩))
     have c2 := hcocycle (a, b) (a, b') (a', b') (prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b'))
-      (hDD _ (Fin.cases h1 (Fin.cases h3 (Fin.cases h4 (fun i ↦ Fin.elim0 i)))))
-      (hDD _ (Fin.cases h1 (Fin.cases h4 (fun i ↦ Fin.elim0 i))))
-      (hDD _ (Fin.cases h1 (Fin.cases h3 (fun i ↦ Fin.elim0 i))))
-      (hDD _ (Fin.cases h3 (Fin.cases h4 (fun i ↦ Fin.elim0 i))))
+      (hDD _ (Fin.cases h1 (Fin.forall_fin_two.2 ⟨h3, h4⟩)))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h4⟩))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h3⟩))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h3, h4⟩))
     exact (sub_eq_sub_iff_add_eq_add).2 (by
       simpa only [add_comm] using c1.symm.trans c2)
   obtain ⟨e, he₁, he₂⟩ := TensorProduct.exists_eq_rTensor_sub_and_eq_lTensor_sub
@@ -491,9 +489,9 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       · exact ⟨Or.inr (congrArg Prod.fst h), Or.inl (congrArg Prod.snd h)⟩
       · exact ⟨Or.inl (congrArg Prod.fst h), Or.inr (congrArg Prod.snd h)⟩
       · exact ⟨Or.inr (congrArg Prod.fst h), Or.inr (congrArg Prod.snd h)⟩
-    rw [hcocycle (a, b) (a', b) (a', b') _ (hDD _ (Fin.cases h1 (Fin.cases h2 (Fin.cases h4 (fun i ↦ Fin.elim0 i)))))
-      hpq (hDD _ (Fin.cases h1 (Fin.cases h2 (fun i ↦ Fin.elim0 i))))
-      (hDD _ (Fin.cases h2 (Fin.cases h4 (fun i ↦ Fin.elim0 i))))]
+    rw [hcocycle (a, b) (a', b) (a', b') _ (hDD _ (Fin.cases h1 (Fin.forall_fin_two.2 ⟨h2, h4⟩)))
+      hpq (hDD _ (Fin.forall_fin_two.2 ⟨h1, h2⟩))
+      (hDD _ (Fin.forall_fin_two.2 ⟨h2, h4⟩))]
     rw [← hcres_map (a, b) (a', b) (hOH a a' b)
         (inf_le_inf le_rfl ((prodSnd K X Y).preimage_mono inf_le_left)),
       ← hcres_map (a', b) (a', b') (hOV a' b b')
@@ -513,7 +511,7 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   set p := y 0
   set q := y 1
   have hy : y = ![p, q] := by
-    funext l; exact Fin.cases rfl (Fin.cases rfl (fun i ↦ Fin.elim0 i)) l
+    funext l; exact (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) l
   have hyle : ⨅ l, Wc (y l) ≤ ⨅ l, Wc (![p, q] l) := hy ▸ le_rfl
   rw [show c y = P.map (homOfLE hyle).op (c ![p, q]) from
     ((TopCat.Presheaf.map_homOfLE_self_apply P le_rfl (c y)).symm.trans
@@ -523,8 +521,8 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   set D := prodOpen K X Y (Ux p.1 ⊓ Ux q.1) (Vy p.2 ⊓ Vy q.2)
   have hDy : D = ⨅ l, Wc (y l) := by
     refine le_antisymm (le_iInf fun l ↦ ?_) fun x hx ↦ ?_
-    · exact Fin.cases (hle (.inl rfl) (.inl rfl))
-        (Fin.cases (hle (.inr rfl) (.inr rfl)) (fun i ↦ Fin.elim0 i)) l
+    · exact (Fin.forall_fin_two.2
+        ⟨hle (.inl rfl) (.inl rfl), hle (.inr rfl) (.inr rfl)⟩) l
     · have h0 : x ∈ Wc p := (iInf_le (fun l ↦ Wc (y l)) 0) hx
       have h1 : x ∈ Wc q := (iInf_le (fun l ↦ Wc (y l)) 1) hx
       exact ⟨⟨h0.1, h1.1⟩, ⟨h0.2, h1.2⟩⟩
