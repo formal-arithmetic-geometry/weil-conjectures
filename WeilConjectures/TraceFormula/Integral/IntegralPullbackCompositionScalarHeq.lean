@@ -186,6 +186,50 @@ private theorem derivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' 
   obtain rfl := eq_of_heq eH
   obtain rfl := eq_of_heq ha
   rfl
+
+universe v₁ v₂ v₃ w₁ w₂ w₃ t₁ t₂ t₃ in
+/-- The forward maps of the two derived compositors agree across presentations. -/
+private theorem derivedCompositor_hom_heq {C C' : Type w₁} {D D' : Type w₂} {E' E'' : Type w₃}
+    [iC : Category.{v₁} C] [iC' : Category.{v₁} C'] [iD : Category.{v₂} D]
+    [iD' : Category.{v₂} D'] [iE : Category.{v₃} E'] [iE' : Category.{v₃} E'']
+    [aC : Abelian C] [aC' : Abelian C'] [aD : Abelian D] [aD' : Abelian D']
+    [aE : Abelian E'] [aE' : Abelian E'']
+    [dC : HasDerivedCategory.{t₁} C] [dC' : HasDerivedCategory.{t₁} C']
+    [dD : HasDerivedCategory.{t₂} D] [dD' : HasDerivedCategory.{t₂} D']
+    [dE : HasDerivedCategory.{t₃} E'] [dE' : HasDerivedCategory.{t₃} E'']
+    (hC : C = C') (hD : D = D') (hE : E' = E'')
+    (hiC : HEq iC iC') (hiD : HEq iD iD') (hiE : HEq iE iE')
+    (haC : HEq aC aC') (haD : HEq aD aD') (haE : HEq aE aE')
+    (hdC : HEq dC dC') (hdD : HEq dD dD') (hdE : HEq dE dE')
+    (F : C ⥤ D) (F' : C' ⥤ D') (G : D ⥤ E') (G' : D' ⥤ E'')
+    [F.Additive] [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
+    [G.Additive] [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
+    [F'.Additive] [Limits.PreservesFiniteLimits F'] [Limits.PreservesFiniteColimits F']
+    [G'.Additive] [Limits.PreservesFiniteLimits G'] [Limits.PreservesFiniteColimits G']
+    (H : C ⥤ E') (H' : C' ⥤ E'')
+    [H.Additive] [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
+    [H'.Additive] [Limits.PreservesFiniteLimits H'] [Limits.PreservesFiniteColimits H']
+    (eF : HEq F F') (eG : HEq G G') (eH : HEq H H')
+    (a : H ≅ F ⋙ G) (a' : H' ≅ F' ⋙ G') (ha : HEq a a') :
+    HEq (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom
+      (Functor.mapDerivedCategoryNatIso a' ≪≫ (Functor.mapDerivedCategoryCompIso F' G').symm).hom := by
+  have he := derivedCompositor_heq hC hD hE hiC hiD hiE haC haD haE hdC hdD hdE
+    F F' G G' H H' eF eG eH a a' ha
+  subst hC hD hE
+  obtain rfl := eq_of_heq hiC
+  obtain rfl := eq_of_heq hiD
+  obtain rfl := eq_of_heq hiE
+  obtain rfl := eq_of_heq haC
+  obtain rfl := eq_of_heq haD
+  obtain rfl := eq_of_heq haE
+  obtain rfl := eq_of_heq hdC
+  obtain rfl := eq_of_heq hdD
+  obtain rfl := eq_of_heq hdE
+  obtain rfl := eq_of_heq eF
+  obtain rfl := eq_of_heq eG
+  obtain rfl := eq_of_heq eH
+  exact heq_of_eq (congrArg Iso.hom (eq_of_heq he))
+
 /-- Compare the ordinary inverse images once, before passing to derived categories. -/
 private theorem finiteSystemPullback_heq_integralComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     HEq (finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) f)
@@ -201,7 +245,7 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
-  have hh := derivedCompositor_heq
+  have hh := derivedCompositor_hom_heq
     (dC := SemilinearSections.hasDerived _ _)
     (dD := SemilinearSections.hasDerived _ _)
     (dE := SemilinearSections.hasDerived _ _)
@@ -247,7 +291,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  exact eq_of_heq (hh.trans HEq.rfl)
+  apply Iso.ext
+  exact eq_of_heq hh
 
 end Composition
 
