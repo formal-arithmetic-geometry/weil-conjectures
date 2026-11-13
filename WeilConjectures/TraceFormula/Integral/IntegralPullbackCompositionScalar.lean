@@ -49,6 +49,20 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
 set_option allowUnsafeReducibility true in
 attribute [local reducible] integralSystemReduction
 
+private theorem scalar_comp_naturality {C D D' B : Type*}
+    [Category C] [Category D] [Category D'] [Category B]
+    (F : C ⥤ D) (G : D ⥤ B) (F' : C ⥤ D') (G' : D' ⥤ B)
+    (η : F ⋙ G ⟶ F' ⋙ G') {X Y : C} (f : X ⟶ Y) :
+    G.map (F.map f) ≫ η.app Y = η.app X ≫ G'.map (F'.map f) :=
+  η.naturality f
+
+private theorem scalar_right_comp_naturality {C D B : Type*}
+    [Category C] [Category D] [Category B]
+    (F : C ⥤ B) (G : C ⥤ D) (H : D ⥤ B)
+    (η : F ⟶ G ⋙ H) {X Y : C} (f : X ⟶ Y) :
+    F.map f ≫ η.app Y = η.app X ≫ H.map (G.map f) :=
+  η.naturality f
+
 /-- Map a composite equation with its factors already expanded.
 Source: functoriality. -/
 private theorem scalar_map_three_eq_two {C D : Type*} [Category C] [Category D]
@@ -206,23 +220,30 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (UL h).mapIso ((integralPullbackSystemIso l L k).app (SV.obj K)) ≪≫
     (UL h).mapIso ((UL k).mapIso ((integralSystemScalarIso l E L ι V).app K))
   apply (cancel_mono T.hom).1
-  have N1 := (integralPullbackSystemIso l L h).hom.naturality
+  have N1 := scalar_comp_naturality
+    (constructibleIntegralPullback l L h) (integralSystemReduction l L Z)
+    (integralSystemReduction l L W) (UL h) (integralPullbackSystemIso l L h).hom
     (integralPullbackScalarComparison l E L ι k K).hom
   have IIIk := integralPullbackSystemIso_scalar l E L ι k K
   have IIIh := integralPullbackSystemIso_scalar l E L ι h
     ((constructibleIntegralPullback l E k).obj K)
   have Ng := integralComparisonSystemScalarPullback_finite_naturality l E L ι h
     ((integralPullbackSystemIso l E k).hom.app K)
-  have Np := (integralSystemScalarIso l E L ι Z).hom.naturality
+  have Np := scalar_comp_naturality
+    (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+      E L ι Z) (integralSystemReduction l L Z)
+    (integralSystemReduction l E Z) (integralComparisonDerivedSequenceScalar l E L ι Z)
+    (integralSystemScalarIso l E L ι Z).hom
     (((integralPullbackComposition l E).choose h k).hom.app K)
   have CE := (integralPullbackComposition l E).choose_spec.2.2 h k K
   simp only [integralPullbackSystemComparison_choose] at CE
   have mix := integralComparisonSystemScalarPullback_finite_mixed l E L ι h k
     ((integralSystemReduction l E V).obj K)
   have IIIhk := integralPullbackSystemIso_scalar l E L ι (h ≫ k) K
-  have Na := (finiteSystemDerivedComposition (integralSystemRings l L)
-    (integralSystemTransition l L) h k).hom.naturality
-      ((integralSystemScalarIso l E L ι V).hom.app K)
+  have Na := scalar_right_comp_naturality (UL (h ≫ k)) (UL k) (UL h)
+    (finiteSystemDerivedComposition (integralSystemRings l L)
+      (integralSystemTransition l L) h k).hom
+    ((integralSystemScalarIso l E L ι V).hom.app K)
   have CL := (integralPullbackComposition l L).choose_spec.2.2 h k (SV.obj K)
   simp only [integralPullbackSystemComparison_choose] at CL
   have eE := finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k
@@ -230,8 +251,6 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have eL := finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
     ((integralComparisonDerivedSequenceScalar l E L ι V).obj
       ((integralSystemReduction l E V).obj K))
-  dsimp only [Functor.comp_map, Functor.comp_obj, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Np Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   have IIIk' := congrArg (UL h).map IIIk
