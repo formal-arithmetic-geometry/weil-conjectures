@@ -117,6 +117,7 @@ private theorem sectionBicomplex_zero
   · exact (HomologicalComplex.eval _ _ p).map_isZero
       ((hypercoverSectionRows X R W U).map_isZero (E.isZero_of_isStrictlyGE N q hq))
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Comparing section-column maps unfolds the section and extension functor compositions.
 set_option backward.isDefEq.respectTransparency false in
