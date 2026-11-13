@@ -120,49 +120,44 @@ private def scalarSection
     ((toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app V
       (s ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x))
 
-set_option profiler true in
-set_option maxHeartbeats 500000 in
--- Elaborate the simultaneous scalar-extension and total-tensor comparisons.
+section
+
 attribute [local implicit_reducible] SheafOfModules.restrictScalars
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
-  PresheafOfModules.presheaf ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj' in
-private theorem scalarTensorTotal
+  PresheafOfModules.presheaf ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
+
+-- Separate the ordinary unit and tensor identities from the total-complex construction.
+set_option profiler true in
+private theorem scalarTensorAdjunctionComparison
     (F : ScalarMod.{c, v, r} R ⥤ ScalarMod.{c, v, r} S)
     (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)
     (hmF : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (hF M) ≫
       SheafOfModules.changeOfRingsHom a M f ≫ eqToHom (hF N).symm)
     [F.Additive] :
+    letI := SheafOfModules.isMonoidal_W_independentCoefficients R
     letI := SheafOfModules.isMonoidal_W_independentCoefficients S
+    letI := SheafOfModules.monoidalCategory R
     letI := SheafOfModules.monoidalCategory S
-    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
-    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
-    ∃ b : coefficientTotalTensor.{r, c, v} J R ⋙ F.mapHomologicalComplex (.up ℤ) ≅
-      (F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ)) ⋙
-        Functor.uncurry.obj
-          ((MonoidalCategory.curriedTensor (ScalarMod.{c, v, r} S)).map₂CochainComplex),
-    ∀ (P Q : CochainComplex (ScalarMod.{c, v, r} R) ℤ) (p q k : ℤ) (h : p + q = k)
-      (V : Cᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),
-      ((b.hom.app (P, Q)).f k).val.app V
-        (scalarSection.{c, v, r} a F hF _ V 1
-          (coefficientTensorGenerator.{r, c, v} J R P Q p q k h V x y)) =
-      coefficientTensorGenerator.{r, c, v} J S
-        ((F.mapHomologicalComplex (.up ℤ)).obj P)
-        ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q k h V
-        (scalarSection.{c, v, r} a F hF _ V 1 x) (scalarSection.{c, v, r} a F hF _ V 1 y) := by
+    ∃ (am : F ⊣ SheafOfModules.scalarRestriction a)
+      (e : ∀ M N : ScalarMod.{c, v, r} R, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N),
+      (∀ {M M' N N' : ScalarMod.{c, v, r} R} (f : M ⟶ M') (g : N ⟶ N'),
+        F.map (f ⊗ₘ g) ≫ (e M' N').hom =
+          (e M N).hom ≫ (F.map f ⊗ₘ F.map g)) ∧
+      (∀ (M : ScalarMod.{c, v, r} R) (V : Cᵒᵖ) (x : M.val.obj V),
+        scalarSection.{c, v, r} a F hF M V 1 x = (am.unit.app M).val.app V x) ∧
+      ∀ (M N : ScalarMod.{c, v, r} R) (V : Cᵒᵖ)
+        (x : M.val.obj V) (y : N.val.obj V),
+        (e M N).hom.val.app V
+          ((am.unit.app _).val.app V (SheafOfModules.ScalarHomOrdinary.pure R M N V x y)) =
+        SheafOfModules.ScalarHomOrdinary.pure S _ _ V
+          ((am.unit.app M).val.app V x) ((am.unit.app N).val.app V y) := by
   classical
   dsimp only
   let A := ScalarMod.{c, v, r} R
-  let B := ScalarMod.{c, v, r} S
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.isMonoidal_W_independentCoefficients S
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.monoidalCategory S
-  let := SheafOfModules.tensorPreadditive R
-  let := SheafOfModules.tensorPreadditive S
-  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
-  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
-  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
-  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
   obtain ⟨_, _, hAdj⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction a
   obtain ⟨am, hUnit⟩ := hAdj F hF hmF
   have unit_normalized (M : A) (V : Cᵒᵖ) (x : M.val.obj V) :
@@ -236,6 +231,59 @@ private theorem scalarTensorTotal
           ((am.unit.app _).val.app V (SheafOfModules.ScalarHomOrdinary.pure R M N V x y)))
     rw [hun, SheafOfModules.ScalarHomOrdinary.pure_map R f g V x y, hgen, hgen,
       SheafOfModules.ScalarHomOrdinary.pure_map S (F.map f) (F.map g) V _ _, hun, hun]
+  have hu (M : A) (V : Cᵒᵖ) (x : M.val.obj V) :
+      scalarSection.{c, v, r} a F hF M V 1 x =
+        (am.unit.app M).val.app V x := by
+    have hh := congrArg ((eqToHom (hF M).symm).val.app V) (unit_normalized M V x)
+    change (eqToHom (hF M).symm).val.app V
+      ((eqToHom (hF M)).val.app V ((am.unit.app M).val.app V x)) =
+        scalarSection.{c, v, r} a F hF M V 1 x at hh
+    rw [← hh]
+    change ((eqToHom (hF M) ≫ eqToHom (hF M).symm).val.app V)
+      ((am.unit.app M).val.app V x) = _
+    simp only [eqToHom_trans, eqToHom_refl]
+    rfl
+  exact ⟨am, e, he, hu, hgen⟩
+
+set_option profiler true in
+private theorem scalarTensorTotal
+    (F : ScalarMod.{c, v, r} R ⥤ ScalarMod.{c, v, r} S)
+    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)
+    (hmF : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (hF M) ≫
+      SheafOfModules.changeOfRingsHom a M f ≫ eqToHom (hF N).symm)
+    [F.Additive] :
+    letI := SheafOfModules.isMonoidal_W_independentCoefficients S
+    letI := SheafOfModules.monoidalCategory S
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
+    ∃ b : coefficientTotalTensor.{r, c, v} J R ⋙ F.mapHomologicalComplex (.up ℤ) ≅
+      (F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj
+          ((MonoidalCategory.curriedTensor (ScalarMod.{c, v, r} S)).map₂CochainComplex),
+    ∀ (P Q : CochainComplex (ScalarMod.{c, v, r} R) ℤ) (p q k : ℤ) (h : p + q = k)
+      (V : Cᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),
+      ((b.hom.app (P, Q)).f k).val.app V
+        (scalarSection.{c, v, r} a F hF _ V 1
+          (coefficientTensorGenerator.{r, c, v} J R P Q p q k h V x y)) =
+      coefficientTensorGenerator.{r, c, v} J S
+        ((F.mapHomologicalComplex (.up ℤ)).obj P)
+        ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q k h V
+        (scalarSection.{c, v, r} a F hF _ V 1 x) (scalarSection.{c, v, r} a F hF _ V 1 y) := by
+  classical
+  dsimp only
+  let A := ScalarMod.{c, v, r} R
+  let B := ScalarMod.{c, v, r} S
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients S
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let := SheafOfModules.tensorPreadditive R
+  let := SheafOfModules.tensorPreadditive S
+  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
+  have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
+  obtain ⟨am, e, he, hu, hgen⟩ := scalarTensorAdjunctionComparison a F hF hmF
   let EC := F.mapHomologicalComplex (.up ℤ)
   let tR := coefficientTotalTensor.{r, c, v} J R
   let tS := coefficientTotalTensor.{r, c, v} J S
@@ -253,18 +301,6 @@ private theorem scalarTensorTotal
         rw [ScalarHomTensor.tensorMap_factor, ScalarHomTensor.tensorMap_factor]
         exact ScalarHomTensor.tensorPullbackTotal_naturality (A := A) (B := B)
           F e he f.1 f.2)
-  have hu (M : A) (V : Cᵒᵖ) (x : M.val.obj V) :
-      scalarSection.{c, v, r} a F hF M V 1 x =
-        (am.unit.app M).val.app V x := by
-    have hh := congrArg ((eqToHom (hF M).symm).val.app V) (unit_normalized M V x)
-    change (eqToHom (hF M).symm).val.app V
-      ((eqToHom (hF M)).val.app V ((am.unit.app M).val.app V x)) =
-        scalarSection.{c, v, r} a F hF M V 1 x at hh
-    rw [← hh]
-    change ((eqToHom (hF M) ≫ eqToHom (hF M).symm).val.app V)
-      ((am.unit.app M).val.app V x) = _
-    simp only [eqToHom_trans, eqToHom_refl]
-    rfl
   refine ⟨b0.symm, ?_⟩
   intro P Q p q k h V x y
   rw [hu, hu, hu]
@@ -293,6 +329,8 @@ private theorem scalarTensorTotal
       (SheafOfModules.ScalarHomOrdinary.pure R (P.X p) (Q.X q) V x y)) at hu'
   erw [hu']
   exact hh.trans (congrArg (ι'.val.app V) (hgen _ _ V x y))
+
+end
 
 end ScalarTotal
 
