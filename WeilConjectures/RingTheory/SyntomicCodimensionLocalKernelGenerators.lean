@@ -71,6 +71,7 @@ private theorem exists_counted_polynomial_fibre_comparison
   let Pk := MvPolynomial (Fin n) k
   let I := RingHom.ker φ.toRingHom
   let Q := q.asIdeal.comap φ.toRingHom
+  have : Q.IsPrime := inferInstance
   let A := Localization.AtPrime Q
   let m := p.map (algebraMap R A)
   let ρ : P →+* Pk := MvPolynomial.map (algebraMap R k)
@@ -83,7 +84,9 @@ private theorem exists_counted_polynomial_fibre_comparison
   let eF : p.Fiber S ≃ₐ[k] (Pk ⧸ Ibar) := polynomial_fiber_equiv_quotient n φ hφ p
   let t : PrimeSpectrum (Pk ⧸ Ibar) := qb.comap eF.symm.toRingHom
   let Qk := t.asIdeal.comap (Ideal.Quotient.mk Ibar)
+  have : Qk.IsPrime := inferInstance
   let U := Qk.comap E.toRingHom
+  have : U.IsPrime := inferInstance
   have hq : qb.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom = q.asIdeal := by
     exact congrArg (fun z ↦ z.val.asIdeal) (EF.symm_apply_apply ⟨q, rfl⟩)
   have heF (a : P) : eF (1 ⊗ₜ[R] φ a) = Ideal.Quotient.mk Ibar (ρ a) := by
