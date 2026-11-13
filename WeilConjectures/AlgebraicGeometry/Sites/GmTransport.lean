@@ -107,7 +107,6 @@ instance isIso_presheafHomRestrict (M : modulesPseudofunctor.obj (.mk (op Y))) (
   infer_instance
 
 -- Prove the compatibility abstractly so that naturality does not unfold module pullbacks.
-set_option profiler true in
 private lemma presheafHom_precomp_restrict_naturality
     {C : Type*} [Category C] (F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat)
     {S S' : C} (q : S' ⟶ S) (A B : F.obj (.mk (op S))) (P : F.obj (.mk (op S')))
@@ -124,7 +123,6 @@ private lemma presheafHom_precomp_restrict_naturality
     (pullHom_map (F := F) a T.hom g.left T'.hom (Over.w g)).symm
     (NatTrans.naturality_apply (F.overMapCompPresheafHomIso A B q).hom g.op x)
 
-set_option profiler true in
 lemma presheafHomRestrict_naturality (M : modulesPseudofunctor.obj (.mk (op Y))) {T T' : Over X}
     (g : T' ⟶ T)
     (x : (modulesPseudofunctor.presheafHom (unitObj Y) M).obj (op ((Over.map f).obj T))) :
@@ -146,7 +144,6 @@ lemma presheafHomRestrict_smulMor (M : modulesPseudofunctor.obj (.mk (op Y))) (T
 
 variable [Etale f]
 
-set_option profiler true in
 /-- **Restriction of `Isom(𝒪, M)`.** The restriction along an étale `f : X ⟶ Y` of the
 `𝔾ₘ`-torsor `Isom(𝒪_Y, M)` is the torsor `Isom(𝒪_X, f^* M)`. -/
 lemma etaleIsoTorsor_restrict_equiv (M : modulesPseudofunctor.obj (.mk (op Y)))
