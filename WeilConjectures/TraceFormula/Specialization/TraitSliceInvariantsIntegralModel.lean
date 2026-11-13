@@ -189,12 +189,13 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total))}
     (hB : boundedConstructible _ B)
-    (eB : L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B ≅
-      L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+    (eB : (integralModelLeftDerivedUpperStar M.j).obj B ≅
+      (integralModelLeftDerivedUpperStar M.ε).obj A)
     (hC : boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (baseChangeGaloisModel hM b hb v hv).generic)
-      (L(((baseChangeGaloisModel hM b hb v hv).ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)) :
+      ((integralModelLeftDerivedUpperStar
+        (baseChangeGaloisModel hM b hb v hv).ε).obj A)) :
     ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ)
       (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1)
         (baseChangeGaloisModel hM b hb v hv).generic))
