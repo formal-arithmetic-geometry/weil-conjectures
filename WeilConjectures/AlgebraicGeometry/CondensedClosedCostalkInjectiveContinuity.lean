@@ -124,18 +124,7 @@ private theorem injectiveContinuity_of_derived
     hd.fac c s]
   exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
 
--- Build complex colimits degreewise, fixing the module category before searching for colimits.
-local instance closedCostalkInjectiveContinuityHasColimit
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
-    (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) ℤ) : HasColimit N := by
-  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  have : HasColimitsOfShape I C := inferInstance
-  have (n : ℤ) : HasColimit (N ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
-    HasColimitsOfShape.has_colimit _
-  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
-
+set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimit inference needs a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- A closed exceptional inverse image preserves a filtered quasi-colimit cocone
@@ -173,6 +162,12 @@ theorem condensed_closed_costalk_injective_continuity
     (hq : QuasiIso (colimit.desc J c)) :
     QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
+  -- Cache the module colimits before specializing the abstract continuity argument.
+  let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
+  let B := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I B := inferInstance
+  have : HasExactColimitsOfShape I B := inferInstance
   exact injectiveContinuity_of_derived H J c a hJ hJi hc hci hq
     (fun q ↦ condensed_closed_costalk_derived_continuity T Λ i H adj J a hJ q)
 
