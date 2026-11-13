@@ -66,7 +66,6 @@ private theorem chart_fmap_inverse {Y Z : Scheme.{u}} (σ : Y ≅ Z)
   exact chart_fmap_identity Z A p
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- Transport along the affine chart identifies its unit map with open restriction
 of the specified coefficient h-map. No Leray edge or higher image is involved.
@@ -134,8 +133,9 @@ theorem exists_flatBaseChange_chart_cohomology_transport
             D.psi p x)) := by
   classical
   intro h N T A C G U L e M C' k
-  obtain ⟨σ, φ, ψ, hφψ, hψφ, hscalar, ef, hunit⟩ :=
+  have hcoefficient :=
     exists_flatBaseChange_chart_coefficient_transport f g F I J V W hV hW eVW D hAlgebra
+  rcases hcoefficient with ⟨σ, φ, ψ, hφψ, hψφ, hscalar, ef, hunit⟩
   let a := moduleCohomologyFMap σ.hom φ p
   let b := moduleCohomologyFMap σ.inv ψ p
   have hab : a ≫ b = 𝟙 _ := chart_fmap_inverse σ φ ψ hφψ p

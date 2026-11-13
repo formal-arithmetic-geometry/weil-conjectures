@@ -58,7 +58,6 @@ private theorem linearEquiv_from_scalar_transports
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Combining the two geometric transports compares explicit module cohomology functors.
 /-- The target Leray identification commutes with module cohomology pullback.
 The displayed algebra is required to be the canonical map on sections.
@@ -129,10 +128,11 @@ theorem exists_flatBaseChange_module_leray_comparison
   let T := baseChangedScheme (S := Γ(S', W)) h
   let A := baseChangedModule (S := Γ(S', W)) h N
   let C := RingedSpace.moduleCohomology T.toRingedSpace p
-  obtain ⟨t, ht, hunit⟩ := exists_flatBaseChange_chart_cohomology_transport
+  have htransport := exists_flatBaseChange_chart_cohomology_transport
     f g F I J p V W hV hW eVW D hAlgebra
-  obtain ⟨d, hd, hres⟩ := exists_flatBaseChange_target_open_edge
-    f g F I J p V W hW eVW D
+  rcases htransport with ⟨t, ht, hunit⟩
+  have hedge := exists_flatBaseChange_target_open_edge f g F I J p V W hW eVW D
+  rcases hedge with ⟨d, hd, hres⟩
   let ρ (a : Γ(S', W)) (x : C.obj A) :=
     (C.map (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫
       (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a))).hom x
@@ -141,9 +141,10 @@ theorem exists_flatBaseChange_module_leray_comparison
         a • (show HOver (baseChangeSnd (S := Γ(S', W)) h) A p from E A x) := by
     exact hE A A (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫
       (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a)) x
-  obtain ⟨b, hb⟩ := linearEquiv_from_scalar_transports
+  have hlinear := linearEquiv_from_scalar_transports
     (A := HOver (baseChangeSnd (S := Γ(S', W)) h) A p)
     (E A) t d ρ _ hscalar ht hd
+  rcases hlinear with ⟨b, hb⟩
   refine ⟨b, ?_⟩
   intro x
   exact (hb _).trans ((congrArg d (hunit x)).trans (hres _))
