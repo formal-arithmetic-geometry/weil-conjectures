@@ -53,7 +53,7 @@ private theorem sectionToLocalizedHom_zero
     (R : Sheaf J CommRingCat.{max u v r}) (U : C)
     (A B : SheafOfModules.{max u v r}
       ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R)) :
-    sectionToLocalizedHom R U A B 0 = 0 := rfl
+    sectionToLocalizedHom.{u, v, r} R U A B 0 = 0 := rfl
 
 private theorem sectionToLocalizedHom_add
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
@@ -63,8 +63,8 @@ private theorem sectionToLocalizedHom_add
     (A B : SheafOfModules.{max u v r}
       ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))
     (φ ψ : (SheafOfModules.homObj (R := R) A B).val.obj (op U)) :
-    sectionToLocalizedHom R U A B (φ + ψ) =
-      sectionToLocalizedHom R U A B φ + sectionToLocalizedHom R U A B ψ := rfl
+    sectionToLocalizedHom.{u, v, r} R U A B (φ + ψ) =
+      sectionToLocalizedHom.{u, v, r} R U A B φ + sectionToLocalizedHom.{u, v, r} R U A B ψ := rfl
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Product projections identify degreewise sections with all localized cochains.
@@ -124,20 +124,20 @@ theorem homComplex_sections_cochainsOfUniverses
       map_zero' := by
         apply CochainComplex.HomComplex.Cochain.ext
         intro p q hpq
-        change sectionToLocalizedHom R U (L.X p) (I.X q)
+        change sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q)
           (((π L I n p q hpq).val.app (op U)).hom 0) = 0
-        rw [map_zero, sectionToLocalizedHom_zero]
+        rw [map_zero, sectionToLocalizedHom_zero.{u, v, r}]
       map_add' := by
         intro x y
         apply CochainComplex.HomComplex.Cochain.ext
         intro p q hpq
-        change sectionToLocalizedHom R U (L.X p) (I.X q)
+        change sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q)
           (((π L I n p q hpq).val.app (op U)).hom (x + y)) =
-            sectionToLocalizedHom R U (L.X p) (I.X q)
+            sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q)
               (((π L I n p q hpq).val.app (op U)).hom x) +
-            sectionToLocalizedHom R U (L.X p) (I.X q)
+            sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q)
               (((π L I n p q hpq).val.app (op U)).hom y)
-        rw [map_add, sectionToLocalizedHom_add] }
+        rw [map_add, sectionToLocalizedHom_add.{u, v, r}] }
   have hfv (n : ℤ) (x : S.X n) (p q : ℤ) (hpq : p + n = q) :
       (((f n) x).v p q hpq).val = ((π L I n p q hpq).val.app (op U)) x := by
     rfl
