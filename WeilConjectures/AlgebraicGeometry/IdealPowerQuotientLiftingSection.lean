@@ -32,9 +32,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 700000 in
-set_option profiler true in
--- Elaborating restricted module maps and their components needs a larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
