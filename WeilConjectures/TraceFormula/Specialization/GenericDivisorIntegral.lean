@@ -97,6 +97,41 @@ end Instances
 
 namespace NearbyCyclesModel
 
+/-- Two flat coefficient changes preserve restricted vanishing when their pushforward
+comparisons are invertible on bounded below complexes. -/
+private lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
+    {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]
+    [MonObj Λ₂] [IsCommMonObj Λ₂]
+    (a : Λ₀ ⟶ Λ₁) [IsMonHom a] (b : Λ₁ ⟶ Λ₂) [IsMonHom b]
+    [∀ T : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a T))]
+    {X X' U Y W : Scheme.{u}} (M : NearbyCyclesModel X X')
+    (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
+    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ₀ U)))
+    (n : ℤ) (hn : ((L((M.ε)^*⟦Λ₀⟧)).obj (D((o)_!open⟦Λ₀⟧).obj K₀)).IsGE n)
+    (ha : ∀ (K : DerivedCategory (Mod (Sheaf (ProEt.topology M.generic) Ab.{u + 1})
+      (condensedRingObj Λ₀ M.generic))) (n : ℤ), K.IsGE n →
+      IsIso ((derivedPushHom a M.j).app K))
+    (hb : ∀ (K : DerivedCategory (Mod (Sheaf (ProEt.topology M.generic) Ab.{u + 1})
+      (condensedRingObj Λ₁ M.generic))) (n : ℤ), K.IsGE n →
+      IsIso ((derivedPushHom b M.j).app K))
+    (h : IsZero ((L((ι)^*⟦Λ₀⟧)).obj ((L((e)^*⟦Λ₀⟧)).obj
+      ((M.nearbyCycles Λ₀).obj (D((o)_!open⟦Λ₀⟧).obj K₀))))) :
+    IsZero ((L((ι)^*⟦Λ₂⟧)).obj ((L((e)^*⟦Λ₂⟧)).obj
+      ((M.nearbyCycles Λ₂).obj (D((o)_!open⟦Λ₂⟧).obj
+        ((L(Mod.extendScalars (coefficientMap b U))).obj
+          ((L(Mod.extendScalars (coefficientMap a U))).obj K₀)))))) := by
+  have h₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
+    a M o e ι K₀ (derivedPushHom a M.j) (ha _ n hn) h
+  have hn₁ : ((L((M.ε)^*⟦Λ₀⟧) ⋙ L(Mod.extendScalars (coefficientMap a M.generic))).obj
+      (D((o)_!open⟦Λ₀⟧).obj K₀)).IsGE n :=
+    isGE_leftDerivedFunctor_extendScalars_obj a _ n
+  have hn₂ := DerivedCategory.TStructure.t.isGE_of_iso
+    ((derivedUpperStarExtendScalarsIso a M.ε).app (D((o)_!open⟦Λ₀⟧).obj K₀) ≪≫
+      (L((M.ε)^*⟦Λ₁⟧)).mapIso ((derivedOpenImmersionShriekIso a o).app K₀)) n
+  exact isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
+    b M o e ι _ (derivedPushHom b M.j) (hb _ n hn₂) h₁
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X X' U Y W : Scheme.{u}}
   (M : NearbyCyclesModel X X') (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
   [IsOpenImmersion ι]
@@ -174,61 +209,15 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
               ((L(Mod.extendScalars
                 (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj
                 K₀)))))) := by
-  -- Share the tensor properties of module categories across the derived functors below.
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasGoodTensor₁₂Tensor A B C := by infer_instance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasGoodTensorTensor₂₃ A B C := by infer_instance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasTensor₄ObjExt A B C D := by infer_instance
-  -- from `𝒪_E` to `E`
-  have hφ₁ := isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j
-    ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
-      (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)) n
-  have k₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
-    (padicIntegersRingObjToContinuousMapRingObj ℓ E) M o e ι K₀
-    (derivedPushHom _ M.j)
-  -- the coefficient rings carry different proofs of `Precoherent Profinite`
-  have h₁ := k₁ (by transport_mod_proofs hφ₁) h
-  -- from `E` to `ℚ̄_ℓ`
-  have hn₁ : ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ⋙ L(Mod.extendScalars
-      (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) M.generic))).obj
-      (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)).IsGE n :=
-    isGE_leftDerivedFunctor_extendScalars_obj (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-      ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
-        (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)) n
-  have hn₂ := DerivedCategory.TStructure.t.isGE_of_iso
-    ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) M.ε).app
-        (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀) ≪≫
-      (L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).mapIso
-        ((derivedOpenImmersionShriekIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) o).app
-          K₀)) n
-  have hn₃ : DerivedCategory.TStructure.t.IsGE
-      ((L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj
-      (D((o)_!open⟦Profinite.continuousMapRingObj E.1⟧).obj
-        ((L(Mod.extendScalars
-          (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀))) n :=
-    by
-    dsimp only [Functor.comp_obj, Iso.trans_hom] at hn₂
-    transport_mod_proofs hn₂
-  have hφ₂ := isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E M.j
-    (n := n) (K := (L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj
-      (D((o)_!open⟦Profinite.continuousMapRingObj E.1⟧).obj
-        ((L(Mod.extendScalars
-          (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀)))
-  have k₂ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) M o e ι
-    ((L(Mod.extendScalars
-      (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀)
-    (derivedPushHom _ M.j)
-  have h₂ := k₂ (by transport_mod_proofs hφ₂) (by transport_mod_proofs h₁)
-  transport_mod_proofs h₂
+  have key := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
+    (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) M o e ι K₀ n hn
+    (fun K n hn ↦ by
+      exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j K n)
+    (fun K n hn ↦ by
+      exact_mod_proofs isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE
+        ℓ E M.j K n) h
+  transport_mod_proofs key
 
 end NearbyCyclesModel
 
@@ -292,7 +281,8 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
       (coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
         (overRestrict X I.support.compl).left))).obj N₀.obj) :=
     boundedConstructible_derivedExtendScalars_residueField _ ℓ E N₀.obj hN₀
-  obtain ⟨U, hU⟩ := core hF'
+  let U := (core hF').choose
+  have hU := (core hF').choose_spec
   refine ⟨U, hU.1, ?_⟩
   have hU := hU.2
   -- the integral case, by derived Nakayama
