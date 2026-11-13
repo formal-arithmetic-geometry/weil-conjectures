@@ -56,7 +56,7 @@ private noncomputable def leftDerivedUpperStarTripleCompOfEq
     {U V W T : Scheme.{u}} {p : U ⟶ V} {q : V ⟶ W} {r : U ⟶ W}
     (h : p ≫ q = r) (s : W ⟶ T) :
     L((s)^*⟦Λ⟧) ⋙ (L((q)^*⟦Λ⟧) ⋙ L((p)^*⟦Λ⟧)) ≅ L((r ≫ s)^*⟦Λ⟧) :=
-  isoWhiskerLeft L((s)^*⟦Λ⟧) (leftDerivedUpperStarCompOfEq Λ h).symm ≪≫
+  Functor.isoWhiskerLeft L((s)^*⟦Λ⟧) (leftDerivedUpperStarCompOfEq Λ h).symm ≪≫
     (leftDerivedUpperStarCompOfEq Λ (p := r) (q := s) rfl).symm
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k' : Type u}
@@ -71,8 +71,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
-
-run_cmd IO.FS.writeFile "/tmp/PH468-stage" "imports\n"
 
 omit [Fact (ringChar k').Prime] in
 /-- Descend a Künneth isomorphism along the change of trait, for arbitrary complexes on the
@@ -106,7 +104,6 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
         (Category.comp_id _)).generic)^*⟦𝔽⟧).obj B))) :
     IsIso (kunnethMap 𝔽 (coordinateSliceTraitMap φ₁ b D)
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂)) A B) := by
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper body"
   have hτM :=
     isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hA
   have hBP :=
@@ -119,17 +116,14 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
       (comp_coordinate_fst hb) D E hBP
   have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
     (K := traitSliceField k') hN E hB
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper exchanges"
   -- the square of Künneth maps along the changes of trait
-  have sq₀ := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
+  have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
     (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (coordinateSliceTraitChangeHom hM b hb D)
     ((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
       (Category.comp_id _)).toGeneric)
     (coordinateSliceTraitChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D)
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square morphisms"
-  have sq₁ := sq₀
     (sliceFst_total_comp_coordinateSliceTraitChangeTotal hM hP hb D)
     (sliceFst_toGeneric_generic_comp_coordinateSliceTraitChangeHom_generic hM hP hb D)
     (sliceSnd_total_comp_baseChangeHom_total hN hpb hP hgen hb D)
@@ -138,37 +132,8 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square compatibilities"
-  have sqAB := sq₁ A B
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square AB"
-  have sqM := sqAB hτM
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square M"
-  have sqN := sqM hτN
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square N"
-  run_tac do
-    let ctx ← Lean.getLCtx
-    let some decl := ctx.findFromUserName? `hτP | Lean.throwError "no hτP"
-    let some sqDecl := ctx.findFromUserName? `sqN | Lean.throwError "no sqN"
-    let ty ← Lean.Meta.whnf sqDecl.type
-    let .forallE _ expected _ _ := ty | Lean.throwError "no forall"
-    let rec walk (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
-      if a == b then return
-      if fuel == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
-        IO.FS.withFile "/tmp/PH468-diff" .append fun out ↦
-          out.putStrLn s!"{path}: {a.getAppFn} / {b.getAppFn}"
-      else
-        let aa := a.getAppArgs
-        let bb := b.getAppArgs
-        for i in [:aa.size] do
-          walk (fuel - 1) s!"{path}.{i}" aa[i]! bb[i]!
-    IO.FS.writeFile "/tmp/PH468-diff" "exchange diff\n"
-    walk 15 "root" decl.type expected
-  have sq₂ := sqN (by cast_proofs hτP)
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "square complexes"
-  have sq := sq₂ (𝟭 _)
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper square"
+    A B hτM hτN hτP (𝟭 _)
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "helper reflection"
   exact sq.2 h
 
 -- the Künneth maps of the two product configurations are large terms
@@ -200,30 +165,23 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport body"
   -- Infer the complex from its étale-origin proof to reuse the derived-functor instances.
   have hAS :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       _ (coordinateSliceTraitGeneric hM b hb D) hA
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport origin"
   refine isIso_kunnethMap_coordinateSliceTrait_of_isIso_change E hM hN hpb hP hgen hb D
     hAS hB ?_
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport descent applied"
   have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport generic"
   -- Compose the natural isomorphisms before evaluating them at `A`.
   have eA := leftDerivedUpperStarTripleCompOfEq 𝔽
     (coordinateSliceTraitChangeGeneric_comp hM b hb D) M.ε
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport natural iso"
   have eB := (leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
     (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).symm
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport second iso"
   have result := isIso_kunnethMap_of_iso 𝔽
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (eA.app A) (eB.app B) h₀
-  run_tac IO.FS.withFile "/tmp/PH468-stage" .append fun h ↦ h.putStrLn "transport result"
-  cast_proofs result
+  exact result
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
