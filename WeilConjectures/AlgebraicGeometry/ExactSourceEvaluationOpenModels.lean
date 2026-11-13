@@ -202,12 +202,17 @@ theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
   let : HasDerivedCategory.{w} A := (inferInstance : HasDerivedCategory.{w}
     (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)))
   let Q := DerivedCategory.Q.{w} (C := A)
+  let L := Q ⋙ E
   obtain ⟨I, hI, η, hη, fI, hfI, t, h, ht, hh, hs⟩ :=
     exists_localEvaluation_resolution_square X U P F hhom hdual f _hf
-  have : IsIso (E.map (Q.map t)) := inferInstance
-  have : IsIso (E.map (Q.map h)) := inferInstance
+  have : IsIso (L.map t) := by
+    change IsIso (E.map (Q.map t))
+    infer_instance
+  have : IsIso (L.map h) := by
+    change IsIso (E.map (Q.map h))
+    infer_instance
   let eI : E.obj (Q.obj I) ≅ N := (E.mapIso (asIso (Q.map η))).symm ≪≫ _eN
-  apply comparison_of_mapped_resolution_square (Q ⋙ E) g f fI t h hs
+  apply comparison_of_mapped_resolution_square L g f fI t h hs
   exact exists_exactSource_kInjective_evaluation_open_models
     X U K N P I hhom hdual _eK eI fI hfI
 
