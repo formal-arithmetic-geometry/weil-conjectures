@@ -443,7 +443,6 @@ private meta def exactFiniteAmbient (h : Lean.Expr) : Lean.Elab.Tactic.TacticM U
   let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
   Lean.Elab.Tactic.closeMainGoal `exact result
 
-set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
 canonical pro-etale compactification base-change map.
@@ -517,15 +516,12 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `ho) none
         exactFiniteAmbient h)
+  -- Normalize the visible word before comparing its remaining instance diamonds.
   simp only [comparisonFiniteF, comparisonLevelExchange, finiteF,
-    nativeOpen, nativePush, nativePull,
-    rightDerivedLowerShriekOfCompactification, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_inv,
-    Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Functor.comp_map, Functor.comp_obj,
-    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc] at H ⊢
+    nativeOpen, nativePush, nativePull, rightDerivedLowerShriekOfCompactification,
+    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+    Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc] at H ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactFiniteAmbient h
