@@ -108,8 +108,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
   have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
     (K := traitSliceField k') hN E hB
   -- the square of Künneth maps along the changes of trait
-  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
-  exact (isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
+  have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
     (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (coordinateSliceTraitChangeHom hM b hb D)
@@ -124,7 +123,10 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    A B hτM hτN hτP (𝟭 _)).2 h
+    A B hτM hτN hτP (𝟭 _)
+  fail "PH468: abstract square elaborated"
+  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
+  exact sq.2 h
 
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
