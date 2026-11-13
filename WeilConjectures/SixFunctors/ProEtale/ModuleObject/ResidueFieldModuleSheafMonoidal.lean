@@ -255,6 +255,7 @@ lemma upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app {S T
     (upperStarForgetIso_hom_comp_whiskerRight_residueFieldModuleSheafUpperStarIso_hom ℓ E a) M
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
+/-- Taking underlying abelian sheaves of a residue-field module map recovers its underlying map. -/
 private lemma sheafCompose_map_residueFieldModuleSheaf_map
     {M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (residueFieldRingObj X ℓ E)}
     (f : M ⟶ N) :
@@ -263,7 +264,6 @@ private lemma sheafCompose_map_residueFieldModuleSheaf_map
         ((residueFieldModuleSheaf X ℓ E).map f) = f.hom :=
   rfl
 
-set_option profiler true in
 /-- **The commutation of `G` with the pullbacks is compatible with the tensor products**: the
 isomorphism `f^* ⋙ G_X ≅ G_Y ⋙ f^*` of `residueFieldModuleSheafUpperStarIso` is compatible with
 the tensor isomorphisms of `G_X`, `G_Y` and the comonoidal structures of the pullbacks. On
@@ -302,8 +302,9 @@ lemma tensorCompatible_residueFieldModuleSheafUpperStarIso {S T : Scheme.{u}} (a
       ((residueFieldModuleSheafUpperStarIso ℓ E a).hom.app N)
   simp only [Functor.comp_obj] at hμ
   conv_rhs =>
-    rw [sheafCompose_map_residueFieldModuleSheaf_map S ℓ E, map_tensorObjπ_upperStarUnitHom_δ_hom_assoc
-      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) a M N]
+    rw [sheafCompose_map_residueFieldModuleSheaf_map S ℓ E,
+      map_tensorObjπ_upperStarUnitHom_δ_hom_assoc
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) a M N]
     rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app_assoc S ℓ E
       ((a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj M)
       ((a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)]
