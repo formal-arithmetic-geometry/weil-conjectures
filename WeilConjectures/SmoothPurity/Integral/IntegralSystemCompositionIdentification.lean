@@ -90,14 +90,14 @@ private theorem finiteSystemComposition_heq {V W Z : Scheme.{u}}
     (raGh' := integralComparisonSequenceRightAdjoint l E h)
     (raGhk := ProEtale.VaryingRing.push_isRightAdjoint _ _ (h ≫ k))
     (raGhk' := integralComparisonSequenceRightAdjoint l E (h ≫ k))
-    rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl
+    (by rfl) (by rfl) (by rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
     (finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) k)
     (integralComparisonSequenceDirectImage l E k)
     (finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) h)
     (integralComparisonSequenceDirectImage l E h)
     (finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) (h ≫ k))
     (integralComparisonSequenceDirectImage l E (h ≫ k))
-    HEq.rfl HEq.rfl HEq.rfl
+    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
     (finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
     (integralComparisonSequenceComposition l E h k) _ _ e1.1 e2.1 ?_
   apply heq_of_eq
@@ -162,7 +162,7 @@ private theorem finiteSystemDerivedComposition_heq {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     HEq (finiteSystemDerivedComposition (integralSystemRings l E)
       (integralSystemTransition l E) h k) (integralComparisonSystemComposition l E h k) := by
-  have hh := finiteSystemDerivedCompositor_heq
+  exact finiteSystemDerivedCompositor_heq
     (addF := finiteSystemPullbackAdditive
       (integralSystemRings l E) (integralSystemTransition l E) k)
     (addF' := integralComparisonSequencePullbackAdditive l E k)
@@ -198,11 +198,9 @@ private theorem finiteSystemDerivedComposition_heq {V W Z : Scheme.{u}}
     (H' := integralComparisonSequencePullback l E (h ≫ k))
     (a := finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
     (a' := integralComparisonSequenceComposition l E h k)
-    rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
-    HEq.rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+    (by rfl) (by rfl) (by rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
+    (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
     (finiteSystemComposition_heq l E h k)
-  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  exact hh
 
 set_option profiler true in
 /-- The derived finite-system compositor is the derived strict sequence compositor.
