@@ -33,8 +33,6 @@ namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
 set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
--- Comparing the resolution and tensor cohomology interfaces needs extra elaboration steps.
 /-- On affine opens W and V with g(W) contained in V, bijectivity of the actual
 resolution comparison is exactly bijectivity of the canonical scalar-extension
 comparison for cohomology over the ring of sections of V.
@@ -103,7 +101,7 @@ theorem Scheme.Modules.flatBaseChangeResolutionBeta_affine_bijective_iff
       rw [ha_tmul, Scheme.Modules.Hom.app_smul]
       have hs := Scheme.Modules.flatBaseChangeResolutionBeta_sections f g I J t ht p
         V D (eH.symm xi)
-      rw [Adjunction.homEquiv_unit] at hs
+      simp only [Adjunction.homEquiv_unit] at hs
       change Scheme.Modules.Hom.app β (g ⁻¹ᵁ V)
         (Scheme.Modules.Hom.app
           ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app
@@ -116,7 +114,7 @@ theorem Scheme.Modules.flatBaseChangeResolutionBeta_affine_bijective_iff
             (((Scheme.Modules.pushforward f).rightDerived p).obj F)) V
           (D.sourceClass p (eH.symm xi)))) hn
       change _ = b (s • Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi)
-      rw [b.map_smul, hb_pullback]
+      simp only [b.map_smul, hb_pullback]
       congr 1
       exact hn'.trans (congrArg
         (fun z ↦ (((Scheme.Modules.pushforward (pullback.fst g f)).rightDerived p).obj

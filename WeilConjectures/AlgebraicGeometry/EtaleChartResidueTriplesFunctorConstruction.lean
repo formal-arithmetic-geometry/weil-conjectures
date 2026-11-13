@@ -101,9 +101,6 @@ private lemma affine_triple_properties (A : CommRingCat.{v}) (p : Spec A)
       (congrArg (fun f ↦ f ≫ Spec.map ((ΓSpecIso A).inv ≫ g.appTop)) hp).trans hy'
 
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- The two nested full subcategories and induced triple category require substantial
--- definitional equality checking when assembling the functor and its ring isomorphism.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, proof of Tag 04HX (lemma-describe-etale-local-ring),
 first paragraph, and Tag 04HT (remark-etale-neighbourhoods).
@@ -284,9 +281,12 @@ theorem etale_chart_residue_triples_functor_construction
   constructor
   · intro g' hg'
     change (ΓSpecIso A).inv ≫ g'.appTop ≫ 𝟙 _ = α c
-    rw [Category.comp_id, g_unique c g' hg']
-  · change _ = _ ≫ _ ≫ Spec.map (𝟙 _)
-    rw [Spec.map_id, Category.comp_id]
-    exact point_formula c
+    exact (Category.comp_id _).trans
+      (congrArg (fun k ↦ (ΓSpecIso A).inv ≫ k.appTop) (g_unique c g' hg'))
+  · change c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ =
+      Spec.map (CommRingCat.ofHom K.subtype) ≫
+        Spec.map ((ΓSpecIso (t c).B).inv ≫ (Spec (t c).B).Γevaluation (t c).q ≫
+          (t c).φ) ≫ Spec.map (𝟙 (t c).B)
+    simpa only [Spec.map_id, Category.comp_id] using point_formula c
 
 end AlgebraicGeometry.Scheme
