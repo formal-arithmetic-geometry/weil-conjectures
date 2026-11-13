@@ -24,7 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-set_option trace.profiler true in
 /-- The sheaf equalizer identifies matching sections with compatible tuples,
 with the selected coordinate equal to restriction to the corresponding chart.
 

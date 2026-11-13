@@ -108,7 +108,8 @@ theorem puncturedMatching_chart_power_lift
   have hc' : ψ (ρ (b h)) = c (h.val.2 0) := by
     exact hc h
   refine hc'.trans ((congrArg c hh).trans ((c.map_smul _ _).trans ?_))
-  refine (congrArg (fun x ↦ g' 0 ^ n • x) (c.apply_symm_apply t)).trans ?_
+  refine (congrArg (fun x : Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) ↦ g' 0 ^ n • x)
+    (c.apply_symm_apply t)).trans ?_
   change ((ψ.comp ρ).comp D.baseMap.hom) (g' 0 ^ n) * t = _
   simp only [g', Fin.cons_zero, map_pow, RingHom.comp_apply]
 
