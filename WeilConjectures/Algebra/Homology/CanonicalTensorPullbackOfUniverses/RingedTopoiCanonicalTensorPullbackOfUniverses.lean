@@ -87,6 +87,7 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
+import WeilConjectures.CategoryTheory.Derived.DerivedResolvingPairRestriction
 import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.DerivedPullbackRepresentativeComputationSupplement
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
@@ -180,7 +181,6 @@ private theorem tensorPullbackTotal_naturality
   rfl
 
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
 -- Elaborate the full two-variable representative square.
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
@@ -347,28 +347,18 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
       exact
         (tensorPullbackTotal_naturality uStar k.mu k.naturality f.1 f.2))
   let b := b0.symm
-  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ PR X.as
-  have hres : ∀ X : HomotopyCategory A (.up ℤ),
-      ∃ (Y : H.FullSubcategory) (f : Y.obj ⟶ X), HomotopyCategory.quasiIso A (.up ℤ) f := by
+  have hres : ∀ X : CochainComplex A ℤ,
+      ∃ (P : CochainComplex A ℤ) (f : P ⟶ X), PR P ∧ QuasiIso f := by
     intro X
     obtain ⟨P, f, hp, hf, hq, _⟩ :=
-      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X.as
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X
     have hflat : ∀ n, IsFlatOnSite (J := JC) (R := R) (P.X n) := by
       intro n
       exact (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (P.X n)).symm (hf n)
-    refine ⟨⟨(HomotopyCategory.quotient A (.up ℤ)).obj P, (hPR P).2 ⟨hp, hflat⟩⟩,
-      (HomotopyCategory.quotient A (.up ℤ)).map f, ?_⟩
-    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hq
+    exact ⟨P, f, (hPR P).2 ⟨hp, hflat⟩, hq⟩
   set_option backward.isDefEq.respectTransparency true in
-    have hff := CategoryTheory.resolvingRepresentativesFullyFaithfulWhiskering
-      (K := CochainComplex A ℤ) (H := HomotopyCategory A (.up ℤ))
-      (D := DerivedCategory A) (DerivedCategory B)
-      (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
-      (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh PR H (fun _ ↦ Iff.rfl) hres
-  obtain ⟨ff⟩ := hff
-  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ (DerivedCategory B)).mapIso
-    (NatIso.prod (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso A))
-      (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso A))))
+    have hff := CategoryTheory.derivedResolvingPairRestriction (DerivedCategory B) PR hres
+  obtain ⟨ff'⟩ := hff
   set_option backward.isDefEq.respectTransparency true in
     have hdes := CategoryTheory.tensorComparisonDescent
       (K := CochainComplex A ℤ) (H := CochainComplex B ℤ)
