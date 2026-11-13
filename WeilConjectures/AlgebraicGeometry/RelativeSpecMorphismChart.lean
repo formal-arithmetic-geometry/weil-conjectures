@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 universe u
 open CategoryTheory Opposite TopologicalSpace
 namespace AlgebraicGeometry
-set_option profiler true in
 /-- The local chart compatibility for the relative-spectrum anti-equivalence, provided
 its forward functor acts on morphisms by the canonical section maps (`hmap`).
 Source: Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX
