@@ -112,6 +112,7 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
 
 attribute [local irreducible] completed homComplexFunctor
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Elaborating the explicit chain-map components traverses the finite tensor constructions.
 /-- The coefficient augmentation exists before tensoring with any complex.
