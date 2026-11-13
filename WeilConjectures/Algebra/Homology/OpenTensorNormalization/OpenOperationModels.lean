@@ -459,8 +459,8 @@ private theorem adjunctionOfLinearMates
     congr 1
     have hn : i.inv.app M ≫ W.map (I.map a) =
         L.map (U.map a) ≫ i.inv.app N := (i.inv.naturality a).symm
-    rw [W.map_comp, ← Category.assoc (W.map (I.map a)),
-      ← Category.assoc (i.inv.app M), hn, Category.assoc]
+    simp only [W.map_comp, Category.assoc]
+    rw [← Category.assoc (i.inv.app M), hn, Category.assoc]
   have hBR M {H H'} a (b : H ⟶ H') :
       E M H' (a ≫ S.map b) = E M H a ≫ P.map b := by
     apply U.map_injective
@@ -477,7 +477,7 @@ private theorem adjunctionOfLinearMates
   have hEL {M N} (a : M ⟶ N) H (b : (I ⋙ T).obj N ⟶ H) :
       E' M H ((I ⋙ T).map a ≫ b) = a ≫ E' N H b := by
     dsimp only [E', Equiv.trans_apply, Functor.comp_map]
-    rw [aT.homEquiv_naturality_left, hBL]
+    rw [aT.homEquiv_naturality_left (I.map a) b, hBL]
   exact ⟨Adjunction.mkOfHomEquiv {
     homEquiv := E'
     homEquiv_naturality_left_symm := by
@@ -487,7 +487,7 @@ private theorem adjunctionOfLinearMates
     homEquiv_naturality_right := by
       intro M H H' a b
       dsimp only [E', Equiv.trans_apply]
-      rw [aT.homEquiv_naturality_right]
+      rw [aT.homEquiv_naturality_right a b]
       exact hBR M (aT.homEquiv (I.obj M) H a) b }⟩
 
 set_option profiler true in
@@ -564,7 +564,10 @@ private theorem supplied_adjunction
     (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
     (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)) B'
   intro M H a
-  simpa only [NatIso.ofComponents_hom_app, Iso.refl_hom, Category.comp_id] using hB M H a
+  change (mset B).map (B' M H a) ≫ 𝟙 _ =
+    adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a ≫ 𝟙 _)
+  rw [Category.comp_id, Category.comp_id]
+  exact hB M H a
 
 end GeneralizedRinged
 
