@@ -89,23 +89,25 @@ theorem exists_subfieldEndRingEquiv :
         (∀ x, ‖ev W t x‖ ≤ 1) →
           ∃ s : Γ (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W),
             Mod.regularEndRingHom (Γ.map (padicIntegersToPadicSubfield W ℓ E) s) = t := by
+  let e (W : Scheme.{u}) : C(W, E) ≃+*
+      End (Mod.regular (padicSubfieldRingObj W ℓ E)) :=
+    RingEquiv.ofBijective
+      (Mod.regularEndRingHom.comp (subfieldSectionRingHom ℓ W E))
+      (Mod.regularEndRingHom_bijective.comp (subfieldSectionRingHom_bijective ℓ W E))
   have key (W : Scheme.{u}) (f : C(W, E)) :
-      ((RingEquiv.ofBijective _ Mod.regularEndRingHom_bijective).symm.trans
-        (subfieldSectionRingEquiv ℓ W E).symm)
-        (Mod.regularEndRingHom (subfieldSectionRingHom ℓ W E f)) = f := by
-    rw [RingEquiv.trans_apply, ← RingEquiv.ofBijective_apply _ Mod.regularEndRingHom_bijective,
-      RingEquiv.symm_apply_apply]
-    exact (subfieldSectionRingEquiv ℓ W E).symm_apply_apply f
-  refine ⟨fun W ↦ (RingEquiv.ofBijective _ Mod.regularEndRingHom_bijective).symm.trans
-    (subfieldSectionRingEquiv ℓ W E).symm, fun W' W g t x ↦ ?_, fun W t ht ↦ ?_⟩
-  · obtain ⟨s, rfl⟩ := Mod.regularEndRingHom_bijective.2 t
-    obtain ⟨f, rfl⟩ := (subfieldSectionRingHom_bijective ℓ W E).2 s
-    rw [restrictEnd_regularEndRingHom, Γ_map_condensedPullbackHom_subfieldSectionRingHom, key,
-      key]
+      (e W).symm (Mod.regularEndRingHom (subfieldSectionRingHom ℓ W E f)) = f :=
+    (e W).symm_apply_apply f
+  refine ⟨fun W ↦ (e W).symm, ?_, ?_⟩
+  · intro W' W g t x
+    obtain ⟨f, rfl⟩ := (e W).surjective t
+    change (e W').symm (restrictEnd _ g
+      (Mod.regularEndRingHom (subfieldSectionRingHom ℓ W E f))) x = (e W).symm (e W f) (g x)
+    rw [restrictEnd_regularEndRingHom, Γ_map_condensedPullbackHom_subfieldSectionRingHom,
+      key, RingEquiv.symm_apply_apply]
     rfl
-  · obtain ⟨s, rfl⟩ := Mod.regularEndRingHom_bijective.2 t
-    obtain ⟨f, rfl⟩ := (subfieldSectionRingHom_bijective ℓ W E).2 s
-    simp only [key] at ht
+  · intro W t ht
+    obtain ⟨f, rfl⟩ := (e W).surjective t
+    simp only [RingEquiv.symm_apply_apply] at ht
     let := normedFieldOfAlgebra ℓ E.1
     have hmem (x : W) : f x ∈ integers ℓ E.1 :=
       (mem_integers_iff_norm_le_one_intermediateField _).2 (ht x)
