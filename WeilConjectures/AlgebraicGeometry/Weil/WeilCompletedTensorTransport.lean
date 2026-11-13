@@ -39,6 +39,7 @@ private theorem tensor_unit_iso_cancel
 attribute [local irreducible] completedCechModulesEquiv intrinsicPresentationRoundTrip
   pbcCompletedComparison
 
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- Elaborate the unbounded tensor comparison across the two coefficient models.
 set_option backward.isDefEq.respectTransparency false in
