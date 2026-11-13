@@ -76,7 +76,6 @@ private theorem mapHomotopyCategory_leftAdjointCompIso_id_comp
   change (L i).map ((Adjunction.leftAdjointIdIso ai ri).hom.app (P.X n)) ≫ 𝟙 _ = _
   exact Category.comp_id _
 
-set_option profiler true in
 /-- Tensor composition mates satisfy both unit laws on the homotopy category.
 Source: Mathlib.CategoryTheory.Adjunction.CompositionIso,
 `Adjunction.leftAdjointCompIso_comp_id` and `Adjunction.leftAdjointCompIso_id_comp`;

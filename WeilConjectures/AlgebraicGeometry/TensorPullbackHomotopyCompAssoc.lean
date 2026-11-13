@@ -74,7 +74,6 @@ private theorem mapHomotopyCategory_leftAdjointCompIso_assoc
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_inv_app, Category.id_comp] using hh.symm
 
-set_option profiler true in
 /-- The tensor pullback composition mates are associative after passage to homotopy.
 Source: Mathlib `Adjunction.leftAdjointCompIso_assoc` and
 the component formulas for `Scheme.Modules.pushforwardComp`; Stacks Project, Cohomology, Tag 0D5S.
