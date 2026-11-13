@@ -350,6 +350,7 @@ variable (X Y X' Y' : Scheme.{u})
   [iY' : Fact (∀ t : Y', IsUnit (l : Y'.presheaf.stalk t))]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the restated goal unfolds the concrete stage functors
 /-- `pbcExchangeStageSquare` on integral objects, with the composite comparisons of
 `StageSystem.Morphism.comp` expanded.
