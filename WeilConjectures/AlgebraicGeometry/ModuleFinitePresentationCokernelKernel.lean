@@ -38,6 +38,20 @@ private theorem finiteType_of_data
   exact ⟨q.shrink, this⟩
 
 open SheafOfModules in
+private theorem finiteType_of_finite_generators
+    {C : Type u} [Category.{u} C] [HasBinaryProducts C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M : SheafOfModules.{u} R} (s : M.GeneratingSections) [s.IsFiniteType] :
+    M.IsFiniteType := by
+  have : s.localGeneratorsData.IsFiniteType := ⟨fun i ↦ by
+    dsimp only [GeneratingSections.localGeneratorsData]
+    infer_instance⟩
+  exact finiteType_of_data s.localGeneratorsData
+
+open SheafOfModules in
 private theorem finiteType_of_iso
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}}
@@ -229,13 +243,8 @@ theorem kernel_composite_cokernel_isFiniteType
   let E := U.sheafOfModulesEquivOver R
   let Y : RingedSpace := X.restrict U.isOpenEmbedding
   -- The finite relation family generates the kernel of the presentation map.
-  have hP : (kernel P.generators.π).IsFiniteType := by
-    let q := P.relations.localGeneratorsData
-    have : q.IsFiniteType := by
-      refine SheafOfModules.LocalGeneratorsData.IsFiniteType.mk (p := q) (fun i ↦ ?_)
-      dsimp only [q, SheafOfModules.GeneratingSections.localGeneratorsData]
-      infer_instance
-    exact finiteType_of_data (R := R.over U) q
+  have hP : (kernel P.generators.π).IsFiniteType :=
+    finiteType_of_finite_generators P.relations
   have hG : (G.over U).IsFiniteType := by
     exact finiteType_pushforward_leftAdjoint (Over.forget U) (𝟙 _) (Iso.refl _)
   have : (E.functor.obj (G.over U)).IsFiniteType := finiteType_equivOver U _
@@ -254,9 +263,13 @@ theorem kernel_composite_cokernel_isFiniteType
     exact finiteType_kernel_of_exact Y T
       (((ShortComplex.exact_cokernel f).map A).map E.functor)
   have : Epi π := by dsimp [π]; infer_instance
+  -- Use the ambient kernels directly for these composite maps.
+  have : HasKernel (π ≫ c) := HasKernels.has_limit _
   have hN : (kernel (π ≫ c)).IsFiniteType :=
     finiteType_kernel_comp_of_epi Y π c
   -- Transfer the finite-type conclusion back to the slice-site kernel.
+  have : HasKernel (E.functor.map (P.generators.π ≫ A.map (cokernel.π f))) :=
+    HasKernels.has_limit _
   have : (kernel (E.functor.map (P.generators.π ≫ A.map (cokernel.π f)))).IsFiniteType := by
     simpa only [Functor.map_comp] using hN
   exact finiteType_kernel_of_equivOver U (P.generators.π ≫ A.map (cokernel.π f))
