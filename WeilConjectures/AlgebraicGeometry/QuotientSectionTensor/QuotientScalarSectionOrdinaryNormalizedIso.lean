@@ -36,9 +36,10 @@ private theorem adjunction_unit_square
     P.map (adj.unit.app M) ≫ restriction.hom.app (L.obj M) ≫
         U'.map (comparison.hom.app M) = adj'.unit.app (P.obj M) := by
   have ht := h M (L.obj M) (𝟙 _)
-  rw [Adjunction.homEquiv_id, Q.map_id, Category.comp_id, Adjunction.homEquiv_unit] at ht
-  rw [← Category.assoc, ht, Category.assoc, ← U'.map_comp, Iso.inv_hom_id_app,
-    U'.map_id, Category.comp_id]
+  rw [Adjunction.homEquiv_id, Q.map_id] at ht
+  erw [Category.comp_id, Adjunction.homEquiv_unit] at ht
+  simpa only [Category.assoc, ← U'.map_comp, Iso.inv_hom_id_app, U'.map_id,
+    Category.comp_id] using congrArg (fun f ↦ f ≫ U'.map (comparison.hom.app M)) ht
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -122,16 +123,15 @@ private theorem canonical_section_extension (T : Scheme.{u}) (M : Modules Λ T) 
     ((restriction.hom.app ((extension a T).obj M)).val.app W
       (((Mod.extendRestrictAdjunction (coefficientMap a T)).unit.app M).hom.hom.app W m)) =
     (s.ordinaryAdjunction.unit.app ((equivalence Λ T).functor.obj M)).val.app W m at hv
-  rw [hrestriction] at hv
-  change (eqToHom (s.extension_obj ((equivalence Λ T).functor.obj M))).val.app W
-    ((comparison.hom.app M).val.app W
-      (((Mod.extendUnit (coefficientMap a T) M).hom.hom.app W) m)) = _
   have hunit : ((Mod.extendRestrictAdjunction (coefficientMap a T)).unit.app M).hom =
       (Mod.extendUnit (coefficientMap a T) M).hom :=
     Mod.extendRestrictAdjunction_unit_app_hom _ _
-  rw [← hunit]
-  erw [hv]
-  exact section_pair_unit a T s ((equivalence Λ T).functor.obj M) W m
+  have hg := (hrestriction ((extension a T).obj M) W _).trans
+    (congrArg (fun f ↦ f.hom.app W m) hunit)
+  have hx := (congrArg (fun x ↦ (comparison.hom.app M).val.app W x) hg).symm.trans hv
+  exact (congrArg
+    (fun x ↦ (eqToHom (s.extension_obj ((equivalence Λ T).functor.obj M))).val.app W x)
+    hx).trans (section_pair_unit a T s ((equivalence Λ T).functor.obj M) W m)
 
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
