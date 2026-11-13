@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
+
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
@@ -43,6 +45,21 @@ open CategoryTheory Category Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
+private lemma adicBaseChange_mate_symm_app {C D E F : Type*}
+    [Category* C] [Category* D] [Category* E] [Category* F]
+    {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
+    {L₂ : E ⥤ F} {R₂ : F ⥤ E} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (β : TwoSquare R₁ H G R₂) (M : C) :
+    ((mateEquiv adj₁ adj₂).symm β).app M =
+      L₂.map (G.map (adj₁.unit.app M)) ≫
+        L₂.map (β.app (L₁.obj M)) ≫ adj₂.counit.app (H.obj (L₁.obj M)) := by
+  simp
+
+private lemma adicBaseChange_isoTrans_app {C D : Type*} [Category* C] [Category* D]
+    {F₁ F₂ F₃ F₄ : C ⥤ D} (e₁ : F₁ ≅ F₂) (e₂ : F₂ ≅ F₃) (e₃ : F₄ ≅ F₃) (M : C) :
+    (e₁ ≪≫ e₂ ≪≫ e₃.symm).hom.app M =
+      e₁.hom.app M ≫ e₂.hom.app M ≫ e₃.inv.app M := rfl
+
 variable (l : ℕ) [Fact l.Prime]
 
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
@@ -53,6 +70,46 @@ noncomputable def adicSquareLowerStarIso (sq : CommSq g' j' j g'') :
     (j')_*ᵃ[l] ⋙ (g'')_*ᵃ[l] ≅ (g')_*ᵃ[l] ⋙ (j)_*ᵃ[l] :=
   adicLowerStarComp l j' g'' ≪≫ adicLowerStarCongr l sq.w.symm ≪≫
     (adicLowerStarComp l g' j).symm
+
+private lemma adicSquareLowerStarIso_hom_app (sq : CommSq g' j' j g'')
+    (M : AdicSheaf l U') :
+    (adicSquareLowerStarIso l sq).hom.app M =
+      (adicLowerStarComp l j' g'').hom.app M ≫
+        (adicLowerStarCongr l sq.w.symm).hom.app M ≫ (adicLowerStarComp l g' j).inv.app M :=
+  adicBaseChange_isoTrans_app _ _ _ _
+
+private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
+    (M : AdicSheaf l U') :
+    ((adicSquareLowerStarIso l sq).hom.app M).hom =
+      (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
+  -- Compare on sections and retain the rewrite proofs: reducing the composite module
+  -- structures directly makes kernel checking much more expensive.
+  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
+  rewrite [adicSquareLowerStarIso_hom_app]
+  unfold ProEtale.squareLowerStarIso
+  repeat' rewrite [Iso.trans_hom]
+  repeat' rewrite [Iso.symm_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [Mod.comp_hom']
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  rewrite [adicLowerStarComp_hom_app_hom_hom_app,
+    adicLowerStarCongr_hom_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app]
+  rewrite [lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
+    lowerStarComp_inv_app_hom_app]
+  rfl
+
+private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : AdicSheaf l Y) :
+    ((adicUpperStarLowerStarAdjunction l f).unit.app M).hom =
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f).unit.app M.X := by
+  exact Adjunction.modAdjunction_unit_app_hom _ _ _
+
+private lemma adicBaseChange_counit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : AdicSheaf l X) :
+    ((adicUpperStarLowerStarAdjunction l f).counit.app M).hom =
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f).counit.app M.X := by
+  exact Adjunction.modAdjunction_counit_app_hom _ _ _
 
 variable [WeaklyEtale j] [WeaklyEtale j']
 
@@ -65,23 +122,17 @@ noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (adicUpperStarLowerStarAdjunction l j)).symm
     (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom))
 
-set_option maxHeartbeats 1600000 in
--- The kernel needs time to unfold the module structures of the lifted functors.
 omit [WeaklyEtale j] [WeaklyEtale j'] in
 /-- The underlying map of sheaves of `ℚ̄_ℓ`-modules of the base change map of `ℓ`-adic sheaves is
 the base change map of the underlying sheaves. -/
 lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
     ((adicBaseChangeMap l sq).app M).hom =
       (ProEtale.baseChangeMap (WeilCoefficients.{u} l) sq).app M.X := by
-  simp only [adicBaseChangeMap, ProEtale.baseChangeMap, mateEquiv, Equiv.coe_fn_symm_mk,
-    NatTrans.comp_app, Functor.comp_obj, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
-    Functor.rightUnitor_hom_app, Functor.id_obj, comp_id, id_comp, Mod.comp_hom', Mod.id_hom',
-    Functor.comp_map,
-    adicUpperStar_map_hom, adicLowerStar_map_hom, adicUpperStarLowerStarAdjunction,
-    Adjunction.modAdjunction_unit_app_hom, Adjunction.modAdjunction_counit_app_hom,
-    adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
-    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+  dsimp only [adicBaseChangeMap, ProEtale.baseChangeMap]
+  rw [adicBaseChange_mate_symm_app, adicBaseChange_mate_symm_app]
+  simp (config := { dsimp := false }) only [Mod.comp_hom', adicUpperStar_map_hom,
+    adicLowerStar_map_hom, adicBaseChange_unit_app_hom, adicBaseChange_counit_app_hom,
+    adicSquareLowerStarIso_hom_app_hom]
   rfl
 
 /-- **Weakly étale base change for `ℓ`-adic sheaves**: for a cartesian square the base change
