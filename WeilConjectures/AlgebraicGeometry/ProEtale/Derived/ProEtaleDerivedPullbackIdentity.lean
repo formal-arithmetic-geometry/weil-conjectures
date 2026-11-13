@@ -275,7 +275,8 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
         _ = M.val.map (p.inv.app U).op (M.val.map (p.hom.app U).op m) :=
           congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (he_unit M U m)
         _ = M.val.map ((p.hom.app U).op ≫ (p.inv.app U).op) m :=
-          (M.val.map_comp_apply _ _ m).symm
+          ConcreteCategory.congr_hom (M.val.map_comp (p.hom.app U).op
+            (p.inv.app U).op).symm m
         _ = m := by
           have hp : (p.hom.app U).op ≫ (p.inv.app U).op = 𝟙 (op U) :=
             congrArg Quiver.Hom.op (p.inv_hom_id_app U)
