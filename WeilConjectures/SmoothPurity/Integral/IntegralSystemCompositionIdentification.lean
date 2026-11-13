@@ -50,10 +50,7 @@ pasting isomorphism for the same direct images and adjunctions. -/
 theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSequenceComposition l E h k := by
-  exact (integralComparisonSequenceComposition_existsUnique l E h k).unique
-    (finiteSystemComposition_existsUnique (integralSystemRings l E)
-      (integralSystemTransition l E) h k).exists.choose_spec
-    (integralComparisonSequenceComposition_existsUnique l E h k).exists.choose_spec
+  rfl
 
 set_option profiler true in
 /-- The derived finite-system compositor is the derived strict sequence compositor.
@@ -62,12 +59,6 @@ Source: Stacks 0D6D, 015F
 theorem finiteSystemDerivedComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
-  exact congrArg
-    (fun e : integralComparisonSequencePullback l E (h ≫ k) ≅
-        integralComparisonSequencePullback l E k ⋙ integralComparisonSequencePullback l E h ↦
-      Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E k)
-          (integralComparisonSequencePullback l E h)).symm)
-    (finiteSystemComposition_eq l E h k)
+  rfl
 
 end WeilConjectures
