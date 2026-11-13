@@ -154,6 +154,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact h
 
 -- Normalize the entire composition path before pasting the Leray comparisons.
+set_option profiler true in
 private theorem mixedSections_composition_path
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
@@ -185,6 +186,7 @@ private theorem mixedSections_composition_path
   rw [← HZ.rightDerivedFunctor.map_comp]
   erw [he]
   simp only [Functor.map_comp]
+  rfl
 
 set_option profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
@@ -239,30 +241,15 @@ theorem mixedSections_left_unit_normalization
   have hn := (mixedGlobalSectionsDirectImageIso g).hom.naturality
     (Df.rightDerivedFunctorUnit.app K)
   dsimp only [Functor.comp_map] at hn
-  have hg : p ≫ (mixedGlobalSectionsDirectImageIso g).hom.app
-        ((schemeDerivedDirectImage f).obj F) =
-      Sg.mapDerivedCategoryFactorsh.inv.app
-        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
-      (schemeGlobalScalarRestriction g).map
-        (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
-      (schemeGlobalScalarRestriction g).map
-        ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
-    dsimp only [p]
-    erw [he]
-    simp only [Category.assoc]
-    erw [hn]
-    simpa only [Category.assoc] using congrArg
-      (fun z ↦ z ≫ (schemeGlobalScalarRestriction g).map
-        ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))) hg₀
   have hf := mixedSections_unit f K
-  exact finish_unit_paste (schemeGlobalScalarRestriction g) p
-    ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
-    (Sg.mapDerivedCategoryFactorsh.inv.app
-      ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
-    (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K))
-    ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))
-    ((mixedGlobalSectionsDirectImageIso f).hom.app F)
-    (Sf.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K))
-    ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K)) hg hf
+  dsimp only [p, b]
+  erw [he]
+  simp only [Category.assoc]
+  erw [hn]
+  erw [reassoc_of% hg₀]
+  rw [← (schemeGlobalScalarRestriction g).map_comp,
+    ← (schemeGlobalScalarRestriction g).map_comp]
+  erw [hf]
+  rw [(schemeGlobalScalarRestriction g).map_comp]
 
 end AlgebraicGeometry
