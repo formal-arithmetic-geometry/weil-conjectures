@@ -67,13 +67,9 @@ theorem changeOfRings_tensor_balancing_universal_exists (Y : Scheme.{u})
       ∀ (Q : Y.Modules) (f : S ⟶ Q), a ≫ f = d ≫ f → ∃ t : T ⟶ Q, g ≫ t = f := by
   classical
   -- Evaluate the equality of action composites on a nested pure tensor.
-  dsimp
-  intro a d g ha hd hg Q f hfd
-  let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
+  intro P₀ S T a d g ha hd hg Q f hfd
   let K := (PresheafOfModules.restrictScalars (𝓻 C.hom).hom).obj
     (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)
-  let T := (SheafOfModules.restrictScalars (𝓻 C.hom)).obj
-    (SheafOfModules.changeOfRings.{u, u, u} φ.right P)
   have hb (W : Y.Opens) (b : B.right.obj.obj (op W))
       (c : C.right.obj.obj (op W)) (p : P.val.obj (op W)) :
       f.app W (tmulSection (M := C.toModule) (N := P₀)

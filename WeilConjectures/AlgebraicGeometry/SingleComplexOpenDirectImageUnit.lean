@@ -211,12 +211,6 @@ theorem singleComplexOpen_directImage_unit
   have : eX.Additive := Functor.additive_of_preserves_binary_products _
   have : eX.PreservesKInjectiveComplexes := inferInstance
   have : rX.PreservesKInjectiveComplexes := inferInstance
-  let b := (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F rY).symm ≪≫
-    Functor.rightDerivedFunctorNatIso (singleComplexOpenUnderivedDirectImageIso f V) ≪≫
-    Functor.rightDerivedFunctorCompIso rX F₀ ≪≫
-    Functor.isoWhiskerRight rX.rightDerivedFunctorIsoMapDerivedCategory F₀.rightDerivedFunctor
-  have hb : singleComplexOpenDirectImageIso f V = b := rfl
-  rw [hb]
   exact derived_square_unit F rY rX F₀ (singleComplexOpenUnderivedDirectImageIso f V) I
 
 end AlgebraicGeometry
