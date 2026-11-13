@@ -51,6 +51,31 @@ private theorem completion_congr_eval {A M N : Type*} [CommRing A]
   rw [hx]
   rfl
 
+private theorem completion_limit_transport_eval {A : Type uS} [CommRing A] (I : Ideal A)
+    {M N : ModuleCat.{uS} A} {T : ℕᵒᵖ ⥤ ModuleCat.{uS} A}
+    {S : ℕᵒᵖ ⥤ ModuleCat.{uS} (AdicCompletion I A)}
+    (a : M ≃ₗ[A] N)
+    (b : T ≅ S ⋙ ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A)))
+    (q : ∀ n : ℕ, (N ⧸ (I ^ (n + 1) • ⊤ : Submodule A N)) →ₗ[A] T.obj (op n))
+    (e : ModuleCat.of A (AdicCompletion I N) ≅ limit T)
+    (he : ∀ n : ℕ, e.hom ≫ limit.π T (op n) =
+      ModuleCat.ofHom ((q n).comp (AdicCompletion.eval I N (n + 1))))
+    (n : ℕ) (x : AdicCompletion I M) (z : M)
+    (hx : AdicCompletion.eval I M (n + 1) x = Submodule.Quotient.mk z) :
+    (limit.π S (op n))
+      ((preservesLimitIso (ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))) S).inv
+        ((HasLimit.isoOfNatIso b).hom (e.hom (AdicCompletion.congr I a x)))) =
+      (b.hom.app (op n)) (q n (Submodule.Quotient.mk (a z))) := by
+  let R := ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))
+  let t := AdicCompletion.congr I a x
+  have hg := ConcreteCategory.congr_hom (preservesLimitIso_inv_π R S (op n))
+    ((HasLimit.isoOfNatIso b).hom (e.hom t))
+  have hd := ConcreteCategory.congr_hom (HasLimit.isoOfNatIso_hom_π b (op n)) (e.hom t)
+  have hh : (limit.π T (op n)) (e.hom t) = q n (AdicCompletion.eval I N (n + 1) t) :=
+    ConcreteCategory.congr_hom (he n) t
+  have hc := completion_congr_eval I a (n + 1) x z hx
+  exact hg.trans (hd.trans (congrArg (b.hom.app (op n)) (hh.trans (congrArg (q n) hc))))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
@@ -85,7 +110,9 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
       AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x = _
     rw [← ha, ← hz]
     rfl
-  have hs : a • θ n z = (formalFibreCohomology f y F p n).smul r (θ n z) := by
+  let smul := @SMul.smul (AdicCompletion I (Y.presheaf.stalk y))
+    (formalFibreCohomology f y F p n) inferInstance
+  have hs : a • θ n z = smul r (θ n z) := by
     let t : (RingedSpace.moduleCohomology (formalFibre f y n).toRingedSpace p).obj
         ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F) := θ n z
     change (formalFibreScalarMap f y n (Ideal.Quotient.mk (formalFibreIdeal Y y n) a)) • t =
@@ -95,8 +122,8 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
     (limit.π (formalFibreCohomologySystem f y F p) (op n)) (φ (r • x)) =
         θ n (a • z) := hφ n _ _ hx
     _ = a • θ n z := (θ n).map_smul a z
-    _ = (formalFibreCohomology f y F p n).smul r (θ n z) := hs
-    _ = (formalFibreCohomology f y F p n).smul r
+    _ = smul r (θ n z) := hs
+    _ = smul r
         ((limit.π (formalFibreCohomologySystem f y F p) (op n)) (φ x)) :=
       congrArg (fun t : formalFibreCohomology f y F p n ↦ r • t) (hφ n x z hz.symm).symm
     _ = (limit.π (formalFibreCohomologySystem f y F p) (op n)) (r • φ x) :=
@@ -184,26 +211,11 @@ theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
       AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x =
         Submodule.Quotient.mk z → (limit.π S (op n)) (v.hom x) = θ n z := by
     intro n x z hx
-    change (limit.π S (op n)) (g.inv (d.hom (e.hom (c.hom x)))) = _
-    have hg : (limit.π S (op n)) (g.inv (d.hom (e.hom (c.hom x)))) =
-        (limit.π (S ⋙ R) (op n)) (d.hom (e.hom (c.hom x))) :=
-      ConcreteCategory.congr_hom (preservesLimitIso_inv_π R S (op n))
-        (d.hom (e.hom (c.hom x)))
-    have hd : (limit.π (S ⋙ R) (op n)) (d.hom (e.hom (c.hom x))) =
-        (b.hom.app (op n)) ((limit.π (formalCompletionSystem J F' ⋙ C) (op n))
-          (e.hom (c.hom x))) :=
-      ConcreteCategory.congr_hom (HasLimit.isoOfNatIso_hom_π b (op n)) (e.hom (c.hom x))
-    have hh : (limit.π (formalCompletionSystem J F' ⋙ C) (op n)) (e.hom (c.hom x)) =
-        q n (AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x)) :=
-      ConcreteCategory.congr_hom (he n) (c.hom x)
-    have hc : AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x) =
-        Submodule.Quotient.mk (a z) := by
-      exact completion_congr_eval I a (n + 1) x z hx
+    have htransport := completion_limit_transport_eval I a b q e he n x z hx
     have hqn : q n (Submodule.Quotient.mk (a z)) =
         (C.map (formalModuleQuotientπ J (n + 1) F')) (a z) :=
       LinearMap.congr_fun (hq n) (a z)
-    exact hg.trans (hd.trans ((congrArg (b.hom.app (op n))
-      (hh.trans ((congrArg (q n) hc).trans hqn))).trans (hb n z).symm))
+    exact htransport.trans ((congrArg (b.hom.app (op n)) hqn).trans (hb n z).symm)
   have hcomp : ∀ (n : ℕ) (z : formalFunctionsStalk f y F p),
       (limit.π S (op n)) (v.hom (AdicCompletion.of I _ z)) = θ n z := by
     intro n z
