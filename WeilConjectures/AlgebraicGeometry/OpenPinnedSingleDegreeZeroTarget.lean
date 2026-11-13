@@ -204,7 +204,7 @@ theorem open_pinned_single_degree_zero_target
             (𝟙 _) U Z j hj) ≫ d.inv.app _ at hb
     apply (Iso.eq_comp_inv (d.app _)).mp
     with_unfolding_all
-      simpa only [Category.assoc, δ, R, Q, Functor.comp_obj, NatIso.app] using hb
+      simpa only [Category.assoc, δ, R, Q, Functor.comp_obj, Iso.app_inv] using hb
   have hc' : δ ≫ RZ.map (openPinnedSingleDegreeZeroCounit g' G) ≫ t.hom.app G =
       L.map s ≫ openPinnedSingleDegreeZeroCounit j H := hc
   have hb₀ : b₀.hom.app G = d.hom.app _ ≫ Q.map (t.hom.app G) := by
