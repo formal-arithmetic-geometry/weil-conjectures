@@ -27,9 +27,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
--- Derived restriction and nested homology functors require extra elaboration steps.
+set_option profiler true in
 /-- Evaluation at one is natural and agrees with the fraction comparison on chain maps.
 The statement concerns chain maps into F; it does not identify arbitrary stage derived
 maps with Hom-complex homology, nor does it transport F to another derived object.
@@ -96,7 +94,7 @@ theorem koszulOpenHom_chain_evaluation
                 (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F)) e))
                   (koszulOpenHomStageClass A r f F e t)) := by
   classical
-  dsimp only
+  intro R H G
   let F₀ := SheafOfModules.overFunctor.{u}
     (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)
   let G₀ := Equivalence.functor
@@ -105,7 +103,6 @@ theorem koszulOpenHom_chain_evaluation
     (D := SheafOfModules.{u}
       (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
     (Scheme.Modules.overEquiv (koszulOpen A r f))
-  let R := (F₀ ⋙ G₀).mapDerivedCategory
   obtain ⟨b, hb, hid⟩ := koszulOpenHom_identity_evaluation.{u, w, v} A r f
   refine ⟨b, hb, ?_⟩
   intro F _hF e t ψ hψ

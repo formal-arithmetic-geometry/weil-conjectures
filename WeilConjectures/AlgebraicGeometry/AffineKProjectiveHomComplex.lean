@@ -42,9 +42,7 @@ private theorem affineTilde_map_bijective (A : Type u) [CommRing A]
     inferInstance, inferInstance, inferInstance, ?_⟩
   exact ⟨h⟩
 
-set_option trace.profiler true in
--- Elaborating the three additive equivalences crosses two derived-category universes.
-set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 /-- For any module target complex, affine derived arrows out of a K-projective module
 complex are its linear Hom-complex cohomology, with chain representatives and naturality.
 Source: Stacks Project, Tag 06Z0; Mathlib HomComplexCohomology and KProjective.
@@ -85,9 +83,8 @@ theorem affineKProjective_homComplex (A : Type u) [CommRing A]
             CochainComplex.HomComplex.Cochain.ofHom g ∧
           a L hL φ = (CochainComplex.moduleHomComplex L M).homologyπ 0 z := by
   classical
-  dsimp only
-  let T := (koszulOpenTilde A).mapHomologicalComplex (.up ℤ)
-  obtain ⟨F, hfull, hfaith, hadd, ⟨η⟩⟩ := affineTilde_map_bijective A
+  intro T
+  obtain ⟨F, hfull, hfaith, hadd, ⟨η⟩⟩ := affineTilde_map_bijective.{u, w, v} A
   let := hfull
   let := hfaith
   let := hadd

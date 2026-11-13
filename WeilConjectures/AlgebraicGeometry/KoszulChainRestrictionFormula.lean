@@ -43,8 +43,7 @@ private theorem naturalEquiv_add
     S.map biprod.snd (b (E ⊞ E) p) = _
   rw [← hb, ← hb, hp₁, hp₂]
 
-set_option trace.profiler true in
--- Nested derived functors and the affine adjunction require extra elaboration heartbeats.
+set_option profiler true in
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
 Source: Stacks Project, Equation 36.9.4.1, Tag 08DC; Tags 08D1 and 08DD.
@@ -90,8 +89,7 @@ theorem koszulChain_restriction_formula
         (D := SheafOfModules.{u}
           (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
-    let M := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F
-    let D := koszulCechHomDiagram A r f M
+      let D := koszulCechHomDiagram A r f M
     let C := koszulCechHomColimit A r f M
     let β := ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app C).inv ≫
       (DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0).map
@@ -118,21 +116,10 @@ theorem koszulChain_restriction_formula
                 ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M).homologyπ
                   0 z))) := by
   classical
-  dsimp only
-  let R := ((SheafOfModules.overFunctor.{u}
-    (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{u}
-        ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-      (D := SheafOfModules.{u}
-        (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-      (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
+  intro R M D C β
   let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
   let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
-  let M := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F
   let T := (koszulOpenTilde A).mapHomologicalComplex (.up ℤ)
-  let D := koszulCechHomDiagram A r f M
-  let C := koszulCechHomColimit A r f M
   let η := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0
   obtain ⟨b, hb, hchain⟩ := koszulOpenHom_chain_evaluation A r f
   let b' : (R.obj (koszulOpenStructure A) ⟶ R.obj E.obj) ≃+ H.obj (G.obj E.obj) :=
