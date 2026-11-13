@@ -239,9 +239,9 @@ private theorem integralCompositionScalarPullback_heq {X Y : Scheme.{u}}
       (integralComparisonSystemScalarPullback l E L ι f) := by
   exact HEq.rfl
 
+universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆ in
 /-- Transport mixed coherence across identified presentations before taking components.
 This keeps the coherence equation in its own categories throughout the comparison. -/
-universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆ in
 private theorem scalar_mixed_component_heq
     {EV EV' : Type w₁} [iEV : Category.{v₁} EV] [iEV' : Category.{v₁} EV']
     {EW EW' : Type w₂} [iEW : Category.{v₂} EW] [iEW' : Category.{v₂} EW']
