@@ -34,6 +34,24 @@ private theorem pointEvaluation_of_comp_specMap
   rw [← SpecMap_ΓSpecIso_hom] at hnat
   simpa only [Spec.map_comp, Category.assoc] using h.symm.trans hnat
 
+private theorem colimit_comparison_evaluation
+    {J N T : Type*} [Category J] [Category N] [Category T]
+    (q : J ⥤ N) [q.Final] {D : N ⥤ CommRingCat.{v}} {DT : T ⥤ CommRingCat.{v}}
+    (E : J ⥤ T) (δ : q ⋙ D ⟶ E ⋙ DT)
+    (cn : Cocone D) (hcn : IsColimit cn) (ct c : Cocone DT)
+    (hct : IsColimit ct) (hc : IsColimit c) (t : cn.pt ≅ ct.pt)
+    (ht : ∀ j, cn.ι.app (q.obj j) ≫ t.hom = δ.app j ≫ ct.ι.app (E.obj j))
+    (ev : Cocone D) {K : CommRingCat.{v}} (ψ : c.pt ⟶ K) (e : K ⟶ ev.pt)
+    (ρ : ∀ j, DT.obj j ⟶ K) (hψ : ∀ j, c.ι.app j ≫ ψ = ρ j)
+    (hev : ∀ j, δ.app j ≫ ρ (E.obj j) ≫ e = ev.ι.app (q.obj j)) :
+    t.hom ≫ (hct.coconePointUniqueUpToIso hc).hom ≫ ψ ≫ e = hcn.desc ev := by
+  apply ((Functor.Final.isColimitWhiskerEquiv q cn).symm hcn).hom_ext
+  intro j
+  change cn.ι.app (q.obj j) ≫ _ = cn.ι.app (q.obj j) ≫ hcn.desc ev
+  rw [← Category.assoc (cn.ι.app _) t.hom, ht]
+  simp only [Category.assoc, IsColimit.comp_coconePointUniqueUpToIso_hom_assoc]
+  rw [← Category.assoc (c.ι.app _) ψ, hψ, hev, hcn.fac]
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The coordinate-ring colimit comparison preserves geometric evaluation.
 Source: Stacks Project, Tag 04HX, and `etale_local_ring_triples`.
@@ -124,32 +142,11 @@ theorem strictHenselizationPointEvaluation_comparison
   let := hinitial
   have hchart : t.hom ≫ k.hom ≫ CommRingCat.ofHom ψ ≫
       CommRingCat.ofHom K.subtype = m := by
-    apply ((Functor.Final.isColimitWhiskerEquiv Q.ι.op cn).symm hcn).hom_ext
+    apply colimit_comparison_evaluation Q.ι.op E.functor δ.hom cn hcn ct c hct hc t ht ev
+      (CommRingCat.ofHom ψ) (CommRingCat.ofHom K.subtype)
+      (fun z ↦ (ΓSpecIso z.B).inv ≫ (Spec z.B).Γevaluation z.q ≫ z.φ)
+      (fun z ↦ CommRingCat.hom_ext (hψ z))
     intro d
-    change cn.ι.app (Q.ι.op.obj d) ≫ _ = cn.ι.app (Q.ι.op.obj d) ≫ m
-    have hleg : cn.ι.app (Q.ι.op.obj d) ≫ t.hom ≫ k.hom =
-        δ.hom.app d ≫ c.ι.app (E.functor.obj d) := by
-      calc
-        _ = (δ.hom.app d ≫ ct.ι.app (E.functor.obj d)) ≫ k.hom :=
-          congrArg (fun f ↦ f ≫ k.hom) (ht d)
-        _ = _ := by
-          simp only [Category.assoc, k, IsColimit.comp_coconePointUniqueUpToIso_hom]
-    rw [← Category.assoc _ t.hom, ← Category.assoc _ k.hom,
-      Category.assoc (cn.ι.app _) t.hom k.hom, hleg]
-    rw [hcn.fac ev]
-    have hres : c.ι.app (E.functor.obj d) ≫ CommRingCat.ofHom ψ =
-        (ΓSpecIso (E.functor.obj d).B).inv ≫
-          (Spec (E.functor.obj d).B).Γevaluation (E.functor.obj d).q ≫
-          (E.functor.obj d).φ := by
-      apply CommRingCat.hom_ext
-      exact hψ _
-    simp only [Category.assoc]
-    rw [← Category.assoc (c.ι.app _) (CommRingCat.ofHom ψ), hres]
-    change δ.hom.app d ≫
-      ((ΓSpecIso (E.functor.obj d).B).inv ≫
-        (Spec (E.functor.obj d).B).Γevaluation (E.functor.obj d).q ≫
-        (E.functor.obj d).φ) ≫ CommRingCat.ofHom K.subtype =
-      d.unop.obj.obj.2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom
     exact pointEvaluation_of_comp_specMap d.unop.obj.obj.2.left (δ.hom.app d)
       ((ΓSpecIso (E.functor.obj d).B).inv ≫
         (Spec (E.functor.obj d).B).Γevaluation (E.functor.obj d).q ≫
