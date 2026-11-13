@@ -112,7 +112,7 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
 
 attribute [local irreducible] completed homComplexFunctor
 
-set_option profiler true in
+set_option trace.profiler true in
 -- Elaborating the explicit chain-map components traverses the finite tensor constructions.
 /-- The coefficient augmentation exists before tensoring with any complex.
 In particular neither K-flatness nor Noetherianity is needed for this construction.
@@ -144,7 +144,8 @@ theorem adicResidue_koszul_coefficient_augmentation
       ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =
         adicResidueQuotientCoefficientUnit X J U n := by
   let O := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U
-  let b := fun i ↦ ringedKoszulSliceSection
+  let b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections :=
+    fun i ↦ ringedKoszulSliceSection
     (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
       (a i)) U
@@ -166,10 +167,10 @@ theorem adicResidue_koszul_coefficient_augmentation
     apply (cancel_epi (t n).hom).1
     apply biproduct.hom_ext'
     intro i
-    have h := congrArg (fun f ↦ f ≫ quotientProjection X J U n) (ht n i)
-    rw [scalarPower_quotientProjection X J U (a i)
-      (ha (Ideal.subset_span (Set.mem_range_self i))) n] at h
-    simpa only [Category.assoc, comp_zero] using h
+    simpa only [Category.assoc, comp_zero] using
+      (congrArg (fun f ↦ f ≫ quotientProjection X J U n) (ht n i)).trans
+        (scalarPower_quotientProjection X J U (a i)
+          (ha (Ideal.subset_span (Set.mem_range_self i))) n)
   let p (n : ℕ) : (T.obj (op n)).X 0 ⟶ adicResidueQuotientModule X J U n :=
     (d n).inv.f 0 ≫ (z n).hom ≫ quotientProjection X J U n
   have hp (n : ℕ) (i : ℤ) (hi : (ComplexShape.up ℤ).Rel i 0) :
@@ -226,11 +227,7 @@ theorem adicResidue_koszul_coefficient_augmentation
     apply (Iso.cancel_iso_hom_left u _ _).1
     rw [show u.hom = (ringedKoszulDualUnit O r b (n + 1)).f 0 from
       (hunit0 (n + 1)).symm]
-    change (ringedKoszulDualUnit O r b (n + 1) ≫
-        (T.map (homOfLE (Nat.le_succ n)).op ≫ e n)).f 0 =
-      (ringedKoszulDualUnit O r b (n + 1) ≫
-        (e (n + 1) ≫ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map
-          (adicResidueQuotientModuleStep X J U n))).f 0
+    simp only [← HomologicalComplex.comp_f]
     rw [← Category.assoc, hunit_naturality, hnorm, ← Category.assoc, hnorm]
     congr 1
     change _ = (HomologicalComplex.single _ (.up ℤ) 0).map
