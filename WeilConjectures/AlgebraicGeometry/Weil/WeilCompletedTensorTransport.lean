@@ -78,7 +78,6 @@ private theorem tensor_transport_unit_component
 attribute [local irreducible] completedCechModulesEquiv intrinsicPresentationRoundTrip
   pbcCompletedComparison
 
-set_option profiler true in
 -- Elaborate the unbounded tensor comparison across the two coefficient models.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
