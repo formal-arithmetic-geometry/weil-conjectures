@@ -21,7 +21,7 @@ Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY
 
 @[expose] public section
 
-universe u
+universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 private theorem epi_pushforward_closedEmbedding
@@ -68,13 +68,30 @@ private theorem epi_pushforward_closedEmbedding
     rw [map_zero]
     exact hzero.symm
 
+/-- The Ext-adjunction bijection remains bijective after identifying its source object
+by an isomorphism. Precomposition commutes with composition by the counit. -/
+private theorem bijective_extMap_counit_precomp
+    {C D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] [HasExt.{w} C] [HasExt.{w} D] [EnoughInjectives D]
+    {L : C ⥤ D} {R : D ⥤ C}
+    [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (adj : L ⊣ R) {A : C} {B : D} (e : B ≅ L.obj A) (F : D) (p : ℕ) :
+    Function.Bijective (fun x : CategoryTheory.Abelian.Ext A (R.obj F) p ↦
+      ((CategoryTheory.Abelian.Ext.mk₀ e.hom).comp (x.mapExactFunctor L) (zero_add p)).comp
+        (CategoryTheory.Abelian.Ext.mk₀ (adj.counit.app F)) (add_zero p)) := by
+  have hb := adj.mapExtCounit_bijective A F p
+  have hc := (CategoryTheory.Abelian.Ext.precompAddEquiv e F p).bijective.comp hb
+  convert hc using 1
+  funext x
+  exact CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero
+    (CategoryTheory.Abelian.Ext.mk₀ e.hom) (x.mapExactFunctor L)
+    (CategoryTheory.Abelian.Ext.mk₀ (adj.counit.app F)) (zero_add p)
 
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 400000 in
--- Comparing the two concrete Ext maps unfolds the sheaf-adjunction construction.
 /-- The canonical comparison from cohomology of the direct image of units to cohomology
 of units is bijective in every degree.
 Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY, the sentence
@@ -127,19 +144,6 @@ theorem bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion
   let e := (g.constantSheafsheafPullbackIso AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
     isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))
-  have hb := adj.mapExtCounit_bijective
-    ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift ℤ))) Z.unitsSheaf p
-  have hc := (CategoryTheory.Abelian.Ext.precompAddEquiv e Z.unitsSheaf p).bijective.comp hb
-  convert hc using 1
-  ext x
-  change (Sheaf.H.map (adj.counit.app Z.unitsSheaf) p)
-    ((Sheaf.H.mapFunctor L e (R.obj Z.unitsSheaf) p) x) =
-      (CategoryTheory.Abelian.Ext.precompAddEquiv e Z.unitsSheaf p)
-        (adj.mapExtCounit _ Z.unitsSheaf p x)
-  rw [Sheaf.H.map_apply, Sheaf.H.mapFunctor_apply,
-    Adjunction.mapExtCounit_apply, CategoryTheory.Abelian.Ext.precompAddEquiv_apply]
-  exact CategoryTheory.Abelian.Ext.comp_assoc _ _ _
-    (zero_add p) (add_zero p) (by omega)
+  exact bijective_extMap_counit_precomp adj e Z.unitsSheaf p
 
 end AlgebraicGeometry.Scheme
