@@ -50,8 +50,7 @@ namespace AlgebraicGeometry
 namespace Scheme
 
 /-- The **`n`-torsion subsheaf** `F[n] = ker (n : F ⟶ F)` of a sheaf `F` of abelian groups on the
-small étale site of `T`, for a positive integer `n`.
-(blueprint: `definition-torsion-sheaves--2`) -/
+small étale site of `T`, for a positive integer `n`. -/
 noncomputable abbrev torsionBy {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ+) :
     Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
@@ -116,8 +115,7 @@ private noncomputable def isColimitMapCoconeFunctorH (Z : Scheme.{u}) [CompactSp
 
 /-- **Vanishing of the cohomology of a torsion sheaf from its `n`-torsion subsheaves.** Let `X`
 be a quasi-compact quasi-separated scheme and `F` a torsion abelian sheaf on `X_ét`. If
-`Hᵠ(X, F[n]) = 0` for every positive integer `n`, then `Hᵠ(X, F) = 0`: cohomology commutes with
-the filtered colimit `F = colim F[n]` (Stacks 03Q6), and a colimit of zero groups is zero. -/
+`Hᵠ(X, F[n]) = 0` for every positive integer `n`, then `Hᵠ(X, F) = 0`. -/
 theorem subsingleton_sheafH_of_forall_torsionBy {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : IsTorsionAbelianSheaf F) (q : ℕ)
@@ -139,9 +137,7 @@ namespace Etale
 /-- **Bijectivity of pullback on the cohomology of a torsion sheaf from its `n`-torsion
 subsheaves.** Let `u : Y ⟶ X` be a morphism of quasi-compact quasi-separated schemes and `F` a
 torsion abelian sheaf on `X_ét`. If the pullback `Hᵠ(X, F[n]) ⟶ Hᵠ(Y, u^* F[n])` is bijective
-for every positive integer `n`, then so is `Hᵠ(X, F) ⟶ Hᵠ(Y, u^* F)`: both sides commute with
-the filtered colimit `F = colim F[n]` (Stacks 03Q6), and the pullback maps form a morphism of
-directed systems. -/
+for every positive integer `n`, then so is `Hᵠ(X, F) ⟶ Hᵠ(Y, u^* F)`. -/
 theorem bijective_cohomologyMap_of_forall_torsionBy {X Y : Scheme.{u}} (u : Y ⟶ X)
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

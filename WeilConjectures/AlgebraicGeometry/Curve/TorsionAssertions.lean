@@ -33,18 +33,7 @@ This file proves the assertions `C₃`, `C₄`, `C₅` and `C₆` of the cohomol
    extension `k'/k` if the torsion of `F` is prime to `char k`.
 
 The coefficient sheaves are sheaves of `Λ`-modules over an arbitrary ring `Λ` and the cohomology
-is that of the underlying abelian sheaf, as in `AlgebraicGeometry.IsCurve.Assertions`. All four
-are deduced from the finite-coefficient case
-`AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`. For `C₄` and `C₅` the sections
-of `F` are killed by some `N > 0`
-(`AlgebraicGeometry.Scheme.finite_quotient_section_annihilator_of_finite_stalks`), so that the
-underlying abelian sheaf of `F` is that of a constructible sheaf of `ℤ/N`-modules. For `C₃` and
-`C₆` the sheaf `F` may have unbounded torsion; they are deduced by writing the underlying
-abelian sheaf `A` of `F` as the filtered colimit of its subsheaves `A[n]`
-(`AlgebraicGeometry.Scheme.subsingleton_sheafH_of_forall_torsionBy`,
-`AlgebraicGeometry.Etale.bijective_cohomologyMap_of_forall_torsionBy`): each `A[n]` is a sheaf
-of `ℤ/n`-modules (`AlgebraicGeometry.exists_module_sheaf_of_nsmul_id_eq_zero`), and its
-geometric stalks embed into those of `F`.
+is that of the underlying abelian sheaf, as in `AlgebraicGeometry.IsCurve.Assertions`.
 
 ## Main statements
 
@@ -52,6 +41,21 @@ geometric stalks embed into those of `F`.
 - `AlgebraicGeometry.IsCurve.finite_sheafH_of_isTorsionSheafOfInvertibleOrder`: `C₄`.
 - `AlgebraicGeometry.IsCurve.finite_sheafH_of_isProper`: `C₅`.
 - `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isTorsionSheafOfInvertibleOrder`: `C₆`.
+
+## Implementation details
+
+All four assertions are deduced from the finite-coefficient case
+`AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`. For `C₄` and `C₅` the sections
+of `F` are killed by an ideal `I` of `Λ` with `Λ ⧸ I` finite
+(`AlgebraicGeometry.Scheme.finite_quotient_section_annihilator_of_finite_stalks`), hence by the
+characteristic `N > 0` of `Λ ⧸ I`, so that the underlying abelian sheaf of `F` is that of a
+constructible sheaf of `ℤ/N`-modules. For `C₃` and `C₆` the sheaf `F` may have unbounded
+torsion; they are deduced by writing the underlying abelian sheaf `A` of `F` as the filtered
+colimit of its subsheaves `A[n]`
+(`AlgebraicGeometry.Scheme.subsingleton_sheafH_of_forall_torsionBy`,
+`AlgebraicGeometry.Etale.bijective_cohomologyMap_of_forall_torsionBy`): each `A[n]` is a sheaf
+of `ℤ/n`-modules (`AlgebraicGeometry.exists_module_sheaf_of_nsmul_id_eq_zero`), and its
+geometric stalks embed into those of `F`.
 
 ## References
 
@@ -143,8 +147,7 @@ private theorem bijective_cohomologyMap_of_iso {X Y : Scheme.{u}} (a : Y ⟶ X)
   exact eY.bijective.comp (h.comp eX.symm.bijective)
 
 /-- The `n`-torsion subsheaf of the underlying abelian sheaf of `F` is the underlying abelian
-sheaf of a sheaf `M` of `ℤ/n`-modules, and the eight assertions hold for `M` since `ℤ/n` is
-finite. -/
+sheaf of a sheaf `M` of `ℤ/n`-modules for which the eight assertions hold. -/
 private theorem exists_assertions_torsionBy {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ+) :
@@ -159,12 +162,7 @@ private theorem exists_assertions_torsionBy {k : Type u} [Field k] [IsAlgClosed 
 
 /-- **Assertion `C₃` of the cohomology of curves.** Let `k` be an algebraically closed field of
 characteristic `p > 0`, `C` a curve over `k` and `F` a `p`-primary torsion sheaf of
-`Λ`-modules on `C_ét`. Then `Hᵠ(C, F) = 0` for every `q ≥ 2`.
-
-The underlying abelian sheaf of `F` is the filtered colimit of its `n`-torsion subsheaves, which
-are `p`-primary sheaves of `ℤ/n`-modules, where this is
-`AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`.
-(blueprint: `theorem-cohomology-curves--3`) -/
+`Λ`-modules on `C_ét`. Then `Hᵠ(C, F) = 0` for every `q ≥ 2`. -/
 theorem subsingleton_sheafH_of_two_le_of_isPrimaryTorsionSheaf {k : Type u} [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (p : ℕ) [Fact p.Prime] [CharP k p]
@@ -205,9 +203,7 @@ private theorem isConstructibleEtaleSheafOfSets_of_iso {X : Scheme.{u}}
       ((Scheme.pointSmallEtale s).sheafFiber.mapIso e').toEquiv
 
 /-- A constructible sheaf `F` of `Λ`-modules with finite geometric stalks on a curve has the
-same underlying abelian sheaf as a constructible sheaf `M` of `ℤ/N`-modules for some `N > 0`:
-the sections of `F` are killed by an ideal `I` of `Λ` with `Λ ⧸ I` finite, hence by the
-characteristic `N` of `Λ ⧸ I`. -/
+same underlying abelian sheaf as a constructible sheaf `M` of `ℤ/N`-modules for some `N > 0`. -/
 private theorem exists_finite_coefficients_of_finite_stalks {k : Type u} [Field k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsConstructibleSheaf F]
@@ -246,11 +242,7 @@ private theorem exists_finite_coefficients_of_finite_stalks {k : Type u} [Field 
 
 /-- **Assertion `C₄` of the cohomology of curves.** Let `k` be an algebraically closed field,
 `C` a curve over `k` and `F` a constructible sheaf of `Λ`-modules on `C_ét` with finite
-geometric stalks whose torsion is prime to `char k`. Then every `Hᵠ(C, F)` is finite.
-
-The underlying abelian sheaf of `F` is that of a constructible sheaf of `ℤ/N`-modules for some
-`N > 0`, where this is `AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`.
-(blueprint: `theorem-cohomology-curves--4`) -/
+geometric stalks whose torsion is prime to `char k`. Then every `Hᵠ(C, F)` is finite. -/
 theorem finite_sheafH_of_isTorsionSheafOfInvertibleOrder {k : Type u} [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsConstructibleSheaf F]
@@ -267,11 +259,7 @@ theorem finite_sheafH_of_isTorsionSheafOfInvertibleOrder {k : Type u} [Field k]
 
 /-- **Assertion `C₅` of the cohomology of curves.** Let `k` be an algebraically closed field,
 `C` a proper curve over `k` and `F` a constructible sheaf of `Λ`-modules on `C_ét` with finite
-geometric stalks. Then every `Hᵠ(C, F)` is finite.
-
-The underlying abelian sheaf of `F` is that of a constructible sheaf of `ℤ/N`-modules for some
-`N > 0`, where this is `AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`.
-(blueprint: `theorem-cohomology-curves--5`) -/
+geometric stalks. Then every `Hᵠ(C, F)` is finite. -/
 theorem finite_sheafH_of_isProper {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsConstructibleSheaf F]
@@ -316,12 +304,7 @@ Spec k' -ι-> Spec k
 ```
 
 the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
-sheaves is bijective for every `q`.
-
-The underlying abelian sheaf of `F` is the filtered colimit of its `n`-torsion subsheaves, which
-are sheaves of `ℤ/n`-modules with torsion prime to `char k`, where this is
-`AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`.
-(blueprint: `theorem-cohomology-curves--6`) -/
+sheaves is bijective for every `q`. -/
 theorem bijective_cohomologyMap_of_isTorsionSheafOfInvertibleOrder {k k' : Type u} [Field k]
     [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k))
     [IsCurve f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
