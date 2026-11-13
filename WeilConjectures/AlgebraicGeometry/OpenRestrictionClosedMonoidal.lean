@@ -140,8 +140,7 @@ theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})
   intro E R H HU
   let e := schemeDerivedTensorHomEquiv X
   let eU := schemeDerivedTensorHomEquiv U.toScheme
-  obtain ⟨m⟩ : Nonempty R.Monoidal := exists_openRestriction_derivedMonoidal X U
-  let : R.Monoidal := m
+  let m : R.Monoidal := Classical.choice (exists_openRestriction_derivedMonoidal X U)
   let c := fun K N ↦ (eU (R.obj (H.obj (op K, N))) (R.obj K) (R.obj N)).symm
     ((Functor.Monoidal.μIso R (H.obj (op K, N)) K).hom ≫
       R.map (e (H.obj (op K, N)) K N (𝟙 _)))
