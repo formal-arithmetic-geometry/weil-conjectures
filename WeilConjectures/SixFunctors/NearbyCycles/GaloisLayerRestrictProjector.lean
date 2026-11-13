@@ -214,9 +214,9 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     infer_instance
   have hp₁ (M : FiniteGaloisIntermediateField L' Ω) :
       IsUnit ((Module.finrank L' M : ℕ) : T₀) := by
-    have : FiniteDimensional L M := Module.Finite.trans L' M
+    have hfin : FiniteDimensional L M := Module.Finite.trans L' M
     have := Module.Free.of_divisionRing L' M
-    have hM := hp (M.toIntermediateField.restrictScalars L) inferInstance
+    have hM := hp (M.toIntermediateField.restrictScalars L) hfin
     change IsUnit ((Module.finrank L M : ℕ) : T₀) at hM
     rw [← Module.finrank_mul_finrank L L' M, Nat.cast_mul] at hM
     exact isUnit_of_mul_isUnit_right hM
