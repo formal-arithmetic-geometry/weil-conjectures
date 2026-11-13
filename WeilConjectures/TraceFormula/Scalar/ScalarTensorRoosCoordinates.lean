@@ -190,7 +190,6 @@ private theorem scalarInverseCoordinate
     ]
   rfl
 
-set_option profiler true in
 /-- Tensor associativity identifies the scalar change of a quotient augmentation
 with the direct augmentation. This is entirely a statement about strict chain
 maps, before localization or insertion of a derived counit.
@@ -301,12 +300,15 @@ theorem scalarTensorRoosCoordinates
   dsimp only
   refine ⟨?_, ?_, ?_⟩
   · intro i
-    exact roosMap_snd_zero _ qEL.inv i
-      ((completedScalarChainComparison_spec l E L ι X).2 P i)
+    simp only [HomologicalComplex.comp_f, Category.assoc]
+    erw [roosMap_snd]
+    erw [reassoc_of% (completedScalarChainComparison_spec l E L ι X).2 P i]
+    simp only [zero_comp]
   · intro i
-    rw [HomologicalComplex.comp_f, Category.assoc,
-      roosMap_snd_zero _ _ i ((completedScalarChainComparison_spec l E F (j.comp ι) X).2 P i),
-      comp_zero]
+    simp only [HomologicalComplex.comp_f, Category.assoc]
+    erw [roosMap_snd]
+    erw [reassoc_of% (completedScalarChainComparison_spec l E F (j.comp ι) X).2 P i]
+    simp only [zero_comp, comp_zero]
   · intro n i U s t x y h
     let D := ((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex
       (.up ℤ)).obj C
