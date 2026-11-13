@@ -154,7 +154,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact h
 
 -- Give the generic paste lemma the heterogeneous equations with their exact source types.
-set_option profiler true in
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)] in
 private theorem mixedSections_composition_unit_heq
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
@@ -178,20 +178,22 @@ private theorem mixedSections_composition_unit_heq
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
   exact heq_of_eq he
 
-set_option profiler true in
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
 private theorem mixedSections_global_source {Y Z : Scheme.{u}} (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)) :
     DerivedCategory.Qh.obj
         (((RingedSpace.globalSectionsFunctor Z.toRingedSpace).mapHomotopyCategory (.up ℤ)).obj
-          (((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj K)) =
+          (((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategory
+            (.up ℤ)).obj K)) =
       ((ModuleCat.restrictScalars.{u}
         (R := (moduleRings Z.toRingedSpace).obj.obj (op ⊤))
         (S := (moduleRings Y.toRingedSpace).obj.obj (op ⊤)) g.appTop.hom).mapHomotopyCategory
           (.up ℤ) ⋙ DerivedCategory.Qh).obj
-        (((RingedSpace.globalSectionsFunctor Y.toRingedSpace).mapHomotopyCategory (.up ℤ)).obj K) := by
+        (((RingedSpace.globalSectionsFunctor Y.toRingedSpace).mapHomotopyCategory
+          (.up ℤ)).obj K) := by
   rfl
 
-set_option profiler true in
 private theorem mixedSections_unit_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : HomotopyCategory
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
@@ -210,7 +212,6 @@ private theorem mixedSections_unit_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K)) := by
   exact heq_of_eq (mixedSections_unit f K)
 
-set_option profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
