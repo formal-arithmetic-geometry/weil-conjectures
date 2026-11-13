@@ -99,7 +99,6 @@ lemma isMonoidal_extendRestrictAdjunction :
   exact (inferInstance : (extendRestrictAdjunction φ).IsMonoidal)
 
 set_option profiler true in
-set_option synthInstance.maxHeartbeats 100000 in
 -- the search for `(extendScalars φ ⋙ extendScalars ψ).LaxMonoidal` first explores braidings
 /-- The transitivity isomorphism `T ⊗_R - ≅ T ⊗_S (S ⊗_R -)` of extension of scalars is a
 monoidal natural isomorphism, for the strong monoidal structures `Mod.extendScalarsMonoidal`. -/
