@@ -29,7 +29,6 @@ attribute [local instance] enoughInjectives
 private lemma moduleCat_smul_asHom_apply {R : Type u} [Ring R]
     (M : ModuleCat.{u} R) (r : R) (x : M) : (M.smul r).asHom x = r • x := rfl
 
-set_option profiler true in
 /-- The fixed comparison intertwines the scalar endomorphisms.
 Source: Stacks Project, Tags 01E1 and 01E4.
 (blueprint: lem-pc-resolution-open-scalar-core).
