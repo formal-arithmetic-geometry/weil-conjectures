@@ -30,7 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 private lemma mapHomotopyCategoryCompIso_refl_map
     {V W W' D : Type*} [Category* V] [Category* W] [Category* W'] [Category* D]
     [Preadditive V] [Preadditive W] [Preadditive W']
-    {ι : Type*} (c : ComplexShape ι) (F : V ⥤ W) (G : W ⥤ W')
+    {J : Type*} (c : ComplexShape J) (F : V ⥤ W) (G : W ⥤ W')
     [F.Additive] [G.Additive] (Q : HomotopyCategory W' c ⥤ D)
     (K : HomotopyCategory V c) :
     Q.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app K) = 𝟙 _ := by
