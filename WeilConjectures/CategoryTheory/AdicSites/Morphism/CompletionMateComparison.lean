@@ -1235,7 +1235,6 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
     ((ConstantCompletion.res a).obj M))).mp
   exact (he M).trans (hn M).symm
 
-
 /-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
 on every inverse-image generator, not merely its objects.
 Source: Stacks 03D2, 0E48 (blueprint: lem-sp-completion-mate-comparison).
@@ -1369,7 +1368,22 @@ private theorem reductionPull_hom_ext {V U : Site.{u}} (f : Morphism V U)
   simpa only [η, ConstantCompletion.insertion_eq_unit, Category.assoc,
     ConstantCompletion.reduction, ConstantCompletion.finiteMap] using h
 
-set_option profiler true in
+-- Quotient-unit compatibility is independent of the pullback and is used on both sites.
+private theorem reductionUnit_step (T : Site.{u}) (A : Type u) [CommRing A]
+    (I : Ideal A) (n : ℕ) (M : T.modules A) :
+    (ConstantCompletion.scalarAdj (ConstantCompletion.quotient T.topology A I (n + 1))).unit.app
+        M ≫ (ConstantCompletion.reductionStep T.topology A I false n).app M =
+      (ConstantCompletion.scalarAdj (ConstantCompletion.quotient T.topology A I n)).unit.app
+        M := by
+  ext W m
+  have ht := (ConstantCompletion.reductionStep_existsUnique T.topology A I false n).exists
+    |>.choose_spec M W 1 m
+  change ((ConstantCompletion.reductionStep T.topology A I false n).app M).val.app W
+    (ConstantCompletion.tensorSection (ConstantCompletion.quotient T.topology A I (n + 1))
+      M W 1 m) =
+    ConstantCompletion.tensorSection (ConstantCompletion.quotient T.topology A I n) M W 1 m
+  simpa only [ConstantCompletion.finiteMap, ConstantCompletion.reductionStep, map_one] using ht
+
 /-- The ordinary strict reduction/pullback comparison is fixed on quotient-unit
 insertions at every level. Its source and target are actual strict diagrams.
 Source: Stacks 07A4, 099N(5) (blueprint: lem-sp-completion-mate-comparison).
@@ -1456,26 +1470,12 @@ theorem Morphism.moduleReductionPullIso_existsUnique {V U : Site.{u}}
     ConstantCompletion.reductionStep U.topology A I false n
   have hv (n : ℕ) (M : V.modules A) :
       (ηv (n + 1)).app M ≫ (dv n).app M =
-        (ηv n).app M := by
-    ext W m
-    have ht := (ConstantCompletion.reductionStep_existsUnique V.topology A I false n).exists
-      |>.choose_spec M W 1 m
-    change ((ConstantCompletion.reductionStep V.topology A I false n).app M).val.app W
-      (ConstantCompletion.tensorSection (av (n + 1)) M W 1 m) =
-        ConstantCompletion.tensorSection (av n) M W 1 m
-    simpa only [av, ConstantCompletion.finiteMap, ConstantCompletion.reductionStep, map_one]
-      using ht
+        (ηv n).app M :=
+    reductionUnit_step V A I n M
   have hu (n : ℕ) (M : U.modules A) :
       (ηu (n + 1)).app M ≫ (du n).app M =
-        (ηu n).app M := by
-    ext W m
-    have ht := (ConstantCompletion.reductionStep_existsUnique U.topology A I false n).exists
-      |>.choose_spec M W 1 m
-    change ((ConstantCompletion.reductionStep U.topology A I false n).app M).val.app W
-      (ConstantCompletion.tensorSection (au (n + 1)) M W 1 m) =
-        ConstantCompletion.tensorSection (au n) M W 1 m
-    simpa only [au, ConstantCompletion.finiteMap, ConstantCompletion.reductionStep, map_one]
-      using ht
+        (ηu n).app M :=
+    reductionUnit_step U A I n M
   have hEpi (n : ℕ) (M : V.modules A) : Epi ((ηv n).app M) :=
     quotientUnit_epi V A I n M
   clear_value ηv ηu
