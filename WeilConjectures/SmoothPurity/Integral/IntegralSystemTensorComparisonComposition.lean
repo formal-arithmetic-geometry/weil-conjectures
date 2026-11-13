@@ -374,18 +374,23 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
     run_tac
       let hs ← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `hs)
-      let actual ← Lean.Meta.inferType (.fvar hs)
-      let expected ← Lean.Elab.Tactic.getMainTarget
-      let rec differences (fuel : Nat) (a b : Lean.Expr) : List String :=
-        if a == b then [] else
-        match fuel, a, b with
-        | 0, _, _ => ["depth limit"]
-        | n + 1, .app f x, .app g y => differences n f g ++ differences n x y
-        | n + 1, .forallE _ a x _, .forallE _ b y _ =>
-          differences n a b ++ differences n x y
-        | _, _, _ => [s!"actual: {repr a}\nexpected: {repr b}"]
-      for d in ((differences 128 actual expected).eraseDups.take 12) do
-        Lean.logInfo d
+      let actual ← Lean.instantiateMVars (← Lean.Meta.inferType (.fvar hs))
+      let expected ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+      let mut todo := #[(actual, expected)]
+      let mut differences : List String := []
+      for _ in [0:10000] do
+        if todo.isEmpty then break
+        let (a, b) := todo.back!
+        todo := todo.pop
+        if a != b then
+          if a.isApp && b.isApp then
+            todo := todo.push (a.appArg!, b.appArg!) |>.push (a.appFn!, b.appFn!)
+          else
+            let d := s!"actual: {(reprStr a).take 1500}\nexpected: {(reprStr b).take 1500}"
+            if !differences.contains d then
+              differences := differences ++ [d]
+              Lean.logInfo d
+              if differences.length == 12 then break
     with_reducible exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E h P Q hP hQ
