@@ -117,11 +117,12 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
         (ShortComplex.homologyMap_mapNatTrans (A.sc q)
           (ModuleCat.smulNatTrans _ (b ^ n)).asHom)
     have hy := ConcreteCategory.congr_hom hphiH y
-    simp only [ConcreteCategory.comp_apply] at hy
+    change (S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y =
+      eA.inv ((b ^ n) • (show A.homology q from eA.hom y)) at hy
     calc
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
           (eA.inv ≫ raw) ((b ^ n) • (show A.homology q from eA.hom y)) := by
-        simpa only [ConcreteCategory.comp_apply] using congrArg raw hy
+        exact congrArg raw hy
       _ = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from
           (eA.inv ≫ raw) (eA.hom y)) := ht _
       _ = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from raw y) := by
