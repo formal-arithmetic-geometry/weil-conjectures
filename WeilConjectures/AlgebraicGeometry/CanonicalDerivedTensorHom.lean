@@ -54,8 +54,6 @@ theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.style.haveILetI false in
-set_option trace.profiler true in
 /-- Uniqueness of the family specified on representatives.
 Source: Stacks, cohomology.tex, Tag 08DJ
 (blueprint: def-pc-canonical-derived-tensor-hom-bijection).
@@ -72,6 +70,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     (h' : IsCanonicalDerivedTensorHom X e') : e = e' := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  -- Share the sheafification and abelian instances throughout the proof.
   let : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} := inferInstance
   have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
     inferInstance
@@ -82,6 +81,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   funext K L M
   apply Equiv.ext
   intro f
+  -- Name the existential proofs before destructuring to avoid generalizing through the goal.
   have hPResolution :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage K)
   rcases hPResolution with ⟨P, p, hP, _, hp, _⟩
