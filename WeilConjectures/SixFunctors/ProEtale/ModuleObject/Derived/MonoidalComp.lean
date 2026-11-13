@@ -25,16 +25,13 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-private lemma upperStarTensorComplexHom_eq_μ
+private lemma upperStarTensorComplexHom_eq_μIso_hom
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
     upperStarTensorComplexHom Λ f A B =
-      Functor.LaxMonoidal.μ ((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) A B := by
-  apply (cancel_mono (Functor.OplaxMonoidal.δ
-    ((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) A B)).1
-  rw [Functor.Monoidal.μ_δ, upperStarTensorComplexHom_eq_inv,
-    Functor.mapCochainComplex_δ,
-    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app, IsIso.inv_hom_id]
+      ((f)^*⟦Λ⟧.mapCochainComplexμIso A B).hom := by
+  rw [upperStarTensorComplexHom_eq_inv]
+  exact IsIso.inv_eq_of_inv_hom_id ((f)^*⟦Λ⟧.mapCochainComplexμIso A B).hom_inv_id
 
 private lemma upperStarComp_mapHomologicalComplexCompHom
     (A : CochainComplex
@@ -42,10 +39,11 @@ private lemma upperStarComp_mapHomologicalComplexCompHom
     Functor.mapHomologicalComplexCompHom (g)^*⟦Λ⟧ (f)^*⟦Λ⟧ (f ≫ g)^*⟦Λ⟧
         (upperStarComp Λ f g) A =
       (NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A := by
-  ext n
+  ext n : 1
   simp only [Functor.mapHomologicalComplexCompHom, HomologicalComplex.comp_f,
     NatTrans.mapHomologicalComplex_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
-    Iso.refl_inv, NatTrans.id_app, Category.comp_id]
+    Iso.refl_inv, NatTrans.id_app]
+  exact Category.comp_id _
 
 set_option profiler true in
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
@@ -61,15 +59,15 @@ lemma upperStarTensorComplexHom_comp
         ((f)^*⟦Λ⟧.mapHomologicalComplex _).map (upperStarTensorComplexHom Λ g A B) =
       upperStarTensorComplexHom Λ (f ≫ g) A B ≫
         (NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom _).app (A ⊗ B) := by
-  rw [upperStarTensorComplexHom_eq_μ, upperStarTensorComplexHom_eq_μ,
-    upperStarTensorComplexHom_eq_μ]
+  rw [upperStarTensorComplexHom_eq_μIso_hom, upperStarTensorComplexHom_eq_μIso_hom,
+    upperStarTensorComplexHom_eq_μIso_hom]
   have hδ := Functor.mapCochainComplex_δ_comp_tensorHom
     (upperStarComp_hom_app_tensor_δ Λ f g) A B
-  simp only [upperStarComp_mapHomologicalComplexCompHom] at hδ
-  rw [← cancel_epi (Functor.OplaxMonoidal.δ
-      ((f ≫ g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) A B), reassoc_of% hδ,
-    Functor.Monoidal.δ_μ_assoc, Functor.Monoidal.δ_μ_assoc, ← Functor.map_comp,
-    Functor.Monoidal.δ_μ, Functor.map_id, Category.comp_id]
+  simp only [upperStarComp_mapHomologicalComplexCompHom,
+    Functor.mapCochainComplex_δ, ← Functor.mapCochainComplexμIso_inv] at hδ
+  rw [← cancel_epi ((f ≫ g)^*⟦Λ⟧.mapCochainComplexμIso A B).inv, reassoc_of% hδ,
+    Iso.inv_hom_id_assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp, Iso.inv_hom_id,
+    Functor.map_id, Category.comp_id]
 
 open DerivedCategory Functor.LaxMonoidal
 
