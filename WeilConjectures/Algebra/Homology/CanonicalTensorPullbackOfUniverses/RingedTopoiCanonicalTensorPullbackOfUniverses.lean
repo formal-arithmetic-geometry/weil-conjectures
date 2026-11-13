@@ -181,7 +181,6 @@ private theorem tensorPullbackTotal_naturality
   rfl
 
 set_option synthInstance.maxSize 2048 in
-set_option profiler true in
 -- Elaborate the full two-variable representative square.
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
