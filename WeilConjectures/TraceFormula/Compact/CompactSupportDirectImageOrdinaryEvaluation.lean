@@ -35,6 +35,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the section identity traverses the nested sequence-site scalar restrictions.
 /-- The ordinary direct-image comparison is sectionwise the identity.
