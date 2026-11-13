@@ -70,6 +70,7 @@ private theorem section_pair_unit (T : Scheme.{u})
   simpa only [ModuleCat.extendRestrictScalarsAdj_unit_app_apply] using s.ordinaryUnit N W m
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The unit square compares the ordinary components of two scalar adjunctions.
 private theorem canonical_section_extension (T : Scheme.{u}) (M : Modules Λ T) :
     ∃ c : (equivalence Λ' T).functor.obj ((extension a T).obj M) ⟶
