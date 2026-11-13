@@ -245,10 +245,13 @@ theorem completedPullbackTensor_associativity_representatives {X Y : Scheme.{u}}
   obtain ⟨βA, ⟨cA⟩⟩ := pullbackTensor_systemTensorCoherence l E X
   have hρ : ∀ (M N M' N' : coefficientSequenceDerived l E Y)
       (g : M ⟶ M') (h : N ⟶ N'),
-      F.map (SB.tensor.map (g, h)) ≫ (ρ M' N').hom =
-        (ρ M N).hom ≫ SA.tensor.map (F.map g, F.map h) := by
+      F.map (SB.tensor.map (X := (M, N)) (Y := (M', N')) (g, h)) ≫ (ρ M' N').hom =
+        (ρ M N).hom ≫ SA.tensor.map
+          (X := (F.obj M, F.obj N)) (Y := (F.obj M', F.obj N')) (F.map g, F.map h) := by
     intro M N M' N' g h
-    exact μ.hom.naturality (g, h)
+    have hμ := μ.hom.naturality (X := (M, N)) (Y := (M', N')) (Prod.mkHom g h)
+    dsimp only [Functor.comp_map, Functor.prod_map] at hμ
+    exact hμ
   have hc : CategoryTheory.RingedForgetTensorTransposition.RingedTensorComparisonCoherence.{
       u + 1, u, u, u + 1, u, u}
       J R J' R' U (pullbackTensorSequenceCochain l E f) :=
