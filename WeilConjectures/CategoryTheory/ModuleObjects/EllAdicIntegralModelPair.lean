@@ -83,7 +83,7 @@ lemma exists_derivedExtendScalars_iso_integralModel_pair (X X' : Scheme.{u}) (�
   exact (exists_padicAlgCl_iso_integralModel_pair X X' ℓ K K').elim fun E hE ↦
     hE.elim fun K₀ hK₀ ↦ hK₀.elim fun K₀' h ↦
       ⟨E, K₀, K₀',
-        h.1.map (fun e ↦ (boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e),
-        h.2.map (fun e ↦ (boundedConstructible (padicAlgClRingObj X' ℓ)).ι.mapIso e)⟩
+        h.1.elim (fun e ↦ ⟨(boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e⟩),
+        h.2.elim (fun e ↦ ⟨(boundedConstructible (padicAlgClRingObj X' ℓ)).ι.mapIso e⟩)⟩
 
 end AlgebraicGeometry.ProEtale
