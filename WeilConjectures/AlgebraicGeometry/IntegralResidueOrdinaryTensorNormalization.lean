@@ -26,6 +26,28 @@ local instance instEssentiallySmallProfinite_integralResidueOrdinaryTensorNormal
 
 namespace CategoryTheory
 
+private theorem mapHomotopyCategory_pasted_square
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    [Preadditive C] [Preadditive D] [Preadditive C'] [Preadditive D']
+    (F : C ⥤ D) (G : C' ⥤ D') (TY : C ⥤ C') (TX : D ⥤ D')
+    (SY : C' ⥤ C) (SX : D' ⥤ D) (L : C ⥤ C) (L' : D ⥤ D)
+    [F.Additive] [G.Additive] [TY.Additive] [TX.Additive]
+    [SY.Additive] [SX.Additive] [L.Additive] [L'.Additive]
+    (q : SY ⋙ F ⟶ G ⋙ SX) (p : TY ⋙ G ⟶ F ⋙ TX)
+    (s : TY ⋙ SY ⟶ L) (s' : TX ⋙ SX ⟶ L') (t : L ⋙ F ⟶ F ⋙ L')
+    (h : ∀ M, q.app (TY.obj M) ≫ SX.map (p.app M) ≫ s'.app (F.obj M) =
+      F.map (s.app M) ≫ t.app M) (P : HomotopyCategory C (.up ℤ)) :
+    (NatTrans.mapHomotopyCategory q (.up ℤ)).app ((TY.mapHomotopyCategory (.up ℤ)).obj P) ≫
+      (SX.mapHomotopyCategory (.up ℤ)).map ((NatTrans.mapHomotopyCategory p (.up ℤ)).app P) ≫
+      (NatTrans.mapHomotopyCategory s' (.up ℤ)).app ((F.mapHomotopyCategory (.up ℤ)).obj P) =
+    (F.mapHomotopyCategory (.up ℤ)).map ((NatTrans.mapHomotopyCategory s (.up ℤ)).app P) ≫
+      (NatTrans.mapHomotopyCategory t (.up ℤ)).app P := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map,
+    ← Functor.map_comp]
+  apply (HomotopyCategory.quotient D (.up ℤ)).congr_map
+  exact HomologicalComplex.hom_ext _ _ (fun n ↦ h (K.X n))
+
 private theorem map_comp_of_pasted_squares
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
     {X Y Z : C} {V W T R : D} (a : F.obj X ⟶ V) (b : V ⟶ W) (c : W ⟶ T)
@@ -256,27 +278,12 @@ theorem residueOrdinaryTensorPull_homotopy
   let τ : tensorLeft B ⋙ F ⟶ F ⋙ tensorLeft B' :=
     (Functor.Monoidal.commTensorLeft F B).inv ≫
       Functor.whiskerLeft F ((curriedTensor _).map e.hom)
-  have hm :
-      (NatTrans.mapHomotopyCategory (comapUpperStarIso φ f).inv (.up ℤ)).app
-          ((TY.mapHomotopyCategory (.up ℤ)).obj P) ≫
-        (SX.mapHomotopyCategory (.up ℤ)).map
-          ((NatTrans.mapHomotopyCategory (pullIso φ f).inv (.up ℤ)).app P) ≫
-        (Mod.tensorPresentationHomotopyIso (coefficientMap φ X)).hom.app
-          ((F.mapHomotopyCategory (.up ℤ)).obj P) =
-      (F.mapHomotopyCategory (.up ℤ)).map
-          ((Mod.tensorPresentationHomotopyIso (coefficientMap φ Y)).hom.app P) ≫
-        (NatTrans.mapHomotopyCategory τ (.up ℤ)).app P := by
-    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-    dsimp only [Mod.tensorPresentationHomotopyIso]
-    simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map,
-      ← Functor.map_comp]
-    apply (HomotopyCategory.quotient _ (.up ℤ)).congr_map
-    ext n : 1
-    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-      NatTrans.mapHomologicalComplex_app_f]
-    dsimp only [τ, NatTrans.comp_app, Functor.whiskerLeft_app,
-      Functor.Monoidal.commTensorLeft_inv_app]
-    exact residueOrdinaryTensorPull_module Λ A φ f (K.X n)
+  have hm := mapHomotopyCategory_pasted_square F ((f)^*⟦A⟧) TY
+    (Mod.extendScalars (coefficientMap φ X)) SY SX (tensorLeft B) (tensorLeft B')
+    (comapUpperStarIso φ f).inv (pullIso φ f).inv
+    (Mod.extendComapTensorIso (coefficientMap φ Y)).hom
+    (Mod.extendComapTensorIso (coefficientMap φ X)).hom τ
+    (fun M ↦ residueOrdinaryTensorPull_module Λ A φ f M) P
   have ht := tensor_single_homotopy_iso_inv F B B' e P
   dsimp only at ht
   exact map_comp_of_pasted_squares (F.mapHomotopyCategory (.up ℤ))
