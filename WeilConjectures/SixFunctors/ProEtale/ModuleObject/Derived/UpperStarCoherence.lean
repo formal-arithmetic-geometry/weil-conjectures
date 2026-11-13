@@ -356,6 +356,19 @@ lemma leftDerivedFunctorFactorIso_assoc_app
     Category.assoc] using
     NatTrans.congr_app this K
 
+/-- The associativity law when the comparison of the two composite functors is an equality. -/
+private lemma leftDerivedFunctorFactorIso_assoc_eq_app (hc : FGH = FGH')
+    (h : ∀ M, e₁.hom.app M ≫ eFG.hom.app (H.obj M) =
+      (eqToIso hc).hom.app M ≫ e₂.hom.app M ≫ F.map (eGH.hom.app M))
+    (K : DerivedCategory C₁) :
+    (leftDerivedFunctorFactorIso e₁).hom.app K ≫
+        (leftDerivedFunctorFactorIso eFG).hom.app (H.leftDerivedFunctor.obj K) =
+      eqToHom (by subst hc; rfl) ≫
+        (leftDerivedFunctorFactorIso e₂).hom.app K ≫
+          F.leftDerivedFunctor.map ((leftDerivedFunctorFactorIso eGH).hom.app K) := by
+  rw [← leftDerivedFunctorNatIso_eqToIso_hom_app hc K]
+  exact leftDerivedFunctorFactorIso_assoc_app e₁ eFG e₂ eGH (eqToIso hc) h K
+
 end Laws
 
 end FlatThree
@@ -446,12 +459,10 @@ lemma leftDerivedUpperStarComp_assoc_app (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ 
         (leftDerivedUpperStarComp Λ f g).hom.app (L((h)^*⟦Λ⟧).obj K) =
       eqToHom (by rw [Category.assoc]) ≫ (leftDerivedUpperStarComp Λ f (g ≫ h)).hom.app K ≫
         L((f)^*⟦Λ⟧).map ((leftDerivedUpperStarComp Λ g h).hom.app K) := by
-  have hcomp := Functor.leftDerivedFunctorFactorIso_assoc_app (upperStarComp Λ (f ≫ g) h)
+  exact Functor.leftDerivedFunctorFactorIso_assoc_eq_app (upperStarComp Λ (f ≫ g) h)
     (upperStarComp Λ f g) (upperStarComp Λ f (g ≫ h)) (upperStarComp Λ g h)
-    (upperStarCongr Λ (Category.assoc f g h))
+    (by rw [Category.assoc])
     (upperStarComp_hom_app_comp_upperStarComp_hom_app Λ f g h) K
-  rw [upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app] at hcomp
-  exact hcomp
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Left unit law** for the composition isomorphisms of the derived pullbacks of module
