@@ -89,6 +89,93 @@ private theorem sections_iso_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     pushforward_obj_presheaf_map, ← Functor.map_comp]
   congr 1
 
+set_option trace.profiler true in
+private theorem comp_data_beta_homotopy {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z)
+    {H : Z.Modules} {G : Y.Modules} {F : X.Modules}
+    (ψ : H ⟶ (pushforward k).obj G) (φ : G ⟶ (pushforward h).obj F)
+    (Ck : ModuleCohomologyFMapData k H G ψ)
+    (Ch : ModuleCohomologyFMapData h G F φ)
+    (Cc : ModuleCohomologyFMapData (h ≫ k) H F
+      (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F))
+    (L : CochainComplex Z.Modules ℕ)
+    (μ : ((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).obj Ch.K ⟶ L)
+    (hL : ∀ n, CategoryTheory.Injective (L.X n)) (e : Ck.K ⟶ L) (f : Cc.K ⟶ L)
+    (he : Nonempty (Homotopy (Ck.lambda ≫ e)
+      (((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).map
+        (InjectiveResolution.desc (𝟙 G) Ch.J Ck.I ≫ Ch.β) ≫ μ)))
+    (hf : Nonempty (Homotopy (Cc.lambda ≫ f)
+      (((pushforward (h ≫ k)).mapHomologicalComplex (ComplexShape.up ℕ)).map
+        (InjectiveResolution.desc (𝟙 F) Ch.I Cc.I) ≫
+        (Functor.mapHomologicalComplexCompIso (pushforwardComp h k)
+          (ComplexShape.up ℕ)).inv.app Ch.I.cocomplex ≫
+        ((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).map Ch.lambda ≫ μ))) :
+    Nonempty (Homotopy (Cc.β ≫ f) (InjectiveResolution.desc (𝟙 H) Ck.J Cc.J ≫ Ck.β ≫ e)) := by
+  let PY := (pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)
+  let PC := (pushforward (h ≫ k)).mapHomologicalComplex (ComplexShape.up ℕ)
+  let T := Functor.mapHomologicalComplexCompIso (pushforwardComp h k) (ComplexShape.up ℕ)
+  let αG := InjectiveResolution.desc (𝟙 G) Ch.J Ck.I
+  let αF := InjectiveResolution.desc (𝟙 F) Ch.I Cc.I
+  let αH := InjectiveResolution.desc (𝟙 H) Ck.J Cc.J
+  let γ := PY.map (αG ≫ Ch.β) ≫ μ
+  let δ := PC.map αF ≫ T.inv.app Ch.I.cocomplex ≫ PY.map Ch.lambda ≫ μ
+  let η₀ := ψ ≫ (pushforward k).map (Ck.I.ι.f 0)
+  have hη₀ : η₀ ≫ (PY.obj Ck.I.cocomplex).d 0 1 = 0 := by
+    change (ψ ≫ (pushforward k).map (Ck.I.ι.f 0)) ≫
+      (pushforward k).map (Ck.I.cocomplex.d 0 1) = 0
+    rw [Category.assoc, ← Functor.map_comp, Ck.I.ι_f_zero_comp_complex_d,
+      Functor.map_zero, CategoryTheory.Limits.comp_zero]
+  let η := (CochainComplex.fromSingle₀Equiv (PY.obj Ck.I.cocomplex) H).symm ⟨η₀, hη₀⟩
+  have hη : η.f 0 = η₀ := CochainComplex.fromSingle₀Equiv_symm_apply_f_zero _ _
+  let θ := ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F
+  let ξ₀ := θ ≫ (pushforward (h ≫ k)).map (Cc.I.ι.f 0)
+  have hξ₀ : ξ₀ ≫ (PC.obj Cc.I.cocomplex).d 0 1 = 0 := by
+    change (θ ≫ (pushforward (h ≫ k)).map (Cc.I.ι.f 0)) ≫
+      (pushforward (h ≫ k)).map (Cc.I.cocomplex.d 0 1) = 0
+    rw [Category.assoc, ← Functor.map_comp, Cc.I.ι_f_zero_comp_complex_d,
+      Functor.map_zero, CategoryTheory.Limits.comp_zero]
+  let ξ := (CochainComplex.fromSingle₀Equiv (PC.obj Cc.I.cocomplex) H).symm ⟨ξ₀, hξ₀⟩
+  have hξ : ξ.f 0 = ξ₀ := CochainComplex.fromSingle₀Equiv_symm_apply_f_zero _ _
+  have hβk : Ck.J.ι ≫ Ck.β = η ≫ Ck.lambda := by
+    apply HomologicalComplex.from_single_hom_ext
+    rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, hη]
+    exact Ck.compatible
+  have hβc : Cc.J.ι ≫ Cc.β = ξ ≫ Cc.lambda := by
+    apply HomologicalComplex.from_single_hom_ext
+    rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, hξ]
+    exact Cc.compatible
+  have hJ : Cc.J.ι ≫ αH = Ck.J.ι := by
+    simp only [αH, InjectiveResolution.desc_commutes, Functor.map_id, Category.id_comp]
+  have hleft : Cc.J.ι ≫ (Cc.β ≫ f) = ξ ≫ (Cc.lambda ≫ f) := by
+    rw [← Category.assoc, hβc, Category.assoc]
+  have hright : Cc.J.ι ≫ (αH ≫ Ck.β ≫ e) = η ≫ (Ck.lambda ≫ e) := by
+    rw [← Category.assoc, hJ, ← Category.assoc, hβk, Category.assoc]
+  have hmiddle : ξ ≫ δ = η ≫ γ := by
+    apply HomologicalComplex.from_single_hom_ext
+    simp only [δ, γ, HomologicalComplex.comp_f, hξ, hη]
+    change ξ₀ ≫ (pushforward (h ≫ k)).map (αF.f 0) ≫
+        (pushforwardComp h k).inv.app (Ch.I.cocomplex.X 0) ≫
+        (pushforward k).map (Ch.lambda.f 0) ≫ μ.f 0 =
+      η₀ ≫ (pushforward k).map ((αG ≫ Ch.β).f 0) ≫ μ.f 0
+    dsimp only [ξ₀, η₀, θ]
+    simp only [HomologicalComplex.comp_f, Category.assoc]
+    rw [← Functor.map_comp_assoc, InjectiveResolution.desc_commutes_zero]
+    simp only [Category.id_comp]
+    have hG : Ck.I.ι.f 0 ≫ αG.f 0 = Ch.J.ι.f 0 := by
+      simp only [αG, InjectiveResolution.desc_commutes_zero, Category.id_comp]
+    rw [← Functor.map_comp_assoc]
+    rw [← Category.assoc (Ck.I.ι.f 0) (αG.f 0) (Ch.β.f 0), hG, Ch.compatible]
+    have hn := (pushforwardComp h k).hom.naturality
+      (show F ⟶ Ch.I.cocomplex.X 0 from Ch.I.ι.f 0)
+    change (pushforward k).map ((pushforward h).map (Ch.I.ι.f 0)) ≫
+        (pushforwardComp h k).hom.app (Ch.I.cocomplex.X 0) =
+      (pushforwardComp h k).hom.app F ≫
+        (pushforward (h ≫ k)).map (Ch.I.ι.f 0) at hn
+    rw [← reassoc_of% hn, Iso.hom_inv_id_app_assoc]
+    simp only [Functor.map_comp, Category.assoc]
+  apply unique_nat_quasiIso hL Cc.J.ι (Cc.β ≫ f) (αH ≫ Ck.β ≫ e)
+  rw [hleft, hright]
+  exact ⟨(hf.some.compLeft ξ).trans (hmiddle ▸ (he.some.compLeft η).symm)⟩
+
 private theorem map_comp_eq_of_map_comp_eq
     {A B D : Type*} [Category* A] [Category* B] [Category* D]
     (F : A ⥤ B) (G : B ⥤ D) {X Y Z : A} {S : B}
@@ -173,63 +260,7 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
   let δ := PC.map αF ≫ T.inv.app Ch.I.cocomplex ≫ PY.map Ch.lambda ≫ μ
   obtain ⟨e, he⟩ := lift_nat_quasiIso hL Ck.lambda γ
   obtain ⟨f, hf⟩ := lift_nat_quasiIso hL Cc.lambda δ
-  have hb : Nonempty (Homotopy (Cc.β ≫ f) (αH ≫ Ck.β ≫ e)) := by
-    let η₀ := ψ ≫ (pushforward k).map (Ck.I.ι.f 0)
-    have hη₀ : η₀ ≫ (PY.obj Ck.I.cocomplex).d 0 1 = 0 := by
-      change (ψ ≫ (pushforward k).map (Ck.I.ι.f 0)) ≫
-        (pushforward k).map (Ck.I.cocomplex.d 0 1) = 0
-      rw [Category.assoc, ← Functor.map_comp, Ck.I.ι_f_zero_comp_complex_d,
-        Functor.map_zero, CategoryTheory.Limits.comp_zero]
-    let η := (CochainComplex.fromSingle₀Equiv (PY.obj Ck.I.cocomplex) H).symm ⟨η₀, hη₀⟩
-    have hη : η.f 0 = η₀ := CochainComplex.fromSingle₀Equiv_symm_apply_f_zero _ _
-    let θ := ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F
-    let ξ₀ := θ ≫ (pushforward (h ≫ k)).map (Cc.I.ι.f 0)
-    have hξ₀ : ξ₀ ≫ (PC.obj Cc.I.cocomplex).d 0 1 = 0 := by
-      change (θ ≫ (pushforward (h ≫ k)).map (Cc.I.ι.f 0)) ≫
-        (pushforward (h ≫ k)).map (Cc.I.cocomplex.d 0 1) = 0
-      rw [Category.assoc, ← Functor.map_comp, Cc.I.ι_f_zero_comp_complex_d,
-        Functor.map_zero, CategoryTheory.Limits.comp_zero]
-    let ξ := (CochainComplex.fromSingle₀Equiv (PC.obj Cc.I.cocomplex) H).symm ⟨ξ₀, hξ₀⟩
-    have hξ : ξ.f 0 = ξ₀ := CochainComplex.fromSingle₀Equiv_symm_apply_f_zero _ _
-    have hβk : Ck.J.ι ≫ Ck.β = η ≫ Ck.lambda := by
-      apply HomologicalComplex.from_single_hom_ext
-      rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, hη]
-      exact Ck.compatible
-    have hβc : Cc.J.ι ≫ Cc.β = ξ ≫ Cc.lambda := by
-      apply HomologicalComplex.from_single_hom_ext
-      rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, hξ]
-      exact Cc.compatible
-    have hJ : Cc.J.ι ≫ αH = Ck.J.ι := by simp [αH]
-    have hleft : Cc.J.ι ≫ (Cc.β ≫ f) = ξ ≫ (Cc.lambda ≫ f) := by
-      rw [← Category.assoc, hβc, Category.assoc]
-    have hright : Cc.J.ι ≫ (αH ≫ Ck.β ≫ e) = η ≫ (Ck.lambda ≫ e) := by
-      rw [← Category.assoc, hJ, ← Category.assoc, hβk, Category.assoc]
-    have hmiddle : ξ ≫ δ = η ≫ γ := by
-      apply HomologicalComplex.from_single_hom_ext
-      simp only [δ, γ, HomologicalComplex.comp_f, hξ, hη]
-      change ξ₀ ≫ (pushforward (h ≫ k)).map (αF.f 0) ≫
-          (pushforwardComp h k).inv.app (Ch.I.cocomplex.X 0) ≫
-          (pushforward k).map (Ch.lambda.f 0) ≫ μ.f 0 =
-        η₀ ≫ (pushforward k).map ((αG ≫ Ch.β).f 0) ≫ μ.f 0
-      dsimp only [ξ₀, η₀, θ]
-      simp only [HomologicalComplex.comp_f, Category.assoc]
-      rw [← Functor.map_comp_assoc, InjectiveResolution.desc_commutes_zero]
-      simp only [Category.id_comp]
-      have hG : Ck.I.ι.f 0 ≫ αG.f 0 = Ch.J.ι.f 0 := by
-        simp [αG]
-      rw [← Functor.map_comp_assoc]
-      rw [← Category.assoc (Ck.I.ι.f 0) (αG.f 0) (Ch.β.f 0), hG, Ch.compatible]
-      have hn := (pushforwardComp h k).hom.naturality
-        (show F ⟶ Ch.I.cocomplex.X 0 from Ch.I.ι.f 0)
-      change (pushforward k).map ((pushforward h).map (Ch.I.ι.f 0)) ≫
-          (pushforwardComp h k).hom.app (Ch.I.cocomplex.X 0) =
-        (pushforwardComp h k).hom.app F ≫
-          (pushforward (h ≫ k)).map (Ch.I.ι.f 0) at hn
-      rw [← reassoc_of% hn, Iso.hom_inv_id_app_assoc]
-      simp only [Functor.map_comp, Category.assoc]
-    apply unique_nat_quasiIso hL Cc.J.ι (Cc.β ≫ f) (αH ≫ Ck.β ≫ e)
-    rw [hleft, hright]
-    exact ⟨(hf.some.compLeft ξ).trans (hmiddle ▸ (he.some.compLeft η).symm)⟩
+  have hb := comp_data_beta_homotopy h k ψ φ Ck Ch Cc L μ hL e f he hf
   let a := pushforward_sections_iso k Ch.K
   have hΓ : QuasiIso (HZ.map μ) :=
     nat_quasiIso_globalSections_pushforward_injectives k Ch.K L Ch.injective hL μ hμ

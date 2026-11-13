@@ -96,7 +96,7 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
         change η.app W (c ⊗ₜ[B.right.obj.obj W]
           (B.hom.hom.app W r • (show P.val.obj W from p))) = _
         refine (congrArg (η.app W)
-          (TensorProduct.tmul_smul (B.hom.hom.app W r)
+          (TensorProduct.tmul_smul (R := B.right.obj.obj W) (B.hom.hom.app W r)
             (show C.right.obj.obj W from c) (show P.val.obj W from p))).trans ?_
         have h : φ.right.hom.app W (B.hom.hom.app W r) = C.hom.hom.app W r := by
           have hw := congrArg (fun f ↦ f.hom.app W) (CategoryTheory.Under.w φ)
@@ -105,7 +105,8 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
           (show C.right.obj.obj W from c)) ⊗ₜ[B.right.obj.obj W,
           (φ.right.hom.app W).hom] p) = _
         exact (congrArg (fun s : C.right.obj.obj W ↦ η.app W
-          (s • (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p))) h).trans
+          ((s * (show C.right.obj.obj W from c))
+            ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] (show P.val.obj W from p)))) h).trans
           ((η.app W).hom.map_smul (C.hom.hom.app W r)
             (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p)))
   refine ⟨{ app := a, naturality := ?_ }, ?_⟩
