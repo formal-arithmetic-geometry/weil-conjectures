@@ -105,6 +105,7 @@ private lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
     [MonObj Λ₂] [IsCommMonObj Λ₂]
     (a : Λ₀ ⟶ Λ₁) [IsMonHom a] (b : Λ₁ ⟶ Λ₂) [IsMonHom b]
     [∀ T : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a T))]
+    [∀ T : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap b T))]
     {X X' U Y W : Scheme.{u}} (M : NearbyCyclesModel X X')
     (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
     (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ₀ U)))
@@ -297,7 +298,9 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
     (zeroSectionSpecialFibreMap X I k').left
     (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι) N₀.obj
-    (derivedCompleteIntegers_of_boundedConstructible hK) n hn' (by transport_mod_proofs hU)
+    (derivedCompleteIntegers_of_boundedConstructible hK) n hn' (by
+      dsimp only [U]
+      transport_mod_proofs hU)
   -- from `𝒪_E` to `ℚ̄_ℓ`
   have h₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicIntegers
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
