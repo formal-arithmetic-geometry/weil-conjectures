@@ -198,6 +198,21 @@ lemma compactificationEtaleGraphIso_restrictOpen
   rw [← derivedSquareUpperStarIso_hom_app_eq (ModuleCat.{u + 1} Λ)
     (c.isPullback_selfGraph_restrictOpen v).toCommSq _
       (c.selfGraph_restrictOpen_selfGraphRestrict v)] at hpre
+  have hpre' : L(((c.restrictOpen v).selfGraph)^*[ModuleCat.{u + 1} Λ]).map
+      ((derivedSquareUpperStarIso _ (c.isPullback_selfGraphRestrict v).toCommSq).hom.app
+        (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) ≫
+      (derivedSquareUpperStarIso _ (c.isPullback_selfGraph_restrictOpen v).toCommSq).hom.app
+        (L((pullback.snd c.g e)^*[ModuleCat.{u + 1} Λ]).obj
+          (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) ≫
+      L((v)^*[ModuleCat.{u + 1} Λ]).map ((leftDerivedUpperStarCompSectionIso _ c.selfGraph
+        (pullback.snd c.g e) c.selfGraph_snd).hom.app (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) =
+      (leftDerivedUpperStarCompSectionIso _ (c.restrictOpen v).selfGraph
+        (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.restrictOpen v).selfGraph_snd).hom.app
+        (L((v)^*[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) := by
+    exact (Iso.eq_inv_comp
+      (L(((c.restrictOpen v).selfGraph)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((derivedSquareUpperStarIso _ (c.isPullback_selfGraphRestrict v).toCommSq).app
+          (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)))).1 hpre.symm
   -- the open immersions `j` and `v ≫ j`
   have hθ := unit_map_restrictOpenLowerShriekIso Λ c v N
   have hpost := leftDerivedUpperStarComp_triangle_coherence (ModuleCat.{u + 1} Λ)
@@ -215,19 +230,7 @@ lemma compactificationEtaleGraphIso_restrictOpen
   dsimp at hnat hsec
   simp only [compactificationEtaleGraphIso_hom_app]
   simp only [Functor.map_comp, Category.assoc]
-  have hpre' : L(((c.restrictOpen v).selfGraph)^*[ModuleCat.{u + 1} Λ]).map
-      ((derivedSquareUpperStarIso _ (c.isPullback_selfGraphRestrict v).toCommSq).hom.app
-        (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) ≫
-      (derivedSquareUpperStarIso _ (c.isPullback_selfGraph_restrictOpen v).toCommSq).hom.app
-        (L((pullback.snd c.g e)^*[ModuleCat.{u + 1} Λ]).obj
-          (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) ≫
-      L((v)^*[ModuleCat.{u + 1} Λ]).map ((leftDerivedUpperStarCompSectionIso _ c.selfGraph
-        (pullback.snd c.g e) c.selfGraph_snd).hom.app (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) =
-      (leftDerivedUpperStarCompSectionIso _ (c.restrictOpen v).selfGraph
-        (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.restrictOpen v).selfGraph_snd).hom.app
-        (L((v)^*[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) := by
-    exact hpre
-  rw [reassoc_of% hpre']
+  simp only [reassoc_of% hpre']
   simp only [hpost]
   simp only [← hnat]
   simp only [reassoc_of% hθ]

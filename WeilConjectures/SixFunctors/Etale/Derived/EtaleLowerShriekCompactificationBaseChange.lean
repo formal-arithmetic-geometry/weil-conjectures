@@ -220,6 +220,7 @@ variable {X Y X' Y' : Scheme.{u}} {e : X ⟶ Y} {g : Y' ⟶ Y} {e' : X' ⟶ Y'} 
   (sq : IsPullback g' e' e g) (c : Compactification e) [_root_.AlgebraicGeometry.Etale e]
   [_root_.AlgebraicGeometry.Etale e']
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] [_root_.AlgebraicGeometry.Etale e'] in
