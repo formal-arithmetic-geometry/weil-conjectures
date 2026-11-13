@@ -37,8 +37,7 @@ private theorem eqToHom_apply_symm {A B : AddCommGrpCat.{u}} (h : A = B) (x : A)
   subst B
   rfl
 
-set_option maxHeartbeats 400000 in
--- The dependent cocycle transports and spectral-sequence witness require extra elaboration.
+set_option profiler true in
 /-- Realize a cohomology map already characterized on resolution cocycles as the bottom
 edge of a functorial Leray spectral sequence. The induced map and its cocycle computation
 are inputs; this statement constructs only the spectral sequence and its finite filtration.
