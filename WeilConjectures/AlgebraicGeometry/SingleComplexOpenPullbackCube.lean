@@ -159,6 +159,7 @@ private theorem openSquare_app
     Category.id_comp, Category.assoc]
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Matching the derived-open component formulas needs extra elaboration heartbeats.
 /-- The two paths around a commuting cube of pullback comparisons agree.
 Source: Stacks Project, cohomology.tex, Tag 0D5S; perfect.tex, Tag 0DJ9.

@@ -85,6 +85,7 @@ set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The adjunction identity compares two definitionally equal scalar-restricted pushforwards.
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
