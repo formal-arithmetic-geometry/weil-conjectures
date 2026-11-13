@@ -650,50 +650,20 @@ private theorem open_exchange_inverse (b : Base l E)
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        let x ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Meta.inferType h))
-        let y ← Lean.Meta.zetaReduce
-          (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
-        let strip (e : Lean.Expr) := e.replace fun v =>
-          if v.isMData then some v.consumeMData else none
-        let x := strip x
-        let y := strip y
-        let mut count := 0
-        let mut seen : Std.HashSet (Lean.Expr × Lean.Expr) := {}
-        let mut todo := #[(x, y)]
-        while !todo.isEmpty && count < 12 do
-          let (a, b) := todo.back!
-          todo := todo.pop
-          let a := a.consumeMData
-          let b := b.consumeMData
-          if a == b || seen.contains (a, b) then continue
-          seen := seen.insert (a, b)
-          if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then continue
-          if a.getAppFn == b.getAppFn && a.getAppNumArgs == b.getAppNumArgs then
-            for a' in a.getAppArgs, b' in b.getAppArgs do
-              todo := todo.push (a', b')
-          else
-            count := count + 1
-            Lean.logInfo m!"NATIVE DIFFERENCE: {a.getAppFn} versus {b.getAppFn}"
-        exactByConversion h)
+      convert HU <;> rfl)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h)
+      convert he <;> rfl)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HC) N
   dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+  convert H <;> rfl
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
