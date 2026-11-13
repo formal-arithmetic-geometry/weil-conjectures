@@ -333,6 +333,75 @@ private theorem ringedKoszulConeFamilyComparison
     exact congrArg (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
       ((exteriorPower.zeroEquiv A (Fin r →₀ A)).apply_symm_apply x)
 
+/-- Pass an exact scalar realization to the finite cone-family comparison. -/
+private theorem existsRingedKoszulConeFamilyComparison
+    {C : Type (max v (u + 1))} [SmallCategory C] {T : GrothendieckTopology C}
+    (O : Sheaf T CommRingCat.{max v (u + 1)}) {A : Type (max v (u + 1))} [CommRing A]
+    (s : A → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (r : ℕ) (a : Fin r → A)
+    (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶
+      (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+        (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))
+    (tA : ∀ n m : ℕ, n ≤ m →
+      (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶
+        ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))
+    (qA : ∀ n m : ℕ, n ≤ m →
+      ((ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶
+        (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))
+    (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom
+      (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp
+        (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap))
+    (htA : ∀ n m h k, (tA n m h).f k = ModuleCat.ofHom
+      (exteriorPower.map k
+        (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (m - n))))))
+    (hc : ∀ n m h,
+      HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat ≫
+        HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =
+      HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫
+        HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
+    (N : ℕ → Mod O) (ν : ∀ n, N (n + 1) ⟶ N n)
+    (p : ∀ n, ringedSiteRingComplex O ⟶
+      (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
+    (hreal : ∃ (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O) (_hadd : E.Additive)
+        (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)
+        (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))
+        (q : ∀ n, E.obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))) ≅ N n),
+      (∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
+        (ringedKoszulScalar O (s x)).asHom ≫ c.hom) ∧
+      ∀ n, c.hom ≫
+          E.map (ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ) ≫ (q n).hom =
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ (p n).f 0 ≫
+          (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (N n)).hom)
+    (ε : ringedKoszulDualTower O r (fun i ↦ s (a i)) ⟶ Functor.ofOpSequence
+      (X := fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
+      (fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (ν n)))
+    (hε : ∀ n, ringedKoszulDualUnit O r (fun i ↦ s (a i)) n ≫ ε.app (op n) = p n) :
+    ∃ (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O) (_hadd : E.Additive)
+      (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)
+      (e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj
+        (HomologicalComplex.homotopyCofiber
+          (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)) ≅
+      (CochainComplex.mappingCone
+        ((HomologicalComplex.functorEquivalence (Mod O) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.obj
+          (op n)),
+      ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map
+          (HomologicalComplex.homotopyCofiber.mapArrowHom
+            (HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat)
+            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)
+            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
+            (Arrow.homMk
+              (HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)
+              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
+              (hc n m h))) ≫ (e n).hom =
+        (e m).hom ≫ (CochainComplex.mappingCone
+          ((HomologicalComplex.functorEquivalence (Mod O) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
+            (homOfLE h).op := by
+  obtain ⟨E, hadd, hlim, hcolim, c, q, hs, hp⟩ := hreal
+  exact ⟨E, hadd, hlim, hcolim,
+    ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc N ν q p hp ε hε⟩
+
 set_option profiler true in
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
@@ -429,23 +498,13 @@ theorem adicResidue_koszul_coefficient_cone_comparison
             ((HomologicalComplex.functorEquivalence
               (Mod R) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
               (homOfLE h).op  := by
-  run_tac Lean.logInfo m!"PH574 start remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   have _ := hqA
   cases ha
-  run_tac Lean.logInfo m!"PH574 cases remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   intro O b ε hε
-  obtain ⟨E, hadd, hlim, hcolim, c, q, hs, hq⟩ :=
-    adicResidue_exact_coefficient_realization X (Ideal.span (Set.range a)) U
-  let s := fun x : A ↦ ringedKoszulSliceSection
-    (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
-    (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
-      (Ideal.span (Set.range a))) x) U
-  refine ⟨E, hadd, hlim, hcolim, ?_⟩
-  run_tac Lean.logInfo m!"PH574 realization remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
-  apply ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc
+  exact existsRingedKoszulConeFamilyComparison O _ r a εA tA qA hεA htA hc
     (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
-    (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U) q
-    (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U) hq ε hε
-  run_tac Lean.logInfo m!"PH574 final remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+    (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U)
+    (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U)
+    (adicResidue_exact_coefficient_realization X (Ideal.span (Set.range a)) U) ε hε
 
 end AlgebraicGeometry.Scheme
