@@ -79,6 +79,17 @@ private theorem canonicalIntegralPullbackTensor_systemReduction_sequence {X Y : 
   exact canonicalIntegralPullbackTensor_systemReduction l E f M N
 
 set_option profiler true in
+private theorem finiteSystemDerivedComposition_eq_sequence {X Y Z : Scheme.{u}}
+    (h : Z ⟶ X) (f : X ⟶ Y) :
+    (finiteSystemDerivedComposition (integralSystemRings l E)
+      (integralSystemTransition l E) h f :
+        integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
+          integralComparisonDerivedSequencePullback l E f ⋙
+            integralComparisonDerivedSequencePullback l E h) =
+      integralComparisonSystemComposition l E h f :=
+  finiteSystemDerivedComposition_eq l E h f
+
+set_option profiler true in
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
@@ -155,7 +166,7 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
             (integralPullbackSystemComparison_sequence l E (h ≫ f)).hom.app K ≫
               a.hom.app (((sfIntegralConstructible l E Y).ι ⋙
                 (pullbackTensorCalculus l E Y).reduction).obj K))
-          (finiteSystemDerivedComposition_eq l E h f))
+          (finiteSystemDerivedComposition_eq_sequence l E h f))
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
     (canonicalIntegralPullbackTensor_systemReduction_sequence l E f)
