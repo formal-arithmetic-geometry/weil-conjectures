@@ -157,22 +157,6 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
 
-section restrictionCompInstances
-
-local instance restrictionComp_overFunctor_preservesZero
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{max u r}) (Z : C) :
-    (SheafOfModules.overFunctor.{max u r} R Z).PreservesZeroMorphisms :=
-  ⟨by intro M N; ext W x; rfl⟩
-
-local instance restrictionComp_overMap_preservesZero
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{max u r}) {X Y : C} (f : X ⟶ Y) :
-    (SheafOfModules.overMap.{max u r} R f).PreservesZeroMorphisms :=
-  ⟨by intro M N; ext W x; rfl⟩
-
-set_option synthInstance.maxHeartbeats 100000 in
-set_option profiler true in
 -- Additivity of the composite restriction functor is found by a deep search.
 /-- The sectionwise identity for iterated restriction, on complexes.
 Source: Stacks 03DH (blueprint: lem-sp-subterminal-derived-image-calculus). -/
@@ -184,8 +168,6 @@ def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
         (SheafOfModules.overMap.{max u r} (ring R) f).mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex
     (SheafOfModules.overFunctorMap.{max u r} (ring R) f).symm (.up ℤ)
-
-end restrictionCompInstances
 
 universe d vd wd
 
