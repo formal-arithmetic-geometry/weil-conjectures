@@ -112,28 +112,34 @@ theorem affine_perfect_open_represent_cohomology_colimit
     (D := SheafOfModules.{uMain}
       (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
     (Scheme.Modules.overEquiv (koszulOpen A r f))
+  let R := (F ⋙ G).mapDerivedCategory
+  change ∃ v : ∀ e : ℕ,
+      R.obj (koszulOpenStructure A) ⟶ R.obj (koszulOpenObject A r f e),
+    (∀ e, R.map (koszulOpenUnit A r f e) ≫ v e = 𝟙 _) ∧
+    (∀ e, v e ≫ R.map (koszulOpenUnit A r f e) = 𝟙 _) ∧
+    ∃ ι : koszulOpenHomDiagram A r f E.1 ⟶
+        (Functor.const ℕ).obj (R.obj (koszulOpenStructure A) ⟶ R.obj E.1),
+      (∀ e φ, ι.app e φ = v e ≫ R.map φ) ∧ Nonempty (IsColimit (Cocone.mk _ ι))
   have hi (e : ℕ) : IsIso (F.mapDerivedCategory.map (koszulOpenUnit A r f e)) := by
-    have h := (affine_perfect_koszul_principal_unit A r f (e + 1)
-      (Nat.le_add_left 1 e)).2
     have hU : (⨆ i : Fin r, (Spec (.of A)).basicOpen
         ((Scheme.ΓSpecIso (.of A)).inv (f i))) = koszulOpen A r f := by
       unfold koszulOpen
       congr 1
       funext i
       exact basicOpen_eq_of_affine (R := .of A) (f i)
-    rw [hU] at h
-    change IsIso (F.mapDerivedCategory.map (koszulOpenUnit A r f e)) at h
-    exact h
-  have hiso (e : ℕ) : IsIso ((F ⋙ G).mapDerivedCategory.map
-      (koszulOpenUnit A r f e)) := by
+    let P := fun U : (Spec (.of A)).Opens ↦
+      IsIso ((SheafOfModules.overFunctor.{uMain}
+        (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.map
+          (koszulOpenUnit A r f e))
+    exact Eq.mp (congrArg P hU)
+      (affine_perfect_koszul_principal_unit A r f (e + 1) (Nat.le_add_left 1 e)).2
+  have hiso (e : ℕ) : IsIso (R.map (koszulOpenUnit A r f e)) := by
     have := hi e
     apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F G) _).1
     change IsIso (G.mapDerivedCategory.map
       (F.mapDerivedCategory.map (koszulOpenUnit A r f e)))
     infer_instance
-  let v := fun e ↦ @inv _ _ _ _ ((F ⋙ G).mapDerivedCategory.map
-    (koszulOpenUnit A r f e)) (hiso e)
-  let R := (F ⋙ G).mapDerivedCategory
+  let v := fun e ↦ @inv _ _ _ _ (R.map (koszulOpenUnit A r f e)) (hiso e)
   have : R.Additive := by
     change (F ⋙ G).mapDerivedCategory.Additive
     infer_instance
