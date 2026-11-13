@@ -386,8 +386,6 @@ private lemma homZero {A B X : Mod.{c, v, u} J R} (hB : IsZero B)
   exact (zeroSection.{c, v, u} J R B hB _ _).trans
     (zeroSection.{c, v, u} J R B hB _ _).symm
 
-set_option maxHeartbeats 600000 in
--- Elaborate five localized product-Hom projections with independent site universes.
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
   [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
@@ -404,9 +402,13 @@ private lemma beta_post_pre_apply (E O I P V : CX.{c, v, u} J R)
         ((((homComplexFunctor (R := R)).obj (op P)).map eta).f b |>.val.app U
           (((((homComplexFunctor (R := R)).map p.op).app O).f b).val.app U
             ((t.f b).val.app U y)))).app (op (Over.mk (𝟙 U.unop)))).hom x := by
-  erw [homPost_apply.{c, v, u} J R, homPost_apply.{c, v, u} J R,
-    homPre_apply.{c, v, u} J R, homPre_apply.{c, v, u} J R,
-    betaTerm_apply.{c, v, u} J R]
+  -- Pin the complexes and degrees before matching the nested Hom evaluations.
+  erw [homPost_apply.{c, v, u} J R V O I eta a b (a + b) (add_comm b a) U,
+    homPost_apply.{c, v, u} J R P O I eta b a (a + b) rfl U,
+    homPre_apply.{c, v, u} J R (homComplex (R := R) E O) V O t
+      a b (a + b) (add_comm b a) U,
+    homPre_apply.{c, v, u} J R E P O p b a (a + b) rfl U,
+    betaTerm_apply.{c, v, u} J R E O a b (a + b) (add_comm b a) U]
   simp only [Over.mk_left, Over.mk_hom, unop_op, op_unop, op_id,
     restriction_id.{c, v, u} J R, Units.smul_def]
   have he := map_zsmul ((eta.f (a + b)).val.app U).hom
@@ -484,6 +486,20 @@ private lemma bidual_eq_of_uncurry
   have hu := uncurry_swap S s A B P T O p t c
   simpa only [Category.assoc] using hu.trans h.symm
 
+-- Transport the representative equality across the two comparison isomorphisms.
+private lemma uncurry_model_swap {A B X Y Z : D}
+    (i : X ≅ A) (j : Y ≅ B) (swap : X ⟶ Y) (s : A ⟶ B)
+    (f : A ⟶ Z) (g : B ⟶ Z) (v : X ⟶ Z) (u : Y ⟶ Z)
+    (hf : i.hom ≫ f = v) (hg : j.hom ≫ g = u)
+    (hv : v = swap ≫ u) (hs : i.hom ≫ s = swap ≫ j.hom) :
+    f = s ≫ g := by
+  apply (cancel_epi i.hom).1
+  calc
+    i.hom ≫ f = v := hf
+    _ = swap ≫ u := hv
+    _ = swap ≫ (j.hom ≫ g) := congrArg (fun k ↦ swap ≫ k) hg.symm
+    _ = i.hom ≫ (s ≫ g) := by rw [← Category.assoc, ← hs, Category.assoc]
+
 end ClosedCalculation
 
 private noncomputable def comparison (E F : CX.{c, v, u} J R) :
@@ -529,6 +545,20 @@ private lemma comparison_pre (E P F : CX.{c, v, u} J R) (p : P ⟶ E) :
     ← NatTrans.naturality, Functor.map_comp, Category.assoc, resolutionIso_pre]
   simp only [Category.assoc]
 
+-- Naturality after an arbitrary map into the ordinary Hom complex.
+private lemma comparison_pre_comp (E P F V : CX.{c, v, u} J R) (p : P ⟶ E)
+    (t : V ⟶ homComplex (R := R) E F) :
+    DerivedCategory.Q.map (t ≫ ((homComplexFunctor (R := R)).map p.op).app F ≫
+      ((homComplexFunctor (R := R)).obj (op P)).map
+        ((SfbHomFilteredColimit.resolutionUnit.{c, v, u} J R).app F)) ≫
+      (coefficientHomResolutionIso.{u, c, v, w} J R P F).inv =
+    DerivedCategory.Q.map t ≫ comparison.{c, v, u, w} J R E F ≫
+      (derivedInternalHomOfUniverses.{c, v, u, w} J R).map
+        (Prod.mkHom (DerivedCategory.Q.map p).op (𝟙 (DerivedCategory.Q.obj F))) := by
+  simp only [Functor.map_comp, Category.assoc]
+  exact congrArg (fun f ↦ DerivedCategory.Q.map t ≫ f)
+    (comparison_pre.{c, v, u, w} J R E P F p)
+
 omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private lemma total_ext (P V I : CX.{c, v, u} J R)
     (f g : (coefficientTotalTensor.{u, c, v} J R).obj (P, V) ⟶ I)
@@ -559,8 +589,55 @@ private lemma total_ext (P V I : CX.{c, v, u} J R)
   apply ModuleCat.MonoidalCategory.tensor_ext
   exact h a b U
 
-set_option maxHeartbeats 800000 in
--- Elaborate the two independent-universe resolution and tensor model squares.
+-- The signed chain-model identity gives symmetry of the derived uncurrying maps.
+private lemma comparison_uncurry_swap
+    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
+    (T : CoefficientTensorModels.{u, c, v, w} J R S)
+    (s : @SymmetricCategory (DerivedCategory (Mod.{c, v, u} J R)) _ S.monoidal)
+    (coh : RingedDerivedTensorCoherence.{c, v, u, w} J R S T s)
+    (E O P V : CX.{c, v, u} J R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
+    (hV : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) V)
+    (p : P ⟶ E) (t : V ⟶ homComplex (R := R) E O) :
+    let eta := (SfbHomFilteredColimit.resolutionUnit.{c, v, u} J R).app O
+    let I := (coefficientHomResolution.{u, c, v} J R).obj O
+    let g : V ⟶ homComplex (R := R) P I :=
+      t ≫ ((homComplexFunctor (R := R)).map p.op).app O ≫
+        ((homComplexFunctor (R := R)).obj (op P)).map eta
+    let h : P ⟶ homComplex (R := R) V I :=
+      p ≫ betaChain.{c, v, u} J R E O ≫
+        ((homComplexFunctor (R := R)).map t.op).app O ≫
+        ((homComplexFunctor (R := R)).obj (op V)).map eta
+    (S.transpose (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj V)
+        (DerivedCategory.Q.obj O)).symm
+      (DerivedCategory.Q.map h ≫ (coefficientHomResolutionIso.{u, c, v, w} J R V O).inv) =
+      (s.braiding (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj V)).hom ≫
+        (S.transpose (DerivedCategory.Q.obj V) (DerivedCategory.Q.obj P)
+          (DerivedCategory.Q.obj O)).symm
+          (DerivedCategory.Q.map g ≫
+            (coefficientHomResolutionIso.{u, c, v, w} J R P O).inv) := by
+  intro eta I g h
+  obtain ⟨ug, hug, hng⟩ := T.uncurry_model ⟨V, hV⟩ ⟨P, hP⟩ O g
+  obtain ⟨vh, hvh, hnh⟩ := T.uncurry_model ⟨P, hP⟩ ⟨V, hV⟩ O h
+  obtain ⟨swap, hswap, hswapQ⟩ := coh.symmetry_model P V hP hV
+  have hvg : vh = swap.hom ≫ ug := by
+    apply total_ext.{c, v, u} J R P V I
+    intro a b U x y
+    rw [hvh a b (a + b) rfl (add_comm b a) U x y]
+    change coefficientHomSectionEvaluation.{u, c, v} J R P V O h
+      a b (a + b) (add_comm b a) U x y =
+        (ug.f (a + b)).val.app U
+          ((swap.hom.f (a + b)).val.app U
+            (coefficientTensorGenerator.{u, c, v} J R P V a b (a + b) rfl U x y))
+    rw [hswap a b (a + b) rfl (add_comm b a) U x y]
+    erw [Units.smul_def, map_zsmul, hug b a (a + b) (add_comm b a) rfl U y x]
+    dsimp only [coefficientHomSectionEvaluation, coefficientHomComponent]
+    exact beta_post_pre_apply.{c, v, u} J R E O I P V p t eta a b U x y
+  exact uncurry_model_swap (T.iso J R S P V hP hV) (T.iso J R S V P hV hP)
+    (DerivedCategory.Q.map swap.hom)
+    (s.braiding (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj V)).hom
+    _ _ _ _ hnh hng (by rw [hvg, Functor.map_comp, Category.assoc]) hswapQ
+
 private lemma comparison_beta
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
@@ -596,33 +673,12 @@ private lemma comparison_beta
     p ≫ betaChain.{c, v, u} J R E O ≫
       ((homComplexFunctor (R := R)).map t.op).app O ≫
       ((homComplexFunctor (R := R)).obj (op V)).map eta
-  obtain ⟨ug, hug, hng⟩ := T.uncurry_model ⟨V, hV⟩ ⟨P, hP⟩ O g
-  obtain ⟨vh, hvh, hnh⟩ := T.uncurry_model ⟨P, hP⟩ ⟨V, hV⟩ O h
-  obtain ⟨swap, hswap, hswapQ⟩ := coh.symmetry_model P V hP hV
-  have hvg : vh = swap.hom ≫ ug := by
-    apply total_ext.{c, v, u} J R P V I
-    intro a b U x y
-    rw [hvh a b (a + b) rfl (add_comm b a) U x y]
-    change coefficientHomSectionEvaluation.{u, c, v} J R P V O h
-      a b (a + b) (add_comm b a) U x y =
-        (ug.f (a + b)).val.app U
-          ((swap.hom.f (a + b)).val.app U
-            (coefficientTensorGenerator.{u, c, v} J R P V a b (a + b) rfl U x y))
-    rw [hswap a b (a + b) rfl (add_comm b a) U x y]
-    erw [Units.smul_def, map_zsmul, hug b a (a + b) (add_comm b a) rfl U y x]
-    dsimp only [coefficientHomSectionEvaluation, coefficientHomComponent]
-    exact beta_post_pre_apply.{c, v, u} J R E O I P V p t eta a b U x y
   have hgQ : DerivedCategory.Q.map g ≫
       (coefficientHomResolutionIso.{u, c, v, w} J R P O).inv =
       DerivedCategory.Q.map t ≫ comparison.{c, v, u, w} J R E O ≫
         (derivedInternalHomOfUniverses.{c, v, u, w} J R).map
           (Prod.mkHom (DerivedCategory.Q.map p).op (𝟙 (DerivedCategory.Q.obj O))) := by
-    dsimp only [g]
-    simp only [Functor.map_comp, Category.assoc]
-    change DerivedCategory.Q.map t ≫
-      (DerivedCategory.Q.map (((homComplexFunctor (R := R)).map p.op).app O) ≫
-        comparison.{c, v, u, w} J R P O) = _
-    rw [comparison_pre]
+    exact comparison_pre_comp.{c, v, u, w} J R E P O V p t
   have hhQ : DerivedCategory.Q.map h ≫
       (coefficientHomResolutionIso.{u, c, v, w} J R V O).inv =
       DerivedCategory.Q.map p ≫
@@ -630,12 +686,9 @@ private lemma comparison_beta
           comparison.{c, v, u, w} J R D O) ≫
         (derivedInternalHomOfUniverses.{c, v, u, w} J R).map
           (Prod.mkHom (DerivedCategory.Q.map t).op (𝟙 (DerivedCategory.Q.obj O))) := by
-    dsimp only [h]
-    simp only [Functor.map_comp, Category.assoc]
-    change DerivedCategory.Q.map p ≫ DerivedCategory.Q.map (betaChain.{c, v, u} J R E O) ≫
-      (DerivedCategory.Q.map (((homComplexFunctor (R := R)).map t.op).app O) ≫
-        comparison.{c, v, u, w} J R V O) = _
-    rw [comparison_pre]
+    simpa only [h, Functor.map_comp, Category.assoc] using
+      comparison_pre_comp.{c, v, u, w} J R D V O P t
+        (p ≫ betaChain.{c, v, u} J R E O)
   have hs : (S.transpose (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj V)
         (DerivedCategory.Q.obj O)).symm
       (DerivedCategory.Q.map h ≫ (coefficientHomResolutionIso.{u, c, v, w} J R V O).inv) =
@@ -644,19 +697,7 @@ private lemma comparison_beta
           (DerivedCategory.Q.obj O)).symm
           (DerivedCategory.Q.map g ≫
             (coefficientHomResolutionIso.{u, c, v, w} J R P O).inv) := by
-    change (T.iso J R S V P hV hP).hom ≫ _ = _ at hng
-    change (T.iso J R S P V hP hV).hom ≫ _ = _ at hnh
-    apply (cancel_epi (T.iso J R S P V hP hV).hom).1
-    calc
-      _ = DerivedCategory.Q.map vh ≫ coefficientHomResolutionInverse.{u, c, v, w} J R O :=
-        hnh
-      _ = DerivedCategory.Q.map swap.hom ≫
-          (DerivedCategory.Q.map ug ≫ coefficientHomResolutionInverse.{u, c, v, w} J R O) := by
-        rw [hvg, Functor.map_comp, Category.assoc]
-      _ = DerivedCategory.Q.map swap.hom ≫
-          ((T.iso J R S V P hV hP).hom ≫ _) := congrArg
-        (fun f ↦ DerivedCategory.Q.map swap.hom ≫ f) hng.symm
-      _ = _ := by rw [← Category.assoc, ← hswapQ, Category.assoc]
+    exact comparison_uncurry_swap.{c, v, u, w} J R S T s coh E O P V hP hV p t
   have : IsIso (DerivedCategory.Q.map p) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hp
   have : IsIso (DerivedCategory.Q.map t) :=
@@ -667,7 +708,7 @@ private lemma comparison_beta
   have : IsIso ((derivedInternalHomOfUniverses.{c, v, u, w} J R).map
       (Prod.mkHom (DerivedCategory.Q.map t).op (𝟙 (DerivedCategory.Q.obj O)))) :=
     inferInstance
-  rw [hhQ, hgQ] at hs
+  simp only [hhQ, hgQ] at hs
   exact bidual_eq_of_uncurry
     (D := DerivedCategory (Mod.{c, v, u} J R))
     (H := derivedInternalHomOfUniverses.{c, v, u, w} J R)
